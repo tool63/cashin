@@ -9,60 +9,57 @@ import {
   Activity,
   BarChart3,
   Wallet,
+  Facebook,
+  Twitter,
+  Instagram,
 } from "lucide-react";
+
+export const metadata = {
+  title: "How Cashog Works – Earn Rewards Online",
+  description: "Step-by-step guide to earn money online with Cashog safely and easily.",
+};
 
 const steps = [
   {
     title: "Create Your Free Account",
-    description:
-      "Sign up on Cashooz in under a minute. No investment required.",
+    description: "Sign up on Cashog in under a minute. No investment required.",
     icon: <Zap size={28} />,
   },
   {
     title: "Choose How You Want to Earn",
-    description:
-      "Pick from surveys, games, app installs, offers, videos, and more.",
+    description: "Pick from surveys, games, app installs, offers, videos, and more.",
     icon: <Activity size={28} />,
   },
   {
     title: "Complete Simple Tasks",
-    description:
-      "Finish tasks at your own pace and earn rewards instantly.",
+    description: "Finish tasks at your own pace and earn rewards instantly.",
     icon: <BarChart3 size={28} />,
   },
   {
     title: "Withdraw Your Earnings",
-    description:
-      "Cash out via PayPal, Gift Cards, Crypto, and other options.",
+    description: "Cash out via PayPal, Gift Cards, Crypto, and other options.",
     icon: <Wallet size={28} />,
   },
 ];
 
-export default function HowCashoozWorks() {
+export default function HowCashogWorks() {
   const heroRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLDivElement>(null);
   const [showFloating, setShowFloating] = useState(false);
 
   const handleCTA = () => {
-    alert("Create your Cashooz account to start earning!");
+    alert("Create your Cashog account to start earning!");
   };
 
-  const ctaGradient =
-    "bg-gradient-to-r from-cyan-400 via-emerald-400 to-teal-400";
+  const ctaGradient = "bg-gradient-to-r from-cyan-400 via-emerald-400 to-teal-400";
 
   useEffect(() => {
     if (!heroRef.current || !footerRef.current) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        const heroVisible = entries.find(
-          (e) => e.target === heroRef.current
-        )?.isIntersecting;
-
-        const footerVisible = entries.find(
-          (e) => e.target === footerRef.current
-        )?.isIntersecting;
-
+        const heroVisible = entries.find((e) => e.target === heroRef.current)?.isIntersecting;
+        const footerVisible = entries.find((e) => e.target === footerRef.current)?.isIntersecting;
         setShowFloating(!heroVisible && !footerVisible);
       },
       { threshold: 0.3 }
@@ -77,10 +74,7 @@ export default function HowCashoozWorks() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0b1220] via-[#060b18] to-black text-white">
       {/* HERO */}
-      <section
-        ref={heroRef}
-        className="px-4 pt-24 pb-28 text-center max-w-6xl mx-auto"
-      >
+      <section ref={heroRef} className="px-4 pt-24 pb-28 text-center max-w-6xl mx-auto">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -88,14 +82,13 @@ export default function HowCashoozWorks() {
         >
           How{" "}
           <span className="bg-gradient-to-r from-cyan-400 via-emerald-400 to-teal-400 bg-clip-text text-transparent">
-            Cashooz
+            Cashog
           </span>{" "}
           Works
         </motion.h1>
 
         <p className="text-gray-400 mt-6 max-w-2xl mx-auto text-lg">
-          Learn how Cashooz helps you earn real rewards online — safely,
-          easily, and worldwide.
+          Learn how Cashog helps you earn real rewards online — safely, easily, and worldwide.
         </p>
 
         <motion.button
@@ -103,6 +96,7 @@ export default function HowCashoozWorks() {
           animate={{ y: [0, -6, 0] }}
           transition={{ repeat: Infinity, duration: 1.6 }}
           className={`mt-10 inline-flex items-center gap-3 px-12 py-5 rounded-full font-bold text-lg ${ctaGradient} shadow-xl hover:scale-105`}
+          aria-label="Start Earning on Cashog"
         >
           Start Earning Now <ArrowRight />
         </motion.button>
@@ -112,31 +106,25 @@ export default function HowCashoozWorks() {
       <section className="bg-white/5 border-y border-white/10 px-4 py-10">
         <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-gray-300 text-sm">
           <div className="flex items-center gap-2">
-            <ShieldCheck className="text-emerald-400" size={16} />
-            Secure & Verified
+            <ShieldCheck className="text-emerald-400" size={16} /> Secure & Verified
           </div>
           <div className="flex items-center gap-2">
-            <Zap className="text-yellow-400" size={16} />
-            Instant Tracking
+            <Zap className="text-yellow-400" size={16} /> Instant Tracking
           </div>
           <div className="flex items-center gap-2">
-            <Activity className="text-cyan-400" size={16} />
-            Beginner Friendly
+            <Activity className="text-cyan-400" size={16} /> Beginner Friendly
           </div>
           <div className="flex items-center gap-2">
-            <BarChart3 className="text-purple-400" size={16} />
-            Multiple Earning Options
+            <BarChart3 className="text-purple-400" size={16} /> Multiple Earning Options
           </div>
         </div>
       </section>
 
       {/* STEPS */}
       <section className="px-4 py-20 max-w-6xl mx-auto text-center">
-        <h2 className="text-3xl font-bold mb-4">
-          Start Earning in 4 Simple Steps
-        </h2>
+        <h2 className="text-3xl font-bold mb-4">Start Earning in 4 Simple Steps</h2>
         <p className="text-gray-400 mb-12 max-w-2xl mx-auto">
-          Cashooz is designed to be simple, transparent, and rewarding.
+          Cashog is designed to be simple, transparent, and rewarding.
         </p>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -147,15 +135,9 @@ export default function HowCashoozWorks() {
               transition={{ delay: i * 0.1 }}
               className="bg-[#0f1629] border border-white/10 rounded-2xl p-8 hover:border-cyan-400/40 transition"
             >
-              <div className="text-cyan-400 mb-4 mx-auto w-fit">
-                {step.icon}
-              </div>
-              <h3 className="text-xl font-semibold mb-2">
-                {step.title}
-              </h3>
-              <p className="text-gray-400 text-sm">
-                {step.description}
-              </p>
+              <div className="text-cyan-400 mb-4 mx-auto w-fit">{step.icon}</div>
+              <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+              <p className="text-gray-400 text-sm">{step.description}</p>
             </motion.div>
           ))}
         </div>
@@ -163,33 +145,25 @@ export default function HowCashoozWorks() {
 
       {/* FAQ */}
       <section className="px-4 py-20 max-w-5xl mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-10">
-          Frequently Asked Questions
-        </h2>
+        <h2 className="text-3xl font-bold text-center mb-10">Frequently Asked Questions</h2>
 
         <div className="space-y-4">
           <div className="bg-[#0f1629] border border-white/10 rounded-xl p-6">
-            <h3 className="font-semibold">
-              Is Cashooz really free to use?
-            </h3>
+            <h3 className="font-semibold">Is Cashog really free to use?</h3>
             <p className="text-gray-400 text-sm mt-2">
-              Yes. You never need to pay to earn on Cashooz.
+              Yes. You never need to pay to earn on Cashog.
             </p>
           </div>
 
           <div className="bg-[#0f1629] border border-white/10 rounded-xl p-6">
-            <h3 className="font-semibold">
-              How fast can I withdraw earnings?
-            </h3>
+            <h3 className="font-semibold">How fast can I withdraw earnings?</h3>
             <p className="text-gray-400 text-sm mt-2">
               Most rewards are available instantly after completion.
             </p>
           </div>
 
           <div className="bg-[#0f1629] border border-white/10 rounded-xl p-6">
-            <h3 className="font-semibold">
-              Is Cashooz safe and legit?
-            </h3>
+            <h3 className="font-semibold">Is Cashog safe and legit?</h3>
             <p className="text-gray-400 text-sm mt-2">
               Yes. We use secure systems and partner only with verified providers.
             </p>
@@ -198,15 +172,10 @@ export default function HowCashoozWorks() {
       </section>
 
       {/* FINAL CTA */}
-      <section
-        ref={footerRef}
-        className="px-4 py-28 text-center max-w-6xl mx-auto"
-      >
-        <h2 className="text-4xl font-extrabold">
-          Ready to Start Earning?
-        </h2>
+      <section ref={footerRef} className="px-4 py-28 text-center max-w-6xl mx-auto">
+        <h2 className="text-4xl font-extrabold">Ready to Start Earning?</h2>
         <p className="text-gray-300 mt-4 text-lg">
-          Join Cashooz today and turn your free time into rewards.
+          Join Cashog today and turn your free time into rewards.
         </p>
 
         <motion.button
@@ -214,9 +183,17 @@ export default function HowCashoozWorks() {
           animate={{ y: [0, -6, 0] }}
           transition={{ repeat: Infinity, duration: 1.6 }}
           className={`mt-10 inline-flex items-center gap-3 px-14 py-5 rounded-full font-bold text-lg ${ctaGradient} shadow-2xl`}
+          aria-label="Start Earning on Cashog"
         >
           Start Earning Now <ArrowRight />
         </motion.button>
+
+        {/* SOCIAL ICONS */}
+        <div className="flex justify-center gap-6 mt-12 text-gray-400">
+          <Facebook className="hover:text-blue-500 cursor-pointer" />
+          <Twitter className="hover:text-sky-400 cursor-pointer" />
+          <Instagram className="hover:text-pink-500 cursor-pointer" />
+        </div>
       </section>
 
       {/* FLOATING CTA */}
@@ -229,6 +206,7 @@ export default function HowCashoozWorks() {
           <button
             onClick={handleCTA}
             className={`px-6 py-4 rounded-full font-bold text-sm md:text-lg ${ctaGradient} shadow-xl hover:scale-105`}
+            aria-label="Start Earning on Cashog"
           >
             Start Earning in 60 Seconds
           </button>
