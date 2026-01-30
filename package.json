@@ -1,5 +1,5 @@
 {
-  "name": "cashin",
+  "name": "payup",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -17,8 +17,8 @@
     "tailwindcss": "3.3.0",
     "autoprefixer": "10.4.0",
     "postcss": "8.4.0",
-    "typescript": "5.0.0",
-    "@types/node": "20.0.0",
+    "typescript": "^5.3.3",
+    "@types/node": "20.5.1",
     "@types/react": "18.2.0",
     "@types/react-dom": "18.2.0"
   }
