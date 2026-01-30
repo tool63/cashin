@@ -1,9 +1,9 @@
-import './globals.css';
-import Footer from './components/Footer';
+import "./globals.css";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: 'Cashog - Earn Online',
-  description: 'Professional earning platform',
+export const metadata: Metadata = {
+  title: "Cashog – Earn Rewards Online",
+  description: "Earn money with surveys, apps, games, and offers on Cashog.",
 };
 
 export default function RootLayout({
@@ -13,12 +13,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="flex flex-col min-h-screen">
-        {/* Main content grows to fill available space */}
-        <main className="flex-grow">{children}</main>
-
-        {/* Footer */}
-        <Footer />
+      <body className="bg-black text-white antialiased">
+        {children}
       </body>
     </html>
   );
