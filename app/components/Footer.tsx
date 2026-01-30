@@ -1,243 +1,201 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
-interface SubLinks {
-  name: string;
-  href: string;
-}
-
-interface FooterColumn {
-  title: string;
-  links: { name: string; href: string }[];
-  sublinks?: SubLinks[][];
-}
-
-const footerData: FooterColumn[] = [
-  {
-    title: "Get Started",
-    links: [
-      { name: "How Cashog Works", href: "/how-it-works" },
-      { name: "How to Start Earning", href: "/start-earning" },
-      { name: "Cashout Methods", href: "/cashout" },
-      { name: "Withdrawal Proofs", href: "/withdrawals" },
-      { name: "Trust & Safety", href: "/trust-safety" },
-    ],
-  },
-  {
-    title: "Ways To Earn",
-    links: [
-      { name: "Surveys", href: "/surveys" },
-      { name: "App Installs", href: "/app-installs" },
-      { name: "Playing Games", href: "/play-games" },
-      { name: "Watching Videos", href: "/watch-videos" },
-      { name: "Mining Rewards", href: "/mining-rewards" },
-      { name: "Completing Offers", href: "/complete-offers" },
-      { name: "Offerwall", href: "/offerwall" },
-      { name: "Surveywall", href: "/surveywall" },
-    ],
-    sublinks: [
-      [
-        { name: "Watching Ads", href: "/watch-ads" },
-        { name: "Micro Tasks", href: "/micro-tasks" },
-        { name: "Free Trials", href: "/complete-free-trials" },
-        { name: "Testing Products", href: "/test-products" },
-      ],
-      [
-        { name: "Reading Emails", href: "/read-emails" },
-        { name: "Visiting Websites", href: "/visit-websites" },
-        { name: "Review Tasks", href: "/review-tasks" },
-        { name: "Spinning Wheel", href: "/spinning-wheel" },
-      ],
-    ],
-  },
-  {
-    title: "Guides & Tips",
-    links: [
-      { name: "Make Money Online", href: "/make-money-online" },
-      { name: "Earn Money from Home", href: "/earn-money-from-home" },
-      { name: "Earn Without Investment", href: "/earn-without-investment" },
-      { name: "Get Paid to Play Games", href: "/get-paid-to-play-games" },
-    ],
-    sublinks: [
-      [
-        { name: "Install Apps for Cash", href: "/install-apps-for-cash" },
-        { name: "Watch Videos for Money", href: "/watch-videos-for-money" },
-        { name: "Complete Offers Online", href: "/complete-offers-online" },
-        { name: "Work from Home Jobs", href: "/work-from-home-jobs" },
-      ],
-      [
-        { name: "Online Earning Methods", href: "/online-earning-methods" },
-        { name: "Earn Money Online Fast", href: "/earn-money-online-fast" },
-        { name: "Earn Passive Income Online", href: "/passive-income-online" },
-        { name: "Online Jobs for Beginners", href: "/online-jobs-for-beginners" },
-      ],
-    ],
-  },
-  {
-    title: "Rewards & Payments",
-    links: [
-      { name: "Earn PayPal Money", href: "/earn-paypal-money" },
-      { name: "Earn Gift Cards", href: "/earn-gift-cards-online" },
-      { name: "Earn Crypto", href: "/earn-crypto-online" },
-      { name: "Earn Gaming Gift Cards", href: "/earn-gaming-gift-cards" },
-      { name: "Earn Spotify Premium", href: "/earn-spotify-premium" },
-    ],
-    sublinks: [
-      [
-        { name: "Earn Amazon Gift Card", href: "/earn-amazon-gift-card" },
-        { name: "Earn Apple Gift Card", href: "/earn-apple-gift-card" },
-        { name: "Earn Google Play Gift Card", href: "/earn-google-play-gift-card" },
-      ],
-      [
-        { name: "Earn Bitcoin", href: "/earn-bitcoin-online" },
-        { name: "Earn Litecoin", href: "/earn-litecoin-online" },
-        { name: "Earn Ethereum", href: "/earn-ethereum-online" },
-        { name: "Earn Dogecoin", href: "/earn-dogecoin-online" },
-      ],
-    ],
-  },
-  {
-    title: "Cashback & Deals",
-    links: [
-      { name: "Cashback Offers", href: "/cashback-offers" },
-      { name: "Shopping Rewards", href: "/shopping-rewards" },
-      { name: "Promo Codes & Coupons", href: "/promo-codes" },
-      { name: "Daily Deals", href: "/daily-deals" },
-    ],
-    sublinks: [
-      [
-        { name: "Electronics Cashback", href: "/shopping-rewards/electronics" },
-        { name: "Fashion Cashback", href: "/shopping-rewards/fashion" },
-        { name: "Home & Garden Cashback", href: "/shopping-rewards/home-garden" },
-        { name: "Grocery Cashback", href: "/shopping-rewards/grocery" },
-      ],
-      [
-        { name: "Travel Cashback", href: "/shopping-rewards/travel" },
-        { name: "Finance Cashback", href: "/shopping-rewards/finance" },
-        { name: "Hotels", href: "/shopping-rewards/travel/hotels" },
-        { name: "Flights", href: "/shopping-rewards/travel/flights" },
-      ],
-    ],
-  },
-  {
-    title: "Resources",
-    links: [
-      { name: "Blog", href: "/blog" },
-      { name: "Help Center", href: "/help" },
-      { name: "FAQ", href: "/faq" },
-      { name: "Contact", href: "/contact" },
-      { name: "About Cashog", href: "/about" },
-    ],
-  },
-  {
-    title: "Business",
-    links: [
-      { name: "Affiliate Program", href: "/affiliate" },
-      { name: "Partners", href: "/partners" },
-      { name: "Advertise with Cashog", href: "/advertise" },
-    ],
-  },
-  {
-    title: "Legal",
-    links: [
-      { name: "Terms & Conditions", href: "/terms-and-conditions" },
-      { name: "Privacy Policy", href: "/privacy-policy" },
-      { name: "Cookie Policy", href: "/cookie-policy" },
-    ],
-  },
-];
+type ToggleMap = Record<string, boolean>;
 
 export default function Footer() {
-  const [openSection, setOpenSection] = useState<number | null>(null);
-  const [openSubsection, setOpenSubsection] = useState<number | null>(null);
+  const [open, setOpen] = useState<ToggleMap>({});
+  const [subOpen, setSubOpen] = useState<ToggleMap>({});
 
-  const toggleSection = (index: number) => {
-    if (openSection === index) {
-      setOpenSection(null);
-      setOpenSubsection(null);
-    } else {
-      setOpenSection(index);
-      setOpenSubsection(null);
-    }
-  };
+  const toggle = (key: string) =>
+    setOpen((p) => ({ ...p, [key]: !p[key] }));
 
-  const toggleSubsection = (index: number) => {
-    setOpenSubsection(openSubsection === index ? null : index);
-  };
+  const toggleSub = (key: string) =>
+    setSubOpen((p) => ({ ...p, [key]: !p[key] }));
+
+  const Section = ({
+    id,
+    title,
+    children,
+  }: {
+    id: string;
+    title: string;
+    children: React.ReactNode;
+  }) => (
+    <div>
+      <button
+        onClick={() => toggle(id)}
+        className="footer-title"
+      >
+        {title}
+        <span>{open[id] ? "−" : "+"}</span>
+      </button>
+
+      {open[id] && <div className="footer-list">{children}</div>}
+    </div>
+  );
+
+  const SubSection = ({
+    id,
+    title,
+    children,
+  }: {
+    id: string;
+    title: string;
+    children: React.ReactNode;
+  }) => (
+    <div>
+      <button
+        onClick={() => toggleSub(id)}
+        className="footer-subtitle"
+      >
+        {title}
+        <span>{subOpen[id] ? "−" : "+"}</span>
+      </button>
+
+      {subOpen[id] && <div className="footer-sublist">{children}</div>}
+    </div>
+  );
 
   return (
-    <footer className="bg-gray-900 text-white py-8 px-4 md:px-16">
-      {footerData.map((col, colIndex) => (
-        <div key={colIndex} className="mb-4">
-          <button
-            className="flex justify-between items-center w-full font-bold text-lg"
-            onClick={() => toggleSection(colIndex)}
-          >
-            {col.title}
-            {openSection === colIndex ? (
-              <ChevronUpIcon className="w-5 h-5" />
-            ) : (
-              <ChevronDownIcon className="w-5 h-5" />
-            )}
-          </button>
+    <footer className="footer-bg">
+      <div className="footer-wrap">
 
-          {/* Main links (first expansion) */}
-          {openSection === colIndex && (
-            <ul className="mt-2 space-y-1">
-              {col.links.map((link, linkIndex) => (
-                <li key={linkIndex}>
-                  <a href={link.href} className="block hover:text-blue-400">
-                    {link.name}
-                  </a>
-                </li>
-              ))}
+        {/* GRID */}
+        <div className="footer-grid">
 
-              {/* If two-level sublinks exist */}
-              {col.sublinks && (
-                <>
-                  <hr className="my-2 border-gray-700" />
+          {/* COLUMN 1 */}
+          <Section id="start" title="Get Started">
+            <Link href="/how-it-works">How Cashooz Works</Link>
+            <Link href="/start-earning">How to Start Earning</Link>
+            <Link href="/cashout">Cashout Methods</Link>
+            <Link href="/withdrawals">Withdrawal Proofs</Link>
+            <Link href="/trust-safety">Trust & Safety</Link>
+          </Section>
 
-                  {col.sublinks.map((group, subIndex) => (
-                    <div key={subIndex}>
-                      <button
-                        className="flex justify-between items-center w-full font-medium text-base"
-                        onClick={() => toggleSubsection(subIndex)}
-                      >
-                        More {col.title}
-                        {openSubsection === subIndex ? (
-                          <ChevronUpIcon className="w-4 h-4" />
-                        ) : (
-                          <ChevronDownIcon className="w-4 h-4" />
-                        )}
-                      </button>
+          {/* COLUMN 2 */}
+          <Section id="earn" title="Ways To Earn">
+            <Link href="/surveys">Surveys</Link>
+            <Link href="/app-installs">App Installs</Link>
+            <Link href="/play-games">Playing Games</Link>
+            <Link href="/watch-videos">Watching Videos</Link>
+            <Link href="/mining-rewards">Mining Rewards</Link>
+            <Link href="/complete-offers">Completing Offers</Link>
+            <Link href="/offerwall">Offerwall</Link>
+            <Link href="/surveywall">Surveywall</Link>
 
-                      {openSubsection === subIndex && (
-                        <ul className="mt-1 space-y-1">
-                          {group.map((sublink, gIndex) => (
-                            <li key={gIndex}>
-                              <a
-                                href={sublink.href}
-                                className="block hover:text-blue-400"
-                              >
-                                {sublink.name}
-                              </a>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
-                  ))}
-                </>
-              )}
-            </ul>
-          )}
+            <SubSection id="extraEarn" title="Extra Earning">
+              <Link href="/watch-ads">Watching Ads</Link>
+              <Link href="/micro-tasks">Micro Tasks</Link>
+              <Link href="/complete-free-trials">Free Trials</Link>
+              <Link href="/test-products">Testing Products</Link>
+              <Link href="/read-emails">Reading Emails</Link>
+              <Link href="/visit-websites">Visiting Websites</Link>
+              <Link href="/review-tasks">Review Tasks</Link>
+              <Link href="/spinning-wheel">Spinning Wheel</Link>
+              <Link href="/loyalty">Loyalty</Link>
+              <Link href="/vouchers">Vouchers</Link>
+            </SubSection>
+          </Section>
+
+          {/* COLUMN 3 */}
+          <Section id="guides" title="Guides & Tips">
+            <Link href="/make-money-online">Make Money Online</Link>
+            <Link href="/earn-money-from-home">Earn Money from Home</Link>
+            <Link href="/earn-without-investment">Earn Without Investment</Link>
+            <Link href="/get-paid-to-play-games">Get Paid to Play Games</Link>
+            <Link href="/install-apps-for-cash">Install Apps for Cash</Link>
+            <Link href="/watch-videos-for-money">Watch Videos for Money</Link>
+            <Link href="/complete-offers-online">Complete Offers Online</Link>
+            <Link href="/work-from-home-jobs">Work from Home Jobs</Link>
+            <Link href="/online-earning-methods">Online Earning Methods</Link>
+            <Link href="/earn-money-online-fast">Earn Money Online Fast</Link>
+
+            <SubSection id="allGuides" title="All Guides">
+              <Link href="/passive-income-online">Passive Income Online</Link>
+              <Link href="/online-jobs-for-beginners">Online Jobs for Beginners</Link>
+              <Link href="/earn-money-as-a-student">Earn Money as a Student</Link>
+              <Link href="/earn-money-without-skills">Earn Without Skills</Link>
+              <Link href="/earn-money-using-mobile">Earn Using Mobile</Link>
+              <Link href="/earn-money-online-worldwide">Earn Worldwide</Link>
+              <Link href="/cashback-rewards">Cashback Rewards</Link>
+              <Link href="/legit-ways-to-make-money-online">Legit Ways</Link>
+              <Link href="/free-ways-to-make-money-online">Free Ways</Link>
+            </SubSection>
+          </Section>
+
+          {/* COLUMN 4 */}
+          <Section id="rewards" title="Rewards & Payments">
+            <Link href="/earn-paypal-money">Earn PayPal Money</Link>
+
+            <SubSection id="giftcards" title="Earn Gift Cards">
+              <Link href="/earn-amazon-gift-card">Amazon</Link>
+              <Link href="/earn-apple-gift-card">Apple</Link>
+              <Link href="/earn-google-play-gift-card">Google Play</Link>
+            </SubSection>
+
+            <SubSection id="crypto" title="Earn Crypto">
+              <Link href="/earn-bitcoin-online">Bitcoin</Link>
+              <Link href="/earn-litecoin-online">Litecoin</Link>
+              <Link href="/earn-ethereum-online">Ethereum</Link>
+              <Link href="/earn-dogecoin-online">Dogecoin</Link>
+            </SubSection>
+
+            <SubSection id="gaming" title="Gaming Gift Cards">
+              <Link href="/earn-free-robux">Robux</Link>
+              <Link href="/earn-steam-gift-cards">Steam</Link>
+              <Link href="/earn-xbox-gift-cards">Xbox</Link>
+              <Link href="/earn-psn-gift-cards">PlayStation</Link>
+            </SubSection>
+
+            <Link href="/earn-spotify-premium">Spotify Premium</Link>
+          </Section>
+
+          {/* COLUMN 5 */}
+          <Section id="resources" title="Resources">
+            <Link href="/blog">Blog</Link>
+            <Link href="/help">Help Center</Link>
+            <Link href="/faq">FAQ</Link>
+            <Link href="/contact">Contact Support</Link>
+            <Link href="/about">About Cashooz</Link>
+          </Section>
+
+          {/* COLUMN 6 */}
+          <Section id="business" title="Business">
+            <Link href="/affiliate">Affiliate Program</Link>
+            <Link href="/partners">Partners</Link>
+            <Link href="/advertise">Advertise with Cashooz</Link>
+          </Section>
+
+          {/* COLUMN 7 */}
+          <Section id="cashback" title="Cashback & Deals">
+            <Link href="/cashback-offers">Cashback Offers</Link>
+            <Link href="/shopping-rewards">Shopping Rewards</Link>
+            <Link href="/promo-codes">Promo Codes</Link>
+            <Link href="/daily-deals">Daily Deals</Link>
+            <Link href="/travel-deals">Travel Cashback</Link>
+            <Link href="/banking-finance-offers">Finance Offers</Link>
+          </Section>
+
+          {/* COLUMN 8 */}
+          <Section id="legal" title="Legal">
+            <a href="https://cashooz.com/terms-and-conditions">Terms & Conditions</a>
+            <a href="https://cashooz.com/privacy-policy">Privacy Policy</a>
+            <a href="https://cashooz.com/cookie-policy">Cookie Policy</a>
+          </Section>
         </div>
-      ))}
 
-      <div className="mt-8 text-center text-sm text-gray-400">
-        © {new Date().getFullYear()} Cashog. All rights reserved.
+        {/* SOCIAL */}
+        <div className="footer-social">
+          <span>f</span><span>x</span><span>y</span><span>p</span><span>l</span><span>i</span>
+        </div>
+
+        {/* COPYRIGHT */}
+        <div className="footer-copy">
+          © {new Date().getFullYear()} Cashooz. All rights reserved.
+        </div>
       </div>
     </footer>
   );
