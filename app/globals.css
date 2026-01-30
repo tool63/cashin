@@ -2,43 +2,133 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Optional: set default body and font styles */
+/* ===============================
+   GLOBAL RESET & BASE
+================================ */
+
+html,
 body {
-  @apply bg-gray-50 text-gray-900 font-sans;
-  margin: 0;
   padding: 0;
+  margin: 0;
+  background-color: #0b0d10; /* FreeCash dark background */
+  color: #d1d5db;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* Optional: links */
 a {
-  @apply text-gray-900 hover:text-blue-500 transition-colors duration-200;
   text-decoration: none;
 }
 
-/* Scrollbar styling (optional) */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-thumb {
-  @apply bg-gray-400 rounded;
-}
-::-webkit-scrollbar-track {
-  @apply bg-gray-200;
+/* ===============================
+   FOOTER – FREECASH STYLE
+================================ */
+
+/* Footer title (column heading) */
+.footer-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  cursor: pointer;
 }
 
-/* Footer tweaks */
-footer ul {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
+/* Arrow icons */
+.footer-title svg,
+.footer-subtitle svg {
+  width: 16px;
+  height: 16px;
+  color: #9ca3af;
 }
 
-/* Smooth transitions for expandable footer sections */
-ul.transition-all {
-  transition: max-height 0.3s ease-in-out;
+/* Main list links */
+.footer-list {
+  margin-top: 6px;
 }
 
-/* Responsive text for footer links */
-footer a {
-  @apply text-sm md:text-base;
+.footer-list li a {
+  display: block;
+  padding: 5px 0;
+  font-size: 14px;
+  color: #d1d5db;
+  transition: color 0.2s ease;
+}
+
+.footer-list li a:hover {
+  color: #22d3ee; /* FreeCash cyan hover */
+}
+
+/* Second level title (Extra Earning) */
+.footer-subtitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #e5e7eb;
+  cursor: pointer;
+}
+
+/* Second level list */
+.footer-sublist {
+  margin-top: 6px;
+  padding-left: 12px;
+}
+
+.footer-sublist li a {
+  display: block;
+  padding: 4px 0;
+  font-size: 13.5px;
+  color: #cbd5e1;
+  transition: color 0.2s ease;
+}
+
+.footer-sublist li a:hover {
+  color: #22d3ee;
+}
+
+/* ===============================
+   SOCIAL ICON PLACEHOLDERS
+================================ */
+
+.footer-social span {
+  font-size: 14px;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.footer-social span:hover {
+  color: #22d3ee;
+}
+
+/* ===============================
+   COPYRIGHT
+================================ */
+
+.footer-copy {
+  font-size: 13px;
+  color: #9ca3af;
+  margin-top: 16px;
+}
+
+/* ===============================
+   RESPONSIVE FIXES
+================================ */
+
+@media (max-width: 640px) {
+  .footer-title {
+    font-size: 14px;
+  }
+
+  .footer-list li a,
+  .footer-sublist li a {
+    font-size: 13px;
+  }
 }
