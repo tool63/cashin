@@ -9,9 +9,6 @@ import {
   Activity,
   BarChart3,
   Wallet,
-  Facebook,
-  Twitter,
-  Instagram,
 } from "lucide-react";
 
 const steps = [
@@ -182,13 +179,6 @@ export default function HowCashogWorks() {
         >
           Start Earning Now <ArrowRight />
         </motion.button>
-
-        {/* SOCIAL ICONS */}
-        <div className="flex justify-center gap-6 mt-12 text-gray-400">
-          <Facebook className="hover:text-blue-500 cursor-pointer" />
-          <Twitter className="hover:text-sky-400 cursor-pointer" />
-          <Instagram className="hover:text-pink-500 cursor-pointer" />
-        </div>
       </section>
 
       {/* FLOATING CTA */}
