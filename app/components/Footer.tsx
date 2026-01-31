@@ -6,7 +6,6 @@ import {
   Facebook,
   Twitter,
   Youtube,
-  Pinterest,
   Linkedin,
   Instagram,
 } from "lucide-react";
@@ -78,7 +77,7 @@ export default function Footer() {
       <div className="footer-wrap">
         <div className="footer-grid">
           <Section id="start" title="Get Started">
-            <A href="/how-it-works" label="How Cashog Works" />
+            <A href="/how-it-works" label="How PayUp Works" />
             <A href="/start-earning" label="How to Start Earning" />
             <A href="/cashout" label="Cashout Methods" />
             <A href="/withdrawals" label="Withdrawal Proofs" />
@@ -110,7 +109,7 @@ export default function Footer() {
             <A href="/faq" label="FAQ" />
             <A href="/help" label="Help Center" />
             <A href="/contact" label="Contact Support" />
-            <A href="/about" label="About Cashog" />
+            <A href="/about" label="About PayUp" />
           </Section>
 
           <Section id="legal" title="Legal">
@@ -120,17 +119,17 @@ export default function Footer() {
           </Section>
         </div>
 
+        {/* SOCIAL ICONS */}
         <div className="footer-social">
           <Facebook />
           <Twitter />
           <Youtube />
-          <Pinterest />
           <Linkedin />
           <Instagram />
         </div>
 
         <div className="footer-copy">
-          © {new Date().getFullYear()} Cashog. All rights reserved.
+          © {new Date().getFullYear()} PayUp. All rights reserved.
         </div>
       </div>
     </footer>
