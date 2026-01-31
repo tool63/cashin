@@ -2,15 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import {
-  Facebook,
-  Twitter,
-  Youtube,
-  Linkedin,
-  Instagram,
-} from "lucide-react";
+import { Facebook, Twitter, Youtube, Linkedin, Instagram } from "lucide-react";
 
-// Inline Pinterest SVG
+// Inline Pinterest icon
 const PinterestIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     {...props}
@@ -122,7 +116,6 @@ export default function Footer() {
           </Section>
         </div>
 
-        {/* SOCIAL ICONS */}
         <div className="footer-social flex gap-4 mt-6">
           <Facebook className="h-6 w-6" />
           <Twitter className="h-6 w-6" />
