@@ -2,7 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Facebook, Twitter, Youtube, Linkedin, Instagram } from "lucide-react";
+import {
+  Facebook,
+  Twitter,
+  Youtube,
+  Linkedin,
+  Instagram,
+} from "lucide-react";
 
 const BASE_URL = "https://payup-pi.vercel.app";
 
@@ -32,6 +38,7 @@ export default function Footer() {
         {title}
         <span className={`caret ${open[id] ? "open" : ""}`}>^</span>
       </button>
+
       <div className={`footer-list ${open[id] ? "show" : ""}`}>
         {children}
       </div>
@@ -52,6 +59,7 @@ export default function Footer() {
         {title}
         <span className={`caret small ${subOpen[id] ? "open" : ""}`}>^</span>
       </button>
+
       <div className={`footer-sublist ${subOpen[id] ? "show" : ""}`}>
         {children}
       </div>
@@ -111,15 +119,16 @@ export default function Footer() {
           </Section>
         </div>
 
-        <div className="footer-social flex gap-4 mt-8 text-gray-400">
-          <Facebook className="hover:text-blue-500 cursor-pointer" />
-          <Twitter className="hover:text-sky-400 cursor-pointer" />
-          <Youtube className="hover:text-red-500 cursor-pointer" />
-          <Linkedin className="hover:text-blue-600 cursor-pointer" />
-          <Instagram className="hover:text-pink-500 cursor-pointer" />
+        {/* SOCIAL ICONS */}
+        <div className="footer-social">
+          <Facebook />
+          <Twitter />
+          <Youtube />
+          <Linkedin />
+          <Instagram />
         </div>
 
-        <div className="footer-copy mt-6 text-gray-500 text-sm">
+        <div className="footer-copy">
           © {new Date().getFullYear()} Cashog. All rights reserved.
         </div>
       </div>
