@@ -14,6 +14,8 @@ import {
   Instagram,
 } from "lucide-react";
 
+/* ❌ METADATA REMOVED — THIS FIXES THE BUILD ERROR */
+
 const steps = [
   {
     title: "Create Your Free Account",
@@ -22,35 +24,38 @@ const steps = [
   },
   {
     title: "Choose How You Want to Earn",
-    description: "Pick from surveys, games, app installs, offers, videos, and more.",
+    description:
+      "Pick from surveys, games, app installs, offers, videos, and more.",
     icon: <Activity size={28} />,
   },
   {
     title: "Complete Simple Tasks",
-    description: "Finish tasks at your own pace and earn rewards instantly.",
+    description:
+      "Finish tasks at your own pace and earn rewards instantly.",
     icon: <BarChart3 size={28} />,
   },
   {
     title: "Withdraw Your Earnings",
-    description: "Cash out via PayPal, Gift Cards, Crypto, and other options.",
+    description:
+      "Cash out via PayPal, Gift Cards, Crypto, and other options.",
     icon: <Wallet size={28} />,
   },
 ];
 
 export default function HowCashogWorks() {
   const heroRef = useRef<HTMLDivElement>(null);
-  const endRef = useRef<HTMLDivElement>(null);
+  const footerRef = useRef<HTMLDivElement>(null);
   const [showFloating, setShowFloating] = useState(false);
-
-  const ctaGradient =
-    "bg-gradient-to-r from-cyan-400 via-emerald-400 to-teal-400";
 
   const handleCTA = () => {
     alert("Create your Cashog account to start earning!");
   };
 
+  const ctaGradient =
+    "bg-gradient-to-r from-cyan-400 via-emerald-400 to-teal-400";
+
   useEffect(() => {
-    if (!heroRef.current || !endRef.current) return;
+    if (!heroRef.current || !footerRef.current) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -58,17 +63,17 @@ export default function HowCashogWorks() {
           (e) => e.target === heroRef.current
         )?.isIntersecting;
 
-        const endVisible = entries.find(
-          (e) => e.target === endRef.current
+        const footerVisible = entries.find(
+          (e) => e.target === footerRef.current
         )?.isIntersecting;
 
-        setShowFloating(!heroVisible && !endVisible);
+        setShowFloating(!heroVisible && !footerVisible);
       },
       { threshold: 0.3 }
     );
 
     observer.observe(heroRef.current);
-    observer.observe(endRef.current);
+    observer.observe(footerRef.current);
 
     return () => observer.disconnect();
   }, []);
@@ -83,7 +88,7 @@ export default function HowCashogWorks() {
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl md:text-6xl font-extrabold"
+          className="text-4xl md:text-6xl font-extrabold leading-tight"
         >
           How{" "}
           <span className="bg-gradient-to-r from-cyan-400 via-emerald-400 to-teal-400 bg-clip-text text-transparent">
@@ -93,8 +98,8 @@ export default function HowCashogWorks() {
         </motion.h1>
 
         <p className="text-gray-400 mt-6 max-w-2xl mx-auto text-lg">
-          Learn how Cashog helps you earn real rewards online — safely, easily,
-          and worldwide.
+          Learn how Cashog helps you earn real rewards online — safely,
+          easily, and worldwide.
         </p>
 
         <motion.button
@@ -131,7 +136,7 @@ export default function HowCashogWorks() {
 
       {/* STEPS */}
       <section className="px-4 py-20 max-w-6xl mx-auto text-center">
-        <h2 className="text-3xl font-bold mb-12">
+        <h2 className="text-3xl font-bold mb-4">
           Start Earning in 4 Simple Steps
         </h2>
 
@@ -141,7 +146,7 @@ export default function HowCashogWorks() {
               key={i}
               whileInView={{ opacity: [0, 1], y: [20, 0] }}
               transition={{ delay: i * 0.1 }}
-              className="bg-[#0f1629] border border-white/10 rounded-2xl p-8 hover:border-cyan-400/40 transition"
+              className="bg-[#0f1629] border border-white/10 rounded-2xl p-8"
             >
               <div className="text-cyan-400 mb-4 mx-auto w-fit">
                 {step.icon}
@@ -157,18 +162,11 @@ export default function HowCashogWorks() {
         </div>
       </section>
 
-      {/* FINAL CTA (before global footer) */}
-      <section
-        ref={endRef}
-        className="px-4 py-28 text-center max-w-6xl mx-auto"
-      >
+      {/* FINAL CTA */}
+      <section ref={footerRef} className="px-4 py-28 text-center">
         <h2 className="text-4xl font-extrabold">
           Ready to Start Earning?
         </h2>
-
-        <p className="text-gray-300 mt-4 text-lg">
-          Join Cashog today and turn your free time into rewards.
-        </p>
 
         <motion.button
           onClick={handleCTA}
@@ -180,27 +178,11 @@ export default function HowCashogWorks() {
         </motion.button>
 
         <div className="flex justify-center gap-6 mt-12 text-gray-400">
-          <Facebook className="hover:text-blue-500 cursor-pointer" />
-          <Twitter className="hover:text-sky-400 cursor-pointer" />
-          <Instagram className="hover:text-pink-500 cursor-pointer" />
+          <Facebook />
+          <Twitter />
+          <Instagram />
         </div>
       </section>
-
-      {/* FLOATING CTA */}
-      {showFloating && (
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="fixed bottom-6 right-6 z-50"
-        >
-          <button
-            onClick={handleCTA}
-            className={`px-6 py-4 rounded-full font-bold text-sm md:text-lg ${ctaGradient} shadow-xl hover:scale-105`}
-          >
-            Start Earning in 60 Seconds
-          </button>
-        </motion.div>
-      )}
     </div>
   );
 }
