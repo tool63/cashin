@@ -17,7 +17,6 @@ const PinterestIcon = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 const BASE_URL = "https://payup-pi.vercel.app";
-
 type ToggleMap = Record<string, boolean>;
 
 export default function Footer() {
@@ -27,15 +26,7 @@ export default function Footer() {
   const toggle = (key: string) => setOpen((p) => ({ ...p, [key]: !p[key] }));
   const toggleSub = (key: string) => setSubOpen((p) => ({ ...p, [key]: !p[key] }));
 
-  const Section = ({
-    id,
-    title,
-    children,
-  }: {
-    id: string;
-    title: string;
-    children: React.ReactNode;
-  }) => (
+  const Section = ({ id, title, children }: { id: string; title: string; children: React.ReactNode }) => (
     <div className="footer-box">
       <button className="footer-title" onClick={() => toggle(id)}>
         {title}
@@ -45,15 +36,7 @@ export default function Footer() {
     </div>
   );
 
-  const SubSection = ({
-    id,
-    title,
-    children,
-  }: {
-    id: string;
-    title: string;
-    children: React.ReactNode;
-  }) => (
+  const SubSection = ({ id, title, children }: { id: string; title: string; children: React.ReactNode }) => (
     <div className="footer-sub">
       <button className="footer-subtitle" onClick={() => toggleSub(id)}>
         {title}
@@ -88,7 +71,6 @@ export default function Footer() {
             <A href="/watch-videos" label="Watching Videos" />
             <A href="/offerwall" label="Offerwall" />
             <A href="/surveywall" label="Surveywall" />
-
             <SubSection id="extra" title="Extra Earning">
               <A href="/watch-ads" label="Watching Ads" />
               <A href="/micro-tasks" label="Micro Tasks" />
