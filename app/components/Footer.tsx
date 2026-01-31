@@ -11,7 +11,6 @@ import {
   Instagram,
 } from "lucide-react";
 
-/* 🔗 CHANGE BASE URL ONLY HERE IN FUTURE */
 const BASE_URL = "https://payup-pi.vercel.app";
 
 type ToggleMap = Record<string, boolean>;
@@ -36,11 +35,14 @@ export default function Footer() {
     children: React.ReactNode;
   }) => (
     <div className="footer-box">
-      <button onClick={() => toggle(id)} className="footer-title">
+      <button className="footer-title" onClick={() => toggle(id)}>
         {title}
         <span className={`caret ${open[id] ? "open" : ""}`}>^</span>
       </button>
-      {open[id] && <div className="footer-list">{children}</div>}
+
+      <div className={`footer-list ${open[id] ? "show" : ""}`}>
+        {children}
+      </div>
     </div>
   );
 
@@ -53,25 +55,28 @@ export default function Footer() {
     title: string;
     children: React.ReactNode;
   }) => (
-    <div className="mt-3">
-      <button onClick={() => toggleSub(id)} className="footer-subtitle">
+    <div className="footer-sub">
+      <button className="footer-subtitle" onClick={() => toggleSub(id)}>
         {title}
         <span className={`caret small ${subOpen[id] ? "open" : ""}`}>^</span>
       </button>
-      {subOpen[id] && <div className="footer-sublist">{children}</div>}
+
+      <div className={`footer-sublist ${subOpen[id] ? "show" : ""}`}>
+        {children}
+      </div>
     </div>
   );
 
   const A = ({ href, label }: { href: string; label: string }) => (
-    <Link href={`${BASE_URL}${href}`}>{label}</Link>
+    <Link href={`${BASE_URL}${href}`} className="footer-link">
+      {label}
+    </Link>
   );
 
   return (
     <footer className="footer-bg">
       <div className="footer-wrap">
-        {/* GRID */}
         <div className="footer-grid">
-          {/* COLUMN 1 */}
           <Section id="start" title="Get Started">
             <A href="/how-it-works" label="How Cashog Works" />
             <A href="/start-earning" label="How to Start Earning" />
@@ -80,7 +85,6 @@ export default function Footer() {
             <A href="/trust-safety" label="Trust & Safety" />
           </Section>
 
-          {/* COLUMN 2 */}
           <Section id="earn" title="Ways To Earn">
             <A href="/surveys" label="Surveys" />
             <A href="/app-installs" label="App Installs" />
@@ -101,7 +105,6 @@ export default function Footer() {
             </SubSection>
           </Section>
 
-          {/* COLUMN 3 */}
           <Section id="resources" title="Resources">
             <A href="/blog" label="Blog" />
             <A href="/faq" label="FAQ" />
@@ -110,7 +113,6 @@ export default function Footer() {
             <A href="/about" label="About Cashog" />
           </Section>
 
-          {/* COLUMN 4 */}
           <Section id="legal" title="Legal">
             <A href="/terms-and-conditions" label="Terms & Conditions" />
             <A href="/privacy-policy" label="Privacy Policy" />
@@ -118,7 +120,6 @@ export default function Footer() {
           </Section>
         </div>
 
-        {/* SOCIAL ICONS */}
         <div className="footer-social">
           <Facebook />
           <Twitter />
@@ -128,7 +129,6 @@ export default function Footer() {
           <Instagram />
         </div>
 
-        {/* COPYRIGHT */}
         <div className="footer-copy">
           © {new Date().getFullYear()} Cashog. All rights reserved.
         </div>
