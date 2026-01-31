@@ -1,20 +1,20 @@
 import "./globals.css";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Cashog – Earn Rewards Online",
-  description: "Earn money with surveys, apps, games, and offers on Cashog.",
-};
+import type { ReactNode } from "react";
+import ClientFooter from "./components/ClientFooter";
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <html lang="en">
-      <body className="bg-black text-white antialiased">
-        {children}
+      <body className="min-h-screen bg-black text-white antialiased">
+        {/* PAGE CONTENT */}
+        <main className="min-h-screen">{children}</main>
+
+        {/* FOOTER (CLIENT COMPONENT) */}
+        <ClientFooter />
       </body>
     </html>
   );
