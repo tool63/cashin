@@ -206,5 +206,5 @@ export default function CashogHowItWorks() {
   );
 }
 
-// Optional: disable caching for immediate updates
-export const revalidate = 0;
+/* ================= FIXED revalidate ================= */
+export const revalidate = 0; // ✅ Must be a number or false, never an object
