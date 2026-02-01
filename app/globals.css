@@ -1,29 +1,110 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Base Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html,
-body {
-  background-color: #020617;
-  color: #e5e7eb;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial;
-  line-height: 1.6;
-}
-
-/* Footer styles */
+/* FOOTER BASE */
 .footer-bg {
-  background: linear-gradient(180deg, #05070d 0%, #020617 100%);
-  border-top: 1px solid #0f172a;
+  background: #050814;
+  color: #cbd5f5;
+  border-top: 1px solid rgba(255,255,255,0.08);
 }
-.footer-wrap { max-width: 1320px; margin: 0 auto; padding: 56px 16px 32px; }
-.footer-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
-@media (min-width: 1024px) { .footer-grid { grid-template-columns: repeat(4, 1fr); gap: 40px; } }
-/* Add the rest of your footer CSS here */
+
+.footer-wrap {
+  max-width: 1200px;
+  margin: auto;
+  padding: 60px 16px 30px;
+}
+
+/* GRID — THIS ENABLES 4 COLUMNS */
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+
+/* COLUMN BOX */
+.footer-box {
+  display: flex;
+  flex-direction: column;
+}
+
+/* TITLES */
+.footer-title,
+.footer-subtitle {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #fff;
+}
+
+/* CARET */
+.caret {
+  transition: transform 0.3s ease;
+}
+.caret.open {
+  transform: rotate(180deg);
+}
+.caret.small {
+  font-size: 12px;
+}
+
+/* LINKS */
+.footer-list,
+.footer-sublist {
+  margin-top: 12px;
+}
+.footer-link {
+  display: block;
+  font-size: 14px;
+  color: #9aa4ff;
+  margin-bottom: 8px;
+}
+.footer-link:hover {
+  color: #4ade80;
+}
+
+/* SUB SECTION */
+.footer-sub {
+  margin-top: 12px;
+  padding-left: 6px;
+}
+
+/* SOCIAL */
+.footer-social {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin: 36px 0 20px;
+}
+.footer-social svg {
+  cursor: pointer;
+  opacity: 0.7;
+}
+.footer-social svg:hover {
+  opacity: 1;
+  color: #4ade80;
+}
+
+/* COPYRIGHT */
+.footer-copy {
+  text-align: center;
+  font-size: 13px;
+  opacity: 0.6;
+}
+
+/* 📱 MOBILE BEHAVIOR */
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-list,
+  .footer-sublist {
+    display: none;
+  }
+
+  .footer-list.show,
+  .footer-sublist.show {
+    display: block;
+  }
+}
