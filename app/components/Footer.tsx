@@ -5,10 +5,6 @@ import Link from "next/link";
 
 type ToggleMap = Record<string, boolean>;
 
-/**
- * CHANGE BASE URL HERE ONLY
- * Works for Vercel now and custom domain later
- */
 const BASE_URL = "";
 
 export default function Footer() {
@@ -62,20 +58,18 @@ export default function Footer() {
   return (
     <footer className="footer-bg">
       <div className="footer-wrap">
-
-        {/* GRID */}
         <div className="footer-grid">
 
-          {/* COLUMN 1 */}
+          {/* COLUMN 1 – GET STARTED */}
           <Section id="start" title="Get Started">
-            <Link href={`${BASE_URL}/how-it-works`}>How Cashog Works</Link>
+            <Link href={`${BASE_URL}/how-it-works`}>How Cashooz Works</Link>
             <Link href={`${BASE_URL}/start-earning`}>How to Start Earning</Link>
             <Link href={`${BASE_URL}/cashout`}>Cashout Methods</Link>
             <Link href={`${BASE_URL}/withdrawals`}>Withdrawal Proofs</Link>
             <Link href={`${BASE_URL}/trust-safety`}>Trust & Safety</Link>
           </Section>
 
-          {/* COLUMN 2 */}
+          {/* COLUMN 2 – WAYS TO EARN */}
           <Section id="earn" title="Ways To Earn">
             <Link href={`${BASE_URL}/surveys`}>Surveys</Link>
             <Link href={`${BASE_URL}/app-installs`}>App Installs</Link>
@@ -100,7 +94,7 @@ export default function Footer() {
             </SubSection>
           </Section>
 
-          {/* COLUMN 3 */}
+          {/* COLUMN 3 – GUIDES & TIPS */}
           <Section id="guides" title="Guides & Tips">
             <Link href={`${BASE_URL}/make-money-online`}>Make Money Online</Link>
             <Link href={`${BASE_URL}/earn-money-from-home`}>Earn Money from Home</Link>
@@ -126,7 +120,7 @@ export default function Footer() {
             </SubSection>
           </Section>
 
-          {/* COLUMN 4 */}
+          {/* COLUMN 4 – REWARDS & PAYMENTS */}
           <Section id="rewards" title="Rewards & Payments">
             <Link href={`${BASE_URL}/earn-paypal-money`}>Earn PayPal Money</Link>
 
@@ -153,23 +147,23 @@ export default function Footer() {
             <Link href={`${BASE_URL}/earn-spotify-premium`}>Spotify Premium</Link>
           </Section>
 
-          {/* COLUMN 5 */}
+          {/* COLUMN 5 – RESOURCES */}
           <Section id="resources" title="Resources">
             <Link href={`${BASE_URL}/blog`}>Blog</Link>
             <Link href={`${BASE_URL}/help`}>Help Center</Link>
             <Link href={`${BASE_URL}/faq`}>FAQ</Link>
             <Link href={`${BASE_URL}/contact`}>Contact Support</Link>
-            <Link href={`${BASE_URL}/about`}>About Cashog</Link>
+            <Link href={`${BASE_URL}/about`}>About Cashooz</Link>
           </Section>
 
-          {/* COLUMN 6 */}
+          {/* COLUMN 6 – BUSINESS */}
           <Section id="business" title="Business">
             <Link href={`${BASE_URL}/affiliate`}>Affiliate Program</Link>
             <Link href={`${BASE_URL}/partners`}>Partners</Link>
-            <Link href={`${BASE_URL}/advertise`}>Advertise with Cashog</Link>
+            <Link href={`${BASE_URL}/advertise`}>Advertise with Cashooz</Link>
           </Section>
 
-          {/* COLUMN 7 */}
+          {/* COLUMN 7 – CASHBACK & DEALS */}
           <Section id="cashback" title="Cashback & Deals">
             <Link href={`${BASE_URL}/cashback-offers`}>Cashback Offers</Link>
             <Link href={`${BASE_URL}/shopping-rewards`}>Shopping Rewards</Link>
@@ -179,11 +173,11 @@ export default function Footer() {
             <Link href={`${BASE_URL}/banking-finance-offers`}>Finance Offers</Link>
           </Section>
 
-          {/* COLUMN 8 */}
+          {/* COLUMN 8 – LEGAL */}
           <Section id="legal" title="Legal">
-            <a href="https://www.cashog.com/terms-and-conditions">Terms & Conditions</a>
-            <a href="https://www.cashog.com/privacy-policy">Privacy Policy</a>
-            <a href="https://www.cashog.com/cookie-policy">Cookie Policy</a>
+            <a href="https://www.cashooz.com/terms-and-conditions">Terms & Conditions</a>
+            <a href="https://www.cashooz.com/privacy-policy">Privacy Policy</a>
+            <a href="https://www.cashooz.com/cookie-policy">Cookie Policy</a>
           </Section>
         </div>
 
@@ -194,7 +188,7 @@ export default function Footer() {
 
         {/* COPYRIGHT */}
         <div className="footer-copy">
-          © {new Date().getFullYear()} Cashog. All rights reserved.
+          © {new Date().getFullYear()} Cashooz. All rights reserved.
         </div>
       </div>
 
@@ -205,14 +199,12 @@ export default function Footer() {
           gap: 16px;
         }
 
-        /* Mobile = 2 columns */
         @media (max-width: 768px) {
           .footer-grid {
             grid-template-columns: repeat(2, 1fr);
           }
         }
 
-        /* Desktop = 4 columns */
         @media (min-width: 769px) {
           .footer-grid {
             grid-template-columns: repeat(4, 1fr);
