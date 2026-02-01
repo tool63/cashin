@@ -1,52 +1,48 @@
-// components/Footer.tsx
+"use client"
+
+import { motion } from "framer-motion"
+
 export default function Footer() {
   return (
-    <footer className="bg-indigo-900 text-white py-10">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
-        {/* Brand & Description */}
-        <div className="space-y-2">
-          <h2 className="text-2xl font-bold">Freecash Clone</h2>
-          <p>
-            Earn rewards with top offers, surveys, and games — always fast payouts
-            and trusted experience.
+    <motion.footer
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="bg-[#070A14] border-t border-white/10 text-gray-300"
+    >
+      <div className="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-4 gap-10">
+        <div>
+          <h2 className="text-2xl font-bold text-white">PayUp</h2>
+          <p className="mt-4 text-sm text-gray-400">
+            A trusted rewards platform where millions earn real money daily.
           </p>
         </div>
 
-        {/* Quick Links */}
-        <div>
-          <h3 className="font-semibold text-lg mb-2">Explore</h3>
-          <ul className="space-y-1 text-sm">
-            <li>Earn</li>
-            <li>Cashout</li>
-            <li>How It Works</li>
-            <li>Support</li>
-          </ul>
-        </div>
-
-        {/* Legal */}
-        <div>
-          <h3 className="font-semibold text-lg mb-2">Legal</h3>
-          <ul className="space-y-1 text-sm">
-            <li>Terms</li>
-            <li>Privacy</li>
-            <li>Cookie Policy</li>
-          </ul>
-        </div>
-
-        {/* Contact & Social */}
-        <div>
-          <h3 className="font-semibold text-lg mb-2">Connect</h3>
-          <ul className="space-y-1 text-sm">
-            <li>Contact Support</li>
-            <li>Follow on Twitter</li>
-            <li>Join Community</li>
-          </ul>
-        </div>
+        {[
+          ["Product", ["Earn", "Cashout", "Leaderboard"]],
+          ["Company", ["About", "Affiliates", "Careers"]],
+          ["Legal", ["Terms", "Privacy", "Cookies"]],
+        ].map(([title, links]) => (
+          <div key={title}>
+            <h3 className="font-semibold text-white mb-4">{title}</h3>
+            <ul className="space-y-2 text-sm">
+              {links.map((l) => (
+                <li
+                  key={l}
+                  className="hover:text-white transition cursor-pointer"
+                >
+                  {l}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
 
-      <div className="text-center text-sm mt-8 border-t border-indigo-800 pt-4">
-        © 2026 Freecash Clone — All Rights Reserved
+      <div className="border-t border-white/10 py-6 text-center text-sm text-gray-500">
+        © 2026 PayUp. All rights reserved.
       </div>
-    </footer>
-  );
+    </motion.footer>
+  )
 }
