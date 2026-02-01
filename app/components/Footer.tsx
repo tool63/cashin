@@ -2,6 +2,14 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import {
+  Facebook,
+  Twitter,
+  Youtube,
+  Instagram,
+  Linkedin,
+  Pinterest,
+} from "lucide-react";
 
 type ToggleMap = Record<string, boolean>;
 
@@ -9,11 +17,11 @@ export default function Footer() {
   const [open, setOpen] = useState<ToggleMap>({});
   const [subOpen, setSubOpen] = useState<ToggleMap>({});
 
-  const toggle = (key: string) =>
-    setOpen((p) => ({ ...p, [key]: !p[key] }));
+  const toggle = (k: string) =>
+    setOpen((p) => ({ ...p, [k]: !p[k] }));
 
-  const toggleSub = (key: string) =>
-    setSubOpen((p) => ({ ...p, [key]: !p[key] }));
+  const toggleSub = (k: string) =>
+    setSubOpen((p) => ({ ...p, [k]: !p[k] }));
 
   const Section = ({
     id,
@@ -24,20 +32,16 @@ export default function Footer() {
     title: string;
     children: React.ReactNode;
   }) => (
-    <div>
-      <button
-        onClick={() => toggle(id)}
-        className="footer-title"
-      >
+    <div className="footer-box">
+      <button className="footer-title" onClick={() => toggle(id)}>
         {title}
-        <span>{open[id] ? "−" : "+"}</span>
+        <span className={`caret ${open[id] ? "open" : ""}`}>^</span>
       </button>
-
       {open[id] && <div className="footer-list">{children}</div>}
     </div>
   );
 
-  const SubSection = ({
+  const Sub = ({
     id,
     title,
     children,
@@ -46,156 +50,163 @@ export default function Footer() {
     title: string;
     children: React.ReactNode;
   }) => (
-    <div>
-      <button
-        onClick={() => toggleSub(id)}
-        className="footer-subtitle"
-      >
+    <div className="footer-sub">
+      <button className="footer-subtitle" onClick={() => toggleSub(id)}>
         {title}
-        <span>{subOpen[id] ? "−" : "+"}</span>
+        <span className={`caret small ${subOpen[id] ? "open" : ""}`}>^</span>
       </button>
-
       {subOpen[id] && <div className="footer-sublist">{children}</div>}
     </div>
+  );
+
+  const A = ({ href, label }: { href: string; label: string }) => (
+    <Link href={href}>{label}</Link>
   );
 
   return (
     <footer className="footer-bg">
       <div className="footer-wrap">
 
-        {/* GRID */}
+        {/* ================= GRID ================= */}
         <div className="footer-grid">
 
           {/* COLUMN 1 */}
-          <Section id="start" title="Get Started">
-            <Link href="/how-it-works">How Cashooz Works</Link>
-            <Link href="/start-earning">How to Start Earning</Link>
-            <Link href="/cashout">Cashout Methods</Link>
-            <Link href="/withdrawals">Withdrawal Proofs</Link>
-            <Link href="/trust-safety">Trust & Safety</Link>
+          <Section id="get-started" title="Get Started">
+            <A href="/how-it-works" label="How Cashog Works" />
+            <A href="/start-earning" label="How to Start Earning" />
+            <A href="/cashout" label="Cashout Methods" />
+            <A href="/withdrawals" label="Withdrawal Proofs" />
+            <A href="/trust-safety" label="Trust & Safety" />
           </Section>
 
           {/* COLUMN 2 */}
-          <Section id="earn" title="Ways To Earn">
-            <Link href="/surveys">Surveys</Link>
-            <Link href="/app-installs">App Installs</Link>
-            <Link href="/play-games">Playing Games</Link>
-            <Link href="/watch-videos">Watching Videos</Link>
-            <Link href="/mining-rewards">Mining Rewards</Link>
-            <Link href="/complete-offers">Completing Offers</Link>
-            <Link href="/offerwall">Offerwall</Link>
-            <Link href="/surveywall">Surveywall</Link>
+          <Section id="ways" title="Ways To Earn">
+            <A href="/surveys" label="Surveys" />
+            <A href="/app-installs" label="App Installs" />
+            <A href="/play-games" label="Playing Games" />
+            <A href="/watch-videos" label="Watching Videos" />
+            <A href="/mining-rewards" label="Mining Rewards" />
+            <A href="/complete-offers" label="Completing Offers" />
+            <A href="/offerwall" label="Offerwall" />
+            <A href="/surveywall" label="Surveywall" />
 
-            <SubSection id="extraEarn" title="Extra Earning">
-              <Link href="/watch-ads">Watching Ads</Link>
-              <Link href="/micro-tasks">Micro Tasks</Link>
-              <Link href="/complete-free-trials">Free Trials</Link>
-              <Link href="/test-products">Testing Products</Link>
-              <Link href="/read-emails">Reading Emails</Link>
-              <Link href="/visit-websites">Visiting Websites</Link>
-              <Link href="/review-tasks">Review Tasks</Link>
-              <Link href="/spinning-wheel">Spinning Wheel</Link>
-              <Link href="/loyalty">Loyalty</Link>
-              <Link href="/vouchers">Vouchers</Link>
-            </SubSection>
+            <Sub id="extra-earning" title="Extra Earning">
+              <A href="/watch-ads" label="Watching Ads" />
+              <A href="/micro-tasks" label="Micro Tasks" />
+              <A href="/complete-free-trials" label="Free Trials" />
+              <A href="/test-products" label="Testing Products" />
+              <A href="/read-emails" label="Reading Emails" />
+              <A href="/visit-websites" label="Visiting Websites" />
+              <A href="/review-tasks" label="Review Tasks" />
+              <A href="/spinning-wheel" label="Spinning Wheel" />
+              <A href="/loyalty" label="Loyalty" />
+              <A href="/vouchers" label="Vouchers" />
+            </Sub>
           </Section>
 
           {/* COLUMN 3 */}
           <Section id="guides" title="Guides & Tips">
-            <Link href="/make-money-online">Make Money Online</Link>
-            <Link href="/earn-money-from-home">Earn Money from Home</Link>
-            <Link href="/earn-without-investment">Earn Without Investment</Link>
-            <Link href="/get-paid-to-play-games">Get Paid to Play Games</Link>
-            <Link href="/install-apps-for-cash">Install Apps for Cash</Link>
-            <Link href="/watch-videos-for-money">Watch Videos for Money</Link>
-            <Link href="/complete-offers-online">Complete Offers Online</Link>
-            <Link href="/work-from-home-jobs">Work from Home Jobs</Link>
-            <Link href="/online-earning-methods">Online Earning Methods</Link>
-            <Link href="/earn-money-online-fast">Earn Money Online Fast</Link>
+            <A href="/make-money-online" label="Make Money Online" />
+            <A href="/earn-money-from-home" label="Earn Money from Home" />
+            <A href="/earn-without-investment" label="Earn Without Investment" />
+            <A href="/get-paid-to-play-games" label="Get Paid to Play Games" />
+            <A href="/install-apps-for-cash" label="Install Apps for Cash" />
+            <A href="/watch-videos-for-money" label="Watch Videos for Money" />
+            <A href="/complete-offers-online" label="Complete Offers Online" />
+            <A href="/work-from-home-jobs" label="Work from Home Jobs" />
+            <A href="/online-earning-methods" label="Online Earning Methods" />
+            <A href="/earn-money-online-fast" label="Earn Money Online Fast" />
 
-            <SubSection id="allGuides" title="All Guides">
-              <Link href="/passive-income-online">Passive Income Online</Link>
-              <Link href="/online-jobs-for-beginners">Online Jobs for Beginners</Link>
-              <Link href="/earn-money-as-a-student">Earn Money as a Student</Link>
-              <Link href="/earn-money-without-skills">Earn Without Skills</Link>
-              <Link href="/earn-money-using-mobile">Earn Using Mobile</Link>
-              <Link href="/earn-money-online-worldwide">Earn Worldwide</Link>
-              <Link href="/cashback-rewards">Cashback Rewards</Link>
-              <Link href="/legit-ways-to-make-money-online">Legit Ways</Link>
-              <Link href="/free-ways-to-make-money-online">Free Ways</Link>
-            </SubSection>
+            <Sub id="all-guides" title="All Guides">
+              <A href="/passive-income-online" label="Passive Income Online" />
+              <A href="/online-jobs-for-beginners" label="Online Jobs for Beginners" />
+              <A href="/earn-money-as-a-student" label="Earn as a Student" />
+              <A href="/earn-money-without-skills" label="Without Skills" />
+              <A href="/earn-money-using-mobile" label="Using Mobile" />
+              <A href="/earn-money-online-worldwide" label="Worldwide" />
+              <A href="/cashback-rewards" label="Cashback Rewards" />
+              <A href="/legit-ways-to-make-money-online" label="Legit Ways" />
+              <A href="/free-ways-to-make-money-online" label="Free Ways" />
+            </Sub>
           </Section>
 
           {/* COLUMN 4 */}
           <Section id="rewards" title="Rewards & Payments">
-            <Link href="/earn-paypal-money">Earn PayPal Money</Link>
+            <A href="/earn-paypal-money" label="Earn PayPal Money" />
 
-            <SubSection id="giftcards" title="Earn Gift Cards">
-              <Link href="/earn-amazon-gift-card">Amazon</Link>
-              <Link href="/earn-apple-gift-card">Apple</Link>
-              <Link href="/earn-google-play-gift-card">Google Play</Link>
-            </SubSection>
+            <Sub id="gift-cards" title="Earn Gift Cards">
+              <A href="/earn-amazon-gift-card" label="Amazon" />
+              <A href="/earn-apple-gift-card" label="Apple" />
+              <A href="/earn-google-play-gift-card" label="Google Play" />
+            </Sub>
 
-            <SubSection id="crypto" title="Earn Crypto">
-              <Link href="/earn-bitcoin-online">Bitcoin</Link>
-              <Link href="/earn-litecoin-online">Litecoin</Link>
-              <Link href="/earn-ethereum-online">Ethereum</Link>
-              <Link href="/earn-dogecoin-online">Dogecoin</Link>
-            </SubSection>
+            <Sub id="crypto" title="Earn Crypto">
+              <A href="/earn-bitcoin-online" label="Bitcoin" />
+              <A href="/earn-litecoin-online" label="Litecoin" />
+              <A href="/earn-ethereum-online" label="Ethereum" />
+              <A href="/earn-dogecoin-online" label="Dogecoin" />
+            </Sub>
 
-            <SubSection id="gaming" title="Gaming Gift Cards">
-              <Link href="/earn-free-robux">Robux</Link>
-              <Link href="/earn-steam-gift-cards">Steam</Link>
-              <Link href="/earn-xbox-gift-cards">Xbox</Link>
-              <Link href="/earn-psn-gift-cards">PlayStation</Link>
-            </SubSection>
+            <Sub id="gaming" title="Gaming Gift Cards">
+              <A href="/earn-free-robux" label="Robux" />
+              <A href="/earn-steam-gift-cards" label="Steam" />
+              <A href="/earn-xbox-gift-cards" label="Xbox" />
+              <A href="/earn-psn-gift-cards" label="PlayStation" />
+            </Sub>
 
-            <Link href="/earn-spotify-premium">Spotify Premium</Link>
+            <A href="/earn-spotify-premium" label="Spotify Premium" />
           </Section>
 
           {/* COLUMN 5 */}
           <Section id="resources" title="Resources">
-            <Link href="/blog">Blog</Link>
-            <Link href="/help">Help Center</Link>
-            <Link href="/faq">FAQ</Link>
-            <Link href="/contact">Contact Support</Link>
-            <Link href="/about">About Cashooz</Link>
+            <A href="/blog" label="Blog" />
+            <A href="/help" label="Help Center" />
+            <A href="/faq" label="FAQ" />
+            <A href="/contact" label="Contact Support" />
+            <A href="/about" label="About Cashog" />
           </Section>
 
           {/* COLUMN 6 */}
           <Section id="business" title="Business">
-            <Link href="/affiliate">Affiliate Program</Link>
-            <Link href="/partners">Partners</Link>
-            <Link href="/advertise">Advertise with Cashooz</Link>
+            <A href="/affiliate" label="Affiliate Program" />
+            <A href="/partners" label="Partners" />
+            <A href="/advertise" label="Advertise with Cashog" />
           </Section>
 
           {/* COLUMN 7 */}
           <Section id="cashback" title="Cashback & Deals">
-            <Link href="/cashback-offers">Cashback Offers</Link>
-            <Link href="/shopping-rewards">Shopping Rewards</Link>
-            <Link href="/promo-codes">Promo Codes</Link>
-            <Link href="/daily-deals">Daily Deals</Link>
-            <Link href="/travel-deals">Travel Cashback</Link>
-            <Link href="/banking-finance-offers">Finance Offers</Link>
+            <A href="/cashback-offers" label="Cashback Offers" />
+            <A href="/shopping-rewards" label="Shopping Rewards" />
+            <A href="/promo-codes" label="Promo Codes & Coupons" />
+            <A href="/daily-deals" label="Daily Deals" />
+            <A href="/travel-deals" label="Travel Cashback" />
+            <A href="/banking-finance-offers" label="Banking & Finance Offers" />
           </Section>
 
           {/* COLUMN 8 */}
           <Section id="legal" title="Legal">
-            <a href="https://cashooz.com/terms-and-conditions">Terms & Conditions</a>
-            <a href="https://cashooz.com/privacy-policy">Privacy Policy</a>
-            <a href="https://cashooz.com/cookie-policy">Cookie Policy</a>
+            <A href="https://cashog.com/terms-and-conditions" label="Terms & Conditions" />
+            <A href="https://cashog.com/privacy-policy" label="Privacy Policy" />
+            <A href="https://cashog.com/cookie-policy" label="Cookie Policy" />
           </Section>
+
         </div>
 
-        {/* SOCIAL */}
+        {/* ================= SOCIAL ================= */}
         <div className="footer-social">
-          <span>f</span><span>x</span><span>y</span><span>p</span><span>l</span><span>i</span>
+          <Facebook />
+          <Twitter />
+          <Youtube />
+          <Instagram />
+          <Linkedin />
+          <Pinterest />
         </div>
 
-        {/* COPYRIGHT */}
+        {/* ================= COPYRIGHT ================= */}
         <div className="footer-copy">
-          © {new Date().getFullYear()} Cashooz. All rights reserved.
+          © {new Date().getFullYear()} Cashog. All rights reserved.
         </div>
+
       </div>
     </footer>
   );
