@@ -1,13 +1,30 @@
-// components/Footer.js
+"use client";
 import { useState } from "react";
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedin,
+} from "react-icons/fa";
 
-const FooterColumn = ({ title, links }) => {
+interface LinkItem {
+  title: string;
+  href?: string;
+  subLinks?: LinkItem[];
+}
+
+interface Column {
+  title: string;
+  links: LinkItem[];
+}
+
+const FooterColumn = ({ title, links }: Column) => {
   const [open, setOpen] = useState(false);
+
   return (
     <div className="mb-6">
       <h3
-        className="font-semibold text-lg cursor-pointer flex justify-between items-center hover:text-white transition-colors"
+        className="font-semibold text-lg flex justify-between items-center cursor-pointer hover:text-white transition-colors"
         onClick={() => setOpen(!open)}
       >
         {title} <span className="text-gray-400">{open ? "▼" : "▲"}</span>
@@ -36,7 +53,10 @@ const FooterColumn = ({ title, links }) => {
             </li>
           ) : (
             <li key={link.title}>
-              <a href={link.href} className="hover:text-white transition-colors">
+              <a
+                href={link.href}
+                className="hover:text-white transition-colors"
+              >
                 {link.title}
               </a>
             </li>
@@ -47,8 +67,8 @@ const FooterColumn = ({ title, links }) => {
   );
 };
 
-const Footer = () => {
-  const columns = [
+export default function Footer() {
+  const columns: Column[] = [
     {
       title: "Get Started",
       links: [
@@ -199,6 +219,4 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}
