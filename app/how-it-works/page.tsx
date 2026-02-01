@@ -18,7 +18,6 @@ const ds = {
   surface: "#0f172a",
   border: "border-white/10",
   primary: "from-indigo-600 to-cyan-500",
-  textMuted: "text-gray-400",
 };
 
 /* ================= FLOATING CTA ================= */
@@ -97,11 +96,7 @@ export default function CashogHowItWorks() {
 
   return (
     <main className={`bg-[${ds.bg}] text-white min-h-screen relative`}>
-      {/* TEST MARKER */}
-      <h1 className="text-red-500 text-4xl text-center py-6">
-        CASHOG TEST PAGE
-      </h1>
-
+      {/* FLOATING CTA */}
       <FloatingCTA topRef={topCTARef} bottomRef={bottomCTARef} />
 
       {/* HERO */}
@@ -207,4 +202,4 @@ export default function CashogHowItWorks() {
 }
 
 /* ================= FIXED revalidate ================= */
-export const revalidate = 0; // ✅ Must be a number or false, never an object
+export const revalidate = 0; // ✅ Number only, never an object
