@@ -17,7 +17,6 @@ const ds = {
   bg: "#020617",
   surface: "#0f172a",
   border: "border-white/10",
-  primary: "from-indigo-600 to-cyan-500",
 };
 
 /* ================= FLOATING CTA ================= */
