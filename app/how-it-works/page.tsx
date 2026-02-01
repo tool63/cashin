@@ -1,255 +1,205 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
-  ArrowRight,
-  ShieldCheck,
   Zap,
-  Activity,
-  Coins,
-  Gamepad2,
-  Smartphone,
+  Shield,
   Wallet,
+  Globe,
   TrendingUp,
   CheckCircle2,
+  ChevronDown,
+  ArrowRight,
+  Briefcase,
+  Users,
 } from "lucide-react";
 
-const steps = [
-  {
-    title: "Create Your Free Account",
-    description:
-      "Sign up in under 60 seconds. No credit card. No risk.",
-    icon: <Zap size={28} />,
-  },
-  {
-    title: "Choose How You Earn",
-    description:
-      "Surveys, games, apps, mining rewards, offers & more.",
-    icon: <Activity size={28} />,
-  },
-  {
-    title: "Complete Tasks",
-    description:
-      "Earn coins instantly for every verified action.",
-    icon: <Coins size={28} />,
-  },
-  {
-    title: "Cash Out Anytime",
-    description:
-      "Withdraw PayPal, crypto, or gift cards with no delays.",
-    icon: <Wallet size={28} />,
-  },
-];
+/* ================= DESIGN SYSTEM ================= */
+const ds = {
+  bg: "#020617",
+  surface: "#0f172a",
+  border: "border-white/10",
+  primary: "from-indigo-600 to-cyan-500",
+  textMuted: "text-gray-400",
+};
 
-const earningMethods = [
-  { title: "Play Games", icon: <Gamepad2 size={26} />, desc: "Get paid for playing top mobile & PC games." },
-  { title: "Install Apps", icon: <Smartphone size={26} />, desc: "Install & use apps to earn instantly." },
-  { title: "Surveys", icon: <TrendingUp size={26} />, desc: "High-paying global surveys." },
-  { title: "Mining Rewards", icon: <Coins size={26} />, desc: "Earn passive coins every hour." },
-];
-
-export default function HowCashoozWorks() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const footerRef = useRef<HTMLDivElement>(null);
-  const [showFloating, setShowFloating] = useState(false);
-
-  const ctaGradient =
-    "bg-gradient-to-r from-cyan-400 via-emerald-400 to-teal-400";
-
-  const handleCTA = () => {
-    alert("Redirect to signup page");
-  };
+/* ================= FLOATING CTA ================= */
+function FloatingCTA({ topRef, bottomRef }: { topRef: any; bottomRef: any }) {
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    if (!heroRef.current || !footerRef.current) return;
-
     const observer = new IntersectionObserver(
       (entries) => {
-        const heroVisible = entries.find(
-          (e) => e.target === heroRef.current
-        )?.isIntersecting;
-        const footerVisible = entries.find(
-          (e) => e.target === footerRef.current
-        )?.isIntersecting;
-
-        setShowFloating(!heroVisible && !footerVisible);
+        const anyVisible = entries.some((e) => e.isIntersecting);
+        setVisible(!anyVisible);
       },
-      { threshold: 0.3 }
+      { threshold: 0.6 }
     );
 
-    observer.observe(heroRef.current);
-    observer.observe(footerRef.current);
+    if (topRef.current) observer.observe(topRef.current);
+    if (bottomRef.current) observer.observe(bottomRef.current);
 
     return () => observer.disconnect();
-  }, []);
+  }, [topRef, bottomRef]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0b1020] via-[#020617] to-black text-white overflow-hidden">
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 40 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      className="fixed bottom-6 right-6 z-50"
+    >
+      <button className="group flex items-center gap-4 px-8 py-4 rounded-xl bg-gradient-to-br from-indigo-600 to-cyan-500 text-white shadow-2xl">
+        <div className="w-10 h-10 rounded-lg bg-black/20 flex items-center justify-center">
+          <Zap size={18} />
+        </div>
+        <div className="text-left leading-tight">
+          <div className="text-xs opacity-80">Get started</div>
+          <div className="text-sm font-semibold">Start Earning in 60 Seconds</div>
+        </div>
+        <ArrowRight className="opacity-0 group-hover:opacity-100 transition" />
+      </button>
+    </motion.div>
+  );
+}
+
+/* ================= FAQ ITEM ================= */
+function FAQItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className={`rounded-xl bg-[${ds.surface}] border ${ds.border}`}>
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between p-6"
+      >
+        <span className="font-medium">{q}</span>
+        <ChevronDown className={`transition-transform ${open ? "rotate-180" : ""}`} />
+      </button>
+      {open && (
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: "auto" }}
+          className="px-6 pb-6 text-gray-400 text-sm"
+        >
+          {a}
+        </motion.div>
+      )}
+    </div>
+  );
+}
+
+/* ================= CASHOG HOW IT WORKS PAGE ================= */
+export default function CashogHowItWorks() {
+  const topCTARef = useRef(null);
+  const bottomCTARef = useRef(null);
+
+  const { scrollYProgress } = useScroll();
+  const heroY = useTransform(scrollYProgress, [0, 0.2], [0, -80]);
+
+  return (
+    <main className={`bg-[${ds.bg}] text-white min-h-screen relative`}>
+      <FloatingCTA topRef={topCTARef} bottomRef={bottomCTARef} />
 
       {/* HERO */}
-      <section
-        ref={heroRef}
-        className="relative px-6 pt-32 pb-40 max-w-7xl mx-auto text-center"
-      >
-        <motion.h1
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-4xl md:text-6xl font-extrabold leading-tight"
-        >
-          How{" "}
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-emerald-400 to-teal-400">
-            Cashooz
-          </span>{" "}
-          Works
-        </motion.h1>
+      <section ref={topCTARef} className="relative px-6 py-40 overflow-hidden">
+        <motion.div
+          style={{ y: heroY }}
+          className="absolute inset-0 bg-gradient-to-b from-indigo-900/30 via-transparent to-transparent"
+        />
+        <div className="relative max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
+          <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}>
+            <span className="inline-flex items-center gap-2 text-sm text-indigo-400 mb-6">
+              <CheckCircle2 size={16} /> Trusted Global Rewards Platform
+            </span>
+            <h1 className="text-6xl font-semibold tracking-tight">
+              Earn Smarter.<br />
+              Get Paid Faster.
+            </h1>
+            <p className="mt-6 text-xl text-gray-300 max-w-xl">
+              Cashog connects users and advertisers through a secure, performance-driven rewards ecosystem.
+            </p>
+            <div className="mt-12 flex gap-6">
+              <button className="px-10 py-5 rounded-xl bg-gradient-to-br from-indigo-600 to-cyan-500 font-semibold">
+                Create Free Account
+              </button>
+              <button className="px-10 py-5 rounded-xl bg-white/5 hover:bg-white/10">
+                For Advertisers
+              </button>
+            </div>
+          </motion.div>
 
-        <p className="mt-8 text-gray-400 max-w-3xl mx-auto text-lg md:text-xl">
-          A smarter, faster and more rewarding way to earn online — inspired by
-          top platforms like Freecash, built to be better.
-        </p>
-
-        <motion.button
-          onClick={handleCTA}
-          whileHover={{ scale: 1.05 }}
-          className={`mt-14 inline-flex items-center gap-4 px-16 py-6 rounded-full font-bold text-lg ${ctaGradient} shadow-[0_0_60px_rgba(34,211,238,0.35)]`}
-        >
-          Start Earning in 60 Seconds <ArrowRight />
-        </motion.button>
+          {/* HERO CARD */}
+          <motion.div initial={{ opacity: 0, y: 60 }} animate={{ opacity: 1, y: 0 }}>
+            <div className={`rounded-3xl bg-[${ds.surface}] p-10 border ${ds.border} shadow-2xl`}>
+              <div className="flex justify-between items-center mb-8">
+                <span className="text-sm text-gray-400">Realtime Earnings</span>
+                <TrendingUp className="text-emerald-400" />
+              </div>
+              <div className="text-5xl font-semibold mb-6">$1,284.40</div>
+              <div className="space-y-4">
+                {["Verified offers", "Instant tracking", "Fast payouts"].map((t, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <CheckCircle2 className="text-indigo-400" size={16} />
+                    <span className="text-gray-300 text-sm">{t}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </section>
 
-      {/* TRUST STATS */}
-      <section className="max-w-7xl mx-auto px-6 -mt-20">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 bg-white/5 backdrop-blur border border-white/10 rounded-3xl p-10 text-center">
-          <div>
-            <h3 className="text-3xl font-bold text-cyan-400">1M+</h3>
-            <p className="text-gray-400 mt-2">Users Worldwide</p>
+      {/* USERS vs ADVERTISERS */}
+      <section className="py-32 px-6">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16">
+          <div className={`rounded-3xl bg-[${ds.surface}] border ${ds.border} p-12`}>
+            <Users className="text-indigo-400 mb-6" />
+            <h3 className="text-3xl font-semibold mb-4">For Users</h3>
+            <ul className="space-y-4 text-gray-300">
+              <li>• Earn from verified global brands</li>
+              <li>• Transparent tracking & instant credit</li>
+              <li>• Withdraw via PayPal, Crypto, Gift Cards</li>
+            </ul>
+            <button className="mt-8 flex items-center gap-2 text-indigo-400">
+              Start earning <ArrowRight size={16} />
+            </button>
           </div>
-          <div>
-            <h3 className="text-3xl font-bold text-emerald-400">$5M+</h3>
-            <p className="text-gray-400 mt-2">Paid to Users</p>
-          </div>
-          <div>
-            <h3 className="text-3xl font-bold text-teal-400">24/7</h3>
-            <p className="text-gray-400 mt-2">Instant Withdrawals</p>
-          </div>
-          <div>
-            <h3 className="text-3xl font-bold text-purple-400">100%</h3>
-            <p className="text-gray-400 mt-2">Legit & Secure</p>
+          <div className={`rounded-3xl bg-[${ds.surface}] border ${ds.border} p-12`}>
+            <Briefcase className="text-cyan-400 mb-6" />
+            <h3 className="text-3xl font-semibold mb-4">For Advertisers</h3>
+            <ul className="space-y-4 text-gray-300">
+              <li>• Performance-based acquisition</li>
+              <li>• Fraud-protected traffic</li>
+              <li>• Real-time analytics & scaling</li>
+            </ul>
+            <button className="mt-8 flex items-center gap-2 text-cyan-400">
+              Advertise with Cashog <ArrowRight size={16} />
+            </button>
           </div>
         </div>
       </section>
 
-      {/* STEPS TIMELINE */}
-      <section className="max-w-7xl mx-auto px-6 py-32">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
-          Start Earning in 4 Simple Steps
-        </h2>
-
-        <div className="grid md:grid-cols-4 gap-8">
-          {steps.map((step, i) => (
-            <motion.div
-              key={i}
-              whileInView={{ opacity: [0, 1], y: [30, 0] }}
-              transition={{ delay: i * 0.15 }}
-              className="relative bg-white/5 border border-white/10 rounded-2xl p-8 hover:border-cyan-400/40 transition"
-            >
-              <div className="text-cyan-400 mb-6">{step.icon}</div>
-              <h3 className="text-xl font-semibold mb-3">
-                {step.title}
-              </h3>
-              <p className="text-gray-400 text-sm">
-                {step.description}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* EARNING METHODS */}
-      <section className="bg-white/5 py-28">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">
-            Multiple Ways to Earn
-          </h2>
-
-          <div className="grid md:grid-cols-4 gap-8">
-            {earningMethods.map((item, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ y: -8 }}
-                className="bg-black/40 border border-white/10 rounded-2xl p-8"
-              >
-                <div className="text-emerald-400 mb-5">
-                  {item.icon}
-                </div>
-                <h3 className="text-lg font-semibold mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-gray-400 text-sm">
-                  {item.desc}
-                </p>
-              </motion.div>
-            ))}
+      {/* FAQ */}
+      <section className="py-28 px-6 border-t border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-4xl font-semibold text-center mb-16">Frequently Asked Questions</h2>
+          <div className="space-y-4">
+            <FAQItem q="Is Cashog legitimate?" a="Yes. Cashog partners only with vetted advertisers and applies advanced fraud prevention systems." />
+            <FAQItem q="How fast can I earn?" a="Most users earn within the first minute after signup." />
+            <FAQItem q="How do advertisers benefit?" a="Advertisers receive high-intent traffic with performance-only billing." />
+            <FAQItem q="Is my data secure?" a="Enterprise-grade encryption and compliance standards are enforced." />
           </div>
-        </div>
-      </section>
-
-      {/* SECURITY */}
-      <section className="max-w-7xl mx-auto px-6 py-28 text-center">
-        <ShieldCheck className="mx-auto text-emerald-400 mb-6" size={48} />
-        <h2 className="text-3xl font-bold mb-6">
-          Safe, Secure & Transparent
-        </h2>
-        <p className="text-gray-400 max-w-3xl mx-auto text-lg">
-          Advanced fraud detection, encrypted tracking, and verified partners
-          ensure every reward you earn is real and payable.
-        </p>
-
-        <div className="mt-10 flex flex-wrap justify-center gap-6 text-sm text-gray-300">
-          <span className="flex items-center gap-2"><CheckCircle2 size={16} /> No fake offers</span>
-          <span className="flex items-center gap-2"><CheckCircle2 size={16} /> No hidden fees</span>
-          <span className="flex items-center gap-2"><CheckCircle2 size={16} /> Real-time tracking</span>
         </div>
       </section>
 
       {/* FINAL CTA */}
-      <section
-        ref={footerRef}
-        className="px-6 py-32 text-center max-w-7xl mx-auto"
-      >
-        <h2 className="text-4xl font-extrabold">
-          Ready to Earn Real Rewards?
-        </h2>
-        <p className="text-gray-400 mt-6 text-lg">
-          Join Cashooz today and start earning within minutes.
-        </p>
-
-        <motion.button
-          onClick={handleCTA}
-          whileHover={{ scale: 1.05 }}
-          className={`mt-12 inline-flex items-center gap-4 px-16 py-6 rounded-full font-bold text-lg ${ctaGradient} shadow-2xl`}
-        >
-          Start Earning Now <ArrowRight />
-        </motion.button>
+      <section ref={bottomCTARef} className="py-36 text-center bg-gradient-to-br from-indigo-700 to-cyan-600">
+        <h2 className="text-5xl font-semibold">Start Earning in 60 Seconds</h2>
+        <p className="mt-6 text-xl opacity-90">Join a trusted rewards platform built for scale.</p>
+        <button className="mt-12 px-16 py-6 rounded-xl bg-black text-white font-semibold">Create Free Account</button>
       </section>
-
-      {/* FLOATING CTA */}
-      {showFloating && (
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="fixed bottom-6 right-6 z-50"
-        >
-          <button
-            onClick={handleCTA}
-            className={`px-6 py-4 rounded-full font-bold text-lg ${ctaGradient} shadow-2xl hover:scale-105`}
-          >
-            Start Earning in 60 Seconds
-          </button>
-        </motion.div>
-      )}
-    </div>
+    </main>
   );
 }
