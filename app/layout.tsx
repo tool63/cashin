@@ -9,11 +9,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-black text-white antialiased">
-        {/* PAGE CONTENT */}
-        <main className="min-h-screen">{children}</main>
+      <body className="min-h-screen bg-black text-white antialiased selection:bg-yellow-500 selection:text-black">
+        {/* MAIN CONTENT */}
+        <main className="relative min-h-screen">{children}</main>
 
-        {/* FOOTER (CLIENT COMPONENT) */}
+        {/* FOOTER COMPONENT */}
         <ClientFooter />
       </body>
     </html>
