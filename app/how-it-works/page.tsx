@@ -1,146 +1,125 @@
+// /app/how-it-works/page.tsx
 "use client";
 
 import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, ChevronUp, ArrowRight } from "lucide-react";
+import { ArrowRight, Clock, ShieldCheck, Coins } from "lucide-react";
 
-export const revalidate = 0; // Important: number only
+// Revalidate for ISR (Next.js requirement)
+export const revalidate = 60; // ✅ Must be a number or false
 
-// --- FAQ Data ---
-const faqData = [
-  {
-    question: "How do I start earning on Cashog?",
-    answer: "Simply click the 'Start Earning' button, complete offers, surveys, or tasks, and watch your rewards accumulate instantly.",
-  },
-  {
-    question: "How do withdrawals work?",
-    answer: "You can withdraw your earnings via PayPal, crypto, or gift cards. Minimum payout depends on your chosen method.",
-  },
-  {
-    question: "Is Cashog safe to use?",
-    answer: "Absolutely. We use enterprise-level security to protect your data and ensure fair rewards.",
-  },
-  {
-    question: "Can I earn from multiple devices?",
-    answer: "Yes! You can log in from multiple devices, and your earnings will sync automatically.",
-  },
+// Features Data
+const features = [
+  { icon: <Coins size={32} />, title: "Earn Instantly", desc: "Start earning points immediately by completing tasks." },
+  { icon: <ShieldCheck size={32} />, title: "Safe & Secure", desc: "All your data and earnings are protected with top-tier security." },
+  { icon: <Clock size={32} />, title: "Fast Payouts", desc: "Withdraw your earnings instantly to multiple payout methods." },
 ];
 
-// --- Page Component ---
+// FAQ Data
+const faqs = [
+  { q: "How do I start earning?", a: "Sign up, choose a task, complete it, and collect points instantly." },
+  { q: "Is Cashog free?", a: "Yes, joining and participating is completely free." },
+  { q: "How long does a withdrawal take?", a: "Most withdrawals are instant. Some may take up to 24 hours." },
+];
+
 export default function HowItWorksPage() {
   const [showCTA, setShowCTA] = useState(true);
-  const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
+  const lastScroll = useRef(0);
 
-  // --- Scroll handler for floating CTA ---
+  // Auto-hide/show floating CTA on scroll
   useEffect(() => {
-    let lastScroll = window.scrollY;
     const handleScroll = () => {
-      const currentScroll = window.scrollY;
-      if (currentScroll > lastScroll && currentScroll > 300) {
-        // Scrolling down
-        setShowCTA(false);
-      } else {
-        // Scrolling up
-        setShowCTA(true);
-      }
-      lastScroll = currentScroll;
+      const current = window.scrollY;
+      setShowCTA(current < lastScroll.current || current < 300 || current + window.innerHeight >= document.body.offsetHeight);
+      lastScroll.current = current;
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <main className="relative bg-black text-white min-h-screen font-sans antialiased">
-      {/* HERO */}
-      <section className="text-center py-24 px-4 max-w-4xl mx-auto">
+    <main className="relative min-h-screen bg-gradient-to-b from-black to-gray-900 text-white font-sans">
+      
+      {/* Hero Section */}
+      <section className="text-center py-28 px-6">
         <motion.h1
-          className="text-5xl lg:text-6xl font-extrabold mb-6 leading-tight"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8 }}
+          className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6"
         >
-          How Cashog Works
+          Earn Online with Cashog
         </motion.h1>
         <motion.p
-          className="text-lg text-gray-300 mb-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.6 }}
+          className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-10"
         >
-          Earn rewards instantly by completing tasks, surveys, and offers—all in one platform.
+          Complete simple tasks, play games, and watch ads to earn points instantly. Safe, secure, and fast payouts guaranteed.
         </motion.p>
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="bg-yellow-500 hover:bg-yellow-400 text-black font-semibold px-8 py-4 rounded-xl shadow-lg transition-all"
+        >
+          Get Started
+        </motion.button>
       </section>
 
-      {/* STEPS */}
-      <section className="max-w-5xl mx-auto py-16 px-6 grid gap-12 lg:grid-cols-3">
-        {[
-          { title: "Sign Up", desc: "Create your free Cashog account in seconds." },
-          { title: "Complete Tasks", desc: "Surveys, offers, and simple tasks for instant rewards." },
-          { title: "Withdraw Rewards", desc: "Cash out securely via PayPal, crypto, or gift cards." },
-        ].map((step, i) => (
-          <motion.div
-            key={i}
-            className="bg-gray-900 rounded-xl p-8 text-center shadow-lg hover:shadow-2xl transition-shadow"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.2 }}
-          >
-            <h3 className="text-xl font-semibold mb-4">{step.title}</h3>
-            <p className="text-gray-400">{step.desc}</p>
-          </motion.div>
-        ))}
-      </section>
-
-      {/* FAQ */}
-      <section className="max-w-4xl mx-auto py-16 px-4">
-        <h2 className="text-3xl font-bold text-center mb-10">Frequently Asked Questions</h2>
-        <div className="space-y-4">
-          {faqData.map((faq, i) => (
-            <div key={i} className="bg-gray-900 rounded-lg overflow-hidden">
-              <button
-                onClick={() => setExpandedFAQ(expandedFAQ === i ? null : i)}
-                className="w-full flex justify-between items-center px-6 py-4 font-medium text-left hover:bg-gray-800 transition-colors"
-              >
-                {faq.question}
-                {expandedFAQ === i ? <ChevronUp /> : <ChevronDown />}
-              </button>
-              <AnimatePresence>
-                {expandedFAQ === i && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="px-6 pb-4 text-gray-300"
-                  >
-                    {faq.answer}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+      {/* Features Section */}
+      <section className="py-20 px-6 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-12">
+          {features.map((f, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.2 }}
+              className="bg-gray-800 p-8 rounded-2xl text-center hover:scale-105 hover:bg-gray-700 transition-transform shadow-md"
+            >
+              <div className="flex justify-center mb-4 text-yellow-400">{f.icon}</div>
+              <h3 className="text-xl font-bold mb-2">{f.title}</h3>
+              <p className="text-gray-300">{f.desc}</p>
+            </motion.div>
           ))}
         </div>
       </section>
 
-      {/* FLOATING CTA */}
+      {/* FAQ Section */}
+      <section className="py-20 px-6 max-w-3xl mx-auto">
+        <h2 className="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+        <div className="flex flex-col gap-6">
+          {faqs.map((faq, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+              className="bg-gray-800 p-6 rounded-xl shadow-md hover:bg-gray-700 transition-colors cursor-pointer"
+            >
+              <h3 className="font-semibold text-lg mb-2">{faq.q}</h3>
+              <p className="text-gray-300">{faq.a}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Floating CTA Button */}
       <AnimatePresence>
         {showCTA && (
           <motion.div
-            ref={ctaRef}
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 50 }}
-            transition={{ duration: 0.4 }}
-            className="fixed bottom-6 right-6 z-50"
+            transition={{ duration: 0.3 }}
+            className="fixed bottom-8 right-8 z-50"
           >
-            <a
-              href="/start-earning"
-              className="bg-yellow-500 hover:bg-yellow-400 text-black font-semibold px-6 py-4 rounded-xl shadow-xl transition-all flex items-center gap-2"
-            >
-              Start Earning in 60 Seconds <ArrowRight />
-            </a>
+            <button className="bg-yellow-500 hover:bg-yellow-400 text-black font-semibold px-6 py-4 rounded-full shadow-2xl flex items-center gap-2">
+              Start Earning in 60 Seconds <ArrowRight size={20} />
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
