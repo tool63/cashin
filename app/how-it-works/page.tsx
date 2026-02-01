@@ -4,15 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
   Zap,
-  Shield,
-  Wallet,
-  Globe,
-  TrendingUp,
   CheckCircle2,
   ChevronDown,
   ArrowRight,
-  Briefcase,
   Users,
+  Briefcase,
+  TrendingUp,
 } from "lucide-react";
 
 /* ================= DESIGN SYSTEM ================= */
@@ -90,7 +87,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   );
 }
 
-/* ================= CASHOG HOW IT WORKS PAGE ================= */
+/* ================= PAGE ================= */
 export default function CashogHowItWorks() {
   const topCTARef = useRef(null);
   const bottomCTARef = useRef(null);
@@ -100,6 +97,11 @@ export default function CashogHowItWorks() {
 
   return (
     <main className={`bg-[${ds.bg}] text-white min-h-screen relative`}>
+      {/* TEST MARKER */}
+      <h1 className="text-red-500 text-4xl text-center py-6">
+        CASHOG TEST PAGE
+      </h1>
+
       <FloatingCTA topRef={topCTARef} bottomRef={bottomCTARef} />
 
       {/* HERO */}
@@ -203,3 +205,6 @@ export default function CashogHowItWorks() {
     </main>
   );
 }
+
+// Optional: disable caching for immediate updates
+export const revalidate = 0;
