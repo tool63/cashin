@@ -1,6 +1,6 @@
 import "./globals.css";
 import type { ReactNode } from "react";
-import ClientFooter from "./components/ClientFooter";
+import Footer from "@/components/Footer";
 
 export default function RootLayout({
   children,
@@ -9,12 +9,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-black text-white antialiased">
-        {/* PAGE CONTENT */}
-        <main className="min-h-screen">{children}</main>
+      <body className="min-h-screen flex flex-col bg-white text-gray-900">
+        {/* MAIN CONTENT */}
+        <main className="flex-1">
+          {children}
+        </main>
 
-        {/* FOOTER (CLIENT COMPONENT) */}
-        <ClientFooter />
+        {/* FOOTER */}
+        <Footer />
       </body>
     </html>
   );
