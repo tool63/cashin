@@ -1,11 +1,6 @@
 // app/layout.tsx
-import '../styles/globals.css'
+import '../styles/globals.css' // correct relative path
 import Footer from '../components/Footer'
-
-export const metadata = {
-  title: 'Next.js 14 Starter',
-  description: 'A minimal Next.js 14 project',
-}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
