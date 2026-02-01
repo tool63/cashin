@@ -2,10 +2,11 @@
 import { useParams } from 'next/navigation'
 
 export default function DynamicPage() {
-  const params = useParams() // { slug: 'something' }
+  const params = useParams()
   return (
-    <main>
-      <h1>Dynamic Page: {params.slug}</h1>
+    <main style={{ padding: '2rem', textAlign: 'center' }}>
+      <h1>Dynamic Page</h1>
+      <p>Slug: {params.slug}</p>
     </main>
   )
 }
