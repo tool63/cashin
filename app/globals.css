@@ -1,110 +1,200 @@
-/* FOOTER BASE */
+/* =========================
+   BASE RESET
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background-color: #020617;
+  color: #e5e7eb;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+/* =========================
+   FOOTER MAIN
+========================= */
+
 .footer-bg {
-  background: #050814;
-  color: #cbd5f5;
-  border-top: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(
+    180deg,
+    #05070d 0%,
+    #020617 100%
+  );
+  border-top: 1px solid #0f172a;
 }
 
 .footer-wrap {
-  max-width: 1200px;
-  margin: auto;
-  padding: 60px 16px 30px;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 56px 16px 32px;
 }
 
-/* GRID — THIS ENABLES 4 COLUMNS */
+/* =========================
+   GRID LAYOUT
+========================= */
+
 .footer-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 28px;
 }
 
-/* COLUMN BOX */
-.footer-box {
-  display: flex;
-  flex-direction: column;
+@media (min-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 40px;
+  }
 }
 
-/* TITLES */
-.footer-title,
-.footer-subtitle {
+/* =========================
+   COLUMN HEADERS
+========================= */
+
+.footer-title {
+  width: 100%;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  font-weight: 600;
+
   font-size: 15px;
-  cursor: pointer;
-  background: none;
-  border: none;
-  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+
+  color: #facc15; /* Freecash yellow */
+  padding: 10px 0;
 }
 
-/* CARET */
-.caret {
-  transition: transform 0.3s ease;
-}
-.caret.open {
-  transform: rotate(180deg);
-}
-.caret.small {
-  font-size: 12px;
+.footer-title span {
+  font-size: 18px;
+  color: #94a3b8;
 }
 
-/* LINKS */
+/* =========================
+   SUB HEADERS (SECOND CLICK)
+========================= */
+
+.footer-subtitle {
+  margin-top: 10px;
+  padding: 8px 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  color: #38bdf8; /* Freecash blue */
+}
+
+.footer-subtitle span {
+  font-size: 16px;
+  color: #64748b;
+}
+
+/* =========================
+   LINK LISTS
+========================= */
+
 .footer-list,
 .footer-sublist {
-  margin-top: 12px;
-}
-.footer-link {
-  display: block;
-  font-size: 14px;
-  color: #9aa4ff;
-  margin-bottom: 8px;
-}
-.footer-link:hover {
-  color: #4ade80;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-left: 2px;
 }
 
-/* SUB SECTION */
-.footer-sub {
-  margin-top: 12px;
-  padding-left: 6px;
+.footer-list a,
+.footer-sublist a {
+  font-size: 13.5px;
+  color: #94a3b8;
+  transition: color 0.15s ease;
 }
 
-/* SOCIAL */
+.footer-list a:hover,
+.footer-sublist a:hover {
+  color: #facc15;
+}
+
+/* =========================
+   SOCIAL ICONS
+========================= */
+
 .footer-social {
   display: flex;
-  gap: 16px;
   justify-content: center;
-  margin: 36px 0 20px;
-}
-.footer-social svg {
-  cursor: pointer;
-  opacity: 0.7;
-}
-.footer-social svg:hover {
-  opacity: 1;
-  color: #4ade80;
+  align-items: center;
+  gap: 14px;
+  margin-top: 40px;
 }
 
-/* COPYRIGHT */
+.footer-social span {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+
+  background: #0f172a;
+  border: 1px solid #1e293b;
+
+  display: grid;
+  place-items: center;
+
+  font-weight: 700;
+  font-size: 15px;
+  color: #e5e7eb;
+
+  transition: all 0.2s ease;
+}
+
+.footer-social span:hover {
+  background: #020617;
+  color: #facc15;
+  border-color: #facc15;
+}
+
+/* =========================
+   COPYRIGHT
+========================= */
+
 .footer-copy {
+  margin-top: 26px;
   text-align: center;
-  font-size: 13px;
-  opacity: 0.6;
+
+  font-size: 12.5px;
+  color: #64748b;
 }
 
-/* 📱 MOBILE BEHAVIOR */
-@media (max-width: 768px) {
-  .footer-grid {
-    grid-template-columns: 1fr;
-  }
+/* =========================
+   DESKTOP BEHAVIOR
+   (Freecash style)
+========================= */
 
+@media (min-width: 1024px) {
   .footer-list,
   .footer-sublist {
-    display: none;
+    display: flex !important;
   }
 
-  .footer-list.show,
-  .footer-sublist.show {
-    display: block;
+  .footer-title span,
+  .footer-subtitle span {
+    display: none;
   }
 }
