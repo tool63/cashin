@@ -1,14 +1,19 @@
-import "../styles/globals.css";
-import Footer from "../components/Footer";
-import { ReactNode } from "react";
+// app/layout.tsx
+import './globals.css'
+import Footer from '../components/Footer'
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export const metadata = {
+  title: 'My Next.js 14 App',
+  description: 'Next.js 14 Project Example',
+}
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="flex flex-col min-h-screen bg-gray-50 text-gray-900">
-        <main className="flex-grow">{children}</main>
+      <body>
+        {children}
         <Footer />
       </body>
     </html>
-  );
+  )
 }
