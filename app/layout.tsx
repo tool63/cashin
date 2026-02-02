@@ -16,14 +16,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="bg-white text-gray-900 dark:bg-[#0B0F1A] dark:text-gray-100 transition-colors duration-300">
-        <Providers>
+      <Providers>
+        <body className="bg-white text-gray-900 dark:bg-black dark:text-white transition-colors duration-300">
           <Header />
           {children}
           <Footer />
           <FloatingCTA />
-        </Providers>
-      </body>
+        </body>
+      </Providers>
     </html>
   )
 }
