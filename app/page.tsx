@@ -21,11 +21,9 @@ export default function Home() {
     <main className="transition-colors duration-300">
       {/* HERO */}
       <section className="relative min-h-screen flex items-center">
-        {/* Background glow */}
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/30 via-purple-600/20 to-cyan-500/20 blur-3xl" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-14 text-gray-900 dark:text-gray-100">
-          {/* LEFT */}
           <motion.div initial="hidden" animate="visible" className="space-y-6">
             <motion.h1
               variants={fadeUp}
