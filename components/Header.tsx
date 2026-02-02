@@ -44,12 +44,28 @@ export default function Header() {
                   transition={{ duration: 0.2 }}
                   className="absolute top-8 left-0 bg-[#0B1020] border border-white/10 rounded-lg shadow-xl p-4 w-56"
                 >
-                  <Link href="/surveys" className="dropdown-link">Surveys</Link>
-                  <Link href="/app-installs" className="dropdown-link">App Installs</Link>
-                  <Link href="/play-games" className="dropdown-link">Play Games</Link>
-                  <Link href="/watch-videos" className="dropdown-link">Watch Videos</Link>
-                  <Link href="/offerwall" className="dropdown-link">Offerwall</Link>
-                </motion.div>
+                  <div className="grid grid-cols-2 gap-3 text-sm">
+  <Link href="/surveys" className="hover:text-white transition">
+    Surveys
+  </Link>
+
+  <Link href="/app-installs" className="hover:text-white transition">
+    App Installs
+  </Link>
+
+  <Link href="/play-games" className="hover:text-white transition">
+    Play Games
+  </Link>
+
+  <Link href="/watch-videos" className="hover:text-white transition">
+    Watch Videos
+  </Link>
+
+  <Link href="/offerwall" className="hover:text-white transition col-span-2">
+    Offerwall
+  </Link>
+</div>
+  </motion.div>
               )}
             </AnimatePresence>
           </div>
