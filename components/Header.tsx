@@ -1,20 +1,22 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, ChevronDown, Sun, Moon } from "lucide-react"
-import { useTheme } from "next-themes"
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, ChevronDown, Sun, Moon } from "lucide-react";
+import { useTheme } from "next-themes";
 
 export default function Header() {
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const [earnOpen, setEarnOpen] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [earnOpen, setEarnOpen] = useState(false);
 
   // Theme toggle
-  const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => setMounted(true), [])
-  if (!mounted) return null // prevent hydration mismatch
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // Prevent hydration mismatch
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
 
   return (
     <header className="sticky top-0 z-50 bg-[#070A14]/90 dark:bg-gray-100/90 backdrop-blur border-b border-white/10 dark:border-gray-300/10 transition-colors duration-300">
@@ -149,5 +151,5 @@ export default function Header() {
         )}
       </AnimatePresence>
     </header>
-  )
+  );
 }
