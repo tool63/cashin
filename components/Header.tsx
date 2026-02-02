@@ -67,31 +67,32 @@ export default function Header() {
         {/* CTA BUTTONS */}
         <div className="hidden md:flex items-center gap-3">
 
-          {/* LOGIN */}
-          <Link
-            href="/login"
-            className="px-4 py-2 text-sm text-white dark:text-gray-900 hover:text-gray-200 dark:hover:text-gray-700 transition"
-          >
-            Login
-          </Link>
+  {/* THEME TOGGLE FIRST */}
+  <button
+    onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+    className="p-2 rounded-lg border border-white/20 dark:border-gray-700 hover:bg-white/10 dark:hover:bg-gray-300/20 transition"
+    aria-label="Toggle Theme"
+  >
+    {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+  </button>
 
-          {/* 🌙 / ☀️ TOGGLE — MOVED BESIDE LOGIN */}
-          <button
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="p-2 rounded-lg border border-white/20 dark:border-gray-700 hover:bg-white/10 dark:hover:bg-gray-300/20 transition"
-            aria-label="Toggle Theme"
-          >
-            {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
-          </button>
+  {/* LOGIN */}
+  <Link
+    href="/login"
+    className="px-4 py-2 text-sm text-white dark:text-gray-900 hover:text-gray-200 dark:hover:text-gray-700 transition"
+  >
+    Login
+  </Link>
 
-          {/* SIGN UP */}
-          <Link
-            href="/register"
-            className="px-5 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-sm font-semibold hover:opacity-90 transition"
-          >
-            Sign Up
-          </Link>
-        </div>
+  {/* SIGN UP */}
+  <Link
+    href="/register"
+    className="px-5 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-sm font-semibold hover:opacity-90 transition"
+  >
+    Sign Up
+  </Link>
+</div>
+
 
         {/* MOBILE MENU BUTTON */}
         <button
