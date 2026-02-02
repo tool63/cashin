@@ -98,7 +98,8 @@ export default function Footer() {
   )
 
   return (
-    <footer className="bg-white dark:bg-[#070A14] border-t border-gray-200 dark:border-white/10 text-gray-700 dark:text-gray-300 transition-colors duration-300">
+    <footer className="bg-[#070A14] border-t border-white/10 text-gray-300">
+
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-2 md:grid-cols-4 gap-10">
 
         {/* COLUMN 1 */}
