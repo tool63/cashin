@@ -32,13 +32,13 @@
   display: inline-block;
 }
 
-/* Bounce animation - runs once */
+/* Letter bounce animation */
 @keyframes bounceLetter {
-  0% { transform: translateY(0); }
+  0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
-  100% { transform: translateY(0); }
 }
 
+/* Bounce repeatedly */
 .bounce {
-  animation: bounceLetter 0.5s ease forwards;
+  animation: bounceLetter 0.5s ease infinite;
 }
