@@ -4,30 +4,26 @@ import { useEffect, useState } from 'react';
 import styles from './FloatingCTA.module.css';
 
 export default function FloatingCTA() {
-  const [visible, setVisible] = useState(true); // show/hide based on CTA
-  const [bounce, setBounce] = useState(false);  // trigger bounce every 10s
+  const [visible, setVisible] = useState(true);
+  const [bounceKey, setBounceKey] = useState(0); // forces re-animation
 
   const text = 'Start Earning in 60 Seconds';
   const letters = text.split('');
 
-  // Intersection Observer: hide/show button automatically
+  // AUTO HIDE / SHOW based on first & last CTA
   useEffect(() => {
     const firstCTA = document.querySelector('.cta:first-of-type');
     const lastCTA = document.querySelector('.cta:last-of-type');
 
     if (!firstCTA || !lastCTA) return;
 
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      const firstVisible = entries.find(e => e.target === firstCTA)?.isIntersecting;
-      const lastVisible = entries.find(e => e.target === lastCTA)?.isIntersecting;
-
-      setVisible(!(firstVisible || lastVisible));
-    };
-
-    const observer = new IntersectionObserver(observerCallback, {
-      root: null,
-      threshold: 0.1,
-    });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const isVisible = entries.some(entry => entry.isIntersecting);
+        setVisible(!isVisible);
+      },
+      { threshold: 0.1 }
+    );
 
     observer.observe(firstCTA);
     observer.observe(lastCTA);
@@ -35,11 +31,10 @@ export default function FloatingCTA() {
     return () => observer.disconnect();
   }, []);
 
-  // Trigger bounce every 10 seconds
+  // TRIGGER BOUNCE EVERY 10 SECONDS (FULL SENTENCE)
   useEffect(() => {
     const interval = setInterval(() => {
-      setBounce(true);
-      setTimeout(() => setBounce(false), 500); // duration of one bounce
+      setBounceKey(prev => prev + 1); // restart animation
     }, 10000);
 
     return () => clearInterval(interval);
@@ -50,13 +45,13 @@ export default function FloatingCTA() {
       href="/signup"
       className={`${styles.floatingCTA} ${visible ? styles.show : styles.hide}`}
     >
-      {letters.map((letter, idx) => (
+      {letters.map((char, index) => (
         <span
-          key={idx}
-          className={bounce ? styles.bounce : ''}
-          style={{ animationDelay: bounce ? `${idx * 0.05}s` : '0s' }}
+          key={`${bounceKey}-${index}`}
+          className={styles.letter}
+          style={{ animationDelay: `${index * 0.05}s` }}
         >
-          {letter === ' ' ? '\u00A0' : letter}
+          {char === ' ' ? '\u00A0' : char}
         </span>
       ))}
     </a>
