@@ -2,7 +2,7 @@ import "../styles/globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import FloatingCTA from "../components/FloatingCTA";
-import Providers from "./providers";
+import { Providers } from "./providers"; // make sure it's default exported as Providers
 
 export const metadata = {
   title: "PayUp",
@@ -16,15 +16,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="bg-[#0B0F1A] text-gray-100 dark:bg-gray-100 dark:text-gray-900 transition-colors duration-300">
-        <Providers>
+      <Providers>
+        <body className="transition-colors duration-300 bg-white dark:bg-[#0B0F1A] text-gray-900 dark:text-gray-100">
           <Header />
           {children}
           <Footer />
-          {/* Floating CTA button */}
           <FloatingCTA />
-        </Providers>
-      </body>
+        </body>
+      </Providers>
     </html>
   );
 }
