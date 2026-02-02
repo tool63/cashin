@@ -18,25 +18,26 @@ const fadeUp = {
 
 export default function Home() {
   return (
-    <main className="bg-white dark:bg-[#0B0F1A] text-gray-900 dark:text-gray-100 overflow-hidden transition-colors duration-300">
-
+    <main className="bg-white text-gray-900 dark:bg-black dark:text-white overflow-hidden transition-colors duration-300">
       {/* HERO */}
       <section className="relative min-h-screen flex items-center">
         {/* Background glow */}
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/30 via-purple-600/20 to-cyan-500/20 blur-3xl" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-14">
-
           {/* LEFT */}
-          <motion.div initial="hidden" animate="visible" className="space-y-6">
-
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            className="space-y-6"
+          >
             <motion.h1
               variants={fadeUp}
               custom={1}
               className="text-5xl md:text-6xl font-extrabold leading-tight"
             >
               Earn Real Money
-              <span className="block bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-indigo-500 to-cyan-500 bg-clip-text text-transparent">
                 Playing Games & Apps
               </span>
             </motion.h1>
@@ -50,11 +51,15 @@ export default function Home() {
               Trusted by millions worldwide.
             </motion.p>
 
-            <motion.div variants={fadeUp} custom={3} className="flex gap-4 pt-2">
+            <motion.div
+              variants={fadeUp}
+              custom={3}
+              className="flex gap-4 pt-2"
+            >
               <motion.button
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
-                className="group flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-cyan-500 px-6 py-3 rounded-xl font-semibold shadow-xl text-white"
+                className="group flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-cyan-500 px-6 py-3 rounded-xl font-semibold text-white shadow-xl"
               >
                 Start Earning
                 <ArrowRight className="group-hover:translate-x-1 transition" />
@@ -62,21 +67,25 @@ export default function Home() {
 
               <motion.button
                 whileHover={{ scale: 1.03 }}
-                className="px-6 py-3 rounded-xl border border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/5 transition"
+                className="px-6 py-3 rounded-xl border border-gray-300 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/5 transition"
               >
                 How It Works
               </motion.button>
             </motion.div>
 
             {/* STATS */}
-            <motion.div variants={fadeUp} custom={4} className="flex gap-10 pt-8">
+            <motion.div
+              variants={fadeUp}
+              custom={4}
+              className="flex gap-10 pt-8"
+            >
               {[
                 ["$50M+", "Paid Out"],
                 ["17M+", "Users"],
                 ["260K+", "Reviews"],
               ].map(([value, label]) => (
                 <div key={label}>
-                  <div className="text-3xl font-bold text-emerald-400">
+                  <div className="text-3xl font-bold text-emerald-500">
                     {value}
                   </div>
                   <div className="text-sm text-gray-500 dark:text-gray-400">
@@ -87,7 +96,7 @@ export default function Home() {
             </motion.div>
           </motion.div>
 
-          {/* RIGHT */}
+          {/* RIGHT CARD */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -111,7 +120,7 @@ export default function Home() {
                     className="flex justify-between bg-black/10 dark:bg-black/40 rounded-lg px-4 py-3"
                   >
                     <span>User #{1200 + i}</span>
-                    <span className="text-emerald-400 font-semibold">
+                    <span className="text-emerald-500 font-semibold">
                       {amt}
                     </span>
                   </motion.div>
