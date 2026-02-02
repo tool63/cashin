@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import styles from './FloatingCTA.module.css';
 
 export default function FloatingCTA() {
-  const [hidden, setHidden] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     const firstCTA = document.querySelector('.cta:first-of-type');
@@ -15,7 +15,7 @@ export default function FloatingCTA() {
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
       const firstVisible = entries.find(e => e.target === firstCTA)?.isIntersecting;
       const lastVisible = entries.find(e => e.target === lastCTA)?.isIntersecting;
-      setHidden(Boolean(firstVisible || lastVisible));
+      setVisible(!(firstVisible || lastVisible));
     };
 
     const observer = new IntersectionObserver(observerCallback, {
@@ -32,7 +32,7 @@ export default function FloatingCTA() {
   return (
     <a
       href="/signup"
-      className={`${styles.floatingCTA} ${hidden ? styles.hide : ''}`}
+      className={`${styles.floatingCTA} ${visible ? styles.show : styles.hide}`}
     >
       Start Earning in 60 Seconds
     </a>
