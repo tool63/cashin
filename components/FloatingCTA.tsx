@@ -4,14 +4,13 @@ import { useEffect, useState } from 'react';
 import styles from './FloatingCTA.module.css';
 
 export default function FloatingCTA() {
-  const [visible, setVisible] = useState(true);
-  const [bounce, setBounce] = useState(false);
+  const [visible, setVisible] = useState(true); // show/hide based on CTA
+  const [bounce, setBounce] = useState(false);  // enable bounce after 10s
 
   const text = 'Start Earning in 60 Seconds';
-  // Split text into letters including spaces
   const letters = text.split('');
 
-  // Intersection Observer to hide/show floating button
+  // Intersection Observer: hide/show floating button
   useEffect(() => {
     const firstCTA = document.querySelector('.cta:first-of-type');
     const lastCTA = document.querySelector('.cta:last-of-type');
@@ -22,7 +21,7 @@ export default function FloatingCTA() {
       const firstVisible = entries.find(e => e.target === firstCTA)?.isIntersecting;
       const lastVisible = entries.find(e => e.target === lastCTA)?.isIntersecting;
 
-      // Hide button if first or last CTA is visible
+      // Hide button if first OR last CTA is visible
       setVisible(!(firstVisible || lastVisible));
     };
 
@@ -37,7 +36,7 @@ export default function FloatingCTA() {
     return () => observer.disconnect();
   }, []);
 
-  // Trigger bounce **once after 10 seconds**
+  // Trigger bounce animation repeatedly after 10 seconds
   useEffect(() => {
     const timer = setTimeout(() => setBounce(true), 10000);
     return () => clearTimeout(timer);
