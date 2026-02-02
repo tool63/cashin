@@ -233,15 +233,49 @@ export default function Footer() {
           <A href="https://cashog.com/cookie-policy">Cookie Policy</A>
         </Section>
 
-      </div>
-
       {/* SOCIAL */}
-      <div className="border-t border-white/10 py-6 flex justify-center gap-6">
-        <Twitter />
-        <Facebook />
-        <Instagram />
-        <Youtube />
-      </div>
+<div className="border-t border-white/10 py-6 flex justify-center gap-6">
+  <a
+    href="https://twitter.com/yourusername"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Twitter"
+    className="hover:text-white transition"
+  >
+    <Twitter />
+  </a>
+
+  <a
+    href="https://facebook.com/yourpage"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Facebook"
+    className="hover:text-white transition"
+  >
+    <Facebook />
+  </a>
+
+  <a
+    href="https://instagram.com/yourusername"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Instagram"
+    className="hover:text-white transition"
+  >
+    <Instagram />
+  </a>
+
+  <a
+    href="https://youtube.com/@yourchannel"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="YouTube"
+    className="hover:text-white transition"
+  >
+    <Youtube />
+  </a>
+</div>
+
 
       {/* COPYRIGHT */}
       <div className="text-center text-sm text-gray-500 pb-6">
