@@ -9,15 +9,11 @@ export const metadata = {
   description: "Earn rewards, cash out, and get paid",
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <Providers>
-        <body className="bg-white text-gray-900 dark:bg-black dark:text-white transition-colors duration-300">
+        <body className="transition-colors duration-300 bg-white text-gray-900 dark:bg-black dark:text-white">
           <Header />
           {children}
           <Footer />
