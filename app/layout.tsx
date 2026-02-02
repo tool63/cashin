@@ -1,11 +1,12 @@
-import '../styles/globals.css'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
+import '../styles/globals.css';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import FloatingCTA from '../components/FloatingCTA';
 
 export const metadata = {
   title: 'PayUp',
   description: 'Earn rewards, cash out, and get paid',
-}
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -14,7 +15,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         {children}
         <Footer />
+        {/* Floating CTA button */}
+        <FloatingCTA />
       </body>
     </html>
-  )
+  );
 }
