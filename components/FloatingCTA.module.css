@@ -15,29 +15,30 @@
   display: inline-block;
 }
 
-/* Slide in */
+/* Slide in/out */
 .show {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Slide out */
 .hide {
   opacity: 0;
   transform: translateY(100px);
   pointer-events: none;
 }
 
-/* Letter bounce animation */
-@keyframes bounceLetter {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-
+/* Letters setup */
 .floatingCTA span {
   display: inline-block;
 }
 
+/* Bounce animation - runs only once */
+@keyframes bounceLetter {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
 .bounce {
-  animation: bounceLetter 0.5s ease infinite;
+  animation: bounceLetter 0.5s ease forwards;
 }
