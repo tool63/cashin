@@ -1,17 +1,19 @@
-"use client";
+"use client"
 
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider } from "next-themes"
 
-export function Providers({ children }: { children: React.ReactNode }) {
+export default function Providers({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <ThemeProvider
       attribute="class"
-      defaultTheme="dark" // default dark
-      enableSystem={false} // users cannot auto-follow system
+      defaultTheme="dark"
+      enableSystem={false}
     >
       {children}
     </ThemeProvider>
-  );
+  )
 }
-
-export default Providers;
