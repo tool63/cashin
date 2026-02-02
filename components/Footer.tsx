@@ -1,198 +1,234 @@
 "use client"
 
-import { motion, AnimatePresence } from "framer-motion"
 import { useState } from "react"
+import Link from "next/link"
+import { motion, AnimatePresence } from "framer-motion"
 import {
-  Facebook,
   Twitter,
-  Youtube,
+  Facebook,
   Instagram,
+  Youtube,
 } from "lucide-react"
 
-type LinkItem = {
-  label: string
-  href?: string
-  children?: LinkItem[]
-}
-
-type Section = {
-  title: string
-  items: LinkItem[]
-}
+type ToggleState = Record<string, boolean>
 
 export default function Footer() {
-  const [open, setOpen] = useState<string | null>(null)
+  const [open, setOpen] = useState<ToggleState>({})
+  const [subOpen, setSubOpen] = useState<ToggleState>({})
 
-  const toggle = (key: string) =>
-    setOpen(open === key ? null : key)
+  const toggle = (k: string) =>
+    setOpen((p) => ({ ...p, [k]: !p[k] }))
 
-  const sections: Section[] = [
-    {
-      title: "Get Started",
-      items: [
-        { label: "How Cashog Works", href: "/how-it-works" },
-        { label: "How to Start Earning", href: "/start-earning" },
-        { label: "Cashout Methods", href: "/cashout" },
-        { label: "Withdrawal Proofs", href: "/withdrawals" },
-        { label: "Trust & Safety", href: "/trust-safety" },
-      ],
-    },
-    {
-      title: "Ways To Earn",
-      items: [
-        { label: "Surveys", href: "/surveys" },
-        { label: "App Installs", href: "/app-installs" },
-        { label: "Playing Games", href: "/play-games" },
-        {
-          label: "Extra Earning",
-          children: [
-            { label: "Watching Ads", href: "/watch-ads" },
-            { label: "Micro Tasks", href: "/micro-tasks" },
-            { label: "Free Trials", href: "/complete-free-trials" },
-            { label: "Spinning Wheel", href: "/spinning-wheel" },
-          ],
-        },
-      ],
-    },
-    {
-      title: "Guides & Tips",
-      items: [
-        { label: "Make Money Online", href: "/make-money-online" },
-        { label: "Earn from Home", href: "/earn-money-from-home" },
-        {
-          label: "All Guides",
-          children: [
-            {
-              label: "Passive Income Online",
-              href: "/passive-income-online",
-            },
-            {
-              label: "Earn as a Student",
-              href: "/earn-money-as-a-student",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      title: "Rewards & Payments",
-      items: [
-        { label: "Earn PayPal Money", href: "/earn-paypal-money" },
-        {
-          label: "Earn Crypto",
-          children: [
-            { label: "Bitcoin", href: "/earn-bitcoin-online" },
-            { label: "Ethereum", href: "/earn-ethereum-online" },
-          ],
-        },
-      ],
-    },
-    {
-      title: "Resources",
-      items: [
-        { label: "Blog", href: "/blog" },
-        { label: "Help Center", href: "/help" },
-        { label: "FAQ", href: "/faq" },
-        { label: "Contact Support", href: "/contact" },
-      ],
-    },
-    {
-      title: "Business",
-      items: [
-        { label: "Affiliate Program", href: "/affiliate" },
-        { label: "Partners", href: "/partners" },
-        { label: "Advertise with Cashooz", href: "/advertise" },
-      ],
-    },
-    {
-      title: "Cashback & Deals",
-      items: [
-        { label: "Cashback Offers", href: "/cashback-offers" },
-        { label: "Shopping Rewards", href: "/shopping-rewards" },
-        { label: "Promo Codes", href: "/promo-codes" },
-      ],
-    },
-    {
-      title: "Legal",
-      items: [
-        {
-          label: "Terms & Conditions",
-          href: "https://cashog.com/terms-and-conditions",
-        },
-        {
-          label: "Privacy Policy",
-          href: "https://cashog.com/privacy-policy",
-        },
-        {
-          label: "Cookie Policy",
-          href: "https://cashog.com/cookie-policy",
-        },
-      ],
-    },
-  ]
+  const toggleSub = (k: string) =>
+    setSubOpen((p) => ({ ...p, [k]: !p[k] }))
+
+  const Section = ({
+    id,
+    title,
+    children,
+  }: {
+    id: string
+    title: string
+    children: React.ReactNode
+  }) => (
+    <div>
+      <button
+        onClick={() => toggle(id)}
+        className="w-full flex justify-between items-center text-white font-semibold mb-3"
+      >
+        {title}
+        <span>{open[id] ? "−" : "+"}</span>
+      </button>
+
+      <AnimatePresence>
+        {open[id] && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="space-y-2 text-sm text-gray-400"
+          >
+            {children}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+
+  const Sub = ({
+    id,
+    title,
+    children,
+  }: {
+    id: string
+    title: string
+    children: React.ReactNode
+  }) => (
+    <div className="pl-2 mt-2">
+      <button
+        onClick={() => toggleSub(id)}
+        className="flex justify-between w-full text-gray-300 font-medium"
+      >
+        {title}
+        <span>{subOpen[id] ? "−" : "+"}</span>
+      </button>
+
+      <AnimatePresence>
+        {subOpen[id] && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="pl-3 mt-2 space-y-2"
+          >
+            {children}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+
+  const A = ({ href, children }: any) => (
+    <motion.div whileHover={{ x: 4 }}>
+      <Link href={href} className="hover:text-white transition">
+        {children}
+      </Link>
+    </motion.div>
+  )
 
   return (
-    <footer className="bg-[#060914] border-t border-white/10 text-gray-300">
+    <footer className="bg-[#070A14] border-t border-white/10 text-gray-300">
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-2 md:grid-cols-4 gap-10">
-        {sections.map((section) => (
-          <div key={section.title}>
-            <button
-              onClick={() => toggle(section.title)}
-              className="flex items-center justify-between w-full text-white font-semibold mb-4"
-            >
-              {section.title}
-              <span>{open === section.title ? "−" : "+"}</span>
-            </button>
 
-            <AnimatePresence>
-              {open === section.title && (
-                <motion.ul
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.25 }}
-                  className="space-y-2 text-sm overflow-hidden"
-                >
-                  {section.items.map((item) => (
-                    <li key={item.label}>
-                      <a
-                        href={item.href}
-                        className="hover:text-white transition"
-                      >
-                        {item.label}
-                      </a>
+        {/* COLUMN 1 */}
+        <Section id="start" title="Get Started">
+          <A href="/how-it-works">How Cashog Works</A>
+          <A href="/start-earning">How to Start Earning</A>
+          <A href="/cashout">Cashout Methods</A>
+          <A href="/withdrawals">Withdrawal Proofs</A>
+          <A href="/trust-safety">Trust & Safety</A>
+        </Section>
 
-                      {item.children && (
-                        <ul className="ml-4 mt-2 space-y-1 text-gray-400">
-                          {item.children.map((child) => (
-                            <li key={child.label}>
-                              <a
-                                href={child.href}
-                                className="hover:text-white"
-                              >
-                                {child.label}
-                              </a>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </li>
-                  ))}
-                </motion.ul>
-              )}
-            </AnimatePresence>
-          </div>
-        ))}
+        {/* COLUMN 2 */}
+        <Section id="earn" title="Ways To Earn">
+          <A href="/surveys">Surveys</A>
+          <A href="/app-installs">App Installs</A>
+          <A href="/play-games">Playing Games</A>
+          <A href="/watch-videos">Watching Videos</A>
+          <A href="/mining-rewards">Mining Rewards</A>
+          <A href="/complete-offers">Completing Offers</A>
+          <A href="/offerwall">Offerwall</A>
+          <A href="/surveywall">Surveywall</A>
+
+          <Sub id="extra" title="Extra Earning">
+            <A href="/watch-ads">Watching Ads</A>
+            <A href="/micro-tasks">Micro Tasks</A>
+            <A href="/complete-free-trials">Free Trials</A>
+            <A href="/test-products">Testing Products</A>
+            <A href="/read-emails">Reading Emails</A>
+            <A href="/visit-websites">Visiting Websites</A>
+            <A href="/review-tasks">Review Tasks</A>
+            <A href="/spinning-wheel">Spinning Wheel</A>
+            <A href="/loyalty">Loyalty</A>
+            <A href="/vouchers">Vouchers</A>
+          </Sub>
+        </Section>
+
+        {/* COLUMN 3 */}
+        <Section id="guides" title="Guides & Tips">
+          <A href="/make-money-online">Make Money Online</A>
+          <A href="/earn-money-from-home">Earn Money from Home</A>
+          <A href="/earn-without-investment">Earn Without Investment</A>
+          <A href="/get-paid-to-play-games">Get Paid to Play Games</A>
+          <A href="/install-apps-for-cash">Install Apps for Cash</A>
+          <A href="/watch-videos-for-money">Watch Videos for Money</A>
+          <A href="/complete-offers-online">Complete Offers Online</A>
+          <A href="/work-from-home-jobs">Work from Home Jobs</A>
+          <A href="/online-earning-methods">Online Earning Methods</A>
+          <A href="/earn-money-online-fast">Earn Money Online Fast</A>
+
+          <Sub id="allGuides" title="All Guides">
+            <A href="/passive-income-online">Passive Income Online</A>
+            <A href="/online-jobs-for-beginners">Online Jobs for Beginners</A>
+            <A href="/earn-money-as-a-student">Earn Money as a Student</A>
+            <A href="/earn-money-without-skills">Earn Without Skills</A>
+            <A href="/earn-money-using-mobile">Earn Using Mobile</A>
+            <A href="/earn-money-online-worldwide">Earn Worldwide</A>
+            <A href="/cashback-rewards">Cashback Rewards</A>
+            <A href="/legit-ways-to-make-money-online">Legit Ways</A>
+            <A href="/free-ways-to-make-money-online">Free Ways</A>
+          </Sub>
+        </Section>
+
+        {/* COLUMN 4 */}
+        <Section id="payments" title="Rewards & Payments">
+          <A href="/earn-paypal-money">Earn PayPal Money</A>
+
+          <Sub id="giftcards" title="Earn Gift Cards">
+            <A href="/earn-amazon-gift-card">Amazon</A>
+            <A href="/earn-apple-gift-card">Apple</A>
+            <A href="/earn-google-play-gift-card">Google Play</A>
+          </Sub>
+
+          <Sub id="crypto" title="Earn Crypto">
+            <A href="/earn-bitcoin-online">Bitcoin</A>
+            <A href="/earn-litecoin-online">Litecoin</A>
+            <A href="/earn-ethereum-online">Ethereum</A>
+            <A href="/earn-dogecoin-online">Dogecoin</A>
+          </Sub>
+
+          <Sub id="gaming" title="Earn Gaming Gift Cards">
+            <A href="/earn-free-robux">Robux</A>
+            <A href="/earn-steam-gift-cards">Steam</A>
+            <A href="/earn-xbox-gift-cards">Xbox</A>
+            <A href="/earn-psn-gift-cards">PlayStation</A>
+          </Sub>
+
+          <A href="/earn-spotify-premium">Earn Spotify Premium</A>
+        </Section>
+
+        {/* COLUMN 5 */}
+        <Section id="resources" title="Resources">
+          <A href="/blog">Blog</A>
+          <A href="/help">Help Center</A>
+          <A href="/faq">FAQ</A>
+          <A href="/contact">Contact Support</A>
+          <A href="/about">About Cashooz</A>
+        </Section>
+
+        {/* COLUMN 6 */}
+        <Section id="business" title="Business">
+          <A href="/affiliate">Affiliate Program</A>
+          <A href="/partners">Partners</A>
+          <A href="/advertise">Advertise with Cashooz</A>
+        </Section>
+
+        {/* COLUMN 7 */}
+        <Section id="cashback" title="Cashback & Deals">
+          <A href="/cashback-offers">Cashback Offers</A>
+          <A href="/shopping-rewards">Shopping Rewards</A>
+          <A href="/promo-codes">Promo Codes & Coupons</A>
+          <A href="/daily-deals">Daily Deals</A>
+          <A href="/travel-deals">Travel Cashback</A>
+          <A href="/banking-finance-offers">Banking & Finance Offers</A>
+        </Section>
+
+        {/* COLUMN 8 */}
+        <Section id="legal" title="Legal">
+          <A href="https://cashog.com/terms-and-conditions">Terms & Conditions</A>
+          <A href="https://cashog.com/privacy-policy">Privacy Policy</A>
+          <A href="https://cashog.com/cookie-policy">Cookie Policy</A>
+        </Section>
       </div>
 
       {/* SOCIAL */}
-      <div className="border-t border-white/10 py-6">
-        <div className="flex justify-center gap-6 text-gray-400">
-          <Facebook className="hover:text-white cursor-pointer" />
-          <Twitter className="hover:text-white cursor-pointer" />
-          <Youtube className="hover:text-white cursor-pointer" />
-          <Instagram className="hover:text-white cursor-pointer" />
-        </div>
+      <div className="border-t border-white/10 py-6 flex justify-center gap-6">
+        <Twitter />
+        <Facebook />
+        <Instagram />
+        <Youtube />
       </div>
 
       {/* COPYRIGHT */}
