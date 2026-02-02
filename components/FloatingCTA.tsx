@@ -5,12 +5,12 @@ import styles from './FloatingCTA.module.css';
 
 export default function FloatingCTA() {
   const [visible, setVisible] = useState(true); // show/hide based on CTA
-  const [bounce, setBounce] = useState(false);  // enable bounce after 10s
+  const [bounce, setBounce] = useState(false);  // trigger bounce every 10s
 
   const text = 'Start Earning in 60 Seconds';
   const letters = text.split('');
 
-  // Intersection Observer: hide/show floating button
+  // Intersection Observer: hide/show button automatically
   useEffect(() => {
     const firstCTA = document.querySelector('.cta:first-of-type');
     const lastCTA = document.querySelector('.cta:last-of-type');
@@ -21,7 +21,6 @@ export default function FloatingCTA() {
       const firstVisible = entries.find(e => e.target === firstCTA)?.isIntersecting;
       const lastVisible = entries.find(e => e.target === lastCTA)?.isIntersecting;
 
-      // Hide button if first OR last CTA is visible
       setVisible(!(firstVisible || lastVisible));
     };
 
@@ -36,10 +35,14 @@ export default function FloatingCTA() {
     return () => observer.disconnect();
   }, []);
 
-  // Trigger bounce animation repeatedly after 10 seconds
+  // Trigger bounce every 10 seconds
   useEffect(() => {
-    const timer = setTimeout(() => setBounce(true), 10000);
-    return () => clearTimeout(timer);
+    const interval = setInterval(() => {
+      setBounce(true);
+      setTimeout(() => setBounce(false), 500); // duration of one bounce
+    }, 10000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
