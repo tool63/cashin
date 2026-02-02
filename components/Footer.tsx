@@ -69,7 +69,10 @@ export default function Footer() {
     children: React.ReactNode
     level?: number
   }) => (
-    <div className={`mt-2 pl-${level * 2}`}>
+    <div
+      className="mt-2"
+      style={{ paddingLeft: `${level * 8}px` }} // ✅ FIX (same look)
+    >
       <button
         onClick={() => (level === 1 ? s(id) : s2(id))}
         className="w-full flex justify-between text-gray-300 font-medium"
@@ -233,49 +236,23 @@ export default function Footer() {
           <A href="https://cashog.com/cookie-policy">Cookie Policy</A>
         </Section>
 
+      </div> {/* ✅ FIXED: grid closed */}
+
       {/* SOCIAL */}
-<div className="border-t border-white/10 py-6 flex justify-center gap-6">
-  <a
-    href="https://twitter.com/yourusername"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Twitter"
-    className="hover:text-white transition"
-  >
-    <Twitter />
-  </a>
-
-  <a
-    href="https://facebook.com/yourpage"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Facebook"
-    className="hover:text-white transition"
-  >
-    <Facebook />
-  </a>
-
-  <a
-    href="https://instagram.com/yourusername"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Instagram"
-    className="hover:text-white transition"
-  >
-    <Instagram />
-  </a>
-
-  <a
-    href="https://youtube.com/@yourchannel"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="YouTube"
-    className="hover:text-white transition"
-  >
-    <Youtube />
-  </a>
-</div>
-
+      <div className="border-t border-white/10 py-6 flex justify-center gap-6">
+        <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+          <Twitter />
+        </a>
+        <a href="https://facebook.com/yourpage" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <Facebook />
+        </a>
+        <a href="https://instagram.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <Instagram />
+        </a>
+        <a href="https://youtube.com/@yourchannel" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <Youtube />
+        </a>
+      </div>
 
       {/* COPYRIGHT */}
       <div className="text-center text-sm text-gray-500 pb-6">
