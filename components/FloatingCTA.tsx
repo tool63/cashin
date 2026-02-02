@@ -8,9 +8,10 @@ export default function FloatingCTA() {
   const [bounce, setBounce] = useState(false);
 
   const text = 'Start Earning in 60 Seconds';
+  // Split text into letters including spaces
   const letters = text.split('');
 
-  // Intersection Observer to hide/show button
+  // Intersection Observer to hide/show floating button
   useEffect(() => {
     const firstCTA = document.querySelector('.cta:first-of-type');
     const lastCTA = document.querySelector('.cta:last-of-type');
@@ -20,6 +21,8 @@ export default function FloatingCTA() {
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
       const firstVisible = entries.find(e => e.target === firstCTA)?.isIntersecting;
       const lastVisible = entries.find(e => e.target === lastCTA)?.isIntersecting;
+
+      // Hide button if first or last CTA is visible
       setVisible(!(firstVisible || lastVisible));
     };
 
@@ -34,7 +37,7 @@ export default function FloatingCTA() {
     return () => observer.disconnect();
   }, []);
 
-  // Trigger bounce **once** after 10 seconds
+  // Trigger bounce **once after 10 seconds**
   useEffect(() => {
     const timer = setTimeout(() => setBounce(true), 10000);
     return () => clearTimeout(timer);
@@ -51,7 +54,7 @@ export default function FloatingCTA() {
           className={bounce ? styles.bounce : ''}
           style={{ animationDelay: bounce ? `${idx * 0.05}s` : '0s' }}
         >
-          {letter}
+          {letter === ' ' ? '\u00A0' : letter}
         </span>
       ))}
     </a>
