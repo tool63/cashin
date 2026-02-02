@@ -96,7 +96,8 @@ export default function Header() {
 
         {/* MOBILE MENU BUTTON */}
         <button
-          className="md:hidden text-white dark:text-gray-900"
+          className="md:hidden absolute top-16 left-0 w-full z-50 bg-white dark:bg-[#070A14] border-t border-black/10 dark:border-white/10 px-6 py-6 space-y-4 text-gray-700 dark:text-gray-300 transition-colors duration-300"
+
           onClick={() => setMobileOpen(!mobileOpen)}
         >
           {mobileOpen ? <X /> : <Menu />}
