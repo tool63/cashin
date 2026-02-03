@@ -1,10 +1,9 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { ArrowRight, ShieldCheck, Wallet, Zap } from "lucide-react"
 import Link from "next/link"
-import { Typewriter } from "react-simple-typewriter"
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -37,26 +36,27 @@ export default function Home() {
     ["💳", "Vouchers", "/vouchers"],
   ]
 
-  const earningMethods = [
-    "Surveys",
-    "App Installs",
-    "Playing Games",
-    "Watching Videos",
-    "Mining Rewards",
-    "Completing Offers",
-    "Offerwall",
-    "Surveywall",
-    "Watching Ads",
-    "Micro Tasks",
-    "Free Trials",
-    "Testing Products",
-    "Reading Emails",
-    "Visiting Websites",
-    "Review Tasks",
-    "Spinning Wheel",
-    "Loyalty",
-    "Vouchers",
-  ]
+  // ======= TYPING EFFECT =======
+  const phrases = ["Surveys", "App Installs", "Playing Games", "Watching Videos"]
+  const [current, setCurrent] = useState(0)
+  const [text, setText] = useState("")
+
+  useEffect(() => {
+    let i = 0
+    const interval = setInterval(() => {
+      const phrase = phrases[current]
+      setText((prev) => phrase.slice(0, prev.length + 1))
+      i++
+      if (i > phrase.length) {
+        setTimeout(() => {
+          setText("")
+          setCurrent((prev) => (prev + 1) % phrases.length)
+        }, 800)
+        clearInterval(interval)
+      }
+    }, 100)
+    return () => clearInterval(interval)
+  }, [current])
 
   return (
     <main className="transition-colors duration-300">
@@ -65,33 +65,24 @@ export default function Home() {
       <section className="relative min-h-[85vh] pt-20 pb-16">
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/30 via-purple-600/20 to-cyan-500/20 blur-3xl" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 text-gray-900 dark:text-gray-100">
-
           {/* LEFT */}
           <motion.div initial="hidden" animate="visible" className="space-y-6">
             <motion.h1 variants={fadeUp} custom={1} className="text-5xl md:text-6xl font-extrabold leading-tight">
-              Earn Real Money By{" "}
-              <span className="text-indigo-500">
-                <Typewriter
-                  words={earningMethods}
-                  loop={0} // loop forever = true
-                  cursor
-                  cursorStyle="|"
-                  typeSpeed={80}
-                  deleteSpeed={50}
-                  delaySpeed={1200}
-                />
+              Earn Real Money By
+              <span className="block bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
+                {text}
               </span>
             </motion.h1>
 
             <motion.p variants={fadeUp} custom={2} className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl">
-              Complete offers, play games, answer surveys and cash out instantly. Trusted by millions worldwide.
+              Complete offers, play games, answer surveys and cash out instantly.
+              Trusted by millions worldwide.
             </motion.p>
 
             <motion.div variants={fadeUp} custom={3} className="flex flex-wrap gap-4">
-              {/* HERO CTA BUTTON - GREEN */}
               <Link href="/signup">
                 <motion.span whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-500 px-7 py-3.5 rounded-xl font-semibold shadow-xl text-white cursor-pointer">
+                  className="inline-flex items-center gap-2 bg-emerald-500 px-7 py-3.5 rounded-xl font-semibold shadow-xl text-white cursor-pointer">
                   Start Earning Now <ArrowRight />
                 </motion.span>
               </Link>
@@ -113,7 +104,6 @@ export default function Home() {
               </div>
             </motion.div>
           </motion.div>
-
         </div>
       </section>
 
@@ -208,15 +198,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= FINAL CTA - DARK BACKGROUND WITH GREEN BUTTON ================= */}
-      <section className="py-20 bg-gray-900 text-white text-center rounded-2xl mx-6 md:mx-20 lg:mx-40">
-        <h2 className="text-4xl font-bold mb-6">Start Earning Real Money Today!</h2>
-        <p className="mb-8 text-lg text-gray-200">
+      {/* ================= FINAL CTA ================= */}
+      <section className="py-20 bg-emerald-500 text-white text-center rounded-2xl mx-6 md:mx-20 lg:mx-40">
+        <h2 className="text-4xl font-bold mb-6">
+          Start Earning Real Money Today!
+        </h2>
+        <p className="mb-8 text-lg">
           Join millions of users who are already earning daily.
         </p>
         <Link href="/signup">
           <motion.span whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-500 px-10 py-4 rounded-xl font-semibold shadow-lg cursor-pointer">
+            className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 px-10 py-4 rounded-xl font-semibold shadow-lg cursor-pointer">
             Get Started Now <ArrowRight />
           </motion.span>
         </Link>
@@ -253,11 +245,5 @@ const Feature = ({ icon, title }: any) => (
   <div className="bg-white/10 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl p-8 text-center">
     <div className="flex justify-center mb-4 text-indigo-400">{icon}</div>
     <h4 className="font-semibold">{title}</h4>
-  </div>
-)
-
-const Testimonial = ({ text }: any) => (
-  <div className="bg-white/10 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl p-6 text-sm text-gray-600 dark:text-gray-300">
-    “{text}”
   </div>
 )
