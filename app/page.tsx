@@ -1,8 +1,10 @@
 "use client"
 
+import { useState } from "react"
 import { motion } from "framer-motion"
 import { ArrowRight, ShieldCheck, Wallet, Zap } from "lucide-react"
 import Link from "next/link"
+import { Typewriter } from "react-simple-typewriter"
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -35,6 +37,27 @@ export default function Home() {
     ["💳", "Vouchers", "/vouchers"],
   ]
 
+  const earningMethods = [
+    "Surveys",
+    "App Installs",
+    "Playing Games",
+    "Watching Videos",
+    "Mining Rewards",
+    "Completing Offers",
+    "Offerwall",
+    "Surveywall",
+    "Watching Ads",
+    "Micro Tasks",
+    "Free Trials",
+    "Testing Products",
+    "Reading Emails",
+    "Visiting Websites",
+    "Review Tasks",
+    "Spinning Wheel",
+    "Loyalty",
+    "Vouchers",
+  ]
+
   return (
     <main className="transition-colors duration-300">
 
@@ -42,18 +65,26 @@ export default function Home() {
       <section className="relative min-h-[85vh] pt-20 pb-16">
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/30 via-purple-600/20 to-cyan-500/20 blur-3xl" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 text-gray-900 dark:text-gray-100">
+
           {/* LEFT */}
           <motion.div initial="hidden" animate="visible" className="space-y-6">
             <motion.h1 variants={fadeUp} custom={1} className="text-5xl md:text-6xl font-extrabold leading-tight">
-              Earn Real Money
-              <span className="block bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
-                Playing Games & Apps
+              Earn Real Money By{" "}
+              <span className="text-indigo-500">
+                <Typewriter
+                  words={earningMethods}
+                  loop={0} // loop forever = true
+                  cursor
+                  cursorStyle="|"
+                  typeSpeed={80}
+                  deleteSpeed={50}
+                  delaySpeed={1200}
+                />
               </span>
             </motion.h1>
 
             <motion.p variants={fadeUp} custom={2} className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl">
-              Complete offers, play games, answer surveys and cash out instantly.
-              Trusted by millions worldwide.
+              Complete offers, play games, answer surveys and cash out instantly. Trusted by millions worldwide.
             </motion.p>
 
             <motion.div variants={fadeUp} custom={3} className="flex flex-wrap gap-4">
@@ -82,6 +113,7 @@ export default function Home() {
               </div>
             </motion.div>
           </motion.div>
+
         </div>
       </section>
 
