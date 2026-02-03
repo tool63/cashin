@@ -149,7 +149,7 @@ export default function Home() {
   )
 }
 
-/* ================= HERO SECTION ================= */
+/* ================= HERO SECTION (CONTENT-ONLY) ================= */
 const HeroSection = () => {
   const phrases = ["Surveys", "App Installs", "Playing Games", "Watching Videos"]
   const [current, setCurrent] = useState(0)
@@ -173,27 +173,24 @@ const HeroSection = () => {
   }, [current])
 
   return (
-    <section className="flex items-center justify-center min-h-[60vh] px-4">
-      <div className="max-w-4xl w-full flex flex-col items-center text-center gap-5">
+    <section className="flex justify-center px-4">
+      <div className="max-w-4xl w-full flex flex-col items-center text-center gap-3">
 
-        <h1 className="text-3xl md:text-5xl font-extrabold">
+        <h1 className="text-2xl sm:text-3xl md:text-5xl font-extrabold">
           Earn Real Money By
         </h1>
 
-        {/* WIDTH & HEIGHT LOCK — ZERO SHIFT */}
-        <div className="relative h-[56px] md:h-[64px]">
-          {/* invisible max-width reference */}
-          <span className="invisible text-3xl md:text-5xl font-extrabold whitespace-nowrap">
+        {/* LOCKED HEIGHT – NO JUMP */}
+        <div className="relative h-[40px] sm:h-[48px] md:h-[64px]">
+          <span className="invisible text-2xl sm:text-3xl md:text-5xl font-extrabold whitespace-nowrap">
             Watching Videos
           </span>
-
-          {/* animated text */}
-          <span className="absolute inset-0 flex items-center justify-center text-3xl md:text-5xl font-extrabold text-cyan-400">
+          <span className="absolute inset-0 flex items-center justify-center text-2xl sm:text-3xl md:text-5xl font-extrabold text-cyan-400">
             {text}
           </span>
         </div>
 
-        <p className="max-w-2xl text-gray-400 text-base md:text-lg leading-relaxed">
+        <p className="max-w-2xl text-gray-400 text-sm sm:text-base md:text-lg leading-relaxed">
           Complete offers, play games, answer surveys and cash out instantly.
           Trusted by millions worldwide.
         </p>
@@ -202,7 +199,7 @@ const HeroSection = () => {
           <motion.span
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 px-8 md:px-10 py-3 md:py-4 rounded-xl font-semibold shadow-xl"
+            className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 px-7 sm:px-9 py-3 rounded-xl font-semibold shadow-xl"
           >
             Start Earning Now <ArrowRight />
           </motion.span>
