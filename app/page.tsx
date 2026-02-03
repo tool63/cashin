@@ -86,32 +86,34 @@ export default function Home() {
       </section>
 
       {/* ================= PAYMENT METHODS ================= */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-900">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-extrabold mb-4 text-gray-900 dark:text-white">
-            Payment Methods
-          </h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
-            Choose from multiple trusted payout methods for secure and instant withdrawals.
-          </p>
+<section className="py-20 bg-gray-50 dark:bg-gray-900">
+  <div className="max-w-7xl mx-auto px-6 text-center">
+    <h2 className="text-4xl font-extrabold mb-4 text-gray-900 dark:text-white">
+      Payment Methods
+    </h2>
+    <p className="text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
+      Choose from multiple trusted payout methods for secure and instant withdrawals.
+    </p>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8">
-            {paymentMethods.map((method) => (
-              <Badge key={method.name}>
-                <div className="bg-gradient-to-tr from-emerald-400 to-cyan-500 p-4 rounded-full w-20 h-20 flex items-center justify-center mb-4 group-hover:from-indigo-500 group-hover:to-pink-500 transition-colors duration-500">
-                  <span className="text-3xl">{method.emoji}</span>
-                </div>
-                <span className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-emerald-400 transition-colors duration-300">
-                  {method.name}
-                </span>
-                <p className="mt-2 text-sm text-gray-500 dark:text-gray-300 group-hover:text-gray-100 transition-colors duration-300">
-                  Fast & secure payouts
-                </p>
-              </Badge>
-            ))}
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8">
+      {[
+        { name: "PayPal", emoji: "💸" },
+        { name: "USDT", emoji: "🪙" },
+        { name: "Bitcoin", emoji: "₿" },
+        { name: "Gift Cards", emoji: "🎁" },
+        { name: "Local Payouts", emoji: "🏦" },
+      ].map((method) => (
+        <Badge key={method.name}>
+          <div className="flex flex-col items-center justify-center p-4 border border-gray-700 dark:border-gray-500 rounded-xl bg-gray-800 dark:bg-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 transition-colors duration-300">
+            <span className="text-4xl mb-2">{method.emoji}</span>
+            <span className="text-lg font-semibold text-white">{method.name}</span>
+            <p className="text-sm text-gray-400 mt-1">Fast & secure payouts</p>
           </div>
-        </div>
-      </section>
+        </Badge>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* ================= EARN MONEY TASKS ================= */}
       <section className="max-w-7xl mx-auto px-6 py-16">
