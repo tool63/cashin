@@ -10,16 +10,6 @@ import LiveWithdrawals from "../components/LiveWithdrawals"
 import LiveOfferCompletion from "../components/LiveOfferCompletion"
 import { SectionTitle, Stat, Badge, Feature } from "../components/SmallComponents"
 
-/* ---------- ANIMATION ---------- */
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (i = 1) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.08, duration: 0.6, ease: "easeOut" },
-  }),
-}
-
 /* ---------- HOME PAGE ---------- */
 export default function Home() {
   const earningOptions = [
@@ -126,7 +116,6 @@ export default function Home() {
 
       {/* ================= EARN MONEY TASKS ================= */}
       <section className="max-w-7xl mx-auto px-6 py-16">
-        {/* Section title moved OUTSIDE the grid */}
         <SectionTitle icon="🎯" text="Earn Money Tasks" />
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {earningOptions.map(([icon, title, href]) => (
@@ -185,7 +174,6 @@ export default function Home() {
           </motion.span>
         </Link>
       </section>
-
     </main>
   )
 }
@@ -214,30 +202,48 @@ const HeroSection = () => {
   }, [current])
 
   return (
-    <section className="relative min-h-[85vh] pt-20 pb-16">
+    <section className="relative min-h-[85vh] flex items-center justify-center pt-20 pb-16 px-6">
+      {/* Background gradient blur */}
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/30 via-purple-600/20 to-cyan-500/20 blur-3xl" />
-      <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 text-gray-900 dark:text-gray-100">
-        <motion.div initial="hidden" animate="visible" className="space-y-6">
-          <motion.h1 variants={fadeUp} custom={1} className="text-5xl md:text-6xl font-extrabold leading-tight">
-            Earn Real Money By
-            <span className="block bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
-              {text}
-            </span>
-          </motion.h1>
-          <motion.p variants={fadeUp} custom={2} className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl">
-            Complete offers, play games, answer surveys and cash out instantly. Trusted by millions worldwide.
-          </motion.p>
-          <motion.div variants={fadeUp} custom={3} className="flex flex-wrap gap-4">
-            <Link href="/signup">
-              <motion.span
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 bg-emerald-500 px-7 py-3.5 rounded-xl font-semibold shadow-xl text-white cursor-pointer"
-              >
-                Start Earning Now <ArrowRight />
-              </motion.span>
-            </Link>
-          </motion.div>
+
+      {/* Content */}
+      <div className="relative z-10 max-w-4xl text-center flex flex-col items-center justify-center space-y-6">
+        <motion.h1
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-5xl md:text-6xl font-extrabold leading-tight"
+        >
+          Earn Real Money By
+          <span className="block bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
+            {text}
+          </span>
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl"
+        >
+          Complete offers, play games, answer surveys and cash out instantly. Trusted by millions worldwide.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="flex flex-wrap gap-4 justify-center"
+        >
+          <Link href="/signup">
+            <motion.span
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center gap-2 bg-emerald-500 px-7 py-3.5 rounded-xl font-semibold shadow-xl text-white cursor-pointer"
+            >
+              Start Earning Now <ArrowRight />
+            </motion.span>
+          </Link>
         </motion.div>
       </div>
     </section>
