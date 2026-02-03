@@ -130,26 +130,26 @@ export default function Home() {
       </section>
 
       {/* ================= FEATURE HIGHLIGHTS ================= */}
-      <section className="py-20 bg-black/5 dark:bg-white/5">
-        <SectionTitle icon="🌟" text="Why Choose Us" />
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
-          <Feature
-            icon={<Zap />}
-            title="Instant Withdrawals"
-            description="Get your rewards instantly without delays"
-          />
-          <Feature
-            icon={<ShieldCheck />}
-            title="Secure & Trusted"
-            description="Reliable platform with verified payments"
-          />
-          <Feature
-            icon={<Wallet />}
-            title="Multiple Payment Options"
-            description="Choose from various payout methods"
-          />
-        </div>
-      </section>
+<section className="py-20 bg-black/5 dark:bg-white/5">
+  <SectionTitle icon="🌟" text="Why Choose Us" />
+  <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+    <Feature
+      icon={<Zap />}
+      title="Instant Withdrawals"
+      description="Receive your earnings immediately after completing tasks."
+    />
+    <Feature
+      icon={<ShieldCheck />}
+      title="Secure & Trusted"
+      description="Your data and payments are safe with our verified platform."
+    />
+    <Feature
+      icon={<Wallet />}
+      title="Multiple Payment Options"
+      description="Withdraw via PayPal, USDT, Bitcoin, gift cards, and more."
+    />
+  </div>
+</section>
 
       {/* ================= FINAL CTA ================= */}
       <section className="py-20 bg-emerald-500 text-white text-center rounded-2xl mx-6 md:mx-20 lg:mx-40">
