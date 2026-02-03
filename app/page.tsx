@@ -75,9 +75,7 @@ export default function Home() {
 
           {/* RIGHT – LIVE EARNINGS */}
           <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.7 }}>
-            <h2 className="text-center text-2xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-cyan-500">
-              💸 Live Earnings
-            </h2>
+            <SectionTitle icon="💸" text="Live Earnings" />
             <motion.div animate={{ y: [0, -8, 0] }} transition={{ repeat: Infinity, duration: 6 }}
               className="bg-white/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-3xl p-8 backdrop-blur-xl shadow-2xl">
               <div className="space-y-4">
@@ -104,9 +102,7 @@ export default function Home() {
 
       {/* ================= PAYMENT METHODS ================= */}
       <section className="py-16 bg-black/5 dark:bg-white/5">
-        <h2 className="text-center text-2xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-cyan-500">
-          🏦 Payment Methods
-        </h2>
+        <SectionTitle icon="🏦" text="Payment Methods" />
         <div className="max-w-7xl mx-auto px-6 text-center">
           <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-600 dark:text-gray-300">
             <Badge>PayPal</Badge>
@@ -120,9 +116,7 @@ export default function Home() {
 
       {/* ================= LIVE OFFER COMPLETION ================= */}
       <section className="py-14 bg-black/5 dark:bg-white/5">
-        <h2 className="text-center text-2xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-cyan-500">
-          🔥 Live Offer Completions
-        </h2>
+        <SectionTitle icon="🔥" text="Live Offer Completions" />
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-6">
           {[
             ["User #4821", "Completed Survey", "+$1.20"],
@@ -142,9 +136,7 @@ export default function Home() {
 
       {/* ================= LIVE WITHDRAWALS ================= */}
       <section className="py-14">
-        <h2 className="text-center text-2xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-cyan-500">
-          🏦 Live Withdrawals
-        </h2>
+        <SectionTitle icon="🏦" text="Live Withdrawals" />
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-6">
           {[
             ["User #6501", "PayPal", "$10.00"],
@@ -164,9 +156,7 @@ export default function Home() {
 
       {/* ================= OFFER CARDS ================= */}
       <section className="max-w-7xl mx-auto px-6 py-16 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        <h2 className="col-span-full text-center text-2xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-cyan-500">
-          🎯 Earn Money Tasks
-        </h2>
+        <SectionTitle icon="🎯" text="Earn Money Tasks" />
         {earningOptions.map(([icon, title, href]) => (
           <Link key={title} href={href} className="bg-white/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl p-6 flex flex-col items-center text-center hover:scale-105 transition">
             <div className="text-4xl">{icon}</div>
@@ -184,9 +174,7 @@ export default function Home() {
 
       {/* ================= FEATURE HIGHLIGHTS ================= */}
       <section className="py-20 bg-black/5 dark:bg-white/5">
-        <h2 className="text-center text-2xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-cyan-500">
-          🌟 Why Choose Us
-        </h2>
+        <SectionTitle icon="🌟" text="Why Choose Us" />
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
           <Feature icon={<Zap />} title="Instant Withdrawals" />
           <Feature icon={<ShieldCheck />} title="Secure & Trusted" />
@@ -196,9 +184,7 @@ export default function Home() {
 
       {/* ================= TESTIMONIALS ================= */}
       <section className="py-20">
-        <h2 className="text-center text-2xl font-bold mb-10 bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-cyan-500">
-          🗣️ Testimonials
-        </h2>
+        <SectionTitle icon="🗣️" text="Testimonials" />
         <div className="max-w-7xl mx-auto px-6 text-center grid md:grid-cols-3 gap-8">
           <Testimonial text="Withdrew in under 2 minutes. Legit site!" />
           <Testimonial text="Best rewards platform I’ve used so far." />
@@ -223,6 +209,16 @@ export default function Home() {
 }
 
 /* ---------- SMALL COMPONENTS ---------- */
+
+const SectionTitle = ({ icon, text }: { icon?: string; text: string }) => (
+  <div className="text-center mb-8 relative">
+    <h2 className="inline-flex items-center justify-center text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-cyan-500">
+      {icon && <span className="mr-2">{icon}</span>}
+      {text}
+    </h2>
+    <span className="absolute left-1/2 transform -translate-x-1/2 -bottom-1 w-24 h-1 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 animate-[pulse_2s_ease-in-out_infinite]"></span>
+  </div>
+)
 
 const Stat = ({ title, value }: any) => (
   <div className="bg-white/10 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl p-6">
