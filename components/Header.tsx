@@ -27,8 +27,6 @@ export default function Header() {
         }`}
     >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-
-        {/* LOGO */}
         <Link href="/" className="text-xl font-bold">
           Cashog
         </Link>
@@ -52,7 +50,6 @@ export default function Header() {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
-                  transition={{ duration: 0.2 }}
                   className={`absolute top-8 left-0 w-56 p-4 rounded-lg shadow-xl grid grid-cols-2 gap-2
                     ${isDark ? "bg-[#0B1020] border border-white/10" : "bg-gray-200"}
                   `}
@@ -103,7 +100,6 @@ export default function Header() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
             className={`md:hidden px-6 py-6 space-y-4 border-t
               ${isDark ? "bg-[#070A14] border-white/10" : "bg-white border-gray-200"}
             `}
@@ -126,32 +122,31 @@ export default function Header() {
 
             {mobileEarnOpen && (
               <div className="flex flex-col gap-3 pl-4 text-sm">
-                <Link href="/surveys">Surveys</Link>
-                <Link href="/app-installs">App Installs</Link>
-                <Link href="/play-games">Play Games</Link>
-                <Link href="/watch-videos">Watch Videos</Link>
-                <Link href="/offerwall">Offerwall</Link>
+                <Link className="block" href="/surveys">Surveys</Link>
+                <Link className="block" href="/app-installs">App Installs</Link>
+                <Link className="block" href="/play-games">Play Games</Link>
+                <Link className="block" href="/watch-videos">Watch Videos</Link>
+                <Link className="block" href="/offerwall">Offerwall</Link>
               </div>
             )}
 
-            <Link href="/cashout">Cashout</Link>
-            <Link href="/blog">Blog</Link>
-            <Link href="/help">Help</Link>
-
-            {/* ✅ THEME TOGGLE IN MIDDLE */}
-            <div className="pt-2">
-              <button
-                onClick={() => setTheme(isDark ? "light" : "dark")}
-                className={`flex items-center justify-between w-full p-3 rounded-lg border
-                  ${isDark ? "border-white/20" : "border-gray-300"}
-                `}
-              >
-                <span className="flex items-center gap-2">
-                  {isDark ? <Sun size={16} /> : <Moon size={16} />}
-                  {isDark ? "Light Mode" : "Dark Mode"}
-                </span>
-              </button>
+            {/* ✅ FIXED COLUMN LINKS */}
+            <div className="flex flex-col gap-3">
+              <Link className="block" href="/cashout">Cashout</Link>
+              <Link className="block" href="/blog">Blog</Link>
+              <Link className="block" href="/help">Help</Link>
             </div>
+
+            {/* ✅ CENTERED THEME TOGGLE */}
+            <button
+              onClick={() => setTheme(isDark ? "light" : "dark")}
+              className={`w-full flex items-center justify-center gap-2 p-3 rounded-lg border
+                ${isDark ? "border-white/20" : "border-gray-300"}
+              `}
+            >
+              {isDark ? <Sun size={16} /> : <Moon size={16} />}
+              {isDark ? "Light Mode" : "Dark Mode"}
+            </button>
 
             {/* AUTH */}
             <div className="pt-4 flex flex-col gap-3">
