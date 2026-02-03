@@ -23,8 +23,8 @@ const fadeUp = {
 /* ---------- HOME PAGE ---------- */
 export default function Home() {
   const earningOptions = [
-    ["🧠", "Surveys", "/surveys"],
-    ["📱", "App Installs", "/app-installs"],
+    ["🧠", "Answering Surveys", "/surveys"],
+    ["📱", "Installing Apps", "/app-installs"],
     ["🎮", "Playing Games", "/play-games"],
     ["📺", "Watching Videos", "/watch-videos"],
     ["⛏️", "Mining Rewards", "/mining-rewards"],
@@ -69,10 +69,26 @@ export default function Home() {
 
           {/* Stats Grid */}
           <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
-            <Stat title="Total Users" value="25M+" />
-            <Stat title="Users Paid" value="3.2M+" />
-            <Stat title="Total Payouts" value="$12M+" />
-            <Stat title="Trust Rating" value="4.8 ★" />
+            <Stat
+              title="Total Users"
+              value="25M+"
+              description="Active users earning rewards daily"
+            />
+            <Stat
+              title="Users Paid"
+              value="3.2M+"
+              description="Members who successfully withdrew earnings"
+            />
+            <Stat
+              title="Total Payouts"
+              value="$12M+"
+              description="Rewards paid to our community"
+            />
+            <Stat
+              title="Trust Rating"
+              value="4.8 ★"
+              description="Average user rating across platforms"
+            />
           </div>
         </div>
       </section>
@@ -82,11 +98,11 @@ export default function Home() {
         <SectionTitle icon="🏦" text="Payment Methods" />
         <div className="max-w-7xl mx-auto px-6 text-center">
           <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-600 dark:text-gray-300">
-            <Badge text="PayPal" />
-            <Badge text="USDT" />
-            <Badge text="Bitcoin" />
-            <Badge text="Gift Cards" />
-            <Badge text="Local Payouts" />
+            <Badge>PayPal</Badge>
+            <Badge>USDT</Badge>
+            <Badge>Bitcoin</Badge>
+            <Badge>Gift Cards</Badge>
+            <Badge>Local Payouts</Badge>
           </div>
         </div>
       </section>
@@ -117,9 +133,21 @@ export default function Home() {
       <section className="py-20 bg-black/5 dark:bg-white/5">
         <SectionTitle icon="🌟" text="Why Choose Us" />
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
-          <Feature icon={<Zap />} title="Instant Withdrawals" />
-          <Feature icon={<ShieldCheck />} title="Secure & Trusted" />
-          <Feature icon={<Wallet />} title="Multiple Payment Options" />
+          <Feature
+            icon={<Zap />}
+            title="Instant Withdrawals"
+            description="Get your rewards instantly without delays"
+          />
+          <Feature
+            icon={<ShieldCheck />}
+            title="Secure & Trusted"
+            description="Reliable platform with verified payments"
+          />
+          <Feature
+            icon={<Wallet />}
+            title="Multiple Payment Options"
+            description="Choose from various payout methods"
+          />
         </div>
       </section>
 
