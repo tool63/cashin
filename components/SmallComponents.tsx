@@ -1,63 +1,81 @@
-// components/SmallComponents.tsx
-import React from "react"
+"use client"
 
-/* ---------- SECTION TITLE ---------- */
-export const SectionTitle = ({
+import { motion } from "framer-motion"
+
+/* ================= SECTION TITLE ================= */
+export function SectionTitle({
   icon,
   text,
 }: {
   icon?: string
   text: string
-}) => (
-  <div className="text-center mb-8 relative">
-    <h2 className="inline-flex items-center justify-center text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-cyan-500">
-      {icon && <span className="mr-2">{icon}</span>}
-      {text}
-    </h2>
+}) {
+  return (
+    <div className="text-center mb-10">
+      <h2 className="text-3xl font-bold flex justify-center items-center gap-2">
+        {icon && <span>{icon}</span>}
+        {text}
+      </h2>
+    </div>
+  )
+}
 
-    <span className="absolute left-1/2 -translate-x-1/2 -bottom-1 w-24 h-1 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 animate-[pulse_2s_ease-in-out_infinite]" />
-  </div>
-)
-
-/* ---------- STAT ---------- */
-export const Stat = ({
+/* ================= STAT ================= */
+export function Stat({
   title,
   value,
+  description,
 }: {
   title: string
   value: string
-}) => (
-  <div className="bg-white/10 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl p-6">
-    <p className="text-3xl font-bold">{value}</p>
-    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-      {title}
-    </p>
-  </div>
-)
+  description?: string
+}) {
+  return (
+    <motion.div
+      whileHover={{ scale: 1.05 }}
+      className="bg-white/10 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-3xl p-6 backdrop-blur-xl shadow-xl"
+    >
+      <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+        {title}
+      </p>
+      <p className="text-3xl font-bold mb-2">{value}</p>
+      {description && (
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          {description}
+        </p>
+      )}
+    </motion.div>
+  )
+}
 
-/* ---------- BADGE ---------- */
-export const Badge = ({
-  children,
-}: {
-  children: React.ReactNode
-}) => (
-  <span className="px-4 py-2 rounded-full bg-white/10 dark:bg-black/20 border border-black/10 dark:border-white/10">
-    {children}
-  </span>
-)
+/* ================= BADGE ================= */
+export function Badge({ text }: { text: string }) {
+  return (
+    <span className="inline-block px-4 py-1 text-sm rounded-full bg-emerald-500/10 text-emerald-400">
+      {text}
+    </span>
+  )
+}
 
-/* ---------- FEATURE ---------- */
-export const Feature = ({
+/* ================= FEATURE ================= */
+export function Feature({
   icon,
   title,
+  description,
 }: {
-  icon: React.ReactNode
+  icon: string
   title: string
-}) => (
-  <div className="bg-white/10 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl p-8 text-center">
-    <div className="flex justify-center mb-4 text-indigo-400">
-      {icon}
+  description: string
+}) {
+  return (
+    <div className="flex gap-4">
+      <div className="text-2xl">{icon}</div>
+      <div>
+        <h4 className="font-semibold">{title}</h4>
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          {description}
+        </p>
+      </div>
     </div>
-    <h4 className="font-semibold">{title}</h4>
-  </div>
-)
+  )
+}
