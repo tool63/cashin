@@ -5,13 +5,14 @@ import React from "react"
 /* ---------- SECTION TITLE ---------- */
 export function SectionTitle({ icon, text }: { icon: string; text: string }) {
   return (
-    <h2 className="text-3xl font-bold flex items-center justify-center gap-2 mb-8">
-      <span className="text-4xl">{icon}</span> {text}
-    </h2>
+    <div className="mb-8 flex items-center justify-center gap-3 text-2xl font-bold text-gray-900 dark:text-white">
+      <span>{icon}</span>
+      <span>{text}</span>
+    </div>
   )
 }
 
-/* ---------- STAT CARD ---------- */
+/* ---------- STAT COMPONENT ---------- */
 export function Stat({
   title,
   value,
@@ -22,24 +23,26 @@ export function Stat({
   description?: string
 }) {
   return (
-    <div className="bg-white/5 dark:bg-black/10 rounded-xl p-6 flex flex-col items-center justify-center shadow-lg">
-      <h3 className="text-lg font-medium">{title}</h3>
-      <p className="text-2xl font-bold mt-2">{value}</p>
-      {description && <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">{description}</p>}
+    <div className="text-center p-4 bg-white/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl">
+      <h3 className="text-lg font-semibold">{title}</h3>
+      <p className="text-2xl font-bold mt-1">{value}</p>
+      {description && (
+        <p className="text-gray-600 dark:text-gray-400 mt-2">{description}</p>
+      )}
     </div>
   )
 }
 
-/* ---------- BADGE ---------- */
-export function Badge({ text }: { text: string }) {
+/* ---------- BADGE COMPONENT ---------- */
+export function Badge({ children }: { children: React.ReactNode }) {
   return (
-    <span className="bg-white/10 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-full px-4 py-1 text-sm font-medium">
-      {text}
+    <span className="px-3 py-1 rounded-full bg-gray-200 dark:bg-gray-800 text-sm font-medium">
+      {children}
     </span>
   )
 }
 
-/* ---------- FEATURE CARD ---------- */
+/* ---------- FEATURE COMPONENT ---------- */
 export function Feature({
   icon,
   title,
@@ -53,7 +56,9 @@ export function Feature({
     <div className="bg-white/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl p-6 text-center flex flex-col items-center justify-center">
       <div className="text-5xl mb-4">{icon}</div>
       <h3 className="text-lg font-semibold">{title}</h3>
-      {description && <p className="text-gray-600 dark:text-gray-400 text-sm mt-2">{description}</p>}
+      {description && (
+        <p className="text-gray-600 dark:text-gray-400 text-sm mt-2">{description}</p>
+      )}
     </div>
   )
 }
