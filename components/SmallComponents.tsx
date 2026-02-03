@@ -13,11 +13,20 @@ export function SectionTitle({ icon, text }: { icon: string; text: string }) {
 }
 
 /* ---------- STAT ---------- */
-export function Stat({ title, value }: { title: string; value: string }) {
+export function Stat({
+  title,
+  value,
+  description,
+}: {
+  title: string
+  value: string
+  description?: string
+}) {
   return (
     <div className="bg-white/10 dark:bg-black/10 border border-black/10 dark:border-white/10 rounded-xl p-6 flex flex-col items-center justify-center text-center shadow-md">
       <span className="text-3xl font-bold text-gray-900 dark:text-white">{value}</span>
       <span className="mt-2 text-gray-600 dark:text-gray-400">{title}</span>
+      {description && <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">{description}</p>}
     </div>
   )
 }
