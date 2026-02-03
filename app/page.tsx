@@ -202,18 +202,14 @@ const HeroSection = () => {
   }, [current])
 
   return (
-    <section className="relative min-h-[70vh] flex items-center justify-center px-6">
-      {/* Background gradient blur */}
+    <section className="relative min-h-[60vh] flex items-center justify-center px-6">
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/30 via-purple-600/20 to-cyan-500/20 blur-3xl" />
-
-      {/* Content */}
-      <div className="relative z-10 max-w-4xl text-center flex flex-col items-center justify-center space-y-6">
-        {/* Heading with inline animated text */}
+      <div className="relative z-10 max-w-3xl text-center flex flex-col items-center justify-center space-y-4">
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-5xl md:text-6xl font-extrabold leading-tight"
+          className="text-4xl md:text-5xl font-extrabold leading-snug"
         >
           Earn Real Money By{" "}
           <span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent inline-block">
@@ -221,27 +217,19 @@ const HeroSection = () => {
           </span>
         </motion.h1>
 
-        {/* Paragraph fixed below heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="flex flex-col items-center space-y-4"
-        >
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl">
-            Complete offers, play games, answer surveys and cash out instantly. Trusted by millions worldwide.
-          </p>
+        <p className="text-lg text-gray-600 dark:text-gray-300 max-w-xl">
+          Complete offers, play games, answer surveys and cash out instantly. Trusted by millions worldwide.
+        </p>
 
-          <Link href="/signup">
-            <motion.span
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-2 bg-emerald-500 px-7 py-3.5 rounded-xl font-semibold shadow-xl text-white cursor-pointer"
-            >
-              Start Earning Now <ArrowRight />
-            </motion.span>
-          </Link>
-        </motion.div>
+        <Link href="/signup">
+          <motion.span
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            className="inline-flex items-center gap-2 bg-emerald-500 px-7 py-3 rounded-xl font-semibold shadow-xl text-white cursor-pointer"
+          >
+            Start Earning Now <ArrowRight />
+          </motion.span>
+        </Link>
       </div>
     </section>
   )
