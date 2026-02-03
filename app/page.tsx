@@ -160,14 +160,14 @@ export default function Home() {
       </section>
 
       {/* ================= FINAL CTA ================= */}
-      <section className="py-20 bg-emerald-500 text-white text-center rounded-2xl mx-6 md:mx-20 lg:mx-40">
-        <h2 className="text-4xl font-bold mb-6">Start Earning Real Money Today!</h2>
-        <p className="mb-8 text-lg">Join millions of users who are already earning daily.</p>
+      <section className="py-20 text-center rounded-2xl mx-6 md:mx-20 lg:mx-40">
+        <h2 className="text-4xl font-bold mb-6 text-white">Start Earning Real Money Today!</h2>
+        <p className="mb-8 text-lg text-gray-300">Join millions of users who are already earning daily.</p>
         <Link href="/signup">
           <motion.span
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 px-10 py-4 rounded-xl font-semibold shadow-lg cursor-pointer"
+            className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-10 py-4 rounded-xl font-semibold shadow-lg text-white"
           >
             Get Started Now <ArrowRight />
           </motion.span>
@@ -202,20 +202,20 @@ const HeroSection = () => {
 
   return (
     <section className="relative flex items-center justify-center py-16 px-4 dark:bg-gray-900">
-      <div className="relative z-10 max-w-3xl w-full text-center flex flex-col items-center justify-center space-y-4">
+      <div className="relative z-10 max-w-4xl w-full text-center flex flex-col items-center justify-center space-y-4">
 
         {/* Fixed heading */}
-        <motion.h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white">
+        <motion.h1 className="text-3xl md:text-5xl font-extrabold text-gray-900 dark:text-white">
           Earn Real Money By
         </motion.h1>
 
         {/* Animated typing */}
-        <motion.span className="text-3xl md:text-4xl font-extrabold text-indigo-500 dark:text-cyan-400 block h-[1.2em]">
+        <motion.span className="text-3xl md:text-5xl font-extrabold text-indigo-500 dark:text-cyan-400 block h-[1.2em]">
           {text}
         </motion.span>
 
         {/* Paragraph */}
-        <p className="text-gray-600 dark:text-gray-300 max-w-xl">
+        <p className="text-gray-600 dark:text-gray-300 max-w-2xl text-base md:text-lg">
           Complete offers, play games, answer surveys and cash out instantly. Trusted by millions worldwide.
         </p>
 
@@ -224,7 +224,7 @@ const HeroSection = () => {
           <motion.span
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 bg-emerald-500 px-8 py-3 rounded-xl font-semibold shadow-xl text-white"
+            className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-8 md:px-10 py-3 md:py-4 rounded-xl font-semibold shadow-xl text-white"
           >
             Start Earning Now <ArrowRight />
           </motion.span>
