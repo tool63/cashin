@@ -149,7 +149,7 @@ export default function Home() {
   )
 }
 
-/* ================= HERO SECTION (CONTENT-ONLY) ================= */
+/* ================= HERO SECTION (RESPONSIVE BALANCED) ================= */
 const HeroSection = () => {
   const phrases = ["Surveys", "App Installs", "Playing Games", "Watching Videos"]
   const [current, setCurrent] = useState(0)
@@ -173,14 +173,14 @@ const HeroSection = () => {
   }, [current])
 
   return (
-    <section className="flex justify-center px-4">
-      <div className="max-w-4xl w-full flex flex-col items-center text-center gap-3">
+    <section className="flex justify-center px-4 mb-8 sm:mb-12 md:mb-16">
+      <div className="max-w-4xl w-full flex flex-col items-center text-center gap-3 sm:gap-4 md:gap-5">
 
         <h1 className="text-2xl sm:text-3xl md:text-5xl font-extrabold">
           Earn Real Money By
         </h1>
 
-        {/* LOCKED HEIGHT – NO JUMP */}
+        {/* LOCKED HEIGHT – NO SHIFT */}
         <div className="relative h-[40px] sm:h-[48px] md:h-[64px]">
           <span className="invisible text-2xl sm:text-3xl md:text-5xl font-extrabold whitespace-nowrap">
             Watching Videos
