@@ -43,6 +43,14 @@ export default function Home() {
     ["💳", "Vouchers", "/vouchers"],
   ]
 
+  const paymentMethods = [
+    { name: "PayPal", icon: "/icons/paypal.svg" },
+    { name: "USDT", icon: "/icons/usdt.svg" },
+    { name: "Bitcoin", icon: "/icons/bitcoin.svg" },
+    { name: "Gift Cards", icon: "/icons/giftcard.svg" },
+    { name: "Local Payouts", icon: "/icons/localpayout.svg" },
+  ]
+
   return (
     <main className="transition-colors duration-300">
 
@@ -57,80 +65,39 @@ export default function Home() {
       {/* ================= TRUST / STATS ================= */}
       <section className="py-16 bg-black/5 dark:bg-white/5">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          
-          {/* Section Title */}
-          <h2 className="text-3xl font-bold mb-4">
-            Trusted by Millions Worldwide
-          </h2>
+          <h2 className="text-3xl font-bold mb-4">Trusted by Millions Worldwide</h2>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-12">
             Cashog is one of the most trusted earning platforms, paying users daily
             across the globe with fast and secure withdrawals.
           </p>
 
-          {/* Stats Grid */}
           <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
-            <Stat
-              title="Total Users"
-              value="25M+"
-              description="Active users earning rewards daily"
-            />
-            <Stat
-              title="Users Paid"
-              value="3.2M+"
-              description="Members who successfully withdrew earnings"
-            />
-            <Stat
-              title="Total Payouts"
-              value="$12M+"
-              description="Rewards paid to our community"
-            />
-            <Stat
-              title="Trust Rating"
-              value="4.8 ★"
-              description="Average user rating across platforms"
-            />
+            <Stat title="Total Users" value="25M+" description="Active users earning rewards daily" />
+            <Stat title="Users Paid" value="3.2M+" description="Members who successfully withdrew earnings" />
+            <Stat title="Total Payouts" value="$12M+" description="Rewards paid to our community" />
+            <Stat title="Trust Rating" value="4.8 ★" description="Average user rating across platforms" />
           </div>
         </div>
       </section>
 
       {/* ================= PAYMENT METHODS ================= */}
-<section className="py-20 bg-gray-50 dark:bg-gray-900">
-  <div className="max-w-7xl mx-auto px-6 text-center">
-    
-    {/* Section Title */}
-    <h2 className="text-3xl font-bold mb-3 text-gray-900 dark:text-white">
-      Payment Methods
-    </h2>
-    <p className="text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
-      Choose from multiple trusted payout methods for secure and instant withdrawals.
-    </p>
+      <section className="py-20 bg-gray-50 dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <h2 className="text-3xl font-bold mb-3 text-gray-900 dark:text-white">Payment Methods</h2>
+          <p className="text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
+            Choose from multiple trusted payout methods for secure and instant withdrawals.
+          </p>
 
-    {/* Cards Grid */}
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
-      <Badge>
-        <img src="/icons/paypal.svg" alt="PayPal" className="mx-auto w-12 h-12 mb-2" />
-        <span>PayPal</span>
-      </Badge>
-      <Badge>
-        <img src="/icons/usdt.svg" alt="USDT" className="mx-auto w-12 h-12 mb-2" />
-        <span>USDT</span>
-      </Badge>
-      <Badge>
-        <img src="/icons/bitcoin.svg" alt="Bitcoin" className="mx-auto w-12 h-12 mb-2" />
-        <span>Bitcoin</span>
-      </Badge>
-      <Badge>
-        <img src="/icons/giftcard.svg" alt="Gift Cards" className="mx-auto w-12 h-12 mb-2" />
-        <span>Gift Cards</span>
-      </Badge>
-      <Badge>
-        <img src="/icons/localpayout.svg" alt="Local Payouts" className="mx-auto w-12 h-12 mb-2" />
-        <span>Local Payouts</span>
-      </Badge>
-    </div>
-  </div>
-</section>
-
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
+            {paymentMethods.map((method) => (
+              <Badge key={method.name}>
+                <img src={method.icon} alt={method.name} className="mx-auto w-12 h-12 mb-2" />
+                <span>{method.name}</span>
+              </Badge>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ================= OFFER CARDS ================= */}
       <section className="max-w-7xl mx-auto px-6 py-16 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
@@ -155,26 +122,26 @@ export default function Home() {
       </section>
 
       {/* ================= FEATURE HIGHLIGHTS ================= */}
-<section className="py-20 bg-black/5 dark:bg-white/5">
-  <SectionTitle icon="🌟" text="Why Choose Us" />
-  <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
-    <Feature
-      icon={<Zap />}
-      title="Instant Withdrawals"
-      description="Receive your earnings immediately after completing tasks."
-    />
-    <Feature
-      icon={<ShieldCheck />}
-      title="Secure & Trusted"
-      description="Your data and payments are safe with our verified platform."
-    />
-    <Feature
-      icon={<Wallet />}
-      title="Multiple Payment Options"
-      description="Withdraw via PayPal, USDT, Bitcoin, gift cards, and more."
-    />
-  </div>
-</section>
+      <section className="py-20 bg-black/5 dark:bg-white/5">
+        <SectionTitle icon="🌟" text="Why Choose Us" />
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+          <Feature
+            icon={<Zap />}
+            title="Instant Withdrawals"
+            description="Receive your earnings immediately after completing tasks."
+          />
+          <Feature
+            icon={<ShieldCheck />}
+            title="Secure & Trusted"
+            description="Your data and payments are safe with our verified platform."
+          />
+          <Feature
+            icon={<Wallet />}
+            title="Multiple Payment Options"
+            description="Withdraw via PayPal, USDT, Bitcoin, gift cards, and more."
+          />
+        </div>
+      </section>
 
       {/* ================= FINAL CTA ================= */}
       <section className="py-20 bg-emerald-500 text-white text-center rounded-2xl mx-6 md:mx-20 lg:mx-40">
@@ -222,7 +189,6 @@ const HeroSection = () => {
     <section className="relative min-h-[85vh] pt-20 pb-16">
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/30 via-purple-600/20 to-cyan-500/20 blur-3xl" />
       <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 text-gray-900 dark:text-gray-100">
-        {/* LEFT */}
         <motion.div initial="hidden" animate="visible" className="space-y-6">
           <motion.h1 variants={fadeUp} custom={1} className="text-5xl md:text-6xl font-extrabold leading-tight">
             Earn Real Money By
