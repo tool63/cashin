@@ -10,7 +10,6 @@ import LiveWithdrawals from "../components/LiveWithdrawals"
 import LiveOfferCompletion from "../components/LiveOfferCompletion"
 import { SectionTitle, Stat, Badge, Feature } from "../components/SmallComponents"
 
-/* ---------- HOME PAGE ---------- */
 export default function Home() {
   const earningOptions = [
     ["🧠", "Surveys", "/surveys"],
@@ -188,7 +187,7 @@ const HeroSection = () => {
     let i = 0
     const interval = setInterval(() => {
       const phrase = phrases[current]
-      setText((prev) => phrase.slice(0, prev.length + 1))
+      setText(phrase.slice(0, i + 1))
       i++
       if (i > phrase.length) {
         setTimeout(() => {
@@ -202,45 +201,35 @@ const HeroSection = () => {
   }, [current])
 
   return (
-    <section className="relative min-h-[55vh] flex items-center justify-center px-6">
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/30 via-purple-600/20 to-cyan-500/20 blur-3xl" />
-      <div className="relative z-10 max-w-3xl text-center flex flex-col items-center justify-center space-y-4">
-
+    <section className="relative flex items-center justify-center py-16 px-6">
+      {/* Card-like container */}
+      <div className="relative z-10 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl shadow-2xl p-10 md:p-16 max-w-3xl w-full text-center flex flex-col items-center justify-center space-y-6">
+        
         {/* Fixed heading */}
-        <motion.h1
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-4xl md:text-5xl font-extrabold leading-snug"
-        >
+        <motion.h1 className="text-3xl md:text-4xl font-extrabold">
           Earn Real Money By
         </motion.h1>
 
-        {/* Animated typing text below heading */}
-        <motion.span
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-4xl md:text-5xl font-extrabold text-indigo-500 dark:text-cyan-400 block"
-        >
+        {/* Animated typing */}
+        <motion.span className="text-3xl md:text-4xl font-extrabold text-indigo-500 dark:text-cyan-400 block h-[1.2em]">
           {text}
         </motion.span>
 
-        {/* Paragraph and CTA */}
-        <p className="text-lg text-gray-600 dark:text-gray-300 max-w-xl mt-4">
+        {/* Paragraph */}
+        <p className="text-gray-600 dark:text-gray-300 max-w-xl">
           Complete offers, play games, answer surveys and cash out instantly. Trusted by millions worldwide.
         </p>
 
+        {/* CTA */}
         <Link href="/signup">
           <motion.span
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 bg-emerald-500 px-7 py-3 rounded-xl font-semibold shadow-xl text-white cursor-pointer mt-2"
+            className="inline-flex items-center gap-2 bg-emerald-500 px-8 py-3 rounded-xl font-semibold shadow-xl text-white"
           >
             Start Earning Now <ArrowRight />
           </motion.span>
         </Link>
-
       </div>
     </section>
   )
