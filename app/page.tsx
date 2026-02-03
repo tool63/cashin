@@ -5,10 +5,10 @@ import { motion } from "framer-motion"
 import { ArrowRight, ShieldCheck, Wallet, Zap } from "lucide-react"
 import Link from "next/link"
 
-import LiveEarnings from "@/components/LiveEarnings"
-import LiveWithdrawals from "@/components/LiveWithdrawals"
-import LiveOfferCompletion from "@/components/LiveOfferCompletion"
-import { SectionTitle, Stat, Badge, Feature } from "@/components/SmallComponents"
+import LiveEarnings from "../components/LiveEarnings"
+import LiveWithdrawals from "../components/LiveWithdrawals"
+import LiveOfferCompletion from "../components/LiveOfferCompletion"
+import { SectionTitle, Stat, Badge, Feature } from "../components/SmallComponents"
 
 /* ---------- ANIMATION ---------- */
 const fadeUp = {
