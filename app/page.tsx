@@ -59,7 +59,7 @@ export default function Home() {
             <motion.div variants={fadeUp} custom={3} className="flex flex-wrap gap-4">
               <Link href="/signup">
                 <motion.span whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-cyan-500 px-7 py-3.5 rounded-xl font-semibold shadow-xl text-white cursor-pointer">
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-cyan-500 dark:from-indigo-700 dark:to-cyan-700 px-7 py-3.5 rounded-xl font-semibold shadow-xl text-white cursor-pointer">
                   Start Earning Now <ArrowRight />
                 </motion.span>
               </Link>
@@ -75,9 +75,11 @@ export default function Home() {
 
           {/* RIGHT – LIVE EARNINGS */}
           <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.7 }}>
+            <h2 className="text-center text-2xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-cyan-500">
+              💸 Live Earnings
+            </h2>
             <motion.div animate={{ y: [0, -8, 0] }} transition={{ repeat: Infinity, duration: 6 }}
               className="bg-white/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-3xl p-8 backdrop-blur-xl shadow-2xl">
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Live Earnings</p>
               <div className="space-y-4">
                 {["$2.45", "$6.10", "$12.00"].map((amt, i) => (
                   <div key={i} className="flex justify-between bg-black/10 dark:bg-white/5 rounded-lg px-5 py-3">
@@ -102,8 +104,10 @@ export default function Home() {
 
       {/* ================= PAYMENT METHODS ================= */}
       <section className="py-16 bg-black/5 dark:bg-white/5">
+        <h2 className="text-center text-2xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-cyan-500">
+          🏦 Payment Methods
+        </h2>
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <h3 className="text-2xl font-semibold mb-8">Payment Methods</h3>
           <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-600 dark:text-gray-300">
             <Badge>PayPal</Badge>
             <Badge>USDT</Badge>
@@ -116,50 +120,53 @@ export default function Home() {
 
       {/* ================= LIVE OFFER COMPLETION ================= */}
       <section className="py-14 bg-black/5 dark:bg-white/5">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-2xl font-semibold mb-6 text-center">Live Offer Completions</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              ["User #4821", "Completed Survey", "+$1.20"],
-              ["User #1932", "Installed App", "+$3.50"],
-              ["User #7720", "Played Game", "+$5.00"],
-            ].map(([user, action, amount], i) => (
-              <div key={i} className="bg-white/10 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-6 py-4 flex justify-between">
-                <div>
-                  <p className="font-medium">{user}</p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">{action}</p>
-                </div>
-                <span className="text-emerald-400 font-semibold">{amount}</span>
+        <h2 className="text-center text-2xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-cyan-500">
+          🔥 Live Offer Completions
+        </h2>
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-6">
+          {[
+            ["User #4821", "Completed Survey", "+$1.20"],
+            ["User #1932", "Installed App", "+$3.50"],
+            ["User #7720", "Played Game", "+$5.00"],
+          ].map(([user, action, amount], i) => (
+            <div key={i} className="bg-white/10 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-6 py-4 flex justify-between">
+              <div>
+                <p className="font-medium">{user}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{action}</p>
               </div>
-            ))}
-          </div>
+              <span className="text-emerald-400 font-semibold">{amount}</span>
+            </div>
+          ))}
         </div>
       </section>
 
       {/* ================= LIVE WITHDRAWALS ================= */}
       <section className="py-14">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-2xl font-semibold mb-6 text-center">Live Withdrawals</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              ["User #6501", "PayPal", "$10.00"],
-              ["User #2290", "USDT", "$25.00"],
-              ["User #8842", "Gift Card", "$5.00"],
-            ].map(([user, method, amount], i) => (
-              <div key={i} className="bg-white/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-6 py-4 flex justify-between">
-                <div>
-                  <p className="font-medium">{user}</p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Withdraw via {method}</p>
-                </div>
-                <span className="text-indigo-400 font-semibold">{amount}</span>
+        <h2 className="text-center text-2xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-cyan-500">
+          🏦 Live Withdrawals
+        </h2>
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-6">
+          {[
+            ["User #6501", "PayPal", "$10.00"],
+            ["User #2290", "USDT", "$25.00"],
+            ["User #8842", "Gift Card", "$5.00"],
+          ].map(([user, method, amount], i) => (
+            <div key={i} className="bg-white/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-6 py-4 flex justify-between">
+              <div>
+                <p className="font-medium">{user}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Withdraw via {method}</p>
               </div>
-            ))}
-          </div>
+              <span className="text-indigo-400 font-semibold">{amount}</span>
+            </div>
+          ))}
         </div>
       </section>
 
       {/* ================= OFFER CARDS ================= */}
       <section className="max-w-7xl mx-auto px-6 py-16 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <h2 className="col-span-full text-center text-2xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-cyan-500">
+          🎯 Earn Money Tasks
+        </h2>
         {earningOptions.map(([icon, title, href]) => (
           <Link key={title} href={href} className="bg-white/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl p-6 flex flex-col items-center text-center hover:scale-105 transition">
             <div className="text-4xl">{icon}</div>
@@ -177,6 +184,9 @@ export default function Home() {
 
       {/* ================= FEATURE HIGHLIGHTS ================= */}
       <section className="py-20 bg-black/5 dark:bg-white/5">
+        <h2 className="text-center text-2xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-cyan-500">
+          🌟 Why Choose Us
+        </h2>
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
           <Feature icon={<Zap />} title="Instant Withdrawals" />
           <Feature icon={<ShieldCheck />} title="Secure & Trusted" />
@@ -186,18 +196,18 @@ export default function Home() {
 
       {/* ================= TESTIMONIALS ================= */}
       <section className="py-20">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-10">What Users Say</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <Testimonial text="Withdrew in under 2 minutes. Legit site!" />
-            <Testimonial text="Best rewards platform I’ve used so far." />
-            <Testimonial text="Perfect for daily side income." />
-          </div>
+        <h2 className="text-center text-2xl font-bold mb-10 bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-cyan-500">
+          🗣️ Testimonials
+        </h2>
+        <div className="max-w-7xl mx-auto px-6 text-center grid md:grid-cols-3 gap-8">
+          <Testimonial text="Withdrew in under 2 minutes. Legit site!" />
+          <Testimonial text="Best rewards platform I’ve used so far." />
+          <Testimonial text="Perfect for daily side income." />
         </div>
       </section>
 
       {/* ================= CTA ================= */}
-      <section className="py-20 bg-gradient-to-r from-indigo-500 to-cyan-500 text-white text-center rounded-2xl mx-6 md:mx-20 lg:mx-40">
+      <section className="py-20 bg-gradient-to-r from-indigo-500 to-cyan-500 dark:from-indigo-700 dark:to-cyan-700 text-white text-center rounded-2xl mx-6 md:mx-20 lg:mx-40">
         <h2 className="text-4xl font-bold mb-6">Start Earning Real Money Today!</h2>
         <p className="mb-8 text-lg">Join millions of users who are already earning daily.</p>
         <Link href="/signup">
