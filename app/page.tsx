@@ -32,14 +32,6 @@ export default function Home() {
     ["💳", "Vouchers", "/vouchers"],
   ]
 
-  const paymentMethods = [
-    { name: "PayPal", emoji: "💸" },
-    { name: "USDT", emoji: "🪙" },
-    { name: "Bitcoin", emoji: "₿" },
-    { name: "Gift Cards", emoji: "🎁" },
-    { name: "Local Payouts", emoji: "🏦" },
-  ]
-
   return (
     <main className="transition-colors duration-300">
 
@@ -60,65 +52,56 @@ export default function Home() {
             across the globe with fast and secure withdrawals.
           </p>
 
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
-            <Stat
-              title="Total Users"
-              value="25M+"
-              description="Active users earning rewards daily"
-            />
-            <Stat
-              title="Users Paid"
-              value="3.2M+"
-              description="Members who successfully withdrew earnings"
-            />
-            <Stat
-              title="Total Payouts"
-              value="$12M+"
-              description="Rewards paid to our community"
-            />
-            <Stat
-              title="Trust Rating"
-              value="4.8 ★"
-              description="Average user rating across platforms"
-            />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <Stat title="Total Users" value="25M+" />
+            <Stat title="Users Paid" value="3.2M+" />
+            <Stat title="Total Payouts" value="$12M+" />
+            <Stat title="Trust Rating" value="4.8 ★" />
           </div>
         </div>
       </section>
 
       {/* ================= PAYMENT METHODS ================= */}
-<section className="py-20 bg-gray-50 dark:bg-gray-900">
-  <div className="max-w-7xl mx-auto px-6 text-center">
-    <h2 className="text-4xl font-extrabold mb-4 text-gray-900 dark:text-white">
-      Payment Methods
-    </h2>
-    <p className="text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
-      Choose from multiple trusted payout methods for secure and instant withdrawals.
-    </p>
+      <section className="py-20 bg-gray-950">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <h2 className="text-4xl font-extrabold mb-4 text-white">
+            Payment Methods
+          </h2>
+          <p className="text-gray-400 mb-14 max-w-2xl mx-auto">
+            Fast, secure, and trusted payout options.
+          </p>
 
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8">
-      {[
-        { name: "PayPal", emoji: "💸" },
-        { name: "USDT", emoji: "🪙" },
-        { name: "Bitcoin", emoji: "₿" },
-        { name: "Gift Cards", emoji: "🎁" },
-        { name: "Local Payouts", emoji: "🏦" },
-      ].map((method) => (
-        <Badge key={method.name}>
-          <div className="flex flex-col items-center justify-center p-4 border border-gray-700 dark:border-gray-500 rounded-xl bg-gray-800 dark:bg-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 transition-colors duration-300">
-            <span className="text-4xl mb-2">{method.emoji}</span>
-            <span className="text-lg font-semibold text-white">{method.name}</span>
-            <p className="text-sm text-gray-400 mt-1">Fast & secure payouts</p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8">
+            {[
+              { name: "PayPal", emoji: "💸" },
+              { name: "USDT", emoji: "🪙" },
+              { name: "Bitcoin", emoji: "₿" },
+              { name: "Gift Cards", emoji: "🎁" },
+              { name: "Local Payouts", emoji: "🏦" },
+            ].map((method) => (
+              <div
+                key={method.name}
+                className="relative p-[1px] rounded-2xl bg-gradient-to-br from-emerald-500/60 via-cyan-500/40 to-purple-500/60"
+              >
+                <div className="rounded-2xl bg-gray-900 px-6 py-8 flex flex-col items-center justify-center hover:scale-105 transition">
+                  <span className="text-4xl mb-3">{method.emoji}</span>
+                  <span className="text-lg font-semibold text-white">
+                    {method.name}
+                  </span>
+                  <span className="text-sm text-gray-400 mt-1">
+                    Instant payout
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
-        </Badge>
-      ))}
-    </div>
-  </div>
-</section>
+        </div>
+      </section>
 
       {/* ================= EARN MONEY TASKS ================= */}
       <section className="max-w-7xl mx-auto px-6 py-16">
         <SectionTitle icon="🎯" text="Earn Money Tasks" />
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {earningOptions.map(([icon, title, href]) => (
             <Link
               key={title}
@@ -128,11 +111,7 @@ export default function Home() {
               <div className="text-4xl">{icon}</div>
               <h3 className="mt-4 text-lg font-semibold">{title}</h3>
               <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                {title === "Surveys"
-                  ? "Answer & get paid"
-                  : title === "Surveywall"
-                  ? "Complete multiple surveys"
-                  : `Earn by ${title.toLowerCase()}`}
+                Earn by {title.toLowerCase()}
               </p>
             </Link>
           ))}
@@ -143,33 +122,25 @@ export default function Home() {
       <section className="py-20 bg-black/5 dark:bg-white/5">
         <SectionTitle icon="🌟" text="Why Choose Us" />
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
-          <Feature
-            icon={<Zap />}
-            title="Instant Withdrawals"
-            description="Receive your earnings immediately after completing tasks."
-          />
-          <Feature
-            icon={<ShieldCheck />}
-            title="Secure & Trusted"
-            description="Your data and payments are safe with our verified platform."
-          />
-          <Feature
-            icon={<Wallet />}
-            title="Multiple Payment Options"
-            description="Withdraw via PayPal, USDT, Bitcoin, gift cards, and more."
-          />
+          <Feature icon={<Zap />} title="Instant Withdrawals" />
+          <Feature icon={<ShieldCheck />} title="Secure & Trusted" />
+          <Feature icon={<Wallet />} title="Multiple Payment Options" />
         </div>
       </section>
 
       {/* ================= FINAL CTA ================= */}
-      <section className="py-20 text-center rounded-2xl mx-6 md:mx-20 lg:mx-40">
-        <h2 className="text-4xl font-bold mb-6 text-white">Start Earning Real Money Today!</h2>
-        <p className="mb-8 text-lg text-gray-300">Join millions of users who are already earning daily.</p>
+      <section className="py-20 text-center">
+        <h2 className="text-4xl font-bold mb-6 text-white">
+          Start Earning Real Money Today!
+        </h2>
+        <p className="mb-8 text-lg text-gray-300">
+          Join millions of users who are already earning daily.
+        </p>
         <Link href="/signup">
           <motion.span
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-10 py-4 rounded-xl font-semibold shadow-lg text-white"
+            className="inline-flex items-center gap-2 bg-gray-900 hover:bg-gray-800 px-10 py-4 rounded-xl font-semibold shadow-lg text-white"
           >
             Get Started Now <ArrowRight />
           </motion.span>
@@ -179,7 +150,7 @@ export default function Home() {
   )
 }
 
-/* ---------- HERO SECTION ---------- */
+/* ================= HERO SECTION ================= */
 const HeroSection = () => {
   const phrases = ["Surveys", "App Installs", "Playing Games", "Watching Videos"]
   const [current, setCurrent] = useState(0)
@@ -198,35 +169,35 @@ const HeroSection = () => {
         }, 800)
         clearInterval(interval)
       }
-    }, 100)
+    }, 90)
     return () => clearInterval(interval)
   }, [current])
 
   return (
-    <section className="relative flex items-center justify-center py-16 px-4 dark:bg-gray-900">
-      <div className="relative z-10 max-w-4xl w-full text-center flex flex-col items-center justify-center space-y-4">
+    <section className="flex items-center justify-center min-h-[65vh] px-4 dark:bg-gray-900">
+      <div className="max-w-4xl w-full text-center flex flex-col items-center gap-4">
 
-        {/* Fixed heading */}
-        <motion.h1 className="text-3xl md:text-5xl font-extrabold text-gray-900 dark:text-white">
+        <h1 className="text-3xl md:text-5xl font-extrabold">
           Earn Real Money By
-        </motion.h1>
+        </h1>
 
-        {/* Animated typing */}
-        <motion.span className="text-3xl md:text-5xl font-extrabold text-indigo-500 dark:text-cyan-400 block h-[1.2em]">
-          {text}
-        </motion.span>
+        {/* fixed height prevents shifting */}
+        <div className="h-[48px] flex items-center justify-center">
+          <span className="text-3xl md:text-5xl font-extrabold text-cyan-400">
+            {text}
+          </span>
+        </div>
 
-        {/* Paragraph */}
         <p className="text-gray-600 dark:text-gray-300 max-w-2xl text-base md:text-lg">
-          Complete offers, play games, answer surveys and cash out instantly. Trusted by millions worldwide.
+          Complete offers, play games, answer surveys and cash out instantly.
+          Trusted by millions worldwide.
         </p>
 
-        {/* CTA */}
         <Link href="/signup">
           <motion.span
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-8 md:px-10 py-3 md:py-4 rounded-xl font-semibold shadow-xl text-white"
+            className="inline-flex items-center gap-2 bg-gray-900 hover:bg-gray-800 px-8 md:px-10 py-3 md:py-4 rounded-xl font-semibold shadow-xl text-white"
           >
             Start Earning Now <ArrowRight />
           </motion.span>
