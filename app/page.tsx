@@ -72,55 +72,57 @@ export default function Home() {
           </p>
 
           <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
-            <Stat title="Total Users" value="25M+" description="Active users earning rewards daily" />
-            <Stat title="Users Paid" value="3.2M+" description="Members who successfully withdrew earnings" />
-            <Stat title="Total Payouts" value="$12M+" description="Rewards paid to our community" />
-            <Stat title="Trust Rating" value="4.8 ★" description="Average user rating across platforms" />
+            <Stat
+              title="Total Users"
+              value="25M+"
+              description="Active users earning rewards daily"
+            />
+            <Stat
+              title="Users Paid"
+              value="3.2M+"
+              description="Members who successfully withdrew earnings"
+            />
+            <Stat
+              title="Total Payouts"
+              value="$12M+"
+              description="Rewards paid to our community"
+            />
+            <Stat
+              title="Trust Rating"
+              value="4.8 ★"
+              description="Average user rating across platforms"
+            />
           </div>
         </div>
       </section>
 
       {/* ================= PAYMENT METHODS ================= */}
-<section className="py-20 bg-gray-50 dark:bg-gray-900">
-  <div className="max-w-7xl mx-auto px-6 text-center">
-    {/* Section Title */}
-    <h2 className="text-4xl font-extrabold mb-4 text-gray-900 dark:text-white">
-      Payment Methods
-    </h2>
-    <p className="text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
-      Choose from multiple trusted payout methods for secure and instant withdrawals.
-    </p>
-
-    {/* Cards Grid */}
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8">
-      {paymentMethods.map((method) => (
-        <div
-          key={method.name}
-          className="relative bg-white/80 dark:bg-gray-800/80 border border-gray-200 dark:border-gray-700 rounded-3xl p-6 flex flex-col items-center justify-center shadow-lg hover:shadow-2xl hover:scale-105 transition-transform duration-300 backdrop-blur-md cursor-pointer group"
-        >
-          <div className="bg-gradient-to-tr from-emerald-400 to-cyan-500 p-4 rounded-full w-20 h-20 flex items-center justify-center mb-4 group-hover:from-indigo-500 group-hover:to-pink-500 transition-colors duration-500">
-            <img
-              src={method.icon}
-              alt={method.name}
-              className="w-10 h-10 object-contain"
-            />
-          </div>
-          <span className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-emerald-400 transition-colors duration-300">
-            {method.name}
-          </span>
-          <p className="mt-2 text-sm text-gray-500 dark:text-gray-300 group-hover:text-gray-100 transition-colors duration-300">
-            Fast & secure payouts
+      <section className="py-20 bg-gray-50 dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <h2 className="text-4xl font-extrabold mb-4 text-gray-900 dark:text-white">
+            Payment Methods
+          </h2>
+          <p className="text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
+            Choose from multiple trusted payout methods for secure and instant withdrawals.
           </p>
-          {/* Optional overlay icon for modern feel */}
-          <div className="absolute -top-3 -right-3 bg-emerald-400 dark:bg-cyan-500 rounded-full w-6 h-6 flex items-center justify-center text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            ✓
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8">
+            {paymentMethods.map((method) => (
+              <Badge key={method.name}>
+                <div className="bg-gradient-to-tr from-emerald-400 to-cyan-500 p-4 rounded-full w-20 h-20 flex items-center justify-center mb-4 group-hover:from-indigo-500 group-hover:to-pink-500 transition-colors duration-500">
+                  <img src={method.icon} alt={method.name} className="w-10 h-10 object-contain" />
+                </div>
+                <span className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-emerald-400 transition-colors duration-300">
+                  {method.name}
+                </span>
+                <p className="mt-2 text-sm text-gray-500 dark:text-gray-300 group-hover:text-gray-100 transition-colors duration-300">
+                  Fast & secure payouts
+                </p>
+              </Badge>
+            ))}
           </div>
         </div>
-      ))}
-    </div>
-  </div>
-</section>
-
+      </section>
 
       {/* ================= OFFER CARDS ================= */}
       <section className="max-w-7xl mx-auto px-6 py-16 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
