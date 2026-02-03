@@ -23,8 +23,8 @@ const fadeUp = {
 /* ---------- HOME PAGE ---------- */
 export default function Home() {
   const earningOptions = [
-    ["🧠", "Answering Surveys", "/surveys"],
-    ["📱", "Installing Apps", "/app-installs"],
+    ["🧠", "Surveys", "/surveys"],
+    ["📱", "App Installs", "/app-installs"],
     ["🎮", "Playing Games", "/play-games"],
     ["📺", "Watching Videos", "/watch-videos"],
     ["⛏️", "Mining Rewards", "/mining-rewards"],
