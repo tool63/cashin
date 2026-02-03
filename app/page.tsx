@@ -71,13 +71,13 @@ export default function Home() {
 
             {/* Buttons */}
             <motion.div variants={fadeUp} custom={3} className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Link href="/start-earning" passHref>
+              <Link href="/signup" passHref>
                 <motion.a
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.97 }}
                   className="group flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 to-cyan-500 px-8 py-4 rounded-xl font-semibold shadow-xl text-white text-lg sm:text-xl"
                 >
-                  Start Earning
+                  Start Earning Now
                   <ArrowRight className="group-hover:translate-x-1 transition" />
                 </motion.a>
               </Link>
