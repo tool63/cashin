@@ -23,8 +23,8 @@ const fadeUp = {
 /* ---------- HOME PAGE ---------- */
 export default function Home() {
   const earningOptions = [
-    ["🧠", "Answering Surveys", "/surveys"],
-    ["📱", "Installing Apps", "/app-installs"],
+    ["🧠", "Surveys", "/surveys"],
+    ["📱", "App Installs", "/app-installs"],
     ["🎮", "Playing Games", "/play-games"],
     ["📺", "Watching Videos", "/watch-videos"],
     ["⛏️", "Mining Rewards", "/mining-rewards"],
@@ -44,11 +44,11 @@ export default function Home() {
   ]
 
   const paymentMethods = [
-    { name: "PayPal", icon: "/icons/paypal.svg" },
-    { name: "USDT", icon: "/icons/usdt.svg" },
-    { name: "Bitcoin", icon: "/icons/bitcoin.svg" },
-    { name: "Gift Cards", icon: "/icons/giftcard.svg" },
-    { name: "Local Payouts", icon: "/icons/localpayout.svg" },
+    { name: "PayPal", emoji: "💸" },
+    { name: "USDT", emoji: "🪙" },
+    { name: "Bitcoin", emoji: "₿" },
+    { name: "Gift Cards", emoji: "🎁" },
+    { name: "Local Payouts", emoji: "🏦" },
   ]
 
   return (
@@ -97,59 +97,56 @@ export default function Home() {
       </section>
 
       {/* ================= PAYMENT METHODS ================= */}
-<section className="py-20 bg-gray-50 dark:bg-gray-900">
-  <div className="max-w-7xl mx-auto px-6 text-center">
-    <h2 className="text-4xl font-extrabold mb-4 text-gray-900 dark:text-white">
-      Payment Methods
-    </h2>
-    <p className="text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
-      Choose from multiple trusted payout methods for secure and instant withdrawals.
-    </p>
-
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8">
-      {[
-        { name: "PayPal", icon: "/icons/paypal.svg", emoji: "💸" },
-        { name: "USDT", icon: "/icons/usdt.svg", emoji: "🪙" },
-        { name: "Bitcoin", icon: "/icons/bitcoin.svg", emoji: "₿" },
-        { name: "Gift Cards", icon: "/icons/giftcard.svg", emoji: "🎁" },
-        { name: "Local Payouts", icon: "/icons/localpayout.svg", emoji: "🏦" },
-      ].map((method) => (
-        <Badge key={method.name}>
-          <div className="bg-gradient-to-tr from-emerald-400 to-cyan-500 p-4 rounded-full w-20 h-20 flex items-center justify-center mb-4 group-hover:from-indigo-500 group-hover:to-pink-500 transition-colors duration-500">
-            <span className="text-3xl">{method.emoji}</span>
-          </div>
-          <span className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-emerald-400 transition-colors duration-300">
-            {method.name}
-          </span>
-          <p className="mt-2 text-sm text-gray-500 dark:text-gray-300 group-hover:text-gray-100 transition-colors duration-300">
-            Fast & secure payouts
+      <section className="py-20 bg-gray-50 dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <h2 className="text-4xl font-extrabold mb-4 text-gray-900 dark:text-white">
+            Payment Methods
+          </h2>
+          <p className="text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
+            Choose from multiple trusted payout methods for secure and instant withdrawals.
           </p>
-        </Badge>
-      ))}
-    </div>
-  </div>
-</section>
 
-      {/* ================= OFFER CARDS ================= */}
-      <section className="max-w-7xl mx-auto px-6 py-16 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8">
+            {paymentMethods.map((method) => (
+              <Badge key={method.name}>
+                <div className="bg-gradient-to-tr from-emerald-400 to-cyan-500 p-4 rounded-full w-20 h-20 flex items-center justify-center mb-4 group-hover:from-indigo-500 group-hover:to-pink-500 transition-colors duration-500">
+                  <span className="text-3xl">{method.emoji}</span>
+                </div>
+                <span className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-emerald-400 transition-colors duration-300">
+                  {method.name}
+                </span>
+                <p className="mt-2 text-sm text-gray-500 dark:text-gray-300 group-hover:text-gray-100 transition-colors duration-300">
+                  Fast & secure payouts
+                </p>
+              </Badge>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= EARN MONEY TASKS ================= */}
+      <section className="max-w-7xl mx-auto px-6 py-16">
+        {/* Section title moved OUTSIDE the grid */}
         <SectionTitle icon="🎯" text="Earn Money Tasks" />
-        {earningOptions.map(([icon, title, href]) => (
-          <Link
-            key={title}
-            href={href}
-            className="bg-white/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl p-6 flex flex-col items-center text-center hover:scale-105 transition"
-          >
-            <div className="text-4xl">{icon}</div>
-            <h3 className="mt-4 text-lg font-semibold">{title}</h3>
-            <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-              {title === "Surveys"
-                ? "Answer & get paid"
-                : title === "Surveywall"
-                ? "Complete multiple surveys"
-                : `Earn by ${title.toLowerCase()}`}
-            </p>
-          </Link>
-        ))}
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          {earningOptions.map(([icon, title, href]) => (
+            <Link
+              key={title}
+              href={href}
+              className="bg-white/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl p-6 flex flex-col items-center text-center hover:scale-105 transition"
+            >
+              <div className="text-4xl">{icon}</div>
+              <h3 className="mt-4 text-lg font-semibold">{title}</h3>
+              <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                {title === "Surveys"
+                  ? "Answer & get paid"
+                  : title === "Surveywall"
+                  ? "Complete multiple surveys"
+                  : `Earn by ${title.toLowerCase()}`}
+              </p>
+            </Link>
+          ))}
+        </div>
       </section>
 
       {/* ================= FEATURE HIGHLIGHTS ================= */}
