@@ -57,17 +57,11 @@ export default function Home() {
             </motion.p>
 
             <motion.div variants={fadeUp} custom={3} className="flex flex-wrap gap-4">
+              {/* HERO CTA BUTTON */}
               <Link href="/signup">
                 <motion.span whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-cyan-500 dark:from-indigo-700 dark:to-cyan-700 px-7 py-3.5 rounded-xl font-semibold shadow-xl text-white cursor-pointer">
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-700 to-cyan-600 px-7 py-3.5 rounded-xl font-semibold shadow-xl text-white cursor-pointer">
                   Start Earning Now <ArrowRight />
-                </motion.span>
-              </Link>
-
-              <Link href="/how-it-works">
-                <motion.span whileHover={{ scale: 1.04 }}
-                  className="inline-flex items-center px-7 py-3.5 rounded-xl border border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/10 transition cursor-pointer">
-                  How It Works
                 </motion.span>
               </Link>
             </motion.div>
@@ -182,25 +176,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= CTA ================= */}
-<section className="py-20 bg-gradient-to-r from-indigo-500 to-cyan-500 dark:from-indigo-500 dark:to-cyan-400 text-white text-center rounded-2xl mx-6 md:mx-20 lg:mx-40">
-  <h2 className="text-4xl font-bold mb-6 dark:text-white dark:drop-shadow-lg">
-    Start Earning Real Money Today!
-  </h2>
-  <p className="mb-8 text-lg dark:text-gray-200 dark:drop-shadow-sm">
-    Join millions of users who are already earning daily.
-  </p>
-  <Link href="/signup">
-    <motion.span whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}
-      className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 px-10 py-4 rounded-xl font-semibold shadow-lg cursor-pointer">
-      Get Started Now <ArrowRight />
-    </motion.span>
-  </Link>
-</section>
-
-
-      {/* ================= CTA ================= */}
-      <section className="py-20 bg-gradient-to-r from-indigo-500 to-cyan-500 dark:from-indigo-700 dark:to-cyan-700 text-white text-center rounded-2xl mx-6 md:mx-20 lg:mx-40">
+      {/* ================= FINAL CTA ================= */}
+      <section className="py-20 bg-gradient-to-r from-indigo-700 to-cyan-600 dark:from-indigo-800 dark:to-cyan-500 text-white text-center rounded-2xl mx-6 md:mx-20 lg:mx-40">
         <h2 className="text-4xl font-bold mb-6">Start Earning Real Money Today!</h2>
         <p className="mb-8 text-lg">Join millions of users who are already earning daily.</p>
         <Link href="/signup">
