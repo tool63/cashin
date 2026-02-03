@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -17,6 +18,27 @@ const fadeUp = {
 }
 
 export default function Home() {
+  const earningOptions = [
+    ["🧠", "Surveys", "/surveys"],       // Survey card with brain emoji
+    ["🧩", "Surveywall", "/surveywall"], // Surveywall card
+    ["📱", "App Installs", "/app-installs"],
+    ["🎮", "Playing Games", "/play-games"],
+    ["📺", "Watching Videos", "/watch-videos"],
+    ["⛏️", "Mining Rewards", "/mining-rewards"],
+    ["✅", "Completing Offers", "/complete-offers"],
+    ["🧩", "Offerwall", "/offerwall"],
+    ["🎬", "Watching Ads", "/watch-ads"],
+    ["🛠️", "Micro Tasks", "/micro-tasks"],
+    ["🎁", "Free Trials", "/complete-free-trials"],
+    ["🧪", "Testing Products", "/test-products"],
+    ["📧", "Reading Emails", "/read-emails"],
+    ["🌐", "Visiting Websites", "/visit-websites"],
+    ["⭐", "Review Tasks", "/review-tasks"],
+    ["🎡", "Spinning Wheel", "/spinning-wheel"],
+    ["🏆", "Loyalty", "/loyalty"],
+    ["💳", "Vouchers", "/vouchers"],
+  ]
+
   return (
     <main className="transition-colors duration-300">
       {/* HERO */}
@@ -83,17 +105,21 @@ export default function Home() {
       </section>
 
       {/* OFFER CARDS */}
-      <section className="max-w-7xl mx-auto px-6 py-24 grid md:grid-cols-3 gap-6 text-gray-900 dark:text-gray-100">
-        {[
-          ["🎮", "Games", "Play & earn real cash"],
-          ["📱", "Apps", "Install & complete tasks"],
-          ["🧠", "Surveys", "Answer & get paid"],
-        ].map(([icon, title, desc], i) => (
-          <motion.div key={title} whileHover={{ y: -6 }} className="group bg-white/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl p-6 transition">
+      <section className="max-w-7xl mx-auto px-6 py-24 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-gray-900 dark:text-gray-100">
+        {earningOptions.map(([icon, title, href]) => (
+          <Link
+            key={title}
+            href={href}
+            className="group bg-white/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl p-6 transition flex flex-col items-center text-center hover:scale-105 transform"
+          >
             <div className="text-4xl">{icon}</div>
             <h3 className="mt-4 text-xl font-semibold">{title}</h3>
-            <p className="mt-2 text-gray-600 dark:text-gray-400">{desc}</p>
-          </motion.div>
+            <p className="mt-2 text-gray-600 dark:text-gray-400">
+              {title === "Surveys" ? "Answer & get paid" :
+               title === "Surveywall" ? "Complete multiple surveys" :
+               `Earn by ${title.toLowerCase()}`}
+            </p>
+          </Link>
         ))}
       </section>
     </main>
