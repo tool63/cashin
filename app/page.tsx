@@ -94,18 +94,43 @@ export default function Home() {
       </section>
 
       {/* ================= PAYMENT METHODS ================= */}
-      <section className="py-16 bg-black/5 dark:bg-white/5">
-        <SectionTitle icon="🏦" text="Payment Methods" />
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-600 dark:text-gray-300">
-            <Badge>PayPal</Badge>
-            <Badge>USDT</Badge>
-            <Badge>Bitcoin</Badge>
-            <Badge>Gift Cards</Badge>
-            <Badge>Local Payouts</Badge>
-          </div>
-        </div>
-      </section>
+<section className="py-20 bg-gray-50 dark:bg-gray-900">
+  <div className="max-w-7xl mx-auto px-6 text-center">
+    
+    {/* Section Title */}
+    <h2 className="text-3xl font-bold mb-3 text-gray-900 dark:text-white">
+      Payment Methods
+    </h2>
+    <p className="text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
+      Choose from multiple trusted payout methods for secure and instant withdrawals.
+    </p>
+
+    {/* Cards Grid */}
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
+      <Badge>
+        <img src="/icons/paypal.svg" alt="PayPal" className="mx-auto w-12 h-12 mb-2" />
+        <span>PayPal</span>
+      </Badge>
+      <Badge>
+        <img src="/icons/usdt.svg" alt="USDT" className="mx-auto w-12 h-12 mb-2" />
+        <span>USDT</span>
+      </Badge>
+      <Badge>
+        <img src="/icons/bitcoin.svg" alt="Bitcoin" className="mx-auto w-12 h-12 mb-2" />
+        <span>Bitcoin</span>
+      </Badge>
+      <Badge>
+        <img src="/icons/giftcard.svg" alt="Gift Cards" className="mx-auto w-12 h-12 mb-2" />
+        <span>Gift Cards</span>
+      </Badge>
+      <Badge>
+        <img src="/icons/localpayout.svg" alt="Local Payouts" className="mx-auto w-12 h-12 mb-2" />
+        <span>Local Payouts</span>
+      </Badge>
+    </div>
+  </div>
+</section>
+
 
       {/* ================= OFFER CARDS ================= */}
       <section className="max-w-7xl mx-auto px-6 py-16 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
