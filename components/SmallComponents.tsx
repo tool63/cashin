@@ -1,5 +1,6 @@
 "use client"
 
+import { ReactNode } from "react"
 import { motion } from "framer-motion"
 
 /* ================= SECTION TITLE ================= */
@@ -7,13 +8,13 @@ export function SectionTitle({
   icon,
   text,
 }: {
-  icon?: string
+  icon: string
   text: string
 }) {
   return (
     <div className="text-center mb-10">
-      <h2 className="text-3xl font-bold flex justify-center items-center gap-2">
-        {icon && <span>{icon}</span>}
+      <h2 className="text-3xl font-bold flex items-center justify-center gap-2">
+        <span>{icon}</span>
         {text}
       </h2>
     </div>
@@ -32,15 +33,20 @@ export function Stat({
 }) {
   return (
     <motion.div
-      whileHover={{ scale: 1.05 }}
-      className="bg-white/10 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-3xl p-6 backdrop-blur-xl shadow-xl"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      viewport={{ once: true }}
+      className="bg-white/10 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl p-8 backdrop-blur-xl shadow-lg"
     >
-      <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+      <p className="text-sm uppercase tracking-wide text-gray-500 dark:text-gray-400">
         {title}
       </p>
-      <p className="text-3xl font-bold mb-2">{value}</p>
+      <p className="mt-2 text-3xl font-bold text-emerald-400">
+        {value}
+      </p>
       {description && (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
           {description}
         </p>
       )}
@@ -49,10 +55,14 @@ export function Stat({
 }
 
 /* ================= BADGE ================= */
-export function Badge({ text }: { text: string }) {
+export function Badge({
+  children,
+}: {
+  children: ReactNode
+}) {
   return (
-    <span className="inline-block px-4 py-1 text-sm rounded-full bg-emerald-500/10 text-emerald-400">
-      {text}
+    <span className="inline-block px-4 py-1 text-sm font-medium rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+      {children}
     </span>
   )
 }
@@ -68,10 +78,10 @@ export function Feature({
   description: string
 }) {
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-4 items-start">
       <div className="text-2xl">{icon}</div>
       <div>
-        <h4 className="font-semibold">{title}</h4>
+        <h4 className="font-semibold text-lg">{title}</h4>
         <p className="text-sm text-gray-600 dark:text-gray-400">
           {description}
         </p>
