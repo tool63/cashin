@@ -202,22 +202,32 @@ const HeroSection = () => {
   }, [current])
 
   return (
-    <section className="relative min-h-[60vh] flex items-center justify-center px-6">
+    <section className="relative min-h-[55vh] flex items-center justify-center px-6">
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/30 via-purple-600/20 to-cyan-500/20 blur-3xl" />
       <div className="relative z-10 max-w-3xl text-center flex flex-col items-center justify-center space-y-4">
+
+        {/* Fixed heading */}
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="text-4xl md:text-5xl font-extrabold leading-snug"
         >
-          Earn Real Money By{" "}
-          <span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent inline-block">
-            {text}
-          </span>
+          Earn Real Money By
         </motion.h1>
 
-        <p className="text-lg text-gray-600 dark:text-gray-300 max-w-xl">
+        {/* Animated typing text below heading */}
+        <motion.span
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-4xl md:text-5xl font-extrabold text-indigo-500 dark:text-cyan-400 block"
+        >
+          {text}
+        </motion.span>
+
+        {/* Paragraph and CTA */}
+        <p className="text-lg text-gray-600 dark:text-gray-300 max-w-xl mt-4">
           Complete offers, play games, answer surveys and cash out instantly. Trusted by millions worldwide.
         </p>
 
@@ -225,11 +235,12 @@ const HeroSection = () => {
           <motion.span
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 bg-emerald-500 px-7 py-3 rounded-xl font-semibold shadow-xl text-white cursor-pointer"
+            className="inline-flex items-center gap-2 bg-emerald-500 px-7 py-3 rounded-xl font-semibold shadow-xl text-white cursor-pointer mt-2"
           >
             Start Earning Now <ArrowRight />
           </motion.span>
         </Link>
+
       </div>
     </section>
   )
