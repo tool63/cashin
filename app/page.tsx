@@ -201,12 +201,11 @@ const HeroSection = () => {
   }, [current])
 
   return (
-    <section className="relative flex items-center justify-center py-16 px-6">
-      {/* Card-like container */}
-      <div className="relative z-10 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl shadow-2xl p-10 md:p-16 max-w-3xl w-full text-center flex flex-col items-center justify-center space-y-6">
-        
+    <section className="relative flex items-center justify-center py-16 px-4 dark:bg-gray-900">
+      <div className="relative z-10 max-w-3xl w-full text-center flex flex-col items-center justify-center space-y-4">
+
         {/* Fixed heading */}
-        <motion.h1 className="text-3xl md:text-4xl font-extrabold">
+        <motion.h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white">
           Earn Real Money By
         </motion.h1>
 
