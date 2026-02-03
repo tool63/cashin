@@ -16,7 +16,7 @@ export function SectionTitle({ icon, text }: { icon: string; text: string }) {
 export function Stat({
   title,
   value,
-  description,
+  description, // optional
 }: {
   title: string
   value: string
@@ -26,7 +26,9 @@ export function Stat({
     <div className="bg-white/10 dark:bg-black/10 border border-black/10 dark:border-white/10 rounded-xl p-6 flex flex-col items-center justify-center text-center shadow-md">
       <span className="text-3xl font-bold text-gray-900 dark:text-white">{value}</span>
       <span className="mt-2 text-gray-600 dark:text-gray-400">{title}</span>
-      {description && <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">{description}</p>}
+      {description && (
+        <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">{description}</p>
+      )}
     </div>
   )
 }
@@ -34,7 +36,7 @@ export function Stat({
 /* ---------- BADGE ---------- */
 export function Badge({ children }: { children: React.ReactNode }) {
   return (
-    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg p-4 flex flex-col items-center justify-center text-gray-900 dark:text-white hover:scale-105 hover:shadow-2xl transition-transform duration-300">
+    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl shadow-lg p-6 flex flex-col items-center justify-center text-gray-900 dark:text-white hover:scale-105 hover:shadow-2xl transition-transform duration-300 backdrop-blur-md cursor-pointer group">
       {children}
     </div>
   )
