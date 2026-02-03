@@ -1,4 +1,6 @@
+// app/layout.tsx
 import "../styles/globals.css"
+import { ReactNode } from "react"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import FloatingCTA from "../components/FloatingCTA"
@@ -9,17 +11,21 @@ export const metadata = {
   description: "Earn rewards, cash out, and get paid",
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+interface RootLayoutProps {
+  children: ReactNode
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <Providers>
-        <body className="transition-colors duration-300 bg-white text-gray-900 dark:bg-black dark:text-white">
+      <body className="transition-colors duration-300 bg-white text-gray-900 dark:bg-black dark:text-white">
+        <Providers>
           <Header />
-          {children}
+          <main>{children}</main>
           <Footer />
           <FloatingCTA />
-        </body>
-      </Providers>
+        </Providers>
+      </body>
     </html>
   )
 }
