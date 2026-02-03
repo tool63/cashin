@@ -182,15 +182,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= TESTIMONIALS ================= */}
-      <section className="py-20">
-        <SectionTitle icon="🗣️" text="Testimonials" />
-        <div className="max-w-7xl mx-auto px-6 text-center grid md:grid-cols-3 gap-8">
-          <Testimonial text="Withdrew in under 2 minutes. Legit site!" />
-          <Testimonial text="Best rewards platform I’ve used so far." />
-          <Testimonial text="Perfect for daily side income." />
-        </div>
-      </section>
+      {/* ================= CTA ================= */}
+<section className="py-20 bg-gradient-to-r from-indigo-500 to-cyan-500 dark:from-indigo-500 dark:to-cyan-400 text-white text-center rounded-2xl mx-6 md:mx-20 lg:mx-40">
+  <h2 className="text-4xl font-bold mb-6 dark:text-white dark:drop-shadow-lg">
+    Start Earning Real Money Today!
+  </h2>
+  <p className="mb-8 text-lg dark:text-gray-200 dark:drop-shadow-sm">
+    Join millions of users who are already earning daily.
+  </p>
+  <Link href="/signup">
+    <motion.span whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}
+      className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 px-10 py-4 rounded-xl font-semibold shadow-lg cursor-pointer">
+      Get Started Now <ArrowRight />
+    </motion.span>
+  </Link>
+</section>
+
 
       {/* ================= CTA ================= */}
       <section className="py-20 bg-gradient-to-r from-indigo-500 to-cyan-500 dark:from-indigo-700 dark:to-cyan-700 text-white text-center rounded-2xl mx-6 md:mx-20 lg:mx-40">
