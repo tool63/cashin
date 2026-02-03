@@ -177,16 +177,18 @@ export default function Home() {
       </section>
 
       {/* ================= FINAL CTA ================= */}
-      <section className="py-20 bg-gradient-to-r from-indigo-700 to-cyan-600 dark:from-indigo-800 dark:to-cyan-500 text-white text-center rounded-2xl mx-6 md:mx-20 lg:mx-40">
-        <h2 className="text-4xl font-bold mb-6">Start Earning Real Money Today!</h2>
-        <p className="mb-8 text-lg">Join millions of users who are already earning daily.</p>
-        <Link href="/signup">
-          <motion.span whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 px-10 py-4 rounded-xl font-semibold shadow-lg cursor-pointer">
-            Get Started Now <ArrowRight />
-          </motion.span>
-        </Link>
-      </section>
+<section className="py-20 bg-gradient-to-r from-gray-900 to-gray-800 text-white text-center rounded-2xl mx-6 md:mx-20 lg:mx-40">
+  <h2 className="text-4xl font-bold mb-6">Start Earning Real Money Today!</h2>
+  <p className="mb-8 text-lg text-gray-200">
+    Join millions of users who are already earning daily.
+  </p>
+  <Link href="/signup">
+    <motion.span whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}
+      className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 px-10 py-4 rounded-xl font-semibold shadow-lg cursor-pointer">
+      Get Started Now <ArrowRight />
+    </motion.span>
+  </Link>
+</section>
 
     </main>
   )
