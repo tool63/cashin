@@ -42,20 +42,20 @@ export default function Home() {
   return (
     <main className="transition-colors duration-300">
       {/* HERO */}
-      <section className="relative min-h-[90vh] flex items-center">
+      <section className="relative min-h-screen pt-28 pb-24">
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/30 via-purple-600/20 to-cyan-500/20 blur-3xl" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 text-gray-900 dark:text-gray-100">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 text-gray-900 dark:text-gray-100">
           {/* LEFT */}
           <motion.div
             initial="hidden"
             animate="visible"
-            className="space-y-8"
+            className="space-y-10"
           >
             <motion.h1
               variants={fadeUp}
               custom={1}
-              className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight"
+              className="text-6xl md:text-7xl font-extrabold leading-tight"
             >
               Earn Real Money
               <span className="block bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
@@ -66,7 +66,7 @@ export default function Home() {
             <motion.p
               variants={fadeUp}
               custom={2}
-              className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl"
+              className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl"
             >
               Complete offers, play games, answer surveys and cash out instantly.
               Trusted by millions worldwide.
@@ -75,23 +75,23 @@ export default function Home() {
             <motion.div
               variants={fadeUp}
               custom={3}
-              className="flex flex-wrap gap-4 pt-4"
+              className="flex gap-6"
             >
               <Link href="/start-earning">
                 <motion.span
-                  whileHover={{ scale: 1.04 }}
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.97 }}
-                  className="group inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-cyan-500 px-7 py-3 rounded-xl font-semibold shadow-xl text-white cursor-pointer"
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-cyan-500 px-8 py-4 rounded-xl font-semibold shadow-xl text-white cursor-pointer"
                 >
                   Start Earning
-                  <ArrowRight className="group-hover:translate-x-1 transition" />
+                  <ArrowRight />
                 </motion.span>
               </Link>
 
               <Link href="/how-it-works">
                 <motion.span
-                  whileHover={{ scale: 1.03 }}
-                  className="inline-flex items-center px-7 py-3 rounded-xl border border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/10 transition text-gray-900 dark:text-gray-100 cursor-pointer"
+                  whileHover={{ scale: 1.04 }}
+                  className="inline-flex items-center px-8 py-4 rounded-xl border border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/10 transition cursor-pointer"
                 >
                   How It Works
                 </motion.span>
@@ -104,29 +104,27 @@ export default function Home() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.7 }}
-            className="relative"
           >
             <motion.div
-              animate={{ y: [0, -6, 0] }}
-              transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-              className="relative bg-white/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-3xl p-8 backdrop-blur-xl shadow-2xl"
+              animate={{ y: [0, -8, 0] }}
+              transition={{ repeat: Infinity, duration: 6 }}
+              className="bg-white/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-3xl p-10 backdrop-blur-xl shadow-2xl"
             >
               <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
                 Live Earnings
               </p>
 
-              <div className="space-y-4">
+              <div className="space-y-5">
                 {["$2.45", "$6.10", "$12.00"].map((amt, i) => (
-                  <motion.div
+                  <div
                     key={i}
-                    whileHover={{ scale: 1.02 }}
-                    className="flex justify-between bg-black/10 dark:bg-white/5 rounded-lg px-5 py-4 text-gray-900 dark:text-gray-100"
+                    className="flex justify-between bg-black/10 dark:bg-white/5 rounded-lg px-6 py-4"
                   >
                     <span>User #{1200 + i}</span>
                     <span className="text-emerald-400 font-semibold">
                       {amt}
                     </span>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </motion.div>
@@ -135,12 +133,12 @@ export default function Home() {
       </section>
 
       {/* OFFER CARDS */}
-      <section className="max-w-7xl mx-auto px-6 py-24 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-gray-900 dark:text-gray-100">
+      <section className="max-w-7xl mx-auto px-6 py-28 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
         {earningOptions.map(([icon, title, href]) => (
           <Link
             key={title}
             href={href}
-            className="group bg-white/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl p-6 transition flex flex-col items-center text-center hover:scale-105"
+            className="bg-white/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl p-7 flex flex-col items-center text-center hover:scale-105 transition"
           >
             <div className="text-4xl">{icon}</div>
             <h3 className="mt-4 text-xl font-semibold">{title}</h3>
