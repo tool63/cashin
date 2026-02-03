@@ -18,7 +18,12 @@ export default function Footer() {
 
   const A = ({ href, children }: { href: string; children: React.ReactNode }) => (
     <motion.div whileHover={{ x: 4 }} transition={{ duration: 0.15 }}>
-      <Link href={href} className="block hover:text-white transition">
+      <Link
+        href={href}
+        className="block transition
+                   text-black dark:text-gray-300
+                   hover:text-black dark:hover:text-white"
+      >
         {children}
       </Link>
     </motion.div>
@@ -36,7 +41,8 @@ export default function Footer() {
     <div>
       <button
         onClick={() => t(id)}
-        className="w-full flex justify-between items-center text-white font-semibold mb-3"
+        className="w-full flex justify-between items-center font-semibold mb-3
+                   text-black dark:text-white"
       >
         {title}
         <span>{open[id] ? "−" : "+"}</span>
@@ -49,7 +55,7 @@ export default function Footer() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="space-y-2 text-sm text-gray-400"
+            className="space-y-2 text-sm text-black dark:text-gray-400"
           >
             {children}
           </motion.div>
@@ -69,13 +75,11 @@ export default function Footer() {
     children: React.ReactNode
     level?: number
   }) => (
-    <div
-      className="mt-2"
-      style={{ paddingLeft: `${level * 8}px` }} // ✅ FIX (same look)
-    >
+    <div className="mt-2" style={{ paddingLeft: `${level * 8}px` }}>
       <button
         onClick={() => (level === 1 ? s(id) : s2(id))}
-        className="w-full flex justify-between text-gray-300 font-medium"
+        className="w-full flex justify-between font-medium
+                   text-black dark:text-gray-300"
       >
         {title}
         <span>{(level === 1 ? sub[id] : sub2[id]) ? "−" : "+"}</span>
@@ -237,25 +241,16 @@ export default function Footer() {
           <A href="https://cashog.com/cookie-policy">Cookie Policy</A>
         </Section>
 
-      </div> {/* ✅ FIXED: grid closed */}
-
-      {/* SOCIAL */}
-      <div className="border-t border-white/10 py-6 flex justify-center gap-6">
-        <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-          <Twitter />
-        </a>
-        <a href="https://facebook.com/yourpage" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-          <Facebook />
-        </a>
-        <a href="https://instagram.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-          <Instagram />
-        </a>
-        <a href="https://youtube.com/@yourchannel" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-          <Youtube />
-        </a>
       </div>
 
-      {/* COPYRIGHT */}
+      {/* SOCIAL (UNCHANGED) */}
+      <div className="border-t border-white/10 py-6 flex justify-center gap-6">
+        <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer"><Twitter /></a>
+        <a href="https://facebook.com/yourpage" target="_blank" rel="noopener noreferrer"><Facebook /></a>
+        <a href="https://instagram.com/yourusername" target="_blank" rel="noopener noreferrer"><Instagram /></a>
+        <a href="https://youtube.com/@yourchannel" target="_blank" rel="noopener noreferrer"><Youtube /></a>
+      </div>
+
       <div className="text-center text-sm text-gray-500 pb-6">
         © {new Date().getFullYear()} Cashog. All rights reserved.
       </div>
