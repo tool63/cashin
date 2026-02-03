@@ -1,65 +1,51 @@
 "use client"
 
-import { ReactNode } from "react"
+import React from "react"
 
-/* ---------- STAT COMPONENT ---------- */
-interface StatProps {
-  title: string
-  value: string
-  description?: string
-}
-
-export const Stat = ({ title, value, description }: StatProps) => {
+/* ---------- SECTION TITLE ---------- */
+export function SectionTitle({ icon, text }: { icon: string; text: string }) {
   return (
-    <div className="bg-white/5 dark:bg-black/10 border border-black/10 dark:border-white/10 rounded-xl p-6 flex flex-col items-center text-center">
-      <p className="text-gray-500 dark:text-gray-400">{title}</p>
-      <h3 className="text-2xl font-bold my-2">{value}</h3>
-      {description && <p className="text-gray-600 dark:text-gray-300 text-sm">{description}</p>}
+    <div className="flex items-center justify-center gap-3 mb-8">
+      <span className="text-2xl">{icon}</span>
+      <h2 className="text-3xl font-bold text-gray-900 dark:text-white">{text}</h2>
     </div>
   )
 }
 
-/* ---------- BADGE COMPONENT ---------- */
-interface BadgeProps {
-  children: ReactNode
+/* ---------- STAT ---------- */
+export function Stat({ title, value }: { title: string; value: string }) {
+  return (
+    <div className="bg-white/10 dark:bg-black/10 border border-black/10 dark:border-white/10 rounded-xl p-6 flex flex-col items-center justify-center text-center shadow-md">
+      <span className="text-3xl font-bold text-gray-900 dark:text-white">{value}</span>
+      <span className="mt-2 text-gray-600 dark:text-gray-400">{title}</span>
+    </div>
+  )
 }
 
-export const Badge = ({ children }: BadgeProps) => {
+/* ---------- BADGE ---------- */
+export function Badge({ children }: { children: React.ReactNode }) {
   return (
-    <span className="px-4 py-1 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 font-medium text-sm">
+    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg p-4 flex flex-col items-center justify-center text-gray-900 dark:text-white hover:scale-105 hover:shadow-2xl transition-transform duration-300">
       {children}
-    </span>
-  )
-}
-
-/* ---------- FEATURE COMPONENT ---------- */
-interface FeatureProps {
-  icon: ReactNode
-  title: string
-  description?: string
-}
-
-export const Feature = ({ icon, title, description }: FeatureProps) => {
-  return (
-    <div className="bg-white/5 dark:bg-black/10 border border-black/10 dark:border-white/10 rounded-xl p-6 text-center flex flex-col items-center">
-      <div className="text-4xl mb-4">{icon}</div>
-      <h3 className="text-lg font-semibold">{title}</h3>
-      {description && <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">{description}</p>}
     </div>
   )
 }
 
-/* ---------- SECTION TITLE COMPONENT ---------- */
-interface SectionTitleProps {
-  icon: string
-  text: string
-}
-
-export const SectionTitle = ({ icon, text }: SectionTitleProps) => {
+/* ---------- FEATURE ---------- */
+export function Feature({
+  icon,
+  title,
+  description,
+}: {
+  icon: React.ReactNode
+  title: string
+  description?: string
+}) {
   return (
-    <div className="flex items-center justify-center gap-2 mb-8 text-2xl font-bold text-gray-900 dark:text-gray-100">
-      <span>{icon}</span>
-      <span>{text}</span>
+    <div className="bg-white/10 dark:bg-black/10 border border-black/10 dark:border-white/10 rounded-2xl p-6 flex flex-col items-center text-center hover:scale-105 hover:shadow-lg transition-transform duration-300">
+      <div className="text-4xl mb-4 text-emerald-500">{icon}</div>
+      <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">{title}</h3>
+      {description && <p className="text-sm text-gray-600 dark:text-gray-400">{description}</p>}
     </div>
   )
 }
