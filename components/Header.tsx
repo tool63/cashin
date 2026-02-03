@@ -78,6 +78,7 @@ export default function Header() {
           <button
             onClick={() => setTheme(isDark ? "light" : "dark")}
             className="p-2 rounded-lg border"
+            aria-label="Toggle Theme"
           >
             {isDark ? <Sun size={16} /> : <Moon size={16} />}
           </button>
@@ -138,6 +139,19 @@ export default function Header() {
             <Link className="block" href="/cashout">Cashout</Link>
             <Link className="block" href="/blog">Blog</Link>
             <Link className="block" href="/help">Help</Link>
+
+            {/* MOBILE THEME TOGGLE */}
+            <button
+              onClick={() => setTheme(isDark ? "light" : "dark")}
+              className={`flex items-center justify-between w-full p-3 rounded-lg border mt-4
+                ${isDark ? "border-white/20" : "border-gray-300"}
+              `}
+            >
+              <span className="flex items-center gap-2">
+                {isDark ? <Sun size={16} /> : <Moon size={16} />}
+                {isDark ? "Light Mode" : "Dark Mode"}
+              </span>
+            </button>
 
             <div className="pt-4 flex flex-col gap-3">
               <Link className="block text-center py-2 border rounded-lg" href="/login">
