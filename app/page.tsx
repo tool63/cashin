@@ -1,155 +1,157 @@
 "use client"
 
-import Link from "next/link"
 import { motion } from "framer-motion"
-import { ArrowRight, Brain, Gamepad2, Gift } from "lucide-react"
+import { ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
-  show: (i = 1) => ({
+  visible: (i = 1) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.12 },
+    transition: {
+      delay: i * 0.08,
+      duration: 0.6,
+      ease: "easeOut",
+    },
   }),
 }
 
-export default function HomeHero() {
+export default function Home() {
+  const earningOptions = [
+    ["🧠", "Surveys", "/surveys"],
+    ["📱", "App Installs", "/app-installs"],
+    ["🎮", "Playing Games", "/play-games"],
+    ["📺", "Watching Videos", "/watch-videos"],
+    ["⛏️", "Mining Rewards", "/mining-rewards"],
+    ["✅", "Completing Offers", "/complete-offers"],
+    ["🧩", "Offerwall", "/offerwall"],
+    ["📋", "Surveywall", "/surveywall"],
+    ["🎬", "Watching Ads", "/watch-ads"],
+    ["🛠️", "Micro Tasks", "/micro-tasks"],
+    ["🎁", "Free Trials", "/complete-free-trials"],
+    ["🧪", "Testing Products", "/test-products"],
+    ["📧", "Reading Emails", "/read-emails"],
+    ["🌐", "Visiting Websites", "/visit-websites"],
+    ["⭐", "Review Tasks", "/review-tasks"],
+    ["🎡", "Spinning Wheel", "/spinning-wheel"],
+    ["🏆", "Loyalty", "/loyalty"],
+    ["💳", "Vouchers", "/vouchers"],
+  ]
+
   return (
-    <>
-      {/* ================= HERO ================= */}
-      <section className="relative min-h-[90vh] flex items-center">
-        <div className="max-w-7xl mx-auto px-6 w-full">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Left */}
-            <motion.div
-              initial="hidden"
-              animate="show"
-              className="space-y-8"
+    <main className="transition-colors duration-300">
+      {/* HERO */}
+      <section className="relative min-h-[85vh] pt-20 pb-16">
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/30 via-purple-600/20 to-cyan-500/20 blur-3xl" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 text-gray-900 dark:text-gray-100">
+          {/* LEFT */}
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            className="space-y-6"
+          >
+            <motion.h1
+              variants={fadeUp}
+              custom={1}
+              className="text-5xl md:text-6xl font-extrabold leading-tight"
             >
-              <motion.h1
-                variants={fadeUp}
-                custom={1}
-                className="text-4xl md:text-5xl xl:text-6xl font-bold leading-tight"
-              >
-                Earn Real Money
-                <span className="block bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
-                  Playing Games & Apps
-                </span>
-              </motion.h1>
+              Earn Real Money
+              <span className="block bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
+                Playing Games & Apps
+              </span>
+            </motion.h1>
 
-              <motion.p
-                variants={fadeUp}
-                custom={2}
-                className="text-lg text-gray-600 dark:text-gray-300 max-w-xl"
-              >
-                Complete offers, play games, answer surveys and cash out instantly.
-                Trusted by millions worldwide.
-              </motion.p>
+            <motion.p
+              variants={fadeUp}
+              custom={2}
+              className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl"
+            >
+              Complete offers, play games, answer surveys and cash out instantly.
+              Trusted by millions worldwide.
+            </motion.p>
 
-              <motion.div
-                variants={fadeUp}
-                custom={3}
-                className="flex gap-4"
-              >
-                <Link href="/start-earning">
-                  <motion.button
-                    whileHover={{ scale: 1.04 }}
-                    whileTap={{ scale: 0.97 }}
-                    className="flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-cyan-500 px-6 py-3 rounded-xl font-semibold shadow-xl text-white"
-                  >
-                    Start Earning
-                    <ArrowRight />
-                  </motion.button>
-                </Link>
+            <motion.div
+              variants={fadeUp}
+              custom={3}
+              className="flex flex-wrap gap-4"
+            >
+              <Link href="/signup">
+                <motion.span
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-cyan-500 px-7 py-3.5 rounded-xl font-semibold shadow-xl text-white cursor-pointer"
+                >
+                  Start Earning Now
+                  <ArrowRight />
+                </motion.span>
+              </Link>
 
-                <Link href="/how-it-works">
-                  <motion.button
-                    whileHover={{ scale: 1.03 }}
-                    className="px-6 py-3 rounded-xl border border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/10 transition"
-                  >
-                    How It Works
-                  </motion.button>
-                </Link>
-              </motion.div>
+              <Link href="/how-it-works">
+                <motion.span
+                  whileHover={{ scale: 1.04 }}
+                  className="inline-flex items-center px-7 py-3.5 rounded-xl border border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/10 transition cursor-pointer"
+                >
+                  How It Works
+                </motion.span>
+              </Link>
             </motion.div>
+          </motion.div>
 
-            {/* Right placeholder */}
-            <div className="hidden lg:block" />
-          </div>
-        </div>
-      </section>
+          {/* RIGHT – LIVE EARNINGS */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.7 }}
+          >
+            <motion.div
+              animate={{ y: [0, -8, 0] }}
+              transition={{ repeat: Infinity, duration: 6 }}
+              className="bg-white/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-3xl p-8 backdrop-blur-xl shadow-2xl"
+            >
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                Live Earnings
+              </p>
 
-      {/* ================= OFFER CARDS ================= */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <OfferCard
-              icon={<Brain />}
-              title="Surveys"
-              desc="Share your opinion and earn instantly"
-            />
-            <OfferCard
-              icon={<Gamepad2 />}
-              title="Play Games"
-              desc="Play & reach levels to earn"
-            />
-            <OfferCard
-              icon={<Gift />}
-              title="Offerwall"
-              desc="Complete offers from partners"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* ================= LIVE EARNINGS (SEPARATE) ================= */}
-      <section className="py-24 bg-gray-50 dark:bg-white/5">
-        <div className="max-w-5xl mx-auto px-6">
-          <h2 className="text-2xl font-semibold mb-10 text-center">
-            Live Earnings
-          </h2>
-
-          <div className="space-y-4">
-            {[
-              ["User #1200", "$2.45"],
-              ["User #1201", "$6.10"],
-              ["User #1202", "$12.00"],
-            ].map(([user, amount]) => (
-              <div
-                key={user}
-                className="flex justify-between items-center bg-white dark:bg-black/30 rounded-xl px-6 py-4 shadow-sm"
-              >
-                <span className="text-sm text-gray-600 dark:text-gray-300">
-                  {user}
-                </span>
-                <span className="font-semibold text-green-500">
-                  {amount}
-                </span>
+              <div className="space-y-4">
+                {["$2.45", "$6.10", "$12.00"].map((amt, i) => (
+                  <div
+                    key={i}
+                    className="flex justify-between bg-black/10 dark:bg-white/5 rounded-lg px-5 py-3"
+                  >
+                    <span>User #{1200 + i}</span>
+                    <span className="text-emerald-400 font-semibold">
+                      {amt}
+                    </span>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
-    </>
-  )
-}
 
-function OfferCard({
-  icon,
-  title,
-  desc,
-}: {
-  icon: React.ReactNode
-  title: string
-  desc: string
-}) {
-  return (
-    <div className="rounded-2xl border border-black/5 dark:border-white/10 p-6 hover:shadow-lg transition">
-      <div className="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-500 flex items-center justify-center mb-4">
-        {icon}
-      </div>
-      <h3 className="font-semibold text-lg mb-1">{title}</h3>
-      <p className="text-sm text-gray-600 dark:text-gray-400">{desc}</p>
-    </div>
+      {/* OFFER CARDS */}
+      <section className="max-w-7xl mx-auto px-6 py-16 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        {earningOptions.map(([icon, title, href]) => (
+          <Link
+            key={title}
+            href={href}
+            className="bg-white/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl p-6 flex flex-col items-center text-center hover:scale-105 transition"
+          >
+            <div className="text-4xl">{icon}</div>
+            <h3 className="mt-4 text-lg font-semibold">{title}</h3>
+            <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+              {title === "Surveys"
+                ? "Answer & get paid"
+                : title === "Surveywall"
+                ? "Complete multiple surveys"
+                : `Earn by ${title.toLowerCase()}`}
+            </p>
+          </Link>
+        ))}
+      </section>
+    </main>
   )
 }
