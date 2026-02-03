@@ -19,14 +19,14 @@ const fadeUp = {
 
 export default function Home() {
   const earningOptions = [
-    ["🧠", "Surveys", "/surveys"],       // Survey card with brain emoji
-    ["🧩", "Surveywall", "/surveywall"], // Surveywall card
+    ["🧠", "Surveys", "/surveys"],        // Survey card first
     ["📱", "App Installs", "/app-installs"],
     ["🎮", "Playing Games", "/play-games"],
     ["📺", "Watching Videos", "/watch-videos"],
     ["⛏️", "Mining Rewards", "/mining-rewards"],
     ["✅", "Completing Offers", "/complete-offers"],
-    ["🧩", "Offerwall", "/offerwall"],
+    ["🧩", "Offerwall", "/offerwall"],    // Offerwall stays in original position
+    ["📋", "Surveywall", "/surveywall"],  // Surveywall moved below Offerwall
     ["🎬", "Watching Ads", "/watch-ads"],
     ["🛠️", "Micro Tasks", "/micro-tasks"],
     ["🎁", "Free Trials", "/complete-free-trials"],
