@@ -23,8 +23,8 @@ const fadeUp = {
 /* ---------- HOME PAGE ---------- */
 export default function Home() {
   const earningOptions = [
-    ["🧠", "Surveys", "/surveys"],
-    ["📱", "App Installs", "/app-installs"],
+    ["🧠", "Answering Surveys", "/surveys"],
+    ["📱", "Installing Apps", "/app-installs"],
     ["🎮", "Playing Games", "/play-games"],
     ["📺", "Watching Videos", "/watch-videos"],
     ["⛏️", "Mining Rewards", "/mining-rewards"],
@@ -129,7 +129,6 @@ export default function Home() {
     </div>
   </div>
 </section>
-
 
       {/* ================= OFFER CARDS ================= */}
       <section className="max-w-7xl mx-auto px-6 py-16 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
