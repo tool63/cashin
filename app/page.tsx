@@ -33,7 +33,7 @@ export default function Home() {
   ]
 
   return (
-    <main className="transition-colors duration-300">
+    <main className="transition-colors duration-300 bg-gray-950 text-white">
 
       {/* ================= HERO ================= */}
       <HeroSection />
@@ -44,10 +44,12 @@ export default function Home() {
       <LiveWithdrawals />
 
       {/* ================= TRUST / STATS ================= */}
-      <section className="py-16 bg-black/5 dark:bg-white/5">
+      <section className="py-16 bg-white/5">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-4">Trusted by Millions Worldwide</h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-12">
+          <h2 className="text-3xl font-bold mb-4">
+            Trusted by Millions Worldwide
+          </h2>
+          <p className="text-gray-400 max-w-2xl mx-auto mb-12">
             Cashog is one of the most trusted earning platforms, paying users daily
             across the globe with fast and secure withdrawals.
           </p>
@@ -62,9 +64,9 @@ export default function Home() {
       </section>
 
       {/* ================= PAYMENT METHODS ================= */}
-      <section className="py-20 bg-gray-950">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-extrabold mb-4 text-white">
+          <h2 className="text-4xl font-extrabold mb-4">
             Payment Methods
           </h2>
           <p className="text-gray-400 mb-14 max-w-2xl mx-auto">
@@ -81,17 +83,13 @@ export default function Home() {
             ].map((method) => (
               <div
                 key={method.name}
-                className="relative p-[1px] rounded-2xl bg-gradient-to-br from-emerald-500/60 via-cyan-500/40 to-purple-500/60"
+                className="rounded-2xl border border-white/10 bg-white/5 px-6 py-8 flex flex-col items-center hover:scale-105 transition"
               >
-                <div className="rounded-2xl bg-gray-900 px-6 py-8 flex flex-col items-center justify-center hover:scale-105 transition">
-                  <span className="text-4xl mb-3">{method.emoji}</span>
-                  <span className="text-lg font-semibold text-white">
-                    {method.name}
-                  </span>
-                  <span className="text-sm text-gray-400 mt-1">
-                    Instant payout
-                  </span>
-                </div>
+                <span className="text-4xl mb-3">{method.emoji}</span>
+                <span className="text-lg font-semibold">{method.name}</span>
+                <span className="text-sm text-gray-400 mt-1">
+                  Instant payout
+                </span>
               </div>
             ))}
           </div>
@@ -106,11 +104,11 @@ export default function Home() {
             <Link
               key={title}
               href={href}
-              className="bg-white/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl p-6 flex flex-col items-center text-center hover:scale-105 transition"
+              className="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col items-center text-center hover:scale-105 transition"
             >
               <div className="text-4xl">{icon}</div>
               <h3 className="mt-4 text-lg font-semibold">{title}</h3>
-              <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+              <p className="mt-2 text-gray-400 text-sm">
                 Earn by {title.toLowerCase()}
               </p>
             </Link>
@@ -119,7 +117,7 @@ export default function Home() {
       </section>
 
       {/* ================= FEATURE HIGHLIGHTS ================= */}
-      <section className="py-20 bg-black/5 dark:bg-white/5">
+      <section className="py-20 bg-white/5">
         <SectionTitle icon="🌟" text="Why Choose Us" />
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
           <Feature icon={<Zap />} title="Instant Withdrawals" />
@@ -130,22 +128,23 @@ export default function Home() {
 
       {/* ================= FINAL CTA ================= */}
       <section className="py-20 text-center">
-        <h2 className="text-4xl font-bold mb-6 text-white">
+        <h2 className="text-4xl font-bold mb-6">
           Start Earning Real Money Today!
         </h2>
-        <p className="mb-8 text-lg text-gray-300">
+        <p className="mb-8 text-lg text-gray-400">
           Join millions of users who are already earning daily.
         </p>
         <Link href="/signup">
           <motion.span
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 bg-gray-900 hover:bg-gray-800 px-10 py-4 rounded-xl font-semibold shadow-lg text-white"
+            className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 px-10 py-4 rounded-xl font-semibold shadow-lg"
           >
             Get Started Now <ArrowRight />
           </motion.span>
         </Link>
       </section>
+
     </main>
   )
 }
@@ -166,7 +165,7 @@ const HeroSection = () => {
         setTimeout(() => {
           setText("")
           setCurrent((prev) => (prev + 1) % phrases.length)
-        }, 800)
+        }, 700)
         clearInterval(interval)
       }
     }, 90)
@@ -174,21 +173,27 @@ const HeroSection = () => {
   }, [current])
 
   return (
-    <section className="flex items-center justify-center min-h-[65vh] px-4 dark:bg-gray-900">
-      <div className="max-w-4xl w-full text-center flex flex-col items-center gap-4">
+    <section className="flex items-center justify-center min-h-[60vh] px-4">
+      <div className="max-w-4xl w-full flex flex-col items-center text-center gap-5">
 
         <h1 className="text-3xl md:text-5xl font-extrabold">
           Earn Real Money By
         </h1>
 
-        {/* fixed height prevents shifting */}
-        <div className="h-[48px] flex items-center justify-center">
-          <span className="text-3xl md:text-5xl font-extrabold text-cyan-400">
+        {/* WIDTH & HEIGHT LOCK — ZERO SHIFT */}
+        <div className="relative h-[56px] md:h-[64px]">
+          {/* invisible max-width reference */}
+          <span className="invisible text-3xl md:text-5xl font-extrabold whitespace-nowrap">
+            Watching Videos
+          </span>
+
+          {/* animated text */}
+          <span className="absolute inset-0 flex items-center justify-center text-3xl md:text-5xl font-extrabold text-cyan-400">
             {text}
           </span>
         </div>
 
-        <p className="text-gray-600 dark:text-gray-300 max-w-2xl text-base md:text-lg">
+        <p className="max-w-2xl text-gray-400 text-base md:text-lg leading-relaxed">
           Complete offers, play games, answer surveys and cash out instantly.
           Trusted by millions worldwide.
         </p>
@@ -197,11 +202,12 @@ const HeroSection = () => {
           <motion.span
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 bg-gray-900 hover:bg-gray-800 px-8 md:px-10 py-3 md:py-4 rounded-xl font-semibold shadow-xl text-white"
+            className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 px-8 md:px-10 py-3 md:py-4 rounded-xl font-semibold shadow-xl"
           >
             Start Earning Now <ArrowRight />
           </motion.span>
         </Link>
+
       </div>
     </section>
   )
