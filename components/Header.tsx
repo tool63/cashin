@@ -37,7 +37,6 @@ export default function Header() {
         <nav className="hidden md:flex items-center gap-8 text-sm">
           <Link href="/how-it-works">How it Works</Link>
 
-          {/* DESKTOP EARN */}
           <div
             className="relative"
             onMouseEnter={() => setEarnOpen(true)}
@@ -78,7 +77,6 @@ export default function Header() {
           <button
             onClick={() => setTheme(isDark ? "light" : "dark")}
             className="p-2 rounded-lg border"
-            aria-label="Toggle Theme"
           >
             {isDark ? <Sun size={16} /> : <Moon size={16} />}
           </button>
@@ -128,31 +126,34 @@ export default function Header() {
 
             {mobileEarnOpen && (
               <div className="flex flex-col gap-3 pl-4 text-sm">
-                <Link className="block" href="/surveys">Surveys</Link>
-                <Link className="block" href="/app-installs">App Installs</Link>
-                <Link className="block" href="/play-games">Play Games</Link>
-                <Link className="block" href="/watch-videos">Watch Videos</Link>
-                <Link className="block" href="/offerwall">Offerwall</Link>
+                <Link href="/surveys">Surveys</Link>
+                <Link href="/app-installs">App Installs</Link>
+                <Link href="/play-games">Play Games</Link>
+                <Link href="/watch-videos">Watch Videos</Link>
+                <Link href="/offerwall">Offerwall</Link>
               </div>
             )}
 
-            <Link className="block" href="/cashout">Cashout</Link>
-            <Link className="block" href="/blog">Blog</Link>
-            <Link className="block" href="/help">Help</Link>
+            <Link href="/cashout">Cashout</Link>
+            <Link href="/blog">Blog</Link>
+            <Link href="/help">Help</Link>
 
-            {/* MOBILE THEME TOGGLE */}
-            <button
-              onClick={() => setTheme(isDark ? "light" : "dark")}
-              className={`flex items-center justify-between w-full p-3 rounded-lg border mt-4
-                ${isDark ? "border-white/20" : "border-gray-300"}
-              `}
-            >
-              <span className="flex items-center gap-2">
-                {isDark ? <Sun size={16} /> : <Moon size={16} />}
-                {isDark ? "Light Mode" : "Dark Mode"}
-              </span>
-            </button>
+            {/* ✅ THEME TOGGLE IN MIDDLE */}
+            <div className="pt-2">
+              <button
+                onClick={() => setTheme(isDark ? "light" : "dark")}
+                className={`flex items-center justify-between w-full p-3 rounded-lg border
+                  ${isDark ? "border-white/20" : "border-gray-300"}
+                `}
+              >
+                <span className="flex items-center gap-2">
+                  {isDark ? <Sun size={16} /> : <Moon size={16} />}
+                  {isDark ? "Light Mode" : "Dark Mode"}
+                </span>
+              </button>
+            </div>
 
+            {/* AUTH */}
             <div className="pt-4 flex flex-col gap-3">
               <Link className="block text-center py-2 border rounded-lg" href="/login">
                 Login
