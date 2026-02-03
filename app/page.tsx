@@ -55,13 +55,44 @@ export default function Home() {
       <LiveWithdrawals />
 
       {/* ================= TRUST / STATS ================= */}
-      <section className="py-16 bg-black/5 dark:bg-white/5">
-        <div className="max-w-7xl mx-auto px-6 grid sm:grid-cols-3 gap-8 text-center">
-          <Stat title="Users Paid" value="3.2M+" />
-          <Stat title="Total Payouts" value="$12M+" />
-          <Stat title="Trust Rating" value="4.8 ★" />
-        </div>
-      </section>
+<section className="py-16 bg-black/5 dark:bg-white/5">
+  <div className="max-w-7xl mx-auto px-6 text-center">
+    
+    {/* Section Title */}
+    <h2 className="text-3xl font-bold mb-4">
+      Trusted by Millions Worldwide
+    </h2>
+    <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-12">
+      Cashog is one of the most trusted earning platforms, paying users daily
+      across the globe with fast and secure withdrawals.
+    </p>
+
+    {/* Stats Grid */}
+    <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
+      <Stat
+        title="Total Users"
+        value="25M+"
+        description="Active users earning rewards daily"
+      />
+      <Stat
+        title="Users Paid"
+        value="3.2M+"
+        description="Members who successfully withdrew earnings"
+      />
+      <Stat
+        title="Total Payouts"
+        value="$12M+"
+        description="Rewards paid to our community"
+      />
+      <Stat
+        title="Trust Rating"
+        value="4.8 ★"
+        description="Average user rating across platforms"
+      />
+    </div>
+  </div>
+</section>
+
 
       {/* ================= PAYMENT METHODS ================= */}
       <section className="py-16 bg-black/5 dark:bg-white/5">
