@@ -57,10 +57,10 @@ export default function Home() {
             </motion.p>
 
             <motion.div variants={fadeUp} custom={3} className="flex flex-wrap gap-4">
-              {/* HERO CTA BUTTON */}
+              {/* HERO CTA BUTTON - GREEN */}
               <Link href="/signup">
                 <motion.span whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-700 to-cyan-600 px-7 py-3.5 rounded-xl font-semibold shadow-xl text-white cursor-pointer">
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-500 px-7 py-3.5 rounded-xl font-semibold shadow-xl text-white cursor-pointer">
                   Start Earning Now <ArrowRight />
                 </motion.span>
               </Link>
@@ -176,19 +176,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= FINAL CTA ================= */}
-<section className="py-20 bg-gradient-to-r from-gray-900 to-gray-800 text-white text-center rounded-2xl mx-6 md:mx-20 lg:mx-40">
-  <h2 className="text-4xl font-bold mb-6">Start Earning Real Money Today!</h2>
-  <p className="mb-8 text-lg text-gray-200">
-    Join millions of users who are already earning daily.
-  </p>
-  <Link href="/signup">
-    <motion.span whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}
-      className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 px-10 py-4 rounded-xl font-semibold shadow-lg cursor-pointer">
-      Get Started Now <ArrowRight />
-    </motion.span>
-  </Link>
-</section>
+      {/* ================= FINAL CTA - DARK BACKGROUND WITH GREEN BUTTON ================= */}
+      <section className="py-20 bg-gray-900 text-white text-center rounded-2xl mx-6 md:mx-20 lg:mx-40">
+        <h2 className="text-4xl font-bold mb-6">Start Earning Real Money Today!</h2>
+        <p className="mb-8 text-lg text-gray-200">
+          Join millions of users who are already earning daily.
+        </p>
+        <Link href="/signup">
+          <motion.span whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-500 px-10 py-4 rounded-xl font-semibold shadow-lg cursor-pointer">
+            Get Started Now <ArrowRight />
+          </motion.span>
+        </Link>
+      </section>
 
     </main>
   )
