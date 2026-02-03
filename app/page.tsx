@@ -50,7 +50,7 @@ export default function Home() {
             <motion.h1
               variants={fadeUp}
               custom={1}
-              className="text-5xl md:text-6xl font-extrabold leading-tight"
+              className="text-5xl md:text-7xl lg:text-8xl font-extrabold leading-tight"
             >
               Earn Real Money  
               <span className="block bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
@@ -61,28 +61,33 @@ export default function Home() {
             <motion.p
               variants={fadeUp}
               custom={2}
-              className="text-lg text-gray-600 dark:text-gray-300 max-w-xl"
+              className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl"
             >
               Complete offers, play games, answer surveys and cash out instantly.
               Trusted by millions worldwide.
             </motion.p>
 
-            <motion.div variants={fadeUp} custom={3} className="flex gap-4 pt-2">
-              <motion.button
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.97 }}
-                className="group flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-cyan-500 px-6 py-3 rounded-xl font-semibold shadow-xl text-white"
-              >
-                Start Earning
-                <ArrowRight className="group-hover:translate-x-1 transition" />
-              </motion.button>
+            {/* UPDATED: Buttons as Links */}
+            <motion.div variants={fadeUp} custom={3} className="flex flex-col sm:flex-row gap-4 pt-2">
+              <Link href="/start-earning" passHref>
+                <motion.a
+                  whileHover={{ scale: 1.04 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="group flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 to-cyan-500 px-6 py-3 rounded-xl font-semibold shadow-xl text-white"
+                >
+                  Start Earning
+                  <ArrowRight className="group-hover:translate-x-1 transition" />
+                </motion.a>
+              </Link>
 
-              <motion.button
-                whileHover={{ scale: 1.03 }}
-                className="px-6 py-3 rounded-xl border border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/10 transition text-gray-900 dark:text-gray-100"
-              >
-                How It Works
-              </motion.button>
+              <Link href="/how-it-works" passHref>
+                <motion.a
+                  whileHover={{ scale: 1.03 }}
+                  className="flex justify-center px-6 py-3 rounded-xl border border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/10 transition text-gray-900 dark:text-gray-100"
+                >
+                  How It Works
+                </motion.a>
+              </Link>
             </motion.div>
           </motion.div>
 
