@@ -33,8 +33,9 @@ export default function Home() {
   ]
 
   return (
-    <main className="bg-background text-foreground transition-colors duration-300">
+    <main className="transition-colors duration-300 bg-white text-gray-900 dark:bg-[#070A14] dark:text-white">
 
+      {/* HERO */}
       <HeroSection />
 
       <LiveEarnings />
@@ -42,12 +43,12 @@ export default function Home() {
       <LiveWithdrawals />
 
       {/* TRUST */}
-      <section className="py-16 bg-muted">
+      <section className="py-16 bg-gray-100 dark:bg-white/5">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold mb-4">
             Trusted by Millions Worldwide
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto mb-12">
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-12">
             Cashog is one of the most trusted earning platforms, paying users daily
             across the globe with fast and secure withdrawals.
           </p>
@@ -67,7 +68,7 @@ export default function Home() {
           <h2 className="text-4xl font-extrabold mb-4">
             Payment Methods
           </h2>
-          <p className="text-muted-foreground mb-14 max-w-2xl mx-auto">
+          <p className="text-gray-600 dark:text-gray-400 mb-14 max-w-2xl mx-auto">
             Fast, secure, and trusted payout options.
           </p>
 
@@ -81,11 +82,13 @@ export default function Home() {
             ].map((method) => (
               <div
                 key={method.name}
-                className="rounded-2xl border border-border bg-muted px-6 py-8 flex flex-col items-center hover:scale-105 transition"
+                className="rounded-2xl border border-gray-200 dark:border-white/10
+                  bg-gray-100 dark:bg-white/5 px-6 py-8
+                  flex flex-col items-center hover:scale-105 transition"
               >
                 <span className="text-4xl mb-3">{method.emoji}</span>
                 <span className="text-lg font-semibold">{method.name}</span>
-                <span className="text-sm text-muted-foreground mt-1">
+                <span className="text-sm text-gray-600 dark:text-gray-400 mt-1">
                   Instant payout
                 </span>
               </div>
@@ -102,11 +105,14 @@ export default function Home() {
             <Link
               key={title}
               href={href}
-              className="bg-muted border border-border rounded-2xl p-6 flex flex-col items-center text-center hover:scale-105 transition"
+              className="rounded-2xl p-6 flex flex-col items-center text-center
+                bg-gray-100 dark:bg-white/5
+                border border-gray-200 dark:border-white/10
+                hover:scale-105 transition"
             >
               <div className="text-4xl">{icon}</div>
               <h3 className="mt-4 text-lg font-semibold">{title}</h3>
-              <p className="mt-2 text-muted-foreground text-sm">
+              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
                 Earn by {title.toLowerCase()}
               </p>
             </Link>
@@ -115,7 +121,7 @@ export default function Home() {
       </section>
 
       {/* FEATURES */}
-      <section className="py-20 bg-muted">
+      <section className="py-20 bg-gray-100 dark:bg-white/5">
         <SectionTitle icon="🌟" text="Why Choose Us" />
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
           <Feature icon={<Zap />} title="Instant Withdrawals" />
@@ -129,7 +135,7 @@ export default function Home() {
         <h2 className="text-4xl font-bold mb-6">
           Start Earning Real Money Today!
         </h2>
-        <p className="mb-8 text-lg text-muted-foreground">
+        <p className="mb-8 text-lg text-gray-600 dark:text-gray-400">
           Join millions of users who are already earning daily.
         </p>
 
@@ -137,7 +143,9 @@ export default function Home() {
           <motion.span
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-black px-10 py-4 rounded-xl font-semibold shadow-lg"
+            className="inline-flex items-center gap-2
+              bg-green-500 hover:bg-green-600 text-black
+              px-10 py-4 rounded-xl font-semibold shadow-lg"
           >
             Get Started Now <ArrowRight />
           </motion.span>
@@ -174,20 +182,22 @@ const HeroSection = () => {
   return (
     <section className="py-24 text-center">
       <div className="max-w-4xl mx-auto px-6">
-        <h1 className="text-3xl md:text-5xl font-bold mb-2">
+
+        <h1 className="text-3xl md:text-5xl font-extrabold mb-2">
           Earn Real Money By
         </h1>
 
         <div className="relative h-[56px] md:h-[64px] mb-4">
-          <span className="invisible text-3xl md:text-5xl font-bold">
+          <span className="invisible text-3xl md:text-5xl font-extrabold">
             Watching Videos
           </span>
-          <span className="absolute inset-0 flex items-center justify-center text-3xl md:text-5xl font-bold text-cyan-500">
+          <span className="absolute inset-0 flex items-center justify-center
+            text-3xl md:text-5xl font-extrabold text-cyan-400">
             {text}
           </span>
         </div>
 
-        <p className="mb-8 text-lg text-muted-foreground max-w-2xl mx-auto">
+        <p className="mb-8 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
           Complete offers, play games, answer surveys and cash out instantly.
         </p>
 
@@ -195,11 +205,14 @@ const HeroSection = () => {
           <motion.span
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-black px-10 py-4 rounded-xl font-semibold shadow-lg"
+            className="inline-flex items-center gap-2
+              bg-green-500 hover:bg-green-600 text-black
+              px-10 py-4 rounded-xl font-semibold shadow-lg"
           >
             Start Earning Now <ArrowRight />
           </motion.span>
         </Link>
+
       </div>
     </section>
   )
