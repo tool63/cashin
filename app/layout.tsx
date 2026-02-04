@@ -1,4 +1,5 @@
 // app/layout.tsx
+
 import "../styles/globals.css"
 import { ReactNode } from "react"
 import Header from "../components/Header"
@@ -17,11 +18,17 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="transition-colors duration-300 bg-white text-gray-900 dark:bg-black dark:text-white">
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className="transition-colors duration-300"
+    >
+      <body className="min-h-screen bg-background text-foreground">
         <Providers>
           <Header />
-          <main>{children}</main>
+          <main className="min-h-[calc(100vh-160px)]">
+            {children}
+          </main>
           <Footer />
           <FloatingCTA />
         </Providers>
