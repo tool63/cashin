@@ -29,13 +29,15 @@ interface LiveUser {
   speed: number // px per frame
   highlight?: boolean
   opacity?: number
+  slideOffset?: number // horizontal slide
+  slideDir?: number // 1 = right, -1 = left
 }
 
 // Generate 100 users with random speed
 const generateUsers = (): LiveUser[] =>
   Array.from({ length: 100 }, () => {
     const c = countries[Math.floor(Math.random() * countries.length)]
-    const rowHeight = 48 // approximate row height in px
+    const rowHeight = 48
     const fps = 60
     const scrollTime = 1 + Math.random() * 11 // 1s → 12s
     const speed = rowHeight / (scrollTime * fps)
@@ -43,10 +45,12 @@ const generateUsers = (): LiveUser[] =>
       username: randomName(),
       country: c.name,
       flag: c.flag,
-      time: `${Math.floor(Math.random() * 10) + 1}s ago`, // 1s → 10s
+      time: `${Math.floor(Math.random() * 10) + 1}s ago`,
       speed,
       highlight: false,
       opacity: 1,
+      slideOffset: 0,
+      slideDir: 1,
     }
   })
 
@@ -63,16 +67,27 @@ export default function LiveJoining() {
 
       listItems.forEach((item, index) => {
         const user = users[index]
+
+        // Vertical scrolling
         let margin = parseFloat(item.style.marginBottom || "0")
         margin += user.speed
         item.style.marginBottom = `${margin}px`
 
-        // Fade effect: top visible, bottom fade
+        // Fade in/out effect
         const parentHeight = listRef.current?.offsetHeight || 1
         const itemTop = item.offsetTop - listRef.current.scrollTop
         const opacity = Math.max(0, Math.min(1, 1 - itemTop / parentHeight))
         user.opacity = opacity
         item.style.opacity = `${opacity}`
+
+        // Horizontal slide effect
+        if (user.slideOffset === undefined) user.slideOffset = 0
+        if (user.slideDir === undefined) user.slideDir = 1
+        const maxSlide = 8 // px
+        user.slideOffset += 0.1 * user.slideDir
+        if (user.slideOffset > maxSlide || user.slideOffset < -maxSlide) user.slideDir *= -1
+        const usernameSpan = item.querySelector("span.username") as HTMLSpanElement
+        if (usernameSpan) usernameSpan.style.transform = `translateX(${user.slideOffset}px)`
       })
 
       // Move last item to top when fully visible
@@ -88,10 +103,12 @@ export default function LiveJoining() {
               moved.time = `${Math.floor(Math.random() * 10) + 1}s ago`
               const rowHeight = 48
               const fps = 60
-              const scrollTime = 1 + Math.random() * 11 // 1s → 12s
+              const scrollTime = 1 + Math.random() * 11
               moved.speed = rowHeight / (scrollTime * fps)
               moved.highlight = true
               moved.opacity = 1
+              moved.slideOffset = 0
+              moved.slideDir = 1
               next.unshift(moved)
             }
             listItems.forEach((li) => (li.style.marginBottom = "0"))
@@ -130,7 +147,6 @@ export default function LiveJoining() {
       <div className="overflow-hidden h-[360px] md:h-[400px] relative">
         <ul ref={listRef} className="space-y-2">
           {users.map((user, idx) => {
-            // Alternate dark background colors for rows
             const darkBg =
               idx % 2 === 0
                 ? "bg-white/5 dark:bg-white/5"
@@ -148,7 +164,7 @@ export default function LiveJoining() {
                   }`}
                 style={{ opacity: user.opacity ?? 1 }}
               >
-                <span className="font-semibold">{user.username}</span>
+                <span className="username font-semibold">{user.username}</span>
                 <span className="flex items-center justify-center gap-2">
                   <span>{user.flag}</span>
                   <span className="hidden md:inline">{user.country}</span>
