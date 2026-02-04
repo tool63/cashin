@@ -1,4 +1,5 @@
-export const countries = [
+const names = ["Alex", "Mia", "John", "Sara", "Leo", "Emma", "Noah", "Liam"]
+const countries = [
   { name: "USA", flag: "🇺🇸" },
   { name: "UK", flag: "🇬🇧" },
   { name: "Canada", flag: "🇨🇦" },
@@ -6,18 +7,17 @@ export const countries = [
   { name: "India", flag: "🇮🇳" },
 ]
 
-export const names = ["Alex", "Mia", "John", "Sara", "Leo", "Emma", "Chris"]
+const methods = ["PayPal", "USDT", "Bitcoin", "Gift Card"]
 
-export const withdrawMethods = ["PayPal", "Crypto", "Bank", "Gift Card"]
+export const randomUser = () =>
+  names[Math.floor(Math.random() * names.length)] +
+  Math.floor(Math.random() * 1000)
 
-export const offers = ["Survey", "Game Install", "App Signup", "Quiz"]
+export const randomCountry = () =>
+  countries[Math.floor(Math.random() * countries.length)]
 
-export function baseItem() {
-  return {
-    speed: 48 / (60 * (1 + Math.random() * 10)),
-    slideOffset: 0,
-    slideDir: 1,
-    gradientOffset: Math.random() * 360,
-    time: `${Math.floor(Math.random() * 10) + 1}s ago`,
-  }
-}
+export const randomAmount = (min: number, max: number) =>
+  `$${(Math.random() * (max - min) + min).toFixed(2)}`
+
+export const randomMethod = () =>
+  methods[Math.floor(Math.random() * methods.length)]
