@@ -21,25 +21,32 @@ function randomName() {
   return names[Math.floor(Math.random() * names.length)] + numbers
 }
 
+// Random glow color generator
+const glowColors = ["#00FFFF", "#00FF00", "#FF00FF", "#FFFF00", "#FFA500", "#FF4500"]
+
 interface LiveUser {
   username: string
   country: string
   flag: string
   time: string
-  speed: number // px per frame
-  highlight?: boolean
-  opacity?: number
-  slideOffset?: number // horizontal slide
-  slideDir?: number // 1 = right, -1 = left
+  speed: number
+  slideOffset?: number
+  slideDir?: number
+  flash?: boolean
+  flagBounce?: boolean
+  glowColor?: string
+  bgSpeed?: number
+  bgIntensity?: number
+  rippleOffset?: number
 }
 
-// Generate 100 users with random speed
+// Generate 100 users
 const generateUsers = (): LiveUser[] =>
   Array.from({ length: 100 }, () => {
     const c = countries[Math.floor(Math.random() * countries.length)]
     const rowHeight = 48
     const fps = 60
-    const scrollTime = 1 + Math.random() * 11 // 1s → 12s
+    const scrollTime = 1 + Math.random() * 11
     const speed = rowHeight / (scrollTime * fps)
     return {
       username: randomName(),
@@ -47,10 +54,14 @@ const generateUsers = (): LiveUser[] =>
       flag: c.flag,
       time: `${Math.floor(Math.random() * 10) + 1}s ago`,
       speed,
-      highlight: false,
-      opacity: 1,
       slideOffset: 0,
       slideDir: 1,
+      flash: false,
+      flagBounce: false,
+      glowColor: glowColors[Math.floor(Math.random() * glowColors.length)],
+      bgSpeed: 0.5 + Math.random() * 1.5,
+      bgIntensity: 5 + Math.random() * 10,
+      rippleOffset: Math.random() * 100,
     }
   })
 
@@ -73,24 +84,35 @@ export default function LiveJoining() {
         margin += user.speed
         item.style.marginBottom = `${margin}px`
 
-        // Fade in/out effect
-        const parentHeight = listRef.current?.offsetHeight || 1
-        const itemTop = item.offsetTop - listRef.current.scrollTop
-        const opacity = Math.max(0, Math.min(1, 1 - itemTop / parentHeight))
-        user.opacity = opacity
-        item.style.opacity = `${opacity}`
-
-        // Horizontal slide effect
+        // Horizontal slide for username
         if (user.slideOffset === undefined) user.slideOffset = 0
         if (user.slideDir === undefined) user.slideDir = 1
-        const maxSlide = 8 // px
+        const maxSlide = 8
         user.slideOffset += 0.1 * user.slideDir
         if (user.slideOffset > maxSlide || user.slideOffset < -maxSlide) user.slideDir *= -1
         const usernameSpan = item.querySelector("span.username") as HTMLSpanElement
         if (usernameSpan) usernameSpan.style.transform = `translateX(${user.slideOffset}px)`
+
+        // Flag bounce
+        const flagSpan = item.querySelector("span.flag") as HTMLSpanElement
+        if (flagSpan) flagSpan.classList.toggle("animate-bounce", !!user.flagBounce)
+
+        // VIP top 3 highlight and faster pulse
+        if (index < 3) {
+          const vipSpeed = 0.3 + index * 0.1 // faster animation for VIP
+          item.style.boxShadow = `0 0 ${10 + index * 5}px ${user.glowColor}`
+          item.style.animation = `glowBg ${vipSpeed}s infinite`
+          usernameSpan.style.animation = `glowText ${vipSpeed}s infinite`
+          if (flagSpan) flagSpan.style.animation = `glowText ${vipSpeed}s infinite`
+        } else {
+          item.style.boxShadow = "none"
+          item.style.animation = `glowBg ${user.bgSpeed}s infinite`
+          usernameSpan.style.animation = `glowText ${user.bgSpeed}s infinite`
+          if (flagSpan) flagSpan.style.animation = `glowText ${user.bgSpeed}s infinite`
+        }
       })
 
-      // Move last item to top when fully visible
+      // Move last item to top
       const lastItem = listItems[listItems.length - 1]
       if (lastItem) {
         const lastHeight = lastItem.offsetHeight
@@ -105,10 +127,14 @@ export default function LiveJoining() {
               const fps = 60
               const scrollTime = 1 + Math.random() * 11
               moved.speed = rowHeight / (scrollTime * fps)
-              moved.highlight = true
-              moved.opacity = 1
               moved.slideOffset = 0
               moved.slideDir = 1
+              moved.flash = true
+              moved.flagBounce = true
+              moved.glowColor = glowColors[Math.floor(Math.random() * glowColors.length)]
+              moved.bgSpeed = 0.5 + Math.random() * 1.5
+              moved.bgIntensity = 5 + Math.random() * 10
+              moved.rippleOffset = Math.random() * 100
               next.unshift(moved)
             }
             listItems.forEach((li) => (li.style.marginBottom = "0"))
@@ -117,7 +143,9 @@ export default function LiveJoining() {
 
           setTimeout(() => {
             setUsers((prev) =>
-              prev.map((u, i) => (i === 0 ? { ...u, highlight: false } : u))
+              prev.map((u, i) =>
+                i === 0 ? { ...u, flash: false, flagBounce: false } : u
+              )
             )
           }, 700)
         }
@@ -146,35 +174,59 @@ export default function LiveJoining() {
       {/* Auto-scrolling list */}
       <div className="overflow-hidden h-[360px] md:h-[400px] relative">
         <ul ref={listRef} className="space-y-2">
-          {users.map((user, idx) => {
-            const darkBg =
-              idx % 2 === 0
-                ? "bg-white/5 dark:bg-white/5"
-                : "bg-white/10 dark:bg-white/10"
+          {users.map((user, idx) => (
+            <li
+              key={idx}
+              className={`flex justify-between items-center border rounded-xl p-3 text-sm md:text-base relative`}
+              style={{
+                "--glow-color": user.glowColor,
+                "--bg-speed": `${user.bgSpeed}s`,
+                "--bg-intensity": `${user.bgIntensity}px`,
+                "--ripple-offset": `${user.rippleOffset}px`,
+              } as any}
+            >
+              <span className="username font-semibold z-10 relative">{user.username}</span>
+              <span className="flex items-center justify-center gap-2 z-10 relative">
+                <span className="flag">{user.flag}</span>
+                <span className="hidden md:inline">{user.country}</span>
+              </span>
+              <span className="text-gray-600 dark:text-gray-400 z-10 relative">{user.time}</span>
 
-            return (
-              <li
-                key={idx}
-                className={`flex justify-between items-center border rounded-xl p-3 text-sm md:text-base
-                  transition-all duration-500
-                  ${
-                    user.highlight
-                      ? "bg-green-400/50 dark:bg-green-500/50 border-green-300 dark:border-green-400 shadow-lg shadow-green-400/50 animate-pulse"
-                      : `${darkBg} border-gray-200 dark:border-white/10`
-                  }`}
-                style={{ opacity: user.opacity ?? 1 }}
-              >
-                <span className="username font-semibold">{user.username}</span>
-                <span className="flex items-center justify-center gap-2">
-                  <span>{user.flag}</span>
-                  <span className="hidden md:inline">{user.country}</span>
-                </span>
-                <span className="text-gray-600 dark:text-gray-400">{user.time}</span>
-              </li>
-            )
-          })}
+              {/* Neon ripple effect */}
+              <span
+                className="absolute inset-0 rounded-xl opacity-40 pointer-events-none"
+                style={{
+                  background: `radial-gradient(circle at var(--ripple-offset) 50%, var(--glow-color), transparent 70%)`,
+                  animation: `ripple var(--bg-speed) infinite`,
+                }}
+              ></span>
+            </li>
+          ))}
         </ul>
       </div>
+
+      <style jsx>{`
+        @keyframes glowText {
+          0%,100% { text-shadow: 0 0 0px var(--glow-color); }
+          50% { text-shadow: 0 0 var(--bg-intensity) var(--glow-color); }
+        }
+        @keyframes glowBg {
+          0%,100% { background-color: rgba(0,0,0,0.05); }
+          50% { background-color: var(--glow-color, #00FFFF)/20; }
+        }
+        @keyframes ripple {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        li span.username,
+        li span.flag {
+          animation: glowText var(--bg-speed) infinite;
+        }
+        li {
+          animation: glowBg var(--bg-speed) infinite;
+        }
+      `}</style>
     </div>
   )
 }
