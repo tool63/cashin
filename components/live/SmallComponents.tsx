@@ -1,39 +1,46 @@
+"use client"
+
 import React from "react"
+import { ReactNode } from "react"
 
 /* ================= LIVE WRAPPER ================= */
-export const LiveWrapper: React.FC<{ title: string; children: React.ReactNode }> = ({
-  title,
-  children,
-}) => {
+export function LiveWrapper({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <div className="max-w-7xl mx-auto px-6 py-10 bg-gray-100 dark:bg-white/5 rounded-2xl shadow-md mb-8">
-      <h3 className="text-xl font-semibold mb-4">{title}</h3>
-      <div className="space-y-2">{children}</div>
+    <div className="bg-gray-50 dark:bg-[#111827] rounded-xl p-6 shadow-md">
+      <h3 className="text-xl font-bold mb-4">{title}</h3>
+      <div className="flex flex-col gap-2">{children}</div>
     </div>
   )
 }
 
 /* ================= SECTION TITLE ================= */
-export const SectionTitle: React.FC<{ icon: string; text: string }> = ({ icon, text }) => (
-  <div className="text-center mb-8">
-    <h2 className="text-3xl font-bold">
-      {icon} {text}
-    </h2>
-  </div>
-)
+export function SectionTitle({ icon, text }: { icon: string; text: string }) {
+  return (
+    <div className="text-center mb-10">
+      <h2 className="text-3xl font-bold flex items-center justify-center gap-2">
+        <span>{icon}</span> {text}
+      </h2>
+      <div className="mt-2 w-24 h-1 bg-cyan-400 mx-auto rounded-full"></div>
+    </div>
+  )
+}
 
-/* ================= STAT CARD ================= */
-export const Stat: React.FC<{ title: string; value: string }> = ({ title, value }) => (
-  <div className="text-center p-4 bg-white dark:bg-[#111827] rounded-xl shadow">
-    <h4 className="text-lg font-semibold">{title}</h4>
-    <p className="text-2xl font-bold mt-2">{value}</p>
-  </div>
-)
+/* ================= STAT ================= */
+export function Stat({ title, value }: { title: string; value: string }) {
+  return (
+    <div className="bg-white dark:bg-[#111827] p-6 rounded-xl shadow-md flex flex-col items-center">
+      <span className="text-2xl font-bold">{value}</span>
+      <span className="text-gray-600 dark:text-gray-400 mt-1">{title}</span>
+    </div>
+  )
+}
 
-/* ================= FEATURE CARD ================= */
-export const Feature: React.FC<{ icon: React.ReactNode; title: string }> = ({ icon, title }) => (
-  <div className="p-6 bg-white dark:bg-[#111827] rounded-xl shadow flex flex-col items-center">
-    <div className="text-4xl mb-4">{icon}</div>
-    <h4 className="font-semibold">{title}</h4>
-  </div>
-)
+/* ================= FEATURE ================= */
+export function Feature({ icon, title }: { icon: ReactNode; title: string }) {
+  return (
+    <div className="bg-white dark:bg-[#111827] p-6 rounded-xl shadow-md flex flex-col items-center text-center">
+      <div className="text-4xl mb-4">{icon}</div>
+      <h3 className="text-lg font-semibold">{title}</h3>
+    </div>
+  )
+}
