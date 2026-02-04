@@ -1,5 +1,5 @@
 import React from "react"
-import { LiveWrapper } from "./SmallComponents" // ✅ Correct import
+import { LiveWrapper } from "./SmallComponents" // ✅ Import LiveWrapper
 
 export default function LiveJoining() {
   const items = [
@@ -11,10 +11,7 @@ export default function LiveJoining() {
   return (
     <LiveWrapper title="🔥 Live Joining">
       {items.map((i) => (
-        <div
-          key={i.id}
-          className="flex justify-between p-2 bg-white dark:bg-[#111827] rounded-md"
-        >
+        <div key={i.id} className="flex justify-between p-2 bg-white dark:bg-[#111827] rounded-md">
           <span>{i.flag} {i.user}</span>
         </div>
       ))}
