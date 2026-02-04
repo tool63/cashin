@@ -138,7 +138,7 @@ export default function Home() {
           <motion.span
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 px-10 py-4 rounded-xl font-semibold shadow-lg"
+            className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-black px-10 py-4 rounded-xl font-semibold shadow-lg"
           >
             Get Started Now <ArrowRight />
           </motion.span>
@@ -149,7 +149,7 @@ export default function Home() {
   )
 }
 
-/* ================= HERO SECTION (MATCHES FINAL CTA STYLE) ================= */
+/* ================= HERO SECTION ================= */
 const HeroSection = () => {
   const phrases = ["Surveys", "App Installs", "Playing Games", "Watching Videos"]
   const [current, setCurrent] = useState(0)
@@ -198,7 +198,7 @@ const HeroSection = () => {
           <motion.span
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 px-10 py-4 rounded-xl font-semibold shadow-lg"
+            className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-black px-10 py-4 rounded-xl font-semibold shadow-lg"
           >
             Start Earning Now <ArrowRight />
           </motion.span>
