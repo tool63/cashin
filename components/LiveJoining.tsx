@@ -26,6 +26,8 @@ interface LiveUser {
   country: string
   flag: string
   time: string
+  speed: number // unique speed per row
+  highlight?: boolean // flash effect
 }
 
 // Generate 100 users
@@ -36,7 +38,9 @@ const generateUsers = (): LiveUser[] =>
       username: randomName(),
       country: c.name,
       flag: c.flag,
-      time: `${Math.floor(Math.random() * 60) + 1}s ago`,
+      time: `${Math.floor(Math.random() * 10) + 1}s ago`,
+      speed: 0.3 + Math.random() * 1.2,
+      highlight: false,
     }
   })
 
@@ -50,40 +54,51 @@ export default function LiveJoining() {
     const scrollStep = () => {
       if (!listRef.current) return
 
-      const last = listRef.current.children[listRef.current.children.length - 1] as HTMLLIElement
-      if (!last) return
+      const listItems = Array.from(listRef.current.children) as HTMLLIElement[]
 
-      // Move last item margin bottom up (negative) to create scroll down effect
-      last.style.marginBottom = `${(parseFloat(last.style.marginBottom || "0") + 1).toFixed(2)}px`
+      listItems.forEach((item, index) => {
+        const user = users[index]
+        const currentMargin = parseFloat(item.style.marginBottom || "0")
+        item.style.marginBottom = `${(currentMargin + user.speed).toFixed(2)}px`
+      })
 
-      const height = last.offsetHeight
+      const lastItem = listItems[listItems.length - 1]
+      if (lastItem) {
+        const lastHeight = lastItem.offsetHeight
+        const lastMargin = parseFloat(lastItem.style.marginBottom || "0")
 
-      // When last item fully visible, move it to top
-      if (parseFloat(last.style.marginBottom) >= height) {
-        last.style.marginBottom = "0"
-        setUsers((prev) => {
-          const next = [...prev]
-          const moved = next.pop()
-          if (moved) {
-            // Update time to random seconds
-            moved.time = `${Math.floor(Math.random() * 60) + 1}s ago`
-            next.unshift(moved)
-          }
-          return next
-        })
+        if (lastMargin >= lastHeight) {
+          // Move last item to top
+          setUsers((prev) => {
+            const next = [...prev]
+            const moved = next.pop()
+            if (moved) {
+              moved.time = `${Math.floor(Math.random() * 10) + 1}s ago`
+              moved.speed = 0.3 + Math.random() * 1.2
+              moved.highlight = true // trigger flash
+              next.unshift(moved)
+            }
+
+            // reset margin for all
+            listItems.forEach((li) => (li.style.marginBottom = "0"))
+            return next
+          })
+
+          // Remove highlight after 700ms
+          setTimeout(() => {
+            setUsers((prev) =>
+              prev.map((u, i) => (i === 0 ? { ...u, highlight: false } : u))
+            )
+          }, 700)
+        }
       }
-
-      // Random speed between 0.5px to 1.5px per frame
-      const randomSpeed = 0.5 + Math.random()
-      last.style.marginBottom = `${(parseFloat(last.style.marginBottom || "0") + randomSpeed).toFixed(2)}px`
 
       animationFrame = requestAnimationFrame(scrollStep)
     }
 
     animationFrame = requestAnimationFrame(scrollStep)
-
     return () => cancelAnimationFrame(animationFrame)
-  }, [])
+  }, [users])
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">
@@ -104,8 +119,13 @@ export default function LiveJoining() {
           {users.map((user, idx) => (
             <li
               key={idx}
-              className="flex justify-between items-center bg-gray-100 dark:bg-white/5
-                border border-gray-200 dark:border-white/10 rounded-xl p-3 text-sm md:text-base"
+              className={`flex justify-between items-center border rounded-xl p-3 text-sm md:text-base
+                ${
+                  user.highlight
+                    ? "bg-green-400/40 dark:bg-green-500/40 animate-pulse"
+                    : "bg-gray-100 dark:bg-white/5"
+                }
+                border-gray-200 dark:border-white/10 transition-colors duration-500`}
             >
               <span className="font-semibold">{user.username}</span>
               <span className="flex items-center justify-center gap-2">
