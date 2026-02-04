@@ -1,42 +1,19 @@
 "use client"
 
-import { useState } from "react"
-import LiveEngine from "./engine/LiveEngine"
-import { countries, names, baseItem } from "./engine/liveUtils"
+import { useLiveEngine } from "./engine/LiveEngine"
 
 export default function LiveJoining() {
-  const [items, setItems] = useState(
-    Array.from({ length: 80 }, () => {
-      const c = countries[Math.floor(Math.random() * countries.length)]
-      return {
-        username: names[Math.floor(Math.random() * names.length)] + Math.floor(Math.random() * 99),
-        country: c.name,
-        flag: c.flag,
-        ...baseItem(),
-      }
-    })
-  )
+  const items = useLiveEngine("join")
 
   return (
-    <section className="max-w-7xl mx-auto px-6 py-10">
-      <h3 className="text-2xl font-bold text-center text-white mb-6">
-        Live Joining
-      </h3>
-
-      <LiveEngine
-        items={items}
-        setItems={setItems}
-        renderRow={(u: any) => (
-          <div className="flex justify-between items-center text-white">
-            <span className="username font-semibold">{u.username}</span>
-            <span className="flex gap-2 items-center">
-              {u.flag}
-              <span className="hidden md:inline">{u.country}</span>
-            </span>
-            <span className="text-gray-300">{u.time}</span>
-          </div>
-        )}
-      />
-    </section>
+    <LiveWrapper title="🔥 Live Joining">
+      {items.map((i) => (
+        <Row key={i.id}>
+          <span>{i.flag} {i.user}</span>
+          <span className="text-purple-400">Joined</span>
+          <span>{i.time}</span>
+        </Row>
+      ))}
+    </LiveWrapper>
   )
 }
