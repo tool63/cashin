@@ -1,18 +1,22 @@
-"use client"
-
-import { useLiveEngine } from "./engine/LiveEngine"
+import React from "react"
+import { LiveWrapper } from "./SmallComponents" // ✅ Correct import
 
 export default function LiveJoining() {
-  const items = useLiveEngine("join")
+  const items = [
+    { id: 1, flag: "🇺🇸", user: "JohnDoe" },
+    { id: 2, flag: "🇬🇧", user: "JaneSmith" },
+    { id: 3, flag: "🇨🇦", user: "Alex" },
+  ]
 
   return (
     <LiveWrapper title="🔥 Live Joining">
       {items.map((i) => (
-        <Row key={i.id}>
+        <div
+          key={i.id}
+          className="flex justify-between p-2 bg-white dark:bg-[#111827] rounded-md"
+        >
           <span>{i.flag} {i.user}</span>
-          <span className="text-purple-400">Joined</span>
-          <span>{i.time}</span>
-        </Row>
+        </div>
       ))}
     </LiveWrapper>
   )
