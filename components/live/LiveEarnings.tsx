@@ -1,10 +1,11 @@
 import React from "react"
-import { LiveWrapper } from "./SmallComponents"  // ✅ Correct import
+import { LiveWrapper } from "./SmallComponents" // ✅ Import LiveWrapper
 
 export default function LiveEarnings() {
   const items = [
-    { id: 1, flag: "🇺🇸", user: "User123", amount: "$5.20" },
-    { id: 2, flag: "🇬🇧", user: "User456", amount: "$3.80" },
+    { id: 1, flag: "🇺🇸", user: "JohnDoe" },
+    { id: 2, flag: "🇬🇧", user: "JaneSmith" },
+    { id: 3, flag: "🇨🇦", user: "Alex" },
   ]
 
   return (
@@ -12,7 +13,6 @@ export default function LiveEarnings() {
       {items.map((i) => (
         <div key={i.id} className="flex justify-between p-2 bg-white dark:bg-[#111827] rounded-md">
           <span>{i.flag} {i.user}</span>
-          <span className="font-semibold">{i.amount}</span>
         </div>
       ))}
     </LiveWrapper>
