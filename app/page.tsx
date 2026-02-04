@@ -5,11 +5,14 @@ import { motion } from "framer-motion"
 import { ArrowRight, ShieldCheck, Wallet, Zap } from "lucide-react"
 import Link from "next/link"
 
-import LiveEarnings from "../components/LiveEarnings"
-import LiveWithdrawals from "../components/LiveWithdrawals"
-import LiveOfferCompletion from "../components/LiveOfferCompletion"
-import LiveJoining from "../components/LiveJoining" // Make sure this file exists
-import { SectionTitle, Stat, Feature } from "../components/SmallComponents"
+/* ================= LIVE SECTIONS ================= */
+import LiveEarnings from "@/components/live/LiveEarnings"
+import LiveWithdrawals from "@/components/live/LiveWithdrawals"
+import LiveOfferCompletion from "@/components/live/LiveOfferCompletion"
+import LiveJoining from "@/components/live/LiveJoining"
+
+/* ================= SMALL COMPONENTS ================= */
+import { SectionTitle, Stat, Feature } from "@/components/SmallComponents"
 
 /* ================= HERO SECTION ================= */
 const HeroSection = () => {
@@ -31,6 +34,7 @@ const HeroSection = () => {
         clearInterval(interval)
       }
     }, 90)
+
     return () => clearInterval(interval)
   }, [current])
 
@@ -46,8 +50,10 @@ const HeroSection = () => {
           <span className="invisible text-3xl md:text-5xl font-extrabold">
             Watching Videos
           </span>
-          <span className="absolute inset-0 flex items-center justify-center
-            text-3xl md:text-5xl font-extrabold text-cyan-400">
+          <span
+            className="absolute inset-0 flex items-center justify-center
+              text-3xl md:text-5xl font-extrabold text-cyan-400"
+          >
             {text}
           </span>
         </div>
@@ -116,10 +122,10 @@ export default function Home() {
       </section>
 
       <section className="py-16 bg-gray-100 dark:bg-white/5">
-        <LiveJoining /> {/* NEW LIVE JOINING SECTION */}
+        <LiveJoining />
       </section>
 
-      {/* TRUST */}
+      {/* ================= TRUST ================= */}
       <section className="py-16 bg-gray-100 dark:bg-white/5">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold mb-4">
@@ -139,7 +145,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PAYMENTS */}
+      {/* ================= PAYMENTS ================= */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-extrabold mb-4">
@@ -174,7 +180,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TASKS */}
+      {/* ================= TASKS ================= */}
       <section className="max-w-7xl mx-auto px-6 py-16">
         <SectionTitle icon="🎯" text="Earn Money Tasks" />
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -197,7 +203,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FEATURES */}
+      {/* ================= FEATURES ================= */}
       <section className="py-20 bg-gray-100 dark:bg-white/5">
         <SectionTitle icon="🌟" text="Why Choose Us" />
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
@@ -207,7 +213,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FINAL CTA */}
+      {/* ================= FINAL CTA ================= */}
       <section className="py-20 text-center">
         <h2 className="text-4xl font-bold mb-6">
           Start Earning Real Money Today!
