@@ -1,5 +1,9 @@
-const names = ["Alex", "Mia", "John", "Sara", "Leo", "Emma", "Noah", "Liam", "Olivia", "Chris"]
-const countries = [
+export const names = [
+  "Alex", "Mia", "John", "Sara", "Leo",
+  "Emma", "Noah", "Liam", "Olivia", "Chris",
+]
+
+export const countries = [
   { name: "USA", flag: "🇺🇸" },
   { name: "UK", flag: "🇬🇧" },
   { name: "Canada", flag: "🇨🇦" },
@@ -10,12 +14,16 @@ const countries = [
   { name: "Brazil", flag: "🇧🇷" },
 ]
 
-const methods = ["PayPal", "USDT", "Bitcoin", "Gift Card"]
+export const methods = ["PayPal", "USDT", "Bitcoin", "Gift Card"]
 
-export const glowColors = ["#ff00ff", "#00ffff", "#00ff00", "#ffff00", "#ffa500", "#ff4500"]
+export const glowColors = [
+  "#ff00ff", "#00ffff", "#00ff00",
+  "#ffff00", "#ffa500", "#ff4500",
+]
 
 export const randomUser = () =>
-  names[Math.floor(Math.random() * names.length)] + Math.floor(Math.random() * 1000)
+  names[Math.floor(Math.random() * names.length)] +
+  Math.floor(Math.random() * 100)
 
 export const randomCountry = () =>
   countries[Math.floor(Math.random() * countries.length)]
