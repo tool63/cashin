@@ -22,7 +22,7 @@ function randomName() {
 }
 
 // Random glow color generator
-const glowColors = ["#00FFFF", "#00FF00", "#FF00FF", "#FFFF00", "#FFA500", "#FF4500"]
+const glowColors = ["#ff00ff", "#00ffff", "#00ff00", "#ffff00", "#ffa500", "#ff4500"]
 
 interface LiveUser {
   username: string
@@ -38,6 +38,8 @@ interface LiveUser {
   bgSpeed?: number
   bgIntensity?: number
   rippleOffset?: number
+  spark?: boolean
+  gradientOffset?: number
 }
 
 // Generate 100 users
@@ -59,9 +61,11 @@ const generateUsers = (): LiveUser[] =>
       flash: false,
       flagBounce: false,
       glowColor: glowColors[Math.floor(Math.random() * glowColors.length)],
-      bgSpeed: 0.5 + Math.random() * 1.5,
+      bgSpeed: 1 + Math.random() * 2,
       bgIntensity: 5 + Math.random() * 10,
       rippleOffset: Math.random() * 100,
+      spark: false,
+      gradientOffset: Math.random() * 360,
     }
   })
 
@@ -97,18 +101,17 @@ export default function LiveJoining() {
         const flagSpan = item.querySelector("span.flag") as HTMLSpanElement
         if (flagSpan) flagSpan.classList.toggle("animate-bounce", !!user.flagBounce)
 
-        // VIP top 3 highlight and faster pulse
-        if (index < 3) {
-          const vipSpeed = 0.3 + index * 0.1 // faster animation for VIP
-          item.style.boxShadow = `0 0 ${10 + index * 5}px ${user.glowColor}`
-          item.style.animation = `glowBg ${vipSpeed}s infinite`
-          usernameSpan.style.animation = `glowText ${vipSpeed}s infinite`
-          if (flagSpan) flagSpan.style.animation = `glowText ${vipSpeed}s infinite`
-        } else {
-          item.style.boxShadow = "none"
-          item.style.animation = `glowBg ${user.bgSpeed}s infinite`
-          usernameSpan.style.animation = `glowText ${user.bgSpeed}s infinite`
-          if (flagSpan) flagSpan.style.animation = `glowText ${user.bgSpeed}s infinite`
+        // Spark flicker
+        if (user.spark && Math.random() < 0.05) {
+          item.classList.add("spark-flicker")
+          setTimeout(() => item.classList.remove("spark-flicker"), 200)
+        }
+
+        // Rainbow gradient background per row
+        if (user.gradientOffset !== undefined) {
+          user.gradientOffset += 0.5
+          const gradient = `linear-gradient(90deg, hsl(${user.gradientOffset}, 100%, 50%), hsl(${(user.gradientOffset + 120) % 360}, 100%, 50%), hsl(${(user.gradientOffset + 240) % 360}, 100%, 50%))`
+          item.style.background = gradient
         }
       })
 
@@ -132,9 +135,11 @@ export default function LiveJoining() {
               moved.flash = true
               moved.flagBounce = true
               moved.glowColor = glowColors[Math.floor(Math.random() * glowColors.length)]
-              moved.bgSpeed = 0.5 + Math.random() * 1.5
+              moved.bgSpeed = 1 + Math.random() * 2
               moved.bgIntensity = 5 + Math.random() * 10
               moved.rippleOffset = Math.random() * 100
+              moved.spark = true
+              moved.gradientOffset = Math.random() * 360
               next.unshift(moved)
             }
             listItems.forEach((li) => (li.style.marginBottom = "0"))
@@ -144,7 +149,7 @@ export default function LiveJoining() {
           setTimeout(() => {
             setUsers((prev) =>
               prev.map((u, i) =>
-                i === 0 ? { ...u, flash: false, flagBounce: false } : u
+                i === 0 ? { ...u, flash: false, flagBounce: false, spark: false } : u
               )
             )
           }, 700)
@@ -160,44 +165,36 @@ export default function LiveJoining() {
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">
-      <h3 className="text-xl md:text-2xl font-bold mb-6 text-center">
+      <h3 className="text-xl md:text-2xl font-bold mb-6 text-center text-white">
         Live Joining
       </h3>
 
-      {/* Table header */}
-      <div className="grid grid-cols-3 gap-4 md:grid-cols-3 text-center mb-2">
-        <span className="font-semibold hidden md:block">Username</span>
-        <span className="font-semibold hidden md:block">Country</span>
-        <span className="font-semibold hidden md:block">Time</span>
-      </div>
+      <div className="overflow-hidden h-[360px] md:h-[400px] relative rounded-xl px-2 py-2">
+        <div className="grid grid-cols-3 gap-4 md:grid-cols-3 text-center mb-2 text-white font-semibold">
+          <span className="hidden md:block">Username</span>
+          <span className="hidden md:block">Country</span>
+          <span className="hidden md:block">Time</span>
+        </div>
 
-      {/* Auto-scrolling list */}
-      <div className="overflow-hidden h-[360px] md:h-[400px] relative">
-        <ul ref={listRef} className="space-y-2">
+        <ul ref={listRef} className="space-y-2 relative z-10">
           {users.map((user, idx) => (
             <li
               key={idx}
               className={`flex justify-between items-center border rounded-xl p-3 text-sm md:text-base relative`}
-              style={{
-                "--glow-color": user.glowColor,
-                "--bg-speed": `${user.bgSpeed}s`,
-                "--bg-intensity": `${user.bgIntensity}px`,
-                "--ripple-offset": `${user.rippleOffset}px`,
-              } as any}
             >
               <span className="username font-semibold z-10 relative">{user.username}</span>
               <span className="flex items-center justify-center gap-2 z-10 relative">
                 <span className="flag">{user.flag}</span>
                 <span className="hidden md:inline">{user.country}</span>
               </span>
-              <span className="text-gray-600 dark:text-gray-400 z-10 relative">{user.time}</span>
+              <span className="text-gray-200 dark:text-gray-400 z-10 relative">{user.time}</span>
 
-              {/* Neon ripple effect */}
+              {/* Spark overlay */}
               <span
                 className="absolute inset-0 rounded-xl opacity-40 pointer-events-none"
                 style={{
-                  background: `radial-gradient(circle at var(--ripple-offset) 50%, var(--glow-color), transparent 70%)`,
-                  animation: `ripple var(--bg-speed) infinite`,
+                  background: `radial-gradient(circle at 50% 50%, rgba(255,255,255,0.3), transparent 70%)`,
+                  animation: `ripple ${user.bgSpeed}s infinite`,
                 }}
               ></span>
             </li>
@@ -206,25 +203,19 @@ export default function LiveJoining() {
       </div>
 
       <style jsx>{`
-        @keyframes glowText {
-          0%,100% { text-shadow: 0 0 0px var(--glow-color); }
-          50% { text-shadow: 0 0 var(--bg-intensity) var(--glow-color); }
-        }
-        @keyframes glowBg {
-          0%,100% { background-color: rgba(0,0,0,0.05); }
-          50% { background-color: var(--glow-color, #00FFFF)/20; }
-        }
         @keyframes ripple {
           0% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
           100% { background-position: 0% 50%; }
         }
-        li span.username,
-        li span.flag {
-          animation: glowText var(--bg-speed) infinite;
+        /* Spark flicker effect */
+        .spark-flicker {
+          animation: spark 0.2s ease-in-out;
         }
-        li {
-          animation: glowBg var(--bg-speed) infinite;
+        @keyframes spark {
+          0% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.2) rotate(1deg); opacity: 0.8; }
+          100% { transform: scale(1); opacity: 1; }
         }
       `}</style>
     </div>
