@@ -2,14 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  webpack(config) {
-    // Add alias for '@' to point to the project root
-    config.resolve.alias = {
-      ...(config.resolve.alias || {}),
-      "@": require("path").resolve(__dirname),
-    }
-    return config
-  },
-}
+  experimental: {
+    appDir: true
+  }
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
