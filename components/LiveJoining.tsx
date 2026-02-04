@@ -38,7 +38,7 @@ const generateUsers = (): LiveUser[] =>
       username: randomName(),
       country: c.name,
       flag: c.flag,
-      time: `${Math.floor(Math.random() * 10) + 1}s ago`,
+      time: `${Math.floor(Math.random() * 10) + 1}s ago`, // 1s → 10s
       speed: 0.3 + Math.random() * 1.2,
       highlight: false,
     }
@@ -68,18 +68,18 @@ export default function LiveJoining() {
         const lastMargin = parseFloat(lastItem.style.marginBottom || "0")
 
         if (lastMargin >= lastHeight) {
-          // Move last item to top
+          // Move last item to top with highlight
           setUsers((prev) => {
             const next = [...prev]
             const moved = next.pop()
             if (moved) {
               moved.time = `${Math.floor(Math.random() * 10) + 1}s ago`
               moved.speed = 0.3 + Math.random() * 1.2
-              moved.highlight = true // trigger flash
+              moved.highlight = true
               next.unshift(moved)
             }
 
-            // reset margin for all
+            // Reset margin for all
             listItems.forEach((li) => (li.style.marginBottom = "0"))
             return next
           })
@@ -120,12 +120,12 @@ export default function LiveJoining() {
             <li
               key={idx}
               className={`flex justify-between items-center border rounded-xl p-3 text-sm md:text-base
+                transition-colors duration-500
                 ${
                   user.highlight
-                    ? "bg-green-400/40 dark:bg-green-500/40 animate-pulse"
-                    : "bg-gray-100 dark:bg-white/5"
-                }
-                border-gray-200 dark:border-white/10 transition-colors duration-500`}
+                    ? "bg-green-400/50 dark:bg-green-500/50 border-green-300 dark:border-green-400 shadow-lg shadow-green-400/50 animate-pulse"
+                    : "bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10"
+                }`}
             >
               <span className="font-semibold">{user.username}</span>
               <span className="flex items-center justify-center gap-2">
