@@ -1,62 +1,44 @@
 "use client"
 
 import React from "react"
+import clsx from "clsx"
 
-/* ---------- SECTION TITLE ---------- */
-export function SectionTitle({ icon, text }: { icon: string; text: string }) {
-  return (
-    <div className="flex items-center justify-center gap-3 mb-8">
-      <span className="text-2xl">{icon}</span>
-      <h2 className="text-3xl font-bold text-gray-900 dark:text-white">{text}</h2>
-    </div>
-  )
+type LiveCardProps = {
+  children: React.ReactNode
+  className?: string
 }
 
-/* ---------- STAT ---------- */
-export function Stat({
-  title,
-  value,
-  description, // optional
-}: {
-  title: string
-  value: string
-  description?: string
-}) {
+export function LiveCard({ children, className }: LiveCardProps) {
   return (
-    <div className="bg-white/10 dark:bg-black/10 border border-black/10 dark:border-white/10 rounded-xl p-6 flex flex-col items-center justify-center text-center shadow-md">
-      <span className="text-3xl font-bold text-gray-900 dark:text-white">{value}</span>
-      <span className="mt-2 text-gray-600 dark:text-gray-400">{title}</span>
-      {description && (
-        <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">{description}</p>
+    <div
+      className={clsx(
+        "flex items-center gap-2 rounded-xl border",
+        "border-black/10 dark:border-white/10",
+        "bg-white/80 dark:bg-black/50 backdrop-blur",
+        "px-4 py-2 text-sm shadow-sm",
+        "transition-all duration-300",
+        className
       )}
-    </div>
-  )
-}
-
-/* ---------- BADGE ---------- */
-export function Badge({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl shadow-lg p-6 flex flex-col items-center justify-center text-gray-900 dark:text-white hover:scale-105 hover:shadow-2xl transition-transform duration-300 backdrop-blur-md cursor-pointer group">
+    >
       {children}
     </div>
   )
 }
 
-/* ---------- FEATURE ---------- */
-export function Feature({
-  icon,
+/* Optional section wrapper (use if needed) */
+export function LiveSection({
   title,
-  description,
+  children,
 }: {
-  icon: React.ReactNode
   title: string
-  description?: string
+  children: React.ReactNode
 }) {
   return (
-    <div className="bg-white/10 dark:bg-black/10 border border-black/10 dark:border-white/10 rounded-2xl p-6 flex flex-col items-center text-center hover:scale-105 hover:shadow-lg transition-transform duration-300">
-      <div className="text-4xl mb-4 text-emerald-500">{icon}</div>
-      <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">{title}</h3>
-      {description && <p className="text-sm text-gray-600 dark:text-gray-400">{description}</p>}
+    <div className="space-y-4">
+      <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+        {title}
+      </h3>
+      <div className="space-y-3">{children}</div>
     </div>
   )
 }
