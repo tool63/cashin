@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 // Countries and flags
 const countries = [
@@ -28,7 +28,7 @@ interface LiveUser {
   time: string
 }
 
-// Generate 100 fake users
+// Generate 100 users
 const generateUsers = (): LiveUser[] =>
   Array.from({ length: 100 }, () => {
     const c = countries[Math.floor(Math.random() * countries.length)]
@@ -42,32 +42,49 @@ const generateUsers = (): LiveUser[] =>
 
 export default function LiveJoining() {
   const [users, setUsers] = useState<LiveUser[]>(generateUsers())
+  const listRef = useRef<HTMLUListElement>(null)
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout
+    let animationFrame: number
 
-    const scrollNext = () => {
-      setUsers((prev) => {
-        const next = [...prev]
-        const first = next.shift()
-        if (first) {
-          first.time =
-            Math.random() > 0.5
-              ? "Just now"
-              : `${Math.floor(Math.random() * 5) + 1} min ago`
-          next.push(first)
-        }
-        return next
-      })
+    const scrollStep = () => {
+      if (!listRef.current) return
 
-      // Call again after a random interval between 1s and 3s
-      const randomInterval = Math.floor(Math.random() * 2000) + 1000
-      timeout = setTimeout(scrollNext, randomInterval)
+      const first = listRef.current.children[0] as HTMLLIElement
+      if (!first) return
+
+      // Move list up 1px
+      first.style.marginTop = `${(parseInt(first.style.marginTop || "0") - 1)}px`
+
+      const height = first.offsetHeight
+
+      // When the first item is fully out, move it to the bottom
+      if (Math.abs(parseInt(first.style.marginTop || "0")) >= height) {
+        first.style.marginTop = "0"
+        setUsers((prev) => {
+          const next = [...prev]
+          const moved = next.shift()
+          if (moved) {
+            moved.time =
+              Math.random() > 0.5
+                ? "Just now"
+                : `${Math.floor(Math.random() * 5) + 1} min ago`
+            next.push(moved)
+          }
+          return next
+        })
+      }
+
+      // Random speed between 0.5px to 1.5px per frame
+      const randomSpeed = 0.5 + Math.random()
+      first.style.marginTop = `${(parseInt(first.style.marginTop || "0") - randomSpeed).toFixed(2)}px`
+
+      animationFrame = requestAnimationFrame(scrollStep)
     }
 
-    scrollNext()
+    animationFrame = requestAnimationFrame(scrollStep)
 
-    return () => clearTimeout(timeout)
+    return () => cancelAnimationFrame(animationFrame)
   }, [])
 
   return (
@@ -85,12 +102,12 @@ export default function LiveJoining() {
 
       {/* Auto-scrolling list */}
       <div className="overflow-hidden h-[360px] md:h-[400px]">
-        <ul className="space-y-2">
+        <ul ref={listRef} className="space-y-2">
           {users.map((user, idx) => (
             <li
               key={idx}
               className="flex justify-between items-center bg-gray-100 dark:bg-white/5
-                border border-gray-200 dark:border-white/10 rounded-xl p-3 text-sm md:text-base transition-all duration-500"
+                border border-gray-200 dark:border-white/10 rounded-xl p-3 text-sm md:text-base"
             >
               <span className="font-semibold">{user.username}</span>
               <span className="flex items-center justify-center gap-2">
