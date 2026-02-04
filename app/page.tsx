@@ -30,6 +30,7 @@ const HeroSection = () => {
       const phrase = phrases[current]
       setText(phrase.slice(0, i + 1))
       i++
+
       if (i > phrase.length) {
         setTimeout(() => {
           setText("")
