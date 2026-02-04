@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 
-// Generate 100 fake users with random countries and flags
+// Countries and flags
 const countries = [
   { name: "USA", flag: "🇺🇸" },
   { name: "UK", flag: "🇬🇧" },
@@ -14,6 +14,7 @@ const countries = [
   { name: "Brazil", flag: "🇧🇷" },
 ]
 
+// Random username generator
 function randomName() {
   const names = ["Alex", "Mia", "John", "Sara", "Leo", "Emma", "Chris", "Liam", "Olivia", "Noah"]
   const numbers = Math.floor(Math.random() * 100)
@@ -27,7 +28,7 @@ interface LiveUser {
   time: string
 }
 
-// Generate initial 100 users
+// Generate 100 fake users
 const generateUsers = (): LiveUser[] =>
   Array.from({ length: 100 }, () => {
     const c = countries[Math.floor(Math.random() * countries.length)]
@@ -43,21 +44,30 @@ export default function LiveJoining() {
   const [users, setUsers] = useState<LiveUser[]>(generateUsers())
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      // Move first user to the end to create scrolling effect
+    let timeout: NodeJS.Timeout
+
+    const scrollNext = () => {
       setUsers((prev) => {
         const next = [...prev]
         const first = next.shift()
         if (first) {
-          // Update time randomly
-          first.time = Math.random() > 0.5 ? "Just now" : `${Math.floor(Math.random() * 5) + 1} min ago`
+          first.time =
+            Math.random() > 0.5
+              ? "Just now"
+              : `${Math.floor(Math.random() * 5) + 1} min ago`
           next.push(first)
         }
         return next
       })
-    }, 2000) // scroll every 2 seconds
 
-    return () => clearInterval(interval)
+      // Call again after a random interval between 1s and 3s
+      const randomInterval = Math.floor(Math.random() * 2000) + 1000
+      timeout = setTimeout(scrollNext, randomInterval)
+    }
+
+    scrollNext()
+
+    return () => clearTimeout(timeout)
   }, [])
 
   return (
