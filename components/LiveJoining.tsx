@@ -31,20 +31,19 @@ interface LiveUser {
   opacity?: number
 }
 
-// Generate 100 users
+// Generate 100 users with random speed
 const generateUsers = (): LiveUser[] =>
   Array.from({ length: 100 }, () => {
     const c = countries[Math.floor(Math.random() * countries.length)]
-    // Random speed so that a row scrolls in 5s-20s
-    const rowHeight = 48 // approx height in px
-    const fps = 60 // frames per second
-    const scrollTime = 5 + Math.random() * 15 // 5s to 20s
+    const rowHeight = 48 // approximate row height in px
+    const fps = 60
+    const scrollTime = 1 + Math.random() * 11 // 1s → 12s
     const speed = rowHeight / (scrollTime * fps)
     return {
       username: randomName(),
       country: c.name,
       flag: c.flag,
-      time: `${Math.floor(Math.random() * 10) + 1}s ago`,
+      time: `${Math.floor(Math.random() * 10) + 1}s ago`, // 1s → 10s
       speed,
       highlight: false,
       opacity: 1,
@@ -62,7 +61,6 @@ export default function LiveJoining() {
       if (!listRef.current) return
       const listItems = Array.from(listRef.current.children) as HTMLLIElement[]
 
-      // Update each row's margin and opacity
       listItems.forEach((item, index) => {
         const user = users[index]
         let margin = parseFloat(item.style.marginBottom || "0")
@@ -72,12 +70,7 @@ export default function LiveJoining() {
         // Fade effect: top visible, bottom fade
         const parentHeight = listRef.current?.offsetHeight || 1
         const itemTop = item.offsetTop - listRef.current.scrollTop
-        const fadeStart = 0
-        const fadeEnd = parentHeight
-        const opacity = Math.max(
-          0,
-          Math.min(1, 1 - (itemTop / fadeEnd))
-        )
+        const opacity = Math.max(0, Math.min(1, 1 - itemTop / parentHeight))
         user.opacity = opacity
         item.style.opacity = `${opacity}`
       })
@@ -95,7 +88,7 @@ export default function LiveJoining() {
               moved.time = `${Math.floor(Math.random() * 10) + 1}s ago`
               const rowHeight = 48
               const fps = 60
-              const scrollTime = 5 + Math.random() * 15
+              const scrollTime = 1 + Math.random() * 11 // 1s → 12s
               moved.speed = rowHeight / (scrollTime * fps)
               moved.highlight = true
               moved.opacity = 1
@@ -136,26 +129,34 @@ export default function LiveJoining() {
       {/* Auto-scrolling list */}
       <div className="overflow-hidden h-[360px] md:h-[400px] relative">
         <ul ref={listRef} className="space-y-2">
-          {users.map((user, idx) => (
-            <li
-              key={idx}
-              className={`flex justify-between items-center border rounded-xl p-3 text-sm md:text-base
-                transition-all duration-500
-                ${
-                  user.highlight
-                    ? "bg-green-400/50 dark:bg-green-500/50 border-green-300 dark:border-green-400 shadow-lg shadow-green-400/50 animate-pulse"
-                    : "bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10"
-                }`}
-              style={{ opacity: user.opacity ?? 1 }}
-            >
-              <span className="font-semibold">{user.username}</span>
-              <span className="flex items-center justify-center gap-2">
-                <span>{user.flag}</span>
-                <span className="hidden md:inline">{user.country}</span>
-              </span>
-              <span className="text-gray-600 dark:text-gray-400">{user.time}</span>
-            </li>
-          ))}
+          {users.map((user, idx) => {
+            // Alternate dark background colors for rows
+            const darkBg =
+              idx % 2 === 0
+                ? "bg-white/5 dark:bg-white/5"
+                : "bg-white/10 dark:bg-white/10"
+
+            return (
+              <li
+                key={idx}
+                className={`flex justify-between items-center border rounded-xl p-3 text-sm md:text-base
+                  transition-all duration-500
+                  ${
+                    user.highlight
+                      ? "bg-green-400/50 dark:bg-green-500/50 border-green-300 dark:border-green-400 shadow-lg shadow-green-400/50 animate-pulse"
+                      : `${darkBg} border-gray-200 dark:border-white/10`
+                  }`}
+                style={{ opacity: user.opacity ?? 1 }}
+              >
+                <span className="font-semibold">{user.username}</span>
+                <span className="flex items-center justify-center gap-2">
+                  <span>{user.flag}</span>
+                  <span className="hidden md:inline">{user.country}</span>
+                </span>
+                <span className="text-gray-600 dark:text-gray-400">{user.time}</span>
+              </li>
+            )
+          })}
         </ul>
       </div>
     </div>
