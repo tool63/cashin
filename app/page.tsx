@@ -149,7 +149,7 @@ export default function Home() {
   )
 }
 
-/* ================= HERO SECTION (RESPONSIVE BALANCED) ================= */
+/* ================= HERO SECTION (MATCHES FINAL CTA STYLE) ================= */
 const HeroSection = () => {
   const phrases = ["Surveys", "App Installs", "Playing Games", "Watching Videos"]
   const [current, setCurrent] = useState(0)
@@ -173,24 +173,23 @@ const HeroSection = () => {
   }, [current])
 
   return (
-    <section className="flex justify-center px-4 mb-8 sm:mb-12 md:mb-16">
-      <div className="max-w-4xl w-full flex flex-col items-center text-center gap-3 sm:gap-4 md:gap-5">
+    <section className="py-20 text-center">
+      <div className="max-w-4xl mx-auto px-6 flex flex-col items-center">
 
-        <h1 className="text-2xl sm:text-3xl md:text-5xl font-extrabold">
+        <h1 className="text-3xl md:text-5xl font-bold mb-2">
           Earn Real Money By
         </h1>
 
-        {/* LOCKED HEIGHT – NO SHIFT */}
-        <div className="relative h-[40px] sm:h-[48px] md:h-[64px]">
-          <span className="invisible text-2xl sm:text-3xl md:text-5xl font-extrabold whitespace-nowrap">
+        <div className="relative h-[56px] md:h-[64px] mb-4">
+          <span className="invisible text-3xl md:text-5xl font-bold whitespace-nowrap">
             Watching Videos
           </span>
-          <span className="absolute inset-0 flex items-center justify-center text-2xl sm:text-3xl md:text-5xl font-extrabold text-cyan-400">
+          <span className="absolute inset-0 flex items-center justify-center text-3xl md:text-5xl font-bold text-cyan-400">
             {text}
           </span>
         </div>
 
-        <p className="max-w-2xl text-gray-400 text-sm sm:text-base md:text-lg leading-relaxed">
+        <p className="mb-8 text-lg text-gray-400 max-w-2xl">
           Complete offers, play games, answer surveys and cash out instantly.
           Trusted by millions worldwide.
         </p>
@@ -199,7 +198,7 @@ const HeroSection = () => {
           <motion.span
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 px-7 sm:px-9 py-3 rounded-xl font-semibold shadow-xl"
+            className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 px-10 py-4 rounded-xl font-semibold shadow-lg"
           >
             Start Earning Now <ArrowRight />
           </motion.span>
