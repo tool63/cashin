@@ -1,88 +1,56 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useState } from "react"
+import { randomUser, randomCountry, randomAmount, randomMethod } from "./liveUtils"
 
-interface LiveEngineProps<T> {
-  items: T[]
-  setItems: React.Dispatch<React.SetStateAction<T[]>>
-  renderRow: (item: T) => React.ReactNode
-  height?: string
+export interface LiveItem {
+  id: number
+  user: string
+  flag: string
+  country?: string
+  method?: string
+  amount?: string
+  time: string
 }
 
-export default function LiveEngine<T>({
-  items,
-  setItems,
-  renderRow,
-  height = "h-[360px] md:h-[400px]",
-}: LiveEngineProps<T>) {
-  const listRef = useRef<HTMLUListElement>(null)
+export function useLiveEngine(type: "join" | "earn" | "withdraw" | "offer") {
+  const [items, setItems] = useState<LiveItem[]>([])
 
   useEffect(() => {
-    let raf: number
+    const init = Array.from({ length: 8 }, (_, i) => createItem(i))
+    setItems(init)
 
-    const animate = () => {
-      if (!listRef.current) return
-      const rows = Array.from(listRef.current.children) as HTMLLIElement[]
-
-      rows.forEach((row, i) => {
-        const item: any = items[i]
-
-        let mb = parseFloat(row.style.marginBottom || "0")
-        mb += item.speed
-        row.style.marginBottom = `${mb}px`
-
-        item.slideOffset += 0.1 * item.slideDir
-        if (item.slideOffset > 8 || item.slideOffset < -8) item.slideDir *= -1
-
-        const username = row.querySelector(".username") as HTMLElement
-        if (username)
-          username.style.transform = `translateX(${item.slideOffset}px)`
-
-        item.gradientOffset += 0.4
-        row.style.background = `linear-gradient(
-          90deg,
-          hsl(${item.gradientOffset},100%,50%),
-          hsl(${(item.gradientOffset + 120) % 360},100%,50%),
-          hsl(${(item.gradientOffset + 240) % 360},100%,50%)
-        )`
+    const interval = setInterval(() => {
+      setItems((prev) => {
+        const next = [...prev]
+        next.pop()
+        next.unshift(createItem(Date.now()))
+        return next
       })
+    }, 1800)
 
-      const last = rows[rows.length - 1]
-      if (last && parseFloat(last.style.marginBottom || "0") >= last.offsetHeight) {
-        setItems((prev: any[]) => {
-          const next = [...prev]
-          const moved = next.pop()
-          if (moved) {
-            moved.slideOffset = 0
-            moved.slideDir = 1
-            moved.gradientOffset = Math.random() * 360
-            moved.time = `${Math.floor(Math.random() * 10) + 1}s ago`
-            next.unshift(moved)
-          }
-          rows.forEach((r) => (r.style.marginBottom = "0"))
-          return next
-        })
-      }
+    return () => clearInterval(interval)
+  }, [])
 
-      raf = requestAnimationFrame(animate)
+  function createItem(id: number): LiveItem {
+    const user = randomUser()
+    const country = randomCountry()
+
+    return {
+      id,
+      user,
+      flag: country.flag,
+      country: country.name,
+      method: type === "withdraw" ? randomMethod() : undefined,
+      amount:
+        type === "earn"
+          ? randomAmount(0.1, 3)
+          : type === "withdraw"
+          ? randomAmount(5, 50)
+          : undefined,
+      time: `${Math.floor(Math.random() * 9) + 1}s ago`,
     }
+  }
 
-    raf = requestAnimationFrame(animate)
-    return () => cancelAnimationFrame(raf)
-  }, [items, setItems])
-
-  return (
-    <div className={`overflow-hidden ${height} rounded-xl px-2 py-2`}>
-      <ul ref={listRef} className="space-y-2">
-        {items.map((item, i) => (
-          <li
-            key={i}
-            className="border rounded-xl p-3 text-sm md:text-base relative"
-          >
-            {renderRow(item)}
-          </li>
-        ))}
-      </ul>
-    </div>
-  )
+  return items
 }
