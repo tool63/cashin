@@ -6,17 +6,13 @@ import { ArrowRight, ShieldCheck, Wallet, Zap } from "lucide-react"
 import Link from "next/link"
 
 /* ================= LIVE SECTIONS ================= */
-import LiveEarnings from "@/components/live/LiveEarnings"
-import LiveWithdrawals from "@/components/live/LiveWithdrawals"
-import LiveOfferCompletion from "@/components/live/LiveOfferCompletion"
-import LiveJoining from "@/components/live/LiveJoining"
+import LiveEarnings from "../components/live/LiveEarnings"
+import LiveWithdrawals from "../components/live/LiveWithdrawals"
+import LiveOfferCompletion from "../components/live/LiveOfferCompletion"
+import LiveJoining from "../components/live/LiveJoining"
 
 /* ================= SMALL COMPONENTS ================= */
-import {
-  SectionTitle,
-  Stat,
-  Feature,
-} from "@/components/live/SmallComponents"
+import { SectionTitle, Stat, Feature } from "../components/live/SmallComponents"
 
 /* ================= HERO SECTION ================= */
 const HeroSection = () => {
@@ -30,7 +26,6 @@ const HeroSection = () => {
       const phrase = phrases[current]
       setText(phrase.slice(0, i + 1))
       i++
-
       if (i > phrase.length) {
         setTimeout(() => {
           setText("")
