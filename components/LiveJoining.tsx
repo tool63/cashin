@@ -36,7 +36,7 @@ const generateUsers = (): LiveUser[] =>
       username: randomName(),
       country: c.name,
       flag: c.flag,
-      time: "Just now",
+      time: `${Math.floor(Math.random() * 60) + 1}s ago`,
     }
   })
 
@@ -50,26 +50,24 @@ export default function LiveJoining() {
     const scrollStep = () => {
       if (!listRef.current) return
 
-      const first = listRef.current.children[0] as HTMLLIElement
-      if (!first) return
+      const last = listRef.current.children[listRef.current.children.length - 1] as HTMLLIElement
+      if (!last) return
 
-      // Move list up 1px
-      first.style.marginTop = `${(parseInt(first.style.marginTop || "0") - 1)}px`
+      // Move last item margin bottom up (negative) to create scroll down effect
+      last.style.marginBottom = `${(parseFloat(last.style.marginBottom || "0") + 1).toFixed(2)}px`
 
-      const height = first.offsetHeight
+      const height = last.offsetHeight
 
-      // When the first item is fully out, move it to the bottom
-      if (Math.abs(parseInt(first.style.marginTop || "0")) >= height) {
-        first.style.marginTop = "0"
+      // When last item fully visible, move it to top
+      if (parseFloat(last.style.marginBottom) >= height) {
+        last.style.marginBottom = "0"
         setUsers((prev) => {
           const next = [...prev]
-          const moved = next.shift()
+          const moved = next.pop()
           if (moved) {
-            moved.time =
-              Math.random() > 0.5
-                ? "Just now"
-                : `${Math.floor(Math.random() * 5) + 1} min ago`
-            next.push(moved)
+            // Update time to random seconds
+            moved.time = `${Math.floor(Math.random() * 60) + 1}s ago`
+            next.unshift(moved)
           }
           return next
         })
@@ -77,7 +75,7 @@ export default function LiveJoining() {
 
       // Random speed between 0.5px to 1.5px per frame
       const randomSpeed = 0.5 + Math.random()
-      first.style.marginTop = `${(parseInt(first.style.marginTop || "0") - randomSpeed).toFixed(2)}px`
+      last.style.marginBottom = `${(parseFloat(last.style.marginBottom || "0") + randomSpeed).toFixed(2)}px`
 
       animationFrame = requestAnimationFrame(scrollStep)
     }
