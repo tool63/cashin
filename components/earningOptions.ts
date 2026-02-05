@@ -1,3 +1,6 @@
+// components/earningOptions.ts
+
+// Type: [icon, title, slug]
 export const earningOptions: [string, string, string][] = [
   ["🧠", "Surveys", "/surveys"],
   ["📱", "App Installs", "/app-installs"],
