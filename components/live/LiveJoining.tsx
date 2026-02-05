@@ -5,57 +5,24 @@ import { useEffect, useRef, useState } from "react"
 /* ================= DATA ================= */
 
 const names = [
-  "Alex",
-  "Emma",
-  "Liam",
-  "Noah",
-  "Olivia",
-  "Sophia",
-  "James",
-  "Daniel",
-  "Ava",
-  "Lucas",
-  "Mia",
-  "Ethan",
-  "Amelia",
-  "Benjamin",
-  "Henry",
-  "Ella",
-  "Jack",
-  "Leo",
-  "Grace",
-  "Arjun",
-  "Ayaan",
-  "Rahul",
-  "Sofia",
+  "Alex","Emma","Liam","Noah","Olivia","Sophia","James","Daniel",
+  "Ava","Lucas","Mia","Ethan","Amelia","Benjamin","Henry","Ella",
+  "Jack","Leo","Grace","Arjun","Ayaan","Rahul","Sofia",
 ]
 
-const countries = [
-  { flag: "🇺🇸" },
-  { flag: "🇬🇧" },
-  { flag: "🇨🇦" },
-  { flag: "🇩🇪" },
-  { flag: "🇫🇷" },
-  { flag: "🇮🇳" },
-  { flag: "🇯🇵" },
-  { flag: "🇧🇷" },
-]
-
-const randomCountry = () =>
-  countries[Math.floor(Math.random() * countries.length)]
+const countries = ["🇺🇸","🇬🇧","🇨🇦","🇩🇪","🇫🇷","🇮🇳","🇯🇵","🇧🇷"]
 
 const randomTime = () =>
   `${Math.floor(Math.random() * 10) + 1}s ago`
 
 /* ================= TYPES ================= */
 
-interface LiveJoin {
+interface JoinItem {
   id: number
   name: string
   flag: string
   time: string
   speed: number
-  gradientOffset: number
 }
 
 /* ================= HELPERS ================= */
@@ -63,89 +30,75 @@ interface LiveJoin {
 const ROW_HEIGHT = 48
 const FPS = 60
 
-const createJoin = (
-  id: number,
-  usedNames: Set<string>
-): LiveJoin => {
+const createJoin = (used: Set<string>): JoinItem => {
   let name = ""
-
-  // Ensure unique name
   do {
     name = names[Math.floor(Math.random() * names.length)]
-  } while (usedNames.has(name))
+  } while (used.has(name))
 
-  usedNames.add(name)
-
-  const scrollTime = 1 + Math.random() * 11
-  const c = randomCountry()
+  used.add(name)
 
   return {
-    id,
+    id: Date.now() + Math.random(),
     name,
-    flag: c.flag,
+    flag: countries[Math.floor(Math.random() * countries.length)],
     time: randomTime(),
-    speed: ROW_HEIGHT / (scrollTime * FPS),
-    gradientOffset: Math.random() * 360,
+    speed: ROW_HEIGHT / ((1 + Math.random() * 11) * FPS),
   }
 }
 
 /* ================= COMPONENT ================= */
 
 export default function LiveJoining() {
-  const [items, setItems] = useState<LiveJoin[]>([])
+  const [items, setItems] = useState<JoinItem[]>([])
   const listRef = useRef<HTMLUListElement>(null)
+  const usedNames = useRef<Set<string>>(new Set())
+  const started = useRef(false)
 
-  // Initial population (unique names)
+  /* INITIAL LOAD (FAST) */
   useEffect(() => {
-    const used = new Set<string>()
-    const initial = Array.from({ length: 40 }, (_, i) =>
-      createJoin(i, used)
-    )
+    const initial: JoinItem[] = []
+    for (let i = 0; i < 20; i++) {
+      initial.push(createJoin(usedNames.current))
+    }
     setItems(initial)
   }, [])
 
+  /* ANIMATION */
   useEffect(() => {
+    if (started.current) return
+    started.current = true
+
     let raf: number
 
     const animate = () => {
-      if (!listRef.current) return
+      const list = listRef.current
+      if (!list) return
 
-      const rows = Array.from(
-        listRef.current.children
-      ) as HTMLLIElement[]
+      const rows = list.children as HTMLCollectionOf<HTMLLIElement>
 
-      rows.forEach((row, index) => {
-        const item = items[index]
-        if (!item) return
+      for (let i = 0; i < rows.length; i++) {
+        const row = rows[i]
+        const item = items[i]
+        if (!item) continue
 
-        let mb = parseFloat(row.style.marginBottom || "0")
+        let mb = parseFloat(row.dataset.mb || "0")
         mb += item.speed
+        row.dataset.mb = mb.toString()
         row.style.marginBottom = `${mb}px`
-
-        item.gradientOffset += 0.6
-        row.style.background = `
-          linear-gradient(
-            90deg,
-            hsl(${item.gradientOffset},100%,50%),
-            hsl(${(item.gradientOffset + 120) % 360},100%,50%),
-            hsl(${(item.gradientOffset + 240) % 360},100%,50%)
-          )
-        `
-      })
+      }
 
       const last = rows[rows.length - 1]
       if (last) {
-        const height = last.offsetHeight
-        const mb = parseFloat(last.style.marginBottom || "0")
-
-        if (mb >= height) {
-          rows.forEach((r) => (r.style.marginBottom = "0"))
+        const mb = parseFloat(last.dataset.mb || "0")
+        if (mb >= ROW_HEIGHT) {
+          last.dataset.mb = "0"
+          last.style.marginBottom = "0"
 
           setItems((prev) => {
-            const usedNames = new Set(prev.map((i) => i.name))
             const next = [...prev]
             next.pop()
-            next.unshift(createJoin(Date.now(), usedNames))
+            next.unshift(createJoin(usedNames.current))
             return next
           })
         }
@@ -164,8 +117,7 @@ export default function LiveJoining() {
         🔥 Live Joining
       </h3>
 
-      <div className="overflow-hidden h-[360px] md:h-[400px] rounded-xl px-2 py-2">
-        {/* Header */}
+      <div className="overflow-hidden h-[360px] rounded-xl px-2 py-2">
         <div className="grid grid-cols-3 text-center mb-2 text-white font-semibold">
           <span className="hidden md:block">Name</span>
           <span className="hidden md:block">Country</span>
@@ -176,19 +128,11 @@ export default function LiveJoining() {
           {items.map((j) => (
             <li
               key={j.id}
-              className="grid grid-cols-3 items-center border rounded-xl p-3 text-sm md:text-base text-white"
+              className="grid grid-cols-3 items-center border rounded-xl p-3 text-sm text-white"
             >
-              <span className="font-semibold truncate">
-                {j.name}
-              </span>
-
-              <span className="text-center text-lg">
-                {j.flag}
-              </span>
-
-              <span className="opacity-80 text-center">
-                {j.time}
-              </span>
+              <span className="font-semibold truncate">{j.name}</span>
+              <span className="text-center text-lg">{j.flag}</span>
+              <span className="opacity-80 text-center">{j.time}</span>
             </li>
           ))}
         </ul>
