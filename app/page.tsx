@@ -5,11 +5,11 @@ import { motion } from "framer-motion"
 import { ArrowRight, ShieldCheck, Wallet, Zap } from "lucide-react"
 import Link from "next/link"
 
-/* ================= LIVE SECTIONS ================= */
+///* ================= LIVE SECTIONS ================= */
 import LiveEarnings from "../components/live/LiveEarnings"
 import LiveWithdrawals from "../components/live/LiveWithdrawals"
 import LiveOfferCompletion from "../components/live/LiveOfferCompletion"
-import LiveJoining from "../components/live/LiveJoining"
+import LiveJoining from "../components/live/LiveJoining"//
 
 /* ================= SMALL COMPONENTS ================= */
 import { SectionTitle, Stat, Feature } from "../components/live/SmallComponents"
