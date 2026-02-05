@@ -1,4 +1,5 @@
 // app/layout.tsx
+"use client"
 
 import "../styles/globals.css"
 import { ReactNode } from "react"
@@ -6,23 +7,33 @@ import Header from "../components/Header"
 import Footer from "../components/Footer"
 import FloatingCTA from "../components/FloatingCTA"
 import Providers from "./providers"
+import Meta from "../components/Meta"
 
-export const metadata = {
-  title: "PayUp",
-  description: "Earn rewards, cash out, and get paid",
-}
-
-interface RootLayoutProps {
+export interface RootLayoutProps {
   children: ReactNode
+  pageTitle?: string
+  pageDescription?: string
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+// Default site meta
+const defaultTitle = "PayUp"
+const defaultDescription = "Earn rewards, cash out, and get paid"
+
+export default function RootLayout({
+  children,
+  pageTitle,
+  pageDescription,
+}: RootLayoutProps) {
   return (
     <html
       lang="en"
       suppressHydrationWarning
       className="transition-colors duration-300"
     >
+      <head>
+        {/* Use Meta component for dynamic SEO */}
+        <Meta title={pageTitle || defaultTitle} description={pageDescription || defaultDescription} />
+      </head>
       <body
         className="
           min-h-screen
