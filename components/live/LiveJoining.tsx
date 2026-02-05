@@ -4,20 +4,20 @@ import { useEffect, useRef, useState } from "react"
 
 /* ================= DATA ================= */
 
-const names = [
+const NAMES = [
   "Alex","Emma","Liam","Noah","Olivia","Sophia","James","Daniel",
   "Ava","Lucas","Mia","Ethan","Amelia","Benjamin","Henry","Ella",
   "Jack","Leo","Grace","Arjun","Ayaan","Rahul","Sofia",
 ]
 
-const countries = ["🇺🇸","🇬🇧","🇨🇦","🇩🇪","🇫🇷","🇮🇳","🇯🇵","🇧🇷"]
+const FLAGS = ["🇺🇸","🇬🇧","🇨🇦","🇩🇪","🇫🇷","🇮🇳","🇯🇵","🇧🇷"]
 
 const randomTime = () =>
   `${Math.floor(Math.random() * 10) + 1}s ago`
 
 /* ================= TYPES ================= */
 
-interface JoinItem {
+interface LiveJoin {
   id: number
   name: string
   flag: string
@@ -25,15 +25,18 @@ interface JoinItem {
   speed: number
 }
 
-/* ================= HELPERS ================= */
+/* ================= CONSTANTS ================= */
 
 const ROW_HEIGHT = 48
 const FPS = 60
+const INITIAL_ROWS = 20
 
-const createJoin = (used: Set<string>): JoinItem => {
+/* ================= HELPERS ================= */
+
+function createJoin(used: Set<string>): LiveJoin {
   let name = ""
   do {
-    name = names[Math.floor(Math.random() * names.length)]
+    name = NAMES[Math.floor(Math.random() * NAMES.length)]
   } while (used.has(name))
 
   used.add(name)
@@ -41,7 +44,7 @@ const createJoin = (used: Set<string>): JoinItem => {
   return {
     id: Date.now() + Math.random(),
     name,
-    flag: countries[Math.floor(Math.random() * countries.length)],
+    flag: FLAGS[Math.floor(Math.random() * FLAGS.length)],
     time: randomTime(),
     speed: ROW_HEIGHT / ((1 + Math.random() * 11) * FPS),
   }
@@ -50,24 +53,24 @@ const createJoin = (used: Set<string>): JoinItem => {
 /* ================= COMPONENT ================= */
 
 export default function LiveJoining() {
-  const [items, setItems] = useState<JoinItem[]>([])
+  const [items, setItems] = useState<LiveJoin[]>([])
   const listRef = useRef<HTMLUListElement>(null)
-  const usedNames = useRef<Set<string>>(new Set())
-  const started = useRef(false)
+  const usedNamesRef = useRef<Set<string>>(new Set())
+  const startedRef = useRef(false)
 
-  /* INITIAL LOAD (FAST) */
+  /* ---------- INITIAL LOAD ---------- */
   useEffect(() => {
-    const initial: JoinItem[] = []
-    for (let i = 0; i < 20; i++) {
-      initial.push(createJoin(usedNames.current))
+    const initial: LiveJoin[] = []
+    for (let i = 0; i < INITIAL_ROWS; i++) {
+      initial.push(createJoin(usedNamesRef.current))
     }
     setItems(initial)
   }, [])
 
-  /* ANIMATION */
+  /* ---------- ANIMATION (NO RE-RENDER LOOP) ---------- */
   useEffect(() => {
-    if (started.current) return
-    started.current = true
+    if (startedRef.current) return
+    startedRef.current = true
 
     let raf: number
 
@@ -84,6 +87,7 @@ export default function LiveJoining() {
 
         let mb = parseFloat(row.dataset.mb || "0")
         mb += item.speed
+
         row.dataset.mb = mb.toString()
         row.style.marginBottom = `${mb}px`
       }
@@ -98,7 +102,7 @@ export default function LiveJoining() {
           setItems((prev) => {
             const next = [...prev]
             next.pop()
-            next.unshift(createJoin(usedNames.current))
+            next.unshift(createJoin(usedNamesRef.current))
             return next
           })
         }
@@ -111,13 +115,16 @@ export default function LiveJoining() {
     return () => cancelAnimationFrame(raf)
   }, [items])
 
+  /* ================= UI (UNCHANGED DESIGN) ================= */
+
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">
       <h3 className="text-xl md:text-2xl font-bold mb-6 text-center text-white">
         🔥 Live Joining
       </h3>
 
-      <div className="overflow-hidden h-[360px] rounded-xl px-2 py-2">
+      <div className="overflow-hidden h-[360px] md:h-[400px] rounded-xl px-2 py-2">
+        {/* Header */}
         <div className="grid grid-cols-3 text-center mb-2 text-white font-semibold">
           <span className="hidden md:block">Name</span>
           <span className="hidden md:block">Country</span>
@@ -128,7 +135,7 @@ export default function LiveJoining() {
           {items.map((j) => (
             <li
               key={j.id}
-              className="grid grid-cols-3 items-center border rounded-xl p-3 text-sm text-white"
+              className="grid grid-cols-3 items-center border rounded-xl p-3 text-sm md:text-base text-white"
             >
               <span className="font-semibold truncate">{j.name}</span>
               <span className="text-center text-lg">{j.flag}</span>
