@@ -4,42 +4,76 @@ import { useEffect, useRef, useState } from "react"
 
 /* ================= DATA ================= */
 
-const countries = [
-  { name: "USA", flag: "🇺🇸" },
-  { name: "UK", flag: "🇬🇧" },
-  { name: "Canada", flag: "🇨🇦" },
-  { name: "Germany", flag: "🇩🇪" },
-  { name: "India", flag: "🇮🇳" },
-  { name: "France", flag: "🇫🇷" },
-  { name: "Japan", flag: "🇯🇵" },
-  { name: "Brazil", flag: "🇧🇷" },
-]
-
 const names = [
-  "Alex", "Mia", "John", "Sara", "Leo",
-  "Emma", "Chris", "Liam", "Olivia", "Noah",
+  "Alex",
+  "Emma",
+  "Liam",
+  "Noah",
+  "Olivia",
+  "Sophia",
+  "James",
+  "Daniel",
+  "Ava",
+  "Lucas",
+  "Mia",
+  "Ethan",
 ]
 
-const methods = ["PayPal", "USDT", "Bitcoin", "Gift Card"]
+const countries = [
+  { flag: "🇺🇸" },
+  { flag: "🇬🇧" },
+  { flag: "🇨🇦" },
+  { flag: "🇩🇪" },
+  { flag: "🇫🇷" },
+  { flag: "🇮🇳" },
+  { flag: "🇯🇵" },
+  { flag: "🇧🇷" },
+]
 
-const randomUser = () =>
-  names[Math.floor(Math.random() * names.length)] +
-  Math.floor(Math.random() * 100)
+const withdrawTypes = [
+  "PayPal",
+  "Bitcoin",
+  "Litecoin",
+  "Ethereum",
+  "Dogecoin",
+  "Amazon Gift Card",
+  "Google Play Gift Card",
+  "Steam Gift Card",
+  "Apple Gift Card",
+]
+
+const randomName = () =>
+  names[Math.floor(Math.random() * names.length)]
 
 const randomCountry = () =>
   countries[Math.floor(Math.random() * countries.length)]
 
-const randomMethod = () =>
-  methods[Math.floor(Math.random() * methods.length)]
+const randomWithdrawType = () =>
+  withdrawTypes[Math.floor(Math.random() * withdrawTypes.length)]
+
+/* ================= AMOUNT LOGIC ================= */
+/**
+ * Range: $2.00 – $20.00
+ * Bias toward smaller withdrawals (realistic)
+ */
+const randomAmount = () => {
+  const biased = Math.pow(Math.random(), 1.6) // skew low
+  const value = 2 + biased * 18
+  return `$${value.toFixed(2)}`
+}
+
+const randomTime = () =>
+  `${Math.floor(Math.random() * 10) + 1}s ago`
 
 /* ================= TYPES ================= */
 
 interface LiveWithdrawal {
   id: number
-  user: string
-  country: string
+  name: string
   flag: string
   method: string
+  amount: string
+  time: string
   speed: number
   gradientOffset: number
 }
@@ -50,15 +84,16 @@ const ROW_HEIGHT = 48
 const FPS = 60
 
 const createWithdrawal = (id: number): LiveWithdrawal => {
-  const c = randomCountry()
   const scrollTime = 1 + Math.random() * 11
+  const c = randomCountry()
 
   return {
     id,
-    user: randomUser(),
-    country: c.name,
+    name: randomName(),
     flag: c.flag,
-    method: randomMethod(),
+    method: randomWithdrawType(),
+    amount: randomAmount(),
+    time: randomTime(),
     speed: ROW_HEIGHT / (scrollTime * FPS),
     gradientOffset: Math.random() * 360,
   }
@@ -87,12 +122,10 @@ export default function LiveWithdrawals() {
         const item = items[index]
         if (!item) return
 
-        // vertical scroll illusion
         let mb = parseFloat(row.style.marginBottom || "0")
         mb += item.speed
         row.style.marginBottom = `${mb}px`
 
-        // animated rainbow gradient
         item.gradientOffset += 0.6
         row.style.background = `
           linear-gradient(
@@ -104,7 +137,6 @@ export default function LiveWithdrawals() {
         `
       })
 
-      // recycle rows
       const last = rows[rows.length - 1]
       if (last) {
         const height = last.offsetHeight
@@ -116,9 +148,7 @@ export default function LiveWithdrawals() {
           setItems((prev) => {
             const next = [...prev]
             const moved = next.pop()
-            if (moved) {
-              next.unshift(createWithdrawal(moved.id))
-            }
+            if (moved) next.unshift(createWithdrawal(moved.id))
             return next
           })
         }
@@ -138,26 +168,40 @@ export default function LiveWithdrawals() {
       </h3>
 
       <div className="overflow-hidden h-[360px] md:h-[400px] rounded-xl px-2 py-2">
-        <div className="grid grid-cols-3 text-center mb-2 text-white font-semibold">
-          <span className="hidden md:block">Username</span>
+        {/* Header */}
+        <div className="grid grid-cols-5 text-center mb-2 text-white font-semibold">
+          <span className="hidden md:block">Name</span>
           <span className="hidden md:block">Country</span>
           <span className="hidden md:block">Method</span>
+          <span className="hidden md:block">Amount</span>
+          <span className="hidden md:block">Time</span>
         </div>
 
         <ul ref={listRef} className="space-y-2">
           {items.map((w) => (
             <li
               key={w.id}
-              className="flex justify-between items-center border rounded-xl p-3 text-sm md:text-base text-white"
+              className="grid grid-cols-5 items-center border rounded-xl p-3 text-sm md:text-base text-white"
             >
-              <span className="font-semibold">{w.user}</span>
-
-              <span className="flex gap-2 items-center">
-                <span>{w.flag}</span>
-                <span className="hidden md:inline">{w.country}</span>
+              <span className="font-semibold truncate">
+                {w.name}
               </span>
 
-              <span className="opacity-80">{w.method}</span>
+              <span className="text-center text-lg">
+                {w.flag}
+              </span>
+
+              <span className="text-center truncate">
+                {w.method}
+              </span>
+
+              <span className="text-green-300 font-semibold text-center">
+                {w.amount}
+              </span>
+
+              <span className="opacity-80 text-center">
+                {w.time}
+              </span>
             </li>
           ))}
         </ul>
