@@ -92,52 +92,29 @@ const earningOptions = [
   ["💳", "Vouchers", "/vouchers"],
 ]
 
-/* ================= DYNAMIC PAGE ================= */
+/* ================= HOME PAGE ================= */
 export default function Home() {
-  const params = useParams<{ slug: string }>()
-  const slug = params.slug
+  const params = useParams<{ slug?: string }>()
+  const slug = params?.slug
 
-  // Find matching earning option from earningOptions
-  const option = earningOptions.find(([icon, title, href]) => href === `/${slug}`)
+  const option = slug
+    ? earningOptions.find(([, , href]) => href === `/${slug}`)
+    : null
 
-  // Dynamic meta
   const metaTitle = option
     ? `${option[1]} | PayUp`
-    : slug
-      ? `${slug.replace("-", " ").charAt(0).toUpperCase() + slug.slice(1)} | PayUp`
-      : "Earn Money Online | PayUp"
+    : "Earn Money Online | PayUp"
 
   const metaDescription = option
     ? `Earn money by ${option[1].toLowerCase()} instantly on PayUp.`
-    : slug
-      ? `Learn more about ${slug.replace("-", " ")} and earn real money on PayUp.`
-      : "Complete offers, play games, answer surveys, and cash out instantly on PayUp."
+    : "Complete offers, play games, answer surveys, and cash out instantly on PayUp."
 
   return (
     <>
-      {/* ================= META ================= */}
       <Meta title={metaTitle} description={metaDescription} />
 
       <main className="transition-colors duration-300 bg-white text-gray-900 dark:bg-[#070A14] dark:text-white">
-        {/* ================= HERO ================= */}
         <HeroSection />
-
-        {/* ================= PAGE HEADER ================= */}
-        {slug && (
-          <section className="max-w-7xl mx-auto px-6 py-20 text-center">
-            <h1 className="text-3xl md:text-5xl font-bold mb-4">
-              {option
-                ? option[1]
-                : slug.replace("-", " ").charAt(0).toUpperCase() + slug.slice(1)}
-            </h1>
-
-            <p className="text-gray-600 dark:text-gray-400 mb-10">
-              {option
-                ? `Start earning by ${option[1].toLowerCase()} today!`
-                : "Explore opportunities and start earning rewards now."}
-            </p>
-          </section>
-        )}
 
         {/* ================= TRUST ================= */}
         <section className="py-16 bg-gray-100 dark:bg-white/5">
@@ -198,7 +175,7 @@ export default function Home() {
             {earningOptions.map(([icon, title, href]) => (
               <Link
                 key={title}
-                href={href}
+                href={`/lang/en${href}`}
                 className="rounded-2xl p-6 flex flex-col items-center text-center bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 hover:scale-105 transition"
               >
                 <div className="text-4xl">{icon}</div>
