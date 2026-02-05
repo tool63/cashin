@@ -7,26 +7,38 @@ import Link from "next/link"
 
 export default function HeroSection() {
   const phrases = ["Surveys", "App Installs", "Playing Games", "Watching Videos"]
-  const [current, setCurrent] = useState(0)
+
   const [text, setText] = useState("")
+  const [wordIndex, setWordIndex] = useState(0)
+  const [charIndex, setCharIndex] = useState(0)
+  const [isDeleting, setIsDeleting] = useState(false)
 
   useEffect(() => {
-    let i = 0
-    const interval = setInterval(() => {
-      const phrase = phrases[current]
-      setText(phrase.slice(0, i + 1))
-      i++
-      if (i > phrase.length) {
-        setTimeout(() => {
-          setText("")
-          setCurrent((prev) => (prev + 1) % phrases.length)
-        }, 700)
-        clearInterval(interval)
-      }
-    }, 90)
+    const currentWord = phrases[wordIndex]
 
-    return () => clearInterval(interval)
-  }, [current])
+    const timeout = setTimeout(() => {
+      if (!isDeleting) {
+        // Typing
+        setText(currentWord.slice(0, charIndex + 1))
+        setCharIndex((prev) => prev + 1)
+
+        if (charIndex + 1 === currentWord.length) {
+          setTimeout(() => setIsDeleting(true), 900)
+        }
+      } else {
+        // Deleting
+        setText(currentWord.slice(0, charIndex - 1))
+        setCharIndex((prev) => prev - 1)
+
+        if (charIndex === 0) {
+          setIsDeleting(false)
+          setWordIndex((prev) => (prev + 1) % phrases.length)
+        }
+      }
+    }, isDeleting ? 50 : 90)
+
+    return () => clearTimeout(timeout)
+  }, [charIndex, isDeleting, wordIndex, phrases])
 
   return (
     <section className="py-24 text-center">
@@ -35,12 +47,16 @@ export default function HeroSection() {
           Earn Real Money By
         </h1>
 
+        {/* TYPING TEXT */}
         <div className="relative h-[56px] md:h-[64px] mb-4">
+          {/* Keeps layout height stable */}
           <span className="invisible text-3xl md:text-5xl font-extrabold">
             Watching Videos
           </span>
+
           <span className="absolute inset-0 flex items-center justify-center text-3xl md:text-5xl font-extrabold text-cyan-400">
             {text}
+            <span className="ml-1 animate-pulse">|</span>
           </span>
         </div>
 
