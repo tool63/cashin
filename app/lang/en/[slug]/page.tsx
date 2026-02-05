@@ -1,12 +1,12 @@
 "use client"
 
 import { useParams } from "next/navigation"
-import HeroSection from "../../components/HeroSection"
-import { earningOptions } from "../../components/earningOptions"
-import { SectionTitle, Stat, Feature } from "../../components/live/SmallComponents"
+import HeroSection from "../../../components/HeroSection"
+import { earningOptions } from "../../../components/earningOptions"
+import { SectionTitle, Stat, Feature } from "../../../components/live/SmallComponents"
 import { ArrowRight, ShieldCheck, Wallet, Zap } from "lucide-react"
 import Link from "next/link"
-import Meta from "../../components/Meta"
+import Meta from "../../../components/Meta"
 
 /* ================= DYNAMIC SLUG PAGE ================= */
 export default function DynamicPage() {
