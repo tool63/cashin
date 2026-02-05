@@ -4,40 +4,65 @@ import { useEffect, useRef, useState } from "react"
 
 /* ================= DATA ================= */
 
-const countries = [
-  { name: "USA", flag: "🇺🇸" },
-  { name: "UK", flag: "🇬🇧" },
-  { name: "Canada", flag: "🇨🇦" },
-  { name: "Germany", flag: "🇩🇪" },
-  { name: "India", flag: "🇮🇳" },
-  { name: "France", flag: "🇫🇷" },
-  { name: "Japan", flag: "🇯🇵" },
-  { name: "Brazil", flag: "🇧🇷" },
-]
-
 const names = [
-  "Alex", "Mia", "John", "Sara", "Leo",
-  "Emma", "Chris", "Liam", "Olivia", "Noah",
+  "Alex",
+  "James",
+  "Emma",
+  "Olivia",
+  "Daniel",
+  "Sophia",
+  "Liam",
+  "Noah",
+  "Ava",
+  "Lucas",
+  "Mia",
+  "Ethan",
+  "Amelia",
+  "Benjamin",
 ]
 
-const randomUser = () =>
-  names[Math.floor(Math.random() * names.length)] +
-  Math.floor(Math.random() * 100)
+const countries = [
+  { flag: "🇺🇸" },
+  { flag: "🇬🇧" },
+  { flag: "🇨🇦" },
+  { flag: "🇩🇪" },
+  { flag: "🇮🇳" },
+  { flag: "🇫🇷" },
+  { flag: "🇯🇵" },
+  { flag: "🇧🇷" },
+]
+
+const randomName = () =>
+  names[Math.floor(Math.random() * names.length)]
 
 const randomCountry = () =>
   countries[Math.floor(Math.random() * countries.length)]
 
-const randomAmount = (min = 0.2, max = 12) =>
-  `$${(Math.random() * (max - min) + min).toFixed(2)}`
+/* ================= AMOUNT LOGIC ================= */
+/**
+ * 80%: $0.05 – $0.99
+ * 20%: $1.00 – $2.00
+ */
+const randomAmount = () => {
+  const low = Math.random() < 0.8
+  const value = low
+    ? Math.random() * 0.94 + 0.05
+    : Math.random() * 1 + 1
+
+  return `$${value.toFixed(2)}`
+}
+
+const randomTime = () =>
+  `${Math.floor(Math.random() * 10) + 1}s ago`
 
 /* ================= TYPES ================= */
 
 interface LiveEarning {
   id: number
-  user: string
-  country: string
+  name: string
   flag: string
   amount: string
+  time: string
   speed: number
   gradientOffset: number
 }
@@ -53,10 +78,10 @@ const createEarning = (id: number): LiveEarning => {
 
   return {
     id,
-    user: randomUser(),
-    country: c.name,
+    name: randomName(),
     flag: c.flag,
     amount: randomAmount(),
+    time: randomTime(),
     speed: ROW_HEIGHT / (scrollTime * FPS),
     gradientOffset: Math.random() * 360,
   }
@@ -85,12 +110,10 @@ export default function LiveEarnings() {
         const item = items[index]
         if (!item) return
 
-        // vertical scroll illusion
         let mb = parseFloat(row.style.marginBottom || "0")
         mb += item.speed
         row.style.marginBottom = `${mb}px`
 
-        // animated rainbow gradient
         item.gradientOffset += 0.6
         row.style.background = `
           linear-gradient(
@@ -102,7 +125,6 @@ export default function LiveEarnings() {
         `
       })
 
-      // recycle rows
       const last = rows[rows.length - 1]
       if (last) {
         const height = last.offsetHeight
@@ -114,9 +136,7 @@ export default function LiveEarnings() {
           setItems((prev) => {
             const next = [...prev]
             const moved = next.pop()
-            if (moved) {
-              next.unshift(createEarning(moved.id))
-            }
+            if (moved) next.unshift(createEarning(moved.id))
             return next
           })
         }
@@ -136,27 +156,34 @@ export default function LiveEarnings() {
       </h3>
 
       <div className="overflow-hidden h-[360px] md:h-[400px] rounded-xl px-2 py-2">
-        <div className="grid grid-cols-3 text-center mb-2 text-white font-semibold">
-          <span className="hidden md:block">Username</span>
+        {/* Header */}
+        <div className="grid grid-cols-4 text-center mb-2 text-white font-semibold">
+          <span className="hidden md:block">Name</span>
           <span className="hidden md:block">Country</span>
           <span className="hidden md:block">Amount</span>
+          <span className="hidden md:block">Time</span>
         </div>
 
         <ul ref={listRef} className="space-y-2">
           {items.map((e) => (
             <li
               key={e.id}
-              className="flex justify-between items-center border rounded-xl p-3 text-sm md:text-base text-white"
+              className="grid grid-cols-4 items-center border rounded-xl p-3 text-sm md:text-base text-white"
             >
-              <span className="font-semibold">{e.user}</span>
-
-              <span className="flex gap-2 items-center">
-                <span>{e.flag}</span>
-                <span className="hidden md:inline">{e.country}</span>
+              <span className="font-semibold truncate">
+                {e.name}
               </span>
 
-              <span className="font-semibold text-green-300">
+              <span className="text-center text-lg">
+                {e.flag}
+              </span>
+
+              <span className="text-green-300 font-semibold text-center">
                 {e.amount}
+              </span>
+
+              <span className="opacity-80 text-center">
+                {e.time}
               </span>
             </li>
           ))}
