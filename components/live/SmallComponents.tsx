@@ -1,3 +1,4 @@
+// components/live/SmallComponents.tsx
 "use client"
 
 import { ReactNode } from "react"
@@ -48,9 +49,7 @@ export function Stat({
   return (
     <div className="bg-white dark:bg-[#111827] p-6 rounded-xl shadow-md flex flex-col items-center">
       <span className="text-2xl font-bold">{value}</span>
-      <span className="text-gray-600 dark:text-gray-400 mt-1">
-        {title}
-      </span>
+      <span className="text-gray-600 dark:text-gray-400 mt-1">{title}</span>
     </div>
   )
 }
