@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 
 /* ================= DATA ================= */
 
@@ -36,7 +36,7 @@ interface LiveJoin {
 
 const ROW_HEIGHT = 48
 const FPS = 60
-const TOTAL_ROWS = 30 // fewer rows for faster load
+const TOTAL_ROWS = 25 // reduce for faster load
 
 const createJoin = (usedNames: Set<string>): LiveJoin => {
   let name = ""
@@ -60,63 +60,39 @@ const createJoin = (usedNames: Set<string>): LiveJoin => {
 
 export default function LiveJoining() {
   const listRef = useRef<HTMLUListElement>(null)
-  const rowsData = useRef<LiveJoin[]>([])
+  const [items, setItems] = useState<LiveJoin[]>([])
 
-  // Populate rows immediately on mount
+  // Populate initial items in React for dark/light support
   useEffect(() => {
     const used = new Set<string>()
-    rowsData.current = Array.from({ length: TOTAL_ROWS }, () =>
-      createJoin(used)
-    )
-
-    const ul = listRef.current
-    if (!ul) return
-
-    ul.innerHTML = ""
-    rowsData.current.forEach((row) => {
-      const li = document.createElement("li")
-      li.className =
-        "grid grid-cols-3 items-center border rounded-xl p-3 text-sm md:text-base text-white"
-      li.innerHTML = `
-        <span class="font-semibold truncate">${row.name}</span>
-        <span class="text-center text-lg">${row.flag}</span>
-        <span class="opacity-80 text-center">${row.time}</span>
-      `
-      li.style.marginBottom = "0px"
-      li.style.background = `linear-gradient(
-        90deg,
-        hsl(${row.gradientOffset},100%,50%),
-        hsl(${(row.gradientOffset+120)%360},100%,50%),
-        hsl(${(row.gradientOffset+240)%360},100%,50%)
-      )`
-      ul.appendChild(li)
-    })
+    const initial = Array.from({ length: TOTAL_ROWS }, () => createJoin(used))
+    setItems(initial)
   }, [])
 
-  // Animate rows purely in DOM
+  // DOM-only animation for speed
   useEffect(() => {
+    if (!listRef.current) return
+    const ul = listRef.current
     let raf: number
-    const animate = () => {
-      const ul = listRef.current
-      if (!ul) return
 
+    const animate = () => {
       const rows = Array.from(ul.children) as HTMLLIElement[]
       rows.forEach((row, i) => {
-        const data = rowsData.current[i]
+        const data = items[i]
         if (!data) return
 
-        // move row
+        // animate margin
         let mb = parseFloat(row.style.marginBottom || "0")
         mb += data.speed
         row.style.marginBottom = `${mb}px`
 
-        // animate gradient slowly
+        // animate gradient
         data.gradientOffset += 0.4
         row.style.background = `linear-gradient(
           90deg,
           hsl(${data.gradientOffset},100%,50%),
-          hsl(${(data.gradientOffset+120)%360},100%,50%),
-          hsl(${(data.gradientOffset+240)%360},100%,50%)
+          hsl(${(data.gradientOffset + 120) % 360},100%,50%),
+          hsl(${(data.gradientOffset + 240) % 360},100%,50%)
         )`
       })
 
@@ -129,16 +105,12 @@ export default function LiveJoining() {
           rows.forEach((r) => (r.style.marginBottom = "0"))
 
           // create new row on top
-          const used = new Set(rowsData.current.map((r) => r.name))
+          const used = new Set(items.map((r) => r.name))
           const newRow = createJoin(used)
-          rowsData.current.pop()
-          rowsData.current.unshift(newRow)
-
-          // update first DOM element
-          const firstLi = rows[0] as HTMLLIElement
-          firstLi.querySelector("span.font-semibold")!.textContent = newRow.name
-          firstLi.querySelector("span.text-lg")!.textContent = newRow.flag
-          firstLi.querySelector("span.opacity-80")!.textContent = newRow.time
+          const updated = [...items]
+          updated.pop()
+          updated.unshift(newRow)
+          setItems(updated) // only update once per scroll cycle
         }
       }
 
@@ -147,7 +119,7 @@ export default function LiveJoining() {
 
     raf = requestAnimationFrame(animate)
     return () => cancelAnimationFrame(raf)
-  }, [])
+  }, [items])
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">
@@ -163,7 +135,27 @@ export default function LiveJoining() {
           <span className="hidden md:block">Time</span>
         </div>
 
-        <ul ref={listRef} className="space-y-2"></ul>
+        <ul ref={listRef} className="space-y-2">
+          {items.map((j) => (
+            <li
+              key={j.id}
+              className="grid grid-cols-3 items-center border rounded-xl p-3 text-sm md:text-base text-white"
+              style={{
+                marginBottom: "0px",
+                background: `linear-gradient(
+                  90deg,
+                  hsl(${j.gradientOffset},100%,50%),
+                  hsl(${(j.gradientOffset + 120) % 360},100%,50%),
+                  hsl(${(j.gradientOffset + 240) % 360},100%,50%)
+                )`,
+              }}
+            >
+              <span className="font-semibold truncate">{j.name}</span>
+              <span className="text-center text-lg">{j.flag}</span>
+              <span className="opacity-80 text-center">{j.time}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   )
