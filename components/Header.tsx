@@ -122,22 +122,20 @@ export default function Header() {
 
             {mobileEarnOpen && (
               <div className="flex flex-col gap-3 pl-4 text-sm">
-                <Link className="block" href="/surveys">Surveys</Link>
-                <Link className="block" href="/app-installs">App Installs</Link>
-                <Link className="block" href="/play-games">Play Games</Link>
-                <Link className="block" href="/watch-videos">Watch Videos</Link>
-                <Link className="block" href="/offerwall">Offerwall</Link>
+                <Link href="/surveys">Surveys</Link>
+                <Link href="/app-installs">App Installs</Link>
+                <Link href="/play-games">Play Games</Link>
+                <Link href="/watch-videos">Watch Videos</Link>
+                <Link href="/offerwall">Offerwall</Link>
               </div>
             )}
 
-            {/* ✅ FIXED COLUMN LINKS */}
             <div className="flex flex-col gap-3">
-              <Link className="block" href="/cashout">Cashout</Link>
-              <Link className="block" href="/blog">Blog</Link>
-              <Link className="block" href="/help">Help</Link>
+              <Link href="/cashout">Cashout</Link>
+              <Link href="/blog">Blog</Link>
+              <Link href="/help">Help</Link>
             </div>
 
-            {/* ✅ CENTERED THEME TOGGLE */}
             <button
               onClick={() => setTheme(isDark ? "light" : "dark")}
               className={`w-full flex items-center justify-center gap-2 p-3 rounded-lg border
@@ -148,14 +146,13 @@ export default function Header() {
               {isDark ? "Light Mode" : "Dark Mode"}
             </button>
 
-            {/* AUTH */}
             <div className="pt-4 flex flex-col gap-3">
-              <Link className="block text-center py-2 border rounded-lg" href="/login">
+              <Link className="text-center py-2 border rounded-lg" href="/login">
                 Login
               </Link>
               <Link
                 href="/register"
-                className="block text-center py-2 rounded-lg bg-indigo-600 text-white"
+                className="text-center py-2 rounded-lg bg-indigo-600 text-white"
               >
                 Sign Up
               </Link>
