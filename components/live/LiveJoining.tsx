@@ -4,35 +4,54 @@ import { useEffect, useRef, useState } from "react"
 
 /* ================= DATA ================= */
 
-const countries = [
-  { name: "USA", flag: "🇺🇸" },
-  { name: "UK", flag: "🇬🇧" },
-  { name: "Canada", flag: "🇨🇦" },
-  { name: "Germany", flag: "🇩🇪" },
-  { name: "India", flag: "🇮🇳" },
-  { name: "France", flag: "🇫🇷" },
-  { name: "Japan", flag: "🇯🇵" },
-  { name: "Brazil", flag: "🇧🇷" },
-]
-
 const names = [
-  "Alex", "Mia", "John", "Sara", "Leo",
-  "Emma", "Chris", "Liam", "Olivia", "Noah",
+  "Alex",
+  "Emma",
+  "Liam",
+  "Noah",
+  "Olivia",
+  "Sophia",
+  "James",
+  "Daniel",
+  "Ava",
+  "Lucas",
+  "Mia",
+  "Ethan",
+  "Amelia",
+  "Benjamin",
+  "Henry",
+  "Ella",
+  "Jack",
+  "Leo",
+  "Grace",
+  "Arjun",
+  "Ayaan",
+  "Rahul",
+  "Sofia",
 ]
 
-const randomUser = () =>
-  names[Math.floor(Math.random() * names.length)] +
-  Math.floor(Math.random() * 100)
+const countries = [
+  { flag: "🇺🇸" },
+  { flag: "🇬🇧" },
+  { flag: "🇨🇦" },
+  { flag: "🇩🇪" },
+  { flag: "🇫🇷" },
+  { flag: "🇮🇳" },
+  { flag: "🇯🇵" },
+  { flag: "🇧🇷" },
+]
 
 const randomCountry = () =>
   countries[Math.floor(Math.random() * countries.length)]
 
+const randomTime = () =>
+  `${Math.floor(Math.random() * 10) + 1}s ago`
+
 /* ================= TYPES ================= */
 
-interface LiveUser {
+interface LiveJoin {
   id: number
-  user: string
-  country: string
+  name: string
   flag: string
   time: string
   speed: number
@@ -44,16 +63,27 @@ interface LiveUser {
 const ROW_HEIGHT = 48
 const FPS = 60
 
-const createUser = (id: number): LiveUser => {
-  const c = randomCountry()
+const createJoin = (
+  id: number,
+  usedNames: Set<string>
+): LiveJoin => {
+  let name = ""
+
+  // Ensure unique name
+  do {
+    name = names[Math.floor(Math.random() * names.length)]
+  } while (usedNames.has(name))
+
+  usedNames.add(name)
+
   const scrollTime = 1 + Math.random() * 11
+  const c = randomCountry()
 
   return {
     id,
-    user: randomUser(),
-    country: c.name,
+    name,
     flag: c.flag,
-    time: `${Math.floor(Math.random() * 10) + 1}s ago`,
+    time: randomTime(),
     speed: ROW_HEIGHT / (scrollTime * FPS),
     gradientOffset: Math.random() * 360,
   }
@@ -62,11 +92,17 @@ const createUser = (id: number): LiveUser => {
 /* ================= COMPONENT ================= */
 
 export default function LiveJoining() {
-  const [users, setUsers] = useState<LiveUser[]>(
-    Array.from({ length: 100 }, (_, i) => createUser(i))
-  )
-
+  const [items, setItems] = useState<LiveJoin[]>([])
   const listRef = useRef<HTMLUListElement>(null)
+
+  // Initial population (unique names)
+  useEffect(() => {
+    const used = new Set<string>()
+    const initial = Array.from({ length: 40 }, (_, i) =>
+      createJoin(i, used)
+    )
+    setItems(initial)
+  }, [])
 
   useEffect(() => {
     let raf: number
@@ -79,27 +115,24 @@ export default function LiveJoining() {
       ) as HTMLLIElement[]
 
       rows.forEach((row, index) => {
-        const user = users[index]
-        if (!user) return
+        const item = items[index]
+        if (!item) return
 
-        // vertical scroll illusion
         let mb = parseFloat(row.style.marginBottom || "0")
-        mb += user.speed
+        mb += item.speed
         row.style.marginBottom = `${mb}px`
 
-        // animated rainbow gradient
-        user.gradientOffset += 0.6
+        item.gradientOffset += 0.6
         row.style.background = `
           linear-gradient(
             90deg,
-            hsl(${user.gradientOffset},100%,50%),
-            hsl(${(user.gradientOffset + 120) % 360},100%,50%),
-            hsl(${(user.gradientOffset + 240) % 360},100%,50%)
+            hsl(${item.gradientOffset},100%,50%),
+            hsl(${(item.gradientOffset + 120) % 360},100%,50%),
+            hsl(${(item.gradientOffset + 240) % 360},100%,50%)
           )
         `
       })
 
-      // recycle rows
       const last = rows[rows.length - 1]
       if (last) {
         const height = last.offsetHeight
@@ -108,12 +141,11 @@ export default function LiveJoining() {
         if (mb >= height) {
           rows.forEach((r) => (r.style.marginBottom = "0"))
 
-          setUsers((prev) => {
+          setItems((prev) => {
+            const usedNames = new Set(prev.map((i) => i.name))
             const next = [...prev]
-            const moved = next.pop()
-            if (moved) {
-              next.unshift(createUser(moved.id))
-            }
+            next.pop()
+            next.unshift(createJoin(Date.now(), usedNames))
             return next
           })
         }
@@ -124,7 +156,7 @@ export default function LiveJoining() {
 
     raf = requestAnimationFrame(animate)
     return () => cancelAnimationFrame(raf)
-  }, [users])
+  }, [items])
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">
@@ -133,26 +165,30 @@ export default function LiveJoining() {
       </h3>
 
       <div className="overflow-hidden h-[360px] md:h-[400px] rounded-xl px-2 py-2">
+        {/* Header */}
         <div className="grid grid-cols-3 text-center mb-2 text-white font-semibold">
-          <span className="hidden md:block">Username</span>
+          <span className="hidden md:block">Name</span>
           <span className="hidden md:block">Country</span>
           <span className="hidden md:block">Time</span>
         </div>
 
         <ul ref={listRef} className="space-y-2">
-          {users.map((u) => (
+          {items.map((j) => (
             <li
-              key={u.id}
-              className="flex justify-between items-center border rounded-xl p-3 text-sm md:text-base text-white"
+              key={j.id}
+              className="grid grid-cols-3 items-center border rounded-xl p-3 text-sm md:text-base text-white"
             >
-              <span className="font-semibold">{u.user}</span>
-
-              <span className="flex gap-2 items-center">
-                <span>{u.flag}</span>
-                <span className="hidden md:inline">{u.country}</span>
+              <span className="font-semibold truncate">
+                {j.name}
               </span>
 
-              <span className="opacity-80">{u.time}</span>
+              <span className="text-center text-lg">
+                {j.flag}
+              </span>
+
+              <span className="opacity-80 text-center">
+                {j.time}
+              </span>
             </li>
           ))}
         </ul>
