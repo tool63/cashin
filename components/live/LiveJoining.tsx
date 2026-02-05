@@ -1,19 +1,18 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 
 /* ================= DATA ================= */
 
-const NAMES = [
+const names = [
   "Alex","Emma","Liam","Noah","Olivia","Sophia","James","Daniel",
   "Ava","Lucas","Mia","Ethan","Amelia","Benjamin","Henry","Ella",
   "Jack","Leo","Grace","Arjun","Ayaan","Rahul","Sofia",
 ]
 
-const FLAGS = ["🇺🇸","🇬🇧","🇨🇦","🇩🇪","🇫🇷","🇮🇳","🇯🇵","🇧🇷"]
+const flags = ["🇺🇸","🇬🇧","🇨🇦","🇩🇪","🇫🇷","🇮🇳","🇯🇵","🇧🇷"]
 
-const randomTime = () =>
-  `${Math.floor(Math.random() * 10) + 1}s ago`
+const randomTime = () => `${Math.floor(Math.random() * 10) + 1}s ago`
 
 /* ================= TYPES ================= */
 
@@ -22,21 +21,14 @@ interface LiveJoin {
   name: string
   flag: string
   time: string
-  speed: number
 }
-
-/* ================= CONSTANTS ================= */
-
-const ROW_HEIGHT = 48
-const FPS = 60
-const INITIAL_ROWS = 20
 
 /* ================= HELPERS ================= */
 
-function createJoin(used: Set<string>): LiveJoin {
+const createJoin = (used: Set<string>): LiveJoin => {
   let name = ""
   do {
-    name = NAMES[Math.floor(Math.random() * NAMES.length)]
+    name = names[Math.floor(Math.random() * names.length)]
   } while (used.has(name))
 
   used.add(name)
@@ -44,9 +36,8 @@ function createJoin(used: Set<string>): LiveJoin {
   return {
     id: Date.now() + Math.random(),
     name,
-    flag: FLAGS[Math.floor(Math.random() * FLAGS.length)],
+    flag: flags[Math.floor(Math.random() * flags.length)],
     time: randomTime(),
-    speed: ROW_HEIGHT / ((1 + Math.random() * 11) * FPS),
   }
 }
 
@@ -54,68 +45,43 @@ function createJoin(used: Set<string>): LiveJoin {
 
 export default function LiveJoining() {
   const [items, setItems] = useState<LiveJoin[]>([])
-  const listRef = useRef<HTMLUListElement>(null)
-  const usedNamesRef = useRef<Set<string>>(new Set())
-  const startedRef = useRef(false)
+  const offsetRef = useRef(0)
+  const containerRef = useRef<HTMLUListElement>(null)
 
-  /* ---------- INITIAL LOAD ---------- */
+  /* Initial items (only once) */
   useEffect(() => {
-    const initial: LiveJoin[] = []
-    for (let i = 0; i < INITIAL_ROWS; i++) {
-      initial.push(createJoin(usedNamesRef.current))
-    }
-    setItems(initial)
+    const used = new Set<string>()
+    setItems(Array.from({ length: 40 }, () => createJoin(used)))
   }, [])
 
-  /* ---------- ANIMATION (NO RE-RENDER LOOP) ---------- */
+  /* Smooth auto scroll (optimized) */
   useEffect(() => {
-    if (startedRef.current) return
-    startedRef.current = true
+    const interval = setInterval(() => {
+      offsetRef.current += 0.5
 
-    let raf: number
-
-    const animate = () => {
-      const list = listRef.current
-      if (!list) return
-
-      const rows = list.children as HTMLCollectionOf<HTMLLIElement>
-
-      for (let i = 0; i < rows.length; i++) {
-        const row = rows[i]
-        const item = items[i]
-        if (!item) continue
-
-        let mb = parseFloat(row.dataset.mb || "0")
-        mb += item.speed
-
-        row.dataset.mb = mb.toString()
-        row.style.marginBottom = `${mb}px`
+      if (containerRef.current) {
+        containerRef.current.style.transform = `translateY(-${offsetRef.current}px)`
       }
 
-      const last = rows[rows.length - 1]
-      if (last) {
-        const mb = parseFloat(last.dataset.mb || "0")
-        if (mb >= ROW_HEIGHT) {
-          last.dataset.mb = "0"
-          last.style.marginBottom = "0"
+      if (offsetRef.current >= 48) {
+        offsetRef.current = 0
 
-          setItems((prev) => {
-            const next = [...prev]
-            next.pop()
-            next.unshift(createJoin(usedNamesRef.current))
-            return next
-          })
-        }
+        setItems(prev => {
+          const used = new Set(prev.map(i => i.name))
+          return [createJoin(used), ...prev.slice(0, -1)]
+        })
       }
+    }, 33) // ~30fps (very light)
 
-      raf = requestAnimationFrame(animate)
-    }
+    return () => clearInterval(interval)
+  }, [])
 
-    raf = requestAnimationFrame(animate)
-    return () => cancelAnimationFrame(raf)
-  }, [items])
-
-  /* ================= UI (UNCHANGED DESIGN) ================= */
+  /* Static gradient (no recalculation per frame) */
+  const gradient = useMemo(
+    () =>
+      "linear-gradient(90deg,#ff0080,#7928ca,#2afadf)",
+    []
+  )
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">
@@ -131,10 +97,14 @@ export default function LiveJoining() {
           <span className="hidden md:block">Time</span>
         </div>
 
-        <ul ref={listRef} className="space-y-2">
-          {items.map((j) => (
+        <ul
+          ref={containerRef}
+          className="space-y-2 will-change-transform"
+        >
+          {items.map(j => (
             <li
               key={j.id}
+              style={{ background: gradient }}
               className="grid grid-cols-3 items-center border rounded-xl p-3 text-sm md:text-base text-white"
             >
               <span className="font-semibold truncate">{j.name}</span>
