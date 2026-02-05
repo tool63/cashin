@@ -5,6 +5,7 @@ import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, ChevronDown, Sun, Moon } from "lucide-react"
 import { useTheme } from "next-themes"
+import { coreLang } from "../lang/core/lang"
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -33,7 +34,7 @@ export default function Header() {
 
         {/* DESKTOP NAV */}
         <nav className="hidden md:flex items-center gap-8 text-sm">
-          <Link href="/how-it-works">How it Works</Link>
+          <Link href="/how-it-works">{coreLang.header.howItWorks}</Link>
 
           <div
             className="relative"
@@ -41,7 +42,7 @@ export default function Header() {
             onMouseLeave={() => setEarnOpen(false)}
           >
             <button className="flex items-center gap-1">
-              Earn <ChevronDown size={14} />
+              {coreLang.header.earn} <ChevronDown size={14} />
             </button>
 
             <AnimatePresence>
@@ -54,19 +55,19 @@ export default function Header() {
                     ${isDark ? "bg-[#0B1020] border border-white/10" : "bg-gray-200"}
                   `}
                 >
-                  <Link href="/surveys">Surveys</Link>
-                  <Link href="/app-installs">App Installs</Link>
-                  <Link href="/play-games">Play Games</Link>
-                  <Link href="/watch-videos">Watch Videos</Link>
-                  <Link href="/offerwall">Offerwall</Link>
+                  <Link href="/surveys">{coreLang.header.earnOptions.surveys}</Link>
+                  <Link href="/app-installs">{coreLang.header.earnOptions.appInstalls}</Link>
+                  <Link href="/play-games">{coreLang.header.earnOptions.playGames}</Link>
+                  <Link href="/watch-videos">{coreLang.header.earnOptions.watchVideos}</Link>
+                  <Link href="/offerwall">{coreLang.header.earnOptions.offerwall}</Link>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
 
-          <Link href="/cashout">Cashout</Link>
-          <Link href="/blog">Blog</Link>
-          <Link href="/help">Help</Link>
+          <Link href="/cashout">{coreLang.header.cashout}</Link>
+          <Link href="/blog">{coreLang.header.blog}</Link>
+          <Link href="/help">{coreLang.header.help}</Link>
         </nav>
 
         {/* DESKTOP CTA */}
@@ -78,12 +79,12 @@ export default function Header() {
             {isDark ? <Sun size={16} /> : <Moon size={16} />}
           </button>
 
-          <Link href="/login">Login</Link>
+          <Link href="/login">{coreLang.header.login}</Link>
           <Link
             href="/register"
             className="px-5 py-2 rounded-lg bg-indigo-600 text-white"
           >
-            Sign Up
+            {coreLang.header.signUp}
           </Link>
         </div>
 
@@ -105,7 +106,7 @@ export default function Header() {
             `}
           >
             <Link className="block" href="/how-it-works">
-              How it Works
+              {coreLang.header.howItWorks}
             </Link>
 
             {/* MOBILE EARN */}
@@ -113,7 +114,7 @@ export default function Header() {
               onClick={() => setMobileEarnOpen(!mobileEarnOpen)}
               className="flex w-full items-center justify-between font-medium"
             >
-              Earn
+              {coreLang.header.earn}
               <ChevronDown
                 size={16}
                 className={`transition ${mobileEarnOpen ? "rotate-180" : ""}`}
@@ -122,18 +123,18 @@ export default function Header() {
 
             {mobileEarnOpen && (
               <div className="flex flex-col gap-3 pl-4 text-sm">
-                <Link href="/surveys">Surveys</Link>
-                <Link href="/app-installs">App Installs</Link>
-                <Link href="/play-games">Play Games</Link>
-                <Link href="/watch-videos">Watch Videos</Link>
-                <Link href="/offerwall">Offerwall</Link>
+                <Link href="/surveys">{coreLang.header.earnOptions.surveys}</Link>
+                <Link href="/app-installs">{coreLang.header.earnOptions.appInstalls}</Link>
+                <Link href="/play-games">{coreLang.header.earnOptions.playGames}</Link>
+                <Link href="/watch-videos">{coreLang.header.earnOptions.watchVideos}</Link>
+                <Link href="/offerwall">{coreLang.header.earnOptions.offerwall}</Link>
               </div>
             )}
 
             <div className="flex flex-col gap-3">
-              <Link href="/cashout">Cashout</Link>
-              <Link href="/blog">Blog</Link>
-              <Link href="/help">Help</Link>
+              <Link href="/cashout">{coreLang.header.cashout}</Link>
+              <Link href="/blog">{coreLang.header.blog}</Link>
+              <Link href="/help">{coreLang.header.help}</Link>
             </div>
 
             <button
@@ -143,18 +144,18 @@ export default function Header() {
               `}
             >
               {isDark ? <Sun size={16} /> : <Moon size={16} />}
-              {isDark ? "Light Mode" : "Dark Mode"}
+              {isDark ? coreLang.header.lightMode : coreLang.header.darkMode}
             </button>
 
             <div className="pt-4 flex flex-col gap-3">
               <Link className="text-center py-2 border rounded-lg" href="/login">
-                Login
+                {coreLang.header.login}
               </Link>
               <Link
                 href="/register"
                 className="text-center py-2 rounded-lg bg-indigo-600 text-white"
               >
-                Sign Up
+                {coreLang.header.signUp}
               </Link>
             </div>
           </motion.div>
