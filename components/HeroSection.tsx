@@ -6,31 +6,34 @@ import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 
 export default function HeroSection() {
+  // Words/phrases to type
   const phrases = ["Surveys", "App Installs", "Playing Games", "Watching Videos"]
 
-  const [text, setText] = useState("")
-  const [wordIndex, setWordIndex] = useState(0)
-  const [charIndex, setCharIndex] = useState(0)
-  const [isDeleting, setIsDeleting] = useState(false)
+  const [text, setText] = useState("")        // Current visible text
+  const [wordIndex, setWordIndex] = useState(0) // Index of current word
+  const [charIndex, setCharIndex] = useState(0) // Index of current character
+  const [isDeleting, setIsDeleting] = useState(false) // Typing or deleting
 
   useEffect(() => {
     const currentWord = phrases[wordIndex]
 
     const timeout = setTimeout(() => {
       if (!isDeleting) {
-        // Typing
+        // Typing effect
         setText(currentWord.slice(0, charIndex + 1))
         setCharIndex((prev) => prev + 1)
 
         if (charIndex + 1 === currentWord.length) {
+          // Pause before deleting
           setTimeout(() => setIsDeleting(true), 900)
         }
       } else {
-        // Deleting
+        // Deleting effect
         setText(currentWord.slice(0, charIndex - 1))
         setCharIndex((prev) => prev - 1)
 
         if (charIndex === 0) {
+          // Move to next word
           setIsDeleting(false)
           setWordIndex((prev) => (prev + 1) % phrases.length)
         }
@@ -47,13 +50,14 @@ export default function HeroSection() {
           Earn Real Money By
         </h1>
 
-        {/* TYPING TEXT */}
+        {/* TYPING EFFECT */}
         <div className="relative h-[56px] md:h-[64px] mb-4">
-          {/* Keeps layout height stable */}
+          {/* Invisible span to keep height consistent */}
           <span className="invisible text-3xl md:text-5xl font-extrabold">
             Watching Videos
           </span>
 
+          {/* Typing text */}
           <span className="absolute inset-0 flex items-center justify-center text-3xl md:text-5xl font-extrabold text-cyan-400">
             {text}
             <span className="ml-1 animate-pulse">|</span>
