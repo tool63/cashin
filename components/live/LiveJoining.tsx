@@ -5,40 +5,14 @@ import { useEffect, useRef } from "react"
 /* ================= DATA ================= */
 
 const names = [
-  "Alex",
-  "Emma",
-  "Liam",
-  "Noah",
-  "Olivia",
-  "Sophia",
-  "James",
-  "Daniel",
-  "Ava",
-  "Lucas",
-  "Mia",
-  "Ethan",
-  "Amelia",
-  "Benjamin",
-  "Henry",
-  "Ella",
-  "Jack",
-  "Leo",
-  "Grace",
-  "Arjun",
-  "Ayaan",
-  "Rahul",
-  "Sofia",
+  "Alex", "Emma", "Liam", "Noah", "Olivia", "Sophia", "James", "Daniel",
+  "Ava", "Lucas", "Mia", "Ethan", "Amelia", "Benjamin", "Henry", "Ella",
+  "Jack", "Leo", "Grace", "Arjun", "Ayaan", "Rahul", "Sofia",
 ]
 
 const countries = [
-  { flag: "🇺🇸" },
-  { flag: "🇬🇧" },
-  { flag: "🇨🇦" },
-  { flag: "🇩🇪" },
-  { flag: "🇫🇷" },
-  { flag: "🇮🇳" },
-  { flag: "🇯🇵" },
-  { flag: "🇧🇷" },
+  { flag: "🇺🇸" }, { flag: "🇬🇧" }, { flag: "🇨🇦" }, { flag: "🇩🇪" },
+  { flag: "🇫🇷" }, { flag: "🇮🇳" }, { flag: "🇯🇵" }, { flag: "🇧🇷" },
 ]
 
 const randomCountry = () =>
@@ -62,7 +36,7 @@ interface LiveJoin {
 
 const ROW_HEIGHT = 48
 const FPS = 60
-const TOTAL_ROWS = 40
+const TOTAL_ROWS = 30 // fewer rows for faster load
 
 const createJoin = (usedNames: Set<string>): LiveJoin => {
   let name = ""
@@ -71,7 +45,7 @@ const createJoin = (usedNames: Set<string>): LiveJoin => {
   } while (usedNames.has(name))
   usedNames.add(name)
 
-  const scrollTime = 0.5 + Math.random() * 2.5 // faster scroll
+  const scrollTime = 0.5 + Math.random() * 2 // faster scrolling
   return {
     id: Date.now() + Math.random(),
     name,
@@ -109,7 +83,12 @@ export default function LiveJoining() {
         <span class="opacity-80 text-center">${row.time}</span>
       `
       li.style.marginBottom = "0px"
-      li.style.background = `linear-gradient(90deg, hsl(${row.gradientOffset},100%,50%), hsl(${(row.gradientOffset+120)%360},100%,50%), hsl(${(row.gradientOffset+240)%360},100%,50%))`
+      li.style.background = `linear-gradient(
+        90deg,
+        hsl(${row.gradientOffset},100%,50%),
+        hsl(${(row.gradientOffset+120)%360},100%,50%),
+        hsl(${(row.gradientOffset+240)%360},100%,50%)
+      )`
       ul.appendChild(li)
     })
   }, [])
@@ -126,12 +105,19 @@ export default function LiveJoining() {
         const data = rowsData.current[i]
         if (!data) return
 
+        // move row
         let mb = parseFloat(row.style.marginBottom || "0")
         mb += data.speed
         row.style.marginBottom = `${mb}px`
 
-        data.gradientOffset += 1
-        row.style.background = `linear-gradient(90deg, hsl(${data.gradientOffset},100%,50%), hsl(${(data.gradientOffset+120)%360},100%,50%), hsl(${(data.gradientOffset+240)%360},100%,50%))`
+        // animate gradient slowly
+        data.gradientOffset += 0.4
+        row.style.background = `linear-gradient(
+          90deg,
+          hsl(${data.gradientOffset},100%,50%),
+          hsl(${(data.gradientOffset+120)%360},100%,50%),
+          hsl(${(data.gradientOffset+240)%360},100%,50%)
+        )`
       })
 
       const last = rows[rows.length - 1]
@@ -139,15 +125,16 @@ export default function LiveJoining() {
         const height = last.offsetHeight
         const mb = parseFloat(last.style.marginBottom || "0")
         if (mb >= height) {
+          // reset margin
           rows.forEach((r) => (r.style.marginBottom = "0"))
 
-          // Add new row on top
+          // create new row on top
           const used = new Set(rowsData.current.map((r) => r.name))
           const newRow = createJoin(used)
           rowsData.current.pop()
           rowsData.current.unshift(newRow)
 
-          // Update DOM for new row
+          // update first DOM element
           const firstLi = rows[0] as HTMLLIElement
           firstLi.querySelector("span.font-semibold")!.textContent = newRow.name
           firstLi.querySelector("span.text-lg")!.textContent = newRow.flag
