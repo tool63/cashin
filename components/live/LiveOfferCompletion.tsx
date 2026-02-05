@@ -5,38 +5,46 @@ import { useEffect, useRef, useState } from "react"
 /* ================= DATA ================= */
 
 const countries = [
-  { name: "USA", flag: "🇺🇸" },
-  { name: "UK", flag: "🇬🇧" },
-  { name: "Canada", flag: "🇨🇦" },
-  { name: "Germany", flag: "🇩🇪" },
-  { name: "India", flag: "🇮🇳" },
-  { name: "France", flag: "🇫🇷" },
-  { name: "Japan", flag: "🇯🇵" },
-  { name: "Brazil", flag: "🇧🇷" },
+  { flag: "🇺🇸" },
+  { flag: "🇬🇧" },
+  { flag: "🇨🇦" },
+  { flag: "🇩🇪" },
+  { flag: "🇮🇳" },
+  { flag: "🇫🇷" },
+  { flag: "🇯🇵" },
+  { flag: "🇧🇷" },
 ]
 
-const offers = [
-  "App Install",
-  "Survey Completed",
-  "Game Level Reached",
-  "Signup Bonus",
-  "Video Watched",
+/* Realistic CPA Offer Names */
+const offerNames = [
+  "Crypto Wallet Signup",
+  "Spin & Win Casino App",
+  "Cash Rewards Survey",
+  "Mobile Legends Level 10",
+  "VPN App Free Trial",
+  "Finance App Registration",
+  "Shopping Cashback App",
+  "Online Quiz Rewards",
+  "Play & Earn Game Offer",
+  "Daily Polls Survey",
+  "Streaming App Trial",
+  "Gift Card Rewards App",
 ]
 
 const randomCountry = () =>
   countries[Math.floor(Math.random() * countries.length)]
 
-const randomOffer = () =>
-  offers[Math.floor(Math.random() * offers.length)]
+const randomOfferName = () =>
+  offerNames[Math.floor(Math.random() * offerNames.length)]
 
 /* ================= AMOUNT LOGIC ================= */
 /**
- * 80% chance: $0.05 – $0.99
- * 20% chance: $1.00 – $2.00
+ * 80%: $0.05 – $0.99
+ * 20%: $1.00 – $2.00
  */
 const randomAmount = () => {
-  const isLow = Math.random() < 0.8
-  const value = isLow
+  const low = Math.random() < 0.8
+  const value = low
     ? Math.random() * 0.94 + 0.05
     : Math.random() * 1 + 1
 
@@ -50,7 +58,7 @@ const randomTime = () =>
 
 interface LiveOffer {
   id: number
-  offer: string
+  offerName: string
   flag: string
   amount: string
   time: string
@@ -69,7 +77,7 @@ const createOffer = (id: number): LiveOffer => {
 
   return {
     id,
-    offer: randomOffer(),
+    offerName: randomOfferName(),
     flag: c.flag,
     amount: randomAmount(),
     time: randomTime(),
@@ -160,7 +168,9 @@ export default function LiveOfferCompletion() {
               key={o.id}
               className="grid grid-cols-4 items-center border rounded-xl p-3 text-sm md:text-base text-white"
             >
-              <span className="font-semibold">{o.offer}</span>
+              <span className="font-semibold truncate">
+                {o.offerName}
+              </span>
 
               <span className="text-center text-lg">
                 {o.flag}
