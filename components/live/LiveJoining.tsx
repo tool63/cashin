@@ -5,16 +5,40 @@ import { useEffect, useRef } from "react"
 /* ================= DATA ================= */
 
 const names = [
-  "Alex", "Emma", "Liam", "Noah", "Olivia", "Sophia",
-  "James", "Daniel", "Ava", "Lucas", "Mia", "Ethan",
-  "Amelia", "Benjamin", "Henry", "Ella", "Jack", "Leo",
-  "Grace", "Arjun", "Ayaan", "Rahul", "Sofia",
+  "Alex",
+  "Emma",
+  "Liam",
+  "Noah",
+  "Olivia",
+  "Sophia",
+  "James",
+  "Daniel",
+  "Ava",
+  "Lucas",
+  "Mia",
+  "Ethan",
+  "Amelia",
+  "Benjamin",
+  "Henry",
+  "Ella",
+  "Jack",
+  "Leo",
+  "Grace",
+  "Arjun",
+  "Ayaan",
+  "Rahul",
+  "Sofia",
 ]
 
 const countries = [
-  { flag: "🇺🇸" }, { flag: "🇬🇧" }, { flag: "🇨🇦" },
-  { flag: "🇩🇪" }, { flag: "🇫🇷" }, { flag: "🇮🇳" },
-  { flag: "🇯🇵" }, { flag: "🇧🇷" },
+  { flag: "🇺🇸" },
+  { flag: "🇬🇧" },
+  { flag: "🇨🇦" },
+  { flag: "🇩🇪" },
+  { flag: "🇫🇷" },
+  { flag: "🇮🇳" },
+  { flag: "🇯🇵" },
+  { flag: "🇧🇷" },
 ]
 
 const randomCountry = () =>
@@ -23,13 +47,9 @@ const randomCountry = () =>
 const randomTime = () =>
   `${Math.floor(Math.random() * 10) + 1}s ago`
 
-/* ================= HELPERS ================= */
+/* ================= TYPES ================= */
 
-const ROW_HEIGHT = 48
-const FPS = 60
-const TOTAL_ROWS = 40
-
-interface RowData {
+interface LiveJoin {
   id: number
   name: string
   flag: string
@@ -38,14 +58,20 @@ interface RowData {
   gradientOffset: number
 }
 
-const createRow = (usedNames: Set<string>): RowData => {
+/* ================= HELPERS ================= */
+
+const ROW_HEIGHT = 48
+const FPS = 60
+const TOTAL_ROWS = 40
+
+const createJoin = (usedNames: Set<string>): LiveJoin => {
   let name = ""
   do {
     name = names[Math.floor(Math.random() * names.length)]
   } while (usedNames.has(name))
   usedNames.add(name)
 
-  const scrollTime = 0.5 + Math.random() * 2.5
+  const scrollTime = 0.5 + Math.random() * 2.5 // faster scroll
   return {
     id: Date.now() + Math.random(),
     name,
@@ -60,19 +86,19 @@ const createRow = (usedNames: Set<string>): RowData => {
 
 export default function LiveJoining() {
   const listRef = useRef<HTMLUListElement>(null)
-  const rowsData = useRef<RowData[]>([])
+  const rowsData = useRef<LiveJoin[]>([])
 
   // Populate rows immediately on mount
   useEffect(() => {
     const used = new Set<string>()
     rowsData.current = Array.from({ length: TOTAL_ROWS }, () =>
-      createRow(used)
+      createJoin(used)
     )
 
     const ul = listRef.current
     if (!ul) return
 
-    ul.innerHTML = "" // clear if any
+    ul.innerHTML = ""
     rowsData.current.forEach((row) => {
       const li = document.createElement("li")
       li.className =
@@ -108,7 +134,6 @@ export default function LiveJoining() {
         row.style.background = `linear-gradient(90deg, hsl(${data.gradientOffset},100%,50%), hsl(${(data.gradientOffset+120)%360},100%,50%), hsl(${(data.gradientOffset+240)%360},100%,50%))`
       })
 
-      // Move rows
       const last = rows[rows.length - 1]
       if (last) {
         const height = last.offsetHeight
@@ -118,7 +143,7 @@ export default function LiveJoining() {
 
           // Add new row on top
           const used = new Set(rowsData.current.map((r) => r.name))
-          const newRow = createRow(used)
+          const newRow = createJoin(used)
           rowsData.current.pop()
           rowsData.current.unshift(newRow)
 
@@ -144,6 +169,7 @@ export default function LiveJoining() {
       </h3>
 
       <div className="overflow-hidden h-[360px] md:h-[400px] rounded-xl px-2 py-2">
+        {/* Header */}
         <div className="grid grid-cols-3 text-center mb-2 text-white font-semibold">
           <span className="hidden md:block">Name</span>
           <span className="hidden md:block">Country</span>
