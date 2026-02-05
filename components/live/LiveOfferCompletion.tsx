@@ -15,11 +15,6 @@ const countries = [
   { name: "Brazil", flag: "🇧🇷" },
 ]
 
-const names = [
-  "Alex", "Mia", "John", "Sara", "Leo",
-  "Emma", "Chris", "Liam", "Olivia", "Noah",
-]
-
 const offers = [
   "App Install",
   "Survey Completed",
@@ -28,24 +23,37 @@ const offers = [
   "Video Watched",
 ]
 
-const randomUser = () =>
-  names[Math.floor(Math.random() * names.length)] +
-  Math.floor(Math.random() * 100)
-
 const randomCountry = () =>
   countries[Math.floor(Math.random() * countries.length)]
 
 const randomOffer = () =>
   offers[Math.floor(Math.random() * offers.length)]
 
+/* ================= AMOUNT LOGIC ================= */
+/**
+ * 80% chance: $0.05 – $0.99
+ * 20% chance: $1.00 – $2.00
+ */
+const randomAmount = () => {
+  const isLow = Math.random() < 0.8
+  const value = isLow
+    ? Math.random() * 0.94 + 0.05
+    : Math.random() * 1 + 1
+
+  return `$${value.toFixed(2)}`
+}
+
+const randomTime = () =>
+  `${Math.floor(Math.random() * 10) + 1}s ago`
+
 /* ================= TYPES ================= */
 
 interface LiveOffer {
   id: number
-  user: string
-  country: string
-  flag: string
   offer: string
+  flag: string
+  amount: string
+  time: string
   speed: number
   gradientOffset: number
 }
@@ -61,10 +69,10 @@ const createOffer = (id: number): LiveOffer => {
 
   return {
     id,
-    user: randomUser(),
-    country: c.name,
-    flag: c.flag,
     offer: randomOffer(),
+    flag: c.flag,
+    amount: randomAmount(),
+    time: randomTime(),
     speed: ROW_HEIGHT / (scrollTime * FPS),
     gradientOffset: Math.random() * 360,
   }
@@ -93,12 +101,10 @@ export default function LiveOfferCompletion() {
         const item = items[index]
         if (!item) return
 
-        // vertical scroll illusion
         let mb = parseFloat(row.style.marginBottom || "0")
         mb += item.speed
         row.style.marginBottom = `${mb}px`
 
-        // animated rainbow gradient
         item.gradientOffset += 0.6
         row.style.background = `
           linear-gradient(
@@ -110,7 +116,6 @@ export default function LiveOfferCompletion() {
         `
       })
 
-      // recycle rows
       const last = rows[rows.length - 1]
       if (last) {
         const height = last.offsetHeight
@@ -122,9 +127,7 @@ export default function LiveOfferCompletion() {
           setItems((prev) => {
             const next = [...prev]
             const moved = next.pop()
-            if (moved) {
-              next.unshift(createOffer(moved.id))
-            }
+            if (moved) next.unshift(createOffer(moved.id))
             return next
           })
         }
@@ -144,26 +147,32 @@ export default function LiveOfferCompletion() {
       </h3>
 
       <div className="overflow-hidden h-[360px] md:h-[400px] rounded-xl px-2 py-2">
-        <div className="grid grid-cols-3 text-center mb-2 text-white font-semibold">
-          <span className="hidden md:block">Username</span>
-          <span className="hidden md:block">Country</span>
+        <div className="grid grid-cols-4 text-center mb-2 text-white font-semibold">
           <span className="hidden md:block">Offer</span>
+          <span className="hidden md:block">Country</span>
+          <span className="hidden md:block">Amount</span>
+          <span className="hidden md:block">Time</span>
         </div>
 
         <ul ref={listRef} className="space-y-2">
           {items.map((o) => (
             <li
               key={o.id}
-              className="flex justify-between items-center border rounded-xl p-3 text-sm md:text-base text-white"
+              className="grid grid-cols-4 items-center border rounded-xl p-3 text-sm md:text-base text-white"
             >
-              <span className="font-semibold">{o.user}</span>
+              <span className="font-semibold">{o.offer}</span>
 
-              <span className="flex gap-2 items-center">
-                <span>{o.flag}</span>
-                <span className="hidden md:inline">{o.country}</span>
+              <span className="text-center text-lg">
+                {o.flag}
               </span>
 
-              <span className="opacity-80">{o.offer}</span>
+              <span className="text-green-300 font-semibold text-center">
+                {o.amount}
+              </span>
+
+              <span className="opacity-80 text-center">
+                {o.time}
+              </span>
             </li>
           ))}
         </ul>
