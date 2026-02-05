@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { ArrowRight, ShieldCheck, Wallet, Zap } from "lucide-react"
 import Link from "next/link"
+import { useParams } from "next/navigation"
 
 /* ================= SMALL COMPONENTS ================= */
 import { SectionTitle, Stat, Feature } from "../components/live/SmallComponents"
@@ -69,39 +70,74 @@ const HeroSection = () => {
   )
 }
 
-/* ================= HOME PAGE ================= */
+/* ================= EARNING OPTIONS ================= */
+const earningOptions = [
+  ["🧠", "Surveys", "/surveys"],
+  ["📱", "App Installs", "/app-installs"],
+  ["🎮", "Playing Games", "/play-games"],
+  ["📺", "Watching Videos", "/watch-videos"],
+  ["⛏️", "Mining Rewards", "/mining-rewards"],
+  ["✅", "Completing Offers", "/complete-offers"],
+  ["🧩", "Offerwall", "/offerwall"],
+  ["📋", "Surveywall", "/surveywall"],
+  ["🎬", "Watching Ads", "/watch-ads"],
+  ["🛠️", "Micro Tasks", "/micro-tasks"],
+  ["🎁", "Free Trials", "/complete-free-trials"],
+  ["🧪", "Testing Products", "/test-products"],
+  ["📧", "Reading Emails", "/read-emails"],
+  ["🌐", "Visiting Websites", "/visit-websites"],
+  ["⭐", "Review Tasks", "/review-tasks"],
+  ["🎡", "Spinning Wheel", "/spinning-wheel"],
+  ["🏆", "Loyalty", "/loyalty"],
+  ["💳", "Vouchers", "/vouchers"],
+]
+
+/* ================= DYNAMIC PAGE ================= */
 export default function Home() {
-  const earningOptions = [
-    ["🧠", "Surveys", "/surveys"],
-    ["📱", "App Installs", "/app-installs"],
-    ["🎮", "Playing Games", "/play-games"],
-    ["📺", "Watching Videos", "/watch-videos"],
-    ["⛏️", "Mining Rewards", "/mining-rewards"],
-    ["✅", "Completing Offers", "/complete-offers"],
-    ["🧩", "Offerwall", "/offerwall"],
-    ["📋", "Surveywall", "/surveywall"],
-    ["🎬", "Watching Ads", "/watch-ads"],
-    ["🛠️", "Micro Tasks", "/micro-tasks"],
-    ["🎁", "Free Trials", "/complete-free-trials"],
-    ["🧪", "Testing Products", "/test-products"],
-    ["📧", "Reading Emails", "/read-emails"],
-    ["🌐", "Visiting Websites", "/visit-websites"],
-    ["⭐", "Review Tasks", "/review-tasks"],
-    ["🎡", "Spinning Wheel", "/spinning-wheel"],
-    ["🏆", "Loyalty", "/loyalty"],
-    ["💳", "Vouchers", "/vouchers"],
-  ]
+  const params = useParams<{ slug: string }>()
+  const slug = params.slug
+
+  // Find matching earning option from earningOptions
+  const option = earningOptions.find(([icon, title, href]) => href === `/${slug}`)
+
+  // Dynamic meta
+  const metaTitle = option
+    ? `${option[1]} | PayUp`
+    : slug
+      ? `${slug.replace("-", " ").charAt(0).toUpperCase() + slug.slice(1)} | PayUp`
+      : "Earn Money Online | PayUp"
+
+  const metaDescription = option
+    ? `Earn money by ${option[1].toLowerCase()} instantly on PayUp.`
+    : slug
+      ? `Learn more about ${slug.replace("-", " ")} and earn real money on PayUp.`
+      : "Complete offers, play games, answer surveys, and cash out instantly on PayUp."
 
   return (
     <>
       {/* ================= META ================= */}
-      <Meta
-        title="Earn Money Online | PayUp"
-        description="Complete offers, play games, answer surveys, and cash out instantly on PayUp."
-      />
+      <Meta title={metaTitle} description={metaDescription} />
 
       <main className="transition-colors duration-300 bg-white text-gray-900 dark:bg-[#070A14] dark:text-white">
+        {/* ================= HERO ================= */}
         <HeroSection />
+
+        {/* ================= PAGE HEADER ================= */}
+        {slug && (
+          <section className="max-w-7xl mx-auto px-6 py-20 text-center">
+            <h1 className="text-3xl md:text-5xl font-bold mb-4">
+              {option
+                ? option[1]
+                : slug.replace("-", " ").charAt(0).toUpperCase() + slug.slice(1)}
+            </h1>
+
+            <p className="text-gray-600 dark:text-gray-400 mb-10">
+              {option
+                ? `Start earning by ${option[1].toLowerCase()} today!`
+                : "Explore opportunities and start earning rewards now."}
+            </p>
+          </section>
+        )}
 
         {/* ================= TRUST ================= */}
         <section className="py-16 bg-gray-100 dark:bg-white/5">
