@@ -5,12 +5,6 @@ import { motion } from "framer-motion"
 import { ArrowRight, ShieldCheck, Wallet, Zap } from "lucide-react"
 import Link from "next/link"
 
-///* ================= LIVE SECTIONS ================= */
-import LiveEarnings from "../components/live/LiveEarnings"
-import LiveWithdrawals from "../components/live/LiveWithdrawals"
-import LiveOfferCompletion from "../components/live/LiveOfferCompletion"
-import LiveJoining from "../components/live/LiveJoining"//
-
 /* ================= SMALL COMPONENTS ================= */
 import { SectionTitle, Stat, Feature } from "../components/live/SmallComponents"
 
@@ -98,23 +92,6 @@ export default function Home() {
   return (
     <main className="transition-colors duration-300 bg-white text-gray-900 dark:bg-[#070A14] dark:text-white">
       <HeroSection />
-
-      {/* ================= LIVE SECTIONS ================= */}
-      <section className="py-16 bg-gray-100 dark:bg-white/5">
-        <LiveEarnings />
-      </section>
-
-      <section className="py-16 bg-gray-100 dark:bg-white/5">
-        <LiveOfferCompletion />
-      </section>
-
-      <section className="py-16 bg-gray-100 dark:bg-white/5">
-        <LiveWithdrawals />
-      </section>
-
-      <section className="py-16 bg-gray-100 dark:bg-white/5">
-        <LiveJoining />
-      </section>
 
       {/* ================= TRUST ================= */}
       <section className="py-16 bg-gray-100 dark:bg-white/5">
