@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, ReactNode } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { Twitter, Facebook, Instagram, Youtube } from "lucide-react"
@@ -16,7 +16,7 @@ export default function Footer() {
   const s = (k: string) => setSub(p => ({ ...p, [k]: !p[k] }))
   const s2 = (k: string) => setSub2(p => ({ ...p, [k]: !p[k] }))
 
-  const A = ({ href, children }: { href: string; children: React.ReactNode }) => (
+  const A = ({ href, children }: { href: string; children: ReactNode }) => (
     <motion.div whileHover={{ x: 4 }} transition={{ duration: 0.15 }}>
       <Link
         href={href}
@@ -36,7 +36,7 @@ export default function Footer() {
   }: {
     id: string
     title: string
-    children: React.ReactNode
+    children: ReactNode
   }) => (
     <div>
       <button
@@ -72,7 +72,7 @@ export default function Footer() {
   }: {
     id: string
     title: string
-    children: React.ReactNode
+    children: ReactNode
     level?: number
   }) => (
     <div className="mt-2" style={{ paddingLeft: `${level * 8}px` }}>
@@ -243,7 +243,7 @@ export default function Footer() {
 
       </div>
 
-      {/* SOCIAL (UNCHANGED) */}
+      {/* SOCIAL */}
       <div className="border-t border-white/10 py-6 flex justify-center gap-6">
         <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer"><Twitter /></a>
         <a href="https://facebook.com/yourpage" target="_blank" rel="noopener noreferrer"><Facebook /></a>
