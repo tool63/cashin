@@ -1,53 +1,63 @@
-"use client";
+"use client"
 
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { LANG } from "../lang/core/lang"; // Make sure this points to your core lang file
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from "react"
+import { LANG } from "../lang/core/lang"
 
-// Type for available languages
-type LangKeys = keyof typeof LANG;
+/* ================= TYPES ================= */
 
-// Type for translation object (all keys of a language)
-type Translations = typeof LANG.en;
+// Language codes like "en", "fr", etc.
+type LangCode = keyof typeof LANG
 
-// Context value type
+// Translation keys (based on EN as source of truth)
+type TranslationKey = keyof typeof LANG["en"]
+
 interface LanguageContextType {
-  lang: LangKeys;
-  t: (key: keyof Translations) => string;
-  setLang: (lang: LangKeys) => void;
+  lang: LangCode
+  t: (key: TranslationKey) => string
+  setLang: (lang: LangCode) => void
 }
 
-// Create context with default value
+/* ================= CONTEXT ================= */
+
 const LanguageContext = createContext<LanguageContextType>({
   lang: "en",
-  t: (key: keyof Translations) => key,
+  t: (key) => key,
   setLang: () => {},
-});
+})
 
-// Provider component
+/* ================= PROVIDER ================= */
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<LangKeys>("en");
+  const [lang, setLang] = useState<LangCode>("en")
 
   useEffect(() => {
-    // Detect browser language
-    const browserLang = navigator.language.split("-")[0] as LangKeys;
-    if (LANG[browserLang]) {
-      setLang(browserLang);
-    }
-  }, []);
+    // Browser language detection
+    const browserLang = navigator.language.split("-")[0] as LangCode
 
-  // Translation function
-  function t(key: keyof Translations) {
-    return LANG[lang]?.[key] || key;
+    if (browserLang in LANG) {
+      setLang(browserLang)
+    }
+  }, [])
+
+  function t(key: TranslationKey): string {
+    return LANG[lang]?.[key] ?? LANG.en[key] ?? key
   }
 
   return (
     <LanguageContext.Provider value={{ lang, t, setLang }}>
       {children}
     </LanguageContext.Provider>
-  );
+  )
 }
 
-// Custom hook to use language context
+/* ================= HOOK ================= */
+
 export function useLang() {
-  return useContext(LanguageContext);
+  return useContext(LanguageContext)
 }
