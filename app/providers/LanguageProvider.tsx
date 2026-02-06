@@ -1,63 +1,44 @@
-"use client"
+"use client";
 
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  ReactNode,
-} from "react"
-import { LANG } from "../lang/core/lang"
+import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { LANG } from "../lang/core/lang"; // core lang file
 
-/* ================= TYPES ================= */
-
-// Language codes like "en", "fr", etc.
-type LangCode = keyof typeof LANG
-
-// Translation keys (based on EN as source of truth)
-type TranslationKey = keyof typeof LANG["en"]
+type LangKeys = keyof typeof LANG;
+type Translations = typeof LANG.en;
 
 interface LanguageContextType {
-  lang: LangCode
-  t: (key: TranslationKey) => string
-  setLang: (lang: LangCode) => void
+  lang: LangKeys;
+  t: (key: keyof Translations) => string;
+  setLang: (lang: LangKeys) => void;
 }
-
-/* ================= CONTEXT ================= */
 
 const LanguageContext = createContext<LanguageContextType>({
   lang: "en",
-  t: (key) => key,
+  t: (key: keyof Translations) => key,
   setLang: () => {},
-})
-
-/* ================= PROVIDER ================= */
+});
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<LangCode>("en")
+  const [lang, setLang] = useState<LangKeys>("en");
 
   useEffect(() => {
-    // Browser language detection
-    const browserLang = navigator.language.split("-")[0] as LangCode
+    const browserLang = navigator.language.split("-")[0] as LangKeys;
+    if (LANG[browserLang]) setLang(browserLang);
+  }, []);
 
-    if (browserLang in LANG) {
-      setLang(browserLang)
-    }
-  }, [])
-
-  function t(key: TranslationKey): string {
-    return LANG[lang]?.[key] ?? LANG.en[key] ?? key
+  // Translation function
+  function t(key: keyof Translations) {
+    return LANG[lang]?.[key] || key;
   }
 
   return (
     <LanguageContext.Provider value={{ lang, t, setLang }}>
       {children}
     </LanguageContext.Provider>
-  )
+  );
 }
 
-/* ================= HOOK ================= */
-
+// Custom hook
 export function useLang() {
-  return useContext(LanguageContext)
+  return useContext(LanguageContext);
 }
