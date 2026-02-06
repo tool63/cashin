@@ -4,36 +4,40 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
+import { useLang } from "../app/providers/LanguageProvider" // ✅ ADD THIS
 
 export default function HeroSection() {
-  // Words/phrases to type
-  const phrases = ["Surveys", "App Installs", "Playing Games", "Watching Videos"]
+  const { t } = useLang() // ✅ language hook
 
-  const [text, setText] = useState("")        // Current visible text
-  const [wordIndex, setWordIndex] = useState(0) // Index of current word
-  const [charIndex, setCharIndex] = useState(0) // Index of current character
-  const [isDeleting, setIsDeleting] = useState(false) // Typing or deleting
+  // Words/phrases to type (now centralized)
+  const phrases = [
+    t("hero_phrase_surveys"),
+    t("hero_phrase_apps"),
+    t("hero_phrase_games"),
+    t("hero_phrase_videos"),
+  ]
+
+  const [text, setText] = useState("")
+  const [wordIndex, setWordIndex] = useState(0)
+  const [charIndex, setCharIndex] = useState(0)
+  const [isDeleting, setIsDeleting] = useState(false)
 
   useEffect(() => {
     const currentWord = phrases[wordIndex]
 
     const timeout = setTimeout(() => {
       if (!isDeleting) {
-        // Typing effect
         setText(currentWord.slice(0, charIndex + 1))
         setCharIndex((prev) => prev + 1)
 
         if (charIndex + 1 === currentWord.length) {
-          // Pause before deleting
           setTimeout(() => setIsDeleting(true), 900)
         }
       } else {
-        // Deleting effect
         setText(currentWord.slice(0, charIndex - 1))
         setCharIndex((prev) => prev - 1)
 
         if (charIndex === 0) {
-          // Move to next word
           setIsDeleting(false)
           setWordIndex((prev) => (prev + 1) % phrases.length)
         }
@@ -47,14 +51,14 @@ export default function HeroSection() {
     <section className="py-24 text-center">
       <div className="max-w-4xl mx-auto px-6">
         <h1 className="text-3xl md:text-5xl font-extrabold mb-2">
-          Earn Real Money By
+          {t("hero_title")}
         </h1>
 
         {/* TYPING EFFECT */}
         <div className="relative h-[56px] md:h-[64px] mb-4">
           {/* Invisible span to keep height consistent */}
           <span className="invisible text-3xl md:text-5xl font-extrabold">
-            Watching Videos
+            {t("hero_phrase_videos")}
           </span>
 
           {/* Typing text */}
@@ -65,7 +69,7 @@ export default function HeroSection() {
         </div>
 
         <p className="mb-8 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-          Complete offers, play games, answer surveys and cash out instantly.
+          {t("hero_description")}
         </p>
 
         <Link href="/signup">
@@ -74,7 +78,7 @@ export default function HeroSection() {
             whileTap={{ scale: 0.97 }}
             className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-black px-10 py-4 rounded-xl font-semibold shadow-lg"
           >
-            Start Earning Now <ArrowRight />
+            {t("hero_cta")} <ArrowRight />
           </motion.span>
         </Link>
       </div>
