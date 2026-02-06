@@ -50,6 +50,7 @@ export default function HeroSection() {
   return (
     <section className="py-24 text-center">
       <div className="max-w-4xl mx-auto px-6">
+        {/* HERO TITLE */}
         <h1 className="text-3xl md:text-5xl font-extrabold mb-2">
           {t("hero_title")}
         </h1>
@@ -68,10 +69,12 @@ export default function HeroSection() {
           </span>
         </div>
 
+        {/* HERO DESCRIPTION */}
         <p className="mb-8 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
           {t("hero_description")}
         </p>
 
+        {/* CTA BUTTON */}
         <Link href="/signup">
           <motion.span
             whileHover={{ scale: 1.05 }}
