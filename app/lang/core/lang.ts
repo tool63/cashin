@@ -1,27 +1,17 @@
-// app/lang/core/lang.ts
-export const coreLang = {
-  header: {
-    howItWorks: "How It Works",
-    earn: "Earn",
-    earnOptions: {
-      surveys: "Surveys",
-      appInstalls: "App Installs",
-      playGames: "Playing Games",
-      watchVideos: "Watching Videos",
-      offerwall: "Offerwall",
-    },
-    cashout: "Cashout",
-    blog: "Blog",
-    help: "Help",
-    login: "Login",
-    signUp: "Sign Up",
-    lightMode: "Light Mode",
-    darkMode: "Dark Mode",
+export const LANG = {
+  en: {
+    hero_title: "Earn Real Money By",
+    hero_description: "Complete offers, play games, answer surveys and cash out instantly.",
+    hero_cta: "Start Earning Now",
+    hero_phrase_surveys: "Surveys",
+    hero_phrase_apps: "App Installs",
+    hero_phrase_games: "Playing Games",
+    hero_phrase_videos: "Watching Videos",
   },
-  footer: {
-    about: "About",
-    contact: "Contact",
-    privacy: "Privacy Policy",
-    terms: "Terms of Service",
+  es: {
+    hero_title: "Gana dinero real",
+    hero_description: "Completa ofertas, juega, responde encuestas y cobra al instante.",
+    hero_cta: "Comenzar ahora",
   },
-}
+  // add more languages here
+};
