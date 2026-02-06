@@ -5,8 +5,7 @@ import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, ChevronDown, Sun, Moon } from "lucide-react"
 import { useTheme } from "next-themes"
-import { coreLang } from "../lang.ts
-"
+import { coreLang } from "../lang/core/lang"
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -23,9 +22,10 @@ export default function Header() {
   return (
     <header
       className={`sticky top-0 z-50 backdrop-blur border-b
-        ${isDark
-          ? "bg-[#070A14]/90 border-white/10 text-white"
-          : "bg-gray-100/90 border-gray-300/10 text-gray-900"
+        ${
+          isDark
+            ? "bg-[#070A14]/90 border-white/10 text-white"
+            : "bg-gray-100/90 border-gray-300/10 text-gray-900"
         }`}
     >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -53,14 +53,28 @@ export default function Header() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
                   className={`absolute top-8 left-0 w-56 p-4 rounded-lg shadow-xl grid grid-cols-2 gap-2
-                    ${isDark ? "bg-[#0B1020] border border-white/10" : "bg-gray-200"}
+                    ${
+                      isDark
+                        ? "bg-[#0B1020] border border-white/10"
+                        : "bg-gray-200"
+                    }
                   `}
                 >
-                  <Link href="/surveys">{coreLang.header.earnOptions.surveys}</Link>
-                  <Link href="/app-installs">{coreLang.header.earnOptions.appInstalls}</Link>
-                  <Link href="/play-games">{coreLang.header.earnOptions.playGames}</Link>
-                  <Link href="/watch-videos">{coreLang.header.earnOptions.watchVideos}</Link>
-                  <Link href="/offerwall">{coreLang.header.earnOptions.offerwall}</Link>
+                  <Link href="/surveys">
+                    {coreLang.header.earnOptions.surveys}
+                  </Link>
+                  <Link href="/app-installs">
+                    {coreLang.header.earnOptions.appInstalls}
+                  </Link>
+                  <Link href="/play-games">
+                    {coreLang.header.earnOptions.playGames}
+                  </Link>
+                  <Link href="/watch-videos">
+                    {coreLang.header.earnOptions.watchVideos}
+                  </Link>
+                  <Link href="/offerwall">
+                    {coreLang.header.earnOptions.offerwall}
+                  </Link>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -103,7 +117,11 @@ export default function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             className={`md:hidden px-6 py-6 space-y-4 border-t
-              ${isDark ? "bg-[#070A14] border-white/10" : "bg-white border-gray-200"}
+              ${
+                isDark
+                  ? "bg-[#070A14] border-white/10"
+                  : "bg-white border-gray-200"
+              }
             `}
           >
             <Link className="block" href="/how-it-works">
@@ -118,17 +136,29 @@ export default function Header() {
               {coreLang.header.earn}
               <ChevronDown
                 size={16}
-                className={`transition ${mobileEarnOpen ? "rotate-180" : ""}`}
+                className={`transition ${
+                  mobileEarnOpen ? "rotate-180" : ""
+                }`}
               />
             </button>
 
             {mobileEarnOpen && (
               <div className="flex flex-col gap-3 pl-4 text-sm">
-                <Link href="/surveys">{coreLang.header.earnOptions.surveys}</Link>
-                <Link href="/app-installs">{coreLang.header.earnOptions.appInstalls}</Link>
-                <Link href="/play-games">{coreLang.header.earnOptions.playGames}</Link>
-                <Link href="/watch-videos">{coreLang.header.earnOptions.watchVideos}</Link>
-                <Link href="/offerwall">{coreLang.header.earnOptions.offerwall}</Link>
+                <Link href="/surveys">
+                  {coreLang.header.earnOptions.surveys}
+                </Link>
+                <Link href="/app-installs">
+                  {coreLang.header.earnOptions.appInstalls}
+                </Link>
+                <Link href="/play-games">
+                  {coreLang.header.earnOptions.playGames}
+                </Link>
+                <Link href="/watch-videos">
+                  {coreLang.header.earnOptions.watchVideos}
+                </Link>
+                <Link href="/offerwall">
+                  {coreLang.header.earnOptions.offerwall}
+                </Link>
               </div>
             )}
 
@@ -141,11 +171,15 @@ export default function Header() {
             <button
               onClick={() => setTheme(isDark ? "light" : "dark")}
               className={`w-full flex items-center justify-center gap-2 p-3 rounded-lg border
-                ${isDark ? "border-white/20" : "border-gray-300"}
+                ${
+                  isDark ? "border-white/20" : "border-gray-300"
+                }
               `}
             >
               {isDark ? <Sun size={16} /> : <Moon size={16} />}
-              {isDark ? coreLang.header.lightMode : coreLang.header.darkMode}
+              {isDark
+                ? coreLang.header.lightMode
+                : coreLang.header.darkMode}
             </button>
 
             <div className="pt-4 flex flex-col gap-3">
