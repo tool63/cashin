@@ -1,4 +1,3 @@
-// app/lang/en/page.tsx
 "use client"
 
 import { useState, useEffect } from "react"
@@ -8,10 +7,10 @@ import Link from "next/link"
 import { useParams } from "next/navigation"
 
 /* ================= SMALL COMPONENTS ================= */
-import { SectionTitle, Stat, Feature } from "../../components/live/SmallComponents"
+import { SectionTitle, Stat, Feature } from "@live/SmallComponents"
 
 /* ================= META COMPONENT ================= */
-import Meta from "../../components/Meta"
+import Meta from "@/Meta"
 
 /* ================= HERO SECTION ================= */
 const HeroSection = () => {
@@ -72,26 +71,7 @@ const HeroSection = () => {
 }
 
 /* ================= EARNING OPTIONS ================= */
-const earningOptions = [
-  ["🧠", "Surveys", "/surveys"],
-  ["📱", "App Installs", "/app-installs"],
-  ["🎮", "Playing Games", "/play-games"],
-  ["📺", "Watching Videos", "/watch-videos"],
-  ["⛏️", "Mining Rewards", "/mining-rewards"],
-  ["✅", "Completing Offers", "/complete-offers"],
-  ["🧩", "Offerwall", "/offerwall"],
-  ["📋", "Surveywall", "/surveywall"],
-  ["🎬", "Watching Ads", "/watch-ads"],
-  ["🛠️", "Micro Tasks", "/micro-tasks"],
-  ["🎁", "Free Trials", "/complete-free-trials"],
-  ["🧪", "Testing Products", "/test-products"],
-  ["📧", "Reading Emails", "/read-emails"],
-  ["🌐", "Visiting Websites", "/visit-websites"],
-  ["⭐", "Review Tasks", "/review-tasks"],
-  ["🎡", "Spinning Wheel", "/spinning-wheel"],
-  ["🏆", "Loyalty", "/loyalty"],
-  ["💳", "Vouchers", "/vouchers"],
-]
+import { earningOptions } from "@/earningOptions"
 
 /* ================= HOME PAGE ================= */
 export default function Home() {
