@@ -5,7 +5,7 @@ import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, ChevronDown, Sun, Moon } from "lucide-react"
 import { useTheme } from "next-themes"
-import { coreLang } from "../lang/core/lang"
+import { coreLang } from "../app/lang"
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
