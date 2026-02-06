@@ -9,6 +9,7 @@ import { SectionTitle, Stat, Feature } from "@live/SmallComponents"
 import { ArrowRight, ShieldCheck, Wallet, Zap } from "lucide-react"
 import Link from "next/link"
 import Meta from "@/Meta"
+import { motion } from "framer-motion" // <--- Added this import
 
 /* ================= DYNAMIC SLUG PAGE ================= */
 export default function DynamicPage() {
