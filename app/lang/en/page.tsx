@@ -1,3 +1,4 @@
+// app/lang/en/page.tsx
 "use client"
 
 import { useState, useEffect } from "react"
@@ -7,10 +8,10 @@ import Link from "next/link"
 import { useParams } from "next/navigation"
 
 /* ================= SMALL COMPONENTS ================= */
-import { SectionTitle, Stat, Feature } from "../components/live/SmallComponents"
+import { SectionTitle, Stat, Feature } from "../../components/live/SmallComponents"
 
 /* ================= META COMPONENT ================= */
-import Meta from "../components/Meta"
+import Meta from "../../components/Meta"
 
 /* ================= HERO SECTION ================= */
 const HeroSection = () => {
