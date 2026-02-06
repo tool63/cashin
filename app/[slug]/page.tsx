@@ -9,28 +9,30 @@ import { SectionTitle, Stat, Feature } from "@live/SmallComponents"
 import { ArrowRight, ShieldCheck, Wallet, Zap } from "lucide-react"
 import Link from "next/link"
 import Meta from "@/Meta"
-import { motion } from "framer-motion" // <--- Added this import
+import { motion } from "framer-motion"
 
 /* ================= DYNAMIC SLUG PAGE ================= */
 export default function DynamicPage() {
   const params = useParams<{ slug: string }>()
   const slug = params.slug
 
-  // Find matching earning option from earningOptions
-  const option = earningOptions.find(([icon, title, href]) => href === `/${slug}`)
+  // Find matching earning option
+  const option = earningOptions.find(
+    ([, , href]) => href === `/${slug}`
+  )
 
   // Dynamic meta
   const title = option
     ? `${option[1]} | PayUp`
     : slug
-      ? `${slug.replace("-", " ").charAt(0).toUpperCase() + slug.slice(1)} | PayUp`
-      : "PayUp"
+    ? `${slug.replace("-", " ").charAt(0).toUpperCase() + slug.slice(1)} | PayUp`
+    : "PayUp"
 
   const description = option
     ? `Earn money by ${option[1].toLowerCase()} instantly on PayUp.`
     : slug
-      ? `Learn more about ${slug.replace("-", " ")} and earn real money on PayUp.`
-      : "PayUp - Earn rewards online"
+    ? `Learn more about ${slug.replace("-", " ")} and earn real money on PayUp.`
+    : "PayUp - Earn rewards online"
 
   return (
     <>
@@ -47,8 +49,8 @@ export default function DynamicPage() {
             {option
               ? option[1]
               : slug
-                ? slug.replace("-", " ").charAt(0).toUpperCase() + slug.slice(1)
-                : "Page"}
+              ? slug.replace("-", " ").charAt(0).toUpperCase() + slug.slice(1)
+              : "Page"}
           </h1>
 
           <p className="text-gray-600 dark:text-gray-400 mb-10">
@@ -61,11 +63,12 @@ export default function DynamicPage() {
         {/* ================= TASKS GRID ================= */}
         <section className="max-w-7xl mx-auto px-6 py-16">
           <SectionTitle icon="🎯" text="Earn Money Tasks" />
+
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {earningOptions.map(([icon, title, href]) => (
               <Link
                 key={title}
-                href={`/lang/en${href}`}
+                href={href} // ✅ FIXED
                 className="rounded-2xl p-6 flex flex-col items-center text-center bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 hover:scale-105 transition"
               >
                 <div className="text-4xl">{icon}</div>
@@ -102,7 +105,10 @@ export default function DynamicPage() {
         {/* ================= PAYMENTS ================= */}
         <section className="py-20">
           <div className="max-w-7xl mx-auto px-6 text-center">
-            <h2 className="text-4xl font-extrabold mb-4">Payment Methods</h2>
+            <h2 className="text-4xl font-extrabold mb-4">
+              Payment Methods
+            </h2>
+
             <p className="text-gray-600 dark:text-gray-400 mb-14 max-w-2xl mx-auto">
               Fast, secure, and trusted payout options.
             </p>
@@ -145,6 +151,7 @@ export default function DynamicPage() {
           <h2 className="text-4xl font-bold mb-6">
             Start Earning Real Money Today!
           </h2>
+
           <p className="mb-8 text-lg text-gray-600 dark:text-gray-400">
             Join millions of users who are already earning daily.
           </p>
