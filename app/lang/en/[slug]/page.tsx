@@ -1,3 +1,4 @@
+// app/lang/en/[slug]/page.tsx
 "use client"
 
 import { useParams } from "next/navigation"
@@ -7,6 +8,7 @@ import { SectionTitle, Stat, Feature } from "../../../components/live/SmallCompo
 import { ArrowRight, ShieldCheck, Wallet, Zap } from "lucide-react"
 import Link from "next/link"
 import Meta from "../../../components/Meta"
+import { motion } from "framer-motion" // ✅ REQUIRED IMPORT
 
 /* ================= DYNAMIC SLUG PAGE ================= */
 export default function DynamicPage() {
