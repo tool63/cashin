@@ -4,7 +4,8 @@ import { useState, ReactNode } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { Twitter, Facebook, Instagram, Youtube } from "lucide-react"
-import { coreLang } from "../lang/core/lang"
+import { coreLang } from "../lang.ts
+"
 
 type Toggle = Record<string, boolean>
 
