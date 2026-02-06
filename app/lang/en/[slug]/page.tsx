@@ -1,14 +1,14 @@
-// app/lang/en/[slug]/page.tsx
 "use client"
 
 import { useParams } from "next/navigation"
-import HeroSection from "../../../components/HeroSection"
-import { earningOptions } from "../../../components/earningOptions"
-import { SectionTitle, Stat, Feature } from "../../../components/live/SmallComponents"
+
+/* ================= COMPONENT IMPORTS ================= */
+import HeroSection from "@/HeroSection"
+import { earningOptions } from "@/earningOptions"
+import { SectionTitle, Stat, Feature } from "@live/SmallComponents"
 import { ArrowRight, ShieldCheck, Wallet, Zap } from "lucide-react"
 import Link from "next/link"
-import Meta from "../../../components/Meta"
-import { motion } from "framer-motion" // ✅ REQUIRED IMPORT
+import Meta from "@/Meta"
 
 /* ================= DYNAMIC SLUG PAGE ================= */
 export default function DynamicPage() {
@@ -64,7 +64,7 @@ export default function DynamicPage() {
             {earningOptions.map(([icon, title, href]) => (
               <Link
                 key={title}
-                href={href}
+                href={`/lang/en${href}`}
                 className="rounded-2xl p-6 flex flex-col items-center text-center bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 hover:scale-105 transition"
               >
                 <div className="text-4xl">{icon}</div>
