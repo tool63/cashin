@@ -1,23 +1,24 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, ChevronDown, Sun, Moon } from "lucide-react"
-import { useTheme } from "next-themes"
-import { coreLang } from "../app/lang/core/lang"
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, ChevronDown, Sun, Moon } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useLang } from "@/app/providers/LanguageProvider"; // ✅ Use dynamic language
 
 export default function Header() {
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const [earnOpen, setEarnOpen] = useState(false)
-  const [mobileEarnOpen, setMobileEarnOpen] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [earnOpen, setEarnOpen] = useState(false);
+  const [mobileEarnOpen, setMobileEarnOpen] = useState(false);
 
-  const { resolvedTheme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const { lang, t } = useLang(); // ✅ Dynamic translations
 
-  useEffect(() => setMounted(true), [])
+  useEffect(() => setMounted(true), []);
 
-  const isDark = mounted ? resolvedTheme === "dark" : true
+  const isDark = mounted ? resolvedTheme === "dark" : true;
 
   return (
     <header
@@ -35,7 +36,7 @@ export default function Header() {
 
         {/* DESKTOP NAV */}
         <nav className="hidden md:flex items-center gap-8 text-sm">
-          <Link href="/how-it-works">{coreLang.header.howItWorks}</Link>
+          <Link href="/how-it-works">{t("header.howItWorks")}</Link>
 
           <div
             className="relative"
@@ -43,7 +44,7 @@ export default function Header() {
             onMouseLeave={() => setEarnOpen(false)}
           >
             <button className="flex items-center gap-1">
-              {coreLang.header.earn} <ChevronDown size={14} />
+              {t("header.earn")} <ChevronDown size={14} />
             </button>
 
             <AnimatePresence>
@@ -60,29 +61,19 @@ export default function Header() {
                     }
                   `}
                 >
-                  <Link href="/surveys">
-                    {coreLang.header.earnOptions.surveys}
-                  </Link>
-                  <Link href="/app-installs">
-                    {coreLang.header.earnOptions.appInstalls}
-                  </Link>
-                  <Link href="/play-games">
-                    {coreLang.header.earnOptions.playGames}
-                  </Link>
-                  <Link href="/watch-videos">
-                    {coreLang.header.earnOptions.watchVideos}
-                  </Link>
-                  <Link href="/offerwall">
-                    {coreLang.header.earnOptions.offerwall}
-                  </Link>
+                  <Link href="/surveys">{t("header.earnOptions.surveys")}</Link>
+                  <Link href="/app-installs">{t("header.earnOptions.appInstalls")}</Link>
+                  <Link href="/play-games">{t("header.earnOptions.playGames")}</Link>
+                  <Link href="/watch-videos">{t("header.earnOptions.watchVideos")}</Link>
+                  <Link href="/offerwall">{t("header.earnOptions.offerwall")}</Link>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
 
-          <Link href="/cashout">{coreLang.header.cashout}</Link>
-          <Link href="/blog">{coreLang.header.blog}</Link>
-          <Link href="/help">{coreLang.header.help}</Link>
+          <Link href="/cashout">{t("header.cashout")}</Link>
+          <Link href="/blog">{t("header.blog")}</Link>
+          <Link href="/help">{t("header.help")}</Link>
         </nav>
 
         {/* DESKTOP CTA */}
@@ -94,12 +85,12 @@ export default function Header() {
             {isDark ? <Sun size={16} /> : <Moon size={16} />}
           </button>
 
-          <Link href="/login">{coreLang.header.login}</Link>
+          <Link href="/login">{t("header.login")}</Link>
           <Link
             href="/register"
             className="px-5 py-2 rounded-lg bg-indigo-600 text-white"
           >
-            {coreLang.header.signUp}
+            {t("header.signUp")}
           </Link>
         </div>
 
@@ -125,7 +116,7 @@ export default function Header() {
             `}
           >
             <Link className="block" href="/how-it-works">
-              {coreLang.header.howItWorks}
+              {t("header.howItWorks")}
             </Link>
 
             {/* MOBILE EARN */}
@@ -133,69 +124,52 @@ export default function Header() {
               onClick={() => setMobileEarnOpen(!mobileEarnOpen)}
               className="flex w-full items-center justify-between font-medium"
             >
-              {coreLang.header.earn}
+              {t("header.earn")}
               <ChevronDown
                 size={16}
-                className={`transition ${
-                  mobileEarnOpen ? "rotate-180" : ""
-                }`}
+                className={`transition ${mobileEarnOpen ? "rotate-180" : ""}`}
               />
             </button>
 
             {mobileEarnOpen && (
               <div className="flex flex-col gap-3 pl-4 text-sm">
-                <Link href="/surveys">
-                  {coreLang.header.earnOptions.surveys}
-                </Link>
-                <Link href="/app-installs">
-                  {coreLang.header.earnOptions.appInstalls}
-                </Link>
-                <Link href="/play-games">
-                  {coreLang.header.earnOptions.playGames}
-                </Link>
-                <Link href="/watch-videos">
-                  {coreLang.header.earnOptions.watchVideos}
-                </Link>
-                <Link href="/offerwall">
-                  {coreLang.header.earnOptions.offerwall}
-                </Link>
+                <Link href="/surveys">{t("header.earnOptions.surveys")}</Link>
+                <Link href="/app-installs">{t("header.earnOptions.appInstalls")}</Link>
+                <Link href="/play-games">{t("header.earnOptions.playGames")}</Link>
+                <Link href="/watch-videos">{t("header.earnOptions.watchVideos")}</Link>
+                <Link href="/offerwall">{t("header.earnOptions.offerwall")}</Link>
               </div>
             )}
 
             <div className="flex flex-col gap-3">
-              <Link href="/cashout">{coreLang.header.cashout}</Link>
-              <Link href="/blog">{coreLang.header.blog}</Link>
-              <Link href="/help">{coreLang.header.help}</Link>
+              <Link href="/cashout">{t("header.cashout")}</Link>
+              <Link href="/blog">{t("header.blog")}</Link>
+              <Link href="/help">{t("header.help")}</Link>
             </div>
 
             <button
               onClick={() => setTheme(isDark ? "light" : "dark")}
               className={`w-full flex items-center justify-center gap-2 p-3 rounded-lg border
-                ${
-                  isDark ? "border-white/20" : "border-gray-300"
-                }
-              `}
+                ${isDark ? "border-white/20" : "border-gray-300"}`}
             >
               {isDark ? <Sun size={16} /> : <Moon size={16} />}
-              {isDark
-                ? coreLang.header.lightMode
-                : coreLang.header.darkMode}
+              {isDark ? t("header.lightMode") : t("header.darkMode")}
             </button>
 
             <div className="pt-4 flex flex-col gap-3">
               <Link className="text-center py-2 border rounded-lg" href="/login">
-                {coreLang.header.login}
+                {t("header.login")}
               </Link>
               <Link
                 href="/register"
                 className="text-center py-2 rounded-lg bg-indigo-600 text-white"
               >
-                {coreLang.header.signUp}
+                {t("header.signUp")}
               </Link>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
     </header>
-  )
+  );
 }
