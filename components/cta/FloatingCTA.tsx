@@ -3,12 +3,14 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import styles from './FloatingCTA.module.css'
+import { useLang } from '@/app/providers/LanguageProvider' // ✅ ADD
 
 export default function FloatingCTA() {
+  const { t } = useLang() // ✅ GET TRANSLATION
   const [visible, setVisible] = useState(true)
   const [bounceKey, setBounceKey] = useState(0)
 
-  const text = 'Start Earning in 60 Seconds'
+  const text = t('floating_cta') // ✅ LANGUAGE TEXT
   const letters = text.split('')
 
   /* ================= AUTO HIDE / SHOW ================= */
