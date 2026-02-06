@@ -4,12 +4,12 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { useLang } from "../app/providers/LanguageProvider"; // ✅ language hook
+import { useLang } from "../app/providers/LanguageProvider"; // ✅ dynamic translations
 
 export default function HeroSection() {
   const { t } = useLang(); // ✅ dynamic translations
 
-  // Words/phrases to type (centralized in LANG file)
+  // Words/phrases to type (centralized in LANG)
   const phrases = [
     t("hero_phrase_surveys"),
     t("hero_phrase_apps"),
@@ -31,7 +31,7 @@ export default function HeroSection() {
         setCharIndex((prev) => prev + 1);
 
         if (charIndex + 1 === currentWord.length) {
-          setTimeout(() => setIsDeleting(true), 900); // pause before deleting
+          setTimeout(() => setIsDeleting(true), 900);
         }
       } else {
         setText(currentWord.slice(0, charIndex - 1));
@@ -39,7 +39,7 @@ export default function HeroSection() {
 
         if (charIndex === 0) {
           setIsDeleting(false);
-          setWordIndex((prev) => (prev + 1) % phrases.length); // loop phrases
+          setWordIndex((prev) => (prev + 1) % phrases.length);
         }
       }
     }, isDeleting ? 50 : 90);
@@ -50,31 +50,26 @@ export default function HeroSection() {
   return (
     <section className="py-24 text-center">
       <div className="max-w-4xl mx-auto px-6">
-        {/* HERO TITLE */}
         <h1 className="text-3xl md:text-5xl font-extrabold mb-2">
           {t("hero_title")}
         </h1>
 
         {/* TYPING EFFECT */}
         <div className="relative h-[56px] md:h-[64px] mb-4">
-          {/* Invisible span to keep height consistent */}
           <span className="invisible text-3xl md:text-5xl font-extrabold">
             {t("hero_phrase_videos")}
           </span>
 
-          {/* Typing text */}
           <span className="absolute inset-0 flex items-center justify-center text-3xl md:text-5xl font-extrabold text-cyan-400">
             {text}
             <span className="ml-1 animate-pulse">|</span>
           </span>
         </div>
 
-        {/* HERO DESCRIPTION */}
         <p className="mb-8 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
           {t("hero_description")}
         </p>
 
-        {/* CTA BUTTON */}
         <Link href="/signup">
           <motion.span
             whileHover={{ scale: 1.05 }}
