@@ -1,51 +1,51 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
-import { ArrowRight } from "lucide-react"
-import Link from "next/link"
-import { useLang } from "../app/providers/LanguageProvider" // ✅ ADD THIS
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { useLang } from "../app/providers/LanguageProvider"; // ✅ language hook
 
 export default function HeroSection() {
-  const { t } = useLang() // ✅ language hook
+  const { t } = useLang(); // ✅ dynamic translations
 
-  // Words/phrases to type (now centralized)
+  // Words/phrases to type (centralized in LANG file)
   const phrases = [
     t("hero_phrase_surveys"),
     t("hero_phrase_apps"),
     t("hero_phrase_games"),
     t("hero_phrase_videos"),
-  ]
+  ];
 
-  const [text, setText] = useState("")
-  const [wordIndex, setWordIndex] = useState(0)
-  const [charIndex, setCharIndex] = useState(0)
-  const [isDeleting, setIsDeleting] = useState(false)
+  const [text, setText] = useState("");
+  const [wordIndex, setWordIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const currentWord = phrases[wordIndex]
+    const currentWord = phrases[wordIndex];
 
     const timeout = setTimeout(() => {
       if (!isDeleting) {
-        setText(currentWord.slice(0, charIndex + 1))
-        setCharIndex((prev) => prev + 1)
+        setText(currentWord.slice(0, charIndex + 1));
+        setCharIndex((prev) => prev + 1);
 
         if (charIndex + 1 === currentWord.length) {
-          setTimeout(() => setIsDeleting(true), 900)
+          setTimeout(() => setIsDeleting(true), 900); // pause before deleting
         }
       } else {
-        setText(currentWord.slice(0, charIndex - 1))
-        setCharIndex((prev) => prev - 1)
+        setText(currentWord.slice(0, charIndex - 1));
+        setCharIndex((prev) => prev - 1);
 
         if (charIndex === 0) {
-          setIsDeleting(false)
-          setWordIndex((prev) => (prev + 1) % phrases.length)
+          setIsDeleting(false);
+          setWordIndex((prev) => (prev + 1) % phrases.length); // loop phrases
         }
       }
-    }, isDeleting ? 50 : 90)
+    }, isDeleting ? 50 : 90);
 
-    return () => clearTimeout(timeout)
-  }, [charIndex, isDeleting, wordIndex, phrases])
+    return () => clearTimeout(timeout);
+  }, [charIndex, isDeleting, wordIndex, phrases]);
 
   return (
     <section className="py-24 text-center">
@@ -83,5 +83,5 @@ export default function HeroSection() {
         </Link>
       </div>
     </section>
-  )
+  );
 }
