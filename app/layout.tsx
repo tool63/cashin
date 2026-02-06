@@ -1,30 +1,22 @@
 // app/layout.tsx
-"use client"
-
 import "../styles/globals.css"
 import { ReactNode } from "react"
-import Header from "../components/Header"
-import Footer from "../components/Footer"
-import FloatingCTA from "../components/FloatingCTA"
+
+import Header from "@/components/Header"
+import Footer from "@/components/Footer"
+import FloatingCTA from "@/components/cta/FloatingCTA"
 import Providers from "./providers"
-import Meta from "../components/Meta"
-import { LanguageProvider } from "./providers/LanguageProvider" // ✅ ADD THIS
+import Meta from "@/components/Meta"
 
 export interface RootLayoutProps {
   children: ReactNode
-  pageTitle?: string
-  pageDescription?: string
 }
 
 // Default site meta
 const defaultTitle = "PayUp"
 const defaultDescription = "Earn rewards, cash out, and get paid"
 
-export default function RootLayout({
-  children,
-  pageTitle,
-  pageDescription,
-}: RootLayoutProps) {
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html
       lang="en"
@@ -32,11 +24,7 @@ export default function RootLayout({
       className="transition-colors duration-300"
     >
       <head>
-        {/* Use Meta component for dynamic SEO */}
-        <Meta
-          title={pageTitle || defaultTitle}
-          description={pageDescription || defaultDescription}
-        />
+        <Meta title={defaultTitle} description={defaultDescription} />
       </head>
 
       <body
@@ -47,19 +35,17 @@ export default function RootLayout({
           antialiased
         "
       >
-        {/* ✅ LANGUAGE SYSTEM WRAPS EVERYTHING */}
-        <LanguageProvider>
-          <Providers>
-            <Header />
+        {/* 🔥 ALL CLIENT LOGIC GOES INSIDE PROVIDERS */}
+        <Providers>
+          <Header />
 
-            <main className="min-h-[calc(100vh-160px)] relative z-0">
-              {children}
-            </main>
+          <main className="min-h-[calc(100vh-160px)] relative z-0">
+            {children}
+          </main>
 
-            <Footer />
-            <FloatingCTA />
-          </Providers>
-        </LanguageProvider>
+          <Footer />
+          <FloatingCTA />
+        </Providers>
       </body>
     </html>
   )
