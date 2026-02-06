@@ -8,6 +8,7 @@ import Footer from "../components/Footer"
 import FloatingCTA from "../components/FloatingCTA"
 import Providers from "./providers"
 import Meta from "../components/Meta"
+import { LanguageProvider } from "./providers/LanguageProvider" // ✅ ADD THIS
 
 export interface RootLayoutProps {
   children: ReactNode
@@ -32,8 +33,12 @@ export default function RootLayout({
     >
       <head>
         {/* Use Meta component for dynamic SEO */}
-        <Meta title={pageTitle || defaultTitle} description={pageDescription || defaultDescription} />
+        <Meta
+          title={pageTitle || defaultTitle}
+          description={pageDescription || defaultDescription}
+        />
       </head>
+
       <body
         className="
           min-h-screen
@@ -42,16 +47,19 @@ export default function RootLayout({
           antialiased
         "
       >
-        <Providers>
-          <Header />
+        {/* ✅ LANGUAGE SYSTEM WRAPS EVERYTHING */}
+        <LanguageProvider>
+          <Providers>
+            <Header />
 
-          <main className="min-h-[calc(100vh-160px)] relative z-0">
-            {children}
-          </main>
+            <main className="min-h-[calc(100vh-160px)] relative z-0">
+              {children}
+            </main>
 
-          <Footer />
-          <FloatingCTA />
-        </Providers>
+            <Footer />
+            <FloatingCTA />
+          </Providers>
+        </LanguageProvider>
       </body>
     </html>
   )
