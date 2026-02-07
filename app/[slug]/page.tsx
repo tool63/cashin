@@ -10,14 +10,18 @@ import { ArrowRight, ShieldCheck, Wallet, Zap } from "lucide-react"
 import Link from "next/link"
 import Meta from "@/components/seo/SeoEngine"
 import { motion } from "framer-motion"
+import { useLang } from "@/app/providers/LanguageProvider"
 
 /* ================= DYNAMIC SLUG PAGE ================= */
 export default function DynamicPage() {
   const params = useParams<{ slug: string }>()
   const slug = params.slug
 
-  // Get all earning options (pass slug as argument to match getEarningOptions signature)
-  const earningOptions = getEarningOptions(slug || "")
+  // Get translation function from LanguageProvider
+  const { t } = useLang()
+
+  // Pass translation function to getEarningOptions
+  const earningOptions = getEarningOptions(t)
 
   // Find matching earning option
   const option = earningOptions.find(
