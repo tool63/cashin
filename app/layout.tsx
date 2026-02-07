@@ -1,49 +1,39 @@
-// app/layout.tsx
 "use client";
 
 import "../styles/globals.css";
 import { ReactNode } from "react";
 
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import FloatingCTA from "@/components/cta/FloatingCTA";
-import { LanguageProvider } from "./providers/LanguageProvider";
-import ThemeProviderWrapper from "@/components/providers/ThemeProviderWrapper"; // ✅ FIXED PATH
-import Meta from "@/components/seo/SeoEngine"; // ✅ FIXED PATH
+import Header from "@/components/common/Header";
+import Footer from "@/components/common/Footer";
+import FloatingCTA from "@/components/common/cta/FloatingCTA";
+import RootProviders from "./providers/RootProviders";
+import Meta from "@/components/seo/SeoEngine";
 
-export interface RootLayoutProps {
+interface RootLayoutProps {
   children: ReactNode;
 }
 
-// Default site meta
 const defaultTitle = "PayUp";
 const defaultDescription = "Earn rewards, cash out, and get paid";
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className="transition-colors duration-300"
-    >
+    <html lang="en" suppressHydrationWarning>
       <head>
         <Meta title={defaultTitle} description={defaultDescription} />
       </head>
 
-      <body className="min-h-screen bg-white text-black dark:bg-black dark:text-white antialiased">
-        {/* 🔥 Wrap all children in Providers */}
-        <LanguageProvider>
-          <ThemeProviderWrapper>
-            <Header />
+      <body className="min-h-screen bg-white text-black dark:bg-black dark:text-white">
+        <RootProviders>
+          <Header />
 
-            <main className="min-h-[calc(100vh-160px)] relative z-0">
-              {children}
-            </main>
+          <main className="min-h-[calc(100vh-160px)]">
+            {children}
+          </main>
 
-            <Footer />
-            <FloatingCTA />
-          </ThemeProviderWrapper>
-        </LanguageProvider>
+          <Footer />
+          <FloatingCTA />
+        </RootProviders>
       </body>
     </html>
   );
