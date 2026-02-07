@@ -4,7 +4,7 @@ import { useState, useEffect, ReactNode } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { Twitter, Facebook, Instagram, Youtube } from "lucide-react"
-import { useLang } from "../app/providers/LanguageProvider" // <-- useLang instead of coreLang
+import { useLang } from "@/app/providers/LanguageProvider"
 
 type Toggle = Record<string, boolean>
 
@@ -14,7 +14,7 @@ export default function Footer() {
   const [sub2, setSub2] = useState<Toggle>({})
   const [isDesktop, setIsDesktop] = useState(false)
 
-  const { t } = useLang() // get translation function
+  const { t } = useLang()
 
   /* Detect desktop */
   useEffect(() => {
@@ -65,7 +65,17 @@ export default function Footer() {
     </div>
   )
 
-  const Sub = ({ id, title, children, level = 1 }: { id: string; title: string; children: ReactNode; level?: number }) => {
+  const Sub = ({
+    id,
+    title,
+    children,
+    level = 1,
+  }: {
+    id: string
+    title: string
+    children: ReactNode
+    level?: number
+  }) => {
     const state = level === 1 ? sub[id] : sub2[id]
 
     return (
@@ -95,7 +105,6 @@ export default function Footer() {
     )
   }
 
-  // Simple column names only, no nested footer.sections
   const footerColumns = {
     getStarted: "Get Started",
     waysToEarn: "Ways to Earn",
