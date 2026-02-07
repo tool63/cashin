@@ -1,65 +1,52 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { LANG } from "../lang/core/lang"; // core lang file
+import { createContext, useContext, useState, ReactNode, useEffect } from "react";
+import { Lang, CountryCode } from "@/lang/types";
+import translations from "@/lang/core/lang";
 
-type LangKeys = keyof typeof LANG; // "en" | "es" | "bn" etc.
-
-interface LanguageContextType {
-  lang: LangKeys;
+interface LanguageContextProps {
+  lang: Lang;
+  setLang: (lang: Lang) => void;
   t: (key: string) => string;
-  setLang: (lang: LangKeys) => void;
 }
 
-const LanguageContext = createContext<LanguageContextType>({
+const LanguageContext = createContext<LanguageContextProps>({
   lang: "en",
-  t: (key: string) => key,
   setLang: () => {},
+  t: (key: string) => key,
 });
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<LangKeys>("en");
+export function useLang() {
+  return useContext(LanguageContext);
+}
 
-  // Auto-detect browser language on mount
-  useEffect(() => {
-    const browserLang = navigator.language.split("-")[0] as LangKeys;
-    if (LANG[browserLang]) setLang(browserLang);
-  }, []);
+interface LanguageProviderProps {
+  children: ReactNode;
+}
 
-  // Optional: Detect country via IP (free API) and set language
+export function LanguageProvider({ children }: LanguageProviderProps) {
+  const [lang, setLang] = useState<Lang>("en");
+
+  // Example: auto-detect language based on country code
   useEffect(() => {
     fetch("https://ipapi.co/json/")
       .then((res) => res.json())
-      .then((data) => {
+      .then((data: { country_code: CountryCode }) => {
         const country = data.country_code;
         if (country === "BD") setLang("bn");
         else if (country === "ES" || country === "MX") setLang("es");
         else setLang("en");
       })
-      .catch(() => {
-        setLang("en"); // fallback
-      });
+      .catch(() => setLang("en"));
   }, []);
 
-  // Translation function
-  function t(key: string) {
-    const keys = key.split(".");
-    let value: any = LANG[lang];
-    for (const k of keys) {
-      if (value[k] === undefined) return key;
-      value = value[k];
-    }
-    return typeof value === "string" ? value : key;
-  }
+  const t = (key: string) => {
+    return translations[lang]?.[key] || key;
+  };
 
   return (
-    <LanguageContext.Provider value={{ lang, t, setLang }}>
+    <LanguageContext.Provider value={{ lang, setLang, t }}>
       {children}
     </LanguageContext.Provider>
   );
-}
-
-// Custom hook
-export function useLang() {
-  return useContext(LanguageContext);
 }
