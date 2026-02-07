@@ -1,26 +1,32 @@
 // components/earning/earningOptions.ts
 
 /**
- * Generates earning options dynamically based on translations.
- * Each option: [icon, translated title, slug]
+ * Static array of earning options: [icon, title, slug]
+ * Can be used directly on homepage and dynamic pages
  */
-export const getEarningOptions = (t: (key: string) => string): [string, string, string][] => [
-  ["🧠", t("hero_phrase_surveys") || "Surveys", "/surveys"],
-  ["📱", t("hero_phrase_apps") || "App Installs", "/app-installs"],
-  ["🎮", t("hero_phrase_games") || "Playing Games", "/play-games"],
-  ["📺", t("hero_phrase_videos") || "Watching Videos", "/watch-videos"],
-  ["⛏️", t("mining_rewards") || "Mining Rewards", "/mining-rewards"],
-  ["✅", t("complete_offers") || "Completing Offers", "/complete-offers"],
-  ["🧩", t("offerwall") || "Offerwall", "/offerwall"],
-  ["📋", t("surveywall") || "Surveywall", "/surveywall"],
-  ["🎬", t("watch_ads") || "Watching Ads", "/watch-ads"],
-  ["🛠️", t("micro_tasks") || "Micro Tasks", "/micro-tasks"],
-  ["🎁", t("free_trials") || "Free Trials", "/complete-free-trials"],
-  ["🧪", t("testing_products") || "Testing Products", "/test-products"],
-  ["📧", t("reading_emails") || "Reading Emails", "/read-emails"],
-  ["🌐", t("visiting_websites") || "Visiting Websites", "/visit-websites"],
-  ["⭐", t("review_tasks") || "Review Tasks", "/review-tasks"],
-  ["🎡", t("spinning_wheel") || "Spinning Wheel", "/spinning-wheel"],
-  ["🏆", t("loyalty") || "Loyalty", "/loyalty"],
-  ["💳", t("vouchers") || "Vouchers", "/vouchers"],
+export const earningOptions: [string, string, string][] = [
+  ["🧠", "Surveys", "/surveys"],
+  ["📱", "App Installs", "/app-installs"],
+  ["🎮", "Playing Games", "/play-games"],
+  ["📺", "Watching Videos", "/watch-videos"],
+  ["⛏️", "Mining Rewards", "/mining-rewards"],
+  ["✅", "Completing Offers", "/complete-offers"],
+  ["🧩", "Offerwall", "/offerwall"],
+  ["📋", "Surveywall", "/surveywall"],
+  ["🎬", "Watching Ads", "/watch-ads"],
+  ["🛠️", "Micro Tasks", "/micro-tasks"],
+  ["🎁", "Free Trials", "/complete-free-trials"],
+  ["🧪", "Testing Products", "/test-products"],
+  ["📧", "Reading Emails", "/read-emails"],
+  ["🌐", "Visiting Websites", "/visit-websites"],
+  ["⭐", "Review Tasks", "/review-tasks"],
+  ["🎡", "Spinning Wheel", "/spinning-wheel"],
+  ["🏆", "Loyalty", "/loyalty"],
+  ["💳", "Vouchers", "/vouchers"],
 ];
+
+/**
+ * Optional function to get earning options dynamically
+ * (Useful if you later want translations or filtering)
+ */
+export const getEarningOptions = () => earningOptions;
