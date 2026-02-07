@@ -1,180 +1,123 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, Sun, Moon } from "lucide-react";
+import { Moon, Sun, Menu, X } from "lucide-react";
+import { useLang } from "@/app/providers/LanguageProvider";
 import { useTheme } from "next-themes";
-import { useLang } from "@/app/providers/LanguageProvider"; // ✅ dynamic language
-import LanguageSwitcher from "@/components/toggle/LanguageSwitcher"; // ✅ add switcher
 
 export default function Header() {
+  const { lang, t, setLang } = useLang();
+  const { theme, setTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [earnOpen, setEarnOpen] = useState(false);
-  const [mobileEarnOpen, setMobileEarnOpen] = useState(false);
 
-  const { resolvedTheme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  const { lang, t } = useLang(); // ✅ dynamic translations
-
-  useEffect(() => setMounted(true), []);
-
-  const isDark = mounted ? resolvedTheme === "dark" : true;
+  const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
+  const toggleMobile = () => setMobileOpen(!mobileOpen);
 
   return (
-    <header
-      className={`sticky top-0 z-50 backdrop-blur border-b
-        ${
-          isDark
-            ? "bg-[#070A14]/90 border-white/10 text-white"
-            : "bg-gray-100/90 border-gray-300/10 text-gray-900"
-        }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="text-xl font-bold">
-          Cashog
+    <header className="bg-white dark:bg-black text-black dark:text-white shadow-md fixed w-full z-50">
+      <div className="max-w-7xl mx-auto flex items-center justify-between p-4">
+        {/* Logo */}
+        <Link href="/" className="font-bold text-xl">
+          PayUp
         </Link>
 
-        {/* DESKTOP NAV */}
-        <nav className="hidden md:flex items-center gap-8 text-sm">
-          <Link href="/how-it-works">{t("header.howItWorks")}</Link>
+        {/* Desktop menu */}
+        <nav className="hidden md:flex items-center space-x-6">
+          <Link href="/" className="hover:underline">
+            {t("header.home")}
+          </Link>
+          <Link href="/about" className="hover:underline">
+            {t("header.about")}
+          </Link>
+          <Link href="/contact" className="hover:underline">
+            {t("header.contact")}
+          </Link>
 
-          <div
-            className="relative"
-            onMouseEnter={() => setEarnOpen(true)}
-            onMouseLeave={() => setEarnOpen(false)}
+          {/* Language switch */}
+          <select
+            value={lang}
+            onChange={(e) => setLang(e.target.value as "en" | "es" | "bn")}
+            className="border rounded px-2 py-1 dark:bg-gray-800 dark:text-white"
           >
-            <button className="flex items-center gap-1">
-              {t("header.earn")} <ChevronDown size={14} />
-            </button>
+            <option value="en">EN</option>
+            <option value="es">ES</option>
+            <option value="bn">BN</option>
+          </select>
 
-            <AnimatePresence>
-              {earnOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 8 }}
-                  className={`absolute top-8 left-0 w-56 p-4 rounded-lg shadow-xl grid grid-cols-2 gap-2
-                    ${
-                      isDark
-                        ? "bg-[#0B1020] border border-white/10"
-                        : "bg-gray-200"
-                    }
-                  `}
-                >
-                  <Link href="/surveys">{t("header.earnOptions.surveys")}</Link>
-                  <Link href="/app-installs">{t("header.earnOptions.appInstalls")}</Link>
-                  <Link href="/play-games">{t("header.earnOptions.playGames")}</Link>
-                  <Link href="/watch-videos">{t("header.earnOptions.watchVideos")}</Link>
-                  <Link href="/offerwall">{t("header.earnOptions.offerwall")}</Link>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-
-          <Link href="/cashout">{t("header.cashout")}</Link>
-          <Link href="/blog">{t("header.blog")}</Link>
-          <Link href="/help">{t("header.help")}</Link>
-        </nav>
-
-        {/* DESKTOP CTA */}
-        <div className="hidden md:flex items-center gap-3">
-          <LanguageSwitcher /> {/* ✅ Added here */}
+          {/* Theme toggle */}
           <button
-            onClick={() => setTheme(isDark ? "light" : "dark")}
-            className="p-2 rounded-lg border"
+            onClick={toggleTheme}
+            className="ml-2 p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
           >
-            {isDark ? <Sun size={16} /> : <Moon size={16} />}
+            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
           </button>
 
-          <Link href="/login">{t("header.login")}</Link>
+          {/* Sign Up / Sign In */}
           <Link
-            href="/register"
-            className="px-5 py-2 rounded-lg bg-indigo-600 text-white"
+            href="/signup"
+            className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
           >
             {t("header.signUp")}
           </Link>
-        </div>
+          <Link
+            href="/signin"
+            className="bg-gray-200 dark:bg-gray-800 dark:text-white px-3 py-1 rounded hover:bg-gray-300 dark:hover:bg-gray-700"
+          >
+            {t("header.signIn")}
+          </Link>
+        </nav>
 
-        {/* MOBILE BUTTON */}
-        <button className="md:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
-          {mobileOpen ? <X /> : <Menu />}
+        {/* Mobile menu button */}
+        <button className="md:hidden" onClick={toggleMobile}>
+          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* MOBILE MENU */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className={`md:hidden px-6 py-6 space-y-4 border-t
-              ${
-                isDark
-                  ? "bg-[#070A14] border-white/10"
-                  : "bg-white border-gray-200"
-              }
-            `}
+      {/* Mobile menu */}
+      {mobileOpen && (
+        <div className="md:hidden bg-white dark:bg-black text-black dark:text-white p-4 space-y-4">
+          <Link href="/" onClick={toggleMobile}>
+            {t("header.home")}
+          </Link>
+          <Link href="/about" onClick={toggleMobile}>
+            {t("header.about")}
+          </Link>
+          <Link href="/contact" onClick={toggleMobile}>
+            {t("header.contact")}
+          </Link>
+
+          <select
+            value={lang}
+            onChange={(e) => setLang(e.target.value as "en" | "es" | "bn")}
+            className="border rounded px-2 py-1 dark:bg-gray-800 dark:text-white w-full"
           >
-            <Link className="block" href="/how-it-works">
-              {t("header.howItWorks")}
-            </Link>
+            <option value="en">EN</option>
+            <option value="es">ES</option>
+            <option value="bn">BN</option>
+          </select>
 
-            {/* MOBILE EARN */}
-            <button
-              onClick={() => setMobileEarnOpen(!mobileEarnOpen)}
-              className="flex w-full items-center justify-between font-medium"
-            >
-              {t("header.earn")}
-              <ChevronDown
-                size={16}
-                className={`transition ${mobileEarnOpen ? "rotate-180" : ""}`}
-              />
-            </button>
+          <button
+            onClick={toggleTheme}
+            className="w-full p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
+          >
+            {theme === "dark" ? t("header.lightMode") : t("header.darkMode")}
+          </button>
 
-            {mobileEarnOpen && (
-              <div className="flex flex-col gap-3 pl-4 text-sm">
-                <Link href="/surveys">{t("header.earnOptions.surveys")}</Link>
-                <Link href="/app-installs">{t("header.earnOptions.appInstalls")}</Link>
-                <Link href="/play-games">{t("header.earnOptions.playGames")}</Link>
-                <Link href="/watch-videos">{t("header.earnOptions.watchVideos")}</Link>
-                <Link href="/offerwall">{t("header.earnOptions.offerwall")}</Link>
-              </div>
-            )}
-
-            <div className="flex flex-col gap-3">
-              <Link href="/cashout">{t("header.cashout")}</Link>
-              <Link href="/blog">{t("header.blog")}</Link>
-              <Link href="/help">{t("header.help")}</Link>
-            </div>
-
-            <div className="flex items-center justify-between gap-3 pt-2">
-              <LanguageSwitcher /> {/* ✅ Added here for mobile */}
-              <button
-                onClick={() => setTheme(isDark ? "light" : "dark")}
-                className={`flex items-center gap-2 p-3 rounded-lg border
-                  ${isDark ? "border-white/20" : "border-gray-300"}`}
-              >
-                {isDark ? <Sun size={16} /> : <Moon size={16} />}
-                {isDark ? t("header.lightMode") : t("header.darkMode")}
-              </button>
-            </div>
-
-            <div className="pt-4 flex flex-col gap-3">
-              <Link className="text-center py-2 border rounded-lg" href="/login">
-                {t("header.login")}
-              </Link>
-              <Link
-                href="/register"
-                className="text-center py-2 rounded-lg bg-indigo-600 text-white"
-              >
-                {t("header.signUp")}
-              </Link>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          <Link
+            href="/signup"
+            className="block w-full text-center bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
+          >
+            {t("header.signUp")}
+          </Link>
+          <Link
+            href="/signin"
+            className="block w-full text-center bg-gray-200 dark:bg-gray-800 dark:text-white px-3 py-1 rounded hover:bg-gray-300 dark:hover:bg-gray-700"
+          >
+            {t("header.signIn")}
+          </Link>
+        </div>
+      )}
     </header>
   );
 }
