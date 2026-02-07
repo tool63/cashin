@@ -4,7 +4,7 @@ import { useState, useEffect, ReactNode } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { Twitter, Facebook, Instagram, Youtube } from "lucide-react"
-import { coreLang } from "../app/lang/core/lang"
+import { useLang } from "../app/providers/LanguageProvider" // <-- useLang instead of coreLang
 
 type Toggle = Record<string, boolean>
 
@@ -14,6 +14,8 @@ export default function Footer() {
   const [sub2, setSub2] = useState<Toggle>({})
   const [isDesktop, setIsDesktop] = useState(false)
 
+  const { t } = useLang() // get translation function
+
   /* Detect desktop */
   useEffect(() => {
     const check = () => setIsDesktop(window.innerWidth >= 768)
@@ -22,43 +24,26 @@ export default function Footer() {
     return () => window.removeEventListener("resize", check)
   }, [])
 
-  const t = (k: string) => {
-    if (!isDesktop) setOpen(p => ({ ...p, [k]: !p[k] }))
-  }
-  const s = (k: string) => {
-    if (!isDesktop) setSub(p => ({ ...p, [k]: !p[k] }))
-  }
-  const s2 = (k: string) => {
-    if (!isDesktop) setSub2(p => ({ ...p, [k]: !p[k] }))
-  }
+  const toggle = (k: string) => { if (!isDesktop) setOpen(p => ({ ...p, [k]: !p[k] })) }
+  const toggleSub = (k: string) => { if (!isDesktop) setSub(p => ({ ...p, [k]: !p[k] })) }
+  const toggleSub2 = (k: string) => { if (!isDesktop) setSub2(p => ({ ...p, [k]: !p[k] })) }
 
   const A = ({ href, children }: { href: string; children: ReactNode }) => (
     <motion.div whileHover={{ x: 4 }} transition={{ duration: 0.15 }}>
       <Link
         href={href}
-        className="block transition
-                   text-black dark:text-gray-300
-                   hover:text-black dark:hover:text-white"
+        className="block transition text-black dark:text-gray-300 hover:text-black dark:hover:text-white"
       >
         {children}
       </Link>
     </motion.div>
   )
 
-  const Section = ({
-    id,
-    title,
-    children,
-  }: {
-    id: string
-    title: string
-    children: ReactNode
-  }) => (
+  const Section = ({ id, title, children }: { id: string; title: string; children: ReactNode }) => (
     <div>
       <button
-        onClick={() => t(id)}
-        className="w-full flex justify-between items-center font-semibold mb-3
-                   text-black dark:text-white"
+        onClick={() => toggle(id)}
+        className="w-full flex justify-between items-center font-semibold mb-3 text-black dark:text-white"
       >
         {title}
         {!isDesktop && <span>{open[id] ? "−" : "+"}</span>}
@@ -80,25 +65,14 @@ export default function Footer() {
     </div>
   )
 
-  const Sub = ({
-    id,
-    title,
-    children,
-    level = 1,
-  }: {
-    id: string
-    title: string
-    children: ReactNode
-    level?: number
-  }) => {
+  const Sub = ({ id, title, children, level = 1 }: { id: string; title: string; children: ReactNode; level?: number }) => {
     const state = level === 1 ? sub[id] : sub2[id]
 
     return (
       <div className="mt-2" style={{ paddingLeft: `${level * 8}px` }}>
         <button
-          onClick={() => (level === 1 ? s(id) : s2(id))}
-          className="w-full flex justify-between font-medium
-                     text-black dark:text-gray-300"
+          onClick={() => (level === 1 ? toggleSub(id) : toggleSub2(id))}
+          className="w-full flex justify-between font-medium text-black dark:text-gray-300"
         >
           {title}
           {!isDesktop && <span>{state ? "−" : "+"}</span>}
@@ -121,12 +95,33 @@ export default function Footer() {
     )
   }
 
+  // Translation wrapper for footer
+  const footer = {
+    sections: {
+      getStarted: t("footer.sections.getStarted") || "Get Started",
+      waysToEarn: t("footer.sections.waysToEarn") || "Ways to Earn",
+      guides: t("footer.sections.guides") || "Guides",
+      rewards: t("footer.sections.rewards") || "Rewards",
+      resources: t("footer.sections.resources") || "Resources",
+      business: t("footer.sections.business") || "Business",
+      cashback: t("footer.sections.cashback") || "Cashback",
+      legal: t("footer.sections.legal") || "Legal",
+    },
+    social: {
+      twitter: t("footer.social.twitter") || "https://twitter.com/",
+      facebook: t("footer.social.facebook") || "https://facebook.com/",
+      instagram: t("footer.social.instagram") || "https://instagram.com/",
+      youtube: t("footer.social.youtube") || "https://youtube.com/",
+    },
+    copyright: t("footer.copyright") || "© 2026 Cashooz. All rights reserved.",
+  }
+
   return (
     <footer className="bg-gray-100 text-gray-700 dark:bg-[#070A14] dark:text-gray-300 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-2 md:grid-cols-4 gap-10">
 
         {/* COLUMN 1 */}
-        <Section id="start" title={coreLang.footer.sections.getStarted}>
+        <Section id="start" title={footer.sections.getStarted}>
           <A href="/how-it-works">How Cashog Works</A>
           <A href="/start-earning">How to Start Earning</A>
           <A href="/cashout">Cashout Methods</A>
@@ -135,7 +130,7 @@ export default function Footer() {
         </Section>
 
         {/* COLUMN 2 */}
-        <Section id="earn" title={coreLang.footer.sections.waysToEarn}>
+        <Section id="earn" title={footer.sections.waysToEarn}>
           <A href="/surveys">Surveys</A>
           <A href="/app-installs">App Installs</A>
           <A href="/play-games">Playing Games</A>
@@ -160,7 +155,7 @@ export default function Footer() {
         </Section>
 
         {/* COLUMN 3 */}
-        <Section id="guides" title={coreLang.footer.sections.guides}>
+        <Section id="guides" title={footer.sections.guides}>
           <A href="/make-money-online">Make Money Online</A>
           <A href="/earn-money-from-home">Earn Money from Home</A>
           <A href="/earn-without-investment">Earn Without Investment</A>
@@ -186,7 +181,7 @@ export default function Footer() {
         </Section>
 
         {/* COLUMN 4 */}
-        <Section id="payments" title={coreLang.footer.sections.rewards}>
+        <Section id="payments" title={footer.sections.rewards}>
           <A href="/earn-paypal-money">Earn PayPal Money</A>
 
           <Sub id="giftcards" title="Earn Gift Cards">
@@ -213,7 +208,7 @@ export default function Footer() {
         </Section>
 
         {/* COLUMN 5 */}
-        <Section id="resources" title={coreLang.footer.sections.resources}>
+        <Section id="resources" title={footer.sections.resources}>
           <A href="/blog">Blog</A>
           <A href="/help">Help Center</A>
           <A href="/faq">FAQ</A>
@@ -222,14 +217,14 @@ export default function Footer() {
         </Section>
 
         {/* COLUMN 6 */}
-        <Section id="business" title={coreLang.footer.sections.business}>
+        <Section id="business" title={footer.sections.business}>
           <A href="/affiliate">Affiliate Program</A>
           <A href="/partners">Partners</A>
           <A href="/advertise">Advertise with Cashooz</A>
         </Section>
 
         {/* COLUMN 7 */}
-        <Section id="cashback" title={coreLang.footer.sections.cashback}>
+        <Section id="cashback" title={footer.sections.cashback}>
           <A href="/cashback-offers">Cashback Offers</A>
 
           <Sub id="shopping" title="Shopping & Rewards">
@@ -254,7 +249,7 @@ export default function Footer() {
         </Section>
 
         {/* COLUMN 8 */}
-        <Section id="legal" title={coreLang.footer.sections.legal}>
+        <Section id="legal" title={footer.sections.legal}>
           <A href="https://cashog.com/terms-and-conditions">Terms & Conditions</A>
           <A href="https://cashog.com/privacy-policy">Privacy Policy</A>
           <A href="https://cashog.com/cookie-policy">Cookie Policy</A>
@@ -264,14 +259,14 @@ export default function Footer() {
 
       {/* SOCIAL */}
       <div className="border-t border-white/10 py-6 flex justify-center gap-6">
-        <a href={coreLang.footer.social.twitter} target="_blank" rel="noopener noreferrer"><Twitter /></a>
-        <a href={coreLang.footer.social.facebook} target="_blank" rel="noopener noreferrer"><Facebook /></a>
-        <a href={coreLang.footer.social.instagram} target="_blank" rel="noopener noreferrer"><Instagram /></a>
-        <a href={coreLang.footer.social.youtube} target="_blank" rel="noopener noreferrer"><Youtube /></a>
+        <a href={footer.social.twitter} target="_blank" rel="noopener noreferrer"><Twitter /></a>
+        <a href={footer.social.facebook} target="_blank" rel="noopener noreferrer"><Facebook /></a>
+        <a href={footer.social.instagram} target="_blank" rel="noopener noreferrer"><Instagram /></a>
+        <a href={footer.social.youtube} target="_blank" rel="noopener noreferrer"><Youtube /></a>
       </div>
 
       <div className="text-center text-sm text-gray-500 pb-6">
-        {coreLang.footer.copyright}
+        {footer.copyright}
       </div>
     </footer>
   )
