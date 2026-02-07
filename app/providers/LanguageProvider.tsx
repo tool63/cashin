@@ -1,7 +1,7 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode, useEffect } from "react";
-import { Lang, CountryCode } from "@/lang/types";
+import { createContext, useContext, useState, ReactNode } from "react";
+import { Lang } from "@/lang/types";
 import translations from "@/lang/core/lang";
 
 interface LanguageContextProps {
@@ -10,43 +10,25 @@ interface LanguageContextProps {
   t: (key: string) => string;
 }
 
-const LanguageContext = createContext<LanguageContextProps>({
-  lang: "en",
-  setLang: () => {},
-  t: (key: string) => key,
-});
+const LanguageContext = createContext<LanguageContextProps | null>(null);
 
-export function useLang() {
-  return useContext(LanguageContext);
-}
-
-interface LanguageProviderProps {
-  children: ReactNode;
-}
-
-export function LanguageProvider({ children }: LanguageProviderProps) {
+export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Lang>("en");
 
-  // Example: auto-detect language based on country code
-  useEffect(() => {
-    fetch("https://ipapi.co/json/")
-      .then((res) => res.json())
-      .then((data: { country_code: CountryCode }) => {
-        const country = data.country_code;
-        if (country === "BD") setLang("bn");
-        else if (country === "ES" || country === "MX") setLang("es");
-        else setLang("en");
-      })
-      .catch(() => setLang("en"));
-  }, []);
-
-  const t = (key: string) => {
-    return translations[lang]?.[key] || key;
-  };
+  const t = (key: string) =>
+    translations[lang]?.[key] ?? key;
 
   return (
     <LanguageContext.Provider value={{ lang, setLang, t }}>
       {children}
     </LanguageContext.Provider>
   );
+}
+
+export function useLang() {
+  const ctx = useContext(LanguageContext);
+  if (!ctx) {
+    throw new Error("useLang must be used inside LanguageProvider");
+  }
+  return ctx;
 }
