@@ -6,7 +6,7 @@ import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import FloatingCTA from "@/components/cta/FloatingCTA"
 import Providers from "./providers"
-import Meta from "@/components/Meta"
+import Meta from "@/components/seo/SeoEngine" // ✅ FIXED PATH
 
 export interface RootLayoutProps {
   children: ReactNode
