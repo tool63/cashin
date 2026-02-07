@@ -3,10 +3,10 @@
 import "../styles/globals.css";
 import { ReactNode } from "react";
 
-import Header from "@/components/common/Header";
-import Footer from "@/components/common/Footer";
-import FloatingCTA from "@/components/common/cta/FloatingCTA";
-import ThemeProviderWrapper from "./providers/ThemeProviderWrapper"; // updated
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import FloatingCTA from "@/components/cta/FloatingCTA";
+import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
 import Meta from "@/components/seo/SeoEngine";
 
 interface RootLayoutProps {
@@ -27,9 +27,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <ThemeProviderWrapper>
           <Header />
 
-          <main className="min-h-[calc(100vh-160px)]">
-            {children}
-          </main>
+          <main className="min-h-[calc(100vh-160px)]">{children}</main>
 
           <Footer />
           <FloatingCTA />
