@@ -1,8 +1,11 @@
+// components/earning/earningOptions.ts
+
 /**
- * Generates earning options dynamically with English-only labels
+ * Generates earning options for the homepage.
  * Each option: [icon, title, slug]
+ * For now, using English text only.
  */
-export const getEarningOptions = (): [string, string, string][] => [
+export const earningOptions: [string, string, string][] = [
   ["🧠", "Surveys", "/surveys"],
   ["📱", "App Installs", "/app-installs"],
   ["🎮", "Playing Games", "/play-games"],
