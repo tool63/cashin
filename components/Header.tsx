@@ -3,9 +3,10 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, Sun, Moon, Globe } from "lucide-react";
+import { Menu, X, ChevronDown, Sun, Moon } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useLang } from "@/app/providers/LanguageProvider"; // ✅ Use dynamic language
+import { useLang } from "@/app/providers/LanguageProvider"; // ✅ dynamic language
+import LanguageSwitcher from "@/components/toggle/LanguageSwitcher"; // ✅ add switcher
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -14,16 +15,11 @@ export default function Header() {
 
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const { lang, t, setLang } = useLang(); // ✅ Dynamic translations + setter
+  const { lang, t } = useLang(); // ✅ dynamic translations
 
   useEffect(() => setMounted(true), []);
 
   const isDark = mounted ? resolvedTheme === "dark" : true;
-
-  // Toggle language between English and Spanish
-  const switchLanguage = () => {
-    setLang(lang === "en" ? "es" : "en");
-  };
 
   return (
     <header
@@ -83,21 +79,12 @@ export default function Header() {
 
         {/* DESKTOP CTA */}
         <div className="hidden md:flex items-center gap-3">
-          {/* DARK/LIGHT TOGGLE */}
+          <LanguageSwitcher /> {/* ✅ Added here */}
           <button
             onClick={() => setTheme(isDark ? "light" : "dark")}
             className="p-2 rounded-lg border"
           >
             {isDark ? <Sun size={16} /> : <Moon size={16} />}
-          </button>
-
-          {/* LANGUAGE SWITCHER */}
-          <button
-            onClick={switchLanguage}
-            className="p-2 rounded-lg border flex items-center gap-1"
-            title="Switch Language"
-          >
-            <Globe size={16} /> {lang.toUpperCase()}
           </button>
 
           <Link href="/login">{t("header.login")}</Link>
@@ -162,23 +149,15 @@ export default function Header() {
               <Link href="/help">{t("header.help")}</Link>
             </div>
 
-            {/* DARK/LIGHT + LANGUAGE SWITCHER */}
-            <div className="flex flex-col gap-3">
+            <div className="flex items-center justify-between gap-3 pt-2">
+              <LanguageSwitcher /> {/* ✅ Added here for mobile */}
               <button
                 onClick={() => setTheme(isDark ? "light" : "dark")}
-                className={`w-full flex items-center justify-center gap-2 p-3 rounded-lg border
+                className={`flex items-center gap-2 p-3 rounded-lg border
                   ${isDark ? "border-white/20" : "border-gray-300"}`}
               >
                 {isDark ? <Sun size={16} /> : <Moon size={16} />}
                 {isDark ? t("header.lightMode") : t("header.darkMode")}
-              </button>
-
-              <button
-                onClick={switchLanguage}
-                className={`w-full flex items-center justify-center gap-2 p-3 rounded-lg border
-                  ${isDark ? "border-white/20" : "border-gray-300"}`}
-              >
-                <Globe size={16} /> {lang.toUpperCase()}
               </button>
             </div>
 
