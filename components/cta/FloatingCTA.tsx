@@ -3,14 +3,12 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import styles from './FloatingCTA.module.css'
-import { useLang } from '@/app/providers/LanguageProvider' // ✅ ADD
 
 export default function FloatingCTA() {
-  const { t } = useLang() // ✅ GET TRANSLATION
   const [visible, setVisible] = useState(true)
   const [bounceKey, setBounceKey] = useState(0)
 
-  const text = t('floating_cta') // ✅ LANGUAGE TEXT
+  const text = "Start Earning Now!" // ✅ English-only text
   const letters = text.split('')
 
   /* ================= AUTO HIDE / SHOW ================= */
@@ -46,7 +44,7 @@ export default function FloatingCTA() {
   return (
     <Link
       href="/signup"
-      className={`${styles.floatingCTA} ${
+      className={`${styles.floatingCTA} cta ${
         visible ? styles.show : styles.hide
       }`}
     >
