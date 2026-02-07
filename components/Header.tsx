@@ -3,15 +3,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Moon, Sun, Menu, X } from "lucide-react";
-import { useLang } from "@/app/providers/LanguageProvider";
-import { useTheme } from "next-themes";
+import { useThemeToggle } from "@/app/providers/ThemeProviderWrapper";
 
 export default function Header() {
-  const { lang, t, setLang } = useLang();
-  const { theme, setTheme } = useTheme();
+  const { theme, toggleTheme } = useThemeToggle(); // new hook from ThemeProviderWrapper
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
   const toggleMobile = () => setMobileOpen(!mobileOpen);
 
   return (
@@ -24,26 +21,9 @@ export default function Header() {
 
         {/* Desktop menu */}
         <nav className="hidden md:flex items-center space-x-6">
-          <Link href="/" className="hover:underline">
-            {t("header.home")}
-          </Link>
-          <Link href="/about" className="hover:underline">
-            {t("header.about")}
-          </Link>
-          <Link href="/contact" className="hover:underline">
-            {t("header.contact")}
-          </Link>
-
-          {/* Language switch */}
-          <select
-            value={lang}
-            onChange={(e) => setLang(e.target.value as "en" | "es" | "bn")}
-            className="border rounded px-2 py-1 dark:bg-gray-800 dark:text-white"
-          >
-            <option value="en">EN</option>
-            <option value="es">ES</option>
-            <option value="bn">BN</option>
-          </select>
+          <Link href="/" className="hover:underline">Home</Link>
+          <Link href="/about" className="hover:underline">About</Link>
+          <Link href="/contact" className="hover:underline">Contact</Link>
 
           {/* Theme toggle */}
           <button
@@ -58,13 +38,13 @@ export default function Header() {
             href="/signup"
             className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
           >
-            {t("header.signUp")}
+            Sign Up
           </Link>
           <Link
             href="/signin"
             className="bg-gray-200 dark:bg-gray-800 dark:text-white px-3 py-1 rounded hover:bg-gray-300 dark:hover:bg-gray-700"
           >
-            {t("header.signIn")}
+            Sign In
           </Link>
         </nav>
 
@@ -77,44 +57,29 @@ export default function Header() {
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="md:hidden bg-white dark:bg-black text-black dark:text-white p-4 space-y-4">
-          <Link href="/" onClick={toggleMobile}>
-            {t("header.home")}
-          </Link>
-          <Link href="/about" onClick={toggleMobile}>
-            {t("header.about")}
-          </Link>
-          <Link href="/contact" onClick={toggleMobile}>
-            {t("header.contact")}
-          </Link>
-
-          <select
-            value={lang}
-            onChange={(e) => setLang(e.target.value as "en" | "es" | "bn")}
-            className="border rounded px-2 py-1 dark:bg-gray-800 dark:text-white w-full"
-          >
-            <option value="en">EN</option>
-            <option value="es">ES</option>
-            <option value="bn">BN</option>
-          </select>
+          <Link href="/" onClick={toggleMobile}>Home</Link>
+          <Link href="/about" onClick={toggleMobile}>About</Link>
+          <Link href="/contact" onClick={toggleMobile}>Contact</Link>
 
           <button
             onClick={toggleTheme}
-            className="w-full p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
+            className="w-full p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 flex justify-center items-center gap-2"
           >
-            {theme === "dark" ? t("header.lightMode") : t("header.darkMode")}
+            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+            {theme === "dark" ? "Light Mode" : "Dark Mode"}
           </button>
 
           <Link
             href="/signup"
             className="block w-full text-center bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
           >
-            {t("header.signUp")}
+            Sign Up
           </Link>
           <Link
             href="/signin"
             className="block w-full text-center bg-gray-200 dark:bg-gray-800 dark:text-white px-3 py-1 rounded hover:bg-gray-300 dark:hover:bg-gray-700"
           >
-            {t("header.signIn")}
+            Sign In
           </Link>
         </div>
       )}
