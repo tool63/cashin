@@ -1,15 +1,18 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import Link from "next/link";
-import { Moon, Sun, Menu, X } from "lucide-react";
-import { useThemeToggle } from "@/app/providers/ThemeProviderWrapper";
+import { useState } from "react"
+import Link from "next/link"
+import { Moon, Sun, Menu, X } from "lucide-react"
+import { useTheme } from "next-themes"
 
 export default function Header() {
-  const { theme, toggleTheme } = useThemeToggle(); // new hook from ThemeProviderWrapper
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const { theme, setTheme } = useTheme()
+  const [mobileOpen, setMobileOpen] = useState(false)
 
-  const toggleMobile = () => setMobileOpen(!mobileOpen);
+  const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark")
+  const toggleMobile = () => setMobileOpen(!mobileOpen)
+
+  const isDark = theme === "dark"
 
   return (
     <header className="bg-white dark:bg-black text-black dark:text-white shadow-md fixed w-full z-50">
@@ -29,8 +32,9 @@ export default function Header() {
           <button
             onClick={toggleTheme}
             className="ml-2 p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
+            title="Toggle dark/light mode"
           >
-            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+            {isDark ? <Sun size={18} /> : <Moon size={18} />}
           </button>
 
           {/* Sign Up / Sign In */}
@@ -63,10 +67,9 @@ export default function Header() {
 
           <button
             onClick={toggleTheme}
-            className="w-full p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 flex justify-center items-center gap-2"
+            className="w-full p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
           >
-            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-            {theme === "dark" ? "Light Mode" : "Dark Mode"}
+            {isDark ? "Light Mode" : "Dark Mode"}
           </button>
 
           <Link
@@ -84,5 +87,5 @@ export default function Header() {
         </div>
       )}
     </header>
-  );
+  )
 }
