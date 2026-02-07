@@ -9,7 +9,7 @@ import { useLang } from "@/app/providers/LanguageProvider"
 type Toggle = Record<string, boolean>
 
 export default function Footer() {
-  const { t } = useLang()
+  const { t, lang, setLang } = useLang()
 
   const [open, setOpen] = useState<Toggle>({})
   const [sub, setSub] = useState<Toggle>({})
@@ -24,17 +24,18 @@ export default function Footer() {
     return () => window.removeEventListener("resize", check)
   }, [])
 
-  const toggle = (k: string) => {
-    if (!isDesktop) setOpen(p => ({ ...p, [k]: !p[k] }))
-  }
+  /* Auto-set language by browser */
+  useEffect(() => {
+    if (!lang) {
+      const browserLang = navigator.language.slice(0, 2)
+      if (["en", "bn"].includes(browserLang)) setLang(browserLang)
+      else setLang("en")
+    }
+  }, [lang, setLang])
 
-  const toggleSub = (k: string) => {
-    if (!isDesktop) setSub(p => ({ ...p, [k]: !p[k] }))
-  }
-
-  const toggleSub2 = (k: string) => {
-    if (!isDesktop) setSub2(p => ({ ...p, [k]: !p[k] }))
-  }
+  const toggle = (k: string) => { if (!isDesktop) setOpen(p => ({ ...p, [k]: !p[k] })) }
+  const toggleSub = (k: string) => { if (!isDesktop) setSub(p => ({ ...p, [k]: !p[k] })) }
+  const toggleSub2 = (k: string) => { if (!isDesktop) setSub2(p => ({ ...p, [k]: !p[k] })) }
 
   const A = ({ href, children }: { href: string; children: ReactNode }) => (
     <motion.div whileHover={{ x: 4 }} transition={{ duration: 0.15 }}>
@@ -121,16 +122,16 @@ export default function Footer() {
     )
   }
 
-  /* Column titles (fallback safe) */
+  /* Column names only (translated) */
   const footerColumns = {
-    getStarted: t("footer.getStarted") ?? "Get Started",
-    waysToEarn: t("footer.waysToEarn") ?? "Ways to Earn",
-    guides: t("footer.guides") ?? "Guides",
-    rewards: t("footer.rewards") ?? "Rewards",
-    resources: t("footer.resources") ?? "Resources",
-    business: t("footer.business") ?? "Business",
-    cashback: t("footer.cashback") ?? "Cashback",
-    legal: t("footer.legal") ?? "Legal",
+    getStarted: t("footer.getStarted") || "Get Started",
+    waysToEarn: t("footer.waysToEarn") || "Ways to Earn",
+    guides: t("footer.guides") || "Guides",
+    rewards: t("footer.rewards") || "Rewards",
+    resources: t("footer.resources") || "Resources",
+    business: t("footer.business") || "Business",
+    cashback: t("footer.cashback") || "Cashback",
+    legal: t("footer.legal") || "Legal",
   }
 
   const footerSocial = {
@@ -141,8 +142,7 @@ export default function Footer() {
   }
 
   const copyright =
-    t("footer.copyright") ??
-    "© 2026 Cashooz. All rights reserved."
+    t("footer.copyright") || "© 2026 Cashooz. All rights reserved."
 
   return (
     <footer className="bg-gray-100 text-gray-700 dark:bg-[#070A14] dark:text-gray-300 transition-colors duration-300">
