@@ -16,8 +16,8 @@ export default function DynamicPage() {
   const params = useParams<{ slug: string }>()
   const slug = params.slug
 
-  // Get all earning options
-  const earningOptions = getEarningOptions()
+  // Get all earning options (pass slug as argument to match getEarningOptions signature)
+  const earningOptions = getEarningOptions(slug || "")
 
   // Find matching earning option
   const option = earningOptions.find(
