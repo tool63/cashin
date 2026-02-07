@@ -13,7 +13,7 @@ interface RootLayoutProps {
   children: ReactNode;
 }
 
-const defaultTitle = "PayUp";
+const defaultTitle = "Cashog";
 const defaultDescription = "Earn rewards, cash out, and get paid";
 
 export default function RootLayout({ children }: RootLayoutProps) {
@@ -27,7 +27,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <ThemeProviderWrapper>
           <Header />
 
-          <main className="min-h-[calc(100vh-160px)]">{children}</main>
+          <main className="min-h-[calc(100vh-160px)]">
+            {children}
+          </main>
 
           <Footer />
           <FloatingCTA />
