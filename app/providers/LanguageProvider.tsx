@@ -1,9 +1,10 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { LANG } from "../lang/core/lang"; // your core translations
+import { LANG } from "../lang/core/lang"; // your translations
 
-export type LangKeys = keyof typeof LANG; // e.g., "en" | "bn" | "es"
+// ✅ Include all languages you support here
+export type LangKeys = keyof typeof LANG; // "en" | "bn" | "es"
 
 interface LanguageContextType {
   lang: LangKeys;
@@ -24,15 +25,15 @@ interface Props {
 export const LanguageProvider = ({ children }: Props) => {
   const [lang, setLangState] = useState<LangKeys>("en");
 
-  // Helper to update language and save in localStorage
+  // ✅ Helper to update state + localStorage
   const setLang = (l: LangKeys) => {
     setLangState(l);
     localStorage.setItem("lang", l);
   };
 
   useEffect(() => {
-    // 1️⃣ Load saved language from localStorage
-    const stored = localStorage.getItem("lang") as LangKeys;
+    // 1️⃣ Load from localStorage
+    const stored = localStorage.getItem("lang") as LangKeys | null;
     if (stored && LANG[stored]) {
       setLangState(stored);
       return;
@@ -45,7 +46,7 @@ export const LanguageProvider = ({ children }: Props) => {
       return;
     }
 
-    // 3️⃣ Optional: IP-based fallback (example using ipapi.co)
+    // 3️⃣ Fallback using country code via IP (optional)
     fetch("https://ipapi.co/json/")
       .then(res => res.json())
       .then(data => {
@@ -57,15 +58,15 @@ export const LanguageProvider = ({ children }: Props) => {
       .catch(() => setLangState("en"));
   }, []);
 
-  // Translation function (supports nested keys like "footer.sections.getStarted")
+  // ✅ Translation function (supports nested keys)
   const t = (key: string) => {
     const keys = key.split(".");
     let value: any = LANG[lang];
     for (const k of keys) {
-      if (value[k] === undefined) return key; // fallback to key if missing
+      if (value[k] === undefined) return key; // fallback
       value = value[k];
     }
-    return typeof value === "string" ? value : key; // always string
+    return typeof value === "string" ? value : key; // always return string
   };
 
   return (
@@ -75,5 +76,5 @@ export const LanguageProvider = ({ children }: Props) => {
   );
 };
 
-// Custom hook to use language context anywhere
+// ✅ Hook to use translations anywhere
 export const useLang = () => useContext(LanguageContext);
