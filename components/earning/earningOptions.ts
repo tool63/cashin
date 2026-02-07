@@ -1,7 +1,5 @@
-// components/earning/earningOptions.ts
-
 /**
- * Generates earning options in English only.
+ * Generates earning options dynamically with English-only labels
  * Each option: [icon, title, slug]
  */
 export const getEarningOptions = (): [string, string, string][] => [
