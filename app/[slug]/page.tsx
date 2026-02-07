@@ -4,24 +4,20 @@ import { useParams } from "next/navigation"
 
 /* ================= COMPONENT IMPORTS ================= */
 import HeroSection from "@/components/HeroSection"
-import { getEarningOptions } from "@/components/earningOptions"
+import { getEarningOptions } from "@/components/earning/earningOptions"
 import { SectionTitle, Stat, Feature } from "@/components/live/SmallComponents"
 import { ArrowRight, ShieldCheck, Wallet, Zap } from "lucide-react"
 import Link from "next/link"
 import Meta from "@/components/seo/SeoEngine"
 import { motion } from "framer-motion"
-import { useLang } from "@/app/providers/LanguageProvider"
 
 /* ================= DYNAMIC SLUG PAGE ================= */
 export default function DynamicPage() {
   const params = useParams<{ slug: string }>()
   const slug = params.slug
 
-  // Get translation function from LanguageProvider
-  const { t } = useLang()
-
-  // Pass translation function to getEarningOptions
-  const earningOptions = getEarningOptions(t)
+  // Get English-only earning options
+  const earningOptions = getEarningOptions(() => "") // no translation function
 
   // Find matching earning option
   const option = earningOptions.find(
