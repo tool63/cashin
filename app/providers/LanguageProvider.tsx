@@ -4,17 +4,16 @@ import { createContext, useContext, useEffect, useState, ReactNode } from "react
 import { LANG } from "../lang/core/lang"; // core lang file
 
 type LangKeys = keyof typeof LANG;
-type Translations = typeof LANG.en;
 
 interface LanguageContextType {
   lang: LangKeys;
-  t: (key: keyof Translations) => string;
+  t: (key: string) => string;
   setLang: (lang: LangKeys) => void;
 }
 
 const LanguageContext = createContext<LanguageContextType>({
   lang: "en",
-  t: (key: keyof Translations) => key,
+  t: (key: string) => key,
   setLang: () => {},
 });
 
@@ -26,9 +25,15 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     if (LANG[browserLang]) setLang(browserLang);
   }, []);
 
-  // Translation function
-  function t(key: keyof Translations) {
-    return LANG[lang]?.[key] || key;
+  // Translation function (supports nested keys using dot notation)
+  function t(key: string) {
+    const keys = key.split("."); // e.g., "footer.sections.getStarted"
+    let value: any = LANG[lang];
+    for (const k of keys) {
+      if (value[k] === undefined) return key; // fallback
+      value = value[k];
+    }
+    return typeof value === "string" ? value : key; // always return string
   }
 
   return (
