@@ -1,10 +1,10 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { LANG } from "../lang/core/lang"; // your translations
+import { LANG } from "../lang/core/lang"; // your translations file
 
-// ✅ Include all languages you support here
-export type LangKeys = keyof typeof LANG; // "en" | "bn" | "es"
+// ✅ Include all supported languages here
+export type LangKeys = keyof typeof LANG; // e.g., "en" | "bn" | "es"
 
 interface LanguageContextType {
   lang: LangKeys;
@@ -25,14 +25,14 @@ interface Props {
 export const LanguageProvider = ({ children }: Props) => {
   const [lang, setLangState] = useState<LangKeys>("en");
 
-  // ✅ Helper to update state + localStorage
+  // ✅ Wrapper to update state + localStorage safely
   const setLang = (l: LangKeys) => {
     setLangState(l);
     localStorage.setItem("lang", l);
   };
 
   useEffect(() => {
-    // 1️⃣ Load from localStorage
+    // 1️⃣ Check localStorage
     const stored = localStorage.getItem("lang") as LangKeys | null;
     if (stored && LANG[stored]) {
       setLangState(stored);
@@ -46,7 +46,7 @@ export const LanguageProvider = ({ children }: Props) => {
       return;
     }
 
-    // 3️⃣ Fallback using country code via IP (optional)
+    // 3️⃣ Fallback using IP country code
     fetch("https://ipapi.co/json/")
       .then(res => res.json())
       .then(data => {
@@ -58,7 +58,7 @@ export const LanguageProvider = ({ children }: Props) => {
       .catch(() => setLangState("en"));
   }, []);
 
-  // ✅ Translation function (supports nested keys)
+  // ✅ Translation function (supports nested keys like "footer.sections.getStarted")
   const t = (key: string) => {
     const keys = key.split(".");
     let value: any = LANG[lang];
@@ -66,7 +66,7 @@ export const LanguageProvider = ({ children }: Props) => {
       if (value[k] === undefined) return key; // fallback
       value = value[k];
     }
-    return typeof value === "string" ? value : key; // always return string
+    return typeof value === "string" ? value : key;
   };
 
   return (
