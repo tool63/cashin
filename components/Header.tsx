@@ -1,18 +1,16 @@
-'use client'
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { Moon, Sun, Menu, X } from "lucide-react"
-import { useTheme } from "next-themes"
+import { useState } from "react";
+import Link from "next/link";
+import { Moon, Sun, Menu, X } from "lucide-react";
+import { useTheme } from "next-themes";
 
 export default function Header() {
-  const { theme, setTheme } = useTheme()
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const { theme, setTheme } = useTheme();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark")
-  const toggleMobile = () => setMobileOpen(!mobileOpen)
-
-  const isDark = theme === "dark"
+  const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
+  const toggleMobile = () => setMobileOpen(!mobileOpen);
 
   return (
     <header className="bg-white dark:bg-black text-black dark:text-white shadow-md fixed w-full z-50">
@@ -24,17 +22,22 @@ export default function Header() {
 
         {/* Desktop menu */}
         <nav className="hidden md:flex items-center space-x-6">
-          <Link href="/" className="hover:underline">Home</Link>
-          <Link href="/about" className="hover:underline">About</Link>
-          <Link href="/contact" className="hover:underline">Contact</Link>
+          <Link href="/" className="hover:underline">
+            Home
+          </Link>
+          <Link href="/about" className="hover:underline">
+            About
+          </Link>
+          <Link href="/contact" className="hover:underline">
+            Contact
+          </Link>
 
           {/* Theme toggle */}
           <button
             onClick={toggleTheme}
             className="ml-2 p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
-            title="Toggle dark/light mode"
           >
-            {isDark ? <Sun size={18} /> : <Moon size={18} />}
+            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
           </button>
 
           {/* Sign Up / Sign In */}
@@ -61,15 +64,21 @@ export default function Header() {
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="md:hidden bg-white dark:bg-black text-black dark:text-white p-4 space-y-4">
-          <Link href="/" onClick={toggleMobile}>Home</Link>
-          <Link href="/about" onClick={toggleMobile}>About</Link>
-          <Link href="/contact" onClick={toggleMobile}>Contact</Link>
+          <Link href="/" onClick={toggleMobile}>
+            Home
+          </Link>
+          <Link href="/about" onClick={toggleMobile}>
+            About
+          </Link>
+          <Link href="/contact" onClick={toggleMobile}>
+            Contact
+          </Link>
 
           <button
             onClick={toggleTheme}
             className="w-full p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
           >
-            {isDark ? "Light Mode" : "Dark Mode"}
+            {theme === "dark" ? "Light Mode" : "Dark Mode"}
           </button>
 
           <Link
@@ -87,5 +96,5 @@ export default function Header() {
         </div>
       )}
     </header>
-  )
+  );
 }
