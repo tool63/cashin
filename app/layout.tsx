@@ -6,7 +6,7 @@ import { ReactNode } from "react";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import FloatingCTA from "@/components/common/cta/FloatingCTA";
-import RootProviders from "./providers/RootProviders";
+import ThemeProviderWrapper from "./providers/ThemeProviderWrapper"; // updated
 import Meta from "@/components/seo/SeoEngine";
 
 interface RootLayoutProps {
@@ -24,7 +24,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       </head>
 
       <body className="min-h-screen bg-white text-black dark:bg-black dark:text-white">
-        <RootProviders>
+        <ThemeProviderWrapper>
           <Header />
 
           <main className="min-h-[calc(100vh-160px)]">
@@ -33,7 +33,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
           <Footer />
           <FloatingCTA />
-        </RootProviders>
+        </ThemeProviderWrapper>
       </body>
     </html>
   );
