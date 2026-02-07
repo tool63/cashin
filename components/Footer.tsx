@@ -95,33 +95,33 @@ export default function Footer() {
     )
   }
 
-  // Translation wrapper for footer
-  const footer = {
-    sections: {
-      getStarted: t("footer.sections.getStarted") || "Get Started",
-      waysToEarn: t("footer.sections.waysToEarn") || "Ways to Earn",
-      guides: t("footer.sections.guides") || "Guides",
-      rewards: t("footer.sections.rewards") || "Rewards",
-      resources: t("footer.sections.resources") || "Resources",
-      business: t("footer.sections.business") || "Business",
-      cashback: t("footer.sections.cashback") || "Cashback",
-      legal: t("footer.sections.legal") || "Legal",
-    },
-    social: {
-      twitter: t("footer.social.twitter") || "https://twitter.com/",
-      facebook: t("footer.social.facebook") || "https://facebook.com/",
-      instagram: t("footer.social.instagram") || "https://instagram.com/",
-      youtube: t("footer.social.youtube") || "https://youtube.com/",
-    },
-    copyright: t("footer.copyright") || "© 2026 Cashooz. All rights reserved.",
+  // Simple column names only, no nested footer.sections
+  const footerColumns = {
+    getStarted: "Get Started",
+    waysToEarn: "Ways to Earn",
+    guides: "Guides",
+    rewards: "Rewards",
+    resources: "Resources",
+    business: "Business",
+    cashback: "Cashback",
+    legal: "Legal",
   }
+
+  const footerSocial = {
+    twitter: "https://twitter.com/",
+    facebook: "https://facebook.com/",
+    instagram: "https://instagram.com/",
+    youtube: "https://youtube.com/",
+  }
+
+  const copyright = "© 2026 Cashooz. All rights reserved."
 
   return (
     <footer className="bg-gray-100 text-gray-700 dark:bg-[#070A14] dark:text-gray-300 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-2 md:grid-cols-4 gap-10">
 
         {/* COLUMN 1 */}
-        <Section id="start" title={footer.sections.getStarted}>
+        <Section id="start" title={footerColumns.getStarted}>
           <A href="/how-it-works">How Cashog Works</A>
           <A href="/start-earning">How to Start Earning</A>
           <A href="/cashout">Cashout Methods</A>
@@ -130,7 +130,7 @@ export default function Footer() {
         </Section>
 
         {/* COLUMN 2 */}
-        <Section id="earn" title={footer.sections.waysToEarn}>
+        <Section id="earn" title={footerColumns.waysToEarn}>
           <A href="/surveys">Surveys</A>
           <A href="/app-installs">App Installs</A>
           <A href="/play-games">Playing Games</A>
@@ -155,7 +155,7 @@ export default function Footer() {
         </Section>
 
         {/* COLUMN 3 */}
-        <Section id="guides" title={footer.sections.guides}>
+        <Section id="guides" title={footerColumns.guides}>
           <A href="/make-money-online">Make Money Online</A>
           <A href="/earn-money-from-home">Earn Money from Home</A>
           <A href="/earn-without-investment">Earn Without Investment</A>
@@ -181,7 +181,7 @@ export default function Footer() {
         </Section>
 
         {/* COLUMN 4 */}
-        <Section id="payments" title={footer.sections.rewards}>
+        <Section id="payments" title={footerColumns.rewards}>
           <A href="/earn-paypal-money">Earn PayPal Money</A>
 
           <Sub id="giftcards" title="Earn Gift Cards">
@@ -208,7 +208,7 @@ export default function Footer() {
         </Section>
 
         {/* COLUMN 5 */}
-        <Section id="resources" title={footer.sections.resources}>
+        <Section id="resources" title={footerColumns.resources}>
           <A href="/blog">Blog</A>
           <A href="/help">Help Center</A>
           <A href="/faq">FAQ</A>
@@ -217,14 +217,14 @@ export default function Footer() {
         </Section>
 
         {/* COLUMN 6 */}
-        <Section id="business" title={footer.sections.business}>
+        <Section id="business" title={footerColumns.business}>
           <A href="/affiliate">Affiliate Program</A>
           <A href="/partners">Partners</A>
           <A href="/advertise">Advertise with Cashooz</A>
         </Section>
 
         {/* COLUMN 7 */}
-        <Section id="cashback" title={footer.sections.cashback}>
+        <Section id="cashback" title={footerColumns.cashback}>
           <A href="/cashback-offers">Cashback Offers</A>
 
           <Sub id="shopping" title="Shopping & Rewards">
@@ -249,7 +249,7 @@ export default function Footer() {
         </Section>
 
         {/* COLUMN 8 */}
-        <Section id="legal" title={footer.sections.legal}>
+        <Section id="legal" title={footerColumns.legal}>
           <A href="https://cashog.com/terms-and-conditions">Terms & Conditions</A>
           <A href="https://cashog.com/privacy-policy">Privacy Policy</A>
           <A href="https://cashog.com/cookie-policy">Cookie Policy</A>
@@ -259,14 +259,14 @@ export default function Footer() {
 
       {/* SOCIAL */}
       <div className="border-t border-white/10 py-6 flex justify-center gap-6">
-        <a href={footer.social.twitter} target="_blank" rel="noopener noreferrer"><Twitter /></a>
-        <a href={footer.social.facebook} target="_blank" rel="noopener noreferrer"><Facebook /></a>
-        <a href={footer.social.instagram} target="_blank" rel="noopener noreferrer"><Instagram /></a>
-        <a href={footer.social.youtube} target="_blank" rel="noopener noreferrer"><Youtube /></a>
+        <a href={footerSocial.twitter} target="_blank" rel="noopener noreferrer"><Twitter /></a>
+        <a href={footerSocial.facebook} target="_blank" rel="noopener noreferrer"><Facebook /></a>
+        <a href={footerSocial.instagram} target="_blank" rel="noopener noreferrer"><Instagram /></a>
+        <a href={footerSocial.youtube} target="_blank" rel="noopener noreferrer"><Youtube /></a>
       </div>
 
       <div className="text-center text-sm text-gray-500 pb-6">
-        {footer.copyright}
+        {copyright}
       </div>
     </footer>
   )
