@@ -2,7 +2,7 @@
 
 import { useParams } from "next/navigation";
 import HeroSection from "@/components/hero/HeroSection";
-import { getEarningOptions } from "@/components/earning/earningOptions";
+import { earningOptions } from "@/components/earning/earningOptions";
 import { SectionTitle, Stat, Feature } from "@/components/live/SmallComponents";
 import { ArrowRight, ShieldCheck, Wallet, Zap } from "lucide-react";
 import Link from "next/link";
@@ -13,23 +13,21 @@ export default function DynamicPage() {
   const params = useParams<{ slug: string }>();
   const slug = params.slug;
 
-  const earningOptions = getEarningOptions();
-
   // Find matching earning option
   const option = earningOptions.find(([, , href]) => href === `/${slug}`);
 
-  // Dynamic meta
+  // Dynamic meta title & description
   const title = option
-    ? `${option[1]} | PayUp`
+    ? `${option[1]} - Earn Real Money | Cashog`
     : slug
-    ? `${slug.replace("-", " ").charAt(0).toUpperCase() + slug.slice(1)} | PayUp`
-    : "PayUp";
+    ? `${slug.replace("-", " ").charAt(0).toUpperCase() + slug.slice(1)} - Cashog`
+    : "Cashog - Earn Rewards Online";
 
   const description = option
-    ? `Earn money by ${option[1].toLowerCase()} instantly on PayUp.`
+    ? `Discover how to earn real money by ${option[1].toLowerCase()} on Cashog. Fast, secure, and trusted ways to earn rewards online.`
     : slug
-    ? `Learn more about ${slug.replace("-", " ")} and earn real money on PayUp.`
-    : "PayUp - Earn rewards online";
+    ? `Learn more about ${slug.replace("-", " ")} and start earning real money on Cashog today!`
+    : "Cashog - Earn rewards, complete offers, watch videos, and get paid instantly.";
 
   return (
     <>
@@ -45,8 +43,20 @@ export default function DynamicPage() {
             {option ? option[1] : slug ? slug.replace("-", " ").charAt(0).toUpperCase() + slug.slice(1) : "Page"}
           </h1>
           <p className="text-gray-600 dark:text-gray-400 mb-10">
-            {option ? `Start earning by ${option[1].toLowerCase()} today!` : "Explore opportunities and start earning rewards now."}
+            {option
+              ? `Start earning by ${option[1].toLowerCase()} today on Cashog!`
+              : "Explore opportunities and start earning rewards now."}
           </p>
+          {/* FIRST CTA */}
+          <Link href="/signup">
+            <motion.span
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-black px-10 py-4 rounded-xl font-semibold shadow-lg"
+            >
+              Get Started Now <ArrowRight />
+            </motion.span>
+          </Link>
         </section>
 
         {/* TASKS GRID */}
@@ -61,7 +71,10 @@ export default function DynamicPage() {
               >
                 <div className="text-4xl">{icon}</div>
                 <h3 className="mt-4 text-lg font-semibold">{title}</h3>
-                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">Earn by {title.toLowerCase()}</p>
+                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                  Earn real rewards by {title.toLowerCase()}
+                </p>
+                <ArrowRight className="mt-3 text-blue-500" size={18} />
               </Link>
             ))}
           </div>
