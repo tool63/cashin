@@ -28,7 +28,7 @@ export default function Footer() {
   useEffect(() => {
     if (!lang) {
       const browserLang = navigator.language.slice(0, 2)
-      if (["en", "bn"].includes(browserLang)) setLang(browserLang as "en" | "bn")
+      if (["en", "bn", "es"].includes(browserLang)) setLang(browserLang as "en" | "bn" | "es")
       else setLang("en")
     }
   }, [lang, setLang])
@@ -124,14 +124,14 @@ export default function Footer() {
 
   /* Column names only (translated) */
   const footerColumns = {
-    getStarted: t("footer.getStarted") || "Get Started",
-    waysToEarn: t("footer.waysToEarn") || "Ways to Earn",
-    guides: t("footer.guides") || "Guides",
-    rewards: t("footer.rewards") || "Rewards",
-    resources: t("footer.resources") || "Resources",
-    business: t("footer.business") || "Business",
-    cashback: t("footer.cashback") || "Cashback",
-    legal: t("footer.legal") || "Legal",
+    getStarted: t("footer.getStarted"),
+    waysToEarn: t("footer.waysToEarn"),
+    guides: t("footer.guides"),
+    rewards: t("footer.rewards"),
+    resources: t("footer.resources"),
+    business: t("footer.business"),
+    cashback: t("footer.cashback"),
+    legal: t("footer.legal"),
   }
 
   const footerSocial = {
@@ -141,8 +141,10 @@ export default function Footer() {
     youtube: "https://youtube.com/",
   }
 
-  const copyright =
-    t("footer.copyright") || "© 2026 Cashooz. All rights reserved."
+  const copyright = t("footer.copyright")
+
+  /* Link texts */
+  const links = t("footer.links") || {}
 
   return (
     <footer className="bg-gray-100 text-gray-700 dark:bg-[#070A14] dark:text-gray-300 transition-colors duration-300">
@@ -150,137 +152,137 @@ export default function Footer() {
 
         {/* COLUMN 1 */}
         <Section id="start" title={footerColumns.getStarted}>
-          <A href="/how-it-works">How Cashog Works</A>
-          <A href="/start-earning">How to Start Earning</A>
-          <A href="/cashout">Cashout Methods</A>
-          <A href="/withdrawals">Withdrawal Proofs</A>
-          <A href="/trust-safety">Trust & Safety</A>
+          <A href="/how-it-works">{links.howItWorks}</A>
+          <A href="/start-earning">{links.startEarning}</A>
+          <A href="/cashout">{links.cashoutMethods}</A>
+          <A href="/withdrawals">{links.withdrawalProofs}</A>
+          <A href="/trust-safety">{links.trustSafety}</A>
         </Section>
 
         {/* COLUMN 2 */}
         <Section id="earn" title={footerColumns.waysToEarn}>
-          <A href="/surveys">Surveys</A>
-          <A href="/app-installs">App Installs</A>
-          <A href="/play-games">Playing Games</A>
-          <A href="/watch-videos">Watching Videos</A>
-          <A href="/mining-rewards">Mining Rewards</A>
-          <A href="/complete-offers">Completing Offers</A>
-          <A href="/offerwall">Offerwall</A>
-          <A href="/surveywall">Surveywall</A>
+          <A href="/surveys">{links.surveys}</A>
+          <A href="/app-installs">{links.appInstalls}</A>
+          <A href="/play-games">{links.playGames}</A>
+          <A href="/watch-videos">{links.watchVideos}</A>
+          <A href="/mining-rewards">{links.miningRewards}</A>
+          <A href="/complete-offers">{links.completeOffers}</A>
+          <A href="/offerwall">{links.offerwall}</A>
+          <A href="/surveywall">{links.surveywall}</A>
 
-          <Sub id="extra" title="Extra Earning">
-            <A href="/watch-ads">Watching Ads</A>
-            <A href="/micro-tasks">Micro Tasks</A>
-            <A href="/complete-free-trials">Free Trials</A>
-            <A href="/test-products">Testing Products</A>
-            <A href="/read-emails">Reading Emails</A>
-            <A href="/visit-websites">Visiting Websites</A>
-            <A href="/review-tasks">Review Tasks</A>
-            <A href="/spinning-wheel">Spinning Wheel</A>
-            <A href="/loyalty">Loyalty</A>
-            <A href="/vouchers">Vouchers</A>
+          <Sub id="extra" title={links.extraEarning}>
+            <A href="/watch-ads">{links.watchAds}</A>
+            <A href="/micro-tasks">{links.microTasks}</A>
+            <A href="/complete-free-trials">{links.freeTrials}</A>
+            <A href="/test-products">{links.testProducts}</A>
+            <A href="/read-emails">{links.readEmails}</A>
+            <A href="/visit-websites">{links.visitWebsites}</A>
+            <A href="/review-tasks">{links.reviewTasks}</A>
+            <A href="/spinning-wheel">{links.spinningWheel}</A>
+            <A href="/loyalty">{links.loyalty}</A>
+            <A href="/vouchers">{links.vouchers}</A>
           </Sub>
         </Section>
 
         {/* COLUMN 3 */}
         <Section id="guides" title={footerColumns.guides}>
-          <A href="/make-money-online">Make Money Online</A>
-          <A href="/earn-money-from-home">Earn Money from Home</A>
-          <A href="/earn-without-investment">Earn Without Investment</A>
-          <A href="/get-paid-to-play-games">Get Paid to Play Games</A>
-          <A href="/install-apps-for-cash">Install Apps for Cash</A>
-          <A href="/watch-videos-for-money">Watch Videos for Money</A>
-          <A href="/complete-offers-online">Complete Offers Online</A>
-          <A href="/work-from-home-jobs">Work from Home Jobs</A>
-          <A href="/online-earning-methods">Online Earning Methods</A>
-          <A href="/earn-money-online-fast">Earn Money Online Fast</A>
+          <A href="/make-money-online">{links.makeMoneyOnline}</A>
+          <A href="/earn-money-from-home">{links.earnFromHome}</A>
+          <A href="/earn-without-investment">{links.earnWithoutInvestment}</A>
+          <A href="/get-paid-to-play-games">{links.getPaidToPlayGames}</A>
+          <A href="/install-apps-for-cash">{links.installApps}</A>
+          <A href="/watch-videos-for-money">{links.watchVideosForMoney}</A>
+          <A href="/complete-offers-online">{links.completeOffersOnline}</A>
+          <A href="/work-from-home-jobs">{links.workFromHomeJobs}</A>
+          <A href="/online-earning-methods">{links.onlineEarningMethods}</A>
+          <A href="/earn-money-online-fast">{links.earnFast}</A>
 
-          <Sub id="allGuides" title="All Guides">
-            <A href="/passive-income-online">Passive Income Online</A>
-            <A href="/online-jobs-for-beginners">Online Jobs for Beginners</A>
-            <A href="/earn-money-as-a-student">Earn Money as a Student</A>
-            <A href="/earn-money-without-skills">Earn Without Skills</A>
-            <A href="/earn-money-using-mobile">Earn Using Mobile</A>
-            <A href="/earn-money-online-worldwide">Earn Worldwide</A>
-            <A href="/cashback-rewards">Cashback Rewards</A>
-            <A href="/legit-ways-to-make-money-online">Legit Ways</A>
-            <A href="/free-ways-to-make-money-online">Free Ways</A>
+          <Sub id="allGuides" title={links.allGuides}>
+            <A href="/passive-income-online">{links.passiveIncome}</A>
+            <A href="/online-jobs-for-beginners">{links.onlineJobs}</A>
+            <A href="/earn-money-as-a-student">{links.studentEarnings}</A>
+            <A href="/earn-money-without-skills">{links.earnWithoutSkills}</A>
+            <A href="/earn-money-using-mobile">{links.earnUsingMobile}</A>
+            <A href="/earn-money-online-worldwide">{links.earnWorldwide}</A>
+            <A href="/cashback-rewards">{links.cashbackRewards}</A>
+            <A href="/legit-ways-to-make-money-online">{links.legitWays}</A>
+            <A href="/free-ways-to-make-money-online">{links.freeWays}</A>
           </Sub>
         </Section>
 
         {/* COLUMN 4 */}
         <Section id="payments" title={footerColumns.rewards}>
-          <A href="/earn-paypal-money">Earn PayPal Money</A>
+          <A href="/earn-paypal-money">{links.earnPayPal}</A>
 
-          <Sub id="giftcards" title="Earn Gift Cards">
-            <A href="/earn-amazon-gift-card">Amazon</A>
-            <A href="/earn-apple-gift-card">Apple</A>
-            <A href="/earn-google-play-gift-card">Google Play</A>
+          <Sub id="giftcards" title={links.earnGiftCards}>
+            <A href="/earn-amazon-gift-card">{links.amazonGiftCard}</A>
+            <A href="/earn-apple-gift-card">{links.appleGiftCard}</A>
+            <A href="/earn-google-play-gift-card">{links.googleGiftCard}</A>
           </Sub>
 
-          <Sub id="crypto" title="Earn Crypto">
-            <A href="/earn-bitcoin-online">Bitcoin</A>
-            <A href="/earn-litecoin-online">Litecoin</A>
-            <A href="/earn-ethereum-online">Ethereum</A>
-            <A href="/earn-dogecoin-online">Dogecoin</A>
+          <Sub id="crypto" title={links.earnCrypto}>
+            <A href="/earn-bitcoin-online">{links.bitcoin}</A>
+            <A href="/earn-litecoin-online">{links.litecoin}</A>
+            <A href="/earn-ethereum-online">{links.ethereum}</A>
+            <A href="/earn-dogecoin-online">{links.dogecoin}</A>
           </Sub>
 
-          <Sub id="gaming" title="Earn Gaming Gift Cards">
-            <A href="/earn-free-robux">Robux</A>
-            <A href="/earn-steam-gift-cards">Steam</A>
-            <A href="/earn-xbox-gift-cards">Xbox</A>
-            <A href="/earn-psn-gift-cards">PlayStation</A>
+          <Sub id="gaming" title={links.earnGaming}>
+            <A href="/earn-free-robux">{links.robux}</A>
+            <A href="/earn-steam-gift-cards">{links.steam}</A>
+            <A href="/earn-xbox-gift-cards">{links.xbox}</A>
+            <A href="/earn-psn-gift-cards">{links.psn}</A>
           </Sub>
 
-          <A href="/earn-spotify-premium">Earn Spotify Premium</A>
+          <A href="/earn-spotify-premium">{links.spotify}</A>
         </Section>
 
         {/* COLUMN 5 */}
         <Section id="resources" title={footerColumns.resources}>
-          <A href="/blog">Blog</A>
-          <A href="/help">Help Center</A>
-          <A href="/faq">FAQ</A>
-          <A href="/contact">Contact Support</A>
-          <A href="/about">About Cashooz</A>
+          <A href="/blog">{links.blog}</A>
+          <A href="/help">{links.helpCenter}</A>
+          <A href="/faq">{links.faq}</A>
+          <A href="/contact">{links.contactSupport}</A>
+          <A href="/about">{links.about}</A>
         </Section>
 
         {/* COLUMN 6 */}
         <Section id="business" title={footerColumns.business}>
-          <A href="/affiliate">Affiliate Program</A>
-          <A href="/partners">Partners</A>
-          <A href="/advertise">Advertise with Cashooz</A>
+          <A href="/affiliate">{links.affiliate}</A>
+          <A href="/partners">{links.partners}</A>
+          <A href="/advertise">{links.advertise}</A>
         </Section>
 
         {/* COLUMN 7 */}
         <Section id="cashback" title={footerColumns.cashback}>
-          <A href="/cashback-offers">Cashback Offers</A>
+          <A href="/cashback-offers">{links.cashbackOffers}</A>
 
-          <Sub id="shopping" title="Shopping & Rewards">
-            <A href="/shopping-rewards/electronics">Electronics Cashback</A>
-            <A href="/shopping-rewards/fashion">Fashion Cashback</A>
-            <A href="/shopping-rewards/home-garden">Home & Garden Cashback</A>
-            <A href="/shopping-rewards/grocery">Grocery Cashback</A>
-            <A href="/shopping-rewards/beauty">Beauty Cashback</A>
-            <A href="/shopping-rewards/mobile">Mobile Cashback</A>
+          <Sub id="shopping" title={links.shoppingRewards}>
+            <A href="/shopping-rewards/electronics">{links.electronics}</A>
+            <A href="/shopping-rewards/fashion">{links.fashion}</A>
+            <A href="/shopping-rewards/home-garden">{links.homeGarden}</A>
+            <A href="/shopping-rewards/grocery">{links.grocery}</A>
+            <A href="/shopping-rewards/beauty">{links.beauty}</A>
+            <A href="/shopping-rewards/mobile">{links.mobile}</A>
 
-            <Sub id="travel" title="Travel Cashback" level={2}>
-              <A href="/shopping-rewards/travel/hotels">Hotels</A>
-              <A href="/shopping-rewards/travel/flights">Flights</A>
+            <Sub id="travel" title={links.travel} level={2}>
+              <A href="/shopping-rewards/travel/hotels">{links.hotels}</A>
+              <A href="/shopping-rewards/travel/flights">{links.flights}</A>
             </Sub>
 
-            <A href="/shopping-rewards/finance">Finance Cashback</A>
+            <A href="/shopping-rewards/finance">{links.finance}</A>
           </Sub>
 
-          <A href="/promo-codes">Promo Codes & Coupons</A>
-          <A href="/daily-deals">Daily Deals</A>
-          <A href="/banking-finance-offers">Banking & Finance Offers</A>
+          <A href="/promo-codes">{links.promoCodes}</A>
+          <A href="/daily-deals">{links.dailyDeals}</A>
+          <A href="/banking-finance-offers">{links.banking}</A>
         </Section>
 
         {/* COLUMN 8 */}
         <Section id="legal" title={footerColumns.legal}>
-          <A href="https://cashog.com/terms-and-conditions">Terms & Conditions</A>
-          <A href="https://cashog.com/privacy-policy">Privacy Policy</A>
-          <A href="https://cashog.com/cookie-policy">Cookie Policy</A>
+          <A href="https://cashog.com/terms-and-conditions">{links.terms}</A>
+          <A href="https://cashog.com/privacy-policy">{links.privacy}</A>
+          <A href="https://cashog.com/cookie-policy">{links.cookies}</A>
         </Section>
       </div>
 
