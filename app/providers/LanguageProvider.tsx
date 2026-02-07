@@ -1,68 +1,48 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { LANG } from "../lang/core/lang"; // your translations
+import { LANG } from "../lang/core/lang"; // core lang file
 
-// ✅ Include all supported languages here
-export type LangKeys = keyof typeof LANG; // "en" | "bn" | "es"
+type LangKeys = keyof typeof LANG; // "en" | "es" | "bn" etc.
 
 interface LanguageContextType {
   lang: LangKeys;
-  setLang: (lang: LangKeys) => void;
   t: (key: string) => string;
+  setLang: (lang: LangKeys) => void;
 }
 
 const LanguageContext = createContext<LanguageContextType>({
   lang: "en",
-  setLang: () => {},
   t: (key: string) => key,
+  setLang: () => {},
 });
 
-interface Props {
-  children: ReactNode;
-}
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  const [lang, setLang] = useState<LangKeys>("en");
 
-export const LanguageProvider = ({ children }: Props) => {
-  // ✅ Make sure useState uses the full LangKeys type
-  const [lang, setLangState] = useState<LangKeys>("en");
-
-  // ✅ Central setLang wrapper
-  const setLang = (l: LangKeys) => {
-    setLangState(l);
-    localStorage.setItem("lang", l);
-  };
-
+  // Auto-detect browser language on mount
   useEffect(() => {
-    // 1️⃣ Check localStorage
-    const stored = localStorage.getItem("lang") as LangKeys | null;
-    if (stored && LANG[stored]) {
-      setLangState(stored);
-      return;
-    }
-
-    // 2️⃣ Detect browser language
     const browserLang = navigator.language.split("-")[0] as LangKeys;
-    if (LANG[browserLang]) {
-      setLangState(browserLang);
-      return;
-    }
-
-    // 3️⃣ Fallback using IP country code
-    fetch("https://ipapi.co/json/")
-      .then(res => res.json())
-      .then(data => {
-        const country = data.country_code;
-
-        // ✅ Use LangKeys explicitly
-        if (country === "BD") setLangState("bn" as LangKeys);
-        else if (country === "ES" || country === "MX") setLangState("es" as LangKeys);
-        else setLangState("en" as LangKeys);
-      })
-      .catch(() => setLangState("en" as LangKeys));
+    if (LANG[browserLang]) setLang(browserLang);
   }, []);
 
-  // ✅ Translation function with nested key support
-  const t = (key: string) => {
+  // Optional: Detect country via IP (free API) and set language
+  useEffect(() => {
+    fetch("https://ipapi.co/json/")
+      .then((res) => res.json())
+      .then((data) => {
+        const country = data.country_code;
+        if (country === "BD") setLang("bn");
+        else if (country === "ES" || country === "MX") setLang("es");
+        else setLang("en");
+      })
+      .catch(() => {
+        setLang("en"); // fallback
+      });
+  }, []);
+
+  // Translation function
+  function t(key: string) {
     const keys = key.split(".");
     let value: any = LANG[lang];
     for (const k of keys) {
@@ -70,14 +50,16 @@ export const LanguageProvider = ({ children }: Props) => {
       value = value[k];
     }
     return typeof value === "string" ? value : key;
-  };
+  }
 
   return (
-    <LanguageContext.Provider value={{ lang, setLang, t }}>
+    <LanguageContext.Provider value={{ lang, t, setLang }}>
       {children}
     </LanguageContext.Provider>
   );
-};
+}
 
-// ✅ Hook for components
-export const useLang = () => useContext(LanguageContext);
+// Custom hook
+export function useLang() {
+  return useContext(LanguageContext);
+}
