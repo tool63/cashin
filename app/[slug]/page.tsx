@@ -4,7 +4,7 @@ import { useParams } from "next/navigation"
 
 /* ================= COMPONENT IMPORTS ================= */
 import HeroSection from "@/components/HeroSection"
-import { earningOptions } from "@/components/earningOptions"
+import { getEarningOptions } from "@/components/earningOptions"
 import { SectionTitle, Stat, Feature } from "@/components/live/SmallComponents"
 import { ArrowRight, ShieldCheck, Wallet, Zap } from "lucide-react"
 import Link from "next/link"
@@ -15,6 +15,9 @@ import { motion } from "framer-motion"
 export default function DynamicPage() {
   const params = useParams<{ slug: string }>()
   const slug = params.slug
+
+  // Get all earning options
+  const earningOptions = getEarningOptions()
 
   // Find matching earning option
   const option = earningOptions.find(
