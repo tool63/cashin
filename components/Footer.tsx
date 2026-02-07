@@ -1,10 +1,10 @@
 "use client"
 
-import { useState, useEffect, ReactNode } from "react"
+import { useState, ReactNode } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { Twitter, Facebook, Instagram, Youtube } from "lucide-react"
-import { useLang } from "@/app/providers/LanguageProvider"
+import { coreLang } from "@/app/lang/core/lang"
 
 type Toggle = Record<string, boolean>
 
@@ -12,21 +12,10 @@ export default function Footer() {
   const [open, setOpen] = useState<Toggle>({})
   const [sub, setSub] = useState<Toggle>({})
   const [sub2, setSub2] = useState<Toggle>({})
-  const [isDesktop, setIsDesktop] = useState(false)
 
-  const { t } = useLang()
-
-  /* Detect desktop */
-  useEffect(() => {
-    const check = () => setIsDesktop(window.innerWidth >= 768)
-    check()
-    window.addEventListener("resize", check)
-    return () => window.removeEventListener("resize", check)
-  }, [])
-
-  const toggle = (k: string) => { if (!isDesktop) setOpen(p => ({ ...p, [k]: !p[k] })) }
-  const toggleSub = (k: string) => { if (!isDesktop) setSub(p => ({ ...p, [k]: !p[k] })) }
-  const toggleSub2 = (k: string) => { if (!isDesktop) setSub2(p => ({ ...p, [k]: !p[k] })) }
+  const t = (k: string) => setOpen(p => ({ ...p, [k]: !p[k] }))
+  const s = (k: string) => setSub(p => ({ ...p, [k]: !p[k] }))
+  const s2 = (k: string) => setSub2(p => ({ ...p, [k]: !p[k] }))
 
   const A = ({ href, children }: { href: string; children: ReactNode }) => (
     <motion.div whileHover={{ x: 4 }} transition={{ duration: 0.15 }}>
@@ -39,22 +28,30 @@ export default function Footer() {
     </motion.div>
   )
 
-  const Section = ({ id, title, children }: { id: string; title: string; children: ReactNode }) => (
+  const Section = ({
+    id,
+    title,
+    children,
+  }: {
+    id: string
+    title: string
+    children: ReactNode
+  }) => (
     <div>
       <button
-        onClick={() => toggle(id)}
+        onClick={() => t(id)}
         className="w-full flex justify-between items-center font-semibold mb-3 text-black dark:text-white"
       >
         {title}
-        {!isDesktop && <span>{open[id] ? "−" : "+"}</span>}
+        <span>{open[id] ? "−" : "+"}</span>
       </button>
 
       <AnimatePresence>
-        {(isDesktop || open[id]) && (
+        {open[id] && (
           <motion.div
-            initial={!isDesktop ? { height: 0, opacity: 0 } : false}
+            initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
-            exit={!isDesktop ? { height: 0, opacity: 0 } : undefined}
+            exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
             className="space-y-2 text-sm text-black dark:text-gray-400"
           >
@@ -75,62 +72,38 @@ export default function Footer() {
     title: string
     children: ReactNode
     level?: number
-  }) => {
-    const state = level === 1 ? sub[id] : sub2[id]
+  }) => (
+    <div className="mt-2" style={{ paddingLeft: `${level * 8}px` }}>
+      <button
+        onClick={() => (level === 1 ? s(id) : s2(id))}
+        className="w-full flex justify-between font-medium text-black dark:text-gray-300"
+      >
+        {title}
+        <span>{(level === 1 ? sub[id] : sub2[id]) ? "−" : "+"}</span>
+      </button>
 
-    return (
-      <div className="mt-2" style={{ paddingLeft: `${level * 8}px` }}>
-        <button
-          onClick={() => (level === 1 ? toggleSub(id) : toggleSub2(id))}
-          className="w-full flex justify-between font-medium text-black dark:text-gray-300"
-        >
-          {title}
-          {!isDesktop && <span>{state ? "−" : "+"}</span>}
-        </button>
-
-        <AnimatePresence>
-          {(isDesktop || state) && (
-            <motion.div
-              initial={!isDesktop ? { height: 0, opacity: 0 } : false}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={!isDesktop ? { height: 0, opacity: 0 } : undefined}
-              transition={{ duration: 0.25 }}
-              className="mt-2 space-y-2 pl-3"
-            >
-              {children}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    )
-  }
-
-  const footerColumns = {
-    getStarted: "Get Started",
-    waysToEarn: "Ways to Earn",
-    guides: "Guides",
-    rewards: "Rewards",
-    resources: "Resources",
-    business: "Business",
-    cashback: "Cashback",
-    legal: "Legal",
-  }
-
-  const footerSocial = {
-    twitter: "https://twitter.com/",
-    facebook: "https://facebook.com/",
-    instagram: "https://instagram.com/",
-    youtube: "https://youtube.com/",
-  }
-
-  const copyright = "© 2026 Cashooz. All rights reserved."
+      <AnimatePresence>
+        {(level === 1 ? sub[id] : sub2[id]) && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="mt-2 space-y-2 pl-3"
+          >
+            {children}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
 
   return (
-    <footer className="bg-gray-100 text-gray-700 dark:bg-[#070A14] dark:text-gray-300 transition-colors duration-300">
+    <footer className="bg-gray-100 dark:bg-[#070A14] transition-colors">
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-2 md:grid-cols-4 gap-10">
 
         {/* COLUMN 1 */}
-        <Section id="start" title={footerColumns.getStarted}>
+        <Section id="start" title={coreLang.footer.sections.getStarted}>
           <A href="/how-it-works">How Cashog Works</A>
           <A href="/start-earning">How to Start Earning</A>
           <A href="/cashout">Cashout Methods</A>
@@ -139,7 +112,7 @@ export default function Footer() {
         </Section>
 
         {/* COLUMN 2 */}
-        <Section id="earn" title={footerColumns.waysToEarn}>
+        <Section id="earn" title={coreLang.footer.sections.waysToEarn}>
           <A href="/surveys">Surveys</A>
           <A href="/app-installs">App Installs</A>
           <A href="/play-games">Playing Games</A>
@@ -164,7 +137,7 @@ export default function Footer() {
         </Section>
 
         {/* COLUMN 3 */}
-        <Section id="guides" title={footerColumns.guides}>
+        <Section id="guides" title={coreLang.footer.sections.guides}>
           <A href="/make-money-online">Make Money Online</A>
           <A href="/earn-money-from-home">Earn Money from Home</A>
           <A href="/earn-without-investment">Earn Without Investment</A>
@@ -190,7 +163,7 @@ export default function Footer() {
         </Section>
 
         {/* COLUMN 4 */}
-        <Section id="payments" title={footerColumns.rewards}>
+        <Section id="payments" title={coreLang.footer.sections.rewards}>
           <A href="/earn-paypal-money">Earn PayPal Money</A>
 
           <Sub id="giftcards" title="Earn Gift Cards">
@@ -217,7 +190,7 @@ export default function Footer() {
         </Section>
 
         {/* COLUMN 5 */}
-        <Section id="resources" title={footerColumns.resources}>
+        <Section id="resources" title={coreLang.footer.sections.resources}>
           <A href="/blog">Blog</A>
           <A href="/help">Help Center</A>
           <A href="/faq">FAQ</A>
@@ -226,14 +199,14 @@ export default function Footer() {
         </Section>
 
         {/* COLUMN 6 */}
-        <Section id="business" title={footerColumns.business}>
+        <Section id="business" title={coreLang.footer.sections.business}>
           <A href="/affiliate">Affiliate Program</A>
           <A href="/partners">Partners</A>
           <A href="/advertise">Advertise with Cashooz</A>
         </Section>
 
         {/* COLUMN 7 */}
-        <Section id="cashback" title={footerColumns.cashback}>
+        <Section id="cashback" title={coreLang.footer.sections.cashback}>
           <A href="/cashback-offers">Cashback Offers</A>
 
           <Sub id="shopping" title="Shopping & Rewards">
@@ -258,7 +231,7 @@ export default function Footer() {
         </Section>
 
         {/* COLUMN 8 */}
-        <Section id="legal" title={footerColumns.legal}>
+        <Section id="legal" title={coreLang.footer.sections.legal}>
           <A href="https://cashog.com/terms-and-conditions">Terms & Conditions</A>
           <A href="https://cashog.com/privacy-policy">Privacy Policy</A>
           <A href="https://cashog.com/cookie-policy">Cookie Policy</A>
@@ -266,16 +239,15 @@ export default function Footer() {
 
       </div>
 
-      {/* SOCIAL */}
       <div className="border-t border-white/10 py-6 flex justify-center gap-6">
-        <a href={footerSocial.twitter} target="_blank" rel="noopener noreferrer"><Twitter /></a>
-        <a href={footerSocial.facebook} target="_blank" rel="noopener noreferrer"><Facebook /></a>
-        <a href={footerSocial.instagram} target="_blank" rel="noopener noreferrer"><Instagram /></a>
-        <a href={footerSocial.youtube} target="_blank" rel="noopener noreferrer"><Youtube /></a>
+        <a href={coreLang.footer.social.twitter}><Twitter /></a>
+        <a href={coreLang.footer.social.facebook}><Facebook /></a>
+        <a href={coreLang.footer.social.instagram}><Instagram /></a>
+        <a href={coreLang.footer.social.youtube}><Youtube /></a>
       </div>
 
       <div className="text-center text-sm text-gray-500 pb-6">
-        {copyright}
+        {coreLang.footer.copyright}
       </div>
     </footer>
   )
