@@ -28,7 +28,7 @@ export default function Footer() {
   useEffect(() => {
     if (!lang) {
       const browserLang = navigator.language.slice(0, 2)
-      if (["en", "bn"].includes(browserLang)) setLang(browserLang)
+      if (["en", "bn"].includes(browserLang)) setLang(browserLang as "en" | "bn")
       else setLang("en")
     }
   }, [lang, setLang])
