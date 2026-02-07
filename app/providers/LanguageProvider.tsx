@@ -1,10 +1,10 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { LANG } from "../lang/core/lang"; // your translations file
+import { LANG } from "../lang/core/lang"; // your translations
 
 // ✅ Include all supported languages here
-export type LangKeys = keyof typeof LANG; // e.g., "en" | "bn" | "es"
+export type LangKeys = keyof typeof LANG; // "en" | "bn" | "es"
 
 interface LanguageContextType {
   lang: LangKeys;
@@ -23,9 +23,10 @@ interface Props {
 }
 
 export const LanguageProvider = ({ children }: Props) => {
+  // ✅ Make sure useState uses the full LangKeys type
   const [lang, setLangState] = useState<LangKeys>("en");
 
-  // ✅ Wrapper to update state + localStorage safely
+  // ✅ Central setLang wrapper
   const setLang = (l: LangKeys) => {
     setLangState(l);
     localStorage.setItem("lang", l);
@@ -51,19 +52,21 @@ export const LanguageProvider = ({ children }: Props) => {
       .then(res => res.json())
       .then(data => {
         const country = data.country_code;
-        if (country === "BD") setLangState("bn");
-        else if (country === "ES" || country === "MX") setLangState("es");
-        else setLangState("en");
+
+        // ✅ Use LangKeys explicitly
+        if (country === "BD") setLangState("bn" as LangKeys);
+        else if (country === "ES" || country === "MX") setLangState("es" as LangKeys);
+        else setLangState("en" as LangKeys);
       })
-      .catch(() => setLangState("en"));
+      .catch(() => setLangState("en" as LangKeys));
   }, []);
 
-  // ✅ Translation function (supports nested keys like "footer.sections.getStarted")
+  // ✅ Translation function with nested key support
   const t = (key: string) => {
     const keys = key.split(".");
     let value: any = LANG[lang];
     for (const k of keys) {
-      if (value[k] === undefined) return key; // fallback
+      if (value[k] === undefined) return key;
       value = value[k];
     }
     return typeof value === "string" ? value : key;
@@ -76,5 +79,5 @@ export const LanguageProvider = ({ children }: Props) => {
   );
 };
 
-// ✅ Hook to use translations anywhere
+// ✅ Hook for components
 export const useLang = () => useContext(LanguageContext);
