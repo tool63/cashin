@@ -1,75 +1,53 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
-import { useLang } from "@/app/providers/LanguageProvider";
 
 export default function Footer() {
-  const { t } = useLang();
-  const [open, setOpen] = useState<Record<string, boolean>>({});
-
-  const toggle = (section: string) => {
-    setOpen((prev) => ({ ...prev, [section]: !prev[section] }));
-  };
-
   return (
-    <footer className="bg-gray-100 dark:bg-gray-900 text-black dark:text-white mt-16">
-      <div className="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-4 gap-8">
-        {/* Column 1 */}
+    <footer className="bg-gray-100 dark:bg-[#0A0C16] text-gray-600 dark:text-gray-400 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-6 py-10 grid md:grid-cols-3 gap-6 text-center md:text-left">
+        {/* Logo */}
         <div>
-          <h4 className="font-bold mb-2 cursor-pointer" onClick={() => toggle("company")}>
-            {t("footer.columns.company")}
-          </h4>
-          {open["company"] && (
-            <ul className="space-y-1 mt-2">
-              <li><Link href="/about">{t("footer.links.about")}</Link></li>
-              <li><Link href="/careers">{t("footer.links.careers")}</Link></li>
-              <li><Link href="/blog">{t("footer.links.blog")}</Link></li>
-            </ul>
-          )}
+          <h2 className="text-2xl font-bold text-indigo-600 dark:text-indigo-400 mb-4">
+            Cashog
+          </h2>
+          <p>Cashog is a trusted platform to earn rewards online safely and fast.</p>
         </div>
 
-        {/* Column 2 */}
+        {/* Links */}
         <div>
-          <h4 className="font-bold mb-2 cursor-pointer" onClick={() => toggle("support")}>
-            {t("footer.columns.support")}
-          </h4>
-          {open["support"] && (
-            <ul className="space-y-1 mt-2">
-              <li><Link href="/help">{t("footer.links.helpCenter")}</Link></li>
-              <li><Link href="/faq">{t("footer.links.faq")}</Link></li>
-              <li><Link href="/contact">{t("footer.links.contactUs")}</Link></li>
-            </ul>
-          )}
-        </div>
-
-        {/* Column 3 */}
-        <div>
-          <h4 className="font-bold mb-2 cursor-pointer" onClick={() => toggle("legal")}>
-            {t("footer.columns.legal")}
-          </h4>
-          {open["legal"] && (
-            <ul className="space-y-1 mt-2">
-              <li><Link href="/terms">{t("footer.links.terms")}</Link></li>
-              <li><Link href="/privacy">{t("footer.links.privacy")}</Link></li>
-              <li><Link href="/cookies">{t("footer.links.cookies")}</Link></li>
-            </ul>
-          )}
-        </div>
-
-        {/* Column 4 - Social */}
-        <div>
-          <h4 className="font-bold mb-2">{t("footer.columns.followUs")}</h4>
-          <ul className="flex space-x-4 mt-2">
-            <li><Link href="https://twitter.com" target="_blank">Twitter</Link></li>
-            <li><Link href="https://facebook.com" target="_blank">Facebook</Link></li>
-            <li><Link href="https://instagram.com" target="_blank">Instagram</Link></li>
+          <h3 className="font-semibold mb-2">Links</h3>
+          <ul className="space-y-1">
+            <li>
+              <Link href="/earn" className="hover:text-indigo-600 dark:hover:text-indigo-400">
+                Earn
+              </Link>
+            </li>
+            <li>
+              <Link href="/about" className="hover:text-indigo-600 dark:hover:text-indigo-400">
+                About
+              </Link>
+            </li>
+            <li>
+              <Link href="/contact" className="hover:text-indigo-600 dark:hover:text-indigo-400">
+                Contact
+              </Link>
+            </li>
+            <li>
+              <Link href="/signup" className="hover:text-indigo-600 dark:hover:text-indigo-400">
+                Sign Up
+              </Link>
+            </li>
           </ul>
         </div>
-      </div>
 
-      <div className="border-t border-gray-300 dark:border-gray-700 text-center py-4 mt-8 text-sm">
-        &copy; {new Date().getFullYear()} Cashog. {t("footer.rights")}
+        {/* Contact */}
+        <div>
+          <h3 className="font-semibold mb-2">Contact</h3>
+          <p>Email: <a href="mailto:support@cashog.com" className="hover:text-indigo-600 dark:hover:text-indigo-400">support@cashog.com</a></p>
+          <p>Phone: +1 234 567 890</p>
+          <p className="mt-4 text-sm">© 2026 Cashog. All rights reserved.</p>
+        </div>
       </div>
     </footer>
   );
