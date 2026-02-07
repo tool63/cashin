@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, ReactNode } from "react"
+import { useState, useEffect, ReactNode } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { Twitter, Facebook, Instagram, Youtube } from "lucide-react"
@@ -12,10 +12,25 @@ export default function Footer() {
   const [open, setOpen] = useState<Toggle>({})
   const [sub, setSub] = useState<Toggle>({})
   const [sub2, setSub2] = useState<Toggle>({})
+  const [isDesktop, setIsDesktop] = useState(false)
 
-  const t = (k: string) => setOpen(p => ({ ...p, [k]: !p[k] }))
-  const s = (k: string) => setSub(p => ({ ...p, [k]: !p[k] }))
-  const s2 = (k: string) => setSub2(p => ({ ...p, [k]: !p[k] }))
+  /* Detect desktop */
+  useEffect(() => {
+    const check = () => setIsDesktop(window.innerWidth >= 768)
+    check()
+    window.addEventListener("resize", check)
+    return () => window.removeEventListener("resize", check)
+  }, [])
+
+  const t = (k: string) => {
+    if (!isDesktop) setOpen(p => ({ ...p, [k]: !p[k] }))
+  }
+  const s = (k: string) => {
+    if (!isDesktop) setSub(p => ({ ...p, [k]: !p[k] }))
+  }
+  const s2 = (k: string) => {
+    if (!isDesktop) setSub2(p => ({ ...p, [k]: !p[k] }))
+  }
 
   const A = ({ href, children }: { href: string; children: ReactNode }) => (
     <motion.div whileHover={{ x: 4 }} transition={{ duration: 0.15 }}>
@@ -46,15 +61,15 @@ export default function Footer() {
                    text-black dark:text-white"
       >
         {title}
-        <span>{open[id] ? "−" : "+"}</span>
+        {!isDesktop && <span>{open[id] ? "−" : "+"}</span>}
       </button>
 
       <AnimatePresence>
-        {open[id] && (
+        {(isDesktop || open[id]) && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
+            initial={!isDesktop ? { height: 0, opacity: 0 } : false}
             animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
+            exit={!isDesktop ? { height: 0, opacity: 0 } : undefined}
             transition={{ duration: 0.25 }}
             className="space-y-2 text-sm text-black dark:text-gray-400"
           >
@@ -75,32 +90,36 @@ export default function Footer() {
     title: string
     children: ReactNode
     level?: number
-  }) => (
-    <div className="mt-2" style={{ paddingLeft: `${level * 8}px` }}>
-      <button
-        onClick={() => (level === 1 ? s(id) : s2(id))}
-        className="w-full flex justify-between font-medium
-                   text-black dark:text-gray-300"
-      >
-        {title}
-        <span>{(level === 1 ? sub[id] : sub2[id]) ? "−" : "+"}</span>
-      </button>
+  }) => {
+    const state = level === 1 ? sub[id] : sub2[id]
 
-      <AnimatePresence>
-        {(level === 1 ? sub[id] : sub2[id]) && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="mt-2 space-y-2 pl-3"
-          >
-            {children}
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  )
+    return (
+      <div className="mt-2" style={{ paddingLeft: `${level * 8}px` }}>
+        <button
+          onClick={() => (level === 1 ? s(id) : s2(id))}
+          className="w-full flex justify-between font-medium
+                     text-black dark:text-gray-300"
+        >
+          {title}
+          {!isDesktop && <span>{state ? "−" : "+"}</span>}
+        </button>
+
+        <AnimatePresence>
+          {(isDesktop || state) && (
+            <motion.div
+              initial={!isDesktop ? { height: 0, opacity: 0 } : false}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={!isDesktop ? { height: 0, opacity: 0 } : undefined}
+              transition={{ duration: 0.25 }}
+              className="mt-2 space-y-2 pl-3"
+            >
+              {children}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    )
+  }
 
   return (
     <footer className="bg-gray-100 text-gray-700 dark:bg-[#070A14] dark:text-gray-300 transition-colors duration-300">
