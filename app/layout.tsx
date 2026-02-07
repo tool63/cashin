@@ -8,7 +8,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingCTA from "@/components/cta/FloatingCTA";
 import { LanguageProvider } from "./providers/LanguageProvider";
-import { ThemeProvider } from "./providers/ThemeProvider"; // optional if you use dark/light mode
+import ThemeProviderWrapper from "@/components/providers/ThemeProviderWrapper"; // ✅ FIXED PATH
 import Meta from "@/components/seo/SeoEngine"; // ✅ FIXED PATH
 
 export interface RootLayoutProps {
@@ -33,7 +33,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body className="min-h-screen bg-white text-black dark:bg-black dark:text-white antialiased">
         {/* 🔥 Wrap all children in Providers */}
         <LanguageProvider>
-          <ThemeProvider>
+          <ThemeProviderWrapper>
             <Header />
 
             <main className="min-h-[calc(100vh-160px)] relative z-0">
@@ -42,7 +42,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
             <Footer />
             <FloatingCTA />
-          </ThemeProvider>
+          </ThemeProviderWrapper>
         </LanguageProvider>
       </body>
     </html>
