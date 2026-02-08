@@ -34,7 +34,7 @@ export default function TypingText({
   typingSpeed = 90,
   deletingSpeed = 50,
   pauseTime = 1500,
-  className = "text-indigo-500 font-semibold",
+  className = "",
 }: TypingTextProps) {
   const [wordIndex, setWordIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
@@ -46,20 +46,15 @@ export default function TypingText({
     let timeout: NodeJS.Timeout;
 
     if (!isDeleting) {
-      // Typing
       if (charIndex < currentWord.length) {
         timeout = setTimeout(() => {
           setDisplayText(currentWord.slice(0, charIndex + 1));
           setCharIndex((prev) => prev + 1);
         }, typingSpeed);
       } else {
-        // Pause before deleting
-        timeout = setTimeout(() => {
-          setIsDeleting(true);
-        }, pauseTime);
+        timeout = setTimeout(() => setIsDeleting(true), pauseTime);
       }
     } else {
-      // Deleting
       if (charIndex > 0) {
         timeout = setTimeout(() => {
           setDisplayText(currentWord.slice(0, charIndex - 1));
@@ -83,9 +78,21 @@ export default function TypingText({
   ]);
 
   return (
-    <span className={className}>
+    <span
+      className={`
+        text-[19px]
+        font-semibold
+        bg-gradient-to-r
+        from-yellow-400
+        via-green-400
+        to-green-500
+        bg-clip-text
+        text-transparent
+        ${className}
+      `}
+    >
       {displayText}
-      <span className="ml-1 animate-pulse">|</span>
+      <span className="ml-1 animate-pulse text-green-400">|</span>
     </span>
   );
 }
