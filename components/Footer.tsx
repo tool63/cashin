@@ -142,13 +142,18 @@ export default function Footer() {
 
   const Section = ({ id, title, children }: { id: string; title: string; children: ReactNode }) => (
     <div>
-      <button
-        onClick={() => toggle(id)}
-        className="w-full flex justify-between items-center font-semibold mb-3 text-black dark:text-white"
-      >
-        {title}
-        {!isDesktop && <ChevronDown size={16} className={`transition ${open[id] ? "rotate-180" : ""}`} />}
-      </button>
+      {isDesktop ? (
+        <h3 className="font-semibold mb-3 text-black dark:text-white">{title}</h3>
+      ) : (
+        <button
+          onClick={() => toggle(id)}
+          className="w-full flex justify-between items-center font-semibold mb-3 text-black dark:text-white"
+        >
+          {title}
+          <ChevronDown size={16} className={`transition ${open[id] ? "rotate-180" : ""}`} />
+        </button>
+      )}
+
       <AnimatePresence>
         {(isDesktop || open[id]) && (
           <motion.div
@@ -168,14 +173,18 @@ export default function Footer() {
   const Sub = ({ id, title, children, level = 1 }: { id: string; title: string; children: ReactNode; level?: number }) => {
     const state = level === 1 ? sub[id] : sub2[id];
     return (
-      <div className="mt-2" style={{ paddingLeft: `${level * 8}px` }}>
-        <button
-          onClick={() => (level === 1 ? toggleSub(id) : toggleSub2(id))}
-          className="w-full flex justify-between font-medium text-black dark:text-gray-300"
-        >
-          {title}
-          {!isDesktop && <ChevronDown size={14} className={`transition ${state ? "rotate-180" : ""}`} />}
-        </button>
+      <div className="mt-2" style={{ paddingLeft: isDesktop ? `${level * 8}px` : `${level * 12}px` }}>
+        {isDesktop ? (
+          <div className="font-medium text-black dark:text-gray-300">{title}</div>
+        ) : (
+          <button
+            onClick={() => (level === 1 ? toggleSub(id) : toggleSub2(id))}
+            className="w-full flex justify-between font-medium text-black dark:text-gray-300"
+          >
+            {title}
+            <ChevronDown size={14} className={`transition ${state ? "rotate-180" : ""}`} />
+          </button>
+        )}
         <AnimatePresence>
           {(isDesktop || state) && (
             <motion.div
@@ -216,7 +225,7 @@ export default function Footer() {
   return (
     <footer className="bg-gray-100 text-gray-700 dark:bg-[#070A14] dark:text-gray-300 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-2 md:grid-cols-8 gap-10">
-
+        
         {/* COLUMN 1 */}
         <Section id="start" title={footerColumns.getStarted}>
           <A href="/how-it-works">{links.howItWorks}</A>
