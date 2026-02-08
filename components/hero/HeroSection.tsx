@@ -9,7 +9,7 @@ export default function HeroSection() {
     <section className="bg-gray-50 dark:bg-gray-900 text-black dark:text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-28 md:py-32 text-center">
 
-        {/* FORWARD / ARROW-STYLE HEADLINE (TEXT ONLY) */}
+        {/* RAINBOW ARROW-STYLE HEADLINE */}
         <div className="flex justify-center mb-8">
           <h1
             className="
@@ -17,10 +17,12 @@ export default function HeroSection() {
               px-10 py-4
               text-3xl sm:text-4xl md:text-5xl lg:text-6xl
               font-extrabold uppercase tracking-wide
-              text-white
-              bg-red-600
               skew-x-[-10deg]
               shadow-xl
+              bg-gradient-to-r
+              from-red-500 via-yellow-400 via-green-500 via-blue-500 to-purple-600
+              bg-clip-text text-transparent
+              animate-rainbow
             "
           >
             <span className="inline-block skew-x-[10deg]">
