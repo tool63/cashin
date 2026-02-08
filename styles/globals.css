@@ -1,20 +1,19 @@
-/* Yellow + Green animated typing text */
-.yellow-green-text {
+.typing-yellow-green {
   background: linear-gradient(
     90deg,
-    #facc15, /* yellow */
-    #a3e635, /* yellow-green */
-    #22c55e, /* green */
+    #facc15,
+    #a3e635,
+    #22c55e,
     #a3e635,
     #facc15
   );
-  background-size: 300% 300%;
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: yellowGreenMove 5s ease-in-out infinite;
+  animation: yellowGreenShift 4s ease-in-out infinite;
 }
 
-@keyframes yellowGreenMove {
+@keyframes yellowGreenShift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
