@@ -50,7 +50,7 @@ export default function FloatingCTA() {
       {letters.map((char, index) => (
         <span
           key={`${bounceKey}-${index}`}
-          className={styles.letter}
+          className={`${styles.letter} ${bounceKey ? styles.sparkle : ""}`}
           style={{ animationDelay: `${index * 0.05}s` }}
         >
           {char === " " ? "\u00A0" : char}
