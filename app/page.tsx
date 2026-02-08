@@ -9,6 +9,30 @@ import Meta from "@/components/seo/SeoEngine";
 import { motion } from "framer-motion";
 import TypingText from "@/components/typing/TypingText";
 
+// High Paying Offers Data
+const highPayingOffers = [
+  { name: "Survey Max", flag: "🇺🇸", amount: "$15" },
+  { name: "App Cash", flag: "🇬🇧", amount: "$12" },
+  { name: "Video Rewards", flag: "🇨🇦", amount: "$10" },
+  { name: "Daily Survey", flag: "🇦🇺", amount: "$18" },
+  { name: "Task Master", flag: "🇮🇳", amount: "$20" },
+  { name: "Offer Wall", flag: "🇪🇺", amount: "$25" },
+  { name: "Crypto Miner", flag: "🇺🇸", amount: "$22" },
+  { name: "App Install Pro", flag: "🇬🇧", amount: "$17" },
+  { name: "Game Rewards", flag: "🇨🇦", amount: "$19" },
+  { name: "Premium Survey", flag: "🇦🇺", amount: "$21" },
+  { name: "Quick Tasks", flag: "🇮🇳", amount: "$16" },
+  { name: "Video Cash", flag: "🇪🇺", amount: "$14" },
+  { name: "Survey King", flag: "🇺🇸", amount: "$23" },
+  { name: "App Bonus", flag: "🇬🇧", amount: "$18" },
+  { name: "Gaming Hub", flag: "🇨🇦", amount: "$20" },
+  { name: "Offer Pro", flag: "🇦🇺", amount: "$26" },
+  { name: "Task Hero", flag: "🇮🇳", amount: "$19" },
+  { name: "Survey Star", flag: "🇪🇺", amount: "$22" },
+  { name: "Video Max", flag: "🇺🇸", amount: "$15" },
+  { name: "App Rewards", flag: "🇬🇧", amount: "$17" },
+];
+
 export default function DynamicPage() {
   const params = useParams<{ slug: string }>();
   const slug = params.slug;
@@ -46,7 +70,7 @@ export default function DynamicPage() {
 
       <main className="transition-colors duration-300 bg-white text-gray-900 dark:bg-[#070A14] dark:text-white">
 
-        {/* PAGE HEADER DESIGNED LIKE HERO */}
+        {/* =================== HERO SECTION =================== */}
         <section className="bg-gray-900 text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
 
@@ -76,10 +100,32 @@ export default function DynamicPage() {
               </motion.span>
             </Link>
 
+            {/* =================== HIGH PAYING OFFERS =================== */}
+            <div className="mt-12 max-w-4xl mx-auto overflow-y-auto h-[360px] border border-gray-700 rounded-xl bg-gray-800 p-4">
+              <h3 className="text-lg font-bold mb-4 text-white">🔥 High Paying Offers</h3>
+              <div className="grid grid-cols-3 gap-4 text-sm text-gray-200 font-medium">
+                <span>Offer</span>
+                <span>Country</span>
+                <span>Amount</span>
+              </div>
+              <div className="mt-2 divide-y divide-gray-700">
+                {highPayingOffers.map((offer, idx) => (
+                  <div
+                    key={idx}
+                    className="grid grid-cols-3 gap-4 py-2 items-center hover:bg-gray-700 transition rounded-md px-2"
+                  >
+                    <span>{offer.name}</span>
+                    <span>{offer.flag}</span>
+                    <span className="text-green-400 font-semibold">{offer.amount}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
           </div>
         </section>
 
-        {/* TASKS GRID */}
+        {/* =================== TASKS GRID =================== */}
         <section className="max-w-7xl mx-auto px-6 py-16">
           <SectionTitle icon="🎯" text="Earn Money Tasks" />
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -100,7 +146,7 @@ export default function DynamicPage() {
           </div>
         </section>
 
-        {/* TRUST */}
+        {/* =================== TRUST =================== */}
         <section className="py-16 bg-gray-100 dark:bg-white/5">
           <div className="max-w-7xl mx-auto px-6 text-center">
             <h2 className="text-3xl font-bold mb-4">Trusted by Millions Worldwide</h2>
@@ -116,14 +162,15 @@ export default function DynamicPage() {
           </div>
         </section>
 
-        {/* PAYMENTS */}
+        {/* =================== PAYMENT METHODS =================== */}
         <section className="py-20">
           <div className="max-w-7xl mx-auto px-6 text-center">
             <h2 className="text-4xl font-extrabold mb-4">Payment Methods</h2>
             <p className="text-gray-600 dark:text-gray-400 mb-14 max-w-2xl mx-auto">
               Fast, secure, and trusted payout options.
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8">
+            {/* Centered on PC, flex wrap keeps mobile layout */}
+            <div className="flex justify-center flex-wrap gap-8">
               {[
                 { name: "PayPal", emoji: "💸" },
                 { name: "USDT", emoji: "🪙" },
@@ -132,7 +179,7 @@ export default function DynamicPage() {
               ].map((method) => (
                 <div
                   key={method.name}
-                  className="rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-100 dark:bg-white/5 px-6 py-8 flex flex-col items-center hover:scale-105 transition"
+                  className="w-36 rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-100 dark:bg-white/5 px-6 py-8 flex flex-col items-center hover:scale-105 transition"
                 >
                   <span className="text-4xl mb-3">{method.emoji}</span>
                   <span className="text-lg font-semibold">{method.name}</span>
@@ -143,7 +190,7 @@ export default function DynamicPage() {
           </div>
         </section>
 
-        {/* FEATURES / WHY CHOOSE US */}
+        {/* =================== FEATURES / WHY CHOOSE US =================== */}
         <section className="py-20 bg-gray-100 dark:bg-white/5">
           <SectionTitle icon="🌟" text="Why Choose Us" />
           <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-10">
@@ -173,7 +220,7 @@ export default function DynamicPage() {
           </div>
         </section>
 
-        {/* FINAL CTA */}
+        {/* =================== FINAL CTA =================== */}
         <section className="py-20 text-center">
           <h2 className="text-4xl font-bold mb-6">Start Earning Real Money Today!</h2>
           <p className="mb-8 text-lg text-gray-600 dark:text-gray-400">
