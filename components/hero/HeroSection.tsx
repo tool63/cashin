@@ -6,31 +6,36 @@ import Link from "next/link";
 
 export default function HeroSection() {
   return (
-    <section className="bg-gray-50 dark:bg-gray-900 text-black dark:text-white py-32">
-      <div className="max-w-7xl mx-auto px-6 text-center">
-        <h1 className="text-5xl md:text-6xl font-extrabold mb-6">
-          Earn Real Money Online
+    <section className="bg-gray-50 dark:bg-gray-900 text-black dark:text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-28 md:py-32 text-center">
+        
+        {/* HEADLINE */}
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
+          Earn Real Money By
         </h1>
 
-        <p className="text-xl md:text-2xl mb-6">
-          <TypingText
-            className="text-green-500 font-semibold"
-          />
+        {/* TYPING TEXT */}
+        <p className="text-lg sm:text-xl md:text-2xl mb-6 min-h-[2.5rem] flex justify-center">
+          <TypingText className="text-green-500 font-semibold text-center" />
         </p>
 
-        <p className="text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+        {/* SUBTEXT */}
+        <p className="text-sm sm:text-base md:text-lg text-gray-600 dark:text-gray-400 mb-10 max-w-xl md:max-w-2xl mx-auto">
           Join millions of users worldwide and start earning rewards instantly.
         </p>
 
-        <Link href="/signup">
-          <motion.span
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-black px-10 py-4 rounded-xl font-semibold shadow-lg"
-          >
-            Get Started Now
-          </motion.span>
-        </Link>
+        {/* CTA */}
+        <div className="flex justify-center">
+          <Link href="/signup">
+            <motion.span
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-black px-8 sm:px-10 py-4 rounded-xl font-semibold shadow-lg text-base sm:text-lg"
+            >
+              Get Started Now
+            </motion.span>
+          </Link>
+        </div>
       </div>
     </section>
   );
