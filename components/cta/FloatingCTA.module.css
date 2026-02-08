@@ -3,9 +3,6 @@
   bottom: 20px;
   right: 20px;
 
-  background: #ff5722;
-  color: #ffffff;
-
   padding: 15px 25px;
   border-radius: 50px;
 
@@ -18,10 +15,15 @@
   z-index: 9999;
 
   transition: transform 0.4s ease, opacity 0.3s ease;
+
+  /* Rainbow background */
+  background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet);
+  background-size: 1400% 1400%;
+  animation: rainbow 10s ease infinite;
+  color: #fff;
 }
 
 /* ================= SHOW / HIDE ================= */
-
 .show {
   opacity: 1;
   transform: translateY(0);
@@ -34,14 +36,24 @@
 }
 
 /* ================= LETTER ANIMATION ================= */
-
 .letter {
   display: inline-block;
   animation: bounce 0.6s ease forwards;
+  position: relative;
+}
+
+/* ================= SPARKLE ON BOUNCE ================= */
+.sparkle::after {
+  content: "✨";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  animation: sparkle 0.6s ease forwards;
 }
 
 /* ================= KEYFRAMES ================= */
-
 @keyframes bounce {
   0% {
     transform: translateY(0);
@@ -55,4 +67,26 @@
   100% {
     transform: translateY(0);
   }
+}
+
+@keyframes sparkle {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -8px) scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -14px) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -20px) scale(0);
+  }
+}
+
+/* ================= RAINBOW ANIMATION ================= */
+@keyframes rainbow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
