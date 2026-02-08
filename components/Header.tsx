@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
@@ -12,8 +12,34 @@ export default function Header() {
   const [earnOpen, setEarnOpen] = useState(false);
   const [mobileEarnOpen, setMobileEarnOpen] = useState(false);
 
+  const headerRef = useRef<HTMLDivElement>(null);
+
+  // 🔒 Close menus when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        headerRef.current &&
+        !headerRef.current.contains(event.target as Node)
+      ) {
+        setEarnOpen(false);
+        setMobileOpen(false);
+        setMobileEarnOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () =>
+      document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 backdrop-blur border-b bg-white/90 dark:bg-[#070A14]/90 border-gray-200 dark:border-white/10 transition-colors">
+    <header
+      ref={headerRef}
+      className="sticky top-0 z-50 backdrop-blur border-b
+                 bg-white/90 dark:bg-[#070A14]/90
+                 border-gray-200 dark:border-white/10
+                 transition-colors"
+    >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-start justify-between">
         {/* LOGO */}
         <Link
@@ -24,14 +50,14 @@ export default function Header() {
         </Link>
 
         {/* DESKTOP COLUMN MENU */}
-        <nav className="hidden md:flex flex-col gap-3 text-sm font-medium">
+        <nav className="hidden md:flex flex-col gap-4 text-sm font-medium">
           <Link href="/how-it-works">How it works</Link>
 
           {/* EARN */}
           <div className="flex flex-col gap-2">
             <button
               onClick={() => setEarnOpen(!earnOpen)}
-              className="flex items-center gap-1 font-medium"
+              className="flex items-center gap-1"
             >
               Earn
               <ChevronDown
@@ -60,6 +86,7 @@ export default function Header() {
             </AnimatePresence>
           </div>
 
+          {/* CLEARLY SEPARATED COLUMN LINKS */}
           <Link href="/cashout">Cashout</Link>
           <Link href="/blog">Blog</Link>
           <Link href="/help">Help</Link>
@@ -91,14 +118,16 @@ export default function Header() {
         </button>
       </div>
 
-      {/* MOBILE MENU (UNCHANGED STRUCTURE) */}
+      {/* MOBILE MENU */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden px-6 py-6 space-y-4 border-t bg-white dark:bg-[#070A14] border-gray-200 dark:border-white/10"
+            className="md:hidden px-6 py-6 space-y-4 border-t
+                       bg-white dark:bg-[#070A14]
+                       border-gray-200 dark:border-white/10"
           >
             <Link href="/how-it-works">How it works</Link>
 
