@@ -46,7 +46,7 @@ export default function DynamicPage() {
 
       <main className="transition-colors duration-300 bg-white text-gray-900 dark:bg-[#070A14] dark:text-white">
 
-        {/* HERO INLINE */}
+        {/* PAGE HEADER DESIGNED LIKE HERO */}
         <section className="bg-gray-900 text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
 
@@ -65,39 +65,18 @@ export default function DynamicPage() {
               Join millions of users worldwide and start earning rewards instantly.
             </p>
 
-            {/* HERO CTA */}
+            {/* CTA */}
             <Link href="/signup">
               <motion.span
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center justify-center bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-8 py-3 rounded-xl font-semibold shadow-lg text-sm sm:text-base"
+                className="inline-flex items-center justify-center bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-10 py-4 rounded-xl font-semibold shadow-lg text-sm sm:text-base"
               >
-                Get Started Now
+                Get Started Now <ArrowRight />
               </motion.span>
             </Link>
 
           </div>
-        </section>
-
-        {/* PAGE HEADER */}
-        <section className="max-w-7xl mx-auto px-6 py-20 text-center">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4">
-            {option ? option[1] : slug ? slug.replace("-", " ").charAt(0).toUpperCase() + slug.slice(1) : "Page"}
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400 mb-10">
-            {option
-              ? `Start earning by ${option[1].toLowerCase()} today on Cashog!`
-              : "Explore opportunities and start earning rewards now."}
-          </p>
-          <Link href="/signup">
-            <motion.span
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-10 py-4 rounded-xl font-semibold shadow-lg"
-            >
-              Get Started Now <ArrowRight />
-            </motion.span>
-          </Link>
         </section>
 
         {/* TASKS GRID */}
