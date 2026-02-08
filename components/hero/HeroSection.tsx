@@ -9,10 +9,25 @@ export default function HeroSection() {
     <section className="bg-gray-50 dark:bg-gray-900 text-black dark:text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-28 md:py-32 text-center">
         
-        {/* HEADLINE */}
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
-          Earn Real Money By
-        </h1>
+        {/* ARROW + HEADLINE */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+          {/* Arrow SVG */}
+          <span className="w-12 h-12 sm:w-14 sm:h-14 text-red-600 dark:text-red-400 flex-shrink-0">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              className="w-full h-full"
+            >
+              <path d="M2 12L22 12M22 12L14 4M22 12L14 20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </span>
+
+          {/* Headline */}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold uppercase leading-tight">
+            Earn Real Money Online
+          </h1>
+        </div>
 
         {/* TYPING TEXT */}
         <p className="text-lg sm:text-xl md:text-2xl mb-6 min-h-[2.5rem] flex justify-center">
