@@ -29,11 +29,24 @@ export default function DynamicPage() {
     ? `Learn more about ${slug.replace("-", " ")} and start earning real money on Cashog today!`
     : "Cashog - Earn rewards, complete offers, watch videos, and get paid instantly.";
 
+  // Custom descriptions for earning tasks
+  const earningDescriptions: Record<string, string> = {
+    Surveys: "Share your opinions and get rewarded instantly",
+    "App Installs": "Install apps and earn money easily",
+    "Play Games": "Have fun while earning rewards",
+    "Watch Videos": "Watch short videos and get paid",
+    "Mining Rewards": "Earn crypto while mining rewards",
+    "Complete Offers": "Finish tasks and get instant payouts",
+    Offerwall: "Complete multiple offers for bonuses",
+    Surveywall: "Explore surveys with higher payouts",
+  };
+
   return (
     <>
       <Meta title={title} description={description} />
 
       <main className="transition-colors duration-300 bg-white text-gray-900 dark:bg-[#070A14] dark:text-white">
+
         {/* HERO */}
         <HeroSection />
 
@@ -47,7 +60,6 @@ export default function DynamicPage() {
               ? `Start earning by ${option[1].toLowerCase()} today on Cashog!`
               : "Explore opportunities and start earning rewards now."}
           </p>
-          {/* FIRST CTA */}
           <Link href="/signup">
             <motion.span
               whileHover={{ scale: 1.05 }}
@@ -72,7 +84,7 @@ export default function DynamicPage() {
                 <div className="text-4xl">{icon}</div>
                 <h3 className="mt-4 text-lg font-semibold">{title}</h3>
                 <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                  Earn real rewards by {title.toLowerCase()}
+                  {earningDescriptions[title] || `Earn rewards with ${title.toLowerCase()}`}
                 </p>
                 <ArrowRight className="mt-3 text-blue-500" size={18} />
               </Link>
@@ -109,7 +121,6 @@ export default function DynamicPage() {
                 { name: "USDT", emoji: "🪙" },
                 { name: "Bitcoin", emoji: "₿" },
                 { name: "Gift Cards", emoji: "🎁" },
-                { name: "Local Payouts", emoji: "🏦" },
               ].map((method) => (
                 <div
                   key={method.name}
@@ -124,13 +135,34 @@ export default function DynamicPage() {
           </div>
         </section>
 
-        {/* FEATURES */}
+        {/* FEATURES / WHY CHOOSE US */}
         <section className="py-20 bg-gray-100 dark:bg-white/5">
           <SectionTitle icon="🌟" text="Why Choose Us" />
-          <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
-            <Feature icon={<Zap />} title="Instant Withdrawals" />
-            <Feature icon={<ShieldCheck />} title="Secure & Trusted" />
-            <Feature icon={<Wallet />} title="Multiple Payment Options" />
+          <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-10">
+            {/* Feature Card */}
+            <div className="flex flex-col items-center bg-white dark:bg-[#0f111b] border border-gray-200 dark:border-white/10 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2">
+              <Zap className="text-green-500 mb-4" size={36} />
+              <h3 className="text-xl font-bold mb-2">Instant Withdrawals</h3>
+              <p className="text-gray-600 dark:text-gray-400 text-center">
+                Get your earnings instantly with zero delays. Fast, secure, and reliable withdrawals.
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center bg-white dark:bg-[#0f111b] border border-gray-200 dark:border-white/10 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2">
+              <ShieldCheck className="text-blue-500 mb-4" size={36} />
+              <h3 className="text-xl font-bold mb-2">Secure & Trusted</h3>
+              <p className="text-gray-600 dark:text-gray-400 text-center">
+                Trusted by millions worldwide. Your data and earnings are fully protected.
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center bg-white dark:bg-[#0f111b] border border-gray-200 dark:border-white/10 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2">
+              <Wallet className="text-purple-500 mb-4" size={36} />
+              <h3 className="text-xl font-bold mb-2">Multiple Payment Options</h3>
+              <p className="text-gray-600 dark:text-gray-400 text-center">
+                Choose from PayPal, crypto, or gift cards. Flexible payouts that suit your lifestyle.
+              </p>
+            </div>
           </div>
         </section>
 
@@ -150,6 +182,7 @@ export default function DynamicPage() {
             </motion.span>
           </Link>
         </section>
+
       </main>
     </>
   );
