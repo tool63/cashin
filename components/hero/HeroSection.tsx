@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import TypingText from "@/components/typing/TypingText";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { UserIcon, CubeIcon, CurrencyDollarIcon, BanknotesIcon } from "@heroicons/react/24/outline";
 
 export default function HeroSection() {
   // Animated number state
@@ -12,18 +13,16 @@ export default function HeroSection() {
   const [paidMonth, setPaidMonth] = useState(0);
   const [totalPaid, setTotalPaid] = useState(0);
 
-  // Animate numbers on mount
   useEffect(() => {
-    const duration = 2000; // 2 seconds
-    const frameRate = 30; // updates per second
+    const duration = 2000;
+    const frameRate = 30;
     const totalFrames = Math.round((duration / 1000) * frameRate);
-
     let frame = 0;
-    // realistic target numbers
-    const usersTarget = 366727; // total users
-    const offersTarget = 87412; // total offers
-    const paidMonthTarget = 54233; // amount paid this month $
-    const totalPaidTarget = 1234567; // total amount paid $
+
+    const usersTarget = 366727;
+    const offersTarget = 87412;
+    const paidMonthTarget = 54233;
+    const totalPaidTarget = 1234567;
 
     const interval = setInterval(() => {
       frame++;
@@ -81,7 +80,7 @@ export default function HeroSection() {
         </div>
       </section>
 
-      {/* ADVANCED STATS SECTION */}
+      {/* STATS SECTION */}
       <section className="bg-gray-900 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -98,6 +97,7 @@ export default function HeroSection() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="bg-gray-800 rounded-3xl p-8 flex flex-col items-center justify-center hover:scale-105 transition-transform shadow-xl"
             >
+              <UserIcon className="w-12 h-12 text-yellow-400 mb-4" />
               <span className="text-4xl sm:text-5xl font-extrabold text-yellow-400">
                 {usersCount.toLocaleString()}
               </span>
@@ -120,6 +120,7 @@ export default function HeroSection() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="bg-gray-800 rounded-3xl p-8 flex flex-col items-center justify-center hover:scale-105 transition-transform shadow-xl"
             >
+              <CubeIcon className="w-12 h-12 text-yellow-400 mb-4" />
               <span className="text-4xl sm:text-5xl font-extrabold text-yellow-400">
                 {offersCount.toLocaleString()}
               </span>
@@ -142,6 +143,7 @@ export default function HeroSection() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="bg-gray-800 rounded-3xl p-8 flex flex-col items-center justify-center hover:scale-105 transition-transform shadow-xl"
             >
+              <CurrencyDollarIcon className="w-12 h-12 text-yellow-400 mb-4" />
               <span className="text-4xl sm:text-5xl font-extrabold text-yellow-400">
                 ${paidMonth.toLocaleString()}
               </span>
@@ -164,6 +166,7 @@ export default function HeroSection() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="bg-gray-800 rounded-3xl p-8 flex flex-col items-center justify-center hover:scale-105 transition-transform shadow-xl"
             >
+              <BanknotesIcon className="w-12 h-12 text-yellow-400 mb-4" />
               <span className="text-4xl sm:text-5xl font-extrabold text-yellow-400">
                 ${totalPaid.toLocaleString()}
               </span>
