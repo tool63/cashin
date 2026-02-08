@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 
 type TypingTextProps = {
-  words?: string[];
-  typingSpeed?: number;
-  deletingSpeed?: number;
-  pauseTime?: number;
-  className?: string;
+  words?: string[];          // Array of words/phrases to type
+  typingSpeed?: number;      // Speed of typing each character (ms)
+  deletingSpeed?: number;    // Speed of deleting each character (ms)
+  pauseTime?: number;        // Pause at the end of word (ms)
+  className?: string;        // CSS classes
 };
 
 export default function TypingText({
@@ -34,7 +34,7 @@ export default function TypingText({
   typingSpeed = 90,
   deletingSpeed = 50,
   pauseTime = 1500,
-  className = "",
+  className = "text-green-500 font-semibold text-[19px]",
 }: TypingTextProps) {
   const [wordIndex, setWordIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
@@ -46,23 +46,28 @@ export default function TypingText({
     let timeout: NodeJS.Timeout;
 
     if (!isDeleting) {
+      // Typing
       if (charIndex < currentWord.length) {
         timeout = setTimeout(() => {
           setDisplayText(currentWord.slice(0, charIndex + 1));
-          setCharIndex((p) => p + 1);
+          setCharIndex((prev) => prev + 1);
         }, typingSpeed);
       } else {
-        timeout = setTimeout(() => setIsDeleting(true), pauseTime);
+        // Pause before deleting
+        timeout = setTimeout(() => {
+          setIsDeleting(true);
+        }, pauseTime);
       }
     } else {
+      // Deleting
       if (charIndex > 0) {
         timeout = setTimeout(() => {
           setDisplayText(currentWord.slice(0, charIndex - 1));
-          setCharIndex((p) => p - 1);
+          setCharIndex((prev) => prev - 1);
         }, deletingSpeed);
       } else {
         setIsDeleting(false);
-        setWordIndex((p) => (p + 1) % words.length);
+        setWordIndex((prev) => (prev + 1) % words.length);
       }
     }
 
@@ -70,30 +75,9 @@ export default function TypingText({
   }, [charIndex, isDeleting, wordIndex, words, typingSpeed, deletingSpeed, pauseTime]);
 
   return (
-    <span
-      className={`
-        text-[19px] font-semibold
-        bg-gradient-to-r
-        from-red-500 via-yellow-400 via-green-400 via-blue-500 to-purple-500
-        bg-[length:300%_300%]
-        bg-clip-text text-transparent
-        animate-rainbow
-        ${className}
-      `}
-    >
+    <span className={className}>
       {displayText}
-      <span className="ml-1 animate-pulse text-green-400">|</span>
-
-      <style jsx>{`
-        @keyframes rainbow {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        .animate-rainbow {
-          animation: rainbow 4s linear infinite;
-        }
-      `}</style>
+      <span className="ml-1 animate-pulse">|</span>
     </span>
   );
 }
