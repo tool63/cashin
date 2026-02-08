@@ -34,7 +34,7 @@ export default function TypingText({
   typingSpeed = 90,
   deletingSpeed = 50,
   pauseTime = 1500,
-  className = "text-green-500 font-semibold text-[19px]",
+  className = "text-green-500 font-semibold text-[20px]", // same as headline
 }: TypingTextProps) {
   const [wordIndex, setWordIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
@@ -46,20 +46,15 @@ export default function TypingText({
     let timeout: NodeJS.Timeout;
 
     if (!isDeleting) {
-      // Typing
       if (charIndex < currentWord.length) {
         timeout = setTimeout(() => {
           setDisplayText(currentWord.slice(0, charIndex + 1));
           setCharIndex((prev) => prev + 1);
         }, typingSpeed);
       } else {
-        // Pause before deleting
-        timeout = setTimeout(() => {
-          setIsDeleting(true);
-        }, pauseTime);
+        timeout = setTimeout(() => setIsDeleting(true), pauseTime);
       }
     } else {
-      // Deleting
       if (charIndex > 0) {
         timeout = setTimeout(() => {
           setDisplayText(currentWord.slice(0, charIndex - 1));
