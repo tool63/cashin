@@ -193,7 +193,6 @@ export default function Footer() {
     business: t("footer.business"),
     cashback: t("footer.cashback"),
     legal: t("footer.legal"),
-    contact: t("footer.contact"), // removed for 9th column replacement
   };
 
   const footerSocial = {
@@ -207,7 +206,8 @@ export default function Footer() {
 
   return (
     <footer className="bg-gray-100 text-gray-700 dark:bg-[#070A14] dark:text-gray-300 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+      {/* Columns Grid */}
+      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10">
 
         {/* COLUMN 1 */}
         <Section id="start" title={footerColumns.getStarted}>
@@ -342,25 +342,6 @@ export default function Footer() {
           <A href="https://cashog.com/terms-and-conditions">{links.terms}</A>
           <A href="https://cashog.com/privacy-policy">{links.privacy}</A>
           <A href="https://cashog.com/cookie-policy">{links.cookies}</A>
-        </Section>
-
-        {/* COLUMN 9: Play Store */}
-        <Section id="app" title="Get Our App">
-          <a
-            href="#"
-            className="flex items-center text-black dark:text-gray-300 hover:text-black dark:hover:text-white transition space-x-2"
-          >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 512 512"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M325.3 234.3L104.5 0C98.7-2.3 91.8.5 88.9 6.2c-1.3 2.3-2 5-2 7.8v490c0 7.3 6 13.3 13.3 13.3 2.8 0 5.5-.7 7.8-2l220.8-234.3-10.5-10.8zM384 256l-58.7-62.4 58.7-62.4 63.3 64-63.3 60.8z"/>
-            </svg>
-            <span>Play Store</span>
-          </a>
         </Section>
 
       </div>
