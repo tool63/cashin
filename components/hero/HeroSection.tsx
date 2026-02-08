@@ -3,8 +3,40 @@
 import { motion } from "framer-motion";
 import TypingText from "@/components/typing/TypingText";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function HeroSection() {
+  // Animated number state
+  const [usersCount, setUsersCount] = useState(0);
+  const [offersCount, setOffersCount] = useState(0);
+  const [paidMonth, setPaidMonth] = useState(0);
+  const [totalPaid, setTotalPaid] = useState(0);
+
+  // Animate numbers on mount
+  useEffect(() => {
+    const duration = 2000; // 2 seconds
+    const frameRate = 30; // updates per second
+    const totalFrames = Math.round((duration / 1000) * frameRate);
+
+    let frame = 0;
+    const usersTarget = 25000000;
+    const offersTarget = 12000;
+    const paidMonthTarget = 350000;
+    const totalPaidTarget = 12000000;
+
+    const interval = setInterval(() => {
+      frame++;
+      setUsersCount(Math.round((usersTarget * frame) / totalFrames));
+      setOffersCount(Math.round((offersTarget * frame) / totalFrames));
+      setPaidMonth(Math.round((paidMonthTarget * frame) / totalFrames));
+      setTotalPaid(Math.round((totalPaidTarget * frame) / totalFrames));
+
+      if (frame === totalFrames) clearInterval(interval);
+    }, duration / totalFrames);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
       {/* HERO SECTION */}
@@ -60,46 +92,93 @@ export default function HeroSection() {
               Get Started Now
             </motion.span>
           </Link>
-
         </div>
       </section>
 
-      {/* STATS / NUMBERS SECTION */}
-      <section className="bg-gray-900 py-16 text-white">
+      {/* ADVANCED STATS SECTION */}
+      <section className="bg-gray-900 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white text-center mb-12">
+            Platform Statistics
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             {/* Total Users */}
-            <div className="bg-gray-800 rounded-2xl p-6 shadow-lg flex flex-col items-center justify-center hover:scale-105 transition-transform">
-              <span className="text-4xl font-extrabold text-yellow-400">25M+</span>
-              <span className="mt-2 text-sm sm:text-base font-medium text-gray-300">
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="bg-gray-800 rounded-3xl p-8 flex flex-col items-center justify-center hover:scale-105 transition-transform shadow-xl"
+            >
+              <span className="text-4xl sm:text-5xl font-extrabold text-yellow-400">
+                {usersCount.toLocaleString()}
+              </span>
+              <span className="mt-2 text-sm sm:text-base text-gray-300 font-medium text-center">
                 Total Users
               </span>
-            </div>
+              <div className="w-full h-1 bg-yellow-500 rounded-full mt-4">
+                <div className="h-1 bg-green-400 rounded-full" style={{ width: `${Math.min(usersCount / 25000000 * 100, 100)}%` }} />
+              </div>
+            </motion.div>
 
             {/* Total Offers */}
-            <div className="bg-gray-800 rounded-2xl p-6 shadow-lg flex flex-col items-center justify-center hover:scale-105 transition-transform">
-              <span className="text-4xl font-extrabold text-yellow-400">12K+</span>
-              <span className="mt-2 text-sm sm:text-base font-medium text-gray-300">
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="bg-gray-800 rounded-3xl p-8 flex flex-col items-center justify-center hover:scale-105 transition-transform shadow-xl"
+            >
+              <span className="text-4xl sm:text-5xl font-extrabold text-yellow-400">
+                {offersCount.toLocaleString()}
+              </span>
+              <span className="mt-2 text-sm sm:text-base text-gray-300 font-medium text-center">
                 Total Offers
               </span>
-            </div>
+              <div className="w-full h-1 bg-yellow-500 rounded-full mt-4">
+                <div className="h-1 bg-green-400 rounded-full" style={{ width: `${Math.min(offersCount / 12000 * 100, 100)}%` }} />
+              </div>
+            </motion.div>
 
             {/* Amount Paid This Month */}
-            <div className="bg-gray-800 rounded-2xl p-6 shadow-lg flex flex-col items-center justify-center hover:scale-105 transition-transform">
-              <span className="text-4xl font-extrabold text-yellow-400">$350K+</span>
-              <span className="mt-2 text-sm sm:text-base font-medium text-gray-300">
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="bg-gray-800 rounded-3xl p-8 flex flex-col items-center justify-center hover:scale-105 transition-transform shadow-xl"
+            >
+              <span className="text-4xl sm:text-5xl font-extrabold text-yellow-400">
+                ${paidMonth.toLocaleString()}
+              </span>
+              <span className="mt-2 text-sm sm:text-base text-gray-300 font-medium text-center">
                 Paid This Month
               </span>
-            </div>
+              <div className="w-full h-1 bg-yellow-500 rounded-full mt-4">
+                <div className="h-1 bg-green-400 rounded-full" style={{ width: `${Math.min(paidMonth / 350000 * 100, 100)}%` }} />
+              </div>
+            </motion.div>
 
-            {/* Total Amount Paid */}
-            <div className="bg-gray-800 rounded-2xl p-6 shadow-lg flex flex-col items-center justify-center hover:scale-105 transition-transform">
-              <span className="text-4xl font-extrabold text-yellow-400">$12M+</span>
-              <span className="mt-2 text-sm sm:text-base font-medium text-gray-300">
+            {/* Total Paid */}
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="bg-gray-800 rounded-3xl p-8 flex flex-col items-center justify-center hover:scale-105 transition-transform shadow-xl"
+            >
+              <span className="text-4xl sm:text-5xl font-extrabold text-yellow-400">
+                ${totalPaid.toLocaleString()}
+              </span>
+              <span className="mt-2 text-sm sm:text-base text-gray-300 font-medium text-center">
                 Total Paid
               </span>
-            </div>
+              <div className="w-full h-1 bg-yellow-500 rounded-full mt-4">
+                <div className="h-1 bg-green-400 rounded-full" style={{ width: `${Math.min(totalPaid / 12000000 * 100, 100)}%` }} />
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
