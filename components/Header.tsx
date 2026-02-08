@@ -43,7 +43,12 @@ export default function Header() {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
-                  className="absolute top-8 left-0 w-56 p-4 rounded-xl shadow-xl grid grid-cols-2 gap-3 bg-white dark:bg-[#0B1020] border border-gray-200 dark:border-white/10"
+                  className="
+                    absolute top-8 left-0 w-56 p-4 rounded-xl shadow-xl
+                    flex flex-col gap-3
+                    bg-white dark:bg-[#0B1020]
+                    border border-gray-200 dark:border-white/10
+                  "
                 >
                   <Link href="/surveys">Surveys</Link>
                   <Link href="/app-installs">App Installs</Link>
@@ -102,7 +107,9 @@ export default function Header() {
               Earn
               <ChevronDown
                 size={16}
-                className={`transition ${mobileEarnOpen ? "rotate-180" : ""}`}
+                className={`transition ${
+                  mobileEarnOpen ? "rotate-180" : ""
+                }`}
               />
             </button>
 
