@@ -1,8 +1,8 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import TypingText from '@/components/typing/TypingText'
-import Link from 'next/link'
+import { motion } from "framer-motion";
+import TypingText from "@/components/typing/TypingText";
+import Link from "next/link";
 
 export default function HeroSection() {
   return (
@@ -14,13 +14,6 @@ export default function HeroSection() {
 
         <p className="text-xl md:text-2xl mb-6">
           <TypingText
-            words={[
-              "Complete tasks quickly",
-              "Play games and earn",
-              "Take surveys and get paid"
-            ]}
-            displayTime={2000}  // how long each word stays before deleting
-            fadeTime={500}      // fade animation duration
             className="text-green-500 font-semibold"
           />
         </p>
@@ -40,5 +33,5 @@ export default function HeroSection() {
         </Link>
       </div>
     </section>
-  )
+  );
 }
