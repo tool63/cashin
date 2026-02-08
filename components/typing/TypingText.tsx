@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 
 type TypingTextProps = {
-  words?: string[];      // Array of words/phrases to display
-  displayTime?: number;  // Time each word stays visible in ms
-  fadeTime?: number;     // Fade animation time in ms
-  className?: string;    // Optional custom className for styling
+  words?: string[];
+  displayTime?: number;
+  fadeTime?: number;
+  className?: string;
 };
 
 export default function TypingText({
@@ -38,40 +38,32 @@ export default function TypingText({
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setVisible(false); // start fade out
-      setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % words.length);
-        setVisible(true); // fade in next word
-      }, fadeTime);
+    const showTimer = setTimeout(() => {
+      setVisible(false); // fade out
     }, displayTime);
 
-    return () => clearTimeout(timeout);
+    const switchTimer = setTimeout(() => {
+      setCurrentIndex((prev) => (prev + 1) % words.length);
+      setVisible(true); // fade in
+    }, displayTime + fadeTime);
+
+    return () => {
+      clearTimeout(showTimer);
+      clearTimeout(switchTimer);
+    };
   }, [currentIndex, words.length, displayTime, fadeTime]);
 
   return (
-    <span className="relative inline-block">
+    <span className="inline-block">
       <span
-        className={`${className} transition-opacity duration-[${fadeTime}ms]`}
-        style={{ opacity: visible ? 1 : 0 }}
+        className={`${className} transition-opacity`}
+        style={{
+          opacity: visible ? 1 : 0,
+          transitionDuration: `${fadeTime}ms`,
+        }}
       >
         {words[currentIndex]}
       </span>
-      {/* Blinking cursor */}
-      <span className="absolute right-[-0.25rem] top-0 animate-blink">|</span>
-
-      <style jsx>{`
-        @keyframes blink {
-          0%, 50%, 100% { opacity: 1; }
-          25%, 75% { opacity: 0; }
-        }
-        .animate-blink {
-          display: inline-block;
-          margin-left: 2px;
-          animation: blink 1s infinite;
-          color: inherit;
-        }
-      `}</style>
     </span>
   );
 }
