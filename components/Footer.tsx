@@ -18,6 +18,7 @@ const t = (key: string) => {
     "footer.business": "Business",
     "footer.cashback": "Cashback",
     "footer.legal": "Legal",
+    "footer.contact": "Contact Us",
     "footer.copyright": "© 2026 Cashog. All rights reserved.",
     "footer.links": {
       howItWorks: "How it works",
@@ -116,9 +117,9 @@ export default function Footer() {
   const [sub, setSub] = useState<Toggle>({});
   const [sub2, setSub2] = useState<Toggle>({});
 
-  const toggle = (k: string) => setOpen(p => ({ ...p, [k]: !p[k] }));
-  const toggleSub = (k: string) => setSub(p => ({ ...p, [k]: !p[k] }));
-  const toggleSub2 = (k: string) => setSub2(p => ({ ...p, [k]: !p[k] }));
+  const toggle = (k: string) => setOpen((p) => ({ ...p, [k]: !p[k] }));
+  const toggleSub = (k: string) => setSub((p) => ({ ...p, [k]: !p[k] }));
+  const toggleSub2 = (k: string) => setSub2((p) => ({ ...p, [k]: !p[k] }));
 
   const A = ({ href, children }: { href: string; children: ReactNode }) => (
     <motion.div whileHover={{ x: 4 }} transition={{ duration: 0.15 }}>
@@ -131,7 +132,15 @@ export default function Footer() {
     </motion.div>
   );
 
-  const Section = ({ id, title, children }: { id: string; title: string; children: ReactNode }) => (
+  const Section = ({
+    id,
+    title,
+    children,
+  }: {
+    id: string;
+    title: string;
+    children: ReactNode;
+  }) => (
     <div>
       <button
         onClick={() => toggle(id)}
@@ -140,7 +149,6 @@ export default function Footer() {
         {title}
         <ChevronDown size={16} className={`transition ${open[id] ? "rotate-180" : ""}`} />
       </button>
-
       <AnimatePresence>
         {open[id] && (
           <motion.div
@@ -157,7 +165,17 @@ export default function Footer() {
     </div>
   );
 
-  const Sub = ({ id, title, children, level = 1 }: { id: string; title: string; children: ReactNode; level?: number }) => {
+  const Sub = ({
+    id,
+    title,
+    children,
+    level = 1,
+  }: {
+    id: string;
+    title: string;
+    children: ReactNode;
+    level?: number;
+  }) => {
     const state = level === 1 ? sub[id] : sub2[id];
     return (
       <div className="mt-2" style={{ paddingLeft: `${level * 12}px` }}>
@@ -168,7 +186,6 @@ export default function Footer() {
           {title}
           <ChevronDown size={14} className={`transition ${state ? "rotate-180" : ""}`} />
         </button>
-
         <AnimatePresence>
           {state && (
             <motion.div
@@ -195,6 +212,7 @@ export default function Footer() {
     business: t("footer.business"),
     cashback: t("footer.cashback"),
     legal: t("footer.legal"),
+    contact: t("footer.contact"),
   };
 
   const footerSocial = {
@@ -208,7 +226,8 @@ export default function Footer() {
 
   return (
     <footer className="bg-gray-100 text-gray-700 dark:bg-[#070A14] dark:text-gray-300 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-2 md:grid-cols-8 gap-10">
+      {/* Columns Grid */}
+      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10">
 
         {/* COLUMN 1 */}
         <Section id="start" title={footerColumns.getStarted}>
@@ -229,6 +248,7 @@ export default function Footer() {
           <A href="/complete-offers">{links.completeOffers}</A>
           <A href="/offerwall">{links.offerwall}</A>
           <A href="/surveywall">{links.surveywall}</A>
+
           <Sub id="extra" title={links.extraEarning}>
             <A href="/watch-ads">{links.watchAds}</A>
             <A href="/micro-tasks">{links.microTasks}</A>
@@ -255,6 +275,7 @@ export default function Footer() {
           <A href="/work-from-home-jobs">{links.workFromHomeJobs}</A>
           <A href="/online-earning-methods">{links.onlineEarningMethods}</A>
           <A href="/earn-money-online-fast">{links.earnFast}</A>
+
           <Sub id="allGuides" title={links.allGuides}>
             <A href="/passive-income-online">{links.passiveIncome}</A>
             <A href="/online-jobs-for-beginners">{links.onlineJobs}</A>
@@ -268,30 +289,34 @@ export default function Footer() {
           </Sub>
         </Section>
 
-        {/* COLUMN 4 */}
-        <Section id="payments" title={footerColumns.rewards}>
+        {/* COLUMN 4: Rewards */}
+        <Section id="rewards" title={footerColumns.rewards}>
           <A href="/earn-paypal-money">{links.earnPayPal}</A>
+
           <Sub id="giftcards" title={links.earnGiftCards}>
             <A href="/earn-amazon-gift-card">{links.amazonGiftCard}</A>
             <A href="/earn-apple-gift-card">{links.appleGiftCard}</A>
             <A href="/earn-google-play-gift-card">{links.googleGiftCard}</A>
           </Sub>
+
           <Sub id="crypto" title={links.earnCrypto}>
             <A href="/earn-bitcoin-online">{links.bitcoin}</A>
             <A href="/earn-litecoin-online">{links.litecoin}</A>
             <A href="/earn-ethereum-online">{links.ethereum}</A>
             <A href="/earn-dogecoin-online">{links.dogecoin}</A>
           </Sub>
+
           <Sub id="gaming" title={links.earnGaming}>
             <A href="/earn-free-robux">{links.robux}</A>
             <A href="/earn-steam-gift-cards">{links.steam}</A>
             <A href="/earn-xbox-gift-cards">{links.xbox}</A>
             <A href="/earn-psn-gift-cards">{links.psn}</A>
           </Sub>
+
           <A href="/earn-spotify-premium">{links.spotify}</A>
         </Section>
 
-        {/* COLUMN 5 */}
+        {/* COLUMN 5: Resources */}
         <Section id="resources" title={footerColumns.resources}>
           <A href="/blog">{links.blog}</A>
           <A href="/help">{links.helpCenter}</A>
@@ -300,16 +325,17 @@ export default function Footer() {
           <A href="/about">{links.about}</A>
         </Section>
 
-        {/* COLUMN 6 */}
+        {/* COLUMN 6: Business */}
         <Section id="business" title={footerColumns.business}>
           <A href="/affiliate">{links.affiliate}</A>
           <A href="/partners">{links.partners}</A>
           <A href="/advertise">{links.advertise}</A>
         </Section>
 
-        {/* COLUMN 7 */}
+        {/* COLUMN 7: Cashback */}
         <Section id="cashback" title={footerColumns.cashback}>
           <A href="/cashback-offers">{links.cashbackOffers}</A>
+
           <Sub id="shopping" title={links.shoppingRewards}>
             <A href="/shopping-rewards/electronics">{links.electronics}</A>
             <A href="/shopping-rewards/fashion">{links.fashion}</A>
@@ -317,32 +343,47 @@ export default function Footer() {
             <A href="/shopping-rewards/grocery">{links.grocery}</A>
             <A href="/shopping-rewards/beauty">{links.beauty}</A>
             <A href="/shopping-rewards/mobile">{links.mobile}</A>
+
             <Sub id="travel" title={links.travel} level={2}>
               <A href="/shopping-rewards/travel/hotels">{links.hotels}</A>
               <A href="/shopping-rewards/travel/flights">{links.flights}</A>
             </Sub>
+
             <A href="/shopping-rewards/finance">{links.finance}</A>
           </Sub>
+
           <A href="/promo-codes">{links.promoCodes}</A>
           <A href="/daily-deals">{links.dailyDeals}</A>
           <A href="/banking-finance-offers">{links.banking}</A>
         </Section>
 
-        {/* COLUMN 8 */}
+        {/* COLUMN 8: Legal */}
         <Section id="legal" title={footerColumns.legal}>
           <A href="https://cashog.com/terms-and-conditions">{links.terms}</A>
           <A href="https://cashog.com/privacy-policy">{links.privacy}</A>
           <A href="https://cashog.com/cookie-policy">{links.cookies}</A>
         </Section>
 
+        {/* COLUMN 9: Contact Us */}
+        <Section id="contact" title={footerColumns.contact}>
+          <A href="/contact">{links.contactSupport}</A>
+        </Section>
       </div>
 
       {/* SOCIAL */}
       <div className="border-t border-white/10 py-6 flex justify-center gap-6">
-        <a href={footerSocial.twitter} target="_blank" rel="noopener noreferrer"><Twitter /></a>
-        <a href={footerSocial.facebook} target="_blank" rel="noopener noreferrer"><Facebook /></a>
-        <a href={footerSocial.instagram} target="_blank" rel="noopener noreferrer"><Instagram /></a>
-        <a href={footerSocial.youtube} target="_blank" rel="noopener noreferrer"><Youtube /></a>
+        <a href={footerSocial.twitter} target="_blank" rel="noopener noreferrer">
+          <Twitter />
+        </a>
+        <a href={footerSocial.facebook} target="_blank" rel="noopener noreferrer">
+          <Facebook />
+        </a>
+        <a href={footerSocial.instagram} target="_blank" rel="noopener noreferrer">
+          <Instagram />
+        </a>
+        <a href={footerSocial.youtube} target="_blank" rel="noopener noreferrer">
+          <Youtube />
+        </a>
       </div>
 
       <div className="text-center text-sm text-gray-500 pb-6">
