@@ -8,8 +8,8 @@ export default function FloatingCTA() {
   const [visible, setVisible] = useState(true);
   const [bounceKey, setBounceKey] = useState(0);
 
-  // English text for CTA
-  const text = "Start Earning Now!";
+  // CTA text
+  const text = "Start Earning in 60 Seconds";
   const letters = text.split("");
 
   /* ================= AUTO HIDE / SHOW ================= */
