@@ -4,6 +4,7 @@ import { useState, ReactNode } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Twitter, Facebook, Instagram, Youtube, ChevronDown } from "lucide-react";
+import { FaGooglePlay } from "react-icons/fa"; // Play Store icon
 
 type Toggle = Record<string, boolean>;
 
@@ -212,7 +213,7 @@ export default function Footer() {
     business: t("footer.business"),
     cashback: t("footer.cashback"),
     legal: t("footer.legal"),
-    contact: t("footer.contact"),
+    // contact removed
   };
 
   const footerSocial = {
@@ -227,7 +228,7 @@ export default function Footer() {
   return (
     <footer className="bg-gray-100 text-gray-700 dark:bg-[#070A14] dark:text-gray-300 transition-colors duration-300">
       {/* Columns Grid */}
-      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10">
+      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
 
         {/* COLUMN 1 */}
         <Section id="start" title={footerColumns.getStarted}>
@@ -364,9 +365,15 @@ export default function Footer() {
           <A href="https://cashog.com/cookie-policy">{links.cookies}</A>
         </Section>
 
-        {/* COLUMN 9: Contact Us */}
-        <Section id="contact" title={footerColumns.contact}>
-          <A href="/contact">{links.contactSupport}</A>
+        {/* COLUMN 9: Play Store */}
+        <Section id="playstore" title="Get Our App">
+          <a
+            href="#"
+            className="flex items-center text-black dark:text-gray-300 hover:text-black dark:hover:text-white transition space-x-2"
+          >
+            <FaGooglePlay size={24} />
+            <span>Play Store</span>
+          </a>
         </Section>
       </div>
 
