@@ -18,18 +18,20 @@ const defaultDescription = "Earn rewards, cash out, and get paid";
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className="bg-gray-100 dark:bg-[#070A14]"
+    >
       <head>
         <Meta title={defaultTitle} description={defaultDescription} />
       </head>
 
-      <body className="min-h-screen bg-white text-black dark:bg-black dark:text-white">
+      <body className="min-h-screen text-black dark:text-white transition-colors duration-300">
         <ThemeProviderWrapper>
           <Header />
 
-          <main className="min-h-[calc(100vh-160px)]">
-            {children}
-          </main>
+          <main className="min-h-[calc(100vh-160px)]">{children}</main>
 
           <Footer />
           <FloatingCTA />
