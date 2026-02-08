@@ -19,8 +19,8 @@ export default function HeroSection() {
               "Play games and earn",
               "Take surveys and get paid"
             ]}
-            speed={80}
-            pause={1500}
+            displayTime={2000}  // how long each word stays before deleting
+            fadeTime={500}      // fade animation duration
             className="text-green-500 font-semibold"
           />
         </p>
