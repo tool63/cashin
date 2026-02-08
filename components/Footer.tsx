@@ -132,7 +132,7 @@ export default function Footer() {
   );
 
   const Section = ({ id, title, children }: { id: string; title: string; children: ReactNode }) => (
-    <div>
+    <div className="relative">
       <button
         onClick={() => toggle(id)}
         className="w-full flex justify-between items-center font-semibold mb-3 text-black dark:text-white"
@@ -140,19 +140,22 @@ export default function Footer() {
         {title}
         <ChevronDown size={16} className={`transition ${open[id] ? "rotate-180" : ""}`} />
       </button>
-      <AnimatePresence>
-        {open[id] && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="space-y-2 text-sm text-black dark:text-gray-400"
-          >
-            {children}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Motion container only for this section */}
+      <div className="overflow-hidden">
+        <AnimatePresence initial={false}>
+          {open[id] && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="space-y-2 text-sm text-black dark:text-gray-400"
+            >
+              {children}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 
@@ -167,19 +170,21 @@ export default function Footer() {
           {title}
           <ChevronDown size={14} className={`transition ${state ? "rotate-180" : ""}`} />
         </button>
-        <AnimatePresence>
-          {state && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className="mt-2 space-y-2 pl-3"
-            >
-              {children}
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <div className="overflow-hidden">
+          <AnimatePresence initial={false}>
+            {state && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                className="mt-2 space-y-2 pl-3"
+              >
+                {children}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     );
   };
