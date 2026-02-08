@@ -3,53 +3,75 @@
 import { useEffect, useState } from "react";
 
 type TypingTextProps = {
-  words: string[];      // Array of words/phrases to type
-  speed?: number;       // Typing speed in ms per character
-  pause?: number;       // Pause at the end of a word before deleting
-  className?: string;   // Optional custom className for styling
+  words?: string[];      // Array of words/phrases to display
+  displayTime?: number;  // Time each word stays visible in ms
+  fadeTime?: number;     // Fade animation time in ms
+  className?: string;    // Optional custom className for styling
 };
 
 export default function TypingText({
-  words,
-  speed = 80,
-  pause = 1500,
-  className = "text-indigo-500",
+  words = [
+    "Answering Surveys",
+    "Installing Apps",
+    "Playing Games",
+    "Watching Videos",
+    "Mining",
+    "Completing Offers",
+    "Offerwall",
+    "Surveywall",
+    "Watching Ads",
+    "Completing Micro Tasks",
+    "Completing Free Trials",
+    "Testing Products",
+    "Reading Emails",
+    "Visiting Websites",
+    "Completing Review",
+    "Spinning Wheel",
+    "Loyalty",
+    "Uploading Vouchers",
+  ],
+  displayTime = 2000,
+  fadeTime = 500,
+  className = "text-indigo-500 font-semibold",
 }: TypingTextProps) {
-  const [text, setText] = useState("");
-  const [wordIndex, setWordIndex] = useState(0);
-  const [charIndex, setCharIndex] = useState(0);
-  const [deleting, setDeleting] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const currentWord = words[wordIndex];
+    const timeout = setTimeout(() => {
+      setVisible(false); // start fade out
+      setTimeout(() => {
+        setCurrentIndex((prev) => (prev + 1) % words.length);
+        setVisible(true); // fade in next word
+      }, fadeTime);
+    }, displayTime);
 
-    const timer = setTimeout(() => {
-      if (!deleting) {
-        setText(currentWord.slice(0, charIndex + 1));
-        if (charIndex + 1 === currentWord.length) {
-          setDeleting(true); // start deleting next
-          setTimeout(() => {}, pause); // optional pause handled in next effect loop
-        } else {
-          setCharIndex(charIndex + 1);
-        }
-      } else {
-        if (charIndex > 0) {
-          setText(currentWord.slice(0, charIndex - 1));
-          setCharIndex(charIndex - 1);
-        } else {
-          setDeleting(false);
-          setWordIndex((wordIndex + 1) % words.length);
-        }
-      }
-    }, deleting ? speed / 2 : speed);
-
-    return () => clearTimeout(timer);
-  }, [charIndex, deleting, wordIndex, words, speed, pause]);
+    return () => clearTimeout(timeout);
+  }, [currentIndex, words.length, displayTime, fadeTime]);
 
   return (
-    <span className={className}>
-      {text}
-      <span className="animate-pulse">|</span>
+    <span className="relative inline-block">
+      <span
+        className={`${className} transition-opacity duration-[${fadeTime}ms]`}
+        style={{ opacity: visible ? 1 : 0 }}
+      >
+        {words[currentIndex]}
+      </span>
+      {/* Blinking cursor */}
+      <span className="absolute right-[-0.25rem] top-0 animate-blink">|</span>
+
+      <style jsx>{`
+        @keyframes blink {
+          0%, 50%, 100% { opacity: 1; }
+          25%, 75% { opacity: 0; }
+        }
+        .animate-blink {
+          display: inline-block;
+          margin-left: 2px;
+          animation: blink 1s infinite;
+          color: inherit;
+        }
+      `}</style>
     </span>
   );
 }
