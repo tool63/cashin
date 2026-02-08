@@ -7,32 +7,26 @@ import Link from "next/link";
 export default function HeroSection() {
   return (
     <section className="bg-gray-50 dark:bg-gray-900 text-black dark:text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-28 md:py-32 text-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
 
-        {/* HEADLINE – PREVIOUS CLEAN DESIGN */}
-        <div className="flex justify-center mb-8">
-          <h1
-            className="
-              relative inline-block
-              px-8 py-4
-              text-3xl sm:text-4xl md:text-5xl lg:text-6xl
-              font-extrabold uppercase tracking-wide
-              bg-gradient-to-r
-              from-red-500 via-yellow-400 via-green-500 via-blue-500 to-purple-600
-              bg-clip-text text-transparent
-            "
-          >
-            Earn Real Money Online
-          </h1>
-        </div>
+        {/* HEADLINE — SIZE 20 */}
+        <h1
+          className="font-extrabold uppercase mb-6"
+          style={{ fontSize: "20px" }}
+        >
+          Earn Real Money Online
+        </h1>
 
-        {/* TYPING TEXT */}
-        <p className="text-lg sm:text-xl md:text-2xl mb-6 min-h-[2.5rem] flex justify-center">
-          <TypingText className="text-green-500 font-semibold text-center" />
+        {/* TYPING TEXT — SIZE 18 */}
+        <p
+          className="mb-6 min-h-[2rem] flex justify-center"
+          style={{ fontSize: "18px" }}
+        >
+          <TypingText className="font-semibold yellow-green-text text-center" />
         </p>
 
         {/* SUBTEXT */}
-        <p className="text-sm sm:text-base md:text-lg text-gray-600 dark:text-gray-400 mb-10 max-w-xl md:max-w-2xl mx-auto">
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-10 max-w-xl mx-auto">
           Join millions of users worldwide and start earning rewards instantly.
         </p>
 
@@ -42,7 +36,7 @@ export default function HeroSection() {
             <motion.span
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center justify-center bg-green-500 hover:bg-green-600 text-black px-8 sm:px-10 py-4 rounded-xl font-semibold shadow-lg text-base sm:text-lg"
+              className="inline-flex items-center justify-center bg-green-500 hover:bg-green-600 text-black px-8 py-4 rounded-xl font-semibold shadow-lg"
             >
               Get Started Now
             </motion.span>
