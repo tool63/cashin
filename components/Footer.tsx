@@ -4,7 +4,6 @@ import { useState, ReactNode } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Twitter, Facebook, Instagram, Youtube, ChevronDown } from "lucide-react";
-import { FaGooglePlay } from "react-icons/fa"; // Play Store icon
 
 type Toggle = Record<string, boolean>;
 
@@ -19,7 +18,6 @@ const t = (key: string) => {
     "footer.business": "Business",
     "footer.cashback": "Cashback",
     "footer.legal": "Legal",
-    "footer.contact": "Contact Us",
     "footer.copyright": "© 2026 Cashog. All rights reserved.",
     "footer.links": {
       howItWorks: "How it works",
@@ -133,15 +131,7 @@ export default function Footer() {
     </motion.div>
   );
 
-  const Section = ({
-    id,
-    title,
-    children,
-  }: {
-    id: string;
-    title: string;
-    children: ReactNode;
-  }) => (
+  const Section = ({ id, title, children }: { id: string; title: string; children: ReactNode }) => (
     <div>
       <button
         onClick={() => toggle(id)}
@@ -166,17 +156,7 @@ export default function Footer() {
     </div>
   );
 
-  const Sub = ({
-    id,
-    title,
-    children,
-    level = 1,
-  }: {
-    id: string;
-    title: string;
-    children: ReactNode;
-    level?: number;
-  }) => {
+  const Sub = ({ id, title, children, level = 1 }: { id: string; title: string; children: ReactNode; level?: number }) => {
     const state = level === 1 ? sub[id] : sub2[id];
     return (
       <div className="mt-2" style={{ paddingLeft: `${level * 12}px` }}>
@@ -213,7 +193,7 @@ export default function Footer() {
     business: t("footer.business"),
     cashback: t("footer.cashback"),
     legal: t("footer.legal"),
-    // contact removed
+    contact: t("footer.contact"), // removed for 9th column replacement
   };
 
   const footerSocial = {
@@ -227,7 +207,6 @@ export default function Footer() {
 
   return (
     <footer className="bg-gray-100 text-gray-700 dark:bg-[#070A14] dark:text-gray-300 transition-colors duration-300">
-      {/* Columns Grid */}
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
 
         {/* COLUMN 1 */}
@@ -366,15 +345,24 @@ export default function Footer() {
         </Section>
 
         {/* COLUMN 9: Play Store */}
-        <Section id="playstore" title="Get Our App">
+        <Section id="app" title="Get Our App">
           <a
             href="#"
             className="flex items-center text-black dark:text-gray-300 hover:text-black dark:hover:text-white transition space-x-2"
           >
-            <FaGooglePlay size={24} />
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 512 512"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M325.3 234.3L104.5 0C98.7-2.3 91.8.5 88.9 6.2c-1.3 2.3-2 5-2 7.8v490c0 7.3 6 13.3 13.3 13.3 2.8 0 5.5-.7 7.8-2l220.8-234.3-10.5-10.8zM384 256l-58.7-62.4 58.7-62.4 63.3 64-63.3 60.8z"/>
+            </svg>
             <span>Play Store</span>
           </a>
         </Section>
+
       </div>
 
       {/* SOCIAL */}
@@ -393,9 +381,7 @@ export default function Footer() {
         </a>
       </div>
 
-      <div className="text-center text-sm text-gray-500 pb-6">
-        {t("footer.copyright")}
-      </div>
+      <div className="text-center text-sm text-gray-500 pb-6">{t("footer.copyright")}</div>
     </footer>
   );
 }
