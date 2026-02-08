@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import { useState, useEffect, ReactNode } from "react"
-import Link from "next/link"
-import { motion, AnimatePresence } from "framer-motion"
-import { Twitter, Facebook, Instagram, Youtube } from "lucide-react"
+import { useState, useEffect, ReactNode } from "react";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { Twitter, Facebook, Instagram, Youtube, ChevronDown } from "lucide-react";
 
-type Toggle = Record<string, boolean>
+type Toggle = Record<string, boolean>;
 
-// Fallback translations to replace useLang
+// Fallback translations
 const t = (key: string) => {
   const translations: Record<string, any> = {
     "footer.getStarted": "Get Started",
@@ -107,38 +107,38 @@ const t = (key: string) => {
       privacy: "Privacy Policy",
       cookies: "Cookie Policy",
     },
-  }
-  return translations[key] || key
-}
+  };
+  return translations[key] || key;
+};
 
 export default function Footer() {
-  const [open, setOpen] = useState<Toggle>({})
-  const [sub, setSub] = useState<Toggle>({})
-  const [sub2, setSub2] = useState<Toggle>({})
-  const [isDesktop, setIsDesktop] = useState(false)
+  const [open, setOpen] = useState<Toggle>({});
+  const [sub, setSub] = useState<Toggle>({});
+  const [sub2, setSub2] = useState<Toggle>({});
+  const [isDesktop, setIsDesktop] = useState(false);
 
   // Detect desktop
   useEffect(() => {
-    const check = () => setIsDesktop(window.innerWidth >= 768)
-    check()
-    window.addEventListener("resize", check)
-    return () => window.removeEventListener("resize", check)
-  }, [])
+    const check = () => setIsDesktop(window.innerWidth >= 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
-  const toggle = (k: string) => { if (!isDesktop) setOpen(p => ({ ...p, [k]: !p[k] })) }
-  const toggleSub = (k: string) => { if (!isDesktop) setSub(p => ({ ...p, [k]: !p[k] })) }
-  const toggleSub2 = (k: string) => { if (!isDesktop) setSub2(p => ({ ...p, [k]: !p[k] })) }
+  const toggle = (k: string) => { if (!isDesktop) setOpen(p => ({ ...p, [k]: !p[k] })); }
+  const toggleSub = (k: string) => { if (!isDesktop) setSub(p => ({ ...p, [k]: !p[k] })); }
+  const toggleSub2 = (k: string) => { if (!isDesktop) setSub2(p => ({ ...p, [k]: !p[k] })); }
 
   const A = ({ href, children }: { href: string; children: ReactNode }) => (
     <motion.div whileHover={{ x: 4 }} transition={{ duration: 0.15 }}>
       <Link
         href={href}
-        className="block transition text-black dark:text-gray-300 hover:text-black dark:hover:text-white"
+        className="block text-black dark:text-gray-300 hover:text-black dark:hover:text-white transition"
       >
         {children}
       </Link>
     </motion.div>
-  )
+  );
 
   const Section = ({ id, title, children }: { id: string; title: string; children: ReactNode }) => (
     <div>
@@ -147,7 +147,7 @@ export default function Footer() {
         className="w-full flex justify-between items-center font-semibold mb-3 text-black dark:text-white"
       >
         {title}
-        {!isDesktop && <span>{open[id] ? "−" : "^"}</span>}
+        {!isDesktop && <ChevronDown size={16} className={`transition ${open[id] ? "rotate-180" : ""}`} />}
       </button>
       <AnimatePresence>
         {(isDesktop || open[id]) && (
@@ -163,10 +163,10 @@ export default function Footer() {
         )}
       </AnimatePresence>
     </div>
-  )
+  );
 
   const Sub = ({ id, title, children, level = 1 }: { id: string; title: string; children: ReactNode; level?: number }) => {
-    const state = level === 1 ? sub[id] : sub2[id]
+    const state = level === 1 ? sub[id] : sub2[id];
     return (
       <div className="mt-2" style={{ paddingLeft: `${level * 8}px` }}>
         <button
@@ -174,7 +174,7 @@ export default function Footer() {
           className="w-full flex justify-between font-medium text-black dark:text-gray-300"
         >
           {title}
-          {!isDesktop && <span>{state ? "−" : "^"}</span>}
+          {!isDesktop && <ChevronDown size={14} className={`transition ${state ? "rotate-180" : ""}`} />}
         </button>
         <AnimatePresence>
           {(isDesktop || state) && (
@@ -190,8 +190,8 @@ export default function Footer() {
           )}
         </AnimatePresence>
       </div>
-    )
-  }
+    );
+  };
 
   const footerColumns = {
     getStarted: t("footer.getStarted"),
@@ -202,20 +202,20 @@ export default function Footer() {
     business: t("footer.business"),
     cashback: t("footer.cashback"),
     legal: t("footer.legal"),
-  }
+  };
 
   const footerSocial = {
     twitter: "https://twitter.com/",
     facebook: "https://facebook.com/",
     instagram: "https://instagram.com/",
     youtube: "https://youtube.com/",
-  }
+  };
 
-  const links = t("footer.links")
+  const links = t("footer.links");
 
   return (
     <footer className="bg-gray-100 text-gray-700 dark:bg-[#070A14] dark:text-gray-300 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-2 md:grid-cols-4 gap-10">
+      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-2 md:grid-cols-8 gap-10">
 
         {/* COLUMN 1 */}
         <Section id="start" title={footerColumns.getStarted}>
@@ -280,27 +280,23 @@ export default function Footer() {
         {/* COLUMN 4 */}
         <Section id="payments" title={footerColumns.rewards}>
           <A href="/earn-paypal-money">{links.earnPayPal}</A>
-
           <Sub id="giftcards" title={links.earnGiftCards}>
             <A href="/earn-amazon-gift-card">{links.amazonGiftCard}</A>
             <A href="/earn-apple-gift-card">{links.appleGiftCard}</A>
             <A href="/earn-google-play-gift-card">{links.googleGiftCard}</A>
           </Sub>
-
           <Sub id="crypto" title={links.earnCrypto}>
             <A href="/earn-bitcoin-online">{links.bitcoin}</A>
             <A href="/earn-litecoin-online">{links.litecoin}</A>
             <A href="/earn-ethereum-online">{links.ethereum}</A>
             <A href="/earn-dogecoin-online">{links.dogecoin}</A>
           </Sub>
-
           <Sub id="gaming" title={links.earnGaming}>
             <A href="/earn-free-robux">{links.robux}</A>
             <A href="/earn-steam-gift-cards">{links.steam}</A>
             <A href="/earn-xbox-gift-cards">{links.xbox}</A>
             <A href="/earn-psn-gift-cards">{links.psn}</A>
           </Sub>
-
           <A href="/earn-spotify-premium">{links.spotify}</A>
         </Section>
 
@@ -323,7 +319,6 @@ export default function Footer() {
         {/* COLUMN 7 */}
         <Section id="cashback" title={footerColumns.cashback}>
           <A href="/cashback-offers">{links.cashbackOffers}</A>
-
           <Sub id="shopping" title={links.shoppingRewards}>
             <A href="/shopping-rewards/electronics">{links.electronics}</A>
             <A href="/shopping-rewards/fashion">{links.fashion}</A>
@@ -331,15 +326,12 @@ export default function Footer() {
             <A href="/shopping-rewards/grocery">{links.grocery}</A>
             <A href="/shopping-rewards/beauty">{links.beauty}</A>
             <A href="/shopping-rewards/mobile">{links.mobile}</A>
-
             <Sub id="travel" title={links.travel} level={2}>
               <A href="/shopping-rewards/travel/hotels">{links.hotels}</A>
               <A href="/shopping-rewards/travel/flights">{links.flights}</A>
             </Sub>
-
             <A href="/shopping-rewards/finance">{links.finance}</A>
           </Sub>
-
           <A href="/promo-codes">{links.promoCodes}</A>
           <A href="/daily-deals">{links.dailyDeals}</A>
           <A href="/banking-finance-offers">{links.banking}</A>
@@ -351,6 +343,7 @@ export default function Footer() {
           <A href="https://cashog.com/privacy-policy">{links.privacy}</A>
           <A href="https://cashog.com/cookie-policy">{links.cookies}</A>
         </Section>
+
       </div>
 
       {/* SOCIAL */}
@@ -365,5 +358,5 @@ export default function Footer() {
         {t("footer.copyright")}
       </div>
     </footer>
-  )
+  );
 }
