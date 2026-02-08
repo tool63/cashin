@@ -8,24 +8,24 @@ export default function HeroSection() {
   return (
     <section className="bg-gray-50 dark:bg-gray-900 text-black dark:text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-28 md:py-32 text-center">
-        
-        {/* ARROW + HEADLINE */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
-          {/* Arrow SVG */}
-          <span className="w-12 h-12 sm:w-14 sm:h-14 text-red-600 dark:text-red-400 flex-shrink-0">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-              className="w-full h-full"
-            >
-              <path d="M2 12L22 12M22 12L14 4M22 12L14 20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </span>
 
-          {/* Headline */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold uppercase leading-tight">
-            Earn Real Money Online
+        {/* FORWARD / ARROW-STYLE HEADLINE (TEXT ONLY) */}
+        <div className="flex justify-center mb-8">
+          <h1
+            className="
+              relative inline-block
+              px-10 py-4
+              text-3xl sm:text-4xl md:text-5xl lg:text-6xl
+              font-extrabold uppercase tracking-wide
+              text-white
+              bg-red-600
+              skew-x-[-10deg]
+              shadow-xl
+            "
+          >
+            <span className="inline-block skew-x-[10deg]">
+              Earn Real Money Online
+            </span>
           </h1>
         </div>
 
@@ -51,6 +51,7 @@ export default function HeroSection() {
             </motion.span>
           </Link>
         </div>
+
       </div>
     </section>
   );
