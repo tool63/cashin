@@ -5,37 +5,24 @@ import TypingText from "@/components/typing/TypingText";
 import Link from "next/link";
 
 export default function HeroSection() {
-  const headline = "Earn Real Money Online";
-
-  // Split headline into letters for curved effect
-  const letters = headline.split("");
-
   return (
     <section className="bg-gray-50 dark:bg-gray-900 text-black dark:text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-28 md:py-32 text-center">
 
-        {/* CURVED / RAINBOW HEADLINE */}
+        {/* HEADLINE – PREVIOUS CLEAN DESIGN */}
         <div className="flex justify-center mb-8">
-          <h1 className="relative inline-block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-wide">
-            <span className="inline-block relative">
-              {letters.map((letter, i) => {
-                // Calculate slight rotation for curved effect
-                const rotation = (i - letters.length / 2) * 4; 
-                return (
-                  <span
-                    key={i}
-                    className="inline-block bg-clip-text text-transparent font-extrabold"
-                    style={{
-                      backgroundImage: "linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet)",
-                      transform: `rotate(${rotation}deg)`,
-                      display: "inline-block",
-                    }}
-                  >
-                    {letter}
-                  </span>
-                );
-              })}
-            </span>
+          <h1
+            className="
+              relative inline-block
+              px-8 py-4
+              text-3xl sm:text-4xl md:text-5xl lg:text-6xl
+              font-extrabold uppercase tracking-wide
+              bg-gradient-to-r
+              from-red-500 via-yellow-400 via-green-500 via-blue-500 to-purple-600
+              bg-clip-text text-transparent
+            "
+          >
+            Earn Real Money Online
           </h1>
         </div>
 
@@ -55,7 +42,7 @@ export default function HeroSection() {
             <motion.span
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-black px-8 sm:px-10 py-4 rounded-xl font-semibold shadow-lg text-base sm:text-lg"
+              className="inline-flex items-center justify-center bg-green-500 hover:bg-green-600 text-black px-8 sm:px-10 py-4 rounded-xl font-semibold shadow-lg text-base sm:text-lg"
             >
               Get Started Now
             </motion.span>
