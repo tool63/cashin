@@ -19,10 +19,11 @@ export default function HeroSection() {
     const totalFrames = Math.round((duration / 1000) * frameRate);
 
     let frame = 0;
-    const usersTarget = 25000000;
-    const offersTarget = 12000;
-    const paidMonthTarget = 350000;
-    const totalPaidTarget = 12000000;
+    // realistic target numbers
+    const usersTarget = 366727; // total users
+    const offersTarget = 87412; // total offers
+    const paidMonthTarget = 54233; // amount paid this month $
+    const totalPaidTarget = 1234567; // total amount paid $
 
     const interval = setInterval(() => {
       frame++;
@@ -44,27 +45,12 @@ export default function HeroSection() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
 
           {/* HEADLINE */}
-          <h1
-            className="
-              font-extrabold
-              text-[20px] sm:text-[22px] md:text-[24px]
-              mb-4
-              text-white
-            "
-          >
+          <h1 className="font-extrabold text-[20px] sm:text-[22px] md:text-[24px] mb-4 text-white">
             Earn Real Money Online
           </h1>
 
           {/* TYPING TEXT */}
-          <div
-            className="
-              text-[18px] sm:text-[18px] md:text-[18px]
-              mb-6
-              font-semibold
-              bg-gradient-to-r from-yellow-400 via-green-400 to-green-500
-              bg-clip-text text-transparent
-            "
-          >
+          <div className="text-[20px] sm:text-[20px] md:text-[20px] mb-6 font-semibold text-green-400">
             <TypingText />
           </div>
 
@@ -119,7 +105,10 @@ export default function HeroSection() {
                 Total Users
               </span>
               <div className="w-full h-1 bg-yellow-500 rounded-full mt-4">
-                <div className="h-1 bg-green-400 rounded-full" style={{ width: `${Math.min(usersCount / 25000000 * 100, 100)}%` }} />
+                <div
+                  className="h-1 bg-green-400 rounded-full"
+                  style={{ width: `${Math.min((usersCount / 366727) * 100, 100)}%` }}
+                />
               </div>
             </motion.div>
 
@@ -138,7 +127,10 @@ export default function HeroSection() {
                 Total Offers
               </span>
               <div className="w-full h-1 bg-yellow-500 rounded-full mt-4">
-                <div className="h-1 bg-green-400 rounded-full" style={{ width: `${Math.min(offersCount / 12000 * 100, 100)}%` }} />
+                <div
+                  className="h-1 bg-green-400 rounded-full"
+                  style={{ width: `${Math.min((offersCount / 87412) * 100, 100)}%` }}
+                />
               </div>
             </motion.div>
 
@@ -157,7 +149,10 @@ export default function HeroSection() {
                 Paid This Month
               </span>
               <div className="w-full h-1 bg-yellow-500 rounded-full mt-4">
-                <div className="h-1 bg-green-400 rounded-full" style={{ width: `${Math.min(paidMonth / 350000 * 100, 100)}%` }} />
+                <div
+                  className="h-1 bg-green-400 rounded-full"
+                  style={{ width: `${Math.min((paidMonth / 54233) * 100, 100)}%` }}
+                />
               </div>
             </motion.div>
 
@@ -176,7 +171,10 @@ export default function HeroSection() {
                 Total Paid
               </span>
               <div className="w-full h-1 bg-yellow-500 rounded-full mt-4">
-                <div className="h-1 bg-green-400 rounded-full" style={{ width: `${Math.min(totalPaid / 12000000 * 100, 100)}%` }} />
+                <div
+                  className="h-1 bg-green-400 rounded-full"
+                  style={{ width: `${Math.min((totalPaid / 1234567) * 100, 100)}%` }}
+                />
               </div>
             </motion.div>
           </div>
