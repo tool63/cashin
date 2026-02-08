@@ -8,27 +8,28 @@ export default function FloatingCTA() {
   const [visible, setVisible] = useState(true);
   const [bounceKey, setBounceKey] = useState(0);
 
-  // CTA text
-  const text = "Start Earning in 60 Seconds";
+  const text = "Start Earning Now!";
   const letters = text.split("");
 
   /* ================= AUTO HIDE / SHOW ================= */
   useEffect(() => {
-    const firstCTA = document.querySelector(".cta");
-    const lastCTA = document.querySelector(".cta:last-of-type");
+    // Automatically find all CTA buttons (Link or button elements)
+    const ctaElements = Array.from(document.querySelectorAll("a, button")).filter(
+      (el) => el.textContent?.toLowerCase().includes("get started") || el.textContent?.toLowerCase().includes("signup")
+    );
 
-    if (!firstCTA || !lastCTA) return;
+    if (!ctaElements.length) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
+        // If any CTA is visible on screen, hide the floating CTA
         const anyVisible = entries.some((entry) => entry.isIntersecting);
         setVisible(!anyVisible);
       },
       { threshold: 0.1 }
     );
 
-    observer.observe(firstCTA);
-    observer.observe(lastCTA);
+    ctaElements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
   }, []);
