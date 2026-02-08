@@ -14,7 +14,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 backdrop-blur border-b bg-white/90 dark:bg-[#070A14]/90 border-gray-200 dark:border-white/10 transition-colors">
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-start justify-between">
         {/* LOGO */}
         <Link
           href="/"
@@ -23,32 +23,32 @@ export default function Header() {
           Cashog
         </Link>
 
-        {/* DESKTOP NAV */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
+        {/* DESKTOP COLUMN MENU */}
+        <nav className="hidden md:flex flex-col gap-3 text-sm font-medium">
           <Link href="/how-it-works">How it works</Link>
 
-          {/* EARN DROPDOWN */}
-          <div
-            className="relative"
-            onMouseEnter={() => setEarnOpen(true)}
-            onMouseLeave={() => setEarnOpen(false)}
-          >
-            <button className="flex items-center gap-1">
-              Earn <ChevronDown size={14} />
+          {/* EARN */}
+          <div className="flex flex-col gap-2">
+            <button
+              onClick={() => setEarnOpen(!earnOpen)}
+              className="flex items-center gap-1 font-medium"
+            >
+              Earn
+              <ChevronDown
+                size={14}
+                className={`transition ${
+                  earnOpen ? "rotate-180" : ""
+                }`}
+              />
             </button>
 
             <AnimatePresence>
               {earnOpen && (
                 <motion.div
-                  initial={{ opacity: 0, y: 8 }}
+                  initial={{ opacity: 0, y: -4 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 8 }}
-                  className="
-                    absolute top-8 left-0 w-56 p-4 rounded-xl shadow-xl
-                    flex flex-col gap-3
-                    bg-white dark:bg-[#0B1020]
-                    border border-gray-200 dark:border-white/10
-                  "
+                  exit={{ opacity: 0, y: -4 }}
+                  className="flex flex-col gap-2 pl-4"
                 >
                   <Link href="/surveys">Surveys</Link>
                   <Link href="/app-installs">App Installs</Link>
@@ -66,7 +66,7 @@ export default function Header() {
         </nav>
 
         {/* DESKTOP ACTIONS */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden md:flex flex-col gap-3 items-end">
           <LanguageSwitcher />
           <DarkLightToggle />
 
@@ -83,12 +83,15 @@ export default function Header() {
         </div>
 
         {/* MOBILE BUTTON */}
-        <button className="md:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
+        <button
+          className="md:hidden"
+          onClick={() => setMobileOpen(!mobileOpen)}
+        >
           {mobileOpen ? <X /> : <Menu />}
         </button>
       </div>
 
-      {/* MOBILE MENU */}
+      {/* MOBILE MENU (UNCHANGED STRUCTURE) */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
