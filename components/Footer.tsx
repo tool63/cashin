@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, ReactNode } from "react";
+import { useState, ReactNode } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Twitter, Facebook, Instagram, Youtube, ChevronDown } from "lucide-react";
@@ -115,15 +115,6 @@ export default function Footer() {
   const [open, setOpen] = useState<Toggle>({});
   const [sub, setSub] = useState<Toggle>({});
   const [sub2, setSub2] = useState<Toggle>({});
-  const [isDesktop, setIsDesktop] = useState(false);
-
-  // Detect desktop
-  useEffect(() => {
-    const check = () => setIsDesktop(window.innerWidth >= 768);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
 
   const toggle = (k: string) => setOpen(p => ({ ...p, [k]: !p[k] }));
   const toggleSub = (k: string) => setSub(p => ({ ...p, [k]: !p[k] }));
@@ -151,11 +142,11 @@ export default function Footer() {
       </button>
 
       <AnimatePresence>
-        {(isDesktop || open[id]) && (
+        {open[id] && (
           <motion.div
-            initial={!isDesktop ? { height: 0, opacity: 0 } : false}
+            initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
-            exit={!isDesktop ? { height: 0, opacity: 0 } : undefined}
+            exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
             className="space-y-2 text-sm text-black dark:text-gray-400"
           >
@@ -179,11 +170,11 @@ export default function Footer() {
         </button>
 
         <AnimatePresence>
-          {(isDesktop || state) && (
+          {state && (
             <motion.div
-              initial={!isDesktop ? { height: 0, opacity: 0 } : false}
+              initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
-              exit={!isDesktop ? { height: 0, opacity: 0 } : undefined}
+              exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.25 }}
               className="mt-2 space-y-2 pl-3"
             >
@@ -238,7 +229,6 @@ export default function Footer() {
           <A href="/complete-offers">{links.completeOffers}</A>
           <A href="/offerwall">{links.offerwall}</A>
           <A href="/surveywall">{links.surveywall}</A>
-
           <Sub id="extra" title={links.extraEarning}>
             <A href="/watch-ads">{links.watchAds}</A>
             <A href="/micro-tasks">{links.microTasks}</A>
@@ -265,7 +255,6 @@ export default function Footer() {
           <A href="/work-from-home-jobs">{links.workFromHomeJobs}</A>
           <A href="/online-earning-methods">{links.onlineEarningMethods}</A>
           <A href="/earn-money-online-fast">{links.earnFast}</A>
-
           <Sub id="allGuides" title={links.allGuides}>
             <A href="/passive-income-online">{links.passiveIncome}</A>
             <A href="/online-jobs-for-beginners">{links.onlineJobs}</A>
