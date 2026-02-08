@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 
 type TypingTextProps = {
   words?: string[];
-  displayTime?: number;
-  fadeTime?: number;
+  typingSpeed?: number;
+  deletingSpeed?: number;
+  pauseTime?: number;
   className?: string;
 };
 
@@ -30,40 +31,61 @@ export default function TypingText({
     "Loyalty",
     "Uploading Vouchers",
   ],
-  displayTime = 2000,
-  fadeTime = 500,
+  typingSpeed = 90,
+  deletingSpeed = 50,
+  pauseTime = 1500,
   className = "text-indigo-500 font-semibold",
 }: TypingTextProps) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [visible, setVisible] = useState(true);
+  const [wordIndex, setWordIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [displayText, setDisplayText] = useState("");
 
   useEffect(() => {
-    const showTimer = setTimeout(() => {
-      setVisible(false); // fade out
-    }, displayTime);
+    const currentWord = words[wordIndex];
+    let timeout: NodeJS.Timeout;
 
-    const switchTimer = setTimeout(() => {
-      setCurrentIndex((prev) => (prev + 1) % words.length);
-      setVisible(true); // fade in
-    }, displayTime + fadeTime);
+    if (!isDeleting) {
+      // Typing
+      if (charIndex < currentWord.length) {
+        timeout = setTimeout(() => {
+          setDisplayText(currentWord.slice(0, charIndex + 1));
+          setCharIndex((prev) => prev + 1);
+        }, typingSpeed);
+      } else {
+        // Pause before deleting
+        timeout = setTimeout(() => {
+          setIsDeleting(true);
+        }, pauseTime);
+      }
+    } else {
+      // Deleting
+      if (charIndex > 0) {
+        timeout = setTimeout(() => {
+          setDisplayText(currentWord.slice(0, charIndex - 1));
+          setCharIndex((prev) => prev - 1);
+        }, deletingSpeed);
+      } else {
+        setIsDeleting(false);
+        setWordIndex((prev) => (prev + 1) % words.length);
+      }
+    }
 
-    return () => {
-      clearTimeout(showTimer);
-      clearTimeout(switchTimer);
-    };
-  }, [currentIndex, words.length, displayTime, fadeTime]);
+    return () => clearTimeout(timeout);
+  }, [
+    charIndex,
+    isDeleting,
+    wordIndex,
+    words,
+    typingSpeed,
+    deletingSpeed,
+    pauseTime,
+  ]);
 
   return (
-    <span className="inline-block">
-      <span
-        className={`${className} transition-opacity`}
-        style={{
-          opacity: visible ? 1 : 0,
-          transitionDuration: `${fadeTime}ms`,
-        }}
-      >
-        {words[currentIndex]}
-      </span>
+    <span className={className}>
+      {displayText}
+      <span className="ml-1 animate-pulse">|</span>
     </span>
   );
 }
