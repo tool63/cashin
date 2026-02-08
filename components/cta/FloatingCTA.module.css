@@ -16,10 +16,10 @@
 
   transition: transform 0.4s ease, opacity 0.3s ease;
 
-  /* Rainbow background */
-  background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet);
+  /* Animated rainbow gradient inspired by LiveJoining */
+  background: linear-gradient(270deg, #ff0000, #ffa500, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff);
   background-size: 1400% 1400%;
-  animation: rainbow 10s ease infinite;
+  animation: rainbowBG 8s ease infinite;
   color: #fff;
 }
 
@@ -42,7 +42,7 @@
   position: relative;
 }
 
-/* ================= SPARKLE ON BOUNCE ================= */
+/* ================= SPARKLE EFFECT ================= */
 .sparkle::after {
   content: "✨";
   position: absolute;
@@ -55,37 +55,20 @@
 
 /* ================= KEYFRAMES ================= */
 @keyframes bounce {
-  0% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-8px);
-  }
-  70% {
-    transform: translateY(2px);
-  }
-  100% {
-    transform: translateY(0);
-  }
+  0% { transform: translateY(0); }
+  40% { transform: translateY(-8px); }
+  70% { transform: translateY(2px); }
+  100% { transform: translateY(0); }
 }
 
 @keyframes sparkle {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -8px) scale(0);
-  }
-  50% {
-    opacity: 1;
-    transform: translate(-50%, -14px) scale(1.2);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -20px) scale(0);
-  }
+  0% { opacity: 0; transform: translate(-50%, -8px) scale(0); }
+  50% { opacity: 1; transform: translate(-50%, -14px) scale(1.2); }
+  100% { opacity: 0; transform: translate(-50%, -20px) scale(0); }
 }
 
-/* ================= RAINBOW ANIMATION ================= */
-@keyframes rainbow {
+/* ================= RAINBOW BACKGROUND ================= */
+@keyframes rainbowBG {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
