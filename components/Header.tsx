@@ -54,7 +54,11 @@ export default function Header() {
             onMouseLeave={() => setEarnOpen(false)}
           >
             <button className="flex items-center gap-1">
-              Earn <ChevronDown size={14} className={`${earnOpen ? "rotate-180" : ""} transition`} />
+              Earn{" "}
+              <ChevronDown
+                size={14}
+                className={`${earnOpen ? "rotate-180" : ""} transition`}
+              />
             </button>
 
             {/* Earn submenu */}
@@ -106,7 +110,7 @@ export default function Header() {
         </button>
       </div>
 
-      {/* MOBILE MENU: vertical layout */}
+      {/* MOBILE MENU */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -139,17 +143,20 @@ export default function Header() {
               </div>
             )}
 
-            <Link href="/cashout">Cashout</Link>
-            <Link href="/blog">Blog</Link>
-            <Link href="/help">Help</Link>
+            {/* Mobile vertical links */}
+            <div className="flex flex-col gap-2">
+              <Link href="/cashout">Cashout</Link>
+              <Link href="/blog">Blog</Link>
+              <Link href="/help">Help</Link>
+            </div>
 
-            {/* MOBILE SWITCHES */}
+            {/* Mobile switches */}
             <div className="flex items-center justify-between pt-3">
               <LanguageSwitcher />
               <DarkLightToggle />
             </div>
 
-            {/* MOBILE CTA */}
+            {/* Mobile CTA */}
             <div className="pt-4 flex flex-col gap-3">
               <Link
                 href="/login"
