@@ -5,7 +5,6 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown, Sun, Moon } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useLang } from "@/app/providers/LanguageProvider";
 import LanguageSwitcher from "@/components/toggle/LanguageSwitcher";
 
 export default function Header() {
