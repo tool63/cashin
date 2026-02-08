@@ -4,7 +4,7 @@ import "../styles/globals.css";
 import { ReactNode } from "react";
 
 import Header from "@/components/Header";
-import Footer from "@/components/Footer"; // make sure this is the updated Footer with SVG icon
+import Footer from "@/components/Footer"; // make sure this is the updated Footer
 import FloatingCTA from "@/components/cta/FloatingCTA";
 import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
 import Meta from "@/components/seo/SeoEngine";
@@ -29,11 +29,18 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
       <body className="min-h-screen text-black dark:text-white transition-colors duration-300">
         <ThemeProviderWrapper>
+          {/* Header */}
           <Header />
 
-          <main className="min-h-[calc(100vh-160px)]">{children}</main>
+          {/* Main Content */}
+          <main className="min-h-[calc(100vh-160px)]">
+            {children}
+          </main>
 
+          {/* Footer */}
           <Footer />
+
+          {/* Floating CTA */}
           <FloatingCTA />
         </ThemeProviderWrapper>
       </body>
