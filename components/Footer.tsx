@@ -5,39 +5,125 @@ import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { Twitter, Facebook, Instagram, Youtube } from "lucide-react"
 
-// TEMP fallback for useLang to prevent build errors
-const useLang = () => ({
-  t: (key: string) => key, // returns the key itself
-  lang: "en",
-  setLang: () => {},
-})
-
 type Toggle = Record<string, boolean>
 
-export default function Footer() {
-  const { t, lang, setLang } = useLang()
+// Fallback translations to replace useLang
+const t = (key: string) => {
+  const translations: Record<string, any> = {
+    "footer.getStarted": "Get Started",
+    "footer.waysToEarn": "Ways to Earn",
+    "footer.guides": "Guides",
+    "footer.rewards": "Rewards",
+    "footer.resources": "Resources",
+    "footer.business": "Business",
+    "footer.cashback": "Cashback",
+    "footer.legal": "Legal",
+    "footer.copyright": "© 2026 Cashog. All rights reserved.",
+    "footer.links": {
+      howItWorks: "How it works",
+      startEarning: "Start Earning",
+      cashoutMethods: "Cashout Methods",
+      withdrawalProofs: "Withdrawal Proofs",
+      trustSafety: "Trust & Safety",
+      surveys: "Surveys",
+      appInstalls: "App Installs",
+      playGames: "Play Games",
+      watchVideos: "Watch Videos",
+      miningRewards: "Mining Rewards",
+      completeOffers: "Complete Offers",
+      offerwall: "Offerwall",
+      surveywall: "Surveywall",
+      extraEarning: "Extra Earning",
+      watchAds: "Watch Ads",
+      microTasks: "Micro Tasks",
+      freeTrials: "Free Trials",
+      testProducts: "Test Products",
+      readEmails: "Read Emails",
+      visitWebsites: "Visit Websites",
+      reviewTasks: "Review Tasks",
+      spinningWheel: "Spinning Wheel",
+      loyalty: "Loyalty",
+      vouchers: "Vouchers",
+      makeMoneyOnline: "Make Money Online",
+      earnFromHome: "Earn from Home",
+      earnWithoutInvestment: "Earn without Investment",
+      getPaidToPlayGames: "Get Paid to Play Games",
+      installApps: "Install Apps",
+      watchVideosForMoney: "Watch Videos for Money",
+      completeOffersOnline: "Complete Offers Online",
+      workFromHomeJobs: "Work from Home Jobs",
+      onlineEarningMethods: "Online Earning Methods",
+      earnFast: "Earn Fast",
+      allGuides: "All Guides",
+      passiveIncome: "Passive Income",
+      onlineJobs: "Online Jobs",
+      studentEarnings: "Student Earnings",
+      earnWithoutSkills: "Earn without Skills",
+      earnUsingMobile: "Earn Using Mobile",
+      earnWorldwide: "Earn Worldwide",
+      cashbackRewards: "Cashback Rewards",
+      legitWays: "Legit Ways",
+      freeWays: "Free Ways",
+      earnPayPal: "Earn PayPal Money",
+      earnGiftCards: "Earn Gift Cards",
+      amazonGiftCard: "Amazon Gift Card",
+      appleGiftCard: "Apple Gift Card",
+      googleGiftCard: "Google Play Gift Card",
+      earnCrypto: "Earn Crypto",
+      bitcoin: "Bitcoin",
+      litecoin: "Litecoin",
+      ethereum: "Ethereum",
+      dogecoin: "Dogecoin",
+      earnGaming: "Earn Gaming",
+      robux: "Free Robux",
+      steam: "Steam Gift Cards",
+      xbox: "Xbox Gift Cards",
+      psn: "PSN Gift Cards",
+      spotify: "Spotify Premium",
+      blog: "Blog",
+      helpCenter: "Help Center",
+      faq: "FAQ",
+      contactSupport: "Contact Support",
+      about: "About",
+      affiliate: "Affiliate",
+      partners: "Partners",
+      advertise: "Advertise",
+      cashbackOffers: "Cashback Offers",
+      shoppingRewards: "Shopping Rewards",
+      electronics: "Electronics",
+      fashion: "Fashion",
+      homeGarden: "Home & Garden",
+      grocery: "Grocery",
+      beauty: "Beauty",
+      mobile: "Mobile",
+      travel: "Travel",
+      hotels: "Hotels",
+      flights: "Flights",
+      finance: "Finance",
+      promoCodes: "Promo Codes",
+      dailyDeals: "Daily Deals",
+      banking: "Banking & Finance",
+      terms: "Terms & Conditions",
+      privacy: "Privacy Policy",
+      cookies: "Cookie Policy",
+    },
+  }
+  return translations[key] || key
+}
 
+export default function Footer() {
   const [open, setOpen] = useState<Toggle>({})
   const [sub, setSub] = useState<Toggle>({})
   const [sub2, setSub2] = useState<Toggle>({})
   const [isDesktop, setIsDesktop] = useState(false)
 
-  /* Detect desktop */
+  // Detect desktop
   useEffect(() => {
     const check = () => setIsDesktop(window.innerWidth >= 768)
     check()
     window.addEventListener("resize", check)
     return () => window.removeEventListener("resize", check)
   }, [])
-
-  /* Auto-set language by browser */
-  useEffect(() => {
-    if (!lang) {
-      const browserLang = navigator.language.slice(0, 2)
-      if (["en", "bn", "es"].includes(browserLang)) setLang(browserLang as "en" | "bn" | "es")
-      else setLang("en")
-    }
-  }, [lang, setLang])
 
   const toggle = (k: string) => { if (!isDesktop) setOpen(p => ({ ...p, [k]: !p[k] })) }
   const toggleSub = (k: string) => { if (!isDesktop) setSub(p => ({ ...p, [k]: !p[k] })) }
@@ -54,15 +140,7 @@ export default function Footer() {
     </motion.div>
   )
 
-  const Section = ({
-    id,
-    title,
-    children,
-  }: {
-    id: string
-    title: string
-    children: ReactNode
-  }) => (
+  const Section = ({ id, title, children }: { id: string; title: string; children: ReactNode }) => (
     <div>
       <button
         onClick={() => toggle(id)}
@@ -71,7 +149,6 @@ export default function Footer() {
         {title}
         {!isDesktop && <span>{open[id] ? "−" : "^"}</span>}
       </button>
-
       <AnimatePresence>
         {(isDesktop || open[id]) && (
           <motion.div
@@ -88,19 +165,8 @@ export default function Footer() {
     </div>
   )
 
-  const Sub = ({
-    id,
-    title,
-    children,
-    level = 1,
-  }: {
-    id: string
-    title: string
-    children: ReactNode
-    level?: number
-  }) => {
+  const Sub = ({ id, title, children, level = 1 }: { id: string; title: string; children: ReactNode; level?: number }) => {
     const state = level === 1 ? sub[id] : sub2[id]
-
     return (
       <div className="mt-2" style={{ paddingLeft: `${level * 8}px` }}>
         <button
@@ -110,7 +176,6 @@ export default function Footer() {
           {title}
           {!isDesktop && <span>{state ? "−" : "^"}</span>}
         </button>
-
         <AnimatePresence>
           {(isDesktop || state) && (
             <motion.div
@@ -128,7 +193,6 @@ export default function Footer() {
     )
   }
 
-  /* Column names only (translated) */
   const footerColumns = {
     getStarted: t("footer.getStarted"),
     waysToEarn: t("footer.waysToEarn"),
@@ -147,10 +211,7 @@ export default function Footer() {
     youtube: "https://youtube.com/",
   }
 
-  const copyright = t("footer.copyright")
-
-  /* Link texts */
-  const links = t("footer.links") || {}
+  const links = t("footer.links")
 
   return (
     <footer className="bg-gray-100 text-gray-700 dark:bg-[#070A14] dark:text-gray-300 transition-colors duration-300">
@@ -301,7 +362,7 @@ export default function Footer() {
       </div>
 
       <div className="text-center text-sm text-gray-500 pb-6">
-        {copyright}
+        {t("footer.copyright")}
       </div>
     </footer>
   )
