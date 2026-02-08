@@ -5,6 +5,13 @@ import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { Twitter, Facebook, Instagram, Youtube } from "lucide-react"
 
+// TEMP fallback for useLang to prevent build errors
+const useLang = () => ({
+  t: (key: string) => key, // returns the key itself
+  lang: "en",
+  setLang: () => {},
+})
+
 type Toggle = Record<string, boolean>
 
 export default function Footer() {
