@@ -14,22 +14,17 @@ export default function Header() {
 
   const headerRef = useRef<HTMLDivElement>(null);
 
-  // 🔒 Close menus when clicking outside
+  // Close menus when clicking outside
   useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (
-        headerRef.current &&
-        !headerRef.current.contains(event.target as Node)
-      ) {
-        setEarnOpen(false);
+    const handleClickOutside = (e: MouseEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
         setMobileOpen(false);
+        setEarnOpen(false);
         setMobileEarnOpen(false);
       }
-    }
-
+    };
     document.addEventListener("mousedown", handleClickOutside);
-    return () =>
-      document.removeEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
@@ -37,10 +32,9 @@ export default function Header() {
       ref={headerRef}
       className="sticky top-0 z-50 backdrop-blur border-b
                  bg-white/90 dark:bg-[#070A14]/90
-                 border-gray-200 dark:border-white/10
-                 transition-colors"
+                 border-gray-200 dark:border-white/10"
     >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-start justify-between">
+      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* LOGO */}
         <Link
           href="/"
@@ -50,11 +44,11 @@ export default function Header() {
         </Link>
 
         {/* DESKTOP COLUMN MENU */}
-        <nav className="hidden md:flex flex-col gap-4 text-sm font-medium">
+        <nav className="hidden md:flex flex-col gap-2 text-sm font-medium">
           <Link href="/how-it-works">How it works</Link>
 
           {/* EARN */}
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-1 relative">
             <button
               onClick={() => setEarnOpen(!earnOpen)}
               className="flex items-center gap-1"
@@ -62,9 +56,7 @@ export default function Header() {
               Earn
               <ChevronDown
                 size={14}
-                className={`transition ${
-                  earnOpen ? "rotate-180" : ""
-                }`}
+                className={`transition ${earnOpen ? "rotate-180" : ""}`}
               />
             </button>
 
@@ -74,7 +66,7 @@ export default function Header() {
                   initial={{ opacity: 0, y: -4 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -4 }}
-                  className="flex flex-col gap-2 pl-4"
+                  className="flex flex-col gap-1 pl-4 mt-1"
                 >
                   <Link href="/surveys">Surveys</Link>
                   <Link href="/app-installs">App Installs</Link>
@@ -86,34 +78,30 @@ export default function Header() {
             </AnimatePresence>
           </div>
 
-          {/* CLEARLY SEPARATED COLUMN LINKS */}
-          <Link href="/cashout">Cashout</Link>
-          <Link href="/blog">Blog</Link>
-          <Link href="/help">Help</Link>
+          {/* Cashout / Blog / Help in proper vertical column */}
+          <div className="flex flex-col gap-1 mt-1">
+            <Link href="/cashout">Cashout</Link>
+            <Link href="/blog">Blog</Link>
+            <Link href="/help">Help</Link>
+          </div>
         </nav>
 
         {/* DESKTOP ACTIONS */}
-        <div className="hidden md:flex flex-col gap-3 items-end">
+        <div className="hidden md:flex flex-col gap-2 items-end">
           <LanguageSwitcher />
           <DarkLightToggle />
 
-          <Link href="/login" className="text-sm font-medium">
-            Login
-          </Link>
-
+          <Link href="/login">Login</Link>
           <Link
             href="/register"
-            className="px-5 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition"
+            className="px-5 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition"
           >
             Sign up
           </Link>
         </div>
 
         {/* MOBILE BUTTON */}
-        <button
-          className="md:hidden"
-          onClick={() => setMobileOpen(!mobileOpen)}
-        >
+        <button className="md:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
           {mobileOpen ? <X /> : <Menu />}
         </button>
       </div>
@@ -131,7 +119,6 @@ export default function Header() {
           >
             <Link href="/how-it-works">How it works</Link>
 
-            {/* MOBILE EARN */}
             <button
               onClick={() => setMobileEarnOpen(!mobileEarnOpen)}
               className="flex w-full items-center justify-between font-medium"
@@ -139,9 +126,7 @@ export default function Header() {
               Earn
               <ChevronDown
                 size={16}
-                className={`transition ${
-                  mobileEarnOpen ? "rotate-180" : ""
-                }`}
+                className={`transition ${mobileEarnOpen ? "rotate-180" : ""}`}
               />
             </button>
 
@@ -159,13 +144,11 @@ export default function Header() {
             <Link href="/blog">Blog</Link>
             <Link href="/help">Help</Link>
 
-            {/* MOBILE SWITCHES */}
             <div className="flex items-center justify-between pt-3">
               <LanguageSwitcher />
               <DarkLightToggle />
             </div>
 
-            {/* MOBILE CTA */}
             <div className="pt-4 flex flex-col gap-3">
               <Link
                 href="/login"
