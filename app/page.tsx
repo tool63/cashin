@@ -22,13 +22,13 @@ import HighPayingOffers from "@/components/homepage/HighPayingOffers";
 export default function HomePage() {
   return (
     <>
+      {/* SEO */}
       <Meta
         title="Cashog - Earn Real Money Online"
         description="Earn real money online by completing surveys, playing games, installing apps, watching videos, and completing high-paying offers. Fast payouts, trusted worldwide."
       />
 
       <main className="transition-colors duration-300 bg-white text-gray-900 dark:bg-[#070A14] dark:text-white">
-        
         {/* HERO */}
         <HeroSection />
 
@@ -41,7 +41,7 @@ export default function HomePage() {
         {/* TASKS */}
         <TasksSection />
 
-        {/* HIGH PAYING OFFERS (CATEGORY BASED) */}
+        {/* HIGH PAYING OFFERS */}
         <HighPayingOffers />
 
         {/* TRUST */}
@@ -55,7 +55,6 @@ export default function HomePage() {
 
         {/* FINAL CTA */}
         <FinalCTASection />
-
       </main>
     </>
   );
