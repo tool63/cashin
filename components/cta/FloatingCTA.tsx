@@ -13,15 +13,13 @@ export default function FloatingCTA() {
 
   /* ================= AUTO HIDE / SHOW ================= */
   useEffect(() => {
-    // Target the hero CTA button by ID
     const heroCTA = document.getElementById("hero-cta-button");
     if (!heroCTA) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        // Hide floating CTA if hero CTA is visible
         const isVisible = entries[0].isIntersecting;
-        setVisible(!isVisible);
+        setVisible(!isVisible); // hide floating CTA when hero CTA is visible
       },
       { threshold: 0.1 }
     );
