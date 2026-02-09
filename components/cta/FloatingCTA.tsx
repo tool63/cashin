@@ -13,23 +13,20 @@ export default function FloatingCTA() {
 
   /* ================= AUTO HIDE / SHOW ================= */
   useEffect(() => {
-    // Automatically find all CTA buttons (Link or button elements)
-    const ctaElements = Array.from(document.querySelectorAll("a, button")).filter(
-      (el) => el.textContent?.toLowerCase().includes("get started") || el.textContent?.toLowerCase().includes("signup")
-    );
-
-    if (!ctaElements.length) return;
+    // Target the hero CTA button by ID
+    const heroCTA = document.getElementById("hero-cta-button");
+    if (!heroCTA) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        // If any CTA is visible on screen, hide the floating CTA
-        const anyVisible = entries.some((entry) => entry.isIntersecting);
-        setVisible(!anyVisible);
+        // Hide floating CTA if hero CTA is visible
+        const isVisible = entries[0].isIntersecting;
+        setVisible(!isVisible);
       },
       { threshold: 0.1 }
     );
 
-    ctaElements.forEach((el) => observer.observe(el));
+    observer.observe(heroCTA);
 
     return () => observer.disconnect();
   }, []);
