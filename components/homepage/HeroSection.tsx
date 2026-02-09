@@ -12,7 +12,7 @@ export default function HeroSection() {
 
         {/* HEADLINE */}
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-          Earn Real Money Online
+          Get Paid Instantly By
         </h1>
 
         {/* TYPING TEXT */}
@@ -32,7 +32,7 @@ export default function HeroSection() {
             whileTap={{ scale: 0.97 }}
             className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-10 py-4 rounded-xl font-semibold shadow-lg"
           >
-            Get Started Now <ArrowRight />
+            Start Earning Now <ArrowRight />
           </motion.span>
         </Link>
 
