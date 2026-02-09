@@ -21,7 +21,7 @@ export default function HeroSection() {
         </div>
 
         {/* SUBTEXT */}
-        <p className="text-lg sm:text-xl md:text-2xl mb-8 text-gray-600 dark:text-gray-300">
+        <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-8 text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed">
           Complete tasks, surveys, watch videos, and earn rewards securely from anywhere.
         </p>
 
