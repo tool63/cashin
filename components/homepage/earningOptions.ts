@@ -1,3 +1,5 @@
+// components/homepage/earningOptions.ts
+
 /**
  * Static array of earning options: [icon, title, slug]
  * Can be used directly on homepage and dynamic pages
@@ -24,7 +26,7 @@ export const earningOptions: [string, string, string][] = [
 ];
 
 /**
- * Optional function to get earning options dynamically
- * (useful if translations are added later)
+ * Optional helper function to get earning options dynamically
+ * Useful if translations or dynamic filtering is added later
  */
 export const getEarningOptions = () => earningOptions;
