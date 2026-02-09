@@ -1,16 +1,8 @@
-// components/homepage/SmallComponents.tsx
 "use client"
-
 import { ReactNode } from "react"
 
 /* ================= LIVE WRAPPER ================= */
-export function LiveWrapper({
-  title,
-  children,
-}: {
-  title: string
-  children: ReactNode
-}) {
+export function LiveWrapper({ title, children }: { title: string; children: ReactNode }) {
   return (
     <div className="bg-gray-50 dark:bg-[#111827] rounded-xl p-6 shadow-md">
       <h3 className="text-xl font-bold mb-4">{title}</h3>
@@ -20,13 +12,7 @@ export function LiveWrapper({
 }
 
 /* ================= SECTION TITLE ================= */
-export function SectionTitle({
-  icon,
-  text,
-}: {
-  icon: string
-  text: string
-}) {
+export function SectionTitle({ icon, text }: { icon: string; text: string }) {
   return (
     <div className="text-center mb-10">
       <h2 className="text-3xl font-bold flex items-center justify-center gap-2">
@@ -39,13 +25,7 @@ export function SectionTitle({
 }
 
 /* ================= STAT ================= */
-export function Stat({
-  title,
-  value,
-}: {
-  title: string
-  value: string
-}) {
+export function Stat({ title, value }: { title: string; value: string }) {
   return (
     <div className="bg-white dark:bg-[#111827] p-6 rounded-xl shadow-md flex flex-col items-center">
       <span className="text-2xl font-bold">{value}</span>
@@ -55,13 +35,7 @@ export function Stat({
 }
 
 /* ================= FEATURE ================= */
-export function Feature({
-  icon,
-  title,
-}: {
-  icon: ReactNode
-  title: string
-}) {
+export function Feature({ icon, title }: { icon: ReactNode; title: string }) {
   return (
     <div className="bg-white dark:bg-[#111827] p-6 rounded-xl shadow-md flex flex-col items-center text-center">
       <div className="text-4xl mb-4">{icon}</div>
