@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 
 type TypingTextProps = {
-  words?: string[];          // Array of words/phrases to type
-  typingSpeed?: number;      // Speed of typing each character (ms)
-  deletingSpeed?: number;    // Speed of deleting each character (ms)
-  pauseTime?: number;        // Pause at the end of word (ms)
-  className?: string;        // CSS classes
+  words?: string[];          
+  typingSpeed?: number;      
+  deletingSpeed?: number;    
+  pauseTime?: number;        
+  className?: string;        
 };
 
 export default function TypingText({
@@ -34,7 +34,7 @@ export default function TypingText({
   typingSpeed = 90,
   deletingSpeed = 50,
   pauseTime = 1500,
-  className = "text-green-500 font-semibold text-[20px]", // same as headline
+  className = "text-4xl sm:text-5xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500",
 }: TypingTextProps) {
   const [wordIndex, setWordIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
