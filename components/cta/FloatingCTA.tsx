@@ -14,29 +14,34 @@ export default function FloatingCTA() {
   useEffect(() => {
     let observer: IntersectionObserver;
 
-    const checkCTAs = () => {
-      const ctas = [
-        document.querySelector("section #hero-cta-1 a"),
-        document.querySelector("section #hero-cta-2 a")
-      ].filter(Boolean) as HTMLElement[];
+    const observeCTAs = () => {
+      // Find all CTA links whose text contains "get started" or "signup"
+      const ctas = Array.from(document.querySelectorAll("a")).filter((el) =>
+        el.textContent?.toLowerCase().includes("get started") ||
+        el.textContent?.toLowerCase().includes("signup")
+      ) as HTMLElement[];
 
       if (!ctas.length) return;
 
       observer = new IntersectionObserver(
         (entries) => {
-          const anyVisible = entries.some((entry) => entry.isIntersecting);
-          setVisible(!anyVisible); // hide floating CTA if any CTA is visible
+          // Hide floating CTA if ANY hero/final CTA is visible
+          const anyVisible = entries.some(entry => entry.isIntersecting);
+          setVisible(!anyVisible);
         },
-        { threshold: 0 } // trigger as soon as element is partially visible
+        { threshold: 0 } // trigger when partially visible
       );
 
       ctas.forEach(cta => observer.observe(cta));
     };
 
-    // Delay until next tick to ensure DOM exists
-    setTimeout(checkCTAs, 100);
+    // Wait for next frame to ensure DOM is ready
+    const timer = setTimeout(observeCTAs, 100);
 
-    return () => observer?.disconnect();
+    return () => {
+      clearTimeout(timer);
+      observer?.disconnect();
+    };
   }, []);
 
   // Bounce animation every 10s
