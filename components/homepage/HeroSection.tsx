@@ -11,18 +11,17 @@ export default function HeroSection() {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // Prevent hydration mismatch
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
 
   return (
     <section
       className={`text-white transition-colors duration-500 ${
-        theme === "dark" ? "bg-[#070A14]" : "bg-white text-gray-900"
+        theme === "dark" ? "bg-[#070A14]" : "bg-gray-50 text-gray-900"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 flex flex-col items-center justify-center text-center">
-        
+
         {/* MAIN HEADLINE */}
         <h1
           className={`text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 leading-tight ${
@@ -33,15 +32,13 @@ export default function HeroSection() {
         </h1>
 
         {/* TYPING TEXT */}
-        <div
-          className={`text-lg sm:text-xl md:text-2xl font-semibold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500`}
-        >
+        <div className="text-lg sm:text-xl md:text-2xl font-semibold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
           <TypingText />
         </div>
 
         {/* SUBTEXT */}
         <p
-          className={`text-sm sm:text-base md:text-lg mb-8 max-w-2xl ${
+          className={`text-sm sm:text-base md:text-lg mb-12 max-w-2xl ${
             theme === "dark" ? "text-gray-300" : "text-gray-700"
           }`}
         >
@@ -53,11 +50,16 @@ export default function HeroSection() {
           <motion.span
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-8 sm:px-10 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-2xl transition"
+            className={`relative inline-flex items-center gap-3 px-8 sm:px-10 py-4 rounded-3xl font-semibold shadow-2xl transition-all
+              ${theme === "dark"
+                ? "bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black"
+                : "bg-gradient-to-r from-green-500 via-green-400 to-yellow-400 text-white"
+              }`}
           >
-            Get Started Now <ArrowRight />
+            Get Started Now <ArrowRight size={20} />
           </motion.span>
         </Link>
+
       </div>
     </section>
   );
