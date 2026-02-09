@@ -37,10 +37,8 @@ export default function DynamicPage() {
   const params = useParams<{ slug: string }>();
   const slug = params.slug;
 
-  // Find matching earning option
   const option = earningOptions.find(([, , href]) => href === `/${slug}`);
 
-  // Dynamic meta title & description
   const title = option
     ? `${option[1]} - Earn Real Money | Cashog`
     : slug
@@ -74,27 +72,25 @@ export default function DynamicPage() {
         <section className="bg-gray-900 text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
 
-            {/* HEADLINE */}
-            <h1 className="font-extrabold text-[20px] sm:text-[20px] md:text-[20px] mb-4 text-white">
+            {/* HEADLINE — MATCHES BOTTOM CTA SIZE */}
+            <h1 className="font-extrabold text-3xl sm:text-4xl mb-4">
               Earn Real Money Online
             </h1>
 
-            {/* TYPING TEXT */}
-            <div className="text-[20px] sm:text-[20px] md:text-[20px] mb-6 font-semibold bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 bg-clip-text text-transparent">
+            {/* TYPING TEXT — SAME SIZE */}
+            <div className="text-3xl sm:text-4xl mb-6 font-semibold bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 bg-clip-text text-transparent">
               <TypingText />
             </div>
 
-            {/* SUBTEXT */}
             <p className="text-sm sm:text-base text-gray-300 mb-8 max-w-xl mx-auto">
               Join millions of users worldwide and start earning rewards instantly.
             </p>
 
-            {/* CTA */}
             <Link href="/signup">
               <motion.span
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center justify-center bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-10 py-4 rounded-xl font-semibold shadow-lg text-sm sm:text-base"
+                className="inline-flex items-center justify-center bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-10 py-4 rounded-xl font-semibold shadow-lg"
               >
                 Get Started Now <ArrowRight />
               </motion.span>
@@ -102,12 +98,16 @@ export default function DynamicPage() {
 
             {/* =================== HIGH PAYING OFFERS =================== */}
             <div className="mt-12 max-w-4xl mx-auto overflow-y-auto h-[360px] border border-gray-700 rounded-xl bg-gray-800 p-4">
-              <h3 className="text-lg font-bold mb-4 text-white">🔥 High Paying Offers</h3>
+              <h3 className="text-lg font-bold mb-4 text-white">
+                🔥 High Paying Offers
+              </h3>
+
               <div className="grid grid-cols-3 gap-4 text-sm text-gray-200 font-medium">
                 <span>Offer</span>
                 <span>Country</span>
                 <span>Amount</span>
               </div>
+
               <div className="mt-2 divide-y divide-gray-700">
                 {highPayingOffers.map((offer, idx) => (
                   <div
@@ -116,7 +116,9 @@ export default function DynamicPage() {
                   >
                     <span>{offer.name}</span>
                     <span>{offer.flag}</span>
-                    <span className="text-green-400 font-semibold">{offer.amount}</span>
+                    <span className="text-green-400 font-semibold">
+                      {offer.amount}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -138,7 +140,8 @@ export default function DynamicPage() {
                 <div className="text-4xl">{icon}</div>
                 <h3 className="mt-4 text-lg font-semibold">{title}</h3>
                 <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                  {earningDescriptions[title] || `Earn rewards with ${title.toLowerCase()}`}
+                  {earningDescriptions[title] ||
+                    `Earn rewards with ${title.toLowerCase()}`}
                 </p>
                 <ArrowRight className="mt-3 text-blue-500" size={18} />
               </Link>
@@ -149,9 +152,12 @@ export default function DynamicPage() {
         {/* =================== TRUST =================== */}
         <section className="py-16 bg-gray-100 dark:bg-white/5">
           <div className="max-w-7xl mx-auto px-6 text-center">
-            <h2 className="text-3xl font-bold mb-4">Trusted by Millions Worldwide</h2>
+            <h2 className="text-3xl font-bold mb-4">
+              Trusted by Millions Worldwide
+            </h2>
             <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-12">
-              Cashog is one of the most trusted earning platforms, paying users daily across the globe with fast and secure withdrawals.
+              Cashog is one of the most trusted earning platforms, paying users
+              daily across the globe.
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               <Stat title="Total Users" value="25M+" />
@@ -165,11 +171,13 @@ export default function DynamicPage() {
         {/* =================== PAYMENT METHODS =================== */}
         <section className="py-20">
           <div className="max-w-7xl mx-auto px-6 text-center">
-            <h2 className="text-4xl font-extrabold mb-4">Payment Methods</h2>
+            <h2 className="text-4xl font-extrabold mb-4">
+              Payment Methods
+            </h2>
             <p className="text-gray-600 dark:text-gray-400 mb-14 max-w-2xl mx-auto">
               Fast, secure, and trusted payout options.
             </p>
-            {/* Centered on PC, flex wrap keeps mobile layout */}
+
             <div className="flex justify-center flex-wrap gap-8">
               {[
                 { name: "PayPal", emoji: "💸" },
@@ -183,46 +191,30 @@ export default function DynamicPage() {
                 >
                   <span className="text-4xl mb-3">{method.emoji}</span>
                   <span className="text-lg font-semibold">{method.name}</span>
-                  <span className="text-sm text-gray-600 dark:text-gray-400 mt-1">Instant payout</span>
+                  <span className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                    Instant payout
+                  </span>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* =================== FEATURES / WHY CHOOSE US =================== */}
+        {/* =================== WHY CHOOSE US =================== */}
         <section className="py-20 bg-gray-100 dark:bg-white/5">
           <SectionTitle icon="🌟" text="Why Choose Us" />
           <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-10">
-            <div className="flex flex-col items-center bg-white dark:bg-[#0f111b] border border-gray-200 dark:border-white/10 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2">
-              <Zap className="text-green-500 mb-4" size={36} />
-              <h3 className="text-xl font-bold mb-2">Instant Withdrawals</h3>
-              <p className="text-gray-600 dark:text-gray-400 text-center">
-                Get your earnings instantly with zero delays. Fast, secure, and reliable withdrawals.
-              </p>
-            </div>
-
-            <div className="flex flex-col items-center bg-white dark:bg-[#0f111b] border border-gray-200 dark:border-white/10 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2">
-              <ShieldCheck className="text-blue-500 mb-4" size={36} />
-              <h3 className="text-xl font-bold mb-2">Secure & Trusted</h3>
-              <p className="text-gray-600 dark:text-gray-400 text-center">
-                Trusted by millions worldwide. Your data and earnings are fully protected.
-              </p>
-            </div>
-
-            <div className="flex flex-col items-center bg-white dark:bg-[#0f111b] border border-gray-200 dark:border-white/10 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2">
-              <Wallet className="text-purple-500 mb-4" size={36} />
-              <h3 className="text-xl font-bold mb-2">Multiple Payment Options</h3>
-              <p className="text-gray-600 dark:text-gray-400 text-center">
-                Choose from PayPal, crypto, or gift cards. Flexible payouts that suit your lifestyle.
-              </p>
-            </div>
+            <Feature icon={<Zap />} title="Instant Withdrawals" />
+            <Feature icon={<ShieldCheck />} title="Secure & Trusted" />
+            <Feature icon={<Wallet />} title="Multiple Payment Options" />
           </div>
         </section>
 
         {/* =================== FINAL CTA =================== */}
         <section className="py-20 text-center">
-          <h2 className="text-4xl font-bold mb-6">Start Earning Real Money Today!</h2>
+          <h2 className="text-4xl font-bold mb-6">
+            Start Earning Real Money Today!
+          </h2>
           <p className="mb-8 text-lg text-gray-600 dark:text-gray-400">
             Join millions of users who are already earning daily.
           </p>
@@ -239,5 +231,17 @@ export default function DynamicPage() {
 
       </main>
     </>
+  );
+}
+
+function Feature({ icon, title }: { icon: React.ReactNode; title: string }) {
+  return (
+    <div className="flex flex-col items-center bg-white dark:bg-[#0f111b] border border-gray-200 dark:border-white/10 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition">
+      <div className="text-green-500 mb-4">{icon}</div>
+      <h3 className="text-xl font-bold mb-2">{title}</h3>
+      <p className="text-gray-600 dark:text-gray-400 text-center">
+        Reliable, fast, and user-friendly experience for everyone.
+      </p>
+    </div>
   );
 }
