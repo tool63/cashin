@@ -12,27 +12,34 @@ export default function FloatingCTA() {
   const letters = text.split("");
 
   useEffect(() => {
-    const ctas = [
-      document.getElementById("hero-cta-1"),
-      document.getElementById("hero-cta-2")
-    ].filter(Boolean) as HTMLElement[];
+    let observer: IntersectionObserver;
 
-    if (!ctas.length) return;
+    const checkCTAs = () => {
+      const ctas = [
+        document.querySelector("section #hero-cta-1 a"),
+        document.querySelector("section #hero-cta-2 a")
+      ].filter(Boolean) as HTMLElement[];
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // Hide floating CTA if any hero CTA is visible
-        const anyVisible = entries.some(entry => entry.isIntersecting);
-        setVisible(!anyVisible);
-      },
-      { threshold: 0 } // trigger when partially visible
-    );
+      if (!ctas.length) return;
 
-    ctas.forEach(cta => observer.observe(cta));
+      observer = new IntersectionObserver(
+        (entries) => {
+          const anyVisible = entries.some((entry) => entry.isIntersecting);
+          setVisible(!anyVisible); // hide floating CTA if any CTA is visible
+        },
+        { threshold: 0 } // trigger as soon as element is partially visible
+      );
 
-    return () => observer.disconnect();
+      ctas.forEach(cta => observer.observe(cta));
+    };
+
+    // Delay until next tick to ensure DOM exists
+    setTimeout(checkCTAs, 100);
+
+    return () => observer?.disconnect();
   }, []);
 
+  // Bounce animation every 10s
   useEffect(() => {
     const interval = setInterval(() => setBounceKey(prev => prev + 1), 10000);
     return () => clearInterval(interval);
