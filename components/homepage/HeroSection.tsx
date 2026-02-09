@@ -45,21 +45,22 @@ export default function HeroSection() {
           Complete tasks, surveys, watch videos, and earn rewards securely from anywhere.
         </p>
 
-        {/* HERO CTA BUTTON */}
-        <Link href="/signup" className="relative z-10">
-          <motion.span
-            id="hero-cta-button"  // <-- Important: ID for IntersectionObserver
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            className={`inline-flex items-center gap-3 px-8 sm:px-10 py-4 rounded-3xl font-semibold shadow-2xl transition-all
-              ${theme === "dark"
-                ? "bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black"
-                : "bg-gradient-to-r from-green-500 via-green-400 to-yellow-400 text-white"
-              }`}
-          >
-            Get Started Now <ArrowRight size={20} />
-          </motion.span>
-        </Link>
+        {/* HERO CTA BUTTON WRAPPER */}
+        <div id="hero-cta-wrapper" className="relative z-10">
+          <Link href="/signup">
+            <motion.span
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              className={`inline-flex items-center gap-3 px-8 sm:px-10 py-4 rounded-3xl font-semibold shadow-2xl transition-all
+                ${theme === "dark"
+                  ? "bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black"
+                  : "bg-gradient-to-r from-green-500 via-green-400 to-yellow-400 text-white"
+                }`}
+            >
+              Get Started Now <ArrowRight size={20} />
+            </motion.span>
+          </Link>
+        </div>
       </div>
     </section>
   );
