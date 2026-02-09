@@ -11,7 +11,8 @@ export default function FinalCTASection() {
       <p className="mb-8 text-lg text-gray-600 dark:text-gray-400">
         Join millions of users who are already earning daily.
       </p>
-      <Link href="/signup">
+
+      <Link href="/signup" className="cta-observer inline-block">
         <motion.span
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.97 }}
