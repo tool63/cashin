@@ -1,7 +1,7 @@
 "use client";
 
-import { earningOptions } from "@/components/earning/earningOptions";
-import { SectionTitle } from "@/components/live/SmallComponents";
+import { earningOptions } from "@/components/homepage/earningOptions";
+import { SectionTitle } from "@/components/homepage/SmallComponents";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
