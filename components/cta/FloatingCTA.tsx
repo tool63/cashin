@@ -11,30 +11,24 @@ export default function FloatingCTA() {
   const text = "Start Earning Now!";
   const letters = text.split("");
 
-  /* ================= AUTO HIDE / SHOW ================= */
   useEffect(() => {
-    const heroWrapper = document.getElementById("hero-cta-wrapper");
-    if (!heroWrapper) return;
+    const heroCTA = document.querySelector<HTMLElement>("#hero-cta-button-wrapper");
+    if (!heroCTA) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        const isVisible = entries[0].isIntersecting;
-        setVisible(!isVisible); // hide floating CTA when hero CTA is visible
+        setVisible(!entries[0].isIntersecting);
       },
-      { threshold: 0.25 } // adjust threshold if needed
+      { threshold: 0.25 }
     );
 
-    observer.observe(heroWrapper);
+    observer.observe(heroCTA);
 
     return () => observer.disconnect();
   }, []);
 
-  /* ================= BOUNCE EVERY 10s ================= */
   useEffect(() => {
-    const interval = setInterval(() => {
-      setBounceKey((prev) => prev + 1);
-    }, 10000);
-
+    const interval = setInterval(() => setBounceKey((prev) => prev + 1), 10000);
     return () => clearInterval(interval);
   }, []);
 
