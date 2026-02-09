@@ -4,10 +4,16 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import TypingText from "@/components/typing/TypingText";
+import DarkLightToggle from "@/components/switch/DarkLightToggle";
 
 export default function HeroSection() {
   return (
-    <section className="py-32 bg-[#070A14] text-white">
+    <section className="relative py-32 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white">
+      <div className="absolute top-5 right-5">
+        {/* Dark/Light Toggle */}
+        <DarkLightToggle />
+      </div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 
         {/* HEADLINE */}
@@ -21,7 +27,7 @@ export default function HeroSection() {
         </div>
 
         {/* SUBTEXT */}
-        <p className="text-lg sm:text-xl md:text-2xl mb-12 text-gray-300">
+        <p className="text-lg sm:text-xl md:text-2xl mb-12 text-gray-600 dark:text-gray-300">
           Complete tasks, surveys, watch videos, and earn rewards securely from anywhere.
         </p>
 
