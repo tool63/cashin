@@ -7,7 +7,7 @@ import TypingText from "@/components/typing/TypingText";
 
 export default function HeroSection() {
   return (
-    <section className="py-16 bg-[#070A14] text-white"> {/* Reduced padding top/bottom */}
+    <section className="py-16 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 
         {/* HEADLINE */}
@@ -21,7 +21,7 @@ export default function HeroSection() {
         </div>
 
         {/* SUBTEXT */}
-        <p className="text-lg sm:text-xl md:text-2xl mb-8 text-gray-300">
+        <p className="text-lg sm:text-xl md:text-2xl mb-8 text-gray-600 dark:text-gray-300">
           Complete tasks, surveys, watch videos, and earn rewards securely from anywhere.
         </p>
 
