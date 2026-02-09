@@ -11,42 +11,30 @@ export default function FloatingCTA() {
   const text = "Start Earning Now!";
   const letters = text.split("");
 
+  /* ================= AUTO HIDE / SHOW ================= */
   useEffect(() => {
-    let observer: IntersectionObserver;
+    const ctaElements = Array.from(document.querySelectorAll(".cta-observer"));
+    if (!ctaElements.length) return;
 
-    const observeCTAs = () => {
-      // Find all CTA links whose text contains "get started" or "signup"
-      const ctas = Array.from(document.querySelectorAll("a")).filter((el) =>
-        el.textContent?.toLowerCase().includes("get started") ||
-        el.textContent?.toLowerCase().includes("signup")
-      ) as HTMLElement[];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const anyVisible = entries.some((entry) => entry.isIntersecting);
+        setVisible(!anyVisible);
+      },
+      { threshold: 0.25 } // 25% visible triggers hide
+    );
 
-      if (!ctas.length) return;
+    ctaElements.forEach((el) => observer.observe(el));
 
-      observer = new IntersectionObserver(
-        (entries) => {
-          // Hide floating CTA if ANY hero/final CTA is visible
-          const anyVisible = entries.some(entry => entry.isIntersecting);
-          setVisible(!anyVisible);
-        },
-        { threshold: 0 } // trigger when partially visible
-      );
-
-      ctas.forEach(cta => observer.observe(cta));
-    };
-
-    // Wait for next frame to ensure DOM is ready
-    const timer = setTimeout(observeCTAs, 100);
-
-    return () => {
-      clearTimeout(timer);
-      observer?.disconnect();
-    };
+    return () => observer.disconnect();
   }, []);
 
-  // Bounce animation every 10s
+  /* ================= BOUNCE EVERY 10s ================= */
   useEffect(() => {
-    const interval = setInterval(() => setBounceKey(prev => prev + 1), 10000);
+    const interval = setInterval(() => {
+      setBounceKey((prev) => prev + 1);
+    }, 10000);
+
     return () => clearInterval(interval);
   }, []);
 
