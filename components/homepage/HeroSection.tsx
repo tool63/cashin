@@ -7,12 +7,12 @@ import TypingText from "@/components/typing/TypingText";
 
 export default function HeroSection() {
   return (
-    <section className="relative bg-[#070A14] text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 flex flex-col items-center justify-center text-center">
-        
+    <section className="bg-[#070A14] text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 flex flex-col items-center justify-center text-center">
+
         {/* MAIN HEADLINE */}
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
-          Earn Real Money Online Instantly
+          Earn Real Money Online
         </h1>
 
         {/* TYPING TEXT */}
@@ -22,7 +22,7 @@ export default function HeroSection() {
 
         {/* SUBTEXT */}
         <p className="text-sm sm:text-base md:text-lg text-gray-300 mb-8 max-w-2xl">
-          Complete simple tasks, surveys, watch videos, and earn rewards securely.
+          Complete tasks, surveys, watch videos, and earn rewards securely from anywhere.
         </p>
 
         {/* CTA BUTTON */}
