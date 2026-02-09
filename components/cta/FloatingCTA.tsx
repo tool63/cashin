@@ -12,23 +12,29 @@ export default function FloatingCTA() {
   const letters = text.split("");
 
   useEffect(() => {
-    const heroCTA = document.querySelector<HTMLElement>("#hero-cta-button-wrapper");
-    if (!heroCTA) return;
+    const ctas = [
+      document.getElementById("hero-cta-1"),
+      document.getElementById("hero-cta-2")
+    ].filter(Boolean) as HTMLElement[];
+
+    if (!ctas.length) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        setVisible(!entries[0].isIntersecting);
+        // Hide floating CTA if any hero CTA is visible
+        const anyVisible = entries.some(entry => entry.isIntersecting);
+        setVisible(!anyVisible);
       },
-      { threshold: 0.25 }
+      { threshold: 0 } // trigger when partially visible
     );
 
-    observer.observe(heroCTA);
+    ctas.forEach(cta => observer.observe(cta));
 
     return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => setBounceKey((prev) => prev + 1), 10000);
+    const interval = setInterval(() => setBounceKey(prev => prev + 1), 10000);
     return () => clearInterval(interval);
   }, []);
 
