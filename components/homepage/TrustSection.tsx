@@ -1,6 +1,6 @@
 "use client";
 
-import { Stat } from "@/components/live/SmallComponents";
+import { Stat } from "@/components/homepage/SmallComponents";
 
 export default function TrustSection() {
   return (
