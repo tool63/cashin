@@ -1,4 +1,4 @@
-// components/live/SmallComponents.tsx
+// components/homepage/SmallComponents.tsx
 "use client"
 
 import { ReactNode } from "react"
