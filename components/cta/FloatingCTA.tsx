@@ -13,18 +13,18 @@ export default function FloatingCTA() {
 
   /* ================= AUTO HIDE / SHOW ================= */
   useEffect(() => {
-    const heroCTA = document.getElementById("hero-cta-button");
-    if (!heroCTA) return;
+    const heroWrapper = document.getElementById("hero-cta-wrapper");
+    if (!heroWrapper) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
         const isVisible = entries[0].isIntersecting;
         setVisible(!isVisible); // hide floating CTA when hero CTA is visible
       },
-      { threshold: 0.1 }
+      { threshold: 0.25 } // adjust threshold if needed
     );
 
-    observer.observe(heroCTA);
+    observer.observe(heroWrapper);
 
     return () => observer.disconnect();
   }, []);
