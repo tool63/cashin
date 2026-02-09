@@ -48,6 +48,7 @@ export default function HeroSection() {
         {/* HERO CTA BUTTON */}
         <Link href="/signup" className="relative z-10">
           <motion.span
+            id="hero-cta-button"  // <-- Important: ID for IntersectionObserver
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
             className={`inline-flex items-center gap-3 px-8 sm:px-10 py-4 rounded-3xl font-semibold shadow-2xl transition-all
@@ -59,7 +60,6 @@ export default function HeroSection() {
             Get Started Now <ArrowRight size={20} />
           </motion.span>
         </Link>
-
       </div>
     </section>
   );
