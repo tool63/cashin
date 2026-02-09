@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import TypingText from "@/components/typing/TypingText";
-import FloatingCTA from "@/components/cta/FloatingCTA"; // Keep floating CTA
+import FloatingCTA from "@/components/cta/FloatingCTA";
 
 export default function HeroSection() {
   return (
@@ -27,11 +27,11 @@ export default function HeroSection() {
         </p>
 
         {/* HERO CTA BUTTON */}
-        <Link href="/signup" className="hero-cta">
+        <Link href="/signup">
           <motion.span
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-10 py-4 rounded-xl font-semibold shadow-lg"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-10 py-4 rounded-xl font-semibold shadow-lg hero-cta"
           >
             Start Earning Now <ArrowRight />
           </motion.span>
