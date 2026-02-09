@@ -16,12 +16,12 @@ export default function HeroSection() {
 
   return (
     <section
-      className={`text-white transition-colors duration-500 ${
-        theme === "dark" ? "bg-[#070A14]" : "bg-gray-50 text-gray-900"
+      className={`transition-colors duration-500 ${
+        theme === "dark" ? "bg-[#070A14] text-white" : "bg-gray-50 text-gray-900"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 flex flex-col items-center justify-center text-center">
-
+        
         {/* MAIN HEADLINE */}
         <h1
           className={`text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 leading-tight ${
@@ -45,12 +45,12 @@ export default function HeroSection() {
           Complete tasks, surveys, watch videos, and earn rewards securely from anywhere.
         </p>
 
-        {/* CTA BUTTON */}
-        <Link href="/signup">
+        {/* HERO CTA BUTTON */}
+        <Link href="/signup" className="relative z-10">
           <motion.span
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className={`relative inline-flex items-center gap-3 px-8 sm:px-10 py-4 rounded-3xl font-semibold shadow-2xl transition-all
+            className={`inline-flex items-center gap-3 px-8 sm:px-10 py-4 rounded-3xl font-semibold shadow-2xl transition-all
               ${theme === "dark"
                 ? "bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black"
                 : "bg-gradient-to-r from-green-500 via-green-400 to-yellow-400 text-white"
