@@ -27,7 +27,7 @@ export default function HeroSection() {
         </p>
 
         {/* HERO CTA BUTTON */}
-        <Link href="/signup" className="cta-button inline-block">
+        <Link href="/signup" className="cta-observer inline-block">
           <motion.span
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
