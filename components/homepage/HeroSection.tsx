@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -10,6 +10,7 @@ import TypingText from "@/components/typing/TypingText";
 export default function HeroSection() {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const ctaRef = useRef<HTMLDivElement>(null); // Ref for IntersectionObserver
 
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
@@ -22,7 +23,7 @@ export default function HeroSection() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 flex flex-col items-center justify-center text-center">
         
-        {/* MAIN HEADLINE */}
+        {/* HEADLINE */}
         <h1
           className={`text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 leading-tight ${
             theme === "dark" ? "text-white" : "text-gray-900"
@@ -45,8 +46,8 @@ export default function HeroSection() {
           Complete tasks, surveys, watch videos, and earn rewards securely from anywhere.
         </p>
 
-        {/* HERO CTA BUTTON WRAPPER */}
-        <div id="hero-cta-wrapper" className="relative z-10">
+        {/* HERO CTA BUTTON WRAPPER with ref */}
+        <div ref={ctaRef} className="relative z-10">
           <Link href="/signup">
             <motion.span
               whileHover={{ scale: 1.05 }}
@@ -65,3 +66,6 @@ export default function HeroSection() {
     </section>
   );
 }
+
+export { HeroSection };
+export const heroCTARef = (ctaRef: any) => ctaRef;
