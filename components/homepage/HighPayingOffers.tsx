@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Flame, Zap } from "lucide-react";
 import { useTheme } from "next-themes";
-import GlobalLoading from "../loading/loading";
+import { TableSkeleton } from "../loading/loading"; // <- small skeleton
 
 /* ===================== TYPES ===================== */
 type Offer = {
@@ -19,7 +19,7 @@ type Offer = {
 type CategoryKey = "Surveys" | "App Installs" | "Play Games" | "Watch Videos";
 
 type HighPayingOffersProps = {
-  offers?: Record<CategoryKey, Offer[]>; // optional, fallback to internal OFFERS
+  offers?: Record<CategoryKey, Offer[]>;
 };
 
 /* ===================== FLAGS ===================== */
@@ -35,31 +35,10 @@ const COUNTRY_FLAG: Record<string, string> = {
 
 /* ===================== OFFERS DATA ===================== */
 const OFFERS: Record<string, Offer[]> = {
-  "Surveys": [
-    { id: 101, title: "Daily Opinion Survey", payout: 4, completions: 2500, country: "US", badgeHigh: true, badgeFast: true },
-    { id: 102, title: "Market Research Survey", payout: 3.5, completions: 2200, country: "UK", badgeHigh: true, badgeFast: false },
-    { id: 103, title: "Product Feedback Survey", payout: 4.5, completions: 2800, country: "CA", badgeHigh: true, badgeFast: true },
-    { id: 104, title: "Customer Satisfaction Survey", payout: 5, completions: 3000, country: "AU", badgeHigh: true, badgeFast: true },
-    { id: 105, title: "Gaming Experience Survey", payout: 3.5, completions: 2400, country: "DE", badgeHigh: false, badgeFast: true },
-    { id: 106, title: "App Review Survey", payout: 4, completions: 2600, country: "FR", badgeHigh: true, badgeFast: true },
-    { id: 107, title: "Lifestyle Survey Challenge", payout: 3, completions: 2100, country: "IN", badgeHigh: false, badgeFast: true },
-    { id: 108, title: "Tech Product Survey", payout: 5, completions: 3200, country: "US", badgeHigh: true, badgeFast: true },
-    { id: 109, title: "Health & Fitness Survey", payout: 4, completions: 2700, country: "UK", badgeHigh: false, badgeFast: true },
-    { id: 110, title: "Movie Feedback Survey", payout: 3.5, completions: 2500, country: "CA", badgeHigh: true, badgeFast: false },
-    { id: 111, title: "Music Preference Survey", payout: 4.5, completions: 2800, country: "AU", badgeHigh: true, badgeFast: true },
-    { id: 112, title: "Travel Experience Survey", payout: 5, completions: 3000, country: "DE", badgeHigh: true, badgeFast: true },
-    { id: 113, title: "Food & Beverage Survey", payout: 3.5, completions: 2300, country: "FR", badgeHigh: false, badgeFast: true },
-    { id: 114, title: "Education Feedback Survey", payout: 4, completions: 2600, country: "IN", badgeHigh: true, badgeFast: true },
-    { id: 115, title: "Fashion Trend Survey", payout: 3, completions: 2000, country: "US", badgeHigh: false, badgeFast: true },
-    { id: 116, title: "Mobile App Feedback Survey", payout: 5, completions: 3100, country: "UK", badgeHigh: true, badgeFast: true },
-    { id: 117, title: "Gaming App Survey", payout: 4.5, completions: 2900, country: "CA", badgeHigh: true, badgeFast: true },
-    { id: 118, title: "Home Product Survey", payout: 3.5, completions: 2400, country: "AU", badgeHigh: false, badgeFast: true },
-    { id: 119, title: "Streaming Service Survey", payout: 4, completions: 2700, country: "DE", badgeHigh: true, badgeFast: true },
-    { id: 120, title: "Social Media Survey", payout: 5, completions: 3000, country: "FR", badgeHigh: true, badgeFast: true }
-  ],
-  "App Installs": [ /* keep your original data here */ ],
-  "Watch Videos": [ /* keep your original data here */ ],
-  "Play Games": [ /* keep your original data here */ ]
+  "Surveys": [ /* ... keep your survey offers ... */ ],
+  "App Installs": [ /* ... keep your app install offers ... */ ],
+  "Watch Videos": [ /* ... keep your watch video offers ... */ ],
+  "Play Games": [ /* ... keep your play games offers ... */ ]
 };
 
 /* ===================== COMPONENT ===================== */
@@ -68,7 +47,6 @@ export default function HighPayingOffers({ offers: propOffers }: HighPayingOffer
   const [loading, setLoading] = useState(true);
   const { resolvedTheme } = useTheme();
 
-  // use dynamic offers if provided, otherwise fallback to default OFFERS
   const offers = useMemo(() => propOffers?.[category] ?? OFFERS[category], [category, propOffers]);
 
   useEffect(() => {
@@ -111,7 +89,7 @@ export default function HighPayingOffers({ offers: propOffers }: HighPayingOffer
 
           {/* LOADING */}
           {loading ? (
-            <GlobalLoading />
+            <TableSkeleton rows={10} /> // <- table loader
           ) : (
             offers.map(offer => (
               <div
@@ -120,20 +98,13 @@ export default function HighPayingOffers({ offers: propOffers }: HighPayingOffer
                   resolvedTheme === "dark" ? "bg-[#0B0E1A]" : "bg-white"
                 }`}
               >
-                {/* Offer Name + Badges */}
                 <div className="flex items-center gap-2 text-left">
                   {offer.title}
                   {offer.badgeHigh && <Flame className="text-yellow-400" size={16} />}
                   {offer.badgeFast && <Zap className="text-green-400" size={16} />}
                 </div>
-
-                {/* Country */}
                 <div className="text-center">{COUNTRY_FLAG[offer.country]}</div>
-
-                {/* Completions */}
                 <div className="text-center">{offer.completions.toLocaleString()}</div>
-
-                {/* Payout */}
                 <div className="text-right">${offer.payout.toFixed(2)}</div>
               </div>
             ))
