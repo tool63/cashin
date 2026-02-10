@@ -15,54 +15,60 @@ type Offer = {
   href: string;
 };
 
-/* ================= DATA (API READY) ================= */
+/* ================= REALISTIC OFFER DATA ================= */
 const offers: Offer[] = [
-  { id: 1, name: "Opinion Rewards Survey", category: "Surveys", country: "US", completions: 5882, payout: 5, href: "#" },
-  { id: 2, name: "Crypto Knowledge Survey", category: "Surveys", country: "GB", completions: 8120, payout: 4.5, href: "#" },
+  // ===== SURVEYS =====
+  { id: 1, name: "Consumer Opinion Study", category: "Surveys", country: "US", completions: 8421, payout: 4.5, href: "#" },
+  { id: 2, name: "Daily Lifestyle Survey", category: "Surveys", country: "US", completions: 5310, payout: 3.8, href: "#" },
+  { id: 3, name: "Shopping Behavior Survey", category: "Surveys", country: "GB", completions: 6922, payout: 5, href: "#" },
+  { id: 4, name: "Tech Usage Feedback", category: "Surveys", country: "CA", completions: 4102, payout: 4.2, href: "#" },
+  { id: 5, name: "Finance Awareness Survey", category: "Surveys", country: "AU", completions: 2871, payout: 6, href: "#" },
 
-  { id: 3, name: "Raid Shadow Legends", category: "Play Games", country: "CA", completions: 2300, payout: 8, href: "#" },
-  { id: 4, name: "Coin Master Level Up", category: "Play Games", country: "US", completions: 1800, payout: 7, href: "#" },
+  // ===== APP INSTALLS =====
+  { id: 20, name: "Cashback Rewards App", category: "App Installs", country: "US", completions: 3650, payout: 5.5, href: "#" },
+  { id: 21, name: "Finance Tracker App", category: "App Installs", country: "US", completions: 2880, payout: 6.2, href: "#" },
+  { id: 22, name: "Crypto Wallet Installation", category: "App Installs", country: "GB", completions: 1900, payout: 7.5, href: "#" },
+  { id: 23, name: "Shopping Deals App", category: "App Installs", country: "CA", completions: 4320, payout: 4.8, href: "#" },
+  { id: 24, name: "Mobile Banking App", category: "App Installs", country: "AU", completions: 1540, payout: 8, href: "#" },
 
-  { id: 5, name: "Finance App Install", category: "App Installs", country: "AU", completions: 4200, payout: 6, href: "#" },
-  { id: 6, name: "Shopping Cashback App", category: "App Installs", country: "US", completions: 3500, payout: 5.5, href: "#" },
+  // ===== PLAY GAMES =====
+  { id: 40, name: "Raid Shadow Legends – Reach Level 10", category: "Play Games", country: "US", completions: 2150, payout: 8.5, href: "#" },
+  { id: 41, name: "Coin Master – Village 5", category: "Play Games", country: "US", completions: 1840, payout: 7.2, href: "#" },
+  { id: 42, name: "State of Survival – HQ Level 8", category: "Play Games", country: "GB", completions: 1320, payout: 9, href: "#" },
+  { id: 43, name: "Merge Dragons – Complete Challenge", category: "Play Games", country: "CA", completions: 2600, payout: 6.5, href: "#" },
+  { id: 44, name: "AFK Arena – Unlock Hero", category: "Play Games", country: "AU", completions: 1980, payout: 7.8, href: "#" },
 
-  { id: 7, name: "Streaming Free Trial", category: "Watch Videos", country: "US", completions: 900, payout: 10, href: "#" },
-  { id: 8, name: "Ad Engagement Task", category: "Watch Videos", country: "IN", completions: 12000, payout: 2, href: "#" },
+  // ===== WATCH VIDEOS =====
+  { id: 60, name: "Ad Engagement Session", category: "Watch Videos", country: "US", completions: 12200, payout: 2.2, href: "#" },
+  { id: 61, name: "Brand Video Feedback", category: "Watch Videos", country: "IN", completions: 14500, payout: 1.8, href: "#" },
+  { id: 62, name: "Short Clip Review", category: "Watch Videos", country: "GB", completions: 9800, payout: 2.5, href: "#" },
+  { id: 63, name: "Product Ad Watch Task", category: "Watch Videos", country: "CA", completions: 8700, payout: 2.9, href: "#" },
+  { id: 64, name: "Sponsored Video Engagement", category: "Watch Videos", country: "AU", completions: 6400, payout: 3.1, href: "#" },
 ];
 
-/* ================= CATEGORIES ================= */
-const categories = [
-  "All",
-  "Surveys",
-  "App Installs",
-  "Play Games",
-  "Watch Videos",
-];
+/* ================= CATEGORIES (NO ALL) ================= */
+const categories = ["Surveys", "App Installs", "Play Games", "Watch Videos"];
 
 /* ================= COMPONENT ================= */
 export default function HighPayingOffers() {
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [activeCategory, setActiveCategory] = useState("Surveys");
   const [country, setCountry] = useState("ALL");
   const [loading, setLoading] = useState(true);
 
-  /* ===== AUTO COUNTRY ===== */
+  /* ===== AUTO COUNTRY DETECT ===== */
   useEffect(() => {
     const locale = navigator.language.split("-")[1];
     if (locale) setCountry(locale.toUpperCase());
     setTimeout(() => setLoading(false), 800);
   }, []);
 
-  /* ===== FILTER ENGINE ===== */
+  /* ===== FILTER ===== */
   const filteredOffers = useMemo(() => {
     let data = country === "ALL"
       ? offers
       : offers.filter(o => o.country === country);
 
-    if (activeCategory !== "All") {
-      data = data.filter(o => o.category === activeCategory);
-    }
-
-    return data;
+    return data.filter(o => o.category === activeCategory);
   }, [activeCategory, country]);
 
   return (
@@ -70,18 +76,18 @@ export default function HighPayingOffers() {
       <div className="max-w-7xl mx-auto px-5">
 
         {/* HEADER */}
-        <div className="mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-white text-center">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-white">
             High Paying Offers
           </h2>
-          <p className="text-gray-400 text-sm text-center mt-1">
-            Choose a category and start earning instantly
+          <p className="text-gray-400 text-sm mt-1">
+            Hand-picked, high-converting offers by category
           </p>
         </div>
 
         {/* CATEGORY FILTER */}
         <div className="flex flex-wrap justify-center gap-3 mb-8">
-          {categories.map((cat) => (
+          {categories.map(cat => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
@@ -119,7 +125,7 @@ export default function HighPayingOffers() {
                 ))}
 
               {!loading &&
-                filteredOffers.map((offer) => {
+                filteredOffers.map(offer => {
                   const high = offer.payout >= 7;
                   const fast = offer.completions <= 2000;
 
