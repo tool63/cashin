@@ -5,112 +5,129 @@ import Link from "next/link";
 
 type Offer = {
   id: number;
-  title: string;
+  name: string;
   category: string;
-  amount: string;      // payout
-  flag: string;
-  completion: string;  // completion in $
+  country: string;
+  payout: string;
+  completion: string;
   href: string;
 };
 
-// 20 offers per category
-const offersData: Offer[] = [
-  // === Surveys ===
-  { id: 1, title: "Survey A", category: "Surveys", amount: "$5", flag: "🇺🇸", completion: "$50", href: "/surveys/a" },
-  { id: 2, title: "Survey B", category: "Surveys", amount: "$4", flag: "🇬🇧", completion: "$40", href: "/surveys/b" },
-  { id: 3, title: "Survey C", category: "Surveys", amount: "$6", flag: "🇨🇦", completion: "$60", href: "/surveys/c" },
-  { id: 4, title: "Survey D", category: "Surveys", amount: "$5", flag: "🇦🇺", completion: "$55", href: "/surveys/d" },
-  { id: 5, title: "Survey E", category: "Surveys", amount: "$7", flag: "🇮🇳", completion: "$70", href: "/surveys/e" },
-  { id: 6, title: "Survey F", category: "Surveys", amount: "$8", flag: "🇺🇸", completion: "$80", href: "/surveys/f" },
-  { id: 7, title: "Survey G", category: "Surveys", amount: "$4", flag: "🇬🇧", completion: "$45", href: "/surveys/g" },
-  { id: 8, title: "Survey H", category: "Surveys", amount: "$5", flag: "🇨🇦", completion: "$50", href: "/surveys/h" },
-  { id: 9, title: "Survey I", category: "Surveys", amount: "$6", flag: "🇦🇺", completion: "$65", href: "/surveys/i" },
-  { id: 10, title: "Survey J", category: "Surveys", amount: "$7", flag: "🇮🇳", completion: "$75", href: "/surveys/j" },
-  { id: 11, title: "Survey K", category: "Surveys", amount: "$5", flag: "🇺🇸", completion: "$55", href: "/surveys/k" },
-  { id: 12, title: "Survey L", category: "Surveys", amount: "$6", flag: "🇬🇧", completion: "$60", href: "/surveys/l" },
-  { id: 13, title: "Survey M", category: "Surveys", amount: "$4", flag: "🇨🇦", completion: "$42", href: "/surveys/m" },
-  { id: 14, title: "Survey N", category: "Surveys", amount: "$7", flag: "🇦🇺", completion: "$70", href: "/surveys/n" },
-  { id: 15, title: "Survey O", category: "Surveys", amount: "$5", flag: "🇮🇳", completion: "$50", href: "/surveys/o" },
-  { id: 16, title: "Survey P", category: "Surveys", amount: "$6", flag: "🇺🇸", completion: "$65", href: "/surveys/p" },
-  { id: 17, title: "Survey Q", category: "Surveys", amount: "$4", flag: "🇬🇧", completion: "$45", href: "/surveys/q" },
-  { id: 18, title: "Survey R", category: "Surveys", amount: "$7", flag: "🇨🇦", completion: "$70", href: "/surveys/r" },
-  { id: 19, title: "Survey S", category: "Surveys", amount: "$5", flag: "🇦🇺", completion: "$55", href: "/surveys/s" },
-  { id: 20, title: "Survey T", category: "Surveys", amount: "$6", flag: "🇮🇳", completion: "$60", href: "/surveys/t" },
-
-  // === Play Games ===
-  { id: 21, title: "Game A", category: "Play Games", amount: "$5", flag: "🇺🇸", completion: "$50", href: "/play-games/a" },
-  { id: 22, title: "Game B", category: "Play Games", amount: "$4", flag: "🇬🇧", completion: "$40", href: "/play-games/b" },
-  { id: 23, title: "Game C", category: "Play Games", amount: "$6", flag: "🇨🇦", completion: "$60", href: "/play-games/c" },
-  { id: 24, title: "Game D", category: "Play Games", amount: "$5", flag: "🇦🇺", completion: "$55", href: "/play-games/d" },
-  { id: 25, title: "Game E", category: "Play Games", amount: "$7", flag: "🇮🇳", completion: "$70", href: "/play-games/e" },
-  { id: 26, title: "Game F", category: "Play Games", amount: "$8", flag: "🇺🇸", completion: "$80", href: "/play-games/f" },
-  { id: 27, title: "Game G", category: "Play Games", amount: "$4", flag: "🇬🇧", completion: "$45", href: "/play-games/g" },
-  { id: 28, title: "Game H", category: "Play Games", amount: "$5", flag: "🇨🇦", completion: "$50", href: "/play-games/h" },
-  { id: 29, title: "Game I", category: "Play Games", amount: "$6", flag: "🇦🇺", completion: "$65", href: "/play-games/i" },
-  { id: 30, title: "Game J", category: "Play Games", amount: "$7", flag: "🇮🇳", completion: "$75", href: "/play-games/j" },
-  { id: 31, title: "Game K", category: "Play Games", amount: "$5", flag: "🇺🇸", completion: "$55", href: "/play-games/k" },
-  { id: 32, title: "Game L", category: "Play Games", amount: "$6", flag: "🇬🇧", completion: "$60", href: "/play-games/l" },
-  { id: 33, title: "Game M", category: "Play Games", amount: "$4", flag: "🇨🇦", completion: "$42", href: "/play-games/m" },
-  { id: 34, title: "Game N", category: "Play Games", amount: "$7", flag: "🇦🇺", completion: "$70", href: "/play-games/n" },
-  { id: 35, title: "Game O", category: "Play Games", amount: "$5", flag: "🇮🇳", completion: "$50", href: "/play-games/o" },
-  { id: 36, title: "Game P", category: "Play Games", amount: "$6", flag: "🇺🇸", completion: "$65", href: "/play-games/p" },
-  { id: 37, title: "Game Q", category: "Play Games", amount: "$4", flag: "🇬🇧", completion: "$45", href: "/play-games/q" },
-  { id: 38, title: "Game R", category: "Play Games", amount: "$7", flag: "🇨🇦", completion: "$70", href: "/play-games/r" },
-  { id: 39, title: "Game S", category: "Play Games", amount: "$5", flag: "🇦🇺", completion: "$55", href: "/play-games/s" },
-  { id: 40, title: "Game T", category: "Play Games", amount: "$6", flag: "🇮🇳", completion: "$60", href: "/play-games/t" },
-
-  // You can continue similarly for "Install Apps", "Trial Offers", "Watch Videos"…
+const offers: Offer[] = [
+  { id: 1, name: "Survey A", category: "Surveys", country: "🇺🇸", payout: "$5.00", completion: "$50", href: "/offers/1" },
+  { id: 2, name: "Survey B", category: "Surveys", country: "🇬🇧", payout: "$4.50", completion: "$45", href: "/offers/2" },
+  { id: 3, name: "Game A", category: "Play Games", country: "🇨🇦", payout: "$8.00", completion: "$80", href: "/offers/3" },
+  { id: 4, name: "App Install A", category: "Install Apps", country: "🇦🇺", payout: "$6.00", completion: "$60", href: "/offers/4" },
+  { id: 5, name: "Trial A", category: "Trial Offers", country: "🇺🇸", payout: "$10.00", completion: "$100", href: "/offers/5" },
+  { id: 6, name: "Video A", category: "Watch Videos", country: "🇮🇳", payout: "$2.00", completion: "$20", href: "/offers/6" },
+  // 👉 you can extend this list freely (table auto-scales)
 ];
 
-const categories = ["All", "Surveys", "Play Games", "Install Apps", "Trial Offers", "Watch Videos"];
+const categories = [
+  "Surveys",
+  "Play Games",
+  "Install Apps",
+  "Trial Offers",
+  "Watch Videos",
+];
 
-export default function HighPayingOffers() {
-  const [activeCategory, setActiveCategory] = useState("All");
+export default function HighPayingOffersTable() {
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
-  const filteredOffers =
-    activeCategory === "All"
-      ? offersData
-      : offersData.filter((offer) => offer.category === activeCategory);
+  const filteredOffers = activeCategory
+    ? offers.filter((o) => o.category === activeCategory)
+    : offers;
 
   return (
-    <section className="py-16 bg-[#0f111b] text-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="bg-[#0b0f1a] py-16 text-white">
+      <div className="max-w-7xl mx-auto px-5">
 
-        <h2 className="text-3xl md:text-4xl font-extrabold mb-8 text-center">High Paying Offers</h2>
+        {/* TITLE */}
+        <div className="text-center mb-10">
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">
+            High Paying Offers
+          </h2>
+          <p className="text-gray-400 mt-2 text-sm md:text-base">
+            Complete offers and earn real rewards instantly
+          </p>
+        </div>
 
-        {/* CATEGORY TABS */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
+        {/* CATEGORY FILTER */}
+        <div className="flex flex-wrap justify-center gap-3 mb-8">
           {categories.map((cat) => (
             <button
               key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-5 py-2 rounded-full font-semibold transition-all duration-300 ${
-                activeCategory === cat
-                  ? "bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black shadow-lg"
-                  : "bg-white/10 hover:bg-white/20 text-white"
-              }`}
+              onClick={() =>
+                setActiveCategory(activeCategory === cat ? null : cat)
+              }
+              className={`px-5 py-2 rounded-full text-sm font-semibold transition-all
+                ${
+                  activeCategory === cat
+                    ? "bg-gradient-to-r from-yellow-400 to-green-500 text-black shadow-lg"
+                    : "bg-white/10 hover:bg-white/20 text-white"
+                }`}
             >
               {cat}
             </button>
           ))}
         </div>
 
-        {/* OFFERS GRID */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-          {filteredOffers.map((offer) => (
-            <Link
-              key={offer.id}
-              href={offer.href}
-              className="flex flex-col items-center text-center p-5 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all shadow-md"
-            >
-              <div className="text-2xl mb-2">{offer.flag}</div>
-              <h3 className="text-lg font-semibold mb-1">{offer.title}</h3>
-              <p className="text-sm text-gray-300 mb-2">Completion: {offer.completion}</p>
-              <span className="text-base font-bold bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-3 py-1 rounded-full">
-                {offer.amount}
-              </span>
-            </Link>
-          ))}
+        {/* TABLE */}
+        <div className="relative overflow-x-auto rounded-2xl border border-white/10 bg-[#0f1424] shadow-xl">
+          <table className="w-full min-w-[700px] text-left">
+            <thead className="bg-[#12182b] sticky top-0 z-10">
+              <tr className="text-gray-300 text-sm uppercase">
+                <th className="px-6 py-4">Offer</th>
+                <th className="px-6 py-4">Category</th>
+                <th className="px-6 py-4">Country</th>
+                <th className="px-6 py-4">Completion</th>
+                <th className="px-6 py-4 text-right">Payout</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {filteredOffers.map((offer) => (
+                <tr
+                  key={offer.id}
+                  className="border-t border-white/5 hover:bg-white/5 transition"
+                >
+                  <td className="px-6 py-4 font-medium">
+                    <Link
+                      href={offer.href}
+                      className="hover:underline text-white"
+                    >
+                      {offer.name}
+                    </Link>
+                  </td>
+                  <td className="px-6 py-4 text-gray-300">
+                    {offer.category}
+                  </td>
+                  <td className="px-6 py-4 text-xl">
+                    {offer.country}
+                  </td>
+                  <td className="px-6 py-4 text-gray-300">
+                    {offer.completion}
+                  </td>
+                  <td className="px-6 py-4 text-right">
+                    <span className="inline-block px-3 py-1 rounded-full font-bold text-black bg-gradient-to-r from-yellow-400 to-green-500">
+                      {offer.payout}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+
+              {filteredOffers.length === 0 && (
+                <tr>
+                  <td
+                    colSpan={5}
+                    className="px-6 py-10 text-center text-gray-400"
+                  >
+                    No offers available in this category
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
 
       </div>
