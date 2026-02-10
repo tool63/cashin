@@ -177,10 +177,10 @@ export default function HighPayingOffers() {
         <div className="overflow-y-auto h-full">
           {/* TABLE HEADER */}
           <div className="grid grid-cols-4 gap-4 px-4 py-2 font-semibold sticky top-0 z-10 bg-white dark:bg-[#070A14] border-b">
-            <span>Offer</span>
-            <span>Payout</span>
-            <span>Completions</span>
-            <span>Country</span>
+            <span className="text-left">Offer</span>
+            <span className="text-center">Country</span>
+            <span className="text-center">Completions</span>
+            <span className="text-right">Payout</span>
           </div>
 
           {loading
@@ -192,20 +192,21 @@ export default function HighPayingOffers() {
                     resolvedTheme === "dark" ? "bg-[#0B0E1A]" : "bg-white"
                   }`}
                 >
-                  <div className="flex items-center gap-2">
+                  {/* Offer Name + Badges */}
+                  <div className="flex items-center gap-2 text-left">
                     {offer.title}
                     {offer.badgeHigh && <Flame className="text-yellow-400" size={16} />}
                     {offer.badgeFast && <Zap className="text-green-400" size={16} />}
                   </div>
-                 
-            
-            
-                  <span>{COUNTRY_FLAG[offer.country]}</span>
-                  <span>{offer.completions.toLocaleString()}</span>
-                  <span>${offer.payout.toFixed(2)}</span>
-                
-            
-            
+
+                  {/* Country */}
+                  <div className="text-center">{COUNTRY_FLAG[offer.country]}</div>
+
+                  {/* Completions */}
+                  <div className="text-center">{offer.completions.toLocaleString()}</div>
+
+                  {/* Payout */}
+                  <div className="text-right">${offer.payout.toFixed(2)}</div>
                 </div>
               ))}
         </div>
@@ -213,3 +214,4 @@ export default function HighPayingOffers() {
     </section>
   );
 }
+
