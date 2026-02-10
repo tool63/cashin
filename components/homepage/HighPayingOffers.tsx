@@ -59,7 +59,7 @@ const OFFERS: Record<CategoryKey, Offer[]> = {
   "App Installs": Array.from({ length: 20 }, (_, i) => ({
     id: 2000 + i + 1,
     title: `Install App ${i + 1} - Real App Example`,
-    payout: Math.round(Math.random() * 5 + 5), // 5-10$
+    payout: Math.round(Math.random() * 5 + 5),
     completions: Math.floor(Math.random() * 2000 + 1000),
     country: ["US", "UK", "CA", "AU", "DE", "FR", "IN"][i % 7] as Offer["country"],
     badgeHigh: i % 2 === 0,
@@ -133,33 +133,37 @@ export default function HighPayingOffers() {
       </div>
 
       {/* OFFERS TABLE */}
-      <div className="overflow-y-auto max-h-[550px] border rounded-xl shadow-lg">
-        <div className="grid grid-cols-4 gap-4 px-4 py-2 font-semibold sticky top-0 z-10 bg-white dark:bg-[#070A14] border-b">
-          <span>Offer</span>
-          <span>Payout</span>
-          <span>Completions</span>
-          <span>Country</span>
-        </div>
+      <div className="relative border rounded-xl shadow-lg h-[550px] overflow-hidden">
+        {/* TABLE SCROLL */}
+        <div className="overflow-y-auto h-full">
+          {/* TABLE HEADER */}
+          <div className="grid grid-cols-4 gap-4 px-4 py-2 font-semibold sticky top-0 z-10 bg-white dark:bg-[#070A14] border-b">
+            <span>Offer</span>
+            <span>Payout</span>
+            <span>Completions</span>
+            <span>Country</span>
+          </div>
 
-        {loading
-          ? Array.from({ length: 10 }).map((_, i) => <SkeletonRow key={i} />)
-          : offers.map((offer) => (
-              <div
-                key={offer.id}
-                className={`grid grid-cols-4 gap-4 px-4 py-2 border-b last:border-b-0 ${
-                  resolvedTheme === "dark" ? "bg-[#0B0E1A]" : "bg-white"
-                }`}
-              >
-                <div className="flex items-center gap-2">
-                  {offer.title}
-                  {offer.badgeHigh && <Flame className="text-yellow-400" size={16} />}
-                  {offer.badgeFast && <Zap className="text-green-400" size={16} />}
+          {loading
+            ? Array.from({ length: 10 }).map((_, i) => <SkeletonRow key={i} />)
+            : offers.map((offer) => (
+                <div
+                  key={offer.id}
+                  className={`grid grid-cols-4 gap-4 px-4 py-2 border-b last:border-b-0 ${
+                    resolvedTheme === "dark" ? "bg-[#0B0E1A]" : "bg-white"
+                  }`}
+                >
+                  <div className="flex items-center gap-2">
+                    {offer.title}
+                    {offer.badgeHigh && <Flame className="text-yellow-400" size={16} />}
+                    {offer.badgeFast && <Zap className="text-green-400" size={16} />}
+                  </div>
+                  <span>${offer.payout.toFixed(2)}</span>
+                  <span>{offer.completions.toLocaleString()}</span>
+                  <span>{COUNTRY_FLAG[offer.country]}</span>
                 </div>
-                <span>${offer.payout.toFixed(2)}</span>
-                <span>{offer.completions.toLocaleString()}</span>
-                <span>{COUNTRY_FLAG[offer.country]}</span>
-              </div>
-            ))}
+              ))}
+        </div>
       </div>
     </section>
   );
