@@ -25,7 +25,7 @@ function useUserCountry() {
   const [country, setCountry] = useState<"US" | "CA" | "UK" | "AU">("US");
 
   useEffect(() => {
-    // API-ready (Geo IP)
+    // API-ready GeoIP hook
     setCountry("US");
   }, []);
 
@@ -42,85 +42,125 @@ const COUNTRY_FLAG: Record<string, string> = {
 
 /* ===================== OFFER DATA ===================== */
 const OFFERS: Record<CategoryKey, Offer[]> = {
-  Surveys: Array.from({ length: 20 }).map((_, i) => ({
+  Surveys: [
+    "Financial Habits Survey",
+    "Online Shopping Behavior",
+    "Crypto Awareness Research",
+    "Streaming Services Feedback",
+    "Mobile Usage Study",
+    "AI Tools Opinion Survey",
+    "Banking Experience Review",
+    "Remote Work Lifestyle",
+    "Digital Payments Research",
+    "Health & Fitness Survey",
+    "Gaming Preferences Study",
+    "E-commerce Checkout Review",
+    "Brand Recognition Survey",
+    "Food Delivery Feedback",
+    "Social Media Trends",
+    "Travel Booking Experience",
+    "Subscription Services Study",
+    "Ad Personalization Survey",
+    "Smartphone Usage Report",
+    "Customer Loyalty Research",
+  ].map((title, i) => ({
     id: 1000 + i,
-    title: [
-      "Financial Habits Survey",
-      "Online Shopping Experience",
-      "Crypto Awareness Survey",
-      "Mobile Usage Study",
-      "Brand Feedback Research",
-      "Streaming Preferences",
-      "Remote Work Study",
-      "AI Tools Opinion",
-      "Lifestyle Survey",
-      "Digital Payments Study",
-    ][i % 10],
+    title,
     payout: 4 + (i % 4),
-    completions: 3200 + i * 170,
+    completions: 2800 + i * 210,
     country: ["US", "CA", "UK", "AU"][i % 4] as any,
     badgeHigh: i % 3 === 0,
     badgeFast: true,
   })),
 
-  "App Installs": Array.from({ length: 20 }).map((_, i) => ({
+  "App Installs": [
+    "Finance Tracker App Install",
+    "Secure VPN Browser Setup",
+    "Cashback Shopping App",
+    "Crypto Wallet Registration",
+    "AI Photo Editor Install",
+    "Cloud Storage Trial App",
+    "Password Manager Setup",
+    "Stock Trading Simulator",
+    "Fitness Tracking App",
+    "Personal Budget Planner",
+    "Language Learning App",
+    "Mobile Security Scanner",
+    "Expense Manager Install",
+    "Smart Notes App",
+    "Weather Forecast Pro",
+    "Music Streaming Trial",
+    "Meditation App Setup",
+    "File Cleaner Utility",
+    "QR Scanner Pro App",
+    "Travel Planner App",
+  ].map((title, i) => ({
     id: 2000 + i,
-    title: [
-      "Finance Tracker App",
-      "VPN Secure Browser",
-      "Cashback Shopping App",
-      "Crypto Wallet Setup",
-      "Fitness Tracker App",
-      "Password Manager",
-      "Stock Simulator App",
-      "Budget Planner",
-      "Cloud Storage Trial",
-      "AI Photo Editor",
-    ][i % 10],
+    title,
     payout: 6 + (i % 5),
-    completions: 1500 + i * 130,
+    completions: 1400 + i * 160,
     country: ["US", "CA", "UK", "AU"][i % 4] as any,
     badgeHigh: true,
     badgeFast: i % 2 === 0,
   })),
 
-  "Play Games": Array.from({ length: 20 }).map((_, i) => ({
+  "Play Games": [
+    "Reach Level 10 – Strategy Game",
+    "Complete Tutorial – RPG",
+    "Win 3 PvP Matches",
+    "Idle Tycoon Level 5",
+    "Puzzle Game Stage 20",
+    "City Builder Level 8",
+    "Merge Game Chapter 3",
+    "Racing License A",
+    "Adventure Quest Start",
+    "Battle Pass Trial",
+    "Farm Simulator Level 6",
+    "Fantasy RPG First Boss",
+    "Tower Defense Wave 15",
+    "Survival Game Day 3",
+    "Card Game Ranked Match",
+    "Arcade High Score Challenge",
+    "Idle Miner Level 7",
+    "Match-3 Level 30",
+    "MMO Character Creation",
+    "Strategy Campaign Mission 5",
+  ].map((title, i) => ({
     id: 3000 + i,
-    title: [
-      "Reach Level 10 – Strategy Game",
-      "Complete Tutorial – RPG Game",
-      "Win 3 PvP Matches",
-      "Idle Tycoon Level 5",
-      "Puzzle Game Stage 20",
-      "Racing License A",
-      "City Builder Level 8",
-      "Merge Game Chapter 3",
-      "Battle Pass Trial",
-      "Adventure Quest Start",
-    ][i % 10],
+    title,
     payout: 8 + (i % 6),
-    completions: 700 + i * 95,
+    completions: 650 + i * 110,
     country: ["US", "CA", "UK", "AU"][i % 4] as any,
     badgeHigh: true,
     badgeFast: true,
   })),
 
-  "Watch Videos": Array.from({ length: 20 }).map((_, i) => ({
+  "Watch Videos": [
+    "Watch Sponsored Video Ads",
+    "Short Promo Clips Playlist",
+    "Tech Product Video Review",
+    "Mobile Game Trailer Watch",
+    "Brand Awareness Campaign",
+    "Streaming Preview Videos",
+    "Entertainment Ad Session",
+    "Finance Promo Videos",
+    "App Feature Walkthrough",
+    "Daily Video Reward",
+    "Video Ads Marathon",
+    "Movie Trailer Collection",
+    "Social Media Promo Clips",
+    "Gaming Ads Playlist",
+    "Lifestyle Brand Videos",
+    "Product Launch Teasers",
+    "E-commerce Video Ads",
+    "Travel Destination Clips",
+    "Automotive Promo Videos",
+    "Startup Pitch Videos",
+  ].map((title, i) => ({
     id: 4000 + i,
-    title: [
-      "Watch Sponsored Clips",
-      "Short Ads Playlist",
-      "Brand Video Review",
-      "Trailer Watch Reward",
-      "Promo Video Series",
-      "Tech Ad Campaign",
-      "Mobile Ads Watch",
-      "Streaming Preview",
-      "Daily Video Bonus",
-      "Ad Viewing Session",
-    ][i % 10],
+    title,
     payout: 2 + (i % 3),
-    completions: 7800 + i * 300,
+    completions: 7200 + i * 350,
     country: ["US", "CA", "UK", "AU"][i % 4] as any,
     badgeHigh: i % 4 === 0,
     badgeFast: true,
@@ -201,11 +241,9 @@ export default function HighPayingOffers() {
 
           {/* BODY */}
           {loading ? (
-            <>
-              {Array.from({ length: 6 }).map((_, i) => (
-                <SkeletonRow key={i} />
-              ))}
-            </>
+            Array.from({ length: 6 }).map((_, i) => (
+              <SkeletonRow key={i} />
+            ))
           ) : (
             offers.map((offer) => (
               <div
