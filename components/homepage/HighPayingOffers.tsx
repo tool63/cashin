@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState } from "react";
 import { Flame, Zap } from "lucide-react";
 import { useTheme } from "next-themes";
 
-/* ===================== TYPES ===================== */
 type Offer = {
   id: number;
   title: string;
@@ -17,7 +16,6 @@ type Offer = {
 
 type CategoryKey = "Surveys" | "App Installs" | "Play Games" | "Watch Videos";
 
-/* ===================== FLAGS ===================== */
 const COUNTRY_FLAG: Record<string, string> = {
   US: "🇺🇸",
   CA: "🇨🇦",
@@ -28,30 +26,34 @@ const COUNTRY_FLAG: Record<string, string> = {
   IN: "🇮🇳",
 };
 
-/* ===================== OFFERS DATA ===================== */
-const OFFERS: Record<CategoryKey, Offer[]> = {
-  Surveys: [
-    { id: 101, title: "Daily Opinion Survey", payout: 4, completions: 2500, country: "US", badgeHigh: true, badgeFast: true },
-    { id: 102, title: "Market Research Survey", payout: 3.5, completions: 2200, country: "UK", badgeHigh: true, badgeFast: false },
-    // ... keep all your existing Survey offers
-  ],
-  "App Installs": [
-    { id: 201, title: "Candy Crush Saga Install", payout: 5, completions: 2800, country: "US", badgeHigh: true, badgeFast: true },
-    // ... keep all your existing App Installs offers
-  ],
-  "Play Games": [
-    { id: 401, title: "Coin Master Daily Spin", payout: 5, completions: 2500, country: "US", badgeHigh: true, badgeFast: true },
-    // ... keep all your existing Play Games offers
-  ],
-  "Watch Videos": [
-    { id: 301, title: "YouTube Sponsored Ad Watch", payout: 2.5, completions: 7000, country: "US", badgeHigh: false, badgeFast: true },
-    // ... keep all your existing Watch Videos offers
-  ],
-};
+/* Props interface */
+interface HighPayingOffersProps {
+  offers?: Offer[];
+}
 
-/* ===================== SKELETON ===================== */
-function SkeletonRow() {
-  return (
+export default function HighPayingOffers({ offers: propOffers }: HighPayingOffersProps) {
+  const [category, setCategory] = useState<CategoryKey>("Surveys");
+  const [loading, setLoading] = useState(true);
+  const { resolvedTheme } = useTheme();
+
+  // If props passed, use them; otherwise use internal OFFERS data
+  const OFFERS: Record<CategoryKey, Offer[]> = {
+    Surveys: [],
+    "App Installs": [],
+    "Play Games": [],
+    "Watch Videos": [],
+  };
+
+  const offers = propOffers ?? OFFERS[category];
+
+  useEffect(() => {
+    setLoading(true);
+    const timer = setTimeout(() => setLoading(false), 500);
+    return () => clearTimeout(timer);
+  }, [category, propOffers]);
+
+  /* Skeleton Row */
+  const SkeletonRow = () => (
     <div className="grid grid-cols-4 gap-4 px-4 py-4 animate-pulse">
       <div className="h-4 bg-white/10 rounded" />
       <div className="h-4 bg-white/10 rounded" />
@@ -59,21 +61,6 @@ function SkeletonRow() {
       <div className="h-4 bg-white/10 rounded" />
     </div>
   );
-}
-
-/* ===================== COMPONENT ===================== */
-export default function HighPayingOffers() {
-  const [category, setCategory] = useState<CategoryKey>("Surveys");
-  const [loading, setLoading] = useState(true);
-  const { resolvedTheme } = useTheme();
-
-  const offers = useMemo(() => OFFERS[category], [category]);
-
-  useEffect(() => {
-    setLoading(true);
-    const timer = setTimeout(() => setLoading(false), 500);
-    return () => clearTimeout(timer);
-  }, [category]);
 
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -99,7 +86,6 @@ export default function HighPayingOffers() {
       {/* OFFERS TABLE */}
       <div className="relative border rounded-xl shadow-lg h-[550px] overflow-hidden">
         <div className="overflow-y-auto h-full">
-          {/* TABLE HEADER */}
           <div className="grid grid-cols-4 gap-4 px-4 py-2 font-semibold sticky top-0 z-10 bg-white dark:bg-[#070A14] border-b">
             <span className="text-left">Offer</span>
             <span className="text-center">Country</span>
@@ -109,7 +95,7 @@ export default function HighPayingOffers() {
 
           {loading
             ? Array.from({ length: 10 }).map((_, i) => <SkeletonRow key={i} />)
-            : offers.map(offer => (
+            : offers.map((offer) => (
                 <div
                   key={offer.id}
                   className={`grid grid-cols-4 gap-4 px-4 py-2 border-b last:border-b-0 ${
