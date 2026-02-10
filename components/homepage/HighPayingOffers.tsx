@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-/* ================= TYPES (API READY) ================= */
+/* ================= TYPES ================= */
 type Offer = {
   id: number;
   name: string;
@@ -12,92 +12,91 @@ type Offer = {
   country: string;
   completions: number;
   payout: number;
-  createdAt: number;
   href: string;
 };
 
-/* ================= MOCK DATA (API REPLACEABLE) ================= */
+/* ================= DATA (API READY) ================= */
 const offers: Offer[] = [
-  { id: 1, name: "Opinion Rewards Survey", category: "Surveys", country: "US", completions: 5882, payout: 5, createdAt: 3, href: "#" },
-  { id: 2, name: "Crypto Knowledge Survey", category: "Surveys", country: "GB", completions: 8120, payout: 4.5, createdAt: 5, href: "#" },
-  { id: 3, name: "Raid Shadow Legends", category: "Play Games", country: "CA", completions: 2300, payout: 8, createdAt: 1, href: "#" },
-  { id: 4, name: "Coin Master Level Up", category: "Play Games", country: "US", completions: 1800, payout: 7, createdAt: 2, href: "#" },
-  { id: 5, name: "Finance App Install", category: "Install Apps", country: "AU", completions: 4200, payout: 6, createdAt: 4, href: "#" },
-  { id: 6, name: "Streaming Free Trial", category: "Trial Offers", country: "US", completions: 900, payout: 10, createdAt: 6, href: "#" },
-  { id: 7, name: "Video Engagement Task", category: "Watch Videos", country: "IN", completions: 12000, payout: 2, createdAt: 7, href: "#" },
+  { id: 1, name: "Opinion Rewards Survey", category: "Surveys", country: "US", completions: 5882, payout: 5, href: "#" },
+  { id: 2, name: "Crypto Knowledge Survey", category: "Surveys", country: "GB", completions: 8120, payout: 4.5, href: "#" },
+
+  { id: 3, name: "Raid Shadow Legends", category: "Play Games", country: "CA", completions: 2300, payout: 8, href: "#" },
+  { id: 4, name: "Coin Master Level Up", category: "Play Games", country: "US", completions: 1800, payout: 7, href: "#" },
+
+  { id: 5, name: "Finance App Install", category: "App Installs", country: "AU", completions: 4200, payout: 6, href: "#" },
+  { id: 6, name: "Shopping Cashback App", category: "App Installs", country: "US", completions: 3500, payout: 5.5, href: "#" },
+
+  { id: 7, name: "Streaming Free Trial", category: "Watch Videos", country: "US", completions: 900, payout: 10, href: "#" },
+  { id: 8, name: "Ad Engagement Task", category: "Watch Videos", country: "IN", completions: 12000, payout: 2, href: "#" },
 ];
 
-type SortType = "highest" | "newest" | "fastest";
+/* ================= CATEGORIES ================= */
+const categories = [
+  "All",
+  "Surveys",
+  "App Installs",
+  "Play Games",
+  "Watch Videos",
+];
 
 /* ================= COMPONENT ================= */
 export default function HighPayingOffers() {
-  const [sort, setSort] = useState<SortType>("highest");
-  const [country, setCountry] = useState<string>("ALL");
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [country, setCountry] = useState("ALL");
   const [loading, setLoading] = useState(true);
 
-  /* ===== AUTO COUNTRY DETECT ===== */
+  /* ===== AUTO COUNTRY ===== */
   useEffect(() => {
     const locale = navigator.language.split("-")[1];
     if (locale) setCountry(locale.toUpperCase());
-    setTimeout(() => setLoading(false), 800); // skeleton feel
+    setTimeout(() => setLoading(false), 800);
   }, []);
 
-  /* ===== FILTER + SORT ENGINE ===== */
+  /* ===== FILTER ENGINE ===== */
   const filteredOffers = useMemo(() => {
     let data = country === "ALL"
       ? offers
       : offers.filter(o => o.country === country);
 
-    if (sort === "highest") {
-      data = [...data].sort((a, b) => b.payout - a.payout);
-    }
-    if (sort === "newest") {
-      data = [...data].sort((a, b) => b.createdAt - a.createdAt);
-    }
-    if (sort === "fastest") {
-      data = [...data].sort((a, b) => a.completions - b.completions);
+    if (activeCategory !== "All") {
+      data = data.filter(o => o.category === activeCategory);
     }
 
     return data;
-  }, [sort, country]);
+  }, [activeCategory, country]);
 
-  /* ================= UI ================= */
   return (
     <section className="bg-[#0b0f1a] py-16">
       <div className="max-w-7xl mx-auto px-5">
 
         {/* HEADER */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-8">
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white">
-              High Paying Offers
-            </h2>
-            <p className="text-gray-400 text-sm mt-1">
-              Best payouts, updated in real time
-            </p>
-          </div>
+        <div className="mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-white text-center">
+            High Paying Offers
+          </h2>
+          <p className="text-gray-400 text-sm text-center mt-1">
+            Choose a category and start earning instantly
+          </p>
+        </div>
 
-          {/* SORT */}
-          <div className="flex gap-2">
-            {["highest", "newest", "fastest"].map((s) => (
-              <button
-                key={s}
-                onClick={() => setSort(s as SortType)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition
-                  ${sort === s
-                    ? "bg-white text-black"
-                    : "bg-white/10 text-gray-300 hover:bg-white/20"}`}
-              >
-                {s === "highest" && "Highest"}
-                {s === "newest" && "New"}
-                {s === "fastest" && "Fastest"}
-              </button>
-            ))}
-          </div>
+        {/* CATEGORY FILTER */}
+        <div className="flex flex-wrap justify-center gap-3 mb-8">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-5 py-2 rounded-full text-sm font-semibold transition
+                ${activeCategory === cat
+                  ? "bg-white text-black"
+                  : "bg-white/10 text-gray-300 hover:bg-white/20"}`}
+            >
+              {cat}
+            </button>
+          ))}
         </div>
 
         {/* TABLE */}
-        <div className="relative overflow-x-auto rounded-xl border border-white/10 bg-[#0f1424]">
+        <div className="overflow-x-auto rounded-xl border border-white/10 bg-[#0f1424]">
           <table className="w-full min-w-[720px]">
             <thead className="bg-[#12182b]">
               <tr className="text-xs uppercase tracking-wide text-gray-400">
