@@ -18,6 +18,10 @@ type Offer = {
 
 type CategoryKey = "Surveys" | "App Installs" | "Play Games" | "Watch Videos";
 
+type HighPayingOffersProps = {
+  offers?: Record<CategoryKey, Offer[]>; // optional, fallback to internal OFFERS
+};
+
 /* ===================== FLAGS ===================== */
 const COUNTRY_FLAG: Record<string, string> = {
   US: "🇺🇸",
@@ -31,7 +35,6 @@ const COUNTRY_FLAG: Record<string, string> = {
 
 /* ===================== OFFERS DATA ===================== */
 const OFFERS: Record<string, Offer[]> = {
-  // ... keep all your offer data exactly as before
   "Surveys": [
     { id: 101, title: "Daily Opinion Survey", payout: 4, completions: 2500, country: "US", badgeHigh: true, badgeFast: true },
     { id: 102, title: "Market Research Survey", payout: 3.5, completions: 2200, country: "UK", badgeHigh: true, badgeFast: false },
@@ -54,18 +57,19 @@ const OFFERS: Record<string, Offer[]> = {
     { id: 119, title: "Streaming Service Survey", payout: 4, completions: 2700, country: "DE", badgeHigh: true, badgeFast: true },
     { id: 120, title: "Social Media Survey", payout: 5, completions: 3000, country: "FR", badgeHigh: true, badgeFast: true }
   ],
-  "App Installs": [ /* same as before */ ],
-  "Watch Videos": [ /* same as before */ ],
-  "Play Games": [ /* same as before */ ],
+  "App Installs": [ /* keep your original data here */ ],
+  "Watch Videos": [ /* keep your original data here */ ],
+  "Play Games": [ /* keep your original data here */ ]
 };
 
 /* ===================== COMPONENT ===================== */
-export default function HighPayingOffers() {
+export default function HighPayingOffers({ offers: propOffers }: HighPayingOffersProps) {
   const [category, setCategory] = useState<CategoryKey>("Surveys");
   const [loading, setLoading] = useState(true);
   const { resolvedTheme } = useTheme();
 
-  const offers = useMemo(() => OFFERS[category], [category]);
+  // use dynamic offers if provided, otherwise fallback to default OFFERS
+  const offers = useMemo(() => propOffers?.[category] ?? OFFERS[category], [category, propOffers]);
 
   useEffect(() => {
     setLoading(true);
