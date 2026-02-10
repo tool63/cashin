@@ -110,44 +110,47 @@ export default function HighPayingOffers() {
       </div>
 
       {/* OFFERS TABLE */}
-      <div className="relative border rounded-xl shadow-lg h-[550px] overflow-hidden">
-        <div className="overflow-y-auto h-full">
-          {/* TABLE HEADER */}
-          <div className="grid grid-cols-4 gap-4 px-4 py-2 font-semibold sticky top-0 z-10 bg-white dark:bg-[#070A14] border-b">
-            <span className="text-left">Offer</span>
-            <span className="text-center">Country</span>
-            <span className="text-center">Completions</span>
-            <span className="text-right">Payout</span>
-          </div>
+<div className="relative border rounded-xl shadow-lg h-[550px] overflow-hidden">
+  <div className="overflow-y-auto h-full">
+    {/* TABLE HEADER */}
+    <div className="grid grid-cols-4 gap-4 px-4 py-2 font-semibold sticky top-0 z-10 bg-white dark:bg-[#070A14] border-b">
+      <span className="text-left">Offer</span>
+      <span className="text-center">Country</span>
+      <span className="text-center">Completions</span>
+      <span className="text-right">Payout</span>
+    </div>
 
-          {loading
-            ? Array.from({ length: 10 }).map((_, i) => <SkeletonRow key={i} />)
-            : offers.map(offer => (
-                <div
-                  key={offer.id}
-                  className={`grid grid-cols-4 gap-4 px-4 py-2 border-b last:border-b-0 ${
-                    resolvedTheme === "dark" ? "bg-[#0B0E1A]" : "bg-white"
-                  }`}
-                >
-                  {/* Offer Name + Badges */}
-                  <div className="flex items-center gap-2 text-left">
-                    {offer.title}
-                    {offer.badgeHigh && <Flame className="text-yellow-400" size={16} />}
-                    {offer.badgeFast && <Zap className="text-green-400" size={16} />}
-                  </div>
-
-                  {/* Country */}
-                  <div className="text-center">{COUNTRY_FLAG[offer.country]}</div>
-
-                  {/* Completions */}
-                  <div className="text-center">{offer.completions.toLocaleString()}</div>
-
-                  {/* Payout */}
-                  <div className="text-right">${offer.payout.toFixed(2)}</div>
+    {loading
+      ? Array.from({ length: 10 }).map((_, i) => <SkeletonRow key={i} />)
+      : (offers && offers.length > 0
+          ? offers.map(offer => (
+              <div
+                key={offer.id}
+                className={`grid grid-cols-4 gap-4 px-4 py-2 border-b last:border-b-0 ${
+                  resolvedTheme === "dark" ? "bg-[#0B0E1A]" : "bg-white"
+                }`}
+              >
+                {/* Offer Name + Badges */}
+                <div className="flex items-center gap-2 text-left">
+                  {offer.title}
+                  {offer.badgeHigh && <Flame className="text-yellow-400" size={16} />}
+                  {offer.badgeFast && <Zap className="text-green-400" size={16} />}
                 </div>
-              ))}
-        </div>
-      </div>
-    </section>
+
+                {/* Country */}
+                <div className="text-center">{COUNTRY_FLAG[offer.country]}</div>
+
+                {/* Completions */}
+                <div className="text-center">{offer.completions.toLocaleString()}</div>
+
+                {/* Payout */}
+                <div className="text-right">${offer.payout.toFixed(2)}</div>
+              </div>
+            ))
+          : Array.from({ length: 10 }).map((_, i) => <SkeletonRow key={i} />)
+        )
+    }
+  </div>
+</div>
   );
 }
