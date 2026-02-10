@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Flame, Zap, Sun, Moon } from "lucide-react";
+import { Flame, Zap } from "lucide-react";
 
 /* ===================== TYPES ===================== */
 type Offer = {
@@ -19,9 +19,7 @@ type CategoryKey = "Surveys" | "App Installs" | "Play Games" | "Watch Videos";
 /* ===================== USER COUNTRY ===================== */
 function useUserCountry() {
   const [country, setCountry] = useState<"US" | "CA" | "UK" | "AU">("US");
-  useEffect(() => {
-    setCountry("US");
-  }, []);
+  useEffect(() => setCountry("US"), []);
   return country;
 }
 
@@ -86,15 +84,16 @@ function SkeletonRow() {
 }
 
 /* ===================== MAIN COMPONENT ===================== */
-export default function HighPayingOffers() {
+interface HighPayingOffersProps {
+  darkMode: boolean; // controlled from header toggle
+}
+
+export default function HighPayingOffers({ darkMode }: HighPayingOffersProps) {
   const userCountry = useUserCountry();
   const categories = Object.keys(OFFERS) as CategoryKey[];
 
   const [activeCategory, setActiveCategory] = useState<CategoryKey>("Surveys");
   const [loading, setLoading] = useState(true);
-
-  // Dark/light mode toggle
-  const [darkMode, setDarkMode] = useState(true);
 
   useEffect(() => {
     setLoading(true);
@@ -108,23 +107,10 @@ export default function HighPayingOffers() {
   );
 
   return (
-    <section className={`${darkMode ? "bg-[#070A14] text-white" : "bg-white text-gray-900"} py-20 transition-colors duration-500`}>
+    <section
+      className={`${darkMode ? "bg-[#070A14] text-white" : "bg-white text-gray-900"} py-20 transition-colors duration-500`}
+    >
       <div className="max-w-7xl mx-auto px-6">
-
-        {/* DARK/LIGHT TOGGLE */}
-        <div className="flex justify-end mb-6">
-          <button
-            onClick={() => setDarkMode(!darkMode)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-full border transition ${
-              darkMode
-                ? "bg-gray-700 border-gray-500 text-white"
-                : "bg-gray-200 border-gray-300 text-black"
-            }`}
-          >
-            {darkMode ? <Moon size={16} /> : <Sun size={16} />}
-            {darkMode ? "Dark" : "Light"}
-          </button>
-        </div>
 
         {/* CATEGORY TOGGLE SWITCH */}
         <div className="flex flex-wrap justify-center gap-3 mb-10">
@@ -150,10 +136,17 @@ export default function HighPayingOffers() {
         </h2>
 
         {/* TABLE */}
-        <div className={`${darkMode ? "bg-[#0f111b] border-white/10" : "bg-gray-100 border-gray-300"} rounded-2xl overflow-hidden border transition-colors duration-500`}>
-
+        <div
+          className={`rounded-2xl overflow-hidden border transition-colors duration-500 ${
+            darkMode ? "bg-[#0f111b] border-white/10" : "bg-gray-100 border-gray-300"
+          }`}
+        >
           {/* TABLE HEADER */}
-          <div className={`grid grid-cols-4 px-4 py-3 text-sm font-semibold border-b sticky top-0 z-10 transition-colors duration-500 ${darkMode ? "text-gray-400 border-white/10 bg-[#0f111b]" : "text-gray-700 border-gray-300 bg-gray-100"}`}>
+          <div
+            className={`grid grid-cols-4 px-4 py-3 text-sm font-semibold border-b sticky top-0 z-10 transition-colors duration-500 ${
+              darkMode ? "text-gray-400 border-white/10 bg-[#0f111b]" : "text-gray-700 border-gray-300 bg-gray-100"
+            }`}
+          >
             <span>Offer</span>
             <span className="text-center">Country</span>
             <span className="text-center">Completed</span>
@@ -168,18 +161,28 @@ export default function HighPayingOffers() {
               filteredOffers.map((offer) => (
                 <div
                   key={offer.id}
-                  className={`grid grid-cols-4 items-center px-4 py-4 border-b hover:bg-white/5 transition-colors duration-300 ${darkMode ? "border-white/5 hover:bg-white/5" : "border-gray-200 hover:bg-gray-200"}`}
+                  className={`grid grid-cols-4 items-center px-4 py-4 border-b hover:bg-white/5 transition-colors duration-300 ${
+                    darkMode ? "border-white/5 hover:bg-white/5" : "border-gray-200 hover:bg-gray-200"
+                  }`}
                 >
                   {/* OFFER NAME + BADGES */}
                   <div className="flex items-center gap-3 font-medium">
                     <span>{offer.title}</span>
                     {offer.badgeHigh && (
-                      <span className={`flex items-center gap-1 text-xs px-2 py-0.5 rounded-full ${darkMode ? "bg-red-500/20 text-red-400" : "bg-red-100 text-red-700"}`}>
+                      <span
+                        className={`flex items-center gap-1 text-xs px-2 py-0.5 rounded-full ${
+                          darkMode ? "bg-red-500/20 text-red-400" : "bg-red-100 text-red-700"
+                        }`}
+                      >
                         <Flame size={12} /> High
                       </span>
                     )}
                     {offer.badgeFast && (
-                      <span className={`flex items-center gap-1 text-xs px-2 py-0.5 rounded-full ${darkMode ? "bg-yellow-500/20 text-yellow-300" : "bg-yellow-100 text-yellow-700"}`}>
+                      <span
+                        className={`flex items-center gap-1 text-xs px-2 py-0.5 rounded-full ${
+                          darkMode ? "bg-yellow-500/20 text-yellow-300" : "bg-yellow-100 text-yellow-700"
+                        }`}
+                      >
                         <Zap size={12} /> Fast
                       </span>
                     )}
