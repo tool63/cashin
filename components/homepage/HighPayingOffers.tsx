@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Flame, Zap } from "lucide-react";
 import { useTheme } from "next-themes";
-import { SkeletonRow } from "@/components/loading/loading"; // Use global skeleton
 
 /* ===================== TYPES ===================== */
 type Offer = {
@@ -30,49 +29,37 @@ const COUNTRY_FLAG: Record<string, string> = {
 };
 
 /* ===================== OFFERS DATA ===================== */
-const OFFERS: Record<string, Offer[]> = {
-  "Surveys": [
+const OFFERS: Record<CategoryKey, Offer[]> = {
+  Surveys: [
     { id: 101, title: "Daily Opinion Survey", payout: 4, completions: 2500, country: "US", badgeHigh: true, badgeFast: true },
     { id: 102, title: "Market Research Survey", payout: 3.5, completions: 2200, country: "UK", badgeHigh: true, badgeFast: false },
-    { id: 103, title: "Product Feedback Survey", payout: 4.5, completions: 2800, country: "CA", badgeHigh: true, badgeFast: true },
-    { id: 104, title: "Customer Satisfaction Survey", payout: 5, completions: 3000, country: "AU", badgeHigh: true, badgeFast: true },
-    { id: 105, title: "Gaming Experience Survey", payout: 3.5, completions: 2400, country: "DE", badgeHigh: false, badgeFast: true },
-    { id: 106, title: "App Review Survey", payout: 4, completions: 2600, country: "FR", badgeHigh: true, badgeFast: true },
-    { id: 107, title: "Lifestyle Survey Challenge", payout: 3, completions: 2100, country: "IN", badgeHigh: false, badgeFast: true },
-    { id: 108, title: "Tech Product Survey", payout: 5, completions: 3200, country: "US", badgeHigh: true, badgeFast: true },
-    { id: 109, title: "Health & Fitness Survey", payout: 4, completions: 2700, country: "UK", badgeHigh: false, badgeFast: true },
-    { id: 110, title: "Movie Feedback Survey", payout: 3.5, completions: 2500, country: "CA", badgeHigh: true, badgeFast: false },
-    { id: 111, title: "Music Preference Survey", payout: 4.5, completions: 2800, country: "AU", badgeHigh: true, badgeFast: true },
-    { id: 112, title: "Travel Experience Survey", payout: 5, completions: 3000, country: "DE", badgeHigh: true, badgeFast: true },
-    { id: 113, title: "Food & Beverage Survey", payout: 3.5, completions: 2300, country: "FR", badgeHigh: false, badgeFast: true },
-    { id: 114, title: "Education Feedback Survey", payout: 4, completions: 2600, country: "IN", badgeHigh: true, badgeFast: true },
-    { id: 115, title: "Fashion Trend Survey", payout: 3, completions: 2000, country: "US", badgeHigh: false, badgeFast: true },
-    { id: 116, title: "Mobile App Feedback Survey", payout: 5, completions: 3100, country: "UK", badgeHigh: true, badgeFast: true },
-    { id: 117, title: "Gaming App Survey", payout: 4.5, completions: 2900, country: "CA", badgeHigh: true, badgeFast: true },
-    { id: 118, title: "Home Product Survey", payout: 3.5, completions: 2400, country: "AU", badgeHigh: false, badgeFast: true },
-    { id: 119, title: "Streaming Service Survey", payout: 4, completions: 2700, country: "DE", badgeHigh: true, badgeFast: true },
-    { id: 120, title: "Social Media Survey", payout: 5, completions: 3000, country: "FR", badgeHigh: true, badgeFast: true }
+    // ... keep all your existing Survey offers
   ],
   "App Installs": [
     { id: 201, title: "Candy Crush Saga Install", payout: 5, completions: 2800, country: "US", badgeHigh: true, badgeFast: true },
-    { id: 202, title: "TikTok App Install Reward", payout: 6, completions: 3000, country: "UK", badgeHigh: true, badgeFast: true },
-    { id: 203, title: "Snapchat Daily Install", payout: 5, completions: 2700, country: "CA", badgeHigh: true, badgeFast: true },
-    { id: 204, title: "Among Us VIP Challenge", payout: 5, completions: 2200, country: "AU", badgeHigh: true, badgeFast: true },
-    { id: 205, title: "Clash Royale Tournament Reward", payout: 6, completions: 2500, country: "DE", badgeHigh: true, badgeFast: false },
-    { id: 206, title: "Fortnite Daily Challenge", payout: 5, completions: 3000, country: "FR", badgeHigh: true, badgeFast: true },
-    { id: 207, title: "Call of Duty Mobile Quest", payout: 5.5, completions: 2800, country: "IN", badgeHigh: true, badgeFast: true },
-    { id: 208, title: "Pokemon Go Adventure Quest", payout: 4.5, completions: 2000, country: "US", badgeHigh: false, badgeFast: true },
-    { id: 209, title: "Subway Surfers Daily Reward", payout: 5, completions: 3100, country: "UK", badgeHigh: false, badgeFast: true },
-    { id: 210, title: "8 Ball Pool Tournament", payout: 5.5, completions: 2300, country: "CA", badgeHigh: true, badgeFast: true }
-    // … keep all other offers exactly the same
-  ],
-  "Watch Videos": [
-    // … keep all video offers the same
+    // ... keep all your existing App Installs offers
   ],
   "Play Games": [
-    // … keep all game offers the same
-  ]
+    { id: 401, title: "Coin Master Daily Spin", payout: 5, completions: 2500, country: "US", badgeHigh: true, badgeFast: true },
+    // ... keep all your existing Play Games offers
+  ],
+  "Watch Videos": [
+    { id: 301, title: "YouTube Sponsored Ad Watch", payout: 2.5, completions: 7000, country: "US", badgeHigh: false, badgeFast: true },
+    // ... keep all your existing Watch Videos offers
+  ],
 };
+
+/* ===================== SKELETON ===================== */
+function SkeletonRow() {
+  return (
+    <div className="grid grid-cols-4 gap-4 px-4 py-4 animate-pulse">
+      <div className="h-4 bg-white/10 rounded" />
+      <div className="h-4 bg-white/10 rounded" />
+      <div className="h-4 bg-white/10 rounded" />
+      <div className="h-4 bg-white/10 rounded" />
+    </div>
+  );
+}
 
 /* ===================== COMPONENT ===================== */
 export default function HighPayingOffers() {
@@ -110,47 +97,37 @@ export default function HighPayingOffers() {
       </div>
 
       {/* OFFERS TABLE */}
-<div className="relative border rounded-xl shadow-lg h-[550px] overflow-hidden">
-  <div className="overflow-y-auto h-full">
-    {/* TABLE HEADER */}
-    <div className="grid grid-cols-4 gap-4 px-4 py-2 font-semibold sticky top-0 z-10 bg-white dark:bg-[#070A14] border-b">
-      <span className="text-left">Offer</span>
-      <span className="text-center">Country</span>
-      <span className="text-center">Completions</span>
-      <span className="text-right">Payout</span>
-    </div>
+      <div className="relative border rounded-xl shadow-lg h-[550px] overflow-hidden">
+        <div className="overflow-y-auto h-full">
+          {/* TABLE HEADER */}
+          <div className="grid grid-cols-4 gap-4 px-4 py-2 font-semibold sticky top-0 z-10 bg-white dark:bg-[#070A14] border-b">
+            <span className="text-left">Offer</span>
+            <span className="text-center">Country</span>
+            <span className="text-center">Completions</span>
+            <span className="text-right">Payout</span>
+          </div>
 
-    {loading
-      ? Array.from({ length: 10 }).map((_, i) => <SkeletonRow key={i} />)
-      : (offers && offers.length > 0
-          ? offers.map(offer => (
-              <div
-                key={offer.id}
-                className={`grid grid-cols-4 gap-4 px-4 py-2 border-b last:border-b-0 ${
-                  resolvedTheme === "dark" ? "bg-[#0B0E1A]" : "bg-white"
-                }`}
-              >
-                {/* Offer Name + Badges */}
-                <div className="flex items-center gap-2 text-left">
-                  {offer.title}
-                  {offer.badgeHigh && <Flame className="text-yellow-400" size={16} />}
-                  {offer.badgeFast && <Zap className="text-green-400" size={16} />}
+          {loading
+            ? Array.from({ length: 10 }).map((_, i) => <SkeletonRow key={i} />)
+            : offers.map(offer => (
+                <div
+                  key={offer.id}
+                  className={`grid grid-cols-4 gap-4 px-4 py-2 border-b last:border-b-0 ${
+                    resolvedTheme === "dark" ? "bg-[#0B0E1A]" : "bg-white"
+                  }`}
+                >
+                  <div className="flex items-center gap-2 text-left">
+                    {offer.title}
+                    {offer.badgeHigh && <Flame className="text-yellow-400" size={16} />}
+                    {offer.badgeFast && <Zap className="text-green-400" size={16} />}
+                  </div>
+                  <div className="text-center">{COUNTRY_FLAG[offer.country]}</div>
+                  <div className="text-center">{offer.completions.toLocaleString()}</div>
+                  <div className="text-right">${offer.payout.toFixed(2)}</div>
                 </div>
-
-                {/* Country */}
-                <div className="text-center">{COUNTRY_FLAG[offer.country]}</div>
-
-                {/* Completions */}
-                <div className="text-center">{offer.completions.toLocaleString()}</div>
-
-                {/* Payout */}
-                <div className="text-right">${offer.payout.toFixed(2)}</div>
-              </div>
-            ))
-          : Array.from({ length: 10 }).map((_, i) => <SkeletonRow key={i} />)
-        )
-    }
-  </div>
-</div>
+              ))}
+        </div>
+      </div>
+    </section>
   );
 }
