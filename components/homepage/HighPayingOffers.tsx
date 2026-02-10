@@ -2,25 +2,26 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 type Offer = {
   id: number;
   name: string;
   category: string;
   country: string;
-  payout: string;
   completion: string;
+  payout: string;
   href: string;
 };
 
 const offers: Offer[] = [
-  { id: 1, name: "Survey A", category: "Surveys", country: "🇺🇸", payout: "$5.00", completion: "$50", href: "/offers/1" },
-  { id: 2, name: "Survey B", category: "Surveys", country: "🇬🇧", payout: "$4.50", completion: "$45", href: "/offers/2" },
-  { id: 3, name: "Game A", category: "Play Games", country: "🇨🇦", payout: "$8.00", completion: "$80", href: "/offers/3" },
-  { id: 4, name: "App Install A", category: "Install Apps", country: "🇦🇺", payout: "$6.00", completion: "$60", href: "/offers/4" },
-  { id: 5, name: "Trial A", category: "Trial Offers", country: "🇺🇸", payout: "$10.00", completion: "$100", href: "/offers/5" },
-  { id: 6, name: "Video A", category: "Watch Videos", country: "🇮🇳", payout: "$2.00", completion: "$20", href: "/offers/6" },
-  // 👉 you can extend this list freely (table auto-scales)
+  { id: 1, name: "Opinion Rewards Survey", category: "Surveys", country: "🇺🇸", completion: "$50", payout: "$5.00", href: "#" },
+  { id: 2, name: "Crypto Knowledge Survey", category: "Surveys", country: "🇬🇧", completion: "$45", payout: "$4.50", href: "#" },
+  { id: 3, name: "Raid Shadow Legends", category: "Play Games", country: "🇨🇦", completion: "$80", payout: "$8.00", href: "#" },
+  { id: 4, name: "Coin Master Level Up", category: "Play Games", country: "🇺🇸", completion: "$70", payout: "$7.00", href: "#" },
+  { id: 5, name: "Finance App Install", category: "Install Apps", country: "🇦🇺", completion: "$60", payout: "$6.00", href: "#" },
+  { id: 6, name: "Streaming Free Trial", category: "Trial Offers", country: "🇺🇸", completion: "$100", payout: "$10.00", href: "#" },
+  { id: 7, name: "Video Engagement Task", category: "Watch Videos", country: "🇮🇳", completion: "$20", payout: "$2.00", href: "#" },
 ];
 
 const categories = [
@@ -31,40 +32,40 @@ const categories = [
   "Watch Videos",
 ];
 
-export default function HighPayingOffersTable() {
+export default function HighPayingOffers() {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
-  const filteredOffers = activeCategory
-    ? offers.filter((o) => o.category === activeCategory)
+  const filtered = activeCategory
+    ? offers.filter(o => o.category === activeCategory)
     : offers;
 
   return (
-    <section className="bg-[#0b0f1a] py-16 text-white">
+    <section className="bg-[#0b0f1a] py-16">
       <div className="max-w-7xl mx-auto px-5">
 
-        {/* TITLE */}
-        <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">
+        {/* HEADER */}
+        <div className="mb-10 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
             High Paying Offers
           </h2>
           <p className="text-gray-400 mt-2 text-sm md:text-base">
-            Complete offers and earn real rewards instantly
+            Hand-picked offers with the highest payouts
           </p>
         </div>
 
-        {/* CATEGORY FILTER */}
-        <div className="flex flex-wrap justify-center gap-3 mb-8">
-          {categories.map((cat) => (
+        {/* FILTER */}
+        <div className="flex flex-wrap justify-center gap-2 mb-8">
+          {categories.map(cat => (
             <button
               key={cat}
               onClick={() =>
                 setActiveCategory(activeCategory === cat ? null : cat)
               }
-              className={`px-5 py-2 rounded-full text-sm font-semibold transition-all
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all
                 ${
                   activeCategory === cat
-                    ? "bg-gradient-to-r from-yellow-400 to-green-500 text-black shadow-lg"
-                    : "bg-white/10 hover:bg-white/20 text-white"
+                    ? "bg-white text-black shadow-md"
+                    : "bg-white/10 text-gray-300 hover:bg-white/20"
                 }`}
             >
               {cat}
@@ -72,29 +73,32 @@ export default function HighPayingOffersTable() {
           ))}
         </div>
 
-        {/* TABLE */}
-        <div className="relative overflow-x-auto rounded-2xl border border-white/10 bg-[#0f1424] shadow-xl">
-          <table className="w-full min-w-[700px] text-left">
-            <thead className="bg-[#12182b] sticky top-0 z-10">
-              <tr className="text-gray-300 text-sm uppercase">
-                <th className="px-6 py-4">Offer</th>
-                <th className="px-6 py-4">Category</th>
-                <th className="px-6 py-4">Country</th>
-                <th className="px-6 py-4">Completion</th>
+        {/* TABLE WRAPPER */}
+        <div className="relative overflow-x-auto rounded-xl border border-white/10 bg-[#0f1424]">
+          <table className="w-full min-w-[720px]">
+            <thead className="bg-[#12182b]">
+              <tr className="text-xs uppercase tracking-wide text-gray-400">
+                <th className="px-6 py-4 text-left">Offer</th>
+                <th className="px-6 py-4 text-left">Category</th>
+                <th className="px-6 py-4 text-left">Country</th>
+                <th className="px-6 py-4 text-left">Completion</th>
                 <th className="px-6 py-4 text-right">Payout</th>
               </tr>
             </thead>
 
             <tbody>
-              {filteredOffers.map((offer) => (
-                <tr
+              {filtered.map((offer) => (
+                <motion.tr
                   key={offer.id}
-                  className="border-t border-white/5 hover:bg-white/5 transition"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.2 }}
+                  className="border-t border-white/5 hover:bg-white/5"
                 >
-                  <td className="px-6 py-4 font-medium">
+                  <td className="px-6 py-4">
                     <Link
                       href={offer.href}
-                      className="hover:underline text-white"
+                      className="font-medium text-white hover:underline"
                     >
                       {offer.name}
                     </Link>
@@ -102,32 +106,32 @@ export default function HighPayingOffersTable() {
                   <td className="px-6 py-4 text-gray-300">
                     {offer.category}
                   </td>
-                  <td className="px-6 py-4 text-xl">
+                  <td className="px-6 py-4 text-lg">
                     {offer.country}
                   </td>
                   <td className="px-6 py-4 text-gray-300">
                     {offer.completion}
                   </td>
                   <td className="px-6 py-4 text-right">
-                    <span className="inline-block px-3 py-1 rounded-full font-bold text-black bg-gradient-to-r from-yellow-400 to-green-500">
+                    <span className="font-semibold text-green-400">
                       {offer.payout}
                     </span>
                   </td>
-                </tr>
+                </motion.tr>
               ))}
 
-              {filteredOffers.length === 0 && (
+              {filtered.length === 0 && (
                 <tr>
-                  <td
-                    colSpan={5}
-                    className="px-6 py-10 text-center text-gray-400"
-                  >
-                    No offers available in this category
+                  <td colSpan={5} className="py-10 text-center text-gray-400">
+                    No offers found for this category
                   </td>
                 </tr>
               )}
             </tbody>
           </table>
+
+          {/* MOBILE SCROLL HINT */}
+          <div className="pointer-events-none absolute right-0 top-0 h-full w-12 bg-gradient-to-l from-[#0f1424] to-transparent md:hidden" />
         </div>
 
       </div>
