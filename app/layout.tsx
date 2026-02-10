@@ -4,7 +4,7 @@ import "../styles/globals.css";
 import { ReactNode } from "react";
 
 import Header from "@/components/Header";
-import Footer from "@/components/Footer"; // make sure this is the updated Footer
+import Footer from "@/components/Footer";
 import FloatingCTA from "@/components/cta/FloatingCTA";
 import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
 import Meta from "@/components/seo/SeoEngine";
