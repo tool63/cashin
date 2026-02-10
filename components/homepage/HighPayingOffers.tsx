@@ -20,7 +20,7 @@ type CategoryKey = "Surveys" | "App Installs" | "Play Games" | "Watch Videos";
 function useUserCountry() {
   const [country, setCountry] = useState<"US" | "CA" | "UK" | "AU">("US");
   useEffect(() => {
-    setCountry("US"); // replace with GeoIP logic if needed
+    setCountry("US"); // replace with GeoIP if needed
   }, []);
   return country;
 }
@@ -143,45 +143,47 @@ export default function HighPayingOffers() {
             <span className="text-right">Payout</span>
           </div>
 
-          {/* TABLE BODY */}
-          {loading ? (
-            Array.from({ length: 6 }).map((_, i) => <SkeletonRow key={i} />)
-          ) : (
-            filteredOffers.map((offer) => (
-              <div
-                key={offer.id}
-                className="grid grid-cols-4 items-center px-4 py-4 border-b border-white/5 hover:bg-white/5 transition"
-              >
-                {/* OFFER NAME + BADGES */}
-                <div className="flex items-center gap-3 font-medium">
-                  <span>{offer.title}</span>
-                  {offer.badgeHigh && (
-                    <span className="flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-red-500/20 text-red-400">
-                      <Flame size={12} /> High
-                    </span>
-                  )}
-                  {offer.badgeFast && (
-                    <span className="flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-yellow-500/20 text-yellow-300">
-                      <Zap size={12} /> Fast
-                    </span>
-                  )}
-                </div>
+          {/* TABLE BODY - Scrollable */}
+          <div className="max-h-[520px] overflow-y-auto">
+            {loading ? (
+              Array.from({ length: 6 }).map((_, i) => <SkeletonRow key={i} />)
+            ) : (
+              filteredOffers.map((offer) => (
+                <div
+                  key={offer.id}
+                  className="grid grid-cols-4 items-center px-4 py-4 border-b border-white/5 hover:bg-white/5 transition"
+                >
+                  {/* OFFER NAME + BADGES */}
+                  <div className="flex items-center gap-3 font-medium">
+                    <span>{offer.title}</span>
+                    {offer.badgeHigh && (
+                      <span className="flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-red-500/20 text-red-400">
+                        <Flame size={12} /> High
+                      </span>
+                    )}
+                    {offer.badgeFast && (
+                      <span className="flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-yellow-500/20 text-yellow-300">
+                        <Zap size={12} /> Fast
+                      </span>
+                    )}
+                  </div>
 
-                {/* COUNTRY FLAG */}
-                <div className="text-center text-xl">{COUNTRY_FLAG[offer.country]}</div>
+                  {/* COUNTRY FLAG */}
+                  <div className="text-center text-xl">{COUNTRY_FLAG[offer.country]}</div>
 
-                {/* COMPLETIONS */}
-                <div className="text-center text-gray-300">
-                  {offer.completions.toLocaleString()}
-                </div>
+                  {/* COMPLETIONS */}
+                  <div className="text-center text-gray-300">
+                    {offer.completions.toLocaleString()}
+                  </div>
 
-                {/* PAYOUT */}
-                <div className="text-right font-semibold text-green-400">
-                  ${offer.payout.toFixed(2)}
+                  {/* PAYOUT */}
+                  <div className="text-right font-semibold text-green-400">
+                    ${offer.payout.toFixed(2)}
+                  </div>
                 </div>
-              </div>
-            ))
-          )}
+              ))
+            )}
+          </div>
         </div>
       </div>
     </section>
