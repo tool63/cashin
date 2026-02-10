@@ -10,7 +10,7 @@ type Offer = {
   title: string;
   payout: number;
   completions: number;
-  country: "US" | "CA" | "UK" | "AU";
+  country: "US" | "CA" | "UK" | "AU" | "DE" | "FR" | "IN";
   badgeHigh: boolean;
   badgeFast: boolean;
 };
@@ -21,66 +21,67 @@ type CategoryKey =
   | "Play Games"
   | "Watch Videos";
 
-/* ===================== USER COUNTRY ===================== */
-function useUserCountry() {
-  const [country, setCountry] = useState<"US" | "CA" | "UK" | "AU">("US");
-
-  useEffect(() => {
-    // Placeholder for real geoIP detection
-    setCountry("US");
-  }, []);
-
-  return country;
-}
-
 /* ===================== FLAGS ===================== */
 const COUNTRY_FLAG: Record<string, string> = {
   US: "🇺🇸",
   CA: "🇨🇦",
   UK: "🇬🇧",
   AU: "🇦🇺",
+  DE: "🇩🇪",
+  FR: "🇫🇷",
+  IN: "🇮🇳",
 };
 
-/* ===================== OFFERS DATA ===================== */
+/* ===================== REALISTIC OFFERS DATA ===================== */
 const OFFERS: Record<CategoryKey, Offer[]> = {
-  Surveys: Array.from({ length: 20 }).map((_, i) => ({
-    id: 1000 + i,
-    title: `Survey Task #${i + 1}`,
-    payout: 4 + (i % 4),
-    completions: 2800 + i * 210,
-    country: ["US", "CA", "UK", "AU"][i % 4] as any,
-    badgeHigh: i % 3 === 0,
-    badgeFast: true,
+  Surveys: [
+    { id: 1001, title: "Consumer Electronics Feedback Survey", payout: 5, completions: 3200, country: "US", badgeHigh: true, badgeFast: true },
+    { id: 1002, title: "Grocery Shopping Habits Survey", payout: 4.5, completions: 2100, country: "UK", badgeHigh: false, badgeFast: true },
+    { id: 1003, title: "Travel Preferences Study", payout: 6, completions: 1800, country: "CA", badgeHigh: true, badgeFast: true },
+    { id: 1004, title: "Streaming Service Experience Survey", payout: 5.5, completions: 2000, country: "AU", badgeHigh: true, badgeFast: true },
+    { id: 1005, title: "Mobile App Usability Survey", payout: 4, completions: 2500, country: "DE", badgeHigh: false, badgeFast: true },
+    { id: 1006, title: "E-commerce Checkout Experience", payout: 4.5, completions: 2700, country: "FR", badgeHigh: true, badgeFast: false },
+    { id: 1007, title: "Cryptocurrency Awareness Survey", payout: 6.5, completions: 1500, country: "IN", badgeHigh: true, badgeFast: true },
+    { id: 1008, title: "Fitness & Health Survey", payout: 5, completions: 3300, country: "US", badgeHigh: false, badgeFast: true },
+    { id: 1009, title: "Smartphone Usage Survey", payout: 4, completions: 2900, country: "UK", badgeHigh: false, badgeFast: true },
+    { id: 1010, title: "Subscription Services Feedback", payout: 5, completions: 2100, country: "CA", badgeHigh: true, badgeFast: false },
+    { id: 1011, title: "Social Media Trends Survey", payout: 4.5, completions: 2300, country: "AU", badgeHigh: true, badgeFast: true },
+    { id: 1012, title: "Banking & Financial Experience", payout: 6, completions: 1900, country: "DE", badgeHigh: true, badgeFast: true },
+    { id: 1013, title: "Online Education Experience", payout: 5, completions: 1800, country: "FR", badgeHigh: false, badgeFast: true },
+    { id: 1014, title: "Mobile Game Preferences", payout: 4.5, completions: 1700, country: "IN", badgeHigh: true, badgeFast: true },
+    { id: 1015, title: "Food Delivery Service Survey", payout: 5, completions: 3000, country: "US", badgeHigh: false, badgeFast: true },
+    { id: 1016, title: "Remote Work Lifestyle Survey", payout: 6, completions: 2100, country: "UK", badgeHigh: true, badgeFast: true },
+    { id: 1017, title: "Advertising Experience Feedback", payout: 4.5, completions: 2500, country: "CA", badgeHigh: false, badgeFast: true },
+    { id: 1018, title: "Mobile Security & Privacy Survey", payout: 5, completions: 1900, country: "AU", badgeHigh: true, badgeFast: false },
+    { id: 1019, title: "Travel Booking Platform Feedback", payout: 6.5, completions: 1800, country: "DE", badgeHigh: true, badgeFast: true },
+    { id: 1020, title: "Customer Loyalty Program Study", payout: 5, completions: 2000, country: "FR", badgeHigh: false, badgeFast: true },
+  ],
+  "App Installs": Array.from({ length: 20 }, (_, i) => ({
+    id: 2000 + i + 1,
+    title: `Install App ${i + 1} - Real App Example`,
+    payout: Math.round(Math.random() * 5 + 5), // 5-10$
+    completions: Math.floor(Math.random() * 2000 + 1000),
+    country: ["US", "UK", "CA", "AU", "DE", "FR", "IN"][i % 7] as Offer["country"],
+    badgeHigh: i % 2 === 0,
+    badgeFast: i % 3 === 0,
   })),
-
-  "App Installs": Array.from({ length: 20 }).map((_, i) => ({
-    id: 2000 + i,
-    title: `Install App #${i + 1}`,
-    payout: 6 + (i % 5),
-    completions: 1400 + i * 160,
-    country: ["US", "CA", "UK", "AU"][i % 4] as any,
-    badgeHigh: true,
-    badgeFast: i % 2 === 0,
+  "Play Games": Array.from({ length: 20 }, (_, i) => ({
+    id: 3000 + i + 1,
+    title: `Play Game ${i + 1} - Level Challenge`,
+    payout: Math.round(Math.random() * 5 + 5),
+    completions: Math.floor(Math.random() * 1000 + 500),
+    country: ["US", "UK", "CA", "AU", "DE", "FR", "IN"][i % 7] as Offer["country"],
+    badgeHigh: i % 2 === 0,
+    badgeFast: i % 3 === 0,
   })),
-
-  "Play Games": Array.from({ length: 20 }).map((_, i) => ({
-    id: 3000 + i,
-    title: `Play Game #${i + 1}`,
-    payout: 8 + (i % 6),
-    completions: 650 + i * 110,
-    country: ["US", "CA", "UK", "AU"][i % 4] as any,
-    badgeHigh: true,
-    badgeFast: true,
-  })),
-
-  "Watch Videos": Array.from({ length: 20 }).map((_, i) => ({
-    id: 4000 + i,
-    title: `Watch Video #${i + 1}`,
-    payout: 2 + (i % 3),
-    completions: 7200 + i * 350,
-    country: ["US", "CA", "UK", "AU"][i % 4] as any,
-    badgeHigh: i % 4 === 0,
-    badgeFast: true,
+  "Watch Videos": Array.from({ length: 20 }, (_, i) => ({
+    id: 4000 + i + 1,
+    title: `Watch Video ${i + 1} - Sponsored Clip`,
+    payout: Math.round(Math.random() * 3 + 2),
+    completions: Math.floor(Math.random() * 8000 + 5000),
+    country: ["US", "UK", "CA", "AU", "DE", "FR", "IN"][i % 7] as Offer["country"],
+    badgeHigh: i % 2 === 0,
+    badgeFast: i % 3 === 0,
   })),
 };
 
@@ -98,102 +99,67 @@ function SkeletonRow() {
 
 /* ===================== COMPONENT ===================== */
 export default function HighPayingOffers() {
-  const { resolvedTheme } = useTheme();
-  const darkMode = resolvedTheme === "dark";
-
-  const userCountry = useUserCountry();
-  const categories = Object.keys(OFFERS) as CategoryKey[];
-  const [activeCategory, setActiveCategory] = useState<CategoryKey>("Surveys");
+  const [category, setCategory] = useState<CategoryKey>("Surveys");
   const [loading, setLoading] = useState(true);
+  const { resolvedTheme } = useTheme();
+
+  const offers = useMemo(() => OFFERS[category], [category]);
 
   useEffect(() => {
     setLoading(true);
-    const t = setTimeout(() => setLoading(false), 600);
-    return () => clearTimeout(t);
-  }, [activeCategory]);
-
-  const offers = useMemo(
-    () => OFFERS[activeCategory].filter((o) => o.country === userCountry),
-    [activeCategory, userCountry]
-  );
+    const timer = setTimeout(() => setLoading(false), 500);
+    return () => clearTimeout(timer);
+  }, [category]);
 
   return (
-    <section className={`py-20 ${darkMode ? "bg-[#070A14] text-white" : "bg-white text-gray-900"}`}>
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h2 className="text-3xl font-bold mb-6 text-center">High Paying Offers</h2>
 
-        {/* HEADING */}
-        <h2 className="text-3xl md:text-4xl font-extrabold mb-10 text-center">
-          High Paying Offers
-        </h2>
+      {/* CATEGORY FILTER */}
+      <div className="flex justify-center gap-4 mb-4 flex-wrap">
+        {(["Surveys", "App Installs", "Play Games", "Watch Videos"] as CategoryKey[]).map((c) => (
+          <button
+            key={c}
+            onClick={() => setCategory(c)}
+            className={`px-4 py-2 rounded-full font-semibold transition-colors ${
+              category === c
+                ? "bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black"
+                : "bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700"
+            }`}
+          >
+            {c}
+          </button>
+        ))}
+      </div>
 
-        {/* CATEGORY FILTER */}
-        <div className="flex flex-wrap justify-center gap-3 mb-10">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-5 py-2 rounded-full text-sm font-semibold transition
-                ${activeCategory === cat
-                  ? "bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black"
-                  : "bg-white/10 text-gray-300 hover:bg-white/20"
+      {/* OFFERS TABLE */}
+      <div className="overflow-y-auto max-h-[550px] border rounded-xl shadow-lg">
+        <div className="grid grid-cols-4 gap-4 px-4 py-2 font-semibold sticky top-0 z-10 bg-white dark:bg-[#070A14] border-b">
+          <span>Offer</span>
+          <span>Payout</span>
+          <span>Completions</span>
+          <span>Country</span>
+        </div>
+
+        {loading
+          ? Array.from({ length: 10 }).map((_, i) => <SkeletonRow key={i} />)
+          : offers.map((offer) => (
+              <div
+                key={offer.id}
+                className={`grid grid-cols-4 gap-4 px-4 py-2 border-b last:border-b-0 ${
+                  resolvedTheme === "dark" ? "bg-[#0B0E1A]" : "bg-white"
                 }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        {/* OFFERS TABLE */}
-        <div className={`rounded-2xl overflow-hidden border ${darkMode ? "border-white/10 bg-[#0f111b]" : "border-gray-200 bg-gray-50"}`}>
-
-          {/* TABLE HEADER */}
-          <div className={`grid grid-cols-4 px-4 py-3 text-sm font-semibold border-b sticky top-0 z-10
-            ${darkMode ? "text-gray-400 border-white/10 bg-[#0f111b]" : "text-gray-700 border-gray-200 bg-gray-100"}`}>
-            <span>Offer</span>
-            <span className="text-center">Country</span>
-            <span className="text-center">Completed</span>
-            <span className="text-right">Payout</span>
-          </div>
-
-          {/* TABLE BODY */}
-          <div className="max-h-[520px] overflow-y-auto scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
-            {loading ? (
-              Array.from({ length: 6 }).map((_, i) => <SkeletonRow key={i} />)
-            ) : (
-              offers.map((offer) => (
-                <div
-                  key={offer.id}
-                  className={`grid grid-cols-4 items-center px-4 py-4 border-b transition hover:${darkMode ? "bg-white/5" : "bg-gray-100"}`}
-                >
-                  {/* OFFER */}
-                  <div className="flex items-center gap-3 font-medium">
-                    <span>{offer.title}</span>
-
-                    {offer.badgeHigh && (
-                      <span className="flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-red-500/20 text-red-400">
-                        <Flame size={12} /> High
-                      </span>
-                    )}
-                    {offer.badgeFast && (
-                      <span className="flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-yellow-500/20 text-yellow-300">
-                        <Zap size={12} /> Fast
-                      </span>
-                    )}
-                  </div>
-
-                  {/* COUNTRY */}
-                  <div className="text-center text-xl">{COUNTRY_FLAG[offer.country]}</div>
-
-                  {/* COMPLETIONS */}
-                  <div className="text-center text-gray-300">{offer.completions.toLocaleString()}</div>
-
-                  {/* PAYOUT */}
-                  <div className="text-right font-semibold text-green-400">${offer.payout.toFixed(2)}</div>
+              >
+                <div className="flex items-center gap-2">
+                  {offer.title}
+                  {offer.badgeHigh && <Flame className="text-yellow-400" size={16} />}
+                  {offer.badgeFast && <Zap className="text-green-400" size={16} />}
                 </div>
-              ))
-            )}
-          </div>
-        </div>
+                <span>${offer.payout.toFixed(2)}</span>
+                <span>{offer.completions.toLocaleString()}</span>
+                <span>{COUNTRY_FLAG[offer.country]}</span>
+              </div>
+            ))}
       </div>
     </section>
   );
