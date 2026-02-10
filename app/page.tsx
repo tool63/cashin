@@ -10,7 +10,7 @@ import PaymentSection from "@/components/homepage/PaymentSection";
 import FeaturesSection from "@/components/homepage/FeaturesSection";
 import FinalCTASection from "@/components/homepage/FinalCTASection";
 
-/* ================== LIVE SECTIONS (OPTIONAL) ================== */
+/* ================== LIVE SECTIONS ================== */
 import LiveJoining from "@/components/homepage/LiveJoining";
 import LiveEarnings from "@/components/homepage/LiveEarnings";
 import LiveOfferCompletion from "@/components/homepage/LiveOfferCompletion";
