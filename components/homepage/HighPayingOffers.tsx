@@ -197,9 +197,15 @@ export default function HighPayingOffers() {
                     {offer.badgeHigh && <Flame className="text-yellow-400" size={16} />}
                     {offer.badgeFast && <Zap className="text-green-400" size={16} />}
                   </div>
-                  <span>${offer.payout.toFixed(2)}</span>
-                  <span>{offer.completions.toLocaleString()}</span>
+                 
+            
+            
                   <span>{COUNTRY_FLAG[offer.country]}</span>
+                  <span>{offer.completions.toLocaleString()}</span>
+                  <span>${offer.payout.toFixed(2)}</span>
+                
+            
+            
                 </div>
               ))}
         </div>
