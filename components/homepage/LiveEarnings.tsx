@@ -69,8 +69,9 @@ export default function LiveEarnings() {
     <section className="relative py-20 bg-[#0b0f19] overflow-hidden">
       <div className="max-w-6xl mx-auto px-4">
 
-        {/* Section Title */}
-        <div className="flex items-center gap-4 mb-12">
+        {/* Section Title - Centered */}
+        <div className="flex flex-col items-center justify-center text-center gap-4 mb-12">
+          
           <div className="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-400/30 backdrop-blur-lg">
             <Sparkles className="text-emerald-400 w-7 h-7" />
           </div>
@@ -79,10 +80,11 @@ export default function LiveEarnings() {
             <h2 className="text-3xl md:text-4xl font-bold text-white">
               Live Earnings
             </h2>
-            <p className="text-gray-400 text-sm">
+            <p className="text-gray-400 text-sm mt-2">
               Real users earning rewards right now
             </p>
           </div>
+
         </div>
 
         {/* Live Feed Box */}
