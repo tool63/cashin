@@ -3,9 +3,13 @@
 export default function PaymentSection() {
   const methods = [
     { name: "PayPal", emoji: "💸" },
-    { name: "USDT", emoji: "🪙" },
+    { name: "Tether (USDT)", emoji: "🪙" },
     { name: "Bitcoin", emoji: "₿" },
     { name: "Gift Cards", emoji: "🎁" },
+    { name: "Litecoin", emoji: "Ł" },
+    { name: "Ethereum", emoji: "Ξ" },
+    { name: "Dogecoin", emoji: "Ð" },
+    { name: "Binance Coin (BNB)", emoji: "🟡" }, // 8th method
   ];
 
   return (
