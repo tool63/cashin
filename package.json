@@ -15,8 +15,7 @@
     "next-themes": "^0.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "@heroicons/react": "^2.0.18",
-    "react-countup": "^9.3.5"
+    "@heroicons/react": "^2.0.18"
   },
   "devDependencies": {
     "@types/node": "^20.5.1",
