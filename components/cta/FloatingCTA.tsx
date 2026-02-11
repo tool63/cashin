@@ -21,7 +21,7 @@ export default function FloatingCTA() {
         const anyVisible = entries.some((entry) => entry.isIntersecting);
         setVisible(!anyVisible);
       },
-      { threshold: 0.25 } // 25% visible triggers hide
+      { threshold: 0.25 }
     );
 
     ctaElements.forEach((el) => observer.observe(el));
