@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Flame, Zap } from "lucide-react";
 import { useTheme } from "next-themes";
 
 /* ===================== TYPES ===================== */
@@ -10,70 +9,59 @@ type Offer = {
   title: string;
   payout: number;
   completions: number;
-  country: "US" | "CA" | "UK" | "AU" | "DE" | "FR" | "IN";
+  country: string;
   badgeHigh: boolean;
   badgeFast: boolean;
 };
 
 type CategoryKey = "Surveys" | "App Installs" | "Play Games" | "Watch Videos";
 
-/* ===================== FLAGS ===================== */
-const COUNTRY_FLAG: Record<string, string> = {
-  US: "🇺🇸",
-  CA: "🇨🇦",
-  UK: "🇬🇧",
-  AU: "🇦🇺",
-  DE: "🇩🇪",
-  FR: "🇫🇷",
-  IN: "🇮🇳",
-};
-
 /* ===================== OFFERS DATA ===================== */
 const OFFERS: Record<CategoryKey, Offer[]> = {
   Surveys: [
-    { id: 1, title: "Daily Opinion Survey", payout: 3.5, completions: 5200, country: "US", badgeHigh: true, badgeFast: true },
-    { id: 2, title: "Market Research Survey", payout: 4.0, completions: 4800, country: "UK", badgeHigh: true, badgeFast: false },
-    { id: 3, title: "Product Feedback Survey", payout: 4.5, completions: 5300, country: "CA", badgeHigh: true, badgeFast: true },
-    { id: 4, title: "Customer Satisfaction Survey", payout: 5.0, completions: 5000, country: "AU", badgeHigh: true, badgeFast: true },
-    { id: 5, title: "Gaming Experience Survey", payout: 3.5, completions: 4700, country: "DE", badgeHigh: false, badgeFast: true },
-    { id: 6, title: "App Review Survey", payout: 4.0, completions: 4900, country: "FR", badgeHigh: true, badgeFast: true },
-    { id: 7, title: "Lifestyle Survey Challenge", payout: 3.0, completions: 4500, country: "IN", badgeHigh: false, badgeFast: true },
-    { id: 8, title: "Tech Product Survey", payout: 5.0, completions: 5200, country: "US", badgeHigh: true, badgeFast: true },
-    { id: 9, title: "Health & Fitness Survey", payout: 4.0, completions: 4700, country: "UK", badgeHigh: false, badgeFast: true },
-    { id: 10, title: "Movie Feedback Survey", payout: 3.5, completions: 4500, country: "CA", badgeHigh: true, badgeFast: false },
-    { id: 11, title: "Music Preference Survey", payout: 4.5, completions: 5300, country: "AU", badgeHigh: true, badgeFast: true },
-    { id: 12, title: "Travel Experience Survey", payout: 5.0, completions: 5000, country: "DE", badgeHigh: true, badgeFast: true },
-    { id: 13, title: "Food & Beverage Survey", payout: 3.5, completions: 4600, country: "FR", badgeHigh: false, badgeFast: true },
-    { id: 14, title: "Education Feedback Survey", payout: 4.0, completions: 4900, country: "IN", badgeHigh: true, badgeFast: true },
-    { id: 15, title: "Fashion Trend Survey", payout: 3.0, completions: 4400, country: "US", badgeHigh: false, badgeFast: true },
-    { id: 16, title: "Mobile App Feedback Survey", payout: 5.0, completions: 5100, country: "UK", badgeHigh: true, badgeFast: true },
-    { id: 17, title: "Gaming App Survey", payout: 4.5, completions: 5200, country: "CA", badgeHigh: true, badgeFast: true },
-    { id: 18, title: "Home Product Survey", payout: 3.5, completions: 4700, country: "AU", badgeHigh: false, badgeFast: true },
-    { id: 19, title: "Streaming Service Survey", payout: 4.0, completions: 4900, country: "DE", badgeHigh: true, badgeFast: true },
-    { id: 20, title: "Social Media Survey", payout: 5.0, completions: 5200, country: "FR", badgeHigh: true, badgeFast: true },
+    { id: 1, title: "Daily Opinion Survey", payout: 4.0, completions: 2500, country: "US", badgeHigh: true, badgeFast: true },
+    { id: 2, title: "Market Research Survey", payout: 3.5, completions: 2200, country: "UK", badgeHigh: true, badgeFast: false },
+    { id: 3, title: "Product Feedback Survey", payout: 4.5, completions: 2800, country: "CA", badgeHigh: true, badgeFast: true },
+    { id: 4, title: "Customer Satisfaction Survey", payout: 5.0, completions: 3000, country: "AU", badgeHigh: true, badgeFast: true },
+    { id: 5, title: "Gaming Experience Survey", payout: 3.5, completions: 2400, country: "DE", badgeHigh: false, badgeFast: true },
+    { id: 6, title: "App Review Survey", payout: 4.0, completions: 2600, country: "FR", badgeHigh: true, badgeFast: true },
+    { id: 7, title: "Lifestyle Survey Challenge", payout: 3.0, completions: 2100, country: "IN", badgeHigh: false, badgeFast: true },
+    { id: 8, title: "Tech Product Survey", payout: 5.0, completions: 3200, country: "US", badgeHigh: true, badgeFast: true },
+    { id: 9, title: "Health & Fitness Survey", payout: 4.0, completions: 2700, country: "UK", badgeHigh: false, badgeFast: true },
+    { id: 10, title: "Movie Feedback Survey", payout: 3.5, completions: 2500, country: "CA", badgeHigh: true, badgeFast: false },
+    { id: 11, title: "Music Preference Survey", payout: 4.5, completions: 2800, country: "AU", badgeHigh: true, badgeFast: true },
+    { id: 12, title: "Travel Experience Survey", payout: 5.0, completions: 3000, country: "DE", badgeHigh: true, badgeFast: true },
+    { id: 13, title: "Food & Beverage Survey", payout: 3.5, completions: 2300, country: "FR", badgeHigh: false, badgeFast: true },
+    { id: 14, title: "Education Feedback Survey", payout: 4.0, completions: 2600, country: "IN", badgeHigh: true, badgeFast: true },
+    { id: 15, title: "Fashion Trend Survey", payout: 3.0, completions: 2000, country: "US", badgeHigh: false, badgeFast: true },
+    { id: 16, title: "Mobile App Feedback Survey", payout: 5.0, completions: 3100, country: "UK", badgeHigh: true, badgeFast: true },
+    { id: 17, title: "Gaming App Survey", payout: 4.5, completions: 2900, country: "CA", badgeHigh: true, badgeFast: true },
+    { id: 18, title: "Home Product Survey", payout: 3.5, completions: 2400, country: "AU", badgeHigh: false, badgeFast: true },
+    { id: 19, title: "Streaming Service Survey", payout: 4.0, completions: 2700, country: "DE", badgeHigh: true, badgeFast: true },
+    { id: 20, title: "Social Media Survey", payout: 5.0, completions: 3000, country: "FR", badgeHigh: true, badgeFast: true },
   ],
 
   "App Installs": [
-    { id: 21, title: "Candy Crush Saga Install", payout: 5.0, completions: 7200, country: "US", badgeHigh: true, badgeFast: true },
-    { id: 22, title: "TikTok App Install Reward", payout: 6.0, completions: 6800, country: "UK", badgeHigh: true, badgeFast: true },
-    { id: 23, title: "Snapchat Daily Install", payout: 5.0, completions: 7100, country: "CA", badgeHigh: true, badgeFast: true },
-    { id: 24, title: "Among Us VIP Challenge", payout: 5.0, completions: 6500, country: "AU", badgeHigh: true, badgeFast: true },
-    { id: 25, title: "Clash Royale Tournament Reward", payout: 6.0, completions: 6700, country: "DE", badgeHigh: true, badgeFast: false },
-    { id: 26, title: "Fortnite Daily Challenge", payout: 5.0, completions: 6900, country: "FR", badgeHigh: true, badgeFast: true },
-    { id: 27, title: "Call of Duty Mobile Quest", payout: 5.5, completions: 6800, country: "IN", badgeHigh: true, badgeFast: true },
-    { id: 28, title: "Pokemon Go Adventure Quest", payout: 4.5, completions: 6400, country: "US", badgeHigh: false, badgeFast: true },
-    { id: 29, title: "Subway Surfers Daily Reward", payout: 5.0, completions: 7000, country: "UK", badgeHigh: false, badgeFast: true },
-    { id: 30, title: "8 Ball Pool Tournament", payout: 5.5, completions: 6600, country: "CA", badgeHigh: true, badgeFast: true },
-    { id: 31, title: "Gardenscapes Daily Spin", payout: 4.5, completions: 6700, country: "AU", badgeHigh: true, badgeFast: true },
-    { id: 32, title: "Homescapes Quest Reward", payout: 5.0, completions: 6800, country: "DE", badgeHigh: false, badgeFast: true },
-    { id: 33, title: "Candy Crush Friends Challenge", payout: 5.0, completions: 6500, country: "FR", badgeHigh: true, badgeFast: true },
-    { id: 34, title: "Temple Run Adventure", payout: 4.5, completions: 6300, country: "IN", badgeHigh: false, badgeFast: true },
-    { id: 35, title: "Angry Birds Classic Challenge", payout: 5.0, completions: 6400, country: "US", badgeHigh: true, badgeFast: true },
-    { id: 36, title: "Farm Heroes Saga Reward", payout: 5.5, completions: 6700, country: "UK", badgeHigh: true, badgeFast: true },
-    { id: 37, title: "Roblox Game Quest Reward", payout: 6.0, completions: 6200, country: "CA", badgeHigh: true, badgeFast: true },
-    { id: 38, title: "Coin Master Spin Reward", payout: 5.0, completions: 6500, country: "AU", badgeHigh: false, badgeFast: true },
-    { id: 39, title: "Garena Free Fire Challenge", payout: 5.5, completions: 6600, country: "DE", badgeHigh: true, badgeFast: true },
-    { id: 40, title: "Mobile Legends Battle Reward", payout: 6.0, completions: 5600, country: "FR", badgeHigh: true, badgeFast: true },
+    { id: 21, title: "Candy Crush Saga Install", payout: 5.0, completions: 2800, country: "US", badgeHigh: true, badgeFast: true },
+    { id: 22, title: "TikTok App Install Reward", payout: 6.0, completions: 3000, country: "UK", badgeHigh: true, badgeFast: true },
+    { id: 23, title: "Snapchat Daily Install", payout: 5.0, completions: 2700, country: "CA", badgeHigh: true, badgeFast: true },
+    { id: 24, title: "Among Us VIP Challenge", payout: 5.0, completions: 2200, country: "AU", badgeHigh: true, badgeFast: true },
+    { id: 25, title: "Clash Royale Tournament Reward", payout: 6.0, completions: 2500, country: "DE", badgeHigh: true, badgeFast: false },
+    { id: 26, title: "Fortnite Daily Challenge", payout: 5.0, completions: 3000, country: "FR", badgeHigh: true, badgeFast: true },
+    { id: 27, title: "Call of Duty Mobile Quest", payout: 5.5, completions: 2800, country: "IN", badgeHigh: true, badgeFast: true },
+    { id: 28, title: "Pokemon Go Adventure Quest", payout: 4.5, completions: 2000, country: "US", badgeHigh: false, badgeFast: true },
+    { id: 29, title: "Subway Surfers Daily Reward", payout: 5.0, completions: 3100, country: "UK", badgeHigh: false, badgeFast: true },
+    { id: 30, title: "8 Ball Pool Tournament", payout: 5.5, completions: 2300, country: "CA", badgeHigh: true, badgeFast: true },
+    { id: 31, title: "Gardenscapes Daily Spin", payout: 4.5, completions: 2700, country: "AU", badgeHigh: true, badgeFast: true },
+    { id: 32, title: "Homescapes Quest Reward", payout: 5.0, completions: 2900, country: "DE", badgeHigh: false, badgeFast: true },
+    { id: 33, title: "Candy Crush Friends Challenge", payout: 5.0, completions: 2500, country: "FR", badgeHigh: true, badgeFast: true },
+    { id: 34, title: "Temple Run Adventure", payout: 4.5, completions: 1800, country: "IN", badgeHigh: false, badgeFast: true },
+    { id: 35, title: "Angry Birds Classic Challenge", payout: 5.0, completions: 2000, country: "US", badgeHigh: true, badgeFast: true },
+    { id: 36, title: "Farm Heroes Saga Reward", payout: 5.5, completions: 2400, country: "UK", badgeHigh: true, badgeFast: true },
+    { id: 37, title: "Roblox Game Quest Reward", payout: 6.0, completions: 2200, country: "CA", badgeHigh: true, badgeFast: true },
+    { id: 38, title: "Coin Master Spin Reward", payout: 5.0, completions: 2600, country: "AU", badgeHigh: false, badgeFast: true },
+    { id: 39, title: "Garena Free Fire Challenge", payout: 5.5, completions: 2300, country: "DE", badgeHigh: true, badgeFast: true },
+    { id: 40, title: "Mobile Legends Battle Reward", payout: 6.0, completions: 2100, country: "FR", badgeHigh: true, badgeFast: true },
   ],
 
   "Watch Videos": [
@@ -123,6 +111,7 @@ const OFFERS: Record<CategoryKey, Offer[]> = {
   ],
 };
 
+
 /* ===================== SKELETON ===================== */
 function SkeletonRow() {
   return (
@@ -141,4 +130,61 @@ export default function HighPayingOffers() {
   const [loading, setLoading] = useState(true);
   const { resolvedTheme } = useTheme();
 
-  const offers =
+  // Compute offers for selected category
+  const offers = useMemo(() => OFFERS[category], [category]);
+
+  // Simulate loading effect
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 500);
+    return () => clearTimeout(timer);
+  }, [category]);
+
+  return (
+    <div className="p-4">
+      {/* Category Tabs */}
+      <div className="flex gap-4 mb-4">
+        {(["Surveys", "App Installs", "Watch Videos", "Play Games"] as CategoryKey[]).map((cat) => (
+          <button
+            key={cat}
+            className={`px-4 py-2 rounded ${
+              category === cat ? "bg-blue-500 text-white" : "bg-gray-200 dark:bg-gray-700"
+            }`}
+            onClick={() => {
+              setCategory(cat);
+              setLoading(true);
+            }}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      {/* Offers Table */}
+      <div className="bg-gray-100 dark:bg-gray-900 rounded-lg overflow-hidden">
+        <div className="grid grid-cols-4 gap-4 px-4 py-2 font-bold bg-gray-200 dark:bg-gray-800">
+          <div>Title</div>
+          <div>Payout</div>
+          <div>Completions</div>
+          <div>Badges</div>
+        </div>
+
+        {loading
+          ? Array.from({ length: 5 }).map((_, i) => <SkeletonRow key={i} />)
+          : offers.map((offer) => (
+              <div
+                key={offer.id}
+                className="grid grid-cols-4 gap-4 px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-800"
+              >
+                <div>{offer.title}</div>
+                <div>${offer.payout.toFixed(2)}</div>
+                <div>{offer.completions.toLocaleString()}</div>
+                <div>
+                  {offer.badgeHigh && <span className="mr-2 text-red-500">🔥</span>}
+                  {offer.badgeFast && <span className="text-yellow-500">⚡</span>}
+                </div>
+              </div>
+            ))}
+      </div>
+    </div>
+  );
+}
