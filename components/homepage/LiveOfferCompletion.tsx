@@ -5,7 +5,6 @@ import { CheckCircle } from "lucide-react";
 
 /* ================= DATA ================= */
 
-// Worldwide countries with flags
 const countries = [
   { flag: "🇺🇸" }, { flag: "🇬🇧" }, { flag: "🇨🇦" }, { flag: "🇩🇪" },
   { flag: "🇮🇳" }, { flag: "🇫🇷" }, { flag: "🇪🇸" }, { flag: "🇮🇹" },
@@ -17,7 +16,6 @@ const countries = [
   { flag: "🇳🇿" }, { flag: "🇵🇰" }, { flag: "🇻🇳" }, { flag: "🇧🇩" },
 ];
 
-// 100+ realistic CPA offer names
 const offerNames = [
   "Crypto Wallet Signup","Spin & Win Casino App","Cash Rewards Survey","Mobile Legends Level 10",
   "VPN App Free Trial","Finance App Registration","Shopping Cashback App","Online Quiz Rewards",
@@ -41,22 +39,16 @@ const offerNames = [
   "Download App Bonus","Survey & Win","Mobile Rewards Challenge","App Install Bonus","Crypto App Signup",
 ];
 
-// Helper functions
-const randomCountry = () =>
-  countries[Math.floor(Math.random() * countries.length)];
-const randomOfferName = () =>
-  offerNames[Math.floor(Math.random() * offerNames.length)];
+/* ================= HELPERS ================= */
 
+const randomCountry = () => countries[Math.floor(Math.random() * countries.length)];
+const randomOfferName = () => offerNames[Math.floor(Math.random() * offerNames.length)];
 const randomAmount = () => {
   const low = Math.random() < 0.8;
-  const value = low
-    ? Math.random() * 0.94 + 0.05
-    : Math.random() * 1 + 1;
+  const value = low ? Math.random() * 0.94 + 0.05 : Math.random() * 1 + 1;
   return `$${value.toFixed(2)}`;
 };
-
-const randomTime = () =>
-  `${Math.floor(Math.random() * 10) + 1}s ago`;
+const randomTime = () => `${Math.floor(Math.random() * 10) + 1}s ago`;
 
 interface LiveOffer {
   id: number;
@@ -91,7 +83,6 @@ export default function LiveOfferCompletion() {
   const [items, setItems] = useState<LiveOffer[]>(
     Array.from({ length: 100 }, (_, i) => createOffer(i))
   );
-
   const [isLive, setIsLive] = useState(true);
   const listRef = useRef<HTMLUListElement>(null);
 
@@ -101,7 +92,6 @@ export default function LiveOfferCompletion() {
 
     const animate = () => {
       if (!listRef.current) return;
-
       const rows = Array.from(listRef.current.children) as HTMLLIElement[];
 
       rows.forEach((row, index) => {
@@ -179,8 +169,7 @@ export default function LiveOfferCompletion() {
               <li
                 key={o.id}
                 className="grid grid-cols-4 items-center px-5 py-3 rounded-xl border border-gray-200 dark:border-white/10
-                  bg-gradient-to-r from-white/50 to-gray-100 dark:from-white/5 dark:to-transparent
-                  text-gray-900 dark:text-white text-sm md:text-base font-medium
+                  bg-white/5 dark:bg-white/5 text-gray-900 dark:text-white text-sm md:text-base font-medium
                   hover:scale-105 hover:shadow-[0_0_20px_rgba(16,185,129,0.15)] transition-transform duration-300"
               >
                 <span className="font-semibold truncate">{o.offerName}</span>
