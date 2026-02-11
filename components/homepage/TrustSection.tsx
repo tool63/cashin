@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { Stat } from "@/components/homepage/SmallComponents";
 
 export default function TrustSection() {
@@ -31,30 +32,44 @@ export default function TrustSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 bg-[#0b1120]"
+      className="relative py-20 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white"
     >
-      {/* Subtle Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white/5 via-transparent to-white/5 pointer-events-none"></div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 
-      <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
         {/* Heading */}
-        <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4"
+        >
           Trusted by Millions Worldwide
-        </h2>
+        </motion.h2>
+
+        {/* Gradient Accent Line */}
+        <div className="w-24 h-1 mx-auto mb-8 rounded-full bg-gradient-to-r from-yellow-400 via-green-400 to-green-500"></div>
 
         {/* Subtext */}
-        <p className="text-gray-400 max-w-3xl mx-auto mb-16 text-lg leading-relaxed">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="text-base sm:text-lg md:text-xl mb-14 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed"
+        >
           Cashog is one of the most trusted earning platforms, paying users daily
           across the globe with fast, secure, and verified withdrawals.
-        </p>
+        </motion.p>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+        {/* Stats Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
           <Stat title="Total Users" value="25M+" animate={animate} />
           <Stat title="Users Paid" value="3.2M+" animate={animate} />
           <Stat title="Total Payouts" value="$12M+" animate={animate} />
           <Stat title="Trust Rating" value="4.8 ★" animate={animate} />
         </div>
+
       </div>
     </section>
   );
