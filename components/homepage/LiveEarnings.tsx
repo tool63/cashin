@@ -11,7 +11,7 @@ interface Earning {
   joinedAt: number;
 }
 
-const users = [
+const baseUsers = [
   { name: "Olivia", flag: "🇺🇸" }, { name: "Liam", flag: "🇺🇸" },
   { name: "Emma", flag: "🇺🇸" }, { name: "Noah", flag: "🇺🇸" },
   { name: "Ava", flag: "🇺🇸" }, { name: "William", flag: "🇬🇧" },
@@ -29,6 +29,20 @@ const users = [
   { name: "Elias", flag: "🇫🇮" }, { name: "Maya", flag: "🇳🇴" },
   { name: "Liam", flag: "🇳🇴" },
 ];
+
+// Generate 500 unique users
+export const users500 = Array.from({ length: 500 }, (_, i) => {
+  const base = baseUsers[Math.floor(Math.random() * baseUsers.length)];
+  return {
+    name: `${base.name}${i + 1}`, // make each name unique
+    flag: base.flag,
+  };
+});
+
+// Example usage
+console.log(users500[0]); // { name: 'Olivia1', flag: '🇺🇸' }
+console.log(users500.length); // 500
+
 
 function randomAmount() {
   return `$${(Math.random() * 10 + 1).toFixed(2)}`;
@@ -53,24 +67,28 @@ const formatTime = (timestamp: number) => {
 };
 
 export default function LiveEarnings() {
-  const [earnings, setEarnings] = useState<Earning[]>([]);
+  const [earnings, setEarnings] = useState<Earning[]>(() =>
+    Array.from({ length: 100 }, (_, i) => generateEarning(i + 1))
+  );
+  const [isLive, setIsLive] = useState(true); // toggle switch state
 
+  // Live updates
   useEffect(() => {
-    setEarnings(Array.from({ length: 100 }, (_, i) => generateEarning(i + 1)));
-  }, []);
-
-  useEffect(() => {
+    if (!isLive) return;
     let isMounted = true;
+
     const addNewEarning = () => {
       if (!isMounted) return;
       setEarnings((prev) => [generateEarning(Date.now()), ...prev.slice(0, 99)]);
-      const nextInterval = Math.floor(Math.random() * 50000) + 1000;
+      const nextInterval = Math.floor(Math.random() * 50000) + 1000; // 1s–50s
       setTimeout(addNewEarning, nextInterval);
     };
     addNewEarning();
-    return () => { isMounted = false; };
-  }, []);
 
+    return () => { isMounted = false; };
+  }, [isLive]);
+
+  // Update seconds ago every 1s
   useEffect(() => {
     const interval = setInterval(() => setEarnings((prev) => [...prev]), 1000);
     return () => clearInterval(interval);
@@ -79,16 +97,27 @@ export default function LiveEarnings() {
   return (
     <section className="relative py-20 bg-[#0b0f19] overflow-hidden flex justify-center">
       <div className="w-full max-w-4xl text-center">
-        <div className="flex items-center justify-center gap-4 mb-8">
+        <div className="flex items-center justify-center gap-4 mb-4">
           <div className="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-400/30 backdrop-blur-lg">
             <Sparkles className="text-emerald-400 w-7 h-7" />
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-white">
-            Live Earnings
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-white">Live Earnings</h2>
         </div>
 
-        <p className="text-gray-400 mb-6">Real users earning rewards right now</p>
+        {/* Toggle Switch */}
+        <div className="flex justify-center mb-6">
+          <label className="flex items-center cursor-pointer gap-2">
+            <span className="text-white text-sm md:text-base">Live Updates</span>
+            <div
+              className={`w-12 h-6 flex items-center rounded-full p-1 transition-colors duration-300 ${isLive ? 'bg-emerald-400' : 'bg-gray-500'}`}
+              onClick={() => setIsLive(!isLive)}
+            >
+              <div
+                className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-300 ${isLive ? 'translate-x-6' : 'translate-x-0'}`}
+              />
+            </div>
+          </label>
+        </div>
 
         <div className="relative h-[500px] overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl">
           <ul className="space-y-4 p-6">
