@@ -124,7 +124,7 @@ const OFFERS: Record<CategoryKey, Offer[]> = {
 };
 
 /* ===================== SKELETON ===================== */
-function TableSkeleton() {
+function SkeletonRow() {
   return (
     <div className="grid grid-cols-4 gap-4 px-4 py-4 animate-pulse">
       <div className="h-4 bg-white/10 rounded" />
@@ -141,6 +141,4 @@ export default function HighPayingOffers() {
   const [loading, setLoading] = useState(true);
   const { resolvedTheme } = useTheme();
 
-  const offers = useMemo(() => OFFERS[category], [category]);
-
-  useEffect
+  const offers =
