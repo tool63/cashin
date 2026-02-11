@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Banknote } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 /* ================= DATA ================= */
 
@@ -16,23 +16,34 @@ const countries = [
   { flag: "🇵🇭" }, { flag: "🇵🇹" }
 ];
 
-const names = [
-  "Olivia","Noah","Emma","Liam","Ava","Sophia","Mason","Isabella",
-  "James","Mia","Lucas","Charlotte","Amelia","Benjamin","Ethan","Harper",
-  "Alexander","Daniel","Henry","Sebastian","Jackson","Avery","Ella",
-  "Scarlett","Aria","Layla","Chloe","Luna","Jack","Levi","Mateo",
-  "David","Joseph","John","Wyatt","Matthew","Luke","Asher","Carter",
-  "Julian","Grayson","Leo","Jayden","Gabriel","Isaac","Lincoln",
-  "Anthony","Hudson","Dylan","Ezra","Thomas","Charles","Christopher",
-  "Jaxon","Maverick","Josiah","Isaiah","Andrew","Elias","Joshua"
+const offerNames = [
+  "Crypto Wallet Signup","Spin & Win Casino App","Cash Rewards Survey",
+  "Mobile Legends Level 10","VPN App Free Trial","Finance App Registration",
+  "Shopping Cashback App","Online Quiz Rewards","Play & Earn Game Offer",
+  "Daily Polls Survey","Streaming App Trial","Gift Card Rewards App",
+  "Bank Signup Bonus","Food Delivery Cashback","Video Game Beta Access",
+  "Fitness App Signup","E-commerce Discount App","Survey Rewards App",
+  "Music Streaming Trial","Language Learning App","Crypto Mining App",
+  "Online Course Signup","Streaming Subscription Bonus","Shopping App Points",
+  "Gaming App Rewards","Cashback Browser Extension","Crypto Exchange Signup",
+  "Trading App Demo Account","Wallet App Bonus","NFT Platform Registration",
+  "Video Streaming Rewards","Fitness Tracker Trial","Product Review Rewards",
+  "Travel Booking App","Ride Hailing Signup","E-learning Course Bonus",
+  "Digital Wallet Bonus","Crypto Airdrop Claim","Online Auction App",
+  "Fashion App Bonus","Finance Tracker App","Cashback Card App",
+  "Social Media Reward App","Crypto Staking App","Game Booster App",
+  "Video Platform Signup","Banking App Cashback","Streaming App Coupons",
+  "Quiz Platform Points","Trading App Signup","Music Platform Rewards"
 ];
+
+/* ================= CONFIG ================= */
 
 const ROW_HEIGHT = 60;
 const FPS = 60;
 
-interface Withdrawal {
+interface LiveOffer {
   id: number;
-  name: string;
+  offerName: string;
   flag: string;
   amount: string;
   secondsAgo: number;
@@ -44,20 +55,21 @@ interface Withdrawal {
 const randomCountry = () =>
   countries[Math.floor(Math.random() * countries.length)];
 
-const randomName = () =>
-  names[Math.floor(Math.random() * names.length)];
+const randomOffer = () =>
+  offerNames[Math.floor(Math.random() * offerNames.length)];
 
 const randomAmount = () => {
-  const value = Math.random() * 45 + 5;
+  const low = Math.random() < 0.8;
+  const value = low ? Math.random() * 0.94 + 0.05 : Math.random() * 1 + 1;
   return `$${value.toFixed(2)}`;
 };
 
-const createWithdrawal = (id: number): Withdrawal => {
+const createOffer = (id: number): LiveOffer => {
   const scrollTime = 1 + Math.random() * 10;
 
   return {
     id,
-    name: randomName(),
+    offerName: randomOffer(),
     flag: randomCountry().flag,
     amount: randomAmount(),
     secondsAgo: Math.floor(Math.random() * 20) + 1,
@@ -67,27 +79,15 @@ const createWithdrawal = (id: number): Withdrawal => {
 
 /* ================= COMPONENT ================= */
 
-export default function LiveWithdrawals() {
-  const [items, setItems] = useState<Withdrawal[]>(
-    Array.from({ length: 100 }, (_, i) => createWithdrawal(i))
+export default function LiveOfferCompletion() {
+  const [items, setItems] = useState<LiveOffer[]>(
+    Array.from({ length: 100 }, (_, i) => createOffer(i))
   );
 
   const [isLive, setIsLive] = useState(true);
-  const [currentTime, setCurrentTime] = useState(
-    new Date().toLocaleTimeString()
-  );
-
   const listRef = useRef<HTMLUListElement>(null);
 
-  /* ===== Live Clock ===== */
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTime(new Date().toLocaleTimeString());
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  /* ===== Time Ago Update ===== */
+  /* ===== Time Update ===== */
   useEffect(() => {
     if (!isLive) return;
 
@@ -134,7 +134,7 @@ export default function LiveWithdrawals() {
           setItems((prev) => {
             const next = [...prev];
             const moved = next.pop();
-            if (moved) next.unshift(createWithdrawal(moved.id));
+            if (moved) next.unshift(createOffer(moved.id));
             return next;
           });
         }
@@ -151,18 +151,13 @@ export default function LiveWithdrawals() {
     <section className="relative py-20 flex justify-center bg-gradient-to-b from-gray-100 to-gray-50 dark:from-[#0b0f19] dark:to-[#0b0f19]">
       <div className="w-full max-w-4xl px-4 text-center">
 
-        {/* Live Clock */}
-        <div className="mb-4 text-sm font-medium text-emerald-600 dark:text-emerald-400">
-          🕒 {currentTime}
-        </div>
-
         {/* Header */}
         <div className="flex justify-center items-center gap-3 mb-6">
           <div className="p-3 rounded-2xl bg-emerald-400/20 border border-emerald-400 backdrop-blur-lg">
-            <Banknote className="text-emerald-500 w-7 h-7" />
+            <Sparkles className="text-emerald-500 w-7 h-7" />
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
-            Live Withdrawals
+            Live Offer Completion
           </h2>
         </div>
 
@@ -186,9 +181,9 @@ export default function LiveWithdrawals() {
         <div className="relative h-[500px] overflow-hidden rounded-3xl border border-gray-200 dark:border-white/10 bg-white dark:bg-[#0f172a] backdrop-blur-xl shadow-xl">
 
           <ul ref={listRef} className="space-y-4 p-6">
-            {items.map((w) => (
+            {items.map((o) => (
               <li
-                key={w.id}
+                key={o.id}
                 className="grid grid-cols-4 items-center px-6 py-4 rounded-2xl
                 bg-gradient-to-r from-[#0f172a] via-[#111827] to-[#0b1220]
                 border border-white/10
@@ -196,17 +191,17 @@ export default function LiveWithdrawals() {
                 hover:scale-[1.02] transition-transform duration-300 shadow-lg"
               >
                 <span className="truncate text-white font-semibold">
-                  {w.name}
+                  {o.offerName}
                 </span>
 
-                <span className="text-2xl text-center">{w.flag}</span>
+                <span className="text-2xl text-center">{o.flag}</span>
 
                 <span className="text-emerald-400 font-bold text-center text-lg">
-                  {w.amount}
+                  {o.amount}
                 </span>
 
                 <span className="text-gray-400 text-center text-sm">
-                  {w.secondsAgo}s ago
+                  {o.secondsAgo}s ago
                 </span>
               </li>
             ))}
