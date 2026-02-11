@@ -11,9 +11,7 @@ const countries = [
   { flag: "🇸🇪" }, { flag: "🇳🇴" }, { flag: "🇫🇮" }, { flag: "🇮🇳" },
   { flag: "🇦🇺" }, { flag: "🇧🇷" }, { flag: "🇯🇵" }, { flag: "🇰🇷" },
   { flag: "🇲🇽" }, { flag: "🇨🇭" }, { flag: "🇦🇷" }, { flag: "🇿🇦" },
-  { flag: "🇪🇬" }, { flag: "🇹🇷" }, { flag: "🇸🇬" }, { flag: "🇦🇪" },
-  { flag: "🇵🇱" }, { flag: "🇹🇭" }, { flag: "🇮🇩" }, { flag: "🇲🇾" },
-  { flag: "🇵🇭" }, { flag: "🇵🇹" }
+  { flag: "🇪🇬" }, { flag: "🇹🇷" }, { flag: "🇸🇬" }, { flag: "🇦🇪" }
 ];
 
 const offerNames = [
@@ -21,12 +19,9 @@ const offerNames = [
   "Mobile Legends Level 10","VPN App Free Trial","Finance App Registration",
   "Shopping Cashback App","Online Quiz Rewards","Play & Earn Game Offer",
   "Streaming App Trial","Gift Card Rewards App","Bank Signup Bonus",
-  "Food Delivery Cashback","Video Game Beta Access","Fitness App Signup",
-  "Crypto Exchange Signup","Trading App Demo Account","NFT Platform Registration",
-  "Travel Booking App","Ride Hailing Signup","E-learning Course Bonus",
-  "Crypto Staking App","Streaming Platform Trial","Daily Login Bonus",
-  "Complete Daily Quiz","Watch Ad & Earn","Refer Friends Bonus",
-  "Download Free App","Claim Cashback Reward","Join Webinar Session"
+  "Food Delivery Cashback","Fitness App Signup","Crypto Exchange Signup",
+  "NFT Platform Registration","Travel Booking App","Ride Hailing Signup",
+  "Daily Login Bonus","Watch Ad & Earn","Refer Friends Bonus"
 ];
 
 /* ================= TYPES ================= */
@@ -81,13 +76,13 @@ export default function LiveOfferCompletion() {
 
   const [isLive, setIsLive] = useState(true);
 
-  /* Live new offers (1s–50s random) */
+  /* Live update */
   useEffect(() => {
     if (!isLive) return;
 
     let active = true;
 
-    const addNewOffer = () => {
+    const addNew = () => {
       if (!active) return;
 
       setOffers((prev) => [
@@ -95,13 +90,11 @@ export default function LiveOfferCompletion() {
         ...prev.slice(0, 99),
       ]);
 
-      const nextInterval =
-        Math.floor(Math.random() * 50000) + 1000;
-
-      setTimeout(addNewOffer, nextInterval);
+      const next = Math.floor(Math.random() * 50000) + 1000;
+      setTimeout(addNew, next);
     };
 
-    addNewOffer();
+    addNew();
 
     return () => {
       active = false;
@@ -151,26 +144,26 @@ export default function LiveOfferCompletion() {
           </label>
         </div>
 
-        {/* Offers List */}
-        <div className="relative h-[500px] overflow-hidden rounded-3xl border border-gray-200 dark:border-white/10 bg-white/70 dark:bg-[#111827]/70 backdrop-blur-xl shadow-lg">
+        {/* List */}
+        <div className="relative h-[500px] overflow-hidden rounded-3xl border border-gray-200 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-xl shadow-lg">
           <ul className="space-y-4 p-6">
             {offers.map((o) => (
               <li
                 key={o.id}
                 className="grid grid-cols-4 items-center px-5 py-3 rounded-xl 
-                bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 
-                dark:from-[#1f2937] dark:via-[#111827] dark:to-[#1f2937]
-                text-white text-sm md:text-base font-medium
-                border border-gray-700
-                hover:scale-105 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)]
+                border border-gray-200 dark:border-white/10
+                bg-gradient-to-r from-white/50 to-gray-100 
+                dark:from-white/5 dark:to-transparent
+                text-gray-900 dark:text-white text-sm md:text-base font-medium
+                hover:scale-105 hover:shadow-[0_0_20px_rgba(16,185,129,0.15)]
                 transition-all duration-300"
               >
                 <span className="truncate">{o.name}</span>
                 <span className="text-xl text-center">{o.flag}</span>
-                <span className="text-emerald-400 font-bold text-center">
+                <span className="text-emerald-600 dark:text-emerald-400 font-bold text-center">
                   {o.amount}
                 </span>
-                <span className="text-gray-400 text-center">
+                <span className="text-gray-500 dark:text-gray-400 text-center">
                   {formatTime(o.createdAt)}
                 </span>
               </li>
