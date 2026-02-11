@@ -1,191 +1,218 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Sparkles } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Banknote } from "lucide-react";
 
-/* =============================
-   BASE USERS (US, UK, CA, EU)
-============================= */
+/* ================= DATA ================= */
 
-const baseUsers = [
-  { name: "Olivia", flag: "🇺🇸" }, { name: "Liam", flag: "🇺🇸" },
-  { name: "Emma", flag: "🇺🇸" }, { name: "Noah", flag: "🇺🇸" },
-  { name: "Ava", flag: "🇺🇸" }, { name: "William", flag: "🇬🇧" },
-  { name: "Amelia", flag: "🇬🇧" }, { name: "Oliver", flag: "🇬🇧" },
-  { name: "Isla", flag: "🇬🇧" }, { name: "Harry", flag: "🇬🇧" },
-  { name: "Charlotte", flag: "🇨🇦" }, { name: "Lucas", flag: "🇨🇦" },
-  { name: "Mia", flag: "🇨🇦" }, { name: "Sophie", flag: "🇩🇪" },
-  { name: "Leon", flag: "🇩🇪" }, { name: "Hannah", flag: "🇫🇷" },
-  { name: "Mateo", flag: "🇪🇸" }, { name: "Anna", flag: "🇮🇹" },
-  { name: "Ella", flag: "🇳🇱" }, { name: "Oscar", flag: "🇸🇪" },
+const countries = [
+  { flag: "🇺🇸" }, { flag: "🇬🇧" }, { flag: "🇨🇦" }, { flag: "🇩🇪" },
+  { flag: "🇫🇷" }, { flag: "🇪🇸" }, { flag: "🇮🇹" }, { flag: "🇳🇱" },
+  { flag: "🇸🇪" }, { flag: "🇳🇴" }, { flag: "🇫🇮" }, { flag: "🇮🇳" },
+  { flag: "🇦🇺" }, { flag: "🇧🇷" }, { flag: "🇯🇵" }, { flag: "🇰🇷" },
+  { flag: "🇲🇽" }, { flag: "🇨🇭" }, { flag: "🇦🇷" }, { flag: "🇿🇦" },
+  { flag: "🇪🇬" }, { flag: "🇹🇷" }, { flag: "🇸🇬" }, { flag: "🇦🇪" },
+  { flag: "🇵🇱" }, { flag: "🇹🇭" }, { flag: "🇮🇩" }, { flag: "🇲🇾" },
+  { flag: "🇵🇭" }, { flag: "🇵🇹" }
 ];
 
-/* =============================
-   GENERATE 500 USERS
-============================= */
+const names = [
+  "Olivia","Noah","Emma","Liam","Ava","Sophia","Mason","Isabella",
+  "James","Mia","Lucas","Charlotte","Amelia","Benjamin","Ethan","Harper",
+  "Alexander","Daniel","Henry","Sebastian","Jackson","Avery","Ella",
+  "Scarlett","Aria","Layla","Chloe","Luna","Jack","Levi","Mateo",
+  "David","Joseph","John","Wyatt","Matthew","Luke","Asher","Carter",
+  "Julian","Grayson","Leo","Jayden","Gabriel","Isaac","Lincoln",
+  "Anthony","Hudson","Dylan","Ezra","Thomas","Charles","Christopher",
+  "Jaxon","Maverick","Josiah","Isaiah","Andrew","Elias","Joshua"
+];
 
-const users500 = Array.from({ length: 500 }, (_, i) => {
-  const base = baseUsers[Math.floor(Math.random() * baseUsers.length)];
-  return {
-    name: `${base.name}${i + 1}`,
-    flag: base.flag,
-  };
-});
-
-/* =============================
-   TYPES
-============================= */
+const ROW_HEIGHT = 60;
+const FPS = 60;
 
 interface Withdrawal {
   id: number;
   name: string;
   flag: string;
   amount: string;
-  createdAt: number;
+  secondsAgo: number;
+  speed: number;
 }
 
-/* =============================
-   GENERATE WITHDRAWAL
-============================= */
+/* ================= HELPERS ================= */
 
-function generateWithdrawal(id: number): Withdrawal {
-  const user = users500[Math.floor(Math.random() * users500.length)];
+const randomCountry = () =>
+  countries[Math.floor(Math.random() * countries.length)];
+
+const randomName = () =>
+  names[Math.floor(Math.random() * names.length)];
+
+const randomAmount = () => {
+  const value = Math.random() * 45 + 5;
+  return `$${value.toFixed(2)}`;
+};
+
+const createWithdrawal = (id: number): Withdrawal => {
+  const scrollTime = 1 + Math.random() * 10;
 
   return {
     id,
-    name: user.name,
-    flag: user.flag,
-    amount: `$${(Math.random() * 50 + 5).toFixed(2)}`,
-    createdAt: Date.now(),
+    name: randomName(),
+    flag: randomCountry().flag,
+    amount: randomAmount(),
+    secondsAgo: Math.floor(Math.random() * 20) + 1,
+    speed: ROW_HEIGHT / (scrollTime * FPS),
   };
-}
-
-/* =============================
-   FORMAT TIME
-============================= */
-
-const formatTime = (timestamp: number) => {
-  const diff = Math.floor((Date.now() - timestamp) / 1000);
-
-  if (diff < 60) return `${diff}s ago`;
-  const mins = Math.floor(diff / 60);
-  return `${mins}m ago`;
 };
 
-/* =============================
-   COMPONENT
-============================= */
+/* ================= COMPONENT ================= */
 
 export default function LiveWithdrawals() {
-  const [withdrawals, setWithdrawals] = useState<Withdrawal[]>(() =>
-    Array.from({ length: 100 }, (_, i) =>
-      generateWithdrawal(i + 1)
-    )
+  const [items, setItems] = useState<Withdrawal[]>(
+    Array.from({ length: 100 }, (_, i) => createWithdrawal(i))
   );
 
   const [isLive, setIsLive] = useState(true);
+  const [currentTime, setCurrentTime] = useState(
+    new Date().toLocaleTimeString()
+  );
 
-  /* =============================
-     LIVE ADD (1s–50s)
-  ============================= */
+  const listRef = useRef<HTMLUListElement>(null);
 
-  useEffect(() => {
-    if (!isLive) return;
-
-    let active = true;
-
-    const addWithdrawal = () => {
-      if (!active) return;
-
-      setWithdrawals((prev) => [
-        generateWithdrawal(Date.now()),
-        ...prev.slice(0, 99),
-      ]);
-
-      const next = Math.floor(Math.random() * 49000) + 1000;
-      setTimeout(addWithdrawal, next);
-    };
-
-    addWithdrawal();
-
-    return () => {
-      active = false;
-    };
-  }, [isLive]);
-
-  /* =============================
-     FORCE TIME UPDATE EVERY 1s
-  ============================= */
-
+  /* ===== Live Clock ===== */
   useEffect(() => {
     const interval = setInterval(() => {
-      setWithdrawals((prev) => [...prev]);
+      setCurrentTime(new Date().toLocaleTimeString());
     }, 1000);
-
     return () => clearInterval(interval);
   }, []);
 
+  /* ===== Time Ago Update ===== */
+  useEffect(() => {
+    if (!isLive) return;
+
+    const interval = setInterval(() => {
+      setItems((prev) =>
+        prev.map((item) => ({
+          ...item,
+          secondsAgo: item.secondsAgo + 1,
+        }))
+      );
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [isLive]);
+
+  /* ===== Scroll Animation ===== */
+  useEffect(() => {
+    if (!isLive) return;
+    let raf: number;
+
+    const animate = () => {
+      if (!listRef.current) return;
+
+      const rows = Array.from(
+        listRef.current.children
+      ) as HTMLLIElement[];
+
+      rows.forEach((row, index) => {
+        const item = items[index];
+        if (!item) return;
+
+        let mb = parseFloat(row.style.marginBottom || "0");
+        mb += item.speed;
+        row.style.marginBottom = `${mb}px`;
+      });
+
+      const last = rows[rows.length - 1];
+      if (last) {
+        const height = last.offsetHeight;
+        const mb = parseFloat(last.style.marginBottom || "0");
+
+        if (mb >= height) {
+          rows.forEach((r) => (r.style.marginBottom = "0"));
+          setItems((prev) => {
+            const next = [...prev];
+            const moved = next.pop();
+            if (moved) next.unshift(createWithdrawal(moved.id));
+            return next;
+          });
+        }
+      }
+
+      raf = requestAnimationFrame(animate);
+    };
+
+    raf = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(raf);
+  }, [items, isLive]);
+
   return (
-    <section className="relative py-20 overflow-hidden flex justify-center bg-gradient-to-b from-gray-100 to-gray-50 dark:from-[#0b0f19] dark:to-[#0b0f19]">
-      <div className="w-full max-w-4xl text-center px-4">
+    <section className="relative py-20 flex justify-center bg-gradient-to-b from-gray-100 to-gray-50 dark:from-[#0b0f19] dark:to-[#0b0f19]">
+      <div className="w-full max-w-4xl px-4 text-center">
 
-        {/* HEADER */}
-        <div className="flex items-center justify-center gap-4 mb-6">
+        {/* Live Clock */}
+        <div className="mb-4 text-sm font-medium text-emerald-600 dark:text-emerald-400">
+          🕒 {currentTime}
+        </div>
+
+        {/* Header */}
+        <div className="flex justify-center items-center gap-3 mb-6">
           <div className="p-3 rounded-2xl bg-emerald-400/20 border border-emerald-400 backdrop-blur-lg">
-            <Sparkles className="text-emerald-500 w-7 h-7" />
+            <Banknote className="text-emerald-500 w-7 h-7" />
           </div>
-
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
             Live Withdrawals
           </h2>
         </div>
 
-        {/* TOGGLE */}
+        {/* Toggle */}
         <div className="flex justify-center mb-6">
-          <label className="flex items-center cursor-pointer gap-2">
-            <span className="text-gray-900 dark:text-white font-medium">
-              Live Updates
-            </span>
-
+          <div
+            onClick={() => setIsLive(!isLive)}
+            className={`w-14 h-7 flex items-center rounded-full p-1 cursor-pointer transition ${
+              isLive ? "bg-emerald-500" : "bg-gray-400"
+            }`}
+          >
             <div
-              onClick={() => setIsLive(!isLive)}
-              className={`w-12 h-6 flex items-center rounded-full p-1 transition-colors duration-300 ${
-                isLive ? "bg-emerald-400" : "bg-gray-400"
+              className={`bg-white w-5 h-5 rounded-full shadow-md transform transition ${
+                isLive ? "translate-x-7" : "translate-x-0"
               }`}
-            >
-              <div
-                className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-300 ${
-                  isLive ? "translate-x-6" : "translate-x-0"
-                }`}
-              />
-            </div>
-          </label>
+            />
+          </div>
         </div>
 
-        {/* LIST */}
-        <div className="relative h-[500px] overflow-hidden rounded-3xl border border-gray-200 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-xl shadow-lg">
-          <ul className="space-y-4 p-6">
-            {withdrawals.map((w) => (
+        {/* List */}
+        <div className="relative h-[500px] overflow-hidden rounded-3xl border border-gray-200 dark:border-white/10 bg-white dark:bg-[#0f172a] backdrop-blur-xl shadow-xl">
+
+          <ul ref={listRef} className="space-y-4 p-6">
+            {items.map((w) => (
               <li
                 key={w.id}
-                className="grid grid-cols-4 items-center px-5 py-3 rounded-xl border border-gray-200 dark:border-white/10
-                  bg-gradient-to-r from-white/50 to-gray-100 dark:from-white/5 dark:to-transparent
-                  text-gray-900 dark:text-white text-sm md:text-base font-medium
-                  hover:scale-105 hover:shadow-[0_0_20px_rgba(16,185,129,0.15)] transition-transform duration-300"
+                className="grid grid-cols-4 items-center px-6 py-4 rounded-2xl
+                bg-gradient-to-r from-[#0f172a] via-[#111827] to-[#0b1220]
+                border border-white/10
+                text-gray-200 text-sm md:text-base font-medium
+                hover:scale-[1.02] transition-transform duration-300 shadow-lg"
               >
-                <span className="truncate text-center">{w.name}</span>
-                <span className="text-xl text-center">{w.flag}</span>
-                <span className="text-emerald-600 dark:text-emerald-400 font-bold text-center">
+                <span className="truncate text-white font-semibold">
+                  {w.name}
+                </span>
+
+                <span className="text-2xl text-center">{w.flag}</span>
+
+                <span className="text-emerald-400 font-bold text-center text-lg">
                   {w.amount}
                 </span>
-                <span className="text-gray-500 dark:text-gray-400 text-center">
-                  {formatTime(w.createdAt)}
+
+                <span className="text-gray-400 text-center text-sm">
+                  {w.secondsAgo}s ago
                 </span>
               </li>
             ))}
           </ul>
 
-          <div className="pointer-events-none absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-gray-50 dark:from-[#0b0f19] to-transparent rounded-b-3xl" />
+          <div className="pointer-events-none absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#0b0f19] to-transparent rounded-b-3xl" />
         </div>
       </div>
     </section>
