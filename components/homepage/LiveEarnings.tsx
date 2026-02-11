@@ -11,18 +11,44 @@ interface Earning {
   time: string;
 }
 
-const names = [
-  "Rahim","John","Ayesha","Lucas","Maria","Ahmed","Sofia","Daniel","Mina","Alex",
-  "Olivia","Liam","Emma","Noah","Ava","Ethan","Isabella","Mason","Mia","James",
-  "Arif","Hasan","Nusrat","Karim","Sabbir","Tania","Rafi","Imran","Sadia","Farhan"
+// Users from USA, UK, Canada, and Europe
+const users = [
+  { name: "Olivia", flag: "🇺🇸" },
+  { name: "Liam", flag: "🇺🇸" },
+  { name: "Emma", flag: "🇺🇸" },
+  { name: "Noah", flag: "🇺🇸" },
+  { name: "Ava", flag: "🇺🇸" },
+  { name: "William", flag: "🇬🇧" },
+  { name: "Amelia", flag: "🇬🇧" },
+  { name: "Oliver", flag: "🇬🇧" },
+  { name: "Isla", flag: "🇬🇧" },
+  { name: "Harry", flag: "🇬🇧" },
+  { name: "Emma", flag: "🇨🇦" },
+  { name: "Liam", flag: "🇨🇦" },
+  { name: "Charlotte", flag: "🇨🇦" },
+  { name: "Lucas", flag: "🇨🇦" },
+  { name: "Mia", flag: "🇨🇦" },
+  { name: "Sophie", flag: "🇩🇪" },
+  { name: "Leon", flag: "🇩🇪" },
+  { name: "Hannah", flag: "🇫🇷" },
+  { name: "Lucas", flag: "🇫🇷" },
+  { name: "Lina", flag: "🇪🇸" },
+  { name: "Mateo", flag: "🇪🇸" },
+  { name: "Anna", flag: "🇮🇹" },
+  { name: "Luca", flag: "🇮🇹" },
+  { name: "Ella", flag: "🇳🇱" },
+  { name: "Finn", flag: "🇳🇱" },
+  { name: "Emily", flag: "🇸🇪" },
+  { name: "Oscar", flag: "🇸🇪" },
+  { name: "Isabelle", flag: "🇫🇮" },
+  { name: "Elias", flag: "🇫🇮" },
+  { name: "Maya", flag: "🇳🇴" },
+  { name: "Liam", flag: "🇳🇴" },
 ];
 
-const flags = ["🇧🇩","🇺🇸","🇮🇳","🇧🇷","🇨🇦","🇦🇪","🇩🇪","🇫🇷","🇬🇧","🇦🇺"];
-
-// Generate random time between 1s – 8m
+// Generate random time for display: 1s – 8m
 function generateRandomTime() {
   const useSeconds = Math.random() > 0.5;
-
   if (useSeconds) {
     const seconds = Math.floor(Math.random() * 60) + 1;
     return `${seconds}s ago`;
@@ -33,19 +59,20 @@ function generateRandomTime() {
 }
 
 function generateEarning(id: number): Earning {
+  const user = users[Math.floor(Math.random() * users.length)];
   return {
     id,
-    name: names[Math.floor(Math.random() * names.length)],
-    flag: flags[Math.floor(Math.random() * flags.length)],
+    name: user.name,
+    flag: user.flag,
     amount: `$${(Math.random() * 10 + 1).toFixed(2)}`,
-    time: generateRandomTime()
+    time: generateRandomTime(),
   };
 }
 
 export default function LiveEarnings() {
   const [earnings, setEarnings] = useState<Earning[]>([]);
 
-  // Create 100 initial records
+  // Generate 100 initial records
   useEffect(() => {
     const initialData = Array.from({ length: 100 }, (_, i) =>
       generateEarning(i + 1)
@@ -53,16 +80,28 @@ export default function LiveEarnings() {
     setEarnings(initialData);
   }, []);
 
-  // Add new earning every 3 seconds at top
+  // Add new record at random interval (1s to 50s)
   useEffect(() => {
-    const interval = setInterval(() => {
+    let isMounted = true;
+
+    function addNewEarning() {
+      if (!isMounted) return;
+
       setEarnings((prev) => {
         const newItem = generateEarning(Date.now());
         return [newItem, ...prev.slice(0, 99)];
       });
-    }, 3000);
 
-    return () => clearInterval(interval);
+      // Random next interval between 1s (1000ms) and 50s (50000ms)
+      const nextInterval = Math.floor(Math.random() * 50000) + 1000;
+      setTimeout(addNewEarning, nextInterval);
+    }
+
+    addNewEarning();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (
@@ -103,21 +142,10 @@ export default function LiveEarnings() {
                 hover:border-emerald-400/40
                 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)]"
               >
-                <span className="font-semibold truncate">
-                  {e.name}
-                </span>
-
-                <span className="text-center text-xl">
-                  {e.flag}
-                </span>
-
-                <span className="text-center font-bold text-emerald-400 tracking-wide">
-                  {e.amount}
-                </span>
-
-                <span className="text-center text-gray-400 text-xs md:text-sm">
-                  {e.time}
-                </span>
+                <span className="font-semibold truncate">{e.name}</span>
+                <span className="text-center text-xl">{e.flag}</span>
+                <span className="text-center font-bold text-emerald-400 tracking-wide">{e.amount}</span>
+                <span className="text-center text-gray-400 text-xs md:text-sm">{e.time}</span>
               </li>
             ))}
           </ul>
