@@ -9,7 +9,7 @@ export default function PaymentSection() {
     { name: "Litecoin", emoji: "Ł" },
     { name: "Ethereum", emoji: "Ξ" },
     { name: "Dogecoin", emoji: "Ð" },
-    { name: "Binance Coin (BNB)", emoji: "🟡" }, // 8th method
+    { name: "Binance Coin (BNB)", emoji: "🟡" },
   ];
 
   return (
@@ -20,7 +20,7 @@ export default function PaymentSection() {
           Fast, secure, and trusted payout options.
         </p>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-8 justify-center">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-0 justify-center">
           {methods.map((method) => (
             <div
               key={method.name}
