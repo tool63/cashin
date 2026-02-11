@@ -25,36 +25,19 @@ export function SectionTitle({ icon, text }: { icon: string; text: string }) {
 }
 
 /* ================= STAT ================= */
-export function Stat({ title, value }: { title: string; value: string }) {
+export function Stat({ title, value, animate }: { title: string; value: string; animate?: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   const [count, setCount] = useState(0);
-  const [animate, setAnimate] = useState(false);
 
   // Extract numeric value and suffix
   const numericValue = parseFloat(String(value).replace(/[^0-9.]/g, "")) || 0;
   const suffix = String(value).replace(/[0-9.]/g, "");
   const decimals = numericValue % 1 !== 0 ? 1 : 0; // show 1 decimal if needed
 
-  // Trigger animation when in viewport
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setAnimate(true);
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
-  // Animate counter
+  // Animate counter when animate is true
   useEffect(() => {
     if (!animate) return;
+
     const duration = 2000; // 2 seconds
     const startTime = performance.now();
 
@@ -64,6 +47,7 @@ export function Stat({ title, value }: { title: string; value: string }) {
       setCount(valueToSet);
       if (progress < 1) requestAnimationFrame(step);
     };
+
     requestAnimationFrame(step);
   }, [animate, numericValue, decimals]);
 
