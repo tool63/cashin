@@ -16,11 +16,16 @@
 
   transition: transform 0.4s ease, opacity 0.3s ease;
 
-  /* Animated rainbow gradient inspired by LiveJoining */
-  background: linear-gradient(270deg, #ff0000, #ffa500, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff);
-  background-size: 1400% 1400%;
-  animation: rainbowBG 8s ease infinite;
-  color: #fff;
+  /* ================= UPDATED GRADIENT ================= */
+  background: linear-gradient(
+    270deg,
+    #facc15, /* yellow-400 */
+    #84cc16, /* green-400 */
+    #22c55e  /* green-500 */
+  );
+  background-size: 600% 600%;
+  animation: gradientBG 8s ease infinite;
+  color: #000; /* keep text readable */
 }
 
 /* ================= SHOW / HIDE ================= */
@@ -67,8 +72,8 @@
   100% { opacity: 0; transform: translate(-50%, -20px) scale(0); }
 }
 
-/* ================= RAINBOW BACKGROUND ================= */
-@keyframes rainbowBG {
+/* ================= GRADIENT ANIMATION ================= */
+@keyframes gradientBG {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
