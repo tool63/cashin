@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { Users } from "lucide-react";
 
-// Countries and flags
+// Worldwide countries and flags
 const countries = [
   { name: "USA", flag: "🇺🇸" },
   { name: "UK", flag: "🇬🇧" },
@@ -14,107 +15,115 @@ const countries = [
   { name: "Netherlands", flag: "🇳🇱" },
   { name: "Sweden", flag: "🇸🇪" },
   { name: "Norway", flag: "🇳🇴" },
+  { name: "Brazil", flag: "🇧🇷" },
+  { name: "Japan", flag: "🇯🇵" },
+  { name: "India", flag: "🇮🇳" },
+  { name: "Australia", flag: "🇦🇺" },
+  { name: "Mexico", flag: "🇲🇽" },
+  { name: "South Korea", flag: "🇰🇷" },
+  { name: "Russia", flag: "🇷🇺" },
+  { name: "Argentina", flag: "🇦🇷" },
+  { name: "South Africa", flag: "🇿🇦" },
+  { name: "Egypt", flag: "🇪🇬" },
+];
+
+// 200+ random first names
+const names = [
+  "Alex","Mia","John","Sara","Leo","Emma","Chris","Liam","Olivia","Noah",
+  "Lucas","Sophia","Ethan","Isabella","Ava","William","Amelia","Oliver","Isla","Harry",
+  "Charlotte","James","Emily","Benjamin","Ella","Daniel","Grace","Jacob","Chloe","Michael",
+  "Sofia","Alexander","Lily","Matthew","Zoe","Ryan","Hannah","Nathan","Ruby","Samuel",
+  "Mason","Scarlett","Henry","Aria","Sebastian","Layla","Gabriel","Aurora","Jack","Victoria",
+  "Wyatt","Nora","Caleb","Luna","Isaac","Maya","Owen","Alice","Dylan","Clara",
+  "Luke","Anna","Anthony","Eva","Jonathan","Leah","Christian","Ivy","Aaron","Camila",
+  "Thomas","Elena","Charles","Stella","Eli","Hazel","Connor","Violet","Isaiah","Lydia",
+  "Adam","Penelope","Julian","Riley","Hunter","Ellie","Aaron","Lillian","Carter","Madeline",
+  "Robert","Nina","Dominic","Sadie","Austin","Paisley","Jordan","Aurora","Cole","Emilia",
+  "Ian","Cora","Jason","Bella","Jasper","Naomi","Tyler","Anna","Blake","Adeline",
+  "Brandon","Eliza","Gavin","Willow","Evan","Julia","Leo","Serena","Max","Amara",
+  "Victor","Samantha","Milo","Avery","Fabian","Mila","Rafael","Lara","Tobias","Kylie",
+  "Diego","Elodie","Hugo","Iris","Adrian","Amelie","Vincent","Freya","Julio","Zara",
+  "Santiago","Arwen","Felix","Clara","Emmanuel","Livia","Matteo","Bianca","Oscar","Fiona",
+  "Lorenzo","Cecilia","Enzo","Valeria","Thiago","Camila","Nicolas","Gabriela","Eduardo","Liliana",
+  "Sebastian","Catalina","Antonio","Julieta","Ricardo","Isabella","Hector","Emilia","Ruben","Martina",
+  "Jorge","Victoria","Carlos","Sofia","Pedro","Lucia","Diego","Maya","Rafael","Elena",
+  "Manuel","Ariana","Miguel","Giulia","Fernando","Alessia","Andres","Claudia","Raul","Mariana",
+  "Leonardo","Sara","Gabriel","Emma","Victor","Olivia","Alex","Sophia","Adrian","Isabel",
 ];
 
 // Random username generator
 function randomName() {
-  const names = [
-    "Alex","Mia","John","Sara","Leo","Emma","Chris","Liam","Olivia","Noah",
-    "Lucas","Sophia","Ethan","Isabella","Ava","William","Amelia","Oliver","Isla","Harry"
-  ];
   const number = Math.floor(Math.random() * 100);
   return names[Math.floor(Math.random() * names.length)] + number;
 }
 
-// Live User type
+// User type
 interface LiveUser {
   username: string;
-  country: string;
   flag: string;
-  joinedAt: number; // timestamp in ms
+  joinedAt: number; // timestamp
 }
 
-// Generate 100 initial users
-const generateUsers = (): LiveUser[] =>
-  Array.from({ length: 100 }, () => {
+// Generate initial users
+const generateUsers = (count: number): LiveUser[] =>
+  Array.from({ length: count }, () => {
     const c = countries[Math.floor(Math.random() * countries.length)];
     return {
       username: randomName(),
-      country: c.name,
       flag: c.flag,
-      joinedAt: Date.now() - Math.floor(Math.random() * 10000), // random 0–10s ago
+      joinedAt: Date.now() - Math.floor(Math.random() * 10000),
     };
   });
 
-// Convert timestamp to "x s ago" format
+// Format timestamp to "x s/min ago"
 const formatTime = (timestamp: number) => {
   const diff = Math.floor((Date.now() - timestamp) / 1000);
   if (diff < 60) return `${diff}s ago`;
-  const mins = Math.floor(diff / 60);
-  return `${mins}m ago`;
+  return `${Math.floor(diff / 60)}m ago`;
 };
 
 export default function LiveJoining() {
-  const [users, setUsers] = useState<LiveUser[]>(generateUsers());
-  const listRef = useRef<HTMLUListElement>(null);
+  const [users, setUsers] = useState<LiveUser[]>(generateUsers(200));
 
-  // Scroll animation
+  // Move last user to top at random interval (1s–50s)
   useEffect(() => {
-    let animationFrame: number;
+    let isMounted = true;
 
-    const scrollStep = () => {
-      if (!listRef.current) return;
+    const addNewUser = () => {
+      if (!isMounted) return;
 
-      const listItems = Array.from(listRef.current.children) as HTMLLIElement[];
+      setUsers((prev) => {
+        const next = [...prev];
+        const moved = next.pop();
+        if (moved) moved.joinedAt = Date.now();
+        if (moved) next.unshift(moved);
+        return next;
+      });
 
-      // Move last item to top
-      const lastItem = listItems[listItems.length - 1];
-      if (lastItem) {
-        const lastHeight = lastItem.offsetHeight;
-        let margin = parseFloat(lastItem.style.marginBottom || "0");
-        margin += 0.5; // scroll speed
-        lastItem.style.marginBottom = `${margin}px`;
-
-        if (margin >= lastHeight) {
-          setUsers((prev) => {
-            const next = [...prev];
-            const moved = next.pop();
-            if (moved) {
-              moved.joinedAt = Date.now(); // reset joined time
-              next.unshift(moved);
-            }
-            // Reset margin
-            listItems.forEach((li) => (li.style.marginBottom = "0"));
-            return next;
-          });
-        }
-      }
-
-      animationFrame = requestAnimationFrame(scrollStep);
+      const nextInterval = Math.floor(Math.random() * 50000) + 1000;
+      setTimeout(addNewUser, nextInterval);
     };
 
-    animationFrame = requestAnimationFrame(scrollStep);
-    return () => cancelAnimationFrame(animationFrame);
-  }, [users]);
+    addNewUser();
 
-  // Update "seconds ago" every 1s
+    return () => { isMounted = false; };
+  }, []);
+
+  // Update seconds ago every 1s
   useEffect(() => {
-    const interval = setInterval(() => {
-      setUsers((prev) => [...prev]); // trigger re-render to update time
-    }, 1000);
-
+    const interval = setInterval(() => setUsers((prev) => [...prev]), 1000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-10">
-      {/* Section Title */}
-      <h3 className="text-2xl md:text-3xl font-bold mb-6 text-center text-white">
-        Live Joining
-      </h3>
+    <div className="max-w-4xl mx-auto px-4 py-10">
+      <div className="flex items-center gap-3 mb-6">
+        <Users className="w-6 h-6 text-emerald-400" />
+        <h3 className="text-2xl md:text-3xl font-bold text-white">Live Joining</h3>
+      </div>
 
-      <div className="overflow-hidden h-[360px] md:h-[400px] rounded-xl border border-white/20 bg-white/5 backdrop-blur-lg">
-        <ul ref={listRef} className="space-y-2 p-4">
+      <div className="overflow-hidden h-[500px] md:h-[600px] rounded-xl border border-white/20 bg-white/5 backdrop-blur-lg">
+        <ul className="space-y-2 p-4">
           {users.map((user, idx) => (
             <li
               key={idx}
