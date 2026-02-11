@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { CheckCircle } from "lucide-react";
 
 /* ================= DATA ================= */
 
@@ -12,42 +11,71 @@ const countries = [
   { flag: "🇷🇺" }, { flag: "🇲🇽" }, { flag: "🇸🇪" }, { flag: "🇳🇴" },
   { flag: "🇳🇱" }, { flag: "🇨🇭" }, { flag: "🇦🇷" }, { flag: "🇿🇦" },
   { flag: "🇪🇬" }, { flag: "🇹🇷" }, { flag: "🇸🇬" }, { flag: "🇦🇪" },
-  { flag: "🇮🇱" }, { flag: "🇹🇭" }, { flag: "🇨🇳" }, { flag: "🇵🇭" },
-  { flag: "🇳🇿" }, { flag: "🇵🇰" }, { flag: "🇻🇳" }, { flag: "🇧🇩" },
 ];
 
 const offerNames = [
-  "Crypto Wallet Signup","Spin & Win Casino App","Cash Rewards Survey","Mobile Legends Level 10",
-  "VPN App Free Trial","Finance App Registration","Shopping Cashback App","Online Quiz Rewards",
-  "Play & Earn Game Offer","Daily Polls Survey","Streaming App Trial","Gift Card Rewards App",
-  "App Install Rewards","Bank Signup Bonus","Crypto Mining App","Fantasy Sports Signup",
-  "Survey & Earn","Fitness App Challenge","New User Bonus","Video App Trial","Referral Rewards",
-  "Quiz Master Challenge","Online Casino Bonus","Shopping App Signup","Health App Rewards",
-  "Trivia Game Challenge","Music App Trial","Cashback Shopping","Stock Trading App Bonus","E-learning App",
-  "Sign Up Rewards","Game Booster App","Mobile Game Rewards","Photo App Signup","Shopping Challenge",
-  "Online Poll Rewards","Puzzle Game Challenge","VPN Premium Trial","Food Delivery Signup Bonus",
-  "Streaming Service Rewards","Crypto Exchange Signup","Spin Wheel Rewards","Quiz App Challenge",
-  "Play Casino Online","App Daily Bonus","Survey Rewards App","Travel App Signup","Music Streaming Bonus",
-  "New User Cashback","Fantasy App Bonus","E-commerce Signup Reward","Download & Earn","Gift Card Survey",
-  "Banking App Challenge","Crypto Rewards App","Video Game App Signup","Mobile Quiz Rewards",
-  "Sign Up Offer","Gaming Platform Bonus","Crypto App Challenge","Online Learning Bonus","Cash App Trial",
-  "Referral Program Bonus","Top Quiz App","Casino Game Signup","Daily Rewards App","Cashback App Signup",
-  "Health App Challenge","Finance App Signup","Shopping Rewards","Crypto Wallet Trial","Spin & Win Bonus",
-  "Survey App Challenge","E-commerce App Rewards","Game Rewards Signup","Streaming App Bonus",
-  "Quiz Challenge App","Play & Earn Casino","Fitness App Signup","Crypto Game Bonus","Online Poll App",
-  "Mobile Game Challenge","Bank Signup Rewards","Gift Card App Bonus","Trivia App Rewards","Travel App Bonus",
-  "Download App Bonus","Survey & Win","Mobile Rewards Challenge","App Install Bonus","Crypto App Signup",
+  "Crypto Wallet Signup","Spin & Win Casino App","Cash Rewards Survey",
+  "Mobile Legends Level 10","VPN App Free Trial","Finance App Registration",
+  "Shopping Cashback App","Online Quiz Rewards","Play & Earn Game Offer",
+  "Daily Polls Survey","Streaming App Trial","Gift Card Rewards App",
+  "Bank Signup Bonus","Food Delivery Cashback","Video Game Beta Access",
+  "Fitness App Signup","E-commerce Discount App","Survey Rewards App",
+  "Music Streaming Trial","Language Learning App","Crypto Mining App",
+  "Online Course Signup","Streaming Subscription Bonus","Shopping App Points",
+  "Gaming App Rewards","Cashback Browser Extension","Photo Editing App",
+  "Crypto Exchange Signup","Trading App Demo Account","Wallet App Bonus",
+  "NFT Platform Registration","Shopping Points App","Video Streaming Rewards",
+  "Fitness Tracker Trial","Product Review Rewards","Quiz Game Rewards",
+  "Travel Booking App","Ride Hailing Signup","E-learning Course Bonus",
+  "Digital Wallet Bonus","Food Coupon App","Health Tracker Rewards",
+  "Music App Premium Trial","Sports App Signup","Crypto Airdrop Claim",
+  "Online Auction App","Fashion App Bonus","E-book App Rewards",
+  "Streaming App Premium","Mobile Game Coins","Finance Tracker App",
+  "Cashback Card App","Social Media Reward App","Survey App Freebies",
+  "Online Learning Platform","Crypto Staking App","Game Booster App",
+  "Video Platform Signup","Fitness App Points","Banking App Cashback",
+  "Shopping Festival Rewards","Streaming App Coupons","Travel App Bonus",
+  "Ride Sharing Cashback","Quiz Platform Points","Trading App Signup",
+  "Music Platform Rewards","E-commerce Signup Bonus","Crypto Wallet Bonus",
+  "Gaming Platform Coins","Cash Rewards App","Online Course Rewards",
+  "Fitness Challenge Signup","Video Game Rewards","Banking App Signups",
+  "Shopping App Cashback","Streaming Service Points","Survey Reward App",
+  "Crypto Exchange Rewards","E-learning App Signup","Fitness App Bonus",
+  "Streaming App Signup","Game App Points","Digital Wallet Signup",
+  "Shopping App Freebies","Online Game Bonus","Finance App Cashback",
+  "Music App Signup","Quiz App Rewards","Crypto Airdrop Signup",
+  "Fitness App Free Trial","E-commerce Rewards","Trading Platform Signup",
+  "Bank Signup Reward","Video Game Points","Streaming Platform Trial",
+  "Cashback App Bonus","Mobile Game Rewards","Online Course Signup",
+  "Health App Rewards","NFT Marketplace Signup","Quiz Game Freebies",
+  "Travel App Signup","Ride Sharing App Rewards","Gaming App Signup",
+  "Streaming App Bonus","Finance Tracker Signup","Crypto Wallet Signup",
+  "E-learning Platform Bonus","Fitness App Rewards","Music Streaming Signup",
+  "Social Media App Bonus","Digital Wallet Rewards","Online Game Signup",
+  "E-commerce App Bonus","Crypto Trading Signup","Video Platform Rewards",
+  "Fitness App Signup","Survey App Points","Banking App Bonus",
+  "Game Platform Rewards","Shopping App Signup","Streaming Service Bonus",
+  "Quiz App Signup","Finance App Rewards","NFT Platform Bonus",
+  "Ride Hailing App Signup","Online Learning Bonus","Crypto Staking Signup",
+  "Gaming Rewards App","Digital Wallet Signup","Video Game Signup",
+  "Streaming App Rewards","E-learning Signup","Fitness App Bonus",
+  "Music App Rewards","Shopping App Rewards","Cashback App Signup",
+  "Trading App Rewards","Banking App Signup","Online Course Bonus",
+  "Crypto Airdrop Rewards","Quiz Platform Signup","Streaming Signup",
+  "Fitness Challenge Rewards","Game App Signup","E-commerce Signup",
 ];
 
 /* ================= HELPERS ================= */
 
 const randomCountry = () => countries[Math.floor(Math.random() * countries.length)];
-const randomOfferName = () => offerNames[Math.floor(Math.random() * offerNames.length)];
+const randomOffer = () => offerNames[Math.floor(Math.random() * offerNames.length)];
+
 const randomAmount = () => {
   const low = Math.random() < 0.8;
   const value = low ? Math.random() * 0.94 + 0.05 : Math.random() * 1 + 1;
   return `$${value.toFixed(2)}`;
 };
+
 const randomTime = () => `${Math.floor(Math.random() * 10) + 1}s ago`;
 
 interface LiveOffer {
@@ -68,7 +96,7 @@ const createOffer = (id: number): LiveOffer => {
   const scrollTime = 1 + Math.random() * 11;
   return {
     id,
-    offerName: randomOfferName(),
+    offerName: randomOffer(),
     flag: c.flag,
     amount: randomAmount(),
     time: randomTime(),
@@ -137,17 +165,12 @@ export default function LiveOfferCompletion() {
   }, [items, isLive]);
 
   return (
-    <section className="relative py-20 flex justify-center bg-gradient-to-b from-gray-100 to-gray-50 dark:from-[#0b0f19] dark:to-[#0b0f19]">
-      <div className="w-full max-w-4xl px-4 text-center">
+    <section className="relative py-20 overflow-hidden flex justify-center bg-gradient-to-b from-gray-100 to-gray-50 dark:from-[#0b0f19] dark:to-[#0b0f19]">
+      <div className="w-full max-w-4xl text-center px-4">
         {/* Header */}
-        <div className="flex items-center justify-center gap-4 mb-6">
-          <div className="p-3 rounded-2xl bg-emerald-400/20 border border-emerald-400 backdrop-blur-lg">
-            <CheckCircle className="text-emerald-500 w-7 h-7" />
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
-            ✅ Live Offer Completion
-          </h2>
-        </div>
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
+          ✅ Live Offer Completion
+        </h2>
 
         {/* Toggle */}
         <div className="flex justify-center mb-6">
@@ -162,7 +185,7 @@ export default function LiveOfferCompletion() {
           </label>
         </div>
 
-        {/* Offer List */}
+        {/* Offers List */}
         <div className="relative h-[500px] overflow-hidden rounded-3xl border border-gray-200 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-xl shadow-lg">
           <ul ref={listRef} className="space-y-4 p-6">
             {items.map((o) => (
@@ -172,9 +195,9 @@ export default function LiveOfferCompletion() {
                   bg-white/5 dark:bg-white/5 text-gray-900 dark:text-white text-sm md:text-base font-medium
                   hover:scale-105 hover:shadow-[0_0_20px_rgba(16,185,129,0.15)] transition-transform duration-300"
               >
-                <span className="font-semibold truncate">{o.offerName}</span>
-                <span className="text-center text-xl">{o.flag}</span>
-                <span className="text-green-500 font-semibold text-center">{o.amount}</span>
+                <span className="truncate">{o.offerName}</span>
+                <span className="text-xl text-center">{o.flag}</span>
+                <span className="text-emerald-600 dark:text-emerald-400 font-bold text-center">{o.amount}</span>
                 <span className="text-gray-500 dark:text-gray-400 text-center">{o.time}</span>
               </li>
             ))}
