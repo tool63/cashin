@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 /* ================= DATA ================= */
 
-// Global countries for flags
+// Worldwide flags
 const countries = [
   { flag: "🇺🇸" }, { flag: "🇬🇧" }, { flag: "🇨🇦" }, { flag: "🇩🇪" },
   { flag: "🇫🇷" }, { flag: "🇪🇸" }, { flag: "🇮🇹" }, { flag: "🇳🇱" },
@@ -16,7 +16,7 @@ const countries = [
   { flag: "🇵🇭" }, { flag: "🇵🇹" }
 ];
 
-// Realistic offer names (200+)
+// 200+ realistic offer names
 const offerNames = [
   "Crypto Wallet Signup","Spin & Win Casino App","Cash Rewards Survey","Mobile Legends Level 10",
   "VPN App Free Trial","Finance App Registration","Shopping Cashback App","Online Quiz Rewards",
@@ -108,7 +108,6 @@ const randomAmount = () => {
   return `$${value.toFixed(2)}`;
 };
 const randomTime = () => `${Math.floor(Math.random() * 10) + 1}s ago`;
-
 const createOffer = (id: number): LiveOffer => {
   const c = randomCountry();
   const scrollTime = 1 + Math.random() * 11;
@@ -126,9 +125,7 @@ const createOffer = (id: number): LiveOffer => {
 /* ================= COMPONENT ================= */
 
 export default function LiveOfferCompletion() {
-  const [items, setItems] = useState<LiveOffer[]>(
-    Array.from({ length: 100 }, (_, i) => createOffer(i))
-  );
+  const [items, setItems] = useState<LiveOffer[]>(Array.from({ length: 100 }, (_, i) => createOffer(i)));
   const [isLive, setIsLive] = useState(true);
   const listRef = useRef<HTMLUListElement>(null);
 
@@ -152,9 +149,9 @@ export default function LiveOfferCompletion() {
         row.style.background = `
           linear-gradient(
             90deg,
-            hsl(${item.gradientOffset},100%,50%),
-            hsl(${(item.gradientOffset + 120) % 360},100%,50%),
-            hsl(${(item.gradientOffset + 240) % 360},100%,50%)
+            hsl(${item.gradientOffset}, 100%, 20%),
+            hsl(${(item.gradientOffset + 120) % 360}, 100%, 25%),
+            hsl(${(item.gradientOffset + 240) % 360}, 100%, 20%)
           )
         `;
       });
@@ -203,19 +200,19 @@ export default function LiveOfferCompletion() {
         </div>
 
         {/* Offers List */}
-        <div className="relative h-[500px] overflow-hidden rounded-3xl border border-gray-200 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-xl shadow-lg">
+        <div className="relative h-[500px] overflow-hidden rounded-3xl border border-gray-200 dark:border-white/10 bg-white/5 dark:bg-white/5 backdrop-blur-xl shadow-lg">
           <ul ref={listRef} className="space-y-4 p-6">
             {items.map((o) => (
               <li
                 key={o.id}
                 className="grid grid-cols-4 items-center px-5 py-3 rounded-xl border border-gray-200 dark:border-white/10
-                  bg-white/5 dark:bg-white/5 text-gray-900 dark:text-white text-sm md:text-base font-medium
+                  bg-gray-900 dark:bg-[#111827] text-gray-100 text-sm md:text-base font-medium
                   hover:scale-105 hover:shadow-[0_0_20px_rgba(16,185,129,0.15)] transition-transform duration-300"
               >
                 <span className="truncate">{o.offerName}</span>
                 <span className="text-xl text-center">{o.flag}</span>
-                <span className="text-emerald-600 dark:text-emerald-400 font-bold text-center">{o.amount}</span>
-                <span className="text-gray-500 dark:text-gray-400 text-center">{o.time}</span>
+                <span className="text-emerald-500 font-bold text-center">{o.amount}</span>
+                <span className="text-gray-400 text-center">{o.time}</span>
               </li>
             ))}
           </ul>
