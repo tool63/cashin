@@ -3,14 +3,7 @@
 import { useEffect, useState } from "react";
 import { Sparkles } from "lucide-react";
 
-interface Earning {
-  id: number;
-  name: string;
-  flag: string;
-  amount: string;
-  joinedAt: number;
-}
-
+// Base users for flags and names
 const baseUsers = [
   { name: "Olivia", flag: "🇺🇸" }, { name: "Liam", flag: "🇺🇸" },
   { name: "Emma", flag: "🇺🇸" }, { name: "Noah", flag: "🇺🇸" },
@@ -31,34 +24,35 @@ const baseUsers = [
 ];
 
 // Generate 500 unique users
-export const users500 = Array.from({ length: 500 }, (_, i) => {
+const users500 = Array.from({ length: 500 }, (_, i) => {
   const base = baseUsers[Math.floor(Math.random() * baseUsers.length)];
   return {
-    name: `${base.name}${i + 1}`, // make each name unique
+    name: `${base.name}${i + 1}`,
     flag: base.flag,
   };
 });
 
-// Example usage
-console.log(users500[0]); // { name: 'Olivia1', flag: '🇺🇸' }
-console.log(users500.length); // 500
-
-
-function randomAmount() {
-  return `$${(Math.random() * 10 + 1).toFixed(2)}`;
+interface Earning {
+  id: number;
+  name: string;
+  flag: string;
+  amount: string;
+  joinedAt: number;
 }
 
+// Generate a single earning
 function generateEarning(id: number): Earning {
-  const user = users[Math.floor(Math.random() * users.length)];
+  const user = users500[Math.floor(Math.random() * users500.length)];
   return {
     id,
     name: user.name,
     flag: user.flag,
-    amount: randomAmount(),
+    amount: `$${(Math.random() * 10 + 1).toFixed(2)}`,
     joinedAt: Date.now() - Math.floor(Math.random() * 60000),
   };
 }
 
+// Format timestamp to "x s/m ago"
 const formatTime = (timestamp: number) => {
   const diff = Math.floor((Date.now() - timestamp) / 1000);
   if (diff < 60) return `${diff}s ago`;
@@ -95,21 +89,26 @@ export default function LiveEarnings() {
   }, []);
 
   return (
-    <section className="relative py-20 bg-[#0b0f19] overflow-hidden flex justify-center">
+    <section className="relative py-20 overflow-hidden flex justify-center bg-gray-50 dark:bg-[#0b0f19]">
       <div className="w-full max-w-4xl text-center">
+        {/* Header with Icon */}
         <div className="flex items-center justify-center gap-4 mb-4">
           <div className="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-400/30 backdrop-blur-lg">
             <Sparkles className="text-emerald-400 w-7 h-7" />
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-white">Live Earnings</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
+            Live Earnings
+          </h2>
         </div>
 
         {/* Toggle Switch */}
         <div className="flex justify-center mb-6">
           <label className="flex items-center cursor-pointer gap-2">
-            <span className="text-white text-sm md:text-base">Live Updates</span>
+            <span className="text-gray-900 dark:text-white text-sm md:text-base">
+              Live Updates
+            </span>
             <div
-              className={`w-12 h-6 flex items-center rounded-full p-1 transition-colors duration-300 ${isLive ? 'bg-emerald-400' : 'bg-gray-500'}`}
+              className={`w-12 h-6 flex items-center rounded-full p-1 transition-colors duration-300 ${isLive ? 'bg-emerald-400' : 'bg-gray-400'}`}
               onClick={() => setIsLive(!isLive)}
             >
               <div
@@ -119,23 +118,24 @@ export default function LiveEarnings() {
           </label>
         </div>
 
-        <div className="relative h-[500px] overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl">
+        {/* Earnings list */}
+        <div className="relative h-[500px] overflow-hidden rounded-2xl border border-gray-300 dark:border-white/10 bg-white/50 dark:bg-white/5 backdrop-blur-xl">
           <ul className="space-y-4 p-6">
             {earnings.map((e) => (
               <li
                 key={e.id}
-                className="grid grid-cols-4 items-center px-5 py-3 rounded-xl border border-white/10
-                  bg-white/5 text-white text-sm md:text-base transition-all duration-300
+                className="grid grid-cols-4 items-center px-5 py-3 rounded-xl border border-gray-200 dark:border-white/10
+                  bg-white/50 dark:bg-white/5 text-gray-900 dark:text-white text-sm md:text-base transition-all duration-300
                   hover:border-emerald-400/40 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)]"
               >
                 <span className="font-semibold truncate">{e.name}</span>
                 <span className="text-center text-xl">{e.flag}</span>
-                <span className="text-center font-bold text-emerald-400 tracking-wide">{e.amount}</span>
-                <span className="text-center text-gray-400 text-xs md:text-sm">{formatTime(e.joinedAt)}</span>
+                <span className="text-center font-bold text-emerald-500 dark:text-emerald-400 tracking-wide">{e.amount}</span>
+                <span className="text-center text-gray-500 dark:text-gray-400 text-xs md:text-sm">{formatTime(e.joinedAt)}</span>
               </li>
             ))}
           </ul>
-          <div className="pointer-events-none absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#0b0f19] to-transparent" />
+          <div className="pointer-events-none absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-gray-50 dark:from-[#0b0f19] to-transparent" />
         </div>
       </div>
     </section>
