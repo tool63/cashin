@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react";
 
 // Countries and flags
 const countries = [
@@ -8,216 +8,125 @@ const countries = [
   { name: "UK", flag: "🇬🇧" },
   { name: "Canada", flag: "🇨🇦" },
   { name: "Germany", flag: "🇩🇪" },
-  { name: "India", flag: "🇮🇳" },
   { name: "France", flag: "🇫🇷" },
-  { name: "Japan", flag: "🇯🇵" },
-  { name: "Brazil", flag: "🇧🇷" },
-]
+  { name: "Spain", flag: "🇪🇸" },
+  { name: "Italy", flag: "🇮🇹" },
+  { name: "Netherlands", flag: "🇳🇱" },
+  { name: "Sweden", flag: "🇸🇪" },
+  { name: "Norway", flag: "🇳🇴" },
+];
 
 // Random username generator
 function randomName() {
-  const names = ["Alex", "Mia", "John", "Sara", "Leo", "Emma", "Chris", "Liam", "Olivia", "Noah"]
-  const numbers = Math.floor(Math.random() * 100)
-  return names[Math.floor(Math.random() * names.length)] + numbers
+  const names = [
+    "Alex","Mia","John","Sara","Leo","Emma","Chris","Liam","Olivia","Noah",
+    "Lucas","Sophia","Ethan","Isabella","Ava","William","Amelia","Oliver","Isla","Harry"
+  ];
+  const number = Math.floor(Math.random() * 100);
+  return names[Math.floor(Math.random() * names.length)] + number;
 }
 
-// Random glow color generator
-const glowColors = ["#ff00ff", "#00ffff", "#00ff00", "#ffff00", "#ffa500", "#ff4500"]
-
+// Live User type
 interface LiveUser {
-  username: string
-  country: string
-  flag: string
-  time: string
-  speed: number
-  slideOffset?: number
-  slideDir?: number
-  flash?: boolean
-  flagBounce?: boolean
-  glowColor?: string
-  bgSpeed?: number
-  bgIntensity?: number
-  rippleOffset?: number
-  spark?: boolean
-  gradientOffset?: number
+  username: string;
+  country: string;
+  flag: string;
+  joinedAt: number; // timestamp in ms
 }
 
-// Generate 100 users
+// Generate 100 initial users
 const generateUsers = (): LiveUser[] =>
   Array.from({ length: 100 }, () => {
-    const c = countries[Math.floor(Math.random() * countries.length)]
-    const rowHeight = 48
-    const fps = 60
-    const scrollTime = 1 + Math.random() * 11
-    const speed = rowHeight / (scrollTime * fps)
+    const c = countries[Math.floor(Math.random() * countries.length)];
     return {
       username: randomName(),
       country: c.name,
       flag: c.flag,
-      time: `${Math.floor(Math.random() * 10) + 1}s ago`,
-      speed,
-      slideOffset: 0,
-      slideDir: 1,
-      flash: false,
-      flagBounce: false,
-      glowColor: glowColors[Math.floor(Math.random() * glowColors.length)],
-      bgSpeed: 1 + Math.random() * 2,
-      bgIntensity: 5 + Math.random() * 10,
-      rippleOffset: Math.random() * 100,
-      spark: false,
-      gradientOffset: Math.random() * 360,
-    }
-  })
+      joinedAt: Date.now() - Math.floor(Math.random() * 10000), // random 0–10s ago
+    };
+  });
+
+// Convert timestamp to "x s ago" format
+const formatTime = (timestamp: number) => {
+  const diff = Math.floor((Date.now() - timestamp) / 1000);
+  if (diff < 60) return `${diff}s ago`;
+  const mins = Math.floor(diff / 60);
+  return `${mins}m ago`;
+};
 
 export default function LiveJoining() {
-  const [users, setUsers] = useState<LiveUser[]>(generateUsers())
-  const listRef = useRef<HTMLUListElement>(null)
+  const [users, setUsers] = useState<LiveUser[]>(generateUsers());
+  const listRef = useRef<HTMLUListElement>(null);
 
+  // Scroll animation
   useEffect(() => {
-    let animationFrame: number
+    let animationFrame: number;
 
     const scrollStep = () => {
-      if (!listRef.current) return
-      const listItems = Array.from(listRef.current.children) as HTMLLIElement[]
+      if (!listRef.current) return;
 
-      listItems.forEach((item, index) => {
-        const user = users[index]
-
-        // Vertical scrolling
-        let margin = parseFloat(item.style.marginBottom || "0")
-        margin += user.speed
-        item.style.marginBottom = `${margin}px`
-
-        // Horizontal slide for username
-        if (user.slideOffset === undefined) user.slideOffset = 0
-        if (user.slideDir === undefined) user.slideDir = 1
-        const maxSlide = 8
-        user.slideOffset += 0.1 * user.slideDir
-        if (user.slideOffset > maxSlide || user.slideOffset < -maxSlide) user.slideDir *= -1
-        const usernameSpan = item.querySelector("span.username") as HTMLSpanElement
-        if (usernameSpan) usernameSpan.style.transform = `translateX(${user.slideOffset}px)`
-
-        // Flag bounce
-        const flagSpan = item.querySelector("span.flag") as HTMLSpanElement
-        if (flagSpan) flagSpan.classList.toggle("animate-bounce", !!user.flagBounce)
-
-        // Spark flicker
-        if (user.spark && Math.random() < 0.05) {
-          item.classList.add("spark-flicker")
-          setTimeout(() => item.classList.remove("spark-flicker"), 200)
-        }
-
-        // Rainbow gradient background per row
-        if (user.gradientOffset !== undefined) {
-          user.gradientOffset += 0.5
-          const gradient = `linear-gradient(90deg, hsl(${user.gradientOffset}, 100%, 50%), hsl(${(user.gradientOffset + 120) % 360}, 100%, 50%), hsl(${(user.gradientOffset + 240) % 360}, 100%, 50%))`
-          item.style.background = gradient
-        }
-      })
+      const listItems = Array.from(listRef.current.children) as HTMLLIElement[];
 
       // Move last item to top
-      const lastItem = listItems[listItems.length - 1]
+      const lastItem = listItems[listItems.length - 1];
       if (lastItem) {
-        const lastHeight = lastItem.offsetHeight
-        const lastMargin = parseFloat(lastItem.style.marginBottom || "0")
-        if (lastMargin >= lastHeight) {
-          setUsers((prev) => {
-            const next = [...prev]
-            const moved = next.pop()
-            if (moved) {
-              moved.time = `${Math.floor(Math.random() * 10) + 1}s ago`
-              const rowHeight = 48
-              const fps = 60
-              const scrollTime = 1 + Math.random() * 11
-              moved.speed = rowHeight / (scrollTime * fps)
-              moved.slideOffset = 0
-              moved.slideDir = 1
-              moved.flash = true
-              moved.flagBounce = true
-              moved.glowColor = glowColors[Math.floor(Math.random() * glowColors.length)]
-              moved.bgSpeed = 1 + Math.random() * 2
-              moved.bgIntensity = 5 + Math.random() * 10
-              moved.rippleOffset = Math.random() * 100
-              moved.spark = true
-              moved.gradientOffset = Math.random() * 360
-              next.unshift(moved)
-            }
-            listItems.forEach((li) => (li.style.marginBottom = "0"))
-            return next
-          })
+        const lastHeight = lastItem.offsetHeight;
+        let margin = parseFloat(lastItem.style.marginBottom || "0");
+        margin += 0.5; // scroll speed
+        lastItem.style.marginBottom = `${margin}px`;
 
-          setTimeout(() => {
-            setUsers((prev) =>
-              prev.map((u, i) =>
-                i === 0 ? { ...u, flash: false, flagBounce: false, spark: false } : u
-              )
-            )
-          }, 700)
+        if (margin >= lastHeight) {
+          setUsers((prev) => {
+            const next = [...prev];
+            const moved = next.pop();
+            if (moved) {
+              moved.joinedAt = Date.now(); // reset joined time
+              next.unshift(moved);
+            }
+            // Reset margin
+            listItems.forEach((li) => (li.style.marginBottom = "0"));
+            return next;
+          });
         }
       }
 
-      animationFrame = requestAnimationFrame(scrollStep)
-    }
+      animationFrame = requestAnimationFrame(scrollStep);
+    };
 
-    animationFrame = requestAnimationFrame(scrollStep)
-    return () => cancelAnimationFrame(animationFrame)
-  }, [users])
+    animationFrame = requestAnimationFrame(scrollStep);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [users]);
+
+  // Update "seconds ago" every 1s
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setUsers((prev) => [...prev]); // trigger re-render to update time
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-10">
-      <h3 className="text-xl md:text-2xl font-bold mb-6 text-center text-white">
+    <div className="max-w-3xl mx-auto px-4 py-10">
+      {/* Section Title */}
+      <h3 className="text-2xl md:text-3xl font-bold mb-6 text-center text-white">
         Live Joining
       </h3>
 
-      <div className="overflow-hidden h-[360px] md:h-[400px] relative rounded-xl px-2 py-2">
-        <div className="grid grid-cols-3 gap-4 md:grid-cols-3 text-center mb-2 text-white font-semibold">
-          <span className="hidden md:block">Username</span>
-          <span className="hidden md:block">Country</span>
-          <span className="hidden md:block">Time</span>
-        </div>
-
-        <ul ref={listRef} className="space-y-2 relative z-10">
+      <div className="overflow-hidden h-[360px] md:h-[400px] rounded-xl border border-white/20 bg-white/5 backdrop-blur-lg">
+        <ul ref={listRef} className="space-y-2 p-4">
           {users.map((user, idx) => (
             <li
               key={idx}
-              className={`flex justify-between items-center border rounded-xl p-3 text-sm md:text-base relative`}
+              className="flex justify-between items-center px-4 py-2 rounded-xl bg-white/5 text-white text-sm md:text-base"
             >
-              <span className="username font-semibold z-10 relative">{user.username}</span>
-              <span className="flex items-center justify-center gap-2 z-10 relative">
-                <span className="flag">{user.flag}</span>
-                <span className="hidden md:inline">{user.country}</span>
-              </span>
-              <span className="text-gray-200 dark:text-gray-400 z-10 relative">{user.time}</span>
-
-              {/* Spark overlay */}
-              <span
-                className="absolute inset-0 rounded-xl opacity-40 pointer-events-none"
-                style={{
-                  background: `radial-gradient(circle at 50% 50%, rgba(255,255,255,0.3), transparent 70%)`,
-                  animation: `ripple ${user.bgSpeed}s infinite`,
-                }}
-              ></span>
+              <span className="font-semibold">{user.username}</span>
+              <span className="text-xl">{user.flag}</span>
+              <span className="text-gray-300 text-xs md:text-sm">{formatTime(user.joinedAt)}</span>
             </li>
           ))}
         </ul>
       </div>
-
-      <style jsx>{`
-        @keyframes ripple {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        /* Spark flicker effect */
-        .spark-flicker {
-          animation: spark 0.2s ease-in-out;
-        }
-        @keyframes spark {
-          0% { transform: scale(1); opacity: 1; }
-          50% { transform: scale(1.2) rotate(1deg); opacity: 0.8; }
-          100% { transform: scale(1); opacity: 1; }
-        }
-      `}</style>
     </div>
-  )
+  );
 }
