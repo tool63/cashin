@@ -28,17 +28,20 @@ export function SectionTitle({ icon, text }: { icon: string; text: string }) {
 export function Stat({ title, value, animate }: { title: string; value: string; animate?: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   const [count, setCount] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false); // track if animation already ran
 
   // Extract numeric value and suffix
   const numericValue = parseFloat(String(value).replace(/[^0-9.]/g, "")) || 0;
   const suffix = String(value).replace(/[0-9.]/g, "");
-  const decimals = numericValue % 1 !== 0 ? 1 : 0; // show 1 decimal if needed
+  const decimals = numericValue % 1 !== 0 ? 1 : 0;
 
-  // Animate counter when animate is true
+  // Animate counter only once
   useEffect(() => {
-    if (!animate) return;
+    if (!animate || hasAnimated) return;
 
-    const duration = 2000; // 2 seconds
+    setHasAnimated(true); // mark as animated
+
+    const duration = 2000;
     const startTime = performance.now();
 
     const step = (currentTime: number) => {
@@ -49,7 +52,7 @@ export function Stat({ title, value, animate }: { title: string; value: string; 
     };
 
     requestAnimationFrame(step);
-  }, [animate, numericValue, decimals]);
+  }, [animate, numericValue, decimals, hasAnimated]);
 
   return (
     <div
