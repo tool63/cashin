@@ -1,6 +1,8 @@
+// components/homepage/HighPayingOffers.tsx
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { Flame, Zap } from "lucide-react";
 import { useTheme } from "next-themes";
 
 /* ===================== TYPES ===================== */
@@ -15,6 +17,17 @@ type Offer = {
 };
 
 type CategoryKey = "Surveys" | "App Installs" | "Play Games" | "Watch Videos";
+
+/* ===================== FLAGS ===================== */
+const COUNTRY_FLAG: Record<string, string> = {
+  US: "🇺🇸",
+  CA: "🇨🇦",
+  UK: "🇬🇧",
+  AU: "🇦🇺",
+  DE: "🇩🇪",
+  FR: "🇫🇷",
+  IN: "🇮🇳",
+};
 
 /* ===================== OFFERS DATA ===================== */
 const OFFERS: Record<CategoryKey, Offer[]> = {
@@ -130,61 +143,74 @@ export default function HighPayingOffers() {
   const [loading, setLoading] = useState(true);
   const { resolvedTheme } = useTheme();
 
-  // Compute offers for selected category
   const offers = useMemo(() => OFFERS[category], [category]);
 
-  // Simulate loading effect
   useEffect(() => {
+    setLoading(true);
     const timer = setTimeout(() => setLoading(false), 500);
     return () => clearTimeout(timer);
   }, [category]);
 
   return (
-    <div className="p-4">
-      {/* Category Tabs */}
-      <div className="flex gap-4 mb-4">
-        {(["Surveys", "App Installs", "Watch Videos", "Play Games"] as CategoryKey[]).map((cat) => (
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h2 className="text-3xl font-bold mb-6 text-center">High Paying Offers</h2>
+
+      {/* CATEGORY FILTER */}
+      <div className="flex justify-center gap-4 mb-4 flex-wrap">
+        {(["Surveys", "App Installs", "Play Games", "Watch Videos"] as CategoryKey[]).map((c) => (
           <button
-            key={cat}
-            className={`px-4 py-2 rounded ${
-              category === cat ? "bg-blue-500 text-white" : "bg-gray-200 dark:bg-gray-700"
+            key={c}
+            onClick={() => setCategory(c)}
+            className={`px-4 py-2 rounded-full font-semibold transition-colors ${
+              category === c
+                ? "bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black"
+                : "bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700"
             }`}
-            onClick={() => {
-              setCategory(cat);
-              setLoading(true);
-            }}
           >
-            {cat}
+            {c}
           </button>
         ))}
       </div>
 
-      {/* Offers Table */}
-      <div className="bg-gray-100 dark:bg-gray-900 rounded-lg overflow-hidden">
-        <div className="grid grid-cols-4 gap-4 px-4 py-2 font-bold bg-gray-200 dark:bg-gray-800">
-          <div>Title</div>
-          <div>Payout</div>
-          <div>Completions</div>
-          <div>Badges</div>
-        </div>
+      {/* OFFERS TABLE */}
+      <div className="relative border rounded-xl shadow-lg h-[550px] overflow-hidden">
+        <div className="overflow-y-auto h-full">
+          {/* TABLE HEADER */}
+          <div className="grid grid-cols-4 gap-4 px-4 py-2 font-semibold sticky top-0 z-10 bg-white dark:bg-[#070A14] border-b">
+            <span className="text-left">Offer</span>
+            <span className="text-center">Country</span>
+            <span className="text-center">Completions</span>
+            <span className="text-right">Payout</span>
+          </div>
 
-        {loading
-          ? Array.from({ length: 5 }).map((_, i) => <SkeletonRow key={i} />)
-          : offers.map((offer) => (
-              <div
-                key={offer.id}
-                className="grid grid-cols-4 gap-4 px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-800"
-              >
-                <div>{offer.title}</div>
-                <div>${offer.payout.toFixed(2)}</div>
-                <div>{offer.completions.toLocaleString()}</div>
-                <div>
-                  {offer.badgeHigh && <span className="mr-2 text-red-500">🔥</span>}
-                  {offer.badgeFast && <span className="text-yellow-500">⚡</span>}
+          {loading
+            ? Array.from({ length: 10 }).map((_, i) => <SkeletonRow key={i} />)
+            : offers.map((offer) => (
+                <div
+                  key={offer.id}
+                  className={`grid grid-cols-4 gap-4 px-4 py-2 border-b last:border-b-0 ${
+                    resolvedTheme === "dark" ? "bg-[#0B0E1A]" : "bg-white"
+                  }`}
+                >
+                  {/* Offer Name + Badges */}
+                  <div className="flex items-center gap-2 text-left">
+                    {offer.title}
+                    {offer.badgeHigh && <Flame className="text-yellow-400" size={16} />}
+                    {offer.badgeFast && <Zap className="text-green-400" size={16} />}
+                  </div>
+
+                  {/* Country */}
+                  <div className="text-center">{COUNTRY_FLAG[offer.country] || offer.country}</div>
+
+                  {/* Completions */}
+                  <div className="text-center">{offer.completions.toLocaleString()}</div>
+
+                  {/* Payout */}
+                  <div className="text-right">${offer.payout.toFixed(2)}</div>
                 </div>
-              </div>
-            ))}
+              ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
