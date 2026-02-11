@@ -20,7 +20,7 @@ export default function TrustSection() {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.4 }
     );
 
     if (sectionRef.current) observer.observe(sectionRef.current);
@@ -31,11 +31,10 @@ export default function TrustSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 bg-gradient-to-b from-[#0f172a] to-[#111827] overflow-hidden"
+      className="relative py-24 bg-[#0b1120]"
     >
-      {/* Background Decorative Shapes */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-2xl pointer-events-none"></div>
+      {/* Subtle Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white/5 via-transparent to-white/5 pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
         {/* Heading */}
@@ -44,12 +43,12 @@ export default function TrustSection() {
         </h2>
 
         {/* Subtext */}
-        <p className="text-gray-300 max-w-3xl mx-auto mb-16 text-lg md:text-xl leading-relaxed">
+        <p className="text-gray-400 max-w-3xl mx-auto mb-16 text-lg leading-relaxed">
           Cashog is one of the most trusted earning platforms, paying users daily
           across the globe with fast, secure, and verified withdrawals.
         </p>
 
-        {/* Stats Grid */}
+        {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
           <Stat title="Total Users" value="25M+" animate={animate} />
           <Stat title="Users Paid" value="3.2M+" animate={animate} />
