@@ -16,15 +16,17 @@ export default function PaymentSection() {
           Fast, secure, and trusted payout options.
         </p>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-8 justify-center">
           {methods.map((method) => (
             <div
               key={method.name}
-              className="rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-100 dark:bg-white/5 px-6 py-8 flex flex-col items-center hover:scale-105 transition"
+              className="rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-100 dark:bg-white/5 px-6 py-8 flex flex-col items-center hover:scale-105 transition-transform"
             >
               <span className="text-4xl mb-3">{method.emoji}</span>
               <span className="text-lg font-semibold">{method.name}</span>
-              <span className="text-sm text-gray-600 dark:text-gray-400 mt-1">Instant payout</span>
+              <span className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                Instant payout
+              </span>
             </div>
           ))}
         </div>
