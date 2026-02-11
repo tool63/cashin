@@ -37,7 +37,7 @@ export function Stat({ title, value }: { title: string; value: string }) {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setAnimate(true);
-            observer.disconnect(); // trigger once
+            observer.disconnect(); // animate only once
           }
         });
       },
@@ -49,9 +49,10 @@ export function Stat({ title, value }: { title: string; value: string }) {
     return () => observer.disconnect();
   }, []);
 
-  // Parse numeric value and suffix (e.g., "25M+" → 25, "M+")
+  // Extract numeric value and suffix
   const numericValue = parseFloat(String(value).replace(/[^0-9.]/g, "")) || 0;
   const suffix = String(value).replace(/[0-9.]/g, "");
+  const decimals = numericValue % 1 !== 0 ? 1 : 0; // show 1 decimal if needed
 
   return (
     <div
@@ -59,7 +60,17 @@ export function Stat({ title, value }: { title: string; value: string }) {
       className="bg-white dark:bg-[#111827] p-6 rounded-xl shadow-md flex flex-col items-center"
     >
       <span className="text-2xl font-bold">
-        {animate ? <CountUp start={0} end={numericValue} duration={2} suffix={suffix} /> : value}
+        {animate ? (
+          <CountUp
+            start={0}
+            end={numericValue}
+            duration={2}
+            decimals={decimals}
+            suffix={suffix}
+          />
+        ) : (
+          value
+        )}
       </span>
       <span className="text-gray-600 dark:text-gray-400 mt-1">{title}</span>
     </div>
