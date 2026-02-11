@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { DollarSign } from "lucide-react";
 
 /* ================= DATA ================= */
 
@@ -12,41 +11,43 @@ const countries = [
   { flag: "🇷🇺" }, { flag: "🇲🇽" }, { flag: "🇸🇪" }, { flag: "🇳🇴" },
   { flag: "🇳🇱" }, { flag: "🇨🇭" }, { flag: "🇦🇷" }, { flag: "🇿🇦" },
   { flag: "🇪🇬" }, { flag: "🇹🇷" }, { flag: "🇸🇬" }, { flag: "🇦🇪" },
-  { flag: "🇮🇱" }, { flag: "🇹🇭" }, { flag: "🇨🇳" }, { flag: "🇵🇭" },
-  { flag: "🇳🇿" }, { flag: "🇵🇰" }, { flag: "🇻🇳" }, { flag: "🇧🇩" },
 ];
 
 const names = [
-  "Alex","Mia","John","Sara","Leo","Emma","Chris","Liam","Olivia","Noah",
-  "Lucas","Sophia","Ethan","Isabella","Ava","William","Amelia","Oliver","Isla","Harry",
-  "Charlotte","James","Emily","Benjamin","Ella","Daniel","Grace","Jacob","Chloe","Michael",
-  "Sofia","Alexander","Lily","Matthew","Zoe","Ryan","Hannah","Nathan","Ruby","Samuel",
-  "Mason","Scarlett","Henry","Aria","Sebastian","Layla","Gabriel","Aurora","Jack","Victoria",
-  "Wyatt","Nora","Caleb","Luna","Isaac","Maya","Owen","Alice","Dylan","Clara",
-  "Luke","Anna","Anthony","Eva","Jonathan","Leah","Christian","Ivy","Aaron","Camila",
-  "Thomas","Elena","Charles","Stella","Eli","Hazel","Connor","Violet","Isaiah","Lydia",
-  "Adam","Penelope","Julian","Riley","Hunter","Ellie","Aaron","Lillian","Carter","Madeline",
+  "Olivia","Liam","Emma","Noah","Ava","William","Amelia","Oliver",
+  "Isla","Harry","Mia","Sophia","Lucas","Charlotte","Ella","Leo",
+  "Emily","James","Grace","Alexander","Sofia","Benjamin","Lily",
+  "Daniel","Chloe","Michael","Ruby","Jacob","Hannah","Ethan","Ava",
+  "Nathan","Scarlett","Samuel","Aria","Mason","Aurora","Henry","Layla",
+  "Sebastian","Victoria","Gabriel","Nora","Jack","Luna","Caleb","Maya",
+  "Isaac","Alice","Owen","Clara","Dylan","Anna","Luke","Eva","Anthony",
+  "Ivy","Jonathan","Leah","Christian","Camila","Thomas","Elena","Charles",
+  "Stella","Eli","Hazel","Connor","Violet","Isaiah","Lydia","Adam",
+  "Penelope","Julian","Riley","Hunter","Ellie","Carter","Madeline",
+  "Robert","Nina","Dominic","Sadie","Austin","Paisley","Jordan","Aurora",
+  "Cole","Emilia","Ian","Cora","Jason","Bella","Jasper","Naomi","Tyler",
+  "Adeline","Brandon","Eliza","Gavin","Willow","Evan","Julia","Leo",
+  "Serena","Max","Amara","Victor","Samantha","Milo","Avery","Fabian",
+  "Mila","Rafael","Lara","Tobias","Kylie","Diego","Elodie","Hugo",
+  "Iris","Adrian","Amelie","Vincent","Freya","Julio","Zara","Santiago",
+  "Arwen","Felix","Clara","Emmanuel","Livia","Matteo","Bianca","Oscar",
+  "Fiona","Lorenzo","Cecilia","Enzo","Valeria","Thiago","Camila","Nicolas",
+  "Gabriela","Eduardo","Liliana","Sebastian","Catalina","Antonio","Julieta",
+  "Ricardo","Isabella","Hector","Emilia","Ruben","Martina","Jorge","Victoria",
+  "Carlos","Sofia","Pedro","Lucia","Diego","Maya","Rafael","Elena","Manuel",
+  "Ariana","Miguel","Giulia","Fernando","Alessia","Andres","Claudia","Raul",
+  "Mariana","Leonardo","Sara","Gabriel","Emma","Victor","Olivia","Alex",
+  "Sophia","Adrian","Isabel",
 ];
 
 /* ================= HELPERS ================= */
 
-const randomCountry = () => countries[Math.floor(Math.random() * countries.length)];
-const randomName = () => names[Math.floor(Math.random() * names.length)] + Math.floor(Math.random() * 100);
-
-const randomAmount = () => {
-  const low = Math.random() < 0.8;
-  const value = low ? Math.random() * 49 + 1 : Math.random() * 50 + 50;
-  return `$${value.toFixed(2)}`;
-};
-
-const randomTime = () => `${Math.floor(Math.random() * 10) + 1}s ago`;
-
-interface LiveWithdrawal {
+interface Withdrawal {
   id: number;
   name: string;
   flag: string;
   amount: string;
-  time: string;
+  joinedAt: number;
   speed: number;
   gradientOffset: number;
 }
@@ -54,26 +55,35 @@ interface LiveWithdrawal {
 const ROW_HEIGHT = 48;
 const FPS = 60;
 
-const createWithdrawal = (id: number): LiveWithdrawal => {
-  const c = randomCountry();
+const randomCountry = () => countries[Math.floor(Math.random() * countries.length)];
+const randomName = () => names[Math.floor(Math.random() * names.length)];
+const randomAmount = () => `$${(Math.random() * 50 + 1).toFixed(2)}`;
+const randomTime = () => Date.now() - Math.floor(Math.random() * 60000);
+
+const createWithdrawal = (id: number): Withdrawal => {
+  const country = randomCountry();
   const scrollTime = 1 + Math.random() * 11;
   return {
     id,
     name: randomName(),
-    flag: c.flag,
+    flag: country.flag,
     amount: randomAmount(),
-    time: randomTime(),
+    joinedAt: randomTime(),
     speed: ROW_HEIGHT / (scrollTime * FPS),
     gradientOffset: Math.random() * 360,
   };
 };
 
+const formatTime = (timestamp: number) => {
+  const diff = Math.floor((Date.now() - timestamp) / 1000);
+  if (diff < 60) return `${diff}s ago`;
+  return `${Math.floor(diff / 60)}m ago`;
+};
+
 /* ================= COMPONENT ================= */
 
 export default function LiveWithdrawals() {
-  const [items, setItems] = useState<LiveWithdrawal[]>(
-    Array.from({ length: 100 }, (_, i) => createWithdrawal(i))
-  );
+  const [items, setItems] = useState<Withdrawal[]>(Array.from({ length: 100 }, (_, i) => createWithdrawal(i)));
   const [isLive, setIsLive] = useState(true);
   const listRef = useRef<HTMLUListElement>(null);
 
@@ -108,7 +118,6 @@ export default function LiveWithdrawals() {
       if (last) {
         const height = last.offsetHeight;
         const mb = parseFloat(last.style.marginBottom || "0");
-
         if (mb >= height) {
           rows.forEach((r) => (r.style.marginBottom = "0"));
           setItems((prev) => {
@@ -128,17 +137,12 @@ export default function LiveWithdrawals() {
   }, [items, isLive]);
 
   return (
-    <section className="relative py-20 flex justify-center bg-gradient-to-b from-gray-100 to-gray-50 dark:from-[#0b0f19] dark:to-[#0b0f19]">
-      <div className="w-full max-w-4xl px-4 text-center">
+    <section className="relative py-20 overflow-hidden flex justify-center bg-gradient-to-b from-gray-100 to-gray-50 dark:from-[#0b0f19] dark:to-[#0b0f19]">
+      <div className="w-full max-w-4xl text-center px-4">
         {/* Header */}
-        <div className="flex items-center justify-center gap-4 mb-6">
-          <div className="p-3 rounded-2xl bg-emerald-400/20 border border-emerald-400 backdrop-blur-lg">
-            <DollarSign className="text-emerald-500 w-7 h-7" />
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
-            💵 Live Withdrawals
-          </h2>
-        </div>
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
+          💸 Live Withdrawals
+        </h2>
 
         {/* Toggle */}
         <div className="flex justify-center mb-6">
@@ -153,7 +157,7 @@ export default function LiveWithdrawals() {
           </label>
         </div>
 
-        {/* Withdrawal List */}
+        {/* Withdrawals List */}
         <div className="relative h-[500px] overflow-hidden rounded-3xl border border-gray-200 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-xl shadow-lg">
           <ul ref={listRef} className="space-y-4 p-6">
             {items.map((o) => (
@@ -163,10 +167,10 @@ export default function LiveWithdrawals() {
                   bg-white/5 dark:bg-white/5 text-gray-900 dark:text-white text-sm md:text-base font-medium
                   hover:scale-105 hover:shadow-[0_0_20px_rgba(16,185,129,0.15)] transition-transform duration-300"
               >
-                <span className="font-semibold truncate">{o.name}</span>
-                <span className="text-center text-xl">{o.flag}</span>
-                <span className="text-green-500 font-semibold text-center">{o.amount}</span>
-                <span className="text-gray-500 dark:text-gray-400 text-center">{o.time}</span>
+                <span className="truncate">{o.name}</span>
+                <span className="text-xl text-center">{o.flag}</span>
+                <span className="text-emerald-600 dark:text-emerald-400 font-bold text-center">{o.amount}</span>
+                <span className="text-gray-500 dark:text-gray-400 text-center">{formatTime(o.joinedAt)}</span>
               </li>
             ))}
           </ul>
