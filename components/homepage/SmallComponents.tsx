@@ -1,6 +1,5 @@
 "use client";
 import { ReactNode, useState, useEffect, useRef } from "react";
-import CountUp from "react-countup";
 
 /* ================= LIVE WRAPPER ================= */
 export function LiveWrapper({ title, children }: { title: string; children: ReactNode }) {
@@ -28,7 +27,13 @@ export function SectionTitle({ icon, text }: { icon: string; text: string }) {
 /* ================= STAT ================= */
 export function Stat({ title, value }: { title: string; value: string }) {
   const ref = useRef<HTMLDivElement>(null);
+  const [count, setCount] = useState(0);
   const [animate, setAnimate] = useState(false);
+
+  // Extract numeric value and suffix
+  const numericValue = parseFloat(String(value).replace(/[^0-9.]/g, "")) || 0;
+  const suffix = String(value).replace(/[0-9.]/g, "");
+  const decimals = numericValue % 1 !== 0 ? 1 : 0; // show 1 decimal if needed
 
   // Trigger animation when in viewport
   useEffect(() => {
@@ -37,41 +42,37 @@ export function Stat({ title, value }: { title: string; value: string }) {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setAnimate(true);
-            observer.disconnect(); // animate only once
+            observer.disconnect();
           }
         });
       },
       { threshold: 0.5 }
     );
-
     if (ref.current) observer.observe(ref.current);
-
     return () => observer.disconnect();
   }, []);
 
-  // Extract numeric value and suffix
-  const numericValue = parseFloat(String(value).replace(/[^0-9.]/g, "")) || 0;
-  const suffix = String(value).replace(/[0-9.]/g, "");
-  const decimals = numericValue % 1 !== 0 ? 1 : 0; // show 1 decimal if needed
+  // Animate counter
+  useEffect(() => {
+    if (!animate) return;
+    const duration = 2000; // 2 seconds
+    const startTime = performance.now();
+
+    const step = (currentTime: number) => {
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+      const valueToSet = parseFloat((progress * numericValue).toFixed(decimals));
+      setCount(valueToSet);
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [animate, numericValue, decimals]);
 
   return (
     <div
       ref={ref}
       className="bg-white dark:bg-[#111827] p-6 rounded-xl shadow-md flex flex-col items-center"
     >
-      <span className="text-2xl font-bold">
-        {animate ? (
-          <CountUp
-            start={0}
-            end={numericValue}
-            duration={2}
-            decimals={decimals}
-            suffix={suffix}
-          />
-        ) : (
-          value
-        )}
-      </span>
+      <span className="text-2xl font-bold">{count}{suffix}</span>
       <span className="text-gray-600 dark:text-gray-400 mt-1">{title}</span>
     </div>
   );
