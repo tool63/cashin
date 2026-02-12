@@ -1,4 +1,3 @@
-// components/homepage/HighPayingOffers.tsx
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
@@ -30,7 +29,7 @@ const COUNTRY_FLAG: Record<string, string> = {
 };
 
 /* ===================== OFFERS DATA ===================== */
-const OFFERS: Record<CategoryKey, Offer[]> = {
+export const OFFERS: Record<CategoryKey, Offer[]> = {
   Surveys: [
     { id: 1, title: "Daily Opinion Survey", payout: 4.0, completions: 2500, country: "US", badgeHigh: true, badgeFast: true },
     { id: 2, title: "Market Research Survey", payout: 3.5, completions: 2200, country: "UK", badgeHigh: true, badgeFast: false },
@@ -138,12 +137,16 @@ function SkeletonRow() {
 }
 
 /* ===================== COMPONENT ===================== */
-export default function HighPayingOffers() {
+export default function HighPayingOffers({
+  offersData,
+}: {
+  offersData: Record<CategoryKey, Offer[]>;
+}) {
   const [category, setCategory] = useState<CategoryKey>("Surveys");
   const [loading, setLoading] = useState(true);
   const { resolvedTheme } = useTheme();
 
-  const offers = useMemo(() => OFFERS[category], [category]);
+  const offers = useMemo(() => offersData[category], [category, offersData]);
 
   useEffect(() => {
     setLoading(true);
