@@ -46,29 +46,22 @@ export default function HowToStartEarning() {
       <main className="bg-white dark:bg-[#070A14] text-gray-900 dark:text-white transition-colors duration-300">
 
         {/* HERO SECTION */}
-        <section className="max-w-7xl mx-auto px-4 py-24 flex flex-col-reverse lg:flex-row items-center gap-12">
-          <div className="lg:w-1/2 text-center lg:text-left">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-              Earn Real Money <br /> Instantly
-            </h1>
-            <p className="text-gray-600 dark:text-gray-300 mb-8 text-lg sm:text-xl">
-              Complete surveys, play games, watch videos, and install apps to earn rewards instantly.
-            </p>
-            <Link href="/signup">
-              <motion.span
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-12 py-5 rounded-2xl font-bold shadow-lg text-lg"
-              >
-                Start Earning Now <ArrowRight />
-              </motion.span>
-            </Link>
-          </div>
-          <div className="lg:w-1/2">
-            <div className="w-full h-64 sm:h-96 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 rounded-2xl shadow-xl flex items-center justify-center text-white font-bold text-3xl">
-              💸 Start Now
-            </div>
-          </div>
+        <section className="max-w-7xl mx-auto px-4 py-24 flex flex-col items-center text-center gap-8">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold">
+            Earn Real Money <br /> Instantly
+          </h1>
+          <p className="text-gray-600 dark:text-gray-300 text-lg sm:text-xl max-w-2xl">
+            Complete surveys, play games, watch videos, and install apps to earn rewards instantly.
+          </p>
+          <Link href="/signup">
+            <motion.span
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-12 py-5 rounded-2xl font-bold shadow-lg text-lg"
+            >
+              Start Earning Now <ArrowRight />
+            </motion.span>
+          </Link>
         </section>
 
         {/* QUICK STEPS */}
