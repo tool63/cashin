@@ -65,7 +65,7 @@ const faqs = [
   },
 ];
 
-export default function WithdrawalsRootPage() {
+export default function WithdrawalsPage() {
   return (
     <>
       {/* ================= META ================= */}
