@@ -13,29 +13,30 @@ import {
   Clock,
 } from "lucide-react";
 import Meta from "@/components/seo/SeoEngine";
+import Header from "@/components/Header";
 
 export default function CashoutMethodsPage() {
   const methods = [
     {
-      icon: <Wallet size={36} className="text-yellow-500" />,
+      icon: Wallet,
       title: "PayPal",
       description:
         "Withdraw your earnings directly to your PayPal account instantly and securely worldwide.",
     },
     {
-      icon: <Gift size={36} className="text-yellow-500" />,
+      icon: Gift,
       title: "Gift Cards",
       description:
         "Redeem your points for Amazon, Google Play, Apple, and other popular gift cards.",
     },
     {
-      icon: <Smartphone size={36} className="text-yellow-500" />,
+      icon: Smartphone,
       title: "Mobile Top-Up",
       description:
         "Recharge your mobile balance directly using your Cashog earnings.",
     },
     {
-      icon: <CreditCard size={36} className="text-yellow-500" />,
+      icon: CreditCard,
       title: "Bank Transfer",
       description:
         "Transfer your earnings directly to your bank account (available in selected regions).",
@@ -48,6 +49,9 @@ export default function CashoutMethodsPage() {
         title="Cashout Methods | Cashog"
         description="Discover Cashog cashout methods. Withdraw your earnings via PayPal, gift cards, mobile top-ups, and bank transfers instantly."
       />
+
+      {/* ================= HEADER ================= */}
+      <Header />
 
       <main className="transition-colors duration-300 bg-white text-gray-900 dark:bg-[#070A14] dark:text-white min-h-screen">
 
@@ -80,22 +84,33 @@ export default function CashoutMethodsPage() {
 
         {/* ================= CASHOUT METHODS ================= */}
         <section className="max-w-7xl mx-auto px-4 py-16 grid gap-12 md:grid-cols-2 lg:grid-cols-4">
-          {methods.map((method, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.2 }}
-              className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-8 flex flex-col items-center text-center shadow-md hover:shadow-lg transition-shadow duration-300"
-            >
-              <div className="mb-4">{method.icon}</div>
-              <h3 className="text-xl font-semibold mb-2">{method.title}</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                {method.description}
-              </p>
-            </motion.div>
-          ))}
+          {methods.map((method, i) => {
+            const IconComponent = method.icon;
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.2 }}
+                className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-8 flex flex-col items-center text-center shadow-md hover:shadow-lg transition-shadow duration-300"
+              >
+                {/* ================= ICON WITH HOVER ANIMATION ================= */}
+                <motion.div
+                  whileHover={{ scale: 1.3, rotate: [0, 10, -10, 0] }}
+                  transition={{ duration: 0.6, type: "spring" }}
+                  className="mb-4 text-yellow-500"
+                >
+                  <IconComponent size={36} />
+                </motion.div>
+
+                <h3 className="text-xl font-semibold mb-2">{method.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  {method.description}
+                </p>
+              </motion.div>
+            );
+          })}
         </section>
 
         {/* ================= WITHDRAWAL INFO ================= */}
