@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ArrowRight, Gift, Video, Gamepad, Smartphone, Star, Zap } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Meta from "@/components/seo/SeoEngine"; // <-- Make sure this path is correct
+import Meta from "@/components/seo/SeoEngine";
 
 // Steps for earning
 const steps = [
@@ -38,7 +38,6 @@ export default function HowToStartEarning() {
 
   return (
     <>
-      {/* META for SEO */}
       <Meta
         title="Cashooz - How to Start Earning Real Money Online"
         description="Learn how to start earning real money online with Cashooz. Complete surveys, play games, watch videos, and install apps to earn instantly."
