@@ -146,8 +146,8 @@ export default function HowItWorks() {
           </div>
         </section>
 
-        {/* FINAL CTA - DARK BACKGROUND WITH BEAUTIFUL TITLE, FULL WIDTH */}
-        <section className="text-center py-28 bg-[#070A14] w-full">
+        {/* FINAL CTA - DARK/LIGHT TOGGLE COMPATIBLE, FULL WIDTH */}
+        <section className="text-center py-28 bg-white dark:bg-[#070A14] w-full transition-colors duration-300">
           
           {/* BEAUTIFUL TITLE */}
           <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
@@ -164,7 +164,7 @@ export default function HowItWorks() {
             </motion.span>
           </Link>
 
-          <p className="mt-6 text-gray-300 text-lg max-w-md mx-auto">
+          <p className="mt-6 text-gray-900 dark:text-gray-300 text-lg max-w-md mx-auto transition-colors duration-300">
             Become part of our community and start earning daily rewards instantly.
           </p>
         </section>
