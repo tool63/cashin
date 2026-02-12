@@ -6,7 +6,7 @@ import Link from "next/link";
 import styles from "./FloatingCTA.module.css";
 
 export default function FloatingCTA() {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
   const [bounceKey, setBounceKey] = useState(0);
   const pathname = usePathname();
 
@@ -17,10 +17,9 @@ export default function FloatingCTA() {
   useEffect(() => {
     let observer: IntersectionObserver | null = null;
 
-    const initObserver = () => {
+    const observeCTAs = () => {
       const ctaElements = document.querySelectorAll(".cta-observer");
 
-      // If no main CTA exists → show floating CTA
       if (!ctaElements.length) {
         setVisible(true);
         return;
@@ -28,30 +27,27 @@ export default function FloatingCTA() {
 
       observer = new IntersectionObserver(
         (entries) => {
-          const anyVisible = entries.some(
-            (entry) => entry.isIntersecting
-          );
-
-          // Hide floating CTA if main CTA is visible
+          const anyVisible = entries.some((entry) => entry.isIntersecting);
           setVisible(!anyVisible);
         },
         {
           root: null,
-          threshold: 0.25,
+          threshold: 0.15, // Lower threshold = more accurate detection
         }
       );
 
       ctaElements.forEach((el) => observer?.observe(el));
     };
 
-    // Delay to ensure page content loads
-    const timeout = setTimeout(initObserver, 150);
+    // Wait until DOM fully painted
+    requestAnimationFrame(() => {
+      observeCTAs();
+    });
 
     return () => {
-      clearTimeout(timeout);
       if (observer) observer.disconnect();
     };
-  }, [pathname]); // Re-run when route changes
+  }, [pathname]);
 
   /* ================= BOUNCE EVERY 10s ================= */
   useEffect(() => {
