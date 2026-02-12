@@ -1,70 +1,48 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import { ArrowRight, User, CreditCard, Gift, CheckCircle, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Meta from "@/components/seo/SeoEngine";
 import TypingText from "@/components/typing/TypingText";
-import FloatingCTA from "@/components/cta/FloatingCTA";
 
-/* ================= COUNT-UP COMPONENT ================= */
-function CountUp({ end }: { end: number }) {
-  const [count, setCount] = useState(0);
-  const ref = useRef<HTMLDivElement | null>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setVisible(true);
-      },
-      { threshold: 0.5 }
-    );
-
-    if (ref.current) observer.observe(ref.current);
-
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!visible) return;
-    let start = 0;
-    const duration = 1500;
-    const increment = end / (duration / 16);
-
-    const counter = setInterval(() => {
-      start += increment;
-      if (start >= end) {
-        setCount(end);
-        clearInterval(counter);
-      } else {
-        setCount(Math.floor(start));
-      }
-    }, 16);
-
-    return () => clearInterval(counter);
-  }, [visible, end]);
-
-  return <span ref={ref}>{count}</span>;
-}
-
-/* ================= DATA ================= */
+/* ================= STEPS ================= */
 const steps = [
-  { icon: <User size={32} />, title: "Sign Up for Free", description: "Create your account in minutes and join our growing community of earners." },
-  { icon: <CreditCard size={32} />, title: "Complete Tasks & Offers", description: "Play games, watch videos, install apps, or complete surveys to earn points." },
-  { icon: <Gift size={32} />, title: "Earn Rewards", description: "Points can be redeemed for real cash via PayPal, gift cards, or mobile top-ups." },
-  { icon: <CheckCircle size={32} />, title: "Withdraw Easily", description: "Instant payouts once you reach the minimum withdrawal threshold." },
+  {
+    icon: <User size={32} className="text-yellow-400" />,
+    title: "Sign Up for Free",
+    description: "Create your account in minutes and join our growing community of earners.",
+  },
+  {
+    icon: <CreditCard size={32} className="text-green-400" />,
+    title: "Complete Tasks & Offers",
+    description: "Play games, watch videos, install apps, or complete surveys to earn points.",
+  },
+  {
+    icon: <Gift size={32} className="text-yellow-400" />,
+    title: "Earn Rewards",
+    description: "Points can be redeemed for real cash via PayPal, gift cards, or mobile top-ups.",
+  },
+  {
+    icon: <CheckCircle size={32} className="text-green-400" />,
+    title: "Withdraw Easily",
+    description: "Instant payouts once you reach the minimum withdrawal threshold.",
+  },
 ];
 
+/* ================= FEATURES ================= */
 const features = [
   { title: "Fast Payouts", description: "Get your money instantly via PayPal or gift cards." },
   { title: "Trusted & Secure", description: "Millions of users trust our platform daily." },
   { title: "High-Paying Offers", description: "Access top offers that maximize your earnings." },
   { title: "Mobile-Friendly", description: "Earn on the go with our fully responsive platform." },
   { title: "Trusted Payments", description: "Secure and reliable payouts every time." },
+  { title: "Global Access", description: "Join from anywhere in the world and start earning." },
+  { title: "24/7 Support", description: "Our support team is here to help whenever you need." },
 ];
 
+/* ================= FAQ ================= */
 const faqs = [
   { q: "How do I cash out?", a: "You can withdraw via PayPal, gift cards, or mobile top-ups once you reach the minimum threshold." },
   { q: "Are surveys safe?", a: "Yes, all tasks and surveys are secure and verified for safety." },
@@ -75,14 +53,7 @@ const faqs = [
   { q: "Can I complete offers on mobile?", a: "Yes! Our platform is fully mobile-friendly, so you can earn anywhere." },
 ];
 
-const stats = [
-  { title: "Users", value: 1250000, color: "text-yellow-400" },
-  { title: "Payouts", value: 2750000, color: "text-green-400" },
-  { title: "Offers Completed", value: 5800000, color: "text-yellow-400" },
-  { title: "Countries Supported", value: 125, color: "text-green-400" },
-];
-
-/* ================= MAIN PAGE ================= */
+/* ================= PAGE COMPONENT ================= */
 export default function HowItWorks() {
   return (
     <>
@@ -91,40 +62,22 @@ export default function HowItWorks() {
         description="Learn how to earn real money online by completing tasks, surveys, and high-paying offers on Cashog."
       />
 
-      <main className="transition-colors duration-300 bg-white text-gray-900 dark:bg-[#070A14] dark:text-white min-h-screen">
+      <main className="transition-colors duration-300 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white min-h-screen">
 
         {/* ================= HERO ================= */}
-        <section className="relative py-24 px-6 text-center overflow-hidden">
-          {/* subtle gradient background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 via-green-400/10 to-green-500/10 blur-3xl -z-10"></div>
-
+        <section className="py-20 px-4 text-center">
           <div className="max-w-3xl mx-auto">
-            <motion.h1
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500"
-            >
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
               Earn Real Money Online
-            </motion.h1>
+            </h1>
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500"
-            >
+            <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
               <TypingText />
-            </motion.div>
+            </div>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="text-lg sm:text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10 leading-relaxed"
-            >
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-8 text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed">
               Follow these simple steps and start earning instantly from anywhere.
-            </motion.p>
+            </p>
 
             <Link href="/signup" className="cta-observer inline-block">
               <motion.span
@@ -132,25 +85,24 @@ export default function HowItWorks() {
                 whileTap={{ scale: 0.97 }}
                 className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-12 py-5 rounded-2xl font-bold shadow-xl text-lg"
               >
-                Start Earning Now <ArrowRight />
+                Start Earning Now <ArrowRight size={20} />
               </motion.span>
             </Link>
           </div>
-          <FloatingCTA />
         </section>
 
-        {/* ================= HOW IT WORKS STEPS ================= */}
-        <section className="max-w-7xl mx-auto px-4 py-16 grid gap-12 md:grid-cols-2 lg:grid-cols-4 place-items-center text-center">
-          {steps.map((step, index) => (
+        {/* ================= STEPS ================= */}
+        <section className="max-w-7xl mx-auto px-4 py-16 grid gap-12 md:grid-cols-2 lg:grid-cols-4 text-center">
+          {steps.map((step, i) => (
             <motion.div
-              key={index}
+              key={i}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-8 flex flex-col items-center text-center shadow-md hover:shadow-lg transition-shadow duration-300 w-full max-w-xs"
+              transition={{ duration: 0.6, delay: i * 0.2 }}
+              className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-8 flex flex-col items-center shadow-md hover:shadow-lg transition-shadow duration-300"
             >
-              <div className="mb-4 text-yellow-500">{step.icon}</div>
+              <div className="mb-4">{step.icon}</div>
               <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
               <p className="text-gray-600 dark:text-gray-400">{step.description}</p>
             </motion.div>
@@ -170,34 +122,13 @@ export default function HowItWorks() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.2 }}
-                className="bg-gray-50 dark:bg-[#111827] rounded-xl p-6 text-center shadow hover:shadow-lg transition-shadow duration-300 w-full max-w-xs"
+                className="bg-gray-50 dark:bg-[#111827] rounded-xl p-6 text-center shadow hover:shadow-lg transition-shadow duration-300 w-full max-w-xs mx-auto"
               >
                 <div className="flex justify-center mb-4 text-yellow-500">
                   <ShieldCheck size={28} />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
                 <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </section>
-
-        {/* ================= STATS / COUNT-UP ================= */}
-        <section className="bg-white dark:bg-[#111827] py-20 text-center">
-          <div className="max-w-5xl mx-auto grid sm:grid-cols-2 md:grid-cols-4 gap-10">
-            {stats.map((stat, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.2 }}
-                className="flex flex-col items-center"
-              >
-                <h3 className={`text-4xl font-bold ${stat.color}`}>
-                  <CountUp end={stat.value} />
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 mt-2">{stat.title}</p>
               </motion.div>
             ))}
           </div>
@@ -221,17 +152,15 @@ export default function HowItWorks() {
           <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
             Ready to Start Earning Today?
           </h2>
-
           <Link href="/signup" className="cta-observer inline-block">
             <motion.span
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
               className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-xl"
             >
-              Start Earning in 60 Seconds <ArrowRight />
+              Start Earning in 60 Seconds <ArrowRight size={20} />
             </motion.span>
           </Link>
-
           <p className="mt-6 text-gray-900 dark:text-gray-300 text-lg max-w-md mx-auto transition-colors duration-300">
             Become part of our community and start earning daily rewards instantly.
           </p>
