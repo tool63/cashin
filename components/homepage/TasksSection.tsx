@@ -1,10 +1,10 @@
 // components/homepage/TasksSection.tsx
 "use client";
 
-import { earningOptions } from "./earningOptions";
-import { SectionTitle } from "./SmallComponents";
-import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { earningOptions } from "@/components/homepage/earningOptions";
+import { SectionTitle } from "@/components/homepage/SmallComponents";
 
 const earningDescriptions: Record<string, string> = {
   Surveys: "Share your opinions and get rewarded instantly",
@@ -15,25 +15,27 @@ const earningDescriptions: Record<string, string> = {
   "Completing Offers": "Finish tasks and get instant payouts",
   Offerwall: "Complete multiple offers for bonuses",
   Surveywall: "Explore surveys with higher payouts",
-  "Watching Ads": "Earn by watching short ads",
-  "Micro Tasks": "Quick tasks for instant rewards",
-  "Free Trials": "Try free services and earn",
-  "Testing Products": "Test products and share feedback",
-  "Reading Emails": "Get paid for reading emails",
-  "Visiting Websites": "Earn by visiting websites",
-  "Review Tasks": "Leave reviews for cash",
-  "Spinning Wheel": "Spin and win rewards",
-  Loyalty: "Earn extra with loyalty programs",
-  Vouchers: "Get vouchers for completing tasks",
+  "Watching Ads": "Earn by watching ads online",
+  "Micro Tasks": "Quick small tasks for extra cash",
+  "Free Trials": "Try free trials and earn rewards",
+  "Testing Products": "Test products and get paid",
+  "Reading Emails": "Read emails and earn money",
+  "Visiting Websites": "Visit websites and earn instantly",
+  "Review Tasks": "Complete review tasks for rewards",
+  "Spinning Wheel": "Spin the wheel and win prizes",
+  Loyalty: "Earn loyalty rewards over time",
+  Vouchers: "Get vouchers as payout options",
 };
 
 export default function TasksSection() {
   return (
     <section className="max-w-7xl mx-auto px-6 py-20">
+      {/* Section Heading */}
       <SectionTitle icon="🎯" text="High Paying Tasks" />
 
+      {/* Task Cards Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {earningOptions.map(([icon, title, href]) => (
+        {earningOptions.map(([emoji, title, href]) => (
           <Link
             key={title}
             href={href}
@@ -47,7 +49,7 @@ export default function TasksSection() {
           >
             {/* Icon */}
             <div className="text-5xl mb-4 transition-transform duration-300 group-hover:scale-110">
-              {icon}
+              <span>{emoji}</span>
             </div>
 
             {/* Title */}
