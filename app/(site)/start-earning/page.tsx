@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   ArrowRight,
   Zap,
@@ -22,57 +22,58 @@ const steps = [
   { title: "Withdraw Rewards", icon: <Star size={28} />, desc: "Cash out instantly via PayPal, gift cards, or crypto." },
 ];
 
-/* ------------------ WHY CHOOSE (PREMIUM STYLE) ------------------ */
 const features = [
-  {
-    icon: <Zap size={44} className="text-yellow-400" />,
-    title: "Instant Rewards",
-    desc: "Get paid immediately after completing each task with no delays.",
-  },
-  {
-    icon: <Smartphone size={44} className="text-cyan-400" />,
-    title: "Mobile-First Experience",
-    desc: "Earn anywhere, anytime with a fully optimized mobile platform.",
-  },
-  {
-    icon: <Gift size={44} className="text-green-400" />,
-    title: "Multiple Income Streams",
-    desc: "Surveys, games, app installs and exclusive high-value offers.",
-  },
-  {
-    icon: <Star size={44} className="text-purple-400" />,
-    title: "Top Paying Offers",
-    desc: "Carefully selected premium tasks designed to maximize earnings.",
-  },
-];
-
-const faqs = [
-  { q: "Do I need prior experience?", a: "No experience is needed. Anyone can start earning immediately." },
-  { q: "How long does it take to get paid?", a: "Most rewards are processed instantly or within a few hours." },
-  { q: "What payment methods are supported?", a: "Withdraw via PayPal, gift cards, or crypto." },
-  { q: "Is Cashog secure?", a: "Yes. Cashog is safe, secure and trusted by thousands of users." },
+  { icon: <Zap size={44} className="text-yellow-400" />, title: "Instant Rewards", desc: "Get paid immediately after completing each task." },
+  { icon: <Smartphone size={44} className="text-cyan-400" />, title: "Mobile-First Experience", desc: "Earn anywhere, anytime." },
+  { icon: <Gift size={44} className="text-green-400" />, title: "Multiple Income Streams", desc: "Surveys, games, installs and premium offers." },
+  { icon: <Star size={44} className="text-purple-400" />, title: "Top Paying Offers", desc: "High value tasks selected daily." },
 ];
 
 export default function HowToStartEarning() {
-  const [openFAQ, setOpenFAQ] = useState<number | null>(null);
+  const [showFloating, setShowFloating] = useState(false);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const footerRef = useRef<HTMLDivElement>(null);
+
+  /* ---------------- FLOATING CTA LOGIC ---------------- */
+  useEffect(() => {
+    if (!heroRef.current || !footerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const heroVisible = entries.find(e => e.target === heroRef.current)?.isIntersecting;
+        const footerVisible = entries.find(e => e.target === footerRef.current)?.isIntersecting;
+
+        setShowFloating(!heroVisible && !footerVisible);
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(heroRef.current);
+    observer.observe(footerRef.current);
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
       <Meta
         title="Cashog - How to Start Earning Real Money Online"
-        description="Learn how to start earning real money online with Cashog. Complete surveys, play games, and install apps to earn instantly."
+        description="Start earning real money with Cashog by completing surveys, games and installs."
       />
 
-      <main className="bg-white dark:bg-[#070A14] text-gray-900 dark:text-white transition-colors duration-300">
+      <main className="bg-white dark:bg-[#070A14] text-gray-900 dark:text-white">
 
-        {/* ---------------- HERO ---------------- */}
-        <section className="max-w-6xl mx-auto px-4 py-28 text-center">
+        {/* HERO */}
+        <section
+          ref={heroRef}
+          className="max-w-6xl mx-auto px-4 py-28 text-center"
+        >
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
             Earn Real Money <br /> Instantly
           </h1>
 
           <p className="mt-6 text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Complete surveys, play games, watch videos, and install apps to earn rewards instantly.
+            Complete surveys, play games, and install apps to earn rewards instantly.
           </p>
 
           <Link href="/signup">
@@ -86,7 +87,7 @@ export default function HowToStartEarning() {
           </Link>
         </section>
 
-        {/* ---------------- STEPS ---------------- */}
+        {/* STEPS */}
         <section className="max-w-7xl mx-auto px-4 py-20">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
             How to Start Earning
@@ -97,7 +98,7 @@ export default function HowToStartEarning() {
               <motion.div
                 key={i}
                 whileHover={{ y: -6 }}
-                className="bg-gray-100 dark:bg-[#1A1F2B] rounded-2xl p-8 text-center transition shadow-sm hover:shadow-md"
+                className="bg-gray-100 dark:bg-[#1A1F2B] rounded-2xl p-8 text-center shadow-sm hover:shadow-md"
               >
                 <div className="mb-4 mx-auto w-fit">{step.icon}</div>
                 <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
@@ -107,7 +108,7 @@ export default function HowToStartEarning() {
           </div>
         </section>
 
-        {/* ---------------- WHY CHOOSE (PREMIUM) ---------------- */}
+        {/* WHY CHOOSE */}
         <section className="bg-gray-50 dark:bg-[#111827] py-28">
           <div className="max-w-6xl mx-auto px-4 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-20">
@@ -119,15 +120,13 @@ export default function HowToStartEarning() {
                 <motion.div
                   key={i}
                   whileHover={{ y: -8 }}
-                  className="flex flex-col items-center text-center"
+                  className="flex flex-col items-center"
                 >
                   <div className="mb-6">{feature.icon}</div>
-
                   <h3 className="text-2xl font-semibold mb-4">
                     {feature.title}
                   </h3>
-
-                  <p className="text-gray-600 dark:text-gray-400 max-w-md leading-relaxed">
+                  <p className="text-gray-600 dark:text-gray-400 max-w-md">
                     {feature.desc}
                   </p>
                 </motion.div>
@@ -136,35 +135,11 @@ export default function HowToStartEarning() {
           </div>
         </section>
 
-        {/* ---------------- FAQ ---------------- */}
-        <section className="max-w-4xl mx-auto px-4 py-24 text-center">
-          <h2 className="text-3xl font-bold mb-14">
-            Frequently Asked Questions
-          </h2>
-
-          <div className="space-y-5">
-            {faqs.map((faq, i) => (
-              <div
-                key={i}
-                className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-6 cursor-pointer transition"
-                onClick={() => setOpenFAQ(openFAQ === i ? null : i)}
-              >
-                <h3 className="font-semibold flex justify-between">
-                  {faq.q}
-                  <span>{openFAQ === i ? "-" : "+"}</span>
-                </h3>
-                {openFAQ === i && (
-                  <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">
-                    {faq.a}
-                  </p>
-                )}
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ---------------- FINAL CTA ---------------- */}
-        <section className="bg-gray-50 dark:bg-[#111827] py-28 text-center">
+        {/* FOOTER CTA SECTION */}
+        <section
+          ref={footerRef}
+          className="bg-gray-50 dark:bg-[#111827] py-28 text-center"
+        >
           <h2 className="text-4xl sm:text-5xl font-extrabold mb-10">
             Start Earning Real Money Today
           </h2>
@@ -179,6 +154,21 @@ export default function HowToStartEarning() {
             </motion.span>
           </Link>
         </section>
+
+        {/* ---------------- FLOATING CTA ---------------- */}
+        {showFloating && (
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="fixed bottom-6 right-6 z-50"
+          >
+            <Link href="/signup">
+              <div className="bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-6 py-4 rounded-full font-semibold shadow-2xl cursor-pointer hover:scale-105 transition">
+                Start Earning →
+              </div>
+            </Link>
+          </motion.div>
+        )}
 
       </main>
     </>
