@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, ShieldCheck, Zap, Activity, BarChart3 } from "lucide-react";
-import DarkLightToggle from "@/components/switch/DarkLightToggle";
 
 const steps = [
   {
@@ -59,11 +58,6 @@ export default function HowItWorksPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0b101f] via-[#020617] to-black text-white">
       
-      {/* HEADER */}
-      <header className="flex justify-end items-center px-4 py-6 max-w-7xl mx-auto">
-        <DarkLightToggle />
-      </header>
-
       {/* HERO */}
       <section ref={heroRef} className="px-4 pt-12 pb-28 text-center max-w-7xl mx-auto">
         <motion.h1
