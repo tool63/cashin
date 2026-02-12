@@ -146,18 +146,18 @@ export default function HowItWorks() {
           </div>
         </section>
 
-        {/* FINAL CTA */}
-        <section className="text-center py-24 px-4 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 rounded-2xl mx-4 md:mx-auto max-w-3xl">
+        {/* FINAL CTA - DARK BACKGROUND */}
+        <section className="text-center py-24 px-4 bg-[#070A14] rounded-2xl mx-4 md:mx-auto max-w-3xl">
           <Link href="/signup" className="cta-observer inline-block">
             <motion.span
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-3 bg-white text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-xl"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-xl"
             >
               Join Now & Start Earning <ArrowRight />
             </motion.span>
           </Link>
-          <p className="mt-6 text-white text-lg max-w-md mx-auto">
+          <p className="mt-6 text-gray-300 text-lg max-w-md mx-auto">
             Become part of our community and start earning daily rewards instantly.
           </p>
         </section>
