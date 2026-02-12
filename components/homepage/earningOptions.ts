@@ -1,33 +1,53 @@
 // components/homepage/earningOptions.ts
+import {
+  Zap,
+  Smartphone,
+  Gamepad,
+  Video,
+  Cpu,
+  CheckCircle,
+  Puzzle,
+  Clipboard,
+  Film,
+  Tool,
+  Gift,
+  Flask,
+  Mail,
+  Globe,
+  Star,
+  RefreshCcw,
+  Trophy,
+  CreditCard,
+} from "lucide-react";
+import { ComponentType, SVGProps } from "react";
 
 /**
- * Type for a single earning option: [icon, title, slug]
+ * Type for a single earning option: [icon component, title, slug]
  */
-export type EarningOption = [icon: string, title: string, slug: string];
+export type EarningOption = [icon: ComponentType<SVGProps<SVGSVGElement>>, title: string, slug: string];
 
 /**
- * Static array of earning options
- * Can be used directly on homepage and dynamic pages
+ * Static array of earning options using lucide-react icons
  */
 export const earningOptions: EarningOption[] = [
-  ["🧠", "Surveys", "/surveys"],
-  ["📱", "App Installs", "/app-installs"],
-  ["🎮", "Playing Games", "/play-games"],
-  ["📺", "Watching Videos", "/watch-videos"],
-  ["⛏️", "Mining Rewards", "/mining-rewards"],
-  ["✅", "Completing Offers", "/complete-offers"],
-  ["🧩", "Offerwall", "/offerwall"],
-  ["📋", "Surveywall", "/surveywall"],
-  ["🎬", "Watching Ads", "/watch-ads"],
-  ["🛠️", "Micro Tasks", "/micro-tasks"],
-  ["🎁", "Free Trials", "/complete-free-trials"],
-  ["🧪", "Testing Products", "/test-products"],
-  ["📧", "Reading Emails", "/read-emails"],
-  ["🌐", "Visiting Websites", "/visit-websites"],
-  ["⭐", "Review Tasks", "/review-tasks"],
-  ["🎡", "Spinning Wheel", "/spinning-wheel"],
-  ["🏆", "Loyalty", "/loyalty"],
-  ["💳", "Vouchers", "/vouchers"],
+  [Zap, "Surveys", "/surveys"],
+  [Smartphone, "App Installs", "/app-installs"],
+  [Gamepad, "Playing Games", "/play-games"],
+  [Video, "Watching Videos", "/watch-videos"],
+  [Cpu, "Mining Rewards", "/mining-rewards"],
+  [CheckCircle, "Completing Offers", "/complete-offers"],
+  [Puzzle, "Offerwall", "/offerwall"],
+  [Clipboard, "Surveywall", "/surveywall"],
+  [Film, "Watching Ads", "/watch-ads"],
+  [Tool, "Micro Tasks", "/micro-tasks"],
+  [Gift, "Free Trials", "/complete-free-trials"],
+  [Flask, "Testing Products", "/test-products"],
+  [Mail, "Reading Emails", "/read-emails"],
+  [Globe, "Visiting Websites", "/visit-websites"],
+  [Star, "Review Tasks", "/review-tasks"],
+  [RefreshCcw, "Spinning Wheel", "/spinning-wheel"],
+  [Trophy, "Loyalty", "/loyalty"],
+  [CreditCard, "Vouchers", "/vouchers"],
 ];
 
 /**
