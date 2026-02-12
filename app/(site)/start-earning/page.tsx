@@ -20,14 +20,14 @@ export default function StartEarningPage() {
       <Meta
         title="Start Earning | Cashog"
         description="Start earning real money with Cashog. Complete offers, play games, take surveys, and withdraw instantly."
-        keywords="earn money online, make money with offers, cash rewards, online income, Cashog"
       />
 
       <main className="transition-colors duration-300 bg-white text-gray-900 dark:bg-[#070A14] dark:text-white min-h-screen">
-
-        {/* ================= HERO SECTION (MATCH HOW-IT-WORKS STYLE) ================= */}
+        
+        {/* ================= HERO SECTION ================= */}
         <section className="relative py-20 px-4 text-center">
           <div className="max-w-3xl mx-auto">
+            
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
               Earn Real Money
             </h1>
@@ -50,6 +50,7 @@ export default function StartEarningPage() {
                 Start Earning Now <ArrowRight />
               </motion.span>
             </Link>
+
           </div>
         </section>
 
@@ -89,6 +90,7 @@ export default function StartEarningPage() {
 
         {/* ================= WHY CHOOSE CASHOG ================= */}
         <section className="max-w-7xl mx-auto px-4 py-16">
+          
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
             Why Choose Cashog
           </h2>
@@ -136,7 +138,7 @@ export default function StartEarningPage() {
           </div>
         </section>
 
-        {/* ================= FINAL CTA (MATCH HOW-IT-WORKS STYLE) ================= */}
+        {/* ================= FINAL CTA ================= */}
         <section className="text-center py-28 bg-white dark:bg-[#070A14] w-full transition-colors duration-300">
           
           <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
