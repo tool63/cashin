@@ -1,7 +1,7 @@
 // app/(site)/start-earning/page.tsx
 "use client";
 
-import { ArrowRight, Gift, Video, Gamepad, Smartphone, Star, LightningBolt } from "lucide-react";
+import { ArrowRight, Gift, Video, Gamepad, Smartphone, Star, Zap } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Meta from "@/components/seo/SeoEngine";
@@ -19,6 +19,8 @@ const highOffers = [
   { title: "Mega Survey Pack", reward: "$8", description: "Complete multiple surveys in one go." },
 ];
 
+const steps = ["Sign Up", "Complete Tasks", "Earn Rewards", "Withdraw"];
+
 export default function StartEarning() {
   return (
     <>
@@ -27,7 +29,7 @@ export default function StartEarning() {
         description="Earn real money online by completing surveys, videos, games, and high-paying offers."
       />
 
-      <main className="transition-colors duration-300 bg-white dark:bg-[#070A14] dark:text-white min-h-screen">
+      <main className="transition-colors duration-300 bg-white text-gray-900 dark:bg-[#070A14] dark:text-white min-h-screen">
 
         {/* HERO SPLIT SECTION */}
         <section className="flex flex-col-reverse lg:flex-row items-center max-w-7xl mx-auto px-4 py-20 gap-12">
@@ -106,7 +108,7 @@ export default function StartEarning() {
             How It Works
           </h2>
           <div className="flex flex-col md:flex-row gap-8 justify-between items-center">
-            {["Sign Up", "Complete Tasks", "Earn Rewards", "Withdraw"].map((step, i) => (
+            {steps.map((step, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
