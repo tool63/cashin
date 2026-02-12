@@ -136,8 +136,8 @@ function SkeletonRow() {
   );
 }
 
-/* ===================== COMPONENT ===================== */
-export default function HighPayingOffers({
+/* ===================== HIGH PAYING OFFERS COMPONENT ===================== */
+function HighPayingOffers({
   offersData,
 }: {
   offersData: Record<CategoryKey, Offer[]>;
@@ -214,6 +214,33 @@ export default function HighPayingOffers({
               ))}
         </div>
       </div>
+    </section>
+  );
+}
+
+/* ===================== PAGE ===================== */
+export default function Page() {
+  return (
+    <div>
+      {/* HIGH PAYING OFFERS */}
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <HighPayingOffers offersData={OFFERS} />
+      </div>
+
+      {/* TRUST SECTION */}
+      <TrustSection />
+    </div>
+  );
+}
+
+/* ===================== TRUST SECTION (placeholder) ===================== */
+function TrustSection() {
+  return (
+    <section className="max-w-7xl mx-auto px-4 py-12 bg-gray-100 dark:bg-[#0B0E1A] rounded-xl text-center">
+      <h2 className="text-3xl font-bold mb-4">Trusted by Thousands</h2>
+      <p className="text-gray-700 dark:text-gray-300">
+        Our platform is trusted by users worldwide to earn rewards safely and reliably.
+      </p>
     </section>
   );
 }
