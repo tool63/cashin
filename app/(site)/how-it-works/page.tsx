@@ -146,8 +146,8 @@ export default function HowItWorks() {
           </div>
         </section>
 
-        {/* FINAL CTA - DARK BACKGROUND WITH BEAUTIFUL TITLE */}
-        <section className="text-center py-28 px-4 bg-[#070A14] rounded-2xl mx-4 md:mx-auto max-w-3xl">
+        {/* FINAL CTA - DARK BACKGROUND WITH BEAUTIFUL TITLE, FULL WIDTH */}
+        <section className="text-center py-28 bg-[#070A14] w-full">
           
           {/* BEAUTIFUL TITLE */}
           <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
@@ -160,7 +160,7 @@ export default function HowItWorks() {
               whileTap={{ scale: 0.97 }}
               className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-xl"
             >
-              Start Earning Now <ArrowRight />
+              Join Now & Start Earning <ArrowRight />
             </motion.span>
           </Link>
 
