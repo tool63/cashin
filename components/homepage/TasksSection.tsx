@@ -35,7 +35,7 @@ export default function TasksSection() {
 
       {/* Task Cards Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {earningOptions.map(([emoji, title, href]) => (
+        {earningOptions.map(([icon, title, href]) => (
           <Link
             key={title}
             href={href}
@@ -49,7 +49,7 @@ export default function TasksSection() {
           >
             {/* Icon */}
             <div className="text-5xl mb-4 transition-transform duration-300 group-hover:scale-110">
-              <span>{emoji}</span>
+              {icon}
             </div>
 
             {/* Title */}
