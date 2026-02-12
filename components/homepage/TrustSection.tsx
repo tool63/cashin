@@ -1,79 +1,47 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Stat } from "@/components/homepage/SmallComponents";
+import { CheckCircle } from "lucide-react";
+import { SectionTitle } from "@/components/homepage/SmallComponents";
 
 export default function TrustSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [animate, setAnimate] = useState(false);
-
-  useEffect(() => {
-    let hasAnimated = false;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasAnimated) {
-            setAnimate(true);
-            hasAnimated = true;
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.4 }
-    );
-
-    if (sectionRef.current) observer.observe(sectionRef.current);
-
-    return () => observer.disconnect();
-  }, []);
+  const features = [
+    { title: "Secure Payments", description: "All transactions are encrypted and safe", icon: "💳" },
+    { title: "Trusted by Millions", description: "Millions of users trust our platform globally", icon: "🌍" },
+    { title: "Fast Payouts", description: "Get your earnings instantly with multiple methods", icon: "⚡" },
+    { title: "24/7 Support", description: "Our support team is always here to help", icon: "🕒" },
+  ];
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative py-24 bg-gray-50 dark:bg-[#0B0E1A] text-gray-900 dark:text-white"
-    >
+    <section className="py-20 bg-gray-50 dark:bg-[#0B0E1A]">
       <div className="max-w-7xl mx-auto px-6 text-center">
 
-        {/* Heading */}
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 text-gray-900 dark:text-white"
-        >
-          Trusted by Millions Worldwide
-        </motion.h2>
+        {/* Section Heading */}
+        <SectionTitle icon="🔒" text="Why You Can Trust Us" />
 
-        {/* Gradient Accent Line */}
-        <motion.div
-          initial={{ width: 0 }}
-          whileInView={{ width: "6rem" }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          viewport={{ once: true }}
-          className="h-1 mx-auto mb-8 rounded-full bg-gradient-to-r from-yellow-400 via-green-400 to-green-500"
-        />
+        <p className="text-gray-600 dark:text-gray-400 mb-14 max-w-2xl mx-auto text-lg">
+          Our platform ensures security, reliability, and instant payouts so you can focus on earning without worries.
+        </p>
 
-        {/* Subtext */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          viewport={{ once: true }}
-          className="text-base sm:text-lg md:text-xl mb-16 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed"
-        >
-          Cashog is a premium earning platform, trusted globally by millions of users for fast,
-          secure, and verified payouts every day.
-        </motion.p>
+        {/* Feature Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {features.map((feature) => (
+            <div
+              key={feature.title}
+              className="rounded-3xl border border-gray-200 dark:border-white/10 bg-white dark:bg-[#111827] px-6 py-10 flex flex-col items-center justify-center shadow-md hover:shadow-2xl hover:scale-105 transition-transform duration-300"
+            >
+              {/* Icon */}
+              <span className="text-6xl mb-4">{feature.icon}</span>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 md:gap-10">
-          <Stat title="Total Users" value="25M+" animate={animate} />
-          <Stat title="Users Paid" value="3.2M+" animate={animate} />
-          <Stat title="Total Payouts" value="$12M+" animate={animate} />
-          <Stat title="Trust Rating" value="4.8 ★" animate={animate} />
+              {/* Title */}
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{feature.title}</h3>
+
+              {/* Description */}
+              <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">{feature.description}</p>
+
+              {/* Check Icon */}
+              <CheckCircle className="text-green-400 mt-4" size={24} />
+            </div>
+          ))}
         </div>
       </div>
     </section>
