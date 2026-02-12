@@ -1,133 +1,98 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import {
-  ArrowRight,
-  Zap,
-  Smartphone,
-  Gift,
-  Star,
-  Video,
-  Gamepad,
-} from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import {
+  Gift,
+  Gamepad2,
+  Smartphone,
+  Star,
+  ShieldCheck,
+  Zap,
+  DollarSign,
+} from "lucide-react";
 import Meta from "@/components/seo/SeoEngine";
 
-/* ------------------ STEPS ------------------ */
-const steps = [
-  { title: "Sign Up Instantly", icon: <Gift size={28} />, desc: "Create your account in seconds and start earning." },
-  { title: "Pick Your Task", icon: <Video size={28} />, desc: "Select from surveys, app installs, games, and more." },
-  { title: "Complete & Earn", icon: <Gamepad size={28} />, desc: "Finish tasks and watch your rewards accumulate." },
-  { title: "Withdraw Rewards", icon: <Star size={28} />, desc: "Cash out instantly via PayPal, gift cards, or crypto." },
-];
-
-const features = [
-  { icon: <Zap size={44} className="text-yellow-400" />, title: "Instant Rewards", desc: "Get paid immediately after completing each task." },
-  { icon: <Smartphone size={44} className="text-cyan-400" />, title: "Mobile-First Experience", desc: "Earn anywhere, anytime." },
-  { icon: <Gift size={44} className="text-green-400" />, title: "Multiple Income Streams", desc: "Surveys, games, installs and premium offers." },
-  { icon: <Star size={44} className="text-purple-400" />, title: "Top Paying Offers", desc: "High value tasks selected daily." },
-];
-
-export default function HowToStartEarning() {
-  const [showFloating, setShowFloating] = useState(false);
-  const heroRef = useRef<HTMLDivElement>(null);
-  const footerRef = useRef<HTMLDivElement>(null);
-
-  /* ---------------- FLOATING CTA LOGIC ---------------- */
-  useEffect(() => {
-    if (!heroRef.current || !footerRef.current) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const heroVisible = entries.find(e => e.target === heroRef.current)?.isIntersecting;
-        const footerVisible = entries.find(e => e.target === footerRef.current)?.isIntersecting;
-
-        setShowFloating(!heroVisible && !footerVisible);
-      },
-      { threshold: 0.3 }
-    );
-
-    observer.observe(heroRef.current);
-    observer.observe(footerRef.current);
-
-    return () => observer.disconnect();
-  }, []);
-
+export default function StartEarningPage() {
   return (
     <>
       <Meta
-        title="Cashog - How to Start Earning Real Money Online"
-        description="Start earning real money with Cashog by completing surveys, games and installs."
+        title="Start Earning | Cashog"
+        description="Start earning real money with Cashog. Complete offers, play games, take surveys, and withdraw instantly."
+        keywords="earn money online, make money with offers, cash rewards, online income, Cashog"
       />
 
-      <main className="bg-white dark:bg-[#070A14] text-gray-900 dark:text-white">
+      <main className="bg-white dark:bg-black text-gray-900 dark:text-white">
 
-        {/* HERO */}
-        <section
-          ref={heroRef}
-          className="max-w-6xl mx-auto px-4 py-28 text-center"
-        >
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
-            Earn Real Money <br /> Instantly
-          </h1>
-
-          <p className="mt-6 text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Complete surveys, play games, and install apps to earn rewards instantly.
-          </p>
-
-          <Link href="/signup">
-            <motion.span
-              whileHover={{ scale: 1.06 }}
-              whileTap={{ scale: 0.96 }}
-              className="mt-10 inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-14 py-6 rounded-2xl font-semibold shadow-xl text-lg"
+        {/* ================= HERO SECTION ================= */}
+        <section className="relative py-24 text-center overflow-hidden">
+          <div className="max-w-4xl mx-auto px-6">
+            <motion.h1
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-4xl md:text-6xl font-extrabold mb-6"
             >
-              Start Earning Now <ArrowRight />
-            </motion.span>
-          </Link>
-        </section>
+              Earn Real Money
+              <br />
+              Instantly
+            </motion.h1>
 
-        {/* STEPS */}
-        <section className="max-w-7xl mx-auto px-4 py-20">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
-            How to Start Earning
-          </h2>
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-10"
+            >
+              Join thousands of users earning daily with Cashog by completing
+              simple online tasks.
+            </motion.p>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-            {steps.map((step, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ y: -6 }}
-                className="bg-gray-100 dark:bg-[#1A1F2B] rounded-2xl p-8 text-center shadow-sm hover:shadow-md"
-              >
-                <div className="mb-4 mx-auto w-fit">{step.icon}</div>
-                <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400">{step.desc}</p>
-              </motion.div>
-            ))}
+            <Link
+              href="/register"
+              className="inline-block px-8 py-4 rounded-full font-semibold text-white bg-gradient-to-r from-indigo-500 to-purple-600 hover:scale-105 transition"
+            >
+              Start Earning Now
+            </Link>
           </div>
         </section>
 
-        {/* WHY CHOOSE */}
-        <section className="bg-gray-50 dark:bg-[#111827] py-28">
-          <div className="max-w-6xl mx-auto px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-20">
-              Why Choose Cashog?
+        {/* ================= EARNING METHODS ================= */}
+        <section className="py-20 bg-gray-50 dark:bg-zinc-900">
+          <div className="max-w-6xl mx-auto px-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
+              Ways You Can Earn
             </h2>
 
-            <div className="grid md:grid-cols-2 gap-y-20 gap-x-16">
-              {features.map((feature, i) => (
+            <div className="grid md:grid-cols-3 gap-10">
+              {[
+                {
+                  icon: <Gift size={40} />,
+                  title: "Complete Offers",
+                  desc: "Install apps, sign up, or try new services and get rewarded instantly.",
+                },
+                {
+                  icon: <Gamepad2 size={40} />,
+                  title: "Play Games",
+                  desc: "Earn money by reaching levels or completing missions in games.",
+                },
+                {
+                  icon: <Smartphone size={40} />,
+                  title: "Take Surveys",
+                  desc: "Share your opinion and earn cash from trusted survey partners.",
+                },
+              ].map((item, i) => (
                 <motion.div
                   key={i}
                   whileHover={{ y: -8 }}
-                  className="flex flex-col items-center"
+                  className="bg-white dark:bg-zinc-800 p-8 rounded-2xl shadow-md text-center"
                 >
-                  <div className="mb-6">{feature.icon}</div>
-                  <h3 className="text-2xl font-semibold mb-4">
-                    {feature.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400 max-w-md">
-                    {feature.desc}
+                  <div className="flex justify-center mb-4 text-indigo-500">
+                    {item.icon}
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    {item.desc}
                   </p>
                 </motion.div>
               ))}
@@ -135,40 +100,73 @@ export default function HowToStartEarning() {
           </div>
         </section>
 
-        {/* FOOTER CTA SECTION */}
-        <section
-          ref={footerRef}
-          className="bg-gray-50 dark:bg-[#111827] py-28 text-center"
-        >
-          <h2 className="text-4xl sm:text-5xl font-extrabold mb-10">
-            Start Earning Real Money Today
-          </h2>
+        {/* ================= WHY CHOOSE CASHOG ================= */}
+        <section className="py-20">
+          <div className="max-w-6xl mx-auto px-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
+              Why Choose Cashog
+            </h2>
 
-          <Link href="/signup">
-            <motion.span
-              whileHover={{ scale: 1.06 }}
-              whileTap={{ scale: 0.96 }}
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-2xl font-semibold shadow-xl text-lg"
-            >
-              Join Cashog Now <ArrowRight />
-            </motion.span>
-          </Link>
+            <div className="grid md:grid-cols-3 gap-10 text-center">
+              {[
+                {
+                  icon: <DollarSign size={40} />,
+                  title: "High Rewards",
+                  desc: "Competitive payouts for every completed task.",
+                },
+                {
+                  icon: <Zap size={40} />,
+                  title: "Instant Tracking",
+                  desc: "Your earnings are tracked in real-time.",
+                },
+                {
+                  icon: <ShieldCheck size={40} />,
+                  title: "Secure & Trusted",
+                  desc: "Safe withdrawals and verified offer partners.",
+                },
+                {
+                  icon: <Star size={40} />,
+                  title: "Top Rated Platform",
+                  desc: "Thousands of satisfied users worldwide.",
+                },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  whileHover={{ scale: 1.05 }}
+                  className="p-6"
+                >
+                  <div className="flex justify-center mb-4 text-indigo-500">
+                    {item.icon}
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    {item.desc}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </section>
 
-        {/* ---------------- FLOATING CTA ---------------- */}
-        {showFloating && (
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="fixed bottom-6 right-6 z-50"
-          >
-            <Link href="/signup">
-              <div className="bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-6 py-4 rounded-full font-semibold shadow-2xl cursor-pointer hover:scale-105 transition">
-                Start Earning →
-              </div>
+        {/* ================= FINAL CTA (MATCH HOW-IT-WORKS STYLE) ================= */}
+        <section className="py-24 bg-gradient-to-r from-indigo-600 to-purple-700 text-white text-center">
+          <div className="max-w-4xl mx-auto px-6">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Ready to Start Earning with Cashog?
+            </h2>
+
+            <p className="text-lg md:text-xl mb-10 text-indigo-100">
+              Sign up today and turn your free time into real income.
+            </p>
+
+            <Link
+              href="/register"
+              className="inline-block px-10 py-4 rounded-full font-semibold bg-white text-indigo-600 hover:scale-105 transition"
+            >
+              Create Free Account
             </Link>
-          </motion.div>
-        )}
+          </div>
+        </section>
 
       </main>
     </>
