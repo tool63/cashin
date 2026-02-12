@@ -6,9 +6,7 @@ import Link from "next/link";
 import {
   ShieldCheck,
   ArrowRight,
-  Clock,
   CheckCircle,
-  DollarSign,
   Globe,
   Star,
   Lock,
@@ -17,7 +15,7 @@ import Meta from "@/components/seo/SeoEngine";
 import FloatingCTA from "@/components/cta/FloatingCTA";
 import Header from "@/components/Header";
 
-// Payment / withdrawal methods (PayPal + crypto + gift cards)
+// Payment / withdrawal methods
 const paymentMethods = [
   { icon: "🪙", title: "PayPal", description: "Instant payout" },
   { icon: "₿", title: "Tether (USDT)", description: "Instant payout" },
@@ -97,7 +95,8 @@ export default function WithdrawalsRootPage() {
         }}
       />
 
-      <Header onToggleCTA={() => setCtaVisible((prev) => !prev)} />
+      {/* ================= HEADER ================= */}
+      <Header onToggleCTA={() => setCtaVisible(prev => !prev)} />
 
       <main className="transition-colors duration-300 bg-white text-gray-900 dark:bg-[#070A14] dark:text-white min-h-screen">
 
