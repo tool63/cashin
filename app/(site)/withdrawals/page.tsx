@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import {
@@ -12,8 +11,6 @@ import {
   Lock,
 } from "lucide-react";
 import Meta from "@/components/seo/SeoEngine";
-import FloatingCTA from "@/components/cta/FloatingCTA";
-import Header from "@/components/Header";
 
 // Payment / withdrawal methods
 const paymentMethods = [
@@ -69,8 +66,6 @@ const faqs = [
 ];
 
 export default function WithdrawalsRootPage() {
-  const [ctaVisible, setCtaVisible] = useState(true);
-
   return (
     <>
       {/* ================= META ================= */}
@@ -94,9 +89,6 @@ export default function WithdrawalsRootPage() {
           }),
         }}
       />
-
-      {/* ================= HEADER ================= */}
-      <Header onToggleCTA={() => setCtaVisible(prev => !prev)} />
 
       <main className="transition-colors duration-300 bg-white text-gray-900 dark:bg-[#070A14] dark:text-white min-h-screen">
 
@@ -129,9 +121,6 @@ export default function WithdrawalsRootPage() {
               </motion.span>
             </Link>
           </div>
-
-          {/* Floating CTA button */}
-          <FloatingCTA show={ctaVisible} />
         </section>
 
         {/* ================= PAYMENT METHODS ================= */}
