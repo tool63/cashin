@@ -1,12 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import {
-  Wallet,
-  CreditCard,
-  Gift,
-  Smartphone,
   ShieldCheck,
   ArrowRight,
   Clock,
@@ -14,45 +11,52 @@ import {
   DollarSign,
 } from "lucide-react";
 import Meta from "@/components/seo/SeoEngine";
+import FloatingCTA from "@/components/cta/FloatingCTA";
+import Header from "@/components/Header";
 
-interface Withdrawal {
-  id: number;
-  method: string;
-  amount: string;
-  date: string;
-  status: "Pending" | "Completed" | "Failed";
-  icon: JSX.Element;
-}
+// Payment / withdrawal methods (PayPal + crypto + gift cards)
+const paymentMethods = [
+  { icon: "🪙", title: "PayPal", description: "Instant payout" },
+  { icon: "₿", title: "Tether (USDT)", description: "Instant payout" },
+  { icon: "🎁", title: "Bitcoin", description: "Instant payout" },
+  { icon: "Ł", title: "Gift Cards", description: "Instant payout" },
+  { icon: "Ξ", title: "Litecoin", description: "Instant payout" },
+  { icon: "Ξ", title: "Ethereum", description: "Instant payout" },
+  { icon: "Ð", title: "Dogecoin", description: "Instant payout" },
+  { icon: "🟡", title: "Binance Coin (BNB)", description: "Instant payout" },
+];
+
+// FAQ for SEO
+const faqs = [
+  {
+    question: "How do I withdraw my Cashog earnings?",
+    answer:
+      "You can withdraw via PayPal, crypto, gift cards, or bank transfer once you reach the minimum payout threshold.",
+  },
+  {
+    question: "How fast are withdrawals processed?",
+    answer:
+      "Most withdrawals are processed instantly or within a few hours.",
+  },
+  {
+    question: "Is Cashog secure?",
+    answer: "Yes, all transactions are encrypted and verified for safety.",
+  },
+  {
+    question: "Are withdrawals available worldwide?",
+    answer: "Yes! Cashog supports users from around the world.",
+  },
+];
 
 export default function WithdrawalsRootPage() {
-  // Example withdrawal history
-  const withdrawals: Withdrawal[] = [
-    { id: 1, method: "PayPal", amount: "$25.00", date: "Feb 12, 2026", status: "Completed", icon: <Wallet size={28} /> },
-    { id: 2, method: "Amazon Gift Card", amount: "$10.00", date: "Feb 10, 2026", status: "Completed", icon: <Gift size={28} /> },
-    { id: 3, method: "Bank Transfer", amount: "$50.00", date: "Feb 9, 2026", status: "Pending", icon: <CreditCard size={28} /> },
-    { id: 4, method: "Mobile Top-Up", amount: "$15.00", date: "Feb 8, 2026", status: "Completed", icon: <DollarSign size={28} /> },
-  ];
-
-  const cashoutMethods = [
-    { icon: <Wallet size={36} />, title: "PayPal", description: "Instant withdrawals worldwide." },
-    { icon: <Gift size={36} />, title: "Gift Cards", description: "Amazon, Google Play, Apple, and more." },
-    { icon: <Smartphone size={36} />, title: "Mobile Top-Up", description: "Recharge your mobile balance." },
-    { icon: <CreditCard size={36} />, title: "Bank Transfer", description: "Direct transfer to your bank." },
-  ];
-
-  const faqs = [
-    { question: "How do I withdraw my Cashog earnings?", answer: "You can withdraw via PayPal, gift cards, bank transfer, or mobile top-up once you reach the minimum payout threshold." },
-    { question: "How fast are withdrawals processed?", answer: "Most withdrawals are processed instantly or within a few hours." },
-    { question: "Is Cashog secure?", answer: "Yes, all transactions are encrypted and verified for safety." },
-    { question: "Are withdrawals available worldwide?", answer: "Yes! Cashog supports users from around the world." },
-  ];
+  const [ctaVisible, setCtaVisible] = useState(true);
 
   return (
     <>
       {/* ================= META ================= */}
       <Meta
         title="Withdrawals | Cashog"
-        description="Track your Cashog withdrawals, view payout methods, amounts, and statuses instantly. Secure and fast withdrawals worldwide."
+        description="Track your Cashog withdrawals and view payout methods instantly. Secure and fast withdrawals worldwide."
       />
 
       {/* JSON-LD FAQ for SEO */}
@@ -62,7 +66,7 @@ export default function WithdrawalsRootPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            mainEntity: faqs.map(faq => ({
+            mainEntity: faqs.map((faq) => ({
               "@type": "Question",
               name: faq.question,
               acceptedAnswer: { "@type": "Answer", text: faq.answer },
@@ -70,6 +74,8 @@ export default function WithdrawalsRootPage() {
           }),
         }}
       />
+
+      <Header onToggleCTA={() => setCtaVisible((prev) => !prev)} />
 
       <main className="transition-colors duration-300 bg-white text-gray-900 dark:bg-[#070A14] dark:text-white min-h-screen">
 
@@ -90,7 +96,7 @@ export default function WithdrawalsRootPage() {
               transition={{ delay: 0.2 }}
               className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto"
             >
-              View your withdrawal history, track payout methods, amounts, and statuses instantly. Cashog makes earning and withdrawing fast, secure, and reliable.
+              View your withdrawal methods, track payout options, and withdraw instantly. Cashog makes earning and withdrawing fast, secure, and reliable.
             </motion.p>
             <Link href="/signup" className="inline-block">
               <motion.span
@@ -102,52 +108,25 @@ export default function WithdrawalsRootPage() {
               </motion.span>
             </Link>
           </div>
+
+          {/* Floating CTA button controlled by header */}
+          <FloatingCTA show={ctaVisible} />
         </section>
 
-        {/* ================= CASHOUT METHODS ================= */}
+        {/* ================= PAYMENT METHODS ================= */}
         <section className="max-w-7xl mx-auto px-4 py-16 grid gap-12 md:grid-cols-2 lg:grid-cols-4">
-          {cashoutMethods.map((method, i) => (
+          {paymentMethods.map((method, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.2 }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
               className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-8 flex flex-col items-center text-center shadow-md hover:shadow-lg transition-shadow duration-300"
             >
-              <div className="mb-4 text-yellow-500">{method.icon}</div>
+              <div className="mb-4 text-yellow-500 text-4xl">{method.icon}</div>
               <h3 className="text-xl font-semibold mb-2">{method.title}</h3>
               <p className="text-gray-600 dark:text-gray-400">{method.description}</p>
-            </motion.div>
-          ))}
-        </section>
-
-        {/* ================= WITHDRAWAL HISTORY ================= */}
-        <section className="max-w-6xl mx-auto px-4 py-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {withdrawals.map((w, i) => (
-            <motion.div
-              key={w.id}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.2 }}
-              className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col items-center text-center"
-            >
-              <div className="mb-4 text-yellow-500">{w.icon}</div>
-              <h3 className="text-xl font-semibold mb-2">{w.method}</h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-2">{w.amount}</p>
-              <p className="text-gray-500 dark:text-gray-400 mb-4 text-sm">{w.date}</p>
-              <div
-                className={`px-4 py-1 rounded-full text-sm font-semibold ${
-                  w.status === "Completed"
-                    ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300"
-                    : w.status === "Pending"
-                    ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300"
-                    : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300"
-                }`}
-              >
-                {w.status}
-              </div>
             </motion.div>
           ))}
         </section>
@@ -157,17 +136,23 @@ export default function WithdrawalsRootPage() {
           <div className="bg-gray-50 dark:bg-[#111827] rounded-xl p-6 shadow">
             <Clock size={32} className="mx-auto mb-4 text-yellow-500" />
             <h3 className="text-xl font-semibold mb-2">Fast Processing</h3>
-            <p className="text-gray-600 dark:text-gray-400">Most withdrawals are processed instantly or within a few hours.</p>
+            <p className="text-gray-600 dark:text-gray-400">
+              Most withdrawals are processed instantly or within a few hours.
+            </p>
           </div>
           <div className="bg-gray-50 dark:bg-[#111827] rounded-xl p-6 shadow">
             <ShieldCheck size={32} className="mx-auto mb-4 text-yellow-500" />
             <h3 className="text-xl font-semibold mb-2">Secure Payments</h3>
-            <p className="text-gray-600 dark:text-gray-400">All transactions are encrypted and processed safely.</p>
+            <p className="text-gray-600 dark:text-gray-400">
+              All transactions are encrypted and processed safely.
+            </p>
           </div>
           <div className="bg-gray-50 dark:bg-[#111827] rounded-xl p-6 shadow">
             <DollarSign size={32} className="mx-auto mb-4 text-yellow-500" />
             <h3 className="text-xl font-semibold mb-2">Multiple Methods</h3>
-            <p className="text-gray-600 dark:text-gray-400">Withdraw via PayPal, gift cards, mobile top-up, or bank transfer.</p>
+            <p className="text-gray-600 dark:text-gray-400">
+              Withdraw via PayPal, crypto, gift cards, or other available options.
+            </p>
           </div>
         </section>
 
