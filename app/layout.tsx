@@ -24,25 +24,23 @@ export default function RootLayout({ children }: RootLayoutProps) {
       className="bg-gray-100 dark:bg-[#070A14] transition-colors duration-300"
     >
       <head>
-        {/* SEO */}
+        {/* Default SEO */}
         <Meta title={defaultTitle} description={defaultDescription} />
       </head>
 
-      <body className="min-h-screen text-black dark:text-white">
-        {/* Wrap everything with ThemeProvider */}
+      <body className="min-h-screen text-black dark:text-white relative">
         <ThemeProviderWrapper>
           {/* Header */}
           <Header />
 
           {/* Main content */}
-          <main className="min-h-[calc(100vh-160px)]">
-            {children}
-          </main>
+          <main className="min-h-[calc(100vh-160px)]">{children}</main>
 
           {/* Footer */}
           <Footer />
 
-          {/* Floating CTA */}
+          {/* Global Floating CTA */}
+          {/* Only one instance site-wide */}
           <FloatingCTA />
         </ThemeProviderWrapper>
       </body>
