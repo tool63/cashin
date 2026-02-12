@@ -15,21 +15,73 @@ import {
 import Meta from "@/components/seo/SeoEngine";
 
 export default function StartEarningPage() {
+  const faqs = [
+    {
+      question: "How can I earn money online with Cashog?",
+      answer:
+        "You can earn money online by completing offers, playing games, taking surveys, and testing apps. Once you earn enough points, you can withdraw your rewards instantly.",
+    },
+    {
+      question: "Is Cashog legit and safe to use worldwide?",
+      answer:
+        "Yes, Cashog is a secure and trusted rewards platform available globally. All offers and surveys are verified, and payments are processed safely.",
+    },
+    {
+      question: "How fast can I withdraw my earnings?",
+      answer:
+        "Most withdrawals are processed instantly or within a few hours after reaching the minimum payout threshold.",
+    },
+    {
+      question: "Do I need to pay to join Cashog?",
+      answer:
+        "No, Cashog is completely free to join. You can create an account and start earning without paying anything.",
+    },
+    {
+      question: "Can I earn money from my mobile phone?",
+      answer:
+        "Yes! Cashog is fully mobile-friendly. You can complete offers, play games, and take surveys directly from your smartphone.",
+    },
+    {
+      question: "What payment methods are available?",
+      answer:
+        "Cashog supports PayPal, gift cards, and other global payout methods depending on your region.",
+    },
+  ];
+
   return (
     <>
       <Meta
         title="Start Earning | Cashog"
-        description="Start earning real money with Cashog. Complete offers, play games, take surveys, and withdraw instantly."
+        description="Start earning real money online with Cashog. Complete offers, play games, take surveys, and withdraw instantly worldwide."
+      />
+
+      {/* ================= FAQ STRUCTURED DATA FOR SEO ================= */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faqs.map((faq) => ({
+              "@type": "Question",
+              name: faq.question,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: faq.answer,
+              },
+            })),
+          }),
+        }}
       />
 
       <main className="transition-colors duration-300 bg-white text-gray-900 dark:bg-[#070A14] dark:text-white min-h-screen">
-        
+
         {/* ================= HERO SECTION ================= */}
         <section className="relative py-20 px-4 text-center">
           <div className="max-w-3xl mx-auto">
             
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-              Earn Real Money
+              Earn Real Money Online
             </h1>
 
             <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
@@ -38,7 +90,7 @@ export default function StartEarningPage() {
 
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-8 text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed">
               Turn your free time into real income by completing simple tasks,
-              playing games, and answering surveys.
+              playing games, and answering surveys from anywhere in the world.
             </p>
 
             <Link href="/signup" className="cta-observer inline-block">
@@ -114,8 +166,8 @@ export default function StartEarningPage() {
               },
               {
                 icon: <Star size={32} />,
-                title: "Top Rated Platform",
-                desc: "Thousands of satisfied users worldwide.",
+                title: "Global Access",
+                desc: "Users from around the world can join and earn.",
               },
             ].map((item, i) => (
               <motion.div
@@ -134,6 +186,29 @@ export default function StartEarningPage() {
                   {item.desc}
                 </p>
               </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* ================= FAQ SECTION ================= */}
+        <section className="max-w-4xl mx-auto px-4 py-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          <div className="space-y-4">
+            {faqs.map((faq, i) => (
+              <details
+                key={i}
+                className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-4 cursor-pointer"
+              >
+                <summary className="font-semibold text-lg">
+                  {faq.question}
+                </summary>
+                <p className="mt-2 text-gray-600 dark:text-gray-400">
+                  {faq.answer}
+                </p>
+              </details>
             ))}
           </div>
         </section>
