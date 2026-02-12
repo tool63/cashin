@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, ShieldCheck, Zap, Activity, BarChart3, Eye } from "lucide-react";
 import Link from "next/link";
@@ -34,13 +35,41 @@ const earnAnywhere = [
 ];
 
 export default function HowItWorksPage() {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const footerRef = useRef<HTMLDivElement>(null);
+  const [showFloating, setShowFloating] = useState(false);
+
   const ctaGradient = "bg-gradient-to-r from-yellow-400 via-green-400 to-green-500";
+
+  // Handle CTA click
+  const handleCTA = () => {
+    window.location.href = "/signup";
+  };
+
+  // Floating CTA show/hide logic
+  useEffect(() => {
+    if (!heroRef.current || !footerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const heroVisible = entries.find((e) => e.target === heroRef.current)?.isIntersecting;
+        const footerVisible = entries.find((e) => e.target === footerRef.current)?.isIntersecting;
+        setShowFloating(!heroVisible && !footerVisible);
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(heroRef.current);
+    observer.observe(footerRef.current);
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#070A14] text-gray-900 dark:text-white">
 
       {/* HERO */}
-      <section className="px-4 pt-24 pb-28 text-center max-w-7xl mx-auto">
+      <section ref={heroRef} className="px-4 pt-24 pb-28 text-center max-w-7xl mx-auto">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -142,7 +171,7 @@ export default function HowItWorksPage() {
       </section>
 
       {/* FINAL CTA */}
-      <section className="px-4 py-28 text-center max-w-7xl mx-auto">
+      <section ref={footerRef} className="px-4 py-28 text-center max-w-7xl mx-auto">
         <h2 className="text-4xl font-extrabold mb-4">Ready to Start Earning?</h2>
         <p className="text-gray-600 dark:text-gray-300 mt-2 text-lg">Join Cashooz today and earn rewards in minutes.</p>
         <Link href="/signup">
@@ -155,6 +184,22 @@ export default function HowItWorksPage() {
           </motion.span>
         </Link>
       </section>
+
+      {/* FLOATING CTA */}
+      {showFloating && (
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="fixed bottom-6 right-6 z-50"
+        >
+          <button
+            onClick={handleCTA}
+            className={`px-6 py-4 rounded-full font-bold text-lg ${ctaGradient} shadow-2xl hover:scale-105`}
+          >
+            Start Earning in 60 Seconds
+          </button>
+        </motion.div>
+      )}
 
     </div>
   );
