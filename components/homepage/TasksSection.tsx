@@ -18,38 +18,42 @@ const earningDescriptions: Record<string, string> = {
 
 export default function TasksSection() {
   return (
-    <section className="max-w-7xl mx-auto px-6 py-20">
+    <section className="max-w-7xl mx-auto px-6 py-20 bg-gray-50 dark:bg-[#0B0E1A]">
+      {/* Section Title */}
       <SectionTitle icon="🎯" text="High Paying Tasks" />
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {/* Tasks Grid */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
         {earningOptions.map(([icon, title, href]) => (
           <Link
             key={title}
             href={href}
             className="group relative rounded-3xl p-6 flex flex-col items-center text-center
-              bg-gray-100 dark:bg-white/5
+              bg-white dark:bg-[#111827]
               border border-gray-200 dark:border-white/10
-              hover:border-blue-500/40
-              hover:shadow-xl
+              hover:border-gradient-to-r from-yellow-400 via-green-400 to-green-500
+              hover:shadow-2xl
               transition-all duration-300
-              hover:-translate-y-1"
+              hover:-translate-y-2"
           >
             {/* Icon */}
-            <div className="text-4xl mb-3 transition-transform group-hover:scale-110">
+            <div className="text-5xl mb-4 transition-transform duration-300 group-hover:scale-110">
               {icon}
             </div>
 
             {/* Title */}
-            <h3 className="text-lg font-semibold">{title}</h3>
+            <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">
+              {title}
+            </h3>
 
             {/* Description */}
-            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+            <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400">
               {earningDescriptions[title] ||
                 `Earn rewards with ${title.toLowerCase()}`}
             </p>
 
             {/* CTA indicator */}
-            <div className="mt-4 flex items-center gap-1 text-blue-500 text-sm font-medium opacity-0 group-hover:opacity-100 transition">
+            <div className="mt-4 flex items-center gap-1 text-yellow-400 font-semibold text-sm opacity-0 group-hover:opacity-100 transition duration-300">
               Start earning <ArrowRight size={16} />
             </div>
           </Link>
