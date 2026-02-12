@@ -12,15 +12,18 @@ export default function FinalCTASection() {
         Join millions of users who are already earning daily.
       </p>
 
-      <Link href="/signup" className="cta-observer inline-block">
-        <motion.span
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.97 }}
-          className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-10 py-4 rounded-xl font-semibold shadow-lg"
-        >
-          Get Started Now <ArrowRight />
-        </motion.span>
-      </Link>
+      {/* CTA OBSERVER WRAPPER */}
+      <div className="cta-observer inline-block">
+        <Link href="/signup">
+          <motion.span
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-10 py-4 rounded-xl font-semibold shadow-lg"
+          >
+            Get Started Now <ArrowRight />
+          </motion.span>
+        </Link>
+      </div>
     </section>
   );
 }
