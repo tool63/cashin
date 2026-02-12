@@ -49,9 +49,10 @@ export default function WithdrawalsRootPage() {
 
   return (
     <>
+      {/* ================= META ================= */}
       <Meta
         title="Withdrawals | Cashog"
-        description="View your Cashog withdrawal history. Track recent payments, payout methods, amounts, and status."
+        description="Track your Cashog withdrawals, view payout methods, amounts, and statuses instantly. Secure and fast withdrawals worldwide."
       />
 
       {/* JSON-LD FAQ for SEO */}
@@ -72,19 +73,38 @@ export default function WithdrawalsRootPage() {
 
       <main className="transition-colors duration-300 bg-white text-gray-900 dark:bg-[#070A14] dark:text-white min-h-screen">
 
-        {/* HERO */}
-        <section className="relative py-20 px-4 text-center">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-              Your Withdrawals
-            </h1>
-            <p className="text-2xl md:text-3xl mb-6 text-gray-600 dark:text-gray-300 max-w-xl mx-auto">
-              Track your recent withdrawals, see payout methods, amounts, and status in real time.
-            </p>
+        {/* ================= HERO SECTION ================= */}
+        <section className="relative py-24 px-4 text-center">
+          <div className="max-w-4xl mx-auto">
+            <motion.h1
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6"
+            >
+              Track and Withdraw Your Earnings
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto"
+            >
+              View your withdrawal history, track payout methods, amounts, and statuses instantly. Cashog makes earning and withdrawing fast, secure, and reliable.
+            </motion.p>
+            <Link href="/signup" className="inline-block">
+              <motion.span
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-12 py-5 rounded-2xl font-bold shadow-xl text-lg"
+              >
+                Create Free Account <ArrowRight />
+              </motion.span>
+            </Link>
           </div>
         </section>
 
-        {/* CASHOUT METHODS */}
+        {/* ================= CASHOUT METHODS ================= */}
         <section className="max-w-7xl mx-auto px-4 py-16 grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           {cashoutMethods.map((method, i) => (
             <motion.div
@@ -102,7 +122,7 @@ export default function WithdrawalsRootPage() {
           ))}
         </section>
 
-        {/* WITHDRAWAL HISTORY */}
+        {/* ================= WITHDRAWAL HISTORY ================= */}
         <section className="max-w-6xl mx-auto px-4 py-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {withdrawals.map((w, i) => (
             <motion.div
@@ -132,7 +152,7 @@ export default function WithdrawalsRootPage() {
           ))}
         </section>
 
-        {/* TRUST / INFO */}
+        {/* ================= TRUST INFO ================= */}
         <section className="max-w-5xl mx-auto px-4 py-16 grid md:grid-cols-3 gap-8 text-center">
           <div className="bg-gray-50 dark:bg-[#111827] rounded-xl p-6 shadow">
             <Clock size={32} className="mx-auto mb-4 text-yellow-500" />
@@ -151,7 +171,7 @@ export default function WithdrawalsRootPage() {
           </div>
         </section>
 
-        {/* FAQ */}
+        {/* ================= FAQ ================= */}
         <section className="max-w-4xl mx-auto px-4 py-16">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Frequently Asked Questions</h2>
           <div className="space-y-4">
@@ -164,7 +184,7 @@ export default function WithdrawalsRootPage() {
           </div>
         </section>
 
-        {/* FINAL CTA */}
+        {/* ================= FINAL CTA ================= */}
         <section className="text-center py-28 bg-white dark:bg-[#070A14] w-full transition-colors duration-300">
           <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
             Ready to Withdraw Your Earnings?
