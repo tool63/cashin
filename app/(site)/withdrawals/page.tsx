@@ -9,6 +9,9 @@ import {
   Clock,
   CheckCircle,
   DollarSign,
+  Globe,
+  Star,
+  Lock,
 } from "lucide-react";
 import Meta from "@/components/seo/SeoEngine";
 import FloatingCTA from "@/components/cta/FloatingCTA";
@@ -24,6 +27,25 @@ const paymentMethods = [
   { icon: "Ξ", title: "Ethereum", description: "Instant payout" },
   { icon: "Ð", title: "Dogecoin", description: "Instant payout" },
   { icon: "🟡", title: "Binance Coin (BNB)", description: "Instant payout" },
+];
+
+// Minimum withdrawal info
+const withdrawalInfo = [
+  { method: "PayPal", min: "$1", fee: "No fees" },
+  { method: "Tether (USDT)", min: "$10", fee: "Network fee applies" },
+  { method: "Bitcoin", min: "$10", fee: "Network fee applies" },
+  { method: "Gift Cards", min: "$5", fee: "No fees" },
+  { method: "Litecoin", min: "$10", fee: "Network fee applies" },
+  { method: "Ethereum", min: "$10", fee: "Network fee applies" },
+  { method: "Dogecoin", min: "$10", fee: "Network fee applies" },
+  { method: "Binance Coin (BNB)", min: "$10", fee: "Network fee applies" },
+];
+
+// Testimonials
+const testimonials = [
+  { name: "Alice J.", text: "Cashog payouts are instant! Love using PayPal." },
+  { name: "David M.", text: "I withdrew USDT without any hassle. Highly recommend." },
+  { name: "Sofia R.", text: "Gift card withdrawals are so easy and fast!" },
 ];
 
 // FAQ for SEO
@@ -109,7 +131,7 @@ export default function WithdrawalsRootPage() {
             </Link>
           </div>
 
-          {/* Floating CTA button controlled by header */}
+          {/* Floating CTA button */}
           <FloatingCTA show={ctaVisible} />
         </section>
 
@@ -131,27 +153,69 @@ export default function WithdrawalsRootPage() {
           ))}
         </section>
 
-        {/* ================= TRUST INFO ================= */}
+        {/* ================= MIN WITHDRAWAL & FEES ================= */}
+        <section className="max-w-6xl mx-auto px-4 py-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Minimum Withdrawal & Fees</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {withdrawalInfo.map((w, i) => (
+              <div
+                key={i}
+                className="bg-gray-50 dark:bg-[#1A1F2B] rounded-xl p-6 shadow text-center"
+              >
+                <h3 className="text-xl font-semibold mb-2">{w.method}</h3>
+                <p className="text-gray-600 dark:text-gray-400">Minimum: {w.min}</p>
+                <p className="text-gray-600 dark:text-gray-400">Fee: {w.fee}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ================= TESTIMONIALS ================= */}
+        <section className="max-w-6xl mx-auto px-4 py-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">What Our Users Say</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            {testimonials.map((t, i) => (
+              <div
+                key={i}
+                className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-6 shadow text-center"
+              >
+                <p className="text-gray-600 dark:text-gray-400 mb-4">"{t.text}"</p>
+                <h4 className="font-semibold">{t.name}</h4>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ================= GLOBAL AVAILABILITY ================= */}
+        <section className="max-w-5xl mx-auto px-4 py-16 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12">Available Worldwide</h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-8">
+            Cashog supports withdrawals from most countries across the globe.
+          </p>
+          <Globe size={48} className="mx-auto text-yellow-500" />
+        </section>
+
+        {/* ================= SECURITY & VERIFICATION ================= */}
         <section className="max-w-5xl mx-auto px-4 py-16 grid md:grid-cols-3 gap-8 text-center">
           <div className="bg-gray-50 dark:bg-[#111827] rounded-xl p-6 shadow">
-            <Clock size={32} className="mx-auto mb-4 text-yellow-500" />
-            <h3 className="text-xl font-semibold mb-2">Fast Processing</h3>
+            <Lock size={32} className="mx-auto mb-4 text-yellow-500" />
+            <h3 className="text-xl font-semibold mb-2">Encrypted Transactions</h3>
             <p className="text-gray-600 dark:text-gray-400">
-              Most withdrawals are processed instantly or within a few hours.
+              All withdrawals are encrypted and secure.
             </p>
           </div>
           <div className="bg-gray-50 dark:bg-[#111827] rounded-xl p-6 shadow">
             <ShieldCheck size={32} className="mx-auto mb-4 text-yellow-500" />
-            <h3 className="text-xl font-semibold mb-2">Secure Payments</h3>
+            <h3 className="text-xl font-semibold mb-2">Verified Partners</h3>
             <p className="text-gray-600 dark:text-gray-400">
-              All transactions are encrypted and processed safely.
+              We only work with trusted payment providers.
             </p>
           </div>
           <div className="bg-gray-50 dark:bg-[#111827] rounded-xl p-6 shadow">
-            <DollarSign size={32} className="mx-auto mb-4 text-yellow-500" />
-            <h3 className="text-xl font-semibold mb-2">Multiple Methods</h3>
+            <Star size={32} className="mx-auto mb-4 text-yellow-500" />
+            <h3 className="text-xl font-semibold mb-2">Fraud Protection</h3>
             <p className="text-gray-600 dark:text-gray-400">
-              Withdraw via PayPal, crypto, gift cards, or other available options.
+              Anti-fraud systems keep your account safe.
             </p>
           </div>
         </section>
