@@ -32,44 +32,49 @@ export default function TrustSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-20 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white"
+      className="relative py-24 bg-gray-50 dark:bg-[#0B0E1A] text-gray-900 dark:text-white"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="max-w-7xl mx-auto px-6 text-center">
 
         {/* Heading */}
         <motion.h2
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7 }}
           viewport={{ once: true }}
-          className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4"
+          className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 text-gray-900 dark:text-white"
         >
           Trusted by Millions Worldwide
         </motion.h2>
 
         {/* Gradient Accent Line */}
-        <div className="w-24 h-1 mx-auto mb-8 rounded-full bg-gradient-to-r from-yellow-400 via-green-400 to-green-500"></div>
+        <motion.div
+          initial={{ width: 0 }}
+          whileInView={{ width: "6rem" }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="h-1 mx-auto mb-8 rounded-full bg-gradient-to-r from-yellow-400 via-green-400 to-green-500"
+        />
 
         {/* Subtext */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
           viewport={{ once: true }}
-          className="text-base sm:text-lg md:text-xl mb-14 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed"
+          className="text-base sm:text-lg md:text-xl mb-16 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed"
         >
-          Cashog is one of the most trusted earning platforms, paying users daily
-          across the globe with fast, secure, and verified withdrawals.
+          Cashog is a premium earning platform, trusted globally by millions of users for fast,
+          secure, and verified payouts every day.
         </motion.p>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 md:gap-10">
           <Stat title="Total Users" value="25M+" animate={animate} />
           <Stat title="Users Paid" value="3.2M+" animate={animate} />
           <Stat title="Total Payouts" value="$12M+" animate={animate} />
           <Stat title="Trust Rating" value="4.8 ★" animate={animate} />
         </div>
-
       </div>
     </section>
   );
