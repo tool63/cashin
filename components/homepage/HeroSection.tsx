@@ -26,16 +26,18 @@ export default function HeroSection() {
           Complete tasks, surveys, watch videos, and earn rewards securely from anywhere.
         </p>
 
-        {/* HERO CTA BUTTON */}
-        <Link href="/signup" className="cta-observer inline-block">
-          <motion.span
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-10 py-4 rounded-xl font-semibold shadow-lg"
-          >
-            Start Earning Now <ArrowRight />
-          </motion.span>
-        </Link>
+        {/* HERO CTA WRAPPER (IMPORTANT FOR OBSERVER) */}
+        <div className="cta-observer inline-block">
+          <Link href="/signup">
+            <motion.span
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-10 py-4 rounded-xl font-semibold shadow-lg"
+            >
+              Start Earning Now <ArrowRight />
+            </motion.span>
+          </Link>
+        </div>
 
       </div>
 
