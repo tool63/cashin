@@ -31,6 +31,19 @@ const steps = [
   },
 ];
 
+const features = [
+  { title: "Fast Payouts", description: "Get your money instantly via PayPal or gift cards." },
+  { title: "Trusted & Secure", description: "Millions of users trust our platform daily." },
+  { title: "High-Paying Offers", description: "Access top offers that maximize your earnings." },
+  { title: "Mobile-Friendly", description: "Earn on the go with our fully responsive platform." },
+];
+
+const faqs = [
+  { q: "How do I cash out?", a: "You can withdraw via PayPal, gift cards, or mobile top-ups once you reach the minimum threshold." },
+  { q: "Are surveys safe?", a: "Yes, all tasks and surveys are secure and verified for safety." },
+  { q: "Can I join from any country?", a: "Yes! Our platform supports users globally." },
+];
+
 export default function HowItWorks() {
   return (
     <>
@@ -56,7 +69,6 @@ export default function HowItWorks() {
               Follow these simple steps and start earning instantly from anywhere.
             </p>
 
-            {/* HERO CTA BUTTON */}
             <Link href="/signup" className="cta-observer inline-block">
               <motion.span
                 whileHover={{ scale: 1.05 }}
@@ -67,8 +79,6 @@ export default function HowItWorks() {
               </motion.span>
             </Link>
           </div>
-
-          {/* Floating CTA */}
           <FloatingCTA />
         </section>
 
@@ -90,7 +100,42 @@ export default function HowItWorks() {
           ))}
         </section>
 
-        {/* FINAL CTA SECTION */}
+        {/* FEATURES / BENEFITS */}
+        <section className="max-w-7xl mx-auto px-4 py-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+            Why Choose Cashog
+          </h2>
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            {features.map((feature, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.2 }}
+                className="bg-gray-50 dark:bg-[#111827] rounded-xl p-6 text-center shadow hover:shadow-lg transition-shadow duration-300"
+              >
+                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* FAQ SECTION */}
+        <section className="max-w-4xl mx-auto px-4 py-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+          <div className="space-y-4">
+            {faqs.map((faq, i) => (
+              <details key={i} className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-4 cursor-pointer group">
+                <summary className="font-semibold text-lg">{faq.q}</summary>
+                <p className="mt-2 text-gray-600 dark:text-gray-400">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        {/* FINAL CTA */}
         <section className="text-center py-20 px-4">
           <Link href="/signup" className="cta-observer inline-block">
             <motion.span
