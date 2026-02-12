@@ -1,57 +1,31 @@
 // components/homepage/earningOptions.ts
-import {
-  Zap,
-  Smartphone,
-  Gamepad,
-  Video,
-  Cpu,
-  CheckCircle,
-  Puzzle,
-  Clipboard,
-  Film,
-  Tool,
-  Gift,
-  Flask,
-  Mail,
-  Globe,
-  Star,
-  RefreshCcw,
-  Trophy,
-  CreditCard,
-} from "lucide-react";
-import { ComponentType, SVGProps } from "react";
 
 /**
- * Type for a single earning option: [icon component, title, slug]
+ * Static array of earning options: [icon as JSX.Element, title, slug]
+ * Fully compatible with TypeScript and Next.js
  */
-export type EarningOption = [icon: ComponentType<SVGProps<SVGSVGElement>>, title: string, slug: string];
-
-/**
- * Static array of earning options using lucide-react icons
- */
-export const earningOptions: EarningOption[] = [
-  [Zap, "Surveys", "/surveys"],
-  [Smartphone, "App Installs", "/app-installs"],
-  [Gamepad, "Playing Games", "/play-games"],
-  [Video, "Watching Videos", "/watch-videos"],
-  [Cpu, "Mining Rewards", "/mining-rewards"],
-  [CheckCircle, "Completing Offers", "/complete-offers"],
-  [Puzzle, "Offerwall", "/offerwall"],
-  [Clipboard, "Surveywall", "/surveywall"],
-  [Film, "Watching Ads", "/watch-ads"],
-  [Tool, "Micro Tasks", "/micro-tasks"],
-  [Gift, "Free Trials", "/complete-free-trials"],
-  [Flask, "Testing Products", "/test-products"],
-  [Mail, "Reading Emails", "/read-emails"],
-  [Globe, "Visiting Websites", "/visit-websites"],
-  [Star, "Review Tasks", "/review-tasks"],
-  [RefreshCcw, "Spinning Wheel", "/spinning-wheel"],
-  [Trophy, "Loyalty", "/loyalty"],
-  [CreditCard, "Vouchers", "/vouchers"],
+export const earningOptions: [JSX.Element, string, string][] = [
+  [<span>🧠</span>, "Surveys", "/surveys"],
+  [<span>📱</span>, "App Installs", "/app-installs"],
+  [<span>🎮</span>, "Playing Games", "/play-games"],
+  [<span>📺</span>, "Watching Videos", "/watch-videos"],
+  [<span>⛏️</span>, "Mining Rewards", "/mining-rewards"],
+  [<span>✅</span>, "Completing Offers", "/complete-offers"],
+  [<span>🧩</span>, "Offerwall", "/offerwall"],
+  [<span>📋</span>, "Surveywall", "/surveywall"],
+  [<span>🎬</span>, "Watching Ads", "/watch-ads"],
+  [<span>🛠️</span>, "Micro Tasks", "/micro-tasks"],
+  [<span>🎁</span>, "Free Trials", "/complete-free-trials"],
+  [<span>🧪</span>, "Testing Products", "/test-products"],
+  [<span>📧</span>, "Reading Emails", "/read-emails"],
+  [<span>🌐</span>, "Visiting Websites", "/visit-websites"],
+  [<span>⭐</span>, "Review Tasks", "/review-tasks"],
+  [<span>🎡</span>, "Spinning Wheel", "/spinning-wheel"],
+  [<span>🏆</span>, "Loyalty", "/loyalty"],
+  [<span>💳</span>, "Vouchers", "/vouchers"],
 ];
 
 /**
- * Helper function to get earning options dynamically
- * Useful for filtering, translations, or future API integration
+ * Optional helper to get earning options dynamically
  */
-export const getEarningOptions = (): EarningOption[] => [...earningOptions];
+export const getEarningOptions = () => earningOptions;
