@@ -1,13 +1,14 @@
 // app/how-it-works/page.tsx
 "use client";
 
-import { ArrowRight, User, CreditCard, Gift, CheckCircle } from "lucide-react";
+import { ArrowRight, User, CreditCard, Gift, CheckCircle, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Meta from "@/components/seo/SeoEngine";
 import TypingText from "@/components/typing/TypingText";
 import FloatingCTA from "@/components/cta/FloatingCTA";
 
+// How It Works Steps
 const steps = [
   {
     icon: <User size={32} />,
@@ -31,17 +32,24 @@ const steps = [
   },
 ];
 
+// Features / Benefits
 const features = [
   { title: "Fast Payouts", description: "Get your money instantly via PayPal or gift cards." },
   { title: "Trusted & Secure", description: "Millions of users trust our platform daily." },
   { title: "High-Paying Offers", description: "Access top offers that maximize your earnings." },
   { title: "Mobile-Friendly", description: "Earn on the go with our fully responsive platform." },
+  { title: "Trusted Payments", description: "Secure and reliable payouts every time." },
 ];
 
+// FAQ Questions
 const faqs = [
   { q: "How do I cash out?", a: "You can withdraw via PayPal, gift cards, or mobile top-ups once you reach the minimum threshold." },
   { q: "Are surveys safe?", a: "Yes, all tasks and surveys are secure and verified for safety." },
   { q: "Can I join from any country?", a: "Yes! Our platform supports users globally." },
+  { q: "Is there a minimum age to join?", a: "You must be at least 13 years old to create an account." },
+  { q: "How long does it take to get paid?", a: "Most withdrawals are processed instantly or within a few hours." },
+  { q: "Do I need to pay anything to join?", a: "No, signing up is completely free." },
+  { q: "Can I complete offers on mobile?", a: "Yes! Our platform is fully mobile-friendly, so you can earn anywhere." },
 ];
 
 export default function HowItWorks() {
@@ -73,7 +81,7 @@ export default function HowItWorks() {
               <motion.span
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-10 py-4 rounded-xl font-semibold shadow-lg"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-12 py-5 rounded-2xl font-bold shadow-xl text-lg"
               >
                 Start Earning Now <ArrowRight />
               </motion.span>
@@ -105,7 +113,7 @@ export default function HowItWorks() {
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
             Why Choose Cashog
           </h2>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-5">
             {features.map((feature, i) => (
               <motion.div
                 key={i}
@@ -115,6 +123,9 @@ export default function HowItWorks() {
                 transition={{ duration: 0.5, delay: i * 0.2 }}
                 className="bg-gray-50 dark:bg-[#111827] rounded-xl p-6 text-center shadow hover:shadow-lg transition-shadow duration-300"
               >
+                <div className="flex justify-center mb-4 text-yellow-500">
+                  <ShieldCheck size={28} />
+                </div>
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
                 <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
               </motion.div>
@@ -136,17 +147,17 @@ export default function HowItWorks() {
         </section>
 
         {/* FINAL CTA */}
-        <section className="text-center py-20 px-4">
+        <section className="text-center py-24 px-4 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 rounded-2xl mx-4 md:mx-auto max-w-3xl">
           <Link href="/signup" className="cta-observer inline-block">
             <motion.span
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-10 py-4 rounded-xl font-semibold shadow-lg"
+              className="inline-flex items-center gap-3 bg-white text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-xl"
             >
               Join Now & Start Earning <ArrowRight />
             </motion.span>
           </Link>
-          <p className="mt-4 text-gray-600 dark:text-gray-400 text-lg max-w-md mx-auto">
+          <p className="mt-6 text-white text-lg max-w-md mx-auto">
             Become part of our community and start earning daily rewards instantly.
           </p>
         </section>
