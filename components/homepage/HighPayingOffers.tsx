@@ -233,14 +233,44 @@ export default function Page() {
   );
 }
 
-/* ===================== TRUST SECTION (placeholder) ===================== */
+/* ===================== TRUST SECTION ===================== */
 function TrustSection() {
   return (
-    <section className="max-w-7xl mx-auto px-4 py-12 bg-gray-100 dark:bg-[#0B0E1A] rounded-xl text-center">
-      <h2 className="text-3xl font-bold mb-4">Trusted by Thousands</h2>
-      <p className="text-gray-700 dark:text-gray-300">
+    <section className="max-w-7xl mx-auto px-6 py-16 bg-gray-50 dark:bg-[#0B0E1A] rounded-3xl text-center shadow-lg mt-12">
+      {/* Heading */}
+      <h2 className="text-3xl sm:text-4xl font-extrabold mb-4 text-gray-900 dark:text-white">
+        Trusted by Thousands Worldwide
+      </h2>
+
+      {/* Accent Line */}
+      <div className="w-24 h-1 mx-auto mb-8 rounded-full bg-gradient-to-r from-yellow-400 via-green-400 to-green-500"></div>
+
+      {/* Subtext */}
+      <p className="text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto text-lg leading-relaxed">
         Our platform is trusted by users worldwide to earn rewards safely and reliably.
+        Fast, secure, and verified payouts every day.
       </p>
+
+      {/* Stats */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
+        <div className="bg-white dark:bg-[#111827] rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center hover:scale-105 transition-transform">
+          <span className="text-4xl sm:text-5xl font-bold text-green-500">25K+</span>
+          <span className="text-lg font-semibold mt-2 text-gray-900 dark:text-white">Total Users</span>
+        </div>
+        <div className="bg-white dark:bg-[#111827] rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center hover:scale-105 transition-transform">
+          <span className="text-4xl sm:text-5xl font-bold text-green-500">12K+</span>
+          <span className="text-lg font-semibold mt-2 text-gray-900 dark:text-white">Active Users</span>
+        </div>
+        <div className="bg-white dark:bg-[#111827] rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center hover:scale-105 transition-transform">
+          <span className="text-4xl sm:text-5xl font-bold text-green-500">$1.2M+</span>
+          <span className="text-lg font-semibold mt-2 text-gray-900 dark:text-white">Total Payouts</span>
+        </div>
+        <div className="bg-white dark:bg-[#111827] rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center hover:scale-105 transition-transform">
+          <span className="text-4xl sm:text-5xl font-bold text-green-500">4.8★</span>
+          <span className="text-lg font-semibold mt-2 text-gray-900 dark:text-white">Trust Rating</span>
+        </div>
+      </div>
     </section>
   );
 }
+
