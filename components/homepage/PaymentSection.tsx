@@ -13,21 +13,27 @@ export default function PaymentSection() {
   ];
 
   return (
-    <section className="py-20">
+    <section className="py-20 bg-gray-50 dark:bg-[#0B0E1A]">
       <div className="max-w-7xl mx-auto px-6 text-center">
-        <h2 className="text-4xl font-extrabold mb-4">Payment Methods</h2>
-        <p className="text-gray-600 dark:text-gray-400 mb-14 max-w-2xl mx-auto">
-          Fast, secure, and trusted payout options.
+        {/* Section Heading */}
+        <h2 className="text-4xl sm:text-5xl font-extrabold mb-4 text-gray-900 dark:text-white">
+          Payment Methods
+        </h2>
+        <p className="text-gray-600 dark:text-gray-400 mb-14 max-w-2xl mx-auto text-lg">
+          Fast, secure, and trusted payout options. Withdraw your earnings instantly via your favorite method.
         </p>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-0 justify-center">
+        {/* Payment Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 justify-center">
           {methods.map((method) => (
             <div
               key={method.name}
-              className="rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-100 dark:bg-white/5 px-6 py-8 flex flex-col items-center hover:scale-105 transition-transform"
+              className="rounded-3xl border border-gray-200 dark:border-white/10 bg-white dark:bg-[#111827] px-6 py-10 flex flex-col items-center justify-center shadow-md hover:shadow-2xl hover:scale-105 transition-transform duration-300"
             >
-              <span className="text-4xl mb-3">{method.emoji}</span>
-              <span className="text-lg font-semibold">{method.name}</span>
+              <span className="text-5xl mb-4">{method.emoji}</span>
+              <span className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white">
+                {method.name}
+              </span>
               <span className="text-sm text-gray-600 dark:text-gray-400 mt-1">
                 Instant payout
               </span>
