@@ -17,25 +17,25 @@ import Meta from "@/components/seo/SeoEngine";
 export default function CashoutMethodsPage() {
   const methods = [
     {
-      icon: <Wallet size={36} />,
+      icon: <Wallet size={36} className="text-yellow-500" />,
       title: "PayPal",
       description:
         "Withdraw your earnings directly to your PayPal account instantly and securely worldwide.",
     },
     {
-      icon: <Gift size={36} />,
+      icon: <Gift size={36} className="text-yellow-500" />,
       title: "Gift Cards",
       description:
         "Redeem your points for Amazon, Google Play, Apple, and other popular gift cards.",
     },
     {
-      icon: <Smartphone size={36} />,
+      icon: <Smartphone size={36} className="text-yellow-500" />,
       title: "Mobile Top-Up",
       description:
         "Recharge your mobile balance directly using your Cashog earnings.",
     },
     {
-      icon: <CreditCard size={36} />,
+      icon: <CreditCard size={36} className="text-yellow-500" />,
       title: "Bank Transfer",
       description:
         "Transfer your earnings directly to your bank account (available in selected regions).",
@@ -54,7 +54,6 @@ export default function CashoutMethodsPage() {
         {/* ================= HERO ================= */}
         <section className="relative py-20 px-4 text-center">
           <div className="max-w-3xl mx-auto">
-            
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
               Withdraw Your Earnings
             </h1>
@@ -67,7 +66,7 @@ export default function CashoutMethodsPage() {
               Choose from multiple trusted payout methods and get your money instantly.
             </p>
 
-            <Link href="/signup" className="inline-block">
+            <Link href="/signup" className="inline-block cta-observer">
               <motion.span
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
@@ -90,7 +89,7 @@ export default function CashoutMethodsPage() {
               transition={{ duration: 0.6, delay: i * 0.2 }}
               className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-8 flex flex-col items-center text-center shadow-md hover:shadow-lg transition-shadow duration-300"
             >
-              <div className="mb-4 text-yellow-500">{method.icon}</div>
+              <div className="mb-4">{method.icon}</div>
               <h3 className="text-xl font-semibold mb-2">{method.title}</h3>
               <p className="text-gray-600 dark:text-gray-400">
                 {method.description}
@@ -102,12 +101,9 @@ export default function CashoutMethodsPage() {
         {/* ================= WITHDRAWAL INFO ================= */}
         <section className="max-w-5xl mx-auto px-4 py-16">
           <div className="grid md:grid-cols-3 gap-10 text-center">
-            
             <div className="bg-gray-50 dark:bg-[#111827] rounded-xl p-8 shadow">
               <Clock size={32} className="mx-auto mb-4 text-yellow-500" />
-              <h3 className="text-xl font-semibold mb-2">
-                Fast Processing
-              </h3>
+              <h3 className="text-xl font-semibold mb-2">Fast Processing</h3>
               <p className="text-gray-600 dark:text-gray-400">
                 Most withdrawals are processed instantly or within a few hours.
               </p>
@@ -115,9 +111,7 @@ export default function CashoutMethodsPage() {
 
             <div className="bg-gray-50 dark:bg-[#111827] rounded-xl p-8 shadow">
               <Globe size={32} className="mx-auto mb-4 text-yellow-500" />
-              <h3 className="text-xl font-semibold mb-2">
-                Global Availability
-              </h3>
+              <h3 className="text-xl font-semibold mb-2">Global Availability</h3>
               <p className="text-gray-600 dark:text-gray-400">
                 Cashog supports users from around the world.
               </p>
@@ -125,25 +119,21 @@ export default function CashoutMethodsPage() {
 
             <div className="bg-gray-50 dark:bg-[#111827] rounded-xl p-8 shadow">
               <ShieldCheck size={32} className="mx-auto mb-4 text-yellow-500" />
-              <h3 className="text-xl font-semibold mb-2">
-                Secure Payments
-              </h3>
+              <h3 className="text-xl font-semibold mb-2">Secure Payments</h3>
               <p className="text-gray-600 dark:text-gray-400">
                 All transactions are encrypted and processed securely.
               </p>
             </div>
-
           </div>
         </section>
 
         {/* ================= FINAL CTA ================= */}
         <section className="text-center py-28 bg-white dark:bg-[#070A14] w-full transition-colors duration-300">
-          
           <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
             Ready to Withdraw Your Earnings?
           </h2>
 
-          <Link href="/signup" className="inline-block">
+          <Link href="/signup" className="inline-block cta-observer">
             <motion.span
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
