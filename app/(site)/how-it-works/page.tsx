@@ -1,9 +1,12 @@
 // app/how-it-works/page.tsx
 "use client";
 
-import Meta from "@/components/seo/SeoEngine";
+import { ArrowRight, User, CreditCard, Gift, CheckCircle } from "lucide-react";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { CheckCircle, User, CreditCard, Gift } from "lucide-react";
+import Meta from "@/components/seo/SeoEngine";
+import TypingText from "@/components/typing/TypingText";
+import FloatingCTA from "@/components/cta/FloatingCTA";
 
 const steps = [
   {
@@ -37,17 +40,40 @@ export default function HowItWorks() {
       />
 
       <main className="transition-colors duration-300 bg-white text-gray-900 dark:bg-[#070A14] dark:text-white min-h-screen">
-        <section className="text-center py-20 px-4">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            How It Works
-          </h1>
-          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Follow these simple steps and start earning real money online today.
-          </p>
+
+        {/* HERO-STYLE SECTION */}
+        <section className="relative py-20 px-4 text-center">
+          <div className="max-w-3xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
+              Earn Real Money Online
+            </h1>
+
+            <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
+              <TypingText />
+            </div>
+
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-8 text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed">
+              Follow these simple steps and start earning instantly from anywhere.
+            </p>
+
+            {/* HERO CTA BUTTON */}
+            <Link href="/signup" className="cta-observer inline-block">
+              <motion.span
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-10 py-4 rounded-xl font-semibold shadow-lg"
+              >
+                Start Earning Now <ArrowRight />
+              </motion.span>
+            </Link>
+          </div>
+
+          {/* Floating CTA */}
+          <FloatingCTA />
         </section>
 
-        {/* Steps Section */}
-        <section className="max-w-6xl mx-auto px-4 py-16 grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+        {/* HOW IT WORKS STEPS */}
+        <section className="max-w-7xl mx-auto px-4 py-16 grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           {steps.map((step, index) => (
             <motion.div
               key={index}
@@ -64,20 +90,22 @@ export default function HowItWorks() {
           ))}
         </section>
 
-        {/* CTA Section */}
-        <section className="text-center py-20 px-4 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 rounded-xl mx-4 md:mx-auto max-w-3xl">
-          <motion.a
-            href="/signup"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            className="inline-block px-10 py-4 bg-white text-black font-bold rounded-xl shadow-lg"
-          >
-            Get Started Now
-          </motion.a>
-          <p className="mt-4 text-white text-lg">
-            Join thousands of users already earning daily.
+        {/* FINAL CTA SECTION */}
+        <section className="text-center py-20 px-4">
+          <Link href="/signup" className="cta-observer inline-block">
+            <motion.span
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-10 py-4 rounded-xl font-semibold shadow-lg"
+            >
+              Join Now & Start Earning <ArrowRight />
+            </motion.span>
+          </Link>
+          <p className="mt-4 text-gray-600 dark:text-gray-400 text-lg max-w-md mx-auto">
+            Become part of our community and start earning daily rewards instantly.
           </p>
         </section>
+
       </main>
     </>
   );
