@@ -21,16 +21,17 @@ export default function PaymentSection() {
         {/* Section Heading */}
         <SectionTitle icon="💰" text="Payment Methods" />
 
-        <p className="text-gray-600 dark:text-gray-400 mb-14 max-w-2xl mx-auto text-lg">
+        {/* Subtitle */}
+        <p className="text-gray-600 dark:text-gray-400 mb-16 max-w-2xl mx-auto text-lg">
           Fast, secure, and trusted payout options. Withdraw your earnings instantly via your favorite method.
         </p>
 
         {/* Payment Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 justify-center">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
           {methods.map((method) => (
             <div
               key={method.name}
-              className="rounded-3xl border border-gray-200 dark:border-white/10 bg-white dark:bg-[#111827] px-6 py-10 flex flex-col items-center justify-center shadow-md hover:shadow-2xl hover:scale-105 transition-transform duration-300"
+              className="flex flex-col items-center justify-center rounded-3xl bg-white dark:bg-[#111827] border border-gray-200 dark:border-white/10 px-6 py-10 shadow-md hover:shadow-2xl hover:scale-105 transition-transform duration-300"
             >
               {/* Icon */}
               <span className="text-6xl mb-4">{method.emoji}</span>
