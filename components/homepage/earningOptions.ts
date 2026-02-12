@@ -1,10 +1,15 @@
 // components/homepage/earningOptions.ts
 
 /**
- * Static array of earning options: [icon, title, slug]
+ * Type for a single earning option: [icon, title, slug]
+ */
+export type EarningOption = [icon: string, title: string, slug: string];
+
+/**
+ * Static array of earning options
  * Can be used directly on homepage and dynamic pages
  */
-export const earningOptions: [string, string, string][] = [
+export const earningOptions: EarningOption[] = [
   ["🧠", "Surveys", "/surveys"],
   ["📱", "App Installs", "/app-installs"],
   ["🎮", "Playing Games", "/play-games"],
@@ -26,7 +31,7 @@ export const earningOptions: [string, string, string][] = [
 ];
 
 /**
- * Optional helper function to get earning options dynamically
- * Useful if translations or dynamic filtering is added later
+ * Helper function to get earning options dynamically
+ * Useful for filtering, translations, or future API integration
  */
-export const getEarningOptions = () => earningOptions;
+export const getEarningOptions = (): EarningOption[] => [...earningOptions];
