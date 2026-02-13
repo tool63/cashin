@@ -53,12 +53,36 @@ function CountUp({ end }: { end: number }) {
 /* ================= PAGE COMPONENT ================= */
 export default function TrustSafetyPage() {
   const securityFeatures = [
-    { icon: <Lock className="h-8 w-8 text-green-600" />, title: "Advanced Encryption", desc: "Bank-level AES-256 encryption and secure SSL protocols safeguard every transaction." },
-    { icon: <Fingerprint className="h-8 w-8 text-yellow-500" />, title: "Multi-Factor Authentication", desc: "Layered identity verification ensures only authorized access." },
-    { icon: <Eye className="h-8 w-8 text-blue-600" />, title: "Real-Time Monitoring", desc: "AI-driven monitoring detects and blocks suspicious activity instantly." },
-    { icon: <Server className="h-8 w-8 text-purple-600" />, title: "Secure Infrastructure", desc: "Enterprise-grade cloud infrastructure with global redundancy." },
-    { icon: <AlertTriangle className="h-8 w-8 text-red-500" />, title: "Fraud Prevention", desc: "Advanced risk scoring and behavioral analysis systems." },
-    { icon: <ShieldCheck className="h-8 w-8 text-emerald-600" />, title: "Compliance & Regulations", desc: "Aligned with international regulatory and financial compliance standards." },
+    {
+      icon: <Lock className="h-8 w-8 text-green-600" />,
+      title: "Advanced Encryption",
+      desc: "Bank-level AES-256 encryption and secure SSL protocols safeguard every transaction.",
+    },
+    {
+      icon: <Fingerprint className="h-8 w-8 text-yellow-500" />,
+      title: "Multi-Factor Authentication",
+      desc: "Layered identity verification ensures only authorized access.",
+    },
+    {
+      icon: <Eye className="h-8 w-8 text-blue-600" />,
+      title: "Real-Time Monitoring",
+      desc: "AI-driven monitoring detects and blocks suspicious activity instantly.",
+    },
+    {
+      icon: <Server className="h-8 w-8 text-purple-600" />,
+      title: "Secure Infrastructure",
+      desc: "Enterprise-grade cloud infrastructure with global redundancy.",
+    },
+    {
+      icon: <AlertTriangle className="h-8 w-8 text-red-500" />,
+      title: "Fraud Prevention",
+      desc: "Advanced risk scoring and behavioral analysis systems.",
+    },
+    {
+      icon: <ShieldCheck className="h-8 w-8 text-emerald-600" />,
+      title: "Compliance & Regulations",
+      desc: "Aligned with international regulatory and financial compliance standards.",
+    },
   ];
 
   const stats = [
@@ -75,7 +99,7 @@ export default function TrustSafetyPage() {
     { q: "Do I need to pay to join?", a: "No, signing up is completely free." },
   ];
 
-  // Animate all CTA buttons on page load
+  // Animate CTA buttons on page load
   const [animateCTA, setAnimateCTA] = useState(false);
   useEffect(() => {
     const timeout = setTimeout(() => setAnimateCTA(true), 100);
@@ -105,10 +129,10 @@ export default function TrustSafetyPage() {
             </p>
             <motion.a
               href="/signup"
+              className="cta-observer inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-12 py-5 rounded-2xl font-bold shadow-xl text-lg hover:scale-105 transition-transform duration-300"
               initial={{ opacity: 0, y: 20 }}
               animate={animateCTA ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-12 py-5 rounded-2xl font-bold shadow-xl text-lg hover:scale-105 transition-transform duration-300"
             >
               Start Earning Now <User size={20} />
             </motion.a>
@@ -214,10 +238,10 @@ export default function TrustSafetyPage() {
         >
           <motion.a
             href="/signup"
+            className="cta-observer inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-xl hover:scale-105 transition-transform duration-300"
             initial={{ opacity: 0, y: 20 }}
             animate={animateCTA ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-xl hover:scale-105 transition-transform duration-300"
           >
             Start Earning in 60 Seconds <User size={20} />
           </motion.a>
