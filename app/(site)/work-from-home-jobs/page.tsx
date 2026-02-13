@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, Laptop, User, Gift, CheckCircle, ShieldCheck, Briefcase } from "lucide-react";
+import { ArrowRight, Laptop, User, Gift, CheckCircle, ShieldCheck, Briefcase, Trophy } from "lucide-react"; // ✅ Trophy imported
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Meta from "@/components/seo/SeoEngine";
