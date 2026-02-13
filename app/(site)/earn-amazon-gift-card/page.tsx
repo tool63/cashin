@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   Gift,
@@ -15,9 +15,7 @@ import {
 } from "lucide-react";
 
 export default function EarnAmazonGiftCardPage() {
-  const router = useRouter();
-
-  // ===== Smart CTA Logic =====
+  // ===== Smart CTA logic =====
   const [ctaText, setCtaText] = useState("Start Earning Free");
   const [ctaLink, setCtaLink] = useState("/signup");
 
@@ -37,10 +35,6 @@ export default function EarnAmazonGiftCardPage() {
     }
   }, []);
 
-  const handleCTA = () => {
-    router.push(ctaLink);
-  };
-
   return (
     <main className="bg-gradient-to-b from-slate-950 via-slate-900 to-black text-white overflow-hidden">
 
@@ -50,7 +44,8 @@ export default function EarnAmazonGiftCardPage() {
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
             <div className="inline-flex items-center gap-2 bg-amber-500/10 text-amber-400 px-4 py-2 rounded-full text-sm mb-6 border border-amber-500/20">
@@ -70,23 +65,23 @@ export default function EarnAmazonGiftCardPage() {
               Amazon gift cards. Fast payouts. Secure platform. Worldwide access.
             </p>
 
-            {/* Smart CTA */}
-            <button
-              onClick={handleCTA}
-              className="group bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 transition px-8 py-4 rounded-xl font-semibold flex items-center gap-2 shadow-lg shadow-orange-500/20"
-            >
-              {ctaText}
-              <ArrowRight
-                className="group-hover:translate-x-1 transition"
-                size={18}
-              />
-            </button>
+            {/* ================= HERO CTA ================= */}
+            <Link href={ctaLink} className="cta-observer inline-block">
+              <motion.span
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 text-black px-8 py-4 rounded-xl font-semibold shadow-lg text-lg"
+              >
+                {ctaText} <ArrowRight size={18} />
+              </motion.span>
+            </Link>
           </motion.div>
 
           {/* Hero Card */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.7 }}
             className="bg-gradient-to-br from-slate-800 to-slate-900 border border-gray-800 p-8 rounded-3xl shadow-2xl backdrop-blur-xl"
           >
@@ -113,11 +108,10 @@ export default function EarnAmazonGiftCardPage() {
               </div>
             </div>
           </motion.div>
-
         </div>
       </section>
 
-      {/* ================= FEATURES SECTION ================= */}
+      {/* ================= FEATURES ================= */}
       <section className="py-20 px-6 lg:px-20 bg-slate-900/40">
         <div className="max-w-7xl mx-auto text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold mb-4">
@@ -130,26 +124,10 @@ export default function EarnAmazonGiftCardPage() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {[
-            {
-              icon: CheckCircle,
-              title: "Easy Tasks",
-              desc: "No complex skills required.",
-            },
-            {
-              icon: ShieldCheck,
-              title: "Secure & Legit",
-              desc: "Trusted by thousands worldwide.",
-            },
-            {
-              icon: Smartphone,
-              title: "Mobile Friendly",
-              desc: "Earn directly from your phone.",
-            },
-            {
-              icon: Globe,
-              title: "Global Access",
-              desc: "Available worldwide.",
-            },
+            { icon: CheckCircle, title: "Easy Tasks", desc: "No complex skills required." },
+            { icon: ShieldCheck, title: "Secure & Legit", desc: "Trusted by thousands worldwide." },
+            { icon: Smartphone, title: "Mobile Friendly", desc: "Earn directly from your phone." },
+            { icon: Globe, title: "Global Access", desc: "Available worldwide." },
           ].map((item, index) => (
             <motion.div
               key={index}
@@ -173,15 +151,17 @@ export default function EarnAmazonGiftCardPage() {
           Join thousands of users earning daily rewards. Start today and redeem your first Amazon gift card fast.
         </p>
 
-        <button
-          onClick={handleCTA}
-          className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 transition px-10 py-5 rounded-xl text-lg font-semibold shadow-lg shadow-orange-500/20"
-        >
-          {ctaText}
-          <ArrowRight size={20} />
-        </button>
+        {/* ================= FINAL CTA with cta-observer ================= */}
+        <Link href={ctaLink} className="cta-observer inline-block">
+          <motion.span
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 text-black px-10 py-5 rounded-xl font-semibold shadow-lg text-lg"
+          >
+            {ctaText} <ArrowRight size={20} />
+          </motion.span>
+        </Link>
       </section>
-
     </main>
   );
 }
