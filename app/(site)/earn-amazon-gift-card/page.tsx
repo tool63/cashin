@@ -62,17 +62,17 @@ export default function EarnAmazonGiftCard() {
       <main className="transition-colors duration-300 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white min-h-screen">
 
         {/* ================= HERO ================= */}
-        <section className="py-24 px-4 text-center bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 rounded-b-3xl">
+        <section className="py-24 px-4 text-center bg-[#111827] dark:bg-[#111827] rounded-b-3xl">
           <div className="max-w-3xl mx-auto">
             <h1 className="text-5xl sm:text-6xl font-extrabold mb-4 text-white">
               Earn Amazon Gift Cards Online
             </h1>
 
-            <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-100 to-white">
+            <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
               <TypingText />
             </div>
 
-            <p className="text-lg sm:text-xl md:text-2xl mb-8 text-white/90 max-w-xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl md:text-2xl mb-8 text-gray-300 max-w-xl mx-auto leading-relaxed">
               Complete simple tasks and start earning Amazon gift cards instantly from anywhere in the world.
             </p>
 
@@ -80,7 +80,7 @@ export default function EarnAmazonGiftCard() {
               <motion.span
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 bg-white text-black px-12 py-5 rounded-3xl font-bold shadow-xl text-lg"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-12 py-5 rounded-3xl font-bold shadow-xl text-lg"
               >
                 Start Earning Now <ArrowRight size={20} />
               </motion.span>
@@ -145,20 +145,20 @@ export default function EarnAmazonGiftCard() {
         </section>
 
         {/* ================= FINAL CTA ================= */}
-        <section className="text-center py-28 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 w-full transition-colors duration-300 rounded-t-3xl">
-          <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-100 to-white">
+        <section className="text-center py-28 bg-[#111827] dark:bg-[#111827] w-full transition-colors duration-300 rounded-t-3xl">
+          <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
             Start Earning Amazon Gift Cards Today!
           </h2>
           <Link href="/signup" className="cta-observer inline-block">
             <motion.span
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-3 bg-white text-black px-16 py-6 rounded-3xl font-bold shadow-2xl text-xl"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-3xl font-bold shadow-2xl text-xl"
             >
               Redeem Gift Cards <ArrowRight size={20} />
             </motion.span>
           </Link>
-          <p className="mt-6 text-white/90 text-lg max-w-md mx-auto transition-colors duration-300">
+          <p className="mt-6 text-gray-300 text-lg max-w-md mx-auto transition-colors duration-300">
             Join Cashog and start earning Amazon gift cards from any device, anywhere in the world.
           </p>
         </section>
