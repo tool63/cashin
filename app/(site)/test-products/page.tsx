@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import SeoEngine from "@/components/seo/SeoEngine";
-import { CheckCircle, PackageCheck, Star, Gift, Rocket } from "lucide-react";
+import { CheckCircle, PackageCheck, Star, Gift, Rocket, ShieldCheck } from "lucide-react";
 
 type ProductTest = {
   id: number;
