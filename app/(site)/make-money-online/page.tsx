@@ -61,7 +61,7 @@ export default function MakeMoneyOnline() {
       <main className="transition-colors duration-300 bg-white dark:bg-[#0B0E1A] text-gray-900 dark:text-white min-h-screen">
 
         {/* ================= HERO ================= */}
-        <section className="py-24 px-6 text-center relative overflow-hidden">
+        <section className="py-24 px-6 text-center relative">
           <div className="max-w-4xl mx-auto relative z-10">
             <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold mb-6">
               Make Money Online Effortlessly
@@ -72,7 +72,9 @@ export default function MakeMoneyOnline() {
             <p className="text-lg sm:text-xl md:text-2xl mb-12 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
               Join thousands of users worldwide and start earning instantly with our premium platform.
             </p>
-            <Link href="/signup" className="inline-block">
+
+            {/* ================= HERO CTA BUTTON ================= */}
+            <Link href="/signup" className="cta-observer inline-block">
               <motion.span
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
@@ -82,9 +84,6 @@ export default function MakeMoneyOnline() {
               </motion.span>
             </Link>
           </div>
-          {/* Background Shapes */}
-          <div className="absolute -top-32 -left-32 w-[600px] h-[600px] bg-yellow-400 opacity-10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute -bottom-32 -right-32 w-[500px] h-[500px] bg-green-400 opacity-10 rounded-full blur-2xl animate-pulse"></div>
         </section>
 
         {/* ================= STEPS ================= */}
@@ -144,11 +143,13 @@ export default function MakeMoneyOnline() {
         </section>
 
         {/* ================= FINAL CTA ================= */}
-        <section className="text-center py-32 bg-white dark:bg-[#0B0E1A] w-full transition-colors duration-300 relative overflow-hidden">
+        <section className="text-center py-32 bg-white dark:bg-[#0B0E1A] w-full transition-colors duration-300">
           <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
             Ready to Start Earning Instantly?
           </h2>
-          <Link href="/signup" className="inline-block">
+
+          {/* ================= FINAL CTA BUTTON ================= */}
+          <Link href="/signup" className="cta-observer inline-block">
             <motion.span
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
@@ -157,12 +158,10 @@ export default function MakeMoneyOnline() {
               Start Earning in 60 Seconds <ArrowRight size={24} />
             </motion.span>
           </Link>
+
           <p className="mt-6 text-gray-900 dark:text-gray-300 text-lg max-w-md mx-auto">
             Join thousands of users worldwide and enjoy premium earning opportunities from anywhere.
           </p>
-          {/* Background abstract shapes */}
-          <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-yellow-400 opacity-10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] bg-green-400 opacity-10 rounded-full blur-2xl animate-pulse"></div>
         </section>
 
       </main>
