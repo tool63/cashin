@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
-import Link from "next/link";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import {
   Gift,
@@ -15,6 +15,32 @@ import {
 } from "lucide-react";
 
 export default function EarnAmazonGiftCardPage() {
+  const router = useRouter();
+
+  // ===== Smart CTA Logic =====
+  const [ctaText, setCtaText] = useState("Start Earning Free");
+  const [ctaLink, setCtaLink] = useState("/signup");
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    const verified = localStorage.getItem("verified");
+
+    if (!user) {
+      setCtaText("Start Earning Free");
+      setCtaLink("/signup");
+    } else if (user && verified !== "true") {
+      setCtaText("Verify Your Account");
+      setCtaLink("/verify");
+    } else {
+      setCtaText("Go to Dashboard");
+      setCtaLink("/dashboard");
+    }
+  }, []);
+
+  const handleCTA = () => {
+    router.push(ctaLink);
+  };
+
   return (
     <main className="bg-gradient-to-b from-slate-950 via-slate-900 to-black text-white overflow-hidden">
 
@@ -44,26 +70,20 @@ export default function EarnAmazonGiftCardPage() {
               Amazon gift cards. Fast payouts. Secure platform. Worldwide access.
             </p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-4">
-              <Link
-                href="/signup"
-                className="group bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 transition px-8 py-4 rounded-xl font-semibold flex items-center gap-2 shadow-lg shadow-orange-500/20"
-              >
-                Start Earning Now
-                <ArrowRight className="group-hover:translate-x-1 transition" size={18} />
-              </Link>
-
-              <Link
-                href="/how-it-works"
-                className="border border-gray-700 hover:border-amber-400 hover:text-amber-400 transition px-8 py-4 rounded-xl font-semibold"
-              >
-                How It Works
-              </Link>
-            </div>
+            {/* Smart CTA */}
+            <button
+              onClick={handleCTA}
+              className="group bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 transition px-8 py-4 rounded-xl font-semibold flex items-center gap-2 shadow-lg shadow-orange-500/20"
+            >
+              {ctaText}
+              <ArrowRight
+                className="group-hover:translate-x-1 transition"
+                size={18}
+              />
+            </button>
           </motion.div>
 
-          {/* Hero Visual Card */}
+          {/* Hero Card */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -109,7 +129,6 @@ export default function EarnAmazonGiftCardPage() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-
           {[
             {
               icon: CheckCircle,
@@ -142,7 +161,6 @@ export default function EarnAmazonGiftCardPage() {
               <p className="text-gray-400 text-sm">{item.desc}</p>
             </motion.div>
           ))}
-
         </div>
       </section>
 
@@ -155,13 +173,13 @@ export default function EarnAmazonGiftCardPage() {
           Join thousands of users earning daily rewards. Start today and redeem your first Amazon gift card fast.
         </p>
 
-        <Link
-          href="/signup"
+        <button
+          onClick={handleCTA}
           className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 transition px-10 py-5 rounded-xl text-lg font-semibold shadow-lg shadow-orange-500/20"
         >
-          Create Free Account
+          {ctaText}
           <ArrowRight size={20} />
-        </Link>
+        </button>
       </section>
 
     </main>
