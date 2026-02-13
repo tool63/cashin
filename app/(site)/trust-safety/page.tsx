@@ -1,6 +1,5 @@
 "use client";
 
-import type { Metadata } from "next";
 import { useEffect, useRef, useState } from "react";
 import {
   ShieldCheck,
@@ -10,46 +9,9 @@ import {
   Fingerprint,
   Server,
 } from "lucide-react";
-
-/* ================= SEO META ================= */
-
-export const metadata: Metadata = {
-  title: "Trust & Safety | PayUp",
-  description:
-    "Learn how PayUp protects your transactions with enterprise-grade security, encryption, fraud detection, and global compliance standards.",
-  keywords: [
-    "PayUp security",
-    "Trust and safety",
-    "Payment protection",
-    "Fraud prevention",
-    "Secure transactions",
-    "Fintech security",
-  ],
-  openGraph: {
-    title: "Trust & Safety | PayUp",
-    description:
-      "Enterprise-grade encryption, fraud monitoring, and compliance systems built to protect your payments.",
-    url: "https://yourdomain.com/trust-safety",
-    siteName: "PayUp",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Trust & Safety | PayUp",
-    description:
-      "Enterprise-grade security infrastructure protecting every transaction.",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  alternates: {
-    canonical: "https://yourdomain.com/trust-safety",
-  },
-};
+import SeoEngine from "@/components/seo/SeoEngine"; // <-- Your existing component
 
 /* ================= COUNT UP COMPONENT ================= */
-
 function CountUp({ end }: { end: number }) {
   const [count, setCount] = useState(0);
   const [visible, setVisible] = useState(false);
@@ -62,18 +24,15 @@ function CountUp({ end }: { end: number }) {
       },
       { threshold: 0.3 }
     );
-
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
     if (!visible) return;
-
     let start = 0;
     const duration = 2000;
     const increment = end / (duration / 16);
-
     const counter = setInterval(() => {
       start += increment;
       if (start >= end) {
@@ -83,15 +42,13 @@ function CountUp({ end }: { end: number }) {
         setCount(Math.floor(start));
       }
     }, 16);
-
     return () => clearInterval(counter);
   }, [visible, end]);
 
   return <div ref={ref}>{count.toLocaleString()}</div>;
 }
 
-/* ================= PAGE ================= */
-
+/* ================= PAGE COMPONENT ================= */
 export default function TrustSafetyPage() {
   const securityFeatures = [
     {
@@ -126,85 +83,80 @@ export default function TrustSafetyPage() {
     },
   ];
 
+  const stats = [
+    { number: 99.99, label: "System Uptime (%)" },
+    { number: 256, label: "Bit Encryption Standard" },
+    { number: 24, label: "Security Monitoring (Hours)" },
+  ];
+
   return (
-    <div className="bg-white dark:bg-black text-gray-900 dark:text-white">
+    <>
+      {/* ================= META ================= */}
+      <SeoEngine
+        title="Trust & Safety | Cashog"
+        description="Cashog ensures enterprise-grade security with encryption, fraud detection, and compliance systems to protect every transaction."
+      />
 
-      {/* HERO */}
-      <section className="relative py-24 px-6 text-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-green-100/40 via-yellow-100/30 to-green-200/40 dark:from-green-900/20 dark:via-yellow-900/10 dark:to-green-800/20 blur-3xl" />
+      <div className="bg-white dark:bg-black text-gray-900 dark:text-white">
+        {/* HERO */}
+        <section className="relative py-24 px-6 text-center overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-green-100/40 via-yellow-100/30 to-green-200/40 dark:from-green-900/20 dark:via-yellow-900/10 dark:to-green-800/20 blur-3xl" />
+          <div className="relative max-w-4xl mx-auto">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">Trust & Safety</h1>
+            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+              Security is at the core of everything we build. Your data and transactions are protected by enterprise-grade systems.
+            </p>
+          </div>
+        </section>
 
-        <div className="relative max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Trust & Safety
-          </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-400">
-            Security is at the core of everything we build. Your data and
-            transactions are protected by enterprise-grade systems.
-          </p>
-        </div>
-      </section>
-
-      {/* STATS */}
-      <section className="py-20 px-6">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
-          {[
-            { number: 99.99, label: "System Uptime (%)" },
-            { number: 256, label: "Bit Encryption Standard" },
-            { number: 24, label: "Security Monitoring (Hours)" },
-          ].map((stat, index) => (
-            <div
-              key={index}
-              className="relative p-8 rounded-3xl backdrop-blur-xl bg-gradient-to-br from-white/70 to-white/40 dark:from-white/10 dark:to-white/5 border border-gray-200 dark:border-white/10 shadow-xl hover:scale-105 transition-transform duration-300"
-            >
-              <div className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-green-400 to-yellow-400 rounded-full blur-3xl opacity-20" />
-
-              <h2 className="text-4xl font-extrabold bg-gradient-to-r from-green-600 to-yellow-500 bg-clip-text text-transparent">
-                <CountUp end={stat.number} />
-                {stat.label.includes("%") && "%"}
-              </h2>
-
-              <p className="mt-3 text-gray-600 dark:text-gray-400">
-                {stat.label}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* FEATURES */}
-      <section className="py-24 px-6 bg-gray-50 dark:bg-zinc-900">
-        <div className="max-w-6xl mx-auto text-center mb-16">
-          <h2 className="text-3xl font-bold mb-4">
-            Our Security Framework
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400">
-            Multi-layered defense systems built for maximum protection.
-          </p>
-        </div>
-
-        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-10">
-          {securityFeatures.map((feature, index) => (
-            <div
-              key={index}
-              className="p-8 rounded-3xl bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 shadow-lg hover:shadow-2xl transition duration-300"
-            >
-              <div className="flex flex-col items-center text-center">
-                <div className="mb-5 p-4 rounded-2xl bg-gradient-to-br from-yellow-400/10 via-green-400/10 to-green-500/10">
-                  {feature.icon}
-                </div>
-
-                <h3 className="text-xl font-semibold mb-3">
-                  {feature.title}
-                </h3>
-
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                  {feature.desc}
-                </p>
+        {/* STATS */}
+        <section className="py-20 px-6">
+          <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
+            {stats.map((stat, index) => (
+              <div
+                key={index}
+                className="relative p-8 rounded-3xl bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 shadow-xl text-center hover:scale-105 transition-transform duration-300"
+              >
+                <div className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-green-400 to-yellow-400 rounded-full blur-3xl opacity-20" />
+                <h2 className="text-4xl font-extrabold bg-gradient-to-r from-green-600 to-yellow-500 bg-clip-text text-transparent">
+                  <CountUp end={stat.number} />
+                  {stat.label.includes("%") && "%"}
+                </h2>
+                <p className="mt-3 text-gray-600 dark:text-gray-400">{stat.label}</p>
               </div>
-            </div>
-          ))}
-        </div>
-      </section>
-    </div>
+            ))}
+          </div>
+        </section>
+
+        {/* FEATURES */}
+        <section className="py-24 px-6 bg-gray-50 dark:bg-zinc-900">
+          <div className="max-w-6xl mx-auto text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Security Framework</h2>
+            <p className="text-gray-600 dark:text-gray-400">
+              Multi-layered defense systems built for maximum protection.
+            </p>
+          </div>
+
+          <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-10">
+            {securityFeatures.map((feature, index) => (
+              <div
+                key={index}
+                className="p-8 rounded-3xl bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 shadow-lg hover:shadow-2xl transition duration-300"
+              >
+                <div className="flex flex-col items-center text-center">
+                  <div className="mb-5 p-4 rounded-2xl bg-green-50 dark:bg-zinc-700">
+                    {feature.icon}
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                    {feature.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+    </>
   );
 }
