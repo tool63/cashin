@@ -39,7 +39,7 @@ export default function EarnAmazonGiftCardPage() {
     <main className="bg-gradient-to-b from-slate-950 via-slate-900 to-black text-white overflow-hidden">
 
       {/* ================= HERO SECTION ================= */}
-      <section className="relative py-24 px-6 lg:px-20">
+      <section className="relative flex items-center justify-center h-screen px-6 lg:px-20">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
 
           <motion.div
@@ -47,6 +47,7 @@ export default function EarnAmazonGiftCardPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="text-center lg:text-left"
           >
             <div className="inline-flex items-center gap-2 bg-amber-500/10 text-amber-400 px-4 py-2 rounded-full text-sm mb-6 border border-amber-500/20">
               <Sparkles size={16} />
@@ -60,12 +61,12 @@ export default function EarnAmazonGiftCardPage() {
               </span>
             </h1>
 
-            <p className="text-gray-400 text-lg mb-8 max-w-xl">
-              Complete surveys, test apps, watch videos, and get rewarded with 
-              Amazon gift cards. Fast payouts. Secure platform. Worldwide access.
+            <p className="text-gray-400 text-lg mb-8 max-w-xl mx-auto lg:mx-0">
+              Complete surveys, test apps, watch videos, and get rewarded with Amazon gift cards. 
+              Fast payouts. Secure platform. Worldwide access.
             </p>
 
-            {/* ================= HERO CTA ================= */}
+            {/* Hero CTA */}
             <Link href={ctaLink} className="cta-observer inline-block">
               <motion.span
                 whileHover={{ scale: 1.05 }}
@@ -83,7 +84,7 @@ export default function EarnAmazonGiftCardPage() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="bg-gradient-to-br from-slate-800 to-slate-900 border border-gray-800 p-8 rounded-3xl shadow-2xl backdrop-blur-xl"
+            className="bg-gradient-to-br from-slate-800 to-slate-900 border border-gray-800 p-8 rounded-3xl shadow-2xl backdrop-blur-xl mx-auto"
           >
             <div className="flex items-center gap-4 mb-6">
               <Gift className="text-amber-400" size={36} />
@@ -151,7 +152,7 @@ export default function EarnAmazonGiftCardPage() {
           Join thousands of users earning daily rewards. Start today and redeem your first Amazon gift card fast.
         </p>
 
-        {/* ================= FINAL CTA with cta-observer ================= */}
+        {/* Final CTA with cta-observer */}
         <Link href={ctaLink} className="cta-observer inline-block">
           <motion.span
             whileHover={{ scale: 1.05 }}
