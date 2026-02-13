@@ -1,7 +1,14 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { ArrowRight, ShieldCheck, CheckCircle, User, Gift, CreditCard } from "lucide-react";
+import {
+  ArrowRight,
+  ShieldCheck,
+  CheckCircle,
+  User,
+  Gift,
+  CreditCard,
+} from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Meta from "@/components/seo/SeoEngine";
@@ -27,6 +34,7 @@ function CountUp({ end }: { end: number }) {
 
   useEffect(() => {
     if (!visible) return;
+
     let start = 0;
     const duration = 1500;
     const increment = end / (duration / 16);
@@ -44,16 +52,37 @@ function CountUp({ end }: { end: number }) {
     return () => clearInterval(counter);
   }, [visible, end]);
 
-  return <span ref={ref}>{count}</span>;
+  return <span ref={ref}>{count.toLocaleString()}</span>;
 }
 
 /* ================= DATA ================= */
 const features = [
-  { icon: <ShieldCheck size={28} className="text-yellow-400" />, title: "Trusted & Secure", description: "Millions of users trust our platform daily." },
-  { icon: <CheckCircle size={28} className="text-green-400" />, title: "Fast Payouts", description: "Instant payouts via PayPal, gift cards, and mobile top-ups." },
-  { icon: <User size={28} className="text-yellow-400" />, title: "Global Reach", description: "Available in 125+ countries worldwide." },
-  { icon: <Gift size={28} className="text-green-400" />, title: "High-Paying Offers", description: "Maximize your earnings with top offers." },
-  { icon: <CreditCard size={28} className="text-yellow-400" />, title: "Mobile Friendly", description: "Earn on the go from any device." },
+  {
+    icon: <ShieldCheck size={28} className="text-yellow-400" />,
+    title: "Trusted & Secure",
+    description: "Millions of users trust our platform daily.",
+  },
+  {
+    icon: <CheckCircle size={28} className="text-green-400" />,
+    title: "Fast Payouts",
+    description:
+      "Instant payouts via PayPal, gift cards, and mobile top-ups.",
+  },
+  {
+    icon: <User size={28} className="text-yellow-400" />,
+    title: "Global Reach",
+    description: "Available in 125+ countries worldwide.",
+  },
+  {
+    icon: <Gift size={28} className="text-green-400" />,
+    title: "High-Paying Offers",
+    description: "Maximize your earnings with top offers.",
+  },
+  {
+    icon: <CreditCard size={28} className="text-yellow-400" />,
+    title: "Mobile Friendly",
+    description: "Earn on the go from any device.",
+  },
 ];
 
 const stats = [
@@ -64,10 +93,22 @@ const stats = [
 ];
 
 const faqs = [
-  { q: "Is Cashog safe?", a: "Yes, our platform is fully secure and trusted by millions of users worldwide." },
-  { q: "How do I withdraw earnings?", a: "Withdraw via PayPal, gift cards, or mobile top-ups instantly." },
-  { q: "Is it free to join?", a: "Yes! Creating an account is completely free." },
-  { q: "Can I earn on mobile?", a: "Absolutely! Our platform is fully mobile-friendly." },
+  {
+    q: "Is Cashog safe?",
+    a: "Yes, our platform is fully secure and trusted by millions of users worldwide.",
+  },
+  {
+    q: "How do I withdraw earnings?",
+    a: "Withdraw via PayPal, gift cards, or mobile top-ups instantly.",
+  },
+  {
+    q: "Is it free to join?",
+    a: "Yes! Creating an account is completely free.",
+  },
+  {
+    q: "Can I earn on mobile?",
+    a: "Absolutely! Our platform is fully mobile-friendly.",
+  },
 ];
 
 /* ================= MAIN PAGE ================= */
@@ -100,7 +141,8 @@ export default function TrustSafetyPage() {
             transition={{ delay: 0.3 }}
             className="text-lg sm:text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed"
           >
-            Cashog ensures every task and payout is secure. Join millions of users worldwide earning real money safely.
+            Cashog ensures every task and payout is secure. Join millions of
+            users worldwide earning real money safely.
           </motion.p>
 
           <Link href="/signup" className="cta-observer inline-block">
@@ -112,12 +154,17 @@ export default function TrustSafetyPage() {
               Create Free Account <ArrowRight size={20} />
             </motion.div>
           </Link>
+
+          {/* Global Floating CTA */}
           <FloatingCTA />
         </section>
 
         {/* ================= FEATURES ================= */}
         <section className="max-w-7xl mx-auto px-4 py-20 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">Platform Features</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-14">
+            Platform Features
+          </h2>
+
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-5 justify-center">
             {features.map((feature, i) => (
               <motion.div
@@ -125,12 +172,22 @@ export default function TrustSafetyPage() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.2 }}
-                className="bg-gray-50 dark:bg-[#111827] rounded-xl p-6 text-center shadow hover:shadow-lg transition-shadow duration-300 w-full max-w-xs mx-auto"
+                transition={{ duration: 0.5, delay: i * 0.15 }}
+                className="bg-gray-50 dark:bg-[#111827] rounded-2xl p-8 shadow hover:shadow-xl transition-all duration-300 w-full max-w-xs mx-auto"
               >
-                <div className="mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
+                <div className="flex flex-col items-center text-center">
+                  <div className="mb-5 p-4 rounded-2xl bg-gradient-to-br from-yellow-400/10 via-green-400/10 to-green-500/10">
+                    {feature.icon}
+                  </div>
+
+                  <h3 className="text-xl font-semibold mb-3">
+                    {feature.title}
+                  </h3>
+
+                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                    {feature.description}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -149,9 +206,11 @@ export default function TrustSafetyPage() {
                 className="flex flex-col items-center"
               >
                 <h3 className={`text-4xl font-bold ${stat.color}`}>
-                  <CountUp end={stat.value} />
+                  <CountUp end={stat.value} />+
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 mt-2">{stat.title}</p>
+                <p className="text-gray-600 dark:text-gray-400 mt-2">
+                  {stat.title}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -159,12 +218,22 @@ export default function TrustSafetyPage() {
 
         {/* ================= FAQ ================= */}
         <section className="max-w-4xl mx-auto px-4 py-16 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-12">
+            Frequently Asked Questions
+          </h2>
+
           <div className="space-y-4">
             {faqs.map((faq, i) => (
-              <details key={i} className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-4 cursor-pointer group">
-                <summary className="font-semibold text-lg">{faq.q}</summary>
-                <p className="mt-2 text-gray-600 dark:text-gray-400">{faq.a}</p>
+              <details
+                key={i}
+                className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-5 cursor-pointer"
+              >
+                <summary className="font-semibold text-lg">
+                  {faq.q}
+                </summary>
+                <p className="mt-3 text-gray-600 dark:text-gray-400">
+                  {faq.a}
+                </p>
               </details>
             ))}
           </div>
