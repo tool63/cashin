@@ -2,41 +2,55 @@
 
 import { motion } from "framer-motion";
 import SeoEngine from "@/components/seo/SeoEngine";
-import { ShoppingBag, Star, Sparkles, ShieldCheck } from "lucide-react";
+import { CheckCircle, PackageCheck, Star, Gift, Rocket } from "lucide-react";
 
-/* ================= PRODUCT TYPE ================= */
-type Product = {
+type ProductTest = {
   id: number;
-  name: string;
-  category: string;
-  price: string;
-  rating: number;
+  title: string;
+  description: string;
+  reward: string;
+  duration: string;
+  popular?: boolean;
 };
 
-/* ================= SAMPLE PRODUCTS ================= */
-const products: Product[] = [
-  { id: 1, name: "Cashog Premium Booster", category: "Digital Tool", price: "$29", rating: 5 },
-  { id: 2, name: "Advanced Referral Engine", category: "Growth Tool", price: "$49", rating: 4 },
-  { id: 3, name: "AI Offer Optimizer", category: "AI Software", price: "$79", rating: 5 },
-  { id: 4, name: "Smart Task Tracker", category: "Productivity", price: "$19", rating: 4 },
-  { id: 5, name: "Enterprise Analytics Pro", category: "Analytics", price: "$99", rating: 5 },
-  { id: 6, name: "Cashog Pro Dashboard", category: "Dashboard", price: "$59", rating: 5 },
+const products: ProductTest[] = [
+  {
+    id: 1,
+    title: "Smartphone Beta Test",
+    description: "Get early access to the latest smartphone and earn rewards by reviewing it.",
+    reward: "$15.00",
+    duration: "7 Days",
+    popular: true,
+  },
+  {
+    id: 2,
+    title: "Headphones Trial",
+    description: "Test premium headphones and submit feedback for instant payout.",
+    reward: "$8.00",
+    duration: "3 Days",
+  },
+  {
+    id: 3,
+    title: "Fitness Tracker Test",
+    description: "Try new fitness tracker features and report your experience.",
+    reward: "$12.00",
+    duration: "5 Days",
+  },
 ];
 
-/* ================= PAGE ================= */
 export default function TestProductsPage() {
   return (
     <>
       <SeoEngine
         title="Test Products | Cashog"
-        description="Explore modern premium test products built for performance, growth, and intelligent reward optimization."
+        description="Participate in product testing offers and earn instant rewards. Premium, modern and secure experience."
       />
 
-      <main className="bg-white dark:bg-[#070A14] text-gray-900 dark:text-white transition-colors duration-300 overflow-hidden">
+      <main className="bg-white dark:bg-zinc-950 text-gray-900 dark:text-white transition-colors duration-300">
 
         {/* ================= HERO ================= */}
         <section className="relative py-28 px-6 text-center overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-yellow-200/40 via-green-200/30 to-yellow-300/40 dark:from-yellow-900/20 dark:via-green-900/10 dark:to-yellow-800/20 blur-3xl" />
+          <div className="absolute inset-0 bg-gradient-to-br from-yellow-200/40 via-green-200/30 to-yellow-300/40 dark:from-yellow-900/20 dark:via-green-900/10 dark:to-green-800/20 blur-3xl" />
 
           <motion.div
             className="relative max-w-4xl mx-auto"
@@ -44,128 +58,130 @@ export default function TestProductsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl md:text-6xl font-extrabold mb-6">
-              Explore Premium Test Products
+            <h1 className="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
+              Test Products & Earn Instant Rewards
             </h1>
-
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-10">
-              Designed with modern UX, advanced performance, and professional-grade architecture.
+              Join exclusive product tests and provide your feedback. Get rewards instantly with Cashog.
             </p>
 
             <motion.a
-              href="#products"
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-lg hover:scale-105 transition-transform duration-300"
+              href="/signup"
+              className="cta-observer inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-lg hover:scale-105 transition-transform duration-300"
               whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.96 }}
+              whileTap={{ scale: 0.97 }}
             >
-              View Products <ShoppingBag size={20} />
+              Start Testing Products <Rocket size={20} />
             </motion.a>
           </motion.div>
         </section>
 
-        {/* ================= PRODUCT GRID ================= */}
-        <section id="products" className="py-24 px-6 max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center">
-            Featured Products
+        {/* ================= PRODUCT TEST CARDS ================= */}
+        <section className="py-24 px-6 max-w-7xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
+            Featured Product Testing Offers
           </h2>
 
           <div className="grid md:grid-cols-3 gap-10">
-            {products.map((product) => (
+            {products.map((product, i) => (
               <motion.div
                 key={product.id}
-                className="group relative bg-white dark:bg-zinc-800 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden"
+                className={`relative bg-white dark:bg-zinc-900 p-8 rounded-3xl shadow-xl border ${
+                  product.popular
+                    ? "border-green-400 scale-105"
+                    : "border-gray-200 dark:border-zinc-800"
+                } hover:shadow-2xl transition-all duration-300`}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                whileHover={{ y: -8 }}
+                transition={{ delay: i * 0.2 }}
               >
-                {/* Gradient Border Effect */}
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 opacity-0 group-hover:opacity-20 transition duration-500" />
-
-                <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-4">
-                    <Sparkles className="text-yellow-500 w-6 h-6" />
-                    <span className="text-sm text-gray-500 dark:text-gray-400">
-                      {product.category}
-                    </span>
+                {product.popular && (
+                  <div className="absolute -top-4 right-6 bg-gradient-to-r from-yellow-400 to-green-500 text-black px-4 py-1 rounded-full text-xs font-bold shadow-lg">
+                    Most Popular
                   </div>
+                )}
 
-                  <h3 className="text-xl font-semibold mb-3">
-                    {product.name}
-                  </h3>
+                <PackageCheck className="w-8 h-8 text-yellow-500 mb-4" />
 
-                  <div className="flex items-center gap-1 mb-3">
-                    {Array.from({ length: product.rating }).map((_, i) => (
-                      <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                    ))}
-                  </div>
+                <h3 className="text-xl font-semibold mb-3">{product.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-4">
+                  {product.description}
+                </p>
 
-                  <p className="text-2xl font-bold text-green-600 mb-6">
-                    {product.price}
+                <div className="mb-6">
+                  <p className="text-green-600 font-bold text-lg">
+                    Reward: {product.reward}
                   </p>
-
-                  <motion.button
-                    className="w-full bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black py-3 rounded-xl font-semibold hover:scale-105 transition-transform duration-300"
-                    whileTap={{ scale: 0.96 }}
-                  >
-                    Test Now
-                  </motion.button>
+                  <p className="text-sm text-gray-500">
+                    Duration: {product.duration}
+                  </p>
                 </div>
+
+                <motion.a
+                  href="/signup"
+                  className="cta-observer inline-flex w-full justify-center items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-4 py-3 rounded-xl font-semibold shadow hover:scale-105 transition-transform duration-300"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  Test Product <CheckCircle size={18} />
+                </motion.a>
               </motion.div>
             ))}
           </div>
         </section>
 
-        {/* ================= PREMIUM FEATURE SECTION ================= */}
-        <section className="py-28 px-6 bg-gray-50 dark:bg-zinc-900">
-          <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-10 text-center">
-            <motion.div
-              whileHover={{ y: -5 }}
-              className="bg-white dark:bg-zinc-800 p-10 rounded-3xl shadow-lg"
-            >
-              <ShieldCheck className="w-8 h-8 text-green-500 mx-auto mb-4" />
-              <h3 className="font-semibold text-xl mb-3">Enterprise Security</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Advanced infrastructure built with corporate-grade security standards.
-              </p>
-            </motion.div>
+        {/* ================= TRUST SECTION ================= */}
+        <section className="py-24 px-6 bg-gray-50 dark:bg-zinc-900 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-14">
+            Why Test Products with Cashog?
+          </h2>
 
-            <motion.div
-              whileHover={{ y: -5 }}
-              className="bg-white dark:bg-zinc-800 p-10 rounded-3xl shadow-lg"
-            >
-              <Sparkles className="w-8 h-8 text-yellow-500 mx-auto mb-4" />
-              <h3 className="font-semibold text-xl mb-3">Modern UX</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Designed for smooth interactions and high conversion performance.
-              </p>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ y: -5 }}
-              className="bg-white dark:bg-zinc-800 p-10 rounded-3xl shadow-lg"
-            >
-              <ShoppingBag className="w-8 h-8 text-green-600 mx-auto mb-4" />
-              <h3 className="font-semibold text-xl mb-3">Scalable Architecture</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Built to support growth, analytics, and intelligent optimization.
-              </p>
-            </motion.div>
+          <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+            {[
+              {
+                icon: Star,
+                title: "Premium Products",
+                desc: "Access high-quality products before anyone else."
+              },
+              {
+                icon: Gift,
+                title: "Instant Rewards",
+                desc: "Receive payouts immediately after completing the test."
+              },
+              {
+                icon: ShieldCheck,
+                title: "Verified Tests",
+                desc: "All product tests are secure and fully verified."
+              }
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                className="bg-white dark:bg-zinc-800 p-8 rounded-3xl shadow-lg"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.2 }}
+              >
+                <item.icon className="w-8 h-8 mx-auto mb-4 text-yellow-500" />
+                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400">{item.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </section>
 
         {/* ================= FINAL CTA ================= */}
         <section className="py-28 px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-10">
-            Ready to Experience Premium Products?
+          <h2 className="text-3xl md:text-4xl font-bold mb-8">
+            Ready to Test Products & Earn Rewards?
           </h2>
 
           <motion.a
             href="/signup"
-            className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-20 py-6 rounded-2xl font-bold shadow-2xl text-xl hover:scale-105 transition-transform duration-300"
+            className="cta-observer inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-xl hover:scale-105 transition-transform duration-300"
             whileHover={{ scale: 1.05 }}
           >
-            Get Started Now
+            Join Cashog Now <Rocket size={20} />
           </motion.a>
         </section>
 
