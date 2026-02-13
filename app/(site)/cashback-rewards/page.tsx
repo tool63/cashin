@@ -28,7 +28,7 @@ const steps = [
     icon: <CreditCard size={36} className="text-yellow-400" />,
     title: "Pay Normally",
     description:
-      "Complete your purchase as usual using your preferred payment method.",
+      "Complete your purchase using your preferred payment method as usual.",
   },
   {
     icon: <Wallet size={36} className="text-emerald-400" />,
@@ -54,7 +54,7 @@ const features = [
   },
   {
     icon: <ShieldCheck size={28} className="text-yellow-500" />,
-    title: "Secure Transactions",
+    title: "Secure & Trusted",
     description:
       "Your purchases and rewards are fully encrypted and protected.",
   },
@@ -79,7 +79,7 @@ const faqs = [
     a: "You shop through our platform, and we receive a commission from the store. We share a portion of that commission with you as cashback.",
   },
   {
-    q: "Is cashback free?",
+    q: "Is cashback really free?",
     a: "Yes. There are no hidden fees. You earn cashback simply by shopping normally.",
   },
   {
@@ -88,7 +88,7 @@ const faqs = [
   },
   {
     q: "Can I combine cashback with coupons?",
-    a: "Yes, in many cases you can combine cashback with discount codes for maximum savings.",
+    a: "In many cases yes — you can combine cashback with store discount codes for maximum savings.",
   },
 ];
 
@@ -104,39 +104,46 @@ export default function CashbackRewards() {
       <main className="min-h-screen bg-white dark:bg-[#0B0E1A] text-gray-900 dark:text-white transition-colors duration-300">
 
         {/* ================= HERO ================= */}
-        <section className="py-24 px-6 text-center">
+        <section className="py-24 px-6 text-center relative">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-5xl md:text-7xl font-extrabold mb-6">
+
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold mb-6">
               Cashback Rewards
             </h1>
 
-            <div className="text-4xl md:text-6xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-emerald-400 to-green-500">
+            <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-emerald-400 to-green-500">
               <TypingText />
             </div>
 
-            <p className="text-lg md:text-2xl mb-12 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl md:text-2xl mb-12 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
               Shop your favorite brands and earn cashback on every purchase.
-              Turn your everyday spending into real rewards.
+              Turn everyday spending into real rewards.
             </p>
 
-            <Link href="/signup" className="inline-block">
+            {/* ✅ HERO CTA (Updated Like Other Pages) */}
+            <Link href="/signup" className="cta-observer inline-block">
               <motion.span
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-emerald-400 to-green-500 text-black px-14 py-6 rounded-3xl font-bold shadow-2xl text-xl"
+                className="inline-flex items-center gap-3 
+                bg-gradient-to-r from-yellow-400 via-emerald-400 to-green-500 
+                text-black px-14 py-6 rounded-3xl font-bold 
+                shadow-2xl text-xl"
               >
-                Start Saving Today <ArrowRight size={24} />
+                Start Saving Today
+                <ArrowRight size={24} />
               </motion.span>
             </Link>
+
           </div>
         </section>
 
-        {/* ================= STEPS ================= */}
-        <section className="max-w-7xl mx-auto px-6 py-20 grid gap-10 md:grid-cols-2 lg:grid-cols-4 text-center">
+        {/* ================= HOW IT WORKS ================= */}
+        <section className="max-w-7xl mx-auto px-6 py-20 grid gap-12 md:grid-cols-2 lg:grid-cols-4 text-center">
           {steps.map((step, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.2 }}
@@ -205,18 +212,23 @@ export default function CashbackRewards() {
         </section>
 
         {/* ================= FINAL CTA ================= */}
-        <section className="text-center py-28">
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-emerald-400 to-green-500">
+        <section className="text-center py-32 transition-colors duration-300">
+          <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-emerald-400 to-green-500">
             Turn Shopping Into Earnings
           </h2>
 
-          <Link href="/signup" className="inline-block">
+          {/* ✅ FINAL CTA (Matching Other Pages) */}
+          <Link href="/signup" className="cta-observer inline-block">
             <motion.span
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-emerald-400 to-green-500 text-black px-16 py-6 rounded-3xl font-bold shadow-2xl text-xl"
+              className="inline-flex items-center gap-3 
+              bg-gradient-to-r from-yellow-400 via-emerald-400 to-green-500 
+              text-black px-16 py-6 rounded-3xl font-bold 
+              shadow-2xl text-xl"
             >
-              Join & Start Earning <ArrowRight size={24} />
+              Join & Start Earning
+              <ArrowRight size={24} />
             </motion.span>
           </Link>
 
