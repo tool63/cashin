@@ -147,6 +147,9 @@ export default function TrustSafetyPage() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
+          <div className="max-w-6xl mx-auto text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold">Our Performance Metrics</h2>
+          </div>
           <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
             {stats.map((stat, index) => (
               <motion.div
@@ -236,6 +239,7 @@ export default function TrustSafetyPage() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
+          <h2 className="text-3xl md:text-4xl font-bold mb-8">Ready to Take Action?</h2>
           <motion.a
             href="/signup"
             className="cta-observer inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-xl hover:scale-105 transition-transform duration-300"
