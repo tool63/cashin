@@ -99,7 +99,7 @@ export default function PlayGamesPage() {
 
         {/* ================= HERO ================= */}
         <section className="relative py-24 px-6 text-center overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-purple-100/20 to-blue-200/30 dark:from-blue-900/20 dark:via-purple-900/10 dark:to-blue-800/20 blur-3xl" />
+          <div className="absolute inset-0 bg-gradient-to-br from-yellow-200/40 via-green-200/30 to-yellow-300/40 dark:from-yellow-900/20 dark:via-green-900/10 dark:to-yellow-800/20 blur-3xl" />
 
           <motion.div
             className="relative max-w-4xl mx-auto"
@@ -115,7 +115,7 @@ export default function PlayGamesPage() {
             </p>
             <motion.a
               href="/signup"
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-400 via-purple-400 to-purple-500 text-black px-14 py-5 rounded-2xl font-bold shadow-lg hover:scale-105 transition-transform duration-300 cta-observer"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-14 py-5 rounded-2xl font-bold shadow-lg hover:scale-105 transition-transform duration-300 cta-observer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
             >
@@ -141,7 +141,7 @@ export default function PlayGamesPage() {
               >
                 <div>
                   <div className="flex items-center gap-2 mb-3">
-                    <ClipboardList className="text-blue-500 w-6 h-6" />
+                    <ClipboardList className="text-yellow-500 w-6 h-6" />
                     <span className="text-sm text-gray-500 dark:text-gray-400">{game.category}</span>
                   </div>
                   <h3 className="text-xl font-semibold mb-1">{game.name}</h3>
@@ -150,10 +150,10 @@ export default function PlayGamesPage() {
                   <StarRating rating={game.rating} />
                 </div>
                 <div className="flex items-center justify-between mt-4">
-                  <span className="text-blue-600 font-bold">{game.reward}</span>
+                  <span className="text-green-600 font-bold">{game.reward}</span>
                   <motion.a
                     href="/signup"
-                    className="px-4 py-2 bg-gradient-to-r from-blue-400 via-purple-400 to-purple-500 text-black rounded-xl font-semibold shadow hover:scale-105 transition-transform duration-300"
+                    className="px-4 py-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black rounded-xl font-semibold shadow hover:scale-105 transition-transform duration-300"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.97 }}
                   >
@@ -180,7 +180,7 @@ export default function PlayGamesPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
               >
-                <h3 className="text-4xl font-extrabold text-blue-600">
+                <h3 className="text-4xl font-extrabold text-green-600">
                   <CountUp end={stat.number} />
                   {stat.label === "Average Reward ($)" && "$"}
                 </h3>
@@ -214,7 +214,7 @@ export default function PlayGamesPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <Trophy className="w-8 h-8 text-blue-400 mb-4 mx-auto" />
+              <Trophy className="w-8 h-8 text-green-400 mb-4 mx-auto" />
               <h3 className="text-xl font-semibold mb-2">Play Games</h3>
               <p className="text-gray-600 dark:text-gray-400">
                 Engage in exciting games and complete challenges.
@@ -243,7 +243,7 @@ export default function PlayGamesPage() {
           </h2>
           <motion.a
             href="/signup"
-            className="cta-observer inline-flex items-center gap-3 bg-gradient-to-r from-blue-400 via-purple-400 to-purple-500 text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-xl hover:scale-105 transition-transform duration-300"
+            className="cta-observer inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-xl hover:scale-105 transition-transform duration-300"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
