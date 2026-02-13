@@ -1,168 +1,169 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { ArrowRight, Gift, CreditCard, User, CheckCircle, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import {
-  Gift,
-  CreditCard,
-  CheckCircle,
-  ShieldCheck,
-  ArrowRight,
-  Smartphone,
-  Globe,
-  Sparkles,
-} from "lucide-react";
+import Meta from "@/components/seo/SeoEngine";
+import TypingText from "@/components/typing/TypingText";
 
-export default function EarnAmazonGiftCardPage() {
-  // ===== Smart CTA logic =====
-  const [ctaText, setCtaText] = useState("Start Earning Free");
-  const [ctaLink, setCtaLink] = useState("/signup");
+/* ================= STEPS ================= */
+const steps = [
+  {
+    icon: <User size={32} className="text-yellow-400" />,
+    title: "Sign Up for Free",
+    description: "Join Cashog and instantly get access to Amazon gift card earning offers.",
+  },
+  {
+    icon: <CreditCard size={32} className="text-green-400" />,
+    title: "Complete Offers",
+    description: "Play games, watch videos, install apps, or answer surveys to earn points fast.",
+  },
+  {
+    icon: <Gift size={32} className="text-yellow-400" />,
+    title: "Redeem Amazon Gift Cards",
+    description: "Convert your points into Amazon gift cards instantly and securely.",
+  },
+  {
+    icon: <CheckCircle size={32} className="text-green-400" />,
+    title: "Withdraw Easily",
+    description: "Gift cards delivered instantly to your account once the threshold is met.",
+  },
+];
 
-  useEffect(() => {
-    const user = localStorage.getItem("user");
-    const verified = localStorage.getItem("verified");
+/* ================= FEATURES ================= */
+const features = [
+  { title: "Instant Delivery", description: "Get your Amazon gift cards instantly after redemption." },
+  { title: "High-Paying Offers", description: "Top offers ensure maximum points per task completed." },
+  { title: "Global Access", description: "Available to users worldwide, no matter where you are." },
+  { title: "Mobile-Friendly", description: "Earn points anytime, anywhere on mobile or desktop." },
+  { title: "Trusted & Secure", description: "Millions of users trust Cashog for safe rewards." },
+  { title: "24/7 Support", description: "Our support team is always ready to help." },
+];
 
-    if (!user) {
-      setCtaText("Start Earning Free");
-      setCtaLink("/signup");
-    } else if (user && verified !== "true") {
-      setCtaText("Verify Your Account");
-      setCtaLink("/verify");
-    } else {
-      setCtaText("Go to Dashboard");
-      setCtaLink("/dashboard");
-    }
-  }, []);
+/* ================= FAQ ================= */
+const faqs = [
+  { q: "How do I redeem Amazon gift cards?", a: "Simply collect points from tasks and redeem them in your rewards section." },
+  { q: "Can I earn from mobile?", a: "Yes! Our platform is fully responsive and mobile-friendly." },
+  { q: "Is signing up free?", a: "Absolutely, you can join and start earning instantly without paying anything." },
+  { q: "Do I need a PayPal account?", a: "No, you can directly redeem points for Amazon gift cards without PayPal." },
+  { q: "How long does delivery take?", a: "Amazon gift cards are delivered instantly to your account after redemption." },
+];
 
+/* ================= PAGE COMPONENT ================= */
+export default function EarnAmazonGiftCard() {
   return (
-    <main className="bg-gradient-to-b from-slate-950 via-slate-900 to-black text-white overflow-hidden">
+    <>
+      <Meta
+        title="Cashog - Earn Amazon Gift Cards"
+        description="Learn how to earn Amazon gift cards online by completing tasks, surveys, and offers with Cashog. Fast, secure, and instant rewards!"
+      />
 
-      {/* ================= HERO SECTION ================= */}
-      <section className="relative flex items-center justify-center h-screen px-6 lg:px-20">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+      <main className="transition-colors duration-300 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white min-h-screen">
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center lg:text-left"
-          >
-            <div className="inline-flex items-center gap-2 bg-amber-500/10 text-amber-400 px-4 py-2 rounded-full text-sm mb-6 border border-amber-500/20">
-              <Sparkles size={16} />
-              Earn Amazon Gift Cards Easily
-            </div>
-
-            <h1 className="text-4xl lg:text-6xl font-bold leading-tight mb-6">
-              Turn Simple Tasks Into{" "}
-              <span className="bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
-                Amazon Gift Cards
-              </span>
+        {/* ================= HERO ================= */}
+        <section className="py-24 px-4 text-center bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 rounded-b-3xl">
+          <div className="max-w-3xl mx-auto">
+            <h1 className="text-5xl sm:text-6xl font-extrabold mb-4 text-white">
+              Earn Amazon Gift Cards Online
             </h1>
 
-            <p className="text-gray-400 text-lg mb-8 max-w-xl mx-auto lg:mx-0">
-              Complete surveys, test apps, watch videos, and get rewarded with Amazon gift cards. 
-              Fast payouts. Secure platform. Worldwide access.
+            <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-100 to-white">
+              <TypingText />
+            </div>
+
+            <p className="text-lg sm:text-xl md:text-2xl mb-8 text-white/90 max-w-xl mx-auto leading-relaxed">
+              Complete simple tasks and start earning Amazon gift cards instantly from anywhere in the world.
             </p>
 
-            {/* Hero CTA */}
-            <Link href={ctaLink} className="cta-observer inline-block">
+            <Link href="/signup" className="cta-observer inline-block">
               <motion.span
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 text-black px-8 py-4 rounded-xl font-semibold shadow-lg text-lg"
+                className="inline-flex items-center gap-2 bg-white text-black px-12 py-5 rounded-3xl font-bold shadow-xl text-lg"
               >
-                {ctaText} <ArrowRight size={18} />
+                Start Earning Now <ArrowRight size={20} />
               </motion.span>
             </Link>
-          </motion.div>
+          </div>
+        </section>
 
-          {/* Hero Card */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="bg-gradient-to-br from-slate-800 to-slate-900 border border-gray-800 p-8 rounded-3xl shadow-2xl backdrop-blur-xl mx-auto"
-          >
-            <div className="flex items-center gap-4 mb-6">
-              <Gift className="text-amber-400" size={36} />
-              <div>
-                <h3 className="text-xl font-semibold">Amazon Rewards</h3>
-                <p className="text-gray-400 text-sm">Instant Digital Delivery</p>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <div className="flex justify-between text-gray-400">
-                <span>Survey Completion</span>
-                <span className="text-white font-medium">$5 - $15</span>
-              </div>
-              <div className="flex justify-between text-gray-400">
-                <span>App Testing</span>
-                <span className="text-white font-medium">$10+</span>
-              </div>
-              <div className="flex justify-between text-gray-400">
-                <span>Video Watching</span>
-                <span className="text-white font-medium">$3+</span>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ================= FEATURES ================= */}
-      <section className="py-20 px-6 lg:px-20 bg-slate-900/40">
-        <div className="max-w-7xl mx-auto text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-            Why Choose Our Platform?
-          </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            A secure and professional earning ecosystem designed for maximum rewards.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-          {[
-            { icon: CheckCircle, title: "Easy Tasks", desc: "No complex skills required." },
-            { icon: ShieldCheck, title: "Secure & Legit", desc: "Trusted by thousands worldwide." },
-            { icon: Smartphone, title: "Mobile Friendly", desc: "Earn directly from your phone." },
-            { icon: Globe, title: "Global Access", desc: "Available worldwide." },
-          ].map((item, index) => (
+        {/* ================= STEPS ================= */}
+        <section className="max-w-7xl mx-auto px-4 py-20 grid gap-12 md:grid-cols-2 lg:grid-cols-4 text-center">
+          {steps.map((step, i) => (
             <motion.div
-              key={index}
-              whileHover={{ y: -6 }}
-              className="bg-slate-800/70 border border-gray-800 p-8 rounded-2xl text-center backdrop-blur-lg"
+              key={i}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.2 }}
+              className="bg-gray-100 dark:bg-[#1A1F2B] rounded-2xl p-8 flex flex-col items-center shadow-md hover:shadow-lg transition-shadow duration-300"
             >
-              <item.icon className="mx-auto text-amber-400 mb-4" size={30} />
-              <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-              <p className="text-gray-400 text-sm">{item.desc}</p>
+              <div className="mb-4">{step.icon}</div>
+              <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+              <p className="text-gray-600 dark:text-gray-400">{step.description}</p>
             </motion.div>
           ))}
-        </div>
-      </section>
+        </section>
 
-      {/* ================= FINAL CTA ================= */}
-      <section className="py-24 px-6 lg:px-20 text-center bg-gradient-to-r from-amber-600/10 via-orange-500/10 to-amber-600/10">
-        <h2 className="text-3xl lg:text-5xl font-bold mb-6">
-          Ready to Earn Amazon Gift Cards?
-        </h2>
-        <p className="text-gray-400 mb-10 max-w-2xl mx-auto">
-          Join thousands of users earning daily rewards. Start today and redeem your first Amazon gift card fast.
-        </p>
+        {/* ================= FEATURES ================= */}
+        <section className="max-w-7xl mx-auto px-4 py-20 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12">
+            Why Choose Cashog for Amazon Gift Cards
+          </h2>
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 justify-center">
+            {features.map((feature, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.2 }}
+                className="bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 text-center shadow hover:shadow-xl transition-shadow duration-300 w-full max-w-sm mx-auto"
+              >
+                <div className="flex justify-center mb-4 text-yellow-500">
+                  <ShieldCheck size={28} />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
 
-        {/* Final CTA with cta-observer */}
-        <Link href={ctaLink} className="cta-observer inline-block">
-          <motion.span
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 text-black px-10 py-5 rounded-xl font-semibold shadow-lg text-lg"
-          >
-            {ctaText} <ArrowRight size={20} />
-          </motion.span>
-        </Link>
-      </section>
-    </main>
+        {/* ================= FAQ ================= */}
+        <section className="max-w-4xl mx-auto px-4 py-20 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+          <div className="space-y-4">
+            {faqs.map((faq, i) => (
+              <details key={i} className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-4 cursor-pointer group">
+                <summary className="font-semibold text-lg">{faq.q}</summary>
+                <p className="mt-2 text-gray-600 dark:text-gray-400">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        {/* ================= FINAL CTA ================= */}
+        <section className="text-center py-28 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 w-full transition-colors duration-300 rounded-t-3xl">
+          <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-100 to-white">
+            Start Earning Amazon Gift Cards Today!
+          </h2>
+          <Link href="/signup" className="cta-observer inline-block">
+            <motion.span
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center gap-3 bg-white text-black px-16 py-6 rounded-3xl font-bold shadow-2xl text-xl"
+            >
+              Redeem Gift Cards <ArrowRight size={20} />
+            </motion.span>
+          </Link>
+          <p className="mt-6 text-white/90 text-lg max-w-md mx-auto transition-colors duration-300">
+            Join Cashog and start earning Amazon gift cards from any device, anywhere in the world.
+          </p>
+        </section>
+
+      </main>
+    </>
   );
 }
