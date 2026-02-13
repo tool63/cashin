@@ -67,9 +67,9 @@ export default function FreeTrialsPage() {
 
             <motion.a
               href="/signup"
+              className="cta-observer inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-lg hover:scale-105 transition-transform duration-300"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-lg"
             >
               Start Free Trials <Rocket size={20} />
             </motion.a>
@@ -120,8 +120,8 @@ export default function FreeTrialsPage() {
 
                 <motion.a
                   href="/signup"
+                  className="cta-observer inline-flex w-full justify-center items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-4 py-3 rounded-xl font-semibold shadow hover:scale-105 transition-transform duration-300"
                   whileHover={{ scale: 1.05 }}
-                  className="inline-flex w-full justify-center items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-4 py-3 rounded-xl font-semibold shadow"
                 >
                   Start Trial <CheckCircle size={18} />
                 </motion.a>
@@ -178,8 +178,8 @@ export default function FreeTrialsPage() {
 
           <motion.a
             href="/signup"
+            className="cta-observer inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-xl hover:scale-105 transition-transform duration-300"
             whileHover={{ scale: 1.05 }}
-            className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-xl"
           >
             Join Cashog Now <Rocket size={20} />
           </motion.a>
