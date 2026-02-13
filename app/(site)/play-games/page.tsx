@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import SeoEngine from "@/components/seo/SeoEngine";
-import { GameController, Star, Gift, User, ClipboardList, Trophy } from "lucide-react";
+import { Joystick, Star, Gift, User, ClipboardList, Trophy } from "lucide-react";
 
 type Game = {
   id: number;
@@ -119,7 +119,7 @@ export default function PlayGamesPage() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
             >
-              Start Playing <GameController size={20} />
+              Start Playing <Joystick size={20} />
             </motion.a>
           </motion.div>
         </section>
@@ -248,7 +248,7 @@ export default function PlayGamesPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            Start Playing Games <GameController size={20} />
+            Start Playing Games <Joystick size={20} />
           </motion.a>
         </section>
       </main>
