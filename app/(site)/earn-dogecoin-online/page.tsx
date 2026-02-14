@@ -1,13 +1,13 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, User, CreditCard, Gift, CheckCircle, ShieldCheck } from "lucide-react";
+import { ArrowRight, User, CreditCard, Gift, CheckCircle, ShieldCheck, Globe, Smartphone, DollarSign } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Meta from "@/components/seo/SeoEngine";
 import TypingText from "@/components/typing/TypingText";
 
-/* ================= STEPS ================= */
+/* ================= DATA ================= */
 const steps = [
   {
     icon: <User size={32} className="text-yellow-400" />,
@@ -31,17 +31,15 @@ const steps = [
   },
 ];
 
-/* ================= FEATURES ================= */
 const features = [
-  { title: "Instant Dogecoin Payouts", description: "Receive Dogecoin immediately after redeeming points." },
-  { title: "High-Paying Offers", description: "Earn maximum points from top offers for faster rewards." },
-  { title: "Global Access", description: "Available for users worldwide on any device." },
-  { title: "Mobile-Friendly", description: "Earn Dogecoin on mobile, tablet, or desktop anywhere." },
-  { title: "Trusted & Secure", description: "Millions of users trust Cashog for safe, verified Dogecoin payouts." },
-  { title: "24/7 Support", description: "Our support team is always ready to help with any questions." },
+  { icon: <DollarSign size={28} className="text-yellow-500" />, title: "Instant Dogecoin Payouts", description: "Receive Dogecoin immediately after redeeming points." },
+  { icon: <CreditCard size={28} className="text-green-500" />, title: "High-Paying Offers", description: "Earn maximum points from top offers for faster rewards." },
+  { icon: <Globe size={28} className="text-blue-500" />, title: "Global Access", description: "Available for users worldwide on any device." },
+  { icon: <Smartphone size={28} className="text-pink-500" />, title: "Mobile-Friendly", description: "Earn Dogecoin on mobile, tablet, or desktop anywhere." },
+  { icon: <ShieldCheck size={28} className="text-green-400" />, title: "Trusted & Secure", description: "Millions of users trust Cashog for safe, verified Dogecoin payouts." },
+  { icon: <CheckCircle size={28} className="text-yellow-400" />, title: "24/7 Support", description: "Our support team is always ready to help with any questions." },
 ];
 
-/* ================= FAQ ================= */
 const faqs = [
   { q: "How do I withdraw Dogecoin?", a: "After collecting points from tasks, redeem them for Dogecoin directly to your wallet instantly." },
   { q: "Can I earn from mobile?", a: "Yes! The platform is fully responsive and works on any mobile device." },
@@ -50,7 +48,71 @@ const faqs = [
   { q: "How long does delivery take?", a: "Dogecoin payouts are delivered instantly after redemption." },
 ];
 
-/* ================= PAGE COMPONENT ================= */
+/* ================= COMPONENTS ================= */
+function StepsSection({ steps }: { steps: typeof steps }) {
+  return (
+    <section className="max-w-7xl mx-auto px-4 py-20 grid gap-12 md:grid-cols-2 lg:grid-cols-4 text-center">
+      {steps.map((step, i) => (
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: i * 0.2 }}
+          className="bg-gray-100 dark:bg-[#1A1F2B] rounded-2xl p-8 flex flex-col items-center shadow-md hover:shadow-lg transition-shadow duration-300"
+        >
+          <div className="mb-4">{step.icon}</div>
+          <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+          <p className="text-gray-600 dark:text-gray-400">{step.description}</p>
+        </motion.div>
+      ))}
+    </section>
+  );
+}
+
+function FeaturesSection({ features }: { features: typeof features }) {
+  return (
+    <section className="max-w-7xl mx-auto px-4 py-20 text-center">
+      <h2 className="text-3xl md:text-4xl font-bold mb-12">
+        Why Choose Cashog for Dogecoin
+      </h2>
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 justify-center">
+        {features.map((feature, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: i * 0.2 }}
+            className="bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 text-center shadow hover:shadow-xl transition-shadow duration-300 w-full max-w-sm mx-auto"
+          >
+            <div className="flex justify-center mb-4">{feature.icon}</div>
+            <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+            <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function FAQSection({ faqs }: { faqs: typeof faqs }) {
+  return (
+    <section className="max-w-4xl mx-auto px-4 py-20 text-center">
+      <h2 className="text-3xl md:text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+      <div className="space-y-4">
+        {faqs.map((faq, i) => (
+          <details key={i} className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-4 cursor-pointer group">
+            <summary className="font-semibold text-lg">{faq.q}</summary>
+            <p className="mt-2 text-gray-600 dark:text-gray-400">{faq.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ================= PAGE ================= */
 export default function EarnDogecoinOnline() {
   return (
     <>
@@ -61,7 +123,7 @@ export default function EarnDogecoinOnline() {
 
       <main className="transition-colors duration-300 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white min-h-screen">
 
-        {/* ================= HERO ================= */}
+        {/* HERO */}
         <section className="py-24 px-4 text-center bg-[#111827] dark:bg-[#111827] rounded-b-3xl">
           <div className="max-w-3xl mx-auto">
             <h1 className="text-5xl sm:text-6xl font-extrabold mb-4 text-white">
@@ -76,6 +138,10 @@ export default function EarnDogecoinOnline() {
               Complete tasks, offers, and surveys to earn Dogecoin instantly from anywhere, on any device.
             </p>
 
+            <p className="mb-6 text-gray-300 text-lg">
+              Join over <strong>100,000+</strong> users earning Dogecoin worldwide.
+            </p>
+
             <Link href="/signup" className="cta-observer inline-block">
               <motion.span
                 whileHover={{ scale: 1.05 }}
@@ -88,63 +154,16 @@ export default function EarnDogecoinOnline() {
           </div>
         </section>
 
-        {/* ================= STEPS ================= */}
-        <section className="max-w-7xl mx-auto px-4 py-20 grid gap-12 md:grid-cols-2 lg:grid-cols-4 text-center">
-          {steps.map((step, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.2 }}
-              className="bg-gray-100 dark:bg-[#1A1F2B] rounded-2xl p-8 flex flex-col items-center shadow-md hover:shadow-lg transition-shadow duration-300"
-            >
-              <div className="mb-4">{step.icon}</div>
-              <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-              <p className="text-gray-600 dark:text-gray-400">{step.description}</p>
-            </motion.div>
-          ))}
-        </section>
+        {/* STEPS */}
+        <StepsSection steps={steps} />
 
-        {/* ================= FEATURES ================= */}
-        <section className="max-w-7xl mx-auto px-4 py-20 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">
-            Why Choose Cashog for Dogecoin
-          </h2>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 justify-center">
-            {features.map((feature, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.2 }}
-                className="bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 text-center shadow hover:shadow-xl transition-shadow duration-300 w-full max-w-sm mx-auto"
-              >
-                <div className="flex justify-center mb-4 text-yellow-500">
-                  <ShieldCheck size={28} />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </section>
+        {/* FEATURES */}
+        <FeaturesSection features={features} />
 
-        {/* ================= FAQ ================= */}
-        <section className="max-w-4xl mx-auto px-4 py-20 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">Frequently Asked Questions</h2>
-          <div className="space-y-4">
-            {faqs.map((faq, i) => (
-              <details key={i} className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-4 cursor-pointer group">
-                <summary className="font-semibold text-lg">{faq.q}</summary>
-                <p className="mt-2 text-gray-600 dark:text-gray-400">{faq.a}</p>
-              </details>
-            ))}
-          </div>
-        </section>
+        {/* FAQ */}
+        <FAQSection faqs={faqs} />
 
-        {/* ================= FINAL CTA ================= */}
+        {/* FINAL CTA */}
         <section className="text-center py-28 bg-[#111827] dark:bg-[#111827] w-full transition-colors duration-300 rounded-t-3xl">
           <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
             Start Earning Dogecoin Today!
