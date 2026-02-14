@@ -1,12 +1,11 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, User, CreditCard, Gift, CheckCircle, ShieldCheck, Sun, Moon } from "lucide-react";
+import { ArrowRight, User, CreditCard, Gift, CheckCircle, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Meta from "@/components/seo/SeoEngine";
 import TypingText from "@/components/typing/TypingText";
-import { useTheme } from "next-themes";
 
 /* ================= STEPS ================= */
 const steps = [
@@ -53,8 +52,6 @@ const faqs = [
 
 /* ================= PAGE COMPONENT ================= */
 export default function EarnDogecoinOnline() {
-  const { theme, setTheme } = useTheme();
-
   return (
     <>
       <Meta
@@ -62,18 +59,10 @@ export default function EarnDogecoinOnline() {
         description="Learn how to earn Dogecoin online by completing tasks, surveys, and offers with Cashog. Instant, secure, and high-paying crypto rewards!"
       />
 
-      <main className="transition-colors duration-300 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white min-h-screen relative">
-
-        {/* ================= DARK/LIGHT TOGGLE ================= */}
-        <button
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          className="fixed top-6 right-6 z-50 p-3 rounded-full bg-gray-200 dark:bg-gray-800 shadow-lg"
-        >
-          {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
-        </button>
+      <main className="transition-colors duration-300 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white min-h-screen">
 
         {/* ================= HERO ================= */}
-        <section className="py-24 px-4 text-center bg-[#111827] dark:bg-[#111827] rounded-b-3xl relative z-10">
+        <section className="py-24 px-4 text-center bg-[#111827] dark:bg-[#111827] rounded-b-3xl">
           <div className="max-w-3xl mx-auto">
             <h1 className="text-5xl sm:text-6xl font-extrabold mb-4 text-white">
               Earn Dogecoin Online
