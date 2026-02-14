@@ -50,7 +50,6 @@ const faqs = [
   { q: "How long does delivery take?", a: "Litecoin payouts are delivered instantly after redemption." },
 ];
 
-/* ================= PAGE COMPONENT ================= */
 export default function EarnLitecoinOnline() {
   return (
     <>
