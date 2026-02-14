@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, ShoppingBasket, Leaf, Sparkles, Percent } from "lucide-react";
+import { ArrowRight, ShoppingBag, Leaf, Sparkles, Percent } from "lucide-react";
 import Meta from "@/components/seo/SeoEngine";
 import TypingText from "@/components/typing/TypingText";
 
@@ -30,7 +30,7 @@ const groceryOffers = [
     title: "Supermarket Cashback",
     reward: "Up to 12% Cashback",
     badge: "Top",
-    icon: <ShoppingBasket size={30} className="text-green-500" />,
+    icon: <ShoppingBag size={30} className="text-green-500" />,
   },
   {
     id: 2,
