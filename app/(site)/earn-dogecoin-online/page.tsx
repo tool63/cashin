@@ -1,31 +1,15 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, User, CreditCard, Gift, CheckCircle, ShieldCheck } from "lucide-react";
+import { ArrowRight, User, CreditCard, Gift, CheckCircle, ShieldCheck, Sun, Moon } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Meta from "@/components/seo/SeoEngine";
 import TypingText from "@/components/typing/TypingText";
+import { useTheme } from "next-themes";
 
-/* ================= TYPES ================= */
-type Step = {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-};
-
-type Feature = {
-  title: string;
-  description: string;
-};
-
-type FAQ = {
-  q: string;
-  a: string;
-};
-
-/* ================= DATA ================= */
-const steps: Step[] = [
+/* ================= STEPS ================= */
+const steps = [
   {
     icon: <User size={32} className="text-yellow-400" />,
     title: "Sign Up for Free",
@@ -48,7 +32,8 @@ const steps: Step[] = [
   },
 ];
 
-const features: Feature[] = [
+/* ================= FEATURES ================= */
+const features = [
   { title: "Instant Dogecoin Payouts", description: "Receive Dogecoin immediately after redeeming points." },
   { title: "High-Paying Offers", description: "Earn maximum points from top offers for faster rewards." },
   { title: "Global Access", description: "Available for users worldwide on any device." },
@@ -57,7 +42,8 @@ const features: Feature[] = [
   { title: "24/7 Support", description: "Our support team is always ready to help with any questions." },
 ];
 
-const faqs: FAQ[] = [
+/* ================= FAQ ================= */
+const faqs = [
   { q: "How do I withdraw Dogecoin?", a: "After collecting points from tasks, redeem them for Dogecoin directly to your wallet instantly." },
   { q: "Can I earn from mobile?", a: "Yes! The platform is fully responsive and works on any mobile device." },
   { q: "Is signing up free?", a: "Absolutely! Creating an account and earning is 100% free." },
@@ -65,72 +51,10 @@ const faqs: FAQ[] = [
   { q: "How long does delivery take?", a: "Dogecoin payouts are delivered instantly after redemption." },
 ];
 
-/* ================= COMPONENTS ================= */
-function StepsSection({ steps }: { steps: Step[] }) {
-  return (
-    <section className="max-w-7xl mx-auto px-4 py-20 grid gap-12 md:grid-cols-2 lg:grid-cols-4 text-center">
-      {steps.map((step, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: i * 0.2 }}
-          className="bg-gray-100 dark:bg-[#1A1F2B] rounded-2xl p-8 flex flex-col items-center shadow-md hover:shadow-lg transition-shadow duration-300"
-        >
-          <div className="mb-4">{step.icon}</div>
-          <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-          <p className="text-gray-600 dark:text-gray-400">{step.description}</p>
-        </motion.div>
-      ))}
-    </section>
-  );
-}
-
-function FeaturesSection({ features }: { features: Feature[] }) {
-  return (
-    <section className="max-w-7xl mx-auto px-4 py-20 text-center">
-      <h2 className="text-3xl md:text-4xl font-bold mb-12">Why Choose Cashog for Dogecoin</h2>
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 justify-center">
-        {features.map((feature, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.2 }}
-            className="bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 text-center shadow hover:shadow-xl transition-shadow duration-300 w-full max-w-sm mx-auto"
-          >
-            <div className="flex justify-center mb-4 text-yellow-500">
-              <ShieldCheck size={28} />
-            </div>
-            <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-            <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
-          </motion.div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function FAQSection({ faqs }: { faqs: FAQ[] }) {
-  return (
-    <section className="max-w-4xl mx-auto px-4 py-20 text-center">
-      <h2 className="text-3xl md:text-4xl font-bold mb-12">Frequently Asked Questions</h2>
-      <div className="space-y-4">
-        {faqs.map((faq, i) => (
-          <details key={i} className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-4 cursor-pointer group">
-            <summary className="font-semibold text-lg">{faq.q}</summary>
-            <p className="mt-2 text-gray-600 dark:text-gray-400">{faq.a}</p>
-          </details>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 /* ================= PAGE COMPONENT ================= */
 export default function EarnDogecoinOnline() {
+  const { theme, setTheme } = useTheme();
+
   return (
     <>
       <Meta
@@ -138,12 +62,22 @@ export default function EarnDogecoinOnline() {
         description="Learn how to earn Dogecoin online by completing tasks, surveys, and offers with Cashog. Instant, secure, and high-paying crypto rewards!"
       />
 
-      <main className="transition-colors duration-300 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white min-h-screen">
+      <main className="transition-colors duration-300 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white min-h-screen relative">
+
+        {/* ================= DARK/LIGHT TOGGLE ================= */}
+        <button
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          className="fixed top-6 right-6 z-50 p-3 rounded-full bg-gray-200 dark:bg-gray-800 shadow-lg"
+        >
+          {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+        </button>
 
         {/* ================= HERO ================= */}
-        <section className="py-24 px-4 text-center bg-[#111827] dark:bg-[#111827] rounded-b-3xl">
+        <section className="py-24 px-4 text-center bg-[#111827] dark:bg-[#111827] rounded-b-3xl relative z-10">
           <div className="max-w-3xl mx-auto">
-            <h1 className="text-5xl sm:text-6xl font-extrabold mb-4 text-white">Earn Dogecoin Online</h1>
+            <h1 className="text-5xl sm:text-6xl font-extrabold mb-4 text-white">
+              Earn Dogecoin Online
+            </h1>
 
             <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
               <TypingText />
@@ -166,13 +100,60 @@ export default function EarnDogecoinOnline() {
         </section>
 
         {/* ================= STEPS ================= */}
-        <StepsSection steps={steps} />
+        <section className="max-w-7xl mx-auto px-4 py-20 grid gap-12 md:grid-cols-2 lg:grid-cols-4 text-center">
+          {steps.map((step, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.2 }}
+              className="bg-gray-100 dark:bg-[#1A1F2B] rounded-2xl p-8 flex flex-col items-center shadow-md hover:shadow-lg transition-shadow duration-300"
+            >
+              <div className="mb-4">{step.icon}</div>
+              <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+              <p className="text-gray-600 dark:text-gray-400">{step.description}</p>
+            </motion.div>
+          ))}
+        </section>
 
         {/* ================= FEATURES ================= */}
-        <FeaturesSection features={features} />
+        <section className="max-w-7xl mx-auto px-4 py-20 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12">
+            Why Choose Cashog for Dogecoin
+          </h2>
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 justify-center">
+            {features.map((feature, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.2 }}
+                className="bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 text-center shadow hover:shadow-xl transition-shadow duration-300 w-full max-w-sm mx-auto"
+              >
+                <div className="flex justify-center mb-4 text-yellow-500">
+                  <ShieldCheck size={28} />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
 
         {/* ================= FAQ ================= */}
-        <FAQSection faqs={faqs} />
+        <section className="max-w-4xl mx-auto px-4 py-20 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+          <div className="space-y-4">
+            {faqs.map((faq, i) => (
+              <details key={i} className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-4 cursor-pointer group">
+                <summary className="font-semibold text-lg">{faq.q}</summary>
+                <p className="mt-2 text-gray-600 dark:text-gray-400">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
 
         {/* ================= FINAL CTA ================= */}
         <section className="text-center py-28 bg-[#111827] dark:bg-[#111827] w-full transition-colors duration-300 rounded-t-3xl">
