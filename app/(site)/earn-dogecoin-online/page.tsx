@@ -110,7 +110,7 @@ export default function EarnDogecoinOnline() {
             </h1>
 
             <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
-              <TypingText text="Complete Tasks & Redeem Crypto Instantly!" />
+              <TypingText />
             </div>
 
             <p className="text-lg sm:text-xl md:text-2xl mb-8 text-gray-300 max-w-xl mx-auto leading-relaxed">
