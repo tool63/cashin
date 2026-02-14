@@ -11,7 +11,7 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [earnOpen, setEarnOpen] = useState(false);
   const [mobileEarnOpen, setMobileEarnOpen] = useState(false);
-  const [activeButton, setActiveButton] = useState<"none" | "signup" | "login">("none");
+  const [activeButton, setActiveButton] = useState<"none" | "signup" | "login">("signup"); // <-- default is signup
 
   const headerRef = useRef<HTMLDivElement>(null);
 
