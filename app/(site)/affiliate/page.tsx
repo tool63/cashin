@@ -62,17 +62,22 @@ export default function AffiliateProgram() {
       <main className="transition-colors duration-300 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white min-h-screen">
 
         {/* ================= HERO ================= */}
-        <section className="py-24 px-4 text-center bg-[#111827] dark:bg-[#111827] rounded-b-3xl">
+        <section className="py-24 px-4 text-center rounded-b-3xl transition-colors duration-300 
+            bg-white dark:bg-[#111827]">
           <div className="max-w-3xl mx-auto">
-            <h1 className="text-5xl sm:text-6xl font-extrabold mb-4 text-white">
+            <h1 className="text-5xl sm:text-6xl font-extrabold mb-4 
+                text-gray-900 dark:text-white">
               Cashog Affiliate Program
             </h1>
 
-            <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
+            <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 
+                bg-clip-text text-transparent 
+                bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
               <TypingText />
             </div>
 
-            <p className="text-lg sm:text-xl md:text-2xl mb-8 text-gray-300 max-w-xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl md:text-2xl mb-8 
+                text-gray-700 dark:text-gray-300 max-w-xl mx-auto leading-relaxed">
               Refer users, earn commissions, and get paid instantly with Cashog’s trusted affiliate program.
             </p>
 
@@ -80,7 +85,10 @@ export default function AffiliateProgram() {
               <motion.span
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-12 py-5 rounded-3xl font-bold shadow-xl text-lg"
+                className="inline-flex items-center gap-2 
+                    bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 
+                    text-black dark:text-black px-12 py-5 rounded-3xl font-bold shadow-xl
+                    dark:shadow-none text-lg"
               >
                 Join Affiliate Program <ArrowRight size={20} />
               </motion.span>
@@ -145,20 +153,26 @@ export default function AffiliateProgram() {
         </section>
 
         {/* ================= FINAL CTA ================= */}
-        <section className="text-center py-28 bg-[#111827] dark:bg-[#111827] w-full transition-colors duration-300 rounded-t-3xl">
-          <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
+        <section className="text-center py-28 w-full rounded-t-3xl transition-colors duration-300
+            bg-white dark:bg-[#111827]">
+          <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 
+              bg-clip-text text-transparent 
+              bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
             Become a Cashog Affiliate Today!
           </h2>
           <Link href="/signup" className="cta-observer inline-block">
             <motion.span
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-3xl font-bold shadow-2xl text-xl"
+              className="inline-flex items-center gap-3 
+                  bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 
+                  text-black dark:text-black px-16 py-6 rounded-3xl font-bold shadow-2xl 
+                  dark:shadow-none text-xl"
             >
               Join Now & Start Earning <ArrowRight size={20} />
             </motion.span>
           </Link>
-          <p className="mt-6 text-gray-300 text-lg max-w-md mx-auto transition-colors duration-300">
+          <p className="mt-6 text-gray-700 dark:text-gray-300 text-lg max-w-md mx-auto transition-colors duration-300">
             Refer users, earn commissions, and grow with Cashog’s trusted affiliate program.
           </p>
         </section>
