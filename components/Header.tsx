@@ -98,24 +98,28 @@ export default function Header() {
           <DarkLightToggle />
 
           {/* Login Button */}
-          <button
-            onClick={() => setActiveButton("login")}
-            className={`text-sm font-medium px-4 py-2 rounded-lg transition ${
-              activeButton === "login" ? ctaGradient : "border"
-            }`}
-          >
-            Login
-          </button>
+          <Link href="/login">
+            <button
+              onClick={() => setActiveButton("login")}
+              className={`text-sm font-medium px-4 py-2 rounded-lg transition ${
+                activeButton === "login" ? ctaGradient : "border"
+              }`}
+            >
+              Login
+            </button>
+          </Link>
 
           {/* Sign Up Button */}
-          <button
-            onClick={() => setActiveButton("signup")}
-            className={`px-5 py-2 rounded-lg text-sm font-medium transition ${
-              activeButton === "signup" ? ctaGradient : "bg-indigo-600 text-white hover:bg-indigo-700"
-            }`}
-          >
-            Sign up
-          </button>
+          <Link href="/signup">
+            <button
+              onClick={() => setActiveButton("signup")}
+              className={`px-5 py-2 rounded-lg text-sm font-medium transition ${
+                activeButton === "signup" ? ctaGradient : "bg-indigo-600 text-white hover:bg-indigo-700"
+              }`}
+            >
+              Sign up
+            </button>
+          </Link>
         </div>
 
         {/* MOBILE BUTTON */}
@@ -175,22 +179,26 @@ export default function Header() {
 
             {/* Mobile CTA */}
             <div className="pt-4 flex flex-col gap-3">
-              <button
-                onClick={() => setActiveButton("login")}
-                className={`text-center py-2 rounded-lg w-full transition ${
-                  activeButton === "login" ? ctaGradient : "border"
-                }`}
-              >
-                Login
-              </button>
-              <button
-                onClick={() => setActiveButton("signup")}
-                className={`text-center py-2 rounded-lg w-full transition ${
-                  activeButton === "signup" ? ctaGradient : "bg-indigo-600 text-white"
-                }`}
-              >
-                Sign up
-              </button>
+              <Link href="/login">
+                <button
+                  onClick={() => setActiveButton("login")}
+                  className={`text-center py-2 rounded-lg w-full transition ${
+                    activeButton === "login" ? ctaGradient : "border"
+                  }`}
+                >
+                  Login
+                </button>
+              </Link>
+              <Link href="/signup">
+                <button
+                  onClick={() => setActiveButton("signup")}
+                  className={`text-center py-2 rounded-lg w-full transition ${
+                    activeButton === "signup" ? ctaGradient : "bg-indigo-600 text-white"
+                  }`}
+                >
+                  Sign up
+                </button>
+              </Link>
             </div>
           </motion.div>
         )}
