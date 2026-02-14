@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { ArrowRight, User, CreditCard, Gift, CheckCircle, ShieldCheck } from "lucide-react";
+import { ArrowRight, User, CreditCard, Gift, CheckCircle, ShieldCheck, Trophy } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
@@ -103,20 +103,30 @@ export default function EarnDogecoinOnline() {
       >
 
         {/* ================= HERO ================= */}
-        <section className="py-24 px-4 text-center bg-[#111827] dark:bg-[#111827] rounded-b-3xl">
+        <section
+          className={`relative py-24 px-4 text-center rounded-b-3xl transition-colors duration-500 ${
+            theme === "dark" ? "bg-[#111827] text-white" : "bg-gray-50 text-gray-900"
+          }`}
+        >
           <div className="max-w-3xl mx-auto">
-            <h1 className="text-5xl sm:text-6xl font-extrabold mb-4 text-white">
+            {/* Main Heading */}
+            <h1 className="text-5xl sm:text-6xl font-extrabold mb-4">
               Earn Dogecoin Online
             </h1>
 
+            {/* Typing Effect */}
             <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
               <TypingText />
             </div>
 
-            <p className="text-lg sm:text-xl md:text-2xl mb-8 text-gray-300 max-w-xl mx-auto leading-relaxed">
+            {/* Subtitle */}
+            <p className={`text-lg sm:text-xl md:text-2xl mb-8 leading-relaxed ${
+              theme === "dark" ? "text-gray-300" : "text-gray-700"
+            }`}>
               Complete tasks, offers, and surveys to earn Dogecoin instantly from anywhere, on any device.
             </p>
 
+            {/* CTA Button */}
             <Link href="/signup" className="inline-block">
               <motion.span
                 whileHover={{ scale: 1.05 }}
@@ -147,6 +157,45 @@ export default function EarnDogecoinOnline() {
               <p className={`text-gray-600 ${theme === "dark" ? "dark:text-gray-400" : ""}`}>{step.description}</p>
             </motion.div>
           ))}
+        </section>
+
+        {/* ================= ACHIEVEMENT COUNTERS ================= */}
+        <section className="max-w-7xl mx-auto px-4 py-16 text-center">
+          <div className="grid gap-8 md:grid-cols-3 lg:grid-cols-4">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className={`bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 shadow hover:shadow-xl transition-shadow duration-300 flex flex-col items-center`}
+            >
+              <Trophy size={32} className="text-yellow-400 mb-2" />
+              <Counter end={50000} />
+              <p className="mt-1 text-gray-600 dark:text-gray-400">Users Worldwide</p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className={`bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 shadow hover:shadow-xl transition-shadow duration-300 flex flex-col items-center`}
+            >
+              <Trophy size={32} className="text-green-400 mb-2" />
+              <Counter end={120000} />
+              <p className="mt-1 text-gray-600 dark:text-gray-400">Tasks Completed</p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className={`bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 shadow hover:shadow-xl transition-shadow duration-300 flex flex-col items-center`}
+            >
+              <Trophy size={32} className="text-yellow-400 mb-2" />
+              <Counter end={85000} />
+              <p className="mt-1 text-gray-600 dark:text-gray-400">Crypto Paid Out</p>
+            </motion.div>
+          </div>
         </section>
 
         {/* ================= FEATURES ================= */}
