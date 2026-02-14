@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, TicketPercent, Copy, Sparkles } from "lucide-react";
+import { ArrowRight, Ticket, Copy, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Meta from "@/components/seo/SeoEngine";
@@ -13,28 +13,32 @@ const promoCodes = [
     id: 1,
     code: "SAVE50",
     title: "50% Bonus Cashback",
-    description: "Activate this code and receive a 50% bonus on your first cashback reward.",
+    description:
+      "Activate this code and receive a 50% bonus on your first cashback reward.",
     tag: "Exclusive",
   },
   {
     id: 2,
     code: "WELCOME20",
     title: "$20 Signup Bonus",
-    description: "New users get an instant $20 bonus after completing their first task.",
+    description:
+      "New users get an instant $20 bonus after completing their first task.",
     tag: "New Users",
   },
   {
     id: 3,
     code: "SUPER100",
     title: "Earn $100 Extra Rewards",
-    description: "Limited time campaign. Complete premium offers and unlock extra rewards.",
+    description:
+      "Limited time campaign. Complete premium offers and unlock extra rewards.",
     tag: "Limited",
   },
   {
     id: 4,
     code: "FREESHIP",
     title: "Free Shipping Cashback",
-    description: "Get shipping costs refunded as cashback on selected partner stores.",
+    description:
+      "Get shipping costs refunded as cashback on selected partner stores.",
     tag: "Hot Deal",
   },
 ];
@@ -57,14 +61,17 @@ export default function PromoCodesPage() {
               Promo Codes
             </h1>
 
-            <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 
-                bg-clip-text text-transparent 
-                bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
+            <div
+              className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 
+              bg-clip-text text-transparent 
+              bg-gradient-to-r from-yellow-400 via-green-400 to-green-500"
+            >
               <TypingText />
             </div>
 
             <p className="text-lg sm:text-xl md:text-2xl mb-8 text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed">
-              Unlock exclusive rewards, bonus cashback, and premium offers using our latest promo codes.
+              Unlock exclusive rewards, bonus cashback, and premium offers
+              using our latest promo codes.
             </p>
 
             <Link href="/signup" className="cta-observer inline-block">
@@ -90,19 +97,22 @@ export default function PromoCodesPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.15 }}
-              className="group relative bg-gray-50 dark:bg-[#1A1F2B] rounded-3xl p-6 shadow-md hover:shadow-2xl transition-all duration-300 border border-transparent hover:border-yellow-400/30"
+              className="group relative bg-gray-50 dark:bg-[#1A1F2B] rounded-3xl p-6 shadow-md hover:shadow-2xl transition-all duration-300 border border-transparent hover:border-yellow-400/30 flex flex-col"
             >
               <div className="flex justify-between items-center mb-4">
-                <TicketPercent className="text-yellow-400" size={28} />
-                <span className="text-xs font-semibold px-3 py-1 rounded-full 
+                <Ticket className="text-yellow-400" size={28} />
+                <span
+                  className="text-xs font-semibold px-3 py-1 rounded-full 
                     bg-yellow-100 text-yellow-700 
-                    dark:bg-yellow-400/20 dark:text-yellow-300">
+                    dark:bg-yellow-400/20 dark:text-yellow-300"
+                >
                   {promo.tag}
                 </span>
               </div>
 
               <h3 className="text-xl font-bold mb-2">{promo.title}</h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm leading-relaxed">
+
+              <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm leading-relaxed flex-grow">
                 {promo.description}
               </p>
 
@@ -110,7 +120,11 @@ export default function PromoCodesPage() {
                 <span className="font-mono text-lg font-bold tracking-widest text-green-500">
                   {promo.code}
                 </span>
-                <button className="flex items-center gap-1 text-sm font-semibold text-yellow-500 hover:text-yellow-600 transition">
+
+                <button
+                  type="button"
+                  className="flex items-center gap-1 text-sm font-semibold text-yellow-500 hover:text-yellow-600 transition"
+                >
                   <Copy size={16} />
                   Copy
                 </button>
@@ -121,9 +135,11 @@ export default function PromoCodesPage() {
 
         {/* ================= FINAL CTA ================= */}
         <section className="text-center py-28 bg-white dark:bg-[#111827] w-full transition-colors duration-300 rounded-t-3xl">
-          <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 
-              bg-clip-text text-transparent 
-              bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
+          <h2
+            className="text-4xl sm:text-5xl font-extrabold mb-8 
+            bg-clip-text text-transparent 
+            bg-gradient-to-r from-yellow-400 via-green-400 to-green-500"
+          >
             Don’t Miss Exclusive Rewards
           </h2>
 
