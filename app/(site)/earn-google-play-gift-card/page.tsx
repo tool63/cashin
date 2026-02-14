@@ -10,22 +10,22 @@ import TypingText from "@/components/typing/TypingText";
 /* ================= STEPS ================= */
 const steps = [
   {
-    icon: <User size={32} className="text-yellow-400" />,
+    icon: <User size={32} className="text-yellow-500 dark:text-yellow-400" />,
     title: "Sign Up for Free",
     description: "Create your Cashog account and instantly access Google Play gift card earning offers.",
   },
   {
-    icon: <CreditCard size={32} className="text-green-400" />,
+    icon: <CreditCard size={32} className="text-green-500 dark:text-green-400" />,
     title: "Complete Offers",
     description: "Play games, watch videos, install apps, or complete surveys to earn points fast.",
   },
   {
-    icon: <Gift size={32} className="text-yellow-400" />,
+    icon: <Gift size={32} className="text-yellow-500 dark:text-yellow-400" />,
     title: "Redeem Google Play Gift Cards",
     description: "Convert your points into Google Play gift cards securely and instantly.",
   },
   {
-    icon: <CheckCircle size={32} className="text-green-400" />,
+    icon: <CheckCircle size={32} className="text-green-500 dark:text-green-400" />,
     title: "Withdraw Easily",
     description: "Gift cards delivered immediately once redemption threshold is reached.",
   },
@@ -41,7 +41,6 @@ const features = [
   { title: "24/7 Support", description: "Our support team is always ready to help you." },
 ];
 
-/* ================= FAQ ================= */
 const faqs = [
   { q: "How do I redeem Google Play gift cards?", a: "Collect points from tasks and redeem them in your rewards section for instant Google Play gift cards." },
   { q: "Can I earn on mobile?", a: "Yes! Cashog is fully mobile-friendly and works on any device." },
@@ -50,21 +49,20 @@ const faqs = [
   { q: "How long does delivery take?", a: "Google Play gift cards are delivered instantly to your account after redemption." },
 ];
 
-/* ================= PAGE COMPONENT ================= */
 export default function EarnGooglePlayGiftCard() {
   return (
     <>
       <Meta
         title="Cashog - Earn Google Play Gift Cards"
-        description="Learn how to earn Google Play gift cards online by completing tasks, surveys, and offers with Cashog. Instant, secure, and high-paying rewards!"
+        description="Learn how to earn Google Play gift cards online by completing tasks, surveys, and offers with Cashog."
       />
 
-      <main className="transition-colors duration-300 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white min-h-screen">
+      <main className="min-h-screen bg-white dark:bg-[#070A14] text-gray-900 dark:text-white transition-colors duration-300">
 
         {/* ================= HERO ================= */}
-        <section className="py-24 px-4 text-center bg-[#111827] dark:bg-[#111827] rounded-b-3xl">
+        <section className="py-24 px-4 text-center bg-gray-50 dark:bg-[#0F172A] transition-colors duration-300 rounded-b-3xl">
           <div className="max-w-3xl mx-auto">
-            <h1 className="text-5xl sm:text-6xl font-extrabold mb-4 text-white">
+            <h1 className="text-5xl sm:text-6xl font-extrabold mb-4">
               Earn Google Play Gift Cards Online
             </h1>
 
@@ -72,11 +70,11 @@ export default function EarnGooglePlayGiftCard() {
               <TypingText />
             </div>
 
-            <p className="text-lg sm:text-xl md:text-2xl mb-8 text-gray-300 max-w-xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl md:text-2xl mb-8 text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed">
               Complete tasks, surveys, and offers to instantly redeem points for Google Play gift cards.
             </p>
 
-            <Link href="/signup" className="cta-observer inline-block">
+            <Link href="/signup">
               <motion.span
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
@@ -93,13 +91,13 @@ export default function EarnGooglePlayGiftCard() {
           {steps.map((step, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.2 }}
-              className="bg-gray-100 dark:bg-[#1A1F2B] rounded-2xl p-8 flex flex-col items-center shadow-md hover:shadow-lg transition-shadow duration-300"
+              transition={{ duration: 0.5, delay: i * 0.15 }}
+              className="bg-gray-100 dark:bg-[#1A1F2B] rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-300"
             >
-              <div className="mb-4">{step.icon}</div>
+              <div className="mb-4 flex justify-center">{step.icon}</div>
               <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
               <p className="text-gray-600 dark:text-gray-400">{step.description}</p>
             </motion.div>
@@ -111,15 +109,16 @@ export default function EarnGooglePlayGiftCard() {
           <h2 className="text-3xl md:text-4xl font-bold mb-12">
             Why Choose Cashog for Google Play Gift Cards
           </h2>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 justify-center">
+
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {features.map((feature, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.2 }}
-                className="bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 text-center shadow hover:shadow-xl transition-shadow duration-300 w-full max-w-sm mx-auto"
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+                className="bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 shadow hover:shadow-2xl transition-all duration-300"
               >
                 <div className="flex justify-center mb-4 text-yellow-500">
                   <ShieldCheck size={28} />
@@ -133,23 +132,30 @@ export default function EarnGooglePlayGiftCard() {
 
         {/* ================= FAQ ================= */}
         <section className="max-w-4xl mx-auto px-4 py-20 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-12">
+            Frequently Asked Questions
+          </h2>
+
           <div className="space-y-4">
             {faqs.map((faq, i) => (
-              <details key={i} className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-4 cursor-pointer group">
+              <details
+                key={i}
+                className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-5 cursor-pointer transition-colors duration-300"
+              >
                 <summary className="font-semibold text-lg">{faq.q}</summary>
-                <p className="mt-2 text-gray-600 dark:text-gray-400">{faq.a}</p>
+                <p className="mt-3 text-gray-600 dark:text-gray-400">{faq.a}</p>
               </details>
             ))}
           </div>
         </section>
 
         {/* ================= FINAL CTA ================= */}
-        <section className="text-center py-28 bg-[#111827] dark:bg-[#111827] w-full transition-colors duration-300 rounded-t-3xl">
+        <section className="text-center py-28 bg-gray-50 dark:bg-[#0F172A] transition-colors duration-300 rounded-t-3xl">
           <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
             Start Earning Google Play Gift Cards Today!
           </h2>
-          <Link href="/signup" className="cta-observer inline-block">
+
+          <Link href="/signup">
             <motion.span
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
@@ -158,7 +164,8 @@ export default function EarnGooglePlayGiftCard() {
               Redeem Gift Cards <ArrowRight size={20} />
             </motion.span>
           </Link>
-          <p className="mt-6 text-gray-300 text-lg max-w-md mx-auto transition-colors duration-300">
+
+          <p className="mt-6 text-gray-600 dark:text-gray-300 text-lg max-w-md mx-auto">
             Join Cashog and start earning Google Play gift cards instantly from any device, anywhere.
           </p>
         </section>
