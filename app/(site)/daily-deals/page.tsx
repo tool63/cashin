@@ -15,10 +15,7 @@ const pageDescription =
 /* ================= ANIMATION ================= */
 const containerVariants = {
   hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 },
-  },
+  show: { opacity: 1, transition: { staggerChildren: 0.15 } },
 };
 
 const itemVariants = {
@@ -56,7 +53,6 @@ export default function DailyDeals() {
               Today’s Daily Deals
             </motion.h1>
 
-            {/* Typing Text */}
             <motion.div
               variants={itemVariants}
               className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500"
@@ -79,7 +75,8 @@ export default function DailyDeals() {
             </motion.p>
 
             <motion.div variants={itemVariants} className="mt-8">
-              <Link href="/signup" className="inline-block">
+              {/* Hero CTA */}
+              <Link href="/signup" className="cta-observer inline-block">
                 <motion.span
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.97 }}
@@ -113,11 +110,10 @@ export default function DailyDeals() {
 
               <h3 className="text-xl font-semibold mb-2">{deal.title}</h3>
 
-              <p className="text-lg font-bold text-yellow-500 mb-4">
-                {deal.payout}
-              </p>
+              <p className="text-lg font-bold text-yellow-500 mb-4">{deal.payout}</p>
 
-              <Link href="/signup">
+              {/* Deal CTA using cta-observer */}
+              <Link href="/signup" className="cta-observer">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -136,7 +132,7 @@ export default function DailyDeals() {
             Don’t Miss Today’s Best Offers
           </h2>
 
-          <Link href="/signup">
+          <Link href="/signup" className="cta-observer">
             <motion.span
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
