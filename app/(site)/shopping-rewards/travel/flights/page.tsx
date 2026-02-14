@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Airplane, Sparkles, Star, Percent } from "lucide-react";
+import { ArrowRight, Airplay, Sparkles, Star, Percent } from "lucide-react"; // replaced Airplane with Airplay
 import Meta from "@/components/seo/SeoEngine";
 import TypingText from "@/components/typing/TypingText";
 
@@ -30,7 +30,7 @@ const flightOffers = [
     title: "Domestic Flight Cashback",
     reward: "Up to 8% Back",
     badge: "Top",
-    icon: <Airplane size={30} className="text-blue-500" />,
+    icon: <Airplay size={30} className="text-blue-500" />, // replaced icon
   },
   {
     id: 2,
@@ -77,7 +77,6 @@ export default function FlightsRewards() {
               Flight Booking Rewards
             </motion.h1>
 
-            {/* Typing Text */}
             <motion.div
               variants={itemVariants}
               className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-purple-400 to-teal-400"
@@ -124,23 +123,18 @@ export default function FlightsRewards() {
               transition={{ duration: 0.5, delay: i * 0.15 }}
               className="relative bg-gray-100 dark:bg-[#162125] rounded-3xl p-8 shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-3 group"
             >
-              {/* Badge */}
               <div className="absolute top-4 right-4 text-xs font-bold bg-blue-400 text-black px-3 py-1 rounded-full">
                 {offer.badge}
               </div>
 
-              {/* Icon */}
               <div className="mb-6 group-hover:scale-110 transition-transform duration-300">
                 {offer.icon}
               </div>
 
-              {/* Title */}
               <h3 className="text-xl font-semibold mb-3">{offer.title}</h3>
 
-              {/* Reward */}
               <p className="text-lg font-bold text-blue-500 mb-6">{offer.reward}</p>
 
-              {/* Card CTA using cta-observer */}
               <Link href="/signup" className="cta-observer">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
