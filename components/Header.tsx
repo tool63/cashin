@@ -11,7 +11,7 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [earnOpen, setEarnOpen] = useState(false);
   const [mobileEarnOpen, setMobileEarnOpen] = useState(false);
-  const [activeButton, setActiveButton] = useState<"none" | "signup" | "login">("signup"); // <-- default is signup
+  const [loginActive, setLoginActive] = useState(false); // Only for login button
 
   const headerRef = useRef<HTMLDivElement>(null);
 
@@ -39,12 +39,10 @@ export default function Header() {
                  border-gray-200 dark:border-white/10 transition-colors"
     >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        {/* LOGO */}
+        {/* LOGO: always gradient */}
         <Link
           href="/"
-          className={`text-2xl font-bold transition ${
-            activeButton === "signup" || activeButton === "login" ? ctaGradient : "text-indigo-600 dark:text-indigo-400"
-          } px-3 py-1 rounded-lg`}
+          className={`text-2xl font-bold transition ${ctaGradient} px-3 py-1 rounded-lg`}
         >
           Cashog
         </Link>
@@ -100,22 +98,19 @@ export default function Header() {
           {/* Login Button */}
           <Link href="/login">
             <button
-              onClick={() => setActiveButton("login")}
+              onClick={() => setLoginActive(true)}
               className={`text-sm font-medium px-4 py-2 rounded-lg transition ${
-                activeButton === "login" ? ctaGradient : "border"
+                loginActive ? ctaGradient : "border"
               }`}
             >
               Login
             </button>
           </Link>
 
-          {/* Sign Up Button */}
+          {/* Sign Up Button: always gradient */}
           <Link href="/signup">
             <button
-              onClick={() => setActiveButton("signup")}
-              className={`px-5 py-2 rounded-lg text-sm font-medium transition ${
-                activeButton === "signup" ? ctaGradient : "bg-indigo-600 text-white hover:bg-indigo-700"
-              }`}
+              className={`px-5 py-2 rounded-lg text-sm font-medium transition ${ctaGradient}`}
             >
               Sign up
             </button>
@@ -181,9 +176,9 @@ export default function Header() {
             <div className="pt-4 flex flex-col gap-3">
               <Link href="/login">
                 <button
-                  onClick={() => setActiveButton("login")}
+                  onClick={() => setLoginActive(true)}
                   className={`text-center py-2 rounded-lg w-full transition ${
-                    activeButton === "login" ? ctaGradient : "border"
+                    loginActive ? ctaGradient : "border"
                   }`}
                 >
                   Login
@@ -191,10 +186,7 @@ export default function Header() {
               </Link>
               <Link href="/signup">
                 <button
-                  onClick={() => setActiveButton("signup")}
-                  className={`text-center py-2 rounded-lg w-full transition ${
-                    activeButton === "signup" ? ctaGradient : "bg-indigo-600 text-white"
-                  }`}
+                  className={`text-center py-2 rounded-lg w-full transition ${ctaGradient}`}
                 >
                   Sign up
                 </button>
