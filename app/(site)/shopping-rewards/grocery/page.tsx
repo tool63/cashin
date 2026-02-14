@@ -1,169 +1,176 @@
 "use client";
 
-import { useEffect } from "react";
+import React from "react";
+import { motion } from "framer-motion";
+import Link from "next/link";
 import { ArrowRight, ShoppingBasket, Leaf, Sparkles, Percent } from "lucide-react";
-import { useCTA } from "@/components/global/GlobalCTA";
-import TypingText from "@/components/ui/TypingText";
+import Meta from "@/components/seo/SeoEngine";
+import TypingText from "@/components/typing/TypingText";
 
-export default function GroceryRewardsPage() {
-  const { openCTA } = useCTA();
+/* ================= SEO ================= */
+const pageTitle = "Cashog - Grocery Shopping Rewards";
+const pageDescription =
+  "Earn cashback and rewards on groceries. Shop smartly at supermarkets, organic stores, and daily essentials while earning premium cashback.";
 
-  // CTA Observer Logic
-  useEffect(() => {
-    const sections = document.querySelectorAll(".cta-observer");
+/* ================= ANIMATION ================= */
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.15 } },
+};
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            openCTA();
-          }
-        });
-      },
-      { threshold: 0.4 }
-    );
+const itemVariants = {
+  hidden: { opacity: 0, y: 40 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
 
-    sections.forEach((section) => observer.observe(section));
-    return () => sections.forEach((section) => observer.unobserve(section));
-  }, [openCTA]);
+/* ================= GROCERY OFFERS ================= */
+const groceryOffers = [
+  {
+    id: 1,
+    title: "Supermarket Cashback",
+    reward: "Up to 12% Cashback",
+    badge: "Top",
+    icon: <ShoppingBasket size={30} className="text-green-500" />,
+  },
+  {
+    id: 2,
+    title: "Organic & Health Stores",
+    reward: "Up to 15% Cashback",
+    badge: "Popular",
+    icon: <Leaf size={30} className="text-emerald-400" />,
+  },
+  {
+    id: 3,
+    title: "Weekly Essentials Bonus",
+    reward: "₹500 Extra",
+    badge: "Bonus",
+    icon: <Sparkles size={30} className="text-yellow-400" />,
+  },
+  {
+    id: 4,
+    title: "Bulk Purchase Deals",
+    reward: "Flat 10% Back",
+    badge: "Exclusive",
+    icon: <Percent size={30} className="text-teal-400" />,
+  },
+];
 
-  const offers = [
-    {
-      title: "Supermarket Cashback",
-      reward: "Up to 12% Cashback",
-      desc: "Earn premium grocery cashback at top supermarkets and hypermarkets.",
-      icon: <ShoppingBasket size={28} />,
-    },
-    {
-      title: "Organic & Health Stores",
-      reward: "Up to 15% Rewards",
-      desc: "Cashback on organic, vegan & wellness grocery purchases.",
-      icon: <Leaf size={28} />,
-    },
-    {
-      title: "Weekly Essentials Bonus",
-      reward: "Extra ₹500 Bonus",
-      desc: "Unlock weekly reward bonuses on everyday grocery shopping.",
-      icon: <Sparkles size={28} />,
-    },
-    {
-      title: "Bulk Purchase Deals",
-      reward: "Flat 10% Back",
-      desc: "Higher savings on bulk purchases & monthly stock-up orders.",
-      icon: <Percent size={28} />,
-    },
-  ];
-
+export default function GroceryRewards() {
   return (
-    <main className="relative overflow-hidden bg-white dark:bg-black text-gray-900 dark:text-white transition-colors duration-500">
+    <>
+      <Meta title={pageTitle} description={pageDescription} />
 
-      {/* ===== HERO SECTION ===== */}
-      <section className="relative py-24 px-6 text-center cta-observer">
-        <div className="absolute inset-0 bg-gradient-to-br from-green-100 via-white to-yellow-100 dark:from-green-950 dark:via-black dark:to-yellow-950 opacity-60 blur-3xl" />
+      <main className="bg-white dark:bg-[#070F12] text-gray-900 dark:text-white min-h-screen transition-colors duration-300">
 
-        <div className="relative z-10 max-w-5xl mx-auto animate-fadeInUp">
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-            Premium Grocery
-            <span className="block bg-gradient-to-r from-green-500 via-yellow-400 to-green-600 bg-clip-text text-transparent">
-              Shopping Rewards
-            </span>
-          </h1>
-
-          <div className="mt-6 text-lg md:text-xl text-gray-600 dark:text-gray-300">
-            <TypingText
-              texts={[
-                "Earn cashback on every grocery purchase.",
-                "Unlock premium supermarket rewards.",
-                "Save more on daily essentials.",
-              ]}
-            />
-          </div>
-
-          <button
-            onClick={openCTA}
-            className="mt-10 inline-flex items-center gap-2 bg-gradient-to-r from-green-500 via-yellow-400 to-green-600 text-black font-semibold px-10 py-4 rounded-2xl shadow-xl hover:scale-105 transition-all duration-300"
-          >
-            Start Saving Now <ArrowRight size={20} />
-          </button>
-        </div>
-      </section>
-
-      {/* ===== OFFERS GRID ===== */}
-      <section className="py-20 px-6 max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {offers.map((offer, index) => (
-            <div
-              key={index}
-              className="group relative bg-white/70 dark:bg-white/5 backdrop-blur-xl border border-gray-200 dark:border-white/10 p-8 rounded-3xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500"
+        {/* ================= HERO ================= */}
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+          className="py-24 px-4 text-center"
+        >
+          <div className="max-w-4xl mx-auto">
+            <motion.h1
+              variants={itemVariants}
+              className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4"
             >
-              <div className="text-green-500 mb-4">{offer.icon}</div>
+              Grocery Shopping Rewards
+            </motion.h1>
 
-              <h3 className="text-xl font-semibold mb-2">
-                {offer.title}
-              </h3>
+            {/* Typing Text */}
+            <motion.div
+              variants={itemVariants}
+              className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-green-500 via-yellow-400 to-green-600"
+            >
+              <TypingText
+                words={[
+                  "Earn Cashback on Every Grocery Visit",
+                  "Weekly Bonus & Supermarket Deals",
+                  "Organic Store Rewards",
+                  "Bulk Purchase Cashback",
+                ]}
+              />
+            </motion.div>
 
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                {offer.desc}
-              </p>
+            <motion.p
+              variants={itemVariants}
+              className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
+            >
+              Shop smartly at supermarkets, organic stores, or stock up your weekly essentials and earn instant rewards and cashback.
+            </motion.p>
 
-              <div className="font-bold text-lg bg-gradient-to-r from-green-500 to-yellow-400 bg-clip-text text-transparent">
-                {offer.reward}
+            <motion.div variants={itemVariants} className="mt-10">
+              <Link href="/signup" className="cta-observer inline-block">
+                <motion.span
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="inline-flex items-center gap-3 bg-gradient-to-r from-green-500 via-yellow-400 to-green-600 text-black px-12 py-5 rounded-2xl font-bold shadow-xl text-lg"
+                >
+                  Start Earning Now <ArrowRight size={20} />
+                </motion.span>
+              </Link>
+            </motion.div>
+          </div>
+        </motion.section>
+
+        {/* ================= OFFERS GRID ================= */}
+        <section className="max-w-7xl mx-auto px-4 py-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          {groceryOffers.map((offer, i) => (
+            <motion.div
+              key={offer.id}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.15 }}
+              className="relative bg-gray-100 dark:bg-[#162125] rounded-3xl p-8 shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-3 group"
+            >
+              {/* Badge */}
+              <div className="absolute top-4 right-4 text-xs font-bold bg-green-400 text-black px-3 py-1 rounded-full">
+                {offer.badge}
               </div>
 
-              <button
-                onClick={openCTA}
-                className="mt-6 w-full bg-gradient-to-r from-green-500 via-yellow-400 to-green-600 text-black py-3 rounded-xl font-medium shadow-lg hover:scale-105 transition-all duration-300"
-              >
-                Activate Offer
-              </button>
-            </div>
+              {/* Icon */}
+              <div className="mb-6 group-hover:scale-110 transition-transform duration-300">
+                {offer.icon}
+              </div>
+
+              {/* Title */}
+              <h3 className="text-xl font-semibold mb-3">{offer.title}</h3>
+
+              {/* Reward */}
+              <p className="text-lg font-bold text-green-500 mb-6">{offer.reward}</p>
+
+              {/* Card CTA using cta-observer */}
+              <Link href="/signup" className="cta-observer">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full bg-gradient-to-r from-green-500 via-yellow-400 to-green-600 text-black py-3 rounded-xl font-semibold shadow-lg"
+                >
+                  Claim Cashback
+                </motion.button>
+              </Link>
+            </motion.div>
           ))}
-        </div>
-      </section>
+        </section>
 
-      {/* ===== FEATURE SECTION ===== */}
-      <section className="py-24 px-6 bg-gray-50 dark:bg-white/5 transition-colors duration-500">
-        <div className="max-w-5xl mx-auto text-center cta-observer">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            Smart Grocery Savings
+        {/* ================= FINAL CTA ================= */}
+        <section className="text-center py-28">
+          <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-green-500 via-yellow-400 to-green-600">
+            Turn Grocery Shopping Into Real Rewards
           </h2>
 
-          <p className="text-lg text-gray-600 dark:text-gray-400 mb-10">
-            Earn consistent cashback on every supermarket visit.
-            Stack bonuses, unlock seasonal multipliers, and
-            maximize savings with our advanced grocery reward system.
-          </p>
-
-          <button
-            onClick={openCTA}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 via-yellow-400 to-green-600 text-black font-semibold px-10 py-4 rounded-2xl shadow-xl hover:scale-105 transition-all duration-300"
-          >
-            Unlock Grocery Rewards <ArrowRight size={20} />
-          </button>
-        </div>
-      </section>
-
-      {/* ===== FINAL CTA SECTION ===== */}
-      <section className="py-24 px-6 text-center cta-observer">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            Turn Everyday Grocery Into Real Cashback
-          </h2>
-
-          <p className="text-gray-600 dark:text-gray-400 mb-10">
-            Don’t miss out on premium supermarket offers.
-            Activate rewards and start earning instantly.
-          </p>
-
-          <button
-            onClick={openCTA}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 via-yellow-400 to-green-600 text-black font-semibold px-10 py-4 rounded-2xl shadow-xl hover:scale-105 transition-all duration-300"
-          >
-            Claim Grocery Cashback <ArrowRight size={20} />
-          </button>
-        </div>
-      </section>
-
-    </main>
+          <Link href="/signup" className="cta-observer">
+            <motion.span
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-green-500 via-yellow-400 to-green-600 text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-xl"
+            >
+              Join & Start Earning <ArrowRight size={20} />
+            </motion.span>
+          </Link>
+        </section>
+      </main>
+    </>
   );
 }
