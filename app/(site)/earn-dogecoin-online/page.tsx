@@ -1,9 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ArrowRight, User, CreditCard, Gift, CheckCircle, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useTheme } from "next-themes";
 import Meta from "@/components/seo/SeoEngine";
 import TypingText from "@/components/typing/TypingText";
 
@@ -50,16 +51,56 @@ const faqs = [
   { q: "How long does delivery take?", a: "Dogecoin payouts are delivered instantly after redemption." },
 ];
 
+/* ================= COUNTER COMPONENT ================= */
+function Counter({ end }: { end: number }) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let start = 0;
+    const duration = 2000;
+    const increment = end / (duration / 20);
+
+    const counter = setInterval(() => {
+      start += increment;
+      if (start >= end) {
+        setCount(end);
+        clearInterval(counter);
+      } else {
+        setCount(Math.floor(start));
+      }
+    }, 20);
+
+    return () => clearInterval(counter);
+  }, [end]);
+
+  return <span>{count.toLocaleString()}</span>;
+}
+
 /* ================= PAGE COMPONENT ================= */
 export default function EarnDogecoinOnline() {
+  const { theme } = useTheme();
+
+  // Opening style logic: fade-in
+  const [isLoaded, setIsLoaded] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoaded(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <>
+      {/* ================= SEO ================= */}
       <Meta
         title="Cashog - Earn Dogecoin Online"
         description="Learn how to earn Dogecoin online by completing tasks, surveys, and offers with Cashog. Instant, secure, and high-paying crypto rewards!"
       />
 
-      <main className="transition-colors duration-300 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white min-h-screen">
+      <main
+        className={`transition-colors duration-500 min-h-screen ${
+          theme === "dark" ? "bg-[#070A14] text-white" : "bg-white text-gray-900"
+        }`}
+        style={{ opacity: isLoaded ? 1 : 0, transition: "opacity 0.8s ease-in-out" }}
+      >
 
         {/* ================= HERO ================= */}
         <section className="py-24 px-4 text-center bg-[#111827] dark:bg-[#111827] rounded-b-3xl">
@@ -69,14 +110,14 @@ export default function EarnDogecoinOnline() {
             </h1>
 
             <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
-              <TypingText />
+              <TypingText text="Complete Tasks & Redeem Crypto Instantly!" />
             </div>
 
             <p className="text-lg sm:text-xl md:text-2xl mb-8 text-gray-300 max-w-xl mx-auto leading-relaxed">
               Complete tasks, offers, and surveys to earn Dogecoin instantly from anywhere, on any device.
             </p>
 
-            <Link href="/signup" className="cta-observer inline-block">
+            <Link href="/signup" className="inline-block">
               <motion.span
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
@@ -97,11 +138,13 @@ export default function EarnDogecoinOnline() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.2 }}
-              className="bg-gray-100 dark:bg-[#1A1F2B] rounded-2xl p-8 flex flex-col items-center shadow-md hover:shadow-lg transition-shadow duration-300"
+              className={`rounded-2xl p-8 flex flex-col items-center shadow-md hover:shadow-lg transition-shadow duration-300 ${
+                theme === "dark" ? "bg-[#1A1F2B]" : "bg-gray-100"
+              }`}
             >
               <div className="mb-4">{step.icon}</div>
               <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-              <p className="text-gray-600 dark:text-gray-400">{step.description}</p>
+              <p className={`text-gray-600 ${theme === "dark" ? "dark:text-gray-400" : ""}`}>{step.description}</p>
             </motion.div>
           ))}
         </section>
@@ -119,13 +162,15 @@ export default function EarnDogecoinOnline() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.2 }}
-                className="bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 text-center shadow hover:shadow-xl transition-shadow duration-300 w-full max-w-sm mx-auto"
+                className={`rounded-2xl p-6 text-center shadow hover:shadow-xl transition-shadow duration-300 w-full max-w-sm mx-auto ${
+                  theme === "dark" ? "bg-[#111827]" : "bg-gray-50"
+                }`}
               >
                 <div className="flex justify-center mb-4 text-yellow-500">
                   <ShieldCheck size={28} />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
+                <p className={`text-gray-600 ${theme === "dark" ? "dark:text-gray-400" : ""}`}>{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -136,20 +181,27 @@ export default function EarnDogecoinOnline() {
           <h2 className="text-3xl md:text-4xl font-bold mb-12">Frequently Asked Questions</h2>
           <div className="space-y-4">
             {faqs.map((faq, i) => (
-              <details key={i} className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-4 cursor-pointer group">
+              <details
+                key={i}
+                className={`rounded-xl p-4 cursor-pointer group ${
+                  theme === "dark" ? "bg-[#1A1F2B]" : "bg-gray-100"
+                }`}
+              >
                 <summary className="font-semibold text-lg">{faq.q}</summary>
-                <p className="mt-2 text-gray-600 dark:text-gray-400">{faq.a}</p>
+                <p className={`mt-2 text-gray-600 ${theme === "dark" ? "dark:text-gray-400" : ""}`}>{faq.a}</p>
               </details>
             ))}
           </div>
         </section>
 
         {/* ================= FINAL CTA ================= */}
-        <section className="text-center py-28 bg-[#111827] dark:bg-[#111827] w-full transition-colors duration-300 rounded-t-3xl">
+        <section className={`text-center py-28 w-full transition-colors duration-300 rounded-t-3xl ${
+          theme === "dark" ? "bg-[#111827]" : "bg-[#f9fafb]"
+        }`}>
           <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
             Start Earning Dogecoin Today!
           </h2>
-          <Link href="/signup" className="cta-observer inline-block">
+          <Link href="/signup" className="inline-block">
             <motion.span
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
@@ -158,7 +210,7 @@ export default function EarnDogecoinOnline() {
               Redeem Dogecoin <ArrowRight size={20} />
             </motion.span>
           </Link>
-          <p className="mt-6 text-gray-300 text-lg max-w-md mx-auto transition-colors duration-300">
+          <p className="mt-6 text-lg max-w-md mx-auto text-gray-300 transition-colors duration-300">
             Join Cashog and start earning Dogecoin instantly from any device, anywhere.
           </p>
         </section>
