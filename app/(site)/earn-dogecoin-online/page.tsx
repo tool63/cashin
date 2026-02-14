@@ -239,8 +239,8 @@ export default function EarnDogecoinOnline() {
           <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
             Start Earning Dogecoin Today!
           </h2>
-          {/* Final CTA: Normal button, no global observer */}
-          <Link href="/signup" className="inline-block">
+          {/* FINAL CTA: Also connected to global floating CTA */}
+          <Link href="/signup" className="cta-observer inline-block">
             <motion.span
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
