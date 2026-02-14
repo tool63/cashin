@@ -5,6 +5,7 @@ import { ArrowRight, Gift, DollarSign, Star } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Meta from "@/components/seo/SeoEngine";
+import TypingText from "@/components/typing/TypingText";
 
 /* ================= OFFERS DATA ================= */
 const cashbackOffers = [
@@ -50,20 +51,26 @@ export default function CashbackOffersPage() {
       <main className="transition-colors duration-300 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white min-h-screen">
 
         {/* ================= HERO ================= */}
-        <section className="py-24 px-4 text-center rounded-b-3xl transition-colors duration-300 
-            bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 dark:from-yellow-500 dark:via-green-500 dark:to-green-600">
+        <section className="py-24 px-4 text-center bg-white dark:bg-[#111827] rounded-b-3xl transition-colors duration-300">
           <div className="max-w-3xl mx-auto">
-            <h1 className="text-5xl sm:text-6xl font-extrabold mb-4 text-white">
+            <h1 className="text-5xl sm:text-6xl font-extrabold mb-4 text-gray-900 dark:text-white">
               Cashback Offers
             </h1>
-            <p className="text-lg sm:text-xl md:text-2xl mb-8 text-white/90 max-w-xl mx-auto leading-relaxed">
+
+            {/* ================= TYPING EFFECT ================= */}
+            <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
+              <TypingText />
+            </div>
+
+            <p className="text-lg sm:text-xl md:text-2xl mb-8 text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed">
               Unlock premium cashback offers on shopping, travel, groceries, and more. Earn instantly and save with Cashog.
             </p>
-            <Link href="/signup" className="inline-block">
+
+            <Link href="/signup" className="cta-observer inline-block">
               <motion.span
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 bg-white dark:bg-black dark:text-white text-gray-900 px-12 py-5 rounded-3xl font-bold shadow-xl text-lg"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black dark:text-black px-12 py-5 rounded-3xl font-bold shadow-xl text-lg"
               >
                 Start Earning <ArrowRight size={20} />
               </motion.span>
@@ -90,12 +97,12 @@ export default function CashbackOffersPage() {
           ))}
         </section>
 
-        {/* ================= CTA ================= */}
-        <section className="text-center py-28 transition-colors duration-300 bg-white dark:bg-[#111827] w-full rounded-t-3xl">
-          <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
+        {/* ================= FINAL CTA ================= */}
+        <section className="text-center py-28 bg-white dark:bg-[#111827] w-full transition-colors duration-300 rounded-t-3xl">
+          <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 text-gray-900 dark:text-white">
             Don’t Miss Out on Premium Cashback!
           </h2>
-          <Link href="/signup" className="inline-block">
+          <Link href="/signup" className="cta-observer inline-block">
             <motion.span
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
