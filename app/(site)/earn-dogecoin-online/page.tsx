@@ -54,7 +54,6 @@ const faqs = [
 /* ================= COUNTER COMPONENT ================= */
 function Counter({ end }: { end: number }) {
   const [count, setCount] = useState(0);
-
   useEffect(() => {
     let start = 0;
     const duration = 2000;
@@ -76,12 +75,49 @@ function Counter({ end }: { end: number }) {
   return <span>{count.toLocaleString()}</span>;
 }
 
+/* ================= FLOATING CTA ================= */
+function FloatingCTAObserver() {
+  const { theme } = useTheme();
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const triggerHeight = 400;
+      setShow(window.scrollY > triggerHeight);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <>
+      {show && (
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 50 }}
+          className="fixed bottom-8 right-8 z-50"
+        >
+          <Link href="/signup">
+            <motion.span
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              className={`inline-flex items-center gap-2 px-6 py-3 rounded-3xl font-bold shadow-xl text-lg bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black`}
+            >
+              Start Earning <ArrowRight size={18} />
+            </motion.span>
+          </Link>
+        </motion.div>
+      )}
+    </>
+  );
+}
+
 /* ================= PAGE COMPONENT ================= */
 export default function EarnDogecoinOnline() {
   const { theme } = useTheme();
-
-  // Opening style logic: fade-in
   const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100);
     return () => clearTimeout(timer);
@@ -89,7 +125,6 @@ export default function EarnDogecoinOnline() {
 
   return (
     <>
-      {/* ================= SEO ================= */}
       <Meta
         title="Cashog - Earn Dogecoin Online"
         description="Learn how to earn Dogecoin online by completing tasks, surveys, and offers with Cashog. Instant, secure, and high-paying crypto rewards!"
@@ -101,7 +136,6 @@ export default function EarnDogecoinOnline() {
         }`}
         style={{ opacity: isLoaded ? 1 : 0, transition: "opacity 0.8s ease-in-out" }}
       >
-
         {/* ================= HERO ================= */}
         <section
           className={`relative py-24 px-4 text-center rounded-b-3xl transition-colors duration-500 ${
@@ -109,24 +143,20 @@ export default function EarnDogecoinOnline() {
           }`}
         >
           <div className="max-w-3xl mx-auto">
-            {/* Main Heading */}
             <h1 className="text-5xl sm:text-6xl font-extrabold mb-4">
               Earn Dogecoin Online
             </h1>
 
-            {/* Typing Effect */}
             <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
               <TypingText />
             </div>
 
-            {/* Subtitle */}
             <p className={`text-lg sm:text-xl md:text-2xl mb-8 leading-relaxed ${
               theme === "dark" ? "text-gray-300" : "text-gray-700"
             }`}>
               Complete tasks, offers, and surveys to earn Dogecoin instantly from anywhere, on any device.
             </p>
 
-            {/* CTA Button */}
             <Link href="/signup" className="inline-block">
               <motion.span
                 whileHover={{ scale: 1.05 }}
@@ -160,49 +190,45 @@ export default function EarnDogecoinOnline() {
         </section>
 
         {/* ================= ACHIEVEMENT COUNTERS ================= */}
-        <section className="max-w-7xl mx-auto px-4 py-16 text-center">
-          <div className="grid gap-8 md:grid-cols-3 lg:grid-cols-4">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className={`bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 shadow hover:shadow-xl transition-shadow duration-300 flex flex-col items-center`}
-            >
-              <Trophy size={32} className="text-yellow-400 mb-2" />
-              <Counter end={50000} />
-              <p className="mt-1 text-gray-600 dark:text-gray-400">Users Worldwide</p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className={`bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 shadow hover:shadow-xl transition-shadow duration-300 flex flex-col items-center`}
-            >
-              <Trophy size={32} className="text-green-400 mb-2" />
-              <Counter end={120000} />
-              <p className="mt-1 text-gray-600 dark:text-gray-400">Tasks Completed</p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className={`bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 shadow hover:shadow-xl transition-shadow duration-300 flex flex-col items-center`}
-            >
-              <Trophy size={32} className="text-yellow-400 mb-2" />
-              <Counter end={85000} />
-              <p className="mt-1 text-gray-600 dark:text-gray-400">Crypto Paid Out</p>
-            </motion.div>
-          </div>
+        <section className="max-w-7xl mx-auto px-4 py-16 text-center grid gap-8 md:grid-cols-3">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className={`bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 shadow hover:shadow-xl flex flex-col items-center`}
+          >
+            <Trophy size={32} className="text-yellow-400 mb-2" />
+            <Counter end={50000} />
+            <p className="mt-1 text-gray-600 dark:text-gray-400">Users Worldwide</p>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className={`bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 shadow hover:shadow-xl flex flex-col items-center`}
+          >
+            <Trophy size={32} className="text-green-400 mb-2" />
+            <Counter end={120000} />
+            <p className="mt-1 text-gray-600 dark:text-gray-400">Tasks Completed</p>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className={`bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 shadow hover:shadow-xl flex flex-col items-center`}
+          >
+            <Trophy size={32} className="text-yellow-400 mb-2" />
+            <Counter end={85000} />
+            <p className="mt-1 text-gray-600 dark:text-gray-400">Crypto Paid Out</p>
+          </motion.div>
         </section>
 
         {/* ================= FEATURES ================= */}
         <section className="max-w-7xl mx-auto px-4 py-20 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">
-            Why Choose Cashog for Dogecoin
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-12">Why Choose Cashog for Dogecoin</h2>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 justify-center">
             {features.map((feature, i) => (
               <motion.div
@@ -264,6 +290,8 @@ export default function EarnDogecoinOnline() {
           </p>
         </section>
 
+        {/* ================= FLOATING CTA ================= */}
+        <FloatingCTAObserver />
       </main>
     </>
   );
