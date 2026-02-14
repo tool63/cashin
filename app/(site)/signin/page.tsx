@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link"; // ✅ Import added
 import Meta from "@/components/seo/SeoEngine";
 import TypingText from "@/components/typing/TypingText";
 import { ArrowRight, User, Lock } from "lucide-react";
