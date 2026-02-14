@@ -75,44 +75,6 @@ function Counter({ end }: { end: number }) {
   return <span>{count.toLocaleString()}</span>;
 }
 
-/* ================= FLOATING CTA ================= */
-function FloatingCTAObserver() {
-  const { theme } = useTheme();
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const triggerHeight = 400;
-      setShow(window.scrollY > triggerHeight);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  return (
-    <>
-      {show && (
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 50 }}
-          className="fixed bottom-8 right-8 z-50"
-        >
-          <Link href="/signup">
-            <motion.span
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.97 }}
-              className={`inline-flex items-center gap-2 px-6 py-3 rounded-3xl font-bold shadow-xl text-lg bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black`}
-            >
-              Start Earning <ArrowRight size={18} />
-            </motion.span>
-          </Link>
-        </motion.div>
-      )}
-    </>
-  );
-}
-
 /* ================= PAGE COMPONENT ================= */
 export default function EarnDogecoinOnline() {
   const { theme } = useTheme();
@@ -157,7 +119,8 @@ export default function EarnDogecoinOnline() {
               Complete tasks, offers, and surveys to earn Dogecoin instantly from anywhere, on any device.
             </p>
 
-            <Link href="/signup" className="inline-block">
+            {/* ================= HERO CTA BUTTON ================= */}
+            <Link href="/signup" className="cta-observer inline-block">
               <motion.span
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
@@ -289,9 +252,6 @@ export default function EarnDogecoinOnline() {
             Join Cashog and start earning Dogecoin instantly from any device, anywhere.
           </p>
         </section>
-
-        {/* ================= FLOATING CTA ================= */}
-        <FloatingCTAObserver />
       </main>
     </>
   );
