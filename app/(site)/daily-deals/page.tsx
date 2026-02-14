@@ -3,14 +3,14 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Flame } from "lucide-react";
+import { ArrowRight, Flame, Star, Gift } from "lucide-react";
 import Meta from "@/components/seo/SeoEngine";
 import TypingText from "@/components/typing/TypingText";
 
 /* ================= SEO ================= */
-const pageTitle = "Cashog - Daily Deals";
+const pageTitle = "Cashog - Cashback Offers";
 const pageDescription =
-  "Explore high-paying daily deals and limited-time offers. Earn more points daily with exclusive Cashog rewards.";
+  "Discover high-paying cashback offers and maximize your earnings daily. Explore exclusive rewards with Cashog.";
 
 /* ================= ANIMATION ================= */
 const containerVariants = {
@@ -23,12 +23,12 @@ const itemVariants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
-/* ================= DEAL DATA ================= */
-const deals = [
-  { id: 1, title: "Install & Play Game", payout: "2,500 Points", badge: "Hot" },
-  { id: 2, title: "Complete Premium Survey", payout: "1,800 Points", badge: "Trending" },
-  { id: 3, title: "Try Free Trial Offer", payout: "3,200 Points", badge: "High Pay" },
-  { id: 4, title: "Watch Video Series", payout: "900 Points", badge: "New" },
+/* ================= CASHBACK OFFERS ================= */
+const cashbackOffers = [
+  { id: 1, title: "High Cashback Shopping", payout: "5% Cashback", badge: "Top", icon: <Star size={28} className="text-yellow-400" /> },
+  { id: 2, title: "New Daily Offers", payout: "Up to 3% Cashback", badge: "New", icon: <Gift size={28} className="text-green-400" /> },
+  { id: 3, title: "Limited-Time Cashback", payout: "Up to 10% Cashback", badge: "Hot", icon: <Flame size={28} className="text-red-400" /> },
+  { id: 4, title: "Exclusive Cashback Deals", payout: "Up to 7% Cashback", badge: "Exclusive", icon: <Gift size={28} className="text-purple-400" /> },
 ];
 
 export default function DailyDeals() {
@@ -50,19 +50,20 @@ export default function DailyDeals() {
               variants={itemVariants}
               className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4"
             >
-              Today’s Daily Deals
+              Today’s Cashback Offers
             </motion.h1>
 
+            {/* Typing Text */}
             <motion.div
               variants={itemVariants}
               className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500"
             >
               <TypingText
                 words={[
-                  "Limited-Time Rewards",
-                  "Exclusive High Payouts",
-                  "New Deals Every Day",
-                  "Boost Your Earnings",
+                  "High Cashback Rewards",
+                  "Limited-Time Offers",
+                  "Exclusive Cashback Deals",
+                  "New Daily Cashback",
                 ]}
               />
             </motion.div>
@@ -71,7 +72,7 @@ export default function DailyDeals() {
               variants={itemVariants}
               className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-xl mx-auto"
             >
-              Discover exclusive offers updated every day. Complete them fast and maximize your earnings instantly.
+              Explore the best cashback offers updated daily. Shop, play, or complete tasks and earn instantly.
             </motion.p>
 
             <motion.div variants={itemVariants} className="mt-8">
@@ -89,11 +90,11 @@ export default function DailyDeals() {
           </div>
         </motion.section>
 
-        {/* ================= DEAL GRID ================= */}
+        {/* ================= CASHBACK OFFERS GRID ================= */}
         <section className="max-w-7xl mx-auto px-4 py-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {deals.map((deal, i) => (
+          {cashbackOffers.map((offer, i) => (
             <motion.div
-              key={deal.id}
+              key={offer.id}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -101,25 +102,23 @@ export default function DailyDeals() {
               className="relative bg-gray-100 dark:bg-[#1A1F2B] rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
             >
               <div className="absolute top-4 right-4 text-xs font-bold bg-yellow-400 text-black px-3 py-1 rounded-full">
-                {deal.badge}
+                {offer.badge}
               </div>
 
-              <div className="mb-4 text-green-500">
-                <Flame size={28} />
-              </div>
+              <div className="mb-4">{offer.icon}</div>
 
-              <h3 className="text-xl font-semibold mb-2">{deal.title}</h3>
+              <h3 className="text-xl font-semibold mb-2">{offer.title}</h3>
 
-              <p className="text-lg font-bold text-yellow-500 mb-4">{deal.payout}</p>
+              <p className="text-lg font-bold text-yellow-500 mb-4">{offer.payout}</p>
 
-              {/* Deal CTA using cta-observer */}
+              {/* Card CTA using cta-observer */}
               <Link href="/signup" className="cta-observer">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="w-full bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black py-3 rounded-xl font-semibold shadow-lg"
                 >
-                  Claim Deal
+                  Claim Cashback
                 </motion.button>
               </Link>
             </motion.div>
@@ -129,7 +128,7 @@ export default function DailyDeals() {
         {/* ================= FINAL CTA ================= */}
         <section className="text-center py-24">
           <h2 className="text-4xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
-            Don’t Miss Today’s Best Offers
+            Don’t Miss Today’s Cashback Offers
           </h2>
 
           <Link href="/signup" className="cta-observer">
