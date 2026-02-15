@@ -1,16 +1,15 @@
 "use client";
 
 import React from "react";
-import { FcGoogle } from "react-icons/fc";
-import { FaFacebook } from "react-icons/fa";
+import { ShieldCheck, Zap, Globe, DollarSign } from "lucide-react";
 
 export default function AuthPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-600 flex items-center justify-center px-4">
-      
+
       <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl p-8 space-y-6">
 
-        {/* Logo + Branding */}
+        {/* Logo Section */}
         <div className="text-center space-y-2">
           <h1 className="text-3xl font-extrabold text-gray-900 tracking-wide">
             CASHOG
@@ -32,13 +31,11 @@ export default function AuthPage() {
 
         {/* Social Buttons */}
         <div className="space-y-3">
-          <button className="w-full flex items-center justify-center gap-3 bg-gray-100 hover:bg-gray-200 transition rounded-xl py-3 font-semibold text-gray-700">
-            <FcGoogle size={20} />
+          <button className="w-full bg-gray-100 hover:bg-gray-200 transition rounded-xl py-3 font-semibold text-gray-700">
             Continue with Google
           </button>
 
-          <button className="w-full flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-700 transition text-white rounded-xl py-3 font-semibold">
-            <FaFacebook size={18} />
+          <button className="w-full bg-blue-600 hover:bg-blue-700 transition text-white rounded-xl py-3 font-semibold">
             Continue with Facebook
           </button>
         </div>
@@ -84,11 +81,28 @@ export default function AuthPage() {
         </form>
 
         {/* Trust Badges */}
-        <div className="grid grid-cols-2 gap-2 text-xs text-gray-500 pt-2">
-          <div>🔒 Secure & Encrypted</div>
-          <div>⚡ Instant Withdrawals</div>
-          <div>🌍 Available Worldwide</div>
-          <div>💰 High-Paying Offers</div>
+        <div className="grid grid-cols-2 gap-3 text-xs text-gray-600 pt-2">
+
+          <div className="flex items-center gap-2">
+            <ShieldCheck size={16} />
+            Secure & Encrypted
+          </div>
+
+          <div className="flex items-center gap-2">
+            <Zap size={16} />
+            Instant Withdrawals
+          </div>
+
+          <div className="flex items-center gap-2">
+            <Globe size={16} />
+            Available Worldwide
+          </div>
+
+          <div className="flex items-center gap-2">
+            <DollarSign size={16} />
+            High-Paying Offers
+          </div>
+
         </div>
 
         {/* Social Proof */}
