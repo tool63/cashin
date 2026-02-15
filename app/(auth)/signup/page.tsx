@@ -1,129 +1,83 @@
 "use client";
 
-import React from "react";
-import { ShieldCheck, Zap, Globe, DollarSign } from "lucide-react";
+import React, { useState } from "react";
+import Link from "next/link";
+import { ArrowRight, User, Mail, Lock } from "lucide-react";
+import AuthLayout from "../layout";
 
-export default function AuthPage() {
+export default function SignupPage() {
+  const [form, setForm] = useState({ name: "", email: "", password: "" });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Signup Data:", form);
+    // 🔥 Add signup API call here
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-600 flex items-center justify-center px-4">
+    <AuthLayout>
+      <h1 className="text-3xl font-bold mb-2 text-center">Join Cashog</h1>
+      <p className="text-center text-gray-600 dark:text-gray-400 mb-6">
+        Create your free account and start earning rewards instantly
+      </p>
 
-      <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl p-8 space-y-6">
-
-        {/* Logo Section */}
-        <div className="text-center space-y-2">
-          <h1 className="text-3xl font-extrabold text-gray-900 tracking-wide">
-            CASHOG
-          </h1>
-          <p className="text-sm text-gray-500 font-medium">
-            Earn. Complete. Get Paid.
-          </p>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="relative">
+          <User className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+          <input
+            type="text"
+            name="name"
+            placeholder="Full Name"
+            required
+            value={form.name}
+            onChange={handleChange}
+            className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0B0E1A] focus:ring-2 focus:ring-green-400 outline-none"
+          />
         </div>
 
-        {/* Headline */}
-        <div className="text-center space-y-1">
-          <h2 className="text-xl font-bold text-gray-800">
-            Start Earning Real Cash Today
-          </h2>
-          <p className="text-sm text-gray-500">
-            Join thousands earning daily rewards.
-          </p>
+        <div className="relative">
+          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            required
+            value={form.email}
+            onChange={handleChange}
+            className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0B0E1A] focus:ring-2 focus:ring-green-400 outline-none"
+          />
         </div>
 
-        {/* Social Buttons */}
-        <div className="space-y-3">
-          <button className="w-full bg-gray-100 hover:bg-gray-200 transition rounded-xl py-3 font-semibold text-gray-700">
-            Continue with Google
-          </button>
-
-          <button className="w-full bg-blue-600 hover:bg-blue-700 transition text-white rounded-xl py-3 font-semibold">
-            Continue with Facebook
-          </button>
+        <div className="relative">
+          <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            required
+            value={form.password}
+            onChange={handleChange}
+            className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0B0E1A] focus:ring-2 focus:ring-green-400 outline-none"
+          />
         </div>
 
-        {/* Divider */}
-        <div className="flex items-center gap-3">
-          <div className="flex-1 h-px bg-gray-200"></div>
-          <span className="text-xs text-gray-400 font-medium">OR</span>
-          <div className="flex-1 h-px bg-gray-200"></div>
-        </div>
+        <button
+          type="submit"
+          className="w-full bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black py-3 rounded-2xl font-bold shadow-lg hover:scale-105 transition flex justify-center items-center gap-2"
+        >
+          🎁 Claim My Free Account <ArrowRight size={18} />
+        </button>
+      </form>
 
-        {/* Email Form */}
-        <form className="space-y-4">
-          <div>
-            <label className="text-sm font-medium text-gray-600">
-              Email
-            </label>
-            <input
-              type="email"
-              placeholder="you@example.com"
-              className="w-full mt-1 px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-            />
-          </div>
-
-          <div>
-            <label className="text-sm font-medium text-gray-600">
-              Password
-            </label>
-            <input
-              type="password"
-              placeholder="••••••••"
-              className="w-full mt-1 px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-            />
-          </div>
-
-          {/* Main CTA */}
-          <button
-            type="submit"
-            className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:opacity-90 transition text-white py-3 rounded-xl font-bold text-lg shadow-lg"
-          >
-            🎁 Claim My Free Account
-          </button>
-        </form>
-
-        {/* Trust Badges */}
-        <div className="grid grid-cols-2 gap-3 text-xs text-gray-600 pt-2">
-
-          <div className="flex items-center gap-2">
-            <ShieldCheck size={16} />
-            Secure & Encrypted
-          </div>
-
-          <div className="flex items-center gap-2">
-            <Zap size={16} />
-            Instant Withdrawals
-          </div>
-
-          <div className="flex items-center gap-2">
-            <Globe size={16} />
-            Available Worldwide
-          </div>
-
-          <div className="flex items-center gap-2">
-            <DollarSign size={16} />
-            High-Paying Offers
-          </div>
-
-        </div>
-
-        {/* Social Proof */}
-        <div className="text-center text-sm font-semibold text-green-600">
-          110,780+ signups in last 24 hours
-        </div>
-
-        {/* Warning */}
-        <div className="text-center text-xs text-red-500">
-          ⚠ VPNs & multiple accounts prohibited.
-        </div>
-
-        {/* Footer */}
-        <div className="text-center text-sm text-gray-500">
-          Already have an account?{" "}
-          <span className="text-indigo-600 font-semibold cursor-pointer hover:underline">
-            Sign In
-          </span>
-        </div>
-
-      </div>
-    </div>
+      <p className="mt-4 text-center text-sm text-gray-500 dark:text-gray-400">
+        Already have an account?{" "}
+        <Link href="/auth/login" className="text-green-400 font-semibold hover:underline">
+          Sign In
+        </Link>
+      </p>
+    </AuthLayout>
   );
 }
