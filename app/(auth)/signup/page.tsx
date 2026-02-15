@@ -6,11 +6,11 @@ import SeoEngine from "@/components/seo/SeoEngine";
 import AuthLayout from "../layout";
 import SocialButtons from "../SocialButtons";
 import { motion } from "framer-motion";
-import { Eye, EyeOff } from "lucide-react"; // 👀
+import { Eye, EyeOff } from "lucide-react";
 
 export default function SignupPage() {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
-  const [showPassword, setShowPassword] = useState(false); // toggle state
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -63,10 +63,20 @@ export default function SignupPage() {
               value={form.name}
               onChange={handleChange}
               required
-              placeholder="Full Name"
+              placeholder=" " // ❗ Important for floating label
               className="peer w-full p-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-400 placeholder-transparent"
             />
-            <label className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-green-400 peer-focus:text-xs transition-all">
+            <label className="absolute left-4 text-gray-400 dark:text-gray-500 text-sm transition-all
+              peer-placeholder-shown:top-4
+              peer-placeholder-shown:text-gray-400
+              peer-placeholder-shown:text-sm
+              peer-not-placeholder-shown:top-1
+              peer-not-placeholder-shown:text-green-400
+              peer-not-placeholder-shown:text-xs
+              peer-focus:top-1
+              peer-focus:text-green-400
+              peer-focus:text-xs
+            ">
               Full Name
             </label>
           </div>
@@ -79,10 +89,20 @@ export default function SignupPage() {
               value={form.email}
               onChange={handleChange}
               required
-              placeholder="Email"
+              placeholder=" "
               className="peer w-full p-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-400 placeholder-transparent"
             />
-            <label className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-green-400 peer-focus:text-xs transition-all">
+            <label className="absolute left-4 text-gray-400 dark:text-gray-500 text-sm transition-all
+              peer-placeholder-shown:top-4
+              peer-placeholder-shown:text-gray-400
+              peer-placeholder-shown:text-sm
+              peer-not-placeholder-shown:top-1
+              peer-not-placeholder-shown:text-green-400
+              peer-not-placeholder-shown:text-xs
+              peer-focus:top-1
+              peer-focus:text-green-400
+              peer-focus:text-xs
+            ">
               Email
             </label>
           </div>
@@ -90,15 +110,25 @@ export default function SignupPage() {
           {/* Password Input */}
           <div className="relative">
             <input
-              type={showPassword ? "text" : "password"} // toggle input type
+              type={showPassword ? "text" : "password"}
               name="password"
               value={form.password}
               onChange={handleChange}
               required
-              placeholder="Password"
+              placeholder=" "
               className="peer w-full p-4 pr-12 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-400 placeholder-transparent"
             />
-            <label className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-green-400 peer-focus:text-xs transition-all">
+            <label className="absolute left-4 text-gray-400 dark:text-gray-500 text-sm transition-all
+              peer-placeholder-shown:top-4
+              peer-placeholder-shown:text-gray-400
+              peer-placeholder-shown:text-sm
+              peer-not-placeholder-shown:top-1
+              peer-not-placeholder-shown:text-green-400
+              peer-not-placeholder-shown:text-xs
+              peer-focus:top-1
+              peer-focus:text-green-400
+              peer-focus:text-xs
+            ">
               Password
             </label>
 
