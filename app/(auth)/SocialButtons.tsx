@@ -2,16 +2,22 @@
 
 import React from "react";
 import { FcGoogle } from "react-icons/fc";
-import { FaFacebookF } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa";
 
-export default function SocialButtons() {
+interface SocialButtonsProps {
+  className?: string; // allow optional className
+}
+
+export default function SocialButtons({ className }: SocialButtonsProps) {
   return (
-    <div className="flex flex-col gap-4 mb-4">
-      <button className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0B0E1A] hover:shadow-lg transition">
-        <FcGoogle size={20} /> Continue with Google
+    <div className={`flex flex-col gap-3 ${className}`}>
+      <button className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl shadow-md hover:shadow-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-semibold transition">
+        <FcGoogle size={20} />
+        Continue with Google
       </button>
-      <button className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-blue-600 text-white hover:shadow-lg transition">
-        <FaFacebookF size={18} /> Continue with Facebook
+      <button className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl shadow-md hover:shadow-lg bg-blue-600 text-white font-semibold transition">
+        <FaFacebook size={20} />
+        Continue with Facebook
       </button>
     </div>
   );
