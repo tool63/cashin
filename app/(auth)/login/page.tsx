@@ -6,9 +6,11 @@ import SeoEngine from "@/components/seo/SeoEngine";
 import AuthLayout from "../layout";
 import SocialButtons from "../SocialButtons";
 import { motion } from "framer-motion";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function LoginPage() {
   const [form, setForm] = useState({ email: "", password: "" });
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -64,7 +66,11 @@ export default function LoginPage() {
               placeholder="Email"
               className="peer w-full p-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-400 placeholder-transparent"
             />
-            <label className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-green-400 peer-focus:text-xs transition-all">
+            <label
+              className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm transition-opacity
+                peer-focus:opacity-0
+                peer-placeholder-shown:opacity-100"
+            >
               Email
             </label>
           </div>
@@ -72,19 +78,32 @@ export default function LoginPage() {
           {/* Password Input */}
           <div className="relative">
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               value={form.password}
               onChange={handleChange}
               required
               placeholder="Password"
-              className="peer w-full p-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-400 placeholder-transparent"
+              className="peer w-full p-4 pr-12 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-400 placeholder-transparent"
             />
-            <label className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-green-400 peer-focus:text-xs transition-all">
+            <label
+              className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm transition-opacity
+                peer-focus:opacity-0
+                peer-placeholder-shown:opacity-100"
+            >
               Password
             </label>
 
-            {/* Forgot Password link under password input */}
+            {/* Eye Icon */}
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-300 hover:text-green-500"
+            >
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
+
+            {/* Forgot Password link */}
             <Link
               href="/reset"
               className="absolute right-4 top-full mt-2 text-sm text-green-500 hover:underline"
