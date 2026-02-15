@@ -10,12 +10,11 @@ export default function ResetPasswordPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Reset Email:", email);
-    // 🔥 Add password reset API here
+    console.log("Reset email:", email);
   };
 
   return (
-    <AuthLayout>
+    <AuthLayout title="Reset Password - Cashog">
       <h1 className="text-3xl font-bold mb-2 text-center">Reset Your Password</h1>
       <p className="text-center text-gray-600 dark:text-gray-400 mb-6">
         Enter your email to receive a secure reset link
@@ -34,10 +33,7 @@ export default function ResetPasswordPage() {
           />
         </div>
 
-        <button
-          type="submit"
-          className="w-full bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black py-3 rounded-2xl font-bold shadow-lg hover:scale-105 transition flex justify-center items-center gap-2"
-        >
+        <button className="w-full bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black py-3 rounded-2xl font-bold shadow-lg hover:scale-105 transition flex justify-center items-center gap-2">
           Send Reset Link <ArrowRight size={18} />
         </button>
       </form>
