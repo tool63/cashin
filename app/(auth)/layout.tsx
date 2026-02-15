@@ -18,12 +18,14 @@ export default function AuthLayout({
 }: AuthLayoutProps) {
   return (
     <ThemeProvider attribute="class" defaultTheme="system">
+      {/* SEO for Auth Pages */}
       <SeoEngine title={title} description={description} />
 
-      <div className="min-h-screen w-full flex justify-center items-center relative overflow-hidden">
-
+      {/* Full-screen modal background */}
+      <div className="fixed inset-0 z-50 flex justify-center items-center overflow-hidden bg-gray-50 dark:bg-[#070A14]">
+        
         {/* ============================
-            Animated Background
+            Ultra-Premium Animated Background
         ============================ */}
         <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 opacity-20 dark:opacity-10"></div>
         <div className="absolute w-72 h-72 bg-green-400/30 rounded-full blur-3xl animate-float top-20 left-10"></div>
@@ -36,7 +38,7 @@ export default function AuthLayout({
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="relative z-10 w-full max-w-md mx-4 bg-white dark:bg-[#0B0E1A] rounded-3xl shadow-2xl p-8 sm:p-12"
+          className="relative z-10 w-full max-w-md mx-4 bg-white/80 dark:bg-[#0B0E1A]/80 backdrop-blur-lg border border-gray-200 dark:border-gray-700 rounded-3xl shadow-2xl p-6 sm:p-12"
         >
           {children}
         </motion.div>
