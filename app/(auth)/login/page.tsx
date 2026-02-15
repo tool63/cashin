@@ -31,7 +31,7 @@ export default function LoginPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-full max-w-md flex flex-col items-center gap-6"
+        className="w-full max-w-md flex flex-col items-center gap-6 px-4 sm:px-0"
       >
         {/* Header */}
         <h1 className="text-3xl sm:text-4xl font-extrabold text-center bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
@@ -52,7 +52,8 @@ export default function LoginPage() {
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4 relative">
+        <form onSubmit={handleSubmit} className="w-full flex flex-col gap-6 relative">
+          {/* Email Input */}
           <div className="relative">
             <input
               type="email"
@@ -68,6 +69,7 @@ export default function LoginPage() {
             </label>
           </div>
 
+          {/* Password Input */}
           <div className="relative">
             <input
               type="password"
@@ -85,14 +87,14 @@ export default function LoginPage() {
             {/* Forgot Password link under password input */}
             <Link
               href="/reset"
-              className="absolute right-4 top-full mt-1 text-sm text-green-500 hover:underline"
+              className="absolute right-4 top-full mt-2 text-sm text-green-500 hover:underline"
             >
               Forgot Password?
             </Link>
           </div>
 
-          {/* Login button */}
-          <button className="mt-8 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black py-3 rounded-xl font-extrabold shadow-lg hover:scale-105 transition-transform duration-200">
+          {/* Login Button */}
+          <button className="mt-6 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black py-3 rounded-xl font-extrabold shadow-lg hover:scale-105 transition-transform duration-200">
             Login
           </button>
         </form>
