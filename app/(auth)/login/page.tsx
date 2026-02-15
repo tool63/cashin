@@ -52,7 +52,7 @@ export default function LoginPage() {
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
+        <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4 relative">
           <div className="relative">
             <input
               type="email"
@@ -81,20 +81,27 @@ export default function LoginPage() {
             <label className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-green-400 peer-focus:text-xs transition-all">
               Password
             </label>
+
+            {/* Forgot Password link under password input */}
+            <Link
+              href="/reset"
+              className="absolute right-4 top-full mt-1 text-sm text-green-500 hover:underline"
+            >
+              Forgot Password?
+            </Link>
           </div>
 
-          <button className="mt-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black py-3 rounded-xl font-extrabold shadow-lg hover:scale-105 transition-transform duration-200">
+          {/* Login button */}
+          <button className="mt-8 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black py-3 rounded-xl font-extrabold shadow-lg hover:scale-105 transition-transform duration-200">
             Login
           </button>
         </form>
 
-        {/* Footer Links */}
-        <div className="flex justify-between w-full text-sm text-gray-600 dark:text-gray-400 mt-6">
-          <Link href="/signup" className="hover:underline font-medium">
-            Don't have an account? Sign Up
-          </Link>
-          <Link href="/reset" className="hover:underline font-medium">
-            Forgot Password?
+        {/* Footer signup link */}
+        <div className="flex justify-center w-full text-sm text-gray-600 dark:text-gray-400 mt-6">
+          <span>Don't have an account? </span>
+          <Link href="/signup" className="ml-1 font-medium text-green-500 hover:underline">
+            Sign Up
           </Link>
         </div>
       </motion.div>
