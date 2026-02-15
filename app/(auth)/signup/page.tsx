@@ -63,20 +63,14 @@ export default function SignupPage() {
               value={form.name}
               onChange={handleChange}
               required
-              placeholder=" " // ❗ Important for floating label
+              placeholder="Full Name"
               className="peer w-full p-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-400 placeholder-transparent"
             />
-            <label className="absolute left-4 text-gray-400 dark:text-gray-500 text-sm transition-all
-              peer-placeholder-shown:top-4
-              peer-placeholder-shown:text-gray-400
-              peer-placeholder-shown:text-sm
-              peer-not-placeholder-shown:top-1
-              peer-not-placeholder-shown:text-green-400
-              peer-not-placeholder-shown:text-xs
-              peer-focus:top-1
-              peer-focus:text-green-400
-              peer-focus:text-xs
-            ">
+            <label
+              className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm transition-opacity
+                peer-focus:opacity-0
+                peer-placeholder-shown:opacity-100"
+            >
               Full Name
             </label>
           </div>
@@ -89,20 +83,14 @@ export default function SignupPage() {
               value={form.email}
               onChange={handleChange}
               required
-              placeholder=" "
+              placeholder="Email"
               className="peer w-full p-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-400 placeholder-transparent"
             />
-            <label className="absolute left-4 text-gray-400 dark:text-gray-500 text-sm transition-all
-              peer-placeholder-shown:top-4
-              peer-placeholder-shown:text-gray-400
-              peer-placeholder-shown:text-sm
-              peer-not-placeholder-shown:top-1
-              peer-not-placeholder-shown:text-green-400
-              peer-not-placeholder-shown:text-xs
-              peer-focus:top-1
-              peer-focus:text-green-400
-              peer-focus:text-xs
-            ">
+            <label
+              className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm transition-opacity
+                peer-focus:opacity-0
+                peer-placeholder-shown:opacity-100"
+            >
               Email
             </label>
           </div>
@@ -115,20 +103,14 @@ export default function SignupPage() {
               value={form.password}
               onChange={handleChange}
               required
-              placeholder=" "
+              placeholder="Password"
               className="peer w-full p-4 pr-12 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-400 placeholder-transparent"
             />
-            <label className="absolute left-4 text-gray-400 dark:text-gray-500 text-sm transition-all
-              peer-placeholder-shown:top-4
-              peer-placeholder-shown:text-gray-400
-              peer-placeholder-shown:text-sm
-              peer-not-placeholder-shown:top-1
-              peer-not-placeholder-shown:text-green-400
-              peer-not-placeholder-shown:text-xs
-              peer-focus:top-1
-              peer-focus:text-green-400
-              peer-focus:text-xs
-            ">
+            <label
+              className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm transition-opacity
+                peer-focus:opacity-0
+                peer-placeholder-shown:opacity-100"
+            >
               Password
             </label>
 
