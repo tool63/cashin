@@ -3,24 +3,14 @@
 import React, { ReactNode } from "react";
 import { ThemeProvider } from "next-themes";
 import { motion } from "framer-motion";
-import SeoEngine from "@/components/seo/SeoEngine";
 
 interface AuthLayoutProps {
   children: ReactNode;
-  title?: string;
-  description?: string;
 }
 
-export default function AuthLayout({
-  children,
-  title = "Cashog - Earn Real Rewards",
-  description = "Complete offers, play games, answer surveys and cash out instantly on Cashog.",
-}: AuthLayoutProps) {
+export default function AuthLayout({ children }: AuthLayoutProps) {
   return (
     <ThemeProvider attribute="class" defaultTheme="system">
-      {/* SEO for Auth Pages */}
-      <SeoEngine title={title} description={description} />
-
       {/* Full-screen modal background */}
       <div className="fixed inset-0 z-50 flex justify-center items-center overflow-hidden bg-gray-50 dark:bg-[#070A14]">
         
