@@ -21,14 +21,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html
       lang="en"
       suppressHydrationWarning
-      className="bg-gray-100 dark:bg-[#070A14] transition-colors duration-300"
+      className="transition-colors duration-300"
     >
       <head>
         {/* Default SEO */}
         <Meta title={defaultTitle} description={defaultDescription} />
       </head>
 
-      <body className="min-h-screen text-black dark:text-white relative overflow-x-hidden">
+      <body className="bg-[#0B0F1A] text-white min-h-screen relative overflow-x-hidden">
         <ThemeProviderWrapper>
           {/* Header */}
           <Header />
