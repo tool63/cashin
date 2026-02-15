@@ -16,7 +16,6 @@ export default function SignupPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Signup Data:", form);
-    // 🔥 Add signup API logic
   };
 
   return (
