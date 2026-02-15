@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 
@@ -11,6 +11,20 @@ interface ModalProps {
 }
 
 export default function Modal({ isOpen, onClose, children }: ModalProps) {
+
+  // 🔒 Lock scroll when modal open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen]);
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -18,31 +32,31 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
           {/* Overlay */}
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.5 }}
+            animate={{ opacity: 0.6 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black dark:bg-gray-900 z-40"
+            className="fixed inset-0 bg-black z-[1000]"
           />
 
-          {/* Modal content */}
+          {/* Modal */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-50 flex justify-center items-center p-4"
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[1001] flex items-center justify-center px-4"
           >
-            <div className="relative w-full max-w-md bg-white/90 dark:bg-[#0B0E1A]/90 backdrop-blur-lg border border-gray-200 dark:border-gray-700 rounded-3xl shadow-2xl p-6 sm:p-10">
-              {/* Close Button */}
+            <div className="relative w-full max-w-md bg-white dark:bg-[#0B0E1A] rounded-3xl shadow-2xl p-6 sm:p-10">
+              
+              {/* Close */}
               <button
                 onClick={onClose}
-                className="absolute top-4 right-4 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-white transition"
+                className="absolute top-4 right-4 text-gray-500 hover:text-black dark:hover:text-white"
               >
-                <X size={24} />
+                <X size={22} />
               </button>
 
-              {/* Modal children */}
-              <div>{children}</div>
+              {children}
             </div>
           </motion.div>
         </>
