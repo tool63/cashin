@@ -12,24 +12,27 @@ export default function ResetPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Reset Email:", email);
-    // 🔥 Add reset password API logic here
+    // 🔥 Add reset password API logic
   };
 
   return (
     <AuthLayout>
-      <SeoEngine title="Reset Password - Cashog" description="Reset your Cashog password and get back to earning rewards instantly." />
+      <SeoEngine
+        title="Reset Password - Cashog"
+        description="Reset your Cashog password and get back to earning rewards instantly."
+      />
 
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="w-full max-w-md bg-white/80 dark:bg-[#0B0E1A]/80 backdrop-blur-lg border border-gray-200 dark:border-gray-700 rounded-3xl shadow-2xl p-6 sm:p-10 flex flex-col items-center"
+        transition={{ duration: 0.5 }}
+        className="w-full max-w-md flex flex-col items-center gap-6"
       >
         {/* Header */}
-        <h1 className="text-3xl sm:text-4xl font-extrabold mb-2 text-center bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-center bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
           Reset Your Password
         </h1>
-        <p className="text-center text-gray-600 dark:text-gray-400 mb-6 text-sm sm:text-base">
+        <p className="text-center text-gray-600 dark:text-gray-400 text-sm sm:text-base">
           Enter your email to receive a secure reset link
         </p>
 
@@ -44,7 +47,7 @@ export default function ResetPage() {
               placeholder="Email"
               className="peer w-full p-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-400 placeholder-transparent"
             />
-            <label className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-sm peer-focus:top-1 peer-focus:text-green-400 peer-focus:text-xs transition-all">
+            <label className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-green-400 peer-focus:text-xs transition-all">
               Email
             </label>
           </div>
@@ -55,7 +58,7 @@ export default function ResetPage() {
         </form>
 
         {/* Footer Links */}
-        <div className="flex justify-between mt-6 w-full text-sm text-gray-600 dark:text-gray-400">
+        <div className="flex justify-between w-full text-sm text-gray-600 dark:text-gray-400 mt-6">
           <Link href="/login" className="hover:underline font-medium">
             Back to Login
           </Link>
