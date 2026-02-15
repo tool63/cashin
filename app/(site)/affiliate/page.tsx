@@ -59,14 +59,12 @@ export default function AffiliateProgram() {
         description="Join Cashog's Affiliate Program and earn commissions by referring users. High payouts, real-time tracking, and global access!"
       />
 
-      <main className="transition-colors duration-300 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white min-h-screen">
+      <main className="transition-colors duration-300 bg-[#0B0F1A] text-white min-h-screen">
 
         {/* ================= HERO ================= */}
-        <section className="py-24 px-4 text-center rounded-b-3xl transition-colors duration-300 
-            bg-white dark:bg-[#111827]">
+        <section className="py-24 px-4 text-center rounded-b-3xl">
           <div className="max-w-3xl mx-auto">
-            <h1 className="text-5xl sm:text-6xl font-extrabold mb-4 
-                text-gray-900 dark:text-white">
+            <h1 className="text-5xl sm:text-6xl font-extrabold mb-4">
               Cashog Affiliate Program
             </h1>
 
@@ -76,8 +74,7 @@ export default function AffiliateProgram() {
               <TypingText />
             </div>
 
-            <p className="text-lg sm:text-xl md:text-2xl mb-8 
-                text-gray-700 dark:text-gray-300 max-w-xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl md:text-2xl mb-8 max-w-xl mx-auto leading-relaxed text-gray-300">
               Refer users, earn commissions, and get paid instantly with Cashog’s trusted affiliate program.
             </p>
 
@@ -87,8 +84,7 @@ export default function AffiliateProgram() {
                 whileTap={{ scale: 0.97 }}
                 className="inline-flex items-center gap-2 
                     bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 
-                    text-black dark:text-black px-12 py-5 rounded-3xl font-bold shadow-xl
-                    dark:shadow-none text-lg"
+                    text-black px-12 py-5 rounded-3xl font-bold shadow-xl text-lg"
               >
                 Join Affiliate Program <ArrowRight size={20} />
               </motion.span>
@@ -105,11 +101,11 @@ export default function AffiliateProgram() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.2 }}
-              className="bg-gray-100 dark:bg-[#1A1F2B] rounded-2xl p-8 flex flex-col items-center shadow-md hover:shadow-lg transition-shadow duration-300"
+              className="bg-[#111827] rounded-2xl p-8 flex flex-col items-center shadow-md hover:shadow-lg transition-shadow duration-300"
             >
               <div className="mb-4">{step.icon}</div>
               <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-              <p className="text-gray-600 dark:text-gray-400">{step.description}</p>
+              <p className="text-gray-400">{step.description}</p>
             </motion.div>
           ))}
         </section>
@@ -127,13 +123,13 @@ export default function AffiliateProgram() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.2 }}
-                className="bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 text-center shadow hover:shadow-xl transition-shadow duration-300 w-full max-w-sm mx-auto"
+                className="bg-[#111827] rounded-2xl p-6 text-center shadow hover:shadow-xl transition-shadow duration-300 w-full max-w-sm mx-auto"
               >
                 <div className="flex justify-center mb-4 text-yellow-500">
                   <ShieldCheck size={28} />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
+                <p className="text-gray-400">{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -144,17 +140,16 @@ export default function AffiliateProgram() {
           <h2 className="text-3xl md:text-4xl font-bold mb-12">Frequently Asked Questions</h2>
           <div className="space-y-4">
             {faqs.map((faq, i) => (
-              <details key={i} className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-4 cursor-pointer group">
+              <details key={i} className="bg-[#111827] rounded-xl p-4 cursor-pointer group">
                 <summary className="font-semibold text-lg">{faq.q}</summary>
-                <p className="mt-2 text-gray-600 dark:text-gray-400">{faq.a}</p>
+                <p className="mt-2 text-gray-400">{faq.a}</p>
               </details>
             ))}
           </div>
         </section>
 
         {/* ================= FINAL CTA ================= */}
-        <section className="text-center py-28 w-full rounded-t-3xl transition-colors duration-300
-            bg-white dark:bg-[#111827]">
+        <section className="text-center py-28 w-full rounded-t-3xl">
           <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 
               bg-clip-text text-transparent 
               bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
@@ -166,13 +161,12 @@ export default function AffiliateProgram() {
               whileTap={{ scale: 0.97 }}
               className="inline-flex items-center gap-3 
                   bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 
-                  text-black dark:text-black px-16 py-6 rounded-3xl font-bold shadow-2xl 
-                  dark:shadow-none text-xl"
+                  text-black px-16 py-6 rounded-3xl font-bold shadow-2xl text-xl"
             >
               Join Now & Start Earning <ArrowRight size={20} />
             </motion.span>
           </Link>
-          <p className="mt-6 text-gray-700 dark:text-gray-300 text-lg max-w-md mx-auto transition-colors duration-300">
+          <p className="mt-6 text-gray-400 text-lg max-w-md mx-auto">
             Refer users, earn commissions, and grow with Cashog’s trusted affiliate program.
           </p>
         </section>
