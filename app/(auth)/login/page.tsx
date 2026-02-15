@@ -1,75 +1,55 @@
 "use client";
 
-import React, { useState } from "react";
-import Link from "next/link";
-import { ArrowRight, User, Lock } from "lucide-react";
+import React from "react";
 import AuthLayout from "../layout";
 import SocialButtons from "../SocialButtons";
+import Link from "next/link";
+import Meta from "@/components/seo/SeoEngine"; // For SEO
 
 export default function LoginPage() {
-  const [form, setForm] = useState({ email: "", password: "" });
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Login:", form);
-  };
-
   return (
-    <AuthLayout title="Login - Cashog">
-      <h1 className="text-3xl font-bold mb-2 text-center">Welcome Back</h1>
-      <p className="text-center text-gray-600 dark:text-gray-400 mb-6">
-        Login to access your rewards
-      </p>
+    <AuthLayout>
+      <Meta title="Login - Cashog" description="Login to access Cashog and start earning rewards today." />
 
-      <SocialButtons />
+      <div className="w-full max-w-md bg-gray-100 dark:bg-[#1A1F2B] rounded-2xl p-8 shadow-lg">
+        <h1 className="text-3xl font-bold mb-2 text-center">Welcome Back</h1>
+        <p className="text-center text-gray-600 dark:text-gray-400 mb-6">
+          Login to access your rewards
+        </p>
 
-      <div className="text-center text-gray-500 dark:text-gray-400 mb-4">— OR —</div>
+        <SocialButtons className="mb-6" />
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="relative">
-          <User className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+        <div className="flex items-center my-4">
+          <hr className="flex-grow border-gray-300 dark:border-gray-600" />
+          <span className="px-2 text-gray-500">OR</span>
+          <hr className="flex-grow border-gray-300 dark:border-gray-600" />
+        </div>
+
+        <form className="flex flex-col gap-4">
           <input
             type="email"
-            name="email"
-            placeholder="Email Address"
-            required
-            value={form.email}
-            onChange={handleChange}
-            className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0B0E1A] focus:ring-2 focus:ring-green-400 outline-none"
+            placeholder="Email"
+            className="px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
           />
-        </div>
-        <div className="relative">
-          <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
           <input
             type="password"
-            name="password"
             placeholder="Password"
-            required
-            value={form.password}
-            onChange={handleChange}
-            className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0B0E1A] focus:ring-2 focus:ring-green-400 outline-none"
+            className="px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
           />
+          <button className="bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black font-bold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all">
+            Login
+          </button>
+        </form>
+
+        <div className="flex justify-between mt-4 text-sm">
+          <Link href="/reset" className="text-blue-500 hover:underline">
+            Forgot Password?
+          </Link>
+          <Link href="/signup" className="text-blue-500 hover:underline">
+            Create Account
+          </Link>
         </div>
-
-        <button className="w-full bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black py-3 rounded-2xl font-bold shadow-lg hover:scale-105 transition flex justify-center items-center gap-2">
-          Login <ArrowRight size={18} />
-        </button>
-      </form>
-
-      <p className="mt-4 text-center text-sm text-gray-500 dark:text-gray-400">
-        Forgot password?{" "}
-        <Link href="/auth/reset" className="text-green-400 font-semibold hover:underline">
-          Reset here
-        </Link>
-      </p>
-
-      <p className="mt-2 text-center text-sm text-gray-500 dark:text-gray-400">
-        No account?{" "}
-        <Link href="/auth/signup" className="text-green-400 font-semibold hover:underline">
-          Sign Up
-        </Link>
-      </p>
+      </div>
     </AuthLayout>
   );
 }
