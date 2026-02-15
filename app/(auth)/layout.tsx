@@ -7,16 +7,14 @@ import Meta from "@/components/seo/SeoEngine";
 
 interface AuthLayoutProps {
   children: React.ReactNode;
+  title?: string;
+  description?: string;
 }
 
-export default function AuthLayout({ children }: AuthLayoutProps) {
+export default function AuthLayout({ children, title = "Cashog - Secure Login & Sign Up", description = "Login or sign up for Cashog and start earning rewards instantly." }: AuthLayoutProps) {
   return (
     <ThemeProvider attribute="class">
-      <Meta
-        title="Cashog - Secure Login & Sign Up"
-        description="Login or sign up for Cashog and start earning cashback, rewards, and exclusive offers instantly."
-      />
-
+      <Meta title={title} description={description} />
       <main className="min-h-screen flex flex-col items-center justify-center bg-white dark:bg-[#070A14] transition-colors duration-300 px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -26,10 +24,6 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
         >
           {children}
         </motion.div>
-
-        <footer className="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
-          © {new Date().getFullYear()} Cashog. All rights reserved.
-        </footer>
       </main>
     </ThemeProvider>
   );
