@@ -31,7 +31,7 @@ export default function SignupPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-full max-w-md flex flex-col items-center gap-6"
+        className="w-full max-w-md flex flex-col items-center gap-6 px-4 sm:px-0"
       >
         {/* Header */}
         <h1 className="text-3xl sm:text-4xl font-extrabold text-center bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
@@ -53,6 +53,7 @@ export default function SignupPage() {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
+          {/* Name Input */}
           <div className="relative">
             <input
               type="text"
@@ -68,6 +69,7 @@ export default function SignupPage() {
             </label>
           </div>
 
+          {/* Email Input */}
           <div className="relative">
             <input
               type="email"
@@ -83,6 +85,7 @@ export default function SignupPage() {
             </label>
           </div>
 
+          {/* Password Input */}
           <div className="relative">
             <input
               type="password"
@@ -98,18 +101,17 @@ export default function SignupPage() {
             </label>
           </div>
 
-          <button className="mt-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black py-3 rounded-xl font-extrabold shadow-lg hover:scale-105 transition-transform duration-200">
+          {/* Sign Up Button */}
+          <button className="mt-6 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black py-3 rounded-xl font-extrabold shadow-lg hover:scale-105 transition-transform duration-200">
             Sign Up
           </button>
         </form>
 
-        {/* Footer Links */}
-        <div className="flex justify-between w-full text-sm text-gray-600 dark:text-gray-400 mt-6">
-          <Link href="/login" className="hover:underline font-medium">
-            Already have an account? Login
-          </Link>
-          <Link href="/reset" className="hover:underline font-medium">
-            Forgot Password?
+        {/* Footer login link */}
+        <div className="flex justify-center w-full text-sm text-gray-600 dark:text-gray-400 mt-6">
+          <span>Already have an account? </span>
+          <Link href="/login" className="ml-1 font-medium text-green-500 hover:underline">
+            Login
           </Link>
         </div>
       </motion.div>
