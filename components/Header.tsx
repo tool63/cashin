@@ -35,7 +35,7 @@ export default function Header() {
       className="sticky top-0 z-50 border-b
                  bg-gradient-to-r from-yellow-400/29 via-green-400/29 to-green-500/29
                  dark:bg-gradient-to-r dark:from-yellow-400/29 dark:via-green-400/29 dark:to-green-500/29
-                 border-gray-200 dark:border-white/10 transition-colors"
+                 border-gray-200 dark:border-white/10 transition-colors backdrop-blur"
     >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* LOGO */}
