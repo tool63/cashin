@@ -35,7 +35,8 @@ export default function Header() {
     <header
       ref={headerRef}
       className="sticky top-0 z-50 backdrop-blur border-b
-                 bg-white/90 dark:bg-[#070A14]/90
+                 bg-gradient-to-r from-yellow-400/29 via-green-400/29 to-green-500/29
+                 dark:bg-gradient-to-r dark:from-yellow-400/29 dark:via-green-400/29 dark:to-green-500/29
                  border-gray-200 dark:border-white/10 transition-colors"
     >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -138,7 +139,10 @@ export default function Header() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden px-6 py-6 space-y-4 border-t bg-white dark:bg-[#070A14] border-gray-200 dark:border-white/10"
+            className="md:hidden px-6 py-6 space-y-4 border-t
+                       bg-gradient-to-r from-yellow-400/29 via-green-400/29 to-green-500/29
+                       dark:bg-gradient-to-r dark:from-yellow-400/29 dark:via-green-400/29 dark:to-green-500/29
+                       border-gray-200 dark:border-white/10"
           >
             <Link href="/how-it-works">How it works</Link>
 
