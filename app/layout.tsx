@@ -27,10 +27,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
                        bg-[#f3f4f6] dark:bg-[#0B0F1A] text-black dark:text-white">
         <ThemeProviderWrapper>
 
-          {/* ================= FIXED HEADER ================= */}
-          <div className="fixed top-0 left-0 w-full z-50">
-            <Header />
-          </div>
+          {/* ================= HEADER ================= */}
+          <Header />
 
           {/* ================= BODY GRADIENT /30 ================= */}
           <div className="absolute inset-0 pointer-events-none -z-10">
@@ -45,12 +43,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             {children}
           </main>
 
-          {/* ================= FOOTER ================= */}
-          <footer className="relative z-10 mt-8">
-            <Footer />
-          </footer>
-
-          {/* ================= GLOBAL CTA ================= */}
+          <Footer />
           <FloatingCTA />
 
         </ThemeProviderWrapper>
