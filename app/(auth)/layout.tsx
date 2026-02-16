@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="relative w-screen min-h-screen bg-gray-50 dark:bg-[#070A14] overflow-hidden flex items-center justify-center px-4 sm:px-6 py-8 sm:py-0">
+    <div className="relative w-screen min-h-screen bg-gray-50 dark:bg-[#070A14] overflow-hidden flex flex-col sm:flex-row items-center justify-center px-4 sm:px-6 py-12 sm:py-0">
 
       {/* ============================
           Animated Gradient Background
@@ -17,7 +17,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
       {/* ============================
           Centered Auth Card
       ============================ */}
-      <div className="relative z-10 w-full max-w-md flex justify-center items-center">
+      <div className="relative z-10 w-full max-w-md flex justify-center items-start sm:items-center">
         {children}
       </div>
     </div>
