@@ -14,7 +14,6 @@ export default function Header() {
   const [activeButton, setActiveButton] = useState<"none" | "signup" | "login">("none");
 
   const headerRef = useRef<HTMLDivElement>(null);
-
   const ctaGradient = "bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black";
 
   useEffect(() => {
@@ -32,34 +31,22 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className="sticky top-0 z-50 border-b
+      className="sticky top-0 z-50 w-full border-b
                  bg-gradient-to-r from-yellow-400/29 via-green-400/29 to-green-500/29
                  dark:bg-gradient-to-r dark:from-yellow-400/29 dark:via-green-400/29 dark:to-green-500/29
-                 border-gray-200 dark:border-white/10 transition-colors backdrop-blur"
+                 backdrop-blur"
     >
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between relative z-50">
         {/* LOGO */}
-        <Link
-          href="/"
-          className={`text-2xl font-bold transition ${ctaGradient} px-3 py-1 rounded-lg`}
-        >
+        <Link href="/" className={`text-2xl font-bold transition ${ctaGradient} px-3 py-1 rounded-lg`}>
           Cashog
         </Link>
 
         {/* DESKTOP NAV */}
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium relative">
           <Link href="/how-it-works">How it works</Link>
-
-          <div
-            className="relative"
-            onMouseEnter={() => setEarnOpen(true)}
-            onMouseLeave={() => setEarnOpen(false)}
-          >
-            <button className="flex items-center gap-1">
-              Earn{" "}
-              <ChevronDown size={14} className={`${earnOpen ? "rotate-180" : ""} transition`} />
-            </button>
-
+          <div className="relative" onMouseEnter={() => setEarnOpen(true)} onMouseLeave={() => setEarnOpen(false)}>
+            <button className="flex items-center gap-1">Earn <ChevronDown size={14} className={`${earnOpen ? "rotate-180" : ""} transition`} /></button>
             <AnimatePresence>
               {earnOpen && (
                 <motion.div
@@ -77,7 +64,6 @@ export default function Header() {
               )}
             </AnimatePresence>
           </div>
-
           <Link href="/cashout">Cashout</Link>
           <Link href="/blog">Blog</Link>
           <Link href="/help">Help</Link>
@@ -87,107 +73,30 @@ export default function Header() {
         <div className="hidden md:flex items-center gap-4">
           <LanguageSwitcher />
           <DarkLightToggle />
-
           <Link href="/login">
-            <button
-              onClick={() => setActiveButton("login")}
-              className={`text-sm font-medium px-4 py-2 rounded-lg transition ${
-                activeButton === "login" ? ctaGradient : "border"
-              }`}
-            >
-              Login
-            </button>
+            <button onClick={() => setActiveButton("login")} className={`text-sm font-medium px-4 py-2 rounded-lg transition ${activeButton === "login" ? ctaGradient : "border"}`}>Login</button>
           </Link>
-
           <Link href="/signup">
-            <button
-              onClick={() => setActiveButton("signup")}
-              className={`px-5 py-2 rounded-lg text-sm font-medium transition ${
-                activeButton === "signup" || activeButton === "none"
-                  ? ctaGradient
-                  : "bg-white dark:bg-[#070A14] border border-gray-300 dark:border-white/20 text-black dark:text-white"
-              }`}
-            >
-              Sign up
-            </button>
+            <button onClick={() => setActiveButton("signup")} className={`px-5 py-2 rounded-lg text-sm font-medium transition ${activeButton === "signup" || activeButton === "none" ? ctaGradient : "bg-white dark:bg-[#070A14] border border-gray-300 dark:border-white/20 text-black dark:text-white"}`}>Sign up</button>
           </Link>
         </div>
 
         {/* MOBILE BUTTON */}
-        <button className="md:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
-          {mobileOpen ? <X /> : <Menu />}
-        </button>
+        <button className="md:hidden" onClick={() => setMobileOpen(!mobileOpen)}>{mobileOpen ? <X /> : <Menu />}</button>
       </div>
 
       {/* MOBILE MENU */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="md:hidden px-6 py-6 space-y-4 border-t
-                       bg-gradient-to-r from-yellow-400/29 via-green-400/29 to-green-500/29
-                       dark:bg-gradient-to-r dark:from-yellow-400/29 dark:via-green-400/29 dark:to-green-500/29
-                       border-gray-200 dark:border-white/10"
-          >
+          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="md:hidden px-6 py-6 space-y-4 border-t bg-gradient-to-r from-yellow-400/29 via-green-400/29 to-green-500/29 dark:bg-gradient-to-r dark:from-yellow-400/29 dark:via-green-400/29 dark:to-green-500/29 border-gray-200 dark:border-white/10">
             <Link href="/how-it-works">How it works</Link>
-
-            <button
-              onClick={() => setMobileEarnOpen(!mobileEarnOpen)}
-              className="flex w-full items-center justify-between font-medium"
-            >
-              Earn
-              <ChevronDown
-                size={16}
-                className={`transition ${mobileEarnOpen ? "rotate-180" : ""}`}
-              />
-            </button>
-
-            {mobileEarnOpen && (
-              <div className="flex flex-col gap-3 pl-4 text-sm">
-                <Link href="/surveys">Surveys</Link>
-                <Link href="/app-installs">App Installs</Link>
-                <Link href="/play-games">Play Games</Link>
-                <Link href="/watch-videos">Watch Videos</Link>
-                <Link href="/offerwall">Offerwall</Link>
-              </div>
-            )}
-
-            <div className="flex flex-col gap-2">
-              <Link href="/cashout">Cashout</Link>
-              <Link href="/blog">Blog</Link>
-              <Link href="/help">Help</Link>
-            </div>
-
-            <div className="flex items-center justify-between pt-3">
-              <LanguageSwitcher />
-              <DarkLightToggle />
-            </div>
-
+            <button onClick={() => setMobileEarnOpen(!mobileEarnOpen)} className="flex w-full items-center justify-between font-medium">Earn <ChevronDown size={16} className={`transition ${mobileEarnOpen ? "rotate-180" : ""}`} /></button>
+            {mobileEarnOpen && <div className="flex flex-col gap-3 pl-4 text-sm"><Link href="/surveys">Surveys</Link><Link href="/app-installs">App Installs</Link><Link href="/play-games">Play Games</Link><Link href="/watch-videos">Watch Videos</Link><Link href="/offerwall">Offerwall</Link></div>}
+            <div className="flex flex-col gap-2"><Link href="/cashout">Cashout</Link><Link href="/blog">Blog</Link><Link href="/help">Help</Link></div>
+            <div className="flex items-center justify-between pt-3"><LanguageSwitcher /><DarkLightToggle /></div>
             <div className="pt-4 flex flex-col gap-3">
-              <Link href="/login">
-                <button
-                  onClick={() => setActiveButton("login")}
-                  className={`text-center py-2 rounded-lg w-full transition ${
-                    activeButton === "login" ? ctaGradient : "border"
-                  }`}
-                >
-                  Login
-                </button>
-              </Link>
-              <Link href="/signup">
-                <button
-                  onClick={() => setActiveButton("signup")}
-                  className={`text-center py-2 rounded-lg w-full transition ${
-                    activeButton === "signup" || activeButton === "none"
-                      ? ctaGradient
-                      : "bg-white dark:bg-[#070A14] border border-gray-300 dark:border-white/20 text-black dark:text-white"
-                  }`}
-                >
-                  Sign up
-                </button>
-              </Link>
+              <Link href="/login"><button onClick={() => setActiveButton("login")} className={`text-center py-2 rounded-lg w-full transition ${activeButton === "login" ? ctaGradient : "border"}`}>Login</button></Link>
+              <Link href="/signup"><button onClick={() => setActiveButton("signup")} className={`text-center py-2 rounded-lg w-full transition ${activeButton === "signup" || activeButton === "none" ? ctaGradient : "bg-white dark:bg-[#070A14] border border-gray-300 dark:border-white/20 text-black dark:text-white"}`}>Sign up</button></Link>
             </div>
           </motion.div>
         )}
