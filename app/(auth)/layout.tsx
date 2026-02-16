@@ -5,6 +5,7 @@ import { ReactNode } from "react";
 export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
     <div className="relative w-screen min-h-screen bg-gray-50 dark:bg-[#070A14] overflow-hidden flex items-center justify-center px-4 sm:px-6">
+
       {/* ============================
           Animated Gradient Background
       ============================ */}
@@ -16,7 +17,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
       {/* ============================
           Centered Auth Card
       ============================ */}
-      <div className="relative z-10 w-full max-w-lg flex justify-center">
+      <div className="relative z-10 w-full max-w-md flex justify-center items-center">
         <div className="w-full">{children}</div>
       </div>
     </div>
