@@ -49,7 +49,6 @@ export default function SignupPage() {
         description="Create a free Cashog account and start earning rewards instantly."
       />
 
-      {/* Container: full width, center content horizontally & vertically */}
       <div className="w-full flex justify-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -66,29 +65,29 @@ export default function SignupPage() {
             Join Cashog and start earning real rewards instantly.
           </p>
 
-          {/* Social login */}
-          <SocialButtons className="w-full" />
+          {/* Social login buttons */}
+          <div className="w-full flex flex-col gap-3">
+            <SocialButtons className="w-full" />
+          </div>
 
-          {/* Continue with Email button */}
+          {/* OR divider */}
+          <div className="w-full flex items-center my-2">
+            <div className="flex-grow border-t border-gray-300 dark:border-gray-600"></div>
+            <span className="px-2 text-sm text-gray-500 dark:text-gray-400">OR</span>
+            <div className="flex-grow border-t border-gray-300 dark:border-gray-600"></div>
+          </div>
+
+          {/* Continue with Email */}
           {!showForm && (
             <button
               onClick={handleContinueEmail}
-              className="w-full mt-4 py-3 rounded-xl font-semibold bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black shadow-lg hover:scale-105 transition-transform duration-200"
+              className="w-full py-3 rounded-xl font-semibold bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black shadow-lg hover:scale-105 transition-transform duration-200"
             >
               Continue with Email
             </button>
           )}
 
-          {/* Divider */}
-          <div className="w-full flex items-center my-4">
-            <div className="flex-grow border-t border-gray-300 dark:border-gray-600"></div>
-            <span className="px-2 text-sm text-gray-500 dark:text-gray-400">
-              OR
-            </span>
-            <div className="flex-grow border-t border-gray-300 dark:border-gray-600"></div>
-          </div>
-
-          {/* Form */}
+          {/* Signup Form */}
           <AnimatePresence>
             {showForm && (
               <motion.form
@@ -97,7 +96,7 @@ export default function SignupPage() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.6 }}
-                className="w-full flex flex-col gap-4"
+                className="w-full flex flex-col gap-4 mt-2"
               >
                 {/* Name Input */}
                 <div className="relative">
@@ -146,7 +145,6 @@ export default function SignupPage() {
                     Password
                   </label>
 
-                  {/* Eye Icon */}
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
@@ -177,7 +175,7 @@ export default function SignupPage() {
             .
           </div>
 
-          {/* 🔥 Live Counter */}
+          {/* Live Counter */}
           <div className="text-sm text-gray-600 dark:text-gray-400 text-center mt-4">
             <span className="font-bold text-green-500">
               {counter.toLocaleString()}+
