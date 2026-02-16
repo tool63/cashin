@@ -13,7 +13,7 @@ export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showForm, setShowForm] = useState(false);
 
-  const [count, setCount] = useState(110780);
+  const [count, setCount] = useState(1380);
 
   useEffect(() => {
     const randomDelay = () =>
