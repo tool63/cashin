@@ -11,33 +11,36 @@ import { Eye, EyeOff } from "lucide-react";
 export default function SignupPage() {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
+  const [counter, setCounter] = useState(110780); // Starting number
   const [showForm, setShowForm] = useState(false);
-  const [count, setCount] = useState(110780);
 
-  // Auto-increment signup counter
-  useEffect(() => {
-    const randomDelay = () =>
-      Math.floor(Math.random() * (300000 - 5000) + 5000); // 5s–5min
-    let timeout: NodeJS.Timeout;
-
-    const updateCounter = () => {
-      const randomIncrease = Math.floor(Math.random() * 6) + 1; // 1–6
-      setCount((prev) => prev + randomIncrease);
-      timeout = setTimeout(updateCounter, randomDelay());
-    };
-
-    timeout = setTimeout(updateCounter, randomDelay());
-    return () => clearTimeout(timeout);
-  }, []);
-
+  // Handle input change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  // Handle form submit
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Signup Data:", form);
+    // 🔥 Add signup API logic here
   };
+
+  // Auto counter animation (random 1–6 every 5s–5min)
+  useEffect(() => {
+    const updateCounter = () => {
+      const randomIncrement = Math.floor(Math.random() * 6) + 1; // 1–6
+      setCounter((prev) => prev + randomIncrement);
+      const randomDelay = Math.random() * (300000 - 5000) + 5000; // 5s–5min in ms
+      setTimeout(updateCounter, randomDelay);
+    };
+    const initialDelay = Math.random() * (300000 - 5000) + 5000;
+    const timer = setTimeout(updateCounter, initialDelay);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Show form after clicking "Continue with Email"
+  const handleContinueEmail = () => setShowForm(true);
 
   return (
     <AuthLayout>
@@ -49,8 +52,8 @@ export default function SignupPage() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="w-full max-w-xl mx-auto flex flex-col items-center gap-6 px-4 sm:px-6 py-8 sm:py-12 bg-white dark:bg-[#070A14] rounded-3xl shadow-2xl"
+        transition={{ duration: 0.6 }}
+        className="w-full max-w-md flex flex-col items-center gap-6 px-4 sm:px-0"
       >
         {/* Header */}
         <h1 className="text-3xl sm:text-4xl font-extrabold text-center bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
@@ -64,10 +67,22 @@ export default function SignupPage() {
         {/* Social login */}
         <SocialButtons className="w-full" />
 
+        {/* Continue with Email button */}
+        {!showForm && (
+          <button
+            onClick={handleContinueEmail}
+            className="w-full mt-4 py-3 rounded-xl font-semibold bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black shadow-lg hover:scale-105 transition-transform duration-200"
+          >
+            Continue with Email
+          </button>
+        )}
+
         {/* Divider */}
         <div className="w-full flex items-center my-4">
           <div className="flex-grow border-t border-gray-300 dark:border-gray-600"></div>
-          <span className="px-2 text-sm text-gray-500 dark:text-gray-400">OR</span>
+          <span className="px-2 text-sm text-gray-500 dark:text-gray-400">
+            OR
+          </span>
           <div className="flex-grow border-t border-gray-300 dark:border-gray-600"></div>
         </div>
 
@@ -76,13 +91,13 @@ export default function SignupPage() {
           {showForm && (
             <motion.form
               onSubmit={handleSubmit}
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              transition={{ duration: 0.4 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.6 }}
               className="w-full flex flex-col gap-4"
             >
-              {/* Name */}
+              {/* Name Input */}
               <div className="relative">
                 <input
                   type="text"
@@ -98,7 +113,7 @@ export default function SignupPage() {
                 </label>
               </div>
 
-              {/* Email */}
+              {/* Email Input */}
               <div className="relative">
                 <input
                   type="email"
@@ -114,7 +129,7 @@ export default function SignupPage() {
                 </label>
               </div>
 
-              {/* Password */}
+              {/* Password Input */}
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
@@ -128,6 +143,8 @@ export default function SignupPage() {
                 <label className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm transition-opacity peer-focus:opacity-0 peer-placeholder-shown:opacity-100">
                   Password
                 </label>
+
+                {/* Eye Icon */}
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
@@ -137,7 +154,7 @@ export default function SignupPage() {
                 </button>
               </div>
 
-              {/* Sign Up */}
+              {/* Sign Up Button */}
               <button className="mt-6 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black py-3 rounded-xl font-extrabold shadow-lg hover:scale-105 transition-transform duration-200">
                 Sign Up
               </button>
@@ -145,25 +162,32 @@ export default function SignupPage() {
           )}
         </AnimatePresence>
 
-        {/* Show form button */}
-        {!showForm && (
-          <button
-            onClick={() => setShowForm(true)}
-            className="w-full py-3 rounded-xl font-extrabold bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-          >
-            Continue with Email
-          </button>
-        )}
-
-        {/* Live counter */}
-        <div className="text-sm text-gray-600 dark:text-gray-400 text-center mt-4">
-          <span className="font-bold text-green-500">{count.toLocaleString()}</span> sign ups in the past 24 hours
+        {/* Terms & Privacy */}
+        <div className="text-xs text-center text-gray-600 dark:text-gray-400 mt-4">
+          By signing up you agree to our{" "}
+          <Link href="/privacy" className="text-green-500 hover:underline">
+            Privacy Policy
+          </Link>{" "}
+          and{" "}
+          <Link href="/terms" className="text-green-500 hover:underline">
+            Terms of Service
+          </Link>
+          .
         </div>
 
-        {/* Footer login */}
+        {/* 🔥 Live Counter */}
+        <div className="text-sm text-gray-600 dark:text-gray-400 text-center mt-4">
+          <span className="font-bold text-green-500">{counter.toLocaleString()}+</span>{" "}
+          sign ups in the past 24 hours
+        </div>
+
+        {/* Footer login link */}
         <div className="flex justify-center w-full text-sm text-gray-600 dark:text-gray-400 mt-6">
           <span>Already have an account? </span>
-          <Link href="/login" className="ml-1 font-medium text-green-500 hover:underline">
+          <Link
+            href="/login"
+            className="ml-1 font-medium text-green-500 hover:underline"
+          >
             Login
           </Link>
         </div>
