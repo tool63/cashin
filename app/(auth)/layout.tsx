@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="relative w-screen min-h-screen bg-gray-50 dark:bg-[#070A14] overflow-hidden flex items-center justify-center px-4 sm:px-6 py-12">
+    <div className="relative w-screen min-h-screen bg-gray-50 dark:bg-[#070A14] overflow-hidden flex flex-col sm:flex-row items-center justify-center px-4 sm:px-6 py-12 sm:py-0">
 
       {/* ============================
           Animated Gradient Background
@@ -15,9 +15,9 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
       <div className="absolute w-96 h-96 bg-yellow-500/20 rounded-3xl blur-3xl animate-float animation-delay-4000 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0"></div>
 
       {/* ============================
-          Centered Popup Card
+          Centered Auth Card
       ============================ */}
-      <div className="relative z-10 w-full max-w-md bg-white dark:bg-[#0B0F1A] border border-gray-300 dark:border-gray-700 rounded-2xl shadow-2xl p-6 sm:p-10 flex flex-col items-center">
+      <div className="relative z-10 w-full max-w-md flex justify-center items-start sm:items-center">
         {children}
       </div>
     </div>
