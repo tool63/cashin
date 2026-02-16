@@ -39,6 +39,7 @@ export default function SignupPage() {
         <h1 className="text-3xl sm:text-4xl font-extrabold text-center bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
           Create Your Account
         </h1>
+
         <p className="text-center text-gray-600 dark:text-gray-400 text-sm sm:text-base">
           Join Cashog and start earning real rewards instantly.
         </p>
@@ -49,7 +50,9 @@ export default function SignupPage() {
         {/* Divider */}
         <div className="w-full flex items-center my-4">
           <div className="flex-grow border-t border-gray-300 dark:border-gray-600"></div>
-          <span className="px-2 text-sm text-gray-500 dark:text-gray-400">OR</span>
+          <span className="px-2 text-sm text-gray-500 dark:text-gray-400">
+            OR
+          </span>
           <div className="flex-grow border-t border-gray-300 dark:border-gray-600"></div>
         </div>
 
@@ -66,11 +69,7 @@ export default function SignupPage() {
               placeholder="Full Name"
               className="peer w-full p-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-400 placeholder-transparent"
             />
-            <label
-              className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm transition-opacity
-                peer-focus:opacity-0
-                peer-placeholder-shown:opacity-100"
-            >
+            <label className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm transition-opacity peer-focus:opacity-0 peer-placeholder-shown:opacity-100">
               Full Name
             </label>
           </div>
@@ -86,11 +85,7 @@ export default function SignupPage() {
               placeholder="Email"
               className="peer w-full p-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-400 placeholder-transparent"
             />
-            <label
-              className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm transition-opacity
-                peer-focus:opacity-0
-                peer-placeholder-shown:opacity-100"
-            >
+            <label className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm transition-opacity peer-focus:opacity-0 peer-placeholder-shown:opacity-100">
               Email
             </label>
           </div>
@@ -106,15 +101,10 @@ export default function SignupPage() {
               placeholder="Password"
               className="peer w-full p-4 pr-12 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-400 placeholder-transparent"
             />
-            <label
-              className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm transition-opacity
-                peer-focus:opacity-0
-                peer-placeholder-shown:opacity-100"
-            >
+            <label className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm transition-opacity peer-focus:opacity-0 peer-placeholder-shown:opacity-100">
               Password
             </label>
 
-            {/* Eye Icon */}
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
@@ -130,10 +120,43 @@ export default function SignupPage() {
           </button>
         </form>
 
+        {/* 🔥 NEW: Terms Section */}
+        <div className="text-xs text-center text-gray-600 dark:text-gray-400 mt-4">
+          By signing up you agree to our{" "}
+          <Link href="/privacy" className="text-green-500 hover:underline">
+            Privacy Policy
+          </Link>{" "}
+          and{" "}
+          <Link href="/terms" className="text-green-500 hover:underline">
+            Terms of Service
+          </Link>
+          .
+        </div>
+
+        {/* 🔥 NEW: Prohibited Notice */}
+        <div className="w-full mt-4 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
+          <p className="text-xs text-yellow-800 dark:text-yellow-200 text-center">
+            Users are prohibited from creating multiple accounts, completing
+            offers on another user’s account, or using VPN, VPS, or Emulator
+            software.
+          </p>
+        </div>
+
+        {/* 🔥 NEW: Live Counter */}
+        <div className="text-sm text-gray-600 dark:text-gray-400 text-center mt-4">
+          <span className="font-bold text-green-500">
+            110,780+
+          </span>{" "}
+          sign ups in the past 24 hours
+        </div>
+
         {/* Footer login link */}
         <div className="flex justify-center w-full text-sm text-gray-600 dark:text-gray-400 mt-6">
           <span>Already have an account? </span>
-          <Link href="/login" className="ml-1 font-medium text-green-500 hover:underline">
+          <Link
+            href="/login"
+            className="ml-1 font-medium text-green-500 hover:underline"
+          >
             Login
           </Link>
         </div>
