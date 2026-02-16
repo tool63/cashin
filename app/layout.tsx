@@ -37,7 +37,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <Header />
 
           {/* ================= MAIN CONTENT ================= */}
-          <main className="relative z-10 pt-16 min-h-[calc(100vh-160px)]">
+          <main className="relative z-10 pt-16">
             {children}
           </main>
 
