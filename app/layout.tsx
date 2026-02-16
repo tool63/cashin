@@ -1,63 +1,71 @@
 "use client";
 
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { Menu } from "lucide-react";
+import "../styles/globals.css";
+import { ReactNode } from "react";
 
-export default function Header() {
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import FloatingCTA from "@/components/cta/FloatingCTA";
+import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
+import Meta from "@/components/seo/SeoEngine";
+
+interface RootLayoutProps {
+  children: ReactNode;
+}
+
+const defaultTitle = "Cashog";
+const defaultDescription = "Earn rewards, cash out, and get paid";
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-black/30 backdrop-blur-xl border-b border-white/10 shadow-lg">
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className="transition-colors duration-300"
+    >
+      <head>
+        <Meta title={defaultTitle} description={defaultDescription} />
+      </head>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <body className="relative min-h-screen overflow-x-hidden text-white bg-gradient-to-br from-[#0B0F1A] via-[#111827] to-[#0F172A]">
 
-        <div className="flex items-center justify-between h-20">
+        <ThemeProviderWrapper>
 
-          {/* ================= LOGO ================= */}
-          <Link href="/" className="text-2xl font-extrabold bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 bg-clip-text text-transparent">
-            Cashog
-          </Link>
+          {/* ================= PREMIUM GLOBAL BACKGROUND ================= */}
+          <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
 
-          {/* ================= NAVIGATION ================= */}
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
+            {/* Soft Green Radial Glow (Top Left) */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(34,197,94,0.15),_transparent_40%)]"></div>
 
-            <Link href="/" className="text-white/80 hover:text-white transition">
-              Home
-            </Link>
+            {/* Soft Yellow Radial Glow (Bottom Right) */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_rgba(250,204,21,0.12),_transparent_40%)]"></div>
 
-            <Link href="/affiliate" className="text-white/80 hover:text-white transition">
-              Affiliate
-            </Link>
+            {/* Floating Glow Orb 1 */}
+            <div className="absolute w-72 h-72 bg-green-500/20 rounded-full blur-3xl animate-float top-20 left-10"></div>
 
-            <Link href="/about" className="text-white/80 hover:text-white transition">
-              About
-            </Link>
+            {/* Floating Glow Orb 2 */}
+            <div className="absolute w-96 h-96 bg-yellow-400/20 rounded-full blur-3xl animate-float animation-delay-2000 bottom-10 right-10"></div>
 
-            <Link href="/contact" className="text-white/80 hover:text-white transition">
-              Contact
-            </Link>
-
-          </nav>
-
-          {/* ================= CTA BUTTON ================= */}
-          <div className="hidden md:block">
-            <Link href="/signup">
-              <motion.span
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-6 py-2.5 rounded-xl font-semibold shadow-md"
-              >
-                Get Started
-              </motion.span>
-            </Link>
           </div>
 
-          {/* ================= MOBILE MENU ICON ================= */}
-          <div className="md:hidden text-white">
-            <Menu size={24} />
-          </div>
+          {/* ================= FIXED HEADER ================= */}
+          <Header />
 
-        </div>
-      </div>
-    </header>
+          {/* ================= MAIN CONTENT ================= */}
+          {/* Header height = h-20 (80px) so we offset content */}
+          <main className="relative z-10 pt-20">
+            {children}
+          </main>
+
+          {/* ================= FOOTER ================= */}
+          <Footer />
+
+          {/* ================= GLOBAL FLOATING CTA ================= */}
+          <FloatingCTA />
+
+        </ThemeProviderWrapper>
+
+      </body>
+    </html>
   );
 }
