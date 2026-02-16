@@ -32,6 +32,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
         <ThemeProviderWrapper>
 
+          {/* ============================
+              Header Background (Gradient / 28%)
+          ============================ */}
+          <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-yellow-400/28 via-green-400/28 to-green-500/28 pointer-events-none -z-20"></div>
+
           {/* ================= HEADER ================= */}
           <Header />
 
@@ -39,7 +44,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <main className="relative z-10 min-h-[calc(100vh-160px)]">
 
             {/* ============================
-                Body Background (Gradient / 400/30)
+                Body Background (Gradient / 30%)
             ============================ */}
             <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/30 via-green-400/30 to-green-500/30 animate-gradient pointer-events-none -z-10"></div>
             <div className="absolute w-72 h-72 bg-green-400/30 rounded-full blur-3xl animate-float top-20 left-10 -z-10"></div>
