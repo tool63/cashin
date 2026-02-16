@@ -34,11 +34,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
           {/* ============================
               Animated Gradient Background
-              (Similar to AuthLayout)
+              (Updated to match Affiliate Page)
           ============================ */}
-          <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 opacity-10"></div>
-          <div className="absolute w-72 h-72 bg-green-400/20 rounded-full blur-3xl animate-float top-20 left-10"></div>
-          <div className="absolute w-96 h-96 bg-yellow-400/20 rounded-full blur-3xl animate-float animation-delay-2000 bottom-10 right-10"></div>
+          <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 opacity-20"></div>
+          <div className="absolute w-72 h-72 bg-green-400/30 rounded-full blur-3xl animate-float top-20 left-10"></div>
+          <div className="absolute w-96 h-96 bg-yellow-400/30 rounded-full blur-3xl animate-float animation-delay-2000 bottom-10 right-10"></div>
+
+          {/* Optional: subtle radial gradient for more depth */}
+          <div className="absolute inset-0 bg-gradient-radial from-[#0B0F1A] via-[#111827] to-[#0B0F1A] opacity-20 pointer-events-none"></div>
 
           {/* ================= HEADER ================= */}
           <Header />
