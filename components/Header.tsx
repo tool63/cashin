@@ -40,7 +40,7 @@ export default function Header() {
                  border-gray-200 dark:border-white/10 transition-colors"
     >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        {/* LOGO: always gradient */}
+        {/* LOGO */}
         <Link
           href="/"
           className={`text-2xl font-bold transition ${ctaGradient} px-3 py-1 rounded-lg`}
@@ -48,7 +48,7 @@ export default function Header() {
           Cashog
         </Link>
 
-        {/* DESKTOP NAV: horizontal layout */}
+        {/* DESKTOP NAV */}
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium relative">
           <Link href="/how-it-works">How it works</Link>
 
@@ -66,7 +66,6 @@ export default function Header() {
               />
             </button>
 
-            {/* Earn submenu */}
             <AnimatePresence>
               {earnOpen && (
                 <motion.div
@@ -85,7 +84,6 @@ export default function Header() {
             </AnimatePresence>
           </div>
 
-          {/* Other main menu links */}
           <Link href="/cashout">Cashout</Link>
           <Link href="/blog">Blog</Link>
           <Link href="/help">Help</Link>
@@ -96,7 +94,6 @@ export default function Header() {
           <LanguageSwitcher />
           <DarkLightToggle />
 
-          {/* Login Button */}
           <Link href="/login">
             <button
               onClick={() => setActiveButton("login")}
@@ -108,7 +105,6 @@ export default function Header() {
             </button>
           </Link>
 
-          {/* Sign Up Button */}
           <Link href="/signup">
             <button
               onClick={() => setActiveButton("signup")}
@@ -168,20 +164,17 @@ export default function Header() {
               </div>
             )}
 
-            {/* Mobile vertical links */}
             <div className="flex flex-col gap-2">
               <Link href="/cashout">Cashout</Link>
               <Link href="/blog">Blog</Link>
               <Link href="/help">Help</Link>
             </div>
 
-            {/* Mobile switches */}
             <div className="flex items-center justify-between pt-3">
               <LanguageSwitcher />
               <DarkLightToggle />
             </div>
 
-            {/* Mobile CTA */}
             <div className="pt-4 flex flex-col gap-3">
               <Link href="/login">
                 <button
