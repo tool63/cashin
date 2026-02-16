@@ -33,9 +33,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <ThemeProviderWrapper>
 
           {/* ============================
-              Header Background (Gradient / 28%)
+              Header & Footer Background (Gradient / 29%)
           ============================ */}
-          <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-yellow-400/28 via-green-400/28 to-green-500/28 pointer-events-none -z-20"></div>
+          <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-yellow-400/29 via-green-400/29 to-green-500/29 pointer-events-none -z-20"></div>
 
           {/* ================= HEADER ================= */}
           <Header />
