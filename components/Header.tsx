@@ -15,10 +15,8 @@ export default function Header() {
 
   const headerRef = useRef<HTMLDivElement>(null);
 
-  // CTA gradient color
   const ctaGradient = "bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black";
 
-  // Close menus when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
@@ -52,7 +50,6 @@ export default function Header() {
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium relative">
           <Link href="/how-it-works">How it works</Link>
 
-          {/* Earn dropdown */}
           <div
             className="relative"
             onMouseEnter={() => setEarnOpen(true)}
@@ -60,10 +57,7 @@ export default function Header() {
           >
             <button className="flex items-center gap-1">
               Earn{" "}
-              <ChevronDown
-                size={14}
-                className={`${earnOpen ? "rotate-180" : ""} transition`}
-              />
+              <ChevronDown size={14} className={`${earnOpen ? "rotate-180" : ""} transition`} />
             </button>
 
             <AnimatePresence>
@@ -120,10 +114,7 @@ export default function Header() {
         </div>
 
         {/* MOBILE BUTTON */}
-        <button
-          className="md:hidden"
-          onClick={() => setMobileOpen(!mobileOpen)}
-        >
+        <button className="md:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
           {mobileOpen ? <X /> : <Menu />}
         </button>
       </div>
@@ -142,7 +133,6 @@ export default function Header() {
           >
             <Link href="/how-it-works">How it works</Link>
 
-            {/* Mobile Earn submenu */}
             <button
               onClick={() => setMobileEarnOpen(!mobileEarnOpen)}
               className="flex w-full items-center justify-between font-medium"
