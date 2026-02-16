@@ -28,17 +28,18 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <ThemeProviderWrapper>
 
           {/* ============================
-              FIXED HEADER
+              FIXED HEADER WITH GRADIENT /29
           ============================ */}
-          <header className="fixed top-0 left-0 w-full z-50">
+          <div className="fixed top-0 left-0 w-full z-50">
             <div className="w-full bg-gradient-to-r from-yellow-400/29 via-green-400/29 to-green-500/29 backdrop-blur-sm">
+              {/* Make sure Header inside has NO background color */}
               <Header />
             </div>
-          </header>
+          </div>
 
           {/* ================= MAIN CONTENT ================= */}
           <main className="relative z-10 min-h-[calc(100vh-160px)] pt-[80px]">
-            {/* Padding top = header height */}
+            {/* pt-[80px] = header height */}
 
             {/* ================= BODY BACKGROUND (/30) ================= */}
             <div className="absolute inset-0 pointer-events-none -z-10">
@@ -50,7 +51,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             {children}
           </main>
 
-          {/* ================= FOOTER ================= */}
+          {/* ================= FOOTER WITH GRADIENT /29 ================= */}
           <footer className="relative z-10">
             <div className="relative w-full bg-gradient-to-r from-yellow-400/29 via-green-400/29 to-green-500/29">
               <Footer />
