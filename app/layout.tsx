@@ -30,15 +30,18 @@ export default function RootLayout({ children }: RootLayoutProps) {
           {/* ============================
               HEADER & FOOTER BACKGROUND (/29)
           ============================ */}
-          <div className="fixed inset-0 pointer-events-none -z-10">
+          <div className="fixed inset-0 pointer-events-none -z-20">
             <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-yellow-400/29 via-green-400/29 to-green-500/29"></div>
           </div>
 
-          {/* ================= HEADER ================= */}
-          <Header />
+          {/* ================= HEADER (Fixed) ================= */}
+          <div className="fixed top-0 left-0 w-full z-50">
+            <Header />
+          </div>
 
           {/* ================= MAIN CONTENT ================= */}
-          <main className="relative z-10 min-h-[calc(100vh-160px)]">
+          <main className="relative z-10 min-h-[calc(100vh-160px)] pt-[80px]">
+            {/* Add top padding equal to header height so content doesn't go under header */}
 
             {/* ================= BODY BACKGROUND (/30) ================= */}
             <div className="absolute inset-0 pointer-events-none -z-10">
