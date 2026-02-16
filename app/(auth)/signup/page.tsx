@@ -13,13 +13,11 @@ export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showForm, setShowForm] = useState(false);
 
-  // 🔥 Live Auto Counter
   const [count, setCount] = useState(110780);
 
   useEffect(() => {
     const randomDelay = () =>
       Math.floor(Math.random() * (300000 - 5000) + 5000); // 5s–5min
-
     let timeout: NodeJS.Timeout;
 
     const updateCounter = () => {
@@ -48,13 +46,12 @@ export default function SignupPage() {
         description="Create a free Cashog account and start earning rewards instantly."
       />
 
+      {/* ✅ Desktop + Mobile Centered Card */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-full max-w-md flex flex-col items-center gap-6 px-4 sm:px-0
-        backdrop-blur-xl bg-white/70 dark:bg-white/5
-        border border-white/20 shadow-2xl rounded-3xl p-8"
+        className="w-full max-w-xl sm:max-w-md flex flex-col items-center gap-6 px-4 sm:px-8 mx-auto"
       >
         {/* Header */}
         <h1 className="text-3xl sm:text-4xl font-extrabold text-center bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
@@ -65,7 +62,7 @@ export default function SignupPage() {
           Join Cashog and start earning real rewards instantly.
         </p>
 
-        {/* 🔢 Live Counter */}
+        {/* Live Counter */}
         <div className="text-sm text-gray-600 dark:text-gray-400 text-center">
           <span className="font-bold text-green-500 text-lg">
             {count.toLocaleString()}+
@@ -85,7 +82,7 @@ export default function SignupPage() {
           <div className="flex-grow border-t border-gray-300 dark:border-gray-600"></div>
         </div>
 
-        {/* Continue with Email Button */}
+        {/* Continue with Email */}
         {!showForm && (
           <button
             onClick={() => setShowForm(true)}
@@ -95,7 +92,7 @@ export default function SignupPage() {
           </button>
         )}
 
-        {/* ✨ Smooth Animated Form Reveal */}
+        {/* Animated Form Reveal */}
         <AnimatePresence>
           {showForm && (
             <motion.form
