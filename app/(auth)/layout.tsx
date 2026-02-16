@@ -10,7 +10,7 @@ interface AuthLayoutProps {
 export default function AuthLayout({ children }: AuthLayoutProps) {
   return (
     <div className="relative w-screen min-h-screen bg-gray-50 dark:bg-[#070A14] flex items-center justify-center overflow-auto px-4 sm:px-6">
-
+      
       {/* ============================
           Animated Background Layers
       ============================ */}
