@@ -24,21 +24,38 @@ export default function RootLayout({ children }: RootLayoutProps) {
       className="transition-colors duration-300"
     >
       <head>
-        {/* Default SEO */}
         <Meta title={defaultTitle} description={defaultDescription} />
       </head>
 
-      <body className="bg-[#0B0F1A] text-white min-h-screen relative overflow-x-hidden">
-
+      <body
+        className="
+          relative
+          min-h-screen
+          overflow-x-hidden
+          bg-gray-50
+          dark:bg-[#070A14]
+          text-gray-900
+          dark:text-white
+          transition-colors duration-300
+        "
+      >
         <ThemeProviderWrapper>
 
           {/* ============================
-              Animated Gradient Background
-              (Similar to AuthLayout)
+              GLOBAL Animated Background
           ============================ */}
-          <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 opacity-10"></div>
-          <div className="absolute w-72 h-72 bg-green-400/20 rounded-full blur-3xl animate-float top-20 left-10"></div>
-          <div className="absolute w-96 h-96 bg-yellow-400/20 rounded-full blur-3xl animate-float animation-delay-2000 bottom-10 right-10"></div>
+          <div className="pointer-events-none absolute inset-0 -z-10">
+            
+            {/* Main Gradient */}
+            <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 opacity-20 dark:opacity-10"></div>
+
+            {/* Floating Glow 1 */}
+            <div className="absolute w-72 h-72 bg-green-400/30 rounded-full blur-3xl animate-float top-20 left-10"></div>
+
+            {/* Floating Glow 2 */}
+            <div className="absolute w-96 h-96 bg-yellow-400/30 rounded-full blur-3xl animate-float animation-delay-2000 bottom-10 right-10"></div>
+
+          </div>
 
           {/* ================= HEADER ================= */}
           <Header />
@@ -55,7 +72,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <FloatingCTA />
 
         </ThemeProviderWrapper>
-
       </body>
     </html>
   );
