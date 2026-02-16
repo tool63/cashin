@@ -1,55 +1,63 @@
 "use client";
 
-import "../styles/globals.css";
-import { ReactNode } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { Menu } from "lucide-react";
 
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import FloatingCTA from "@/components/cta/FloatingCTA";
-import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
-import Meta from "@/components/seo/SeoEngine";
-
-interface RootLayoutProps {
-  children: ReactNode;
-}
-
-const defaultTitle = "Cashog";
-const defaultDescription = "Earn rewards, cash out, and get paid";
-
-export default function RootLayout({ children }: RootLayoutProps) {
+export default function Header() {
   return (
-    <html lang="en" suppressHydrationWarning className="transition-colors duration-300">
-      <head>
-        <Meta title={defaultTitle} description={defaultDescription} />
-      </head>
-      <body className="relative min-h-screen overflow-x-hidden bg-[#0B0F1A] text-white">
+    <header className="fixed top-0 left-0 w-full z-50 bg-black/30 backdrop-blur-xl border-b border-white/10 shadow-lg">
 
-        <ThemeProviderWrapper>
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
 
-          {/* ================= BODY GRADIENT /30 ================= */}
-          <div className="absolute inset-0 -z-10 pointer-events-none">
-            <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-yellow-400/30 via-green-400/30 to-green-500/30"></div>
-            <div className="absolute w-72 h-72 bg-green-400/30 rounded-3xl blur-3xl animate-float top-20 left-10"></div>
-            <div className="absolute w-96 h-96 bg-yellow-400/30 rounded-3xl blur-3xl animate-float animation-delay-2000 bottom-10 right-10"></div>
+        <div className="flex items-center justify-between h-20">
+
+          {/* ================= LOGO ================= */}
+          <Link href="/" className="text-2xl font-extrabold bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 bg-clip-text text-transparent">
+            Cashog
+          </Link>
+
+          {/* ================= NAVIGATION ================= */}
+          <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
+
+            <Link href="/" className="text-white/80 hover:text-white transition">
+              Home
+            </Link>
+
+            <Link href="/affiliate" className="text-white/80 hover:text-white transition">
+              Affiliate
+            </Link>
+
+            <Link href="/about" className="text-white/80 hover:text-white transition">
+              About
+            </Link>
+
+            <Link href="/contact" className="text-white/80 hover:text-white transition">
+              Contact
+            </Link>
+
+          </nav>
+
+          {/* ================= CTA BUTTON ================= */}
+          <div className="hidden md:block">
+            <Link href="/signup">
+              <motion.span
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-6 py-2.5 rounded-xl font-semibold shadow-md"
+              >
+                Get Started
+              </motion.span>
+            </Link>
           </div>
 
-          {/* ================= HEADER ================= */}
-          <Header />
+          {/* ================= MOBILE MENU ICON ================= */}
+          <div className="md:hidden text-white">
+            <Menu size={24} />
+          </div>
 
-          {/* ================= MAIN CONTENT ================= */}
-          <main className="relative z-10 pt-16">
-            {children}
-          </main>
-
-          {/* ================= FOOTER ================= */}
-          <Footer />
-
-          {/* ================= GLOBAL CTA ================= */}
-          <FloatingCTA />
-
-        </ThemeProviderWrapper>
-
-      </body>
-    </html>
+        </div>
+      </div>
+    </header>
   );
 }
