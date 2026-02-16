@@ -28,7 +28,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           {/* ============================
               GLOBAL ANIMATED BACKGROUND
           ============================ */}
-          <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+          <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
 
             {/* Main Gradient */}
             <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 opacity-20 dark:opacity-10"></div>
