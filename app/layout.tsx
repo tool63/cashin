@@ -20,31 +20,25 @@ const defaultDescription = "Earn rewards, cash out, and get paid";
 export default function RootLayout({ children }: RootLayoutProps) {
   const pathname = usePathname();
 
-  // Check if current page is an auth page
+  // Detect auth pages
   const isAuthPage =
     pathname?.startsWith("/login") ||
     pathname?.startsWith("/signup") ||
     pathname?.startsWith("/reset");
 
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className="transition-colors duration-300"
-    >
+    <html lang="en" suppressHydrationWarning className="transition-colors duration-300">
       <head>
         <Meta title={defaultTitle} description={defaultDescription} />
       </head>
 
       <body className="bg-[#0B0F1A] text-white min-h-screen relative overflow-x-hidden">
-
         <ThemeProviderWrapper>
-
           {/* ================= BACKGROUND ================= */}
-          <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 opacity-20 pointer-events-none"></div>
-          <div className="absolute w-72 h-72 bg-green-400/30 rounded-full blur-3xl animate-float top-20 left-10 pointer-events-none"></div>
-          <div className="absolute w-96 h-96 bg-yellow-400/30 rounded-full blur-3xl animate-float animation-delay-2000 bottom-10 right-10 pointer-events-none"></div>
-          <div className="absolute inset-0 bg-gradient-radial from-[#0B0F1A] via-[#111827] to-[#0B0F1A] opacity-20 pointer-events-none"></div>
+          <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 opacity-20 pointer-events-none z-0"></div>
+          <div className="absolute w-72 h-72 bg-green-400/30 rounded-full blur-3xl animate-float top-20 left-10 pointer-events-none z-0"></div>
+          <div className="absolute w-96 h-96 bg-yellow-400/30 rounded-full blur-3xl animate-float animation-delay-2000 bottom-10 right-10 pointer-events-none z-0"></div>
+          <div className="absolute inset-0 bg-gradient-radial from-[#0B0F1A] via-[#111827] to-[#0B0F1A] opacity-20 pointer-events-none z-0"></div>
 
           {/* ================= FIXED HEADER ================= */}
           {!isAuthPage && (
@@ -55,12 +49,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
           {/* ================= MAIN CONTENT ================= */}
           {isAuthPage ? (
-            // Auth pages: full-center, no padding top
             <main className="relative z-10 w-full min-h-screen flex items-center justify-center px-4 sm:px-6">
+              {/* AuthLayout already handles centering and card width */}
               {children}
             </main>
           ) : (
-            // Normal pages: keep header offset
             <main className="relative z-10 pt-20 min-h-[calc(100vh-160px)]">
               {children}
             </main>
@@ -71,9 +64,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
           {/* ================= GLOBAL CTA ================= */}
           {!isAuthPage && <FloatingCTA />}
-
         </ThemeProviderWrapper>
-
       </body>
     </html>
   );
