@@ -7,12 +7,13 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
     <div className="relative w-screen min-h-screen bg-gray-50 dark:bg-[#070A14] overflow-hidden">
 
       {/* ============================
-          Animated Gradient Background
+          Subtle Animated Background
       ============================ */}
-      <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-yellow-400 via-green-400 to-yellow-400 opacity-20 dark:opacity-10 pointer-events-none z-0"></div>
-      <div className="absolute w-72 h-72 bg-green-400/30 rounded-full blur-3xl animate-float top-1/4 left-1/2 transform -translate-x-1/2 pointer-events-none z-0"></div>
-      <div className="absolute w-96 h-96 bg-yellow-400/30 rounded-full blur-3xl animate-float animation-delay-2000 bottom-1/4 left-1/2 transform -translate-x-1/2 pointer-events-none z-0"></div>
-      <div className="absolute w-96 h-96 bg-yellow-500/20 rounded-full blur-3xl animate-float animation-delay-4000 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-green-400 to-yellow-400 opacity-20 dark:opacity-10 pointer-events-none z-0 animate-gradient"></div>
+
+      {/* Single subtle floating blobs */}
+      <div className="absolute w-72 h-72 bg-green-400/20 rounded-full blur-3xl animate-float top-1/4 left-1/4 pointer-events-none z-0"></div>
+      <div className="absolute w-96 h-96 bg-yellow-400/20 rounded-full blur-3xl animate-float bottom-1/4 right-1/4 pointer-events-none z-0 animation-delay-2000"></div>
 
       {/* ============================
           Centered Popup Modal
