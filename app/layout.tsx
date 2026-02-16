@@ -2,6 +2,7 @@
 
 import "../styles/globals.css";
 import { ReactNode } from "react";
+
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingCTA from "@/components/cta/FloatingCTA";
@@ -19,39 +20,39 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <ThemeProviderWrapper>
 
           {/* ============================
-              Global Animated Gradient Background
+              GLOBAL ANIMATED BACKGROUND
           ============================ */}
-          <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+          <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
 
-            {/* Main gradient overlay */}
+            {/* Main Gradient Overlay */}
             <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 opacity-20"></div>
 
-            {/* Floating green circle */}
+            {/* Floating Green Glow */}
             <div className="absolute w-72 h-72 bg-green-400/30 rounded-full blur-3xl animate-float top-20 left-10"></div>
 
-            {/* Floating yellow circle */}
+            {/* Floating Yellow Glow */}
             <div className="absolute w-96 h-96 bg-yellow-400/30 rounded-full blur-3xl animate-float animation-delay-2000 bottom-10 right-10"></div>
 
-            {/* Optional center radial glow */}
+            {/* Center Radial Glow */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08),transparent_70%)]"></div>
 
           </div>
 
-          {/* SEO */}
+          {/* ================= SEO ================= */}
           <Meta title="Cashog" description="Earn rewards, cash out, and get paid" />
 
-          {/* Header */}
+          {/* ================= HEADER ================= */}
           <Header />
 
-          {/* Main content */}
-          <main className="relative z-10 flex-1 min-h-[calc(100vh-160px)]">
+          {/* ================= MAIN CONTENT ================= */}
+          <main className="relative z-10 flex-1 min-h-screen">
             {children}
           </main>
 
-          {/* Footer */}
+          {/* ================= FOOTER ================= */}
           <Footer />
 
-          {/* Floating CTA */}
+          {/* ================= FLOATING CTA ================= */}
           <FloatingCTA />
 
         </ThemeProviderWrapper>
