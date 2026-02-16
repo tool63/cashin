@@ -23,10 +23,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
       suppressHydrationWarning
       className="transition-colors duration-300"
     >
-      <head>
-        <Meta title={defaultTitle} description={defaultDescription} />
-      </head>
-
       <body
         className="
           relative
@@ -44,7 +40,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           {/* ============================
               GLOBAL Animated Background
           ============================ */}
-          <div className="pointer-events-none absolute inset-0 -z-10">
+          <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
             
             {/* Main Gradient */}
             <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 opacity-20 dark:opacity-10"></div>
@@ -55,13 +51,19 @@ export default function RootLayout({ children }: RootLayoutProps) {
             {/* Floating Glow 2 */}
             <div className="absolute w-96 h-96 bg-yellow-400/30 rounded-full blur-3xl animate-float animation-delay-2000 bottom-10 right-10"></div>
 
+            {/* Optional Center Glow (Premium Depth) */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08),transparent_70%)] dark:bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.04),transparent_70%)]"></div>
+
           </div>
+
+          {/* ================= SEO ================= */}
+          <Meta title={defaultTitle} description={defaultDescription} />
 
           {/* ================= HEADER ================= */}
           <Header />
 
           {/* ================= MAIN CONTENT ================= */}
-          <main className="relative z-10 min-h-[calc(100vh-160px)]">
+          <main className="relative z-10 flex-1 min-h-[calc(100vh-160px)]">
             {children}
           </main>
 
