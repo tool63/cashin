@@ -20,32 +20,18 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html
       lang="en"
-      suppressHydrationWarning
-      className="transition-colors duration-300"
+      className="h-screen w-screen transition-colors duration-300"
     >
-      <body
-        className="
-          relative
-          min-h-screen
-          overflow-x-hidden
-          bg-white
-          dark:bg-[#070A14]
-          text-gray-900
-          dark:text-white
-          transition-colors duration-300
-        "
-      >
+      <body className="relative h-screen w-screen overflow-x-hidden bg-white dark:bg-[#070A14] text-gray-900 dark:text-white transition-colors duration-300">
         <ThemeProviderWrapper>
-          
+
           {/* ============================
-              GLOBAL Animated Background
+              GLOBAL ANIMATED BACKGROUND
           ============================ */}
-          <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
-            
+          <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+
             {/* Main Gradient */}
-            <div className="absolute inset-0 animate-gradient 
-                            bg-gradient-to-r from-yellow-400 via-green-400 to-green-500
-                            opacity-20 dark:opacity-10"></div>
+            <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 opacity-20 dark:opacity-10"></div>
 
             {/* Floating Glow 1 */}
             <div className="absolute w-72 h-72 bg-green-400/30 rounded-full blur-3xl animate-float top-20 left-10"></div>
@@ -53,10 +39,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
             {/* Floating Glow 2 */}
             <div className="absolute w-96 h-96 bg-yellow-400/30 rounded-full blur-3xl animate-float animation-delay-2000 bottom-10 right-10"></div>
 
-            {/* Optional Center Glow (Premium Depth) */}
-            <div className="absolute inset-0 
-                            bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08),transparent_70%)]
-                            dark:bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.04),transparent_70%)]"></div>
+            {/* Center Radial Glow for Depth */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08),transparent_70%)] dark:bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.04),transparent_70%)]"></div>
 
           </div>
 
