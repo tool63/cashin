@@ -30,10 +30,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
           {/* ============================
               HEADER (Fixed) with Gradient /29
           ============================ */}
-          <div className="fixed top-0 left-0 w-full z-50 pointer-events-none">
-            <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-yellow-400/29 via-green-400/29 to-green-500/29"></div>
-            <Header />
-          </div>
+          <header className="fixed top-0 left-0 w-full z-50">
+            <div className="relative w-full bg-gradient-to-r from-yellow-400/29 via-green-400/29 to-green-500/29 backdrop-blur-sm">
+              {/* backdrop-blur-sm optional for nicer effect */}
+              <Header />
+            </div>
+          </header>
 
           {/* ================= MAIN CONTENT ================= */}
           <main className="relative z-10 min-h-[calc(100vh-160px)] pt-[80px]">
@@ -50,10 +52,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
           </main>
 
           {/* ================= FOOTER (Gradient /29) ================= */}
-          <div className="relative z-10">
-            <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-yellow-400/29 via-green-400/29 to-green-500/29 -z-10"></div>
-            <Footer />
-          </div>
+          <footer className="relative z-10">
+            <div className="relative w-full bg-gradient-to-r from-yellow-400/29 via-green-400/29 to-green-500/29">
+              <Footer />
+            </div>
+          </footer>
 
           {/* ================= GLOBAL CTA ================= */}
           <FloatingCTA />
