@@ -13,38 +13,49 @@ interface RootLayoutProps {
   children: ReactNode;
 }
 
+const defaultTitle = "Cashog";
+const defaultDescription = "Earn rewards, cash out, and get paid";
+
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" className="h-screen w-screen transition-colors duration-300">
-      <body className="relative h-screen w-screen overflow-x-hidden bg-[#0B0F1A] text-white transition-colors duration-300">
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className="transition-colors duration-300"
+    >
+      <head>
+        {/* Default SEO */}
+        <Meta title={defaultTitle} description={defaultDescription} />
+      </head>
+
+      <body className="bg-[#0B0F1A] text-white min-h-screen relative overflow-x-hidden">
+
         <ThemeProviderWrapper>
 
-          {/* ===== GLOBAL ANIMATED BACKGROUND ===== */}
-          <div className="bg-animated">
-            <div className="gradient"></div>
-            <div className="blob1"></div>
-            <div className="blob2"></div>
-            <div className="radial"></div>
-          </div>
+          {/* ============================
+              Animated Gradient Background
+              (Similar to AuthLayout)
+          ============================ */}
+          <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 opacity-10"></div>
+          <div className="absolute w-72 h-72 bg-green-400/20 rounded-full blur-3xl animate-float top-20 left-10"></div>
+          <div className="absolute w-96 h-96 bg-yellow-400/20 rounded-full blur-3xl animate-float animation-delay-2000 bottom-10 right-10"></div>
 
-          {/* ===== SEO ===== */}
-          <Meta title="Cashog" description="Earn rewards, cash out, and get paid" />
-
-          {/* ===== HEADER ===== */}
+          {/* ================= HEADER ================= */}
           <Header />
 
-          {/* ===== MAIN CONTENT ===== */}
-          <main className="relative z-10 flex-1 min-h-screen">
+          {/* ================= MAIN CONTENT ================= */}
+          <main className="relative z-10 min-h-[calc(100vh-160px)]">
             {children}
           </main>
 
-          {/* ===== FOOTER ===== */}
+          {/* ================= FOOTER ================= */}
           <Footer />
 
-          {/* ===== FLOATING CTA ===== */}
+          {/* ================= GLOBAL CTA ================= */}
           <FloatingCTA />
 
         </ThemeProviderWrapper>
+
       </body>
     </html>
   );
