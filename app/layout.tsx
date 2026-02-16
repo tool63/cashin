@@ -18,13 +18,8 @@ const defaultDescription = "Earn rewards, cash out, and get paid";
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className="transition-colors duration-300"
-    >
+    <html lang="en" suppressHydrationWarning className="transition-colors duration-300">
       <head>
-        {/* Default SEO */}
         <Meta title={defaultTitle} description={defaultDescription} />
       </head>
 
@@ -33,9 +28,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <ThemeProviderWrapper>
 
           {/* ============================
-              Header & Footer Background (Gradient / 29%)
+              HEADER & FOOTER BACKGROUND (/29)
           ============================ */}
-          <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-yellow-400/29 via-green-400/29 to-green-500/29 pointer-events-none -z-20"></div>
+          <div className="fixed inset-0 pointer-events-none -z-10">
+            <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-yellow-400/29 via-green-400/29 to-green-500/29"></div>
+          </div>
 
           {/* ================= HEADER ================= */}
           <Header />
@@ -43,12 +40,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
           {/* ================= MAIN CONTENT ================= */}
           <main className="relative z-10 min-h-[calc(100vh-160px)]">
 
-            {/* ============================
-                Body Background (Gradient / 30%)
-            ============================ */}
-            <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/30 via-green-400/30 to-green-500/30 animate-gradient pointer-events-none -z-10"></div>
-            <div className="absolute w-72 h-72 bg-green-400/30 rounded-full blur-3xl animate-float top-20 left-10 -z-10"></div>
-            <div className="absolute w-96 h-96 bg-yellow-400/30 rounded-full blur-3xl animate-float animation-delay-2000 bottom-10 right-10 -z-10"></div>
+            {/* ================= BODY BACKGROUND (/30) ================= */}
+            <div className="absolute inset-0 pointer-events-none -z-10">
+              <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-yellow-400/30 via-green-400/30 to-green-500/30"></div>
+              <div className="absolute w-72 h-72 bg-green-400/30 rounded-full blur-3xl animate-float top-20 left-10"></div>
+              <div className="absolute w-96 h-96 bg-yellow-400/30 rounded-3xl blur-3xl animate-float animation-delay-2000 bottom-10 right-10"></div>
+            </div>
 
             {children}
           </main>
