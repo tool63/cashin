@@ -1,29 +1,33 @@
 "use client";
 
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 
-export default function AuthLayout({ children }: { children: ReactNode }) {
+interface AuthLayoutProps {
+  children: ReactNode;
+}
+
+export default function AuthLayout({ children }: AuthLayoutProps) {
   return (
-    <div className="relative w-screen min-h-screen bg-gray-50 dark:bg-[#070A14] flex justify-center items-center px-4 sm:px-6 overflow-hidden">
+    <div className="relative w-screen min-h-screen flex items-center justify-center overflow-auto px-4 sm:px-6 py-12">
 
-      {/* ============================
-          Subtle Gradient Background
-      ============================ */}
-      <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 via-green-400 to-yellow-500 opacity-20 dark:opacity-10 pointer-events-none z-0"></div>
+      {/* ===== LAYER 1: Fullscreen Background ===== */}
+      <div className="absolute inset-0 bg-gray-50 dark:bg-[#070A14]"></div>
 
-      {/* ============================
-          Floating Accent Blobs
-      ============================ */}
-      <div className="absolute w-64 h-64 bg-green-400/20 rounded-full blur-3xl top-1/3 left-1/4 animate-float pointer-events-none z-0"></div>
-      <div className="absolute w-80 h-80 bg-yellow-400/20 rounded-full blur-3xl bottom-1/3 right-1/4 animate-float pointer-events-none z-0 animation-delay-2000"></div>
+      {/* ===== LAYER 2: Subtle Blurred Glow ===== */}
+      <div className="absolute inset-0">
+        <div className="absolute top-[-20%] left-[-20%] w-[140%] h-[140%] bg-gradient-to-tr from-yellow-300 via-green-300 to-green-500 opacity-20 blur-3xl animate-pulse-slow"></div>
+      </div>
 
-      {/* ============================
-          Centered Premium Popup Card
-      ============================ */}
-      <div className="relative z-10 flex justify-center items-center w-full min-h-screen">
-        <div className="w-full max-w-lg bg-white dark:bg-[#0B0F1A] border border-gray-200 dark:border-gray-700 rounded-3xl shadow-[0_15px_60px_rgba(0,0,0,0.25)] p-6 sm:p-10 flex flex-col justify-center items-center">
-          {children}
+      {/* ===== LAYER 3: Card Container ===== */}
+      <div className="relative w-full max-w-xl p-1 sm:p-2 rounded-3xl shadow-2xl">
+
+        {/* ===== LAYER 4: Inner Gradient Layer ===== */}
+        <div className="w-full h-full rounded-3xl p-6 sm:p-10 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
+          <div className="bg-white dark:bg-[#070A14] rounded-2xl p-6 sm:p-8 flex flex-col gap-6 shadow-inner">
+            {children}
+          </div>
         </div>
+
       </div>
     </div>
   );
