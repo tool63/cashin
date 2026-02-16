@@ -13,15 +13,16 @@ export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showForm, setShowForm] = useState(false);
 
-  const [count, setCount] = useState(1380);
+  const [count, setCount] = useState(110780);
 
+  // Auto-increment signup counter
   useEffect(() => {
     const randomDelay = () =>
       Math.floor(Math.random() * (300000 - 5000) + 5000); // 5s–5min
     let timeout: NodeJS.Timeout;
 
     const updateCounter = () => {
-      const randomIncrease = Math.floor(Math.random() * 6) + 1;
+      const randomIncrease = Math.floor(Math.random() * 6) + 1; // 1–6
       setCount((prev) => prev + randomIncrease);
       timeout = setTimeout(updateCounter, randomDelay());
     };
@@ -37,6 +38,7 @@ export default function SignupPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Signup Data:", form);
+    // 🔥 Add signup API logic here
   };
 
   return (
@@ -46,7 +48,7 @@ export default function SignupPage() {
         description="Create a free Cashog account and start earning rewards instantly."
       />
 
-      {/* ✅ Desktop + Mobile Centered Card */}
+      {/* Centered Card */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -70,7 +72,7 @@ export default function SignupPage() {
           sign ups in the past 24 hours
         </div>
 
-        {/* Social login */}
+        {/* Social Buttons */}
         <SocialButtons className="w-full" />
 
         {/* Divider */}
@@ -101,7 +103,7 @@ export default function SignupPage() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.4 }}
-              className="w-full flex flex-col gap-4 overflow-hidden"
+              className="w-full flex flex-col gap-4 overflow-hidden mt-4"
             >
               {/* Name */}
               <div className="relative">
