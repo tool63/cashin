@@ -1,4 +1,3 @@
-// components/ui/CloseButton.tsx
 'use client';
 
 import { useRouter } from 'next/navigation';
@@ -14,10 +13,10 @@ export default function CloseButton() {
   return (
     <button
       onClick={handleClose}
-      className="close-button"
+      className="absolute top-4 right-4 z-50 w-8 h-8 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 shadow-md border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all hover:scale-110"
       aria-label="Close"
     >
-      <X />
+      <X className="w-4 h-4 text-gray-600 dark:text-gray-400" />
     </button>
   );
 }
