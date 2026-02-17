@@ -26,12 +26,12 @@ export default function SignupPage() {
     // 🔥 Add signup API logic here
   };
 
-  // Auto counter animation (random 1–6 every 5s–5min)
+  // Auto counter animation
   useEffect(() => {
     const updateCounter = () => {
       const randomIncrement = Math.floor(Math.random() * 6) + 1; // 1–6
       setCounter((prev) => prev + randomIncrement);
-      const randomDelay = Math.random() * (300000 - 5000) + 5000; // 5s–5min in ms
+      const randomDelay = Math.random() * (300000 - 5000) + 5000; // 5s–5min
       setTimeout(updateCounter, randomDelay);
     };
     const initialDelay = Math.random() * (300000 - 5000) + 5000;
@@ -39,7 +39,6 @@ export default function SignupPage() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Show form after clicking "Continue with Email"
   const handleContinueEmail = () => setShowForm(true);
 
   return (
@@ -49,24 +48,22 @@ export default function SignupPage() {
         description="Create a free Cashog account and start earning rewards instantly."
       />
 
-      <div className="w-full flex justify-center">
+      <div className="w-full flex justify-center relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="w-full max-w-md flex flex-col items-center gap-6 px-4 sm:px-0"
+          className="w-full max-w-md flex flex-col items-center gap-6 px-4 sm:px-0 relative"
         >
-          {/* Header */}
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-center bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
-            Create Your Account
-          </h1>
-
-          <p className="text-center text-gray-600 dark:text-gray-400 text-sm sm:text-base">
-            Join Cashog and start earning real rewards instantly.
-          </p>
+          {/* =========================
+              BONUS BADGE
+          ========================= */}
+          <div className="absolute -top-10 right-0 bg-yellow-400 text-black font-bold px-4 py-2 rounded-full shadow-lg text-sm animate-bounce z-20">
+            DAILY BONUS +5 Coins
+          </div>
 
           {/* Social login buttons */}
-          <div className="w-full flex flex-col gap-3">
+          <div className="w-full flex flex-col gap-3 mt-4">
             <SocialButtons className="w-full" />
           </div>
 
