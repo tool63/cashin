@@ -11,23 +11,27 @@ import { Eye, EyeOff } from "lucide-react";
 export default function SignupPage() {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
-  const [counter, setCounter] = useState(110780);
+  const [counter, setCounter] = useState(110780); // Starting number
   const [showForm, setShowForm] = useState(false);
 
+  // Handle input change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  // Handle form submit
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Signup Data:", form);
+    // 🔥 Add signup API logic here
   };
 
+  // Auto counter animation
   useEffect(() => {
     const updateCounter = () => {
-      const randomIncrement = Math.floor(Math.random() * 6) + 1;
+      const randomIncrement = Math.floor(Math.random() * 6) + 1; // 1–6
       setCounter((prev) => prev + randomIncrement);
-      const randomDelay = Math.random() * (300000 - 5000) + 5000;
+      const randomDelay = Math.random() * (300000 - 5000) + 5000; // 5s–5min
       setTimeout(updateCounter, randomDelay);
     };
     const initialDelay = Math.random() * (300000 - 5000) + 5000;
@@ -56,18 +60,6 @@ export default function SignupPage() {
           ========================= */}
           <div className="absolute -top-10 right-0 bg-yellow-400 text-black font-bold px-4 py-2 rounded-full shadow-lg text-sm animate-bounce z-20">
             DAILY BONUS +5 Coins
-          </div>
-
-          {/* =========================
-              FREECASH-STYLE HERO SECTION
-          ========================= */}
-          <div className="flex flex-col items-center text-center gap-2 mt-6">
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
-              Earn Real Rewards Instantly!
-            </h1>
-            <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
-              Join Cashog and start earning coins by completing simple tasks.
-            </p>
           </div>
 
           {/* Social login buttons */}
@@ -103,6 +95,7 @@ export default function SignupPage() {
                 transition={{ duration: 0.6 }}
                 className="w-full flex flex-col gap-4 mt-2"
               >
+                {/* Name Input */}
                 <div className="relative">
                   <input
                     type="text"
@@ -118,6 +111,7 @@ export default function SignupPage() {
                   </label>
                 </div>
 
+                {/* Email Input */}
                 <div className="relative">
                   <input
                     type="email"
@@ -133,6 +127,7 @@ export default function SignupPage() {
                   </label>
                 </div>
 
+                {/* Password Input */}
                 <div className="relative">
                   <input
                     type={showPassword ? "text" : "password"}
@@ -156,6 +151,7 @@ export default function SignupPage() {
                   </button>
                 </div>
 
+                {/* Sign Up Button */}
                 <button className="mt-6 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black py-3 rounded-xl font-extrabold shadow-lg hover:scale-105 transition-transform duration-200">
                   Sign Up
                 </button>
