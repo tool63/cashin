@@ -1,44 +1,48 @@
 "use client";
 
-import React, { ReactNode } from "react";
-import { motion } from "framer-motion";
+import { ReactNode } from "react";
 
-interface AuthLayoutProps {
-  children: ReactNode;
-}
-
-export default function AuthLayout({ children }: AuthLayoutProps) {
+export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-gray-50 dark:bg-[#070A14] transition-colors duration-300">
+    <div className="relative min-h-screen w-full flex items-center justify-center px-4 sm:px-6 overflow-hidden bg-gray-50 dark:bg-[#070A14] transition-colors duration-300">
 
       {/* ============================
-          Animated Background
+          Animated Gradient Background
       ============================ */}
-      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+      <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
 
-        {/* Yellow-Green Moving Gradient */}
-        <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-yellow-400 via-green-400 to-green-400 opacity-30"></div>
+        {/* Yellow-Green Base Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 via-green-400 to-yellow-400 opacity-30"></div>
 
-        {/* Green Blob */}
-        <div className="absolute w-80 h-80 bg-green-400/30 rounded-full blur-3xl animate-float top-24 left-12"></div>
+        {/* Soft Radial Overlay (adds depth) */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.2),transparent_70%)] dark:bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.4),transparent_70%)]"></div>
 
-        {/* Yellow Blob */}
-        <div className="absolute w-[28rem] h-[28rem] bg-yellow-400/30 rounded-full blur-3xl animate-float animation-delay-2000 bottom-12 right-12"></div>
+        {/* Floating Blob 1 */}
+        <div className="absolute w-72 h-72 bg-green-400/30 rounded-full blur-3xl top-1/4 left-1/4 animate-float"></div>
+
+        {/* Floating Blob 2 */}
+        <div className="absolute w-96 h-96 bg-yellow-400/30 rounded-full blur-3xl bottom-1/4 right-1/4 animate-float animation-delay-2000"></div>
 
       </div>
 
       {/* ============================
-          Content Layer
+          Premium Auth Card
       ============================ */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="relative z-10 min-h-screen w-full flex flex-col items-center justify-center px-4 sm:px-8 py-16"
-      >
-        {children}
-      </motion.div>
+      <div className="relative z-10 w-full max-w-lg">
 
+        <div className="
+          bg-white/80 dark:bg-[#0B0F1A]/90
+          backdrop-blur-xl
+          border border-white/40 dark:border-gray-700
+          rounded-3xl
+          shadow-[0_20px_80px_rgba(0,0,0,0.25)]
+          p-6 sm:p-10
+          flex flex-col items-center
+        ">
+          {children}
+        </div>
+
+      </div>
     </div>
   );
 }
