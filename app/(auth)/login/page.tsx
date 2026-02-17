@@ -19,7 +19,6 @@ export default function LoginPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Login Data:", form);
-    // 🔥 Add login API logic
   };
 
   return (
@@ -33,28 +32,30 @@ export default function LoginPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-full max-w-md flex flex-col items-center gap-6 px-4 sm:px-0"
+        className="w-full flex flex-col items-center gap-6"
       >
         {/* Header */}
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-center bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
-          Welcome Back
-        </h1>
-        <p className="text-center text-gray-600 dark:text-gray-400 text-sm sm:text-base">
-          Login to access your rewards instantly
-        </p>
+        <div className="text-center w-full">
+          <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
+            Sign In
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400 text-sm mt-2">
+            Login to access your rewards instantly
+          </p>
+        </div>
 
         {/* Social login */}
         <SocialButtons className="w-full" />
 
         {/* Divider */}
-        <div className="w-full flex items-center my-4">
+        <div className="w-full flex items-center my-2">
           <div className="flex-grow border-t border-gray-300 dark:border-gray-600"></div>
           <span className="px-2 text-sm text-gray-500 dark:text-gray-400">OR</span>
           <div className="flex-grow border-t border-gray-300 dark:border-gray-600"></div>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="w-full flex flex-col gap-6 relative">
+        <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
           {/* Email Input */}
           <div className="relative">
             <input
@@ -66,11 +67,7 @@ export default function LoginPage() {
               placeholder="Email"
               className="peer w-full p-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-400 placeholder-transparent"
             />
-            <label
-              className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm transition-opacity
-                peer-focus:opacity-0
-                peer-placeholder-shown:opacity-100"
-            >
+            <label className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm transition-opacity peer-focus:opacity-0 peer-placeholder-shown:opacity-100">
               Email
             </label>
           </div>
@@ -86,15 +83,10 @@ export default function LoginPage() {
               placeholder="Password"
               className="peer w-full p-4 pr-12 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-400 placeholder-transparent"
             />
-            <label
-              className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm transition-opacity
-                peer-focus:opacity-0
-                peer-placeholder-shown:opacity-100"
-            >
+            <label className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm transition-opacity peer-focus:opacity-0 peer-placeholder-shown:opacity-100">
               Password
             </label>
 
-            {/* Eye Icon */}
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
@@ -103,26 +95,35 @@ export default function LoginPage() {
               {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
 
-            {/* Forgot Password link */}
             <Link
               href="/reset"
-              className="absolute right-4 top-full mt-2 text-sm text-green-500 hover:underline"
+              className="absolute right-0 -bottom-6 text-xs text-green-500 hover:underline"
             >
               Forgot Password?
             </Link>
           </div>
 
           {/* Login Button */}
-          <button className="mt-6 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black py-3 rounded-xl font-extrabold shadow-lg hover:scale-105 transition-transform duration-200">
-            Login
+          <button className="mt-4 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black py-3 rounded-xl font-extrabold shadow-lg hover:scale-105 transition-transform duration-200">
+            Sign In
           </button>
         </form>
 
+        {/* Prohibited Actions Notice */}
+        <div className="mt-4 p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border border-yellow-200 dark:border-yellow-800">
+          <p className="text-xs text-yellow-800 dark:text-yellow-200 text-center">
+            Users are prohibited from using multiple accounts, completing offers on another user's account, or using any type of VPN, VPS, or Emulator software.
+          </p>
+        </div>
+
         {/* Footer signup link */}
-        <div className="flex justify-center w-full text-sm text-gray-600 dark:text-gray-400 mt-6">
-          <span>Don't have an account? </span>
-          <Link href="/signup" className="ml-1 font-medium text-green-500 hover:underline">
-            Sign Up
+        <div className="flex justify-center w-full text-sm text-gray-600 dark:text-gray-400">
+          <span>No account? </span>
+          <Link
+            href="/signup"
+            className="ml-1 font-medium text-green-500 hover:underline"
+          >
+            Sign up
           </Link>
         </div>
       </motion.div>
