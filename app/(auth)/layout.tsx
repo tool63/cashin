@@ -16,14 +16,14 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
       ============================ */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
 
-        {/* Moving Gradient */}
-        <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 opacity-15 dark:opacity-10"></div>
+        {/* Yellow-Green Moving Gradient */}
+        <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-yellow-400 via-green-400 to-green-400 opacity-30"></div>
 
-        {/* Floating Blob 1 */}
-        <div className="absolute w-72 h-72 bg-green-400/25 rounded-full blur-3xl animate-float top-20 left-10"></div>
+        {/* Green Blob */}
+        <div className="absolute w-80 h-80 bg-green-400/30 rounded-full blur-3xl animate-float top-24 left-12"></div>
 
-        {/* Floating Blob 2 */}
-        <div className="absolute w-96 h-96 bg-yellow-400/25 rounded-full blur-3xl animate-float animation-delay-2000 bottom-10 right-10"></div>
+        {/* Yellow Blob */}
+        <div className="absolute w-[28rem] h-[28rem] bg-yellow-400/30 rounded-full blur-3xl animate-float animation-delay-2000 bottom-12 right-12"></div>
 
       </div>
 
