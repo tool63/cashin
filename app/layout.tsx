@@ -32,36 +32,37 @@ export default function RootLayout({ children }: RootLayoutProps) {
       </head>
 
       <body
-        className={`
-          transition-colors duration-300 
-          bg-[#0B0F1A] text-white
-          ${isAuthPage ? "h-screen overflow-hidden" : "min-h-screen overflow-x-hidden"}
-        `}
+        className="
+          bg-[#0B0F1A] 
+          text-white 
+          transition-colors duration-300
+        "
       >
         <ThemeProviderWrapper>
+          <div className="relative min-h-screen overflow-x-hidden">
 
-          {/* ================= HEADER ================= */}
-          {!isAuthPage && (
-            <div className="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-[#0B0F1A]/70 border-b border-white/10">
-              <Header />
-            </div>
-          )}
+            {/* ================= HEADER ================= */}
+            {!isAuthPage && (
+              <div className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-[#0B0F1A]/70 border-b border-white/10">
+                <Header />
+              </div>
+            )}
 
-          {/* ================= MAIN CONTENT ================= */}
-          <main
-            className={`relative w-full ${
-              isAuthPage
-                ? "h-full flex items-center justify-center px-4 sm:px-6"
-                : "pt-20 min-h-[calc(100vh-160px)]"
-            }`}
-          >
-            {children}
-          </main>
+            {/* ================= MAIN CONTENT ================= */}
+            <main
+              className={`relative w-full ${
+                isAuthPage
+                  ? "min-h-screen flex items-center justify-center px-4 sm:px-6"
+                  : "pt-20 min-h-[calc(100vh-160px)]"
+              }`}
+            >
+              {children}
+            </main>
 
-          {/* ================= FOOTER ================= */}
-          {!isAuthPage && <Footer />}
-          {!isAuthPage && <FloatingCTA />}
-
+            {/* ================= FOOTER ================= */}
+            {!isAuthPage && <Footer />}
+            {!isAuthPage && <FloatingCTA />}
+          </div>
         </ThemeProviderWrapper>
       </body>
     </html>
