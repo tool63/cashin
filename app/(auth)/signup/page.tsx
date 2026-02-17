@@ -4,34 +4,29 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import SeoEngine from "@/components/seo/SeoEngine";
 import AuthLayout from "../layout";
-import SocialButtons from "../SocialButtons";
-import { motion, AnimatePresence } from "framer-motion";
-import { Eye, EyeOff } from "lucide-react";
+import { motion } from "framer-motion";
+import { FcGoogle } from "react-icons/fc";
+import { FaFacebook } from "react-icons/fa";
 
 export default function SignupPage() {
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
-  const [showPassword, setShowPassword] = useState(false);
-  const [counter, setCounter] = useState(110780); // Starting number
-  const [showForm, setShowForm] = useState(false);
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [counter, setCounter] = useState(93095); // Freecash shows ~93k+ signups
 
-  // Handle input change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // Handle form submit
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Signup Data:", form);
-    // 🔥 Add signup API logic here
   };
 
   // Auto counter animation
   useEffect(() => {
     const updateCounter = () => {
-      const randomIncrement = Math.floor(Math.random() * 6) + 1; // 1–6
+      const randomIncrement = Math.floor(Math.random() * 6) + 1;
       setCounter((prev) => prev + randomIncrement);
-      const randomDelay = Math.random() * (300000 - 5000) + 5000; // 5s–5min
+      const randomDelay = Math.random() * (300000 - 5000) + 5000;
       setTimeout(updateCounter, randomDelay);
     };
     const initialDelay = Math.random() * (300000 - 5000) + 5000;
@@ -39,159 +34,129 @@ export default function SignupPage() {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleContinueEmail = () => setShowForm(true);
-
   return (
     <AuthLayout>
       <SeoEngine
-        title="Sign Up - Cashog"
-        description="Create a free Cashog account and start earning rewards instantly."
+        title="Sign Up - Freecash"
+        description="Create a free account and start earning real cash by testing apps, playing games, and taking surveys."
       />
 
-      <div className="w-full flex justify-center relative">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="w-full max-w-md flex flex-col items-center gap-6 px-4 sm:px-0 relative"
-        >
-          {/* =========================
-              BONUS BADGE
-          ========================= */}
-          <div className="absolute -top-10 right-0 bg-yellow-400 text-black font-bold px-4 py-2 rounded-full shadow-lg text-sm animate-bounce z-20">
-            DAILY BONUS +5 Coins
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="w-full flex flex-col items-center gap-4"
+      >
+        {/* Header */}
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+          Sign Up
+        </h1>
+
+        {/* Social Login Buttons */}
+        <div className="w-full flex flex-col gap-3">
+          {/* Google Button */}
+          <button
+            onClick={() => window.location.href = '/api/auth/google'}
+            className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#0B0E1A] hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+          >
+            <FcGoogle size={20} />
+            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              Sign up with Google
+            </span>
+          </button>
+
+          {/* Facebook Button */}
+          <button
+            onClick={() => window.location.href = '/api/auth/facebook'}
+            className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-[#1877F2] hover:bg-[#1666d9] transition-colors"
+          >
+            <FaFacebook size={20} className="text-white" />
+            <span className="text-sm font-medium text-white">
+              Sign up with Facebook
+            </span>
+          </button>
+        </div>
+
+        {/* OR Divider */}
+        <div className="w-full flex items-center gap-2 my-2">
+          <div className="flex-1 border-t border-gray-300 dark:border-gray-700"></div>
+          <span className="text-xs text-gray-500 dark:text-gray-400">OR</span>
+          <div className="flex-1 border-t border-gray-300 dark:border-gray-700"></div>
+        </div>
+
+        {/* Email Form */}
+        <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
+          {/* Email Input */}
+          <div>
+            <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Email
+            </label>
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              required
+              placeholder="Type here..."
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 text-sm"
+            />
           </div>
 
-          {/* Social login buttons */}
-          <div className="w-full flex flex-col gap-3 mt-4">
-            <SocialButtons className="w-full" />
+          {/* Password Input */}
+          <div>
+            <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Password
+            </label>
+            <input
+              type="password"
+              name="password"
+              value={form.password}
+              onChange={handleChange}
+              required
+              placeholder="Type here..."
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 text-sm"
+            />
           </div>
 
-          {/* OR divider */}
-          <div className="w-full flex items-center my-2">
-            <div className="flex-grow border-t border-gray-300 dark:border-gray-600"></div>
-            <span className="px-2 text-sm text-gray-500 dark:text-gray-400">OR</span>
-            <div className="flex-grow border-t border-gray-300 dark:border-gray-600"></div>
-          </div>
-
-          {/* Continue with Email */}
-          {!showForm && (
-            <button
-              onClick={handleContinueEmail}
-              className="w-full py-3 rounded-xl font-semibold bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black shadow-lg hover:scale-105 transition-transform duration-200"
-            >
-              Continue with Email
-            </button>
-          )}
-
-          {/* Signup Form */}
-          <AnimatePresence>
-            {showForm && (
-              <motion.form
-                onSubmit={handleSubmit}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{ duration: 0.6 }}
-                className="w-full flex flex-col gap-4 mt-2"
-              >
-                {/* Name Input */}
-                <div className="relative">
-                  <input
-                    type="text"
-                    name="name"
-                    value={form.name}
-                    onChange={handleChange}
-                    required
-                    placeholder="Full Name"
-                    className="peer w-full p-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-400 placeholder-transparent"
-                  />
-                  <label className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm transition-opacity peer-focus:opacity-0 peer-placeholder-shown:opacity-100">
-                    Full Name
-                  </label>
-                </div>
-
-                {/* Email Input */}
-                <div className="relative">
-                  <input
-                    type="email"
-                    name="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    required
-                    placeholder="Email"
-                    className="peer w-full p-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-400 placeholder-transparent"
-                  />
-                  <label className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm transition-opacity peer-focus:opacity-0 peer-placeholder-shown:opacity-100">
-                    Email
-                  </label>
-                </div>
-
-                {/* Password Input */}
-                <div className="relative">
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    name="password"
-                    value={form.password}
-                    onChange={handleChange}
-                    required
-                    placeholder="Password"
-                    className="peer w-full p-4 pr-12 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-400 placeholder-transparent"
-                  />
-                  <label className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm transition-opacity peer-focus:opacity-0 peer-placeholder-shown:opacity-100">
-                    Password
-                  </label>
-
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-300 hover:text-green-500"
-                  >
-                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                  </button>
-                </div>
-
-                {/* Sign Up Button */}
-                <button className="mt-6 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black py-3 rounded-xl font-extrabold shadow-lg hover:scale-105 transition-transform duration-200">
-                  Sign Up
-                </button>
-              </motion.form>
-            )}
-          </AnimatePresence>
-
-          {/* Terms & Privacy */}
-          <div className="text-xs text-center text-gray-600 dark:text-gray-400 mt-4">
-            By signing up you agree to our{" "}
-            <Link href="/privacy" className="text-green-500 hover:underline">
+          {/* Terms Agreement */}
+          <p className="text-xs text-gray-600 dark:text-gray-400 text-center">
+            By signing up you agree to the{" "}
+            <Link href="/privacy" className="text-green-600 hover:underline">
               Privacy Policy
             </Link>{" "}
             and{" "}
-            <Link href="/terms" className="text-green-500 hover:underline">
+            <Link href="/terms" className="text-green-600 hover:underline">
               Terms of Service
             </Link>
-            .
-          </div>
+          </p>
 
-          {/* Live Counter */}
-          <div className="text-sm text-gray-600 dark:text-gray-400 text-center mt-4">
-            <span className="font-bold text-green-500">
-              {counter.toLocaleString()}+
-            </span>{" "}
-            sign ups in the past 24 hours
-          </div>
+          {/* Sign Up Button */}
+          <button
+            type="submit"
+            className="w-full py-3 px-4 rounded-lg bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold text-sm transition-colors shadow-md"
+          >
+            Sign Up
+          </button>
+        </form>
 
-          {/* Footer login link */}
-          <div className="flex justify-center w-full text-sm text-gray-600 dark:text-gray-400 mt-6">
-            <span>Already have an account? </span>
-            <Link
-              href="/login"
-              className="ml-1 font-medium text-green-500 hover:underline"
-            >
-              Login
-            </Link>
-          </div>
-        </motion.div>
-      </div>
+        {/* Login Link */}
+        <div className="text-sm text-gray-600 dark:text-gray-400">
+          <span>Got an account? </span>
+          <Link href="/login" className="text-green-600 hover:underline font-medium">
+            Log in
+          </Link>
+        </div>
+
+        {/* Prohibited Actions Notice */}
+        <div className="mt-4 text-xs text-gray-500 dark:text-gray-500 text-center max-w-xs">
+          Users are prohibited from using multiple accounts, completing offers on another user's account, or using any type of VPN, VPS, or Emulator software.
+        </div>
+
+        {/* Live Signup Counter */}
+        <div className="text-xs text-gray-500 dark:text-gray-500 text-center mt-2">
+          <span className="font-bold text-green-600">{counter.toLocaleString()}+</span> sign ups in the past 24 hours
+        </div>
+      </motion.div>
     </AuthLayout>
   );
 }
