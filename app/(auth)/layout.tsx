@@ -22,12 +22,12 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
       </div>
 
       {/* ============================
-          Centered Premium Card
+          Centered Premium Card with Thicker Border
       ============================ */}
       <div className="relative w-full max-w-xl sm:max-w-2xl">
 
-        {/* Outer Gradient Border */}
-        <div className="p-[2px] rounded-3xl bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 shadow-[0_25px_80px_rgba(0,0,0,0.25)]">
+        {/* Outer Gradient Border (Thicker) */}
+        <div className="p-2 sm:p-3 md:p-4 rounded-3xl bg-gradient-to-r from-yellow-400 via-green-400 to-yellow-500 shadow-[0_30px_100px_rgba(0,0,0,0.35)]">
 
           {/* Inner Content Area */}
           <div
