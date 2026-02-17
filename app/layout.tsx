@@ -31,22 +31,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <Meta title={defaultTitle} description={defaultDescription} />
       </head>
 
-      <body className="min-h-screen overflow-x-hidden transition-colors duration-300">
+      <body className="min-h-screen overflow-x-hidden transition-colors duration-300 bg-[#0B0F1A] text-white">
         <ThemeProviderWrapper>
-
-          {/* ================= BACKGROUND ================= */}
-          {!isAuthPage && (
-            <div className="fixed inset-0 -z-10 bg-[#0B0F1A] overflow-hidden">
-              
-              <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 opacity-20"></div>
-
-              <div className="absolute w-72 h-72 bg-green-400/30 rounded-full blur-3xl animate-float top-20 left-10"></div>
-
-              <div className="absolute w-96 h-96 bg-yellow-400/30 rounded-full blur-3xl animate-float animation-delay-2000 bottom-10 right-10"></div>
-
-              <div className="absolute inset-0 bg-gradient-radial from-[#0B0F1A] via-[#111827] to-[#0B0F1A] opacity-60"></div>
-            </div>
-          )}
 
           {/* ================= HEADER ================= */}
           {!isAuthPage && (
@@ -55,9 +41,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </div>
           )}
 
-          {/* ================= MAIN ================= */}
+          {/* ================= MAIN CONTENT ================= */}
           {isAuthPage ? (
-            <main className="relative w-full min-h-screen">
+            <main className="relative w-full min-h-screen flex items-center justify-center px-4 sm:px-6">
               {children}
             </main>
           ) : (
