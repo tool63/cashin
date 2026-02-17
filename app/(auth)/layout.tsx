@@ -10,10 +10,6 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
   return (
     <div className="relative w-screen min-h-screen bg-[#0B0F1A] flex justify-center items-start px-4 sm:px-6 py-12 overflow-auto">
 
-      {/* ============================
-          Centered Card Wrapper
-      ============================ */}
-      <div className="relative w-full max-w-2xl flex justify-center items-center">
 
         {/* ============================
             Minimal Floating Blobs (Freecash style)
