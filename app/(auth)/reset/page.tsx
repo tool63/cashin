@@ -18,59 +18,56 @@ export default function ResetPage() {
     <AuthLayout>
       <SeoEngine
         title="Reset Password - Cashog"
-        description="Reset your Cashog password and get back to earning rewards instantly."
+        description="Reset your password and get back to earning."
       />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-full flex flex-col items-center gap-6"
+        className="w-full flex flex-col items-center gap-4"
       >
-        {/* Header */}
-        <div className="text-center w-full">
-          <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
-            Reset Password
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400 text-sm mt-2">
-            Enter your email to receive a secure reset link
-          </p>
-        </div>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+          Reset Password
+        </h1>
+        
+        <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
+          Enter your email to receive a secure reset link
+        </p>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
-          <div className="relative">
+          <div>
+            <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Email
+            </label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              placeholder="Email"
-              className="peer w-full p-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-400 placeholder-transparent"
+              placeholder="Type here..."
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 text-sm"
             />
-            <label className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm transition-opacity peer-focus:opacity-0 peer-placeholder-shown:opacity-100">
-              Email
-            </label>
           </div>
 
-          <button className="mt-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black py-3 rounded-xl font-extrabold shadow-lg hover:scale-105 transition-transform duration-200">
+          <button
+            type="submit"
+            className="w-full py-3 px-4 rounded-lg bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold text-sm transition-colors shadow-md"
+          >
             Send Reset Link
           </button>
         </form>
 
-        {/* Prohibited Actions Notice */}
-        <div className="p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border border-yellow-200 dark:border-yellow-800">
-          <p className="text-xs text-yellow-800 dark:text-yellow-200 text-center">
-            Users are prohibited from using multiple accounts, completing offers on another user's account, or using any type of VPN, VPS, or Emulator software.
-          </p>
+        <div className="mt-2 text-xs text-gray-500 dark:text-gray-500 text-center max-w-xs">
+          Users are prohibited from using multiple accounts, completing offers on another user's account, or using any type of VPN, VPS, or Emulator software.
         </div>
 
-        {/* Footer Links */}
         <div className="flex justify-between w-full text-sm text-gray-600 dark:text-gray-400">
-          <Link href="/login" className="hover:underline font-medium text-green-500">
+          <Link href="/login" className="text-green-600 hover:underline font-medium">
             ← Back to Login
           </Link>
-          <Link href="/signup" className="hover:underline font-medium text-green-500">
+          <Link href="/signup" className="text-green-600 hover:underline font-medium">
             Create Account →
           </Link>
         </div>
