@@ -12,7 +12,6 @@ export default function ResetPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Reset Email:", email);
-    // 🔥 Add reset password API logic
   };
 
   return (
@@ -26,15 +25,17 @@ export default function ResetPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-full max-w-md flex flex-col items-center gap-6"
+        className="w-full flex flex-col items-center gap-6"
       >
         {/* Header */}
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-center bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
-          Reset Your Password
-        </h1>
-        <p className="text-center text-gray-600 dark:text-gray-400 text-sm sm:text-base">
-          Enter your email to receive a secure reset link
-        </p>
+        <div className="text-center w-full">
+          <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
+            Reset Password
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400 text-sm mt-2">
+            Enter your email to receive a secure reset link
+          </p>
+        </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
@@ -47,7 +48,7 @@ export default function ResetPage() {
               placeholder="Email"
               className="peer w-full p-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-400 placeholder-transparent"
             />
-            <label className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-green-400 peer-focus:text-xs transition-all">
+            <label className="absolute left-4 top-4 text-gray-400 dark:text-gray-500 text-sm transition-opacity peer-focus:opacity-0 peer-placeholder-shown:opacity-100">
               Email
             </label>
           </div>
@@ -57,13 +58,20 @@ export default function ResetPage() {
           </button>
         </form>
 
+        {/* Prohibited Actions Notice */}
+        <div className="p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border border-yellow-200 dark:border-yellow-800">
+          <p className="text-xs text-yellow-800 dark:text-yellow-200 text-center">
+            Users are prohibited from using multiple accounts, completing offers on another user's account, or using any type of VPN, VPS, or Emulator software.
+          </p>
+        </div>
+
         {/* Footer Links */}
-        <div className="flex justify-between w-full text-sm text-gray-600 dark:text-gray-400 mt-6">
-          <Link href="/login" className="hover:underline font-medium">
-            Back to Login
+        <div className="flex justify-between w-full text-sm text-gray-600 dark:text-gray-400">
+          <Link href="/login" className="hover:underline font-medium text-green-500">
+            ← Back to Login
           </Link>
-          <Link href="/signup" className="hover:underline font-medium">
-            Create Account
+          <Link href="/signup" className="hover:underline font-medium text-green-500">
+            Create Account →
           </Link>
         </div>
       </motion.div>
