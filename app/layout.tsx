@@ -31,7 +31,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <Meta title={defaultTitle} description={defaultDescription} />
       </head>
 
-      <body className="min-h-screen overflow-x-hidden transition-colors duration-300 bg-[#0B0F1A] text-white">
+      <body
+        className={`
+          transition-colors duration-300 
+          bg-[#0B0F1A] text-white
+          ${isAuthPage ? "h-screen overflow-hidden" : "min-h-screen overflow-x-hidden"}
+        `}
+      >
         <ThemeProviderWrapper>
 
           {/* ================= HEADER ================= */}
@@ -43,9 +49,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
           {/* ================= MAIN CONTENT ================= */}
           <main
-            className={`relative w-full min-h-screen ${
+            className={`relative w-full ${
               isAuthPage
-                ? "flex items-center justify-center px-4 sm:px-6"
+                ? "h-full flex items-center justify-center px-4 sm:px-6"
                 : "pt-20 min-h-[calc(100vh-160px)]"
             }`}
           >
