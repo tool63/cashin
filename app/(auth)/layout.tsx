@@ -15,17 +15,10 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
       "
     >
       {/* ============================
-          Clean Content Card Only
+          CONTENT BODY ONLY
+          No floating blobs, no scrollable card
       ============================ */}
-      <div
-        className="
-          relative w-full max-w-md
-          bg-gradient-to-br from-yellow-400/20 via-green-400/20 to-green-400/20
-          dark:from-yellow-500/20 dark:via-green-500/20 dark:to-green-500/20
-          backdrop-blur-md rounded-3xl shadow-2xl p-6 sm:p-10
-          flex flex-col items-center
-        "
-      >
+      <div className="relative w-full max-w-md flex flex-col items-center">
         {children}
       </div>
     </div>
