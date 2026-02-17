@@ -4,12 +4,12 @@ module.exports = {
     "./app/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
   ],
-  darkMode: "class", // enable dark mode using a class
+  darkMode: "class",
   theme: {
     extend: {
       animation: {
-        gradient: "gradient 8s ease infinite",
-        float: "float 6s ease-in-out infinite",
+        gradient: "gradient 15s ease infinite",
+        float: "float 8s ease-in-out infinite",
       },
       keyframes: {
         gradient: {
@@ -17,8 +17,8 @@ module.exports = {
           "50%": { backgroundPosition: "100% 50%" },
         },
         float: {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-20px)" },
+          "0%, 100%": { transform: "translate3d(0, 0, 0)" },
+          "50%": { transform: "translate3d(0, -20px, 0)" }, // Y only
         },
       },
     },
