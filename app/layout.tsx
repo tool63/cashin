@@ -42,15 +42,15 @@ export default function RootLayout({ children }: RootLayoutProps) {
           )}
 
           {/* ================= MAIN CONTENT ================= */}
-          {isAuthPage ? (
-            <main className="relative w-full min-h-screen flex items-center justify-center px-4 sm:px-6">
-              {children}
-            </main>
-          ) : (
-            <main className="relative pt-20 min-h-[calc(100vh-160px)]">
-              {children}
-            </main>
-          )}
+          <main
+            className={`relative w-full min-h-screen ${
+              isAuthPage
+                ? "flex items-center justify-center px-4 sm:px-6"
+                : "pt-20 min-h-[calc(100vh-160px)]"
+            }`}
+          >
+            {children}
+          </main>
 
           {/* ================= FOOTER ================= */}
           {!isAuthPage && <Footer />}
