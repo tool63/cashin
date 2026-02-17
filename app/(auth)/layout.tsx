@@ -22,28 +22,32 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
       </div>
 
       {/* ============================
-          Centered Premium Card with Thicker Border
+          Centered Premium Card with 2 Gradient Layers
       ============================ */}
       <div className="relative w-full max-w-xl sm:max-w-2xl">
 
-        {/* Outer Gradient Border (Thicker) */}
-        <div className="p-2 sm:p-3 md:p-4 rounded-3xl bg-gradient-to-r from-yellow-400 via-green-400 to-yellow-500 shadow-[0_30px_100px_rgba(0,0,0,0.35)]">
+        {/* ===== Outer Gradient Layer ===== */}
+        <div className="p-4 rounded-3xl bg-gradient-to-r from-yellow-400 via-green-400 to-yellow-500 shadow-[0_30px_100px_rgba(0,0,0,0.35)]">
 
-          {/* Inner Content Area */}
-          <div
-            className="
-              rounded-3xl
-              p-6 sm:p-10
-              flex flex-col items-center justify-center gap-6
-              border border-gray-200 dark:border-gray-700
-              bg-gradient-to-br from-yellow-400/30 via-green-400/30 to-green-400/30
-              dark:bg-gradient-to-br from-yellow-500/20 via-green-500/20 to-green-500/20
-              transition-colors duration-300
-            "
-          >
-            {children}
+          {/* ===== Inner Gradient Layer ===== */}
+          <div className="p-2 rounded-3xl bg-gradient-to-r from-yellow-400/50 via-green-400/50 to-green-400/50">
+
+            {/* ===== Actual Content Card ===== */}
+            <div
+              className="
+                rounded-3xl
+                p-6 sm:p-10
+                flex flex-col items-center justify-center gap-6
+                border border-gray-200 dark:border-gray-700
+                bg-gradient-to-br from-yellow-400/30 via-green-400/30 to-green-400/30
+                dark:bg-gradient-to-br from-yellow-500/20 via-green-500/20 to-green-500/20
+                transition-colors duration-300
+              "
+            >
+              {children}
+            </div>
+
           </div>
-
         </div>
       </div>
     </div>
