@@ -12,7 +12,6 @@ html {
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;    /* lock horizontal scroll globally */
-  overscroll-x-none;     /* prevent iOS elastic horizontal scroll */
 }
 
 body {
@@ -36,7 +35,7 @@ body {
 *::before,
 *::after {
   box-sizing: border-box;
-  max-width: 100vw;      /* important: prevent children from overflowing */
+  max-width: 100vw;      /* prevent children from overflowing horizontally */
 }
 
 /* Remove tap highlight on mobile */
@@ -172,8 +171,7 @@ button {
   body {
     margin: 0;
     padding: 0;
-    overflow-x: hidden;     /* lock horizontal scroll on mobile */
-    overscroll-x-none;      /* prevent elastic scroll on iOS */
+    overflow-x: hidden;   /* lock horizontal scroll on mobile */
   }
 
   /* Prevent accidental overflow from children on mobile */
