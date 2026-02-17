@@ -14,13 +14,13 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
         w-full min-h-screen
         bg-[#0B0F1A]
         px-4 sm:px-6
-        overflow-x-hidden
+        overflow-x-hidden  /* BLOCK horizontal scroll */
       "
     >
       {/* ============================
           CONTENT BODY STARTS FROM TOP
       ============================ */}
-      <div className="relative w-full max-w-md mx-auto flex flex-col items-center pt-12 sm:pt-16">
+      <div className="relative w-full max-w-md mx-auto flex flex-col items-center pt-12 sm:pt-16 overflow-x-hidden">
         {children}
       </div>
     </div>
