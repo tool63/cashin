@@ -9,27 +9,8 @@ interface AuthLayoutProps {
 
 export default function AuthLayout({ children }: AuthLayoutProps) {
   return (
-    <div className="relative w-screen min-h-screen bg-[#0B0F1A] flex justify-center items-center overflow-hidden">
+    <div className="relative w-screen min-h-screen flex justify-center items-center bg-gradient-to-tr from-[#0B0F1A] via-[#111827] to-[#0B0F1A]">
       
-      {/* ===================== Background Gradient ===================== */}
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-tr from-[#0B0F1A] via-[#111827] to-[#0B0F1A] opacity-80"
-        animate={{ rotate: [0, 2, -2, 0] }}
-        transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
-      />
-
-      {/* ===================== Subtle Floating Blobs ===================== */}
-      <motion.div
-        className="absolute w-72 h-72 bg-green-500/10 rounded-full top-16 left-10 filter blur-3xl"
-        animate={{ y: [0, -30, 0], x: [0, 20, 0] }}
-        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute w-96 h-96 bg-yellow-400/10 rounded-full bottom-10 right-10 filter blur-3xl"
-        animate={{ y: [0, 20, 0], x: [0, -20, 0] }}
-        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-      />
-
       {/* ===================== Glassmorphic Card ===================== */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
