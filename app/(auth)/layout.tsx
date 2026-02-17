@@ -1,7 +1,6 @@
 "use client";
 
 import React, { ReactNode } from "react";
-import { motion } from "framer-motion";
 
 interface AuthLayoutProps {
   children: ReactNode;
@@ -9,18 +8,19 @@ interface AuthLayoutProps {
 
 export default function AuthLayout({ children }: AuthLayoutProps) {
   return (
-    <div className="w-screen min-h-screen flex justify-center items-center bg-[#0B0F1A]">
+    <div className="relative w-screen min-h-screen bg-[#0B0F1A] overflow-auto flex justify-center items-start px-4 sm:px-6 py-12">
       
-      {/* ===================== Glassmorphic Card ===================== */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative w-full max-w-md p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-white/5 via-white/10 to-white/5 backdrop-blur-xl shadow-2xl border border-white/20"
-      >
-        {children}
-      </motion.div>
-
+      {/* ============================
+          Scrollable Content Card
+      ============================ */}
+      <div className="relative w-full max-w-2xl flex justify-center items-center overflow-visible">
+        <div className="relative z-10 w-full max-h-[90vh] overflow-auto 
+                        bg-gradient-to-br from-yellow-400/20 via-green-400/20 to-green-400/20
+                        dark:from-yellow-500/20 dark:via-green-500/20 dark:to-green-500/20
+                        backdrop-blur-md rounded-3xl shadow-2xl p-6 sm:p-10">
+          {children}
+        </div>
+      </div>
     </div>
   );
 }
