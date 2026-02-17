@@ -21,8 +21,6 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
         {children}
       </motion.div>
 
-      {/* ===================== Optional Bottom Accent ===================== */}
-      <div className="absolute bottom-0 w-full h-24 bg-gradient-to-t from-[#0B0F1A] via-transparent to-transparent pointer-events-none" />
     </div>
   );
 }
