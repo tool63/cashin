@@ -144,57 +144,11 @@ button:disabled {
   border-radius: 1rem;
   background: white;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  position: relative;
 }
 
 .dark .auth-card {
   background: #0b0e1a;
   border: 1px solid #1f2937;
-}
-
-/* =====================================================
-   CLOSE BUTTON
-===================================================== */
-
-.close-button {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 2rem;
-  height: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 9999px;
-  background-color: white;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e5e7eb;
-  transition: all 0.2s ease;
-  cursor: pointer;
-}
-
-.close-button:hover {
-  background-color: #f3f4f6;
-  transform: scale(1.1);
-}
-
-.close-button svg {
-  width: 1rem;
-  height: 1rem;
-  color: #4b5563;
-}
-
-.dark .close-button {
-  background-color: #1f2937;
-  border-color: #374151;
-}
-
-.dark .close-button:hover {
-  background-color: #374151;
-}
-
-.dark .close-button svg {
-  color: #9ca3af;
 }
 
 /* =====================================================
@@ -204,13 +158,6 @@ button:disabled {
 @media (max-width: 640px) {
   .auth-card {
     padding: 1.5rem 1rem;
-  }
-  
-  .close-button {
-    top: 0.5rem;
-    right: 0.5rem;
-    width: 1.75rem;
-    height: 1.75rem;
   }
   
   input[type="text"],
