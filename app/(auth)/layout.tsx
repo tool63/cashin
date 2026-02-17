@@ -18,15 +18,18 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
         {/* Outer Gradient Border */}
         <div className="p-[2px] rounded-3xl bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 shadow-[0_25px_80px_rgba(0,0,0,0.25)]">
 
-          {/* Inner Card */}
-          <div className="
-            rounded-3xl
-            bg-white dark:bg-[#0F172A]
-            border border-gray-200 dark:border-gray-700
-            p-6 sm:p-10
-            flex flex-col items-center justify-center gap-6
-            transition-colors duration-300
-          ">
+          {/* Inner Gradient Content Area */}
+          <div
+            className="
+              rounded-3xl
+              p-6 sm:p-10
+              flex flex-col items-center justify-center gap-6
+              transition-colors duration-300
+              border border-gray-200 dark:border-gray-700
+              bg-gradient-to-br from-yellow-400/30 via-green-400/30 to-green-400/30
+              dark:bg-gradient-to-br from-yellow-500/20 via-green-500/20 to-green-500/20
+            "
+          >
             {children}
           </div>
 
