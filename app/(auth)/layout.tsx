@@ -8,24 +8,27 @@ interface AuthLayoutProps {
 
 export default function AuthLayout({ children }: AuthLayoutProps) {
   return (
-    <div className="min-h-screen w-full bg-[#0f1115] flex items-center justify-center px-4">
-      
-      {/* Background Subtle Glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-yellow-500/10 blur-[120px] rounded-full" />
-      </div>
+    <div className="relative w-screen min-h-screen bg-[#0B0F1A] flex justify-center items-start px-4 sm:px-6 py-12 overflow-auto">
 
-      {/* Auth Card */}
-      <div className="relative z-10 w-full max-w-md bg-[#171a21] border border-white/5 rounded-2xl shadow-2xl p-8">
-        
-        {/* Logo */}
-        <div className="flex justify-center mb-8">
-          <h1 className="text-2xl font-bold text-white tracking-wide">
-            <span className="text-yellow-400">Cash</span>og
-          </h1>
+      {/* ============================
+          Centered Card Wrapper
+      ============================ */}
+      <div className="relative w-full max-w-2xl flex justify-center items-center">
+
+        {/* ============================
+            Minimal Floating Blobs (Freecash style)
+        ============================ */}
+        <div className="absolute -top-32 -left-32 w-48 h-48 bg-yellow-400/20 rounded-full blur-3xl animate-float pointer-events-none z-0"></div>
+        <div className="absolute -bottom-32 -right-32 w-56 h-56 bg-green-400/20 rounded-full blur-3xl animate-float animation-delay-2000 pointer-events-none z-0"></div>
+
+        {/* ============================
+            Scrollable Card Content
+        ============================ */}
+        <div className="relative z-10 w-full max-h-[90vh] overflow-auto
+                        bg-gradient-to-br from-yellow-400/10 via-green-400/10 to-green-400/10
+                        backdrop-blur-md rounded-3xl shadow-2xl p-6 sm:p-10">
+          {children}
         </div>
-
-        {children}
 
       </div>
     </div>
