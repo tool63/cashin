@@ -11,13 +11,16 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
     <div
       className="
         relative
-        w-full min-h-screen
+        w-screen h-[calc(100vh-1px)]   /* Full viewport minus 1px to prevent mobile overflow */
         bg-[#0B0F1A]
         flex justify-center items-center
         px-4 sm:px-6
         overflow-x-hidden
       "
     >
+      {/* ============================
+          CONTENT BODY
+      ============================ */}
       <div className="relative w-full max-w-md flex flex-col items-center">
         {children}
       </div>
