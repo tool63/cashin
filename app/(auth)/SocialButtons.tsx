@@ -10,7 +10,6 @@ interface SocialButtonsProps {
 
 export default function SocialButtons({ className }: SocialButtonsProps) {
   const handleSocialLogin = (provider: string) => {
-    // 🔥 Implement OAuth logic here
     window.location.href = `/api/auth/${provider}`;
   };
 
