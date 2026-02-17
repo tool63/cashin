@@ -18,7 +18,7 @@ body {
   min-height: 100%;
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden; /* prevent 100vw overflows */
+  overflow-x: hidden; /* prevent 100vw overflow */
   position: relative;
 
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
