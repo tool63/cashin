@@ -3,8 +3,8 @@
 import { useState } from "react";
 import ModalRoot from "@/components/modals/ModalRoot";
 import AuthModal from "@/components/modals/AuthModal";
-import AuthPageWrapper from "@/components/auth/AuthPageWrapper";
-import SocialButtons from "@/components/auth/SocialButtons";
+import AuthPageWrapper from "@/app/auth/AuthPageWrapper";
+import SocialButtons from "@/app/auth/SocialButtons";
 import Link from "next/link";
 
 export default function LoginPage() {
