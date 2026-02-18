@@ -61,7 +61,7 @@ button {
 }
 
 /* =====================================================
-   ANIMATIONS - From Affiliate Page
+   ANIMATIONS
 ===================================================== */
 
 @keyframes gradient {
@@ -95,83 +95,10 @@ button {
   animation-delay: 2s;
 }
 
-@keyframes pulse-glow {
-  0%, 100% {
-    opacity: 0.5;
-  }
-  50% {
-    opacity: 0.8;
-  }
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
-}
-
-/* =====================================================
-   SCROLLBAR - Premium Dark Theme
-===================================================== */
-
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #1F2937;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #4B5563;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #6B7280;
-}
-
 /* =====================================================
    UTILITIES
 ===================================================== */
 
 .gradient-text {
   @apply bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500;
-}
-
-/* Card styles matching Affiliate page */
-.premium-card {
-  @apply bg-[#111827] rounded-2xl border border-gray-800/50 shadow-xl;
-}
-
-/* Glass effect */
-.glass-effect {
-  @apply backdrop-blur-xl bg-[#111827]/90;
-}
-
-/* Gradient border */
-.gradient-border {
-  position: relative;
-  border: double 1px transparent;
-  background-image: linear-gradient(#111827, #111827), 
-                    linear-gradient(to right, #fbbf24, #22c55e, #22c55e);
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
-}
-
-/* Floating blob - from affiliate page */
-.floating-blob {
-  @apply absolute rounded-full blur-3xl opacity-30 animate-float;
-}
-
-/* =====================================================
-   DARK MODE OVERRIDES (Now default)
-===================================================== */
-
-.dark {
-  color-scheme: dark;
-}
-
-/* Remove light mode styles since we're dark by default */
-.light {
-  /* Keep for compatibility if needed */
 }
