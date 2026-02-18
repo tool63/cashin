@@ -21,6 +21,7 @@ export default function AuthModal({ children }: AuthModalProps) {
         <X size={20} />
       </button>
 
+      {/* Modal content (form / SocialButtons / iframe) */}
       {children}
     </div>
   );
