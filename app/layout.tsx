@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import FloatingCTA from "@/components/cta/FloatingCTA";
 import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
 import Meta from "@/components/seo/SeoEngine";
+import ModalRoot from "@/components/modals/ModalRoot"; // Import ModalRoot
 
 interface RootLayoutProps {
   children: ReactNode;
@@ -34,14 +35,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
         className={`transition-colors duration-300 bg-[#0B0F1A] text-white overflow-x-hidden overscroll-x-none`}
       >
         <ThemeProviderWrapper>
-          {/* Header */}
+          {/* Header - hidden on auth pages */}
           {!isAuthPage && (
             <div className="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-[#0B0F1A]/70 border-b border-white/10">
               <Header />
             </div>
           )}
 
-          {/* Main */}
+          {/* Main Content */}
           <main
             className={`relative w-full ${
               isAuthPage
@@ -52,9 +53,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
             {children}
           </main>
 
-          {/* Footer */}
+          {/* Footer & CTA - hidden on auth pages */}
           {!isAuthPage && <Footer />}
           {!isAuthPage && <FloatingCTA />}
+
+          {/* Modal Root - handles auth modals on top of any page */}
+          <ModalRoot />
         </ThemeProviderWrapper>
       </body>
     </html>
