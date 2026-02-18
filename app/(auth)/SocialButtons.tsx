@@ -1,3 +1,4 @@
+// app/(auth)/SocialButtons.tsx
 "use client";
 
 import React from "react";
@@ -8,7 +9,7 @@ interface SocialButtonsProps {
   className?: string;
 }
 
-export default function SocialButtons({ className }: SocialButtonsProps) {
+export default function SocialButtons({ className = "" }: SocialButtonsProps) {
   const handleSocialLogin = (provider: string) => {
     window.location.href = `/api/auth/${provider}`;
   };
@@ -18,10 +19,10 @@ export default function SocialButtons({ className }: SocialButtonsProps) {
       {/* Google Button */}
       <button
         onClick={() => handleSocialLogin("google")}
-        className="flex items-center justify-center gap-3 p-3 sm:p-4 rounded-xl bg-white/80 dark:bg-[#0B0E1A]/80 border border-gray-200 dark:border-gray-700 backdrop-blur-md shadow-md hover:shadow-lg transition transform hover:-translate-y-0.5"
+        className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#0b0e1a] hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-sm"
       >
-        <FcGoogle size={24} />
-        <span className="font-semibold text-gray-900 dark:text-white text-sm sm:text-base">
+        <FcGoogle size={18} />
+        <span className="font-medium text-gray-700 dark:text-gray-300">
           Continue with Google
         </span>
       </button>
@@ -29,10 +30,10 @@ export default function SocialButtons({ className }: SocialButtonsProps) {
       {/* Facebook Button */}
       <button
         onClick={() => handleSocialLogin("facebook")}
-        className="flex items-center justify-center gap-3 p-3 sm:p-4 rounded-xl bg-blue-600 border border-blue-600 shadow-md hover:shadow-lg transition transform hover:-translate-y-0.5"
+        className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg bg-[#1877F2] hover:bg-[#1666d9] dark:bg-[#1877F2] dark:hover:bg-[#1666d9] transition-colors text-sm"
       >
-        <FaFacebook size={20} className="text-white" />
-        <span className="font-semibold text-white text-sm sm:text-base">
+        <FaFacebook size={18} className="text-white" />
+        <span className="font-medium text-white">
           Continue with Facebook
         </span>
       </button>
