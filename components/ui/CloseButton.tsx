@@ -12,13 +12,13 @@ export default function CloseButton({ className = '' }: CloseButtonProps) {
   const router = useRouter();
 
   const handleClose = () => {
-    router.back(); // Go back to previous page
+    router.back();
   };
 
   return (
     <button
       onClick={handleClose}
-      className={`absolute top-4 right-4 p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors ${className}`}
+      className={`absolute top-4 right-4 p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors z-50 ${className}`}
       aria-label="Close"
     >
       <X size={20} className="text-gray-500 dark:text-gray-400" />
