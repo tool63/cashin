@@ -3,15 +3,15 @@
 
 import { ReactNode } from "react";
 
-interface AuthLayoutProps {
-  children: ReactNode;
-  onClose?: () => void;
-}
-
-export default function AuthLayout({ children, onClose }: AuthLayoutProps) {
+export default function AuthLayout({ 
+  children 
+}: { 
+  children: ReactNode 
+}) {
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget && onClose) {
-      onClose();
+    if (e.target === e.currentTarget) {
+      // You might want to handle navigation here or use a different approach
+      window.history.back();
     }
   };
 
