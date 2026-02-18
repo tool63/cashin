@@ -2,11 +2,12 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import SeoEngine from "@/components/seo/SeoEngine";
-import AuthLayout from "../layout";
 import { motion } from "framer-motion";
+import { X } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function ResetPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -14,31 +15,42 @@ export default function ResetPage() {
     console.log("Reset Email:", email);
   };
 
-  return (
-    <AuthLayout>
-      <SeoEngine
-        title="Reset Password - Cashog"
-        description="Reset your password and get back to earning."
-      />
+  const handleClose = () => {
+    router.back();
+  };
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="w-full flex flex-col items-center gap-4"
-      >
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-          Reset Password
-        </h1>
-        
-        <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.2 }}
+      className="bg-white dark:bg-[#0b0e1a] rounded-2xl shadow-2xl overflow-hidden"
+    >
+      {/* Header with close button */}
+      <div className="relative py-4 border-b border-gray-200 dark:border-gray-800">
+        <h2 className="text-center font-semibold text-gray-900 dark:text-white">
+          Reset password
+        </h2>
+        <button
+          onClick={handleClose}
+          className="absolute right-4 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+          aria-label="Close"
+        >
+          <X size={20} className="text-gray-500 dark:text-gray-400" />
+        </button>
+      </div>
+
+      {/* Content */}
+      <div className="p-6">
+        <p className="text-sm text-gray-600 dark:text-gray-400 text-center mb-4">
           Enter your email to receive a secure reset link
         </p>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
               Email
             </label>
             <input
@@ -47,23 +59,25 @@ export default function ResetPage() {
               onChange={(e) => setEmail(e.target.value)}
               required
               placeholder="Type here..."
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 text-sm"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full py-3 px-4 rounded-lg bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold text-sm transition-colors shadow-md"
+            className="w-full py-2.5 px-4 rounded-lg bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold text-sm transition-colors shadow-md"
           >
             Send Reset Link
           </button>
         </form>
 
-        <div className="mt-2 text-xs text-gray-500 dark:text-gray-500 text-center max-w-xs">
+        {/* Prohibited Notice */}
+        <div className="mt-4 text-xs text-gray-500 dark:text-gray-500 text-center leading-tight">
           Users are prohibited from using multiple accounts, completing offers on another user's account, or using any type of VPN, VPS, or Emulator software.
         </div>
 
-        <div className="flex justify-between w-full text-sm text-gray-600 dark:text-gray-400">
+        {/* Footer Links */}
+        <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mt-4">
           <Link href="/login" className="text-green-600 hover:underline font-medium">
             ← Back to Login
           </Link>
@@ -71,7 +85,7 @@ export default function ResetPage() {
             Create Account →
           </Link>
         </div>
-      </motion.div>
-    </AuthLayout>
+      </div>
+    </motion.div>
   );
 }
