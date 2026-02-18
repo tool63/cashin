@@ -16,10 +16,9 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
     <div
       onClick={handleBackdropClick}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 overflow-y-auto py-10"
+      className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/60 py-10"
     >
-      {/* Simple modal container - exactly like Freecash */}
-      <div className="relative w-full max-w-md mx-auto my-auto">
+      <div className="w-full max-w-md mx-auto my-auto">
         {children}
       </div>
     </div>
