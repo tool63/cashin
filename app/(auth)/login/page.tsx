@@ -2,13 +2,14 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import SeoEngine from "@/components/seo/SeoEngine";
-import AuthLayout from "../layout";
 import { motion } from "framer-motion";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
+import { X } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [form, setForm] = useState({ email: "", password: "" });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,55 +21,66 @@ export default function LoginPage() {
     console.log("Login Data:", form);
   };
 
-  return (
-    <AuthLayout>
-      <SeoEngine
-        title="Sign In - Cashog"
-        description="Login to your account and continue earning rewards."
-      />
+  const handleClose = () => {
+    router.back();
+  };
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="w-full flex flex-col items-center gap-4"
-      >
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-          Sign In
-        </h1>
-        
-        <p className="text-sm text-gray-600 dark:text-gray-400">
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.2 }}
+      className="bg-white dark:bg-[#0b0e1a] rounded-2xl shadow-2xl overflow-hidden"
+    >
+      {/* Header with close button */}
+      <div className="relative py-4 border-b border-gray-200 dark:border-gray-800">
+        <h2 className="text-center font-semibold text-gray-900 dark:text-white">
+          Sign in
+        </h2>
+        <button
+          onClick={handleClose}
+          className="absolute right-4 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+          aria-label="Close"
+        >
+          <X size={20} className="text-gray-500 dark:text-gray-400" />
+        </button>
+      </div>
+
+      {/* Content */}
+      <div className="p-6">
+        <p className="text-sm text-gray-600 dark:text-gray-400 text-center mb-4">
           Login to access your rewards instantly
         </p>
 
-        {/* Social Login */}
-        <div className="w-full flex flex-col gap-3">
-          <button className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#0B0E1A] hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-            <FcGoogle size={20} />
-            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+        {/* Social Buttons */}
+        <div className="space-y-2">
+          <button className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#0b0e1a] hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-sm">
+            <FcGoogle size={18} />
+            <span className="font-medium text-gray-700 dark:text-gray-300">
               Continue with Google
             </span>
           </button>
 
-          <button className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-[#1877F2] hover:bg-[#1666d9] transition-colors">
-            <FaFacebook size={20} className="text-white" />
-            <span className="text-sm font-medium text-white">
+          <button className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg bg-[#1877F2] hover:bg-[#1666d9] transition-colors text-sm">
+            <FaFacebook size={18} className="text-white" />
+            <span className="font-medium text-white">
               Continue with Facebook
             </span>
           </button>
         </div>
 
         {/* OR Divider */}
-        <div className="w-full flex items-center gap-2 my-2">
-          <div className="flex-1 border-t border-gray-300 dark:border-gray-700"></div>
-          <span className="text-xs text-gray-500 dark:text-gray-400">OR</span>
-          <div className="flex-1 border-t border-gray-300 dark:border-gray-700"></div>
+        <div className="flex items-center gap-2 my-4">
+          <div className="flex-1 border-t border-gray-200 dark:border-gray-800"></div>
+          <span className="text-xs text-gray-400">OR</span>
+          <div className="flex-1 border-t border-gray-200 dark:border-gray-800"></div>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
               Email
             </label>
             <input
@@ -78,12 +90,12 @@ export default function LoginPage() {
               onChange={handleChange}
               required
               placeholder="Type here..."
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 text-sm"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
               Password
             </label>
             <input
@@ -93,33 +105,35 @@ export default function LoginPage() {
               onChange={handleChange}
               required
               placeholder="Type here..."
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 text-sm"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </div>
 
-          <Link href="/reset" className="text-xs text-green-600 hover:underline text-right">
+          <Link href="/reset" className="block text-xs text-green-600 hover:underline text-right">
             Forgot Password?
           </Link>
 
           <button
             type="submit"
-            className="w-full py-3 px-4 rounded-lg bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold text-sm transition-colors shadow-md"
+            className="w-full py-2.5 px-4 rounded-lg bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold text-sm transition-colors shadow-md"
           >
             Sign In
           </button>
         </form>
 
-        <div className="mt-2 text-xs text-gray-500 dark:text-gray-500 text-center max-w-xs">
+        {/* Prohibited Notice */}
+        <div className="mt-4 text-xs text-gray-500 dark:text-gray-500 text-center leading-tight">
           Users are prohibited from using multiple accounts, completing offers on another user's account, or using any type of VPN, VPS, or Emulator software.
         </div>
 
-        <div className="text-sm text-gray-600 dark:text-gray-400">
+        {/* Signup Link */}
+        <div className="text-center text-sm text-gray-600 dark:text-gray-400 mt-4">
           <span>No account? </span>
           <Link href="/signup" className="text-green-600 hover:underline font-medium">
             Sign up
           </Link>
         </div>
-      </motion.div>
-    </AuthLayout>
+      </div>
+    </motion.div>
   );
 }
