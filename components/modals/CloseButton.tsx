@@ -1,4 +1,4 @@
-// components/ui/CloseButton.tsx
+// components/modals/CloseButton.tsx
 'use client';
 
 import { useRouter } from 'next/navigation';
