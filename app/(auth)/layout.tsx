@@ -2,14 +2,16 @@
 "use client";
 
 import { ReactNode } from "react";
-import { useRouter } from "next/navigation";
 
-export default function AuthLayout({ children }: { children: ReactNode }) {
-  const router = useRouter();
+interface AuthLayoutProps {
+  children: ReactNode;
+  onClose?: () => void;
+}
 
+export default function AuthLayout({ children, onClose }: AuthLayoutProps) {
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) {
-      router.back();
+    if (e.target === e.currentTarget && onClose) {
+      onClose();
     }
   };
 
