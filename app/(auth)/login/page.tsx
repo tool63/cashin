@@ -5,11 +5,9 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
-import { X } from "lucide-react";
-import { useRouter } from "next/navigation";
+import CloseButton from "@/components/ui/CloseButton";
 
 export default function LoginPage() {
-  const router = useRouter();
   const [form, setForm] = useState({ email: "", password: "" });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,34 +19,21 @@ export default function LoginPage() {
     console.log("Login Data:", form);
   };
 
-  const handleClose = () => {
-    router.back();
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.2 }}
-      className="bg-white dark:bg-[#0b0e1a] rounded-2xl shadow-2xl overflow-hidden"
+      className="bg-white dark:bg-[#0b0e1a] rounded-2xl shadow-2xl overflow-hidden relative"
     >
-      {/* Header with close button */}
-      <div className="relative py-4 border-b border-gray-200 dark:border-gray-800">
-        <h2 className="text-center font-semibold text-gray-900 dark:text-white">
+      <CloseButton />
+
+      <div className="p-6">
+        <h2 className="text-center font-semibold text-gray-900 dark:text-white mb-2">
           Sign in
         </h2>
-        <button
-          onClick={handleClose}
-          className="absolute right-4 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-          aria-label="Close"
-        >
-          <X size={20} className="text-gray-500 dark:text-gray-400" />
-        </button>
-      </div>
-
-      {/* Content */}
-      <div className="p-6">
+        
         <p className="text-sm text-gray-600 dark:text-gray-400 text-center mb-4">
           Login to access your rewards instantly
         </p>
