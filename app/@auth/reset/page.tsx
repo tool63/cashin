@@ -3,7 +3,7 @@
 import { useState } from "react";
 import ModalRoot from "@/components/modals/ModalRoot";
 import AuthModal from "@/components/modals/AuthModal";
-import AuthPageWrapper from "@/app/auth/AuthPageWrapper";
+import AuthPageWrapper from "./AuthPageWrapper";
 import Link from "next/link";
 
 export default function ResetPage() {
