@@ -12,6 +12,8 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
+  background-color: #0B0F1A;
+  color: #ffffff;
 }
 
 *,
@@ -35,19 +37,18 @@ a {
 
 input {
   width: 100%;
-  border-radius: 0.5rem;
-  border: 1px solid #d1d5db;
-  padding: 0.5rem 0.75rem;
-  background-color: #fff;
-  color: #111827;
+  border-radius: 0.75rem;
+  border: 1px solid #374151;
+  padding: 0.75rem 1rem;
+  background-color: #1F2937;
+  color: #ffffff;
   outline: none;
   font-size: 0.875rem;
+  transition: all 0.2s ease;
 }
 
-.dark input {
-  border-color: #374151;
-  background-color: #0b0e1a;
-  color: #f9fafb;
+input::placeholder {
+  color: #6B7280;
 }
 
 input:focus {
@@ -60,9 +61,117 @@ button {
 }
 
 /* =====================================================
+   ANIMATIONS - From Affiliate Page
+===================================================== */
+
+@keyframes gradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* =====================================================
+   SCROLLBAR - Premium Dark Theme
+===================================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1F2937;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4B5563;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6B7280;
+}
+
+/* =====================================================
    UTILITIES
 ===================================================== */
 
 .gradient-text {
   @apply bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500;
+}
+
+/* Card styles matching Affiliate page */
+.premium-card {
+  @apply bg-[#111827] rounded-2xl border border-gray-800/50 shadow-xl;
+}
+
+/* Glass effect */
+.glass-effect {
+  @apply backdrop-blur-xl bg-[#111827]/90;
+}
+
+/* Gradient border */
+.gradient-border {
+  position: relative;
+  border: double 1px transparent;
+  background-image: linear-gradient(#111827, #111827), 
+                    linear-gradient(to right, #fbbf24, #22c55e, #22c55e);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+/* Floating blob - from affiliate page */
+.floating-blob {
+  @apply absolute rounded-full blur-3xl opacity-30 animate-float;
+}
+
+/* =====================================================
+   DARK MODE OVERRIDES (Now default)
+===================================================== */
+
+.dark {
+  color-scheme: dark;
+}
+
+/* Remove light mode styles since we're dark by default */
+.light {
+  /* Keep for compatibility if needed */
 }
