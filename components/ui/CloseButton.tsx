@@ -12,7 +12,7 @@ export default function CloseButton({ className = '' }: CloseButtonProps) {
   const router = useRouter();
 
   const handleClose = () => {
-    router.back();
+    router.back(); // Always goes back to the previous page
   };
 
   return (
