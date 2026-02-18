@@ -3,8 +3,8 @@
 import { useState } from "react";
 import ModalRoot from "@/components/modals/ModalRoot";
 import AuthModal from "@/components/modals/AuthModal";
-import AuthPageWrapper from "./AuthPageWrapper";
-import SocialButtons from "./SocialButtons";
+import AuthPageWrapper from "@/components/auth/AuthPageWrapper";
+import SocialButtons from "@/components/auth/SocialButtons";
 import Link from "next/link";
 
 export default function SignupPage() {
