@@ -13,19 +13,19 @@ export default function AuthModal({ children }: AuthModalProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  // Build the current path with query string
+  // Preserve query string if present
   const currentPath = searchParams?.toString()
     ? `${pathname}?${searchParams.toString()}`
     : pathname;
 
-  // Close modal by navigating to the same page — clears @auth slot
+  // Close modal completely
   const handleClose = () => {
-    router.replace(currentPath);
+    router.replace(currentPath); // removes @auth slot, keeps page
   };
 
   return (
     <div className="relative w-full max-w-md bg-neutral-900 border border-neutral-800 rounded-2xl p-8 shadow-2xl animate-slideUp">
-      
+      {/* Cross Icon Button */}
       <button
         onClick={handleClose}
         className="absolute top-4 right-4 text-neutral-400 hover:text-white transition"
@@ -33,6 +33,7 @@ export default function AuthModal({ children }: AuthModalProps) {
         <X size={20} />
       </button>
 
+      {/* Modal Content */}
       {children}
     </div>
   );
