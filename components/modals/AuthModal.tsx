@@ -2,7 +2,7 @@
 
 import { ReactNode } from "react";
 import { X } from "lucide-react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 interface AuthModalProps {
   children: ReactNode;
@@ -10,15 +10,14 @@ interface AuthModalProps {
 
 /**
  * AuthModal wraps login/signup/reset forms in a modal
- * Cross icon completely closes the modal
+ * Cross icon completely closes the modal using parallel route removal
  */
 export default function AuthModal({ children }: AuthModalProps) {
   const router = useRouter();
-  const pathname = usePathname(); // get current page path
 
-  // Close modal by replacing the current path (removes @auth parallel route)
   const handleClose = () => {
-    router.replace(pathname); // fully closes modal
+    // Clear the @auth parallel route slot by navigating to the root without the slot
+    router.push("/", { forceOptimisticNavigation: true });
   };
 
   return (
@@ -32,7 +31,7 @@ export default function AuthModal({ children }: AuthModalProps) {
         <X size={20} />
       </button>
 
-      {/* Modal Content (login/signup/reset forms go here) */}
+      {/* Modal Content */}
       {children}
     </div>
   );
