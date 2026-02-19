@@ -44,23 +44,62 @@ const steps = [
 
 /* ================= FEATURES ================= */
 const features = [
-  { title: "Fast Payouts", description: "Get earnings instantly." },
-  { title: "Trusted & Secure", description: "Millions rely on Cashog daily." },
-  { title: "High-Paying Offers", description: "Top offers to maximize rewards." },
-  { title: "Mobile-Friendly", description: "Earn on-the-go easily." },
-  { title: "Global Access", description: "Available worldwide." },
-  { title: "24/7 Support", description: "We’re always ready to help." },
+  {
+    title: "Fast Payouts",
+    description: "Get your earnings instantly via PayPal or gift cards.",
+  },
+  {
+    title: "Trusted & Secure",
+    description: "Millions of users rely on Cashog daily.",
+  },
+  {
+    title: "High-Paying Offers",
+    description: "Top offers to maximize your rewards.",
+  },
+  {
+    title: "Mobile-Friendly",
+    description: "Earn on-the-go with our fully responsive platform.",
+  },
+  {
+    title: "Global Access",
+    description: "Join and earn from anywhere in the world.",
+  },
+  {
+    title: "24/7 Support",
+    description: "Our team is always ready to assist you.",
+  },
 ];
 
 /* ================= FAQ ================= */
 const faqs = [
   {
     q: "How can I withdraw my earnings?",
-    a: "Withdraw via PayPal, gift cards, or mobile top-ups instantly.",
+    a: "Withdraw via PayPal, gift cards, or mobile top-ups instantly after reaching the minimum threshold.",
   },
-  { q: "Is Cashog safe?", a: "Yes, all offers are verified and secure." },
-  { q: "Do I need to pay anything?", a: "No, Cashog is completely free." },
-  { q: "Is there a minimum age?", a: "Users must be at least 13 years old." },
+  {
+    q: "Is Cashog safe?",
+    a: "Yes, all offers and tasks are verified and secure for all users.",
+  },
+  {
+    q: "Do I need to pay anything?",
+    a: "No, joining and using Cashog is completely free.",
+  },
+  {
+    q: "Can I use Cashog on mobile?",
+    a: "Yes, the platform is fully mobile-friendly for earning anywhere.",
+  },
+  {
+    q: "Is there a minimum age?",
+    a: "Users must be at least 13 years old to create an account.",
+  },
+  {
+    q: "How fast are payouts?",
+    a: "Most withdrawals are processed instantly or within a few hours.",
+  },
+  {
+    q: "Can I join from any country?",
+    a: "Yes, Cashog is available globally.",
+  },
 ];
 
 export default function FinancePage() {
@@ -72,16 +111,16 @@ export default function FinancePage() {
     <>
       <Meta
         title="Cashog Finance & Rewards | Earn Money Online"
-        description="Earn cashback and financial rewards while shopping online with Cashog."
-        keywords="cashback, shopping rewards, earn money online"
+        description="Earn cashback and financial rewards while shopping online with Cashog. Activate offers, track earnings, and withdraw securely worldwide."
+        keywords="cashback, shopping rewards, earn money online, financial rewards, passive income, online earning"
       />
 
-      <main className="min-h-screen text-gray-900 dark:text-white">
+      <main className="relative min-h-screen transition-colors duration-300 text-gray-900 dark:text-white">
         {/* ================= SINGLE SECTION ================= */}
-        <section className={`px-4 py-20 ${sectionGradient}`}>
-          <div className="max-w-7xl mx-auto text-center">
+        <section className={`relative py-20 px-4 text-center ${sectionGradient}`}>
+          <div className="max-w-7xl mx-auto">
 
-            {/* HERO */}
+            {/* ================= HERO ================= */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
               Earn Financial Rewards Online
             </h1>
@@ -90,46 +129,45 @@ export default function FinancePage() {
               <TypingText />
             </div>
 
-            <p className="text-lg mb-10 max-w-xl mx-auto text-gray-600 dark:text-gray-300">
+            <p className="text-base sm:text-lg md:text-xl mb-8 text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed">
               Complete offers, surveys, and tasks to earn real money from anywhere.
             </p>
 
-            <Link href="/signup" className="inline-block mb-20">
+            {/* ✅ Original CTA Logic Restored */}
+            <Link href="/signup" className="cta-observer inline-block mb-20">
               <motion.span
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-10 py-4 rounded-3xl font-bold shadow-xl text-lg"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-12 py-5 rounded-3xl font-bold shadow-xl text-lg"
               >
                 Start Earning Now <ArrowRight size={20} />
               </motion.span>
             </Link>
 
-            {/* STEPS */}
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 mb-20">
+            {/* ================= STEPS ================= */}
+            <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4 mb-24">
               {steps.map((step, i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, y: 40 }}
+                  initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.2 }}
-                  className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-6 shadow"
+                  transition={{ duration: 0.6, delay: i * 0.2 }}
+                  className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-8 shadow-md hover:shadow-lg transition-shadow duration-300"
                 >
                   <div className="mb-4 flex justify-center">{step.icon}</div>
-                  <h3 className="font-semibold text-xl mb-2">{step.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    {step.description}
-                  </p>
+                  <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400">{step.description}</p>
                 </motion.div>
               ))}
             </div>
 
-            {/* FEATURES */}
-            <h2 className="text-3xl font-bold mb-10">
+            {/* ================= FEATURES ================= */}
+            <h2 className="text-3xl md:text-4xl font-bold mb-12">
               Why Choose Cashog Finance
             </h2>
 
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-20">
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-24">
               {features.map((feature, i) => (
                 <motion.div
                   key={i}
@@ -137,33 +175,29 @@ export default function FinancePage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.2 }}
-                  className="bg-gray-50 dark:bg-[#111827] rounded-xl p-6 shadow"
+                  className="bg-gray-50 dark:bg-[#111827] rounded-xl p-6 shadow hover:shadow-lg transition-shadow duration-300"
                 >
-                  <div className="flex justify-center mb-3 text-yellow-500">
-                    <ShieldCheck size={26} />
+                  <div className="flex justify-center mb-4 text-yellow-500">
+                    <ShieldCheck size={28} />
                   </div>
-                  <h3 className="font-semibold text-lg mb-1">
-                    {feature.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    {feature.description}
-                  </p>
+                  <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
                 </motion.div>
               ))}
             </div>
 
-            {/* FAQ */}
-            <h2 className="text-3xl font-bold mb-10">
+            {/* ================= FAQ ================= */}
+            <h2 className="text-3xl md:text-4xl font-bold mb-12">
               Frequently Asked Questions
             </h2>
 
-            <div className="space-y-4 mb-20 max-w-3xl mx-auto">
+            <div className="space-y-4 mb-24 max-w-4xl mx-auto text-left">
               {faqs.map((faq, i) => (
                 <details
                   key={i}
-                  className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-4 text-left"
+                  className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-4 cursor-pointer"
                 >
-                  <summary className="font-semibold cursor-pointer">
+                  <summary className="font-semibold text-lg">
                     {faq.q}
                   </summary>
                   <p className="mt-2 text-gray-600 dark:text-gray-400">
@@ -173,20 +207,25 @@ export default function FinancePage() {
               ))}
             </div>
 
-            {/* FINAL CTA */}
-            <h2 className="text-4xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
+            {/* ================= FINAL CTA ================= */}
+            <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
               Start Earning Financial Rewards Today
             </h2>
 
-            <Link href="/signup" className="inline-block">
+            {/* ✅ Original CTA Logic Restored */}
+            <Link href="/signup" className="cta-observer inline-block">
               <motion.span
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-10 py-4 rounded-3xl font-bold shadow-xl text-lg"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-12 py-5 rounded-3xl font-bold shadow-xl text-lg"
               >
                 Join Cashog Now <ArrowRight size={20} />
               </motion.span>
             </Link>
+
+            <p className="mt-6 text-gray-900 dark:text-gray-300 text-lg max-w-md mx-auto">
+              Activate offers, complete tasks, and withdraw earnings instantly anywhere in the world.
+            </p>
 
           </div>
         </section>
