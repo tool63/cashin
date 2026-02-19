@@ -2,8 +2,8 @@
 
 import React from "react";
 import { ArrowRight, User, CreditCard, Gift, CheckCircle, ShieldCheck } from "lucide-react";
-import Link from "next/link";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import Meta from "@/components/seo/SeoEngine";
 import TypingText from "@/components/typing/TypingText";
 
@@ -77,10 +77,7 @@ export default function FinancePage() {
         keywords="cashback, shopping rewards, earn money online, financial rewards, passive income, online earning"
       />
 
-      <main className="relative min-h-screen transition-colors duration-300 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white">
-
-        {/* ================= AFFILIATE GRADIENT BACKGROUND ================= */}
-        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20 animate-gradient-xy"></div>
+      <main className="relative min-h-screen transition-colors duration-300 bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20 dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20 text-gray-900 dark:text-white">
 
         {/* ================= HERO ================= */}
         <section className="relative py-20 px-4 text-center">
@@ -97,7 +94,7 @@ export default function FinancePage() {
               Complete offers, surveys, and tasks to earn real money from anywhere.
             </p>
 
-            <CTAObserver className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md text-white px-12 py-5 rounded-3xl font-bold shadow-lg text-lg">
+            <CTAObserver className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-xl">
               Start Earning Now <ArrowRight size={20} />
             </CTAObserver>
           </div>
@@ -160,7 +157,7 @@ export default function FinancePage() {
         </section>
 
         {/* ================= FINAL CTA ================= */}
-        <section className="text-center py-28 bg-white dark:bg-[#070A14] w-full transition-colors duration-300">
+        <section className="text-center py-28 bg-white/20 dark:bg-[#070A14] w-full transition-colors duration-300">
           <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
             Start Earning Financial Rewards Today
           </h2>
