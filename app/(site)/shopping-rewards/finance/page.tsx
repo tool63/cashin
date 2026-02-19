@@ -14,7 +14,10 @@ const CTAObserver: React.FC<{ children: React.ReactNode; className?: string; onC
 
   React.useEffect(() => {
     if (!ref.current) return;
-    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold: 0.5 });
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.5 }
+    );
     observer.observe(ref.current);
     return () => observer.disconnect();
   }, []);
@@ -74,29 +77,38 @@ export default function FinancePage() {
         keywords="cashback, shopping rewards, earn money online, financial rewards, passive income, online earning"
       />
 
-      <main className="relative min-h-screen text-white overflow-auto animate-gradient">
-        {/* ================= HERO ================= */}
-        <section className="relative py-24 px-4 text-center">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="text-5xl sm:text-6xl font-extrabold mb-4">Earn Financial Rewards Online</h1>
+      <main className="relative min-h-screen transition-colors duration-300
+        bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20
+        dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20
+        text-gray-900 dark:text-white">
 
-            <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
+        {/* ================= HERO ================= */}
+        <section className="relative py-20 px-4 text-center">
+          <div className="max-w-3xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
+              Earn Financial Rewards Online
+            </h1>
+
+            <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6
+              bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
               <TypingText />
             </div>
 
-            <p className="text-lg sm:text-xl md:text-2xl mb-8 text-gray-300 max-w-xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-8
+              text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed">
               Complete offers, surveys, and tasks to earn real money from anywhere.
             </p>
 
-            {/* Hero CTA */}
-            <CTAObserver className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-3xl font-bold shadow-2xl text-xl">
-              <Link href="/signup">Start Earning Now <ArrowRight size={20} /></Link>
+            <CTAObserver className="inline-flex items-center gap-3
+              bg-gradient-to-r from-yellow-400 via-green-400 to-green-500
+              text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-xl">
+              Start Earning Now <ArrowRight size={20} />
             </CTAObserver>
           </div>
         </section>
 
         {/* ================= STEPS ================= */}
-        <section className="max-w-7xl w-full mx-auto px-4 py-16 grid gap-12 md:grid-cols-2 lg:grid-cols-4 text-center">
+        <section className="max-w-7xl mx-auto px-4 py-16 grid gap-12 md:grid-cols-2 lg:grid-cols-4 text-center">
           {steps.map((step, i) => (
             <motion.div
               key={i}
@@ -104,18 +116,20 @@ export default function FinancePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.2 }}
-              className="bg-[#111827] rounded-2xl p-8 flex flex-col items-center shadow-md hover:shadow-lg transition-shadow duration-300"
+              className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-8 flex flex-col items-center shadow-md hover:shadow-lg transition-shadow duration-300"
             >
               <div className="mb-4">{step.icon}</div>
               <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-              <p className="text-gray-400">{step.description}</p>
+              <p className="text-gray-600 dark:text-gray-400">{step.description}</p>
             </motion.div>
           ))}
         </section>
 
         {/* ================= FEATURES ================= */}
-        <section className="max-w-7xl w-full mx-auto px-4 py-16 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">Why Choose Cashog Finance</h2>
+        <section className="max-w-7xl mx-auto px-4 py-16 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12">
+            Why Choose Cashog Finance
+          </h2>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 justify-center">
             {features.map((feature, i) => (
               <motion.div
@@ -124,43 +138,47 @@ export default function FinancePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.2 }}
-                className="bg-[#111827] rounded-2xl p-6 text-center shadow hover:shadow-xl transition-shadow duration-300 w-full max-w-sm mx-auto"
+                className="bg-gray-50 dark:bg-[#111827] rounded-xl p-6 text-center shadow hover:shadow-lg transition-shadow duration-300 w-full max-w-sm mx-auto"
               >
                 <div className="flex justify-center mb-4 text-yellow-500">
                   <ShieldCheck size={28} />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-gray-400">{feature.description}</p>
+                <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
               </motion.div>
             ))}
           </div>
         </section>
 
         {/* ================= FAQ ================= */}
-        <section className="max-w-4xl w-full mx-auto px-4 py-16 text-center">
+        <section className="max-w-4xl mx-auto px-4 py-16 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-12">Frequently Asked Questions</h2>
           <div className="space-y-4">
             {faqs.map((faq, i) => (
-              <details key={i} className="bg-[#111827] rounded-2xl p-4 cursor-pointer group">
+              <details key={i} className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-4 cursor-pointer group">
                 <summary className="font-semibold text-lg">{faq.q}</summary>
-                <p className="mt-2 text-gray-400">{faq.a}</p>
+                <p className="mt-2 text-gray-600 dark:text-gray-400">{faq.a}</p>
               </details>
             ))}
           </div>
         </section>
 
         {/* ================= FINAL CTA ================= */}
-        <section className="text-center py-28 w-full rounded-t-3xl">
-          <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
+        <section className="text-center py-28 bg-white/20 dark:bg-[#070A14] w-full transition-colors duration-300">
+          <h2 className="text-4xl sm:text-5xl font-extrabold mb-8
+            bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
             Start Earning Financial Rewards Today
           </h2>
-          <CTAObserver className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-3xl font-bold shadow-2xl text-xl">
-            <Link href="/signup">Join Cashog Now <ArrowRight size={20} /></Link>
+          <CTAObserver className="inline-flex items-center gap-3
+            bg-gradient-to-r from-yellow-400 via-green-400 to-green-500
+            text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-xl">
+            Join Cashog Now <ArrowRight size={20} />
           </CTAObserver>
-          <p className="mt-6 text-gray-400 text-lg max-w-md mx-auto">
+          <p className="mt-6 text-gray-900 dark:text-gray-300 text-lg max-w-md mx-auto transition-colors duration-300">
             Activate offers, complete tasks, and withdraw earnings instantly anywhere in the world.
           </p>
         </section>
+
       </main>
     </>
   );
