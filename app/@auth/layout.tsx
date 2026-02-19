@@ -8,7 +8,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
 
       {/* 🌈 Animated Gradient Background */}
       <div className="absolute inset-0 animate-gradient 
-                      bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 
+                      bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 
                       opacity-20" />
 
       {/* 💚 Green Glow Blob */}
