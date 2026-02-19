@@ -3,7 +3,7 @@
 
 import { ReactNode } from "react";
 import { X } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 interface AuthModalProps {
   children: ReactNode;
@@ -11,11 +11,17 @@ interface AuthModalProps {
 
 export default function AuthModal({ children }: AuthModalProps) {
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleClose = () => {
-    // Close the modal by removing the @auth slot from the URL
-    // This replaces the current URL with the same path but without the modal
-    router.replace(window.location.pathname, { scroll: false });
+    // Get the base path without the modal route
+    // For example, if we're on /signup, we want to go to /
+    // If we're on /some-page with a modal, we want to stay on /some-page
+    const basePath = pathname === '/login' || pathname === '/signup' || pathname === '/reset' 
+      ? '/' 
+      : pathname;
+    
+    router.replace(basePath, { scroll: false });
   };
 
   return (
