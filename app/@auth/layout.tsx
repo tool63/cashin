@@ -6,19 +6,24 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
   return (
     <div className="relative w-screen min-h-screen bg-[#0B0F1A] overflow-hidden">
 
-      {/* 🌈 Animated Gradient Background */}
+      {/* 🌈 Animated Gradient Background - Yellow/Green Theme */}
       <div className="absolute inset-0 animate-gradient 
-                      bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 
-                      opacity-20" />
+                      bg-gradient-to-r from-yellow-400/20 via-green-400/20 to-green-500/20 
+                      opacity-30" />
 
-      {/* 💚 Green Glow Blob */}
-      <div className="absolute w-72 h-72 bg-green-400/30 rounded-full 
+      {/* 💚 Green Glow Blob - Enhanced */}
+      <div className="absolute w-96 h-96 bg-green-400/40 rounded-full 
                       blur-3xl animate-float top-20 left-10" />
 
-      {/* 💛 Yellow Glow Blob */}
-      <div className="absolute w-96 h-96 bg-yellow-400/30 rounded-full 
+      {/* 💛 Yellow Glow Blob - Enhanced */}
+      <div className="absolute w-[500px] h-[500px] bg-yellow-400/40 rounded-full 
                       blur-3xl animate-float animation-delay-2000 
                       bottom-10 right-10" />
+
+      {/* 🌟 Additional Center Glow for Depth */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
+                      w-[600px] h-[600px] bg-gradient-to-r from-yellow-400/10 via-green-400/20 to-green-500/10 
+                      rounded-full blur-3xl"></div>
 
       {/* Modal Content */}
       <div className="relative z-10 flex items-center justify-center min-h-screen px-4">
