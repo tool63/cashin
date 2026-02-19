@@ -13,17 +13,12 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
 
       {/* 💚 Green Glow Blob */}
       <div className="absolute w-72 h-72 bg-green-400/30 rounded-full 
-                      blur-3xl animate-float top-20 left-10 mix-blend-screen" />
+                      blur-3xl animate-float top-20 left-10" />
 
       {/* 💛 Yellow Glow Blob */}
       <div className="absolute w-96 h-96 bg-yellow-400/30 rounded-full 
                       blur-3xl animate-float animation-delay-2000 
-                      bottom-10 right-10 mix-blend-screen" />
-
-      {/* 💜 Optional Purple Glow Blob for depth */}
-      <div className="absolute w-60 h-60 bg-purple-400/20 rounded-full 
-                      blur-3xl animate-float animation-delay-1000 
-                      top-32 right-20 mix-blend-screen" />
+                      bottom-10 right-10" />
 
       {/* Modal Content */}
       <div className="relative z-10 flex items-center justify-center min-h-screen px-4">
