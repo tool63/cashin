@@ -10,15 +10,15 @@ interface AuthModalProps {
 
 /**
  * AuthModal wraps login/signup/reset forms in a modal
- * Cross icon closes modal by removing the @auth parallel route
+ * Cross icon completely closes the modal
  */
 export default function AuthModal({ children }: AuthModalProps) {
   const router = useRouter();
   const pathname = usePathname(); // get current page path
 
-  // Close modal by replacing the current path (clears modal slot)
+  // Close modal by replacing the current path (removes @auth parallel route)
   const handleClose = () => {
-    router.replace(pathname); // <-- THIS WORKS
+    router.replace(pathname); // fully closes modal
   };
 
   return (
