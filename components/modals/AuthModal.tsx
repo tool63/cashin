@@ -13,9 +13,9 @@ export default function AuthModal({ children }: AuthModalProps) {
   const router = useRouter();
 
   const handleClose = () => {
-    // Use router.back() to go back to the previous page
-    // This will close the modal while keeping the user on the same page they were on
-    router.back();
+    // Close the modal by removing the @auth slot from the URL
+    // This replaces the current URL with the same path but without the modal
+    router.replace(window.location.pathname, { scroll: false });
   };
 
   return (
