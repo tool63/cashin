@@ -1,3 +1,4 @@
+// components/modals/AuthModal.tsx
 "use client";
 
 import { ReactNode } from "react";
@@ -12,8 +13,9 @@ export default function AuthModal({ children }: AuthModalProps) {
   const router = useRouter();
 
   const handleClose = () => {
-    // Fully close the modal by going to the root page (or any page without @auth)
-    router.push("/"); 
+    // Use router.back() to go back to the previous page
+    // This will close the modal while keeping the user on the same page they were on
+    router.back();
   };
 
   return (
