@@ -10,21 +10,15 @@ interface AuthModalProps {
 
 /**
  * AuthModal wraps login/signup/reset forms in a modal
- * Works with parallel route @auth/(.)login, @auth/(.)signup, @auth/(.)reset
- * Cross icon closes modal safely by going back if possible, otherwise navigates to home
+ * Cross icon closes modal by removing the @auth parallel route
  */
 export default function AuthModal({ children }: AuthModalProps) {
   const router = useRouter();
 
-  // Close the modal safely
+  // Close modal by removing the @auth parallel route slot
   const handleClose = () => {
-    if (window.history.length > 1) {
-      // Go back if modal was opened via link
-      router.back();
-    } else {
-      // Otherwise, navigate to home
-      router.push("/");
-    }
+    // Clear the modal without affecting the underlying page
+    router.replace("/", { forceOptimisticNavigation: true });
   };
 
   return (
