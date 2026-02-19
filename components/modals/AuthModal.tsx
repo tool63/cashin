@@ -2,7 +2,7 @@
 
 import { ReactNode } from "react";
 import { X } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 interface AuthModalProps {
   children: ReactNode;
@@ -14,11 +14,11 @@ interface AuthModalProps {
  */
 export default function AuthModal({ children }: AuthModalProps) {
   const router = useRouter();
+  const pathname = usePathname(); // get current page path
 
-  // Close modal by removing the @auth parallel route slot
+  // Close modal by replacing the current path (clears modal slot)
   const handleClose = () => {
-    // Replace the current route to clear the modal slot
-    router.replace(router.pathname);
+    router.replace(pathname); // <-- THIS WORKS
   };
 
   return (
