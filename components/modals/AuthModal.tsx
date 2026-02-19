@@ -17,8 +17,8 @@ export default function AuthModal({ children }: AuthModalProps) {
 
   // Close modal by removing the @auth parallel route slot
   const handleClose = () => {
-    // Clear the modal without affecting the underlying page
-    router.replace("/", { forceOptimisticNavigation: true });
+    // Replace the current route to clear the modal slot
+    router.replace(router.pathname);
   };
 
   return (
