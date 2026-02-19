@@ -18,13 +18,9 @@ interface RootLayoutProps {
 const defaultTitle = "Cashog";
 const defaultDescription = "Earn rewards, cash out, and get paid";
 
-export default function RootLayout({
-  children,
-  auth,
-}: RootLayoutProps) {
+export default function RootLayout({ children, auth }: RootLayoutProps) {
   const pathname = usePathname();
 
-  // Detect if full-page auth route is accessed directly
   const isAuthRoute =
     pathname?.startsWith("/login") ||
     pathname?.startsWith("/signup") ||
@@ -38,15 +34,12 @@ export default function RootLayout({
 
       <body className="transition-colors duration-300 bg-[#0B0F1A] text-white overflow-x-hidden overscroll-x-none">
         <ThemeProviderWrapper>
-
-          {/* Header (hidden on direct auth route pages) */}
           {!isAuthRoute && (
             <div className="fixed top-0 left-0 w-full z-40 backdrop-blur-xl bg-[#0B0F1A]/70 border-b border-white/10">
               <Header />
             </div>
           )}
 
-          {/* Main Content */}
           <main
             className={`relative w-full ${
               isAuthRoute
@@ -57,13 +50,11 @@ export default function RootLayout({
             {children}
           </main>
 
-          {/* Footer & Floating CTA (hidden on auth routes) */}
           {!isAuthRoute && <Footer />}
           {!isAuthRoute && <FloatingCTA />}
 
           {/* Parallel Auth Modal Slot */}
           {auth}
-
         </ThemeProviderWrapper>
       </body>
     </html>
