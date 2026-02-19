@@ -8,41 +8,35 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative min-h-screen overflow-hidden 
-                    bg-white dark:bg-[#0B0F1A]">
+    <div className="relative w-screen min-h-screen bg-[#0B0F1A] overflow-hidden">
 
-      {/* 🔥 Animated Gradient Base Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br 
-                      from-yellow-400/10 
-                      via-transparent 
-                      to-green-500/10 
-                      pointer-events-none" />
-
-      {/* 💡 Top Left Glow */}
-      <div className="absolute -top-32 -left-32 w-[500px] h-[500px] 
-                      bg-yellow-400/20 
-                      rounded-full blur-3xl 
-                      animate-pulse 
-                      pointer-events-none" />
-
-      {/* 💚 Bottom Right Glow */}
-      <div className="absolute -bottom-32 -right-32 w-[500px] h-[500px] 
-                      bg-green-500/20 
-                      rounded-full blur-3xl 
-                      animate-pulse 
-                      pointer-events-none" />
-
-      {/* 🌈 Subtle Moving Gradient Line */}
-      <div className="absolute inset-0 opacity-10 
+      {/* 🌈 Animated Gradient Base (Same as Affiliate) */}
+      <div className="absolute inset-0 animate-gradient 
                       bg-gradient-to-r 
                       from-yellow-400 
                       via-green-400 
-                      to-yellow-400 
-                      animate-[gradientShift_8s_linear_infinite] 
-                      pointer-events-none" />
+                      to-green-500 
+                      opacity-20" />
 
-      {/* 🧊 Modal Content */}
-      <div className="relative z-10">
+      {/* 💚 Green Glow Blob */}
+      <div className="absolute w-72 h-72 
+                      bg-green-400/30 
+                      rounded-full 
+                      blur-3xl 
+                      animate-float 
+                      top-20 left-10" />
+
+      {/* 💛 Yellow Glow Blob */}
+      <div className="absolute w-96 h-96 
+                      bg-yellow-400/30 
+                      rounded-full 
+                      blur-3xl 
+                      animate-float 
+                      animation-delay-2000 
+                      bottom-10 right-10" />
+
+      {/* Modal Content */}
+      <div className="relative z-10 flex items-center justify-center min-h-screen">
         <ModalRoot>{children}</ModalRoot>
       </div>
     </div>
