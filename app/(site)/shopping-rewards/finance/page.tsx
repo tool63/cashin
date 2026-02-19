@@ -74,8 +74,7 @@ export default function FinancePage() {
         keywords="cashback, shopping rewards, earn money online, financial rewards, passive income, online earning"
       />
 
-      <main className="relative min-h-screen bg-[#0B0F1A] text-white overflow-auto">
-
+      <main className="relative min-h-screen text-white overflow-auto animate-gradient">
         {/* ================= HERO ================= */}
         <section className="relative py-24 px-4 text-center">
           <div className="max-w-3xl mx-auto">
@@ -89,8 +88,9 @@ export default function FinancePage() {
               Complete offers, surveys, and tasks to earn real money from anywhere.
             </p>
 
+            {/* Hero CTA */}
             <CTAObserver className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-3xl font-bold shadow-2xl text-xl">
-              Start Earning Now <ArrowRight size={20} />
+              <Link href="/signup">Start Earning Now <ArrowRight size={20} /></Link>
             </CTAObserver>
           </div>
         </section>
@@ -155,13 +155,12 @@ export default function FinancePage() {
             Start Earning Financial Rewards Today
           </h2>
           <CTAObserver className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-3xl font-bold shadow-2xl text-xl">
-            Join Cashog Now <ArrowRight size={20} />
+            <Link href="/signup">Join Cashog Now <ArrowRight size={20} /></Link>
           </CTAObserver>
           <p className="mt-6 text-gray-400 text-lg max-w-md mx-auto">
             Activate offers, complete tasks, and withdraw earnings instantly anywhere in the world.
           </p>
         </section>
-
       </main>
     </>
   );
