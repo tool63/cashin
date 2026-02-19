@@ -38,6 +38,10 @@ const faqs = [
 
 /* ================= PAGE COMPONENT ================= */
 export default function FinancePage() {
+  const sectionGradient =
+    "bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20 " +
+    "dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20";
+
   return (
     <>
       <Meta
@@ -46,13 +50,10 @@ export default function FinancePage() {
         keywords="cashback, shopping rewards, earn money online, financial rewards, passive income, online earning"
       />
 
-      <main className="relative min-h-screen transition-colors duration-300
-        bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20
-        dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20
-        text-gray-900 dark:text-white">
+      <main className="relative min-h-screen transition-colors duration-300 text-gray-900 dark:text-white">
 
         {/* ================= HERO ================= */}
-        <section className="relative py-20 px-4 text-center">
+        <section className={`relative py-20 px-4 text-center ${sectionGradient}`}>
           <div className="max-w-3xl mx-auto">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
               Earn Financial Rewards Online
@@ -83,7 +84,7 @@ export default function FinancePage() {
         </section>
 
         {/* ================= STEPS ================= */}
-        <section className="max-w-7xl mx-auto px-4 py-16 grid gap-12 md:grid-cols-2 lg:grid-cols-4 text-center">
+        <section className={`max-w-7xl mx-auto px-4 py-16 grid gap-12 md:grid-cols-2 lg:grid-cols-4 text-center ${sectionGradient}`}>
           {steps.map((step, i) => (
             <motion.div
               key={i}
@@ -101,7 +102,7 @@ export default function FinancePage() {
         </section>
 
         {/* ================= FEATURES ================= */}
-        <section className="max-w-7xl mx-auto px-4 py-16 text-center">
+        <section className={`max-w-7xl mx-auto px-4 py-16 text-center ${sectionGradient}`}>
           <h2 className="text-3xl md:text-4xl font-bold mb-12">
             Why Choose Cashog Finance
           </h2>
@@ -126,7 +127,7 @@ export default function FinancePage() {
         </section>
 
         {/* ================= FAQ ================= */}
-        <section className="max-w-4xl mx-auto px-4 py-16 text-center">
+        <section className={`max-w-4xl mx-auto px-4 py-16 text-center ${sectionGradient}`}>
           <h2 className="text-3xl md:text-4xl font-bold mb-12">Frequently Asked Questions</h2>
           <div className="space-y-4">
             {faqs.map((faq, i) => (
@@ -139,32 +140,28 @@ export default function FinancePage() {
         </section>
 
         {/* ================= FINAL CTA ================= */}
-<section className="text-center py-28
-  bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20
-  dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20
-  w-full transition-colors duration-300">
+        <section className={`text-center py-28 ${sectionGradient}`}>
+          <h2 className="text-4xl sm:text-5xl font-extrabold mb-8
+            bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
+            Start Earning Financial Rewards Today
+          </h2>
 
-  <h2 className="text-4xl sm:text-5xl font-extrabold mb-8
-    bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
-    Start Earning Financial Rewards Today
-  </h2>
+          <Link href="/signup" className="cta-observer inline-block">
+            <motion.span
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center gap-2
+                bg-gradient-to-r from-yellow-400 via-green-400 to-green-500
+                text-black px-12 py-5 rounded-3xl font-bold shadow-xl text-lg"
+            >
+              Join Cashog Now <ArrowRight size={20} />
+            </motion.span>
+          </Link>
 
-  <Link href="/signup" className="cta-observer inline-block">
-    <motion.span
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.97 }}
-      className="inline-flex items-center gap-2
-        bg-gradient-to-r from-yellow-400 via-green-400 to-green-500
-        text-black px-12 py-5 rounded-3xl font-bold shadow-xl text-lg"
-    >
-      Join Cashog Now <ArrowRight size={20} />
-    </motion.span>
-  </Link>
-
-  <p className="mt-6 text-gray-900 dark:text-gray-300 text-lg max-w-md mx-auto transition-colors duration-300">
-    Activate offers, complete tasks, and withdraw earnings instantly anywhere in the world.
-  </p>
-</section>
+          <p className="mt-6 text-gray-900 dark:text-gray-300 text-lg max-w-md mx-auto transition-colors duration-300">
+            Activate offers, complete tasks, and withdraw earnings instantly anywhere in the world.
+          </p>
+        </section>
 
       </main>
     </>
