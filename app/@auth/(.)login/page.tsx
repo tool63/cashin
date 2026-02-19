@@ -1,35 +1,12 @@
-"use client";
-
 import AuthModal from "@/components/modals/AuthModal";
 import AuthPageWrapper from "@/components/auth/AuthPageWrapper";
 import SocialButtons from "@/components/auth/SocialButtons";
 import Link from "next/link";
 
-const AUTH_BASE =
-  process.env.NEXT_PUBLIC_AUTH_URL || "https://auth.cashog.com";
-
-const useExternalAuth =
-  process.env.NEXT_PUBLIC_USE_EXTERNAL_AUTH === "true";
-
 export default function LoginPage() {
-  if (useExternalAuth) {
-    return (
-      <AuthModal>
-        <iframe
-          src={`${AUTH_BASE}/login?redirect_back=https://cashog.com`}
-          className="w-full h-[600px] rounded-2xl"
-          frameBorder="0"
-        />
-      </AuthModal>
-    );
-  }
-
   return (
     <AuthModal>
-      <AuthPageWrapper
-        title="Welcome back"
-        subtitle="Log in to continue"
-      >
+      <AuthPageWrapper title="Welcome back" subtitle="Log in to continue">
         <SocialButtons />
 
         <input
