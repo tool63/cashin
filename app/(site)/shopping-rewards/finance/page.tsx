@@ -7,37 +7,6 @@ import Link from "next/link";
 import Meta from "@/components/seo/SeoEngine";
 import TypingText from "@/components/typing/TypingText";
 
-/* ================= CTA OBSERVER ================= */
-const CTAObserver: React.FC<{ children: React.ReactNode; className?: string; onClick?: () => void }> = ({ children, className, onClick }) => {
-  const ref = React.useRef<HTMLDivElement>(null);
-  const [inView, setInView] = React.useState(false);
-
-  React.useEffect(() => {
-    if (!ref.current) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
-      { threshold: 0.5 }
-    );
-    observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <motion.div
-      ref={ref}
-      className={className}
-      onClick={onClick}
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.97 }}
-      transition={{ duration: 0.4 }}
-    >
-      {children}
-    </motion.div>
-  );
-};
-
 /* ================= STEPS ================= */
 const steps = [
   { icon: <User size={32} className="text-yellow-400" />, title: "Sign Up for Free", description: "Create your Cashog account in minutes and start earning instantly." },
@@ -99,11 +68,17 @@ export default function FinancePage() {
               Complete offers, surveys, and tasks to earn real money from anywhere.
             </p>
 
-            <CTAObserver className="inline-flex items-center gap-3
-              bg-gradient-to-r from-yellow-400 via-green-400 to-green-500
-              text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-xl">
-              Start Earning Now <ArrowRight size={20} />
-            </CTAObserver>
+            <Link href="/signup" className="cta-observer inline-block">
+              <motion.span
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center gap-2
+                  bg-gradient-to-r from-yellow-400 via-green-400 to-green-500
+                  text-black px-12 py-5 rounded-3xl font-bold shadow-xl text-lg"
+              >
+                Start Earning Now <ArrowRight size={20} />
+              </motion.span>
+            </Link>
           </div>
         </section>
 
@@ -169,11 +144,17 @@ export default function FinancePage() {
             bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
             Start Earning Financial Rewards Today
           </h2>
-          <CTAObserver className="inline-flex items-center gap-3
-            bg-gradient-to-r from-yellow-400 via-green-400 to-green-500
-            text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-xl">
-            Join Cashog Now <ArrowRight size={20} />
-          </CTAObserver>
+          <Link href="/signup" className="cta-observer inline-block">
+            <motion.span
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center gap-2
+                bg-gradient-to-r from-yellow-400 via-green-400 to-green-500
+                text-black px-12 py-5 rounded-3xl font-bold shadow-xl text-lg"
+            >
+              Join Cashog Now <ArrowRight size={20} />
+            </motion.span>
+          </Link>
           <p className="mt-6 text-gray-900 dark:text-gray-300 text-lg max-w-md mx-auto transition-colors duration-300">
             Activate offers, complete tasks, and withdraw earnings instantly anywhere in the world.
           </p>
