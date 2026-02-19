@@ -11,14 +11,10 @@ interface AuthModalProps {
 export default function AuthModal({ children }: AuthModalProps) {
   const router = useRouter();
 
-  const handleClose = () => {
-    router.replace("/"); // safely remove modal route
-  };
-
   return (
     <div className="relative w-full max-w-md bg-neutral-900 border border-neutral-800 rounded-2xl p-8 shadow-2xl animate-slideUp">
       <button
-        onClick={handleClose}
+        onClick={() => router.push("/")}
         className="absolute top-4 right-4 text-neutral-400 hover:text-white transition"
       >
         <X size={20} />
