@@ -139,11 +139,15 @@ export default function FinancePage() {
         </section>
 
         {/* ================= FINAL CTA ================= */}
-        <section className="text-center py-28 bg-white/20 dark:bg-[#070A14] w-full transition-colors duration-300">
+        <section className="text-center py-28
+          bg-gradient-to-r from-yellow-400 via-green-400 to-green-500
+          dark:from-yellow-500 dark:via-green-700 dark:to-green-800
+          w-full transition-colors duration-300">
           <h2 className="text-4xl sm:text-5xl font-extrabold mb-8
             bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
             Start Earning Financial Rewards Today
           </h2>
+
           <Link href="/signup" className="cta-observer inline-block">
             <motion.span
               whileHover={{ scale: 1.05 }}
@@ -155,7 +159,8 @@ export default function FinancePage() {
               Join Cashog Now <ArrowRight size={20} />
             </motion.span>
           </Link>
-          <p className="mt-6 text-gray-900 dark:text-gray-300 text-lg max-w-md mx-auto transition-colors duration-300">
+
+          <p className="mt-6 text-black dark:text-white text-lg max-w-md mx-auto transition-colors duration-300">
             Activate offers, complete tasks, and withdraw earnings instantly anywhere in the world.
           </p>
         </section>
