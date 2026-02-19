@@ -8,35 +8,21 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative w-screen min-h-screen bg-[#0B0F1A] overflow-hidden">
+    <div className="relative w-screen min-h-screen overflow-hidden">
 
-      {/* 🌈 Animated Gradient Base (Same as Affiliate) */}
-      <div className="absolute inset-0 animate-gradient 
-                      bg-gradient-to-r 
-                      from-yellow-400 
-                      via-green-400 
-                      to-green-500 
-                      opacity-20" />
+      {/* ✨ Full gradient background similar to Freecash style */}
+      <div className="absolute inset-0 bg-gradient-to-br from-yellow-300 via-green-300 to-green-500 opacity-70"></div>
 
-      {/* 💚 Green Glow Blob */}
-      <div className="absolute w-72 h-72 
-                      bg-green-400/30 
-                      rounded-full 
-                      blur-3xl 
-                      animate-float 
-                      top-20 left-10" />
+      {/* 🔹 Subtle dark overlay for contrast if needed */}
+      <div className="absolute inset-0 bg-black/30"></div>
 
-      {/* 💛 Yellow Glow Blob */}
-      <div className="absolute w-96 h-96 
-                      bg-yellow-400/30 
-                      rounded-full 
-                      blur-3xl 
-                      animate-float 
-                      animation-delay-2000 
-                      bottom-10 right-10" />
+      {/* 🔶 Layered glow highlights */}
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-yellow-400/40 rounded-full blur-3xl animate-float"></div>
+      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-green-500/40 rounded-full blur-3xl animate-float animation-delay-2000"></div>
 
-      {/* Modal Content */}
-      <div className="relative z-10 flex items-center justify-center min-h-screen">
+      {/* 📌 Modal container (kept on top) */}
+      <div className="relative z-20 flex items-center justify-center min-h-screen px-4 py-8">
+        {/* Makes modal card stand out above the gradient */}
         <ModalRoot>{children}</ModalRoot>
       </div>
     </div>
