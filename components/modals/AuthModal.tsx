@@ -1,7 +1,7 @@
 // components/modals/AuthModal.tsx
 "use client";
 
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode } from "react";
 import { X } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -11,20 +11,11 @@ interface AuthModalProps {
 
 export default function AuthModal({ children }: AuthModalProps) {
   const router = useRouter();
-  const [previousPath, setPreviousPath] = useState("/");
-
-  useEffect(() => {
-    // Store the previous path when modal opens
-    // This assumes the modal was opened from a page
-    if (document.referrer) {
-      setPreviousPath(document.referrer);
-    }
-  }, []);
 
   const handleClose = () => {
-    // Close modal and go back to previous page, but replace history
-    // so the modal route isn't in history
-    router.replace(previousPath, { scroll: false });
+    // Close the modal by replacing the current URL with the base path
+    // This removes the modal from history completely
+    router.replace('/', { scroll: false });
   };
 
   return (
