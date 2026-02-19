@@ -13,9 +13,10 @@ export default function AuthModal({ children }: AuthModalProps) {
   const router = useRouter();
 
   const handleClose = () => {
-    // Close the modal by replacing the current URL with the base path
-    // This removes the modal from history completely
-    router.replace('/', { scroll: false });
+    // This will close the modal by going back in history
+    // Since the modal was opened by navigating to /signup (which added to history),
+    // going back will remove it and show the previous page
+    router.back();
   };
 
   return (
