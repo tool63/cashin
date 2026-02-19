@@ -7,28 +7,43 @@ import { motion } from "framer-motion";
 import Meta from "@/components/seo/SeoEngine";
 import TypingText from "@/components/typing/TypingText";
 
+/* ================= CTA OBSERVER ================= */
+const CTAObserver: React.FC<{ children: React.ReactNode; className?: string; onClick?: () => void }> = ({ children, className, onClick }) => {
+  const ref = React.useRef<HTMLDivElement>(null);
+  const [inView, setInView] = React.useState(false);
+
+  React.useEffect(() => {
+    if (!ref.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.5 }
+    );
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <motion.div
+      ref={ref}
+      className={className}
+      onClick={onClick}
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.97 }}
+      transition={{ duration: 0.4 }}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
 /* ================= STEPS ================= */
 const steps = [
-  {
-    icon: <User size={32} className="text-yellow-400" />,
-    title: "Sign Up for Free",
-    description: "Create your Cashog account in minutes and start earning instantly.",
-  },
-  {
-    icon: <CreditCard size={32} className="text-green-400" />,
-    title: "Complete Offers & Tasks",
-    description: "Play games, watch videos, complete surveys, or install apps to earn points.",
-  },
-  {
-    icon: <Gift size={32} className="text-yellow-400" />,
-    title: "Earn Rewards",
-    description: "Redeem points for PayPal cash, gift cards, or mobile top-ups securely.",
-  },
-  {
-    icon: <CheckCircle size={32} className="text-green-400" />,
-    title: "Withdraw Easily",
-    description: "Instant payouts once you reach the minimum withdrawal threshold.",
-  },
+  { icon: <User size={32} className="text-yellow-400" />, title: "Sign Up for Free", description: "Create your Cashog account in minutes and start earning instantly." },
+  { icon: <CreditCard size={32} className="text-green-400" />, title: "Complete Offers & Tasks", description: "Play games, watch videos, complete surveys, or install apps to earn points." },
+  { icon: <Gift size={32} className="text-yellow-400" />, title: "Earn Rewards", description: "Redeem points for PayPal cash, gift cards, or mobile top-ups securely." },
+  { icon: <CheckCircle size={32} className="text-green-400" />, title: "Withdraw Easily", description: "Instant payouts once you reach the minimum withdrawal threshold." },
 ];
 
 /* ================= FEATURES ================= */
@@ -64,11 +79,11 @@ export default function FinancePage() {
 
       <main className="relative min-h-screen transition-colors duration-300 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white">
 
-        {/* ================= BACKGROUND GRADIENT ================= */}
-        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-yellow-400/10 via-green-400/20 to-green-500/10 animate-gradient-xy"></div>
+        {/* ================= AFFILIATE GRADIENT BACKGROUND ================= */}
+        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20 animate-gradient-xy"></div>
 
         {/* ================= HERO ================= */}
-        <section className="py-20 px-4 text-center">
+        <section className="relative py-20 px-4 text-center">
           <div className="max-w-3xl mx-auto">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
               Earn Financial Rewards Online
@@ -82,15 +97,9 @@ export default function FinancePage() {
               Complete offers, surveys, and tasks to earn real money from anywhere.
             </p>
 
-            <Link href="/signup" className="inline-block">
-              <motion.span
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-12 py-5 rounded-2xl font-bold shadow-xl text-lg"
-              >
-                Start Earning Now <ArrowRight size={20} />
-              </motion.span>
-            </Link>
+            <CTAObserver className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md text-white px-12 py-5 rounded-3xl font-bold shadow-lg text-lg">
+              Start Earning Now <ArrowRight size={20} />
+            </CTAObserver>
           </div>
         </section>
 
@@ -155,15 +164,9 @@ export default function FinancePage() {
           <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
             Start Earning Financial Rewards Today
           </h2>
-          <Link href="/signup" className="inline-block">
-            <motion.span
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-xl"
-            >
-              Join Cashog Now <ArrowRight size={20} />
-            </motion.span>
-          </Link>
+          <CTAObserver className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-xl">
+            Join Cashog Now <ArrowRight size={20} />
+          </CTAObserver>
           <p className="mt-6 text-gray-900 dark:text-gray-300 text-lg max-w-md mx-auto transition-colors duration-300">
             Activate offers, complete tasks, and withdraw earnings instantly anywhere in the world.
           </p>
