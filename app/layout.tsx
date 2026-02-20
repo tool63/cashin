@@ -1,4 +1,3 @@
-// app/layout.tsx
 "use client";
 
 import "../styles/globals.css";
@@ -13,7 +12,7 @@ import Meta from "@/components/seo/SeoEngine";
 
 interface RootLayoutProps {
   children: ReactNode;
-  auth: ReactNode; // Parallel auth slot
+  auth: ReactNode;
 }
 
 const defaultTitle = "Cashog";
@@ -31,7 +30,9 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
     pathname?.startsWith("/reset");
 
   const hasAuthModal = !!auth;
-  const hideLayout = isAuthPage && !hasAuthModal; // hide header/footer only for direct auth pages
+
+  // Hide header/footer only for direct auth pages
+  const hideLayout = isAuthPage && !hasAuthModal;
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -39,44 +40,20 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
         <Meta title={defaultTitle} description={defaultDescription} />
       </head>
 
-      <body
-        className="
-          bg-primary
-          text-[var(--text-primary)]
-          transition-colors duration-500
-          overflow-x-hidden
-        "
-      >
+      <body className="bg-primary text-[var(--text-primary)] transition-colors duration-500 overflow-x-hidden">
         <ThemeProviderWrapper>
-
-          {/* ================= GLOBAL OPENING STYLE LAYER ================= */}
-          {!hideLayout && (
-            <>
-              {/* Gradient background */}
-              <div
-                className="
-                  fixed inset-0
-                  bg-gradient-to-br 
-                  from-yellow-400/20 
-                  via-green-400/30 
-                  to-green-500/20
-                  dark:from-yellow-500/10 
-                  dark:via-green-700/20 
-                  dark:to-green-800/20
-                  transition-colors duration-700
-                  pointer-events-none
-                  z-0
-                "
-              />
-
-              {/* Glow blobs */}
-              <div className="fixed w-80 h-80 bg-green-400/25 rounded-full blur-[120px] top-10 left-10 animate-blobMove pointer-events-none z-0" />
-              <div className="fixed w-96 h-96 bg-yellow-400/25 rounded-full blur-[140px] bottom-10 right-10 animate-blobMove2 pointer-events-none z-0" />
-
-              {/* Frosted overlay */}
-              <div className="fixed inset-0 bg-white/5 backdrop-blur-3xl pointer-events-none z-0" />
-            </>
-          )}
+          
+          {/* ================= GLOBAL BACKGROUND ================= */}
+          <div className="fixed inset-0 -z-10 pointer-events-none">
+            <div className="absolute inset-0 bg-gradient-to-br 
+                            from-yellow-400/20 via-green-400/30 to-green-500/20 
+                            dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20 
+                            transition-colors duration-500">
+            </div>
+            <div className="absolute w-80 h-80 bg-green-400/25 rounded-full blur-[120px] top-10 left-10 animate-blobMove"></div>
+            <div className="absolute w-96 h-96 bg-yellow-400/25 rounded-full blur-[140px] bottom-10 right-10 animate-blobMove2"></div>
+            <div className="absolute inset-0 bg-white/5 backdrop-blur-3xl"></div>
+          </div>
 
           {/* ================= HEADER ================= */}
           {!hideLayout && (
@@ -87,7 +64,7 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
 
           {/* ================= MAIN CONTENT ================= */}
           <main
-            className={`relative w-full z-10 ${
+            className={`relative w-full ${
               hideLayout
                 ? "min-h-screen flex items-center justify-center px-4"
                 : "pt-20 min-h-[calc(100vh-160px)]"
