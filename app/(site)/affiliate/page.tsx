@@ -1,13 +1,13 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, User, CreditCard, Gift, CheckCircle, ShieldCheck } from "lucide-react";
+import { ArrowRight, User, CreditCard, Gift, CheckCircle, ShieldCheck, Globe, BarChart, DollarSign, Headphones } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Meta from "@/components/seo/SeoEngine";
 import TypingText from "@/components/typing/TypingText";
 
-/* ================= STEPS ================= */
+/* ================= DATA ================= */
 const steps = [
   {
     icon: <User size={32} className="text-yellow-400" />,
@@ -31,17 +31,22 @@ const steps = [
   },
 ];
 
-/* ================= FEATURES ================= */
 const features = [
-  { title: "High Commission Rates", description: "Earn generous commissions for every referred user." },
-  { title: "Real-Time Tracking", description: "Monitor clicks, conversions, and earnings in real time." },
-  { title: "Global Access", description: "Promote Cashog from anywhere in the world." },
-  { title: "Marketing Materials", description: "Get access to banners, links, and creatives to maximize referrals." },
-  { title: "Trusted & Secure", description: "Millions of users trust Cashog, making it easier to convert referrals." },
-  { title: "24/7 Support", description: "Our affiliate support team is ready to assist whenever needed." },
+  { icon: <DollarSign size={24} className="text-green-500" />, title: "High Commission Rates", description: "Earn generous commissions for every referred user.", color: "from-green-400/20 to-green-500/5" },
+  { icon: <BarChart size={24} className="text-green-500" />, title: "Real-Time Tracking", description: "Monitor clicks, conversions, and earnings in real time.", color: "from-green-400/20 to-green-500/5" },
+  { icon: <Globe size={24} className="text-yellow-500" />, title: "Global Access", description: "Promote Cashog from anywhere in the world.", color: "from-yellow-400/20 to-yellow-500/5" },
+  { icon: <ShieldCheck size={24} className="text-yellow-500" />, title: "Trusted & Secure", description: "Millions of users trust Cashog, making it easier to convert referrals.", color: "from-yellow-400/20 to-yellow-500/5" },
+  { icon: <Headphones size={24} className="text-green-500" />, title: "24/7 Support", description: "Our affiliate support team is ready to assist whenever needed.", color: "from-green-400/20 to-green-500/5" },
+  { icon: <Gift size={24} className="text-yellow-500" />, title: "Marketing Materials", description: "Get banners, links, and creatives to maximize referrals.", color: "from-yellow-400/20 to-yellow-500/5" },
 ];
 
-/* ================= FAQ ================= */
+const stats = [
+  { value: "50M+", label: "Active Users", icon: <User size={20} /> },
+  { value: "150+", label: "Countries", icon: <Globe size={20} /> },
+  { value: "2.5B+", label: "Offers Completed/mo", icon: <BarChart size={20} /> },
+  { value: "99.9%", label: "Uptime", icon: <CheckCircle size={20} /> },
+];
+
 const faqs = [
   { q: "How do I join the affiliate program?", a: "Sign up for a free Cashog affiliate account and start sharing your referral links immediately." },
   { q: "How do I get paid?", a: "Earnings can be withdrawn via PayPal or other supported payout methods once you reach the minimum threshold." },
@@ -59,51 +64,56 @@ export default function AffiliateProgram() {
         description="Join Cashog's Affiliate Program and earn commissions by referring users. High payouts, real-time tracking, and global access!"
       />
 
-      <div className="relative w-screen min-h-screen bg-[#0B0F1A] overflow-auto">
-        {/* ============================
-            Animated Gradient Overlays
-        ============================ */}
-        <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 opacity-20"></div>
-        <div className="absolute w-72 h-72 bg-green-400/30 rounded-full blur-3xl animate-float top-20 left-10"></div>
-        <div className="absolute w-96 h-96 bg-yellow-400/30 rounded-full blur-3xl animate-float animation-delay-2000 bottom-10 right-10"></div>
+      <main className="relative min-h-screen bg-white dark:bg-[#070A14] text-gray-900 dark:text-white overflow-hidden">
 
         {/* ============================
-            Full Content
+            Global Background Gradient + Glow
         ============================ */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="relative z-10 w-full flex flex-col items-center px-4 sm:px-8 pt-24 pb-16 text-white"
-        >
+        <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20 dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20 transition-colors duration-500 pointer-events-none"></div>
+        <div className="absolute w-80 h-80 bg-green-400/25 rounded-full blur-[120px] top-10 left-10 animate-blobMove pointer-events-none"></div>
+        <div className="absolute w-96 h-96 bg-yellow-400/25 rounded-full blur-[140px] bottom-10 right-10 animate-blobMove2 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-white/5 backdrop-blur-3xl pointer-events-none"></div>
+
+        <section className="relative isolate max-w-7xl mx-auto px-4">
 
           {/* ================= HERO ================= */}
-          <section className="text-center max-w-3xl mx-auto mb-24">
-            <h1 className="text-5xl sm:text-6xl font-extrabold mb-4">
+          <div className="py-32 text-center rounded-b-[60px] shadow-xl">
+            <h1 className="text-5xl sm:text-6xl font-extrabold mb-6 text-gray-900 dark:text-white drop-shadow-lg">
               Cashog Affiliate Program
             </h1>
-
-            <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
+            <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-8 gradient-text drop-shadow-md">
               <TypingText />
             </div>
-
-            <p className="text-gray-300 text-lg sm:text-xl md:text-2xl mb-8 max-w-xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl md:text-2xl mb-12 text-gray-700 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
               Refer users, earn commissions, and get paid instantly with Cashog’s trusted affiliate program.
             </p>
-
             <Link href="/signup" className="cta-observer inline-block">
               <motion.span
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.07 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-12 py-5 rounded-3xl font-bold shadow-xl text-lg"
+                className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-3xl font-bold shadow-2xl text-xl hover:shadow-3xl transition-all duration-300"
               >
-                Join Affiliate Program <ArrowRight size={20} />
+                Join Affiliate Program <ArrowRight size={24} />
               </motion.span>
             </Link>
-          </section>
+
+            {/* Stats */}
+            <div className="flex flex-wrap justify-center gap-6 mt-16">
+              {stats.map((stat, i) => (
+                <div key={i} className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800/50 rounded-full">
+                  <span className="text-yellow-500">{stat.icon}</span>
+                  <span className="font-bold text-gray-900 dark:text-white">{stat.value}</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">{stat.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
 
           {/* ================= STEPS ================= */}
-          <section className="max-w-7xl w-full mx-auto grid gap-12 md:grid-cols-2 lg:grid-cols-4 text-center mb-24">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 mt-32">
+            How It <span className="gradient-text">Works</span>
+          </h2>
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 mb-20">
             {steps.map((step, i) => (
               <motion.div
                 key={i}
@@ -111,74 +121,94 @@ export default function AffiliateProgram() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.2 }}
-                className="bg-[#111827] rounded-2xl p-8 flex flex-col items-center shadow-md hover:shadow-lg transition-shadow duration-300"
+                className="bg-gray-50 dark:bg-[#0b0e1a] rounded-2xl p-8 flex flex-col items-center text-center shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-800 group hover:-translate-y-2"
               >
-                <div className="mb-4">{step.icon}</div>
+                <div className="mb-4 p-4 rounded-full bg-gradient-to-r from-yellow-400/20 via-green-400/20 to-green-500/20 group-hover:scale-110 transition-transform duration-300">
+                  {step.icon}
+                </div>
                 <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                <p className="text-gray-400">{step.description}</p>
+                <p className="text-gray-600 dark:text-gray-400">{step.description}</p>
               </motion.div>
             ))}
-          </section>
+          </div>
 
           {/* ================= FEATURES ================= */}
-          <section className="max-w-7xl w-full mx-auto text-center mb-24">
-            <h2 className="text-3xl md:text-4xl font-bold mb-12">
-              Why Join Cashog Affiliate Program
-            </h2>
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 justify-center">
-              {features.map((feature, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.2 }}
-                  className="bg-[#111827] rounded-2xl p-6 text-center shadow hover:shadow-xl transition-shadow duration-300 w-full max-w-sm mx-auto"
-                >
-                  <div className="flex justify-center mb-4 text-yellow-500">
-                    <ShieldCheck size={28} />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                  <p className="text-gray-400">{feature.description}</p>
-                </motion.div>
-              ))}
-            </div>
-          </section>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+            Why Join <span className="gradient-text">Cashog Affiliate Program</span>
+          </h2>
+          <p className="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+            Trusted by thousands of affiliates to maximize earnings and performance
+          </p>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-20">
+            {features.map((feature, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="bg-white dark:bg-[#070A14] rounded-2xl p-8 text-center shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-800 hover:-translate-y-2"
+              >
+                <div className={`inline-flex p-3 rounded-xl bg-gradient-to-r ${feature.color} mb-4`}>
+                  {feature.icon || <ShieldCheck size={24} className="text-yellow-500" />}
+                </div>
+                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
+              </motion.div>
+            ))}
+          </div>
 
           {/* ================= FAQ ================= */}
-          <section className="max-w-4xl w-full mx-auto text-center mb-24">
-            <h2 className="text-3xl md:text-4xl font-bold mb-12">Frequently Asked Questions</h2>
-            <div className="space-y-4">
-              {faqs.map((faq, i) => (
-                <details key={i} className="bg-[#111827] rounded-xl p-4 cursor-pointer group">
-                  <summary className="font-semibold text-lg">{faq.q}</summary>
-                  <p className="mt-2 text-gray-400">{faq.a}</p>
-                </details>
-              ))}
-            </div>
-          </section>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+            Frequently Asked <span className="gradient-text">Questions</span>
+          </h2>
+          <p className="text-center text-gray-600 dark:text-gray-400 mb-12">
+            Everything you need to know about Cashog Affiliate Program
+          </p>
+          <div className="space-y-4 mb-20">
+            {faqs.map((faq, i) => (
+              <motion.details
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="group bg-white dark:bg-[#0b0e1a] rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-lg transition-all duration-300"
+              >
+                <summary className="font-semibold text-lg px-6 py-4 cursor-pointer flex items-center justify-between hover:bg-gradient-to-r hover:from-yellow-400/5 hover:via-green-400/5 hover:to-green-500/5">
+                  <span>{faq.q}</span>
+                  <span className="text-green-500 group-open:rotate-180 transition-transform duration-300">▼</span>
+                </summary>
+                <div className="px-6 pb-4 text-gray-600 dark:text-gray-400 border-t border-gray-200 dark:border-gray-800 pt-4">
+                  {faq.a}
+                </div>
+              </motion.details>
+            ))}
+          </div>
 
           {/* ================= FINAL CTA ================= */}
-          <section className="text-center py-28 w-full rounded-t-3xl">
-            <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
-              Become a Cashog Affiliate Today!
+          <div className="py-28 text-center rounded-t-[60px] shadow-xl relative">
+            <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 gradient-text drop-shadow-lg">
+              Ready to Start Earning?
             </h2>
             <Link href="/signup" className="cta-observer inline-block">
               <motion.span
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-3xl font-bold shadow-2xl text-xl"
+                className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-20 py-7 rounded-3xl font-bold shadow-3xl text-xl hover:shadow-4xl transition-all duration-300"
               >
-                Join Now & Start Earning <ArrowRight size={20} />
+                Join Now <ArrowRight size={24} />
               </motion.span>
             </Link>
-            <p className="mt-6 text-gray-400 text-lg max-w-md mx-auto">
-              Refer users, earn commissions, and grow with Cashog’s trusted affiliate program.
-            </p>
-          </section>
+            <div className="mt-10 flex flex-wrap justify-center gap-6 text-sm text-gray-500 dark:text-gray-400">
+              <span className="flex items-center gap-2">✓ No experience required</span>
+              <span className="flex items-center gap-2">✓ Flexible promotion options</span>
+              <span className="flex items-center gap-2">✓ 24/7 support</span>
+            </div>
+          </div>
 
-        </motion.div>
-      </div>
+        </section>
+      </main>
     </>
   );
 }
