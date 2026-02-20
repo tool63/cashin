@@ -42,17 +42,15 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
 
       <body className="bg-primary text-[var(--text-primary)] transition-colors duration-500 overflow-x-hidden">
         <ThemeProviderWrapper>
-          
+
           {/* ================= GLOBAL BACKGROUND ================= */}
           <div className="fixed inset-0 -z-10 pointer-events-none">
-            {/* Gradient background */}
-            <div
-              className="absolute inset-0 transition-colors duration-500"
-              style={{
-                background: "linear-gradient(to bottom right, var(--gradient-from), var(--gradient-via), var(--gradient-to))",
-              }}
-            />
-            
+
+            {/* Gradient background using CSS variables */}
+            <div className="absolute inset-0 transition-colors duration-500 
+                            bg-[linear-gradient(to_bottom_right,var(--gradient-from),var(--gradient-via),var(--gradient-to))]">
+            </div>
+
             {/* Glow blobs */}
             <div className="absolute w-80 h-80 bg-green-400/25 rounded-full blur-[120px] top-10 left-10 animate-blobMove"></div>
             <div className="absolute w-96 h-96 bg-yellow-400/25 rounded-full blur-[140px] bottom-10 right-10 animate-blobMove2"></div>
