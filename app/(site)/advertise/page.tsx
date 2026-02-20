@@ -49,29 +49,27 @@ export default function AdvertisePage() {
         description="Reach millions of active users by advertising with Cashog. Flexible budgets, real-time analytics, and global reach for your campaigns. Start advertising today!"
       />
 
-      <main className="relative min-h-screen text-gray-900 dark:text-white overflow-hidden isolate">
+      <main className="relative min-h-screen bg-white dark:bg-[#070A14] text-gray-900 dark:text-white overflow-hidden">
+
         {/* ============================
-            Unified Gradient + Glow Blobs
+            Background + Glow Blobs
         ============================ */}
         <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20 dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20 transition-colors duration-500 pointer-events-none"></div>
         <div className="absolute w-80 h-80 bg-green-400/25 rounded-full blur-[120px] top-10 left-10 animate-blobMove pointer-events-none"></div>
         <div className="absolute w-96 h-96 bg-yellow-400/25 rounded-full blur-[140px] bottom-10 right-10 animate-blobMove2 pointer-events-none"></div>
         <div className="absolute inset-0 bg-white/5 backdrop-blur-3xl pointer-events-none"></div>
 
-        {/* ============================
-            ALL CONTENT IN ONE SECTION
-        ============================ */}
-        <section className="relative max-w-7xl mx-auto px-4 py-28">
+        <section className="relative isolate overflow-hidden max-w-7xl mx-auto px-4">
 
-          {/* Hero */}
-          <div className="text-center mb-20">
-            <h1 className="text-5xl sm:text-6xl font-extrabold mb-6 drop-shadow-lg">
+          {/* ================= HERO ================= */}
+          <div className="py-32 text-center rounded-b-[60px] shadow-xl">
+            <h1 className="text-5xl sm:text-6xl font-extrabold mb-6 text-gray-900 dark:text-white drop-shadow-lg">
               Advertise with Cashog
             </h1>
             <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-8 gradient-text drop-shadow-md">
               <TypingText />
             </div>
-            <p className="text-lg sm:text-xl md:text-2xl mb-12 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl md:text-2xl mb-12 text-gray-700 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
               Reach millions of active users, maximize engagement, and grow your business with Cashog's premium advertising platform.
             </p>
             <Link href="/signup?type=advertiser" className="cta-observer inline-block">
@@ -89,15 +87,15 @@ export default function AdvertisePage() {
               {stats.map((stat, i) => (
                 <div key={i} className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800/50 rounded-full">
                   <span className="text-yellow-500">{stat.icon}</span>
-                  <span className="font-bold">{stat.value}</span>
+                  <span className="font-bold text-gray-900 dark:text-white">{stat.value}</span>
                   <span className="text-xs text-gray-500 dark:text-gray-400">{stat.label}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Steps */}
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 mt-20">
+          {/* ================= STEPS ================= */}
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 mt-32">
             How It <span className="gradient-text">Works</span>
           </h2>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 mb-20">
@@ -119,7 +117,7 @@ export default function AdvertisePage() {
             ))}
           </div>
 
-          {/* Features */}
+          {/* ================= FEATURES ================= */}
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
             Why Advertise with <span className="gradient-text">Cashog</span>
           </h2>
@@ -145,7 +143,7 @@ export default function AdvertisePage() {
             ))}
           </div>
 
-          {/* FAQ */}
+          {/* ================= FAQ ================= */}
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
             Frequently Asked <span className="gradient-text">Questions</span>
           </h2>
@@ -173,15 +171,19 @@ export default function AdvertisePage() {
             ))}
           </div>
 
-          {/* Unified Final CTA */}
-          <div className="text-center mt-12">
-            <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 gradient-text drop-shadow-lg">
+          {/* ================= FINAL CTA ================= */}
+          <div className="py-28 text-center rounded-t-[60px] shadow-xl relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/30 via-green-400/40 to-green-500/30 dark:from-yellow-500/20 dark:via-green-700/30 dark:to-green-800/25 transition-colors duration-500 pointer-events-none"></div>
+            <div className="absolute -top-24 left-1/2 transform -translate-x-1/2 w-96 h-96 bg-yellow-400/25 rounded-full blur-[140px] animate-blobMove2 pointer-events-none"></div>
+            <div className="absolute inset-0 bg-white/10 backdrop-blur-3xl pointer-events-none"></div>
+
+            <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 gradient-text drop-shadow-lg relative z-10">
               Ready to Scale Your Advertising?
             </h2>
-            <p className="text-xl text-gray-700 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-700 dark:text-gray-300 mb-12 max-w-2xl mx-auto relative z-10">
               Join thousands of advertisers already reaching millions of active users on Cashog
             </p>
-            <Link href="/signup?type=advertiser" className="cta-observer inline-block">
+            <Link href="/signup?type=advertiser" className="cta-observer inline-block relative z-10">
               <motion.span
                 whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.97 }}
@@ -190,7 +192,7 @@ export default function AdvertisePage() {
                 Launch Your Campaign <ArrowRight size={24} />
               </motion.span>
             </Link>
-            <div className="mt-10 flex flex-wrap justify-center gap-6 text-sm text-gray-500 dark:text-gray-400">
+            <div className="mt-10 flex flex-wrap justify-center gap-6 text-sm text-gray-500 dark:text-gray-400 relative z-10">
               <span className="flex items-center gap-2">✓ No credit card required</span>
               <span className="flex items-center gap-2">✓ Cancel anytime</span>
               <span className="flex items-center gap-2">✓ 24/7 support</span>
