@@ -3,98 +3,60 @@
 @tailwind utilities;
 
 /* =====================================================
-   CORE THEME VARIABLES (CHANGE COLOR HERE ONLY)
+   THEME VARIABLES
 ===================================================== */
 
+/* Default = Dark Mode */
 :root {
-  --bg-primary: #0B0F1A;      /* 🔥 CHANGE THIS TO UPDATE ALL PAGES */
+  --bg-primary: #0B0F1A;
   --bg-secondary: #111827;
   --card-bg: #1F2937;
-  --border-color: #374151;
-  --accent-color: #22c55e;
+
   --text-primary: #ffffff;
   --text-muted: #9CA3AF;
+
+  --border-color: #374151;
+
+  /* Gradient Colors */
+  --gradient-from: rgba(250, 204, 21, 0.20);
+  --gradient-via: rgba(34, 197, 94, 0.25);
+  --gradient-to: rgba(22, 163, 74, 0.20);
+
+  /* Glow Colors */
+  --glow-green: rgba(34, 197, 94, 0.25);
+  --glow-yellow: rgba(250, 204, 21, 0.25);
+}
+
+/* Light Mode Override */
+[data-theme="light"] {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9fafb;
+  --card-bg: #ffffff;
+
+  --text-primary: #111827;
+  --text-muted: #6B7280;
+
+  --border-color: #e5e7eb;
+
+  --gradient-from: rgba(250, 204, 21, 0.10);
+  --gradient-via: rgba(34, 197, 94, 0.15);
+  --gradient-to: rgba(22, 163, 74, 0.10);
+
+  --glow-green: rgba(34, 197, 94, 0.15);
+  --glow-yellow: rgba(250, 204, 21, 0.15);
 }
 
 /* =====================================================
-   GLOBAL RESET
+   GLOBAL BASE
 ===================================================== */
 
-html,
-body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
+html, body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-/* =====================================================
-   LINKS
-===================================================== */
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-/* =====================================================
-   FORMS
-===================================================== */
-
-input {
-  width: 100%;
-  border-radius: 0.75rem;
-  border: 1px solid var(--border-color);
-  padding: 0.75rem 1rem;
-  background-color: var(--card-bg);
-  color: var(--text-primary);
-  outline: none;
-  font-size: 0.875rem;
-  transition: 0.2s ease;
-}
-
-input::placeholder {
-  color: var(--text-muted);
-}
-
-input:focus {
-  border-color: var(--accent-color);
-  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.25);
-}
-
-button {
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-
-/* =====================================================
-   SIMPLE UTILITY CLASSES
-===================================================== */
-
-.bg-primary {
-  background-color: var(--bg-primary);
-}
-
-.bg-secondary {
-  background-color: var(--bg-secondary);
-}
-
-.bg-card {
-  background-color: var(--card-bg);
-}
-
-.text-muted {
-  color: var(--text-muted);
-}
-
-.border-theme {
-  border-color: var(--border-color);
-}
+.bg-primary { background-color: var(--bg-primary); }
+.bg-card { background-color: var(--card-bg); }
+.text-muted { color: var(--text-muted); }
+.border-theme { border-color: var(--border-color); }
