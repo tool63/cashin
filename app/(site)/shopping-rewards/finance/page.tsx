@@ -74,21 +74,16 @@ export default function FinancePage() {
 
       <main className="relative min-h-screen text-gray-900 dark:text-white">
 
-        {/* ================= SINGLE SMOOTH SECTION ================= */}
-        <section className="relative overflow-hidden py-20 px-4 text-center
-          bg-gradient-to-r 
-          from-yellow-400/15 
-          via-green-400/15 
-          to-green-500/15
-          dark:from-yellow-500/8
-          dark:via-green-700/10
-          dark:to-green-800/10">
+        {/* ============================
+    Background Gradient Layer
+============================ */}
+<div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 via-green-400/20 to-green-500/20"></div>
 
-          {/* Subtle floating blur (balanced, not bright) */}
-          <div className="absolute w-80 h-80 bg-green-400/10 dark:bg-green-700/10 rounded-full blur-3xl top-32 left-20"></div>
-          <div className="absolute w-80 h-80 bg-yellow-400/10 dark:bg-yellow-500/10 rounded-full blur-3xl bottom-32 right-20"></div>
-
-          <div className="relative z-10 max-w-7xl mx-auto">
+{/* ============================
+    Glow Blobs
+============================ */}
+<div className="absolute w-72 h-72 bg-green-400/30 rounded-full blur-3xl top-20 left-10"></div>
+<div className="absolute w-96 h-96 bg-yellow-500/30 rounded-full blur-3xl bottom-10 right-10"></div>
 
             {/* HERO */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
