@@ -1,28 +1,32 @@
-"use client"
+"use client";
 
-import { ThemeProvider } from "next-themes"
-import { useEffect, useState, ReactNode } from "react"
+import { ThemeProvider } from "next-themes";
+import { useEffect, useState, ReactNode } from "react";
 
 interface ThemeProviderWrapperProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
-export default function ThemeProviderWrapper({ children }: ThemeProviderWrapperProps) {
-  const [mounted, setMounted] = useState(false)
+export default function ThemeProviderWrapper({
+  children,
+}: ThemeProviderWrapperProps) {
+  const [mounted, setMounted] = useState(false);
 
-  // Prevents hydration mismatch
-  useEffect(() => setMounted(true), [])
+  // Prevent hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-  if (!mounted) return null
+  if (!mounted) return null;
 
   return (
     <ThemeProvider
-      attribute="class"         // Uses 'class' for dark/light switching
-      defaultTheme="system"     // Default to system theme
-      enableSystem              // Allow system preference
-      disableTransitionOnChange // Smooth transition when switching themes
+      attribute="data-theme"   // ✅ Use data-theme instead of class
+      defaultTheme="system"    // ✅ Follows OS preference
+      enableSystem             // ✅ Allows system detection
+      disableTransitionOnChange={false} // allow smooth CSS transitions
     >
       {children}
     </ThemeProvider>
-  )
+  );
 }
