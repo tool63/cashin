@@ -100,7 +100,6 @@ export default function PartnersPage() {
                 Join as a Partner <ArrowRight size={24} />
               </motion.span>
             </Link>
-
           </div>
 
           {/* ================= STEPS ================= */}
@@ -182,17 +181,13 @@ export default function PartnersPage() {
 
           {/* ================= FINAL CTA ================= */}
           <div className="py-28 text-center rounded-t-[60px] relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/30 via-green-400/40 to-green-500/30 dark:from-yellow-500/20 dark:via-green-700/30 dark:to-green-800/25 transition-colors duration-500 pointer-events-none"></div>
-            <div className="absolute -top-24 left-1/2 transform -translate-x-1/2 w-96 h-96 bg-yellow-400/25 rounded-full blur-[140px] animate-blobMove2 pointer-events-none"></div>
-            <div className="absolute inset-0 bg-white/10 backdrop-blur-3xl pointer-events-none"></div>
-
-            <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 gradient-text drop-shadow-lg relative z-10">
+            <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 gradient-text drop-shadow-lg">
               Partner with Cashog Today!
             </h2>
-            <p className="text-xl text-gray-700 dark:text-gray-300 mb-12 max-w-2xl mx-auto relative z-10">
+            <p className="text-xl text-gray-700 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
               Collaborate, grow revenue, and gain global exposure by joining Cashog’s partner program.
             </p>
-            <Link href="/signup" className="cta-observer inline-block relative z-10">
+            <Link href="/signup" className="cta-observer inline-block">
               <motion.span
                 whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.97 }}
