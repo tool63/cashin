@@ -52,21 +52,20 @@ export default function AdvertisePage() {
       <main className="relative min-h-screen bg-white dark:bg-[#070A14] text-gray-900 dark:text-white overflow-hidden">
 
         {/* ============================
-            Background Gradient + Glow
+            Animated Gradient + Glow Blobs
         ============================ */}
         <div className="absolute inset-0 
           bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20
           dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20
-          transition-colors duration-500 pointer-events-none">
-        </div>
+          transition-colors duration-500 pointer-events-none"></div>
 
-        <div className="absolute w-80 h-80 bg-green-400/25 rounded-full blur-[120px] top-10 left-10 animate-pulse pointer-events-none"></div>
-        <div className="absolute w-96 h-96 bg-yellow-400/25 rounded-full blur-[140px] bottom-10 right-10 animate-pulse delay-1000 pointer-events-none"></div>
+        <div className="absolute w-80 h-80 bg-green-400/25 rounded-full blur-[120px] top-10 left-10 animate-blobMove pointer-events-none"></div>
+        <div className="absolute w-96 h-96 bg-yellow-400/25 rounded-full blur-[140px] bottom-10 right-10 animate-blobMove2 pointer-events-none"></div>
 
         <div className="absolute inset-0 bg-white/5 backdrop-blur-3xl pointer-events-none"></div>
 
         {/* ============================
-            Content Section
+            Content Section (Single Section)
         ============================ */}
         <section className="relative isolate overflow-hidden max-w-7xl mx-auto px-4 py-28">
 
@@ -74,7 +73,7 @@ export default function AdvertisePage() {
           <h1 className="text-5xl sm:text-6xl font-extrabold mb-4 text-center text-gray-900 dark:text-white">
             Advertise with Cashog
           </h1>
-          <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
+          <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 text-center gradient-text">
             <TypingText />
           </div>
           <p className="text-lg sm:text-xl md:text-2xl mb-12 text-gray-700 dark:text-gray-300 text-center max-w-3xl mx-auto leading-relaxed">
@@ -94,7 +93,7 @@ export default function AdvertisePage() {
 
           {/* STEPS */}
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            How It <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">Works</span>
+            How It <span className="gradient-text">Works</span>
           </h2>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 mb-20">
             {steps.map((step, i) => (
@@ -117,7 +116,7 @@ export default function AdvertisePage() {
 
           {/* FEATURES */}
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-            Why Advertise with <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">Cashog</span>
+            Why Advertise with <span className="gradient-text">Cashog</span>
           </h2>
           <p className="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
             Join thousands of advertisers who trust Cashog to reach their target audience effectively
@@ -143,7 +142,7 @@ export default function AdvertisePage() {
 
           {/* FAQ */}
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-            Frequently Asked <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">Questions</span>
+            Frequently Asked <span className="gradient-text">Questions</span>
           </h2>
           <p className="text-center text-gray-600 dark:text-gray-400 mb-12">
             Everything you need to know about advertising on Cashog
@@ -171,7 +170,7 @@ export default function AdvertisePage() {
 
           {/* FINAL CTA */}
           <div className="text-center mb-20">
-            <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
+            <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 gradient-text">
               Ready to Scale Your Advertising?
             </h2>
             <p className="text-xl text-gray-700 dark:text-gray-300 mb-10 max-w-2xl mx-auto">
