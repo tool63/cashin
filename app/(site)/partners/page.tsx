@@ -59,124 +59,151 @@ export default function PartnersPage() {
         description="Join Cashog as a partner and collaborate to earn revenue. Trusted partnerships, real-time tracking, and global access."
       />
 
-      <main className="transition-colors duration-300 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white min-h-screen">
+      <main className="relative min-h-screen text-gray-900 dark:text-white overflow-hidden transition-colors duration-300">
 
-        {/* ================= HERO ================= */}
-        <section className="py-24 px-4 text-center rounded-b-3xl transition-colors duration-300 
-            bg-white dark:bg-[#111827]">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="text-5xl sm:text-6xl font-extrabold mb-4 
-                text-gray-900 dark:text-white">
+        {/* ============================
+            Global Background Gradient + Glow
+        ============================ */}
+        <div className="absolute inset-0 
+          bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20
+          dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20
+          transition-colors duration-500 pointer-events-none">
+        </div>
+
+        <div className="absolute w-80 h-80 bg-green-400/25 rounded-full blur-[120px] top-10 left-10 animate-blobMove pointer-events-none"></div>
+        <div className="absolute w-96 h-96 bg-yellow-400/25 rounded-full blur-[140px] bottom-10 right-10 animate-blobMove2 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-white/5 backdrop-blur-3xl pointer-events-none"></div>
+
+        <section className="relative isolate max-w-7xl mx-auto px-4">
+
+          {/* ================= HERO ================= */}
+          <div className="py-32 text-center">
+            <h1 className="text-5xl sm:text-6xl font-extrabold mb-6 text-gray-900 dark:text-white drop-shadow-lg">
               Become a Cashog Partner
             </h1>
 
-            <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 
-                bg-clip-text text-transparent 
-                bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
+            <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-8 
+                bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 drop-shadow-md">
               <TypingText />
             </div>
 
-            <p className="text-lg sm:text-xl md:text-2xl mb-8 
-                text-gray-700 dark:text-gray-300 max-w-xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl md:text-2xl mb-12 text-gray-700 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
               Collaborate with Cashog to grow your business, earn revenue, and gain global exposure.
             </p>
 
             <Link href="/signup" className="cta-observer inline-block">
               <motion.span
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.07 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 
-                    bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 
-                    text-black dark:text-black px-12 py-5 rounded-3xl font-bold shadow-xl
-                    dark:shadow-none text-lg"
+                className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-3xl font-bold shadow-2xl hover:shadow-3xl transition-all duration-300 text-xl"
               >
-                Join as a Partner <ArrowRight size={20} />
+                Join as a Partner <ArrowRight size={24} />
               </motion.span>
             </Link>
+
           </div>
-        </section>
 
-        {/* ================= STEPS ================= */}
-        <section className="max-w-7xl mx-auto px-4 py-20 grid gap-12 md:grid-cols-2 lg:grid-cols-4 text-center">
-          {steps.map((step, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.2 }}
-              className="bg-gray-100 dark:bg-[#1A1F2B] rounded-2xl p-8 flex flex-col items-center shadow-md hover:shadow-lg transition-shadow duration-300"
-            >
-              <div className="mb-4">{step.icon}</div>
-              <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-              <p className="text-gray-600 dark:text-gray-400">{step.description}</p>
-            </motion.div>
-          ))}
-        </section>
-
-        {/* ================= FEATURES ================= */}
-        <section className="max-w-7xl mx-auto px-4 py-20 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">
-            Why Partner with Cashog
+          {/* ================= STEPS ================= */}
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 mt-32">
+            How It <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">Works</span>
           </h2>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 justify-center">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 mb-20">
+            {steps.map((step, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.2 }}
+                className="bg-gray-50 dark:bg-[#0b0e1a] rounded-2xl p-8 flex flex-col items-center text-center shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-800 group hover:-translate-y-2"
+              >
+                <div className="mb-4 p-4 rounded-full bg-gradient-to-r from-yellow-400/20 via-green-400/20 to-green-500/20 group-hover:scale-110 transition-transform duration-300">
+                  {step.icon}
+                </div>
+                <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400">{step.description}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* ================= FEATURES ================= */}
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+            Why Partner with <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">Cashog</span>
+          </h2>
+          <p className="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+            Join thousands of partners who trust Cashog to grow revenue and expand globally.
+          </p>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-20">
             {features.map((feature, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.2 }}
-                className="bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 text-center shadow hover:shadow-xl transition-shadow duration-300 w-full max-w-sm mx-auto"
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="bg-white dark:bg-[#070A14] rounded-2xl p-8 text-center shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-800 hover:-translate-y-2"
               >
-                <div className="flex justify-center mb-4 text-yellow-500">
-                  <ShieldCheck size={28} />
+                <div className="inline-flex p-3 rounded-xl bg-gradient-to-r from-yellow-400/20 via-green-400/20 to-green-500/20 mb-4 justify-center">
+                  <ShieldCheck size={24} className="text-yellow-500" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
                 <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
               </motion.div>
             ))}
           </div>
-        </section>
 
-        {/* ================= FAQ ================= */}
-        <section className="max-w-4xl mx-auto px-4 py-20 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">Frequently Asked Questions</h2>
-          <div className="space-y-4">
+          {/* ================= FAQ ================= */}
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+            Frequently Asked <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">Questions</span>
+          </h2>
+          <p className="text-center text-gray-600 dark:text-gray-400 mb-12">
+            Everything you need to know about partnering with Cashog
+          </p>
+          <div className="space-y-4 mb-20">
             {faqs.map((faq, i) => (
-              <details key={i} className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-4 cursor-pointer group">
-                <summary className="font-semibold text-lg">{faq.q}</summary>
-                <p className="mt-2 text-gray-600 dark:text-gray-400">{faq.a}</p>
-              </details>
+              <motion.details
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="group bg-white dark:bg-[#0b0e1a] rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-lg transition-all duration-300"
+              >
+                <summary className="font-semibold text-lg px-6 py-4 cursor-pointer flex items-center justify-between hover:bg-gradient-to-r hover:from-yellow-400/5 hover:via-green-400/5 hover:to-green-500/5">
+                  <span>{faq.q}</span>
+                  <span className="text-green-500 group-open:rotate-180 transition-transform duration-300">▼</span>
+                </summary>
+                <div className="px-6 pb-4 text-gray-600 dark:text-gray-400 border-t border-gray-200 dark:border-gray-800 pt-4">
+                  {faq.a}
+                </div>
+              </motion.details>
             ))}
           </div>
-        </section>
 
-        {/* ================= FINAL CTA ================= */}
-        <section className="text-center py-28 w-full rounded-t-3xl transition-colors duration-300
-            bg-white dark:bg-[#111827]">
-          <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 
-              bg-clip-text text-transparent 
-              bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
-            Partner with Cashog Today!
-          </h2>
-          <Link href="/signup" className="cta-observer inline-block">
-            <motion.span
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-3 
-                  bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 
-                  text-black dark:text-black px-16 py-6 rounded-3xl font-bold shadow-2xl 
-                  dark:shadow-none text-xl"
-            >
-              Join as a Partner <ArrowRight size={20} />
-            </motion.span>
-          </Link>
-          <p className="mt-6 text-gray-700 dark:text-gray-300 text-lg max-w-md mx-auto transition-colors duration-300">
-            Collaborate, grow revenue, and gain global exposure by joining Cashog’s partner program.
-          </p>
-        </section>
+          {/* ================= FINAL CTA ================= */}
+          <div className="py-28 text-center rounded-t-[60px] relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/30 via-green-400/40 to-green-500/30 dark:from-yellow-500/20 dark:via-green-700/30 dark:to-green-800/25 transition-colors duration-500 pointer-events-none"></div>
+            <div className="absolute -top-24 left-1/2 transform -translate-x-1/2 w-96 h-96 bg-yellow-400/25 rounded-full blur-[140px] animate-blobMove2 pointer-events-none"></div>
+            <div className="absolute inset-0 bg-white/10 backdrop-blur-3xl pointer-events-none"></div>
 
+            <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 gradient-text drop-shadow-lg relative z-10">
+              Partner with Cashog Today!
+            </h2>
+            <p className="text-xl text-gray-700 dark:text-gray-300 mb-12 max-w-2xl mx-auto relative z-10">
+              Collaborate, grow revenue, and gain global exposure by joining Cashog’s partner program.
+            </p>
+            <Link href="/signup" className="cta-observer inline-block relative z-10">
+              <motion.span
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-20 py-7 rounded-3xl font-bold shadow-3xl text-xl hover:shadow-4xl transition-all duration-300"
+              >
+                Join as a Partner <ArrowRight size={24} />
+              </motion.span>
+            </Link>
+          </div>
+
+        </section>
       </main>
     </>
   );
