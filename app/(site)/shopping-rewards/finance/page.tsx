@@ -77,7 +77,7 @@ export default function FinancePage() {
         {/* ============================
             Background Gradient Layer
         ============================ */}
-        <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 via-green-400/30 to-green-500/30"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/30 via-green-400/30 to-green-500/30"></div>
 
         {/* ============================
             Glow Blobs
