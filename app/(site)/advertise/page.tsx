@@ -10,7 +10,7 @@ import {
   BarChart,
   DollarSign,
   ShieldCheck,
-  HeadphonesIcon,
+  Headphones,
   CheckCircle,
   Users,
 } from "lucide-react";
@@ -18,6 +18,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Meta from "@/components/seo/SeoEngine";
 import TypingText from "@/components/typing/TypingText";
+import Background from "@/components/Background";
 
 /* ================= DATA ================= */
 
@@ -75,7 +76,7 @@ const features = [
     description: "Advertise on a trusted platform.",
   },
   {
-    icon: <HeadphonesIcon size={22} className="text-green-500" />,
+    icon: <Headphones size={22} className="text-green-500" />,
     title: "Dedicated Support",
     description: "24/7 campaign optimization support.",
   },
@@ -117,7 +118,10 @@ export default function AdvertisePage() {
         description="Reach millions of active users with Cashog advertising platform."
       />
 
-      <main className="min-h-screen bg-primary text-white">
+      <main className="relative min-h-screen bg-primary text-white overflow-hidden">
+
+        {/* ================= GLOBAL BACKGROUND ================= */}
+        <Background />
 
         <section className="max-w-7xl mx-auto px-4 py-20">
 
@@ -192,13 +196,9 @@ export default function AdvertisePage() {
                 whileHover={{ y: -6 }}
                 className="bg-card rounded-2xl p-6 text-center border border-theme"
               >
-                <div className="mb-4 flex justify-center">
-                  {feature.icon}
-                </div>
+                <div className="mb-4 flex justify-center">{feature.icon}</div>
                 <h3 className="font-semibold mb-2">{feature.title}</h3>
-                <p className="text-sm text-muted">
-                  {feature.description}
-                </p>
+                <p className="text-sm text-muted">{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -214,9 +214,7 @@ export default function AdvertisePage() {
                 key={i}
                 className="bg-card rounded-xl border border-theme p-4"
               >
-                <summary className="font-semibold cursor-pointer">
-                  {faq.q}
-                </summary>
+                <summary className="font-semibold cursor-pointer">{faq.q}</summary>
                 <p className="mt-3 text-sm text-muted">{faq.a}</p>
               </details>
             ))}
