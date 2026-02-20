@@ -101,25 +101,22 @@ export default function AdvertisePage() {
       <main className="transition-colors duration-300 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white min-h-screen">
 
         {/* ================= HERO ================= */}
-        <section className="relative py-28 px-4 text-center overflow-hidden bg-white dark:bg-[#070A14] rounded-b-[50px] shadow-xl">
+        <section className="relative py-28 px-4 text-center overflow-hidden rounded-b-[50px] shadow-xl">
           {/* Gradient background elements */}
-          <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 via-green-500/5 to-green-600/5"></div>
-          <div className="absolute -top-24 -right-24 w-48 h-48 bg-yellow-400/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-green-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20 dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20 transition-colors duration-500"></div>
+          <div className="absolute -top-24 -right-24 w-48 h-48 bg-yellow-400/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-green-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
           
           <div className="max-w-4xl mx-auto relative z-10">
             <h1 className="text-5xl sm:text-6xl font-extrabold mb-4 text-gray-900 dark:text-white">
               Advertise with Cashog
             </h1>
 
-            <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 
-                bg-clip-text text-transparent 
-                bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
+            <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
               <TypingText />
             </div>
 
-            <p className="text-lg sm:text-xl md:text-2xl mb-8 
-                text-gray-700 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl md:text-2xl mb-8 text-gray-700 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
               Reach millions of active users, maximize engagement, and grow your business with Cashog's premium advertising platform.
             </p>
 
@@ -138,10 +135,7 @@ export default function AdvertisePage() {
               <motion.span
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-3 
-                    bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 
-                    text-black px-12 py-5 rounded-3xl font-bold shadow-xl text-lg
-                    hover:shadow-2xl transition-all duration-300"
+                className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-12 py-5 rounded-3xl font-bold shadow-xl text-lg hover:shadow-2xl transition-all duration-300"
               >
                 Start Advertising <ArrowRight size={20} />
               </motion.span>
@@ -237,15 +231,13 @@ export default function AdvertisePage() {
         </section>
 
         {/* ================= FINAL CTA ================= */}
-        <section className="relative py-28 px-4 text-center overflow-hidden bg-white dark:bg-[#070A14] rounded-t-[50px] shadow-xl">
+        <section className="relative py-28 px-4 text-center overflow-hidden rounded-t-[50px] shadow-xl">
           {/* Gradient background elements */}
-          <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 via-green-500/5 to-green-600/5"></div>
-          <div className="absolute -top-24 left-1/2 transform -translate-x-1/2 w-96 h-96 bg-yellow-400/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20 dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20 transition-colors duration-500"></div>
+          <div className="absolute -top-24 left-1/2 transform -translate-x-1/2 w-96 h-96 bg-yellow-400/20 rounded-full blur-3xl animate-pulse"></div>
           
           <div className="relative z-10 max-w-4xl mx-auto">
-            <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 
-                bg-clip-text text-transparent 
-                bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
+            <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
               Ready to Scale Your Advertising?
             </h2>
             
@@ -257,10 +249,7 @@ export default function AdvertisePage() {
               <motion.span
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-3 
-                    bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 
-                    text-black px-16 py-6 rounded-3xl font-bold shadow-2xl text-xl
-                    hover:shadow-2xl transition-all duration-300"
+                className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-3xl font-bold shadow-2xl text-xl hover:shadow-2xl transition-all duration-300"
               >
                 Launch Your Campaign <ArrowRight size={24} />
               </motion.span>
