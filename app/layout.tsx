@@ -9,10 +9,11 @@ import Footer from "@/components/Footer";
 import FloatingCTA from "@/components/cta/FloatingCTA";
 import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
 import Meta from "@/components/seo/SeoEngine";
+import Background from "@/components/Background";
 
 interface RootLayoutProps {
   children: ReactNode;
-  auth: ReactNode;
+  auth?: ReactNode;
 }
 
 const defaultTitle = "Cashog";
@@ -21,13 +22,13 @@ const defaultDescription = "Earn rewards, cash out, and get paid";
 export default function RootLayout({ children, auth }: RootLayoutProps) {
   const pathname = usePathname();
 
+  // Detect auth pages
   const isAuthPage =
     pathname?.startsWith("/login") ||
     pathname?.startsWith("/signup") ||
     pathname?.startsWith("/reset");
 
   const hasAuthModal = !!auth;
-
   const hideLayout = isAuthPage && !hasAuthModal;
 
   return (
@@ -38,23 +39,8 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
 
       <body className="bg-primary text-[var(--text-primary)] transition-colors duration-500 overflow-x-hidden">
         <ThemeProviderWrapper>
-
           {/* ================= GLOBAL BACKGROUND ================= */}
-          <div className="fixed inset-0 -z-10 pointer-events-none">
-            {/* Gradient Background */}
-            <div className="absolute inset-0 transition-colors duration-500"
-                 style={{ 
-                   background: `linear-gradient(to bottom right, var(--gradient-from), var(--gradient-via), var(--gradient-to))`
-                 }}>
-            </div>
-
-            {/* Glow blobs */}
-            <div className="absolute w-80 h-80 rounded-full blur-[120px] top-10 left-10 animate-blobMove blob-green pointer-events-none"></div>
-            <div className="absolute w-96 h-96 rounded-full blur-[140px] bottom-10 right-10 animate-blobMove2 blob-yellow pointer-events-none"></div>
-
-            {/* Subtle overlay */}
-            <div className="absolute inset-0 bg-white/5 backdrop-blur-3xl pointer-events-none"></div>
-          </div>
+          <Background />
 
           {/* ================= HEADER ================= */}
           {!hideLayout && (
@@ -79,7 +65,6 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
           {!hideLayout && <FloatingCTA />}
 
           {hasAuthModal && auth}
-
         </ThemeProviderWrapper>
       </body>
     </html>
