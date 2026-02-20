@@ -22,7 +22,7 @@ const defaultDescription = "Earn rewards, cash out, and get paid";
 export default function RootLayout({ children, auth }: RootLayoutProps) {
   const pathname = usePathname();
 
-  // Detect auth pages
+  // Detect auth pages (login, signup, reset)
   const isAuthPage =
     pathname?.startsWith("/login") ||
     pathname?.startsWith("/signup") ||
@@ -39,17 +39,23 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
 
       <body className="bg-primary text-[var(--text-primary)] transition-colors duration-500 overflow-x-hidden">
         <ThemeProviderWrapper>
-          {/* ================= GLOBAL BACKGROUND ================= */}
+          {/* ============================
+              GLOBAL BACKGROUND
+          ============================ */}
           <Background />
 
-          {/* ================= HEADER ================= */}
+          {/* ============================
+              HEADER (visible on non-auth pages)
+          ============================ */}
           {!hideLayout && (
-            <div className="fixed top-0 left-0 w-full z-40 backdrop-blur-xl bg-primary/80 border-b border-theme">
+            <header className="fixed top-0 left-0 w-full z-40 backdrop-blur-xl bg-primary/80 border-b border-theme">
               <Header />
-            </div>
+            </header>
           )}
 
-          {/* ================= MAIN CONTENT ================= */}
+          {/* ============================
+              MAIN CONTENT
+          ============================ */}
           <main
             className={`relative w-full ${
               hideLayout
@@ -60,10 +66,15 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
             {children}
           </main>
 
-          {/* ================= FOOTER + CTA ================= */}
+          {/* ============================
+              FOOTER + FLOATING CTA
+          ============================ */}
           {!hideLayout && <Footer />}
           {!hideLayout && <FloatingCTA />}
 
+          {/* ============================
+              AUTH MODAL (if any)
+          ============================ */}
           {hasAuthModal && auth}
         </ThemeProviderWrapper>
       </body>
