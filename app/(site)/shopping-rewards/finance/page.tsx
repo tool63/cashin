@@ -115,12 +115,43 @@ export default function FinancePage() {
         keywords="cashback, shopping rewards, earn money online, financial rewards, passive income, online earning"
       />
 
-      <main className="relative min-h-screen transition-colors duration-300 text-gray-900 dark:text-white">
-        {/* ================= SINGLE SECTION ================= */}
-        <section className={`relative py-20 px-4 text-center ${sectionGradient}`}>
-          <div className="max-w-7xl mx-auto">
+      <main className="relative min-h-screen text-gray-900 dark:text-white">
+        <section
+          className={`relative overflow-hidden py-20 px-4 text-center ${sectionGradient}`}
+        >
+          {/* ============================
+              Animated Gradient Overlays
+          ============================ */}
+          <div
+            className="absolute inset-0 
+              bg-gradient-to-br 
+              from-yellow-400/20 
+              via-green-400/30 
+              to-green-500/20
+              dark:from-yellow-500/10 
+              dark:via-green-700/20 
+              dark:to-green-800/20
+              animate-gradient"
+          ></div>
 
-            {/* ================= HERO ================= */}
+          <div
+            className="absolute w-72 h-72 
+              bg-green-400/20 
+              dark:bg-green-700/20 
+              rounded-full blur-3xl animate-float top-20 left-10"
+          ></div>
+
+          <div
+            className="absolute w-96 h-96 
+              bg-yellow-400/20 
+              dark:bg-yellow-500/10 
+              rounded-full blur-3xl animate-float animation-delay-2000 bottom-10 right-10"
+          ></div>
+
+          {/* ================= CONTENT ================= */}
+          <div className="relative z-10 max-w-7xl mx-auto">
+
+            {/* HERO */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
               Earn Financial Rewards Online
             </h1>
@@ -129,11 +160,11 @@ export default function FinancePage() {
               <TypingText />
             </div>
 
-            <p className="text-base sm:text-lg md:text-xl mb-8 text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl mb-8 text-gray-700 dark:text-gray-300 max-w-xl mx-auto leading-relaxed">
               Complete offers, surveys, and tasks to earn real money from anywhere.
             </p>
 
-            {/* ✅ Original CTA Logic Restored */}
+            {/* CTA (Original Logic Preserved) */}
             <Link href="/signup" className="cta-observer inline-block mb-20">
               <motion.span
                 whileHover={{ scale: 1.05 }}
@@ -144,7 +175,7 @@ export default function FinancePage() {
               </motion.span>
             </Link>
 
-            {/* ================= STEPS ================= */}
+            {/* STEPS */}
             <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4 mb-24">
               {steps.map((step, i) => (
                 <motion.div
@@ -153,16 +184,18 @@ export default function FinancePage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: i * 0.2 }}
-                  className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-8 shadow-md hover:shadow-lg transition-shadow duration-300"
+                  className="bg-white/60 dark:bg-[#1A1F2B]/80 backdrop-blur-md rounded-xl p-8 shadow-md hover:shadow-lg transition-shadow duration-300"
                 >
                   <div className="mb-4 flex justify-center">{step.icon}</div>
                   <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-400">{step.description}</p>
+                  <p className="text-gray-700 dark:text-gray-400">
+                    {step.description}
+                  </p>
                 </motion.div>
               ))}
             </div>
 
-            {/* ================= FEATURES ================= */}
+            {/* FEATURES */}
             <h2 className="text-3xl md:text-4xl font-bold mb-12">
               Why Choose Cashog Finance
             </h2>
@@ -175,18 +208,20 @@ export default function FinancePage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.2 }}
-                  className="bg-gray-50 dark:bg-[#111827] rounded-xl p-6 shadow hover:shadow-lg transition-shadow duration-300"
+                  className="bg-white/60 dark:bg-[#111827]/80 backdrop-blur-md rounded-xl p-6 shadow hover:shadow-lg transition-shadow duration-300"
                 >
                   <div className="flex justify-center mb-4 text-yellow-500">
                     <ShieldCheck size={28} />
                   </div>
                   <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
+                  <p className="text-gray-700 dark:text-gray-400">
+                    {feature.description}
+                  </p>
                 </motion.div>
               ))}
             </div>
 
-            {/* ================= FAQ ================= */}
+            {/* FAQ */}
             <h2 className="text-3xl md:text-4xl font-bold mb-12">
               Frequently Asked Questions
             </h2>
@@ -195,24 +230,23 @@ export default function FinancePage() {
               {faqs.map((faq, i) => (
                 <details
                   key={i}
-                  className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-4 cursor-pointer"
+                  className="bg-white/60 dark:bg-[#1A1F2B]/80 backdrop-blur-md rounded-xl p-4"
                 >
-                  <summary className="font-semibold text-lg">
+                  <summary className="font-semibold text-lg cursor-pointer">
                     {faq.q}
                   </summary>
-                  <p className="mt-2 text-gray-600 dark:text-gray-400">
+                  <p className="mt-2 text-gray-700 dark:text-gray-400">
                     {faq.a}
                   </p>
                 </details>
               ))}
             </div>
 
-            {/* ================= FINAL CTA ================= */}
+            {/* FINAL CTA */}
             <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
               Start Earning Financial Rewards Today
             </h2>
 
-            {/* ✅ Original CTA Logic Restored */}
             <Link href="/signup" className="cta-observer inline-block">
               <motion.span
                 whileHover={{ scale: 1.05 }}
