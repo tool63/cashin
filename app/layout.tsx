@@ -21,9 +21,6 @@ const defaultDescription = "Earn rewards, cash out, and get paid";
 export default function RootLayout({ children, auth }: RootLayoutProps) {
   const pathname = usePathname();
 
-  /* =============================
-     AUTH PAGE LOGIC
-  ============================= */
   const isAuthPage =
     pathname?.startsWith("/login") ||
     pathname?.startsWith("/signup") ||
@@ -31,7 +28,6 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
 
   const hasAuthModal = !!auth;
 
-  // Hide header/footer only for direct auth pages
   const hideLayout = isAuthPage && !hasAuthModal;
 
   return (
@@ -45,17 +41,18 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
 
           {/* ================= GLOBAL BACKGROUND ================= */}
           <div className="fixed inset-0 -z-10 pointer-events-none">
-
-            {/* Gradient background using CSS variables */}
-            <div className="absolute inset-0 transition-colors duration-500 
-                            bg-[linear-gradient(to_bottom_right,var(--gradient-from),var(--gradient-via),var(--gradient-to))]">
+            {/* Gradient Background */}
+            <div className="absolute inset-0 transition-colors duration-500"
+                 style={{ 
+                   background: `linear-gradient(to bottom right, var(--gradient-from), var(--gradient-via), var(--gradient-to))`
+                 }}>
             </div>
 
             {/* Glow blobs */}
-            <div className="absolute w-80 h-80 bg-green-400/25 rounded-full blur-[120px] top-10 left-10 animate-blobMove"></div>
-            <div className="absolute w-96 h-96 bg-yellow-400/25 rounded-full blur-[140px] bottom-10 right-10 animate-blobMove2"></div>
+            <div className="absolute w-80 h-80 rounded-full blur-[120px] top-10 left-10 animate-blobMove blob-green pointer-events-none"></div>
+            <div className="absolute w-96 h-96 rounded-full blur-[140px] bottom-10 right-10 animate-blobMove2 blob-yellow pointer-events-none"></div>
 
-            {/* Soft overlay */}
+            {/* Subtle overlay */}
             <div className="absolute inset-0 bg-white/5 backdrop-blur-3xl pointer-events-none"></div>
           </div>
 
@@ -81,7 +78,6 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
           {!hideLayout && <Footer />}
           {!hideLayout && <FloatingCTA />}
 
-          {/* ================= AUTH MODAL SLOT ================= */}
           {hasAuthModal && auth}
 
         </ThemeProviderWrapper>
