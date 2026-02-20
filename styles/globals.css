@@ -2,51 +2,108 @@
 @tailwind components;
 @tailwind utilities;
 
-/* THEME VARIABLES */
+/* =====================================================
+   THEME VARIABLES
+===================================================== */
+
+/* Default = Dark Mode */
 :root {
+  /* Backgrounds */
   --bg-primary: #0B0F1A;
   --bg-secondary: #111827;
   --card-bg: #1F2937;
 
+  /* Text */
   --text-primary: #ffffff;
   --text-muted: #9CA3AF;
 
+  /* Borders */
   --border-color: #374151;
 
+  /* Gradient for backgrounds */
   --gradient-from: rgba(250, 204, 21, 0.20);
   --gradient-via: rgba(34, 197, 94, 0.25);
   --gradient-to: rgba(22, 163, 74, 0.20);
 
+  /* Glow colors for blobs */
   --glow-green: rgba(34, 197, 94, 0.25);
   --glow-yellow: rgba(250, 204, 21, 0.25);
 }
 
+/* Light Mode Overrides */
 [data-theme="light"] {
+  /* Backgrounds */
   --bg-primary: #ffffff;
   --bg-secondary: #f9fafb;
   --card-bg: #ffffff;
 
+  /* Text */
   --text-primary: #111827;
   --text-muted: #6B7280;
 
+  /* Borders */
   --border-color: #e5e7eb;
 
+  /* Gradient for backgrounds */
   --gradient-from: rgba(250, 204, 21, 0.10);
   --gradient-via: rgba(34, 197, 94, 0.15);
   --gradient-to: rgba(22, 163, 74, 0.10);
 
+  /* Glow colors for blobs */
   --glow-green: rgba(34, 197, 94, 0.15);
   --glow-yellow: rgba(250, 204, 21, 0.15);
 }
 
-/* GLOBAL BASE */
+/* =====================================================
+   GLOBAL BASE
+===================================================== */
+
 html, body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: "Inter", sans-serif;
 }
 
 .bg-primary { background-color: var(--bg-primary); }
+.bg-secondary { background-color: var(--bg-secondary); }
 .bg-card { background-color: var(--card-bg); }
+
+.text-primary { color: var(--text-primary); }
 .text-muted { color: var(--text-muted); }
+
 .border-theme { border-color: var(--border-color); }
+
+/* =====================================================
+   GRADIENT TEXT
+===================================================== */
+.gradient-text {
+  background: linear-gradient(
+    to right,
+    var(--gradient-from),
+    var(--gradient-via),
+    var(--gradient-to)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* =====================================================
+   GLOW BLOBS
+===================================================== */
+.blob-green {
+  background-color: var(--glow-green);
+}
+.blob-yellow {
+  background-color: var(--glow-yellow);
+}
+
+/* =====================================================
+   TRANSITIONS & ANIMATIONS
+===================================================== */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Blob animations are defined in tailwind.config.js */
