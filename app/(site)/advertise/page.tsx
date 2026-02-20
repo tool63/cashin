@@ -119,11 +119,10 @@ export default function AdvertisePage() {
       />
 
       <main className="relative min-h-screen bg-primary text-white overflow-hidden">
-
         {/* ================= GLOBAL BACKGROUND ================= */}
         <Background />
 
-        <section className="max-w-7xl mx-auto px-4 py-20">
+        <section className="relative isolate max-w-7xl mx-auto px-4 py-20">
 
           {/* ================= HERO ================= */}
           <div className="text-center mb-24">
