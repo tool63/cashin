@@ -22,6 +22,10 @@ const defaultDescription = "Earn rewards, cash out, and get paid";
 export default function RootLayout({ children, auth }: RootLayoutProps) {
   const pathname = usePathname();
 
+  /* =============================
+     AUTH PAGE LOGIC
+  ============================= */
+
   const isAuthPage =
     pathname?.startsWith("/login") ||
     pathname?.startsWith("/signup") ||
@@ -29,6 +33,7 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
 
   const hasAuthModal = !!auth;
 
+  // Hide header/footer only for direct auth pages
   const hideLayout = isAuthPage && !hasAuthModal;
 
   return (
@@ -37,17 +42,24 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
         <Meta title={defaultTitle} description={defaultDescription} />
       </head>
 
-      <body className="bg-primary text-white transition-colors duration-300 overflow-x-hidden">
+      <body
+        className="
+          bg-primary
+          text-[var(--text-primary)]
+          transition-colors duration-300
+          overflow-x-hidden
+        "
+      >
         <ThemeProviderWrapper>
 
-          {/* Header */}
+          {/* ================= HEADER ================= */}
           {!hideLayout && (
-            <div className="fixed top-0 left-0 w-full z-40 backdrop-blur-xl bg-primary/80 border-b border-white/10">
+            <div className="fixed top-0 left-0 w-full z-40 backdrop-blur-xl bg-primary/80 border-b border-theme">
               <Header />
             </div>
           )}
 
-          {/* Main Content */}
+          {/* ================= MAIN CONTENT ================= */}
           <main
             className={`relative w-full ${
               hideLayout
@@ -58,11 +70,11 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
             {children}
           </main>
 
-          {/* Footer + CTA */}
+          {/* ================= FOOTER + CTA ================= */}
           {!hideLayout && <Footer />}
           {!hideLayout && <FloatingCTA />}
 
-          {/* Auth Modal Slot */}
+          {/* ================= AUTH MODAL SLOT ================= */}
           {hasAuthModal && auth}
 
         </ThemeProviderWrapper>
