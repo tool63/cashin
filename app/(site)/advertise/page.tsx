@@ -52,14 +52,18 @@ export default function AdvertisePage() {
       <main className="relative min-h-screen bg-white dark:bg-[#070A14] text-gray-900 dark:text-white overflow-hidden">
 
         {/* ============================
-            Background + Glow Blobs
+            Global Background Gradient + Glow
         ============================ */}
-        <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20 dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20 transition-colors duration-500 pointer-events-none"></div>
+        <div className="absolute inset-0 
+          bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20
+          dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20
+          transition-colors duration-500 pointer-events-none"></div>
+
         <div className="absolute w-80 h-80 bg-green-400/25 rounded-full blur-[120px] top-10 left-10 animate-blobMove pointer-events-none"></div>
         <div className="absolute w-96 h-96 bg-yellow-400/25 rounded-full blur-[140px] bottom-10 right-10 animate-blobMove2 pointer-events-none"></div>
         <div className="absolute inset-0 bg-white/5 backdrop-blur-3xl pointer-events-none"></div>
 
-        <section className="relative isolate overflow-hidden max-w-7xl mx-auto px-4">
+        <section className="relative isolate max-w-7xl mx-auto px-4">
 
           {/* ================= HERO ================= */}
           <div className="py-32 text-center rounded-b-[60px] shadow-xl">
@@ -173,17 +177,13 @@ export default function AdvertisePage() {
 
           {/* ================= FINAL CTA ================= */}
           <div className="py-28 text-center rounded-t-[60px] shadow-xl relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/30 via-green-400/40 to-green-500/30 dark:from-yellow-500/20 dark:via-green-700/30 dark:to-green-800/25 transition-colors duration-500 pointer-events-none"></div>
-            <div className="absolute -top-24 left-1/2 transform -translate-x-1/2 w-96 h-96 bg-yellow-400/25 rounded-full blur-[140px] animate-blobMove2 pointer-events-none"></div>
-            <div className="absolute inset-0 bg-white/10 backdrop-blur-3xl pointer-events-none"></div>
-
-            <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 gradient-text drop-shadow-lg relative z-10">
+            <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 gradient-text drop-shadow-lg">
               Ready to Scale Your Advertising?
             </h2>
-            <p className="text-xl text-gray-700 dark:text-gray-300 mb-12 max-w-2xl mx-auto relative z-10">
+            <p className="text-xl text-gray-700 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
               Join thousands of advertisers already reaching millions of active users on Cashog
             </p>
-            <Link href="/signup?type=advertiser" className="cta-observer inline-block relative z-10">
+            <Link href="/signup?type=advertiser" className="cta-observer inline-block">
               <motion.span
                 whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.97 }}
@@ -192,7 +192,7 @@ export default function AdvertisePage() {
                 Launch Your Campaign <ArrowRight size={24} />
               </motion.span>
             </Link>
-            <div className="mt-10 flex flex-wrap justify-center gap-6 text-sm text-gray-500 dark:text-gray-400 relative z-10">
+            <div className="mt-10 flex flex-wrap justify-center gap-6 text-sm text-gray-500 dark:text-gray-400">
               <span className="flex items-center gap-2">✓ No credit card required</span>
               <span className="flex items-center gap-2">✓ Cancel anytime</span>
               <span className="flex items-center gap-2">✓ 24/7 support</span>
