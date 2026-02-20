@@ -15,12 +15,15 @@ export default function ThemeProviderWrapper({ children }: ThemeProviderWrapperP
 
   if (!mounted) return null;
 
+  // ✅ Type assertion applied here, not in JSX
+  const defaultTheme: "light" | "dark" | "system" = "system";
+
   return (
     <ThemeProvider
-      attribute="data-theme"       // Use data-theme for Tailwind dark/light
-      defaultTheme="system" as "system" // ✅ Type assertion fixes TypeScript
-      enableSystem                  // Detect system theme
-      disableTransitionOnChange={false} // Smooth transitions
+      attribute="data-theme"
+      defaultTheme={defaultTheme}
+      enableSystem
+      disableTransitionOnChange={false}
     >
       {children}
     </ThemeProvider>
