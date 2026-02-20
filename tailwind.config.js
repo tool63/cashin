@@ -4,7 +4,7 @@ module.exports = {
     "./app/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
   ],
-  darkMode: "class",
+  darkMode: "class", // respects 'data-theme' attribute
   theme: {
     extend: {
       animation: {
