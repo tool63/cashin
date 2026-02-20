@@ -51,15 +51,27 @@ export default function AdvertisePage() {
 
       <main className="relative min-h-screen bg-white dark:bg-[#070A14] text-gray-900 dark:text-white overflow-hidden">
 
-        {/* ================= BACKGROUND GRADIENT + GLOWS ================= */}
-        <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20 dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20 transition-colors duration-500"></div>
-        <div className="absolute -top-32 -right-32 w-96 h-96 bg-yellow-400/20 rounded-full blur-[120px] animate-pulse"></div>
-        <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-green-400/20 rounded-full blur-[120px] animate-pulse delay-1000"></div>
+        {/* ============================
+            Background Gradient + Glow
+        ============================ */}
+        <div className="absolute inset-0 
+          bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20
+          dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20
+          transition-colors duration-500 pointer-events-none">
+        </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 py-28">
+        <div className="absolute w-80 h-80 bg-green-400/25 rounded-full blur-[120px] top-10 left-10 animate-pulse pointer-events-none"></div>
+        <div className="absolute w-96 h-96 bg-yellow-400/25 rounded-full blur-[140px] bottom-10 right-10 animate-pulse delay-1000 pointer-events-none"></div>
 
-          {/* ================= HERO ================= */}
-          <h1 className="text-5xl sm:text-6xl font-extrabold mb-4 text-gray-900 dark:text-white text-center">
+        <div className="absolute inset-0 bg-white/5 backdrop-blur-3xl pointer-events-none"></div>
+
+        {/* ============================
+            Content Section
+        ============================ */}
+        <section className="relative isolate overflow-hidden max-w-7xl mx-auto px-4 py-28">
+
+          {/* HERO */}
+          <h1 className="text-5xl sm:text-6xl font-extrabold mb-4 text-center text-gray-900 dark:text-white">
             Advertise with Cashog
           </h1>
           <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
@@ -69,7 +81,7 @@ export default function AdvertisePage() {
             Reach millions of active users, maximize engagement, and grow your business with Cashog's premium advertising platform.
           </p>
 
-          {/* ================= STATS ================= */}
+          {/* STATS */}
           <div className="flex flex-wrap justify-center gap-6 mb-20">
             {stats.map((stat, i) => (
               <div key={i} className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800/50 rounded-full">
@@ -80,7 +92,7 @@ export default function AdvertisePage() {
             ))}
           </div>
 
-          {/* ================= STEPS ================= */}
+          {/* STEPS */}
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
             How It <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">Works</span>
           </h2>
@@ -103,7 +115,7 @@ export default function AdvertisePage() {
             ))}
           </div>
 
-          {/* ================= FEATURES ================= */}
+          {/* FEATURES */}
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
             Why Advertise with <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">Cashog</span>
           </h2>
@@ -129,7 +141,7 @@ export default function AdvertisePage() {
             ))}
           </div>
 
-          {/* ================= FAQ ================= */}
+          {/* FAQ */}
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
             Frequently Asked <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">Questions</span>
           </h2>
@@ -157,7 +169,7 @@ export default function AdvertisePage() {
             ))}
           </div>
 
-          {/* ================= FINAL CTA ================= */}
+          {/* FINAL CTA */}
           <div className="text-center mb-20">
             <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
               Ready to Scale Your Advertising?
@@ -181,7 +193,7 @@ export default function AdvertisePage() {
             </div>
           </div>
 
-        </div>
+        </section>
       </main>
     </>
   );
