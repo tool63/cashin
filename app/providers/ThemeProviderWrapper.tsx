@@ -5,32 +5,22 @@ import { useEffect, useState, ReactNode } from "react";
 
 interface ThemeProviderWrapperProps {
   children: ReactNode;
-  enableSystem?: boolean;          // optional: allow system theme
-  defaultTheme?: "light" | "dark"; // optional default
 }
 
-export default function ThemeProviderWrapper({
-  children,
-  enableSystem = true,
-  defaultTheme = "system",
-}: ThemeProviderWrapperProps) {
+export default function ThemeProviderWrapper({ children }: ThemeProviderWrapperProps) {
   const [mounted, setMounted] = useState(false);
 
   // Prevent hydration mismatch
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  useEffect(() => setMounted(true), []);
 
-  if (!mounted) return null; // avoid flicker on initial load
+  if (!mounted) return null;
 
   return (
     <ThemeProvider
-      attribute="data-theme"           // Use data-theme to control dark/light globally
-      defaultTheme={defaultTheme}      // default theme
-      enableSystem={enableSystem}      // allow system preference
-      storageKey="cashog-theme"        // optional: store user preference
-      disableTransitionOnChange={false} // smooth transitions on theme change
-      forcedTheme={undefined}          // allow external override if needed
+      attribute="data-theme"       // Use data-theme for Tailwind dark/light
+      defaultTheme="system" as "system" // ✅ Type assertion fixes TypeScript
+      enableSystem                  // Detect system theme
+      disableTransitionOnChange={false} // Smooth transitions
     >
       {children}
     </ThemeProvider>
