@@ -2,7 +2,6 @@
 
 import React from "react";
 import {
-  ArrowRight,
   User,
   CreditCard,
   Target,
@@ -14,10 +13,11 @@ import {
   CheckCircle,
   Users,
 } from "lucide-react";
-import Link from "next/link";
-import { motion } from "framer-motion";
 import Meta from "@/components/seo/SeoEngine";
 import TypingText from "@/components/typing/TypingText";
+import Background from "@/components/Background";
+import Reveal from "@/components/animations/Reveal";
+import PrimaryCTA from "@/components/cta/PrimaryCTA";
 
 /* ================= DATA ================= */
 
@@ -117,122 +117,114 @@ export default function AdvertisePage() {
         description="Reach millions of active users with Cashog advertising platform."
       />
 
-      <main className="relative min-h-screen text-primary">
+      <main className="relative min-h-screen bg-primary text-white overflow-hidden">
+        <Background />
+
         <section className="relative isolate max-w-7xl mx-auto px-4 py-20">
 
-          {/* ================= HERO ================= */}
-          <div className="text-center mb-24">
-            <h1 className="text-5xl font-extrabold mb-6">
-              Advertise with <span className="gradient-text">Cashog</span>
-            </h1>
+          {/* HERO */}
+          <Reveal>
+            <div className="text-center mb-24">
+              <h1 className="text-5xl font-extrabold mb-6">
+                Advertise with <span className="gradient-text">Cashog</span>
+              </h1>
 
-            <div className="text-4xl font-extrabold mb-8 gradient-text">
-              <TypingText />
+              <div className="text-4xl font-extrabold mb-8 gradient-text">
+                <TypingText />
+              </div>
+
+              <p className="text-lg text-muted max-w-3xl mx-auto mb-10">
+                Reach millions of active users and scale your business with
+                performance-driven advertising.
+              </p>
+
+              <PrimaryCTA href="/signup?type=advertiser">
+                Start Advertising
+              </PrimaryCTA>
+
+              {/* Stats */}
+              <div className="flex flex-wrap justify-center gap-4 mt-12">
+                {stats.map((stat, i) => (
+                  <Reveal key={i} delay={i * 0.1}>
+                    <div className="flex items-center gap-2 px-4 py-2 bg-card rounded-full text-sm">
+                      <span className="text-green-400">{stat.icon}</span>
+                      <span className="font-semibold">{stat.value}</span>
+                      <span className="text-muted">{stat.label}</span>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
             </div>
+          </Reveal>
 
-            <p className="text-lg text-muted max-w-3xl mx-auto mb-10">
-              Reach millions of active users and scale your business with
-              performance-driven advertising.
-            </p>
-
-            <Link href="/signup?type=advertiser">
-              <motion.span
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-3 bg-green-500 text-black px-10 py-4 rounded-2xl font-bold shadow-lg"
-              >
-                Start Advertising <ArrowRight size={20} />
-              </motion.span>
-            </Link>
-
-            {/* Stats */}
-            <div className="flex flex-wrap justify-center gap-4 mt-12">
-              {stats.map((stat, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-2 px-4 py-2 bg-card rounded-full text-sm border border-theme"
-                >
-                  <span className="text-green-400">{stat.icon}</span>
-                  <span className="font-semibold">{stat.value}</span>
-                  <span className="text-muted">{stat.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* ================= STEPS ================= */}
-          <h2 className="text-3xl font-bold text-center mb-12">
-            How It <span className="gradient-text">Works</span>
-          </h2>
+          {/* STEPS */}
+          <Reveal>
+            <h2 className="text-3xl font-bold text-center mb-12">
+              How It <span className="gradient-text">Works</span>
+            </h2>
+          </Reveal>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-24">
             {steps.map((step, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ y: -6 }}
-                className="bg-card rounded-2xl p-6 text-center border border-theme"
-              >
-                <div className="mb-4 flex justify-center">{step.icon}</div>
-                <h3 className="font-semibold mb-2">{step.title}</h3>
-                <p className="text-sm text-muted">{step.description}</p>
-              </motion.div>
+              <Reveal key={i} delay={i * 0.15}>
+                <div className="bg-card rounded-2xl p-6 text-center border border-theme">
+                  <div className="mb-4 flex justify-center">{step.icon}</div>
+                  <h3 className="font-semibold mb-2">{step.title}</h3>
+                  <p className="text-sm text-muted">{step.description}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
 
-          {/* ================= FEATURES ================= */}
-          <h2 className="text-3xl font-bold text-center mb-12">
-            Why Advertise with <span className="gradient-text">Cashog</span>
-          </h2>
+          {/* FEATURES */}
+          <Reveal>
+            <h2 className="text-3xl font-bold text-center mb-12">
+              Why Advertise with <span className="gradient-text">Cashog</span>
+            </h2>
+          </Reveal>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-24">
             {features.map((feature, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ y: -6 }}
-                className="bg-card rounded-2xl p-6 text-center border border-theme"
-              >
-                <div className="mb-4 flex justify-center">{feature.icon}</div>
-                <h3 className="font-semibold mb-2">{feature.title}</h3>
-                <p className="text-sm text-muted">{feature.description}</p>
-              </motion.div>
+              <Reveal key={i} delay={i * 0.1}>
+                <div className="bg-card rounded-2xl p-6 text-center border border-theme">
+                  <div className="mb-4 flex justify-center">{feature.icon}</div>
+                  <h3 className="font-semibold mb-2">{feature.title}</h3>
+                  <p className="text-sm text-muted">{feature.description}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
 
-          {/* ================= FAQ ================= */}
-          <h2 className="text-3xl font-bold text-center mb-10">
-            Frequently Asked Questions
-          </h2>
+          {/* FAQ */}
+          <Reveal>
+            <h2 className="text-3xl font-bold text-center mb-10">
+              Frequently Asked Questions
+            </h2>
+          </Reveal>
 
           <div className="space-y-4 mb-24">
             {faqs.map((faq, i) => (
-              <details
-                key={i}
-                className="bg-card rounded-xl border border-theme p-4"
-              >
-                <summary className="font-semibold cursor-pointer">
-                  {faq.q}
-                </summary>
-                <p className="mt-3 text-sm text-muted">{faq.a}</p>
-              </details>
+              <Reveal key={i} delay={i * 0.1}>
+                <details className="bg-card rounded-xl border border-theme p-4">
+                  <summary className="font-semibold cursor-pointer">{faq.q}</summary>
+                  <p className="mt-3 text-sm text-muted">{faq.a}</p>
+                </details>
+              </Reveal>
             ))}
           </div>
 
-          {/* ================= FINAL CTA ================= */}
-          <div className="text-center">
-            <h2 className="text-4xl font-extrabold mb-6 gradient-text">
-              Ready to Scale?
-            </h2>
+          {/* FINAL CTA */}
+          <Reveal>
+            <div className="text-center">
+              <h2 className="text-4xl font-extrabold mb-6 gradient-text">
+                Ready to Scale?
+              </h2>
 
-            <Link href="/signup?type=advertiser">
-              <motion.span
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-3 bg-green-500 text-black px-14 py-5 rounded-2xl font-bold shadow-lg"
-              >
-                Launch Your Campaign <ArrowRight size={20} />
-              </motion.span>
-            </Link>
-          </div>
+              <PrimaryCTA href="/signup?type=advertiser">
+                Launch Your Campaign
+              </PrimaryCTA>
+            </div>
+          </Reveal>
 
         </section>
       </main>
