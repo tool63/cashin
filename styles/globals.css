@@ -23,9 +23,9 @@
   --border-color: #e5e7eb;
 
   /* Gradient Colors */
-  --gradient-from: rgba(250, 204, 21, 0.20);
-  --gradient-via: rgba(34, 197, 94, 0.25);
-  --gradient-to: rgba(22, 163, 74, 0.20);
+  --gradient-from: rgba(250, 204, 21, 0.25);
+  --gradient-via: rgba(34, 197, 94, 0.30);
+  --gradient-to: rgba(22, 163, 74, 0.25);
 
   /* Glow Colors */
   --glow-green: rgba(34, 197, 94, 0.25);
@@ -33,7 +33,7 @@
 }
 
 /* ----------------------
-   Dark Mode (50% opacity)
+   Dark Mode (Balanced Soft Glow)
 ------------------------ */
 [data-theme="dark"] {
   --bg-primary: #0B0F1A;
@@ -45,20 +45,22 @@
 
   --border-color: #374151;
 
-  /* Gradient Colors - 50% opacity */
-  --gradient-from: rgba(250, 204, 21, 0.10);
-  --gradient-via: rgba(34, 197, 94, 0.125);
-  --gradient-to: rgba(22, 163, 74, 0.10);
+  /* Softer gradient for dark */
+  --gradient-from: rgba(250, 204, 21, 0.12);
+  --gradient-via: rgba(34, 197, 94, 0.15);
+  --gradient-to: rgba(22, 163, 74, 0.12);
 
-  /* Glow Colors - 50% opacity */
-  --glow-green: rgba(34, 197, 94, 0.125);
-  --glow-yellow: rgba(250, 204, 21, 0.125);
+  /* Softer glow */
+  --glow-green: rgba(34, 197, 94, 0.15);
+  --glow-yellow: rgba(250, 204, 21, 0.15);
 }
 
 /* =====================================================
    GLOBAL BASE STYLES
 ===================================================== */
-html, body {
+
+html,
+body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   font-family: "Inter", sans-serif;
@@ -66,6 +68,7 @@ html, body {
   overflow-x: hidden;
 }
 
+/* Utility mappings */
 .bg-primary { background-color: var(--bg-primary); }
 .bg-secondary { background-color: var(--bg-secondary); }
 .bg-card { background-color: var(--card-bg); }
@@ -76,36 +79,51 @@ html, body {
 .border-theme { border-color: var(--border-color); }
 
 /* =====================================================
-   Gradient Text Utility
+   CORE GLOBAL GRADIENT BACKGROUND
 ===================================================== */
-.gradient-text {
+
+.core-gradient-bg {
+  position: absolute;
+  inset: 0;
   background: linear-gradient(
-    to right,
+    120deg,
     var(--gradient-from),
     var(--gradient-via),
     var(--gradient-to)
   );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
+  background-size: 200% 200%;
+  animation: gradientShift 12s ease infinite;
+  opacity: 0.6;
+  z-index: 0;
+}
+
+/* Smooth animated gradient */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* =====================================================
-   Glow Blobs Utility
+   GLOW BLOBS
 ===================================================== */
-.blob-green { background-color: var(--glow-green); }
-.blob-yellow { background-color: var(--glow-yellow); }
 
-/* =====================================================
-   Smooth Transitions
-===================================================== */
-* {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+.blob-green {
+  background-color: var(--glow-green);
 }
 
-/* =====================================================
-   Tailwind Extended Animations (if needed)
-===================================================== */
+.blob-yellow {
+  background-color: var(--glow-yellow);
+}
+
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(100px);
+  opacity: 0.8;
+}
+
+/* Floating Animations */
 @keyframes blobMove {
   0%, 100% { transform: translate(0,0) rotate(0deg); }
   25% { transform: translate(20px,-30px) rotate(45deg); }
@@ -126,4 +144,31 @@ html, body {
 
 .animate-blobMove2 {
   animation: blobMove2 45s linear infinite;
+}
+
+/* =====================================================
+   Gradient Text Utility
+===================================================== */
+
+.gradient-text {
+  background: linear-gradient(
+    to right,
+    #facc15,
+    #22c55e,
+    #16a34a
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* =====================================================
+   PERFORMANCE OPTIMIZATION
+===================================================== */
+
+/* Remove heavy transition from ALL elements */
+* {
+  transition: background-color 0.3s ease,
+              color 0.3s ease,
+              border-color 0.3s ease;
 }
