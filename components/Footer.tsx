@@ -7,7 +7,6 @@ import { Twitter, Facebook, Instagram, Youtube, ChevronDown } from "lucide-react
 
 type Toggle = Record<string, boolean>;
 
-// Fallback translations
 const t = (key: string) => {
   const translations: Record<string, any> = {
     "footer.getStarted": "Get Started",
@@ -122,25 +121,22 @@ export default function Footer() {
 
   const A = ({ href, children }: { href: string; children: ReactNode }) => (
     <motion.div whileHover={{ x: 4 }} transition={{ duration: 0.15 }}>
-      <Link
-        href={href}
-        className="block text-black dark:text-gray-300 hover:text-black dark:hover:text-white transition"
-      >
+      <Link href={href} className="block text-primary hover:opacity-80 transition">
         {children}
       </Link>
     </motion.div>
   );
 
   const Section = ({ id, title, children }: { id: string; title: string; children: ReactNode }) => (
-    <div className="relative">
+    <div>
       <button
         onClick={() => toggle(id)}
-        className="w-full flex justify-between items-center font-semibold mb-3 text-black dark:text-white"
+        className="w-full flex justify-between items-center font-semibold mb-3 text-primary"
       >
         {title}
         <ChevronDown size={16} className={`transition ${open[id] ? "rotate-180" : ""}`} />
       </button>
-      {/* Motion container only for this section */}
+
       <div className="overflow-hidden">
         <AnimatePresence initial={false}>
           {open[id] && (
@@ -149,7 +145,7 @@ export default function Footer() {
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.25 }}
-              className="space-y-2 text-sm text-black dark:text-gray-400"
+              className="space-y-2 text-sm text-muted"
             >
               {children}
             </motion.div>
@@ -161,15 +157,17 @@ export default function Footer() {
 
   const Sub = ({ id, title, children, level = 1 }: { id: string; title: string; children: ReactNode; level?: number }) => {
     const state = level === 1 ? sub[id] : sub2[id];
+
     return (
       <div className="mt-2" style={{ paddingLeft: `${level * 12}px` }}>
         <button
           onClick={() => (level === 1 ? toggleSub(id) : toggleSub2(id))}
-          className="w-full flex justify-between font-medium text-black dark:text-gray-300"
+          className="w-full flex justify-between font-medium text-muted"
         >
           {title}
           <ChevronDown size={14} className={`transition ${state ? "rotate-180" : ""}`} />
         </button>
+
         <div className="overflow-hidden">
           <AnimatePresence initial={false}>
             {state && (
@@ -210,8 +208,7 @@ export default function Footer() {
   const links = t("footer.links");
 
   return (
-    <footer className="bg-gray-100 text-gray-700 dark:bg-[#070A14] dark:text-gray-300 transition-colors duration-300">
-      {/* Columns Grid */}
+    <footer className="bg-secondary text-primary transition-colors duration-300 border-t border-theme">
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10">
 
         {/* COLUMN 1 */}
@@ -274,7 +271,7 @@ export default function Footer() {
           </Sub>
         </Section>
 
-        {/* COLUMN 4: Rewards */}
+        {/* COLUMN 4 */}
         <Section id="rewards" title={footerColumns.rewards}>
           <A href="/earn-paypal-money">{links.earnPayPal}</A>
 
@@ -301,7 +298,7 @@ export default function Footer() {
           <A href="/earn-spotify-premium">{links.spotify}</A>
         </Section>
 
-        {/* COLUMN 5: Resources */}
+        {/* COLUMN 5 */}
         <Section id="resources" title={footerColumns.resources}>
           <A href="/blog">{links.blog}</A>
           <A href="/help">{links.helpCenter}</A>
@@ -310,14 +307,14 @@ export default function Footer() {
           <A href="/about">{links.about}</A>
         </Section>
 
-        {/* COLUMN 6: Business */}
+        {/* COLUMN 6 */}
         <Section id="business" title={footerColumns.business}>
           <A href="/affiliate">{links.affiliate}</A>
           <A href="/partners">{links.partners}</A>
           <A href="/advertise">{links.advertise}</A>
         </Section>
 
-        {/* COLUMN 7: Cashback */}
+        {/* COLUMN 7 */}
         <Section id="cashback" title={footerColumns.cashback}>
           <A href="/cashback-offers">{links.cashbackOffers}</A>
 
@@ -342,7 +339,7 @@ export default function Footer() {
           <A href="/banking-finance-offers">{links.banking}</A>
         </Section>
 
-        {/* COLUMN 8: Legal */}
+        {/* COLUMN 8 */}
         <Section id="legal" title={footerColumns.legal}>
           <A href="https://cashog.com/terms-and-conditions">{links.terms}</A>
           <A href="https://cashog.com/privacy-policy">{links.privacy}</A>
@@ -351,8 +348,7 @@ export default function Footer() {
 
       </div>
 
-      {/* SOCIAL */}
-      <div className="border-t border-white/10 py-6 flex justify-center gap-6">
+      <div className="border-t border-theme py-6 flex justify-center gap-6">
         <a href={footerSocial.twitter} target="_blank" rel="noopener noreferrer">
           <Twitter />
         </a>
@@ -367,7 +363,9 @@ export default function Footer() {
         </a>
       </div>
 
-      <div className="text-center text-sm text-gray-500 pb-6">{t("footer.copyright")}</div>
+      <div className="text-center text-sm text-muted pb-6">
+        {t("footer.copyright")}
+      </div>
     </footer>
   );
 }
