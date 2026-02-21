@@ -18,7 +18,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Meta from "@/components/seo/SeoEngine";
 import TypingText from "@/components/typing/TypingText";
-import Background from "@/components/Background";
 
 /* ================= DATA ================= */
 
@@ -118,10 +117,7 @@ export default function AdvertisePage() {
         description="Reach millions of active users with Cashog advertising platform."
       />
 
-      <main className="relative min-h-screen bg-primary text-white overflow-hidden">
-        {/* ================= GLOBAL BACKGROUND ================= */}
-        <Background />
-
+      <main className="relative min-h-screen text-primary">
         <section className="relative isolate max-w-7xl mx-auto px-4 py-20">
 
           {/* ================= HERO ================= */}
@@ -154,7 +150,7 @@ export default function AdvertisePage() {
               {stats.map((stat, i) => (
                 <div
                   key={i}
-                  className="flex items-center gap-2 px-4 py-2 bg-card rounded-full text-sm"
+                  className="flex items-center gap-2 px-4 py-2 bg-card rounded-full text-sm border border-theme"
                 >
                   <span className="text-green-400">{stat.icon}</span>
                   <span className="font-semibold">{stat.value}</span>
@@ -213,7 +209,9 @@ export default function AdvertisePage() {
                 key={i}
                 className="bg-card rounded-xl border border-theme p-4"
               >
-                <summary className="font-semibold cursor-pointer">{faq.q}</summary>
+                <summary className="font-semibold cursor-pointer">
+                  {faq.q}
+                </summary>
                 <p className="mt-3 text-sm text-muted">{faq.a}</p>
               </details>
             ))}
