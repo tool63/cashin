@@ -175,7 +175,7 @@ export default function AdvertisePage() {
               <Reveal key={i}>
                 <motion.div
                   whileHover={{ y: -6 }}
-                  className="bg-gray-50 dark:bg-[#0b0e1a] rounded-2xl p-6 text-center border border-gray-100 dark:border-gray-800"
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800"
                 >
                   <div className="mb-4 flex justify-center">{step.icon}</div>
                   <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
@@ -202,7 +202,7 @@ export default function AdvertisePage() {
               <Reveal key={i}>
                 <motion.div
                   whileHover={{ y: -6 }}
-                  className="bg-white dark:bg-[#070A14] rounded-2xl p-6 text-center border border-gray-100 dark:border-gray-800"
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800"
                 >
                   <div className="mb-4 flex justify-center">{feature.icon}</div>
                   <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
@@ -228,7 +228,7 @@ export default function AdvertisePage() {
             {faqs.map((faq, i) => (
               <Reveal key={i}>
                 <details
-                  className="bg-white dark:bg-[#0b0e1a] rounded-xl border border-gray-200 dark:border-gray-800 p-4"
+                  className="bg-white dark:bg-[#0a0d16] rounded-xl border border-gray-200 dark:border-gray-800 p-4"
                 >
                   <summary className="font-semibold text-lg cursor-pointer">
                     {faq.q}
