@@ -36,34 +36,43 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
         <Meta title={defaultTitle} description={defaultDescription} />
       </head>
 
-      <body className="bg-primary text-[var(--text-primary)] transition-colors duration-500 overflow-x-hidden">
+      <body className="relative min-h-screen bg-primary text-primary transition-colors duration-500 overflow-x-hidden">
         <ThemeProviderWrapper>
-          {/* ================= GLOBAL BACKGROUND ================= */}
+
+          {/* ================= CORE GLOBAL BACKGROUND ================= */}
           <Background />
 
-          {/* ================= HEADER ================= */}
-          {!hideLayout && (
-            <div className="fixed top-0 left-0 w-full z-40 backdrop-blur-xl bg-primary/80 border-b border-theme">
-              <Header />
-            </div>
-          )}
+          {/* ================= PAGE WRAPPER ================= */}
+          <div className="relative z-10 flex flex-col min-h-screen">
 
-          {/* ================= MAIN CONTENT ================= */}
-          <main
-            className={`relative w-full ${
-              hideLayout
-                ? "min-h-screen flex items-center justify-center px-4"
-                : "pt-20 min-h-[calc(100vh-160px)]"
-            }`}
-          >
-            {children}
-          </main>
+            {/* ================= HEADER ================= */}
+            {!hideLayout && (
+              <div className="fixed top-0 left-0 w-full z-40 backdrop-blur-xl bg-primary/70 border-b border-theme">
+                <Header />
+              </div>
+            )}
 
-          {/* ================= FOOTER + CTA ================= */}
-          {!hideLayout && <Footer />}
-          {!hideLayout && <FloatingCTA />}
+            {/* ================= MAIN CONTENT ================= */}
+            <main
+              className={`flex-1 w-full ${
+                hideLayout
+                  ? "min-h-screen flex items-center justify-center px-4"
+                  : "pt-20"
+              }`}
+            >
+              {children}
+            </main>
 
+            {/* ================= FOOTER ================= */}
+            {!hideLayout && <Footer />}
+
+            {/* ================= FLOATING CTA ================= */}
+            {!hideLayout && <FloatingCTA />}
+          </div>
+
+          {/* ================= AUTH MODAL SLOT ================= */}
           {hasAuthModal && auth}
+
         </ThemeProviderWrapper>
       </body>
     </html>
