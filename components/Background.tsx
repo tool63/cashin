@@ -6,40 +6,64 @@ export default function Background() {
   return (
     <>
       {/* ============================
-          Gradient Background
+          Main Gradient Background
       ============================ */}
       <div
-        className="absolute inset-0 pointer-events-none transition-colors duration-500"
-        style={{
-          background: `linear-gradient(
-            to bottom right,
-            var(--gradient-from),
-            var(--gradient-via),
-            var(--gradient-to)
-          )`,
-        }}
+        className="
+          absolute inset-0
+          bg-gradient-to-br
+          from-yellow-400/20
+          via-green-400/30
+          to-green-500/20
+          dark:from-yellow-500/10
+          dark:via-green-700/20
+          dark:to-green-800/20
+          transition-colors duration-500
+          pointer-events-none
+        "
       />
 
       {/* ============================
-          Glow Blobs
+          Green Glow Blob
       ============================ */}
       <div
-        className="absolute w-80 h-80 rounded-full blur-[120px] top-10 left-10 animate-blobMove pointer-events-none"
-        style={{
-          backgroundColor: "var(--glow-green)",
-        }}
-      />
-      <div
-        className="absolute w-96 h-96 rounded-full blur-[140px] bottom-10 right-10 animate-blobMove2 pointer-events-none"
-        style={{
-          backgroundColor: "var(--glow-yellow)",
-        }}
+        className="
+          absolute w-80 h-80
+          bg-green-400/25
+          rounded-full
+          blur-[120px]
+          top-10 left-10
+          animate-blobMove
+          pointer-events-none
+        "
       />
 
       {/* ============================
-          Frosted Overlay (Optional)
+          Yellow Glow Blob
       ============================ */}
-      <div className="absolute inset-0 bg-white/5 backdrop-blur-3xl pointer-events-none" />
+      <div
+        className="
+          absolute w-96 h-96
+          bg-yellow-400/25
+          rounded-full
+          blur-[140px]
+          bottom-10 right-10
+          animate-blobMove2
+          pointer-events-none
+        "
+      />
+
+      {/* ============================
+          Frosted Overlay
+      ============================ */}
+      <div
+        className="
+          absolute inset-0
+          bg-white/5
+          backdrop-blur-3xl
+          pointer-events-none
+        "
+      />
     </>
   );
 }
