@@ -19,6 +19,8 @@ import { motion } from "framer-motion";
 import Meta from "@/components/seo/SeoEngine";
 import TypingText from "@/components/typing/TypingText";
 import Background from "@/components/Background";
+import PrimaryCTA from "@/components/cta/PrimaryCTA";
+import Reveal from "@/components/animations/Reveal";
 
 /* ================= DATA ================= */
 
@@ -118,136 +120,139 @@ export default function AdvertisePage() {
         description="Reach millions of active users with Cashog advertising platform."
       />
 
-      <main className="relative min-h-screen bg-white dark:bg-[#070A14] text-gray-900 dark:text-white overflow-hidden">
+      <main className="relative min-h-screen text-gray-900 dark:text-white overflow-hidden">
         <Background />
 
         <section className="relative isolate max-w-7xl mx-auto px-4 py-20">
 
           {/* HERO */}
-          <div className="text-center mb-24">
-            <h1 className="text-5xl sm:text-6xl font-extrabold mb-6">
-              Advertise with <span className="gradient-text">Cashog</span>
-            </h1>
+          <Reveal>
+            <div className="text-center mb-24">
+              <h1 className="text-5xl sm:text-6xl font-extrabold mb-6">
+                Advertise with <span className="gradient-text">Cashog</span>
+              </h1>
 
-            <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-8 gradient-text">
-              <TypingText />
-            </div>
+              <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-8 gradient-text">
+                <TypingText />
+              </div>
 
-            <p className="text-lg sm:text-xl md:text-2xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed">
-              Reach millions of active users and scale your business with
-              performance-driven advertising.
-            </p>
+              <p className="text-lg sm:text-xl md:text-2xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed">
+                Reach millions of active users and scale your business with
+                performance-driven advertising.
+              </p>
 
-            <Link href="/signup?type=advertiser" className="cta-observer inline-block">
-              <motion.span
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-12 py-5 rounded-2xl font-bold shadow-lg text-lg"
-              >
+              <PrimaryCTA href="/signup?type=advertiser">
                 Start Advertising <ArrowRight size={20} />
-              </motion.span>
-            </Link>
+              </PrimaryCTA>
 
-            {/* Stats */}
-            <div className="flex flex-wrap justify-center gap-4 mt-12">
-              {stats.map((stat, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800/50 rounded-full text-sm"
-                >
-                  <span className="text-green-400">{stat.icon}</span>
-                  <span className="font-semibold">{stat.value}</span>
-                  <span className="text-gray-500 dark:text-gray-400">{stat.label}</span>
-                </div>
-              ))}
+              {/* Stats */}
+              <div className="flex flex-wrap justify-center gap-4 mt-12">
+                {stats.map((stat, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800/50 rounded-full text-sm"
+                  >
+                    <span className="text-green-400">{stat.icon}</span>
+                    <span className="font-semibold">{stat.value}</span>
+                    <span className="text-gray-500 dark:text-gray-400">
+                      {stat.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          </Reveal>
 
           {/* STEPS */}
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            How It <span className="gradient-text">Works</span>
-          </h2>
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+              How It <span className="gradient-text">Works</span>
+            </h2>
+          </Reveal>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-24">
             {steps.map((step, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ y: -6 }}
-                className="bg-gray-50 dark:bg-[#0b0e1a] rounded-2xl p-6 text-center border border-gray-100 dark:border-gray-800"
-              >
-                <div className="mb-4 flex justify-center">{step.icon}</div>
-                <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">
-                  {step.description}
-                </p>
-              </motion.div>
+              <Reveal key={i}>
+                <motion.div
+                  whileHover={{ y: -6 }}
+                  className="bg-gray-50 dark:bg-[#0b0e1a] rounded-2xl p-6 text-center border border-gray-100 dark:border-gray-800"
+                >
+                  <div className="mb-4 flex justify-center">{step.icon}</div>
+                  <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">
+                    {step.description}
+                  </p>
+                </motion.div>
+              </Reveal>
             ))}
           </div>
 
           {/* FEATURES */}
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-            Why Advertise with <span className="gradient-text">Cashog</span>
-          </h2>
-          <p className="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
-            Performance-driven advertising that connects brands with active users
-          </p>
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+              Why Advertise with <span className="gradient-text">Cashog</span>
+            </h2>
+            <p className="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+              Performance-driven advertising that connects brands with active users
+            </p>
+          </Reveal>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-24">
             {features.map((feature, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ y: -6 }}
-                className="bg-white dark:bg-[#070A14] rounded-2xl p-6 text-center border border-gray-100 dark:border-gray-800"
-              >
-                <div className="mb-4 flex justify-center">{feature.icon}</div>
-                <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">
-                  {feature.description}
-                </p>
-              </motion.div>
+              <Reveal key={i}>
+                <motion.div
+                  whileHover={{ y: -6 }}
+                  className="bg-white dark:bg-[#070A14] rounded-2xl p-6 text-center border border-gray-100 dark:border-gray-800"
+                >
+                  <div className="mb-4 flex justify-center">{feature.icon}</div>
+                  <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">
+                    {feature.description}
+                  </p>
+                </motion.div>
+              </Reveal>
             ))}
           </div>
 
           {/* FAQ */}
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-            Frequently Asked <span className="gradient-text">Questions</span>
-          </h2>
-          <p className="text-center text-gray-600 dark:text-gray-400 mb-12">
-            Everything you need to know about advertising on Cashog
-          </p>
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+              Frequently Asked <span className="gradient-text">Questions</span>
+            </h2>
+            <p className="text-center text-gray-600 dark:text-gray-400 mb-12">
+              Everything you need to know about advertising on Cashog
+            </p>
+          </Reveal>
 
           <div className="space-y-4 mb-24">
             {faqs.map((faq, i) => (
-              <details
-                key={i}
-                className="bg-white dark:bg-[#0b0e1a] rounded-xl border border-gray-200 dark:border-gray-800 p-4"
-              >
-                <summary className="font-semibold text-lg cursor-pointer">
-                  {faq.q}
-                </summary>
-                <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">
-                  {faq.a}
-                </p>
-              </details>
+              <Reveal key={i}>
+                <details
+                  className="bg-white dark:bg-[#0b0e1a] rounded-xl border border-gray-200 dark:border-gray-800 p-4"
+                >
+                  <summary className="font-semibold text-lg cursor-pointer">
+                    {faq.q}
+                  </summary>
+                  <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">
+                    {faq.a}
+                  </p>
+                </details>
+              </Reveal>
             ))}
           </div>
 
           {/* FINAL CTA */}
-          <div className="text-center">
-            <h2 className="text-4xl sm:text-5xl font-extrabold mb-6 gradient-text">
-              Ready to Scale?
-            </h2>
+          <Reveal>
+            <div className="text-center">
+              <h2 className="text-4xl sm:text-5xl font-extrabold mb-6 gradient-text">
+                Ready to Scale?
+              </h2>
 
-            <Link href="/signup?type=advertiser" className="cta-observer inline-block">
-              <motion.span
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-14 py-5 rounded-2xl font-bold shadow-lg text-lg"
-              >
+              <PrimaryCTA href="/signup?type=advertiser">
                 Launch Your Campaign <ArrowRight size={20} />
-              </motion.span>
-            </Link>
-          </div>
+              </PrimaryCTA>
+            </div>
+          </Reveal>
 
         </section>
       </main>
