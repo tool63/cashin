@@ -43,7 +43,7 @@ export default function Header() {
         </Link>
 
         {/* DESKTOP NAV */}
-        <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+        <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-primary">
           <Link href="/how-it-works">How it works</Link>
 
           <div
@@ -65,7 +65,7 @@ export default function Header() {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
-                  className="absolute top-full left-0 mt-2 w-48 flex flex-col gap-1 p-3 rounded-xl bg-white dark:bg-[#111827] border border-gray-200 dark:border-white/10 shadow-xl"
+                  className="absolute top-full left-0 mt-2 w-48 flex flex-col gap-1 p-3 rounded-xl bg-white dark:bg-[#111827] border border-gray-200 dark:border-white/10 shadow-xl text-primary"
                 >
                   <Link href="/surveys">Surveys</Link>
                   <Link href="/app-installs">App Installs</Link>
@@ -91,7 +91,7 @@ export default function Header() {
             <button
               onClick={() => setActiveButton("login")}
               className={`px-4 py-2 rounded-lg text-sm transition ${
-                activeButton === "login" ? ctaGradient : "border"
+                activeButton === "login" ? ctaGradient : "border text-primary"
               }`}
             >
               Login
@@ -114,7 +114,7 @@ export default function Header() {
 
         {/* MOBILE BUTTON */}
         <button
-          className="md:hidden"
+          className="md:hidden text-primary"
           onClick={() => setMobileOpen(!mobileOpen)}
         >
           {mobileOpen ? <X /> : <Menu />}
@@ -128,7 +128,7 @@ export default function Header() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden px-6 py-6 space-y-4 border-t bg-white dark:bg-[#0B0F1A] border-gray-200 dark:border-white/10"
+            className="md:hidden px-6 py-6 space-y-4 border-t bg-white dark:bg-[#0B0F1A] border-gray-200 dark:border-white/10 text-primary"
           >
             <Link href="/how-it-works">How it works</Link>
 
@@ -139,9 +139,7 @@ export default function Header() {
               Earn
               <ChevronDown
                 size={16}
-                className={`transition ${
-                  mobileEarnOpen ? "rotate-180" : ""
-                }`}
+                className={`transition ${mobileEarnOpen ? "rotate-180" : ""}`}
               />
             </button>
 
@@ -166,7 +164,7 @@ export default function Header() {
 
             <div className="pt-4 flex flex-col gap-3">
               <Link href="/login">
-                <button className="border py-2 rounded-lg w-full">
+                <button className="border py-2 rounded-lg w-full text-primary">
                   Login
                 </button>
               </Link>
