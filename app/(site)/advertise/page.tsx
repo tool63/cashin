@@ -116,8 +116,8 @@ export default function AdvertisePage() {
   return (
     <>
       <Meta
-        title="Cashog - Advertise with Us"
-        description="Reach millions of active users with Cashog advertising platform."
+        title="Advertise with Us"
+        description="Reach millions of active users with our advertising platform."
       />
 
       <main className="relative min-h-screen text-gray-900 dark:text-white overflow-hidden">
@@ -129,7 +129,7 @@ export default function AdvertisePage() {
           <Reveal>
             <div className="text-center mb-24">
               <h1 className="text-5xl sm:text-6xl font-extrabold mb-6">
-                Advertise with <span className="gradient-text">Cashog</span>
+                Advertise with <span className="gradient-text">Platform</span>
               </h1>
 
               <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-8 gradient-text">
@@ -150,11 +150,11 @@ export default function AdvertisePage() {
                 {stats.map((stat, i) => (
                   <div
                     key={i}
-                    className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800/50 rounded-full text-sm"
+                    className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-full text-sm"
                   >
                     <span className="text-green-400">{stat.icon}</span>
                     <span className="font-semibold">{stat.value}</span>
-                    <span className="text-gray-500 dark:text-gray-400">
+                    <span className="text-gray-500 dark:text-gray-300">
                       {stat.label}
                     </span>
                   </div>
@@ -175,11 +175,11 @@ export default function AdvertisePage() {
               <Reveal key={i}>
                 <motion.div
                   whileHover={{ y: -6 }}
-                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800"
+                  className="bg-white dark:bg-[#0a0d16] dark:text-white rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800"
                 >
                   <div className="mb-4 flex justify-center">{step.icon}</div>
                   <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm">
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">
                     {step.description}
                   </p>
                 </motion.div>
@@ -190,9 +190,9 @@ export default function AdvertisePage() {
           {/* FEATURES */}
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-              Why Advertise with <span className="gradient-text">Cashog</span>
+              Why Advertise
             </h2>
-            <p className="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
               Performance-driven advertising that connects brands with active users
             </p>
           </Reveal>
@@ -202,11 +202,11 @@ export default function AdvertisePage() {
               <Reveal key={i}>
                 <motion.div
                   whileHover={{ y: -6 }}
-                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800"
+                  className="bg-white dark:bg-[#0a0d16] dark:text-white rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800"
                 >
                   <div className="mb-4 flex justify-center">{feature.icon}</div>
                   <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm">
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">
                     {feature.description}
                   </p>
                 </motion.div>
@@ -217,10 +217,10 @@ export default function AdvertisePage() {
           {/* FAQ */}
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-              Frequently Asked <span className="gradient-text">Questions</span>
+              Frequently Asked Questions
             </h2>
-            <p className="text-center text-gray-600 dark:text-gray-400 mb-12">
-              Everything you need to know about advertising on Cashog
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+              Everything you need to know about advertising
             </p>
           </Reveal>
 
@@ -228,12 +228,12 @@ export default function AdvertisePage() {
             {faqs.map((faq, i) => (
               <Reveal key={i}>
                 <details
-                  className="bg-white dark:bg-[#0a0d16] rounded-xl border border-gray-200 dark:border-gray-800 p-4"
+                  className="bg-white dark:bg-[#0a0d16] dark:text-white rounded-xl border border-gray-200 dark:border-gray-800 p-4"
                 >
-                  <summary className="font-semibold text-lg cursor-pointer">
+                  <summary className="font-semibold text-lg cursor-pointer dark:text-white">
                     {faq.q}
                   </summary>
-                  <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">
+                  <p className="mt-3 text-sm text-gray-600 dark:text-gray-300">
                     {faq.a}
                   </p>
                 </details>
