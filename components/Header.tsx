@@ -128,7 +128,12 @@ export default function Header() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden px-6 py-6 space-y-4 border-t bg-white dark:bg-[#0B0F1A] border-gray-200 dark:border-white/10 text-primary"
+            className="
+              md:hidden px-6 py-6 space-y-4 border-t
+              bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20
+              dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20
+              border-gray-200 dark:border-white/10 text-primary
+            "
           >
             <Link href="/how-it-works">How it works</Link>
 
@@ -153,9 +158,12 @@ export default function Header() {
               </div>
             )}
 
-            <Link href="/cashout">Cashout</Link>
-            <Link href="/blog">Blog</Link>
-            <Link href="/help">Help</Link>
+            {/* MOBILE LINKS (stacked vertically) */}
+            <div className="flex flex-col gap-3 pt-2">
+              <Link href="/cashout">Cashout</Link>
+              <Link href="/blog">Blog</Link>
+              <Link href="/help">Help</Link>
+            </div>
 
             <div className="flex items-center justify-between pt-3">
               <LanguageSwitcher />
