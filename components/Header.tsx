@@ -69,7 +69,8 @@ export default function Header() {
                   className="
                     absolute top-full left-0 mt-2 w-48
                     flex flex-col gap-1 p-3 rounded-xl
-                    bg-white dark:bg-[#111827]
+                    bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20
+                    dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20
                     border border-gray-200 dark:border-white/10
                     shadow-xl
                   "
@@ -160,7 +161,12 @@ export default function Header() {
             </button>
 
             {mobileEarnOpen && (
-              <div className="flex flex-col gap-3 pl-4 text-sm text-black">
+              <div className="
+                flex flex-col gap-3 pl-4 text-sm text-black
+                bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20
+                dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20
+                p-3 rounded-lg
+              ">
                 <Link href="/surveys">Surveys</Link>
                 <Link href="/app-installs">App Installs</Link>
                 <Link href="/play-games">Play Games</Link>
