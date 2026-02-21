@@ -8,18 +8,25 @@ interface ModalRootProps {
 }
 
 export default function ModalRoot({ children }: ModalRootProps) {
-  // Lock scroll when modal is open
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
-    document.body.style.overflow = "hidden"; // lock scroll
+    document.body.style.overflow = "hidden";
+
     return () => {
-      document.body.style.overflow = originalStyle; // restore scroll
+      document.body.style.overflow = originalStyle;
     };
   }, []);
 
-  // Use portal to render modal at the top of DOM
   return createPortal(
-    <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-start justify-center pt-24 px-4 animate-fadeIn">
+    <div
+      className="
+        fixed inset-0 z-50
+        bg-black/60
+        backdrop-blur-md
+        flex items-start justify-center
+        pt-24 px-4
+      "
+    >
       {children}
     </div>,
     document.body
