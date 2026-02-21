@@ -46,6 +46,7 @@ export default function Header() {
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-primary">
           <Link href="/how-it-works">How it works</Link>
 
+          {/* EARN DROPDOWN */}
           <div
             className="relative"
             onMouseEnter={() => setEarnOpen(true)}
@@ -65,13 +66,19 @@ export default function Header() {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
-                  className="absolute top-full left-0 mt-2 w-48 flex flex-col gap-1 p-3 rounded-xl bg-white dark:bg-[#111827] border border-gray-200 dark:border-white/10 shadow-xl text-primary"
+                  className="
+                    absolute top-full left-0 mt-2 w-48
+                    flex flex-col gap-1 p-3 rounded-xl
+                    bg-white dark:bg-[#111827]
+                    border border-gray-200 dark:border-white/10
+                    shadow-xl
+                  "
                 >
-                  <Link href="/surveys">Surveys</Link>
-                  <Link href="/app-installs">App Installs</Link>
-                  <Link href="/play-games">Play Games</Link>
-                  <Link href="/watch-videos">Watch Videos</Link>
-                  <Link href="/offerwall">Offerwall</Link>
+                  <Link href="/surveys" className="text-black dark:text-white">Surveys</Link>
+                  <Link href="/app-installs" className="text-black dark:text-white">App Installs</Link>
+                  <Link href="/play-games" className="text-black dark:text-white">Play Games</Link>
+                  <Link href="/watch-videos" className="text-black dark:text-white">Watch Videos</Link>
+                  <Link href="/offerwall" className="text-black dark:text-white">Offerwall</Link>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -140,6 +147,7 @@ export default function Header() {
               How it works
             </Link>
 
+            {/* MOBILE EARN */}
             <button
               onClick={() => setMobileEarnOpen(!mobileEarnOpen)}
               className="flex w-full items-center justify-between font-medium text-black"
@@ -161,7 +169,7 @@ export default function Header() {
               </div>
             )}
 
-            {/* MOBILE LINKS (stacked vertically) */}
+            {/* MOBILE LINKS */}
             <div className="flex flex-col gap-3 pt-2 text-black">
               <Link href="/cashout">Cashout</Link>
               <Link href="/blog">Blog</Link>
