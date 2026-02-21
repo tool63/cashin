@@ -36,23 +36,23 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
         <Meta title={defaultTitle} description={defaultDescription} />
       </head>
 
-      <body className="relative min-h-screen bg-primary text-primary transition-colors duration-500 overflow-x-hidden">
+      <body className="min-h-screen text-gray-900 dark:text-white transition-colors duration-500 overflow-x-hidden">
         <ThemeProviderWrapper>
 
-          {/* ================= CORE GLOBAL BACKGROUND ================= */}
+          {/* GLOBAL BACKGROUND */}
           <Background />
 
-          {/* ================= PAGE WRAPPER ================= */}
+          {/* PAGE WRAPPER */}
           <div className="relative z-10 flex flex-col min-h-screen">
 
-            {/* ================= HEADER ================= */}
+            {/* HEADER */}
             {!hideLayout && (
-              <div className="fixed top-0 left-0 w-full z-40 backdrop-blur-xl bg-primary/70 border-b border-theme">
+              <div className="fixed top-0 left-0 w-full z-40 backdrop-blur-xl bg-white/70 dark:bg-black/70 border-b border-gray-200 dark:border-gray-800">
                 <Header />
               </div>
             )}
 
-            {/* ================= MAIN CONTENT ================= */}
+            {/* MAIN CONTENT */}
             <main
               className={`flex-1 w-full ${
                 hideLayout
@@ -63,14 +63,14 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
               {children}
             </main>
 
-            {/* ================= FOOTER ================= */}
+            {/* FOOTER */}
             {!hideLayout && <Footer />}
 
-            {/* ================= FLOATING CTA ================= */}
+            {/* FLOATING CTA */}
             {!hideLayout && <FloatingCTA />}
           </div>
 
-          {/* ================= AUTH MODAL SLOT ================= */}
+          {/* AUTH MODAL */}
           {hasAuthModal && auth}
 
         </ThemeProviderWrapper>
