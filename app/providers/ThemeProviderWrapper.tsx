@@ -14,14 +14,12 @@ export default function ThemeProviderWrapper({ children }: ThemeProviderWrapperP
 
   if (!mounted) return null;
 
-  const defaultTheme: "light" | "dark" | "system" = "system";
-
   return (
     <ThemeProvider
-      attribute="data-theme"
-      defaultTheme={defaultTheme}
+      attribute="class"
+      defaultTheme="system"
       enableSystem
-      disableTransitionOnChange={false}
+      disableTransitionOnChange
     >
       {children}
     </ThemeProvider>
