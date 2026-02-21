@@ -208,7 +208,13 @@ export default function Footer() {
   const links = t("footer.links");
 
   return (
-    <footer className="bg-secondary text-primary transition-colors duration-300 border-t border-theme">
+    <footer
+      className="
+        bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20
+        dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20
+        text-primary transition-colors duration-300 border-t border-theme
+      "
+    >
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10">
 
         {/* COLUMN 1 */}
