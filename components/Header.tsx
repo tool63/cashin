@@ -132,14 +132,17 @@ export default function Header() {
               md:hidden px-6 py-6 space-y-4 border-t
               bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20
               dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20
-              border-gray-200 dark:border-white/10 text-primary
+              border-gray-200 dark:border-white/10
+              text-black
             "
           >
-            <Link href="/how-it-works">How it works</Link>
+            <Link href="/how-it-works" className="text-black">
+              How it works
+            </Link>
 
             <button
               onClick={() => setMobileEarnOpen(!mobileEarnOpen)}
-              className="flex w-full items-center justify-between font-medium"
+              className="flex w-full items-center justify-between font-medium text-black"
             >
               Earn
               <ChevronDown
@@ -149,7 +152,7 @@ export default function Header() {
             </button>
 
             {mobileEarnOpen && (
-              <div className="flex flex-col gap-3 pl-4 text-sm">
+              <div className="flex flex-col gap-3 pl-4 text-sm text-black">
                 <Link href="/surveys">Surveys</Link>
                 <Link href="/app-installs">App Installs</Link>
                 <Link href="/play-games">Play Games</Link>
@@ -159,20 +162,20 @@ export default function Header() {
             )}
 
             {/* MOBILE LINKS (stacked vertically) */}
-            <div className="flex flex-col gap-3 pt-2">
+            <div className="flex flex-col gap-3 pt-2 text-black">
               <Link href="/cashout">Cashout</Link>
               <Link href="/blog">Blog</Link>
               <Link href="/help">Help</Link>
             </div>
 
-            <div className="flex items-center justify-between pt-3">
+            <div className="flex items-center justify-between pt-3 text-black">
               <LanguageSwitcher />
               <DarkLightToggle />
             </div>
 
             <div className="pt-4 flex flex-col gap-3">
               <Link href="/login">
-                <button className="border py-2 rounded-lg w-full text-primary">
+                <button className="border py-2 rounded-lg w-full text-black">
                   Login
                 </button>
               </Link>
