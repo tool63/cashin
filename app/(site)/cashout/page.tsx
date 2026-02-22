@@ -9,7 +9,6 @@ import {
   Smartphone,
   Globe,
   ShieldCheck,
-  ArrowRight,
   Clock,
 } from "lucide-react";
 import Meta from "@/components/seo/SeoEngine";
@@ -97,7 +96,7 @@ export default function CashoutMethodsPage() {
             </Reveal>
 
             <PrimaryCTA href="/signup">
-              Start Earning Now <ArrowRight size={20} />
+              Start Earning Now
             </PrimaryCTA>
 
           </div>
@@ -155,7 +154,7 @@ export default function CashoutMethodsPage() {
           </div>
         </section>
 
-        {/* ================= FINAL CTA (MATCHED BACKGROUND) ================= */}
+        {/* ================= FINAL CTA ================= */}
         <section className="relative z-10 text-center py-28 w-full">
 
           <Reveal>
@@ -165,7 +164,7 @@ export default function CashoutMethodsPage() {
           </Reveal>
 
           <PrimaryCTA href="/signup">
-            Create Free Account <ArrowRight size={20} />
+            Create Free Account
           </PrimaryCTA>
 
           <p className="mt-6 text-gray-900 dark:text-gray-300 text-lg max-w-md mx-auto">
