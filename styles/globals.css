@@ -33,9 +33,9 @@
 }
 
 /* ----------------------
-   Dark Mode (Balanced Soft Glow)
+   Dark Mode (FIXED)
 ------------------------ */
-[data-theme="dark"] {
+.dark {
   --bg-primary: #0B0F1A;
   --bg-secondary: #111827;
   --card-bg: #1F2937;
@@ -97,7 +97,6 @@ body {
   z-index: 0;
 }
 
-/* Smooth animated gradient */
 @keyframes gradientShift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -108,6 +107,13 @@ body {
    GLOW BLOBS
 ===================================================== */
 
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(100px);
+  opacity: 0.8;
+}
+
 .blob-green {
   background-color: var(--glow-green);
 }
@@ -116,14 +122,6 @@ body {
   background-color: var(--glow-yellow);
 }
 
-.blob {
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(100px);
-  opacity: 0.8;
-}
-
-/* Floating Animations */
 @keyframes blobMove {
   0%, 100% { transform: translate(0,0) rotate(0deg); }
   25% { transform: translate(20px,-30px) rotate(45deg); }
@@ -166,7 +164,6 @@ body {
    PERFORMANCE OPTIMIZATION
 ===================================================== */
 
-/* Remove heavy transition from ALL elements */
 * {
   transition: background-color 0.3s ease,
               color 0.3s ease,
