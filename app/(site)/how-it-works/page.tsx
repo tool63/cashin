@@ -2,16 +2,13 @@
 
 import React from "react";
 import { ArrowRight, User, CreditCard, Gift, CheckCircle } from "lucide-react";
-import { motion } from "framer-motion";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import Meta from "@/components/seo/SeoEngine";
 import TypingText from "@/components/typing/TypingText";
 import Background from "@/components/Background";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
-
-/* ================= PAGE EMOJI ================= */
-const pageEmoji = "🚀";
 
 /* ================= STEPS ================= */
 const steps = [
@@ -116,26 +113,15 @@ export default function HowItWorks() {
       <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
 
-        {/* ================= HERO ================= */}
         <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
+
+          {/* HERO */}
           <Reveal>
             <div className="text-center mb-20">
-
-              {/* EMOJI WITH ANIMATION */}
-              <motion.div
-                initial={{ scale: 0.7, rotate: -10 }}
-                animate={{ scale: 1, rotate: 0 }}
-                transition={{ duration: 0.6 }}
-                className="text-4xl mb-4 inline-block"
-              >
-                {pageEmoji}
-              </motion.div>
-
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
                 Earn Real Money Online
               </h1>
 
-              {/* TYPING EFFECT */}
               <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 gradient-text">
                 <TypingText />
               </div>
@@ -150,30 +136,19 @@ export default function HowItWorks() {
             </div>
           </Reveal>
 
-          {/* PREMIUM SECTION TITLE */}
+          {/* STEPS */}
           <Reveal>
-            <div className="text-center mb-4">
-              <span className="text-4xl">✨</span>
-            </div>
-
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              How It Works
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+              How It <span className="gradient-text">Works</span>
             </h2>
-
-            <div className="w-16 h-1 mx-auto rounded-full bg-gradient-to-r from-yellow-400 via-green-400 to-green-500" />
-
-            <p className="text-center text-gray-600 dark:text-gray-300 mt-4 mb-12 max-w-2xl mx-auto">
-              Earn rewards in simple steps and withdraw your earnings securely.
-            </p>
           </Reveal>
 
-          {/* STEPS */}
-          <div className="grid gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-4 mb-24">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-24">
             {steps.map((step, i) => (
               <Reveal key={i}>
                 <motion.div
-                  whileHover={{ y: -6, scale: 1.01 }}
-                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md transition-all duration-300"
+                  whileHover={{ y: -6 }}
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow"
                 >
                   <div className="mb-4 flex justify-center">{step.icon}</div>
                   <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
@@ -187,34 +162,20 @@ export default function HowItWorks() {
 
           {/* FEATURES */}
           <Reveal>
-            <div className="text-center mb-4">
-              <motion.span
-                initial={{ scale: 0.7, rotate: -10 }}
-                animate={{ scale: 1, rotate: 0 }}
-                transition={{ duration: 0.6 }}
-                className="text-4xl inline-block"
-              >
-                💎
-              </motion.span>
-            </div>
-
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
               Why Choose Cashog
             </h2>
-
-            <div className="w-16 h-1 mx-auto rounded-full bg-gradient-to-r from-yellow-400 via-green-400 to-green-500" />
-
-            <p className="text-center text-gray-600 dark:text-gray-300 mt-4 mb-12 max-w-2xl mx-auto">
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
               Earn rewards safely with fast payouts and premium opportunities.
             </p>
           </Reveal>
 
-          <div className="grid gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-5 mb-24">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5 mb-24">
             {features.map((feature, i) => (
               <Reveal key={i}>
                 <motion.div
                   whileHover={{ y: -4 }}
-                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md transition-all duration-300"
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow"
                 >
                   <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
                   <p className="text-gray-600 dark:text-gray-300 text-sm">
@@ -227,10 +188,9 @@ export default function HowItWorks() {
 
           {/* FAQ */}
           <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
               Frequently Asked Questions
             </h2>
-
             <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
               Everything you need to know about earning
             </p>
@@ -239,7 +199,7 @@ export default function HowItWorks() {
           <div className="space-y-4 mb-24">
             {faqs.map((faq, i) => (
               <Reveal key={i}>
-                <details className="bg-white dark:bg-[#0a0d16] rounded-xl border border-gray-200 dark:border-gray-800 p-4 transition-all duration-300">
+                <details className="bg-white dark:bg-[#0a0d16] rounded-xl border border-gray-200 dark:border-gray-800 p-4">
                   <summary className="font-semibold text-lg cursor-pointer">
                     {faq.q}
                   </summary>
@@ -254,15 +214,6 @@ export default function HowItWorks() {
           {/* FINAL CTA */}
           <Reveal>
             <div className="text-center">
-              <motion.div
-                initial={{ scale: 0.7 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.6 }}
-                className="text-4xl mb-4"
-              >
-                🎯
-              </motion.div>
-
               <h2 className="text-4xl sm:text-5xl font-extrabold mb-6 gradient-text">
                 Ready to Start Earning?
               </h2>
@@ -272,6 +223,7 @@ export default function HowItWorks() {
               </PrimaryCTA>
             </div>
           </Reveal>
+
         </section>
       </main>
     </>
