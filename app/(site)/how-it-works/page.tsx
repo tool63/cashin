@@ -1,9 +1,19 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, User, CreditCard, Gift, CheckCircle, Eye } from "lucide-react";
+import {
+  User,
+  CreditCard,
+  Gift,
+  CheckCircle,
+  DollarSign,
+  Shield,
+  TrendingUp,
+  Smartphone,
+  Globe,
+  Headphones,
+} from "lucide-react";
 import { motion } from "framer-motion";
-import Link from "next/link";
 import Meta from "@/components/seo/SeoEngine";
 import TypingText from "@/components/typing/TypingText";
 import Background from "@/components/Background";
@@ -38,33 +48,40 @@ const steps = [
   },
 ];
 
-/* ================= FEATURES ================= */
+/* ================= FEATURES (WITH ICONS ABOVE EACH CATEGORY) ================= */
 const features = [
   {
+    icon: <DollarSign size={36} className="text-green-400" />,
     title: "Fast Payouts",
     description: "Get your money instantly via PayPal or gift cards.",
   },
   {
+    icon: <Shield size={36} className="text-blue-400" />,
     title: "Trusted & Secure",
     description: "Millions of users trust our platform daily.",
   },
   {
+    icon: <TrendingUp size={36} className="text-yellow-400" />,
     title: "High-Paying Offers",
     description: "Access top offers that maximize your earnings.",
   },
   {
+    icon: <Smartphone size={36} className="text-green-400" />,
     title: "Mobile-Friendly",
     description: "Earn on the go with our fully responsive platform.",
   },
   {
+    icon: <CreditCard size={36} className="text-purple-400" />,
     title: "Trusted Payments",
     description: "Secure and reliable payouts every time.",
   },
   {
+    icon: <Globe size={36} className="text-blue-400" />,
     title: "Global Access",
     description: "Join from anywhere in the world and start earning.",
   },
   {
+    icon: <Headphones size={36} className="text-green-400" />,
     title: "24/7 Support",
     description: "Our support team is here to help whenever you need.",
   },
@@ -168,12 +185,8 @@ export default function HowItWorks() {
             ))}
           </div>
 
-          {/* FEATURES */}
+          {/* FEATURES WITH ICON ABOVE EACH CATEGORY */}
           <Reveal>
-            <div className="text-center mb-6">
-              <Eye size={42} className="text-green-400 mx-auto" />
-            </div>
-
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               Why Choose Cashog
             </h2>
@@ -192,6 +205,7 @@ export default function HowItWorks() {
                   whileHover={{ y: -4 }}
                   className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md transition-all duration-300"
                 >
+                  <div className="mb-4 flex justify-center">{feature.icon}</div>
                   <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
                   <p className="text-gray-600 dark:text-gray-300 text-sm">
                     {feature.description}
