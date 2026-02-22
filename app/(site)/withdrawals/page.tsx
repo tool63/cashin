@@ -10,6 +10,7 @@ import {
   Globe,
   ShieldCheck,
   Clock,
+  Lock,
 } from "lucide-react";
 import Meta from "@/components/seo/SeoEngine";
 import Background from "@/components/Background";
@@ -43,7 +44,7 @@ export default function WithdrawalsPage() {
 
   const securityFeatures = [
     {
-      icon: LockIcon,
+      icon: Lock,
       title: "Encrypted Transactions",
       desc: "All withdrawals are protected with advanced encryption.",
     },
