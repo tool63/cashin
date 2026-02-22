@@ -20,7 +20,6 @@ import Background from "@/components/Background";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
 import FAQ from "@/components/faq/FAQ";
-import LanguageSwitcher from "@/components/switch/LanguageSwitcher";
 
 /* ================= STEPS ================= */
 const steps = [
@@ -133,11 +132,6 @@ export default function HowItWorks() {
         <Background />
 
         <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
-          {/* LANGUAGE (EN ONLY) */}
-          <div className="flex justify-end mb-6">
-            <LanguageSwitcher />
-          </div>
-
           {/* HERO */}
           <Reveal>
             <div className="text-center mb-20">
