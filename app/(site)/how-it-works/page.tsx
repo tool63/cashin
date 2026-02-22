@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, User, CreditCard, Gift, CheckCircle } from "lucide-react";
-import Link from "next/link";
+import { ArrowRight, User, CreditCard, Gift, CheckCircle, Eye } from "lucide-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import Meta from "@/components/seo/SeoEngine";
 import TypingText from "@/components/typing/TypingText";
 import Background from "@/components/Background";
@@ -113,15 +113,16 @@ export default function HowItWorks() {
       <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
 
+        {/* ================= HERO ================= */}
         <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
-
-          {/* HERO */}
           <Reveal>
             <div className="text-center mb-20">
+
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
                 Earn Real Money Online
               </h1>
 
+              {/* TYPING EFFECT */}
               <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 gradient-text">
                 <TypingText />
               </div>
@@ -131,24 +132,31 @@ export default function HowItWorks() {
               </p>
 
               <PrimaryCTA href="/signup">
-                Start Earning Now <ArrowRight size={20} />
+                Start Earning Now
               </PrimaryCTA>
             </div>
           </Reveal>
 
-          {/* STEPS */}
+          {/* PREMIUM SECTION TITLE */}
           <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-              How It <span className="gradient-text">Works</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              How It Works
             </h2>
+
+            <div className="w-16 h-1 mx-auto rounded-full bg-gradient-to-r from-yellow-400 via-green-400 to-green-500" />
+
+            <p className="text-center text-gray-600 dark:text-gray-300 mt-4 mb-12 max-w-2xl mx-auto">
+              Earn rewards in simple steps and withdraw your earnings securely.
+            </p>
           </Reveal>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-24">
+          {/* STEPS */}
+          <div className="grid gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-4 mb-24">
             {steps.map((step, i) => (
               <Reveal key={i}>
                 <motion.div
-                  whileHover={{ y: -6 }}
-                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow"
+                  whileHover={{ y: -6, scale: 1.01 }}
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md transition-all duration-300"
                 >
                   <div className="mb-4 flex justify-center">{step.icon}</div>
                   <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
@@ -162,20 +170,27 @@ export default function HowItWorks() {
 
           {/* FEATURES */}
           <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+            <div className="text-center mb-6">
+              <Eye size={42} className="text-green-400 mx-auto" />
+            </div>
+
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               Why Choose Cashog
             </h2>
-            <p className="text-center text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
+
+            <div className="w-16 h-1 mx-auto rounded-full bg-gradient-to-r from-yellow-400 via-green-400 to-green-500" />
+
+            <p className="text-center text-gray-600 dark:text-gray-300 mt-4 mb-12 max-w-2xl mx-auto">
               Earn rewards safely with fast payouts and premium opportunities.
             </p>
           </Reveal>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5 mb-24">
+          <div className="grid gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-5 mb-24">
             {features.map((feature, i) => (
               <Reveal key={i}>
                 <motion.div
                   whileHover={{ y: -4 }}
-                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow"
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md transition-all duration-300"
                 >
                   <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
                   <p className="text-gray-600 dark:text-gray-300 text-sm">
@@ -188,9 +203,10 @@ export default function HowItWorks() {
 
           {/* FAQ */}
           <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               Frequently Asked Questions
             </h2>
+
             <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
               Everything you need to know about earning
             </p>
@@ -199,7 +215,7 @@ export default function HowItWorks() {
           <div className="space-y-4 mb-24">
             {faqs.map((faq, i) => (
               <Reveal key={i}>
-                <details className="bg-white dark:bg-[#0a0d16] rounded-xl border border-gray-200 dark:border-gray-800 p-4">
+                <details className="bg-white dark:bg-[#0a0d16] rounded-xl border border-gray-200 dark:border-gray-800 p-4 transition-all duration-300">
                   <summary className="font-semibold text-lg cursor-pointer">
                     {faq.q}
                   </summary>
@@ -211,15 +227,20 @@ export default function HowItWorks() {
             ))}
           </div>
 
-          {/* FINAL CTA */}
+          {/* FINAL CTA (LIKE HERO) */}
           <Reveal>
             <div className="text-center">
-              <h2 className="text-4xl sm:text-5xl font-extrabold mb-6 gradient-text">
+
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
                 Ready to Start Earning?
               </h2>
 
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed mb-10">
+                Join Cashog today and unlock unlimited earning opportunities.
+              </p>
+
               <PrimaryCTA href="/signup">
-                Join Now <ArrowRight size={20} />
+                Join Now
               </PrimaryCTA>
             </div>
           </Reveal>
