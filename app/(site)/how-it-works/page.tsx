@@ -19,6 +19,8 @@ import TypingText from "@/components/typing/TypingText";
 import Background from "@/components/Background";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
+import FAQ from "@/components/faq/FAQ";
+import LanguageSwitcher from "@/components/switch/LanguageSwitcher";
 
 /* ================= STEPS ================= */
 const steps = [
@@ -48,7 +50,7 @@ const steps = [
   },
 ];
 
-/* ================= FEATURES (WITH ICONS ABOVE EACH CATEGORY) ================= */
+/* ================= FEATURES ================= */
 const features = [
   {
     icon: <DollarSign size={36} className="text-green-400" />,
@@ -130,16 +132,19 @@ export default function HowItWorks() {
       <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
 
-        {/* ================= HERO ================= */}
         <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
+          {/* LANGUAGE (EN ONLY) */}
+          <div className="flex justify-end mb-6">
+            <LanguageSwitcher label="English" />
+          </div>
+
+          {/* HERO */}
           <Reveal>
             <div className="text-center mb-20">
-
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
                 Earn Real Money Online
               </h1>
 
-              {/* TYPING EFFECT */}
               <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 gradient-text">
                 <TypingText />
               </div>
@@ -154,26 +159,14 @@ export default function HowItWorks() {
             </div>
           </Reveal>
 
-          {/* PREMIUM SECTION TITLE */}
-          <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              How It Works
-            </h2>
-
-            <div className="w-16 h-1 mx-auto rounded-full bg-gradient-to-r from-yellow-400 via-green-400 to-green-500" />
-
-            <p className="text-center text-gray-600 dark:text-gray-300 mt-4 mb-12 max-w-2xl mx-auto">
-              Earn rewards in simple steps and withdraw your earnings securely.
-            </p>
-          </Reveal>
-
           {/* STEPS */}
           <div className="grid gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-4 mb-24">
             {steps.map((step, i) => (
               <Reveal key={i}>
                 <motion.div
-                  whileHover={{ y: -6, scale: 1.01 }}
-                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md transition-all duration-300"
+                  whileHover={{ y: -6, scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 200 }}
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
                 >
                   <div className="mb-4 flex justify-center">{step.icon}</div>
                   <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
@@ -185,25 +178,13 @@ export default function HowItWorks() {
             ))}
           </div>
 
-          {/* FEATURES WITH ICON ABOVE EACH CATEGORY */}
-          <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              Why Choose Cashog
-            </h2>
-
-            <div className="w-16 h-1 mx-auto rounded-full bg-gradient-to-r from-yellow-400 via-green-400 to-green-500" />
-
-            <p className="text-center text-gray-600 dark:text-gray-300 mt-4 mb-12 max-w-2xl mx-auto">
-              Earn rewards safely with fast payouts and premium opportunities.
-            </p>
-          </Reveal>
-
+          {/* FEATURES */}
           <div className="grid gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-5 mb-24">
             {features.map((feature, i) => (
               <Reveal key={i}>
                 <motion.div
                   whileHover={{ y: -4 }}
-                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md transition-all duration-300"
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
                 >
                   <div className="mb-4 flex justify-center">{feature.icon}</div>
                   <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
@@ -226,25 +207,13 @@ export default function HowItWorks() {
             </p>
           </Reveal>
 
-          <div className="space-y-4 mb-24">
-            {faqs.map((faq, i) => (
-              <Reveal key={i}>
-                <details className="bg-white dark:bg-[#0a0d16] rounded-xl border border-gray-200 dark:border-gray-800 p-4 transition-all duration-300">
-                  <summary className="font-semibold text-lg cursor-pointer">
-                    {faq.q}
-                  </summary>
-                  <p className="mt-3 text-sm text-gray-600 dark:text-gray-300">
-                    {faq.a}
-                  </p>
-                </details>
-              </Reveal>
-            ))}
+          <div className="mb-24">
+            <FAQ faqs={faqs} />
           </div>
 
-          {/* FINAL CTA (LIKE HERO) */}
+          {/* FINAL CTA */}
           <Reveal>
             <div className="text-center">
-
               <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
                 Ready to Start Earning?
               </h2>
@@ -258,7 +227,6 @@ export default function HowItWorks() {
               </PrimaryCTA>
             </div>
           </Reveal>
-
         </section>
       </main>
     </>
