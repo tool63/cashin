@@ -1,171 +1,258 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, User, CreditCard, Gift, CheckCircle, ShieldCheck } from "lucide-react";
+import {
+  ArrowRight,
+  User,
+  CreditCard,
+  Target,
+  Globe,
+  BarChart,
+  DollarSign,
+  ShieldCheck,
+  Headphones,
+  CheckCircle,
+  Users,
+} from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Meta from "@/components/seo/SeoEngine";
 import TypingText from "@/components/typing/TypingText";
+import Background from "@/components/Background";
+import PrimaryCTA from "@/components/cta/PrimaryCTA";
+import Reveal from "@/components/animations/Reveal";
 
-/* ================= STEPS ================= */
+/* ================= DATA ================= */
+
 const steps = [
   {
-    icon: <User size={32} className="text-yellow-400" />,
-    title: "Sign Up for Free",
-    description: "Create your account in minutes and join our growing community of earners.",
+    icon: <User size={30} className="text-yellow-400" />,
+    title: "Sign Up as Advertiser",
+    description:
+      "Create an advertiser account and access our platform to promote your brand or products.",
   },
   {
-    icon: <CreditCard size={32} className="text-green-400" />,
-    title: "Complete Tasks & Offers",
-    description: "Play games, watch videos, install apps, or complete surveys to earn points.",
+    icon: <CreditCard size={30} className="text-green-400" />,
+    title: "Set Up Campaigns",
+    description:
+      "Design campaigns, choose target audience, and set your budget easily.",
   },
   {
-    icon: <Gift size={32} className="text-yellow-400" />,
-    title: "Earn Rewards",
-    description: "Points can be redeemed for real cash via PayPal, gift cards, or mobile top-ups.",
+    icon: <Target size={30} className="text-yellow-400" />,
+    title: "Reach Millions",
+    description:
+      "Your ads are displayed to millions of active users completing offers.",
   },
   {
-    icon: <CheckCircle size={32} className="text-green-400" />,
-    title: "Withdraw Easily",
-    description: "Instant payouts once you reach the minimum withdrawal threshold.",
+    icon: <BarChart size={30} className="text-green-400" />,
+    title: "Monitor & Optimize",
+    description:
+      "Track clicks, conversions, and ROI in real-time with our dashboard.",
   },
 ];
 
-/* ================= FEATURES ================= */
 const features = [
-  { title: "Fast Payouts", description: "Get your money instantly via PayPal or gift cards." },
-  { title: "Trusted & Secure", description: "Millions of users trust our platform daily." },
-  { title: "High-Paying Offers", description: "Access top offers that maximize your earnings." },
-  { title: "Mobile-Friendly", description: "Earn on the go with our fully responsive platform." },
-  { title: "Trusted Payments", description: "Secure and reliable payouts every time." },
-  { title: "Global Access", description: "Join from anywhere in the world and start earning." },
-  { title: "24/7 Support", description: "Our support team is here to help whenever you need." },
+  {
+    icon: <Target size={22} className="text-yellow-500" />,
+    title: "High Engagement",
+    description: "Reach an active audience ready to interact.",
+  },
+  {
+    icon: <BarChart size={22} className="text-green-500" />,
+    title: "Real-Time Analytics",
+    description: "Monitor performance metrics instantly.",
+  },
+  {
+    icon: <Globe size={22} className="text-yellow-500" />,
+    title: "Global Reach",
+    description: "Promote to users worldwide.",
+  },
+  {
+    icon: <DollarSign size={22} className="text-green-500" />,
+    title: "Flexible Budgets",
+    description: "Set daily or total campaign budgets easily.",
+  },
+  {
+    icon: <ShieldCheck size={22} className="text-yellow-500" />,
+    title: "Trusted Platform",
+    description: "Advertise on a trusted platform.",
+  },
+  {
+    icon: <Headphones size={22} className="text-green-500" />,
+    title: "Dedicated Support",
+    description: "24/7 campaign optimization support.",
+  },
 ];
 
-/* ================= FAQ ================= */
+const stats = [
+  { value: "50M+", label: "Active Users", icon: <Users size={18} /> },
+  { value: "150+", label: "Countries", icon: <Globe size={18} /> },
+  { value: "2.5B+", label: "Impressions/mo", icon: <BarChart size={18} /> },
+  { value: "99.9%", label: "Uptime", icon: <CheckCircle size={18} /> },
+];
+
 const faqs = [
-  { q: "How do I cash out?", a: "You can withdraw via PayPal, gift cards, or mobile top-ups once you reach the minimum threshold." },
-  { q: "Are surveys safe?", a: "Yes, all tasks and surveys are secure and verified for safety." },
-  { q: "Can I join from any country?", a: "Yes! Our platform supports users globally." },
-  { q: "Is there a minimum age to join?", a: "You must be at least 13 years old to create an account." },
-  { q: "How long does it take to get paid?", a: "Most withdrawals are processed instantly or within a few hours." },
-  { q: "Do I need to pay anything to join?", a: "No, signing up is completely free." },
-  { q: "Can I complete offers on mobile?", a: "Yes! Our platform is fully mobile-friendly, so you can earn anywhere." },
+  {
+    q: "How do I start advertising?",
+    a: "Sign up for a free advertiser account and create your first campaign instantly.",
+  },
+  {
+    q: "Can I target specific users?",
+    a: "Yes, you can target by demographics, location, and interests.",
+  },
+  {
+    q: "Is there a minimum budget?",
+    a: "Start with any budget that fits your goals.",
+  },
+  {
+    q: "How is performance tracked?",
+    a: "Real-time dashboards show clicks, conversions, and ROI.",
+  },
 ];
 
-/* ================= PAGE COMPONENT ================= */
-export default function HowItWorks() {
+/* ================= PAGE ================= */
+
+export default function AdvertisePage() {
   return (
     <>
       <Meta
-        title="Cashog - How It Works"
-        description="Learn how to earn real money online by completing tasks, surveys, and high-paying offers on Cashog."
+        title="Advertise with Us"
+        description="Reach millions of active users with our advertising platform."
       />
 
-      <main className="transition-colors duration-300 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white min-h-screen">
+      <main className="relative min-h-screen text-gray-900 dark:text-white overflow-hidden">
+        <Background />
 
-        {/* ================= HERO ================= */}
-        <section className="py-20 px-4 text-center">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-              Earn Real Money Online
-            </h1>
+        <section className="relative isolate max-w-7xl mx-auto px-4 py-20">
 
-            <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
-              <TypingText />
+          {/* HERO */}
+          <Reveal>
+            <div className="text-center mb-24">
+              <h1 className="text-5xl sm:text-6xl font-extrabold mb-6">
+                Advertise with <span className="gradient-text">Platform</span>
+              </h1>
+
+              <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-8 gradient-text">
+                <TypingText />
+              </div>
+
+              <p className="text-lg sm:text-xl md:text-2xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed">
+                Reach millions of active users and scale your business with
+                performance-driven advertising.
+              </p>
+
+              <PrimaryCTA href="/signup?type=advertiser">
+                Start Advertising <ArrowRight size={20} />
+              </PrimaryCTA>
+
+              {/* Stats */}
+              <div className="flex flex-wrap justify-center gap-4 mt-12">
+                {stats.map((stat, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-full text-sm"
+                  >
+                    <span className="text-green-400">{stat.icon}</span>
+                    <span className="font-semibold">{stat.value}</span>
+                    <span className="text-gray-500 dark:text-gray-300">
+                      {stat.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
+          </Reveal>
 
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-8 text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed">
-              Follow these simple steps and start earning instantly from anywhere.
+          {/* STEPS */}
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+              How It <span className="gradient-text">Works</span>
+            </h2>
+          </Reveal>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-24">
+            {steps.map((step, i) => (
+              <Reveal key={i}>
+                <motion.div
+                  whileHover={{ y: -6 }}
+                  className="bg-white dark:bg-[#0a0d16] dark:text-white rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800"
+                >
+                  <div className="mb-4 flex justify-center">{step.icon}</div>
+                  <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">
+                    {step.description}
+                  </p>
+                </motion.div>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* FEATURES */}
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+              Why Advertise
+            </h2>
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
+              Performance-driven advertising that connects brands with active users
             </p>
+          </Reveal>
 
-            <Link href="/signup" className="cta-observer inline-block">
-              <motion.span
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-12 py-5 rounded-2xl font-bold shadow-xl text-lg"
-              >
-                Start Earning Now <ArrowRight size={20} />
-              </motion.span>
-            </Link>
-          </div>
-        </section>
-
-        {/* ================= STEPS ================= */}
-        <section className="max-w-7xl mx-auto px-4 py-16 grid gap-12 md:grid-cols-2 lg:grid-cols-4 text-center">
-          {steps.map((step, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.2 }}
-              className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-8 flex flex-col items-center shadow-md hover:shadow-lg transition-shadow duration-300"
-            >
-              <div className="mb-4">{step.icon}</div>
-              <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-              <p className="text-gray-600 dark:text-gray-400">{step.description}</p>
-            </motion.div>
-          ))}
-        </section>
-
-        {/* ================= FEATURES ================= */}
-        <section className="max-w-7xl mx-auto px-4 py-16 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">
-            Why Choose Cashog
-          </h2>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-5 justify-center">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-24">
             {features.map((feature, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.2 }}
-                className="bg-gray-50 dark:bg-[#111827] rounded-xl p-6 text-center shadow hover:shadow-lg transition-shadow duration-300 w-full max-w-xs mx-auto"
-              >
-                <div className="flex justify-center mb-4 text-yellow-500">
-                  <ShieldCheck size={28} />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
-              </motion.div>
+              <Reveal key={i}>
+                <motion.div
+                  whileHover={{ y: -6 }}
+                  className="bg-white dark:bg-[#0a0d16] dark:text-white rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800"
+                >
+                  <div className="mb-4 flex justify-center">{feature.icon}</div>
+                  <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">
+                    {feature.description}
+                  </p>
+                </motion.div>
+              </Reveal>
             ))}
           </div>
-        </section>
 
-        {/* ================= FAQ ================= */}
-        <section className="max-w-4xl mx-auto px-4 py-16 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">Frequently Asked Questions</h2>
-          <div className="space-y-4">
+          {/* FAQ */}
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+              Everything you need to know about advertising
+            </p>
+          </Reveal>
+
+          <div className="space-y-4 mb-24">
             {faqs.map((faq, i) => (
-              <details key={i} className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-4 cursor-pointer group">
-                <summary className="font-semibold text-lg">{faq.q}</summary>
-                <p className="mt-2 text-gray-600 dark:text-gray-400">{faq.a}</p>
-              </details>
+              <Reveal key={i}>
+                <details className="bg-white dark:bg-[#0a0d16] dark:text-white rounded-xl border border-gray-200 dark:border-gray-800 p-4">
+                  <summary className="font-semibold text-lg cursor-pointer dark:text-white">
+                    {faq.q}
+                  </summary>
+                  <p className="mt-3 text-sm text-gray-600 dark:text-gray-300">
+                    {faq.a}
+                  </p>
+                </details>
+              </Reveal>
             ))}
           </div>
-        </section>
 
-        {/* ================= FINAL CTA ================= */}
-        <section className="text-center py-28 bg-white dark:bg-[#070A14] w-full transition-colors duration-300">
-          <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
-            Ready to Start Earning Today?
-          </h2>
-          <Link href="/signup" className="cta-observer inline-block">
-            <motion.span
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-xl"
-            >
-              Start Earning in 60 Seconds <ArrowRight size={20} />
-            </motion.span>
-          </Link>
-          <p className="mt-6 text-gray-900 dark:text-gray-300 text-lg max-w-md mx-auto transition-colors duration-300">
-            Become part of our community and start earning daily rewards instantly.
-          </p>
-        </section>
+          {/* FINAL CTA */}
+          <Reveal>
+            <div className="text-center">
+              <h2 className="text-4xl sm:text-5xl font-extrabold mb-6 gradient-text">
+                Ready to Scale?
+              </h2>
 
+              <PrimaryCTA href="/signup?type=advertiser">
+                Launch Your Campaign <ArrowRight size={20} />
+              </PrimaryCTA>
+            </div>
+          </Reveal>
+
+        </section>
       </main>
     </>
   );
