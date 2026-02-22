@@ -38,7 +38,7 @@ const surveys = [
   },
 ];
 
-/* ================= FAQ ================= */
+/* ================= FAQ (Expanded) ================= */
 const faqs = [
   {
     q: "Is it free to join?",
@@ -47,6 +47,38 @@ const faqs = [
   {
     q: "How fast are payouts?",
     a: "Most payouts are processed instantly or within a few hours depending on method.",
+  },
+  {
+    q: "What payment methods are available?",
+    a: "You can withdraw via PayPal, gift cards, and mobile top-ups (where supported).",
+  },
+  {
+    q: "Are surveys safe and legit?",
+    a: "Yes. All surveys are verified and designed to collect anonymous feedback only.",
+  },
+  {
+    q: "Why was I disqualified from a survey?",
+    a: "Some surveys target specific demographics. If you don’t qualify, you can try another one.",
+  },
+  {
+    q: "How much can I earn?",
+    a: "Earnings vary by survey — typically between $1 and $10 depending on complexity.",
+  },
+  {
+    q: "When will I receive my reward?",
+    a: "Rewards are credited immediately after successful survey completion.",
+  },
+  {
+    q: "Can I complete surveys on mobile?",
+    a: "Yes. Our platform is fully mobile-friendly for earning on the go.",
+  },
+  {
+    q: "Do I need experience?",
+    a: "No experience is required. Just share your opinions.",
+  },
+  {
+    q: "Is my data shared?",
+    a: "No. Survey responses are anonymous and used only for research purposes.",
   },
 ];
 
@@ -59,14 +91,11 @@ export default function SurveysPage() {
         description="Complete surveys and earn rewards with Cashog."
       />
 
-      {/* MAIN WRAPPER (same logic as other pages) */}
       <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
 
-        {/* CONTENT WRAPPER WITH z-10 */}
+        {/* HERO */}
         <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
-
-          {/* HERO */}
           <Reveal>
             <div className="text-center mb-20">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
@@ -86,9 +115,15 @@ export default function SurveysPage() {
               </PrimaryCTA>
             </div>
           </Reveal>
+        </section>
 
-          {/* SURVEYS GRID */}
-          <div className="grid gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-3 mb-24">
+        {/* SURVEYS GRID */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+            Featured Surveys
+          </h2>
+
+          <div className="grid gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-3">
             {surveys.map((survey) => (
               <motion.div
                 key={survey.id}
@@ -127,45 +162,60 @@ export default function SurveysPage() {
                 <div className="flex items-center justify-between mt-4">
                   <span className="text-green-600 font-bold">{survey.reward}</span>
 
-                  <PrimaryCTA href="/signup">
+                  {/* SMALL, MODERN BUTTON */}
+                  <motion.a
+                    href="/signup"
+                    whileHover={{ scale: 1.05 }}
+                    className="
+                      text-xs
+                      px-4
+                      py-2
+                      rounded-full
+                      bg-green-600
+                      text-white
+                      font-semibold
+                      shadow-sm
+                      hover:bg-green-700
+                      transition
+                    "
+                  >
                     Start Survey
-                  </PrimaryCTA>
+                  </motion.a>
                 </div>
               </motion.div>
             ))}
           </div>
+        </div>
 
-          {/* FAQ */}
-          <div className="mb-24">
-            <Reveal>
-              <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-                Frequently Asked Questions
-              </h2>
-              <p className="text-gray-600 dark:text-gray-300 text-center mb-12">
-                Everything you need to know about earning
-              </p>
-            </Reveal>
+        {/* FAQ */}
+        <section className="relative z-10 max-w-4xl mx-auto px-4 py-20 text-center">
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold mb-2">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-gray-600 dark:text-gray-300 mb-12">
+              Everything you need to know about earning
+            </p>
+          </Reveal>
 
-            <FAQ faqs={faqs} />
-          </div>
+          <FAQ faqs={faqs} />
+        </section>
 
-          {/* FINAL CTA */}
-          <div className="text-center">
-            <Reveal>
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-                Ready to Start Earning?
-              </h2>
+        {/* FINAL CTA */}
+        <section className="relative z-10 text-center py-28">
+          <Reveal>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
+              Ready to Start Earning?
+            </h2>
 
-              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed mb-10">
-                Join Cashog today and unlock unlimited earning opportunities.
-              </p>
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed mb-10">
+              Join Cashog today and unlock unlimited earning opportunities.
+            </p>
 
-              <PrimaryCTA href="/signup">
-                Join Now
-              </PrimaryCTA>
-            </Reveal>
-          </div>
-
+            <PrimaryCTA href="/signup">
+              Join Now
+            </PrimaryCTA>
+          </Reveal>
         </section>
       </main>
     </>
