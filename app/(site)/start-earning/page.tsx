@@ -3,80 +3,128 @@
 import React from "react";
 import { motion } from "framer-motion";
 import {
+  User,
+  CreditCard,
   Gift,
-  Gamepad2,
-  Smartphone,
-  Star,
-  ShieldCheck,
-  Zap,
+  CheckCircle,
   DollarSign,
-  ArrowRight,
+  Shield,
+  TrendingUp,
+  Smartphone,
+  Globe,
+  Headphones,
 } from "lucide-react";
-import Link from "next/link";
 import Meta from "@/components/seo/SeoEngine";
 import Background from "@/components/Background";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
 import TypingText from "@/components/typing/TypingText";
+import { ArrowRight } from "lucide-react";
 
-export default function StartEarningPage() {
+export default function HowItWorksPage() {
+  const steps = [
+    {
+      icon: <User size={32} className="text-yellow-400" />,
+      title: "Sign Up for Free",
+      description:
+        "Create your account in minutes and join our growing community of earners.",
+    },
+    {
+      icon: <CreditCard size={32} className="text-green-400" />,
+      title: "Complete Tasks & Offers",
+      description:
+        "Play games, watch videos, install apps, or complete surveys to earn points.",
+    },
+    {
+      icon: <Gift size={32} className="text-yellow-400" />,
+      title: "Earn Rewards",
+      description:
+        "Points can be redeemed for real cash via PayPal, gift cards, or mobile top-ups.",
+    },
+    {
+      icon: <CheckCircle size={32} className="text-green-400" />,
+      title: "Withdraw Easily",
+      description:
+        "Instant payouts once you reach the minimum withdrawal threshold.",
+    },
+  ];
+
+  const features = [
+    {
+      icon: <DollarSign size={36} className="text-green-400" />,
+      title: "Fast Payouts",
+      description: "Get your money instantly via PayPal or gift cards.",
+    },
+    {
+      icon: <Shield size={36} className="text-blue-400" />,
+      title: "Trusted & Secure",
+      description: "Millions of users trust our platform daily.",
+    },
+    {
+      icon: <TrendingUp size={36} className="text-yellow-400" />,
+      title: "High-Paying Offers",
+      description: "Access top offers that maximize your earnings.",
+    },
+    {
+      icon: <Smartphone size={36} className="text-green-400" />,
+      title: "Mobile-Friendly",
+      description: "Earn on the go with our fully responsive platform.",
+    },
+    {
+      icon: <CreditCard size={36} className="text-purple-400" />,
+      title: "Trusted Payments",
+      description: "Secure and reliable payouts every time.",
+    },
+    {
+      icon: <Globe size={36} className="text-blue-400" />,
+      title: "Global Access",
+      description: "Join from anywhere in the world and start earning.",
+    },
+    {
+      icon: <Headphones size={36} className="text-green-400" />,
+      title: "24/7 Support",
+      description: "Our support team is here to help whenever you need.",
+    },
+  ];
+
   const faqs = [
     {
-      question: "How can I earn money online with Cashog?",
+      question: "How does Cashog work?",
       answer:
-        "You can earn money online by completing offers, playing games, taking surveys, and testing apps. Once you earn enough points, you can withdraw your rewards instantly.",
+        "You earn rewards by completing tasks, playing games, and taking surveys. Points can be withdrawn as real money.",
     },
     {
-      question: "Is Cashog legit and safe to use worldwide?",
+      question: "Is it free to join?",
       answer:
-        "Yes, Cashog is a secure and trusted rewards platform available globally. All offers and surveys are verified, and payments are processed safely.",
+        "Yes, joining Cashog and earning rewards is completely free.",
     },
     {
-      question: "How fast can I withdraw my earnings?",
+      question: "How fast are withdrawals?",
       answer:
-        "Most withdrawals are processed instantly or within a few hours after reaching the minimum payout threshold.",
+        "Most withdrawals are processed instantly or within a few hours.",
     },
     {
-      question: "Do I need to pay to join Cashog?",
+      question: "Can I earn from mobile?",
       answer:
-        "No, Cashog is completely free to join. You can create an account and start earning without paying anything.",
-    },
-    {
-      question: "Can I earn money from my mobile phone?",
-      answer:
-        "Yes! Cashog is fully mobile-friendly. You can complete offers, play games, and take surveys directly from your smartphone.",
+        "Absolutely! Cashog is fully mobile-friendly and works on smartphones.",
     },
     {
       question: "What payment methods are available?",
       answer:
-        "Cashog supports PayPal, gift cards, and other global payout methods depending on your region.",
+        "Cashog supports PayPal, gift cards, and regional payout options.",
+    },
+    {
+      question: "Is Cashog safe and legit?",
+      answer:
+        "Yes, Cashog is a trusted platform with verified partners and secure payments.",
     },
   ];
 
   return (
     <>
       <Meta
-        title="Start Earning | Cashog"
-        description="Start earning real money online with Cashog. Complete offers, play games, take surveys, and withdraw instantly worldwide."
-      />
-
-      {/* FAQ Structured Data for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: faqs.map((faq) => ({
-              "@type": "Question",
-              name: faq.question,
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: faq.answer,
-              },
-            })),
-          }),
-        }}
+        title="How It Works | Cashog"
+        description="Learn how Cashog works and start earning real money online by completing tasks and offers."
       />
 
       <main className="relative min-h-screen text-gray-900 dark:text-white">
@@ -92,7 +140,6 @@ export default function StartEarningPage() {
               </h1>
             </Reveal>
 
-            {/* Typing Effect */}
             <Reveal>
               <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 gradient-text">
                 <TypingText />
@@ -101,84 +148,53 @@ export default function StartEarningPage() {
 
             <Reveal>
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-8 text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed">
-                Turn your free time into real income by completing simple tasks,
-                playing games, and answering surveys from anywhere in the world.
+                Follow simple steps and start earning instantly from anywhere in the world.
               </p>
             </Reveal>
 
             <PrimaryCTA href="/signup">
-              Start Earning Now <ArrowRight size={20} />
+              Start Earning Now
             </PrimaryCTA>
 
           </div>
         </section>
 
-        {/* ================= WAYS YOU CAN EARN ================= */}
-        <section className="relative z-10 max-w-7xl mx-auto px-4 py-16 grid gap-12 md:grid-cols-3">
-          {[
-            {
-              icon: <Gift size={40} />,
-              title: "Complete Offers",
-              desc: "Install apps, sign up, or try new services and get rewarded instantly.",
-            },
-            {
-              icon: <Gamepad2 size={40} />,
-              title: "Play Games",
-              desc: "Earn money by reaching levels or completing missions in games.",
-            },
-            {
-              icon: <Smartphone size={40} />,
-              title: "Take Surveys",
-              desc: "Share your opinion and earn cash from trusted survey partners.",
-            },
-          ].map((item, i) => (
-            <Reveal key={i}>
-              <motion.div
-                whileHover={{ y: -6 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-8 text-center border border-gray-200 dark:border-gray-800 shadow"
-              >
-                <div className="mb-4 text-yellow-500">{item.icon}</div>
-                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300 text-sm">
-                  {item.desc}
-                </p>
-              </motion.div>
-            </Reveal>
-          ))}
+        {/* ================= HOW IT WORKS STEPS ================= */}
+        <section className="relative z-10 max-w-7xl mx-auto px-4 py-16">
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+              How It Works
+            </h2>
+          </Reveal>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {steps.map((step, i) => (
+              <Reveal key={i}>
+                <motion.div
+                  whileHover={{ y: -6 }}
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow"
+                >
+                  <div className="mb-4 flex justify-center">{step.icon}</div>
+                  <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">
+                    {step.description}
+                  </p>
+                </motion.div>
+              </Reveal>
+            ))}
+          </div>
         </section>
 
-        {/* ================= WHY CHOOSE CASHOG ================= */}
+        {/* ================= WHY CHOOSE CASHOG (WITH ICONS ABOVE EACH CATEGORY) ================= */}
         <section className="relative z-10 max-w-7xl mx-auto px-4 py-16">
-
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
               Why Choose Cashog
             </h2>
           </Reveal>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-            {[
-              {
-                icon: <DollarSign size={32} />,
-                title: "High Rewards",
-                desc: "Competitive payouts for every completed task.",
-              },
-              {
-                icon: <Zap size={32} />,
-                title: "Instant Tracking",
-                desc: "Your earnings are tracked in real-time.",
-              },
-              {
-                icon: <ShieldCheck size={32} />,
-                title: "Secure & Trusted",
-                desc: "Safe withdrawals and verified offer partners.",
-              },
-              {
-                icon: <Star size={32} />,
-                title: "Global Access",
-                desc: "Users from around the world can join and earn.",
-              },
-            ].map((item, i) => (
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {features.map((item, i) => (
               <Reveal key={i}>
                 <motion.div
                   whileHover={{ y: -4 }}
@@ -189,7 +205,7 @@ export default function StartEarningPage() {
                   </div>
                   <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
                   <p className="text-gray-600 dark:text-gray-300 text-sm">
-                    {item.desc}
+                    {item.description}
                   </p>
                 </motion.div>
               </Reveal>
@@ -197,9 +213,8 @@ export default function StartEarningPage() {
           </div>
         </section>
 
-        {/* ================= FAQ SECTION ================= */}
+        {/* ================= FAQ ================= */}
         <section className="relative z-10 max-w-4xl mx-auto px-4 py-16">
-
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
               Frequently Asked Questions
@@ -224,7 +239,6 @@ export default function StartEarningPage() {
 
         {/* ================= FINAL CTA ================= */}
         <section className="relative z-10 text-center py-28 bg-white dark:bg-[#070A14] w-full transition-colors duration-300">
-
           <Reveal>
             <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 gradient-text">
               Ready to Start Earning Today?
@@ -232,11 +246,11 @@ export default function StartEarningPage() {
           </Reveal>
 
           <PrimaryCTA href="/signup">
-            Create Free Account <ArrowRight size={20} />
+            Create Free Account
           </PrimaryCTA>
 
           <p className="mt-6 text-gray-900 dark:text-gray-300 text-lg max-w-md mx-auto">
-            Join Cashog today and start turning your spare time into daily earnings.
+            Join Cashog and start earning real money by completing tasks and offers.
           </p>
         </section>
 
