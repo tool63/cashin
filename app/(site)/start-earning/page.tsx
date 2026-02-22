@@ -10,7 +10,6 @@ import {
   ShieldCheck,
   Zap,
   DollarSign,
-  ArrowRight,
 } from "lucide-react";
 import Meta from "@/components/seo/SeoEngine";
 import Background from "@/components/Background";
@@ -140,7 +139,7 @@ export default function StartEarningPage() {
             </Reveal>
 
             <PrimaryCTA href="/signup">
-              Start Earning Now <ArrowRight size={20} />
+              Start Earning Now
             </PrimaryCTA>
 
           </div>
@@ -190,7 +189,7 @@ export default function StartEarningPage() {
           </div>
         </section>
 
-        {/* ================= FAQ (REUSABLE COMPONENT) ================= */}
+        {/* ================= FAQ ================= */}
         <section className="relative z-10 max-w-4xl mx-auto px-4 py-16">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
@@ -214,7 +213,7 @@ export default function StartEarningPage() {
           </Reveal>
 
           <PrimaryCTA href="/signup">
-            Create Free Account <ArrowRight size={20} />
+            Create Free Account
           </PrimaryCTA>
 
           <p className="mt-6 text-gray-900 dark:text-gray-300 text-lg max-w-md mx-auto">
