@@ -8,232 +8,162 @@ import Background from "@/components/Background";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
 import FAQ from "@/components/faq/FAQ";
-import { Video, Star, Gift, User, ClipboardList, Trophy } from "lucide-react";
+import { ClipboardList, Star } from "lucide-react";
 
-/* ================= VIDEO DATA ================= */
-const videos = [
-  { id: 1, title: "Crypto Insights", category: "Finance", reward: "$2", rating: 4.8, views: "50K+" },
-  { id: 2, title: "Brain Training", category: "Education", reward: "$1.5", rating: 4.7, views: "75K+" },
-  { id: 3, title: "Action Highlights", category: "Entertainment", reward: "$3", rating: 4.9, views: "120K+" },
-];
-
-/* ================= FAQ ================= */
-const faqs = [
-  {
-    q: "Is it free to watch videos?",
-    a: "Yes. Watching videos and earning rewards is completely free.",
-  },
-  {
-    q: "How much can I earn per video?",
-    a: "Rewards typically range from $1 to $5 depending on the video.",
-  },
-  {
-    q: "When do I receive rewards?",
-    a: "Rewards are credited instantly after successful completion.",
-  },
-  {
-    q: "Can I watch videos on mobile?",
-    a: "Yes. Our platform is fully mobile optimized.",
-  },
-  {
-    q: "Is there a daily earning limit?",
-    a: "Some videos may have limits, but new content is added regularly.",
-  },
-];
-
-/* ================= STAR RATING ================= */
-function StarRating({ rating }: { rating: number }) {
-  return (
-    <div className="flex items-center mt-2">
-      {Array(Math.floor(rating))
-        .fill(0)
-        .map((_, i) => (
-          <Star key={i} className="w-4 h-4 text-yellow-400" />
-        ))}
-    </div>
-  );
-}
-
-/* ================= PAGE ================= */
-export default function WatchVideosPage() {
+export default function SurveysPage() {
   return (
     <>
       <Meta
-        title="Watch Videos & Earn | Cashog"
-        description="Watch engaging videos and earn real rewards instantly."
+        title="Paid Surveys | Cashooz"
+        description="Complete surveys, earn rewards, and withdraw real money securely."
       />
 
-      <main className="relative min-h-screen text-gray-900 dark:text-white">
+      <div className="relative min-h-screen overflow-hidden text-gray-900 dark:text-white">
+
+        {/* Same Background Logic */}
         <Background />
 
-        {/* ================= HERO ================= */}
-        <section className="relative z-10 max-w-7xl mx-auto px-4 py-20 text-center">
-          <Reveal>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-              Watch Videos & Earn Rewards
-            </h1>
+        <section className="relative z-10 max-w-6xl mx-auto px-4 py-20">
 
-            <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold gradient-text mb-6">
-              <TypingText />
-            </div>
+          {/* HERO */}
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <TypingText
+              text="Complete Surveys & Earn Instantly"
+              className="text-4xl md:text-5xl font-bold mb-6"
+            />
 
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10">
-              Enjoy curated content, learn new things, and earn real rewards instantly.
+            <p className="text-lg text-gray-600 dark:text-gray-400">
+              Answer simple surveys from trusted partners and earn real rewards.
+              Secure. Fast. Reliable.
             </p>
 
-            <PrimaryCTA href="/signup">
-              Start Watching
-            </PrimaryCTA>
-          </Reveal>
-        </section>
-
-        {/* ================= VIDEO GRID ================= */}
-        <section className="relative z-10 py-20 px-4 max-w-7xl mx-auto">
-          <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-              Top Rewarding Videos
-            </h2>
-          </Reveal>
-
-          <div className="grid gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {videos.map((video) => (
-              <motion.div
-                key={video.id}
-                whileHover={{ y: -4 }}
+            {/* Premium Resized CTA */}
+            <div className="mt-8 flex justify-center">
+              <PrimaryCTA
+                href="/dashboard"
                 className="
-                  bg-white
-                  dark:bg-[#0a0d16]
-                  rounded-2xl
-                  p-6
-                  border
-                  border-gray-200
-                  dark:border-gray-800
-                  shadow-md
+                  px-8 py-3 
+                  text-base 
+                  rounded-xl 
+                  shadow-lg 
+                  hover:shadow-xl 
+                  transition-all 
+                  duration-300 
+                  font-semibold
                 "
               >
-                <div className="flex items-center gap-2 mb-3">
-                  <ClipboardList className="text-yellow-500 w-5 h-5" />
-                  <span className="text-sm text-gray-500 dark:text-gray-400">
-                    {video.category}
-                  </span>
-                </div>
-
-                <h3 className="text-lg font-semibold">{video.title}</h3>
-
-                <p className="text-sm text-gray-600 dark:text-gray-300">
-                  Views: {video.views}
-                </p>
-
-                <StarRating rating={video.rating} />
-
-                <div className="flex items-center justify-between mt-4">
-                  <span className="text-green-600 font-bold">
-                    {video.reward}
-                  </span>
-
-                  <motion.a
-                    href="/signup"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.97 }}
-                    className="
-                      text-xs
-                      px-4
-                      py-2
-                      rounded-full
-                      bg-green-600
-                      text-white
-                      font-semibold
-                      shadow-sm
-                      hover:bg-green-700
-                    "
-                  >
-                    Watch Now
-                  </motion.a>
-                </div>
-              </motion.div>
-            ))}
+                Start Survey
+              </PrimaryCTA>
+            </div>
           </div>
-        </section>
 
-        {/* ================= HOW IT WORKS ================= */}
-        <section className="relative z-10 py-24 px-4 max-w-6xl mx-auto text-center">
-          <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold mb-12">
-              How It Works
-            </h2>
-          </Reveal>
+          {/* FEATURES SECTION */}
+          <div className="grid md:grid-cols-2 gap-8 mb-20">
 
-          <div className="grid md:grid-cols-3 gap-10">
-            {[
-              {
-                icon: <User className="w-8 h-8 text-yellow-400 mb-4 mx-auto" />,
-                title: "Sign Up",
-                desc: "Create a free account and access video rewards.",
-              },
-              {
-                icon: <Trophy className="w-8 h-8 text-green-400 mb-4 mx-auto" />,
-                title: "Watch Videos",
-                desc: "Enjoy selected videos designed for earning.",
-              },
-              {
-                icon: <Gift className="w-8 h-8 text-yellow-500 mb-4 mx-auto" />,
-                title: "Earn Rewards",
-                desc: "Withdraw instantly via PayPal or gift cards.",
-              },
-            ].map((step, index) => (
+            <Reveal>
               <motion.div
-                key={index}
-                whileHover={{ y: -4 }}
+                whileHover={{ y: -6 }}
+                transition={{ duration: 0.3 }}
                 className="
-                  bg-white
-                  dark:bg-[#0a0d16]
-                  rounded-2xl
-                  p-6
-                  border
-                  border-gray-200
-                  dark:border-gray-800
+                  bg-white 
+                  dark:bg-[#0a0d16] 
+                  rounded-2xl 
+                  p-8 
+                  border 
+                  border-gray-200 
+                  dark:border-gray-800 
                   shadow-md
                 "
               >
-                {step.icon}
-                <h3 className="text-xl font-semibold mb-2">
-                  {step.title}
+                <ClipboardList className="w-10 h-10 mb-4 text-blue-600" />
+                <h3 className="text-xl font-semibold mb-3">
+                  Verified Survey Providers
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  {step.desc}
+                <p className="text-gray-600 dark:text-gray-400">
+                  We partner only with trusted survey networks to ensure safe
+                  and legitimate earning opportunities.
                 </p>
               </motion.div>
-            ))}
-          </div>
-        </section>
+            </Reveal>
 
-        {/* ================= FAQ ================= */}
-        <section className="relative z-10 max-w-4xl mx-auto px-4 py-20 text-center">
-          <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold mb-2">
+            <Reveal>
+              <motion.div
+                whileHover={{ y: -6 }}
+                transition={{ duration: 0.3 }}
+                className="
+                  bg-white 
+                  dark:bg-[#0a0d16] 
+                  rounded-2xl 
+                  p-8 
+                  border 
+                  border-gray-200 
+                  dark:border-gray-800 
+                  shadow-md
+                "
+              >
+                <Star className="w-10 h-10 mb-4 text-yellow-500" />
+                <h3 className="text-xl font-semibold mb-3">
+                  Fast & Secure Payments
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  Earn points instantly after completion and withdraw securely
+                  via your preferred payment method.
+                </p>
+              </motion.div>
+            </Reveal>
+
+          </div>
+
+          {/* FAQ SECTION */}
+          <div className="max-w-4xl mx-auto">
+
+            <h2 className="text-3xl font-bold text-center mb-10">
               Frequently Asked Questions
             </h2>
-            <p className="text-gray-600 dark:text-gray-300 mb-12">
-              Everything you need to know about watching & earning
-            </p>
-          </Reveal>
 
-          <FAQ faqs={faqs} />
+            <FAQ
+              items={[
+                {
+                  question: "How do I qualify for surveys?",
+                  answer:
+                    "Survey eligibility depends on your profile. Complete your account information accurately to receive more matches.",
+                },
+                {
+                  question: "Why was I disqualified from a survey?",
+                  answer:
+                    "Some surveys require specific demographics. If your answers don't match the criteria, you may be screened out.",
+                },
+                {
+                  question: "When do I receive my rewards?",
+                  answer:
+                    "Rewards are usually credited instantly after successful completion. In rare cases, it may take a few hours.",
+                },
+                {
+                  question: "Is Cashooz safe and legitimate?",
+                  answer:
+                    "Yes. We work with verified survey providers and use advanced security systems to protect user data.",
+                },
+                {
+                  question: "How can I increase my earnings?",
+                  answer:
+                    "Complete your profile fully, check daily for new surveys, and participate consistently to maximize earnings.",
+                },
+                {
+                  question: "What payment methods are available?",
+                  answer:
+                    "We support multiple secure withdrawal methods depending on your region.",
+                },
+                {
+                  question: "Do surveys cost anything?",
+                  answer:
+                    "No. All surveys are completely free to participate in.",
+                },
+              ]}
+            />
+          </div>
+
         </section>
-
-        {/* ================= FINAL CTA ================= */}
-        <section className="relative z-10 text-center py-28">
-          <Reveal>
-            <h2 className="text-4xl sm:text-5xl font-extrabold mb-6">
-              Ready to Start Earning?
-            </h2>
-
-            <PrimaryCTA href="/signup">
-              Join Now
-            </PrimaryCTA>
-          </Reveal>
-        </section>
-      </main>
+      </div>
     </>
   );
 }
