@@ -28,7 +28,7 @@ function useCountUp(end: number, duration = 2000) {
       ([entry]) => {
         if (entry.isIntersecting) setVisible(true);
       },
-      { threshold: 0.3 }
+      { threshold: 0.2 }
     );
 
     if (ref.current) observer.observe(ref.current);
@@ -62,22 +62,22 @@ const securityFeatures = [
   {
     icon: <Lock className="h-8 w-8 text-green-600" />,
     title: "Advanced Encryption",
-    desc: "Bank-level AES-256 encryption and secure SSL protocols safeguard transactions.",
+    desc: "Bank-level AES-256 encryption protects your data and transactions.",
   },
   {
     icon: <Fingerprint className="h-8 w-8 text-yellow-500" />,
     title: "Multi-Factor Authentication",
-    desc: "Layered identity verification ensures only authorized access.",
+    desc: "Layered identity verification prevents unauthorized access.",
   },
   {
     icon: <Eye className="h-8 w-8 text-blue-600" />,
     title: "Real-Time Monitoring",
-    desc: "AI-driven monitoring detects and blocks suspicious activity instantly.",
+    desc: "AI-driven monitoring detects suspicious activity instantly.",
   },
   {
     icon: <Server className="h-8 w-8 text-purple-600" />,
     title: "Secure Infrastructure",
-    desc: "Enterprise-grade cloud infrastructure with global redundancy.",
+    desc: "Enterprise-grade cloud systems with global redundancy.",
   },
   {
     icon: <AlertTriangle className="h-8 w-8 text-red-500" />,
@@ -87,7 +87,7 @@ const securityFeatures = [
   {
     icon: <ShieldCheck className="h-8 w-8 text-emerald-600" />,
     title: "Compliance & Standards",
-    desc: "Aligned with global security and financial regulations.",
+    desc: "Aligned with international security requirements.",
   },
 ];
 
@@ -98,10 +98,10 @@ const stats = [
 ];
 
 const faqs = [
-  { q: "Is my data safe?", a: "Yes. All transactions are encrypted and monitored 24/7." },
-  { q: "How fast are withdrawals?", a: "Most payouts are processed instantly or within hours." },
-  { q: "Can I earn on mobile?", a: "Absolutely. The platform is fully mobile-friendly." },
-  { q: "Is joining free?", a: "Yes — signing up and earning requires no payment." },
+  { q: "Is my data safe?", a: "Yes. Everything is encrypted and monitored 24/7." },
+  { q: "How fast are withdrawals?", a: "Most payouts are processed instantly." },
+  { q: "Can I earn on mobile?", a: "Yes — the platform is fully mobile-friendly." },
+  { q: "Is joining free?", a: "Absolutely. Signing up costs nothing." },
 ];
 
 /* ================= COMPONENT ================= */
@@ -109,7 +109,7 @@ export default function TrustSafetyPage() {
   const [animateCTA, setAnimateCTA] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setAnimateCTA(true), 150);
+    const timer = setTimeout(() => setAnimateCTA(true), 200);
     return () => clearTimeout(timer);
   }, []);
 
@@ -117,11 +117,16 @@ export default function TrustSafetyPage() {
     <>
       <SeoEngine
         title="Trust & Safety | Cashog"
-        description="Cashog protects user data with enterprise-grade security, encryption, and fraud prevention systems."
+        description="Cashog protects user data with enterprise-grade security and fraud prevention."
       />
 
-      <main className="relative min-h-screen text-gray-900 dark:text-white">
-        <Background />
+      {/* WRAPPER FIX: ensure content visible */}
+      <div className="relative min-h-screen w-full text-gray-900 dark:text-white bg-white dark:bg-black">
+
+        {/* BACKGROUND (low z-index so content sits above) */}
+        <div className="absolute inset-0 -z-10">
+          <Background />
+        </div>
 
         {/* HERO */}
         <Reveal>
@@ -131,8 +136,8 @@ export default function TrustSafetyPage() {
             </h1>
 
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-10">
-              Security is at the core of everything we build. Your data and transactions
-              are protected by enterprise-grade systems.
+              Security is at the core of everything we build. Your data is protected
+              by enterprise-grade systems and real-time monitoring.
             </p>
 
             <PrimaryCTA href="/signup">
@@ -156,7 +161,7 @@ export default function TrustSafetyPage() {
               return (
                 <motion.div
                   key={stat.label}
-                  className="relative p-8 rounded-3xl bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 shadow-xl text-center"
+                  className="p-8 rounded-3xl bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 shadow-xl text-center"
                   whileHover={{ scale: 1.03 }}
                 >
                   <h2
@@ -183,7 +188,7 @@ export default function TrustSafetyPage() {
               Our Security Framework
             </h2>
             <p className="text-gray-600 dark:text-gray-400">
-              Multi-layered defense systems built for maximum protection.
+              Multi-layered defenses built for maximum protection.
             </p>
           </div>
 
@@ -241,10 +246,11 @@ export default function TrustSafetyPage() {
           </motion.div>
 
           <p className="mt-6 text-gray-600 dark:text-gray-300 text-lg max-w-md mx-auto">
-            Become part of our community and start earning daily rewards.
+            Join our community and start earning daily rewards.
           </p>
         </section>
-      </main>
+
+      </div>
     </>
   );
 }
