@@ -135,7 +135,7 @@ export default function HowItWorks() {
         <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
           {/* LANGUAGE (EN ONLY) */}
           <div className="flex justify-end mb-6">
-            <LanguageSwitcher label="English" />
+            <LanguageSwitcher />
           </div>
 
           {/* HERO */}
