@@ -119,137 +119,137 @@ export default function TrustSafetyPage() {
         description="Cashog protects user data with enterprise-grade security and fraud prevention."
       />
 
-      {/* WRAPPER */}
-      <div className="relative min-h-screen w-full text-gray-900 dark:text-white bg-white dark:bg-black">
+      <main className="relative min-h-screen text-gray-900 dark:text-white">
+        <Background />
 
-        {/* BACKGROUND */}
-        <div className="absolute inset-0 -z-10">
-          <Background />
-        </div>
+        <section className="relative z-10 max-w-6xl mx-auto px-4 py-20">
 
-        {/* HERO */}
-        <Reveal>
-          <section className="relative z-10 max-w-5xl mx-auto px-6 py-24 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Trust & Safety
-            </h1>
+          {/* HERO */}
+          <Reveal>
+            <div className="text-center mb-20">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">
+                Trust & Safety
+              </h1>
 
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-10">
-              Security is at the core of everything we build. Your data is protected
-              by enterprise-grade systems and real-time monitoring.
-            </p>
+              <p className="text-lg text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
+                Security is at the core of everything we build. Your data is protected
+                by enterprise-grade systems and real-time monitoring.
+              </p>
 
-            <PrimaryCTA href="/signup">
-              Start Earning Now
-            </PrimaryCTA>
-          </section>
-        </Reveal>
+              <PrimaryCTA href="/signup">
+                Start Earning Now
+              </PrimaryCTA>
+            </div>
+          </Reveal>
 
-        {/* STATS */}
-        <section className="py-20 px-6">
-          <div className="max-w-6xl mx-auto text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold">
-              Our Performance Metrics
-            </h2>
-          </div>
-
-          <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
+          {/* STATS */}
+          <div className="grid md:grid-cols-3 gap-6 mb-20">
             {stats.map((stat) => {
               const { count, ref } = useCountUp(stat.number);
 
               return (
                 <motion.div
                   key={stat.label}
-                  className="p-8 rounded-3xl bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 shadow-xl text-center"
-                  whileHover={{ scale: 1.03 }}
+                  ref={ref}
+                  whileHover={{ y: -4 }}
+                  className="
+                    bg-white 
+                    dark:bg-[#0a0d16] 
+                    rounded-2xl 
+                    p-6 
+                    border 
+                    border-gray-200 
+                    dark:border-gray-800 
+                    shadow-md
+                    text-center
+                  "
                 >
-                  <h2
-                    ref={ref}
-                    className="text-4xl font-extrabold bg-gradient-to-r from-green-600 to-yellow-500 bg-clip-text text-transparent"
-                  >
+                  <h2 className="text-4xl font-extrabold gradient-text">
                     {count.toLocaleString()}
                     {stat.label.includes("%") && "%"}
                   </h2>
-
-                  <p className="mt-3 text-gray-600 dark:text-gray-400">
+                  <p className="text-gray-600 dark:text-gray-300 mt-2">
                     {stat.label}
                   </p>
                 </motion.div>
               );
             })}
           </div>
-        </section>
 
-        {/* SECURITY FEATURES */}
-        <section className="py-24 px-6 bg-gray-50 dark:bg-zinc-900">
-          <div className="max-w-6xl mx-auto text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          {/* SECURITY FEATURES */}
+          <div className="mb-24">
+            <h2 className="text-3xl font-bold text-center mb-10">
               Our Security Framework
             </h2>
-            <p className="text-gray-600 dark:text-gray-400">
-              Multi-layered defenses built for maximum protection.
+
+            <div className="grid md:grid-cols-3 gap-6">
+              {securityFeatures.map((feature) => (
+                <Reveal key={feature.title}>
+                  <motion.div
+                    whileHover={{ y: -4 }}
+                    className="
+                      bg-white 
+                      dark:bg-[#0a0d16] 
+                      rounded-2xl 
+                      p-6 
+                      border 
+                      border-gray-200 
+                      dark:border-gray-800 
+                      shadow-md
+                      text-center
+                    "
+                  >
+                    <div className="mb-4 flex justify-center">
+                      {feature.icon}
+                    </div>
+                    <h3 className="text-xl font-semibold mb-2">
+                      {feature.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm">
+                      {feature.desc}
+                    </p>
+                  </motion.div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+
+          {/* FAQ */}
+          <div className="mb-24">
+            <Reveal>
+              <h2 className="text-3xl font-bold text-center mb-6">
+                Frequently Asked Questions
+              </h2>
+            </Reveal>
+
+            <FAQ faqs={faqs} />
+          </div>
+
+          {/* FINAL CTA */}
+          <div className="text-center">
+            <Reveal>
+              <h2 className="text-3xl font-bold mb-6">
+                Ready to Take Action?
+              </h2>
+            </Reveal>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={animateCTA ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6 }}
+            >
+              <PrimaryCTA href="/signup">
+                Start Earning in 60 Seconds
+              </PrimaryCTA>
+            </motion.div>
+
+            <p className="mt-4 text-gray-600 dark:text-gray-300">
+              Join our community and start earning daily rewards.
             </p>
           </div>
 
-          <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-10">
-            {securityFeatures.map((feature) => (
-              <Reveal key={feature.title}>
-                <motion.div
-                  className="p-8 rounded-3xl bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 shadow-lg"
-                  whileHover={{ y: -4 }}
-                >
-                  <div className="flex flex-col items-center text-center">
-                    <div className="mb-5 p-4 rounded-2xl bg-green-50 dark:bg-zinc-700">
-                      {feature.icon}
-                    </div>
-                    <h3 className="text-xl font-semibold mb-3">
-                      {feature.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                      {feature.desc}
-                    </p>
-                  </div>
-                </motion.div>
-              </Reveal>
-            ))}
-          </div>
         </section>
-
-        {/* FAQ */}
-        <section className="max-w-4xl mx-auto px-6 py-20 text-center">
-          <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold mb-12">
-              Frequently Asked Questions
-            </h2>
-          </Reveal>
-
-          <FAQ faqs={faqs} />
-        </section>
-
-        {/* FINAL CTA */}
-        <section className="text-center py-28 bg-white dark:bg-black">
-          <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">
-              Ready to Take Action?
-            </h2>
-          </Reveal>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={animateCTA ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-          >
-            <PrimaryCTA href="/signup">
-              Start Earning in 60 Seconds
-            </PrimaryCTA>
-          </motion.div>
-
-          <p className="mt-6 text-gray-600 dark:text-gray-300 text-lg max-w-md mx-auto">
-            Join our community and start earning daily rewards.
-          </p>
-        </section>
-
-      </div>
+      </main>
     </>
   );
 }
