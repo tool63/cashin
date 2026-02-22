@@ -1,16 +1,20 @@
 "use client";
 
-import Link from "next/link";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
-  ArrowRight,
-  ShieldCheck,
-  Lock,
+  Wallet,
+  CreditCard,
+  Gift,
+  Smartphone,
   Globe,
+  ShieldCheck,
   Clock,
 } from "lucide-react";
 import Meta from "@/components/seo/SeoEngine";
-import { useState } from "react";
+import Background from "@/components/Background";
+import PrimaryCTA from "@/components/cta/PrimaryCTA";
+import Reveal from "@/components/animations/Reveal";
 
 export default function WithdrawalsPage() {
   const [faqSearch, setFaqSearch] = useState("");
@@ -39,7 +43,7 @@ export default function WithdrawalsPage() {
 
   const securityFeatures = [
     {
-      icon: Lock,
+      icon: LockIcon,
       title: "Encrypted Transactions",
       desc: "All withdrawals are protected with advanced encryption.",
     },
@@ -61,14 +65,46 @@ export default function WithdrawalsPage() {
   ];
 
   const paymentMethods = [
-    { title: "PayPal", subtitle: "Instant payout", icon: "🪙" },
-    { title: "Tether (USDT)", subtitle: "Instant payout", icon: "₿" },
-    { title: "Bitcoin", subtitle: "Instant payout", icon: "₿" },
-    { title: "Gift Cards", subtitle: "Instant payout", icon: "🎁" },
-    { title: "Litecoin", subtitle: "Instant payout", icon: "Ł" },
-    { title: "Ethereum", subtitle: "Instant payout", icon: "Ξ" },
-    { title: "Dogecoin", subtitle: "Instant payout", icon: "Ð" },
-    { title: "Binance Coin (BNB)", subtitle: "Instant payout", icon: "🟡" },
+    {
+      title: "PayPal",
+      subtitle: "Instant payout",
+      icon: "🪙",
+    },
+    {
+      title: "Tether (USDT)",
+      subtitle: "Instant payout",
+      icon: "₿",
+    },
+    {
+      title: "Bitcoin",
+      subtitle: "Instant payout",
+      icon: "₿",
+    },
+    {
+      title: "Gift Cards",
+      subtitle: "Instant payout",
+      icon: "🎁",
+    },
+    {
+      title: "Litecoin",
+      subtitle: "Instant payout",
+      icon: "Ł",
+    },
+    {
+      title: "Ethereum",
+      subtitle: "Instant payout",
+      icon: "Ξ",
+    },
+    {
+      title: "Dogecoin",
+      subtitle: "Instant payout",
+      icon: "Ð",
+    },
+    {
+      title: "Binance Coin (BNB)",
+      subtitle: "Instant payout",
+      icon: "🟡",
+    },
   ];
 
   return (
@@ -78,102 +114,92 @@ export default function WithdrawalsPage() {
         description="Withdraw your Cashog earnings instantly via PayPal, crypto, or gift cards. Secure and fast worldwide payouts."
       />
 
-      <main className="transition-colors duration-300 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white min-h-screen">
+      <main className="relative min-h-screen text-gray-900 dark:text-white">
+        <Background />
 
-        {/* ================= HERO SECTION ================= */}
-        <section className="relative py-24 px-4 text-center bg-white dark:bg-[#070A14] rounded-b-[50px] shadow-xl transition-colors duration-300 overflow-hidden">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto"
-          >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
-              Fast & Secure Withdrawals
-            </h1>
+        {/* ================= HERO ================= */}
+        <section className="relative z-10 py-24 px-4 text-center">
+          <div className="max-w-4xl mx-auto">
+            <Reveal>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
+                Fast & Secure Withdrawals
+              </h1>
+            </Reveal>
 
-            <p className="text-lg sm:text-xl md:text-2xl mb-8 max-w-2xl mx-auto leading-relaxed text-gray-600 dark:text-gray-300">
-              Cash out your earnings instantly via trusted payment methods. Safe, fast, and globally available.
-            </p>
+            <Reveal>
+              <p className="text-lg sm:text-xl md:text-2xl mb-8 max-w-2xl mx-auto leading-relaxed text-gray-600 dark:text-gray-300">
+                Cash out your earnings instantly via trusted payment methods. Safe, fast, and globally available.
+              </p>
+            </Reveal>
 
-            {/* HERO CTA */}
-            <div className="cta-observer inline-block">
-              <Link href="/signup">
-                <motion.span
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-14 py-5 rounded-3xl font-bold shadow-xl text-lg md:text-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl"
-                >
-                  Start Earning Now <ArrowRight />
-                </motion.span>
-              </Link>
-            </div>
-          </motion.div>
-
-          {/* Decorative Circles */}
-          <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-blob"></div>
-          <div className="absolute -top-20 -right-20 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+            <PrimaryCTA href="/signup">
+              Start Earning Now
+            </PrimaryCTA>
+          </div>
         </section>
 
         {/* ================= PAYMENT METHODS ================= */}
         <section className="max-w-7xl mx-auto px-4 py-20">
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
-            Supported Payment Methods
-          </h2>
+          <Reveal>
+            <h2 className="text-4xl sm:text-5xl font-extrabold text-center mb-12 gradient-text">
+              Supported Payment Methods
+            </h2>
+          </Reveal>
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {paymentMethods.map((method, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 60 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="bg-gray-100 dark:bg-[#1A1F2B] rounded-3xl p-6 flex flex-col items-center text-center shadow-lg hover:shadow-2xl transition-all duration-300"
-              >
-                <div className="text-5xl mb-4">{method.icon}</div>
-                <h3 className="text-xl font-semibold mb-1">{method.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300">{method.subtitle}</p>
-              </motion.div>
+              <Reveal key={i}>
+                <motion.div
+                  whileHover={{ y: -6 }}
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow"
+                >
+                  <div className="text-5xl mb-4">{method.icon}</div>
+                  <h3 className="text-xl font-semibold mb-1">{method.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    {method.subtitle}
+                  </p>
+                </motion.div>
+              </Reveal>
             ))}
           </div>
         </section>
 
-        {/* ================= TRUSTED / SECURITY SECTION NAME ================= */}
-        <section className="text-center py-8">
-          <h2 className="text-3xl sm:text-4xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
-            Trusted & Secure Payments
-          </h2>
-        </section>
-
         {/* ================= SECURITY FEATURES ================= */}
-        <section className="max-w-6xl mx-auto px-4 py-20 grid gap-8 md:grid-cols-2 lg:grid-cols-4 text-center">
-          {securityFeatures.map((feature, i) => {
-            const Icon = feature.icon;
-            return (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 60 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: i * 0.2 }}
-                className="bg-gray-50 dark:bg-[#111827] rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300"
-              >
-                <div className="flex justify-center mb-4 text-green-400">
-                  <Icon size={36} />
-                </div>
-                <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300">{feature.desc}</p>
-              </motion.div>
-            );
-          })}
+        <section className="max-w-6xl mx-auto px-4 py-20">
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+              Why Cashog Withdrawals Are Secure
+            </h2>
+          </Reveal>
+
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            {securityFeatures.map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <Reveal key={i}>
+                  <motion.div
+                    whileHover={{ y: -4 }}
+                    className="bg-gray-50 dark:bg-[#111827] rounded-xl p-6 text-center shadow hover:shadow-lg transition-shadow duration-300"
+                  >
+                    <div className="flex justify-center mb-4 text-green-400">
+                      <Icon size={36} />
+                    </div>
+                    <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-300">{item.desc}</p>
+                  </motion.div>
+                </Reveal>
+              );
+            })}
+          </div>
         </section>
 
-        {/* ================= FAQ SECTION ================= */}
+        {/* ================= FAQ ================= */}
         <section className="max-w-4xl mx-auto px-4 py-20">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Frequently Asked Questions
-          </h2>
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+              Frequently Asked Questions
+            </h2>
+          </Reveal>
 
           <div className="mb-8 flex justify-center">
             <input
@@ -195,36 +221,33 @@ export default function WithdrawalsPage() {
                   key={i}
                   className="bg-gray-100 dark:bg-[#1A1F2B] rounded-2xl p-4 cursor-pointer shadow hover:shadow-lg transition-all duration-300"
                 >
-                  <summary className="font-semibold text-lg">{faq.question}</summary>
-                  <p className="mt-2 text-gray-600 dark:text-gray-300">{faq.answer}</p>
+                  <summary className="font-semibold text-lg">
+                    {faq.question}
+                  </summary>
+                  <p className="mt-2 text-gray-600 dark:text-gray-300">
+                    {faq.answer}
+                  </p>
                 </details>
               ))}
           </div>
         </section>
 
         {/* ================= FINAL CTA ================= */}
-        <section className="text-center py-28 bg-white dark:bg-[#070A14] w-full transition-colors duration-300">
-          <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
-            Ready to Withdraw Your Earnings?
-          </h2>
+        <section className="text-center py-28 bg-white dark:bg-[#070A14] w-full">
+          <Reveal>
+            <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 gradient-text">
+              Ready to Withdraw Your Earnings?
+            </h2>
+          </Reveal>
 
-          <div className="cta-observer inline-block">
-            <Link href="/signup">
-              <motion.span
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-3xl font-bold shadow-xl text-xl md:text-2xl transition-all duration-300 hover:scale-105 hover:shadow-2xl"
-              >
-                Create Free Account <ArrowRight />
-              </motion.span>
-            </Link>
-          </div>
+          <PrimaryCTA href="/signup">
+            Create Free Account
+          </PrimaryCTA>
 
           <p className="mt-6 text-gray-900 dark:text-gray-300 text-lg max-w-md mx-auto">
             Join Cashog today and start withdrawing real money safely.
           </p>
         </section>
-
       </main>
     </>
   );
