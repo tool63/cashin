@@ -126,7 +126,7 @@ export default function SurveysPage() {
         </section>
 
         {/* SURVEYS GRID */}
-        <section className="py-20 px-4 max-w-6xl mx-auto">
+        <section className="py-20 px-4 max-w-7xl mx-auto">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
               Featured Surveys
@@ -137,8 +137,17 @@ export default function SurveysPage() {
             {surveys.map((survey) => (
               <motion.div
                 key={survey.id}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 border border-gray-200 dark:border-gray-800 shadow-md"
                 whileHover={{ y: -4 }}
+                className="
+                  bg-white
+                  dark:bg-[#0a0d16]
+                  rounded-2xl
+                  p-6
+                  border
+                  border-gray-200
+                  dark:border-gray-800
+                  shadow-md
+                "
               >
                 <div className="flex items-center gap-2 mb-3">
                   <ClipboardList className="text-green-400 w-6 h-6" />
