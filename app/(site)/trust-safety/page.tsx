@@ -8,7 +8,6 @@ import {
   AlertTriangle,
   Fingerprint,
   Server,
-  User,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import SeoEngine from "@/components/seo/SeoEngine";
@@ -120,10 +119,10 @@ export default function TrustSafetyPage() {
         description="Cashog protects user data with enterprise-grade security and fraud prevention."
       />
 
-      {/* WRAPPER FIX: ensure content visible */}
+      {/* WRAPPER */}
       <div className="relative min-h-screen w-full text-gray-900 dark:text-white bg-white dark:bg-black">
 
-        {/* BACKGROUND (low z-index so content sits above) */}
+        {/* BACKGROUND */}
         <div className="absolute inset-0 -z-10">
           <Background />
         </div>
