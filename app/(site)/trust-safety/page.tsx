@@ -135,7 +135,7 @@ export default function TrustSafetyPage() {
               are protected by enterprise-grade systems.
             </p>
 
-            <PrimaryCTA href="/signup" icon={<User size={20} />}>
+            <PrimaryCTA href="/signup">
               Start Earning Now
             </PrimaryCTA>
           </section>
@@ -235,7 +235,7 @@ export default function TrustSafetyPage() {
             animate={animateCTA ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <PrimaryCTA href="/signup" icon={<User size={20} />}>
+            <PrimaryCTA href="/signup">
               Start Earning in 60 Seconds
             </PrimaryCTA>
           </motion.div>
