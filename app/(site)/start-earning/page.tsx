@@ -17,97 +17,95 @@ import Background from "@/components/Background";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
 import TypingText from "@/components/typing/TypingText";
+import FAQ from "@/components/faq/FAQ";
+
+/* ================= WAYS TO EARN ================= */
+const waysToEarn = [
+  {
+    icon: <Gift size={40} className="text-yellow-400" />,
+    title: "Complete Offers",
+    desc: "Install apps, sign up, or try new services and get rewarded instantly.",
+  },
+  {
+    icon: <Gamepad2 size={40} className="text-green-400" />,
+    title: "Play Games",
+    desc: "Earn money by reaching levels or completing missions in games.",
+  },
+  {
+    icon: <Smartphone size={40} className="text-blue-400" />,
+    title: "Take Surveys",
+    desc: "Share your opinion and earn cash from trusted survey partners.",
+  },
+];
+
+/* ================= FEATURES ================= */
+const features = [
+  {
+    icon: <DollarSign size={36} className="text-green-400" />,
+    title: "Fast Payouts",
+    description: "Get your money instantly via PayPal or gift cards.",
+  },
+  {
+    icon: <ShieldCheck size={36} className="text-blue-400" />,
+    title: "Trusted & Secure",
+    description: "Millions of users trust our platform daily.",
+  },
+  {
+    icon: <Zap size={36} className="text-yellow-400" />,
+    title: "High-Paying Offers",
+    description: "Access top offers that maximize your earnings.",
+  },
+  {
+    icon: <Smartphone size={36} className="text-green-400" />,
+    title: "Mobile-Friendly",
+    description: "Earn on the go with our fully responsive platform.",
+  },
+  {
+    icon: <Star size={36} className="text-purple-400" />,
+    title: "Trusted Payments",
+    description: "Secure and reliable payouts every time.",
+  },
+  {
+    icon: <Gift size={36} className="text-blue-400" />,
+    title: "Global Access",
+    description: "Join from anywhere in the world and start earning.",
+  },
+  {
+    icon: <Star size={36} className="text-green-400" />,
+    title: "24/7 Support",
+    description: "Our support team is here to help whenever you need.",
+  },
+];
+
+/* ================= FAQ ================= */
+const faqs = [
+  {
+    q: "How can I earn money online with Cashog?",
+    a: "You can earn money by completing offers, playing games, taking surveys, and testing apps. Once you earn enough points, you can withdraw your rewards instantly.",
+  },
+  {
+    q: "Is Cashog legit and safe to use worldwide?",
+    a: "Yes, Cashog is a secure and trusted rewards platform available globally. All offers and surveys are verified, and payments are processed safely.",
+  },
+  {
+    q: "How fast can I withdraw my earnings?",
+    a: "Most withdrawals are processed instantly or within a few hours after reaching the minimum payout threshold.",
+  },
+  {
+    q: "Do I need to pay to join Cashog?",
+    a: "No, Cashog is completely free to join. You can create an account and start earning without paying anything.",
+  },
+  {
+    q: "Can I earn money from my mobile phone?",
+    a: "Yes! Cashog is fully mobile-friendly. You can complete offers, play games, and take surveys directly from your smartphone.",
+  },
+  {
+    q: "What payment methods are available?",
+    a: "Cashog supports PayPal, gift cards, and other global payout methods depending on your region.",
+  },
+];
 
 export default function StartEarningPage() {
-  const waysToEarn = [
-    {
-      icon: <Gift size={40} className="text-yellow-400" />,
-      title: "Complete Offers",
-      desc: "Install apps, sign up, or try new services and get rewarded instantly.",
-    },
-    {
-      icon: <Gamepad2 size={40} className="text-green-400" />,
-      title: "Play Games",
-      desc: "Earn money by reaching levels or completing missions in games.",
-    },
-    {
-      icon: <Smartphone size={40} className="text-blue-400" />,
-      title: "Take Surveys",
-      desc: "Share your opinion and earn cash from trusted survey partners.",
-    },
-  ];
-
-  const features = [
-    {
-      icon: <DollarSign size={36} className="text-green-400" />,
-      title: "Fast Payouts",
-      description: "Get your money instantly via PayPal or gift cards.",
-    },
-    {
-      icon: <ShieldCheck size={36} className="text-blue-400" />,
-      title: "Trusted & Secure",
-      description: "Millions of users trust our platform daily.",
-    },
-    {
-      icon: <Zap size={36} className="text-yellow-400" />,
-      title: "High-Paying Offers",
-      description: "Access top offers that maximize your earnings.",
-    },
-    {
-      icon: <Smartphone size={36} className="text-green-400" />,
-      title: "Mobile-Friendly",
-      description: "Earn on the go with our fully responsive platform.",
-    },
-    {
-      icon: <Star size={36} className="text-purple-400" />,
-      title: "Trusted Payments",
-      description: "Secure and reliable payouts every time.",
-    },
-    {
-      icon: <Gift size={36} className="text-blue-400" />,
-      title: "Global Access",
-      description: "Join from anywhere in the world and start earning.",
-    },
-    {
-      icon: <Star size={36} className="text-green-400" />,
-      title: "24/7 Support",
-      description: "Our support team is here to help whenever you need.",
-    },
-  ];
-
-  const faqs = [
-    {
-      question: "How can I earn money online with Cashog?",
-      answer:
-        "You can earn money by completing offers, playing games, taking surveys, and testing apps. Once you earn enough points, you can withdraw your rewards instantly.",
-    },
-    {
-      question: "Is Cashog legit and safe to use worldwide?",
-      answer:
-        "Yes, Cashog is a secure and trusted rewards platform available globally. All offers and surveys are verified, and payments are processed safely.",
-    },
-    {
-      question: "How fast can I withdraw my earnings?",
-      answer:
-        "Most withdrawals are processed instantly or within a few hours after reaching the minimum payout threshold.",
-    },
-    {
-      question: "Do I need to pay to join Cashog?",
-      answer:
-        "No, Cashog is completely free to join. You can create an account and start earning without paying anything.",
-    },
-    {
-      question: "Can I earn money from my mobile phone?",
-      answer:
-        "Yes! Cashog is fully mobile-friendly. You can complete offers, play games, and take surveys directly from your smartphone.",
-    },
-    {
-      question: "What payment methods are available?",
-      answer:
-        "Cashog supports PayPal, gift cards, and other global payout methods depending on your region.",
-    },
-  ];
-
   return (
     <>
       <Meta
@@ -156,9 +154,7 @@ export default function StartEarningPage() {
                 whileHover={{ y: -6 }}
                 className="bg-white dark:bg-[#0a0d16] rounded-2xl p-8 text-center border border-gray-200 dark:border-gray-800 shadow"
               >
-                <div className="mb-4 flex justify-center">
-                  {item.icon}
-                </div>
+                <div className="mb-4 flex justify-center">{item.icon}</div>
                 <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
                 <p className="text-gray-600 dark:text-gray-300 text-sm">
                   {item.desc}
@@ -183,9 +179,7 @@ export default function StartEarningPage() {
                   whileHover={{ y: -4 }}
                   className="bg-gray-50 dark:bg-[#111827] rounded-xl p-6 text-center shadow hover:shadow-lg transition-shadow duration-300"
                 >
-                  <div className="flex justify-center mb-4">
-                    {item.icon}
-                  </div>
+                  <div className="flex justify-center mb-4">{item.icon}</div>
                   <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
                   <p className="text-gray-600 dark:text-gray-300 text-sm">
                     {item.description}
@@ -196,33 +190,23 @@ export default function StartEarningPage() {
           </div>
         </section>
 
-        {/* ================= FAQ ================= */}
+        {/* ================= FAQ (REUSABLE COMPONENT) ================= */}
         <section className="relative z-10 max-w-4xl mx-auto px-4 py-16">
           <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               Frequently Asked Questions
             </h2>
+
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+              Everything you need to know about earning
+            </p>
           </Reveal>
 
-          <div className="space-y-4">
-            {faqs.map((faq, i) => (
-              <Reveal key={i}>
-                <details className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-4 cursor-pointer">
-                  <summary className="font-semibold text-lg">
-                    {faq.question}
-                  </summary>
-                  <p className="mt-2 text-gray-600 dark:text-gray-300 text-sm">
-                    {faq.answer}
-                  </p>
-                </details>
-              </Reveal>
-            ))}
-          </div>
+          <FAQ faqs={faqs} />
         </section>
 
-        {/* ================= FINAL CTA (MATCHED BACKGROUND) ================= */}
+        {/* ================= FINAL CTA ================= */}
         <section className="relative z-10 text-center py-28 w-full">
-
           <Reveal>
             <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 gradient-text">
               Ready to Start Earning Today?
@@ -237,7 +221,6 @@ export default function StartEarningPage() {
             Join Cashog today and start turning your spare time into daily earnings.
           </p>
         </section>
-
       </main>
     </>
   );
