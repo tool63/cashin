@@ -1,13 +1,7 @@
 "use client";
 
 import React from "react";
-import {
-  ArrowRight,
-  User,
-  CreditCard,
-  Gift,
-  CheckCircle,
-} from "lucide-react";
+import { ArrowRight, User, CreditCard, Gift, CheckCircle } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Meta from "@/components/seo/SeoEngine";
@@ -83,28 +77,28 @@ const faqs = [
     a: "You can withdraw via PayPal, gift cards, or mobile top-ups once you reach the minimum threshold.",
   },
   {
-    q: "Are surveys safe?",
-    a: "Yes, all tasks and surveys are secure and verified for safety.",
+    q: "Are tasks safe?",
+    a: "Yes, all tasks and offers are verified for security and reliability.",
   },
   {
     q: "Can I join from any country?",
     a: "Yes! Our platform supports users globally.",
   },
   {
-    q: "Is there a minimum age to join?",
+    q: "Is there a minimum age?",
     a: "You must be at least 13 years old to create an account.",
   },
   {
-    q: "How long does it take to get paid?",
-    a: "Most withdrawals are processed instantly or within a few hours.",
+    q: "How fast are withdrawals?",
+    a: "Most payouts are processed instantly or within a few hours.",
   },
   {
-    q: "Do I need to pay anything to join?",
-    a: "No, signing up is completely free.",
+    q: "Is it free to join?",
+    a: "Yes, signing up and earning is completely free.",
   },
   {
-    q: "Can I complete offers on mobile?",
-    a: "Yes! Our platform is fully mobile-friendly, so you can earn anywhere.",
+    q: "Can I earn on mobile?",
+    a: "Absolutely! Our platform is fully optimized for mobile users.",
   },
 ];
 
@@ -116,113 +110,120 @@ export default function HowItWorks() {
         description="Learn how to earn real money online by completing tasks, surveys, and high-paying offers on Cashog."
       />
 
-      <main className="transition-colors duration-300 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white min-h-screen">
+      <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
 
-        {/* ================= HERO ================= */}
-        <section className="py-24 px-4 text-center">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-              Earn Real Money Online
-            </h1>
+        <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
 
-            <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
-              <TypingText />
-            </div>
-
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-8 text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed">
-              Follow these simple steps and start earning instantly from anywhere.
-            </p>
-
-            <PrimaryCTA href="/signup">
-              Start Earning Now <ArrowRight size={20} />
-            </PrimaryCTA>
-          </div>
-        </section>
-
-        {/* ================= STEPS ================= */}
-        <section className="max-w-7xl mx-auto px-4 py-20 grid gap-10 md:grid-cols-2 lg:grid-cols-4 text-center">
-          {steps.map((step, i) => (
-            <Reveal key={i}>
-              <motion.div
-                whileHover={{ y: -6 }}
-                className="bg-gray-100 dark:bg-[#141A27] rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-300"
-              >
-                <div className="mb-4 flex justify-center">{step.icon}</div>
-                <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                  {step.description}
-                </p>
-              </motion.div>
-            </Reveal>
-          ))}
-        </section>
-
-        {/* ================= FEATURES ================= */}
-        <section className="max-w-7xl mx-auto px-4 py-20 text-center">
+          {/* HERO */}
           <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <div className="text-center mb-20">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
+                Earn Real Money Online
+              </h1>
+
+              <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 gradient-text">
+                <TypingText />
+              </div>
+
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed mb-10">
+                Follow these simple steps and start earning instantly from anywhere.
+              </p>
+
+              <PrimaryCTA href="/signup">
+                Start Earning Now <ArrowRight size={20} />
+              </PrimaryCTA>
+            </div>
+          </Reveal>
+
+          {/* STEPS */}
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+              How It <span className="gradient-text">Works</span>
+            </h2>
+          </Reveal>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-24">
+            {steps.map((step, i) => (
+              <Reveal key={i}>
+                <motion.div
+                  whileHover={{ y: -6 }}
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow"
+                >
+                  <div className="mb-4 flex justify-center">{step.icon}</div>
+                  <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">
+                    {step.description}
+                  </p>
+                </motion.div>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* FEATURES */}
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
               Why Choose Cashog
             </h2>
-            <p className="text-gray-600 dark:text-gray-400 mb-14 max-w-2xl mx-auto">
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
               Earn rewards safely with fast payouts and premium opportunities.
             </p>
           </Reveal>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-5 justify-center">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5 mb-24">
             {features.map((feature, i) => (
               <Reveal key={i}>
                 <motion.div
                   whileHover={{ y: -4 }}
-                  className="bg-gray-50 dark:bg-[#111827] rounded-xl p-6 text-center shadow hover:shadow-lg transition-all duration-300 w-full max-w-xs mx-auto"
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow"
                 >
-                  <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm">
+                  <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">
                     {feature.description}
                   </p>
                 </motion.div>
               </Reveal>
             ))}
           </div>
-        </section>
 
-        {/* ================= FAQ ================= */}
-        <section className="max-w-4xl mx-auto px-4 py-20 text-center">
+          {/* FAQ */}
           <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
               Frequently Asked Questions
             </h2>
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+              Everything you need to know about earning
+            </p>
           </Reveal>
 
-          <div className="space-y-4">
+          <div className="space-y-4 mb-24">
             {faqs.map((faq, i) => (
               <Reveal key={i}>
-                <details className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-4 cursor-pointer group">
-                  <summary className="font-semibold text-lg">{faq.q}</summary>
-                  <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                <details className="bg-white dark:bg-[#0a0d16] rounded-xl border border-gray-200 dark:border-gray-800 p-4">
+                  <summary className="font-semibold text-lg cursor-pointer">
+                    {faq.q}
+                  </summary>
+                  <p className="mt-3 text-sm text-gray-600 dark:text-gray-300">
                     {faq.a}
                   </p>
                 </details>
               </Reveal>
             ))}
           </div>
-        </section>
 
-        {/* ================= FINAL CTA ================= */}
-        <section className="text-center py-28 bg-white dark:bg-[#070A14] w-full transition-colors duration-300">
+          {/* FINAL CTA */}
           <Reveal>
-            <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
-              Ready to Start Earning Today?
-            </h2>
+            <div className="text-center">
+              <h2 className="text-4xl sm:text-5xl font-extrabold mb-6 gradient-text">
+                Ready to Start Earning?
+              </h2>
+
+              <PrimaryCTA href="/signup">
+                Join Now <ArrowRight size={20} />
+              </PrimaryCTA>
+            </div>
           </Reveal>
 
-          <PrimaryCTA href="/signup">
-            Start Earning in 60 Seconds <ArrowRight size={20} />
-          </PrimaryCTA>
-
-          <p className="mt-6 text-gray-900 dark:text-gray-300 text-lg max-w-md mx-auto transition-colors duration-300">
-            Become part of our community and start earning daily rewards instantly.
-          </p>
         </section>
       </main>
     </>
