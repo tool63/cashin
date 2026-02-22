@@ -5,14 +5,8 @@ import {
   ArrowRight,
   User,
   CreditCard,
-  Target,
-  Globe,
-  BarChart,
-  DollarSign,
-  ShieldCheck,
-  Headphones,
+  Gift,
   CheckCircle,
-  Users,
 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -22,236 +16,213 @@ import Background from "@/components/Background";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
 
-/* ================= DATA ================= */
-
+/* ================= STEPS ================= */
 const steps = [
   {
-    icon: <User size={30} className="text-yellow-400" />,
-    title: "Sign Up as Advertiser",
+    icon: <User size={32} className="text-yellow-400" />,
+    title: "Sign Up for Free",
     description:
-      "Create an advertiser account and access our platform to promote your brand or products.",
+      "Create your account in minutes and join our growing community of earners.",
   },
   {
-    icon: <CreditCard size={30} className="text-green-400" />,
-    title: "Set Up Campaigns",
+    icon: <CreditCard size={32} className="text-green-400" />,
+    title: "Complete Tasks & Offers",
     description:
-      "Design campaigns, choose target audience, and set your budget easily.",
+      "Play games, watch videos, install apps, or complete surveys to earn points.",
   },
   {
-    icon: <Target size={30} className="text-yellow-400" />,
-    title: "Reach Millions",
+    icon: <Gift size={32} className="text-yellow-400" />,
+    title: "Earn Rewards",
     description:
-      "Your ads are displayed to millions of active users completing offers.",
+      "Points can be redeemed for real cash via PayPal, gift cards, or mobile top-ups.",
   },
   {
-    icon: <BarChart size={30} className="text-green-400" />,
-    title: "Monitor & Optimize",
+    icon: <CheckCircle size={32} className="text-green-400" />,
+    title: "Withdraw Easily",
     description:
-      "Track clicks, conversions, and ROI in real-time with our dashboard.",
+      "Instant payouts once you reach the minimum withdrawal threshold.",
   },
 ];
 
+/* ================= FEATURES ================= */
 const features = [
   {
-    icon: <Target size={22} className="text-yellow-500" />,
-    title: "High Engagement",
-    description: "Reach an active audience ready to interact.",
+    title: "Fast Payouts",
+    description: "Get your money instantly via PayPal or gift cards.",
   },
   {
-    icon: <BarChart size={22} className="text-green-500" />,
-    title: "Real-Time Analytics",
-    description: "Monitor performance metrics instantly.",
+    title: "Trusted & Secure",
+    description: "Millions of users trust our platform daily.",
   },
   {
-    icon: <Globe size={22} className="text-yellow-500" />,
-    title: "Global Reach",
-    description: "Promote to users worldwide.",
+    title: "High-Paying Offers",
+    description: "Access top offers that maximize your earnings.",
   },
   {
-    icon: <DollarSign size={22} className="text-green-500" />,
-    title: "Flexible Budgets",
-    description: "Set daily or total campaign budgets easily.",
+    title: "Mobile-Friendly",
+    description: "Earn on the go with our fully responsive platform.",
   },
   {
-    icon: <ShieldCheck size={22} className="text-yellow-500" />,
-    title: "Trusted Platform",
-    description: "Advertise on a trusted platform.",
+    title: "Trusted Payments",
+    description: "Secure and reliable payouts every time.",
   },
   {
-    icon: <Headphones size={22} className="text-green-500" />,
-    title: "Dedicated Support",
-    description: "24/7 campaign optimization support.",
+    title: "Global Access",
+    description: "Join from anywhere in the world and start earning.",
+  },
+  {
+    title: "24/7 Support",
+    description: "Our support team is here to help whenever you need.",
   },
 ];
 
-const stats = [
-  { value: "50M+", label: "Active Users", icon: <Users size={18} /> },
-  { value: "150+", label: "Countries", icon: <Globe size={18} /> },
-  { value: "2.5B+", label: "Impressions/mo", icon: <BarChart size={18} /> },
-  { value: "99.9%", label: "Uptime", icon: <CheckCircle size={18} /> },
-];
-
+/* ================= FAQ ================= */
 const faqs = [
   {
-    q: "How do I start advertising?",
-    a: "Sign up for a free advertiser account and create your first campaign instantly.",
+    q: "How do I cash out?",
+    a: "You can withdraw via PayPal, gift cards, or mobile top-ups once you reach the minimum threshold.",
   },
   {
-    q: "Can I target specific users?",
-    a: "Yes, you can target by demographics, location, and interests.",
+    q: "Are surveys safe?",
+    a: "Yes, all tasks and surveys are secure and verified for safety.",
   },
   {
-    q: "Is there a minimum budget?",
-    a: "Start with any budget that fits your goals.",
+    q: "Can I join from any country?",
+    a: "Yes! Our platform supports users globally.",
   },
   {
-    q: "How is performance tracked?",
-    a: "Real-time dashboards show clicks, conversions, and ROI.",
+    q: "Is there a minimum age to join?",
+    a: "You must be at least 13 years old to create an account.",
+  },
+  {
+    q: "How long does it take to get paid?",
+    a: "Most withdrawals are processed instantly or within a few hours.",
+  },
+  {
+    q: "Do I need to pay anything to join?",
+    a: "No, signing up is completely free.",
+  },
+  {
+    q: "Can I complete offers on mobile?",
+    a: "Yes! Our platform is fully mobile-friendly, so you can earn anywhere.",
   },
 ];
 
-/* ================= PAGE ================= */
-
-export default function AdvertisePage() {
+export default function HowItWorks() {
   return (
     <>
       <Meta
-        title="Advertise with Us"
-        description="Reach millions of active users with our advertising platform."
+        title="Cashog - How It Works"
+        description="Learn how to earn real money online by completing tasks, surveys, and high-paying offers on Cashog."
       />
 
-      <main className="relative min-h-screen text-gray-900 dark:text-white overflow-hidden">
+      <main className="transition-colors duration-300 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white min-h-screen">
         <Background />
 
-        <section className="relative isolate max-w-7xl mx-auto px-4 py-20">
+        {/* ================= HERO ================= */}
+        <section className="py-24 px-4 text-center">
+          <div className="max-w-3xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
+              Earn Real Money Online
+            </h1>
 
-          {/* HERO */}
-          <Reveal>
-            <div className="text-center mb-24">
-              <h1 className="text-5xl sm:text-6xl font-extrabold mb-6">
-                Advertise with <span className="gradient-text">Platform</span>
-              </h1>
-
-              <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-8 gradient-text">
-                <TypingText />
-              </div>
-
-              <p className="text-lg sm:text-xl md:text-2xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed">
-                Reach millions of active users and scale your business with
-                performance-driven advertising.
-              </p>
-
-              <PrimaryCTA href="/signup?type=advertiser">
-                Start Advertising <ArrowRight size={20} />
-              </PrimaryCTA>
-
-              {/* Stats */}
-              <div className="flex flex-wrap justify-center gap-4 mt-12">
-                {stats.map((stat, i) => (
-                  <div
-                    key={i}
-                    className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-full text-sm"
-                  >
-                    <span className="text-green-400">{stat.icon}</span>
-                    <span className="font-semibold">{stat.value}</span>
-                    <span className="text-gray-500 dark:text-gray-300">
-                      {stat.label}
-                    </span>
-                  </div>
-                ))}
-              </div>
+            <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
+              <TypingText />
             </div>
-          </Reveal>
 
-          {/* STEPS */}
-          <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-              How It <span className="gradient-text">Works</span>
-            </h2>
-          </Reveal>
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-8 text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed">
+              Follow these simple steps and start earning instantly from anywhere.
+            </p>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-24">
-            {steps.map((step, i) => (
-              <Reveal key={i}>
-                <motion.div
-                  whileHover={{ y: -6 }}
-                  className="bg-white dark:bg-[#0a0d16] dark:text-white rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800"
-                >
-                  <div className="mb-4 flex justify-center">{step.icon}</div>
-                  <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm">
-                    {step.description}
-                  </p>
-                </motion.div>
-              </Reveal>
-            ))}
+            <PrimaryCTA href="/signup">
+              Start Earning Now <ArrowRight size={20} />
+            </PrimaryCTA>
           </div>
+        </section>
 
-          {/* FEATURES */}
+        {/* ================= STEPS ================= */}
+        <section className="max-w-7xl mx-auto px-4 py-20 grid gap-10 md:grid-cols-2 lg:grid-cols-4 text-center">
+          {steps.map((step, i) => (
+            <Reveal key={i}>
+              <motion.div
+                whileHover={{ y: -6 }}
+                className="bg-gray-100 dark:bg-[#141A27] rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-300"
+              >
+                <div className="mb-4 flex justify-center">{step.icon}</div>
+                <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                  {step.description}
+                </p>
+              </motion.div>
+            </Reveal>
+          ))}
+        </section>
+
+        {/* ================= FEATURES ================= */}
+        <section className="max-w-7xl mx-auto px-4 py-20 text-center">
           <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-              Why Advertise
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Why Choose Cashog
             </h2>
-            <p className="text-center text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
-              Performance-driven advertising that connects brands with active users
+            <p className="text-gray-600 dark:text-gray-400 mb-14 max-w-2xl mx-auto">
+              Earn rewards safely with fast payouts and premium opportunities.
             </p>
           </Reveal>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-24">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-5 justify-center">
             {features.map((feature, i) => (
               <Reveal key={i}>
                 <motion.div
-                  whileHover={{ y: -6 }}
-                  className="bg-white dark:bg-[#0a0d16] dark:text-white rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800"
+                  whileHover={{ y: -4 }}
+                  className="bg-gray-50 dark:bg-[#111827] rounded-xl p-6 text-center shadow hover:shadow-lg transition-all duration-300 w-full max-w-xs mx-auto"
                 >
-                  <div className="mb-4 flex justify-center">{feature.icon}</div>
-                  <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm">
+                  <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">
                     {feature.description}
                   </p>
                 </motion.div>
               </Reveal>
             ))}
           </div>
+        </section>
 
-          {/* FAQ */}
+        {/* ================= FAQ ================= */}
+        <section className="max-w-4xl mx-auto px-4 py-20 text-center">
           <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12">
               Frequently Asked Questions
             </h2>
-            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-              Everything you need to know about advertising
-            </p>
           </Reveal>
 
-          <div className="space-y-4 mb-24">
+          <div className="space-y-4">
             {faqs.map((faq, i) => (
               <Reveal key={i}>
-                <details className="bg-white dark:bg-[#0a0d16] dark:text-white rounded-xl border border-gray-200 dark:border-gray-800 p-4">
-                  <summary className="font-semibold text-lg cursor-pointer dark:text-white">
-                    {faq.q}
-                  </summary>
-                  <p className="mt-3 text-sm text-gray-600 dark:text-gray-300">
+                <details className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-4 cursor-pointer group">
+                  <summary className="font-semibold text-lg">{faq.q}</summary>
+                  <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
                     {faq.a}
                   </p>
                 </details>
               </Reveal>
             ))}
           </div>
+        </section>
 
-          {/* FINAL CTA */}
+        {/* ================= FINAL CTA ================= */}
+        <section className="text-center py-28 bg-white dark:bg-[#070A14] w-full transition-colors duration-300">
           <Reveal>
-            <div className="text-center">
-              <h2 className="text-4xl sm:text-5xl font-extrabold mb-6 gradient-text">
-                Ready to Scale?
-              </h2>
-
-              <PrimaryCTA href="/signup?type=advertiser">
-                Launch Your Campaign <ArrowRight size={20} />
-              </PrimaryCTA>
-            </div>
+            <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
+              Ready to Start Earning Today?
+            </h2>
           </Reveal>
 
+          <PrimaryCTA href="/signup">
+            Start Earning in 60 Seconds <ArrowRight size={20} />
+          </PrimaryCTA>
+
+          <p className="mt-6 text-gray-900 dark:text-gray-300 text-lg max-w-md mx-auto transition-colors duration-300">
+            Become part of our community and start earning daily rewards instantly.
+          </p>
         </section>
       </main>
     </>
