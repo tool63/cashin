@@ -7,13 +7,13 @@
 ===================================================== */
 
 /* ----------------------
-   Default (Light Mode)
+   Light Mode
 ------------------------ */
 :root {
   /* Backgrounds */
   --bg-primary: #ffffff;
   --bg-secondary: #f9fafb;
-  --card-bg: #ffffff;
+  --card-bg: #ffffff; /* white cards */
 
   /* Text */
   --text-primary: #111827;
@@ -22,37 +22,38 @@
   /* Borders */
   --border-color: #e5e7eb;
 
-  /* Gradient Colors */
-  --gradient-from: rgba(250, 204, 21, 0.25);
+  /* Light Yellow-Green Gradient */
+  --gradient-from: rgba(250, 204, 21, 0.35);
   --gradient-via: rgba(34, 197, 94, 0.30);
-  --gradient-to: rgba(22, 163, 74, 0.25);
+  --gradient-to: rgba(22, 163, 74, 0.30);
 
-  /* Glow Colors */
+  /* Glow */
   --glow-green: rgba(34, 197, 94, 0.25);
   --glow-yellow: rgba(250, 204, 21, 0.25);
 }
 
 /* ----------------------
-   Dark Mode (FIXED)
+   Dark Mode
 ------------------------ */
 .dark {
-  --bg-primary: #0B0F1A;
-  --bg-secondary: #111827;
-  --card-bg: #1F2937;
+  /* Dark base */
+  --bg-primary: #05080f;
+  --bg-secondary: #0b1220;
+  --card-bg: #000000; /* black cards */
 
   --text-primary: #ffffff;
   --text-muted: #9CA3AF;
 
-  --border-color: #374151;
+  --border-color: #1f2937;
 
-  /* Softer gradient for dark */
-  --gradient-from: rgba(250, 204, 21, 0.12);
-  --gradient-via: rgba(34, 197, 94, 0.15);
-  --gradient-to: rgba(22, 163, 74, 0.12);
+  /* Deep Yellow-Green Gradient */
+  --gradient-from: rgba(234, 179, 8, 0.45);
+  --gradient-via: rgba(34, 197, 94, 0.40);
+  --gradient-to: rgba(21, 128, 61, 0.45);
 
-  /* Softer glow */
-  --glow-green: rgba(34, 197, 94, 0.15);
-  --glow-yellow: rgba(250, 204, 21, 0.15);
+  /* Stronger glow for dark */
+  --glow-green: rgba(34, 197, 94, 0.35);
+  --glow-yellow: rgba(234, 179, 8, 0.35);
 }
 
 /* =====================================================
@@ -92,8 +93,8 @@ body {
     var(--gradient-to)
   );
   background-size: 200% 200%;
-  animation: gradientShift 12s ease infinite;
-  opacity: 0.6;
+  animation: gradientShift 14s ease infinite;
+  opacity: 0.75;
   z-index: 0;
 }
 
@@ -110,8 +111,8 @@ body {
 .blob {
   position: absolute;
   border-radius: 9999px;
-  filter: blur(100px);
-  opacity: 0.8;
+  filter: blur(110px);
+  opacity: 0.9;
 }
 
 .blob-green {
