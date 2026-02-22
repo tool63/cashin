@@ -142,13 +142,13 @@ export default function StartEarningPage() {
             </Reveal>
 
             <PrimaryCTA href="/signup">
-              Start Earning Now
+              Start Earning Now <ArrowRight size={20} />
             </PrimaryCTA>
 
           </div>
         </section>
 
-        {/* ================= WAYS YOU CAN EARN (WITH ICONS ABOVE) ================= */}
+        {/* ================= WAYS YOU CAN EARN ================= */}
         <section className="relative z-10 max-w-7xl mx-auto px-4 py-16 grid gap-8 md:grid-cols-3">
           {waysToEarn.map((item, i) => (
             <Reveal key={i}>
@@ -156,7 +156,7 @@ export default function StartEarningPage() {
                 whileHover={{ y: -6 }}
                 className="bg-white dark:bg-[#0a0d16] rounded-2xl p-8 text-center border border-gray-200 dark:border-gray-800 shadow"
               >
-                <div className="mb-4 flex justify-center text-yellow-500">
+                <div className="mb-4 flex justify-center">
                   {item.icon}
                 </div>
                 <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
@@ -168,7 +168,7 @@ export default function StartEarningPage() {
           ))}
         </section>
 
-        {/* ================= WHY CHOOSE CASHOG (ICONS ABOVE EVERY CATEGORY) ================= */}
+        {/* ================= WHY CHOOSE CASHOG ================= */}
         <section className="relative z-10 max-w-7xl mx-auto px-4 py-16">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
@@ -183,7 +183,7 @@ export default function StartEarningPage() {
                   whileHover={{ y: -4 }}
                   className="bg-gray-50 dark:bg-[#111827] rounded-xl p-6 text-center shadow hover:shadow-lg transition-shadow duration-300"
                 >
-                  <div className="flex justify-center mb-4 text-yellow-500">
+                  <div className="flex justify-center mb-4">
                     {item.icon}
                   </div>
                   <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
@@ -220,8 +220,8 @@ export default function StartEarningPage() {
           </div>
         </section>
 
-        {/* ================= FINAL CTA ================= */}
-        <section className="relative z-10 text-center py-28 bg-white dark:bg-[#070A14] w-full transition-colors duration-300">
+        {/* ================= FINAL CTA (MATCHED BACKGROUND) ================= */}
+        <section className="relative z-10 text-center py-28 w-full">
 
           <Reveal>
             <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 gradient-text">
@@ -230,7 +230,7 @@ export default function StartEarningPage() {
           </Reveal>
 
           <PrimaryCTA href="/signup">
-            Create Free Account
+            Create Free Account <ArrowRight size={20} />
           </PrimaryCTA>
 
           <p className="mt-6 text-gray-900 dark:text-gray-300 text-lg max-w-md mx-auto">
