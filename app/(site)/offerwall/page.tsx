@@ -23,7 +23,7 @@ type Offer = {
   popularity: number;
 };
 
-/* ================= SAMPLE DATA ================= */
+/* ================= SAMPLE DATA (9 OFFERS) ================= */
 const offers: Offer[] = [
   { id: 1, title: "Install MegaApp", category: "App Install", reward: "$3", popularity: 90 },
   { id: 2, title: "Complete Quick Survey", category: "Survey", reward: "$2", popularity: 85 },
@@ -32,6 +32,8 @@ const offers: Offer[] = [
   { id: 5, title: "Download Game X", category: "App Install", reward: "$4", popularity: 95 },
   { id: 6, title: "Refer a Friend", category: "Referral", reward: "$5", popularity: 80 },
   { id: 7, title: "Complete Daily Task", category: "Task", reward: "$1.5", popularity: 75 },
+  { id: 8, title: "Premium Trial Signup", category: "Trial", reward: "$3.5", popularity: 88 },
+  { id: 9, title: "Download Finance App", category: "Finance", reward: "$4.5", popularity: 92 },
 ];
 
 /* ================= COUNT UP ================= */
@@ -110,7 +112,7 @@ export default function OfferWallPage() {
             </div>
           </Reveal>
 
-          {/* ================= OFFERS SECTION ================= */}
+          {/* ================= OFFERS ================= */}
           <Reveal>
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
@@ -152,7 +154,7 @@ export default function OfferWallPage() {
 
                     <div className="w-full h-2 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
                       <div
-                        className="h-2 bg-gradient-to-r from-yellow-400 to-green-400 rounded-full transition-all duration-500"
+                        className="h-2 bg-gradient-to-r from-yellow-400 to-green-400 rounded-full"
                         style={{ width: `${offer.popularity}%` }}
                       />
                     </div>
@@ -179,7 +181,7 @@ export default function OfferWallPage() {
             ))}
           </div>
 
-          {/* ================= STATS SECTION ================= */}
+          {/* ================= STATS (FIXED SAME LAYOUT ALL DEVICES) ================= */}
           <Reveal>
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
@@ -191,63 +193,25 @@ export default function OfferWallPage() {
             </div>
           </Reveal>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-28">
+          {/* 👇 Always 3 columns even on mobile */}
+          <div className="grid grid-cols-3 gap-4 mb-28">
             {stats.map((stat, index) => (
-              <Reveal key={index}>
-                <motion.div
-                  whileHover={{ y: -5 }}
-                  className="bg-white/80 dark:bg-[#0c111b]/80 backdrop-blur-xl
-                  border border-gray-200 dark:border-gray-800
-                  rounded-2xl p-8 text-center shadow-sm hover:shadow-lg
-                  transition-all duration-300"
-                >
-                  <h3 className="text-4xl font-extrabold text-green-500">
-                    <CountUp end={stat.number} />
-                    {stat.label === "Average Reward" && "$"}
-                  </h3>
-                  <p className="mt-2 text-gray-600 dark:text-gray-400">
-                    {stat.label}
-                  </p>
-                </motion.div>
-              </Reveal>
-            ))}
-          </div>
-
-          {/* ================= HOW IT WORKS ================= */}
-          <Reveal>
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
-                Intelligent Earning Framework
-              </h2>
-              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                A streamlined three-step system engineered for speed and simplicity.
-              </p>
-            </div>
-          </Reveal>
-
-          <div className="grid md:grid-cols-3 gap-10 mb-28 text-center">
-            {[
-              { icon: <User className="w-8 h-8 text-yellow-500 mx-auto" />, title: "Create Account", desc: "Secure onboarding in seconds." },
-              { icon: <Star className="w-8 h-8 text-green-500 mx-auto" />, title: "Complete Offers", desc: "Select and complete premium campaigns." },
-              { icon: <Gift className="w-8 h-8 text-yellow-500 mx-auto" />, title: "Redeem Rewards", desc: "Withdraw earnings safely and instantly." },
-            ].map((step, i) => (
-              <Reveal key={i}>
-                <motion.div
-                  whileHover={{ y: -6 }}
-                  className="bg-white/80 dark:bg-[#0c111b]/80 backdrop-blur-xl
-                  border border-gray-200 dark:border-gray-800
-                  p-8 rounded-2xl shadow-sm hover:shadow-lg
-                  transition-all duration-300"
-                >
-                  {step.icon}
-                  <h3 className="text-xl font-semibold mt-4 mb-2">
-                    {step.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm">
-                    {step.desc}
-                  </p>
-                </motion.div>
-              </Reveal>
+              <motion.div
+                key={index}
+                whileHover={{ y: -5 }}
+                className="bg-white/80 dark:bg-[#0c111b]/80 backdrop-blur-xl
+                border border-gray-200 dark:border-gray-800
+                rounded-2xl p-6 text-center shadow-sm hover:shadow-lg
+                transition-all duration-300"
+              >
+                <h3 className="text-2xl md:text-4xl font-extrabold text-green-500">
+                  <CountUp end={stat.number} />
+                  {stat.label === "Average Reward" && "$"}
+                </h3>
+                <p className="mt-2 text-xs md:text-base text-gray-600 dark:text-gray-400">
+                  {stat.label}
+                </p>
+              </motion.div>
             ))}
           </div>
 
