@@ -6,7 +6,6 @@ import Background from "@/components/Background";
 import TypingText from "@/components/typing/TypingText";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import FAQ from "@/components/faq/FAQ";
-import Reveal from "@/components/animations/Reveal";
 import { motion } from "framer-motion";
 import {
   CheckCircle,
@@ -141,7 +140,11 @@ export default function TestProductsPage() {
 
         {/* HERO (OPENING STYLE) */}
         <section className="max-w-6xl mx-auto px-4 py-24 text-center">
-          <Reveal>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
               Test Products & Earn Rewards
             </h1>
@@ -155,19 +158,24 @@ export default function TestProductsPage() {
             </p>
 
             <PrimaryCTA href="/signup">Start Now</PrimaryCTA>
-          </Reveal>
+          </motion.div>
         </section>
 
         {/* STATS (OPENING STYLE) */}
         <section className="max-w-6xl mx-auto px-4 pb-24">
-          <Reveal>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+          >
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               Platform Statistics
             </h2>
             <p className="text-center text-gray-600 dark:text-gray-300 mb-10">
               Platform growth and impact
             </p>
-          </Reveal>
+          </motion.div>
 
           <div className="grid gap-6 md:grid-cols-4">
             {stats.map((stat) => (
@@ -176,7 +184,7 @@ export default function TestProductsPage() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.5 }}
                 whileHover={{ y: -4 }}
                 className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md"
               >
@@ -194,12 +202,19 @@ export default function TestProductsPage() {
 
         {/* PRODUCT GRID (OPENING STYLE) */}
         <section className="max-w-7xl mx-auto px-4 pb-24">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-            Product Offers
-          </h2>
-          <p className="text-center text-gray-600 dark:text-gray-300 mb-10">
-            Complete tasks and earn rewards
-          </p>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              Product Offers
+            </h2>
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-10">
+              Complete tasks and earn rewards
+            </p>
+          </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {products.map((product) => (
@@ -256,14 +271,19 @@ export default function TestProductsPage() {
 
         {/* HOW IT WORKS (OPENING STYLE) */}
         <section className="max-w-6xl mx-auto px-4 pb-24">
-          <Reveal>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+          >
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               How It Works
             </h2>
             <p className="text-center text-gray-600 dark:text-gray-300 mb-10">
               Three steps to start earning
             </p>
-          </Reveal>
+          </motion.div>
 
           <div className="grid gap-6 md:grid-cols-4">
             {[
@@ -292,18 +312,28 @@ export default function TestProductsPage() {
 
         {/* FAQ (OPENING STYLE) */}
         <section className="max-w-6xl mx-auto px-4 pb-24">
-          <Reveal>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+          >
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
               Frequently Asked Questions
             </h2>
-          </Reveal>
+          </motion.div>
 
           <FAQ faqs={faqs} />
         </section>
 
         {/* FINAL CTA (OPENING STYLE) */}
         <section className="text-center py-24">
-          <Reveal>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+          >
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
               Ready to Start?
             </h2>
@@ -313,7 +343,7 @@ export default function TestProductsPage() {
             </p>
 
             <PrimaryCTA href="/signup">Join Now</PrimaryCTA>
-          </Reveal>
+          </motion.div>
         </section>
       </main>
     </>
