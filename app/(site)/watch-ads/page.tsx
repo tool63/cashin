@@ -3,7 +3,21 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import SeoEngine from "@/components/seo/SeoEngine";
-import { Eye, Star, Gift, User, Trophy } from "lucide-react";
+import Background from "@/components/Background";
+import TypingText from "@/components/typing/TypingText";
+import PrimaryCTA from "@/components/cta/PrimaryCTA";
+import Reveal from "@/components/animations/Reveal";
+import FAQ from "@/components/faq/FAQ";
+import {
+  Eye,
+  Star,
+  Gift,
+  User,
+  Users,
+  TrendingUp,
+  DollarSign,
+  Trophy,
+} from "lucide-react";
 
 /* ================= AD TYPE ================= */
 type Ad = {
@@ -14,7 +28,7 @@ type Ad = {
   popularity: number;
 };
 
-/* ================= SAMPLE AD DATA ================= */
+/* ================= 9+ ADS ================= */
 const ads: Ad[] = [
   { id: 1, title: "Watch Tech Ad", category: "Technology", reward: "$0.5", popularity: 90 },
   { id: 2, title: "Fashion Brand Video", category: "Fashion", reward: "$1", popularity: 85 },
@@ -22,9 +36,12 @@ const ads: Ad[] = [
   { id: 4, title: "Travel Destination Promo", category: "Travel", reward: "$1.2", popularity: 88 },
   { id: 5, title: "Gaming Trailer", category: "Gaming", reward: "$1", popularity: 95 },
   { id: 6, title: "Fitness Campaign Video", category: "Health", reward: "$0.6", popularity: 75 },
+  { id: 7, title: "Mobile App Promo", category: "Apps", reward: "$0.9", popularity: 83 },
+  { id: 8, title: "E-commerce Deal Ad", category: "Shopping", reward: "$1.1", popularity: 89 },
+  { id: 9, title: "Streaming Service Trailer", category: "Entertainment", reward: "$1.3", popularity: 92 },
 ];
 
-/* ================= COUNT UP COMPONENT ================= */
+/* ================= COUNT UP ================= */
 function CountUp({ end }: { end: number }) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement | null>(null);
@@ -58,11 +75,11 @@ function CountUp({ end }: { end: number }) {
   return <div ref={ref}>{count.toLocaleString()}</div>;
 }
 
-/* ================= STATS ================= */
+/* ================= STATS WITH ICONS ================= */
 const stats = [
-  { label: "Total Ads", number: 850 },
-  { label: "Active Watchers", number: 12000 },
-  { label: "Average Reward ($)", number: 0.9 },
+  { label: "Total Ads", number: 850, icon: <Eye className="w-6 h-6 text-green-400" /> },
+  { label: "Active Watchers", number: 12000, icon: <Users className="w-6 h-6 text-green-400" /> },
+  { label: "Average Reward ($)", number: 0.9, icon: <DollarSign className="w-6 h-6 text-green-400" /> },
 ];
 
 /* ================= PAGE COMPONENT ================= */
@@ -74,71 +91,76 @@ export default function WatchAdsPage() {
         description="Earn rewards by watching premium ads on Cashog. Instant payouts for every ad you watch."
       />
 
-      <main className="bg-white dark:bg-[#070A14] text-gray-900 dark:text-white transition-colors duration-300">
+      <main className="relative min-h-screen text-gray-900 dark:text-white">
+        <Background />
 
-        {/* ================= HERO ================= */}
-        <section className="relative py-24 px-6 text-center overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-yellow-200/40 via-green-200/30 to-yellow-300/40 dark:from-yellow-900/20 dark:via-green-900/10 dark:to-yellow-800/20 blur-3xl" />
-
-          <motion.div
-            className="relative max-w-4xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
+        {/* HERO */}
+        <section className="relative z-10 max-w-7xl mx-auto px-4 py-20 text-center">
+          <Reveal>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
               Watch Ads & Earn Instantly
             </h1>
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-8">
-              Engage with premium ad content and earn cash or points instantly for each video you watch.
+
+            <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold gradient-text mb-6">
+              <TypingText />
+            </div>
+
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
+              Engage with premium ad content and earn cash or points instantly for every video you watch.
             </p>
-            <motion.a
-              href="/signup"
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-14 py-5 rounded-2xl font-bold shadow-lg hover:scale-105 transition-transform duration-300 cta-observer"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              Start Watching Ads <Eye size={20} />
-            </motion.a>
-          </motion.div>
+
+            <PrimaryCTA href="/signup">
+              Start Watching Ads
+            </PrimaryCTA>
+          </Reveal>
         </section>
 
-        {/* ================= ADS GRID ================= */}
-        <section className="py-20 px-6 max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-            Featured Ads
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
+        {/* ADS GRID */}
+        <section className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              Featured Ads
+            </h2>
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+              Watch ads and earn rewards
+            </p>
+          </Reveal>
+
+          <div className="grid gap-6 md:grid-cols-3">
             {ads.map((ad) => (
               <motion.div
                 key={ad.id}
-                className="bg-white dark:bg-zinc-800 p-6 rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col justify-between"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
+                whileHover={{ y: -4 }}
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md flex flex-col"
               >
-                <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <Eye className="text-yellow-500 w-6 h-6" />
-                    <span className="text-sm text-gray-500 dark:text-gray-400">{ad.category}</span>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-1">{ad.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-2">Reward: {ad.reward}</p>
-                  <div className="w-full bg-gray-200 dark:bg-zinc-700 h-2 rounded-full mt-2">
-                    <div
-                      className="bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 h-2 rounded-full transition-all duration-500"
-                      style={{ width: `${ad.popularity}%` }}
-                    />
-                  </div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{ad.popularity}% Popularity</p>
+                <div className="flex items-center gap-2 mb-3">
+                  <Eye className="text-green-400 w-5 h-5" />
+                  <span className="text-xs px-3 py-1 rounded-full bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20">
+                    {ad.category}
+                  </span>
                 </div>
-                <div className="flex justify-end mt-4">
+
+                <h3 className="text-xl font-semibold mb-2">{ad.title}</h3>
+
+                <div className="w-full bg-gray-200 dark:bg-zinc-700 h-2 rounded-full mt-2">
+                  <div
+                    className="bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 h-2 rounded-full"
+                    style={{ width: `${ad.popularity}%` }}
+                  />
+                </div>
+
+                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                  {ad.popularity}% Popularity
+                </p>
+
+                <div className="mt-6 flex items-center justify-between">
+                  <span className="text-green-500 font-bold">{ad.reward}</span>
+
                   <motion.a
                     href="/signup"
-                    className="px-4 py-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black rounded-xl font-semibold shadow hover:scale-105 transition-transform duration-300"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.97 }}
+                    className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-sm"
                   >
                     Watch Now
                   </motion.a>
@@ -148,91 +170,85 @@ export default function WatchAdsPage() {
           </div>
         </section>
 
-        {/* ================= STATS ================= */}
-        <section className="py-20 px-6 bg-gray-50 dark:bg-zinc-900">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-            Watch Ads Stats
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {stats.map((stat, index) => (
+        {/* STATS */}
+        <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              Watch Ads Stats
+            </h2>
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+              Real numbers from our growing community
+            </p>
+          </Reveal>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {stats.map((stat) => (
               <motion.div
-                key={index}
-                className="p-8 bg-white dark:bg-zinc-800 rounded-3xl shadow-lg text-center hover:scale-105 transition-transform duration-300"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
+                key={stat.label}
+                whileHover={{ y: -4 }}
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
               >
-                <h3 className="text-4xl font-extrabold text-green-600">
+                <div className="flex justify-center mb-2">{stat.icon}</div>
+
+                <h3 className="text-3xl font-extrabold text-green-500">
                   <CountUp end={stat.number} />
-                  {stat.label === "Average Reward ($)" && "$"}
                 </h3>
-                <p className="mt-2 text-gray-600 dark:text-gray-400">{stat.label}</p>
+
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                  {stat.label}
+                </p>
               </motion.div>
             ))}
           </div>
         </section>
 
-        {/* ================= HOW IT WORKS ================= */}
-        <section className="py-24 px-6 max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">How Watching Ads Works</h2>
-          <div className="grid md:grid-cols-3 gap-10">
-            <motion.div
-              className="bg-white dark:bg-zinc-800 p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-300"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <User className="w-8 h-8 text-yellow-400 mb-4 mx-auto" />
-              <h3 className="text-xl font-semibold mb-2">Sign Up</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Create your Cashog account to access premium ads.
-              </p>
-            </motion.div>
-            <motion.div
-              className="bg-white dark:bg-zinc-800 p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-300"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              <Star className="w-8 h-8 text-green-400 mb-4 mx-auto" />
-              <h3 className="text-xl font-semibold mb-2">Watch Ads</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Select an ad from our SurveyWall and watch it fully to earn rewards.
-              </p>
-            </motion.div>
-            <motion.div
-              className="bg-white dark:bg-zinc-800 p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-300"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <Gift className="w-8 h-8 text-yellow-500 mb-4 mx-auto" />
-              <h3 className="text-xl font-semibold mb-2">Claim Rewards</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Receive instant payouts in cash, points, or gift cards after each ad.
-              </p>
-            </motion.div>
+        {/* HOW IT WORKS */}
+        <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              How Watching Ads Works
+            </h2>
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+              Start earning in three simple steps
+            </p>
+          </Reveal>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {[
+              { icon: <User className="w-8 h-8 text-yellow-400" />, title: "Sign Up", desc: "Create your free account." },
+              { icon: <Star className="w-8 h-8 text-green-400" />, title: "Watch Ads", desc: "Watch ads fully to earn rewards." },
+              { icon: <Gift className="w-8 h-8 text-yellow-400" />, title: "Claim Rewards", desc: "Withdraw instantly after watching." },
+            ].map((step) => (
+              <motion.div
+                key={step.title}
+                whileHover={{ y: -4 }}
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
+              >
+                <div className="flex justify-center mb-4">{step.icon}</div>
+                <h3 className="text-lg font-semibold">{step.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
+                  {step.desc}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </section>
 
-        {/* ================= FINAL CTA ================= */}
-        <section className="py-28 px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8">
-            Start Watching Ads & Earn Rewards Today!
-          </h2>
-          <motion.a
-            href="/signup"
-            className="cta-observer inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-xl hover:scale-105 transition-transform duration-300"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            Start Watching Ads <Trophy size={20} />
-          </motion.a>
+        {/* FINAL CTA */}
+        <section className="relative z-10 text-center py-28">
+          <Reveal>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
+              Turn Watching Ads Into Real Rewards
+            </h2>
+
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed mb-10">
+              Join Cashog today and start earning with every ad you watch.
+            </p>
+
+            <PrimaryCTA href="/signup">
+              Join Now
+            </PrimaryCTA>
+          </Reveal>
         </section>
 
       </main>
