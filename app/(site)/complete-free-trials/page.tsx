@@ -16,6 +16,7 @@ import {
   User,
   Users,
   DollarSign,
+  HelpCircle,
 } from "lucide-react";
 
 /* ================= TRIAL TYPE ================= */
@@ -28,7 +29,7 @@ type Trial = {
   popular?: boolean;
 };
 
-/* ================= TRIAL DATA (6+) ================= */
+/* ================= TRIAL DATA ================= */
 const trials: Trial[] = [
   {
     id: 1,
@@ -80,6 +81,17 @@ const stats = [
   { label: "Active Trials", number: 3200, icon: <Gift className="w-6 h-6 text-green-400" /> },
   { label: "Users Earned", number: 18500, icon: <Users className="w-6 h-6 text-green-400" /> },
   { label: "Total Rewards Paid", number: 45000, icon: <DollarSign className="w-6 h-6 text-green-400" /> },
+];
+
+/* ================= FAQ ================= */
+const faqs = [
+  { q: "Is it free to join?", a: "Yes. All free trials and offers on Cashog are free to start." },
+  { q: "How fast are rewards paid?", a: "Most rewards are credited instantly after completion." },
+  { q: "Do I need a credit card?", a: "Generally no. Most trials do not require payment details." },
+  { q: "Can I cancel after trial?", a: "Yes. You can cancel before trial ends if required." },
+  { q: "Are trials safe and verified?", a: "Yes. We only feature verified and legitimate offers." },
+  { q: "How much can I earn?", a: "Earnings vary per trial, but premium offers pay higher rewards." },
+  { q: "Can I use mobile?", a: "Yes. Our platform is fully mobile-friendly." },
 ];
 
 /* ================= PAGE ================= */
@@ -207,6 +219,36 @@ export default function FreeTrialsPage() {
                 <h3 className="text-lg font-semibold">{item.title}</h3>
                 <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
                   {item.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* FAQ SECTION */}
+        <section className="relative z-10 max-w-4xl mx-auto px-4 py-20 text-center">
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-base text-gray-600 dark:text-gray-300 mb-8">
+              Everything you need to know about free trials
+            </p>
+          </Reveal>
+
+          <div className="space-y-4">
+            {faqs.map((faq) => (
+              <motion.div
+                key={faq.q}
+                whileHover={{ y: -2 }}
+                className="bg-white dark:bg-[#0a0d16] border border-gray-200 dark:border-gray-800 rounded-xl p-5 text-left shadow"
+              >
+                <div className="flex items-center gap-2">
+                  <HelpCircle className="w-5 h-5 text-green-400" />
+                  <h3 className="text-lg font-semibold">{faq.q}</h3>
+                </div>
+                <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
+                  {faq.a}
                 </p>
               </motion.div>
             ))}
