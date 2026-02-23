@@ -192,70 +192,66 @@ export default function TestProductsPage() {
           </div>
         </section>
 
-        {/* PRODUCT GRID (OPENING STYLE) */}
         <section className="max-w-7xl mx-auto px-4 pb-24">
-          <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              Product Offers
-            </h2>
-            <p className="text-center text-gray-600 dark:text-gray-300 mb-10">
-              Complete tasks and earn rewards
-            </p>
-          </Reveal>
+  <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+    Product Offers
+  </h2>
+  <p className="text-center text-gray-600 dark:text-gray-300 mb-10">
+    Complete tasks and earn rewards
+  </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {products.map((product) => (
-              <motion.div
-                key={product.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.5 }}
-                whileHover={{ y: -4 }}
-                className="border rounded-2xl p-5 bg-white dark:bg-[#0a0d16] shadow-md"
-              >
-                <div className="flex justify-center mb-3">
-                  <PackageCheck className="w-8 h-8 text-green-400" />
-                </div>
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    {products.map((product) => (
+      <motion.div
+        key={product.id}
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.5 }}
+        className="border rounded-2xl p-5 bg-white dark:bg-[#0a0d16] shadow-md"
+      >
+        <div className="flex justify-center mb-3">
+          <PackageCheck className="w-8 h-8 text-green-400" />
+        </div>
 
-                <h3 className="text-lg font-semibold text-center">
-                  {product.title}
-                </h3>
+        <h3 className="text-lg font-semibold text-center">
+          {product.title}
+        </h3>
 
-                <p className="text-sm text-gray-600 dark:text-gray-300 text-center mt-2">
-                  {product.description}
-                </p>
+        <p className="text-sm text-gray-600 dark:text-gray-300 text-center mt-2">
+          {product.description}
+        </p>
 
-                <div className="flex justify-center mt-3">
-                  {Array(5)
-                    .fill(0)
-                    .map((_, index) => (
-                      <Star key={index} className="w-4 h-4 text-yellow-400" />
-                    ))}
-                </div>
-
-                <p className="text-xs text-center text-gray-600 dark:text-gray-300 mt-2">
-                  Duration: {product.duration}
-                </p>
-
-                <div className="flex justify-between items-center mt-5">
-                  <span className="text-green-500 font-bold">
-                    {product.reward}
-                  </span>
-
-                  <motion.a
-                    href="/signup"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.97 }}
-                    className="px-3 py-1 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-sm"
-                  >
-                    Apply Now
-                  </motion.a>
-                </div>
-              </motion.div>
+        <div className="flex justify-center mt-3">
+          {Array(5)
+            .fill(0)
+            .map((_, index) => (
+              <Star key={index} className="w-4 h-4 text-yellow-400" />
             ))}
-          </div>
-        </section>
+        </div>
+
+        <p className="text-xs text-center text-gray-600 dark:text-gray-300 mt-2">
+          Duration: {product.duration}
+        </p>
+
+        <div className="flex justify-between items-center mt-5">
+          <span className="text-green-500 font-bold">
+            {product.reward}
+          </span>
+
+          <motion.a
+            href="/signup"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            className="px-3 py-1 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-sm"
+          >
+            Apply Now
+          </motion.a>
+        </div>
+      </motion.div>
+    ))}
+  </div>
+</section>
 
         {/* HOW IT WORKS (OPENING STYLE) */}
         <section className="max-w-6xl mx-auto px-4 pb-24">
