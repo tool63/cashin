@@ -235,74 +235,90 @@ export default function PlayGamesPage() {
           </div>
         </section>
 
-        {/* ================= STATS ================= */}
         <section className="py-20 px-6 bg-gray-50 dark:bg-[#0c111b]">
-          <h2 className="text-3xl md:text-4xl font-bold text-center">
-            Platform Performance
-          </h2>
-          <p className="text-center text-gray-600 dark:text-gray-400 mb-12">
-            Real-time insights from our growing community
-          </p>
+  <h2 className="text-3xl md:text-4xl font-bold text-center">
+    Platform Performance
+  </h2>
+  <p className="text-center text-gray-600 dark:text-gray-400 mb-12">
+    Real-time insights from our growing community
+  </p>
 
-          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                className="bg-white dark:bg-[#0f1520] rounded-2xl p-6 text-center shadow-sm"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-              >
-                <h3 className="text-4xl font-extrabold text-green-500">
-                  <CountUp end={stat.number} />
-                  {stat.label === "Average Reward" && "$"}
-                </h3>
-                <p className="mt-2 text-gray-600 dark:text-gray-400">{stat.label}</p>
-              </motion.div>
-            ))}
-          </div>
-        </section>
+  <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+    {stats.map((stat, index) => (
+      <motion.div
+        key={index}
+        className="bg-white/90 dark:bg-[#0c111b]/90 backdrop-blur-xl
+        border border-gray-200 dark:border-gray-800
+        rounded-2xl p-6 text-center shadow-sm hover:shadow-xl
+        transition-all duration-300"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+      >
+        <div className="flex justify-center items-center mb-4">
+          <TrendingUp className="w-8 h-8 text-green-500" />
+        </div>
 
-        {/* ================= HOW IT WORKS ================= */}
+        <h3 className="text-4xl font-extrabold text-green-500">
+          <CountUp end={stat.number} />
+          {stat.label === "Average Reward" && "$"}
+        </h3>
+
+        <p className="mt-2 text-gray-600 dark:text-gray-400">
+          {stat.label}
+        </p>
+      </motion.div>
+    ))}
+  </div>
+</section>
+
         <section className="py-24 px-6 max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold">
-            How It Works
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-12">
-            Start earning in three simple steps
-          </p>
+  <h2 className="text-3xl md:text-4xl font-bold">
+    How It Works
+  </h2>
+  <p className="text-gray-600 dark:text-gray-400 mb-12">
+    Start earning in three simple steps
+  </p>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: <User className="w-8 h-8 text-yellow-400" />,
-                title: "Sign Up",
-                desc: "Create your account in seconds.",
-              },
-              {
-                icon: <Trophy className="w-8 h-8 text-green-400" />,
-                title: "Play Games",
-                desc: "Complete challenges and earn rewards.",
-              },
-              {
-                icon: <Gift className="w-8 h-8 text-yellow-400" />,
-                title: "Withdraw",
-                desc: "Redeem earnings instantly.",
-              },
-            ].map((step) => (
-              <motion.div
-                key={step.title}
-                className="bg-white dark:bg-[#0c111b] rounded-2xl p-6 shadow-sm"
-              >
-                <div className="mb-4">{step.icon}</div>
-                <h3 className="text-lg font-semibold">{step.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">
-                  {step.desc}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </section>
+  <div className="grid md:grid-cols-3 gap-8">
+    {[
+      {
+        icon: <User className="w-8 h-8 text-yellow-400" />,
+        title: "Sign Up",
+        desc: "Create your account in seconds.",
+      },
+      {
+        icon: <Trophy className="w-8 h-8 text-green-400" />,
+        title: "Play Games",
+        desc: "Complete challenges and earn rewards.",
+      },
+      {
+        icon: <Gift className="w-8 h-8 text-yellow-400" />,
+        title: "Withdraw",
+        desc: "Redeem earnings instantly.",
+      },
+    ].map((step) => (
+      <motion.div
+        key={step.title}
+        className="bg-white/90 dark:bg-[#0c111b]/90 backdrop-blur-xl
+        border border-gray-200 dark:border-gray-800
+        rounded-2xl p-6 shadow-sm hover:shadow-xl
+        transition-all duration-300 text-center"
+      >
+        {/* Icon in the middle */}
+        <div className="flex justify-center items-center mb-4">
+          {step.icon}
+        </div>
+
+        <h3 className="text-lg font-semibold">{step.title}</h3>
+
+        <p className="text-gray-600 dark:text-gray-400 text-sm mt-2">
+          {step.desc}
+        </p>
+      </motion.div>
+    ))}
+  </div>
+</section>
 
         {/* ================= FAQ ================= */}
         <section className="py-20 px-6 max-w-6xl mx-auto">
