@@ -9,6 +9,7 @@ import {
   DollarSign,
   Shield,
   TrendingUp,
+  Joystick,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import Meta from "@/components/seo/SeoEngine";
@@ -148,9 +149,12 @@ export default function PlayGamesPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl md:text-6xl font-extrabold mb-4">
+            <h1 className="text-4xl md:text-6xl font-extrabold mb-2">
               Premium Play & Earn
             </h1>
+            <p className="text-sm uppercase tracking-widest text-green-600 mb-6">
+              Play | Earn | Enjoy
+            </p>
 
             <div className="text-3xl md:text-4xl font-extrabold gradient-text mb-6">
               <TypingText />
@@ -166,11 +170,14 @@ export default function PlayGamesPage() {
           </motion.div>
         </section>
 
-        {/* ================= FEATURED GAMES (OFFERWALL STYLE) ================= */}
+        {/* ================= FEATURED GAMES ================= */}
         <section className="py-20 px-6 max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-center">
             Premium Games
           </h2>
+          <p className="text-center text-gray-600 dark:text-gray-400 mb-12">
+            Hand-picked games with real earning opportunities
+          </p>
 
           <div className="grid gap-6 md:grid-cols-3">
             {games.map((game) => (
@@ -207,12 +214,21 @@ export default function PlayGamesPage() {
                   <StarRating rating={game.rating} />
                 </div>
 
-                {/* CTA */}
+                {/* CTA (SMALL & MODERN) */}
                 <div className="mt-6 flex items-center justify-between">
                   <span className="text-green-600 font-bold">{game.reward}</span>
-                  <PrimaryCTA href="/signup">
+
+                  <motion.a
+                    href="/signup"
+                    className="px-4 py-1.5 text-xs font-semibold rounded-lg
+                    bg-gradient-to-r from-yellow-400 to-green-400
+                    text-black shadow-sm hover:shadow-md
+                    transition-all duration-300 hover:scale-105"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.97 }}
+                  >
                     Play Now
-                  </PrimaryCTA>
+                  </motion.a>
                 </div>
               </motion.div>
             ))}
@@ -221,9 +237,12 @@ export default function PlayGamesPage() {
 
         {/* ================= STATS ================= */}
         <section className="py-20 px-6 bg-gray-50 dark:bg-[#0c111b]">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-center">
             Platform Performance
           </h2>
+          <p className="text-center text-gray-600 dark:text-gray-400 mb-12">
+            Real-time insights from our growing community
+          </p>
 
           <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {stats.map((stat, index) => (
@@ -246,9 +265,12 @@ export default function PlayGamesPage() {
 
         {/* ================= HOW IT WORKS ================= */}
         <section className="py-24 px-6 max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold">
             How It Works
           </h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-12">
+            Start earning in three simple steps
+          </p>
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
@@ -296,9 +318,12 @@ export default function PlayGamesPage() {
 
         {/* ================= FINAL CTA ================= */}
         <section className="py-28 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Ready to Play & Earn?
           </h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-8">
+            Join thousands of players earning rewards today
+          </p>
 
           <PrimaryCTA href="/signup">
             Start Playing
