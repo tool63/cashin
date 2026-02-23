@@ -6,17 +6,15 @@ import Background from "@/components/Background";
 import TypingText from "@/components/typing/TypingText";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
+import FAQ from "@/components/faq/FAQ";
 import {
   CheckCircle,
   Gift,
   Sparkles,
   ShieldCheck,
-  Rocket,
   Star,
-  User,
   Users,
   DollarSign,
-  HelpCircle,
 } from "lucide-react";
 
 /* ================= TRIAL TYPE ================= */
@@ -76,7 +74,7 @@ const trials: Trial[] = [
   },
 ];
 
-/* ================= STATS WITH ICONS ================= */
+/* ================= STATS ================= */
 const stats = [
   { label: "Active Trials", number: 3200, icon: <Gift className="w-6 h-6 text-green-400" /> },
   { label: "Users Earned", number: 18500, icon: <Users className="w-6 h-6 text-green-400" /> },
@@ -87,11 +85,11 @@ const stats = [
 const faqs = [
   { q: "Is it free to join?", a: "Yes. All free trials and offers on Cashog are free to start." },
   { q: "How fast are rewards paid?", a: "Most rewards are credited instantly after completion." },
-  { q: "Do I need a credit card?", a: "Generally no. Most trials do not require payment details." },
-  { q: "Can I cancel after trial?", a: "Yes. You can cancel before trial ends if required." },
-  { q: "Are trials safe and verified?", a: "Yes. We only feature verified and legitimate offers." },
-  { q: "How much can I earn?", a: "Earnings vary per trial, but premium offers pay higher rewards." },
-  { q: "Can I use mobile?", a: "Yes. Our platform is fully mobile-friendly." },
+  { q: "Do I need a credit card?", a: "Most trials do not require payment details, but some premium offers may." },
+  { q: "Can I cancel after the trial?", a: "Yes. You can cancel before the trial period ends if required." },
+  { q: "Are trials safe and verified?", a: "Yes. We only feature verified and legitimate partner offers." },
+  { q: "How much can I earn?", a: "Earnings vary by trial, with premium offers paying higher rewards." },
+  { q: "Can I use mobile?", a: "Yes. Our platform is fully optimized for mobile users." },
 ];
 
 /* ================= PAGE ================= */
@@ -225,34 +223,19 @@ export default function FreeTrialsPage() {
           </div>
         </section>
 
-        {/* FAQ SECTION */}
-        <section className="relative z-10 max-w-4xl mx-auto px-4 py-20 text-center">
+        {/* FAQ (UPDATED TO MATCH HOW IT WORKS PAGE) */}
+        <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
           <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               Frequently Asked Questions
             </h2>
-            <p className="text-base text-gray-600 dark:text-gray-300 mb-8">
+
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
               Everything you need to know about free trials
             </p>
           </Reveal>
 
-          <div className="space-y-4">
-            {faqs.map((faq) => (
-              <motion.div
-                key={faq.q}
-                whileHover={{ y: -2 }}
-                className="bg-white dark:bg-[#0a0d16] border border-gray-200 dark:border-gray-800 rounded-xl p-5 text-left shadow"
-              >
-                <div className="flex items-center gap-2">
-                  <HelpCircle className="w-5 h-5 text-green-400" />
-                  <h3 className="text-lg font-semibold">{faq.q}</h3>
-                </div>
-                <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
-                  {faq.a}
-                </p>
-              </motion.div>
-            ))}
-          </div>
+          <FAQ faqs={faqs} />
         </section>
 
         {/* STATS */}
@@ -303,7 +286,6 @@ export default function FreeTrialsPage() {
             </PrimaryCTA>
           </Reveal>
         </section>
-
       </main>
     </>
   );
