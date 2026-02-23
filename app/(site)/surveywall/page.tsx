@@ -108,7 +108,7 @@ export default function SurveyWallPage() {
         <section className="relative z-10 max-w-7xl mx-auto px-4 py-20 text-center">
           <Reveal>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-              Discover Cashog SurveyWall
+             Get Instant Rewards Through 
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
@@ -258,7 +258,7 @@ export default function SurveyWallPage() {
         <section className="relative z-10 text-center py-28">
           <Reveal>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-              Turn Your Opinion Into Real Rewards
+              Turn Your Spare Time Into Real Rewards
             </h2>
 
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed mb-10">
