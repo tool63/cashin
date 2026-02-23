@@ -11,13 +11,10 @@ import FAQ from "@/components/faq/FAQ";
 import {
   ClipboardList,
   Star,
-  UserPlus,
-  ListChecks,
-  Wallet,
+  User,
   Users,
-  BarChart3,
-  DollarSign,
-  Award,
+  TrendingUp,
+  Gift,
 } from "lucide-react";
 
 /* ================= SURVEYS ================= */
@@ -33,6 +30,37 @@ const surveys = [
   { id: 9, title: "Social Media Trends Study", category: "Social", reward: "$3", estimatedTime: "4 min", rating: 4.7 },
 ];
 
+/* ================= COUNT UP ================= */
+function CountUp({ end }: { end: number }) {
+  const [count, setCount] = React.useState(0);
+  const ref = React.useRef(null);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        let start = 0;
+        const duration = 2000;
+        const increment = end / (duration / 16);
+
+        const counter = setInterval(() => {
+          start += increment;
+          if (start >= end) {
+            setCount(end);
+            clearInterval(counter);
+          } else {
+            setCount(Math.floor(start));
+          }
+        }, 16);
+      }
+    }, { threshold: 0.3 });
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [end]);
+
+  return <div ref={ref}>{count.toLocaleString()}</div>;
+}
+
 /* ================= FAQ ================= */
 const faqs = [
   { q: "Is it free to join?", a: "Yes. Signing up and completing surveys costs nothing." },
@@ -41,117 +69,126 @@ const faqs = [
   { q: "Can I use mobile?", a: "Yes. Fully mobile optimized." },
 ];
 
+/* ================= STATS ================= */
+const stats = [
+  { label: "Active Users", number: 250000, icon: <Users className="w-6 h-6 text-green-400" /> },
+  { label: "Surveys Completed", number: 1200000, icon: <TrendingUp className="w-6 h-6 text-green-400" /> },
+  { label: "Total Paid", number: 850000, icon: <Gift className="w-6 h-6 text-green-400" /> },
+  { label: "Avg Rating", number: 48, icon: <Star className="w-6 h-6 text-green-400" /> },
+];
+
+/* ================= PAGE ================= */
 export default function SurveysPage() {
   return (
     <>
-      <Meta title="Surveys | Cashog" description="Complete surveys and earn rewards with Cashog." />
+      <Meta
+        title="Surveys | Cashog"
+        description="Complete surveys and earn rewards with Cashog."
+      />
 
       <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
 
-        {/* ================= HERO ================= */}
+        {/* HERO */}
         <section className="relative z-10 max-w-7xl mx-auto px-4 py-20 text-center">
           <Reveal>
-            <h1 className="text-4xl md:text-6xl font-extrabold mb-4">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
               Earn Rewards by Completing Surveys
             </h1>
 
-            <div className="text-3xl md:text-5xl font-extrabold gradient-text mb-6">
+            <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold gradient-text mb-6">
               <TypingText />
             </div>
 
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
               Share your opinion and earn real money instantly.
             </p>
 
-            <PrimaryCTA href="/signup">Get Started</PrimaryCTA>
+            <PrimaryCTA href="/signup">
+              Get Started
+            </PrimaryCTA>
           </Reveal>
         </section>
 
-        {/* ================= STATS ================= */}
+        {/* STATS */}
         <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
           <Reveal>
-            <p className="text-green-600 font-semibold text-center mb-2">
-              Platform Overview
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-              Trusted by Thousands Worldwide
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              Platform Performance
             </h2>
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+              Real numbers from our growing community
+            </p>
           </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { icon: <Users className="w-8 h-8 text-green-500" />, label: "Active Users", value: "250K+" },
-              { icon: <BarChart3 className="w-8 h-8 text-green-500" />, label: "Surveys Completed", value: "1.2M+" },
-              { icon: <DollarSign className="w-8 h-8 text-green-500" />, label: "Total Paid", value: "$850K+" },
-              { icon: <Award className="w-8 h-8 text-green-500" />, label: "Avg Rating", value: "4.8★" },
-            ].map((stat, i) => (
+          <div className="grid gap-6 md:grid-cols-4">
+            {stats.map((stat) => (
               <motion.div
-                key={i}
-                whileHover={{ y: -6 }}
-                className="bg-white dark:bg-[#0a0d16] p-8 rounded-2xl shadow border border-gray-200 dark:border-gray-800 text-center"
+                key={stat.label}
+                whileHover={{ y: -4 }}
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
               >
-                <div className="mb-4 flex justify-center">{stat.icon}</div>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">
+                <div className="flex justify-center mb-2">
+                  {stat.icon}
+                </div>
+
+                <h3 className="text-sm uppercase tracking-wide text-gray-600 dark:text-gray-400">
                   {stat.label}
-                </p>
-                <h3 className="text-2xl font-bold text-green-600">
-                  {stat.value}
                 </h3>
+
+                <div className="text-3xl font-extrabold mt-2 text-green-500">
+                  <CountUp end={stat.number} />
+                </div>
               </motion.div>
             ))}
           </div>
         </section>
 
-        {/* ================= SURVEY GRID ================= */}
+        {/* SURVEY GRID */}
         <section className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Featured Surveys
-          </h2>
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              Featured Surveys
+            </h2>
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+              Share opinions and earn rewards
+            </p>
+          </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
+          <div className="grid gap-6 md:grid-cols-3">
             {surveys.map((survey) => (
               <motion.div
                 key={survey.id}
-                whileHover={{ y: -6 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 border border-gray-200 dark:border-gray-800 shadow flex flex-col h-full"
+                whileHover={{ y: -4 }}
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md flex flex-col"
               >
-                <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <ClipboardList className="text-green-500 w-5 h-5" />
-                    <span className="text-sm text-gray-500 dark:text-gray-400">
-                      {survey.category}
-                    </span>
-                  </div>
-
-                  <h3 className="text-xl font-semibold mb-2">
-                    {survey.title}
-                  </h3>
-
-                  <p className="text-sm text-gray-600 dark:text-gray-300">
-                    Estimated Time: {survey.estimatedTime}
-                  </p>
-
-                  <div className="flex mt-3">
-                    {Array(Math.floor(survey.rating))
-                      .fill(0)
-                      .map((_, i) => (
-                        <Star key={i} className="w-4 h-4 text-yellow-400" />
-                      ))}
-                  </div>
+                <div className="flex items-center gap-2 mb-3">
+                  <ClipboardList className="text-green-400 w-5 h-5" />
+                  <span className="text-xs px-3 py-1 rounded-full bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20">
+                    {survey.category}
+                  </span>
                 </div>
 
-                <div className="flex-grow" />
+                <h3 className="text-xl font-semibold mb-2">{survey.title}</h3>
 
-                <div className="mt-6 flex items-center justify-between gap-4">
-                  <span className="text-green-600 font-bold text-lg whitespace-nowrap">
-                    {survey.reward}
-                  </span>
+                <p className="text-sm text-gray-600 dark:text-gray-300">
+                  Estimated Time: {survey.estimatedTime}
+                </p>
+
+                <div className="flex justify-center mt-2">
+                  {Array(Math.floor(survey.rating)).fill(0).map((_, i) => (
+                    <Star key={i} className="w-4 h-4 text-yellow-400" />
+                  ))}
+                </div>
+
+                <div className="mt-6 flex items-center justify-between">
+                  <span className="text-green-500 font-bold">{survey.reward}</span>
 
                   <motion.a
                     href="/signup"
                     whileHover={{ scale: 1.05 }}
-                    className="text-xs px-5 py-2.5 rounded-full bg-green-600 text-white font-semibold hover:bg-green-700 transition whitespace-nowrap flex-none"
+                    whileTap={{ scale: 0.97 }}
+                    className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-sm"
                   >
                     Start Survey
                   </motion.a>
@@ -161,37 +198,42 @@ export default function SurveysPage() {
           </div>
         </section>
 
-        {/* ================= HOW IT WORKS (MOVED HERE) ================= */}
+        {/* HOW IT WORKS */}
         <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
           <Reveal>
-            <p className="text-green-600 font-semibold text-center mb-2">
-              Simple Process
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               How It Works
             </h2>
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+              Start earning in three simple steps
+            </p>
           </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid gap-6 md:grid-cols-3">
             {[
-              { icon: <UserPlus className="w-8 h-8 text-green-500" />, title: "Sign Up", desc: "Create your free account in seconds." },
-              { icon: <ListChecks className="w-8 h-8 text-green-500" />, title: "Complete Surveys", desc: "Choose surveys that match your profile." },
-              { icon: <Wallet className="w-8 h-8 text-green-500" />, title: "Get Paid", desc: "Receive rewards instantly after completion." },
-            ].map((step, i) => (
+              { icon: <User className="w-8 h-8 text-yellow-400" />, title: "Sign Up", desc: "Create your free account." },
+              { icon: <ClipboardList className="w-8 h-8 text-green-400" />, title: "Complete Surveys", desc: "Choose surveys that match your profile." },
+              { icon: <Gift className="w-8 h-8 text-yellow-400" />, title: "Withdraw", desc: "Redeem your earnings instantly." },
+            ].map((step) => (
               <motion.div
-                key={i}
-                whileHover={{ y: -6 }}
-                className="bg-white dark:bg-[#0a0d16] p-8 rounded-2xl shadow border border-gray-200 dark:border-gray-800 text-center"
+                key={step.title}
+                whileHover={{ y: -4 }}
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
               >
-                <div className="mb-4 flex justify-center">{step.icon}</div>
-                <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400">{step.desc}</p>
+                <div className="flex justify-center mb-4">
+                  {step.icon}
+                </div>
+
+                <h3 className="text-lg font-semibold">{step.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
+                  {step.desc}
+                </p>
               </motion.div>
             ))}
           </div>
         </section>
 
-        {/* ================= FAQ ================= */}
+        {/* FAQ */}
         <section className="relative z-10 max-w-4xl mx-auto px-4 py-20 text-center">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold mb-8">
@@ -202,13 +244,16 @@ export default function SurveysPage() {
           <FAQ faqs={faqs} />
         </section>
 
-        {/* ================= FINAL CTA ================= */}
+        {/* FINAL CTA */}
         <section className="relative z-10 text-center py-28">
           <Reveal>
             <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
               Ready to Start Earning?
             </h2>
-            <PrimaryCTA href="/signup">Join Now</PrimaryCTA>
+
+            <PrimaryCTA href="/signup">
+              Join Now
+            </PrimaryCTA>
           </Reveal>
         </section>
       </main>
