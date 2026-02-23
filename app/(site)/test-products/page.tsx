@@ -222,61 +222,62 @@ export default function TestProductsPage() {
           </div>
         </section>
 
-        {/* PRODUCT OFFERS (GRID LIKE SURVEY STYLE) */}
-        <section className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
-          <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              Product Testing Offers
-            </h2>
-            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-              Complete tasks and earn rewards
-            </p>
-          </Reveal>
+        {/* PRODUCT OFFERS (SIMPLE GRID - NO ANIMATIONS) */}
+<section className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
+  <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+    Product Testing Offers
+  </h2>
+  <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+    Complete tasks and earn rewards
+  </p>
 
-          <div className="grid gap-6 md:grid-cols-3">
-            {products.map((product) => (
-              <motion.div
-                key={product.id}
-                whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md flex flex-col"
-              >
-                <PackageCheck className="w-8 h-8 text-green-400 mb-3 mx-auto" />
+  {/* GRID: 3 on desktop */}
+  <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+    {products.map((product) => (
+      <div
+        key={product.id}
+        className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md flex flex-col"
+      >
+        {/* ICON */}
+        <PackageCheck className="w-8 h-8 text-green-400 mb-3 mx-auto" />
 
-                <h3 className="text-xl font-semibold mb-2">{product.title}</h3>
+        {/* TITLE */}
+        <h3 className="text-xl font-semibold mb-2">{product.title}</h3>
 
-                <p className="text-sm text-gray-600 dark:text-gray-300">
-                  {product.description}
-                </p>
+        {/* DESCRIPTION */}
+        <p className="text-sm text-gray-600 dark:text-gray-300">
+          {product.description}
+        </p>
 
-                <div className="flex justify-center mt-2">
-                  {Array(5)
-                    .fill(0)
-                    .map((_, index) => (
-                      <Star key={index} className="w-4 h-4 text-yellow-400" />
-                    ))}
-                </div>
-
-                <div className="text-sm text-gray-600 dark:text-gray-300 mt-2">
-                  Duration: {product.duration}
-                </div>
-
-                <div className="mt-6 flex items-center justify-between">
-                  <span className="text-green-500 font-bold">{product.reward}</span>
-
-                  <motion.a
-                    href="/signup"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.97 }}
-                    className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-sm"
-                  >
-                    Apply Now
-                  </motion.a>
-                </div>
-              </motion.div>
+        {/* STAR RATING */}
+        <div className="flex justify-center mt-2">
+          {Array(5)
+            .fill(0)
+            .map((_, index) => (
+              <Star key={index} className="w-4 h-4 text-yellow-400" />
             ))}
-          </div>
-        </section>
+        </div>
 
+        {/* DETAILS */}
+        <div className="text-sm text-gray-600 dark:text-gray-300 mt-2">
+          Duration: {product.duration}
+        </div>
+
+        {/* FOOTER */}
+        <div className="mt-6 flex items-center justify-between">
+          <span className="text-green-500 font-bold">{product.reward}</span>
+
+          <a
+            href="/signup"
+            className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-sm hover:shadow-md"
+          >
+            Apply Now
+          </a>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
         {/* HOW IT WORKS */}
         <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
           <Reveal>
