@@ -3,7 +3,6 @@
 import React from "react";
 import {
   Video,
-  Gift,
   DollarSign,
   Shield,
   Smartphone,
@@ -24,25 +23,25 @@ const features = [
     icon: <Video size={36} className="text-blue-400" />,
     title: "Watch Sponsored Videos",
     description:
-      "Earn points by watching high-quality sponsored content from trusted partners.",
+      "Earn points by watching high-quality sponsored content from verified partners.",
   },
   {
     icon: <DollarSign size={36} className="text-green-400" />,
     title: "Instant Rewards",
     description:
-      "Points are credited automatically after successful video completion.",
+      "Points are credited automatically after successful completion.",
   },
   {
     icon: <Shield size={36} className="text-blue-400" />,
-    title: "Secure & Verified",
+    title: "Secure & Trusted",
     description:
-      "All video partners are verified to ensure safety and reliability.",
+      "All video providers are verified to ensure safety and reliability.",
   },
   {
     icon: <Smartphone size={36} className="text-green-400" />,
     title: "Mobile Optimized",
     description:
-      "Watch and earn from your mobile device anytime, anywhere.",
+      "Watch and earn directly from your smartphone anytime.",
   },
   {
     icon: <Globe size={36} className="text-purple-400" />,
@@ -54,7 +53,7 @@ const features = [
     icon: <Headphones size={36} className="text-yellow-400" />,
     title: "24/7 Support",
     description:
-      "Our support team is always available to assist you.",
+      "Our support team is always available to help you.",
   },
 ];
 
@@ -62,30 +61,30 @@ const features = [
 const faqs = [
   {
     q: "How do I earn by watching videos?",
-    a: "Simply watch the full sponsored video and points will be credited automatically.",
+    a: "Simply watch the full sponsored video and rewards will be credited automatically.",
   },
   {
     q: "Why was my video not credited?",
-    a: "Make sure you watched the full video without skipping or closing the page.",
+    a: "Make sure you watched the video fully without skipping or closing the tab.",
   },
   {
     q: "How fast are rewards added?",
-    a: "Most rewards are added instantly after successful completion.",
+    a: "Most rewards are credited instantly after verification.",
   },
   {
-    q: "Is it safe to participate?",
-    a: "Yes, we work only with verified advertising partners.",
+    q: "Is watching videos safe?",
+    a: "Yes, we only work with verified advertising partners.",
   },
   {
-    q: "Can I watch videos on mobile?",
-    a: "Yes, our platform is fully optimized for mobile devices.",
+    q: "Can I participate using my phone?",
+    a: "Absolutely! Our platform is fully mobile optimized.",
   },
   {
-    q: "Is there any cost to join?",
-    a: "No, joining and earning is completely free.",
+    q: "Is it free to join?",
+    a: "Yes, joining and earning is completely free.",
   },
   {
-    q: "When can I withdraw?",
+    q: "When can I withdraw earnings?",
     a: "You can withdraw once you reach the minimum payout threshold.",
   },
 ];
@@ -95,7 +94,7 @@ export default function WatchVideos() {
     <>
       <Meta
         title="Watch Videos & Earn | Cashog"
-        description="Earn real rewards by watching sponsored videos online. Fast, secure and reliable payouts."
+        description="Earn real rewards by watching sponsored videos online. Secure, fast and reliable payouts."
       />
 
       <main className="relative min-h-screen text-gray-900 dark:text-white">
@@ -118,10 +117,7 @@ export default function WatchVideos() {
                 Watch sponsored videos and earn rewards instantly from anywhere in the world.
               </p>
 
-              <PrimaryCTA
-                href="/signup"
-                className="px-8 py-3 text-sm rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-              >
+              <PrimaryCTA href="/signup">
                 Start Watching
               </PrimaryCTA>
             </div>
