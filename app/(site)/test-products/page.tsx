@@ -225,74 +225,74 @@ export default function TestProductsPage() {
         </section>
 
         {/* ================= OFFER GRID (3 PER LINE ON PC) ================= */}
-        <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
-          <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              Featured Product Tests
-            </h2>
-            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-              Join product trials and earn rewards
-            </p>
-          </Reveal>
+<section className="relative z-10 w-full px-4 pb-24">
+  <Reveal>
+    <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+      Featured Product Tests
+    </h2>
+    <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+      Join product trials and earn rewards
+    </p>
+  </Reveal>
 
-          {/* GRID FIX: 1 mobile, 2 tablet, 3 PC */}
-          <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            {products.map((product, i) => (
-              <motion.div
-                key={product.id}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.12 }}
-                whileHover={{ y: -4 }}
-                className={`relative bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md ${
-                  product.popular
-                    ? "border-green-400"
-                    : "border-gray-200 dark:border-gray-800"
-                }`}
-              >
-                {product.popular && (
-                  <div className="absolute -top-3 right-4 bg-gradient-to-r from-yellow-400 to-green-500 text-black text-xs font-bold px-3 py-1 rounded-full shadow">
-                    Most Popular
-                  </div>
-                )}
-
-                <PackageCheck className="w-8 h-8 text-green-400 mb-4 mx-auto" />
-
-                <h3 className="text-xl font-semibold mb-2">{product.title}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
-                  {product.description}
-                </p>
-
-                {/* STAR RATING */}
-                <div className="flex justify-center mt-2 mb-2">
-                  {Array(5)
-                    .fill(0)
-                    .map((_, index) => (
-                      <Star key={index} className="w-4 h-4 text-yellow-400" />
-                    ))}
-                </div>
-
-                <div className="text-sm text-gray-600 dark:text-gray-300 mb-4">
-                  Duration: {product.duration}
-                </div>
-
-                <div className="mt-2 flex items-center justify-between">
-                  <span className="text-green-500 font-bold">{product.reward}</span>
-
-                  <motion.a
-                    href="/signup"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.97 }}
-                    className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-sm hover:shadow-md"
-                  >
-                    Apply Now
-                  </motion.a>
-                </div>
-              </motion.div>
-            ))}
+  {/* GRID FIX: mobile 1, tablet 2, desktop 3 */}
+  <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+    {products.map((product, i) => (
+      <motion.div
+        key={product.id}
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: i * 0.12 }}
+        whileHover={{ y: -4 }}
+        className={`relative bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md ${
+          product.popular
+            ? "border-green-400"
+            : "border-gray-200 dark:border-gray-800"
+        }`}
+      >
+        {product.popular && (
+          <div className="absolute -top-3 right-4 bg-gradient-to-r from-yellow-400 to-green-500 text-black text-xs font-bold px-3 py-1 rounded-full shadow">
+            Most Popular
           </div>
-        </section>
+        )}
+
+        <PackageCheck className="w-8 h-8 text-green-400 mb-4 mx-auto" />
+
+        <h3 className="text-xl font-semibold mb-2">{product.title}</h3>
+        <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+          {product.description}
+        </p>
+
+        {/* STAR RATING */}
+        <div className="flex justify-center mt-2 mb-2">
+          {Array(5)
+            .fill(0)
+            .map((_, index) => (
+              <Star key={index} className="w-4 h-4 text-yellow-400" />
+            ))}
+        </div>
+
+        <div className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+          Duration: {product.duration}
+        </div>
+
+        <div className="mt-2 flex items-center justify-between">
+          <span className="text-green-500 font-bold">{product.reward}</span>
+
+          <motion.a
+            href="/signup"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-sm hover:shadow-md"
+          >
+            Apply Now
+          </motion.a>
+        </div>
+      </motion.div>
+    ))}
+  </div>
+</section>
 
         {/* ================= HOW IT WORKS ================= */}
         <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
