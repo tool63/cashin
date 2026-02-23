@@ -24,14 +24,17 @@ type Offer = {
   popularity: number;
 };
 
-/* ================= SAMPLE DATA ================= */
+/* ================= PREMIUM OFFERS (9 ITEMS) ================= */
 const offers: Offer[] = [
-  { id: 1, title: "Install SuperApp", category: "App Install", reward: "$2", popularity: 85 },
-  { id: 2, title: "Complete Survey 5 Min", category: "Survey", reward: "$3", popularity: 90 },
-  { id: 3, title: "Watch Promotional Video", category: "Video", reward: "$1", popularity: 70 },
-  { id: 4, title: "Sign Up Newsletter", category: "Signup", reward: "$2.5", popularity: 60 },
-  { id: 5, title: "Download Game X", category: "App Install", reward: "$4", popularity: 95 },
-  { id: 6, title: "Refer a Friend", category: "Referral", reward: "$5", popularity: 80 },
+  { id: 1, title: "Install Premium App", category: "App Install", reward: "$3", popularity: 90 },
+  { id: 2, title: "Complete Quick Survey", category: "Survey", reward: "$2", popularity: 85 },
+  { id: 3, title: "Watch Exclusive Video", category: "Video", reward: "$1", popularity: 70 },
+  { id: 4, title: "Sign Up for Free Trial", category: "Trial", reward: "$4", popularity: 88 },
+  { id: 5, title: "Download Game Pro", category: "App Install", reward: "$5", popularity: 95 },
+  { id: 6, title: "Refer & Earn Bonus", category: "Referral", reward: "$6", popularity: 92 },
+  { id: 7, title: "Daily Task Completion", category: "Task", reward: "$1.5", popularity: 75 },
+  { id: 8, title: "Premium Newsletter Signup", category: "Signup", reward: "$2.5", popularity: 80 },
+  { id: 9, title: "Finance App Install", category: "Finance", reward: "$4.5", popularity: 93 },
 ];
 
 /* ================= COUNT UP ================= */
@@ -68,51 +71,51 @@ function CountUp({ end }: { end: number }) {
   return <div ref={ref}>{count.toLocaleString()}</div>;
 }
 
-/* ================= STATS ================= */
+/* ================= PLATFORM STATS ================= */
 const stats = [
-  { label: "Offers Completed", number: 15000 },
-  { label: "Active Users", number: 12000 },
-  { label: "Average Reward ($)", number: 3.5 },
+  { label: "Total Rewards Issued", number: 35000 },
+  { label: "Active Members", number: 20000 },
+  { label: "Average Reward", number: 3.8 },
 ];
 
 /* ================= HOW IT WORKS STEPS ================= */
 const steps = [
   {
     icon: <User className="w-8 h-8 text-yellow-400 mx-auto" />,
-    title: "Sign Up",
-    desc: "Create your account in minutes.",
+    title: "Create Account",
+    desc: "Join in seconds and start exploring opportunities.",
   },
   {
     icon: <Star className="w-8 h-8 text-green-400 mx-auto" />,
-    title: "Complete Offers",
-    desc: "Choose tasks and finish them easily.",
+    title: "Complete Tasks",
+    desc: "Choose high-value offers and finish them easily.",
   },
   {
     icon: <Gift className="w-8 h-8 text-yellow-500 mx-auto" />,
     title: "Redeem Rewards",
-    desc: "Withdraw earnings securely.",
+    desc: "Withdraw earnings securely to your wallet.",
   },
 ];
 
 /* ================= PAGE ================= */
-export default function CompleteOffersPage() {
+export default function PremiumRewardPage() {
   return (
     <>
       <SeoEngine
-        title="Complete Offers | Cashog"
-        description="Browse high-paying offers, complete surveys and installs, and earn real rewards instantly."
+        title="Premium Reward Marketplace | Cashog"
+        description="Enterprise-grade digital earning platform with high-value opportunities and instant rewards."
       />
 
       <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
 
-        <section className="relative z-10 max-w-7xl mx-auto px-6 py-20">
+        <section className="relative z-10 max-w-7xl mx-auto px-6 py-24">
 
-          {/* ================= HERO ================= */}
+          {/* ================= HERO SECTION ================= */}
           <Reveal>
-            <div className="text-center mb-20">
+            <div className="text-center mb-24">
               <h1 className="text-4xl md:text-6xl font-extrabold mb-4">
-                Complete Offers
+                Premium Reward Marketplace
               </h1>
 
               <div className="text-3xl md:text-4xl font-extrabold gradient-text mb-6">
@@ -120,32 +123,49 @@ export default function CompleteOffersPage() {
               </div>
 
               <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10">
-                Discover high-paying offers, complete tasks, and redeem your rewards instantly.
+                Access curated digital opportunities and unlock real rewards with enterprise-grade security.
               </p>
 
               <PrimaryCTA href="/signup">
-                Start Completing
+                Activate Access
               </PrimaryCTA>
             </div>
           </Reveal>
 
-          {/* ================= OFFERS ================= */}
-          <div className="grid md:grid-cols-3 gap-8 mb-24">
+          {/* ================= OFFERS SECTION ================= */}
+          <Reveal>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
+                Curated High-Value Opportunities
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Explore verified campaigns designed to maximize your earning potential.
+              </p>
+            </div>
+          </Reveal>
+
+          {/* OFFER CARDS (Premium Layout) */}
+          <div className="grid md:grid-cols-3 gap-8 mb-28">
             {offers.map((offer) => (
               <Reveal key={offer.id}>
                 <motion.div
                   whileHover={{ y: -6 }}
-                  className="bg-white dark:bg-[#0a0d16] border border-gray-200 dark:border-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                  className="bg-white/90 dark:bg-[#0c111b]/90 backdrop-blur-xl
+                  border border-gray-200 dark:border-gray-800
+                  rounded-2xl p-6 shadow-sm hover:shadow-xl
+                  transition-all duration-300 flex flex-col justify-between"
                 >
                   <div>
-                    <div className="flex justify-between items-center mb-3">
-                      <ClipboardList className="text-yellow-400 w-5 h-5" />
-                      <span className="text-xs px-3 py-1 rounded-full bg-yellow-400/20 text-yellow-500 border border-yellow-400/30">
+                    <div className="flex justify-between items-center mb-4">
+                      <ClipboardList className="text-yellow-500 w-5 h-5" />
+                      <span className="text-xs px-3 py-1 rounded-full
+                        bg-yellow-500/10 text-yellow-600 dark:text-yellow-400
+                        border border-yellow-500/20">
                         {offer.category}
                       </span>
                     </div>
 
-                    <h3 className="text-lg font-semibold mb-1">
+                    <h3 className="text-lg font-semibold mb-2">
                       {offer.title}
                     </h3>
 
@@ -156,24 +176,26 @@ export default function CompleteOffersPage() {
                     {/* Progress Bar */}
                     <div className="w-full h-2 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
                       <div
-                        className="h-2 bg-gradient-to-r from-yellow-400 to-green-400 rounded-full transition-all duration-500"
+                        className="h-2 bg-gradient-to-r from-yellow-400 to-green-400 rounded-full"
                         style={{ width: `${offer.popularity}%` }}
                       />
                     </div>
+
                     <p className="text-xs text-gray-500 mt-2">
                       {offer.popularity}% Popular
                     </p>
                   </div>
 
-                  <div className="mt-5">
+                  <div className="mt-6">
                     <a
                       href="/signup"
-                      className="inline-flex items-center justify-center px-5 py-2 text-sm font-semibold rounded-xl 
-                      bg-gradient-to-r from-yellow-400 to-green-400 
-                      text-black shadow-md hover:shadow-lg 
+                      className="inline-flex items-center justify-center
+                      px-5 py-2 text-sm font-semibold rounded-xl
+                      bg-gradient-to-r from-yellow-400 to-green-400
+                      text-black shadow-md hover:shadow-lg
                       transition-all duration-300 hover:scale-105 active:scale-95"
                     >
-                      Claim Offer
+                      Claim Opportunity
                     </a>
                   </div>
                 </motion.div>
@@ -181,33 +203,47 @@ export default function CompleteOffersPage() {
             ))}
           </div>
 
-          {/* ================= STATS ================= */}
-          <div className="grid md:grid-cols-3 gap-8 mb-24">
+          {/* ================= PLATFORM STATS ================= */}
+          <Reveal>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
+                Platform Performance Metrics
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Real-time insights powered by our global reward infrastructure.
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="grid grid-cols-3 gap-4 mb-28">
             {stats.map((stat, index) => (
-              <Reveal key={index}>
-                <motion.div
-                  whileHover={{ y: -5 }}
-                  className="bg-white dark:bg-[#0a0d16] border border-gray-200 dark:border-gray-800 rounded-2xl p-8 text-center shadow-sm hover:shadow-lg transition-all duration-300"
-                >
-                  <h3 className="text-4xl font-extrabold text-green-500">
-                    <CountUp end={stat.number} />
-                    {stat.label === "Average Reward ($)" && "$"}
-                  </h3>
-                  <p className="mt-2 text-gray-600 dark:text-gray-400">
-                    {stat.label}
-                  </p>
-                </motion.div>
-              </Reveal>
+              <motion.div
+                key={index}
+                whileHover={{ y: -5 }}
+                className="bg-white/90 dark:bg-[#0c111b]/90 backdrop-blur-xl
+                border border-gray-200 dark:border-gray-800
+                rounded-2xl p-6 text-center shadow-sm hover:shadow-lg
+                transition-all duration-300"
+              >
+                <h3 className="text-2xl md:text-4xl font-extrabold text-green-500">
+                  <CountUp end={stat.number} />
+                  {stat.label === "Average Reward" && "$"}
+                </h3>
+                <p className="mt-2 text-xs md:text-base text-gray-600 dark:text-gray-400">
+                  {stat.label}
+                </p>
+              </motion.div>
             ))}
           </div>
 
           {/* ================= HOW IT WORKS ================= */}
-          <div className="grid md:grid-cols-3 gap-10 mb-24 text-center">
+          <div className="grid md:grid-cols-3 gap-10 mb-28 text-center">
             {steps.map((step, i) => (
               <Reveal key={i}>
                 <motion.div
                   whileHover={{ y: -6 }}
-                  className="bg-white dark:bg-[#0a0d16] border border-gray-200 dark:border-gray-800 p-8 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300"
+                  className="bg-white dark:bg-[#0c111b] border border-gray-200 dark:border-gray-800
+                  p-8 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300"
                 >
                   {step.icon}
                   <h3 className="text-xl font-semibold mt-4 mb-2">
