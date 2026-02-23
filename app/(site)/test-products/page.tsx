@@ -201,28 +201,36 @@ export default function TestProductsPage() {
             </p>
           </Reveal>
 
-          <div className="grid gap-6 md:grid-cols-4">
-            {stats.map((stat) => (
+          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+            {stats.map((stat, index) => (
               <motion.div
                 key={stat.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-4 text-center border border-gray-200 dark:border-gray-800 shadow-md"
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md hover:shadow-xl transition-all duration-300"
               >
-                <div className="flex justify-center mb-2">
-                  <stat.icon className="w-6 h-6 text-green-400" />
+                <div className="flex justify-center mb-3">
+                  <div className="w-12 h-12 bg-gradient-to-br from-yellow-400/20 to-green-400/20 rounded-xl flex items-center justify-center">
+                    <stat.icon className="w-6 h-6 text-green-400" />
+                  </div>
                 </div>
 
-                <h3 className="text-sm uppercase tracking-wide text-gray-600 dark:text-gray-400">
+                <h3 className="text-sm uppercase tracking-wide text-gray-600 dark:text-gray-400 mb-1">
                   {stat.title}
                 </h3>
 
-                <div className="text-2xl font-extrabold mt-2">{stat.value}</div>
+                <div className="text-3xl font-extrabold bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
+                  {stat.value}
+                </div>
               </motion.div>
             ))}
           </div>
         </section>
 
-        {/* PRODUCT OFFERS (REDESIGNED GRID) */}
+        {/* PRODUCT OFFERS - REDESIGNED GRID */}
         <section className="relative z-10 w-full px-4 pb-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
@@ -233,45 +241,60 @@ export default function TestProductsPage() {
             </p>
           </Reveal>
 
-          {/* GRID: 1 mobile, 2 tablet, 3 desktop */}
-          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-            {products.map((product) => (
+          {/* GRID: Mobile 1 column, Tablet 2 columns, Desktop 3 columns */}
+          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
+            {products.map((product, index) => (
               <motion.div
                 key={product.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
                 whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-xl p-4 text-center border border-gray-200 dark:border-gray-800 shadow-sm"
+                className="bg-white dark:bg-[#0a0d16] rounded-xl p-6 border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full"
               >
-                <PackageCheck className="w-7 h-7 text-green-400 mb-3 mx-auto" />
+                {/* Icon with gradient background */}
+                <div className="w-12 h-12 bg-gradient-to-br from-yellow-400/20 to-green-400/20 rounded-xl flex items-center justify-center mb-4 mx-auto">
+                  <PackageCheck className="w-6 h-6 text-green-400" />
+                </div>
 
-                <h3 className="text-lg font-semibold mb-2">{product.title}</h3>
+                {/* Title */}
+                <h3 className="text-lg font-semibold mb-2 text-center">{product.title}</h3>
 
-                <p className="text-xs text-gray-600 dark:text-gray-300">
+                {/* Description */}
+                <p className="text-sm text-gray-600 dark:text-gray-300 text-center mb-4 flex-grow">
                   {product.description}
                 </p>
 
-                {/* STAR RATING */}
-                <div className="flex justify-center mt-3">
-                  {Array(5)
-                    .fill(0)
-                    .map((_, index) => (
-                      <Star key={index} className="w-4 h-4 text-yellow-400" />
-                    ))}
-                </div>
+                {/* Rating & Duration Row */}
+                <div className="flex items-center justify-between mb-4">
+                  {/* Star Rating */}
+                  <div className="flex items-center gap-1">
+                    {Array(5)
+                      .fill(0)
+                      .map((_, index) => (
+                        <Star key={index} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                      ))}
+                  </div>
 
-                <div className="text-xs text-gray-600 dark:text-gray-300 mt-2">
-                  Duration: {product.duration}
-                </div>
-
-                <div className="mt-4 flex items-center justify-between">
-                  <span className="text-green-500 font-bold text-sm">
-                    {product.reward}
+                  {/* Duration Badge */}
+                  <span className="text-xs px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full text-gray-600 dark:text-gray-300 font-medium">
+                    {product.duration}
                   </span>
+                </div>
+
+                {/* Reward & CTA Row */}
+                <div className="flex items-center justify-between mt-2 pt-4 border-t border-gray-200 dark:border-gray-800">
+                  <div>
+                    <span className="text-xs text-gray-500 dark:text-gray-400 block">Reward</span>
+                    <span className="text-green-500 font-bold text-lg">{product.reward}</span>
+                  </div>
 
                   <motion.a
                     href="/signup"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.97 }}
-                    className="px-3 py-1 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-sm"
+                    className="px-5 py-2 text-sm font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-sm hover:shadow-md transition-all"
                   >
                     Apply Now
                   </motion.a>
@@ -292,19 +315,25 @@ export default function TestProductsPage() {
             </p>
           </Reveal>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {steps.map((step) => (
+          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+            {steps.map((step, index) => (
               <motion.div
                 key={step.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-4 text-center border shadow-md"
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md hover:shadow-xl transition-all duration-300"
               >
-                <div className="flex justify-center mb-3">
-                  <step.icon className="w-8 h-8 text-green-400" />
+                <div className="flex justify-center mb-4">
+                  <div className="w-14 h-14 bg-gradient-to-br from-yellow-400/20 to-green-400/20 rounded-xl flex items-center justify-center">
+                    <step.icon className="w-7 h-7 text-green-400" />
+                  </div>
                 </div>
 
-                <h3 className="text-lg font-semibold">{step.title}</h3>
-                <p className="text-xs text-gray-600 dark:text-gray-300 mt-2">
+                <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-300">
                   {step.description}
                 </p>
               </motion.div>
@@ -313,13 +342,13 @@ export default function TestProductsPage() {
         </section>
 
         {/* FAQ */}
-        <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
+        <section className="relative z-10 max-w-4xl mx-auto px-4 pb-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               Frequently Asked Questions
             </h2>
             <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-              Everything you need to know
+              Everything you need to know about product testing
             </p>
           </Reveal>
 
@@ -327,14 +356,14 @@ export default function TestProductsPage() {
         </section>
 
         {/* FINAL CTA */}
-        <section className="relative z-10 text-center py-24">
+        <section className="relative z-10 text-center py-24 px-4">
           <Reveal>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
               Ready to Start Testing?
             </h2>
 
-            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed mb-10">
-              Join Cashog today and start earning with premium product tests.
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed mb-10">
+              Join thousands of testers who are already earning rewards by sharing their opinions on premium products.
             </p>
           </Reveal>
 
