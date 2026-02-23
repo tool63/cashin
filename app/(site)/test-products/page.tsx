@@ -6,7 +6,6 @@ import Background from "@/components/Background";
 import TypingText from "@/components/typing/TypingText";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import FAQ from "@/components/faq/FAQ";
-import { motion } from "framer-motion";
 import {
   CheckCircle,
   PackageCheck,
@@ -72,13 +71,7 @@ const products: ProductTest[] = [
 ];
 
 /* STATS */
-type Stat = {
-  label: string;
-  number: number;
-  icon: React.ReactNode;
-};
-
-const stats: Stat[] = [
+const stats = [
   { label: "Active Users", number: 1000000, icon: <Users className="w-6 h-6 text-green-400" /> },
   { label: "Daily Earnings", number: 25000, icon: <TrendingUp className="w-6 h-6 text-green-400" /> },
   { label: "Total Payouts", number: 5000000, icon: <DollarSign className="w-6 h-6 text-green-400" /> },
@@ -138,13 +131,8 @@ export default function TestProductsPage() {
       <main className="min-h-screen text-gray-900 dark:text-white">
         <Background />
 
-        {/* HERO (OPENING) */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-6xl mx-auto px-4 py-24 text-center"
-        >
+        {/* HERO (NO ANIMATION) */}
+        <section className="max-w-6xl mx-auto px-4 py-24 text-center">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
             Test Products & Earn Rewards
           </h1>
@@ -158,16 +146,10 @@ export default function TestProductsPage() {
           </p>
 
           <PrimaryCTA href="/signup">Start Now</PrimaryCTA>
-        </motion.section>
+        </section>
 
-        {/* STATS (OPENING) */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-6xl mx-auto px-4 pb-24"
-        >
+        {/* STATS (NO ANIMATION) */}
+        <section className="max-w-6xl mx-auto px-4 pb-24">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
             Platform Statistics
           </h2>
@@ -177,13 +159,8 @@ export default function TestProductsPage() {
 
           <div className="grid gap-6 md:grid-cols-4">
             {stats.map((stat) => (
-              <motion.div
+              <div
                 key={stat.label}
-                whileInView={{ opacity: 1, y: 0 }}
-                initial={{ opacity: 0, y: 20 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                whileHover={{ y: -4 }}
                 className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md"
               >
                 <div className="flex justify-center mb-2">{stat.icon}</div>
@@ -193,19 +170,13 @@ export default function TestProductsPage() {
                 <div className="text-3xl font-extrabold mt-2 text-green-500">
                   <CountUp end={stat.number} />
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
-        </motion.section>
+        </section>
 
-        {/* PRODUCT GRID (OPENING) */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-7xl mx-auto px-4 pb-24"
-        >
+        {/* PRODUCT GRID (NO ANIMATION) */}
+        <section className="max-w-7xl mx-auto px-4 pb-24">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
             Product Offers
           </h2>
@@ -215,12 +186,8 @@ export default function TestProductsPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {products.map((product) => (
-              <motion.div
+              <div
                 key={product.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
                 className="border rounded-2xl p-5 bg-white dark:bg-[#0a0d16] shadow-md"
               >
                 <div className="flex justify-center mb-3">
@@ -252,28 +219,20 @@ export default function TestProductsPage() {
                     {product.reward}
                   </span>
 
-                  <motion.a
+                  <a
                     href="/signup"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.97 }}
                     className="px-3 py-1 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-sm"
                   >
                     Apply Now
-                  </motion.a>
+                  </a>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
-        </motion.section>
+        </section>
 
-        {/* HOW IT WORKS (OPENING) */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-6xl mx-auto px-4 pb-24"
-        >
+        {/* HOW IT WORKS (NO ANIMATION) */}
+        <section className="max-w-6xl mx-auto px-4 pb-24">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
             How It Works
           </h2>
@@ -288,12 +247,8 @@ export default function TestProductsPage() {
               { title: "Complete Tasks", description: "Follow instructions and submit." },
               { title: "Get Paid", description: "Receive rewards instantly." },
             ].map((step) => (
-              <motion.div
+              <div
                 key={step.title}
-                whileInView={{ opacity: 1, y: 0 }}
-                initial={{ opacity: 0, y: 20 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
                 className="bg-white dark:bg-[#0a0d16] rounded-2xl p-4 text-center border shadow-md"
               >
                 <CheckCircle className="w-8 h-8 text-green-400 mx-auto mb-3" />
@@ -301,34 +256,22 @@ export default function TestProductsPage() {
                 <p className="text-xs text-gray-600 dark:text-gray-300 mt-2">
                   {step.description}
                 </p>
-              </motion.div>
+              </div>
             ))}
           </div>
-        </motion.section>
+        </section>
 
-        {/* FAQ (OPENING) */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-6xl mx-auto px-4 pb-24"
-        >
+        {/* FAQ (NO ANIMATION) */}
+        <section className="max-w-6xl mx-auto px-4 pb-24">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
             Frequently Asked Questions
           </h2>
 
           <FAQ faqs={faqs} />
-        </motion.section>
+        </section>
 
-        {/* FINAL CTA (OPENING) */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6 }}
-          className="text-center py-24"
-        >
+        {/* FINAL CTA (NO ANIMATION) */}
+        <section className="text-center py-24">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
             Ready to Start?
           </h2>
@@ -338,7 +281,7 @@ export default function TestProductsPage() {
           </p>
 
           <PrimaryCTA href="/signup">Join Now</PrimaryCTA>
-        </motion.section>
+        </section>
       </main>
     </>
   );
