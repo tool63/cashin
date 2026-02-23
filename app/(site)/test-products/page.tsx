@@ -59,7 +59,7 @@ const products: ProductTest[] = [
 const faqs = [
   {
     q: "How do product tests work?",
-    a: "Sign up, apply for a product test, complete the instructions, and submit feedback to earn rewards.",
+    a: "Sign up, apply for a product test, complete instructions, and submit feedback to earn rewards.",
   },
   {
     q: "When will I receive my reward?",
@@ -67,7 +67,7 @@ const faqs = [
   },
   {
     q: "Do I keep the product?",
-    a: "Some tests allow you to keep the product, others require returns. Details are shown before applying.",
+    a: "Some tests allow you to keep the product, others require returns. Details are provided before applying.",
   },
   {
     q: "Is product testing free?",
@@ -86,97 +86,92 @@ export default function TestProductsPage() {
       <main className="relative bg-white dark:bg-zinc-950 text-gray-900 dark:text-white overflow-hidden">
         <Background />
 
-        {/* ================= HERO ================= */}
-        <section className="relative z-10 py-32 px-6 text-center max-w-5xl mx-auto">
+        {/* ================= HERO (How It Works style) ================= */}
+        <section className="relative z-10 max-w-6xl mx-auto px-4 py-24 text-center">
           <Reveal>
-            <h1 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
               Test Products & Earn Real Rewards
             </h1>
-          </Reveal>
 
-          <Reveal delay={0.2}>
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-10">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
               Join exclusive product trials, provide honest feedback, and get paid instantly.
             </p>
           </Reveal>
 
-          <Reveal delay={0.4}>
-            <PrimaryCTA href="/signup">
-              Start Testing Products <Rocket size={20} />
-            </PrimaryCTA>
+          <Reveal delay={0.2}>
+            <div className="flex justify-center">
+              <PrimaryCTA href="/signup">
+                Start Testing Products <Rocket size={20} />
+              </PrimaryCTA>
+            </div>
           </Reveal>
         </section>
 
-        {/* ================= PRODUCT SECTION ================= */}
-        <section className="relative z-10 py-28 px-6 max-w-7xl mx-auto">
+        {/* ================= PRODUCT SECTION (Grid like How It Works) ================= */}
+        <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
           <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               Featured Product Tests
             </h2>
-            <p className="text-center text-gray-600 dark:text-gray-400 mb-16">
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
               Apply for premium brand trials and start earning today.
             </p>
           </Reveal>
 
-          <div className="grid md:grid-cols-3 gap-10">
+          <div className="grid gap-6 md:grid-cols-3">
             {products.map((product, i) => (
               <motion.div
                 key={product.id}
-                className={`relative bg-white dark:bg-zinc-900 p-8 rounded-3xl shadow-xl border ${
+                className={`relative bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md ${
                   product.popular
-                    ? "border-green-400 scale-105"
-                    : "border-gray-200 dark:border-zinc-800"
-                } hover:shadow-2xl transition-all duration-300`}
+                    ? "border-green-400"
+                    : "border-gray-200 dark:border-gray-800"
+                }`}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.15 }}
               >
                 {product.popular && (
-                  <div className="absolute -top-4 right-6 bg-gradient-to-r from-yellow-400 to-green-500 text-black px-4 py-1 rounded-full text-xs font-bold shadow-lg">
+                  <div className="absolute -top-3 right-4 bg-gradient-to-r from-yellow-400 to-green-500 text-black text-xs font-bold px-3 py-1 rounded-full shadow">
                     Most Popular
                   </div>
                 )}
 
-                <PackageCheck className="w-9 h-9 text-yellow-500 mb-5" />
+                <PackageCheck className="w-8 h-8 text-yellow-500 mb-4 mx-auto" />
 
-                <h3 className="text-xl font-semibold mb-3">
-                  {product.title}
-                </h3>
-
-                <p className="text-gray-600 dark:text-gray-400 mb-6">
+                <h3 className="text-xl font-semibold mb-2">{product.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
                   {product.description}
                 </p>
 
-                <div className="mb-6 space-y-1">
-                  <p className="text-green-600 font-bold text-lg">
-                    Reward: {product.reward}
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    Duration: {product.duration}
-                  </p>
+                <div className="mb-4">
+                  <p className="text-green-500 font-bold">Reward: {product.reward}</p>
+                  <p className="text-sm text-gray-500">Duration: {product.duration}</p>
                 </div>
 
-                <PrimaryCTA href="/signup" className="w-full justify-center">
-                  Apply Now <CheckCircle size={18} />
-                </PrimaryCTA>
+                <div className="flex justify-center">
+                  <PrimaryCTA href="/signup">
+                    Apply Now <CheckCircle size={18} />
+                  </PrimaryCTA>
+                </div>
               </motion.div>
             ))}
           </div>
         </section>
 
-        {/* ================= TRUST SECTION ================= */}
-        <section className="relative z-10 py-28 px-6 bg-gray-50 dark:bg-zinc-900">
+        {/* ================= TRUST SECTION (How It Works style) ================= */}
+        <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
           <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               Why Test Products with Cashog?
             </h2>
-            <p className="text-center text-gray-600 dark:text-gray-400 mb-16">
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
               Safe, verified and rewarding experience.
             </p>
           </Reveal>
 
-          <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+          <div className="grid gap-6 md:grid-cols-3">
             {[
               {
                 icon: Star,
@@ -194,44 +189,56 @@ export default function TestProductsPage() {
                 desc: "All product tests are verified and secure.",
               },
             ].map((item, i) => (
-              <Reveal key={i} delay={i * 0.15}>
-                <div className="bg-white dark:bg-zinc-800 p-8 rounded-3xl shadow-lg text-center">
-                  <item.icon className="w-9 h-9 mx-auto mb-5 text-yellow-500" />
-                  <h3 className="text-xl font-semibold mb-3">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    {item.desc}
-                  </p>
-                </div>
-              </Reveal>
+              <motion.div
+                key={i}
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.15 }}
+              >
+                <item.icon className="w-8 h-8 mx-auto mb-4 text-yellow-400" />
+                <h3 className="text-lg font-semibold">{item.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
+                  {item.desc}
+                </p>
+              </motion.div>
             ))}
           </div>
         </section>
 
-        {/* ================= FAQ ================= */}
-        <section className="relative z-10 max-w-6xl mx-auto px-6 py-28">
+        {/* ================= FAQ (How It Works style) ================= */}
+        <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
           <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-3">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               Frequently Asked Questions
             </h2>
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+              Everything you need to know about product testing
+            </p>
           </Reveal>
 
           <FAQ faqs={faqs} />
         </section>
 
-        {/* ================= FINAL CTA ================= */}
-        <section className="relative z-10 py-32 px-6 text-center">
+        {/* ================= FINAL CTA (How It Works style) ================= */}
+        <section className="relative z-10 text-center py-24">
           <Reveal>
-            <h2 className="text-3xl md:text-5xl font-bold mb-10">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
               Ready to Start Testing?
             </h2>
+
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed mb-10">
+              Join Cashog today and start earning with premium product tests.
+            </p>
           </Reveal>
 
           <Reveal delay={0.2}>
-            <PrimaryCTA href="/signup">
-              Join Cashog Now <Rocket size={20} />
-            </PrimaryCTA>
+            <div className="flex justify-center">
+              <PrimaryCTA href="/signup">
+                Join Cashog Now <Rocket size={20} />
+              </PrimaryCTA>
+            </div>
           </Reveal>
         </section>
       </main>
