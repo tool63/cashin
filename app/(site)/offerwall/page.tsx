@@ -11,7 +11,6 @@ import {
   ClipboardList,
   Star,
   Gift,
-  Trophy,
   User,
 } from "lucide-react";
 
@@ -73,7 +72,7 @@ function CountUp({ end }: { end: number }) {
 const stats = [
   { label: "Total Offers", number: 3200 },
   { label: "Active Users", number: 15000 },
-  { label: "Average Reward ($)", number: 3.7 },
+  { label: "Average Reward", number: 3.7 },
 ];
 
 /* ================= PAGE ================= */
@@ -81,20 +80,20 @@ export default function OfferWallPage() {
   return (
     <>
       <SeoEngine
-        title="OfferWall | Cashog"
-        description="Discover premium high-paying offers on Cashog. Complete tasks and earn rewards instantly."
+        title="Premium Reward Marketplace | Cashog"
+        description="Enterprise-grade digital earning platform powered by high-value curated opportunities."
       />
 
       <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
 
-        <section className="relative z-10 max-w-7xl mx-auto px-6 py-20">
+        <section className="relative z-10 max-w-7xl mx-auto px-6 py-24">
 
           {/* ================= HERO ================= */}
           <Reveal>
-            <div className="text-center mb-20">
+            <div className="text-center mb-24">
               <h1 className="text-4xl md:text-6xl font-extrabold mb-4">
-                Explore the OfferWall
+                Premium Reward Marketplace
               </h1>
 
               <div className="text-3xl md:text-4xl font-extrabold gradient-text mb-6">
@@ -102,32 +101,48 @@ export default function OfferWallPage() {
               </div>
 
               <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10">
-                Complete premium offers, surveys, installs, and tasks to earn real rewards.
+                Enterprise-grade digital earning platform engineered for performance, trust, and scalability.
               </p>
 
               <PrimaryCTA href="/signup">
-                Start Earning
+                Activate Access
               </PrimaryCTA>
             </div>
           </Reveal>
 
-          {/* ================= OFFERS ================= */}
-          <div className="grid md:grid-cols-3 gap-8 mb-24">
+          {/* ================= OFFERS SECTION ================= */}
+          <Reveal>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
+                Curated High-Value Opportunities
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Access verified premium campaigns designed to maximize your earning potential.
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="grid md:grid-cols-3 gap-8 mb-28">
             {offers.map((offer) => (
               <Reveal key={offer.id}>
                 <motion.div
                   whileHover={{ y: -6 }}
-                  className="bg-white dark:bg-[#0a0d16] border border-gray-200 dark:border-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                  className="bg-white/80 dark:bg-[#0c111b]/80 backdrop-blur-xl
+                  border border-gray-200 dark:border-gray-800
+                  rounded-2xl p-6 shadow-sm hover:shadow-xl
+                  transition-all duration-300 flex flex-col justify-between"
                 >
                   <div>
-                    <div className="flex justify-between items-center mb-3">
-                      <ClipboardList className="text-yellow-400 w-5 h-5" />
-                      <span className="text-xs px-3 py-1 rounded-full bg-yellow-400/20 text-yellow-500 border border-yellow-400/30">
+                    <div className="flex justify-between items-center mb-4">
+                      <ClipboardList className="text-yellow-500 w-5 h-5" />
+                      <span className="text-xs px-3 py-1 rounded-full
+                        bg-yellow-500/10 text-yellow-600 dark:text-yellow-400
+                        border border-yellow-500/20">
                         {offer.category}
                       </span>
                     </div>
 
-                    <h3 className="text-lg font-semibold mb-1">
+                    <h3 className="text-lg font-semibold mb-2">
                       {offer.title}
                     </h3>
 
@@ -147,12 +162,13 @@ export default function OfferWallPage() {
                     </p>
                   </div>
 
-                  <div className="mt-5">
+                  <div className="mt-6">
                     <a
                       href="/signup"
-                      className="inline-flex items-center justify-center px-5 py-2 text-sm font-semibold rounded-xl 
-                      bg-gradient-to-r from-yellow-400 to-green-400 
-                      text-black shadow-md hover:shadow-lg 
+                      className="inline-flex items-center justify-center
+                      px-5 py-2 text-sm font-semibold rounded-xl
+                      bg-gradient-to-r from-yellow-400 to-green-400
+                      text-black shadow-md hover:shadow-lg
                       transition-all duration-300 hover:scale-105 active:scale-95"
                     >
                       Claim Offer
@@ -163,17 +179,31 @@ export default function OfferWallPage() {
             ))}
           </div>
 
-          {/* ================= STATS ================= */}
-          <div className="grid md:grid-cols-3 gap-8 mb-24">
+          {/* ================= STATS SECTION ================= */}
+          <Reveal>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
+                Platform Performance Metrics
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Real-time growth insights powered by our global reward infrastructure.
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="grid md:grid-cols-3 gap-8 mb-28">
             {stats.map((stat, index) => (
               <Reveal key={index}>
                 <motion.div
                   whileHover={{ y: -5 }}
-                  className="bg-white dark:bg-[#0a0d16] border border-gray-200 dark:border-gray-800 rounded-2xl p-8 text-center shadow-sm hover:shadow-lg transition-all duration-300"
+                  className="bg-white/80 dark:bg-[#0c111b]/80 backdrop-blur-xl
+                  border border-gray-200 dark:border-gray-800
+                  rounded-2xl p-8 text-center shadow-sm hover:shadow-lg
+                  transition-all duration-300"
                 >
                   <h3 className="text-4xl font-extrabold text-green-500">
                     <CountUp end={stat.number} />
-                    {stat.label === "Average Reward ($)" && "$"}
+                    {stat.label === "Average Reward" && "$"}
                   </h3>
                   <p className="mt-2 text-gray-600 dark:text-gray-400">
                     {stat.label}
@@ -184,16 +214,30 @@ export default function OfferWallPage() {
           </div>
 
           {/* ================= HOW IT WORKS ================= */}
-          <div className="grid md:grid-cols-3 gap-10 mb-24 text-center">
+          <Reveal>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
+                Intelligent Earning Framework
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                A streamlined three-step system engineered for speed and simplicity.
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="grid md:grid-cols-3 gap-10 mb-28 text-center">
             {[
-              { icon: <User className="w-8 h-8 text-yellow-400 mx-auto" />, title: "Sign Up", desc: "Create your account instantly." },
-              { icon: <Star className="w-8 h-8 text-green-400 mx-auto" />, title: "Complete Offers", desc: "Choose and complete high-paying tasks." },
-              { icon: <Gift className="w-8 h-8 text-yellow-500 mx-auto" />, title: "Redeem Rewards", desc: "Withdraw earnings securely and quickly." },
+              { icon: <User className="w-8 h-8 text-yellow-500 mx-auto" />, title: "Create Account", desc: "Secure onboarding in seconds." },
+              { icon: <Star className="w-8 h-8 text-green-500 mx-auto" />, title: "Complete Offers", desc: "Select and complete premium campaigns." },
+              { icon: <Gift className="w-8 h-8 text-yellow-500 mx-auto" />, title: "Redeem Rewards", desc: "Withdraw earnings safely and instantly." },
             ].map((step, i) => (
               <Reveal key={i}>
                 <motion.div
                   whileHover={{ y: -6 }}
-                  className="bg-white dark:bg-[#0a0d16] border border-gray-200 dark:border-gray-800 p-8 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300"
+                  className="bg-white/80 dark:bg-[#0c111b]/80 backdrop-blur-xl
+                  border border-gray-200 dark:border-gray-800
+                  p-8 rounded-2xl shadow-sm hover:shadow-lg
+                  transition-all duration-300"
                 >
                   {step.icon}
                   <h3 className="text-xl font-semibold mt-4 mb-2">
@@ -211,8 +255,13 @@ export default function OfferWallPage() {
           <Reveal>
             <div className="text-center">
               <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
-                Ready to Start Earning?
+                Activate Your Earning Potential
               </h2>
+
+              <p className="text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+                Join a next-generation reward ecosystem trusted by thousands worldwide.
+              </p>
+
               <PrimaryCTA href="/signup">
                 Join Cashog Today
               </PrimaryCTA>
