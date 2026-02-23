@@ -16,13 +16,10 @@ import {
   Users,
   TrendingUp,
   DollarSign,
-  Smartphone,
-  Globe,
-  Headphones,
   BarChart3,
 } from "lucide-react";
 
-/* ================= PRODUCT DATA (SURVEYS) ================= */
+/* ================= PRODUCT DATA ================= */
 
 type ProductTest = {
   id: number;
@@ -137,7 +134,7 @@ const steps = [
   },
 ];
 
-/* ================= FAQ DATA ================= */
+/* ================= FAQ ================= */
 
 const faqs = [
   {
@@ -166,29 +163,37 @@ export default function TestProductsPage() {
         description="Join exclusive product testing programs and earn instant rewards."
       />
 
-      <main className="relative bg-white dark:bg-zinc-950 text-gray-900 dark:text-white overflow-hidden">
+      <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
 
         {/* ================= HERO ================= */}
         <section className="relative z-10 max-w-6xl mx-auto px-4 py-24 text-center">
           <Reveal>
-            <TypingText />
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
+              Test Premium Products & Earn Rewards
+            </h1>
           </Reveal>
 
-          <Reveal delay={0.2}>
-            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mt-4 mb-10">
+          <Reveal delay={0.15}>
+            <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold gradient-text mb-6">
+              <TypingText />
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.25}>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed mb-10">
               Join exclusive product trials, provide honest feedback, and get paid instantly.
             </p>
           </Reveal>
 
-          <Reveal delay={0.3}>
+          <Reveal delay={0.35}>
             <PrimaryCTA href="/signup">
               Start Testing Products
             </PrimaryCTA>
           </Reveal>
         </section>
 
-        {/* ================= STATS SECTION ================= */}
+        {/* ================= STATS ================= */}
         <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
@@ -200,30 +205,33 @@ export default function TestProductsPage() {
           </Reveal>
 
           <div className="grid gap-6 md:grid-cols-4">
-            {stats.map((stat, i) => (
+            {stats.map((stat) => (
               <motion.div
-                key={i}
+                key={stat.title}
+                whileHover={{ y: -4 }}
                 className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
               >
-                <div className="flex justify-center mb-3">
-                  <stat.icon className="w-8 h-8 text-green-400" />
+                <div className="flex justify-center mb-2">
+                  <stat.icon className="w-6 h-6 text-green-400" />
                 </div>
-                <h3 className="text-lg font-semibold">{stat.title}</h3>
-                <p className="text-2xl font-bold text-green-500">{stat.value}</p>
+
+                <h3 className="text-sm uppercase tracking-wide text-gray-600 dark:text-gray-400">
+                  {stat.title}
+                </h3>
+
+                <div className="text-3xl font-extrabold mt-2">
+                  {stat.value}
+                </div>
               </motion.div>
             ))}
           </div>
         </section>
 
-        {/* ================= PRODUCT SECTION (GRID RULES) ================= */}
+        {/* ================= OFFER GRID (PC 3, MID 2, MOBILE 1) ================= */}
         <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              Featured Surveys
+              Featured Product Tests
             </h2>
             <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
               PC: 3 per row | Mid: 2 per row | Mobile: 1 per row
@@ -284,68 +292,19 @@ export default function TestProductsPage() {
           </Reveal>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {steps.map((step, i) => (
+            {steps.map((step) => (
               <motion.div
-                key={i}
+                key={step.title}
+                whileHover={{ y: -4 }}
                 className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.12 }}
               >
                 <div className="flex justify-center mb-3">
                   <step.icon className="w-8 h-8 text-green-400" />
                 </div>
+
                 <h3 className="text-lg font-semibold">{step.title}</h3>
                 <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
                   {step.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </section>
-
-        {/* ================= TRUST SECTION ================= */}
-        <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
-          <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              Why Test Products with Cashog?
-            </h2>
-            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-              Safe, verified and rewarding experience.
-            </p>
-          </Reveal>
-
-          <div className="grid gap-6 md:grid-cols-3">
-            {[
-              {
-                icon: Star,
-                title: "Premium Brands",
-                desc: "Access high-quality products before public release.",
-              },
-              {
-                icon: Gift,
-                title: "Instant Rewards",
-                desc: "Get paid immediately after completing approved tests.",
-              },
-              {
-                icon: ShieldCheck,
-                title: "Secure & Verified",
-                desc: "All product tests are verified and secure.",
-              },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.15 }}
-              >
-                <item.icon className="w-8 h-8 mx-auto mb-4 text-yellow-400" />
-                <h3 className="text-lg font-semibold">{item.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
-                  {item.desc}
                 </p>
               </motion.div>
             ))}
