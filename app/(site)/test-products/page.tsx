@@ -5,23 +5,17 @@ import Background from "@/components/Background";
 import TypingText from "@/components/typing/TypingText";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import FAQ from "@/components/faq/FAQ";
+import Reveal from "@/components/animations/Reveal";
 import { motion } from "framer-motion";
 import {
   CheckCircle,
   PackageCheck,
   Star,
-  Gift,
   Users,
   TrendingUp,
   DollarSign,
   BarChart3,
 } from "lucide-react";
-
-/* ANIMATION VARIANTS */
-const sectionVariant = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0 },
-};
 
 /* PRODUCT DATA */
 type ProductTest = {
@@ -77,12 +71,18 @@ const products: ProductTest[] = [
   },
 ];
 
-/* STATS */
-const stats = [
-  { icon: Users, title: "Active Users", value: "1M+" },
-  { icon: TrendingUp, title: "Daily Earnings", value: "$25K+" },
-  { icon: DollarSign, title: "Payouts", value: "$5M+" },
-  { icon: BarChart3, title: "Surveys Completed", value: "8M+" },
+/* STATS (TYPE SAFE) */
+type Stat = {
+  label: string;
+  number: number;
+  icon: React.ReactNode;
+};
+
+const stats: Stat[] = [
+  { label: "Active Users", number: 1000000, icon: <Users className="w-6 h-6 text-green-400" /> },
+  { label: "Daily Earnings", number: 25000, icon: <TrendingUp className="w-6 h-6 text-green-400" /> },
+  { label: "Total Payouts", number: 5000000, icon: <DollarSign className="w-6 h-6 text-green-400" /> },
+  { label: "Surveys Completed", number: 8000000, icon: <BarChart3 className="w-6 h-6 text-green-400" /> },
 ];
 
 /* FAQ */
@@ -92,6 +92,41 @@ const faqs = [
   { q: "Is it free?", a: "Yes, there are no fees." },
 ];
 
+/* COUNT UP */
+function CountUp({ end }: { end: number }) {
+  const [count, setCount] = React.useState(0);
+  const ref = React.useRef<HTMLDivElement | null>(null);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          let start = 0;
+          const duration = 2000;
+          const increment = end / (duration / 16);
+
+          const counter = setInterval(() => {
+            start += increment;
+            if (start >= end) {
+              setCount(end);
+              clearInterval(counter);
+            } else {
+              setCount(Math.floor(start));
+            }
+          }, 16);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [end]);
+
+  return <div ref={ref}>{count.toLocaleString()}</div>;
+}
+
+/* PAGE */
 export default function TestProductsPage() {
   return (
     <>
@@ -104,83 +139,78 @@ export default function TestProductsPage() {
         <Background />
 
         {/* HERO */}
-        <motion.section
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={sectionVariant}
-          transition={{ duration: 0.6 }}
-          className="max-w-6xl mx-auto px-4 py-24 text-center"
-        >
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-            Test Products & Earn Rewards
-          </h1>
+        <section className="max-w-6xl mx-auto px-4 py-24 text-center">
+          <Reveal>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
+              Test Products & Earn Rewards
+            </h1>
 
-          <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold gradient-text mb-6">
-            <TypingText />
-          </div>
+            <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold gradient-text mb-6">
+              <TypingText />
+            </div>
 
-          <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
-            Join trials, give feedback, and get paid instantly.
-          </p>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
+              Join trials, give feedback, and get paid instantly.
+            </p>
 
-          <PrimaryCTA href="/signup">Start Now</PrimaryCTA>
-        </motion.section>
+            <PrimaryCTA href="/signup">Start Now</PrimaryCTA>
+          </Reveal>
+        </section>
 
         {/* STATS */}
-        <motion.section
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={sectionVariant}
-          transition={{ duration: 0.6 }}
-          className="max-w-6xl mx-auto px-4 pb-24"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
-            Platform Statistics
-          </h2>
+        <section className="max-w-6xl mx-auto px-4 pb-24">
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              Platform Statistics
+            </h2>
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-10">
+              Platform growth and impact
+            </p>
+          </Reveal>
 
           <div className="grid gap-6 md:grid-cols-4">
             {stats.map((stat) => (
-              <div
-                key={stat.title}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-4 text-center border shadow-md"
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.6 }}
+                whileHover={{ y: -4 }}
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md"
               >
-                <stat.icon className="w-6 h-6 text-green-400 mx-auto mb-2" />
+                <div className="flex justify-center mb-2">{stat.icon}</div>
                 <h3 className="text-sm uppercase text-gray-600 dark:text-gray-400">
-                  {stat.title}
+                  {stat.label}
                 </h3>
-                <div className="text-2xl font-bold mt-2">{stat.value}</div>
-              </div>
+                <div className="text-3xl font-extrabold mt-2 text-green-500">
+                  <CountUp end={stat.number} />
+                </div>
+              </motion.div>
             ))}
           </div>
-        </motion.section>
+        </section>
 
-        {/* OFFER GRID */}
-        <motion.section
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={sectionVariant}
-          transition={{ duration: 0.6 }}
-          className="max-w-7xl mx-auto px-4 pb-24"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-            Product Offers
-          </h2>
-          <p className="text-center text-gray-600 dark:text-gray-300 mb-10">
-            Complete tasks and earn rewards
-          </p>
+        {/* PRODUCT GRID */}
+        <section className="max-w-7xl mx-auto px-4 pb-24">
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              Product Offers
+            </h2>
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-10">
+              Complete tasks and earn rewards
+            </p>
+          </Reveal>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {products.map((product) => (
               <motion.div
                 key={product.id}
-                initial="hidden"
-                whileInView="visible"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
-                variants={sectionVariant}
                 transition={{ duration: 0.5 }}
+                whileHover={{ y: -4 }}
                 className="border rounded-2xl p-5 bg-white dark:bg-[#0a0d16] shadow-md"
               >
                 <div className="flex justify-center mb-3">
@@ -212,52 +242,45 @@ export default function TestProductsPage() {
                     {product.reward}
                   </span>
 
-                  <a
+                  <motion.a
                     href="/signup"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.97 }}
                     className="px-3 py-1 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-sm"
                   >
                     Apply Now
-                  </a>
+                  </motion.a>
                 </div>
               </motion.div>
             ))}
           </div>
-        </motion.section>
+        </section>
 
         {/* HOW IT WORKS */}
-        <motion.section
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={sectionVariant}
-          transition={{ duration: 0.6 }}
-          className="max-w-6xl mx-auto px-4 pb-24"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
-            How It Works
-          </h2>
+        <section className="max-w-6xl mx-auto px-4 pb-24">
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              How It Works
+            </h2>
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-10">
+              Three steps to start earning
+            </p>
+          </Reveal>
 
           <div className="grid gap-6 md:grid-cols-4">
             {[
-              {
-                title: "Sign Up",
-                description: "Create account in minutes.",
-              },
-              {
-                title: "Choose Offer",
-                description: "Select tasks that fit you.",
-              },
-              {
-                title: "Complete Tasks",
-                description: "Follow instructions and submit.",
-              },
-              {
-                title: "Get Paid",
-                description: "Receive rewards instantly.",
-              },
+              { title: "Sign Up", description: "Create account in minutes." },
+              { title: "Choose Offer", description: "Select tasks that fit you." },
+              { title: "Complete Tasks", description: "Follow instructions and submit." },
+              { title: "Get Paid", description: "Receive rewards instantly." },
             ].map((step) => (
-              <div
+              <motion.div
                 key={step.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5 }}
+                whileHover={{ y: -4 }}
                 className="bg-white dark:bg-[#0a0d16] rounded-2xl p-4 text-center border shadow-md"
               >
                 <CheckCircle className="w-8 h-8 text-green-400 mx-auto mb-3" />
@@ -265,46 +288,36 @@ export default function TestProductsPage() {
                 <p className="text-xs text-gray-600 dark:text-gray-300 mt-2">
                   {step.description}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </motion.section>
+        </section>
 
         {/* FAQ */}
-        <motion.section
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={sectionVariant}
-          transition={{ duration: 0.6 }}
-          className="max-w-6xl mx-auto px-4 pb-24"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
-            Frequently Asked Questions
-          </h2>
+        <section className="max-w-6xl mx-auto px-4 pb-24">
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
+              Frequently Asked Questions
+            </h2>
+          </Reveal>
 
           <FAQ faqs={faqs} />
-        </motion.section>
+        </section>
 
         {/* FINAL CTA */}
-        <motion.section
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={sectionVariant}
-          transition={{ duration: 0.6 }}
-          className="text-center py-24"
-        >
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-            Ready to Start?
-          </h2>
+        <section className="text-center py-24">
+          <Reveal>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
+              Ready to Start?
+            </h2>
 
-          <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
-            Join today and start earning.
-          </p>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
+              Join today and start earning.
+            </p>
 
-          <PrimaryCTA href="/signup">Join Now</PrimaryCTA>
-        </motion.section>
+            <PrimaryCTA href="/signup">Join Now</PrimaryCTA>
+          </Reveal>
+        </section>
       </main>
     </>
   );
