@@ -12,7 +12,6 @@ import {
   Star,
   Gift,
   User,
-  Trophy,
 } from "lucide-react";
 
 /* ================= OFFER TYPE ================= */
@@ -136,15 +135,15 @@ export default function PremiumRewardPage() {
           <Reveal>
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
-                Curated High-Value Opportunities
+                Premium Opportunities
               </h2>
               <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                Explore verified campaigns designed to maximize your earning potential.
+                Explore high-value digital tasks and verified earning opportunities.
               </p>
             </div>
           </Reveal>
 
-          {/* OFFER CARDS (Premium Layout) */}
+          {/* OFFER CARDS */}
           <div className="grid md:grid-cols-3 gap-8 mb-28">
             {offers.map((offer) => (
               <Reveal key={offer.id}>
@@ -173,7 +172,6 @@ export default function PremiumRewardPage() {
                       Reward: <span className="text-green-500 font-semibold">{offer.reward}</span>
                     </p>
 
-                    {/* Progress Bar */}
                     <div className="w-full h-2 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
                       <div
                         className="h-2 bg-gradient-to-r from-yellow-400 to-green-400 rounded-full"
@@ -207,10 +205,10 @@ export default function PremiumRewardPage() {
           <Reveal>
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
-                Platform Performance Metrics
+                Platform Growth Metrics
               </h2>
               <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                Real-time insights powered by our global reward infrastructure.
+                Real-time performance insights from our global reward ecosystem.
               </p>
             </div>
           </Reveal>
@@ -237,6 +235,15 @@ export default function PremiumRewardPage() {
           </div>
 
           {/* ================= HOW IT WORKS ================= */}
+          <div className="mb-12 text-center">
+            <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
+              How It Works
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              Start earning in three simple steps.
+            </p>
+          </div>
+
           <div className="grid md:grid-cols-3 gap-10 mb-28 text-center">
             {steps.map((step, i) => (
               <Reveal key={i}>
@@ -261,8 +268,13 @@ export default function PremiumRewardPage() {
           <Reveal>
             <div className="text-center">
               <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
-                Ready to Start Earning?
+                Unlock Your Earning Potential
               </h2>
+
+              <p className="text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+                Join thousands of users earning rewards through verified opportunities.
+              </p>
+
               <PrimaryCTA href="/signup">
                 Join Cashog Today
               </PrimaryCTA>
