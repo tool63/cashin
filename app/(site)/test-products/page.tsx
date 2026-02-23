@@ -222,8 +222,8 @@ export default function TestProductsPage() {
           </div>
         </section>
 
-        {/* INSTALL STYLE CARDS (3 PER ROW ON PC) */}
-        <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
+        {/* PRODUCT OFFERS (REDESIGNED GRID) */}
+        <section className="relative z-10 w-full px-4 pb-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               Product Testing Offers
@@ -233,18 +233,19 @@ export default function TestProductsPage() {
             </p>
           </Reveal>
 
-          {/* GRID: 1 mobile, 2 tablet, 3 PC */}
-          <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {/* GRID: 1 mobile, 2 tablet, 3 desktop */}
+          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((product) => (
               <motion.div
                 key={product.id}
                 whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
+                className="bg-white dark:bg-[#0a0d16] rounded-xl p-4 text-center border border-gray-200 dark:border-gray-800 shadow-sm"
               >
-                <PackageCheck className="w-8 h-8 text-green-400 mb-4 mx-auto" />
+                <PackageCheck className="w-7 h-7 text-green-400 mb-3 mx-auto" />
 
-                <h3 className="text-xl font-semibold mb-2">{product.title}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300">
+                <h3 className="text-lg font-semibold mb-2">{product.title}</h3>
+
+                <p className="text-xs text-gray-600 dark:text-gray-300">
                   {product.description}
                 </p>
 
@@ -257,18 +258,20 @@ export default function TestProductsPage() {
                     ))}
                 </div>
 
-                <div className="text-sm text-gray-600 dark:text-gray-300 mt-2">
+                <div className="text-xs text-gray-600 dark:text-gray-300 mt-2">
                   Duration: {product.duration}
                 </div>
 
-                <div className="mt-6 flex items-center justify-between">
-                  <span className="text-green-500 font-bold">{product.reward}</span>
+                <div className="mt-4 flex items-center justify-between">
+                  <span className="text-green-500 font-bold text-sm">
+                    {product.reward}
+                  </span>
 
                   <motion.a
                     href="/signup"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.97 }}
-                    className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-sm hover:shadow-md"
+                    className="px-3 py-1 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-sm"
                   >
                     Apply Now
                   </motion.a>
