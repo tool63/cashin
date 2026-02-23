@@ -10,54 +10,45 @@ import Reveal from "@/components/animations/Reveal";
 import FAQ from "@/components/faq/FAQ";
 import { ClipboardList, Star } from "lucide-react";
 
-export default function SurveysPage() {
+export default function WatchVideosPage() {
   return (
     <>
       <Meta
-        title="Paid Surveys | Cashooz"
-        description="Complete surveys, earn rewards, and withdraw real money securely."
+        title="Watch Videos & Earn | Cashooz"
+        description="Watch short videos and earn rewards instantly. Safe, fast and secure."
       />
 
-      <div className="relative min-h-screen overflow-hidden text-gray-900 dark:text-white">
-
-        {/* Same Background Logic */}
+      <div className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
 
         <section className="relative z-10 max-w-6xl mx-auto px-4 py-20">
 
-          {/* HERO */}
+          {/* HERO SECTION — Same Logic as How It Works */}
           <div className="text-center max-w-3xl mx-auto mb-16">
             <TypingText
-              text="Complete Surveys & Earn Instantly"
-              className="text-4xl md:text-5xl font-bold mb-6"
+              subtitleWords={[
+                "Watch Videos",
+                "Earn Rewards",
+                "Withdraw Securely"
+              ]}
             />
 
-            <p className="text-lg text-gray-600 dark:text-gray-400">
-              Answer simple surveys from trusted partners and earn real rewards.
-              Secure. Fast. Reliable.
+            <p className="mt-6 text-lg text-gray-600 dark:text-gray-400">
+              Earn real rewards by watching sponsored videos from trusted partners.
+              Simple. Transparent. Reliable.
             </p>
 
-            {/* Premium Resized CTA */}
             <div className="mt-8 flex justify-center">
               <PrimaryCTA
                 href="/dashboard"
-                className="
-                  px-8 py-3 
-                  text-base 
-                  rounded-xl 
-                  shadow-lg 
-                  hover:shadow-xl 
-                  transition-all 
-                  duration-300 
-                  font-semibold
-                "
+                className="px-7 py-3 text-sm rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
               >
-                Start Survey
+                Start Watching
               </PrimaryCTA>
             </div>
           </div>
 
-          {/* FEATURES SECTION */}
+          {/* FEATURES SECTION — Same Card Style */}
           <div className="grid md:grid-cols-2 gap-8 mb-20">
 
             <Reveal>
@@ -77,11 +68,11 @@ export default function SurveysPage() {
               >
                 <ClipboardList className="w-10 h-10 mb-4 text-blue-600" />
                 <h3 className="text-xl font-semibold mb-3">
-                  Verified Survey Providers
+                  Verified Video Providers
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400">
-                  We partner only with trusted survey networks to ensure safe
-                  and legitimate earning opportunities.
+                  We work only with premium advertising partners to ensure
+                  safe and legitimate earning opportunities.
                 </p>
               </motion.div>
             </Reveal>
@@ -103,11 +94,11 @@ export default function SurveysPage() {
               >
                 <Star className="w-10 h-10 mb-4 text-yellow-500" />
                 <h3 className="text-xl font-semibold mb-3">
-                  Fast & Secure Payments
+                  Instant Reward System
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400">
-                  Earn points instantly after completion and withdraw securely
-                  via your preferred payment method.
+                  Points are credited immediately after successful completion.
+                  Withdraw securely anytime.
                 </p>
               </motion.div>
             </Reveal>
@@ -124,39 +115,34 @@ export default function SurveysPage() {
             <FAQ
               items={[
                 {
-                  question: "How do I qualify for surveys?",
+                  question: "How do I earn by watching videos?",
                   answer:
-                    "Survey eligibility depends on your profile. Complete your account information accurately to receive more matches.",
+                    "Simply watch sponsored videos fully. Once completed, rewards are credited automatically.",
                 },
                 {
-                  question: "Why was I disqualified from a survey?",
+                  question: "Why was a video not credited?",
                   answer:
-                    "Some surveys require specific demographics. If your answers don't match the criteria, you may be screened out.",
+                    "Make sure you watched the entire video and did not switch tabs or close early.",
                 },
                 {
-                  question: "When do I receive my rewards?",
+                  question: "How fast are rewards credited?",
                   answer:
-                    "Rewards are usually credited instantly after successful completion. In rare cases, it may take a few hours.",
+                    "Rewards are usually credited instantly. Some offers may take a few minutes to verify.",
                 },
                 {
-                  question: "Is Cashooz safe and legitimate?",
+                  question: "Is this safe?",
                   answer:
-                    "Yes. We work with verified survey providers and use advanced security systems to protect user data.",
+                    "Yes. We partner with verified advertising networks and use advanced security systems.",
                 },
                 {
-                  question: "How can I increase my earnings?",
+                  question: "Can I withdraw anytime?",
                   answer:
-                    "Complete your profile fully, check daily for new surveys, and participate consistently to maximize earnings.",
+                    "Yes. Once you reach the minimum withdrawal threshold, you can request payout.",
                 },
                 {
-                  question: "What payment methods are available?",
+                  question: "Is there any cost to join?",
                   answer:
-                    "We support multiple secure withdrawal methods depending on your region.",
-                },
-                {
-                  question: "Do surveys cost anything?",
-                  answer:
-                    "No. All surveys are completely free to participate in.",
+                    "No. Joining and earning on Cashooz is completely free.",
                 },
               ]}
             />
