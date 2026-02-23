@@ -86,12 +86,10 @@ export default function TestProductsPage() {
       <main className="relative bg-white dark:bg-zinc-950 text-gray-900 dark:text-white overflow-hidden">
         <Background />
 
-        {/* ================= HERO (Typing Text) ================= */}
+        {/* ================= HERO WITH TYPING TEXT ================= */}
         <section className="relative z-10 max-w-6xl mx-auto px-4 py-24 text-center">
           <Reveal>
-            <TypingText>
-              Test Products & Earn Real Rewards
-            </TypingText>
+            <TypingText />
           </Reveal>
 
           <Reveal delay={0.2}>
@@ -107,7 +105,7 @@ export default function TestProductsPage() {
           </Reveal>
         </section>
 
-        {/* ================= PRODUCT GRID (Modern UX) ================= */}
+        {/* ================= PRODUCT SECTION ================= */}
         <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
@@ -160,7 +158,7 @@ export default function TestProductsPage() {
           </div>
         </section>
 
-        {/* ================= TRUST SECTION (Modern UX) ================= */}
+        {/* ================= TRUST SECTION ================= */}
         <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
@@ -221,7 +219,7 @@ export default function TestProductsPage() {
           <FAQ faqs={faqs} />
         </section>
 
-        {/* ================= FINAL CTA (Medium Button) ================= */}
+        {/* ================= FINAL CTA (MEDIUM BUTTON) ================= */}
         <section className="relative z-10 text-center py-24">
           <Reveal>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
