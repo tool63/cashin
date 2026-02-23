@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import SeoEngine from "@/components/seo/SeoEngine";
 import Background from "@/components/Background";
 import TypingText from "@/components/typing/TypingText";
@@ -138,7 +139,7 @@ export default function TestProductsPage() {
       <main className="min-h-screen text-gray-900 dark:text-white">
         <Background />
 
-        {/* HERO */}
+        {/* HERO (OPENING STYLE) */}
         <section className="max-w-6xl mx-auto px-4 py-24 text-center">
           <Reveal>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
@@ -157,7 +158,7 @@ export default function TestProductsPage() {
           </Reveal>
         </section>
 
-        {/* STATS */}
+        {/* STATS (OPENING STYLE) */}
         <section className="max-w-6xl mx-auto px-4 pb-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
@@ -191,7 +192,7 @@ export default function TestProductsPage() {
           </div>
         </section>
 
-        {/* PRODUCT GRID */}
+        {/* PRODUCT GRID (OPENING STYLE) */}
         <section className="max-w-7xl mx-auto px-4 pb-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
@@ -256,7 +257,7 @@ export default function TestProductsPage() {
           </div>
         </section>
 
-        {/* HOW IT WORKS */}
+        {/* HOW IT WORKS (OPENING STYLE) */}
         <section className="max-w-6xl mx-auto px-4 pb-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
@@ -304,7 +305,7 @@ export default function TestProductsPage() {
           <FAQ faqs={faqs} />
         </section>
 
-        {/* FINAL CTA */}
+        {/* FINAL CTA (OPENING STYLE) */}
         <section className="text-center py-24">
           <Reveal>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
