@@ -155,60 +155,64 @@ export default function SurveysPage() {
         </section>
 
         {/* SURVEY GRID */}
-        <section className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
-          <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              Featured Surveys
-            </h2>
-            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-              Share opinions and earn rewards
-            </p>
-          </Reveal>
+<section className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
+  <Reveal>
+    <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+      Featured Surveys
+    </h2>
+    <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+      Share opinions and earn rewards
+    </p>
+  </Reveal>
 
-          <div className="grid gap-6 md:grid-cols-3">
-            {surveys.map((survey) => (
-              <motion.div
-                key={survey.id}
-                whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md flex flex-col"
-              >
-                <div className="flex items-center gap-2 mb-3">
-                  <ClipboardList className="text-green-400 w-5 h-5" />
-                  <span className="text-xs px-3 py-1 rounded-full bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20">
-                    {survey.category}
-                  </span>
-                </div>
+  <div className="grid gap-6 md:grid-cols-3">
+    {surveys.map((survey) => (
+      <motion.div
+        key={survey.id}
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.5 }}
+        whileHover={{ y: -4 }}
+        className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md flex flex-col"
+      >
+        <div className="flex items-center gap-2 mb-3">
+          <ClipboardList className="text-green-400 w-5 h-5" />
+          <span className="text-xs px-3 py-1 rounded-full bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20">
+            {survey.category}
+          </span>
+        </div>
 
-                <h3 className="text-xl font-semibold mb-2">{survey.title}</h3>
+        <h3 className="text-xl font-semibold mb-2">{survey.title}</h3>
 
-                <p className="text-sm text-gray-600 dark:text-gray-300">
-                  Estimated Time: {survey.estimatedTime}
-                </p>
+        <p className="text-sm text-gray-600 dark:text-gray-300">
+          Estimated Time: {survey.estimatedTime}
+        </p>
 
-                <div className="flex justify-center mt-2">
-                  {Array(Math.floor(survey.rating))
-                    .fill(0)
-                    .map((_, i) => (
-                      <Star key={i} className="w-4 h-4 text-yellow-400" />
-                    ))}
-                </div>
-
-                <div className="mt-6 flex items-center justify-between">
-                  <span className="text-green-500 font-bold">{survey.reward}</span>
-
-                  <motion.a
-                    href="/signup"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.97 }}
-                    className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-sm"
-                  >
-                    Start Survey
-                  </motion.a>
-                </div>
-              </motion.div>
+        <div className="flex justify-center mt-2">
+          {Array(Math.floor(survey.rating))
+            .fill(0)
+            .map((_, i) => (
+              <Star key={i} className="w-4 h-4 text-yellow-400" />
             ))}
-          </div>
-        </section>
+        </div>
+
+        <div className="mt-6 flex items-center justify-between">
+          <span className="text-green-500 font-bold">{survey.reward}</span>
+
+          <motion.a
+            href="/signup"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-sm"
+          >
+            Start Survey
+          </motion.a>
+        </div>
+      </motion.div>
+    ))}
+  </div>
+</section>
 
         {/* HOW IT WORKS */}
         <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
