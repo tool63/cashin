@@ -26,7 +26,6 @@ type ProductTest = {
   description: string;
   reward: string;
   duration: string;
-  popular?: boolean;
 };
 
 const products: ProductTest[] = [
@@ -37,7 +36,6 @@ const products: ProductTest[] = [
       "Get early access to the latest smartphone and earn rewards by reviewing it.",
     reward: "$15.00",
     duration: "7 Days",
-    popular: true,
   },
   {
     id: 2,
@@ -224,48 +222,34 @@ export default function TestProductsPage() {
           </div>
         </section>
 
-        {/* OFFER GRID (3 PER LINE ON PC) */}
-        <section className="relative z-10 w-full px-4 pb-24">
+        {/* INSTALL STYLE CARDS (3 PER ROW ON PC) */}
+        <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              Featured Product Tests
+              Product Testing Offers
             </h2>
             <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-              Join product trials and earn rewards
+              Complete tasks and earn rewards
             </p>
           </Reveal>
 
-          {/* GRID FIX & SMALL CARDS */}
-          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            {products.map((product, i) => (
+          {/* GRID: 1 mobile, 2 tablet, 3 PC */}
+          <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            {products.map((product) => (
               <motion.div
                 key={product.id}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.12 }}
                 whileHover={{ y: -4 }}
-                className={`relative bg-white dark:bg-[#0a0d16] rounded-xl p-4 text-center border shadow-sm ${
-                  product.popular
-                    ? "border-green-400"
-                    : "border-gray-200 dark:border-gray-800"
-                }`}
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
               >
-                {product.popular && (
-                  <div className="absolute -top-3 right-4 bg-gradient-to-r from-yellow-400 to-green-500 text-black text-xs font-bold px-3 py-1 rounded-full shadow">
-                    Most Popular
-                  </div>
-                )}
+                <PackageCheck className="w-8 h-8 text-green-400 mb-4 mx-auto" />
 
-                <PackageCheck className="w-7 h-7 text-green-400 mb-3 mx-auto" />
-
-                <h3 className="text-lg font-semibold mb-2">{product.title}</h3>
-                <p className="text-xs text-gray-600 dark:text-gray-300 mb-3">
+                <h3 className="text-xl font-semibold mb-2">{product.title}</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-300">
                   {product.description}
                 </p>
 
                 {/* STAR RATING */}
-                <div className="flex justify-center mt-1 mb-2">
+                <div className="flex justify-center mt-3">
                   {Array(5)
                     .fill(0)
                     .map((_, index) => (
@@ -273,20 +257,18 @@ export default function TestProductsPage() {
                     ))}
                 </div>
 
-                <div className="text-xs text-gray-600 dark:text-gray-300 mb-3">
+                <div className="text-sm text-gray-600 dark:text-gray-300 mt-2">
                   Duration: {product.duration}
                 </div>
 
-                <div className="mt-2 flex items-center justify-between">
-                  <span className="text-green-500 font-bold text-sm">
-                    {product.reward}
-                  </span>
+                <div className="mt-6 flex items-center justify-between">
+                  <span className="text-green-500 font-bold">{product.reward}</span>
 
                   <motion.a
                     href="/signup"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.97 }}
-                    className="px-3 py-1 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-sm"
+                    className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-sm hover:shadow-md"
                   >
                     Apply Now
                   </motion.a>
@@ -312,7 +294,7 @@ export default function TestProductsPage() {
               <motion.div
                 key={step.title}
                 whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-4 text-center border shadow-sm"
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-4 text-center border shadow-md"
               >
                 <div className="flex justify-center mb-3">
                   <step.icon className="w-8 h-8 text-green-400" />
