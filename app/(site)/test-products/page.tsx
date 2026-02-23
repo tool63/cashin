@@ -72,7 +72,11 @@ const faqs = [
   },
   {
     q: "Is product testing free?",
-    a: "Yes. There are no hidden fees — you simply complete the test and earn rewards.",
+    a: "Yes. There are no hidden fees. You simply complete the test and earn rewards.",
+  },
+  {
+    q: "Who can participate?",
+    a: "Most users worldwide can apply depending on availability.",
   },
 ];
 
@@ -91,15 +95,14 @@ export default function TestProductsPage() {
         {/* ================= HERO ================= */}
         <section className="relative z-10 py-32 px-6 text-center max-w-5xl mx-auto">
           <Reveal>
-            <TypingText
-              text="Test Products & Earn Real Rewards"
-              className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight"
-            />
+            <TypingText className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
+              Test Products & Earn Real Rewards
+            </TypingText>
           </Reveal>
 
           <Reveal delay={0.2}>
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-10">
-              Join exclusive product trials, provide feedback, and get paid instantly.
+              Join exclusive product trials, provide honest feedback, and get paid instantly.
             </p>
           </Reveal>
 
