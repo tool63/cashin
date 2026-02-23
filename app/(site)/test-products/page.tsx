@@ -230,7 +230,8 @@ export default function TestProductsPage() {
         </section>
 
         {/* ================= PRODUCT OFFERS ================= */}
-<section className="relative z-10 w-full px-4 pb-24">
+<section{/* OFFER GRID (SURVEY STYLE) */}
+<section className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
   <Reveal>
     <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
       Product Testing Offers
@@ -240,31 +241,29 @@ export default function TestProductsPage() {
     </p>
   </Reveal>
 
-  {/* GRID: mobile 1, tablet 2, desktop 3 */}
-  <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+  {/* GRID (LIKE SURVEY GRID) */}
+  <div className="grid gap-6 md:grid-cols-3">
     {products.map((product) => (
       <motion.div
         key={product.id}
         whileHover={{ y: -4 }}
-        className="relative bg-white dark:bg-[#0a0d16] rounded-2xl p-5 border border-gray-200 dark:border-gray-800 shadow-md"
+        className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md flex flex-col"
       >
-        {/* ICON */}
-        <div className="flex justify-center mb-3">
-          <PackageCheck className="w-8 h-8 text-green-400" />
+        {/* ICON + BADGE */}
+        <div className="flex items-center justify-center gap-2 mb-3">
+          <PackageCheck className="text-green-400 w-5 h-5" />
         </div>
 
         {/* TITLE */}
-        <h3 className="text-lg font-semibold text-center mb-2">
-          {product.title}
-        </h3>
+        <h3 className="text-xl font-semibold mb-2">{product.title}</h3>
 
         {/* DESCRIPTION */}
-        <p className="text-xs text-gray-600 dark:text-gray-300 text-center">
+        <p className="text-sm text-gray-600 dark:text-gray-300">
           {product.description}
         </p>
 
         {/* STAR RATING */}
-        <div className="flex justify-center mt-3">
+        <div className="flex justify-center mt-2">
           {Array(5)
             .fill(0)
             .map((_, index) => (
@@ -273,21 +272,19 @@ export default function TestProductsPage() {
         </div>
 
         {/* DETAILS */}
-        <div className="text-xs text-gray-600 dark:text-gray-300 text-center mt-2">
+        <div className="text-sm text-gray-600 dark:text-gray-300 mt-2">
           Duration: {product.duration}
         </div>
 
         {/* FOOTER */}
-        <div className="mt-5 flex items-center justify-between">
-          <span className="text-green-500 font-bold text-sm">
-            {product.reward}
-          </span>
+        <div className="mt-6 flex items-center justify-between">
+          <span className="text-green-500 font-bold">{product.reward}</span>
 
           <motion.a
             href="/signup"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-md"
+            className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-sm"
           >
             Apply Now
           </motion.a>
