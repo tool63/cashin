@@ -219,9 +219,7 @@ export default function TestProductsPage() {
                   {stat.title}
                 </h3>
 
-                <div className="text-3xl font-extrabold mt-2">
-                  {stat.value}
-                </div>
+                <div className="text-3xl font-extrabold mt-2">{stat.value}</div>
               </motion.div>
             ))}
           </div>
