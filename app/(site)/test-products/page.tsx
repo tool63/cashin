@@ -13,9 +13,16 @@ import {
   Star,
   Gift,
   ShieldCheck,
+  Users,
+  TrendingUp,
+  DollarSign,
+  Smartphone,
+  Globe,
+  Headphones,
+  BarChart3,
 } from "lucide-react";
 
-/* ================= PRODUCT DATA ================= */
+/* ================= PRODUCT DATA (SURVEYS) ================= */
 
 type ProductTest = {
   id: number;
@@ -52,6 +59,82 @@ const products: ProductTest[] = [
     reward: "$12.00",
     duration: "5 Days",
   },
+  {
+    id: 4,
+    title: "Gaming Survey",
+    description: "Share your gaming habits and earn rewards.",
+    reward: "$4.00",
+    duration: "10 Min",
+  },
+  {
+    id: 5,
+    title: "App Usability Test",
+    description: "Test a new app and provide usability feedback.",
+    reward: "$6.00",
+    duration: "15 Min",
+  },
+  {
+    id: 6,
+    title: "Video Feedback",
+    description: "Watch and review short promotional videos.",
+    reward: "$2.00",
+    duration: "5 Min",
+  },
+  {
+    id: 7,
+    title: "Market Research Survey",
+    description: "Help brands understand consumer preferences.",
+    reward: "$5.00",
+    duration: "8 Min",
+  },
+  {
+    id: 8,
+    title: "Product Opinion Poll",
+    description: "Quick polls to shape future products.",
+    reward: "$1.50",
+    duration: "2 Min",
+  },
+  {
+    id: 9,
+    title: "Lifestyle Survey",
+    description: "Answer lifestyle questions and earn rewards.",
+    reward: "$3.00",
+    duration: "6 Min",
+  },
+];
+
+/* ================= STATS ================= */
+
+const stats = [
+  { icon: Users, title: "Active Users", value: "1M+" },
+  { icon: TrendingUp, title: "Daily Earnings", value: "$25K+" },
+  { icon: DollarSign, title: "Payouts", value: "$5M+" },
+  { icon: BarChart3, title: "Surveys Completed", value: "8M+" },
+];
+
+/* ================= HOW IT WORKS ================= */
+
+const steps = [
+  {
+    icon: Users,
+    title: "Sign Up",
+    description: "Create your account in minutes and join the community.",
+  },
+  {
+    icon: PackageCheck,
+    title: "Choose a Survey",
+    description: "Browse available surveys and select one that fits you.",
+  },
+  {
+    icon: CheckCircle,
+    title: "Complete Tasks",
+    description: "Answer questions and provide feedback.",
+  },
+  {
+    icon: Gift,
+    title: "Earn Rewards",
+    description: "Receive instant payouts after approval.",
+  },
 ];
 
 /* ================= FAQ DATA ================= */
@@ -86,7 +169,7 @@ export default function TestProductsPage() {
       <main className="relative bg-white dark:bg-zinc-950 text-gray-900 dark:text-white overflow-hidden">
         <Background />
 
-        {/* ================= HERO WITH TYPING TEXT ================= */}
+        {/* ================= HERO ================= */}
         <section className="relative z-10 max-w-6xl mx-auto px-4 py-24 text-center">
           <Reveal>
             <TypingText />
@@ -105,18 +188,49 @@ export default function TestProductsPage() {
           </Reveal>
         </section>
 
-        {/* ================= PRODUCT SECTION ================= */}
+        {/* ================= STATS SECTION ================= */}
         <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              Featured Product Tests
+              Platform Statistics
             </h2>
             <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-              Apply for premium brand trials and start earning today.
+              Trusted by thousands of users worldwide
             </p>
           </Reveal>
 
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-4">
+            {stats.map((stat, i) => (
+              <motion.div
+                key={i}
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+              >
+                <div className="flex justify-center mb-3">
+                  <stat.icon className="w-8 h-8 text-green-400" />
+                </div>
+                <h3 className="text-lg font-semibold">{stat.title}</h3>
+                <p className="text-2xl font-bold text-green-500">{stat.value}</p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* ================= PRODUCT SECTION (GRID RULES) ================= */}
+        <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              Featured Surveys
+            </h2>
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+              PC: 3 per row | Mid: 2 per row | Mobile: 1 per row
+            </p>
+          </Reveal>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {products.map((product, i) => (
               <motion.div
                 key={product.id}
@@ -128,7 +242,7 @@ export default function TestProductsPage() {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.15 }}
+                transition={{ delay: i * 0.12 }}
               >
                 {product.popular && (
                   <div className="absolute -top-3 right-4 bg-gradient-to-r from-yellow-400 to-green-500 text-black text-xs font-bold px-3 py-1 rounded-full shadow">
@@ -153,6 +267,39 @@ export default function TestProductsPage() {
                     Apply Now <CheckCircle size={16} />
                   </PrimaryCTA>
                 </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* ================= HOW IT WORKS ================= */}
+        <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              How It Works
+            </h2>
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+              Start earning in four simple steps
+            </p>
+          </Reveal>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {steps.map((step, i) => (
+              <motion.div
+                key={i}
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.12 }}
+              >
+                <div className="flex justify-center mb-3">
+                  <step.icon className="w-8 h-8 text-green-400" />
+                </div>
+                <h3 className="text-lg font-semibold">{step.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
+                  {step.description}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -219,7 +366,7 @@ export default function TestProductsPage() {
           <FAQ faqs={faqs} />
         </section>
 
-        {/* ================= FINAL CTA (MEDIUM BUTTON) ================= */}
+        {/* ================= FINAL CTA ================= */}
         <section className="relative z-10 text-center py-24">
           <Reveal>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
