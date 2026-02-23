@@ -9,191 +9,238 @@ import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
 import FAQ from "@/components/faq/FAQ";
 import {
-  ClipboardList,
+  ShoppingBag,
   Star,
-  Trophy,
-  User,
-  TrendingUp,
-  Gift,
+  ShieldCheck,
+  Zap,
+  Crown,
+  Sparkles,
 } from "lucide-react";
 
-/* ================= OFFERS ================= */
-const apps = [
-  { id: 1, name: "Photo Editor Pro", category: "Utilities", reward: "$2", rating: 4.8, installs: "500K+" },
-  { id: 2, name: "Fitness Tracker", category: "Health", reward: "$3", rating: 4.7, installs: "350K+" },
-  { id: 3, name: "Language Learner", category: "Education", reward: "$2", rating: 4.6, installs: "200K+" },
-  { id: 4, name: "Crypto Wallet", category: "Finance", reward: "$4", rating: 4.9, installs: "600K+" },
-  { id: 5, name: "Music Streamer", category: "Entertainment", reward: "$2", rating: 4.7, installs: "800K+" },
-  { id: 6, name: "Budget Planner", category: "Finance", reward: "$3", rating: 4.6, installs: "250K+" },
-  { id: 7, name: "Daily News App", category: "News", reward: "$2", rating: 4.5, installs: "150K+" },
-  { id: 8, name: "Gaming Hub", category: "Gaming", reward: "$5", rating: 4.9, installs: "1M+" },
-  { id: 9, name: "Shopping Rewards", category: "Shopping", reward: "$3", rating: 4.8, installs: "400K+" },
-];
-
-/* ================= SAFE COUNT UP ================= */
-function CountUp({ end }: { end: number }) {
-  const [count, setCount] = React.useState(0);
-  const ref = React.useRef<HTMLDivElement | null>(null);
-  const hasAnimated = React.useRef(false);
-
-  React.useEffect(() => {
-    if (!ref.current) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated.current) {
-          hasAnimated.current = true;
-
-          let start = 0;
-          const duration = 2000;
-          const increment = end / (duration / 16);
-
-          const counter = setInterval(() => {
-            start += increment;
-
-            if (start >= end) {
-              setCount(end);
-              clearInterval(counter);
-            } else {
-              setCount(Math.floor(start));
-            }
-          }, 16);
-
-          observer.disconnect(); // 🔥 stops retrigger
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    observer.observe(ref.current);
-
-    return () => observer.disconnect();
-  }, [end]);
-
-  return <div ref={ref}>{count.toLocaleString()}</div>;
-}
-
-/* ================= STATS ================= */
-const stats = [
-  { label: "Total Installs", number: 1200000, icon: <Trophy className="w-6 h-6 text-yellow-400" /> },
-  { label: "Active Users", number: 350000, icon: <User className="w-6 h-6 text-green-400" /> },
-  { label: "Avg Reward", number: 3, icon: <TrendingUp className="w-6 h-6 text-blue-400" /> },
+/* ================= PRODUCTS ================= */
+const products = [
+  {
+    id: 1,
+    name: "AI Business Toolkit",
+    category: "AI Suite",
+    price: "$29",
+    rating: 4.9,
+    badge: "Best Seller",
+  },
+  {
+    id: 2,
+    name: "Premium Design System",
+    category: "UI Kit",
+    price: "$49",
+    rating: 4.8,
+    badge: "Pro Choice",
+  },
+  {
+    id: 3,
+    name: "Growth Automation Pack",
+    category: "Marketing",
+    price: "$39",
+    rating: 4.9,
+    badge: "Hot",
+  },
 ];
 
 /* ================= FAQ ================= */
 const faqs = [
-  { q: "How does it work?", a: "Install apps and complete simple actions to earn rewards." },
-  { q: "Are apps safe?", a: "Yes. We feature verified and trusted apps only." },
-  { q: "How fast are rewards credited?", a: "Rewards are usually credited instantly." },
-  { q: "Can I uninstall after earning?", a: "Yes, after completing required tasks." },
+  {
+    q: "Are these lifetime access products?",
+    a: "Yes. One-time purchase gives you lifetime access.",
+  },
+  {
+    q: "Do I get future updates?",
+    a: "Yes. All updates are included for free.",
+  },
+  {
+    q: "Is premium support included?",
+    a: "Yes. Dedicated support is available.",
+  },
 ];
 
 /* ================= PAGE ================= */
-export default function AppInstallPage() {
+export default function TestProductsPage() {
   return (
     <>
       <Meta
-        title="Install Apps & Earn | Cashog"
-        description="Install apps and earn rewards instantly with Cashog."
+        title="Premium Products | Cashog"
+        description="Discover premium digital products designed for professionals."
       />
 
-      <main className="relative min-h-screen text-gray-900 dark:text-white">
+      <main className="relative min-h-screen text-gray-900 dark:text-white overflow-hidden">
         <Background />
 
-        <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
+        {/* ================= HERO SECTION ================= */}
+        <section className="relative z-10 max-w-7xl mx-auto px-6 pt-28 pb-28 text-center">
 
-          {/* HERO */}
           <Reveal>
-            <div className="text-center mb-20">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-                Install Apps & Earn Rewards
-              </h1>
-
-              <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold gradient-text mb-6">
-                <TypingText />
-              </div>
-
-              <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
-                Install premium apps and complete actions to earn real rewards instantly.
-              </p>
-
-              <PrimaryCTA href="/signup">
-                Start Earning
-              </PrimaryCTA>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-yellow-400/20 to-green-400/20 border border-yellow-400/30 mb-6">
+              <Sparkles className="w-4 h-4 text-yellow-400" />
+              <span className="text-sm font-medium">
+                Premium Digital Marketplace
+              </span>
             </div>
+
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold leading-tight mb-6">
+              Power Your Business With
+            </h1>
+
+            <div className="text-3xl sm:text-5xl md:text-6xl font-extrabold mb-8 bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
+              <TypingText />
+            </div>
+
+            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-12 leading-relaxed">
+              Elite digital products engineered for scalability, growth, and premium user experience.
+            </p>
+
+            <PrimaryCTA href="/signup">
+              Explore Products
+            </PrimaryCTA>
           </Reveal>
 
-          {/* OFFERS GRID */}
-          <div className="grid gap-6 md:grid-cols-3 mb-24">
-            {apps.map((app) => (
+        </section>
+
+        {/* ================= TRUST SECTION ================= */}
+        <section className="relative z-10 max-w-6xl mx-auto px-6 pb-28">
+          <Reveal>
+            <h2 className="text-4xl font-bold text-center mb-4">
+              Why Choose Our Products
+            </h2>
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-14">
+              Designed with performance, security, and scalability in mind.
+            </p>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                {
+                  icon: <ShieldCheck className="w-8 h-8 text-green-400" />,
+                  title: "Enterprise Security",
+                  desc: "Built with modern architecture and encrypted systems.",
+                },
+                {
+                  icon: <Zap className="w-8 h-8 text-yellow-400" />,
+                  title: "Instant Access",
+                  desc: "Get immediate delivery after purchase.",
+                },
+                {
+                  icon: <Crown className="w-8 h-8 text-purple-400" />,
+                  title: "Premium Quality",
+                  desc: "Crafted for professionals and teams.",
+                },
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  whileHover={{ y: -6 }}
+                  className="bg-white/70 dark:bg-[#0a0d16]/80 backdrop-blur-lg rounded-3xl p-8 border border-gray-200 dark:border-gray-800 shadow-xl text-center"
+                >
+                  <div className="flex justify-center mb-4">
+                    {item.icon}
+                  </div>
+
+                  <h3 className="text-lg font-semibold mb-3">
+                    {item.title}
+                  </h3>
+
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">
+                    {item.desc}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </Reveal>
+        </section>
+
+        {/* ================= PRODUCTS SECTION ================= */}
+        <section className="relative z-10 max-w-7xl mx-auto px-6 pb-32">
+          <Reveal>
+            <h2 className="text-4xl font-bold text-center mb-4">
+              Featured Premium Products
+            </h2>
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-14">
+              Carefully crafted tools to accelerate your success.
+            </p>
+          </Reveal>
+
+          <div className="grid md:grid-cols-3 gap-10">
+            {products.map((product) => (
               <motion.div
-                key={app.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
+                key={product.id}
+                whileHover={{ y: -8 }}
+                className="group relative bg-gradient-to-br from-white to-gray-50 dark:from-[#0a0d16] dark:to-[#101424] rounded-3xl p-8 border border-gray-200 dark:border-gray-800 shadow-xl transition-all duration-300"
               >
-                <div className="flex justify-between items-center mb-4">
-                  <ClipboardList className="text-green-400 w-5 h-5" />
-                  <span className="text-xs px-3 py-1 rounded-full bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20">
-                    {app.category}
-                  </span>
+                <div className="absolute top-6 right-6 text-xs px-3 py-1 rounded-full bg-gradient-to-r from-yellow-400 to-green-400 text-black font-semibold shadow-md">
+                  {product.badge}
                 </div>
 
-                <h3 className="text-xl font-semibold mb-2">{app.name}</h3>
+                <ShoppingBag className="w-10 h-10 text-green-400 mb-6" />
 
-                <div className="flex justify-center mt-2">
-                  {Array(Math.floor(app.rating)).fill(0).map((_, i) => (
+                <h3 className="text-2xl font-bold mb-3">
+                  {product.name}
+                </h3>
+
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                  {product.category}
+                </p>
+
+                <div className="flex mb-6">
+                  {Array(Math.floor(product.rating)).fill(0).map((_, i) => (
                     <Star key={i} className="w-4 h-4 text-yellow-400" />
                   ))}
                 </div>
 
-                <div className="mt-6 flex items-center justify-between">
-                  <span className="text-green-500 font-bold">{app.reward}</span>
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl font-extrabold bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
+                    {product.price}
+                  </span>
 
                   <motion.a
                     href="/signup"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.97 }}
-                    className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-sm"
+                    whileHover={{ scale: 1.08 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-5 py-2 rounded-xl bg-gradient-to-r from-yellow-400 to-green-400 text-black font-semibold shadow-lg"
                   >
-                    Install Now
+                    Buy Now
                   </motion.a>
                 </div>
               </motion.div>
             ))}
           </div>
-
-          {/* STATS */}
-          <div className="grid gap-6 md:grid-cols-3 mb-24">
-            {stats.map((stat) => (
-              <motion.div
-                key={stat.label}
-                whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
-              >
-                <div className="flex justify-center mb-2">
-                  {stat.icon}
-                </div>
-
-                <h3 className="text-sm uppercase tracking-wide text-gray-600 dark:text-gray-400">
-                  {stat.label}
-                </h3>
-
-                <div className="text-3xl font-extrabold mt-2">
-                  <CountUp end={stat.number} />
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="mb-24">
-            <FAQ faqs={faqs} />
-          </div>
-
         </section>
+
+        {/* ================= FAQ SECTION ================= */}
+        <section className="relative z-10 max-w-4xl mx-auto px-6 pb-32 text-center">
+          <Reveal>
+            <h2 className="text-4xl font-bold mb-4">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-gray-600 dark:text-gray-300 mb-10">
+              Everything you need to know before purchasing.
+            </p>
+          </Reveal>
+
+          <FAQ faqs={faqs} />
+        </section>
+
+        {/* ================= FINAL CTA ================= */}
+        <section className="relative z-10 text-center pb-32">
+          <Reveal>
+            <h2 className="text-5xl font-extrabold mb-6">
+              Upgrade Your Digital Experience
+            </h2>
+
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-12">
+              Join thousands of professionals using Cashog premium tools.
+            </p>
+
+            <PrimaryCTA href="/signup">
+              Get Started Now
+            </PrimaryCTA>
+          </Reveal>
+        </section>
+
       </main>
     </>
   );
