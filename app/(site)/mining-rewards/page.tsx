@@ -18,32 +18,17 @@ import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
 import FAQ from "@/components/faq/FAQ";
 
-/* ================= MINING TASKS ================= */
+/* ================= PREMIUM MINING TASKS (9 ITEMS) ================= */
 const miningRewards = [
-  {
-    title: "Crypto Miner 101",
-    category: "Beginner",
-    difficulty: "Easy",
-    reward: "$2",
-  },
-  {
-    title: "Blockchain Basics",
-    category: "Education",
-    difficulty: "Medium",
-    reward: "$3",
-  },
-  {
-    title: "Altcoin Explorer",
-    category: "Research",
-    difficulty: "Hard",
-    reward: "$5",
-  },
-  {
-    title: "Mining Advanced Tips",
-    category: "Pro Level",
-    difficulty: "Expert",
-    reward: "$7",
-  },
+  { title: "Crypto Basics", category: "Beginner", difficulty: "Easy", reward: "$2" },
+  { title: "Blockchain Fundamentals", category: "Education", difficulty: "Medium", reward: "$3" },
+  { title: "Altcoin Research", category: "Research", difficulty: "Medium", reward: "$4" },
+  { title: "Mining Strategy Guide", category: "Pro", difficulty: "Hard", reward: "$5" },
+  { title: "Market Analysis Task", category: "Analytics", difficulty: "Hard", reward: "$6" },
+  { title: "Daily Mining Challenge", category: "Task", difficulty: "Easy", reward: "$2.5" },
+  { title: "Crypto Portfolio Tips", category: "Education", difficulty: "Medium", reward: "$3.5" },
+  { title: "Reward Booster Mission", category: "Bonus", difficulty: "Hard", reward: "$7" },
+  { title: "Advanced Mining Guide", category: "Expert", difficulty: "Very Hard", reward: "$8" },
 ];
 
 /* ================= FEATURES ================= */
@@ -51,18 +36,17 @@ const features = [
   {
     icon: <DollarSign size={36} className="text-green-400" />,
     title: "High Reward Tasks",
-    description:
-      "Earn more by completing higher difficulty mining challenges.",
+    description: "Earn premium rewards by completing structured challenges.",
   },
   {
     icon: <Shield size={36} className="text-blue-400" />,
     title: "Secure Platform",
-    description: "Your earnings and account are fully protected.",
+    description: "Your earnings and account data are fully protected.",
   },
   {
     icon: <TrendingUp size={36} className="text-yellow-400" />,
-    title: "Progress Tracking",
-    description: "Track your mining growth and maximize rewards.",
+    title: "Performance Tracking",
+    description: "Monitor your progress and maximize earnings.",
   },
 ];
 
@@ -70,15 +54,15 @@ const features = [
 const faqs = [
   {
     q: "What are Mining Rewards?",
-    a: "Mining Rewards allow you to complete structured earning tasks and receive real payouts.",
+    a: "Mining Rewards are structured earning tasks that reward users with real payouts.",
   },
   {
-    q: "Do I need real crypto mining hardware?",
-    a: "No. These are structured earning tasks, not real blockchain mining.",
+    q: "Do I need crypto mining hardware?",
+    a: "No. These are digital tasks and challenges — no hardware required.",
   },
   {
     q: "How fast are rewards credited?",
-    a: "Most rewards are credited instantly after successful completion.",
+    a: "Most rewards are credited instantly after task completion.",
   },
   {
     q: "Is it free to participate?",
@@ -86,7 +70,7 @@ const faqs = [
   },
   {
     q: "How do I withdraw earnings?",
-    a: "You can withdraw via PayPal or gift cards once you reach the minimum payout threshold.",
+    a: "You can withdraw via PayPal or gift cards after reaching minimum payout.",
   },
 ];
 
@@ -94,19 +78,20 @@ export default function MiningRewardsPage() {
   return (
     <>
       <Meta
-        title="Mining Rewards | Cashog"
-        description="Complete mining challenges and earn real rewards instantly on Cashog."
+        title="Premium Mining Rewards | Cashog"
+        description="Complete premium mining challenges and earn real rewards instantly."
       />
 
       <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
 
-        <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
-          {/* HERO */}
+        <section className="relative z-10 max-w-7xl mx-auto px-4 py-24">
+
+          {/* ================= HERO SECTION ================= */}
           <Reveal>
-            <div className="text-center mb-20">
+            <div className="text-center mb-24">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-                Mining Rewards
+                Premium Mining Rewards
               </h1>
 
               <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 gradient-text">
@@ -114,27 +99,43 @@ export default function MiningRewardsPage() {
               </div>
 
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed mb-10">
-                Complete structured mining challenges and earn real money rewards instantly.
+                Complete premium challenges and unlock real rewards through structured tasks.
               </p>
 
               <PrimaryCTA href="/signup">
-                Start Mining Now
+                Start Earning Now
               </PrimaryCTA>
             </div>
           </Reveal>
 
-          {/* MINING TASKS */}
-          <div className="grid gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-4 mb-24">
+          {/* ================= PREMIUM TASKS SECTION ================= */}
+          <Reveal>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
+                Premium Opportunities
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                High-value tasks designed to maximize your earning potential.
+              </p>
+            </div>
+          </Reveal>
+
+          {/* TASK CARDS (Premium Layout) */}
+          <div className="grid gap-6 md:gap-8 md:grid-cols-3 lg:grid-cols-3 mb-28">
             {miningRewards.map((task, i) => (
               <Reveal key={i}>
                 <motion.div
                   whileHover={{ y: -6 }}
                   transition={{ type: "spring", stiffness: 200 }}
-                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-xl transition-all duration-300"
+                  className="bg-white/90 dark:bg-[#0c111b]/90 backdrop-blur-xl
+                  rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800
+                  shadow-sm hover:shadow-xl transition-all duration-300"
                 >
                   {/* Category Badge */}
                   <div className="flex justify-center mb-3">
-                    <span className="text-xs font-semibold px-3 py-1 rounded-full bg-gradient-to-r from-yellow-400/20 to-green-400/20 text-yellow-600 dark:text-yellow-400 border border-yellow-400/30">
+                    <span className="text-xs font-semibold px-3 py-1 rounded-full
+                      bg-yellow-400/10 text-yellow-600 dark:text-yellow-400
+                      border border-yellow-400/30">
                       {task.category}
                     </span>
                   </div>
@@ -155,29 +156,40 @@ export default function MiningRewardsPage() {
                     Reward: {task.reward}
                   </p>
 
-                  {/* Premium Compact Button */}
                   <a
                     href="/signup"
-                    className="inline-flex items-center justify-center px-5 py-2 text-sm font-semibold rounded-xl 
-                    bg-gradient-to-r from-yellow-400 to-green-400 
-                    text-black shadow-md hover:shadow-lg 
-                    transition-all duration-300 
-                    hover:scale-105 active:scale-95"
+                    className="inline-flex items-center justify-center px-5 py-2 text-sm font-semibold rounded-xl
+                    bg-gradient-to-r from-yellow-400 to-green-400
+                    text-black shadow-md hover:shadow-lg
+                    transition-all duration-300 hover:scale-105 active:scale-95"
                   >
-                    Mine Now
+                    Complete Task
                   </a>
                 </motion.div>
               </Reveal>
             ))}
           </div>
 
-          {/* FEATURES */}
-          <div className="grid gap-6 md:gap-8 md:grid-cols-3 mb-24">
+          {/* ================= FEATURES SECTION ================= */}
+          <Reveal>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
+                Platform Advantages
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Secure, fast, and optimized for earning opportunities.
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="grid gap-6 md:gap-8 md:grid-cols-3 mb-28">
             {features.map((feature, i) => (
               <Reveal key={i}>
                 <motion.div
                   whileHover={{ y: -4 }}
-                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-lg transition-all duration-300"
+                  className="bg-white/90 dark:bg-[#0c111b]/90 backdrop-blur-xl
+                  rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800
+                  shadow-sm hover:shadow-lg transition-all duration-300"
                 >
                   <div className="mb-4 flex justify-center">
                     {feature.icon}
@@ -195,29 +207,40 @@ export default function MiningRewardsPage() {
             ))}
           </div>
 
-          {/* HOW IT WORKS */}
-          <div className="grid gap-6 md:gap-8 md:grid-cols-3 mb-24">
+          {/* ================= HOW IT WORKS SECTION ================= */}
+          <div className="mb-12 text-center">
+            <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
+              How It Works
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              Start earning in three simple steps.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:gap-8 md:grid-cols-3 mb-28">
             {[
               {
                 icon: <User size={32} className="text-yellow-400" />,
-                title: "Sign Up",
-                desc: "Create your Cashog account in minutes.",
+                title: "Create Account",
+                desc: "Join in seconds and start earning opportunities.",
               },
               {
                 icon: <Trophy size={32} className="text-green-400" />,
                 title: "Complete Tasks",
-                desc: "Finish mining challenges to earn rewards.",
+                desc: "Finish challenges and unlock rewards.",
               },
               {
                 icon: <Gift size={32} className="text-yellow-400" />,
                 title: "Withdraw",
-                desc: "Redeem your earnings securely and easily.",
+                desc: "Redeem earnings securely and easily.",
               },
             ].map((step, i) => (
               <Reveal key={i}>
                 <motion.div
                   whileHover={{ y: -6 }}
-                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-lg transition-all duration-300"
+                  className="bg-white dark:bg-[#0c111b] rounded-2xl p-6 text-center
+                  border border-gray-200 dark:border-gray-800 shadow-sm
+                  hover:shadow-lg transition-all duration-300"
                 >
                   <div className="mb-4 flex justify-center">
                     {step.icon}
@@ -235,7 +258,7 @@ export default function MiningRewardsPage() {
             ))}
           </div>
 
-          {/* FAQ */}
+          {/* ================= FAQ SECTION ================= */}
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               Frequently Asked Questions
@@ -250,15 +273,15 @@ export default function MiningRewardsPage() {
             <FAQ faqs={faqs} />
           </div>
 
-          {/* FINAL CTA */}
+          {/* ================= FINAL CTA ================= */}
           <Reveal>
             <div className="text-center">
               <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-                Ready to Start Mining?
+                Ready to Start Earning?
               </h2>
 
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed mb-10">
-                Join today and unlock structured earning opportunities.
+                Join today and unlock premium earning opportunities.
               </p>
 
               <PrimaryCTA href="/signup">
