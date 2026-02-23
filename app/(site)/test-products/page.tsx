@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import SeoEngine from "@/components/seo/SeoEngine";
 import Background from "@/components/Background";
-import TypingText from "@/components/typing/TypingText";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
 import FAQ from "@/components/faq/FAQ";
@@ -60,7 +59,7 @@ const products: ProductTest[] = [
 const faqs = [
   {
     q: "How do product tests work?",
-    a: "Sign up, apply for a product test, receive instructions, complete the test, and submit feedback to earn your reward.",
+    a: "Sign up, apply for a product test, complete the instructions, and submit feedback to earn rewards.",
   },
   {
     q: "When will I receive my reward?",
@@ -68,15 +67,11 @@ const faqs = [
   },
   {
     q: "Do I keep the product?",
-    a: "Some tests allow you to keep the product, while others require returns. Details are provided beforehand.",
+    a: "Some tests allow you to keep the product, others require returns. Details are shown before applying.",
   },
   {
     q: "Is product testing free?",
-    a: "Yes. There are no hidden fees. You simply complete the test and earn rewards.",
-  },
-  {
-    q: "Who can participate?",
-    a: "Most users worldwide can apply depending on availability.",
+    a: "Yes. There are no hidden fees.",
   },
 ];
 
@@ -85,19 +80,18 @@ export default function TestProductsPage() {
     <>
       <SeoEngine
         title="Test Products | Cashog"
-        description="Join exclusive product testing programs and earn instant rewards with Cashog."
+        description="Join exclusive product testing programs and earn instant rewards."
       />
 
       <main className="relative bg-white dark:bg-zinc-950 text-gray-900 dark:text-white overflow-hidden">
-
         <Background />
 
         {/* ================= HERO ================= */}
         <section className="relative z-10 py-32 px-6 text-center max-w-5xl mx-auto">
           <Reveal>
-            <TypingText className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
+            <h1 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
               Test Products & Earn Real Rewards
-            </TypingText>
+            </h1>
           </Reveal>
 
           <Reveal delay={0.2}>
@@ -215,15 +209,12 @@ export default function TestProductsPage() {
           </div>
         </section>
 
-        {/* ================= FAQ SECTION ================= */}
+        {/* ================= FAQ ================= */}
         <section className="relative z-10 max-w-6xl mx-auto px-6 py-28">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-3">
               Frequently Asked Questions
             </h2>
-            <p className="text-center text-gray-600 dark:text-gray-400 mb-12">
-              Everything you need to know about product testing.
-            </p>
           </Reveal>
 
           <FAQ faqs={faqs} />
@@ -243,7 +234,6 @@ export default function TestProductsPage() {
             </PrimaryCTA>
           </Reveal>
         </section>
-
       </main>
     </>
   );
