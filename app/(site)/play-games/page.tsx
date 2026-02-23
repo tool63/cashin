@@ -8,7 +8,6 @@ import {
   ClipboardList,
   TrendingUp,
   Star,
-  Joystick,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import Meta from "@/components/seo/SeoEngine";
@@ -76,13 +75,13 @@ function StarRating({ rating }: { rating: number }) {
       {Array(fullStars)
         .fill(0)
         .map((_, i) => (
-          <Star key={`full-${i}`} className="w-5 h-5 text-yellow-400" />
+          <Star key={`full-${i}`} className="w-4 h-4 text-yellow-400" />
         ))}
-      {halfStar && <Star className="w-5 h-5 text-yellow-400 opacity-60" />}
+      {halfStar && <Star className="w-4 h-4 text-yellow-400 opacity-60" />}
       {Array(emptyStars)
         .fill(0)
         .map((_, i) => (
-          <Star key={`empty-${i}`} className="w-5 h-5 text-gray-300 dark:text-gray-600" />
+          <Star key={`empty-${i}`} className="w-4 h-4 text-gray-300 dark:text-gray-600" />
         ))}
     </div>
   );
@@ -138,26 +137,6 @@ export default function PlayGamesPage() {
             </div>
           </Reveal>
 
-          {/* PLATFORM STATS */}
-          <Reveal>
-            <div className="grid gap-6 md:grid-cols-3 mb-24">
-              {stats.map((stat) => (
-                <motion.div
-                  key={stat.label}
-                  whileHover={{ y: -4 }}
-                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
-                >
-                  <h3 className="text-lg font-medium text-gray-600 dark:text-gray-400">
-                    {stat.label}
-                  </h3>
-                  <div className="text-3xl font-extrabold mt-2">
-                    <CountUp end={stat.number} />
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </Reveal>
-
           {/* GAMES GRID */}
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
@@ -173,8 +152,7 @@ export default function PlayGamesPage() {
             {games.map((game) => (
               <Reveal key={game.id}>
                 <motion.div
-                  whileHover={{ y: -6, scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 200 }}
+                  whileHover={{ y: -4 }}
                   className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
                 >
                   <div className="flex justify-between items-center mb-4">
@@ -195,14 +173,47 @@ export default function PlayGamesPage() {
                   <div className="mt-6 flex items-center justify-between">
                     <span className="text-green-500 font-bold">{game.reward}</span>
 
-                    <PrimaryCTA href="/signup">
+                    <motion.a
+                      href="/signup"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.97 }}
+                      className="
+                        px-3 py-1.5 text-xs font-semibold
+                        rounded-lg
+                        bg-gradient-to-r from-green-400 to-green-600
+                        text-white
+                        shadow-sm
+                        hover:shadow-md
+                        transition-all duration-200
+                      "
+                    >
                       Play Now
-                    </PrimaryCTA>
+                    </motion.a>
                   </div>
                 </motion.div>
               </Reveal>
             ))}
           </div>
+
+          {/* PLATFORM STATS */}
+          <Reveal>
+            <div className="grid gap-6 md:grid-cols-3 mb-24">
+              {stats.map((stat) => (
+                <motion.div
+                  key={stat.label}
+                  whileHover={{ y: -4 }}
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
+                >
+                  <h3 className="text-sm uppercase tracking-wide text-gray-600 dark:text-gray-400">
+                    {stat.label}
+                  </h3>
+                  <div className="text-3xl font-extrabold mt-2">
+                    <CountUp end={stat.number} />
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </Reveal>
 
           {/* HOW IT WORKS */}
           <Reveal>
