@@ -46,7 +46,7 @@ const stats = [
   { label: "Active Users", number: 250000, icon: <Users className="w-6 h-6 text-green-400" /> },
   { label: "Surveys Completed", number: 1200000, icon: <TrendingUp className="w-6 h-6 text-green-400" /> },
   { label: "Total Paid", number: 850000, icon: <Gift className="w-6 h-6 text-green-400" /> },
-  { label: "Avg Rating", number: 48, icon: <Star className="w-6 h-6 text-green-400" /> },
+  { label: "Avg Rating", number: 4.8, icon: <Star className="w-6 h-6 text-green-400" /> },
 ];
 
 /* ================= COUNT UP ================= */
@@ -96,7 +96,7 @@ export default function SurveysPage() {
         <section className="relative z-10 max-w-7xl mx-auto px-4 py-20 text-center">
           <Reveal>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-              Earn Rewards by Completing Surveys
+              Earn Instant Rewards by
             </h1>
 
             <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold gradient-text mb-6">
