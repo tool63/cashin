@@ -22,21 +22,25 @@ import FAQ from "@/components/faq/FAQ";
 const miningRewards = [
   {
     title: "Crypto Miner 101",
+    category: "Beginner",
     difficulty: "Easy",
     reward: "$2",
   },
   {
     title: "Blockchain Basics",
+    category: "Education",
     difficulty: "Medium",
     reward: "$3",
   },
   {
     title: "Altcoin Explorer",
+    category: "Research",
     difficulty: "Hard",
     reward: "$5",
   },
   {
     title: "Mining Advanced Tips",
+    category: "Pro Level",
     difficulty: "Expert",
     reward: "$7",
   },
@@ -47,7 +51,8 @@ const features = [
   {
     icon: <DollarSign size={36} className="text-green-400" />,
     title: "High Reward Tasks",
-    description: "Earn more by completing higher difficulty mining challenges.",
+    description:
+      "Earn more by completing higher difficulty mining challenges.",
   },
   {
     icon: <Shield size={36} className="text-blue-400" />,
@@ -69,19 +74,19 @@ const faqs = [
   },
   {
     q: "Do I need real crypto mining hardware?",
-    a: "No. These are reward-based tasks, not real blockchain mining.",
+    a: "No. These are structured earning tasks, not real blockchain mining.",
   },
   {
     q: "How fast are rewards credited?",
-    a: "Most tasks credit rewards instantly after successful completion.",
+    a: "Most rewards are credited instantly after successful completion.",
   },
   {
     q: "Is it free to participate?",
-    a: "Yes, joining and participating is completely free.",
+    a: "Yes. Joining and completing tasks is completely free.",
   },
   {
-    q: "How do I withdraw?",
-    a: "You can withdraw via PayPal or gift cards after reaching the minimum threshold.",
+    q: "How do I withdraw earnings?",
+    a: "You can withdraw via PayPal or gift cards once you reach the minimum payout threshold.",
   },
 ];
 
@@ -97,7 +102,6 @@ export default function MiningRewardsPage() {
         <Background />
 
         <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
-
           {/* HERO */}
           <Reveal>
             <div className="text-center mb-20">
@@ -124,15 +128,22 @@ export default function MiningRewardsPage() {
             {miningRewards.map((task, i) => (
               <Reveal key={i}>
                 <motion.div
-                  whileHover={{ y: -6, scale: 1.02 }}
+                  whileHover={{ y: -6 }}
                   transition={{ type: "spring", stiffness: 200 }}
-                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-xl transition-all duration-300"
                 >
-                  <div className="mb-4 flex justify-center">
-                    <ClipboardList size={32} className="text-yellow-400" />
+                  {/* Category Badge */}
+                  <div className="flex justify-center mb-3">
+                    <span className="text-xs font-semibold px-3 py-1 rounded-full bg-gradient-to-r from-yellow-400/20 to-green-400/20 text-yellow-600 dark:text-yellow-400 border border-yellow-400/30">
+                      {task.category}
+                    </span>
                   </div>
 
-                  <h3 className="text-xl font-semibold mb-2">
+                  <div className="mb-4 flex justify-center">
+                    <ClipboardList size={28} className="text-yellow-400" />
+                  </div>
+
+                  <h3 className="text-lg font-semibold mb-2">
                     {task.title}
                   </h3>
 
@@ -140,15 +151,21 @@ export default function MiningRewardsPage() {
                     Difficulty: {task.difficulty}
                   </p>
 
-                  <p className="text-green-600 font-bold">
+                  <p className="text-green-600 font-bold mb-4">
                     Reward: {task.reward}
                   </p>
 
-                  <div className="mt-4">
-                    <PrimaryCTA href="/signup">
-                      Mine Now
-                    </PrimaryCTA>
-                  </div>
+                  {/* Premium Compact Button */}
+                  <a
+                    href="/signup"
+                    className="inline-flex items-center justify-center px-5 py-2 text-sm font-semibold rounded-xl 
+                    bg-gradient-to-r from-yellow-400 to-green-400 
+                    text-black shadow-md hover:shadow-lg 
+                    transition-all duration-300 
+                    hover:scale-105 active:scale-95"
+                  >
+                    Mine Now
+                  </a>
                 </motion.div>
               </Reveal>
             ))}
@@ -160,7 +177,7 @@ export default function MiningRewardsPage() {
               <Reveal key={i}>
                 <motion.div
                   whileHover={{ y: -4 }}
-                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-lg transition-all duration-300"
                 >
                   <div className="mb-4 flex justify-center">
                     {feature.icon}
@@ -194,13 +211,13 @@ export default function MiningRewardsPage() {
               {
                 icon: <Gift size={32} className="text-yellow-400" />,
                 title: "Withdraw",
-                desc: "Redeem your earnings easily and securely.",
+                desc: "Redeem your earnings securely and easily.",
               },
             ].map((step, i) => (
               <Reveal key={i}>
                 <motion.div
                   whileHover={{ y: -6 }}
-                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-lg transition-all duration-300"
                 >
                   <div className="mb-4 flex justify-center">
                     {step.icon}
@@ -249,7 +266,6 @@ export default function MiningRewardsPage() {
               </PrimaryCTA>
             </div>
           </Reveal>
-
         </section>
       </main>
     </>
