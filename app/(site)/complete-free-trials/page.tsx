@@ -13,8 +13,8 @@ import {
   ShieldCheck,
   Rocket,
   Star,
+  User,
   Users,
-  TrendingUp,
   DollarSign,
 } from "lucide-react";
 
@@ -28,7 +28,7 @@ type Trial = {
   popular?: boolean;
 };
 
-/* ================= 6+ TRIALS ================= */
+/* ================= TRIAL DATA (6+) ================= */
 const trials: Trial[] = [
   {
     id: 1,
@@ -167,6 +167,52 @@ export default function FreeTrialsPage() {
           </div>
         </section>
 
+        {/* WHY TRUST */}
+        <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              Why Choose Cashog Free Trials?
+            </h2>
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+              Verified offers with instant rewards and premium experience
+            </p>
+          </Reveal>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {[
+              {
+                icon: ShieldCheck,
+                title: "Verified Offers",
+                desc: "All trials are manually verified for safety and real payouts."
+              },
+              {
+                icon: Gift,
+                title: "Instant Rewards",
+                desc: "Receive your earnings immediately after successful completion."
+              },
+              {
+                icon: Star,
+                title: "Premium Experience",
+                desc: "Clean UI, fast tracking and advanced payout system."
+              }
+            ].map((item) => (
+              <motion.div
+                key={item.title}
+                whileHover={{ y: -4 }}
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md"
+              >
+                <div className="flex justify-center mb-4">
+                  <item.icon className="w-8 h-8 text-yellow-400" />
+                </div>
+                <h3 className="text-lg font-semibold">{item.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
+                  {item.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
         {/* STATS */}
         <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
           <Reveal>
@@ -183,7 +229,7 @@ export default function FreeTrialsPage() {
               <motion.div
                 key={stat.label}
                 whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md"
               >
                 <div className="flex justify-center mb-2">{stat.icon}</div>
 
@@ -193,41 +239,6 @@ export default function FreeTrialsPage() {
 
                 <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">
                   {stat.label}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </section>
-
-        {/* HOW IT WORKS */}
-        <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
-          <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              How Free Trials Work
-            </h2>
-            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-              Start earning in three simple steps
-            </p>
-          </Reveal>
-
-          <div className="grid gap-6 md:grid-cols-3">
-            {[
-              { icon: User, title: "Sign Up", desc: "Create your account to access trials." },
-              { icon: Star, title: "Complete Trial", desc: "Try premium services and complete steps." },
-              { icon: Gift, title: "Earn Rewards", desc: "Receive instant payouts after completion." },
-            ].map((step) => (
-              <motion.div
-                key={step.title}
-                whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
-              >
-                <div className="flex justify-center mb-4">
-                  <step.icon className="w-8 h-8 text-yellow-400" />
-                </div>
-
-                <h3 className="text-lg font-semibold">{step.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
-                  {step.desc}
                 </p>
               </motion.div>
             ))}
