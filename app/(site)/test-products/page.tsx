@@ -71,7 +71,7 @@ const products: ProductTest[] = [
   },
 ];
 
-/* STATS (TYPE SAFE) */
+/* STATS */
 type Stat = {
   label: string;
   number: number;
@@ -138,52 +138,50 @@ export default function TestProductsPage() {
       <main className="min-h-screen text-gray-900 dark:text-white">
         <Background />
 
-        {/* HERO (OPENING STYLE) */}
-        <section className="max-w-6xl mx-auto px-4 py-24 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-              Test Products & Earn Rewards
-            </h1>
+        {/* HERO (OPENING) */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="max-w-6xl mx-auto px-4 py-24 text-center"
+        >
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
+            Test Products & Earn Rewards
+          </h1>
 
-            <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold gradient-text mb-6">
-              <TypingText />
-            </div>
+          <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold gradient-text mb-6">
+            <TypingText />
+          </div>
 
-            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
-              Join trials, give feedback, and get paid instantly.
-            </p>
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
+            Join trials, give feedback, and get paid instantly.
+          </p>
 
-            <PrimaryCTA href="/signup">Start Now</PrimaryCTA>
-          </motion.div>
-        </section>
+          <PrimaryCTA href="/signup">Start Now</PrimaryCTA>
+        </motion.section>
 
-        {/* STATS (OPENING STYLE) */}
-        <section className="max-w-6xl mx-auto px-4 pb-24">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              Platform Statistics
-            </h2>
-            <p className="text-center text-gray-600 dark:text-gray-300 mb-10">
-              Platform growth and impact
-            </p>
-          </motion.div>
+        {/* STATS (OPENING) */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
+          className="max-w-6xl mx-auto px-4 pb-24"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+            Platform Statistics
+          </h2>
+          <p className="text-center text-gray-600 dark:text-gray-300 mb-10">
+            Platform growth and impact
+          </p>
 
           <div className="grid gap-6 md:grid-cols-4">
             {stats.map((stat) => (
               <motion.div
                 key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
+                initial={{ opacity: 0, y: 20 }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
                 whileHover={{ y: -4 }}
                 className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md"
@@ -198,31 +196,30 @@ export default function TestProductsPage() {
               </motion.div>
             ))}
           </div>
-        </section>
+        </motion.section>
 
-        {/* PRODUCT GRID (OPENING STYLE) */}
-        <section className="max-w-7xl mx-auto px-4 pb-24">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              Product Offers
-            </h2>
-            <p className="text-center text-gray-600 dark:text-gray-300 mb-10">
-              Complete tasks and earn rewards
-            </p>
-          </motion.div>
+        {/* PRODUCT GRID (OPENING) */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
+          className="max-w-7xl mx-auto px-4 pb-24"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+            Product Offers
+          </h2>
+          <p className="text-center text-gray-600 dark:text-gray-300 mb-10">
+            Complete tasks and earn rewards
+          </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {products.map((product) => (
               <motion.div
                 key={product.id}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
                 className="border rounded-2xl p-5 bg-white dark:bg-[#0a0d16] shadow-md"
               >
@@ -267,23 +264,22 @@ export default function TestProductsPage() {
               </motion.div>
             ))}
           </div>
-        </section>
+        </motion.section>
 
-        {/* HOW IT WORKS (OPENING STYLE) */}
-        <section className="max-w-6xl mx-auto px-4 pb-24">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              How It Works
-            </h2>
-            <p className="text-center text-gray-600 dark:text-gray-300 mb-10">
-              Three steps to start earning
-            </p>
-          </motion.div>
+        {/* HOW IT WORKS (OPENING) */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
+          className="max-w-6xl mx-auto px-4 pb-24"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+            How It Works
+          </h2>
+          <p className="text-center text-gray-600 dark:text-gray-300 mb-10">
+            Three steps to start earning
+          </p>
 
           <div className="grid gap-6 md:grid-cols-4">
             {[
@@ -294,9 +290,9 @@ export default function TestProductsPage() {
             ].map((step) => (
               <motion.div
                 key={step.title}
-                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
+                initial={{ opacity: 0, y: 20 }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
                 className="bg-white dark:bg-[#0a0d16] rounded-2xl p-4 text-center border shadow-md"
               >
@@ -308,43 +304,41 @@ export default function TestProductsPage() {
               </motion.div>
             ))}
           </div>
-        </section>
+        </motion.section>
 
-        {/* FAQ (OPENING STYLE) */}
-        <section className="max-w-6xl mx-auto px-4 pb-24">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
-              Frequently Asked Questions
-            </h2>
-          </motion.div>
+        {/* FAQ (OPENING) */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
+          className="max-w-6xl mx-auto px-4 pb-24"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
+            Frequently Asked Questions
+          </h2>
 
           <FAQ faqs={faqs} />
-        </section>
+        </motion.section>
 
-        {/* FINAL CTA (OPENING STYLE) */}
-        <section className="text-center py-24">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-              Ready to Start?
-            </h2>
+        {/* FINAL CTA (OPENING) */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
+          className="text-center py-24"
+        >
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
+            Ready to Start?
+          </h2>
 
-            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
-              Join today and start earning.
-            </p>
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
+            Join today and start earning.
+          </p>
 
-            <PrimaryCTA href="/signup">Join Now</PrimaryCTA>
-          </motion.div>
-        </section>
+          <PrimaryCTA href="/signup">Join Now</PrimaryCTA>
+        </motion.section>
       </main>
     </>
   );
