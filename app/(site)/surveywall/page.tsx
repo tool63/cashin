@@ -7,7 +7,16 @@ import Background from "@/components/Background";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
 import FAQ from "@/components/faq/FAQ";
-import { ClipboardList, Star, Gift, Trophy, User, Users, TrendingUp } from "lucide-react";
+import {
+  ClipboardList,
+  Star,
+  Gift,
+  Trophy,
+  User,
+  Users,
+  TrendingUp,
+  DollarSign,
+} from "lucide-react";
 
 /* ================= SURVEY TYPE ================= */
 type Survey = {
@@ -18,7 +27,7 @@ type Survey = {
   popularity: number;
 };
 
-/* ================= SAMPLE SURVEY DATA ================= */
+/* ================= 9+ SURVEYS ================= */
 const surveys: Survey[] = [
   { id: 1, title: "Customer Satisfaction Survey", category: "Marketing", reward: "$2", popularity: 95 },
   { id: 2, title: "Product Feedback Survey", category: "Product", reward: "$3", popularity: 90 },
@@ -26,6 +35,9 @@ const surveys: Survey[] = [
   { id: 4, title: "Website Feedback Survey", category: "UX", reward: "$2.5", popularity: 85 },
   { id: 5, title: "Brand Awareness Survey", category: "Marketing", reward: "$2", popularity: 88 },
   { id: 6, title: "Employee Satisfaction Survey", category: "HR", reward: "$3.5", popularity: 70 },
+  { id: 7, title: "Gaming Preferences Survey", category: "Gaming", reward: "$2.8", popularity: 82 },
+  { id: 8, title: "Food & Nutrition Survey", category: "Health", reward: "$2.2", popularity: 78 },
+  { id: 9, title: "Social Media Trends Survey", category: "Social", reward: "$3", popularity: 91 },
 ];
 
 /* ================= COUNT UP ================= */
@@ -62,11 +74,11 @@ function CountUp({ end }: { end: number }) {
   return <div ref={ref}>{count.toLocaleString()}</div>;
 }
 
-/* ================= STATS ================= */
+/* ================= STATS WITH ICONS ================= */
 const stats = [
-  { label: "Total Surveys", number: 1200 },
-  { label: "Active Users", number: 15000 },
-  { label: "Average Reward ($)", number: 2.8 },
+  { label: "Total Surveys", number: 1250, icon: <ClipboardList className="w-6 h-6 text-green-400" /> },
+  { label: "Active Users", number: 15000, icon: <Users className="w-6 h-6 text-green-400" /> },
+  { label: "Average Reward ($)", number: 2.8, icon: <DollarSign className="w-6 h-6 text-green-400" /> },
 ];
 
 /* ================= FAQ ================= */
@@ -109,7 +121,7 @@ export default function SurveyWallPage() {
           </Reveal>
         </section>
 
-        {/* SURVEYS GRID */}
+        {/* SURVEYS GRID (9+ Offers) */}
         <section className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
@@ -164,7 +176,7 @@ export default function SurveyWallPage() {
           </div>
         </section>
 
-        {/* STATS */}
+        {/* STATS WITH ICONS */}
         <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
@@ -182,9 +194,12 @@ export default function SurveyWallPage() {
                 whileHover={{ y: -4 }}
                 className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
               >
+                <div className="flex justify-center mb-2">{stat.icon}</div>
+
                 <h3 className="text-3xl font-extrabold text-green-500">
                   <CountUp end={stat.number} />
                 </h3>
+
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
                   {stat.label}
                 </p>
