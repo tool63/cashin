@@ -18,7 +18,7 @@ import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
 import FAQ from "@/components/faq/FAQ";
 
-/* ================= PREMIUM GAMES (OFFERWALL STYLE) ================= */
+/* ================= PREMIUM GAMES ================= */
 const games = [
   { id: 1, name: "Crypto Racer", category: "Racing", reward: "$3", rating: 4.8, players: "50K+" },
   { id: 2, name: "Puzzle Mania", category: "Puzzle", reward: "$2", rating: 4.7, players: "75K+" },
@@ -146,7 +146,7 @@ export default function PlayGamesPage() {
           </motion.div>
         </section>
 
-        {/* ================= FEATURED GAMES (OFFERWALL STYLE) ================= */}
+        {/* ================= FEATURED GAMES ================= */}
         <section className="py-20 px-6 max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center">
             Premium Games
@@ -168,7 +168,6 @@ export default function PlayGamesPage() {
                 viewport={{ once: true }}
               >
                 <div>
-                  {/* Category Badge */}
                   <div className="flex justify-between items-center mb-4">
                     <ClipboardList className="text-yellow-500 w-5 h-5" />
                     <span className="text-xs px-3 py-1 rounded-full
@@ -178,19 +177,15 @@ export default function PlayGamesPage() {
                     </span>
                   </div>
 
-                  {/* Title */}
                   <h3 className="text-lg font-semibold mb-2">{game.name}</h3>
 
-                  {/* Details */}
                   <p className="text-sm text-gray-500 dark:text-gray-400">
                     Players: {game.players}
                   </p>
 
-                  {/* Rating */}
                   <StarRating rating={game.rating} />
                 </div>
 
-                {/* CTA (SMALL & MODERN) */}
                 <div className="mt-6 flex items-center justify-between">
                   <span className="text-green-600 font-bold">{game.reward}</span>
 
@@ -212,7 +207,7 @@ export default function PlayGamesPage() {
         </section>
 
         {/* ================= STATS (OFFERWALL STYLE) ================= */}
-        <section className="py-20 px-6 bg-gray-50 dark:bg-[#0c111b]">
+        <section className="py-20 px-6 max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center">
             Platform Performance
           </h2>
@@ -220,14 +215,13 @@ export default function PlayGamesPage() {
             Real-time insights from our growing community
           </p>
 
-          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid gap-6 md:grid-cols-3">
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
                 className="bg-white/90 dark:bg-[#0c111b]/90 backdrop-blur-xl
                 border border-gray-200 dark:border-gray-800
-                rounded-2xl p-6 text-center shadow-sm hover:shadow-xl
-                transition-all duration-300"
+                rounded-2xl p-6 text-center shadow-sm hover:shadow-xl"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -250,11 +244,11 @@ export default function PlayGamesPage() {
         </section>
 
         {/* ================= HOW IT WORKS (OFFERWALL STYLE) ================= */}
-        <section className="py-24 px-6 max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold">
+        <section className="py-20 px-6 max-w-7xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center">
             How It Works
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-12">
+          <p className="text-center text-gray-600 dark:text-gray-400 mb-12">
             Start earning in three simple steps
           </p>
 
@@ -284,21 +278,23 @@ export default function PlayGamesPage() {
           </div>
         </section>
 
-        {/* ================= FAQ ================= */}
-        <section className="py-20 px-6 max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+        {/* ================= FAQ (OFFERWALL STYLE) ================= */}
+        <section className="py-20 px-6 max-w-7xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center">
             Frequently Asked Questions
           </h2>
-          <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+          <p className="text-center text-gray-600 dark:text-gray-400 mb-12">
             Everything you need to know about Play & Earn
           </p>
 
-          <FAQ faqs={faqs} />
+          <div className="grid gap-6">
+            <FAQ faqs={faqs} />
+          </div>
         </section>
 
-        {/* ================= FINAL CTA ================= */}
-        <section className="py-28 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+        {/* ================= FINAL CTA (OFFERWALL STYLE) ================= */}
+        <section className="py-20 px-6 max-w-7xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold">
             Ready to Play & Earn?
           </h2>
           <p className="text-gray-600 dark:text-gray-400 mb-8">
