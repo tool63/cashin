@@ -201,98 +201,81 @@ export default function TestProductsPage() {
             </p>
           </Reveal>
 
-          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-            {stats.map((stat, index) => (
+          <div className="grid gap-6 md:grid-cols-4">
+            {stats.map((stat) => (
               <motion.div
                 key={stat.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md hover:shadow-xl transition-all duration-300"
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-4 text-center border border-gray-200 dark:border-gray-800 shadow-md"
               >
-                <div className="flex justify-center mb-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-yellow-400/20 to-green-400/20 rounded-xl flex items-center justify-center">
-                    <stat.icon className="w-6 h-6 text-green-400" />
-                  </div>
+                <div className="flex justify-center mb-2">
+                  <stat.icon className="w-6 h-6 text-green-400" />
                 </div>
 
-                <h3 className="text-sm uppercase tracking-wide text-gray-600 dark:text-gray-400 mb-1">
+                <h3 className="text-sm uppercase tracking-wide text-gray-600 dark:text-gray-400">
                   {stat.title}
                 </h3>
 
-                <div className="text-3xl font-extrabold bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
-                  {stat.value}
-                </div>
+                <div className="text-2xl font-extrabold mt-2">{stat.value}</div>
               </motion.div>
             ))}
           </div>
         </section>
 
-        {/* ================= PRODUCT OFFERS ================= */}
-<section{/* OFFER GRID (SURVEY STYLE) */}
-<section className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
-  <Reveal>
-    <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-      Product Testing Offers
-    </h2>
-    <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-      Complete tasks and earn rewards
-    </p>
-  </Reveal>
+        {/* PRODUCT OFFERS (GRID LIKE SURVEY STYLE) */}
+        <section className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              Product Testing Offers
+            </h2>
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+              Complete tasks and earn rewards
+            </p>
+          </Reveal>
 
-  {/* GRID (LIKE SURVEY GRID) */}
-  <div className="grid gap-6 md:grid-cols-3">
-    {products.map((product) => (
-      <motion.div
-        key={product.id}
-        whileHover={{ y: -4 }}
-        className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md flex flex-col"
-      >
-        {/* ICON + BADGE */}
-        <div className="flex items-center justify-center gap-2 mb-3">
-          <PackageCheck className="text-green-400 w-5 h-5" />
-        </div>
+          <div className="grid gap-6 md:grid-cols-3">
+            {products.map((product) => (
+              <motion.div
+                key={product.id}
+                whileHover={{ y: -4 }}
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md flex flex-col"
+              >
+                <PackageCheck className="w-8 h-8 text-green-400 mb-3 mx-auto" />
 
-        {/* TITLE */}
-        <h3 className="text-xl font-semibold mb-2">{product.title}</h3>
+                <h3 className="text-xl font-semibold mb-2">{product.title}</h3>
 
-        {/* DESCRIPTION */}
-        <p className="text-sm text-gray-600 dark:text-gray-300">
-          {product.description}
-        </p>
+                <p className="text-sm text-gray-600 dark:text-gray-300">
+                  {product.description}
+                </p>
 
-        {/* STAR RATING */}
-        <div className="flex justify-center mt-2">
-          {Array(5)
-            .fill(0)
-            .map((_, index) => (
-              <Star key={index} className="w-4 h-4 text-yellow-400" />
+                <div className="flex justify-center mt-2">
+                  {Array(5)
+                    .fill(0)
+                    .map((_, index) => (
+                      <Star key={index} className="w-4 h-4 text-yellow-400" />
+                    ))}
+                </div>
+
+                <div className="text-sm text-gray-600 dark:text-gray-300 mt-2">
+                  Duration: {product.duration}
+                </div>
+
+                <div className="mt-6 flex items-center justify-between">
+                  <span className="text-green-500 font-bold">{product.reward}</span>
+
+                  <motion.a
+                    href="/signup"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-sm"
+                  >
+                    Apply Now
+                  </motion.a>
+                </div>
+              </motion.div>
             ))}
-        </div>
-
-        {/* DETAILS */}
-        <div className="text-sm text-gray-600 dark:text-gray-300 mt-2">
-          Duration: {product.duration}
-        </div>
-
-        {/* FOOTER */}
-        <div className="mt-6 flex items-center justify-between">
-          <span className="text-green-500 font-bold">{product.reward}</span>
-
-          <motion.a
-            href="/signup"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-sm"
-          >
-            Apply Now
-          </motion.a>
-        </div>
-      </motion.div>
-    ))}
-  </div>
-</section>
+          </div>
+        </section>
 
         {/* HOW IT WORKS */}
         <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
@@ -305,24 +288,19 @@ export default function TestProductsPage() {
             </p>
           </Reveal>
 
-          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-            {steps.map((step, index) => (
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {steps.map((step) => (
               <motion.div
                 key={step.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md hover:shadow-xl transition-all duration-300"
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-4 text-center border shadow-md"
               >
-                <div className="flex justify-center mb-4">
-                  <div className="w-14 h-14 bg-gradient-to-br from-yellow-400/20 to-green-400/20 rounded-xl flex items-center justify-center">
-                    <step.icon className="w-7 h-7 text-green-400" />
-                  </div>
+                <div className="flex justify-center mb-3">
+                  <step.icon className="w-8 h-8 text-green-400" />
                 </div>
 
-                <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300">
+                <h3 className="text-lg font-semibold">{step.title}</h3>
+                <p className="text-xs text-gray-600 dark:text-gray-300 mt-2">
                   {step.description}
                 </p>
               </motion.div>
@@ -331,13 +309,13 @@ export default function TestProductsPage() {
         </section>
 
         {/* FAQ */}
-        <section className="relative z-10 max-w-4xl mx-auto px-4 pb-24">
+        <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               Frequently Asked Questions
             </h2>
             <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-              Everything you need to know about product testing
+              Everything you need to know
             </p>
           </Reveal>
 
@@ -345,14 +323,14 @@ export default function TestProductsPage() {
         </section>
 
         {/* FINAL CTA */}
-        <section className="relative z-10 text-center py-24 px-4">
+        <section className="relative z-10 text-center py-24">
           <Reveal>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
               Ready to Start Testing?
             </h2>
 
-            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed mb-10">
-              Join thousands of testers who are already earning rewards by sharing their opinions on premium products.
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed mb-10">
+              Join Cashog today and start earning with premium product tests.
             </p>
           </Reveal>
 
