@@ -7,15 +7,14 @@ import Background from "@/components/Background";
 import TypingText from "@/components/typing/TypingText";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
+import FAQ from "@/components/faq/FAQ";
 import {
   CheckCircle,
   ClipboardList,
   Gift,
   Star,
-  Trophy,
   User,
   Users,
-  TrendingUp,
 } from "lucide-react";
 
 /* ================= TASK TYPE ================= */
@@ -28,7 +27,7 @@ type Task = {
   completionRate: number;
 };
 
-/* ================= 9+ TASKS ================= */
+/* ================= TASKS ================= */
 const tasks: Task[] = [
   { id: 1, title: "Like & Follow Social Page", category: "Social", reward: "$0.30", difficulty: "Easy", completionRate: 95 },
   { id: 2, title: "Submit Email Signup", category: "Signup", reward: "$0.50", difficulty: "Easy", completionRate: 90 },
@@ -53,6 +52,7 @@ function CountUp({ end }: { end: number }) {
           let start = 0;
           const duration = 2000;
           const increment = end / (duration / 16);
+
           const counter = setInterval(() => {
             start += increment;
             if (start >= end) {
@@ -62,6 +62,7 @@ function CountUp({ end }: { end: number }) {
               setCount(Math.floor(start));
             }
           }, 16);
+
           return () => clearInterval(counter);
         }
       },
@@ -75,11 +76,39 @@ function CountUp({ end }: { end: number }) {
   return <div ref={ref}>{count.toLocaleString()}</div>;
 }
 
-/* ================= STATS WITH ICONS ================= */
+/* ================= STATS ================= */
 const stats = [
   { label: "Available Micro Tasks", number: 5400, icon: <ClipboardList className="w-6 h-6 text-green-400" /> },
   { label: "Tasks Completed", number: 82000, icon: <CheckCircle className="w-6 h-6 text-green-400" /> },
   { label: "Active Workers", number: 15000, icon: <Users className="w-6 h-6 text-green-400" /> },
+];
+
+/* ================= FAQ ================= */
+const faqs = [
+  {
+    q: "How do I start completing micro-tasks?",
+    a: "Create a free account, browse available tasks, and start completing them instantly.",
+  },
+  {
+    q: "When will I receive my rewards?",
+    a: "Most rewards are credited instantly after successful task completion.",
+  },
+  {
+    q: "Is there a minimum payout threshold?",
+    a: "Yes, you can withdraw once you reach the minimum balance required for your selected payout method.",
+  },
+  {
+    q: "Can I complete tasks from mobile?",
+    a: "Absolutely! Our platform is fully optimized for mobile devices.",
+  },
+  {
+    q: "Are micro-tasks available worldwide?",
+    a: "Yes, users from most countries can access tasks, though availability may vary by region.",
+  },
+  {
+    q: "Why are brands paying for these tasks?",
+    a: "Companies pay for engagement, installs, signups, and feedback. We share that revenue with you.",
+  },
 ];
 
 /* ================= PAGE ================= */
@@ -240,6 +269,20 @@ export default function MicroTasksPage() {
           </div>
         </section>
 
+        {/* FAQ */}
+        <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+              Everything you need to know about micro-tasks
+            </p>
+          </Reveal>
+
+          <FAQ faqs={faqs} />
+        </section>
+
         {/* FINAL CTA */}
         <section className="relative z-10 text-center py-28">
           <Reveal>
@@ -256,7 +299,6 @@ export default function MicroTasksPage() {
             </PrimaryCTA>
           </Reveal>
         </section>
-
       </main>
     </>
   );
