@@ -1,10 +1,24 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import React from "react";
+import {
+  Trophy,
+  User,
+  Gift,
+  ClipboardList,
+  DollarSign,
+  Shield,
+  TrendingUp,
+} from "lucide-react";
 import { motion } from "framer-motion";
-import SeoEngine from "@/components/seo/SeoEngine";
-import { Joystick, Star, Gift, User, ClipboardList, Trophy } from "lucide-react";
+import Meta from "@/components/seo/SeoEngine";
+import TypingText from "@/components/typing/TypingText";
+import Background from "@/components/Background";
+import PrimaryCTA from "@/components/cta/PrimaryCTA";
+import Reveal from "@/components/animations/Reveal";
+import FAQ from "@/components/faq/FAQ";
 
+/* ================= GAME DATA ================= */
 type Game = {
   id: number;
   name: string;
@@ -25,16 +39,17 @@ const games: Game[] = [
 
 /* ================= COUNT UP ================= */
 function CountUp({ end }: { end: number }) {
-  const [count, setCount] = useState(0);
-  const ref = useRef<HTMLDivElement | null>(null);
+  const [count, setCount] = React.useState(0);
+  const ref = React.useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           let start = 0;
           const duration = 2000;
           const increment = end / (duration / 16);
+
           const counter = setInterval(() => {
             start += increment;
             if (start >= end) {
@@ -44,11 +59,11 @@ function CountUp({ end }: { end: number }) {
               setCount(Math.floor(start));
             }
           }, 16);
-          return () => clearInterval(counter);
         }
       },
       { threshold: 0.3 }
     );
+
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, [end]);
@@ -67,98 +82,137 @@ function StarRating({ rating }: { rating: number }) {
       {Array(fullStars)
         .fill(0)
         .map((_, i) => (
-          <Star key={`full-${i}`} className="w-5 h-5 text-yellow-400 animate-pulse" />
+          <TrendingUp key={`full-${i}`} className="w-5 h-5 text-yellow-400" />
         ))}
-      {halfStar && <Star key="half" className="w-5 h-5 text-yellow-400 opacity-50 animate-pulse" />}
+      {halfStar && <TrendingUp className="w-5 h-5 text-yellow-400 opacity-60" />}
       {Array(emptyStars)
         .fill(0)
         .map((_, i) => (
-          <Star key={`empty-${i}`} className="w-5 h-5 text-gray-300 dark:text-gray-600" />
+          <TrendingUp key={`empty-${i}`} className="w-5 h-5 text-gray-300 dark:text-gray-600" />
         ))}
     </div>
   );
 }
 
-/* ================= STATS ================= */
+/* ================= PLATFORM STATS ================= */
 const stats = [
   { label: "Games Played", number: 500000 },
   { label: "Happy Players", number: 200000 },
-  { label: "Average Reward ($)", number: 3.2 },
+  { label: "Average Reward", number: 3.2 },
 ];
 
-/* ================= PAGE ================= */
+/* ================= FAQ ================= */
+const faqs = [
+  {
+    q: "How do I earn rewards?",
+    a: "Play games and complete challenges to earn rewards instantly.",
+  },
+  {
+    q: "Are rewards real money?",
+    a: "Yes. You can withdraw rewards via PayPal or gift cards.",
+  },
+  {
+    q: "Is it free to play?",
+    a: "Yes. All games and challenges are free to play.",
+  },
+  {
+    q: "How fast are rewards credited?",
+    a: "Most rewards are credited instantly after completion.",
+  },
+  {
+    q: "How do I withdraw earnings?",
+    a: "You can withdraw once you reach the minimum payout threshold.",
+  },
+];
+
 export default function PlayGamesPage() {
   return (
     <>
-      <SeoEngine
+      <Meta
         title="Play Games & Earn | Cashog"
-        description="Play fun games online and earn instant rewards with Cashog. Join thousands of players and start earning today."
+        description="Play premium games and earn real rewards instantly."
       />
 
-      <main className="bg-white dark:bg-[#070A14] text-gray-900 dark:text-white transition-colors duration-300">
+      <main className="min-h-screen text-gray-900 dark:text-white">
 
-        {/* ================= HERO ================= */}
-        <section className="relative py-24 px-6 text-center overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-yellow-200/40 via-green-200/30 to-yellow-300/40 dark:from-yellow-900/20 dark:via-green-900/10 dark:to-yellow-800/20 blur-3xl" />
+        {/* ================= HERO SECTION ================= */}
+        <section className="relative py-24 text-center">
+          <div className="absolute inset-0 bg-gradient-to-br
+            from-yellow-400/20 via-green-400/10 to-yellow-600/20
+            dark:from-yellow-900/20 dark:via-green-900/10 dark:to-yellow-800/20
+            blur-3xl" />
 
           <motion.div
-            className="relative max-w-4xl mx-auto"
+            className="relative max-w-4xl mx-auto px-6"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
-              Play Games & Earn Rewards
+            <h1 className="text-4xl md:text-6xl font-extrabold mb-4">
+              Premium Play & Earn
             </h1>
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-8">
-              Enjoy top games, complete challenges, and earn real cash instantly. Hand-picked games for maximum fun and rewards.
+
+            <div className="text-3xl md:text-4xl font-extrabold gradient-text mb-6">
+              <TypingText />
+            </div>
+
+            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-10">
+              Play premium games, complete challenges, and earn real rewards.
             </p>
-            <motion.a
-              href="/signup"
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-14 py-5 rounded-2xl font-bold shadow-lg hover:scale-105 transition-transform duration-300 cta-observer"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              Start Playing <Joystick size={20} />
-            </motion.a>
+
+            <PrimaryCTA href="/signup">
+              Start Playing
+            </PrimaryCTA>
           </motion.div>
         </section>
 
-        {/* ================= FEATURED GAMES ================= */}
-        <section className="py-20 px-6 max-w-6xl mx-auto">
+        {/* ================= FEATURED GAMES (OFFERWALL STYLE) ================= */}
+        <section className="py-20 px-6 max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-            Top Earning Games
+            Premium Games
           </h2>
-          <div className="grid md:grid-cols-3 gap-8">
+
+          <div className="grid gap-6 md:grid-cols-3">
             {games.map((game) => (
               <motion.div
                 key={game.id}
-                className="bg-white dark:bg-zinc-800 p-6 rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col justify-between"
+                className="bg-white/90 dark:bg-[#0c111b]/90 backdrop-blur-xl
+                border border-gray-200 dark:border-gray-800
+                rounded-2xl p-6 shadow-sm hover:shadow-xl
+                transition-all duration-300 flex flex-col justify-between"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
               >
                 <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <ClipboardList className="text-yellow-500 w-6 h-6" />
-                    <span className="text-sm text-gray-500 dark:text-gray-400">{game.category}</span>
+                  {/* Category Badge */}
+                  <div className="flex justify-between items-center mb-4">
+                    <ClipboardList className="text-yellow-500 w-5 h-5" />
+                    <span className="text-xs px-3 py-1 rounded-full
+                      bg-yellow-500/10 text-yellow-600 dark:text-yellow-400
+                      border border-yellow-500/20">
+                      {game.category}
+                    </span>
                   </div>
-                  <h3 className="text-xl font-semibold mb-1">{game.name}</h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-1">Reward: {game.reward}</p>
-                  <p className="text-gray-600 dark:text-gray-300 mb-2">Players: {game.players}</p>
+
+                  {/* Title */}
+                  <h3 className="text-lg font-semibold mb-2">{game.name}</h3>
+
+                  {/* Details */}
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    Players: {game.players}
+                  </p>
+
+                  {/* Rating */}
                   <StarRating rating={game.rating} />
                 </div>
-                <div className="flex items-center justify-between mt-4">
+
+                {/* CTA */}
+                <div className="mt-6 flex items-center justify-between">
                   <span className="text-green-600 font-bold">{game.reward}</span>
-                  <motion.a
-                    href="/signup"
-                    className="px-4 py-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black rounded-xl font-semibold shadow hover:scale-105 transition-transform duration-300"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.97 }}
-                  >
+                  <PrimaryCTA href="/signup">
                     Play Now
-                  </motion.a>
+                  </PrimaryCTA>
                 </div>
               </motion.div>
             ))}
@@ -166,23 +220,23 @@ export default function PlayGamesPage() {
         </section>
 
         {/* ================= STATS ================= */}
-        <section className="py-20 px-6 bg-gray-50 dark:bg-zinc-900">
+        <section className="py-20 px-6 bg-gray-50 dark:bg-[#0c111b]">
           <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
             Platform Performance
           </h2>
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
+          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
-                className="p-8 bg-white dark:bg-zinc-800 rounded-3xl shadow-lg text-center hover:scale-105 transition-transform duration-300"
+                className="bg-white dark:bg-[#0f1520] rounded-2xl p-6 text-center shadow-sm"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
               >
-                <h3 className="text-4xl font-extrabold text-green-600">
+                <h3 className="text-4xl font-extrabold text-green-500">
                   <CountUp end={stat.number} />
-                  {stat.label === "Average Reward ($)" && "$"}
+                  {stat.label === "Average Reward" && "$"}
                 </h3>
                 <p className="mt-2 text-gray-600 dark:text-gray-400">{stat.label}</p>
               </motion.div>
@@ -192,64 +246,63 @@ export default function PlayGamesPage() {
 
         {/* ================= HOW IT WORKS ================= */}
         <section className="py-24 px-6 max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">How It Works</h2>
-          <div className="grid md:grid-cols-3 gap-10">
-            <motion.div
-              className="bg-white dark:bg-zinc-800 p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-300"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <User className="w-8 h-8 text-yellow-400 mb-4 mx-auto" />
-              <h3 className="text-xl font-semibold mb-2">Sign Up</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Create your free Cashog account to start playing.
-              </p>
-            </motion.div>
-            <motion.div
-              className="bg-white dark:bg-zinc-800 p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-300"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              <Trophy className="w-8 h-8 text-green-400 mb-4 mx-auto" />
-              <h3 className="text-xl font-semibold mb-2">Play Games</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Engage in exciting games and complete challenges.
-              </p>
-            </motion.div>
-            <motion.div
-              className="bg-white dark:bg-zinc-800 p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-300"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <Gift className="w-8 h-8 text-yellow-500 mb-4 mx-auto" />
-              <h3 className="text-xl font-semibold mb-2">Earn Rewards</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Redeem rewards instantly via PayPal, gift cards, or points.
-              </p>
-            </motion.div>
+          <h2 className="text-3xl md:text-4xl font-bold mb-12">
+            How It Works
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                icon: <User className="w-8 h-8 text-yellow-400" />,
+                title: "Sign Up",
+                desc: "Create your account in seconds.",
+              },
+              {
+                icon: <Trophy className="w-8 h-8 text-green-400" />,
+                title: "Play Games",
+                desc: "Complete challenges and earn rewards.",
+              },
+              {
+                icon: <Gift className="w-8 h-8 text-yellow-400" />,
+                title: "Withdraw",
+                desc: "Redeem earnings instantly.",
+              },
+            ].map((step) => (
+              <motion.div
+                key={step.title}
+                className="bg-white dark:bg-[#0c111b] rounded-2xl p-6 shadow-sm"
+              >
+                <div className="mb-4">{step.icon}</div>
+                <h3 className="text-lg font-semibold">{step.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">
+                  {step.desc}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </section>
 
-        {/* ================= FINAL CTA ================= */}
-        <section className="py-28 px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8">
-            Ready to Play & Earn Now?
+        {/* ================= FAQ ================= */}
+        <section className="py-20 px-6 max-w-6xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+            Frequently Asked Questions
           </h2>
-          <motion.a
-            href="/signup"
-            className="cta-observer inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-xl hover:scale-105 transition-transform duration-300"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            Start Playing Games <Joystick size={20} />
-          </motion.a>
+          <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+            Everything you need to know about Play & Earn
+          </p>
+
+          <FAQ faqs={faqs} />
+        </section>
+
+        {/* ================= FINAL CTA ================= */}
+        <section className="py-28 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            Ready to Play & Earn?
+          </h2>
+
+          <PrimaryCTA href="/signup">
+            Start Playing
+          </PrimaryCTA>
         </section>
       </main>
     </>
