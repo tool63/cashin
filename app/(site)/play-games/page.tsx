@@ -26,6 +26,9 @@ const games = [
   { id: 4, name: "Brain Teasers", category: "Educational", reward: "$2", rating: 4.6, players: "40K+" },
   { id: 5, name: "Fantasy Quest", category: "Adventure", reward: "$3", rating: 4.8, players: "60K+" },
   { id: 6, name: "Word Wizard", category: "Word Game", reward: "$2", rating: 4.7, players: "55K+" },
+  { id: 7, name: "Sky Runner", category: "Arcade", reward: "$2", rating: 4.6, players: "80K+" },
+  { id: 8, name: "Tower Builder", category: "Strategy", reward: "$3", rating: 4.7, players: "90K+" },
+  { id: 9, name: "Space Defender", category: "Action", reward: "$4", rating: 4.9, players: "110K+" },
 ];
 
 /* ================= COUNT UP ================= */
@@ -109,176 +112,166 @@ export default function PlayGamesPage() {
         description="Premium games with real rewards. Play, earn, and withdraw instantly."
       />
 
-      <main className="min-h-screen text-gray-900 dark:text-white">
+      <main className="relative min-h-screen text-gray-900 dark:text-white">
+        <Background />
 
-        {/* ================= HERO ================= */}
-        <section className="relative py-24 text-center">
-          <div className="absolute inset-0 bg-gradient-to-br
-            from-yellow-400/20 via-green-400/10 to-yellow-600/20
-            dark:from-yellow-900/20 dark:via-green-900/10 dark:to-yellow-800/20
-            blur-3xl" />
+        <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
 
-          <motion.div
-            className="relative max-w-4xl mx-auto px-6"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="text-4xl md:text-6xl font-extrabold mb-2">
-              Premium Play & Earn
-            </h1>
+          {/* HERO */}
+          <Reveal>
+            <div className="text-center mb-20">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
+                Premium Play & Earn
+              </h1>
 
-            <p className="text-sm uppercase tracking-widest text-green-600 mb-6">
-              Play | Earn | Enjoy
-            </p>
+              <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 gradient-text">
+                <TypingText />
+              </div>
 
-            <div className="text-3xl md:text-4xl font-extrabold gradient-text mb-6">
-              <TypingText />
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed mb-10">
+                Engage with premium games and earn real rewards instantly.
+              </p>
+
+              <PrimaryCTA href="/signup">
+                Start Playing
+              </PrimaryCTA>
             </div>
+          </Reveal>
 
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-10">
-              Engage with premium games and earn real rewards instantly.
+          {/* PLATFORM STATS */}
+          <Reveal>
+            <div className="grid gap-6 md:grid-cols-3 mb-24">
+              {stats.map((stat) => (
+                <motion.div
+                  key={stat.label}
+                  whileHover={{ y: -4 }}
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
+                >
+                  <h3 className="text-lg font-medium text-gray-600 dark:text-gray-400">
+                    {stat.label}
+                  </h3>
+                  <div className="text-3xl font-extrabold mt-2">
+                    <CountUp end={stat.number} />
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </Reveal>
+
+          {/* GAMES GRID */}
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              Premium Games
+            </h2>
+
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+              Hand-picked games with real earning opportunities
             </p>
+          </Reveal>
 
-            <PrimaryCTA href="/signup">
-              Start Playing
-            </PrimaryCTA>
-          </motion.div>
-        </section>
-
-        {/* ================= FEATURED GAMES ================= */}
-        <section className="py-20 px-6 max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center">
-            Premium Games
-          </h2>
-          <p className="text-center text-gray-600 dark:text-gray-400 mb-12">
-            Hand-picked games with real earning opportunities
-          </p>
-
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-3 mb-24">
             {games.map((game) => (
-              <motion.div
-                key={game.id}
-                className="bg-white/90 dark:bg-[#0c111b]/90 backdrop-blur-xl
-                border border-gray-200 dark:border-gray-800
-                rounded-2xl p-6 shadow-sm hover:shadow-xl
-                transition-all duration-300 flex flex-col justify-between"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-              >
-                <div>
+              <Reveal key={game.id}>
+                <motion.div
+                  whileHover={{ y: -6, scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 200 }}
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
+                >
                   <div className="flex justify-between items-center mb-4">
-                    <ClipboardList className="text-yellow-500 w-5 h-5" />
-                    <span className="text-xs px-3 py-1 rounded-full
-                      bg-yellow-500/10 text-yellow-600 dark:text-yellow-400
-                      border border-yellow-500/20">
+                    <ClipboardList className="text-green-400 w-5 h-5" />
+                    <span className="text-xs px-3 py-1 rounded-full bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20">
                       {game.category}
                     </span>
                   </div>
 
-                  <h3 className="text-lg font-semibold mb-2">{game.name}</h3>
+                  <h3 className="text-xl font-semibold mb-2">{game.name}</h3>
 
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                  <p className="text-sm text-gray-600 dark:text-gray-300">
                     Players: {game.players}
                   </p>
 
                   <StarRating rating={game.rating} />
-                </div>
 
-                <div className="mt-6 flex items-center justify-between">
-                  <span className="text-green-600 font-bold">{game.reward}</span>
+                  <div className="mt-6 flex items-center justify-between">
+                    <span className="text-green-500 font-bold">{game.reward}</span>
 
-                  <motion.a
-                    href="/signup"
-                    className="px-4 py-1.5 text-xs font-semibold rounded-lg
-                    bg-gradient-to-r from-yellow-400 to-green-400
-                    text-black shadow-sm hover:shadow-md
-                    transition-all duration-300 hover:scale-105"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.97 }}
-                  >
-                    Play Now
-                  </motion.a>
-                </div>
-              </motion.div>
+                    <PrimaryCTA href="/signup">
+                      Play Now
+                    </PrimaryCTA>
+                  </div>
+                </motion.div>
+              </Reveal>
             ))}
           </div>
-        </section>
 
-        {/* ================= HOW IT WORKS (CARD STYLE) ================= */}
-        <section className="py-20 px-6 max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center">
-            How It Works
-          </h2>
-          <p className="text-center text-gray-600 dark:text-gray-400 mb-12">
-            Start earning in three simple steps
-          </p>
+          {/* HOW IT WORKS */}
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              How It Works
+            </h2>
 
-          <div className="grid gap-6 md:grid-cols-3">
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+              Start earning in three simple steps
+            </p>
+          </Reveal>
+
+          <div className="grid gap-6 md:grid-cols-3 mb-24">
             {[
               { icon: <User className="w-8 h-8 text-yellow-400" />, title: "Sign Up", desc: "Create account in seconds." },
               { icon: <Trophy className="w-8 h-8 text-green-400" />, title: "Play Games", desc: "Complete challenges and earn rewards." },
               { icon: <Gift className="w-8 h-8 text-yellow-400" />, title: "Withdraw", desc: "Redeem earnings instantly." },
             ].map((step) => (
-              <motion.div
-                key={step.title}
-                className="bg-white/90 dark:bg-[#0c111b]/90 backdrop-blur-xl
-                border border-gray-200 dark:border-gray-800
-                rounded-2xl p-6 text-center shadow-sm hover:shadow-xl"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-              >
-                <div className="flex justify-center items-center mb-4">
-                  {step.icon}
-                </div>
+              <Reveal key={step.title}>
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
+                >
+                  <div className="flex justify-center items-center mb-4">
+                    {step.icon}
+                  </div>
 
-                <h3 className="text-lg font-semibold">{step.title}</h3>
+                  <h3 className="text-lg font-semibold">{step.title}</h3>
 
-                <p className="text-gray-600 dark:text-gray-400 text-sm mt-2">
-                  {step.desc}
-                </p>
-              </motion.div>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
+                    {step.desc}
+                  </p>
+                </motion.div>
+              </Reveal>
             ))}
           </div>
-        </section>
 
-        {/* ================= FAQ (CARD STYLE) ================= */}
-        <section className="py-20 px-6 max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center">
-            Frequently Asked Questions
-          </h2>
-          <p className="text-center text-gray-600 dark:text-gray-400 mb-12">
-            Everything you need to know about Play & Earn
-          </p>
+          {/* FAQ */}
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              Frequently Asked Questions
+            </h2>
 
-          <div className="grid gap-6">
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+              Everything you need to know about Play & Earn
+            </p>
+          </Reveal>
+
+          <div className="mb-24">
             <FAQ faqs={faqs} />
           </div>
-        </section>
 
-        {/* ================= FINAL CTA (CARD STYLE) ================= */}
-        <section className="py-20 px-6 max-w-7xl mx-auto text-center">
-          <motion.div
-            className="bg-white/90 dark:bg-[#0c111b]/90 backdrop-blur-xl
-            border border-gray-200 dark:border-gray-800
-            rounded-2xl p-10 shadow-lg"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold">
-              Ready to Play & Earn?
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 mb-8">
-              Join thousands of players earning rewards
-            </p>
+          {/* FINAL CTA */}
+          <Reveal>
+            <div className="text-center">
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
+                Ready to Play & Earn?
+              </h2>
 
-            <PrimaryCTA href="/signup">
-              Start Playing
-            </PrimaryCTA>
-          </motion.div>
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed mb-10">
+                Join Cashog today and unlock unlimited earning opportunities.
+              </p>
+
+              <PrimaryCTA href="/signup">
+                Join Now
+              </PrimaryCTA>
+            </div>
+          </Reveal>
+
         </section>
       </main>
     </>
