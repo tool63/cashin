@@ -10,85 +10,85 @@ import Reveal from "@/components/animations/Reveal";
 import FAQ from "@/components/faq/FAQ";
 import { ClipboardList, Star } from "lucide-react";
 
-/* ================= SURVEYS ================= */
-const surveys = [
+/* ================= APPS ================= */
+const apps = [
   {
     id: 1,
-    title: "Consumer Electronics Feedback",
-    category: "Tech",
-    reward: "$3",
-    estimatedTime: "5 min",
+    name: "Photo Editor Pro",
+    category: "Utilities",
+    reward: "$2",
     rating: 4.8,
+    installs: "500K+",
   },
   {
     id: 2,
-    title: "Travel Habits Survey",
-    category: "Travel",
-    reward: "$5",
-    estimatedTime: "7 min",
-    rating: 4.6,
+    name: "Fitness Tracker",
+    category: "Health",
+    reward: "$3",
+    rating: 4.7,
+    installs: "350K+",
   },
   {
     id: 3,
-    title: "Healthy Eating Preferences",
-    category: "Food",
+    name: "Language Learner",
+    category: "Education",
     reward: "$2",
-    estimatedTime: "3 min",
-    rating: 4.7,
+    rating: 4.6,
+    installs: "200K+",
   },
 ];
 
-/* ================= FAQ (Expanded) ================= */
+/* ================= FAQ ================= */
 const faqs = [
   {
-    q: "Is it free to join?",
-    a: "Yes. Signing up and completing surveys costs nothing. You earn rewards for your time.",
+    q: "How does app installation earning work?",
+    a: "Install apps and complete simple in-app actions to earn rewards.",
   },
   {
-    q: "How fast are payouts?",
-    a: "Most payouts are processed instantly or within a few hours depending on method.",
+    q: "Are installed apps safe?",
+    a: "Yes. We only feature verified apps from trusted developers.",
+  },
+  {
+    q: "How fast are rewards credited?",
+    a: "Rewards are usually credited instantly after completion.",
+  },
+  {
+    q: "Can I uninstall apps after earning?",
+    a: "Yes. After completing the earning task, you may uninstall if you wish.",
+  },
+  {
+    q: "Is it free to participate?",
+    a: "Yes. Installing apps and earning rewards costs nothing.",
   },
   {
     q: "What payment methods are available?",
-    a: "You can withdraw via PayPal, gift cards, and mobile top-ups (where supported).",
-  },
-  {
-    q: "Are surveys safe and legit?",
-    a: "Yes. All surveys are verified and designed to collect anonymous feedback only.",
-  },
-  {
-    q: "Why was I disqualified from a survey?",
-    a: "Some surveys target specific demographics. If you don’t qualify, you can try another one.",
+    a: "You can withdraw via PayPal, gift cards, and other supported methods.",
   },
   {
     q: "How much can I earn?",
-    a: "Earnings vary by survey — typically between $1 and $10 depending on complexity.",
+    a: "Earnings vary per app — typically between $1 and $5 per install/action.",
   },
   {
-    q: "When will I receive my reward?",
-    a: "Rewards are credited immediately after successful survey completion.",
-  },
-  {
-    q: "Can I complete surveys on mobile?",
-    a: "Yes. Our platform is fully mobile-friendly for earning on the go.",
+    q: "Is my data safe?",
+    a: "Yes. We do not access personal data from installed apps.",
   },
   {
     q: "Do I need experience?",
-    a: "No experience is required. Just share your opinions.",
+    a: "No. Just install apps and follow simple instructions.",
   },
   {
-    q: "Is my data shared?",
-    a: "No. Survey responses are anonymous and used only for research purposes.",
+    q: "Can I use mobile?",
+    a: "Yes. The platform is fully mobile-friendly.",
   },
 ];
 
 /* ================= PAGE ================= */
-export default function SurveysPage() {
+export default function AppInstallPage() {
   return (
     <>
       <Meta
-        title="Surveys | Cashog"
-        description="Complete surveys and earn rewards with Cashog."
+        title="Install Apps & Earn | Cashog"
+        description="Install apps and earn rewards instantly with Cashog."
       />
 
       <main className="relative min-h-screen text-gray-900 dark:text-white">
@@ -99,7 +99,7 @@ export default function SurveysPage() {
           <Reveal>
             <div className="text-center mb-20">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-                Earn Rewards by Completing Surveys
+                Install Apps & Earn Rewards
               </h1>
 
               <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold gradient-text mb-6">
@@ -107,7 +107,7 @@ export default function SurveysPage() {
               </div>
 
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed mb-10">
-                Share your opinion and earn real rewards instantly.
+                Install premium apps and complete actions to earn real rewards.
               </p>
 
               <PrimaryCTA href="/signup">
@@ -117,16 +117,16 @@ export default function SurveysPage() {
           </Reveal>
         </section>
 
-        {/* SURVEYS GRID */}
+        {/* APPS GRID */}
         <section className="relative z-10 py-20 px-4 max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Featured Surveys
+            Featured Apps
           </h2>
 
           <div className="grid gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {surveys.map((survey) => (
+            {apps.map((app) => (
               <motion.div
-                key={survey.id}
+                key={app.id}
                 whileHover={{ y: -4 }}
                 className="
                   bg-white
@@ -139,46 +139,60 @@ export default function SurveysPage() {
                   shadow-md
                 "
               >
-                <div className="flex items-center gap-2 mb-3">
+                {/* CATEGORY BADGE */}
+                <div className="flex items-center justify-between mb-4">
                   <ClipboardList className="text-green-500 w-6 h-6" />
-                  <span className="text-sm text-gray-500 dark:text-gray-400">
-                    {survey.category}
+                  <span className="
+                    text-xs
+                    px-3
+                    py-1
+                    rounded-full
+                    bg-green-500/10
+                    text-green-600
+                    dark:text-green-400
+                    border
+                    border-green-500/20
+                  ">
+                    {app.category}
                   </span>
                 </div>
 
-                <h3 className="text-xl font-semibold">{survey.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300 text-sm">
-                  Estimated Time: {survey.estimatedTime}
+                <h3 className="text-xl font-semibold">{app.name}</h3>
+
+                <p className="text-gray-600 dark:text-gray-300 text-sm mt-1">
+                  Installs: {app.installs}
                 </p>
 
-                <div className="flex items-center mt-2">
-                  {Array(Math.floor(survey.rating))
+                {/* STAR RATING */}
+                <div className="flex items-center mt-3">
+                  {Array(Math.floor(app.rating))
                     .fill(0)
                     .map((_, i) => (
                       <Star key={i} className="w-5 h-5 text-yellow-400" />
                     ))}
                 </div>
 
-                <div className="flex items-center justify-between mt-4">
-                  <span className="text-green-600 font-bold">{survey.reward}</span>
+                {/* FOOTER */}
+                <div className="flex items-center justify-between mt-5">
+                  <span className="text-green-500 font-bold">{app.reward}</span>
 
                   <motion.a
                     href="/signup"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.97 }}
                     className="
+                      px-3
+                      py-1.5
                       text-xs
-                      px-4
-                      py-2
-                      rounded-full
-                      bg-green-600
-                      text-white
                       font-semibold
+                      rounded-lg
+                      bg-gradient-to-r from-yellow-400 to-green-400
+                      text-black
                       shadow-sm
-                      hover:bg-green-700
+                      hover:shadow-md
                     "
                   >
-                    Start Survey
+                    Install & Earn
                   </motion.a>
                 </div>
               </motion.div>
