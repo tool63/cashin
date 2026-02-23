@@ -196,24 +196,34 @@ export default function PlayGamesPage() {
           </div>
 
           {/* PLATFORM STATS */}
-          <Reveal>
-            <div className="grid gap-6 md:grid-cols-3 mb-24">
-              {stats.map((stat) => (
-                <motion.div
-                  key={stat.label}
-                  whileHover={{ y: -4 }}
-                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
-                >
-                  <h3 className="text-sm uppercase tracking-wide text-gray-600 dark:text-gray-400">
-                    {stat.label}
-                  </h3>
-                  <div className="text-3xl font-extrabold mt-2">
-                    <CountUp end={stat.number} />
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </Reveal>
+<Reveal>
+  <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+    Platform Performance
+  </h2>
+
+  <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+    Real numbers from our growing community
+  </p>
+</Reveal>
+
+<Reveal>
+  <div className="grid gap-6 md:grid-cols-3 mb-24">
+    {stats.map((stat) => (
+      <motion.div
+        key={stat.label}
+        whileHover={{ y: -4 }}
+        className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
+      >
+        <h3 className="text-sm uppercase tracking-wide text-gray-600 dark:text-gray-400">
+          {stat.label}
+        </h3>
+        <div className="text-3xl font-extrabold mt-2">
+          <CountUp end={stat.number} />
+        </div>
+      </motion.div>
+    ))}
+  </div>
+</Reveal>
 
           {/* HOW IT WORKS */}
           <Reveal>
