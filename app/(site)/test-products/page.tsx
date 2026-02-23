@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import SeoEngine from "@/components/seo/SeoEngine";
 import Background from "@/components/Background";
+import TypingText from "@/components/typing/TypingText";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
 import FAQ from "@/components/faq/FAQ";
@@ -11,7 +12,6 @@ import {
   PackageCheck,
   Star,
   Gift,
-  Rocket,
   ShieldCheck,
 } from "lucide-react";
 
@@ -86,28 +86,28 @@ export default function TestProductsPage() {
       <main className="relative bg-white dark:bg-zinc-950 text-gray-900 dark:text-white overflow-hidden">
         <Background />
 
-        {/* ================= HERO (How It Works style) ================= */}
+        {/* ================= HERO (Typing Text) ================= */}
         <section className="relative z-10 max-w-6xl mx-auto px-4 py-24 text-center">
           <Reveal>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
+            <TypingText>
               Test Products & Earn Real Rewards
-            </h1>
+            </TypingText>
+          </Reveal>
 
-            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
+          <Reveal delay={0.2}>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mt-4 mb-10">
               Join exclusive product trials, provide honest feedback, and get paid instantly.
             </p>
           </Reveal>
 
-          <Reveal delay={0.2}>
-            <div className="flex justify-center">
-              <PrimaryCTA href="/signup">
-                Start Testing Products <Rocket size={20} />
-              </PrimaryCTA>
-            </div>
+          <Reveal delay={0.3}>
+            <PrimaryCTA href="/signup">
+              Start Testing Products
+            </PrimaryCTA>
           </Reveal>
         </section>
 
-        {/* ================= PRODUCT SECTION (Grid like How It Works) ================= */}
+        {/* ================= PRODUCT GRID (Modern UX) ================= */}
         <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
@@ -152,7 +152,7 @@ export default function TestProductsPage() {
 
                 <div className="flex justify-center">
                   <PrimaryCTA href="/signup">
-                    Apply Now <CheckCircle size={18} />
+                    Apply Now <CheckCircle size={16} />
                   </PrimaryCTA>
                 </div>
               </motion.div>
@@ -160,7 +160,7 @@ export default function TestProductsPage() {
           </div>
         </section>
 
-        {/* ================= TRUST SECTION (How It Works style) ================= */}
+        {/* ================= TRUST SECTION (Modern UX) ================= */}
         <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
@@ -207,7 +207,7 @@ export default function TestProductsPage() {
           </div>
         </section>
 
-        {/* ================= FAQ (How It Works style) ================= */}
+        {/* ================= FAQ ================= */}
         <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
@@ -221,7 +221,7 @@ export default function TestProductsPage() {
           <FAQ faqs={faqs} />
         </section>
 
-        {/* ================= FINAL CTA (How It Works style) ================= */}
+        {/* ================= FINAL CTA (Medium Button) ================= */}
         <section className="relative z-10 text-center py-24">
           <Reveal>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
@@ -234,11 +234,9 @@ export default function TestProductsPage() {
           </Reveal>
 
           <Reveal delay={0.2}>
-            <div className="flex justify-center">
-              <PrimaryCTA href="/signup">
-                Join Cashog Now <Rocket size={20} />
-              </PrimaryCTA>
-            </div>
+            <PrimaryCTA href="/signup">
+              Join Cashog Now
+            </PrimaryCTA>
           </Reveal>
         </section>
       </main>
