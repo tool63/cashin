@@ -1,11 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
 import SeoEngine from "@/components/seo/SeoEngine";
 import Background from "@/components/Background";
 import TypingText from "@/components/typing/TypingText";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
-import Reveal from "@/components/animations/Reveal";
 import FAQ from "@/components/faq/FAQ";
 import {
   CheckCircle,
@@ -18,8 +16,7 @@ import {
   BarChart3,
 } from "lucide-react";
 
-/* ================= PRODUCT DATA ================= */
-
+/* PRODUCT DATA */
 type ProductTest = {
   id: number;
   title: string;
@@ -32,73 +29,48 @@ const products: ProductTest[] = [
   {
     id: 1,
     title: "Smartphone Beta Test",
-    description:
-      "Get early access to the latest smartphone and earn rewards by reviewing it.",
+    description: "Get early access and earn rewards by reviewing it.",
     reward: "$15.00",
     duration: "7 Days",
   },
   {
     id: 2,
     title: "Headphones Trial",
-    description:
-      "Test premium headphones and submit feedback for instant payout.",
+    description: "Test premium headphones and submit feedback.",
     reward: "$8.00",
     duration: "3 Days",
   },
   {
     id: 3,
     title: "Fitness Tracker Test",
-    description:
-      "Try new fitness tracker features and report your experience.",
+    description: "Try new features and report experience.",
     reward: "$12.00",
     duration: "5 Days",
   },
   {
     id: 4,
     title: "Gaming Survey",
-    description: "Share your gaming habits and earn rewards.",
+    description: "Share gaming habits and earn rewards.",
     reward: "$4.00",
     duration: "10 Min",
   },
   {
     id: 5,
     title: "App Usability Test",
-    description: "Test a new app and provide usability feedback.",
+    description: "Test app and provide feedback.",
     reward: "$6.00",
     duration: "15 Min",
   },
   {
     id: 6,
     title: "Video Feedback",
-    description: "Watch and review short promotional videos.",
+    description: "Watch and review videos.",
     reward: "$2.00",
     duration: "5 Min",
   },
-  {
-    id: 7,
-    title: "Market Research Survey",
-    description: "Help brands understand consumer preferences.",
-    reward: "$5.00",
-    duration: "8 Min",
-  },
-  {
-    id: 8,
-    title: "Product Opinion Poll",
-    description: "Quick polls to shape future products.",
-    reward: "$1.50",
-    duration: "2 Min",
-  },
-  {
-    id: 9,
-    title: "Lifestyle Survey",
-    description: "Answer lifestyle questions and earn rewards.",
-    reward: "$3.00",
-    duration: "6 Min",
-  },
 ];
 
-/* ================= STATS ================= */
-
+/* STATS */
 const stats = [
   { icon: Users, title: "Active Users", value: "1M+" },
   { icon: TrendingUp, title: "Daily Earnings", value: "$25K+" },
@@ -106,50 +78,11 @@ const stats = [
   { icon: BarChart3, title: "Surveys Completed", value: "8M+" },
 ];
 
-/* ================= HOW IT WORKS ================= */
-
-const steps = [
-  {
-    icon: Users,
-    title: "Sign Up",
-    description: "Create your account in minutes and join the community.",
-  },
-  {
-    icon: PackageCheck,
-    title: "Choose a Survey",
-    description: "Browse available surveys and select one that fits you.",
-  },
-  {
-    icon: CheckCircle,
-    title: "Complete Tasks",
-    description: "Answer questions and provide feedback.",
-  },
-  {
-    icon: Gift,
-    title: "Earn Rewards",
-    description: "Receive instant payouts after approval.",
-  },
-];
-
-/* ================= FAQ ================= */
-
+/* FAQ */
 const faqs = [
-  {
-    q: "How do product tests work?",
-    a: "Sign up, apply for a product test, complete instructions, and submit feedback to earn rewards.",
-  },
-  {
-    q: "When will I receive my reward?",
-    a: "Rewards are credited instantly once your submission is approved.",
-  },
-  {
-    q: "Do I keep the product?",
-    a: "Some tests allow you to keep the product, others require returns. Details are provided before applying.",
-  },
-  {
-    q: "Is product testing free?",
-    a: "Yes. There are no hidden fees.",
-  },
+  { q: "How does it work?", a: "Complete tasks and earn rewards." },
+  { q: "When do I get paid?", a: "Rewards are credited instantly." },
+  { q: "Is it free?", a: "Yes, there are no fees." },
 ];
 
 export default function TestProductsPage() {
@@ -157,189 +90,166 @@ export default function TestProductsPage() {
     <>
       <SeoEngine
         title="Test Products | Cashog"
-        description="Join exclusive product testing programs and earn instant rewards."
+        description="Join product testing and earn rewards."
       />
 
-      <main className="relative min-h-screen text-gray-900 dark:text-white">
+      <main className="min-h-screen text-gray-900 dark:text-white">
         <Background />
 
         {/* HERO */}
-        <section className="relative z-10 max-w-6xl mx-auto px-4 py-24 text-center">
-          <Reveal>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-              Test Premium Products & Earn Rewards
-            </h1>
-          </Reveal>
+        <section className="max-w-6xl mx-auto px-4 py-24 text-center">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
+            Test Products & Earn Rewards
+          </h1>
 
-          <Reveal delay={0.15}>
-            <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold gradient-text mb-6">
-              <TypingText />
-            </div>
-          </Reveal>
+          <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold gradient-text mb-6">
+            <TypingText />
+          </div>
 
-          <Reveal delay={0.25}>
-            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed mb-10">
-              Join exclusive product trials, provide honest feedback, and get paid instantly.
-            </p>
-          </Reveal>
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
+            Join trials, give feedback, and get paid instantly.
+          </p>
 
-          <Reveal delay={0.35}>
-            <PrimaryCTA href="/signup">
-              Start Testing Products
-            </PrimaryCTA>
-          </Reveal>
+          <PrimaryCTA href="/signup">Start Now</PrimaryCTA>
         </section>
 
         {/* STATS */}
-        <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
-          <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              Platform Statistics
-            </h2>
-            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-              Trusted by thousands of users worldwide
-            </p>
-          </Reveal>
+        <section className="max-w-6xl mx-auto px-4 pb-24">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
+            Platform Statistics
+          </h2>
 
           <div className="grid gap-6 md:grid-cols-4">
             {stats.map((stat) => (
-              <motion.div
+              <div
                 key={stat.title}
-                whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-4 text-center border border-gray-200 dark:border-gray-800 shadow-md"
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-4 text-center border shadow-md"
               >
-                <div className="flex justify-center mb-2">
-                  <stat.icon className="w-6 h-6 text-green-400" />
-                </div>
-
-                <h3 className="text-sm uppercase tracking-wide text-gray-600 dark:text-gray-400">
+                <stat.icon className="w-6 h-6 text-green-400 mx-auto mb-2" />
+                <h3 className="text-sm uppercase text-gray-600 dark:text-gray-400">
                   {stat.title}
                 </h3>
-
-                <div className="text-2xl font-extrabold mt-2">{stat.value}</div>
-              </motion.div>
+                <div className="text-2xl font-bold mt-2">{stat.value}</div>
+              </div>
             ))}
           </div>
         </section>
 
-        {/* PRODUCT OFFERS (SIMPLE GRID - NO ANIMATIONS) */}
-<section className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
-  <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-    Product Testing Offers
-  </h2>
-  <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-    Complete tasks and earn rewards
-  </p>
+        {/* OFFER GRID (WORKING 3 COLUMNS) */}
+        <section className="max-w-7xl mx-auto px-4 pb-24">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+            Product Offers
+          </h2>
+          <p className="text-center text-gray-600 dark:text-gray-300 mb-10">
+            Complete tasks and earn rewards
+          </p>
 
-  {/* GRID: 3 on desktop */}
-  <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-    {products.map((product) => (
-      <div
-        key={product.id}
-        className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md flex flex-col"
-      >
-        {/* ICON */}
-        <PackageCheck className="w-8 h-8 text-green-400 mb-3 mx-auto" />
-
-        {/* TITLE */}
-        <h3 className="text-xl font-semibold mb-2">{product.title}</h3>
-
-        {/* DESCRIPTION */}
-        <p className="text-sm text-gray-600 dark:text-gray-300">
-          {product.description}
-        </p>
-
-        {/* STAR RATING */}
-        <div className="flex justify-center mt-2">
-          {Array(5)
-            .fill(0)
-            .map((_, index) => (
-              <Star key={index} className="w-4 h-4 text-yellow-400" />
-            ))}
-        </div>
-
-        {/* DETAILS */}
-        <div className="text-sm text-gray-600 dark:text-gray-300 mt-2">
-          Duration: {product.duration}
-        </div>
-
-        {/* FOOTER */}
-        <div className="mt-6 flex items-center justify-between">
-          <span className="text-green-500 font-bold">{product.reward}</span>
-
-          <a
-            href="/signup"
-            className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-sm hover:shadow-md"
-          >
-            Apply Now
-          </a>
-        </div>
-      </div>
-    ))}
-  </div>
-</section>
-        {/* HOW IT WORKS */}
-        <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
-          <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              How It Works
-            </h2>
-            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-              Start earning in four simple steps
-            </p>
-          </Reveal>
-
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {steps.map((step) => (
-              <motion.div
-                key={step.title}
-                whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-4 text-center border shadow-md"
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className="border rounded-2xl p-5 bg-white dark:bg-[#0a0d16] shadow-md"
               >
                 <div className="flex justify-center mb-3">
-                  <step.icon className="w-8 h-8 text-green-400" />
+                  <PackageCheck className="w-8 h-8 text-green-400" />
                 </div>
 
+                <h3 className="text-lg font-semibold text-center">
+                  {product.title}
+                </h3>
+
+                <p className="text-sm text-gray-600 dark:text-gray-300 text-center mt-2">
+                  {product.description}
+                </p>
+
+                <div className="flex justify-center mt-3">
+                  {Array(5)
+                    .fill(0)
+                    .map((_, index) => (
+                      <Star key={index} className="w-4 h-4 text-yellow-400" />
+                    ))}
+                </div>
+
+                <p className="text-xs text-center text-gray-600 dark:text-gray-300 mt-2">
+                  Duration: {product.duration}
+                </p>
+
+                <div className="flex justify-between items-center mt-5">
+                  <span className="text-green-500 font-bold">
+                    {product.reward}
+                  </span>
+
+                  <a
+                    href="/signup"
+                    className="px-3 py-1 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-sm"
+                  >
+                    Apply Now
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* HOW IT WORKS */}
+        <section className="max-w-6xl mx-auto px-4 pb-24">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
+            How It Works
+          </h2>
+
+          <div className="grid gap-6 md:grid-cols-4">
+            {[
+              {
+                title: "Sign Up",
+                description: "Create account in minutes.",
+              },
+              {
+                title: "Choose Offer",
+                description: "Select tasks that fit you.",
+              },
+              {
+                title: "Complete Tasks",
+                description: "Follow instructions and submit.",
+              },
+              {
+                title: "Get Paid",
+                description: "Receive rewards instantly.",
+              },
+            ].map((step) => (
+              <div
+                key={step.title}
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-4 text-center border shadow-md"
+              >
+                <CheckCircle className="w-8 h-8 text-green-400 mx-auto mb-3" />
                 <h3 className="text-lg font-semibold">{step.title}</h3>
                 <p className="text-xs text-gray-600 dark:text-gray-300 mt-2">
                   {step.description}
                 </p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </section>
 
         {/* FAQ */}
-        <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
-          <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-              Everything you need to know
-            </p>
-          </Reveal>
+        <section className="max-w-6xl mx-auto px-4 pb-24">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
+            Frequently Asked Questions
+          </h2>
 
           <FAQ faqs={faqs} />
         </section>
 
         {/* FINAL CTA */}
-        <section className="relative z-10 text-center py-24">
-          <Reveal>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-              Ready to Start Testing?
-            </h2>
+        <section className="text-center py-24">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
+            Ready to Start?
+          </h2>
 
-            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed mb-10">
-              Join Cashog today and start earning with premium product tests.
-            </p>
-          </Reveal>
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
+            Join today and start earning.
+          </p>
 
-          <Reveal delay={0.2}>
-            <PrimaryCTA href="/signup">
-              Join Cashog Now
-            </PrimaryCTA>
-          </Reveal>
+          <PrimaryCTA href="/signup">Join Now</PrimaryCTA>
         </section>
       </main>
     </>
