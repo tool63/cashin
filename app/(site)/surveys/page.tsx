@@ -30,6 +30,25 @@ const surveys = [
   { id: 9, title: "Social Media Trends Study", category: "Social", reward: "$3", estimatedTime: "4 min", rating: 4.7 },
 ];
 
+/* ================= FAQ (7 QUESTIONS) ================= */
+const faqs = [
+  { q: "Is it free to join?", a: "Yes. Signing up and completing surveys costs nothing." },
+  { q: "How fast are payouts?", a: "Most payouts are processed instantly or within hours." },
+  { q: "Why was I disqualified?", a: "Some surveys target specific demographics. It happens." },
+  { q: "Can I use mobile?", a: "Yes. Fully optimized for phones and tablets." },
+  { q: "How much can I earn?", a: "Earnings vary per survey. Higher time surveys usually pay more." },
+  { q: "Do I need special qualifications?", a: "No. Most surveys are open to general users." },
+  { q: "What payment methods are available?", a: "We support multiple methods including digital wallets." },
+];
+
+/* ================= STATS ================= */
+const stats = [
+  { label: "Active Users", number: 250000, icon: <Users className="w-6 h-6 text-green-400" /> },
+  { label: "Surveys Completed", number: 1200000, icon: <TrendingUp className="w-6 h-6 text-green-400" /> },
+  { label: "Total Paid", number: 850000, icon: <Gift className="w-6 h-6 text-green-400" /> },
+  { label: "Avg Rating", number: 48, icon: <Star className="w-6 h-6 text-green-400" /> },
+];
+
 /* ================= COUNT UP ================= */
 function CountUp({ end }: { end: number }) {
   const [count, setCount] = React.useState(0);
@@ -60,22 +79,6 @@ function CountUp({ end }: { end: number }) {
 
   return <div ref={ref}>{count.toLocaleString()}</div>;
 }
-
-/* ================= FAQ ================= */
-const faqs = [
-  { q: "Is it free to join?", a: "Yes. Signing up and completing surveys costs nothing." },
-  { q: "How fast are payouts?", a: "Most payouts are processed instantly or within hours." },
-  { q: "Why was I disqualified?", a: "Some surveys target specific demographics." },
-  { q: "Can I use mobile?", a: "Yes. Fully mobile optimized." },
-];
-
-/* ================= STATS ================= */
-const stats = [
-  { label: "Active Users", number: 250000, icon: <Users className="w-6 h-6 text-green-400" /> },
-  { label: "Surveys Completed", number: 1200000, icon: <TrendingUp className="w-6 h-6 text-green-400" /> },
-  { label: "Total Paid", number: 850000, icon: <Gift className="w-6 h-6 text-green-400" /> },
-  { label: "Avg Rating", number: 48, icon: <Star className="w-6 h-6 text-green-400" /> },
-];
 
 /* ================= PAGE ================= */
 export default function SurveysPage() {
@@ -236,9 +239,12 @@ export default function SurveysPage() {
         {/* FAQ */}
         <section className="relative z-10 max-w-4xl mx-auto px-4 py-20 text-center">
           <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Frequently Asked Questions
             </h2>
+            <p className="text-base text-gray-600 dark:text-gray-300 mb-8">
+              Everything you need to know about earning with surveys
+            </p>
           </Reveal>
 
           <FAQ faqs={faqs} />
@@ -247,9 +253,13 @@ export default function SurveysPage() {
         {/* FINAL CTA */}
         <section className="relative z-10 text-center py-28">
           <Reveal>
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
-              Ready to Start Earning?
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
+              Turn Your Opinion Into Real Rewards
             </h2>
+
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed mb-10">
+              Join Cashog today and start earning by sharing what you know.
+            </p>
 
             <PrimaryCTA href="/signup">
               Join Now
