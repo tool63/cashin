@@ -5,6 +5,7 @@ import Background from "@/components/Background";
 import TypingText from "@/components/typing/TypingText";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import FAQ from "@/components/faq/FAQ";
+import { motion } from "framer-motion";
 import {
   CheckCircle,
   PackageCheck,
@@ -15,6 +16,12 @@ import {
   DollarSign,
   BarChart3,
 } from "lucide-react";
+
+/* ANIMATION VARIANTS */
+const sectionVariant = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0 },
+};
 
 /* PRODUCT DATA */
 type ProductTest = {
@@ -97,7 +104,14 @@ export default function TestProductsPage() {
         <Background />
 
         {/* HERO */}
-        <section className="max-w-6xl mx-auto px-4 py-24 text-center">
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={sectionVariant}
+          transition={{ duration: 0.6 }}
+          className="max-w-6xl mx-auto px-4 py-24 text-center"
+        >
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
             Test Products & Earn Rewards
           </h1>
@@ -111,10 +125,17 @@ export default function TestProductsPage() {
           </p>
 
           <PrimaryCTA href="/signup">Start Now</PrimaryCTA>
-        </section>
+        </motion.section>
 
         {/* STATS */}
-        <section className="max-w-6xl mx-auto px-4 pb-24">
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={sectionVariant}
+          transition={{ duration: 0.6 }}
+          className="max-w-6xl mx-auto px-4 pb-24"
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
             Platform Statistics
           </h2>
@@ -133,10 +154,17 @@ export default function TestProductsPage() {
               </div>
             ))}
           </div>
-        </section>
+        </motion.section>
 
-        {/* OFFER GRID (WORKING 3 COLUMNS) */}
-        <section className="max-w-7xl mx-auto px-4 pb-24">
+        {/* OFFER GRID */}
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={sectionVariant}
+          transition={{ duration: 0.6 }}
+          className="max-w-7xl mx-auto px-4 pb-24"
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
             Product Offers
           </h2>
@@ -146,8 +174,13 @@ export default function TestProductsPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {products.map((product) => (
-              <div
+              <motion.div
                 key={product.id}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+                variants={sectionVariant}
+                transition={{ duration: 0.5 }}
                 className="border rounded-2xl p-5 bg-white dark:bg-[#0a0d16] shadow-md"
               >
                 <div className="flex justify-center mb-3">
@@ -186,13 +219,20 @@ export default function TestProductsPage() {
                     Apply Now
                   </a>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </section>
+        </motion.section>
 
         {/* HOW IT WORKS */}
-        <section className="max-w-6xl mx-auto px-4 pb-24">
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={sectionVariant}
+          transition={{ duration: 0.6 }}
+          className="max-w-6xl mx-auto px-4 pb-24"
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
             How It Works
           </h2>
@@ -228,19 +268,33 @@ export default function TestProductsPage() {
               </div>
             ))}
           </div>
-        </section>
+        </motion.section>
 
         {/* FAQ */}
-        <section className="max-w-6xl mx-auto px-4 pb-24">
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={sectionVariant}
+          transition={{ duration: 0.6 }}
+          className="max-w-6xl mx-auto px-4 pb-24"
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
             Frequently Asked Questions
           </h2>
 
           <FAQ faqs={faqs} />
-        </section>
+        </motion.section>
 
         {/* FINAL CTA */}
-        <section className="text-center py-24">
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={sectionVariant}
+          transition={{ duration: 0.6 }}
+          className="text-center py-24"
+        >
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
             Ready to Start?
           </h2>
@@ -250,7 +304,7 @@ export default function TestProductsPage() {
           </p>
 
           <PrimaryCTA href="/signup">Join Now</PrimaryCTA>
-        </section>
+        </motion.section>
       </main>
     </>
   );
