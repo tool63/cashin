@@ -229,71 +229,73 @@ export default function TestProductsPage() {
           </div>
         </section>
 
-        {/* PRODUCT OFFERS */}
-        <section className="relative z-10 w-full px-4 pb-24">
-          <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              Product Testing Offers
-            </h2>
-            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-              Complete tasks and earn rewards
-            </p>
-          </Reveal>
+        {/* ================= PRODUCT OFFERS ================= */}
+<section className="relative z-10 w-full px-4 pb-24">
+  <Reveal>
+    <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+      Product Testing Offers
+    </h2>
+    <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+      Complete tasks and earn rewards
+    </p>
+  </Reveal>
 
-          {/* Grid: 1 column mobile, 2 columns tablet, 3 columns desktop */}
-          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
-            {products.map((product, index) => (
-              <motion.div
-                key={product.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
-                whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-xl p-6 border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col"
-              >
-                <div className="w-12 h-12 bg-gradient-to-br from-yellow-400/20 to-green-400/20 rounded-xl flex items-center justify-center mb-4 mx-auto">
-                  <PackageCheck className="w-6 h-6 text-green-400" />
-                </div>
+  {/* GRID: mobile 1, tablet 2, desktop 3 */}
+  <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+    {products.map((product) => (
+      <motion.div
+        key={product.id}
+        whileHover={{ y: -4 }}
+        className="relative bg-white dark:bg-[#0a0d16] rounded-2xl p-5 border border-gray-200 dark:border-gray-800 shadow-md"
+      >
+        {/* ICON */}
+        <div className="flex justify-center mb-3">
+          <PackageCheck className="w-8 h-8 text-green-400" />
+        </div>
 
-                <h3 className="text-lg font-semibold mb-2 text-center">{product.title}</h3>
+        {/* TITLE */}
+        <h3 className="text-lg font-semibold text-center mb-2">
+          {product.title}
+        </h3>
 
-                <p className="text-sm text-gray-600 dark:text-gray-300 text-center mb-4">
-                  {product.description}
-                </p>
+        {/* DESCRIPTION */}
+        <p className="text-xs text-gray-600 dark:text-gray-300 text-center">
+          {product.description}
+        </p>
 
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-1">
-                    {Array(5)
-                      .fill(0)
-                      .map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                      ))}
-                  </div>
-
-                  <span className="text-xs px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full text-gray-600 dark:text-gray-300">
-                    {product.duration}
-                  </span>
-                </div>
-
-                <div className="flex items-center justify-between mt-2 pt-4 border-t border-gray-200 dark:border-gray-800">
-                  <div>
-                    <span className="text-xs text-gray-500 dark:text-gray-400 block">Reward</span>
-                    <span className="text-green-500 font-bold text-lg">{product.reward}</span>
-                  </div>
-
-                  <motion.a
-                    href="/signup"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.97 }}
-                    className="px-5 py-2 text-sm font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-sm hover:shadow-md transition-all"
-                  >
-                    Apply Now
-                  </motion.a>
-                </div>
-              </motion.div>
+        {/* STAR RATING */}
+        <div className="flex justify-center mt-3">
+          {Array(5)
+            .fill(0)
+            .map((_, index) => (
+              <Star key={index} className="w-4 h-4 text-yellow-400" />
             ))}
-          </div>
-        </section>
+        </div>
+
+        {/* DETAILS */}
+        <div className="text-xs text-gray-600 dark:text-gray-300 text-center mt-2">
+          Duration: {product.duration}
+        </div>
+
+        {/* FOOTER */}
+        <div className="mt-5 flex items-center justify-between">
+          <span className="text-green-500 font-bold text-sm">
+            {product.reward}
+          </span>
+
+          <motion.a
+            href="/signup"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-md"
+          >
+            Apply Now
+          </motion.a>
+        </div>
+      </motion.div>
+    ))}
+  </div>
+</section>
 
         {/* HOW IT WORKS */}
         <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
