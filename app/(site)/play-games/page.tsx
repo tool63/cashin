@@ -92,7 +92,7 @@ const stats = [
   { label: "Average Reward", number: 3.2 },
 ];
 
-/* ================= FAQ ================= */
+/* ================= FAQ DATA ================= */
 const faqs = [
   { q: "How do I earn rewards?", a: "Play games and complete challenges to earn rewards." },
   { q: "Are rewards real money?", a: "Yes. You can withdraw rewards via PayPal or gift cards." },
@@ -146,7 +146,7 @@ export default function PlayGamesPage() {
           </motion.div>
         </section>
 
-        {/* ================= FEATURED GAMES (OFFERWALL STYLE) ================= */}
+        {/* ================= FEATURED GAMES ================= */}
         <section className="py-20 px-6 max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center">
             Premium Games
@@ -206,44 +206,7 @@ export default function PlayGamesPage() {
           </div>
         </section>
 
-        {/* ================= STATS (OFFERWALL STYLE) ================= */}
-        <section className="py-20 px-6 max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center">
-            Platform Performance
-          </h2>
-          <p className="text-center text-gray-600 dark:text-gray-400 mb-12">
-            Real-time insights from our growing community
-          </p>
-
-          <div className="grid gap-6 md:grid-cols-3">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                className="bg-white/90 dark:bg-[#0c111b]/90 backdrop-blur-xl
-                border border-gray-200 dark:border-gray-800
-                rounded-2xl p-6 text-center shadow-sm hover:shadow-xl"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-              >
-                <div className="flex justify-center items-center mb-4">
-                  <TrendingUp className="w-8 h-8 text-green-500" />
-                </div>
-
-                <h3 className="text-4xl font-extrabold text-green-500">
-                  <CountUp end={stat.number} />
-                  {stat.label === "Average Reward" && "$"}
-                </h3>
-
-                <p className="mt-2 text-gray-600 dark:text-gray-400">
-                  {stat.label}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </section>
-
-        {/* ================= HOW IT WORKS (OFFERWALL STYLE) ================= */}
+        {/* ================= HOW IT WORKS (CARD STYLE) ================= */}
         <section className="py-20 px-6 max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center">
             How It Works
@@ -263,6 +226,9 @@ export default function PlayGamesPage() {
                 className="bg-white/90 dark:bg-[#0c111b]/90 backdrop-blur-xl
                 border border-gray-200 dark:border-gray-800
                 rounded-2xl p-6 text-center shadow-sm hover:shadow-xl"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
               >
                 <div className="flex justify-center items-center mb-4">
                   {step.icon}
@@ -278,7 +244,7 @@ export default function PlayGamesPage() {
           </div>
         </section>
 
-        {/* ================= FAQ (OFFERWALL STYLE) ================= */}
+        {/* ================= FAQ (CARD STYLE) ================= */}
         <section className="py-20 px-6 max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center">
             Frequently Asked Questions
@@ -292,18 +258,27 @@ export default function PlayGamesPage() {
           </div>
         </section>
 
-        {/* ================= FINAL CTA (OFFERWALL STYLE) ================= */}
+        {/* ================= FINAL CTA (CARD STYLE) ================= */}
         <section className="py-20 px-6 max-w-7xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold">
-            Ready to Play & Earn?
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-8">
-            Join thousands of players earning rewards
-          </p>
+          <motion.div
+            className="bg-white/90 dark:bg-[#0c111b]/90 backdrop-blur-xl
+            border border-gray-200 dark:border-gray-800
+            rounded-2xl p-10 shadow-lg"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold">
+              Ready to Play & Earn?
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400 mb-8">
+              Join thousands of players earning rewards
+            </p>
 
-          <PrimaryCTA href="/signup">
-            Start Playing
-          </PrimaryCTA>
+            <PrimaryCTA href="/signup">
+              Start Playing
+            </PrimaryCTA>
+          </motion.div>
         </section>
       </main>
     </>
