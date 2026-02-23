@@ -1,107 +1,198 @@
 "use client";
 
 import React from "react";
-import SeoEngine from "@/components/seo/SeoEngine";
+import { motion } from "framer-motion";
+import Meta from "@/components/seo/SeoEngine";
+import TypingText from "@/components/typing/TypingText";
 import Background from "@/components/Background";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
+import Reveal from "@/components/animations/Reveal";
 import FAQ from "@/components/faq/FAQ";
+import {
+  ClipboardList,
+  Star,
+  Trophy,
+  User,
+  TrendingUp,
+  Gift,
+} from "lucide-react";
 
-/* PRODUCT DATA */
-const products = [
-  { id: 1, title: "Smartphone Beta Test", description: "Early access test.", reward: "$15", duration: "7 Days" },
-  { id: 2, title: "Headphones Trial", description: "Test and review.", reward: "$8", duration: "3 Days" },
-  { id: 3, title: "Fitness Tracker", description: "Share feedback.", reward: "$12", duration: "5 Days" },
+/* ================= OFFERS ================= */
+const apps = [
+  { id: 1, name: "Photo Editor Pro", category: "Utilities", reward: "$2", rating: 4.8, installs: "500K+" },
+  { id: 2, name: "Fitness Tracker", category: "Health", reward: "$3", rating: 4.7, installs: "350K+" },
+  { id: 3, name: "Language Learner", category: "Education", reward: "$2", rating: 4.6, installs: "200K+" },
+  { id: 4, name: "Crypto Wallet", category: "Finance", reward: "$4", rating: 4.9, installs: "600K+" },
+  { id: 5, name: "Music Streamer", category: "Entertainment", reward: "$2", rating: 4.7, installs: "800K+" },
+  { id: 6, name: "Budget Planner", category: "Finance", reward: "$3", rating: 4.6, installs: "250K+" },
+  { id: 7, name: "Daily News App", category: "News", reward: "$2", rating: 4.5, installs: "150K+" },
+  { id: 8, name: "Gaming Hub", category: "Gaming", reward: "$5", rating: 4.9, installs: "1M+" },
+  { id: 9, name: "Shopping Rewards", category: "Shopping", reward: "$3", rating: 4.8, installs: "400K+" },
 ];
 
-/* FAQ */
+/* ================= SAFE COUNT UP ================= */
+function CountUp({ end }: { end: number }) {
+  const [count, setCount] = React.useState(0);
+  const ref = React.useRef<HTMLDivElement | null>(null);
+  const hasAnimated = React.useRef(false);
+
+  React.useEffect(() => {
+    if (!ref.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated.current) {
+          hasAnimated.current = true;
+
+          let start = 0;
+          const duration = 2000;
+          const increment = end / (duration / 16);
+
+          const counter = setInterval(() => {
+            start += increment;
+
+            if (start >= end) {
+              setCount(end);
+              clearInterval(counter);
+            } else {
+              setCount(Math.floor(start));
+            }
+          }, 16);
+
+          observer.disconnect(); // 🔥 stops retrigger
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(ref.current);
+
+    return () => observer.disconnect();
+  }, [end]);
+
+  return <div ref={ref}>{count.toLocaleString()}</div>;
+}
+
+/* ================= STATS ================= */
+const stats = [
+  { label: "Total Installs", number: 1200000, icon: <Trophy className="w-6 h-6 text-yellow-400" /> },
+  { label: "Active Users", number: 350000, icon: <User className="w-6 h-6 text-green-400" /> },
+  { label: "Avg Reward", number: 3, icon: <TrendingUp className="w-6 h-6 text-blue-400" /> },
+];
+
+/* ================= FAQ ================= */
 const faqs = [
-  { q: "How does it work?", a: "Complete tasks and earn rewards." },
-  { q: "When do I get paid?", a: "Rewards are credited instantly." },
-  { q: "Is it free?", a: "Yes." },
+  { q: "How does it work?", a: "Install apps and complete simple actions to earn rewards." },
+  { q: "Are apps safe?", a: "Yes. We feature verified and trusted apps only." },
+  { q: "How fast are rewards credited?", a: "Rewards are usually credited instantly." },
+  { q: "Can I uninstall after earning?", a: "Yes, after completing required tasks." },
 ];
 
-export default function TestProductsPage() {
+/* ================= PAGE ================= */
+export default function AppInstallPage() {
   return (
     <>
-      <SeoEngine
-        title="Test Products"
-        description="Join product testing and earn rewards."
+      <Meta
+        title="Install Apps & Earn | Cashog"
+        description="Install apps and earn rewards instantly with Cashog."
       />
 
-      <main className="min-h-screen text-center">
+      <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
 
-        {/* HERO */}
-        <section className="max-w-6xl mx-auto px-4 py-24">
-          <h1 className="text-4xl font-bold mb-4">
-            Test Products & Earn Rewards
-          </h1>
-          <p className="text-gray-600 mb-6">
-            Join trials, give feedback, and get paid.
-          </p>
+        <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
 
-          <PrimaryCTA href="/signup">Start Now</PrimaryCTA>
-        </section>
+          {/* HERO */}
+          <Reveal>
+            <div className="text-center mb-20">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
+                Install Apps & Earn Rewards
+              </h1>
 
-        {/* PRODUCT GRID */}
-        <section className="max-w-7xl mx-auto px-4 pb-24">
-          <h2 className="text-2xl font-bold mb-4">Product Offers</h2>
-
-          <div className="grid gap-4 md:grid-cols-3">
-            {products.map((product) => (
-              <div
-                key={product.id}
-                className="border rounded-lg p-4 bg-white shadow-sm"
-              >
-                <h3 className="font-semibold">{product.title}</h3>
-                <p className="text-sm text-gray-600 mt-2">
-                  {product.description}
-                </p>
-                <p className="text-green-600 font-bold mt-2">{product.reward}</p>
-                <p className="text-xs text-gray-500">Duration: {product.duration}</p>
-
-                <a
-                  href="/signup"
-                  className="inline-block mt-4 px-4 py-2 text-sm rounded bg-green-500 text-white"
-                >
-                  Apply Now
-                </a>
+              <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold gradient-text mb-6">
+                <TypingText />
               </div>
+
+              <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
+                Install premium apps and complete actions to earn real rewards instantly.
+              </p>
+
+              <PrimaryCTA href="/signup">
+                Start Earning
+              </PrimaryCTA>
+            </div>
+          </Reveal>
+
+          {/* OFFERS GRID */}
+          <div className="grid gap-6 md:grid-cols-3 mb-24">
+            {apps.map((app) => (
+              <motion.div
+                key={app.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                whileHover={{ y: -4 }}
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
+              >
+                <div className="flex justify-between items-center mb-4">
+                  <ClipboardList className="text-green-400 w-5 h-5" />
+                  <span className="text-xs px-3 py-1 rounded-full bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20">
+                    {app.category}
+                  </span>
+                </div>
+
+                <h3 className="text-xl font-semibold mb-2">{app.name}</h3>
+
+                <div className="flex justify-center mt-2">
+                  {Array(Math.floor(app.rating)).fill(0).map((_, i) => (
+                    <Star key={i} className="w-4 h-4 text-yellow-400" />
+                  ))}
+                </div>
+
+                <div className="mt-6 flex items-center justify-between">
+                  <span className="text-green-500 font-bold">{app.reward}</span>
+
+                  <motion.a
+                    href="/signup"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-sm"
+                  >
+                    Install Now
+                  </motion.a>
+                </div>
+              </motion.div>
             ))}
           </div>
-        </section>
 
-        {/* HOW IT WORKS */}
-        <section className="max-w-6xl mx-auto px-4 pb-24">
-          <h2 className="text-2xl font-bold mb-4">How It Works</h2>
-
-          <div className="grid gap-4 md:grid-cols-4">
-            {[
-              "Sign Up",
-              "Choose Offer",
-              "Complete Tasks",
-              "Get Paid",
-            ].map((step) => (
-              <div
-                key={step}
-                className="border rounded-lg p-4 bg-white shadow-sm"
+          {/* STATS */}
+          <div className="grid gap-6 md:grid-cols-3 mb-24">
+            {stats.map((stat) => (
+              <motion.div
+                key={stat.label}
+                whileHover={{ y: -4 }}
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
               >
-                <h3 className="font-semibold">{step}</h3>
-              </div>
+                <div className="flex justify-center mb-2">
+                  {stat.icon}
+                </div>
+
+                <h3 className="text-sm uppercase tracking-wide text-gray-600 dark:text-gray-400">
+                  {stat.label}
+                </h3>
+
+                <div className="text-3xl font-extrabold mt-2">
+                  <CountUp end={stat.number} />
+                </div>
+              </motion.div>
             ))}
           </div>
-        </section>
 
-        {/* FAQ */}
-        <section className="max-w-6xl mx-auto px-4 pb-24">
-          <h2 className="text-2xl font-bold mb-4">FAQ</h2>
-          <FAQ faqs={faqs} />
-        </section>
+          <div className="mb-24">
+            <FAQ faqs={faqs} />
+          </div>
 
-        {/* FINAL CTA */}
-        <section className="text-center py-24">
-          <h2 className="text-4xl font-bold mb-4">Ready to Start?</h2>
-          <PrimaryCTA href="/signup">Join Now</PrimaryCTA>
         </section>
       </main>
     </>
