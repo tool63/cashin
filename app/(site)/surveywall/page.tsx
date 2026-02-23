@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import SeoEngine from "@/components/seo/SeoEngine";
 import Background from "@/components/Background";
+import TypingText from "@/components/typing/TypingText";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
 import FAQ from "@/components/faq/FAQ";
@@ -108,8 +109,12 @@ export default function SurveyWallPage() {
         <section className="relative z-10 max-w-7xl mx-auto px-4 py-20 text-center">
           <Reveal>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-             Get Instant Rewards Through 
+              Discover Cashog SurveyWall
             </h1>
+
+            <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold gradient-text mb-6">
+              <TypingText />
+            </div>
 
             <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
               Complete premium surveys and share your opinions to earn cash and rewards instantly.
@@ -121,7 +126,7 @@ export default function SurveyWallPage() {
           </Reveal>
         </section>
 
-        {/* SURVEYS GRID (9+ Offers) */}
+        {/* SURVEYS GRID */}
         <section className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
@@ -258,7 +263,7 @@ export default function SurveyWallPage() {
         <section className="relative z-10 text-center py-28">
           <Reveal>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-              Turn Your Spare Time Into Real Rewards
+              Turn Your Opinion Into Real Rewards
             </h2>
 
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed mb-10">
