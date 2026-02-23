@@ -206,8 +206,7 @@ export default function TestProductsPage() {
               <motion.div
                 key={stat.title}
                 initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -4 }}
                 className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md hover:shadow-xl transition-all duration-300"
@@ -230,7 +229,7 @@ export default function TestProductsPage() {
           </div>
         </section>
 
-        {/* PRODUCT OFFERS - REDESIGNED GRID */}
+        {/* PRODUCT OFFERS */}
         <section className="relative z-10 w-full px-4 pb-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
@@ -241,49 +240,41 @@ export default function TestProductsPage() {
             </p>
           </Reveal>
 
-          {/* GRID: Mobile 1 column, Tablet 2 columns, Desktop 3 columns */}
+          {/* Grid: 1 column mobile, 2 columns tablet, 3 columns desktop */}
           <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
             {products.map((product, index) => (
               <motion.div
                 key={product.id}
                 initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
                 whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-xl p-6 border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full"
+                className="bg-white dark:bg-[#0a0d16] rounded-xl p-6 border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col"
               >
-                {/* Icon with gradient background */}
                 <div className="w-12 h-12 bg-gradient-to-br from-yellow-400/20 to-green-400/20 rounded-xl flex items-center justify-center mb-4 mx-auto">
                   <PackageCheck className="w-6 h-6 text-green-400" />
                 </div>
 
-                {/* Title */}
                 <h3 className="text-lg font-semibold mb-2 text-center">{product.title}</h3>
 
-                {/* Description */}
-                <p className="text-sm text-gray-600 dark:text-gray-300 text-center mb-4 flex-grow">
+                <p className="text-sm text-gray-600 dark:text-gray-300 text-center mb-4">
                   {product.description}
                 </p>
 
-                {/* Rating & Duration Row */}
                 <div className="flex items-center justify-between mb-4">
-                  {/* Star Rating */}
                   <div className="flex items-center gap-1">
                     {Array(5)
                       .fill(0)
-                      .map((_, index) => (
-                        <Star key={index} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                      .map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                       ))}
                   </div>
 
-                  {/* Duration Badge */}
-                  <span className="text-xs px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full text-gray-600 dark:text-gray-300 font-medium">
+                  <span className="text-xs px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full text-gray-600 dark:text-gray-300">
                     {product.duration}
                   </span>
                 </div>
 
-                {/* Reward & CTA Row */}
                 <div className="flex items-center justify-between mt-2 pt-4 border-t border-gray-200 dark:border-gray-800">
                   <div>
                     <span className="text-xs text-gray-500 dark:text-gray-400 block">Reward</span>
@@ -320,8 +311,7 @@ export default function TestProductsPage() {
               <motion.div
                 key={step.title}
                 initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -4 }}
                 className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md hover:shadow-xl transition-all duration-300"
