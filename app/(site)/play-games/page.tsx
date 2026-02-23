@@ -6,9 +6,8 @@ import {
   User,
   Gift,
   ClipboardList,
-  DollarSign,
-  Shield,
   TrendingUp,
+  Star,
   Joystick,
 } from "lucide-react";
 import { motion } from "framer-motion";
@@ -19,17 +18,8 @@ import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
 import FAQ from "@/components/faq/FAQ";
 
-/* ================= GAME DATA ================= */
-type Game = {
-  id: number;
-  name: string;
-  category: string;
-  reward: string;
-  rating: number;
-  players: string;
-};
-
-const games: Game[] = [
+/* ================= PREMIUM GAMES (OFFERWALL STYLE) ================= */
+const games = [
   { id: 1, name: "Crypto Racer", category: "Racing", reward: "$3", rating: 4.8, players: "50K+" },
   { id: 2, name: "Puzzle Mania", category: "Puzzle", reward: "$2", rating: 4.7, players: "75K+" },
   { id: 3, name: "Battle Arena", category: "Action", reward: "$4", rating: 4.9, players: "120K+" },
@@ -83,13 +73,13 @@ function StarRating({ rating }: { rating: number }) {
       {Array(fullStars)
         .fill(0)
         .map((_, i) => (
-          <TrendingUp key={`full-${i}`} className="w-5 h-5 text-yellow-400" />
+          <Star key={`full-${i}`} className="w-5 h-5 text-yellow-400" />
         ))}
-      {halfStar && <TrendingUp className="w-5 h-5 text-yellow-400 opacity-60" />}
+      {halfStar && <Star className="w-5 h-5 text-yellow-400 opacity-60" />}
       {Array(emptyStars)
         .fill(0)
         .map((_, i) => (
-          <TrendingUp key={`empty-${i}`} className="w-5 h-5 text-gray-300 dark:text-gray-600" />
+          <Star key={`empty-${i}`} className="w-5 h-5 text-gray-300 dark:text-gray-600" />
         ))}
     </div>
   );
@@ -104,26 +94,11 @@ const stats = [
 
 /* ================= FAQ ================= */
 const faqs = [
-  {
-    q: "How do I earn rewards?",
-    a: "Play games and complete challenges to earn rewards instantly.",
-  },
-  {
-    q: "Are rewards real money?",
-    a: "Yes. You can withdraw rewards via PayPal or gift cards.",
-  },
-  {
-    q: "Is it free to play?",
-    a: "Yes. All games and challenges are free to play.",
-  },
-  {
-    q: "How fast are rewards credited?",
-    a: "Most rewards are credited instantly after completion.",
-  },
-  {
-    q: "How do I withdraw earnings?",
-    a: "You can withdraw once you reach the minimum payout threshold.",
-  },
+  { q: "How do I earn rewards?", a: "Play games and complete challenges to earn rewards." },
+  { q: "Are rewards real money?", a: "Yes. You can withdraw rewards via PayPal or gift cards." },
+  { q: "Is it free to play?", a: "Yes. All games are free to play." },
+  { q: "How fast are rewards credited?", a: "Rewards are credited instantly after completion." },
+  { q: "How do I withdraw earnings?", a: "Withdraw once you reach minimum payout." },
 ];
 
 export default function PlayGamesPage() {
@@ -131,12 +106,12 @@ export default function PlayGamesPage() {
     <>
       <Meta
         title="Play Games & Earn | Cashog"
-        description="Play premium games and earn real rewards instantly."
+        description="Premium games with real rewards. Play, earn, and withdraw instantly."
       />
 
       <main className="min-h-screen text-gray-900 dark:text-white">
 
-        {/* ================= HERO SECTION ================= */}
+        {/* ================= HERO ================= */}
         <section className="relative py-24 text-center">
           <div className="absolute inset-0 bg-gradient-to-br
             from-yellow-400/20 via-green-400/10 to-yellow-600/20
@@ -152,6 +127,7 @@ export default function PlayGamesPage() {
             <h1 className="text-4xl md:text-6xl font-extrabold mb-2">
               Premium Play & Earn
             </h1>
+
             <p className="text-sm uppercase tracking-widest text-green-600 mb-6">
               Play | Earn | Enjoy
             </p>
@@ -161,7 +137,7 @@ export default function PlayGamesPage() {
             </div>
 
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-10">
-              Play premium games, complete challenges, and earn real rewards.
+              Engage with premium games and earn real rewards instantly.
             </p>
 
             <PrimaryCTA href="/signup">
@@ -170,7 +146,7 @@ export default function PlayGamesPage() {
           </motion.div>
         </section>
 
-        {/* ================= FEATURED GAMES ================= */}
+        {/* ================= FEATURED GAMES (OFFERWALL STYLE) ================= */}
         <section className="py-20 px-6 max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center">
             Premium Games
@@ -235,90 +211,78 @@ export default function PlayGamesPage() {
           </div>
         </section>
 
+        {/* ================= STATS (OFFERWALL STYLE) ================= */}
         <section className="py-20 px-6 bg-gray-50 dark:bg-[#0c111b]">
-  <h2 className="text-3xl md:text-4xl font-bold text-center">
-    Platform Performance
-  </h2>
-  <p className="text-center text-gray-600 dark:text-gray-400 mb-12">
-    Real-time insights from our growing community
-  </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-center">
+            Platform Performance
+          </h2>
+          <p className="text-center text-gray-600 dark:text-gray-400 mb-12">
+            Real-time insights from our growing community
+          </p>
 
-  <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-    {stats.map((stat, index) => (
-      <motion.div
-        key={index}
-        className="bg-white/90 dark:bg-[#0c111b]/90 backdrop-blur-xl
-        border border-gray-200 dark:border-gray-800
-        rounded-2xl p-6 text-center shadow-sm hover:shadow-xl
-        transition-all duration-300"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-      >
-        <div className="flex justify-center items-center mb-4">
-          <TrendingUp className="w-8 h-8 text-green-500" />
-        </div>
+          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {stats.map((stat, index) => (
+              <motion.div
+                key={index}
+                className="bg-white/90 dark:bg-[#0c111b]/90 backdrop-blur-xl
+                border border-gray-200 dark:border-gray-800
+                rounded-2xl p-6 text-center shadow-sm hover:shadow-xl
+                transition-all duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <div className="flex justify-center items-center mb-4">
+                  <TrendingUp className="w-8 h-8 text-green-500" />
+                </div>
 
-        <h3 className="text-4xl font-extrabold text-green-500">
-          <CountUp end={stat.number} />
-          {stat.label === "Average Reward" && "$"}
-        </h3>
+                <h3 className="text-4xl font-extrabold text-green-500">
+                  <CountUp end={stat.number} />
+                  {stat.label === "Average Reward" && "$"}
+                </h3>
 
-        <p className="mt-2 text-gray-600 dark:text-gray-400">
-          {stat.label}
-        </p>
-      </motion.div>
-    ))}
-  </div>
-</section>
+                <p className="mt-2 text-gray-600 dark:text-gray-400">
+                  {stat.label}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
 
+        {/* ================= HOW IT WORKS (OFFERWALL STYLE) ================= */}
         <section className="py-24 px-6 max-w-6xl mx-auto text-center">
-  <h2 className="text-3xl md:text-4xl font-bold">
-    How It Works
-  </h2>
-  <p className="text-gray-600 dark:text-gray-400 mb-12">
-    Start earning in three simple steps
-  </p>
+          <h2 className="text-3xl md:text-4xl font-bold">
+            How It Works
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-12">
+            Start earning in three simple steps
+          </p>
 
-  <div className="grid md:grid-cols-3 gap-8">
-    {[
-      {
-        icon: <User className="w-8 h-8 text-yellow-400" />,
-        title: "Sign Up",
-        desc: "Create your account in seconds.",
-      },
-      {
-        icon: <Trophy className="w-8 h-8 text-green-400" />,
-        title: "Play Games",
-        desc: "Complete challenges and earn rewards.",
-      },
-      {
-        icon: <Gift className="w-8 h-8 text-yellow-400" />,
-        title: "Withdraw",
-        desc: "Redeem earnings instantly.",
-      },
-    ].map((step) => (
-      <motion.div
-        key={step.title}
-        className="bg-white/90 dark:bg-[#0c111b]/90 backdrop-blur-xl
-        border border-gray-200 dark:border-gray-800
-        rounded-2xl p-6 shadow-sm hover:shadow-xl
-        transition-all duration-300 text-center"
-      >
-        {/* Icon in the middle */}
-        <div className="flex justify-center items-center mb-4">
-          {step.icon}
-        </div>
+          <div className="grid gap-6 md:grid-cols-3">
+            {[
+              { icon: <User className="w-8 h-8 text-yellow-400" />, title: "Sign Up", desc: "Create account in seconds." },
+              { icon: <Trophy className="w-8 h-8 text-green-400" />, title: "Play Games", desc: "Complete challenges and earn rewards." },
+              { icon: <Gift className="w-8 h-8 text-yellow-400" />, title: "Withdraw", desc: "Redeem earnings instantly." },
+            ].map((step) => (
+              <motion.div
+                key={step.title}
+                className="bg-white/90 dark:bg-[#0c111b]/90 backdrop-blur-xl
+                border border-gray-200 dark:border-gray-800
+                rounded-2xl p-6 text-center shadow-sm hover:shadow-xl"
+              >
+                <div className="flex justify-center items-center mb-4">
+                  {step.icon}
+                </div>
 
-        <h3 className="text-lg font-semibold">{step.title}</h3>
+                <h3 className="text-lg font-semibold">{step.title}</h3>
 
-        <p className="text-gray-600 dark:text-gray-400 text-sm mt-2">
-          {step.desc}
-        </p>
-      </motion.div>
-    ))}
-  </div>
-</section>
+                <p className="text-gray-600 dark:text-gray-400 text-sm mt-2">
+                  {step.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
 
         {/* ================= FAQ ================= */}
         <section className="py-20 px-6 max-w-6xl mx-auto">
@@ -338,7 +302,7 @@ export default function PlayGamesPage() {
             Ready to Play & Earn?
           </h2>
           <p className="text-gray-600 dark:text-gray-400 mb-8">
-            Join thousands of players earning rewards today
+            Join thousands of players earning rewards
           </p>
 
           <PrimaryCTA href="/signup">
