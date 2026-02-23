@@ -75,6 +75,25 @@ const stats = [
   { label: "Average Reward ($)", number: 3.5 },
 ];
 
+/* ================= HOW IT WORKS STEPS ================= */
+const steps = [
+  {
+    icon: <User className="w-8 h-8 text-yellow-400 mx-auto" />,
+    title: "Sign Up",
+    desc: "Create your account in minutes.",
+  },
+  {
+    icon: <Star className="w-8 h-8 text-green-400 mx-auto" />,
+    title: "Complete Offers",
+    desc: "Choose tasks and finish them easily.",
+  },
+  {
+    icon: <Gift className="w-8 h-8 text-yellow-500 mx-auto" />,
+    title: "Redeem Rewards",
+    desc: "Withdraw earnings securely.",
+  },
+];
+
 /* ================= PAGE ================= */
 export default function CompleteOffersPage() {
   return (
@@ -184,11 +203,7 @@ export default function CompleteOffersPage() {
 
           {/* ================= HOW IT WORKS ================= */}
           <div className="grid md:grid-cols-3 gap-10 mb-24 text-center">
-            {[
-              { icon: <User className="w-8 h-8 text-yellow-400 mx-auto" />, title: "Sign Up", desc: "Create your account in minutes." },
-              { icon: <Star className="w-8 h-8 text-green-400 mx-auto" />, title: "Complete Offers", desc: "Choose tasks and finish them easily." },
-              { icon: <Gift className="w-8 h-8 text-yellow-500 mx-auto" />, title: "Redeem Rewards", desc: "Withdraw earnings securely." },
-            ].map((step, i) => (
+            {steps.map((step, i) => (
               <Reveal key={i}>
                 <motion.div
                   whileHover={{ y: -6 }}
