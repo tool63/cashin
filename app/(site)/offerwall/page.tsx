@@ -3,7 +3,17 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import SeoEngine from "@/components/seo/SeoEngine";
-import { ClipboardList, Star, Gift, Trophy, User } from "lucide-react";
+import Background from "@/components/Background";
+import Reveal from "@/components/animations/Reveal";
+import PrimaryCTA from "@/components/cta/PrimaryCTA";
+import TypingText from "@/components/typing/TypingText";
+import {
+  ClipboardList,
+  Star,
+  Gift,
+  Trophy,
+  User,
+} from "lucide-react";
 
 /* ================= OFFER TYPE ================= */
 type Offer = {
@@ -11,10 +21,10 @@ type Offer = {
   title: string;
   category: string;
   reward: string;
-  popularity: number; // out of 100
+  popularity: number;
 };
 
-/* ================= SAMPLE OFFER DATA ================= */
+/* ================= SAMPLE DATA ================= */
 const offers: Offer[] = [
   { id: 1, title: "Install MegaApp", category: "App Install", reward: "$3", popularity: 90 },
   { id: 2, title: "Complete Quick Survey", category: "Survey", reward: "$2", popularity: 85 },
@@ -25,7 +35,7 @@ const offers: Offer[] = [
   { id: 7, title: "Complete Daily Task", category: "Task", reward: "$1.5", popularity: 75 },
 ];
 
-/* ================= COUNT UP COMPONENT ================= */
+/* ================= COUNT UP ================= */
 function CountUp({ end }: { end: number }) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement | null>(null);
@@ -37,6 +47,7 @@ function CountUp({ end }: { end: number }) {
           let start = 0;
           const duration = 2000;
           const increment = end / (duration / 16);
+
           const counter = setInterval(() => {
             start += increment;
             if (start >= end) {
@@ -46,7 +57,6 @@ function CountUp({ end }: { end: number }) {
               setCount(Math.floor(start));
             }
           }, 16);
-          return () => clearInterval(counter);
         }
       },
       { threshold: 0.3 }
@@ -66,176 +76,150 @@ const stats = [
   { label: "Average Reward ($)", number: 3.7 },
 ];
 
-/* ================= PAGE COMPONENT ================= */
+/* ================= PAGE ================= */
 export default function OfferWallPage() {
   return (
     <>
       <SeoEngine
         title="OfferWall | Cashog"
-        description="Discover premium high-paying offers on Cashog. Complete tasks, surveys, app installs, and videos to earn instant rewards and cash."
+        description="Discover premium high-paying offers on Cashog. Complete tasks and earn rewards instantly."
       />
 
-      <main className="bg-white dark:bg-[#070A14] text-gray-900 dark:text-white transition-colors duration-300">
+      <main className="relative min-h-screen text-gray-900 dark:text-white">
+        <Background />
 
-        {/* ================= HERO ================= */}
-        <section className="relative py-24 px-6 text-center overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-yellow-200/40 via-green-200/30 to-yellow-300/40 dark:from-yellow-900/20 dark:via-green-900/10 dark:to-yellow-800/20 blur-3xl" />
+        <section className="relative z-10 max-w-7xl mx-auto px-6 py-20">
 
-          <motion.div
-            className="relative max-w-4xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
-              Explore the Cashog OfferWall
-            </h1>
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-8">
-              Complete premium offers, tasks, surveys, and installs to earn cash and rewards instantly.
-            </p>
-            <motion.a
-              href="/signup"
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-14 py-5 rounded-2xl font-bold shadow-lg hover:scale-105 transition-transform duration-300 cta-observer"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              Start Earning Now <Trophy size={20} />
-            </motion.a>
-          </motion.div>
-        </section>
+          {/* ================= HERO ================= */}
+          <Reveal>
+            <div className="text-center mb-20">
+              <h1 className="text-4xl md:text-6xl font-extrabold mb-4">
+                Explore the OfferWall
+              </h1>
 
-        {/* ================= OFFERS GRID ================= */}
-        <section className="py-20 px-6 max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-            Featured Offers
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
+              <div className="text-3xl md:text-4xl font-extrabold gradient-text mb-6">
+                <TypingText />
+              </div>
+
+              <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10">
+                Complete premium offers, surveys, installs, and tasks to earn real rewards.
+              </p>
+
+              <PrimaryCTA href="/signup">
+                Start Earning
+              </PrimaryCTA>
+            </div>
+          </Reveal>
+
+          {/* ================= OFFERS ================= */}
+          <div className="grid md:grid-cols-3 gap-8 mb-24">
             {offers.map((offer) => (
-              <motion.div
-                key={offer.id}
-                className="bg-white dark:bg-zinc-800 p-6 rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col justify-between"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <ClipboardList className="text-yellow-500 w-6 h-6" />
-                    <span className="text-sm text-gray-500 dark:text-gray-400">{offer.category}</span>
+              <Reveal key={offer.id}>
+                <motion.div
+                  whileHover={{ y: -6 }}
+                  className="bg-white dark:bg-[#0a0d16] border border-gray-200 dark:border-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex justify-between items-center mb-3">
+                      <ClipboardList className="text-yellow-400 w-5 h-5" />
+                      <span className="text-xs px-3 py-1 rounded-full bg-yellow-400/20 text-yellow-500 border border-yellow-400/30">
+                        {offer.category}
+                      </span>
+                    </div>
+
+                    <h3 className="text-lg font-semibold mb-1">
+                      {offer.title}
+                    </h3>
+
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
+                      Reward: <span className="text-green-500 font-semibold">{offer.reward}</span>
+                    </p>
+
+                    <div className="w-full h-2 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+                      <div
+                        className="h-2 bg-gradient-to-r from-yellow-400 to-green-400 rounded-full transition-all duration-500"
+                        style={{ width: `${offer.popularity}%` }}
+                      />
+                    </div>
+
+                    <p className="text-xs text-gray-500 mt-2">
+                      {offer.popularity}% Popular
+                    </p>
                   </div>
-                  <h3 className="text-xl font-semibold mb-1">{offer.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-2">Reward: {offer.reward}</p>
-                  <div className="w-full bg-gray-200 dark:bg-zinc-700 h-2 rounded-full mt-2">
-                    <div
-                      className="bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 h-2 rounded-full transition-all duration-500"
-                      style={{ width: `${offer.popularity}%` }}
-                    />
+
+                  <div className="mt-5">
+                    <a
+                      href="/signup"
+                      className="inline-flex items-center justify-center px-5 py-2 text-sm font-semibold rounded-xl 
+                      bg-gradient-to-r from-yellow-400 to-green-400 
+                      text-black shadow-md hover:shadow-lg 
+                      transition-all duration-300 hover:scale-105 active:scale-95"
+                    >
+                      Claim Offer
+                    </a>
                   </div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{offer.popularity}% Popularity</p>
-                </div>
-                <div className="flex justify-end mt-4">
-                  <motion.a
-                    href="/signup"
-                    className="px-4 py-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black rounded-xl font-semibold shadow hover:scale-105 transition-transform duration-300"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.97 }}
-                  >
-                    Claim Offer
-                  </motion.a>
-                </div>
-              </motion.div>
+                </motion.div>
+              </Reveal>
             ))}
           </div>
-        </section>
 
-        {/* ================= STATS ================= */}
-        <section className="py-20 px-6 bg-gray-50 dark:bg-zinc-900">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-            OfferWall Stats
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {/* ================= STATS ================= */}
+          <div className="grid md:grid-cols-3 gap-8 mb-24">
             {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                className="p-8 bg-white dark:bg-zinc-800 rounded-3xl shadow-lg text-center hover:scale-105 transition-transform duration-300"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-              >
-                <h3 className="text-4xl font-extrabold text-green-600">
-                  <CountUp end={stat.number} />
-                  {stat.label === "Average Reward ($)" && "$"}
-                </h3>
-                <p className="mt-2 text-gray-600 dark:text-gray-400">{stat.label}</p>
-              </motion.div>
+              <Reveal key={index}>
+                <motion.div
+                  whileHover={{ y: -5 }}
+                  className="bg-white dark:bg-[#0a0d16] border border-gray-200 dark:border-gray-800 rounded-2xl p-8 text-center shadow-sm hover:shadow-lg transition-all duration-300"
+                >
+                  <h3 className="text-4xl font-extrabold text-green-500">
+                    <CountUp end={stat.number} />
+                    {stat.label === "Average Reward ($)" && "$"}
+                  </h3>
+                  <p className="mt-2 text-gray-600 dark:text-gray-400">
+                    {stat.label}
+                  </p>
+                </motion.div>
+              </Reveal>
             ))}
           </div>
-        </section>
 
-        {/* ================= HOW IT WORKS ================= */}
-        <section className="py-24 px-6 max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">How the OfferWall Works</h2>
-          <div className="grid md:grid-cols-3 gap-10">
-            <motion.div
-              className="bg-white dark:bg-zinc-800 p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-300"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <User className="w-8 h-8 text-yellow-400 mb-4 mx-auto" />
-              <h3 className="text-xl font-semibold mb-2">Sign Up</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Create your Cashog account to access premium offers.
-              </p>
-            </motion.div>
-            <motion.div
-              className="bg-white dark:bg-zinc-800 p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-300"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              <Star className="w-8 h-8 text-green-400 mb-4 mx-auto" />
-              <h3 className="text-xl font-semibold mb-2">Complete Offers</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Browse offers, complete tasks, installs, surveys, or videos.
-              </p>
-            </motion.div>
-            <motion.div
-              className="bg-white dark:bg-zinc-800 p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-300"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <Gift className="w-8 h-8 text-yellow-500 mb-4 mx-auto" />
-              <h3 className="text-xl font-semibold mb-2">Redeem Rewards</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Claim rewards instantly via PayPal, gift cards, or points.
-              </p>
-            </motion.div>
+          {/* ================= HOW IT WORKS ================= */}
+          <div className="grid md:grid-cols-3 gap-10 mb-24 text-center">
+            {[
+              { icon: <User className="w-8 h-8 text-yellow-400 mx-auto" />, title: "Sign Up", desc: "Create your account instantly." },
+              { icon: <Star className="w-8 h-8 text-green-400 mx-auto" />, title: "Complete Offers", desc: "Choose and complete high-paying tasks." },
+              { icon: <Gift className="w-8 h-8 text-yellow-500 mx-auto" />, title: "Redeem Rewards", desc: "Withdraw earnings securely and quickly." },
+            ].map((step, i) => (
+              <Reveal key={i}>
+                <motion.div
+                  whileHover={{ y: -6 }}
+                  className="bg-white dark:bg-[#0a0d16] border border-gray-200 dark:border-gray-800 p-8 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300"
+                >
+                  {step.icon}
+                  <h3 className="text-xl font-semibold mt-4 mb-2">
+                    {step.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">
+                    {step.desc}
+                  </p>
+                </motion.div>
+              </Reveal>
+            ))}
           </div>
-        </section>
 
-        {/* ================= FINAL CTA ================= */}
-        <section className="py-28 px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8">
-            Ready to Explore the OfferWall & Earn Rewards?
-          </h2>
-          <motion.a
-            href="/signup"
-            className="cta-observer inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-xl hover:scale-105 transition-transform duration-300"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            Start Exploring Offers <Trophy size={20} />
-          </motion.a>
-        </section>
+          {/* ================= FINAL CTA ================= */}
+          <Reveal>
+            <div className="text-center">
+              <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
+                Ready to Start Earning?
+              </h2>
+              <PrimaryCTA href="/signup">
+                Join Cashog Today
+              </PrimaryCTA>
+            </div>
+          </Reveal>
 
+        </section>
       </main>
     </>
   );
