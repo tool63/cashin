@@ -2,6 +2,7 @@
 
 import React from "react";
 import SeoEngine from "@/components/seo/SeoEngine";
+import Background from "@/components/Background";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import FAQ from "@/components/faq/FAQ";
 
@@ -27,16 +28,23 @@ export default function TestProductsPage() {
         description="Join product testing and earn rewards."
       />
 
-      <main className="min-h-screen p-6 text-center">
-        <h1 className="text-3xl font-bold mb-4">Test Products & Earn Rewards</h1>
-        <p className="mb-6 text-gray-600">
-          Join trials, give feedback, and get paid.
-        </p>
+      <main className="min-h-screen text-center">
+        <Background />
 
-        <PrimaryCTA href="/signup">Start Now</PrimaryCTA>
+        {/* HERO */}
+        <section className="max-w-6xl mx-auto px-4 py-24">
+          <h1 className="text-4xl font-bold mb-4">
+            Test Products & Earn Rewards
+          </h1>
+          <p className="text-gray-600 mb-6">
+            Join trials, give feedback, and get paid.
+          </p>
+
+          <PrimaryCTA href="/signup">Start Now</PrimaryCTA>
+        </section>
 
         {/* PRODUCT GRID */}
-        <section className="mt-10">
+        <section className="max-w-7xl mx-auto px-4 pb-24">
           <h2 className="text-2xl font-bold mb-4">Product Offers</h2>
 
           <div className="grid gap-4 md:grid-cols-3">
@@ -64,9 +72,10 @@ export default function TestProductsPage() {
         </section>
 
         {/* HOW IT WORKS */}
-        <section className="mt-10">
+        <section className="max-w-6xl mx-auto px-4 pb-24">
           <h2 className="text-2xl font-bold mb-4">How It Works</h2>
-          <div className="grid gap-4 md:grid-cols-3">
+
+          <div className="grid gap-4 md:grid-cols-4">
             {[
               "Sign Up",
               "Choose Offer",
@@ -84,14 +93,14 @@ export default function TestProductsPage() {
         </section>
 
         {/* FAQ */}
-        <section className="mt-10">
+        <section className="max-w-6xl mx-auto px-4 pb-24">
           <h2 className="text-2xl font-bold mb-4">FAQ</h2>
           <FAQ faqs={faqs} />
         </section>
 
         {/* FINAL CTA */}
-        <section className="mt-10 pb-10">
-          <h2 className="text-2xl font-bold mb-4">Ready to Start?</h2>
+        <section className="text-center py-24">
+          <h2 className="text-4xl font-bold mb-4">Ready to Start?</h2>
           <PrimaryCTA href="/signup">Join Now</PrimaryCTA>
         </section>
       </main>
