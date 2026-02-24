@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Meta from "@/components/seo/SeoEngine";
 import TypingText from "@/components/typing/TypingText";
 import Background from "@/components/Background";
@@ -14,6 +14,7 @@ import {
   User,
   TrendingUp,
   Gift,
+  ChevronDown,
 } from "lucide-react";
 
 /* ================= OFFERS ================= */
@@ -56,32 +57,6 @@ const apps = [
   },
 ];
 
-/* ================= EXPANDABLE CARD ================= */
-function ExpandableCard({ children }: { children: React.ReactNode }) {
-  const [open, setOpen] = React.useState(false);
-
-  return (
-    <motion.div
-      onClick={() => setOpen(!open)}
-      className="cursor-pointer overflow-hidden rounded-2xl"
-      animate={{ height: open ? "auto" : "140px" }}
-      transition={{ duration: 0.25 }}
-    >
-      {children}
-
-      {open && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="mt-4 text-sm text-gray-600 dark:text-gray-300"
-        >
-          Click card again to collapse.
-        </motion.div>
-      )}
-    </motion.div>
-  );
-}
-
 /* ================= STATS ================= */
 const stats = [
   {
@@ -97,12 +72,58 @@ const stats = [
     description: "Users actively earning rewards daily.",
   },
   {
-    label: "Avg Reward",
+    label: "Avg Reward ($)",
     number: 3,
     icon: <TrendingUp className="w-6 h-6 text-blue-400" />,
     description: "Average reward per completed task.",
   },
 ];
+
+/* ================= EXPANDABLE CARD ================= */
+function ExpandableCard({ children }: { children: React.ReactNode }) {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <motion.div
+      layout
+      onClick={() => setOpen(!open)}
+      className="cursor-pointer"
+      transition={{ layout: { duration: 0.35, type: "spring" } }}
+    >
+      <motion.div
+        layout
+        className={`relative overflow-hidden rounded-2xl transition-all duration-300 ${
+          open ? "shadow-xl" : "shadow-md"
+        }`}
+      >
+        {/* Chevron */}
+        <motion.div
+          animate={{ rotate: open ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+          className="absolute top-4 right-4 text-gray-400"
+        >
+          <ChevronDown className="w-5 h-5" />
+        </motion.div>
+
+        {children}
+
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              layout
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="mt-4 text-sm text-gray-600 dark:text-gray-300 px-6 pb-6"
+            >
+              Click card again to collapse.
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
+    </motion.div>
+  );
+}
 
 /* ================= PAGE ================= */
 export default function AppInstallPage() {
@@ -137,7 +158,7 @@ export default function AppInstallPage() {
             </div>
           </Reveal>
 
-          {/* OFFERS GRID (Expandable) */}
+          {/* OFFERS */}
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               Featured Offers
@@ -149,55 +170,53 @@ export default function AppInstallPage() {
 
           <div className="grid gap-6 md:grid-cols-3 mb-24">
             {apps.map((app) => (
-              <Reveal key={app.id}>
-                <ExpandableCard>
-                  <motion.div
-                    whileHover={{ y: -4 }}
-                    className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
-                  >
-                    <div className="flex justify-between items-center mb-4">
-                      <ClipboardList className="text-green-400 w-5 h-5" />
-                      <span className="text-xs px-3 py-1 rounded-full bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20">
-                        {app.category}
-                      </span>
-                    </div>
+              <ExpandableCard key={app.id}>
+                <motion.div
+                  layout
+                  whileHover={{ y: -4 }}
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800"
+                >
+                  <div className="flex justify-between items-center mb-4">
+                    <ClipboardList className="text-green-400 w-5 h-5" />
+                    <span className="text-xs px-3 py-1 rounded-full bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20">
+                      {app.category}
+                    </span>
+                  </div>
 
-                    <h3 className="text-xl font-semibold mb-2">{app.name}</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">
-                      Installs: {app.installs}
-                    </p>
+                  <h3 className="text-xl font-semibold mb-2">{app.name}</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">
+                    Installs: {app.installs}
+                  </p>
 
-                    <div className="flex justify-center mt-2">
-                      {Array(Math.floor(app.rating))
-                        .fill(0)
-                        .map((_, i) => (
-                          <Star key={i} className="w-4 h-4 text-yellow-400" />
-                        ))}
-                    </div>
+                  <div className="flex justify-center mt-2">
+                    {Array(Math.floor(app.rating))
+                      .fill(0)
+                      .map((_, i) => (
+                        <Star key={i} className="w-4 h-4 text-yellow-400" />
+                      ))}
+                  </div>
 
-                    <div className="mt-4 text-sm text-gray-600 dark:text-gray-300">
-                      {app.description}
-                    </div>
+                  <div className="mt-4 text-sm text-gray-600 dark:text-gray-300">
+                    {app.description}
+                  </div>
 
-                    <div className="mt-6 flex items-center justify-between">
-                      <span className="text-green-500 font-bold">{app.reward}</span>
-
-                      <motion.a
-                        href="/signup"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.97 }}
-                        className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-sm hover:shadow-md"
-                      >
-                        Install Now
-                      </motion.a>
-                    </div>
-                  </motion.div>
-                </ExpandableCard>
-              </Reveal>
+                  <div className="mt-6 flex items-center justify-between">
+                    <span className="text-green-500 font-bold">{app.reward}</span>
+                    <motion.a
+                      href="/signup"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.97 }}
+                      className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black"
+                    >
+                      Install Now
+                    </motion.a>
+                  </div>
+                </motion.div>
+              </ExpandableCard>
             ))}
           </div>
 
-          {/* STATS (Expandable) */}
+          {/* STATS */}
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               Platform Performance
@@ -211,8 +230,9 @@ export default function AppInstallPage() {
             {stats.map((stat) => (
               <ExpandableCard key={stat.label}>
                 <motion.div
+                  layout
                   whileHover={{ y: -4 }}
-                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800"
                 >
                   <div className="flex justify-center mb-2">{stat.icon}</div>
                   <h3 className="text-sm uppercase tracking-wide text-gray-600 dark:text-gray-400">
@@ -221,7 +241,6 @@ export default function AppInstallPage() {
                   <div className="text-3xl font-extrabold mt-2">
                     {stat.number.toLocaleString()}
                   </div>
-
                   <div className="mt-4 text-sm text-gray-600 dark:text-gray-300">
                     {stat.description}
                   </div>
@@ -230,7 +249,7 @@ export default function AppInstallPage() {
             ))}
           </div>
 
-          {/* HOW IT WORKS (Expandable) */}
+          {/* HOW IT WORKS */}
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               How It Works
@@ -260,12 +279,11 @@ export default function AppInstallPage() {
             ].map((step) => (
               <ExpandableCard key={step.title}>
                 <motion.div
+                  layout
                   whileHover={{ y: -4 }}
-                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800"
                 >
-                  <div className="flex justify-center items-center mb-4">
-                    {step.icon}
-                  </div>
+                  <div className="flex justify-center mb-4">{step.icon}</div>
                   <h3 className="text-lg font-semibold">{step.title}</h3>
                   <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
                     {step.desc}
