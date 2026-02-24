@@ -137,7 +137,9 @@ export default function TrustSafetyPage() {
                 by enterprise-grade systems and real-time monitoring.
               </p>
 
-              <PrimaryCTA href="/signup" />
+              <PrimaryCTA href="/signup">
+                Start Earning Now
+              </PrimaryCTA>
 
               <p className="mt-4 text-sm text-gray-600 dark:text-gray-300">
                 Secure platform built for modern users.
@@ -279,7 +281,9 @@ export default function TrustSafetyPage() {
               className="flex justify-center"
             >
               <div className="max-w-xs w-full">
-                <PrimaryCTA href="/signup" />
+                <PrimaryCTA href="/signup">
+                  Start Earning in 60 Seconds
+                </PrimaryCTA>
               </div>
             </motion.div>
 
