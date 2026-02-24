@@ -25,6 +25,30 @@ function getRandomReward() {
   return rewards[Math.floor(Math.random() * rewards.length)];
 }
 
+/* ================= TESTIMONIALS ================= */
+const testimonials = [
+  {
+    name: "Alex",
+    text: "I spun the wheel and won instantly! Cashog is amazing.",
+  },
+  {
+    name: "Sarah",
+    text: "Fun and rewarding experience. I love spinning the wheel!",
+  },
+  {
+    name: "John",
+    text: "I got a bonus spin and earned rewards. Highly recommended!",
+  },
+  {
+    name: "Emma",
+    text: "Simple, fast, and rewarding. Great experience with Cashog.",
+  },
+  {
+    name: "Michael",
+    text: "I didn’t win big, but the experience was exciting and fair.",
+  },
+];
+
 export default function SpinningWheelPage() {
   const [spinning, setSpinning] = useState(false);
   const [result, setResult] = useState<string | null>(null);
@@ -85,7 +109,7 @@ export default function SpinningWheelPage() {
             </p>
           </Reveal>
 
-          {/* SPIN CIRCLE (NO WHEEL GRAPHIC, SHOW CASHOG) */}
+          {/* SPIN CIRCLE (SHOW CASHOG) */}
           <motion.div
             className="mx-auto w-64 h-64 rounded-full border-8 border-green-400 flex items-center justify-center bg-white dark:bg-[#0a0d16] shadow-lg"
             animate={spinning ? { rotate: 360 } : {}}
@@ -117,6 +141,37 @@ export default function SpinningWheelPage() {
           >
             {spinning ? "Spinning..." : "Spin Now"}
           </motion.button>
+        </section>
+
+        {/* ================= TESTIMONIALS ================= */}
+        <section className="relative z-10 max-w-6xl mx-auto px-6 py-24">
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              What Users Say
+            </h2>
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-14">
+              Real feedback from Cashog users
+            </p>
+          </Reveal>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {testimonials.map((item, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ y: -4 }}
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 shadow-md border border-gray-200 dark:border-gray-800"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.15 }}
+              >
+                <p className="text-gray-600 dark:text-gray-300 italic">
+                  “{item.text}”
+                </p>
+                <h3 className="mt-4 font-semibold text-green-500">— {item.name}</h3>
+              </motion.div>
+            ))}
+          </div>
         </section>
 
         {/* ================= HOW IT WORKS ================= */}
