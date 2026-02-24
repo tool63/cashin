@@ -8,7 +8,7 @@ import Background from "@/components/Background";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
 import FAQ from "@/components/faq/FAQ";
-import { DollarSign, Star, Shield, Clock } from "lucide-react";
+import { DollarSign, Shield, Clock, Star } from "lucide-react";
 
 export default function TestProductsEarningPage() {
   const offers = [
@@ -87,8 +87,8 @@ export default function TestProductsEarningPage() {
       <div className="relative overflow-hidden bg-white dark:bg-[#05070f] text-gray-900 dark:text-white">
         <Background />
 
-        {/* HERO */}
-        <section className="relative py-24 text-center">
+        {/* HERO SECTION */}
+        <section className="relative py-24 text-center px-6">
           <Reveal>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               Earn By Testing
@@ -101,18 +101,21 @@ export default function TestProductsEarningPage() {
           <Reveal delay={0.2}>
             <p className="max-w-2xl mx-auto text-lg text-gray-600 dark:text-gray-400">
               Complete real product testing tasks and get paid instantly.
-              No investment. No risk. Just pure earning.
+              No investment required. No hidden fees.
             </p>
           </Reveal>
 
           <Reveal delay={0.4}>
             <div className="mt-8">
-              <PrimaryCTA text="Start Earning Now" href="/signup" />
+              {/* FIXED PRIMARY CTA */}
+              <PrimaryCTA href="/signup">
+                Start Earning Now
+              </PrimaryCTA>
             </div>
           </Reveal>
         </section>
 
-        {/* OFFERS */}
+        {/* OFFERS SECTION */}
         <section className="relative py-20 px-6 max-w-7xl mx-auto">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-14">
@@ -128,7 +131,7 @@ export default function TestProductsEarningPage() {
                 transition={{ type: "spring", stiffness: 200, damping: 15 }}
                 className="relative group rounded-3xl p-6 bg-white dark:bg-[#0a0d16] border border-gray-200 dark:border-gray-800 shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden"
               >
-                {/* Shine Effect */}
+                {/* Shine Hover Effect */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500">
                   <div className="absolute -left-40 top-0 h-full w-40 bg-gradient-to-r from-transparent via-white/20 to-transparent rotate-12 transform group-hover:translate-x-[600px] transition-all duration-1000" />
                 </div>
@@ -150,28 +153,39 @@ export default function TestProductsEarningPage() {
                   {offer.description}
                 </p>
 
-                <motion.a
+                <a
                   href="/signup"
-                  whileTap={{ scale: 0.95 }}
                   className="mt-6 inline-block w-full text-center py-3 rounded-xl bg-gradient-to-r from-yellow-400 to-green-400 text-black font-semibold shadow-md hover:shadow-lg transition"
                 >
                   Start Task
-                </motion.a>
+                </a>
               </motion.div>
             ))}
           </div>
         </section>
 
-        {/* WHY TRUST US */}
+        {/* TRUST SECTION */}
         <section className="py-20 bg-gray-50 dark:bg-[#0b0f1c]">
           <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-10 text-center">
-            <Feature icon={<Shield />} title="Secure Platform" desc="All offers verified & secure." />
-            <Feature icon={<Clock />} title="Instant Rewards" desc="Get paid immediately after completion." />
-            <Feature icon={<Star />} title="Premium Offers" desc="High payout test campaigns daily." />
+            <Feature
+              icon={<Shield />}
+              title="Secure Platform"
+              desc="All offers are verified and 100% secure."
+            />
+            <Feature
+              icon={<Clock />}
+              title="Instant Rewards"
+              desc="Rewards are credited immediately after approval."
+            />
+            <Feature
+              icon={<Star />}
+              title="Premium Offers"
+              desc="High-paying product test campaigns updated daily."
+            />
           </div>
         </section>
 
-        {/* FAQ */}
+        {/* FAQ SECTION */}
         <section className="py-20 max-w-4xl mx-auto px-6">
           <Reveal>
             <h2 className="text-3xl font-bold text-center mb-10">
@@ -196,7 +210,9 @@ function Feature({ icon, title, desc }: any) {
         {icon}
       </div>
       <h3 className="font-semibold text-lg">{title}</h3>
-      <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">{desc}</p>
+      <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+        {desc}
+      </p>
     </motion.div>
   );
 }
