@@ -110,13 +110,13 @@ export default function VisitWebsitesPage() {
     <>
       <SeoEngine
         title="Visit Websites | Cashog"
-        description="Visit websites, explore offers, and earn instant rewards. Secure and modern browsing rewards experience."
+        description="Visit websites, explore offers, and earn instant rewards."
       />
 
       <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
 
-        {/* ================= HERO WITH TYPING TEXT ================= */}
+        {/* HERO */}
         <section className="relative z-10 py-28 px-6 text-center">
           <Reveal>
             <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
@@ -129,7 +129,6 @@ export default function VisitWebsitesPage() {
 
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto">
               Explore websites, complete actions, and earn instant rewards with Cashog.
-              Verified and secure browsing offers.
             </p>
 
             <PrimaryCTA href="/signup">
@@ -138,7 +137,7 @@ export default function VisitWebsitesPage() {
           </Reveal>
         </section>
 
-        {/* ================= STATS ================= */}
+        {/* STATS (OPENING LOGIC APPLIED) */}
         <section className="relative z-10 py-24 px-6 max-w-6xl mx-auto">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
@@ -151,26 +150,27 @@ export default function VisitWebsitesPage() {
 
           <div className="grid gap-6 md:grid-cols-4">
             {stats.map((stat) => (
-              <motion.div
-                key={stat.label}
-                whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
-              >
-                <div className="flex justify-center mb-2">{stat.icon}</div>
+              <Reveal key={stat.label}>
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md"
+                >
+                  <div className="flex justify-center mb-2">{stat.icon}</div>
 
-                <h3 className="text-3xl font-extrabold text-green-500">
-                  <CountUp end={stat.number} />
-                </h3>
+                  <h3 className="text-3xl font-extrabold text-green-500">
+                    <CountUp end={stat.number} />
+                  </h3>
 
-                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-                  {stat.label}
-                </p>
-              </motion.div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                    {stat.label}
+                  </p>
+                </motion.div>
+              </Reveal>
             ))}
           </div>
         </section>
 
-        {/* ================= WEBSITE CARDS ================= */}
+        {/* WEBSITE CARDS */}
         <section className="relative z-10 py-24 px-6 max-w-7xl mx-auto">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
@@ -229,7 +229,7 @@ export default function VisitWebsitesPage() {
           </div>
         </section>
 
-        {/* ================= TRUST SECTION ================= */}
+        {/* TRUST SECTION */}
         <section className="relative z-10 max-w-6xl mx-auto px-6 py-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
@@ -249,7 +249,7 @@ export default function VisitWebsitesPage() {
               <motion.div
                 key={i}
                 whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 shadow-md border border-gray-200 dark:border-gray-800"
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 shadow-md border"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -265,7 +265,7 @@ export default function VisitWebsitesPage() {
           </div>
         </section>
 
-        {/* ================= FAQ ================= */}
+        {/* FAQ */}
         <section className="relative z-10 max-w-4xl mx-auto px-6 py-20 text-center">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -279,7 +279,7 @@ export default function VisitWebsitesPage() {
           <FAQ faqs={faqs} />
         </section>
 
-        {/* ================= FINAL CTA ================= */}
+        {/* FINAL CTA */}
         <section className="relative z-10 py-28 px-6 text-center">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
