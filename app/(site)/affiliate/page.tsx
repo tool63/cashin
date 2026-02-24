@@ -20,6 +20,10 @@ import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
 import FAQ from "@/components/faq/FAQ";
 import { Line } from "react-chartjs-2"; // To create referral tracking graph
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from "chart.js";
+
+// Register necessary chart elements
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 /* ================= AFFILIATE PROGRAM DETAILS ================= */
 const affiliateStats = [
@@ -209,8 +213,8 @@ export default function AffiliatePage() {
                     name="referrals"
                     value={referrals}
                     onChange={handleReferralChange}
-                    className="mt-1 px-4 py-2 w-full border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue
-                                      focus:ring-blue-500"
+                    className="mt-1 px-4 py-2 w-full border border-gray-300 dark:border-gray-700
+                                      className="mt-1 px-4 py-2 w-full border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Enter number of successful referrals"
                   />
                 </div>
