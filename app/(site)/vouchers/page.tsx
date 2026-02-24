@@ -232,24 +232,32 @@ export default function VouchersPage() {
         </section>
 
         {/* ================= FINAL CTA ================= */}
-        <section className="relative z-10 py-28 px-6 text-center">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
-              Start Earning & Redeem
-              <span className="gradient-text block">
-                Premium Gift Cards Today
-              </span>
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 mb-10">
-              Join thousands of users and unlock exclusive rewards instantly.
-            </p>
-          </div>
+<section className="relative z-10 py-36 px-6 text-center overflow-hidden">
+  
+  {/* Soft Background Glow */}
+  <div className="absolute inset-0 -z-10 flex justify-center">
+    <div className="w-[600px] h-[600px] bg-gradient-to-r from-yellow-400/20 via-green-400/20 to-green-500/20 blur-3xl rounded-full" />
+  </div>
 
-          <PrimaryCTA href="/signup">
-            Claim Now
-          </PrimaryCTA>
-        </section>
-      </main>
-    </>
-  );
-}
+  <Reveal>
+    <div className="max-w-4xl mx-auto">
+      
+      <h2 className="text-4xl md:text-6xl font-extrabold leading-tight mb-8">
+        Start Earning & Redeem
+        <span className="gradient-text block mt-3">
+          Premium Gift Cards Today
+        </span>
+      </h2>
+
+      <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+        Join thousands of users earning rewards daily. 
+        Unlock exclusive vouchers and claim your premium gift cards instantly.
+      </p>
+
+      <PrimaryCTA href="/signup">
+        Get Started Now
+      </PrimaryCTA>
+
+    </div>
+  </Reveal>
+</section>
