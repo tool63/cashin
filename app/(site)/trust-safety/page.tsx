@@ -269,4 +269,6 @@ export default function TrustSafetyPage() {
             ))}
           </div>
 
-          {/* FINAL
+          {/* FINAL CTA */}
+          <Reveal>
+            <div class
