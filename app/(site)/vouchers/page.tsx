@@ -35,25 +35,6 @@ function CountUp({ end, duration = 2000 }: { end: number; duration?: number }) {
   return <span>{count.toLocaleString()}</span>;
 }
 
-/* ================= STAGGER ANIMATION (OPENING LOGIC) ================= */
-const container = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 40 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
-  },
-};
-
 /* ================= DATA (9 VOUCHERS) ================= */
 const vouchers = [
   { id: 1, title: "Amazon Gift Card", code: "AMZ50", reward: "$50", expiry: "Feb 28, 2026", popular: true },
@@ -98,7 +79,7 @@ export default function VouchersPage() {
       <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
 
-        {/* HERO (NO STAGGER) */}
+        {/* HERO (INDIVIDUAL LOGIC) */}
         <section className="relative z-10 py-32 px-6 text-center">
           <Reveal>
             <h1 className="text-4xl md:text-6xl font-extrabold mb-6">
@@ -119,7 +100,7 @@ export default function VouchersPage() {
           </Reveal>
         </section>
 
-        {/* STATS (WITH STAGGER OPENING LOGIC) */}
+        {/* STATS (INDIVIDUAL CARDS) */}
         <section className="relative z-10 py-28 px-6">
           <Reveal>
             <div className="text-center mb-16">
@@ -129,35 +110,30 @@ export default function VouchersPage() {
             </div>
           </Reveal>
 
-          <motion.div
-            variants={container}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="max-w-6xl mx-auto grid gap-8 md:grid-cols-4"
-          >
+          <div className="max-w-6xl mx-auto grid gap-8 md:grid-cols-4">
             {[
               { value: 50000, label: "Vouchers Claimed" },
               { value: 25000, label: "Happy Users" },
               { value: 100000, label: "Rewards Distributed" },
               { value: 99, label: "Satisfaction Rate", suffix: "%" },
             ].map((stat, i) => (
-              <motion.div
-                key={i}
-                variants={item}
-                className="bg-white dark:bg-[#0a0d16] p-8 rounded-3xl shadow-lg border text-center"
-              >
-                <h3 className="text-3xl font-bold text-green-500 mb-2">
-                  <CountUp end={stat.value} />
-                  {stat.suffix ? stat.suffix : "+"}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400">{stat.label}</p>
-              </motion.div>
+              <Reveal key={i}>
+                <motion.div
+                  whileHover={{ y: -6 }}
+                  className="bg-white dark:bg-[#0a0d16] p-8 rounded-3xl shadow-lg border text-center"
+                >
+                  <h3 className="text-3xl font-bold text-green-500 mb-2">
+                    <CountUp end={stat.value} />
+                    {stat.suffix ? stat.suffix : "+"}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400">{stat.label}</p>
+                </motion.div>
+              </Reveal>
             ))}
-          </motion.div>
+          </div>
         </section>
 
-        {/* VOUCHERS (STAGGER OPENING) */}
+        {/* VOUCHERS (INDIVIDUAL CARDS) */}
         <section className="relative z-10 py-28 px-6 max-w-7xl mx-auto">
           <Reveal>
             <div className="text-center mb-16">
@@ -171,50 +147,44 @@ export default function VouchersPage() {
             </div>
           </Reveal>
 
-          <motion.div
-            variants={container}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="grid gap-8 md:grid-cols-3"
-          >
+          <div className="grid gap-8 md:grid-cols-3">
             {vouchers.map((voucher) => (
-              <motion.div
-                key={voucher.id}
-                variants={item}
-                whileHover={{ y: -6 }}
-                className="bg-white dark:bg-[#0a0d16] p-8 rounded-3xl shadow-lg border flex flex-col"
-              >
-                {voucher.popular && (
-                  <div className="self-start mb-4 bg-gradient-to-r from-yellow-400 to-green-500 text-black px-4 py-1 rounded-full text-xs font-bold shadow">
-                    Most Popular
-                  </div>
-                )}
-
-                <Gift className="w-8 h-8 text-yellow-500 mb-4" />
-
-                <h3 className="text-xl font-semibold mb-2">{voucher.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-1">
-                  Code: <span className="font-bold">{voucher.code}</span>
-                </p>
-                <p className="text-green-600 font-bold mb-4">{voucher.reward}</p>
-
-                <motion.a
-                  href="/signup"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="mt-auto inline-flex justify-center items-center gap-2
-                             bg-gradient-to-r from-yellow-400 via-green-400 to-green-500
-                             text-black px-4 py-2.5 rounded-xl font-semibold text-sm shadow"
+              <Reveal key={voucher.id}>
+                <motion.div
+                  whileHover={{ y: -6 }}
+                  className="bg-white dark:bg-[#0a0d16] p-8 rounded-3xl shadow-lg border flex flex-col"
                 >
-                  Claim Now <CheckCircle size={16} />
-                </motion.a>
-              </motion.div>
+                  {voucher.popular && (
+                    <div className="self-start mb-4 bg-gradient-to-r from-yellow-400 to-green-500 text-black px-4 py-1 rounded-full text-xs font-bold shadow">
+                      Most Popular
+                    </div>
+                  )}
+
+                  <Gift className="w-8 h-8 text-yellow-500 mb-4" />
+
+                  <h3 className="text-xl font-semibold mb-2">{voucher.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-1">
+                    Code: <span className="font-bold">{voucher.code}</span>
+                  </p>
+                  <p className="text-green-600 font-bold mb-4">{voucher.reward}</p>
+
+                  <motion.a
+                    href="/signup"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="mt-auto inline-flex justify-center items-center gap-2
+                               bg-gradient-to-r from-yellow-400 via-green-400 to-green-500
+                               text-black px-4 py-2.5 rounded-xl font-semibold text-sm shadow"
+                  >
+                    Claim Now <CheckCircle size={16} />
+                  </motion.a>
+                </motion.div>
+              </Reveal>
             ))}
-          </motion.div>
+          </div>
         </section>
 
-        {/* TESTIMONIALS (STAGGER OPENING) */}
+        {/* TESTIMONIALS (INDIVIDUAL CARDS) */}
         <section className="relative z-10 py-28 px-6">
           <Reveal>
             <div className="text-center mb-16">
@@ -227,31 +197,26 @@ export default function VouchersPage() {
             </div>
           </Reveal>
 
-          <motion.div
-            variants={container}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8"
-          >
+          <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
             {testimonials.map((itemData, i) => (
-              <motion.div
-                key={i}
-                variants={item}
-                className="bg-white dark:bg-[#0a0d16] rounded-3xl p-6 shadow-md border"
-              >
-                <p className="italic text-gray-600 dark:text-gray-300">
-                  “{itemData.text}”
-                </p>
-                <h3 className="mt-4 font-semibold text-green-500">
-                  — {itemData.name}
-                </h3>
-              </motion.div>
+              <Reveal key={i}>
+                <motion.div
+                  whileHover={{ y: -6 }}
+                  className="bg-white dark:bg-[#0a0d16] rounded-3xl p-6 shadow-md border"
+                >
+                  <p className="italic text-gray-600 dark:text-gray-300">
+                    “{itemData.text}”
+                  </p>
+                  <h3 className="mt-4 font-semibold text-green-500">
+                    — {itemData.name}
+                  </h3>
+                </motion.div>
+              </Reveal>
             ))}
-          </motion.div>
+          </div>
         </section>
 
-        {/* FAQ (NO STAGGER LOGIC) */}
+        {/* FAQ */}
         <section className="relative z-10 max-w-4xl mx-auto px-6 py-24 text-center">
           <h2 className="text-4xl md:text-5xl font-extrabold mb-8">
             Frequently Asked Questions
@@ -259,7 +224,7 @@ export default function VouchersPage() {
           <FAQ faqs={faqs} />
         </section>
 
-        {/* FINAL CTA (NO STAGGER) */}
+        {/* FINAL CTA */}
         <section className="relative z-10 py-36 px-6 text-center">
           <Reveal>
             <h2 className="text-4xl md:text-6xl font-extrabold leading-tight mb-8">
