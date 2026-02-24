@@ -7,7 +7,17 @@ import Reveal from "@/components/animations/Reveal";
 import TypingText from "@/components/typing/TypingText";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import FAQ from "@/components/faq/FAQ";
-import { Lock, Trophy, Gift, ShieldCheck } from "lucide-react";
+import {
+  Award,
+  Crown,
+  Gem,
+  Medal,
+  Shield,
+  Sparkles,
+  Trophy,
+  Star,
+  Zap,
+} from "lucide-react";
 
 /* ================= POINT RULE ================= */
 /*
@@ -20,27 +30,28 @@ type LoyaltyTier = {
   pointsRequired: number;
   reward: string;
   color: string;
+  icon: React.ElementType;
 };
 
-/* ================= 9 LOYALTY OFFERS ================= */
+/* ================= 9 LOYALTY OFFERS (CATEGORY ICONS) ================= */
 const tiers: LoyaltyTier[] = [
-  { id: 1, name: "Bronze", pointsRequired: 100, reward: "$0.10 Reward", color: "#FACC15" },
-  { id: 2, name: "Silver", pointsRequired: 500, reward: "$0.50 Reward", color: "#9CA3AF" },
-  { id: 3, name: "Gold", pointsRequired: 1000, reward: "$1.00 Reward", color: "#FBBF24" },
-  { id: 4, name: "Platinum", pointsRequired: 5000, reward: "$5.00 Reward", color: "#60A5FA" },
-  { id: 5, name: "Diamond", pointsRequired: 10000, reward: "$10.00 Reward", color: "#A78BFA" },
-  { id: 6, name: "Elite", pointsRequired: 20000, reward: "$20.00 Reward", color: "#F97316" },
-  { id: 7, name: "Master", pointsRequired: 50000, reward: "$50.00 Reward", color: "#22C55E" },
-  { id: 8, name: "Legend", pointsRequired: 100000, reward: "$100.00 Reward", color: "#EC4899" },
-  { id: 9, name: "Ultimate", pointsRequired: 500000, reward: "$500.00 Reward", color: "#8B5CF6" },
+  { id: 1, name: "Bronze", pointsRequired: 100, reward: "$0.10 Reward", color: "#FACC15", icon: Medal },
+  { id: 2, name: "Silver", pointsRequired: 500, reward: "$0.50 Reward", color: "#9CA3AF", icon: Shield },
+  { id: 3, name: "Gold", pointsRequired: 1000, reward: "$1.00 Reward", color: "#FBBF24", icon: Award },
+  { id: 4, name: "Platinum", pointsRequired: 5000, reward: "$5.00 Reward", color: "#60A5FA", icon: Crown },
+  { id: 5, name: "Diamond", pointsRequired: 10000, reward: "$10.00 Reward", color: "#A78BFA", icon: Gem },
+  { id: 6, name: "Elite", pointsRequired: 20000, reward: "$20.00 Reward", color: "#F97316", icon: Sparkles },
+  { id: 7, name: "Master", pointsRequired: 50000, reward: "$50.00 Reward", color: "#22C55E", icon: Trophy },
+  { id: 8, name: "Legend", pointsRequired: 100000, reward: "$100.00 Reward", color: "#EC4899", icon: Star },
+  { id: 9, name: "Ultimate", pointsRequired: 500000, reward: "$500.00 Reward", color: "#8B5CF6", icon: Zap },
 ];
 
 /* ================= TESTIMONIALS ================= */
 const testimonials = [
-  { name: "Alex", text: "Loyalty program rewards are amazing. I love earning points!" },
+  { name: "Alex", text: "Loyalty rewards are amazing. I love earning points!" },
   { name: "Sarah", text: "1000 points = $1 makes rewards clear and valuable." },
   { name: "John", text: "Tiers are exciting. I can see my progress and earnings." },
-  { name: "Emma", text: "Cashog loyalty program is simple and rewarding." },
+  { name: "Emma", text: "Cashog loyalty is simple and rewarding." },
   { name: "Michael", text: "I unlocked a tier and received rewards instantly!" },
 ];
 
@@ -98,40 +109,43 @@ export default function LoyaltyPage() {
           </Reveal>
 
           <div className="grid gap-6 md:grid-cols-3">
-            {tiers.map((tier, i) => (
-              <motion.div
-                key={tier.id}
-                whileHover={{ y: -4 }}
-                className="relative bg-white dark:bg-[#0a0d16] rounded-2xl p-6 border shadow-md flex flex-col"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.15 }}
-              >
-                {/* PREMIUM LOCK ICON */}
-                <div
-                  className="w-16 h-16 flex items-center justify-center rounded-full mb-4 mx-auto shadow-lg"
-                  style={{ backgroundColor: tier.color }}
+            {tiers.map((tier, i) => {
+              const Icon = tier.icon;
+              return (
+                <motion.div
+                  key={tier.id}
+                  whileHover={{ y: -4 }}
+                  className="relative bg-white dark:bg-[#0a0d16] rounded-2xl p-6 border shadow-md flex flex-col"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.15 }}
                 >
-                  <Lock className="w-8 h-8 text-white" />
-                </div>
+                  {/* CATEGORY PREMIUM ICON */}
+                  <div
+                    className="w-16 h-16 flex items-center justify-center rounded-full mb-4 mx-auto shadow-lg"
+                    style={{ backgroundColor: tier.color }}
+                  >
+                    <Icon className="w-8 h-8 text-white" />
+                  </div>
 
-                <h3 className="text-xl font-semibold mb-2 text-center">{tier.name}</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-center mb-4">
-                  {tier.pointsRequired.toLocaleString()} Points Required
-                </p>
-                <p className="text-green-600 font-bold text-center text-lg">{tier.reward}</p>
+                  <h3 className="text-xl font-semibold mb-2 text-center">{tier.name}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-center mb-4">
+                    {tier.pointsRequired.toLocaleString()} Points Required
+                  </p>
+                  <p className="text-green-600 font-bold text-center text-lg">{tier.reward}</p>
 
-                <motion.a
-                  href="/signup"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="mt-6 inline-flex w-full justify-center items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-4 py-3 rounded-xl font-semibold shadow"
-                >
-                  Unlock Access <Gift size={18} />
-                </motion.a>
-              </motion.div>
-            ))}
+                  <motion.a
+                    href="/signup"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="mt-6 inline-flex w-full justify-center items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-4 py-3 rounded-xl font-semibold shadow"
+                  >
+                    Unlock Access
+                  </motion.a>
+                </motion.div>
+              );
+            })}
           </div>
         </section>
 
@@ -179,9 +193,9 @@ export default function LoyaltyPage() {
 
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { icon: ShieldCheck, title: "Verified Rewards", desc: "Rewards are secure and instant." },
+              { icon: Shield, title: "Verified Rewards", desc: "Rewards are secure and instant." },
               { icon: Trophy, title: "Premium Tiers", desc: "Unlock higher rewards with each tier." },
-              { icon: Lock, title: "Secure Access", desc: "Only unlocked tiers grant rewards." },
+              { icon: Sparkles, title: "Fast Redemption", desc: "Claim rewards quickly after earning points." },
             ].map((item, i) => (
               <motion.div
                 key={i}
