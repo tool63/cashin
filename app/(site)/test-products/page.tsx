@@ -12,69 +12,34 @@ import { DollarSign, Shield, Clock, Star } from "lucide-react";
 
 export default function TestProductsEarningPage() {
   const offers = [
+    { id: 1, title: "Mobile App Testing", category: "App", reward: "$3.50", description: "Install and test a new productivity app for 5 minutes." },
+    { id: 2, title: "Game Beta Review", category: "Game", reward: "$5.00", description: "Play a new mobile game and submit feedback." },
+    { id: 3, title: "E-commerce UX Test", category: "Shopping", reward: "$4.20", description: "Browse and review checkout experience." },
+    { id: 4, title: "Survey Platform Trial", category: "Survey", reward: "$2.80", description: "Sign up and complete profile survey." },
+    { id: 5, title: "Finance App Trial", category: "Finance", reward: "$6.00", description: "Test budgeting features and report issues." },
+    { id: 6, title: "Streaming App Review", category: "Media", reward: "$4.75", description: "Explore UI and watch demo content." },
+    { id: 7, title: "Fitness App Test", category: "Health", reward: "$3.90", description: "Track one workout session." },
+    { id: 8, title: "Food Delivery Test", category: "Food", reward: "$5.40", description: "Browse restaurants and simulate checkout." },
+    { id: 9, title: "Crypto Wallet Trial", category: "Crypto", reward: "$7.25", description: "Test wallet interface & security features." },
+  ];
+
+  const faqs = [
     {
-      id: 1,
-      title: "Mobile App Testing",
-      category: "App",
-      reward: "$3.50",
-      description: "Install and test a new productivity app for 5 minutes.",
+      question: "How do I earn money?",
+      answer: "Simply complete product testing tasks. Once verified, your reward is credited instantly."
     },
     {
-      id: 2,
-      title: "Game Beta Review",
-      category: "Game",
-      reward: "$5.00",
-      description: "Play a new mobile game and submit feedback.",
+      question: "Is there any investment required?",
+      answer: "No. You do not need to pay anything. All offers are completely free to complete."
     },
     {
-      id: 3,
-      title: "E-commerce UX Test",
-      category: "Shopping",
-      reward: "$4.20",
-      description: "Browse and review checkout experience.",
+      question: "How long does approval take?",
+      answer: "Most offers are approved instantly or within a few hours depending on verification."
     },
     {
-      id: 4,
-      title: "Survey Platform Trial",
-      category: "Survey",
-      reward: "$2.80",
-      description: "Sign up and complete profile survey.",
-    },
-    {
-      id: 5,
-      title: "Finance App Trial",
-      category: "Finance",
-      reward: "$6.00",
-      description: "Test budgeting features and report issues.",
-    },
-    {
-      id: 6,
-      title: "Streaming App Review",
-      category: "Media",
-      reward: "$4.75",
-      description: "Explore UI and watch demo content.",
-    },
-    {
-      id: 7,
-      title: "Fitness App Test",
-      category: "Health",
-      reward: "$3.90",
-      description: "Track one workout session.",
-    },
-    {
-      id: 8,
-      title: "Food Delivery Test",
-      category: "Food",
-      reward: "$5.40",
-      description: "Browse restaurants and simulate checkout.",
-    },
-    {
-      id: 9,
-      title: "Crypto Wallet Trial",
-      category: "Crypto",
-      reward: "$7.25",
-      description: "Test wallet interface & security features.",
-    },
+      question: "How do I withdraw earnings?",
+      answer: "You can withdraw through available payment methods once you reach the minimum threshold."
+    }
   ];
 
   return (
@@ -87,7 +52,7 @@ export default function TestProductsEarningPage() {
       <div className="relative overflow-hidden bg-white dark:bg-[#05070f] text-gray-900 dark:text-white">
         <Background />
 
-        {/* HERO SECTION */}
+        {/* HERO */}
         <section className="relative py-24 text-center px-6">
           <Reveal>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
@@ -101,13 +66,12 @@ export default function TestProductsEarningPage() {
           <Reveal delay={0.2}>
             <p className="max-w-2xl mx-auto text-lg text-gray-600 dark:text-gray-400">
               Complete real product testing tasks and get paid instantly.
-              No investment required. No hidden fees.
+              No investment required.
             </p>
           </Reveal>
 
           <Reveal delay={0.4}>
             <div className="mt-8">
-              {/* FIXED PRIMARY CTA */}
               <PrimaryCTA href="/signup">
                 Start Earning Now
               </PrimaryCTA>
@@ -115,7 +79,7 @@ export default function TestProductsEarningPage() {
           </Reveal>
         </section>
 
-        {/* OFFERS SECTION */}
+        {/* OFFERS */}
         <section className="relative py-20 px-6 max-w-7xl mx-auto">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-14">
@@ -131,11 +95,6 @@ export default function TestProductsEarningPage() {
                 transition={{ type: "spring", stiffness: 200, damping: 15 }}
                 className="relative group rounded-3xl p-6 bg-white dark:bg-[#0a0d16] border border-gray-200 dark:border-gray-800 shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden"
               >
-                {/* Shine Hover Effect */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500">
-                  <div className="absolute -left-40 top-0 h-full w-40 bg-gradient-to-r from-transparent via-white/20 to-transparent rotate-12 transform group-hover:translate-x-[600px] transition-all duration-1000" />
-                </div>
-
                 <span className="text-xs px-3 py-1 rounded-full bg-green-500/10 text-green-500 border border-green-500/20">
                   {offer.category}
                 </span>
@@ -164,28 +123,16 @@ export default function TestProductsEarningPage() {
           </div>
         </section>
 
-        {/* TRUST SECTION */}
+        {/* TRUST */}
         <section className="py-20 bg-gray-50 dark:bg-[#0b0f1c]">
           <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-10 text-center">
-            <Feature
-              icon={<Shield />}
-              title="Secure Platform"
-              desc="All offers are verified and 100% secure."
-            />
-            <Feature
-              icon={<Clock />}
-              title="Instant Rewards"
-              desc="Rewards are credited immediately after approval."
-            />
-            <Feature
-              icon={<Star />}
-              title="Premium Offers"
-              desc="High-paying product test campaigns updated daily."
-            />
+            <Feature icon={<Shield />} title="Secure Platform" desc="All offers verified and secure." />
+            <Feature icon={<Clock />} title="Instant Rewards" desc="Rewards credited immediately after completion." />
+            <Feature icon={<Star />} title="Premium Offers" desc="High-paying campaigns updated daily." />
           </div>
         </section>
 
-        {/* FAQ SECTION */}
+        {/* FAQ */}
         <section className="py-20 max-w-4xl mx-auto px-6">
           <Reveal>
             <h2 className="text-3xl font-bold text-center mb-10">
@@ -193,7 +140,7 @@ export default function TestProductsEarningPage() {
             </h2>
           </Reveal>
 
-          <FAQ />
+          <FAQ faqs={faqs} />
         </section>
       </div>
     </>
