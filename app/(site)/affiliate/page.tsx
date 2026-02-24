@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   DollarSign,
   User,
@@ -10,6 +10,7 @@ import {
   Star,
   Trophy,
   CheckCircle,
+  BarChart,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import Meta from "@/components/seo/SeoEngine";
@@ -18,7 +19,7 @@ import Background from "@/components/Background";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
 import FAQ from "@/components/faq/FAQ";
-import ProgressBar from "@/components/ProgressBar"; // Custom component for progress bar
+import { Line } from "react-chartjs-2"; // To create referral tracking graph
 
 /* ================= AFFILIATE PROGRAM DETAILS ================= */
 const affiliateStats = [
@@ -39,12 +40,29 @@ const calculateCommission = (amount: number) => {
   return amount * 0.15; // 15% commission
 };
 
-/* ================= HOW AFFILIATE PROGRAM WORKS ================= */
-const affiliateSteps = [
-  { icon: <User className="w-8 h-8 text-yellow-400" />, title: "Sign Up", desc: "Join our affiliate program in minutes." },
-  { icon: <Share className="w-8 h-8 text-green-400" />, title: "Promote", desc: "Share your unique affiliate link." },
-  { icon: <DollarSign className="w-8 h-8 text-blue-400" />, title: "Earn", desc: "Earn commissions for each successful referral." },
+/* ================= AFFILIATE SUCCESS STORIES ================= */
+const successStories = [
+  {
+    name: "John Doe",
+    earnings: "$5000",
+    story: "I earned over $5000 by sharing Cashog with my followers. The platform is amazing and easy to promote!",
+  },
+  {
+    name: "Emily Clark",
+    earnings: "$3500",
+    story: "Using Cashog's marketing resources helped me reach new audiences and hit my first big milestone.",
+  },
+  {
+    name: "Michael Scott",
+    earnings: "$4200",
+    story: "With consistent efforts and Cashog's generous commission structure, I've made a steady income every month.",
+  },
 ];
+
+/* ================= REFERRAL PROGRESS ================= */
+const calculateProgress = (referrals: number, target: number) => {
+  return (referrals / target) * 100;
+};
 
 /* ================= AFFILIATE RESOURCES ================= */
 const resources = [
@@ -65,11 +83,40 @@ const affiliateFAQs = [
 export default function AffiliatePage() {
   const [referrals, setReferrals] = useState(0);
   const [earnings, setEarnings] = useState(0);
+  const [referralLink, setReferralLink] = useState("");
+
+  useEffect(() => {
+    // Example of generating a unique referral link based on user
+    setReferralLink(`${window.location.origin}/?ref=affiliate123`);
+  }, []);
 
   const handleReferralChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const referralCount = Number(e.target.value);
     setReferrals(referralCount);
     setEarnings(calculateCommission(referralCount * 50)); // Assuming $50 per referral
+  };
+
+  // Referral tracking data for the graph
+  const referralData = {
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+    datasets: [
+      {
+        label: "Referrals",
+        data: [10, 50, 90, 120, 150, 200], // Example data, this should be dynamic
+        fill: false,
+        backgroundColor: "rgba(75,192,192,0.2)",
+        borderColor: "rgba(75,192,192,1)",
+        borderWidth: 2,
+      },
+    ],
+  };
+
+  const referralOptions = {
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
   };
 
   return (
@@ -162,7 +209,8 @@ export default function AffiliatePage() {
                     name="referrals"
                     value={referrals}
                     onChange={handleReferralChange}
-                    className="mt-1 px-4 py-2 w-full border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="mt-1 px-4 py-2 w-full border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue
+                                      focus:ring-blue-500"
                     placeholder="Enter number of successful referrals"
                   />
                 </div>
@@ -203,8 +251,7 @@ export default function AffiliatePage() {
           </Reveal>
 
           <div className="mb-12">
-            <div className="bg-white dark:bg-[#0a0d16] rounded
-                        <div className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md">
+            <div className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md">
               <h3 className="text-xl font-semibold mb-2">Bonus Structure</h3>
               <p className="text-gray-600 dark:text-gray-300 text-sm">
                 Earn a 10% bonus when you refer over 100 new users in a month!
@@ -218,47 +265,105 @@ export default function AffiliatePage() {
             </div>
           </div>
 
-          {/* AFFILIATE PAYOUT HISTORY */}
+          {/* REFERRAL PROGRESS TRACKER */}
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              Payout History
+              Referral Progress
             </h2>
 
             <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-              View your past payouts and keep track of your earnings.
+              Track how close you are to earning bonuses and rewards
             </p>
           </Reveal>
 
           <div className="mb-12">
             <div className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md">
-              <h3 className="text-xl font-semibold mb-2">Recent Payouts</h3>
-              <table className="min-w-full table-auto text-sm text-left">
-                <thead>
-                  <tr className="border-b">
-                    <th className="px-4 py-2 text-gray-600 dark:text-gray-300">Date</th>
-                    <th className="px-4 py-2 text-gray-600 dark:text-gray-300">Amount</th>
-                    <th className="px-4 py-2 text-gray-600 dark:text-gray-300">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="px-4 py-2 text-gray-600 dark:text-gray-300">January 25, 2026</td>
-                    <td className="px-4 py-2 text-green-500">$150</td>
-                    <td className="px-4 py-2 text-green-500">Paid</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-2 text-gray-600 dark:text-gray-300">December 10, 2025</td>
-                    <td className="px-4 py-2 text-green-500">$200</td>
-                    <td className="px-4 py-2 text-green-500">Paid</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-2 text-gray-600 dark:text-gray-300">November 20, 2025</td>
-                    <td className="px-4 py-2 text-red-500">$100</td>
-                    <td className="px-4 py-2 text-red-500">Pending</td>
-                  </tr>
-                </tbody>
-              </table>
+              <h3 className="text-xl font-semibold mb-2">Referral Milestones</h3>
+              <div className="mb-6">
+                <p className="text-gray-600 dark:text-gray-300">
+                  You have referred {referrals} users. You are {calculateProgress(referrals, 100)}% of the way to your next bonus!
+                </p>
+                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                  <div
+                    style={{ width: `${calculateProgress(referrals, 100)}%` }}
+                    className="bg-gradient-to-r from-yellow-400 to-green-400 h-2 rounded-full"
+                  ></div>
+                </div>
+              </div>
             </div>
+          </div>
+
+          {/* REFERRAL TRACKING GRAPH */}
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              Your Referral Growth
+            </h2>
+
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+              Visualize your referral growth over the months
+            </p>
+          </Reveal>
+
+          <div className="mb-12">
+            <div className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md">
+              <Line data={referralData} options={referralOptions} />
+            </div>
+          </div>
+
+          {/* AFFILIATE SUCCESS STORIES */}
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              Success Stories
+            </h2>
+
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+              Hear from our top affiliates about their journey and success with Cashog.
+            </p>
+          </Reveal>
+
+          <div className="mb-12">
+            {successStories.map((story, index) => (
+              <div key={index} className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 mb-6 border border-gray-200 dark:border-gray-800 shadow-md">
+                <h3 className="text-xl font-semibold">{story.name}</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">{story.story}</p>
+                <p className="text-lg text-green-500 mt-4 font-semibold">Earnings: {story.earnings}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* AFFILIATE RESOURCES */}
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              Affiliate Resources
+            </h2>
+
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+              Get all the tools you need to promote Cashog and succeed in our affiliate program.
+            </p>
+          </Reveal>
+
+          <div className="grid gap-6 md:grid-cols-3 mb-24">
+            {resources.map((resource, index) => (
+              <div key={index} className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md">
+                <h3 className="text-xl font-semibold mb-2">{resource.title}</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-300">{resource.description}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* FAQ */}
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              Frequently Asked Questions
+            </h2>
+
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+              Everything you need to know about Play & Earn
+            </p>
+          </Reveal>
+
+          <div className="mb-24">
+            <FAQ faqs={affiliateFAQs} />
           </div>
 
           {/* FINAL CTA */}
@@ -283,4 +388,3 @@ export default function AffiliatePage() {
     </>
   );
 }
-            
