@@ -7,6 +7,7 @@ import Background from "@/components/Background";
 import Reveal from "@/components/animations/Reveal";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import FAQ from "@/components/faq/FAQ";
+import TypingText from "@/components/typing/TypingText";
 import {
   ShoppingBag,
   Star,
@@ -116,12 +117,17 @@ export default function EarningPage() {
       <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
 
-        {/* HERO */}
+        {/* HERO WITH TYPING TEXT */}
         <section className="relative z-10 max-w-7xl mx-auto px-4 py-20 text-center">
           <Reveal>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
               Earn Rewards by Completing Tasks
             </h1>
+
+            {/* Typing dynamic headline */}
+            <div className="text-2xl sm:text-3xl md:text-4xl font-extrabold gradient-text mb-6">
+              <TypingText />
+            </div>
 
             <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
               Join thousands of users earning rewards with simple tasks.
@@ -165,7 +171,7 @@ export default function EarningPage() {
           </div>
         </section>
 
-        {/* TASK GRID (9 OFFERS) */}
+        {/* TASK GRID */}
         <section className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
