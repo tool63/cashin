@@ -16,7 +16,7 @@ import {
   Package,
 } from "lucide-react";
 
-/* ================= EARNING TASKS (9) ================= */
+/* ================= TASKS (9 OFFERS) ================= */
 const tasks = [
   { id: 1, name: "Install VPN App", category: "Security", reward: "$2", rating: 4.8 },
   { id: 2, name: "Play Mobile Game", category: "Gaming", reward: "$3", rating: 4.9 },
@@ -34,7 +34,7 @@ const faqs = [
   { q: "How do I earn rewards?", a: "Complete tasks and test offers to earn rewards." },
   { q: "When are rewards credited?", a: "Rewards are credited after task verification." },
   { q: "Can I withdraw earnings?", a: "Yes. After reaching minimum withdrawal limits." },
-  { q: "Is this free to use?", a: "Yes. You can earn without any investment." },
+  { q: "Is it free to use?", a: "Yes. You can earn without any investment." },
   { q: "Do I need experience?", a: "No. Tasks are beginner-friendly." },
   { q: "How fast can I earn?", a: "Earnings depend on task completion speed." },
   { q: "Is payment secure?", a: "Yes. We use secure payment systems." },
@@ -165,7 +165,7 @@ export default function EarningPage() {
           </div>
         </section>
 
-        {/* TASK GRID */}
+        {/* TASK GRID (9 OFFERS) */}
         <section className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
@@ -221,7 +221,7 @@ export default function EarningPage() {
           </div>
         </section>
 
-        {/* FAQ */}
+        {/* FAQ (7 QUESTIONS) */}
         <section className="relative z-10 max-w-4xl mx-auto px-4 py-20 text-center">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
