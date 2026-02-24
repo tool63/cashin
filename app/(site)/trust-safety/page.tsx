@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import SeoEngine from "@/components/seo/SeoEngine";
 import Background from "@/components/Background";
@@ -16,7 +16,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 
-/* ================= FAQ DATA (EARLY LOGIC) ================= */
+/* ================= FAQ DATA ================= */
 const faqs = [
   {
     q: "Is my data safe?",
@@ -42,7 +42,7 @@ const faqs = [
 
 /* ================= EXPANDABLE CARD ================= */
 function ExpandableCard({ children }: { children: React.ReactNode }) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
     <motion.div
@@ -269,21 +269,4 @@ export default function TrustSafetyPage() {
             ))}
           </div>
 
-          {/* FINAL CTA */}
-          <Reveal>
-            <div className="text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Ready to Get Started?
-              </h2>
-              <p className="text-base text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
-                Join a secure platform built for modern users.
-              </p>
-              <PrimaryCTA href="/signup" />
-            </div>
-          </Reveal>
-
-        </section>
-      </main>
-    </>
-  );
-}
+          {/* FINAL
