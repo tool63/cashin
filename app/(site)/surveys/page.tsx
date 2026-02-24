@@ -34,26 +34,7 @@ function CountUp({ end, duration = 2000 }: { end: number; duration?: number }) {
   return <span>{count.toLocaleString()}</span>;
 }
 
-/* ================= ANIMATIONS ================= */
-const container = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 40 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
-  },
-};
-
-/* ================= SURVEYS (9 CARDS) ================= */
+/* ================= SURVEYS ================= */
 const surveys = [
   { id: 1, title: "Food Preferences Survey", reward: "$1.5", time: "5 min", category: "Food" },
   { id: 2, title: "Travel Experience Survey", reward: "$2.0", time: "8 min", category: "Travel" },
@@ -90,157 +71,155 @@ export default function SurveyPage() {
         {/* ================= HERO ================= */}
         <section className="relative z-10 py-32 px-6 text-center">
           <Reveal>
-            <h1 className="text-4xl md:text-6xl font-extrabold mb-6">
-              Share Your Opinion and <span className="gradient-text">Earn Rewards</span>
-            </h1>
+            <>
+              <h1 className="text-4xl md:text-6xl font-extrabold mb-6">
+                Share Your Opinion and <span className="gradient-text">Earn Rewards</span>
+              </h1>
 
-            <div className="text-2xl md:text-3xl font-bold mb-6">
-              <TypingText />
-            </div>
+              <div className="text-2xl md:text-3xl font-bold mb-6">
+                <TypingText />
+              </div>
 
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
-              Complete short surveys and earn rewards instantly.
-            </p>
+              <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+                Complete short surveys and earn rewards instantly.
+              </p>
 
-            <PrimaryCTA href="/signup">Start Earning</PrimaryCTA>
+              <PrimaryCTA href="/signup">Start Earning</PrimaryCTA>
+            </>
           </Reveal>
         </section>
 
         {/* ================= STATS ================= */}
         <section className="relative z-10 py-28 px-6">
           <Reveal>
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-extrabold mb-4">
-                Growing Community of Earners
-              </h2>
-            </div>
+            <>
+              <div className="text-center mb-16">
+                <h2 className="text-4xl md:text-5xl font-extrabold mb-4">
+                  Growing Community of Earners
+                </h2>
+              </div>
 
-            <motion.div
-              variants={container}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="max-w-6xl mx-auto grid gap-8 md:grid-cols-4"
-            >
-              {[
-                { value: 50000, label: "Surveys Completed" },
-                { value: 25000, label: "Active Participants" },
-                { value: 100000, label: "Rewards Given" },
-                { value: 99, label: "Satisfaction Rate", suffix: "%" },
-              ].map((stat, i) => (
-                <motion.div
-                  key={i}
-                  variants={item}
-                  className="bg-white dark:bg-[#0a0d16] p-8 rounded-3xl shadow-lg border text-center"
-                >
-                  <h3 className="text-3xl font-bold text-green-500 mb-2">
-                    <CountUp end={stat.value} />
-                    {stat.suffix ? stat.suffix : "+"}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400">{stat.label}</p>
-                </motion.div>
-              ))}
-            </motion.div>
+              <div className="max-w-6xl mx-auto grid gap-8 md:grid-cols-4">
+                {[
+                  { value: 50000, label: "Surveys Completed" },
+                  { value: 25000, label: "Active Participants" },
+                  { value: 100000, label: "Rewards Given" },
+                  { value: 99, label: "Satisfaction Rate", suffix: "%" },
+                ].map((stat, i) => (
+                  <Reveal key={i}>
+                    <motion.div
+                      whileHover={{ y: -6 }}
+                      className="bg-white dark:bg-[#0a0d16] p-8 rounded-3xl shadow-lg border text-center"
+                    >
+                      <h3 className="text-3xl font-bold text-green-500 mb-2">
+                        <CountUp end={stat.value} />
+                        {stat.suffix ? stat.suffix : "+"}
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-400">{stat.label}</p>
+                    </motion.div>
+                  </Reveal>
+                ))}
+              </div>
+            </>
           </Reveal>
         </section>
 
         {/* ================= SURVEY CARDS ================= */}
         <section className="relative z-10 py-28 px-6 max-w-7xl mx-auto">
           <Reveal>
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-extrabold mb-4">
-                Complete Surveys and Earn Rewards
-              </h2>
+            <>
+              <div className="text-center mb-16">
+                <h2 className="text-4xl md:text-5xl font-extrabold mb-4">
+                  Complete Surveys and Earn Rewards
+                </h2>
 
-              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                Choose from categories and get paid for your opinions.
-              </p>
-            </div>
+                <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                  Choose from categories and get paid for your opinions.
+                </p>
+              </div>
 
-            <motion.div
-              variants={container}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="grid gap-8 md:grid-cols-3"
-            >
-              {surveys.map((survey) => (
-                <motion.div
-                  key={survey.id}
-                  variants={item}
-                  whileHover={{ y: -6 }}
-                  className="bg-white dark:bg-[#0a0d16] p-8 rounded-3xl shadow-lg border flex flex-col"
-                >
-                  <MessageSquare className="w-8 h-8 text-yellow-500 mb-4" />
+              <div className="grid gap-8 md:grid-cols-3">
+                {surveys.map((survey) => (
+                  <Reveal key={survey.id}>
+                    <motion.div
+                      whileHover={{ y: -6 }}
+                      className="bg-white dark:bg-[#0a0d16] p-8 rounded-3xl shadow-lg border flex flex-col"
+                    >
+                      <MessageSquare className="w-8 h-8 text-yellow-500 mb-4" />
 
-                  <span className="text-xs px-3 py-1 rounded-full bg-green-500/10 text-green-600 border border-green-500/20 mb-3 self-start">
-                    {survey.category}
-                  </span>
+                      <span className="text-xs px-3 py-1 rounded-full bg-green-500/10 text-green-600 border border-green-500/20 mb-3 self-start">
+                        {survey.category}
+                      </span>
 
-                  <h3 className="text-xl font-semibold mb-2">{survey.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-400 mb-1">
-                    Time: {survey.time}
-                  </p>
-                  <p className="text-green-600 font-bold mb-4">{survey.reward}</p>
+                      <h3 className="text-xl font-semibold mb-2">{survey.title}</h3>
+                      <p className="text-gray-600 dark:text-gray-400 mb-1">
+                        Time: {survey.time}
+                      </p>
+                      <p className="text-green-600 font-bold mb-4">{survey.reward}</p>
 
-                  <motion.a
-                    href="/signup"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="mt-auto inline-flex items-center justify-center gap-2
-                      bg-gradient-to-r from-yellow-400 to-green-500
-                      text-black px-4 py-2.5 rounded-xl font-semibold text-sm shadow"
-                  >
-                    Start Survey <CheckCircle size={16} />
-                  </motion.a>
-                </motion.div>
-              ))}
-            </motion.div>
+                      <motion.a
+                        href="/signup"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="mt-auto inline-flex items-center justify-center gap-2
+                          bg-gradient-to-r from-yellow-400 to-green-500
+                          text-black px-4 py-2.5 rounded-xl font-semibold text-sm shadow"
+                      >
+                        Start Survey <CheckCircle size={16} />
+                      </motion.a>
+                    </motion.div>
+                  </Reveal>
+                ))}
+              </div>
+            </>
           </Reveal>
         </section>
 
         {/* ================= TESTIMONIALS ================= */}
         <section className="relative z-10 py-28 px-6">
           <Reveal>
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-extrabold mb-4">
-                Loved by Earners
-              </h2>
-              <p className="text-gray-600 dark:text-gray-400">
-                Real feedback from our community.
-              </p>
-            </div>
+            <>
+              <div className="text-center mb-16">
+                <h2 className="text-4xl md:text-5xl font-extrabold mb-4">
+                  Loved by Earners
+                </h2>
+                <p className="text-gray-600 dark:text-gray-400">
+                  Real feedback from our community.
+                </p>
+              </div>
 
-            <motion.div
-              variants={container}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8"
-            >
-              {testimonials.map((t, i) => (
-                <motion.div
-                  key={i}
-                  variants={item}
-                  className="bg-white dark:bg-[#0a0d16] rounded-3xl p-6 shadow-md border"
-                >
-                  <Star className="w-6 h-6 text-yellow-400 mx-auto mb-2" />
-                  <p className="italic text-gray-600 dark:text-gray-300">“{t.text}”</p>
-                  <h3 className="mt-4 font-semibold text-green-500">— {t.name}</h3>
-                </motion.div>
-              ))}
-            </motion.div>
+              <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
+                {testimonials.map((t, i) => (
+                  <Reveal key={i}>
+                    <motion.div
+                      whileHover={{ y: -6 }}
+                      className="bg-white dark:bg-[#0a0d16] rounded-3xl p-6 shadow-md border"
+                    >
+                      <Star className="w-6 h-6 text-yellow-400 mx-auto mb-2" />
+                      <p className="italic text-gray-600 dark:text-gray-300">
+                        “{t.text}”
+                      </p>
+                      <h3 className="mt-4 font-semibold text-green-500">
+                        — {t.name}
+                      </h3>
+                    </motion.div>
+                  </Reveal>
+                ))}
+              </div>
+            </>
           </Reveal>
         </section>
 
         {/* ================= FINAL CTA ================= */}
         <section className="relative z-10 py-36 px-6 text-center">
           <Reveal>
-            <h2 className="text-4xl md:text-6xl font-extrabold mb-8">
-              Start Earning Today
-            </h2>
+            <>
+              <h2 className="text-4xl md:text-6xl font-extrabold mb-8">
+                Start Earning Today
+              </h2>
 
-            <PrimaryCTA href="/signup">Join Now</PrimaryCTA>
+              <PrimaryCTA href="/signup">Join Now</PrimaryCTA>
+            </>
           </Reveal>
         </section>
       </main>
