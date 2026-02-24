@@ -98,7 +98,7 @@ export default function FreeTrialsPage() {
     <>
       <SeoEngine
         title="Free Trials | Cashog"
-        description="Complete premium free trials and earn rewards instantly. Secure and verified earning experience."
+        description="Complete premium free trials and earn rewards instantly."
       />
 
       <main className="relative min-h-screen text-gray-900 dark:text-white">
@@ -128,51 +128,54 @@ export default function FreeTrialsPage() {
         {/* TRIAL CARDS */}
         <section className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
           <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              Featured Free Trial Offers
-            </h2>
-            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-              Secure and high-converting trial opportunities
-            </p>
+            <>
+              <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+                Featured Free Trial Offers
+              </h2>
+              <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+                Secure and high-converting trial opportunities
+              </p>
+            </>
           </Reveal>
 
           <div className="grid gap-6 md:grid-cols-3">
             {trials.map((trial) => (
-              <motion.div
-                key={trial.id}
-                whileHover={{ y: -4 }}
-                className={`relative bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md flex flex-col ${
-                  trial.popular
-                    ? "border-green-400"
-                    : "border-gray-200 dark:border-gray-800"
-                }`}
-              >
-                {trial.popular && (
-                  <div className="absolute -top-3 right-4 bg-gradient-to-r from-yellow-400 to-green-500 text-black text-xs font-bold px-3 py-1 rounded-full shadow">
-                    Most Popular
-                  </div>
-                )}
-
-                <Sparkles className="w-8 h-8 text-yellow-500 mb-4 mx-auto" />
-
-                <h3 className="text-xl font-semibold mb-2">{trial.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
-                  {trial.description}
-                </p>
-
-                <div className="mb-4">
-                  <p className="text-green-500 font-bold">Reward: {trial.reward}</p>
-                  <p className="text-sm text-gray-500">Duration: {trial.duration}</p>
-                </div>
-
-                <motion.a
-                  href="/signup"
-                  whileHover={{ scale: 1.05 }}
-                  className="mt-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-yellow-400 to-green-400 text-black px-4 py-3 rounded-xl font-semibold shadow"
+              <Reveal key={trial.id}>
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  className={`relative bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md flex flex-col ${
+                    trial.popular
+                      ? "border-green-400"
+                      : "border-gray-200 dark:border-gray-800"
+                  }`}
                 >
-                  Start Trial <CheckCircle size={18} />
-                </motion.a>
-              </motion.div>
+                  {trial.popular && (
+                    <div className="absolute -top-3 right-4 bg-gradient-to-r from-yellow-400 to-green-500 text-black text-xs font-bold px-3 py-1 rounded-full shadow">
+                      Most Popular
+                    </div>
+                  )}
+
+                  <Sparkles className="w-8 h-8 text-yellow-500 mb-4 mx-auto" />
+
+                  <h3 className="text-xl font-semibold mb-2">{trial.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                    {trial.description}
+                  </p>
+
+                  <div className="mb-4">
+                    <p className="text-green-500 font-bold">Reward: {trial.reward}</p>
+                    <p className="text-sm text-gray-500">Duration: {trial.duration}</p>
+                  </div>
+
+                  <motion.a
+                    href="/signup"
+                    whileHover={{ scale: 1.05 }}
+                    className="mt-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-yellow-400 to-green-400 text-black px-4 py-3 rounded-xl font-semibold shadow"
+                  >
+                    Start Trial <CheckCircle size={18} />
+                  </motion.a>
+                </motion.div>
+              </Reveal>
             ))}
           </div>
         </section>
@@ -180,12 +183,14 @@ export default function FreeTrialsPage() {
         {/* WHY TRUST */}
         <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
           <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              Why Choose Cashog Free Trials?
-            </h2>
-            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-              Verified offers with instant rewards and premium experience
-            </p>
+            <>
+              <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+                Why Choose Cashog Free Trials?
+              </h2>
+              <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+                Verified offers with instant rewards
+              </p>
+            </>
           </Reveal>
 
           <div className="grid gap-6 md:grid-cols-3">
@@ -206,33 +211,36 @@ export default function FreeTrialsPage() {
                 desc: "Clean UI, fast tracking and advanced payout system."
               }
             ].map((item) => (
-              <motion.div
-                key={item.title}
-                whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md"
-              >
-                <div className="flex justify-center mb-4">
-                  <item.icon className="w-8 h-8 text-yellow-400" />
-                </div>
-                <h3 className="text-lg font-semibold">{item.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
-                  {item.desc}
-                </p>
-              </motion.div>
+              <Reveal key={item.title}>
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md"
+                >
+                  <div className="flex justify-center mb-4">
+                    <item.icon className="w-8 h-8 text-yellow-400" />
+                  </div>
+                  <h3 className="text-lg font-semibold">{item.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
+                    {item.desc}
+                  </p>
+                </motion.div>
+              </Reveal>
             ))}
           </div>
         </section>
 
-        {/* FAQ (UPDATED TO MATCH HOW IT WORKS PAGE) */}
+        {/* FAQ */}
         <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
           <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              Frequently Asked Questions
-            </h2>
+            <>
+              <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+                Frequently Asked Questions
+              </h2>
 
-            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-              Everything you need to know about free trials
-            </p>
+              <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+                Everything you need to know about free trials
+              </p>
+            </>
           </Reveal>
 
           <FAQ faqs={faqs} />
@@ -241,31 +249,34 @@ export default function FreeTrialsPage() {
         {/* STATS */}
         <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
           <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              Free Trial Platform Stats
-            </h2>
-            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-              Real numbers from our growing community
-            </p>
+            <>
+              <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+                Free Trial Platform Stats
+              </h2>
+              <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+                Real numbers from our growing community
+              </p>
+            </>
           </Reveal>
 
           <div className="grid gap-6 md:grid-cols-3">
             {stats.map((stat) => (
-              <motion.div
-                key={stat.label}
-                whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md"
-              >
-                <div className="flex justify-center mb-2">{stat.icon}</div>
+              <Reveal key={stat.label}>
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md"
+                >
+                  <div className="flex justify-center mb-2">{stat.icon}</div>
 
-                <h3 className="text-3xl font-extrabold text-green-500">
-                  {stat.number.toLocaleString()}
-                </h3>
+                  <h3 className="text-3xl font-extrabold text-green-500">
+                    {stat.number.toLocaleString()}
+                  </h3>
 
-                <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">
-                  {stat.label}
-                </p>
-              </motion.div>
+                  <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">
+                    {stat.label}
+                  </p>
+                </motion.div>
+              </Reveal>
             ))}
           </div>
         </section>
@@ -277,7 +288,7 @@ export default function FreeTrialsPage() {
               Turn Free Trials Into Real Rewards
             </h2>
 
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed mb-10">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed mb-10">
               Join Cashog today and start earning with premium trial offers.
             </p>
 
