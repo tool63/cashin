@@ -279,16 +279,12 @@ export default function VisitWebsitesPage() {
           <FAQ faqs={faqs} />
         </section>
 
-        {/* ================= FINAL CTA WITH TYPING ================= */}
+        {/* ================= FINAL CTA ================= */}
         <section className="relative z-10 py-28 px-6 text-center">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Turn Website Visits Into Real Rewards
             </h2>
-
-            <div className="text-lg md:text-xl font-semibold gradient-text mb-6">
-              <TypingText />
-            </div>
 
             <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-xl mx-auto mb-10">
               Join Cashog today and start earning by exploring and visiting websites.
