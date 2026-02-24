@@ -13,7 +13,6 @@ import {
   Mail,
   Star,
   ShieldCheck,
-  Rocket,
   Users,
   DollarSign,
   TrendingUp,
@@ -197,7 +196,7 @@ export default function ReadEmailsPage() {
             </p>
 
             <PrimaryCTA href="/signup">
-              Start Reading Emails <Rocket size={20} />
+              Start Reading Emails
             </PrimaryCTA>
           </Reveal>
         </section>
@@ -302,7 +301,7 @@ export default function ReadEmailsPage() {
         <section className="relative z-10 max-w-6xl mx-auto px-6 py-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              Why Read Emails with Cashog?
+              Why Choose Cashog Emails
             </h2>
             <p className="text-center text-gray-600 dark:text-gray-300 mb-14">
               Secure, verified, and rewarding email experience
@@ -348,15 +347,19 @@ export default function ReadEmailsPage() {
           <FAQ faqs={faqs} />
         </section>
 
-        {/* ================= FINAL CTA ================= */}
+        {/* ================= FINAL SECTION ================= */}
         <section className="relative z-10 py-28 px-6 text-center">
           <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">
-              Ready to Start Reading Emails & Earn Rewards?
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Turn Emails Into Real Rewards
             </h2>
 
+            <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-xl mx-auto mb-10">
+              Join Cashog today and start earning by reading emails and completing offers.
+            </p>
+
             <PrimaryCTA href="/signup">
-              Join Cashog Now <Rocket size={20} />
+              Join Cashog Now
             </PrimaryCTA>
           </Reveal>
         </section>
