@@ -54,7 +54,7 @@ const item = {
   },
 };
 
-/* ================= DATA ================= */
+/* ================= DATA (9 VOUCHERS) ================= */
 const vouchers = [
   { id: 1, title: "Amazon Gift Card", code: "AMZ50", reward: "$50", expiry: "Feb 28, 2026", popular: true },
   { id: 2, title: "Google Play Voucher", code: "GP30", reward: "$30", expiry: "Mar 15, 2026" },
@@ -62,8 +62,12 @@ const vouchers = [
   { id: 4, title: "Steam Wallet", code: "STM25", reward: "$25", expiry: "May 12, 2026" },
   { id: 5, title: "Xbox Gift Card", code: "XBOX15", reward: "$15", expiry: "Jun 20, 2026" },
   { id: 6, title: "PlayStation Voucher", code: "PSN40", reward: "$40", expiry: "Jul 18, 2026" },
+  { id: 7, title: "Spotify Premium", code: "SPOT10", reward: "$10", expiry: "Aug 10, 2026" },
+  { id: 8, title: "Uber Gift Card", code: "UBER20", reward: "$20", expiry: "Sep 30, 2026" },
+  { id: 9, title: "Apple Store Card", code: "APL50", reward: "$50", expiry: "Oct 25, 2026" },
 ];
 
+/* ================= TESTIMONIALS ================= */
 const testimonials = [
   { name: "Alex", text: "Super fast redemption and premium vouchers!" },
   { name: "Sarah", text: "I love earning Amazon gift cards here." },
@@ -73,13 +77,16 @@ const testimonials = [
   { name: "Olivia", text: "High-value gift cards every month!" },
 ];
 
+/* ================= FAQ (6 QUESTIONS) ================= */
 const faqs = [
   { q: "How do I claim vouchers?", a: "Complete tasks and redeem rewards instantly." },
   { q: "Are vouchers secure?", a: "Yes, all vouchers are verified and safe." },
   { q: "How fast is redemption?", a: "Most vouchers are redeemable instantly." },
+  { q: "Do vouchers expire?", a: "Yes, check expiry dates before redemption." },
+  { q: "What rewards can I claim?", a: "Gift cards, vouchers, and premium rewards." },
+  { q: "Can I redeem multiple vouchers?", a: "Yes, you can redeem as many as available." },
 ];
 
-/* ================= PAGE ================= */
 export default function VouchersPage() {
   return (
     <>
@@ -150,7 +157,7 @@ export default function VouchersPage() {
           </Reveal>
         </section>
 
-        {/* ================= VOUCHERS ================= */}
+        {/* ================= VOUCHERS (9 CARDS) ================= */}
         <section className="relative z-10 py-28 px-6 max-w-7xl mx-auto">
           <Reveal>
             <div className="text-center mb-16">
