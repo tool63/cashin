@@ -137,9 +137,7 @@ export default function TrustSafetyPage() {
                 by enterprise-grade systems and real-time monitoring.
               </p>
 
-              <PrimaryCTA href="/signup">
-                Start Earning Now
-              </PrimaryCTA>
+              <PrimaryCTA href="/signup" />
 
               <p className="mt-4 text-sm text-gray-600 dark:text-gray-300">
                 Secure platform built for modern users.
@@ -191,6 +189,16 @@ export default function TrustSafetyPage() {
             })}
           </div>
 
+          {/* TITLE BELOW STATS */}
+          <div className="text-center mb-20">
+            <h2 className="text-lg font-semibold">
+              Platform Security Metrics
+            </h2>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              Real-time operational performance
+            </p>
+          </div>
+
           {/* SECURITY FEATURES */}
           <div className="mb-24 grid md:grid-cols-3 gap-6">
             {securityFeatures.map((feature) => (
@@ -227,12 +235,32 @@ export default function TrustSafetyPage() {
             ))}
           </div>
 
+          {/* TITLE BELOW SECURITY */}
+          <div className="text-center mb-24">
+            <h2 className="text-lg font-semibold">
+              Security Framework Overview
+            </h2>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              Enterprise-grade protection and monitoring
+            </p>
+          </div>
+
           {/* FAQ */}
           <div className="mb-24">
             <FAQ faqs={faqs} />
 
             <p className="mt-4 text-center text-sm text-gray-600 dark:text-gray-300">
               Frequently asked questions and support information
+            </p>
+          </div>
+
+          {/* TITLE BELOW FAQ */}
+          <div className="text-center mb-20">
+            <h2 className="text-lg font-semibold">
+              Support & Guidance
+            </h2>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              We are here to help you succeed
             </p>
           </div>
 
@@ -251,26 +279,7 @@ export default function TrustSafetyPage() {
               className="flex justify-center"
             >
               <div className="max-w-xs w-full">
-                <PrimaryCTA
-                  href="/signup"
-                  className="
-                    inline-flex 
-                    items-center 
-                    justify-center 
-                    px-6 
-                    py-3 
-                    text-base 
-                    font-semibold 
-                    rounded-xl 
-                    shadow-lg 
-                    transition-all 
-                    duration-300 
-                    hover:shadow-xl 
-                    hover:-translate-y-0.5
-                  "
-                >
-                  Start Earning in 60 Seconds
-                </PrimaryCTA>
+                <PrimaryCTA href="/signup" />
               </div>
             </motion.div>
 
