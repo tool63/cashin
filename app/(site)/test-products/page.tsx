@@ -16,30 +16,28 @@ import {
   Package,
 } from "lucide-react";
 
-/* ================= PRODUCTS (9) ================= */
+/* ================= TEST PRODUCTS (9) ================= */
 const products = [
-  { id: 1, name: "Premium VPN Access", category: "Security", price: 5, rating: 4.8 },
-  { id: 2, name: "Gaming Gift Card", category: "Gaming", price: 10, rating: 4.9 },
-  { id: 3, name: "E-Book: Growth Hacking", category: "Business", price: 3, rating: 4.7 },
-  { id: 4, name: "Pro Design Assets", category: "Design", price: 8, rating: 4.8 },
-  { id: 5, name: "Stock Photos Pack", category: "Media", price: 6, rating: 4.6 },
-  { id: 6, name: "AI Writing Credits", category: "AI Tools", price: 4, rating: 4.9 },
-  { id: 7, name: "Crypto Trading Course", category: "Finance", price: 12, rating: 4.7 },
-  { id: 8, name: "Advanced SEO Toolkit", category: "Marketing", price: 9, rating: 4.8 },
-  { id: 9, name: "Premium Notion Templates", category: "Productivity", price: 7, rating: 4.6 },
+  { id: 1, name: "VPN Access Test", category: "Security", reward: "$2", rating: 4.8 },
+  { id: 2, name: "Gaming Gift Card Test", category: "Gaming", reward: "$3", rating: 4.9 },
+  { id: 3, name: "E-Book Growth Test", category: "Business", reward: "$2", rating: 4.7 },
+  { id: 4, name: "Design Asset Test", category: "Design", reward: "$4", rating: 4.8 },
+  { id: 5, name: "Stock Photo Test", category: "Media", reward: "$2", rating: 4.6 },
+  { id: 6, name: "AI Writing Test", category: "AI Tools", reward: "$3", rating: 4.9 },
+  { id: 7, name: "SEO Tool Test", category: "Marketing", reward: "$2", rating: 4.7 },
+  { id: 8, name: "Notion Template Test", category: "Productivity", reward: "$3", rating: 4.8 },
+  { id: 9, name: "Crypto Learning Test", category: "Finance", reward: "$5", rating: 4.6 },
 ];
 
-/* ================= FAQ (9 QUESTIONS) ================= */
+/* ================= FAQ (7 QUESTIONS) ================= */
 const faqs = [
-  { q: "Are these digital products?", a: "Yes. All products are delivered digitally." },
-  { q: "Is payment secure?", a: "Yes. We use encrypted secure payment systems." },
-  { q: "Can I request a refund?", a: "Refund policies depend on the specific product." },
-  { q: "How will I receive my product?", a: "After purchase, you will receive instant access via your dashboard." },
-  { q: "Do products expire?", a: "Most products offer lifetime access unless stated otherwise." },
-  { q: "Can I resell these products?", a: "No. Products are licensed for personal use only." },
-  { q: "Are updates included?", a: "Yes. Many products include free future updates." },
-  { q: "Do you offer customer support?", a: "Yes. Our support team is available 24/7." },
-  { q: "Can I earn rewards for purchases?", a: "Yes. Selected products may offer cashback or reward points." },
+  { q: "How do I earn rewards?", a: "Complete test products and tasks to earn rewards." },
+  { q: "Are test products safe?", a: "Yes. We use verified and secure test tasks." },
+  { q: "When are rewards credited?", a: "Rewards are credited after task verification." },
+  { q: "Can I withdraw earnings?", a: "Yes. After reaching minimum withdrawal limits." },
+  { q: "Do I need experience?", a: "No. Tasks are simple and beginner-friendly." },
+  { q: "Is there a limit to earnings?", a: "You can earn by completing available tasks." },
+  { q: "Can I use mobile?", a: "Yes. Our platform works on mobile and desktop." },
 ];
 
 /* ================= STATS ================= */
@@ -50,10 +48,10 @@ type Stat = {
 };
 
 const stats: Stat[] = [
-  { label: "Active Buyers", number: 180000, icon: <Users className="w-6 h-6 text-green-400" /> },
-  { label: "Products Sold", number: 950000, icon: <TrendingUp className="w-6 h-6 text-green-400" /> },
-  { label: "Total Revenue", number: 1200000, icon: <Gift className="w-6 h-6 text-green-400" /> },
-  { label: "Total Products", number: 320, icon: <Package className="w-6 h-6 text-green-400" /> },
+  { label: "Active Earners", number: 180000, icon: <Users className="w-6 h-6 text-green-400" /> },
+  { label: "Tasks Completed", number: 950000, icon: <TrendingUp className="w-6 h-6 text-green-400" /> },
+  { label: "Total Rewards", number: 1200000, icon: <Gift className="w-6 h-6 text-green-400" /> },
+  { label: "Test Products", number: 320, icon: <Package className="w-6 h-6 text-green-400" /> },
 ];
 
 /* ================= COUNT UP ================= */
@@ -111,8 +109,8 @@ export default function ProductsPage() {
   return (
     <>
       <Meta
-        title="Products | Cashog"
-        description="Browse premium digital products and earn rewards."
+        title="Test Products | Cashog"
+        description="Complete test products and earn rewards."
       />
 
       <main className="relative min-h-screen text-gray-900 dark:text-white">
@@ -122,14 +120,14 @@ export default function ProductsPage() {
         <section className="relative z-10 max-w-7xl mx-auto px-4 py-20 text-center">
           <Reveal>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-              Discover Premium Digital Products
+              Earn Rewards by Testing Products
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
-              Boost your productivity with high-quality tools and resources.
+              Complete test tasks and earn real rewards instantly.
             </p>
 
-            <PrimaryCTA href="/signup">Get Started</PrimaryCTA>
+            <PrimaryCTA href="/signup">Start Earning</PrimaryCTA>
           </Reveal>
         </section>
 
@@ -137,10 +135,10 @@ export default function ProductsPage() {
         <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              Marketplace Performance
+              Platform Performance
             </h2>
             <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-              Real numbers from our growing marketplace
+              Real numbers from our growing earning community
             </p>
           </Reveal>
 
@@ -171,10 +169,10 @@ export default function ProductsPage() {
         <section className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              Featured Products
+              Test Products
             </h2>
             <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-              Hand-picked premium items
+              Complete tasks and earn rewards
             </p>
           </Reveal>
 
@@ -206,7 +204,7 @@ export default function ProductsPage() {
 
                 <div className="mt-auto flex items-center justify-between">
                   <span className="text-green-500 font-bold text-lg">
-                    ${product.price}
+                    Earn {product.reward}
                   </span>
 
                   <motion.a
@@ -215,7 +213,7 @@ export default function ProductsPage() {
                     whileTap={{ scale: 0.97 }}
                     className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black shadow-sm"
                   >
-                    Buy Now
+                    Start Task
                   </motion.a>
                 </div>
               </motion.div>
@@ -230,7 +228,7 @@ export default function ProductsPage() {
               Frequently Asked Questions
             </h2>
             <p className="text-base text-gray-600 dark:text-gray-300 mb-8">
-              Everything you need to know before purchasing
+              Everything you need to know about earning rewards
             </p>
           </Reveal>
 
@@ -241,11 +239,11 @@ export default function ProductsPage() {
         <section className="relative z-10 text-center py-28">
           <Reveal>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-              Start Shopping Today
+              Start Earning Today
             </h2>
 
             <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
-              Join Cashog and access premium digital products instantly.
+              Join Cashog and complete tasks to earn real rewards.
             </p>
 
             <PrimaryCTA href="/signup">Join Now</PrimaryCTA>
