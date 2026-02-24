@@ -5,9 +5,19 @@ import { motion } from "framer-motion";
 import SeoEngine from "@/components/seo/SeoEngine";
 import Background from "@/components/Background";
 import Reveal from "@/components/animations/Reveal";
+import TypingText from "@/components/typing/TypingText";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import FAQ from "@/components/faq/FAQ";
-import { Globe, CheckCircle, Star, Rocket, ShieldCheck, Users, DollarSign, TrendingUp } from "lucide-react";
+import {
+  Globe,
+  CheckCircle,
+  Star,
+  Rocket,
+  ShieldCheck,
+  Users,
+  DollarSign,
+  TrendingUp,
+} from "lucide-react";
 
 /* ================= COUNT UP ================= */
 function CountUp({ end }: { end: number }) {
@@ -106,12 +116,16 @@ export default function VisitWebsitesPage() {
       <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
 
-        {/* ================= HERO ================= */}
+        {/* ================= HERO WITH TYPING TEXT ================= */}
         <section className="relative z-10 py-28 px-6 text-center">
           <Reveal>
             <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
               Visit Websites & Earn Rewards
             </h1>
+
+            <div className="text-2xl md:text-3xl font-bold gradient-text mb-6">
+              <TypingText />
+            </div>
 
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto">
               Explore websites, complete actions, and earn instant rewards with Cashog.
@@ -265,12 +279,16 @@ export default function VisitWebsitesPage() {
           <FAQ faqs={faqs} />
         </section>
 
-        {/* ================= FINAL CTA ================= */}
+        {/* ================= FINAL CTA WITH TYPING ================= */}
         <section className="relative z-10 py-28 px-6 text-center">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Turn Website Visits Into Real Rewards
             </h2>
+
+            <div className="text-lg md:text-xl font-semibold gradient-text mb-6">
+              <TypingText />
+            </div>
 
             <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-xl mx-auto mb-10">
               Join Cashog today and start earning by exploring and visiting websites.
