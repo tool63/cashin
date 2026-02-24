@@ -24,35 +24,27 @@ import {
    1000 points = $1 reward value
 */
 
-type LoyaltyTier = {
-  id: number;
-  name: string;
-  pointsRequired: number;
-  reward: string;
-  color: string;
-  icon: React.ElementType;
-};
-
-/* ================= 9 LOYALTY OFFERS (CATEGORY ICONS) ================= */
-const tiers: LoyaltyTier[] = [
-  { id: 1, name: "Bronze", pointsRequired: 100, reward: "$0.10 Reward", color: "#FACC15", icon: Medal },
-  { id: 2, name: "Silver", pointsRequired: 500, reward: "$0.50 Reward", color: "#9CA3AF", icon: Shield },
-  { id: 3, name: "Gold", pointsRequired: 1000, reward: "$1.00 Reward", color: "#FBBF24", icon: Award },
-  { id: 4, name: "Platinum", pointsRequired: 5000, reward: "$5.00 Reward", color: "#60A5FA", icon: Crown },
-  { id: 5, name: "Diamond", pointsRequired: 10000, reward: "$10.00 Reward", color: "#A78BFA", icon: Gem },
-  { id: 6, name: "Elite", pointsRequired: 20000, reward: "$20.00 Reward", color: "#F97316", icon: Sparkles },
-  { id: 7, name: "Master", pointsRequired: 50000, reward: "$50.00 Reward", color: "#22C55E", icon: Trophy },
-  { id: 8, name: "Legend", pointsRequired: 100000, reward: "$100.00 Reward", color: "#EC4899", icon: Star },
-  { id: 9, name: "Ultimate", pointsRequired: 500000, reward: "$500.00 Reward", color: "#8B5CF6", icon: Zap },
+/* ================= LOYALTY TIERS (START $10) ================= */
+const tiers = [
+  { id: 1, name: "Bronze", pointsRequired: 10000, reward: "$10.00 Reward", color: "#FACC15", icon: Medal },
+  { id: 2, name: "Silver", pointsRequired: 25000, reward: "$25.00 Reward", color: "#9CA3AF", icon: Shield },
+  { id: 3, name: "Gold", pointsRequired: 60000, reward: "$60.00 Reward", color: "#FBBF24", icon: Award },
+  { id: 4, name: "Platinum", pointsRequired: 150000, reward: "$150.00 Reward", color: "#60A5FA", icon: Crown },
+  { id: 5, name: "Diamond", pointsRequired: 500000, reward: "$500.00 Reward", color: "#A78BFA", icon: Gem },
+  { id: 6, name: "Elite", pointsRequired: 750000, reward: "$750.00 Reward", color: "#F97316", icon: Sparkles },
+  { id: 7, name: "Master", pointsRequired: 1000000, reward: "$1000.00 Reward", color: "#22C55E", icon: Trophy },
+  { id: 8, name: "Legend", pointsRequired: 2500000, reward: "$2500.00 Reward", color: "#EC4899", icon: Star },
+  { id: 9, name: "Ultimate", pointsRequired: 5000000, reward: "$5000.00 Reward", color: "#8B5CF6", icon: Zap },
 ];
 
-/* ================= TESTIMONIALS ================= */
+/* ================= TESTIMONIALS (6) ================= */
 const testimonials = [
   { name: "Alex", text: "Loyalty rewards are amazing. I love earning points!" },
   { name: "Sarah", text: "1000 points = $1 makes rewards clear and valuable." },
   { name: "John", text: "Tiers are exciting. I can see my progress and earnings." },
   { name: "Emma", text: "Cashog loyalty is simple and rewarding." },
   { name: "Michael", text: "I unlocked a tier and received rewards instantly!" },
+  { name: "Sophia", text: "Great program. Earning rewards feels exciting and fair!" },
 ];
 
 /* ================= FAQ ================= */
@@ -69,13 +61,13 @@ export default function LoyaltyPage() {
     <>
       <SeoEngine
         title="Loyalty Program | Cashog"
-        description="Join Cashog loyalty, earn points, unlock tiers, and claim rewards."
+        description="Join Cashog loyalty, earn points, unlock tiers starting from $10 rewards."
       />
 
       <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
 
-        {/* ================= HERO WITH TYPING TEXT ================= */}
+        {/* ================= HERO ================= */}
         <section className="relative z-10 py-28 px-6 text-center">
           <Reveal>
             <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
@@ -89,6 +81,7 @@ export default function LoyaltyPage() {
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto">
               Earn points and unlock premium rewards.
               1000 points = $1 reward value.
+              Loyalty tiers start from $10 rewards.
             </p>
 
             <PrimaryCTA href="/signup">
@@ -121,7 +114,7 @@ export default function LoyaltyPage() {
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.15 }}
                 >
-                  {/* CATEGORY PREMIUM ICON */}
+                  {/* CATEGORY ICON */}
                   <div
                     className="w-16 h-16 flex items-center justify-center rounded-full mb-4 mx-auto shadow-lg"
                     style={{ backgroundColor: tier.color }}
