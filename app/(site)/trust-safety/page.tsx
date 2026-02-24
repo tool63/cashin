@@ -125,7 +125,7 @@ export default function TrustSafetyPage() {
 
         <section className="relative z-10 max-w-6xl mx-auto px-4 py-20">
 
-          {/* HERO */}
+          {/* HERO (TITLE ADDED) */}
           <Reveal>
             <div className="text-center mb-20">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
@@ -143,51 +143,67 @@ export default function TrustSafetyPage() {
             </div>
           </Reveal>
 
-          {/* STATS (INDIVIDUAL LOGIC + NAME/TITLE) */}
-          <div className="grid md:grid-cols-3 gap-6 mb-20">
-            {stats.map((stat) => {
-              const { count, ref } = useCountUp(stat.number);
+          {/* STATS SECTION (NAME + TITLE) */}
+          <div className="mb-20">
+            <Reveal>
+              <div className="text-center mb-8">
+                <h2 className="text-sm uppercase tracking-widest text-gray-500">
+                  Statistics
+                </h2>
+                <h3 className="text-3xl font-bold">Platform Security Metrics</h3>
+              </div>
+            </Reveal>
 
-              return (
-                <Reveal key={stat.title}>
-                  <motion.div
-                    ref={ref}
-                    whileHover={{ y: -6 }}
-                    className="
-                      bg-white 
-                      dark:bg-[#0a0d16] 
-                      rounded-2xl 
-                      p-6 
-                      border 
-                      border-gray-200 
-                      dark:border-gray-800 
-                      shadow-md
-                      text-center
-                    "
-                  >
-                    <h3 className="text-lg font-semibold text-gray-600 dark:text-gray-300">
-                      {stat.title}
-                    </h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              {stats.map((stat) => {
+                const { count, ref } = useCountUp(stat.number);
 
-                    <h2 className="text-4xl font-extrabold gradient-text mt-2">
-                      {count.toLocaleString()}
-                      {stat.label.includes("%") && "%"}
-                    </h2>
+                return (
+                  <Reveal key={stat.title}>
+                    <motion.div
+                      ref={ref}
+                      whileHover={{ y: -6 }}
+                      className="
+                        bg-white 
+                        dark:bg-[#0a0d16] 
+                        rounded-2xl 
+                        p-6 
+                        border 
+                        border-gray-200 
+                        dark:border-gray-800 
+                        shadow-md
+                        text-center
+                      "
+                    >
+                      <h3 className="text-lg font-semibold text-gray-600 dark:text-gray-300">
+                        {stat.title}
+                      </h3>
 
-                    <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm">
-                      {stat.label}
-                    </p>
-                  </motion.div>
-                </Reveal>
-              );
-            })}
+                      <h2 className="text-4xl font-extrabold gradient-text mt-2">
+                        {count.toLocaleString()}
+                        {stat.label.includes("%") && "%"}
+                      </h2>
+
+                      <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm">
+                        {stat.label}
+                      </p>
+                    </motion.div>
+                  </Reveal>
+                );
+              })}
+            </div>
           </div>
 
-          {/* SECURITY FEATURES */}
+          {/* SECURITY FEATURES (TITLE ADDED) */}
           <div className="mb-24">
-            <h2 className="text-3xl font-bold text-center mb-10">
-              Our Security Framework
-            </h2>
+            <Reveal>
+              <div className="text-center mb-10">
+                <h2 className="text-sm uppercase tracking-widest text-gray-500">
+                  Security
+                </h2>
+                <h3 className="text-3xl font-bold">Our Security Framework</h3>
+              </div>
+            </Reveal>
 
             <div className="grid md:grid-cols-3 gap-6">
               {securityFeatures.map((feature) => (
@@ -221,18 +237,23 @@ export default function TrustSafetyPage() {
             </div>
           </div>
 
-          {/* FAQ */}
+          {/* FAQ (TITLE ADDED) */}
           <div className="mb-24">
             <Reveal>
-              <h2 className="text-3xl font-bold text-center mb-6">
-                Frequently Asked Questions
-              </h2>
+              <div className="text-center mb-6">
+                <h2 className="text-sm uppercase tracking-widest text-gray-500">
+                  Support
+                </h2>
+                <h3 className="text-3xl font-bold">
+                  Frequently Asked Questions
+                </h3>
+              </div>
             </Reveal>
 
             <FAQ faqs={faqs} />
           </div>
 
-          {/* FINAL CTA (INDIVIDUAL LOGIC) */}
+          {/* FINAL CTA (RESPONSIVE BUTTON SIZE) */}
           <div className="text-center">
             <Reveal>
               <h2 className="text-3xl font-bold mb-6">
@@ -244,10 +265,13 @@ export default function TrustSafetyPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={animateCTA ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6 }}
+              className="flex justify-center"
             >
-              <PrimaryCTA href="/signup">
-                Start Earning in 60 Seconds
-              </PrimaryCTA>
+              <div className="max-w-xs w-full">
+                <PrimaryCTA href="/signup">
+                  Start Earning in 60 Seconds
+                </PrimaryCTA>
+              </div>
             </motion.div>
 
             <p className="mt-4 text-gray-600 dark:text-gray-300">
