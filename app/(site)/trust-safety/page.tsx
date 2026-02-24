@@ -90,12 +90,14 @@ const securityFeatures = [
   },
 ];
 
+/* ================= STATS (NAME + TITLE) ================= */
 const stats = [
-  { number: 99.99, label: "System Uptime (%)" },
-  { number: 256, label: "Encryption Strength (Bit)" },
-  { number: 24, label: "Security Monitoring (Hours)" },
+  { title: "System Uptime", number: 99.99, label: "Uptime (%)" },
+  { title: "Encryption Power", number: 256, label: "Bit Strength" },
+  { title: "Security Monitoring", number: 24, label: "Hours Active" },
 ];
 
+/* ================= FAQ ================= */
 const faqs = [
   { q: "Is my data safe?", a: "Yes. Everything is encrypted and monitored 24/7." },
   { q: "How fast are withdrawals?", a: "Most payouts are processed instantly." },
@@ -103,7 +105,6 @@ const faqs = [
   { q: "Is joining free?", a: "Absolutely. Signing up costs nothing." },
 ];
 
-/* ================= COMPONENT ================= */
 export default function TrustSafetyPage() {
   const [animateCTA, setAnimateCTA] = useState(false);
 
@@ -142,36 +143,42 @@ export default function TrustSafetyPage() {
             </div>
           </Reveal>
 
-          {/* STATS */}
+          {/* STATS (INDIVIDUAL LOGIC + NAME/TITLE) */}
           <div className="grid md:grid-cols-3 gap-6 mb-20">
             {stats.map((stat) => {
               const { count, ref } = useCountUp(stat.number);
 
               return (
-                <motion.div
-                  key={stat.label}
-                  ref={ref}
-                  whileHover={{ y: -4 }}
-                  className="
-                    bg-white 
-                    dark:bg-[#0a0d16] 
-                    rounded-2xl 
-                    p-6 
-                    border 
-                    border-gray-200 
-                    dark:border-gray-800 
-                    shadow-md
-                    text-center
-                  "
-                >
-                  <h2 className="text-4xl font-extrabold gradient-text">
-                    {count.toLocaleString()}
-                    {stat.label.includes("%") && "%"}
-                  </h2>
-                  <p className="text-gray-600 dark:text-gray-300 mt-2">
-                    {stat.label}
-                  </p>
-                </motion.div>
+                <Reveal key={stat.title}>
+                  <motion.div
+                    ref={ref}
+                    whileHover={{ y: -6 }}
+                    className="
+                      bg-white 
+                      dark:bg-[#0a0d16] 
+                      rounded-2xl 
+                      p-6 
+                      border 
+                      border-gray-200 
+                      dark:border-gray-800 
+                      shadow-md
+                      text-center
+                    "
+                  >
+                    <h3 className="text-lg font-semibold text-gray-600 dark:text-gray-300">
+                      {stat.title}
+                    </h3>
+
+                    <h2 className="text-4xl font-extrabold gradient-text mt-2">
+                      {count.toLocaleString()}
+                      {stat.label.includes("%") && "%"}
+                    </h2>
+
+                    <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm">
+                      {stat.label}
+                    </p>
+                  </motion.div>
+                </Reveal>
               );
             })}
           </div>
@@ -186,7 +193,7 @@ export default function TrustSafetyPage() {
               {securityFeatures.map((feature) => (
                 <Reveal key={feature.title}>
                   <motion.div
-                    whileHover={{ y: -4 }}
+                    whileHover={{ y: -6 }}
                     className="
                       bg-white 
                       dark:bg-[#0a0d16] 
@@ -225,7 +232,7 @@ export default function TrustSafetyPage() {
             <FAQ faqs={faqs} />
           </div>
 
-          {/* FINAL CTA */}
+          {/* FINAL CTA (INDIVIDUAL LOGIC) */}
           <div className="text-center">
             <Reveal>
               <h2 className="text-3xl font-bold mb-6">
