@@ -7,15 +7,11 @@ import Reveal from "@/components/animations/Reveal";
 import TypingText from "@/components/typing/TypingText";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import FAQ from "@/components/faq/FAQ";
-import { Lock, Star, Trophy, Gift, ShieldCheck } from "lucide-react";
+import { Lock, Trophy, Gift, ShieldCheck } from "lucide-react";
 
 /* ================= POINT RULE ================= */
 /*
-   1000 points = $1 reward
-   Example:
-   - 1000 points -> $1
-   - 5000 points -> $5
-   - 10000 points -> $10
+   1000 points = $1 reward value
 */
 
 type LoyaltyTier = {
@@ -39,13 +35,21 @@ const tiers: LoyaltyTier[] = [
   { id: 9, name: "Ultimate", pointsRequired: 500000, reward: "$500.00 Reward", color: "#8B5CF6" },
 ];
 
+/* ================= TESTIMONIALS ================= */
+const testimonials = [
+  { name: "Alex", text: "Loyalty program rewards are amazing. I love earning points!" },
+  { name: "Sarah", text: "1000 points = $1 makes rewards clear and valuable." },
+  { name: "John", text: "Tiers are exciting. I can see my progress and earnings." },
+  { name: "Emma", text: "Cashog loyalty program is simple and rewarding." },
+  { name: "Michael", text: "I unlocked a tier and received rewards instantly!" },
+];
+
 /* ================= FAQ ================= */
 const faqs = [
   { q: "How does point conversion work?", a: "1000 points equals $1 reward value." },
   { q: "Is the loyalty program free?", a: "Yes. Joining and earning points is free." },
   { q: "How do I earn points?", a: "Complete tasks and activities to earn points." },
   { q: "What rewards can I claim?", a: "Cash rewards and premium benefits." },
-  { q: "How fast are rewards?", a: "Rewards are processed instantly or quickly." },
   { q: "Do points expire?", a: "No. Points remain active on your account." },
 ];
 
@@ -54,7 +58,7 @@ export default function LoyaltyPage() {
     <>
       <SeoEngine
         title="Loyalty Program | Cashog"
-        description="Join Cashog’s loyalty program, earn points, unlock tiers, and claim premium rewards instantly."
+        description="Join Cashog loyalty, earn points, unlock tiers, and claim rewards."
       />
 
       <main className="relative min-h-screen text-gray-900 dark:text-white">
@@ -72,7 +76,7 @@ export default function LoyaltyPage() {
             </div>
 
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto">
-              Earn points, unlock rewards, and maximize earnings.
+              Earn points and unlock premium rewards.
               1000 points = $1 reward value.
             </p>
 
@@ -89,7 +93,7 @@ export default function LoyaltyPage() {
               Loyalty Tiers & Rewards
             </h2>
             <p className="text-center text-gray-600 dark:text-gray-300 mb-14">
-              Unlock tiers and earn premium rewards
+              Unlock premium tiers and rewards
             </p>
           </Reveal>
 
@@ -104,6 +108,7 @@ export default function LoyaltyPage() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.15 }}
               >
+                {/* PREMIUM LOCK ICON */}
                 <div
                   className="w-16 h-16 flex items-center justify-center rounded-full mb-4 mx-auto shadow-lg"
                   style={{ backgroundColor: tier.color }}
@@ -123,8 +128,39 @@ export default function LoyaltyPage() {
                   whileTap={{ scale: 0.97 }}
                   className="mt-6 inline-flex w-full justify-center items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-4 py-3 rounded-xl font-semibold shadow"
                 >
-                  Activate Tier <Gift size={18} />
+                  Unlock Access <Gift size={18} />
                 </motion.a>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* ================= TESTIMONIALS ================= */}
+        <section className="relative z-10 max-w-6xl mx-auto px-6 py-24">
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              What Users Say
+            </h2>
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-14">
+              Real feedback from our community
+            </p>
+          </Reveal>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {testimonials.map((item, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ y: -4 }}
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 shadow-md border border-gray-200 dark:border-gray-800"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.15 }}
+              >
+                <p className="text-gray-600 dark:text-gray-300 italic">
+                  “{item.text}”
+                </p>
+                <h3 className="mt-4 font-semibold text-green-500">— {item.name}</h3>
               </motion.div>
             ))}
           </div>
@@ -144,8 +180,8 @@ export default function LoyaltyPage() {
           <div className="grid md:grid-cols-3 gap-6">
             {[
               { icon: ShieldCheck, title: "Verified Rewards", desc: "Rewards are secure and instant." },
-              { icon: Star, title: "Premium Tiers", desc: "Unlock higher rewards with each tier." },
-              { icon: Trophy, title: "Fast Redemption", desc: "Claim rewards quickly after earning points." },
+              { icon: Trophy, title: "Premium Tiers", desc: "Unlock higher rewards with each tier." },
+              { icon: Lock, title: "Secure Access", desc: "Only unlocked tiers grant rewards." },
             ].map((item, i) => (
               <motion.div
                 key={i}
@@ -188,7 +224,7 @@ export default function LoyaltyPage() {
             </h2>
 
             <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-xl mx-auto mb-10">
-              Join Cashog and unlock premium rewards with our loyalty program.
+              Join Cashog and unlock premium rewards.
             </p>
 
             <PrimaryCTA href="/signup">
