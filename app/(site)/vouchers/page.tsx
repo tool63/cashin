@@ -8,7 +8,7 @@ import Reveal from "@/components/animations/Reveal";
 import TypingText from "@/components/typing/TypingText";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import FAQ from "@/components/faq/FAQ";
-import { Gift, CheckCircle, Star, ShieldCheck } from "lucide-react";
+import { Gift, CheckCircle } from "lucide-react";
 
 /* ================= COUNT UP ================= */
 function CountUp({ end, duration = 2000 }: { end: number; duration?: number }) {
@@ -40,10 +40,11 @@ type Voucher = {
   code: string;
   reward: string;
   expiry: string;
+  popular?: boolean;
 };
 
 const vouchers: Voucher[] = [
-  { id: 1, title: "Amazon Gift Card", code: "AMZ50", reward: "$50", expiry: "Feb 28, 2026" },
+  { id: 1, title: "Amazon Gift Card", code: "AMZ50", reward: "$50", expiry: "Feb 28, 2026", popular: true },
   { id: 2, title: "Google Play Voucher", code: "GP30", reward: "$30", expiry: "Mar 15, 2026" },
   { id: 3, title: "Netflix Gift Card", code: "NFLX20", reward: "$20", expiry: "Apr 10, 2026" },
   { id: 4, title: "Steam Wallet", code: "STM25", reward: "$25", expiry: "May 12, 2026" },
@@ -54,7 +55,7 @@ const vouchers: Voucher[] = [
   { id: 9, title: "Apple Store Card", code: "APL50", reward: "$50", expiry: "Oct 25, 2026" },
 ];
 
-/* ================= TESTIMONIALS (6) ================= */
+/* ================= TESTIMONIALS ================= */
 const testimonials = [
   { name: "Alex", text: "Super fast redemption and premium vouchers!" },
   { name: "Sarah", text: "I love earning Amazon gift cards here." },
@@ -105,14 +106,14 @@ export default function VouchersPage() {
           </Reveal>
         </section>
 
-        {/* ================= STATS SECTION ================= */}
+        {/* ================= STATS ================= */}
         <section className="relative z-10 py-24 px-6 text-center">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Our Growing Community
             </h2>
             <p className="text-gray-600 dark:text-gray-400 mb-14">
-              Trusted by thousands of users worldwide
+              Trusted by thousands worldwide
             </p>
           </Reveal>
 
@@ -147,13 +148,57 @@ export default function VouchersPage() {
           </div>
         </section>
 
+        {/* ================= VOUCHERS ================= */}
+        <section className="relative z-10 py-24 px-6 max-w-7xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
+            Available Premium Vouchers
+          </h2>
+
+          <div className="grid gap-8 md:grid-cols-3">
+            {vouchers.map((voucher, i) => (
+              <motion.div
+                key={voucher.id}
+                whileHover={{ y: -6 }}
+                className={`relative bg-white dark:bg-[#0a0d16] p-8 rounded-3xl shadow-lg border flex flex-col ${
+                  voucher.popular
+                    ? "border-green-400"
+                    : "border-gray-200 dark:border-gray-800"
+                }`}
+              >
+                {voucher.popular && (
+                  <div className="absolute -top-4 right-6 bg-gradient-to-r from-yellow-400 to-green-500 text-black px-4 py-1 rounded-full text-xs font-bold shadow-lg">
+                    Most Popular
+                  </div>
+                )}
+
+                <Gift className="w-8 h-8 text-yellow-500 mb-4" />
+
+                <h3 className="text-xl font-semibold mb-2">{voucher.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-1">
+                  Code: <span className="font-bold">{voucher.code}</span>
+                </p>
+                <p className="text-green-600 font-bold mb-2">{voucher.reward}</p>
+                <p className="text-sm text-gray-500 mb-6">
+                  Expires: {voucher.expiry}
+                </p>
+
+                <motion.a
+                  href="/signup"
+                  whileHover={{ scale: 1.05 }}
+                  className="mt-auto inline-flex w-full justify-center items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-4 py-3 rounded-xl font-semibold shadow"
+                >
+                  Claim Voucher <CheckCircle size={18} />
+                </motion.a>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
         {/* ================= TESTIMONIALS ================= */}
         <section className="relative z-10 py-24 px-6">
-          <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-14">
-              What Our Users Say
-            </h2>
-          </Reveal>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-14">
+            What Our Users Say
+          </h2>
 
           <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
             {testimonials.map((item, i) => (
