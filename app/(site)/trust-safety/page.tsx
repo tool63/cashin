@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { motion } from "framer-motion";
 import SeoEngine from "@/components/seo/SeoEngine";
 import Background from "@/components/Background";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
@@ -13,80 +13,9 @@ import {
   AlertTriangle,
   Fingerprint,
   Server,
-  ChevronDown,
 } from "lucide-react";
 
-/* ================= FAQ DATA ================= */
-const faqs = [
-  {
-    q: "Is my data safe?",
-    a: "Yes. All data is encrypted and monitored 24/7 using enterprise security standards.",
-  },
-  {
-    q: "Do you share user data?",
-    a: "No. User data is never sold or shared with third parties.",
-  },
-  {
-    q: "How does fraud prevention work?",
-    a: "AI-driven monitoring detects anomalies and suspicious behavior in real time.",
-  },
-  {
-    q: "Can I delete my account?",
-    a: "Yes. You can request account deletion from your settings at any time.",
-  },
-  {
-    q: "Is two-factor authentication available?",
-    a: "Yes. MFA is available to enhance account security and prevent unauthorized access.",
-  },
-];
-
-/* ================= EXPANDABLE CARD ================= */
-function ExpandableCard({ children }: { children: React.ReactNode }) {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <motion.div
-      layout
-      onClick={() => setOpen(!open)}
-      className="cursor-pointer"
-      transition={{ layout: { duration: 0.35, type: "spring" } }}
-    >
-      <motion.div
-        layout
-        className={`relative overflow-hidden rounded-2xl transition-all duration-300 ${
-          open ? "shadow-xl" : "shadow-md"
-        }`}
-      >
-        {/* Chevron Indicator */}
-        <motion.div
-          animate={{ rotate: open ? 180 : 0 }}
-          transition={{ duration: 0.3 }}
-          className="absolute top-4 right-4 text-gray-400"
-        >
-          <ChevronDown className="w-5 h-5" />
-        </motion.div>
-
-        {children}
-
-        <AnimatePresence>
-          {open && (
-            <motion.div
-              layout
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="mt-4 text-sm text-gray-600 dark:text-gray-300 px-6 pb-6"
-            >
-              Click card again to collapse.
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.div>
-    </motion.div>
-  );
-}
-
-/* ================= SECURITY FEATURES ================= */
+// ========================== SECURITY FEATURES ===========================
 const securityFeatures = [
   {
     icon: <Lock className="h-8 w-8 text-green-600" />,
@@ -120,7 +49,7 @@ const securityFeatures = [
   },
 ];
 
-/* ================= STATS ================= */
+// ========================== STATS ===========================
 const stats = [
   {
     label: "System Uptime",
@@ -150,101 +79,93 @@ export default function TrustSafetyPage() {
       <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
 
-        <section className="relative z-10 max-w-6xl mx-auto px-4 py-20">
-          {/* HERO */}
+        {/* HERO SECTION */}
+        <section className="relative z-10 max-w-6xl mx-auto px-4 py-20 text-center">
           <Reveal>
-            <div className="text-center mb-20">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                Trust & Safety
-              </h1>
-
+            <div>
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">Trust & Safety</h1>
               <p className="text-lg text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
                 Security is at the core of everything we build. Your data is protected
                 by enterprise-grade systems and real-time monitoring.
               </p>
-
-              <PrimaryCTA href="/signup" />
-
-              <p className="mt-4 text-sm text-gray-600 dark:text-gray-300">
-                Secure platform built for modern users.
-              </p>
+              <PrimaryCTA href="/signup">Get Started</PrimaryCTA>
             </div>
           </Reveal>
+        </section>
 
-          {/* STATS SECTION */}
+        {/* SECURITY STATS */}
+        <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
           <Reveal>
             <>
-              <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-                Platform Security Metrics
-              </h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">Platform Security Metrics</h2>
               <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
                 Real-time operational performance
               </p>
             </>
           </Reveal>
 
-          <div className="grid gap-6 md:grid-cols-3 mb-24">
+          <div className="grid gap-6 md:grid-cols-3">
             {stats.map((stat) => (
               <Reveal key={stat.label}>
-                <ExpandableCard>
-                  <motion.div
-                    layout
-                    whileHover={{ y: -4 }}
-                    className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800"
-                  >
-                    <h3 className="text-sm uppercase tracking-wide text-gray-600 dark:text-gray-400">
-                      {stat.label}
-                    </h3>
-                    <div className="text-4xl font-extrabold mt-2 gradient-text">
-                      {stat.number}
-                      {stat.label.includes("Uptime") && "%"}
-                    </div>
-                    <div className="mt-4 text-sm text-gray-600 dark:text-gray-300">
-                      {stat.description}
-                    </div>
-                  </motion.div>
-                </ExpandableCard>
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md"
+                >
+                  <h3 className="text-sm uppercase tracking-wide text-gray-600 dark:text-gray-400">{stat.label}</h3>
+                  <div className="text-4xl font-extrabold mt-2 gradient-text">
+                    {stat.number}
+                    {stat.label.includes("Uptime") && "%"}
+                  </div>
+                  <p className="mt-4 text-sm text-gray-600 dark:text-gray-300">{stat.description}</p>
+                </motion.div>
               </Reveal>
             ))}
           </div>
+        </section>
 
-          {/* SECURITY FEATURES */}
+        {/* SECURITY FEATURES */}
+        <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
           <Reveal>
             <>
-              <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-                Security Features
-              </h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">Security Features</h2>
               <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
                 Enterprise-grade protection and monitoring
               </p>
             </>
           </Reveal>
 
-          <div className="grid gap-6 md:grid-cols-3 mb-24">
+          <div className="grid gap-6 md:grid-cols-3">
             {securityFeatures.map((feature) => (
               <Reveal key={feature.title}>
-                <ExpandableCard>
-                  <motion.div
-                    layout
-                    whileHover={{ y: -4 }}
-                    className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800"
-                  >
-                    <div className="flex justify-center mb-4">{feature.icon}</div>
-                    <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm">
-                      {feature.desc}
-                    </p>
-                  </motion.div>
-                </ExpandableCard>
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md"
+                >
+                  <div className="flex justify-center mb-4">{feature.icon}</div>
+                  <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">{feature.desc}</p>
+                </motion.div>
               </Reveal>
             ))}
           </div>
+        </section>
 
-          {/* FAQ SECTION */}
+        {/* FINAL CTA */}
+        <section className="relative z-10 text-center py-28">
           <Reveal>
             <>
-              <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-                Frequently Asked Questions
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
+                Secure Your Data with Cashog
               </h2>
-              <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-                Transparency and support
+              <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
+                Join Cashog today and experience our cutting-edge security systems.
+              </p>
+              <PrimaryCTA href="/signup">Join Now</PrimaryCTA>
+            </>
+          </Reveal>
+        </section>
+
+      </main>
+    </>
+  );
+}
