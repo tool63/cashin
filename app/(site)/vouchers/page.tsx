@@ -17,8 +17,10 @@ function CountUp({ end, duration = 2000 }: { end: number; duration?: number }) {
   useEffect(() => {
     let start = 0;
     const increment = end / (duration / 16);
+
     const timer = setInterval(() => {
       start += increment;
+
       if (start >= end) {
         setCount(end);
         clearInterval(timer);
@@ -88,16 +90,16 @@ export default function VouchersPage() {
         {/* ================= HERO ================= */}
         <section className="relative z-10 py-28 px-6 text-center">
           <Reveal>
-            <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
-              Claim Vouchers & Gift Cards
+            <h1 className="text-4xl md:text-6xl font-extrabold mb-6">
+              Claim <span className="gradient-text">Premium Vouchers</span>
             </h1>
 
-            <div className="text-2xl md:text-3xl font-bold gradient-text mb-6">
+            <div className="text-2xl md:text-3xl font-bold mb-6">
               <TypingText />
             </div>
 
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto">
-              Redeem premium vouchers and gift cards instantly.
+              Redeem high-value gift cards and exclusive rewards instantly.
             </p>
 
             <PrimaryCTA href="/signup">
@@ -107,55 +109,53 @@ export default function VouchersPage() {
         </section>
 
         {/* ================= STATS ================= */}
-        <section className="relative z-10 py-24 px-6 text-center">
+        <section className="relative z-10 py-24 px-6">
           <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Our Growing Community
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 mb-14">
-              Trusted by thousands worldwide
-            </p>
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-extrabold mb-4">
+                Trusted by a <span className="gradient-text">Growing Community</span>
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Thousands of users worldwide redeem premium vouchers every day.
+              </p>
+            </div>
           </Reveal>
 
-          <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-3xl font-bold text-green-500">
-                <CountUp end={50000} />+
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 mt-2">Vouchers Claimed</p>
-            </div>
-
-            <div>
-              <h3 className="text-3xl font-bold text-yellow-500">
-                <CountUp end={25000} />+
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 mt-2">Happy Users</p>
-            </div>
-
-            <div>
-              <h3 className="text-3xl font-bold text-green-500">
-                <CountUp end={100000} />+
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 mt-2">Rewards Distributed</p>
-            </div>
-
-            <div>
-              <h3 className="text-3xl font-bold text-yellow-500">
-                <CountUp end={99} />%
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 mt-2">Satisfaction Rate</p>
-            </div>
+          <div className="max-w-6xl mx-auto grid gap-8 md:grid-cols-4">
+            {[
+              { value: 50000, label: "Vouchers Claimed" },
+              { value: 25000, label: "Happy Users" },
+              { value: 100000, label: "Rewards Distributed" },
+              { value: 99, label: "Satisfaction Rate", suffix: "%" },
+            ].map((stat, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ y: -6 }}
+                className="bg-white dark:bg-[#0a0d16] p-8 rounded-3xl shadow-lg border border-gray-200 dark:border-gray-800 text-center"
+              >
+                <h3 className="text-3xl font-bold text-green-500 mb-2">
+                  <CountUp end={stat.value} />
+                  {stat.suffix ? stat.suffix : "+"}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">{stat.label}</p>
+              </motion.div>
+            ))}
           </div>
         </section>
 
         {/* ================= VOUCHERS ================= */}
         <section className="relative z-10 py-24 px-6 max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
-            Available Premium Vouchers
-          </h2>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-4">
+              Unlock <span className="gradient-text">Premium Rewards</span>
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              Choose from high-value gift cards and redeem instantly.
+            </p>
+          </div>
 
           <div className="grid gap-8 md:grid-cols-3">
-            {vouchers.map((voucher, i) => (
+            {vouchers.map((voucher) => (
               <motion.div
                 key={voucher.id}
                 whileHover={{ y: -6 }}
@@ -196,16 +196,21 @@ export default function VouchersPage() {
 
         {/* ================= TESTIMONIALS ================= */}
         <section className="relative z-10 py-24 px-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-14">
-            What Our Users Say
-          </h2>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-4">
+              Loved by <span className="gradient-text">Thousands</span>
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400">
+              Real feedback from our happy reward earners.
+            </p>
+          </div>
 
           <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
             {testimonials.map((item, i) => (
               <motion.div
                 key={i}
                 whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 shadow-md border border-gray-200 dark:border-gray-800"
+                className="bg-white dark:bg-[#0a0d16] rounded-3xl p-6 shadow-md border border-gray-200 dark:border-gray-800"
               >
                 <p className="italic text-gray-600 dark:text-gray-300">
                   “{item.text}”
@@ -220,7 +225,7 @@ export default function VouchersPage() {
 
         {/* ================= FAQ ================= */}
         <section className="relative z-10 max-w-4xl mx-auto px-6 py-20 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8">
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-8">
             Frequently Asked Questions
           </h2>
           <FAQ faqs={faqs} />
@@ -228,9 +233,17 @@ export default function VouchersPage() {
 
         {/* ================= FINAL CTA ================= */}
         <section className="relative z-10 py-28 px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Claim Your Rewards Today
-          </h2>
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
+              Start Earning & Redeem
+              <span className="gradient-text block">
+                Premium Gift Cards Today
+              </span>
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400 mb-10">
+              Join thousands of users and unlock exclusive rewards instantly.
+            </p>
+          </div>
 
           <PrimaryCTA href="/signup">
             Claim Now
