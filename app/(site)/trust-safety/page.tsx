@@ -151,7 +151,6 @@ export default function TrustSafetyPage() {
         <Background />
 
         <section className="relative z-10 max-w-6xl mx-auto px-4 py-20">
-
           {/* HERO */}
           <Reveal>
             <div className="text-center mb-20">
@@ -249,26 +248,3 @@ export default function TrustSafetyPage() {
               </h2>
               <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
                 Transparency and support
-              </p>
-            </>
-          </Reveal>
-
-          <div className="grid gap-4 max-w-3xl mx-auto mb-24">
-            {faqs.map((faq) => (
-              <ExpandableCard key={faq.q}>
-                <motion.div
-                  layout
-                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 border border-gray-200 dark:border-gray-800"
-                >
-                  <h3 className="text-lg font-semibold">{faq.q}</h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
-                    {faq.a}
-                  </p>
-                </motion.div>
-              </ExpandableCard>
-            ))}
-          </div>
-
-          {/* FINAL CTA */}
-          <Reveal>
-            <div class
