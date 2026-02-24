@@ -88,9 +88,9 @@ export default function VouchersPage() {
         <Background />
 
         {/* ================= HERO ================= */}
-        <section className="relative z-10 py-28 px-6 text-center">
+        <section className="relative z-10 py-32 px-6 text-center">
           <Reveal>
-            <h1 className="text-4xl md:text-6xl font-extrabold mb-6">
+            <h1 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
               Claim <span className="gradient-text">Premium Vouchers</span>
             </h1>
 
@@ -98,7 +98,7 @@ export default function VouchersPage() {
               <TypingText />
             </div>
 
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
               Redeem high-value gift cards and exclusive rewards instantly.
             </p>
 
@@ -109,7 +109,7 @@ export default function VouchersPage() {
         </section>
 
         {/* ================= STATS ================= */}
-        <section className="relative z-10 py-24 px-6">
+        <section className="relative z-10 py-28 px-6">
           <Reveal>
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-extrabold mb-4">
@@ -144,7 +144,7 @@ export default function VouchersPage() {
         </section>
 
         {/* ================= VOUCHERS ================= */}
-        <section className="relative z-10 py-24 px-6 max-w-7xl mx-auto">
+        <section className="relative z-10 py-28 px-6 max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-extrabold mb-4">
               Unlock <span className="gradient-text">Premium Rewards</span>
@@ -195,7 +195,7 @@ export default function VouchersPage() {
         </section>
 
         {/* ================= TESTIMONIALS ================= */}
-        <section className="relative z-10 py-24 px-6">
+        <section className="relative z-10 py-28 px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-extrabold mb-4">
               Loved by <span className="gradient-text">Thousands</span>
@@ -224,7 +224,7 @@ export default function VouchersPage() {
         </section>
 
         {/* ================= FAQ ================= */}
-        <section className="relative z-10 max-w-4xl mx-auto px-6 py-20 text-center">
+        <section className="relative z-10 max-w-4xl mx-auto px-6 py-24 text-center">
           <h2 className="text-4xl md:text-5xl font-extrabold mb-8">
             Frequently Asked Questions
           </h2>
@@ -232,32 +232,34 @@ export default function VouchersPage() {
         </section>
 
         {/* ================= FINAL CTA ================= */}
-<section className="relative z-10 py-36 px-6 text-center overflow-hidden">
-  
-  {/* Soft Background Glow */}
-  <div className="absolute inset-0 -z-10 flex justify-center">
-    <div className="w-[600px] h-[600px] bg-gradient-to-r from-yellow-400/20 via-green-400/20 to-green-500/20 blur-3xl rounded-full" />
-  </div>
+        <section className="relative z-10 py-36 px-6 text-center overflow-hidden">
 
-  <Reveal>
-    <div className="max-w-4xl mx-auto">
-      
-      <h2 className="text-4xl md:text-6xl font-extrabold leading-tight mb-8">
-        Start Earning & Redeem
-        <span className="gradient-text block mt-3">
-          Premium Gift Cards Today
-        </span>
-      </h2>
+          {/* Background Glow */}
+          <div className="absolute inset-0 -z-10 flex justify-center">
+            <div className="w-[600px] h-[600px] bg-gradient-to-r from-yellow-400/20 via-green-400/20 to-green-500/20 blur-3xl rounded-full" />
+          </div>
 
-      <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
-        Join thousands of users earning rewards daily. 
-        Unlock exclusive vouchers and claim your premium gift cards instantly.
-      </p>
+          <Reveal>
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-4xl md:text-6xl font-extrabold leading-tight mb-8">
+                Start Earning & Redeem
+                <span className="gradient-text block mt-3">
+                  Premium Gift Cards Today
+                </span>
+              </h2>
 
-      <PrimaryCTA href="/signup">
-        Get Started Now
-      </PrimaryCTA>
+              <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+                Join thousands of users earning rewards daily.
+                Unlock exclusive vouchers and claim your premium gift cards instantly.
+              </p>
 
-    </div>
-  </Reveal>
-</section>
+              <PrimaryCTA href="/signup">
+                Get Started Now
+              </PrimaryCTA>
+            </div>
+          </Reveal>
+        </section>
+      </main>
+    </>
+  );
+}
