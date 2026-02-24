@@ -7,7 +7,16 @@ import Reveal from "@/components/animations/Reveal";
 import TypingText from "@/components/typing/TypingText";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import FAQ from "@/components/faq/FAQ";
-import { Star, Trophy, Gift, ShieldCheck } from "lucide-react";
+import { Lock, Star, Trophy, Gift, ShieldCheck } from "lucide-react";
+
+/* ================= POINT RULE ================= */
+/*
+   1000 points = $1 reward
+   Example:
+   - 1000 points -> $1
+   - 5000 points -> $5
+   - 10000 points -> $10
+*/
 
 type LoyaltyTier = {
   id: number;
@@ -19,25 +28,25 @@ type LoyaltyTier = {
 
 /* ================= 9 LOYALTY OFFERS ================= */
 const tiers: LoyaltyTier[] = [
-  { id: 1, name: "Bronze", pointsRequired: 100, reward: "$5 Reward", color: "#FACC15" },
-  { id: 2, name: "Silver", pointsRequired: 500, reward: "$25 Reward", color: "#9CA3AF" },
-  { id: 3, name: "Gold", pointsRequired: 1000, reward: "$60 Reward", color: "#FBBF24" },
-  { id: 4, name: "Platinum", pointsRequired: 2000, reward: "$150 Reward", color: "#60A5FA" },
-  { id: 5, name: "Diamond", pointsRequired: 5000, reward: "$500 Reward", color: "#A78BFA" },
-  { id: 6, name: "Elite", pointsRequired: 8000, reward: "$750 Reward", color: "#F97316" },
-  { id: 7, name: "Master", pointsRequired: 12000, reward: "$1000 Reward", color: "#22C55E" },
-  { id: 8, name: "Legend", pointsRequired: 20000, reward: "$2500 Reward", color: "#EC4899" },
-  { id: 9, name: "Ultimate", pointsRequired: 50000, reward: "$5000 Reward", color: "#8B5CF6" },
+  { id: 1, name: "Bronze", pointsRequired: 100, reward: "$0.10 Reward", color: "#FACC15" },
+  { id: 2, name: "Silver", pointsRequired: 500, reward: "$0.50 Reward", color: "#9CA3AF" },
+  { id: 3, name: "Gold", pointsRequired: 1000, reward: "$1.00 Reward", color: "#FBBF24" },
+  { id: 4, name: "Platinum", pointsRequired: 5000, reward: "$5.00 Reward", color: "#60A5FA" },
+  { id: 5, name: "Diamond", pointsRequired: 10000, reward: "$10.00 Reward", color: "#A78BFA" },
+  { id: 6, name: "Elite", pointsRequired: 20000, reward: "$20.00 Reward", color: "#F97316" },
+  { id: 7, name: "Master", pointsRequired: 50000, reward: "$50.00 Reward", color: "#22C55E" },
+  { id: 8, name: "Legend", pointsRequired: 100000, reward: "$100.00 Reward", color: "#EC4899" },
+  { id: 9, name: "Ultimate", pointsRequired: 500000, reward: "$500.00 Reward", color: "#8B5CF6" },
 ];
 
-/* ================= FAQ (5-7 QUESTIONS) ================= */
+/* ================= FAQ ================= */
 const faqs = [
-  { q: "Is the loyalty program free?", a: "Yes. Joining and earning points is completely free." },
-  { q: "How do I earn points?", a: "You earn points by completing tasks and activities." },
-  { q: "What rewards can I claim?", a: "You can claim cash rewards and premium benefits." },
-  { q: "How fast are rewards?", a: "Rewards are processed instantly or within a short time." },
-  { q: "Do points expire?", a: "No. Your points remain active as long as your account exists." },
-  { q: "Can I upgrade tiers?", a: "Yes. Earn more points to unlock higher tiers." },
+  { q: "How does point conversion work?", a: "1000 points equals $1 reward value." },
+  { q: "Is the loyalty program free?", a: "Yes. Joining and earning points is free." },
+  { q: "How do I earn points?", a: "Complete tasks and activities to earn points." },
+  { q: "What rewards can I claim?", a: "Cash rewards and premium benefits." },
+  { q: "How fast are rewards?", a: "Rewards are processed instantly or quickly." },
+  { q: "Do points expire?", a: "No. Points remain active on your account." },
 ];
 
 export default function LoyaltyPage() {
@@ -63,17 +72,17 @@ export default function LoyaltyPage() {
             </div>
 
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto">
-              Earn points, unlock loyalty tiers, and claim premium rewards instantly.
-              Join now and maximize your earnings!
+              Earn points, unlock rewards, and maximize earnings.
+              1000 points = $1 reward value.
             </p>
 
             <PrimaryCTA href="/signup">
-              Join Loyalty Program <Trophy size={20} />
+              Join Loyalty Program
             </PrimaryCTA>
           </Reveal>
         </section>
 
-        {/* ================= LOYALTY TIERS (9 OFFERS) ================= */}
+        {/* ================= LOYALTY TIERS ================= */}
         <section className="relative z-10 py-24 px-6 max-w-7xl mx-auto">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
@@ -99,7 +108,7 @@ export default function LoyaltyPage() {
                   className="w-16 h-16 flex items-center justify-center rounded-full mb-4 mx-auto shadow-lg"
                   style={{ backgroundColor: tier.color }}
                 >
-                  <Star className="w-8 h-8 text-white" />
+                  <Lock className="w-8 h-8 text-white" />
                 </div>
 
                 <h3 className="text-xl font-semibold mb-2 text-center">{tier.name}</h3>
@@ -114,7 +123,7 @@ export default function LoyaltyPage() {
                   whileTap={{ scale: 0.97 }}
                   className="mt-6 inline-flex w-full justify-center items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-4 py-3 rounded-xl font-semibold shadow"
                 >
-                  Unlock Tier <Gift size={18} />
+                  Activate Tier <Gift size={18} />
                 </motion.a>
               </motion.div>
             ))}
@@ -134,7 +143,7 @@ export default function LoyaltyPage() {
 
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { icon: ShieldCheck, title: "Verified Rewards", desc: "All rewards are secure and instant." },
+              { icon: ShieldCheck, title: "Verified Rewards", desc: "Rewards are secure and instant." },
               { icon: Star, title: "Premium Tiers", desc: "Unlock higher rewards with each tier." },
               { icon: Trophy, title: "Fast Redemption", desc: "Claim rewards quickly after earning points." },
             ].map((item, i) => (
@@ -164,7 +173,7 @@ export default function LoyaltyPage() {
               Frequently Asked Questions
             </h2>
             <p className="text-base text-gray-600 dark:text-gray-300 mb-8">
-              Everything you need to know about loyalty rewards
+              Everything about loyalty rewards
             </p>
           </Reveal>
 
