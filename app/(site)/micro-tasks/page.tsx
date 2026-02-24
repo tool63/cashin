@@ -95,7 +95,7 @@ const faqs = [
   },
   {
     q: "Is there a minimum payout threshold?",
-    a: "Yes, you can withdraw once you reach the minimum balance required for your selected payout method.",
+    a: "Yes, you can withdraw once you reach the minimum balance required for your payout method.",
   },
   {
     q: "Can I complete tasks from mobile?",
@@ -117,7 +117,7 @@ export default function MicroTasksPage() {
     <>
       <SeoEngine
         title="Micro Tasks | Cashog"
-        description="Complete micro-tasks on Cashog and earn instant rewards. Simple jobs, fast payouts, premium earning experience."
+        description="Complete micro-tasks on Cashog and earn instant rewards."
       />
 
       <main className="relative min-h-screen text-gray-900 dark:text-white">
@@ -135,7 +135,7 @@ export default function MicroTasksPage() {
             </div>
 
             <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
-              Simple tasks. Fast completion. Instant rewards. Experience premium micro-earning with Cashog.
+              Simple tasks. Fast completion. Instant rewards.
             </p>
 
             <PrimaryCTA href="/signup">
@@ -147,57 +147,60 @@ export default function MicroTasksPage() {
         {/* TASK GRID */}
         <section className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
           <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              Available Micro-Tasks
-            </h2>
-            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-              Complete tasks and earn rewards
-            </p>
+            <>
+              <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+                Available Micro-Tasks
+              </h2>
+              <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+                Complete tasks and earn rewards
+              </p>
+            </>
           </Reveal>
 
           <div className="grid gap-6 md:grid-cols-3">
             {tasks.map((task) => (
-              <motion.div
-                key={task.id}
-                whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md flex flex-col"
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <ClipboardList className="w-6 h-6 text-yellow-500" />
-                  <span className="text-xs px-3 py-1 rounded-full bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20">
-                    {task.difficulty}
-                  </span>
-                </div>
-
-                <h3 className="text-xl font-semibold mb-2">{task.title}</h3>
-
-                <p className="text-sm text-gray-600 dark:text-gray-300">
-                  Category: {task.category}
-                </p>
-
-                <p className="font-bold text-green-500 mt-2">
-                  Reward: {task.reward}
-                </p>
-
-                <div className="w-full bg-gray-200 dark:bg-zinc-700 h-2 rounded-full mt-4">
-                  <div
-                    className="bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 h-2 rounded-full"
-                    style={{ width: `${task.completionRate}%` }}
-                  />
-                </div>
-
-                <p className="text-xs text-gray-500 mt-1">
-                  {task.completionRate}% Completion Rate
-                </p>
-
-                <motion.a
-                  href="/signup"
-                  whileHover={{ scale: 1.05 }}
-                  className="mt-6 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-yellow-400 to-green-400 text-black px-4 py-3 rounded-xl font-semibold shadow"
+              <Reveal key={task.id}>
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md flex flex-col"
                 >
-                  Complete Task <CheckCircle size={18} />
-                </motion.a>
-              </motion.div>
+                  <div className="flex items-center justify-between mb-4">
+                    <ClipboardList className="w-6 h-6 text-yellow-500" />
+                    <span className="text-xs px-3 py-1 rounded-full bg-green-500/10 text-green-600 border border-green-500/20">
+                      {task.difficulty}
+                    </span>
+                  </div>
+
+                  <h3 className="text-xl font-semibold mb-2">{task.title}</h3>
+
+                  <p className="text-sm text-gray-600 dark:text-gray-300">
+                    Category: {task.category}
+                  </p>
+
+                  <p className="font-bold text-green-500 mt-2">
+                    Reward: {task.reward}
+                  </p>
+
+                  <div className="w-full bg-gray-200 dark:bg-zinc-700 h-2 rounded-full mt-4">
+                    <div
+                      className="bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 h-2 rounded-full"
+                      style={{ width: `${task.completionRate}%` }}
+                    />
+                  </div>
+
+                  <p className="text-xs text-gray-500 mt-1">
+                    {task.completionRate}% Completion Rate
+                  </p>
+
+                  <motion.a
+                    href="/signup"
+                    whileHover={{ scale: 1.05 }}
+                    className="mt-6 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-yellow-400 to-green-400 text-black px-4 py-3 rounded-xl font-semibold shadow"
+                  >
+                    Complete Task <CheckCircle size={18} />
+                  </motion.a>
+                </motion.div>
+              </Reveal>
             ))}
           </div>
         </section>
@@ -205,31 +208,34 @@ export default function MicroTasksPage() {
         {/* STATS */}
         <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
           <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              Micro-Task Platform Stats
-            </h2>
-            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-              Real numbers from our growing community
-            </p>
+            <>
+              <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+                Micro-Task Platform Stats
+              </h2>
+              <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+                Real numbers from our growing community
+              </p>
+            </>
           </Reveal>
 
           <div className="grid gap-6 md:grid-cols-3">
             {stats.map((stat) => (
-              <motion.div
-                key={stat.label}
-                whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
-              >
-                <div className="flex justify-center mb-2">{stat.icon}</div>
+              <Reveal key={stat.label}>
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md"
+                >
+                  <div className="flex justify-center mb-2">{stat.icon}</div>
 
-                <h3 className="text-3xl font-extrabold text-green-500">
-                  <CountUp end={stat.number} />
-                </h3>
+                  <h3 className="text-3xl font-extrabold text-green-500">
+                    <CountUp end={stat.number} />
+                  </h3>
 
-                <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">
-                  {stat.label}
-                </p>
-              </motion.div>
+                  <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">
+                    {stat.label}
+                  </p>
+                </motion.div>
+              </Reveal>
             ))}
           </div>
         </section>
@@ -237,12 +243,14 @@ export default function MicroTasksPage() {
         {/* HOW IT WORKS */}
         <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
           <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              How Micro-Tasks Work
-            </h2>
-            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-              Start earning in three simple steps
-            </p>
+            <>
+              <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+                How Micro-Tasks Work
+              </h2>
+              <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+                Start earning in three simple steps
+              </p>
+            </>
           </Reveal>
 
           <div className="grid gap-6 md:grid-cols-3">
@@ -251,20 +259,21 @@ export default function MicroTasksPage() {
               { icon: Star, title: "Complete Tasks", desc: "Finish jobs quickly with simple instructions." },
               { icon: Gift, title: "Earn Rewards", desc: "Get instant payouts via cash or gift cards." },
             ].map((item) => (
-              <motion.div
-                key={item.title}
-                whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
-              >
-                <div className="flex justify-center mb-4">
-                  <item.icon className="w-8 h-8 text-yellow-400" />
-                </div>
+              <Reveal key={item.title}>
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md"
+                >
+                  <div className="flex justify-center mb-4">
+                    <item.icon className="w-8 h-8 text-yellow-400" />
+                  </div>
 
-                <h3 className="text-lg font-semibold">{item.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
-                  {item.desc}
-                </p>
-              </motion.div>
+                  <h3 className="text-lg font-semibold">{item.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
+                    {item.desc}
+                  </p>
+                </motion.div>
+              </Reveal>
             ))}
           </div>
         </section>
@@ -272,12 +281,14 @@ export default function MicroTasksPage() {
         {/* FAQ */}
         <section className="relative z-10 max-w-6xl mx-auto px-4 pb-24">
           <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-              Everything you need to know about micro-tasks
-            </p>
+            <>
+              <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+                Everything you need to know about micro-tasks
+              </p>
+            </>
           </Reveal>
 
           <FAQ faqs={faqs} />
@@ -290,7 +301,7 @@ export default function MicroTasksPage() {
               Turn Micro-Tasks Into Real Rewards
             </h2>
 
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed mb-10">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed mb-10">
               Join Cashog today and start earning with every task you complete.
             </p>
 
