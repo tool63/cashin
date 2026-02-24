@@ -7,7 +7,6 @@ import Background from "@/components/Background";
 import Reveal from "@/components/animations/Reveal";
 import TypingText from "@/components/typing/TypingText";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
-import FAQ from "@/components/faq/FAQ";
 import { MessageSquare, CheckCircle, Star } from "lucide-react";
 
 /* ================= COUNT UP ================= */
