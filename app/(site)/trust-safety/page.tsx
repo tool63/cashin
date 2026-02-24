@@ -88,7 +88,7 @@ export default function TrustSafetyPage() {
                 Security is at the core of everything we build. Your data is protected
                 by enterprise-grade systems and real-time monitoring.
               </p>
-              <PrimaryCTA href="/signup">Get Started</PrimaryCTA>
+              <PrimaryCTA href="/signup">Start Earning Now</PrimaryCTA>
             </div>
           </Reveal>
         </section>
@@ -160,7 +160,7 @@ export default function TrustSafetyPage() {
               <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
                 Join Cashog today and experience our cutting-edge security systems.
               </p>
-              <PrimaryCTA href="/signup">Join Now</PrimaryCTA>
+              <PrimaryCTA href="/signup">Start Earning Now</PrimaryCTA>
             </>
           </Reveal>
         </section>
