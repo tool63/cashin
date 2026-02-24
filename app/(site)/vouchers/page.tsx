@@ -182,14 +182,11 @@ export default function VouchersPage() {
                   key={voucher.id}
                   variants={item}
                   whileHover={{ y: -6 }}
-                  className={`bg-white dark:bg-[#0a0d16] p-8 rounded-3xl shadow-lg border flex flex-col ${
-                    voucher.popular
-                      ? "border-green-400"
-                      : "border-gray-200 dark:border-gray-800"
-                  }`}
+                  className="bg-white dark:bg-[#0a0d16] p-8 rounded-3xl shadow-lg border flex flex-col"
                 >
+                  {/* Most Popular badge inside card (top area) */}
                   {voucher.popular && (
-                    <div className="absolute -top-4 right-6 bg-gradient-to-r from-yellow-400 to-green-500 text-black px-4 py-1 rounded-full text-xs font-bold shadow-lg">
+                    <div className="self-start mb-4 bg-gradient-to-r from-yellow-400 to-green-500 text-black px-4 py-1 rounded-full text-xs font-bold shadow">
                       Most Popular
                     </div>
                   )}
@@ -222,9 +219,12 @@ export default function VouchersPage() {
         <section className="relative z-10 py-28 px-6">
           <Reveal>
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-extrabold">
+              <h2 className="text-4xl md:text-5xl font-extrabold mb-4">
                 Loved by <span className="gradient-text">Thousands</span>
               </h2>
+              <p className="text-gray-600 dark:text-gray-400">
+                Real feedback from our happy reward earners.
+              </p>
             </div>
 
             <motion.div
