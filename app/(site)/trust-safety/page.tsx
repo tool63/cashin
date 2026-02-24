@@ -90,7 +90,7 @@ const securityFeatures = [
   },
 ];
 
-/* ================= STATS (NAME + TITLE) ================= */
+/* ================= STATS ================= */
 const stats = [
   { title: "System Uptime", number: 99.99, label: "Uptime (%)" },
   { title: "Encryption Power", number: 256, label: "Bit Strength" },
@@ -125,7 +125,7 @@ export default function TrustSafetyPage() {
 
         <section className="relative z-10 max-w-6xl mx-auto px-4 py-20">
 
-          {/* HERO (TITLE ADDED) */}
+          {/* HERO */}
           <Reveal>
             <div className="text-center mb-20">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
@@ -140,75 +140,22 @@ export default function TrustSafetyPage() {
               <PrimaryCTA href="/signup">
                 Start Earning Now
               </PrimaryCTA>
+
+              <p className="mt-4 text-sm text-gray-600 dark:text-gray-300">
+                Secure platform built for modern users.
+              </p>
             </div>
           </Reveal>
 
-          {/* STATS SECTION (NAME + TITLE) */}
-          <div className="mb-20">
-            <Reveal>
-              <div className="text-center mb-8">
-                <h2 className="text-sm uppercase tracking-widest text-gray-500">
-                  Statistics
-                </h2>
-                <h3 className="text-3xl font-bold">Platform Security Metrics</h3>
-              </div>
-            </Reveal>
+          {/* STATS */}
+          <div className="grid md:grid-cols-3 gap-6 mb-20">
+            {stats.map((stat) => {
+              const { count, ref } = useCountUp(stat.number);
 
-            <div className="grid md:grid-cols-3 gap-6">
-              {stats.map((stat) => {
-                const { count, ref } = useCountUp(stat.number);
-
-                return (
-                  <Reveal key={stat.title}>
-                    <motion.div
-                      ref={ref}
-                      whileHover={{ y: -6 }}
-                      className="
-                        bg-white 
-                        dark:bg-[#0a0d16] 
-                        rounded-2xl 
-                        p-6 
-                        border 
-                        border-gray-200 
-                        dark:border-gray-800 
-                        shadow-md
-                        text-center
-                      "
-                    >
-                      <h3 className="text-lg font-semibold text-gray-600 dark:text-gray-300">
-                        {stat.title}
-                      </h3>
-
-                      <h2 className="text-4xl font-extrabold gradient-text mt-2">
-                        {count.toLocaleString()}
-                        {stat.label.includes("%") && "%"}
-                      </h2>
-
-                      <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm">
-                        {stat.label}
-                      </p>
-                    </motion.div>
-                  </Reveal>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* SECURITY FEATURES (TITLE ADDED) */}
-          <div className="mb-24">
-            <Reveal>
-              <div className="text-center mb-10">
-                <h2 className="text-sm uppercase tracking-widest text-gray-500">
-                  Security
-                </h2>
-                <h3 className="text-3xl font-bold">Our Security Framework</h3>
-              </div>
-            </Reveal>
-
-            <div className="grid md:grid-cols-3 gap-6">
-              {securityFeatures.map((feature) => (
-                <Reveal key={feature.title}>
+              return (
+                <Reveal key={stat.title}>
                   <motion.div
+                    ref={ref}
                     whileHover={{ y: -6 }}
                     className="
                       bg-white 
@@ -222,59 +169,112 @@ export default function TrustSafetyPage() {
                       text-center
                     "
                   >
-                    <div className="mb-4 flex justify-center">
-                      {feature.icon}
-                    </div>
-                    <h3 className="text-xl font-semibold mb-2">
-                      {feature.title}
+                    <h3 className="text-lg font-semibold text-gray-600 dark:text-gray-300">
+                      {stat.title}
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm">
-                      {feature.desc}
+
+                    <h2 className="text-4xl font-extrabold gradient-text mt-2">
+                      {count.toLocaleString()}
+                      {stat.label.includes("%") && "%"}
+                    </h2>
+
+                    <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm">
+                      {stat.label}
+                    </p>
+
+                    <p className="mt-4 text-xs text-gray-500">
+                      Platform performance metrics
                     </p>
                   </motion.div>
                 </Reveal>
-              ))}
-            </div>
+              );
+            })}
           </div>
 
-          {/* FAQ (TITLE ADDED) */}
+          {/* SECURITY FEATURES */}
+          <div className="mb-24 grid md:grid-cols-3 gap-6">
+            {securityFeatures.map((feature) => (
+              <Reveal key={feature.title}>
+                <motion.div
+                  whileHover={{ y: -6 }}
+                  className="
+                    bg-white 
+                    dark:bg-[#0a0d16] 
+                    rounded-2xl 
+                    p-6 
+                    border 
+                    border-gray-200 
+                    dark:border-gray-800 
+                    shadow-md
+                    text-center
+                  "
+                >
+                  <div className="mb-4 flex justify-center">
+                    {feature.icon}
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">
+                    {feature.desc}
+                  </p>
+
+                  <p className="mt-4 text-xs text-gray-500">
+                    Security and compliance standards
+                  </p>
+                </motion.div>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* FAQ */}
           <div className="mb-24">
-            <Reveal>
-              <div className="text-center mb-6">
-                <h2 className="text-sm uppercase tracking-widest text-gray-500">
-                  Support
-                </h2>
-                <h3 className="text-3xl font-bold">
-                  Frequently Asked Questions
-                </h3>
-              </div>
-            </Reveal>
-
             <FAQ faqs={faqs} />
+
+            <p className="mt-4 text-center text-sm text-gray-600 dark:text-gray-300">
+              Frequently asked questions and support information
+            </p>
           </div>
 
-          {/* FINAL CTA (RESPONSIVE BUTTON SIZE) */}
+          {/* FINAL CTA */}
           <div className="text-center">
             <Reveal>
-              <h2 className="text-3xl font-bold mb-6">
+              <h2 className="text-3xl font-bold mb-4">
                 Ready to Take Action?
               </h2>
             </Reveal>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={animateCTA ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.5 }}
               className="flex justify-center"
             >
               <div className="max-w-xs w-full">
-                <PrimaryCTA href="/signup">
+                <PrimaryCTA
+                  href="/signup"
+                  className="
+                    inline-flex 
+                    items-center 
+                    justify-center 
+                    px-6 
+                    py-3 
+                    text-base 
+                    font-semibold 
+                    rounded-xl 
+                    shadow-lg 
+                    transition-all 
+                    duration-300 
+                    hover:shadow-xl 
+                    hover:-translate-y-0.5
+                  "
+                >
                   Start Earning in 60 Seconds
                 </PrimaryCTA>
               </div>
             </motion.div>
 
-            <p className="mt-4 text-gray-600 dark:text-gray-300">
+            <p className="mt-4 text-sm text-gray-600 dark:text-gray-300">
               Join our community and start earning daily rewards.
             </p>
           </div>
