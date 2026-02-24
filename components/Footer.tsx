@@ -37,7 +37,6 @@ const t = (key: string) => {
       microTasks: "Micro Tasks",
       freeTrials: "Free Trials",
       testProducts: "Test Products",
-      casinooffers: "Casino Offers",
       readEmails: "Read Emails",
       visitWebsites: "Visit Websites",
       reviewTasks: "Review Tasks",
@@ -243,7 +242,6 @@ export default function Footer() {
             <A href="/micro-tasks">{links.microTasks}</A>
             <A href="/complete-free-trials">{links.freeTrials}</A>
             <A href="/test-products">{links.testProducts}</A>
-            <A href="/casino-offers">{links.casinooffers}</A>
             <A href="/read-emails">{links.readEmails}</A>
             <A href="/visit-websites">{links.visitWebsites}</A>
             <A href="/review-tasks">{links.reviewTasks}</A>
