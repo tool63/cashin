@@ -20,6 +20,7 @@ function CountUp({ end, duration = 2000 }: { end: number; duration?: number }) {
 
     const timer = setInterval(() => {
       start += increment;
+
       if (start >= end) {
         setCount(end);
         clearInterval(timer);
@@ -34,7 +35,7 @@ function CountUp({ end, duration = 2000 }: { end: number; duration?: number }) {
   return <span>{count.toLocaleString()}</span>;
 }
 
-/* ================= STAGGER VARIANTS ================= */
+/* ================= STAGGER ANIMATION ================= */
 const container = {
   hidden: {},
   show: {
@@ -153,9 +154,13 @@ export default function VouchersPage() {
         <section className="relative z-10 py-28 px-6 max-w-7xl mx-auto">
           <Reveal>
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-extrabold">
+              <h2 className="text-4xl md:text-5xl font-extrabold mb-4">
                 Unlock <span className="gradient-text">Premium Rewards</span>
               </h2>
+
+              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Choose from high-value gift cards and redeem instantly.
+              </p>
             </div>
 
             <motion.div
@@ -170,18 +175,36 @@ export default function VouchersPage() {
                   key={voucher.id}
                   variants={item}
                   whileHover={{ y: -6 }}
-                  className="bg-white dark:bg-[#0a0d16] p-8 rounded-3xl shadow-lg border border-gray-200 dark:border-gray-800"
+                  className={`bg-white dark:bg-[#0a0d16] p-8 rounded-3xl shadow-lg border flex flex-col ${
+                    voucher.popular
+                      ? "border-green-400"
+                      : "border-gray-200 dark:border-gray-800"
+                  }`}
                 >
+                  {voucher.popular && (
+                    <div className="absolute -top-4 right-6 bg-gradient-to-r from-yellow-400 to-green-500 text-black px-4 py-1 rounded-full text-xs font-bold shadow-lg">
+                      Most Popular
+                    </div>
+                  )}
+
                   <Gift className="w-8 h-8 text-yellow-500 mb-4" />
+
                   <h3 className="text-xl font-semibold mb-2">{voucher.title}</h3>
                   <p className="text-gray-600 dark:text-gray-400 mb-1">
                     Code: <span className="font-bold">{voucher.code}</span>
                   </p>
-                  <p className="text-green-600 font-bold mb-6">{voucher.reward}</p>
+                  <p className="text-green-600 font-bold mb-4">{voucher.reward}</p>
 
-                  <PrimaryCTA href="/signup">
-                    Claim Voucher
-                  </PrimaryCTA>
+                  <motion.a
+                    href="/signup"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="mt-auto inline-flex justify-center items-center gap-2
+                               bg-gradient-to-r from-yellow-400 via-green-400 to-green-500
+                               text-black px-4 py-2.5 rounded-xl font-semibold text-sm shadow"
+                  >
+                    Claim Now <CheckCircle size={16} />
+                  </motion.a>
                 </motion.div>
               ))}
             </motion.div>
@@ -220,6 +243,14 @@ export default function VouchersPage() {
               ))}
             </motion.div>
           </Reveal>
+        </section>
+
+        {/* ================= FAQ ================= */}
+        <section className="relative z-10 max-w-4xl mx-auto px-6 py-24 text-center">
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-8">
+            Frequently Asked Questions
+          </h2>
+          <FAQ faqs={faqs} />
         </section>
 
         {/* ================= FINAL CTA ================= */}
