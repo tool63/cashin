@@ -5,10 +5,10 @@ import { motion } from "framer-motion";
 import SeoEngine from "@/components/seo/SeoEngine";
 import Background from "@/components/Background";
 import Reveal from "@/components/animations/Reveal";
+import TypingText from "@/components/typing/TypingText";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
-import { Gift, RotateCcw } from "lucide-react";
 
-/* ================= WHEEL SEGMENTS ================= */
+/* ================= REWARDS ================= */
 const rewards = [
   "No Win",
   "$0.50",
@@ -21,7 +21,6 @@ const rewards = [
   "Lucky Try",
 ];
 
-/* ================= RANDOM SPIN LOGIC ================= */
 function getRandomReward() {
   return rewards[Math.floor(Math.random() * rewards.length)];
 }
@@ -52,25 +51,29 @@ export default function SpinningWheelPage() {
       <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
 
-        {/* ================= HERO ================= */}
+        {/* ================= HERO WITH TYPING TEXT ================= */}
         <section className="relative z-10 py-28 px-6 text-center">
           <Reveal>
             <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
               Spin the Wheel & Win Rewards
             </h1>
 
+            <div className="text-2xl md:text-3xl font-bold gradient-text mb-6">
+              <TypingText />
+            </div>
+
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto">
               Try your luck! Spin the wheel and win instant rewards.
-              Exciting and fair reward experience with Cashog.
+              Fair and exciting reward experience with Cashog.
             </p>
 
             <PrimaryCTA href="#wheel">
-              Start Spinning <Gift size={20} />
+              Start Spinning
             </PrimaryCTA>
           </Reveal>
         </section>
 
-        {/* ================= WHEEL SECTION ================= */}
+        {/* ================= SPIN WHEEL SECTION ================= */}
         <section id="wheel" className="relative z-10 max-w-4xl mx-auto px-6 py-24 text-center">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -82,14 +85,14 @@ export default function SpinningWheelPage() {
             </p>
           </Reveal>
 
-          {/* SPIN WHEEL VISUAL (SIMULATED) */}
+          {/* SPIN CIRCLE (NO WHEEL GRAPHIC, SHOW CASHOG) */}
           <motion.div
             className="mx-auto w-64 h-64 rounded-full border-8 border-green-400 flex items-center justify-center bg-white dark:bg-[#0a0d16] shadow-lg"
             animate={spinning ? { rotate: 360 } : {}}
             transition={spinning ? { repeat: Infinity, duration: 1 } : {}}
           >
-            <span className="text-xl font-bold text-green-500">
-              {spinning ? "Spinning..." : "Wheel"}
+            <span className="text-2xl font-bold text-green-500">
+              Cashog
             </span>
           </motion.div>
 
@@ -112,26 +115,18 @@ export default function SpinningWheelPage() {
             className="mt-10 inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-10 py-4 rounded-xl font-semibold shadow"
             disabled={spinning}
           >
-            {spinning ? (
-              <>
-                Spinning <RotateCcw className="animate-spin" size={18} />
-              </>
-            ) : (
-              <>
-                Spin Now <Gift size={18} />
-              </>
-            )}
+            {spinning ? "Spinning..." : "Spin Now"}
           </motion.button>
         </section>
 
-        {/* ================= REWARD INFO ================= */}
+        {/* ================= HOW IT WORKS ================= */}
         <section className="relative z-10 max-w-6xl mx-auto px-6 py-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               How It Works
             </h2>
             <p className="text-center text-gray-600 dark:text-gray-300 mb-14">
-              Simple, fair, and rewarding experience
+              Simple and rewarding spinning experience
             </p>
           </Reveal>
 
@@ -139,11 +134,11 @@ export default function SpinningWheelPage() {
             {[
               {
                 title: "Spin the Wheel",
-                desc: "Click spin and let the wheel decide your reward."
+                desc: "Click spin and let luck decide your reward."
               },
               {
                 title: "Win Rewards",
-                desc: "Get instant rewards based on your spin result."
+                desc: "Get instant rewards based on your result."
               },
               {
                 title: "Enjoy & Repeat",
@@ -174,11 +169,11 @@ export default function SpinningWheelPage() {
             </h2>
 
             <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-xl mx-auto mb-10">
-              Join Cashog and start winning rewards with our spinning wheel.
+              Join Cashog and start winning rewards with our spinning experience.
             </p>
 
             <PrimaryCTA href="/signup">
-              Join Now
+              Join Cashog Now
             </PrimaryCTA>
           </Reveal>
         </section>
