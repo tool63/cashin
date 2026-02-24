@@ -186,28 +186,30 @@ export default function AffiliateProgram() {
             ))}
           </div>
 
-          {/* ================= FINAL CTA ================= */}
-          <div className="py-28 text-center rounded-t-[60px] shadow-xl relative">
-            <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 gradient-text drop-shadow-lg">
-              Ready to Start Earning?
-            </h2>
-            <Link href="/signup" className="cta-observer inline-block">
-              <motion.span
-                whileHover={{ scale: 1.08 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-20 py-7 rounded-3xl font-bold shadow-3xl text-xl hover:shadow-4xl transition-all duration-300"
-              >
-                Join Now <ArrowRight size={24} />
-              </motion.span>
-            </Link>
-            <div className="mt-10 flex flex-wrap justify-center gap-6 text-sm text-gray-500 dark:text-gray-400">
-              <span className="flex items-center gap-2">✓ No experience required</span>
-              <span className="flex items-center gap-2">✓ Flexible promotion options</span>
-              <span className="flex items-center gap-2">✓ 24/7 support</span>
-            </div>
-          </div>
+          <section className="relative py-28 bg-gradient-to-b from-[#0a0d16] to-[#1a202c] text-center rounded-t-[60px] shadow-xl">
+  {/* Title */}
+  <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 gradient-text drop-shadow-lg">
+    Ready to Start Earning?
+  </h2>
 
-        </section>
+  {/* CTA Button */}
+  <Link href="/signup" className="cta-observer inline-block">
+    <motion.span
+      whileHover={{ scale: 1.08 }}
+      whileTap={{ scale: 0.97 }}
+      className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-20 py-7 rounded-3xl font-bold shadow-3xl text-xl hover:shadow-4xl transition-all duration-300"
+    >
+      Join Now <ArrowRight size={24} />
+    </motion.span>
+  </Link>
+
+  {/* Additional Information */}
+  <div className="mt-10 flex flex-wrap justify-center gap-6 text-sm text-gray-500 dark:text-gray-400">
+    <span className="flex items-center gap-2">✓ No experience required</span>
+    <span className="flex items-center gap-2">✓ Flexible promotion options</span>
+    <span className="flex items-center gap-2">✓ 24/7 support</span>
+  </div>
+</section>
       </main>
     </>
   );
