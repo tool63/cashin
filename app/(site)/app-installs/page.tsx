@@ -54,86 +54,7 @@ const apps = [
     installs: "600K+",
     description: "Securely store and manage your crypto assets.",
   },
-  {
-    id: 5,
-    name: "Music Streamer",
-    category: "Entertainment",
-    reward: "$2",
-    rating: 4.7,
-    installs: "800K+",
-    description: "Stream music and discover new artists.",
-  },
-  {
-    id: 6,
-    name: "Budget Planner",
-    category: "Finance",
-    reward: "$3",
-    rating: 4.6,
-    installs: "250K+",
-    description: "Manage your expenses and save money.",
-  },
-  {
-    id: 7,
-    name: "Daily News App",
-    category: "News",
-    reward: "$2",
-    rating: 4.5,
-    installs: "150K+",
-    description: "Stay updated with daily news and trends.",
-  },
-  {
-    id: 8,
-    name: "Gaming Hub",
-    category: "Gaming",
-    reward: "$5",
-    rating: 4.9,
-    installs: "1M+",
-    description: "Play games and earn rewards.",
-  },
-  {
-    id: 9,
-    name: "Shopping Rewards",
-    category: "Shopping",
-    reward: "$3",
-    rating: 4.8,
-    installs: "400K+",
-    description: "Earn rewards while shopping online.",
-  },
 ];
-
-/* ================= COUNT UP ================= */
-function CountUp({ end }: { end: number }) {
-  const [count, setCount] = React.useState(0);
-  const ref = React.useRef(null);
-
-  React.useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          let start = 0;
-          const duration = 2000;
-          const increment = end / (duration / 16);
-
-          const counter = setInterval(() => {
-            start += increment;
-            if (start >= end) {
-              setCount(end);
-              clearInterval(counter);
-            } else {
-              setCount(Math.floor(start));
-            }
-          }, 16);
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [end]);
-
-  return <div ref={ref}>{count.toLocaleString()}</div>;
-}
 
 /* ================= EXPANDABLE CARD ================= */
 function ExpandableCard({ children }: { children: React.ReactNode }) {
@@ -167,16 +88,19 @@ const stats = [
     label: "Total Installs",
     number: 1200000,
     icon: <Trophy className="w-6 h-6 text-yellow-400" />,
+    description: "Total successful app installs on the platform.",
   },
   {
     label: "Active Users",
     number: 350000,
     icon: <User className="w-6 h-6 text-green-400" />,
+    description: "Users actively earning rewards daily.",
   },
   {
     label: "Avg Reward",
     number: 3,
     icon: <TrendingUp className="w-6 h-6 text-blue-400" />,
+    description: "Average reward per completed task.",
   },
 ];
 
@@ -193,6 +117,7 @@ export default function AppInstallPage() {
         <Background />
 
         <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
+
           {/* HERO */}
           <Reveal>
             <div className="text-center mb-20">
@@ -212,7 +137,7 @@ export default function AppInstallPage() {
             </div>
           </Reveal>
 
-          {/* OFFERS GRID */}
+          {/* OFFERS GRID (Expandable) */}
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               Featured Offers
@@ -272,7 +197,7 @@ export default function AppInstallPage() {
             ))}
           </div>
 
-          {/* STATS */}
+          {/* STATS (Expandable) */}
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               Platform Performance
@@ -284,23 +209,28 @@ export default function AppInstallPage() {
 
           <div className="grid gap-6 md:grid-cols-3 mb-24">
             {stats.map((stat) => (
-              <motion.div
-                key={stat.label}
-                whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
-              >
-                <div className="flex justify-center mb-2">{stat.icon}</div>
-                <h3 className="text-sm uppercase tracking-wide text-gray-600 dark:text-gray-400">
-                  {stat.label}
-                </h3>
-                <div className="text-3xl font-extrabold mt-2">
-                  <CountUp end={stat.number} />
-                </div>
-              </motion.div>
+              <ExpandableCard key={stat.label}>
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
+                >
+                  <div className="flex justify-center mb-2">{stat.icon}</div>
+                  <h3 className="text-sm uppercase tracking-wide text-gray-600 dark:text-gray-400">
+                    {stat.label}
+                  </h3>
+                  <div className="text-3xl font-extrabold mt-2">
+                    {stat.number.toLocaleString()}
+                  </div>
+
+                  <div className="mt-4 text-sm text-gray-600 dark:text-gray-300">
+                    {stat.description}
+                  </div>
+                </motion.div>
+              </ExpandableCard>
             ))}
           </div>
 
-          {/* HOW IT WORKS */}
+          {/* HOW IT WORKS (Expandable) */}
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               How It Works
@@ -328,19 +258,20 @@ export default function AppInstallPage() {
                 desc: "Redeem your earnings instantly.",
               },
             ].map((step) => (
-              <motion.div
-                key={step.title}
-                whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
-              >
-                <div className="flex justify-center items-center mb-4">
-                  {step.icon}
-                </div>
-                <h3 className="text-lg font-semibold">{step.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
-                  {step.desc}
-                </p>
-              </motion.div>
+              <ExpandableCard key={step.title}>
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
+                >
+                  <div className="flex justify-center items-center mb-4">
+                    {step.icon}
+                  </div>
+                  <h3 className="text-lg font-semibold">{step.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
+                    {step.desc}
+                  </p>
+                </motion.div>
+              </ExpandableCard>
             ))}
           </div>
 
@@ -356,6 +287,7 @@ export default function AppInstallPage() {
               <PrimaryCTA href="/signup">Join Now</PrimaryCTA>
             </div>
           </Reveal>
+
         </section>
       </main>
     </>
