@@ -34,7 +34,7 @@ function CountUp({ end, duration = 2000 }: { end: number; duration?: number }) {
   return <span>{count.toLocaleString()}</span>;
 }
 
-/* ================= STAGGER ANIMATION ================= */
+/* ================= ANIMATIONS ================= */
 const container = {
   hidden: {},
   show: {
@@ -53,7 +53,7 @@ const item = {
   },
 };
 
-/* ================= DATA (9 SURVEYS) ================= */
+/* ================= SURVEYS (9 CARDS) ================= */
 const surveys = [
   { id: 1, title: "Food Preferences Survey", reward: "$1.5", time: "5 min", category: "Food" },
   { id: 2, title: "Travel Experience Survey", reward: "$2.0", time: "8 min", category: "Travel" },
@@ -68,22 +68,12 @@ const surveys = [
 
 /* ================= TESTIMONIALS ================= */
 const testimonials = [
-  { name: "Alex", text: "I love sharing my opinions and earning rewards!" },
-  { name: "Sarah", text: "Quick surveys, easy rewards. Great platform." },
-  { name: "John", text: "Fantastic way to earn while answering simple surveys." },
-  { name: "Emma", text: "Survey experience is smooth and rewarding." },
-  { name: "Daniel", text: "I earn money daily with minimal effort. Highly recommend!" },
-  { name: "Olivia", text: "Simple surveys and fast payouts, couldn't ask for more." },
-];
-
-/* ================= FAQ (6 QUESTIONS) ================= */
-const faqs = [
-  { q: "How do I start earning?", a: "Sign up and complete surveys to earn rewards." },
-  { q: "How much can I earn per survey?", a: "Earnings depend on the survey, usually between $1 to $3." },
-  { q: "Is my data safe?", a: "Yes, your data is protected and used only for survey purposes." },
-  { q: "Can I redeem rewards immediately?", a: "Most surveys offer instant rewards upon completion." },
-  { q: "How often can I participate?", a: "New surveys are added regularly, so check back often." },
-  { q: "Are the rewards worth it?", a: "Yes! You can claim gift cards, cash, and other rewards." },
+  { name: "Alex", text: "I love sharing opinions and earning rewards!" },
+  { name: "Sarah", text: "Quick surveys and instant rewards. Great platform." },
+  { name: "John", text: "Simple surveys and fast payouts. Highly recommend." },
+  { name: "Emma", text: "Surveys are easy and rewards are real." },
+  { name: "Daniel", text: "I earn daily with minimal effort!" },
+  { name: "Olivia", text: "Great way to earn by answering questions." },
 ];
 
 export default function SurveyPage() {
@@ -109,12 +99,10 @@ export default function SurveyPage() {
             </div>
 
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
-              Complete quick surveys and claim your rewards.
+              Complete short surveys and earn rewards instantly.
             </p>
 
-            <PrimaryCTA href="/signup">
-              Start Earning
-            </PrimaryCTA>
+            <PrimaryCTA href="/signup">Start Earning</PrimaryCTA>
           </Reveal>
         </section>
 
@@ -123,7 +111,7 @@ export default function SurveyPage() {
           <Reveal>
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-extrabold mb-4">
-                Join a <span className="gradient-text">Thriving Community</span>
+                Growing Community of Earners
               </h2>
             </div>
 
@@ -143,7 +131,7 @@ export default function SurveyPage() {
                 <motion.div
                   key={i}
                   variants={item}
-                  className="bg-white dark:bg-[#0a0d16] p-8 rounded-3xl shadow-lg border border-gray-200 dark:border-gray-800 text-center"
+                  className="bg-white dark:bg-[#0a0d16] p-8 rounded-3xl shadow-lg border text-center"
                 >
                   <h3 className="text-3xl font-bold text-green-500 mb-2">
                     <CountUp end={stat.value} />
@@ -161,11 +149,11 @@ export default function SurveyPage() {
           <Reveal>
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-extrabold mb-4">
-                Complete Surveys and Earn <span className="gradient-text">Instant Rewards</span>
+                Complete Surveys and Earn Rewards
               </h2>
 
               <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                Choose from a variety of surveys and get paid instantly.
+                Choose from categories and get paid for your opinions.
               </p>
             </div>
 
@@ -185,11 +173,77 @@ export default function SurveyPage() {
                 >
                   <MessageSquare className="w-8 h-8 text-yellow-500 mb-4" />
 
+                  <span className="text-xs px-3 py-1 rounded-full bg-green-500/10 text-green-600 border border-green-500/20 mb-3 self-start">
+                    {survey.category}
+                  </span>
+
                   <h3 className="text-xl font-semibold mb-2">{survey.title}</h3>
                   <p className="text-gray-600 dark:text-gray-400 mb-1">
-                    Time: <span className="font-bold">{survey.time}</span>
+                    Time: {survey.time}
                   </p>
                   <p className="text-green-600 font-bold mb-4">{survey.reward}</p>
 
                   <motion.a
-                   
+                    href="/signup"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="mt-auto inline-flex items-center justify-center gap-2
+                      bg-gradient-to-r from-yellow-400 to-green-500
+                      text-black px-4 py-2.5 rounded-xl font-semibold text-sm shadow"
+                  >
+                    Start Survey <CheckCircle size={16} />
+                  </motion.a>
+                </motion.div>
+              ))}
+            </motion.div>
+          </Reveal>
+        </section>
+
+        {/* ================= TESTIMONIALS ================= */}
+        <section className="relative z-10 py-28 px-6">
+          <Reveal>
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-extrabold mb-4">
+                Loved by Earners
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400">
+                Real feedback from our community.
+              </p>
+            </div>
+
+            <motion.div
+              variants={container}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8"
+            >
+              {testimonials.map((t, i) => (
+                <motion.div
+                  key={i}
+                  variants={item}
+                  className="bg-white dark:bg-[#0a0d16] rounded-3xl p-6 shadow-md border"
+                >
+                  <Star className="w-6 h-6 text-yellow-400 mx-auto mb-2" />
+                  <p className="italic text-gray-600 dark:text-gray-300">“{t.text}”</p>
+                  <h3 className="mt-4 font-semibold text-green-500">— {t.name}</h3>
+                </motion.div>
+              ))}
+            </motion.div>
+          </Reveal>
+        </section>
+
+        {/* ================= FINAL CTA ================= */}
+        <section className="relative z-10 py-36 px-6 text-center">
+          <Reveal>
+            <h2 className="text-4xl md:text-6xl font-extrabold mb-8">
+              Start Earning Today
+            </h2>
+
+            <PrimaryCTA href="/signup">Join Now</PrimaryCTA>
+          </Reveal>
+        </section>
+      </main>
+    </>
+  );
+}
