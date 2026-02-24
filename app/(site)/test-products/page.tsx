@@ -16,28 +16,28 @@ import {
   Package,
 } from "lucide-react";
 
-/* ================= TEST PRODUCTS (9) ================= */
-const products = [
-  { id: 1, name: "VPN Access Test", category: "Security", reward: "$2", rating: 4.8 },
-  { id: 2, name: "Gaming Gift Card Test", category: "Gaming", reward: "$3", rating: 4.9 },
-  { id: 3, name: "E-Book Growth Test", category: "Business", reward: "$2", rating: 4.7 },
-  { id: 4, name: "Design Asset Test", category: "Design", reward: "$4", rating: 4.8 },
-  { id: 5, name: "Stock Photo Test", category: "Media", reward: "$2", rating: 4.6 },
-  { id: 6, name: "AI Writing Test", category: "AI Tools", reward: "$3", rating: 4.9 },
-  { id: 7, name: "SEO Tool Test", category: "Marketing", reward: "$2", rating: 4.7 },
-  { id: 8, name: "Notion Template Test", category: "Productivity", reward: "$3", rating: 4.8 },
-  { id: 9, name: "Crypto Learning Test", category: "Finance", reward: "$5", rating: 4.6 },
+/* ================= EARNING TASKS (9) ================= */
+const tasks = [
+  { id: 1, name: "Install VPN App", category: "Security", reward: "$2", rating: 4.8 },
+  { id: 2, name: "Play Mobile Game", category: "Gaming", reward: "$3", rating: 4.9 },
+  { id: 3, name: "Complete Survey", category: "Survey", reward: "$1.5", rating: 4.7 },
+  { id: 4, name: "Test Design Tool", category: "Design", reward: "$2.5", rating: 4.8 },
+  { id: 5, name: "Watch Video Ads", category: "Ads", reward: "$1", rating: 4.6 },
+  { id: 6, name: "Try AI Tool", category: "AI Tools", reward: "$3", rating: 4.9 },
+  { id: 7, name: "Sign Up Offer", category: "Offers", reward: "$4", rating: 4.7 },
+  { id: 8, name: "Complete Quiz", category: "Education", reward: "$2", rating: 4.8 },
+  { id: 9, name: "Download App", category: "Apps", reward: "$2.5", rating: 4.6 },
 ];
 
 /* ================= FAQ (7 QUESTIONS) ================= */
 const faqs = [
-  { q: "How do I earn rewards?", a: "Complete test products and tasks to earn rewards." },
-  { q: "Are test products safe?", a: "Yes. We use verified and secure test tasks." },
+  { q: "How do I earn rewards?", a: "Complete tasks and test offers to earn rewards." },
   { q: "When are rewards credited?", a: "Rewards are credited after task verification." },
   { q: "Can I withdraw earnings?", a: "Yes. After reaching minimum withdrawal limits." },
-  { q: "Do I need experience?", a: "No. Tasks are simple and beginner-friendly." },
-  { q: "Is there a limit to earnings?", a: "You can earn by completing available tasks." },
-  { q: "Can I use mobile?", a: "Yes. Our platform works on mobile and desktop." },
+  { q: "Is this free to use?", a: "Yes. You can earn without any investment." },
+  { q: "Do I need experience?", a: "No. Tasks are beginner-friendly." },
+  { q: "How fast can I earn?", a: "Earnings depend on task completion speed." },
+  { q: "Is payment secure?", a: "Yes. We use secure payment systems." },
 ];
 
 /* ================= STATS ================= */
@@ -50,8 +50,8 @@ type Stat = {
 const stats: Stat[] = [
   { label: "Active Earners", number: 180000, icon: <Users className="w-6 h-6 text-green-400" /> },
   { label: "Tasks Completed", number: 950000, icon: <TrendingUp className="w-6 h-6 text-green-400" /> },
-  { label: "Total Rewards", number: 1200000, icon: <Gift className="w-6 h-6 text-green-400" /> },
-  { label: "Test Products", number: 320, icon: <Package className="w-6 h-6 text-green-400" /> },
+  { label: "Total Rewards Paid", number: 1200000, icon: <Gift className="w-6 h-6 text-green-400" /> },
+  { label: "Available Tasks", number: 320, icon: <Package className="w-6 h-6 text-green-400" /> },
 ];
 
 /* ================= COUNT UP ================= */
@@ -105,12 +105,12 @@ const cardAnimation = {
 };
 
 /* ================= PAGE ================= */
-export default function ProductsPage() {
+export default function EarningPage() {
   return (
     <>
       <Meta
-        title="Test Products | Cashog"
-        description="Complete test products and earn rewards."
+        title="Earn Rewards | Cashog"
+        description="Complete tasks and earn real rewards."
       />
 
       <main className="relative min-h-screen text-gray-900 dark:text-white">
@@ -120,11 +120,11 @@ export default function ProductsPage() {
         <section className="relative z-10 max-w-7xl mx-auto px-4 py-20 text-center">
           <Reveal>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-              Earn Rewards by Testing Products
+              Earn Rewards by Completing Tasks
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
-              Complete test tasks and earn real rewards instantly.
+              Join thousands of users earning rewards with simple tasks.
             </p>
 
             <PrimaryCTA href="/signup">Start Earning</PrimaryCTA>
@@ -165,37 +165,37 @@ export default function ProductsPage() {
           </div>
         </section>
 
-        {/* PRODUCTS GRID */}
+        {/* TASK GRID */}
         <section className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              Test Products
+              Available Tasks
             </h2>
             <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-              Complete tasks and earn rewards
+              Complete tasks and earn rewards instantly
             </p>
           </Reveal>
 
           <div className="grid gap-6 md:grid-cols-3">
-            {products.map((product) => (
+            {tasks.map((task) => (
               <motion.div
-                key={product.id}
+                key={task.id}
                 {...cardAnimation}
                 className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 border border-gray-200 dark:border-gray-800 shadow-md flex flex-col"
               >
                 <div className="flex items-center gap-2 mb-3">
                   <ShoppingBag className="text-green-400 w-5 h-5" />
                   <span className="text-xs px-3 py-1 rounded-full bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20">
-                    {product.category}
+                    {task.category}
                   </span>
                 </div>
 
                 <h3 className="text-xl font-semibold mb-2">
-                  {product.name}
+                  {task.name}
                 </h3>
 
                 <div className="flex mb-3">
-                  {Array(Math.floor(product.rating))
+                  {Array(Math.floor(task.rating))
                     .fill(0)
                     .map((_, i) => (
                       <Star key={i} className="w-4 h-4 text-yellow-400" />
@@ -204,7 +204,7 @@ export default function ProductsPage() {
 
                 <div className="mt-auto flex items-center justify-between">
                   <span className="text-green-500 font-bold text-lg">
-                    Earn {product.reward}
+                    Earn {task.reward}
                   </span>
 
                   <motion.a
