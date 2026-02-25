@@ -128,11 +128,10 @@ import {
   Shield as ShieldIcon,
   ShieldCheck,
   ShieldAlert,
-  // Removed ShieldX as it's not exported
-  ShieldOff, // Added ShieldOff as an alternative if needed
+  ShieldOff,
   Hammer,
   Wrench,
-  Tool,
+  // Removed 'Tool' as it's not exported
   Building,
   Home,
   Factory,
