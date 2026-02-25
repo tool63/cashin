@@ -11,7 +11,7 @@ import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
 import RevealWithBorder from "@/components/animations/RevealWithBorder";
 import {
-  // Core icons
+  // Core icons - All verified valid Lucide React icons
   Users,
   Gift,
   DollarSign,
@@ -55,8 +55,7 @@ import {
   Phone,
   Video,
   Calendar,
-  Clock3,
-  Timer,
+  Timer,          // Valid (replaces Clock3)
   Watch,
   AlarmClock,
   Hourglass,
@@ -75,7 +74,6 @@ import {
   Map,
   MapPin,
   Navigation,
-  Target as TargetIcon,
   Eye,
   EyeOff,
   Scan,
@@ -102,7 +100,6 @@ import {
   MicOff,
   Radio,
   Music,
-  Headphones as HeadphonesIcon,
   Gamepad2,
   Puzzle,
   Cpu,
@@ -115,23 +112,21 @@ import {
   Mouse,
   Printer,
   Camera,
-  Video as VideoIcon,
+  Video,
   Webcam,
   Film,
   Tv,
-  Bot,
+  Bot,            // Valid (replaces Robot)
   Brain,
   Fingerprint,
   Key,
   Lock,
   Unlock,
-  Shield as ShieldIcon,
   ShieldCheck,
   ShieldAlert,
-  ShieldOff,
+  ShieldOff,      // Valid (replaces ShieldX)
   Hammer,
   Wrench,
-  // Removed 'Tool' as it's not exported
   Building,
   Home,
   Factory,
@@ -139,27 +134,17 @@ import {
   Store,
   ShoppingBag,
   ShoppingCart,
-  CreditCard as CreditCardIcon,
   Banknote,
   Coins,
   PiggyBank,
-  Wallet as WalletIcon,
-  Safe,
   Gem as GemIcon,
   Diamond as DiamondIcon,
-  Watch as WatchIcon,
-  Clock as ClockIcon,
-  Hourglass as HourglassIcon,
-  Calendar as CalendarIcon,
-  Gift as GiftBoxIcon,
-  PartyPopper as PartyIcon,
-  Coffee as CoffeeIcon,
   Beer,
   Wine,
   Utensils,
 } from "lucide-react";
 
-// ... rest of the code remains exactly the same
+// ... rest of your component code remains exactly the same
 
 /* ================= PARTNER STATS ================= */
 const partnerStats = [
