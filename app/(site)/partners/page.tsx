@@ -323,13 +323,13 @@ export default function PartnerPage() {
                 </div>
               </div>
 
-              {/* Single CTA Button - More attractive */}
+              {/* Single CTA Button - Fixed: removed className */}
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="inline-block"
               >
-                <PrimaryCTA href="/partner/apply" className="px-8 py-3 text-base">
+                <PrimaryCTA href="/partner/apply">
                   Become a Partner
                 </PrimaryCTA>
               </motion.div>
@@ -599,12 +599,13 @@ export default function PartnerPage() {
                   Join 10,000+ partners earning up to 30% revenue share
                 </p>
 
+                {/* Single CTA Button - Fixed: removed className */}
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="inline-block"
                 >
-                  <PrimaryCTA href="/partner/apply" className="px-8 py-3 text-base">
+                  <PrimaryCTA href="/partner/apply">
                     Apply Now
                   </PrimaryCTA>
                 </motion.div>
