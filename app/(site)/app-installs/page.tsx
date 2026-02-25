@@ -263,8 +263,7 @@ export default function AppInstallPage() {
               <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
                 How It Works
               </h2>
-              <p className="text-center text-gray
-                            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+              <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
                 Start earning in three simple steps
               </p>
             </>
