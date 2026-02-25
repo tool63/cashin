@@ -91,7 +91,6 @@ import {
   Shuffle,
   Play,
   Pause,
-  // Removed 'Stop' as it's not exported
   SkipBack,
   SkipForward,
   Rewind,
@@ -104,10 +103,6 @@ import {
   Radio,
   Music,
   Headphones as HeadphonesIcon,
-  Speaker,
-  SpeakerHigh,
-  SpeakerLow,
-  SpeakerNone,
   Gamepad2,
   Puzzle,
   Cpu,
