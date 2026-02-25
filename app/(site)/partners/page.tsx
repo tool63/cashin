@@ -53,9 +53,9 @@ import {
   Mail,
   MessageCircle,
   Phone,
-  Video,
+  Video,  // Keep only one Video import
   Calendar,
-  Timer,          // Valid (replaces Clock3)
+  Timer,
   Watch,
   AlarmClock,
   Hourglass,
@@ -112,11 +112,11 @@ import {
   Mouse,
   Printer,
   Camera,
-  Video,
+  // Removed duplicate Video import
   Webcam,
   Film,
   Tv,
-  Bot,            // Valid (replaces Robot)
+  Bot,
   Brain,
   Fingerprint,
   Key,
@@ -124,7 +124,7 @@ import {
   Unlock,
   ShieldCheck,
   ShieldAlert,
-  ShieldOff,      // Valid (replaces ShieldX)
+  ShieldOff,
   Hammer,
   Wrench,
   Building,
