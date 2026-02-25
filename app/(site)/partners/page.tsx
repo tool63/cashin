@@ -121,7 +121,6 @@ import {
   Tv,
   Bot,
   Brain,
-  // Removed 'Circuit' and 'Microchip' as they're not exported
   Fingerprint,
   Key,
   Lock,
@@ -129,7 +128,8 @@ import {
   Shield as ShieldIcon,
   ShieldCheck,
   ShieldAlert,
-  ShieldX,
+  // Removed ShieldX as it's not exported
+  ShieldOff, // Added ShieldOff as an alternative if needed
   Hammer,
   Wrench,
   Tool,
