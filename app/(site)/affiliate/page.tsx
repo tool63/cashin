@@ -7,6 +7,7 @@ import TypingText from "@/components/typing/TypingText";
 import Background from "@/components/Background";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
+import RevealWithBorder from "@/components/animations/RevealWithBorder";
 import FAQ from "@/components/faq/FAQ";
 import {
   Users,
@@ -18,30 +19,7 @@ import {
   Target,
   Zap,
   CheckCircle,
-  Copy,
-  ExternalLink,
-  ChevronDown,
-  ClipboardList,
-  Gamepad2,
-  Film,
-  LayoutGrid,
-  Eye,
-  Sparkles,
-  FlaskConical,
-  Mail,
-  MousePointerClick,
-  FileText,
-  Award,
-  Ticket,
-  Hammer,
-  CheckSquare,
-  Timer,
-  Puzzle,
-  PenTool,
-  Monitor,
-  Smartphone,
   Globe,
-  TrendingUp,
   Shield,
   Clock,
   Wallet,
@@ -49,82 +27,148 @@ import {
   Rocket,
   Crown,
   Infinity,
-  Key,
-  Layers,
-  Lightbulb,
-  Link,
-  Lock,
-  Map,
-  Music,
-  Package,
-  Phone,
+  Briefcase,
+  Building2,
+  Award,
+  Gem,
+  Diamond,
+  Medal,
+  TrendingUp,
+  Heart,
+  Network,
+  Sparkles,
+  PartyPopper,
+  CreditCard,
   PieChart,
-  PiggyBank,
-  Plane,
-  Play,
-  Power,
-  RefreshCw,
-  Repeat,
-  Rewind,
-  RotateCcw,
-  Save,
+  LineChart,
+  ArrowUpRight,
+  ArrowDownRight,
+  Percent,
+  BadgeCheck,
+  Verified,
+  ThumbsUp,
+  Headphones,
+  Mail,
+  MessageCircle,
+  Phone,
+  Video,
+  Calendar,
+  Timer,
+  Watch,
+  AlarmClock,
+  Hourglass,
+  Coffee,
+  Moon,
+  Sun,
+  Cloud,
+  CloudSun,
+  CloudRain,
+  CloudSnow,
+  CloudLightning,
+  CloudFog,
+  Cloudy,
+  Wind,
+  Compass,
+  Map,
+  MapPin,
+  Navigation,
+  Eye,
+  EyeOff,
   Scan,
   Search,
-  Send,
-  Server,
-  Settings,
-  Share,
-  ShoppingBag,
+  ZoomIn,
+  ZoomOut,
+  Maximize2,
+  Minimize2,
+  Move,
+  RotateCw,
+  RotateCcw,
+  Repeat,
   Shuffle,
+  Play,
+  Pause,
   SkipBack,
   SkipForward,
-  Sliders,
-  SmartphoneCharging,
-  Smile,
-  Speaker,
-  Square,
-  Sun,
-  SwitchCamera,
-  Table,
-  Tag,
-  Terminal,
-  Thermometer,
-  Trash,
-  Trello,
-  Truck,
-  Tv,
-  Umbrella,
-  Underline,
-  Undo,
-  Unlink,
-  Unlock,
-  Upload,
-  Usb,
-  UserCheck,
-  UserMinus,
-  UserPlus,
-  UserX,
-  Verified,
-  Vibrate,
-  Video,
-  Voicemail,
+  Rewind,
+  FastForward,
   Volume1,
   Volume2,
   VolumeX,
-  Wand,
-  Watch,
-  Waves,
+  Mic,
+  MicOff,
+  Radio,
+  Music,
+  Gamepad2,
+  Puzzle,
+  Cpu,
+  HardDrive,
+  Monitor,
+  Smartphone,
+  Tablet,
+  Laptop,
+  Keyboard,
+  Mouse,
+  Printer,
+  Camera,
   Webcam,
-  Wifi,
-  Wind,
-  X,
-  XCircle,
-  XOctagon,
-  XSquare,
-  Youtube,
-  ZoomIn,
-  ZoomOut,
+  Film,
+  Tv,
+  Bot,
+  Brain,
+  Fingerprint,
+  Key,
+  Lock,
+  Unlock,
+  ShieldCheck,
+  ShieldAlert,
+  ShieldOff,
+  Hammer,
+  Wrench,
+  Building,
+  Home,
+  Factory,
+  Warehouse,
+  Store,
+  ShoppingBag,
+  ShoppingCart,
+  Banknote,
+  Coins,
+  PiggyBank,
+  Beer,
+  Wine,
+  Utensils,
 } from "lucide-react";
+
+/* ================= CUSTOM ICONS ================= */
+const Code = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+  </svg>
+);
+
+const Code2 = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+  </svg>
+);
+
+const FileText = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+  </svg>
+);
+
+const Package = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+  </svg>
+);
+
+const Terminal = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+  </svg>
+);
 
 /* ================= AFFILIATE STATS ================= */
 const affiliateStats = [
@@ -321,413 +365,402 @@ export default function AffiliatePage() {
 
         <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
 
-          {/* HERO SECTION - UNCHANGED */}
-          <Reveal>
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              className="relative overflow-hidden rounded-3xl mb-20"
-            >
-              {/* Animated Background */}
+          {/* HERO SECTION */}
+          <RevealWithBorder 
+            gradientFrom="from-yellow-400"
+            gradientVia="via-yellow-400" 
+            gradientTo="to-green-400"
+            borderColor="border-yellow-400/20"
+            floatingElements={true}
+            rotatingCircle={true}
+          >
+            <div className="text-center py-12">
               <motion.div
-                animate={{ 
-                  scale: [1, 1.2, 1],
-                  rotate: [0, 90, 180],
-                }}
-                transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-yellow-400 to-green-400 opacity-90"
-              />
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-yellow-400/10 to-green-400/10 rounded-full border border-yellow-400/20 backdrop-blur-sm mb-6"
+              >
+                <Crown className="w-5 h-5 text-yellow-400" />
+                <span className="text-sm font-semibold bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">The #1 Affiliate Program</span>
+                <Crown className="w-5 h-5 text-green-400" />
+              </motion.div>
               
-              {/* Content */}
-              <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-3xl p-16 m-1">
-                {/* Floating Elements */}
-                <motion.div
-                  animate={{ y: [0, -20, 0] }}
-                  transition={{ duration: 5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-                  className="absolute top-10 left-10 w-32 h-32 bg-yellow-400/20 rounded-full blur-3xl"
-                />
-                <motion.div
-                  animate={{ y: [0, 20, 0] }}
-                  transition={{ duration: 7, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-                  className="absolute bottom-10 right-10 w-32 h-32 bg-green-400/20 rounded-full blur-3xl"
-                />
-                
-                <div className="relative">
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 30, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border-2 border-yellow-400/20 rounded-full"
-                  />
-                  
-                  <div className="relative text-center">
+              <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold mb-4 leading-tight">
+                <span className="bg-gradient-to-r from-yellow-400 via-yellow-400 to-green-400 bg-clip-text text-transparent">
+                  Earn 15%
+                </span>
+              </h1>
+
+              <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
+                On everything your friends do - Join 50,000+ affiliates
+              </p>
+
+              <div className="flex items-center justify-center gap-4 mb-6">
+                <div className="flex -space-x-3">
+                  {[1,2,3,4,5].map((i) => (
                     <motion.div
-                      initial={{ scale: 0.9, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ duration: 0.5 }}
-                      className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-yellow-400/10 to-green-400/10 rounded-full border border-yellow-400/20 backdrop-blur-sm mb-8"
+                      key={i}
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      className="w-8 h-8 rounded-full bg-gradient-to-r from-yellow-400 to-green-400 flex items-center justify-center text-black font-bold text-xs border-2 border-white dark:border-gray-900 shadow-lg"
                     >
-                      <Crown className="w-5 h-5 text-yellow-400" />
-                      <span className="text-sm font-semibold bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">The #1 Affiliate Program</span>
-                      <Crown className="w-5 h-5 text-green-400" />
+                      {i}
                     </motion.div>
-                    
-                    <h1 className="text-6xl sm:text-7xl md:text-8xl font-extrabold mb-8 leading-tight">
-                      <span className="bg-gradient-to-r from-yellow-400 via-yellow-400 to-green-400 bg-clip-text text-transparent">
-                        Earn 15%
-                      </span>
-                      <br />
-                      <span className="text-4xl sm:text-5xl md:text-6xl text-gray-600 dark:text-gray-400">
-                        On Everything Your Friends Do
-                      </span>
-                    </h1>
-
-                    <div className="flex items-center justify-center gap-4 mb-6">
-                      <div className="flex -space-x-3">
-                        {[1,2,3,4,5].map((i) => (
-                          <motion.div
-                            key={i}
-                            whileHover={{ scale: 1.1, y: -2 }}
-                            className="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-green-400 flex items-center justify-center text-black font-bold text-sm border-2 border-white dark:border-gray-900 shadow-lg"
-                          >
-                            {i}
-                          </motion.div>
-                        ))}
-                      </div>
-                      <span className="text-2xl font-bold">Excellent</span>
-                      <div className="flex gap-1">
-                        {[1,2,3,4,5].map((star) => (
-                          <motion.div
-                            key={star}
-                            whileHover={{ scale: 1.2, rotate: 10 }}
-                          >
-                            <Star className="w-6 h-6 text-yellow-400 fill-current" />
-                          </motion.div>
-                        ))}
-                      </div>
-                    </div>
-                    
-                    <p className="text-gray-600 dark:text-gray-300 mb-3 text-lg">
-                      <span className="font-bold text-2xl">266,096+</span> reviews on
-                    </p>
-                    <motion.div 
-                      whileHover={{ scale: 1.05 }}
-                      className="flex items-center justify-center gap-3 mb-10"
-                    >
-                      <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-400 rounded-xl flex items-center justify-center text-white font-bold text-sm shadow-lg">
-                        TP
-                      </div>
-                      <span className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">Trustpilot</span>
-                    </motion.div>
-
-                    <div className="flex flex-wrap items-center justify-center gap-3 mb-12">
-                      {[
-                        { icon: <Zap className="w-4 h-4" />, text: "Instant Payouts" },
-                        { icon: <Infinity className="w-4 h-4" />, text: "No Limits" },
-                        { icon: <Globe className="w-4 h-4" />, text: "Global Program" },
-                        { icon: <Clock className="w-4 h-4" />, text: "24/7 Support" },
-                      ].map((item, i) => (
-                        <motion.div
-                          key={i}
-                          whileHover={{ scale: 1.05, y: -2 }}
-                          className="flex items-center gap-2 px-5 py-2.5 bg-white/80 dark:bg-white/5 backdrop-blur-sm rounded-full border border-gray-200 dark:border-gray-800 shadow-lg"
-                        >
-                          <div className="text-yellow-400">{item.icon}</div>
-                          <span className="text-sm font-medium">{item.text}</span>
-                        </motion.div>
-                      ))}
-                    </div>
-
-                    <div className="flex justify-center">
-                      <PrimaryCTA href="/signup">
-                        Become An Affiliate 
-                      </PrimaryCTA>
-                    </div>
-                  </div>
+                  ))}
+                </div>
+                <span className="text-xl font-bold">Excellent</span>
+                <div className="flex gap-1">
+                  {[1,2,3,4,5].map((star) => (
+                    <Star key={star} className="w-4 h-4 text-yellow-400 fill-current" />
+                  ))}
                 </div>
               </div>
-            </motion.div>
-          </Reveal>
 
-          {/* STATS SECTION - Redesigned like partner page */}
-          <section className="relative z-10 max-w-7xl mx-auto px-4 py-16">
-            <div className="flex items-center justify-center gap-12">
-              {affiliateStats.map((stat) => (
-                <Reveal key={stat.label}>
-                  <motion.div
-                    whileHover={{ y: -2 }}
-                    className="flex items-center gap-3"
-                  >
-                    <div className={`w-8 h-8 rounded-lg bg-gradient-to-r ${stat.gradient} bg-opacity-10 flex items-center justify-center`}>
-                      <div className={stat.iconColor}>
-                        {stat.icon}
-                      </div>
-                    </div>
-                    <div>
-                      <div className="text-sm font-medium text-gray-500">{stat.label}</div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-xl font-bold">{stat.value}</span>
-                        <span className="text-xs text-green-400">{stat.trend}</span>
-                      </div>
-                    </div>
-                  </motion.div>
-                </Reveal>
-              ))}
-            </div>
-          </section>
-
-          {/* HOW IT WORKS - Redesigned like partner page */}
-          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
-            <h2 className="text-2xl font-bold text-center mb-8">
-              <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
-                How It Works
-              </span>
-            </h2>
-            <div className="flex items-center justify-center gap-8">
-              {steps.map((step, index) => (
-                <Reveal key={step.title}>
-                  <motion.div
-                    whileHover={{ y: -2 }}
-                    className="flex items-center gap-3"
-                  >
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-r from-yellow-400 to-green-400 flex items-center justify-center text-white text-xs font-bold">
-                      {index + 1}
-                    </div>
-                    <div className={`w-6 h-6 rounded-full bg-gradient-to-r ${step.gradient} bg-opacity-10 flex items-center justify-center`}>
-                      <div className={step.iconColor}>
-                        {step.icon}
-                      </div>
-                    </div>
-                    <span className="text-sm font-medium">{step.title}</span>
-                  </motion.div>
-                </Reveal>
-              ))}
-            </div>
-          </section>
-
-          {/* EARNING METHODS - Redesigned like partner page integrations */}
-          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
-            <h2 className="text-2xl font-bold text-center mb-8">
-              <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
-                18+ Ways to Earn
-              </span>
-            </h2>
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              {allEarningMethods.map((method) => (
-                <Reveal key={method.name}>
-                  <motion.a
-                    href={method.path}
-                    whileHover={{ y: -2 }}
-                    className="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-[#0a0d16] rounded-full border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-md transition-all duration-300"
-                  >
-                    <div className={`w-5 h-5 rounded-full bg-gradient-to-r ${method.gradient} bg-opacity-10 flex items-center justify-center`}>
-                      <div className={`text-${method.color}-600 dark:text-${method.color}-400`}>
-                        {method.icon}
-                      </div>
-                    </div>
-                    <span className="text-xs font-medium">{method.name}</span>
-                  </motion.a>
-                </Reveal>
-              ))}
-            </div>
-          </section>
-
-          {/* BONUSES SECTION - Redesigned like partner page */}
-          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
-            <h2 className="text-2xl font-bold text-center mb-8">
-              <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
-                Unlock More Bonuses
-              </span>
-            </h2>
-            <div className="flex items-center justify-center gap-8">
-              {bonuses.map((bonus) => (
-                <Reveal key={bonus.title}>
-                  <motion.div
-                    whileHover={{ y: -2 }}
-                    className="relative flex items-center gap-3 px-4 py-2 bg-white dark:bg-[#0a0d16] rounded-full border border-gray-200 dark:border-gray-800 shadow-sm"
-                  >
-                    <div className="absolute -top-2 -right-2 w-4 h-4 rounded-full bg-gradient-to-r from-green-400 to-emerald-400 flex items-center justify-center text-[8px] text-white font-bold">
-                      ↑
-                    </div>
-                    <div className={`w-6 h-6 rounded-full bg-gradient-to-r ${bonus.gradient} bg-opacity-10 flex items-center justify-center`}>
-                      <div className={bonus.iconColor}>
-                        {bonus.icon}
-                      </div>
-                    </div>
-                    <span className="text-sm font-medium">{bonus.title}</span>
-                    <span className="text-xs font-bold bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
-                      {bonus.metric}
-                    </span>
-                  </motion.div>
-                </Reveal>
-              ))}
-            </div>
-          </section>
-
-          {/* FEATURES SECTION - Redesigned like partner page benefits */}
-          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
-            <h2 className="text-2xl font-bold text-center mb-8">
-              <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
-                Premium Features
-              </span>
-            </h2>
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              {features.map((feature) => (
-                <Reveal key={feature.title}>
-                  <motion.div
-                    whileHover={{ y: -2 }}
-                    className="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-[#0a0d16] rounded-full border border-gray-200 dark:border-gray-800 shadow-sm"
-                  >
-                    <div className={`w-5 h-5 rounded-full bg-gradient-to-r ${feature.gradient} bg-opacity-10 flex items-center justify-center`}>
-                      <div className={feature.iconColor}>
-                        {feature.icon}
-                      </div>
-                    </div>
-                    <span className="text-xs font-medium">{feature.title}</span>
-                  </motion.div>
-                </Reveal>
-              ))}
-            </div>
-          </section>
-
-          {/* TESTIMONIALS SECTION - Redesigned like partner page success stories */}
-          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
-            <h2 className="text-2xl font-bold text-center mb-8">
-              <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
-                50,000+ Affiliates Trust Us
-              </span>
-            </h2>
-            <div className="flex flex-wrap items-center justify-center gap-6">
-              {testimonials.map((testimonial, index) => (
-                <Reveal key={index}>
-                  <motion.div
-                    whileHover={{ y: -2 }}
-                    className="flex items-center gap-3"
-                  >
-                    <div className={`w-8 h-8 rounded-lg bg-gradient-to-r ${testimonial.gradient} flex items-center justify-center text-white text-xs font-bold`}>
-                      {testimonial.avatar}
-                    </div>
-                    <div className="text-left">
-                      <div className="text-sm font-medium">{testimonial.name}</div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs font-bold">{testimonial.earnings}</span>
-                      </div>
-                    </div>
-                  </motion.div>
-                </Reveal>
-              ))}
-            </div>
-          </section>
-
-          {/* FAQ SECTION - Redesigned like partner page FAQ */}
-          <section className="relative z-10 max-w-3xl mx-auto px-4 pb-16">
-            <h2 className="text-2xl font-bold text-center mb-8">
-              <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
-                Frequently Asked Questions
-              </span>
-            </h2>
-            <div className="space-y-3">
-              {faqs.map((faq, index) => (
-                <Reveal key={index}>
-                  <motion.div
-                    whileHover={{ y: -1 }}
-                    className="p-3 bg-white/50 dark:bg-white/5 rounded-lg border border-gray-200 dark:border-gray-800"
-                  >
-                    <div className="flex items-start gap-2">
-                      <div className="w-4 h-4 rounded-full bg-gradient-to-r from-yellow-400 to-green-400 flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <div className="w-1.5 h-1.5 rounded-full bg-white" />
-                      </div>
-                      <div>
-                        <h3 className="text-sm font-medium mb-1">{faq.q}</h3>
-                        <p className="text-xs text-gray-600 dark:text-gray-400">{faq.a}</p>
-                      </div>
-                    </div>
-                  </motion.div>
-                </Reveal>
-              ))}
-            </div>
-          </section>
-
-          {/* FINAL CTA - UNCHANGED */}
-          <section className="relative z-10 text-center py-20">
-            <Reveal>
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                className="relative overflow-hidden rounded-3xl"
-              >
-                {/* Animated Background */}
-                <motion.div
-                  animate={{ 
-                    scale: [1, 1.2, 1],
-                    rotate: [0, 90, 180],
-                  }}
-                  transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                  className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-yellow-400 to-green-400 opacity-90"
-                />
-                
-                {/* Content */}
-                <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-3xl p-16 m-1">
-                  {/* Floating Elements */}
-                  <motion.div
-                    animate={{ y: [0, -20, 0] }}
-                    transition={{ duration: 5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-                    className="absolute top-10 left-10 w-32 h-32 bg-yellow-400/20 rounded-full blur-3xl"
-                  />
-                  <motion.div
-                    animate={{ y: [0, 20, 0] }}
-                    transition={{ duration: 7, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-                    className="absolute bottom-10 right-10 w-32 h-32 bg-green-400/20 rounded-full blur-3xl"
-                  />
-                  
-                  <div className="relative">
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 30, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border-2 border-yellow-400/20 rounded-full"
-                    />
-                    
-                    <div className="flex items-center justify-center gap-4 mb-8">
-                      <Crown className="w-12 h-12 text-yellow-400" />
-                      <h2 className="text-5xl sm:text-6xl md:text-7xl font-extrabold">
-                        <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
-                          Ready to Earn 15%?
-                        </span>
-                      </h2>
-                      <Crown className="w-12 h-12 text-green-400" />
-                    </div>
-
-                    <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10">
-                      Join 50,000+ affiliates already earning from 18+ methods
-                    </p>
-                    
-                    <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
-                      {[
-                        { text: "⚡ Instant Payouts", gradient: "from-yellow-400/10 to-green-400/10" },
-                        { text: "🎯 No Limits", gradient: "from-blue-400/10 to-cyan-400/10" },
-                        { text: "🌍 Global", gradient: "from-purple-400/10 to-pink-400/10" },
-                        { text: "💰 15% Commission", gradient: "from-emerald-400/10 to-teal-400/10" },
-                      ].map((item, i) => (
-                        <motion.div
-                          key={i}
-                          whileHover={{ scale: 1.05, y: -2 }}
-                          className={`px-6 py-3 bg-gradient-to-r ${item.gradient} rounded-full text-sm font-semibold backdrop-blur-sm border border-white/20`}
-                        >
-                          {item.text}
-                        </motion.div>
-                      ))}
-                    </div>
-
-                    <div className="flex justify-center">
-                      <PrimaryCTA href="/signup">
-                        Become an Affiliate
-                      </PrimaryCTA>
-                    </div>
-                    
-                    <p className="text-sm text-gray-500 mt-8">
-                      🔒 Free to join • No credit card required • 50,000+ active affiliates
-                    </p>
-                  </div>
+              <div className="flex items-center justify-center gap-6 mb-8">
+                <div className="text-center">
+                  <div className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">50K+</div>
+                  <div className="text-xs text-gray-500">Affiliates</div>
                 </div>
+                <div className="w-px h-6 bg-gray-300 dark:bg-gray-700" />
+                <div className="text-center">
+                  <div className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">15%</div>
+                  <div className="text-xs text-gray-500">Commission</div>
+                </div>
+                <div className="w-px h-6 bg-gray-300 dark:bg-gray-700" />
+                <div className="text-center">
+                  <div className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">18+</div>
+                  <div className="text-xs text-gray-500">Methods</div>
+                </div>
+              </div>
+
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-block"
+              >
+                <PrimaryCTA href="/signup">
+                  Become An Affiliate
+                </PrimaryCTA>
               </motion.div>
-            </Reveal>
+            </div>
+          </RevealWithBorder>
+
+          {/* STATS SECTION - With border */}
+          <section className="relative z-10 max-w-7xl mx-auto px-4 py-16">
+            <RevealWithBorder
+              gradientFrom="from-emerald-400"
+              gradientVia="via-teal-400"
+              gradientTo="to-cyan-400"
+              borderColor="border-emerald-400/20"
+              floatingElements={false}
+              rotatingCircle={true}
+            >
+              <div className="py-8">
+                <div className="flex items-center justify-center gap-12">
+                  {affiliateStats.map((stat) => (
+                    <Reveal key={stat.label}>
+                      <motion.div
+                        whileHover={{ y: -2 }}
+                        className="flex items-center gap-3"
+                      >
+                        <div className={`w-8 h-8 rounded-lg bg-gradient-to-r ${stat.gradient} bg-opacity-10 flex items-center justify-center`}>
+                          <div className={stat.iconColor}>
+                            {stat.icon}
+                          </div>
+                        </div>
+                        <div>
+                          <div className="text-sm font-medium text-gray-500">{stat.label}</div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-xl font-bold">{stat.value}</span>
+                            <span className="text-xs text-green-400">{stat.trend}</span>
+                          </div>
+                        </div>
+                      </motion.div>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </RevealWithBorder>
+          </section>
+
+          {/* HOW IT WORKS - With border */}
+          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
+            <RevealWithBorder
+              gradientFrom="from-amber-400"
+              gradientVia="via-orange-400"
+              gradientTo="to-red-400"
+              borderColor="border-amber-400/20"
+              floatingElements={false}
+              rotatingCircle={true}
+            >
+              <div className="py-8">
+                <h2 className="text-2xl font-bold text-center mb-8">
+                  <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">
+                    How It Works
+                  </span>
+                </h2>
+                <div className="flex items-center justify-center gap-8">
+                  {steps.map((step, index) => (
+                    <Reveal key={step.title}>
+                      <motion.div
+                        whileHover={{ y: -2 }}
+                        className="flex items-center gap-3"
+                      >
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-r from-amber-400 to-orange-400 flex items-center justify-center text-white text-xs font-bold">
+                          {index + 1}
+                        </div>
+                        <div className={`w-6 h-6 rounded-full bg-gradient-to-r ${step.gradient} bg-opacity-10 flex items-center justify-center`}>
+                          <div className={step.iconColor}>
+                            {step.icon}
+                          </div>
+                        </div>
+                        <span className="text-sm font-medium">{step.title}</span>
+                      </motion.div>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </RevealWithBorder>
+          </section>
+
+          {/* EARNING METHODS - With border */}
+          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
+            <RevealWithBorder
+              gradientFrom="from-yellow-400"
+              gradientVia="via-green-400"
+              gradientTo="to-emerald-400"
+              borderColor="border-yellow-400/20"
+              floatingElements={false}
+              rotatingCircle={true}
+            >
+              <div className="py-8">
+                <h2 className="text-2xl font-bold text-center mb-8">
+                  <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
+                    18+ Ways to Earn
+                  </span>
+                </h2>
+                <div className="flex flex-wrap items-center justify-center gap-3">
+                  {allEarningMethods.map((method) => (
+                    <Reveal key={method.name}>
+                      <motion.a
+                        href={method.path}
+                        whileHover={{ y: -2 }}
+                        className="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-[#0a0d16] rounded-full border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-md transition-all duration-300"
+                      >
+                        <div className={`w-5 h-5 rounded-full bg-gradient-to-r ${method.gradient} bg-opacity-10 flex items-center justify-center`}>
+                          <div className={`text-${method.color}-600 dark:text-${method.color}-400`}>
+                            {method.icon}
+                          </div>
+                        </div>
+                        <span className="text-xs font-medium">{method.name}</span>
+                      </motion.a>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </RevealWithBorder>
+          </section>
+
+          {/* BONUSES SECTION - With border */}
+          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
+            <RevealWithBorder
+              gradientFrom="from-purple-400"
+              gradientVia="via-pink-400"
+              gradientTo="to-red-400"
+              borderColor="border-purple-400/20"
+              floatingElements={false}
+              rotatingCircle={true}
+            >
+              <div className="py-8">
+                <h2 className="text-2xl font-bold text-center mb-8">
+                  <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    Unlock More Bonuses
+                  </span>
+                </h2>
+                <div className="flex items-center justify-center gap-8">
+                  {bonuses.map((bonus) => (
+                    <Reveal key={bonus.title}>
+                      <motion.div
+                        whileHover={{ y: -2 }}
+                        className="relative flex items-center gap-3 px-4 py-2 bg-white dark:bg-[#0a0d16] rounded-full border border-gray-200 dark:border-gray-800 shadow-sm"
+                      >
+                        <div className="absolute -top-2 -right-2 w-4 h-4 rounded-full bg-gradient-to-r from-green-400 to-emerald-400 flex items-center justify-center text-[8px] text-white font-bold">
+                          ↑
+                        </div>
+                        <div className={`w-6 h-6 rounded-full bg-gradient-to-r ${bonus.gradient} bg-opacity-10 flex items-center justify-center`}>
+                          <div className={bonus.iconColor}>
+                            {bonus.icon}
+                          </div>
+                        </div>
+                        <span className="text-sm font-medium">{bonus.title}</span>
+                        <span className="text-xs font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                          {bonus.metric}
+                        </span>
+                      </motion.div>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </RevealWithBorder>
+          </section>
+
+          {/* FEATURES SECTION - With border */}
+          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
+            <RevealWithBorder
+              gradientFrom="from-blue-400"
+              gradientVia="via-cyan-400"
+              gradientTo="to-sky-400"
+              borderColor="border-blue-400/20"
+              floatingElements={false}
+              rotatingCircle={true}
+            >
+              <div className="py-8">
+                <h2 className="text-2xl font-bold text-center mb-8">
+                  <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                    Premium Features
+                  </span>
+                </h2>
+                <div className="flex flex-wrap items-center justify-center gap-4">
+                  {features.map((feature) => (
+                    <Reveal key={feature.title}>
+                      <motion.div
+                        whileHover={{ y: -2 }}
+                        className="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-[#0a0d16] rounded-full border border-gray-200 dark:border-gray-800 shadow-sm"
+                      >
+                        <div className={`w-5 h-5 rounded-full bg-gradient-to-r ${feature.gradient} bg-opacity-10 flex items-center justify-center`}>
+                          <div className={feature.iconColor}>
+                            {feature.icon}
+                          </div>
+                        </div>
+                        <span className="text-xs font-medium">{feature.title}</span>
+                      </motion.div>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </RevealWithBorder>
+          </section>
+
+          {/* TESTIMONIALS SECTION - With border */}
+          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
+            <RevealWithBorder
+              gradientFrom="from-green-400"
+              gradientVia="via-emerald-400"
+              gradientTo="to-teal-400"
+              borderColor="border-green-400/20"
+              floatingElements={false}
+              rotatingCircle={true}
+            >
+              <div className="py-8">
+                <h2 className="text-2xl font-bold text-center mb-8">
+                  <span className="bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+                    50,000+ Affiliates Trust Us
+                  </span>
+                </h2>
+                <div className="flex flex-wrap items-center justify-center gap-6">
+                  {testimonials.map((testimonial, index) => (
+                    <Reveal key={index}>
+                      <motion.div
+                        whileHover={{ y: -2 }}
+                        className="flex items-center gap-3"
+                      >
+                        <div className={`w-8 h-8 rounded-lg bg-gradient-to-r ${testimonial.gradient} flex items-center justify-center text-white text-xs font-bold`}>
+                          {testimonial.avatar}
+                        </div>
+                        <div className="text-left">
+                          <div className="text-sm font-medium">{testimonial.name}</div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs font-bold">{testimonial.earnings}</span>
+                          </div>
+                        </div>
+                      </motion.div>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </RevealWithBorder>
+          </section>
+
+          {/* FAQ SECTION - With border */}
+          <section className="relative z-10 max-w-3xl mx-auto px-4 pb-16">
+            <RevealWithBorder
+              gradientFrom="from-orange-400"
+              gradientVia="via-amber-400"
+              gradientTo="to-yellow-400"
+              borderColor="border-orange-400/20"
+              floatingElements={false}
+              rotatingCircle={true}
+            >
+              <div className="py-8 px-6">
+                <h2 className="text-2xl font-bold text-center mb-6">
+                  <span className="bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent">
+                    Frequently Asked Questions
+                  </span>
+                </h2>
+                <div className="space-y-3">
+                  {faqs.map((faq, index) => (
+                    <Reveal key={index}>
+                      <motion.div
+                        whileHover={{ y: -1 }}
+                        className="p-3 bg-white/50 dark:bg-white/5 rounded-lg border border-gray-200 dark:border-gray-800"
+                      >
+                        <div className="flex items-start gap-2">
+                          <div className="w-4 h-4 rounded-full bg-gradient-to-r from-orange-400 to-yellow-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <div className="w-1.5 h-1.5 rounded-full bg-white" />
+                          </div>
+                          <div>
+                            <h3 className="text-sm font-medium mb-1">{faq.q}</h3>
+                            <p className="text-xs text-gray-600 dark:text-gray-400">{faq.a}</p>
+                          </div>
+                        </div>
+                      </motion.div>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </RevealWithBorder>
+          </section>
+
+          {/* FINAL CTA */}
+          <section className="relative z-10 text-center">
+            <RevealWithBorder
+              gradientFrom="from-yellow-400"
+              gradientVia="via-yellow-400"
+              gradientTo="to-green-400"
+              borderColor="border-yellow-400/20"
+              floatingElements={true}
+              rotatingCircle={true}
+            >
+              <div className="py-12">
+                <div className="flex items-center justify-center gap-3 mb-4">
+                  <Crown className="w-5 h-5 text-yellow-400" />
+                  <h2 className="text-3xl font-extrabold">
+                    <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
+                      Ready to Earn 15%?
+                    </span>
+                  </h2>
+                  <Crown className="w-5 h-5 text-green-400" />
+                </div>
+
+                <p className="text-base text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-6">
+                  Join 50,000+ affiliates already earning from 18+ methods
+                </p>
+
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="inline-block"
+                >
+                  <PrimaryCTA href="/signup">
+                    Become an Affiliate
+                  </PrimaryCTA>
+                </motion.div>
+
+                <p className="text-xs text-gray-500 mt-4">
+                  🔒 Free to join • No credit card required • 50,000+ active affiliates
+                </p>
+              </div>
+            </RevealWithBorder>
           </section>
 
         </section>
