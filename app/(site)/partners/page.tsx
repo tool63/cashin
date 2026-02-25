@@ -11,7 +11,7 @@ import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
 import RevealWithBorder from "@/components/animations/RevealWithBorder";
 import {
-  // Core icons - All verified valid Lucide React icons
+  // Core icons - All verified valid Lucide React exports
   Users,
   Gift,
   DollarSign,
@@ -53,7 +53,7 @@ import {
   Mail,
   MessageCircle,
   Phone,
-  Video,  // Keep only one Video import
+  Video,
   Calendar,
   Timer,
   Watch,
@@ -112,7 +112,6 @@ import {
   Mouse,
   Printer,
   Camera,
-  // Removed duplicate Video import
   Webcam,
   Film,
   Tv,
@@ -137,14 +136,42 @@ import {
   Banknote,
   Coins,
   PiggyBank,
-  Gem as GemIcon,
-  Diamond as DiamondIcon,
   Beer,
   Wine,
   Utensils,
 } from "lucide-react";
 
-// ... rest of your component code remains exactly the same
+/* ================= CUSTOM ICONS ================= */
+// ⚠️ IMPORTANT: These MUST be defined before any data arrays that use them
+const Code = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+  </svg>
+);
+
+const Code2 = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+  </svg>
+);
+
+const FileText = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+  </svg>
+);
+
+const Package = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+  </svg>
+);
+
+const Terminal = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+  </svg>
+);
 
 /* ================= PARTNER STATS ================= */
 const partnerStats = [
@@ -192,7 +219,7 @@ const partnerTiers = [
     ],
     gradient: "from-amber-600 to-amber-400",
     iconColor: "text-amber-600 dark:text-amber-400",
-    bgGradient: "from-amber-400/10 to-amber-600/10",
+    popular: false,
   },
   {
     name: "Silver Partner",
@@ -208,7 +235,6 @@ const partnerTiers = [
     ],
     gradient: "from-gray-400 to-gray-300",
     iconColor: "text-gray-600 dark:text-gray-300",
-    bgGradient: "from-gray-400/10 to-gray-600/10",
     popular: false,
   },
   {
@@ -226,7 +252,6 @@ const partnerTiers = [
     ],
     gradient: "from-yellow-400 to-amber-400",
     iconColor: "text-yellow-600 dark:text-yellow-400",
-    bgGradient: "from-yellow-400/10 to-amber-400/10",
     popular: true,
   },
 ];
@@ -330,6 +355,7 @@ const successStories = [
 ];
 
 /* ================= INTEGRATION OPTIONS ================= */
+// ✅ Now safely using custom icons defined above
 const integrations = [
   { name: "REST API", icon: <Network className="w-6 h-6" />, status: "Live", gradient: "from-blue-400 to-cyan-400" },
   { name: "Webhooks", icon: <Zap className="w-6 h-6" />, status: "Live", gradient: "from-yellow-400 to-amber-400" },
@@ -373,37 +399,6 @@ const faqs = [
   },
 ];
 
-/* ================= CUSTOM ICONS ================= */
-const Code = ({ className }: { className?: string }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-  </svg>
-);
-
-const Code2 = ({ className }: { className?: string }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-  </svg>
-);
-
-const FileText = ({ className }: { className?: string }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-  </svg>
-);
-
-const Package = ({ className }: { className?: string }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-  </svg>
-);
-
-const Terminal = ({ className }: { className?: string }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-  </svg>
-);
-
 /* ================= PAGE ================= */
 export default function PartnerPage() {
   return (
@@ -425,7 +420,7 @@ export default function PartnerPage() {
 
         <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
 
-          {/* HERO SECTION - Using RevealWithBorder */}
+          {/* HERO SECTION */}
           <RevealWithBorder 
             gradientFrom="from-blue-400"
             gradientVia="via-purple-400" 
@@ -863,7 +858,7 @@ export default function PartnerPage() {
                     desc: "Start earning revenue share and grow your business with us.",
                     icon: <TrendingUp className="w-12 h-12" />,
                   },
-                ].map((item, index) => (
+                ].map((item) => (
                   <Reveal key={item.step}>
                     <motion.div
                       whileHover={{ y: -8 }}
