@@ -121,8 +121,7 @@ import {
   Tv,
   Bot,
   Brain,
-  // Removed 'Circuit' as it's not exported
-  Microchip,
+  // Removed 'Circuit' and 'Microchip' as they're not exported
   Fingerprint,
   Key,
   Lock,
