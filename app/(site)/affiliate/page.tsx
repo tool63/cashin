@@ -338,7 +338,7 @@ export default function AffiliatePage() {
               </div>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <PrimaryCTA href="/signup" className="px-8 py-4 text-lg">
+                <PrimaryCTA href="/signup">
                   Start Earning 15% Now
                 </PrimaryCTA>
                 <motion.a
@@ -734,7 +734,7 @@ export default function AffiliatePage() {
                     </div>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                      <PrimaryCTA href="/signup" className="px-8 py-4 text-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black">
+                      <PrimaryCTA href="/signup">
                         Become an Affiliate Now
                       </PrimaryCTA>
                       <motion.a
