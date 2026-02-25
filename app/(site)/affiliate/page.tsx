@@ -7,19 +7,16 @@ import TypingText from "@/components/typing/TypingText";
 import Background from "@/components/Background";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
+import FAQ from "@/components/faq/FAQ";
 import {
   Users,
   Gift,
   DollarSign,
   Trophy,
-  TrendingUp,
   Star,
   User,
   Target,
   Zap,
-  Award,
-  Shield,
-  MessageCircle,
   CheckCircle,
   Copy,
   ExternalLink,
@@ -125,7 +122,7 @@ const testimonials = [
   },
 ];
 
-/* ================= FAQS ================= */
+/* ================= FAQ ================= */
 const faqs = [
   {
     q: "What do my referrals need to do for me to get paid?",
@@ -141,7 +138,7 @@ const faqs = [
   },
   {
     q: "Why can I not find the affiliate page?",
-    a: "Simply login to Freecash and select 'Invite Friends' under the 'Rewards' tab. Here you'll find your personal referral link.",
+    a: "Simply login to Cashog and select 'Invite Friends' under the 'Rewards' tab. Here you'll find your personal referral link.",
   },
   {
     q: "Are quests and bonuses always available, and who can receive them?",
@@ -401,37 +398,18 @@ export default function AffiliatePage() {
             </div>
           </section>
 
-          {/* FAQ SECTION */}
+          {/* ================= FAQ ================= */}
           <section className="relative z-10 max-w-4xl mx-auto px-4 pb-24">
             <Reveal>
-              <>
-                <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-                  Frequently Asked Questions
-                </h2>
-                <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-                  Still unsure? Get answers to the most commonly asked questions
-                </p>
-              </>
+              <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+                Still unsure? Get answers to the most commonly asked questions about our affiliate program.
+              </p>
             </Reveal>
 
-            <div className="grid gap-4">
-              {faqs.map((faq, index) => (
-                <Reveal key={index}>
-                  <motion.div
-                    whileHover={{ y: -2 }}
-                    className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 border border-gray-200 dark:border-gray-800"
-                  >
-                    <h3 className="font-semibold text-lg mb-2 flex items-start gap-2">
-                      <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0 mt-1" />
-                      {faq.q}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm pl-7">
-                      {faq.a}
-                    </p>
-                  </motion.div>
-                </Reveal>
-              ))}
-            </div>
+            <FAQ faqs={faqs} />
           </section>
 
           {/* FINAL CTA */}
@@ -449,7 +427,7 @@ export default function AffiliatePage() {
                   Join Cashog today and start earning with the #1 affiliate program
                 </p>
 
-                <PrimaryCTA href="/signup" className="bg-black text-white hover:bg-gray-900">
+                <PrimaryCTA href="/signup">
                   Join Now
                 </PrimaryCTA>
               </motion.div>
