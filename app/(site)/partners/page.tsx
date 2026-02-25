@@ -75,8 +75,6 @@ import {
   Map,
   MapPin,
   Navigation,
-  // Fixed: Removed 'Route' and added 'Router' if needed
-  Router,
   Target as TargetIcon,
   Eye,
   EyeOff,
@@ -93,7 +91,7 @@ import {
   Shuffle,
   Play,
   Pause,
-  Stop,
+  // Removed 'Stop' as it's not exported
   SkipBack,
   SkipForward,
   Rewind,
@@ -168,7 +166,7 @@ import {
   Utensils,
 } from "lucide-react";
 
-// ... rest of the imports remain the same
+// ... rest of the code remains exactly the same from the previous response
 
 /* ================= PARTNER STATS ================= */
 const partnerStats = [
