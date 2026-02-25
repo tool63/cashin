@@ -504,7 +504,7 @@ export default function AffiliatePage() {
 
                     <div className="flex justify-center">
                       <PrimaryCTA href="/signup">
-                        Start Earning 15% Now
+                        Become An Affiliate 
                       </PrimaryCTA>
                     </div>
                   </div>
@@ -998,7 +998,7 @@ export default function AffiliatePage() {
 
                     <div className="flex justify-center">
                       <PrimaryCTA href="/signup">
-                        Become an Affiliate Now
+                        Become an Affiliate
                       </PrimaryCTA>
                     </div>
                     
