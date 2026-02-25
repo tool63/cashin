@@ -1,6 +1,3 @@
-Here is the complete and updated code for your `app-installs/page.tsx`:
-
-```tsx
 "use client";
 
 import React from "react";
@@ -227,7 +224,6 @@ export default function AppInstallPage() {
           <Reveal>
             <>
               <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-              
                 Platform Performance
               </h2>
               <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
@@ -269,8 +265,10 @@ export default function AppInstallPage() {
               </h2>
               <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
                 Start earning in three simple steps
-              </p>
-           
+                           </p>
+            </>
+          </Reveal>
+
           <div className="grid gap-6 md:grid-cols-3 mb-24">
             <Reveal>
               <motion.div
