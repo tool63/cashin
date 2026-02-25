@@ -413,7 +413,7 @@ export default function AffiliatePage() {
           {/* HERO WITH PREMIUM BADGES */}
           <Reveal>
             <div className="text-center mb-20 relative">
-              {/* Animated Background */}
+              {/* Animated Background - FIXED: Removed Infinity reference */}
               <motion.div
                 animate={{ 
                   scale: [1, 1.2, 1],
@@ -509,12 +509,12 @@ export default function AffiliatePage() {
               {/* Floating Elements */}
               <motion.div
                 animate={{ y: [0, -20, 0] }}
-                transition={{ duration: 5, repeat: Infinity }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                 className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-r from-yellow-400/20 to-green-400/20 rounded-full blur-2xl"
               />
               <motion.div
                 animate={{ y: [0, 20, 0] }}
-                transition={{ duration: 7, repeat: Infinity }}
+                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
                 className="absolute bottom-20 right-10 w-32 h-32 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-2xl"
               />
             </div>
@@ -655,15 +655,15 @@ export default function AffiliatePage() {
                 
                 <div className="flex flex-wrap items-center justify-center gap-3 mb-16">
                   {[
-                    { icon: "💰", text: "15% Commission" },
-                    { icon: "⚡", text: "Instant Tracking" },
-                    { icon: "🚀", text: "No Limits" },
-                    { icon: "🌍", text: "Global" },
+                    { icon: "💰", text: "15% Commission", gradient: "from-yellow-400 to-green-400" },
+                    { icon: "⚡", text: "Instant Tracking", gradient: "from-blue-400 to-cyan-400" },
+                    { icon: "🚀", text: "No Limits", gradient: "from-purple-400 to-pink-400" },
+                    { icon: "🌍", text: "Global", gradient: "from-emerald-400 to-teal-400" },
                   ].map((badge, i) => (
                     <motion.div
                       key={i}
                       whileHover={{ scale: 1.05, y: -2 }}
-                      className="px-6 py-3 bg-gradient-to-r from-yellow-400 to-green-400 rounded-full text-black font-semibold shadow-xl flex items-center gap-2"
+                      className={`px-6 py-3 bg-gradient-to-r ${badge.gradient} rounded-full text-black font-semibold shadow-xl flex items-center gap-2`}
                     >
                       <span className="text-lg">{badge.icon}</span>
                       <span>{badge.text}</span>
@@ -690,30 +690,50 @@ export default function AffiliatePage() {
                       {/* Background Pattern */}
                       <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       
-                      {/* Icon Container with Gradient */}
+                      {/* Icon Container with Gradient - ULTRA PREMIUM */}
                       <div className="relative mb-4">
-                        <div className={`w-16 h-16 mx-auto rounded-xl bg-gradient-to-r ${method.gradient} p-0.5`}>
-                          <div className="w-full h-full rounded-xl bg-white dark:bg-[#0a0d16] flex items-center justify-center">
-                            <div className={`text-${method.color}-400`}>
+                        {/* Outer Glow Ring */}
+                        <div className={`absolute inset-0 bg-gradient-to-r ${method.gradient} rounded-xl blur-md opacity-0 group-hover:opacity-50 transition-opacity duration-300`} />
+                        
+                        {/* Main Icon Container */}
+                        <div className={`relative w-16 h-16 mx-auto rounded-xl bg-gradient-to-r ${method.gradient} p-[2px]`}>
+                          <div className="w-full h-full rounded-xl bg-white dark:bg-[#0a0d16] flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <div className={`text-${method.color}-400 group-hover:text-white transition-colors duration-300 relative z-10`}>
                               {method.icon}
                             </div>
                           </div>
                         </div>
                         
-                        {/* Floating Badge */}
-                        <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-gradient-to-r from-green-400 to-emerald-400 flex items-center justify-center text-white text-xs font-bold shadow-lg">
+                        {/* Floating 15% Badge - ANIMATED */}
+                        <motion.div
+                          animate={{ 
+                            scale: [1, 1.1, 1],
+                            rotate: [0, 5, -5, 0]
+                          }}
+                          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                          className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-gradient-to-r from-green-400 to-emerald-400 flex items-center justify-center text-white text-xs font-bold shadow-xl"
+                        >
                           15%
-                        </div>
+                        </motion.div>
+                        
+                        {/* Sparkle Effect */}
+                        <motion.div
+                          animate={{ opacity: [0, 1, 0] }}
+                          transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+                          className="absolute -top-1 -left-1 w-3 h-3 bg-yellow-400 rounded-full blur-sm"
+                        />
                       </div>
                       
-                      <h3 className="text-base font-bold text-center mb-2">{method.name}</h3>
+                      <h3 className="text-base font-bold text-center mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-yellow-400 group-hover:to-green-400 group-hover:bg-clip-text transition-all duration-300">
+                        {method.name}
+                      </h3>
                       
-                      <div className="text-xs text-center text-gray-500 dark:text-gray-400 mb-3">
+                      <div className="text-xs text-center text-gray-500 dark:text-gray-400 mb-3 group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors duration-300">
                         {method.earnings}
                       </div>
                       
-                      {/* Progress Indicator */}
-                      <div className="h-1 w-full bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+                      {/* Premium Progress Indicator */}
+                      <div className="h-1.5 w-full bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
                         <motion.div
                           initial={{ width: 0 }}
                           whileHover={{ width: "100%" }}
@@ -721,6 +741,9 @@ export default function AffiliatePage() {
                           className={`h-full bg-gradient-to-r ${method.gradient}`}
                         />
                       </div>
+                      
+                      {/* Bottom Glow Line */}
+                      <div className={`absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r ${method.gradient} scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left`} />
                     </div>
                   </motion.a>
                 </Reveal>
@@ -914,7 +937,7 @@ export default function AffiliatePage() {
             <FAQ faqs={faqs} />
           </section>
 
-          {/* FINAL CTA WITH ULTRA PREMIUM DESIGN */}
+          {/* FINAL CTA WITH ULTRA PREMIUM DESIGN - REMOVED DASHBOARD BUTTON */}
           <section className="relative z-10 text-center py-20">
             <Reveal>
               <motion.div
@@ -927,7 +950,7 @@ export default function AffiliatePage() {
                     scale: [1, 1.2, 1],
                     rotate: [0, 90, 180],
                   }}
-                  transition={{ duration: 20, repeat: Infinity }}
+                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                   className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-yellow-400 to-green-400 opacity-90"
                 />
                 
@@ -936,12 +959,12 @@ export default function AffiliatePage() {
                   {/* Floating Elements */}
                   <motion.div
                     animate={{ y: [0, -20, 0] }}
-                    transition={{ duration: 5, repeat: Infinity }}
+                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                     className="absolute top-10 left-10 w-32 h-32 bg-yellow-400/20 rounded-full blur-3xl"
                   />
                   <motion.div
                     animate={{ y: [0, 20, 0] }}
-                    transition={{ duration: 7, repeat: Infinity }}
+                    transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
                     className="absolute bottom-10 right-10 w-32 h-32 bg-green-400/20 rounded-full blur-3xl"
                   />
                   
@@ -968,17 +991,17 @@ export default function AffiliatePage() {
                     
                     <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
                       {[
-                        "⚡ Instant Payouts",
-                        "🎯 No Limits",
-                        "🌍 Global",
-                        "💰 15% Commission",
-                      ].map((text, i) => (
+                        { text: "⚡ Instant Payouts", gradient: "from-yellow-400/10 to-green-400/10" },
+                        { text: "🎯 No Limits", gradient: "from-blue-400/10 to-cyan-400/10" },
+                        { text: "🌍 Global", gradient: "from-purple-400/10 to-pink-400/10" },
+                        { text: "💰 15% Commission", gradient: "from-emerald-400/10 to-teal-400/10" },
+                      ].map((item, i) => (
                         <motion.div
                           key={i}
                           whileHover={{ scale: 1.05, y: -2 }}
-                          className="px-6 py-3 bg-gradient-to-r from-green-500/10 to-green-500/5 rounded-full text-sm font-semibold"
+                          className={`px-6 py-3 bg-gradient-to-r ${item.gradient} rounded-full text-sm font-semibold backdrop-blur-sm border border-white/20`}
                         >
-                          {text}
+                          {item.text}
                         </motion.div>
                       ))}
                     </div>
