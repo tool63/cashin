@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Meta from "@/components/seo/SeoEngine";
 import TypingText from "@/components/typing/TypingText";
 import Background from "@/components/Background";
@@ -20,15 +20,31 @@ import {
   CheckCircle,
   Copy,
   ExternalLink,
+  ChevronDown,
+  ClipboardList,
+  Gamepad2,
+  Film,
+  Pickaxe,
+  SquareCheckBig,
+  LayoutGrid,
+  Newspaper,
+  Eye,
+  Sparkles,
+  FlaskConical,
+  Mail,
+  MousePointerClick,
+  FileText,
+  Award,
+  Ticket,
 } from "lucide-react";
 
 /* ================= AFFILIATE STATS ================= */
 const affiliateStats = [
   {
-    label: "Per Referral",
-    value: "$13",
+    label: "Commission Rate",
+    value: "15%",
     icon: <DollarSign className="w-6 h-6 text-green-400" />,
-    description: "Earn $13 for every friend you refer",
+    description: "Earn 15% commission on all referrals' earnings",
   },
   {
     label: "Active Affiliates",
@@ -49,17 +65,17 @@ const steps = [
   {
     icon: <User className="w-8 h-8 text-yellow-400" />,
     title: "Invite Your Friends",
-    desc: "Create your custom referral link on your profile page and share it with friends.",
+    desc: "Create your custom referral link and share it with friends across social media.",
   },
   {
     icon: <Gift className="w-8 h-8 text-green-400" />,
-    title: "Earn As They Play",
-    desc: "When they install their first game, you get $2.50. They also earn a bonus.",
+    title: "They Earn, You Earn",
+    desc: "When your friends complete any task, you earn 15% commission on their earnings.",
   },
   {
     icon: <DollarSign className="w-8 h-8 text-yellow-400" />,
     title: "Cashout Together",
-    desc: "When your friend makes their first cashout, you'll earn another $10!",
+    desc: "Withdraw your commissions instantly via PayPal, crypto, or gift cards.",
   },
 ];
 
@@ -67,19 +83,45 @@ const steps = [
 const bonuses = [
   {
     icon: <Users className="w-8 h-8 text-purple-400" />,
-    title: "Group Bonuses",
-    desc: "Group Bonus Quests reward you for referring multiple users. Reach your goal to earn a significant extra reward!",
+    title: "Team Bonuses",
+    desc: "Earn extra rewards when your team reaches milestone targets together.",
   },
   {
     icon: <Zap className="w-8 h-8 text-orange-400" />,
     title: "Boosting Events",
-    desc: "During Boosting Events, you will earn greater rewards for your referrals with exact earning multipliers.",
+    desc: "During special events, earn double or triple commissions on all referrals.",
   },
   {
     icon: <Target className="w-8 h-8 text-red-400" />,
-    title: "Play Together",
-    desc: "You might unlock a co-op quest, so you and your friend can play & earn together!",
+    title: "Monthly Contests",
+    desc: "Compete with top affiliates for massive bonus prizes and recognition.",
   },
+];
+
+/* ================= MAIN EARNING METHODS ================= */
+const mainEarningMethods = [
+  { name: "Surveys", path: "/surveys", icon: <ClipboardList className="w-5 h-5" />, color: "text-blue-400" },
+  { name: "App Installs", path: "/app-installs", icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>, color: "text-green-400" },
+  { name: "Playing Games", path: "/play-games", icon: <Gamepad2 className="w-5 h-5" />, color: "text-purple-400" },
+  { name: "Watching Videos", path: "/watch-videos", icon: <Film className="w-5 h-5" />, color: "text-red-400" },
+  { name: "Mining Rewards", path: "/mining-rewards", icon: <Pickaxe className="w-5 h-5" />, color: "text-yellow-400" },
+  { name: "Completing Offers", path: "/complete-offers", icon: <SquareCheckBig className="w-5 h-5" />, color: "text-indigo-400" },
+  { name: "Offerwall", path: "/offerwall", icon: <LayoutGrid className="w-5 h-5" />, color: "text-pink-400" },
+  { name: "Surveywall", path: "/surveywall", icon: <ClipboardList className="w-5 h-5" />, color: "text-cyan-400" },
+];
+
+/* ================= EXTRA EARNING METHODS ================= */
+const extraEarningMethods = [
+  { name: "Watching Ads", path: "/watch-ads", icon: <Eye className="w-5 h-5" />, color: "text-amber-400" },
+  { name: "Micro Tasks", path: "/micro-tasks", icon: <Sparkles className="w-5 h-5" />, color: "text-lime-400" },
+  { name: "Free Trials", path: "/complete-free-trials", icon: <Gift className="w-5 h-5" />, color: "text-emerald-400" },
+  { name: "Testing Products", path: "/test-products", icon: <FlaskConical className="w-5 h-5" />, color: "text-teal-400" },
+  { name: "Reading Emails", path: "/read-emails", icon: <Mail className="w-5 h-5" />, color: "text-orange-400" },
+  { name: "Visiting Websites", path: "/visit-websites", icon: <MousePointerClick className="w-5 h-5" />, color: "text-rose-400" },
+  { name: "Review Tasks", path: "/review-tasks", icon: <FileText className="w-5 h-5" />, color: "text-violet-400" },
+  { name: "Spinning Wheel", path: "/spinning-wheel", icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>, color: "text-fuchsia-400" },
+  { name: "Loyalty", path: "/loyalty", icon: <Award className="w-5 h-5" />, color: "text-yellow-400" },
+  { name: "Vouchers", path: "/vouchers", icon: <Ticket className="w-5 h-5" />, color: "text-green-400" },
 ];
 
 /* ================= TESTIMONIALS ================= */
@@ -87,37 +129,37 @@ const testimonials = [
   {
     name: "Cryptozeal",
     date: "February 18, 2026",
-    content: "The ultimate cashapp side hustle Passive income platform available absolutely brilliant i earned so much in my first week of joining and the affiliate system is great with other side completions etc I really recommend to anyone wanting to earn a litt...",
+    content: "The 15% commission is amazing! I'm earning passive income from my friends' daily activities. Made over $500 in my first month!",
     rating: 5,
   },
   {
     name: "Michael Raisner",
     date: "February 11, 2026",
-    content: "Amazing fun game to play is awesome and I like to refer my friends to the game.It's awesome",
+    content: "Great affiliate program! My friends love the platform and I love the recurring commissions.",
     rating: 5,
   },
   {
     name: "Dx Tik",
     date: "January 30, 2026",
-    content: "its very good app i am now share my refer code some people are use and they share with friends maybe we are all like this website.",
-    rating: 5,
-  },
-  {
-    name: "Customer",
-    date: "February 13, 2026",
-    content: "This game is amazing I've had nothing but great things come from it it's one of the very first apps and platforms that actually pay you a decent amount and don't stop paying you as you progress they've good affiliate bonuses and it's just overall pre...",
-    rating: 5,
-  },
-  {
-    name: "Nichole",
-    date: "January 15, 2026",
-    content: "I've cashed out over $100. Awesome affiliate program too 😊❤",
+    content: "I share my link everywhere. Every time my friends complete surveys or install apps, I earn. Best decision ever!",
     rating: 5,
   },
   {
     name: "Sarah Johnson",
     date: "February 5, 2026",
-    content: "Best affiliate program I've ever joined. Made over $500 in my first month just by sharing with my gaming community!",
+    content: "The team bonuses are incredible. Built a team of 50+ active members and earning daily commissions.",
+    rating: 5,
+  },
+  {
+    name: "Nichole",
+    date: "January 15, 2026",
+    content: "I've cashed out over $1000 from referrals alone. The 15% commission adds up fast!",
+    rating: 5,
+  },
+  {
+    name: "David Chen",
+    date: "February 20, 2026",
+    content: "Boosting events doubled my earnings last month. Best affiliate program I've ever joined.",
     rating: 5,
   },
 ];
@@ -125,30 +167,70 @@ const testimonials = [
 /* ================= FAQ ================= */
 const faqs = [
   {
-    q: "What do my referrals need to do for me to get paid?",
-    a: "Your referrals need to sign up using your link, install their first game, and make their first cashout. You earn $2.50 after their first game install and another $10 after their first cashout.",
+    q: "How does the 15% commission work?",
+    a: "You earn 15% commission on everything your referrals earn on Cashog. If they complete surveys, install apps, play games, or do any other task, you get 15% of their earnings automatically.",
   },
   {
     q: "Is there a limit to how many friends I can refer?",
-    a: "No, there's no limit! You can refer as many friends as you want and earn $13 for each qualified referral.",
+    a: "No, there's no limit! You can refer unlimited friends and earn 15% commission on all their earnings.",
   },
   {
     q: "How can I track my earnings from referrals?",
     a: "You can track all your referral earnings and activity in your dashboard under the 'Invite Friends' section.",
   },
   {
-    q: "Why can I not find the affiliate page?",
-    a: "Simply login to Cashog and select 'Invite Friends' under the 'Rewards' tab. Here you'll find your personal referral link.",
+    q: "Do I earn from all earning methods?",
+    a: "Yes! You earn 15% commission from every earning method: surveys, app installs, games, videos, mining rewards, offers, offerwall, surveywall, and all extra earning methods.",
   },
   {
-    q: "Are quests and bonuses always available, and who can receive them?",
-    a: "Quests and bonuses are regularly available to all affiliates. Check your dashboard for current active quests.",
+    q: "When do commissions get credited?",
+    a: "Commissions are credited instantly when your referrals complete tasks and their earnings are confirmed.",
   },
   {
-    q: "What can I earn from time-limited quests?",
-    a: "Time-limited quests offer enhanced rewards and multipliers. During Boosting Events, you can earn significantly more per referral.",
+    q: "What payment methods are available?",
+    a: "You can withdraw your commissions via PayPal, cryptocurrency, gift cards, and more.",
   },
 ];
+
+/* ================= EXPANDABLE SECTION ================= */
+function ExpandableSection({ title, children }: { title: string; children: React.ReactNode }) {
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  return (
+    <div className="mb-6">
+      <motion.button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center justify-between p-4 bg-white dark:bg-[#0a0d16] rounded-xl border border-gray-200 dark:border-gray-800"
+        whileHover={{ scale: 1.01 }}
+        whileTap={{ scale: 0.99 }}
+      >
+        <span className="text-lg font-semibold">{title}</span>
+        <motion.div
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <ChevronDown className="w-5 h-5 text-gray-500" />
+        </motion.div>
+      </motion.button>
+      
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden"
+          >
+            <div className="pt-4">
+              {children}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
 
 /* ================= REFERRAL CARD ================= */
 function ReferralCard() {
@@ -167,7 +249,7 @@ function ReferralCard() {
       className="bg-gradient-to-r from-yellow-400 to-green-400 rounded-2xl p-8 text-center text-black mb-16"
     >
       <h3 className="text-2xl font-bold mb-2">Your Referral Link</h3>
-      <p className="mb-6">Share this link with friends to start earning</p>
+      <p className="mb-6">Share this link with friends to earn 15% commission on everything they earn</p>
       
       <div className="flex items-center justify-center gap-2 bg-white/20 backdrop-blur rounded-xl p-2 max-w-xl mx-auto">
         <input
@@ -216,8 +298,8 @@ export default function AffiliatePage() {
   return (
     <>
       <Meta
-        title="Affiliate Program | Cashog"
-        description="Join the #1 affiliate program. Earn $13 per referral! Invite friends and earn together."
+        title="Affiliate Program - Earn 15% Commission | Cashog"
+        description="Join the #1 affiliate program. Earn 15% commission on everything your referrals earn. Surveys, apps, games, and more!"
       />
 
       <main className="relative min-h-screen text-gray-900 dark:text-white">
@@ -233,8 +315,8 @@ export default function AffiliatePage() {
               </div>
               
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-                Invite Your Friends, <br />
-                <span className="gradient-text">Earn $13 Per Referral!</span>
+                Earn <span className="gradient-text">15% Commission</span> <br />
+                On Everything
               </h1>
 
               <div className="flex items-center justify-center gap-2 mb-6">
@@ -252,10 +334,10 @@ export default function AffiliatePage() {
               <p className="text-2xl font-bold mb-8">Trustpilot</p>
 
               <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed mb-10">
-                No spending required! Just invite your friends to join Cashog, and earn $13 per referral when they play and cashout.
+                When your friends earn on Cashog, you earn 15% automatically. From surveys and games to offers and tasks - every method counts!
               </p>
 
-              <PrimaryCTA href="/signup">Start Referring Now</PrimaryCTA>
+              <PrimaryCTA href="/signup">Start Earning 15% Now</PrimaryCTA>
             </div>
           </Reveal>
 
@@ -306,7 +388,7 @@ export default function AffiliatePage() {
                   How Does the Affiliate Program Work?
                 </h2>
                 <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-                  Start earning in three simple steps
+                  Start earning 15% commission in three simple steps
                 </p>
               </>
             </Reveal>
@@ -329,15 +411,70 @@ export default function AffiliatePage() {
             </div>
           </section>
 
+          {/* EARNING METHODS SECTION */}
+          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
+            <Reveal>
+              <>
+                <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+                  Every Method Earns You 15%
+                </h2>
+                <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+                  Your referrals earn through these methods - and you earn too!
+                </p>
+              </>
+            </Reveal>
+
+            {/* Main Earning Methods */}
+            <div className="mb-8">
+              <h3 className="text-xl font-semibold mb-4">Main Earning Methods</h3>
+              <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
+                {mainEarningMethods.map((method) => (
+                  <motion.a
+                    key={method.name}
+                    href={method.path}
+                    whileHover={{ y: -2 }}
+                    className="bg-white dark:bg-[#0a0d16] rounded-xl p-4 border border-gray-200 dark:border-gray-800 flex flex-col items-center text-center group"
+                  >
+                    <div className={`mb-2 ${method.color}`}>{method.icon}</div>
+                    <span className="text-sm font-medium">{method.name}</span>
+                  </motion.a>
+                ))}
+              </div>
+            </div>
+
+            {/* Extra Earning Methods (Expandable) */}
+            <ExpandableSection title="Extra Earning Methods (Click to Expand)">
+              <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
+                {extraEarningMethods.map((method) => (
+                  <motion.a
+                    key={method.name}
+                    href={method.path}
+                    whileHover={{ y: -2 }}
+                    className="bg-white dark:bg-[#0a0d16] rounded-xl p-4 border border-gray-200 dark:border-gray-800 flex flex-col items-center text-center group"
+                  >
+                    <div className={`mb-2 ${method.color}`}>{method.icon}</div>
+                    <span className="text-sm font-medium">{method.name}</span>
+                  </motion.a>
+                ))}
+              </div>
+            </ExpandableSection>
+
+            <div className="mt-8 text-center">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                That's <span className="font-bold text-green-400">18+ earning methods</span> where you earn 15% commission on everything your referrals do!
+              </p>
+            </div>
+          </section>
+
           {/* BONUSES SECTION */}
           <section className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
             <Reveal>
               <>
                 <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-                  Unlock More Quests & Bonuses
+                  Unlock More Bonuses
                 </h2>
                 <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-                  Extra rewards for top performers
+                  Extra rewards on top of your 15% commission
                 </p>
               </>
             </Reveal>
@@ -365,7 +502,7 @@ export default function AffiliatePage() {
             <Reveal>
               <>
                 <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-                  Hear from Real Users Earning with Friends
+                  Hear from Real Users Earning 15%
                 </h2>
                 <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
                   Join thousands of happy affiliates
@@ -398,14 +535,14 @@ export default function AffiliatePage() {
             </div>
           </section>
 
-          {/* ================= FAQ ================= */}
+          {/* FAQ SECTION */}
           <section className="relative z-10 max-w-4xl mx-auto px-4 pb-24">
             <Reveal>
               <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
                 Frequently Asked Questions
               </h2>
               <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-                Still unsure? Get answers to the most commonly asked questions about our affiliate program.
+                Everything you need to know about earning 15% commission
               </p>
             </Reveal>
 
@@ -420,15 +557,15 @@ export default function AffiliatePage() {
                 className="bg-gradient-to-r from-yellow-400 to-green-400 rounded-3xl p-12 text-black"
               >
                 <h2 className="text-4xl sm:text-5xl font-extrabold mb-4">
-                  Play 5 min and earn up to $20
+                  Start Earning 15% Commission Today
                 </h2>
 
                 <p className="text-lg sm:text-xl max-w-2xl mx-auto mb-8">
-                  Join Cashog today and start earning with the #1 affiliate program
+                  Join Cashog's affiliate program and earn from 18+ earning methods
                 </p>
 
                 <PrimaryCTA href="/signup">
-                  Join Now
+                  Become an Affiliate Now
                 </PrimaryCTA>
               </motion.div>
             </Reveal>
