@@ -24,8 +24,6 @@ import {
   ClipboardList,
   Gamepad2,
   Film,
-  Pickaxe,
-  SquareCheckBig,
   LayoutGrid,
   Newspaper,
   Eye,
@@ -36,6 +34,14 @@ import {
   FileText,
   Award,
   Ticket,
+  Hammer,
+  CheckSquare,
+  Puzzle,
+  Timer,
+  ShoppingBag,
+  Headphones,
+  BookOpen,
+  PenTool,
 } from "lucide-react";
 
 /* ================= AFFILIATE STATS ================= */
@@ -104,8 +110,8 @@ const mainEarningMethods = [
   { name: "App Installs", path: "/app-installs", icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>, color: "text-green-400" },
   { name: "Playing Games", path: "/play-games", icon: <Gamepad2 className="w-5 h-5" />, color: "text-purple-400" },
   { name: "Watching Videos", path: "/watch-videos", icon: <Film className="w-5 h-5" />, color: "text-red-400" },
-  { name: "Mining Rewards", path: "/mining-rewards", icon: <Pickaxe className="w-5 h-5" />, color: "text-yellow-400" },
-  { name: "Completing Offers", path: "/complete-offers", icon: <SquareCheckBig className="w-5 h-5" />, color: "text-indigo-400" },
+  { name: "Mining Rewards", path: "/mining-rewards", icon: <Hammer className="w-5 h-5" />, color: "text-yellow-400" },
+  { name: "Completing Offers", path: "/complete-offers", icon: <CheckSquare className="w-5 h-5" />, color: "text-indigo-400" },
   { name: "Offerwall", path: "/offerwall", icon: <LayoutGrid className="w-5 h-5" />, color: "text-pink-400" },
   { name: "Surveywall", path: "/surveywall", icon: <ClipboardList className="w-5 h-5" />, color: "text-cyan-400" },
 ];
@@ -114,12 +120,12 @@ const mainEarningMethods = [
 const extraEarningMethods = [
   { name: "Watching Ads", path: "/watch-ads", icon: <Eye className="w-5 h-5" />, color: "text-amber-400" },
   { name: "Micro Tasks", path: "/micro-tasks", icon: <Sparkles className="w-5 h-5" />, color: "text-lime-400" },
-  { name: "Free Trials", path: "/complete-free-trials", icon: <Gift className="w-5 h-5" />, color: "text-emerald-400" },
+  { name: "Free Trials", path: "/complete-free-trials", icon: <Timer className="w-5 h-5" />, color: "text-emerald-400" },
   { name: "Testing Products", path: "/test-products", icon: <FlaskConical className="w-5 h-5" />, color: "text-teal-400" },
   { name: "Reading Emails", path: "/read-emails", icon: <Mail className="w-5 h-5" />, color: "text-orange-400" },
   { name: "Visiting Websites", path: "/visit-websites", icon: <MousePointerClick className="w-5 h-5" />, color: "text-rose-400" },
-  { name: "Review Tasks", path: "/review-tasks", icon: <FileText className="w-5 h-5" />, color: "text-violet-400" },
-  { name: "Spinning Wheel", path: "/spinning-wheel", icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>, color: "text-fuchsia-400" },
+  { name: "Review Tasks", path: "/review-tasks", icon: <PenTool className="w-5 h-5" />, color: "text-violet-400" },
+  { name: "Spinning Wheel", path: "/spinning-wheel", icon: <Puzzle className="w-5 h-5" />, color: "text-fuchsia-400" },
   { name: "Loyalty", path: "/loyalty", icon: <Award className="w-5 h-5" />, color: "text-yellow-400" },
   { name: "Vouchers", path: "/vouchers", icon: <Ticket className="w-5 h-5" />, color: "text-green-400" },
 ];
