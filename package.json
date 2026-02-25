@@ -18,8 +18,8 @@
     "@heroicons/react": "^2.0.18",
     "react-icons": "^4.11.0",
     "zustand": "^4.3.6",
-    "react-chartjs-2": "^3.0.0",    // Added
-    "chart.js": "^3.0.0"             // Added
+    "react-chartjs-2": "^3.0.0",
+    "chart.js": "^3.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.5.1",
