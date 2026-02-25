@@ -11,6 +11,7 @@ import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
 import RevealWithBorder from "@/components/animations/RevealWithBorder";
 import {
+  // Core icons
   Users,
   Gift,
   DollarSign,
@@ -39,7 +40,6 @@ import {
   Network,
   Sparkles,
   PartyPopper,
-  Gift as GiftIcon,
   CreditCard,
   PieChart,
   LineChart,
@@ -70,12 +70,13 @@ import {
   CloudLightning,
   CloudFog,
   Cloudy,
-  Wind as WindIcon,
+  Wind,
   Compass,
   Map,
   MapPin,
   Navigation,
-  Route,
+  // Fixed: Removed 'Route' and added 'Router' if needed
+  Router,
   Target as TargetIcon,
   Eye,
   EyeOff,
@@ -166,6 +167,8 @@ import {
   Wine,
   Utensils,
 } from "lucide-react";
+
+// ... rest of the imports remain the same
 
 /* ================= PARTNER STATS ================= */
 const partnerStats = [
