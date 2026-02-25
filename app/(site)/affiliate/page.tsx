@@ -40,28 +40,14 @@ import {
   PenTool,
   Monitor,
   Smartphone,
-  Tablet,
+  Globe,
   TrendingUp,
   Shield,
   Clock,
-  Globe,
   Wallet,
   BarChart3,
   Rocket,
   Crown,
-  Gem,
-  Diamond,
-  Medal,
-  ThumbsUp,
-  HeartHandshake,
-  Briefcase,
-  Coffee,
-  Compass,
-  Cpu,
-  CreditCard,
-  Database,
-  Headphones,
-  Heart,
   Infinity,
   Key,
   Layers,
@@ -69,32 +55,18 @@ import {
   Link,
   Lock,
   Map,
-  Maximize2,
-  Mic,
-  Minimize2,
-  Moon,
-  Move,
   Music,
-  Navigation,
-  Network,
   Package,
-  Paintbrush,
-  Paperclip,
   Phone,
   PieChart,
   PiggyBank,
-  Pin,
   Plane,
   Play,
-  Plus,
   Power,
-  Printer,
-  Radio,
   RefreshCw,
   Repeat,
   Rewind,
   RotateCcw,
-  Rss,
   Save,
   Scan,
   Search,
@@ -102,7 +74,6 @@ import {
   Server,
   Settings,
   Share,
-  ShieldAlert,
   ShoppingBag,
   Shuffle,
   SkipBack,
@@ -112,18 +83,12 @@ import {
   Smile,
   Speaker,
   Square,
-  Star as StarIcon,
   Sun,
   SwitchCamera,
   Table,
   Tag,
-  Target as TargetIcon,
   Terminal,
   Thermometer,
-  ThumbsDown,
-  ThumbsUp as ThumbsUpIcon,
-  ToggleLeft,
-  ToggleRight,
   Trash,
   Trello,
   Truck,
@@ -139,7 +104,6 @@ import {
   UserMinus,
   UserPlus,
   UserX,
-  Users as UsersIcon,
   Verified,
   Vibrate,
   Video,
@@ -147,7 +111,6 @@ import {
   Volume1,
   Volume2,
   VolumeX,
-  Wallet as WalletIcon,
   Wand,
   Watch,
   Waves,
@@ -159,7 +122,6 @@ import {
   XOctagon,
   XSquare,
   Youtube,
-  Zap as ZapIcon,
   ZoomIn,
   ZoomOut,
 } from "lucide-react";
@@ -413,13 +375,13 @@ export default function AffiliatePage() {
           {/* HERO WITH PREMIUM BADGES */}
           <Reveal>
             <div className="text-center mb-20 relative">
-              {/* Animated Background - FIXED: Removed Infinity reference */}
+              {/* Animated Background - FIXED: Using Number.POSITIVE_INFINITY instead of Infinity */}
               <motion.div
                 animate={{ 
                   scale: [1, 1.2, 1],
                   rotate: [0, 180, 360],
                 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-yellow-400/10 rounded-full"
               />
               
@@ -506,15 +468,15 @@ export default function AffiliatePage() {
                 </PrimaryCTA>
               </div>
 
-              {/* Floating Elements */}
+              {/* Floating Elements - FIXED: Using Number.POSITIVE_INFINITY */}
               <motion.div
                 animate={{ y: [0, -20, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                transition={{ duration: 5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
                 className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-r from-yellow-400/20 to-green-400/20 rounded-full blur-2xl"
               />
               <motion.div
                 animate={{ y: [0, 20, 0] }}
-                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+                transition={{ duration: 7, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
                 className="absolute bottom-20 right-10 w-32 h-32 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-2xl"
               />
             </div>
@@ -704,22 +666,22 @@ export default function AffiliatePage() {
                           </div>
                         </div>
                         
-                        {/* Floating 15% Badge - ANIMATED */}
+                        {/* Floating 15% Badge - ANIMATED - FIXED: Using Number.POSITIVE_INFINITY */}
                         <motion.div
                           animate={{ 
                             scale: [1, 1.1, 1],
                             rotate: [0, 5, -5, 0]
                           }}
-                          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                          transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
                           className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-gradient-to-r from-green-400 to-emerald-400 flex items-center justify-center text-white text-xs font-bold shadow-xl"
                         >
                           15%
                         </motion.div>
                         
-                        {/* Sparkle Effect */}
+                        {/* Sparkle Effect - FIXED: Using Number.POSITIVE_INFINITY */}
                         <motion.div
                           animate={{ opacity: [0, 1, 0] }}
-                          transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+                          transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, delay: 1 }}
                           className="absolute -top-1 -left-1 w-3 h-3 bg-yellow-400 rounded-full blur-sm"
                         />
                       </div>
@@ -944,34 +906,34 @@ export default function AffiliatePage() {
                 whileHover={{ scale: 1.02 }}
                 className="relative overflow-hidden rounded-3xl"
               >
-                {/* Animated Background */}
+                {/* Animated Background - FIXED: Using Number.POSITIVE_INFINITY */}
                 <motion.div
                   animate={{ 
                     scale: [1, 1.2, 1],
                     rotate: [0, 90, 180],
                   }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
                   className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-yellow-400 to-green-400 opacity-90"
                 />
                 
                 {/* Content */}
                 <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-3xl p-16 m-1">
-                  {/* Floating Elements */}
+                  {/* Floating Elements - FIXED: Using Number.POSITIVE_INFINITY */}
                   <motion.div
                     animate={{ y: [0, -20, 0] }}
-                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                    transition={{ duration: 5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
                     className="absolute top-10 left-10 w-32 h-32 bg-yellow-400/20 rounded-full blur-3xl"
                   />
                   <motion.div
                     animate={{ y: [0, 20, 0] }}
-                    transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+                    transition={{ duration: 7, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
                     className="absolute bottom-10 right-10 w-32 h-32 bg-green-400/20 rounded-full blur-3xl"
                   />
                   
                   <div className="relative">
                     <motion.div
                       animate={{ rotate: 360 }}
-                      transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                      transition={{ duration: 30, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
                       className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border-2 border-yellow-400/20 rounded-full"
                     />
                     
