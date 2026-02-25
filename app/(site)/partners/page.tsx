@@ -1,4 +1,4 @@
-// app/(site)/partner/page.tsx
+// app/(site)/partners/page.tsx
 
 "use client";
 
@@ -30,13 +30,12 @@ import {
   Infinity,
   Briefcase,
   Building2,
-  Handshake,
   Award,
   Gem,
   Diamond,
   Medal,
   TrendingUp,
-  HeartHandshake,
+  Heart,
   Network,
   Sparkles,
   PartyPopper,
@@ -44,7 +43,6 @@ import {
   CreditCard,
   PieChart,
   LineChart,
-  CandlestickChart,
   ArrowUpRight,
   ArrowDownRight,
   Percent,
@@ -79,9 +77,6 @@ import {
   Navigation,
   Route,
   Target as TargetIcon,
-  Bullseye,
-  Crosshair,
-  Aim,
   Eye,
   EyeOff,
   Scan,
@@ -90,13 +85,10 @@ import {
   ZoomOut,
   Maximize2,
   Minimize2,
-  Expand,
-  Shrink,
   Move,
   RotateCw,
   RotateCcw,
   Repeat,
-  Repeat1,
   Shuffle,
   Play,
   Pause,
@@ -111,20 +103,12 @@ import {
   Mic,
   MicOff,
   Radio,
-  Podcast,
   Music,
   Headphones as HeadphonesIcon,
   Speaker,
   SpeakerHigh,
   SpeakerLow,
   SpeakerNone,
-  Disc,
-  Disc3,
-  Vinyl,
-  Tape,
-  Cassette,
-  RadioReceiver,
-  Walkman,
   Gamepad2,
   Puzzle,
   Cpu,
@@ -136,17 +120,12 @@ import {
   Keyboard,
   Mouse,
   Printer,
-  Scanner,
   Camera,
   Video as VideoIcon,
   Webcam,
   Film,
-  Clapperboard,
   Tv,
-  Projector,
-  Drone,
   Robot,
-  Ai,
   Brain,
   Circuit,
   Microchip,
@@ -158,23 +137,14 @@ import {
   ShieldCheck,
   ShieldAlert,
   ShieldX,
-  ShieldHalf,
-  Sword,
-  Axe,
   Hammer,
   Wrench,
-  Screwdriver,
-  Saw,
-  Drill,
   Tool,
-  Construction,
   Building,
   Home,
-  Office,
   Factory,
   Warehouse,
   Store,
-  Shop,
   ShoppingBag,
   ShoppingCart,
   CreditCard as CreditCardIcon,
@@ -183,40 +153,18 @@ import {
   PiggyBank,
   Wallet as WalletIcon,
   Safe,
-  Vault,
   Gem as GemIcon,
   Diamond as DiamondIcon,
-  Ring,
-  Necklace,
   Watch as WatchIcon,
   Clock as ClockIcon,
   Hourglass as HourglassIcon,
   Calendar as CalendarIcon,
   Gift as GiftBoxIcon,
   PartyPopper as PartyIcon,
-  Balloon,
-  Cake,
-  GlassWater,
-  Champagne,
-  Wine,
-  Beer,
-  Cocktail,
-  Utensils,
-  Pizza,
-  Burger,
-  Fries,
-  IceCream,
-  Candy,
-  Cookie,
   Coffee as CoffeeIcon,
-  Tea,
-  Milk,
-  Water,
-  Soda,
-  Juice,
-  Beer as BeerIcon,
-  Wine as WineIcon,
-  GlassWater as GlassIcon,
+  Beer,
+  Wine,
+  Utensils,
 } from "lucide-react";
 
 /* ================= PARTNER STATS ================= */
@@ -446,6 +394,37 @@ const faqs = [
   },
 ];
 
+/* ================= CUSTOM ICONS ================= */
+const Code = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+  </svg>
+);
+
+const Code2 = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+  </svg>
+);
+
+const FileText = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+  </svg>
+);
+
+const Package = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+  </svg>
+);
+
+const Terminal = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+  </svg>
+);
+
 /* ================= PAGE ================= */
 export default function PartnerPage() {
   return (
@@ -484,9 +463,9 @@ export default function PartnerPage() {
                 transition={{ duration: 0.5 }}
                 className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-400/10 to-purple-400/10 rounded-full border border-blue-400/20 backdrop-blur-sm mb-8"
               >
-                <Handshake className="w-5 h-5 text-blue-400" />
+                <Heart className="w-5 h-5 text-blue-400" />
                 <span className="text-sm font-semibold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Join 10,000+ Partners Worldwide</span>
-                <Handshake className="w-5 h-5 text-purple-400" />
+                <Heart className="w-5 h-5 text-purple-400" />
               </motion.div>
               
               {/* Main Heading */}
@@ -991,13 +970,13 @@ export default function PartnerPage() {
             >
               <div className="py-16">
                 <div className="flex items-center justify-center gap-4 mb-8">
-                  <Handshake className="w-12 h-12 text-blue-400" />
+                  <Heart className="w-12 h-12 text-blue-400" />
                   <h2 className="text-5xl sm:text-6xl font-extrabold">
                     <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                       Ready to Partner?
                     </span>
                   </h2>
-                  <Handshake className="w-12 h-12 text-purple-400" />
+                  <Heart className="w-12 h-12 text-purple-400" />
                 </div>
 
                 <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10">
@@ -1047,22 +1026,3 @@ export default function PartnerPage() {
     </>
   );
 }
-
-// Missing imports
-const Code = ({ className }: { className?: string }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-  </svg>
-);
-
-const Code2 = ({ className }: { className?: string }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-  </svg>
-);
-
-const FileText = ({ className }: { className?: string }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-  </svg>
-);
