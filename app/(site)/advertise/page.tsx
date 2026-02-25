@@ -141,7 +141,6 @@ import {
   Utensils,
   Megaphone,
   RadioTower,
-  Satellite,
   Wifi,
   Activity,
   Crosshair,
@@ -150,7 +149,6 @@ import {
   Pointer,
   Hand,
   QrCode,
-  Barcode,
   Newspaper,
   BookOpen,
   FileText,
@@ -218,6 +216,8 @@ const BarChart4 = ({ className }: { className?: string }) => (
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 20h18M5 16h2M9 12h2M13 8h2M17 4h2" />
   </svg>
 );
+
+// Rest of the component code remains exactly the same...
 
 /* ================= AD STATS ================= */
 const adStats = [
