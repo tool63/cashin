@@ -137,7 +137,6 @@ import {
   Beer,
   Wine,
   Utensils,
-  // Missing icons for earning methods
   ClipboardList,
   LayoutGrid,
   CheckSquare,
@@ -372,7 +371,7 @@ export default function AffiliatePage() {
 
         <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
 
-          {/* HERO SECTION - Original style preserved */}
+          {/* HERO SECTION - Reduced height, one line */}
           <Reveal>
             <motion.div
               whileHover={{ scale: 1.02 }}
@@ -388,8 +387,8 @@ export default function AffiliatePage() {
                 className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-yellow-400 to-green-400 opacity-90"
               />
               
-              {/* Content */}
-              <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-3xl p-16 m-1">
+              {/* Content - Reduced padding */}
+              <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-3xl p-8 m-1">
                 {/* Floating Elements */}
                 <motion.div
                   animate={{ y: [0, -20, 0] }}
@@ -414,91 +413,72 @@ export default function AffiliatePage() {
                       initial={{ scale: 0.9, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
                       transition={{ duration: 0.5 }}
-                      className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-yellow-400/10 to-green-400/10 rounded-full border border-yellow-400/20 backdrop-blur-sm mb-8"
+                      className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-yellow-400/10 to-green-400/10 rounded-full border border-yellow-400/20 backdrop-blur-sm mb-6"
                     >
                       <Crown className="w-5 h-5 text-yellow-400" />
                       <span className="text-sm font-semibold bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">The #1 Affiliate Program</span>
                       <Crown className="w-5 h-5 text-green-400" />
                     </motion.div>
                     
-                    <h1 className="text-6xl sm:text-7xl md:text-8xl font-extrabold mb-8 leading-tight">
+                    <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold mb-4 leading-tight">
                       <span className="bg-gradient-to-r from-yellow-400 via-yellow-400 to-green-400 bg-clip-text text-transparent">
-                        Earn 15%
-                      </span>
-                      <br />
-                      <span className="text-4xl sm:text-5xl md:text-6xl text-gray-600 dark:text-gray-400">
-                        On Everything Your Friends Do
+                        Earn 15% On Everything
                       </span>
                     </h1>
 
-                    <div className="flex items-center justify-center gap-4 mb-6">
+                    <div className="flex items-center justify-center gap-4 mb-4">
                       <div className="flex -space-x-3">
                         {[1,2,3,4,5].map((i) => (
                           <motion.div
                             key={i}
                             whileHover={{ scale: 1.1, y: -2 }}
-                            className="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-green-400 flex items-center justify-center text-black font-bold text-sm border-2 border-white dark:border-gray-900 shadow-lg"
+                            className="w-8 h-8 rounded-full bg-gradient-to-r from-yellow-400 to-green-400 flex items-center justify-center text-black font-bold text-xs border-2 border-white dark:border-gray-900 shadow-lg"
                           >
                             {i}
                           </motion.div>
                         ))}
                       </div>
-                      <span className="text-2xl font-bold">Excellent</span>
+                      <span className="text-lg font-bold">Excellent</span>
                       <div className="flex gap-1">
                         {[1,2,3,4,5].map((star) => (
-                          <motion.div
-                            key={star}
-                            whileHover={{ scale: 1.2, rotate: 10 }}
-                          >
-                            <Star className="w-6 h-6 text-yellow-400 fill-current" />
-                          </motion.div>
+                          <Star key={star} className="w-4 h-4 text-yellow-400 fill-current" />
                         ))}
                       </div>
                     </div>
-                    
-                    <p className="text-gray-600 dark:text-gray-300 mb-3 text-lg">
-                      <span className="font-bold text-2xl">266,096+</span> reviews on
-                    </p>
-                    <motion.div 
-                      whileHover={{ scale: 1.05 }}
-                      className="flex items-center justify-center gap-3 mb-10"
-                    >
-                      <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-400 rounded-xl flex items-center justify-center text-white font-bold text-sm shadow-lg">
-                        TP
+
+                    <div className="flex items-center justify-center gap-6 mb-6">
+                      <div className="text-center">
+                        <div className="text-xl font-bold bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">50K+</div>
+                        <div className="text-xs text-gray-500">Affiliates</div>
                       </div>
-                      <span className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">Trustpilot</span>
-                    </motion.div>
-
-                    <div className="flex flex-wrap items-center justify-center gap-3 mb-12">
-                      {[
-                        { icon: <Zap className="w-4 h-4" />, text: "Instant Payouts" },
-                        { icon: <Infinity className="w-4 h-4" />, text: "No Limits" },
-                        { icon: <Globe className="w-4 h-4" />, text: "Global Program" },
-                        { icon: <Clock className="w-4 h-4" />, text: "24/7 Support" },
-                      ].map((item, i) => (
-                        <motion.div
-                          key={i}
-                          whileHover={{ scale: 1.05, y: -2 }}
-                          className="flex items-center gap-2 px-5 py-2.5 bg-white/80 dark:bg-white/5 backdrop-blur-sm rounded-full border border-gray-200 dark:border-gray-800 shadow-lg"
-                        >
-                          <div className="text-yellow-400">{item.icon}</div>
-                          <span className="text-sm font-medium">{item.text}</span>
-                        </motion.div>
-                      ))}
+                      <div className="w-px h-6 bg-gray-300 dark:bg-gray-700" />
+                      <div className="text-center">
+                        <div className="text-xl font-bold bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">15%</div>
+                        <div className="text-xs text-gray-500">Commission</div>
+                      </div>
+                      <div className="w-px h-6 bg-gray-300 dark:bg-gray-700" />
+                      <div className="text-center">
+                        <div className="text-xl font-bold bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">18+</div>
+                        <div className="text-xs text-gray-500">Methods</div>
+                      </div>
                     </div>
 
-                    <div className="flex justify-center">
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="inline-block"
+                    >
                       <PrimaryCTA href="/signup">
-                        Become An Affiliate 
+                        Become An Affiliate
                       </PrimaryCTA>
-                    </div>
+                    </motion.div>
                   </div>
                 </div>
               </div>
             </motion.div>
           </Reveal>
 
-          {/* STATS SECTION - With border */}
+          {/* STATS SECTION - With beautiful name */}
           <section className="relative z-10 max-w-7xl mx-auto px-4 py-16">
             <RevealWithBorder
               gradientFrom="from-emerald-400"
@@ -509,6 +489,11 @@ export default function AffiliatePage() {
               rotatingCircle={true}
             >
               <div className="py-8">
+                <h2 className="text-2xl font-bold text-center mb-8">
+                  <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+                    Program Performance
+                  </span>
+                </h2>
                 <div className="flex items-center justify-center gap-12">
                   {affiliateStats.map((stat) => (
                     <Reveal key={stat.label}>
@@ -614,7 +599,7 @@ export default function AffiliatePage() {
             </RevealWithBorder>
           </section>
 
-          {/* BONUSES SECTION - With border */}
+          {/* BONUSES SECTION - With beautiful name and content inside border */}
           <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
             <RevealWithBorder
               gradientFrom="from-purple-400"
@@ -627,7 +612,7 @@ export default function AffiliatePage() {
               <div className="py-8">
                 <h2 className="text-2xl font-bold text-center mb-8">
                   <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                    Unlock More Bonuses
+                    Exclusive Bonuses
                   </span>
                 </h2>
                 <div className="flex items-center justify-center gap-8">
@@ -774,8 +759,8 @@ export default function AffiliatePage() {
             </RevealWithBorder>
           </section>
 
-          {/* FINAL CTA - Original style preserved */}
-          <section className="relative z-10 text-center py-20">
+          {/* FINAL CTA - Reduced height, one line */}
+          <section className="relative z-10 text-center">
             <Reveal>
               <motion.div
                 whileHover={{ scale: 1.02 }}
@@ -791,8 +776,8 @@ export default function AffiliatePage() {
                   className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-yellow-400 to-green-400 opacity-90"
                 />
                 
-                {/* Content */}
-                <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-3xl p-16 m-1">
+                {/* Content - Reduced padding */}
+                <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-3xl p-8 m-1">
                   {/* Floating Elements */}
                   <motion.div
                     animate={{ y: [0, -20, 0] }}
@@ -812,45 +797,49 @@ export default function AffiliatePage() {
                       className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border-2 border-yellow-400/20 rounded-full"
                     />
                     
-                    <div className="flex items-center justify-center gap-4 mb-8">
-                      <Crown className="w-12 h-12 text-yellow-400" />
-                      <h2 className="text-5xl sm:text-6xl md:text-7xl font-extrabold">
+                    <div className="flex items-center justify-center gap-3 mb-4">
+                      <Crown className="w-8 h-8 text-yellow-400" />
+                      <h2 className="text-3xl sm:text-4xl font-extrabold">
                         <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
                           Ready to Earn 15%?
                         </span>
                       </h2>
-                      <Crown className="w-12 h-12 text-green-400" />
+                      <Crown className="w-8 h-8 text-green-400" />
                     </div>
 
-                    <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10">
-                      Join 50,000+ affiliates already earning from 18+ methods
+                    <p className="text-base text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-4">
+                      Join 50,000+ affiliates already earning
                     </p>
-                    
-                    <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
+
+                    <div className="flex flex-wrap items-center justify-center gap-2 mb-4">
                       {[
-                        { text: "⚡ Instant Payouts", gradient: "from-yellow-400/10 to-green-400/10" },
-                        { text: "🎯 No Limits", gradient: "from-blue-400/10 to-cyan-400/10" },
-                        { text: "🌍 Global", gradient: "from-purple-400/10 to-pink-400/10" },
-                        { text: "💰 15% Commission", gradient: "from-emerald-400/10 to-teal-400/10" },
-                      ].map((item, i) => (
+                        "⚡ Instant",
+                        "🎯 No Limits",
+                        "🌍 Global",
+                        "💰 15%",
+                      ].map((text, i) => (
                         <motion.div
                           key={i}
                           whileHover={{ scale: 1.05, y: -2 }}
-                          className={`px-6 py-3 bg-gradient-to-r ${item.gradient} rounded-full text-sm font-semibold backdrop-blur-sm border border-white/20`}
+                          className="px-3 py-1.5 bg-gradient-to-r from-yellow-400/10 to-green-400/10 rounded-full text-xs font-semibold backdrop-blur-sm border border-white/20"
                         >
-                          {item.text}
+                          {text}
                         </motion.div>
                       ))}
                     </div>
 
-                    <div className="flex justify-center">
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="inline-block"
+                    >
                       <PrimaryCTA href="/signup">
-                        Become an Affiliate
+                        Join Now
                       </PrimaryCTA>
-                    </div>
+                    </motion.div>
                     
-                    <p className="text-sm text-gray-500 mt-8">
-                      🔒 Free to join • No credit card required • 50,000+ active affiliates
+                    <p className="text-xs text-gray-500 mt-3">
+                      50,000+ active affiliates
                     </p>
                   </div>
                 </div>
