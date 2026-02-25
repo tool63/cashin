@@ -274,7 +274,7 @@ export default function PartnerPage() {
 
         <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
 
-          {/* HERO SECTION - Clean border line, no Contact Sales */}
+          {/* HERO SECTION */}
           <RevealWithBorder 
             gradientFrom="from-blue-400"
             gradientVia="via-purple-400" 
@@ -305,7 +305,6 @@ export default function PartnerPage() {
                 Join 10,000+ partners and earn up to 30% revenue share
               </p>
 
-              {/* Stats Preview - Ultra compact */}
               <div className="flex items-center justify-center gap-6 mb-8">
                 <div className="text-center">
                   <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">10K+</div>
@@ -323,7 +322,6 @@ export default function PartnerPage() {
                 </div>
               </div>
 
-              {/* Single CTA Button - Fixed: removed className */}
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -336,94 +334,45 @@ export default function PartnerPage() {
             </div>
           </RevealWithBorder>
 
-          {/* STATS SECTION - Ultra premium mini stats */}
+          {/* STATS SECTION - With border */}
           <section className="relative z-10 max-w-7xl mx-auto px-4 py-16">
-            <div className="flex items-center justify-center gap-12">
-              {partnerStats.map((stat) => (
-                <Reveal key={stat.label}>
-                  <motion.div
-                    whileHover={{ y: -2 }}
-                    className="flex items-center gap-3"
-                  >
-                    <div className={`w-8 h-8 rounded-lg bg-gradient-to-r ${stat.gradient} bg-opacity-10 flex items-center justify-center`}>
-                      <div className={stat.iconColor}>
-                        {stat.icon}
-                      </div>
-                    </div>
-                    <div>
-                      <div className="text-sm font-medium text-gray-500">{stat.label}</div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-xl font-bold">{stat.value}</span>
-                        <span className="text-xs text-green-400">{stat.trend}</span>
-                      </div>
-                    </div>
-                  </motion.div>
-                </Reveal>
-              ))}
-            </div>
+            <RevealWithBorder
+              gradientFrom="from-blue-400"
+              gradientVia="via-purple-400"
+              gradientTo="to-pink-400"
+              borderColor="border-blue-400/20"
+              floatingElements={false}
+              rotatingCircle={true}
+            >
+              <div className="py-8">
+                <div className="flex items-center justify-center gap-12">
+                  {partnerStats.map((stat) => (
+                    <Reveal key={stat.label}>
+                      <motion.div
+                        whileHover={{ y: -2 }}
+                        className="flex items-center gap-3"
+                      >
+                        <div className={`w-8 h-8 rounded-lg bg-gradient-to-r ${stat.gradient} bg-opacity-10 flex items-center justify-center`}>
+                          <div className={stat.iconColor}>
+                            {stat.icon}
+                          </div>
+                        </div>
+                        <div>
+                          <div className="text-sm font-medium text-gray-500">{stat.label}</div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-xl font-bold">{stat.value}</span>
+                            <span className="text-xs text-green-400">{stat.trend}</span>
+                          </div>
+                        </div>
+                      </motion.div>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </RevealWithBorder>
           </section>
 
-          {/* PARTNER TIERS - Ultra premium icon row */}
-          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
-            <h2 className="text-2xl font-bold text-center mb-8">
-              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Partner Tiers
-              </span>
-            </h2>
-            <div className="flex items-center justify-center gap-8">
-              {partnerTiers.map((tier) => (
-                <Reveal key={tier.name}>
-                  <motion.div
-                    whileHover={{ y: -2 }}
-                    className="relative flex items-center gap-3 px-4 py-2 bg-white dark:bg-[#0a0d16] rounded-full border border-gray-200 dark:border-gray-800 shadow-sm"
-                  >
-                    {tier.popular && (
-                      <div className="absolute -top-2 -right-2 w-4 h-4 rounded-full bg-gradient-to-r from-yellow-400 to-amber-400 flex items-center justify-center text-[8px] text-black font-bold">
-                        ★
-                      </div>
-                    )}
-                    <div className={`w-6 h-6 rounded-full bg-gradient-to-r ${tier.gradient} bg-opacity-10 flex items-center justify-center`}>
-                      <div className={tier.iconColor}>
-                        {tier.icon}
-                      </div>
-                    </div>
-                    <span className="text-sm font-medium">{tier.name}</span>
-                    <span className="text-xs font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                      {tier.revenue}
-                    </span>
-                  </motion.div>
-                </Reveal>
-              ))}
-            </div>
-          </section>
-
-          {/* BENEFITS - Ultra premium icon grid */}
-          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
-            <h2 className="text-2xl font-bold text-center mb-8">
-              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Benefits
-              </span>
-            </h2>
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              {partnerBenefits.map((benefit) => (
-                <Reveal key={benefit.title}>
-                  <motion.div
-                    whileHover={{ y: -2 }}
-                    className="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-[#0a0d16] rounded-full border border-gray-200 dark:border-gray-800 shadow-sm"
-                  >
-                    <div className={`w-5 h-5 rounded-full bg-gradient-to-r ${benefit.gradient} bg-opacity-10 flex items-center justify-center`}>
-                      <div className={benefit.iconColor}>
-                        {benefit.icon}
-                      </div>
-                    </div>
-                    <span className="text-xs font-medium">{benefit.title}</span>
-                  </motion.div>
-                </Reveal>
-              ))}
-            </div>
-          </section>
-
-          {/* SUCCESS STORIES - Ultra premium mini cards */}
+          {/* PARTNER TIERS - With border */}
           <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
             <RevealWithBorder
               gradientFrom="from-purple-400"
@@ -433,8 +382,90 @@ export default function PartnerPage() {
               floatingElements={false}
               rotatingCircle={true}
             >
-              <div className="text-center py-8">
-                <h2 className="text-2xl font-bold mb-6">
+              <div className="py-8">
+                <h2 className="text-2xl font-bold text-center mb-8">
+                  <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    Partner Tiers
+                  </span>
+                </h2>
+                <div className="flex items-center justify-center gap-8">
+                  {partnerTiers.map((tier) => (
+                    <Reveal key={tier.name}>
+                      <motion.div
+                        whileHover={{ y: -2 }}
+                        className="relative flex items-center gap-3 px-4 py-2 bg-white dark:bg-[#0a0d16] rounded-full border border-gray-200 dark:border-gray-800 shadow-sm"
+                      >
+                        {tier.popular && (
+                          <div className="absolute -top-2 -right-2 w-4 h-4 rounded-full bg-gradient-to-r from-yellow-400 to-amber-400 flex items-center justify-center text-[8px] text-black font-bold">
+                            ★
+                          </div>
+                        )}
+                        <div className={`w-6 h-6 rounded-full bg-gradient-to-r ${tier.gradient} bg-opacity-10 flex items-center justify-center`}>
+                          <div className={tier.iconColor}>
+                            {tier.icon}
+                          </div>
+                        </div>
+                        <span className="text-sm font-medium">{tier.name}</span>
+                        <span className="text-xs font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                          {tier.revenue}
+                        </span>
+                      </motion.div>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </RevealWithBorder>
+          </section>
+
+          {/* BENEFITS - With border */}
+          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
+            <RevealWithBorder
+              gradientFrom="from-emerald-400"
+              gradientVia="via-teal-400"
+              gradientTo="to-cyan-400"
+              borderColor="border-emerald-400/20"
+              floatingElements={false}
+              rotatingCircle={true}
+            >
+              <div className="py-8">
+                <h2 className="text-2xl font-bold text-center mb-8">
+                  <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+                    Benefits
+                  </span>
+                </h2>
+                <div className="flex flex-wrap items-center justify-center gap-4">
+                  {partnerBenefits.map((benefit) => (
+                    <Reveal key={benefit.title}>
+                      <motion.div
+                        whileHover={{ y: -2 }}
+                        className="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-[#0a0d16] rounded-full border border-gray-200 dark:border-gray-800 shadow-sm"
+                      >
+                        <div className={`w-5 h-5 rounded-full bg-gradient-to-r ${benefit.gradient} bg-opacity-10 flex items-center justify-center`}>
+                          <div className={benefit.iconColor}>
+                            {benefit.icon}
+                          </div>
+                        </div>
+                        <span className="text-xs font-medium">{benefit.title}</span>
+                      </motion.div>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </RevealWithBorder>
+          </section>
+
+          {/* SUCCESS STORIES - With border */}
+          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
+            <RevealWithBorder
+              gradientFrom="from-purple-400"
+              gradientVia="via-pink-400"
+              gradientTo="to-red-400"
+              borderColor="border-purple-400/20"
+              floatingElements={false}
+              rotatingCircle={true}
+            >
+              <div className="py-8">
+                <h2 className="text-2xl font-bold text-center mb-8">
                   <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                     Success Stories
                   </span>
@@ -464,33 +495,44 @@ export default function PartnerPage() {
             </RevealWithBorder>
           </section>
 
-          {/* INTEGRATIONS - Ultra premium icon row */}
+          {/* INTEGRATIONS - With border */}
           <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
-            <h2 className="text-2xl font-bold text-center mb-8">
-              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Integrations
-              </span>
-            </h2>
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              {integrations.map((integration) => (
-                <Reveal key={integration.name}>
-                  <motion.div
-                    whileHover={{ y: -2 }}
-                    className="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-[#0a0d16] rounded-full border border-gray-200 dark:border-gray-800 shadow-sm"
-                  >
-                    <div className={`w-5 h-5 rounded-full bg-gradient-to-r ${integration.gradient} bg-opacity-10 flex items-center justify-center`}>
-                      <div className={`text-${integration.gradient.split(' ')[0].replace('from-', '')}-600 dark:text-white`}>
-                        {integration.icon}
-                      </div>
-                    </div>
-                    <span className="text-xs font-medium">{integration.name}</span>
-                  </motion.div>
-                </Reveal>
-              ))}
-            </div>
+            <RevealWithBorder
+              gradientFrom="from-blue-400"
+              gradientVia="via-cyan-400"
+              gradientTo="to-sky-400"
+              borderColor="border-blue-400/20"
+              floatingElements={false}
+              rotatingCircle={true}
+            >
+              <div className="py-8">
+                <h2 className="text-2xl font-bold text-center mb-8">
+                  <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                    Integrations
+                  </span>
+                </h2>
+                <div className="flex flex-wrap items-center justify-center gap-3">
+                  {integrations.map((integration) => (
+                    <Reveal key={integration.name}>
+                      <motion.div
+                        whileHover={{ y: -2 }}
+                        className="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-[#0a0d16] rounded-full border border-gray-200 dark:border-gray-800 shadow-sm"
+                      >
+                        <div className={`w-5 h-5 rounded-full bg-gradient-to-r ${integration.gradient} bg-opacity-10 flex items-center justify-center`}>
+                          <div className={`text-${integration.gradient.split(' ')[0].replace('from-', '')}-600 dark:text-white`}>
+                            {integration.icon}
+                          </div>
+                        </div>
+                        <span className="text-xs font-medium">{integration.name}</span>
+                      </motion.div>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </RevealWithBorder>
           </section>
 
-          {/* HOW IT WORKS - Ultra premium step indicators */}
+          {/* HOW IT WORKS - With border */}
           <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
             <RevealWithBorder
               gradientFrom="from-emerald-400"
@@ -500,8 +542,8 @@ export default function PartnerPage() {
               floatingElements={false}
               rotatingCircle={true}
             >
-              <div className="text-center py-8">
-                <h2 className="text-2xl font-bold mb-6">
+              <div className="py-8">
+                <h2 className="text-2xl font-bold text-center mb-8">
                   <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
                     How It Works
                   </span>
@@ -534,7 +576,7 @@ export default function PartnerPage() {
             </RevealWithBorder>
           </section>
 
-          {/* FAQ - Ultra premium mini FAQ */}
+          {/* FAQ - With border */}
           <section className="relative z-10 max-w-3xl mx-auto px-4 pb-16">
             <RevealWithBorder
               gradientFrom="from-orange-400"
@@ -555,7 +597,7 @@ export default function PartnerPage() {
                     <Reveal key={index}>
                       <motion.div
                         whileHover={{ y: -1 }}
-                        className="p-3 bg-white/50 dark:bg-white/5 rounded-lg"
+                        className="p-3 bg-white/50 dark:bg-white/5 rounded-lg border border-gray-200 dark:border-gray-800"
                       >
                         <div className="flex items-start gap-2">
                           <div className="w-4 h-4 rounded-full bg-gradient-to-r from-orange-400 to-yellow-400 flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -574,7 +616,7 @@ export default function PartnerPage() {
             </RevealWithBorder>
           </section>
 
-          {/* FINAL CTA - Clean border line, no Contact Sales */}
+          {/* FINAL CTA */}
           <section className="relative z-10 text-center">
             <RevealWithBorder
               gradientFrom="from-blue-400"
@@ -599,7 +641,6 @@ export default function PartnerPage() {
                   Join 10,000+ partners earning up to 30% revenue share
                 </p>
 
-                {/* Single CTA Button - Fixed: removed className */}
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
