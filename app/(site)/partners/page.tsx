@@ -119,9 +119,9 @@ import {
   Webcam,
   Film,
   Tv,
-  Bot,  // Changed from Robot to Bot
+  Bot,
   Brain,
-  Circuit,
+  // Removed 'Circuit' as it's not exported
   Microchip,
   Fingerprint,
   Key,
