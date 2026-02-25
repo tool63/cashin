@@ -215,7 +215,7 @@ export default function AppInstallPage() {
             </>
           </Reveal>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-24">
+          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mb-24">
             {apps.map((app) => (
               <Reveal key={app.id}>
                 <ExpandableCard>
@@ -280,7 +280,7 @@ export default function AppInstallPage() {
             </>
           </Reveal>
 
-          <div className="grid gap-6 md:grid-cols-3 mb-24">
+          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mb-24">
             {stats.map((stat) => (
               <Reveal key={stat.label}>
                 <ExpandableCard>
@@ -317,7 +317,7 @@ export default function AppInstallPage() {
             </>
           </Reveal>
 
-          <div className="grid gap-6 md:grid-cols-3 mb-24">
+          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mb-24">
             {[
               { icon: <User className="w-8 h-8 text-yellow-400" />, title: "Sign Up", desc: "Create your free account to get started." },
               { icon: <Star className="w-8 h-8 text-green-400" />, title: "Complete Tasks", desc: "Install apps and complete actions to earn rewards." },
