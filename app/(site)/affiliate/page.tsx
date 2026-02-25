@@ -643,4 +643,121 @@ export default function AffiliatePage() {
                           </div>
                           <div>
                             <h4 className="font-bold">{testimonial.name}</h4>
-                            <p className="text-xs
+                            <p className="text-xs text-gray-500">{testimonial.date}</p>
+                          </div>
+                        </div>
+                        <div className="px-3 py-1 bg-green-500/10 rounded-full text-xs font-bold text-green-400">
+                          {testimonial.earnings}
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-center gap-1 mb-3">
+                        {Array(testimonial.rating).fill(0).map((_, i) => (
+                          <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                        ))}
+                      </div>
+                      
+                      <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                        "{testimonial.content}"
+                      </p>
+                      
+                      <div className="mt-4 flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-400" />
+                        <span className="text-xs text-gray-500">Verified Affiliate</span>
+                      </div>
+                    </div>
+                  </motion.div>
+                </Reveal>
+              ))}
+            </div>
+          </section>
+
+          {/* FAQ SECTION */}
+          <section className="relative z-10 max-w-4xl mx-auto px-4 pb-24">
+            <Reveal>
+              <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+                Everything you need to know about earning 15% commission
+              </p>
+            </Reveal>
+
+            <FAQ faqs={faqs} />
+          </section>
+
+          {/* FINAL CTA WITH PREMIUM DESIGN */}
+          <section className="relative z-10 text-center py-20">
+            <Reveal>
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-yellow-400 via-yellow-400 to-green-400 p-1"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-green-400 opacity-90" />
+                
+                <div className="relative bg-white dark:bg-gray-900 rounded-3xl p-12 m-0.5">
+                  <div className="absolute top-0 left-0 w-64 h-64 bg-yellow-400/20 rounded-full blur-3xl" />
+                  <div className="absolute bottom-0 right-0 w-64 h-64 bg-green-400/20 rounded-full blur-3xl" />
+                  
+                  <div className="relative">
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 border-2 border-yellow-400/20 rounded-full"
+                    />
+                    
+                    <div className="flex items-center justify-center gap-2 mb-6">
+                      <Crown className="w-8 h-8 text-yellow-400" />
+                      <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold">
+                        Ready to <span className="gradient-text bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">Earn 15%</span>?
+                      </h2>
+                      <Crown className="w-8 h-8 text-green-400" />
+                    </div>
+
+                    <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
+                      Join 50,000+ affiliates already earning from 18+ methods
+                    </p>
+                    
+                    <div className="flex flex-wrap items-center justify-center gap-3 mb-8">
+                      <div className="px-4 py-2 bg-green-500/10 rounded-full text-sm">
+                        ⚡ Instant Payouts
+                      </div>
+                      <div className="px-4 py-2 bg-green-500/10 rounded-full text-sm">
+                        🎯 No Limits
+                      </div>
+                      <div className="px-4 py-2 bg-green-500/10 rounded-full text-sm">
+                        🌍 Global
+                      </div>
+                      <div className="px-4 py-2 bg-green-500/10 rounded-full text-sm">
+                        💰 15% Commission
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                      <PrimaryCTA href="/signup" className="px-8 py-4 text-lg bg-gradient-to-r from-yellow-400 to-green-400 text-black">
+                        Become an Affiliate Now
+                      </PrimaryCTA>
+                      <motion.a
+                        href="#"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.97 }}
+                        className="px-8 py-4 text-lg font-semibold rounded-xl bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white hover:shadow-lg transition-all duration-300"
+                      >
+                        View Dashboard →
+                      </motion.a>
+                    </div>
+                    
+                    <p className="text-sm text-gray-500 mt-6">
+                      🔒 Free to join • No credit card required • 50,000+ active affiliates
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            </Reveal>
+          </section>
+
+        </section>
+      </main>
+    </>
+  );
+}
