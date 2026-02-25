@@ -1,258 +1,842 @@
+// app/(site)/advertise/page.tsx
+
 "use client";
 
 import React from "react";
-import {
-  ArrowRight,
-  User,
-  CreditCard,
-  Target,
-  Globe,
-  BarChart,
-  DollarSign,
-  ShieldCheck,
-  Headphones,
-  CheckCircle,
-  Users,
-} from "lucide-react";
-import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Meta from "@/components/seo/SeoEngine";
 import TypingText from "@/components/typing/TypingText";
 import Background from "@/components/Background";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
+import RevealWithBorder from "@/components/animations/RevealWithBorder";
+import {
+  // Core icons
+  Users,
+  Gift,
+  DollarSign,
+  Trophy,
+  Star,
+  User,
+  Target,
+  Zap,
+  CheckCircle,
+  Globe,
+  Shield,
+  Clock,
+  Wallet,
+  BarChart3,
+  Rocket,
+  Crown,
+  Infinity,
+  Briefcase,
+  Building2,
+  Award,
+  Gem,
+  Diamond,
+  Medal,
+  TrendingUp,
+  Heart,
+  Network,
+  Sparkles,
+  PartyPopper,
+  CreditCard,
+  PieChart,
+  LineChart,
+  ArrowUpRight,
+  ArrowDownRight,
+  Percent,
+  BadgeCheck,
+  Verified,
+  ThumbsUp,
+  Headphones,
+  Mail,
+  MessageCircle,
+  Phone,
+  Video,
+  Calendar,
+  Timer,
+  Watch,
+  AlarmClock,
+  Hourglass,
+  Coffee,
+  Moon,
+  Sun,
+  Cloud,
+  CloudSun,
+  CloudRain,
+  CloudSnow,
+  CloudLightning,
+  CloudFog,
+  Cloudy,
+  Wind,
+  Compass,
+  Map,
+  MapPin,
+  Navigation,
+  Eye,
+  EyeOff,
+  Scan,
+  Search,
+  ZoomIn,
+  ZoomOut,
+  Maximize2,
+  Minimize2,
+  Move,
+  RotateCw,
+  RotateCcw,
+  Repeat,
+  Shuffle,
+  Play,
+  Pause,
+  SkipBack,
+  SkipForward,
+  Rewind,
+  FastForward,
+  Volume1,
+  Volume2,
+  VolumeX,
+  Mic,
+  MicOff,
+  Radio,
+  Music,
+  Gamepad2,
+  Puzzle,
+  Cpu,
+  HardDrive,
+  Monitor,
+  Smartphone,
+  Tablet,
+  Laptop,
+  Keyboard,
+  Mouse,
+  Printer,
+  Camera,
+  Webcam,
+  Film,
+  Tv,
+  Bot,
+  Brain,
+  Fingerprint,
+  Key,
+  Lock,
+  Unlock,
+  ShieldCheck,
+  ShieldAlert,
+  ShieldOff,
+  Hammer,
+  Wrench,
+  Building,
+  Home,
+  Factory,
+  Warehouse,
+  Store,
+  ShoppingBag,
+  ShoppingCart,
+  Banknote,
+  Coins,
+  PiggyBank,
+  Beer,
+  Wine,
+  Utensils,
+  Megaphone,
+  RadioTower,
+  Satellite,
+  Antenna,
+  Wifi,
+  TrendingUp as TrendingIcon,
+  PieChart as PieChartIcon,
+  BarChart4,
+  LineChart as LineChartIcon,
+  AreaChart,
+  CandlestickChart,
+  Activity,
+  Target as TargetIcon,
+  Crosshair,
+  Eye as EyeIcon,
+  MousePointer,
+  MousePointerClick,
+  Pointer,
+  Hand,
+  Fingerprint as FingerprintIcon,
+  Scan as ScanIcon,
+  QrCode,
+  Barcode,
+  Smartphone as SmartphoneIcon,
+  Tablet as TabletIcon,
+  Laptop as LaptopIcon,
+  Monitor as MonitorIcon,
+  Tv as TvIcon,
+  Radio as RadioIcon,
+  Newspaper,
+  BookOpen,
+  FileText as FileTextIcon,
+  FileSpreadsheet,
+  FileSliders,
+  FileBarChart,
+  FilePieChart,
+  FileLineChart,
+  FileCog,
+  FileCheck,
+  FileWarning,
+  FileX,
+  FileMinus,
+  FilePlus,
+  FileSearch,
+  FileScan,
+  FileVideo,
+  FileAudio,
+  FileImage,
+  FileCode,
+  FileJson,
+  FileType,
+  FileDigit,
+  FileSpreadsheet as FileSpreadsheetIcon,
+} from "lucide-react";
 
-/* ================= DATA ================= */
+/* ================= CUSTOM ICONS ================= */
+const Code = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+  </svg>
+);
 
-const steps = [
+const Code2 = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+  </svg>
+);
+
+const FileText = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+  </svg>
+);
+
+const Package = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+  </svg>
+);
+
+const Terminal = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+  </svg>
+);
+
+/* ================= AD STATS ================= */
+const adStats = [
   {
-    icon: <User size={30} className="text-yellow-400" />,
-    title: "Sign Up as Advertiser",
-    description:
-      "Create an advertiser account and access our platform to promote your brand or products.",
+    label: "Daily Impressions",
+    value: "10M+",
+    icon: <Eye className="w-5 h-5" />,
+    trend: "+25%",
+    gradient: "from-blue-400 to-indigo-400",
+    iconColor: "text-blue-600 dark:text-blue-400",
   },
   {
-    icon: <CreditCard size={30} className="text-green-400" />,
-    title: "Set Up Campaigns",
-    description:
-      "Design campaigns, choose target audience, and set your budget easily.",
+    label: "Click-Through Rate",
+    value: "3.2%",
+    icon: <MousePointerClick className="w-5 h-5" />,
+    trend: "+0.5%",
+    gradient: "from-emerald-400 to-teal-400",
+    iconColor: "text-emerald-600 dark:text-emerald-400",
   },
   {
-    icon: <Target size={30} className="text-yellow-400" />,
-    title: "Reach Millions",
-    description:
-      "Your ads are displayed to millions of active users completing offers.",
-  },
-  {
-    icon: <BarChart size={30} className="text-green-400" />,
-    title: "Monitor & Optimize",
-    description:
-      "Track clicks, conversions, and ROI in real-time with our dashboard.",
+    label: "Active Campaigns",
+    value: "1,250+",
+    icon: <Megaphone className="w-5 h-5" />,
+    trend: "+18%",
+    gradient: "from-amber-400 to-orange-400",
+    iconColor: "text-amber-600 dark:text-amber-400",
   },
 ];
 
-const features = [
+/* ================= AD FORMATS ================= */
+const adFormats = [
+  { name: "Banner Ads", icon: <LayoutGrid className="w-4 h-4" />, ctr: "0.8%", gradient: "from-blue-400 to-cyan-400", color: "blue" },
+  { name: "Native Ads", icon: <Newspaper className="w-4 h-4" />, ctr: "1.2%", gradient: "from-green-400 to-emerald-400", color: "green" },
+  { name: "Video Ads", icon: <Film className="w-4 h-4" />, ctr: "2.5%", gradient: "from-purple-400 to-pink-400", color: "purple" },
+  { name: "Interstitial", icon: <Maximize2 className="w-4 h-4" />, ctr: "1.8%", gradient: "from-red-400 to-rose-400", color: "red" },
+  { name: "Rewarded Video", icon: <Gift className="w-4 h-4" />, ctr: "4.2%", gradient: "from-amber-400 to-orange-400", color: "amber" },
+  { name: "Playable Ads", icon: <Gamepad2 className="w-4 h-4" />, ctr: "3.5%", gradient: "from-indigo-400 to-purple-400", color: "indigo" },
+  { name: "Offerwall", icon: <LayoutGrid className="w-4 h-4" />, ctr: "2.8%", gradient: "from-pink-400 to-rose-400", color: "pink" },
+  { name: "Native Video", icon: <Video className="w-4 h-4" />, ctr: "3.1%", gradient: "from-cyan-400 to-blue-400", color: "cyan" },
+  { name: "Rich Media", icon: <Sparkles className="w-4 h-4" />, ctr: "2.2%", gradient: "from-lime-400 to-green-400", color: "lime" },
+  { name: "Display Ads", icon: <Monitor className="w-4 h-4" />, ctr: "0.9%", gradient: "from-teal-400 to-cyan-400", color: "teal" },
+  { name: "Mobile Ads", icon: <Smartphone className="w-4 h-4" />, ctr: "2.7%", gradient: "from-orange-400 to-amber-400", color: "orange" },
+  { name: "Desktop Ads", icon: <Laptop className="w-4 h-4" />, ctr: "1.4%", gradient: "from-rose-400 to-pink-400", color: "rose" },
+];
+
+/* ================= TARGETING OPTIONS ================= */
+const targetingOptions = [
+  { name: "Demographic", icon: <Users className="w-4 h-4" />, gradient: "from-blue-400 to-cyan-400", color: "blue" },
+  { name: "Geographic", icon: <Globe className="w-4 h-4" />, gradient: "from-green-400 to-emerald-400", color: "green" },
+  { name: "Behavioral", icon: <Activity className="w-4 h-4" />, gradient: "from-purple-400 to-pink-400", color: "purple" },
+  { name: "Contextual", icon: <FileText className="w-4 h-4" />, gradient: "from-red-400 to-rose-400", color: "red" },
+  { name: "Device", icon: <Smartphone className="w-4 h-4" />, gradient: "from-amber-400 to-orange-400", color: "amber" },
+  { name: "Time of Day", icon: <Clock className="w-4 h-4" />, gradient: "from-indigo-400 to-purple-400", color: "indigo" },
+  { name: "Interest", icon: <Heart className="w-4 h-4" />, gradient: "from-pink-400 to-rose-400", color: "pink" },
+  { name: "Retargeting", icon: <Repeat className="w-4 h-4" />, gradient: "from-cyan-400 to-blue-400", color: "cyan" },
+];
+
+/* ================= AD PLACEMENTS ================= */
+const adPlacements = [
+  { name: "In-App", icon: <Smartphone className="w-4 h-4" />, reach: "500M+", gradient: "from-blue-400 to-cyan-400" },
+  { name: "Mobile Web", icon: <Globe className="w-4 h-4" />, reach: "750M+", gradient: "from-green-400 to-emerald-400" },
+  { name: "Desktop", icon: <Monitor className="w-4 h-4" />, reach: "350M+", gradient: "from-purple-400 to-pink-400" },
+  { name: "CTV", icon: <Tv className="w-4 h-4" />, reach: "200M+", gradient: "from-red-400 to-rose-400" },
+];
+
+/* ================= PERFORMANCE METRICS ================= */
+const performanceMetrics = [
+  { label: "Avg. CPM", value: "$4.50", icon: <DollarSign className="w-4 h-4" />, gradient: "from-emerald-400 to-teal-400" },
+  { label: "Avg. CPC", value: "$0.35", icon: <MousePointerClick className="w-4 h-4" />, gradient: "from-blue-400 to-indigo-400" },
+  { label: "Fill Rate", value: "98%", icon: <Percent className="w-4 h-4" />, gradient: "from-amber-400 to-orange-400" },
+  { label: "Viewability", value: "92%", icon: <Eye className="w-4 h-4" />, gradient: "from-purple-400 to-pink-400" },
+];
+
+/* ================= TESTIMONIALS ================= */
+const testimonials = [
   {
-    icon: <Target size={22} className="text-yellow-500" />,
-    title: "High Engagement",
-    description: "Reach an active audience ready to interact.",
+    name: "Global Brands Inc.",
+    avatar: "GB",
+    revenue: "+156%",
+    quote: "Best ROI we've seen across all ad networks.",
+    gradient: "from-blue-400 to-cyan-400",
   },
   {
-    icon: <BarChart size={22} className="text-green-500" />,
-    title: "Real-Time Analytics",
-    description: "Monitor performance metrics instantly.",
+    name: "TechStart",
+    avatar: "TS",
+    revenue: "+243%",
+    quote: "Incredible reach and targeting capabilities.",
+    gradient: "from-green-400 to-emerald-400",
   },
   {
-    icon: <Globe size={22} className="text-yellow-500" />,
-    title: "Global Reach",
-    description: "Promote to users worldwide.",
-  },
-  {
-    icon: <DollarSign size={22} className="text-green-500" />,
-    title: "Flexible Budgets",
-    description: "Set daily or total campaign budgets easily.",
-  },
-  {
-    icon: <ShieldCheck size={22} className="text-yellow-500" />,
-    title: "Trusted Platform",
-    description: "Advertise on a trusted platform.",
-  },
-  {
-    icon: <Headphones size={22} className="text-green-500" />,
-    title: "Dedicated Support",
-    description: "24/7 campaign optimization support.",
+    name: "Media Group",
+    avatar: "MG",
+    revenue: "+189%",
+    quote: "The analytics and reporting are unmatched.",
+    gradient: "from-purple-400 to-pink-400",
   },
 ];
 
-const stats = [
-  { value: "50M+", label: "Active Users", icon: <Users size={18} /> },
-  { value: "150+", label: "Countries", icon: <Globe size={18} /> },
-  { value: "2.5B+", label: "Impressions/mo", icon: <BarChart size={18} /> },
-  { value: "99.9%", label: "Uptime", icon: <CheckCircle size={18} /> },
-];
-
+/* ================= FAQ ================= */
 const faqs = [
-  {
-    q: "How do I start advertising?",
-    a: "Sign up for a free advertiser account and create your first campaign instantly.",
-  },
-  {
-    q: "Can I target specific users?",
-    a: "Yes, you can target by demographics, location, and interests.",
-  },
-  {
-    q: "Is there a minimum budget?",
-    a: "Start with any budget that fits your goals.",
-  },
-  {
-    q: "How is performance tracked?",
-    a: "Real-time dashboards show clicks, conversions, and ROI.",
-  },
+  { q: "What ad formats do you support?", a: "We support banners, native, video, interstitial, rewarded video, and playable ads." },
+  { q: "What targeting options are available?", a: "Demographic, geographic, behavioral, contextual, device, and retargeting." },
+  { q: "What is the minimum campaign budget?", a: "Start with as low as $500 for testing campaigns." },
+  { q: "How are payments processed?", a: "Net-30 terms for qualified advertisers, prepay options available." },
+  { q: "Do you offer self-serve platform?", a: "Yes, our self-serve dashboard gives you full control over campaigns." },
+  { q: "What reporting is available?", a: "Real-time analytics, custom reports, and API access." },
 ];
 
 /* ================= PAGE ================= */
-
 export default function AdvertisePage() {
   return (
     <>
       <Meta
-        title="Advertise with Us"
-        description="Reach millions of active users with our advertising platform."
+        title="Advertise - Reach Millions of Users | Cashog"
+        description="Scale your brand with our premium ad inventory. Reach millions of engaged users across web and mobile."
       />
 
       <main className="relative min-h-screen text-gray-900 dark:text-white overflow-hidden">
         <Background />
 
-        <section className="relative isolate max-w-7xl mx-auto px-4 py-20">
+        {/* Premium Background Elements */}
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-gradient-to-r from-purple-400/5 to-pink-400/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-0 w-[800px] h-[800px] bg-gradient-to-r from-blue-400/5 to-cyan-400/5 rounded-full blur-3xl" />
+        </div>
 
-          {/* HERO */}
+        <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
+
+          {/* HERO SECTION */}
           <Reveal>
-            <div className="text-center mb-24">
-              <h1 className="text-5xl sm:text-6xl font-extrabold mb-6">
-                Advertise with <span className="gradient-text">Platform</span>
-              </h1>
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              className="relative overflow-hidden rounded-3xl mb-20"
+            >
+              {/* Animated Background */}
+              <motion.div
+                animate={{ 
+                  scale: [1, 1.2, 1],
+                  rotate: [0, 90, 180],
+                }}
+                transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+                className="absolute inset-0 bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 opacity-90"
+              />
+              
+              {/* Content */}
+              <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-3xl p-16 m-1">
+                {/* Floating Elements */}
+                <motion.div
+                  animate={{ y: [0, -20, 0] }}
+                  transition={{ duration: 5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+                  className="absolute top-10 left-10 w-32 h-32 bg-purple-400/20 rounded-full blur-3xl"
+                />
+                <motion.div
+                  animate={{ y: [0, 20, 0] }}
+                  transition={{ duration: 7, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+                  className="absolute bottom-10 right-10 w-32 h-32 bg-orange-400/20 rounded-full blur-3xl"
+                />
+                
+                <div className="relative">
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 30, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border-2 border-purple-400/20 rounded-full"
+                  />
+                  
+                  <div className="relative text-center">
+                    <motion.div
+                      initial={{ scale: 0.9, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 0.5 }}
+                      className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-purple-400/10 to-pink-400/10 rounded-full border border-purple-400/20 backdrop-blur-sm mb-8"
+                    >
+                      <Megaphone className="w-5 h-5 text-purple-400" />
+                      <span className="text-sm font-semibold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Premium Ad Network</span>
+                      <Megaphone className="w-5 h-5 text-pink-400" />
+                    </motion.div>
+                    
+                    <h1 className="text-6xl sm:text-7xl md:text-8xl font-extrabold mb-8 leading-tight">
+                      <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 bg-clip-text text-transparent">
+                        Reach Millions
+                      </span>
+                      <br />
+                      <span className="text-4xl sm:text-5xl md:text-6xl text-gray-600 dark:text-gray-400">
+                        of Engaged Users
+                      </span>
+                    </h1>
 
-              <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-8 gradient-text">
-                <TypingText />
-              </div>
+                    <div className="flex items-center justify-center gap-6 mb-8">
+                      <div className="text-center">
+                        <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">10M+</div>
+                        <div className="text-sm text-gray-500">Daily Impressions</div>
+                      </div>
+                      <div className="w-px h-8 bg-gray-300 dark:bg-gray-700" />
+                      <div className="text-center">
+                        <div className="text-3xl font-bold bg-gradient-to-r from-pink-400 to-orange-400 bg-clip-text text-transparent">98%</div>
+                        <div className="text-sm text-gray-500">Fill Rate</div>
+                      </div>
+                      <div className="w-px h-8 bg-gray-300 dark:bg-gray-700" />
+                      <div className="text-center">
+                        <div className="text-3xl font-bold bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">100+</div>
+                        <div className="text-sm text-gray-500">Countries</div>
+                      </div>
+                    </div>
 
-              <p className="text-lg sm:text-xl md:text-2xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed">
-                Reach millions of active users and scale your business with
-                performance-driven advertising.
-              </p>
+                    <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
+                      {[
+                        { icon: <Target className="w-4 h-4" />, text: "Precise Targeting" },
+                        { icon: <BarChart3 className="w-4 h-4" />, text: "Real-time Analytics" },
+                        { icon: <Shield className="w-4 h-4" />, text: "Brand Safe" },
+                        { icon: <Rocket className="w-4 h-4" />, text: "Fast Delivery" },
+                      ].map((item, i) => (
+                        <motion.div
+                          key={i}
+                          whileHover={{ scale: 1.05, y: -2 }}
+                          className="flex items-center gap-2 px-5 py-2.5 bg-white/80 dark:bg-white/5 backdrop-blur-sm rounded-full border border-gray-200 dark:border-gray-800 shadow-lg"
+                        >
+                          <div className="text-purple-400">{item.icon}</div>
+                          <span className="text-sm font-medium">{item.text}</span>
+                        </motion.div>
+                      ))}
+                    </div>
 
-              <PrimaryCTA href="/signup?type=advertiser">
-                Start Advertising <ArrowRight size={20} />
-              </PrimaryCTA>
-
-              {/* Stats */}
-              <div className="flex flex-wrap justify-center gap-4 mt-12">
-                {stats.map((stat, i) => (
-                  <div
-                    key={i}
-                    className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-full text-sm"
-                  >
-                    <span className="text-green-400">{stat.icon}</span>
-                    <span className="font-semibold">{stat.value}</span>
-                    <span className="text-gray-500 dark:text-gray-300">
-                      {stat.label}
-                    </span>
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                      <PrimaryCTA href="/advertise/start">
+                        Start Campaign
+                      </PrimaryCTA>
+                      <motion.a
+                        href="/contact-sales"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.97 }}
+                        className="px-8 py-4 text-lg font-semibold rounded-xl bg-white dark:bg-[#0a0d16] border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white hover:shadow-lg transition-all duration-300"
+                      >
+                        Contact Sales
+                      </motion.a>
+                    </div>
                   </div>
-                ))}
+                </div>
               </div>
-            </div>
+            </motion.div>
           </Reveal>
 
-          {/* STEPS */}
-          <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-              How It <span className="gradient-text">Works</span>
-            </h2>
-          </Reveal>
+          {/* STATS SECTION */}
+          <section className="relative z-10 max-w-7xl mx-auto px-4 py-16">
+            <RevealWithBorder
+              gradientFrom="from-purple-400"
+              gradientVia="via-pink-400"
+              gradientTo="to-orange-400"
+              borderColor="border-purple-400/20"
+              floatingElements={false}
+              rotatingCircle={true}
+            >
+              <div className="py-8">
+                <h2 className="text-2xl font-bold text-center mb-8">
+                  <span className="bg-gradient-to-r from-purple-400 to-orange-400 bg-clip-text text-transparent">
+                    Network Performance
+                  </span>
+                </h2>
+                <div className="flex items-center justify-center gap-12">
+                  {adStats.map((stat) => (
+                    <Reveal key={stat.label}>
+                      <motion.div
+                        whileHover={{ y: -2 }}
+                        className="flex items-center gap-3"
+                      >
+                        <div className={`w-8 h-8 rounded-lg bg-gradient-to-r ${stat.gradient} bg-opacity-10 flex items-center justify-center`}>
+                          <div className={stat.iconColor}>
+                            {stat.icon}
+                          </div>
+                        </div>
+                        <div>
+                          <div className="text-sm font-medium text-gray-500">{stat.label}</div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-xl font-bold">{stat.value}</span>
+                            <span className="text-xs text-green-400">{stat.trend}</span>
+                          </div>
+                        </div>
+                      </motion.div>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </RevealWithBorder>
+          </section>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-24">
-            {steps.map((step, i) => (
-              <Reveal key={i}>
-                <motion.div
-                  whileHover={{ y: -6 }}
-                  className="bg-white dark:bg-[#0a0d16] dark:text-white rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800"
-                >
-                  <div className="mb-4 flex justify-center">{step.icon}</div>
-                  <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm">
-                    {step.description}
-                  </p>
-                </motion.div>
-              </Reveal>
-            ))}
-          </div>
+          {/* AD FORMATS */}
+          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
+            <RevealWithBorder
+              gradientFrom="from-blue-400"
+              gradientVia="via-cyan-400"
+              gradientTo="to-sky-400"
+              borderColor="border-blue-400/20"
+              floatingElements={false}
+              rotatingCircle={true}
+            >
+              <div className="py-8">
+                <h2 className="text-2xl font-bold text-center mb-8">
+                  <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                    Ad Formats
+                  </span>
+                </h2>
+                <div className="flex flex-wrap items-center justify-center gap-3">
+                  {adFormats.map((format) => (
+                    <Reveal key={format.name}>
+                      <motion.div
+                        whileHover={{ y: -2 }}
+                        className="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-[#0a0d16] rounded-full border border-gray-200 dark:border-gray-800 shadow-sm"
+                      >
+                        <div className={`w-5 h-5 rounded-full bg-gradient-to-r ${format.gradient} bg-opacity-10 flex items-center justify-center`}>
+                          <div className={`text-${format.color}-600 dark:text-${format.color}-400`}>
+                            {format.icon}
+                          </div>
+                        </div>
+                        <span className="text-xs font-medium">{format.name}</span>
+                        <span className="text-[10px] px-1.5 py-0.5 bg-green-500/10 text-green-400 rounded-full">
+                          {format.ctr}
+                        </span>
+                      </motion.div>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </RevealWithBorder>
+          </section>
 
-          {/* FEATURES */}
-          <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-              Why Advertise
-            </h2>
-            <p className="text-center text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
-              Performance-driven advertising that connects brands with active users
-            </p>
-          </Reveal>
+          {/* TARGETING OPTIONS */}
+          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
+            <RevealWithBorder
+              gradientFrom="from-green-400"
+              gradientVia="via-emerald-400"
+              gradientTo="to-teal-400"
+              borderColor="border-green-400/20"
+              floatingElements={false}
+              rotatingCircle={true}
+            >
+              <div className="py-8">
+                <h2 className="text-2xl font-bold text-center mb-8">
+                  <span className="bg-gradient-to-r from-green-400 to-teal-400 bg-clip-text text-transparent">
+                    Targeting Options
+                  </span>
+                </h2>
+                <div className="flex flex-wrap items-center justify-center gap-3">
+                  {targetingOptions.map((option) => (
+                    <Reveal key={option.name}>
+                      <motion.div
+                        whileHover={{ y: -2 }}
+                        className="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-[#0a0d16] rounded-full border border-gray-200 dark:border-gray-800 shadow-sm"
+                      >
+                        <div className={`w-5 h-5 rounded-full bg-gradient-to-r ${option.gradient} bg-opacity-10 flex items-center justify-center`}>
+                          <div className={`text-${option.color}-600 dark:text-${option.color}-400`}>
+                            {option.icon}
+                          </div>
+                        </div>
+                        <span className="text-xs font-medium">{option.name}</span>
+                      </motion.div>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </RevealWithBorder>
+          </section>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-24">
-            {features.map((feature, i) => (
-              <Reveal key={i}>
-                <motion.div
-                  whileHover={{ y: -6 }}
-                  className="bg-white dark:bg-[#0a0d16] dark:text-white rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800"
-                >
-                  <div className="mb-4 flex justify-center">{feature.icon}</div>
-                  <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm">
-                    {feature.description}
-                  </p>
-                </motion.div>
-              </Reveal>
-            ))}
-          </div>
+          {/* AD PLACEMENTS */}
+          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
+            <RevealWithBorder
+              gradientFrom="from-amber-400"
+              gradientVia="via-orange-400"
+              gradientTo="to-red-400"
+              borderColor="border-amber-400/20"
+              floatingElements={false}
+              rotatingCircle={true}
+            >
+              <div className="py-8">
+                <h2 className="text-2xl font-bold text-center mb-8">
+                  <span className="bg-gradient-to-r from-amber-400 to-red-400 bg-clip-text text-transparent">
+                    Ad Placements
+                  </span>
+                </h2>
+                <div className="flex items-center justify-center gap-8">
+                  {adPlacements.map((placement) => (
+                    <Reveal key={placement.name}>
+                      <motion.div
+                        whileHover={{ y: -2 }}
+                        className="flex items-center gap-3"
+                      >
+                        <div className={`w-8 h-8 rounded-lg bg-gradient-to-r ${placement.gradient} bg-opacity-10 flex items-center justify-center`}>
+                          <div className={`text-${placement.gradient.split(' ')[0].replace('from-', '')}-600 dark:text-white`}>
+                            {placement.icon}
+                          </div>
+                        </div>
+                        <div className="text-left">
+                          <div className="text-sm font-medium">{placement.name}</div>
+                          <div className="text-xs text-gray-500">{placement.reach} users</div>
+                        </div>
+                      </motion.div>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </RevealWithBorder>
+          </section>
 
-          {/* FAQ */}
-          <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-              Everything you need to know about advertising
-            </p>
-          </Reveal>
+          {/* PERFORMANCE METRICS */}
+          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
+            <RevealWithBorder
+              gradientFrom="from-indigo-400"
+              gradientVia="via-purple-400"
+              gradientTo="to-pink-400"
+              borderColor="border-indigo-400/20"
+              floatingElements={false}
+              rotatingCircle={true}
+            >
+              <div className="py-8">
+                <h2 className="text-2xl font-bold text-center mb-8">
+                  <span className="bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text text-transparent">
+                    Performance Metrics
+                  </span>
+                </h2>
+                <div className="flex items-center justify-center gap-12">
+                  {performanceMetrics.map((metric) => (
+                    <Reveal key={metric.label}>
+                      <motion.div
+                        whileHover={{ y: -2 }}
+                        className="flex items-center gap-3"
+                      >
+                        <div className={`w-8 h-8 rounded-lg bg-gradient-to-r ${metric.gradient} bg-opacity-10 flex items-center justify-center`}>
+                          <div className={`text-${metric.gradient.split(' ')[0].replace('from-', '')}-600 dark:text-white`}>
+                            {metric.icon}
+                          </div>
+                        </div>
+                        <div>
+                          <div className="text-sm font-medium text-gray-500">{metric.label}</div>
+                          <div className="text-xl font-bold">{metric.value}</div>
+                        </div>
+                      </motion.div>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </RevealWithBorder>
+          </section>
 
-          <div className="space-y-4 mb-24">
-            {faqs.map((faq, i) => (
-              <Reveal key={i}>
-                <details
-                  className="bg-white dark:bg-[#0a0d16] dark:text-white rounded-xl border border-gray-200 dark:border-gray-800 p-4"
-                >
-                  <summary className="font-semibold text-lg cursor-pointer dark:text-white">
-                    {faq.q}
-                  </summary>
-                  <p className="mt-3 text-sm text-gray-600 dark:text-gray-300">
-                    {faq.a}
-                  </p>
-                </details>
-              </Reveal>
-            ))}
-          </div>
+          {/* TESTIMONIALS */}
+          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
+            <RevealWithBorder
+              gradientFrom="from-rose-400"
+              gradientVia="via-pink-400"
+              gradientTo="to-purple-400"
+              borderColor="border-rose-400/20"
+              floatingElements={false}
+              rotatingCircle={true}
+            >
+              <div className="py-8">
+                <h2 className="text-2xl font-bold text-center mb-8">
+                  <span className="bg-gradient-to-r from-rose-400 to-purple-400 bg-clip-text text-transparent">
+                    Success Stories
+                  </span>
+                </h2>
+                <div className="flex items-center justify-center gap-8">
+                  {testimonials.map((testimonial) => (
+                    <Reveal key={testimonial.name}>
+                      <motion.div
+                        whileHover={{ y: -2 }}
+                        className="flex items-center gap-3"
+                      >
+                        <div className={`w-8 h-8 rounded-lg bg-gradient-to-r ${testimonial.gradient} flex items-center justify-center text-white text-xs font-bold`}>
+                          {testimonial.avatar}
+                        </div>
+                        <div className="text-left">
+                          <div className="text-sm font-medium">{testimonial.name}</div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs text-green-400">{testimonial.revenue}</span>
+                            <span className="text-[10px] text-gray-500">ROI</span>
+                          </div>
+                        </div>
+                      </motion.div>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </RevealWithBorder>
+          </section>
+
+          {/* FAQ SECTION */}
+          <section className="relative z-10 max-w-3xl mx-auto px-4 pb-16">
+            <RevealWithBorder
+              gradientFrom="from-orange-400"
+              gradientVia="via-amber-400"
+              gradientTo="to-yellow-400"
+              borderColor="border-orange-400/20"
+              floatingElements={false}
+              rotatingCircle={true}
+            >
+              <div className="py-8 px-6">
+                <h2 className="text-2xl font-bold text-center mb-6">
+                  <span className="bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent">
+                    Frequently Asked Questions
+                  </span>
+                </h2>
+                <div className="space-y-3">
+                  {faqs.map((faq, index) => (
+                    <Reveal key={index}>
+                      <motion.div
+                        whileHover={{ y: -1 }}
+                        className="p-3 bg-white/50 dark:bg-white/5 rounded-lg border border-gray-200 dark:border-gray-800"
+                      >
+                        <div className="flex items-start gap-2">
+                          <div className="w-4 h-4 rounded-full bg-gradient-to-r from-orange-400 to-yellow-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <div className="w-1.5 h-1.5 rounded-full bg-white" />
+                          </div>
+                          <div>
+                            <h3 className="text-sm font-medium mb-1">{faq.q}</h3>
+                            <p className="text-xs text-gray-600 dark:text-gray-400">{faq.a}</p>
+                          </div>
+                        </div>
+                      </motion.div>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </RevealWithBorder>
+          </section>
 
           {/* FINAL CTA */}
-          <Reveal>
-            <div className="text-center">
-              <h2 className="text-4xl sm:text-5xl font-extrabold mb-6 gradient-text">
-                Ready to Scale?
-              </h2>
+          <section className="relative z-10 text-center">
+            <Reveal>
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                className="relative overflow-hidden rounded-3xl"
+              >
+                {/* Animated Background */}
+                <motion.div
+                  animate={{ 
+                    scale: [1, 1.2, 1],
+                    rotate: [0, 90, 180],
+                  }}
+                  transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+                  className="absolute inset-0 bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 opacity-90"
+                />
+                
+                {/* Content */}
+                <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-3xl p-16 m-1">
+                  {/* Floating Elements */}
+                  <motion.div
+                    animate={{ y: [0, -20, 0] }}
+                    transition={{ duration: 5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+                    className="absolute top-10 left-10 w-32 h-32 bg-purple-400/20 rounded-full blur-3xl"
+                  />
+                  <motion.div
+                    animate={{ y: [0, 20, 0] }}
+                    transition={{ duration: 7, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+                    className="absolute bottom-10 right-10 w-32 h-32 bg-orange-400/20 rounded-full blur-3xl"
+                  />
+                  
+                  <div className="relative">
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 30, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border-2 border-purple-400/20 rounded-full"
+                    />
+                    
+                    <div className="flex items-center justify-center gap-4 mb-8">
+                      <Megaphone className="w-12 h-12 text-purple-400" />
+                      <h2 className="text-5xl sm:text-6xl md:text-7xl font-extrabold">
+                        <span className="bg-gradient-to-r from-purple-400 to-orange-400 bg-clip-text text-transparent">
+                          Ready to Launch?
+                        </span>
+                      </h2>
+                      <Megaphone className="w-12 h-12 text-orange-400" />
+                    </div>
 
-              <PrimaryCTA href="/signup?type=advertiser">
-                Launch Your Campaign <ArrowRight size={20} />
-              </PrimaryCTA>
-            </div>
-          </Reveal>
+                    <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10">
+                      Start reaching millions of engaged users today
+                    </p>
+                    
+                    <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
+                      {[
+                        { text: "🎯 Precise Targeting", gradient: "from-purple-400/10 to-pink-400/10" },
+                        { text: "📊 Real-time Analytics", gradient: "from-pink-400/10 to-orange-400/10" },
+                        { text: "🛡️ Brand Safe", gradient: "from-orange-400/10 to-red-400/10" },
+                        { text: "🚀 Fast Delivery", gradient: "from-red-400/10 to-rose-400/10" },
+                      ].map((item, i) => (
+                        <motion.div
+                          key={i}
+                          whileHover={{ scale: 1.05, y: -2 }}
+                          className={`px-6 py-3 bg-gradient-to-r ${item.gradient} rounded-full text-sm font-semibold backdrop-blur-sm border border-white/20`}
+                        >
+                          {item.text}
+                        </motion.div>
+                      ))}
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                      <PrimaryCTA href="/advertise/start">
+                        Start Campaign
+                      </PrimaryCTA>
+                      <motion.a
+                        href="/contact-sales"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.97 }}
+                        className="px-8 py-4 text-lg font-semibold rounded-xl bg-white dark:bg-[#0a0d16] border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white hover:shadow-lg transition-all duration-300"
+                      >
+                        Contact Sales
+                      </motion.a>
+                    </div>
+                    
+                    <p className="text-sm text-gray-500 mt-8">
+                      🔒 No minimum commitment • Cancel anytime • 1,250+ active campaigns
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            </Reveal>
+          </section>
 
         </section>
       </main>
