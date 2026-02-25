@@ -153,7 +153,6 @@ import {
   BookOpen,
   FileText,
   FileSpreadsheet,
-  // Removed FileSliders (not in Lucide)
   FileBarChart,
   FilePieChart,
   FileLineChart,
@@ -172,6 +171,19 @@ import {
   FileJson,
   FileType,
   FileDigit,
+  // Missing icons for ad formats
+  LayoutGrid,
+  Maximize2,
+  Gift,
+  Gamepad2,
+  Video,
+  Sparkles,
+  Monitor,
+  Smartphone,
+  Laptop,
+  Film,
+  // Missing for placements
+  Tv,
 } from "lucide-react";
 
 /* ================= CUSTOM ICONS ================= */
@@ -225,8 +237,6 @@ const FileSliders = ({ className }: { className?: string }) => (
     <circle cx="12" cy="18" r="2" fill="currentColor" />
   </svg>
 );
-
-// ... rest of the component code (stats, formats, targeting options, etc.) remains exactly the same
 
 /* ================= AD STATS ================= */
 const adStats = [
