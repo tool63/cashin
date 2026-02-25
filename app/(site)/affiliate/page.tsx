@@ -131,208 +131,142 @@ const affiliateStats = [
   {
     label: "Commission Rate",
     value: "15%",
-    icon: <DollarSign className="w-8 h-8" />,
-    description: "Earn 15% commission on all referrals' earnings",
-    trend: "+25% this month",
+    icon: <DollarSign className="w-5 h-5" />,
+    trend: "+25%",
     gradient: "from-emerald-400 to-teal-400",
-    iconColor: "text-emerald-600 dark:text-white",
+    iconColor: "text-emerald-600 dark:text-emerald-400",
   },
   {
     label: "Active Affiliates",
     value: "50K+",
-    icon: <Users className="w-8 h-8" />,
-    description: "Join thousands of earning affiliates",
-    trend: "Growing daily",
+    icon: <Users className="w-5 h-5" />,
+    trend: "Growing",
     gradient: "from-blue-400 to-indigo-400",
-    iconColor: "text-blue-600 dark:text-white",
+    iconColor: "text-blue-600 dark:text-blue-400",
   },
   {
     label: "Trustpilot Rating",
     value: "4.7",
-    icon: <Star className="w-8 h-8" />,
-    description: "Excellent rating from 266K+ reviews",
+    icon: <Star className="w-5 h-5" />,
     trend: "Top rated",
     gradient: "from-amber-400 to-orange-400",
-    iconColor: "text-amber-600 dark:text-white",
+    iconColor: "text-amber-600 dark:text-amber-400",
   },
 ];
 
 /* ================= HOW IT WORKS STEPS ================= */
 const steps = [
   {
-    icon: <User className="w-10 h-10" />,
-    title: "Invite Your Friends",
-    desc: "Create your custom referral link and share it with friends across social media.",
+    icon: <User className="w-4 h-4" />,
+    title: "Invite",
     gradient: "from-amber-400 to-orange-400",
-    badge: "Step 1",
-    iconColor: "text-amber-600 dark:text-white",
+    iconColor: "text-amber-600 dark:text-amber-400",
   },
   {
-    icon: <Gift className="w-10 h-10" />,
-    title: "They Earn, You Earn",
-    desc: "When your friends complete any task, you earn 15% commission on their earnings.",
+    icon: <Gift className="w-4 h-4" />,
+    title: "They Earn",
     gradient: "from-emerald-400 to-teal-400",
-    badge: "Step 2",
-    iconColor: "text-emerald-600 dark:text-white",
+    iconColor: "text-emerald-600 dark:text-emerald-400",
   },
   {
-    icon: <DollarSign className="w-10 h-10" />,
-    title: "Cashout Together",
-    desc: "Withdraw your commissions instantly via PayPal, crypto, or gift cards.",
+    icon: <DollarSign className="w-4 h-4" />,
+    title: "You Earn",
     gradient: "from-blue-400 to-indigo-400",
-    badge: "Step 3",
-    iconColor: "text-blue-600 dark:text-white",
+    iconColor: "text-blue-600 dark:text-blue-400",
   },
 ];
 
 /* ================= AFFILIATE BONUSES ================= */
 const bonuses = [
   {
-    icon: <Users className="w-10 h-10" />,
+    icon: <Users className="w-4 h-4" />,
     title: "Team Bonuses",
-    desc: "Earn extra rewards when your team reaches milestone targets together.",
-    metric: "Up to +5%",
+    metric: "+5%",
     gradient: "from-purple-400 to-pink-400",
-    iconColor: "text-purple-600 dark:text-white",
+    iconColor: "text-purple-600 dark:text-purple-400",
   },
   {
-    icon: <Zap className="w-10 h-10" />,
+    icon: <Zap className="w-4 h-4" />,
     title: "Boosting Events",
-    desc: "During special events, earn double or triple commissions on all referrals.",
     metric: "2x-3x",
     gradient: "from-amber-400 to-orange-400",
-    iconColor: "text-amber-600 dark:text-white",
+    iconColor: "text-amber-600 dark:text-amber-400",
   },
   {
-    icon: <Target className="w-10 h-10" />,
+    icon: <Target className="w-4 h-4" />,
     title: "Monthly Contests",
-    desc: "Compete with top affiliates for massive bonus prizes and recognition.",
-    metric: "$10K Pool",
+    metric: "$10K",
     gradient: "from-rose-400 to-red-400",
-    iconColor: "text-rose-600 dark:text-white",
+    iconColor: "text-rose-600 dark:text-rose-400",
   },
 ];
 
 /* ================= ALL EARNING METHODS ================= */
 const allEarningMethods = [
-  { name: "Surveys", path: "/surveys", icon: <ClipboardList className="w-6 h-6" />, gradient: "from-blue-400 to-cyan-400", earnings: "$2-5", color: "blue" },
-  { name: "App Installs", path: "/app-installs", icon: <Smartphone className="w-6 h-6" />, gradient: "from-green-400 to-emerald-400", earnings: "$2-4", color: "green" },
-  { name: "Playing Games", path: "/play-games", icon: <Gamepad2 className="w-6 h-6" />, gradient: "from-purple-400 to-pink-400", earnings: "$3-10", color: "purple" },
-  { name: "Watching Videos", path: "/watch-videos", icon: <Film className="w-6 h-6" />, gradient: "from-red-400 to-rose-400", earnings: "$1-3", color: "red" },
-  { name: "Mining Rewards", path: "/mining-rewards", icon: <Hammer className="w-6 h-6" />, gradient: "from-amber-400 to-orange-400", earnings: "$5-20", color: "amber" },
-  { name: "Completing Offers", path: "/complete-offers", icon: <CheckSquare className="w-6 h-6" />, gradient: "from-indigo-400 to-purple-400", earnings: "$2-15", color: "indigo" },
-  { name: "Offerwall", path: "/offerwall", icon: <LayoutGrid className="w-6 h-6" />, gradient: "from-pink-400 to-rose-400", earnings: "$1-50", color: "pink" },
-  { name: "Surveywall", path: "/surveywall", icon: <ClipboardList className="w-6 h-6" />, gradient: "from-cyan-400 to-blue-400", earnings: "$2-8", color: "cyan" },
-  { name: "Watching Ads", path: "/watch-ads", icon: <Eye className="w-6 h-6" />, gradient: "from-amber-400 to-yellow-400", earnings: "$0.5-2", color: "amber" },
-  { name: "Micro Tasks", path: "/micro-tasks", icon: <Sparkles className="w-6 h-6" />, gradient: "from-lime-400 to-green-400", earnings: "$1-5", color: "lime" },
-  { name: "Free Trials", path: "/complete-free-trials", icon: <Timer className="w-6 h-6" />, gradient: "from-emerald-400 to-teal-400", earnings: "$5-25", color: "emerald" },
-  { name: "Testing Products", path: "/test-products", icon: <FlaskConical className="w-6 h-6" />, gradient: "from-teal-400 to-cyan-400", earnings: "$10-50", color: "teal" },
-  { name: "Reading Emails", path: "/read-emails", icon: <Mail className="w-6 h-6" />, gradient: "from-orange-400 to-amber-400", earnings: "$0.5-2", color: "orange" },
-  { name: "Visiting Websites", path: "/visit-websites", icon: <Globe className="w-6 h-6" />, gradient: "from-rose-400 to-pink-400", earnings: "$0.5-3", color: "rose" },
-  { name: "Review Tasks", path: "/review-tasks", icon: <PenTool className="w-6 h-6" />, gradient: "from-violet-400 to-purple-400", earnings: "$3-15", color: "violet" },
-  { name: "Spinning Wheel", path: "/spinning-wheel", icon: <Puzzle className="w-6 h-6" />, gradient: "from-fuchsia-400 to-pink-400", earnings: "$1-100", color: "fuchsia" },
-  { name: "Loyalty", path: "/loyalty", icon: <Crown className="w-6 h-6" />, gradient: "from-yellow-400 to-amber-400", earnings: "Exclusive", color: "yellow" },
-  { name: "Vouchers", path: "/vouchers", icon: <Ticket className="w-6 h-6" />, gradient: "from-green-400 to-emerald-400", earnings: "Gift cards", color: "green" },
+  { name: "Surveys", path: "/surveys", icon: <ClipboardList className="w-4 h-4" />, gradient: "from-blue-400 to-cyan-400", color: "blue" },
+  { name: "App Installs", path: "/app-installs", icon: <Smartphone className="w-4 h-4" />, gradient: "from-green-400 to-emerald-400", color: "green" },
+  { name: "Playing Games", path: "/play-games", icon: <Gamepad2 className="w-4 h-4" />, gradient: "from-purple-400 to-pink-400", color: "purple" },
+  { name: "Watching Videos", path: "/watch-videos", icon: <Film className="w-4 h-4" />, gradient: "from-red-400 to-rose-400", color: "red" },
+  { name: "Mining Rewards", path: "/mining-rewards", icon: <Hammer className="w-4 h-4" />, gradient: "from-amber-400 to-orange-400", color: "amber" },
+  { name: "Completing Offers", path: "/complete-offers", icon: <CheckSquare className="w-4 h-4" />, gradient: "from-indigo-400 to-purple-400", color: "indigo" },
+  { name: "Offerwall", path: "/offerwall", icon: <LayoutGrid className="w-4 h-4" />, gradient: "from-pink-400 to-rose-400", color: "pink" },
+  { name: "Surveywall", path: "/surveywall", icon: <ClipboardList className="w-4 h-4" />, gradient: "from-cyan-400 to-blue-400", color: "cyan" },
+  { name: "Watching Ads", path: "/watch-ads", icon: <Eye className="w-4 h-4" />, gradient: "from-amber-400 to-yellow-400", color: "amber" },
+  { name: "Micro Tasks", path: "/micro-tasks", icon: <Sparkles className="w-4 h-4" />, gradient: "from-lime-400 to-green-400", color: "lime" },
+  { name: "Free Trials", path: "/complete-free-trials", icon: <Timer className="w-4 h-4" />, gradient: "from-emerald-400 to-teal-400", color: "emerald" },
+  { name: "Testing Products", path: "/test-products", icon: <FlaskConical className="w-4 h-4" />, gradient: "from-teal-400 to-cyan-400", color: "teal" },
+  { name: "Reading Emails", path: "/read-emails", icon: <Mail className="w-4 h-4" />, gradient: "from-orange-400 to-amber-400", color: "orange" },
+  { name: "Visiting Websites", path: "/visit-websites", icon: <Globe className="w-4 h-4" />, gradient: "from-rose-400 to-pink-400", color: "rose" },
+  { name: "Review Tasks", path: "/review-tasks", icon: <PenTool className="w-4 h-4" />, gradient: "from-violet-400 to-purple-400", color: "violet" },
+  { name: "Spinning Wheel", path: "/spinning-wheel", icon: <Puzzle className="w-4 h-4" />, gradient: "from-fuchsia-400 to-pink-400", color: "fuchsia" },
+  { name: "Loyalty", path: "/loyalty", icon: <Crown className="w-4 h-4" />, gradient: "from-yellow-400 to-amber-400", color: "yellow" },
+  { name: "Vouchers", path: "/vouchers", icon: <Ticket className="w-4 h-4" />, gradient: "from-green-400 to-emerald-400", color: "green" },
 ];
 
 /* ================= FEATURES ================= */
 const features = [
-  {
-    icon: <Rocket className="w-8 h-8" />,
-    title: "Instant Payouts",
-    desc: "Get your commissions instantly, no waiting periods",
-    gradient: "from-purple-400 to-pink-400",
-    iconColor: "text-purple-600 dark:text-white",
-  },
-  {
-    icon: <Shield className="w-8 h-8" />,
-    title: "Secure Platform",
-    desc: "Bank-level security for your earnings and data",
-    gradient: "from-blue-400 to-cyan-400",
-    iconColor: "text-blue-600 dark:text-white",
-  },
-  {
-    icon: <BarChart3 className="w-8 h-8" />,
-    title: "Real-time Analytics",
-    desc: "Track your referrals and earnings in real-time",
-    gradient: "from-green-400 to-emerald-400",
-    iconColor: "text-green-600 dark:text-white",
-  },
-  {
-    icon: <Wallet className="w-8 h-8" />,
-    title: "Multiple Payouts",
-    desc: "PayPal, crypto, gift cards, and more options",
-    gradient: "from-amber-400 to-orange-400",
-    iconColor: "text-amber-600 dark:text-white",
-  },
-  {
-    icon: <Clock className="w-8 h-8" />,
-    title: "24/7 Support",
-    desc: "Dedicated support team always ready to help",
-    gradient: "from-red-400 to-rose-400",
-    iconColor: "text-red-600 dark:text-white",
-  },
-  {
-    icon: <Globe className="w-8 h-8" />,
-    title: "Global Program",
-    desc: "Available in 100+ countries worldwide",
-    gradient: "from-indigo-400 to-purple-400",
-    iconColor: "text-indigo-600 dark:text-white",
-  },
+  { icon: <Rocket className="w-4 h-4" />, title: "Instant Payouts", gradient: "from-purple-400 to-pink-400", iconColor: "text-purple-600 dark:text-purple-400" },
+  { icon: <Shield className="w-4 h-4" />, title: "Secure Platform", gradient: "from-blue-400 to-cyan-400", iconColor: "text-blue-600 dark:text-blue-400" },
+  { icon: <BarChart3 className="w-4 h-4" />, title: "Real-time Analytics", gradient: "from-green-400 to-emerald-400", iconColor: "text-green-600 dark:text-green-400" },
+  { icon: <Wallet className="w-4 h-4" />, title: "Multiple Payouts", gradient: "from-amber-400 to-orange-400", iconColor: "text-amber-600 dark:text-amber-400" },
+  { icon: <Clock className="w-4 h-4" />, title: "24/7 Support", gradient: "from-red-400 to-rose-400", iconColor: "text-red-600 dark:text-red-400" },
+  { icon: <Globe className="w-4 h-4" />, title: "Global Program", gradient: "from-indigo-400 to-purple-400", iconColor: "text-indigo-600 dark:text-indigo-400" },
 ];
 
 /* ================= TESTIMONIALS ================= */
 const testimonials = [
   {
     name: "Cryptozeal",
-    date: "February 18, 2026",
-    content: "The 15% commission is amazing! I'm earning passive income from my friends' daily activities. Made over $500 in my first month!",
-    rating: 5,
     avatar: "C",
     earnings: "$2,450+",
     gradient: "from-blue-400 to-cyan-400",
   },
   {
-    name: "Michael Raisner",
-    date: "February 11, 2026",
-    content: "Great affiliate program! My friends love the platform and I love the recurring commissions.",
-    rating: 5,
+    name: "Michael R.",
     avatar: "M",
     earnings: "$1,280+",
     gradient: "from-green-400 to-emerald-400",
   },
   {
     name: "Dx Tik",
-    date: "January 30, 2026",
-    content: "I share my link everywhere. Every time my friends complete surveys or install apps, I earn. Best decision ever!",
-    rating: 5,
     avatar: "D",
     earnings: "$3,100+",
     gradient: "from-purple-400 to-pink-400",
   },
   {
-    name: "Sarah Johnson",
-    date: "February 5, 2026",
-    content: "The team bonuses are incredible. Built a team of 50+ active members and earning daily commissions.",
-    rating: 5,
+    name: "Sarah J.",
     avatar: "S",
     earnings: "$5,670+",
     gradient: "from-amber-400 to-orange-400",
   },
   {
     name: "Nichole",
-    date: "January 15, 2026",
-    content: "I've cashed out over $1000 from referrals alone. The 15% commission adds up fast!",
-    rating: 5,
     avatar: "N",
     earnings: "$1,890+",
     gradient: "from-red-400 to-rose-400",
   },
   {
-    name: "David Chen",
-    date: "February 20, 2026",
-    content: "Boosting events doubled my earnings last month. Best affiliate program I've ever joined.",
-    rating: 5,
+    name: "David C.",
     avatar: "D",
     earnings: "$4,230+",
     gradient: "from-indigo-400 to-purple-400",
@@ -343,27 +277,27 @@ const testimonials = [
 const faqs = [
   {
     q: "How does the 15% commission work?",
-    a: "You earn 15% commission on everything your referrals earn on Cashog. If they complete surveys, install apps, play games, or do any other task, you get 15% of their earnings automatically.",
+    a: "You earn 15% commission on everything your referrals earn on Cashog.",
   },
   {
     q: "Is there a limit to how many friends I can refer?",
-    a: "No, there's no limit! You can refer unlimited friends and earn 15% commission on all their earnings.",
+    a: "No, there's no limit! You can refer unlimited friends.",
   },
   {
     q: "How can I track my earnings from referrals?",
-    a: "You can track all your referral earnings and activity in your dashboard under the 'Invite Friends' section with real-time analytics.",
+    a: "Track all your referral earnings in your dashboard in real-time.",
   },
   {
     q: "Do I earn from all earning methods?",
-    a: "Yes! You earn 15% commission from every earning method: surveys, app installs, games, videos, mining rewards, offers, offerwall, surveywall, and all extra earning methods.",
+    a: "Yes! You earn 15% from every earning method on the platform.",
   },
   {
     q: "When do commissions get credited?",
-    a: "Commissions are credited instantly when your referrals complete tasks and their earnings are confirmed.",
+    a: "Commissions are credited instantly when your referrals complete tasks.",
   },
   {
     q: "What payment methods are available?",
-    a: "You can withdraw your commissions via PayPal, cryptocurrency, gift cards, and more with instant processing.",
+    a: "PayPal, cryptocurrency, gift cards, and more with instant processing.",
   },
 ];
 
@@ -387,7 +321,7 @@ export default function AffiliatePage() {
 
         <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
 
-          {/* HERO WITH PREMIUM BADGES - UPDATED WITH FINAL SECTION BORDER STYLE */}
+          {/* HERO SECTION - UNCHANGED */}
           <Reveal>
             <motion.div
               whileHover={{ scale: 1.02 }}
@@ -513,62 +447,25 @@ export default function AffiliatePage() {
             </motion.div>
           </Reveal>
 
-          {/* STATS SECTION WITH PREMIUM CARDS */}
-          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
-            <Reveal>
-              <>
-                <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
-                  <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
-                    Affiliate Program Stats
-                  </span>
-                </h2>
-                <p className="text-center text-gray-600 dark:text-gray-300 mb-16 max-w-2xl mx-auto text-lg">
-                  Real numbers from our top-earning affiliates
-                </p>
-              </>
-            </Reveal>
-
-            <div className="grid gap-8 md:grid-cols-3">
-              {affiliateStats.map((stat, index) => (
+          {/* STATS SECTION - Redesigned like partner page */}
+          <section className="relative z-10 max-w-7xl mx-auto px-4 py-16">
+            <div className="flex items-center justify-center gap-12">
+              {affiliateStats.map((stat) => (
                 <Reveal key={stat.label}>
                   <motion.div
-                    whileHover={{ y: -12, scale: 1.02 }}
-                    transition={{ type: "spring", stiffness: 400 }}
-                    className="group relative"
+                    whileHover={{ y: -2 }}
+                    className="flex items-center gap-3"
                   >
-                    {/* Background Glow */}
-                    <div className={`absolute inset-0 bg-gradient-to-r ${stat.gradient} rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500`} />
-                    
-                    {/* Card */}
-                    <div className="relative bg-white dark:bg-[#0a0d16] rounded-3xl p-8 border border-gray-200 dark:border-gray-800 shadow-2xl overflow-hidden">
-                      {/* Decorative Elements */}
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-white/5 to-transparent rounded-full blur-2xl" />
-                      
-                      <div className="relative">
-                        {/* Icon Container */}
-                        <div className={`w-20 h-20 rounded-2xl bg-gradient-to-r ${stat.gradient} bg-opacity-10 mb-6 flex items-center justify-center`}>
-                          <div className={stat.iconColor}>
-                            {stat.icon}
-                          </div>
-                        </div>
-                        
-                        <h3 className="text-sm uppercase tracking-wider text-gray-600 dark:text-gray-400 mb-2">
-                          {stat.label}
-                        </h3>
-                        
-                        <div className="text-6xl font-extrabold mb-4 bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
-                          {stat.value}
-                        </div>
-                        
-                        <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">
-                          {stat.description}
-                        </p>
-                        
-                        <div className="inline-block px-4 py-2 bg-gradient-to-r from-green-500/10 to-green-500/5 rounded-full">
-                          <span className="text-sm font-semibold text-green-400">
-                            {stat.trend}
-                          </span>
-                        </div>
+                    <div className={`w-8 h-8 rounded-lg bg-gradient-to-r ${stat.gradient} bg-opacity-10 flex items-center justify-center`}>
+                      <div className={stat.iconColor}>
+                        {stat.icon}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-sm font-medium text-gray-500">{stat.label}</div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xl font-bold">{stat.value}</span>
+                        <span className="text-xs text-green-400">{stat.trend}</span>
                       </div>
                     </div>
                   </motion.div>
@@ -577,332 +474,141 @@ export default function AffiliatePage() {
             </div>
           </section>
 
-          {/* HOW IT WORKS WITH PREMIUM CARDS */}
-          <section id="how-it-works" className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
-            <Reveal>
-              <>
-                <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
-                  <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
-                    How It Works
-                  </span>
-                </h2>
-                <p className="text-center text-gray-600 dark:text-gray-300 mb-16 max-w-2xl mx-auto text-lg">
-                  Start earning 15% commission in three simple steps
-                </p>
-              </>
-            </Reveal>
-
-            <div className="grid gap-8 md:grid-cols-3">
+          {/* HOW IT WORKS - Redesigned like partner page */}
+          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
+            <h2 className="text-2xl font-bold text-center mb-8">
+              <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
+                How It Works
+              </span>
+            </h2>
+            <div className="flex items-center justify-center gap-8">
               {steps.map((step, index) => (
                 <Reveal key={step.title}>
                   <motion.div
-                    whileHover={{ y: -12 }}
-                    className="group relative"
+                    whileHover={{ y: -2 }}
+                    className="flex items-center gap-3"
                   >
-                    {/* Step Number Badge */}
-                    <div className={`absolute -top-4 -left-4 w-16 h-16 rounded-2xl bg-gradient-to-r ${step.gradient} flex items-center justify-center text-white font-bold text-2xl z-10 shadow-2xl`}>
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-r from-yellow-400 to-green-400 flex items-center justify-center text-white text-xs font-bold">
                       {index + 1}
                     </div>
-                    
-                    {/* Card */}
-                    <div className="relative bg-white dark:bg-[#0a0d16] rounded-3xl p-8 pt-16 border border-gray-200 dark:border-gray-800 shadow-2xl overflow-hidden">
-                      {/* Background Pattern */}
-                      <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-white/5 to-transparent rounded-full blur-2xl" />
-                      
-                      <div className="relative">
-                        {/* Icon */}
-                        <div className={`w-24 h-24 rounded-3xl bg-gradient-to-r ${step.gradient} bg-opacity-10 mb-6 mx-auto flex items-center justify-center`}>
-                          <div className={step.iconColor}>
-                            {step.icon}
-                          </div>
-                        </div>
-                        
-                        <h3 className="text-2xl font-bold mb-4 text-center">{step.title}</h3>
-                        
-                        <p className="text-gray-600 dark:text-gray-300 text-center leading-relaxed">
-                          {step.desc}
-                        </p>
-                        
-                        {/* Decorative Line */}
-                        <div className={`mt-6 h-1 w-20 mx-auto bg-gradient-to-r ${step.gradient} rounded-full`} />
+                    <div className={`w-6 h-6 rounded-full bg-gradient-to-r ${step.gradient} bg-opacity-10 flex items-center justify-center`}>
+                      <div className={step.iconColor}>
+                        {step.icon}
                       </div>
                     </div>
+                    <span className="text-sm font-medium">{step.title}</span>
                   </motion.div>
                 </Reveal>
               ))}
             </div>
           </section>
 
-          {/* ALL EARNING METHODS - ULTRA PREMIUM SECTION */}
-          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
-            <Reveal>
-              <>
-                <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
-                  <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
-                    18+ Ways to Earn
-                  </span>
-                </h2>
-                <p className="text-center text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto text-lg">
-                  Your referrals can earn through these methods - and you earn 15% on everything!
-                </p>
-                
-                <div className="flex flex-wrap items-center justify-center gap-3 mb-16">
-                  {[
-                    { icon: "💰", text: "15% Commission", gradient: "from-yellow-400 to-green-400" },
-                    { icon: "⚡", text: "Instant Tracking", gradient: "from-blue-400 to-cyan-400" },
-                    { icon: "🚀", text: "No Limits", gradient: "from-purple-400 to-pink-400" },
-                    { icon: "🌍", text: "Global", gradient: "from-emerald-400 to-teal-400" },
-                  ].map((badge, i) => (
-                    <motion.div
-                      key={i}
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      className={`px-6 py-3 bg-gradient-to-r ${badge.gradient} rounded-full text-black font-semibold shadow-xl flex items-center gap-2`}
-                    >
-                      <span className="text-lg">{badge.icon}</span>
-                      <span>{badge.text}</span>
-                    </motion.div>
-                  ))}
-                </div>
-              </>
-            </Reveal>
-
-            <div className="grid gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+          {/* EARNING METHODS - Redesigned like partner page integrations */}
+          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
+            <h2 className="text-2xl font-bold text-center mb-8">
+              <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
+                18+ Ways to Earn
+              </span>
+            </h2>
+            <div className="flex flex-wrap items-center justify-center gap-3">
               {allEarningMethods.map((method) => (
                 <Reveal key={method.name}>
                   <motion.a
                     href={method.path}
-                    whileHover={{ y: -8, scale: 1.02 }}
-                    transition={{ type: "spring", stiffness: 400 }}
-                    className="group relative block"
+                    whileHover={{ y: -2 }}
+                    className="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-[#0a0d16] rounded-full border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-md transition-all duration-300"
                   >
-                    {/* Premium Glow Effect */}
-                    <div className={`absolute inset-0 bg-gradient-to-r ${method.gradient} rounded-2xl opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500`} />
-                    
-                    {/* Card */}
-                    <div className="relative bg-white dark:bg-[#0a0d16] rounded-2xl p-6 border border-gray-200 dark:border-gray-800 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden">
-                      {/* Background Pattern */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      
-                      {/* Icon Container with Gradient - ULTRA PREMIUM */}
-                      <div className="relative mb-4">
-                        {/* Outer Glow Ring */}
-                        <div className={`absolute inset-0 bg-gradient-to-r ${method.gradient} rounded-xl blur-md opacity-0 group-hover:opacity-50 transition-opacity duration-300`} />
-                        
-                        {/* Main Icon Container */}
-                        <div className={`relative w-16 h-16 mx-auto rounded-xl bg-gradient-to-r ${method.gradient} bg-opacity-10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                          <div className={`text-${method.color}-600 dark:text-${method.color}-400 group-hover:text-${method.color}-600 transition-colors duration-300 relative z-10`}>
-                            {method.icon}
-                          </div>
-                        </div>
-                        
-                        {/* Floating 15% Badge - ANIMATED */}
-                        <motion.div
-                          animate={{ 
-                            scale: [1, 1.1, 1],
-                            rotate: [0, 5, -5, 0]
-                          }}
-                          transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-                          className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-gradient-to-r from-green-400 to-emerald-400 flex items-center justify-center text-white text-xs font-bold shadow-xl"
-                        >
-                          15%
-                        </motion.div>
-                        
-                        {/* Sparkle Effect */}
-                        <motion.div
-                          animate={{ opacity: [0, 1, 0] }}
-                          transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, delay: 1 }}
-                          className="absolute -top-1 -left-1 w-3 h-3 bg-yellow-400 rounded-full blur-sm"
-                        />
+                    <div className={`w-5 h-5 rounded-full bg-gradient-to-r ${method.gradient} bg-opacity-10 flex items-center justify-center`}>
+                      <div className={`text-${method.color}-600 dark:text-${method.color}-400`}>
+                        {method.icon}
                       </div>
-                      
-                      <h3 className="text-base font-bold text-center mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-yellow-400 group-hover:to-green-400 group-hover:bg-clip-text transition-all duration-300">
-                        {method.name}
-                      </h3>
-                      
-                      <div className="text-xs text-center text-gray-500 dark:text-gray-400 mb-3 group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors duration-300">
-                        {method.earnings}
-                      </div>
-                      
-                      {/* Premium Progress Indicator */}
-                      <div className="h-1.5 w-full bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          whileHover={{ width: "100%" }}
-                          transition={{ duration: 0.3 }}
-                          className={`h-full bg-gradient-to-r ${method.gradient}`}
-                        />
-                      </div>
-                      
-                      {/* Bottom Glow Line */}
-                      <div className={`absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r ${method.gradient} scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left`} />
                     </div>
+                    <span className="text-xs font-medium">{method.name}</span>
                   </motion.a>
                 </Reveal>
               ))}
             </div>
-
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              className="mt-16 text-center"
-            >
-              <div className="inline-block px-10 py-5 bg-gradient-to-r from-yellow-400 to-green-400 rounded-2xl text-black font-bold text-xl shadow-2xl">
-                <span className="mr-3 text-2xl">🎯</span>
-                18+ earning methods - Start referring now!
-              </div>
-            </motion.div>
           </section>
 
-          {/* BONUSES SECTION WITH PREMIUM CARDS */}
-          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
-            <Reveal>
-              <>
-                <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
-                  <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
-                    Unlock More Bonuses
-                  </span>
-                </h2>
-                <p className="text-center text-gray-600 dark:text-gray-300 mb-16 max-w-2xl mx-auto text-lg">
-                  Extra rewards on top of your 15% commission
-                </p>
-              </>
-            </Reveal>
-
-            <div className="grid gap-8 md:grid-cols-3">
+          {/* BONUSES SECTION - Redesigned like partner page */}
+          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
+            <h2 className="text-2xl font-bold text-center mb-8">
+              <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
+                Unlock More Bonuses
+              </span>
+            </h2>
+            <div className="flex items-center justify-center gap-8">
               {bonuses.map((bonus) => (
                 <Reveal key={bonus.title}>
                   <motion.div
-                    whileHover={{ y: -12 }}
-                    className="group relative"
+                    whileHover={{ y: -2 }}
+                    className="relative flex items-center gap-3 px-4 py-2 bg-white dark:bg-[#0a0d16] rounded-full border border-gray-200 dark:border-gray-800 shadow-sm"
                   >
-                    {/* Background Glow */}
-                    <div className={`absolute inset-0 bg-gradient-to-r ${bonus.gradient} rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500`} />
-                    
-                    <div className="relative bg-white dark:bg-[#0a0d16] rounded-3xl p-8 border border-gray-200 dark:border-gray-800 shadow-2xl overflow-hidden">
-                      {/* Metric Badge */}
-                      <div className={`absolute top-4 right-4 px-4 py-2 bg-gradient-to-r ${bonus.gradient} rounded-full text-white font-bold text-sm shadow-lg`}>
-                        {bonus.metric}
-                      </div>
-                      
-                      {/* Icon */}
-                      <div className={`w-20 h-20 rounded-2xl bg-gradient-to-r ${bonus.gradient} bg-opacity-10 mb-6 flex items-center justify-center`}>
-                        <div className={bonus.iconColor}>
-                          {bonus.icon}
-                        </div>
-                      </div>
-                      
-                      <h3 className="text-2xl font-bold mb-3">{bonus.title}</h3>
-                      
-                      <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                        {bonus.desc}
-                      </p>
-                      
-                      {/* Decorative Line */}
-                      <div className={`mt-6 h-1 w-20 bg-gradient-to-r ${bonus.gradient} rounded-full`} />
+                    <div className="absolute -top-2 -right-2 w-4 h-4 rounded-full bg-gradient-to-r from-green-400 to-emerald-400 flex items-center justify-center text-[8px] text-white font-bold">
+                      ↑
                     </div>
+                    <div className={`w-6 h-6 rounded-full bg-gradient-to-r ${bonus.gradient} bg-opacity-10 flex items-center justify-center`}>
+                      <div className={bonus.iconColor}>
+                        {bonus.icon}
+                      </div>
+                    </div>
+                    <span className="text-sm font-medium">{bonus.title}</span>
+                    <span className="text-xs font-bold bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
+                      {bonus.metric}
+                    </span>
                   </motion.div>
                 </Reveal>
               ))}
             </div>
           </section>
 
-          {/* FEATURES SECTION */}
-          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
-            <Reveal>
-              <>
-                <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
-                  <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
-                    Premium Features
-                  </span>
-                </h2>
-                <p className="text-center text-gray-600 dark:text-gray-300 mb-16 max-w-2xl mx-auto text-lg">
-                  Everything you need to succeed as an affiliate
-                </p>
-              </>
-            </Reveal>
-
-            <div className="grid gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+          {/* FEATURES SECTION - Redesigned like partner page benefits */}
+          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
+            <h2 className="text-2xl font-bold text-center mb-8">
+              <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
+                Premium Features
+              </span>
+            </h2>
+            <div className="flex flex-wrap items-center justify-center gap-4">
               {features.map((feature) => (
                 <Reveal key={feature.title}>
                   <motion.div
-                    whileHover={{ y: -6 }}
-                    className="group relative"
+                    whileHover={{ y: -2 }}
+                    className="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-[#0a0d16] rounded-full border border-gray-200 dark:border-gray-800 shadow-sm"
                   >
-                    <div className={`absolute inset-0 bg-gradient-to-r ${feature.gradient} rounded-2xl opacity-0 group-hover:opacity-10 blur-lg transition-opacity duration-300`} />
-                    
-                    <div className="relative bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-lg hover:shadow-xl transition-all duration-300">
-                      {/* Icon */}
-                      <div className={`w-16 h-16 mx-auto rounded-xl bg-gradient-to-r ${feature.gradient} bg-opacity-10 mb-4 flex items-center justify-center`}>
-                        <div className={feature.iconColor}>
-                          {feature.icon}
-                        </div>
+                    <div className={`w-5 h-5 rounded-full bg-gradient-to-r ${feature.gradient} bg-opacity-10 flex items-center justify-center`}>
+                      <div className={feature.iconColor}>
+                        {feature.icon}
                       </div>
-                      
-                      <h3 className="text-sm font-bold mb-2">{feature.title}</h3>
-                      
-                      <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-                        {feature.desc}
-                      </p>
                     </div>
+                    <span className="text-xs font-medium">{feature.title}</span>
                   </motion.div>
                 </Reveal>
               ))}
             </div>
           </section>
 
-          {/* TESTIMONIALS SECTION WITH PREMIUM CARDS */}
-          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
-            <Reveal>
-              <>
-                <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
-                  <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
-                    50,000+ Affiliates Trust Us
-                  </span>
-                </h2>
-                <p className="text-center text-gray-600 dark:text-gray-300 mb-16 max-w-2xl mx-auto text-lg">
-                  Real earnings from real people
-                </p>
-              </>
-            </Reveal>
-
-            <div className="grid gap-6 md:grid-cols-3">
+          {/* TESTIMONIALS SECTION - Redesigned like partner page success stories */}
+          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
+            <h2 className="text-2xl font-bold text-center mb-8">
+              <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
+                50,000+ Affiliates Trust Us
+              </span>
+            </h2>
+            <div className="flex flex-wrap items-center justify-center gap-6">
               {testimonials.map((testimonial, index) => (
                 <Reveal key={index}>
                   <motion.div
-                    whileHover={{ y: -8 }}
-                    className="group relative"
+                    whileHover={{ y: -2 }}
+                    className="flex items-center gap-3"
                   >
-                    {/* Background Glow */}
-                    <div className={`absolute inset-0 bg-gradient-to-r ${testimonial.gradient} rounded-3xl opacity-0 group-hover:opacity-10 blur-xl transition-opacity duration-500`} />
-                    
-                    <div className="relative bg-white dark:bg-[#0a0d16] rounded-3xl p-6 border border-gray-200 dark:border-gray-800 shadow-2xl overflow-hidden">
-                      {/* Earnings Badge */}
-                      <div className={`absolute top-4 right-4 px-3 py-1.5 bg-gradient-to-r ${testimonial.gradient} rounded-full text-white text-xs font-bold shadow-lg`}>
-                        {testimonial.earnings}
-                      </div>
-                      
-                      <div className="flex items-center gap-4 mb-4">
-                        <div className={`w-14 h-14 rounded-2xl bg-gradient-to-r ${testimonial.gradient} flex items-center justify-center text-white text-xl font-bold shadow-lg`}>
-                          {testimonial.avatar}
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-lg">{testimonial.name}</h4>
-                          <p className="text-xs text-gray-500">{testimonial.date}</p>
-                        </div>
-                      </div>
-                      
-                      <div className="flex items-center gap-1 mb-3">
-                        {Array(testimonial.rating).fill(0).map((_, i) => (
-                          <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
-                        ))}
-                      </div>
-                      
-                      <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-                        "{testimonial.content}"
-                      </p>
-                      
+                    <div className={`w-8 h-8 rounded-lg bg-gradient-to-r ${testimonial.gradient} flex items-center justify-center text-white text-xs font-bold`}>
+                      {testimonial.avatar}
+                    </div>
+                    <div className="text-left">
+                      <div className="text-sm font-medium">{testimonial.name}</div>
                       <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-green-400" />
-                        <span className="text-xs text-gray-500">Verified Affiliate</span>
+                        <span className="text-xs font-bold">{testimonial.earnings}</span>
                       </div>
                     </div>
                   </motion.div>
@@ -911,23 +617,36 @@ export default function AffiliatePage() {
             </div>
           </section>
 
-          {/* FAQ SECTION */}
-          <section className="relative z-10 max-w-4xl mx-auto px-4 pb-24">
-            <Reveal>
-              <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
-                <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
-                  Frequently Asked Questions
-                </span>
-              </h2>
-              <p className="text-center text-gray-600 dark:text-gray-300 mb-16 text-lg">
-                Everything you need to know about earning 15% commission
-              </p>
-            </Reveal>
-
-            <FAQ faqs={faqs} />
+          {/* FAQ SECTION - Redesigned like partner page FAQ */}
+          <section className="relative z-10 max-w-3xl mx-auto px-4 pb-16">
+            <h2 className="text-2xl font-bold text-center mb-8">
+              <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
+                Frequently Asked Questions
+              </span>
+            </h2>
+            <div className="space-y-3">
+              {faqs.map((faq, index) => (
+                <Reveal key={index}>
+                  <motion.div
+                    whileHover={{ y: -1 }}
+                    className="p-3 bg-white/50 dark:bg-white/5 rounded-lg border border-gray-200 dark:border-gray-800"
+                  >
+                    <div className="flex items-start gap-2">
+                      <div className="w-4 h-4 rounded-full bg-gradient-to-r from-yellow-400 to-green-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <div className="w-1.5 h-1.5 rounded-full bg-white" />
+                      </div>
+                      <div>
+                        <h3 className="text-sm font-medium mb-1">{faq.q}</h3>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">{faq.a}</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                </Reveal>
+              ))}
+            </div>
           </section>
 
-          {/* FINAL CTA WITH ULTRA PREMIUM DESIGN */}
+          {/* FINAL CTA - UNCHANGED */}
           <section className="relative z-10 text-center py-20">
             <Reveal>
               <motion.div
