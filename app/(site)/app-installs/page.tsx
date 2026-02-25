@@ -263,4 +263,56 @@ export default function AppInstallPage() {
               <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
                 How It Works
               </h2>
-              <p
+              <p className="text-center text-gray
+                            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+                Start earning in three simple steps
+              </p>
+            </>
+          </Reveal>
+
+          <div className="grid gap-6 md:grid-cols-3 mb-24">
+            {[
+              { icon: <User className="w-8 h-8 text-yellow-400" />, title: "Sign Up", desc: "Create your free account to get started." },
+              { icon: <Star className="w-8 h-8 text-green-400" />, title: "Complete Tasks", desc: "Install apps and complete actions to earn rewards." },
+              { icon: <Gift className="w-8 h-8 text-yellow-400" />, title: "Get Rewards", desc: "Redeem your points for instant rewards." },
+            ].map((step) => (
+              <Reveal key={step.title}>
+                <ExpandableCard>
+                  <motion.div
+                    layout
+                    whileHover={{ y: -4 }}
+                    className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800"
+                  >
+                    <div className="flex justify-center mb-4">{step.icon}</div>
+                    <h3 className="text-lg font-semibold">{step.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
+                      {step.desc}
+                    </p>
+                  </motion.div>
+                </ExpandableCard>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* FINAL CTA */}
+          <section className="relative z-10 text-center py-28">
+            <Reveal>
+              <>
+                <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
+                  Start Earning Now with Cashog
+                </h2>
+
+                <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
+                  Join Cashog today and start earning rewards by installing apps and completing tasks.
+                </p>
+
+                <PrimaryCTA href="/signup">Join Now</PrimaryCTA>
+              </>
+            </Reveal>
+          </section>
+
+        </section>
+      </main>
+    </>
+  );
+}
