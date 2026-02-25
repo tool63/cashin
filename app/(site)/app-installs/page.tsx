@@ -55,6 +55,51 @@ const apps = [
     installs: "600K+",
     description: "Securely store and manage your crypto assets.",
   },
+  {
+    id: 5,
+    name: "Meditation Master",
+    category: "Wellness",
+    reward: "$3",
+    rating: 4.9,
+    installs: "150K+",
+    description: "Guided meditations for stress relief and better sleep.",
+  },
+  {
+    id: 6,
+    name: "Recipe Finder",
+    category: "Food",
+    reward: "$2",
+    rating: 4.5,
+    installs: "280K+",
+    description: "Discover delicious recipes based on ingredients you have.",
+  },
+  {
+    id: 7,
+    name: "Weather Pro",
+    category: "Weather",
+    reward: "$2",
+    rating: 4.7,
+    installs: "420K+",
+    description: "Accurate weather forecasts with beautiful widgets.",
+  },
+  {
+    id: 8,
+    name: "Music Mixer",
+    category: "Entertainment",
+    reward: "$4",
+    rating: 4.8,
+    installs: "180K+",
+    description: "Create and mix your own music tracks easily.",
+  },
+  {
+    id: 9,
+    name: "Shopping Helper",
+    category: "Shopping",
+    reward: "$3",
+    rating: 4.6,
+    installs: "310K+",
+    description: "Compare prices and find the best deals online.",
+  },
 ];
 
 /* ================= STATS ================= */
@@ -170,7 +215,7 @@ export default function AppInstallPage() {
             </>
           </Reveal>
 
-          <div className="grid gap-6 md:grid-cols-3 mb-24">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-24">
             {apps.map((app) => (
               <Reveal key={app.id}>
                 <ExpandableCard>
@@ -195,8 +240,11 @@ export default function AppInstallPage() {
                       {Array(Math.floor(app.rating))
                         .fill(0)
                         .map((_, i) => (
-                          <Star key={i} className="w-4 h-4 text-yellow-400" />
+                          <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
                         ))}
+                      {app.rating % 1 !== 0 && (
+                        <Star className="w-4 h-4 text-yellow-400 fill-current opacity-50" />
+                      )}
                     </div>
 
                     <div className="mt-4 text-sm text-gray-600 dark:text-gray-300">
