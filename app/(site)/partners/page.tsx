@@ -119,7 +119,7 @@ import {
   Webcam,
   Film,
   Tv,
-  Robot,
+  Bot,  // Changed from Robot to Bot
   Brain,
   Circuit,
   Microchip,
@@ -161,7 +161,7 @@ import {
   Utensils,
 } from "lucide-react";
 
-// ... rest of the code remains exactly the same from the previous response
+// ... rest of the code remains exactly the same
 
 /* ================= PARTNER STATS ================= */
 const partnerStats = [
