@@ -25,7 +25,6 @@ import {
   Gamepad2,
   Film,
   LayoutGrid,
-  Newspaper,
   Eye,
   Sparkles,
   FlaskConical,
@@ -36,12 +35,12 @@ import {
   Ticket,
   Hammer,
   CheckSquare,
-  Puzzle,
   Timer,
-  ShoppingBag,
-  Headphones,
-  BookOpen,
+  Puzzle,
   PenTool,
+  Monitor,
+  Smartphone,
+  Tablet,
 } from "lucide-react";
 
 /* ================= AFFILIATE STATS ================= */
@@ -104,30 +103,29 @@ const bonuses = [
   },
 ];
 
-/* ================= MAIN EARNING METHODS ================= */
-const mainEarningMethods = [
-  { name: "Surveys", path: "/surveys", icon: <ClipboardList className="w-5 h-5" />, color: "text-blue-400" },
-  { name: "App Installs", path: "/app-installs", icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>, color: "text-green-400" },
-  { name: "Playing Games", path: "/play-games", icon: <Gamepad2 className="w-5 h-5" />, color: "text-purple-400" },
-  { name: "Watching Videos", path: "/watch-videos", icon: <Film className="w-5 h-5" />, color: "text-red-400" },
-  { name: "Mining Rewards", path: "/mining-rewards", icon: <Hammer className="w-5 h-5" />, color: "text-yellow-400" },
-  { name: "Completing Offers", path: "/complete-offers", icon: <CheckSquare className="w-5 h-5" />, color: "text-indigo-400" },
-  { name: "Offerwall", path: "/offerwall", icon: <LayoutGrid className="w-5 h-5" />, color: "text-pink-400" },
-  { name: "Surveywall", path: "/surveywall", icon: <ClipboardList className="w-5 h-5" />, color: "text-cyan-400" },
-];
-
-/* ================= EXTRA EARNING METHODS ================= */
-const extraEarningMethods = [
-  { name: "Watching Ads", path: "/watch-ads", icon: <Eye className="w-5 h-5" />, color: "text-amber-400" },
-  { name: "Micro Tasks", path: "/micro-tasks", icon: <Sparkles className="w-5 h-5" />, color: "text-lime-400" },
-  { name: "Free Trials", path: "/complete-free-trials", icon: <Timer className="w-5 h-5" />, color: "text-emerald-400" },
-  { name: "Testing Products", path: "/test-products", icon: <FlaskConical className="w-5 h-5" />, color: "text-teal-400" },
-  { name: "Reading Emails", path: "/read-emails", icon: <Mail className="w-5 h-5" />, color: "text-orange-400" },
-  { name: "Visiting Websites", path: "/visit-websites", icon: <MousePointerClick className="w-5 h-5" />, color: "text-rose-400" },
-  { name: "Review Tasks", path: "/review-tasks", icon: <PenTool className="w-5 h-5" />, color: "text-violet-400" },
-  { name: "Spinning Wheel", path: "/spinning-wheel", icon: <Puzzle className="w-5 h-5" />, color: "text-fuchsia-400" },
-  { name: "Loyalty", path: "/loyalty", icon: <Award className="w-5 h-5" />, color: "text-yellow-400" },
-  { name: "Vouchers", path: "/vouchers", icon: <Ticket className="w-5 h-5" />, color: "text-green-400" },
+/* ================= ALL EARNING METHODS ================= */
+const allEarningMethods = [
+  // Main Methods
+  { name: "Surveys", path: "/surveys", icon: <ClipboardList className="w-5 h-5" />, color: "text-blue-400", category: "main" },
+  { name: "App Installs", path: "/app-installs", icon: <Smartphone className="w-5 h-5" />, color: "text-green-400", category: "main" },
+  { name: "Playing Games", path: "/play-games", icon: <Gamepad2 className="w-5 h-5" />, color: "text-purple-400", category: "main" },
+  { name: "Watching Videos", path: "/watch-videos", icon: <Film className="w-5 h-5" />, color: "text-red-400", category: "main" },
+  { name: "Mining Rewards", path: "/mining-rewards", icon: <Hammer className="w-5 h-5" />, color: "text-yellow-400", category: "main" },
+  { name: "Completing Offers", path: "/complete-offers", icon: <CheckSquare className="w-5 h-5" />, color: "text-indigo-400", category: "main" },
+  { name: "Offerwall", path: "/offerwall", icon: <LayoutGrid className="w-5 h-5" />, color: "text-pink-400", category: "main" },
+  { name: "Surveywall", path: "/surveywall", icon: <ClipboardList className="w-5 h-5" />, color: "text-cyan-400", category: "main" },
+  
+  // Extra Methods
+  { name: "Watching Ads", path: "/watch-ads", icon: <Eye className="w-5 h-5" />, color: "text-amber-400", category: "extra" },
+  { name: "Micro Tasks", path: "/micro-tasks", icon: <Sparkles className="w-5 h-5" />, color: "text-lime-400", category: "extra" },
+  { name: "Free Trials", path: "/complete-free-trials", icon: <Timer className="w-5 h-5" />, color: "text-emerald-400", category: "extra" },
+  { name: "Testing Products", path: "/test-products", icon: <FlaskConical className="w-5 h-5" />, color: "text-teal-400", category: "extra" },
+  { name: "Reading Emails", path: "/read-emails", icon: <Mail className="w-5 h-5" />, color: "text-orange-400", category: "extra" },
+  { name: "Visiting Websites", path: "/visit-websites", icon: <Monitor className="w-5 h-5" />, color: "text-rose-400", category: "extra" },
+  { name: "Review Tasks", path: "/review-tasks", icon: <PenTool className="w-5 h-5" />, color: "text-violet-400", category: "extra" },
+  { name: "Spinning Wheel", path: "/spinning-wheel", icon: <Puzzle className="w-5 h-5" />, color: "text-fuchsia-400", category: "extra" },
+  { name: "Loyalty", path: "/loyalty", icon: <Award className="w-5 h-5" />, color: "text-yellow-400", category: "extra" },
+  { name: "Vouchers", path: "/vouchers", icon: <Ticket className="w-5 h-5" />, color: "text-green-400", category: "extra" },
 ];
 
 /* ================= TESTIMONIALS ================= */
@@ -238,69 +236,11 @@ function ExpandableSection({ title, children }: { title: string; children: React
   );
 }
 
-/* ================= REFERRAL CARD ================= */
-function ReferralCard() {
-  const [copied, setCopied] = React.useState(false);
-  const referralLink = "https://cashog.com/ref/your-username";
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(referralLink);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  return (
-    <motion.div
-      whileHover={{ y: -4 }}
-      className="bg-gradient-to-r from-yellow-400 to-green-400 rounded-2xl p-8 text-center text-black mb-16"
-    >
-      <h3 className="text-2xl font-bold mb-2">Your Referral Link</h3>
-      <p className="mb-6">Share this link with friends to earn 15% commission on everything they earn</p>
-      
-      <div className="flex items-center justify-center gap-2 bg-white/20 backdrop-blur rounded-xl p-2 max-w-xl mx-auto">
-        <input
-          type="text"
-          value={referralLink}
-          readOnly
-          className="bg-transparent flex-1 px-4 py-2 outline-none text-black placeholder-black/50"
-        />
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.97 }}
-          onClick={copyToClipboard}
-          className="flex items-center gap-2 bg-black text-white px-6 py-2 rounded-lg font-semibold"
-        >
-          <Copy className="w-4 h-4" />
-          {copied ? "Copied!" : "Copy"}
-        </motion.button>
-      </div>
-      
-      <div className="flex justify-center gap-4 mt-6">
-        <motion.a
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.97 }}
-          href="#"
-          className="bg-black text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2"
-        >
-          <ExternalLink className="w-4 h-4" />
-          Share via WhatsApp
-        </motion.a>
-        <motion.a
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.97 }}
-          href="#"
-          className="bg-black text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2"
-        >
-          <ExternalLink className="w-4 h-4" />
-          Share via Telegram
-        </motion.a>
-      </div>
-    </motion.div>
-  );
-}
-
 /* ================= PAGE ================= */
 export default function AffiliatePage() {
+  const mainMethods = allEarningMethods.filter(m => m.category === "main");
+  const extraMethods = allEarningMethods.filter(m => m.category === "extra");
+
   return (
     <>
       <Meta
@@ -346,9 +286,6 @@ export default function AffiliatePage() {
               <PrimaryCTA href="/signup">Start Earning 15% Now</PrimaryCTA>
             </div>
           </Reveal>
-
-          {/* REFERRAL LINK CARD */}
-          <ReferralCard />
 
           {/* STATS SECTION */}
           <section className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
@@ -433,34 +370,46 @@ export default function AffiliatePage() {
             {/* Main Earning Methods */}
             <div className="mb-8">
               <h3 className="text-xl font-semibold mb-4">Main Earning Methods</h3>
-              <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
-                {mainEarningMethods.map((method) => (
-                  <motion.a
-                    key={method.name}
-                    href={method.path}
-                    whileHover={{ y: -2 }}
-                    className="bg-white dark:bg-[#0a0d16] rounded-xl p-4 border border-gray-200 dark:border-gray-800 flex flex-col items-center text-center group"
-                  >
-                    <div className={`mb-2 ${method.color}`}>{method.icon}</div>
-                    <span className="text-sm font-medium">{method.name}</span>
-                  </motion.a>
+              <div className="grid gap-6 md:grid-cols-4">
+                {mainMethods.map((method) => (
+                  <Reveal key={method.name}>
+                    <motion.a
+                      href={method.path}
+                      whileHover={{ y: -4 }}
+                      className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 border border-gray-200 dark:border-gray-800 flex flex-col items-center text-center group"
+                    >
+                      <div className={`mb-3 ${method.color}`}>
+                        <div className="w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                          {method.icon}
+                        </div>
+                      </div>
+                      <span className="text-sm font-medium">{method.name}</span>
+                      <span className="text-xs text-gray-500 mt-2">15% Commission</span>
+                    </motion.a>
+                  </Reveal>
                 ))}
               </div>
             </div>
 
             {/* Extra Earning Methods (Expandable) */}
             <ExpandableSection title="Extra Earning Methods (Click to Expand)">
-              <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
-                {extraEarningMethods.map((method) => (
-                  <motion.a
-                    key={method.name}
-                    href={method.path}
-                    whileHover={{ y: -2 }}
-                    className="bg-white dark:bg-[#0a0d16] rounded-xl p-4 border border-gray-200 dark:border-gray-800 flex flex-col items-center text-center group"
-                  >
-                    <div className={`mb-2 ${method.color}`}>{method.icon}</div>
-                    <span className="text-sm font-medium">{method.name}</span>
-                  </motion.a>
+              <div className="grid gap-6 md:grid-cols-4">
+                {extraMethods.map((method) => (
+                  <Reveal key={method.name}>
+                    <motion.a
+                      href={method.path}
+                      whileHover={{ y: -4 }}
+                      className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 border border-gray-200 dark:border-gray-800 flex flex-col items-center text-center group"
+                    >
+                      <div className={`mb-3 ${method.color}`}>
+                        <div className="w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                          {method.icon}
+                        </div>
+                      </div>
+                      <span className="text-sm font-medium">{method.name}</span>
+                      <span className="text-xs text-gray-500 mt-2">15% Commission</span>
+                    </motion.a>
+                  </Reveal>
                 ))}
               </div>
             </ExpandableSection>
@@ -555,25 +504,22 @@ export default function AffiliatePage() {
             <FAQ faqs={faqs} />
           </section>
 
-          {/* FINAL CTA */}
-          <section className="relative z-10 text-center py-16">
+          {/* FINAL CTA - Now with same background as hero */}
+          <section className="relative z-10 text-center py-28">
             <Reveal>
-              <motion.div
-                whileHover={{ y: -4 }}
-                className="bg-gradient-to-r from-yellow-400 to-green-400 rounded-3xl p-12 text-black"
-              >
-                <h2 className="text-4xl sm:text-5xl font-extrabold mb-4">
+              <div className="text-center">
+                <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
                   Start Earning 15% Commission Today
                 </h2>
 
-                <p className="text-lg sm:text-xl max-w-2xl mx-auto mb-8">
+                <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
                   Join Cashog's affiliate program and earn from 18+ earning methods
                 </p>
 
                 <PrimaryCTA href="/signup">
                   Become an Affiliate Now
                 </PrimaryCTA>
-              </motion.div>
+              </div>
             </Reveal>
           </section>
 
