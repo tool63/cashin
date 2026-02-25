@@ -17,7 +17,9 @@
     "react-dom": "18.2.0",
     "@heroicons/react": "^2.0.18",
     "react-icons": "^4.11.0",
-    "zustand": "^4.3.6"
+    "zustand": "^4.3.6",
+    "react-chartjs-2": "^3.0.0",    // Added
+    "chart.js": "^3.0.0"             // Added
   },
   "devDependencies": {
     "@types/node": "^20.5.1",
