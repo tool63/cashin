@@ -179,16 +179,16 @@ const partnerStats = [
     value: "10K+",
     icon: <Building2 className="w-5 h-5" />,
     trend: "+35%",
-    gradient: "from-blue-400 to-indigo-400",
-    iconColor: "text-blue-600 dark:text-blue-400",
+    gradient: "from-emerald-400 to-teal-400",
+    iconColor: "text-emerald-600 dark:text-emerald-400",
   },
   {
     label: "Revenue Share",
     value: "30%",
     icon: <Percent className="w-5 h-5" />,
     trend: "Top-tier",
-    gradient: "from-emerald-400 to-teal-400",
-    iconColor: "text-emerald-600 dark:text-emerald-400",
+    gradient: "from-blue-400 to-indigo-400",
+    iconColor: "text-blue-600 dark:text-blue-400",
   },
   {
     label: "Avg. Payout",
@@ -239,17 +239,17 @@ const partnerBenefits = [
 /* ================= SUCCESS STORIES ================= */
 const successStories = [
   { company: "TechCorp", logo: "TC", revenue: "$250K", growth: "+156%", gradient: "from-blue-400 to-cyan-400" },
-  { company: "Global Media", logo: "GMG", revenue: "$1.2M", growth: "+243%", gradient: "from-purple-400 to-pink-400" },
-  { company: "Innovate", logo: "IS", revenue: "$750K", growth: "+189%", gradient: "from-green-400 to-emerald-400" },
+  { company: "Global Media", logo: "GMG", revenue: "$1.2M", growth: "+243%", gradient: "from-green-400 to-emerald-400" },
+  { company: "Innovate", logo: "IS", revenue: "$750K", growth: "+189%", gradient: "from-purple-400 to-pink-400" },
 ];
 
 /* ================= INTEGRATION OPTIONS ================= */
 const integrations = [
   { name: "REST API", icon: <Network className="w-4 h-4" />, gradient: "from-blue-400 to-cyan-400" },
-  { name: "Webhooks", icon: <Zap className="w-4 h-4" />, gradient: "from-yellow-400 to-amber-400" },
+  { name: "Webhooks", icon: <Zap className="w-4 h-4" />, gradient: "from-amber-400 to-orange-400" },
   { name: "SDK", icon: <Package className="w-4 h-4" />, gradient: "from-purple-400 to-pink-400" },
   { name: "JS", icon: <Code className="w-4 h-4" />, gradient: "from-green-400 to-emerald-400" },
-  { name: "Python", icon: <Terminal className="w-4 h-4" />, gradient: "from-blue-400 to-indigo-400" },
+  { name: "Python", icon: <Terminal className="w-4 h-4" />, gradient: "from-indigo-400 to-purple-400" },
   { name: "Ruby", icon: <Gem className="w-4 h-4" />, gradient: "from-red-400 to-rose-400" },
 ];
 
@@ -274,13 +274,13 @@ export default function PartnerPage() {
 
         {/* Premium Background Elements */}
         <div className="fixed inset-0 pointer-events-none">
-          <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-gradient-to-r from-blue-400/5 to-purple-400/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-0 w-[800px] h-[800px] bg-gradient-to-r from-emerald-400/5 to-teal-400/5 rounded-full blur-3xl" />
+          <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-gradient-to-r from-yellow-400/5 to-green-400/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-0 w-[800px] h-[800px] bg-gradient-to-r from-blue-400/5 to-purple-400/5 rounded-full blur-3xl" />
         </div>
 
         <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
 
-          {/* HERO SECTION - Premium design with border */}
+          {/* HERO SECTION - Yellow/Green gradient like affiliate page */}
           <Reveal>
             <motion.div
               whileHover={{ scale: 1.02 }}
@@ -293,7 +293,7 @@ export default function PartnerPage() {
                   rotate: [0, 90, 180],
                 }}
                 transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 opacity-90"
+                className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-yellow-400 to-green-400 opacity-90"
               />
               
               {/* Content */}
@@ -302,19 +302,19 @@ export default function PartnerPage() {
                 <motion.div
                   animate={{ y: [0, -20, 0] }}
                   transition={{ duration: 5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-                  className="absolute top-10 left-10 w-32 h-32 bg-blue-400/20 rounded-full blur-3xl"
+                  className="absolute top-10 left-10 w-32 h-32 bg-yellow-400/20 rounded-full blur-3xl"
                 />
                 <motion.div
                   animate={{ y: [0, 20, 0] }}
                   transition={{ duration: 7, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-                  className="absolute bottom-10 right-10 w-32 h-32 bg-pink-400/20 rounded-full blur-3xl"
+                  className="absolute bottom-10 right-10 w-32 h-32 bg-green-400/20 rounded-full blur-3xl"
                 />
                 
                 <div className="relative">
                   <motion.div
                     animate={{ rotate: 360 }}
                     transition={{ duration: 30, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border-2 border-blue-400/20 rounded-full"
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border-2 border-yellow-400/20 rounded-full"
                   />
                   
                   <div className="relative text-center">
@@ -322,15 +322,15 @@ export default function PartnerPage() {
                       initial={{ scale: 0.9, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
                       transition={{ duration: 0.5 }}
-                      className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-400/10 to-purple-400/10 rounded-full border border-blue-400/20 backdrop-blur-sm mb-8"
+                      className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-yellow-400/10 to-green-400/10 rounded-full border border-yellow-400/20 backdrop-blur-sm mb-8"
                     >
-                      <Heart className="w-5 h-5 text-blue-400" />
-                      <span className="text-sm font-semibold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">10,000+ Partners Worldwide</span>
-                      <Heart className="w-5 h-5 text-purple-400" />
+                      <Heart className="w-5 h-5 text-yellow-400" />
+                      <span className="text-sm font-semibold bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">10,000+ Partners Worldwide</span>
+                      <Heart className="w-5 h-5 text-green-400" />
                     </motion.div>
                     
                     <h1 className="text-6xl sm:text-7xl md:text-8xl font-extrabold mb-8 leading-tight">
-                      <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                      <span className="bg-gradient-to-r from-yellow-400 via-yellow-400 to-green-400 bg-clip-text text-transparent">
                         Partner With Us
                       </span>
                       <br />
@@ -341,17 +341,17 @@ export default function PartnerPage() {
 
                     <div className="flex items-center justify-center gap-6 mb-8">
                       <div className="text-center">
-                        <div className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">10K+</div>
+                        <div className="text-3xl font-bold bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">10K+</div>
                         <div className="text-sm text-gray-500">Partners</div>
                       </div>
                       <div className="w-px h-8 bg-gray-300 dark:bg-gray-700" />
                       <div className="text-center">
-                        <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">30%</div>
+                        <div className="text-3xl font-bold bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">30%</div>
                         <div className="text-sm text-gray-500">Revenue Share</div>
                       </div>
                       <div className="w-px h-8 bg-gray-300 dark:bg-gray-700" />
                       <div className="text-center">
-                        <div className="text-3xl font-bold bg-gradient-to-r from-pink-400 to-red-400 bg-clip-text text-transparent">100+</div>
+                        <div className="text-3xl font-bold bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">100+</div>
                         <div className="text-sm text-gray-500">Countries</div>
                       </div>
                     </div>
@@ -368,7 +368,7 @@ export default function PartnerPage() {
                           whileHover={{ scale: 1.05, y: -2 }}
                           className="flex items-center gap-2 px-5 py-2.5 bg-white/80 dark:bg-white/5 backdrop-blur-sm rounded-full border border-gray-200 dark:border-gray-800 shadow-lg"
                         >
-                          <div className="text-blue-400">{item.icon}</div>
+                          <div className="text-yellow-400">{item.icon}</div>
                           <span className="text-sm font-medium">{item.text}</span>
                         </motion.div>
                       ))}
@@ -385,7 +385,7 @@ export default function PartnerPage() {
             </motion.div>
           </Reveal>
 
-          {/* STATS SECTION - Program Performance */}
+          {/* STATS SECTION - Emerald/Teal gradient like affiliate page */}
           <section className="relative z-10 max-w-7xl mx-auto px-4 py-16">
             <RevealWithBorder
               gradientFrom="from-emerald-400"
@@ -428,19 +428,19 @@ export default function PartnerPage() {
             </RevealWithBorder>
           </section>
 
-          {/* PARTNER TIERS */}
+          {/* PARTNER TIERS - Blue/Cyan gradient like affiliate page */}
           <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
             <RevealWithBorder
-              gradientFrom="from-purple-400"
-              gradientVia="via-pink-400"
-              gradientTo="to-red-400"
-              borderColor="border-purple-400/20"
+              gradientFrom="from-blue-400"
+              gradientVia="via-cyan-400"
+              gradientTo="to-sky-400"
+              borderColor="border-blue-400/20"
               floatingElements={false}
               rotatingCircle={true}
             >
               <div className="py-8">
                 <h2 className="text-2xl font-bold text-center mb-8">
-                  <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
                     Partner Tiers
                   </span>
                 </h2>
@@ -462,7 +462,7 @@ export default function PartnerPage() {
                           </div>
                         </div>
                         <span className="text-sm font-medium">{tier.name}</span>
-                        <span className="text-xs font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        <span className="text-xs font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
                           {tier.revenue}
                         </span>
                       </motion.div>
@@ -473,19 +473,19 @@ export default function PartnerPage() {
             </RevealWithBorder>
           </section>
 
-          {/* BENEFITS */}
+          {/* BENEFITS - Green/Teal gradient like affiliate page */}
           <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
             <RevealWithBorder
-              gradientFrom="from-blue-400"
-              gradientVia="via-cyan-400"
-              gradientTo="to-sky-400"
-              borderColor="border-blue-400/20"
+              gradientFrom="from-green-400"
+              gradientVia="via-emerald-400"
+              gradientTo="to-teal-400"
+              borderColor="border-green-400/20"
               floatingElements={false}
               rotatingCircle={true}
             >
               <div className="py-8">
                 <h2 className="text-2xl font-bold text-center mb-8">
-                  <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-green-400 to-teal-400 bg-clip-text text-transparent">
                     Key Benefits
                   </span>
                 </h2>
@@ -510,19 +510,19 @@ export default function PartnerPage() {
             </RevealWithBorder>
           </section>
 
-          {/* SUCCESS STORIES */}
+          {/* SUCCESS STORIES - Purple/Pink gradient like affiliate page */}
           <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
             <RevealWithBorder
-              gradientFrom="from-green-400"
-              gradientVia="via-emerald-400"
-              gradientTo="to-teal-400"
-              borderColor="border-green-400/20"
+              gradientFrom="from-purple-400"
+              gradientVia="via-pink-400"
+              gradientTo="to-red-400"
+              borderColor="border-purple-400/20"
               floatingElements={false}
               rotatingCircle={true}
             >
               <div className="py-8">
                 <h2 className="text-2xl font-bold text-center mb-8">
-                  <span className="bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                     Success Stories
                   </span>
                 </h2>
@@ -551,19 +551,19 @@ export default function PartnerPage() {
             </RevealWithBorder>
           </section>
 
-          {/* INTEGRATIONS */}
+          {/* INTEGRATIONS - Amber/Red gradient like affiliate page */}
           <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
             <RevealWithBorder
-              gradientFrom="from-orange-400"
-              gradientVia="via-amber-400"
-              gradientTo="to-yellow-400"
-              borderColor="border-orange-400/20"
+              gradientFrom="from-amber-400"
+              gradientVia="via-orange-400"
+              gradientTo="to-red-400"
+              borderColor="border-amber-400/20"
               floatingElements={false}
               rotatingCircle={true}
             >
               <div className="py-8">
                 <h2 className="text-2xl font-bold text-center mb-8">
-                  <span className="bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-amber-400 to-red-400 bg-clip-text text-transparent">
                     Integrations
                   </span>
                 </h2>
@@ -588,7 +588,7 @@ export default function PartnerPage() {
             </RevealWithBorder>
           </section>
 
-          {/* HOW IT WORKS */}
+          {/* HOW IT WORKS - Indigo/Pink gradient like affiliate page */}
           <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
             <RevealWithBorder
               gradientFrom="from-indigo-400"
@@ -632,19 +632,19 @@ export default function PartnerPage() {
             </RevealWithBorder>
           </section>
 
-          {/* FAQ SECTION */}
+          {/* FAQ SECTION - Orange/Yellow gradient like affiliate page */}
           <section className="relative z-10 max-w-3xl mx-auto px-4 pb-16">
             <RevealWithBorder
-              gradientFrom="from-rose-400"
-              gradientVia="via-pink-400"
-              gradientTo="to-purple-400"
-              borderColor="border-rose-400/20"
+              gradientFrom="from-orange-400"
+              gradientVia="via-amber-400"
+              gradientTo="to-yellow-400"
+              borderColor="border-orange-400/20"
               floatingElements={false}
               rotatingCircle={true}
             >
               <div className="py-8 px-6">
                 <h2 className="text-2xl font-bold text-center mb-6">
-                  <span className="bg-gradient-to-r from-rose-400 to-purple-400 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent">
                     Frequently Asked Questions
                   </span>
                 </h2>
@@ -656,7 +656,7 @@ export default function PartnerPage() {
                         className="p-3 bg-white/50 dark:bg-white/5 rounded-lg border border-gray-200 dark:border-gray-800"
                       >
                         <div className="flex items-start gap-2">
-                          <div className="w-4 h-4 rounded-full bg-gradient-to-r from-rose-400 to-purple-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <div className="w-4 h-4 rounded-full bg-gradient-to-r from-orange-400 to-yellow-400 flex items-center justify-center flex-shrink-0 mt-0.5">
                             <div className="w-1.5 h-1.5 rounded-full bg-white" />
                           </div>
                           <div>
@@ -672,7 +672,7 @@ export default function PartnerPage() {
             </RevealWithBorder>
           </section>
 
-          {/* FINAL CTA */}
+          {/* FINAL CTA - Yellow/Green gradient like affiliate page */}
           <section className="relative z-10 text-center">
             <Reveal>
               <motion.div
@@ -686,7 +686,7 @@ export default function PartnerPage() {
                     rotate: [0, 90, 180],
                   }}
                   transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                  className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 opacity-90"
+                  className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-yellow-400 to-green-400 opacity-90"
                 />
                 
                 {/* Content */}
@@ -695,29 +695,29 @@ export default function PartnerPage() {
                   <motion.div
                     animate={{ y: [0, -20, 0] }}
                     transition={{ duration: 5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-                    className="absolute top-10 left-10 w-32 h-32 bg-blue-400/20 rounded-full blur-3xl"
+                    className="absolute top-10 left-10 w-32 h-32 bg-yellow-400/20 rounded-full blur-3xl"
                   />
                   <motion.div
                     animate={{ y: [0, 20, 0] }}
                     transition={{ duration: 7, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-                    className="absolute bottom-10 right-10 w-32 h-32 bg-pink-400/20 rounded-full blur-3xl"
+                    className="absolute bottom-10 right-10 w-32 h-32 bg-green-400/20 rounded-full blur-3xl"
                   />
                   
                   <div className="relative">
                     <motion.div
                       animate={{ rotate: 360 }}
                       transition={{ duration: 30, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border-2 border-blue-400/20 rounded-full"
+                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border-2 border-yellow-400/20 rounded-full"
                     />
                     
                     <div className="flex items-center justify-center gap-4 mb-8">
-                      <Heart className="w-12 h-12 text-blue-400" />
+                      <Heart className="w-12 h-12 text-yellow-400" />
                       <h2 className="text-5xl sm:text-6xl md:text-7xl font-extrabold">
-                        <span className="bg-gradient-to-r from-blue-400 to-pink-400 bg-clip-text text-transparent">
+                        <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
                           Ready to Partner?
                         </span>
                       </h2>
-                      <Heart className="w-12 h-12 text-pink-400" />
+                      <Heart className="w-12 h-12 text-green-400" />
                     </div>
 
                     <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10">
@@ -726,10 +726,10 @@ export default function PartnerPage() {
                     
                     <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
                       {[
-                        { text: "🚀 Fast Integration", gradient: "from-blue-400/10 to-purple-400/10" },
-                        { text: "💸 30% Revenue Share", gradient: "from-purple-400/10 to-pink-400/10" },
-                        { text: "🌍 Global Reach", gradient: "from-pink-400/10 to-red-400/10" },
-                        { text: "🎯 Dedicated Support", gradient: "from-red-400/10 to-orange-400/10" },
+                        { text: "🚀 Fast Integration", gradient: "from-yellow-400/10 to-green-400/10" },
+                        { text: "💸 30% Revenue Share", gradient: "from-blue-400/10 to-cyan-400/10" },
+                        { text: "🌍 Global Reach", gradient: "from-purple-400/10 to-pink-400/10" },
+                        { text: "🎯 Dedicated Support", gradient: "from-emerald-400/10 to-teal-400/10" },
                       ].map((item, i) => (
                         <motion.div
                           key={i}
