@@ -11,7 +11,7 @@ import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
 import RevealWithBorder from "@/components/animations/RevealWithBorder";
 import {
-  // Core icons
+  // Core icons - All valid Lucide exports
   Users,
   Gift,
   DollarSign,
@@ -114,7 +114,7 @@ import {
   Camera,
   Webcam,
   Film,
-  Tv,
+  Tv,               // ✅ Single Tv import
   Bot,
   Brain,
   Fingerprint,
@@ -171,19 +171,7 @@ import {
   FileJson,
   FileType,
   FileDigit,
-  // Missing icons for ad formats
   LayoutGrid,
-  Maximize2,
-  Gift,
-  Gamepad2,
-  Video,
-  Sparkles,
-  Monitor,
-  Smartphone,
-  Laptop,
-  Film,
-  // Missing for placements
-  Tv,
 } from "lucide-react";
 
 /* ================= CUSTOM ICONS ================= */
