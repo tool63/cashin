@@ -114,7 +114,7 @@ import {
   Camera,
   Webcam,
   Film,
-  Tv,               // ✅ Single Tv import
+  Tv,
   Bot,
   Brain,
   Fingerprint,
@@ -233,16 +233,16 @@ const adStats = [
     value: "10M+",
     icon: <Eye className="w-5 h-5" />,
     trend: "+25%",
-    gradient: "from-blue-400 to-indigo-400",
-    iconColor: "text-blue-600 dark:text-blue-400",
+    gradient: "from-emerald-400 to-teal-400",
+    iconColor: "text-emerald-600 dark:text-emerald-400",
   },
   {
     label: "Click-Through Rate",
     value: "3.2%",
     icon: <MousePointerClick className="w-5 h-5" />,
     trend: "+0.5%",
-    gradient: "from-emerald-400 to-teal-400",
-    iconColor: "text-emerald-600 dark:text-emerald-400",
+    gradient: "from-blue-400 to-indigo-400",
+    iconColor: "text-blue-600 dark:text-blue-400",
   },
   {
     label: "Active Campaigns",
@@ -347,13 +347,13 @@ export default function AdvertisePage() {
 
         {/* Premium Background Elements */}
         <div className="fixed inset-0 pointer-events-none">
-          <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-gradient-to-r from-purple-400/5 to-pink-400/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-0 w-[800px] h-[800px] bg-gradient-to-r from-blue-400/5 to-cyan-400/5 rounded-full blur-3xl" />
+          <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-gradient-to-r from-yellow-400/5 to-green-400/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-0 w-[800px] h-[800px] bg-gradient-to-r from-blue-400/5 to-purple-400/5 rounded-full blur-3xl" />
         </div>
 
         <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
 
-          {/* HERO SECTION */}
+          {/* HERO SECTION - Yellow/Green gradient like affiliate page */}
           <Reveal>
             <motion.div
               whileHover={{ scale: 1.02 }}
@@ -366,7 +366,7 @@ export default function AdvertisePage() {
                   rotate: [0, 90, 180],
                 }}
                 transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                className="absolute inset-0 bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 opacity-90"
+                className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-yellow-400 to-green-400 opacity-90"
               />
               
               {/* Content */}
@@ -375,19 +375,19 @@ export default function AdvertisePage() {
                 <motion.div
                   animate={{ y: [0, -20, 0] }}
                   transition={{ duration: 5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-                  className="absolute top-10 left-10 w-32 h-32 bg-purple-400/20 rounded-full blur-3xl"
+                  className="absolute top-10 left-10 w-32 h-32 bg-yellow-400/20 rounded-full blur-3xl"
                 />
                 <motion.div
                   animate={{ y: [0, 20, 0] }}
                   transition={{ duration: 7, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-                  className="absolute bottom-10 right-10 w-32 h-32 bg-orange-400/20 rounded-full blur-3xl"
+                  className="absolute bottom-10 right-10 w-32 h-32 bg-green-400/20 rounded-full blur-3xl"
                 />
                 
                 <div className="relative">
                   <motion.div
                     animate={{ rotate: 360 }}
                     transition={{ duration: 30, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border-2 border-purple-400/20 rounded-full"
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border-2 border-yellow-400/20 rounded-full"
                   />
                   
                   <div className="relative text-center">
@@ -395,15 +395,15 @@ export default function AdvertisePage() {
                       initial={{ scale: 0.9, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
                       transition={{ duration: 0.5 }}
-                      className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-purple-400/10 to-pink-400/10 rounded-full border border-purple-400/20 backdrop-blur-sm mb-8"
+                      className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-yellow-400/10 to-green-400/10 rounded-full border border-yellow-400/20 backdrop-blur-sm mb-8"
                     >
-                      <Megaphone className="w-5 h-5 text-purple-400" />
-                      <span className="text-sm font-semibold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Premium Ad Network</span>
-                      <Megaphone className="w-5 h-5 text-pink-400" />
+                      <Megaphone className="w-5 h-5 text-yellow-400" />
+                      <span className="text-sm font-semibold bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">Premium Ad Network</span>
+                      <Megaphone className="w-5 h-5 text-green-400" />
                     </motion.div>
                     
                     <h1 className="text-6xl sm:text-7xl md:text-8xl font-extrabold mb-8 leading-tight">
-                      <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 bg-clip-text text-transparent">
+                      <span className="bg-gradient-to-r from-yellow-400 via-yellow-400 to-green-400 bg-clip-text text-transparent">
                         Reach Millions
                       </span>
                       <br />
@@ -414,17 +414,17 @@ export default function AdvertisePage() {
 
                     <div className="flex items-center justify-center gap-6 mb-8">
                       <div className="text-center">
-                        <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">10M+</div>
+                        <div className="text-3xl font-bold bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">10M+</div>
                         <div className="text-sm text-gray-500">Daily Impressions</div>
                       </div>
                       <div className="w-px h-8 bg-gray-300 dark:bg-gray-700" />
                       <div className="text-center">
-                        <div className="text-3xl font-bold bg-gradient-to-r from-pink-400 to-orange-400 bg-clip-text text-transparent">98%</div>
+                        <div className="text-3xl font-bold bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">98%</div>
                         <div className="text-sm text-gray-500">Fill Rate</div>
                       </div>
                       <div className="w-px h-8 bg-gray-300 dark:bg-gray-700" />
                       <div className="text-center">
-                        <div className="text-3xl font-bold bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">100+</div>
+                        <div className="text-3xl font-bold bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">100+</div>
                         <div className="text-sm text-gray-500">Countries</div>
                       </div>
                     </div>
@@ -441,7 +441,7 @@ export default function AdvertisePage() {
                           whileHover={{ scale: 1.05, y: -2 }}
                           className="flex items-center gap-2 px-5 py-2.5 bg-white/80 dark:bg-white/5 backdrop-blur-sm rounded-full border border-gray-200 dark:border-gray-800 shadow-lg"
                         >
-                          <div className="text-purple-400">{item.icon}</div>
+                          <div className="text-yellow-400">{item.icon}</div>
                           <span className="text-sm font-medium">{item.text}</span>
                         </motion.div>
                       ))}
@@ -466,19 +466,19 @@ export default function AdvertisePage() {
             </motion.div>
           </Reveal>
 
-          {/* STATS SECTION */}
+          {/* STATS SECTION - Emerald/Teal gradient like affiliate page */}
           <section className="relative z-10 max-w-7xl mx-auto px-4 py-16">
             <RevealWithBorder
-              gradientFrom="from-purple-400"
-              gradientVia="via-pink-400"
-              gradientTo="to-orange-400"
-              borderColor="border-purple-400/20"
+              gradientFrom="from-emerald-400"
+              gradientVia="via-teal-400"
+              gradientTo="to-cyan-400"
+              borderColor="border-emerald-400/20"
               floatingElements={false}
               rotatingCircle={true}
             >
               <div className="py-8">
                 <h2 className="text-2xl font-bold text-center mb-8">
-                  <span className="bg-gradient-to-r from-purple-400 to-orange-400 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
                     Network Performance
                   </span>
                 </h2>
@@ -509,7 +509,7 @@ export default function AdvertisePage() {
             </RevealWithBorder>
           </section>
 
-          {/* AD FORMATS */}
+          {/* AD FORMATS - Blue/Cyan gradient like affiliate page */}
           <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
             <RevealWithBorder
               gradientFrom="from-blue-400"
@@ -549,7 +549,7 @@ export default function AdvertisePage() {
             </RevealWithBorder>
           </section>
 
-          {/* TARGETING OPTIONS */}
+          {/* TARGETING OPTIONS - Green/Teal gradient like affiliate page */}
           <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
             <RevealWithBorder
               gradientFrom="from-green-400"
@@ -586,7 +586,7 @@ export default function AdvertisePage() {
             </RevealWithBorder>
           </section>
 
-          {/* AD PLACEMENTS */}
+          {/* AD PLACEMENTS - Amber/Red gradient like affiliate page */}
           <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
             <RevealWithBorder
               gradientFrom="from-amber-400"
@@ -626,7 +626,7 @@ export default function AdvertisePage() {
             </RevealWithBorder>
           </section>
 
-          {/* PERFORMANCE METRICS */}
+          {/* PERFORMANCE METRICS - Indigo/Pink gradient like affiliate page */}
           <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
             <RevealWithBorder
               gradientFrom="from-indigo-400"
@@ -666,7 +666,7 @@ export default function AdvertisePage() {
             </RevealWithBorder>
           </section>
 
-          {/* TESTIMONIALS */}
+          {/* TESTIMONIALS - Rose/Purple gradient like affiliate page */}
           <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
             <RevealWithBorder
               gradientFrom="from-rose-400"
@@ -707,7 +707,7 @@ export default function AdvertisePage() {
             </RevealWithBorder>
           </section>
 
-          {/* FAQ SECTION */}
+          {/* FAQ SECTION - Orange/Yellow gradient like affiliate page */}
           <section className="relative z-10 max-w-3xl mx-auto px-4 pb-16">
             <RevealWithBorder
               gradientFrom="from-orange-400"
@@ -747,7 +747,7 @@ export default function AdvertisePage() {
             </RevealWithBorder>
           </section>
 
-          {/* FINAL CTA */}
+          {/* FINAL CTA - Yellow/Green gradient like affiliate page */}
           <section className="relative z-10 text-center">
             <Reveal>
               <motion.div
@@ -761,7 +761,7 @@ export default function AdvertisePage() {
                     rotate: [0, 90, 180],
                   }}
                   transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                  className="absolute inset-0 bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 opacity-90"
+                  className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-yellow-400 to-green-400 opacity-90"
                 />
                 
                 {/* Content */}
@@ -770,29 +770,29 @@ export default function AdvertisePage() {
                   <motion.div
                     animate={{ y: [0, -20, 0] }}
                     transition={{ duration: 5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-                    className="absolute top-10 left-10 w-32 h-32 bg-purple-400/20 rounded-full blur-3xl"
+                    className="absolute top-10 left-10 w-32 h-32 bg-yellow-400/20 rounded-full blur-3xl"
                   />
                   <motion.div
                     animate={{ y: [0, 20, 0] }}
                     transition={{ duration: 7, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-                    className="absolute bottom-10 right-10 w-32 h-32 bg-orange-400/20 rounded-full blur-3xl"
+                    className="absolute bottom-10 right-10 w-32 h-32 bg-green-400/20 rounded-full blur-3xl"
                   />
                   
                   <div className="relative">
                     <motion.div
                       animate={{ rotate: 360 }}
                       transition={{ duration: 30, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border-2 border-purple-400/20 rounded-full"
+                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border-2 border-yellow-400/20 rounded-full"
                     />
                     
                     <div className="flex items-center justify-center gap-4 mb-8">
-                      <Megaphone className="w-12 h-12 text-purple-400" />
+                      <Megaphone className="w-12 h-12 text-yellow-400" />
                       <h2 className="text-5xl sm:text-6xl md:text-7xl font-extrabold">
-                        <span className="bg-gradient-to-r from-purple-400 to-orange-400 bg-clip-text text-transparent">
+                        <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
                           Ready to Launch?
                         </span>
                       </h2>
-                      <Megaphone className="w-12 h-12 text-orange-400" />
+                      <Megaphone className="w-12 h-12 text-green-400" />
                     </div>
 
                     <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10">
@@ -801,10 +801,10 @@ export default function AdvertisePage() {
                     
                     <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
                       {[
-                        { text: "🎯 Precise Targeting", gradient: "from-purple-400/10 to-pink-400/10" },
-                        { text: "📊 Real-time Analytics", gradient: "from-pink-400/10 to-orange-400/10" },
-                        { text: "🛡️ Brand Safe", gradient: "from-orange-400/10 to-red-400/10" },
-                        { text: "🚀 Fast Delivery", gradient: "from-red-400/10 to-rose-400/10" },
+                        { text: "🎯 Precise Targeting", gradient: "from-yellow-400/10 to-green-400/10" },
+                        { text: "📊 Real-time Analytics", gradient: "from-blue-400/10 to-cyan-400/10" },
+                        { text: "🛡️ Brand Safe", gradient: "from-purple-400/10 to-pink-400/10" },
+                        { text: "🚀 Fast Delivery", gradient: "from-emerald-400/10 to-teal-400/10" },
                       ].map((item, i) => (
                         <motion.div
                           key={i}
