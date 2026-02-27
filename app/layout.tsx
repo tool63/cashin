@@ -8,16 +8,12 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingCTA from "@/components/cta/FloatingCTA";
 import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
-import Meta from "@/components/seo/SeoEngine";
 import Background from "@/components/Background";
 
 interface RootLayoutProps {
   children: ReactNode;
   auth?: ReactNode;
 }
-
-const defaultTitle = "Cashog";
-const defaultDescription = "Earn rewards, cash out, and get paid";
 
 export default function RootLayout({ children, auth }: RootLayoutProps) {
   const pathname = usePathname();
@@ -32,10 +28,6 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <Meta title={defaultTitle} description={defaultDescription} />
-      </head>
-
       <body className="min-h-screen text-gray-900 dark:text-white transition-colors duration-500 overflow-x-hidden">
         <ThemeProviderWrapper>
 
