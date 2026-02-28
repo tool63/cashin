@@ -17,6 +17,8 @@ export interface SeoData {
   twitterHandle?: string;
   facebookAppId?: string;
   structuredData?: Record<string, any>[];
+  slug?: string; // Dynamic slug support
+  breadcrumbs?: Array<{ name: string; url: string }>;
 }
 
 export interface SeoConfig {
@@ -31,7 +33,7 @@ export interface SeoConfig {
   baseUrl: string;
 }
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://payup-pi.vercel.app";
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://cashog.com";
 
 const defaultSeo: SeoConfig = {
   title: "Cashog - Earn Real Money Online",
@@ -54,67 +56,177 @@ const defaultSeo: SeoConfig = {
   baseUrl,
 };
 
-// Route-specific SEO data
-export const routeSeo: Record<string, Partial<SeoData>> = {
-  "/": {
+// Dynamic route pattern matching
+export interface RoutePattern {
+  pattern: RegExp | string;
+  seo: Partial<SeoData>;
+  priority?: number;
+}
+
+// Route-specific SEO data with patterns
+export const routePatterns: RoutePattern[] = [
+  // Static routes
+  { pattern: '/', seo: {
     title: "Cashog - Make Money Online | Earn Cash Fast",
     description: "Join 500K+ users earning real money daily. Complete offers, play games, answer surveys. Instant cashouts via PayPal, Venmo, Gift Cards.",
     keywords: ["earn money online", "cash rewards", "online income", "make money from home"],
     section: "home",
-  },
-  "/affiliate": {
+  }},
+  { pattern: '/affiliate', seo: {
     title: "Cashog Affiliate Program - Earn 30% Commission",
     description: "Join Cashog affiliate program. Earn 30% recurring commission for life. Promote legitimate money-making opportunities.",
     keywords: ["affiliate program", "earn commission", "referral program", "make money referrals"],
     section: "affiliate",
-  },
-  "/how-it-works": {
+  }},
+  { pattern: '/how-it-works', seo: {
     title: "How Cashog Works - Simple Steps to Start Earning",
     description: "Learn how to make money with Cashog in 3 simple steps. Sign up, complete offers, get paid instantly. No hidden fees.",
     section: "information",
-  },
-  "/tasks": {
-    title: "Available Tasks - Start Earning Money Today",
-    description: "Browse hundreds of available tasks, offers, and surveys. New tasks added daily. Start earning real money now.",
-    keywords: ["online tasks", "paid surveys", "micro tasks", "online jobs"],
-    section: "tasks",
-  },
-  "/blog": {
-    title: "Cashog Blog - Money Making Tips & Success Stories",
-    description: "Read latest articles about online money making, side hustles, success stories, and tips to maximize your earnings.",
-    section: "blog",
-  },
-  "/faq": {
-    title: "Frequently Asked Questions - Cashog Help Center",
-    description: "Get answers to common questions about Cashog, payments, tasks, and how to maximize your earnings.",
-    section: "support",
-  },
-  "/contact": {
-    title: "Contact Cashog Support - We're Here to Help",
-    description: "Have questions? Contact our support team. We're available 24/7 to assist you with any issues.",
-    section: "support",
-  },
-  "/terms": {
-    title: "Terms of Service - Cashog User Agreement",
-    description: "Read our terms of service and user agreement before using Cashog.",
+  }},
+  
+  // Dynamic routes with patterns
+  { pattern: /^\/surveys$/, seo: {
+    title: "Paid Surveys - Earn Money for Your Opinions | Cashog",
+    description: "Take paid surveys and earn cash. Share your opinions and get rewarded instantly. High-paying surveys available now.",
+    keywords: ["paid surveys", "survey jobs", "market research", "paid opinions"],
+    section: "earning-methods",
+  }},
+  { pattern: /^\/app-installs$/, seo: {
+    title: "App Installs - Earn Money by Trying Apps | Cashog",
+    description: "Get paid to install and try new apps. Earn cash rewards for testing mobile applications. Simple and fast.",
+    section: "earning-methods",
+  }},
+  { pattern: /^\/play-games$/, seo: {
+    title: "Play Games & Earn Money | Cashog",
+    description: "Play fun games and earn real money. Top-rated gaming rewards platform. Cash out instantly.",
+    keywords: ["play games earn money", "gaming rewards", "paid to play"],
+    section: "earning-methods",
+  }},
+  { pattern: /^\/watch-videos$/, seo: {
+    title: "Watch Videos & Earn Cash | Cashog",
+    description: "Watch entertaining videos and earn money. Get paid for watching ads, trailers, and content.",
+    section: "earning-methods",
+  }},
+  { pattern: /^\/complete-offers$/, seo: {
+    title: "Complete Offers & Earn Money | Cashog",
+    description: "Complete simple offers and get paid. High-paying offers updated daily. Start earning now.",
+    section: "earning-methods",
+  }},
+  
+  // Rewards routes
+  { pattern: /^\/earn-paypal-money$/, seo: {
+    title: "Earn PayPal Money Online | Cashog",
+    description: "Make money and cash out directly to PayPal. Fast, secure, and reliable payments.",
+    keywords: ["earn paypal money", "paypal cash", "online money transfer"],
+    section: "rewards",
+  }},
+  { pattern: /^\/earn-gift-cards-online$/, seo: {
+    title: "Earn Gift Cards Online | Cashog",
+    description: "Get paid in gift cards from top brands. Amazon, Apple, Google Play and more.",
+    section: "rewards",
+  }},
+  { pattern: /^\/earn-amazon-gift-card$/, seo: {
+    title: "Earn Amazon Gift Cards | Cashog",
+    description: "Get free Amazon gift cards by completing offers and tasks. Shop your favorite products.",
+    section: "rewards",
+  }},
+  { pattern: /^\/earn-crypto-online$/, seo: {
+    title: "Earn Cryptocurrency Online | Cashog",
+    description: "Make money in Bitcoin, Ethereum, and more. Crypto rewards platform.",
+    keywords: ["earn bitcoin", "crypto rewards", "bitcoin mining", "ethereum earnings"],
+    section: "rewards",
+  }},
+  
+  // Guides routes
+  { pattern: /^\/make-money-online$/, seo: {
+    title: "How to Make Money Online - Complete Guide | Cashog",
+    description: "Ultimate guide to making money online. Legitimate methods, tips, and strategies.",
+    section: "guides",
+  }},
+  { pattern: /^\/earn-money-from-home$/, seo: {
+    title: "Earn Money from Home - Work From Home Guide | Cashog",
+    description: "Learn how to earn money from home. Remote work opportunities and online jobs.",
+    section: "guides",
+  }},
+  
+  // Cashback routes
+  { pattern: /^\/cashback-offers$/, seo: {
+    title: "Cashback Offers - Get Money Back on Purchases | Cashog",
+    description: "Earn cashback on your online shopping. Best cashback deals and offers.",
+    section: "cashback",
+  }},
+  { pattern: /^\/shopping-rewards\/[^/]+$/, seo: {
+    title: "Shopping Rewards - Earn Cashback on Shopping | Cashog",
+    description: "Get rewarded for your online shopping. Cashback on electronics, fashion, and more.",
+    section: "cashback",
+  }},
+  { pattern: /^\/shopping-rewards\/travel\/hotels$/, seo: {
+    title: "Hotel Cashback - Earn Money on Hotel Bookings | Cashog",
+    description: "Get cashback on hotel bookings worldwide. Best hotel deals with rewards.",
+    section: "cashback",
+  }},
+  
+  // Legal routes
+  { pattern: /^\/terms-and-conditions$/, seo: {
+    title: "Terms and Conditions | Cashog",
+    description: "Cashog terms of service and user agreement.",
     noIndex: true,
     section: "legal",
-  },
-  "/privacy": {
-    title: "Privacy Policy - Cashog Data Protection",
-    description: "Learn how Cashog protects your privacy and handles your personal data.",
+  }},
+  { pattern: /^\/privacy-policy$/, seo: {
+    title: "Privacy Policy | Cashog",
+    description: "Cashog privacy policy and data protection information.",
     noIndex: true,
     section: "legal",
-  },
-};
+  }},
+];
+
+// Generate slug from title
+export function generateSlug(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '') // Remove special characters
+    .replace(/\s+/g, '-') // Replace spaces with hyphens
+    .replace(/-+/g, '-') // Replace multiple hyphens
+    .trim();
+}
+
+// Find matching route SEO
+export function findRouteSeo(path: string): Partial<SeoData> {
+  // Remove trailing slash
+  const cleanPath = path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path;
+  
+  // Find matching pattern
+  for (const { pattern, seo } of routePatterns) {
+    if (pattern instanceof RegExp) {
+      if (pattern.test(cleanPath)) {
+        return seo;
+      }
+    } else if (pattern === cleanPath) {
+      return seo;
+    }
+  }
+  
+  // Return default for 404
+  return {
+    title: "Page Not Found | Cashog",
+    description: "The page you're looking for doesn't exist.",
+    noIndex: true,
+  };
+}
 
 export class SeoBuilder {
   private config: SeoConfig;
   private data: SeoData;
+  private path: string;
 
-  constructor(data: SeoData = {}) {
+  constructor(data: SeoData = {}, path: string = '/') {
     this.config = { ...defaultSeo };
-    this.data = data;
+    this.path = path;
+    
+    // Merge route data with custom data
+    const routeData = findRouteSeo(path);
+    this.data = { ...routeData, ...data };
   }
 
   // Build complete SEO metadata
@@ -126,12 +238,10 @@ export class SeoBuilder {
     const canonical = this.buildCanonical();
 
     return {
-      // Basic metadata
       title,
       description,
       keywords: Array.isArray(keywords) ? keywords.join(', ') : keywords,
       
-      // Robots control
       robots: {
         index: !this.data.noIndex,
         follow: !(this.data.noFollow || this.data.noIndex),
@@ -147,12 +257,10 @@ export class SeoBuilder {
         },
       },
       
-      // Canonical
       alternates: {
         canonical,
       },
       
-      // Open Graph
       openGraph: {
         title,
         description,
@@ -177,7 +285,6 @@ export class SeoBuilder {
         ...(this.data.tags && { tags: this.data.tags }),
       },
       
-      // Twitter
       twitter: {
         card: 'summary_large_image',
         site: this.config.twitterHandle,
@@ -187,15 +294,14 @@ export class SeoBuilder {
         images: [image],
       },
       
-      // Additional meta
       other: {
         ...(this.config.facebookAppId && { 'fb:app_id': this.config.facebookAppId }),
         'og:image:width': '1200',
         'og:image:height': '630',
         'twitter:image:alt': title,
+        ...(this.data.slug && { 'slug': this.data.slug }),
       },
       
-      // Icons
       icons: {
         icon: [
           { url: '/favicon.ico' },
@@ -206,17 +312,14 @@ export class SeoBuilder {
         ],
       },
       
-      // Manifest
       manifest: '/manifest.json',
       
-      // Viewport
       viewport: {
         width: 'device-width',
         initialScale: 1,
         maximumScale: 5,
       },
       
-      // Theme
       themeColor: '#4F46E5',
       colorScheme: 'light',
     };
@@ -225,6 +328,7 @@ export class SeoBuilder {
   // Build JSON-LD structured data
   buildStructuredData() {
     const structuredData = [];
+    const canonical = this.buildCanonical();
 
     // Website schema
     structuredData.push({
@@ -261,6 +365,31 @@ export class SeoBuilder {
       },
     });
 
+    // Breadcrumb schema
+    if (this.data.breadcrumbs && this.data.breadcrumbs.length > 0) {
+      structuredData.push({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: this.data.breadcrumbs.map((item, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: item.name,
+          item: `${this.config.baseUrl}${item.url}`,
+        })),
+      });
+    }
+
+    // WebPage schema
+    structuredData.push({
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: this.buildTitle(),
+      description: this.buildDescription(),
+      url: canonical,
+      ...(this.data.publishedTime && { datePublished: this.data.publishedTime }),
+      ...(this.data.modifiedTime && { dateModified: this.data.modifiedTime }),
+    });
+
     // Add custom structured data
     if (this.data.structuredData) {
       structuredData.push(...this.data.structuredData);
@@ -269,7 +398,6 @@ export class SeoBuilder {
     return structuredData;
   }
 
-  // Build title with template
   private buildTitle(): string {
     if (!this.data.title) return this.config.title;
     
@@ -280,12 +408,10 @@ export class SeoBuilder {
     return `${this.data.title} | ${this.config.siteName}`;
   }
 
-  // Build description
   private buildDescription(): string {
     return this.data.description || this.config.description;
   }
 
-  // Build keywords
   private buildKeywords(): string[] {
     if (!this.data.keywords) return this.config.keywords;
     
@@ -296,7 +422,6 @@ export class SeoBuilder {
     return [...this.config.keywords, this.data.keywords];
   }
 
-  // Build canonical URL
   private buildCanonical(): string {
     if (this.data.canonical) {
       return this.data.canonical.startsWith('http') 
@@ -304,18 +429,30 @@ export class SeoBuilder {
         : `${this.config.baseUrl}${this.data.canonical}`;
     }
     
-    return this.config.baseUrl;
+    // Handle dynamic slugs
+    if (this.data.slug) {
+      return `${this.config.baseUrl}/${this.data.slug}`;
+    }
+    
+    return `${this.config.baseUrl}${this.path}`;
   }
 }
 
 // Factory function
-export function buildSeo(data: SeoData = {}) {
-  const builder = new SeoBuilder(data);
+export function buildSeo(data: SeoData = {}, path: string = '/') {
+  const builder = new SeoBuilder(data, path);
   return builder.build();
 }
 
-// Get route SEO data
-export function getRouteSeo(path: string, customData?: SeoData): SeoData {
-  const routeData = routeSeo[path] || {};
-  return { ...routeData, ...customData };
+// Get structured data
+export function buildStructuredData(data: SeoData = {}, path: string = '/') {
+  const builder = new SeoBuilder(data, path);
+  return builder.buildStructuredData();
+}
+
+// Generate slug from data
+export function getSlugFromData(data: SeoData): string {
+  if (data.slug) return data.slug;
+  if (data.title) return generateSlug(data.title);
+  return '';
 }
