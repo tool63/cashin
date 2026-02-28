@@ -1,38 +1,63 @@
-interface HreflangEntry {
-  code: string; // e.g. en, en-US
-  url: string;
+import React from 'react';
+import Head from 'next/head';
+
+interface HreflangProps {
+  currentPath: string;
+  languages?: Array<{
+    code: string;
+    url: string;
+    isDefault?: boolean;
+  }>;
+  slug?: string;
 }
 
-interface HreflangOptions {
-  includeDefault?: boolean;
-  defaultUrl?: string;
-}
+export const Hreflang: React.FC<HreflangProps> = ({ 
+  currentPath, 
+  languages,
+  slug,
+}) => {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://cashog.com';
+  const path = slug ? `/${slug}` : currentPath;
+  
+  const defaultLanguages = [
+    { code: 'en-us', url: `${baseUrl}${path}`, isDefault: true },
+    { code: 'en-gb', url: `${baseUrl}/uk${path}` },
+    { code: 'en-au', url: `${baseUrl}/au${path}` },
+    { code: 'en-ca', url: `${baseUrl}/ca${path}` },
+  ];
 
-export function generateHreflang(
-  entries: HreflangEntry[],
-  options: HreflangOptions = {}
-) {
-  const { includeDefault = true, defaultUrl } = options;
+  const langList = languages || defaultLanguages;
 
-  // Remove duplicate language codes
-  const uniqueEntries = Array.from(
-    new Map(entries.map((e) => [e.code.toLowerCase(), e])).values()
+  return (
+    <Head>
+      <link
+        rel="alternate"
+        hrefLang="x-default"
+        href={langList.find(l => l.isDefault)?.url || langList[0]?.url}
+      />
+      
+      {langList.map(lang => (
+        <link
+          key={lang.code}
+          rel="alternate"
+          hrefLang={lang.code}
+          href={lang.url}
+        />
+      ))}
+    </Head>
   );
+};
 
-  const tags = uniqueEntries.map((entry) => ({
-    rel: "alternate",
-    hreflang: entry.code,
-    href: entry.url,
-  }));
+export const EnglishHreflang: React.FC<{ slug?: string }> = ({ slug }) => {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://cashog.com';
+  const path = slug ? `/${slug}` : '';
+  
+  const languages = [
+    { code: 'en-us', url: `${baseUrl}${path}`, isDefault: true },
+    { code: 'en-gb', url: `${baseUrl}/uk${path}` },
+    { code: 'en-au', url: `${baseUrl}/au${path}` },
+    { code: 'en-ca', url: `${baseUrl}/ca${path}` },
+  ];
 
-  // Add x-default if enabled
-  if (includeDefault && defaultUrl) {
-    tags.push({
-      rel: "alternate",
-      hreflang: "x-default",
-      href: defaultUrl,
-    });
-  }
-
-  return tags;
-}
+  return <Hreflang currentPath={path} languages={languages} slug={slug} />;
+};
