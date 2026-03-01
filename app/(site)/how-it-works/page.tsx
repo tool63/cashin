@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+"use client";
+
 import React from "react";
 import {
   User,
@@ -13,24 +14,31 @@ import {
   Headphones,
 } from "lucide-react";
 import { motion } from "framer-motion";
-
 import { buildSEO } from "@/components/SEO/seoEngine";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
-
 import TypingText from "@/components/typing/TypingText";
 import Background from "@/components/Background";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
 import FAQ from "@/components/faq/FAQ";
 
-/* =========================
-   SEO Metadata (Custom Engine)
-========================= */
+/* ================= SEO ================= */
 
-export const metadata: Metadata = buildSEO({
-  route: "/how-it-works",
-  locale: SEO_CONFIG.defaultLocale,
-});
+export async function generateMetadata() {
+  const seo = buildSEO({
+    route: "/how-it-works",
+    locale: SEO_CONFIG.defaultLocale,
+  });
+
+  return {
+    ...seo.metadata,
+    alternates: {
+      canonical: seo.canonical,
+      languages: seo.hreflang,
+    },
+    robots: seo.metadata?.robots,
+  };
+}
 
 /* ================= STEPS ================= */
 const steps = [
@@ -153,8 +161,9 @@ export default function HowItWorks() {
       <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
 
-        {/* HERO */}
         <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
+
+          {/* HERO */}
           <Reveal>
             <div className="text-center mb-20">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
@@ -217,7 +226,6 @@ export default function HowItWorks() {
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               Frequently Asked Questions
             </h2>
-
             <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
               Everything you need to know about earning
             </p>
@@ -243,6 +251,7 @@ export default function HowItWorks() {
               </PrimaryCTA>
             </div>
           </Reveal>
+
         </section>
       </main>
     </>
