@@ -1,11 +1,15 @@
-"use client";
-
-import { useState } from "react";
+import type { Metadata } from "next";
 import { motion } from "framer-motion";
-import SeoEngine from "@/components/seo/SeoEngine";
+import React from "react";
+
+import { buildSEO } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+
 import Background from "@/components/Background";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
+import FAQ from "@/components/faq/FAQ";
+
 import {
   ShieldCheck,
   Lock,
@@ -15,7 +19,19 @@ import {
   Server,
 } from "lucide-react";
 
-// ========================== SECURITY FEATURES ===========================
+/* =========================
+   SEO Metadata (Custom Engine)
+========================= */
+
+export const metadata: Metadata = buildSEO({
+  route: "/trust-safety",
+  locale: SEO_CONFIG.defaultLocale,
+});
+
+/* =========================
+   SECURITY FEATURES
+========================= */
+
 const securityFeatures = [
   {
     icon: <Lock className="h-8 w-8 text-green-600" />,
@@ -49,7 +65,10 @@ const securityFeatures = [
   },
 ];
 
-// ========================== STATS ===========================
+/* =========================
+   STATS
+========================= */
+
 const stats = [
   {
     label: "System Uptime",
@@ -68,104 +87,147 @@ const stats = [
   },
 ];
 
+/* =========================
+   FAQ
+========================= */
+
+const faqs = [
+  {
+    q: "How does Cashog protect my data?",
+    a: "We use AES-256 encryption, multi-factor authentication, and real-time monitoring to secure all user information.",
+  },
+  {
+    q: "Is Cashog safe to use?",
+    a: "Yes. Our platform follows strict security standards and fraud prevention systems.",
+  },
+  {
+    q: "Do you sell user data?",
+    a: "No. User privacy is our priority, and we never sell personal data.",
+  },
+  {
+    q: "Can my account be hacked?",
+    a: "We use layered security measures to minimize risks and protect accounts.",
+  },
+];
+
+/* =========================
+   PAGE COMPONENT
+========================= */
+
 export default function TrustSafetyPage() {
   return (
-    <>
-      <SeoEngine
-        title="Trust & Safety | Cashog"
-        description="Cashog protects user data with enterprise-grade security and fraud prevention."
-      />
+    <main className="relative min-h-screen text-gray-900 dark:text-white">
+      <Background />
 
-      <main className="relative min-h-screen text-gray-900 dark:text-white">
-        <Background />
-
-        {/* HERO SECTION */}
-        <section className="relative z-10 max-w-6xl mx-auto px-4 py-20 text-center">
-          <Reveal>
-            <div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">Trust & Safety</h1>
-              <p className="text-lg text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
-                Security is at the core of everything we build. Your data is protected
-                by enterprise-grade systems and real-time monitoring.
-              </p>
-              <PrimaryCTA href="/signup">Start Earning Now</PrimaryCTA>
-            </div>
-          </Reveal>
-        </section>
-
-        {/* SECURITY STATS */}
-        <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
-          <Reveal>
-            <>
-              <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">Platform Security Metrics</h2>
-              <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-                Real-time operational performance
-              </p>
-            </>
-          </Reveal>
-
-          <div className="grid gap-6 md:grid-cols-3">
-            {stats.map((stat) => (
-              <Reveal key={stat.label}>
-                <motion.div
-                  whileHover={{ y: -4 }}
-                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md"
-                >
-                  <h3 className="text-sm uppercase tracking-wide text-gray-600 dark:text-gray-400">{stat.label}</h3>
-                  <div className="text-4xl font-extrabold mt-2 gradient-text">
-                    {stat.number}
-                    {stat.label.includes("Uptime") && "%"}
-                  </div>
-                  <p className="mt-4 text-sm text-gray-600 dark:text-gray-300">{stat.description}</p>
-                </motion.div>
-              </Reveal>
-            ))}
+      {/* HERO SECTION */}
+      <section className="relative z-10 max-w-6xl mx-auto px-4 py-20 text-center">
+        <Reveal>
+          <div>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              Trust & Safety
+            </h1>
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
+              Security is at the core of everything we build. Your data is protected
+              by enterprise-grade systems and real-time monitoring.
+            </p>
+            <PrimaryCTA href="/signup">Start Earning Now</PrimaryCTA>
           </div>
-        </section>
+        </Reveal>
+      </section>
 
-        {/* SECURITY FEATURES */}
-        <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
-          <Reveal>
-            <>
-              <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">Security Features</h2>
-              <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-                Enterprise-grade protection and monitoring
-              </p>
-            </>
-          </Reveal>
+      {/* SECURITY STATS */}
+      <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
+        <Reveal>
+          <>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              Platform Security Metrics
+            </h2>
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+              Real-time operational performance
+            </p>
+          </>
+        </Reveal>
 
-          <div className="grid gap-6 md:grid-cols-3">
-            {securityFeatures.map((feature) => (
-              <Reveal key={feature.title}>
-                <motion.div
-                  whileHover={{ y: -4 }}
-                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md"
-                >
-                  <div className="flex justify-center mb-4">{feature.icon}</div>
-                  <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm">{feature.desc}</p>
-                </motion.div>
-              </Reveal>
-            ))}
-          </div>
-        </section>
+        <div className="grid gap-6 md:grid-cols-3">
+          {stats.map((stat) => (
+            <Reveal key={stat.label}>
+              <motion.div
+                whileHover={{ y: -4 }}
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md"
+              >
+                <h3 className="text-sm uppercase tracking-wide text-gray-600 dark:text-gray-400">
+                  {stat.label}
+                </h3>
+                <div className="text-4xl font-extrabold mt-2 gradient-text">
+                  {stat.number}
+                  {stat.label.includes("Uptime") && "%"}
+                </div>
+                <p className="mt-4 text-sm text-gray-600 dark:text-gray-300">
+                  {stat.description}
+                </p>
+              </motion.div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
 
-        {/* FINAL CTA */}
-        <section className="relative z-10 text-center py-28">
-          <Reveal>
-            <>
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-                Secure Your Data with Cashog
-              </h2>
-              <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
-                Join Cashog today and experience our cutting-edge security systems.
-              </p>
-              <PrimaryCTA href="/signup">Start Earning Now</PrimaryCTA>
-            </>
-          </Reveal>
-        </section>
+      {/* SECURITY FEATURES */}
+      <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
+        <Reveal>
+          <>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+              Security Features
+            </h2>
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+              Enterprise-grade protection and monitoring
+            </p>
+          </>
+        </Reveal>
 
-      </main>
-    </>
+        <div className="grid gap-6 md:grid-cols-3">
+          {securityFeatures.map((feature) => (
+            <Reveal key={feature.title}>
+              <motion.div
+                whileHover={{ y: -4 }}
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md"
+              >
+                <div className="flex justify-center mb-4">{feature.icon}</div>
+                <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300 text-sm">
+                  {feature.desc}
+                </p>
+              </motion.div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* FAQ SECTION */}
+      <section className="relative z-10 max-w-4xl mx-auto px-4 py-20">
+        <Reveal>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
+            Frequently Asked Questions
+          </h2>
+        </Reveal>
+
+        <FAQ faqs={faqs} />
+      </section>
+
+      {/* FINAL CTA */}
+      <section className="relative z-10 text-center py-28">
+        <Reveal>
+          <>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
+              Secure Your Data with Cashog
+            </h2>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
+              Join Cashog today and experience our cutting-edge security systems.
+            </p>
+            <PrimaryCTA href="/signup">Start Earning Now</PrimaryCTA>
+          </>
+        </Reveal>
+      </section>
+
+    </main>
   );
 }
