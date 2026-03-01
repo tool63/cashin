@@ -3,12 +3,43 @@
 import "../styles/globals.css";
 import { ReactNode, useMemo } from "react";
 import { usePathname } from "next/navigation";
+import { headers } from "next/headers";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingCTA from "@/components/cta/FloatingCTA";
 import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
 import Background from "@/components/Background";
+
+import { buildSEO } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+
+/**
+ * =====================================
+ * ✅ SEO Metadata Generator (Server)
+ * =====================================
+ */
+export async function generateMetadata() {
+  const headersList = headers();
+  const pathname =
+    headersList.get("x-pathname") ||
+    headersList.get("referer") ||
+    "/";
+
+  const seo = buildSEO({
+    route: pathname,
+    locale: SEO_CONFIG.defaultLocale,
+  });
+
+  return {
+    ...seo.metadata,
+    alternates: {
+      canonical: seo.canonical,
+      languages: seo.hreflang,
+    },
+    robots: seo.metadata?.robots,
+  };
+}
 
 interface RootLayoutProps {
   children: ReactNode;
@@ -22,11 +53,6 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
    * =====================================
    * Layout Visibility + Route Detection
    * =====================================
-   * Centralized logic for:
-   * - Auth pages
-   * - Future dashboard
-   * - Admin routes
-   * - Marketing pages
    */
   const {
     hideLayout,
@@ -51,6 +77,18 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
     };
   }, [pathname, auth]);
 
+  /**
+   * =====================================
+   * Structured Data Injection (Client Safe)
+   * =====================================
+   */
+  const seo = useMemo(() => {
+    return buildSEO({
+      route: pathname || "/",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+  }, [pathname]);
+
   return (
     <html
       lang="en"
@@ -58,6 +96,17 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
       className="scroll-smooth"
     >
       <body className="min-h-screen overflow-x-hidden text-gray-900 transition-colors duration-500 dark:text-white bg-white dark:bg-[#070A14]">
+
+        {/* JSON-LD Structured Data */}
+        {seo.structuredData?.map((schema, index) => (
+          <script
+            key={index}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(schema),
+            }}
+          />
+        ))}
 
         <ThemeProviderWrapper>
 
