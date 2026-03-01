@@ -1,7 +1,7 @@
 "use client";
 
 import "../styles/globals.css";
-import { ReactNode } from "react";
+import { ReactNode, useMemo } from "react";
 import { usePathname } from "next/navigation";
 
 import Header from "@/components/Header";
@@ -18,51 +18,97 @@ interface RootLayoutProps {
 export default function RootLayout({ children, auth }: RootLayoutProps) {
   const pathname = usePathname();
 
-  const isAuthPage =
-    pathname?.startsWith("/login") ||
-    pathname?.startsWith("/signup") ||
-    pathname?.startsWith("/reset");
+  /**
+   * =====================================
+   * Layout Visibility + Route Detection
+   * =====================================
+   * Centralized logic for:
+   * - Auth pages
+   * - Future dashboard
+   * - Admin routes
+   * - Marketing pages
+   */
+  const {
+    hideLayout,
+    hasAuthModal,
+    isAuthPage,
+    isDashboardPage,
+  } = useMemo(() => {
+    const isAuth =
+      pathname?.startsWith("/login") ||
+      pathname?.startsWith("/signup") ||
+      pathname?.startsWith("/reset");
 
-  const hasAuthModal = !!auth;
-  const hideLayout = isAuthPage && !hasAuthModal;
+    const isDashboard = pathname?.startsWith("/dashboard");
+
+    const hasAuthModal = !!auth;
+
+    return {
+      isAuthPage: isAuth,
+      isDashboardPage: isDashboard,
+      hideLayout: isAuth && !hasAuthModal,
+      hasAuthModal,
+    };
+  }, [pathname, auth]);
 
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen text-gray-900 dark:text-white transition-colors duration-500 overflow-x-hidden">
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className="scroll-smooth"
+    >
+      <body className="min-h-screen overflow-x-hidden text-gray-900 transition-colors duration-500 dark:text-white bg-white dark:bg-[#070A14]">
+
         <ThemeProviderWrapper>
 
-          {/* GLOBAL BACKGROUND */}
+          {/* =====================================
+              Global Background Layer
+          ====================================== */}
           <Background />
 
-          {/* PAGE WRAPPER */}
-          <div className="relative z-10 flex flex-col min-h-screen">
+          {/* =====================================
+              Page Wrapper
+          ====================================== */}
+          <div className="relative z-10 flex min-h-screen flex-col">
 
-            {/* HEADER */}
+            {/* =====================================
+                Header (Hidden on Full Auth Pages)
+            ====================================== */}
             {!hideLayout && (
-              <div className="fixed top-0 left-0 w-full z-40 backdrop-blur-xl bg-white/70 dark:bg-black/70 border-b border-gray-200 dark:border-gray-800">
+              <header className="fixed top-0 left-0 z-40 w-full border-b border-gray-200 bg-white/70 backdrop-blur-xl dark:border-gray-800 dark:bg-black/70 supports-[backdrop-filter]:bg-white/60">
                 <Header />
-              </div>
+              </header>
             )}
 
-            {/* MAIN CONTENT */}
+            {/* =====================================
+                Main Content
+            ====================================== */}
             <main
               className={`flex-1 w-full ${
                 hideLayout
                   ? "min-h-screen flex items-center justify-center px-4"
+                  : isDashboardPage
+                  ? "pt-16"
                   : "pt-20"
               }`}
             >
               {children}
             </main>
 
-            {/* FOOTER */}
+            {/* =====================================
+                Footer (Hidden on Auth Pages)
+            ====================================== */}
             {!hideLayout && <Footer />}
 
-            {/* FLOATING CTA */}
+            {/* =====================================
+                Floating CTA (Hidden on Auth Pages)
+            ====================================== */}
             {!hideLayout && <FloatingCTA />}
           </div>
 
-          {/* AUTH MODAL */}
+          {/* =====================================
+              Auth Modal (Parallel Route Support)
+          ====================================== */}
           {hasAuthModal && auth}
 
         </ThemeProviderWrapper>
