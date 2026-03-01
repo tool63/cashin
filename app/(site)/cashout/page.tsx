@@ -11,11 +11,31 @@ import {
   ShieldCheck,
   Clock,
 } from "lucide-react";
-import Meta from "@/components/seo/SeoEngine";
 import Background from "@/components/Background";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
 import TypingText from "@/components/typing/TypingText";
+
+/* =========================
+   SEO Metadata (App Router)
+========================= */
+
+export const metadata = {
+  title: "Cashout Methods | Cashog",
+  description:
+    "Discover Cashog cashout methods. Withdraw your earnings via PayPal, gift cards, mobile top-ups, and bank transfers instantly.",
+  openGraph: {
+    title: "Cashout Methods | Cashog",
+    description:
+      "Withdraw your earnings via PayPal, gift cards, mobile top-ups, and bank transfers.",
+    url: "/cashout",
+    type: "website",
+  },
+};
+
+/* =========================
+   Page Component
+========================= */
 
 export default function CashoutMethodsPage() {
   const methods = [
@@ -64,115 +84,105 @@ export default function CashoutMethodsPage() {
   ];
 
   return (
-    <>
-      <Meta
-        title="Cashout Methods | Cashog"
-        description="Discover Cashog cashout methods. Withdraw your earnings via PayPal, gift cards, mobile top-ups, and bank transfers instantly."
-      />
+    <main className="relative min-h-screen text-gray-900 dark:text-white">
+      <Background />
 
-      <main className="relative min-h-screen text-gray-900 dark:text-white">
-        <Background />
+      {/* ================= HERO ================= */}
+      <section className="relative z-10 py-24 px-4 text-center">
+        <div className="max-w-3xl mx-auto">
+          <Reveal>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
+              Withdraw Your Earnings
+            </h1>
+          </Reveal>
 
-        {/* ================= HERO ================= */}
-        <section className="relative z-10 py-24 px-4 text-center">
-          <div className="max-w-3xl mx-auto">
+          <Reveal>
+            <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 gradient-text">
+              <TypingText />
+            </div>
+          </Reveal>
 
-            <Reveal>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-                Withdraw Your Earnings
-              </h1>
-            </Reveal>
+          <Reveal>
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-8 text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed">
+              Choose from multiple trusted payout methods and withdraw your
+              money quickly and securely.
+            </p>
+          </Reveal>
 
-            <Reveal>
-              <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 gradient-text">
-                <TypingText />
+          <PrimaryCTA href="/signup">
+            Start Earning Now
+          </PrimaryCTA>
+        </div>
+      </section>
+
+      {/* ================= CASHOUT METHODS ================= */}
+      <section className="relative z-10 max-w-7xl mx-auto px-4 py-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        {methods.map((method, i) => (
+          <Reveal key={i}>
+            <motion.div
+              whileHover={{ y: -6 }}
+              className="bg-white dark:bg-[#0a0d16] rounded-2xl p-8 text-center border border-gray-200 dark:border-gray-800 shadow"
+            >
+              <div className="mb-4 flex justify-center">
+                {method.icon}
               </div>
-            </Reveal>
-
-            <Reveal>
-              <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-8 text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed">
-                Choose from multiple trusted payout methods and withdraw your money quickly and securely.
+              <h3 className="text-xl font-semibold mb-2">
+                {method.title}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 text-sm">
+                {method.description}
               </p>
-            </Reveal>
+            </motion.div>
+          </Reveal>
+        ))}
+      </section>
 
-            <PrimaryCTA href="/signup">
-              Start Earning Now
-            </PrimaryCTA>
+      {/* ================= WITHDRAWAL INFO ================= */}
+      <section className="relative z-10 max-w-6xl mx-auto px-4 py-16">
+        <Reveal>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+            Why Cashog Withdrawals Are Better
+          </h2>
+        </Reveal>
 
-          </div>
-        </section>
-
-        {/* ================= CASHOUT METHODS ================= */}
-        <section className="relative z-10 max-w-7xl mx-auto px-4 py-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {methods.map((method, i) => (
+        <div className="grid gap-8 md:grid-cols-3">
+          {withdrawalInfo.map((item, i) => (
             <Reveal key={i}>
               <motion.div
-                whileHover={{ y: -6 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-8 text-center border border-gray-200 dark:border-gray-800 shadow"
+                whileHover={{ y: -4 }}
+                className="bg-gray-50 dark:bg-[#111827] rounded-xl p-8 text-center shadow hover:shadow-lg transition-shadow duration-300"
               >
-                <div className="mb-4 flex justify-center">
-                  {method.icon}
+                <div className="flex justify-center mb-4">
+                  {item.icon}
                 </div>
                 <h3 className="text-xl font-semibold mb-2">
-                  {method.title}
+                  {item.title}
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300 text-sm">
-                  {method.description}
+                  {item.desc}
                 </p>
               </motion.div>
             </Reveal>
           ))}
-        </section>
+        </div>
+      </section>
 
-        {/* ================= WITHDRAWAL INFO ================= */}
-        <section className="relative z-10 max-w-6xl mx-auto px-4 py-16">
-          <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-              Why Cashog Withdrawals Are Better
-            </h2>
-          </Reveal>
+      {/* ================= FINAL CTA ================= */}
+      <section className="relative z-10 text-center py-28 w-full">
+        <Reveal>
+          <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 gradient-text">
+            Ready to Withdraw Your Earnings?
+          </h2>
+        </Reveal>
 
-          <div className="grid gap-8 md:grid-cols-3">
-            {withdrawalInfo.map((item, i) => (
-              <Reveal key={i}>
-                <motion.div
-                  whileHover={{ y: -4 }}
-                  className="bg-gray-50 dark:bg-[#111827] rounded-xl p-8 text-center shadow hover:shadow-lg transition-shadow duration-300"
-                >
-                  <div className="flex justify-center mb-4">
-                    {item.icon}
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm">
-                    {item.desc}
-                  </p>
-                </motion.div>
-              </Reveal>
-            ))}
-          </div>
-        </section>
+        <PrimaryCTA href="/signup">
+          Create Free Account
+        </PrimaryCTA>
 
-        {/* ================= FINAL CTA ================= */}
-        <section className="relative z-10 text-center py-28 w-full">
-
-          <Reveal>
-            <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 gradient-text">
-              Ready to Withdraw Your Earnings?
-            </h2>
-          </Reveal>
-
-          <PrimaryCTA href="/signup">
-            Create Free Account
-          </PrimaryCTA>
-
-          <p className="mt-6 text-gray-900 dark:text-gray-300 text-lg max-w-md mx-auto">
-            Join Cashog today and start withdrawing real money safely and securely.
-          </p>
-        </section>
-
-      </main>
-    </>
+        <p className="mt-6 text-gray-900 dark:text-gray-300 text-lg max-w-md mx-auto">
+          Join Cashog today and start withdrawing real money safely and securely.
+        </p>
+      </section>
+    </main>
   );
 }
