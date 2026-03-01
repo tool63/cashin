@@ -1,8 +1,13 @@
-import { MetadataRoute } from "next";
-import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import { NextRequest } from "next/server";
 
-// Example dynamic pages (replace with real data later)
-const dynamicPages = [
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://cashooz.com";
+
+const isProduction = process.env.NODE_ENV === "production";
+
+// Example static pages (replace later with DB fetch)
+const staticPages = [
+  "",
   "/earn",
   "/guides",
   "/rewards",
@@ -11,22 +16,55 @@ const dynamicPages = [
   "/blog",
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    // Home
-    {
-      url: SEO_CONFIG.siteUrl,
-      lastModified: new Date(),
-      changeFrequency: "daily",
-      priority: 1,
-    },
+export async function GET(req: NextRequest) {
+  // 🚫 Prevent sitemap in non-production
+  if (!isProduction) {
+    return new Response("Not allowed", { status: 403 });
+  }
 
-    // Dynamic pages
-    ...dynamicPages.map((path) => ({
-      url: `${SEO_CONFIG.siteUrl}${path}`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    })),
-  ];
+  const now = new Date().toISOString();
+
+  // 🔹 Static URLs
+  const staticUrls = staticPages
+    .map((path) => {
+      return `
+  <url>
+    <loc>${SITE_URL}${path}</loc>
+    <lastmod>${now}</lastmod>
+    <changefreq>${path === "" ? "daily" : "weekly"}</changefreq>
+    <priority>${path === "" ? "1.0" : "0.9"}</priority>
+  </url>`;
+    })
+    .join("");
+
+  /**
+   * 🔹 Future: Replace with DB fetch
+   * Example:
+   * const offers = await db.offer.findMany()
+   */
+
+  const dynamicOfferUrls = `
+  <!-- Example dynamic offer -->
+  <url>
+    <loc>${SITE_URL}/offers/sample-offer</loc>
+    <lastmod>${now}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  `;
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset 
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+>
+  ${staticUrls}
+  ${dynamicOfferUrls}
+</urlset>`;
+
+  return new Response(xml, {
+    headers: {
+      "Content-Type": "application/xml",
+      "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
+    },
+  });
 }
