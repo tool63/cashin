@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
-import { buildSeo } from "@/lib/seo";
+import { buildSEO } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
 
 /* =========================
    Core Above-the-Fold
@@ -8,7 +9,6 @@ import HeroSection from "@/components/homepage/HeroSection";
 
 /* =========================
    Lazy Loaded Sections
-   (Improves LCP + TTFB)
 ========================= */
 const LiveJoining = dynamic(
   () => import("@/components/homepage/LiveJoining"),
@@ -55,56 +55,80 @@ const FinalCTASection = dynamic(
 );
 
 /* =========================
-   SEO Metadata
+   Dynamic Metadata
 ========================= */
+export async function generateMetadata() {
+  const seo = buildSEO({
+    route: "/",
+    locale: SEO_CONFIG.defaultLocale,
+  });
 
-export const metadata = buildSeo({
-  title: "Cashog - Earn Real Money Online",
-  description:
-    "Earn real money online by completing surveys, playing games, installing apps, watching videos, and completing high-paying offers.",
-  path: "/",
-  type: "website",
-});
+  return {
+    ...seo.metadata,
+    alternates: {
+      canonical: seo.canonical,
+      languages: seo.hreflang,
+    },
+    robots: seo.metadata?.robots,
+  };
+}
 
 /* =========================
    Homepage Component
 ========================= */
-
 export default function HomePage() {
+  const seo = buildSEO({
+    route: "/",
+    locale: SEO_CONFIG.defaultLocale,
+  });
+
   return (
-    <main className="bg-white text-gray-900 transition-colors duration-300 dark:bg-[#070A14] dark:text-white">
+    <>
+      {/* Structured Data */}
+      {seo.structuredData?.map((schema, index) => (
+        <script
+          key={index}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(schema),
+          }}
+        />
+      ))}
 
-      {/* Hero (Critical for LCP) */}
-      <HeroSection />
+      <main className="bg-white text-gray-900 transition-colors duration-300 dark:bg-[#070A14] dark:text-white">
 
-      {/* Social Proof (Live Data) */}
-      <section aria-label="Live platform activity">
-        <LiveJoining />
-        <LiveEarnings />
-        <LiveOfferCompletion />
-        <LiveWithdrawals />
-      </section>
+        {/* Hero (Critical LCP) */}
+        <HeroSection />
 
-      {/* Core Earning Methods */}
-      <TasksSection />
+        {/* Live Activity */}
+        <section aria-label="Live platform activity">
+          <LiveJoining />
+          <LiveEarnings />
+          <LiveOfferCompletion />
+          <LiveWithdrawals />
+        </section>
 
-      {/* High Paying Offers */}
-      <section className="max-w-7xl mx-auto px-4 py-8">
-        <HighPayingOffers />
-      </section>
+        {/* Core Earning Methods */}
+        <TasksSection />
 
-      {/* Trust & Credibility */}
-      <TrustSection />
+        {/* High Paying Offers */}
+        <section className="max-w-7xl mx-auto px-4 py-8">
+          <HighPayingOffers />
+        </section>
 
-      {/* Payment Methods */}
-      <PaymentSection />
+        {/* Trust */}
+        <TrustSection />
 
-      {/* Platform Features */}
-      <FeaturesSection />
+        {/* Payments */}
+        <PaymentSection />
 
-      {/* Conversion Section */}
-      <FinalCTASection />
+        {/* Features */}
+        <FeaturesSection />
 
-    </main>
+        {/* Final CTA */}
+        <FinalCTASection />
+
+      </main>
+    </>
   );
 }
