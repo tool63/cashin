@@ -11,12 +11,31 @@ import {
   Zap,
   DollarSign,
 } from "lucide-react";
-import Meta from "@/components/seo/SeoEngine";
+import { buildSEO } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
 import Background from "@/components/Background";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
 import TypingText from "@/components/typing/TypingText";
 import FAQ from "@/components/faq/FAQ";
+
+/* ================= SEO ================= */
+
+export async function generateMetadata() {
+  const seo = buildSEO({
+    route: "/start-earning",
+    locale: SEO_CONFIG.defaultLocale,
+  });
+
+  return {
+    ...seo.metadata,
+    alternates: {
+      canonical: seo.canonical,
+      languages: seo.hreflang,
+    },
+    robots: seo.metadata?.robots,
+  };
+}
 
 /* ================= WAYS TO EARN ================= */
 const waysToEarn = [
@@ -105,12 +124,23 @@ const faqs = [
 ];
 
 export default function StartEarningPage() {
+  const seo = buildSEO({
+    route: "/start-earning",
+    locale: SEO_CONFIG.defaultLocale,
+  });
+
   return (
     <>
-      <Meta
-        title="Start Earning | Cashog"
-        description="Start earning real money online with Cashog. Complete offers, play games, take surveys, and withdraw instantly worldwide."
-      />
+      {/* Structured Data Injection */}
+      {seo.structuredData?.map((schema, index) => (
+        <script
+          key={index}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(schema),
+          }}
+        />
+      ))}
 
       <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
@@ -220,6 +250,7 @@ export default function StartEarningPage() {
             Join Cashog today and start turning your spare time into daily earnings.
           </p>
         </section>
+
       </main>
     </>
   );
