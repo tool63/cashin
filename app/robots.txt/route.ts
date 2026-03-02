@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://cashooz.com";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://cashog.com";
 
 const isProduction = process.env.NODE_ENV === "production";
 const isPreview =
