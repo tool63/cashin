@@ -1,4 +1,5 @@
 // Advanced page type detection with regex patterns and hierarchy
+
 export type PageType =
   | 'home'
   | 'earn'
@@ -46,18 +47,20 @@ export type PageType =
   | 'error_500'
   | 'unknown';
 
+export interface PageTypeMetadata {
+  noindex?: boolean;
+  nofollow?: boolean;
+  requiresAuth?: boolean;
+  isPaginated?: boolean;
+  maxDepth?: number;
+}
+
 interface PageTypePattern {
   type: PageType;
   pattern: RegExp;
   priority: number;
   parent?: PageType;
-  metadata: {
-    noindex?: boolean;
-    nofollow?: boolean;
-    requiresAuth?: boolean;
-    isPaginated?: boolean;
-    maxDepth?: number;
-  };
+  metadata: PageTypeMetadata;
 }
 
 export const PAGE_TYPE_PATTERNS: PageTypePattern[] = [
@@ -68,13 +71,13 @@ export const PAGE_TYPE_PATTERNS: PageTypePattern[] = [
     priority: 100,
     metadata: { noindex: false, nofollow: false },
   },
-  
+
   // Auth
   {
     type: 'auth',
-    pattern: /^\/auth\//,
+    pattern: /^\/auth\/?/,
     priority: 90,
-    metadata: { noindex: true, nofollow: true },
+    metadata: { noindex: true, nofollow: true, requiresAuth: false },
   },
   {
     type: 'auth_login',
@@ -90,8 +93,8 @@ export const PAGE_TYPE_PATTERNS: PageTypePattern[] = [
     parent: 'auth',
     metadata: { noindex: true, nofollow: true },
   },
-  
-  // User areas
+
+  // User areas (always noindex)
   {
     type: 'user_dashboard',
     pattern: /^\/dashboard/,
@@ -110,7 +113,7 @@ export const PAGE_TYPE_PATTERNS: PageTypePattern[] = [
     priority: 80,
     metadata: { noindex: true, nofollow: true, requiresAuth: true },
   },
-  
+
   // Earn section
   {
     type: 'earn',
@@ -120,19 +123,19 @@ export const PAGE_TYPE_PATTERNS: PageTypePattern[] = [
   },
   {
     type: 'earn_category',
-    pattern: /^\/earn\/category\/[^\/]+\/?$/,
+    pattern: /^\/earn\/category\/[^/]+\/?$/,
     priority: 65,
     parent: 'earn',
     metadata: { noindex: false, nofollow: false },
   },
   {
     type: 'earn_offer',
-    pattern: /^\/earn\/[^\/]+\/[^\/]+\/?$/,
+    pattern: /^\/earn\/[^/]+\/[^/]+\/?$/,
     priority: 60,
     parent: 'earn',
     metadata: { noindex: false, nofollow: false },
   },
-  
+
   // Blog
   {
     type: 'blog',
@@ -142,34 +145,34 @@ export const PAGE_TYPE_PATTERNS: PageTypePattern[] = [
   },
   {
     type: 'blog_category',
-    pattern: /^\/blog\/category\/[^\/]+\/?$/,
+    pattern: /^\/blog\/category\/[^/]+\/?$/,
     priority: 45,
     parent: 'blog',
     metadata: { noindex: false, nofollow: false },
   },
   {
     type: 'blog_post',
-    pattern: /^\/blog\/\d{4}\/\d{2}\/[^\/]+\/?$/,
+    pattern: /^\/blog\/\d{4}\/\d{2}\/[^/]+\/?$/,
     priority: 40,
     parent: 'blog',
     metadata: { noindex: false, nofollow: false },
   },
   {
     type: 'blog_author',
-    pattern: /^\/blog\/author\/[^\/]+\/?$/,
+    pattern: /^\/blog\/author\/[^/]+\/?$/,
     priority: 35,
     parent: 'blog',
     metadata: { noindex: true, nofollow: true },
   },
   {
     type: 'blog_tag',
-    pattern: /^\/blog\/tag\/[^\/]+\/?$/,
+    pattern: /^\/blog\/tag\/[^/]+\/?$/,
     priority: 35,
     parent: 'blog',
     metadata: { noindex: true, nofollow: true },
   },
-  
-  // Search and pagination
+
+  // Search & pagination
   {
     type: 'search',
     pattern: /^\/search/,
@@ -178,11 +181,11 @@ export const PAGE_TYPE_PATTERNS: PageTypePattern[] = [
   },
   {
     type: 'pagination',
-    pattern: /[\/\?](page|p)[=\/]\d+/,
+    pattern: /[/?](page|p)=[0-9]+/,
     priority: 25,
     metadata: { noindex: true, nofollow: true, isPaginated: true },
   },
-  
+
   // Static pages
   {
     type: 'static_about',
@@ -212,15 +215,15 @@ export const PAGE_TYPE_PATTERNS: PageTypePattern[] = [
     parent: 'static',
     metadata: { noindex: true, nofollow: true },
   },
-  
-  // Admin
+
+  // Admin (always noindex)
   {
     type: 'admin',
     pattern: /^\/admin/,
     priority: 10,
     metadata: { noindex: true, nofollow: true, requiresAuth: true },
   },
-  
+
   // Error pages
   {
     type: 'error_404',
@@ -236,26 +239,30 @@ export const PAGE_TYPE_PATTERNS: PageTypePattern[] = [
   },
 ];
 
+/**
+ * Page type detection result
+ */
 export interface PageTypeResult {
   type: PageType;
   parent?: PageType;
   hierarchy: PageType[];
-  metadata: PageTypePattern['metadata'];
+  metadata: PageTypeMetadata;
   matches: RegExpMatchArray | null;
 }
 
+/**
+ * Detect page type with priority-based matching
+ */
 export function detectPageType(
   route: string,
-  queryParams?: Record<string, string>
+  queryParams: Record<string, string> = {}
 ): PageTypeResult {
-  // Clean route
   const cleanRoute = route.split('?')[0].split('#')[0];
-  
-  // Find matching patterns
+
   const matches = PAGE_TYPE_PATTERNS
     .filter(p => p.pattern.test(cleanRoute))
     .sort((a, b) => b.priority - a.priority);
-  
+
   if (matches.length === 0) {
     return {
       type: 'unknown',
@@ -264,32 +271,29 @@ export function detectPageType(
       matches: null,
     };
   }
-  
+
   const primary = matches[0];
-  
-  // Build hierarchy
-  const hierarchy: PageType[] = [primary.type];
-  let current = primary;
-  while (current.parent) {
-    const parent = PAGE_TYPE_PATTERNS.find(p => p.type === current.parent);
-    if (parent) {
-      hierarchy.unshift(parent.type);
-      current = parent;
-    } else {
-      break;
-    }
+
+  // Build hierarchy (parent chain)
+  const hierarchy: PageType[] = [];
+  let current: PageTypePattern | undefined = primary;
+
+  while (current) {
+    hierarchy.unshift(current.type);
+    current = current.parent
+      ? PAGE_TYPE_PATTERNS.find(p => p.type === current.parent)
+      : undefined;
   }
-  
-  // Apply query param rules
-  const metadata = { ...primary.metadata };
-  if (queryParams) {
-    if (Object.keys(queryParams).some(key => 
-      ['sort', 'filter', 'utm_', 'ref', 'source'].some(p => key.includes(p))
-    )) {
-      metadata.noindex = true;
-    }
+
+  // Apply query rules (filters, tracking, pagination)
+  const metadata: PageTypeMetadata = { ...primary.metadata };
+
+  if (Object.keys(queryParams).some(key =>
+    ['sort', 'filter', 'utm_', 'ref', 'source'].some(p => key.includes(p))
+  )) {
+    metadata.noindex = true;
   }
-  
+
   return {
     type: primary.type,
     parent: primary.parent,
@@ -299,12 +303,18 @@ export function detectPageType(
   };
 }
 
+/**
+ * Check if page is paginated
+ */
 export function isPaginated(route: string): boolean {
-  return PAGE_TYPE_PATTERNS.some(p => 
-    p.metadata.isPaginated && p.pattern.test(route)
+  return PAGE_TYPE_PATTERNS.some(
+    p => p.metadata.isPaginated && p.pattern.test(route)
   );
 }
 
+/**
+ * Check if page requires authentication
+ */
 export function requiresAuth(route: string): boolean {
   const match = PAGE_TYPE_PATTERNS.find(p => p.pattern.test(route));
   return match?.metadata.requiresAuth || false;
