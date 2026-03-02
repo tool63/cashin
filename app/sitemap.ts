@@ -5,7 +5,7 @@ import { SEO_CONFIG } from '@/components/SEO/seoConfig'
 const isProduction = process.env.NODE_ENV === 'production'
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || SEO_CONFIG.siteUrl
 
-// Revalidate sitemap (Next caching)
+// Revalidate every hour (optional)
 export const revalidate = 3600
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
