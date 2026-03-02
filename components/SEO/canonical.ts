@@ -1,5 +1,8 @@
 import { SEO_CONFIG } from './seoConfig';
 
+/**
+ * Options for building canonical URLs
+ */
 export interface CanonicalOptions {
   includeQuery?: boolean;
   trailingSlash?: boolean;
@@ -7,27 +10,87 @@ export interface CanonicalOptions {
   lowercase?: boolean;
   secure?: boolean;
   customDomain?: string;
+  preserveCase?: boolean;
+  normalizeSlashes?: boolean;
 }
 
-export function buildCanonical(
-  route: string,
-  options: CanonicalOptions = {}
-): string {
+/**
+ * Parsed URL structure
+ */
+interface ParsedCanonical {
+  path: string;
+  query: string;
+  hash: string;
+  protocol: string;
+  domain: string;
+}
+
+/**
+ * Builds a canonical URL with SEO best practices
+ */
+export function buildCanonical(route: string, options: CanonicalOptions = {}): string {
   const {
     includeQuery = false,
     trailingSlash = true,
-    removeParams = ['utm_', 'ref', 'source', 'fbclid', 'gclid', 'msclkid'],
+    removeParams = ['utm_', 'ref', 'source', 'fbclid', 'gclid', 'msclkid', 'mc_', '_ga', '_gl'],
     lowercase = true,
     secure = true,
     customDomain,
+    preserveCase = false,
+    normalizeSlashes = true,
   } = options;
 
-  // Parse URL
+  if (!route) {
+    return buildBaseUrl(customDomain || SEO_CONFIG.siteUrl, secure);
+  }
+
+  const parsed = parseUrl(route, customDomain, secure);
+  let { path, query, hash, protocol, domain } = parsed;
+
+  let cleanPath = normalizePath(path, {
+    lowercase: lowercase && !preserveCase,
+    normalizeSlashes,
+    trailingSlash,
+  });
+
+  if (cleanPath === '/' || cleanPath === '') {
+    cleanPath = '';
+  }
+
+  const processedQuery = processQueryParams(query, { includeQuery, removeParams });
+  const fullUrl = buildFinalUrl(protocol, domain, cleanPath, processedQuery, hash);
+
+  return isCanonicalValid(fullUrl)
+    ? fullUrl
+    : buildBaseUrl(customDomain || domain, secure);
+}
+
+/**
+ * Parses URL or route into components
+ */
+function parseUrl(route: string, customDomain?: string, secure = true): ParsedCanonical {
+  const defaultProtocol = secure ? 'https://' : 'http://';
+  const defaultDomain = (customDomain || SEO_CONFIG.siteUrl).replace(/^https?:\/\//, '');
+
+  if (route.startsWith('http://') || route.startsWith('https://')) {
+    try {
+      const url = new URL(route);
+      return {
+        path: url.pathname,
+        query: url.search,
+        hash: url.hash,
+        protocol: url.protocol,
+        domain: url.host,
+      };
+    } catch {
+      // fallback to path parsing
+    }
+  }
+
   let path = route;
   let query = '';
   let hash = '';
 
-  // Split URL components
   const hashIndex = path.indexOf('#');
   if (hashIndex !== -1) {
     hash = path.substring(hashIndex);
@@ -40,83 +103,143 @@ export function buildCanonical(
     path = path.substring(0, queryIndex);
   }
 
-  // Clean path
-  let cleanPath = path || '/';
+  return {
+    path: path || '/',
+    query,
+    hash,
+    protocol: defaultProtocol,
+    domain: defaultDomain,
+  };
+}
 
-  // Lowercase URL for consistency
-  if (lowercase) {
+/**
+ * Normalizes path (case, slashes, trailing slash)
+ */
+function normalizePath(
+  path: string,
+  options: { lowercase: boolean; normalizeSlashes: boolean; trailingSlash: boolean }
+): string {
+  let cleanPath = path;
+
+  if (options.lowercase) {
     cleanPath = cleanPath.toLowerCase();
   }
 
-  // Remove duplicate slashes
-  cleanPath = cleanPath.replace(/\/+/g, '/');
+  if (options.normalizeSlashes) {
+    cleanPath = cleanPath.replace(/\/+/g, '/');
+  }
 
-  // Add trailing slash
-  if (trailingSlash && !cleanPath.endsWith('/') && !cleanPath.includes('.')) {
+  try {
+    cleanPath = decodeURIComponent(cleanPath);
+  } catch {
+    // ignore decoding errors
+  }
+
+  if (
+    options.trailingSlash &&
+    !cleanPath.endsWith('/') &&
+    !cleanPath.match(/\.[a-z0-9]+$/i)
+  ) {
     cleanPath += '/';
   }
 
-  // Remove trailing slash for homepage
-  if (cleanPath === '/') {
-    cleanPath = '';
-  }
-
-  // Handle query parameters
-  if (includeQuery && query) {
-    const params = new URLSearchParams(query);
-    
-    // Remove tracking parameters
-    if (removeParams.length > 0) {
-      for (const [key] of params) {
-        if (removeParams.some(param => key.startsWith(param))) {
-          params.delete(key);
-        }
-      }
-    }
-    
-    // Sort parameters for consistency
-    const sortedParams = new URLSearchParams();
-    [...params.entries()]
-      .sort(([a], [b]) => a.localeCompare(b))
-      .forEach(([key, value]) => sortedParams.append(key, value));
-    
-    const queryString = sortedParams.toString();
-    if (queryString) {
-      query = `?${queryString}`;
-    } else {
-      query = '';
-    }
-  } else {
-    query = '';
-  }
-
-  // Build base URL
-  const baseUrl = customDomain || SEO_CONFIG.siteUrl;
-  const protocol = secure ? 'https://' : 'http://';
-  const domain = baseUrl.replace(/^https?:\/\//, '');
-  
-  // Ensure no double slashes
-  let fullUrl = `${protocol}${domain}${cleanPath}`;
-  if (cleanPath === '' && !fullUrl.endsWith('/')) {
-    fullUrl += '/';
-  }
-  
-  return fullUrl + query + hash;
+  return cleanPath;
 }
 
+/**
+ * Processes query parameters (removes tracking params)
+ */
+function processQueryParams(
+  query: string,
+  options: { includeQuery: boolean; removeParams: string[] }
+): string {
+  if (!options.includeQuery || !query) return '';
+
+  const params = new URLSearchParams(query);
+
+  for (const key of Array.from(params.keys())) {
+    if (options.removeParams.some(param => key.startsWith(param))) {
+      params.delete(key);
+    }
+  }
+
+  if (params.size === 0) return '';
+
+  const sorted = new URLSearchParams();
+  Array.from(params.entries())
+    .sort(([a], [b]) => a.localeCompare(b))
+    .forEach(([k, v]) => sorted.append(k, v));
+
+  const qs = sorted.toString();
+  return qs ? `?${qs}` : '';
+}
+
+/**
+ * Builds final URL from components
+ */
+function buildFinalUrl(
+  protocol: string,
+  domain: string,
+  path: string,
+  query: string,
+  hash: string
+): string {
+  const cleanProtocol = protocol.endsWith('://') ? protocol : `${protocol}://`;
+  let url = `${cleanProtocol}${domain}${path}`;
+
+  if (path === '' && !url.endsWith('/')) {
+    url += '/';
+  }
+
+  return url + query + hash;
+}
+
+/**
+ * Builds base URL
+ */
+function buildBaseUrl(domain: string, secure: boolean): string {
+  const cleanDomain = domain.replace(/^https?:\/\//, '');
+  const protocol = secure ? 'https://' : 'http://';
+  return `${protocol}${cleanDomain}/`;
+}
+
+/**
+ * Validates URL format
+ */
 export function isCanonicalValid(url: string): boolean {
   try {
-    new URL(url);
-    return true;
+    return Boolean(new URL(url));
   } catch {
     return false;
   }
 }
 
+/**
+ * Extract canonical from HTTP headers
+ */
 export function getCanonicalFromHeaders(headers: Headers): string | null {
   const link = headers.get('Link');
   if (!link) return null;
-  
-  const canonicalMatch = link.match(/<([^>]+)>;\s*rel="canonical"/);
-  return canonicalMatch ? canonicalMatch[1] : null;
+
+  const match = link.match(/<([^>]+)>;\s*rel="canonical"/);
+  return match ? match[1] : null;
+}
+
+/**
+ * Extract canonical from HTML
+ */
+export function getCanonicalFromHtml(html: string): string | null {
+  const match = html.match(/<link[^>]*rel="canonical"[^>]*href="([^"]+)"[^>]*>/i);
+  return match ? match[1] : null;
+}
+
+/**
+ * Compare two URLs for canonical equality
+ */
+export function areCanonicalEqual(url1: string, url2: string): boolean {
+  try {
+    return buildCanonical(url1) === buildCanonical(url2);
+  } catch {
+    return false;
+  }
 }
