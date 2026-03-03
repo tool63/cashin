@@ -1,7 +1,12 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import SeoEngine from "@/components/seo/SeoEngine";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
+
 import Background from "@/components/Background";
 import Reveal from "@/components/animations/Reveal";
 import TypingText from "@/components/typing/TypingText";
@@ -18,6 +23,56 @@ import {
   Star,
   Zap,
 } from "lucide-react";
+
+/* ================= SEO HYDRATION ================= */
+function useSEOHydration() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/loyalty",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  return seo;
+}
+
+/* ================= SEO METADATA ================= */
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/loyalty",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: SEO_CONFIG.defaultTitle,
+      description: SEO_CONFIG.defaultDescription,
+    };
+  }
+}
 
 /* ================= POINT RULE ================= */
 /*
@@ -57,8 +112,14 @@ const faqs = [
 ];
 
 export default function LoyaltyPage() {
+  const seo = useSEOHydration();
+
   return (
     <>
+      {/* Structured SEO Data */}
+      {seo && <SeoRenderer seo={seo} />}
+
+      {/* Existing SEO Engine (kept intact) */}
       <SeoEngine
         title="Loyalty Program | Cashog"
         description="Join Cashog loyalty, earn points, unlock tiers starting from $10 rewards."
@@ -67,7 +128,7 @@ export default function LoyaltyPage() {
       <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
 
-        {/* ================= HERO ================= */}
+        {/* HERO */}
         <section className="relative z-10 py-28 px-6 text-center">
           <Reveal>
             <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
@@ -90,7 +151,7 @@ export default function LoyaltyPage() {
           </Reveal>
         </section>
 
-        {/* ================= LOYALTY TIERS ================= */}
+        {/* LOYALTY TIERS */}
         <section className="relative z-10 py-24 px-6 max-w-7xl mx-auto">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
@@ -114,7 +175,6 @@ export default function LoyaltyPage() {
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.15 }}
                 >
-                  {/* CATEGORY ICON */}
                   <div
                     className="w-16 h-16 flex items-center justify-center rounded-full mb-4 mx-auto shadow-lg"
                     style={{ backgroundColor: tier.color }}
@@ -142,7 +202,7 @@ export default function LoyaltyPage() {
           </div>
         </section>
 
-        {/* ================= TESTIMONIALS ================= */}
+        {/* TESTIMONIALS */}
         <section className="relative z-10 max-w-6xl mx-auto px-6 py-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
@@ -158,22 +218,20 @@ export default function LoyaltyPage() {
               <motion.div
                 key={i}
                 whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 shadow-md border border-gray-200 dark:border-gray-800"
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 shadow-md border"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.15 }}
               >
-                <p className="text-gray-600 dark:text-gray-300 italic">
-                  “{item.text}”
-                </p>
+                <p className="italic">“{item.text}”</p>
                 <h3 className="mt-4 font-semibold text-green-500">— {item.name}</h3>
               </motion.div>
             ))}
           </div>
         </section>
 
-        {/* ================= TRUST SECTION ================= */}
+        {/* TRUST SECTION */}
         <section className="relative z-10 max-w-6xl mx-auto px-6 py-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
@@ -183,33 +241,9 @@ export default function LoyaltyPage() {
               Secure rewards and premium tiers
             </p>
           </Reveal>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { icon: Shield, title: "Verified Rewards", desc: "Rewards are secure and instant." },
-              { icon: Trophy, title: "Premium Tiers", desc: "Unlock higher rewards with each tier." },
-              { icon: Sparkles, title: "Fast Redemption", desc: "Claim rewards quickly after earning points." },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 shadow-md border border-gray-200 dark:border-gray-800"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.15 }}
-              >
-                <item.icon className="w-8 h-8 mx-auto mb-4 text-yellow-500" />
-                <h3 className="text-xl font-semibold mb-2 text-center">{item.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-center">
-                  {item.desc}
-                </p>
-              </motion.div>
-            ))}
-          </div>
         </section>
 
-        {/* ================= FAQ ================= */}
+        {/* FAQ */}
         <section className="relative z-10 max-w-4xl mx-auto px-6 py-20 text-center">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -223,7 +257,7 @@ export default function LoyaltyPage() {
           <FAQ faqs={faqs} />
         </section>
 
-        {/* ================= FINAL CTA ================= */}
+        {/* FINAL CTA */}
         <section className="relative z-10 py-28 px-6 text-center">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
