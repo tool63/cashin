@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import SeoEngine from "@/components/seo/SeoEngine";
+import SeoEngine from "@/components/SEO/seoEngine.ts";
 import Background from "@/components/Background";
 import TypingText from "@/components/typing/TypingText";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
