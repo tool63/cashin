@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { motion } from "framer-motion";
 import React from "react";
 
-import { buildSEO } from "@/components/SEO/seoEngine";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
 
 import Background from "@/components/Background";
@@ -20,13 +20,33 @@ import {
 } from "lucide-react";
 
 /* =========================
-   SEO Metadata (Custom Engine)
+   SEO Metadata (Dynamic)
 ========================= */
 
-export const metadata: Metadata = buildSEO({
-  route: "/trust-safety",
-  locale: SEO_CONFIG.defaultLocale,
-});
+export async function generateMetadata(): Promise<Metadata> {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/trust-safety",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: SEO_CONFIG.defaultTitle,
+      description: SEO_CONFIG.defaultDescription,
+    };
+  }
+}
 
 /* =========================
    SECURITY FEATURES
