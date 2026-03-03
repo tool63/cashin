@@ -35,11 +35,11 @@ export interface SEOOutput {
   preconnect?: string[];
   prefetch?: string[];
   prerender?: string[];
-  metrics?: SEOAnalytics;
+  metrics?: SEOAnalytics & { seoScore?: number };
 }
 
 // ============================================================
-// Cache Layer (Memory Safe)
+// Smart Cache
 // ============================================================
 interface CachedSEO {
   output: SEOOutput;
@@ -47,23 +47,24 @@ interface CachedSEO {
 }
 
 const seoCache = new Map<string, CachedSEO>();
-const CACHE_TTL = 3600000; // 1 hour
+const CACHE_TTL = 3600000;
 const MAX_CACHE_SIZE = 500;
 
 function cleanupCache() {
   if (seoCache.size <= MAX_CACHE_SIZE) return;
 
-  const entries = Array.from(seoCache.entries());
-  entries.sort((a, b) => a[1].timestamp - b[1].timestamp);
+  const sorted = Array.from(seoCache.entries()).sort(
+    (a, b) => a[1].timestamp - b[1].timestamp
+  );
 
   while (seoCache.size > MAX_CACHE_SIZE * 0.8) {
-    const [key] = entries.shift()!;
+    const [key] = sorted.shift()!;
     seoCache.delete(key);
   }
 }
 
 // ============================================================
-// SEO Engine (Cached)
+// Ultra SEO Engine
 // ============================================================
 export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
   const startTime = Date.now();
@@ -75,7 +76,7 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
     queryParams = {},
     noindex = false,
     nofollow = false,
-    priority = 0.5,
+    priority = 0.7,
     customCanonical,
     skipHreflang = false,
     skipSchema = false,
@@ -83,56 +84,49 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
   } = input;
 
   const cacheKey = `${route}:${locale}:${JSON.stringify(queryParams)}`;
-
   const cached = seoCache.get(cacheKey);
+
   if (cached && Date.now() - cached.timestamp < cacheTTL) {
-    return {
-      ...cached.output,
-      metrics: trackSEOGeneration({
-        pageType: cached.output.pageType.type,
-        generationTime: 0,
-        metadataSize: JSON.stringify(cached.output.metadata).length,
-        schemaCount: cached.output.structuredData.length,
-        cacheHit: true,
-      }),
-    };
+    return cached.output;
   }
 
   try {
     // ========================================================
-    // Page Type Detection (Safe)
+    // Page Detection
     // ========================================================
-    const pageType = detectPageType(route, queryParams) || {
-      type: 'generic',
-      hierarchy: ['generic'],
-      metadata: {},
-      matches: null,
-    };
+    const pageType =
+      detectPageType(route, queryParams) || {
+        type: 'generic',
+        hierarchy: ['generic'],
+        metadata: {},
+        matches: null,
+      };
 
-    // ========================================================
-    // Indexing Rules
-    // ========================================================
+    const isProduction = process.env.NODE_ENV === 'production';
+
     const shouldIndex =
       !noindex &&
       !pageType.metadata.noindex &&
       !isPaginated(route) &&
-      process.env.NODE_ENV === 'production';
+      isProduction;
 
-    const shouldFollow = !nofollow && !pageType.metadata.nofollow;
+    const shouldFollow =
+      !nofollow && !pageType.metadata.nofollow;
 
     // ========================================================
-    // Canonical URL
+    // Canonical
     // ========================================================
     const canonicalOptions: CanonicalOptions = {
-      includeQuery: !pageType.metadata.isPaginated,
+      includeQuery: false,
       trailingSlash: true,
       removeParams: ['utm_', 'ref', 'source', 'fbclid', 'gclid'],
     };
 
-    const canonical = customCanonical || buildCanonical(route, canonicalOptions);
+    const canonical =
+      customCanonical || buildCanonical(route, canonicalOptions);
 
     // ========================================================
-    // Hreflang (Optional)
+    // Hreflang
     // ========================================================
     const hreflang = !skipHreflang
       ? buildHreflang(route, {
@@ -143,7 +137,7 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
       : {};
 
     // ========================================================
-    // Metadata
+    // Metadata (Base)
     // ========================================================
     const metadataInput: MetadataInput = {
       pageType: pageType.type,
@@ -158,10 +152,15 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
       siteName: SEO_CONFIG.siteName,
     };
 
-    const metadata = buildMetadata(metadataInput);
+    let metadata = buildMetadata(metadataInput);
 
     // ========================================================
-    // Structured Data (Schema)
+    // 🔥 ULTRA TITLE & KEYWORD ENHANCEMENT
+    // ========================================================
+    metadata = enhanceMetadata(metadata, route);
+
+    // ========================================================
+    // Structured Data
     // ========================================================
     const structuredData = !skipSchema
       ? buildStructuredData({
@@ -175,7 +174,7 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
       : [];
 
     // ========================================================
-    // Resource Hints
+    // Resource Optimization
     // ========================================================
     const links = generateResourceHints(pageType, data);
     const preconnect = SEO_CONFIG.preconnect;
@@ -183,8 +182,10 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
     const prerender = generatePrerenderUrls(pageType, route);
 
     // ========================================================
-    // Analytics (SEO Performance)
+    // SEO Score Calculation (Premium Feature)
     // ========================================================
+    const seoScore = calculateSEOScore(metadata, structuredData);
+
     const metrics = trackSEOGeneration({
       pageType: pageType.type,
       generationTime: Date.now() - startTime,
@@ -203,7 +204,7 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
       preconnect,
       prefetch,
       prerender,
-      metrics,
+      metrics: { ...metrics, seoScore },
     };
 
     seoCache.set(cacheKey, { output, timestamp: Date.now() });
@@ -218,7 +219,6 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
         title: SEO_CONFIG.defaultTitle,
         description: SEO_CONFIG.defaultDescription,
         robots: 'index, follow',
-        viewport: 'width=device-width, initial-scale=1',
       },
       structuredData: [],
       canonical: SEO_CONFIG.siteUrl,
@@ -231,17 +231,51 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
       },
       links: [],
       preconnect: SEO_CONFIG.preconnect,
-      metrics: trackSEOGeneration({
-        pageType: 'unknown',
-        generationTime: Date.now() - startTime,
-        metadataSize: 0,
-        schemaCount: 0,
-        cacheHit: false,
-        error: true,
-      }),
+      metrics: { seoScore: 50 } as any,
     };
   }
 });
+
+// ============================================================
+// 🔥 Metadata Enhancer
+// ============================================================
+function enhanceMetadata(metadata: any, route: string) {
+  const primary = SEO_CONFIG.primaryKeyword;
+
+  // Inject primary keyword if missing
+  if (!metadata.title?.toLowerCase().includes(primary)) {
+    metadata.title = `${metadata.title} | ${primary}`;
+  }
+
+  // Improve description CTR
+  if (metadata.description && !metadata.description.includes('Start earning')) {
+    metadata.description += ' Start earning today.';
+  }
+
+  // Inject keywords
+  metadata.keywords = [
+    ...(SEO_CONFIG.defaultKeywords || []),
+    ...(SEO_CONFIG.secondaryKeywords || []),
+  ];
+
+  return metadata;
+}
+
+// ============================================================
+// SEO Score Algorithm
+// ============================================================
+function calculateSEOScore(metadata: any, schema: object[]): number {
+  let score = 50;
+
+  if (metadata.title?.length > 40) score += 10;
+  if (metadata.description?.length > 120) score += 10;
+  if (metadata.keywords?.length > 10) score += 10;
+  if (schema.length > 0) score += 10;
+  if (metadata.openGraph) score += 5;
+  if (metadata.twitter) score += 5;
+
+  return Math.min(score, 100);
+}
 
 // ============================================================
 // Resource Hints
@@ -249,78 +283,62 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
 function generateResourceHints(
   pageType: PageTypeResult,
   data: any
-): Array<{ rel: string; href: string; hreflang?: string }> {
-  const hints: Array<{ rel: string; href: string; hreflang?: string }> = [];
-
-  const dnsPrefetch = [
-    'https://api.cashog.com',
-    'https://images.cashog.com',
-    'https://fonts.googleapis.com',
-  ];
-
-  dnsPrefetch.forEach((url) => {
-    hints.push({ rel: 'dns-prefetch', href: url });
-  });
+) {
+  const hints: Array<{ rel: string; href: string }> = [];
 
   SEO_CONFIG.preconnect?.forEach((url) => {
     hints.push({ rel: 'preconnect', href: url });
   });
 
-  switch (pageType.type) {
-    case 'home':
-      hints.push({ rel: 'preload', href: '/images/hero.webp', as: 'image' });
-      break;
+  if (pageType.type === 'home') {
+    hints.push({ rel: 'preload', href: '/images/hero.webp' });
+  }
 
-    case 'earn_offer':
-      if (data?.image) {
-        hints.push({ rel: 'preload', href: data.image, as: 'image' });
-      }
-      break;
+  if (data?.image) {
+    hints.push({ rel: 'preload', href: data.image });
   }
 
   return hints;
 }
 
 // ============================================================
-// Prefetch URLs
+// Prefetch
 // ============================================================
 function generatePrefetchUrls(pageType: PageTypeResult): string[] {
   switch (pageType.type) {
     case 'home':
-      return ['/earn', '/blog', '/rewards'];
-
-    case 'blog':
-      return ['/blog/popular', '/blog/recent'];
-
+      return ['/surveys', '/offerwall', '/earn-paypal-money'];
     default:
       return [];
   }
 }
 
 // ============================================================
-// Prerender URLs
+// Prerender
 // ============================================================
-function generatePrerenderUrls(pageType: PageTypeResult, route: string): string[] {
-  const urls: string[] = [];
-
-  if (pageType.type === 'earn_category' && route.includes('/category/')) {
-    urls.push(route.replace('/category/', '/'));
+function generatePrerenderUrls(
+  pageType: PageTypeResult,
+  route: string
+): string[] {
+  if (pageType.type === 'earn_category') {
+    return ['/earn-paypal-money'];
   }
 
-  return urls;
+  return [];
 }
 
 // ============================================================
-// Cache Utilities
+// Cache Control
 // ============================================================
 export function clearSEOCache(pattern?: RegExp) {
-  if (pattern) {
-    for (const key of seoCache.keys()) {
-      if (pattern.test(key)) {
-        seoCache.delete(key);
-      }
-    }
-  } else {
+  if (!pattern) {
     seoCache.clear();
+    return;
+  }
+
+  for (const key of seoCache.keys()) {
+    if (pattern.test(key)) {
+      seoCache.delete(key);
+    }
   }
 }
