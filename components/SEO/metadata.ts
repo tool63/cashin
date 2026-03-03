@@ -4,36 +4,15 @@ import { PageType } from './pageTypes';
 import { buildCanonical } from './canonical';
 import { buildHreflang } from './hreflang';
 
+// ============================================================
+// Types
+// ============================================================
 export interface MetadataInput {
   pageType: PageType;
   route: string;
   locale?: string;
   canonical?: string;
-  data?: {
-    title?: string;
-    description?: string;
-    image?: string;
-    imageAlt?: string;
-    video?: string;
-    audio?: string;
-    keywords?: string[];
-    author?: string;
-    publishedAt?: string;
-    updatedAt?: string;
-    category?: string;
-    tags?: string[];
-    rating?: number;
-    reviewCount?: number;
-    price?: number;
-    currency?: string;
-    availability?: 'instock' | 'outofstock' | 'preorder';
-    brand?: string;
-    sku?: string;
-    mpn?: string;
-    page?: number;
-    query?: string;
-    username?: string;
-  };
+  data?: any;
   queryParams?: Record<string, string>;
   noindex?: boolean;
   nofollow?: boolean;
@@ -51,18 +30,13 @@ export interface MetadataOutput extends Metadata {
   };
 }
 
-/**
- * Builds full Next.js metadata with SEO optimizations
- */
+// ============================================================
+// Main Metadata Builder
+// ============================================================
 export function buildMetadata(input: MetadataInput): MetadataOutput {
-  if (!input.route) {
-    console.warn('[SEO Metadata] Empty route -> "/"');
-    input.route = '/';
-  }
-
   const {
     pageType,
-    route,
+    route = '/',
     locale = SEO_CONFIG.defaultLocale,
     canonical,
     data = {},
@@ -73,34 +47,92 @@ export function buildMetadata(input: MetadataInput): MetadataOutput {
   } = input;
 
   const baseUrl = SEO_CONFIG.siteUrl;
+  const primaryKeyword = SEO_CONFIG.primaryKeyword;
 
-  // Canonical (SEO best practice)
-  const fullUrl = canonical || buildCanonical(route, {
-    includeQuery: false,
-    removeParams: ['utm_', 'ref', 'source', 'fbclid', 'gclid'],
-  });
+  // ========================================================
+  // Canonical
+  // ========================================================
+  const fullUrl =
+    canonical ||
+    buildCanonical(route, {
+      includeQuery: false,
+      removeParams: ['utm_', 'ref', 'source', 'fbclid', 'gclid'],
+    });
 
-  // Titles & descriptions
-  const title = buildTitle(pageType, data, siteName);
-  const description = buildDescription(pageType, data);
-  const keywords = buildKeywords(pageType, data.keywords);
+  // ========================================================
+  // Smart Title Builder
+  // ========================================================
+  let title = data.title || SEO_CONFIG.defaultTitle;
 
-  // Media
-  const image = buildImageForType(pageType, data);
-  const imageAlt = data.imageAlt || title;
+  if (!title.toLowerCase().includes(primaryKeyword)) {
+    title = `${title} | ${primaryKeyword}`;
+  }
 
-  // Robots (indexing rules)
-  const robots = buildRobotsDirectives(pageType, noindex, nofollow, queryParams, data);
+  if (data.page) {
+    title += ` - Page ${data.page}`;
+  }
 
-  // Alternate languages (hreflang-ready)
+  // Add high-CTR modifiers for key pages
+  if (route.includes('earn') && !title.includes('Trusted')) {
+    title += ' (Trusted & Legit)';
+  }
+
+  // ========================================================
+  // Smart Description Builder
+  // ========================================================
+  let description =
+    data.description || SEO_CONFIG.defaultDescription;
+
+  if (!description.includes('Start earning')) {
+    description += ' Start earning today.';
+  }
+
+  if (queryParams?.q) {
+    description = `Results for "${queryParams.q}". ${description}`;
+  }
+
+  // ========================================================
+  // Smart Keywords
+  // ========================================================
+  const keywords = Array.from(
+    new Set([
+      ...(SEO_CONFIG.defaultKeywords || []),
+      ...(SEO_CONFIG.secondaryKeywords || []),
+      ...(data.keywords || []),
+    ])
+  );
+
+  // ========================================================
+  // Robots
+  // ========================================================
+  const robots =
+    noindex || process.env.NODE_ENV !== 'production'
+      ? {
+          index: false,
+          follow: false,
+          nocache: true,
+        }
+      : {
+          index: true,
+          follow: !nofollow,
+        };
+
+  // ========================================================
+  // Hreflang
+  // ========================================================
   const alternates = buildHreflang(route, {
     addLanguagePrefix: true,
     includeDefault: true,
   });
 
-  // OpenGraph locale format (en-US -> en_US)
   const ogLocale = locale.replace('-', '_');
 
+  const image =
+    data.image || SEO_CONFIG.defaultOgImage;
+
+  // ========================================================
+  // Return Premium Metadata
+  // ========================================================
   return {
     metadataBase: new URL(baseUrl),
 
@@ -115,45 +147,22 @@ export function buildMetadata(input: MetadataInput): MetadataOutput {
       languages: alternates,
     },
 
-    openGraph: buildOpenGraph({
-      type: getOpenGraphType(pageType),
+    openGraph: {
+      type: pageType === 'blog_post' ? 'article' : 'website',
+      url: fullUrl,
       title,
       description,
-      url: fullUrl,
       siteName,
       locale: ogLocale,
-      images: image
-        ? [
-            {
-              url: image,
-              width: 1200,
-              height: 630,
-              alt: imageAlt,
-              type: 'image/jpeg',
-            },
-          ]
-        : undefined,
-      videos: data.video
-        ? [
-            {
-              url: data.video,
-              width: 1280,
-              height: 720,
-              type: 'video/mp4',
-            },
-          ]
-        : undefined,
-      audio: data.audio
-        ? [
-            {
-              url: data.audio,
-              type: 'audio/mpeg',
-            },
-          ]
-        : undefined,
-
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: data.imageAlt || title,
+        },
+      ],
       ...(pageType === 'blog_post' && {
-        type: 'article',
         article: {
           publishedTime: data.publishedAt,
           modifiedTime: data.updatedAt,
@@ -162,30 +171,15 @@ export function buildMetadata(input: MetadataInput): MetadataOutput {
           section: data.category,
         },
       }),
+    },
 
-      ...(pageType.includes('offer') && {
-        type: 'product',
-        product: {
-          price: data.price,
-          priceCurrency: data.currency || 'USD',
-          availability: data.availability
-            ? `https://schema.org/${data.availability === 'instock' ? 'InStock' : 'OutOfStock'}`
-            : undefined,
-          brand: data.brand,
-          sku: data.sku,
-          mpn: data.mpn,
-        },
-      }),
-    }),
-
-    twitter: buildTwitterCard({
+    twitter: {
       card: 'summary_large_image',
       title,
       description,
       site: SEO_CONFIG.twitterHandle,
-      images: image ? [image] : undefined,
-      imageAlt,
-    }),
+      images: [image],
+    },
 
     verification: SEO_CONFIG.verification,
 
@@ -197,13 +191,8 @@ export function buildMetadata(input: MetadataInput): MetadataOutput {
     },
 
     icons: {
-      icon: [
-        { url: '/favicon.ico', sizes: 'any' },
-        { url: '/icon-192x192.png', sizes: '192x192', type: 'image/png' },
-        { url: '/icon-512x512.png', sizes: '512x512', type: 'image/png' },
-      ],
-      apple: [{ url: '/apple-icon-180x180.png', sizes: '180x180', type: 'image/png' }],
-      other: [{ rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: SEO_CONFIG.themeColor }],
+      icon: '/favicon.ico',
+      apple: '/apple-touch-icon.png',
     },
 
     manifest: '/manifest.json',
@@ -215,25 +204,14 @@ export function buildMetadata(input: MetadataInput): MetadataOutput {
     },
 
     formatDetection: {
-      telephone: true,
-      date: true,
-      address: true,
-      email: true,
-      url: true,
+      telephone: false,
     },
 
-    itunes: process.env.ITUNES_APP_ID
-      ? {
-          appId: process.env.ITUNES_APP_ID,
-          appArgument: fullUrl,
-        }
-      : undefined,
-
     other: {
-      'application-name': siteName,
-      'msapplication-TileColor': SEO_CONFIG.themeColor,
-      'msapplication-TileImage': '/ms-icon-144x144.png',
       'theme-color': SEO_CONFIG.themeColor,
+      'application-name': siteName,
+      'apple-mobile-web-app-title': siteName,
+      'og:updated_time': data.updatedAt || undefined,
     },
   };
 }
