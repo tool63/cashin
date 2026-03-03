@@ -1,8 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Meta from "@/components/SEO/seoEngine.ts";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
+
 import TypingText from "@/components/typing/TypingText";
 import Background from "@/components/Background";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
@@ -16,6 +19,47 @@ import {
   Gift,
   ChevronDown,
 } from "lucide-react";
+
+/* ================= SEO (Server Metadata) ================= */
+
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/app-installs",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: SEO_CONFIG.defaultTitle,
+      description: SEO_CONFIG.defaultDescription,
+    };
+  }
+}
+
+/* ================= SEO Metrics Hook ================= */
+
+function useSEOMetrics(seo: SEOOutput | null) {
+  useEffect(() => {
+    if (!seo?.metrics) return;
+
+    console.log("[SEO Metrics]", {
+      score: seo.metrics.seoScore ?? "n/a",
+      pageType: seo.pageType?.type,
+      generationTime: seo.metrics.generationTime,
+    });
+  }, [seo]);
+}
 
 /* ================= OFFERS ================= */
 const apps = [
@@ -172,12 +216,31 @@ function ExpandableCard({ children }: { children: React.ReactNode }) {
 
 /* ================= PAGE ================= */
 export default function AppInstallPage() {
+  /* SEO Hydration (Client Side) */
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+  useSEOMetrics(seo);
+
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/app-installs",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <>
-      <Meta
-        title="Install Apps & Earn | Cashog"
-        description="Install apps and earn rewards instantly with Cashog."
-      />
+      {/* Structured Data & Meta Tags */}
+      {seo && <SeoRenderer seo={seo} />}
 
       <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
