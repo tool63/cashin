@@ -1,12 +1,66 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import SeoEngine from "@/components/seo/SeoEngine";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
+
 import Background from "@/components/Background";
 import Reveal from "@/components/animations/Reveal";
 import TypingText from "@/components/typing/TypingText";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
+
+/* ================= SEO HYDRATION ================= */
+function useSEOHydration() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/spinning-wheel",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  return seo;
+}
+
+/* ================= SEO METADATA ================= */
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/spinning-wheel",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: SEO_CONFIG.defaultTitle,
+      description: SEO_CONFIG.defaultDescription,
+    };
+  }
+}
 
 /* ================= REWARDS ================= */
 const rewards = [
@@ -50,6 +104,8 @@ const testimonials = [
 ];
 
 export default function SpinningWheelPage() {
+  const seo = useSEOHydration();
+
   const [spinning, setSpinning] = useState(false);
   const [result, setResult] = useState<string | null>(null);
 
@@ -67,6 +123,10 @@ export default function SpinningWheelPage() {
 
   return (
     <>
+      {/* Structured SEO Data */}
+      {seo && <SeoRenderer seo={seo} />}
+
+      {/* Existing SEO Engine (kept intact) */}
       <SeoEngine
         title="Spinning Wheel | Cashog"
         description="Spin the wheel and earn rewards instantly. Modern and exciting reward experience."
@@ -75,7 +135,7 @@ export default function SpinningWheelPage() {
       <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
 
-        {/* ================= HERO WITH TYPING TEXT ================= */}
+        {/* HERO WITH TYPING TEXT */}
         <section className="relative z-10 py-28 px-6 text-center">
           <Reveal>
             <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
@@ -97,7 +157,7 @@ export default function SpinningWheelPage() {
           </Reveal>
         </section>
 
-        {/* ================= SPIN WHEEL SECTION ================= */}
+        {/* SPIN WHEEL SECTION */}
         <section id="wheel" className="relative z-10 max-w-4xl mx-auto px-6 py-24 text-center">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -109,7 +169,7 @@ export default function SpinningWheelPage() {
             </p>
           </Reveal>
 
-          {/* SPIN CIRCLE (SHOW CASHOG) */}
+          {/* SPIN CIRCLE */}
           <motion.div
             className="mx-auto w-64 h-64 rounded-full border-8 border-green-400 flex items-center justify-center bg-white dark:bg-[#0a0d16] shadow-lg"
             animate={spinning ? { rotate: 360 } : {}}
@@ -143,7 +203,7 @@ export default function SpinningWheelPage() {
           </motion.button>
         </section>
 
-        {/* ================= TESTIMONIALS ================= */}
+        {/* TESTIMONIALS */}
         <section className="relative z-10 max-w-6xl mx-auto px-6 py-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
@@ -174,7 +234,7 @@ export default function SpinningWheelPage() {
           </div>
         </section>
 
-        {/* ================= HOW IT WORKS ================= */}
+        {/* HOW IT WORKS */}
         <section className="relative z-10 max-w-6xl mx-auto px-6 py-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
@@ -216,7 +276,7 @@ export default function SpinningWheelPage() {
           </div>
         </section>
 
-        {/* ================= FINAL CTA ================= */}
+        {/* FINAL CTA */}
         <section className="relative z-10 py-28 px-6 text-center">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
