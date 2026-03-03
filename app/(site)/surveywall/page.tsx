@@ -2,7 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import SeoEngine from "@/components/seo/SeoEngine";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
+
 import Background from "@/components/Background";
 import TypingText from "@/components/typing/TypingText";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
@@ -37,6 +40,57 @@ const surveys: Survey[] = [
   { id: 8, title: "Food & Nutrition Survey", category: "Health", reward: "$2.2", popularity: 78 },
   { id: 9, title: "Social Media Trends Survey", category: "Social", reward: "$3", popularity: 91 },
 ];
+
+/* ================= SEO METADATA ================= */
+
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/surveywall",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: SEO_CONFIG.defaultTitle,
+      description: SEO_CONFIG.defaultDescription,
+    };
+  }
+}
+
+/* ================= SEO HYDRATION ================= */
+function useSEOHydration() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/surveywall",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  return seo;
+}
 
 /* ================= COUNT UP ================= */
 function CountUp({ end }: { end: number }) {
@@ -91,12 +145,12 @@ const faqs = [
 ];
 
 export default function SurveyWallPage() {
+  const seo = useSEOHydration();
+
   return (
     <>
-      <SeoEngine
-        title="SurveyWall | Cashog"
-        description="Complete premium surveys and earn rewards."
-      />
+      {/* Structured SEO Data */}
+      {seo && <SeoRenderer seo={seo} />}
 
       <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
@@ -163,9 +217,7 @@ export default function SurveyWallPage() {
                   </p>
 
                   <div className="mt-6 flex items-center justify-between">
-                    <span className="text-green-500 font-bold">
-                      {survey.reward}
-                    </span>
+                    <span className="text-green-500 font-bold">{survey.reward}</span>
 
                     <motion.a
                       href="/signup"
