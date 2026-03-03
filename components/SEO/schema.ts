@@ -108,8 +108,53 @@ function validateSchemas(graph: any[]) {
 }
 
 /* =========================================================
-   Core Schemas
+   Core Schemas (Always Included)
 ========================================================= */
+
+function buildOrganization() {
+  return {
+    '@type': 'Organization',
+    '@id': `${SEO_CONFIG.siteUrl}#organization`,
+    name: SEO_CONFIG.siteName,
+    url: SEO_CONFIG.siteUrl,
+    logo: {
+      '@type': 'ImageObject',
+      url: absoluteUrl('/logo.png'),
+      width: 512,
+      height: 512,
+    },
+    sameAs: Object.values(SEO_CONFIG.socialLinks || {}).filter(Boolean),
+    ...(SEO_CONFIG.contact?.email && {
+      contactPoint: {
+        '@type': 'ContactPoint',
+        telephone: SEO_CONFIG.contact.phone,
+        contactType: 'customer service',
+        email: SEO_CONFIG.contact.email,
+        availableLanguage: SEO_CONFIG.supportedLocales,
+      },
+    }),
+  };
+}
+
+function buildWebsite() {
+  return {
+    '@type': 'WebSite',
+    '@id': `${SEO_CONFIG.siteUrl}#website`,
+    url: SEO_CONFIG.siteUrl,
+    name: SEO_CONFIG.siteName,
+    description: SEO_CONFIG.defaultDescription,
+    publisher: { '@id': `${SEO_CONFIG.siteUrl}#organization` },
+    inLanguage: SEO_CONFIG.defaultLocale,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${SEO_CONFIG.siteUrl}/search?q={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
+  };
+}
 
 function buildBreadcrumb(route: string) {
   const cleaned = cleanRoute(route);
@@ -161,7 +206,7 @@ function buildHomePage(data: SchemaInput) {
   const url = absoluteUrl(cleanRoute(data.route));
 
   return {
-    '@type': 'WebPage',
+    '@type': 'WebPage', // fixed (was AboutPage)
     '@id': `${url}#home`,
     url,
     name: data.title || SEO_CONFIG.siteName,
@@ -361,21 +406,11 @@ function buildVideo(data: SchemaInput) {
     contentUrl: data.video.url,
   };
 
-  if (data.description) {
-    video.description = data.description;
-  }
-
-  if (data.video.thumbnail || data.image) {
+  if (data.description) video.description = data.description;
+  if (data.video.thumbnail || data.image)
     video.thumbnailUrl = absoluteUrl(data.video.thumbnail || data.image);
-  }
-
-  if (data.datePublished) {
-    video.uploadDate = data.datePublished;
-  }
-
-  if (data.video.duration) {
-    video.duration = data.video.duration;
-  }
+  if (data.datePublished) video.uploadDate = data.datePublished;
+  if (data.video.duration) video.duration = data.video.duration;
 
   return video;
 }
@@ -408,6 +443,9 @@ export function buildStructuredData(input: SchemaInput) {
 
   const graph: any[] = [];
 
+  // Core (kept as requested)
+  graph.push(buildOrganization());
+  graph.push(buildWebsite());
   graph.push(buildBreadcrumb(input.route));
 
   if (input.title && input.description) {
@@ -420,10 +458,11 @@ export function buildStructuredData(input: SchemaInput) {
     );
   }
 
+  if (input.pageType === 'home') {
+    graph.push(buildHomePage(input));
+  }
+
   switch (input.pageType) {
-    case 'home':
-      graph.push(buildHomePage(input));
-      break;
     case 'blog':
       graph.push(buildBlogPosting(input));
       break;
@@ -447,13 +486,9 @@ export function buildStructuredData(input: SchemaInput) {
       break;
   }
 
-  if (input.video) {
-    graph.push(buildVideo(input));
-  }
-
-  if (input.images?.length && input.images.length > 1) {
+  if (input.video) graph.push(buildVideo(input));
+  if (input.images?.length && input.images.length > 1)
     graph.push(buildImageGallery(input));
-  }
 
   const finalGraph = dedupeSchemas(graph.filter(Boolean));
 
