@@ -3,6 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import SeoEngine from "@/components/seo/SeoEngine";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
+
 import Background from "@/components/Background";
 import Reveal from "@/components/animations/Reveal";
 import TypingText from "@/components/typing/TypingText";
@@ -17,6 +21,56 @@ import {
   DollarSign,
   TrendingUp,
 } from "lucide-react";
+
+/* ================= SEO HYDRATION ================= */
+function useSEOHydration() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/read-emails",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  return seo;
+}
+
+/* ================= SEO METADATA ================= */
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/read-emails",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: SEO_CONFIG.defaultTitle,
+      description: SEO_CONFIG.defaultDescription,
+    };
+  }
+}
 
 /* ================= COUNT UP ================= */
 function CountUp({ end }: { end: number }) {
@@ -169,9 +223,16 @@ const faqs = [
   { q: "Do I need experience?", a: "No. Anyone can read emails and earn rewards." },
 ];
 
+/* ================= PAGE COMPONENT ================= */
 export default function ReadEmailsPage() {
+  const seo = useSEOHydration();
+
   return (
     <>
+      {/* Structured SEO Data */}
+      {seo && <SeoRenderer seo={seo} />}
+
+      {/* Existing SEO Engine (kept intact) */}
       <SeoEngine
         title="Read Emails | Cashog"
         description="Read emails, complete offers, and earn rewards instantly."
