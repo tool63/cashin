@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Trophy,
   User,
@@ -11,12 +11,56 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import Meta from "@/components/seo/SeoEngine";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
+
 import TypingText from "@/components/typing/TypingText";
 import Background from "@/components/Background";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
 import FAQ from "@/components/faq/FAQ";
+
+/* ================= SEO (Server Metadata) ================= */
+
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/mining-rewards",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: SEO_CONFIG.defaultTitle,
+      description: SEO_CONFIG.defaultDescription,
+    };
+  }
+}
+
+/* ================= SEO Metrics Hook ================= */
+
+function useSEOMetrics(seo: SEOOutput | null) {
+  useEffect(() => {
+    if (!seo?.metrics) return;
+
+    console.log("[SEO Metrics]", {
+      score: seo.metrics.seoScore ?? "n/a",
+      pageType: seo.pageType?.type,
+      generationTime: seo.metrics.generationTime,
+    });
+  }, [seo]);
+}
 
 /* ================= PREMIUM MINING TASKS ================= */
 const miningRewards = [
@@ -75,19 +119,38 @@ const faqs = [
 ];
 
 export default function MiningRewardsPage() {
+  /* SEO Hydration (Client Side) */
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+  useSEOMetrics(seo);
+
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/mining-rewards",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <>
-      <Meta
-        title="Premium Mining Rewards | Cashog"
-        description="Complete premium mining challenges and earn real rewards instantly."
-      />
+      {/* Structured Data & Meta Tags */}
+      {seo && <SeoRenderer seo={seo} />}
 
       <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
 
         <section className="relative z-10 max-w-7xl mx-auto px-4 py-24">
 
-          {/* ================= HERO SECTION ================= */}
+          {/* HERO SECTION */}
           <Reveal>
             <div className="text-center mb-24">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
@@ -108,7 +171,7 @@ export default function MiningRewardsPage() {
             </div>
           </Reveal>
 
-          {/* ================= PREMIUM TASKS SECTION ================= */}
+          {/* PREMIUM TASKS SECTION */}
           <Reveal>
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
@@ -120,83 +183,49 @@ export default function MiningRewardsPage() {
             </div>
           </Reveal>
 
-          {/* OFFER CARDS (Offerwall Style) */}
+          {/* OFFER CARDS */}
           <div className="grid gap-6 md:gap-8 md:grid-cols-3 mb-28">
             {miningRewards.map((task) => (
               <Reveal key={task.title}>
                 <motion.div
                   whileHover={{ y: -6 }}
                   transition={{ type: "spring", stiffness: 200 }}
-                  className="bg-white/90 dark:bg-[#0c111b]/90 backdrop-blur-xl
-                  rounded-2xl p-6 shadow-sm hover:shadow-xl
-                  transition-all duration-300 flex flex-col justify-between"
+                  className="bg-white/90 dark:bg-[#0c111b]/90 backdrop-blur-xl rounded-2xl p-6 shadow-sm"
                 >
-                  <div>
-                    {/* Category Badge */}
-                    <div className="flex justify-between items-center mb-4">
-                      <ClipboardList className="text-yellow-500 w-5 h-5" />
-
-                      <span className="text-xs px-3 py-1 rounded-full
-                        bg-yellow-500/10 text-yellow-600 dark:text-yellow-400
-                        border border-yellow-500/20">
-                        {task.category}
-                      </span>
-                    </div>
-
-                    {/* Title */}
-                    <h3 className="text-lg font-semibold mb-2">
-                      {task.title}
-                    </h3>
-
-                    {/* Difficulty */}
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      Difficulty: {task.difficulty}
-                    </p>
-
-                    {/* Reward */}
-                    <p className="text-green-500 font-semibold mt-1">
-                      Reward: {task.reward}
-                    </p>
-
-                    {/* Progress Bar */}
-                    <div className="w-full h-2 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden mt-4">
-                      <div
-                        className="h-2 bg-gradient-to-r from-yellow-400 to-green-400 rounded-full"
-                        style={{
-                          width:
-                            task.difficulty === "Easy"
-                              ? "90%"
-                              : task.difficulty === "Medium"
-                              ? "70%"
-                              : "50%",
-                        }}
-                      />
-                    </div>
-
-                    <p className="text-xs text-gray-500 mt-2">
-                      Completion Potential
-                    </p>
+                  <div className="flex justify-between items-center mb-4">
+                    <ClipboardList className="text-yellow-500 w-5 h-5" />
+                    <span className="text-xs px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-600">
+                      {task.category}
+                    </span>
                   </div>
 
-                  {/* CTA */}
-                  <div className="mt-6">
-                    <a
-                      href="/signup"
-                      className="inline-flex items-center justify-center
-                      px-5 py-2 text-sm font-semibold rounded-xl
-                      bg-gradient-to-r from-yellow-400 to-green-400
-                      text-black shadow-md hover:shadow-lg
-                      transition-all duration-300 hover:scale-105 active:scale-95"
-                    >
-                      Complete Task
-                    </a>
+                  <h3 className="text-lg font-semibold mb-2">{task.title}</h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    Difficulty: {task.difficulty}
+                  </p>
+                  <p className="text-green-500 font-semibold mt-1">
+                    Reward: {task.reward}
+                  </p>
+
+                  <div className="w-full h-2 bg-gray-200 dark:bg-gray-800 rounded-full mt-4">
+                    <div
+                      className="h-2 bg-gradient-to-r from-yellow-400 to-green-400 rounded-full"
+                      style={{
+                        width:
+                          task.difficulty === "Easy"
+                            ? "90%"
+                            : task.difficulty === "Medium"
+                            ? "70%"
+                            : "50%",
+                      }}
+                    />
                   </div>
                 </motion.div>
               </Reveal>
             ))}
           </div>
 
-          {/* ================= FEATURES SECTION ================= */}
+          {/* FEATURES SECTION */}
           <Reveal>
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
@@ -213,9 +242,7 @@ export default function MiningRewardsPage() {
               <Reveal key={feature.title}>
                 <motion.div
                   whileHover={{ y: -4 }}
-                  className="bg-white/90 dark:bg-[#0c111b]/90 backdrop-blur-xl
-                  rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800
-                  shadow-sm hover:shadow-lg transition-all duration-300"
+                  className="bg-white dark:bg-[#0c111b] rounded-2xl p-6 text-center"
                 >
                   <div className="mb-4 flex justify-center">
                     {feature.icon}
@@ -233,7 +260,7 @@ export default function MiningRewardsPage() {
             ))}
           </div>
 
-          {/* ================= HOW IT WORKS ================= */}
+          {/* HOW IT WORKS */}
           <div className="mb-12 text-center">
             <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
               How It Works
@@ -245,51 +272,31 @@ export default function MiningRewardsPage() {
 
           <div className="grid gap-6 md:gap-8 md:grid-cols-3 mb-28">
             {[
-              {
-                icon: <User size={32} className="text-yellow-400" />,
-                title: "Create Account",
-                desc: "Join in seconds and start earning opportunities.",
-              },
-              {
-                icon: <Trophy size={32} className="text-green-400" />,
-                title: "Complete Tasks",
-                desc: "Finish challenges and unlock rewards.",
-              },
-              {
-                icon: <Gift size={32} className="text-yellow-400" />,
-                title: "Withdraw",
-                desc: "Redeem earnings securely and easily.",
-              },
+              { icon: <User size={32} className="text-yellow-400" />, title: "Create Account", desc: "Join in seconds." },
+              { icon: <Trophy size={32} className="text-green-400" />, title: "Complete Tasks", desc: "Finish challenges and earn rewards." },
+              { icon: <Gift size={32} className="text-yellow-400" />, title: "Withdraw", desc: "Redeem earnings securely." },
             ].map((step) => (
-              <Reveal key={step.title}>
-                <motion.div
-                  whileHover={{ y: -6 }}
-                  className="bg-white dark:bg-[#0c111b] rounded-2xl p-6 text-center
-                  border border-gray-200 dark:border-gray-800 shadow-sm
-                  hover:shadow-lg transition-all duration-300"
-                >
-                  <div className="mb-4 flex justify-center">
-                    {step.icon}
-                  </div>
-
-                  <h3 className="text-xl font-semibold mb-2">
-                    {step.title}
-                  </h3>
-
-                  <p className="text-gray-600 dark:text-gray-300 text-sm">
-                    {step.desc}
-                  </p>
-                </motion.div>
-              </Reveal>
+              <motion.div
+                key={step.title}
+                whileHover={{ y: -6 }}
+                className="bg-white dark:bg-[#0c111b] rounded-2xl p-6 text-center"
+              >
+                <div className="mb-4 flex justify-center">
+                  {step.icon}
+                </div>
+                <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300 text-sm">
+                  {step.desc}
+                </p>
+              </motion.div>
             ))}
           </div>
 
-          {/* ================= FAQ ================= */}
+          {/* FAQ */}
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               Frequently Asked Questions
             </h2>
-
             <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
               Everything you need to know about Mining Rewards
             </p>
@@ -299,17 +306,15 @@ export default function MiningRewardsPage() {
             <FAQ faqs={faqs} />
           </div>
 
-          {/* ================= FINAL CTA ================= */}
+          {/* FINAL CTA */}
           <Reveal>
             <div className="text-center">
               <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
                 Ready to Start Earning?
               </h2>
-
-              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed mb-10">
+              <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
                 Join today and unlock premium earning opportunities.
               </p>
-
               <PrimaryCTA href="/signup">
                 Join Now
               </PrimaryCTA>
