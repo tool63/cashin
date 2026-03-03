@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   Gift,
@@ -11,30 +11,54 @@ import {
   Zap,
   DollarSign,
 } from "lucide-react";
-import { buildSEO } from "@/components/SEO/seoEngine";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
 import Background from "@/components/Background";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
 import TypingText from "@/components/typing/TypingText";
 import FAQ from "@/components/faq/FAQ";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
 
-/* ================= SEO ================= */
+/* ================= SEO (Server Metadata) ================= */
 
 export async function generateMetadata() {
-  const seo = buildSEO({
-    route: "/start-earning",
-    locale: SEO_CONFIG.defaultLocale,
-  });
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/start-earning",
+      locale: SEO_CONFIG.defaultLocale,
+    });
 
-  return {
-    ...seo.metadata,
-    alternates: {
-      canonical: seo.canonical,
-      languages: seo.hreflang,
-    },
-    robots: seo.metadata?.robots,
-  };
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: SEO_CONFIG.defaultTitle,
+      description: SEO_CONFIG.defaultDescription,
+    };
+  }
+}
+
+/* ================= SEO Metrics Hook ================= */
+
+function useSEOMetrics(seo: SEOOutput | null) {
+  useEffect(() => {
+    if (!seo?.metrics) return;
+
+    console.log("[SEO Metrics]", {
+      score: seo.metrics.seoScore ?? "n/a",
+      pageType: seo.pageType?.type,
+      generationTime: seo.metrics.generationTime,
+    });
+  }, [seo]);
 }
 
 /* ================= WAYS TO EARN ================= */
@@ -124,23 +148,31 @@ const faqs = [
 ];
 
 export default function StartEarningPage() {
-  const seo = buildSEO({
-    route: "/start-earning",
-    locale: SEO_CONFIG.defaultLocale,
-  });
+  /* SEO Hydration (Client Side) */
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+  useSEOMetrics(seo);
+
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/start-earning",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   return (
     <>
-      {/* Structured Data Injection */}
-      {seo.structuredData?.map((schema, index) => (
-        <script
-          key={index}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(schema),
-          }}
-        />
-      ))}
+      {/* Structured Data & Meta Tags */}
+      {seo && <SeoRenderer seo={seo} />}
 
       <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
