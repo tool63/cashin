@@ -1,5 +1,3 @@
-typescript
-
 export interface SEOAnalytics {
   pageType: string;
   generationTime: number;
@@ -8,7 +6,21 @@ export interface SEOAnalytics {
   cacheHit: boolean;
   error?: boolean;
   timestamp: number;
+  userAgent?: string;
+  path?: string;
 }
+
+export interface SEOAnalyticsConfig {
+  endpoint: string;
+  batchSize?: number;
+  flushInterval?: number;
+}
+
+const ANALYTICS_CONFIG: SEOAnalyticsConfig = {
+  endpoint: '/api/analytics/seo',
+  batchSize: 25,
+  flushInterval: 5000,
+};
 
 export function trackSEOGeneration(metrics: Partial<SEOAnalytics>): SEOAnalytics {
   const fullMetrics: SEOAnalytics = {
@@ -19,70 +31,98 @@ export function trackSEOGeneration(metrics: Partial<SEOAnalytics>): SEOAnalytics
     cacheHit: metrics.cacheHit || false,
     error: metrics.error || false,
     timestamp: Date.now(),
+    userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : undefined,
+    path: typeof window !== 'undefined' ? window.location.pathname : undefined,
   };
 
-  // Log in development
+  // Development logging
   if (process.env.NODE_ENV === 'development') {
     console.log('📊 SEO Metrics:', fullMetrics);
   }
 
-  // Send to analytics in production
+  // Production analytics queue
   if (process.env.NODE_ENV === 'production' && typeof window !== 'undefined') {
-    // Queue for batch sending
     queueSEOMetrics(fullMetrics);
   }
 
   return fullMetrics;
 }
 
+// ============================================================
+// Metrics Queue (Batch Processing)
+// ============================================================
 const metricsQueue: SEOAnalytics[] = [];
 let flushTimeout: NodeJS.Timeout | null = null;
+let isFlushing = false;
 
 function queueSEOMetrics(metrics: SEOAnalytics) {
   metricsQueue.push(metrics);
-  
+
+  if (metricsQueue.length >= (ANALYTICS_CONFIG.batchSize || 25)) {
+    flushMetricsQueue();
+    return;
+  }
+
   if (!flushTimeout) {
-    flushTimeout = setTimeout(flushMetricsQueue, 5000); // Flush every 5 seconds
+    flushTimeout = setTimeout(flushMetricsQueue, ANALYTICS_CONFIG.flushInterval);
   }
 }
 
-function flushMetricsQueue() {
-  if (metricsQueue.length === 0) return;
-  
+async function flushMetricsQueue() {
+  if (isFlushing || metricsQueue.length === 0) return;
+
+  isFlushing = true;
   const metrics = [...metricsQueue];
   metricsQueue.length = 0;
   flushTimeout = null;
-  
-  // Send to analytics endpoint
-  if (typeof navigator !== 'undefined' && navigator.sendBeacon) {
-    const blob = new Blob([JSON.stringify(metrics)], { type: 'application/json' });
-    navigator.sendBeacon('/api/analytics/seo', blob);
+
+  try {
+    await sendMetrics(metrics);
+  } catch (error) {
+    console.error('❌ SEO Analytics send failed:', error);
+    // Requeue on failure (with limit)
+    metricsQueue.push(...metrics.slice(0, 100));
+  } finally {
+    isFlushing = false;
   }
 }
 
-This enterprise-grade SEO system provides:
+// ============================================================
+// Analytics Transmission
+// ============================================================
+async function sendMetrics(metrics: SEOAnalytics[]): Promise<void> {
+  if (typeof navigator === 'undefined') return;
 
-    Comprehensive robots.txt with environment-based rules, AI bot blocking, and crawl budget optimization
+  const payload = JSON.stringify(metrics);
 
-    Advanced sitemap generation with multiple sitemaps, image/video/news support, and pagination
+  // Use Beacon API for best reliability
+  if (navigator.sendBeacon) {
+    const blob = new Blob([payload], { type: 'application/json' });
+    navigator.sendBeacon(ANALYTICS_CONFIG.endpoint, blob);
+    return;
+  }
 
-    Type-safe configuration with environment variables and verification codes
+  // Fallback to fetch
+  try {
+    await fetch(ANALYTICS_CONFIG.endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: payload,
+      keepalive: true,
+    });
+  } catch (error) {
+    console.error('❌ SEO analytics fetch failed:', error);
+  }
+}
 
-    Sophisticated page type detection with hierarchy and regex patterns
+// ============================================================
+// Cleanup (Memory Safety)
+// ============================================================
+export function clearSEOAnalyticsQueue() {
+  metricsQueue.length = 0;
 
-    Cached SEO engine with performance monitoring and fallbacks
-
-    Rich metadata generation with OpenGraph, Twitter Cards, and platform-specific tags
-
-    Extensive schema.org markup for 20+ different page types
-
-    Multi-language hreflang support with validation
-
-    Canonical URL optimization with query parameter handling
-
-    Performance-optimized React component with lazy loading and resource hints
-
-    Analytics tracking for SEO performance monitoring
-
-The system is production-ready, scalable, and follows all major SEO best practices and Google guidelines.
-This response is AI-generated, for reference only.
+  if (flushTimeout) {
+    clearTimeout(flushTimeout);
+    flushTimeout = null;
+  }
+}
