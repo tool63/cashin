@@ -2,7 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
 import SeoEngine from "@/components/seo/SeoEngine";
+
 import Background from "@/components/Background";
 import TypingText from "@/components/typing/TypingText";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
@@ -39,6 +43,57 @@ const tasks: Task[] = [
   { id: 8, title: "Share Feedback on Product", category: "Feedback", reward: "$1.10", difficulty: "Medium", completionRate: 84 },
   { id: 9, title: "Complete Quick Survey", category: "Survey", reward: "$0.90", difficulty: "Easy", completionRate: 93 },
 ];
+
+/* ================= SEO METADATA ================= */
+
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/micro-tasks",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: SEO_CONFIG.defaultTitle,
+      description: SEO_CONFIG.defaultDescription,
+    };
+  }
+}
+
+/* ================= SEO HYDRATION ================= */
+function useSEOHydration() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/micro-tasks",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  return seo;
+}
 
 /* ================= COUNT UP ================= */
 function CountUp({ end }: { end: number }) {
@@ -113,8 +168,14 @@ const faqs = [
 
 /* ================= PAGE ================= */
 export default function MicroTasksPage() {
+  const seo = useSEOHydration();
+
   return (
     <>
+      {/* Structured SEO Data */}
+      {seo && <SeoRenderer seo={seo} />}
+
+      {/* Existing SEO Engine (kept intact) */}
       <SeoEngine
         title="Micro Tasks | Cashog"
         description="Complete micro-tasks on Cashog and earn instant rewards."
