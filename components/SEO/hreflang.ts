@@ -12,6 +12,11 @@ export interface HreflangOptions {
   addLanguagePrefix?: boolean;
   countrySpecific?: boolean;
   fallbackLocale?: string;
+
+  // Ultra Premium
+  allowQuery?: boolean;
+  trailingSlash?: boolean;
+  preferHttps?: boolean;
 }
 
 /**
@@ -51,6 +56,11 @@ export function buildHreflang(
     addLanguagePrefix = true,
     countrySpecific = false,
     fallbackLocale = SEO_CONFIG.defaultLocale,
+
+    // Ultra Premium
+    allowQuery = false,
+    trailingSlash = true,
+    preferHttps = true,
   } = options;
 
   if (!route) {
@@ -59,7 +69,11 @@ export function buildHreflang(
   }
 
   const hreflang: Record<string, string> = {};
-  let cleanRoute = route.split('?')[0].split('#')[0];
+  let cleanRoute = route.split('#')[0];
+
+  if (!allowQuery) {
+    cleanRoute = cleanRoute.split('?')[0];
+  }
 
   if (removeTrailingSlash && cleanRoute.endsWith('/') && cleanRoute !== '/') {
     cleanRoute = cleanRoute.slice(0, -1);
@@ -75,6 +89,8 @@ export function buildHreflang(
         includeDefault,
         defaultLocale: SEO_CONFIG.defaultLocale,
         countrySpecific,
+        trailingSlash,
+        preferHttps,
       });
     } catch (err) {
       console.error(`[SEO Hreflang] Locale error: ${locale}`, err);
@@ -88,6 +104,8 @@ export function buildHreflang(
         addLanguagePrefix,
         defaultLocale: SEO_CONFIG.defaultLocale,
         fallbackLocale,
+        trailingSlash,
+        preferHttps,
       });
     } catch (err) {
       console.error('[SEO Hreflang] x-default error', err);
@@ -114,15 +132,26 @@ function buildLocaleUrl(
     includeDefault: boolean;
     defaultLocale: string;
     countrySpecific: boolean;
+    trailingSlash: boolean;
+    preferHttps: boolean;
   }
 ): string {
-  const { baseUrl, addLanguagePrefix, includeDefault, defaultLocale, countrySpecific } = options;
+  const {
+    baseUrl,
+    addLanguagePrefix,
+    includeDefault,
+    defaultLocale,
+    countrySpecific,
+    trailingSlash,
+    preferHttps,
+  } = options;
 
   let url: string;
 
   if (addLanguagePrefix) {
     const shouldPrefix = locale !== defaultLocale || includeDefault;
-    const path = shouldPrefix ? `/${locale}${cleanRoute === '/' ? '' : cleanRoute}` : cleanRoute;
+    const path =
+      shouldPrefix ? `/${locale}${cleanRoute === '/' ? '' : cleanRoute}` : cleanRoute;
     url = `${baseUrl}${path}`;
   } else {
     const domain = baseUrl.replace(/^https?:\/\//, '');
@@ -134,11 +163,11 @@ function buildLocaleUrl(
         ? locale.replace('-', '.') // en-us → en.us
         : locale;
 
-      url = `https://${subdomain}.${domain}${cleanRoute}`;
+      url = `${preferHttps ? 'https' : 'http'}://${subdomain}.${domain}${cleanRoute}`;
     }
   }
 
-  return normalizeUrl(url);
+  return normalizeUrl(trailingSlash ? ensureTrailingSlash(url) : url);
 }
 
 /**
@@ -151,15 +180,19 @@ function buildXDefaultUrl(
     addLanguagePrefix: boolean;
     defaultLocale: string;
     fallbackLocale: string;
+    trailingSlash: boolean;
+    preferHttps: boolean;
   }
 ): string {
-  const { baseUrl, addLanguagePrefix } = options;
+  const { baseUrl, addLanguagePrefix, trailingSlash, preferHttps } = options;
 
   const url = addLanguagePrefix
     ? `${baseUrl}${cleanRoute === '/' ? '' : cleanRoute}`
     : `${baseUrl}${cleanRoute}`;
 
-  return normalizeUrl(url);
+  return normalizeUrl(
+    trailingSlash ? ensureTrailingSlash(url) : url
+  );
 }
 
 /**
@@ -167,6 +200,13 @@ function buildXDefaultUrl(
  */
 function normalizeUrl(url: string): string {
   return url.replace(/([^:]\/)\/+/g, '$1');
+}
+
+/**
+ * Ensures trailing slash if required
+ */
+function ensureTrailingSlash(url: string): string {
+  return url.endsWith('/') ? url : `${url}/`;
 }
 
 /**
