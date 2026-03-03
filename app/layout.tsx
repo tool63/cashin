@@ -1,9 +1,8 @@
 "use client";
 
 import "../styles/globals.css";
-import { ReactNode, useMemo } from "react";
+import { ReactNode, useMemo, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { headers } from "next/headers";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -11,35 +10,9 @@ import FloatingCTA from "@/components/cta/FloatingCTA";
 import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
 import Background from "@/components/Background";
 
-import { buildSEO } from "@/components/SEO/seoEngine";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
-
-/**
- * =====================================
- * ✅ SEO Metadata Generator (Server)
- * =====================================
- */
-export async function generateMetadata() {
-  const headersList = headers();
-  const pathname =
-    headersList.get("x-pathname") ||
-    headersList.get("referer") ||
-    "/";
-
-  const seo = buildSEO({
-    route: pathname,
-    locale: SEO_CONFIG.defaultLocale,
-  });
-
-  return {
-    ...seo.metadata,
-    alternates: {
-      canonical: seo.canonical,
-      languages: seo.hreflang,
-    },
-    robots: seo.metadata?.robots,
-  };
-}
+import SeoRenderer from "@/components/SEO/SeoRenderer";
 
 interface RootLayoutProps {
   children: ReactNode;
@@ -48,25 +21,18 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children, auth }: RootLayoutProps) {
   const pathname = usePathname();
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
 
-  /**
-   * =====================================
-   * Layout Visibility + Route Detection
-   * =====================================
-   */
-  const {
-    hideLayout,
-    hasAuthModal,
-    isAuthPage,
-    isDashboardPage,
-  } = useMemo(() => {
+  // =====================================
+  // Layout Visibility + Route Detection
+  // =====================================
+  const { hideLayout, hasAuthModal, isAuthPage, isDashboardPage } = useMemo(() => {
     const isAuth =
       pathname?.startsWith("/login") ||
       pathname?.startsWith("/signup") ||
       pathname?.startsWith("/reset");
 
     const isDashboard = pathname?.startsWith("/dashboard");
-
     const hasAuthModal = !!auth;
 
     return {
@@ -77,16 +43,17 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
     };
   }, [pathname, auth]);
 
-  /**
-   * =====================================
-   * Structured Data Injection (Client Safe)
-   * =====================================
-   */
-  const seo = useMemo(() => {
-    return buildSEO({
-      route: pathname || "/",
-      locale: SEO_CONFIG.defaultLocale,
-    });
+  // =====================================
+  // SEO Engine (Client-Safe)
+  // =====================================
+  useEffect(() => {
+    if (!pathname) return;
+
+    buildSEO({ route: pathname, locale: SEO_CONFIG.defaultLocale })
+      .then(setSeo)
+      .catch((err) => {
+        console.error("SEO build failed:", err);
+      });
   }, [pathname]);
 
   return (
@@ -97,16 +64,10 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
     >
       <body className="min-h-screen overflow-x-hidden text-gray-900 transition-colors duration-500 dark:text-white bg-white dark:bg-[#070A14]">
 
-        {/* JSON-LD Structured Data */}
-        {seo.structuredData?.map((schema, index) => (
-          <script
-            key={index}
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify(schema),
-            }}
-          />
-        ))}
+        {/* =====================================
+            SEO Metadata & Structured Data
+        ====================================== */}
+        {seo && <SeoRenderer seo={seo} />}
 
         <ThemeProviderWrapper>
 
