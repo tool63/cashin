@@ -5,7 +5,7 @@ import { ArrowRight, User, CreditCard, Gift, CheckCircle, ShieldCheck } from "lu
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
-import Meta from "@/components/seo/SeoEngine";
+import Meta from "@/components/SEO/seoEngine.ts";
 import TypingText from "@/components/typing/TypingText";
 
 /* ================= STEPS ================= */
