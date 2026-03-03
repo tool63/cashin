@@ -105,10 +105,28 @@ export async function generateMetadata() {
 }
 
 /* =========================
+   Performance & SEO Metrics (Optional)
+========================= */
+function useSEOMetrics(seo: SEOOutput | null) {
+  useEffect(() => {
+    if (!seo?.metrics) return;
+
+    console.log("[SEO Metrics]", {
+      score: seo.metrics.seoScore ?? "n/a",
+      pageType: seo.pageType?.type,
+      generationTime: seo.metrics.generationTime,
+    });
+  }, [seo]);
+}
+
+/* =========================
    Homepage Component
 ========================= */
 export default function HomePage() {
   const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  /* SEO Metrics Hook */
+  useSEOMetrics(seo);
 
   /* =========================
      Hydrate SEO Client-Side (Non-Blocking)
