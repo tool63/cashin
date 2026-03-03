@@ -13,7 +13,10 @@ export type PageType =
   | 'guide'
   | 'profile'
   | 'search'
-  | 'generic';
+  | 'generic'
+  | 'offer'
+  | 'reward'
+  | 'event';
 
 export interface SchemaInput {
   route: string;
@@ -48,6 +51,23 @@ export interface SchemaInput {
   brand?: string;
   sku?: string;
   mpn?: string;
+
+  // Ultra Premium
+  event?: {
+    name: string;
+    startDate?: string;
+    endDate?: string;
+    location?: string;
+    organizer?: string;
+  };
+
+  reward?: {
+    type?: string;
+    value?: number;
+    currency?: string;
+  };
+
+  availability?: 'instock' | 'outofstock' | 'preorder';
 }
 
 /* =========================================================
@@ -206,7 +226,7 @@ function buildHomePage(data: SchemaInput) {
   const url = absoluteUrl(cleanRoute(data.route));
 
   return {
-    '@type': 'WebPage', // fixed (was AboutPage)
+    '@type': 'WebPage',
     '@id': `${url}#home`,
     url,
     name: data.title || SEO_CONFIG.siteName,
@@ -217,7 +237,7 @@ function buildHomePage(data: SchemaInput) {
 }
 
 /* =========================================================
-   Page-Specific Schemas
+   Page-Specific Schemas (Ultra Premium)
 ========================================================= */
 
 function buildArticle(data: SchemaInput) {
@@ -293,7 +313,10 @@ function buildProduct(data: SchemaInput) {
       url,
       price: data.price,
       priceCurrency: data.currency || 'USD',
-      availability: 'https://schema.org/InStock',
+      availability:
+        data.availability === 'outofstock'
+          ? 'https://schema.org/OutOfStock'
+          : 'https://schema.org/InStock',
     };
   }
 
@@ -432,7 +455,42 @@ function buildImageGallery(data: SchemaInput) {
 }
 
 /* =========================================================
-   Main Builder
+   Ultra Premium: Reward & Event Schemas
+========================================================= */
+
+function buildReward(data: SchemaInput) {
+  if (!data.reward) return null;
+
+  const url = absoluteUrl(cleanRoute(data.route));
+
+  return {
+    '@type': 'Reward',
+    '@id': `${url}#reward`,
+    description: data.description,
+    rewardType: data.reward.type,
+    rewardValue: data.reward.value,
+    currency: data.reward.currency || 'USD',
+  };
+}
+
+function buildEvent(data: SchemaInput) {
+  if (!data.event?.name) return null;
+
+  const url = absoluteUrl(cleanRoute(data.route));
+
+  return {
+    '@type': 'Event',
+    '@id': `${url}#event`,
+    name: data.event.name,
+    startDate: data.event.startDate,
+    endDate: data.event.endDate,
+    location: data.event.location,
+    organizer: data.event.organizer,
+  };
+}
+
+/* =========================================================
+   Main Builder (Ultra Premium)
 ========================================================= */
 
 export function buildStructuredData(input: SchemaInput) {
@@ -443,7 +501,7 @@ export function buildStructuredData(input: SchemaInput) {
 
   const graph: any[] = [];
 
-  // Core (kept as requested)
+  // Core (always)
   graph.push(buildOrganization());
   graph.push(buildWebsite());
   graph.push(buildBreadcrumb(input.route));
@@ -470,6 +528,7 @@ export function buildStructuredData(input: SchemaInput) {
       graph.push(buildArticle(input));
       break;
     case 'product':
+    case 'offer':
       graph.push(buildProduct(input));
       break;
     case 'faq':
@@ -486,9 +545,13 @@ export function buildStructuredData(input: SchemaInput) {
       break;
   }
 
+  // Ultra Premium Extras
   if (input.video) graph.push(buildVideo(input));
   if (input.images?.length && input.images.length > 1)
     graph.push(buildImageGallery(input));
+
+  if (input.reward) graph.push(buildReward(input));
+  if (input.event) graph.push(buildEvent(input));
 
   const finalGraph = dedupeSchemas(graph.filter(Boolean));
 
