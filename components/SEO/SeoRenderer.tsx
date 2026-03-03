@@ -23,6 +23,9 @@ export interface SEORenderMetrics {
   timestamp: number;
 }
 
+/* =========================================================
+   Ultra Premium: SEO Renderer
+========================================================= */
 export default function SeoRenderer({
   seo,
   children,
@@ -33,9 +36,9 @@ export default function SeoRenderer({
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  // ==========================================================
+  // ========================================================
   // Structured Data (Schema.org)
-  // ==========================================================
+  // ========================================================
   const structuredDataScripts = useMemo(() => {
     if (!seo.structuredData?.length) return null;
 
@@ -60,16 +63,16 @@ export default function SeoRenderer({
       });
   }, [seo.structuredData, defer]);
 
-  // ==========================================================
-  // Meta Tags
-  // ==========================================================
+  // ========================================================
+  // Meta Tags (Ultra Premium)
+  // ========================================================
   const metaTags = useMemo(() => {
     const tags: React.ReactNode[] = [];
     const metadata = seo.metadata;
 
     if (!metadata) return tags;
 
-    // Title
+    // Title (Premium OpenGraph)
     if (metadata.title) {
       tags.push(
         <title key="title">{metadata.title}</title>,
@@ -78,7 +81,7 @@ export default function SeoRenderer({
       );
     }
 
-    // Description
+    // Description (SEO + Social)
     if (metadata.description) {
       tags.push(
         <meta key="description" name="description" content={metadata.description} />,
@@ -87,26 +90,41 @@ export default function SeoRenderer({
       );
     }
 
-    // Keywords
+    // Keywords (Ultra Premium)
     if (metadata.keywords) {
-      tags.push(<meta key="keywords" name="keywords" content={metadata.keywords} />);
+      tags.push(
+        <meta
+          key="keywords"
+          name="keywords"
+          content={
+            Array.isArray(metadata.keywords)
+              ? metadata.keywords.join(', ')
+              : metadata.keywords
+          }
+        />
+      );
     }
 
-    // Canonical
+    // Canonical (SEO best practice)
     if (seo.canonical) {
       tags.push(<link key="canonical" rel="canonical" href={seo.canonical} />);
     }
 
-    // Hreflang
+    // Hreflang (International SEO)
     if (seo.hreflang) {
       Object.entries(seo.hreflang).forEach(([lang, href]) => {
         tags.push(
-          <link key={`hreflang-${lang}`} rel="alternate" hrefLang={lang} href={href} />
+          <link
+            key={`hreflang-${lang}`}
+            rel="alternate"
+            hrefLang={lang}
+            href={href}
+          />
         );
       });
     }
 
-    // Robots
+    // Robots (Premium Handling)
     if (metadata.robots) {
       const robotsValue =
         typeof metadata.robots === 'string'
@@ -118,7 +136,7 @@ export default function SeoRenderer({
       tags.push(<meta key="robots" name="robots" content={robotsValue} />);
     }
 
-    // OpenGraph
+    // OpenGraph (Ultra Premium)
     if (metadata.openGraph) {
       const og = metadata.openGraph;
 
@@ -151,7 +169,7 @@ export default function SeoRenderer({
         tags.push(<meta key="og:locale" property="og:locale" content={og.locale} />);
     }
 
-    // Twitter Card
+    // Twitter Card (Premium)
     if (metadata.twitter) {
       const twitter = metadata.twitter;
 
@@ -160,7 +178,9 @@ export default function SeoRenderer({
       if (twitter.site)
         tags.push(<meta key="twitter:site" name="twitter:site" content={twitter.site} />);
       if (twitter.images?.[0])
-        tags.push(<meta key="twitter:image" name="twitter:image" content={twitter.images[0]} />);
+        tags.push(
+          <meta key="twitter:image" name="twitter:image" content={twitter.images[0]} />
+        );
       if (twitter.imageAlt)
         tags.push(
           <meta
@@ -171,7 +191,7 @@ export default function SeoRenderer({
         );
     }
 
-    // Viewport
+    // Viewport (Mobile SEO)
     if (metadata.viewport) {
       const viewportValue =
         typeof metadata.viewport === 'string'
@@ -181,19 +201,27 @@ export default function SeoRenderer({
       tags.push(<meta key="viewport" name="viewport" content={viewportValue} />);
     }
 
-    // Theme color
+    // Theme color (PWA + SEO)
     if (metadata.other?.['theme-color']) {
       tags.push(
-        <meta key="theme-color" name="theme-color" content={metadata.other['theme-color']} />
+        <meta
+          key="theme-color"
+          name="theme-color"
+          content={metadata.other['theme-color']}
+        />
       );
     }
 
-    // Verification
+    // Verification (Search Engine)
     if (metadata.verification) {
       Object.entries(metadata.verification).forEach(([key, value]) => {
         if (value) {
           tags.push(
-            <meta key={`verify-${key}`} name={`${key}-verification`} content={value} />
+            <meta
+              key={`verify-${key}`}
+              name={`${key}-verification`}
+              content={value}
+            />
           );
         }
       });
@@ -202,9 +230,9 @@ export default function SeoRenderer({
     return tags;
   }, [seo]);
 
-  // ==========================================================
-  // Resource Hints
-  // ==========================================================
+  // ========================================================
+  // Resource Hints (Ultra Premium)
+  // ========================================================
   const resourceHints = useMemo(() => {
     const hints: React.ReactNode[] = [];
 
@@ -234,9 +262,9 @@ export default function SeoRenderer({
     return hints;
   }, [seo]);
 
-  // ==========================================================
-  // Performance Monitoring
-  // ==========================================================
+  // ========================================================
+  // Performance Monitoring (Ultra Premium)
+  // ========================================================
   useEffect(() => {
     if (!onRender) return;
 
@@ -253,9 +281,9 @@ export default function SeoRenderer({
     onRender(metrics);
   }, [seo, pathname, searchParams, onRender]);
 
-  // ==========================================================
-  // Priority Resource Loading
-  // ==========================================================
+  // ========================================================
+  // Priority Resource Loading (Ultra Premium)
+  // ========================================================
   useEffect(() => {
     if (priority !== 'high' || !seo.canonical) return;
 
@@ -282,9 +310,9 @@ export default function SeoRenderer({
   );
 }
 
-// ============================================================
-// Lazy Loaded Version (Non-Critical Pages)
-// ============================================================
+/* =========================================================
+   Lazy Loaded Version (Ultra Premium)
+========================================================= */
 export const LazySeoRenderer = React.lazy(() =>
   Promise.resolve({ default: SeoRenderer })
 );
