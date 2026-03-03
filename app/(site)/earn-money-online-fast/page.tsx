@@ -4,7 +4,7 @@ import React from "react";
 import { ArrowRight, Zap, User, Gift, CheckCircle, ShieldCheck, ClipboardList, CreditCard } from "lucide-react"; // ✅ Zap replaces Lightning
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Meta from "@/components/seo/SeoEngine";
+import Meta from "@/components/SEO/seoEngine.ts";
 import TypingText from "@/components/typing/TypingText";
 
 /* ================= STEPS ================= */
