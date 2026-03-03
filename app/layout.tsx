@@ -113,6 +113,19 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
   }, [pathname]);
 
   /* =========================================================
+     SEO Performance Metrics (Premium)
+  ========================================================= */
+  useEffect(() => {
+    if (!seo?.metrics) return;
+
+    console.log("[SEO Metrics]", {
+      score: seo.metrics.seoScore ?? "n/a",
+      pageType: seo.pageType?.type,
+      generationTime: seo.metrics.generationTime,
+    });
+  }, [seo]);
+
+  /* =========================================================
      Scroll Restoration (UX Best Practice)
   ========================================================= */
   useEffect(() => {
