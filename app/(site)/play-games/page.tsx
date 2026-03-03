@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import {
   Trophy,
   User,
@@ -9,13 +10,56 @@ import {
   TrendingUp,
   Star,
 } from "lucide-react";
-import { motion } from "framer-motion";
-import Meta from "@/components/seo/SeoEngine";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
+
 import TypingText from "@/components/typing/TypingText";
 import Background from "@/components/Background";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
 import FAQ from "@/components/faq/FAQ";
+
+/* ================= SEO (Server Metadata) ================= */
+
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/play-games",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: SEO_CONFIG.defaultTitle,
+      description: SEO_CONFIG.defaultDescription,
+    };
+  }
+}
+
+/* ================= SEO Metrics Hook ================= */
+
+function useSEOMetrics(seo: SEOOutput | null) {
+  useEffect(() => {
+    if (!seo?.metrics) return;
+
+    console.log("[SEO Metrics]", {
+      score: seo.metrics.seoScore ?? "n/a",
+      pageType: seo.pageType?.type,
+      generationTime: seo.metrics.generationTime,
+    });
+  }, [seo]);
+}
 
 /* ================= PREMIUM GAMES ================= */
 const games = [
@@ -32,10 +76,10 @@ const games = [
 
 /* ================= COUNT UP ================= */
 function CountUp({ end }: { end: number }) {
-  const [count, setCount] = React.useState(0);
+  const [count, setCount] = useState(0);
   const ref = React.useRef<HTMLDivElement | null>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -87,7 +131,7 @@ function StarRating({ rating }: { rating: number }) {
   );
 }
 
-/* ================= PLATFORM STATS (WITH ICONS) ================= */
+/* ================= PLATFORM STATS ================= */
 const stats = [
   { label: "Games Played", number: 500000, icon: <Trophy className="w-6 h-6 text-yellow-400" /> },
   { label: "Happy Players", number: 200000, icon: <User className="w-6 h-6 text-green-400" /> },
@@ -104,12 +148,31 @@ const faqs = [
 ];
 
 export default function PlayGamesPage() {
+  /* SEO Hydration (Client Side) */
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+  useSEOMetrics(seo);
+
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/play-games",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <>
-      <Meta
-        title="Play Games & Earn | Cashog"
-        description="Premium games with real rewards. Play, earn, and withdraw instantly."
-      />
+      {/* Structured Data & Meta Tags */}
+      {seo && <SeoRenderer seo={seo} />}
 
       <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
@@ -183,8 +246,6 @@ export default function PlayGamesPage() {
                         bg-gradient-to-r from-yellow-400 to-green-400
                         text-black
                         shadow-sm
-                        hover:shadow-md
-                        transition-all duration-200
                       "
                     >
                       Play Now
@@ -195,7 +256,7 @@ export default function PlayGamesPage() {
             ))}
           </div>
 
-          {/* PLATFORM STATS (WITH ICONS) */}
+          {/* PLATFORM STATS */}
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               Platform Performance
@@ -206,30 +267,23 @@ export default function PlayGamesPage() {
             </p>
           </Reveal>
 
-          <Reveal>
-            <div className="grid gap-6 md:grid-cols-3 mb-24">
-              {stats.map((stat) => (
-                <motion.div
-                  key={stat.label}
-                  whileHover={{ y: -4 }}
-                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
-                >
-                  {/* ICON ABOVE CATEGORY */}
-                  <div className="flex justify-center mb-2">
-                    {stat.icon}
-                  </div>
-
-                  <h3 className="text-sm uppercase tracking-wide text-gray-600 dark:text-gray-400">
-                    {stat.label}
-                  </h3>
-
-                  <div className="text-3xl font-extrabold mt-2">
-                    <CountUp end={stat.number} />
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </Reveal>
+          <div className="grid gap-6 md:grid-cols-3 mb-24">
+            {stats.map((stat) => (
+              <motion.div
+                key={stat.label}
+                whileHover={{ y: -4 }}
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md"
+              >
+                <div className="flex justify-center mb-2">{stat.icon}</div>
+                <h3 className="text-sm uppercase tracking-wide text-gray-600 dark:text-gray-400">
+                  {stat.label}
+                </h3>
+                <div className="text-3xl font-extrabold mt-2">
+                  <CountUp end={stat.number} />
+                </div>
+              </motion.div>
+            ))}
+          </div>
 
           {/* HOW IT WORKS */}
           <Reveal>
@@ -248,22 +302,21 @@ export default function PlayGamesPage() {
               { icon: <Trophy className="w-8 h-8 text-green-400" />, title: "Play Games", desc: "Complete challenges and earn rewards." },
               { icon: <Gift className="w-8 h-8 text-yellow-400" />, title: "Withdraw", desc: "Redeem earnings instantly." },
             ].map((step) => (
-              <Reveal key={step.title}>
-                <motion.div
-                  whileHover={{ y: -4 }}
-                  className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-800 shadow-md"
-                >
-                  <div className="flex justify-center items-center mb-4">
-                    {step.icon}
-                  </div>
+              <motion.div
+                key={step.title}
+                whileHover={{ y: -4 }}
+                className="bg-white dark:bg-[#0a0d16] rounded-2xl p-6 text-center border shadow-md"
+              >
+                <div className="flex justify-center items-center mb-4">
+                  {step.icon}
+                </div>
 
-                  <h3 className="text-lg font-semibold">{step.title}</h3>
+                <h3 className="text-lg font-semibold">{step.title}</h3>
 
-                  <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
-                    {step.desc}
-                  </p>
-                </motion.div>
-              </Reveal>
+                <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
+                  {step.desc}
+                </p>
+              </motion.div>
             ))}
           </div>
 
@@ -289,7 +342,7 @@ export default function PlayGamesPage() {
                 Ready to Play & Earn?
               </h2>
 
-              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed mb-10">
+              <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed mb-10">
                 Join Cashog today and unlock unlimited earning opportunities.
               </p>
 
