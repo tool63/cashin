@@ -1,5 +1,6 @@
 // ============================================================
-// Enterprise-grade SEO configuration (Global Authority Ready)
+// Enterprise-Grade Global SEO Configuration (2026 Optimized)
+// Cashog – Global Authority Ready
 // ============================================================
 
 export const SEO_CONFIG = {
@@ -9,10 +10,14 @@ export const SEO_CONFIG = {
   siteName: 'Cashog',
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://cashog.com',
   siteDomain: 'cashog.com',
-  defaultLocale: 'en',
-  supportedLocales: ['en', 'es', 'fr', 'de', 'it', 'pt', 'nl', 'pl', 'ru', 'ja', 'ko', 'zh'],
 
-  // OpenGraph locale mapping
+  defaultLocale: 'en',
+  supportedLocales: [
+    'en', 'es', 'fr', 'de', 'it',
+    'pt', 'nl', 'pl', 'ru',
+    'ja', 'ko', 'zh'
+  ],
+
   localeMap: {
     en: 'en_US',
     es: 'es_ES',
@@ -29,24 +34,53 @@ export const SEO_CONFIG = {
   },
 
   // ==========================================================
-  // Default Meta (Updated Titles)
+  // Global High-Search Meta Defaults
   // ==========================================================
-  defaultTitle: 'Earn Money From Online - Cashog',
-  titleTemplate: '%s - Cashog',
+  defaultTitle:
+    'Earn Real Money Online | Paid Surveys, Offers & Rewards - Cashog',
+
+  titleTemplate: '%s | Earn Money Online - Cashog',
+
   defaultDescription:
-    'Join 10M+ users earning real money with Cashog. Complete offers, surveys, and tasks to earn PayPal cash, gift cards, and crypto rewards. Start earning today!',
+    'Earn real money online with Cashog. Get paid for surveys, app installs, games, offers, microtasks, and cashback deals. Withdraw via PayPal, gift cards, or crypto. Trusted worldwide. Start earning today.',
 
   defaultKeywords: [
+    // Core High Volume
     'earn money online',
-    'make money from home',
-    'cash rewards',
+    'make money online',
+    'earn real money',
+    'get paid online',
+    'online side hustle',
+
+    // Intent Based
+    'earn money from home',
+    'how to make money online',
+    'ways to make money fast',
+    'best money making apps',
+    'legit online jobs',
+
+    // Rewards & Surveys
+    'paid surveys that pay',
+    'earn PayPal money',
+    'free gift cards online',
+    'earn crypto rewards',
+    'get paid to play games',
+
+    // Long Tail Authority
+    'earn money without investment',
+    'earn money worldwide',
+    'online earning platform',
+    'rewards app that pays real money',
+    'trusted survey sites',
+  ],
+
+  primaryKeyword: 'earn money online',
+
+  secondaryKeywords: [
     'paid surveys',
-    'gift cards',
-    'PayPal money',
-    'crypto rewards',
-    'online jobs',
-    'side hustle',
-    'passive income',
+    'make money online',
+    'earn PayPal money',
+    'online rewards platform',
   ],
 
   defaultRobots: {
@@ -71,6 +105,8 @@ export const SEO_CONFIG = {
     url: process.env.NEXT_PUBLIC_SITE_URL || 'https://cashog.com',
     logo: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://cashog.com'}/logo.png`,
     foundingDate: '2024',
+    description:
+      'Cashog is a global online rewards platform that allows users to earn real money by completing surveys, offers, games, and tasks.',
     sameAs: [
       'https://facebook.com/cashog',
       'https://twitter.com/cashog',
@@ -88,11 +124,25 @@ export const SEO_CONFIG = {
   twitterHandle: '@cashog',
   facebookAppId: process.env.FACEBOOK_APP_ID,
 
+  socialLinks: {
+    facebook: 'https://facebook.com/cashog',
+    twitter: 'https://twitter.com/cashog',
+    instagram: 'https://instagram.com/cashog',
+    linkedin: 'https://linkedin.com/company/cashog',
+    youtube: 'https://youtube.com/cashog',
+    tiktok: 'https://tiktok.com/@cashog',
+    pinterest: 'https://pinterest.com/cashog',
+  },
+
   // ==========================================================
   // Images
   // ==========================================================
-  defaultOgImage: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://cashog.com'}/og-image.jpg`,
-  defaultTwitterImage: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://cashog.com'}/twitter-image.jpg`,
+  defaultOgImage:
+    `${process.env.NEXT_PUBLIC_SITE_URL || 'https://cashog.com'}/og-image.jpg`,
+
+  defaultTwitterImage:
+    `${process.env.NEXT_PUBLIC_SITE_URL || 'https://cashog.com'}/twitter-image.jpg`,
+
   favicon: '/favicon.ico',
   appleTouchIcon: '/apple-touch-icon.png',
 
@@ -105,19 +155,6 @@ export const SEO_CONFIG = {
     yandex: process.env.YANDEX_VERIFICATION,
     pinterest: process.env.PINTEREST_VERIFICATION,
     facebook: process.env.FACEBOOK_VERIFICATION,
-  },
-
-  // ==========================================================
-  // Social Links
-  // ==========================================================
-  socialLinks: {
-    facebook: 'https://facebook.com/cashog',
-    twitter: 'https://twitter.com/cashog',
-    instagram: 'https://instagram.com/cashog',
-    linkedin: 'https://linkedin.com/company/cashog',
-    youtube: 'https://youtube.com/cashog',
-    tiktok: 'https://tiktok.com/@cashog',
-    pinterest: 'https://pinterest.com/cashog',
   },
 
   // ==========================================================
@@ -204,8 +241,11 @@ export const SEO_CONFIG = {
   // ==========================================================
   // Sitemap & Feeds
   // ==========================================================
-  sitemapUrl: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://cashog.com'}/sitemap.xml`,
-  rssUrl: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://cashog.com'}/rss.xml`,
+  sitemapUrl:
+    `${process.env.NEXT_PUBLIC_SITE_URL || 'https://cashog.com'}/sitemap.xml`,
+
+  rssUrl:
+    `${process.env.NEXT_PUBLIC_SITE_URL || 'https://cashog.com'}/rss.xml`,
 
   // ==========================================================
   // Structured Data Defaults
@@ -223,7 +263,8 @@ export const SEO_CONFIG = {
   pwa: {
     name: 'Cashog Rewards',
     shortName: 'Cashog',
-    description: 'Earn money with Cashog rewards platform',
+    description:
+      'Earn real money online with surveys, offers, games and cashback.',
     startUrl: '/',
     display: 'standalone',
     orientation: 'portrait',
