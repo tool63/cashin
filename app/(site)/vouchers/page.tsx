@@ -1,14 +1,68 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
 import SeoEngine from "@/components/seo/SeoEngine";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
+
 import Background from "@/components/Background";
 import Reveal from "@/components/animations/Reveal";
 import TypingText from "@/components/typing/TypingText";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import FAQ from "@/components/faq/FAQ";
 import { Gift, CheckCircle } from "lucide-react";
+
+/* ================= SEO HYDRATION ================= */
+function useSEOHydration() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/vouchers",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  return seo;
+}
+
+/* ================= SEO METADATA ================= */
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/vouchers",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: SEO_CONFIG.defaultTitle,
+      description: SEO_CONFIG.defaultDescription,
+    };
+  }
+}
 
 /* ================= COUNT UP ================= */
 function CountUp({ end, duration = 2000 }: { end: number; duration?: number }) {
@@ -69,8 +123,14 @@ const faqs = [
 ];
 
 export default function VouchersPage() {
+  const seo = useSEOHydration();
+
   return (
     <>
+      {/* Structured SEO Data */}
+      {seo && <SeoRenderer seo={seo} />}
+
+      {/* Existing SEO Engine (kept intact) */}
       <SeoEngine
         title="Vouchers & Gift Cards | Cashog"
         description="Claim premium vouchers instantly with Cashog."
@@ -79,7 +139,7 @@ export default function VouchersPage() {
       <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
 
-        {/* HERO (INDIVIDUAL LOGIC) */}
+        {/* HERO */}
         <section className="relative z-10 py-32 px-6 text-center">
           <Reveal>
             <h1 className="text-4xl md:text-6xl font-extrabold mb-6">
@@ -100,7 +160,7 @@ export default function VouchersPage() {
           </Reveal>
         </section>
 
-        {/* STATS (INDIVIDUAL CARDS) */}
+        {/* STATS */}
         <section className="relative z-10 py-28 px-6">
           <Reveal>
             <div className="text-center mb-16">
@@ -133,7 +193,7 @@ export default function VouchersPage() {
           </div>
         </section>
 
-        {/* VOUCHERS (INDIVIDUAL CARDS) */}
+        {/* VOUCHERS */}
         <section className="relative z-10 py-28 px-6 max-w-7xl mx-auto">
           <Reveal>
             <div className="text-center mb-16">
@@ -184,7 +244,7 @@ export default function VouchersPage() {
           </div>
         </section>
 
-        {/* TESTIMONIALS (INDIVIDUAL CARDS) */}
+        {/* TESTIMONIALS */}
         <section className="relative z-10 py-28 px-6">
           <Reveal>
             <div className="text-center mb-16">
@@ -204,9 +264,7 @@ export default function VouchersPage() {
                   whileHover={{ y: -6 }}
                   className="bg-white dark:bg-[#0a0d16] rounded-3xl p-6 shadow-md border"
                 >
-                  <p className="italic text-gray-600 dark:text-gray-300">
-                    “{itemData.text}”
-                  </p>
+                  <p className="italic">“{itemData.text}”</p>
                   <h3 className="mt-4 font-semibold text-green-500">
                     — {itemData.name}
                   </h3>
