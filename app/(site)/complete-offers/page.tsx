@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import SeoEngine from "@/components/seo/SeoEngine";
+import SeoEngine from "@/components/SEO/seoEngine.ts";
 import Background from "@/components/Background";
 import Reveal from "@/components/animations/Reveal";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
