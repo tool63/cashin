@@ -29,10 +29,10 @@ export const SEO_CONFIG = {
   },
 
   // ==========================================================
-  // Default Meta
+  // Default Meta (Updated Titles)
   // ==========================================================
-  defaultTitle: 'Cashog – #1 Rewards Platform: Earn Money, Gift Cards & Crypto',
-  titleTemplate: '%s | Cashog - Earn Money Online',
+  defaultTitle: 'Earn Money From Online - Cashog',
+  titleTemplate: '%s - Cashog',
   defaultDescription:
     'Join 10M+ users earning real money with Cashog. Complete offers, surveys, and tasks to earn PayPal cash, gift cards, and crypto rewards. Start earning today!',
 
