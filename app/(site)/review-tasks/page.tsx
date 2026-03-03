@@ -1,7 +1,12 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import SeoEngine from "@/components/seo/SeoEngine";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
+
 import Background from "@/components/Background";
 import Reveal from "@/components/animations/Reveal";
 import TypingText from "@/components/typing/TypingText";
@@ -14,6 +19,56 @@ import {
   ShieldCheck,
   Trophy,
 } from "lucide-react";
+
+/* ================= SEO HYDRATION ================= */
+function useSEOHydration() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/review-tasks",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  return seo;
+}
+
+/* ================= SEO METADATA ================= */
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/review-tasks",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: SEO_CONFIG.defaultTitle,
+      description: SEO_CONFIG.defaultDescription,
+    };
+  }
+}
 
 type TaskReview = {
   id: number;
@@ -112,9 +167,16 @@ const faqs = [
   { q: "Do I need experience?", a: "No. Anyone can complete tasks and earn rewards." },
 ];
 
+/* ================= PAGE COMPONENT ================= */
 export default function ReviewTasksPage() {
+  const seo = useSEOHydration();
+
   return (
     <>
+      {/* Structured SEO Data */}
+      {seo && <SeoRenderer seo={seo} />}
+
+      {/* Existing SEO Engine (kept intact) */}
       <SeoEngine
         title="Review Tasks | Cashog"
         description="Review tasks, submit feedback, and earn instant rewards. Modern and premium experience."
@@ -123,7 +185,7 @@ export default function ReviewTasksPage() {
       <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
 
-        {/* ================= HERO WITH TYPING TEXT ================= */}
+        {/* HERO WITH TYPING TEXT */}
         <section className="relative z-10 py-28 px-6 text-center">
           <Reveal>
             <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
@@ -145,7 +207,7 @@ export default function ReviewTasksPage() {
           </Reveal>
         </section>
 
-        {/* ================= TASK REVIEW CARDS ================= */}
+        {/* TASK REVIEW CARDS */}
         <section className="relative z-10 py-24 px-6 max-w-7xl mx-auto">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
@@ -209,7 +271,7 @@ export default function ReviewTasksPage() {
           </div>
         </section>
 
-        {/* ================= TRUST SECTION ================= */}
+        {/* TRUST SECTION */}
         <section className="relative z-10 max-w-6xl mx-auto px-6 py-24">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
@@ -245,7 +307,7 @@ export default function ReviewTasksPage() {
           </div>
         </section>
 
-        {/* ================= FAQ ================= */}
+        {/* FAQ */}
         <section className="relative z-10 max-w-4xl mx-auto px-6 py-20 text-center">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -259,7 +321,7 @@ export default function ReviewTasksPage() {
           <FAQ faqs={faqs} />
         </section>
 
-        {/* ================= FINAL CTA ================= */}
+        {/* FINAL CTA */}
         <section className="relative z-10 py-28 px-6 text-center">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
