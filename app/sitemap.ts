@@ -8,6 +8,19 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || SEO_CONFIG.siteUrl
 // Revalidate every hour (optional)
 export const revalidate = 3600
 
+// ==========================================================
+// Utility: Deduplicate URLs (Ultra Premium)
+// ==========================================================
+function dedupe(entries: MetadataRoute.Sitemap) {
+  const seen = new Set<string>()
+  return entries.filter((item) => {
+    if (!item.url) return false
+    if (seen.has(item.url)) return false
+    seen.add(item.url)
+    return true
+  })
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // No sitemap in dev or staging
   if (!isProduction) {
@@ -44,7 +57,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   })
 
   // ===========================
-  // 2️⃣ DYNAMIC CONTENT (API)
+  // 2️⃣ INTERNATIONAL URL SUPPORT (Ultra Premium)
+  // ===========================
+  const locales = SEO_CONFIG.supportedLocales || ['en']
+
+  locales.forEach((locale) => {
+    const prefix = locale === SEO_CONFIG.defaultLocale ? '' : `/${locale}`
+
+    staticPages.forEach(({ path, priority, frequency }) => {
+      entries.push({
+        url: `${baseUrl}${prefix}${path}`,
+        lastModified: new Date(),
+        changeFrequency: frequency as MetadataRoute.Sitemap[number]['changeFrequency'],
+        priority: Math.max(priority - 0.05, 0.1),
+      })
+    })
+  })
+
+  // ===========================
+  // 3️⃣ DYNAMIC CONTENT (API)
   // ===========================
   try {
     const [offersRes, blogRes, categoriesRes] = await Promise.allSettled([
@@ -95,5 +126,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error('Sitemap dynamic fetch failed:', error)
   }
 
-  return entries
+  // Final: Deduplicate URLs (Ultra Premium)
+  return dedupe(entries)
 }
