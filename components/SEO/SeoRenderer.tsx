@@ -10,27 +10,38 @@ interface SeoRendererProps {
   children?: React.ReactNode;
   defer?: boolean;
   priority?: 'high' | 'low';
-  onRender?: (metrics: any) => void;
+  onRender?: (metrics: SEORenderMetrics) => void;
 }
 
-export default function SeoRenderer({ 
-  seo, 
+export interface SEORenderMetrics {
+  pathname: string;
+  searchParams: Record<string, string>;
+  pageType: string;
+  canonical?: string;
+  schemaCount: number;
+  metadataSize: number;
+  timestamp: number;
+}
+
+export default function SeoRenderer({
+  seo,
   children,
   defer = false,
   priority = 'high',
-  onRender 
+  onRender,
 }: SeoRendererProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  // Memoize structured data to prevent unnecessary re-renders
+  // ==========================================================
+  // Structured Data (Schema.org)
+  // ==========================================================
   const structuredDataScripts = useMemo(() => {
     if (!seo.structuredData?.length) return null;
 
     return seo.structuredData
-      .filter(schema => schema && Object.keys(schema).length > 0)
+      .filter((schema) => schema && Object.keys(schema).length > 0)
       .map((schema, index) => {
-        // Ensure @context is present
         const schemaWithContext = {
           '@context': 'https://schema.org',
           ...schema,
@@ -38,10 +49,10 @@ export default function SeoRenderer({
 
         return (
           <script
-            key={`schema-${index}-${schema['@type'] || 'data'}`}
+            key={`schema-${index}-${(schema as any)['@type'] || 'data'}`}
             type="application/ld+json"
-            dangerouslySetInnerHTML={{ 
-              __html: JSON.stringify(schemaWithContext, null, 0) 
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(schemaWithContext),
             }}
             defer={defer}
           />
@@ -49,10 +60,14 @@ export default function SeoRenderer({
       });
   }, [seo.structuredData, defer]);
 
-  // Generate meta tags from metadata
+  // ==========================================================
+  // Meta Tags
+  // ==========================================================
   const metaTags = useMemo(() => {
     const tags: React.ReactNode[] = [];
     const metadata = seo.metadata;
+
+    if (!metadata) return tags;
 
     // Title
     if (metadata.title) {
@@ -74,100 +89,95 @@ export default function SeoRenderer({
 
     // Keywords
     if (metadata.keywords) {
-      tags.push(
-        <meta key="keywords" name="keywords" content={metadata.keywords} />
-      );
+      tags.push(<meta key="keywords" name="keywords" content={metadata.keywords} />);
     }
 
     // Canonical
     if (seo.canonical) {
-      tags.push(
-        <link key="canonical" rel="canonical" href={seo.canonical} />
-      );
+      tags.push(<link key="canonical" rel="canonical" href={seo.canonical} />);
     }
 
     // Hreflang
     if (seo.hreflang) {
       Object.entries(seo.hreflang).forEach(([lang, href]) => {
         tags.push(
-          <link
-            key={`hreflang-${lang}`}
-            rel="alternate"
-            hrefLang={lang}
-            href={href}
-          />
+          <link key={`hreflang-${lang}`} rel="alternate" hrefLang={lang} href={href} />
         );
       });
     }
 
     // Robots
     if (metadata.robots) {
-      const robotsValue = typeof metadata.robots === 'string' 
-        ? metadata.robots 
-        : `${metadata.robots.index ? 'index' : 'noindex'}, ${metadata.robots.follow ? 'follow' : 'nofollow'}`;
-      
-      tags.push(
-        <meta key="robots" name="robots" content={robotsValue} />
-      );
+      const robotsValue =
+        typeof metadata.robots === 'string'
+          ? metadata.robots
+          : `${metadata.robots.index ? 'index' : 'noindex'}, ${
+              metadata.robots.follow ? 'follow' : 'nofollow'
+            }`;
+
+      tags.push(<meta key="robots" name="robots" content={robotsValue} />);
     }
 
     // OpenGraph
     if (metadata.openGraph) {
       const og = metadata.openGraph;
-      
+
       if (og.images?.[0]?.url) {
         tags.push(
           <meta key="og:image" property="og:image" content={og.images[0].url} />,
-          <meta key="og:image:width" property="og:image:width" content={String(og.images[0].width || 1200)} />,
-          <meta key="og:image:height" property="og:image:height" content={String(og.images[0].height || 630)} />,
-          <meta key="og:image:alt" property="og:image:alt" content={og.images[0].alt || metadata.title} />
+          <meta
+            key="og:image:width"
+            property="og:image:width"
+            content={String(og.images[0].width || 1200)}
+          />,
+          <meta
+            key="og:image:height"
+            property="og:image:height"
+            content={String(og.images[0].height || 630)}
+          />,
+          <meta
+            key="og:image:alt"
+            property="og:image:alt"
+            content={og.images[0].alt || metadata.title}
+          />
         );
       }
-      
-      if (og.url) {
-        tags.push(<meta key="og:url" property="og:url" content={og.url} />);
-      }
-      
-      if (og.type) {
-        tags.push(<meta key="og:type" property="og:type" content={og.type} />);
-      }
-      
-      if (og.siteName) {
+
+      if (og.url) tags.push(<meta key="og:url" property="og:url" content={og.url} />);
+      if (og.type) tags.push(<meta key="og:type" property="og:type" content={og.type} />);
+      if (og.siteName)
         tags.push(<meta key="og:site_name" property="og:site_name" content={og.siteName} />);
-      }
-      
-      if (og.locale) {
+      if (og.locale)
         tags.push(<meta key="og:locale" property="og:locale" content={og.locale} />);
-      }
     }
 
     // Twitter Card
     if (metadata.twitter) {
       const twitter = metadata.twitter;
-      
-      if (twitter.card) {
+
+      if (twitter.card)
         tags.push(<meta key="twitter:card" name="twitter:card" content={twitter.card} />);
-      }
-      
-      if (twitter.site) {
+      if (twitter.site)
         tags.push(<meta key="twitter:site" name="twitter:site" content={twitter.site} />);
-      }
-      
-      if (twitter.images?.[0]) {
+      if (twitter.images?.[0])
         tags.push(<meta key="twitter:image" name="twitter:image" content={twitter.images[0]} />);
-      }
-      
-      if (twitter.imageAlt) {
-        tags.push(<meta key="twitter:image:alt" name="twitter:image:alt" content={twitter.imageAlt} />);
-      }
+      if (twitter.imageAlt)
+        tags.push(
+          <meta
+            key="twitter:image:alt"
+            name="twitter:image:alt"
+            content={twitter.imageAlt}
+          />
+        );
     }
 
     // Viewport
     if (metadata.viewport) {
-      const viewportValue = typeof metadata.viewport === 'string'
-        ? metadata.viewport
-        : `width=${metadata.viewport.width}, initial-scale=${metadata.viewport.initialScale}`;
-      
+      const viewportValue =
+        typeof metadata.viewport === 'string'
+          ? metadata.viewport
+          : `width=${metadata.viewport.width}, initial-scale=${metadata.viewport.initialScale}`;
+
       tags.push(<meta key="viewport" name="viewport" content={viewportValue} />);
     }
 
@@ -183,11 +193,7 @@ export default function SeoRenderer({
       Object.entries(metadata.verification).forEach(([key, value]) => {
         if (value) {
           tags.push(
-            <meta
-              key={`verify-${key}`}
-              name={`${key}-verification`}
-              content={value}
-            />
+            <meta key={`verify-${key}`} name={`${key}-verification`} content={value} />
           );
         }
       });
@@ -196,18 +202,16 @@ export default function SeoRenderer({
     return tags;
   }, [seo]);
 
-  // Resource hints
+  // ==========================================================
+  // Resource Hints
+  // ==========================================================
   const resourceHints = useMemo(() => {
     const hints: React.ReactNode[] = [];
 
-    // Preconnect
     seo.preconnect?.forEach((url, index) => {
-      hints.push(
-        <link key={`preconnect-${index}`} rel="preconnect" href={url} />
-      );
+      hints.push(<link key={`preconnect-${index}`} rel="preconnect" href={url} />);
     });
 
-    // Resource links
     seo.links?.forEach((link, index) => {
       hints.push(
         <link
@@ -219,50 +223,51 @@ export default function SeoRenderer({
       );
     });
 
-    // Prefetch
     seo.prefetch?.forEach((url, index) => {
-      hints.push(
-        <link key={`prefetch-${index}`} rel="prefetch" href={url} />
-      );
+      hints.push(<link key={`prefetch-${index}`} rel="prefetch" href={url} />);
     });
 
-    // Prerender
     seo.prerender?.forEach((url, index) => {
-      hints.push(
-        <link key={`prerender-${index}`} rel="prerender" href={url} />
-      );
+      hints.push(<link key={`prerender-${index}`} rel="prerender" href={url} />);
     });
 
     return hints;
   }, [seo]);
 
-  // Performance monitoring
+  // ==========================================================
+  // Performance Monitoring
+  // ==========================================================
   useEffect(() => {
-    if (onRender) {
-      const metrics = {
-        pathname,
-        searchParams: Object.fromEntries(searchParams.entries()),
-        pageType: seo.pageType.type,
-        canonical: seo.canonical,
-        schemaCount: seo.structuredData.length,
-        metadataSize: JSON.stringify(seo.metadata).length,
-        timestamp: Date.now(),
-      };
-      
-      onRender(metrics);
-    }
+    if (!onRender) return;
+
+    const metrics: SEORenderMetrics = {
+      pathname,
+      searchParams: Object.fromEntries(searchParams.entries()),
+      pageType: seo.pageType?.type || 'unknown',
+      canonical: seo.canonical,
+      schemaCount: seo.structuredData?.length || 0,
+      metadataSize: JSON.stringify(seo.metadata || {}).length,
+      timestamp: Date.now(),
+    };
+
+    onRender(metrics);
   }, [seo, pathname, searchParams, onRender]);
 
-  // Priority loading
+  // ==========================================================
+  // Priority Resource Loading
+  // ==========================================================
   useEffect(() => {
-    if (priority === 'high') {
-      // Load critical SEO resources immediately
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'fetch';
-      link.href = seo.canonical;
-      document.head.appendChild(link);
-    }
+    if (priority !== 'high' || !seo.canonical) return;
+
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'document';
+    link.href = seo.canonical;
+    document.head.appendChild(link);
+
+    return () => {
+      document.head.removeChild(link);
+    };
   }, [priority, seo.canonical]);
 
   return (
@@ -277,7 +282,9 @@ export default function SeoRenderer({
   );
 }
 
-// Lazy-loaded version for non-critical pages
-export const LazySeoRenderer = React.lazy(() => 
+// ============================================================
+// Lazy Loaded Version (Non-Critical Pages)
+// ============================================================
+export const LazySeoRenderer = React.lazy(() =>
   Promise.resolve({ default: SeoRenderer })
 );
