@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import {
   Trophy,
   User,
@@ -10,18 +11,31 @@ import {
   Shield,
   TrendingUp,
 } from "lucide-react";
-import { motion } from "framer-motion";
+
 import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
 import SeoRenderer from "@/components/SEO/SeoRenderer";
 
-import TypingText from "@/components/typing/TypingText";
 import Background from "@/components/Background";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
 import FAQ from "@/components/faq/FAQ";
+import TypingText from "@/components/typing/TypingText";
 
-/* ================= SEO (Server Metadata) ================= */
+/* ================= PREMIUM MINING TASKS ================= */
+const miningRewards = [
+  { title: "Crypto Basics", category: "Beginner", difficulty: "Easy", reward: "$2" },
+  { title: "Blockchain Fundamentals", category: "Education", difficulty: "Medium", reward: "$3" },
+  { title: "Altcoin Research", category: "Research", difficulty: "Medium", reward: "$4" },
+  { title: "Mining Strategy Guide", category: "Pro", difficulty: "Hard", reward: "$5" },
+  { title: "Market Analysis Task", category: "Analytics", difficulty: "Hard", reward: "$6" },
+  { title: "Daily Mining Challenge", category: "Task", difficulty: "Easy", reward: "$2.5" },
+  { title: "Crypto Portfolio Tips", category: "Education", difficulty: "Medium", reward: "$3.5" },
+  { title: "Reward Booster Mission", category: "Bonus", difficulty: "Hard", reward: "$7" },
+  { title: "Advanced Mining Guide", category: "Expert", difficulty: "Very Hard", reward: "$8" },
+];
+
+/* ================= SEO METADATA ================= */
 
 export async function generateMetadata() {
   try {
@@ -48,32 +62,29 @@ export async function generateMetadata() {
   }
 }
 
-/* ================= SEO Metrics Hook ================= */
+/* ================= SEO HYDRATION ================= */
+function useSEOHydration() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
 
-function useSEOMetrics(seo: SEOOutput | null) {
   useEffect(() => {
-    if (!seo?.metrics) return;
+    let mounted = true;
 
-    console.log("[SEO Metrics]", {
-      score: seo.metrics.seoScore ?? "n/a",
-      pageType: seo.pageType?.type,
-      generationTime: seo.metrics.generationTime,
-    });
-  }, [seo]);
+    buildSEO({
+      route: "/mining-rewards",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  return seo;
 }
-
-/* ================= PREMIUM MINING TASKS ================= */
-const miningRewards = [
-  { title: "Crypto Basics", category: "Beginner", difficulty: "Easy", reward: "$2" },
-  { title: "Blockchain Fundamentals", category: "Education", difficulty: "Medium", reward: "$3" },
-  { title: "Altcoin Research", category: "Research", difficulty: "Medium", reward: "$4" },
-  { title: "Mining Strategy Guide", category: "Pro", difficulty: "Hard", reward: "$5" },
-  { title: "Market Analysis Task", category: "Analytics", difficulty: "Hard", reward: "$6" },
-  { title: "Daily Mining Challenge", category: "Task", difficulty: "Easy", reward: "$2.5" },
-  { title: "Crypto Portfolio Tips", category: "Education", difficulty: "Medium", reward: "$3.5" },
-  { title: "Reward Booster Mission", category: "Bonus", difficulty: "Hard", reward: "$7" },
-  { title: "Advanced Mining Guide", category: "Expert", difficulty: "Very Hard", reward: "$8" },
-];
 
 /* ================= FEATURES ================= */
 const features = [
@@ -118,31 +129,13 @@ const faqs = [
   },
 ];
 
+/* ================= PAGE COMPONENT ================= */
 export default function MiningRewardsPage() {
-  /* SEO Hydration (Client Side) */
-  const [seo, setSeo] = useState<SEOOutput | null>(null);
-  useSEOMetrics(seo);
-
-  useEffect(() => {
-    let mounted = true;
-
-    buildSEO({
-      route: "/mining-rewards",
-      locale: SEO_CONFIG.defaultLocale,
-    })
-      .then((result) => {
-        if (mounted) setSeo(result);
-      })
-      .catch((err) => console.error("SEO hydration failed:", err));
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
+  const seo = useSEOHydration();
 
   return (
     <>
-      {/* Structured Data & Meta Tags */}
+      {/* Structured SEO Data */}
       {seo && <SeoRenderer seo={seo} />}
 
       <main className="relative min-h-screen text-gray-900 dark:text-white">
@@ -157,7 +150,7 @@ export default function MiningRewardsPage() {
                 Premium Mining Rewards
               </h1>
 
-              <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 gradient-text">
+              <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold gradient-text mb-6">
                 <TypingText />
               </div>
 
@@ -183,13 +176,12 @@ export default function MiningRewardsPage() {
             </div>
           </Reveal>
 
-          {/* OFFER CARDS */}
+          {/* TASK CARDS */}
           <div className="grid gap-6 md:gap-8 md:grid-cols-3 mb-28">
             {miningRewards.map((task) => (
               <Reveal key={task.title}>
                 <motion.div
                   whileHover={{ y: -6 }}
-                  transition={{ type: "spring", stiffness: 200 }}
                   className="bg-white/90 dark:bg-[#0c111b]/90 backdrop-blur-xl rounded-2xl p-6 shadow-sm"
                 >
                   <div className="flex justify-between items-center mb-4">
@@ -203,6 +195,7 @@ export default function MiningRewardsPage() {
                   <p className="text-sm text-gray-500 dark:text-gray-400">
                     Difficulty: {task.difficulty}
                   </p>
+
                   <p className="text-green-500 font-semibold mt-1">
                     Reward: {task.reward}
                   </p>
@@ -219,6 +212,19 @@ export default function MiningRewardsPage() {
                             : "50%",
                       }}
                     />
+                  </div>
+
+                  <p className="text-xs text-gray-500 mt-2">
+                    Completion Potential
+                  </p>
+
+                  <div className="mt-6">
+                    <a
+                      href="/signup"
+                      className="inline-flex items-center justify-center px-5 py-2 text-sm font-semibold rounded-xl bg-gradient-to-r from-yellow-400 to-green-400 text-black"
+                    >
+                      Complete Task
+                    </a>
                   </div>
                 </motion.div>
               </Reveal>
@@ -242,16 +248,10 @@ export default function MiningRewardsPage() {
               <Reveal key={feature.title}>
                 <motion.div
                   whileHover={{ y: -4 }}
-                  className="bg-white dark:bg-[#0c111b] rounded-2xl p-6 text-center"
+                  className="bg-white/90 dark:bg-[#0c111b]/90 backdrop-blur-xl rounded-2xl p-6 text-center"
                 >
-                  <div className="mb-4 flex justify-center">
-                    {feature.icon}
-                  </div>
-
-                  <h3 className="text-lg font-semibold mb-2">
-                    {feature.title}
-                  </h3>
-
+                  <div className="mb-4 flex justify-center">{feature.icon}</div>
+                  <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
                   <p className="text-gray-600 dark:text-gray-300 text-sm">
                     {feature.description}
                   </p>
@@ -272,23 +272,36 @@ export default function MiningRewardsPage() {
 
           <div className="grid gap-6 md:gap-8 md:grid-cols-3 mb-28">
             {[
-              { icon: <User size={32} className="text-yellow-400" />, title: "Create Account", desc: "Join in seconds." },
-              { icon: <Trophy size={32} className="text-green-400" />, title: "Complete Tasks", desc: "Finish challenges and earn rewards." },
-              { icon: <Gift size={32} className="text-yellow-400" />, title: "Withdraw", desc: "Redeem earnings securely." },
+              {
+                icon: <User size={32} className="text-yellow-400" />,
+                title: "Create Account",
+                desc: "Join in seconds and start earning opportunities.",
+              },
+              {
+                icon: <Trophy size={32} className="text-green-400" />,
+                title: "Complete Tasks",
+                desc: "Finish challenges and unlock rewards.",
+              },
+              {
+                icon: <Gift size={32} className="text-yellow-400" />,
+                title: "Withdraw",
+                desc: "Redeem earnings securely and easily.",
+              },
             ].map((step) => (
-              <motion.div
-                key={step.title}
-                whileHover={{ y: -6 }}
-                className="bg-white dark:bg-[#0c111b] rounded-2xl p-6 text-center"
-              >
-                <div className="mb-4 flex justify-center">
+              <Reveal key={step.title}>
+                <motion.div
+                  whileHover={{ y: -6 }}
+                  className="bg-white dark:bg-[#0c111b] rounded-2xl p-6 text-center"
+                >
                   {step.icon}
-                </div>
-                <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300 text-sm">
-                  {step.desc}
-                </p>
-              </motion.div>
+                  <h3 className="text-xl font-semibold mt-4 mb-2">
+                    {step.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">
+                    {step.desc}
+                  </p>
+                </motion.div>
+              </Reveal>
             ))}
           </div>
 
@@ -297,6 +310,7 @@ export default function MiningRewardsPage() {
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
               Frequently Asked Questions
             </h2>
+
             <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
               Everything you need to know about Mining Rewards
             </p>
@@ -312,9 +326,11 @@ export default function MiningRewardsPage() {
               <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
                 Ready to Start Earning?
               </h2>
-              <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-10">
+
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed mb-10">
                 Join today and unlock premium earning opportunities.
               </p>
+
               <PrimaryCTA href="/signup">
                 Join Now
               </PrimaryCTA>
