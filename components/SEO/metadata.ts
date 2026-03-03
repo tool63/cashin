@@ -4,15 +4,36 @@ import { PageType } from './pageTypes';
 import { buildCanonical } from './canonical';
 import { buildHreflang } from './hreflang';
 
-// ============================================================
-// Types
-// ============================================================
 export interface MetadataInput {
   pageType: PageType;
   route: string;
   locale?: string;
   canonical?: string;
-  data?: any;
+  data?: {
+    title?: string;
+    description?: string;
+    image?: string;
+    imageAlt?: string;
+    video?: string;
+    audio?: string;
+    keywords?: string[];
+    author?: string;
+    publishedAt?: string;
+    updatedAt?: string;
+    category?: string;
+    tags?: string[];
+    rating?: number;
+    reviewCount?: number;
+    price?: number;
+    currency?: string;
+    availability?: 'instock' | 'outofstock' | 'preorder';
+    brand?: string;
+    sku?: string;
+    mpn?: string;
+    page?: number;
+    query?: string;
+    username?: string;
+  };
   queryParams?: Record<string, string>;
   noindex?: boolean;
   nofollow?: boolean;
@@ -30,13 +51,18 @@ export interface MetadataOutput extends Metadata {
   };
 }
 
-// ============================================================
-// Main Metadata Builder
-// ============================================================
+/**
+ * Builds full Next.js metadata with ultra SEO optimizations
+ */
 export function buildMetadata(input: MetadataInput): MetadataOutput {
+  if (!input.route) {
+    console.warn('[SEO Metadata] Empty route -> "/"');
+    input.route = '/';
+  }
+
   const {
     pageType,
-    route = '/',
+    route,
     locale = SEO_CONFIG.defaultLocale,
     canonical,
     data = {},
@@ -47,11 +73,11 @@ export function buildMetadata(input: MetadataInput): MetadataOutput {
   } = input;
 
   const baseUrl = SEO_CONFIG.siteUrl;
-  const primaryKeyword = SEO_CONFIG.primaryKeyword;
+  const primaryKeyword = SEO_CONFIG.primaryKeyword || 'earn money online';
 
-  // ========================================================
-  // Canonical
-  // ========================================================
+  // ==========================================================
+  // Canonical (SEO Best Practice)
+  // ==========================================================
   const fullUrl =
     canonical ||
     buildCanonical(route, {
@@ -59,9 +85,9 @@ export function buildMetadata(input: MetadataInput): MetadataOutput {
       removeParams: ['utm_', 'ref', 'source', 'fbclid', 'gclid'],
     });
 
-  // ========================================================
-  // Smart Title Builder
-  // ========================================================
+  // ==========================================================
+  // Title Builder (Ultra CTR & Keyword Optimized)
+  // ==========================================================
   let title = data.title || SEO_CONFIG.defaultTitle;
 
   if (!title.toLowerCase().includes(primaryKeyword)) {
@@ -72,14 +98,13 @@ export function buildMetadata(input: MetadataInput): MetadataOutput {
     title += ` - Page ${data.page}`;
   }
 
-  // Add high-CTR modifiers for key pages
   if (route.includes('earn') && !title.includes('Trusted')) {
     title += ' (Trusted & Legit)';
   }
 
-  // ========================================================
-  // Smart Description Builder
-  // ========================================================
+  // ==========================================================
+  // Description Builder (High CTR)
+  // ==========================================================
   let description =
     data.description || SEO_CONFIG.defaultDescription;
 
@@ -91,9 +116,9 @@ export function buildMetadata(input: MetadataInput): MetadataOutput {
     description = `Results for "${queryParams.q}". ${description}`;
   }
 
-  // ========================================================
-  // Smart Keywords
-  // ========================================================
+  // ==========================================================
+  // Smart Keywords (Deduplicated)
+  // ==========================================================
   const keywords = Array.from(
     new Set([
       ...(SEO_CONFIG.defaultKeywords || []),
@@ -102,9 +127,9 @@ export function buildMetadata(input: MetadataInput): MetadataOutput {
     ])
   );
 
-  // ========================================================
-  // Robots
-  // ========================================================
+  // ==========================================================
+  // Robots (Indexing Control)
+  // ==========================================================
   const robots =
     noindex || process.env.NODE_ENV !== 'production'
       ? {
@@ -117,9 +142,9 @@ export function buildMetadata(input: MetadataInput): MetadataOutput {
           follow: !nofollow,
         };
 
-  // ========================================================
-  // Hreflang
-  // ========================================================
+  // ==========================================================
+  // Hreflang (Locale Support)
+  // ==========================================================
   const alternates = buildHreflang(route, {
     addLanguagePrefix: true,
     includeDefault: true,
@@ -130,9 +155,9 @@ export function buildMetadata(input: MetadataInput): MetadataOutput {
   const image =
     data.image || SEO_CONFIG.defaultOgImage;
 
-  // ========================================================
+  // ==========================================================
   // Return Premium Metadata
-  // ========================================================
+  // ==========================================================
   return {
     metadataBase: new URL(baseUrl),
 
@@ -154,21 +179,57 @@ export function buildMetadata(input: MetadataInput): MetadataOutput {
       description,
       siteName,
       locale: ogLocale,
-      images: [
-        {
-          url: image,
-          width: 1200,
-          height: 630,
-          alt: data.imageAlt || title,
-        },
-      ],
+      images: image
+        ? [
+            {
+              url: image,
+              width: 1200,
+              height: 630,
+              alt: data.imageAlt || title,
+            },
+          ]
+        : undefined,
+      videos: data.video
+        ? [
+            {
+              url: data.video,
+              width: 1280,
+              height: 720,
+              type: 'video/mp4',
+            },
+          ]
+        : undefined,
+      audio: data.audio
+        ? [
+            {
+              url: data.audio,
+              type: 'audio/mpeg',
+            },
+          ]
+        : undefined,
+
       ...(pageType === 'blog_post' && {
+        type: 'article',
         article: {
           publishedTime: data.publishedAt,
           modifiedTime: data.updatedAt,
           authors: data.author ? [data.author] : undefined,
           tags: data.tags,
           section: data.category,
+        },
+      }),
+
+      ...(pageType.includes('offer') && {
+        type: 'product',
+        product: {
+          price: data.price,
+          priceCurrency: data.currency || 'USD',
+          availability: data.availability
+            ? `https://schema.org/${data.availability === 'instock' ? 'InStock' : 'OutOfStock'}`
+            : undefined,
+          brand: data.brand,
+          sku: data.sku,
+          mpn: data.mpn,
         },
       }),
     },
@@ -178,7 +239,8 @@ export function buildMetadata(input: MetadataInput): MetadataOutput {
       title,
       description,
       site: SEO_CONFIG.twitterHandle,
-      images: [image],
+      images: image ? [image] : undefined,
+      imageAlt,
     },
 
     verification: SEO_CONFIG.verification,
@@ -191,8 +253,21 @@ export function buildMetadata(input: MetadataInput): MetadataOutput {
     },
 
     icons: {
-      icon: '/favicon.ico',
-      apple: '/apple-touch-icon.png',
+      icon: [
+        { url: '/favicon.ico', sizes: 'any' },
+        { url: '/icon-192x192.png', sizes: '192x192', type: 'image/png' },
+        { url: '/icon-512x512.png', sizes: '512x512', type: 'image/png' },
+      ],
+      apple: [
+        { url: '/apple-icon-180x180.png', sizes: '180x180', type: 'image/png' },
+      ],
+      other: [
+        {
+          rel: 'mask-icon',
+          url: '/safari-pinned-tab.svg',
+          color: SEO_CONFIG.themeColor,
+        },
+      ],
     },
 
     manifest: '/manifest.json',
@@ -204,14 +279,25 @@ export function buildMetadata(input: MetadataInput): MetadataOutput {
     },
 
     formatDetection: {
-      telephone: false,
+      telephone: true,
+      date: true,
+      address: true,
+      email: true,
+      url: true,
     },
 
+    itunes: process.env.ITUNES_APP_ID
+      ? {
+          appId: process.env.ITUNES_APP_ID,
+          appArgument: fullUrl,
+        }
+      : undefined,
+
     other: {
-      'theme-color': SEO_CONFIG.themeColor,
       'application-name': siteName,
-      'apple-mobile-web-app-title': siteName,
-      'og:updated_time': data.updatedAt || undefined,
+      'msapplication-TileColor': SEO_CONFIG.themeColor,
+      'msapplication-TileImage': '/ms-icon-144x144.png',
+      'theme-color': SEO_CONFIG.themeColor,
     },
   };
 }
