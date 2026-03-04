@@ -1,59 +1,156 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { ArrowRight, User, CreditCard, Gift, CheckCircle, ShieldCheck, Trophy } from "lucide-react";
+import {
+  ArrowRight,
+  User,
+  CreditCard,
+  Gift,
+  CheckCircle,
+  ShieldCheck,
+  Trophy,
+} from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
-import Meta from "@/components/SEO/seoEngine.ts";
 import TypingText from "@/components/typing/TypingText";
+
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
+
+/* =========================
+   Dynamic Metadata (Server-Side)
+========================= */
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/earn-dogecoin-online",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: "Earn Dogecoin Online - Cashog",
+      description:
+        "Learn how to earn Dogecoin online by completing tasks, surveys, and offers with Cashog.",
+    };
+  }
+}
 
 /* ================= STEPS ================= */
 const steps = [
   {
     icon: <User size={32} className="text-yellow-400" />,
     title: "Sign Up for Free",
-    description: "Create your Cashog account and start earning Dogecoin instantly with our platform.",
+    description:
+      "Create your Cashog account and start earning Dogecoin instantly with our platform.",
   },
   {
     icon: <CreditCard size={32} className="text-green-400" />,
     title: "Complete Tasks & Offers",
-    description: "Play games, watch videos, install apps, or complete surveys to earn points that convert to Dogecoin.",
+    description:
+      "Play games, watch videos, install apps, or complete surveys to earn points that convert to Dogecoin.",
   },
   {
     icon: <Gift size={32} className="text-yellow-400" />,
     title: "Convert Points to Dogecoin",
-    description: "Redeem your points safely and instantly for Dogecoin through secure wallets.",
+    description:
+      "Redeem your points safely and instantly for Dogecoin through secure wallets.",
   },
   {
     icon: <CheckCircle size={32} className="text-green-400" />,
     title: "Withdraw Instantly",
-    description: "Dogecoin is delivered directly to your wallet once the redemption threshold is reached.",
+    description:
+      "Dogecoin is delivered directly to your wallet once the redemption threshold is reached.",
   },
 ];
 
 /* ================= FEATURES ================= */
 const features = [
-  { title: "Instant Dogecoin Payouts", description: "Receive Dogecoin immediately after redeeming points." },
-  { title: "High-Paying Offers", description: "Earn maximum points from top offers for faster rewards." },
-  { title: "Global Access", description: "Available for users worldwide on any device." },
-  { title: "Mobile-Friendly", description: "Earn Dogecoin on mobile, tablet, or desktop anywhere." },
-  { title: "Trusted & Secure", description: "Millions of users trust Cashog for safe, verified Dogecoin payouts." },
-  { title: "24/7 Support", description: "Our support team is always ready to help with any questions." },
+  {
+    title: "Instant Dogecoin Payouts",
+    description:
+      "Receive Dogecoin immediately after redeeming points.",
+  },
+  {
+    title: "High-Paying Offers",
+    description:
+      "Earn maximum points from top offers for faster rewards.",
+  },
+  {
+    title: "Global Access",
+    description:
+      "Available for users worldwide on any device.",
+  },
+  {
+    title: "Mobile-Friendly",
+    description:
+      "Earn Dogecoin on mobile, tablet, or desktop anywhere.",
+  },
+  {
+    title: "Trusted & Secure",
+    description:
+      "Millions of users trust Cashog for safe, verified Dogecoin payouts.",
+  },
+  {
+    title: "24/7 Support",
+    description:
+      "Our support team is always ready to help with any questions.",
+  },
 ];
 
 /* ================= FAQ ================= */
 const faqs = [
-  { q: "How do I withdraw Dogecoin?", a: "After collecting points from tasks, redeem them for Dogecoin directly to your wallet instantly." },
-  { q: "Can I earn from mobile?", a: "Yes! The platform is fully responsive and works on any mobile device." },
-  { q: "Is signing up free?", a: "Absolutely! Creating an account and earning is 100% free." },
-  { q: "Is Dogecoin safe?", a: "Yes, all withdrawals are processed securely and instantly to verified wallets." },
-  { q: "How long does delivery take?", a: "Dogecoin payouts are delivered instantly after redemption." },
+  {
+    q: "How do I withdraw Dogecoin?",
+    a: "After collecting points from tasks, redeem them for Dogecoin directly to your wallet instantly.",
+  },
+  {
+    q: "Can I earn from mobile?",
+    a: "Yes! The platform is fully responsive and works on any mobile device.",
+  },
+  {
+    q: "Is signing up free?",
+    a: "Absolutely! Creating an account and earning is 100% free.",
+  },
+  {
+    q: "Is Dogecoin safe?",
+    a: "Yes, all withdrawals are processed securely and instantly to verified wallets.",
+  },
+  {
+    q: "How long does delivery take?",
+    a: "Dogecoin payouts are delivered instantly after redemption.",
+  },
 ];
+
+/* ================= SEO Metrics Hook ================= */
+function useSEOMetrics(seo: SEOOutput | null) {
+  useEffect(() => {
+    if (!seo?.metrics) return;
+
+    console.log("[SEO Metrics]", {
+      score: seo.metrics.seoScore ?? "n/a",
+      pageType: seo.pageType?.type,
+      generationTime: seo.metrics.generationTime,
+    });
+  }, [seo]);
+}
 
 /* ================= COUNTER COMPONENT ================= */
 function Counter({ end }: { end: number }) {
   const [count, setCount] = useState(0);
+
   useEffect(() => {
     let start = 0;
     const duration = 2000;
@@ -79,29 +176,54 @@ function Counter({ end }: { end: number }) {
 export default function EarnDogecoinOnline() {
   const { theme } = useTheme();
   const [isLoaded, setIsLoaded] = useState(false);
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  useSEOMetrics(seo);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100);
     return () => clearTimeout(timer);
   }, []);
 
+  /* ================= SEO Hydration ================= */
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/earn-dogecoin-online",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <>
-      <Meta
-        title="Cashog - Earn Dogecoin Online"
-        description="Learn how to earn Dogecoin online by completing tasks, surveys, and offers with Cashog. Instant, secure, and high-paying crypto rewards!"
-      />
+      {seo && <SeoRenderer seo={seo} />}
 
       <main
         className={`transition-colors duration-500 min-h-screen ${
-          theme === "dark" ? "bg-[#070A14] text-white" : "bg-white text-gray-900"
+          theme === "dark"
+            ? "bg-[#070A14] text-white"
+            : "bg-white text-gray-900"
         }`}
-        style={{ opacity: isLoaded ? 1 : 0, transition: "opacity 0.8s ease-in-out" }}
+        style={{
+          opacity: isLoaded ? 1 : 0,
+          transition: "opacity 0.8s ease-in-out",
+        }}
       >
         {/* ================= HERO ================= */}
         <section
           className={`relative py-24 px-4 text-center rounded-b-3xl transition-colors duration-500 ${
-            theme === "dark" ? "bg-[#111827] text-white" : "bg-gray-50 text-gray-900"
+            theme === "dark"
+              ? "bg-[#111827] text-white"
+              : "bg-gray-50 text-gray-900"
           }`}
         >
           <div className="max-w-3xl mx-auto">
@@ -113,13 +235,16 @@ export default function EarnDogecoinOnline() {
               <TypingText />
             </div>
 
-            <p className={`text-lg sm:text-xl md:text-2xl mb-8 leading-relaxed ${
-              theme === "dark" ? "text-gray-300" : "text-gray-700"
-            }`}>
+            <p
+              className={`text-lg sm:text-xl md:text-2xl mb-8 leading-relaxed ${
+                theme === "dark"
+                  ? "text-gray-300"
+                  : "text-gray-700"
+              }`}
+            >
               Complete tasks, offers, and surveys to earn Dogecoin instantly from anywhere, on any device.
             </p>
 
-            {/* ================= HERO CTA BUTTON (Connects to global floating CTA) ================= */}
             <Link href="/signup" className="cta-observer inline-block">
               <motion.span
                 whileHover={{ scale: 1.05 }}
@@ -146,8 +271,12 @@ export default function EarnDogecoinOnline() {
               }`}
             >
               <div className="mb-4">{step.icon}</div>
-              <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-              <p className={`text-gray-600 ${theme === "dark" ? "dark:text-gray-400" : ""}`}>{step.description}</p>
+              <h3 className="text-xl font-semibold mb-2">
+                {step.title}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                {step.description}
+              </p>
             </motion.div>
           ))}
         </section>
@@ -159,39 +288,50 @@ export default function EarnDogecoinOnline() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className={`bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 shadow hover:shadow-xl flex flex-col items-center`}
+            className="bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 shadow hover:shadow-xl flex flex-col items-center"
           >
             <Trophy size={32} className="text-yellow-400 mb-2" />
             <Counter end={50000} />
-            <p className="mt-1 text-gray-600 dark:text-gray-400">Users Worldwide</p>
+            <p className="mt-1 text-gray-600 dark:text-gray-400">
+              Users Worldwide
+            </p>
           </motion.div>
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className={`bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 shadow hover:shadow-xl flex flex-col items-center`}
+            className="bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 shadow hover:shadow-xl flex flex-col items-center"
           >
             <Trophy size={32} className="text-green-400 mb-2" />
             <Counter end={120000} />
-            <p className="mt-1 text-gray-600 dark:text-gray-400">Tasks Completed</p>
+            <p className="mt-1 text-gray-600 dark:text-gray-400">
+              Tasks Completed
+            </p>
           </motion.div>
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className={`bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 shadow hover:shadow-xl flex flex-col items-center`}
+            className="bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 shadow hover:shadow-xl flex flex-col items-center"
           >
             <Trophy size={32} className="text-yellow-400 mb-2" />
             <Counter end={85000} />
-            <p className="mt-1 text-gray-600 dark:text-gray-400">Crypto Paid Out</p>
+            <p className="mt-1 text-gray-600 dark:text-gray-400">
+              Crypto Paid Out
+            </p>
           </motion.div>
         </section>
 
         {/* ================= FEATURES ================= */}
         <section className="max-w-7xl mx-auto px-4 py-20 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">Why Choose Cashog for Dogecoin</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-12">
+            Why Choose Cashog for Dogecoin
+          </h2>
+
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 justify-center">
             {features.map((feature, i) => (
               <motion.div
@@ -201,14 +341,20 @@ export default function EarnDogecoinOnline() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.2 }}
                 className={`rounded-2xl p-6 text-center shadow hover:shadow-xl transition-shadow duration-300 w-full max-w-sm mx-auto ${
-                  theme === "dark" ? "bg-[#111827]" : "bg-gray-50"
+                  theme === "dark"
+                    ? "bg-[#111827]"
+                    : "bg-gray-50"
                 }`}
               >
                 <div className="flex justify-center mb-4 text-yellow-500">
                   <ShieldCheck size={28} />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className={`text-gray-600 ${theme === "dark" ? "dark:text-gray-400" : ""}`}>{feature.description}</p>
+                <h3 className="text-xl font-semibold mb-2">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  {feature.description}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -216,30 +362,43 @@ export default function EarnDogecoinOnline() {
 
         {/* ================= FAQ ================= */}
         <section className="max-w-4xl mx-auto px-4 py-20 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-12">
+            Frequently Asked Questions
+          </h2>
+
           <div className="space-y-4">
             {faqs.map((faq, i) => (
               <details
                 key={i}
-                className={`rounded-xl p-4 cursor-pointer group ${
-                  theme === "dark" ? "bg-[#1A1F2B]" : "bg-gray-100"
+                className={`rounded-xl p-4 cursor-pointer ${
+                  theme === "dark"
+                    ? "bg-[#1A1F2B]"
+                    : "bg-gray-100"
                 }`}
               >
-                <summary className="font-semibold text-lg">{faq.q}</summary>
-                <p className={`mt-2 text-gray-600 ${theme === "dark" ? "dark:text-gray-400" : ""}`}>{faq.a}</p>
+                <summary className="font-semibold text-lg">
+                  {faq.q}
+                </summary>
+                <p className="mt-2 text-gray-600 dark:text-gray-400">
+                  {faq.a}
+                </p>
               </details>
             ))}
           </div>
         </section>
 
         {/* ================= FINAL CTA ================= */}
-        <section className={`text-center py-28 w-full transition-colors duration-300 rounded-t-3xl ${
-          theme === "dark" ? "bg-[#111827]" : "bg-[#f9fafb]"
-        }`}>
+        <section
+          className={`text-center py-28 w-full transition-colors duration-300 rounded-t-3xl ${
+            theme === "dark"
+              ? "bg-[#111827]"
+              : "bg-[#f9fafb]"
+          }`}
+        >
           <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
             Start Earning Dogecoin Today!
           </h2>
-          {/* FINAL CTA: Also connected to global floating CTA */}
+
           <Link href="/signup" className="cta-observer inline-block">
             <motion.span
               whileHover={{ scale: 1.05 }}
@@ -249,7 +408,8 @@ export default function EarnDogecoinOnline() {
               Redeem Dogecoin <ArrowRight size={20} />
             </motion.span>
           </Link>
-          <p className="mt-6 text-lg max-w-md mx-auto text-gray-300 transition-colors duration-300">
+
+          <p className="mt-6 text-lg max-w-md mx-auto text-gray-600 dark:text-gray-300 transition-colors duration-300">
             Join Cashog and start earning Dogecoin instantly from any device, anywhere.
           </p>
         </section>
