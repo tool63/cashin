@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   ArrowRight,
   Wallet,
@@ -13,8 +13,37 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Meta from "@/components/SEO/seoEngine.ts";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
 import TypingText from "@/components/typing/TypingText";
+
+/* ================= SEO METADATA ================= */
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/earn-paypal-money",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: "Earn PayPal Money Online - Cashog",
+      description:
+        "Earn PayPal money online with surveys, cashback offers, and simple tasks. Secure payouts and beginner-friendly earning methods.",
+    };
+  }
+}
 
 /* ================= PAYPAL METHODS ================= */
 const methods = [
@@ -22,13 +51,13 @@ const methods = [
     icon: <ClipboardList size={36} className="text-emerald-400" />,
     title: "Complete Surveys",
     description:
-      "Answer short surveys from global brands and earn PayPal cash rewards.",
+      "Answer short surveys from global brands and earn cash rewards that you can withdraw to PayPal.",
   },
   {
     icon: <Gift size={36} className="text-yellow-400" />,
     title: "Cashback Offers",
     description:
-      "Shop through verified stores and receive cashback directly to PayPal.",
+      "Shop through verified stores and receive cashback directly to your PayPal account.",
   },
   {
     icon: <Zap size={36} className="text-emerald-400" />,
@@ -40,7 +69,7 @@ const methods = [
     icon: <CreditCard size={36} className="text-yellow-400" />,
     title: "Referral Bonuses",
     description:
-      "Invite friends and earn bonus PayPal rewards when they join.",
+      "Invite friends and earn bonus rewards that you can withdraw via PayPal.",
   },
 ];
 
@@ -50,19 +79,19 @@ const features = [
     icon: <ShieldCheck size={28} className="text-yellow-500" />,
     title: "Secure Transactions",
     description:
-      "All PayPal payments are encrypted and securely processed.",
+      "All payments and withdrawals are encrypted and securely processed.",
   },
   {
     icon: <Wallet size={28} className="text-yellow-500" />,
     title: "Fast Withdrawals",
     description:
-      "Receive your PayPal earnings quickly after reaching the payout threshold.",
+      "Receive your earnings quickly after reaching the minimum payout threshold.",
   },
   {
     icon: <CheckCircle size={28} className="text-yellow-500" />,
     title: "No Investment Needed",
     description:
-      "Start earning PayPal money online without paying any fees.",
+      "Start earning online without paying any fees or hidden charges.",
   },
 ];
 
@@ -77,7 +106,7 @@ const faqs = [
     a: "Yes. All earning opportunities are verified and secure.",
   },
   {
-    q: "How long does PayPal withdrawal take?",
+    q: "How long does withdrawal take?",
     a: "Most withdrawals are processed quickly after confirmation.",
   },
   {
@@ -86,13 +115,31 @@ const faqs = [
   },
 ];
 
+/* ================= PAGE COMPONENT ================= */
 export default function EarnPaypalMoney() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  /* Client-side SEO hydration */
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/earn-paypal-money",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <>
-      <Meta
-        title="Cashog - Earn PayPal Money Online"
-        description="Earn PayPal money online with surveys, cashback offers, and simple tasks. Secure payouts and beginner-friendly earning methods."
-      />
+      {seo && <SeoRenderer seo={seo} />}
 
       <main className="min-h-screen bg-white dark:bg-[#0B0E1A] text-gray-900 dark:text-white transition-colors duration-300">
 
@@ -123,8 +170,7 @@ export default function EarnPaypalMoney() {
                 text-black px-14 py-6 rounded-3xl font-bold 
                 shadow-2xl text-xl"
               >
-                Start Earning PayPal Cash
-                <ArrowRight size={24} />
+                Start Earning PayPal Cash <ArrowRight size={24} />
               </motion.span>
             </Link>
 
@@ -167,12 +213,8 @@ export default function EarnPaypalMoney() {
                 transition={{ duration: 0.5, delay: i * 0.2 }}
                 className="bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-shadow duration-500 border border-gray-200 dark:border-[#2C3140]"
               >
-                <div className="flex justify-center mb-4">
-                  {feature.icon}
-                </div>
-                <h3 className="text-xl font-semibold mb-2">
-                  {feature.title}
-                </h3>
+                <div className="flex justify-center mb-4">{feature.icon}</div>
+                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
                 <p className="text-gray-600 dark:text-gray-400">
                   {feature.description}
                 </p>
@@ -219,13 +261,12 @@ export default function EarnPaypalMoney() {
               text-black px-16 py-6 rounded-3xl font-bold 
               shadow-2xl text-xl"
             >
-              Join & Get Paid
-              <ArrowRight size={24} />
+              Join & Get Paid <ArrowRight size={24} />
             </motion.span>
           </Link>
 
           <p className="mt-6 text-gray-600 dark:text-gray-300 text-lg max-w-md mx-auto">
-            Sign up for free and start earning real PayPal cash safely and
+            Sign up for free and start earning real cash safely and
             consistently.
           </p>
         </section>
