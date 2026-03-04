@@ -1,11 +1,91 @@
 "use client";
 
-import React from "react";
-import { ArrowRight, Zap, User, Gift, CheckCircle, ShieldCheck, ClipboardList, CreditCard } from "lucide-react"; // ✅ Zap replaces Lightning
+import React, { useEffect, useState } from "react";
+import {
+  ArrowRight,
+  Zap,
+  User,
+  Gift,
+  CheckCircle,
+  ShieldCheck,
+  ClipboardList,
+  CreditCard,
+} from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Meta from "@/components/SEO/seoEngine.ts";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
 import TypingText from "@/components/typing/TypingText";
+
+/* =========================
+   Dynamic Metadata (Server-Side)
+========================= */
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/earn-money-online-fast",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: SEO_CONFIG.defaultTitle,
+      description: SEO_CONFIG.defaultDescription,
+    };
+  }
+}
+
+/* =========================
+   SEO Metrics (Optional)
+========================= */
+function useSEOMetrics(seo: SEOOutput | null) {
+  useEffect(() => {
+    if (!seo?.metrics) return;
+
+    console.log("[SEO Metrics]", {
+      score: seo.metrics.seoScore ?? "n/a",
+      pageType: seo.pageType?.type,
+      generationTime: seo.metrics.generationTime,
+    });
+  }, [seo]);
+}
+
+/* =========================
+   SEO Hydration (Client Side)
+========================= */
+function useSEOHydration() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/earn-money-online-fast",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  return seo;
+}
 
 /* ================= STEPS ================= */
 const steps = [
@@ -33,32 +113,74 @@ const steps = [
 
 /* ================= FEATURES ================= */
 const features = [
-  { icon: <ShieldCheck size={28} className="text-yellow-500" />, title: "Trusted & Secure", description: "Millions of users trust our platform daily for safe earning." },
-  { icon: <CreditCard size={28} className="text-yellow-500" />, title: "Instant Payouts", description: "Get your earnings quickly with secure payment options." },
-  { icon: <Gift size={28} className="text-yellow-500" />, title: "High-Paying Offers", description: "Access top offers that maximize your earning potential." },
-  { icon: <Zap size={28} className="text-yellow-500" />, title: "Fast Earnings", description: "Earn rewards rapidly by completing tasks and offers." },
-  { icon: <User size={28} className="text-yellow-500" />, title: "Global Access", description: "Join from anywhere in the world and start earning today." },
+  {
+    icon: <ShieldCheck size={28} className="text-yellow-500" />,
+    title: "Trusted & Secure",
+    description: "Millions of users trust our platform daily for safe earning.",
+  },
+  {
+    icon: <CreditCard size={28} className="text-yellow-500" />,
+    title: "Instant Payouts",
+    description: "Get your earnings quickly with secure payment options.",
+  },
+  {
+    icon: <Gift size={28} className="text-yellow-500" />,
+    title: "High-Paying Offers",
+    description: "Access top offers that maximize your earning potential.",
+  },
+  {
+    icon: <Zap size={28} className="text-yellow-500" />,
+    title: "Fast Earnings",
+    description: "Earn rewards rapidly by completing tasks and offers.",
+  },
+  {
+    icon: <User size={28} className="text-yellow-500" />,
+    title: "Global Access",
+    description: "Join from anywhere in the world and start earning today.",
+  },
 ];
 
 /* ================= FAQ ================= */
 const faqs = [
-  { q: "How do I cash out?", a: "Withdraw via PayPal, gift cards, or mobile top-ups once you reach the minimum threshold." },
-  { q: "Are surveys safe?", a: "Yes, all tasks and surveys are secure and verified for safety." },
-  { q: "Can I join from any country?", a: "Absolutely! Our platform supports users globally." },
-  { q: "Is there a minimum age?", a: "You must be at least 13 years old to create an account." },
-  { q: "How fast are payouts?", a: "Most withdrawals are processed instantly or within a few hours." },
-  { q: "Do I need to pay to join?", a: "No, signing up is completely free." },
-  { q: "Can I complete offers on mobile?", a: "Yes! Our platform is fully mobile-friendly." },
+  {
+    q: "How do I cash out?",
+    a: "Withdraw via PayPal, gift cards, or mobile top-ups once you reach the minimum threshold.",
+  },
+  {
+    q: "Are surveys safe?",
+    a: "Yes, all tasks and surveys are secure and verified for safety.",
+  },
+  {
+    q: "Can I join from any country?",
+    a: "Absolutely! Our platform supports users globally.",
+  },
+  {
+    q: "Is there a minimum age?",
+    a: "You must be at least 13 years old to create an account.",
+  },
+  {
+    q: "How fast are payouts?",
+    a: "Most withdrawals are processed instantly or within a few hours.",
+  },
+  {
+    q: "Do I need to pay to join?",
+    a: "No, signing up is completely free.",
+  },
+  {
+    q: "Can I complete offers on mobile?",
+    a: "Yes! Our platform is fully mobile-friendly.",
+  },
 ];
 
 /* ================= PAGE COMPONENT ================= */
 export default function EarnMoneyOnlineFast() {
+  const seo = useSEOHydration();
+  useSEOMetrics(seo);
+
   return (
     <>
-      <Meta
-        title="Cashog - Earn Money Online Fast"
-        description="Complete surveys, play games, watch videos, and start earning money online instantly on Cashog."
-      />
+      {/* Structured SEO Data */}
+      {seo && <SeoRenderer seo={seo} />}
 
       <main className="transition-colors duration-300 bg-white dark:bg-[#0B0E1A] text-gray-900 dark:text-white min-h-screen">
 
@@ -75,7 +197,6 @@ export default function EarnMoneyOnlineFast() {
               Complete surveys, play games, watch videos, and complete offers to earn cash and rewards instantly.
             </p>
 
-            {/* ================= HERO CTA BUTTON ================= */}
             <Link href="/signup" className="cta-observer inline-block">
               <motion.span
                 whileHover={{ scale: 1.05 }}
@@ -136,7 +257,10 @@ export default function EarnMoneyOnlineFast() {
           <h2 className="text-3xl md:text-4xl font-bold mb-12">Frequently Asked Questions</h2>
           <div className="space-y-4">
             {faqs.map((faq, i) => (
-              <details key={i} className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-5 cursor-pointer group border border-gray-200 dark:border-[#2C3140] hover:bg-gray-200 dark:hover:bg-[#2A2F43] transition-all duration-300">
+              <details
+                key={i}
+                className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-5 cursor-pointer group border border-gray-200 dark:border-[#2C3140] hover:bg-gray-200 dark:hover:bg-[#2A2F43] transition-all duration-300"
+              >
                 <summary className="font-semibold text-lg">{faq.q}</summary>
                 <p className="mt-3 text-gray-700 dark:text-gray-400">{faq.a}</p>
               </details>
@@ -150,7 +274,6 @@ export default function EarnMoneyOnlineFast() {
             Start Earning Online Fast Today
           </h2>
 
-          {/* ================= FINAL CTA BUTTON ================= */}
           <Link href="/signup" className="cta-observer inline-block">
             <motion.span
               whileHover={{ scale: 1.05 }}
