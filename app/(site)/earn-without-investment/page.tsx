@@ -1,62 +1,181 @@
 "use client";
 
-import React from "react";
-import { ArrowRight, User, CreditCard, Gift, CheckCircle, ShieldCheck, Trophy } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import {
+  ArrowRight,
+  User,
+  CreditCard,
+  Gift,
+  CheckCircle,
+  ShieldCheck,
+  Trophy,
+} from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Meta from "@/components/SEO/seoEngine.ts";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
 import TypingText from "@/components/typing/TypingText";
+
+/* =========================
+   Dynamic Metadata (Server-Side)
+========================= */
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/earn-without-investment",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: SEO_CONFIG.defaultTitle,
+      description: SEO_CONFIG.defaultDescription,
+    };
+  }
+}
+
+/* =========================
+   SEO Metrics Logger
+========================= */
+function useSEOMetrics(seo: SEOOutput | null) {
+  useEffect(() => {
+    if (!seo?.metrics) return;
+
+    console.log("[SEO Metrics]", {
+      score: seo.metrics.seoScore ?? "n/a",
+      pageType: seo.pageType?.type,
+      generationTime: seo.metrics.generationTime,
+    });
+  }, [seo]);
+}
 
 /* ================= STEPS ================= */
 const steps = [
   {
     icon: <User size={36} className="text-yellow-400" />,
     title: "Sign Up for Free",
-    description: "Create your account in minutes with zero investment and start earning immediately.",
+    description:
+      "Create your account in minutes with zero investment and start earning immediately.",
   },
   {
     icon: <CreditCard size={36} className="text-green-400" />,
     title: "Complete Simple Tasks",
-    description: "Play games, watch videos, install apps, or complete surveys to earn points without spending money.",
+    description:
+      "Play games, watch videos, install apps, or complete surveys to earn points without spending money.",
   },
   {
     icon: <Gift size={36} className="text-yellow-400" />,
     title: "Earn Rewards",
-    description: "Redeem points for cash, gift cards, or mobile top-ups instantly, all without paying anything.",
+    description:
+      "Redeem points for cash, gift cards, or mobile top-ups instantly, all without paying anything.",
   },
   {
     icon: <CheckCircle size={36} className="text-green-400" />,
     title: "Withdraw Securely",
-    description: "Get fast and reliable payouts once you reach the minimum threshold, no investment required.",
+    description:
+      "Get fast and reliable payouts once you reach the minimum threshold, no investment required.",
   },
 ];
 
 /* ================= FEATURES ================= */
 const features = [
-  { icon: <ShieldCheck size={28} className="text-yellow-500" />, title: "Trusted Platform", description: "Millions of users globally trust us to earn safely without investment." },
-  { icon: <Trophy size={28} className="text-yellow-500" />, title: "High-Paying Offers", description: "Access top offers and surveys designed to maximize earnings without spending." },
-  { icon: <CreditCard size={28} className="text-yellow-500" />, title: "Instant Payouts", description: "Get your money immediately via PayPal or gift cards with zero upfront costs." },
-  { icon: <User size={28} className="text-yellow-500" />, title: "User-Friendly Interface", description: "Simple, intuitive platform for effortless earnings without investment." },
-  { icon: <Gift size={28} className="text-yellow-500" />, title: "Mobile-Ready", description: "Earn on desktop or mobile anywhere, anytime, with no initial payment." },
+  {
+    icon: <ShieldCheck size={28} className="text-yellow-500" />,
+    title: "Trusted Platform",
+    description:
+      "Millions of users globally trust us to earn safely without investment.",
+  },
+  {
+    icon: <Trophy size={28} className="text-yellow-500" />,
+    title: "High-Paying Offers",
+    description:
+      "Access top offers and surveys designed to maximize earnings without spending.",
+  },
+  {
+    icon: <CreditCard size={28} className="text-yellow-500" />,
+    title: "Instant Payouts",
+    description:
+      "Get your money immediately via PayPal or gift cards with zero upfront costs.",
+  },
+  {
+    icon: <User size={28} className="text-yellow-500" />,
+    title: "User-Friendly Interface",
+    description:
+      "Simple, intuitive platform for effortless earnings without investment.",
+  },
+  {
+    icon: <Gift size={28} className="text-yellow-500" />,
+    title: "Mobile-Ready",
+    description:
+      "Earn on desktop or mobile anywhere, anytime, with no initial payment.",
+  },
 ];
 
 /* ================= FAQ ================= */
 const faqs = [
-  { q: "Do I need to invest money?", a: "No! You can start earning immediately without any investment." },
-  { q: "Is the platform secure?", a: "Yes, we use enterprise-grade security to protect user data and transactions." },
-  { q: "Can I join from any country?", a: "Absolutely! Our platform supports users worldwide." },
-  { q: "How do I withdraw?", a: "Withdraw your earnings instantly via PayPal, gift cards, or mobile top-ups." },
-  { q: "Is signing up free?", a: "Yes, creating an account is completely free with no hidden fees." },
+  {
+    q: "Do I need to invest money?",
+    a: "No! You can start earning immediately without any investment.",
+  },
+  {
+    q: "Is the platform secure?",
+    a: "Yes, we use enterprise-grade security to protect user data and transactions.",
+  },
+  {
+    q: "Can I join from any country?",
+    a: "Absolutely! Our platform supports users worldwide.",
+  },
+  {
+    q: "How do I withdraw?",
+    a: "Withdraw your earnings instantly via PayPal, gift cards, or mobile top-ups.",
+  },
+  {
+    q: "Is signing up free?",
+    a: "Yes, creating an account is completely free with no hidden fees.",
+  },
 ];
 
 /* ================= PAGE COMPONENT ================= */
 export default function EarnWithoutInvestment() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  useSEOMetrics(seo);
+
+  /* =========================
+     Hydrate SEO Client-Side
+  ========================== */
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/earn-without-investment",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <>
-      <Meta
-        title="Cashog - Earn Without Investment"
-        description="Start earning real money online without investing a single penny. Complete tasks, surveys, and offers instantly with Cashog."
-      />
+      {/* Structured Data & Meta Hydration */}
+      {seo && <SeoRenderer seo={seo} />}
 
       <main className="transition-colors duration-300 bg-white dark:bg-[#0B0E1A] text-gray-900 dark:text-white min-h-screen">
 
@@ -73,7 +192,6 @@ export default function EarnWithoutInvestment() {
               Start earning real money online instantly without paying anything upfront.
             </p>
 
-            {/* ================= HERO CTA BUTTON ================= */}
             <Link href="/signup" className="cta-observer inline-block">
               <motion.span
                 whileHover={{ scale: 1.05 }}
@@ -122,8 +240,12 @@ export default function EarnWithoutInvestment() {
                 <div className="flex justify-center mb-4 text-yellow-500">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
+                <h3 className="text-xl font-semibold mb-2">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  {feature.description}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -131,12 +253,21 @@ export default function EarnWithoutInvestment() {
 
         {/* ================= FAQ ================= */}
         <section className="max-w-4xl mx-auto px-6 py-20 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-12">
+            Frequently Asked Questions
+          </h2>
           <div className="space-y-4">
             {faqs.map((faq, i) => (
-              <details key={i} className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-5 cursor-pointer group border border-gray-200 dark:border-[#2C3140] hover:bg-gray-200 dark:hover:bg-[#2A2F43] transition-all duration-300">
-                <summary className="font-semibold text-lg">{faq.q}</summary>
-                <p className="mt-3 text-gray-700 dark:text-gray-400">{faq.a}</p>
+              <details
+                key={i}
+                className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-5 cursor-pointer group border border-gray-200 dark:border-[#2C3140] hover:bg-gray-200 dark:hover:bg-[#2A2F43] transition-all duration-300"
+              >
+                <summary className="font-semibold text-lg">
+                  {faq.q}
+                </summary>
+                <p className="mt-3 text-gray-700 dark:text-gray-400">
+                  {faq.a}
+                </p>
               </details>
             ))}
           </div>
@@ -148,7 +279,6 @@ export default function EarnWithoutInvestment() {
             Start Earning Without Investing Today
           </h2>
 
-          {/* ================= FINAL CTA BUTTON ================= */}
           <Link href="/signup" className="cta-observer inline-block">
             <motion.span
               whileHover={{ scale: 1.05 }}
@@ -163,7 +293,6 @@ export default function EarnWithoutInvestment() {
             Join thousands of users and enjoy premium earning opportunities completely free from home.
           </p>
         </section>
-
       </main>
     </>
   );
