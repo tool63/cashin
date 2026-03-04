@@ -1,11 +1,40 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ArrowRight, Zap, User, Gift, CheckCircle, ShieldCheck, ClipboardList, CreditCard } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Meta from "@/components/SEO/seoEngine.ts";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
 import TypingText from "@/components/typing/TypingText";
+
+/* ================= SEO METADATA (SERVER SIDE) ================= */
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/earn-money-as-a-student",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: "Earn Money as a Student - Cashog",
+      description:
+        "Learn how students can earn money online with flexible, beginner-friendly tasks. Start earning safely today.",
+    };
+  }
+}
 
 /* ================= STEPS ================= */
 const steps = [
@@ -16,18 +45,18 @@ const steps = [
   },
   {
     icon: <ClipboardList size={36} className="text-green-400" />,
-    title: "Explore Student-Friendly Tasks",
-    description: "Discover surveys, apps, and micro-tasks perfect for students with flexible schedules.",
+    title: "Discover Student Tasks",
+    description: "Find surveys, apps, and micro-tasks perfect for students with flexible schedules.",
   },
   {
     icon: <Zap size={36} className="text-yellow-400" />,
     title: "Earn Rewards",
-    description: "Complete tasks and start accumulating cash, gift cards, and other rewards quickly.",
+    description: "Complete tasks and start accumulating cash, gift cards, and rewards quickly.",
   },
   {
     icon: <CheckCircle size={36} className="text-green-400" />,
     title: "Withdraw Easily",
-    description: "Get paid safely via PayPal, gift cards, or mobile top-ups with minimal effort.",
+    description: "Get paid securely via PayPal, gift cards, or mobile top-ups with minimal effort.",
   },
 ];
 
@@ -45,18 +74,36 @@ const faqs = [
   { q: "Can students join?", a: "Yes! Our platform is designed for students aged 13+ to earn safely online." },
   { q: "Do I need prior experience?", a: "No experience required. All tasks are beginner-friendly." },
   { q: "How do I get paid?", a: "Withdraw via PayPal, gift cards, or mobile top-ups instantly." },
-  { q: "Can I earn on mobile?", a: "Yes, all student-friendly tasks are mobile-optimized." },
-  { q: "Do I need to invest?", a: "No, signing up and earning is completely free for students." },
+  { q: "Can I earn on mobile?", a: "Yes, all tasks are mobile-optimized." },
+  { q: "Do I need to invest?", a: "No, signing up and earning is completely free." },
 ];
 
 /* ================= PAGE COMPONENT ================= */
 export default function EarnMoneyAsAStudent() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  /* Hydrate SEO client-side (non-blocking) */
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/earn-money-as-a-student",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <>
-      <Meta
-        title="Cashog - Earn Money as a Student"
-        description="Learn how students can earn money online with flexible, beginner-friendly tasks. Start earning safely today."
-      />
+      {/* Structured Data & Meta Tags */}
+      {seo && <SeoRenderer seo={seo} />}
 
       <main className="transition-colors duration-300 bg-white dark:bg-[#0B0E1A] text-gray-900 dark:text-white min-h-screen">
 
@@ -134,7 +181,10 @@ export default function EarnMoneyAsAStudent() {
           <h2 className="text-3xl md:text-4xl font-bold mb-12">Frequently Asked Questions</h2>
           <div className="space-y-4">
             {faqs.map((faq, i) => (
-              <details key={i} className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-5 cursor-pointer group border border-gray-200 dark:border-[#2C3140] hover:bg-gray-200 dark:hover:bg-[#2A2F43] transition-all duration-300">
+              <details
+                key={i}
+                className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-5 cursor-pointer group border border-gray-200 dark:border-[#2C3140] hover:bg-gray-200 dark:hover:bg-[#2A2F43] transition-all duration-300"
+              >
                 <summary className="font-semibold text-lg">{faq.q}</summary>
                 <p className="mt-3 text-gray-700 dark:text-gray-400">{faq.a}</p>
               </details>
@@ -148,7 +198,6 @@ export default function EarnMoneyAsAStudent() {
             Start Earning as a Student Today
           </h2>
 
-          {/* ================= FINAL CTA BUTTON ================= */}
           <Link href="/signup" className="cta-observer inline-block">
             <motion.span
               whileHover={{ scale: 1.05 }}
@@ -160,7 +209,7 @@ export default function EarnMoneyAsAStudent() {
           </Link>
 
           <p className="mt-6 text-gray-900 dark:text-gray-300 text-lg max-w-md mx-auto">
-            Flexible, safe, and beginner-friendly earning methods designed specifically for students.
+            Flexible, safe, and beginner-friendly earning methods designed for students.
           </p>
         </section>
 
