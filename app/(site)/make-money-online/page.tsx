@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { ArrowRight, User, CreditCard, Gift, CheckCircle, ShieldCheck, Trophy } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Meta from "@/components/seo/SeoEngine";
 import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
 import SeoRenderer from "@/components/SEO/SeoRenderer";
@@ -32,9 +31,8 @@ export async function generateMetadata() {
     console.error("Metadata generation failed:", error);
 
     return {
-      title: "Cashog - Make Money Online",
-      description:
-        "Earn real money online instantly by completing tasks, high-paying offers, surveys, and more with Cashog.",
+      title: SEO_CONFIG.defaultTitle,
+      description: SEO_CONFIG.defaultDescription,
     };
   }
 }
@@ -83,13 +81,7 @@ export default function MakeMoneyOnline() {
 
   return (
     <>
-      {/* Existing Meta (kept intact) */}
-      <Meta
-        title="Cashog - Make Money Online"
-        description="Earn real money online instantly by completing tasks, high-paying offers, surveys, and more with Cashog."
-      />
-
-      {/* SEO Engine Renderer (Structured Data + Full Meta Handling) */}
+      {/* Structured Data & Meta Tags */}
       {seo && <SeoRenderer seo={seo} />}
 
       <main className="transition-colors duration-300 bg-white dark:bg-[#0B0E1A] text-gray-900 dark:text-white min-h-screen">
