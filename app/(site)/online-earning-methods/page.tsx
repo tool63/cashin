@@ -1,63 +1,160 @@
 "use client";
 
-import React from "react";
-import { ArrowRight, User, Gift, CheckCircle, ShieldCheck, Laptop, ClipboardList, Video, CreditCard } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import {
+  ArrowRight,
+  User,
+  Gift,
+  CheckCircle,
+  ShieldCheck,
+  Laptop,
+  ClipboardList,
+  Video,
+  CreditCard,
+} from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Meta from "@/components/seo/SeoEngine";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
 import TypingText from "@/components/typing/TypingText";
+
+/* =========================
+   Dynamic Metadata (Server-Side)
+========================= */
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/online-earning-methods",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: SEO_CONFIG.defaultTitle,
+      description: SEO_CONFIG.defaultDescription,
+    };
+  }
+}
+
+/* =========================
+   SEO Metrics Logger (Optional)
+========================= */
+function useSEOMetrics(seo: SEOOutput | null) {
+  useEffect(() => {
+    if (!seo?.metrics) return;
+
+    console.log("[SEO Metrics]", {
+      score: seo.metrics.seoScore ?? "n/a",
+      pageType: seo.pageType?.type,
+      generationTime: seo.metrics.generationTime,
+    });
+  }, [seo]);
+}
+
+/* =========================
+   SEO Hydration (Client Side)
+========================= */
+function useSEOHydration() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/online-earning-methods",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  return seo;
+}
 
 /* ================= EARNING METHODS ================= */
 const methods = [
   {
     icon: <CreditCard size={36} className="text-green-400" />,
     title: "Complete Offers Online",
-    description: "Earn points by completing surveys, free trials, app installs, and more."
+    description: "Earn points by completing surveys, free trials, app installs, and more.",
   },
   {
     icon: <Video size={36} className="text-yellow-400" />,
     title: "Watch Videos for Money",
-    description: "Enjoy engaging videos while earning real money instantly."
+    description: "Enjoy engaging videos while earning real money instantly.",
   },
   {
     icon: <ClipboardList size={36} className="text-green-400" />,
     title: "Play Games & Get Paid",
-    description: "Get rewarded for playing popular online games and achieving milestones."
+    description: "Get rewarded for playing popular online games and achieving milestones.",
   },
   {
     icon: <Laptop size={36} className="text-yellow-400" />,
     title: "Work From Home Jobs",
-    description: "Access verified remote jobs and earn safely from your home."
+    description: "Access verified remote jobs and earn safely from your home.",
   },
   {
     icon: <User size={36} className="text-green-400" />,
     title: "Install Apps for Cash",
-    description: "Download and install apps to earn instant rewards."
+    description: "Download and install apps to earn instant rewards.",
   },
   {
     icon: <Gift size={36} className="text-yellow-400" />,
     title: "Earn Without Investment",
-    description: "Start earning without spending any money upfront."
+    description: "Start earning without spending any money upfront.",
   },
 ];
 
 /* ================= FAQ ================= */
 const faqs = [
-  { q: "Are these earning methods safe?", a: "Yes! All tasks and methods are verified and safe for users worldwide." },
-  { q: "Do I need to pay to start?", a: "No, all earning methods are free to start and participate." },
-  { q: "How can I withdraw earnings?", a: "Withdraw your points via PayPal, gift cards, or mobile top-ups instantly." },
-  { q: "Can I earn on mobile?", a: "Absolutely! All methods are fully mobile-friendly." },
-  { q: "Is there a minimum age?", a: "You must be at least 13 years old to create an account and start earning." },
+  {
+    q: "Are these earning methods safe?",
+    a: "Yes! All tasks and methods are verified and safe for users worldwide.",
+  },
+  {
+    q: "Do I need to pay to start?",
+    a: "No, all earning methods are free to start and participate.",
+  },
+  {
+    q: "How can I withdraw earnings?",
+    a: "Withdraw your points via PayPal, gift cards, or mobile top-ups instantly.",
+  },
+  {
+    q: "Can I earn on mobile?",
+    a: "Absolutely! All methods are fully mobile-friendly.",
+  },
+  {
+    q: "Is there a minimum age?",
+    a: "You must be at least 13 years old to create an account and start earning.",
+  },
 ];
 
 /* ================= PAGE COMPONENT ================= */
 export default function OnlineEarningMethods() {
+  const seo = useSEOHydration();
+  useSEOMetrics(seo);
+
   return (
     <>
-      <Meta
-        title="Cashog - Online Earning Methods"
-        description="Discover multiple ways to earn online with Cashog. Complete offers, watch videos, play games, and access remote jobs."
-      />
+      {/* Structured SEO Data */}
+      {seo && <SeoRenderer seo={seo} />}
 
       <main className="transition-colors duration-300 bg-white dark:bg-[#0B0E1A] text-gray-900 dark:text-white min-h-screen">
 
@@ -74,7 +171,6 @@ export default function OnlineEarningMethods() {
               Discover multiple ways to earn online safely and instantly. From completing offers to remote jobs, we make earning easy.
             </p>
 
-            {/* ================= HERO CTA BUTTON ================= */}
             <Link href="/signup" className="cta-observer inline-block">
               <motion.span
                 whileHover={{ scale: 1.05 }}
@@ -115,7 +211,10 @@ export default function OnlineEarningMethods() {
           <h2 className="text-3xl md:text-4xl font-bold mb-12">Frequently Asked Questions</h2>
           <div className="space-y-4">
             {faqs.map((faq, i) => (
-              <details key={i} className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-5 cursor-pointer group border border-gray-200 dark:border-[#2C3140] hover:bg-gray-200 dark:hover:bg-[#2A2F43] transition-all duration-300">
+              <details
+                key={i}
+                className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-5 cursor-pointer group border border-gray-200 dark:border-[#2C3140] hover:bg-gray-200 dark:hover:bg-[#2A2F43] transition-all duration-300"
+              >
                 <summary className="font-semibold text-lg">{faq.q}</summary>
                 <p className="mt-3 text-gray-700 dark:text-gray-400">{faq.a}</p>
               </details>
@@ -129,7 +228,6 @@ export default function OnlineEarningMethods() {
             Start Exploring & Earning Today
           </h2>
 
-          {/* ================= FINAL CTA BUTTON ================= */}
           <Link href="/signup" className="cta-observer inline-block">
             <motion.span
               whileHover={{ scale: 1.05 }}
