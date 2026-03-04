@@ -54,6 +54,7 @@ const faqs = [
 /* ================= COUNTER COMPONENT ================= */
 function Counter({ end }: { end: number }) {
   const [count, setCount] = useState(0);
+
   useEffect(() => {
     let start = 0;
     const duration = 2000;
@@ -88,8 +89,17 @@ export default function EarnFreeRobux() {
   return (
     <>
       <Meta
-        title="Cashog - Earn Free Robux Online"
-        description="Learn how to earn free Robux online by completing tasks, offers, and surveys with Cashog. Instant, secure, and high-paying rewards for Roblox players!"
+        title="Earn Free Robux Online | Instant & Secure Robux Rewards - Cashog"
+        description="Earn free Robux online instantly by completing tasks, surveys, and offers with Cashog. Safe, secure, and trusted platform for Roblox players worldwide."
+        keywords="earn free robux, free robux online, robux generator alternative, instant robux rewards, roblox robux earning site, legit robux earning platform"
+        canonical="https://yourdomain.com/earn-free-robux"
+        ogTitle="Earn Free Robux Online Instantly | Cashog"
+        ogDescription="Join Cashog to earn free Robux safely and instantly. Complete offers, surveys, and tasks to redeem Robux directly to your Roblox account."
+        ogUrl="https://yourdomain.com/earn-free-robux"
+        ogType="website"
+        twitterCard="summary_large_image"
+        twitterTitle="Earn Free Robux Online | Cashog"
+        twitterDescription="Complete tasks and redeem free Robux instantly. Safe, secure, and trusted by Roblox players worldwide."
       />
 
       <main
@@ -119,7 +129,6 @@ export default function EarnFreeRobux() {
               Complete tasks, offers, and surveys to earn free Robux instantly for your Roblox account.
             </p>
 
-            {/* ================= HERO CTA BUTTON ================= */}
             <Link href="/signup" className="cta-observer inline-block">
               <motion.span
                 whileHover={{ scale: 1.05 }}
