@@ -1,20 +1,85 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ArrowRight, User, CreditCard, Gift, CheckCircle, ShieldCheck, Trophy } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Meta from "@/components/seo/SeoEngine";
-import { buildSEO } from "@/components/SEO/seoEngine";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
 import TypingText from "@/components/typing/TypingText";
+
+/* =========================
+   Dynamic Metadata (Server-Side)
+========================= */
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/make-money-online",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: "Cashog - Make Money Online",
+      description:
+        "Earn real money online instantly by completing tasks, high-paying offers, surveys, and more with Cashog.",
+    };
+  }
+}
+
+/* =========================
+   Performance & SEO Metrics (Optional)
+========================= */
+function useSEOMetrics(seo: SEOOutput | null) {
+  useEffect(() => {
+    if (!seo?.metrics) return;
+
+    console.log("[SEO Metrics]", {
+      score: seo.metrics.seoScore ?? "n/a",
+      pageType: seo.pageType?.type,
+      generationTime: seo.metrics.generationTime,
+    });
+  }, [seo]);
+}
 
 /* ================= PAGE COMPONENT ================= */
 export default function MakeMoneyOnline() {
-  const seo = buildSEO({
-    route: "/make-money-online",
-    locale: SEO_CONFIG.defaultLocale,
-  });
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  /* SEO Metrics Hook */
+  useSEOMetrics(seo);
+
+  /* =========================
+     Hydrate SEO Client-Side (Non-Blocking)
+  ========================== */
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/make-money-online",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   return (
     <>
@@ -24,27 +89,8 @@ export default function MakeMoneyOnline() {
         description="Earn real money online instantly by completing tasks, high-paying offers, surveys, and more with Cashog."
       />
 
-      {/* SEO Engine Metadata (added, not replacing anything) */}
-      {seo.metadata && (
-        <>
-          <title>{seo.metadata.title}</title>
-          {seo.metadata.description && (
-            <meta name="description" content={seo.metadata.description} />
-          )}
-          {seo.canonical && <link rel="canonical" href={seo.canonical} />}
-        </>
-      )}
-
-      {/* Structured Data (JSON-LD) */}
-      {seo.structuredData?.map((schema, index) => (
-        <script
-          key={index}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(schema),
-          }}
-        />
-      ))}
+      {/* SEO Engine Renderer (Structured Data + Full Meta Handling) */}
+      {seo && <SeoRenderer seo={seo} />}
 
       <main className="transition-colors duration-300 bg-white dark:bg-[#0B0E1A] text-gray-900 dark:text-white min-h-screen">
 
