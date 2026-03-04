@@ -1,62 +1,186 @@
 "use client";
 
-import React from "react";
-import { ArrowRight, Laptop, User, Gift, CheckCircle, ShieldCheck, Briefcase, Trophy } from "lucide-react"; // ✅ All icons valid
+import React, { useEffect, useState } from "react";
+import {
+  ArrowRight,
+  Laptop,
+  User,
+  Gift,
+  CheckCircle,
+  ShieldCheck,
+  Briefcase,
+  Trophy,
+} from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Meta from "@/components/seo/SeoEngine";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
 import TypingText from "@/components/typing/TypingText";
+
+/* =========================
+   Dynamic Metadata (Server-Side)
+========================= */
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/work-from-home-jobs",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: SEO_CONFIG.defaultTitle,
+      description: SEO_CONFIG.defaultDescription,
+    };
+  }
+}
+
+/* =========================
+   SEO Metrics Logger (Optional)
+========================= */
+function useSEOMetrics(seo: SEOOutput | null) {
+  useEffect(() => {
+    if (!seo?.metrics) return;
+
+    console.log("[SEO Metrics]", {
+      score: seo.metrics.seoScore ?? "n/a",
+      pageType: seo.pageType?.type,
+      generationTime: seo.metrics.generationTime,
+    });
+  }, [seo]);
+}
+
+/* =========================
+   SEO Hydration (Client Side)
+========================= */
+function useSEOHydration() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/work-from-home-jobs",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  return seo;
+}
 
 /* ================= STEPS ================= */
 const steps = [
   {
     icon: <User size={36} className="text-yellow-400" />,
     title: "Sign Up Free",
-    description: "Create your account quickly and get access to verified remote job listings.",
+    description:
+      "Create your account quickly and get access to verified remote job listings.",
   },
   {
     icon: <Laptop size={36} className="text-green-400" />,
     title: "Find Jobs",
-    description: "Browse curated work-from-home jobs that match your skills and preferences.",
+    description:
+      "Browse curated work-from-home jobs that match your skills and preferences.",
   },
   {
     icon: <Gift size={36} className="text-yellow-400" />,
     title: "Earn Money",
-    description: "Apply, complete tasks, and earn real money from the comfort of your home.",
+    description:
+      "Apply, complete tasks, and earn real money from the comfort of your home.",
   },
   {
     icon: <CheckCircle size={36} className="text-green-400" />,
     title: "Withdraw Easily",
-    description: "Fast and secure payouts once you complete jobs and reach the minimum threshold.",
+    description:
+      "Fast and secure payouts once you complete jobs and reach the minimum threshold.",
   },
 ];
 
 /* ================= FEATURES ================= */
 const features = [
-  { icon: <ShieldCheck size={28} className="text-yellow-500" />, title: "Trusted Platform", description: "Millions of users rely on our safe and verified work-from-home opportunities." },
-  { icon: <Trophy size={28} className="text-yellow-500" />, title: "High-Paying Jobs", description: "Access jobs that maximize your earnings and match your skills." },
-  { icon: <Gift size={28} className="text-yellow-500" />, title: "Instant Rewards", description: "Get paid quickly once tasks or jobs are completed." },
-  { icon: <Briefcase size={28} className="text-yellow-500" />, title: "Flexible Work", description: "Choose jobs that fit your schedule and preferences." },
-  { icon: <Laptop size={28} className="text-yellow-500" />, title: "Mobile-Friendly", description: "Apply and work from any device, anywhere, anytime." },
+  {
+    icon: <ShieldCheck size={28} className="text-yellow-500" />,
+    title: "Trusted Platform",
+    description:
+      "Millions of users rely on our safe and verified work-from-home opportunities.",
+  },
+  {
+    icon: <Trophy size={28} className="text-yellow-500" />,
+    title: "High-Paying Jobs",
+    description:
+      "Access jobs that maximize your earnings and match your skills.",
+  },
+  {
+    icon: <Gift size={28} className="text-yellow-500" />,
+    title: "Instant Rewards",
+    description: "Get paid quickly once tasks or jobs are completed.",
+  },
+  {
+    icon: <Briefcase size={28} className="text-yellow-500" />,
+    title: "Flexible Work",
+    description:
+      "Choose jobs that fit your schedule and preferences.",
+  },
+  {
+    icon: <Laptop size={28} className="text-yellow-500" />,
+    title: "Mobile-Friendly",
+    description:
+      "Apply and work from any device, anywhere, anytime.",
+  },
 ];
 
 /* ================= FAQ ================= */
 const faqs = [
-  { q: "Do I need to pay to access jobs?", a: "No, all job listings are completely free to browse and apply." },
-  { q: "How do I get paid?", a: "Payments are processed securely via PayPal, gift cards, or direct bank transfer once tasks are completed." },
-  { q: "Are the jobs verified?", a: "Yes, all jobs are verified for legitimacy and safety." },
-  { q: "Can I work on mobile?", a: "Absolutely! Our platform is fully mobile-optimized for convenience." },
-  { q: "Is signing up free?", a: "Yes, creating an account is completely free with no hidden fees." },
+  {
+    q: "Do I need to pay to access jobs?",
+    a: "No, all job listings are completely free to browse and apply.",
+  },
+  {
+    q: "How do I get paid?",
+    a: "Payments are processed securely via PayPal, gift cards, or direct bank transfer once tasks are completed.",
+  },
+  {
+    q: "Are the jobs verified?",
+    a: "Yes, all jobs are verified for legitimacy and safety.",
+  },
+  {
+    q: "Can I work on mobile?",
+    a: "Absolutely! Our platform is fully mobile-optimized for convenience.",
+  },
+  {
+    q: "Is signing up free?",
+    a: "Yes, creating an account is completely free with no hidden fees.",
+  },
 ];
 
 /* ================= PAGE COMPONENT ================= */
 export default function WorkFromHomeJobs() {
+  const seo = useSEOHydration();
+  useSEOMetrics(seo);
+
   return (
     <>
-      <Meta
-        title="Cashog - Work From Home Jobs"
-        description="Find verified work-from-home jobs and earn real money from home. Join Cashog and start earning instantly."
-      />
+      {/* Structured SEO Data */}
+      {seo && <SeoRenderer seo={seo} />}
 
       <main className="transition-colors duration-300 bg-white dark:bg-[#0B0E1A] text-gray-900 dark:text-white min-h-screen">
 
@@ -73,7 +197,6 @@ export default function WorkFromHomeJobs() {
               Access flexible, verified remote job opportunities and start earning real money from the comfort of your home.
             </p>
 
-            {/* ================= HERO CTA BUTTON ================= */}
             <Link href="/signup" className="cta-observer inline-block">
               <motion.span
                 whileHover={{ scale: 1.05 }}
@@ -134,7 +257,10 @@ export default function WorkFromHomeJobs() {
           <h2 className="text-3xl md:text-4xl font-bold mb-12">Frequently Asked Questions</h2>
           <div className="space-y-4">
             {faqs.map((faq, i) => (
-              <details key={i} className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-5 cursor-pointer group border border-gray-200 dark:border-[#2C3140] hover:bg-gray-200 dark:hover:bg-[#2A2F43] transition-all duration-300">
+              <details
+                key={i}
+                className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-5 cursor-pointer group border border-gray-200 dark:border-[#2C3140] hover:bg-gray-200 dark:hover:bg-[#2A/2F43] transition-all duration-300"
+              >
                 <summary className="font-semibold text-lg">{faq.q}</summary>
                 <p className="mt-3 text-gray-700 dark:text-gray-400">{faq.a}</p>
               </details>
@@ -148,7 +274,6 @@ export default function WorkFromHomeJobs() {
             Start Working From Home & Earning Today
           </h2>
 
-          {/* ================= FINAL CTA BUTTON ================= */}
           <Link href="/signup" className="cta-observer inline-block">
             <motion.span
               whileHover={{ scale: 1.05 }}
