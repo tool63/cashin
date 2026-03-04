@@ -5,8 +5,40 @@ import { ArrowRight, User, CreditCard, Gift, CheckCircle, ShieldCheck } from "lu
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
-import Meta from "@/components/SEO/seoEngine.ts";
 import TypingText from "@/components/typing/TypingText";
+
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
+
+/* =========================
+   Dynamic Metadata (Server-Side)
+========================= */
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/earn-psn-gift-cards",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: "Earn PSN Gift Cards Online - Cashog",
+      description:
+        "Earn PSN Gift Cards online by completing tasks, surveys, and offers with Cashog.",
+    };
+  }
+}
 
 /* ================= STEPS ================= */
 const steps = [
@@ -51,22 +83,53 @@ const faqs = [
   { q: "How long does it take to receive my card?", a: "PSN Gift Cards are delivered instantly after redeeming your points." },
 ];
 
+/* ================= SEO Metrics Hook ================= */
+function useSEOMetrics(seo: SEOOutput | null) {
+  useEffect(() => {
+    if (!seo?.metrics) return;
+
+    console.log("[SEO Metrics]", {
+      score: seo.metrics.seoScore ?? "n/a",
+      pageType: seo.pageType?.type,
+      generationTime: seo.metrics.generationTime,
+    });
+  }, [seo]);
+}
+
 /* ================= PAGE COMPONENT ================= */
 export default function EarnPSNGiftCards() {
   const { theme } = useTheme();
   const [isLoaded, setIsLoaded] = useState(false);
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  useSEOMetrics(seo);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100);
     return () => clearTimeout(timer);
   }, []);
 
+  /* ================= SEO HYDRATION ================= */
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/earn-psn-gift-cards",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <>
-      <Meta
-        title="Cashog - Earn PSN Gift Cards"
-        description="Learn how to earn PSN Gift Cards online by completing tasks, offers, and surveys with Cashog. Instant, secure, and high-paying rewards!"
-      />
+      {seo && <SeoRenderer seo={seo} />}
 
       <main
         className={`transition-colors duration-500 min-h-screen ${
@@ -94,7 +157,6 @@ export default function EarnPSNGiftCards() {
               Complete tasks, offers, and surveys to earn PSN Gift Cards instantly from anywhere.
             </p>
 
-            {/* ================= HERO CTA BUTTON ================= */}
             <Link href="/signup" className="cta-observer inline-block">
               <motion.span
                 whileHover={{ scale: 1.05 }}
