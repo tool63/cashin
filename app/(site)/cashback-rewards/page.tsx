@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   ArrowRight,
   ShoppingBag,
@@ -13,8 +13,37 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Meta from "@/components/SEO/seoEngine.ts";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
 import TypingText from "@/components/typing/TypingText";
+
+/* ================= SEO METADATA (SERVER SIDE) ================= */
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/cashback-rewards",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: "Cashback Rewards - Cashog",
+      description:
+        "Earn cashback rewards when you shop online. Get paid for your everyday purchases with secure tracking and instant withdrawals.",
+    };
+  }
+}
 
 /* ================= HOW IT WORKS ================= */
 const steps = [
@@ -92,14 +121,32 @@ const faqs = [
   },
 ];
 
-/* ================= PAGE ================= */
+/* ================= PAGE COMPONENT ================= */
 export default function CashbackRewards() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  /* Hydrate SEO client-side (non-blocking) */
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/cashback-rewards",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <>
-      <Meta
-        title="Cashog - Cashback Rewards"
-        description="Earn cashback rewards when you shop online. Get paid for your everyday purchases with secure tracking and instant withdrawals."
-      />
+      {/* Structured Data & Meta Tags */}
+      {seo && <SeoRenderer seo={seo} />}
 
       <main className="min-h-screen bg-white dark:bg-[#0B0E1A] text-gray-900 dark:text-white transition-colors duration-300">
 
@@ -120,7 +167,7 @@ export default function CashbackRewards() {
               Turn everyday spending into real rewards.
             </p>
 
-            {/* ✅ HERO CTA (Updated Like Other Pages) */}
+            {/* HERO CTA */}
             <Link href="/signup" className="cta-observer inline-block">
               <motion.span
                 whileHover={{ scale: 1.05 }}
@@ -130,8 +177,7 @@ export default function CashbackRewards() {
                 text-black px-14 py-6 rounded-3xl font-bold 
                 shadow-2xl text-xl"
               >
-                Start Saving Today
-                <ArrowRight size={24} />
+                Start Saving Today <ArrowRight size={24} />
               </motion.span>
             </Link>
 
@@ -174,9 +220,7 @@ export default function CashbackRewards() {
                 transition={{ duration: 0.5, delay: i * 0.2 }}
                 className="bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-shadow duration-500 border border-gray-200 dark:border-[#2C3140]"
               >
-                <div className="flex justify-center mb-4">
-                  {feature.icon}
-                </div>
+                <div className="flex justify-center mb-4">{feature.icon}</div>
                 <h3 className="text-xl font-semibold mb-2">
                   {feature.title}
                 </h3>
@@ -217,7 +261,6 @@ export default function CashbackRewards() {
             Turn Shopping Into Earnings
           </h2>
 
-          {/* ✅ FINAL CTA (Matching Other Pages) */}
           <Link href="/signup" className="cta-observer inline-block">
             <motion.span
               whileHover={{ scale: 1.05 }}
@@ -227,14 +270,12 @@ export default function CashbackRewards() {
               text-black px-16 py-6 rounded-3xl font-bold 
               shadow-2xl text-xl"
             >
-              Join & Start Earning
-              <ArrowRight size={24} />
+              Join & Start Earning <ArrowRight size={24} />
             </motion.span>
           </Link>
 
           <p className="mt-6 text-gray-600 dark:text-gray-300 text-lg max-w-md mx-auto">
-            Sign up for free and start earning cashback rewards on your online
-            purchases today.
+            Sign up for free and start earning cashback rewards on your online purchases today.
           </p>
         </section>
 
