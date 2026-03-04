@@ -1,62 +1,181 @@
 "use client";
 
-import React from "react";
-import { ArrowRight, Gamepad, User, Gift, CheckCircle, ShieldCheck, Trophy } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import {
+  ArrowRight,
+  Gamepad,
+  User,
+  Gift,
+  CheckCircle,
+  ShieldCheck,
+  Trophy,
+} from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Meta from "@/components/SEO/seoEngine.ts";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
 import TypingText from "@/components/typing/TypingText";
+
+/* =========================
+   Dynamic Metadata (Server-Side)
+========================= */
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/get-paid-to-play-games",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: SEO_CONFIG.defaultTitle,
+      description: SEO_CONFIG.defaultDescription,
+    };
+  }
+}
+
+/* =========================
+   SEO Metrics Logger
+========================= */
+function useSEOMetrics(seo: SEOOutput | null) {
+  useEffect(() => {
+    if (!seo?.metrics) return;
+
+    console.log("[SEO Metrics]", {
+      score: seo.metrics.seoScore ?? "n/a",
+      pageType: seo.pageType?.type,
+      generationTime: seo.metrics.generationTime,
+    });
+  }, [seo]);
+}
 
 /* ================= STEPS ================= */
 const steps = [
   {
     icon: <User size={36} className="text-yellow-400" />,
     title: "Sign Up Instantly",
-    description: "Create your account in minutes and join thousands of gamers earning daily.",
+    description:
+      "Create your account in minutes and join thousands of gamers earning daily.",
   },
   {
     icon: <Gamepad size={36} className="text-green-400" />,
     title: "Play Fun Games",
-    description: "Choose from top mobile and web games and play for points without spending money.",
+    description:
+      "Choose from top mobile and web games and play for points without spending money.",
   },
   {
     icon: <Gift size={36} className="text-yellow-400" />,
     title: "Earn Rewards",
-    description: "Convert your gaming points into cash, gift cards, or mobile top-ups instantly.",
+    description:
+      "Convert your gaming points into cash, gift cards, or mobile top-ups instantly.",
   },
   {
     icon: <CheckCircle size={36} className="text-green-400" />,
     title: "Withdraw Easily",
-    description: "Secure and fast payouts when you reach the minimum threshold, hassle-free.",
+    description:
+      "Secure and fast payouts when you reach the minimum threshold, hassle-free.",
   },
 ];
 
 /* ================= FEATURES ================= */
 const features = [
-  { icon: <ShieldCheck size={28} className="text-yellow-500" />, title: "Trusted & Secure", description: "Millions of users rely on our platform to earn safely while gaming." },
-  { icon: <Trophy size={28} className="text-yellow-500" />, title: "Top-Paying Games", description: "Play games with the highest payouts and maximize your earnings." },
-  { icon: <Gift size={28} className="text-yellow-500" />, title: "Instant Rewards", description: "Redeem your points immediately via PayPal, gift cards, or mobile top-ups." },
-  { icon: <Gamepad size={28} className="text-yellow-500" />, title: "Fun & Engaging", description: "Play games you love while earning real money on the side." },
-  { icon: <User size={28} className="text-yellow-500" />, title: "Mobile-Friendly", description: "Play and earn from any device, anywhere, anytime." },
+  {
+    icon: <ShieldCheck size={28} className="text-yellow-500" />,
+    title: "Trusted & Secure",
+    description:
+      "Millions of users rely on our platform to earn safely while gaming.",
+  },
+  {
+    icon: <Trophy size={28} className="text-yellow-500" />,
+    title: "Top-Paying Games",
+    description:
+      "Play games with the highest payouts and maximize your earnings.",
+  },
+  {
+    icon: <Gift size={28} className="text-yellow-500" />,
+    title: "Instant Rewards",
+    description:
+      "Redeem your points immediately via PayPal, gift cards, or mobile top-ups.",
+  },
+  {
+    icon: <Gamepad size={28} className="text-yellow-500" />,
+    title: "Fun & Engaging",
+    description:
+      "Play games you love while earning real money on the side.",
+  },
+  {
+    icon: <User size={28} className="text-yellow-500" />,
+    title: "Mobile-Friendly",
+    description:
+      "Play and earn from any device, anywhere, anytime.",
+  },
 ];
 
 /* ================= FAQ ================= */
 const faqs = [
-  { q: "Do I need to pay to play?", a: "No, all games are free to play and earn points for real rewards." },
-  { q: "How do I cash out?", a: "Withdraw via PayPal, gift cards, or mobile top-ups instantly once you reach the minimum threshold." },
-  { q: "Can I play on mobile?", a: "Yes! Our platform is fully mobile-optimized so you can earn on the go." },
-  { q: "Is it secure?", a: "Absolutely! We use enterprise-grade security to protect your data and earnings." },
-  { q: "Are all games verified?", a: "Yes, we ensure all games are safe and verified before offering them to users." },
+  {
+    q: "Do I need to pay to play?",
+    a: "No, all games are free to play and earn points for real rewards.",
+  },
+  {
+    q: "How do I cash out?",
+    a: "Withdraw via PayPal, gift cards, or mobile top-ups instantly once you reach the minimum threshold.",
+  },
+  {
+    q: "Can I play on mobile?",
+    a: "Yes! Our platform is fully mobile-optimized so you can earn on the go.",
+  },
+  {
+    q: "Is it secure?",
+    a: "Absolutely! We use enterprise-grade security to protect your data and earnings.",
+  },
+  {
+    q: "Are all games verified?",
+    a: "Yes, we ensure all games are safe and verified before offering them to users.",
+  },
 ];
 
 /* ================= PAGE COMPONENT ================= */
 export default function GetPaidToPlayGames() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  useSEOMetrics(seo);
+
+  /* =========================
+     Hydrate SEO Client-Side
+  ========================== */
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/get-paid-to-play-games",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <>
-      <Meta
-        title="Cashog - Get Paid to Play Games"
-        description="Play games online and earn real money instantly. Join Cashog and start getting paid for gaming today."
-      />
+      {/* Structured Data & SEO Hydration */}
+      {seo && <SeoRenderer seo={seo} />}
 
       <main className="transition-colors duration-300 bg-white dark:bg-[#0B0E1A] text-gray-900 dark:text-white min-h-screen">
 
@@ -73,7 +192,6 @@ export default function GetPaidToPlayGames() {
               Play your favorite games and earn real rewards instantly from home or on the go.
             </p>
 
-            {/* ================= HERO CTA BUTTON ================= */}
             <Link href="/signup" className="cta-observer inline-block">
               <motion.span
                 whileHover={{ scale: 1.05 }}
@@ -122,8 +240,12 @@ export default function GetPaidToPlayGames() {
                 <div className="flex justify-center mb-4 text-yellow-500">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
+                <h3 className="text-xl font-semibold mb-2">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  {feature.description}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -131,12 +253,21 @@ export default function GetPaidToPlayGames() {
 
         {/* ================= FAQ ================= */}
         <section className="max-w-4xl mx-auto px-6 py-20 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-12">
+            Frequently Asked Questions
+          </h2>
           <div className="space-y-4">
             {faqs.map((faq, i) => (
-              <details key={i} className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-5 cursor-pointer group border border-gray-200 dark:border-[#2C3140] hover:bg-gray-200 dark:hover:bg-[#2A2F43] transition-all duration-300">
-                <summary className="font-semibold text-lg">{faq.q}</summary>
-                <p className="mt-3 text-gray-700 dark:text-gray-400">{faq.a}</p>
+              <details
+                key={i}
+                className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-5 cursor-pointer group border border-gray-200 dark:border-[#2C3140] hover:bg-gray-200 dark:hover:bg-[#2A2F43] transition-all duration-300"
+              >
+                <summary className="font-semibold text-lg">
+                  {faq.q}
+                </summary>
+                <p className="mt-3 text-gray-700 dark:text-gray-400">
+                  {faq.a}
+                </p>
               </details>
             ))}
           </div>
@@ -148,7 +279,6 @@ export default function GetPaidToPlayGames() {
             Start Playing & Earning Today
           </h2>
 
-          {/* ================= FINAL CTA BUTTON ================= */}
           <Link href="/signup" className="cta-observer inline-block">
             <motion.span
               whileHover={{ scale: 1.05 }}
@@ -163,7 +293,6 @@ export default function GetPaidToPlayGames() {
             Enjoy top games and earn real money instantly from anywhere, no investment required.
           </p>
         </section>
-
       </main>
     </>
   );
