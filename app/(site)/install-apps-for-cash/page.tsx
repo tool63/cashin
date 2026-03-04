@@ -1,62 +1,181 @@
 "use client";
 
-import React from "react";
-import { ArrowRight, Smartphone, User, Gift, CheckCircle, ShieldCheck, Trophy } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import {
+  ArrowRight,
+  Smartphone,
+  User,
+  Gift,
+  CheckCircle,
+  ShieldCheck,
+  Trophy,
+} from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Meta from "@/components/seo/SeoEngine";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
 import TypingText from "@/components/typing/TypingText";
+
+/* =========================
+   Dynamic Metadata (Server-Side)
+========================= */
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/install-apps-for-cash",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: SEO_CONFIG.defaultTitle,
+      description: SEO_CONFIG.defaultDescription,
+    };
+  }
+}
+
+/* =========================
+   SEO Metrics Logger
+========================= */
+function useSEOMetrics(seo: SEOOutput | null) {
+  useEffect(() => {
+    if (!seo?.metrics) return;
+
+    console.log("[SEO Metrics]", {
+      score: seo.metrics.seoScore ?? "n/a",
+      pageType: seo.pageType?.type,
+      generationTime: seo.metrics.generationTime,
+    });
+  }, [seo]);
+}
 
 /* ================= STEPS ================= */
 const steps = [
   {
     icon: <User size={36} className="text-yellow-400" />,
     title: "Sign Up Free",
-    description: "Create your account in minutes and start earning by installing apps safely.",
+    description:
+      "Create your account in minutes and start earning by installing apps safely.",
   },
   {
     icon: <Smartphone size={36} className="text-green-400" />,
     title: "Install Apps",
-    description: "Browse top apps, install them, and complete simple tasks to earn points instantly.",
+    description:
+      "Browse top apps, install them, and complete simple tasks to earn points instantly.",
   },
   {
     icon: <Gift size={36} className="text-yellow-400" />,
     title: "Earn Rewards",
-    description: "Convert your points to cash, gift cards, or mobile top-ups instantly.",
+    description:
+      "Convert your points to cash, gift cards, or mobile top-ups instantly.",
   },
   {
     icon: <CheckCircle size={36} className="text-green-400" />,
     title: "Withdraw Easily",
-    description: "Fast and secure payouts once you reach the minimum threshold.",
+    description:
+      "Fast and secure payouts once you reach the minimum threshold.",
   },
 ];
 
 /* ================= FEATURES ================= */
 const features = [
-  { icon: <ShieldCheck size={28} className="text-yellow-500" />, title: "Trusted & Secure", description: "Millions of users trust our platform to earn safely by installing apps." },
-  { icon: <Trophy size={28} className="text-yellow-500" />, title: "High-Paying Offers", description: "Access top apps with the highest payouts to maximize your earnings." },
-  { icon: <Gift size={28} className="text-yellow-500" />, title: "Instant Rewards", description: "Redeem points immediately via PayPal, gift cards, or mobile top-ups." },
-  { icon: <Smartphone size={28} className="text-yellow-500" />, title: "Mobile-Friendly", description: "Install apps and earn from any device, anytime." },
-  { icon: <User size={28} className="text-yellow-500" />, title: "Easy & Fun", description: "Simple app installation tasks with quick payouts." },
+  {
+    icon: <ShieldCheck size={28} className="text-yellow-500" />,
+    title: "Trusted & Secure",
+    description:
+      "Millions of users trust our platform to earn safely by installing apps.",
+  },
+  {
+    icon: <Trophy size={28} className="text-yellow-500" />,
+    title: "High-Paying Offers",
+    description:
+      "Access top apps with the highest payouts to maximize your earnings.",
+  },
+  {
+    icon: <Gift size={28} className="text-yellow-500" />,
+    title: "Instant Rewards",
+    description:
+      "Redeem points immediately via PayPal, gift cards, or mobile top-ups.",
+  },
+  {
+    icon: <Smartphone size={28} className="text-yellow-500" />,
+    title: "Mobile-Friendly",
+    description:
+      "Install apps and earn from any device, anytime.",
+  },
+  {
+    icon: <User size={28} className="text-yellow-500" />,
+    title: "Easy & Fun",
+    description:
+      "Simple app installation tasks with quick payouts.",
+  },
 ];
 
 /* ================= FAQ ================= */
 const faqs = [
-  { q: "Do I need to pay to install apps?", a: "No! All app installation tasks are free to complete." },
-  { q: "How do I cash out?", a: "Withdraw your earnings instantly via PayPal, gift cards, or mobile top-ups once you reach the minimum threshold." },
-  { q: "Are the apps safe?", a: "Yes! All apps are verified and safe to install." },
-  { q: "Can I earn on mobile?", a: "Absolutely! Our platform is fully mobile-friendly so you can earn anywhere." },
-  { q: "Is signing up free?", a: "Yes, creating an account is completely free with no hidden fees." },
+  {
+    q: "Do I need to pay to install apps?",
+    a: "No! All app installation tasks are free to complete.",
+  },
+  {
+    q: "How do I cash out?",
+    a: "Withdraw your earnings instantly via PayPal, gift cards, or mobile top-ups once you reach the minimum threshold.",
+  },
+  {
+    q: "Are the apps safe?",
+    a: "Yes! All apps are verified and safe to install.",
+  },
+  {
+    q: "Can I earn on mobile?",
+    a: "Absolutely! Our platform is fully mobile-friendly so you can earn anywhere.",
+  },
+  {
+    q: "Is signing up free?",
+    a: "Yes, creating an account is completely free with no hidden fees.",
+  },
 ];
 
 /* ================= PAGE COMPONENT ================= */
 export default function InstallAppsForCash() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  useSEOMetrics(seo);
+
+  /* =========================
+     Hydrate SEO Client-Side
+  ========================== */
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/install-apps-for-cash",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <>
-      <Meta
-        title="Cashog - Install Apps for Cash"
-        description="Earn real money by installing apps online. Join Cashog and get paid instantly for every app you install."
-      />
+      {/* Structured Data & SEO Hydration */}
+      {seo && <SeoRenderer seo={seo} />}
 
       <main className="transition-colors duration-300 bg-white dark:bg-[#0B0E1A] text-gray-900 dark:text-white min-h-screen">
 
@@ -73,7 +192,6 @@ export default function InstallAppsForCash() {
               Earn money instantly by installing apps from our curated selection. Safe, secure, and fun!
             </p>
 
-            {/* ================= HERO CTA BUTTON ================= */}
             <Link href="/signup" className="cta-observer inline-block">
               <motion.span
                 whileHover={{ scale: 1.05 }}
@@ -98,8 +216,12 @@ export default function InstallAppsForCash() {
               className="bg-gray-100 dark:bg-[#1A1F2B] rounded-2xl p-8 flex flex-col items-center shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-200 dark:border-[#2C3140]"
             >
               <div className="mb-4">{step.icon}</div>
-              <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-              <p className="text-gray-700 dark:text-gray-400">{step.description}</p>
+              <h3 className="text-xl font-semibold mb-2">
+                {step.title}
+              </h3>
+              <p className="text-gray-700 dark:text-gray-400">
+                {step.description}
+              </p>
             </motion.div>
           ))}
         </section>
@@ -122,8 +244,12 @@ export default function InstallAppsForCash() {
                 <div className="flex justify-center mb-4 text-yellow-500">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
+                <h3 className="text-xl font-semibold mb-2">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  {feature.description}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -131,12 +257,21 @@ export default function InstallAppsForCash() {
 
         {/* ================= FAQ ================= */}
         <section className="max-w-4xl mx-auto px-6 py-20 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-12">
+            Frequently Asked Questions
+          </h2>
           <div className="space-y-4">
             {faqs.map((faq, i) => (
-              <details key={i} className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-5 cursor-pointer group border border-gray-200 dark:border-[#2C3140] hover:bg-gray-200 dark:hover:bg-[#2A2F43] transition-all duration-300">
-                <summary className="font-semibold text-lg">{faq.q}</summary>
-                <p className="mt-3 text-gray-700 dark:text-gray-400">{faq.a}</p>
+              <details
+                key={i}
+                className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-5 cursor-pointer group border border-gray-200 dark:border-[#2C3140] hover:bg-gray-200 dark:hover:bg-[#2A2F43] transition-all duration-300"
+              >
+                <summary className="font-semibold text-lg">
+                  {faq.q}
+                </summary>
+                <p className="mt-3 text-gray-700 dark:text-gray-400">
+                  {faq.a}
+                </p>
               </details>
             ))}
           </div>
@@ -148,7 +283,6 @@ export default function InstallAppsForCash() {
             Start Earning by Installing Apps Today
           </h2>
 
-          {/* ================= FINAL CTA BUTTON ================= */}
           <Link href="/signup" className="cta-observer inline-block">
             <motion.span
               whileHover={{ scale: 1.05 }}
