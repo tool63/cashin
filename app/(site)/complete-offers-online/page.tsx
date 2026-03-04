@@ -1,40 +1,25 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { ArrowRight, ClipboardList, User, Gift, CheckCircle, ShieldCheck, Trophy } from "lucide-react";
+import {
+  ArrowRight,
+  ClipboardList,
+  User,
+  Gift,
+  CheckCircle,
+  ShieldCheck,
+  Trophy,
+} from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Meta from "@/components/SEO/seoEngine.ts";
 import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
 import SeoRenderer from "@/components/SEO/SeoRenderer";
 import TypingText from "@/components/typing/TypingText";
 
-/* ================= SEO HYDRATION ================= */
-function useSEOHydration() {
-  const [seo, setSeo] = useState<SEOOutput | null>(null);
-
-  useEffect(() => {
-    let mounted = true;
-
-    buildSEO({
-      route: "/complete-offers-online",
-      locale: SEO_CONFIG.defaultLocale,
-    })
-      .then((result) => {
-        if (mounted) setSeo(result);
-      })
-      .catch((err) => console.error("SEO hydration failed:", err));
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
-  return seo;
-}
-
-/* ================= SEO METADATA ================= */
+/* =========================
+   Dynamic Metadata (Server-Side)
+========================= */
 export async function generateMetadata() {
   try {
     const seo: SEOOutput = await buildSEO({
@@ -60,62 +45,142 @@ export async function generateMetadata() {
   }
 }
 
+/* =========================
+   SEO Metrics Logger (Optional)
+========================= */
+function useSEOMetrics(seo: SEOOutput | null) {
+  useEffect(() => {
+    if (!seo?.metrics) return;
+
+    console.log("[SEO Metrics]", {
+      score: seo.metrics.seoScore ?? "n/a",
+      pageType: seo.pageType?.type,
+      generationTime: seo.metrics.generationTime,
+    });
+  }, [seo]);
+}
+
+/* =========================
+   SEO Hydration (Client Side)
+========================= */
+function useSEOHydration() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/complete-offers-online",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  return seo;
+}
+
 /* ================= STEPS ================= */
 const steps = [
   {
     icon: <User size={36} className="text-yellow-400" />,
     title: "Sign Up Free",
-    description: "Create your account in minutes and access thousands of online offers safely.",
+    description:
+      "Create your account in minutes and access thousands of online offers safely.",
   },
   {
     icon: <ClipboardList size={36} className="text-green-400" />,
     title: "Complete Offers",
-    description: "Browse surveys, app installs, trials, and more to earn points instantly.",
+    description:
+      "Browse surveys, app installs, trials, and more to earn points instantly.",
   },
   {
     icon: <Gift size={36} className="text-yellow-400" />,
     title: "Earn Rewards",
-    description: "Redeem points for cash, gift cards, or mobile top-ups instantly.",
+    description:
+      "Redeem points for cash, gift cards, or mobile top-ups instantly.",
   },
   {
     icon: <CheckCircle size={36} className="text-green-400" />,
     title: "Withdraw Easily",
-    description: "Fast and secure payouts once you reach the minimum threshold.",
+    description:
+      "Fast and secure payouts once you reach the minimum threshold.",
   },
 ];
 
 /* ================= FEATURES ================= */
 const features = [
-  { icon: <ShieldCheck size={28} className="text-yellow-500" />, title: "Trusted & Secure", description: "Millions of users trust our platform to earn safely by completing online offers." },
-  { icon: <Trophy size={28} className="text-yellow-500" />, title: "High-Paying Offers", description: "Access top offers that maximize your earnings." },
-  { icon: <Gift size={28} className="text-yellow-500" />, title: "Instant Rewards", description: "Redeem points immediately via PayPal, gift cards, or mobile top-ups." },
-  { icon: <ClipboardList size={28} className="text-yellow-500" />, title: "Variety of Tasks", description: "Complete surveys, trials, installs, and more with ease." },
-  { icon: <User size={28} className="text-yellow-500" />, title: "Mobile-Friendly", description: "Access and complete offers from any device, anytime." },
+  {
+    icon: <ShieldCheck size={28} className="text-yellow-500" />,
+    title: "Trusted & Secure",
+    description:
+      "Millions of users trust our platform to earn safely by completing online offers.",
+  },
+  {
+    icon: <Trophy size={28} className="text-yellow-500" />,
+    title: "High-Paying Offers",
+    description:
+      "Access top offers that maximize your earnings.",
+  },
+  {
+    icon: <Gift size={28} className="text-yellow-500" />,
+    title: "Instant Rewards",
+    description:
+      "Redeem points immediately via PayPal, gift cards, or mobile top-ups.",
+  },
+  {
+    icon: <ClipboardList size={28} className="text-yellow-500" />,
+    title: "Variety of Tasks",
+    description:
+      "Complete surveys, trials, installs, and more with ease.",
+  },
+  {
+    icon: <User size={28} className="text-yellow-500" />,
+    title: "Mobile-Friendly",
+    description:
+      "Access and complete offers from any device, anytime.",
+  },
 ];
 
 /* ================= FAQ ================= */
 const faqs = [
-  { q: "Do I need to pay for offers?", a: "No! All offers are free to complete and earn points instantly." },
-  { q: "How do I cash out?", a: "Withdraw your earnings via PayPal, gift cards, or mobile top-ups once you reach the minimum threshold." },
-  { q: "Are offers safe?", a: "Yes! All offers are verified and safe for all users." },
-  { q: "Can I complete offers on mobile?", a: "Absolutely! Our platform is fully mobile-optimized." },
-  { q: "Is signing up free?", a: "Yes, creating an account is completely free." },
+  {
+    q: "Do I need to pay for offers?",
+    a: "No! All offers are free to complete and earn points instantly.",
+  },
+  {
+    q: "How do I cash out?",
+    a: "Withdraw your earnings via PayPal, gift cards, or mobile top-ups once you reach the minimum threshold.",
+  },
+  {
+    q: "Are offers safe?",
+    a: "Yes! All offers are verified and safe for all users.",
+  },
+  {
+    q: "Can I complete offers on mobile?",
+    a: "Absolutely! Our platform is fully mobile-optimized.",
+  },
+  {
+    q: "Is signing up free?",
+    a: "Yes, creating an account is completely free.",
+  },
 ];
 
 /* ================= PAGE COMPONENT ================= */
 export default function CompleteOffersOnline() {
   const seo = useSEOHydration();
+  useSEOMetrics(seo);
 
   return (
     <>
       {/* Structured SEO Data */}
       {seo && <SeoRenderer seo={seo} />}
-
-      {/* Existing SEO Engine (kept intact) */}
-      <Meta
-        title="Cashog - Complete Offers Online"
-        description="Earn real money by completing online offers. Join Cashog and get paid instantly for surveys, trials, and more."
-      />
 
       <main className="transition-colors duration-300 bg-white dark:bg-[#0B0E1A] text-gray-900 dark:text-white min-h-screen">
 
@@ -132,7 +197,6 @@ export default function CompleteOffersOnline() {
               Earn real rewards by completing online offers such as surveys, free trials, app installs, and more.
             </p>
 
-            {/* ================= HERO CTA BUTTON ================= */}
             <Link href="/signup" className="cta-observer inline-block">
               <motion.span
                 whileHover={{ scale: 1.05 }}
@@ -193,7 +257,10 @@ export default function CompleteOffersOnline() {
           <h2 className="text-3xl md:text-4xl font-bold mb-12">Frequently Asked Questions</h2>
           <div className="space-y-4">
             {faqs.map((faq, i) => (
-              <details key={i} className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-5 cursor-pointer group border border-gray-200 dark:border-[#2C3140] hover:bg-gray-200 dark:hover:bg-[#2A2F43] transition-all duration-300">
+              <details
+                key={i}
+                className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-5 cursor-pointer group border border-gray-200 dark:border-[#2C3140] hover:bg-gray-200 dark:hover:bg-[#2A2F43] transition-all duration-300"
+              >
                 <summary className="font-semibold text-lg">{faq.q}</summary>
                 <p className="mt-3 text-gray-700 dark:text-gray-400">{faq.a}</p>
               </details>
