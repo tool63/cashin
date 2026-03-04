@@ -1,33 +1,66 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ArrowRight, Gift, CreditCard, User, CheckCircle, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Meta from "@/components/SEO/seoEngine.ts";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
 import TypingText from "@/components/typing/TypingText";
+
+/* ================= SEO METADATA ================= */
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/earn-apple-gift-card",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: "Earn Apple Gift Cards Online - Cashog",
+      description:
+        "Learn how to earn Apple gift cards online by completing tasks, surveys, and offers with Cashog.",
+    };
+  }
+}
 
 /* ================= STEPS ================= */
 const steps = [
   {
     icon: <User size={32} className="text-yellow-500 dark:text-yellow-400" />,
     title: "Sign Up for Free",
-    description: "Create your Cashog account and start accessing Apple gift card earning offers instantly.",
+    description:
+      "Create your Cashog account and start accessing Apple gift card earning offers instantly.",
   },
   {
     icon: <CreditCard size={32} className="text-green-500 dark:text-green-400" />,
     title: "Complete Offers",
-    description: "Play games, watch videos, install apps, or complete surveys to earn points quickly.",
+    description:
+      "Play games, watch videos, install apps, or complete surveys to earn points quickly.",
   },
   {
     icon: <Gift size={32} className="text-yellow-500 dark:text-yellow-400" />,
     title: "Redeem Apple Gift Cards",
-    description: "Turn your points into Apple gift cards securely and instantly.",
+    description:
+      "Turn your points into Apple gift cards securely and instantly.",
   },
   {
     icon: <CheckCircle size={32} className="text-green-500 dark:text-green-400" />,
     title: "Withdraw Easily",
-    description: "Apple gift cards delivered immediately once redemption threshold is reached.",
+    description:
+      "Apple gift cards delivered immediately once redemption threshold is reached.",
   },
 ];
 
@@ -50,13 +83,31 @@ const faqs = [
   { q: "How long does delivery take?", a: "Apple gift cards are delivered instantly to your account after redemption." },
 ];
 
+/* ================= PAGE COMPONENT ================= */
 export default function EarnAppleGiftCard() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  /* Client-side SEO hydration */
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/earn-apple-gift-card",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <>
-      <Meta
-        title="Cashog - Earn Apple Gift Cards"
-        description="Learn how to earn Apple gift cards online by completing tasks, surveys, and offers with Cashog."
-      />
+      {seo && <SeoRenderer seo={seo} />}
 
       <main className="min-h-screen bg-white dark:bg-[#070A14] text-gray-900 dark:text-white transition-colors duration-300">
 
