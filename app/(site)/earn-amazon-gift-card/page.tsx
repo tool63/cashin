@@ -1,33 +1,73 @@
 "use client";
 
-import React from "react";
-import { ArrowRight, Gift, CreditCard, User, CheckCircle, ShieldCheck } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import {
+  ArrowRight,
+  Gift,
+  CreditCard,
+  User,
+  CheckCircle,
+  ShieldCheck,
+} from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Meta from "@/components/SEO/seoEngine.ts";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
 import TypingText from "@/components/typing/TypingText";
+
+/* ================= SEO METADATA ================= */
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/earn-amazon-gift-card",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: "Earn Amazon Gift Cards Online - Cashog",
+      description:
+        "Learn how to earn Amazon gift cards online by completing tasks, surveys, and offers with Cashog.",
+    };
+  }
+}
 
 /* ================= STEPS ================= */
 const steps = [
   {
     icon: <User size={32} className="text-yellow-500 dark:text-yellow-400" />,
     title: "Sign Up for Free",
-    description: "Join Cashog and instantly get access to Amazon gift card earning offers.",
+    description:
+      "Join Cashog and instantly get access to Amazon gift card earning offers.",
   },
   {
     icon: <CreditCard size={32} className="text-green-500 dark:text-green-400" />,
     title: "Complete Offers",
-    description: "Play games, watch videos, install apps, or answer surveys to earn points fast.",
+    description:
+      "Play games, watch videos, install apps, or answer surveys to earn points fast.",
   },
   {
     icon: <Gift size={32} className="text-yellow-500 dark:text-yellow-400" />,
     title: "Redeem Amazon Gift Cards",
-    description: "Convert your points into Amazon gift cards instantly and securely.",
+    description:
+      "Convert your points into Amazon gift cards instantly and securely.",
   },
   {
     icon: <CheckCircle size={32} className="text-green-500 dark:text-green-400" />,
     title: "Withdraw Easily",
-    description: "Gift cards delivered instantly to your account once the threshold is met.",
+    description:
+      "Gift cards delivered instantly to your account once the threshold is met.",
   },
 ];
 
@@ -50,13 +90,31 @@ const faqs = [
   { q: "How long does delivery take?", a: "Amazon gift cards are delivered instantly to your account after redemption." },
 ];
 
+/* ================= PAGE COMPONENT ================= */
 export default function EarnAmazonGiftCard() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  /* Client-side SEO hydration */
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/earn-amazon-gift-card",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <>
-      <Meta
-        title="Cashog - Earn Amazon Gift Cards"
-        description="Learn how to earn Amazon gift cards online by completing tasks, surveys, and offers with Cashog."
-      />
+      {seo && <SeoRenderer seo={seo} />}
 
       <main className="min-h-screen bg-white dark:bg-[#070A14] text-gray-900 dark:text-white transition-colors duration-300">
 
