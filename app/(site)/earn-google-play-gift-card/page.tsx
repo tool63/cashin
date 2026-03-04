@@ -1,33 +1,66 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ArrowRight, Gift, CreditCard, User, CheckCircle, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Meta from "@/components/SEO/seoEngine.ts";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
 import TypingText from "@/components/typing/TypingText";
+
+/* ================= SEO METADATA ================= */
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/earn-google-play-gift-card",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: "Earn Google Play Gift Cards Online - Cashog",
+      description:
+        "Learn how to earn Google Play gift cards online by completing tasks, surveys, and offers with Cashog.",
+    };
+  }
+}
 
 /* ================= STEPS ================= */
 const steps = [
   {
     icon: <User size={32} className="text-yellow-500 dark:text-yellow-400" />,
     title: "Sign Up for Free",
-    description: "Create your Cashog account and instantly access Google Play gift card earning offers.",
+    description:
+      "Create your account and instantly access Google Play gift card earning offers.",
   },
   {
     icon: <CreditCard size={32} className="text-green-500 dark:text-green-400" />,
     title: "Complete Offers",
-    description: "Play games, watch videos, install apps, or complete surveys to earn points fast.",
+    description:
+      "Play games, watch videos, install apps, or complete surveys to earn points fast.",
   },
   {
     icon: <Gift size={32} className="text-yellow-500 dark:text-yellow-400" />,
     title: "Redeem Google Play Gift Cards",
-    description: "Convert your points into Google Play gift cards securely and instantly.",
+    description:
+      "Convert your points into Google Play gift cards securely and instantly.",
   },
   {
     icon: <CheckCircle size={32} className="text-green-500 dark:text-green-400" />,
     title: "Withdraw Easily",
-    description: "Gift cards delivered immediately once redemption threshold is reached.",
+    description:
+      "Gift cards delivered immediately once redemption threshold is reached.",
   },
 ];
 
@@ -43,19 +76,37 @@ const features = [
 
 const faqs = [
   { q: "How do I redeem Google Play gift cards?", a: "Collect points from tasks and redeem them in your rewards section for instant Google Play gift cards." },
-  { q: "Can I earn on mobile?", a: "Yes! Cashog is fully mobile-friendly and works on any device." },
+  { q: "Can I earn on mobile?", a: "Yes! The platform is fully mobile-friendly and works on any device." },
   { q: "Is signing up free?", a: "Yes! Creating an account is completely free." },
   { q: "Do I need PayPal to redeem?", a: "No, you can directly redeem points for Google Play gift cards without PayPal." },
   { q: "How long does delivery take?", a: "Google Play gift cards are delivered instantly to your account after redemption." },
 ];
 
+/* ================= PAGE COMPONENT ================= */
 export default function EarnGooglePlayGiftCard() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  /* Client-side SEO hydration */
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/earn-google-play-gift-card",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <>
-      <Meta
-        title="Cashog - Earn Google Play Gift Cards"
-        description="Learn how to earn Google Play gift cards online by completing tasks, surveys, and offers with Cashog."
-      />
+      {seo && <SeoRenderer seo={seo} />}
 
       <main className="min-h-screen bg-white dark:bg-[#070A14] text-gray-900 dark:text-white transition-colors duration-300">
 
