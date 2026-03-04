@@ -1,62 +1,181 @@
 "use client";
 
-import React from "react";
-import { ArrowRight, Video, User, Gift, CheckCircle, ShieldCheck, Trophy } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import {
+  ArrowRight,
+  Video,
+  User,
+  Gift,
+  CheckCircle,
+  ShieldCheck,
+  Trophy,
+} from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Meta from "@/components/seo/SeoEngine";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
 import TypingText from "@/components/typing/TypingText";
+
+/* =========================
+   Dynamic Metadata (Server-Side)
+========================= */
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/watch-videos-for-money",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: SEO_CONFIG.defaultTitle,
+      description: SEO_CONFIG.defaultDescription,
+    };
+  }
+}
+
+/* =========================
+   SEO Metrics Logger
+========================= */
+function useSEOMetrics(seo: SEOOutput | null) {
+  useEffect(() => {
+    if (!seo?.metrics) return;
+
+    console.log("[SEO Metrics]", {
+      score: seo.metrics.seoScore ?? "n/a",
+      pageType: seo.pageType?.type,
+      generationTime: seo.metrics.generationTime,
+    });
+  }, [seo]);
+}
 
 /* ================= STEPS ================= */
 const steps = [
   {
     icon: <User size={36} className="text-yellow-400" />,
     title: "Sign Up Free",
-    description: "Create your account in minutes and start earning by watching videos safely.",
+    description:
+      "Create your account in minutes and start earning by watching videos safely.",
   },
   {
     icon: <Video size={36} className="text-green-400" />,
     title: "Watch Videos",
-    description: "Choose from a variety of engaging videos and watch to earn points instantly.",
+    description:
+      "Choose from a variety of engaging videos and watch to earn points instantly.",
   },
   {
     icon: <Gift size={36} className="text-yellow-400" />,
     title: "Earn Rewards",
-    description: "Redeem points for cash, gift cards, or mobile top-ups instantly.",
+    description:
+      "Redeem points for cash, gift cards, or mobile top-ups instantly.",
   },
   {
     icon: <CheckCircle size={36} className="text-green-400" />,
     title: "Withdraw Easily",
-    description: "Fast and secure payouts once you reach the minimum threshold.",
+    description:
+      "Fast and secure payouts once you reach the minimum threshold.",
   },
 ];
 
 /* ================= FEATURES ================= */
 const features = [
-  { icon: <ShieldCheck size={28} className="text-yellow-500" />, title: "Trusted & Secure", description: "Millions of users trust our platform to earn safely by watching videos." },
-  { icon: <Trophy size={28} className="text-yellow-500" />, title: "High-Paying Videos", description: "Watch top videos with the highest payouts to maximize your earnings." },
-  { icon: <Gift size={28} className="text-yellow-500" />, title: "Instant Rewards", description: "Redeem points immediately via PayPal, gift cards, or mobile top-ups." },
-  { icon: <Video size={28} className="text-yellow-500" />, title: "Engaging Content", description: "Enjoy a wide variety of videos while earning real money." },
-  { icon: <User size={28} className="text-yellow-500" />, title: "Mobile-Friendly", description: "Watch and earn from any device, anywhere, anytime." },
+  {
+    icon: <ShieldCheck size={28} className="text-yellow-500" />,
+    title: "Trusted & Secure",
+    description:
+      "Millions of users trust our platform to earn safely by watching videos.",
+  },
+  {
+    icon: <Trophy size={28} className="text-yellow-500" />,
+    title: "High-Paying Videos",
+    description:
+      "Watch top videos with the highest payouts to maximize your earnings.",
+  },
+  {
+    icon: <Gift size={28} className="text-yellow-500" />,
+    title: "Instant Rewards",
+    description:
+      "Redeem points immediately via PayPal, gift cards, or mobile top-ups.",
+  },
+  {
+    icon: <Video size={28} className="text-yellow-500" />,
+    title: "Engaging Content",
+    description:
+      "Enjoy a wide variety of videos while earning real money.",
+  },
+  {
+    icon: <User size={28} className="text-yellow-500" />,
+    title: "Mobile-Friendly",
+    description:
+      "Watch and earn from any device, anywhere, anytime.",
+  },
 ];
 
 /* ================= FAQ ================= */
 const faqs = [
-  { q: "Do I need to pay to watch videos?", a: "No! All video tasks are free to watch and earn points." },
-  { q: "How do I cash out?", a: "Withdraw your earnings instantly via PayPal, gift cards, or mobile top-ups once you reach the minimum threshold." },
-  { q: "Are the videos safe?", a: "Yes! All videos are curated and safe for all users." },
-  { q: "Can I earn on mobile?", a: "Absolutely! Our platform is fully mobile-optimized so you can earn anywhere." },
-  { q: "Is signing up free?", a: "Yes, creating an account is completely free with no hidden fees." },
+  {
+    q: "Do I need to pay to watch videos?",
+    a: "No! All video tasks are free to watch and earn points.",
+  },
+  {
+    q: "How do I cash out?",
+    a: "Withdraw your earnings instantly via PayPal, gift cards, or mobile top-ups once you reach the minimum threshold.",
+  },
+  {
+    q: "Are the videos safe?",
+    a: "Yes! All videos are curated and safe for all users.",
+  },
+  {
+    q: "Can I earn on mobile?",
+    a: "Absolutely! Our platform is fully mobile-optimized so you can earn anywhere.",
+  },
+  {
+    q: "Is signing up free?",
+    a: "Yes, creating an account is completely free with no hidden fees.",
+  },
 ];
 
 /* ================= PAGE COMPONENT ================= */
 export default function WatchVideosForMoney() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  useSEOMetrics(seo);
+
+  /* =========================
+     Hydrate SEO Client-Side
+  ========================== */
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/watch-videos-for-money",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <>
-      <Meta
-        title="Cashog - Watch Videos for Money"
-        description="Earn real money by watching videos online. Join Cashog and start getting paid instantly for every video you watch."
-      />
+      {/* Structured Data & SEO Hydration */}
+      {seo && <SeoRenderer seo={seo} />}
 
       <main className="transition-colors duration-300 bg-white dark:bg-[#0B0E1A] text-gray-900 dark:text-white min-h-screen">
 
@@ -73,7 +192,6 @@ export default function WatchVideosForMoney() {
               Enjoy engaging videos and earn real money instantly. Safe, secure, and rewarding!
             </p>
 
-            {/* ================= HERO CTA BUTTON ================= */}
             <Link href="/signup" className="cta-observer inline-block">
               <motion.span
                 whileHover={{ scale: 1.05 }}
@@ -134,7 +252,10 @@ export default function WatchVideosForMoney() {
           <h2 className="text-3xl md:text-4xl font-bold mb-12">Frequently Asked Questions</h2>
           <div className="space-y-4">
             {faqs.map((faq, i) => (
-              <details key={i} className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-5 cursor-pointer group border border-gray-200 dark:border-[#2C3140] hover:bg-gray-200 dark:hover:bg-[#2A2F43] transition-all duration-300">
+              <details
+                key={i}
+                className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-5 cursor-pointer group border border-gray-200 dark:border-[#2C3140] hover:bg-gray-200 dark:hover:bg-[#2A2F43] transition-all duration-300"
+              >
                 <summary className="font-semibold text-lg">{faq.q}</summary>
                 <p className="mt-3 text-gray-700 dark:text-gray-400">{faq.a}</p>
               </details>
@@ -148,7 +269,6 @@ export default function WatchVideosForMoney() {
             Start Watching & Earning Today
           </h2>
 
-          {/* ================= FINAL CTA BUTTON ================= */}
           <Link href="/signup" className="cta-observer inline-block">
             <motion.span
               whileHover={{ scale: 1.05 }}
