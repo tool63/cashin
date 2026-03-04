@@ -1,33 +1,65 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ArrowRight, User, CreditCard, Gift, CheckCircle, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Meta from "@/components/SEO/seoEngine.ts";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
 import TypingText from "@/components/typing/TypingText";
+
+/* ================= SEO METADATA ================= */
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/earn-bitcoin-online",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: "Earn Bitcoin Online - Cashog",
+      description:
+        "Learn how to earn Bitcoin online by completing tasks, surveys, and offers with Cashog.",
+    };
+  }
+}
 
 /* ================= STEPS ================= */
 const steps = [
   {
     icon: <User size={32} className="text-yellow-500 dark:text-yellow-400" />,
     title: "Sign Up for Free",
-    description: "Create your Cashog account and start earning Bitcoin instantly with our platform.",
+    description: "Create your account and start earning Bitcoin instantly.",
   },
   {
     icon: <CreditCard size={32} className="text-green-500 dark:text-green-400" />,
     title: "Complete Tasks & Offers",
-    description: "Play games, watch videos, install apps, or complete surveys to earn points that convert to Bitcoin.",
+    description:
+      "Play games, watch videos, install apps, or complete surveys to earn points that convert to Bitcoin.",
   },
   {
     icon: <Gift size={32} className="text-yellow-500 dark:text-yellow-400" />,
     title: "Convert Points to Bitcoin",
-    description: "Redeem your points for Bitcoin safely and instantly through secure wallets.",
+    description:
+      "Redeem your points for Bitcoin safely and instantly through secure wallets.",
   },
   {
     icon: <CheckCircle size={32} className="text-green-500 dark:text-green-400" />,
     title: "Withdraw Instantly",
-    description: "Bitcoin is delivered directly to your wallet once the redemption threshold is reached.",
+    description:
+      "Bitcoin is delivered directly to your wallet once the redemption threshold is reached.",
   },
 ];
 
@@ -35,32 +67,50 @@ const steps = [
 const features = [
   { title: "Instant Bitcoin Payouts", description: "Receive Bitcoin instantly after redeeming points." },
   { title: "High-Paying Offers", description: "Maximize your earnings with top-performing offers." },
-  { title: "Global Access", description: "Available for users worldwide on any device." },
-  { title: "Mobile-Friendly", description: "Earn Bitcoin on mobile, tablet, or desktop anywhere." },
-  { title: "Trusted & Secure", description: "Millions of users trust Cashog for safe, verified Bitcoin payouts." },
-  { title: "24/7 Support", description: "Our team is always ready to help with any questions." },
+  { title: "Global Access", description: "Available worldwide on any device." },
+  { title: "Mobile-Friendly", description: "Earn Bitcoin on mobile, tablet, or desktop." },
+  { title: "Trusted & Secure", description: "Safe and verified Bitcoin payouts." },
+  { title: "24/7 Support", description: "Support team ready to help anytime." },
 ];
 
 const faqs = [
-  { q: "How do I withdraw Bitcoin?", a: "After collecting points from tasks, redeem them for Bitcoin directly to your wallet instantly." },
-  { q: "Can I earn from mobile?", a: "Yes! The platform is fully responsive and works on any mobile device." },
-  { q: "Is signing up free?", a: "Absolutely! Creating an account and earning is 100% free." },
-  { q: "Is Bitcoin safe?", a: "Yes, all withdrawals are processed securely and instantly to verified wallets." },
+  { q: "How do I withdraw Bitcoin?", a: "Collect points from tasks and redeem them directly to your wallet instantly." },
+  { q: "Can I earn from mobile?", a: "Yes! The platform works on all mobile devices." },
+  { q: "Is signing up free?", a: "Yes, creating an account is completely free." },
+  { q: "Is Bitcoin safe?", a: "All withdrawals are processed securely to verified wallets." },
   { q: "How long does delivery take?", a: "Bitcoin payouts are delivered instantly after redemption." },
 ];
 
+/* ================= PAGE COMPONENT ================= */
 export default function EarnBitcoinOnline() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  /* Client-side SEO hydration */
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/earn-bitcoin-online",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <>
-      <Meta
-        title="Cashog - Earn Bitcoin Online"
-        description="Learn how to earn Bitcoin online by completing tasks, surveys, and offers with Cashog."
-      />
+      {seo && <SeoRenderer seo={seo} />}
 
       <main className="min-h-screen bg-white dark:bg-[#070A14] text-gray-900 dark:text-white transition-colors duration-300">
 
         {/* ================= HERO ================= */}
-        <section className="py-24 px-4 text-center bg-gray-50 dark:bg-[#0F172A] transition-colors duration-300 rounded-b-3xl">
+        <section className="py-24 px-4 text-center bg-gray-50 dark:bg-[#0F172A] rounded-b-3xl">
           <div className="max-w-3xl mx-auto">
             <h1 className="text-5xl sm:text-6xl font-extrabold mb-4">
               Earn Bitcoin Online
@@ -140,7 +190,7 @@ export default function EarnBitcoinOnline() {
             {faqs.map((faq, i) => (
               <details
                 key={i}
-                className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-5 cursor-pointer transition-colors duration-300"
+                className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-5 cursor-pointer"
               >
                 <summary className="font-semibold text-lg">{faq.q}</summary>
                 <p className="mt-3 text-gray-600 dark:text-gray-400">{faq.a}</p>
@@ -150,7 +200,7 @@ export default function EarnBitcoinOnline() {
         </section>
 
         {/* ================= FINAL CTA ================= */}
-        <section className="text-center py-28 bg-gray-50 dark:bg-[#0F172A] transition-colors duration-300 rounded-t-3xl">
+        <section className="text-center py-28 bg-gray-50 dark:bg-[#0F172A] rounded-t-3xl">
           <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
             Start Earning Bitcoin Today!
           </h2>
