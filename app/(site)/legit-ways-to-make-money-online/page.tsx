@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   ArrowRight,
   ShieldCheck,
@@ -13,8 +13,37 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Meta from "@/components/seo/SeoEngine";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
 import TypingText from "@/components/typing/TypingText";
+
+/* ================= SEO METADATA (SERVER SIDE) ================= */
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/legit-ways-to-make-money-online",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: "Legit Ways to Make Money Online - Cashog",
+      description:
+        "Discover legit and trusted ways to make money online. Start earning with verified surveys, cashback offers, and beginner-friendly online jobs.",
+    };
+  }
+}
 
 /* ================= LEGIT METHODS ================= */
 const methods = [
@@ -86,13 +115,32 @@ const faqs = [
   },
 ];
 
+/* ================= PAGE COMPONENT ================= */
 export default function LegitWaysToMakeMoneyOnline() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  /* Hydrate SEO client-side (non-blocking) */
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/legit-ways-to-make-money-online",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <>
-      <Meta
-        title="Cashog - Legit Ways To Make Money Online"
-        description="Discover legit and trusted ways to make money online. Start earning with verified surveys, cashback offers, and beginner-friendly online jobs."
-      />
+      {/* Structured Data & Meta Tags */}
+      {seo && <SeoRenderer seo={seo} />}
 
       <main className="min-h-screen bg-white dark:bg-[#0B0E1A] text-gray-900 dark:text-white transition-colors duration-300">
 
@@ -123,8 +171,7 @@ export default function LegitWaysToMakeMoneyOnline() {
                 text-black px-14 py-6 rounded-3xl font-bold 
                 shadow-2xl text-xl"
               >
-                Start Earning Safely
-                <ArrowRight size={24} />
+                Start Earning Safely <ArrowRight size={24} />
               </motion.span>
             </Link>
 
@@ -167,9 +214,7 @@ export default function LegitWaysToMakeMoneyOnline() {
                 transition={{ duration: 0.5, delay: i * 0.2 }}
                 className="bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-shadow duration-500 border border-gray-200 dark:border-[#2C3140]"
               >
-                <div className="flex justify-center mb-4">
-                  {feature.icon}
-                </div>
+                <div className="flex justify-center mb-4">{feature.icon}</div>
                 <h3 className="text-xl font-semibold mb-2">
                   {feature.title}
                 </h3>
@@ -219,8 +264,7 @@ export default function LegitWaysToMakeMoneyOnline() {
               text-black px-16 py-6 rounded-3xl font-bold 
               shadow-2xl text-xl"
             >
-              Join & Start Earning
-              <ArrowRight size={24} />
+              Join & Start Earning <ArrowRight size={24} />
             </motion.span>
           </Link>
 
