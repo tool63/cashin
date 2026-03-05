@@ -1,16 +1,57 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, Smartphone, Laptop, Headphones, Tv } from "lucide-react";
-import Meta from "@/components/seo/SeoEngine";
 import TypingText from "@/components/typing/TypingText";
 
-/* ================= SEO ================= */
-const pageTitle = "Cashog - Electronics Shopping Rewards";
-const pageDescription =
-  "Earn premium cashback on electronics shopping. Get rewards on mobiles, laptops, headphones, and smart TVs with Cashog.";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
+
+/* =========================
+   Dynamic Metadata (Server-Side)
+========================= */
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/shopping-rewards/electronics",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: SEO_CONFIG.defaultTitle,
+      description: SEO_CONFIG.defaultDescription,
+    };
+  }
+}
+
+/* =========================
+   SEO Metrics
+========================= */
+function useSEOMetrics(seo: SEOOutput | null) {
+  useEffect(() => {
+    if (!seo?.metrics) return;
+
+    console.log("[SEO Metrics]", {
+      score: seo.metrics.seoScore ?? "n/a",
+      pageType: seo.pageType?.type,
+      generationTime: seo.metrics.generationTime,
+    });
+  }, [seo]);
+}
 
 /* ================= ANIMATION ================= */
 const containerVariants = {
@@ -62,10 +103,37 @@ const electronicsOffers = [
   },
 ];
 
+/* ================= PAGE ================= */
 export default function ElectronicsRewards() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  /* SEO Metrics Hook */
+  useSEOMetrics(seo);
+
+  /* =========================
+     Hydrate SEO Client-Side
+  ========================== */
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/shopping-rewards/electronics",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <>
-      <Meta title={pageTitle} description={pageDescription} />
+      {/* Structured Data & Meta */}
+      {seo && <SeoRenderer seo={seo} />}
 
       <main className="bg-white dark:bg-[#070A14] text-gray-900 dark:text-white min-h-screen transition-colors duration-300">
 
