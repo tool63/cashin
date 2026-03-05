@@ -1,16 +1,14 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, CreditCard, Landmark, Wallet, BadgePercent } from "lucide-react";
-import Meta from "@/components/SEO/seoEngine.ts";
 import TypingText from "@/components/typing/TypingText";
 
-/* ================= SEO ================= */
-const pageTitle = "Cashog - Banking & Finance Offers";
-const pageDescription =
-  "Unlock premium banking, credit card, UPI, and loan cashback offers. Earn high-value financial rewards with Cashog.";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
 
 /* ================= ANIMATION ================= */
 const containerVariants = {
@@ -63,9 +61,22 @@ const bankingOffers = [
 ];
 
 export default function BankingFinanceOffers() {
+
+  /* ================= SEO STATE ================= */
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  useEffect(() => {
+    buildSEO({
+      route: "/banking-finance-offers",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then(setSeo)
+      .catch(console.error);
+  }, []);
+
   return (
     <>
-      <Meta title={pageTitle} description={pageDescription} />
+      {seo && <SeoRenderer seo={seo} />}
 
       <main className="bg-white dark:bg-[#070A14] text-gray-900 dark:text-white min-h-screen transition-colors duration-300">
 
