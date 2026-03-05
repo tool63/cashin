@@ -1,5 +1,3 @@
-"use client";
-
 import AuthModal from "@/components/modals/AuthModal";
 import AuthPageWrapper from "@/components/auth/AuthPageWrapper";
 import Link from "next/link";
