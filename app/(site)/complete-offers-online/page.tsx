@@ -1,6 +1,4 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   ArrowRight,
   ClipboardList,
@@ -11,10 +9,8 @@ import {
   Trophy,
 } from "lucide-react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
-import SeoRenderer from "@/components/SEO/SeoRenderer";
 import TypingText from "@/components/typing/TypingText";
 
 /* =========================
@@ -37,53 +33,11 @@ export async function generateMetadata() {
     };
   } catch (error) {
     console.error("Metadata generation failed:", error);
-
     return {
       title: SEO_CONFIG.defaultTitle,
       description: SEO_CONFIG.defaultDescription,
     };
   }
-}
-
-/* =========================
-   SEO Metrics Logger (Optional)
-========================= */
-function useSEOMetrics(seo: SEOOutput | null) {
-  useEffect(() => {
-    if (!seo?.metrics) return;
-
-    console.log("[SEO Metrics]", {
-      score: seo.metrics.seoScore ?? "n/a",
-      pageType: seo.pageType?.type,
-      generationTime: seo.metrics.generationTime,
-    });
-  }, [seo]);
-}
-
-/* =========================
-   SEO Hydration (Client Side)
-========================= */
-function useSEOHydration() {
-  const [seo, setSeo] = useState<SEOOutput | null>(null);
-
-  useEffect(() => {
-    let mounted = true;
-
-    buildSEO({
-      route: "/complete-offers-online",
-      locale: SEO_CONFIG.defaultLocale,
-    })
-      .then((result) => {
-        if (mounted) setSeo(result);
-      })
-      .catch((err) => console.error("SEO hydration failed:", err));
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
-  return seo;
 }
 
 /* ================= STEPS ================= */
@@ -174,14 +128,8 @@ const faqs = [
 
 /* ================= PAGE COMPONENT ================= */
 export default function CompleteOffersOnline() {
-  const seo = useSEOHydration();
-  useSEOMetrics(seo);
-
   return (
     <>
-      {/* Structured SEO Data */}
-      {seo && <SeoRenderer seo={seo} />}
-
       <main className="transition-colors duration-300 bg-white dark:bg-[#0B0E1A] text-gray-900 dark:text-white min-h-screen">
 
         {/* ================= HERO ================= */}
@@ -198,13 +146,9 @@ export default function CompleteOffersOnline() {
             </p>
 
             <Link href="/signup" className="cta-observer inline-block">
-              <motion.span
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-14 py-6 rounded-3xl font-bold shadow-2xl text-xl"
-              >
+              <span className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-14 py-6 rounded-3xl font-bold shadow-2xl text-xl">
                 Start Completing Offers <ArrowRight size={24} />
-              </motion.span>
+              </span>
             </Link>
           </div>
         </section>
@@ -212,18 +156,14 @@ export default function CompleteOffersOnline() {
         {/* ================= STEPS ================= */}
         <section className="max-w-7xl mx-auto px-6 py-20 grid gap-12 md:grid-cols-2 lg:grid-cols-4 text-center">
           {steps.map((step, i) => (
-            <motion.div
+            <div
               key={i}
-              initial={{ opacity: 0, y: 60 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.2 }}
               className="bg-gray-100 dark:bg-[#1A1F2B] rounded-2xl p-8 flex flex-col items-center shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-200 dark:border-[#2C3140]"
             >
               <div className="mb-4">{step.icon}</div>
               <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
               <p className="text-gray-700 dark:text-gray-400">{step.description}</p>
-            </motion.div>
+            </div>
           ))}
         </section>
 
@@ -234,12 +174,8 @@ export default function CompleteOffersOnline() {
           </h2>
           <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5 justify-center">
             {features.map((feature, i) => (
-              <motion.div
+              <div
                 key={i}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.2 }}
                 className="bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 text-center shadow-lg hover:shadow-2xl transition-shadow duration-500 w-full max-w-xs mx-auto border border-gray-200 dark:border-[#2C3140]"
               >
                 <div className="flex justify-center mb-4 text-yellow-500">
@@ -247,7 +183,7 @@ export default function CompleteOffersOnline() {
                 </div>
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
                 <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </section>
@@ -275,13 +211,9 @@ export default function CompleteOffersOnline() {
           </h2>
 
           <Link href="/signup" className="cta-observer inline-block">
-            <motion.span
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-3xl font-bold shadow-2xl text-xl"
-            >
+            <span className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-3xl font-bold shadow-2xl text-xl">
               Join & Complete Offers <ArrowRight size={24} />
-            </motion.span>
+            </span>
           </Link>
 
           <p className="mt-6 text-gray-900 dark:text-gray-300 text-lg max-w-md mx-auto">
