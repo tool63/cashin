@@ -1,8 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
-import SeoRenderer from "@/components/SEO/SeoRenderer";
 
 import Background from "@/components/Background";
 import Reveal from "@/components/animations/Reveal";
@@ -37,96 +36,11 @@ const offers: Offer[] = [
   { id: 9, title: "Finance App Install", category: "Finance", reward: "$4.5", popularity: 93 },
 ];
 
-/* ================= SEO METADATA ================= */
-
-export async function generateMetadata() {
-  try {
-    const seo: SEOOutput = await buildSEO({
-      route: "/complete-offers",
-      locale: SEO_CONFIG.defaultLocale,
-    });
-
-    return {
-      ...seo.metadata,
-      alternates: {
-        canonical: seo.canonical,
-        languages: seo.hreflang,
-      },
-      robots: seo.metadata?.robots,
-    };
-  } catch (error) {
-    console.error("Metadata generation failed:", error);
-
-    return {
-      title: SEO_CONFIG.defaultTitle,
-      description: SEO_CONFIG.defaultDescription,
-    };
-  }
-}
-
-/* ================= SEO HYDRATION (CLIENT) ================= */
-function useSEOHydration() {
-  const [seo, setSeo] = useState<SEOOutput | null>(null);
-
-  useEffect(() => {
-    let mounted = true;
-
-    buildSEO({
-      route: "/complete-offers",
-      locale: SEO_CONFIG.defaultLocale,
-    })
-      .then((result) => {
-        if (mounted) setSeo(result);
-      })
-      .catch((err) => console.error("SEO hydration failed:", err));
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
-  return seo;
-}
-
-/* ================= COUNT UP ================= */
-function CountUp({ end }: { end: number }) {
-  const [count, setCount] = useState(0);
-  const ref = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          let start = 0;
-          const duration = 2000;
-          const increment = end / (duration / 16);
-
-          const counter = setInterval(() => {
-            start += increment;
-            if (start >= end) {
-              setCount(end);
-              clearInterval(counter);
-            } else {
-              setCount(Math.floor(start));
-            }
-          }, 16);
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [end]);
-
-  return <div ref={ref}>{count.toLocaleString()}</div>;
-}
-
 /* ================= PLATFORM STATS ================= */
 const stats = [
-  { label: "Total Rewards Issued", number: 35000 },
-  { label: "Active Members", number: 20000 },
-  { label: "Average Reward", number: 3.8 },
+  { label: "Total Rewards Issued", value: "35K+" },
+  { label: "Active Members", value: "20K+" },
+  { label: "Avg. Reward", value: "$3.80" },
 ];
 
 /* ================= HOW IT WORKS STEPS ================= */
@@ -148,15 +62,35 @@ const steps = [
   },
 ];
 
-/* ================= PAGE ================= */
-export default function PremiumRewardPage() {
-  const seo = useSEOHydration();
+/* ================= SEO METADATA ================= */
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/complete-offers",
+      locale: SEO_CONFIG.defaultLocale,
+    });
 
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+    return {
+      title: "Complete Offers - Cashog",
+      description: "Earn real rewards by completing online offers, surveys, and tasks. Join thousands of users earning daily.",
+    };
+  }
+}
+
+/* ================= PAGE ================= */
+export default function CompleteOffersPage() {
   return (
     <>
-      {/* Structured SEO Data */}
-      {seo && <SeoRenderer seo={seo} />}
-
       <main className="relative min-h-screen text-gray-900 dark:text-white">
         <Background />
 
@@ -166,7 +100,7 @@ export default function PremiumRewardPage() {
           <Reveal>
             <div className="text-center mb-24">
               <h1 className="text-4xl md:text-6xl font-extrabold mb-4">
-                Premium Reward Marketplace
+                Complete Offers Online
               </h1>
 
               <div className="text-3xl md:text-4xl font-extrabold gradient-text mb-6">
@@ -178,7 +112,7 @@ export default function PremiumRewardPage() {
               </p>
 
               <PrimaryCTA href="/signup">
-                Activate Access
+                Start Earning Now
               </PrimaryCTA>
             </div>
           </Reveal>
@@ -199,10 +133,7 @@ export default function PremiumRewardPage() {
           <div className="grid md:grid-cols-3 gap-8 mb-28">
             {offers.map((offer) => (
               <Reveal key={offer.id}>
-                <motion.div
-                  whileHover={{ y: -6 }}
-                  className="bg-white/90 dark:bg-[#0c111b]/90 backdrop-blur-xl border rounded-2xl p-6 shadow-sm"
-                >
+                <div className="bg-white/90 dark:bg-[#0c111b]/90 backdrop-blur-xl border rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
                   <div className="flex justify-between items-center mb-4">
                     <ClipboardList className="text-yellow-500 w-5 h-5" />
                     <span className="text-xs px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-600">
@@ -229,12 +160,12 @@ export default function PremiumRewardPage() {
                   <div className="mt-6">
                     <a
                       href="/signup"
-                      className="inline-flex items-center justify-center px-5 py-2 text-sm font-semibold rounded-xl bg-gradient-to-r from-yellow-400 to-green-400 text-black"
+                      className="inline-flex items-center justify-center px-5 py-2 text-sm font-semibold rounded-xl bg-gradient-to-r from-yellow-400 to-green-400 text-black hover:opacity-90 transition-opacity"
                     >
                       Claim Opportunity
                     </a>
                   </div>
-                </motion.div>
+                </div>
               </Reveal>
             ))}
           </div>
@@ -253,18 +184,17 @@ export default function PremiumRewardPage() {
 
           <div className="grid grid-cols-3 gap-4 mb-28">
             {stats.map((stat, index) => (
-              <motion.div
+              <div
                 key={index}
-                whileHover={{ y: -5 }}
-                className="bg-white/90 dark:bg-[#0c111b]/90 backdrop-blur-xl border rounded-2xl p-6 text-center"
+                className="bg-white/90 dark:bg-[#0c111b]/90 backdrop-blur-xl border rounded-2xl p-6 text-center hover:shadow-xl transition-all duration-300"
               >
                 <h3 className="text-2xl md:text-4xl font-extrabold text-green-500">
-                  <CountUp end={stat.number} />
+                  {stat.value}
                 </h3>
                 <p className="mt-2 text-xs md:text-base text-gray-600 dark:text-gray-400">
                   {stat.label}
                 </p>
-              </motion.div>
+              </div>
             ))}
           </div>
 
@@ -281,10 +211,7 @@ export default function PremiumRewardPage() {
           <div className="grid md:grid-cols-3 gap-10 mb-28 text-center">
             {steps.map((step) => (
               <Reveal key={step.title}>
-                <motion.div
-                  whileHover={{ y: -6 }}
-                  className="bg-white dark:bg-[#0c111b] border rounded-2xl p-8"
-                >
+                <div className="bg-white dark:bg-[#0c111b] border rounded-2xl p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
                   {step.icon}
                   <h3 className="text-xl font-semibold mt-4 mb-2">
                     {step.title}
@@ -292,7 +219,7 @@ export default function PremiumRewardPage() {
                   <p className="text-gray-600 dark:text-gray-400 text-sm">
                     {step.desc}
                   </p>
-                </motion.div>
+                </div>
               </Reveal>
             ))}
           </div>
