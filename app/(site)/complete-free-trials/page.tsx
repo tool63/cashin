@@ -1,5 +1,3 @@
-"use client";
-
 import { motion } from "framer-motion";
 import SeoEngine from "@/components/SEO/seoEngine.ts";
 import Background from "@/components/Background";
