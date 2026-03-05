@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { buildSEO, SEOOutput } from "@/components/seo/SeoEngine";
+import { buildSEO, SEOOutput } from "@/components/seo/seoEngine";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
 import SeoRenderer from "@/components/SEO/SeoRenderer";
 
