@@ -1,16 +1,57 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, Sofa, Flower2, Lamp, Home } from "lucide-react";
-import Meta from "@/components/seo/SeoEngine";
 import TypingText from "@/components/typing/TypingText";
 
-/* ================= SEO ================= */
-const pageTitle = "Cashog - Home & Garden Shopping Rewards";
-const pageDescription =
-  "Earn premium cashback on home decor, furniture, gardening, and lifestyle essentials. Shop smarter and earn rewards with Cashog.";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
+
+/* =========================
+   Dynamic Metadata (Server-Side)
+========================= */
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/shopping-rewards/home-garden",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: SEO_CONFIG.defaultTitle,
+      description: SEO_CONFIG.defaultDescription,
+    };
+  }
+}
+
+/* =========================
+   SEO Metrics
+========================= */
+function useSEOMetrics(seo: SEOOutput | null) {
+  useEffect(() => {
+    if (!seo?.metrics) return;
+
+    console.log("[SEO Metrics]", {
+      score: seo.metrics.seoScore ?? "n/a",
+      pageType: seo.pageType?.type,
+      generationTime: seo.metrics.generationTime,
+    });
+  }, [seo]);
+}
 
 /* ================= ANIMATION ================= */
 const containerVariants = {
@@ -62,10 +103,37 @@ const homeGardenOffers = [
   },
 ];
 
+/* ================= PAGE ================= */
 export default function HomeGardenRewards() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  /* SEO Metrics Hook */
+  useSEOMetrics(seo);
+
+  /* =========================
+     Hydrate SEO Client-Side
+  ========================== */
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/shopping-rewards/home-garden",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <>
-      <Meta title={pageTitle} description={pageDescription} />
+      {/* Structured Data & Meta */}
+      {seo && <SeoRenderer seo={seo} />}
 
       <main className="bg-white dark:bg-[#070F12] text-gray-900 dark:text-white min-h-screen transition-colors duration-300">
 
@@ -104,7 +172,7 @@ export default function HomeGardenRewards() {
               variants={itemVariants}
               className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
             >
-              Transform your home into a premium living experience while earning 
+              Transform your home into a premium living experience while earning
               attractive cashback on furniture, decor, and garden essentials.
             </motion.p>
 
@@ -134,27 +202,22 @@ export default function HomeGardenRewards() {
               transition={{ duration: 0.5, delay: i * 0.15 }}
               className="relative bg-gray-100 dark:bg-[#162125] rounded-3xl p-8 shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-3 group"
             >
-              {/* Badge */}
               <div className="absolute top-4 right-4 text-xs font-bold bg-green-400 text-black px-3 py-1 rounded-full">
                 {offer.badge}
               </div>
 
-              {/* Icon */}
               <div className="mb-6 group-hover:scale-110 transition-transform duration-300">
                 {offer.icon}
               </div>
 
-              {/* Title */}
               <h3 className="text-xl font-semibold mb-3">
                 {offer.title}
               </h3>
 
-              {/* Reward */}
               <p className="text-lg font-bold text-green-500 mb-6">
                 {offer.reward}
               </p>
 
-              {/* CTA */}
               <Link href="/signup" className="cta-observer">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
