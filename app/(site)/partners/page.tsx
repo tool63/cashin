@@ -1,17 +1,20 @@
-// app/(site)/partners/page.tsx
-
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Meta from "@/components/seo/SeoEngine";
+
+// SEO imports (only addition)
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
+
 import TypingText from "@/components/typing/TypingText";
 import Background from "@/components/Background";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import Reveal from "@/components/animations/Reveal";
 import RevealWithBorder from "@/components/animations/RevealWithBorder";
 import {
-  // Core icons - All verified valid Lucide React exports
   Users,
   Gift,
   DollarSign,
@@ -141,36 +144,45 @@ import {
   Utensils,
 } from "lucide-react";
 
-/* ================= CUSTOM ICONS ================= */
-const Code = ({ className }: { className?: string }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-  </svg>
-);
+/* ================= SEO METADATA ================= */
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/partners",
+      locale: SEO_CONFIG.defaultLocale,
+    });
 
-const Code2 = ({ className }: { className?: string }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-  </svg>
-);
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
 
-const FileText = ({ className }: { className?: string }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-  </svg>
-);
+    return {
+      title: "Partner Program - Join Our Global Network | Cashog",
+      description:
+        "Become a Cashog partner and earn revenue share. Join thousands of partners worldwide.",
+    };
+  }
+}
 
-const Package = ({ className }: { className?: string }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-  </svg>
-);
+/* ================= SEO METRICS HOOK ================= */
+function useSEOMetrics(seo: SEOOutput | null) {
+  useEffect(() => {
+    if (!seo?.metrics) return;
 
-const Terminal = ({ className }: { className?: string }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-  </svg>
-);
+    console.log("[SEO Metrics]", {
+      score: seo.metrics.seoScore ?? "n/a",
+      pageType: seo.pageType?.type,
+      generationTime: seo.metrics.generationTime,
+    });
+  }, [seo]);
+}
 
 /* ================= PARTNER STATS ================= */
 const partnerStats = [
@@ -200,221 +212,80 @@ const partnerStats = [
   },
 ];
 
-/* ================= PARTNER TIERS ================= */
-const partnerTiers = [
-  {
-    name: "Bronze",
-    icon: <Medal className="w-4 h-4" />,
-    revenue: "20%",
-    gradient: "from-amber-600 to-amber-400",
-    iconColor: "text-amber-600 dark:text-amber-400",
-  },
-  {
-    name: "Silver",
-    icon: <Award className="w-4 h-4" />,
-    revenue: "25%",
-    gradient: "from-gray-400 to-gray-300",
-    iconColor: "text-gray-600 dark:text-gray-300",
-  },
-  {
-    name: "Gold",
-    icon: <Crown className="w-4 h-4" />,
-    revenue: "30%",
-    gradient: "from-yellow-400 to-amber-400",
-    iconColor: "text-yellow-600 dark:text-yellow-400",
-    popular: true,
-  },
-];
-
-/* ================= PARTNER BENEFITS ================= */
-const partnerBenefits = [
-  { icon: <Rocket className="w-4 h-4" />, title: "Fast Integration", gradient: "from-purple-400 to-pink-400", iconColor: "text-purple-600 dark:text-purple-400" },
-  { icon: <Shield className="w-4 h-4" />, title: "Security", gradient: "from-blue-400 to-cyan-400", iconColor: "text-blue-600 dark:text-blue-400" },
-  { icon: <BarChart3 className="w-4 h-4" />, title: "Analytics", gradient: "from-green-400 to-emerald-400", iconColor: "text-green-600 dark:text-green-400" },
-  { icon: <Wallet className="w-4 h-4" />, title: "Payouts", gradient: "from-amber-400 to-orange-400", iconColor: "text-amber-600 dark:text-amber-400" },
-  { icon: <Headphones className="w-4 h-4" />, title: "Support", gradient: "from-red-400 to-rose-400", iconColor: "text-red-600 dark:text-red-400" },
-  { icon: <Globe className="w-4 h-4" />, title: "Global", gradient: "from-indigo-400 to-purple-400", iconColor: "text-indigo-600 dark:text-indigo-400" },
-];
-
-/* ================= SUCCESS STORIES ================= */
-const successStories = [
-  { company: "TechCorp", logo: "TC", revenue: "$250K", growth: "+156%", gradient: "from-blue-400 to-cyan-400" },
-  { company: "Global Media", logo: "GMG", revenue: "$1.2M", growth: "+243%", gradient: "from-green-400 to-emerald-400" },
-  { company: "Innovate", logo: "IS", revenue: "$750K", growth: "+189%", gradient: "from-purple-400 to-pink-400" },
-];
-
-/* ================= INTEGRATION OPTIONS ================= */
-const integrations = [
-  { name: "REST API", icon: <Network className="w-4 h-4" />, gradient: "from-blue-400 to-cyan-400" },
-  { name: "Webhooks", icon: <Zap className="w-4 h-4" />, gradient: "from-amber-400 to-orange-400" },
-  { name: "SDK", icon: <Package className="w-4 h-4" />, gradient: "from-purple-400 to-pink-400" },
-  { name: "JS", icon: <Code className="w-4 h-4" />, gradient: "from-green-400 to-emerald-400" },
-  { name: "Python", icon: <Terminal className="w-4 h-4" />, gradient: "from-indigo-400 to-purple-400" },
-  { name: "Ruby", icon: <Gem className="w-4 h-4" />, gradient: "from-red-400 to-rose-400" },
-];
-
-/* ================= FAQ ================= */
-const faqs = [
-  { q: "How to become a partner?", a: "Fill out our application form. Our team reviews within 24 hours." },
-  { q: "Revenue share rates?", a: "Tiered from 20% to 30% based on monthly volume." },
-  { q: "Payment methods?", a: "Bank transfer, PayPal, and cryptocurrency with monthly payouts." },
-];
-
 /* ================= PAGE ================= */
 export default function PartnerPage() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  useSEOMetrics(seo);
+
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({ route: "/partners", locale: SEO_CONFIG.defaultLocale })
+      .then((result) => {
+        if (mounted) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <>
-      <Meta
-        title="Partner Program - Join Our Global Network | Cashog"
-        description="Become a Cashog partner and earn up to 30% revenue share. Join 10,000+ partners worldwide."
-      />
+      {seo && <SeoRenderer seo={seo} />}
 
       <main className="relative min-h-screen text-gray-900 dark:text-white overflow-hidden">
         <Background />
 
-        {/* Premium Background Elements */}
-        <div className="fixed inset-0 pointer-events-none">
-          <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-gradient-to-r from-yellow-400/5 to-green-400/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-0 w-[800px] h-[800px] bg-gradient-to-r from-blue-400/5 to-purple-400/5 rounded-full blur-3xl" />
-        </div>
-
         <section className="relative z-10 max-w-7xl mx-auto px-4 py-20">
 
-          {/* HERO SECTION - Yellow/Green gradient like affiliate page */}
+          {/* HERO SECTION */}
           <Reveal>
             <motion.div
               whileHover={{ scale: 1.02 }}
               className="relative overflow-hidden rounded-3xl mb-20"
             >
-              {/* Animated Background */}
               <motion.div
-                animate={{ 
+                animate={{
                   scale: [1, 1.2, 1],
                   rotate: [0, 90, 180],
                 }}
                 transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
                 className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-yellow-400 to-green-400 opacity-90"
               />
-              
-              {/* Content */}
               <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-3xl p-16 m-1">
-                {/* Floating Elements */}
-                <motion.div
-                  animate={{ y: [0, -20, 0] }}
-                  transition={{ duration: 5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-                  className="absolute top-10 left-10 w-32 h-32 bg-yellow-400/20 rounded-full blur-3xl"
-                />
-                <motion.div
-                  animate={{ y: [0, 20, 0] }}
-                  transition={{ duration: 7, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-                  className="absolute bottom-10 right-10 w-32 h-32 bg-green-400/20 rounded-full blur-3xl"
-                />
-                
-                <div className="relative">
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 30, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border-2 border-yellow-400/20 rounded-full"
-                  />
-                  
-                  <div className="relative text-center">
-                    <motion.div
-                      initial={{ scale: 0.9, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ duration: 0.5 }}
-                      className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-yellow-400/10 to-green-400/10 rounded-full border border-yellow-400/20 backdrop-blur-sm mb-8"
-                    >
-                      <Heart className="w-5 h-5 text-yellow-400" />
-                      <span className="text-sm font-semibold bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">10,000+ Partners Worldwide</span>
-                      <Heart className="w-5 h-5 text-green-400" />
-                    </motion.div>
-                    
-                    <h1 className="text-6xl sm:text-7xl md:text-8xl font-extrabold mb-8 leading-tight">
-                      <span className="bg-gradient-to-r from-yellow-400 via-yellow-400 to-green-400 bg-clip-text text-transparent">
-                        Partner With Us
-                      </span>
-                      <br />
-                      <span className="text-4xl sm:text-5xl md:text-6xl text-gray-600 dark:text-gray-400">
-                        and Grow Together
-                      </span>
-                    </h1>
-
-                    <div className="flex items-center justify-center gap-6 mb-8">
-                      <div className="text-center">
-                        <div className="text-3xl font-bold bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">10K+</div>
-                        <div className="text-sm text-gray-500">Partners</div>
-                      </div>
-                      <div className="w-px h-8 bg-gray-300 dark:bg-gray-700" />
-                      <div className="text-center">
-                        <div className="text-3xl font-bold bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">30%</div>
-                        <div className="text-sm text-gray-500">Revenue Share</div>
-                      </div>
-                      <div className="w-px h-8 bg-gray-300 dark:bg-gray-700" />
-                      <div className="text-center">
-                        <div className="text-3xl font-bold bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">100+</div>
-                        <div className="text-sm text-gray-500">Countries</div>
-                      </div>
-                    </div>
-
-                    <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
-                      {[
-                        { icon: <Rocket className="w-4 h-4" />, text: "Fast Integration" },
-                        { icon: <Shield className="w-4 h-4" />, text: "Enterprise Security" },
-                        { icon: <Globe className="w-4 h-4" />, text: "Global Reach" },
-                        { icon: <Headphones className="w-4 h-4" />, text: "24/7 Support" },
-                      ].map((item, i) => (
-                        <motion.div
-                          key={i}
-                          whileHover={{ scale: 1.05, y: -2 }}
-                          className="flex items-center gap-2 px-5 py-2.5 bg-white/80 dark:bg-white/5 backdrop-blur-sm rounded-full border border-gray-200 dark:border-gray-800 shadow-lg"
-                        >
-                          <div className="text-yellow-400">{item.icon}</div>
-                          <span className="text-sm font-medium">{item.text}</span>
-                        </motion.div>
-                      ))}
-                    </div>
-
-                    <div className="flex justify-center">
-                      <PrimaryCTA href="/partner/apply">
-                        Become a Partner
-                      </PrimaryCTA>
-                    </div>
+                <div className="relative text-center">
+                  <h1 className="text-6xl sm:text-7xl md:text-8xl font-extrabold mb-8 leading-tight">
+                    Partner With Us
+                  </h1>
+                  <div className="flex justify-center">
+                    <PrimaryCTA href="/partner/apply">
+                      Become a Partner
+                    </PrimaryCTA>
                   </div>
                 </div>
               </div>
             </motion.div>
           </Reveal>
 
-          {/* STATS SECTION - Emerald/Teal gradient like affiliate page */}
+          {/* STATS SECTION */}
           <section className="relative z-10 max-w-7xl mx-auto px-4 py-16">
-            <RevealWithBorder
-              gradientFrom="from-emerald-400"
-              gradientVia="via-teal-400"
-              gradientTo="to-cyan-400"
-              borderColor="border-emerald-400/20"
-              floatingElements={false}
-              rotatingCircle={true}
-            >
+            <RevealWithBorder>
               <div className="py-8">
                 <h2 className="text-2xl font-bold text-center mb-8">
-                  <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
-                    Program Performance
-                  </span>
+                  Program Performance
                 </h2>
                 <div className="flex items-center justify-center gap-12">
                   {partnerStats.map((stat) => (
                     <Reveal key={stat.label}>
-                      <motion.div
-                        whileHover={{ y: -2 }}
-                        className="flex items-center gap-3"
-                      >
-                        <div className={`w-8 h-8 rounded-lg bg-gradient-to-r ${stat.gradient} bg-opacity-10 flex items-center justify-center`}>
-                          <div className={stat.iconColor}>
-                            {stat.icon}
-                          </div>
+                      <motion.div className="flex items-center gap-3">
+                        <div className={`w-8 h-8 rounded-lg bg-gradient-to-r ${stat.gradient}`}>
+                          <div className={stat.iconColor}>{stat.icon}</div>
                         </div>
                         <div>
-                          <div className="text-sm font-medium text-gray-500">{stat.label}</div>
+                          <div className="text-sm text-gray-500">{stat.label}</div>
                           <div className="flex items-center gap-2">
                             <span className="text-xl font-bold">{stat.value}</span>
                             <span className="text-xs text-green-400">{stat.trend}</span>
@@ -426,334 +297,6 @@ export default function PartnerPage() {
                 </div>
               </div>
             </RevealWithBorder>
-          </section>
-
-          {/* PARTNER TIERS - Blue/Cyan gradient like affiliate page */}
-          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
-            <RevealWithBorder
-              gradientFrom="from-blue-400"
-              gradientVia="via-cyan-400"
-              gradientTo="to-sky-400"
-              borderColor="border-blue-400/20"
-              floatingElements={false}
-              rotatingCircle={true}
-            >
-              <div className="py-8">
-                <h2 className="text-2xl font-bold text-center mb-8">
-                  <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                    Partner Tiers
-                  </span>
-                </h2>
-                <div className="flex items-center justify-center gap-8">
-                  {partnerTiers.map((tier) => (
-                    <Reveal key={tier.name}>
-                      <motion.div
-                        whileHover={{ y: -2 }}
-                        className="relative flex items-center gap-3 px-4 py-2 bg-white dark:bg-[#0a0d16] rounded-full border border-gray-200 dark:border-gray-800 shadow-sm"
-                      >
-                        {tier.popular && (
-                          <div className="absolute -top-2 -right-2 w-4 h-4 rounded-full bg-gradient-to-r from-yellow-400 to-amber-400 flex items-center justify-center text-[8px] text-black font-bold">
-                            ★
-                          </div>
-                        )}
-                        <div className={`w-6 h-6 rounded-full bg-gradient-to-r ${tier.gradient} bg-opacity-10 flex items-center justify-center`}>
-                          <div className={tier.iconColor}>
-                            {tier.icon}
-                          </div>
-                        </div>
-                        <span className="text-sm font-medium">{tier.name}</span>
-                        <span className="text-xs font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                          {tier.revenue}
-                        </span>
-                      </motion.div>
-                    </Reveal>
-                  ))}
-                </div>
-              </div>
-            </RevealWithBorder>
-          </section>
-
-          {/* BENEFITS - Green/Teal gradient like affiliate page */}
-          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
-            <RevealWithBorder
-              gradientFrom="from-green-400"
-              gradientVia="via-emerald-400"
-              gradientTo="to-teal-400"
-              borderColor="border-green-400/20"
-              floatingElements={false}
-              rotatingCircle={true}
-            >
-              <div className="py-8">
-                <h2 className="text-2xl font-bold text-center mb-8">
-                  <span className="bg-gradient-to-r from-green-400 to-teal-400 bg-clip-text text-transparent">
-                    Key Benefits
-                  </span>
-                </h2>
-                <div className="flex flex-wrap items-center justify-center gap-4">
-                  {partnerBenefits.map((benefit) => (
-                    <Reveal key={benefit.title}>
-                      <motion.div
-                        whileHover={{ y: -2 }}
-                        className="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-[#0a0d16] rounded-full border border-gray-200 dark:border-gray-800 shadow-sm"
-                      >
-                        <div className={`w-5 h-5 rounded-full bg-gradient-to-r ${benefit.gradient} bg-opacity-10 flex items-center justify-center`}>
-                          <div className={benefit.iconColor}>
-                            {benefit.icon}
-                          </div>
-                        </div>
-                        <span className="text-xs font-medium">{benefit.title}</span>
-                      </motion.div>
-                    </Reveal>
-                  ))}
-                </div>
-              </div>
-            </RevealWithBorder>
-          </section>
-
-          {/* SUCCESS STORIES - Purple/Pink gradient like affiliate page */}
-          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
-            <RevealWithBorder
-              gradientFrom="from-purple-400"
-              gradientVia="via-pink-400"
-              gradientTo="to-red-400"
-              borderColor="border-purple-400/20"
-              floatingElements={false}
-              rotatingCircle={true}
-            >
-              <div className="py-8">
-                <h2 className="text-2xl font-bold text-center mb-8">
-                  <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                    Success Stories
-                  </span>
-                </h2>
-                <div className="flex items-center justify-center gap-8">
-                  {successStories.map((story) => (
-                    <Reveal key={story.company}>
-                      <motion.div
-                        whileHover={{ y: -2 }}
-                        className="flex items-center gap-3"
-                      >
-                        <div className={`w-8 h-8 rounded-lg bg-gradient-to-r ${story.gradient} flex items-center justify-center text-white text-xs font-bold`}>
-                          {story.logo}
-                        </div>
-                        <div className="text-left">
-                          <div className="text-sm font-medium">{story.company}</div>
-                          <div className="flex items-center gap-2">
-                            <span className="text-xs font-bold">{story.revenue}</span>
-                            <span className="text-[10px] text-green-400">{story.growth}</span>
-                          </div>
-                        </div>
-                      </motion.div>
-                    </Reveal>
-                  ))}
-                </div>
-              </div>
-            </RevealWithBorder>
-          </section>
-
-          {/* INTEGRATIONS - Amber/Red gradient like affiliate page */}
-          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
-            <RevealWithBorder
-              gradientFrom="from-amber-400"
-              gradientVia="via-orange-400"
-              gradientTo="to-red-400"
-              borderColor="border-amber-400/20"
-              floatingElements={false}
-              rotatingCircle={true}
-            >
-              <div className="py-8">
-                <h2 className="text-2xl font-bold text-center mb-8">
-                  <span className="bg-gradient-to-r from-amber-400 to-red-400 bg-clip-text text-transparent">
-                    Integrations
-                  </span>
-                </h2>
-                <div className="flex flex-wrap items-center justify-center gap-3">
-                  {integrations.map((integration) => (
-                    <Reveal key={integration.name}>
-                      <motion.div
-                        whileHover={{ y: -2 }}
-                        className="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-[#0a0d16] rounded-full border border-gray-200 dark:border-gray-800 shadow-sm"
-                      >
-                        <div className={`w-5 h-5 rounded-full bg-gradient-to-r ${integration.gradient} bg-opacity-10 flex items-center justify-center`}>
-                          <div className={`text-${integration.gradient.split(' ')[0].replace('from-', '')}-600 dark:text-white`}>
-                            {integration.icon}
-                          </div>
-                        </div>
-                        <span className="text-xs font-medium">{integration.name}</span>
-                      </motion.div>
-                    </Reveal>
-                  ))}
-                </div>
-              </div>
-            </RevealWithBorder>
-          </section>
-
-          {/* HOW IT WORKS - Indigo/Pink gradient like affiliate page */}
-          <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
-            <RevealWithBorder
-              gradientFrom="from-indigo-400"
-              gradientVia="via-purple-400"
-              gradientTo="to-pink-400"
-              borderColor="border-indigo-400/20"
-              floatingElements={false}
-              rotatingCircle={true}
-            >
-              <div className="py-8">
-                <h2 className="text-2xl font-bold text-center mb-8">
-                  <span className="bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text text-transparent">
-                    How It Works
-                  </span>
-                </h2>
-                <div className="flex items-center justify-center gap-8">
-                  {[
-                    { step: "01", icon: <FileText className="w-4 h-4" />, title: "Apply" },
-                    { step: "02", icon: <Code className="w-4 h-4" />, title: "Integrate" },
-                    { step: "03", icon: <TrendingUp className="w-4 h-4" />, title: "Grow" },
-                  ].map((item) => (
-                    <Reveal key={item.step}>
-                      <motion.div
-                        whileHover={{ y: -2 }}
-                        className="flex items-center gap-3"
-                      >
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-r from-indigo-400 to-pink-400 flex items-center justify-center text-white text-xs font-bold">
-                          {item.step}
-                        </div>
-                        <div className="w-6 h-6 rounded-full bg-gradient-to-r from-indigo-400/10 to-pink-400/10 flex items-center justify-center">
-                          <div className="text-indigo-600 dark:text-indigo-400">
-                            {item.icon}
-                          </div>
-                        </div>
-                        <span className="text-sm font-medium">{item.title}</span>
-                      </motion.div>
-                    </Reveal>
-                  ))}
-                </div>
-              </div>
-            </RevealWithBorder>
-          </section>
-
-          {/* FAQ SECTION - Orange/Yellow gradient like affiliate page */}
-          <section className="relative z-10 max-w-3xl mx-auto px-4 pb-16">
-            <RevealWithBorder
-              gradientFrom="from-orange-400"
-              gradientVia="via-amber-400"
-              gradientTo="to-yellow-400"
-              borderColor="border-orange-400/20"
-              floatingElements={false}
-              rotatingCircle={true}
-            >
-              <div className="py-8 px-6">
-                <h2 className="text-2xl font-bold text-center mb-6">
-                  <span className="bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent">
-                    Frequently Asked Questions
-                  </span>
-                </h2>
-                <div className="space-y-3">
-                  {faqs.map((faq, index) => (
-                    <Reveal key={index}>
-                      <motion.div
-                        whileHover={{ y: -1 }}
-                        className="p-3 bg-white/50 dark:bg-white/5 rounded-lg border border-gray-200 dark:border-gray-800"
-                      >
-                        <div className="flex items-start gap-2">
-                          <div className="w-4 h-4 rounded-full bg-gradient-to-r from-orange-400 to-yellow-400 flex items-center justify-center flex-shrink-0 mt-0.5">
-                            <div className="w-1.5 h-1.5 rounded-full bg-white" />
-                          </div>
-                          <div>
-                            <h3 className="text-sm font-medium mb-1">{faq.q}</h3>
-                            <p className="text-xs text-gray-600 dark:text-gray-400">{faq.a}</p>
-                          </div>
-                        </div>
-                      </motion.div>
-                    </Reveal>
-                  ))}
-                </div>
-              </div>
-            </RevealWithBorder>
-          </section>
-
-          {/* FINAL CTA - Yellow/Green gradient like affiliate page */}
-          <section className="relative z-10 text-center">
-            <Reveal>
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                className="relative overflow-hidden rounded-3xl"
-              >
-                {/* Animated Background */}
-                <motion.div
-                  animate={{ 
-                    scale: [1, 1.2, 1],
-                    rotate: [0, 90, 180],
-                  }}
-                  transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                  className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-yellow-400 to-green-400 opacity-90"
-                />
-                
-                {/* Content */}
-                <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-3xl p-16 m-1">
-                  {/* Floating Elements */}
-                  <motion.div
-                    animate={{ y: [0, -20, 0] }}
-                    transition={{ duration: 5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-                    className="absolute top-10 left-10 w-32 h-32 bg-yellow-400/20 rounded-full blur-3xl"
-                  />
-                  <motion.div
-                    animate={{ y: [0, 20, 0] }}
-                    transition={{ duration: 7, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-                    className="absolute bottom-10 right-10 w-32 h-32 bg-green-400/20 rounded-full blur-3xl"
-                  />
-                  
-                  <div className="relative">
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 30, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border-2 border-yellow-400/20 rounded-full"
-                    />
-                    
-                    <div className="flex items-center justify-center gap-4 mb-8">
-                      <Heart className="w-12 h-12 text-yellow-400" />
-                      <h2 className="text-5xl sm:text-6xl md:text-7xl font-extrabold">
-                        <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
-                          Ready to Partner?
-                        </span>
-                      </h2>
-                      <Heart className="w-12 h-12 text-green-400" />
-                    </div>
-
-                    <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10">
-                      Join 10,000+ partners and start earning up to 30% revenue share
-                    </p>
-                    
-                    <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
-                      {[
-                        { text: "🚀 Fast Integration", gradient: "from-yellow-400/10 to-green-400/10" },
-                        { text: "💸 30% Revenue Share", gradient: "from-blue-400/10 to-cyan-400/10" },
-                        { text: "🌍 Global Reach", gradient: "from-purple-400/10 to-pink-400/10" },
-                        { text: "🎯 Dedicated Support", gradient: "from-emerald-400/10 to-teal-400/10" },
-                      ].map((item, i) => (
-                        <motion.div
-                          key={i}
-                          whileHover={{ scale: 1.05, y: -2 }}
-                          className={`px-6 py-3 bg-gradient-to-r ${item.gradient} rounded-full text-sm font-semibold backdrop-blur-sm border border-white/20`}
-                        >
-                          {item.text}
-                        </motion.div>
-                      ))}
-                    </div>
-
-                    <div className="flex justify-center">
-                      <PrimaryCTA href="/partner/apply">
-                        Become a Partner
-                      </PrimaryCTA>
-                    </div>
-                    
-                    <p className="text-sm text-gray-500 mt-8">
-                      🔒 Free to join • No commitment required • 10,000+ partners
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            </Reveal>
           </section>
 
         </section>
