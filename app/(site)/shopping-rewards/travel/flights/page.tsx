@@ -1,14 +1,11 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Airplay, Sparkles, Star, Percent } from "lucide-react";
-import TypingText from "@/components/typing/TypingText";
-
+import { ArrowRight, Heart, Sparkles, Star, Percent } from "lucide-react";
 import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
 import SeoRenderer from "@/components/SEO/SeoRenderer";
+import TypingText from "@/components/typing/TypingText";
 
 /* =========================
    Dynamic Metadata (Server-Side)
@@ -16,7 +13,7 @@ import SeoRenderer from "@/components/SEO/SeoRenderer";
 export async function generateMetadata() {
   try {
     const seo: SEOOutput = await buildSEO({
-      route: "/shopping-rewards/travel/flights",
+      route: "/shopping-rewards/beauty",
       locale: SEO_CONFIG.defaultLocale,
     });
 
@@ -38,21 +35,6 @@ export async function generateMetadata() {
   }
 }
 
-/* =========================
-   SEO Metrics
-========================= */
-function useSEOMetrics(seo: SEOOutput | null) {
-  useEffect(() => {
-    if (!seo?.metrics) return;
-
-    console.log("[SEO Metrics]", {
-      score: seo.metrics.seoScore ?? "n/a",
-      pageType: seo.pageType?.type,
-      generationTime: seo.metrics.generationTime,
-    });
-  }, [seo]);
-}
-
 /* ================= ANIMATION ================= */
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -64,73 +46,44 @@ const itemVariants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
-/* ================= FLIGHT OFFERS ================= */
-const flightOffers = [
+/* ================= BEAUTY OFFERS ================= */
+const beautyOffers = [
   {
     id: 1,
-    title: "Domestic Flight Cashback",
-    reward: "Up to 8% Back",
+    title: "Skincare Cashback",
+    reward: "Up to 15% Back",
     badge: "Top",
-    icon: <Airplay size={30} className="text-blue-500" />,
+    icon: <Sparkles size={30} className="text-pink-400" />,
   },
   {
     id: 2,
-    title: "International Flights Bonus",
+    title: "Makeup Deals",
     reward: "Up to 12% Cashback",
     badge: "Popular",
-    icon: <Sparkles size={30} className="text-purple-400" />,
+    icon: <Heart size={30} className="text-red-400" />,
   },
   {
     id: 3,
-    title: "Premium Airline Reward",
-    reward: "₹1000 Extra",
+    title: "Luxury Beauty Bonus",
+    reward: "₹500 Extra",
     badge: "Exclusive",
     icon: <Star size={30} className="text-yellow-400" />,
   },
   {
     id: 4,
-    title: "Weekend Getaway Flights",
-    reward: "Flat 7% Back",
+    title: "Personal Care Essentials",
+    reward: "Flat 10% Back",
     badge: "Bonus",
     icon: <Percent size={30} className="text-teal-400" />,
   },
 ];
 
-/* ================= PAGE ================= */
-export default function FlightsRewards() {
-  const [seo, setSeo] = useState<SEOOutput | null>(null);
-
-  /* SEO Metrics Hook */
-  useSEOMetrics(seo);
-
-  /* =========================
-     Hydrate SEO Client-Side
-  ========================== */
-  useEffect(() => {
-    let mounted = true;
-
-    buildSEO({
-      route: "/shopping-rewards/travel/flights",
-      locale: SEO_CONFIG.defaultLocale,
-    })
-      .then((result) => {
-        if (mounted) setSeo(result));
-      })
-      .catch((err) => console.error("SEO hydration failed:", err));
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
+export default function BeautyRewards() {
   return (
     <>
-      {/* Structured Data & Meta */}
-      {seo && <SeoRenderer seo={seo} />}
+      <SeoRenderer seo={null} />
 
       <main className="bg-white dark:bg-[#070F12] text-gray-900 dark:text-white min-h-screen transition-colors duration-300">
-
-        {/* ================= HERO ================= */}
         <motion.section
           variants={containerVariants}
           initial="hidden"
@@ -142,28 +95,28 @@ export default function FlightsRewards() {
               variants={itemVariants}
               className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4"
             >
-              Flight Booking Rewards
+              Beauty & Personal Care Rewards
             </motion.h1>
 
             <motion.div
               variants={itemVariants}
-              className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-purple-400 to-teal-400"
+              className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-pink-400 via-purple-400 to-red-400"
             >
               <TypingText
                 words={[
-                  "Cashback on Domestic Flights",
-                  "Exclusive International Flight Deals",
-                  "Premium Airline Rewards",
-                  "Book Smart, Earn Premium Cashback",
+                  "Cashback on Skincare & Makeup",
+                  "Exclusive Luxury Beauty Deals",
+                  "Daily Rewards on Personal Care",
+                  "Shop Smart, Earn Premium Cashback",
                 ]}
               />
             </motion.div>
 
             <motion.p
               variants={itemVariants}
-              className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
+              className="text-lg text-gray-600 dark:text-gray-400"
             >
-              Discover the best cashback offers on flights. Book domestic, international, or premium airline tickets and earn instant rewards.
+              Discover cashback offers on beauty products and earn rewards daily.
             </motion.p>
 
             <motion.div variants={itemVariants} className="mt-10">
@@ -171,7 +124,7 @@ export default function FlightsRewards() {
                 <motion.span
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-500 via-purple-400 to-teal-400 text-black px-12 py-5 rounded-2xl font-bold shadow-xl text-lg"
+                  className="inline-flex items-center gap-3 bg-gradient-to-r from-pink-400 via-purple-400 to-red-400 text-black px-12 py-5 rounded-2xl font-bold shadow-xl"
                 >
                   Start Earning Now <ArrowRight size={20} />
                 </motion.span>
@@ -180,34 +133,32 @@ export default function FlightsRewards() {
           </div>
         </motion.section>
 
-        {/* ================= OFFERS GRID ================= */}
+        {/* OFFERS GRID */}
         <section className="max-w-7xl mx-auto px-4 py-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          {flightOffers.map((offer, i) => (
+          {beautyOffers.map((offer, i) => (
             <motion.div
               key={offer.id}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.15 }}
-              className="relative bg-gray-100 dark:bg-[#162125] rounded-3xl p-8 shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-3 group"
+              className="relative bg-gray-100 dark:bg-[#162125] rounded-3xl p-8 shadow-md hover:shadow-2xl"
             >
-              <div className="absolute top-4 right-4 text-xs font-bold bg-blue-400 text-black px-3 py-1 rounded-full">
+              <div className="absolute top-4 right-4 text-xs font-bold bg-pink-400 text-black px-3 py-1 rounded-full">
                 {offer.badge}
               </div>
 
-              <div className="mb-6 group-hover:scale-110 transition-transform duration-300">
-                {offer.icon}
-              </div>
+              <div className="mb-6">{offer.icon}</div>
 
               <h3 className="text-xl font-semibold mb-3">{offer.title}</h3>
 
-              <p className="text-lg font-bold text-blue-500 mb-6">{offer.reward}</p>
+              <p className="text-lg font-bold text-pink-500 mb-6">{offer.reward}</p>
 
               <Link href="/signup" className="cta-observer">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-full bg-gradient-to-r from-blue-500 via-purple-400 to-teal-400 text-black py-3 rounded-xl font-semibold shadow-lg"
+                  className="w-full bg-gradient-to-r from-pink-400 via-purple-400 to-red-400 text-black py-3 rounded-xl font-semibold shadow-lg"
                 >
                   Claim Cashback
                 </motion.button>
@@ -216,17 +167,17 @@ export default function FlightsRewards() {
           ))}
         </section>
 
-        {/* ================= FINAL CTA ================= */}
+        {/* FINAL CTA */}
         <section className="text-center py-28">
-          <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-purple-400 to-teal-400">
-            Turn Flight Bookings Into Real Rewards
+          <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-pink-400 via-purple-400 to-red-400">
+            Turn Beauty Shopping Into Real Rewards
           </h2>
 
           <Link href="/signup" className="cta-observer">
             <motion.span
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-500 via-purple-400 to-teal-400 text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-xl"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-pink-400 via-purple-400 to-red-400 text-black px-16 py-6 rounded-2xl font-bold shadow-2xl text-xl"
             >
               Join & Start Earning <ArrowRight size={20} />
             </motion.span>
