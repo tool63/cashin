@@ -1,8 +1,9 @@
+import dynamic from "next/dynamic";
 import { buildSEO, SEOOutput } from "@/components/seo/SeoEngine";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
 import SeoRenderer from "@/components/SEO/SeoRenderer";
-import PartnerPageClient from "./PartnerPageClient";
 
+/* ================= SEO METADATA (SERVER SIDE) ================= */
 export async function generateMetadata() {
   try {
     const seo: SEOOutput = await buildSEO({
@@ -29,6 +30,13 @@ export async function generateMetadata() {
   }
 }
 
+/* ================= CLIENT COMPONENT (INTERACTIVE UI) ================= */
+const PartnerPageClient = dynamic(
+  () => import("./PartnerPageClient"), 
+  { ssr: false }
+);
+
+/* ================= PAGE ================= */
 export default async function PartnerPage() {
   const seo = await buildSEO({
     route: "/partners",
