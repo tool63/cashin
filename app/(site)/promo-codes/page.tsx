@@ -1,10 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ArrowRight, Ticket, Copy, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Meta from "@/components/seo/SeoEngine";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
 import TypingText from "@/components/typing/TypingText";
 
 /* ================= PROMO DATA ================= */
@@ -45,18 +47,29 @@ const promoCodes = [
 
 /* ================= PAGE COMPONENT ================= */
 export default function PromoCodesPage() {
+
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  /* ================= SEO LOAD ================= */
+  useEffect(() => {
+    buildSEO({
+      route: "/promo-codes",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then(setSeo)
+      .catch(console.error);
+  }, []);
+
   return (
     <>
-      <Meta
-        title="Cashog - Promo Codes"
-        description="Discover exclusive promo codes, bonus cashback rewards, and limited-time offers. Activate promo codes instantly and earn more with Cashog."
-      />
+      {seo && <SeoRenderer seo={seo} />}
 
       <main className="transition-colors duration-300 bg-white dark:bg-[#070A14] text-gray-900 dark:text-white min-h-screen">
 
         {/* ================= HERO ================= */}
         <section className="py-24 px-4 text-center bg-white dark:bg-[#111827] rounded-b-3xl transition-colors duration-300">
           <div className="max-w-3xl mx-auto">
+
             <h1 className="text-5xl sm:text-6xl font-extrabold mb-4 text-gray-900 dark:text-white">
               Promo Codes
             </h1>
@@ -85,6 +98,7 @@ export default function PromoCodesPage() {
                 Activate Rewards <ArrowRight size={20} />
               </motion.span>
             </Link>
+
           </div>
         </section>
 
@@ -99,8 +113,10 @@ export default function PromoCodesPage() {
               transition={{ duration: 0.5, delay: i * 0.15 }}
               className="group relative bg-gray-50 dark:bg-[#1A1F2B] rounded-3xl p-6 shadow-md hover:shadow-2xl transition-all duration-300 border border-transparent hover:border-yellow-400/30 flex flex-col"
             >
+
               <div className="flex justify-between items-center mb-4">
                 <Ticket className="text-yellow-400" size={28} />
+
                 <span
                   className="text-xs font-semibold px-3 py-1 rounded-full 
                     bg-yellow-100 text-yellow-700 
@@ -110,13 +126,16 @@ export default function PromoCodesPage() {
                 </span>
               </div>
 
-              <h3 className="text-xl font-bold mb-2">{promo.title}</h3>
+              <h3 className="text-xl font-bold mb-2">
+                {promo.title}
+              </h3>
 
               <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm leading-relaxed flex-grow">
                 {promo.description}
               </p>
 
               <div className="flex items-center justify-between mt-auto">
+
                 <span className="font-mono text-lg font-bold tracking-widest text-green-500">
                   {promo.code}
                 </span>
@@ -128,13 +147,16 @@ export default function PromoCodesPage() {
                   <Copy size={16} />
                   Copy
                 </button>
+
               </div>
+
             </motion.div>
           ))}
         </section>
 
         {/* ================= FINAL CTA ================= */}
         <section className="text-center py-28 bg-white dark:bg-[#111827] w-full transition-colors duration-300 rounded-t-3xl">
+
           <h2
             className="text-4xl sm:text-5xl font-extrabold mb-8 
             bg-clip-text text-transparent 
@@ -158,6 +180,7 @@ export default function PromoCodesPage() {
           <p className="mt-6 text-gray-700 dark:text-gray-300 text-lg max-w-md mx-auto">
             Apply promo codes, unlock bonuses, and maximize your earnings instantly.
           </p>
+
         </section>
 
       </main>
