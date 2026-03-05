@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   ArrowRight,
   Gift,
@@ -8,10 +8,8 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
-import SeoRenderer from "@/components/SEO/SeoRenderer";
 import TypingText from "@/components/typing/TypingText";
 
 /* ================= SEO METADATA ================= */
@@ -32,7 +30,6 @@ export async function generateMetadata() {
     };
   } catch (error) {
     console.error("Metadata generation failed:", error);
-
     return {
       title: "Earn Amazon Gift Cards Online - Cashog",
       description:
@@ -90,30 +87,8 @@ const faqs = [
 
 /* ================= PAGE COMPONENT ================= */
 export default function EarnAmazonGiftCard() {
-  const [seo, setSeo] = useState<SEOOutput | null>(null);
-
-  /* Client-side SEO hydration */
-  useEffect(() => {
-    let mounted = true;
-
-    buildSEO({
-      route: "/earn-amazon-gift-card",
-      locale: SEO_CONFIG.defaultLocale,
-    })
-      .then((result) => {
-        if (mounted) setSeo(result);
-      })
-      .catch((err) => console.error("SEO hydration failed:", err));
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
   return (
     <>
-      {seo && <SeoRenderer seo={seo} />}
-
       <main className="min-h-screen bg-white dark:bg-[#070A14] text-gray-900 dark:text-white transition-colors duration-300">
 
         {/* ================= HERO ================= */}
@@ -132,13 +107,9 @@ export default function EarnAmazonGiftCard() {
             </p>
 
             <Link href="/signup">
-              <motion.span
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-12 py-5 rounded-3xl font-bold shadow-xl text-lg"
-              >
+              <span className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-12 py-5 rounded-3xl font-bold shadow-xl text-lg hover:opacity-90 transition-opacity">
                 Start Earning Now <ArrowRight size={20} />
-              </motion.span>
+              </span>
             </Link>
           </div>
         </section>
@@ -146,18 +117,14 @@ export default function EarnAmazonGiftCard() {
         {/* ================= STEPS ================= */}
         <section className="max-w-7xl mx-auto px-4 py-20 grid gap-12 md:grid-cols-2 lg:grid-cols-4 text-center">
           {steps.map((step, i) => (
-            <motion.div
+            <div
               key={i}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.15 }}
-              className="bg-gray-100 dark:bg-[#1A1F2B] rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-300"
+              className="bg-gray-100 dark:bg-[#1A1F2B] rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
             >
               <div className="mb-4 flex justify-center">{step.icon}</div>
               <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
               <p className="text-gray-600 dark:text-gray-400">{step.description}</p>
-            </motion.div>
+            </div>
           ))}
         </section>
 
@@ -169,20 +136,16 @@ export default function EarnAmazonGiftCard() {
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {features.map((feature, i) => (
-              <motion.div
+              <div
                 key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
-                className="bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 shadow hover:shadow-2xl transition-all duration-300"
+                className="bg-gray-50 dark:bg-[#111827] rounded-2xl p-6 shadow hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
               >
                 <div className="flex justify-center mb-4 text-yellow-500">
                   <ShieldCheck size={28} />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
                 <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </section>
@@ -197,7 +160,7 @@ export default function EarnAmazonGiftCard() {
             {faqs.map((faq, i) => (
               <details
                 key={i}
-                className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-5 cursor-pointer transition-colors duration-300"
+                className="bg-gray-100 dark:bg-[#1A1F2B] rounded-xl p-5 cursor-pointer transition-colors duration-300 hover:bg-gray-200 dark:hover:bg-[#2A2F43]"
               >
                 <summary className="font-semibold text-lg">{faq.q}</summary>
                 <p className="mt-3 text-gray-600 dark:text-gray-400">{faq.a}</p>
@@ -213,13 +176,9 @@ export default function EarnAmazonGiftCard() {
           </h2>
 
           <Link href="/signup">
-            <motion.span
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-3xl font-bold shadow-2xl text-xl"
-            >
+            <span className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-3xl font-bold shadow-2xl text-xl hover:opacity-90 transition-opacity">
               Redeem Gift Cards <ArrowRight size={20} />
-            </motion.span>
+            </span>
           </Link>
 
           <p className="mt-6 text-gray-600 dark:text-gray-300 text-lg max-w-md mx-auto">
