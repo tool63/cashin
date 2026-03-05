@@ -5,6 +5,9 @@ import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
 import SeoRenderer from "@/components/SEO/SeoRenderer";
 
+// ===== FIX: Add missing import =====
+import HeroSection from "@/components/homepage/HeroSection";
+
 /* =========================
    Loading Skeleton
 ========================= */
