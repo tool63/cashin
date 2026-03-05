@@ -1,3 +1,5 @@
+"use client"; // <--- ADD THIS AT THE VERY TOP
+
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
@@ -17,47 +19,6 @@ import {
   Gift,
   ChevronDown,
 } from "lucide-react";
-
-/* ================= SEO (Server Metadata) ================= */
-
-export async function generateMetadata() {
-  try {
-    const seo: SEOOutput = await buildSEO({
-      route: "/app-installs",
-      locale: SEO_CONFIG.defaultLocale,
-    });
-
-    return {
-      ...seo.metadata,
-      alternates: {
-        canonical: seo.canonical,
-        languages: seo.hreflang,
-      },
-      robots: seo.metadata?.robots,
-    };
-  } catch (error) {
-    console.error("Metadata generation failed:", error);
-
-    return {
-      title: SEO_CONFIG.defaultTitle,
-      description: SEO_CONFIG.defaultDescription,
-    };
-  }
-}
-
-/* ================= SEO Metrics Hook ================= */
-
-function useSEOMetrics(seo: SEOOutput | null) {
-  useEffect(() => {
-    if (!seo?.metrics) return;
-
-    console.log("[SEO Metrics]", {
-      score: seo.metrics.seoScore ?? "n/a",
-      pageType: seo.pageType?.type,
-      generationTime: seo.metrics.generationTime,
-    });
-  }, [seo]);
-}
 
 /* ================= OFFERS ================= */
 const apps = [
@@ -210,6 +171,19 @@ function ExpandableCard({ children }: { children: React.ReactNode }) {
       </motion.div>
     </motion.div>
   );
+}
+
+/* ================= SEO METRICS HOOK ================= */
+function useSEOMetrics(seo: SEOOutput | null) {
+  useEffect(() => {
+    if (!seo?.metrics) return;
+
+    console.log("[SEO Metrics]", {
+      score: seo.metrics.seoScore ?? "n/a",
+      pageType: seo.pageType?.type,
+      generationTime: seo.metrics.generationTime,
+    });
+  }, [seo]);
 }
 
 /* ================= PAGE ================= */
