@@ -1,16 +1,57 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Airplay, Sparkles, Star, Percent } from "lucide-react"; // replaced Airplane with Airplay
-import Meta from "@/components/seo/SeoEngine";
+import { ArrowRight, Airplay, Sparkles, Star, Percent } from "lucide-react";
 import TypingText from "@/components/typing/TypingText";
 
-/* ================= SEO ================= */
-const pageTitle = "Cashog - Flight Rewards";
-const pageDescription =
-  "Earn cashback and rewards on flight bookings. Discover premium airline deals and exclusive travel rewards every time you book a flight.";
+import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
+
+/* =========================
+   Dynamic Metadata (Server-Side)
+========================= */
+export async function generateMetadata() {
+  try {
+    const seo: SEOOutput = await buildSEO({
+      route: "/shopping-rewards/travel/flights",
+      locale: SEO_CONFIG.defaultLocale,
+    });
+
+    return {
+      ...seo.metadata,
+      alternates: {
+        canonical: seo.canonical,
+        languages: seo.hreflang,
+      },
+      robots: seo.metadata?.robots,
+    };
+  } catch (error) {
+    console.error("Metadata generation failed:", error);
+
+    return {
+      title: SEO_CONFIG.defaultTitle,
+      description: SEO_CONFIG.defaultDescription,
+    };
+  }
+}
+
+/* =========================
+   SEO Metrics
+========================= */
+function useSEOMetrics(seo: SEOOutput | null) {
+  useEffect(() => {
+    if (!seo?.metrics) return;
+
+    console.log("[SEO Metrics]", {
+      score: seo.metrics.seoScore ?? "n/a",
+      pageType: seo.pageType?.type,
+      generationTime: seo.metrics.generationTime,
+    });
+  }, [seo]);
+}
 
 /* ================= ANIMATION ================= */
 const containerVariants = {
@@ -30,7 +71,7 @@ const flightOffers = [
     title: "Domestic Flight Cashback",
     reward: "Up to 8% Back",
     badge: "Top",
-    icon: <Airplay size={30} className="text-blue-500" />, // replaced icon
+    icon: <Airplay size={30} className="text-blue-500" />,
   },
   {
     id: 2,
@@ -55,10 +96,37 @@ const flightOffers = [
   },
 ];
 
+/* ================= PAGE ================= */
 export default function FlightsRewards() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+
+  /* SEO Metrics Hook */
+  useSEOMetrics(seo);
+
+  /* =========================
+     Hydrate SEO Client-Side
+  ========================== */
+  useEffect(() => {
+    let mounted = true;
+
+    buildSEO({
+      route: "/shopping-rewards/travel/flights",
+      locale: SEO_CONFIG.defaultLocale,
+    })
+      .then((result) => {
+        if (mounted) setSeo(result));
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <>
-      <Meta title={pageTitle} description={pageDescription} />
+      {/* Structured Data & Meta */}
+      {seo && <SeoRenderer seo={seo} />}
 
       <main className="bg-white dark:bg-[#070F12] text-gray-900 dark:text-white min-h-screen transition-colors duration-300">
 
