@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useEffect, useState } from "react";
 import { ArrowRight, Ticket, Copy, Sparkles } from "lucide-react";
 import Link from "next/link";
