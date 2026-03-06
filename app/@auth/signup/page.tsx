@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import AuthModal from "@/components/modals/AuthModal";
 import AuthPageWrapper from "@/components/auth/AuthPageWrapper";
