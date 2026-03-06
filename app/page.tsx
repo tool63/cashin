@@ -94,9 +94,15 @@ export default function HomePage() {
           <PaymentSection />
         </section>
 
-        {/* FAQ */}
+        {/* FAQ (with props) */}
         <section className="max-w-3xl mx-auto px-4 py-12">
-          <FAQ />
+          <FAQ
+            faqs={[
+              { q: "How do I earn?", a: "Complete tasks and offers to earn rewards." },
+              { q: "When do I get paid?", a: "Withdraw anytime after reaching minimum balance." },
+              { q: "Is it free?", a: "Yes, joining and earning are completely free." },
+            ]}
+          />
         </section>
 
         {/* CTA */}
