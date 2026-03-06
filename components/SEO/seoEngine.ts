@@ -64,7 +64,7 @@ function cleanupCache() {
 }
 
 // ============================================================
-// Ultra SEO Engine
+// Ultra SEO Engine (Type Safe)
 // ============================================================
 export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
   const startTime = Date.now();
@@ -104,14 +104,16 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
 
     const isProduction = process.env.NODE_ENV === 'production';
 
+    const noindexFlag = (pageType.metadata as { noindex?: boolean })?.noindex;
+    const nofollowFlag = (pageType.metadata as { nofollow?: boolean })?.nofollow;
+
     const shouldIndex =
       !noindex &&
-      !pageType.metadata.noindex &&
+      !noindexFlag &&
       !isPaginated(route) &&
       isProduction;
 
-    const shouldFollow =
-      !nofollow && !pageType.metadata.nofollow;
+    const shouldFollow = !nofollow && !nofollowFlag;
 
     // ========================================================
     // Canonical
@@ -242,17 +244,14 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
 function enhanceMetadata(metadata: any, route: string) {
   const primary = SEO_CONFIG.primaryKeyword;
 
-  // Inject primary keyword if missing
   if (!metadata.title?.toLowerCase().includes(primary)) {
     metadata.title = `${metadata.title} | ${primary}`;
   }
 
-  // Improve description CTR
   if (metadata.description && !metadata.description.includes('Start earning')) {
     metadata.description += ' Start earning today.';
   }
 
-  // Inject keywords
   metadata.keywords = [
     ...(SEO_CONFIG.defaultKeywords || []),
     ...(SEO_CONFIG.secondaryKeywords || []),
