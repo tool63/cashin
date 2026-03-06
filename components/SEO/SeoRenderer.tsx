@@ -1,13 +1,35 @@
 // components/SEO/SeoRenderer.tsx
 'use client';
 
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, Suspense } from 'react';
 import Head from 'next/head';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { SEOOutput, LinkHint } from './seoEngine';  // ← Import LinkHint
+import { SEOOutput, LinkHint } from './seoEngine';
 
-// ... (keep existing interfaces)
+// ============================================================
+// Props Interface - FIXED: Added missing interface
+// ============================================================
+export interface SeoRendererProps {
+  seo: SEOOutput;
+  children?: React.ReactNode;
+  defer?: boolean;
+  priority?: 'high' | 'low';
+  onRender?: (metrics: SEORenderMetrics) => void;
+}
 
+export interface SEORenderMetrics {
+  pathname: string;
+  searchParams: Record<string, string>;
+  pageType: string;
+  canonical?: string;
+  schemaCount: number;
+  metadataSize: number;
+  timestamp: number;
+}
+
+/* =========================================================
+   Ultra Premium: SEO Renderer (Type Safe)
+========================================================= */
 export default function SeoRenderer({
   seo,
   children,
@@ -209,7 +231,7 @@ export default function SeoRenderer({
   }, [seo]);
 
   // ========================================================
-  // Resource Hints - UPDATED to handle LinkHint
+  // Resource Hints - Handles LinkHint type
   // ========================================================
   const resourceHints = useMemo(() => {
     const hints: React.ReactNode[] = [];
