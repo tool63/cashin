@@ -31,8 +31,10 @@ const LiveWithdrawals = dynamic(() => import("@/components/homepage/LiveWithdraw
 /* SEO hydration */
 export default function HomePage() {
   const [seo, setSeo] = useState<SEOOutput | null>(null);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     let mounted = true;
 
     buildSEO({ route: "/", locale: SEO_CONFIG.defaultLocale })
@@ -46,21 +48,35 @@ export default function HomePage() {
     };
   }, []);
 
+  // During SSR, return a simpler version to prevent hydration mismatch
+  if (!mounted) {
+    return (
+      <>
+        <Background />
+        <main className="relative min-h-screen bg-transparent text-gray-900 dark:text-white">
+          <div className="animate-pulse p-8">
+            <div className="h-96 bg-gray-200/20 dark:bg-gray-700/20 rounded-lg mb-4"></div>
+          </div>
+        </main>
+      </>
+    );
+  }
+
   return (
     <>
       {seo && <SeoRenderer seo={seo} />}
 
       <Background />
 
-      <main className="relative min-h-screen bg-white text-gray-900 dark:bg-[#070A14] dark:text-white">
+      <main className="relative min-h-screen bg-transparent text-gray-900 dark:text-white">
 
         {/* HERO */}
-        <section>
+        <section className="bg-transparent">
           <HeroSection />
         </section>
 
         {/* LIVE ACTIVITY */}
-        <section className="max-w-7xl mx-auto px-4 py-10">
+        <section className="max-w-7xl mx-auto px-4 py-10 bg-transparent">
           <LiveJoining />
           <LiveEarnings />
           <LiveOfferCompletion />
@@ -69,33 +85,35 @@ export default function HomePage() {
 
         {/* FEATURES */}
         <Reveal>
-          <FeaturesSection />
+          <section className="bg-transparent">
+            <FeaturesSection />
+          </section>
         </Reveal>
 
         {/* TASKS */}
-        <section className="max-w-7xl mx-auto px-4 py-12">
+        <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
           <TasksSection />
         </section>
 
         {/* OFFERS */}
-        <section className="max-w-7xl mx-auto px-4 py-8">
+        <section className="max-w-7xl mx-auto px-4 py-8 bg-transparent">
           <RevealWithBorder>
             <HighPayingOffers />
           </RevealWithBorder>
         </section>
 
         {/* TRUST */}
-        <section className="max-w-7xl mx-auto px-4 py-12">
+        <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
           <TrustSection />
         </section>
 
         {/* PAYMENTS */}
-        <section className="max-w-7xl mx-auto px-4 py-12">
+        <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
           <PaymentSection />
         </section>
 
         {/* FAQ (with props) */}
-        <section className="max-w-3xl mx-auto px-4 py-12">
+        <section className="max-w-3xl mx-auto px-4 py-12 bg-transparent">
           <FAQ
             faqs={[
               { q: "How do I earn?", a: "Complete tasks and offers to earn rewards." },
@@ -106,7 +124,7 @@ export default function HomePage() {
         </section>
 
         {/* CTA */}
-        <section className="max-w-7xl mx-auto px-4 py-12">
+        <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
           <FinalCTASection />
         </section>
 
