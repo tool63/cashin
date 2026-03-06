@@ -37,6 +37,9 @@ const metricsQueue: SEOAnalytics[] = [];
 let flushTimeout: NodeJS.Timeout | null = null;
 let isFlushing = false;
 
+// Detect if we're in browser environment
+const isBrowser = typeof window !== 'undefined' && typeof navigator !== 'undefined';
+
 export function trackSEOGeneration(metrics: Partial<SEOAnalytics>): SEOAnalytics {
   // Sample tracking in production
   if (process.env.NODE_ENV === 'production') {
@@ -55,9 +58,9 @@ export function trackSEOGeneration(metrics: Partial<SEOAnalytics>): SEOAnalytics
     }
   }
 
-  // Detect device and browser
-  const device = detectDevice();
-  const browser = detectBrowser();
+  // Detect device and browser (only in browser environment)
+  const device = isBrowser ? detectDevice() : undefined;
+  const browser = isBrowser ? detectBrowser() : undefined;
 
   const fullMetrics: SEOAnalytics = {
     pageType: metrics.pageType || 'unknown',
@@ -69,9 +72,9 @@ export function trackSEOGeneration(metrics: Partial<SEOAnalytics>): SEOAnalytics
     warnings: metrics.warnings || 0,
     suggestions: metrics.suggestions || 0,
     timestamp: Date.now(),
-    userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : undefined,
-    path: typeof window !== 'undefined' ? window.location.pathname : undefined,
-    referrer: typeof document !== 'undefined' ? document.referrer : undefined,
+    userAgent: isBrowser ? navigator.userAgent : undefined,
+    path: isBrowser ? window.location.pathname : undefined,
+    referrer: isBrowser ? document.referrer : undefined,
     device,
     browser,
   };
@@ -81,8 +84,8 @@ export function trackSEOGeneration(metrics: Partial<SEOAnalytics>): SEOAnalytics
     console.log('📊 SEO Metrics:', fullMetrics);
   }
 
-  // Production analytics queue
-  if (process.env.NODE_ENV === 'production' && typeof window !== 'undefined') {
+  // Production analytics queue (only in browser)
+  if (process.env.NODE_ENV === 'production' && isBrowser) {
     queueSEOMetrics(fullMetrics);
   }
 
@@ -90,7 +93,7 @@ export function trackSEOGeneration(metrics: Partial<SEOAnalytics>): SEOAnalytics
 }
 
 function detectDevice(): 'mobile' | 'tablet' | 'desktop' | undefined {
-  if (typeof navigator === 'undefined') return undefined;
+  if (!isBrowser) return undefined;
   
   const ua = navigator.userAgent;
   if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
@@ -103,7 +106,7 @@ function detectDevice(): 'mobile' | 'tablet' | 'desktop' | undefined {
 }
 
 function detectBrowser(): string | undefined {
-  if (typeof navigator === 'undefined') return undefined;
+  if (!isBrowser) return undefined;
   
   const ua = navigator.userAgent;
   if (ua.includes('Chrome')) return 'chrome';
@@ -153,7 +156,7 @@ async function flushMetricsQueue() {
 }
 
 async function sendMetrics(metrics: SEOAnalytics[]): Promise<void> {
-  if (typeof navigator === 'undefined') return;
+  if (!isBrowser) return;
 
   const payload = JSON.stringify(metrics);
 
@@ -242,8 +245,8 @@ export function clearSEOAnalyticsQueue() {
   }
 }
 
-// Auto-cleanup on page unload
-if (typeof window !== 'undefined') {
+// Auto-cleanup on page unload (only in browser)
+if (isBrowser) {
   window.addEventListener('beforeunload', () => {
     if (metricsQueue.length > 0) {
       flushMetricsQueue();
