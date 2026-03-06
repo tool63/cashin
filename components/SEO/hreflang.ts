@@ -279,11 +279,11 @@ export function parseHreflangEntries(
 }
 
 /**
- * Checks required languages exist
+ * Checks required languages exist (Type Safe)
  */
 export function hasRequiredLanguages(
   hreflang: Record<string, string>,
-  requiredLocales: string[] = SEO_CONFIG.supportedLocales
+  requiredLocales: readonly string[] = SEO_CONFIG.supportedLocales
 ): boolean {
   const present = new Set(Object.keys(hreflang).filter(l => l !== 'x-default'));
   return requiredLocales.every(locale => present.has(locale));
