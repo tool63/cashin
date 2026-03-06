@@ -21,11 +21,11 @@ declare global {
 
 // Dynamic imports for code splitting
 const Header = dynamic(() => import("@/components/Header"), {
-  loading: () => <div className="h-16 w-full bg-gray-100 dark:bg-gray-800 animate-pulse" />,
+  loading: () => <div className="h-16 w-full bg-transparent animate-pulse" />,
 });
 
 const Footer = dynamic(() => import("@/components/Footer"), {
-  loading: () => <div className="h-40 w-full bg-gray-50 dark:bg-gray-900 animate-pulse" />,
+  loading: () => <div className="h-40 w-full bg-transparent animate-pulse" />,
 });
 
 const FloatingCTA = dynamic(() => import("@/components/cta/FloatingCTA"));
@@ -52,7 +52,7 @@ function LayoutErrorFallback({ error, resetErrorBoundary }: {
 }) {
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <div className="text-center p-8 max-w-md">
+      <div className="text-center p-8 max-w-md bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm rounded-xl">
         <h1 className="text-2xl font-bold mb-4">Something went wrong</h1>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
           {error.message || 'We encountered an unexpected error. Please try again.'}
@@ -81,7 +81,7 @@ function LayoutErrorFallback({ error, resetErrorBoundary }: {
 ========================================================= */
 const SEOLoadingSkeleton = () => (
   <div className="fixed top-0 left-0 w-full z-50">
-    <div className="h-0.5 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 animate-loading" />
+    <div className="h-0.5 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 animate-pulse" />
   </div>
 );
 
@@ -92,7 +92,6 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
   const [seoLoading, setSeoLoading] = useState(true);
   const [mounted, setMounted] = useState(false);
 
-  // Avoid theme flash (client only render)
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -121,7 +120,6 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
     let active = true;
     setSeoLoading(true);
 
-    // Check cache first
     const cached = sessionStorage.getItem(`seo-${pathname}`);
     if (cached) {
       try {
@@ -136,16 +134,14 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
       }
     }
 
-    // Build fresh SEO
     buildSEO({ 
       route: pathname, 
       locale: SEO_CONFIG.defaultLocale,
-      noindex: hideLayout, // Don't index auth pages
+      noindex: hideLayout,
     })
       .then((result) => {
         if (active) {
           setSeo(result);
-          // Cache for this session
           try {
             sessionStorage.setItem(`seo-${pathname}`, JSON.stringify(result));
           } catch (e) {
@@ -186,14 +182,12 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
   }, [pathname, hideLayout]);
 
   /* =========================================================
-     SEO Performance Metrics (Premium) - FIXED
+     SEO Performance Metrics
   ========================================================= */
   useEffect(() => {
     if (!seo?.metrics) return;
 
-    // Send to analytics in production - with type guard
     if (process.env.NODE_ENV === 'production' && typeof window !== 'undefined') {
-      // Check if gtag exists before using
       if (window.gtag) {
         window.gtag('event', 'seo_metrics', {
           score: seo.metrics.seoScore ?? 'n/a',
@@ -202,7 +196,6 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
         });
       }
       
-      // Check if dataLayer exists before using
       if (window.dataLayer && Array.isArray(window.dataLayer)) {
         window.dataLayer.push({
           event: 'seo_metrics',
@@ -213,7 +206,6 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
       }
     }
 
-    // Development logging
     if (process.env.NODE_ENV === 'development') {
       console.log("[SEO Metrics]", {
         score: seo.metrics.seoScore ?? "n/a",
@@ -226,14 +218,14 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
   }, [seo]);
 
   /* =========================================================
-     Scroll Restoration (UX Best Practice)
+     Scroll Restoration
   ========================================================= */
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [pathname]);
 
   /* =========================================================
-     Error Boundary fallback (memoized)
+     Error Boundary fallback
   ========================================================= */
   const fallbackRender = useCallback(
     ({ error, resetErrorBoundary }: { error: Error; resetErrorBoundary: () => void }) => (
@@ -242,70 +234,55 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
     []
   );
 
-  // Prevent hydration flash (SEO-safe)
   if (!mounted) return null;
 
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
       <head>
-        {/* Preconnect to critical origins */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://images.cashog.com" />
         <link rel="preconnect" href="https://api.cashog.com" />
-        
-        {/* DNS Prefetch */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
       </head>
       
-      <body className="min-h-screen overflow-x-hidden text-gray-900 transition-colors duration-500 dark:text-white">
+      <body className="min-h-screen overflow-x-hidden text-gray-900 dark:text-white bg-transparent">
 
-        {/* Tiny loading indicator (optional UX) */}
         {seoLoading && <SEOLoadingSkeleton />}
 
         <ThemeProviderWrapper>
-          {/* =====================================================
-              Global Background Layer - INSIDE THEME PROVIDER
-          ===================================================== */}
+          {/* Background Layer */}
           <Suspense fallback={null}>
             <Background />
           </Suspense>
 
-          {/* =====================================================
-              SEO Metadata & Structured Data
-          ===================================================== */}
+          {/* SEO Metadata */}
           {seo && (
             <Suspense fallback={null}>
               <SeoRenderer seo={seo} />
             </Suspense>
           )}
 
-          {/* =====================================================
-              Page Wrapper (Content sits above Background)
-          ===================================================== */}
-          <div className="relative z-10 flex min-h-screen flex-col">
+          {/* Main Content Wrapper - Transparent background */}
+          <div className="relative z-10 flex min-h-screen flex-col bg-transparent">
 
-            {/* =====================================================
-                Header (Hidden on Auth Pages)
-            ===================================================== */}
+            {/* Header - Transparent with blur */}
             {!hideLayout && (
-              <header className="fixed top-0 left-0 z-40 w-full border-b border-gray-200 bg-white/70 backdrop-blur-xl dark:border-gray-800 dark:bg-black/70">
-                <Suspense fallback={<div className="h-16 animate-pulse bg-gray-100 dark:bg-gray-800" />}>
+              <header className="fixed top-0 left-0 z-40 w-full border-b border-gray-200/30 dark:border-gray-800/30 bg-transparent backdrop-blur-xl">
+                <Suspense fallback={<div className="h-16 animate-pulse bg-transparent" />}>
                   <Header />
                 </Suspense>
               </header>
             )}
 
-            {/* =====================================================
-                Main Content (Error Boundary Scoped)
-            ===================================================== */}
+            {/* Main Content - Transparent background */}
             <ErrorBoundary 
               fallbackRender={fallbackRender}
               onReset={() => window.location.reload()}
             >
               <main
-                className={`flex-1 w-full ${
+                className={`flex-1 w-full bg-transparent ${
                   hideLayout
                     ? "min-h-screen flex items-center justify-center px-4"
                     : isDashboardPage
@@ -313,19 +290,21 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
                     : "pt-20"
                 }`}
               >
-                {children}
+                {/* Content wrapper with semi-transparent background for readability */}
+                <div className="w-full h-full bg-transparent">
+                  {children}
+                </div>
               </main>
             </ErrorBoundary>
 
-            {/* =====================================================
-                Footer & CTA (Hidden on Auth Pages)
-            ===================================================== */}
+            {/* Footer - Transparent with blur */}
             {!hideLayout && (
-              <Suspense fallback={<div className="h-40 animate-pulse bg-gray-50 dark:bg-gray-900" />}>
+              <Suspense fallback={<div className="h-40 animate-pulse bg-transparent" />}>
                 <Footer />
               </Suspense>
             )}
             
+            {/* Floating CTA */}
             {!hideLayout && (
               <Suspense fallback={null}>
                 <FloatingCTA />
@@ -333,9 +312,7 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
             )}
           </div>
 
-          {/* =====================================================
-              Auth Modal (Parallel Route Support)
-          ===================================================== */}
+          {/* Auth Modal */}
           {hasAuthModal && auth}
         </ThemeProviderWrapper>
       </body>
