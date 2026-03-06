@@ -10,7 +10,7 @@ import SeoRenderer from "@/components/SEO/SeoRenderer";
 import Background from "@/components/Background";
 import FAQ from "@/components/faq/FAQ";
 
-import Reveal from "@/components/animations/Reveal";
+import Reveal from "@/components/animations/openingstyle";
 import RevealWithBorder from "@/components/animations/RevealWithBorder";
 
 /* Homepage Sections */
