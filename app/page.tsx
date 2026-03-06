@@ -9,7 +9,7 @@ import { SEO_CONFIG } from "@/components/SEO/seoConfig";
 import SeoRenderer from "@/components/SEO/SeoRenderer";
 
 import Background from "@/components/Background";
-import TypingText from "@/components/typing/TypingText";
+import TypingText from "@/components/typing/home"; // 👈 FIXED IMPORT
 import FAQ from "@/components/faq/FAQ";
 
 import Reveal from "@/components/animations/Reveal";
