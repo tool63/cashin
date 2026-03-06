@@ -15,9 +15,9 @@ export default function Background() {
           from-yellow-400/20
           via-green-400/30
           to-green-500/20
-          dark:from-yellow-400/30
-          dark:via-green-500/40
-          dark:to-green-600/30
+          dark:from-yellow-500/10
+          dark:via-green-700/20
+          dark:to-green-800/20
           transition-colors duration-500
           pointer-events-none
         "
@@ -30,7 +30,7 @@ export default function Background() {
         className="
           absolute w-80 h-80
           bg-green-400/25
-          dark:bg-green-500/40
+          dark:bg-green-700/20
           rounded-full
           blur-[120px]
           top-10 left-10
@@ -46,7 +46,7 @@ export default function Background() {
         className="
           absolute w-96 h-96
           bg-yellow-400/25
-          dark:bg-yellow-500/40
+          dark:bg-yellow-500/10
           rounded-full
           blur-[140px]
           bottom-10 right-10
@@ -62,7 +62,6 @@ export default function Background() {
         className="
           absolute inset-0
           bg-white/5
-          dark:bg-transparent
           backdrop-blur-3xl
           pointer-events-none
         "
