@@ -2,14 +2,12 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import { useInView } from "react-intersection-observer";
 
 import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
 import SeoRenderer from "@/components/SEO/SeoRenderer";
 
 import Background from "@/components/Background";
-import TypingText from "@/components/typing/home"; // 👈 FIXED IMPORT
 import FAQ from "@/components/faq/FAQ";
 
 import Reveal from "@/components/animations/Reveal";
@@ -24,26 +22,11 @@ import TrustSection from "@/components/homepage/TrustSection";
 import PaymentSection from "@/components/homepage/PaymentSection";
 import FinalCTASection from "@/components/homepage/FinalCTASection";
 
-/* Live Components (Lazy) */
+/* Live Components */
 const LiveJoining = dynamic(() => import("@/components/homepage/LiveJoining"), { ssr: false });
 const LiveEarnings = dynamic(() => import("@/components/homepage/LiveEarnings"), { ssr: false });
 const LiveOfferCompletion = dynamic(() => import("@/components/homepage/LiveOfferCompletion"), { ssr: false });
 const LiveWithdrawals = dynamic(() => import("@/components/homepage/LiveWithdrawals"), { ssr: false });
-
-/* Loading */
-const SectionSkeleton = () => (
-  <div className="h-32 animate-pulse bg-gray-200 dark:bg-gray-800 rounded-lg" />
-);
-
-function LazySection({ children }: { children: React.ReactNode }) {
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.15,
-    rootMargin: "200px",
-  });
-
-  return <div ref={ref}>{inView ? children : <SectionSkeleton />}</div>;
-}
 
 /* SEO hydration */
 export default function HomePage() {
@@ -69,28 +52,19 @@ export default function HomePage() {
 
       <Background />
 
-      <main className="relative min-h-screen bg-white text-gray-900 transition-colors duration-300 dark:bg-[#070A14] dark:text-white">
+      <main className="relative min-h-screen bg-white text-gray-900 dark:bg-[#070A14] dark:text-white">
 
-        {/* HERO SECTION */}
+        {/* HERO */}
         <section>
           <HeroSection />
-          <div className="text-center mt-4">
-            <TypingText
-              text={[
-                "Earn money online",
-                "Complete tasks and withdraw",
-                "Join thousands of users",
-              ]}
-            />
-          </div>
         </section>
 
         {/* LIVE ACTIVITY */}
-        <section aria-label="Live platform activity" className="max-w-7xl mx-auto px-4 py-10">
-          <LazySection><LiveJoining /></LazySection>
-          <LazySection><LiveEarnings /></LazySection>
-          <LazySection><LiveOfferCompletion /></LazySection>
-          <LazySection><LiveWithdrawals /></LazySection>
+        <section className="max-w-7xl mx-auto px-4 py-10">
+          <LiveJoining />
+          <LiveEarnings />
+          <LiveOfferCompletion />
+          <LiveWithdrawals />
         </section>
 
         {/* FEATURES */}
@@ -99,9 +73,9 @@ export default function HomePage() {
         </Reveal>
 
         {/* TASKS */}
-        <LazySection>
+        <section className="max-w-7xl mx-auto px-4 py-12">
           <TasksSection />
-        </LazySection>
+        </section>
 
         {/* OFFERS */}
         <section className="max-w-7xl mx-auto px-4 py-8">
@@ -111,24 +85,24 @@ export default function HomePage() {
         </section>
 
         {/* TRUST */}
-        <LazySection>
+        <section className="max-w-7xl mx-auto px-4 py-12">
           <TrustSection />
-        </LazySection>
+        </section>
 
         {/* PAYMENTS */}
-        <LazySection>
+        <section className="max-w-7xl mx-auto px-4 py-12">
           <PaymentSection />
-        </LazySection>
+        </section>
 
         {/* FAQ */}
-        <section className="max-w-7xl mx-auto px-4 py-12">
+        <section className="max-w-3xl mx-auto px-4 py-12">
           <FAQ />
         </section>
 
         {/* CTA */}
-        <LazySection>
+        <section className="max-w-7xl mx-auto px-4 py-12">
           <FinalCTASection />
-        </LazySection>
+        </section>
 
       </main>
     </>
