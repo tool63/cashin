@@ -1,31 +1,13 @@
+// components/SEO/SeoRenderer.tsx
 'use client';
 
 import React, { useEffect, useMemo } from 'react';
 import Head from 'next/head';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { SEOOutput } from './seoEngine';
+import { SEOOutput, LinkHint } from './seoEngine';  // ← Import LinkHint
 
-interface SeoRendererProps {
-  seo: SEOOutput;
-  children?: React.ReactNode;
-  defer?: boolean;
-  priority?: 'high' | 'low';
-  onRender?: (metrics: SEORenderMetrics) => void;
-}
+// ... (keep existing interfaces)
 
-export interface SEORenderMetrics {
-  pathname: string;
-  searchParams: Record<string, string>;
-  pageType: string;
-  canonical?: string;
-  schemaCount: number;
-  metadataSize: number;
-  timestamp: number;
-}
-
-/* =========================================================
-   Ultra Premium: SEO Renderer (Type Safe)
-========================================================= */
 export default function SeoRenderer({
   seo,
   children,
@@ -227,32 +209,63 @@ export default function SeoRenderer({
   }, [seo]);
 
   // ========================================================
-  // Resource Hints
+  // Resource Hints - UPDATED to handle LinkHint
   // ========================================================
   const resourceHints = useMemo(() => {
     const hints: React.ReactNode[] = [];
 
+    // Preconnect hints
     seo.preconnect?.forEach((url, index) => {
-      hints.push(<link key={`preconnect-${index}`} rel="preconnect" href={String(url)} />);
-    });
-
-    seo.links?.forEach((link, index) => {
       hints.push(
-        <link
-          key={`link-${index}`}
-          rel={link.rel}
-          href={String(link.href)}
-          {...(link.hreflang && { hrefLang: link.hreflang })}
+        <link 
+          key={`preconnect-${index}`} 
+          rel="preconnect" 
+          href={String(url)} 
+          crossOrigin="anonymous"
         />
       );
     });
 
-    seo.prefetch?.forEach((url, index) => {
-      hints.push(<link key={`prefetch-${index}`} rel="prefetch" href={String(url)} />);
+    // Resource links with all possible attributes
+    seo.links?.forEach((link, index) => {
+      const props: any = {
+        key: `link-${index}`,
+        rel: link.rel,
+        href: String(link.href),
+      };
+
+      // Add optional attributes if they exist
+      if (link.hreflang) props.hrefLang = link.hreflang;
+      if (link.as) props.as = link.as;
+      if (link.type) props.type = link.type;
+      if (link.crossOrigin) props.crossOrigin = link.crossOrigin;
+      if (link.media) props.media = link.media;
+      if (link.imagesrcset) props.imagesrcset = link.imagesrcset;
+      if (link.imagesizes) props.imagesizes = link.imagesizes;
+
+      hints.push(<link {...props} />);
     });
 
+    // Prefetch hints
+    seo.prefetch?.forEach((url, index) => {
+      hints.push(
+        <link 
+          key={`prefetch-${index}`} 
+          rel="prefetch" 
+          href={String(url)} 
+        />
+      );
+    });
+
+    // Prerender hints
     seo.prerender?.forEach((url, index) => {
-      hints.push(<link key={`prerender-${index}`} rel="prerender" href={String(url)} />);
+      hints.push(
+        <link 
+          key={`prerender-${index}`} 
+          rel="prerender" 
+          href={String(url)} 
+        />
+      );
     });
 
     return hints;
