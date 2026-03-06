@@ -1,5 +1,5 @@
 import { cache } from 'react';
-import { PageTypeResult, detectPageType, isPaginated } from './pageTypes';
+import { PageTypeResult, detectPageType, isPaginated, PageType } from './pageTypes';
 import { buildMetadata, MetadataInput } from './metadata';
 import { buildStructuredData, SchemaInput } from './schema';
 import { buildCanonical, CanonicalOptions } from './canonical';
@@ -94,13 +94,15 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
     // ========================================================
     // Page Detection
     // ========================================================
-    const pageType =
-      detectPageType(route, queryParams) || {
-        type: 'generic',
-        hierarchy: ['generic'],
-        metadata: {},
-        matches: null,
-      };
+    const detected = detectPageType(route, queryParams);
+    const pageType: PageTypeResult = detected
+      ? detected
+      : {
+          type: 'generic' as PageType,
+          hierarchy: ['generic'],
+          metadata: {},
+          matches: null,
+        };
 
     const isProduction = process.env.NODE_ENV === 'production';
 
@@ -139,7 +141,7 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
     // Metadata (Base)
     // ========================================================
     const metadataInput: MetadataInput = {
-      pageType: (pageType.type as any) || 'generic',
+      pageType: pageType.type,
       route,
       locale,
       canonical,
@@ -223,8 +225,8 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
       canonical: SEO_CONFIG.siteUrl,
       hreflang: { [SEO_CONFIG.defaultLocale]: SEO_CONFIG.siteUrl },
       pageType: {
-        type: 'unknown',
-        hierarchy: ['unknown'],
+        type: 'generic' as PageType,
+        hierarchy: ['generic'],
         metadata: {},
         matches: null,
       },
@@ -276,10 +278,7 @@ function calculateSEOScore(metadata: any, schema: object[]): number {
 // ============================================================
 // Resource Hints
 // ============================================================
-function generateResourceHints(
-  pageType: PageTypeResult,
-  data: any
-) {
+function generateResourceHints(pageType: PageTypeResult, data: any) {
   const hints: Array<{ rel: string; href: string }> = [];
 
   SEO_CONFIG.preconnect?.forEach((url) => {
@@ -312,10 +311,7 @@ function generatePrefetchUrls(pageType: PageTypeResult): string[] {
 // ============================================================
 // Prerender
 // ============================================================
-function generatePrerenderUrls(
-  pageType: PageTypeResult,
-  route: string
-): string[] {
+function generatePrerenderUrls(pageType: PageTypeResult, route: string): string[] {
   if (pageType.type === 'earn_category') {
     return ['/earn-paypal-money'];
   }
