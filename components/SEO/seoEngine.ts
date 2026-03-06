@@ -92,14 +92,14 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
 
   try {
     // ========================================================
-    // Page Detection
+    // Page Detection (Type Safe)
     // ========================================================
     const detected = detectPageType(route, queryParams);
     const pageType: PageTypeResult = detected
       ? detected
       : {
           type: 'generic' as PageType,
-          hierarchy: ['generic'],
+          hierarchy: [], // FIX: must be PageType[]
           metadata: {},
           matches: null,
         };
@@ -138,7 +138,7 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
       : {};
 
     // ========================================================
-    // Metadata (Base)
+    // Metadata
     // ========================================================
     const metadataInput: MetadataInput = {
       pageType: pageType.type,
@@ -155,9 +155,6 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
 
     let metadata = buildMetadata(metadataInput);
 
-    // ========================================================
-    // 🔥 ULTRA TITLE & KEYWORD ENHANCEMENT
-    // ========================================================
     metadata = enhanceMetadata(metadata, route);
 
     // ========================================================
@@ -175,7 +172,7 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
       : [];
 
     // ========================================================
-    // Resource Optimization
+    // Resources
     // ========================================================
     const links = generateResourceHints(pageType, data);
     const preconnect = SEO_CONFIG.preconnect;
@@ -183,7 +180,7 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
     const prerender = generatePrerenderUrls(pageType, route);
 
     // ========================================================
-    // SEO Score Calculation
+    // SEO Score
     // ========================================================
     const seoScore = calculateSEOScore(metadata, structuredData);
 
@@ -226,7 +223,7 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
       hreflang: { [SEO_CONFIG.defaultLocale]: SEO_CONFIG.siteUrl },
       pageType: {
         type: 'generic' as PageType,
-        hierarchy: ['generic'],
+        hierarchy: [], // FIXED
         metadata: {},
         matches: null,
       },
@@ -238,7 +235,7 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
 });
 
 // ============================================================
-// Metadata Enhancer
+// Helpers
 // ============================================================
 function enhanceMetadata(metadata: any, route: string) {
   const primary = SEO_CONFIG.primaryKeyword;
@@ -259,9 +256,6 @@ function enhanceMetadata(metadata: any, route: string) {
   return metadata;
 }
 
-// ============================================================
-// SEO Score
-// ============================================================
 function calculateSEOScore(metadata: any, schema: object[]): number {
   let score = 50;
 
@@ -296,9 +290,6 @@ function generateResourceHints(pageType: PageTypeResult, data: any) {
   return hints;
 }
 
-// ============================================================
-// Prefetch
-// ============================================================
 function generatePrefetchUrls(pageType: PageTypeResult): string[] {
   switch (pageType.type) {
     case 'home':
@@ -308,9 +299,6 @@ function generatePrefetchUrls(pageType: PageTypeResult): string[] {
   }
 }
 
-// ============================================================
-// Prerender
-// ============================================================
 function generatePrerenderUrls(pageType: PageTypeResult, route: string): string[] {
   if (pageType.type === 'earn_category') {
     return ['/earn-paypal-money'];
