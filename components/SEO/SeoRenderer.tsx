@@ -24,7 +24,7 @@ export interface SEORenderMetrics {
 }
 
 /* =========================================================
-   Ultra Premium: SEO Renderer
+   Ultra Premium: SEO Renderer (Type Safe)
 ========================================================= */
 export default function SeoRenderer({
   seo,
@@ -64,7 +64,7 @@ export default function SeoRenderer({
   }, [seo.structuredData, defer]);
 
   // ========================================================
-  // Meta Tags (Ultra Premium)
+  // Meta Tags (Type Safe)
   // ========================================================
   const metaTags = useMemo(() => {
     const tags: React.ReactNode[] = [];
@@ -72,7 +72,7 @@ export default function SeoRenderer({
 
     if (!metadata) return tags;
 
-    // Title (Premium OpenGraph)
+    // Title
     if (metadata.title) {
       tags.push(
         <title key="title">{metadata.title}</title>,
@@ -81,36 +81,32 @@ export default function SeoRenderer({
       );
     }
 
-    // Description (SEO + Social)
+    // Description
     if (metadata.description) {
+      const description = String(metadata.description);
+
       tags.push(
-        <meta key="description" name="description" content={metadata.description} />,
-        <meta key="og:description" property="og:description" content={metadata.description} />,
-        <meta key="twitter:description" name="twitter:description" content={metadata.description} />
+        <meta key="description" name="description" content={description} />,
+        <meta key="og:description" property="og:description" content={description} />,
+        <meta key="twitter:description" name="twitter:description" content={description} />
       );
     }
 
-    // Keywords (Ultra Premium)
+    // Keywords
     if (metadata.keywords) {
-      tags.push(
-        <meta
-          key="keywords"
-          name="keywords"
-          content={
-            Array.isArray(metadata.keywords)
-              ? metadata.keywords.join(', ')
-              : metadata.keywords
-          }
-        />
-      );
+      const keywords = Array.isArray(metadata.keywords)
+        ? metadata.keywords.join(', ')
+        : String(metadata.keywords);
+
+      tags.push(<meta key="keywords" name="keywords" content={keywords} />);
     }
 
-    // Canonical (SEO best practice)
+    // Canonical
     if (seo.canonical) {
-      tags.push(<link key="canonical" rel="canonical" href={seo.canonical} />);
+      tags.push(<link key="canonical" rel="canonical" href={String(seo.canonical)} />);
     }
 
-    // Hreflang (International SEO)
+    // Hreflang
     if (seo.hreflang) {
       Object.entries(seo.hreflang).forEach(([lang, href]) => {
         tags.push(
@@ -118,13 +114,13 @@ export default function SeoRenderer({
             key={`hreflang-${lang}`}
             rel="alternate"
             hrefLang={lang}
-            href={href}
+            href={String(href)}
           />
         );
       });
     }
 
-    // Robots (Premium Handling)
+    // Robots
     if (metadata.robots) {
       const robotsValue =
         typeof metadata.robots === 'string'
@@ -136,13 +132,13 @@ export default function SeoRenderer({
       tags.push(<meta key="robots" name="robots" content={robotsValue} />);
     }
 
-    // OpenGraph (Ultra Premium)
+    // OpenGraph
     if (metadata.openGraph) {
       const og = metadata.openGraph;
 
       if (og.images?.[0]?.url) {
         tags.push(
-          <meta key="og:image" property="og:image" content={og.images[0].url} />,
+          <meta key="og:image" property="og:image" content={String(og.images[0].url)} />,
           <meta
             key="og:image:width"
             property="og:image:width"
@@ -156,42 +152,42 @@ export default function SeoRenderer({
           <meta
             key="og:image:alt"
             property="og:image:alt"
-            content={og.images[0].alt || metadata.title}
+            content={String(og.images[0].alt || metadata.title || '')}
           />
         );
       }
 
-      if (og.url) tags.push(<meta key="og:url" property="og:url" content={og.url} />);
-      if (og.type) tags.push(<meta key="og:type" property="og:type" content={og.type} />);
+      if (og.url) tags.push(<meta key="og:url" property="og:url" content={String(og.url)} />);
+      if (og.type) tags.push(<meta key="og:type" property="og:type" content={String(og.type)} />);
       if (og.siteName)
-        tags.push(<meta key="og:site_name" property="og:site_name" content={og.siteName} />);
+        tags.push(<meta key="og:site_name" property="og:site_name" content={String(og.siteName)} />);
       if (og.locale)
-        tags.push(<meta key="og:locale" property="og:locale" content={og.locale} />);
+        tags.push(<meta key="og:locale" property="og:locale" content={String(og.locale)} />);
     }
 
-    // Twitter Card (Premium)
+    // Twitter Card
     if (metadata.twitter) {
       const twitter = metadata.twitter;
 
       if (twitter.card)
-        tags.push(<meta key="twitter:card" name="twitter:card" content={twitter.card} />);
+        tags.push(<meta key="twitter:card" name="twitter:card" content={String(twitter.card)} />);
       if (twitter.site)
-        tags.push(<meta key="twitter:site" name="twitter:site" content={twitter.site} />);
+        tags.push(<meta key="twitter:site" name="twitter:site" content={String(twitter.site)} />);
       if (twitter.images?.[0])
         tags.push(
-          <meta key="twitter:image" name="twitter:image" content={twitter.images[0]} />
+          <meta key="twitter:image" name="twitter:image" content={String(twitter.images[0])} />
         );
       if (twitter.imageAlt)
         tags.push(
           <meta
             key="twitter:image:alt"
             name="twitter:image:alt"
-            content={twitter.imageAlt}
+            content={String(twitter.imageAlt)}
           />
         );
     }
 
-    // Viewport (Mobile SEO)
+    // Viewport
     if (metadata.viewport) {
       const viewportValue =
         typeof metadata.viewport === 'string'
@@ -201,18 +197,18 @@ export default function SeoRenderer({
       tags.push(<meta key="viewport" name="viewport" content={viewportValue} />);
     }
 
-    // Theme color (PWA + SEO)
+    // Theme color
     if (metadata.other?.['theme-color']) {
       tags.push(
         <meta
           key="theme-color"
           name="theme-color"
-          content={metadata.other['theme-color']}
+          content={String(metadata.other['theme-color'])}
         />
       );
     }
 
-    // Verification (Search Engine)
+    // Verification (Type Safe)
     if (metadata.verification) {
       Object.entries(metadata.verification).forEach(([key, value]) => {
         if (value) {
@@ -220,7 +216,7 @@ export default function SeoRenderer({
             <meta
               key={`verify-${key}`}
               name={`${key}-verification`}
-              content={value}
+              content={String(value)}
             />
           );
         }
@@ -231,13 +227,13 @@ export default function SeoRenderer({
   }, [seo]);
 
   // ========================================================
-  // Resource Hints (Ultra Premium)
+  // Resource Hints
   // ========================================================
   const resourceHints = useMemo(() => {
     const hints: React.ReactNode[] = [];
 
     seo.preconnect?.forEach((url, index) => {
-      hints.push(<link key={`preconnect-${index}`} rel="preconnect" href={url} />);
+      hints.push(<link key={`preconnect-${index}`} rel="preconnect" href={String(url)} />);
     });
 
     seo.links?.forEach((link, index) => {
@@ -245,25 +241,25 @@ export default function SeoRenderer({
         <link
           key={`link-${index}`}
           rel={link.rel}
-          href={link.href}
+          href={String(link.href)}
           {...(link.hreflang && { hrefLang: link.hreflang })}
         />
       );
     });
 
     seo.prefetch?.forEach((url, index) => {
-      hints.push(<link key={`prefetch-${index}`} rel="prefetch" href={url} />);
+      hints.push(<link key={`prefetch-${index}`} rel="prefetch" href={String(url)} />);
     });
 
     seo.prerender?.forEach((url, index) => {
-      hints.push(<link key={`prerender-${index}`} rel="prerender" href={url} />);
+      hints.push(<link key={`prerender-${index}`} rel="prerender" href={String(url)} />);
     });
 
     return hints;
   }, [seo]);
 
   // ========================================================
-  // Performance Monitoring (Ultra Premium)
+  // Performance Monitoring
   // ========================================================
   useEffect(() => {
     if (!onRender) return;
@@ -281,23 +277,6 @@ export default function SeoRenderer({
     onRender(metrics);
   }, [seo, pathname, searchParams, onRender]);
 
-  // ========================================================
-  // Priority Resource Loading (Ultra Premium)
-  // ========================================================
-  useEffect(() => {
-    if (priority !== 'high' || !seo.canonical) return;
-
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'document';
-    link.href = seo.canonical;
-    document.head.appendChild(link);
-
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, [priority, seo.canonical]);
-
   return (
     <>
       <Head>
@@ -311,7 +290,7 @@ export default function SeoRenderer({
 }
 
 /* =========================================================
-   Lazy Loaded Version (Ultra Premium)
+   Lazy Loaded Version
 ========================================================= */
 export const LazySeoRenderer = React.lazy(() =>
   Promise.resolve({ default: SeoRenderer })
