@@ -268,10 +268,18 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
       </head>
       
-      <body className="min-h-screen overflow-x-hidden text-gray-900 transition-colors duration-500 dark:text-white bg-white dark:bg-[#070A14]">
+      {/* REMOVED ONLY background colors - kept text colors */}
+      <body className="min-h-screen overflow-x-hidden text-gray-900 transition-colors duration-500 dark:text-white">
 
         {/* Tiny loading indicator (optional UX) */}
         {seoLoading && <SEOLoadingSkeleton />}
+
+        {/* =====================================================
+            Global Background Layer (Handles background colors)
+        ===================================================== */}
+        <Suspense fallback={null}>
+          <Background />
+        </Suspense>
 
         {/* =====================================================
             SEO Metadata & Structured Data
@@ -284,14 +292,7 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
 
         <ThemeProviderWrapper>
           {/* =====================================================
-              Global Background Layer
-          ===================================================== */}
-          <Suspense fallback={null}>
-            <Background />
-          </Suspense>
-
-          {/* =====================================================
-              Page Wrapper
+              Page Wrapper (Content sits above Background)
           ===================================================== */}
           <div className="relative z-10 flex min-h-screen flex-col">
 
