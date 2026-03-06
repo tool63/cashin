@@ -1,3 +1,5 @@
+"use client";
+
 import AuthModal from "@/components/modals/AuthModal";
 import AuthPageWrapper from "@/components/auth/AuthPageWrapper";
 import SocialButtons from "@/components/auth/SocialButtons";
