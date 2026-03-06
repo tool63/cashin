@@ -128,13 +128,13 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
       customCanonical || buildCanonical(route, canonicalOptions);
 
     // ========================================================
-    // Hreflang
+    // Hreflang (Type Safe)
     // ========================================================
     const hreflang = !skipHreflang
       ? buildHreflang(route, {
           includeDefault: true,
           includeXDefault: true,
-          locales: SEO_CONFIG.supportedLocales,
+          locales: [...SEO_CONFIG.supportedLocales],
         } as HreflangOptions)
       : {};
 
@@ -239,7 +239,7 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
 });
 
 // ============================================================
-// 🔥 Metadata Enhancer
+// Metadata Enhancer
 // ============================================================
 function enhanceMetadata(metadata: any, route: string) {
   const primary = SEO_CONFIG.primaryKeyword;
