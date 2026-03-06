@@ -70,63 +70,135 @@ export default function HomePage() {
 
       <main className="relative min-h-screen bg-transparent text-gray-900 dark:text-white">
 
-        {/* HERO */}
+        {/* =====================================================
+            SECTION 1: HERO
+        ===================================================== */}
         <section className="bg-transparent">
           <HeroSection />
         </section>
 
-        {/* LIVE ACTIVITY */}
+        {/* Visual Separator */}
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
+
+        {/* =====================================================
+            SECTION 2: LIVE ACTIVITY (4 components)
+        ===================================================== */}
         <section className="max-w-7xl mx-auto px-4 py-10 bg-transparent">
-          <LiveJoining />
-          <LiveEarnings />
-          <LiveOfferCompletion />
-          <LiveWithdrawals />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6">
+              <LiveJoining />
+            </div>
+            <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6">
+              <LiveEarnings />
+            </div>
+            <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6">
+              <LiveOfferCompletion />
+            </div>
+            <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6">
+              <LiveWithdrawals />
+            </div>
+          </div>
         </section>
 
-        {/* FEATURES */}
-        <Reveal>
-          <section className="bg-transparent">
-            <FeaturesSection />
-          </section>
-        </Reveal>
+        {/* Visual Separator */}
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
 
-        {/* TASKS */}
+        {/* =====================================================
+            SECTION 3: FEATURES
+        ===================================================== */}
+        <section className="bg-transparent py-8">
+          <Reveal>
+            <div className="max-w-7xl mx-auto px-4">
+              <FeaturesSection />
+            </div>
+          </Reveal>
+        </section>
+
+        {/* Visual Separator */}
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
+
+        {/* =====================================================
+            SECTION 4: TASKS
+        ===================================================== */}
         <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
-          <TasksSection />
+          <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6">
+            <TasksSection />
+          </div>
         </section>
 
-        {/* OFFERS */}
+        {/* Visual Separator */}
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
+
+        {/* =====================================================
+            SECTION 5: HIGH PAYING OFFERS
+        ===================================================== */}
         <section className="max-w-7xl mx-auto px-4 py-8 bg-transparent">
           <RevealWithBorder>
-            <HighPayingOffers />
+            <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6">
+              <HighPayingOffers />
+            </div>
           </RevealWithBorder>
         </section>
 
-        {/* TRUST */}
+        {/* Visual Separator */}
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
+
+        {/* =====================================================
+            SECTION 6: TRUST
+        ===================================================== */}
         <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
-          <TrustSection />
+          <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6">
+            <TrustSection />
+          </div>
         </section>
 
-        {/* PAYMENTS */}
+        {/* Visual Separator */}
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
+
+        {/* =====================================================
+            SECTION 7: PAYMENTS
+        ===================================================== */}
         <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
-          <PaymentSection />
+          <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6">
+            <PaymentSection />
+          </div>
         </section>
 
-        {/* FAQ (with props) */}
+        {/* Visual Separator */}
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
+
+        {/* =====================================================
+            SECTION 8: FAQ
+        ===================================================== */}
         <section className="max-w-3xl mx-auto px-4 py-12 bg-transparent">
-          <FAQ
-            faqs={[
-              { q: "How do I earn?", a: "Complete tasks and offers to earn rewards." },
-              { q: "When do I get paid?", a: "Withdraw anytime after reaching minimum balance." },
-              { q: "Is it free?", a: "Yes, joining and earning are completely free." },
-            ]}
-          />
+          <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-8">
+            <h2 className="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-yellow-400 to-green-500 bg-clip-text text-transparent">
+              Frequently Asked Questions
+            </h2>
+            <FAQ
+              faqs={[
+                { q: "How do I earn?", a: "Complete tasks and offers to earn rewards." },
+                { q: "When do I get paid?", a: "Withdraw anytime after reaching minimum balance." },
+                { q: "Is it free?", a: "Yes, joining and earning are completely free." },
+              ]}
+            />
+          </div>
         </section>
 
-        {/* CTA */}
+        {/* Visual Separator */}
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
+
+        {/* =====================================================
+            SECTION 9: FINAL CTA
+        ===================================================== */}
         <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
-          <FinalCTASection />
+          <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-8">
+            <FinalCTASection />
+          </div>
         </section>
+
+        {/* Bottom Spacer */}
+        <div className="h-12"></div>
 
       </main>
     </>
