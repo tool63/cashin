@@ -7,14 +7,15 @@ import { usePathname } from "next/navigation";
 import { ErrorBoundary } from "react-error-boundary";
 import dynamic from 'next/dynamic';
 
-// Add type declaration for gtag
+// Add type declarations for gtag and dataLayer
 declare global {
   interface Window {
     gtag?: (
-      command: 'event',
+      command: 'event' | 'config' | 'js',
       action: string,
-      params: Record<string, any>
+      params?: Record<string, any>
     ) => void;
+    dataLayer?: any[];
   }
 }
 
@@ -210,8 +211,8 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
         });
       }
       
-      // Alternative: Use dataLayer for GTM
-      if (window.dataLayer) {
+      // Check if dataLayer exists before using
+      if (window.dataLayer && Array.isArray(window.dataLayer)) {
         window.dataLayer.push({
           event: 'seo_metrics',
           seo_score: seo.metrics.seoScore ?? 'n/a',
