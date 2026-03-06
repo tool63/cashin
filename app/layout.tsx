@@ -95,15 +95,6 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
   // Avoid theme flash (client only render)
   useEffect(() => {
     setMounted(true);
-    
-    // Detect theme from localStorage or system preference
-    const theme = (() => {
-      const stored = localStorage.getItem('theme');
-      if (stored) return stored;
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    })();
-    
-    document.documentElement.classList.toggle('dark', theme === 'dark');
   }, []);
 
   /* =========================================================
@@ -275,7 +266,7 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
 
         <ThemeProviderWrapper>
           {/* =====================================================
-              Global Background Layer - NOW INSIDE THEME PROVIDER
+              Global Background Layer - INSIDE THEME PROVIDER
           ===================================================== */}
           <Suspense fallback={null}>
             <Background />
