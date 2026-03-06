@@ -1,74 +1,40 @@
+"use client";
+
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
+
 import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
 import SeoRenderer from "@/components/SEO/SeoRenderer";
 
-// ===== FIX: Add missing import =====
-import HeroSection from "@/components/homepage/HeroSection";
+import Background from "@/components/Background";
+import TypingText from "@/components/typing/TypingText";
+import FAQ from "@/components/faq/FAQ";
 
-/* =========================
-   Loading Skeleton
-========================= */
+import Reveal from "@/components/animations/Reveal";
+import RevealWithBorder from "@/components/animations/RevealWithBorder";
+
+/* Homepage Sections */
+import HeroSection from "@/components/homepage/HeroSection";
+import FeaturesSection from "@/components/homepage/FeaturesSection";
+import TasksSection from "@/components/homepage/TasksSection";
+import HighPayingOffers from "@/components/homepage/HighPayingOffers";
+import TrustSection from "@/components/homepage/TrustSection";
+import PaymentSection from "@/components/homepage/PaymentSection";
+import FinalCTASection from "@/components/homepage/FinalCTASection";
+
+/* Live Components (Lazy) */
+const LiveJoining = dynamic(() => import("@/components/homepage/LiveJoining"), { ssr: false });
+const LiveEarnings = dynamic(() => import("@/components/homepage/LiveEarnings"), { ssr: false });
+const LiveOfferCompletion = dynamic(() => import("@/components/homepage/LiveOfferCompletion"), { ssr: false });
+const LiveWithdrawals = dynamic(() => import("@/components/homepage/LiveWithdrawals"), { ssr: false });
+
+/* Loading */
 const SectionSkeleton = () => (
   <div className="h-32 animate-pulse bg-gray-200 dark:bg-gray-800 rounded-lg" />
 );
 
-/* =========================
-   Lazy Loaded Sections
-========================= */
-const LiveJoining = dynamic(() => import("@/components/homepage/LiveJoining"), {
-  ssr: false,
-  loading: SectionSkeleton,
-});
-
-const LiveEarnings = dynamic(() => import("@/components/homepage/LiveEarnings"), {
-  ssr: false,
-  loading: SectionSkeleton,
-});
-
-const LiveOfferCompletion = dynamic(
-  () => import("@/components/homepage/LiveOfferCompletion"),
-  { ssr: false, loading: SectionSkeleton }
-);
-
-const LiveWithdrawals = dynamic(
-  () => import("@/components/homepage/LiveWithdrawals"),
-  { ssr: false, loading: SectionSkeleton }
-);
-
-const TasksSection = dynamic(() => import("@/components/homepage/TasksSection"), {
-  loading: SectionSkeleton,
-});
-
-const HighPayingOffers = dynamic(
-  () => import("@/components/homepage/HighPayingOffers"),
-  { loading: SectionSkeleton }
-);
-
-const TrustSection = dynamic(() => import("@/components/homepage/TrustSection"), {
-  loading: SectionSkeleton,
-});
-
-const PaymentSection = dynamic(
-  () => import("@/components/homepage/PaymentSection"),
-  { loading: SectionSkeleton }
-);
-
-const FeaturesSection = dynamic(
-  () => import("@/components/homepage/FeaturesSection"),
-  { loading: SectionSkeleton }
-);
-
-const FinalCTASection = dynamic(
-  () => import("@/components/homepage/FinalCTASection"),
-  { loading: SectionSkeleton }
-);
-
-/* =========================
-   Lazy Loading Wrapper (Intersection Observer)
-========================= */
 function LazySection({ children }: { children: React.ReactNode }) {
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -79,61 +45,10 @@ function LazySection({ children }: { children: React.ReactNode }) {
   return <div ref={ref}>{inView ? children : <SectionSkeleton />}</div>;
 }
 
-/* =========================
-   Dynamic Metadata (Server-Side)
-========================= */
-export async function generateMetadata() {
-  try {
-    const seo: SEOOutput = await buildSEO({
-      route: "/",
-      locale: SEO_CONFIG.defaultLocale,
-    });
-
-    return {
-      ...seo.metadata,
-      alternates: {
-        canonical: seo.canonical,
-        languages: seo.hreflang,
-      },
-      robots: seo.metadata?.robots,
-    };
-  } catch (error) {
-    console.error("Metadata generation failed:", error);
-
-    return {
-      title: SEO_CONFIG.defaultTitle,
-      description: SEO_CONFIG.defaultDescription,
-    };
-  }
-}
-
-/* =========================
-   Performance & SEO Metrics (Optional)
-========================= */
-function useSEOMetrics(seo: SEOOutput | null) {
-  useEffect(() => {
-    if (!seo?.metrics) return;
-
-    console.log("[SEO Metrics]", {
-      score: seo.metrics.seoScore ?? "n/a",
-      pageType: seo.pageType?.type,
-      generationTime: seo.metrics.generationTime,
-    });
-  }, [seo]);
-}
-
-/* =========================
-   Homepage Component
-========================= */
+/* SEO hydration */
 export default function HomePage() {
   const [seo, setSeo] = useState<SEOOutput | null>(null);
 
-  /* SEO Metrics Hook */
-  useSEOMetrics(seo);
-
-  /* =========================
-     Hydrate SEO Client-Side (Non-Blocking)
-  ========================== */
   useEffect(() => {
     let mounted = true;
 
@@ -150,15 +65,27 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Structured Data & Meta Tags */}
       {seo && <SeoRenderer seo={seo} />}
+
+      <Background />
 
       <main className="bg-white text-gray-900 transition-colors duration-300 dark:bg-[#070A14] dark:text-white">
 
-        {/* Hero (Critical LCP) */}
-        <HeroSection />
+        {/* HERO */}
+        <section>
+          <HeroSection />
+          <div className="text-center mt-4">
+            <TypingText
+              text={[
+                "Earn money online",
+                "Complete tasks and withdraw",
+                "Join 1M+ users",
+              ]}
+            />
+          </div>
+        </section>
 
-        {/* Live Activity (Lazy) */}
+        {/* LIVE ACTIVITY */}
         <section aria-label="Live platform activity">
           <LazySection><LiveJoining /></LazySection>
           <LazySection><LiveEarnings /></LazySection>
@@ -166,25 +93,42 @@ export default function HomePage() {
           <LazySection><LiveWithdrawals /></LazySection>
         </section>
 
-        {/* Core Earning Methods */}
-        <LazySection><TasksSection /></LazySection>
+        {/* FEATURES */}
+        <Reveal>
+          <FeaturesSection />
+        </Reveal>
 
-        {/* High Paying Offers */}
+        {/* TASKS */}
+        <LazySection>
+          <TasksSection />
+        </LazySection>
+
+        {/* OFFERS */}
         <section className="max-w-7xl mx-auto px-4 py-8">
-          <LazySection><HighPayingOffers /></LazySection>
+          <RevealWithBorder>
+            <HighPayingOffers />
+          </RevealWithBorder>
         </section>
 
-        {/* Trust */}
-        <LazySection><TrustSection /></LazySection>
+        {/* TRUST */}
+        <LazySection>
+          <TrustSection />
+        </LazySection>
 
-        {/* Payments */}
-        <LazySection><PaymentSection /></LazySection>
+        {/* PAYMENTS */}
+        <LazySection>
+          <PaymentSection />
+        </LazySection>
 
-        {/* Features */}
-        <LazySection><FeaturesSection /></LazySection>
+        {/* FAQ */}
+        <section className="max-w-7xl mx-auto px-4 py-12">
+          <FAQ />
+        </section>
 
-        {/* Final CTA */}
-        <LazySection><FinalCTASection /></LazySection>
+        {/* CTA */}
+        <LazySection>
+          <FinalCTASection />
+        </LazySection>
 
       </main>
     </>
