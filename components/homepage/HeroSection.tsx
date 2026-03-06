@@ -3,7 +3,7 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import TypingText from "@/components/typing/TypingText";
+import TypingText from "@/components/typing/home";
 import FloatingCTA from "@/components/cta/FloatingCTA";
 
 export default function HeroSection() {
