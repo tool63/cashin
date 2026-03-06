@@ -7,6 +7,17 @@ import { usePathname } from "next/navigation";
 import { ErrorBoundary } from "react-error-boundary";
 import dynamic from 'next/dynamic';
 
+// Add type declaration for gtag
+declare global {
+  interface Window {
+    gtag?: (
+      command: 'event',
+      action: string,
+      params: Record<string, any>
+    ) => void;
+  }
+}
+
 // Dynamic imports for code splitting
 const Header = dynamic(() => import("@/components/Header"), {
   loading: () => <div className="h-16 w-full bg-gray-100 dark:bg-gray-800 animate-pulse" />,
@@ -168,8 +179,8 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
               metadata: {},
               matches: null,
             },
-            links: [], // ← Added missing property
-            preconnect: SEO_CONFIG.preconnect, // ← Added missing property
+            links: [],
+            preconnect: SEO_CONFIG.preconnect,
           });
         }
       })
@@ -183,18 +194,31 @@ export default function RootLayout({ children, auth }: RootLayoutProps) {
   }, [pathname, hideLayout]);
 
   /* =========================================================
-     SEO Performance Metrics (Premium)
+     SEO Performance Metrics (Premium) - FIXED
   ========================================================= */
   useEffect(() => {
     if (!seo?.metrics) return;
 
-    // Send to analytics in production
-    if (process.env.NODE_ENV === 'production' && window.gtag) {
-      window.gtag('event', 'seo_metrics', {
-        score: seo.metrics.seoScore ?? 'n/a',
-        page_type: seo.pageType?.type,
-        generation_time: seo.metrics.generationTime,
-      });
+    // Send to analytics in production - with type guard
+    if (process.env.NODE_ENV === 'production' && typeof window !== 'undefined') {
+      // Check if gtag exists before using
+      if (window.gtag) {
+        window.gtag('event', 'seo_metrics', {
+          score: seo.metrics.seoScore ?? 'n/a',
+          page_type: seo.pageType?.type,
+          generation_time: seo.metrics.generationTime,
+        });
+      }
+      
+      // Alternative: Use dataLayer for GTM
+      if (window.dataLayer) {
+        window.dataLayer.push({
+          event: 'seo_metrics',
+          seo_score: seo.metrics.seoScore ?? 'n/a',
+          page_type: seo.pageType?.type,
+          generation_time: seo.metrics.generationTime,
+        });
+      }
     }
 
     // Development logging
