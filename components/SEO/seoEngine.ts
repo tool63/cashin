@@ -27,16 +27,28 @@ export interface SEOInput {
   cacheTTL?: number;
 }
 
+export interface LinkHint {
+  rel: string;
+  href: string;
+  hreflang?: string;
+  as?: string;        // For preload links
+  type?: string;      // MIME type
+  crossOrigin?: string; // CORS for fonts
+  media?: string;     // Media queries
+  imagesrcset?: string; // Responsive images
+  imagesizes?: string;  // Responsive images
+}
+
 export interface SEOOutput {
   metadata: Record<string, any>;
   structuredData: object[];
   canonical: string;
   hreflang: Record<string, string>;
   pageType: PageTypeResult;
-  links?: Array<{ rel: string; href: string; hreflang?: string }>;
-  preconnect?: readonly string[];  // ← FIXED: Added readonly
-  prefetch?: readonly string[];    // ← FIXED: Added readonly
-  prerender?: readonly string[];   // ← FIXED: Added readonly
+  links?: LinkHint[];  // ← Updated type
+  preconnect?: readonly string[];
+  prefetch?: readonly string[];
+  prerender?: readonly string[];
   metrics?: SEOAnalytics & { seoScore?: number };
 }
 
@@ -101,7 +113,7 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
       ? detected
       : {
           type: 'generic' as PageType,
-          hierarchy: [] as PageType[], // FIX: explicitly cast as PageType[]
+          hierarchy: [] as PageType[],
           metadata: {},
           matches: null,
         };
@@ -177,7 +189,7 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
     // Resources
     // ========================================================
     const links = generateResourceHints(pageType, data);
-    const preconnect = SEO_CONFIG.preconnect; // This is readonly from seoConfig
+    const preconnect = SEO_CONFIG.preconnect;
     const prefetch = generatePrefetchUrls(pageType);
     const prerender = generatePrerenderUrls(pageType, route);
 
@@ -201,9 +213,9 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
       hreflang,
       pageType,
       links,
-      preconnect,  // ← Now works with readonly[]
-      prefetch,    // ← Now works with readonly[]
-      prerender,   // ← Now works with readonly[]
+      preconnect,
+      prefetch,
+      prerender,
       metrics: { ...metrics, seoScore },
     };
 
@@ -225,12 +237,12 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
       hreflang: { [SEO_CONFIG.defaultLocale]: SEO_CONFIG.siteUrl },
       pageType: {
         type: 'generic' as PageType,
-        hierarchy: [] as PageType[], // FIX: explicitly cast as PageType[]
+        hierarchy: [] as PageType[],
         metadata: {},
         matches: null,
       },
       links: [],
-      preconnect: SEO_CONFIG.preconnect, // ← Now works with readonly[]
+      preconnect: SEO_CONFIG.preconnect,
       metrics: { seoScore: 50 } as any,
     };
   }
@@ -272,28 +284,63 @@ function calculateSEOScore(metadata: any, schema: object[]): number {
 }
 
 // ============================================================
-// Resource Hints
+// Resource Hints - UPDATED with proper types
 // ============================================================
-function generateResourceHints(pageType: PageTypeResult, data: any) {
-  const hints: Array<{ rel: string; href: string; hreflang?: string }> = [];
+function generateResourceHints(pageType: PageTypeResult, data: any): LinkHint[] {
+  const hints: LinkHint[] = [];
 
   // Add preconnect hints from config
   SEO_CONFIG.preconnect?.forEach((url) => {
     hints.push({ rel: 'preconnect', href: url });
   });
 
-  // Add page-specific preloads
+  // Add DNS prefetch for external domains
+  SEO_CONFIG.dnsPrefetch?.forEach((url) => {
+    hints.push({ rel: 'dns-prefetch', href: url });
+  });
+
+  // Add page-specific preloads with proper 'as' attribute
   if (pageType.type === 'home') {
-    hints.push({ rel: 'preload', href: '/images/hero.webp', as: 'image' });
+    hints.push({ 
+      rel: 'preload', 
+      href: '/images/hero.webp', 
+      as: 'image',
+      type: 'image/webp'
+    });
   }
 
   if (data?.image) {
-    hints.push({ rel: 'preload', href: data.image, as: 'image' });
+    hints.push({ 
+      rel: 'preload', 
+      href: data.image, 
+      as: 'image' 
+    });
   }
 
   if (data?.video) {
-    hints.push({ rel: 'preload', href: data.video, as: 'video' });
+    hints.push({ 
+      rel: 'preload', 
+      href: data.video, 
+      as: 'video' 
+    });
   }
+
+  // Add font preloading for better LCP
+  if (pageType.type === 'home' || pageType.type === 'generic') {
+    hints.push({
+      rel: 'preload',
+      href: '/fonts/inter-var.woff2',
+      as: 'font',
+      type: 'font/woff2',
+      crossOrigin: 'anonymous'
+    });
+  }
+
+  // Add preconnect for critical third-party domains
+  hints.push(
+    { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+    { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' }
+  );
 
   return hints;
 }
