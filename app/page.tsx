@@ -69,65 +69,111 @@ export default function HomePage() {
 
       <Background />
 
-      <main className="bg-white text-gray-900 transition-colors duration-300 dark:bg-[#070A14] dark:text-white">
+      <main className="relative min-h-screen bg-white text-gray-900 transition-colors duration-300 dark:bg-[#070A14] dark:text-white">
 
-        {/* HERO */}
-        <section>
-          <HeroSection />
-          <div className="text-center mt-4">
-            <TypingText
-              text={[
-                "Earn money online",
-                "Complete tasks and withdraw",
-                "Join 1M+ users",
-              ]}
-            />
-          </div>
+        {/* HERO SECTION (Premium Gradient Style) */}
+        <section className="relative">
+          <Reveal>
+            <div className="relative overflow-hidden rounded-3xl">
+              <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-yellow-400 to-green-400 opacity-90" />
+
+              <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-3xl p-16">
+                <HeroSection />
+
+                <div className="text-center mt-4">
+                  <TypingText
+                    text={[
+                      "Earn money online",
+                      "Complete tasks and withdraw",
+                      "Join thousands of users",
+                    ]}
+                  />
+                </div>
+
+                <div className="flex justify-center mt-8">
+                  <Reveal>
+                    <a
+                      href="/signup"
+                      className="px-6 py-3 rounded-full bg-gradient-to-r from-yellow-400 to-green-400 text-black font-semibold shadow-lg"
+                    >
+                      Get Started
+                    </a>
+                  </Reveal>
+                </div>
+              </div>
+            </div>
+          </Reveal>
         </section>
 
         {/* LIVE ACTIVITY */}
-        <section aria-label="Live platform activity">
-          <LazySection><LiveJoining /></LazySection>
-          <LazySection><LiveEarnings /></LazySection>
-          <LazySection><LiveOfferCompletion /></LazySection>
-          <LazySection><LiveWithdrawals /></LazySection>
+        <section aria-label="Live platform activity" className="max-w-7xl mx-auto px-4 py-10">
+          <RevealWithBorder
+            gradientFrom="from-emerald-400"
+            gradientVia="via-teal-400"
+            gradientTo="to-cyan-400"
+          >
+            <LazySection><LiveJoining /></LazySection>
+            <LazySection><LiveEarnings /></LazySection>
+            <LazySection><LiveOfferCompletion /></LazySection>
+            <LazySection><LiveWithdrawals /></LazySection>
+          </RevealWithBorder>
         </section>
 
         {/* FEATURES */}
-        <Reveal>
-          <FeaturesSection />
-        </Reveal>
+        <section className="max-w-7xl mx-auto px-4 py-12">
+          <Reveal>
+            <FeaturesSection />
+          </Reveal>
+        </section>
 
         {/* TASKS */}
         <LazySection>
-          <TasksSection />
+          <section className="max-w-7xl mx-auto px-4 py-12">
+            <TasksSection />
+          </section>
         </LazySection>
 
-        {/* OFFERS */}
-        <section className="max-w-7xl mx-auto px-4 py-8">
-          <RevealWithBorder>
+        {/* HIGH PAYING OFFERS */}
+        <section className="max-w-7xl mx-auto px-4 py-12">
+          <RevealWithBorder
+            gradientFrom="from-blue-400"
+            gradientVia="via-cyan-400"
+            gradientTo="to-sky-400"
+          >
             <HighPayingOffers />
           </RevealWithBorder>
         </section>
 
-        {/* TRUST */}
+        {/* TRUST SECTION */}
         <LazySection>
-          <TrustSection />
+          <section className="max-w-7xl mx-auto px-4 py-12">
+            <TrustSection />
+          </section>
         </LazySection>
 
         {/* PAYMENTS */}
         <LazySection>
-          <PaymentSection />
+          <section className="max-w-7xl mx-auto px-4 py-12">
+            <PaymentSection />
+          </section>
         </LazySection>
 
         {/* FAQ */}
-        <section className="max-w-7xl mx-auto px-4 py-12">
-          <FAQ />
+        <section className="max-w-3xl mx-auto px-4 py-12">
+          <RevealWithBorder
+            gradientFrom="from-orange-400"
+            gradientVia="via-amber-400"
+            gradientTo="to-yellow-400"
+          >
+            <FAQ />
+          </RevealWithBorder>
         </section>
 
-        {/* CTA */}
+        {/* FINAL CTA */}
         <LazySection>
-          <FinalCTASection />
+          <section className="max-w-7xl mx-auto px-4 py-12">
+            <FinalCTASection />
+          </section>
         </LazySection>
 
       </main>
