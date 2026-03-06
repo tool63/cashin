@@ -1,3 +1,5 @@
+// components/SEO/seoEngine.ts
+
 import { cache } from 'react';
 import { PageTypeResult, detectPageType, isPaginated, PageType } from './pageTypes';
 import { buildMetadata, MetadataInput } from './metadata';
@@ -32,9 +34,9 @@ export interface SEOOutput {
   hreflang: Record<string, string>;
   pageType: PageTypeResult;
   links?: Array<{ rel: string; href: string; hreflang?: string }>;
-  preconnect?: string[];
-  prefetch?: string[];
-  prerender?: string[];
+  preconnect?: readonly string[];  // ← FIXED: Added readonly
+  prefetch?: readonly string[];    // ← FIXED: Added readonly
+  prerender?: readonly string[];   // ← FIXED: Added readonly
   metrics?: SEOAnalytics & { seoScore?: number };
 }
 
@@ -47,7 +49,7 @@ interface CachedSEO {
 }
 
 const seoCache = new Map<string, CachedSEO>();
-const CACHE_TTL = 3600000;
+const CACHE_TTL = 3600000; // 1 hour
 const MAX_CACHE_SIZE = 500;
 
 function cleanupCache() {
@@ -99,7 +101,7 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
       ? detected
       : {
           type: 'generic' as PageType,
-          hierarchy: [], // FIX: must be PageType[]
+          hierarchy: [] as PageType[], // FIX: explicitly cast as PageType[]
           metadata: {},
           matches: null,
         };
@@ -175,7 +177,7 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
     // Resources
     // ========================================================
     const links = generateResourceHints(pageType, data);
-    const preconnect = SEO_CONFIG.preconnect;
+    const preconnect = SEO_CONFIG.preconnect; // This is readonly from seoConfig
     const prefetch = generatePrefetchUrls(pageType);
     const prerender = generatePrerenderUrls(pageType, route);
 
@@ -199,9 +201,9 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
       hreflang,
       pageType,
       links,
-      preconnect,
-      prefetch,
-      prerender,
+      preconnect,  // ← Now works with readonly[]
+      prefetch,    // ← Now works with readonly[]
+      prerender,   // ← Now works with readonly[]
       metrics: { ...metrics, seoScore },
     };
 
@@ -223,12 +225,12 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
       hreflang: { [SEO_CONFIG.defaultLocale]: SEO_CONFIG.siteUrl },
       pageType: {
         type: 'generic' as PageType,
-        hierarchy: [], // FIXED
+        hierarchy: [] as PageType[], // FIX: explicitly cast as PageType[]
         metadata: {},
         matches: null,
       },
       links: [],
-      preconnect: SEO_CONFIG.preconnect,
+      preconnect: SEO_CONFIG.preconnect, // ← Now works with readonly[]
       metrics: { seoScore: 50 } as any,
     };
   }
@@ -273,37 +275,52 @@ function calculateSEOScore(metadata: any, schema: object[]): number {
 // Resource Hints
 // ============================================================
 function generateResourceHints(pageType: PageTypeResult, data: any) {
-  const hints: Array<{ rel: string; href: string }> = [];
+  const hints: Array<{ rel: string; href: string; hreflang?: string }> = [];
 
+  // Add preconnect hints from config
   SEO_CONFIG.preconnect?.forEach((url) => {
     hints.push({ rel: 'preconnect', href: url });
   });
 
+  // Add page-specific preloads
   if (pageType.type === 'home') {
-    hints.push({ rel: 'preload', href: '/images/hero.webp' });
+    hints.push({ rel: 'preload', href: '/images/hero.webp', as: 'image' });
   }
 
   if (data?.image) {
-    hints.push({ rel: 'preload', href: data.image });
+    hints.push({ rel: 'preload', href: data.image, as: 'image' });
+  }
+
+  if (data?.video) {
+    hints.push({ rel: 'preload', href: data.video, as: 'video' });
   }
 
   return hints;
 }
 
-function generatePrefetchUrls(pageType: PageTypeResult): string[] {
+function generatePrefetchUrls(pageType: PageTypeResult): readonly string[] {
   switch (pageType.type) {
     case 'home':
-      return ['/surveys', '/offerwall', '/earn-paypal-money'];
+      return ['/surveys', '/offerwall', '/earn-paypal-money'] as const;
+    case 'earn_category':
+      return ['/earn/surveys', '/earn/offers'] as const;
+    case 'blog':
+      return ['/blog/popular', '/blog/latest'] as const;
     default:
-      return [];
+      return [] as const;
   }
 }
 
-function generatePrerenderUrls(pageType: PageTypeResult, route: string): string[] {
+function generatePrerenderUrls(pageType: PageTypeResult, route: string): readonly string[] {
   if (pageType.type === 'earn_category') {
-    return ['/earn-paypal-money'];
+    return ['/earn-paypal-money'] as const;
   }
-  return [];
+  
+  if (pageType.type === 'home') {
+    return ['/how-it-works'] as const;
+  }
+  
+  return [] as const;
 }
 
 // ============================================================
@@ -321,3 +338,61 @@ export function clearSEOCache(pattern?: RegExp) {
     }
   }
 }
+
+// ============================================================
+// Cache Stats (for monitoring)
+// ============================================================
+export function getSEOCacheStats() {
+  return {
+    size: seoCache.size,
+    maxSize: MAX_CACHE_SIZE,
+    keys: Array.from(seoCache.keys()),
+    oldestTimestamp: seoCache.size > 0 
+      ? Math.min(...Array.from(seoCache.values()).map(v => v.timestamp))
+      : null,
+    newestTimestamp: seoCache.size > 0
+      ? Math.max(...Array.from(seoCache.values()).map(v => v.timestamp))
+      : null,
+  };
+}
+
+// ============================================================
+// Warm Cache (for critical pages)
+// ============================================================
+export async function warmSEOCache(routes: string[]) {
+  const results = await Promise.allSettled(
+    routes.map(route => 
+      buildSEO({ route }).catch(err => {
+        console.error(`Failed to warm cache for ${route}:`, err);
+        return null;
+      })
+    )
+  );
+
+  return {
+    total: routes.length,
+    succeeded: results.filter(r => r.status === 'fulfilled').length,
+    failed: results.filter(r => r.status === 'rejected').length,
+  };
+}
+
+// ============================================================
+// Debug Helper
+// ============================================================
+export function debugSEO(route: string) {
+  const cleanRoute = route.split('?')[0].split('#')[0];
+  const detected = detectPageType(cleanRoute);
+  
+  return {
+    route: cleanRoute,
+    detected,
+    cached: seoCache.has(route),
+    config: {
+      siteUrl: SEO_CONFIG.siteUrl,
+      defaultLocale: SEO_CONFIG.defaultLocale,
+      supportedLocales: SEO_CONFIG.supportedLocales,
+    },
+  };
+}
+
+export default buildSEO;
