@@ -64,7 +64,7 @@ function cleanupCache() {
 }
 
 // ============================================================
-// Ultra SEO Engine (Type Safe)
+// Ultra SEO Engine
 // ============================================================
 export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
   const startTime = Date.now();
@@ -104,16 +104,13 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
 
     const isProduction = process.env.NODE_ENV === 'production';
 
-    const noindexFlag = (pageType.metadata as { noindex?: boolean })?.noindex;
-    const nofollowFlag = (pageType.metadata as { nofollow?: boolean })?.nofollow;
-
     const shouldIndex =
       !noindex &&
-      !noindexFlag &&
+      !(pageType.metadata as any)?.noindex &&
       !isPaginated(route) &&
       isProduction;
 
-    const shouldFollow = !nofollow && !nofollowFlag;
+    const shouldFollow = !nofollow && !(pageType.metadata as any)?.nofollow;
 
     // ========================================================
     // Canonical
@@ -128,7 +125,7 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
       customCanonical || buildCanonical(route, canonicalOptions);
 
     // ========================================================
-    // Hreflang (Type Safe)
+    // Hreflang
     // ========================================================
     const hreflang = !skipHreflang
       ? buildHreflang(route, {
@@ -142,7 +139,7 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
     // Metadata (Base)
     // ========================================================
     const metadataInput: MetadataInput = {
-      pageType: pageType.type,
+      pageType: (pageType.type as any) || 'generic',
       route,
       locale,
       canonical,
@@ -184,7 +181,7 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
     const prerender = generatePrerenderUrls(pageType, route);
 
     // ========================================================
-    // SEO Score Calculation (Premium Feature)
+    // SEO Score Calculation
     // ========================================================
     const seoScore = calculateSEOScore(metadata, structuredData);
 
@@ -244,7 +241,7 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
 function enhanceMetadata(metadata: any, route: string) {
   const primary = SEO_CONFIG.primaryKeyword;
 
-  if (!metadata.title?.toLowerCase().includes(primary)) {
+  if (metadata.title && !metadata.title.toLowerCase().includes(primary)) {
     metadata.title = `${metadata.title} | ${primary}`;
   }
 
@@ -261,7 +258,7 @@ function enhanceMetadata(metadata: any, route: string) {
 }
 
 // ============================================================
-// SEO Score Algorithm
+// SEO Score
 // ============================================================
 function calculateSEOScore(metadata: any, schema: object[]): number {
   let score = 50;
@@ -322,7 +319,6 @@ function generatePrerenderUrls(
   if (pageType.type === 'earn_category') {
     return ['/earn-paypal-money'];
   }
-
   return [];
 }
 
