@@ -1,4 +1,4 @@
-// components/SEO/seoEngine.ts
+// components/SEO/seoEngine.ts (ULTRA-PREMIUM VERSION - COMPLETE FIX)
 
 import { cache } from 'react';
 import { PageTypeResult, detectPageType, isPaginated, PageType } from './pageTypes';
@@ -262,7 +262,26 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
       suggestions.push('Description is too long (maximum 160 characters recommended)');
     }
 
-    if (!metadata.openGraph?.images?.length) {
+    // ========================================================
+    // Open Graph Image Check - FIXED TYPE SAFETY
+    // ========================================================
+    // Safely check if Open Graph images exist
+    const hasOgImage = (() => {
+      if (!metadata.openGraph) return false;
+      
+      const images = metadata.openGraph.images;
+      if (!images) return false;
+      
+      // Check if it's an array with at least one item
+      if (Array.isArray(images) && images.length > 0) return true;
+      
+      // Check if it's a single image object
+      if (typeof images === 'object' && images !== null) return true;
+      
+      return false;
+    })();
+
+    if (!hasOgImage) {
       suggestions.push('Open Graph image is missing');
     }
 
@@ -437,7 +456,17 @@ function calculateAdvancedSEOScore(
   // Open Graph (10 points)
   if (metadata.openGraph) {
     score += 5;
-    if (metadata.openGraph.images?.length) score += 5;
+    
+    // Safely check if Open Graph images exist
+    const hasOgImage = (() => {
+      const images = metadata.openGraph.images;
+      if (!images) return false;
+      if (Array.isArray(images) && images.length > 0) return true;
+      if (typeof images === 'object' && images !== null) return true;
+      return false;
+    })();
+    
+    if (hasOgImage) score += 5;
   }
 
   // Twitter Cards (5 points)
@@ -688,6 +717,16 @@ export async function auditSEO(route: string) {
   const titleStr = seo.metadata.title ? String(seo.metadata.title) : '';
   const descStr = seo.metadata.description ? String(seo.metadata.description) : '';
 
+  // Safely check if Open Graph images exist
+  const hasOgImage = (() => {
+    if (!seo.metadata.openGraph) return false;
+    const images = seo.metadata.openGraph.images;
+    if (!images) return false;
+    if (Array.isArray(images) && images.length > 0) return true;
+    if (typeof images === 'object' && images !== null) return true;
+    return false;
+  })();
+
   return {
     url: route,
     score: seo.metrics?.seoScore || 0,
@@ -699,7 +738,7 @@ export async function auditSEO(route: string) {
       description: seo.metadata.description,
       titleLength: titleStr.length,
       descriptionLength: descStr.length,
-      hasOgImage: !!seo.metadata.openGraph?.images?.length,
+      hasOgImage,
       hasTwitterCard: !!seo.metadata.twitter,
       schemaCount: seo.structuredData.length,
     },
