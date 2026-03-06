@@ -78,15 +78,17 @@ const MAX_CACHE_SIZE = 500;
 const CACHE_CLEANUP_INTERVAL = 300000; // 5 minutes
 
 // Automatic cache cleanup
-setInterval(() => {
-  const now = Date.now();
-  for (const [key, value] of seoCache.entries()) {
-    if (now - value.timestamp > CACHE_TTL) {
-      seoCache.delete(key);
+if (typeof setInterval !== 'undefined') {
+  setInterval(() => {
+    const now = Date.now();
+    for (const [key, value] of seoCache.entries()) {
+      if (now - value.timestamp > CACHE_TTL) {
+        seoCache.delete(key);
+      }
     }
-  }
-  cleanupCache();
-}, CACHE_CLEANUP_INTERVAL);
+    cleanupCache();
+  }, CACHE_CLEANUP_INTERVAL);
+}
 
 function cleanupCache() {
   if (seoCache.size <= MAX_CACHE_SIZE) return;
@@ -237,13 +239,29 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
     let metadata = buildMetadata(metadataInput);
     metadata = enhanceMetadata(metadata, route, data);
 
-    // Generate SEO suggestions
-    if (!metadata.title || metadata.title.length < 30) {
+    // ========================================================
+    // Generate SEO Suggestions - FIXED TYPE SAFETY
+    // ========================================================
+    // Convert metadata to string safely for length checks
+    const titleStr = metadata.title ? String(metadata.title) : '';
+    const descStr = metadata.description ? String(metadata.description) : '';
+
+    if (!titleStr) {
+      suggestions.push('Title is missing');
+    } else if (titleStr.length < 30) {
       suggestions.push('Title is too short (minimum 30 characters recommended)');
+    } else if (titleStr.length > 60) {
+      suggestions.push('Title is too long (maximum 60 characters recommended)');
     }
-    if (!metadata.description || metadata.description.length < 120) {
+
+    if (!descStr) {
+      suggestions.push('Description is missing');
+    } else if (descStr.length < 120) {
       suggestions.push('Description is too short (minimum 120 characters recommended)');
+    } else if (descStr.length > 160) {
+      suggestions.push('Description is too long (maximum 160 characters recommended)');
     }
+
     if (!metadata.openGraph?.images?.length) {
       suggestions.push('Open Graph image is missing');
     }
@@ -275,7 +293,7 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
     const { links, preconnect, dnsPrefetch, preload, prefetch, prerender, modulePreload } = resourceHints;
 
     // ========================================================
-    // Advanced SEO Score Calculation
+    // Advanced SEO Score Calculation - FIXED TYPE SAFETY
     // ========================================================
     const seoScore = calculateAdvancedSEOScore(metadata, structuredData, pageType, warnings, suggestions);
 
@@ -350,21 +368,23 @@ function enhanceMetadata(metadata: any, route: string, data: any) {
 
   // Smart title enhancement
   if (metadata.title) {
-    if (!metadata.title.toLowerCase().includes(primary)) {
-      metadata.title = `${metadata.title} | ${primary}`;
+    const titleStr = String(metadata.title);
+    if (!titleStr.toLowerCase().includes(primary)) {
+      metadata.title = `${titleStr} | ${primary}`;
     }
     if (data.page && data.page > 1) {
-      metadata.title = `Page ${data.page} - ${metadata.title}`;
+      metadata.title = `Page ${data.page} - ${titleStr}`;
     }
   }
 
   // Smart description enhancement
   if (metadata.description) {
-    if (!metadata.description.includes('Start earning')) {
-      metadata.description += ' Start earning today.';
+    const descStr = String(metadata.description);
+    if (!descStr.includes('Start earning')) {
+      metadata.description = descStr + ' Start earning today.';
     }
     if (data.query) {
-      metadata.description = `Results for "${data.query}". ${metadata.description}`;
+      metadata.description = `Results for "${data.query}". ${descStr}`;
     }
   }
 
@@ -388,17 +408,21 @@ function calculateAdvancedSEOScore(
 ): number {
   let score = 50; // Base score
 
+  // Safe string conversion for metadata fields
+  const titleStr = metadata.title ? String(metadata.title) : '';
+  const descStr = metadata.description ? String(metadata.description) : '';
+
   // Title optimization (15 points)
-  if (metadata.title) {
-    if (metadata.title.length >= 40 && metadata.title.length <= 60) score += 10;
-    else if (metadata.title.length > 60) score += 5;
+  if (titleStr) {
+    if (titleStr.length >= 40 && titleStr.length <= 60) score += 10;
+    else if (titleStr.length > 60) score += 5;
     else score -= 5;
   }
 
   // Description optimization (15 points)
-  if (metadata.description) {
-    if (metadata.description.length >= 120 && metadata.description.length <= 160) score += 10;
-    else if (metadata.description.length > 160) score += 5;
+  if (descStr) {
+    if (descStr.length >= 120 && descStr.length <= 160) score += 10;
+    else if (descStr.length > 160) score += 5;
     else score -= 5;
   }
 
@@ -420,7 +444,7 @@ function calculateAdvancedSEOScore(
   if (metadata.twitter) score += 5;
 
   // Canonical (5 points)
-  if (metadata.canonical && !metadata.canonical.includes('undefined')) score += 5;
+  if (metadata.canonical && !String(metadata.canonical).includes('undefined')) score += 5;
 
   // Hreflang (5 points)
   if (Object.keys(metadata.alternates?.languages || {}).length > 1) score += 5;
@@ -660,6 +684,10 @@ export async function warmSEOCache(routes: string[]) {
 export async function auditSEO(route: string) {
   const seo = await buildSEO({ route });
   
+  // Safe string conversions for metadata
+  const titleStr = seo.metadata.title ? String(seo.metadata.title) : '';
+  const descStr = seo.metadata.description ? String(seo.metadata.description) : '';
+
   return {
     url: route,
     score: seo.metrics?.seoScore || 0,
@@ -669,8 +697,8 @@ export async function auditSEO(route: string) {
     metadata: {
       title: seo.metadata.title,
       description: seo.metadata.description,
-      titleLength: seo.metadata.title?.length || 0,
-      descriptionLength: seo.metadata.description?.length || 0,
+      titleLength: titleStr.length,
+      descriptionLength: descStr.length,
       hasOgImage: !!seo.metadata.openGraph?.images?.length,
       hasTwitterCard: !!seo.metadata.twitter,
       schemaCount: seo.structuredData.length,
