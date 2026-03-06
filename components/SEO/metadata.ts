@@ -152,11 +152,11 @@ export function buildMetadata(input: MetadataInput): MetadataOutput {
 
   const ogLocale = locale.replace('-', '_');
 
-  const image =
-    data.image || SEO_CONFIG.defaultOgImage;
+  const image = data.image || SEO_CONFIG.defaultOgImage;
+  const imageAlt = data.imageAlt || title;
 
   // ==========================================================
-  // Return Premium Metadata
+  // Return Premium Metadata (Type Safe)
   // ==========================================================
   return {
     metadataBase: new URL(baseUrl),
@@ -185,7 +185,7 @@ export function buildMetadata(input: MetadataInput): MetadataOutput {
               url: image,
               width: 1200,
               height: 630,
-              alt: data.imageAlt || title,
+              alt: imageAlt,
             },
           ]
         : undefined,
@@ -240,7 +240,6 @@ export function buildMetadata(input: MetadataInput): MetadataOutput {
       description,
       site: SEO_CONFIG.twitterHandle,
       images: image ? [image] : undefined,
-      imageAlt,
     },
 
     verification: SEO_CONFIG.verification,
