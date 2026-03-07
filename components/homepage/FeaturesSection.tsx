@@ -38,7 +38,7 @@ export default function FeaturesSection() {
             <SectionTitle icon="✨" text="Why Choose Cashog" />
           </div>
 
-          {/* Features Grid */}
+          {/* Features Grid - Only icons, no cards */}
           <div className="grid md:grid-cols-3 gap-8">
             {features.map((feature, i) => (
               <motion.div
@@ -47,29 +47,12 @@ export default function FeaturesSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.6, delay: i * 0.15 }}
-                whileHover={{ 
-                  y: -8,
-                  transition: { duration: 0.3 }
-                }}
-                className="group relative bg-white/80 dark:bg-[#111827]/80 backdrop-blur-sm border border-gray-200 dark:border-white/10 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col items-center text-center"
+                className="flex flex-col items-center text-center"
               >
-                {/* Animated gradient border on hover */}
-                <div className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
-                
                 {/* Icon with gradient background */}
-                <div className={`relative mb-6 p-4 rounded-xl bg-gradient-to-r ${feature.gradient} bg-opacity-10`}>
-                  <span className="text-4xl">{feature.icon}</span>
+                <div className={`relative mb-4 p-6 rounded-2xl bg-gradient-to-r ${feature.gradient} bg-opacity-10`}>
+                  <span className="text-5xl">{feature.icon}</span>
                 </div>
-                
-                <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                  {feature.description}
-                </p>
-
-                {/* Decorative line on hover */}
-                <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r ${feature.gradient} group-hover:w-1/2 transition-all duration-300`}></div>
               </motion.div>
             ))}
           </div>
