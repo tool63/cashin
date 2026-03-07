@@ -159,7 +159,7 @@ export default function SignupPage() {
                             bg-white dark:bg-neutral-900 
                             border-2 border-blue-500/20 dark:border-blue-500/20
                             group-hover:border-blue-500 rounded-xl
-                            text-neutral-900 dark:text-white font-medium
+                            text-black dark:text-white font-medium
                             hover:shadow-lg hover:shadow-blue-500/20
                             transition-all duration-300">
               <Chrome className="w-5 h-5 text-blue-500" />
@@ -174,7 +174,7 @@ export default function SignupPage() {
                             bg-white dark:bg-neutral-900 
                             border-2 border-indigo-500/20 dark:border-indigo-500/20
                             group-hover:border-indigo-500 rounded-xl
-                            text-neutral-900 dark:text-white font-medium
+                            text-black dark:text-white font-medium
                             hover:shadow-lg hover:shadow-indigo-500/20
                             transition-all duration-300">
               <Facebook className="w-5 h-5 text-indigo-500" />
@@ -183,26 +183,27 @@ export default function SignupPage() {
           </button>
         </div>
 
-        {/* OR Divider - Always visible */}
+        {/* OR Divider */}
         <div className="flex items-center my-6">
           <div className="flex-grow border-t border-neutral-200 dark:border-neutral-800"></div>
-          <span className="text-sm text-neutral-500 px-4">or</span>
+          <span className="text-sm text-black dark:text-white px-4">or</span>
           <div className="flex-grow border-t border-neutral-200 dark:border-neutral-800"></div>
         </div>
 
-        {/* Continue with Email - Always visible with proper dark/light text */}
+        {/* Continue with Email Button */}
         <button
           onClick={handleContinueWithEmail}
           className="w-full py-3.5 rounded-xl 
-                     bg-neutral-100 dark:bg-neutral-900 
-                     border border-neutral-200 dark:border-neutral-800
-                     text-neutral-700 dark:text-neutral-300 font-medium 
-                     flex items-center justify-center gap-2
-                     hover:border-green-500/50 hover:bg-neutral-50 dark:hover:bg-neutral-800/80
-                     hover:text-neutral-900 dark:hover:text-white
-                     transition-all duration-300"
+                     bg-white dark:bg-neutral-900 
+                     border-2 border-neutral-200 dark:border-neutral-800
+                     text-black dark:text-white 
+                     font-medium flex items-center justify-center gap-2
+                     hover:border-green-500 dark:hover:border-green-500
+                     hover:bg-neutral-50 dark:hover:bg-neutral-800
+                     transition-all duration-300 group"
         >
-          <Mail className="w-4 h-4 text-neutral-500 dark:text-neutral-400 group-hover:text-green-500" />
+          <Mail className="w-4 h-4 text-neutral-500 dark:text-neutral-400 
+                          group-hover:text-green-500 dark:group-hover:text-green-400" />
           <span>Continue with Email</span>
         </button>
 
@@ -231,9 +232,9 @@ export default function SignupPage() {
                   onBlur={() => setFocusedField(null)}
                   placeholder="Full Name"
                   className="w-full p-4 pl-12 rounded-xl 
-                             bg-neutral-50 dark:bg-neutral-900/50 
+                             bg-white dark:bg-neutral-900/50 
                              border-2 border-neutral-200 dark:border-neutral-800 
-                             text-neutral-900 dark:text-white 
+                             text-black dark:text-white 
                              placeholder-neutral-400 dark:placeholder-neutral-500
                              focus:outline-none focus:border-green-500 
                              focus:bg-white dark:focus:bg-neutral-900
@@ -265,9 +266,9 @@ export default function SignupPage() {
                   onBlur={() => setFocusedField(null)}
                   placeholder="Email Address"
                   className="w-full p-4 pl-12 rounded-xl 
-                             bg-neutral-50 dark:bg-neutral-900/50 
+                             bg-white dark:bg-neutral-900/50 
                              border-2 border-neutral-200 dark:border-neutral-800 
-                             text-neutral-900 dark:text-white 
+                             text-black dark:text-white 
                              placeholder-neutral-400 dark:placeholder-neutral-500
                              focus:outline-none focus:border-blue-500 
                              focus:bg-white dark:focus:bg-neutral-900
@@ -299,9 +300,9 @@ export default function SignupPage() {
                   onBlur={handlePasswordBlur}
                   placeholder="Create Password"
                   className="w-full p-4 pl-12 pr-12 rounded-xl 
-                             bg-neutral-50 dark:bg-neutral-900/50 
+                             bg-white dark:bg-neutral-900/50 
                              border-2 border-neutral-200 dark:border-neutral-800 
-                             text-neutral-900 dark:text-white 
+                             text-black dark:text-white 
                              placeholder-neutral-400 dark:placeholder-neutral-500
                              focus:outline-none focus:border-purple-500 
                              focus:bg-white dark:focus:bg-neutral-900
@@ -312,17 +313,19 @@ export default function SignupPage() {
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-4 top-1/2 -translate-y-1/2 
-                             text-neutral-400 hover:text-purple-500 transition-all
-                             hover:scale-110 active:scale-95"
+                             text-neutral-400 dark:text-neutral-500 
+                             hover:text-purple-500 dark:hover:text-purple-400 
+                             transition-all hover:scale-110 active:scale-95"
                 >
                   {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
                 </button>
               </div>
             </div>
 
-            {/* Password Strength */}
+            {/* Password Strength Indicator */}
             {showStrength && formData.password && (
               <div className="mb-4 animate-slideDown">
+                {/* Strength Bars */}
                 <div className="flex justify-between items-center mb-2">
                   <div className="flex gap-1 flex-1 mr-3">
                     {[...Array(4)].map((_, i) => (
@@ -335,13 +338,13 @@ export default function SignupPage() {
                       />
                     ))}
                   </div>
-                  <span className="text-xs font-medium text-neutral-600 dark:text-neutral-400">
+                  <span className="text-xs font-medium text-black dark:text-white">
                     {getStrengthText()}
                   </span>
                 </div>
 
-                {/* Requirements */}
-                <div className="grid grid-cols-2 gap-2 mt-3">
+                {/* Password Requirements */}
+                <div className="grid grid-cols-2 gap-2 mt-4">
                   {[
                     { key: "length", text: "8+ characters" },
                     { key: "number", text: "Contains number" },
@@ -357,13 +360,13 @@ export default function SignupPage() {
                                      req.key as keyof typeof passwordRequirements
                                    ]
                                      ? "text-green-600 dark:text-green-400"
-                                     : "text-neutral-400 dark:text-neutral-500"
+                                     : "text-neutral-500 dark:text-neutral-400"
                                  }`}
                     >
                       {passwordRequirements[req.key as keyof typeof passwordRequirements] ? (
-                        <CheckCircle className="w-3 h-3" />
+                        <CheckCircle className="w-3 h-3 text-green-600 dark:text-green-400" />
                       ) : (
-                        <XCircle className="w-3 h-3" />
+                        <XCircle className="w-3 h-3 text-neutral-500 dark:text-neutral-400" />
                       )}
                       <span>{req.text}</span>
                     </div>
@@ -398,28 +401,28 @@ export default function SignupPage() {
 
         {/* Trust Badges */}
         <div className="flex items-center justify-center gap-4 mt-4 text-sm">
-          <div className="flex items-center gap-1.5 text-neutral-600 dark:text-neutral-400">
-            <Shield className="w-4 h-4 text-blue-500" />
+          <div className="flex items-center gap-1.5 text-black dark:text-white">
+            <Shield className="w-4 h-4 text-blue-500 dark:text-blue-400" />
             <span>Privacy secured</span>
           </div>
           
-          <span className="text-neutral-300 dark:text-neutral-700">•</span>
+          <span className="text-neutral-300 dark:text-neutral-600">•</span>
           
-          <div className="flex items-center gap-1.5 text-neutral-600 dark:text-neutral-400">
-            <Zap className="w-4 h-4 text-amber-500" />
+          <div className="flex items-center gap-1.5 text-black dark:text-white">
+            <Zap className="w-4 h-4 text-amber-500 dark:text-amber-400" />
             <span>Instant payout</span>
           </div>
           
-          <span className="text-neutral-300 dark:text-neutral-700">•</span>
+          <span className="text-neutral-300 dark:text-neutral-600">•</span>
           
-          <div className="flex items-center gap-1.5 text-neutral-600 dark:text-neutral-400">
-            <Heart className="w-4 h-4 text-rose-500" />
+          <div className="flex items-center gap-1.5 text-black dark:text-white">
+            <Heart className="w-4 h-4 text-rose-500 dark:text-rose-400" />
             <span>Feel Happy</span>
           </div>
         </div>
 
         {/* Footer */}
-        <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-6 text-center group">
+        <p className="text-sm text-black dark:text-white mt-6 text-center group">
           Already have an account?{" "}
           <Link
             href="/login"
@@ -430,25 +433,25 @@ export default function SignupPage() {
             <span>Log In</span>
             <ArrowRight className="w-3 h-3 opacity-0 -translate-x-2 
                                  group-hover:opacity-100 group-hover:translate-x-0 
-                                 transition-all" />
+                                 transition-all text-green-600 dark:text-green-400" />
           </Link>
         </p>
 
-        {/* Terms with Yellow-Green Gradient */}
+        {/* Terms */}
         <p className="text-sm text-center mt-6 leading-relaxed">
-          <span className="text-neutral-500 dark:text-neutral-500">By signing up, you agree to our </span>
+          <span className="text-black dark:text-white">By signing up, you agree to our </span>
           <Link 
             href="/terms" 
-            className="bg-gradient-to-r from-yellow-400 to-green-500 bg-clip-text text-transparent 
-                       font-medium hover:from-yellow-500 hover:to-green-600 transition-all duration-300"
+            className="bg-gradient-to-r from-amber-500 to-green-500 bg-clip-text text-transparent 
+                       font-medium hover:from-amber-600 hover:to-green-600 transition-all duration-300"
           >
             Terms
           </Link>
-          <span className="text-neutral-500 dark:text-neutral-500"> and </span>
+          <span className="text-black dark:text-white"> and </span>
           <Link 
             href="/privacy" 
-            className="bg-gradient-to-r from-yellow-400 to-green-500 bg-clip-text text-transparent 
-                       font-medium hover:from-yellow-500 hover:to-green-600 transition-all duration-300"
+            className="bg-gradient-to-r from-amber-500 to-green-500 bg-clip-text text-transparent 
+                       font-medium hover:from-amber-600 hover:to-green-600 transition-all duration-300"
           >
             Privacy Policy
           </Link>
