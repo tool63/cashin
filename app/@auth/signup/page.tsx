@@ -150,13 +150,6 @@ export default function SignupPage() {
                          bg-clip-text text-transparent mb-2">
             Sign Up
           </h1>
-          <div className="flex items-center justify-center gap-2">
-            <Sparkles className="w-4 h-4 text-amber-400" />
-            <p className="text-neutral-600 dark:text-neutral-400">
-              Join and start earning
-            </p>
-            <Sparkles className="w-4 h-4 text-rose-400" />
-          </div>
         </div>
 
         {/* Social Login Buttons - Custom implementation to match screenshot */}
@@ -192,35 +185,34 @@ export default function SignupPage() {
           </button>
         </div>
 
-        {/* Continue with Email */}
-        {!formVisible && (
-          <button
-            onClick={handleContinueWithEmail}
-            className="w-full mt-2 py-3.5 rounded-xl 
-                       bg-neutral-100 dark:bg-neutral-900 
-                       border border-neutral-200 dark:border-neutral-800
-                       text-neutral-900 dark:text-white font-medium 
-                       flex items-center justify-center gap-2
-                       hover:border-green-500/50 hover:bg-neutral-50 dark:hover:bg-neutral-800/80
-                       transition-all duration-300"
-          >
-            <Mail className="w-4 h-4" />
-            Continue with Email
-          </button>
-        )}
+        {/* OR Divider - Always visible */}
+        <div className="flex items-center my-6">
+          <div className="flex-grow border-t border-neutral-200 dark:border-neutral-800"></div>
+          <span className="text-sm text-neutral-500 px-4">or</span>
+          <div className="flex-grow border-t border-neutral-200 dark:border-neutral-800"></div>
+        </div>
+
+        {/* Continue with Email - Always visible with proper dark/light text */}
+        <button
+          onClick={handleContinueWithEmail}
+          className="w-full py-3.5 rounded-xl 
+                     bg-neutral-100 dark:bg-neutral-900 
+                     border border-neutral-200 dark:border-neutral-800
+                     text-neutral-700 dark:text-neutral-300 font-medium 
+                     flex items-center justify-center gap-2
+                     hover:border-green-500/50 hover:bg-neutral-50 dark:hover:bg-neutral-800/80
+                     hover:text-neutral-900 dark:hover:text-white
+                     transition-all duration-300"
+        >
+          <Mail className="w-4 h-4 text-neutral-500 dark:text-neutral-400 group-hover:text-green-500" />
+          <span>Continue with Email</span>
+        </button>
 
         {/* Form (only visible after clicking email) */}
         {formVisible && (
           <>
-            {/* Simple OR divider */}
-            <div className="flex items-center my-6">
-              <div className="flex-grow border-t border-neutral-200 dark:border-neutral-800"></div>
-              <span className="text-sm text-neutral-500 px-4">or</span>
-              <div className="flex-grow border-t border-neutral-200 dark:border-neutral-800"></div>
-            </div>
-
             {/* Full Name Field */}
-            <div className="relative mb-4 group">
+            <div className="relative mt-6 mb-4 group">
               <div
                 className={`absolute inset-0 bg-gradient-to-r from-green-500/20 to-blue-500/20 rounded-xl 
                             transition-opacity duration-500 ${
@@ -382,15 +374,22 @@ export default function SignupPage() {
               </div>
             )}
 
-            {/* Instant Bonus - Title as per screenshot */}
-            <div className="flex items-center justify-between mt-6 mb-4">
+            {/* Get Instant Bonus with $0.50 badge */}
+            <div className="relative flex items-center justify-between mt-6 mb-4">
               <div className="text-base font-medium text-neutral-900 dark:text-white">
                 Get Instant Bonus
               </div>
-              <div className="flex items-center gap-1.5 bg-gradient-to-r from-yellow-400/20 to-amber-500/20 
+              <div className="relative">
+                <div className="flex items-center gap-1.5 bg-gradient-to-r from-yellow-400 to-green-500 
                               px-3 py-1.5 rounded-full border border-yellow-500/30">
-                <Coins className="w-4 h-4 text-yellow-500" />
-                <span className="font-bold text-yellow-500 text-sm">500</span>
+                  <Coins className="w-4 h-4 text-yellow-500" />
+                  <span className="font-bold text-yellow-500 text-sm">500</span>
+                </div>
+                {/* $0.50 badge */}
+                <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-yellow-400 to-green-500 
+                              text-black text-xs font-bold px-2 py-0.5 rounded-full shadow-lg">
+                  $0.50
+                </div>
               </div>
             </div>
 
@@ -456,21 +455,21 @@ export default function SignupPage() {
           </Link>
         </p>
 
-        {/* Terms */}
-        <p className="text-sm text-neutral-500 dark:text-neutral-500 text-center mt-6 leading-relaxed">
-          By signing up, you agree to our{" "}
+        {/* Terms with Yellow-Green Gradient */}
+        <p className="text-sm text-center mt-6 leading-relaxed">
+          <span className="text-neutral-500 dark:text-neutral-500">By signing up, you agree to our </span>
           <Link 
             href="/terms" 
-            className="text-green-600 dark:text-green-400 hover:text-green-700 
-                       dark:hover:text-green-300 font-medium transition"
+            className="bg-gradient-to-r from-yellow-400 to-green-500 bg-clip-text text-transparent 
+                       font-medium hover:from-yellow-500 hover:to-green-600 transition-all duration-300"
           >
             Terms
-          </Link>{" "}
-          and{" "}
+          </Link>
+          <span className="text-neutral-500 dark:text-neutral-500"> and </span>
           <Link 
             href="/privacy" 
-            className="text-green-600 dark:text-green-400 hover:text-green-700 
-                       dark:hover:text-green-300 font-medium transition"
+            className="bg-gradient-to-r from-yellow-400 to-green-500 bg-clip-text text-transparent 
+                       font-medium hover:from-yellow-500 hover:to-green-600 transition-all duration-300"
           >
             Privacy Policy
           </Link>
