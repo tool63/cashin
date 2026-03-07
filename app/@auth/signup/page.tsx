@@ -12,13 +12,11 @@ import {
   Lock,
   CheckCircle,
   XCircle,
-  Coins,
   Shield,
   Zap,
   Gift,
   ArrowRight,
   Heart,
-  Sparkles,
   Chrome,
   Facebook
 } from "lucide-react";
@@ -144,7 +142,7 @@ export default function SignupPage() {
   return (
     <AuthModal>
       <AuthPageWrapper title="" subtitle="">
-        {/* Sign Up Header - Exactly like screenshot */}
+        {/* Sign Up Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 
                          bg-clip-text text-transparent mb-2">
@@ -152,7 +150,7 @@ export default function SignupPage() {
           </h1>
         </div>
 
-        {/* Social Login Buttons - Custom implementation to match screenshot */}
+        {/* Social Login Buttons */}
         <div className="space-y-3 mb-6">
           <button className="w-full group relative overflow-hidden rounded-xl">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 
@@ -374,31 +372,12 @@ export default function SignupPage() {
               </div>
             )}
 
-            {/* Get Instant Bonus with $0.50 badge */}
-            <div className="relative flex items-center justify-between mt-6 mb-4">
-              <div className="text-base font-medium text-neutral-900 dark:text-white">
-                Get Instant Bonus
-              </div>
-              <div className="relative">
-                <div className="flex items-center gap-1.5 bg-gradient-to-r from-yellow-400 to-green-500 
-                              px-3 py-1.5 rounded-full border border-yellow-500/30">
-                  <Coins className="w-4 h-4 text-yellow-500" />
-                  <span className="font-bold text-yellow-500 text-sm">500</span>
-                </div>
-                {/* $0.50 badge */}
-                <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-yellow-400 to-green-500 
-                              text-black text-xs font-bold px-2 py-0.5 rounded-full shadow-lg">
-                  $0.50
-                </div>
-              </div>
-            </div>
-
             {/* Submit Button */}
             <button
               className="relative w-full py-4 px-6 rounded-xl font-bold text-black group
                          overflow-hidden transition-all duration-500
                          hover:scale-[1.02] hover:shadow-2xl
-                         active:scale-[0.98] mb-6"
+                         active:scale-[0.98] mt-4 mb-6"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-green-400 to-blue-500 
                               animate-gradient-x bg-[length:200%_100%]" />
@@ -410,14 +389,14 @@ export default function SignupPage() {
 
               <span className="relative flex items-center justify-center gap-2">
                 <Gift className="w-5 h-5" />
-                <span>Get Started & Claim $5 Bonus</span>
+                <span>Create Account</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </span>
             </button>
           </>
         )}
 
-        {/* Trust Badges - Single line exactly as requested */}
+        {/* Trust Badges */}
         <div className="flex items-center justify-center gap-4 mt-4 text-sm">
           <div className="flex items-center gap-1.5 text-neutral-600 dark:text-neutral-400">
             <Shield className="w-4 h-4 text-blue-500" />
