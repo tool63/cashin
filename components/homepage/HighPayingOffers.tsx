@@ -6,7 +6,7 @@ import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 import OpeningStyle from "@/components/animations/openingstyle";
 import Container, { Card, CardGrid } from "@/components/animations/container";
-import Loading from "@/components/loading/loading";
+import Loading from "@/components/loading/GlobalLoading";
 
 /* ===================== TYPES ===================== */
 type Offer = {
