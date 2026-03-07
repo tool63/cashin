@@ -20,6 +20,7 @@ interface RevealWithBorderProps {
   backdropBlur?: string;
   floatingElements?: boolean;
   rotatingCircle?: boolean;
+  padding?: string;
 }
 
 export default function RevealWithBorder({
@@ -36,6 +37,7 @@ export default function RevealWithBorder({
   backdropBlur = "backdrop-blur-xl",
   floatingElements = true,
   rotatingCircle = true,
+  padding = "p-3", // Changed default padding to p-3
 }: RevealWithBorderProps) {
   return (
     <Reveal>
@@ -54,7 +56,7 @@ export default function RevealWithBorder({
         />
 
         {/* Content Container with Border Effect */}
-        <div className={`relative ${innerBgLight} ${innerBgDark} ${backdropBlur} rounded-3xl p-8 m-1 ${className}`}>
+        <div className={`relative ${innerBgLight} ${innerBgDark} ${backdropBlur} rounded-3xl ${padding} m-1 ${className}`}>
           {/* Floating Animated Elements */}
           {floatingElements && (
             <>
