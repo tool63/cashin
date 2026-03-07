@@ -18,6 +18,8 @@ import HighPayingOffers from "@/components/homepage/HighPayingOffers";
 import TrustSection from "@/components/homepage/TrustSection";
 import PaymentSection from "@/components/homepage/PaymentSection";
 import FinalCTASection from "@/components/homepage/FinalCTASection";
+import StatsSection from "@/components/homepage/StatsSection";
+import TestimonialSection from "@/components/homepage/TestimonialSection";
 
 /* Animation Components */
 import OpeningStyle from "@/components/animations/openingstyle";
@@ -84,7 +86,19 @@ export default function HomePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 2: LIVE JOINING
+            SECTION 2: STATS (Social Proof)
+        ===================================================== */}
+        <OpeningStyle>
+          <RevealWithBorder>
+            <StatsSection />
+          </RevealWithBorder>
+        </OpeningStyle>
+
+        {/* Visual Separator */}
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
+
+        {/* =====================================================
+            SECTION 3: LIVE JOINING
         ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
@@ -93,10 +107,10 @@ export default function HomePage() {
         </OpeningStyle>
 
         {/* Visual Separator */}
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 3: LIVE EARNINGS
+            SECTION 4: LIVE EARNINGS
         ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
@@ -105,10 +119,10 @@ export default function HomePage() {
         </OpeningStyle>
 
         {/* Visual Separator */}
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 4: LIVE OFFER COMPLETION
+            SECTION 5: LIVE OFFER COMPLETION
         ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
@@ -117,10 +131,10 @@ export default function HomePage() {
         </OpeningStyle>
 
         {/* Visual Separator */}
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 5: LIVE WITHDRAWALS
+            SECTION 6: LIVE WITHDRAWALS
         ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
@@ -129,10 +143,10 @@ export default function HomePage() {
         </OpeningStyle>
 
         {/* Visual Separator */}
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 6: FEATURES
+            SECTION 7: FEATURES
         ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
@@ -141,10 +155,10 @@ export default function HomePage() {
         </OpeningStyle>
 
         {/* Visual Separator */}
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 7: TASKS
+            SECTION 8: TASKS
         ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
@@ -153,10 +167,10 @@ export default function HomePage() {
         </OpeningStyle>
 
         {/* Visual Separator */}
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 8: HIGH PAYING OFFERS
+            SECTION 9: HIGH PAYING OFFERS
         ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
@@ -165,10 +179,22 @@ export default function HomePage() {
         </OpeningStyle>
 
         {/* Visual Separator */}
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
+
+        {/* =====================================================
+            SECTION 10: TESTIMONIALS
+        ===================================================== */}
+        <OpeningStyle>
+          <RevealWithBorder>
+            <TestimonialSection />
+          </RevealWithBorder>
+        </OpeningStyle>
+
+        {/* Visual Separator */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 9: TRUST
+            SECTION 11: TRUST
         ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
@@ -180,7 +206,7 @@ export default function HomePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 10: PAYMENTS
+            SECTION 12: PAYMENTS
         ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
@@ -192,7 +218,7 @@ export default function HomePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 11: FAQ
+            SECTION 13: FAQ
         ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
@@ -242,7 +268,7 @@ export default function HomePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 12: FINAL CTA
+            SECTION 14: FINAL CTA
         ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
