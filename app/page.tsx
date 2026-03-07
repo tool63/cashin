@@ -68,7 +68,7 @@ export default function HomePage() {
       <main className="relative min-h-screen bg-transparent text-gray-900 dark:text-white">
 
         {/* =====================================================
-            SECTION 1: HERO
+            SECTION 1: HERO (NO BORDER)
         ===================================================== */}
         <section className="bg-transparent">
           <HeroSection />
@@ -78,20 +78,20 @@ export default function HomePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 2: LIVE ACTIVITY (4 components)
+            SECTION 2: LIVE ACTIVITY (4 components) - WITH BORDER
         ===================================================== */}
         <section className="max-w-7xl mx-auto px-4 py-10 bg-transparent">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6">
+            <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 dark:border-white/10 shadow-lg">
               <LiveJoining />
             </div>
-            <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6">
+            <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 dark:border-white/10 shadow-lg">
               <LiveEarnings />
             </div>
-            <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6">
+            <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 dark:border-white/10 shadow-lg">
               <LiveOfferCompletion />
             </div>
-            <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6">
+            <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 dark:border-white/10 shadow-lg">
               <LiveWithdrawals />
             </div>
           </div>
@@ -101,11 +101,13 @@ export default function HomePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 3: FEATURES
+            SECTION 3: FEATURES - WITH BORDER
         ===================================================== */}
         <section className="bg-transparent py-8">
           <div className="max-w-7xl mx-auto px-4">
-            <FeaturesSection />
+            <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 dark:border-white/10 shadow-lg">
+              <FeaturesSection />
+            </div>
           </div>
         </section>
 
@@ -113,10 +115,10 @@ export default function HomePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 4: TASKS
+            SECTION 4: TASKS - WITH BORDER
         ===================================================== */}
         <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
-          <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6">
+          <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 dark:border-white/10 shadow-lg">
             <TasksSection />
           </div>
         </section>
@@ -125,10 +127,10 @@ export default function HomePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 5: HIGH PAYING OFFERS
+            SECTION 5: HIGH PAYING OFFERS - WITH BORDER
         ===================================================== */}
         <section className="max-w-7xl mx-auto px-4 py-8 bg-transparent">
-          <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6">
+          <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 dark:border-white/10 shadow-lg">
             <HighPayingOffers />
           </div>
         </section>
@@ -137,10 +139,10 @@ export default function HomePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 6: TRUST
+            SECTION 6: TRUST - WITH BORDER
         ===================================================== */}
         <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
-          <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6">
+          <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 dark:border-white/10 shadow-lg">
             <TrustSection />
           </div>
         </section>
@@ -149,10 +151,10 @@ export default function HomePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 7: PAYMENTS
+            SECTION 7: PAYMENTS - WITH BORDER
         ===================================================== */}
         <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
-          <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6">
+          <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 dark:border-white/10 shadow-lg">
             <PaymentSection />
           </div>
         </section>
@@ -161,10 +163,10 @@ export default function HomePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 8: FAQ
+            SECTION 8: FAQ - WITH BORDER
         ===================================================== */}
         <section className="max-w-3xl mx-auto px-4 py-12 bg-transparent">
-          <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-8">
+          <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 dark:border-white/10 shadow-lg">
             <h2 className="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-yellow-400 to-green-500 bg-clip-text text-transparent">
               Frequently Asked Questions
             </h2>
@@ -182,10 +184,10 @@ export default function HomePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 9: FINAL CTA
+            SECTION 9: FINAL CTA - WITH BORDER
         ===================================================== */}
         <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
-          <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-8">
+          <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 dark:border-white/10 shadow-lg">
             <FinalCTASection />
           </div>
         </section>
