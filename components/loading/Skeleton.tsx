@@ -1,8 +1,10 @@
-export default function Skeleton({
-  className = "",
-}: {
+"use client";
+
+interface SkeletonProps {
   className?: string;
-}) {
+}
+
+export default function Skeleton({ className = "" }: SkeletonProps) {
   return (
     <div
       className={`relative overflow-hidden rounded-md bg-gray-200 dark:bg-white/10 ${className}`}
