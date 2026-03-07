@@ -1,6 +1,5 @@
 "use client";
 
-import { Rocket, BadgeCheck, CreditCard } from "lucide-react";
 import { SectionTitle } from "@/components/homepage/SmallComponents";
 import { motion } from "framer-motion";
 import OpeningStyle from "@/components/animations/openingstyle";
@@ -8,21 +7,38 @@ import OpeningStyle from "@/components/animations/openingstyle";
 export default function FeaturesSection() {
   const features = [
     {
-      icon: <Rocket className="text-yellow-400" size={48} />,
+      icon: (
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-yellow-400">
+          <path d="M13 10L18 5M13 10L18 15M13 10H21M7 14L3 18M7 14L3 10M7 14H3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2"/>
+        </svg>
+      ),
       title: "Instant Withdrawals",
       description:
         "Get your earnings instantly with zero delays. Fast, secure, and reliable withdrawals.",
       gradient: "from-yellow-400 to-yellow-500",
     },
     {
-      icon: <BadgeCheck className="text-green-400" size={48} />,
+      icon: (
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-green-400">
+          <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M12 8V12L14 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+        </svg>
+      ),
       title: "Secure & Trusted",
       description:
         "Trusted by millions worldwide. Your data and earnings are fully protected.",
       gradient: "from-green-400 to-green-500",
     },
     {
-      icon: <CreditCard className="text-purple-400" size={48} />,
+      icon: (
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-purple-400">
+          <rect x="2" y="4" width="20" height="16" rx="3" stroke="currentColor" strokeWidth="2"/>
+          <path d="M7 15H9M15 15H17M7 9H9M15 9H17" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+          <circle cx="12" cy="12" r="1" fill="currentColor"/>
+          <path d="M2 10H22" stroke="currentColor" strokeWidth="2"/>
+        </svg>
+      ),
       title: "Multiple Payment Options",
       description:
         "Choose from PayPal, crypto, or gift cards. Flexible payouts that suit your lifestyle.",
