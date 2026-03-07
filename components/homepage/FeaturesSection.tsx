@@ -28,51 +28,49 @@ export default function FeaturesSection() {
 
   return (
     <OpeningStyle delay={0.12}>
-      <section className="relative py-28 px-4 text-center bg-white dark:bg-[#070A14] transition-colors duration-300 overflow-hidden rounded-b-[50px] shadow-xl">
-        <div className="max-w-7xl mx-auto">
-          {/* Section Title */}
-          <div className="mb-16">
-            <SectionTitle icon="✨" text="Why Choose Cashog" />
-          </div>
-
-          {/* Features Grid */}
-          <div className="grid md:grid-cols-3 gap-8">
-            {features.map((feature, i) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.6, delay: i * 0.15 }}
-                whileHover={{ 
-                  y: -8,
-                  transition: { duration: 0.3 }
-                }}
-                className="group relative bg-white/80 dark:bg-[#111827]/80 backdrop-blur-sm border border-gray-200 dark:border-white/10 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col items-center text-center"
-              >
-                {/* Animated gradient border on hover */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
-                
-                {/* Icon - Simple emoji without gradient background */}
-                <span className="text-5xl mb-6">{feature.icon}</span>
-                
-                <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                  {feature.description}
-                </p>
-
-                {/* Decorative line on hover */}
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 group-hover:w-1/2 transition-all duration-300"></div>
-              </motion.div>
-            ))}
-          </div>
+      <section className="max-w-7xl mx-auto px-6 py-20">
+        {/* Section Heading */}
+        <div className="mb-12">
+          <SectionTitle icon="✨" text="Why Choose Cashog" />
         </div>
 
-        {/* Floating Decorative Elements */}
-        <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-yellow-400/5 rounded-full blur-3xl animate-blob"></div>
-        <div className="absolute -top-20 -right-20 w-96 h-96 bg-green-400/5 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+        {/* Features Grid - Matching TasksSection grid style */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {features.map((feature, i) => (
+            <motion.div
+              key={feature.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: i * 0.15 }}
+              className="group relative rounded-3xl p-6 flex flex-col items-center text-center
+                bg-gray-100 dark:bg-white/5
+                border border-gray-200 dark:border-white/10
+                hover:border-blue-500/40
+                hover:shadow-xl
+                transition-all duration-300
+                hover:-translate-y-1"
+            >
+              {/* Icon - Matching TasksSection icon style */}
+              <div className="text-5xl mb-4 transition-transform duration-300 group-hover:scale-110">
+                {feature.icon}
+              </div>
+
+              {/* Title - Matching TasksSection title style */}
+              <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
+
+              {/* Description - Matching TasksSection description style */}
+              <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                {feature.description}
+              </p>
+
+              {/* CTA indicator - Matching TasksSection style */}
+              <div className="mt-4 flex items-center gap-1 text-blue-500 text-sm font-medium opacity-0 group-hover:opacity-100 transition">
+                Learn more <span className="text-lg">→</span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </section>
     </OpeningStyle>
   );
