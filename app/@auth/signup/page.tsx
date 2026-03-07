@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import AuthModal from "@/components/modals/AuthModal";
 import AuthPageWrapper from "@/components/auth/AuthPageWrapper";
-import SocialButtons from "@/components/auth/SocialButtons";
 import Link from "next/link";
 import {
   Eye,
@@ -147,48 +146,49 @@ export default function SignupPage() {
       <AuthPageWrapper title="" subtitle="">
         {/* Sign Up Header - Exactly like screenshot */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-amber-500 to-rose-500 
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 
                          bg-clip-text text-transparent mb-2">
             Sign Up
           </h1>
           <div className="flex items-center justify-center gap-2">
             <Sparkles className="w-4 h-4 text-amber-400" />
             <p className="text-neutral-600 dark:text-neutral-400">
-              Join 2M+ happy earners
+              Join and start earning
             </p>
             <Sparkles className="w-4 h-4 text-rose-400" />
           </div>
         </div>
 
-        {/* Instant Bonus Badge - Title removed, just badge as in screenshot */}
-        <div className="flex justify-end mb-6">
-          <div className="flex items-center gap-2 bg-gradient-to-r from-amber-500/10 to-rose-500/10 
-                          px-4 py-2 rounded-full border border-amber-500/20">
-            <Coins className="w-4 h-4 text-amber-400" />
-            <span className="font-semibold text-amber-400">500</span>
-          </div>
-        </div>
-
-        {/* Social Login - Exactly like screenshot */}
+        {/* Social Login Buttons - Custom implementation to match screenshot */}
         <div className="space-y-3 mb-6">
-          <button className="w-full flex items-center justify-center gap-3 px-6 py-3.5
-                             bg-white dark:bg-neutral-900 
-                             border-2 border-neutral-200 dark:border-neutral-800
-                             rounded-xl text-neutral-900 dark:text-white font-medium
-                             hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/10
-                             transition-all duration-300 group">
-            <Chrome className="w-5 h-5 text-blue-500" />
-            <span>Sign up with Google</span>
+          <button className="w-full group relative overflow-hidden rounded-xl">
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 
+                            opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="relative flex items-center justify-center gap-3 px-4 py-3.5 
+                            bg-white dark:bg-neutral-900 
+                            border-2 border-blue-500/20 dark:border-blue-500/20
+                            group-hover:border-blue-500 rounded-xl
+                            text-neutral-900 dark:text-white font-medium
+                            hover:shadow-lg hover:shadow-blue-500/20
+                            transition-all duration-300">
+              <Chrome className="w-5 h-5 text-blue-500" />
+              <span>Sign up with Google</span>
+            </div>
           </button>
 
-          <button className="w-full flex items-center justify-center gap-3 px-6 py-3.5
-                             bg-white dark:bg-neutral-900 
-                             border-2 border-neutral-200 dark:border-neutral-800
-                             rounded-xl text-neutral-900 dark:text-white font-medium
-                             hover:border-indigo-500 hover:shadow-lg hover:shadow-indigo-500/10
-                             transition-all duration-300 group">
-            <Facebook className="w-5 h-5 text-indigo-500" />
-            <span>Sign Up with Facebook</span>
+          <button className="w-full group relative overflow-hidden rounded-xl">
+            <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-indigo-700 
+                            opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="relative flex items-center justify-center gap-3 px-4 py-3.5 
+                            bg-white dark:bg-neutral-900 
+                            border-2 border-indigo-500/20 dark:border-indigo-500/20
+                            group-hover:border-indigo-500 rounded-xl
+                            text-neutral-900 dark:text-white font-medium
+                            hover:shadow-lg hover:shadow-indigo-500/20
+                            transition-all duration-300">
+              <Facebook className="w-5 h-5 text-indigo-500" />
+              <span>Sign Up with Facebook</span>
+            </div>
           </button>
         </div>
 
@@ -196,12 +196,12 @@ export default function SignupPage() {
         {!formVisible && (
           <button
             onClick={handleContinueWithEmail}
-            className="w-full py-3.5 rounded-xl 
+            className="w-full mt-2 py-3.5 rounded-xl 
                        bg-neutral-100 dark:bg-neutral-900 
-                       border-2 border-neutral-200 dark:border-neutral-800
+                       border border-neutral-200 dark:border-neutral-800
                        text-neutral-900 dark:text-white font-medium 
                        flex items-center justify-center gap-2
-                       hover:border-green-500 hover:shadow-lg hover:shadow-green-500/10
+                       hover:border-green-500/50 hover:bg-neutral-50 dark:hover:bg-neutral-800/80
                        transition-all duration-300"
           >
             <Mail className="w-4 h-4" />
@@ -241,10 +241,10 @@ export default function SignupPage() {
                   onBlur={() => setFocusedField(null)}
                   placeholder="Full Name"
                   className="w-full p-4 pl-12 rounded-xl 
-                             bg-white dark:bg-neutral-900/50 
+                             bg-neutral-50 dark:bg-neutral-900/50 
                              border-2 border-neutral-200 dark:border-neutral-800 
                              text-neutral-900 dark:text-white 
-                             placeholder-neutral-400
+                             placeholder-neutral-400 dark:placeholder-neutral-500
                              focus:outline-none focus:border-green-500 
                              focus:bg-white dark:focus:bg-neutral-900
                              hover:border-neutral-300 dark:hover:border-neutral-700
@@ -275,10 +275,10 @@ export default function SignupPage() {
                   onBlur={() => setFocusedField(null)}
                   placeholder="Email Address"
                   className="w-full p-4 pl-12 rounded-xl 
-                             bg-white dark:bg-neutral-900/50 
+                             bg-neutral-50 dark:bg-neutral-900/50 
                              border-2 border-neutral-200 dark:border-neutral-800 
                              text-neutral-900 dark:text-white 
-                             placeholder-neutral-400
+                             placeholder-neutral-400 dark:placeholder-neutral-500
                              focus:outline-none focus:border-blue-500 
                              focus:bg-white dark:focus:bg-neutral-900
                              hover:border-neutral-300 dark:hover:border-neutral-700
@@ -309,10 +309,10 @@ export default function SignupPage() {
                   onBlur={handlePasswordBlur}
                   placeholder="Create Password"
                   className="w-full p-4 pl-12 pr-12 rounded-xl 
-                             bg-white dark:bg-neutral-900/50 
+                             bg-neutral-50 dark:bg-neutral-900/50 
                              border-2 border-neutral-200 dark:border-neutral-800 
                              text-neutral-900 dark:text-white 
-                             placeholder-neutral-400
+                             placeholder-neutral-400 dark:placeholder-neutral-500
                              focus:outline-none focus:border-purple-500 
                              focus:bg-white dark:focus:bg-neutral-900
                              hover:border-neutral-300 dark:hover:border-neutral-700
@@ -345,7 +345,7 @@ export default function SignupPage() {
                       />
                     ))}
                   </div>
-                  <span className="text-xs font-medium text-neutral-500">
+                  <span className="text-xs font-medium text-neutral-600 dark:text-neutral-400">
                     {getStrengthText()}
                   </span>
                 </div>
@@ -366,8 +366,8 @@ export default function SignupPage() {
                                    passwordRequirements[
                                      req.key as keyof typeof passwordRequirements
                                    ]
-                                     ? "text-green-500"
-                                     : "text-neutral-400"
+                                     ? "text-green-600 dark:text-green-400"
+                                     : "text-neutral-400 dark:text-neutral-500"
                                  }`}
                     >
                       {passwordRequirements[req.key as keyof typeof passwordRequirements] ? (
@@ -382,73 +382,61 @@ export default function SignupPage() {
               </div>
             )}
 
-            {/* Terms Agreement */}
-            <p className="text-sm text-neutral-600 dark:text-neutral-400 my-6 text-center">
-              By signing up you agree to the{' '}
-              <Link 
-                href="/privacy" 
-                className="text-green-600 dark:text-green-400 hover:text-green-700 
-                           dark:hover:text-green-300 font-medium transition"
-              >
-                Privacy Policy
-              </Link>{' '}
-              and{' '}
-              <Link 
-                href="/terms" 
-                className="text-green-600 dark:text-green-400 hover:text-green-700 
-                           dark:hover:text-green-300 font-medium transition"
-              >
-                Terms of Service
-              </Link>
-            </p>
+            {/* Instant Bonus - Title as per screenshot */}
+            <div className="flex items-center justify-between mt-6 mb-4">
+              <div className="text-base font-medium text-neutral-900 dark:text-white">
+                Get Instant Bonus
+              </div>
+              <div className="flex items-center gap-1.5 bg-gradient-to-r from-yellow-400/20 to-amber-500/20 
+                              px-3 py-1.5 rounded-full border border-yellow-500/30">
+                <Coins className="w-4 h-4 text-yellow-500" />
+                <span className="font-bold text-yellow-500 text-sm">500</span>
+              </div>
+            </div>
 
             {/* Submit Button */}
             <button
               className="relative w-full py-4 px-6 rounded-xl font-bold text-black group
                          overflow-hidden transition-all duration-500
                          hover:scale-[1.02] hover:shadow-2xl
-                         active:scale-[0.98]"
+                         active:scale-[0.98] mb-6"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-green-400 to-blue-500 
                               animate-gradient-x bg-[length:200%_100%]" />
+
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 
                               bg-gradient-to-r from-transparent via-white/20 to-transparent 
                               -translate-x-full group-hover:translate-x-full 
                               transition-all duration-1000" />
+
               <span className="relative flex items-center justify-center gap-2">
                 <Gift className="w-5 h-5" />
-                <span>Sign Up</span>
+                <span>Get Started & Claim $5 Bonus</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </span>
             </button>
           </>
         )}
 
-        {/* Trust Badges - One line with dots */}
-        <div className="flex items-center justify-center gap-4 mt-6">
-          <div className="flex items-center gap-2">
+        {/* Trust Badges - Single line exactly as requested */}
+        <div className="flex items-center justify-center gap-4 mt-4 text-sm">
+          <div className="flex items-center gap-1.5 text-neutral-600 dark:text-neutral-400">
             <Shield className="w-4 h-4 text-blue-500" />
-            <span className="text-sm text-neutral-600 dark:text-neutral-400">
-              Privacy secured
-            </span>
+            <span>Privacy secured</span>
           </div>
           
           <span className="text-neutral-300 dark:text-neutral-700">•</span>
           
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 text-neutral-600 dark:text-neutral-400">
             <Zap className="w-4 h-4 text-amber-500" />
-            <span className="text-sm text-neutral-600 dark:text-neutral-400">
-              Instant payout
-            </span>
+            <span>Instant payout</span>
           </div>
           
           <span className="text-neutral-300 dark:text-neutral-700">•</span>
           
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 text-neutral-600 dark:text-neutral-400">
             <Heart className="w-4 h-4 text-rose-500" />
-            <span className="text-sm text-neutral-600 dark:text-neutral-400">
-              Feel Happy
-            </span>
+            <span>Feel Happy</span>
           </div>
         </div>
 
@@ -457,9 +445,9 @@ export default function SignupPage() {
           Already have an account?{" "}
           <Link
             href="/login"
-            className="inline-flex items-center gap-1 text-green-600 dark:text-green-400 
-                       hover:text-green-700 dark:hover:text-green-300 font-medium
-                       group-hover:gap-2 transition-all"
+            className="relative inline-flex items-center gap-1 text-green-600 dark:text-green-400 
+                       hover:text-green-700 dark:hover:text-green-300 transition-all font-medium
+                       group-hover:gap-2"
           >
             <span>Log In</span>
             <ArrowRight className="w-3 h-3 opacity-0 -translate-x-2 
@@ -468,20 +456,25 @@ export default function SignupPage() {
           </Link>
         </p>
 
-        {/* Prohibited Actions */}
-        <div className="mt-6 p-3 bg-rose-500/5 border border-rose-500/10 rounded-lg">
-          <p className="text-xs text-neutral-500 dark:text-neutral-500 text-center">
-            ⚠️ Users are prohibited from using multiple accounts, completing offers on another user's account, 
-            or using any type of VPN, VPS, or Emulator software.
-          </p>
-        </div>
-
-        {/* Referral Code */}
-        <div className="mt-4 text-center">
-          <span className="text-xs font-mono text-neutral-400">
-            freecash.com/en?ref=c399cf22a1c
-          </span>
-        </div>
+        {/* Terms */}
+        <p className="text-sm text-neutral-500 dark:text-neutral-500 text-center mt-6 leading-relaxed">
+          By signing up, you agree to our{" "}
+          <Link 
+            href="/terms" 
+            className="text-green-600 dark:text-green-400 hover:text-green-700 
+                       dark:hover:text-green-300 font-medium transition"
+          >
+            Terms
+          </Link>{" "}
+          and{" "}
+          <Link 
+            href="/privacy" 
+            className="text-green-600 dark:text-green-400 hover:text-green-700 
+                       dark:hover:text-green-300 font-medium transition"
+          >
+            Privacy Policy
+          </Link>
+        </p>
       </AuthPageWrapper>
     </AuthModal>
   );
