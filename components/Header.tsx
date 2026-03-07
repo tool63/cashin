@@ -75,11 +75,11 @@ export default function Header() {
                     shadow-xl
                   "
                 >
-                  <Link href="/surveys" className="text-black dark:text-white">Surveys</Link>
-                  <Link href="/app-installs" className="text-black dark:text-white">App Installs</Link>
-                  <Link href="/play-games" className="text-black dark:text-white">Play Games</Link>
-                  <Link href="/watch-videos" className="text-black dark:text-white">Watch Videos</Link>
-                  <Link href="/offerwall" className="text-black dark:text-white">Offerwall</Link>
+                  <Link href="/surveys" className="text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-200">Surveys</Link>
+                  <Link href="/app-installs" className="text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-200">App Installs</Link>
+                  <Link href="/play-games" className="text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-200">Play Games</Link>
+                  <Link href="/watch-videos" className="text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-200">Watch Videos</Link>
+                  <Link href="/offerwall" className="text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-200">Offerwall</Link>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -141,17 +141,17 @@ export default function Header() {
               bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20
               dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20
               border-gray-200 dark:border-white/10
-              text-black
+              text-gray-900 dark:text-white
             "
           >
-            <Link href="/how-it-works" className="text-black">
+            <Link href="/how-it-works" className="block text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-200">
               How it works
             </Link>
 
             {/* MOBILE EARN */}
             <button
               onClick={() => setMobileEarnOpen(!mobileEarnOpen)}
-              className="flex w-full items-center justify-between font-medium text-black"
+              className="flex w-full items-center justify-between font-medium text-gray-900 dark:text-white"
             >
               Earn
               <ChevronDown
@@ -162,34 +162,34 @@ export default function Header() {
 
             {mobileEarnOpen && (
               <div className="
-                flex flex-col gap-3 pl-4 text-sm text-black
+                flex flex-col gap-3 pl-4 text-sm
                 bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20
                 dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20
                 p-3 rounded-lg
               ">
-                <Link href="/surveys">Surveys</Link>
-                <Link href="/app-installs">App Installs</Link>
-                <Link href="/play-games">Play Games</Link>
-                <Link href="/watch-videos">Watch Videos</Link>
-                <Link href="/offerwall">Offerwall</Link>
+                <Link href="/surveys" className="text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-200">Surveys</Link>
+                <Link href="/app-installs" className="text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-200">App Installs</Link>
+                <Link href="/play-games" className="text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-200">Play Games</Link>
+                <Link href="/watch-videos" className="text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-200">Watch Videos</Link>
+                <Link href="/offerwall" className="text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-200">Offerwall</Link>
               </div>
             )}
 
             {/* MOBILE LINKS */}
-            <div className="flex flex-col gap-3 pt-2 text-black">
-              <Link href="/cashout">Cashout</Link>
-              <Link href="/blog">Blog</Link>
-              <Link href="/help">Help</Link>
+            <div className="flex flex-col gap-3 pt-2">
+              <Link href="/cashout" className="text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-200">Cashout</Link>
+              <Link href="/blog" className="text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-200">Blog</Link>
+              <Link href="/help" className="text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-200">Help</Link>
             </div>
 
-            <div className="flex items-center justify-between pt-3 text-black">
+            <div className="flex items-center justify-between pt-3">
               <LanguageSwitcher />
               <DarkLightToggle />
             </div>
 
             <div className="pt-4 flex flex-col gap-3">
               <Link href="/login">
-                <button className="border py-2 rounded-lg w-full text-black">
+                <button className="border border-gray-300 dark:border-white/20 py-2 rounded-lg w-full text-gray-900 dark:text-white">
                   Login
                 </button>
               </Link>
