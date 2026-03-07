@@ -88,11 +88,13 @@ export default function HomePage() {
         {/* =====================================================
             SECTION 2: LIVE JOINING - WITH BORDER (MATCHING HERO)
         ===================================================== */}
-        <RevealWithBorder>
-          <section className="max-w-7xl mx-auto px-4 py-10 bg-transparent">
-            <LiveJoining />
-          </section>
-        </RevealWithBorder>
+        <OpeningStyle>
+          <RevealWithBorder>
+            <section className="max-w-7xl mx-auto px-4 py-10 bg-transparent">
+              <LiveJoining />
+            </section>
+          </RevealWithBorder>
+        </OpeningStyle>
 
         {/* Visual Separator */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
@@ -100,11 +102,13 @@ export default function HomePage() {
         {/* =====================================================
             SECTION 3: LIVE EARNINGS - WITH BORDER (MATCHING HERO)
         ===================================================== */}
-        <RevealWithBorder>
-          <section className="max-w-7xl mx-auto px-4 py-10 bg-transparent">
-            <LiveEarnings />
-          </section>
-        </RevealWithBorder>
+        <OpeningStyle>
+          <RevealWithBorder>
+            <section className="max-w-7xl mx-auto px-4 py-10 bg-transparent">
+              <LiveEarnings />
+            </section>
+          </RevealWithBorder>
+        </OpeningStyle>
 
         {/* Visual Separator */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
@@ -112,11 +116,13 @@ export default function HomePage() {
         {/* =====================================================
             SECTION 4: LIVE OFFER COMPLETION - WITH BORDER (MATCHING HERO)
         ===================================================== */}
-        <RevealWithBorder>
-          <section className="max-w-7xl mx-auto px-4 py-10 bg-transparent">
-            <LiveOfferCompletion />
-          </section>
-        </RevealWithBorder>
+        <OpeningStyle>
+          <RevealWithBorder>
+            <section className="max-w-7xl mx-auto px-4 py-10 bg-transparent">
+              <LiveOfferCompletion />
+            </section>
+          </RevealWithBorder>
+        </OpeningStyle>
 
         {/* Visual Separator */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
@@ -124,11 +130,13 @@ export default function HomePage() {
         {/* =====================================================
             SECTION 5: LIVE WITHDRAWALS - WITH BORDER (MATCHING HERO)
         ===================================================== */}
-        <RevealWithBorder>
-          <section className="max-w-7xl mx-auto px-4 py-10 bg-transparent">
-            <LiveWithdrawals />
-          </section>
-        </RevealWithBorder>
+        <OpeningStyle>
+          <RevealWithBorder>
+            <section className="max-w-7xl mx-auto px-4 py-10 bg-transparent">
+              <LiveWithdrawals />
+            </section>
+          </RevealWithBorder>
+        </OpeningStyle>
 
         {/* Visual Separator */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
@@ -136,13 +144,15 @@ export default function HomePage() {
         {/* =====================================================
             SECTION 6: FEATURES - WITH BORDER (MATCHING HERO)
         ===================================================== */}
-        <RevealWithBorder>
-          <section className="bg-transparent py-8">
-            <div className="max-w-7xl mx-auto px-4">
-              <FeaturesSection />
-            </div>
-          </section>
-        </RevealWithBorder>
+        <OpeningStyle>
+          <RevealWithBorder>
+            <section className="bg-transparent py-8">
+              <div className="max-w-7xl mx-auto px-4">
+                <FeaturesSection />
+              </div>
+            </section>
+          </RevealWithBorder>
+        </OpeningStyle>
 
         {/* Visual Separator */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
@@ -150,11 +160,13 @@ export default function HomePage() {
         {/* =====================================================
             SECTION 7: TASKS - WITH BORDER (MATCHING HERO)
         ===================================================== */}
-        <RevealWithBorder>
-          <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
-            <TasksSection />
-          </section>
-        </RevealWithBorder>
+        <OpeningStyle>
+          <RevealWithBorder>
+            <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
+              <TasksSection />
+            </section>
+          </RevealWithBorder>
+        </OpeningStyle>
 
         {/* Visual Separator */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
@@ -162,11 +174,13 @@ export default function HomePage() {
         {/* =====================================================
             SECTION 8: HIGH PAYING OFFERS - WITH BORDER (MATCHING HERO)
         ===================================================== */}
-        <RevealWithBorder>
-          <section className="max-w-7xl mx-auto px-4 py-8 bg-transparent">
-            <HighPayingOffers />
-          </section>
-        </RevealWithBorder>
+        <OpeningStyle>
+          <RevealWithBorder>
+            <section className="max-w-7xl mx-auto px-4 py-8 bg-transparent">
+              <HighPayingOffers />
+            </section>
+          </RevealWithBorder>
+        </OpeningStyle>
 
         {/* Visual Separator */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
@@ -174,15 +188,17 @@ export default function HomePage() {
         {/* =====================================================
             SECTION 9: TRUST - WITH BORDER (MATCHING HERO)
         ===================================================== */}
-        <RevealWithBorder>
-          <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
-            <div className="flex justify-center">
-              <div className="w-full">
-                <TrustSection />
+        <OpeningStyle>
+          <RevealWithBorder>
+            <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
+              <div className="flex justify-center">
+                <div className="w-full">
+                  <TrustSection />
+                </div>
               </div>
-            </div>
-          </section>
-        </RevealWithBorder>
+            </section>
+          </RevealWithBorder>
+        </OpeningStyle>
 
         {/* Visual Separator */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
@@ -190,11 +206,13 @@ export default function HomePage() {
         {/* =====================================================
             SECTION 10: PAYMENTS - WITH BORDER (MATCHING HERO)
         ===================================================== */}
-        <RevealWithBorder>
-          <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
-            <PaymentSection />
-          </section>
-        </RevealWithBorder>
+        <OpeningStyle>
+          <RevealWithBorder>
+            <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
+              <PaymentSection />
+            </section>
+          </RevealWithBorder>
+        </OpeningStyle>
 
         {/* Visual Separator */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
@@ -202,47 +220,49 @@ export default function HomePage() {
         {/* =====================================================
             SECTION 11: FAQ - WITH BORDER (MATCHING HERO)
         ===================================================== */}
-        <RevealWithBorder>
-          <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
-            <h2 className="text-3xl font-bold text-center mb-6 bg-gradient-to-r from-yellow-400 to-green-500 bg-clip-text text-transparent">
-              Frequently Asked Questions
-            </h2>
-            <div className="space-y-4">
-              <FAQ
-                faqs={[
-                  { 
-                    q: "How can I start earning money online?", 
-                    a: "Getting started is completely free! Simply sign up with your email, verify your account, and you'll immediately get access to hundreds of tasks and offers. You can start earning within minutes by completing simple tasks, surveys, and offers from our partners." 
-                  },
-                  { 
-                    q: "Is this website legit or a scam?", 
-                    a: "We are 100% legit and have paid over $2 million to our users. We've been in business for over 5 years with thousands of positive reviews on Trustpilot. All payments are processed securely, and we have a dedicated support team to assist you." 
-                  },
-                  { 
-                    q: "How much money can I really make?", 
-                    a: "Earnings vary based on your location and the time you invest. Active users earn between $100-$500 per month. Some power users make over $1,000 monthly by focusing on high-paying offers and referring friends. There's no upper limit - the more you do, the more you earn!" 
-                  },
-                  { 
-                    q: "What are the payment methods and withdrawal options?", 
-                    a: "We offer multiple payment options including PayPal, Payoneer, Bitcoin, and gift cards (Amazon, Google Play, Steam). You can withdraw your earnings once you reach the minimum threshold of $5. Payments are typically processed within 24-48 hours." 
-                  },
-                  { 
-                    q: "Do I need to pay anything to join?", 
-                    a: "No, joining and earning is completely free! We never ask for credit card details or any payment information to sign up. Beware of sites that ask for money upfront - we are 100% free to join and use." 
-                  },
-                  { 
-                    q: "Which countries are supported?", 
-                    a: "We currently support users from United States, Canada, United Kingdom, Australia, Germany, France, India, and over 50 other countries. The number of available offers may vary depending on your location." 
-                  },
-                  { 
-                    q: "How quickly can I get paid after withdrawing?", 
-                    a: "Withdrawal requests are processed within 24-48 hours. PayPal payments are usually instant once processed, bank transfers take 2-3 business days, and Bitcoin payments are sent within a few hours after approval." 
-                  }
-                ]}
-              />
-            </div>
-          </section>
-        </RevealWithBorder>
+        <OpeningStyle>
+          <RevealWithBorder>
+            <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
+              <h2 className="text-3xl font-bold text-center mb-6 bg-gradient-to-r from-yellow-400 to-green-500 bg-clip-text text-transparent">
+                Frequently Asked Questions
+              </h2>
+              <div className="space-y-4">
+                <FAQ
+                  faqs={[
+                    { 
+                      q: "How can I start earning money online?", 
+                      a: "Getting started is completely free! Simply sign up with your email, verify your account, and you'll immediately get access to hundreds of tasks and offers. You can start earning within minutes by completing simple tasks, surveys, and offers from our partners." 
+                    },
+                    { 
+                      q: "Is this website legit or a scam?", 
+                      a: "We are 100% legit and have paid over $2 million to our users. We've been in business for over 5 years with thousands of positive reviews on Trustpilot. All payments are processed securely, and we have a dedicated support team to assist you." 
+                    },
+                    { 
+                      q: "How much money can I really make?", 
+                      a: "Earnings vary based on your location and the time you invest. Active users earn between $100-$500 per month. Some power users make over $1,000 monthly by focusing on high-paying offers and referring friends. There's no upper limit - the more you do, the more you earn!" 
+                    },
+                    { 
+                      q: "What are the payment methods and withdrawal options?", 
+                      a: "We offer multiple payment options including PayPal, Payoneer, Bitcoin, and gift cards (Amazon, Google Play, Steam). You can withdraw your earnings once you reach the minimum threshold of $5. Payments are typically processed within 24-48 hours." 
+                    },
+                    { 
+                      q: "Do I need to pay anything to join?", 
+                      a: "No, joining and earning is completely free! We never ask for credit card details or any payment information to sign up. Beware of sites that ask for money upfront - we are 100% free to join and use." 
+                    },
+                    { 
+                      q: "Which countries are supported?", 
+                      a: "We currently support users from United States, Canada, United Kingdom, Australia, Germany, France, India, and over 50 other countries. The number of available offers may vary depending on your location." 
+                    },
+                    { 
+                      q: "How quickly can I get paid after withdrawing?", 
+                      a: "Withdrawal requests are processed within 24-48 hours. PayPal payments are usually instant once processed, bank transfers take 2-3 business days, and Bitcoin payments are sent within a few hours after approval." 
+                    }
+                  ]}
+                />
+              </div>
+            </section>
+          </RevealWithBorder>
+        </OpeningStyle>
 
         {/* Visual Separator */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
@@ -250,11 +270,13 @@ export default function HomePage() {
         {/* =====================================================
             SECTION 12: FINAL CTA - WITH BORDER (MATCHING HERO)
         ===================================================== */}
-        <RevealWithBorder>
-          <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
-            <FinalCTASection />
-          </section>
-        </RevealWithBorder>
+        <OpeningStyle>
+          <RevealWithBorder>
+            <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
+              <FinalCTASection />
+            </section>
+          </RevealWithBorder>
+        </OpeningStyle>
 
         {/* Bottom Spacer */}
         <div className="h-12"></div>
