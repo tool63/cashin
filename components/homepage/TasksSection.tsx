@@ -5,6 +5,8 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { earningOptions } from "@/components/homepage/earningOptions";
 import { SectionTitle } from "@/components/homepage/SmallComponents";
+import OpeningStyle from "@/components/animations/openingstyle";
+import Container, { Card, CardIcon, CardTitle, CardDescription, CardCTA, CardGrid } from "@/components/animations/container";
 
 const earningDescriptions: Record<string, string> = {
   Surveys: "Share your opinions and get rewarded instantly",
@@ -29,45 +31,32 @@ const earningDescriptions: Record<string, string> = {
 
 export default function TasksSection() {
   return (
-    <section className="max-w-7xl mx-auto px-6 py-20">
-      {/* Section Heading */}
-      <SectionTitle icon="🎯" text="High Paying Tasks" />
+    <OpeningStyle delay={0.12}>
+      <section className="max-w-7xl mx-auto px-6 py-20">
+        {/* Section Heading */}
+        <div className="mb-12">
+          <SectionTitle icon="🎯" text="High Paying Tasks" />
+        </div>
 
-      {/* Task Cards Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {earningOptions.map(([icon, title, href]) => (
-          <Link
-            key={title}
-            href={href}
-            className="group relative rounded-3xl p-6 flex flex-col items-center text-center
-              bg-gray-100 dark:bg-white/5
-              border border-gray-200 dark:border-white/10
-              hover:border-blue-500/40
-              hover:shadow-xl
-              transition-all duration-300
-              hover:-translate-y-1"
-          >
-            {/* Icon */}
-            <div className="text-5xl mb-4 transition-transform duration-300 group-hover:scale-110">
-              {icon}
-            </div>
-
-            {/* Title */}
-            <h3 className="text-lg font-semibold">{title}</h3>
-
-            {/* Description */}
-            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-              {earningDescriptions[title] ||
-                `Earn rewards with ${title.toLowerCase()}`}
-            </p>
-
-            {/* CTA indicator */}
-            <div className="mt-4 flex items-center gap-1 text-blue-500 text-sm font-medium opacity-0 group-hover:opacity-100 transition">
-              Start earning <ArrowRight size={16} />
-            </div>
-          </Link>
-        ))}
-      </div>
-    </section>
+        {/* Task Cards Grid */}
+        <CardGrid cols={{ default: 2, md: 3, lg: 4 }}>
+          {earningOptions.map(([icon, title, href]) => (
+            <Link key={title} href={href} className="block">
+              <Card>
+                <CardIcon>{icon}</CardIcon>
+                <CardTitle>{title}</CardTitle>
+                <CardDescription>
+                  {earningDescriptions[title] ||
+                    `Earn rewards with ${title.toLowerCase()}`}
+                </CardDescription>
+                <CardCTA>
+                  Start earning <ArrowRight size={16} />
+                </CardCTA>
+              </Card>
+            </Link>
+          ))}
+        </CardGrid>
+      </section>
+    </OpeningStyle>
   );
 }
