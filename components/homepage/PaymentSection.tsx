@@ -1,6 +1,9 @@
 "use client";
 
 import { SectionTitle } from "@/components/homepage/SmallComponents";
+import { motion } from "framer-motion";
+import OpeningStyle from "@/components/animations/openingstyle";
+import Container, { Card, CardIcon, CardTitle, CardDescription, CardGrid } from "@/components/animations/container";
 
 export default function PaymentSection() {
   const methods = [
@@ -15,40 +18,55 @@ export default function PaymentSection() {
   ];
 
   return (
-    <section className="py-20 bg-gray-50 dark:bg-[#0B0E1A]">
-      <div className="max-w-7xl mx-auto px-6 text-center">
+    <OpeningStyle delay={0.15}>
+      <section className="max-w-7xl mx-auto px-6 py-20">
+        <div className="text-center">
+          {/* Section Heading */}
+          <div className="mb-6">
+            <SectionTitle icon="💰" text="Payment Methods" />
+          </div>
 
-        {/* Section Heading */}
-        <SectionTitle icon="💰" text="Payment Methods" />
+          {/* Subtitle */}
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed">
+            Fast, secure, and trusted payout options. Withdraw your earnings instantly via your favorite method.
+          </p>
 
-        {/* Subtitle */}
-        <p className="text-gray-600 dark:text-gray-400 mb-16 max-w-2xl mx-auto text-lg">
-          Fast, secure, and trusted payout options. Withdraw your earnings instantly via your favorite method.
-        </p>
+          {/* Payment Grid */}
+          <CardGrid cols={{ default: 2, sm: 3, md: 4 }}>
+            {methods.map((method, i) => (
+              <motion.div
+                key={method.name}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+              >
+                <Card>
+                  <CardIcon>{method.emoji}</CardIcon>
+                  <CardTitle>{method.name}</CardTitle>
+                  <CardDescription>Instant payout</CardDescription>
+                </Card>
+              </motion.div>
+            ))}
+          </CardGrid>
 
-        {/* Payment Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
-          {methods.map((method) => (
-            <div
-              key={method.name}
-              className="flex flex-col items-center justify-center rounded-3xl bg-white dark:bg-[#111827] border border-gray-200 dark:border-white/10 px-6 py-10 shadow-md hover:shadow-2xl hover:scale-105 transition-transform duration-300"
-            >
-              {/* Icon */}
-              <span className="text-6xl mb-4">{method.emoji}</span>
-
-              {/* Name */}
-              <span className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white">
-                {method.name}
-              </span>
-
-              {/* Subtitle */}
-              <span className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                Instant payout
-              </span>
+          {/* Trust badges */}
+          <div className="mt-16 flex flex-wrap justify-center gap-8 text-sm text-gray-600 dark:text-gray-400">
+            <div className="flex items-center gap-2">
+              <span className="text-green-500">✓</span> Instant Withdrawals
             </div>
-          ))}
+            <div className="flex items-center gap-2">
+              <span className="text-green-500">✓</span> No Hidden Fees
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-green-500">✓</span> 24/7 Processing
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-green-500">✓</span> Global Payments
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </OpeningStyle>
   );
 }
