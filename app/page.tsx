@@ -75,9 +75,11 @@ export default function HomePage() {
             SECTION 1: HERO (NO BORDER) - WITH ANIMATION
         ===================================================== */}
         <OpeningStyle>
-          <section className="bg-transparent">
-            <HeroSection />
-          </section>
+          <RevealWithBorder>
+            <section className="bg-transparent">
+              <HeroSection />
+            </section>
+          </RevealWithBorder>
         </OpeningStyle>
 
         {/* Visual Separator */}
