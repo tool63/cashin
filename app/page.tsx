@@ -115,7 +115,7 @@ export default function HomePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 4: TASKS - WITH BORDER (FIXED)
+            SECTION 4: TASKS - WITH BORDER
         ===================================================== */}
         <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
           <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 dark:border-white/10 shadow-lg">
@@ -127,7 +127,7 @@ export default function HomePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 5: HIGH PAYING OFFERS - WITH BORDER (FIXED)
+            SECTION 5: HIGH PAYING OFFERS - WITH BORDER
         ===================================================== */}
         <section className="max-w-7xl mx-auto px-4 py-8 bg-transparent">
           <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 dark:border-white/10 shadow-lg">
@@ -166,7 +166,7 @@ export default function HomePage() {
             SECTION 8: FAQ - WITH BORDER
         ===================================================== */}
         <section className="max-w-3xl mx-auto px-4 py-12 bg-transparent">
-          <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 dark:border-white/10 shadow-lg">
+          <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 dark:border-white/10 shadow-lg">
             <h2 className="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-yellow-400 to-green-500 bg-clip-text text-transparent">
               Frequently Asked Questions
             </h2>
@@ -184,10 +184,10 @@ export default function HomePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 9: FINAL CTA - WITH BORDER (FIXED)
+            SECTION 9: FINAL CTA - WITH BORDER (FIXED - NOW USING p-6)
         ===================================================== */}
         <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
-          <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 dark:border-white/10 shadow-lg">
+          <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 dark:border-white/10 shadow-lg">
             <FinalCTASection />
           </div>
         </section>
