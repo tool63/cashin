@@ -8,7 +8,7 @@ import OpeningStyle from "@/components/animations/openingstyle";
 
 export default function HeroSection() {
   return (
-    <OpeningStyle delay={0.1} duration={0.9}>
+    <OpeningStyle delay={0.1}>
       <section className="relative py-28 px-4 text-center bg-white dark:bg-[#070A14] transition-colors duration-300 overflow-hidden rounded-b-[50px] shadow-xl">
         <div className="max-w-4xl mx-auto">
 
