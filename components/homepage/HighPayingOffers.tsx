@@ -147,6 +147,30 @@ export const OFFERS: Record<CategoryKey, Offer[]> = {
   ],
 };
 
+/* ===================== SKELETON ROW COMPONENT ===================== */
+function SkeletonRow() {
+  return (
+    <div className="grid grid-cols-5 gap-4 px-6 py-4 border-b border-gray-200 dark:border-white/10 animate-pulse">
+      <div className="col-span-2 flex items-center gap-2">
+        <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
+        <div className="flex gap-1">
+          <div className="w-4 h-4 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
+          <div className="w-4 h-4 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
+        </div>
+      </div>
+      <div className="text-center">
+        <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-12 mx-auto"></div>
+      </div>
+      <div className="text-center">
+        <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-16 mx-auto"></div>
+      </div>
+      <div className="text-right">
+        <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-14 ml-auto"></div>
+      </div>
+    </div>
+  );
+}
+
 /* ===================== HIGH PAYING OFFERS COMPONENT ===================== */
 export default function HighPayingOffers() {
   const [category, setCategory] = useState<CategoryKey>("Surveys");
@@ -229,9 +253,10 @@ export default function HighPayingOffers() {
               </div>
 
               {loading ? (
-                <div className="flex justify-center items-center py-20">
-                  <Loading />
-                </div>
+                // Show skeleton rows when loading
+                Array.from({ length: 10 }).map((_, index) => (
+                  <SkeletonRow key={index} />
+                ))
               ) : (
                 offers.map((offer, index) => (
                   <motion.div
