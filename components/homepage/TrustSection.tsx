@@ -2,17 +2,34 @@
 
 import { CheckCircle } from "lucide-react";
 import { SectionTitle } from "@/components/homepage/SmallComponents";
+import { motion } from "framer-motion";
 
 export default function TrustSection() {
   const features = [
-    { title: "Secure Payments", description: "All transactions are encrypted and safe", icon: "💳" },
-    { title: "Trusted by Millions", description: "Millions of users trust our platform globally", icon: "🌍" },
-    { title: "Fast Payouts", description: "Get your earnings instantly with multiple methods", icon: "⚡" },
-    { title: "24/7 Support", description: "Our support team is always here to help", icon: "🕒" },
+    { 
+      title: "Secure Payments", 
+      description: "All transactions are encrypted and safe", 
+      icon: "💳" 
+    },
+    { 
+      title: "Trusted by Millions", 
+      description: "Millions of users trust our platform globally", 
+      icon: "🌍" 
+    },
+    { 
+      title: "Fast Payouts", 
+      description: "Get your earnings instantly with multiple methods", 
+      icon: "⚡" 
+    },
+    { 
+      title: "24/7 Support", 
+      description: "Our support team is always here to help", 
+      icon: "🕒" 
+    },
   ];
 
   return (
-    <section className="py-20 bg-gray-50 dark:bg-[#0B0E1A]">
+    <section className="py-20 bg-gray-100 dark:bg-[#0f111b] transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 text-center">
 
         {/* Section Heading */}
@@ -24,23 +41,31 @@ export default function TrustSection() {
 
         {/* Feature Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature) => (
-            <div
+          {features.map((feature, i) => (
+            <motion.div
               key={feature.title}
-              className="rounded-3xl border border-gray-200 dark:border-white/10 bg-white dark:bg-[#111827] px-6 py-10 flex flex-col items-center justify-center shadow-md hover:shadow-2xl hover:scale-105 transition-transform duration-300"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.15 }}
+              className="flex flex-col items-center bg-white dark:bg-[#111827] border border-gray-200 dark:border-white/10 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105"
             >
               {/* Icon */}
               <span className="text-6xl mb-4">{feature.icon}</span>
 
               {/* Title */}
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{feature.title}</h3>
+              <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white text-center">
+                {feature.title}
+              </h3>
 
               {/* Description */}
-              <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">{feature.description}</p>
+              <p className="text-gray-600 dark:text-gray-400 text-center">
+                {feature.description}
+              </p>
 
               {/* Check Icon */}
               <CheckCircle className="text-green-400 mt-4" size={24} />
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
