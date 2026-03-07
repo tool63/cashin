@@ -13,7 +13,7 @@ import {
   Lock,
   CheckCircle,
   XCircle,
-  Sparkles,
+  Coins,
   Shield,
   Zap,
   Gift,
@@ -140,38 +140,17 @@ export default function SignupPage() {
 
   return (
     <AuthModal>
-      <AuthPageWrapper
-        title={
-          <span className="flex items-center gap-2">
-            Create your account
-            <Sparkles className="w-5 h-5 text-yellow-400" />
-          </span>
-        }
-        subtitle={
-          <span>
-            Join <span className="text-green-400 font-semibold">50,000+</span> members earning daily rewards
-          </span>
-        }
-      >
-        {/* Premium Badges */}
-        <div className="grid grid-cols-3 gap-2 mb-6">
-          {[
-            { icon: Gift, text: "Bonus $5", color: "from-pink-500 to-rose-500" },
-            { icon: Zap, text: "Instant", color: "from-blue-500 to-cyan-500" },
-            { icon: Shield, text: "Secure", color: "from-green-500 to-emerald-500" }
-          ].map((item, i) => (
-            <div key={i} className="relative group">
-              <div
-                className={`absolute inset-0 bg-gradient-to-r ${item.color} rounded-xl opacity-20 
-                            group-hover:opacity-30 transition-opacity blur-sm`}
-              />
-              <div className="relative bg-neutral-900/80 border border-neutral-800 rounded-xl p-2 
-                            flex flex-col items-center gap-1 backdrop-blur-sm">
-                <item.icon className="w-4 h-4 text-white" />
-                <span className="text-[10px] font-medium text-neutral-300">{item.text}</span>
-              </div>
-            </div>
-          ))}
+      <AuthPageWrapper title="" subtitle="">
+        {/* Instant Bonus Section */}
+        <div className="text-center mb-6">
+          <div className="text-lg font-medium text-neutral-900 dark:text-white">
+            Get Instant Bonus
+          </div>
+          <div className="flex items-center justify-center gap-2 text-4xl font-bold mt-2
+                          text-neutral-900 dark:text-white">
+            <Coins className="w-7 h-7 text-yellow-400" />
+            500
+          </div>
         </div>
 
         {/* Social Login */}
@@ -222,7 +201,7 @@ export default function SignupPage() {
                   onBlur={() => setFocusedField(null)}
                   placeholder="Full Name"
                   className="w-full p-4 pl-12 rounded-xl bg-neutral-900/50 border-2 
-                             border-neutral-800 text-white placeholder-neutral-600
+                             border-neutral-800 text-white dark:text-black placeholder-neutral-600
                              focus:outline-none focus:border-green-500/50 focus:bg-neutral-900/80
                              transition-all duration-300 backdrop-blur-sm
                              hover:border-neutral-700"
@@ -252,7 +231,7 @@ export default function SignupPage() {
                   onBlur={() => setFocusedField(null)}
                   placeholder="Email Address"
                   className="w-full p-4 pl-12 rounded-xl bg-neutral-900/50 border-2 
-                             border-neutral-800 text-white placeholder-neutral-600
+                             border-neutral-800 text-white dark:text-black placeholder-neutral-600
                              focus:outline-none focus:border-blue-500/50 focus:bg-neutral-900/80
                              transition-all duration-300 backdrop-blur-sm
                              hover:border-neutral-700"
@@ -282,7 +261,7 @@ export default function SignupPage() {
                   onBlur={handlePasswordBlur}
                   placeholder="Create Password"
                   className="w-full p-4 pl-12 pr-12 rounded-xl bg-neutral-900/50 border-2 
-                             border-neutral-800 text-white placeholder-neutral-600
+                             border-neutral-800 text-white dark:text-black placeholder-neutral-600
                              focus:outline-none focus:border-purple-500/50 focus:bg-neutral-900/80
                              transition-all duration-300 backdrop-blur-sm
                              hover:border-neutral-700"
