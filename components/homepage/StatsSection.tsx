@@ -2,7 +2,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Users, Target, CheckCircle, Building2, DollarSign, TrendingUp, ArrowUp, ArrowDown } from "lucide-react";
+import { Users, Target, CheckCircle, Building2, DollarSign, TrendingUp, ArrowUp, ArrowDown, Activity } from "lucide-react";
 import OpeningStyle from "@/components/animations/openingstyle";
 import { SectionTitle } from "@/components/homepage/SmallComponents";
 import { Card, CardIcon, CardTitle, CardDescription, CardGrid } from "@/components/animations/container";
@@ -30,6 +30,17 @@ export default function StatsSection() {
         value: "+12%",
         direction: 'up',
         text: "+150k this month"
+      }
+    },
+    {
+      icon: <Activity className="w-8 h-8 text-indigo-500" />,
+      value: "850K+",
+      label: "Daily Active Users",
+      description: "Users online daily",
+      trend: {
+        value: "+18%",
+        direction: 'up',
+        text: "Peak: 1.2M yesterday"
       }
     },
     {
@@ -116,8 +127,8 @@ export default function StatsSection() {
           </p>
         </div>
 
-        {/* Stats Grid */}
-        <CardGrid cols={{ default: 1, sm: 2, md: 3, lg: 5 }}>
+        {/* Stats Grid - 6 cards (2 rows of 3 on desktop) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
@@ -148,7 +159,7 @@ export default function StatsSection() {
               </Card>
             </motion.div>
           ))}
-        </CardGrid>
+        </div>
 
         {/* Achievement Highlights */}
         <div className="mt-16 flex flex-wrap justify-center gap-8 text-sm text-gray-600 dark:text-gray-400">
