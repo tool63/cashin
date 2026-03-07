@@ -18,7 +18,6 @@ export default function FeaturesSection() {
       description:
         "Lightning-fast payouts to your preferred payment method. No waiting, no delays.",
       gradient: "from-yellow-400 to-yellow-500",
-      accent: "yellow",
     },
     {
       icon: (
@@ -33,7 +32,6 @@ export default function FeaturesSection() {
       description:
         "Enterprise-grade security with 256-bit encryption. Your earnings are always protected.",
       gradient: "from-green-400 to-green-500",
-      accent: "green",
     },
     {
       icon: (
@@ -50,7 +48,6 @@ export default function FeaturesSection() {
       description:
         "Flexible payouts via PayPal, cryptocurrency, bank transfers, and gift cards.",
       gradient: "from-purple-400 to-purple-500",
-      accent: "purple",
     },
   ];
 
