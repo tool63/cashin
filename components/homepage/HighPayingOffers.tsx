@@ -5,6 +5,7 @@ import { Flame, Zap, Clock, TrendingUp, Award, Star, Gift, Crown } from "lucide-
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 import OpeningStyle from "@/components/animations/openingstyle";
+import Container, { Card, CardGrid } from "@/components/animations/container";
 import Loading from "@/components/loading/loading";
 
 /* ===================== TYPES ===================== */
@@ -187,190 +188,156 @@ export default function HighPayingOffers() {
 
   return (
     <OpeningStyle delay={0.15}>
-      <section className="relative py-20 bg-white dark:bg-[#070A14] transition-colors duration-300 overflow-hidden">
-        {/* Background decorative elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-yellow-400/5 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-green-400/5 rounded-full blur-3xl animate-pulse animation-delay-2000"></div>
-        </div>
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl sm:text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
+      <section className="max-w-7xl mx-auto px-6 py-20">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl sm:text-5xl font-extrabold mb-4">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
               High Paying Offers
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Complete these top-paying offers and earn big rewards instantly
-            </p>
-          </motion.div>
-
-          {/* CATEGORY FILTER */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex justify-center gap-3 mb-8 flex-wrap"
-          >
-            {(["Surveys", "App Installs", "Play Games", "Watch Videos"] as CategoryKey[]).map((c, index) => (
-              <motion.button
-                key={c}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setCategory(c)}
-                className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
-                  category === c
-                    ? "bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black shadow-lg hover:shadow-xl"
-                    : "bg-white dark:bg-[#111827] border border-gray-200 dark:border-white/10 text-gray-700 dark:text-gray-300 hover:border-yellow-400/50 hover:shadow-md"
-                }`}
-              >
-                {c}
-              </motion.button>
-            ))}
-          </motion.div>
-
-          {/* OFFERS TABLE */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="relative border border-white/20 dark:border-white/10 rounded-xl shadow-lg bg-white/90 dark:bg-[#111827]/80 backdrop-blur-sm overflow-hidden"
-          >
-            <div className="overflow-y-auto max-h-[600px]">
-              {/* TABLE HEADER */}
-              <div className="grid grid-cols-5 gap-4 px-6 py-4 font-semibold sticky top-0 z-10 bg-gradient-to-r from-yellow-400/10 via-green-400/10 to-green-500/10 dark:from-yellow-400/5 dark:via-green-400/5 dark:to-green-500/5 border-b border-gray-200 dark:border-white/10">
-                <span className="text-left text-gray-700 dark:text-gray-300 col-span-2">Offer</span>
-                <span className="text-center text-gray-700 dark:text-gray-300">Country</span>
-                <span className="text-center text-gray-700 dark:text-gray-300">Completions</span>
-                <span className="text-right text-gray-700 dark:text-gray-300">Payout</span>
-              </div>
-
-              {loading ? (
-                // Show skeleton rows when loading
-                Array.from({ length: 10 }).map((_, index) => (
-                  <SkeletonRow key={index} />
-                ))
-              ) : (
-                offers.map((offer, index) => (
-                  <motion.div
-                    key={offer.id}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: index * 0.02 }}
-                    className={`grid grid-cols-5 gap-4 px-6 py-4 border-b last:border-b-0 border-gray-200 dark:border-white/10 hover:bg-yellow-400/5 dark:hover:bg-yellow-400/5 transition-colors duration-200 ${
-                      index % 2 === 0 
-                        ? "bg-white/50 dark:bg-[#0B0E1A]/50" 
-                        : "bg-transparent"
-                    }`}
-                  >
-                    {/* Offer Name + Badges */}
-                    <div className="flex items-center gap-2 text-left col-span-2">
-                      <span className="text-gray-900 dark:text-white font-medium truncate" title={offer.title}>
-                        {offer.title}
-                      </span>
-                      <div className="flex gap-1 flex-shrink-0">
-                        {offer.badgeHigh && (
-                          <span title="High Paying">
-                            <Crown className="text-yellow-400" size={16} />
-                          </span>
-                        )}
-                        {offer.badgeFast && (
-                          <span title="Fast Completion">
-                            <Zap className="text-green-400" size={16} />
-                          </span>
-                        )}
-                        {offer.badgeNew && (
-                          <span title="New Offer">
-                            <Star className="text-blue-400" size={16} />
-                          </span>
-                        )}
-                        {offer.badgeTrending && (
-                          <span title="Trending">
-                            <TrendingUp className="text-purple-400" size={16} />
-                          </span>
-                        )}
-                        {offer.badgeLimited && (
-                          <span title="Limited Time">
-                            <Clock className="text-red-400" size={16} />
-                          </span>
-                        )}
-                        {offer.rating && offer.rating >= 4.7 && (
-                          <span title={`Rating: ${offer.rating}/5`}>
-                            <Award className="text-orange-400" size={16} />
-                          </span>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Country */}
-                    <div className="text-center text-gray-700 dark:text-gray-300">
-                      <span title={offer.country}>
-                        {COUNTRY_FLAG[offer.country] || offer.country}
-                      </span>
-                    </div>
-
-                    {/* Completions */}
-                    <div className="text-center text-gray-700 dark:text-gray-300">
-                      {offer.completions.toLocaleString()}
-                    </div>
-
-                    {/* Payout */}
-                    <div className="text-right font-bold text-green-600 dark:text-green-400">
-                      ${offer.payout.toFixed(2)}
-                    </div>
-                  </motion.div>
-                ))
-              )}
-
-              {!loading && offers.length === 0 && (
-                <div className="px-6 py-12 text-center text-gray-500 dark:text-gray-400">
-                  No offers available in this category
-                </div>
-              )}
-            </div>
-          </motion.div>
-
-          {/* Stats Summary */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8"
-          >
-            <div className="bg-white/50 dark:bg-[#111827]/50 backdrop-blur-sm rounded-xl p-4 border border-white/20 dark:border-white/10 text-center">
-              <div className="text-2xl font-bold text-yellow-400">{offers.length}</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Available Offers</div>
-            </div>
-            <div className="bg-white/50 dark:bg-[#111827]/50 backdrop-blur-sm rounded-xl p-4 border border-white/20 dark:border-white/10 text-center">
-              <div className="text-2xl font-bold text-green-400">
-                ${offers.reduce((sum, offer) => sum + offer.payout, 0).toFixed(0)}
-              </div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Total Potential</div>
-            </div>
-            <div className="bg-white/50 dark:bg-[#111827]/50 backdrop-blur-sm rounded-xl p-4 border border-white/20 dark:border-white/10 text-center">
-              <div className="text-2xl font-bold text-purple-400">
-                {offers.filter(o => o.badgeHigh).length}
-              </div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">High Paying</div>
-            </div>
-            <div className="bg-white/50 dark:bg-[#111827]/50 backdrop-blur-sm rounded-xl p-4 border border-white/20 dark:border-white/10 text-center">
-              <div className="text-2xl font-bold text-blue-400">
-                {offers.filter(o => o.badgeNew || o.badgeTrending).length}
-              </div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Hot Offers</div>
-            </div>
-          </motion.div>
+            </span>
+          </h2>
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            Complete these top-paying offers and earn big rewards instantly
+          </p>
         </div>
-      </section>
-    </OpeningStyle>
-  );
-}
+
+        {/* CATEGORY FILTER */}
+        <div className="flex justify-center gap-3 mb-8 flex-wrap">
+          {(["Surveys", "App Installs", "Play Games", "Watch Videos"] as CategoryKey[]).map((c, index) => (
+            <motion.button
+              key={c}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setCategory(c)}
+              className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
+                category === c
+                  ? "bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black shadow-lg hover:shadow-xl"
+                  : "bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-700 dark:text-gray-300 hover:border-blue-500/40 hover:shadow-md"
+              }`}
+            >
+              {c}
+            </motion.button>
+          ))}
+        </div>
+
+        {/* OFFERS TABLE */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="relative rounded-xl shadow-lg bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 overflow-hidden hover:border-blue-500/40 hover:shadow-xl transition-all duration-300"
+        >
+          <div className="overflow-y-auto max-h-[600px]">
+            {/* TABLE HEADER */}
+            <div className="grid grid-cols-5 gap-4 px-6 py-4 font-semibold sticky top-0 z-10 bg-gradient-to-r from-yellow-400/10 via-green-400/10 to-green-500/10 dark:from-yellow-400/5 dark:via-green-400/5 dark:to-green-500/5 border-b border-gray-200 dark:border-white/10">
+              <span className="text-left text-gray-700 dark:text-gray-300 col-span-2">Offer</span>
+              <span className="text-center text-gray-700 dark:text-gray-300">Country</span>
+              <span className="text-center text-gray-700 dark:text-gray-300">Completions</span>
+              <span className="text-right text-gray-700 dark:text-gray-300">Payout</span>
+            </div>
+
+            {loading ? (
+              // Show skeleton rows when loading
+              Array.from({ length: 10 }).map((_, index) => (
+                <SkeletonRow key={index} />
+              ))
+            ) : (
+              offers.map((offer, index) => (
+                <motion.div
+                  key={offer.id}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: index * 0.02 }}
+                  className={`grid grid-cols-5 gap-4 px-6 py-4 border-b last:border-b-0 border-gray-200 dark:border-white/10 hover:bg-yellow-400/5 dark:hover:bg-yellow-400/5 transition-colors duration-200 ${
+                    index % 2 === 0 
+                      ? "bg-white/50 dark:bg-[#0B0E1A]/50" 
+                      : "bg-transparent"
+                  }`}
+                >
+                  {/* Offer Name + Badges */}
+                  <div className="flex items-center gap-2 text-left col-span-2">
+                    <span className="text-gray-900 dark:text-white font-medium truncate" title={offer.title}>
+                      {offer.title}
+                    </span>
+                    <div className="flex gap-1 flex-shrink-0">
+                      {offer.badgeHigh && (
+                        <span title="High Paying">
+                          <Crown className="text-yellow-400" size={16} />
+                        </span>
+                      )}
+                      {offer.badgeFast && (
+                        <span title="Fast Completion">
+                          <Zap className="text-green-400" size={16} />
+                        </span>
+                      )}
+                      {offer.badgeNew && (
+                        <span title="New Offer">
+                          <Star className="text-blue-400" size={16} />
+                        </span>
+                      )}
+                      {offer.badgeTrending && (
+                        <span title="Trending">
+                          <TrendingUp className="text-purple-400" size={16} />
+                        </span>
+                      )}
+                      {offer.badgeLimited && (
+                        <span title="Limited Time">
+                          <Clock className="text-red-400" size={16} />
+                        </span>
+                      )}
+                      {offer.rating && offer.rating >= 4.7 && (
+                        <span title={`Rating: ${offer.rating}/5`}>
+                          <Award className="text-orange-400" size={16} />
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Country */}
+                  <div className="text-center text-gray-700 dark:text-gray-300">
+                    <span title={offer.country}>
+                      {COUNTRY_FLAG[offer.country] || offer.country}
+                    </span>
+                  </div>
+
+                  {/* Completions */}
+                  <div className="text-center text-gray-700 dark:text-gray-300">
+                    {offer.completions.toLocaleString()}
+                  </div>
+
+                  {/* Payout */}
+                  <div className="text-right font-bold text-green-600 dark:text-green-400">
+                    ${offer.payout.toFixed(2)}
+                  </div>
+                </motion.div>
+              ))
+            )}
+
+            {!loading && offers.length === 0 && (
+              <div className="px-6 py-12 text-center text-gray-500 dark:text-gray-400">
+                No offers available in this category
+              </div>
+            )}
+          </div>
+        </motion.div>
+
+        {/* Stats Summary */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+          <div className="bg-gray-100 dark:bg-white/5 rounded-xl p-4 border border-gray-200 dark:border-white/10 text-center hover:border-blue-500/40 hover:shadow-xl transition-all duration-300">
+            <div className="text-2xl font-bold text-yellow-400">{offers.length}</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">Available Offers</div>
+          </div>
+          <div className="bg-gray-100 dark:bg-white/5 rounded-xl p-4 border border-gray-200 dark:border-white/10 text-center hover:border-blue-500/40 hover:shadow-xl transition-all duration-300">
+            <div className="text-2xl font-bold text-green-400">
+              ${offers.reduce((sum, offer) => sum + offer.payout, 0).toFixed(0)}
+            </div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">Total Potential</div>
+          </div>
+          <div className="bg-gray-100 dark:bg-white/5 rounded-xl p-4 border border-gray-200 dark:border-white/10 text-center hover:border-blue-500/40 hover:shadow-xl transition-all duration-300">
+            <div className="text-2xl font-bold text-purple-400">
+              {offers.filter(o => o.badgeHigh).length}
+            </div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">High Paying</div>
+          </div>
+          <div className="bg-gray-100 dark:bg-white/5 rounded-xl p-4 border border-gray-200 dark:border-white/10 text-center hover:border-blue-500/40 hover:
