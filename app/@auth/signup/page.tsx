@@ -47,7 +47,7 @@ export default function SignupPage() {
     special: false
   });
 
-  // Password strength checker (only runs when password exists)
+  // Password strength checker
   useEffect(() => {
     if (!formData.password) {
       setPasswordStrength(0);
@@ -148,7 +148,7 @@ export default function SignupPage() {
           </span>
         }
         subtitle={
-          <span className="text-neutral-400">
+          <span>
             Join <span className="text-green-400 font-semibold">50,000+</span> members earning daily rewards
           </span>
         }
@@ -177,7 +177,7 @@ export default function SignupPage() {
         {/* Social Login */}
         <SocialButtons />
 
-        {/* Continue with Email Button */}
+        {/* Continue with Email */}
         {!formVisible && (
           <button
             onClick={handleContinueWithEmail}
@@ -299,7 +299,7 @@ export default function SignupPage() {
               </div>
             </div>
 
-            {/* Password Strength (only when focused & has value) */}
+            {/* Password Strength */}
             {showStrength && formData.password && (
               <div className="mb-4 animate-slideDown">
                 <div className="flex justify-between items-center mb-2">
@@ -401,11 +401,9 @@ export default function SignupPage() {
                        group-hover:gap-2"
           >
             <span>Log In</span>
-            <ArrowRight
-              className="w-3 h-3 opacity-0 -translate-x-2 
-                           group-hover:opacity-100 group-hover:translate-x-0 
-                           transition-all"
-            />
+            <ArrowRight className="w-3 h-3 opacity-0 -translate-x-2 
+                                 group-hover:opacity-100 group-hover:translate-x-0 
+                                 transition-all" />
           </Link>
         </p>
 
