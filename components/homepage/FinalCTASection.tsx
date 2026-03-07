@@ -1,5 +1,3 @@
-// components/homepage/FinalCTASection.tsx
-
 "use client";
 
 import { ArrowRight } from "lucide-react";
@@ -9,7 +7,7 @@ import OpeningStyle from "@/components/animations/openingstyle";
 
 export default function FinalCTASection() {
   return (
-    <OpeningStyle delay={0.2} duration={0.8}>
+    <OpeningStyle delay={0.2}>
       <section className="relative py-28 px-4 text-center bg-white dark:bg-[#070A14] transition-colors duration-300 overflow-hidden rounded-b-[50px] shadow-xl">
         <div className="max-w-4xl mx-auto">
           
