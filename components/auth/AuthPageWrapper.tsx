@@ -3,8 +3,8 @@
 import { ReactNode } from "react";
 
 interface AuthPageWrapperProps {
-  title: string;
-  subtitle: string;
+  title: ReactNode;
+  subtitle: ReactNode;
   children: ReactNode;
 }
 
