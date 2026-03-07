@@ -1,6 +1,6 @@
 "use client";
 
-import { Zap, ShieldCheck, Wallet } from "lucide-react";
+import { Rocket, BadgeCheck, CreditCard } from "lucide-react";
 import { SectionTitle } from "@/components/homepage/SmallComponents";
 import { motion } from "framer-motion";
 import OpeningStyle from "@/components/animations/openingstyle";
@@ -8,21 +8,21 @@ import OpeningStyle from "@/components/animations/openingstyle";
 export default function FeaturesSection() {
   const features = [
     {
-      icon: <Zap className="text-yellow-400 mb-4" size={40} />,
+      icon: <Rocket className="text-yellow-400" size={48} />,
       title: "Instant Withdrawals",
       description:
         "Get your earnings instantly with zero delays. Fast, secure, and reliable withdrawals.",
       gradient: "from-yellow-400 to-yellow-500",
     },
     {
-      icon: <ShieldCheck className="text-green-400 mb-4" size={40} />,
+      icon: <BadgeCheck className="text-green-400" size={48} />,
       title: "Secure & Trusted",
       description:
         "Trusted by millions worldwide. Your data and earnings are fully protected.",
       gradient: "from-green-400 to-green-500",
     },
     {
-      icon: <Wallet className="text-purple-400 mb-4" size={40} />,
+      icon: <CreditCard className="text-purple-400" size={48} />,
       title: "Multiple Payment Options",
       description:
         "Choose from PayPal, crypto, or gift cards. Flexible payouts that suit your lifestyle.",
@@ -56,19 +56,19 @@ export default function FeaturesSection() {
                 scale: 1.02,
                 transition: { duration: 0.3 }
               }}
-              className="group relative bg-white dark:bg-[#111827]/80 backdrop-blur-sm border border-gray-200 dark:border-white/10 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300"
+              className="group relative bg-white dark:bg-[#111827]/80 backdrop-blur-sm border border-gray-200 dark:border-white/10 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col items-center text-center"
             >
               {/* Animated gradient border on hover */}
               <div className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
               
-              {/* Icon with gradient background */}
-              <div className={`relative inline-flex p-3 rounded-xl bg-gradient-to-r ${feature.gradient} bg-opacity-10 mb-4`}>
+              {/* Icon with gradient background - Centered */}
+              <div className={`relative inline-flex p-4 rounded-xl bg-gradient-to-r ${feature.gradient} bg-opacity-10 mb-6 mx-auto`}>
                 <div className="text-gray-900 dark:text-white">
                   {feature.icon}
                 </div>
               </div>
               
-              <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
+              <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
                 {feature.title}
               </h3>
               <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
