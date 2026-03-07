@@ -72,13 +72,11 @@ export default function HomePage() {
       <main className="relative min-h-screen bg-transparent text-gray-900 dark:text-white">
 
         {/* =====================================================
-            SECTION 1: HERO - WITH BORDER (p-3)
+            SECTION 1: HERO
         ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
-            <section className="bg-transparent">
-              <HeroSection />
-            </section>
+            <HeroSection />
           </RevealWithBorder>
         </OpeningStyle>
 
@@ -86,13 +84,11 @@ export default function HomePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 2: LIVE JOINING - WITH BORDER (MATCHING HERO)
+            SECTION 2: LIVE JOINING
         ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
-            <section className="max-w-7xl mx-auto px-4 py-10 bg-transparent">
-              <LiveJoining />
-            </section>
+            <LiveJoining />
           </RevealWithBorder>
         </OpeningStyle>
 
@@ -100,13 +96,11 @@ export default function HomePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 3: LIVE EARNINGS - WITH BORDER (MATCHING HERO)
+            SECTION 3: LIVE EARNINGS
         ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
-            <section className="max-w-7xl mx-auto px-4 py-10 bg-transparent">
-              <LiveEarnings />
-            </section>
+            <LiveEarnings />
           </RevealWithBorder>
         </OpeningStyle>
 
@@ -114,13 +108,11 @@ export default function HomePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 4: LIVE OFFER COMPLETION - WITH BORDER (MATCHING HERO)
+            SECTION 4: LIVE OFFER COMPLETION
         ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
-            <section className="max-w-7xl mx-auto px-4 py-10 bg-transparent">
-              <LiveOfferCompletion />
-            </section>
+            <LiveOfferCompletion />
           </RevealWithBorder>
         </OpeningStyle>
 
@@ -128,13 +120,11 @@ export default function HomePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 5: LIVE WITHDRAWALS - WITH BORDER (MATCHING HERO)
+            SECTION 5: LIVE WITHDRAWALS
         ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
-            <section className="max-w-7xl mx-auto px-4 py-10 bg-transparent">
-              <LiveWithdrawals />
-            </section>
+            <LiveWithdrawals />
           </RevealWithBorder>
         </OpeningStyle>
 
@@ -142,15 +132,11 @@ export default function HomePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 6: FEATURES - WITH BORDER (MATCHING HERO)
+            SECTION 6: FEATURES
         ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
-            <section className="bg-transparent py-8">
-              <div className="max-w-7xl mx-auto px-4">
-                <FeaturesSection />
-              </div>
-            </section>
+            <FeaturesSection />
           </RevealWithBorder>
         </OpeningStyle>
 
@@ -158,13 +144,11 @@ export default function HomePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 7: TASKS - WITH BORDER (MATCHING HERO)
+            SECTION 7: TASKS
         ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
-            <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
-              <TasksSection />
-            </section>
+            <TasksSection />
           </RevealWithBorder>
         </OpeningStyle>
 
@@ -172,13 +156,11 @@ export default function HomePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 8: HIGH PAYING OFFERS - WITH BORDER (MATCHING HERO)
+            SECTION 8: HIGH PAYING OFFERS
         ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
-            <section className="max-w-7xl mx-auto px-4 py-8 bg-transparent">
-              <HighPayingOffers />
-            </section>
+            <HighPayingOffers />
           </RevealWithBorder>
         </OpeningStyle>
 
@@ -186,17 +168,11 @@ export default function HomePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 9: TRUST - WITH BORDER (MATCHING HERO)
+            SECTION 9: TRUST
         ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
-            <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
-              <div className="flex justify-center">
-                <div className="w-full">
-                  <TrustSection />
-                </div>
-              </div>
-            </section>
+            <TrustSection />
           </RevealWithBorder>
         </OpeningStyle>
 
@@ -204,13 +180,11 @@ export default function HomePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 10: PAYMENTS - WITH BORDER (MATCHING HERO)
+            SECTION 10: PAYMENTS
         ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
-            <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
-              <PaymentSection />
-            </section>
+            <PaymentSection />
           </RevealWithBorder>
         </OpeningStyle>
 
@@ -218,7 +192,7 @@ export default function HomePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 11: FAQ - WITH BORDER (MATCHING HERO)
+            SECTION 11: FAQ
         ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
@@ -268,13 +242,11 @@ export default function HomePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 12: FINAL CTA - WITH BORDER (MATCHING HERO)
+            SECTION 12: FINAL CTA
         ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
-            <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
-              <FinalCTASection />
-            </section>
+            <FinalCTASection />
           </RevealWithBorder>
         </OpeningStyle>
 
