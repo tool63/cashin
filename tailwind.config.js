@@ -16,7 +16,7 @@ module.exports = {
         blobMove: "blobMove 30s linear infinite",
         blobMove2: "blobMove2 45s linear infinite",
 
-        // NEW (Skeleton shimmer)
+        // Skeleton shimmer
         shimmer: "shimmer 1.6s linear infinite",
       },
 
@@ -47,21 +47,15 @@ module.exports = {
           "100%": { transform: "translate(0, 0) rotate(-360deg)" },
         },
 
-        // NEW (Skeleton shimmer animation)
         shimmer: {
-          "0%": {
-            transform: "translateX(-100%)",
-          },
-          "100%": {
-            transform: "translateX(100%)",
-          },
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100%)" },
         },
       },
 
       backgroundSize: {
         "200": "200% 200%",
       },
-
     },
   },
 
