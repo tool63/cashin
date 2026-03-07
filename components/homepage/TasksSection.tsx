@@ -3,6 +3,7 @@
 
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 import { earningOptions } from "@/components/homepage/earningOptions";
 import { SectionTitle } from "@/components/homepage/SmallComponents";
 import OpeningStyle from "@/components/animations/openingstyle";
@@ -40,20 +41,28 @@ export default function TasksSection() {
 
         {/* Task Cards Grid */}
         <CardGrid cols={{ default: 2, md: 3, lg: 4 }}>
-          {earningOptions.map(([icon, title, href]) => (
-            <Link key={title} href={href} className="block">
-              <Card>
-                <CardIcon>{icon}</CardIcon>
-                <CardTitle>{title}</CardTitle>
-                <CardDescription>
-                  {earningDescriptions[title] ||
-                    `Earn rewards with ${title.toLowerCase()}`}
-                </CardDescription>
-                <CardCTA>
-                  Start earning <ArrowRight size={16} />
-                </CardCTA>
-              </Card>
-            </Link>
+          {earningOptions.map(([icon, title, href], index) => (
+            <motion.div
+              key={title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+            >
+              <Link href={href} className="block">
+                <Card>
+                  <CardIcon>{icon}</CardIcon>
+                  <CardTitle>{title}</CardTitle>
+                  <CardDescription>
+                    {earningDescriptions[title] ||
+                      `Earn rewards with ${title.toLowerCase()}`}
+                  </CardDescription>
+                  <CardCTA>
+                    Start earning <ArrowRight size={16} />
+                  </CardCTA>
+                </Card>
+              </Link>
+            </motion.div>
           ))}
         </CardGrid>
       </section>
