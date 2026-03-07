@@ -340,4 +340,14 @@ export default function HighPayingOffers() {
             </div>
             <div className="text-sm text-gray-600 dark:text-gray-400">High Paying</div>
           </div>
-          <div className="bg-gray-100 dark:bg-white/5 rounded-xl p-4 border border-gray-200 dark:border-white/10 text-center hover:border-blue-500/40 hover:
+          <div className="bg-gray-100 dark:bg-white/5 rounded-xl p-4 border border-gray-200 dark:border-white/10 text-center hover:border-blue-500/40 hover:shadow-xl transition-all duration-300">
+            <div className="text-2xl font-bold text-blue-400">
+              {offers.filter(o => o.badgeNew || o.badgeTrending).length}
+            </div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">Hot Offers</div>
+          </div>
+        </div>
+      </section>
+    </OpeningStyle>
+  );
+}
