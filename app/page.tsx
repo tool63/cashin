@@ -10,9 +10,6 @@ import SeoRenderer from "@/components/SEO/SeoRenderer";
 import Background from "@/components/Background";
 import FAQ from "@/components/faq/FAQ";
 
-import OpeningStyle from "@/components/animations/openingstyle";
-import RevealWithBorder from "@/components/animations/RevealWithBorder";
-
 /* Homepage Sections */
 import HeroSection from "@/components/homepage/HeroSection";
 import FeaturesSection from "@/components/homepage/FeaturesSection";
@@ -107,11 +104,9 @@ export default function HomePage() {
             SECTION 3: FEATURES
         ===================================================== */}
         <section className="bg-transparent py-8">
-          <OpeningStyle>
-            <div className="max-w-7xl mx-auto px-4">
-              <FeaturesSection />
-            </div>
-          </OpeningStyle>
+          <div className="max-w-7xl mx-auto px-4">
+            <FeaturesSection />
+          </div>
         </section>
 
         {/* Visual Separator */}
@@ -133,11 +128,9 @@ export default function HomePage() {
             SECTION 5: HIGH PAYING OFFERS
         ===================================================== */}
         <section className="max-w-7xl mx-auto px-4 py-8 bg-transparent">
-          <RevealWithBorder>
-            <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6">
-              <HighPayingOffers />
-            </div>
-          </RevealWithBorder>
+          <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-6">
+            <HighPayingOffers />
+          </div>
         </section>
 
         {/* Visual Separator */}
