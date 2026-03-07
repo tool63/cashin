@@ -8,16 +8,11 @@ import OpeningStyle from "@/components/animations/openingstyle";
 export default function FinalCTASection() {
   return (
     <OpeningStyle delay={0.2}>
-      <section className="max-w-7xl mx-auto px-6 py-20 text-center">
-        {/* Single container matching TasksSection card style */}
-        <div className="relative rounded-3xl p-12 md:p-16 flex flex-col items-center
-          bg-gray-100 dark:bg-white/5
-          border border-gray-200 dark:border-white/10
-          hover:border-blue-500/40
-          hover:shadow-xl
-          transition-all duration-300
-          group"
-        >
+      <section className="max-w-7xl mx-auto px-6 py-20">
+        {/* Section container - matching FeaturesSection and TasksSection pattern */}
+        <div className="text-center">
+          {/* No extra container with card styling - just the section content */}
+          
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
               Start Earning Real Money Today!
@@ -28,21 +23,34 @@ export default function FinalCTASection() {
             Join millions of users already earning daily. Complete surveys, tasks, and high-paying offers securely from anywhere.
           </p>
 
-          {/* CTA BUTTON - Original gradient background */}
-          <div className="cta-observer">
+          {/* CTA BUTTON - With hover effects matching card patterns */}
+          <div className="cta-observer inline-block">
             <Link href="/signup">
-              <motion.span
+              <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black px-16 py-6 rounded-3xl font-bold shadow-xl text-lg md:text-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer"
+                className="group relative rounded-3xl px-16 py-6 flex items-center gap-3
+                  bg-gradient-to-r from-yellow-400 via-green-400 to-green-500
+                  hover:shadow-xl
+                  transition-all duration-300
+                  hover:-translate-y-1
+                  cursor-pointer"
               >
-                Get Started Now <ArrowRight />
-              </motion.span>
+                <span className="text-lg md:text-xl font-bold text-black">
+                  Get Started Now
+                </span>
+                <ArrowRight className="text-black group-hover:translate-x-1 transition-transform duration-300" />
+                
+                {/* CTA indicator - matching TasksSection style */}
+                <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-1 text-blue-500 text-sm font-medium opacity-0 group-hover:opacity-100 transition whitespace-nowrap">
+                  Start earning today <ArrowRight size={16} />
+                </div>
+              </motion.div>
             </Link>
           </div>
 
-          {/* Optional trust indicators */}
-          <div className="mt-12 flex flex-wrap justify-center gap-8 text-sm text-gray-600 dark:text-gray-400">
+          {/* Trust indicators - with matching text colors */}
+          <div className="mt-16 flex flex-wrap justify-center gap-8 text-sm text-gray-600 dark:text-gray-400">
             <div className="flex items-center gap-2">
               <span className="text-green-500">✓</span> 1M+ Happy Users
             </div>
