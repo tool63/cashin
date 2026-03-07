@@ -54,12 +54,12 @@ export default function TrustSection() {
               <span className="text-6xl mb-4">{feature.icon}</span>
 
               {/* Title */}
-              <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white text-center">
+              <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white text-center">
                 {feature.title}
               </h3>
 
               {/* Description */}
-              <p className="text-gray-600 dark:text-gray-400 text-center">
+              <p className="text-gray-600 dark:text-gray-400 text-center text-sm">
                 {feature.description}
               </p>
 
