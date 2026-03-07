@@ -72,7 +72,7 @@ export default function HomePage() {
       <main className="relative min-h-screen bg-transparent text-gray-900 dark:text-white">
 
         {/* =====================================================
-            SECTION 1: HERO (NO BORDER)
+            SECTION 1: HERO (NO BORDER) - WITH ANIMATION
         ===================================================== */}
         <OpeningStyle>
           <section className="bg-transparent">
@@ -84,23 +84,12 @@ export default function HomePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 2: LIVE ACTIVITY (4 components) - WITH BORDER
+            SECTION 2: LIVE JOINING - WITH BORDER
         ===================================================== */}
         <RevealWithBorder>
           <section className="max-w-7xl mx-auto px-4 py-10 bg-transparent">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-3 border border-white/20 dark:border-white/10 shadow-lg">
-                <LiveJoining />
-              </div>
-              <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-3 border border-white/20 dark:border-white/10 shadow-lg">
-                <LiveEarnings />
-              </div>
-              <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-3 border border-white/20 dark:border-white/10 shadow-lg">
-                <LiveOfferCompletion />
-              </div>
-              <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-3 border border-white/20 dark:border-white/10 shadow-lg">
-                <LiveWithdrawals />
-              </div>
+            <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-3 border border-white/20 dark:border-white/10 shadow-lg">
+              <LiveJoining />
             </div>
           </section>
         </RevealWithBorder>
@@ -109,7 +98,49 @@ export default function HomePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 3: FEATURES - WITH BORDER
+            SECTION 3: LIVE EARNINGS - WITH BORDER
+        ===================================================== */}
+        <RevealWithBorder>
+          <section className="max-w-7xl mx-auto px-4 py-10 bg-transparent">
+            <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-3 border border-white/20 dark:border-white/10 shadow-lg">
+              <LiveEarnings />
+            </div>
+          </section>
+        </RevealWithBorder>
+
+        {/* Visual Separator */}
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
+
+        {/* =====================================================
+            SECTION 4: LIVE OFFER COMPLETION - WITH BORDER
+        ===================================================== */}
+        <RevealWithBorder>
+          <section className="max-w-7xl mx-auto px-4 py-10 bg-transparent">
+            <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-3 border border-white/20 dark:border-white/10 shadow-lg">
+              <LiveOfferCompletion />
+            </div>
+          </section>
+        </RevealWithBorder>
+
+        {/* Visual Separator */}
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
+
+        {/* =====================================================
+            SECTION 5: LIVE WITHDRAWALS - WITH BORDER
+        ===================================================== */}
+        <RevealWithBorder>
+          <section className="max-w-7xl mx-auto px-4 py-10 bg-transparent">
+            <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl p-3 border border-white/20 dark:border-white/10 shadow-lg">
+              <LiveWithdrawals />
+            </div>
+          </section>
+        </RevealWithBorder>
+
+        {/* Visual Separator */}
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
+
+        {/* =====================================================
+            SECTION 6: FEATURES - WITH BORDER
         ===================================================== */}
         <RevealWithBorder>
           <section className="bg-transparent py-8">
@@ -122,10 +153,10 @@ export default function HomePage() {
         </RevealWithBorder>
 
         {/* Visual Separator */}
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 4: TASKS - WITH BORDER
+            SECTION 7: TASKS - WITH BORDER
         ===================================================== */}
         <RevealWithBorder>
           <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
@@ -136,10 +167,10 @@ export default function HomePage() {
         </RevealWithBorder>
 
         {/* Visual Separator */}
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 5: HIGH PAYING OFFERS - WITH BORDER
+            SECTION 8: HIGH PAYING OFFERS - WITH BORDER
         ===================================================== */}
         <RevealWithBorder>
           <section className="max-w-7xl mx-auto px-4 py-8 bg-transparent">
@@ -150,10 +181,10 @@ export default function HomePage() {
         </RevealWithBorder>
 
         {/* Visual Separator */}
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 6: TRUST - WITH BORDER (FIXED CENTERING)
+            SECTION 9: TRUST - WITH BORDER (FIXED CENTERING)
         ===================================================== */}
         <RevealWithBorder>
           <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
@@ -166,10 +197,10 @@ export default function HomePage() {
         </RevealWithBorder>
 
         {/* Visual Separator */}
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 7: PAYMENTS - WITH BORDER
+            SECTION 10: PAYMENTS - WITH BORDER
         ===================================================== */}
         <RevealWithBorder>
           <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
@@ -180,10 +211,10 @@ export default function HomePage() {
         </RevealWithBorder>
 
         {/* Visual Separator */}
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 8: FAQ - WITH BORDER (FIXED CONTENT POSITIONING)
+            SECTION 11: FAQ - WITH BORDER (FIXED CONTENT POSITIONING)
         ===================================================== */}
         <RevealWithBorder>
           <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
@@ -230,10 +261,10 @@ export default function HomePage() {
         </RevealWithBorder>
 
         {/* Visual Separator */}
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
 
         {/* =====================================================
-            SECTION 9: FINAL CTA - WITH BORDER
+            SECTION 12: FINAL CTA - WITH BORDER
         ===================================================== */}
         <RevealWithBorder>
           <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
