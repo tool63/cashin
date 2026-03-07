@@ -18,7 +18,8 @@ import {
   ArrowRight,
   Heart,
   Chrome,
-  Facebook
+  Facebook,
+  Coins
 } from "lucide-react";
 
 const AUTH_BASE =
@@ -142,12 +143,16 @@ export default function SignupPage() {
   return (
     <AuthModal>
       <AuthPageWrapper title="" subtitle="">
-        {/* Sign Up Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 
-                         bg-clip-text text-transparent mb-2">
-            Sign Up
+        {/* Get Instant Bonus Header with Badge */}
+        <div className="flex items-center justify-between mb-8">
+          <h1 className="text-3xl font-bold text-black dark:text-white">
+            Get Instant Bonus
           </h1>
+          <div className="flex items-center gap-1 bg-gradient-to-r from-yellow-400/20 to-amber-500/20 
+                          px-3 py-1.5 rounded-full border border-yellow-500/30">
+            <Coins className="w-4 h-4 text-yellow-500" />
+            <span className="font-bold text-yellow-500 text-sm">$0.50</span>
+          </div>
         </div>
 
         {/* Social Login Buttons */}
@@ -190,7 +195,7 @@ export default function SignupPage() {
           <div className="flex-grow border-t border-neutral-200 dark:border-neutral-800"></div>
         </div>
 
-        {/* Continue with Email Button */}
+        {/* Continue with Email Button - Always visible */}
         <button
           onClick={handleContinueWithEmail}
           className="w-full py-3.5 rounded-xl 
@@ -200,18 +205,19 @@ export default function SignupPage() {
                      font-medium flex items-center justify-center gap-2
                      hover:border-green-500 dark:hover:border-green-500
                      hover:bg-neutral-50 dark:hover:bg-neutral-800
-                     transition-all duration-300 group"
+                     transition-all duration-300 group
+                     mb-6"
         >
           <Mail className="w-4 h-4 text-neutral-500 dark:text-neutral-400 
                           group-hover:text-green-500 dark:group-hover:text-green-400" />
           <span>Continue with Email</span>
         </button>
 
-        {/* Form (only visible after clicking email) */}
+        {/* Form (visible after clicking email) */}
         {formVisible && (
           <>
             {/* Full Name Field */}
-            <div className="relative mt-6 mb-4 group">
+            <div className="relative mb-4 group">
               <div
                 className={`absolute inset-0 bg-gradient-to-r from-green-500/20 to-blue-500/20 rounded-xl 
                             transition-opacity duration-500 ${
@@ -322,7 +328,7 @@ export default function SignupPage() {
               </div>
             </div>
 
-            {/* Password Strength Indicator */}
+            {/* Password Strength Indicator - FIXED: Now working properly in light/dark mode */}
             {showStrength && formData.password && (
               <div className="mb-4 animate-slideDown">
                 {/* Strength Bars */}
@@ -334,7 +340,7 @@ export default function SignupPage() {
                         className={`h-1.5 flex-1 rounded-full transition-all duration-300
                                    ${i < passwordStrength 
                                      ? getStrengthColor() 
-                                     : "bg-neutral-200 dark:bg-neutral-800"}`}
+                                     : "bg-neutral-200 dark:bg-neutral-700"}`}
                       />
                     ))}
                   </div>
