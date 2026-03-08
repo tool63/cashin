@@ -19,25 +19,10 @@ export default function AuthModal({ children, onClose }: AuthModalProps) {
   }, [onClose]);
 
   return (
-    <div
-      className="
-        relative w-full max-w-md
-        bg-gradient-to-br
-        from-yellow-400/20
-        via-green-400/30
-        to-green-500/20
-        border
-        rounded-2xl
-        p-8
-        shadow-2xl
-        backdrop-blur-xl
-        animate-in fade-in zoom-in-95 duration-200
-      "
-    >
+    <div className="relative w-full max-w-md bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20 border rounded-2xl p-8 shadow-2xl backdrop-blur-xl">
       <button onClick={onClose} className="absolute top-4 right-4">
         <X size={20} />
       </button>
-
       {children}
     </div>
   );
