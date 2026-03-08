@@ -2,7 +2,7 @@
 
 import "../styles/globals.css";
 import { ReactNode, useMemo, useEffect, useState, useCallback, Suspense } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { ErrorBoundary } from "react-error-boundary";
 import dynamic from "next/dynamic";
 
@@ -47,6 +47,7 @@ import ModalRoot from "@/components/modals/ModalRoot";
 import AuthModal from "@/components/modals/AuthModal";
 import LoginPage from "@/app/@auth/login/page";
 import SignupPage from "@/app/@auth/signup/page";
+import ResetPage from "@/app/@auth/reset/page";
 
 interface RootLayoutProps {
   children: ReactNode;
@@ -54,11 +55,16 @@ interface RootLayoutProps {
 
 function LayoutErrorFallback({ error, resetErrorBoundary }: { error: Error; resetErrorBoundary: () => void }) {
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="p-8 text-center">
-        <h1>Something went wrong</h1>
-        <p>{error.message}</p>
-        <button onClick={resetErrorBoundary}>Try Again</button>
+    <div className="min-h-screen flex items-center justify-center bg-[#0E111B]">
+      <div className="p-8 text-center max-w-md">
+        <h1 className="text-2xl font-bold text-white mb-4">Something went wrong</h1>
+        <p className="text-gray-400 mb-6">{error.message}</p>
+        <button 
+          onClick={resetErrorBoundary}
+          className="px-6 py-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black font-bold rounded-xl hover:shadow-lg transition-all"
+        >
+          Try Again
+        </button>
       </div>
     </div>
   );
@@ -67,6 +73,7 @@ function LayoutErrorFallback({ error, resetErrorBoundary }: { error: Error; rese
 export default function RootLayout({ children }: RootLayoutProps) {
   const pathname = usePathname() || "/";
   const searchParams = useSearchParams();
+  const router = useRouter();
 
   const [mounted, setMounted] = useState(false);
   const [seo, setSeo] = useState<SEOOutput | null>(null);
@@ -77,8 +84,22 @@ export default function RootLayout({ children }: RootLayoutProps) {
   }, []);
 
   // Modal logic from query param
-  const authType = searchParams?.get("auth"); // "login" or "signup"
-  const hasAuthModal = authType === "login" || authType === "signup";
+  const authType = searchParams?.get("auth"); // "login", "signup", or "reset"
+  const hasAuthModal = authType === "login" || authType === "signup" || authType === "reset";
+
+  const closeModal = useCallback(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("auth");
+    
+    const query = params.toString();
+    const url = query ? `?${query}` : window.location.pathname;
+    
+    // Use replace to avoid adding to history stack
+    window.history.replaceState({}, "", url);
+    
+    // Also trigger router refresh for any server components
+    router.refresh();
+  }, [searchParams, router]);
 
   const { hideLayout, isDashboardPage } = useMemo(() => {
     const isAuthPage =
@@ -116,6 +137,32 @@ export default function RootLayout({ children }: RootLayoutProps) {
     };
   }, [pathname, hideLayout, mounted]);
 
+  // Prevent background scroll when modal is open
+  useEffect(() => {
+    if (hasAuthModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [hasAuthModal]);
+
+  const renderAuthContent = () => {
+    switch (authType) {
+      case "login":
+        return <LoginPage />;
+      case "signup":
+        return <SignupPage />;
+      case "reset":
+        return <ResetPage />;
+      default:
+        return null;
+    }
+  };
+
   const fallbackRender = useCallback(
     ({ error, resetErrorBoundary }: { error: Error; resetErrorBoundary: () => void }) => (
       <LayoutErrorFallback error={error} resetErrorBoundary={resetErrorBoundary} />
@@ -125,25 +172,53 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
+      <body className="min-h-screen bg-[#0E111B] text-white">
         <ErrorBoundary fallbackRender={fallbackRender}>
           <ThemeProviderWrapper>
-            {mounted && <Background />}
-            {mounted && seo && <SeoRenderer seo={seo} />}
-            {mounted && seoLoading && <div className="h-1 bg-gradient-to-r" />}
+            {/* Background Layer */}
+            {mounted && (
+              <Suspense fallback={null}>
+                <Background />
+              </Suspense>
+            )}
+            
+            {/* SEO Metadata */}
+            {mounted && seo && (
+              <Suspense fallback={null}>
+                <SeoRenderer seo={seo} />
+              </Suspense>
+            )}
+            
+            {/* Loading Indicator */}
+            {mounted && seoLoading && (
+              <div className="fixed top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 animate-pulse z-50" />
+            )}
 
-            <div className="relative flex min-h-screen flex-col">
-              {/* HEADER */}
+            {/* Main Content */}
+            <div className="relative flex min-h-screen flex-col bg-transparent">
+              {/* HEADER - Only show when not in auth page or modal mode */}
               {!hideLayout && mounted && (
-                <header className="fixed top-0 w-full">
+                <header className="fixed top-0 left-0 w-full z-40 bg-[#0E111B]/80 backdrop-blur-xl border-b border-[#2A2F3E]">
                   <Suspense fallback={<div className="h-16 animate-pulse" />}>
                     <Header />
                   </Suspense>
                 </header>
               )}
 
-              {/* MAIN CONTENT */}
-              <main className={hideLayout ? "flex-1" : isDashboardPage ? "pt-16" : "pt-20"}>
+              {/* MAIN CONTENT with proper padding */}
+              <main 
+                className={`flex-1 bg-transparent ${
+                  hideLayout 
+                    ? "min-h-screen flex items-center justify-center" 
+                    : isDashboardPage 
+                      ? "pt-16" 
+                      : "pt-20"
+                }`}
+              >
                 {children}
               </main>
 
@@ -162,14 +237,21 @@ export default function RootLayout({ children }: RootLayoutProps) {
               )}
             </div>
 
-            {/* MODAL LOGIC */}
-            {hasAuthModal && (
-              <ModalRoot isOpen onClose={() => window.history.replaceState({}, "", window.location.pathname)}>
-                <AuthModal
-                  onClose={() => window.history.replaceState({}, "", window.location.pathname)}
-                >
-                  {authType === "login" && <LoginPage />}
-                  {authType === "signup" && <SignupPage />}
+            {/* AUTH MODAL - Rendered via portal */}
+            {hasAuthModal && mounted && (
+              <ModalRoot isOpen={true} onClose={closeModal}>
+                <AuthModal onClose={closeModal}>
+                  {renderAuthContent()}
+                  
+                  {/* Anti-fraud notice - only for signup */}
+                  {authType === "signup" && (
+                    <div className="px-6 pb-6">
+                      <p className="text-xs text-gray-500 text-center">
+                        Users are prohibited from using multiple accounts, completing offers on another user's account, 
+                        or using any type of VPN, VPS, or Emulator software.
+                      </p>
+                    </div>
+                  )}
                 </AuthModal>
               </ModalRoot>
             )}
