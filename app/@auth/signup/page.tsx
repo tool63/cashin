@@ -66,14 +66,15 @@ export default function SignupPage() {
     special: false
   });
 
-  // SEO Hydration
+  // SEO Hydration - FIXED: Using correct SEO_CONFIG structure
   useEffect(() => {
     setMounted(true);
     let mounted = true;
 
+    // Using the same pattern as homepage - direct access to defaultLocale
     buildSEO({ 
       route: "/signup", 
-      locale: SEO_CONFIG.site.defaultLocale 
+      locale: SEO_CONFIG.defaultLocale 
     })
       .then((result) => {
         if (mounted) setSeo(result);
