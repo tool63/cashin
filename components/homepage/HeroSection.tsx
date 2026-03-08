@@ -30,7 +30,7 @@ export default function HeroSection() {
 
         {/* CTA BUTTON */}
         <div className="inline-block">
-          <Link href="/signup" passHref>
+          <Link href="/?auth=signup" passHref>
             <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
