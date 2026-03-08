@@ -4,6 +4,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import Reveal from "./openingstyle";
 
 interface RevealWithBorderProps {
   children: React.ReactNode;
