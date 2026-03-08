@@ -2,7 +2,7 @@
 
 import "../styles/globals.css";
 import { ReactNode, useMemo, useEffect, useState, useCallback, Suspense } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { ErrorBoundary } from "react-error-boundary";
 import dynamic from "next/dynamic";
 
@@ -17,136 +17,162 @@ declare global {
   }
 }
 
-// Dynamic imports (kept but not blocking layout)
-const Header = dynamic(() => import("@/components/Header"), { ssr: false });
-const Footer = dynamic(() => import("@/components/Footer"), { ssr: false });
-const FloatingCTA = dynamic(() => import("@/components/cta/FloatingCTA"), { ssr: false });
-const Background = dynamic(() => import("@/components/Background"), { ssr: false });
-const SeoRenderer = dynamic(() => import("@/components/SEO/SeoRenderer"), { ssr: false });
+// Dynamic components
+const Header = dynamic(() => import("@/components/Header"), {
+  loading: () => <div className="h-16 w-full animate-pulse" />,
+  ssr: false,
+});
+
+const Footer = dynamic(() => import("@/components/Footer"), {
+  loading: () => <div className="h-40 w-full animate-pulse" />,
+  ssr: false,
+});
+
+const FloatingCTA = dynamic(() => import("@/components/cta/FloatingCTA"), {
+  ssr: false,
+});
+
+const Background = dynamic(() => import("@/components/Background"), {
+  ssr: false,
+});
+
+const SeoRenderer = dynamic(() => import("@/components/SEO/SeoRenderer"), {
+  ssr: false,
+});
 
 import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
 import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import ModalRoot from "@/components/modals/ModalRoot";
+import AuthModal from "@/components/modals/AuthModal";
+import LoginPage from "@/app/@auth/login/page";
+import SignupPage from "@/app/@auth/signup/page";
 
 interface RootLayoutProps {
   children: ReactNode;
 }
 
-/* ERROR FALLBACK */
 function LayoutErrorFallback({ error, resetErrorBoundary }: { error: Error; resetErrorBoundary: () => void }) {
-  console.error("Layout Error:", error);
-
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <div className="text-center p-8 max-w-md bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm rounded-xl">
-        <h1 className="text-2xl font-bold mb-4">Something went wrong</h1>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">{error.message}</p>
-        <button
-          onClick={resetErrorBoundary}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-        >
-          Try Again
-        </button>
+      <div className="p-8 text-center">
+        <h1>Something went wrong</h1>
+        <p>{error.message}</p>
+        <button onClick={resetErrorBoundary}>Try Again</button>
       </div>
     </div>
   );
 }
 
-/* SEO LOADING */
-const SEOLoadingSkeleton = () => (
-  <div className="fixed top-0 left-0 w-full z-50">
-    <div className="h-0.5 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 animate-pulse" />
-  </div>
-);
-
 export default function RootLayout({ children }: RootLayoutProps) {
   const pathname = usePathname() || "/";
+  const searchParams = useSearchParams();
+
   const [mounted, setMounted] = useState(false);
   const [seo, setSeo] = useState<SEOOutput | null>(null);
   const [seoLoading, setSeoLoading] = useState(true);
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-  const hideLayout = useMemo(() => {
-    return (
+  // Modal logic from query param
+  const authType = searchParams?.get("auth"); // "login" or "signup"
+  const hasAuthModal = authType === "login" || authType === "signup";
+
+  const { hideLayout, isDashboardPage } = useMemo(() => {
+    const isAuthPage =
       pathname.startsWith("/login") ||
       pathname.startsWith("/signup") ||
-      pathname.startsWith("/reset") ||
-      pathname.startsWith("/forgot-password")
-    );
-  }, [pathname]);
+      pathname.startsWith("/reset");
 
-  /* SEO ENGINE */
+    return {
+      isDashboardPage: pathname.startsWith("/dashboard"),
+      hideLayout: isAuthPage && !hasAuthModal,
+    };
+  }, [pathname, hasAuthModal]);
+
   useEffect(() => {
     if (!mounted) return;
 
     let active = true;
     setSeoLoading(true);
 
-    const cached = sessionStorage.getItem(`seo-${pathname}`);
-    if (cached) {
-      try {
-        const parsed = JSON.parse(cached);
-        if (active) {
-          setSeo(parsed);
-          setSeoLoading(false);
-          return;
-        }
-      } catch {}
-    }
-
-    buildSEO({ route: pathname, locale: SEO_CONFIG.defaultLocale, noindex: hideLayout })
+    buildSEO({
+      route: pathname,
+      locale: SEO_CONFIG.defaultLocale,
+      noindex: hideLayout,
+    })
       .then((result) => {
-        if (active) {
-          setSeo(result);
-          sessionStorage.setItem(`seo-${pathname}`, JSON.stringify(result));
-        }
+        if (active) setSeo(result);
       })
-      .catch(() => {
-        if (active) {
-          setSeo({
-            metadata: {
-              title: SEO_CONFIG.defaultTitle,
-              description: SEO_CONFIG.defaultDescription,
-            },
-            structuredData: [],
-            canonical: SEO_CONFIG.siteUrl,
-            hreflang: { [SEO_CONFIG.defaultLocale]: SEO_CONFIG.siteUrl },
-            pageType: { type: "unknown", hierarchy: ["unknown"], metadata: {}, matches: null },
-            links: [],
-            preconnect: SEO_CONFIG.preconnect,
-          });
-        }
-      })
-      .finally(() => active && setSeoLoading(false));
+      .catch((err) => console.error("SEO error:", err))
+      .finally(() => {
+        if (active) setSeoLoading(false);
+      });
 
     return () => {
       active = false;
     };
   }, [pathname, hideLayout, mounted]);
 
+  const fallbackRender = useCallback(
+    ({ error, resetErrorBoundary }: { error: Error; resetErrorBoundary: () => void }) => (
+      <LayoutErrorFallback error={error} resetErrorBoundary={resetErrorBoundary} />
+    ),
+    []
+  );
+
   return (
-    <html lang="en" suppressHydrationWarning className="scroll-smooth">
-      <body className="min-h-screen overflow-x-hidden text-gray-900 dark:text-white bg-transparent">
-        <ErrorBoundary fallbackRender={({ error, resetErrorBoundary }) => (
-          <LayoutErrorFallback error={error} resetErrorBoundary={resetErrorBoundary} />
-        )}>
+    <html lang="en" suppressHydrationWarning>
+      <body className="min-h-screen">
+        <ErrorBoundary fallbackRender={fallbackRender}>
           <ThemeProviderWrapper>
             {mounted && <Background />}
             {mounted && seo && <SeoRenderer seo={seo} />}
-            {mounted && seoLoading && <SEOLoadingSkeleton />}
+            {mounted && seoLoading && <div className="h-1 bg-gradient-to-r" />}
 
-            {/* MAIN CONTENT */}
-            <div className="relative z-10 flex min-h-screen flex-col bg-transparent">
-              {!hideLayout && mounted && <Header />}
+            <div className="relative flex min-h-screen flex-col">
+              {/* HEADER */}
+              {!hideLayout && mounted && (
+                <header className="fixed top-0 w-full">
+                  <Suspense fallback={<div className="h-16 animate-pulse" />}>
+                    <Header />
+                  </Suspense>
+                </header>
+              )}
 
-              <main className={hideLayout ? "min-h-screen flex items-center justify-center" : "pt-20"}>
+              {/* MAIN CONTENT */}
+              <main className={hideLayout ? "flex-1" : isDashboardPage ? "pt-16" : "pt-20"}>
                 {children}
               </main>
 
-              {!hideLayout && mounted && <Footer />}
-              {!hideLayout && mounted && <FloatingCTA />}
+              {/* FOOTER */}
+              {!hideLayout && mounted && (
+                <Suspense fallback={<div className="h-40 animate-pulse" />}>
+                  <Footer />
+                </Suspense>
+              )}
+
+              {/* FLOATING CTA */}
+              {!hideLayout && mounted && (
+                <Suspense fallback={null}>
+                  <FloatingCTA />
+                </Suspense>
+              )}
             </div>
+
+            {/* MODAL LOGIC */}
+            {hasAuthModal && (
+              <ModalRoot isOpen onClose={() => window.history.replaceState({}, "", window.location.pathname)}>
+                <AuthModal
+                  onClose={() => window.history.replaceState({}, "", window.location.pathname)}
+                >
+                  {authType === "login" && <LoginPage />}
+                  {authType === "signup" && <SignupPage />}
+                </AuthModal>
+              </ModalRoot>
+            )}
           </ThemeProviderWrapper>
         </ErrorBoundary>
       </body>
