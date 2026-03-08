@@ -94,8 +94,8 @@ export default function Header() {
         <div className="hidden md:flex items-center gap-4">
           <LanguageSwitcher />
           <DarkLightToggle />
-
-          <Link href="/login">
+          
+          <Link href="/?auth=login">
             <button
               onClick={() => setActiveButton("login")}
               className={`px-4 py-2 rounded-lg text-sm transition ${
@@ -106,7 +106,7 @@ export default function Header() {
             </button>
           </Link>
 
-          <Link href="/signup">
+          <Link href="/?auth=signup">
             <button
               onClick={() => setActiveButton("signup")}
               className={`px-5 py-2 rounded-lg text-sm transition ${
