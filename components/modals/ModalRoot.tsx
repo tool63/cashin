@@ -36,18 +36,12 @@ export default function ModalRoot({ children, isOpen, onClose }: ModalRootProps)
       className="
         fixed inset-0 z-50
         flex items-center justify-center
-        bg-black/50 dark:bg-black/60
+        bg-black/50
         backdrop-blur-md
         animate-in fade-in duration-200
       "
     >
-      <div
-        onClick={(e) => e.stopPropagation()}
-        className="
-          w-full max-w-md
-          animate-in fade-in zoom-in-95 duration-200
-        "
-      >
+      <div onClick={(e) => e.stopPropagation()}>
         {children}
       </div>
     </div>,
