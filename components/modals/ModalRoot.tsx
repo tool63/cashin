@@ -2,33 +2,22 @@
 
 import { ReactNode, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { useRouter, useSearchParams } from "next/navigation";
 
 interface ModalRootProps {
   children: ReactNode;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
-export default function ModalRoot({ children }: ModalRootProps) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const showAuth = searchParams.get("auth");
-
-  const closeModal = () => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.delete("auth");
-
-    const query = params.toString();
-    router.replace(query ? `?${query}` : "/");
-  };
-
+export default function ModalRoot({ children, isOpen, onClose }: ModalRootProps) {
   useEffect(() => {
-    if (!showAuth) return;
+    if (!isOpen) return;
 
     const original = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
     const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") closeModal();
+      if (e.key === "Escape") onClose();
     };
 
     window.addEventListener("keydown", handleEsc);
@@ -37,13 +26,19 @@ export default function ModalRoot({ children }: ModalRootProps) {
       document.body.style.overflow = original;
       window.removeEventListener("keydown", handleEsc);
     };
-  }, [showAuth]);
+  }, [isOpen, onClose]);
 
-  if (!showAuth) return null;
+  const handleBackgroundClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
+  if (!isOpen) return null;
 
   return createPortal(
     <div
-      onClick={closeModal}
+      onClick={handleBackgroundClick}
       className="
         fixed inset-0 z-50
         flex items-start justify-center
