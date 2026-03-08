@@ -5,11 +5,11 @@ import { X } from "lucide-react";
 
 interface AuthModalProps {
   children: ReactNode;
-  onClose: () => void;  // Add this prop
+  onClose: () => void;
 }
 
 export default function AuthModal({ children, onClose }: AuthModalProps) {
-  // ESC key close
+  // Close on ESC key
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -19,33 +19,62 @@ export default function AuthModal({ children, onClose }: AuthModalProps) {
     return () => window.removeEventListener("keydown", handleEsc);
   }, [onClose]);
 
-  return (
-    <div
-      className="
-        relative w-full max-w-md
-        bg-gradient-to-br
-        from-yellow-400/20
-        via-green-400/30
-        to-green-500/20
-        dark:from-yellow-500/10
-        dark:via-green-700/20
-        dark:to-green-800/20
-        border border-gray-200 dark:border-white/10
-        rounded-2xl p-8 shadow-2xl
-        text-primary
-        backdrop-blur-xl
-        animate-in fade-in zoom-in-95 duration-200
-      "
-    >
-      {/* Close Button */}
-      <button
-        onClick={onClose}
-        className="absolute top-4 right-4 text-muted hover:text-primary transition"
-      >
-        <X size={20} />
-      </button>
+  // Prevent background scroll when modal is open
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
 
-      {children}
-    </div>
+  return (
+    <>
+      {/* Backdrop */}
+      <div
+        onClick={onClose} // Close when clicking outside
+        className="
+          fixed inset-0
+          bg-black/50 dark:bg-black/60
+          backdrop-blur-sm
+          z-[999] 
+          animate-in fade-in duration-200
+        "
+      />
+
+      {/* Modal Content */}
+      <div
+        className="
+          fixed inset-0
+          flex items-center justify-center
+          z-[1000]
+          px-4
+        "
+      >
+        <div
+          onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
+          className="
+            relative w-full max-w-md
+            bg-gradient-to-br
+            from-yellow-400/20 via-green-400/30 to-green-500/20
+            dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20
+            border border-gray-200 dark:border-white/10
+            rounded-2xl p-8 shadow-2xl
+            text-primary
+            backdrop-blur-xl
+            animate-in fade-in zoom-in-95 duration-200
+          "
+        >
+          {/* Close Button */}
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 text-muted hover:text-primary transition"
+          >
+            <X size={20} />
+          </button>
+
+          {children}
+        </div>
+      </div>
+    </>
   );
 }
