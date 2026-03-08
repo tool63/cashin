@@ -13,12 +13,10 @@ import {
   XCircle,
   Shield,
   Zap,
-  Gift,
-  ArrowRight,
   Heart,
   Chrome,
   Facebook,
-  Coins
+  ArrowRight
 } from "lucide-react";
 
 // SEO Imports
@@ -66,12 +64,11 @@ export default function SignupPage() {
     special: false
   });
 
-  // SEO Hydration - FIXED: Using correct SEO_CONFIG structure
+  // SEO Hydration
   useEffect(() => {
     setMounted(true);
     let mounted = true;
 
-    // Using the same pattern as homepage - direct access to defaultLocale
     buildSEO({ 
       route: "/signup", 
       locale: SEO_CONFIG.defaultLocale 
@@ -209,59 +206,18 @@ export default function SignupPage() {
             <AuthModal>
               <AuthPageWrapper title="" subtitle="">
                 
-                {/* Get Instant Bonus Header with Badge */}
-                <div className="flex items-center justify-between mb-8">
+                {/* Header with centered headline and right badge - NO COIN ICON */}
+                <div className="relative flex items-center justify-center mb-8">
                   <h1 className="text-3xl font-bold text-black dark:text-white">
                     Get Instant Bonus
                   </h1>
-                  <div className="flex items-center gap-1 bg-gradient-to-r from-yellow-400/20 to-amber-500/20 
-                                  px-3 py-1.5 rounded-full border border-yellow-500/30">
-                    <Coins className="w-4 h-4 text-yellow-500" />
+                  <div className="absolute right-0 px-3 py-1.5 bg-gradient-to-r from-yellow-400/20 to-amber-500/20 
+                                  rounded-full border border-yellow-500/30">
                     <span className="font-bold text-yellow-500 text-sm">$0.50</span>
                   </div>
                 </div>
 
-                {/* Social Login Buttons */}
-                <div className="space-y-3 mb-6">
-                  <button className="w-full group relative overflow-hidden rounded-xl">
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 
-                                    opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="relative flex items-center justify-center gap-3 px-4 py-3.5 
-                                    bg-white dark:bg-neutral-900 
-                                    border-2 border-blue-500/20 dark:border-blue-500/20
-                                    group-hover:border-blue-500 rounded-xl
-                                    text-black dark:text-white font-medium
-                                    hover:shadow-lg hover:shadow-blue-500/20
-                                    transition-all duration-300">
-                      <Chrome className="w-5 h-5 text-blue-500" />
-                      <span>Sign up with Google</span>
-                    </div>
-                  </button>
-
-                  <button className="w-full group relative overflow-hidden rounded-xl">
-                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-indigo-700 
-                                    opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="relative flex items-center justify-center gap-3 px-4 py-3.5 
-                                    bg-white dark:bg-neutral-900 
-                                    border-2 border-indigo-500/20 dark:border-indigo-500/20
-                                    group-hover:border-indigo-500 rounded-xl
-                                    text-black dark:text-white font-medium
-                                    hover:shadow-lg hover:shadow-indigo-500/20
-                                    transition-all duration-300">
-                      <Facebook className="w-5 h-5 text-indigo-500" />
-                      <span>Sign Up with Facebook</span>
-                    </div>
-                  </button>
-                </div>
-
-                {/* OR Divider */}
-                <div className="flex items-center my-6">
-                  <div className="flex-grow border-t border-neutral-200 dark:border-neutral-800"></div>
-                  <span className="text-sm text-black dark:text-white px-4">or</span>
-                  <div className="flex-grow border-t border-neutral-200 dark:border-neutral-800"></div>
-                </div>
-
-                {/* Continue with Email Button - Conditionally rendered */}
+                {/* Continue with Email Button */}
                 {!formVisible && (
                   <button
                     onClick={handleContinueWithEmail}
@@ -272,8 +228,7 @@ export default function SignupPage() {
                                font-medium flex items-center justify-center gap-2
                                hover:border-green-500 dark:hover:border-green-500
                                hover:bg-neutral-50 dark:hover:bg-neutral-800
-                               transition-all duration-300 group
-                               mb-6"
+                               transition-all duration-300 group"
                   >
                     <Mail className="w-4 h-4 text-neutral-500 dark:text-neutral-400 
                                     group-hover:text-green-500 dark:group-hover:text-green-400" />
@@ -449,7 +404,45 @@ export default function SignupPage() {
                       </div>
                     )}
 
-                    {/* Submit Button */}
+                    {/* OR Divider with lines on both sides */}
+                    <div className="flex items-center my-6">
+                      <div className="flex-grow border-t border-neutral-200 dark:border-neutral-800"></div>
+                      <span className="text-sm text-black dark:text-white px-4">or</span>
+                      <div className="flex-grow border-t border-neutral-200 dark:border-neutral-800"></div>
+                    </div>
+
+                    {/* Social Login Buttons - WITHOUT ICONS */}
+                    <div className="space-y-3 mb-6">
+                      <button className="w-full group relative overflow-hidden rounded-xl">
+                        <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 
+                                        opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <div className="relative flex items-center justify-center px-4 py-3.5 
+                                        bg-white dark:bg-neutral-900 
+                                        border-2 border-blue-500/20 dark:border-blue-500/20
+                                        group-hover:border-blue-500 rounded-xl
+                                        text-black dark:text-white font-medium
+                                        hover:shadow-lg hover:shadow-blue-500/20
+                                        transition-all duration-300">
+                          <span>Sign up with Google</span>
+                        </div>
+                      </button>
+
+                      <button className="w-full group relative overflow-hidden rounded-xl">
+                        <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-indigo-700 
+                                        opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <div className="relative flex items-center justify-center px-4 py-3.5 
+                                        bg-white dark:bg-neutral-900 
+                                        border-2 border-indigo-500/20 dark:border-indigo-500/20
+                                        group-hover:border-indigo-500 rounded-xl
+                                        text-black dark:text-white font-medium
+                                        hover:shadow-lg hover:shadow-indigo-500/20
+                                        transition-all duration-300">
+                          <span>Sign Up with Facebook</span>
+                        </div>
+                      </button>
+                    </div>
+
+                    {/* Submit Button - WITHOUT ICON */}
                     <button
                       className="relative w-full py-4 px-6 rounded-xl font-bold text-black group
                                  overflow-hidden transition-all duration-500
@@ -464,10 +457,8 @@ export default function SignupPage() {
                                       -translate-x-full group-hover:translate-x-full 
                                       transition-all duration-1000" />
 
-                      <span className="relative flex items-center justify-center gap-2">
-                        <Gift className="w-5 h-5" />
-                        <span>Create Account</span>
-                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      <span className="relative flex items-center justify-center">
+                        Create Account
                       </span>
                     </button>
                   </>
@@ -477,7 +468,7 @@ export default function SignupPage() {
                 <div className="flex items-center justify-center gap-4 mt-4 text-sm">
                   <div className="flex items-center gap-1.5 text-black dark:text-white">
                     <Shield className="w-4 h-4 text-blue-500 dark:text-blue-400" />
-                    <span>Secured</span>
+                    <span>Privacy secured</span>
                   </div>
                   
                   <span className="text-neutral-300 dark:text-neutral-600">•</span>
@@ -491,7 +482,7 @@ export default function SignupPage() {
                   
                   <div className="flex items-center gap-1.5 text-black dark:text-white">
                     <Heart className="w-4 h-4 text-rose-500 dark:text-rose-400" />
-                    <span>Trusted</span>
+                    <span>Feel Happy</span>
                   </div>
                 </div>
 
