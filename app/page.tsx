@@ -31,8 +31,12 @@ const LiveEarnings = dynamic(() => import("@/components/homepage/LiveEarnings"),
 const LiveOfferCompletion = dynamic(() => import("@/components/homepage/LiveOfferCompletion"), { ssr: false });
 const LiveWithdrawals = dynamic(() => import("@/components/homepage/LiveWithdrawals"), { ssr: false });
 
+interface HomePageProps {
+  onOpenAuth?: (type: "login" | "signup" | "reset") => void;
+}
+
 /* SEO hydration */
-export default function HomePage() {
+export default function HomePage({ onOpenAuth }: HomePageProps) {
   const [seo, setSeo] = useState<SEOOutput | null>(null);
   const [mounted, setMounted] = useState(false);
 
@@ -78,7 +82,7 @@ export default function HomePage() {
         ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
-            <HeroSection />
+            <HeroSection onOpenAuth={onOpenAuth || (() => {})} />
           </RevealWithBorder>
         </OpeningStyle>
 
