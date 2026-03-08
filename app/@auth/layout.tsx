@@ -1,16 +1,31 @@
 "use client";
 
+import { useRouter, useSearchParams } from "next/navigation";
 import ModalRoot from "@/components/modals/ModalRoot";
+import AuthModal from "@/components/modals/AuthModal";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="relative w-screen min-h-screen overflow-hidden">
-      
-      {/* Modal Content Only */}
-      <div className="relative z-50 flex items-center justify-center min-h-screen px-4">
-        <ModalRoot>{children}</ModalRoot>
-      </div>
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  
+  // Check if auth modal should be open
+  const isOpen = searchParams?.get("auth") !== null;
 
-    </div>
+  const handleClose = () => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("auth");
+    const query = params.toString();
+    router.replace(query ? `?${query}` : window.location.pathname);
+  };
+
+  // Don't render anything if modal shouldn't be open
+  if (!isOpen) return null;
+
+  return (
+    <ModalRoot isOpen={isOpen} onClose={handleClose}>
+      <AuthModal onClose={handleClose}>
+        {children}
+      </AuthModal>
+    </ModalRoot>
   );
 }
