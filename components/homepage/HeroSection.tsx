@@ -1,12 +1,14 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import TypingText from "@/components/typing/home";
 import OpeningStyle from "@/components/animations/openingstyle";
+import { useAuth } from "@/contexts/AuthContext"; // You'll need to create this context
 
 export default function HeroSection() {
+  const { openModal } = useAuth();
+
   return (
     <OpeningStyle delay={0.1}>
       <section className="max-w-7xl mx-auto px-6 py-24 md:py-32 text-center">
@@ -30,25 +32,23 @@ export default function HeroSection() {
 
         {/* CTA BUTTON */}
         <div className="inline-block">
-          <Link href="/?auth=signup" passHref>
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.97 }}
-              className="group relative inline-flex items-center justify-center rounded-3xl px-16 py-6
-                         bg-gradient-to-r from-yellow-400 via-green-400 to-green-500
-                         text-black font-bold text-lg md:text-xl
-                         hover:shadow-xl transition-all duration-300 hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-green-300 cursor-pointer"
-              role="button"
-            >
-              Start Earning Now
-              <ArrowRight className="ml-2 text-black group-hover:translate-x-1 transition-transform duration-300" />
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            onClick={() => openModal("signup")}
+            className="group relative inline-flex items-center justify-center rounded-3xl px-16 py-6
+                       bg-gradient-to-r from-yellow-400 via-green-400 to-green-500
+                       text-black font-bold text-lg md:text-xl
+                       hover:shadow-xl transition-all duration-300 hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-green-300 cursor-pointer"
+          >
+            Start Earning Now
+            <ArrowRight className="ml-2 text-black group-hover:translate-x-1 transition-transform duration-300" />
 
-              {/* Hover CTA indicator */}
-              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-1 text-blue-500 text-sm font-medium opacity-0 group-hover:opacity-100 transition whitespace-nowrap">
-                Join free today <ArrowRight size={16} />
-              </div>
-            </motion.a>
-          </Link>
+            {/* Hover CTA indicator */}
+            <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-1 text-green-500 text-sm font-medium opacity-0 group-hover:opacity-100 transition whitespace-nowrap">
+              Join free today <ArrowRight size={16} />
+            </div>
+          </motion.button>
         </div>
 
         {/* TRUST BADGES */}
