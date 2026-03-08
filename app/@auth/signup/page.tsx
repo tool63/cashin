@@ -16,7 +16,10 @@ import {
   Heart,
   Chrome,
   Facebook,
-  ArrowRight
+  ArrowRight,
+  Gift,
+  Sparkles,
+  Star
 } from "lucide-react";
 
 // SEO Imports
@@ -206,18 +209,74 @@ export default function SignupPage() {
             <AuthModal>
               <AuthPageWrapper title="" subtitle="">
                 
-                {/* Header with centered headline and right badge - NO COIN ICON */}
-                <div className="relative flex items-center justify-center mb-8">
+                {/* Header with centered headline and premium badge */}
+                <div className="relative flex items-center justify-center mb-10">
                   <h1 className="text-3xl font-bold text-black dark:text-white">
                     Get Instant Bonus
                   </h1>
-                  <div className="absolute right-0 px-3 py-1.5 bg-gradient-to-r from-yellow-400/20 to-amber-500/20 
-                                  rounded-full border border-yellow-500/30">
-                    <span className="font-bold text-yellow-500 text-sm">$0.50</span>
+                  
+                  {/* Premium Redesigned Badge */}
+                  <div className="absolute right-0 group">
+                    <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-yellow-500 
+                                    rounded-full blur-lg opacity-50 group-hover:opacity-70 
+                                    transition-opacity duration-300"></div>
+                    <div className="relative flex items-center gap-1.5 px-4 py-2 
+                                    bg-gradient-to-r from-amber-400 to-yellow-500 
+                                    rounded-full shadow-lg shadow-yellow-500/30
+                                    border border-white/20 dark:border-white/10
+                                    group-hover:scale-105 group-hover:shadow-xl 
+                                    group-hover:shadow-yellow-500/40
+                                    transition-all duration-300">
+                      <Gift className="w-3.5 h-3.5 text-white" />
+                      <span className="font-bold text-white text-sm">$0.50</span>
+                      <Sparkles className="w-3 h-3 text-white/80" />
+                    </div>
                   </div>
                 </div>
 
-                {/* Continue with Email Button */}
+                {/* Social Login Buttons - FIRST (with icons) */}
+                <div className="space-y-3 mb-4">
+                  <button className="w-full group relative overflow-hidden rounded-xl">
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 
+                                    opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="relative flex items-center justify-center gap-3 px-4 py-3.5 
+                                    bg-white dark:bg-neutral-900 
+                                    border-2 border-blue-500/20 dark:border-blue-500/20
+                                    group-hover:border-blue-500 rounded-xl
+                                    text-black dark:text-white font-medium
+                                    hover:shadow-lg hover:shadow-blue-500/20
+                                    transition-all duration-300">
+                      <Chrome className="w-5 h-5 text-blue-500" />
+                      <span>Sign up with Google</span>
+                    </div>
+                  </button>
+
+                  <button className="w-full group relative overflow-hidden rounded-xl">
+                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-indigo-700 
+                                    opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="relative flex items-center justify-center gap-3 px-4 py-3.5 
+                                    bg-white dark:bg-neutral-900 
+                                    border-2 border-indigo-500/20 dark:border-indigo-500/20
+                                    group-hover:border-indigo-500 rounded-xl
+                                    text-black dark:text-white font-medium
+                                    hover:shadow-lg hover:shadow-indigo-500/20
+                                    transition-all duration-300">
+                      <Facebook className="w-5 h-5 text-indigo-500" />
+                      <span>Sign up with Facebook</span>
+                    </div>
+                  </button>
+                </div>
+
+                {/* OR Divider - SECOND */}
+                <div className="flex items-center my-6">
+                  <div className="flex-grow h-px bg-gradient-to-r from-transparent via-neutral-300 to-transparent 
+                                  dark:via-neutral-700"></div>
+                  <span className="text-sm text-black dark:text-white px-4 font-medium">or</span>
+                  <div className="flex-grow h-px bg-gradient-to-r from-transparent via-neutral-300 to-transparent 
+                                  dark:via-neutral-700"></div>
+                </div>
+
+                {/* Continue with Email Button - THIRD (only if form not visible) */}
                 {!formVisible && (
                   <button
                     onClick={handleContinueWithEmail}
@@ -228,6 +287,7 @@ export default function SignupPage() {
                                font-medium flex items-center justify-center gap-2
                                hover:border-green-500 dark:hover:border-green-500
                                hover:bg-neutral-50 dark:hover:bg-neutral-800
+                               hover:shadow-lg hover:shadow-green-500/10
                                transition-all duration-300 group"
                   >
                     <Mail className="w-4 h-4 text-neutral-500 dark:text-neutral-400 
@@ -404,45 +464,7 @@ export default function SignupPage() {
                       </div>
                     )}
 
-                    {/* OR Divider with lines on both sides */}
-                    <div className="flex items-center my-6">
-                      <div className="flex-grow border-t border-neutral-200 dark:border-neutral-800"></div>
-                      <span className="text-sm text-black dark:text-white px-4">or</span>
-                      <div className="flex-grow border-t border-neutral-200 dark:border-neutral-800"></div>
-                    </div>
-
-                    {/* Social Login Buttons - WITHOUT ICONS */}
-                    <div className="space-y-3 mb-6">
-                      <button className="w-full group relative overflow-hidden rounded-xl">
-                        <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 
-                                        opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                        <div className="relative flex items-center justify-center px-4 py-3.5 
-                                        bg-white dark:bg-neutral-900 
-                                        border-2 border-blue-500/20 dark:border-blue-500/20
-                                        group-hover:border-blue-500 rounded-xl
-                                        text-black dark:text-white font-medium
-                                        hover:shadow-lg hover:shadow-blue-500/20
-                                        transition-all duration-300">
-                          <span>Sign up with Google</span>
-                        </div>
-                      </button>
-
-                      <button className="w-full group relative overflow-hidden rounded-xl">
-                        <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-indigo-700 
-                                        opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                        <div className="relative flex items-center justify-center px-4 py-3.5 
-                                        bg-white dark:bg-neutral-900 
-                                        border-2 border-indigo-500/20 dark:border-indigo-500/20
-                                        group-hover:border-indigo-500 rounded-xl
-                                        text-black dark:text-white font-medium
-                                        hover:shadow-lg hover:shadow-indigo-500/20
-                                        transition-all duration-300">
-                          <span>Sign Up with Facebook</span>
-                        </div>
-                      </button>
-                    </div>
-
-                    {/* Submit Button - WITHOUT ICON */}
+                    {/* Submit Button */}
                     <button
                       className="relative w-full py-4 px-6 rounded-xl font-bold text-black group
                                  overflow-hidden transition-all duration-500
