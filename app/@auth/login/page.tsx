@@ -118,25 +118,14 @@ export default function LoginPage() {
             <AuthModal>
               <AuthPageWrapper title="" subtitle="">
 
-                {/* HEADER */}
-                <div className="relative mb-10 text-center">
+                {/* HEADER - Removed welcome badge */}
+                <div className="mb-10 text-center">
                   <h1 className="text-3xl font-bold text-black dark:text-white">
                     Welcome Back
                   </h1>
                   <p className="text-neutral-500 dark:text-neutral-400 mt-2">
                     Sign in to access your account
                   </p>
-
-                  {/* BONUS BADGE - Optional for login, can be removed if not needed */}
-                  <div className="absolute top-full right-0 mt-2 group">
-                    <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-yellow-500 rounded-full blur-lg opacity-50 group-hover:opacity-70 transition-opacity duration-300"></div>
-
-                    <div className="relative flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-amber-400 to-yellow-500 rounded-full shadow-lg shadow-yellow-500/30 border border-white/20 dark:border-white/10 group-hover:scale-105 group-hover:shadow-xl group-hover:shadow-yellow-500/40 transition-all duration-300">
-                      <Gift className="w-3.5 h-3.5 text-white" />
-                      <span className="font-bold text-white text-sm">Welcome!</span>
-                      <Sparkles className="w-3 h-3 text-white/80" />
-                    </div>
-                  </div>
                 </div>
 
                 {/* SOCIAL LOGIN BUTTONS */}
@@ -230,15 +219,15 @@ export default function LoginPage() {
                         </span>
                       </label>
                       <Link
-                        href="/forgot-password"
+                        href="/reset-password"
                         className="text-sm text-green-600 dark:text-green-400 font-medium hover:underline"
                       >
                         Forgot password?
                       </Link>
                     </div>
 
-                    {/* SIGN IN BUTTON */}
-                    <button className="relative w-full py-4 px-6 rounded-xl font-bold text-white mb-6 bg-gradient-to-r from-green-500 via-green-400 to-blue-500 hover:from-green-600 hover:via-green-500 hover:to-blue-600 transform hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-green-500/25">
+                    {/* SIGN IN BUTTON - Yellow Green Gradient */}
+                    <button className="relative w-full py-4 px-6 rounded-xl font-bold text-white mb-6 bg-gradient-to-r from-yellow-400 via-green-400 to-blue-500 hover:from-yellow-500 hover:via-green-500 hover:to-blue-600 transform hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-green-500/25">
                       Sign In
                     </button>
                   </>
