@@ -27,10 +27,10 @@ import { SEO_CONFIG } from "@/components/SEO/seoConfig";
 import ModalRoot from "@/components/modals/ModalRoot";
 import AuthModal from "@/components/modals/AuthModal";
 
-// Lazy load auth pages
-const LoginPage = dynamic(() => import("@/app/@auth/login/page"));
-const SignupPage = dynamic(() => import("@/app/@auth/signup/page"));
-const ResetPage = dynamic(() => import("@/app/@auth/reset/page"));
+// Lazy load auth pages - using RELATIVE paths (FIXED)
+const LoginPage = dynamic(() => import("./@auth/login/page"));
+const SignupPage = dynamic(() => import("./@auth/signup/page"));
+const ResetPage = dynamic(() => import("./@auth/reset/page"));
 
 interface RootLayoutProps {
   children: ReactNode;
