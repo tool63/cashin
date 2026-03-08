@@ -44,13 +44,13 @@ export default function ModalRoot({ isOpen, onClose, children }: ModalRootProps)
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-md bg-[#0E111B] rounded-2xl border border-[#2A2F3E] shadow-2xl"
+        className="relative w-full max-w-md"
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors z-10"
+          className="absolute -top-2 -right-2 z-10 bg-[#0E111B] border border-[#2A2F3E] rounded-full p-1.5 text-gray-400 hover:text-white transition-colors"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4" />
         </button>
         {children}
       </div>
