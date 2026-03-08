@@ -8,8 +8,8 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
   const router = useRouter();
   const searchParams = useSearchParams();
   
-  // Check if auth modal should be open
-  const isOpen = searchParams?.get("auth") !== null;
+  const authType = searchParams?.get("auth");
+  const isOpen = authType !== null;
 
   const handleClose = () => {
     const params = new URLSearchParams(searchParams.toString());
@@ -18,8 +18,10 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
     router.replace(query ? `?${query}` : window.location.pathname);
   };
 
-  // Don't render anything if modal shouldn't be open
-  if (!isOpen) return null;
+  // Optional: Validate authType to prevent invalid modal content
+  const isValidAuthType = authType && ['login', 'signup', 'reset'].includes(authType);
+  
+  if (!isOpen || !isValidAuthType) return null;
 
   return (
     <ModalRoot isOpen={isOpen} onClose={handleClose}>
