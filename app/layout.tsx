@@ -128,9 +128,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 </header>
               )}
 
-              {/* Main */}
+              {/* Main - Pass openModal to children */}
               <main className={`flex-1 ${!isAuthPage ? (isDashboardPage ? "pt-16" : "pt-20") : ""}`}>
-                {children}
+                {React.Children.map(children, child => {
+                  if (React.isValidElement(child)) {
+                    return React.cloneElement(child, { onOpenAuth: openModal });
+                  }
+                  return child;
+                })}
               </main>
 
               {/* Footer */}
