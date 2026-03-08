@@ -3,36 +3,21 @@
 import { ReactNode } from "react";
 
 interface AuthPageWrapperProps {
-  title: ReactNode;
-  subtitle?: ReactNode;
   children: ReactNode;
+  title?: string;
+  subtitle?: string;
 }
 
-export default function AuthPageWrapper({
-  title,
-  subtitle,
-  children,
-}: AuthPageWrapperProps) {
+export default function AuthPageWrapper({ children, title, subtitle }: AuthPageWrapperProps) {
   return (
-    <div className="w-full flex flex-col items-center text-center">
-
-      {/* Title */}
-      <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-primary">
-        {title}
-      </h2>
-
-      {/* Subtitle */}
-      {subtitle && (
-        <p className="mt-2 mb-6 text-sm sm:text-base text-muted max-w-sm">
-          {subtitle}
-        </p>
+    <div className="p-6">
+      {title && (
+        <h2 className="text-2xl font-bold text-white mb-2">{title}</h2>
       )}
-
-      {/* Content */}
-      <div className="w-full">
-        {children}
-      </div>
-
+      {subtitle && (
+        <p className="text-gray-400 text-sm mb-6">{subtitle}</p>
+      )}
+      {children}
     </div>
   );
 }
