@@ -245,7 +245,7 @@ export default function LoginPage() {
                         </span>
                       </label>
                       <Link
-                        href="/reset-password"
+                        href="/reset"
                         className="text-sm text-green-600 dark:text-green-400 font-medium hover:underline"
                       >
                         Forgot password?
