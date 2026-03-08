@@ -490,7 +490,7 @@ export default function SignupPage() {
                 <div className="flex items-center justify-center gap-4 mt-4 text-sm">
                   <div className="flex items-center gap-1.5 text-black dark:text-white">
                     <Shield className="w-4 h-4 text-blue-500 dark:text-blue-400" />
-                    <span>Privacy secured</span>
+                    <span>Secured</span>
                   </div>
                   
                   <span className="text-neutral-300 dark:text-neutral-600">•</span>
@@ -504,7 +504,7 @@ export default function SignupPage() {
                   
                   <div className="flex items-center gap-1.5 text-black dark:text-white">
                     <Heart className="w-4 h-4 text-rose-500 dark:text-rose-400" />
-                    <span>Feel Happy</span>
+                    <span>Happy</span>
                   </div>
                 </div>
 
