@@ -31,6 +31,9 @@ import SeoRenderer from "@/components/SEO/SeoRenderer";
 import OpeningStyle from "@/components/animations/openingstyle";
 import RevealWithBorder from "@/components/animations/RevealWithBorder";
 
+// Background
+import Background from "@/components/Background";
+
 // Modal Wrapper
 import AuthModal from "@/components/modals/AuthModal";
 import AuthPageWrapper from "@/components/auth/AuthPageWrapper";
@@ -165,11 +168,14 @@ export default function SignupPage() {
   // During SSR, return a simpler version to prevent hydration mismatch
   if (!mounted) {
     return (
-      <main className="relative min-h-screen bg-transparent text-gray-900 dark:text-white">
-        <div className="animate-pulse p-8 max-w-md mx-auto">
-          <div className="h-96 bg-gray-200/20 dark:bg-gray-700/20 rounded-lg mb-4"></div>
-        </div>
-      </main>
+      <>
+        <Background />
+        <main className="relative min-h-screen bg-transparent text-gray-900 dark:text-white">
+          <div className="animate-pulse p-8 max-w-md mx-auto">
+            <div className="h-96 bg-gray-200/20 dark:bg-gray-700/20 rounded-lg mb-4"></div>
+          </div>
+        </main>
+      </>
     );
   }
 
@@ -177,6 +183,7 @@ export default function SignupPage() {
     return (
       <AuthModal>
         {seo && <SeoRenderer seo={seo} />}
+        <Background />
         <iframe
           src={`${AUTH_BASE}/signup?redirect_back=https://cashog.com`}
           className="w-full h-[650px] rounded-3xl border border-neutral-800 shadow-2xl"
@@ -190,6 +197,8 @@ export default function SignupPage() {
     <>
       {seo && <SeoRenderer seo={seo} />}
       
+      <Background />
+
       <main className="relative min-h-screen bg-transparent text-gray-900 dark:text-white">
         
         {/* =====================================================
@@ -200,16 +209,14 @@ export default function SignupPage() {
             <AuthModal>
               <AuthPageWrapper title="" subtitle="">
                 
-                {/* Header with centered headline */}
-                <div className="relative flex items-center justify-center mb-6">
+                {/* Header with centered headline and premium badge */}
+                <div className="relative flex items-center justify-center mb-10">
                   <h1 className="text-3xl font-bold text-black dark:text-white">
                     Get Instant Bonus
                   </h1>
-                </div>
-
-                {/* Bonus Badge - Below Headline in Right Corner */}
-                <div className="flex justify-end mb-8">
-                  <div className="group">
+                  
+                  {/* Premium Redesigned Badge */}
+                  <div className="absolute right-0 group">
                     <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-yellow-500 
                                     rounded-full blur-lg opacity-50 group-hover:opacity-70 
                                     transition-opacity duration-300"></div>
@@ -227,7 +234,7 @@ export default function SignupPage() {
                   </div>
                 </div>
 
-                {/* Social Login Buttons - WITHOUT ICONS */}
+                {/* Social Login Buttons - FIRST (with icons) */}
                 <div className="space-y-3 mb-4">
                   <button className="w-full group relative overflow-hidden rounded-xl">
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 
@@ -239,6 +246,7 @@ export default function SignupPage() {
                                     text-black dark:text-white font-medium
                                     hover:shadow-lg hover:shadow-blue-500/20
                                     transition-all duration-300">
+                      <Chrome className="w-5 h-5 text-blue-500" />
                       <span>Sign up with Google</span>
                     </div>
                   </button>
@@ -253,12 +261,13 @@ export default function SignupPage() {
                                     text-black dark:text-white font-medium
                                     hover:shadow-lg hover:shadow-indigo-500/20
                                     transition-all duration-300">
+                      <Facebook className="w-5 h-5 text-indigo-500" />
                       <span>Sign up with Facebook</span>
                     </div>
                   </button>
                 </div>
 
-                {/* OR Divider */}
+                {/* OR Divider - SECOND */}
                 <div className="flex items-center my-6">
                   <div className="flex-grow h-px bg-gradient-to-r from-transparent via-neutral-300 to-transparent 
                                   dark:via-neutral-700"></div>
@@ -267,7 +276,7 @@ export default function SignupPage() {
                                   dark:via-neutral-700"></div>
                 </div>
 
-                {/* Continue with Email Button (only if form not visible) */}
+                {/* Continue with Email Button - THIRD (only if form not visible) */}
                 {!formVisible && (
                   <button
                     onClick={handleContinueWithEmail}
