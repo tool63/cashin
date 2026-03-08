@@ -13,7 +13,7 @@ export default function ModalRoot({ children, isOpen, onClose }: ModalRootProps)
   useEffect(() => {
     if (!isOpen) return;
 
-    const originalOverflow = document.body.style.overflow;
+    const original = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
     const handleEsc = (e: KeyboardEvent) => {
@@ -23,7 +23,7 @@ export default function ModalRoot({ children, isOpen, onClose }: ModalRootProps)
     window.addEventListener("keydown", handleEsc);
 
     return () => {
-      document.body.style.overflow = originalOverflow;
+      document.body.style.overflow = original;
       window.removeEventListener("keydown", handleEsc);
     };
   }, [isOpen, onClose]);
@@ -32,18 +32,10 @@ export default function ModalRoot({ children, isOpen, onClose }: ModalRootProps)
 
   return createPortal(
     <div
+      className="fixed inset-0 z-50 flex items-start justify-center pt-24 px-4 backdrop-blur-lg bg-black/50"
       onClick={onClose}
-      className="
-        fixed inset-0 z-50
-        flex items-center justify-center
-        bg-black/50
-        backdrop-blur-md
-        animate-in fade-in duration-200
-      "
     >
-      <div onClick={(e) => e.stopPropagation()}>
-        {children}
-      </div>
+      <div onClick={(e) => e.stopPropagation()}>{children}</div>
     </div>,
     document.body
   );
