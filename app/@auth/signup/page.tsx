@@ -209,29 +209,19 @@ export default function SignupPage() {
                     Get Instant Bonus
                   </h1>
 
-                  {/* Bonus Badge */}
+                  {/* BONUS BADGE */}
                   <div className="absolute top-full right-0 mt-2 group">
-                    <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-yellow-500 
-                                    rounded-full blur-lg opacity-50 group-hover:opacity-70 
-                                    transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-yellow-500 rounded-full blur-lg opacity-50 group-hover:opacity-70 transition-opacity duration-300"></div>
 
-                    <div className="relative flex items-center gap-1.5 px-4 py-2
-                                    bg-gradient-to-r from-amber-400 to-yellow-500
-                                    rounded-full shadow-lg shadow-yellow-500/30
-                                    border border-white/20 dark:border-white/10
-                                    group-hover:scale-105 group-hover:shadow-xl
-                                    group-hover:shadow-yellow-500/40
-                                    transition-all duration-300">
-
+                    <div className="relative flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-amber-400 to-yellow-500 rounded-full shadow-lg shadow-yellow-500/30 border border-white/20 dark:border-white/10 group-hover:scale-105 group-hover:shadow-xl group-hover:shadow-yellow-500/40 transition-all duration-300">
                       <Gift className="w-3.5 h-3.5 text-white" />
                       <span className="font-bold text-white text-sm">$0.50</span>
                       <Sparkles className="w-3 h-3 text-white/80" />
-
                     </div>
                   </div>
                 </div>
 
-                {/* SOCIAL BUTTONS */}
+                {/* SOCIAL LOGIN */}
                 <div className="space-y-3 mb-4">
                   <button className="w-full group relative overflow-hidden rounded-xl">
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -254,14 +244,14 @@ export default function SignupPage() {
                 <div className="flex items-center my-8">
                   <div className="flex-grow h-px bg-gradient-to-r from-transparent via-green-400/70 to-transparent dark:via-green-500/60"></div>
 
-                  <span className="relative px-4 text-sm font-semibold text-black dark:text-white before:absolute before:inset-0 before:rounded-full before:bg-green-500/10 before:blur-md">
+                  <span className="px-4 text-sm font-semibold text-black dark:text-white">
                     or
                   </span>
 
                   <div className="flex-grow h-px bg-gradient-to-r from-transparent via-blue-400/70 to-transparent dark:via-blue-500/60"></div>
                 </div>
 
-                {/* CONTINUE EMAIL BUTTON */}
+                {/* CONTINUE WITH EMAIL BUTTON */}
                 {!formVisible && (
                   <button
                     onClick={handleContinueWithEmail}
@@ -272,10 +262,10 @@ export default function SignupPage() {
                   </button>
                 )}
 
-                {/* FORM */}
+                {/* EMAIL SIGNUP FORM */}
                 {formVisible && (
                   <>
-                    {/* NAME */}
+                    {/* FULL NAME FIELD */}
                     <div className="relative mb-4">
                       <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
                       <input
@@ -284,11 +274,11 @@ export default function SignupPage() {
                         value={formData.fullName}
                         onChange={handleInputChange}
                         placeholder="Full Name"
-                        className="w-full p-4 pl-12 rounded-xl bg-white dark:bg-neutral-900 border-2 border-neutral-200 dark:border-neutral-800 text-black dark:text-white"
+                        className="w-full p-4 pl-12 rounded-xl bg-white dark:bg-neutral-900 border-2 border-neutral-200 dark:border-neutral-800 text-black dark:text-white placeholder-neutral-400 focus:border-green-500 focus:outline-none transition-colors duration-200"
                       />
                     </div>
 
-                    {/* EMAIL */}
+                    {/* EMAIL FIELD */}
                     <div className="relative mb-4">
                       <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
                       <input
@@ -297,11 +287,11 @@ export default function SignupPage() {
                         value={formData.email}
                         onChange={handleInputChange}
                         placeholder="Email Address"
-                        className="w-full p-4 pl-12 rounded-xl bg-white dark:bg-neutral-900 border-2 border-neutral-200 dark:border-neutral-800 text-black dark:text-white"
+                        className="w-full p-4 pl-12 rounded-xl bg-white dark:bg-neutral-900 border-2 border-neutral-200 dark:border-neutral-800 text-black dark:text-white placeholder-neutral-400 focus:border-green-500 focus:outline-none transition-colors duration-200"
                       />
                     </div>
 
-                    {/* PASSWORD */}
+                    {/* PASSWORD FIELD */}
                     <div className="relative mb-2">
                       <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
                       <input
@@ -312,19 +302,98 @@ export default function SignupPage() {
                         onFocus={handlePasswordFocus}
                         onBlur={handlePasswordBlur}
                         placeholder="Create Password"
-                        className="w-full p-4 pl-12 pr-12 rounded-xl bg-white dark:bg-neutral-900 border-2 border-neutral-200 dark:border-neutral-800 text-black dark:text-white"
+                        className="w-full p-4 pl-12 pr-12 rounded-xl bg-white dark:bg-neutral-900 border-2 border-neutral-200 dark:border-neutral-800 text-black dark:text-white placeholder-neutral-400 focus:border-green-500 focus:outline-none transition-colors duration-200"
                       />
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-purple-500"
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-green-500 transition-colors duration-200"
                       >
                         {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
                       </button>
                     </div>
 
-                    {/* SUBMIT */}
-                    <button className="relative w-full py-4 px-6 rounded-xl font-bold text-black mt-4 mb-6 bg-gradient-to-r from-yellow-400 via-green-400 to-blue-500">
+                    {/* PASSWORD STRENGTH INDICATOR */}
+                    {showStrength && formData.password && (
+                      <div className="mb-4 space-y-3">
+                        {/* Strength Bar */}
+                        <div className="space-y-1">
+                          <div className="flex justify-between items-center">
+                            <span className="text-xs text-neutral-500">Password strength:</span>
+                            <span className="text-xs font-medium" style={{ 
+                              color: passwordStrength <= 1 ? '#ef4444' : 
+                                     passwordStrength === 2 ? '#f97316' : 
+                                     passwordStrength === 3 ? '#eab308' : '#22c55e' 
+                            }}>
+                              {getStrengthText()}
+                            </span>
+                          </div>
+                          <div className="h-1.5 w-full bg-neutral-200 dark:bg-neutral-800 rounded-full overflow-hidden">
+                            <div 
+                              className={`h-full transition-all duration-300 ${getStrengthColor()}`}
+                              style={{ width: `${(passwordStrength / 4) * 100}%` }}
+                            />
+                          </div>
+                        </div>
+
+                        {/* Password Requirements */}
+                        <div className="grid grid-cols-2 gap-2 text-xs">
+                          <div className="flex items-center gap-1.5">
+                            {passwordRequirements.length ? (
+                              <CheckCircle className="w-3.5 h-3.5 text-green-500" />
+                            ) : (
+                              <XCircle className="w-3.5 h-3.5 text-neutral-300 dark:text-neutral-600" />
+                            )}
+                            <span className={passwordRequirements.length ? "text-green-500" : "text-neutral-400"}>
+                              8+ characters
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1.5">
+                            {passwordRequirements.number ? (
+                              <CheckCircle className="w-3.5 h-3.5 text-green-500" />
+                            ) : (
+                              <XCircle className="w-3.5 h-3.5 text-neutral-300 dark:text-neutral-600" />
+                            )}
+                            <span className={passwordRequirements.number ? "text-green-500" : "text-neutral-400"}>
+                              Number
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1.5">
+                            {passwordRequirements.uppercase ? (
+                              <CheckCircle className="w-3.5 h-3.5 text-green-500" />
+                            ) : (
+                              <XCircle className="w-3.5 h-3.5 text-neutral-300 dark:text-neutral-600" />
+                            )}
+                            <span className={passwordRequirements.uppercase ? "text-green-500" : "text-neutral-400"}>
+                              Uppercase
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1.5">
+                            {passwordRequirements.lowercase ? (
+                              <CheckCircle className="w-3.5 h-3.5 text-green-500" />
+                            ) : (
+                              <XCircle className="w-3.5 h-3.5 text-neutral-300 dark:text-neutral-600" />
+                            )}
+                            <span className={passwordRequirements.lowercase ? "text-green-500" : "text-neutral-400"}>
+                              Lowercase
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1.5 col-span-2">
+                            {passwordRequirements.special ? (
+                              <CheckCircle className="w-3.5 h-3.5 text-green-500" />
+                            ) : (
+                              <XCircle className="w-3.5 h-3.5 text-neutral-300 dark:text-neutral-600" />
+                            )}
+                            <span className={passwordRequirements.special ? "text-green-500" : "text-neutral-400"}>
+                              Special character (!@#$%^&*)
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* CREATE ACCOUNT BUTTON */}
+                    <button className="relative w-full py-4 px-6 rounded-xl font-bold text-white mt-4 mb-6 bg-gradient-to-r from-green-500 via-green-400 to-blue-500 hover:from-green-600 hover:via-green-500 hover:to-blue-600 transform hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-green-500/25">
                       Create Account
                     </button>
                   </>
@@ -357,20 +426,20 @@ export default function SignupPage() {
                   Already have an account?{" "}
                   <Link
                     href="/login"
-                    className="text-green-600 dark:text-green-400 font-medium"
+                    className="text-green-600 dark:text-green-400 font-medium hover:underline"
                   >
                     Log In
                   </Link>
                 </p>
 
                 {/* TERMS */}
-                <p className="text-sm text-center mt-6">
+                <p className="text-xs text-center mt-6 text-neutral-500">
                   By signing up, you agree to our{" "}
-                  <Link href="/terms" className="text-green-500 font-medium">
+                  <Link href="/terms" className="text-green-500 font-medium hover:underline">
                     Terms
                   </Link>{" "}
                   and{" "}
-                  <Link href="/privacy" className="text-green-500 font-medium">
+                  <Link href="/privacy" className="text-green-500 font-medium hover:underline">
                     Privacy Policy
                   </Link>
                 </p>
