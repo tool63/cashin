@@ -12,7 +12,9 @@ export default function AuthModal({ children }: AuthModalProps) {
   const router = useRouter();
 
   const handleClose = () => {
-    router.back();
+    // Navigate to the current path without the auth modal
+    // This removes the modal from the URL
+    router.push(window.location.pathname);
   };
 
   return (
