@@ -4,11 +4,12 @@ import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import TypingText from "@/components/typing/home";
 import OpeningStyle from "@/components/animations/openingstyle";
-import { useAuth } from "@/contexts/AuthContext"; // You'll need to create this context
 
-export default function HeroSection() {
-  const { openModal } = useAuth();
+interface HeroSectionProps {
+  onOpenAuth: (view: "login" | "signup" | "reset") => void;
+}
 
+export default function HeroSection({ onOpenAuth }: HeroSectionProps) {
   return (
     <OpeningStyle delay={0.1}>
       <section className="max-w-7xl mx-auto px-6 py-24 md:py-32 text-center">
@@ -35,7 +36,7 @@ export default function HeroSection() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            onClick={() => openModal("signup")}
+            onClick={() => onOpenAuth("signup")}
             className="group relative inline-flex items-center justify-center rounded-3xl px-16 py-6
                        bg-gradient-to-r from-yellow-400 via-green-400 to-green-500
                        text-black font-bold text-lg md:text-xl
