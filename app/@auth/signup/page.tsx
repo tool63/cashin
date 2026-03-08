@@ -200,14 +200,16 @@ export default function SignupPage() {
             <AuthModal>
               <AuthPageWrapper title="" subtitle="">
                 
-                {/* Header with centered headline and premium badge below */}
-                <div className="relative flex flex-col items-center mb-10">
+                {/* Header with centered headline */}
+                <div className="relative flex items-center justify-center mb-6">
                   <h1 className="text-3xl font-bold text-black dark:text-white">
                     Get Instant Bonus
                   </h1>
-                  
-                  {/* Premium Redesigned Badge - positioned below headline */}
-                  <div className="mt-2 group">
+                </div>
+
+                {/* Bonus Badge - Below Headline in Right Corner */}
+                <div className="flex justify-end mb-8">
+                  <div className="group">
                     <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-yellow-500 
                                     rounded-full blur-lg opacity-50 group-hover:opacity-70 
                                     transition-opacity duration-300"></div>
@@ -223,6 +225,37 @@ export default function SignupPage() {
                       <Sparkles className="w-3 h-3 text-white/80" />
                     </div>
                   </div>
+                </div>
+
+                {/* Social Login Buttons - WITHOUT ICONS */}
+                <div className="space-y-3 mb-4">
+                  <button className="w-full group relative overflow-hidden rounded-xl">
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 
+                                    opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="relative flex items-center justify-center gap-3 px-4 py-3.5 
+                                    bg-white dark:bg-neutral-900 
+                                    border-2 border-blue-500/20 dark:border-blue-500/20
+                                    group-hover:border-blue-500 rounded-xl
+                                    text-black dark:text-white font-medium
+                                    hover:shadow-lg hover:shadow-blue-500/20
+                                    transition-all duration-300">
+                      <span>Sign up with Google</span>
+                    </div>
+                  </button>
+
+                  <button className="w-full group relative overflow-hidden rounded-xl">
+                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-indigo-700 
+                                    opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="relative flex items-center justify-center gap-3 px-4 py-3.5 
+                                    bg-white dark:bg-neutral-900 
+                                    border-2 border-indigo-500/20 dark:border-indigo-500/20
+                                    group-hover:border-indigo-500 rounded-xl
+                                    text-black dark:text-white font-medium
+                                    hover:shadow-lg hover:shadow-indigo-500/20
+                                    transition-all duration-300">
+                      <span>Sign up with Facebook</span>
+                    </div>
+                  </button>
                 </div>
 
                 {/* OR Divider */}
