@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 
 interface AuthPageWrapperProps {
   title: ReactNode;
-  subtitle: ReactNode;
+  subtitle?: ReactNode;
   children: ReactNode;
 }
 
@@ -14,15 +14,25 @@ export default function AuthPageWrapper({
   children,
 }: AuthPageWrapperProps) {
   return (
-    <div className="flex flex-col w-full">
+    <div className="w-full flex flex-col items-center text-center">
+
       {/* Title */}
-      <h2 className="text-3xl font-bold mb-2">{title}</h2>
+      <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-primary">
+        {title}
+      </h2>
 
       {/* Subtitle */}
-      <p className="text-neutral-400 mb-6">{subtitle}</p>
+      {subtitle && (
+        <p className="mt-2 mb-6 text-sm sm:text-base text-muted max-w-sm">
+          {subtitle}
+        </p>
+      )}
 
-      {/* Form / Social Buttons / Other Content */}
-      {children}
+      {/* Content */}
+      <div className="w-full">
+        {children}
+      </div>
+
     </div>
   );
 }
