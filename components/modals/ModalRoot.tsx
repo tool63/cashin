@@ -13,7 +13,7 @@ export default function ModalRoot({ children, isOpen, onClose }: ModalRootProps)
   useEffect(() => {
     if (!isOpen) return;
 
-    const original = document.body.style.overflow;
+    const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
     const handleEsc = (e: KeyboardEvent) => {
@@ -23,33 +23,31 @@ export default function ModalRoot({ children, isOpen, onClose }: ModalRootProps)
     window.addEventListener("keydown", handleEsc);
 
     return () => {
-      document.body.style.overflow = original;
+      document.body.style.overflow = originalOverflow;
       window.removeEventListener("keydown", handleEsc);
     };
   }, [isOpen, onClose]);
-
-  const handleBackgroundClick = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
 
   if (!isOpen) return null;
 
   return createPortal(
     <div
-      onClick={handleBackgroundClick}
+      onClick={onClose}
       className="
         fixed inset-0 z-50
-        flex items-start justify-center
-        pt-24 px-4
-        backdrop-blur-lg
-        bg-black/50
+        flex items-center justify-center
+        bg-black/50 dark:bg-black/60
+        backdrop-blur-md
         animate-in fade-in duration-200
       "
     >
-      {/* Prevent modal close when clicking inside */}
-      <div onClick={(e) => e.stopPropagation()}>
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="
+          w-full max-w-md
+          animate-in fade-in zoom-in-95 duration-200
+        "
+      >
         {children}
       </div>
     </div>,
