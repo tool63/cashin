@@ -2,11 +2,11 @@
 
 import "../styles/globals.css";
 import { ReactNode, useEffect, useState, Suspense } from "react";
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { ErrorBoundary } from "react-error-boundary";
 import dynamic from "next/dynamic";
 
-// Dynamic components with proper loading states
+// Dynamic components
 const Header = dynamic(() => import("@/components/Header"), {
   loading: () => <div className="h-16 w-full bg-[#0E111B]" />,
 });
@@ -16,9 +16,7 @@ const Footer = dynamic(() => import("@/components/Footer"), {
 });
 
 const FloatingCTA = dynamic(() => import("@/components/cta/FloatingCTA"));
-
 const Background = dynamic(() => import("@/components/Background"));
-
 const SeoRenderer = dynamic(() => import("@/components/SEO/SeoRenderer"));
 
 import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
@@ -27,16 +25,15 @@ import { SEO_CONFIG } from "@/components/SEO/seoConfig";
 import ModalRoot from "@/components/modals/ModalRoot";
 import AuthModal from "@/components/modals/AuthModal";
 
-// Lazy load auth pages - using RELATIVE paths (FIXED)
-const LoginPage = dynamic(() => import("./@auth/login/page"));
-const SignupPage = dynamic(() => import("./@auth/signup/page"));
-const ResetPage = dynamic(() => import("./@auth/reset/page"));
+// Import auth pages
+import LoginPage from "./@auth/login/page";
+import SignupPage from "./@auth/signup/page";
+import ResetPage from "./@auth/reset/page";
 
 interface RootLayoutProps {
   children: ReactNode;
 }
 
-// Simple error fallback
 function ErrorFallback({ error }: { error: Error }) {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#0E111B] p-4">
@@ -50,26 +47,21 @@ function ErrorFallback({ error }: { error: Error }) {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const router = useRouter();
   
   const [mounted, setMounted] = useState(false);
   const [seo, setSeo] = useState<SEOOutput | null>(null);
+  const [showAuth, setShowAuth] = useState<"login" | "signup" | "reset" | null>(null);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Modal logic
-  const authType = searchParams?.get("auth");
-  const hasAuthModal = authType === "login" || authType === "signup" || authType === "reset";
+  const openModal = (type: "login" | "signup" | "reset") => {
+    setShowAuth(type);
+  };
 
   const closeModal = () => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.delete("auth");
-    const url = params.toString() ? `?${params}` : window.location.pathname;
-    window.history.replaceState({}, "", url);
-    router.refresh();
+    setShowAuth(null);
   };
 
   // Check if current page is auth page
@@ -94,23 +86,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
   // Body scroll lock
   useEffect(() => {
-    document.body.style.overflow = hasAuthModal ? "hidden" : "unset";
+    document.body.style.overflow = showAuth ? "hidden" : "unset";
     return () => {
       document.body.style.overflow = "unset";
     };
-  }, [hasAuthModal]);
+  }, [showAuth]);
 
-  // Render auth content
-  const renderAuthContent = () => {
-    switch (authType) {
-      case "login": return <LoginPage />;
-      case "signup": return <SignupPage />;
-      case "reset": return <ResetPage />;
-      default: return null;
-    }
-  };
-
-  // Don't render anything until mounted
   if (!mounted) {
     return (
       <html lang="en">
@@ -130,7 +111,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body className="min-h-screen bg-[#0E111B] text-white">
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <ThemeProviderWrapper>
-            {/* Background - only when not on auth page */}
+            {/* Background */}
             {!isAuthPage && <Background />}
             
             {/* SEO */}
@@ -138,11 +119,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
             {/* Main Content */}
             <div className="relative flex min-h-screen flex-col">
-              {/* Header - hide on auth pages */}
+              {/* Header with auth buttons */}
               {!isAuthPage && (
                 <header className="fixed top-0 w-full z-40 bg-[#0E111B]/80 backdrop-blur-xl border-b border-[#2A2F3E]">
                   <Suspense fallback={<div className="h-16" />}>
-                    <Header />
+                    <Header onOpenAuth={openModal} />
                   </Suspense>
                 </header>
               )}
@@ -152,14 +133,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 {children}
               </main>
 
-              {/* Footer - hide on auth pages */}
+              {/* Footer */}
               {!isAuthPage && (
                 <Suspense fallback={<div className="h-40" />}>
                   <Footer />
                 </Suspense>
               )}
 
-              {/* Floating CTA - hide on auth pages */}
+              {/* Floating CTA */}
               {!isAuthPage && (
                 <Suspense fallback={null}>
                   <FloatingCTA />
@@ -168,14 +149,16 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </div>
 
             {/* Auth Modal */}
-            {hasAuthModal && (
+            {showAuth && (
               <ModalRoot isOpen onClose={closeModal}>
                 <AuthModal onClose={closeModal}>
                   <Suspense fallback={<div className="h-96 bg-[#0E111B]" />}>
-                    {renderAuthContent()}
+                    {showAuth === "login" && <LoginPage />}
+                    {showAuth === "signup" && <SignupPage />}
+                    {showAuth === "reset" && <ResetPage />}
                   </Suspense>
                   
-                  {authType === "signup" && (
+                  {showAuth === "signup" && (
                     <div className="px-6 pb-6">
                       <p className="text-xs text-gray-500 text-center">
                         Users are prohibited from using multiple accounts, completing offers on another user's account, 
