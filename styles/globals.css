@@ -10,54 +10,70 @@
    Light Mode
 ------------------------ */
 :root {
-  /* Backgrounds */
   --bg-primary: #ffffff;
   --bg-secondary: #f9fafb;
-  --card-bg: #ffffff; /* white cards */
+  --card-bg: #ffffff;
 
-  /* Text */
   --text-primary: #111827;
   --text-muted: #6B7280;
 
-  /* Borders */
   --border-color: #e5e7eb;
+  --border-light: #f3f4f6;
 
-  /* Light Yellow-Green Gradient */
   --gradient-from: rgba(250, 204, 21, 0.35);
   --gradient-via: rgba(34, 197, 94, 0.30);
   --gradient-to: rgba(22, 163, 74, 0.30);
 
-  /* Glow */
   --glow-green: rgba(34, 197, 94, 0.25);
   --glow-yellow: rgba(250, 204, 21, 0.25);
+  --glow-blue: rgba(59, 130, 246, 0.25);
+  --glow-purple: rgba(168, 85, 247, 0.25);
+  --glow-rose: rgba(244, 114, 182, 0.25);
+
+  --strength-weak: #ef4444;
+  --strength-fair: #f97316;
+  --strength-good: #eab308;
+  --strength-strong: #22c55e;
+  --strength-bg: #e5e7eb;
+
+  --focus-green: #22c55e;
+  --focus-blue: #3b82f6;
+  --focus-purple: #a855f7;
 }
 
 /* ----------------------
    Dark Mode
 ------------------------ */
 .dark {
-  /* Dark base */
   --bg-primary: #05080f;
   --bg-secondary: #0b1220;
-  --card-bg: #000000; /* black cards */
+  --card-bg: #000000;
 
   --text-primary: #ffffff;
   --text-muted: #9CA3AF;
 
   --border-color: #1f2937;
+  --border-light: #374151;
 
-  /* Deep Yellow-Green Gradient */
   --gradient-from: rgba(234, 179, 8, 0.45);
   --gradient-via: rgba(34, 197, 94, 0.40);
   --gradient-to: rgba(21, 128, 61, 0.45);
 
-  /* Stronger glow for dark */
   --glow-green: rgba(34, 197, 94, 0.35);
   --glow-yellow: rgba(234, 179, 8, 0.35);
+  --glow-blue: rgba(59, 130, 246, 0.35);
+  --glow-purple: rgba(168, 85, 247, 0.35);
+  --glow-rose: rgba(244, 114, 182, 0.35);
+
+  --strength-bg: #374151;
+
+  --focus-green: #4ade80;
+  --focus-blue: #60a5fa;
+  --focus-purple: #c084fc;
 }
 
 /* =====================================================
-   GLOBAL BASE STYLES
+   GLOBAL BASE
 ===================================================== */
 
 html,
@@ -67,20 +83,29 @@ body {
   font-family: "Inter", sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
-/* Utility mappings */
-.bg-primary { background-color: var(--bg-primary); }
-.bg-secondary { background-color: var(--bg-secondary); }
-.bg-card { background-color: var(--card-bg); }
+/* =====================================================
+   UTILITIES
+===================================================== */
 
-.text-primary { color: var(--text-primary); }
-.text-muted { color: var(--text-muted); }
+@layer utilities {
 
-.border-theme { border-color: var(--border-color); }
+  .bg-primary { background-color: var(--bg-primary); }
+  .bg-secondary { background-color: var(--bg-secondary); }
+  .bg-card { background-color: var(--card-bg); }
+
+  .text-primary { color: var(--text-primary); }
+  .text-muted { color: var(--text-muted); }
+
+  .border-theme { border-color: var(--border-color); }
+  .border-theme-light { border-color: var(--border-light); }
+
+}
 
 /* =====================================================
-   CORE GLOBAL GRADIENT BACKGROUND
+   GRADIENT BACKGROUND
 ===================================================== */
 
 .core-gradient-bg {
@@ -105,68 +130,165 @@ body {
 }
 
 /* =====================================================
+   REVEAL ANIMATIONS
+===================================================== */
+
+@keyframes revealUp {
+  from { opacity:0; transform:translateY(20px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+.animate-reveal-up {
+  animation: revealUp 0.6s ease-out forwards;
+}
+
+/* =====================================================
+   SLIDE ANIMATIONS
+===================================================== */
+
+@keyframes slideDown {
+  from { opacity:0; transform:translateY(-10px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.3s ease-out;
+}
+
+/* =====================================================
+   FADE
+===================================================== */
+
+@keyframes fadeIn {
+  from {opacity:0;}
+  to {opacity:1;}
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* =====================================================
    GLOW BLOBS
 ===================================================== */
 
 .blob {
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(110px);
-  opacity: 0.9;
+  position:absolute;
+  border-radius:9999px;
+  filter:blur(110px);
+  opacity:0.9;
+  pointer-events:none;
 }
 
-.blob-green {
-  background-color: var(--glow-green);
-}
-
-.blob-yellow {
-  background-color: var(--glow-yellow);
-}
+.blob-green { background-color: var(--glow-green); }
+.blob-yellow { background-color: var(--glow-yellow); }
+.blob-blue { background-color: var(--glow-blue); }
 
 @keyframes blobMove {
-  0%, 100% { transform: translate(0,0) rotate(0deg); }
-  25% { transform: translate(20px,-30px) rotate(45deg); }
-  50% { transform: translate(-20px,20px) rotate(90deg); }
-  75% { transform: translate(30px,10px) rotate(135deg); }
-}
-
-@keyframes blobMove2 {
-  0%, 100% { transform: translate(0,0) rotate(0deg); }
-  25% { transform: translate(-25px,15px) rotate(-45deg); }
-  50% { transform: translate(20px,-20px) rotate(-90deg); }
-  75% { transform: translate(-15px,25px) rotate(-135deg); }
+  0%,100% { transform:translate(0,0) rotate(0deg); }
+  50% { transform:translate(20px,-30px) rotate(90deg); }
 }
 
 .animate-blobMove {
   animation: blobMove 30s linear infinite;
 }
 
-.animate-blobMove2 {
-  animation: blobMove2 45s linear infinite;
+/* =====================================================
+   PASSWORD STRENGTH
+===================================================== */
+
+.strength-bar-weak { background:var(--strength-weak); }
+.strength-bar-fair { background:var(--strength-fair); }
+.strength-bar-good { background:var(--strength-good); }
+.strength-bar-strong { background:var(--strength-strong); }
+
+.strength-bar-bg { background:var(--strength-bg); }
+
+.requirement-met { color:var(--strength-strong); }
+.requirement-unmet { color:var(--text-muted); }
+
+/* =====================================================
+   INPUT FOCUS
+===================================================== */
+
+.focus-ring-green:focus {
+  outline:none;
+  border-color:var(--focus-green);
+  box-shadow:0 0 0 3px rgba(34,197,94,0.2);
+}
+
+.focus-ring-blue:focus {
+  outline:none;
+  border-color:var(--focus-blue);
+  box-shadow:0 0 0 3px rgba(59,130,246,0.2);
 }
 
 /* =====================================================
-   Gradient Text Utility
+   GRADIENT TEXT
 ===================================================== */
 
 .gradient-text {
-  background: linear-gradient(
-    to right,
-    #facc15,
-    #22c55e,
-    #16a34a
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
+  background:linear-gradient(to right,#facc15,#22c55e,#16a34a);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
 }
 
 /* =====================================================
-   PERFORMANCE OPTIMIZATION
+   BUTTON HOVER
 ===================================================== */
 
-* {
-  transition: background-color 0.3s ease,
-              color 0.3s ease,
-              border-color 0.3s ease;
+.hover-scale {
+  transition:transform 0.2s ease;
+}
+
+.hover-scale:hover {
+  transform:scale(1.02);
+}
+
+.hover-scale:active {
+  transform:scale(0.98);
+}
+
+/* =====================================================
+   SELECTION
+===================================================== */
+
+::selection {
+  background:rgba(34,197,94,0.35);
+  color:white;
+}
+
+/* =====================================================
+   ACCESSIBILITY
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration:0.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:0.01ms !important;
+    scroll-behavior:auto !important;
+  }
+}
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+
+::-webkit-scrollbar {
+  width:8px;
+}
+
+::-webkit-scrollbar-track {
+  background:var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background:var(--border-color);
+  border-radius:4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background:var(--text-muted);
 }
