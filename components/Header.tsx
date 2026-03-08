@@ -7,7 +7,11 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import LanguageSwitcher from "@/components/switch/LanguageSwitcher";
 import DarkLightToggle from "@/components/switch/DarkLightToggle";
 
-export default function Header() {
+interface HeaderProps {
+  onOpenAuth: (type: "login" | "signup" | "reset") => void;
+}
+
+export default function Header({ onOpenAuth }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [earnOpen, setEarnOpen] = useState(false);
   const [mobileEarnOpen, setMobileEarnOpen] = useState(false);
@@ -95,29 +99,31 @@ export default function Header() {
           <LanguageSwitcher />
           <DarkLightToggle />
           
-          <Link href="/?auth=login">
-            <button
-              onClick={() => setActiveButton("login")}
-              className={`px-4 py-2 rounded-lg text-sm transition ${
-                activeButton === "login" ? ctaGradient : "border text-primary"
-              }`}
-            >
-              Login
-            </button>
-          </Link>
+          <button
+            onClick={() => {
+              setActiveButton("login");
+              onOpenAuth("login");
+            }}
+            className={`px-4 py-2 rounded-lg text-sm transition ${
+              activeButton === "login" ? ctaGradient : "border text-primary"
+            }`}
+          >
+            Login
+          </button>
 
-          <Link href="/?auth=signup">
-            <button
-              onClick={() => setActiveButton("signup")}
-              className={`px-5 py-2 rounded-lg text-sm transition ${
-                activeButton === "signup" || activeButton === "none"
-                  ? ctaGradient
-                  : "bg-white dark:bg-[#070A14] border border-gray-300 dark:border-white/20 text-black dark:text-white"
-              }`}
-            >
-              Sign up
-            </button>
-          </Link>
+          <button
+            onClick={() => {
+              setActiveButton("signup");
+              onOpenAuth("signup");
+            }}
+            className={`px-5 py-2 rounded-lg text-sm transition ${
+              activeButton === "signup" || activeButton === "none"
+                ? ctaGradient
+                : "bg-white dark:bg-[#070A14] border border-gray-300 dark:border-white/20 text-black dark:text-white"
+            }`}
+          >
+            Sign up
+          </button>
         </div>
 
         {/* MOBILE BUTTON */}
@@ -188,17 +194,25 @@ export default function Header() {
             </div>
 
             <div className="pt-4 flex flex-col gap-3">
-              <Link href="/login">
-                <button className="border border-gray-300 dark:border-white/20 py-2 rounded-lg w-full text-gray-900 dark:text-white">
-                  Login
-                </button>
-              </Link>
+              <button
+                onClick={() => {
+                  setMobileOpen(false);
+                  onOpenAuth("login");
+                }}
+                className="border border-gray-300 dark:border-white/20 py-2 rounded-lg w-full text-gray-900 dark:text-white"
+              >
+                Login
+              </button>
 
-              <Link href="/signup">
-                <button className={`${ctaGradient} py-2 rounded-lg w-full`}>
-                  Sign up
-                </button>
-              </Link>
+              <button
+                onClick={() => {
+                  setMobileOpen(false);
+                  onOpenAuth("signup");
+                }}
+                className={`${ctaGradient} py-2 rounded-lg w-full`}
+              >
+                Sign up
+              </button>
             </div>
           </motion.div>
         )}
