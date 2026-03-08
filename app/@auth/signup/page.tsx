@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import dynamic from "next/dynamic";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import {
   Eye,
   EyeOff,
@@ -223,21 +223,31 @@ export default function SignupPage() {
 
                 {/* SOCIAL LOGIN */}
                 <div className="space-y-3 mb-4">
-                  <button className="w-full group relative overflow-hidden rounded-xl">
+                  {/* Google Login Button */}
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full group relative overflow-hidden rounded-xl"
+                  >
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <div className="relative flex items-center justify-center gap-3 px-4 py-3.5 bg-white dark:bg-neutral-900 border-2 border-blue-500/20 group-hover:border-blue-500 rounded-xl text-black dark:text-white font-medium hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300">
                       <Chrome className="w-5 h-5 text-blue-500" />
                       <span>Sign up with Google</span>
                     </div>
-                  </button>
+                  </motion.button>
 
-                  <button className="w-full group relative overflow-hidden rounded-xl">
+                  {/* Facebook Login Button */}
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full group relative overflow-hidden rounded-xl"
+                  >
                     <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-indigo-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <div className="relative flex items-center justify-center gap-3 px-4 py-3.5 bg-white dark:bg-neutral-900 border-2 border-indigo-500/20 group-hover:border-indigo-500 rounded-xl text-black dark:text-white font-medium hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300">
                       <Facebook className="w-5 h-5 text-indigo-500" />
                       <span>Sign up with Facebook</span>
                     </div>
-                  </button>
+                  </motion.button>
                 </div>
 
                 {/* OR DIVIDER */}
@@ -253,20 +263,27 @@ export default function SignupPage() {
 
                 {/* CONTINUE WITH EMAIL BUTTON */}
                 {!formVisible && (
-                  <button
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     onClick={handleContinueWithEmail}
                     className="w-full py-3.5 rounded-xl bg-white dark:bg-neutral-900 border-2 border-neutral-200 dark:border-neutral-800 text-black dark:text-white font-medium flex items-center justify-center gap-2 hover:border-green-500 dark:hover:border-green-500 hover:bg-neutral-50 dark:hover:bg-neutral-800 hover:shadow-lg hover:shadow-green-500/10 transition-all duration-300 group"
                   >
                     <Mail className="w-4 h-4 text-neutral-500 group-hover:text-green-500" />
                     <span>Continue with Email</span>
-                  </button>
+                  </motion.button>
                 )}
 
                 {/* EMAIL SIGNUP FORM */}
                 {formVisible && (
                   <>
                     {/* FULL NAME FIELD */}
-                    <div className="relative mb-4">
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="relative mb-4"
+                    >
                       <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
                       <input
                         type="text"
@@ -276,10 +293,15 @@ export default function SignupPage() {
                         placeholder="Full Name"
                         className="w-full p-4 pl-12 rounded-xl bg-white dark:bg-neutral-900 border-2 border-neutral-200 dark:border-neutral-800 text-black dark:text-white placeholder-neutral-400 focus:border-green-500 focus:outline-none transition-colors duration-200"
                       />
-                    </div>
+                    </motion.div>
 
                     {/* EMAIL FIELD */}
-                    <div className="relative mb-4">
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: 0.1 }}
+                      className="relative mb-4"
+                    >
                       <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
                       <input
                         type="email"
@@ -289,10 +311,15 @@ export default function SignupPage() {
                         placeholder="Email Address"
                         className="w-full p-4 pl-12 rounded-xl bg-white dark:bg-neutral-900 border-2 border-neutral-200 dark:border-neutral-800 text-black dark:text-white placeholder-neutral-400 focus:border-green-500 focus:outline-none transition-colors duration-200"
                       />
-                    </div>
+                    </motion.div>
 
                     {/* PASSWORD FIELD */}
-                    <div className="relative mb-2">
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: 0.2 }}
+                      className="relative mb-2"
+                    >
                       <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
                       <input
                         type={showPassword ? "text" : "password"}
@@ -311,11 +338,17 @@ export default function SignupPage() {
                       >
                         {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
                       </button>
-                    </div>
+                    </motion.div>
 
                     {/* PASSWORD STRENGTH INDICATOR */}
                     {showStrength && formData.password && (
-                      <div className="mb-4 space-y-3">
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="mb-4 space-y-3 overflow-hidden"
+                      >
                         {/* Strength Bar */}
                         <div className="space-y-1">
                           <div className="flex justify-between items-center">
@@ -329,9 +362,11 @@ export default function SignupPage() {
                             </span>
                           </div>
                           <div className="h-1.5 w-full bg-neutral-200 dark:bg-neutral-800 rounded-full overflow-hidden">
-                            <div 
+                            <motion.div 
+                              initial={{ width: 0 }}
+                              animate={{ width: `${(passwordStrength / 4) * 100}%` }}
+                              transition={{ duration: 0.3 }}
                               className={`h-full transition-all duration-300 ${getStrengthColor()}`}
-                              style={{ width: `${(passwordStrength / 4) * 100}%` }}
                             />
                           </div>
                         </div>
@@ -389,18 +424,47 @@ export default function SignupPage() {
                             </span>
                           </div>
                         </div>
-                      </div>
+                      </motion.div>
                     )}
 
-                    {/* CREATE ACCOUNT BUTTON */}
-                    <button className="relative w-full py-4 px-6 rounded-xl font-bold text-white mt-4 mb-6 bg-gradient-to-r from-green-500 via-green-400 to-blue-500 hover:from-green-600 hover:via-green-500 hover:to-blue-600 transform hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-green-500/25">
-                      Create Account
-                    </button>
+                    {/* CREATE ACCOUNT BUTTON - Matching CTA button style */}
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3, delay: 0.3 }}
+                      className="relative mt-6 mb-6"
+                    >
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.97 }}
+                        className="group relative w-full rounded-xl px-6 py-4 flex items-center justify-center gap-3
+                          bg-gradient-to-r from-yellow-400 via-green-400 to-green-500
+                          hover:shadow-xl
+                          transition-all duration-300
+                          hover:-translate-y-1
+                          cursor-pointer"
+                      >
+                        <span className="text-lg md:text-xl font-bold text-black">
+                          Create Account
+                        </span>
+                        <ArrowRight className="text-black group-hover:translate-x-1 transition-transform duration-300" />
+                        
+                        {/* Button indicator */}
+                        <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-1 text-green-500 text-sm font-medium opacity-0 group-hover:opacity-100 transition whitespace-nowrap">
+                          Get your $0.50 bonus <ArrowRight size={16} />
+                        </div>
+                      </motion.button>
+                    </motion.div>
                   </>
                 )}
 
                 {/* TRUST BADGES */}
-                <div className="flex items-center justify-center gap-4 mt-4 text-sm">
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3, delay: 0.4 }}
+                  className="flex items-center justify-center gap-4 mt-4 text-sm"
+                >
                   <div className="flex items-center gap-1.5 text-black dark:text-white">
                     <Shield className="w-4 h-4 text-blue-500" />
                     <span>Secured</span>
@@ -419,10 +483,15 @@ export default function SignupPage() {
                     <Heart className="w-4 h-4 text-rose-500" />
                     <span>Happy</span>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* FOOTER */}
-                <p className="text-sm text-black dark:text-white mt-6 text-center">
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3, delay: 0.5 }}
+                  className="text-sm text-black dark:text-white mt-6 text-center"
+                >
                   Already have an account?{" "}
                   <Link
                     href="/login"
@@ -430,10 +499,15 @@ export default function SignupPage() {
                   >
                     Log In
                   </Link>
-                </p>
+                </motion.p>
 
                 {/* TERMS */}
-                <p className="text-xs text-center mt-6 text-neutral-500">
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3, delay: 0.6 }}
+                  className="text-xs text-center mt-6 text-neutral-500"
+                >
                   By signing up, you agree to our{" "}
                   <Link href="/terms" className="text-green-500 font-medium hover:underline">
                     Terms
@@ -442,7 +516,7 @@ export default function SignupPage() {
                   <Link href="/privacy" className="text-green-500 font-medium hover:underline">
                     Privacy Policy
                   </Link>
-                </p>
+                </motion.p>
 
               </AuthPageWrapper>
             </AuthModal>
