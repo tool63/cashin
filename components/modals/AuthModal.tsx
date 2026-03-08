@@ -2,33 +2,22 @@
 
 import { ReactNode, useEffect } from "react";
 import { X } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
 
 interface AuthModalProps {
   children: ReactNode;
+  onClose: () => void;  // Add this prop
 }
 
-export default function AuthModal({ children }: AuthModalProps) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const closeModal = () => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.delete("auth");
-
-    const query = params.toString();
-    router.replace(query ? `?${query}` : "/");
-  };
-
+export default function AuthModal({ children, onClose }: AuthModalProps) {
   // ESC key close
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") closeModal();
+      if (e.key === "Escape") onClose();
     };
 
     window.addEventListener("keydown", handleEsc);
     return () => window.removeEventListener("keydown", handleEsc);
-  }, []);
+  }, [onClose]);
 
   return (
     <div
@@ -50,7 +39,7 @@ export default function AuthModal({ children }: AuthModalProps) {
     >
       {/* Close Button */}
       <button
-        onClick={closeModal}
+        onClick={onClose}
         className="absolute top-4 right-4 text-muted hover:text-primary transition"
       >
         <X size={20} />
