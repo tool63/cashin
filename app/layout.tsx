@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import "../styles/globals.css";
 import { ReactNode, useEffect, useState, Suspense } from "react";
 import { usePathname } from "next/navigation";
