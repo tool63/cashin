@@ -35,8 +35,7 @@ export default function Header() {
     <header
       ref={headerRef}
       className="fixed top-0 left-0 w-full z-50
-        bg-transparent
-        backdrop-blur-md
+        bg-white/95 dark:bg-gray-900/95
         shadow-sm"
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
@@ -76,7 +75,7 @@ export default function Header() {
                   className="
                     absolute top-full left-0 mt-2 w-48
                     flex flex-col gap-1 p-3 rounded-xl
-                    bg-transparent
+                    bg-white/95 dark:bg-gray-900/95
                     text-primary
                     border border-gray-200 dark:border-white/10
                     shadow-xl
@@ -119,7 +118,7 @@ export default function Header() {
               className={`px-5 py-2 rounded-lg text-sm transition ${
                 activeButton === "signup" || activeButton === "none"
                   ? ctaGradient
-                  : "bg-white dark:bg-[#070A14] border border-gray-300 dark:border-white/20 text-black dark:text-white"
+                  : "bg-white dark:bg-gray-900 border border-gray-300 dark:border-white/20 text-black dark:text-white"
               }`}
             >
               Sign up
@@ -145,7 +144,7 @@ export default function Header() {
             exit={{ opacity: 0, y: -10 }}
             className="
               md:hidden px-6 py-6 space-y-4 border-t
-              bg-transparent
+              bg-white/95 dark:bg-gray-900/95
               text-primary
               border-gray-200 dark:border-white/10
               shadow-xl
