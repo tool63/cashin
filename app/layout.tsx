@@ -33,7 +33,6 @@ const fadeInUp = {
 };
 
 export default function RootLayout({ children }: RootLayoutProps) {
-
   const defaultSeo: SEOOutput = {
     metadata: {
       title: SEO_CONFIG.siteName,
@@ -59,9 +58,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       twitter: {
         card: "summary_large_image",
         site: SEO_CONFIG.twitterHandle || "",
-        images: SEO_CONFIG.defaultTwitterImage
-          ? [SEO_CONFIG.defaultTwitterImage]
-          : [],
+        images: SEO_CONFIG.defaultTwitterImage ? [SEO_CONFIG.defaultTwitterImage] : [],
         imageAlt: SEO_CONFIG.siteName,
       },
       viewport: "width=device-width, initial-scale=1",
@@ -108,7 +105,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <RootProviders>
           <ThemeProviderWrapper>
             <LanguageProvider>
-
+              
+              {/* Background */}
               <Background />
 
               {/* Header */}
@@ -123,17 +121,18 @@ export default function RootLayout({ children }: RootLayoutProps) {
                   animate="animate"
                   exit="exit"
                   variants={pageTransition}
-                  className="relative z-10"
+                  className="relative z-10 max-w-7xl mx-auto px-6 py-10 sm:py-16"
                 >
                   {children}
                 </motion.main>
               </AnimatePresence>
 
-              {/* CTA */}
+              {/* Floating CTA */}
               <motion.div
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
+                className="fixed bottom-6 right-6 z-20"
               >
                 <FloatingCTA />
               </motion.div>
