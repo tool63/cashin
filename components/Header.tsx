@@ -15,10 +15,8 @@ export default function Header() {
 
   const headerRef = useRef<HTMLDivElement>(null);
 
-  // Yellow → Green gradient for CTA buttons/logo
   const ctaGradient = "bg-gradient-to-r from-yellow-400 to-green-500 text-black";
 
-  // Close menus when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
@@ -32,7 +30,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header ref={headerRef} className="fixed top-0 left-0 w-full z-20 shadow-sm bg-background">
+    <header ref={headerRef} className="fixed top-0 left-0 w-full z-20 shadow-sm bg-white dark:bg-[#070A14]">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
         {/* LOGO */}
@@ -67,7 +65,7 @@ export default function Header() {
                   className="
                     absolute top-full left-0 mt-2 w-48
                     flex flex-col gap-1 p-3 rounded-xl
-                    bg-background
+                    bg-white dark:bg-[#0D1117]
                     text-primary
                     border border-gray-200 dark:border-white/10
                     shadow-xl
@@ -133,7 +131,7 @@ export default function Header() {
             exit={{ opacity: 0, y: -10 }}
             className="
               md:hidden px-6 py-6 space-y-4 border-t
-              bg-background
+              bg-white dark:bg-[#0D1117]
               text-primary
               border-gray-200 dark:border-white/10
               shadow-xl
@@ -181,7 +179,7 @@ export default function Header() {
               </Link>
 
               <Link href="/signup">
-                <button className={`${ctaGradient} py-2 rounded-lg w-full`}>Sign up</button>
+                <button className="bg-gradient-to-r from-yellow-400 to-green-500 py-2 rounded-lg w-full text-black">Sign up</button>
               </Link>
             </div>
           </motion.div>
