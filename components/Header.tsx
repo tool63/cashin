@@ -18,6 +18,7 @@ export default function Header() {
   const ctaGradient =
     "bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black";
 
+  // Close menus when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
@@ -31,7 +32,10 @@ export default function Header() {
   }, []);
 
   return (
-    <header ref={headerRef} className="w-full">
+    <header
+      ref={headerRef}
+      className="fixed top-0 left-0 w-full z-50 bg-white dark:bg-gray-900 shadow-sm"
+    >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
         {/* LOGO */}
@@ -94,7 +98,7 @@ export default function Header() {
         <div className="hidden md:flex items-center gap-4">
           <LanguageSwitcher />
           <DarkLightToggle />
-          
+
           <Link href="/?auth=login">
             <button
               onClick={() => setActiveButton("login")}
