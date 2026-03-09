@@ -16,12 +16,10 @@ import AuthLayout from './@auth/layout';
 import SeoRenderer from '@/components/SEO/SeoRenderer';
 import { SEO_CONFIG } from '@/components/SEO/seoConfig';
 import { SEOOutput } from '@/components/SEO/seoEngine';
-import { detectPageType, PageTypeResult } from '@/utils/pageTypeDetection'; // updated path
 
 interface RootLayoutProps {
   children: ReactNode;
   authPage?: boolean;
-  route?: string; // pass current route if available
 }
 
 // Page transition animation
@@ -37,17 +35,14 @@ const fadeInUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
 };
 
-export default function RootLayout({ children, authPage = false, route = '/' }: RootLayoutProps) {
-  // ✅ Detect page type with full typing
-  const pageType: PageTypeResult = detectPageType(route);
-
-  // ✅ Build SEO object
+export default function RootLayout({ children, authPage = false }: RootLayoutProps) {
+  // Simple SEO object without pageType detection
   const defaultSeo: SEOOutput = {
     metadata: {
       title: SEO_CONFIG.siteName,
       description: SEO_CONFIG.defaultDescription || '',
       keywords: SEO_CONFIG.defaultKeywords || [],
-      robots: pageType.metadata.noindex ? 'noindex, nofollow' : 'index, follow',
+      robots: 'index, follow',
       openGraph: {
         type: 'website',
         url: SEO_CONFIG.siteUrl,
@@ -79,8 +74,7 @@ export default function RootLayout({ children, authPage = false, route = '/' }: 
     hreflang: Object.fromEntries(
       SEO_CONFIG.supportedLocales.map((loc) => [loc, SEO_CONFIG.siteUrl])
     ),
-    pageType, // ✅ fully typed now
-    structuredData: [], 
+    structuredData: [],
     preconnect: SEO_CONFIG.preconnect || [],
     links: [],
     prefetch: [],
