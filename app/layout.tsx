@@ -72,7 +72,17 @@ export default function RootLayout({ children }: RootLayoutProps) {
     prefetch: [],
     prerender: [],
     modulePreload: [],
-    metrics: { pageType: "unknown", generationTime: 0, metadataSize: 0, schemaCount: 0, cacheHit: false, warnings: 0, suggestions: 0, seoScore: 0, timestamp: Date.now() },
+    metrics: {
+      pageType: "unknown",
+      generationTime: 0,
+      metadataSize: 0,
+      schemaCount: 0,
+      cacheHit: false,
+      warnings: 0,
+      suggestions: 0,
+      seoScore: 0,
+      timestamp: Date.now(),
+    },
   };
 
   return (
