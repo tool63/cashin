@@ -1,36 +1,35 @@
 "use client";
 
-import '@/styles/globals.css';
-import { ReactNode } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import "@/styles/globals.css";
+import { ReactNode } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
-import RootProviders from './providers/RootProviders';
-import ThemeProviderWrapper from './providers/ThemeProviderWrapper';
-import LanguageProvider from './providers/LanguageProvider';
+import RootProviders from "./providers/RootProviders";
+import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
+import LanguageProvider from "./providers/LanguageProvider";
 
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import Background from '@/components/Background';
-import FloatingCTA from '@/components/cta/FloatingCTA';
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import Background from "@/components/Background";
+import FloatingCTA from "@/components/cta/FloatingCTA";
 
-import SeoRenderer from '@/components/SEO/SeoRenderer';
-import { SEO_CONFIG } from '@/components/SEO/seoConfig';
-import { SEOOutput } from '@/components/SEO/seoEngine';
+import SeoRenderer from "@/components/SEO/SeoRenderer";
+import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import { SEOOutput } from "@/components/SEO/seoEngine";
 
 interface RootLayoutProps {
   children: ReactNode;
 }
 
-// Page transition animation for Framer Motion
 const pageTransition = {
-  initial: { opacity: 0, y: 20, transition: { duration: 0.5, ease: 'easeInOut' } },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeInOut' } },
-  exit: { opacity: 0, y: -20, transition: { duration: 0.5, ease: 'easeInOut' } },
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -20 },
 };
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+  visible: { opacity: 1, y: 0 },
 };
 
 export default function RootLayout({ children }: RootLayoutProps) {
@@ -38,19 +37,19 @@ export default function RootLayout({ children }: RootLayoutProps) {
   const defaultSeo: SEOOutput = {
     metadata: {
       title: SEO_CONFIG.siteName,
-      description: SEO_CONFIG.defaultDescription || '',
+      description: SEO_CONFIG.defaultDescription || "",
       keywords: SEO_CONFIG.defaultKeywords || [],
-      robots: 'index, follow',
+      robots: "index, follow",
       openGraph: {
-        type: 'website',
+        type: "website",
         url: SEO_CONFIG.siteUrl,
         title: SEO_CONFIG.siteName,
-        description: SEO_CONFIG.defaultDescription || '',
+        description: SEO_CONFIG.defaultDescription || "",
         siteName: SEO_CONFIG.siteName,
         locale: SEO_CONFIG.defaultLocale,
         images: [
           {
-            url: SEO_CONFIG.defaultOgImage || '',
+            url: SEO_CONFIG.defaultOgImage || "",
             width: 1200,
             height: 630,
             alt: SEO_CONFIG.siteName,
@@ -58,24 +57,24 @@ export default function RootLayout({ children }: RootLayoutProps) {
         ],
       },
       twitter: {
-        card: 'summary_large_image',
-        site: SEO_CONFIG.twitterHandle || '',
-        images: SEO_CONFIG.defaultTwitterImage ? [SEO_CONFIG.defaultTwitterImage] : [],
+        card: "summary_large_image",
+        site: SEO_CONFIG.twitterHandle || "",
+        images: SEO_CONFIG.defaultTwitterImage
+          ? [SEO_CONFIG.defaultTwitterImage]
+          : [],
         imageAlt: SEO_CONFIG.siteName,
       },
-      viewport: 'width=device-width, initial-scale=1',
+      viewport: "width=device-width, initial-scale=1",
       other: {
-        'theme-color': SEO_CONFIG.themeColor || '#000000',
+        "theme-color": SEO_CONFIG.themeColor || "#000000",
       },
     },
     canonical: SEO_CONFIG.siteUrl,
-    hreflang: Object.fromEntries(
-      SEO_CONFIG.supportedLocales.map((loc) => [loc, SEO_CONFIG.siteUrl])
-    ),
+    hreflang: {},
     structuredData: [],
     pageType: {
-      type: 'unknown',
-      hierarchy: ['unknown'],
+      type: "unknown",
+      hierarchy: ["unknown"],
       metadata: {},
       matches: null,
     },
@@ -87,7 +86,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     prerender: [],
     modulePreload: [],
     metrics: {
-      pageType: 'unknown',
+      pageType: "unknown",
       generationTime: 0,
       metadataSize: 0,
       schemaCount: 0,
@@ -112,13 +111,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
               <Background />
 
+              {/* Header */}
               <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
                 <Header />
               </motion.div>
 
+              {/* Page Content */}
               <AnimatePresence mode="wait">
                 <motion.main
-                  key={typeof window !== 'undefined' ? window.location.pathname : 'root'}
                   initial="initial"
                   animate="animate"
                   exit="exit"
@@ -129,14 +129,16 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 </motion.main>
               </AnimatePresence>
 
+              {/* CTA */}
               <motion.div
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: 'easeOut' }}
+                transition={{ duration: 0.6 }}
               >
                 <FloatingCTA />
               </motion.div>
 
+              {/* Footer */}
               <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
                 <Footer />
               </motion.div>
