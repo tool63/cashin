@@ -1,12 +1,8 @@
 "use client";
 
-import React, { ReactNode } from "react";
+import React from "react";
 
-type BackgroundProps = {
-  children?: ReactNode; // <-- allow children
-};
-
-export default function Background({ children }: BackgroundProps) {
+export default function Background() {
   return (
     <>
       {/* ============================
@@ -69,15 +65,10 @@ export default function Background({ children }: BackgroundProps) {
           rounded-full 
           blur-[100px] 
           top-1/3 right-1/4 
-          animate-pulse animation-delay-500
+          animate-pulse delay-500
           -z-10
         "
       />
-
-      {/* ============================
-          Children content will appear on top
-      ============================ */}
-      {children}
     </>
   );
 }
