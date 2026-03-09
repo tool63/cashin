@@ -32,7 +32,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header ref={headerRef} className="fixed top-0 left-0 w-full z-20 shadow-sm bg-transparent">
+    <header ref={headerRef} className="fixed top-0 left-0 w-full z-20 shadow-sm bg-background">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
         {/* LOGO */}
@@ -67,7 +67,7 @@ export default function Header() {
                   className="
                     absolute top-full left-0 mt-2 w-48
                     flex flex-col gap-1 p-3 rounded-xl
-                    bg-inherit
+                    bg-background
                     text-primary
                     border border-gray-200 dark:border-white/10
                     shadow-xl
@@ -133,7 +133,7 @@ export default function Header() {
             exit={{ opacity: 0, y: -10 }}
             className="
               md:hidden px-6 py-6 space-y-4 border-t
-              bg-inherit
+              bg-background
               text-primary
               border-gray-200 dark:border-white/10
               shadow-xl
