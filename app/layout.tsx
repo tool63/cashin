@@ -94,14 +94,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <SeoRenderer seo={defaultSeo} />
       </head>
 
-      <body className="relative flex flex-col min-h-screen text-black dark:text-white overflow-x-hidden">
+      <body className="flex flex-col min-h-screen text-black dark:text-white overflow-x-hidden">
 
         <RootProviders>
 
-          {/* Background (global) */}
+          {/* GLOBAL BACKGROUND */}
           <Background />
 
-          {/* ================= HEADER ================= */}
+          {/* HEADER */}
           <Header
             className="
               fixed top-0 left-0 right-0 z-40
@@ -111,36 +111,32 @@ export default function RootLayout({ children }: RootLayoutProps) {
             "
           />
 
-          {/* ================= MAIN CONTENT ================= */}
-          <div className="flex flex-col flex-1 pt-20">
+          {/* MAIN CONTENT */}
+          <main className="flex-1 pt-20 relative z-10 max-w-7xl mx-auto w-full px-6 py-8">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key="page"
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                variants={pageTransition}
+              >
+                {children}
+              </motion.div>
+            </AnimatePresence>
+          </main>
 
-            <main className="relative z-10 flex-1 max-w-7xl mx-auto w-full px-6 py-8">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key="page"
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                  variants={pageTransition}
-                  className="relative"
-                >
-                  {children}
-                </motion.div>
-              </AnimatePresence>
-            </main>
+          {/* FOOTER */}
+          <Footer
+            className="
+              relative z-10
+              border-t border-gray-200 dark:border-white/10
+              bg-white/80 dark:bg-black/80
+              backdrop-blur-xl
+            "
+          />
 
-            {/* ================= FOOTER ================= */}
-            <Footer
-              className="
-                border-t border-gray-200 dark:border-white/10
-                bg-white/80 dark:bg-black/80
-                backdrop-blur-xl
-              "
-            />
-
-          </div>
-
-          {/* ================= FLOATING CTA ================= */}
+          {/* FLOATING CTA */}
           <div className="fixed bottom-6 right-6 z-50">
             <FloatingCTA />
           </div>
