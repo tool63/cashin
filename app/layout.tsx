@@ -22,12 +22,11 @@ interface RootLayoutProps {
   authPage?: boolean;
 }
 
-// Page transition animation
+// Page transition animation for Framer Motion
 const pageTransition = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -20 },
-  transition: { duration: 0.5, ease: 'easeInOut' },
+  initial: { opacity: 0, y: 20, transition: { duration: 0.5, ease: 'easeInOut' } },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeInOut' } },
+  exit: { opacity: 0, y: -20, transition: { duration: 0.5, ease: 'easeInOut' } },
 };
 
 const fadeInUp = {
@@ -97,7 +96,7 @@ export default function RootLayout({ children, authPage = false }: RootLayoutPro
       warnings: 0,
       suggestions: 0,
       seoScore: 0,
-      timestamp: Date.now(), // <-- Added to satisfy SEOAnalytics type
+      timestamp: Date.now(), // ✅ Added timestamp to satisfy SEOAnalytics
     },
   };
 
@@ -126,7 +125,7 @@ export default function RootLayout({ children, authPage = false }: RootLayoutPro
                       initial="initial"
                       animate="animate"
                       exit="exit"
-                      variants={pageTransition}
+                      variants={pageTransition} // ✅ Fixed Framer Motion type
                       className="relative z-10"
                     >
                       {children}
