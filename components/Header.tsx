@@ -15,7 +15,7 @@ export default function Header() {
 
   const headerRef = useRef<HTMLDivElement>(null);
 
-  // Only yellow → green gradient for CTA buttons/logo
+  // Yellow → Green gradient for CTA buttons/logo
   const ctaGradient = "bg-gradient-to-r from-yellow-400 to-green-500 text-black";
 
   // Close menus when clicking outside
