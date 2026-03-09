@@ -1,6 +1,6 @@
 "use client";
 
-import './globals.css';
+import '@/styles/globals.css'; // fixed path
 import { ReactNode } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -12,7 +12,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Background from '@/components/Background';
 import FloatingCTA from '@/components/cta/FloatingCTA';
-import AuthLayout from '@/components/auth/AuthLayout';
+import AuthLayout from './@auth/layout'; // fixed path for auth layout
 import SeoRenderer from '@/components/SEO/SeoRenderer';
 import { SEO_CONFIG } from '@/components/SEO/seoConfig';
 
@@ -46,7 +46,7 @@ export default function RootLayout({ children, authPage = false }: RootLayoutPro
           <ThemeProviderWrapper>
             <LanguageProvider>
               {authPage ? (
-                // Render auth page layout
+                // Auth page layout
                 <AuthLayout>{children}</AuthLayout>
               ) : (
                 <>
