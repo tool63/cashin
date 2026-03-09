@@ -3,7 +3,7 @@
 import React from "react";
 import "../styles/globals.css";
 import { ReactNode, useEffect, useState, Suspense } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { ErrorBoundary } from "react-error-boundary";
 import dynamic from "next/dynamic";
 
@@ -48,21 +48,26 @@ function ErrorFallback({ error }: { error: Error }) {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const router = useRouter();
   
   const [mounted, setMounted] = useState(false);
   const [seo, setSeo] = useState<SEOOutput | null>(null);
-  const [showAuth, setShowAuth] = useState<"login" | "signup" | "reset" | null>(null);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const openModal = (type: "login" | "signup" | "reset") => {
-    setShowAuth(type);
-  };
+  // Modal logic from URL params - matches Header component
+  const authType = searchParams?.get("auth");
+  const showAuth = authType === "login" || authType === "signup" || authType === "reset" ? authType : null;
 
   const closeModal = () => {
-    setShowAuth(null);
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("auth");
+    const url = params.toString() ? `?${params}` : window.location.pathname;
+    window.history.replaceState({}, "", url);
+    router.refresh();
   };
 
   // Check if current page is auth page
@@ -120,23 +125,18 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
             {/* Main Content */}
             <div className="relative flex min-h-screen flex-col">
-              {/* Header with auth buttons */}
+              {/* Header - No props needed, uses URL params */}
               {!isAuthPage && (
                 <header className="fixed top-0 w-full z-40 bg-[#0E111B]/80 backdrop-blur-xl border-b border-[#2A2F3E]">
                   <Suspense fallback={<div className="h-16" />}>
-                    <Header onOpenAuth={openModal} />
+                    <Header />
                   </Suspense>
                 </header>
               )}
 
-              {/* Main - Pass openModal to children */}
+              {/* Main */}
               <main className={`flex-1 ${!isAuthPage ? (isDashboardPage ? "pt-16" : "pt-20") : ""}`}>
-                {React.Children.map(children, child => {
-                  if (React.isValidElement(child)) {
-                    return React.cloneElement(child, { onOpenAuth: openModal });
-                  }
-                  return child;
-                })}
+                {children}
               </main>
 
               {/* Footer */}
@@ -154,7 +154,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               )}
             </div>
 
-            {/* Auth Modal */}
+            {/* Auth Modal - Controlled by URL params */}
             {showAuth && (
               <ModalRoot isOpen onClose={closeModal}>
                 <AuthModal onClose={closeModal}>
