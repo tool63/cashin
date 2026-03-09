@@ -91,27 +91,23 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
       <body className="relative min-h-screen text-black dark:text-white overflow-x-hidden">
 
-        {/* ============================
-            GLOBAL BACKGROUND
-            - Full-page gradient + glow blobs
-        ============================ */}
-        <Background />
-
         <RootProviders>
           <ThemeProviderWrapper>
             <LanguageProvider>
 
               {/* ============================
                   HEADER
-                  - Fixed minimal bar
               ============================ */}
-              <Header />
+              <Header className="border-b border-gray-200 dark:border-white/20 bg-white dark:bg-black z-30" />
 
               {/* ============================
-                  PAGE CONTENT
-                  - Add top padding for fixed header
+                  PAGE CONTENT WITH BACKGROUND
               ============================ */}
               <div className="relative pt-20 min-h-screen">
+
+                {/* Background only behind page content */}
+                <Background />
+
                 <main className="relative z-10 max-w-7xl mx-auto px-6 py-8">
                   <AnimatePresence mode="wait">
                     <motion.div
@@ -138,7 +134,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               {/* ============================
                   FOOTER
               ============================ */}
-              <Footer />
+              <Footer className="border-t border-gray-200 dark:border-white/20 bg-white dark:bg-black z-30" />
 
             </LanguageProvider>
           </ThemeProviderWrapper>
