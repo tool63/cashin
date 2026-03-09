@@ -5,8 +5,6 @@ import { ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import RootProviders from "./providers/RootProviders";
-import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
-import LanguageProvider from "./providers/LanguageProvider";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -90,56 +88,52 @@ export default function RootLayout({ children }: RootLayoutProps) {
       </head>
 
       <body className="relative min-h-screen text-black dark:text-white overflow-x-hidden">
-
+        {/* ============================
+            Root Providers (Theme + Language)
+        ============================ */}
         <RootProviders>
-          <ThemeProviderWrapper>
-            <LanguageProvider>
 
-              {/* ============================
-                  HEADER
-              ============================ */}
-              <Header className="border-b border-gray-200 dark:border-white/20 bg-white dark:bg-black z-30" />
+          {/* ============================
+              HEADER
+          ============================ */}
+          <Header className="border-b border-gray-200 dark:border-white/20 bg-white dark:bg-black z-30" />
 
-              {/* ============================
-                  PAGE CONTENT WITH BACKGROUND
-              ============================ */}
-              <div className="relative pt-20 min-h-screen">
+          {/* ============================
+              PAGE CONTENT WITH BACKGROUND
+          ============================ */}
+          <div className="relative pt-20 min-h-screen">
+            {/* Background globally behind all pages */}
+            <Background />
 
-                {/* Background only behind page content */}
-                <Background />
+            <main className="relative z-10 max-w-7xl mx-auto px-6 py-8">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key="page"
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  variants={pageTransition}
+                  className="relative z-10"
+                >
+                  {children}
+                </motion.div>
+              </AnimatePresence>
+            </main>
+          </div>
 
-                <main className="relative z-10 max-w-7xl mx-auto px-6 py-8">
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key="page"
-                      initial="initial"
-                      animate="animate"
-                      exit="exit"
-                      variants={pageTransition}
-                      className="relative z-10"
-                    >
-                      {children}
-                    </motion.div>
-                  </AnimatePresence>
-                </main>
-              </div>
+          {/* ============================
+              FLOATING CTA
+          ============================ */}
+          <div className="fixed bottom-6 right-6 z-40">
+            <FloatingCTA />
+          </div>
 
-              {/* ============================
-                  FLOATING CTA
-              ============================ */}
-              <div className="fixed bottom-6 right-6 z-40">
-                <FloatingCTA />
-              </div>
+          {/* ============================
+              FOOTER
+          ============================ */}
+          <Footer className="border-t border-gray-200 dark:border-white/20 bg-white dark:bg-black z-30" />
 
-              {/* ============================
-                  FOOTER
-              ============================ */}
-              <Footer className="border-t border-gray-200 dark:border-white/20 bg-white dark:bg-black z-30" />
-
-            </LanguageProvider>
-          </ThemeProviderWrapper>
         </RootProviders>
-
       </body>
     </html>
   );
