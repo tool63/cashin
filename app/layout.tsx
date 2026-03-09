@@ -1,114 +1,94 @@
 "use client";
 
-import React, { ReactNode, useState, useEffect, Suspense } from "react";
-import dynamic from "next/dynamic";
-import Link from "next/link";
-import { ErrorBoundary } from "react-error-boundary";
-import { usePathname } from "next/navigation";
+import './globals.css';
+import { ReactNode } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 
-// Dynamic Imports
-const Header = dynamic(() => import("@/components/Header"));
-const Footer = dynamic(() => import("@/components/Footer"));
-const FloatingCTA = dynamic(() => import("@/components/cta/FloatingCTA"));
-const Background = dynamic(() => import("@/components/Background"));
-const SeoRenderer = dynamic(() => import("@/components/SEO/SeoRenderer"));
+import RootProviders from './providers/RootProviders';
+import ThemeProviderWrapper from './providers/ThemeProviderWrapper';
+import LanguageProvider from './providers/LanguageProvider';
 
-// Theme Provider
-import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
-
-// SEO Engine
-import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
-import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import Background from '@/components/Background';
+import FloatingCTA from '@/components/cta/FloatingCTA';
+import AuthLayout from '@/components/auth/AuthLayout';
+import SeoRenderer from '@/components/SEO/SeoRenderer';
+import { SEO_CONFIG } from '@/components/SEO/seoConfig';
 
 interface RootLayoutProps {
   children: ReactNode;
+  authPage?: boolean; // if true, wrap in AuthLayout
 }
 
-function ErrorFallback({ error }: { error: Error }) {
+// Page transition animation
+const pageTransition = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -20 },
+  transition: { duration: 0.5, ease: 'easeInOut' },
+};
+
+// Header/Footer/FloatingCTA animation
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+};
+
+export default function RootLayout({ children, authPage = false }: RootLayoutProps) {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0E111B]">
-      <div className="text-center">
-        <h1 className="text-xl text-white mb-2">Something went wrong</h1>
-        <p className="text-gray-400 text-sm">{error.message}</p>
-      </div>
-    </div>
-  );
-}
-
-export default function RootLayout({ children }: RootLayoutProps) {
-  const pathname = usePathname();
-  const [mounted, setMounted] = useState(false);
-  const [seo, setSeo] = useState<SEOOutput | null>(null);
-
-  const isDashboardPage = pathname?.startsWith("/dashboard");
-
-  // Mount check for client-only components
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Build SEO dynamically
-  useEffect(() => {
-    if (!mounted) return;
-
-    buildSEO({
-      route: pathname || "/",
-      locale: SEO_CONFIG.defaultLocale,
-    })
-      .then(setSeo)
-      .catch(() => setSeo(null));
-  }, [pathname, mounted]);
-
-  if (!mounted) {
-    return (
-      <html lang="en">
-        <body className="bg-[#0E111B]">
-          <div className="min-h-screen" />
-        </body>
-      </html>
-    );
-  }
-
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen bg-[#0E111B] text-white">
-        <ErrorBoundary FallbackComponent={ErrorFallback}>
+    <html lang="en">
+      <head>
+        <SeoRenderer config={SEO_CONFIG} />
+      </head>
+      <body className="relative min-h-screen bg-white dark:bg-gray-900 text-black dark:text-white">
+        <RootProviders>
           <ThemeProviderWrapper>
-            {/* Background */}
-            <Background />
+            <LanguageProvider>
+              {authPage ? (
+                // Render auth page layout
+                <AuthLayout>{children}</AuthLayout>
+              ) : (
+                <>
+                  <Background />
 
-            {/* SEO */}
-            {mounted && seo && <SeoRenderer seo={seo} />}
+                  {/* Animated Header */}
+                  <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
+                    <Header />
+                  </motion.div>
 
-            <div className="relative flex min-h-screen flex-col">
-              {/* HEADER */}
-              <header className="fixed top-0 w-full z-40 bg-[#0E111B]/80 backdrop-blur-xl border-b border-[#2A2F3E]">
-                <Suspense fallback={<div className="h-16" />}>
-                  <Header />
-                </Suspense>
-              </header>
+                  {/* Animate page transitions */}
+                  <AnimatePresence mode="wait">
+                    <motion.main
+                      key={typeof window !== 'undefined' ? window.location.pathname : 'root'}
+                      initial="initial"
+                      animate="animate"
+                      exit="exit"
+                      variants={pageTransition}
+                      className="relative z-10"
+                    >
+                      {children}
+                    </motion.main>
+                  </AnimatePresence>
 
-              {/* MAIN */}
-              <main
-                className={`flex-1 ${
-                  isDashboardPage ? "pt-16" : "pt-20"
-                }`}
-              >
-                {children}
-              </main>
+                  {/* Animated Floating CTA */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, ease: 'easeOut' }}
+                  >
+                    <FloatingCTA />
+                  </motion.div>
 
-              {/* FOOTER */}
-              <Suspense fallback={<div className="h-40" />}>
-                <Footer />
-              </Suspense>
-
-              {/* FLOATING CTA */}
-              <Suspense fallback={null}>
-                <FloatingCTA />
-              </Suspense>
-            </div>
+                  {/* Animated Footer */}
+                  <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
+                    <Footer />
+                  </motion.div>
+                </>
+              )}
+            </LanguageProvider>
           </ThemeProviderWrapper>
-        </ErrorBoundary>
+        </RootProviders>
       </body>
     </html>
   );
