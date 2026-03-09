@@ -93,7 +93,7 @@ export default function SeoRenderer({
     const metrics: SEORenderMetrics = {
       pathname,
       searchParams: Object.fromEntries(searchParams.entries()),
-      pageType: (seo.pageType as string) || 'unknown',
+      pageType: typeof seo.pageType?.type === 'string' ? seo.pageType.type : 'unknown', // ✅ fixed
       canonical: seo.canonical,
       schemaCount: seo.structuredData?.length || 0,
       metadataSize: JSON.stringify(seo.metadata || {}).length,
