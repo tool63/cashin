@@ -1,4 +1,7 @@
-// Advanced page type detection with regex patterns and hierarchy
+// ============================================================
+// Page Type Detection & Metadata (TypeScript Safe)
+// Cashog – SEO & Routing Engine
+// ============================================================
 
 export type PageType =
   | 'home'
@@ -64,20 +67,17 @@ interface PageTypePattern {
 }
 
 export const PAGE_TYPE_PATTERNS: PageTypePattern[] = [
-  // Home
   {
     type: 'home',
     pattern: /^\/$/,
     priority: 100,
     metadata: { noindex: false, nofollow: false },
   },
-
-  // Auth
   {
     type: 'auth',
     pattern: /^\/auth\/?/,
     priority: 90,
-    metadata: { noindex: true, nofollow: true, requiresAuth: false },
+    metadata: { noindex: true, nofollow: true },
   },
   {
     type: 'auth_login',
@@ -93,8 +93,6 @@ export const PAGE_TYPE_PATTERNS: PageTypePattern[] = [
     parent: 'auth',
     metadata: { noindex: true, nofollow: true },
   },
-
-  // User areas (always noindex)
   {
     type: 'user_dashboard',
     pattern: /^\/dashboard/,
@@ -113,8 +111,6 @@ export const PAGE_TYPE_PATTERNS: PageTypePattern[] = [
     priority: 80,
     metadata: { noindex: true, nofollow: true, requiresAuth: true },
   },
-
-  // Earn section
   {
     type: 'earn',
     pattern: /^\/earn\/?$/,
@@ -135,8 +131,6 @@ export const PAGE_TYPE_PATTERNS: PageTypePattern[] = [
     parent: 'earn',
     metadata: { noindex: false, nofollow: false },
   },
-
-  // Blog
   {
     type: 'blog',
     pattern: /^\/blog\/?$/,
@@ -171,8 +165,6 @@ export const PAGE_TYPE_PATTERNS: PageTypePattern[] = [
     parent: 'blog',
     metadata: { noindex: true, nofollow: true },
   },
-
-  // Search & pagination
   {
     type: 'search',
     pattern: /^\/search/,
@@ -185,8 +177,6 @@ export const PAGE_TYPE_PATTERNS: PageTypePattern[] = [
     priority: 25,
     metadata: { noindex: true, nofollow: true, isPaginated: true },
   },
-
-  // Static pages
   {
     type: 'static_about',
     pattern: /^\/about/,
@@ -215,16 +205,12 @@ export const PAGE_TYPE_PATTERNS: PageTypePattern[] = [
     parent: 'static',
     metadata: { noindex: true, nofollow: true },
   },
-
-  // Admin (always noindex)
   {
     type: 'admin',
     pattern: /^\/admin/,
     priority: 10,
     metadata: { noindex: true, nofollow: true, requiresAuth: true },
   },
-
-  // Error pages
   {
     type: 'error_404',
     pattern: /^\/404/,
@@ -239,9 +225,9 @@ export const PAGE_TYPE_PATTERNS: PageTypePattern[] = [
   },
 ];
 
-/**
- * Page type detection result
- */
+// ============================================================
+// Page type detection result
+// ============================================================
 export interface PageTypeResult {
   type: PageType;
   parent?: PageType;
@@ -250,9 +236,9 @@ export interface PageTypeResult {
   matches: RegExpMatchArray | null;
 }
 
-/**
- * Detect page type with priority-based matching
- */
+// ============================================================
+// Detect page type
+// ============================================================
 export function detectPageType(
   route: string,
   queryParams: Record<string, string> = {}
@@ -263,7 +249,7 @@ export function detectPageType(
     .filter(p => p.pattern.test(cleanRoute))
     .sort((a, b) => b.priority - a.priority);
 
-  if (matches.length === 0) {
+  if (!matches.length) {
     return {
       type: 'unknown',
       hierarchy: ['unknown'],
@@ -274,10 +260,9 @@ export function detectPageType(
 
   const primary = matches[0];
 
-  // Build hierarchy (parent chain)
+  // Build hierarchy
   const hierarchy: PageType[] = [];
   let current: PageTypePattern | undefined = primary;
-
   while (current) {
     hierarchy.unshift(current.type);
     current = current.parent
@@ -285,9 +270,8 @@ export function detectPageType(
       : undefined;
   }
 
-  // Apply query rules (filters, tracking, pagination)
+  // Apply query param rules
   const metadata: PageTypeMetadata = { ...primary.metadata };
-
   if (Object.keys(queryParams).some(key =>
     ['sort', 'filter', 'utm_', 'ref', 'source'].some(p => key.includes(p))
   )) {
@@ -303,19 +287,11 @@ export function detectPageType(
   };
 }
 
-/**
- * Check if page is paginated
- */
-export function isPaginated(route: string): boolean {
-  return PAGE_TYPE_PATTERNS.some(
-    p => p.metadata.isPaginated && p.pattern.test(route)
-  );
-}
+// ============================================================
+// Helpers
+// ============================================================
+export const isPaginated = (route: string) =>
+  PAGE_TYPE_PATTERNS.some(p => p.metadata.isPaginated && p.pattern.test(route));
 
-/**
- * Check if page requires authentication
- */
-export function requiresAuth(route: string): boolean {
-  const match = PAGE_TYPE_PATTERNS.find(p => p.pattern.test(route));
-  return match?.metadata.requiresAuth || false;
-}
+export const requiresAuth = (route: string) =>
+  PAGE_TYPE_PATTERNS.find(p => p.pattern.test(route))?.metadata.requiresAuth || false;
