@@ -91,9 +91,15 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <SeoRenderer seo={defaultSeo} />
       </head>
 
-      <body className="relative min-h-screen text-black dark:text-white">
+      {/* Set inline fallback background to prevent flashing */}
+      <body
+        className="relative min-h-screen text-black dark:text-white"
+        style={{
+          background: "linear-gradient(to bottom right, rgba(253,243,199,0.2), rgba(220,252,231,0.3), rgba(16,185,129,0.2))",
+        }}
+      >
 
-        {/* GLOBAL BACKGROUND */}
+        {/* GLOBAL BACKGROUND (mounted after hydration) */}
         <Background />
 
         <RootProviders>
