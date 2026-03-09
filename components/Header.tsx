@@ -18,6 +18,7 @@ export default function Header() {
   const ctaGradient =
     "bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black";
 
+  // Close menus when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
@@ -33,7 +34,7 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className="fixed top-0 left-0 w-full z-50 bg-transparent backdrop-blur-sm"
+      className="fixed top-0 left-0 w-full z-50 bg-transparent backdrop-blur-md shadow-sm"
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
@@ -72,16 +73,16 @@ export default function Header() {
                   className="
                     absolute top-full left-0 mt-2 w-48
                     flex flex-col gap-1 p-3 rounded-xl
+                    bg-transparent text-primary
                     border border-gray-200 dark:border-white/10
                     shadow-xl
-                    bg-transparent backdrop-blur-sm
                   "
                 >
-                  <Link href="/surveys" className="text-primary hover:opacity-80 transition">Surveys</Link>
-                  <Link href="/app-installs" className="text-primary hover:opacity-80 transition">App Installs</Link>
-                  <Link href="/play-games" className="text-primary hover:opacity-80 transition">Play Games</Link>
-                  <Link href="/watch-videos" className="text-primary hover:opacity-80 transition">Watch Videos</Link>
-                  <Link href="/offerwall" className="text-primary hover:opacity-80 transition">Offerwall</Link>
+                  <Link href="/surveys" className="hover:opacity-80 transition">Surveys</Link>
+                  <Link href="/app-installs" className="hover:opacity-80 transition">App Installs</Link>
+                  <Link href="/play-games" className="hover:opacity-80 transition">Play Games</Link>
+                  <Link href="/watch-videos" className="hover:opacity-80 transition">Watch Videos</Link>
+                  <Link href="/offerwall" className="hover:opacity-80 transition">Offerwall</Link>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -114,7 +115,7 @@ export default function Header() {
               className={`px-5 py-2 rounded-lg text-sm transition ${
                 activeButton === "signup" || activeButton === "none"
                   ? ctaGradient
-                  : "border text-primary"
+                  : "bg-white dark:bg-[#070A14] border border-gray-300 dark:border-white/20 text-black dark:text-white"
               }`}
             >
               Sign up
@@ -140,17 +141,20 @@ export default function Header() {
             exit={{ opacity: 0, y: -10 }}
             className="
               md:hidden px-6 py-6 space-y-4 border-t
+              bg-transparent text-primary
               border-gray-200 dark:border-white/10
-              bg-transparent backdrop-blur-sm
-              text-primary
+              shadow-xl
+              relative z-50
             "
           >
-            <Link href="/how-it-works" className="block hover:opacity-80 transition">How it works</Link>
+            <Link href="/how-it-works" className="block hover:opacity-80 transition">
+              How it works
+            </Link>
 
             {/* MOBILE EARN */}
             <button
               onClick={() => setMobileEarnOpen(!mobileEarnOpen)}
-              className="flex w-full items-center justify-between font-medium hover:opacity-80 transition"
+              className="flex w-full items-center justify-between font-medium"
             >
               Earn
               <ChevronDown
@@ -160,7 +164,7 @@ export default function Header() {
             </button>
 
             {mobileEarnOpen && (
-              <div className="flex flex-col gap-3 pl-4 text-sm p-3 rounded-lg bg-transparent backdrop-blur-sm">
+              <div className="flex flex-col gap-3 pl-4 text-sm">
                 <Link href="/surveys" className="hover:opacity-80 transition">Surveys</Link>
                 <Link href="/app-installs" className="hover:opacity-80 transition">App Installs</Link>
                 <Link href="/play-games" className="hover:opacity-80 transition">Play Games</Link>
@@ -169,17 +173,20 @@ export default function Header() {
               </div>
             )}
 
+            {/* MOBILE LINKS */}
             <div className="flex flex-col gap-3 pt-2">
               <Link href="/cashout" className="hover:opacity-80 transition">Cashout</Link>
               <Link href="/blog" className="hover:opacity-80 transition">Blog</Link>
               <Link href="/help" className="hover:opacity-80 transition">Help</Link>
             </div>
 
+            {/* SWITCHES */}
             <div className="flex items-center justify-between pt-3">
               <LanguageSwitcher />
               <DarkLightToggle />
             </div>
 
+            {/* MOBILE ACTIONS */}
             <div className="pt-4 flex flex-col gap-3">
               <Link href="/login">
                 <button className="border border-gray-300 dark:border-white/20 py-2 rounded-lg w-full">
