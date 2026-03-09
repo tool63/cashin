@@ -16,66 +16,15 @@ import AuthLayout from './@auth/layout';
 import SeoRenderer from '@/components/SEO/SeoRenderer';
 import { SEO_CONFIG } from '@/components/SEO/seoConfig';
 import { SEOOutput } from '@/components/SEO/seoEngine';
+import { detectPageType, PageTypeResult } from '@/utils/pageTypeDetection'; // updated path
 
 interface RootLayoutProps {
   children: ReactNode;
   authPage?: boolean;
+  route?: string; // pass current route if available
 }
 
-// Proper pageType according to SEOOutput/PageTypeResult
-const pageType = {
-  type: 'home',
-  hierarchy: [],
-  metadata: {},
-  matches: [],
-};
-
-const defaultSeo: SEOOutput = {
-  metadata: {
-    title: SEO_CONFIG.defaultTitle || SEO_CONFIG.siteName,
-    description: SEO_CONFIG.defaultDescription || '',
-    keywords: SEO_CONFIG.defaultKeywords || [],
-    robots: 'index, follow',
-    openGraph: {
-      type: 'website',
-      url: SEO_CONFIG.siteUrl,
-      title: SEO_CONFIG.defaultTitle || SEO_CONFIG.siteName,
-      description: SEO_CONFIG.defaultDescription || '',
-      siteName: SEO_CONFIG.siteName,
-      locale: SEO_CONFIG.defaultLocale,
-      images: [
-        {
-          url: SEO_CONFIG.defaultOgImage || '',
-          width: 1200,
-          height: 630,
-          alt: SEO_CONFIG.siteName,
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      site: SEO_CONFIG.twitterHandle || '',
-      images: SEO_CONFIG.defaultTwitterImage ? [SEO_CONFIG.defaultTwitterImage] : [],
-      imageAlt: SEO_CONFIG.siteName,
-    },
-    viewport: 'width=device-width, initial-scale=1',
-    other: {
-      'theme-color': SEO_CONFIG.themeColor || '#000000',
-    },
-  },
-  canonical: SEO_CONFIG.siteUrl,
-  hreflang: Object.fromEntries(
-    SEO_CONFIG.supportedLocales.map((loc) => [loc, SEO_CONFIG.siteUrl])
-  ),
-  pageType, // ✅ fully typed
-  structuredData: [],
-  preconnect: SEO_CONFIG.preconnect || [],
-  links: [],
-  prefetch: [],
-  prerender: [],
-};
-
-// Page transitions
+// Page transition animation
 const pageTransition = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
@@ -88,7 +37,56 @@ const fadeInUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
 };
 
-export default function RootLayout({ children, authPage = false }: RootLayoutProps) {
+export default function RootLayout({ children, authPage = false, route = '/' }: RootLayoutProps) {
+  // ✅ Detect page type with full typing
+  const pageType: PageTypeResult = detectPageType(route);
+
+  // ✅ Build SEO object
+  const defaultSeo: SEOOutput = {
+    metadata: {
+      title: SEO_CONFIG.siteName,
+      description: SEO_CONFIG.defaultDescription || '',
+      keywords: SEO_CONFIG.defaultKeywords || [],
+      robots: pageType.metadata.noindex ? 'noindex, nofollow' : 'index, follow',
+      openGraph: {
+        type: 'website',
+        url: SEO_CONFIG.siteUrl,
+        title: SEO_CONFIG.siteName,
+        description: SEO_CONFIG.defaultDescription || '',
+        siteName: SEO_CONFIG.siteName,
+        locale: SEO_CONFIG.defaultLocale,
+        images: [
+          {
+            url: SEO_CONFIG.defaultOgImage || '',
+            width: 1200,
+            height: 630,
+            alt: SEO_CONFIG.siteName,
+          },
+        ],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        site: SEO_CONFIG.twitterHandle || '',
+        images: SEO_CONFIG.defaultTwitterImage ? [SEO_CONFIG.defaultTwitterImage] : [],
+        imageAlt: SEO_CONFIG.siteName,
+      },
+      viewport: 'width=device-width, initial-scale=1',
+      other: {
+        'theme-color': SEO_CONFIG.themeColor || '#000000',
+      },
+    },
+    canonical: SEO_CONFIG.siteUrl,
+    hreflang: Object.fromEntries(
+      SEO_CONFIG.supportedLocales.map((loc) => [loc, SEO_CONFIG.siteUrl])
+    ),
+    pageType, // ✅ fully typed now
+    structuredData: [], 
+    preconnect: SEO_CONFIG.preconnect || [],
+    links: [],
+    prefetch: [],
+    prerender: [],
+  };
+
   return (
     <html lang="en">
       <head>
@@ -121,11 +119,7 @@ export default function RootLayout({ children, authPage = false }: RootLayoutPro
                     </motion.main>
                   </AnimatePresence>
 
-                  <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, ease: 'easeOut' }}
-                  >
+                  <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: 'easeOut' }}>
                     <FloatingCTA />
                   </motion.div>
 
