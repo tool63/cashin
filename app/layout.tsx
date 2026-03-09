@@ -12,14 +12,13 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Background from '@/components/Background';
 import FloatingCTA from '@/components/cta/FloatingCTA';
-import AuthLayout from './@auth/layout';
+
 import SeoRenderer from '@/components/SEO/SeoRenderer';
 import { SEO_CONFIG } from '@/components/SEO/seoConfig';
 import { SEOOutput } from '@/components/SEO/seoEngine';
 
 interface RootLayoutProps {
   children: ReactNode;
-  authPage?: boolean;
 }
 
 // Page transition animation for Framer Motion
@@ -34,8 +33,8 @@ const fadeInUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
 };
 
-export default function RootLayout({ children, authPage = false }: RootLayoutProps) {
-  // Default SEO object with full metrics & pageType
+export default function RootLayout({ children }: RootLayoutProps) {
+
   const defaultSeo: SEOOutput = {
     metadata: {
       title: SEO_CONFIG.siteName,
@@ -96,7 +95,7 @@ export default function RootLayout({ children, authPage = false }: RootLayoutPro
       warnings: 0,
       suggestions: 0,
       seoScore: 0,
-      timestamp: Date.now(), // ✅ Added timestamp to satisfy SEOAnalytics
+      timestamp: Date.now(),
     },
   };
 
@@ -105,46 +104,43 @@ export default function RootLayout({ children, authPage = false }: RootLayoutPro
       <head>
         <SeoRenderer seo={defaultSeo} />
       </head>
+
       <body className="relative min-h-screen bg-white dark:bg-gray-900 text-black dark:text-white">
         <RootProviders>
           <ThemeProviderWrapper>
             <LanguageProvider>
-              {authPage ? (
-                <AuthLayout>{children}</AuthLayout>
-              ) : (
-                <>
-                  <Background />
 
-                  <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
-                    <Header />
-                  </motion.div>
+              <Background />
 
-                  <AnimatePresence mode="wait">
-                    <motion.main
-                      key={typeof window !== 'undefined' ? window.location.pathname : 'root'}
-                      initial="initial"
-                      animate="animate"
-                      exit="exit"
-                      variants={pageTransition} // ✅ Fixed Framer Motion type
-                      className="relative z-10"
-                    >
-                      {children}
-                    </motion.main>
-                  </AnimatePresence>
+              <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
+                <Header />
+              </motion.div>
 
-                  <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, ease: 'easeOut' }}
-                  >
-                    <FloatingCTA />
-                  </motion.div>
+              <AnimatePresence mode="wait">
+                <motion.main
+                  key={typeof window !== 'undefined' ? window.location.pathname : 'root'}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  variants={pageTransition}
+                  className="relative z-10"
+                >
+                  {children}
+                </motion.main>
+              </AnimatePresence>
 
-                  <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
-                    <Footer />
-                  </motion.div>
-                </>
-              )}
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
+              >
+                <FloatingCTA />
+              </motion.div>
+
+              <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
+                <Footer />
+              </motion.div>
+
             </LanguageProvider>
           </ThemeProviderWrapper>
         </RootProviders>
