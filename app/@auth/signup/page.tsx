@@ -1,5 +1,8 @@
+"use client";
+export const dynamic = 'force-dynamic';
+
 import { useState, useEffect } from "react";
-import Link from "next/link"; // <-- ADD THIS
+import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   Eye,
@@ -19,6 +22,7 @@ import {
   Sparkles,
 } from "lucide-react";
 
+// ... rest of your imports and code
 // SEO Imports
 import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
