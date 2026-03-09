@@ -100,7 +100,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <ThemeProviderWrapper>
             <LanguageProvider>
 
-              {/* HEADER */}
+              {/* HEADER (handles its own background) */}
               <Header />
 
               {/* PAGE CONTENT */}
@@ -123,7 +123,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 <FloatingCTA />
               </div>
 
-              {/* FOOTER */}
+              {/* FOOTER (handles its own background) */}
               <Footer />
 
             </LanguageProvider>
