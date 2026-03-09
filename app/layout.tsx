@@ -19,10 +19,17 @@ import { SEOOutput } from '@/components/SEO/seoEngine';
 
 interface RootLayoutProps {
   children: ReactNode;
-  authPage?: boolean; // if true, wrap in AuthLayout
+  authPage?: boolean;
 }
 
-// Convert SEO_CONFIG into SEOOutput format for SeoRenderer
+// Proper pageType according to SEOOutput/PageTypeResult
+const pageType = {
+  type: 'home',
+  hierarchy: [],
+  metadata: {},
+  matches: [],
+};
+
 const defaultSeo: SEOOutput = {
   metadata: {
     title: SEO_CONFIG.defaultTitle || SEO_CONFIG.siteName,
@@ -60,7 +67,7 @@ const defaultSeo: SEOOutput = {
   hreflang: Object.fromEntries(
     SEO_CONFIG.supportedLocales.map((loc) => [loc, SEO_CONFIG.siteUrl])
   ),
-  pageType: { type: 'home' }, // ✅ fixed TypeScript error
+  pageType, // ✅ fully typed
   structuredData: [],
   preconnect: SEO_CONFIG.preconnect || [],
   links: [],
@@ -68,7 +75,7 @@ const defaultSeo: SEOOutput = {
   prerender: [],
 };
 
-// Page transition animation
+// Page transitions
 const pageTransition = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
@@ -76,7 +83,6 @@ const pageTransition = {
   transition: { duration: 0.5, ease: 'easeInOut' },
 };
 
-// Header/Footer/FloatingCTA animation
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
@@ -86,7 +92,6 @@ export default function RootLayout({ children, authPage = false }: RootLayoutPro
   return (
     <html lang="en">
       <head>
-        {/* SEO Renderer */}
         <SeoRenderer seo={defaultSeo} />
       </head>
       <body className="relative min-h-screen bg-white dark:bg-gray-900 text-black dark:text-white">
@@ -99,12 +104,10 @@ export default function RootLayout({ children, authPage = false }: RootLayoutPro
                 <>
                   <Background />
 
-                  {/* Animated Header */}
                   <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
                     <Header />
                   </motion.div>
 
-                  {/* Animate page transitions */}
                   <AnimatePresence mode="wait">
                     <motion.main
                       key={typeof window !== 'undefined' ? window.location.pathname : 'root'}
@@ -118,7 +121,6 @@ export default function RootLayout({ children, authPage = false }: RootLayoutPro
                     </motion.main>
                   </AnimatePresence>
 
-                  {/* Animated Floating CTA */}
                   <motion.div
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -127,7 +129,6 @@ export default function RootLayout({ children, authPage = false }: RootLayoutPro
                     <FloatingCTA />
                   </motion.div>
 
-                  {/* Animated Footer */}
                   <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
                     <Footer />
                   </motion.div>
