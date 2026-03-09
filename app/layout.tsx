@@ -11,6 +11,7 @@ import LanguageProvider from "./providers/LanguageProvider";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingCTA from "@/components/cta/FloatingCTA";
+import Background from "@/components/Background";
 
 import SeoRenderer from "@/components/SEO/SeoRenderer";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
@@ -27,7 +28,6 @@ const pageTransition = {
 };
 
 export default function RootLayout({ children }: RootLayoutProps) {
-
   const defaultSeo: SEOOutput = {
     metadata: {
       title: SEO_CONFIG.siteName,
@@ -53,9 +53,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       twitter: {
         card: "summary_large_image",
         site: SEO_CONFIG.twitterHandle || "",
-        images: SEO_CONFIG.defaultTwitterImage
-          ? [SEO_CONFIG.defaultTwitterImage]
-          : [],
+        images: SEO_CONFIG.defaultTwitterImage ? [SEO_CONFIG.defaultTwitterImage] : [],
         imageAlt: SEO_CONFIG.siteName,
       },
       viewport: "width=device-width, initial-scale=1",
@@ -66,12 +64,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     canonical: SEO_CONFIG.siteUrl,
     hreflang: {},
     structuredData: [],
-    pageType: {
-      type: "unknown",
-      hierarchy: ["unknown"],
-      metadata: {},
-      matches: null,
-    },
+    pageType: { type: "unknown", hierarchy: ["unknown"], metadata: {}, matches: null },
     links: [],
     preconnect: SEO_CONFIG.preconnect || [],
     dnsPrefetch: SEO_CONFIG.dnsPrefetch || [],
@@ -79,17 +72,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     prefetch: [],
     prerender: [],
     modulePreload: [],
-    metrics: {
-      pageType: "unknown",
-      generationTime: 0,
-      metadataSize: 0,
-      schemaCount: 0,
-      cacheHit: false,
-      warnings: 0,
-      suggestions: 0,
-      seoScore: 0,
-      timestamp: Date.now(),
-    },
+    metrics: { pageType: "unknown", generationTime: 0, metadataSize: 0, schemaCount: 0, cacheHit: false, warnings: 0, suggestions: 0, seoScore: 0, timestamp: Date.now() },
   };
 
   return (
@@ -98,18 +81,20 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <SeoRenderer seo={defaultSeo} />
       </head>
 
-      <body className="relative min-h-screen bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20 dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20 text-black dark:text-white">
+      <body className="relative min-h-screen text-black dark:text-white">
+
+        {/* GLOBAL BACKGROUND */}
+        <Background />
 
         <RootProviders>
           <ThemeProviderWrapper>
             <LanguageProvider>
 
-              {/* HEADER (GLOBAL) */}
+              {/* HEADER */}
               <Header />
 
               {/* PAGE CONTENT */}
               <main className="relative z-10 max-w-7xl mx-auto px-6 pt-24 pb-16">
-
                 <AnimatePresence mode="wait">
                   <motion.div
                     key="page"
@@ -121,7 +106,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
                     {children}
                   </motion.div>
                 </AnimatePresence>
-
               </main>
 
               {/* FLOATING CTA */}
@@ -129,7 +113,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 <FloatingCTA />
               </div>
 
-              {/* FOOTER (GLOBAL) */}
+              {/* FOOTER */}
               <Footer />
 
             </LanguageProvider>
