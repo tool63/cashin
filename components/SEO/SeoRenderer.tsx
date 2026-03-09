@@ -1,115 +1,53 @@
-'use client';
+"use client";
 
-import React, { useEffect, useMemo } from 'react';
-import Head from 'next/head';
-import { usePathname, useSearchParams } from 'next/navigation';
-import { SEOOutput } from './seoEngine';
+import Head from "next/head";
 
-export interface SeoRendererProps {
-  seo: SEOOutput;
-  children?: React.ReactNode;
-  defer?: boolean;
-  priority?: 'high' | 'low';
-  onRender?: (metrics: SEORenderMetrics) => void;
-}
+type SeoProps = {
+  seo?: any;
+};
 
-export interface SEORenderMetrics {
-  pathname: string;
-  searchParams: Record<string, string>;
-  pageType: string;
-  canonical?: string;
-  schemaCount: number;
-  metadataSize: number;
-  timestamp: number;
-}
+export default function SeoRenderer({ seo }: SeoProps) {
+  if (!seo) return null;
 
-export default function SeoRenderer({
-  seo,
-  children,
-  defer = false,
-  priority = 'high',
-  onRender,
-}: SeoRendererProps) {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  const structuredDataScripts = useMemo(() => {
-    if (!seo.structuredData?.length) return null;
-
-    return seo.structuredData
-      .filter(schema => schema && Object.keys(schema).length > 0)
-      .map((schema, index) => (
-        <script
-          key={`schema-${index}-${(schema as any)['@type'] || 'data'}`}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({ '@context': 'https://schema.org', ...schema }),
-          }}
-          defer={defer}
-        />
-      ));
-  }, [seo.structuredData, defer]);
-
-  const metaTags = useMemo(() => {
-    const tags: React.ReactNode[] = [];
-    const metadata = seo.metadata;
-    if (!metadata) return tags;
-
-    if (metadata.title) {
-      tags.push(
-        <title key="title">{metadata.title}</title>,
-        <meta key="og:title" property="og:title" content={metadata.title} />,
-        <meta key="twitter:title" name="twitter:title" content={metadata.title} />
-      );
-    }
-
-    if (metadata.description) {
-      const description = String(metadata.description);
-      tags.push(
-        <meta key="description" name="description" content={description} />,
-        <meta key="og:description" property="og:description" content={description} />,
-        <meta key="twitter:description" name="twitter:description" content={description} />
-      );
-    }
-
-    if (seo.canonical) {
-      tags.push(<link key="canonical" rel="canonical" href={String(seo.canonical)} />);
-    }
-
-    if (seo.hreflang) {
-      Object.entries(seo.hreflang).forEach(([lang, href]) => {
-        tags.push(
-          <link key={`hreflang-${lang}`} rel="alternate" hrefLang={lang} href={String(href)} />
-        );
-      });
-    }
-
-    return tags;
-  }, [seo]);
-
-  useEffect(() => {
-    if (!onRender) return;
-
-    const metrics: SEORenderMetrics = {
-      pathname,
-      searchParams: Object.fromEntries(searchParams.entries()),
-      pageType: typeof seo.pageType?.type === 'string' ? seo.pageType.type : 'unknown', // ✅ fixed
-      canonical: seo.canonical,
-      schemaCount: seo.structuredData?.length || 0,
-      metadataSize: JSON.stringify(seo.metadata || {}).length,
-      timestamp: Date.now(),
-    };
-
-    onRender(metrics);
-  }, [seo, pathname, searchParams, onRender]);
+  const meta = seo.metadata || {};
+  const og = meta.openGraph || {};
+  const twitter = meta.twitter || {};
 
   return (
-    <>
-      <Head>{metaTags}{structuredDataScripts}</Head>
-      {children}
-    </>
+    <Head>
+      <title>{meta.title}</title>
+
+      {meta.description && (
+        <meta name="description" content={meta.description} />
+      )}
+
+      {meta.keywords && (
+        <meta name="keywords" content={meta.keywords.join(", ")} />
+      )}
+
+      {meta.robots && <meta name="robots" content={meta.robots} />}
+
+      {/* OpenGraph */}
+      {og.title && <meta property="og:title" content={og.title} />}
+      {og.description && (
+        <meta property="og:description" content={og.description} />
+      )}
+      {og.url && <meta property="og:url" content={og.url} />}
+      {og.type && <meta property="og:type" content={og.type} />}
+
+      {og.images?.length > 0 && (
+        <meta property="og:image" content={og.images[0].url} />
+      )}
+
+      {/* Twitter */}
+      {twitter.card && <meta name="twitter:card" content={twitter.card} />}
+      {twitter.site && <meta name="twitter:site" content={twitter.site} />}
+
+      {twitter.images?.length > 0 && (
+        <meta name="twitter:image" content={twitter.images[0]} />
+      )}
+
+      {seo.canonical && <link rel="canonical" href={seo.canonical} />}
+    </Head>
   );
 }
-
-/* Lazy version */
-export const LazySeoRenderer = React.lazy(() => Promise.resolve({ default: SeoRenderer }));
