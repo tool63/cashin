@@ -36,7 +36,7 @@ const fadeInUp = {
 };
 
 export default function RootLayout({ children, authPage = false }: RootLayoutProps) {
-  // Simple SEO object without pageType detection
+  // Default SEO object with all required SEOOutput fields
   const defaultSeo: SEOOutput = {
     metadata: {
       title: SEO_CONFIG.siteName,
@@ -75,10 +75,20 @@ export default function RootLayout({ children, authPage = false }: RootLayoutPro
       SEO_CONFIG.supportedLocales.map((loc) => [loc, SEO_CONFIG.siteUrl])
     ),
     structuredData: [],
-    preconnect: SEO_CONFIG.preconnect || [],
+    pageType: {
+      type: 'unknown',
+      hierarchy: ['unknown'],
+      metadata: {},
+      matches: null,
+    },
     links: [],
+    preconnect: SEO_CONFIG.preconnect || [],
+    dnsPrefetch: SEO_CONFIG.dnsPrefetch || [],
+    preload: [],
     prefetch: [],
     prerender: [],
+    modulePreload: [],
+    metrics: { seoScore: 0 },
   };
 
   return (
@@ -113,7 +123,11 @@ export default function RootLayout({ children, authPage = false }: RootLayoutPro
                     </motion.main>
                   </AnimatePresence>
 
-                  <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: 'easeOut' }}>
+                  <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, ease: 'easeOut' }}
+                  >
                     <FloatingCTA />
                   </motion.div>
 
