@@ -7,7 +7,11 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import LanguageSwitcher from "@/components/switch/LanguageSwitcher";
 import DarkLightToggle from "@/components/switch/DarkLightToggle";
 
-export default function Header() {
+interface HeaderProps {
+  className?: string; // <-- accept optional className from layout
+}
+
+export default function Header({ className }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [earnOpen, setEarnOpen] = useState(false);
   const [mobileEarnOpen, setMobileEarnOpen] = useState(false);
@@ -32,7 +36,7 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className="fixed top-0 left-0 w-full z-30 backdrop-blur-sm bg-white/70 dark:bg-black/70 border-b border-gray-200 dark:border-white/20 transition-colors duration-500"
+      className={`fixed top-0 left-0 w-full z-30 backdrop-blur-sm bg-white/70 dark:bg-black/70 border-b border-gray-200 dark:border-white/20 transition-colors duration-500 ${className || ""}`}
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
