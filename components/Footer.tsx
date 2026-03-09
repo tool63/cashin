@@ -7,6 +7,10 @@ import { Twitter, Facebook, Instagram, Youtube, ChevronDown } from "lucide-react
 
 type Toggle = Record<string, boolean>;
 
+interface FooterProps {
+  className?: string; // <-- optional className
+}
+
 // Simple translation function
 const t = (key: string) => {
   const translations: Record<string, any> = {
@@ -111,7 +115,7 @@ const t = (key: string) => {
   return translations[key] || key;
 };
 
-export default function Footer() {
+export default function Footer({ className }: FooterProps) {
   const [open, setOpen] = useState<Toggle>({});
   const [sub, setSub] = useState<Toggle>({});
   const [sub2, setSub2] = useState<Toggle>({});
@@ -199,22 +203,16 @@ export default function Footer() {
     legal: t("footer.legal"),
   };
 
-  const footerSocial = {
-    twitter: "https://twitter.com/",
-    facebook: "https://facebook.com/",
-    instagram: "https://instagram.com/",
-    youtube: "https://youtube.com/",
-  };
-
   const links = t("footer.links");
 
   return (
     <footer
-      className="
+      className={`
         bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20
         dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20
         text-primary transition-colors duration-300 border-t border-theme
-      "
+        ${className || ""}
+      `}
     >
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10">
 
@@ -352,24 +350,23 @@ export default function Footer() {
           <A href="https://cashog.com/privacy-policy">{links.privacy}</A>
           <A href="https://cashog.com/cookie-policy">{links.cookies}</A>
         </Section>
-
       </div>
 
       {/* SOCIAL ICONS */}
-<div className="border-t border-theme py-6 flex justify-center gap-6">
-  <a href="https://twitter.com/cashog" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-    <Twitter size={20} />
-  </a>
-  <a href="https://facebook.com/cashog" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-    <Facebook size={20} />
-  </a>
-  <a href="https://instagram.com/cashog" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-    <Instagram size={20} />
-  </a>
-  <a href="https://youtube.com/cashog" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-    <Youtube size={20} />
-  </a>
-</div>
+      <div className="border-t border-theme py-6 flex justify-center gap-6">
+        <a href="https://twitter.com/cashog" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+          <Twitter size={20} />
+        </a>
+        <a href="https://facebook.com/cashog" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <Facebook size={20} />
+        </a>
+        <a href="https://instagram.com/cashog" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <Instagram size={20} />
+        </a>
+        <a href="https://youtube.com/cashog" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <Youtube size={20} />
+        </a>
+      </div>
 
       {/* COPYRIGHT */}
       <div className="text-center text-sm text-muted pb-6">
@@ -378,3 +375,4 @@ export default function Footer() {
     </footer>
   );
 }
+      
