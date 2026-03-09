@@ -34,9 +34,7 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className="fixed top-0 left-0 w-full z-50
-        bg-white/95 dark:bg-gray-900/95
-        shadow-sm"
+      className="fixed top-0 left-0 w-full z-50 bg-transparent shadow-sm"
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
@@ -60,10 +58,7 @@ export default function Header() {
           >
             <button className="flex items-center gap-1">
               Earn
-              <ChevronDown
-                size={14}
-                className={`transition ${earnOpen ? "rotate-180" : ""}`}
-              />
+              <ChevronDown size={14} className={`transition ${earnOpen ? "rotate-180" : ""}`} />
             </button>
 
             <AnimatePresence>
@@ -75,7 +70,7 @@ export default function Header() {
                   className="
                     absolute top-full left-0 mt-2 w-48
                     flex flex-col gap-1 p-3 rounded-xl
-                    bg-white/95 dark:bg-gray-900/95
+                    bg-transparent
                     text-primary
                     border border-gray-200 dark:border-white/10
                     shadow-xl
@@ -118,7 +113,7 @@ export default function Header() {
               className={`px-5 py-2 rounded-lg text-sm transition ${
                 activeButton === "signup" || activeButton === "none"
                   ? ctaGradient
-                  : "bg-white dark:bg-gray-900 border border-gray-300 dark:border-white/20 text-black dark:text-white"
+                  : "bg-white dark:bg-[#070A14] border border-gray-300 dark:border-white/20 text-black dark:text-white"
               }`}
             >
               Sign up
@@ -127,10 +122,7 @@ export default function Header() {
         </div>
 
         {/* MOBILE BUTTON */}
-        <button
-          className="md:hidden text-primary"
-          onClick={() => setMobileOpen(!mobileOpen)}
-        >
+        <button className="md:hidden text-primary" onClick={() => setMobileOpen(!mobileOpen)}>
           {mobileOpen ? <X /> : <Menu />}
         </button>
       </div>
@@ -144,16 +136,14 @@ export default function Header() {
             exit={{ opacity: 0, y: -10 }}
             className="
               md:hidden px-6 py-6 space-y-4 border-t
-              bg-white/95 dark:bg-gray-900/95
+              bg-transparent
               text-primary
               border-gray-200 dark:border-white/10
               shadow-xl
               relative z-50
             "
           >
-            <Link href="/how-it-works" className="block hover:opacity-80 transition">
-              How it works
-            </Link>
+            <Link href="/how-it-works" className="block hover:opacity-80 transition">How it works</Link>
 
             {/* MOBILE EARN */}
             <button
@@ -161,10 +151,7 @@ export default function Header() {
               className="flex w-full items-center justify-between font-medium"
             >
               Earn
-              <ChevronDown
-                size={16}
-                className={`transition ${mobileEarnOpen ? "rotate-180" : ""}`}
-              />
+              <ChevronDown size={16} className={`transition ${mobileEarnOpen ? "rotate-180" : ""}`} />
             </button>
 
             {mobileEarnOpen && (
@@ -193,15 +180,11 @@ export default function Header() {
             {/* MOBILE ACTIONS */}
             <div className="pt-4 flex flex-col gap-3">
               <Link href="/login">
-                <button className="border border-gray-300 dark:border-white/20 py-2 rounded-lg w-full">
-                  Login
-                </button>
+                <button className="border border-gray-300 dark:border-white/20 py-2 rounded-lg w-full">Login</button>
               </Link>
 
               <Link href="/signup">
-                <button className={`${ctaGradient} py-2 rounded-lg w-full`}>
-                  Sign up
-                </button>
+                <button className={`${ctaGradient} py-2 rounded-lg w-full`}>Sign up</button>
               </Link>
             </div>
           </motion.div>
