@@ -97,6 +97,7 @@ export default function RootLayout({ children, authPage = false }: RootLayoutPro
       warnings: 0,
       suggestions: 0,
       seoScore: 0,
+      timestamp: Date.now(), // <-- Added to satisfy SEOAnalytics type
     },
   };
 
