@@ -36,7 +36,7 @@ const fadeInUp = {
 };
 
 export default function RootLayout({ children, authPage = false }: RootLayoutProps) {
-  // Default SEO object with all required SEOOutput fields
+  // Default SEO object with full metrics & pageType
   const defaultSeo: SEOOutput = {
     metadata: {
       title: SEO_CONFIG.siteName,
@@ -88,7 +88,16 @@ export default function RootLayout({ children, authPage = false }: RootLayoutPro
     prefetch: [],
     prerender: [],
     modulePreload: [],
-    metrics: { seoScore: 0 },
+    metrics: {
+      pageType: 'unknown',
+      generationTime: 0,
+      metadataSize: 0,
+      schemaCount: 0,
+      cacheHit: false,
+      warnings: 0,
+      suggestions: 0,
+      seoScore: 0,
+    },
   };
 
   return (
