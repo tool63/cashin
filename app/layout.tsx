@@ -20,12 +20,14 @@ interface RootLayoutProps {
 }
 
 const pageTransition = {
-  initial: { opacity: 0, y: 20 },
+  initial: { opacity: 0, y: 12 },
   animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -20 },
+  exit: { opacity: 0, y: -12 },
+  transition: { duration: 0.35 }
 };
 
 export default function RootLayout({ children }: RootLayoutProps) {
+
   const defaultSeo: SEOOutput = {
     metadata: {
       title: SEO_CONFIG.siteName,
@@ -62,12 +64,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     canonical: SEO_CONFIG.siteUrl,
     hreflang: {},
     structuredData: [],
-    pageType: {
-      type: "unknown",
-      hierarchy: ["unknown"],
-      metadata: {},
-      matches: null,
-    },
+    pageType: { type: "unknown", hierarchy: ["unknown"], metadata: {}, matches: null },
     links: [],
     preconnect: SEO_CONFIG.preconnect || [],
     dnsPrefetch: SEO_CONFIG.dnsPrefetch || [],
@@ -94,7 +91,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <SeoRenderer seo={defaultSeo} />
       </head>
 
-      <body className="flex flex-col min-h-screen text-black dark:text-white overflow-x-hidden">
+      <body className="flex flex-col min-h-screen overflow-x-hidden text-black dark:text-white">
 
         <RootProviders>
 
@@ -104,7 +101,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
           {/* HEADER */}
           <Header
             className="
-              fixed top-0 left-0 right-0 z-40
+              fixed top-0 left-0 right-0
+              z-40
               backdrop-blur-xl
               bg-white/60 dark:bg-black/60
               border-b border-gray-200 dark:border-white/10
@@ -112,18 +110,24 @@ export default function RootLayout({ children }: RootLayoutProps) {
           />
 
           {/* MAIN CONTENT */}
-          <main className="flex-1 pt-20 relative z-10 max-w-7xl mx-auto w-full px-6 py-8">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key="page"
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                variants={pageTransition}
-              >
-                {children}
-              </motion.div>
-            </AnimatePresence>
+          <main className="flex-1 pt-20 relative z-10">
+
+            <div className="max-w-7xl mx-auto px-6 py-10">
+
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key="page"
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  variants={pageTransition}
+                >
+                  {children}
+                </motion.div>
+              </AnimatePresence>
+
+            </div>
+
           </main>
 
           {/* FOOTER */}
@@ -142,6 +146,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           </div>
 
         </RootProviders>
+
       </body>
     </html>
   );
