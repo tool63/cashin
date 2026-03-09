@@ -3,7 +3,7 @@
 import React, { useEffect, useMemo } from 'react';
 import Head from 'next/head';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { SEOOutput, LinkHint } from './seoEngine';
+import { SEOOutput } from './seoEngine';
 
 export interface SeoRendererProps {
   seo: SEOOutput;
@@ -37,24 +37,17 @@ export default function SeoRenderer({
     if (!seo.structuredData?.length) return null;
 
     return seo.structuredData
-      .filter((schema) => schema && Object.keys(schema).length > 0)
-      .map((schema, index) => {
-        const schemaWithContext = {
-          '@context': 'https://schema.org',
-          ...schema,
-        };
-
-        return (
-          <script
-            key={`schema-${index}-${(schema as any)['@type'] || 'data'}`}
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify(schemaWithContext),
-            }}
-            defer={defer}
-          />
-        );
-      });
+      .filter(schema => schema && Object.keys(schema).length > 0)
+      .map((schema, index) => (
+        <script
+          key={`schema-${index}-${(schema as any)['@type'] || 'data'}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({ '@context': 'https://schema.org', ...schema }),
+          }}
+          defer={defer}
+        />
+      ));
   }, [seo.structuredData, defer]);
 
   const metaTags = useMemo(() => {
@@ -86,12 +79,7 @@ export default function SeoRenderer({
     if (seo.hreflang) {
       Object.entries(seo.hreflang).forEach(([lang, href]) => {
         tags.push(
-          <link
-            key={`hreflang-${lang}`}
-            rel="alternate"
-            hrefLang={lang}
-            href={String(href)}
-          />
+          <link key={`hreflang-${lang}`} rel="alternate" hrefLang={lang} href={String(href)} />
         );
       });
     }
@@ -105,7 +93,7 @@ export default function SeoRenderer({
     const metrics: SEORenderMetrics = {
       pathname,
       searchParams: Object.fromEntries(searchParams.entries()),
-      pageType: seo.pageType?.type || 'unknown',
+      pageType: (seo.pageType as string) || 'unknown',
       canonical: seo.canonical,
       schemaCount: seo.structuredData?.length || 0,
       metadataSize: JSON.stringify(seo.metadata || {}).length,
@@ -117,18 +105,11 @@ export default function SeoRenderer({
 
   return (
     <>
-      <Head>
-        {metaTags}
-        {structuredDataScripts}
-      </Head>
+      <Head>{metaTags}{structuredDataScripts}</Head>
       {children}
     </>
   );
 }
 
-/* =========================================================
-   Lazy Loaded Version
-========================================================= */
-export const LazySeoRenderer = React.lazy(() =>
-  Promise.resolve({ default: SeoRenderer })
-);
+/* Lazy version */
+export const LazySeoRenderer = React.lazy(() => Promise.resolve({ default: SeoRenderer }));
