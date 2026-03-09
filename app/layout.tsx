@@ -2,7 +2,7 @@
 
 import "@/styles/globals.css";
 import { ReactNode } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, Variants } from "framer-motion";
 
 import RootProviders from "./providers/RootProviders";
 
@@ -19,11 +19,21 @@ interface RootLayoutProps {
   children: ReactNode;
 }
 
-const pageTransition = {
-  initial: { opacity: 0, y: 12 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -12 },
-  transition: { duration: 0.35 }
+const pageTransition: Variants = {
+  initial: {
+    opacity: 0,
+    y: 12
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.35 }
+  },
+  exit: {
+    opacity: 0,
+    y: -12,
+    transition: { duration: 0.25 }
+  }
 };
 
 export default function RootLayout({ children }: RootLayoutProps) {
@@ -59,12 +69,19 @@ export default function RootLayout({ children }: RootLayoutProps) {
         imageAlt: SEO_CONFIG.siteName,
       },
       viewport: "width=device-width, initial-scale=1",
-      other: { "theme-color": SEO_CONFIG.themeColor || "#000000" },
+      other: {
+        "theme-color": SEO_CONFIG.themeColor || "#000000"
+      },
     },
     canonical: SEO_CONFIG.siteUrl,
     hreflang: {},
     structuredData: [],
-    pageType: { type: "unknown", hierarchy: ["unknown"], metadata: {}, matches: null },
+    pageType: {
+      type: "unknown",
+      hierarchy: ["unknown"],
+      metadata: {},
+      matches: null
+    },
     links: [],
     preconnect: SEO_CONFIG.preconnect || [],
     dnsPrefetch: SEO_CONFIG.dnsPrefetch || [],
