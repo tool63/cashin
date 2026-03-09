@@ -20,15 +20,17 @@
   --border-color: #e5e7eb;
   --border-light: #f3f4f6;
 
-  --gradient-from: rgba(250, 204, 21, 0.35);
-  --gradient-via: rgba(34, 197, 94, 0.30);
-  --gradient-to: rgba(22, 163, 74, 0.30);
+  /* Fully opaque gradient colors */
+  --gradient-from: rgba(250, 204, 21, 1);
+  --gradient-via: rgba(34, 197, 94, 1);
+  --gradient-to: rgba(22, 163, 74, 1);
 
-  --glow-green: rgba(34, 197, 94, 0.25);
-  --glow-yellow: rgba(250, 204, 21, 0.25);
-  --glow-blue: rgba(59, 130, 246, 0.25);
-  --glow-purple: rgba(168, 85, 247, 0.25);
-  --glow-rose: rgba(244, 114, 182, 0.25);
+  /* Fully opaque glow blobs */
+  --glow-green: rgba(34, 197, 94, 1);
+  --glow-yellow: rgba(250, 204, 21, 1);
+  --glow-blue: rgba(59, 130, 246, 1);
+  --glow-purple: rgba(168, 85, 247, 1);
+  --glow-rose: rgba(244, 114, 182, 1);
 
   --strength-weak: #ef4444;
   --strength-fair: #f97316;
@@ -55,15 +57,17 @@
   --border-color: #1f2937;
   --border-light: #374151;
 
-  --gradient-from: rgba(234, 179, 8, 0.45);
-  --gradient-via: rgba(34, 197, 94, 0.40);
-  --gradient-to: rgba(21, 128, 61, 0.45);
+  /* Fully opaque gradient colors for dark mode */
+  --gradient-from: rgba(234, 179, 8, 1);
+  --gradient-via: rgba(34, 197, 94, 1);
+  --gradient-to: rgba(21, 128, 61, 1);
 
-  --glow-green: rgba(34, 197, 94, 0.35);
-  --glow-yellow: rgba(234, 179, 8, 0.35);
-  --glow-blue: rgba(59, 130, 246, 0.35);
-  --glow-purple: rgba(168, 85, 247, 0.35);
-  --glow-rose: rgba(244, 114, 182, 0.35);
+  /* Fully opaque glow blobs */
+  --glow-green: rgba(34, 197, 94, 1);
+  --glow-yellow: rgba(234, 179, 8, 1);
+  --glow-blue: rgba(59, 130, 246, 1);
+  --glow-purple: rgba(168, 85, 247, 1);
+  --glow-rose: rgba(244, 114, 182, 1);
 
   --strength-bg: #374151;
 
@@ -119,7 +123,7 @@ body {
   );
   background-size: 200% 200%;
   animation: gradientShift 14s ease infinite;
-  opacity: 0.75;
+  opacity: 1; /* Fully opaque */
   z-index: 0;
 }
 
@@ -176,7 +180,7 @@ body {
   position:absolute;
   border-radius:9999px;
   filter:blur(110px);
-  opacity:0.9;
+  opacity:1; /* Fully opaque now */
   pointer-events:none;
 }
 
@@ -223,6 +227,12 @@ body {
   box-shadow:0 0 0 3px rgba(59,130,246,0.2);
 }
 
+.focus-ring-purple:focus {
+  outline:none;
+  border-color:var(--focus-purple);
+  box-shadow:0 0 0 3px rgba(168,85,247,0.2);
+}
+
 /* =====================================================
    GRADIENT TEXT
 ===================================================== */
@@ -255,7 +265,7 @@ body {
 ===================================================== */
 
 ::selection {
-  background:rgba(34,197,94,0.35);
+  background:rgba(34,197,94,1);
   color:white;
 }
 
