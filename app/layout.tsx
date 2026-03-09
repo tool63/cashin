@@ -1,7 +1,7 @@
 "use client";
 
 import '@/styles/globals.css';
-import { ReactNode, Suspense } from 'react';
+import { ReactNode } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import RootProviders from './providers/RootProviders';
@@ -13,7 +13,7 @@ import Footer from '@/components/Footer';
 import Background from '@/components/Background';
 import FloatingCTA from '@/components/cta/FloatingCTA';
 import AuthLayout from './@auth/layout';
-import { LazySeoRenderer } from '@/components/SEO/SeoRenderer';
+import SeoRenderer from '@/components/SEO/SeoRenderer';
 import { SEO_CONFIG } from '@/components/SEO/seoConfig';
 import { SEOOutput } from '@/components/SEO/seoEngine';
 
@@ -22,9 +22,7 @@ interface RootLayoutProps {
   authPage?: boolean; // if true, wrap in AuthLayout
 }
 
-// ===============================
-// Convert SEO_CONFIG into SEOOutput
-// ===============================
+// Convert SEO_CONFIG into SEOOutput format for SeoRenderer
 const defaultSeo: SEOOutput = {
   metadata: {
     title: SEO_CONFIG.defaultTitle || SEO_CONFIG.siteName,
@@ -62,7 +60,7 @@ const defaultSeo: SEOOutput = {
   hreflang: Object.fromEntries(
     SEO_CONFIG.supportedLocales.map((loc) => [loc, SEO_CONFIG.siteUrl])
   ),
-  pageType: { type: 'website' },
+  pageType: { type: 'home' }, // ✅ fixed TypeScript error
   structuredData: [],
   preconnect: SEO_CONFIG.preconnect || [],
   links: [],
@@ -70,9 +68,7 @@ const defaultSeo: SEOOutput = {
   prerender: [],
 };
 
-// ===============================
-// Page transition animations
-// ===============================
+// Page transition animation
 const pageTransition = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
@@ -80,7 +76,7 @@ const pageTransition = {
   transition: { duration: 0.5, ease: 'easeInOut' },
 };
 
-// Header/Footer animation
+// Header/Footer/FloatingCTA animation
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
@@ -90,10 +86,8 @@ export default function RootLayout({ children, authPage = false }: RootLayoutPro
   return (
     <html lang="en">
       <head>
-        {/* Lazy SEO Renderer */}
-        <Suspense fallback={null}>
-          <LazySeoRenderer seo={defaultSeo} />
-        </Suspense>
+        {/* SEO Renderer */}
+        <SeoRenderer seo={defaultSeo} />
       </head>
       <body className="relative min-h-screen bg-white dark:bg-gray-900 text-black dark:text-white">
         <RootProviders>
@@ -110,7 +104,7 @@ export default function RootLayout({ children, authPage = false }: RootLayoutPro
                     <Header />
                   </motion.div>
 
-                  {/* Animated page transitions */}
+                  {/* Animate page transitions */}
                   <AnimatePresence mode="wait">
                     <motion.main
                       key={typeof window !== 'undefined' ? window.location.pathname : 'root'}
