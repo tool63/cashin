@@ -26,12 +26,8 @@ const pageTransition = {
   exit: { opacity: 0, y: -20 },
 };
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-};
-
 export default function RootLayout({ children }: RootLayoutProps) {
+
   const defaultSeo: SEOOutput = {
     metadata: {
       title: SEO_CONFIG.siteName,
@@ -57,7 +53,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
       twitter: {
         card: "summary_large_image",
         site: SEO_CONFIG.twitterHandle || "",
-        images: SEO_CONFIG.defaultTwitterImage ? [SEO_CONFIG.defaultTwitterImage] : [],
+        images: SEO_CONFIG.defaultTwitterImage
+          ? [SEO_CONFIG.defaultTwitterImage]
+          : [],
         imageAlt: SEO_CONFIG.siteName,
       },
       viewport: "width=device-width, initial-scale=1",
@@ -106,38 +104,33 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <ThemeProviderWrapper>
             <LanguageProvider>
 
-              {/* Header */}
-              <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
-                <Header />
-              </motion.div>
+              {/* HEADER (GLOBAL) */}
+              <Header />
 
-              {/* Page Content with padding to avoid overlap with fixed header */}
-              <AnimatePresence mode="wait">
-                <motion.main
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                  variants={pageTransition}
-                  className="relative z-10 max-w-7xl mx-auto px-6 pt-20 sm:pt-24 py-10 sm:py-16"
-                >
-                  {children}
-                </motion.main>
-              </AnimatePresence>
+              {/* PAGE CONTENT */}
+              <main className="relative z-10 max-w-7xl mx-auto px-6 pt-24 pb-16">
 
-              {/* Floating CTA */}
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="fixed bottom-6 right-6 z-30"
-              >
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key="page"
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    variants={pageTransition}
+                  >
+                    {children}
+                  </motion.div>
+                </AnimatePresence>
+
+              </main>
+
+              {/* FLOATING CTA */}
+              <div className="fixed bottom-6 right-6 z-40">
                 <FloatingCTA />
-              </motion.div>
+              </div>
 
-              {/* Footer */}
-              <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="relative z-10">
-                <Footer />
-              </motion.div>
+              {/* FOOTER (GLOBAL) */}
+              <Footer />
 
             </LanguageProvider>
           </ThemeProviderWrapper>
