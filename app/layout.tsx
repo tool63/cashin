@@ -10,7 +10,6 @@ import LanguageProvider from "./providers/LanguageProvider";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Background from "@/components/Background";
 import FloatingCTA from "@/components/cta/FloatingCTA";
 
 import SeoRenderer from "@/components/SEO/SeoRenderer";
@@ -101,27 +100,25 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <SeoRenderer seo={defaultSeo} />
       </head>
 
-      <body className="relative min-h-screen bg-white dark:bg-gray-900 text-black dark:text-white">
+      <body className="relative min-h-screen bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20 dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20 text-black dark:text-white">
+
         <RootProviders>
           <ThemeProviderWrapper>
             <LanguageProvider>
-              
-              {/* Background */}
-              <Background />
 
               {/* Header */}
               <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
                 <Header />
               </motion.div>
 
-              {/* Page Content */}
+              {/* Page Content with padding to avoid overlap with fixed header */}
               <AnimatePresence mode="wait">
                 <motion.main
                   initial="initial"
                   animate="animate"
                   exit="exit"
                   variants={pageTransition}
-                  className="relative z-10 max-w-7xl mx-auto px-6 py-10 sm:py-16"
+                  className="relative z-10 max-w-7xl mx-auto px-6 pt-20 sm:pt-24 py-10 sm:py-16"
                 >
                   {children}
                 </motion.main>
@@ -132,19 +129,20 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="fixed bottom-6 right-6 z-20"
+                className="fixed bottom-6 right-6 z-30"
               >
                 <FloatingCTA />
               </motion.div>
 
               {/* Footer */}
-              <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
+              <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="relative z-10">
                 <Footer />
               </motion.div>
 
             </LanguageProvider>
           </ThemeProviderWrapper>
         </RootProviders>
+
       </body>
     </html>
   );
