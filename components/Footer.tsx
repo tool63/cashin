@@ -278,31 +278,34 @@ export default function Footer() {
           </Sub>
         </Section>
 
-        {/* Remaining columns kept identical */}
-        {/* COLUMN 4 – rewards */}
+        {/* COLUMN 4 */}
         <Section id="rewards" title={footerColumns.rewards}>
           <A href="/earn-paypal-money">{links.earnPayPal}</A>
+
           <Sub id="giftcards" title={links.earnGiftCards}>
             <A href="/earn-amazon-gift-card">{links.amazonGiftCard}</A>
             <A href="/earn-apple-gift-card">{links.appleGiftCard}</A>
             <A href="/earn-google-play-gift-card">{links.googleGiftCard}</A>
           </Sub>
+
           <Sub id="crypto" title={links.earnCrypto}>
             <A href="/earn-bitcoin-online">{links.bitcoin}</A>
             <A href="/earn-litecoin-online">{links.litecoin}</A>
             <A href="/earn-ethereum-online">{links.ethereum}</A>
             <A href="/earn-dogecoin-online">{links.dogecoin}</A>
           </Sub>
+
           <Sub id="gaming" title={links.earnGaming}>
             <A href="/earn-free-robux">{links.robux}</A>
             <A href="/earn-steam-gift-cards">{links.steam}</A>
             <A href="/earn-xbox-gift-cards">{links.xbox}</A>
             <A href="/earn-psn-gift-cards">{links.psn}</A>
           </Sub>
+
           <A href="/earn-spotify-premium">{links.spotify}</A>
         </Section>
 
-        {/* COLUMN 5 – resources */}
+        {/* COLUMN 5 */}
         <Section id="resources" title={footerColumns.resources}>
           <A href="/blog">{links.blog}</A>
           <A href="/help">{links.helpCenter}</A>
@@ -311,16 +314,17 @@ export default function Footer() {
           <A href="/about">{links.about}</A>
         </Section>
 
-        {/* COLUMN 6 – business */}
+        {/* COLUMN 6 */}
         <Section id="business" title={footerColumns.business}>
           <A href="/affiliate">{links.affiliate}</A>
           <A href="/partners">{links.partners}</A>
           <A href="/advertise">{links.advertise}</A>
         </Section>
 
-        {/* COLUMN 7 – cashback */}
+        {/* COLUMN 7 */}
         <Section id="cashback" title={footerColumns.cashback}>
           <A href="/cashback-offers">{links.cashbackOffers}</A>
+
           <Sub id="shopping" title={links.shoppingRewards}>
             <A href="/shopping-rewards/electronics">{links.electronics}</A>
             <A href="/shopping-rewards/fashion">{links.fashion}</A>
@@ -328,18 +332,21 @@ export default function Footer() {
             <A href="/shopping-rewards/grocery">{links.grocery}</A>
             <A href="/shopping-rewards/beauty">{links.beauty}</A>
             <A href="/shopping-rewards/mobile">{links.mobile}</A>
+
             <Sub id="travel" title={links.travel} level={2}>
               <A href="/shopping-rewards/travel/hotels">{links.hotels}</A>
               <A href="/shopping-rewards/travel/flights">{links.flights}</A>
             </Sub>
+
             <A href="/shopping-rewards/finance">{links.finance}</A>
           </Sub>
+
           <A href="/promo-codes">{links.promoCodes}</A>
           <A href="/daily-deals">{links.dailyDeals}</A>
           <A href="/banking-finance-offers">{links.banking}</A>
         </Section>
 
-        {/* COLUMN 8 – legal */}
+        {/* COLUMN 8 */}
         <Section id="legal" title={footerColumns.legal}>
           <A href="https://cashog.com/terms-and-conditions">{links.terms}</A>
           <A href="https://cashog.com/privacy-policy">{links.privacy}</A>
@@ -348,15 +355,23 @@ export default function Footer() {
 
       </div>
 
-      {/* Social Icons */}
-      <div className="border-t border-theme py-6 flex justify-center gap-6">
-        <a href={footerSocial.twitter} target="_blank" rel="noopener noreferrer"><Twitter /></a>
-        <a href={footerSocial.facebook} target="_blank" rel="noopener noreferrer"><Facebook /></a>
-        <a href={footerSocial.instagram} target="_blank" rel="noopener noreferrer"><Instagram /></a>
-        <a href={footerSocial.youtube} target="_blank" rel="noopener noreferrer"><Youtube /></a>
-      </div>
+      {/* SOCIAL ICONS */}
+<div className="border-t border-theme py-6 flex justify-center gap-6">
+  <a href="https://twitter.com/cashog" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+    <Twitter size={20} />
+  </a>
+  <a href="https://facebook.com/cashog" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+    <Facebook size={20} />
+  </a>
+  <a href="https://instagram.com/cashog" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+    <Instagram size={20} />
+  </a>
+  <a href="https://youtube.com/cashog" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+    <Youtube size={20} />
+  </a>
+</div>
 
-      {/* Copyright */}
+      {/* COPYRIGHT */}
       <div className="text-center text-sm text-muted pb-6">
         {t("footer.copyright")}
       </div>
