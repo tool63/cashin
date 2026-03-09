@@ -1,8 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { ReactNode } from "react";
 
-export default function Background() {
+type BackgroundProps = {
+  children?: ReactNode; // <-- allow children
+};
+
+export default function Background({ children }: BackgroundProps) {
   return (
     <>
       {/* ============================
@@ -57,9 +61,6 @@ export default function Background() {
         "
       />
 
-      {/* ============================
-          Additional Glow Blob
-      ============================ */}
       <div 
         className="
           fixed w-72 h-72 
@@ -72,6 +73,11 @@ export default function Background() {
           -z-10
         "
       />
+
+      {/* ============================
+          Children content will appear on top
+      ============================ */}
+      {children}
     </>
   );
 }
