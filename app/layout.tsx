@@ -57,9 +57,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         imageAlt: SEO_CONFIG.siteName,
       },
       viewport: "width=device-width, initial-scale=1",
-      other: {
-        "theme-color": SEO_CONFIG.themeColor || "#000000",
-      },
+      other: { "theme-color": SEO_CONFIG.themeColor || "#000000" },
     },
     canonical: SEO_CONFIG.siteUrl,
     hreflang: {},
@@ -91,7 +89,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <SeoRenderer seo={defaultSeo} />
       </head>
 
-      <body className="relative min-h-screen text-black dark:text-white">
+      <body className="relative min-h-screen text-black dark:text-white overflow-x-hidden">
 
         {/* ============================
             GLOBAL BACKGROUND
@@ -103,30 +101,43 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <ThemeProviderWrapper>
             <LanguageProvider>
 
-              {/* HEADER */}
+              {/* ============================
+                  HEADER
+                  - Fixed minimal bar
+              ============================ */}
               <Header />
 
-              {/* PAGE CONTENT */}
-              <main className="relative z-10 max-w-7xl mx-auto px-6 pt-24 pb-16">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key="page"
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    variants={pageTransition}
-                  >
-                    {children}
-                  </motion.div>
-                </AnimatePresence>
-              </main>
+              {/* ============================
+                  PAGE CONTENT
+                  - Add top padding for fixed header
+              ============================ */}
+              <div className="relative pt-20 min-h-screen">
+                <main className="relative z-10 max-w-7xl mx-auto px-6 py-8">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key="page"
+                      initial="initial"
+                      animate="animate"
+                      exit="exit"
+                      variants={pageTransition}
+                      className="relative z-10"
+                    >
+                      {children}
+                    </motion.div>
+                  </AnimatePresence>
+                </main>
+              </div>
 
-              {/* FLOATING CTA */}
+              {/* ============================
+                  FLOATING CTA
+              ============================ */}
               <div className="fixed bottom-6 right-6 z-40">
                 <FloatingCTA />
               </div>
 
-              {/* FOOTER */}
+              {/* ============================
+                  FOOTER
+              ============================ */}
               <Footer />
 
             </LanguageProvider>
