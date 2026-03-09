@@ -33,7 +33,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header ref={headerRef} className="fixed top-0 left-0 w-full z-0 shadow-sm">
+    <header ref={headerRef} className="fixed top-0 left-0 w-full z-2 shadow-sm">
       {/* GLOBAL BACKGROUND */}
       <Background>
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
