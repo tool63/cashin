@@ -51,7 +51,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
       twitter: {
         card: "summary_large_image",
         site: SEO_CONFIG.twitterHandle || "",
-        images: SEO_CONFIG.defaultTwitterImage ? [SEO_CONFIG.defaultTwitterImage] : [],
+        images: SEO_CONFIG.defaultTwitterImage
+          ? [SEO_CONFIG.defaultTwitterImage]
+          : [],
         imageAlt: SEO_CONFIG.siteName,
       },
       viewport: "width=device-width, initial-scale=1",
@@ -60,7 +62,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
     canonical: SEO_CONFIG.siteUrl,
     hreflang: {},
     structuredData: [],
-    pageType: { type: "unknown", hierarchy: ["unknown"], metadata: {}, matches: null },
+    pageType: {
+      type: "unknown",
+      hierarchy: ["unknown"],
+      metadata: {},
+      matches: null,
+    },
     links: [],
     preconnect: SEO_CONFIG.preconnect || [],
     dnsPrefetch: SEO_CONFIG.dnsPrefetch || [],
@@ -87,25 +94,27 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <SeoRenderer seo={defaultSeo} />
       </head>
 
-      <body className="relative min-h-screen text-black dark:text-white overflow-x-hidden">
-        {/* ============================
-            Root Providers (Theme + Language)
-        ============================ */}
+      <body className="relative flex flex-col min-h-screen text-black dark:text-white overflow-x-hidden">
+
         <RootProviders>
 
-          {/* ============================
-              HEADER
-          ============================ */}
-          <Header className="border-b border-gray-200 dark:border-white/20 bg-white dark:bg-black z-30" />
+          {/* Background (global) */}
+          <Background />
 
-          {/* ============================
-              PAGE CONTENT WITH BACKGROUND
-          ============================ */}
-          <div className="relative pt-20 min-h-screen">
-            {/* Background globally behind all pages */}
-            <Background />
+          {/* ================= HEADER ================= */}
+          <Header
+            className="
+              fixed top-0 left-0 right-0 z-40
+              backdrop-blur-xl
+              bg-white/60 dark:bg-black/60
+              border-b border-gray-200 dark:border-white/10
+            "
+          />
 
-            <main className="relative z-10 max-w-7xl mx-auto px-6 py-8">
+          {/* ================= MAIN CONTENT ================= */}
+          <div className="flex flex-col flex-1 pt-20">
+
+            <main className="relative z-10 flex-1 max-w-7xl mx-auto w-full px-6 py-8">
               <AnimatePresence mode="wait">
                 <motion.div
                   key="page"
@@ -113,25 +122,28 @@ export default function RootLayout({ children }: RootLayoutProps) {
                   animate="animate"
                   exit="exit"
                   variants={pageTransition}
-                  className="relative z-10"
+                  className="relative"
                 >
                   {children}
                 </motion.div>
               </AnimatePresence>
             </main>
+
+            {/* ================= FOOTER ================= */}
+            <Footer
+              className="
+                border-t border-gray-200 dark:border-white/10
+                bg-white/80 dark:bg-black/80
+                backdrop-blur-xl
+              "
+            />
+
           </div>
 
-          {/* ============================
-              FLOATING CTA
-          ============================ */}
-          <div className="fixed bottom-6 right-6 z-40">
+          {/* ================= FLOATING CTA ================= */}
+          <div className="fixed bottom-6 right-6 z-50">
             <FloatingCTA />
           </div>
-
-          {/* ============================
-              FOOTER
-          ============================ */}
-          <Footer className="border-t border-gray-200 dark:border-white/20 bg-white dark:bg-black z-30" />
 
         </RootProviders>
       </body>
