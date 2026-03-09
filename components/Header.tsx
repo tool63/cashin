@@ -34,7 +34,10 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className="fixed top-0 left-0 w-full z-50 bg-inherit backdrop-blur-md shadow-sm"
+      className="fixed top-0 left-0 w-full z-50
+        bg-transparent
+        backdrop-blur-md
+        shadow-sm"
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
@@ -73,7 +76,7 @@ export default function Header() {
                   className="
                     absolute top-full left-0 mt-2 w-48
                     flex flex-col gap-1 p-3 rounded-xl
-                    bg-inherit
+                    bg-transparent
                     text-primary
                     border border-gray-200 dark:border-white/10
                     shadow-xl
@@ -142,7 +145,7 @@ export default function Header() {
             exit={{ opacity: 0, y: -10 }}
             className="
               md:hidden px-6 py-6 space-y-4 border-t
-              bg-inherit
+              bg-transparent
               text-primary
               border-gray-200 dark:border-white/10
               shadow-xl
