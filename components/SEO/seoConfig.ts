@@ -45,28 +45,21 @@ export const SEO_CONFIG = {
     'Earn real money online with Cashog. Get paid for surveys, app installs, games, offers, microtasks, and cashback deals. Withdraw via PayPal, gift cards, or crypto. Trusted worldwide. Start earning today.',
 
   defaultKeywords: [
-    // Core High Volume
     'earn money online',
     'make money online',
     'earn real money',
     'get paid online',
     'online side hustle',
-
-    // Intent Based
     'earn money from home',
     'how to make money online',
     'ways to make money fast',
     'best money making apps',
     'legit online jobs',
-
-    // Rewards & Surveys
     'paid surveys that pay',
     'earn PayPal money',
     'free gift cards online',
     'earn crypto rewards',
     'get paid to play games',
-
-    // Long Tail Authority
     'earn money without investment',
     'earn money worldwide',
     'online earning platform',
@@ -74,6 +67,9 @@ export const SEO_CONFIG = {
     'trusted survey sites',
   ],
 
+  // ==========================================================
+  // PWA / Branding Defaults
+  // ==========================================================
   primaryKeyword: 'earn money online',
 
   secondaryKeywords: [
@@ -96,9 +92,6 @@ export const SEO_CONFIG = {
     },
   },
 
-  // ==========================================================
-  // Brand & Organization (Authority SEO)
-  // ==========================================================
   organization: {
     name: 'Cashog',
     legalName: 'Cashog Inc.',
@@ -158,7 +151,7 @@ export const SEO_CONFIG = {
   },
 
   // ==========================================================
-  // Contact Info (Used in Schema)
+  // Contact Info
   // ==========================================================
   contact: {
     email: 'support@cashog.com',
@@ -172,20 +165,11 @@ export const SEO_CONFIG = {
     },
   },
 
-  // ==========================================================
-  // Theme & Branding
-  // ==========================================================
   themeColor: '#FF6B00',
   backgroundColor: '#FFFFFF',
 
   // ==========================================================
-  // Analytics
-  // ==========================================================
-  googleAnalyticsId: process.env.GA_MEASUREMENT_ID,
-  googleTagManagerId: process.env.GTM_ID,
-
-  // ==========================================================
-  // Performance Optimizations
+  // Performance / Prefetch / Security
   // ==========================================================
   preconnect: [
     'https://fonts.googleapis.com',
@@ -199,9 +183,6 @@ export const SEO_CONFIG = {
     'https://www.google-analytics.com',
   ],
 
-  // ==========================================================
-  // Security (Enterprise CSP)
-  // ==========================================================
   csp: {
     'default-src': ["'self'"],
     'script-src': [
@@ -238,18 +219,12 @@ export const SEO_CONFIG = {
     ],
   },
 
-  // ==========================================================
-  // Sitemap & Feeds
-  // ==========================================================
   sitemapUrl:
     `${process.env.NEXT_PUBLIC_SITE_URL || 'https://cashog.com'}/sitemap.xml`,
 
   rssUrl:
     `${process.env.NEXT_PUBLIC_SITE_URL || 'https://cashog.com'}/rss.xml`,
 
-  // ==========================================================
-  // Structured Data Defaults
-  // ==========================================================
   structuredDataDefaults: {
     enableBreadcrumbs: true,
     enableOrganization: true,
@@ -257,9 +232,6 @@ export const SEO_CONFIG = {
     enableSearchAction: true,
   },
 
-  // ==========================================================
-  // PWA Configuration
-  // ==========================================================
   pwa: {
     name: 'Cashog Rewards',
     shortName: 'Cashog',
