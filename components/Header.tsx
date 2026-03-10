@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import LanguageSwitcher from "@/components/switch/LanguageSwitcher";
 import DarkLightToggle from "@/components/switch/DarkLightToggle";
-import { useTheme } from "next-themes";
 
 interface HeaderProps {
   className?: string;
@@ -21,33 +20,16 @@ export default function Header({ className }: HeaderProps) {
 
   const headerRef = useRef<HTMLDivElement>(null);
 
-  const { theme } = useTheme();
-
   const ctaGradient =
     "bg-gradient-to-r from-yellow-400 to-green-500 text-black";
 
-  /* ---------------------------
-     THEME COLORS (ONE SOURCE)
-  --------------------------- */
+  /* SAME BACKGROUND EVERYWHERE */
 
-  const bgBase =
-    theme === "dark"
-      ? "bg-gray-100"
-      : "bg-gray-900";
+  const bgBase = "bg-white dark:bg-gray-900";
+  const textColor = "text-gray-900 dark:text-white";
+  const borderColor = "border-gray-200 dark:border-gray-700";
 
-  const textColor =
-    theme === "dark"
-      ? "text-black"
-      : "text-white";
-
-  const borderColor =
-    theme === "dark"
-      ? "border-gray-300"
-      : "border-gray-700";
-
-  /* ---------------------------
-     CLOSE MENU OUTSIDE CLICK
-  --------------------------- */
+  /* CLOSE MENU WHEN CLICK OUTSIDE */
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -67,7 +49,7 @@ export default function Header({ className }: HeaderProps) {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 w-full z-30 transition-colors duration-300 border-b ${borderColor} ${bgBase} ${className || ""}`}
+      className={`fixed top-0 left-0 w-full z-30 border-b ${borderColor} ${bgBase} ${className || ""}`}
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         
@@ -85,7 +67,7 @@ export default function Header({ className }: HeaderProps) {
         <nav
           className={`hidden md:flex items-center gap-6 text-sm font-medium ${textColor}`}
         >
-          <Link href="/how-it-works" className="hover:opacity-80 transition">
+          <Link href="/how-it-works" className="hover:opacity-80">
             How it works
           </Link>
 
@@ -112,49 +94,19 @@ export default function Header({ className }: HeaderProps) {
                   exit={{ opacity: 0, y: 8 }}
                   className={`absolute top-full left-0 mt-2 w-48 flex flex-col gap-1 p-3 rounded-xl shadow-xl border ${borderColor} ${bgBase}`}
                 >
-                  <Link href="/surveys" className="hover:opacity-80 transition">
-                    Surveys
-                  </Link>
-                  <Link
-                    href="/app-installs"
-                    className="hover:opacity-80 transition"
-                  >
-                    App Installs
-                  </Link>
-                  <Link
-                    href="/play-games"
-                    className="hover:opacity-80 transition"
-                  >
-                    Play Games
-                  </Link>
-                  <Link
-                    href="/watch-videos"
-                    className="hover:opacity-80 transition"
-                  >
-                    Watch Videos
-                  </Link>
-                  <Link
-                    href="/offerwall"
-                    className="hover:opacity-80 transition"
-                  >
-                    Offerwall
-                  </Link>
+                  <Link href="/surveys">Surveys</Link>
+                  <Link href="/app-installs">App Installs</Link>
+                  <Link href="/play-games">Play Games</Link>
+                  <Link href="/watch-videos">Watch Videos</Link>
+                  <Link href="/offerwall">Offerwall</Link>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
 
-          <Link href="/cashout" className="hover:opacity-80 transition">
-            Cashout
-          </Link>
-
-          <Link href="/blog" className="hover:opacity-80 transition">
-            Blog
-          </Link>
-
-          <Link href="/help" className="hover:opacity-80 transition">
-            Help
-          </Link>
+          <Link href="/cashout">Cashout</Link>
+          <Link href="/blog">Blog</Link>
+          <Link href="/help">Help</Link>
         </nav>
 
         {/* DESKTOP ACTIONS */}
@@ -190,7 +142,7 @@ export default function Header({ className }: HeaderProps) {
           </Link>
         </div>
 
-        {/* MOBILE MENU BUTTON */}
+        {/* MOBILE BUTTON */}
 
         <button
           className={`${textColor} md:hidden`}
@@ -208,13 +160,9 @@ export default function Header({ className }: HeaderProps) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className={`md:hidden w-full px-6 pt-0 pb-6 space-y-4 border-t ${borderColor} shadow-xl ${bgBase} ${textColor}`}
+            className={`md:hidden w-full px-6 pb-6 pt-2 space-y-4 border-t ${borderColor} shadow-xl ${bgBase} ${textColor}`}
           >
-            <Link href="/how-it-works" className="hover:opacity-80 transition">
-              How it works
-            </Link>
-
-            {/* MOBILE EARN */}
+            <Link href="/how-it-works">How it works</Link>
 
             <button
               onClick={() => setMobileEarnOpen(!mobileEarnOpen)}
@@ -231,49 +179,17 @@ export default function Header({ className }: HeaderProps) {
 
             {mobileEarnOpen && (
               <div className="flex flex-col gap-3 pl-4 text-sm">
-                <Link href="/surveys" className="hover:opacity-80 transition">
-                  Surveys
-                </Link>
-                <Link
-                  href="/app-installs"
-                  className="hover:opacity-80 transition"
-                >
-                  App Installs
-                </Link>
-                <Link
-                  href="/play-games"
-                  className="hover:opacity-80 transition"
-                >
-                  Play Games
-                </Link>
-                <Link
-                  href="/watch-videos"
-                  className="hover:opacity-80 transition"
-                >
-                  Watch Videos
-                </Link>
-                <Link
-                  href="/offerwall"
-                  className="hover:opacity-80 transition"
-                >
-                  Offerwall
-                </Link>
+                <Link href="/surveys">Surveys</Link>
+                <Link href="/app-installs">App Installs</Link>
+                <Link href="/play-games">Play Games</Link>
+                <Link href="/watch-videos">Watch Videos</Link>
+                <Link href="/offerwall">Offerwall</Link>
               </div>
             )}
 
-            <div className="flex flex-col gap-3 pt-2">
-              <Link href="/cashout" className="hover:opacity-80 transition">
-                Cashout
-              </Link>
-
-              <Link href="/blog" className="hover:opacity-80 transition">
-                Blog
-              </Link>
-
-              <Link href="/help" className="hover:opacity-80 transition">
-                Help
-              </Link>
-            </div>
+            <Link href="/cashout">Cashout</Link>
+            <Link href="/blog">Blog</Link>
+            <Link href="/help">Help</Link>
 
             <div className="flex items-center justify-between pt-3">
               <LanguageSwitcher />
@@ -283,7 +199,7 @@ export default function Header({ className }: HeaderProps) {
             <div className="pt-4 flex flex-col gap-3">
               <Link href="/login">
                 <button
-                  className={`border ${borderColor} py-2 rounded-lg w-full ${textColor}`}
+                  className={`border ${borderColor} py-2 rounded-lg w-full`}
                 >
                   Login
                 </button>
