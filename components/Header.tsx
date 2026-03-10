@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import LanguageSwitcher from "@/components/switch/LanguageSwitcher";
 import DarkLightToggle from "@/components/switch/DarkLightToggle";
-import { useTheme } from "next-themes";
 
 interface HeaderProps {
   className?: string;
@@ -20,17 +19,11 @@ export default function Header({ className }: HeaderProps) {
     useState<"none" | "signup" | "login">("none");
 
   const headerRef = useRef<HTMLDivElement>(null);
-  const { theme } = useTheme();
 
   const ctaGradient =
     "bg-gradient-to-r from-yellow-400 to-green-500 text-black";
 
-  const textColor = theme === "dark" ? "text-black" : "text-white";
-
-  const borderColor =
-    theme === "dark"
-      ? "border-gray-300"
-      : "border-gray-700";
+  const borderColor = "border-gray-300 dark:border-gray-700";
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -50,9 +43,9 @@ export default function Header({ className }: HeaderProps) {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 w-full z-30 backdrop-blur-md transition-colors duration-300 border-b ${borderColor} ${className || ""}`}
+      className={`fixed top-0 left-0 w-full z-30 backdrop-blur-md border-b ${borderColor} ${className || ""}`}
     >
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between text-black dark:text-white">
 
         {/* LOGO */}
         <Link
@@ -63,14 +56,13 @@ export default function Header({ className }: HeaderProps) {
         </Link>
 
         {/* DESKTOP NAV */}
-        <nav
-          className={`hidden md:flex items-center gap-6 text-sm font-medium ${textColor}`}
-        >
-          <Link href="/how-it-works" className="hover:opacity-80 transition">
+        <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+
+          <Link href="/how-it-works" className="block hover:opacity-80">
             How it works
           </Link>
 
-          {/* EARN DROPDOWN */}
+          {/* EARN */}
           <div
             className="relative"
             onMouseEnter={() => setEarnOpen(true)}
@@ -90,25 +82,45 @@ export default function Header({ className }: HeaderProps) {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
-                  className={`absolute top-full left-0 mt-2 w-48 flex flex-col gap-1 p-3 rounded-xl shadow-xl border ${borderColor}`}
+                  className={`absolute top-full left-0 mt-2 w-48 flex flex-col gap-2 p-3 rounded-xl shadow-xl border ${borderColor}`}
                 >
-                  <Link href="/surveys">Surveys</Link>
-                  <Link href="/app-installs">App Installs</Link>
-                  <Link href="/play-games">Play Games</Link>
-                  <Link href="/watch-videos">Watch Videos</Link>
-                  <Link href="/offerwall">Offerwall</Link>
+                  <Link href="/surveys" className="block">
+                    Surveys
+                  </Link>
+                  <Link href="/app-installs" className="block">
+                    App Installs
+                  </Link>
+                  <Link href="/play-games" className="block">
+                    Play Games
+                  </Link>
+                  <Link href="/watch-videos" className="block">
+                    Watch Videos
+                  </Link>
+                  <Link href="/offerwall" className="block">
+                    Offerwall
+                  </Link>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
 
-          <Link href="/cashout">Cashout</Link>
-          <Link href="/blog">Blog</Link>
-          <Link href="/help">Help</Link>
+          <Link href="/cashout" className="block hover:opacity-80">
+            Cashout
+          </Link>
+
+          <Link href="/blog" className="block hover:opacity-80">
+            Blog
+          </Link>
+
+          <Link href="/help" className="block hover:opacity-80">
+            Help
+          </Link>
+
         </nav>
 
         {/* DESKTOP ACTIONS */}
-        <div className={`hidden md:flex items-center gap-4 ${textColor}`}>
+        <div className="hidden md:flex items-center gap-4">
+
           <LanguageSwitcher />
           <DarkLightToggle />
 
@@ -137,15 +149,17 @@ export default function Header({ className }: HeaderProps) {
               Sign up
             </button>
           </Link>
+
         </div>
 
         {/* MOBILE MENU BUTTON */}
         <button
-          className={`${textColor} md:hidden`}
+          className="md:hidden"
           onClick={() => setMobileOpen(!mobileOpen)}
         >
           {mobileOpen ? <X /> : <Menu />}
         </button>
+
       </div>
 
       {/* MOBILE MENU */}
@@ -155,10 +169,13 @@ export default function Header({ className }: HeaderProps) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className={`md:hidden w-full px-6 pt-0 pb-6 space-y-4 border-t ${borderColor} shadow-xl ${textColor}`}
+            className={`md:hidden w-full px-6 pt-2 pb-6 space-y-4 border-t ${borderColor} shadow-xl text-black dark:text-white`}
           >
-            <Link href="/how-it-works">How it works</Link>
+            <Link href="/how-it-works" className="block">
+              How it works
+            </Link>
 
+            {/* MOBILE EARN */}
             <button
               onClick={() => setMobileEarnOpen(!mobileEarnOpen)}
               className="flex w-full items-center justify-between font-medium"
@@ -204,9 +221,11 @@ export default function Header({ className }: HeaderProps) {
                 </button>
               </Link>
             </div>
+
           </motion.div>
         )}
       </AnimatePresence>
+
     </header>
   );
 }
