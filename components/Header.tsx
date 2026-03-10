@@ -33,9 +33,9 @@ export default function Header({ className }: HeaderProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Use the SAME gradient for header, dropdowns, and mobile menu
+  // Header & menus gradient with 90% opacity
   const headerGradient =
-    "bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20 dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20";
+    "bg-gradient-to-br from-yellow-400/18 via-green-400/27 to-green-500/18 dark:from-yellow-500/9 dark:via-green-700/18 dark:to-green-800/18";
 
   return (
     <header
