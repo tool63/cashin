@@ -25,10 +25,7 @@ export default function Header({ className }: HeaderProps) {
   const ctaGradient =
     "bg-gradient-to-r from-yellow-400 to-green-500 text-black";
 
-  const textColor =
-    theme === "dark"
-      ? "text-black"
-      : "text-white";
+  const textColor = theme === "dark" ? "text-black" : "text-white";
 
   const borderColor =
     theme === "dark"
@@ -45,6 +42,7 @@ export default function Header({ className }: HeaderProps) {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
+
     return () =>
       document.removeEventListener("mousedown", handleClickOutside);
   }, []);
@@ -52,10 +50,11 @@ export default function Header({ className }: HeaderProps) {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 w-full z-30 transition-colors duration-300 border-b ${borderColor} ${className || ""}`}
+      className={`fixed top-0 left-0 w-full z-30 backdrop-blur-md transition-colors duration-300 border-b ${borderColor} ${className || ""}`}
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        
+
+        {/* LOGO */}
         <Link
           href="/"
           className={`${ctaGradient} text-2xl font-bold px-3 py-1 rounded-lg`}
@@ -63,6 +62,7 @@ export default function Header({ className }: HeaderProps) {
           Cashog
         </Link>
 
+        {/* DESKTOP NAV */}
         <nav
           className={`hidden md:flex items-center gap-6 text-sm font-medium ${textColor}`}
         >
@@ -70,6 +70,7 @@ export default function Header({ className }: HeaderProps) {
             How it works
           </Link>
 
+          {/* EARN DROPDOWN */}
           <div
             className="relative"
             onMouseEnter={() => setEarnOpen(true)}
@@ -106,6 +107,7 @@ export default function Header({ className }: HeaderProps) {
           <Link href="/help">Help</Link>
         </nav>
 
+        {/* DESKTOP ACTIONS */}
         <div className={`hidden md:flex items-center gap-4 ${textColor}`}>
           <LanguageSwitcher />
           <DarkLightToggle />
@@ -137,6 +139,7 @@ export default function Header({ className }: HeaderProps) {
           </Link>
         </div>
 
+        {/* MOBILE MENU BUTTON */}
         <button
           className={`${textColor} md:hidden`}
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -145,6 +148,7 @@ export default function Header({ className }: HeaderProps) {
         </button>
       </div>
 
+      {/* MOBILE MENU */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -189,17 +193,13 @@ export default function Header({ className }: HeaderProps) {
 
             <div className="pt-4 flex flex-col gap-3">
               <Link href="/login">
-                <button
-                  className={`border ${borderColor} py-2 rounded-lg w-full ${textColor}`}
-                >
+                <button className={`border ${borderColor} py-2 rounded-lg w-full`}>
                   Login
                 </button>
               </Link>
 
               <Link href="/signup">
-                <button
-                  className={`${ctaGradient} py-2 rounded-lg w-full text-black`}
-                >
+                <button className={`${ctaGradient} py-2 rounded-lg w-full text-black`}>
                   Sign up
                 </button>
               </Link>
