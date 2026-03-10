@@ -20,7 +20,7 @@ interface RootLayoutProps {
   children: ReactNode;
 }
 
-/* Static SEO object (performance-friendly) */
+/* ---------- Static SEO object ---------- */
 const defaultSeo: SEOOutput = {
   metadata: {
     title: SEO_CONFIG.siteName,
@@ -68,30 +68,37 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
       <body className="relative text-black dark:text-white antialiased">
 
-        {/* GLOBAL FIXED BACKGROUND */}
+        {/* ---------- GLOBAL FIXED BACKGROUND ---------- */}
         <Background />
 
         <RootProviders>
           <ThemeProviderWrapper>
             <LanguageProvider>
 
-              {/* PAGE WRAPPER */}
+              {/* ---------- PAGE WRAPPER ---------- */}
               <div className="flex flex-col min-h-screen relative z-10">
 
-                {/* HEADER */}
-                <Header className="bg-transparent" />
+                {/* ---------- HEADER ---------- */}
+                <Header
+                  className={`bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20
+                              dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20
+                              border-b border-theme`}
+                />
 
-                {/* MAIN CONTENT */}
+                {/* ---------- MAIN CONTENT ---------- */}
                 <main className="flex-1 w-full max-w-7xl mx-auto px-6 pt-24 pb-16">
                   {children}
                 </main>
 
-                {/* FOOTER */}
-                <Footer className="bg-transparent" />
+                {/* ---------- FOOTER ---------- */}
+                <Footer
+                  className={`bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20
+                              dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20`}
+                />
 
               </div>
 
-              {/* FLOATING CTA */}
+              {/* ---------- FLOATING CTA ---------- */}
               <div className="fixed bottom-6 right-6 z-50">
                 <FloatingCTA />
               </div>
