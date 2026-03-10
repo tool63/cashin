@@ -8,7 +8,7 @@ import LanguageSwitcher from "@/components/switch/LanguageSwitcher";
 import DarkLightToggle from "@/components/switch/DarkLightToggle";
 
 interface HeaderProps {
-  className?: string; // optional extra classes from layout
+  className?: string;
 }
 
 export default function Header({ className }: HeaderProps) {
@@ -36,7 +36,10 @@ export default function Header({ className }: HeaderProps) {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 w-full z-30 border-b border-gray-200 dark:border-white/20 transition-colors duration-300 ${className || ""}`}
+      className={`fixed top-0 left-0 w-full z-30 border-b border-theme
+        bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20
+        dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20
+        transition-colors duration-300 ${className || ""}`}
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
@@ -49,7 +52,6 @@ export default function Header({ className }: HeaderProps) {
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-primary">
           <Link href="/how-it-works">How it works</Link>
 
-          {/* EARN DROPDOWN */}
           <div
             className="relative"
             onMouseEnter={() => setEarnOpen(true)}
@@ -66,7 +68,9 @@ export default function Header({ className }: HeaderProps) {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
-                  className="absolute top-full left-0 mt-2 w-48 flex flex-col gap-1 p-3 rounded-xl border border-gray-200 dark:border-white/10 shadow-xl bg-transparent"
+                  className="absolute top-full left-0 mt-2 w-48 flex flex-col gap-1 p-3 rounded-xl border border-gray-200 dark:border-white/10 shadow-xl
+                    bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20
+                    dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20"
                 >
                   <Link href="/surveys" className="hover:opacity-80 transition">Surveys</Link>
                   <Link href="/app-installs" className="hover:opacity-80 transition">App Installs</Link>
@@ -126,11 +130,12 @@ export default function Header({ className }: HeaderProps) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden px-6 py-6 space-y-4 border-t border-gray-200 dark:border-white/10 shadow-xl relative z-50 bg-transparent"
+            className="md:hidden px-6 py-6 space-y-4 border-t border-theme shadow-xl
+              bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20
+              dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20"
           >
             <Link href="/how-it-works" className="block hover:opacity-80 transition">How it works</Link>
 
-            {/* MOBILE EARN */}
             <button
               onClick={() => setMobileEarnOpen(!mobileEarnOpen)}
               className="flex w-full items-center justify-between font-medium"
@@ -149,25 +154,21 @@ export default function Header({ className }: HeaderProps) {
               </div>
             )}
 
-            {/* MOBILE LINKS */}
             <div className="flex flex-col gap-3 pt-2">
               <Link href="/cashout" className="hover:opacity-80 transition">Cashout</Link>
               <Link href="/blog" className="hover:opacity-80 transition">Blog</Link>
               <Link href="/help" className="hover:opacity-80 transition">Help</Link>
             </div>
 
-            {/* SWITCHES */}
             <div className="flex items-center justify-between pt-3">
               <LanguageSwitcher />
               <DarkLightToggle />
             </div>
 
-            {/* MOBILE ACTIONS */}
             <div className="pt-4 flex flex-col gap-3">
               <Link href="/login">
                 <button className="border border-gray-300 py-2 rounded-lg w-full">Login</button>
               </Link>
-
               <Link href="/signup">
                 <button className={`${ctaGradient} py-2 rounded-lg w-full text-black`}>Sign up</button>
               </Link>
