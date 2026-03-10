@@ -20,7 +20,6 @@ interface RootLayoutProps {
   children: ReactNode;
 }
 
-/* ---------- Static SEO object ---------- */
 const defaultSeo: SEOOutput = {
   metadata: {
     title: SEO_CONFIG.siteName,
@@ -34,12 +33,21 @@ const defaultSeo: SEOOutput = {
       description: SEO_CONFIG.defaultDescription || "",
       siteName: SEO_CONFIG.siteName,
       locale: SEO_CONFIG.defaultLocale,
-      images: [{ url: SEO_CONFIG.defaultOgImage || "", width: 1200, height: 630, alt: SEO_CONFIG.siteName }],
+      images: [
+        {
+          url: SEO_CONFIG.defaultOgImage || "",
+          width: 1200,
+          height: 630,
+          alt: SEO_CONFIG.siteName,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       site: SEO_CONFIG.twitterHandle || "",
-      images: SEO_CONFIG.defaultTwitterImage ? [SEO_CONFIG.defaultTwitterImage] : [],
+      images: SEO_CONFIG.defaultTwitterImage
+        ? [SEO_CONFIG.defaultTwitterImage]
+        : [],
       imageAlt: SEO_CONFIG.siteName,
     },
     viewport: "width=device-width, initial-scale=1",
@@ -48,7 +56,12 @@ const defaultSeo: SEOOutput = {
   canonical: SEO_CONFIG.siteUrl,
   hreflang: {},
   structuredData: [],
-  pageType: { type: "unknown", hierarchy: ["unknown"], metadata: {}, matches: null },
+  pageType: {
+    type: "unknown",
+    hierarchy: ["unknown"],
+    metadata: {},
+    matches: null,
+  },
   links: [],
   preconnect: SEO_CONFIG.preconnect || [],
   dnsPrefetch: SEO_CONFIG.dnsPrefetch || [],
@@ -56,7 +69,17 @@ const defaultSeo: SEOOutput = {
   prefetch: [],
   prerender: [],
   modulePreload: [],
-  metrics: { pageType: "unknown", generationTime: 0, metadataSize: 0, schemaCount: 0, cacheHit: false, warnings: 0, suggestions: 0, seoScore: 0, timestamp: Date.now() },
+  metrics: {
+    pageType: "unknown",
+    generationTime: 0,
+    metadataSize: 0,
+    schemaCount: 0,
+    cacheHit: false,
+    warnings: 0,
+    suggestions: 0,
+    seoScore: 0,
+    timestamp: Date.now(),
+  },
 };
 
 export default function RootLayout({ children }: RootLayoutProps) {
@@ -68,37 +91,29 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
       <body className="relative text-black dark:text-white antialiased">
 
-        {/* ---------- GLOBAL FIXED BACKGROUND ---------- */}
+        {/* GLOBAL BACKGROUND */}
         <Background />
 
         <RootProviders>
           <ThemeProviderWrapper>
             <LanguageProvider>
 
-              {/* ---------- PAGE WRAPPER ---------- */}
               <div className="flex flex-col min-h-screen relative z-10">
 
-                {/* ---------- HEADER ---------- */}
-                <Header
-                  className={`bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20
-                              dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20
-                              border-b border-theme`}
-                />
+                {/* HEADER */}
+                <Header className="border-b border-theme bg-transparent" />
 
-                {/* ---------- MAIN CONTENT ---------- */}
+                {/* MAIN */}
                 <main className="flex-1 w-full max-w-7xl mx-auto px-6 pt-24 pb-16">
                   {children}
                 </main>
 
-                {/* ---------- FOOTER ---------- */}
-                <Footer
-                  className={`bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20
-                              dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20`}
-                />
+                {/* FOOTER */}
+                <Footer className="bg-transparent" />
 
               </div>
 
-              {/* ---------- FLOATING CTA ---------- */}
+              {/* FLOATING CTA */}
               <div className="fixed bottom-6 right-6 z-50">
                 <FloatingCTA />
               </div>
