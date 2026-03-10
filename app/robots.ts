@@ -1,3 +1,4 @@
+// app/robots.ts
 import type { MetadataRoute } from 'next'
 import { SEO_CONFIG } from '@/components/SEO/seoConfig'
 
@@ -7,22 +8,52 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
   const isStaging = process.env.NEXT_PUBLIC_APP_ENV === 'staging'
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || SEO_CONFIG.siteUrl
 
-  // 🚫 Block in non-production (Original logic preserved)
+  // 🚫 Block everything on non-production environments
   if (!isProduction || isPreview || isStaging) {
-    return {
-      rules: [{ userAgent: '*', disallow: '/' }],
-      sitemap: [],
-    }
+    return { rules: [{ userAgent: '*', disallow: '/' }], sitemap: [] }
   }
+
+  // ============================
+  // Block Known Malicious / AI Bots
+  // ============================
+  const blockedBots = [
+    'GPTBot', 'ClaudeBot', 'PerplexityBot', 'CCBot', 'Google-Extended',
+    'OpenAI-Bot', 'ChatGPT-User', 'Bytespider', 'anthropic-ai'
+  ]
+
+  // ============================
+  // Heavy Crawlers with Crawl Delay
+  // ============================
+  const heavyCrawlers = [
+    { bot: 'AhrefsBot', delay: 5 },
+    { bot: 'SemrushBot', delay: 5 },
+    { bot: 'MJ12bot', delay: 10 },
+  ]
+
+  // ============================
+  // High-Value Pages (Always Allowed)
+  // ============================
+  const premiumAllow = ['/offer/', '/reward/']
+
+  // ============================
+  // Regional Sitemaps
+  // ============================
+  const regions = ['us', 'eu', 'asia']
+  const regionalSitemaps = regions.map(region => `${baseUrl}/sitemap.xml?region=${region}`)
+
+  // ============================
+  // Dynamic LLM & Suspicious Bot Detection
+  // ============================
+  // Matches common patterns in AI/LLM bots to block new or unknown ones
+  const suspiciousPatterns = ['*ai*', '*gpt*', '*llm*', '*chatgpt*', '*anthropic*']
 
   return {
     rules: [
+      // ---------------------------
+      // Standard Corporate Rules
+      // ---------------------------
       {
         userAgent: '*',
-
-        // ==================================================
-        // ORIGINAL ALLOW RULES (KEPT UNCHANGED)
-        // ==================================================
         allow: [
           '/',
           '/blog/',
@@ -32,11 +63,8 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
           '/cashback/',
           '/affiliate/',
           '/earn/',
+          ...premiumAllow,
         ],
-
-        // ==================================================
-        // ORIGINAL DISALLOW RULES (KEPT UNCHANGED)
-        // ==================================================
         disallow: [
           '/api/',
           '/_next/',
@@ -53,56 +81,43 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
           '/*?*utm_',
           '/*?*fbclid=',
           '/*?*gclid=',
+          '/*?*session',
+          '/*?*ref=',
         ],
+        crawlDelay: 2, // corporate throttle
       },
 
-      // ==================================================
-      // ORIGINAL BOT BLOCKS (KEPT UNCHANGED)
-      // ==================================================
-      { userAgent: 'GPTBot', disallow: '/' },
-      { userAgent: 'Google-Extended', disallow: '/' },
-      { userAgent: 'ClaudeBot', disallow: '/' },
-      { userAgent: 'PerplexityBot', disallow: '/' },
-      { userAgent: 'CCBot', disallow: '/' },
+      // ---------------------------
+      // Block Known Malicious / AI Bots
+      // ---------------------------
+      ...blockedBots.map(bot => ({ userAgent: bot, disallow: '/' })),
 
-      // ==================================================
-      // ORIGINAL CRAWL DELAYS (KEPT UNCHANGED)
-      // ==================================================
-      { userAgent: 'AhrefsBot', crawlDelay: 5 },
-      { userAgent: 'SemrushBot', crawlDelay: 5 },
-      { userAgent: 'MJ12bot', crawlDelay: 10 },
+      // ---------------------------
+      // Heavy Crawlers with Delays
+      // ---------------------------
+      ...heavyCrawlers.map(c => ({ userAgent: c.bot, crawlDelay: c.delay })),
 
-      // ==================================================
-      // ULTRA PREMIUM ADDITIONS (WITHOUT REMOVING ANYTHING)
-      // ==================================================
+      // ---------------------------
+      // Catch-All Suspicious Bots (Pattern Matching)
+      // ---------------------------
+      ...suspiciousPatterns.map(pattern => ({ userAgent: pattern, disallow: '/' })),
 
-      // AI & Large Language Model Crawlers (Security)
-      { userAgent: 'OpenAI-Bot', disallow: '/' },
-      { userAgent: 'ChatGPT-User', disallow: '/' },
-      { userAgent: 'CCBot', disallow: '/' },
-      { userAgent: 'Bytespider', disallow: '/' },
-      { userAgent: 'anthropic-ai', disallow: '/' },
-
-      // International SEO Friendly Crawling
-      { userAgent: '*', crawlDelay: 2 },
-
-      // Query Parameter Protection (SEO Safe)
-      { userAgent: '*', disallow: '/*?*session' },
-      { userAgent: '*', disallow: '/*?*ref=' },
-
-      // Reward & Offer Pages (Allowed)
-      { userAgent: '*', allow: ['/offer/', '/reward/'] },
+      // ---------------------------
+      // Catch-All Generic Bot Block for Unknown Crawlers
+      // ---------------------------
+      { userAgent: '*bot*', disallow: '/', crawlDelay: 5 },
     ],
 
-    // ======================================================
-    // ORIGINAL SITEMAP SECTION (KEPT UNCHANGED)
-    // ======================================================
+    // ============================
+    // Sitemaps (Enterprise + Regional)
+    // ============================
     sitemap: [
       `${baseUrl}/sitemap.xml`,
       `${baseUrl}/sitemap.xml?type=pages`,
       `${baseUrl}/sitemap.xml?type=offers`,
       `${baseUrl}/sitemap.xml?type=blog`,
       `${baseUrl}/sitemap.xml?type=categories`,
+      ...regionalSitemaps,
     ],
   }
 }
