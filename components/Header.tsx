@@ -37,7 +37,8 @@ export default function Header({ className }: HeaderProps) {
     <header
       ref={headerRef}
       className={`fixed top-0 left-0 w-full z-30 border-b border-theme
-        bg-transparent
+        bg-gradient-to-br from-yellow-400 via-green-400 to-green-500
+        dark:from-yellow-500 dark:via-green-700 dark:to-green-800
         transition-colors duration-300 ${className || ""}`}
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
@@ -67,7 +68,9 @@ export default function Header({ className }: HeaderProps) {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
-                  className="absolute top-full left-0 mt-2 w-48 flex flex-col gap-1 p-3 rounded-xl border border-gray-200 dark:border-white/10 shadow-xl bg-transparent"
+                  className="absolute top-full left-0 mt-2 w-48 flex flex-col gap-1 p-3 rounded-xl border border-gray-200 dark:border-white/10 shadow-xl
+                    bg-gradient-to-br from-yellow-400 via-green-400 to-green-500
+                    dark:from-yellow-500 dark:via-green-700 dark:to-green-800"
                 >
                   <Link href="/surveys" className="hover:opacity-80 transition">Surveys</Link>
                   <Link href="/app-installs" className="hover:opacity-80 transition">App Installs</Link>
@@ -127,7 +130,9 @@ export default function Header({ className }: HeaderProps) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden px-6 py-6 space-y-4 border-t border-theme shadow-xl bg-transparent"
+            className="md:hidden px-6 py-6 space-y-4 border-t border-theme shadow-xl
+              bg-gradient-to-br from-yellow-400 via-green-400 to-green-500
+              dark:from-yellow-500 dark:via-green-700 dark:to-green-800"
           >
             <Link href="/how-it-works" className="block hover:opacity-80 transition">How it works</Link>
 
