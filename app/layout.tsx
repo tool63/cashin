@@ -20,6 +20,7 @@ interface RootLayoutProps {
   children: ReactNode;
 }
 
+/* Static SEO object (performance-friendly) */
 const defaultSeo: SEOOutput = {
   metadata: {
     title: SEO_CONFIG.siteName,
@@ -33,9 +34,7 @@ const defaultSeo: SEOOutput = {
       description: SEO_CONFIG.defaultDescription || "",
       siteName: SEO_CONFIG.siteName,
       locale: SEO_CONFIG.defaultLocale,
-      images: [
-        { url: SEO_CONFIG.defaultOgImage || "", width: 1200, height: 630, alt: SEO_CONFIG.siteName },
-      ],
+      images: [{ url: SEO_CONFIG.defaultOgImage || "", width: 1200, height: 630, alt: SEO_CONFIG.siteName }],
     },
     twitter: {
       card: "summary_large_image",
@@ -67,9 +66,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <SeoRenderer seo={defaultSeo} />
       </head>
 
-      <body className="relative bg-transparent text-black dark:text-white antialiased">
+      <body className="relative text-black dark:text-white antialiased">
 
-        {/* FIXED BACKGROUND */}
+        {/* GLOBAL FIXED BACKGROUND */}
         <Background />
 
         <RootProviders>
@@ -80,15 +79,15 @@ export default function RootLayout({ children }: RootLayoutProps) {
               <div className="flex flex-col min-h-screen relative z-10">
 
                 {/* HEADER */}
-                <Header />
+                <Header className="bg-transparent" />
 
                 {/* MAIN CONTENT */}
-                <main className="flex-grow w-full max-w-7xl mx-auto px-6 pt-24 pb-16">
+                <main className="flex-1 w-full max-w-7xl mx-auto px-6 pt-24 pb-16">
                   {children}
                 </main>
 
                 {/* FOOTER */}
-                <Footer />
+                <Footer className="bg-transparent" />
 
               </div>
 
