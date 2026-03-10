@@ -33,16 +33,21 @@ export default function Header({ className }: HeaderProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Header & menus gradient with 90% opacity
-  const headerGradient =
-    "bg-gradient-to-br from-yellow-400/18 via-green-400/27 to-green-500/18 dark:from-yellow-500/9 dark:via-green-700/18 dark:to-green-800/18";
+  // Solid background opposite to main Background.tsx
+  const headerBg = `
+    bg-gray-900 dark:bg-white
+    border-b border-gray-800 dark:border-gray-200
+  `;
+
+  const menuBg = `
+    bg-gray-900 dark:bg-white
+  `;
 
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 w-full z-30 border-b border-theme ${headerGradient} transition-colors duration-300 ${className || ""}`}
+      className={`fixed top-0 left-0 w-full z-30 transition-colors duration-300 ${headerBg} ${className || ""}`}
     >
-      {/* Header container */}
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
         {/* LOGO */}
@@ -70,7 +75,7 @@ export default function Header({ className }: HeaderProps) {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
-                  className={`absolute top-full left-0 mt-2 w-48 flex flex-col gap-1 p-3 rounded-xl border border-theme shadow-xl ${headerGradient}`}
+                  className={`absolute top-full left-0 mt-2 w-48 flex flex-col gap-1 p-3 rounded-xl border border-gray-800 dark:border-gray-200 shadow-xl ${menuBg}`}
                 >
                   <Link href="/surveys" className="hover:opacity-80 transition">Surveys</Link>
                   <Link href="/app-installs" className="hover:opacity-80 transition">App Installs</Link>
@@ -130,7 +135,7 @@ export default function Header({ className }: HeaderProps) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className={`md:hidden w-full px-6 pt-0 pb-6 space-y-4 border-t border-theme shadow-xl ${headerGradient}`}
+            className={`md:hidden w-full px-6 pt-0 pb-6 space-y-4 border-t border-gray-800 dark:border-gray-200 shadow-xl ${menuBg}`}
           >
             <Link href="/how-it-works" className="block hover:opacity-80 transition">How it works</Link>
 
@@ -165,7 +170,7 @@ export default function Header({ className }: HeaderProps) {
 
             <div className="pt-4 flex flex-col gap-3">
               <Link href="/login">
-                <button className="border border-gray-300 py-2 rounded-lg w-full">Login</button>
+                <button className="border border-gray-800 dark:border-gray-200 py-2 rounded-lg w-full">Login</button>
               </Link>
               <Link href="/signup">
                 <button className={`${ctaGradient} py-2 rounded-lg w-full text-black`}>Sign up</button>
