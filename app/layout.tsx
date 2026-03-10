@@ -20,9 +20,9 @@ interface RootLayoutProps {
 }
 
 const pageTransition: Variants = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.3 } },
-  exit: { opacity: 0, y: -20, transition: { duration: 0.3 } },
+  initial: { opacity: 0, y: 12 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.35 } },
+  exit: { opacity: 0, y: -12, transition: { duration: 0.25 } },
 };
 
 export default function RootLayout({ children }: RootLayoutProps) {
@@ -57,7 +57,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
         imageAlt: SEO_CONFIG.siteName,
       },
       viewport: "width=device-width, initial-scale=1",
-      other: { "theme-color": SEO_CONFIG.themeColor || "#000000" },
+      other: {
+        "theme-color": SEO_CONFIG.themeColor || "#000000",
+      },
     },
     canonical: SEO_CONFIG.siteUrl,
     hreflang: {},
@@ -94,7 +96,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <SeoRenderer seo={defaultSeo} />
       </head>
 
-      <body className="flex flex-col min-h-screen text-black dark:text-white overflow-x-hidden">
+      <body className="flex flex-col min-h-screen overflow-x-hidden text-black dark:text-white bg-white dark:bg-gray-950">
+
         <RootProviders>
 
           {/* GLOBAL BACKGROUND */}
@@ -103,7 +106,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           {/* HEADER */}
           <Header />
 
-          {/* MAIN CONTENT */}
+          {/* PAGE CONTENT */}
           <main className="flex-1 pt-20 relative z-10 max-w-7xl mx-auto px-6 py-8 w-full">
             <AnimatePresence mode="wait">
               <motion.div
