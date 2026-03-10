@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import LanguageSwitcher from "@/components/switch/LanguageSwitcher";
 import DarkLightToggle from "@/components/switch/DarkLightToggle";
+import { useTheme } from "next-themes"; // optional if using next-themes
 
 interface HeaderProps {
   className?: string;
@@ -20,6 +21,9 @@ export default function Header({ className }: HeaderProps) {
   const headerRef = useRef<HTMLDivElement>(null);
   const ctaGradient = "bg-gradient-to-r from-yellow-400 to-green-500 text-black";
 
+  // Optional: get current theme
+  const { theme } = useTheme();
+
   // Close menus when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -33,16 +37,25 @@ export default function Header({ className }: HeaderProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Header & menu gradient (opposite of Background.tsx)
+  // Backgrounds: use gradient similar to Background.tsx
+  // For "opposite" effect: dark mode header gets light gradient, light mode header gets dark gradient
   const headerGradient =
-    "bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 dark:from-yellow-400/30 dark:via-green-400/40 dark:to-green-500/30";
-  const menuText = "text-white dark:text-black"; // Menu text contrast
-  const switchText = "text-white dark:text-black"; // Switch icons contrast
+    theme === "dark"
+      ? "bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100"
+      : "bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900";
+
+  const menuGradient =
+    theme === "dark"
+      ? "bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100"
+      : "bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900";
+
+  const textColor = theme === "dark" ? "text-black" : "text-white"; // adaptive text
+  const borderColor = theme === "dark" ? "border-gray-300" : "border-gray-700";
 
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 w-full z-30 border-b border-gray-800 dark:border-gray-200 transition-colors duration-300 ${headerGradient} ${className || ""}`}
+      className={`fixed top-0 left-0 w-full z-30 transition-colors duration-300 border-b ${borderColor} ${headerGradient} ${className || ""}`}
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
@@ -52,7 +65,7 @@ export default function Header({ className }: HeaderProps) {
         </Link>
 
         {/* DESKTOP NAV */}
-        <nav className={`hidden md:flex items-center gap-6 text-sm font-medium ${menuText}`}>
+        <nav className={`hidden md:flex items-center gap-6 text-sm font-medium ${textColor}`}>
           <Link href="/how-it-works" className="hover:opacity-80 transition">How it works</Link>
 
           <div
@@ -71,7 +84,7 @@ export default function Header({ className }: HeaderProps) {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
-                  className={`absolute top-full left-0 mt-2 w-48 flex flex-col gap-1 p-3 rounded-xl shadow-xl border border-gray-700 dark:border-gray-300 ${headerGradient}`}
+                  className={`absolute top-full left-0 mt-2 w-48 flex flex-col gap-1 p-3 rounded-xl shadow-xl border ${borderColor} ${menuGradient}`}
                 >
                   <Link href="/surveys" className="hover:opacity-80 transition">Surveys</Link>
                   <Link href="/app-installs" className="hover:opacity-80 transition">App Installs</Link>
@@ -89,7 +102,7 @@ export default function Header({ className }: HeaderProps) {
         </nav>
 
         {/* DESKTOP ACTIONS */}
-        <div className={`hidden md:flex items-center gap-4 ${switchText}`}>
+        <div className={`hidden md:flex items-center gap-4 ${textColor}`}>
           <LanguageSwitcher />
           <DarkLightToggle />
 
@@ -97,7 +110,7 @@ export default function Header({ className }: HeaderProps) {
             <button
               onClick={() => setActiveButton("login")}
               className={`px-4 py-2 rounded-lg text-sm transition ${
-                activeButton === "login" ? ctaGradient : `border ${menuText}`
+                activeButton === "login" ? ctaGradient : `border ${borderColor}`
               }`}
             >
               Login
@@ -110,7 +123,7 @@ export default function Header({ className }: HeaderProps) {
               className={`px-5 py-2 rounded-lg text-sm transition ${
                 activeButton === "signup" || activeButton === "none"
                   ? ctaGradient
-                  : `border border-gray-700 ${menuText}`
+                  : `border ${borderColor}`
               }`}
             >
               Sign up
@@ -119,7 +132,7 @@ export default function Header({ className }: HeaderProps) {
         </div>
 
         {/* MOBILE BUTTON */}
-        <button className={`${switchText} md:hidden`} onClick={() => setMobileOpen(!mobileOpen)}>
+        <button className={`${textColor} md:hidden`} onClick={() => setMobileOpen(!mobileOpen)}>
           {mobileOpen ? <X /> : <Menu />}
         </button>
       </div>
@@ -131,7 +144,7 @@ export default function Header({ className }: HeaderProps) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className={`md:hidden w-full px-6 pt-0 pb-6 space-y-4 border-t border-gray-700 dark:border-gray-300 shadow-xl ${headerGradient} ${menuText}`}
+            className={`md:hidden w-full px-6 pt-0 pb-6 space-y-4 border-t ${borderColor} shadow-xl ${menuGradient} ${textColor}`}
           >
             <Link href="/how-it-works" className="hover:opacity-80 transition">How it works</Link>
 
@@ -159,14 +172,14 @@ export default function Header({ className }: HeaderProps) {
               <Link href="/help" className="hover:opacity-80 transition">Help</Link>
             </div>
 
-            <div className={`flex items-center justify-between pt-3 ${switchText}`}>
+            <div className={`flex items-center justify-between pt-3 ${textColor}`}>
               <LanguageSwitcher />
               <DarkLightToggle />
             </div>
 
             <div className="pt-4 flex flex-col gap-3">
               <Link href="/login">
-                <button className={`border border-gray-700 dark:border-gray-300 py-2 rounded-lg w-full ${menuText}`}>Login</button>
+                <button className={`border ${borderColor} py-2 rounded-lg w-full ${textColor}`}>Login</button>
               </Link>
               <Link href="/signup">
                 <button className={`${ctaGradient} py-2 rounded-lg w-full text-black`}>Sign up</button>
