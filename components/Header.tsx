@@ -33,16 +33,16 @@ export default function Header({ className }: HeaderProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Header background (opposite of Background.tsx gradient)
-  const headerBg = "bg-gray-900 dark:bg-white border-b border-gray-800 dark:border-gray-200";
-  const menuBg = "bg-black dark:bg-white"; // Earn menu & mobile menu
-  const menuText = "text-white dark:text-black"; // Text for menu items
-  const switchBg = "text-white dark:text-black"; // Switches (language / dark mode toggle)
+  // Header & menu gradient (opposite of Background.tsx)
+  const headerGradient =
+    "bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 dark:from-yellow-400/30 dark:via-green-400/40 dark:to-green-500/30";
+  const menuText = "text-white dark:text-black"; // Menu text contrast
+  const switchText = "text-white dark:text-black"; // Switch icons contrast
 
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 w-full z-30 transition-colors duration-300 ${headerBg} ${className || ""}`}
+      className={`fixed top-0 left-0 w-full z-30 border-b border-gray-800 dark:border-gray-200 transition-colors duration-300 ${headerGradient} ${className || ""}`}
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
@@ -71,7 +71,7 @@ export default function Header({ className }: HeaderProps) {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
-                  className={`absolute top-full left-0 mt-2 w-48 flex flex-col gap-1 p-3 rounded-xl shadow-xl border border-gray-700 dark:border-gray-300 ${menuBg}`}
+                  className={`absolute top-full left-0 mt-2 w-48 flex flex-col gap-1 p-3 rounded-xl shadow-xl border border-gray-700 dark:border-gray-300 ${headerGradient}`}
                 >
                   <Link href="/surveys" className="hover:opacity-80 transition">Surveys</Link>
                   <Link href="/app-installs" className="hover:opacity-80 transition">App Installs</Link>
@@ -89,7 +89,7 @@ export default function Header({ className }: HeaderProps) {
         </nav>
 
         {/* DESKTOP ACTIONS */}
-        <div className={`hidden md:flex items-center gap-4 ${switchBg}`}>
+        <div className={`hidden md:flex items-center gap-4 ${switchText}`}>
           <LanguageSwitcher />
           <DarkLightToggle />
 
@@ -119,7 +119,7 @@ export default function Header({ className }: HeaderProps) {
         </div>
 
         {/* MOBILE BUTTON */}
-        <button className={`${menuText} md:hidden`} onClick={() => setMobileOpen(!mobileOpen)}>
+        <button className={`${switchText} md:hidden`} onClick={() => setMobileOpen(!mobileOpen)}>
           {mobileOpen ? <X /> : <Menu />}
         </button>
       </div>
@@ -131,7 +131,7 @@ export default function Header({ className }: HeaderProps) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className={`md:hidden w-full px-6 pt-0 pb-6 space-y-4 border-t border-gray-700 dark:border-gray-300 shadow-xl ${menuBg} ${menuText}`}
+            className={`md:hidden w-full px-6 pt-0 pb-6 space-y-4 border-t border-gray-700 dark:border-gray-300 shadow-xl ${headerGradient} ${menuText}`}
           >
             <Link href="/how-it-works" className="hover:opacity-80 transition">How it works</Link>
 
@@ -159,7 +159,7 @@ export default function Header({ className }: HeaderProps) {
               <Link href="/help" className="hover:opacity-80 transition">Help</Link>
             </div>
 
-            <div className={`flex items-center justify-between pt-3 ${switchBg}`}>
+            <div className={`flex items-center justify-between pt-3 ${switchText}`}>
               <LanguageSwitcher />
               <DarkLightToggle />
             </div>
