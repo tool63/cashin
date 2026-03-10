@@ -33,15 +33,11 @@ export default function Header({ className }: HeaderProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Solid background opposite to main Background.tsx
-  const headerBg = `
-    bg-gray-900 dark:bg-white
-    border-b border-gray-800 dark:border-gray-200
-  `;
-
-  const menuBg = `
-    bg-gray-900 dark:bg-white
-  `;
+  // Header background (opposite of Background.tsx gradient)
+  const headerBg = "bg-gray-900 dark:bg-white border-b border-gray-800 dark:border-gray-200";
+  const menuBg = "bg-black dark:bg-white"; // Earn menu & mobile menu
+  const menuText = "text-white dark:text-black"; // Text for menu items
+  const switchBg = "text-white dark:text-black"; // Switches (language / dark mode toggle)
 
   return (
     <header
@@ -56,8 +52,8 @@ export default function Header({ className }: HeaderProps) {
         </Link>
 
         {/* DESKTOP NAV */}
-        <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-primary">
-          <Link href="/how-it-works">How it works</Link>
+        <nav className={`hidden md:flex items-center gap-6 text-sm font-medium ${menuText}`}>
+          <Link href="/how-it-works" className="hover:opacity-80 transition">How it works</Link>
 
           <div
             className="relative"
@@ -75,7 +71,7 @@ export default function Header({ className }: HeaderProps) {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
-                  className={`absolute top-full left-0 mt-2 w-48 flex flex-col gap-1 p-3 rounded-xl border border-gray-800 dark:border-gray-200 shadow-xl ${menuBg}`}
+                  className={`absolute top-full left-0 mt-2 w-48 flex flex-col gap-1 p-3 rounded-xl shadow-xl border border-gray-700 dark:border-gray-300 ${menuBg}`}
                 >
                   <Link href="/surveys" className="hover:opacity-80 transition">Surveys</Link>
                   <Link href="/app-installs" className="hover:opacity-80 transition">App Installs</Link>
@@ -87,13 +83,13 @@ export default function Header({ className }: HeaderProps) {
             </AnimatePresence>
           </div>
 
-          <Link href="/cashout">Cashout</Link>
-          <Link href="/blog">Blog</Link>
-          <Link href="/help">Help</Link>
+          <Link href="/cashout" className="hover:opacity-80 transition">Cashout</Link>
+          <Link href="/blog" className="hover:opacity-80 transition">Blog</Link>
+          <Link href="/help" className="hover:opacity-80 transition">Help</Link>
         </nav>
 
         {/* DESKTOP ACTIONS */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className={`hidden md:flex items-center gap-4 ${switchBg}`}>
           <LanguageSwitcher />
           <DarkLightToggle />
 
@@ -101,7 +97,7 @@ export default function Header({ className }: HeaderProps) {
             <button
               onClick={() => setActiveButton("login")}
               className={`px-4 py-2 rounded-lg text-sm transition ${
-                activeButton === "login" ? ctaGradient : "border text-primary"
+                activeButton === "login" ? ctaGradient : `border ${menuText}`
               }`}
             >
               Login
@@ -114,7 +110,7 @@ export default function Header({ className }: HeaderProps) {
               className={`px-5 py-2 rounded-lg text-sm transition ${
                 activeButton === "signup" || activeButton === "none"
                   ? ctaGradient
-                  : "border border-gray-300 text-primary dark:text-white"
+                  : `border border-gray-700 ${menuText}`
               }`}
             >
               Sign up
@@ -123,7 +119,7 @@ export default function Header({ className }: HeaderProps) {
         </div>
 
         {/* MOBILE BUTTON */}
-        <button className="md:hidden text-primary" onClick={() => setMobileOpen(!mobileOpen)}>
+        <button className={`${menuText} md:hidden`} onClick={() => setMobileOpen(!mobileOpen)}>
           {mobileOpen ? <X /> : <Menu />}
         </button>
       </div>
@@ -135,9 +131,9 @@ export default function Header({ className }: HeaderProps) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className={`md:hidden w-full px-6 pt-0 pb-6 space-y-4 border-t border-gray-800 dark:border-gray-200 shadow-xl ${menuBg}`}
+            className={`md:hidden w-full px-6 pt-0 pb-6 space-y-4 border-t border-gray-700 dark:border-gray-300 shadow-xl ${menuBg} ${menuText}`}
           >
-            <Link href="/how-it-works" className="block hover:opacity-80 transition">How it works</Link>
+            <Link href="/how-it-works" className="hover:opacity-80 transition">How it works</Link>
 
             <button
               onClick={() => setMobileEarnOpen(!mobileEarnOpen)}
@@ -163,14 +159,14 @@ export default function Header({ className }: HeaderProps) {
               <Link href="/help" className="hover:opacity-80 transition">Help</Link>
             </div>
 
-            <div className="flex items-center justify-between pt-3">
+            <div className={`flex items-center justify-between pt-3 ${switchBg}`}>
               <LanguageSwitcher />
               <DarkLightToggle />
             </div>
 
             <div className="pt-4 flex flex-col gap-3">
               <Link href="/login">
-                <button className="border border-gray-800 dark:border-gray-200 py-2 rounded-lg w-full">Login</button>
+                <button className={`border border-gray-700 dark:border-gray-300 py-2 rounded-lg w-full ${menuText}`}>Login</button>
               </Link>
               <Link href="/signup">
                 <button className={`${ctaGradient} py-2 rounded-lg w-full text-black`}>Sign up</button>
