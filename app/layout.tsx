@@ -20,7 +20,6 @@ interface RootLayoutProps {
   children: ReactNode;
 }
 
-/* Static SEO object */
 const defaultSeo: SEOOutput = {
   metadata: {
     title: SEO_CONFIG.siteName,
@@ -68,26 +67,23 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <SeoRenderer seo={defaultSeo} />
       </head>
 
-      {/* BODY TRANSPARENT */}
-      <body className="relative min-h-screen bg-transparent text-black dark:text-white antialiased">
+      <body className="relative bg-transparent text-black dark:text-white antialiased">
 
         {/* FIXED BACKGROUND */}
-        <div className="fixed inset-0 -z-10">
-          <Background />
-        </div>
+        <Background />
 
         <RootProviders>
           <ThemeProviderWrapper>
             <LanguageProvider>
 
               {/* PAGE WRAPPER */}
-              <div className="flex flex-col min-h-screen">
+              <div className="flex flex-col min-h-screen relative z-10">
 
                 {/* HEADER */}
                 <Header />
 
                 {/* MAIN CONTENT */}
-                <main className="flex-1 relative z-10 max-w-7xl mx-auto px-6 pt-24 pb-16 w-full">
+                <main className="flex-grow w-full max-w-7xl mx-auto px-6 pt-24 pb-16">
                   {children}
                 </main>
 
