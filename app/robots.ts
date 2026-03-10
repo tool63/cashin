@@ -14,111 +14,91 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
   }
 
   // ============================
-  // Known Malicious / AI Bots
+  // Configuration
   // ============================
   const blockedBots = [
     'GPTBot', 'ClaudeBot', 'PerplexityBot', 'CCBot', 'Google-Extended',
     'OpenAI-Bot', 'ChatGPT-User', 'Bytespider', 'anthropic-ai'
   ]
 
-  // ============================
-  // Heavy Crawlers with Crawl Delays
-  // ============================
   const heavyCrawlers = [
     { bot: 'AhrefsBot', delay: 5 },
     { bot: 'SemrushBot', delay: 5 },
     { bot: 'MJ12bot', delay: 10 },
   ]
 
-  // ============================
-  // High-Value Pages (Always Allowed)
-  // ============================
   const premiumAllow = ['/offer/', '/reward/']
 
-  // ============================
-  // Regional Sitemaps
-  // ============================
-  const regions = ['us', 'eu', 'asia']
-  const regionalSitemaps = regions.map(region => `${baseUrl}/sitemap.xml?region=${region}`)
-
-  // ============================
-  // Dynamic AI / LLM Bot Detection Patterns
-  // ============================
   const dynamicAIBotPatterns = [
     '*ai*', '*gpt*', '*llm*', '*chatgpt*', '*anthropic*', '*bard*', '*falcon*'
   ]
 
-  return {
-    rules: [
-      // ---------------------------
-      // Standard Corporate Rules
-      // ---------------------------
-      {
-        userAgent: '*',
-        allow: [
-          '/',
-          '/blog/',
-          '/guides/',
-          '/offers/',
-          '/rewards/',
-          '/cashback/',
-          '/affiliate/',
-          '/earn/',
-          ...premiumAllow,
-        ],
-        disallow: [
-          '/api/',
-          '/_next/',
-          '/internal/',
-          '/server/',
-          '/auth/',
-          '/login/',
-          '/register/',
-          '/dashboard/',
-          '/profile/',
-          '/settings/',
-          '/track/',
-          '/redirect/',
-          '/*?*utm_',
-          '/*?*fbclid=',
-          '/*?*gclid=',
-          '/*?*session',
-          '/*?*ref=',
-        ],
-        crawlDelay: 2,
-      },
+  const regions = ['us', 'eu', 'asia']
+  const regionalSitemaps = regions.map(region => `${baseUrl}/sitemap.xml?region=${region}`)
 
-      // ---------------------------
-      // Block Known Malicious / AI Bots
-      // ---------------------------
-      ...blockedBots.map(bot => ({ userAgent: bot, disallow: '/' })),
+  // ============================
+  // Rules
+  // ============================
+  const rules: MetadataRoute.Robots['rules'] = [
+    {
+      userAgent: '*',
+      allow: [
+        '/',
+        '/blog/',
+        '/guides/',
+        '/offers/',
+        '/rewards/',
+        '/cashback/',
+        '/affiliate/',
+        '/earn/',
+        ...premiumAllow,
+      ],
+      disallow: [
+        '/api/',
+        '/_next/',
+        '/internal/',
+        '/server/',
+        '/auth/',
+        '/login/',
+        '/register/',
+        '/dashboard/',
+        '/profile/',
+        '/settings/',
+        '/track/',
+        '/redirect/',
+        '/*?*utm_',
+        '/*?*fbclid=',
+        '/*?*gclid=',
+        '/*?*session',
+        '/*?*ref=',
+      ],
+      crawlDelay: 2,
+    },
 
-      // ---------------------------
-      // Heavy Crawlers with Delays
-      // ---------------------------
-      ...heavyCrawlers.map(c => ({ userAgent: c.bot, crawlDelay: c.delay })),
+    // Block known malicious AI / bots
+    ...blockedBots.map(bot => ({ userAgent: bot, disallow: '/' })),
 
-      // ---------------------------
-      // Dynamic Pattern-Based AI / LLM Bot Blocking
-      // ---------------------------
-      ...dynamicAIBotPatterns.map(pattern => ({ userAgent: pattern, disallow: '/' })),
+    // Heavy crawlers with delays
+    ...heavyCrawlers.map(c => ({ userAgent: c.bot, crawlDelay: c.delay })),
 
-      // ---------------------------
-      // Catch-All Unknown Bots
-      // ---------------------------
-      { userAgent: '*bot*', disallow: '/', crawlDelay: 5 },
-    ],
+    // Dynamic AI/LLM bot pattern blocking
+    ...dynamicAIBotPatterns.map(pattern => ({ userAgent: pattern, disallow: '/' })),
 
-    // ============================
-    // Sitemaps (Enterprise + Regional)
-    // ============================
-    sitemap: [
-      `${baseUrl}/sitemap.xml`,
-      `${baseUrl}/sitemap.xml?type=pages`,
-      `${baseUrl}/sitemap.xml?type=offers`,
-      `${baseUrl}/sitemap.xml?type=blog`,
-      `${baseUrl}/sitemap.xml?type=categories`,
-      ...regionalSitemaps,
-    ],
-  }
+    // Catch-all for unknown bots
+    { userAgent: '*bot*', disallow: '/', crawlDelay: 5 },
+  ]
+
+  // ============================
+  // Sitemaps
+  // ============================
+  const sitemap = [
+    `${baseUrl}/sitemap.xml`,
+    `${baseUrl}/sitemap.xml?type=pages`,
+    `${baseUrl}/sitemap.xml?type=offers`,
+    `${baseUrl}/sitemap.xml?type=blog`,
+    `${baseUrl}/sitemap.xml?type=categories`,
+    ...regionalSitemaps,
+  ]
+
+  return { rules, sitemap }
 }
