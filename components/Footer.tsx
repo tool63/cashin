@@ -1,166 +1,200 @@
 "use client";
 
-import { useState, ReactNode } from "react";
+import { useState, ReactNode, useCallback } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { Twitter, Facebook, Instagram, Youtube, ChevronDown } from "lucide-react";
+import { ChevronDown, Twitter, Facebook, Instagram, Youtube } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 
 type Toggle = Record<string, boolean>;
 
 interface FooterProps {
-  className?: string; // <-- optional className
+  className?: string;
 }
 
-// Simple translation function
-const t = (key: string) => {
-  const translations: Record<string, any> = {
-    "footer.getStarted": "Get Started",
-    "footer.waysToEarn": "Ways to Earn",
-    "footer.guides": "Guides",
-    "footer.rewards": "Rewards",
-    "footer.resources": "Resources",
-    "footer.business": "Business",
-    "footer.cashback": "Cashback",
-    "footer.legal": "Legal",
-    "footer.copyright": "© 2026 Cashog. All rights reserved.",
-    "footer.links": {
-      howItWorks: "How it works",
-      startEarning: "Start Earning",
-      cashoutMethods: "Cashout Methods",
-      withdrawalProofs: "Withdrawal Proofs",
-      trustSafety: "Trust & Safety",
-      surveys: "Surveys",
-      appInstalls: "App Installs",
-      playGames: "Play Games",
-      watchVideos: "Watch Videos",
-      miningRewards: "Mining Rewards",
-      completeOffers: "Complete Offers",
-      offerwall: "Offerwall",
-      surveywall: "Surveywall",
-      extraEarning: "Extra Earning",
-      watchAds: "Watch Ads",
-      microTasks: "Micro Tasks",
-      freeTrials: "Free Trials",
-      testProducts: "Test Products",
-      readEmails: "Read Emails",
-      visitWebsites: "Visit Websites",
-      reviewTasks: "Review Tasks",
-      spinningWheel: "Spinning Wheel",
-      loyalty: "Loyalty",
-      vouchers: "Vouchers",
-      makeMoneyOnline: "Make Money Online",
-      earnFromHome: "Earn from Home",
-      earnWithoutInvestment: "Earn without Investment",
-      getPaidToPlayGames: "Get Paid to Play Games",
-      installApps: "Install Apps",
-      watchVideosForMoney: "Watch Videos for Money",
-      completeOffersOnline: "Complete Offers Online",
-      workFromHomeJobs: "Work from Home Jobs",
-      onlineEarningMethods: "Online Earning Methods",
-      earnFast: "Earn Fast",
-      allGuides: "All Guides",
-      passiveIncome: "Passive Income",
-      onlineJobs: "Online Jobs",
-      studentEarnings: "Student Earnings",
-      earnWithoutSkills: "Earn without Skills",
-      earnUsingMobile: "Earn Using Mobile",
-      earnWorldwide: "Earn Worldwide",
-      cashbackRewards: "Cashback Rewards",
-      legitWays: "Legit Ways",
-      freeWays: "Free Ways",
-      earnPayPal: "Earn PayPal Money",
-      earnGiftCards: "Earn Gift Cards",
-      amazonGiftCard: "Amazon Gift Card",
-      appleGiftCard: "Apple Gift Card",
-      googleGiftCard: "Google Play Gift Card",
-      earnCrypto: "Earn Crypto",
-      bitcoin: "Bitcoin",
-      litecoin: "Litecoin",
-      ethereum: "Ethereum",
-      dogecoin: "Dogecoin",
-      earnGaming: "Earn Gaming",
-      robux: "Free Robux",
-      steam: "Steam Gift Cards",
-      xbox: "Xbox Gift Cards",
-      psn: "PSN Gift Cards",
-      spotify: "Spotify Premium",
-      blog: "Blog",
-      helpCenter: "Help Center",
-      faq: "FAQ",
-      contactSupport: "Contact Support",
-      about: "About",
-      affiliate: "Affiliate",
-      partners: "Partners",
-      advertise: "Advertise",
-      cashbackOffers: "Cashback Offers",
-      shoppingRewards: "Shopping Rewards",
-      electronics: "Electronics",
-      fashion: "Fashion",
-      homeGarden: "Home & Garden",
-      grocery: "Grocery",
-      beauty: "Beauty",
-      mobile: "Mobile",
-      travel: "Travel",
-      hotels: "Hotels",
-      flights: "Flights",
-      finance: "Finance",
-      promoCodes: "Promo Codes",
-      dailyDeals: "Daily Deals",
-      banking: "Banking & Finance",
-      terms: "Terms & Conditions",
-      privacy: "Privacy Policy",
-      cookies: "Cookie Policy",
-    },
-  };
-  return translations[key] || key;
+/* ---------- TRANSLATIONS (moved outside component for performance) ---------- */
+
+const translations: any = {
+  "footer.getStarted": "Get Started",
+  "footer.waysToEarn": "Ways to Earn",
+  "footer.guides": "Guides",
+  "footer.rewards": "Rewards",
+  "footer.resources": "Resources",
+  "footer.business": "Business",
+  "footer.cashback": "Cashback",
+  "footer.legal": "Legal",
+  "footer.copyright": "© 2026 Cashog. All rights reserved.",
+  "footer.links": {
+    howItWorks: "How it works",
+    startEarning: "Start Earning",
+    cashoutMethods: "Cashout Methods",
+    withdrawalProofs: "Withdrawal Proofs",
+    trustSafety: "Trust & Safety",
+    surveys: "Surveys",
+    appInstalls: "App Installs",
+    playGames: "Play Games",
+    watchVideos: "Watch Videos",
+    miningRewards: "Mining Rewards",
+    completeOffers: "Complete Offers",
+    offerwall: "Offerwall",
+    surveywall: "Surveywall",
+    extraEarning: "Extra Earning",
+    watchAds: "Watch Ads",
+    microTasks: "Micro Tasks",
+    freeTrials: "Free Trials",
+    testProducts: "Test Products",
+    readEmails: "Read Emails",
+    visitWebsites: "Visit Websites",
+    reviewTasks: "Review Tasks",
+    spinningWheel: "Spinning Wheel",
+    loyalty: "Loyalty",
+    vouchers: "Vouchers",
+    makeMoneyOnline: "Make Money Online",
+    earnFromHome: "Earn from Home",
+    earnWithoutInvestment: "Earn without Investment",
+    getPaidToPlayGames: "Get Paid to Play Games",
+    installApps: "Install Apps",
+    watchVideosForMoney: "Watch Videos for Money",
+    completeOffersOnline: "Complete Offers Online",
+    workFromHomeJobs: "Work from Home Jobs",
+    onlineEarningMethods: "Online Earning Methods",
+    earnFast: "Earn Fast",
+    allGuides: "All Guides",
+    passiveIncome: "Passive Income",
+    onlineJobs: "Online Jobs",
+    studentEarnings: "Student Earnings",
+    earnWithoutSkills: "Earn without Skills",
+    earnUsingMobile: "Earn Using Mobile",
+    earnWorldwide: "Earn Worldwide",
+    cashbackRewards: "Cashback Rewards",
+    legitWays: "Legit Ways",
+    freeWays: "Free Ways",
+    earnPayPal: "Earn PayPal Money",
+    earnGiftCards: "Earn Gift Cards",
+    amazonGiftCard: "Amazon Gift Card",
+    appleGiftCard: "Apple Gift Card",
+    googleGiftCard: "Google Play Gift Card",
+    earnCrypto: "Earn Crypto",
+    bitcoin: "Bitcoin",
+    litecoin: "Litecoin",
+    ethereum: "Ethereum",
+    dogecoin: "Dogecoin",
+    earnGaming: "Earn Gaming",
+    robux: "Free Robux",
+    steam: "Steam Gift Cards",
+    xbox: "Xbox Gift Cards",
+    psn: "PSN Gift Cards",
+    spotify: "Spotify Premium",
+    blog: "Blog",
+    helpCenter: "Help Center",
+    faq: "FAQ",
+    contactSupport: "Contact Support",
+    about: "About",
+    affiliate: "Affiliate",
+    partners: "Partners",
+    advertise: "Advertise",
+    cashbackOffers: "Cashback Offers",
+    shoppingRewards: "Shopping Rewards",
+    electronics: "Electronics",
+    fashion: "Fashion",
+    homeGarden: "Home & Garden",
+    grocery: "Grocery",
+    beauty: "Beauty",
+    mobile: "Mobile",
+    travel: "Travel",
+    hotels: "Hotels",
+    flights: "Flights",
+    finance: "Finance",
+    promoCodes: "Promo Codes",
+    dailyDeals: "Daily Deals",
+    banking: "Banking & Finance",
+    terms: "Terms & Conditions",
+    privacy: "Privacy Policy",
+    cookies: "Cookie Policy",
+  },
 };
+
+const t = (key: string) => translations[key] || key;
 
 export default function Footer({ className }: FooterProps) {
   const [open, setOpen] = useState<Toggle>({});
   const [sub, setSub] = useState<Toggle>({});
   const [sub2, setSub2] = useState<Toggle>({});
 
-  const toggle = (k: string) => setOpen((p) => ({ ...p, [k]: !p[k] }));
-  const toggleSub = (k: string) => setSub((p) => ({ ...p, [k]: !p[k] }));
-  const toggleSub2 = (k: string) => setSub2((p) => ({ ...p, [k]: !p[k] }));
+  const toggle = useCallback((k: string) => {
+    setOpen((p) => ({ ...p, [k]: !p[k] }));
+  }, []);
+
+  const toggleSub = useCallback((k: string) => {
+    setSub((p) => ({ ...p, [k]: !p[k] }));
+  }, []);
+
+  const toggleSub2 = useCallback((k: string) => {
+    setSub2((p) => ({ ...p, [k]: !p[k] }));
+  }, []);
+
+  /* ---------- LINK COMPONENT (CSS hover instead of framer-motion) ---------- */
 
   const A = ({ href, children }: { href: string; children: ReactNode }) => (
-    <motion.div whileHover={{ x: 4 }} transition={{ duration: 0.15 }}>
-      <Link href={href} className="block text-primary hover:opacity-80 transition">
-        {children}
-      </Link>
-    </motion.div>
+    <Link
+      href={href}
+      className="block text-primary hover:opacity-80 hover:translate-x-1 transition-all duration-150"
+    >
+      {children}
+    </Link>
   );
 
-  const Section = ({ id, title, children }: { id: string; title: string; children: ReactNode }) => (
+  /* ---------- SECTION ---------- */
+
+  const Section = ({
+    id,
+    title,
+    children,
+  }: {
+    id: string;
+    title: string;
+    children: ReactNode;
+  }) => (
     <div>
       <button
         onClick={() => toggle(id)}
         className="w-full flex justify-between items-center font-semibold mb-3 text-primary"
       >
         {title}
-        <ChevronDown size={16} className={`transition ${open[id] ? "rotate-180" : ""}`} />
+        <ChevronDown
+          size={16}
+          className={`transition-transform ${open[id] ? "rotate-180" : ""}`}
+        />
       </button>
 
-      <div className="overflow-hidden">
-        <AnimatePresence initial={false}>
-          {open[id] && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className="space-y-2 text-sm text-muted"
-            >
-              {children}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+      <AnimatePresence initial={false}>
+        {open[id] && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.22 }}
+            className="space-y-2 text-sm text-muted overflow-hidden"
+          >
+            {children}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 
-  const Sub = ({ id, title, children, level = 1 }: { id: string; title: string; children: ReactNode; level?: number }) => {
+  /* ---------- SUB SECTION ---------- */
+
+  const Sub = ({
+    id,
+    title,
+    children,
+    level = 1,
+  }: {
+    id: string;
+    title: string;
+    children: ReactNode;
+    level?: number;
+  }) => {
     const state = level === 1 ? sub[id] : sub2[id];
 
     return (
@@ -170,24 +204,25 @@ export default function Footer({ className }: FooterProps) {
           className="w-full flex justify-between font-medium text-muted"
         >
           {title}
-          <ChevronDown size={14} className={`transition ${state ? "rotate-180" : ""}`} />
+          <ChevronDown
+            size={14}
+            className={`transition-transform ${state ? "rotate-180" : ""}`}
+          />
         </button>
 
-        <div className="overflow-hidden">
-          <AnimatePresence initial={false}>
-            {state && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.25 }}
-                className="mt-2 space-y-2 pl-3"
-              >
-                {children}
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+        <AnimatePresence initial={false}>
+          {state && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.22 }}
+              className="mt-2 space-y-2 pl-3 overflow-hidden"
+            >
+              {children}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     );
   };
@@ -203,16 +238,13 @@ export default function Footer({ className }: FooterProps) {
     legal: t("footer.legal"),
   };
 
-  const links = t("footer.links");
+  const links = translations["footer.links"];
 
   return (
     <footer
-      className={`
-        bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20
-        dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20
-        text-primary transition-colors duration-300 border-t border-theme
-        ${className || ""}
-      `}
+      className={`bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20
+      dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20
+      text-primary transition-colors duration-300 border-t border-theme ${className || ""}`}
     >
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10">
 
@@ -350,22 +382,15 @@ export default function Footer({ className }: FooterProps) {
           <A href="https://cashog.com/privacy-policy">{links.privacy}</A>
           <A href="https://cashog.com/cookie-policy">{links.cookies}</A>
         </Section>
+
       </div>
 
       {/* SOCIAL ICONS */}
       <div className="border-t border-theme py-6 flex justify-center gap-6">
-        <a href="https://twitter.com/cashog" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-          <Twitter size={20} />
-        </a>
-        <a href="https://facebook.com/cashog" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-          <Facebook size={20} />
-        </a>
-        <a href="https://instagram.com/cashog" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-          <Instagram size={20} />
-        </a>
-        <a href="https://youtube.com/cashog" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-          <Youtube size={20} />
-        </a>
+        <a href="https://twitter.com/cashog" target="_blank" rel="noopener noreferrer"><Twitter size={20} /></a>
+        <a href="https://facebook.com/cashog" target="_blank" rel="noopener noreferrer"><Facebook size={20} /></a>
+        <a href="https://instagram.com/cashog" target="_blank" rel="noopener noreferrer"><Instagram size={20} /></a>
+        <a href="https://youtube.com/cashog" target="_blank" rel="noopener noreferrer"><Youtube size={20} /></a>
       </div>
 
       {/* COPYRIGHT */}
@@ -375,4 +400,3 @@ export default function Footer({ className }: FooterProps) {
     </footer>
   );
 }
-      
