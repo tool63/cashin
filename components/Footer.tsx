@@ -201,7 +201,7 @@ export default function Footer({ className }: FooterProps) {
       <div className="mt-2" style={{ paddingLeft: `${level * 12}px` }}>
         <button
           onClick={() => (level === 1 ? toggleSub(id) : toggleSub2(id))}
-          className="w-full flex justify-between font-medium text-muted"
+          className="w-full flex justify-between font-medium text-primary"
         >
           {title}
           <ChevronDown
@@ -394,7 +394,7 @@ export default function Footer({ className }: FooterProps) {
       </div>
 
       {/* COPYRIGHT */}
-      <div className="text-center text-sm text-muted pb-6">
+      <div className="text-center text-sm text-primary pb-6">
         {t("footer.copyright")}
       </div>
     </footer>
