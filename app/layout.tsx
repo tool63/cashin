@@ -68,30 +68,33 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <SeoRenderer seo={defaultSeo} />
       </head>
 
-      <body className="relative min-h-screen flex flex-col text-black dark:text-white antialiased">
+      {/* BODY TRANSPARENT */}
+      <body className="relative min-h-screen bg-transparent text-black dark:text-white antialiased">
 
-        {/* GLOBAL BACKGROUND */}
+        {/* FIXED BACKGROUND */}
         <div className="fixed inset-0 -z-10">
           <Background />
         </div>
 
-        {/* MAIN WRAPPER */}
         <RootProviders>
           <ThemeProviderWrapper>
             <LanguageProvider>
 
-              {/* HEADER */}
-              <Header />
+              {/* PAGE WRAPPER */}
+              <div className="flex flex-col min-h-screen">
 
-              {/* PAGE CONTENT */}
-              <main className="flex-1 w-full">
-                <div className="max-w-7xl mx-auto px-6 pt-24 pb-16">
+                {/* HEADER */}
+                <Header />
+
+                {/* MAIN CONTENT */}
+                <main className="flex-1 relative z-10 max-w-7xl mx-auto px-6 pt-24 pb-16 w-full">
                   {children}
-                </div>
-              </main>
+                </main>
 
-              {/* FOOTER */}
-              <Footer />
+                {/* FOOTER */}
+                <Footer />
+
+              </div>
 
               {/* FLOATING CTA */}
               <div className="fixed bottom-6 right-6 z-50">
