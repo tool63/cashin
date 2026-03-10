@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import LanguageSwitcher from "@/components/switch/LanguageSwitcher";
 import DarkLightToggle from "@/components/switch/DarkLightToggle";
-import { useTheme } from "next-themes"; // optional if using next-themes
+import { useTheme } from "next-themes";
 
 interface HeaderProps {
   className?: string;
@@ -21,7 +21,6 @@ export default function Header({ className }: HeaderProps) {
   const headerRef = useRef<HTMLDivElement>(null);
   const ctaGradient = "bg-gradient-to-r from-yellow-400 to-green-500 text-black";
 
-  // Optional: get current theme
   const { theme } = useTheme();
 
   // Close menus when clicking outside
@@ -37,19 +36,14 @@ export default function Header({ className }: HeaderProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Backgrounds: use gradient similar to Background.tsx
-  // For "opposite" effect: dark mode header gets light gradient, light mode header gets dark gradient
+  // Gradient backgrounds: opposite of Background.tsx
   const headerGradient =
     theme === "dark"
       ? "bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100"
       : "bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900";
 
-  const menuGradient =
-    theme === "dark"
-      ? "bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100"
-      : "bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900";
-
-  const textColor = theme === "dark" ? "text-black" : "text-white"; // adaptive text
+  const menuGradient = headerGradient;
+  const textColor = theme === "dark" ? "text-black" : "text-white";
   const borderColor = theme === "dark" ? "border-gray-300" : "border-gray-700";
 
   return (
