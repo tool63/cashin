@@ -84,21 +84,11 @@ export default function Header({ className }: HeaderProps) {
                   exit={{ opacity: 0, y: 8 }}
                   className={`absolute top-full left-0 mt-2 w-48 flex flex-col gap-2 p-3 rounded-xl shadow-xl border ${borderColor}`}
                 >
-                  <Link href="/surveys" className="block">
-                    Surveys
-                  </Link>
-                  <Link href="/app-installs" className="block">
-                    App Installs
-                  </Link>
-                  <Link href="/play-games" className="block">
-                    Play Games
-                  </Link>
-                  <Link href="/watch-videos" className="block">
-                    Watch Videos
-                  </Link>
-                  <Link href="/offerwall" className="block">
-                    Offerwall
-                  </Link>
+                  <Link href="/surveys" className="block">Surveys</Link>
+                  <Link href="/app-installs" className="block">App Installs</Link>
+                  <Link href="/play-games" className="block">Play Games</Link>
+                  <Link href="/watch-videos" className="block">Watch Videos</Link>
+                  <Link href="/offerwall" className="block">Offerwall</Link>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -154,7 +144,7 @@ export default function Header({ className }: HeaderProps) {
 
         {/* MOBILE MENU BUTTON */}
         <button
-          className="md:hidden"
+          className="md:hidden text-black dark:text-white"
           onClick={() => setMobileOpen(!mobileOpen)}
         >
           {mobileOpen ? <X /> : <Menu />}
@@ -169,59 +159,70 @@ export default function Header({ className }: HeaderProps) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className={`md:hidden w-full px-6 pt-2 pb-6 space-y-4 border-t ${borderColor} shadow-xl text-black dark:text-white`}
+            className={`md:hidden w-full px-6 pt-4 pb-6 border-t ${borderColor} shadow-xl text-black dark:text-white`}
           >
-            <Link href="/how-it-works" className="block">
-              How it works
-            </Link>
+            <div className="flex flex-col gap-4">
 
-            {/* MOBILE EARN */}
-            <button
-              onClick={() => setMobileEarnOpen(!mobileEarnOpen)}
-              className="flex w-full items-center justify-between font-medium"
-            >
-              Earn
-              <ChevronDown
-                size={16}
-                className={`transition ${
-                  mobileEarnOpen ? "rotate-180" : ""
-                }`}
-              />
-            </button>
+              <Link href="/how-it-works" className="block">
+                How it works
+              </Link>
 
-            {mobileEarnOpen && (
-              <div className="flex flex-col gap-3 pl-4 text-sm">
-                <Link href="/surveys">Surveys</Link>
-                <Link href="/app-installs">App Installs</Link>
-                <Link href="/play-games">Play Games</Link>
-                <Link href="/watch-videos">Watch Videos</Link>
-                <Link href="/offerwall">Offerwall</Link>
+              {/* MOBILE EARN */}
+              <button
+                onClick={() => setMobileEarnOpen(!mobileEarnOpen)}
+                className="flex items-center justify-between w-full"
+              >
+                Earn
+                <ChevronDown
+                  size={16}
+                  className={`transition ${
+                    mobileEarnOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              {mobileEarnOpen && (
+                <div className="flex flex-col gap-3 pl-4 text-sm">
+                  <Link href="/surveys" className="block">Surveys</Link>
+                  <Link href="/app-installs" className="block">App Installs</Link>
+                  <Link href="/play-games" className="block">Play Games</Link>
+                  <Link href="/watch-videos" className="block">Watch Videos</Link>
+                  <Link href="/offerwall" className="block">Offerwall</Link>
+                </div>
+              )}
+
+              <Link href="/cashout" className="block">
+                Cashout
+              </Link>
+
+              <Link href="/blog" className="block">
+                Blog
+              </Link>
+
+              <Link href="/help" className="block">
+                Help
+              </Link>
+
+              <div className="flex items-center justify-between pt-3">
+                <LanguageSwitcher />
+                <DarkLightToggle />
               </div>
-            )}
 
-            <Link href="/cashout">Cashout</Link>
-            <Link href="/blog">Blog</Link>
-            <Link href="/help">Help</Link>
+              <div className="pt-3 flex flex-col gap-3">
+                <Link href="/login">
+                  <button className={`border ${borderColor} py-2 rounded-lg w-full`}>
+                    Login
+                  </button>
+                </Link>
 
-            <div className="flex items-center justify-between pt-3">
-              <LanguageSwitcher />
-              <DarkLightToggle />
+                <Link href="/signup">
+                  <button className={`${ctaGradient} py-2 rounded-lg w-full text-black`}>
+                    Sign up
+                  </button>
+                </Link>
+              </div>
+
             </div>
-
-            <div className="pt-4 flex flex-col gap-3">
-              <Link href="/login">
-                <button className={`border ${borderColor} py-2 rounded-lg w-full`}>
-                  Login
-                </button>
-              </Link>
-
-              <Link href="/signup">
-                <button className={`${ctaGradient} py-2 rounded-lg w-full text-black`}>
-                  Sign up
-                </button>
-              </Link>
-            </div>
-
           </motion.div>
         )}
       </AnimatePresence>
