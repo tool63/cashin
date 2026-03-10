@@ -8,7 +8,7 @@ import LanguageSwitcher from "@/components/switch/LanguageSwitcher";
 import DarkLightToggle from "@/components/switch/DarkLightToggle";
 
 interface HeaderProps {
-  className?: string; // <-- accept optional className from layout
+  className?: string;
 }
 
 export default function Header({ className }: HeaderProps) {
@@ -36,10 +36,9 @@ export default function Header({ className }: HeaderProps) {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 w-full z-30 backdrop-blur-sm bg-white/70 dark:bg-black/70 border-b border-gray-200 dark:border-white/20 transition-colors duration-500 ${className || ""}`}
+      className={`fixed top-0 left-0 w-full z-30 border-b border-theme transition-colors duration-500 ${className || ""}`}
     >
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between bg-primary dark:bg-primary">
         {/* LOGO */}
         <Link
           href="/"
@@ -72,8 +71,8 @@ export default function Header({ className }: HeaderProps) {
                   className="
                     absolute top-full left-0 mt-2 w-48
                     flex flex-col gap-1 p-3 rounded-xl
-                    border border-gray-200 dark:border-white/10
-                    shadow-xl bg-white dark:bg-black
+                    border border-theme dark:border-theme
+                    shadow-xl bg-primary dark:bg-primary
                   "
                 >
                   <Link href="/surveys" className="hover:opacity-80 transition">Surveys</Link>
@@ -113,7 +112,7 @@ export default function Header({ className }: HeaderProps) {
               className={`px-5 py-2 rounded-lg text-sm transition ${
                 activeButton === "signup" || activeButton === "none"
                   ? ctaGradient
-                  : "border border-gray-300 text-black dark:text-white"
+                  : "border border-gray-300 text-primary dark:text-primary"
               }`}
             >
               Sign up
@@ -134,7 +133,7 @@ export default function Header({ className }: HeaderProps) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden px-6 py-6 space-y-4 border-t border-gray-200 dark:border-white/10 shadow-xl relative z-50 bg-white dark:bg-black"
+            className="md:hidden px-6 py-6 space-y-4 border-t border-theme shadow-xl relative z-50 bg-primary dark:bg-primary"
           >
             <Link href="/how-it-works" className="block hover:opacity-80 transition">How it works</Link>
 
