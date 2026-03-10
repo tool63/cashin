@@ -10,9 +10,10 @@ interface ThemeProviderWrapperProps {
 export default function ThemeProviderWrapper({ children }: ThemeProviderWrapperProps) {
   const [mounted, setMounted] = useState(false);
 
+  // Only render after mount to avoid SSR theme mismatch
   useEffect(() => setMounted(true), []);
 
-  if (!mounted) return null;
+  if (!mounted) return <div className="bg-background min-h-screen" />; // fallback div with background
 
   return (
     <ThemeProvider
