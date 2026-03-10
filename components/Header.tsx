@@ -27,13 +27,13 @@ export default function Header({ className }: HeaderProps) {
     "bg-gradient-to-r from-yellow-400 to-green-500 text-black";
 
   /* ---------------------------
-     THEME COLORS (ONE SOURCE)
+     GLOBAL HEADER GRADIENT
   --------------------------- */
 
-  const bgBase =
+  const headerGradient =
     theme === "dark"
-      ? "bg-gray-100"
-      : "bg-gray-900";
+      ? "bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100"
+      : "bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900";
 
   const textColor =
     theme === "dark"
@@ -67,7 +67,7 @@ export default function Header({ className }: HeaderProps) {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 w-full z-30 transition-colors duration-300 border-b ${borderColor} ${bgBase} ${className || ""}`}
+      className={`fixed top-0 left-0 w-full z-30 transition-colors duration-300 border-b ${borderColor} ${headerGradient} ${className || ""}`}
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         
@@ -110,7 +110,7 @@ export default function Header({ className }: HeaderProps) {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
-                  className={`absolute top-full left-0 mt-2 w-48 flex flex-col gap-1 p-3 rounded-xl shadow-xl border ${borderColor} ${bgBase}`}
+                  className={`absolute top-full left-0 mt-2 w-48 flex flex-col gap-1 p-3 rounded-xl shadow-xl border ${borderColor} ${headerGradient}`}
                 >
                   <Link href="/surveys" className="hover:opacity-80 transition">
                     Surveys
@@ -208,7 +208,7 @@ export default function Header({ className }: HeaderProps) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className={`md:hidden w-full px-6 pt-0 pb-6 space-y-4 border-t ${borderColor} shadow-xl ${bgBase} ${textColor}`}
+            className={`md:hidden w-full px-6 pt-0 pb-6 space-y-4 border-t ${borderColor} shadow-xl ${headerGradient} ${textColor}`}
           >
             <Link href="/how-it-works" className="hover:opacity-80 transition">
               How it works
