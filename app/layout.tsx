@@ -20,7 +20,7 @@ interface RootLayoutProps {
   children: ReactNode;
 }
 
-/* Static SEO object (prevents recreation on every render) */
+/* Static SEO object */
 const defaultSeo: SEOOutput = {
   metadata: {
     title: SEO_CONFIG.siteName,
@@ -94,28 +94,35 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
       <body className="relative min-h-screen text-black dark:text-white antialiased">
 
-        {/* GLOBAL BACKGROUND */}
-        <Background />
+        {/* BACKGROUND LAYER */}
+        <div className="fixed inset-0 -z-10">
+          <Background />
+        </div>
 
         <RootProviders>
           <ThemeProviderWrapper>
             <LanguageProvider>
 
-              {/* HEADER */}
-              <Header />
+              {/* PAGE WRAPPER */}
+              <div className="flex flex-col min-h-screen">
 
-              {/* MAIN CONTENT */}
-              <main className="relative z-10 max-w-7xl mx-auto px-6 pt-24 pb-16">
-                {children}
-              </main>
+                {/* HEADER */}
+                <Header />
 
-              {/* FLOATING CTA */}
-              <div className="fixed bottom-6 right-6 z-40">
-                <FloatingCTA />
+                {/* MAIN */}
+                <main className="flex-1 relative z-10 max-w-7xl mx-auto px-6 pt-24 pb-16 w-full">
+                  {children}
+                </main>
+
+                {/* FOOTER */}
+                <Footer />
+
               </div>
 
-              {/* FOOTER */}
-              <Footer />
+              {/* FLOATING CTA */}
+              <div className="fixed bottom-6 right-6 z-50">
+                <FloatingCTA />
+              </div>
 
             </LanguageProvider>
           </ThemeProviderWrapper>
