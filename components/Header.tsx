@@ -41,6 +41,7 @@ export default function Header({ className }: HeaderProps) {
         dark:from-yellow-500 dark:via-green-700 dark:to-green-800
         transition-colors duration-300 ${className || ""}`}
     >
+      {/* Header container */}
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
         {/* LOGO */}
@@ -130,9 +131,10 @@ export default function Header({ className }: HeaderProps) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden px-6 py-6 space-y-4 border-t border-theme shadow-xl
+            className="md:hidden w-full px-6 pt-0 pb-6 space-y-4
               bg-gradient-to-br from-yellow-400 via-green-400 to-green-500
-              dark:from-yellow-500 dark:via-green-700 dark:to-green-800"
+              dark:from-yellow-500 dark:via-green-700 dark:to-green-800
+              border-t border-theme shadow-xl"
           >
             <Link href="/how-it-works" className="block hover:opacity-80 transition">How it works</Link>
 
