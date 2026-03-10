@@ -15,11 +15,21 @@ import SeoRenderer from "@/components/SEO/SeoRenderer";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
 import { SEOOutput } from "@/components/SEO/seoEngine";
 
+import { usePathname } from "next/navigation";
+
 interface RootLayoutProps {
   children: ReactNode;
 }
 
+// Page transition variants
+const pageTransition: Variants = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.3 } },
+  exit: { opacity: 0, y: -20, transition: { duration: 0.3 } },
+};
+
 export default function RootLayout({ children }: RootLayoutProps) {
+  const pathname = usePathname(); // Get current route
   const defaultSeo: SEOOutput = {
     metadata: {
       title: SEO_CONFIG.siteName,
@@ -28,7 +38,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       robots: "index, follow",
       openGraph: {
         type: "website",
-        url: SEO_CONFIG.siteUrl,
+        url: SEO_CONFIG.siteUrl + pathname,
         title: SEO_CONFIG.siteName,
         description: SEO_CONFIG.defaultDescription || "",
         siteName: SEO_CONFIG.siteName,
@@ -51,7 +61,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       viewport: "width=device-width, initial-scale=1",
       other: { "theme-color": SEO_CONFIG.themeColor || "#000000" },
     },
-    canonical: SEO_CONFIG.siteUrl,
+    canonical: SEO_CONFIG.siteUrl + pathname,
     hreflang: {},
     structuredData: [],
     pageType: { type: "unknown", hierarchy: ["unknown"], metadata: {}, matches: null },
@@ -75,63 +85,53 @@ export default function RootLayout({ children }: RootLayoutProps) {
     },
   };
 
-  // ✅ Framer Motion variants for page transition
-  const pageVariants: Variants = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -20 },
-  };
-
   return (
     <html lang="en">
       <head>
         <SeoRenderer seo={defaultSeo} />
       </head>
 
-      <body className="relative min-h-screen text-black dark:text-white overflow-x-hidden flex flex-col">
-
+      <body className="relative min-h-screen text-black dark:text-white overflow-x-hidden">
         <RootProviders>
-          {/* ============================
-              BACKGROUND (works for all slugs)
-          ============================ */}
-          <Background />
+          {/* ============================ */}
+          {/* HEADER */}
+          {/* ============================ */}
+          <Header />
 
-          {/* ============================
-              HEADER (glass effect)
-          ============================ */}
-          <Header className="fixed top-0 left-0 right-0 z-40 backdrop-blur-xl bg-white/60 dark:bg-black/60 border-b border-gray-200 dark:border-white/10" />
+          {/* ============================ */}
+          {/* PAGE CONTENT WITH BACKGROUND */}
+          {/* ============================ */}
+          <div className="relative pt-20 min-h-screen">
+            {/* Background dynamically changes based on current pathname */}
+            <Background pathname={pathname} />
 
-          {/* ============================
-              MAIN CONTENT
-          ============================ */}
-          <main className="flex-1 pt-20 relative z-10 max-w-7xl mx-auto px-6 py-8 w-full">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={Math.random()} // ensures animation on slug change
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                variants={pageVariants}
-                transition={{ duration: 0.25 }}
-                className="w-full"
-              >
-                {children}
-              </motion.div>
-            </AnimatePresence>
-          </main>
+            <main className="relative z-10 max-w-7xl mx-auto px-6 py-8">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={pathname} // Use pathname as key to trigger animation on route change
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  variants={pageTransition}
+                  className="relative z-10"
+                >
+                  {children}
+                </motion.div>
+              </AnimatePresence>
+            </main>
+          </div>
 
-          {/* ============================
-              FLOATING CTA
-          ============================ */}
+          {/* ============================ */}
+          {/* FLOATING CTA */}
+          {/* ============================ */}
           <div className="fixed bottom-6 right-6 z-40">
             <FloatingCTA />
           </div>
 
-          {/* ============================
-              FOOTER
-          ============================ */}
-          <Footer className="border-t border-gray-200 dark:border-white/20 bg-white dark:bg-black z-30" />
-
+          {/* ============================ */}
+          {/* FOOTER */}
+          {/* ============================ */}
+          <Footer />
         </RootProviders>
       </body>
     </html>
