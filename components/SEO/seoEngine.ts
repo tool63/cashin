@@ -1,5 +1,5 @@
 // components/SEO/seoEngine.ts
-// ULTRA-PREMIUM CORPORATE SEO ENGINE
+// ULTRA-PREMIUM CORPORATE SEO ENGINE WITH AUTOMATIC LONG-TAIL TITLES & DESCRIPTIONS
 
 import { cache } from "react";
 import { PageTypeResult, detectPageType, isPaginated } from "./pageTypes";
@@ -17,7 +17,7 @@ import { SEOAnalytics, trackSEOGeneration } from "./seoAnalytics";
 export interface SEOInput {
   route: string;
   locale?: string;
-  data?: Record<string, any>;          // custom page data
+  data?: Record<string, any>;
   queryParams?: Record<string, string>;
   noindex?: boolean;
   nofollow?: boolean;
@@ -25,13 +25,19 @@ export interface SEOInput {
   customCanonical?: string;
   skipHreflang?: boolean;
   skipSchema?: boolean;
+
+  // Old-school SEO
+  title?: string;
+  description?: string;
+  keywords?: string[];
+
+  // Ultra-premium SEO
+  customTitle?: string;
+  customDescription?: string;
   tags?: string[];
   author?: string;
   publishedAt?: string;
   updatedAt?: string;
-  // ultra-premium SEO
-  customTitle?: string;
-  customDescription?: string;
   openGraph?: Record<string, any>;
   twitter?: Record<string, any>;
 }
@@ -60,21 +66,14 @@ export interface SEOOutput {
 // Cache
 // ============================================================
 
-const seoCache = new Map<
-  string,
-  { output: SEOOutput; timestamp: number; hits: number }
->();
+const seoCache = new Map<string, { output: SEOOutput; timestamp: number; hits: number }>();
 const CACHE_TTL = 3600000; // 1 hour
 const MAX_CACHE_SIZE = 500;
 
 function cleanupCache() {
   if (seoCache.size <= MAX_CACHE_SIZE) return;
-  const sorted = Array.from(seoCache.entries()).sort(
-    (a, b) => a[1].timestamp - b[1].timestamp
-  );
-  while (seoCache.size > MAX_CACHE_SIZE * 0.8) {
-    seoCache.delete(sorted.shift()![0]);
-  }
+  const sorted = Array.from(seoCache.entries()).sort((a, b) => a[1].timestamp - b[1].timestamp);
+  while (seoCache.size > MAX_CACHE_SIZE * 0.8) seoCache.delete(sorted.shift()![0]);
 }
 
 // ============================================================
@@ -89,8 +88,20 @@ function expandKeywords(base: string[], tags: string[]) {
     set.add(`${tag} rewards`);
     set.add(`earn ${tag}`);
     set.add(`${tag} online`);
+    set.add(`${tag} fast`);
   });
   return Array.from(set);
+}
+
+// ============================================================
+// Automatic Long-Tail Title & Description Generator
+// ============================================================
+
+function generateLongTailSEO(route: string, primary: string, tags: string[]) {
+  const pageKeyword = route.replace(/\//g, " ").trim() || primary;
+  const title = `${primary} | Complete ${pageKeyword} & Get Paid | Cashog`;
+  const description = `Join Cashog to complete ${pageKeyword}, surveys, tasks, and offers to earn money online securely and quickly.`;
+  return { title, description };
 }
 
 // ============================================================
@@ -117,6 +128,9 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
     author,
     publishedAt,
     updatedAt,
+    title,
+    description,
+    keywords,
     customTitle,
     customDescription,
     openGraph,
@@ -136,13 +150,12 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
     // ============================================================
 
     const pageType =
-      detectPageType(route, queryParams) ||
-      ({
+      detectPageType(route, queryParams) || {
         type: "unknown",
         hierarchy: ["unknown"],
         metadata: {},
         matches: null,
-      } as PageTypeResult);
+      } as PageTypeResult;
 
     const isProduction = process.env.NODE_ENV === "production";
     const shouldIndex =
@@ -196,13 +209,7 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
       route,
       locale,
       canonical,
-      data: {
-        ...data,
-        tags,
-        author,
-        publishedAt,
-        updatedAt,
-      },
+      data: { ...data, tags, author, publishedAt, updatedAt },
       queryParams,
       noindex: !shouldIndex,
       nofollow: !shouldFollow,
@@ -214,10 +221,24 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
     let metadata = buildMetadata(metadataInput);
 
     // ============================================================
-    // Ultra-Premium Metadata Enhancer
+    // Enhance Metadata (automatic + custom)
     // ============================================================
 
-    metadata = enhanceMetadata(metadata, route, data, tags, customTitle, customDescription, openGraph, twitter);
+    const { title: autoTitle, description: autoDescription } = generateLongTailSEO(route, SEO_CONFIG.primaryKeyword, tags);
+
+    metadata = enhanceMetadata(
+      metadata,
+      route,
+      data,
+      tags,
+      title,
+      description,
+      keywords,
+      customTitle || autoTitle,
+      customDescription || autoDescription,
+      openGraph,
+      twitter
+    );
 
     // ============================================================
     // Structured Data
@@ -238,15 +259,8 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
     // Resource Hints
     // ============================================================
 
-    const {
-      links,
-      preconnect,
-      dnsPrefetch,
-      preload,
-      prefetch,
-      prerender,
-      modulePreload,
-    } = generateResourceHints(pageType, data, route);
+    const { links, preconnect, dnsPrefetch, preload, prefetch, prerender, modulePreload } =
+      generateResourceHints(pageType, data, route);
 
     // ============================================================
     // SEO Score & Metrics
@@ -303,12 +317,15 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
 });
 
 // ============================================================
-// Metadata Enhancer (corporate + ultra premium)
+// Metadata Enhancer (dual-mode + auto long-tail)
 function enhanceMetadata(
   metadata: any,
   route: string,
   data: any,
   tags: string[],
+  title?: string,
+  description?: string,
+  keywords?: string[],
   customTitle?: string,
   customDescription?: string,
   openGraph?: Record<string, any>,
@@ -316,35 +333,27 @@ function enhanceMetadata(
 ) {
   const primary = SEO_CONFIG.primaryKeyword;
 
-  // Custom title takes priority
-  if (customTitle) {
-    metadata.title = customTitle;
-  } else if (metadata.title && !metadata.title.toLowerCase().includes(primary)) {
+  // Title
+  if (customTitle) metadata.title = customTitle;
+  else if (title) metadata.title = title;
+  else if (metadata.title && !metadata.title.toLowerCase().includes(primary))
     metadata.title = `${metadata.title} | ${primary}`;
-  }
 
-  // Custom description takes priority
-  if (customDescription) {
-    metadata.description = customDescription;
-  } else if (metadata.description && !metadata.description.includes("earn")) {
+  // Description
+  if (customDescription) metadata.description = customDescription;
+  else if (description) metadata.description = description;
+  else if (metadata.description && !metadata.description.includes("earn"))
     metadata.description += " Start earning rewards today.";
-  }
 
   // Keywords
   metadata.keywords = expandKeywords(
-    [...(SEO_CONFIG.defaultKeywords || []), ...(SEO_CONFIG.secondaryKeywords || [])],
+    [...(keywords || []), ...(SEO_CONFIG.defaultKeywords || []), ...(SEO_CONFIG.secondaryKeywords || [])],
     tags
   );
 
-  // Open Graph
-  if (openGraph) {
-    metadata.openGraph = openGraph;
-  }
-
-  // Twitter Cards
-  if (twitter) {
-    metadata.twitter = twitter;
-  }
+  // Open Graph & Twitter Cards
+  if (openGraph) metadata.openGraph = openGraph;
+  if (twitter) metadata.twitter = twitter;
 
   return metadata;
 }
