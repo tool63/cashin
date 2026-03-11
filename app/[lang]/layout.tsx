@@ -1,3 +1,4 @@
+// app/[lang]/layout.tsx
 "use client";
 
 import "@/styles/globals.css";
@@ -14,7 +15,7 @@ import SeoRenderer from "@/components/SEO/SeoRenderer";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
 import { SEOOutput } from "@/components/SEO/seoEngine";
 
-interface RootLayoutProps {
+interface LangLayoutProps {
   children: ReactNode;
 }
 
@@ -43,9 +44,7 @@ const defaultSeo: SEOOutput = {
     twitter: {
       card: "summary_large_image",
       site: SEO_CONFIG.twitterHandle || "",
-      images: SEO_CONFIG.defaultTwitterImage
-        ? [SEO_CONFIG.defaultTwitterImage]
-        : [],
+      images: SEO_CONFIG.defaultTwitterImage ? [SEO_CONFIG.defaultTwitterImage] : [],
       imageAlt: SEO_CONFIG.siteName,
     },
     viewport: "width=device-width, initial-scale=1",
@@ -80,7 +79,7 @@ const defaultSeo: SEOOutput = {
   },
 };
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default function LangLayout({ children }: LangLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -99,7 +98,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             {/* HEADER */}
             <Header className="border-b border-theme bg-transparent" />
 
-            {/* MAIN */}
+            {/* MAIN CONTENT */}
             <main className="flex-1 w-full max-w-7xl mx-auto px-6 pt-24 pb-16">
               {children}
             </main>
