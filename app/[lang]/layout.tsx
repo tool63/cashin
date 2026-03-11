@@ -4,8 +4,6 @@ import "@/styles/globals.css";
 import { ReactNode } from "react";
 
 import RootProviders from "./providers/RootProviders";
-import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
-import LanguageProvider from "./providers/LanguageProvider";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -95,31 +93,27 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <Background />
 
         <RootProviders>
-          <ThemeProviderWrapper>
-            <LanguageProvider>
 
-              <div className="flex flex-col min-h-screen relative z-10">
+          <div className="flex flex-col min-h-screen relative z-10">
 
-                {/* HEADER */}
-                <Header className="border-b border-theme bg-transparent" />
+            {/* HEADER */}
+            <Header className="border-b border-theme bg-transparent" />
 
-                {/* MAIN */}
-                <main className="flex-1 w-full max-w-7xl mx-auto px-6 pt-24 pb-16">
-                  {children}
-                </main>
+            {/* MAIN */}
+            <main className="flex-1 w-full max-w-7xl mx-auto px-6 pt-24 pb-16">
+              {children}
+            </main>
 
-                {/* FOOTER */}
-                <Footer className="bg-transparent" />
+            {/* FOOTER */}
+            <Footer className="bg-transparent" />
 
-              </div>
+          </div>
 
-              {/* FLOATING CTA */}
-              <div className="fixed bottom-6 right-6 z-50">
-                <FloatingCTA />
-              </div>
+          {/* FLOATING CTA */}
+          <div className="fixed bottom-6 right-6 z-50">
+            <FloatingCTA />
+          </div>
 
-            </LanguageProvider>
-          </ThemeProviderWrapper>
         </RootProviders>
 
       </body>
