@@ -45,20 +45,42 @@ export default function HomePage({ onOpenAuth }: HomePageProps) {
   const lang = (params?.lang as string) || SEO_CONFIG.defaultLocale;
 
   useEffect(() => {
-    setMounted(true);
-    let mountedState = true;
+  setMounted(true);
+  let mountedState = true;
 
-    buildSEO({ route: "/", locale: lang })
-      .then((result) => {
-        if (mountedState) setSeo(result);
-      })
-      .catch((err) => console.error("SEO hydration failed:", err));
+  buildSEO({
+    route: "/",
+    locale: lang,
 
-    return () => {
-      mountedState = false;
-    };
-  }, [lang]);
+    title:
+      "Earn Money Online ",
 
+    description:
+      "Cashog is a premium rewards platform where users earn money online by completing surveys, playing games, testing apps, and finishing offers. Join millions of users earning real cash and gift cards daily.",
+
+    keywords: [
+      "earn money online",
+      "make money completing tasks",
+      "paid surveys online",
+      "earn money playing games",
+      "get paid for offers",
+      "cash rewards platform",
+      "make money online free",
+      "best GPT sites",
+      "earn paypal cash online",
+      "earn gift cards online",
+      "cashog rewards"
+    ]
+  })
+    .then((result) => {
+      if (mountedState) setSeo(result);
+    })
+    .catch((err) => console.error("SEO hydration failed:", err));
+
+  return () => {
+    mountedState = false;
+  };
+}, [lang]);
   if (!mounted) {
     return (
       <>
