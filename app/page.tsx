@@ -23,7 +23,7 @@ import TestimonialSection from "@/components/homepage/TestimonialSection";
 
 /* Animation Components */
 import OpeningStyle from "@/components/animations/openingstyle";
-import RevealWithBorder from "@/components/animations/RevealWithBorder";
+import RevealWithBorder from "@/components/animations/CircleBorder";
 
 /* Live Components */
 const LiveJoining = dynamic(() => import("@/components/homepage/LiveJoining"), { ssr: false });
