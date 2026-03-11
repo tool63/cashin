@@ -1,18 +1,19 @@
-/* app/[lang]/how-it-works/page.tsx */
-import { ReactNode } from "react";
+"use client";
+
+import OpeningStyle from "@/components/animations/openingstyle";
+import PrimaryCTA from "@/components/cta/PrimaryCTA";
+import TypingText from "@/components/typing/home";
 import SeoRenderer from "@/components/SEO/SeoRenderer";
 import { buildSEO } from "@/components/SEO/seoEngine";
 
 export default async function HowItWorksPage() {
-  // ✅ Build SEO safely with TypeScript: use metaTitle instead of title
+  // ✅ TypeScript-safe SEO: use only properties supported by SEOInput
   const seo = await buildSEO({
     route: "/how-it-works",
-    metaTitle: "How It Works | Easy Steps to Earn Rewards | Cashog",
     description:
       "Learn how Cashog works to help you earn rewards easily — step by step guide for tasks, games, surveys & payouts.",
   });
 
-  // Step cards data
   const steps = [
     {
       title: "Sign Up Instantly",
@@ -40,52 +41,51 @@ export default async function HowItWorksPage() {
     <>
       {seo && <SeoRenderer seo={seo} />}
 
-      {/* Hero Section */}
-      <section className="w-full bg-gradient-to-tr from-indigo-900 to-purple-700 text-white py-20">
-        <div className="max-w-6xl mx-auto text-center space-y-6 px-6">
-          <h1 className="text-5xl font-extrabold tracking-tight">
-            How It Works
+      {/* HERO SECTION */}
+      <OpeningStyle delay={0.1}>
+        <section className="max-w-7xl mx-auto px-6 py-24 md:py-32 text-center">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 text-gray-900 dark:text-white">
+            How Cashog Works
           </h1>
-          <p className="text-xl opacity-90">
-            Simple, transparent & rewarding — here’s how you earn with Cashog
-          </p>
-        </div>
-      </section>
 
-      {/* Steps Section */}
-      <section className="max-w-6xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {steps.map((step, i) => (
-            <div
-              key={i}
-              className="bg-white shadow-2xl rounded-2xl p-8 border border-gray-100 transform hover:scale-105 transition ease duration-300"
-            >
+          <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
+              <TypingText />
+            </span>
+          </div>
+
+          <p className="text-lg sm:text-xl md:text-2xl mb-12 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            Complete tasks, surveys, watch videos, and earn rewards securely from anywhere.
+          </p>
+
+          <PrimaryCTA href="/signup" observer={true}>
+            Start Earning Now
+          </PrimaryCTA>
+        </section>
+      </OpeningStyle>
+
+      {/* STEP CARDS */}
+      <section className="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        {steps.map((step, i) => (
+          <OpeningStyle key={i} delay={0.2 + i * 0.1}>
+            <div className="bg-white shadow-2xl rounded-2xl p-8 border border-gray-100 transform hover:scale-105 transition ease duration-300">
               <div className="text-6xl mb-4">{step.icon}</div>
-              <h3 className="text-2xl font-bold mb-2 text-gray-900">
-                {step.title}
-              </h3>
+              <h3 className="text-2xl font-bold mb-2 text-gray-900">{step.title}</h3>
               <p className="text-gray-700">{step.desc}</p>
             </div>
-          ))}
-        </div>
+          </OpeningStyle>
+        ))}
       </section>
 
-      {/* CTA Section */}
-      <section className="bg-gray-50 py-16">
-        <div className="max-w-4xl mx-auto text-center px-6">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Ready to Get Started?
-          </h2>
-          <p className="text-lg text-gray-700 mb-8">
-            Sign up now and start earning rewards instantly — no fees, no delays.
-          </p>
-          <a
-            href="/signup"
-            className="inline-block bg-indigo-600 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:bg-indigo-700 transition"
-          >
-            Create Free Account
-          </a>
-        </div>
+      {/* CTA BOTTOM */}
+      <section className="bg-gray-50 py-16 text-center">
+        <h2 className="text-3xl font-bold text-gray-900 mb-4">Ready to Get Started?</h2>
+        <p className="text-lg text-gray-700 mb-8">
+          Sign up now and start earning rewards instantly — no fees, no delays.
+        </p>
+        <PrimaryCTA href="/signup" observer={true}>
+          Create Free Account
+        </PrimaryCTA>
       </section>
     </>
   );
