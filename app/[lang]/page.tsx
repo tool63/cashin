@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 
 import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
@@ -40,22 +41,24 @@ export default function HomePage({ onOpenAuth }: HomePageProps) {
   const [seo, setSeo] = useState<SEOOutput | null>(null);
   const [mounted, setMounted] = useState(false);
 
+  const params = useParams();
+  const lang = (params?.lang as string) || SEO_CONFIG.defaultLocale;
+
   useEffect(() => {
     setMounted(true);
-    let mounted = true;
+    let mountedState = true;
 
-    buildSEO({ route: "/", locale: SEO_CONFIG.defaultLocale })
+    buildSEO({ route: "/", locale: lang })
       .then((result) => {
-        if (mounted) setSeo(result);
+        if (mountedState) setSeo(result);
       })
       .catch((err) => console.error("SEO hydration failed:", err));
 
     return () => {
-      mounted = false;
+      mountedState = false;
     };
-  }, []);
+  }, [lang]);
 
-  // During SSR, return a simpler version to prevent hydration mismatch
   if (!mounted) {
     return (
       <>
@@ -77,210 +80,132 @@ export default function HomePage({ onOpenAuth }: HomePageProps) {
 
       <main className="relative min-h-screen bg-transparent text-gray-900 dark:text-white">
 
-        {/* =====================================================
-            SECTION 1: HERO
-        ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
             <HeroSection onOpenAuth={onOpenAuth || (() => {})} />
           </RevealWithBorder>
         </OpeningStyle>
 
-        {/* Visual Separator */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
 
-        {/* =====================================================
-            SECTION 2: STATS (Social Proof)
-        ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
             <StatsSection />
           </RevealWithBorder>
         </OpeningStyle>
 
-        {/* Visual Separator */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
 
-        {/* =====================================================
-            SECTION 3: LIVE JOINING
-        ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
             <LiveJoining />
           </RevealWithBorder>
         </OpeningStyle>
 
-        {/* Visual Separator */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
 
-        {/* =====================================================
-            SECTION 4: LIVE EARNINGS
-        ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
             <LiveEarnings />
           </RevealWithBorder>
         </OpeningStyle>
 
-        {/* Visual Separator */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
 
-        {/* =====================================================
-            SECTION 5: LIVE OFFER COMPLETION
-        ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
             <LiveOfferCompletion />
           </RevealWithBorder>
         </OpeningStyle>
 
-        {/* Visual Separator */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
 
-        {/* =====================================================
-            SECTION 6: LIVE WITHDRAWALS
-        ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
             <LiveWithdrawals />
           </RevealWithBorder>
         </OpeningStyle>
 
-        {/* Visual Separator */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
 
-        {/* =====================================================
-            SECTION 7: FEATURES
-        ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
             <FeaturesSection />
           </RevealWithBorder>
         </OpeningStyle>
 
-        {/* Visual Separator */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
 
-        {/* =====================================================
-            SECTION 8: TASKS
-        ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
             <TasksSection />
           </RevealWithBorder>
         </OpeningStyle>
 
-        {/* Visual Separator */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
 
-        {/* =====================================================
-            SECTION 9: HIGH PAYING OFFERS
-        ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
             <HighPayingOffers />
           </RevealWithBorder>
         </OpeningStyle>
 
-        {/* Visual Separator */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
 
-        {/* =====================================================
-            SECTION 10: TESTIMONIALS
-        ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
             <TestimonialSection />
           </RevealWithBorder>
         </OpeningStyle>
 
-        {/* Visual Separator */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
 
-        {/* =====================================================
-            SECTION 11: TRUST
-        ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
             <TrustSection />
           </RevealWithBorder>
         </OpeningStyle>
 
-        {/* Visual Separator */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
 
-        {/* =====================================================
-            SECTION 12: PAYMENTS
-        ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
             <PaymentSection />
           </RevealWithBorder>
         </OpeningStyle>
 
-        {/* Visual Separator */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
 
-        {/* =====================================================
-            SECTION 13: FAQ
-        ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
             <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
               <h2 className="text-3xl font-bold text-center mb-6 bg-gradient-to-r from-yellow-400 to-green-500 bg-clip-text text-transparent">
                 Frequently Asked Questions
               </h2>
-              <div className="space-y-4">
-                <FAQ
-                  faqs={[
-                    { 
-                      q: "How can I start earning money online?", 
-                      a: "Getting started is completely free! Simply sign up with your email, verify your account, and you'll immediately get access to hundreds of tasks and offers. You can start earning within minutes by completing simple tasks, surveys, and offers from our partners." 
-                    },
-                    { 
-                      q: "Is this website legit or a scam?", 
-                      a: "We are 100% legit and have paid over $2 million to our users. We've been in business for over 5 years with thousands of positive reviews on Trustpilot. All payments are processed securely, and we have a dedicated support team to assist you." 
-                    },
-                    { 
-                      q: "How much money can I really make?", 
-                      a: "Earnings vary based on your location and the time you invest. Active users earn between $100-$500 per month. Some power users make over $1,000 monthly by focusing on high-paying offers and referring friends. There's no upper limit - the more you do, the more you earn!" 
-                    },
-                    { 
-                      q: "What are the payment methods and withdrawal options?", 
-                      a: "We offer multiple payment options including PayPal, Payoneer, Bitcoin, and gift cards (Amazon, Google Play, Steam). You can withdraw your earnings once you reach the minimum threshold of $5. Payments are typically processed within 24-48 hours." 
-                    },
-                    { 
-                      q: "Do I need to pay anything to join?", 
-                      a: "No, joining and earning is completely free! We never ask for credit card details or any payment information to sign up. Beware of sites that ask for money upfront - we are 100% free to join and use." 
-                    },
-                    { 
-                      q: "Which countries are supported?", 
-                      a: "We currently support users from United States, Canada, United Kingdom, Australia, Germany, France, India, and over 50 other countries. The number of available offers may vary depending on your location." 
-                    },
-                    { 
-                      q: "How quickly can I get paid after withdrawing?", 
-                      a: "Withdrawal requests are processed within 24-48 hours. PayPal payments are usually instant once processed, bank transfers take 2-3 business days, and Bitcoin payments are sent within a few hours after approval." 
-                    }
-                  ]}
-                />
-              </div>
+
+              <FAQ
+                faqs={[
+                  { q: "How can I start earning money online?", a: "Simply sign up and start completing tasks." },
+                  { q: "Is this website legit?", a: "Yes, we have paid millions to our users." },
+                  { q: "How much can I earn?", a: "Active users earn $100-$500 monthly." },
+                  { q: "Payment methods?", a: "PayPal, Payoneer, Bitcoin, and gift cards." },
+                  { q: "Do I need to pay?", a: "No, joining is 100% free." },
+                  { q: "Which countries are supported?", a: "Over 50 countries including US, UK, Canada." },
+                  { q: "How fast are withdrawals?", a: "Usually within 24-48 hours." },
+                ]}
+              />
             </section>
           </RevealWithBorder>
         </OpeningStyle>
 
-        {/* Visual Separator */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
 
-        {/* =====================================================
-            SECTION 14: FINAL CTA
-        ===================================================== */}
         <OpeningStyle>
           <RevealWithBorder>
             <FinalCTASection />
           </RevealWithBorder>
         </OpeningStyle>
 
-        {/* Bottom Spacer */}
         <div className="h-12"></div>
 
       </main>
