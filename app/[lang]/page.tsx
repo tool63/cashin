@@ -1,8 +1,6 @@
-"use client";
+// app/[lang]/page.tsx
 
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
 
 import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
@@ -26,77 +24,46 @@ import TestimonialSection from "@/components/homepage/TestimonialSection";
 import OpeningStyle from "@/components/animations/openingstyle";
 import RevealWithBorder from "@/components/animations/CircleBorder";
 
-/* Live Components */
+/* Live Components (dynamic, client-only) */
 const LiveJoining = dynamic(() => import("@/components/homepage/LiveJoining"), { ssr: false });
 const LiveEarnings = dynamic(() => import("@/components/homepage/LiveEarnings"), { ssr: false });
 const LiveOfferCompletion = dynamic(() => import("@/components/homepage/LiveOfferCompletion"), { ssr: false });
 const LiveWithdrawals = dynamic(() => import("@/components/homepage/LiveWithdrawals"), { ssr: false });
 
 interface HomePageProps {
+  params: { lang: string };
   onOpenAuth?: (type: "login" | "signup" | "reset") => void;
 }
 
-/* SEO hydration */
-export default function HomePage({ onOpenAuth }: HomePageProps) {
-  const [seo, setSeo] = useState<SEOOutput | null>(null);
-  const [mounted, setMounted] = useState(false);
+/* Server-Side Homepage */
+export default async function HomePage({ params, onOpenAuth }: HomePageProps) {
+  const lang = params.lang || SEO_CONFIG.defaultLocale;
 
-  const params = useParams();
-  // Fix: handle string | string[] | undefined
-  const langParam = params?.lang;
-  const lang = Array.isArray(langParam) ? langParam[0] : langParam ?? SEO_CONFIG.defaultLocale;
-
-  useEffect(() => {
-    setMounted(true);
-    let mountedState = true;
-
-    buildSEO({
-      route: "/",
-      locale: lang,
-      title: "Earn Money Online",
-      description:
-        "Cashog is a premium rewards platform where users earn money online by completing surveys, playing games, testing apps, and finishing offers. Join millions of users earning real cash and gift cards daily.",
-      keywords: [
-        "earn money online",
-        "make money completing tasks",
-        "paid surveys online",
-        "earn money playing games",
-        "get paid for offers",
-        "cash rewards platform",
-        "make money online free",
-        "best GPT sites",
-        "earn paypal cash online",
-        "earn gift cards online",
-        "cashog rewards",
-      ],
-    })
-      .then((result) => {
-        if (mountedState) setSeo(result);
-      })
-      .catch((err) => console.error("SEO hydration failed:", err));
-
-    return () => {
-      mountedState = false;
-    };
-  }, [lang]);
-
-  if (!mounted) {
-    return (
-      <>
-        <Background />
-        <main className="relative min-h-screen bg-transparent text-gray-900 dark:text-white">
-          <div className="animate-pulse p-8">
-            <div className="h-96 bg-gray-200/20 dark:bg-gray-700/20 rounded-lg mb-4"></div>
-          </div>
-        </main>
-      </>
-    );
-  }
+  // Server-side SEO
+  const seo: SEOOutput = await buildSEO({
+    route: "/",
+    locale: lang,
+    title: "Earn Money Online",
+    description:
+      "Cashog is a premium rewards platform where users earn money online by completing surveys, playing games, testing apps, and finishing offers. Join millions of users earning real cash and gift cards daily.",
+    keywords: [
+      "earn money online",
+      "make money completing tasks",
+      "paid surveys online",
+      "earn money playing games",
+      "get paid for offers",
+      "cash rewards platform",
+      "make money online free",
+      "best GPT sites",
+      "earn paypal cash online",
+      "earn gift cards online",
+      "cashog rewards",
+    ],
+  });
 
   return (
     <>
       {seo && <SeoRenderer seo={seo} />}
-
       <Background />
 
       <main className="relative min-h-screen bg-transparent text-gray-900 dark:text-white">
@@ -203,7 +170,6 @@ export default function HomePage({ onOpenAuth }: HomePageProps) {
               <h2 className="text-3xl font-bold text-center mb-6 bg-gradient-to-r from-yellow-400 to-green-500 bg-clip-text text-transparent">
                 Frequently Asked Questions
               </h2>
-
               <FAQ
                 faqs={[
                   { q: "How can I start earning money online?", a: "Simply sign up and start completing tasks." },
