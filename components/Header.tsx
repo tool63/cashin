@@ -23,7 +23,7 @@ export default function Header({ className }: HeaderProps) {
   const ctaGradient =
     "bg-gradient-to-r from-yellow-400 to-green-500 text-black";
 
-  const borderColor = "border-gray-300 dark:border-gray-700";
+  const borderColor = "border-theme"; // use CSS variable, auto adjusts dark/light
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -42,9 +42,9 @@ export default function Header({ className }: HeaderProps) {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 w-full z-30 border-b ${borderColor} bg-primary dark:bg-gray-950 ${className || ""}`}
+      className={`fixed top-0 left-0 w-full z-30 border-b ${borderColor} bg-primary dark:bg-secondary ${className || ""}`}
     >
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between text-black dark:text-white">
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between text-primary dark:text-primary">
 
         {/* LOGO */}
         <Link
@@ -75,7 +75,7 @@ export default function Header({ className }: HeaderProps) {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
-                  className={`absolute top-full left-0 mt-2 w-48 flex flex-col gap-2 p-3 rounded-xl shadow-xl border ${borderColor} bg-primary dark:bg-gray-950`}
+                  className={`absolute top-full left-0 mt-2 w-48 flex flex-col gap-2 p-3 rounded-xl shadow-xl border ${borderColor} bg-primary dark:bg-secondary`}
                 >
                   <Link href="/surveys" className="block">Surveys</Link>
                   <Link href="/app-installs" className="block">App Installs</Link>
@@ -103,7 +103,7 @@ export default function Header({ className }: HeaderProps) {
               className={`px-4 py-2 rounded-lg text-sm transition ${
                 activeButton === "login"
                   ? ctaGradient
-                  : `border ${borderColor} bg-primary dark:bg-gray-950`
+                  : `border ${borderColor} bg-primary dark:bg-secondary`
               }`}
             >
               Login
@@ -116,7 +116,7 @@ export default function Header({ className }: HeaderProps) {
               className={`px-5 py-2 rounded-lg text-sm transition ${
                 activeButton === "signup" || activeButton === "none"
                   ? ctaGradient
-                  : `border ${borderColor} bg-primary dark:bg-gray-950`
+                  : `border ${borderColor} bg-primary dark:bg-secondary`
               }`}
             >
               Sign up
@@ -126,7 +126,7 @@ export default function Header({ className }: HeaderProps) {
 
         {/* MOBILE MENU BUTTON */}
         <button
-          className="md:hidden text-black dark:text-white"
+          className="md:hidden text-primary dark:text-primary"
           onClick={() => setMobileOpen(!mobileOpen)}
         >
           {mobileOpen ? <X /> : <Menu />}
@@ -141,7 +141,7 @@ export default function Header({ className }: HeaderProps) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className={`md:hidden w-full px-6 pt-4 pb-6 border-t ${borderColor} shadow-xl text-black dark:text-white bg-primary dark:bg-gray-950`}
+            className={`md:hidden w-full px-6 pt-4 pb-6 border-t ${borderColor} shadow-xl text-primary dark:text-primary bg-primary dark:bg-secondary`}
           >
             <div className="flex flex-col gap-4">
 
@@ -180,7 +180,7 @@ export default function Header({ className }: HeaderProps) {
 
               <div className="pt-3 flex flex-col gap-3">
                 <Link href="/login">
-                  <button className={`border ${borderColor} py-2 rounded-lg w-full bg-primary dark:bg-gray-950`}>Login</button>
+                  <button className={`border ${borderColor} py-2 rounded-lg w-full bg-primary dark:bg-secondary`}>Login</button>
                 </Link>
 
                 <Link href="/signup">
