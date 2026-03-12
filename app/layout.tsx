@@ -1,6 +1,6 @@
 // app/layout.tsx
 import { redirect } from "next/navigation";
-import { LanguageDetector, defaultLanguage } from "./lang/core/detector";
+import { LanguageDetector, defaultLanguage } from "./[lang]/core/detector";
 
 /**
  * Root layout automatically redirects users to their detected language.
