@@ -10,6 +10,7 @@ interface BuildSEOParams {
   title: string
   description?: string
   locale?: string
+  keywords?: string[]
 }
 
 export async function buildSEO({
@@ -17,6 +18,7 @@ export async function buildSEO({
   title,
   description,
   locale,
+  keywords,
 }: BuildSEOParams) {
 
   const start = Date.now()
@@ -26,6 +28,7 @@ export async function buildSEO({
     description,
     path: route,
     locale,
+    keywords,
   })
 
   const pageType = detectPageType(route)
