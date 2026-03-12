@@ -1,261 +1,43 @@
-// ============================================================
-// Enterprise-Grade Global SEO Configuration (2026 Optimized)
-// Cashog – Global Authority Ready
-// ============================================================
+// components/SEO/seoConfig.ts
 
 export const SEO_CONFIG = {
-  // ==========================================================
-  // Core Settings
-  // ==========================================================
-  siteName: 'Cashog',
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://cashog.com',
-  siteDomain: 'cashog.com',
-
-  defaultLocale: 'en',
+  siteName: "Cashog",
+  siteUrl: "https://cashog.com",
+  siteDomain: "cashog.com",
+  defaultLocale: "en",
   supportedLocales: [
-    'en', 'es', 'fr', 'de', 'it',
-    'pt', 'nl', 'pl', 'ru',
-    'ja', 'ko', 'zh'
+    "en", "es", "fr", "de", "it", "pt", "ru", "ja", "zh"
   ],
+  primaryKeyword: "earn money online",
+  defaultDescription: "Earn money online completing surveys, tasks, and games.",
+  defaultKeywords: ["earn money", "online rewards", "cash", "paid surveys", "online tasks"],
+  secondaryKeywords: ["games for money", "app rewards", "task rewards"],
 
-  localeMap: {
-    en: 'en_US',
-    es: 'es_ES',
-    fr: 'fr_FR',
-    de: 'de_DE',
-    it: 'it_IT',
-    pt: 'pt_PT',
-    nl: 'nl_NL',
-    pl: 'pl_PL',
-    ru: 'ru_RU',
-    ja: 'ja_JP',
-    ko: 'ko_KR',
-    zh: 'zh_CN',
-  },
+  twitterHandle: "@cashog",
+  defaultOgImage: "/og-image.png",
+  defaultTwitterImage: "/twitter-image.png",
+  themeColor: "#000000",
 
-  // ==========================================================
-  // Global High-Search Meta Defaults
-  // ==========================================================
-  defaultTitle:
-    'Earn Real Money Online | Paid Surveys, Offers & Rewards - Cashog',
-
-  titleTemplate: '%s | Earn Money Online - Cashog',
-
-  defaultDescription:
-    'Earn real money online with Cashog. Get paid for surveys, app installs, games, offers, microtasks, and cashback deals. Withdraw via PayPal, gift cards, or crypto. Trusted worldwide. Start earning today.',
-
-  defaultKeywords: [
-    'earn money online',
-    'make money online',
-    'earn real money',
-    'get paid online',
-    'online side hustle',
-    'earn money from home',
-    'how to make money online',
-    'ways to make money fast',
-    'best money making apps',
-    'legit online jobs',
-    'paid surveys that pay',
-    'earn PayPal money',
-    'free gift cards online',
-    'earn crypto rewards',
-    'get paid to play games',
-    'earn money without investment',
-    'earn money worldwide',
-    'online earning platform',
-    'rewards app that pays real money',
-    'trusted survey sites',
-  ],
-
-  // ==========================================================
-  // PWA / Branding Defaults
-  // ==========================================================
-  primaryKeyword: 'earn money online',
-
-  secondaryKeywords: [
-    'paid surveys',
-    'make money online',
-    'earn PayPal money',
-    'online rewards platform',
-  ],
-
-  defaultRobots: {
-    index: true,
-    follow: true,
-    nocache: false,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-
-  organization: {
-    name: 'Cashog',
-    legalName: 'Cashog Inc.',
-    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://cashog.com',
-    logo: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://cashog.com'}/logo.png`,
-    foundingDate: '2024',
-    description:
-      'Cashog is a global online rewards platform that allows users to earn real money by completing surveys, offers, games, and tasks.',
-    sameAs: [
-      'https://facebook.com/cashog',
-      'https://twitter.com/cashog',
-      'https://instagram.com/cashog',
-      'https://linkedin.com/company/cashog',
-      'https://youtube.com/cashog',
-      'https://tiktok.com/@cashog',
-      'https://pinterest.com/cashog',
-    ],
-  },
-
-  // ==========================================================
-  // Social Media
-  // ==========================================================
-  twitterHandle: '@cashog',
-  facebookAppId: process.env.FACEBOOK_APP_ID,
-
-  socialLinks: {
-    facebook: 'https://facebook.com/cashog',
-    twitter: 'https://twitter.com/cashog',
-    instagram: 'https://instagram.com/cashog',
-    linkedin: 'https://linkedin.com/company/cashog',
-    youtube: 'https://youtube.com/cashog',
-    tiktok: 'https://tiktok.com/@cashog',
-    pinterest: 'https://pinterest.com/cashog',
-  },
-
-  // ==========================================================
-  // Images
-  // ==========================================================
-  defaultOgImage:
-    `${process.env.NEXT_PUBLIC_SITE_URL || 'https://cashog.com'}/og-image.jpg`,
-
-  defaultTwitterImage:
-    `${process.env.NEXT_PUBLIC_SITE_URL || 'https://cashog.com'}/twitter-image.jpg`,
-
-  favicon: '/favicon.ico',
-  appleTouchIcon: '/apple-touch-icon.png',
-
-  // ==========================================================
-  // Verification Codes
-  // ==========================================================
-  verification: {
-    google: process.env.GOOGLE_VERIFICATION,
-    bing: process.env.BING_VERIFICATION,
-    yandex: process.env.YANDEX_VERIFICATION,
-    pinterest: process.env.PINTEREST_VERIFICATION,
-    facebook: process.env.FACEBOOK_VERIFICATION,
-  },
-
-  // ==========================================================
-  // Contact Info
-  // ==========================================================
-  contact: {
-    email: 'support@cashog.com',
-    phone: '+1-800-CASHOG',
-    address: {
-      street: '123 Rewards Street',
-      city: 'San Francisco',
-      state: 'CA',
-      postalCode: '94105',
-      country: 'US',
-    },
-  },
-
-  themeColor: '#FF6B00',
-  backgroundColor: '#FFFFFF',
-
-  // ==========================================================
-  // Performance / Prefetch / Security
-  // ==========================================================
   preconnect: [
-    'https://fonts.googleapis.com',
-    'https://fonts.gstatic.com',
-    'https://images.cashog.com',
-    'https://api.cashog.com',
+    "https://fonts.googleapis.com",
+    "https://fonts.gstatic.com",
+    "https://images.cashog.com",
+    "https://api.cashog.com"
   ],
-
   dnsPrefetch: [
-    'https://www.googletagmanager.com',
-    'https://www.google-analytics.com',
+    "https://fonts.googleapis.com",
+    "https://fonts.gstatic.com",
+    "https://images.cashog.com",
+    "https://api.cashog.com"
   ],
-
-  csp: {
-    'default-src': ["'self'"],
-    'script-src': [
-      "'self'",
-      "'unsafe-inline'",
-      "'unsafe-eval'",
-      'https://www.googletagmanager.com',
-      'https://www.google-analytics.com',
-    ],
-    'style-src': [
-      "'self'",
-      "'unsafe-inline'",
-      'https://fonts.googleapis.com',
-    ],
-    'img-src': [
-      "'self'",
-      'data:',
-      'https:',
-      'https://images.cashog.com',
-    ],
-    'font-src': [
-      "'self'",
-      'https://fonts.gstatic.com',
-    ],
-    'connect-src': [
-      "'self'",
-      'https://api.cashog.com',
-      'https://www.google-analytics.com',
-    ],
-    'frame-src': [
-      "'self'",
-      'https://www.youtube.com',
-      'https://player.vimeo.com',
-    ],
-  },
-
-  sitemapUrl:
-    `${process.env.NEXT_PUBLIC_SITE_URL || 'https://cashog.com'}/sitemap.xml`,
-
-  rssUrl:
-    `${process.env.NEXT_PUBLIC_SITE_URL || 'https://cashog.com'}/rss.xml`,
-
-  structuredDataDefaults: {
-    enableBreadcrumbs: true,
-    enableOrganization: true,
-    enableWebsiteSchema: true,
-    enableSearchAction: true,
-  },
+  prefetch: [] as string[],
+  prerender: [] as string[],
+  modulePreload: [] as string[],
 
   pwa: {
-    name: 'Cashog Rewards',
-    shortName: 'Cashog',
-    description:
-      'Earn real money online with surveys, offers, games and cashback.',
-    startUrl: '/',
-    display: 'standalone',
-    orientation: 'portrait',
-    themeColor: '#FF6B00',
-    backgroundColor: '#FFFFFF',
-    icons: [
-      { src: '/icons/icon-72x72.png', sizes: '72x72', type: 'image/png' },
-      { src: '/icons/icon-96x96.png', sizes: '96x96', type: 'image/png' },
-      { src: '/icons/icon-128x128.png', sizes: '128x128', type: 'image/png' },
-      { src: '/icons/icon-144x144.png', sizes: '144x144', type: 'image/png' },
-      { src: '/icons/icon-152x152.png', sizes: '152x152', type: 'image/png' },
-      { src: '/icons/icon-192x192.png', sizes: '192x192', type: 'image/png' },
-      { src: '/icons/icon-384x384.png', sizes: '384x384', type: 'image/png' },
-      { src: '/icons/icon-512x512.png', sizes: '512x512', type: 'image/png' },
-    ],
+    enabled: true,
+    manifestPath: "/manifest.json",
+    themeColor: "#000000",
+    backgroundColor: "#ffffff",
   },
 } as const;
-
-// ============================================================
-// Type-safe config access
-// ============================================================
-export type SEOConfig = typeof SEO_CONFIG;
