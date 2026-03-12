@@ -1,4 +1,3 @@
-// components/animations/container.tsx
 "use client";
 
 import { ReactNode } from "react";
@@ -22,7 +21,7 @@ function Container({
   
   const baseClasses = `
     max-w-7xl mx-auto px-6 py-20
-    bg-transparent
+    bg-primary dark:bg-secondary
     ${className}
   `.trim();
 
@@ -61,7 +60,7 @@ export function Card({
 }) {
   const baseClasses = `
     group relative rounded-3xl p-6 flex flex-col items-center text-center
-    bg-gray-100 dark:bg-white/5
+    bg-card
     border border-gray-200 dark:border-white/10
     ${hover ? `
       hover:border-blue-500/40
