@@ -1,6 +1,8 @@
-// app/[lang]/page.tsx
+"use client";
 
 import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 
 import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
@@ -24,75 +26,154 @@ import TestimonialSection from "@/components/homepage/TestimonialSection";
 import OpeningStyle from "@/components/animations/openingstyle";
 import RevealWithBorder from "@/components/animations/CircleBorder";
 
-/* Live Components (client-side dynamic) */
+/* Live Components */
 const LiveJoining = dynamic(() => import("@/components/homepage/LiveJoining"), { ssr: false });
 const LiveEarnings = dynamic(() => import("@/components/homepage/LiveEarnings"), { ssr: false });
 const LiveOfferCompletion = dynamic(() => import("@/components/homepage/LiveOfferCompletion"), { ssr: false });
 const LiveWithdrawals = dynamic(() => import("@/components/homepage/LiveWithdrawals"), { ssr: false });
 
-export default async function Page({ params }: { params: { lang: string } }) {
-  const lang = params.lang || SEO_CONFIG.defaultLocale;
+export default function HomePage() {
+  const [seo, setSeo] = useState<SEOOutput | null>(null);
+  const [mounted, setMounted] = useState(false);
 
-  // Build SEO server-side
-  const seo: SEOOutput = await buildSEO({
-    route: "/",
-    locale: lang,
-    title: "Earn Money Online",
-    description:
-      "Cashog is a premium rewards platform where users earn money online by completing surveys, playing games, testing apps, and finishing offers. Join millions of users earning real cash and gift cards daily.",
-    keywords: [
-      "earn money online",
-      "make money completing tasks",
-      "paid surveys online",
-      "earn money playing games",
-      "get paid for offers",
-      "cash rewards platform",
-      "make money online free",
-      "best GPT sites",
-      "earn paypal cash online",
-      "earn gift cards online",
-      "cashog rewards",
-    ],
-  });
+  const params = useParams();
+  const langParam = params?.lang;
+  const lang = Array.isArray(langParam) ? langParam[0] : langParam ?? SEO_CONFIG.defaultLocale;
+
+  // --- Auth handler for HeroSection ---
+  const handleOpenAuth = (type: "login" | "signup" | "reset") => {
+    console.log("Open auth modal:", type);
+    // TODO: connect to your auth modal logic
+  };
+
+  useEffect(() => {
+    setMounted(true);
+    let mountedState = true;
+
+    buildSEO({
+      route: "/",
+      locale: lang,
+      title: "Earn Money Online",
+      description:
+        "Cashog is a premium rewards platform where users earn money online by completing surveys, playing games, testing apps, and finishing offers. Join millions of users earning real cash and gift cards daily.",
+      keywords: [
+        "earn money online",
+        "make money completing tasks",
+        "paid surveys online",
+        "earn money playing games",
+        "get paid for offers",
+        "cash rewards platform",
+        "make money online free",
+        "best GPT sites",
+        "earn paypal cash online",
+        "earn gift cards online",
+        "cashog rewards",
+      ],
+    })
+      .then((result) => {
+        if (mountedState) setSeo(result);
+      })
+      .catch((err) => console.error("SEO hydration failed:", err));
+
+    return () => {
+      mountedState = false;
+    };
+  }, [lang]);
+
+  if (!mounted) {
+    return (
+      <>
+        <Background />
+        <main className="relative min-h-screen bg-transparent text-gray-900 dark:text-white">
+          <div className="animate-pulse p-8">
+            <div className="h-96 bg-gray-200/20 dark:bg-gray-700/20 rounded-lg mb-4"></div>
+          </div>
+        </main>
+      </>
+    );
+  }
 
   return (
     <>
-      <SeoRenderer seo={seo} />
+      {seo && <SeoRenderer seo={seo} />}
       <Background />
 
       <main className="relative min-h-screen bg-transparent text-gray-900 dark:text-white">
 
-        {/* Hero Section */}
         <OpeningStyle>
           <RevealWithBorder>
-            <HeroSection />
+            {/* Pass the required prop */}
+            <HeroSection onOpenAuth={handleOpenAuth} />
           </RevealWithBorder>
         </OpeningStyle>
 
-        {/* Stats Section */}
+        {/* The rest of your sections remain unchanged */}
         <OpeningStyle>
           <RevealWithBorder>
             <StatsSection />
           </RevealWithBorder>
         </OpeningStyle>
 
-        {/* Live Sections */}
-        <OpeningStyle><RevealWithBorder><LiveJoining /></RevealWithBorder></OpeningStyle>
-        <OpeningStyle><RevealWithBorder><LiveEarnings /></RevealWithBorder></OpeningStyle>
-        <OpeningStyle><RevealWithBorder><LiveOfferCompletion /></RevealWithBorder></OpeningStyle>
-        <OpeningStyle><RevealWithBorder><LiveWithdrawals /></RevealWithBorder></OpeningStyle>
+        <OpeningStyle>
+          <RevealWithBorder>
+            <LiveJoining />
+          </RevealWithBorder>
+        </OpeningStyle>
 
-        {/* Features / Tasks / Offers */}
-        <OpeningStyle><RevealWithBorder><FeaturesSection /></RevealWithBorder></OpeningStyle>
-        <OpeningStyle><RevealWithBorder><TasksSection /></RevealWithBorder></OpeningStyle>
-        <OpeningStyle><RevealWithBorder><HighPayingOffers /></RevealWithBorder></OpeningStyle>
-        <OpeningStyle><RevealWithBorder><TestimonialSection /></RevealWithBorder></OpeningStyle>
+        <OpeningStyle>
+          <RevealWithBorder>
+            <LiveEarnings />
+          </RevealWithBorder>
+        </OpeningStyle>
 
-        {/* Trust / Payment Sections */}
-        <OpeningStyle><RevealWithBorder><TrustSection /></RevealWithBorder></OpeningStyle>
-        <OpeningStyle><RevealWithBorder><PaymentSection /></RevealWithBorder></OpeningStyle>
+        <OpeningStyle>
+          <RevealWithBorder>
+            <LiveOfferCompletion />
+          </RevealWithBorder>
+        </OpeningStyle>
 
-        {/* FAQ Section */}
+        <OpeningStyle>
+          <RevealWithBorder>
+            <LiveWithdrawals />
+          </RevealWithBorder>
+        </OpeningStyle>
+
+        <OpeningStyle>
+          <RevealWithBorder>
+            <FeaturesSection />
+          </RevealWithBorder>
+        </OpeningStyle>
+
+        <OpeningStyle>
+          <RevealWithBorder>
+            <TasksSection />
+          </RevealWithBorder>
+        </OpeningStyle>
+
+        <OpeningStyle>
+          <RevealWithBorder>
+            <HighPayingOffers />
+          </RevealWithBorder>
+        </OpeningStyle>
+
+        <OpeningStyle>
+          <RevealWithBorder>
+            <TestimonialSection />
+          </RevealWithBorder>
+        </OpeningStyle>
+
+        <OpeningStyle>
+          <RevealWithBorder>
+            <TrustSection />
+          </RevealWithBorder>
+        </OpeningStyle>
+
+        <OpeningStyle>
+          <RevealWithBorder>
+            <PaymentSection />
+          </RevealWithBorder>
+        </OpeningStyle>
+
         <OpeningStyle>
           <RevealWithBorder>
             <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
@@ -114,9 +195,13 @@ export default async function Page({ params }: { params: { lang: string } }) {
           </RevealWithBorder>
         </OpeningStyle>
 
-        {/* Final CTA */}
-        <OpeningStyle><RevealWithBorder><FinalCTASection /></RevealWithBorder></OpeningStyle>
+        <OpeningStyle>
+          <RevealWithBorder>
+            <FinalCTASection />
+          </RevealWithBorder>
+        </OpeningStyle>
 
+        <div className="h-12"></div>
       </main>
     </>
   );
