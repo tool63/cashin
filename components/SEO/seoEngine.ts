@@ -1,5 +1,4 @@
 // components/SEO/seoEngine.ts
-
 import { cache } from "react";
 import { PageTypeResult, detectPageType, isPaginated } from "./pageTypes";
 import { buildMetadata, MetadataInput } from "./metadata";
@@ -52,7 +51,6 @@ export interface SEOOutput {
   pageType: PageTypeResult;
 
   links?: any[];
-
   preconnect?: string[];
   dnsPrefetch?: string[];
   preload?: string[];
@@ -74,16 +72,14 @@ const seoCache = new Map<
   { output: SEOOutput; timestamp: number; hits: number }
 >();
 
-const CACHE_TTL = 1000 * 60 * 60;
+const CACHE_TTL = 1000 * 60 * 60; // 1 hour
 const MAX_CACHE_SIZE = 500;
 
 function cleanupCache() {
   if (seoCache.size <= MAX_CACHE_SIZE) return;
-
   const sorted = Array.from(seoCache.entries()).sort(
     (a, b) => a[1].timestamp - b[1].timestamp
   );
-
   while (seoCache.size > MAX_CACHE_SIZE * 0.8) {
     const item = sorted.shift();
     if (item) seoCache.delete(item[0]);
@@ -96,22 +92,19 @@ function cleanupCache() {
 
 function expandKeywords(base: string[], tags: string[]) {
   const set = new Set<string>();
-
   base.forEach((k) => set.add(k));
   tags.forEach((k) => set.add(k));
-
   tags.forEach((tag) => {
     set.add(`${tag} rewards`);
     set.add(`earn ${tag}`);
     set.add(`${tag} online`);
     set.add(`${tag} fast`);
   });
-
   return Array.from(set);
 }
 
 // ============================================================
-// Intelligent Long-Tail SEO Generator
+// Long-Tail SEO
 // ============================================================
 
 function generateLongTailSEO(route: string, primary: string, tags: string[]) {
@@ -123,46 +116,38 @@ function generateLongTailSEO(route: string, primary: string, tags: string[]) {
       description:
         `${site} is a rewards platform where users earn real money online by completing surveys, playing games, testing apps, and finishing offers.`,
     },
-
     "/how-it-works": {
       title: `How ${site} Works | Earn Money Completing Tasks`,
       description:
         `Learn how ${site} works step-by-step. Complete surveys, tasks, and games to earn real money online.`,
     },
-
     "/play-games": {
       title: `Play Games & Earn Money Online | ${site}`,
       description:
         `Play mobile and PC games to earn money online. ${site} rewards players for completing levels and testing apps.`,
     },
-
     "/surveys": {
       title: `Paid Surveys Online | Earn Cash Completing Surveys | ${site}`,
-      description:
-        `Complete high-paying surveys and earn real money online on ${site}.`,
+      description: `Complete high-paying surveys and earn real money online on ${site}.`,
     },
-
     "/offers": {
       title: `High Paying Offers | Complete Tasks & Earn Rewards | ${site}`,
-      description:
-        `Discover high-paying offers. Install apps and complete tasks to earn rewards instantly.`,
+      description: `Discover high-paying offers. Install apps and complete tasks to earn rewards instantly.`,
     },
   };
 
   if (map[route]) return map[route];
 
   const keyword = route.replace(/\//g, " ").replace(/-/g, " ").trim();
-
   const formatted = keyword
     .split(" ")
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
     .join(" ");
 
-  const title = `${formatted} | ${primary} & Earn Rewards | ${site}`;
-
-  const description = `Complete ${keyword}, surveys, games, and tasks to earn money online on ${site}.`;
-
-  return { title, description };
+  return {
+    title: `${formatted} | ${primary} & Earn Rewards | ${site}`,
+    description: `Complete ${keyword}, surveys, games, and tasks to earn money online on ${site}.`,
+  };
 }
 
 // ============================================================
@@ -171,7 +156,6 @@ function generateLongTailSEO(route: string, primary: string, tags: string[]) {
 
 export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
   const startTime = Date.now();
-
   const warnings: string[] = [];
   const suggestions: string[] = [];
 
@@ -180,37 +164,27 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
     locale = SEO_CONFIG.defaultLocale,
     data = {},
     queryParams = {},
-
     noindex = false,
     nofollow = false,
-
     priority = 0.7,
-
     customCanonical,
     skipHreflang = false,
     skipSchema = false,
-
     tags = [],
-
     author,
     publishedAt,
     updatedAt,
-
     title,
     description,
     keywords,
-
     customTitle,
     customDescription,
-
     openGraph,
     twitter,
   } = input;
 
   const cacheKey = `${route}:${locale}:${JSON.stringify(queryParams)}`;
-
   const cached = seoCache.get(cacheKey);
-
   if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
     cached.hits++;
     return cached.output;
@@ -219,26 +193,11 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
   try {
     const pageType =
       detectPageType(route, queryParams) ||
-      ({
-        type: "unknown",
-        hierarchy: ["unknown"],
-        metadata: {},
-        matches: null,
-      } as PageTypeResult);
+      ({ type: "unknown", hierarchy: ["unknown"], metadata: {}, matches: null } as PageTypeResult);
 
     const isProduction = process.env.NODE_ENV === "production";
-
-    const shouldIndex =
-      !noindex &&
-      !isPaginated(route) &&
-      isProduction &&
-      !route.includes("preview");
-
+    const shouldIndex = !noindex && !isPaginated(route) && isProduction && !route.includes("preview");
     const shouldFollow = !nofollow;
-
-    // ============================================================
-    // Canonical
-    // ============================================================
 
     const canonicalOptions: CanonicalOptions = {
       includeQuery: false,
@@ -248,13 +207,7 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
       secure: true,
       normalizeSlashes: true,
     };
-
-    const canonical =
-      customCanonical || buildCanonical(route, canonicalOptions);
-
-    // ============================================================
-    // Hreflang
-    // ============================================================
+    const canonical = customCanonical || buildCanonical(route, canonicalOptions);
 
     const hreflang = !skipHreflang
       ? buildHreflang(route, {
@@ -264,10 +217,6 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
           trailingSlash: true,
         } as HreflangOptions)
       : {};
-
-    // ============================================================
-    // Metadata
-    // ============================================================
 
     const metadataInput: MetadataInput = {
       pageType: pageType.type,
@@ -283,15 +232,7 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
 
     let metadata = buildMetadata(metadataInput);
 
-    // ============================================================
-    // Automatic SEO
-    // ============================================================
-
-    const autoSEO = generateLongTailSEO(
-      route,
-      SEO_CONFIG.primaryKeyword,
-      tags
-    );
+    const autoSEO = generateLongTailSEO(route, SEO_CONFIG.primaryKeyword, tags);
 
     metadata = enhanceMetadata(
       metadata,
@@ -305,10 +246,6 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
       twitter
     );
 
-    // ============================================================
-    // Schema
-    // ============================================================
-
     const structuredData = !skipSchema
       ? buildStructuredData({
           pageType: pageType.type,
@@ -320,19 +257,9 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
         } as SchemaInput)
       : [];
 
-    // ============================================================
-    // Resource Hints
-    // ============================================================
-
     const { links, preload } = generateResourceHints(pageType, data);
 
-    const seoScore = calculateSEOScore(
-      metadata,
-      structuredData,
-      pageType,
-      warnings,
-      suggestions
-    );
+    const seoScore = calculateSEOScore(metadata, structuredData, pageType, warnings, suggestions);
 
     const metrics = trackSEOGeneration({
       pageType: pageType.type,
@@ -351,49 +278,49 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
       hreflang,
       pageType,
       links,
+      preconnect: SEO_CONFIG.preconnect || [],
+      dnsPrefetch: SEO_CONFIG.dnsPrefetch || [],
       preload,
-      preconnect: (SEO_CONFIG.preconnect || []) as string[],
-      dnsPrefetch: (SEO_CONFIG.dnsPrefetch || []) as string[],
-      prefetch: (SEO_CONFIG.prefetch || []) as string[],
-      prerender: (SEO_CONFIG.prerender || []) as string[],
-      modulePreload: (SEO_CONFIG.modulePreload || []) as string[],
+      prefetch: SEO_CONFIG.prefetch || [],
+      prerender: SEO_CONFIG.prerender || [],
+      modulePreload: SEO_CONFIG.modulePreload || [],
       metrics: { ...metrics, seoScore },
       warnings,
       suggestions,
     };
 
-    seoCache.set(cacheKey, {
-      output,
-      timestamp: Date.now(),
-      hits: 1,
-    });
-
+    seoCache.set(cacheKey, { output, timestamp: Date.now(), hits: 1 });
     cleanupCache();
 
     return output;
   } catch (err) {
     console.error("SEO generation failed:", err);
-
     return {
       metadata: {
-        title: SEO_CONFIG.defaultTitle,
+        title: SEO_CONFIG.siteName,
         description: SEO_CONFIG.defaultDescription,
       },
       structuredData: [],
       canonical: SEO_CONFIG.siteUrl,
       hreflang: { [SEO_CONFIG.defaultLocale]: SEO_CONFIG.siteUrl },
-      pageType: {
-        type: "unknown",
-        hierarchy: ["unknown"],
-        metadata: {},
-        matches: null,
-      },
+      pageType: { type: "unknown", hierarchy: ["unknown"], metadata: {}, matches: null },
       preconnect: [],
       dnsPrefetch: [],
       preload: [],
       prefetch: [],
       prerender: [],
       modulePreload: [],
+      metrics: {
+        pageType: "unknown",
+        generationTime: 0,
+        metadataSize: 0,
+        schemaCount: 0,
+        cacheHit: false,
+        warnings: 0,
+        suggestions: 0,
+        seoScore: 0,
+        timestamp: Date.now(),
+      },
     };
   }
 });
@@ -420,11 +347,7 @@ function enhanceMetadata(
   else if (description) metadata.description = description;
 
   metadata.keywords = expandKeywords(
-    [
-      ...(keywords || []),
-      ...(SEO_CONFIG.defaultKeywords || []),
-      ...(SEO_CONFIG.secondaryKeywords || []),
-    ],
+    [...(keywords || []), ...(SEO_CONFIG.defaultKeywords || []), ...(SEO_CONFIG.secondaryKeywords || [])],
     tags
   );
 
@@ -446,7 +369,6 @@ function calculateSEOScore(
   suggestions: string[]
 ) {
   let score = 50;
-
   const titleLen = metadata.title?.length || 0;
   const descLen = metadata.description?.length || 0;
 
@@ -454,10 +376,8 @@ function calculateSEOScore(
   if (descLen >= 120 && descLen <= 160) score += 10;
   if (metadata.keywords?.length >= 10) score += 10;
   if (schema.length > 2) score += 15;
-
   if (metadata.openGraph) score += 10;
   if (metadata.twitter) score += 5;
-
   if (pageType.type === "home") score += 5;
 
   score -= warnings.length * 2;
@@ -474,17 +394,10 @@ function generateResourceHints(pageType: PageTypeResult, data: any) {
   const links: any[] = [];
   const preload: string[] = [];
 
-  SEO_CONFIG.preconnect?.forEach((url) =>
-    links.push({ rel: "preconnect", href: url })
-  );
+  SEO_CONFIG.preconnect?.forEach((url) => links.push({ rel: "preconnect", href: url }));
+  SEO_CONFIG.dnsPrefetch?.forEach((url) => links.push({ rel: "dns-prefetch", href: url }));
 
-  SEO_CONFIG.dnsPrefetch?.forEach((url) =>
-    links.push({ rel: "dns-prefetch", href: url })
-  );
-
-  if (pageType.type === "home" && data?.image) {
-    preload.push(data.image);
-  }
+  if (pageType.type === "home" && data?.image) preload.push(data.image);
 
   return { links, preload };
 }
@@ -495,17 +408,13 @@ function generateResourceHints(pageType: PageTypeResult, data: any) {
 
 export function clearSEOCache(pattern?: RegExp) {
   if (!pattern) return seoCache.clear();
-
   for (const key of seoCache.keys()) {
     if (pattern.test(key)) seoCache.delete(key);
   }
 }
 
 export function getSEOCacheStats() {
-  return {
-    size: seoCache.size,
-    hits: Array.from(seoCache.values()).reduce((a, b) => a + b.hits, 0),
-  };
+  return { size: seoCache.size, hits: Array.from(seoCache.values()).reduce((a, b) => a + b.hits, 0) };
 }
 
 export default buildSEO;
