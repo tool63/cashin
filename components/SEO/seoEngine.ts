@@ -1,24 +1,31 @@
 // components/SEO/seoEngine.ts
-// CASHOG ULTRA-PREMIUM CORPORATE SEO ENGINE
 
 import { cache } from "react";
-import { detectPageType, PageTypeResult, isPaginated } from "./pageTypes";
+import { PageTypeResult, detectPageType, isPaginated } from "./pageTypes";
 import { buildMetadata, MetadataInput } from "./metadata";
 import { buildStructuredData, SchemaInput } from "./schema";
 import { buildCanonical, CanonicalOptions } from "./canonical";
 import { buildHreflang, HreflangOptions } from "./hreflang";
 import { SEO_CONFIG } from "./seoConfig";
-import { trackSEOGeneration, SEOAnalytics } from "./seoAnalytics";
+import { SEOAnalytics, trackSEOGeneration } from "./seoAnalytics";
 
-/* -------------------------------------------------- */
-/* TYPES */
-/* -------------------------------------------------- */
+// ============================================================
+// Types
+// ============================================================
 
 export interface SEOInput {
   route: string;
   locale?: string;
   data?: Record<string, any>;
   queryParams?: Record<string, string>;
+
+  noindex?: boolean;
+  nofollow?: boolean;
+  priority?: number;
+
+  customCanonical?: string;
+  skipHreflang?: boolean;
+  skipSchema?: boolean;
 
   title?: string;
   description?: string;
@@ -29,13 +36,9 @@ export interface SEOInput {
 
   tags?: string[];
 
-  noindex?: boolean;
-  nofollow?: boolean;
-
-  skipSchema?: boolean;
-  skipHreflang?: boolean;
-
-  priority?: number;
+  author?: string;
+  publishedAt?: string;
+  updatedAt?: string;
 
   openGraph?: Record<string, any>;
   twitter?: Record<string, any>;
@@ -48,29 +51,58 @@ export interface SEOOutput {
   hreflang: Record<string, string>;
   pageType: PageTypeResult;
 
+  links?: any[];
+
+  preconnect?: readonly string[];
+  dnsPrefetch?: readonly string[];
+  preload?: readonly string[];
+  prefetch?: readonly string[];
+  prerender?: readonly string[];
+  modulePreload?: readonly string[];
+
   metrics?: SEOAnalytics & { seoScore?: number };
   warnings?: string[];
+  suggestions?: string[];
 }
 
-/* -------------------------------------------------- */
-/* CACHE */
-/* -------------------------------------------------- */
+// ============================================================
+// Cache
+// ============================================================
 
-const seoCache = new Map<string, SEOOutput>();
-const CACHE_TTL = 60 * 60 * 1000;
+const seoCache = new Map<
+  string,
+  { output: SEOOutput; timestamp: number; hits: number }
+>();
 
-/* -------------------------------------------------- */
-/* KEYWORD EXPANSION */
-/* -------------------------------------------------- */
+const CACHE_TTL = 1000 * 60 * 60;
+const MAX_CACHE_SIZE = 500;
 
-function expandKeywords(base: string[], tags: string[] = []) {
+function cleanupCache() {
+  if (seoCache.size <= MAX_CACHE_SIZE) return;
+
+  const sorted = Array.from(seoCache.entries()).sort(
+    (a, b) => a[1].timestamp - b[1].timestamp
+  );
+
+  while (seoCache.size > MAX_CACHE_SIZE * 0.8) {
+    const item = sorted.shift();
+    if (item) seoCache.delete(item[0]);
+  }
+}
+
+// ============================================================
+// Keyword Expansion
+// ============================================================
+
+function expandKeywords(base: string[], tags: string[]) {
   const set = new Set<string>();
 
   base.forEach((k) => set.add(k));
+  tags.forEach((k) => set.add(k));
+
   tags.forEach((tag) => {
-    set.add(tag);
-    set.add(`earn ${tag}`);
     set.add(`${tag} rewards`);
+    set.add(`earn ${tag}`);
     set.add(`${tag} online`);
     set.add(`${tag} fast`);
   });
@@ -78,87 +110,70 @@ function expandKeywords(base: string[], tags: string[] = []) {
   return Array.from(set);
 }
 
-/* -------------------------------------------------- */
-/* INTELLIGENT LONG-TAIL SEO GENERATOR */
-/* -------------------------------------------------- */
+// ============================================================
+// Intelligent Long-Tail SEO Generator
+// ============================================================
 
-function generateLongTailSEO(route: string) {
+function generateLongTailSEO(route: string, primary: string, tags: string[]) {
   const site = SEO_CONFIG.siteName || "Cashog";
 
-  const routes: Record<string, { title: string; description: string }> = {
+  const map: Record<string, { title: string; description: string }> = {
     "/": {
-      title:
-        `Earn Money Online Fast | Complete Tasks, Surveys & Games | Get Paid Daily | ${site}`,
+      title: `Earn Money Online Fast | Complete Tasks, Surveys & Games | ${site}`,
       description:
-        `${site} is a premium rewards platform where users earn money online by completing surveys, playing games, testing apps, and finishing offers.`,
+        `${site} is a rewards platform where users earn real money online by completing surveys, playing games, testing apps, and finishing offers.`,
     },
 
     "/how-it-works": {
-      title:
-        `How ${site} Works | Complete Tasks, Play Games & Earn Money Online`,
+      title: `How ${site} Works | Earn Money Completing Tasks`,
       description:
-        `Learn how ${site} works step-by-step. Complete simple tasks, surveys, and games to earn rewards and withdraw via PayPal, crypto or gift cards.`,
+        `Learn how ${site} works step-by-step. Complete surveys, tasks, and games to earn real money online.`,
     },
 
     "/play-games": {
-      title:
-        `Play Games & Earn Money Online | Get Paid for Gaming | ${site}`,
+      title: `Play Games & Earn Money Online | ${site}`,
       description:
-        `Play mobile and PC games to earn real money online. ${site} rewards players for completing levels, testing apps and gaming offers.`,
+        `Play mobile and PC games to earn money online. ${site} rewards players for completing levels and testing apps.`,
     },
 
     "/surveys": {
-      title:
-        `Paid Surveys Online | Earn Cash Completing Surveys | ${site}`,
+      title: `Paid Surveys Online | Earn Cash Completing Surveys | ${site}`,
       description:
-        `Complete high-paying surveys and earn real money online. ${site} connects users with top survey providers worldwide.`,
+        `Complete high-paying surveys and earn real money online on ${site}.`,
+    },
+
+    "/offers": {
+      title: `High Paying Offers | Complete Tasks & Earn Rewards | ${site}`,
+      description:
+        `Discover high-paying offers. Install apps and complete tasks to earn rewards instantly.`,
     },
   };
 
-  if (routes[route]) return routes[route];
+  if (map[route]) return map[route];
 
-  /* fallback generator */
+  const keyword = route.replace(/\//g, " ").replace(/-/g, " ").trim();
 
-  const keyword = route.replace(/\//g, " ").trim();
+  const formatted = keyword
+    .split(" ")
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
 
-  const title =
-    `Earn Money Online | ${keyword
-      .split(" ")
-      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-      .join(" ")} | ${site}`;
+  const title = `${formatted} | ${primary} & Earn Rewards | ${site}`;
 
-  const description =
-    `Complete ${keyword} tasks, surveys and offers to earn money online on ${site}.`;
+  const description = `Complete ${keyword}, surveys, games, and tasks to earn money online on ${site}.`;
 
   return { title, description };
 }
 
-/* -------------------------------------------------- */
-/* SEO SCORE */
-/* -------------------------------------------------- */
-
-function calculateSEOScore(metadata: any, schema: object[]) {
-  let score = 50;
-
-  const titleLength = metadata.title?.length || 0;
-  const descLength = metadata.description?.length || 0;
-
-  if (titleLength >= 40 && titleLength <= 60) score += 15;
-  if (descLength >= 120 && descLength <= 160) score += 15;
-  if (schema.length > 0) score += 10;
-  if (metadata.keywords?.length > 8) score += 10;
-  if (metadata.openGraph) score += 10;
-  if (metadata.twitter) score += 5;
-
-  return Math.min(score, 100);
-}
-
-/* -------------------------------------------------- */
-/* MAIN SEO ENGINE */
-/* -------------------------------------------------- */
+// ============================================================
+// SEO Engine
+// ============================================================
 
 export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
-  const start = Date.now();
+  const startTime = Date.now();
+
+  const warnings: string[] = [];
+  const suggestions: string[] = [];
 
   const {
     route,
@@ -166,37 +181,42 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
     data = {},
     queryParams = {},
 
+    noindex = false,
+    nofollow = false,
+
+    priority = 0.7,
+
+    customCanonical,
+    skipHreflang = false,
+    skipSchema = false,
+
+    tags = [],
+
+    author,
+    publishedAt,
+    updatedAt,
+
     title,
     description,
-    keywords = [],
-    tags = [],
+    keywords,
 
     customTitle,
     customDescription,
-
-    skipSchema = false,
-    skipHreflang = false,
-
-    noindex = false,
-    nofollow = false,
 
     openGraph,
     twitter,
   } = input;
 
-  const cacheKey = `${route}:${locale}`;
+  const cacheKey = `${route}:${locale}:${JSON.stringify(queryParams)}`;
 
-  if (seoCache.has(cacheKey)) {
-    return seoCache.get(cacheKey)!;
+  const cached = seoCache.get(cacheKey);
+
+  if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+    cached.hits++;
+    return cached.output;
   }
 
-  const warnings: string[] = [];
-
   try {
-    /* -------------------------------------------------- */
-    /* PAGE TYPE */
-    /* -------------------------------------------------- */
-
     const pageType =
       detectPageType(route, queryParams) ||
       ({
@@ -206,109 +226,122 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
         matches: null,
       } as PageTypeResult);
 
-    /* -------------------------------------------------- */
-    /* CANONICAL */
-    /* -------------------------------------------------- */
+    const isProduction = process.env.NODE_ENV === "production";
+
+    const shouldIndex =
+      !noindex &&
+      !isPaginated(route) &&
+      isProduction &&
+      !route.includes("preview");
+
+    const shouldFollow = !nofollow;
+
+    // ============================================================
+    // Canonical
+    // ============================================================
 
     const canonicalOptions: CanonicalOptions = {
       includeQuery: false,
       trailingSlash: true,
+      removeParams: ["utm_", "ref", "source", "fbclid", "gclid"],
       lowercase: true,
       secure: true,
       normalizeSlashes: true,
     };
 
-    const canonical = buildCanonical(route, canonicalOptions);
+    const canonical =
+      customCanonical || buildCanonical(route, canonicalOptions);
 
-    /* -------------------------------------------------- */
-    /* HREFLANG */
-    /* -------------------------------------------------- */
+    // ============================================================
+    // Hreflang
+    // ============================================================
 
     const hreflang = !skipHreflang
       ? buildHreflang(route, {
           includeDefault: true,
           includeXDefault: true,
           locales: [...SEO_CONFIG.supportedLocales],
+          trailingSlash: true,
         } as HreflangOptions)
       : {};
 
-    /* -------------------------------------------------- */
-    /* METADATA BASE */
-    /* -------------------------------------------------- */
+    // ============================================================
+    // Metadata
+    // ============================================================
 
     const metadataInput: MetadataInput = {
       pageType: pageType.type,
       route,
       locale,
       canonical,
-      data,
+      data: { ...data, tags, author, publishedAt, updatedAt },
       queryParams,
-      noindex,
-      nofollow,
+      noindex: !shouldIndex,
+      nofollow: !shouldFollow,
       siteName: SEO_CONFIG.siteName,
     };
 
     let metadata = buildMetadata(metadataInput);
 
-    /* -------------------------------------------------- */
-    /* AUTO LONG-TAIL */
-    /* -------------------------------------------------- */
+    // ============================================================
+    // Automatic SEO
+    // ============================================================
 
-    const autoSEO = generateLongTailSEO(route);
-
-    metadata.title =
-      customTitle ||
-      title ||
-      autoSEO.title ||
-      SEO_CONFIG.defaultTitle;
-
-    metadata.description =
-      customDescription ||
-      description ||
-      autoSEO.description ||
-      SEO_CONFIG.defaultDescription;
-
-    metadata.keywords = expandKeywords(
-      [...keywords, ...(SEO_CONFIG.defaultKeywords || [])],
+    const autoSEO = generateLongTailSEO(
+      route,
+      SEO_CONFIG.primaryKeyword,
       tags
     );
 
-    if (openGraph) metadata.openGraph = openGraph;
-    if (twitter) metadata.twitter = twitter;
+    metadata = enhanceMetadata(
+      metadata,
+      tags,
+      title,
+      description,
+      keywords,
+      customTitle || autoSEO.title,
+      customDescription || autoSEO.description,
+      openGraph,
+      twitter
+    );
 
-    /* -------------------------------------------------- */
-    /* STRUCTURED DATA */
-    /* -------------------------------------------------- */
+    // ============================================================
+    // Schema
+    // ============================================================
 
     const structuredData = !skipSchema
       ? buildStructuredData({
           pageType: pageType.type,
           route,
+          data: { ...data, tags, author, publishedAt, updatedAt },
           canonical,
-          data,
           metadata,
           pageTypeHierarchy: pageType.hierarchy,
         } as SchemaInput)
       : [];
 
-    /* -------------------------------------------------- */
-    /* SEO SCORE */
-    /* -------------------------------------------------- */
+    // ============================================================
+    // Resource Hints
+    // ============================================================
 
-    const seoScore = calculateSEOScore(metadata, structuredData);
+    const { links, preload } = generateResourceHints(pageType, data);
 
-    /* -------------------------------------------------- */
-    /* METRICS */
-    /* -------------------------------------------------- */
+    const seoScore = calculateSEOScore(
+      metadata,
+      structuredData,
+      pageType,
+      warnings,
+      suggestions
+    );
 
     const metrics = trackSEOGeneration({
       pageType: pageType.type,
-      generationTime: Date.now() - start,
+      generationTime: Date.now() - startTime,
       metadataSize: JSON.stringify(metadata).length,
       schemaCount: structuredData.length,
       cacheHit: false,
       warnings: warnings.length,
-      suggestions: 0,
+      suggestions: suggestions.length,
     });
 
     const output: SEOOutput = {
@@ -317,15 +350,22 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
       canonical,
       hreflang,
       pageType,
+      links,
+      preload,
       metrics: { ...metrics, seoScore },
-      warnings,
     };
 
-    seoCache.set(cacheKey, output);
+    seoCache.set(cacheKey, {
+      output,
+      timestamp: Date.now(),
+      hits: 1,
+    });
+
+    cleanupCache();
 
     return output;
-  } catch (error) {
-    console.error("SEO engine failed:", error);
+  } catch (err) {
+    console.error("SEO generation failed:", err);
 
     return {
       metadata: {
@@ -334,16 +374,125 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
       },
       structuredData: [],
       canonical: SEO_CONFIG.siteUrl,
-      hreflang: {},
+      hreflang: { [SEO_CONFIG.defaultLocale]: SEO_CONFIG.siteUrl },
       pageType: {
         type: "unknown",
         hierarchy: ["unknown"],
         metadata: {},
         matches: null,
       },
-      warnings: ["SEO generation failed"],
     };
   }
 });
+
+// ============================================================
+// Metadata Enhancer
+// ============================================================
+
+function enhanceMetadata(
+  metadata: any,
+  tags: string[],
+  title?: string,
+  description?: string,
+  keywords?: string[],
+  customTitle?: string,
+  customDescription?: string,
+  openGraph?: Record<string, any>,
+  twitter?: Record<string, any>
+) {
+  if (customTitle) metadata.title = customTitle;
+  else if (title) metadata.title = title;
+
+  if (customDescription) metadata.description = customDescription;
+  else if (description) metadata.description = description;
+
+  metadata.keywords = expandKeywords(
+    [
+      ...(keywords || []),
+      ...(SEO_CONFIG.defaultKeywords || []),
+      ...(SEO_CONFIG.secondaryKeywords || []),
+    ],
+    tags
+  );
+
+  if (openGraph) metadata.openGraph = openGraph;
+  if (twitter) metadata.twitter = twitter;
+
+  return metadata;
+}
+
+// ============================================================
+// SEO Score
+// ============================================================
+
+function calculateSEOScore(
+  metadata: any,
+  schema: object[],
+  pageType: PageTypeResult,
+  warnings: string[],
+  suggestions: string[]
+) {
+  let score = 50;
+
+  const titleLen = metadata.title?.length || 0;
+  const descLen = metadata.description?.length || 0;
+
+  if (titleLen >= 40 && titleLen <= 60) score += 10;
+  if (descLen >= 120 && descLen <= 160) score += 10;
+  if (metadata.keywords?.length >= 10) score += 10;
+  if (schema.length > 2) score += 15;
+
+  if (metadata.openGraph) score += 10;
+  if (metadata.twitter) score += 5;
+
+  if (pageType.type === "home") score += 5;
+
+  score -= warnings.length * 2;
+  score -= suggestions.length;
+
+  return Math.min(Math.max(score, 0), 100);
+}
+
+// ============================================================
+// Resource Hints
+// ============================================================
+
+function generateResourceHints(pageType: PageTypeResult, data: any) {
+  const links: any[] = [];
+  const preload: string[] = [];
+
+  SEO_CONFIG.preconnect?.forEach((url) =>
+    links.push({ rel: "preconnect", href: url })
+  );
+
+  SEO_CONFIG.dnsPrefetch?.forEach((url) =>
+    links.push({ rel: "dns-prefetch", href: url })
+  );
+
+  if (pageType.type === "home" && data?.image) {
+    preload.push(data.image);
+  }
+
+  return { links, preload };
+}
+
+// ============================================================
+// Cache Utilities
+// ============================================================
+
+export function clearSEOCache(pattern?: RegExp) {
+  if (!pattern) return seoCache.clear();
+
+  for (const key of seoCache.keys()) {
+    if (pattern.test(key)) seoCache.delete(key);
+  }
+}
+
+export function getSEOCacheStats() {
+  return {
+    size: seoCache.size,
+    hits: Array.from(seoCache.values()).reduce((a, b) => a + b.hits, 0),
+  };
+}
 
 export default buildSEO;
