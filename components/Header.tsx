@@ -43,7 +43,7 @@ export default function Header({ className }: HeaderProps) {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 w-full z-30 backdrop-blur-md border-b ${borderColor} ${className || ""}`}
+      className={`fixed top-0 left-0 w-full z-30 border-b ${borderColor} ${className || ""}`}
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between text-black dark:text-white">
 
