@@ -1,27 +1,13 @@
+// app/[lang]/core/detector.ts
+
 import { cookies, headers } from "next/headers";
 
-/* ---------------- Supported Languages ---------------- */
-
-export const supportedLanguages = ["en", "es", "fr", "de", "pt"] as const;
-export type SupportedLang = (typeof supportedLanguages)[number];
-
-export const defaultLanguage: SupportedLang = "en";
-
-/* ---------------- Country → Language Map ---------------- */
-
-const countryLangMap: Record<string, SupportedLang> = {
-  US: "en",
-  GB: "en",
-  CA: "en",
-  AU: "en",
-  ES: "es",
-  MX: "es",
-  BR: "pt",
-  DE: "de",
-  FR: "fr",
-};
-
-/* ---------------- Utilities ---------------- */
+import {
+  supportedLanguages,
+  defaultLanguage,
+  countryLangMap,
+  SupportedLang,
+} from "@/app/core/i18n/config";
 
 function normalizeLanguage(
   lang: string | undefined | null
@@ -35,108 +21,63 @@ function normalizeLanguage(
     : null;
 }
 
-/* ---------------- Detector ---------------- */
-
 export class LanguageDetector {
   private _detected: SupportedLang | null = null;
-
-  constructor(
-    private logDetection: ((lang: SupportedLang, source: string) => void) | null =
-      null
-  ) {}
 
   detect(): SupportedLang {
     const cookieStore = cookies();
 
-    /* 1️⃣ Cookie */
+    /* Cookie */
     const cookieLang = normalizeLanguage(cookieStore.get("lang")?.value);
 
     if (cookieLang) {
-      this._log(cookieLang, "cookie");
       this._detected = cookieLang;
       return cookieLang;
     }
 
-    /* 2️⃣ Accept Language */
-    const acceptLangHeader = headers().get("accept-language");
+    /* Accept-Language */
+    const acceptLang = headers().get("accept-language");
 
-    if (acceptLangHeader) {
-      const langs = acceptLangHeader
-        .split(",")
-        .map((l) => l.split(";")[0].trim());
+    if (acceptLang) {
+      const langs = acceptLang.split(",").map((l) => l.split(";")[0]);
 
       for (const lang of langs) {
         const normalized = normalizeLanguage(lang);
 
         if (normalized) {
-          this._log(normalized, "accept-language");
           this._detected = normalized;
           return normalized;
         }
       }
     }
 
-    /* 3️⃣ CDN / Geo Headers */
-
-    const countryCode =
+    /* Geo Country */
+    const country =
       headers().get("cf-ipcountry") ||
-      headers().get("x-vercel-ip-country") ||
-      headers().get("cloudfront-viewer-country") ||
-      headers().get("x-country-code");
+      headers().get("x-vercel-ip-country");
 
-    if (countryCode && countryLangMap[countryCode.toUpperCase()]) {
-      const geoLang = countryLangMap[countryCode.toUpperCase()];
-      this._log(geoLang, "geo-ip");
+    if (country && countryLangMap[country]) {
+      const geoLang = countryLangMap[country];
+
       this._detected = geoLang;
+
       return geoLang;
     }
-
-    /* 4️⃣ Default */
-
-    this._log(defaultLanguage, "default");
 
     this._detected = defaultLanguage;
 
     return defaultLanguage;
   }
 
-  setCookie(lang: string | SupportedLang, maxAgeDays = 365) {
-    const normalized = normalizeLanguage(lang);
-
-    if (!normalized) return;
-
-    cookies().set("lang", normalized, {
-      path: "/",
-      maxAge: 60 * 60 * 24 * maxAgeDays,
-      sameSite: "lax",
-      httpOnly: false,
-    });
-  }
-
   get detected(): SupportedLang {
-    if (!this._detected) return this.detect();
+    if (!this._detected) {
+      return this.detect();
+    }
 
     return this._detected;
   }
-
-  private _log(lang: SupportedLang, source: string) {
-    if (this.logDetection) {
-      this.logDetection(lang, source);
-    } else {
-      console.log(`[LanguageDetector] ${lang} (${source})`);
-    }
-  }
 }
-
-/* ---------------- Helpers ---------------- */
 
 export function detectLanguage(): SupportedLang {
   return new LanguageDetector().detect();
-}
-
-export function setLanguageCookie(
-  lang: string | SupportedLang,
-  maxAgeDays?: number
-) {
-  new LanguageDetector().setCookie(lang, maxAgeDays);
 }
