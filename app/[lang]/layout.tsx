@@ -35,7 +35,7 @@ export default function LangLayout({
 
   return (
     <html lang={lang}>
-      <body>
+      <body className="bg-transparent">
 
         <Background />
 
