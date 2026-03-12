@@ -12,6 +12,7 @@ import SeoRenderer from "@/components/SEO/SeoRenderer";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
 import { SEOOutput } from "@/components/SEO/seoEngine";
 
+// Layout props can only be children + params
 interface LangLayoutProps {
   children: ReactNode;
   params: { lang: string };
@@ -93,29 +94,24 @@ export default function LangLayout({ children, params }: LangLayoutProps) {
 
   return (
     <>
-      {/* Render default SEO */}
+      {/* Default SEO */}
       <SeoRenderer seo={seo} />
 
-      {/* GLOBAL BACKGROUND */}
+      {/* Background */}
       <Background />
 
       <RootProviders>
         <div className="flex flex-col min-h-screen relative z-10">
 
-          {/* HEADER */}
           <Header className="border-b border-theme bg-transparent" />
 
-          {/* MAIN CONTENT */}
           <main className="flex-1 w-full max-w-7xl mx-auto px-6 pt-24 pb-16">
             {children}
           </main>
 
-          {/* FOOTER */}
           <Footer className="bg-transparent" />
-
         </div>
 
-        {/* FLOATING CTA */}
         <div className="fixed bottom-6 right-6 z-50">
           <FloatingCTA />
         </div>
