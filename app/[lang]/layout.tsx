@@ -62,12 +62,13 @@ const defaultSeo: SEOOutput = {
     matches: null,
   },
   links: [],
-  preconnect: SEO_CONFIG.preconnect || [],
-  dnsPrefetch: SEO_CONFIG.dnsPrefetch || [],
+  // ✅ Cast readonly arrays to mutable string[]
+  preconnect: (SEO_CONFIG.preconnect || []) as string[],
+  dnsPrefetch: (SEO_CONFIG.dnsPrefetch || []) as string[],
   preload: [],
-  prefetch: [],
-  prerender: [],
-  modulePreload: [],
+  prefetch: (SEO_CONFIG.prefetch || []) as string[],
+  prerender: (SEO_CONFIG.prerender || []) as string[],
+  modulePreload: (SEO_CONFIG.modulePreload || []) as string[],
   metrics: {
     pageType: "unknown",
     generationTime: 0,
@@ -102,7 +103,6 @@ export default function LangLayout({ children, params }: LangLayoutProps) {
 
       <RootProviders>
         <div className="flex flex-col min-h-screen relative z-10">
-
           <Header className="border-b border-theme bg-transparent" />
 
           <main className="flex-1 w-full max-w-7xl mx-auto px-6 pt-24 pb-16">
