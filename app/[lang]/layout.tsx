@@ -1,6 +1,5 @@
 // app/[lang]/layout.tsx
 
-import "@/styles/globals.css";
 import { ReactNode } from "react";
 
 import RootProviders from "./providers/RootProviders";
@@ -82,11 +81,9 @@ const defaultSeo: SEOOutput = {
   },
 };
 
-// --------------------- Layout ---------------------
 export default function LangLayout({ children, params }: LangLayoutProps) {
   const lang = params?.lang || SEO_CONFIG.defaultLocale || "en";
 
-  // Language-based SEO title
   const seo: SEOOutput = {
     ...defaultSeo,
     metadata: {
@@ -96,41 +93,35 @@ export default function LangLayout({ children, params }: LangLayoutProps) {
   };
 
   return (
-    <html lang={lang} suppressHydrationWarning>
-      <head>
-        <SeoRenderer seo={seo} />
-      </head>
+    <>
+      <SeoRenderer seo={seo} />
 
-      <body className="relative text-black dark:text-white antialiased">
-        
-        {/* GLOBAL BACKGROUND */}
-        <Background />
+      {/* GLOBAL BACKGROUND */}
+      <Background />
 
-        <RootProviders>
-          
-          <div className="flex flex-col min-h-screen relative z-10">
-            
-            {/* HEADER */}
-            <Header className="border-b border-theme bg-transparent" />
+      <RootProviders>
 
-            {/* MAIN CONTENT */}
-            <main className="flex-1 w-full max-w-7xl mx-auto px-6 pt-24 pb-16">
-              {children}
-            </main>
+        <div className="flex flex-col min-h-screen relative z-10">
 
-            {/* FOOTER */}
-            <Footer className="bg-transparent" />
+          {/* HEADER */}
+          <Header className="border-b border-theme bg-transparent" />
 
-          </div>
+          {/* MAIN CONTENT */}
+          <main className="flex-1 w-full max-w-7xl mx-auto px-6 pt-24 pb-16">
+            {children}
+          </main>
 
-          {/* FLOATING CTA */}
-          <div className="fixed bottom-6 right-6 z-50">
-            <FloatingCTA />
-          </div>
+          {/* FOOTER */}
+          <Footer className="bg-transparent" />
 
-        </RootProviders>
+        </div>
 
-      </body>
-    </html>
+        {/* FLOATING CTA */}
+        <div className="fixed bottom-6 right-6 z-50">
+          <FloatingCTA />
+        </div>
+
+      </RootProviders>
+    </>
   );
 }
