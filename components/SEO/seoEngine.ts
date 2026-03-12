@@ -1,5 +1,3 @@
-// components/SEO/seoEngine.ts
-
 import { cache } from "react";
 import { PageTypeResult, detectPageType, isPaginated } from "./pageTypes";
 import { buildMetadata, MetadataInput } from "./metadata";
@@ -7,7 +5,6 @@ import { buildStructuredData, SchemaInput } from "./schema";
 import { buildCanonical, CanonicalOptions } from "./canonical";
 import { buildHreflang, HreflangOptions } from "./hreflang";
 import { SEO_CONFIG } from "./seoConfig";
-import { SEOAnalytics, trackSEOGeneration } from "./seoAnalytics";
 
 // ============================================================
 // Types
@@ -52,15 +49,9 @@ export interface SEOOutput {
   pageType: PageTypeResult;
 
   links?: any[];
+  preload?: string[];
 
-  preconnect?: readonly string[];
-  dnsPrefetch?: readonly string[];
-  preload?: readonly string[];
-  prefetch?: readonly string[];
-  prerender?: readonly string[];
-  modulePreload?: readonly string[];
-
-  metrics?: SEOAnalytics & { seoScore?: number };
+  metrics?: Record<string, any>;
   warnings?: string[];
   suggestions?: string[];
 }
@@ -120,32 +111,23 @@ function generateLongTailSEO(route: string, primary: string, tags: string[]) {
   const map: Record<string, { title: string; description: string }> = {
     "/": {
       title: `Earn Money Online Fast | Complete Tasks, Surveys & Games | ${site}`,
-      description:
-        `${site} is a rewards platform where users earn real money online by completing surveys, playing games, testing apps, and finishing offers.`,
+      description: `${site} is a rewards platform where users earn real money online by completing surveys, playing games, testing apps, and finishing offers.`,
     },
-
     "/how-it-works": {
       title: `How ${site} Works | Earn Money Completing Tasks`,
-      description:
-        `Learn how ${site} works step-by-step. Complete surveys, tasks, and games to earn real money online.`,
+      description: `Learn how ${site} works step-by-step. Complete surveys, tasks, and games to earn real money online.`,
     },
-
     "/play-games": {
       title: `Play Games & Earn Money Online | ${site}`,
-      description:
-        `Play mobile and PC games to earn money online. ${site} rewards players for completing levels and testing apps.`,
+      description: `Play mobile and PC games to earn money online. ${site} rewards players for completing levels and testing apps.`,
     },
-
     "/surveys": {
       title: `Paid Surveys Online | Earn Cash Completing Surveys | ${site}`,
-      description:
-        `Complete high-paying surveys and earn real money online on ${site}.`,
+      description: `Complete high-paying surveys and earn real money online on ${site}.`,
     },
-
     "/offers": {
       title: `High Paying Offers | Complete Tasks & Earn Rewards | ${site}`,
-      description:
-        `Discover high-paying offers. Install apps and complete tasks to earn rewards instantly.`,
+      description: `Discover high-paying offers. Install apps and complete tasks to earn rewards instantly.`,
     },
   };
 
@@ -159,7 +141,6 @@ function generateLongTailSEO(route: string, primary: string, tags: string[]) {
     .join(" ");
 
   const title = `${formatted} | ${primary} & Earn Rewards | ${site}`;
-
   const description = `Complete ${keyword}, surveys, games, and tasks to earn money online on ${site}.`;
 
   return { title, description };
@@ -180,37 +161,26 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
     locale = SEO_CONFIG.defaultLocale,
     data = {},
     queryParams = {},
-
     noindex = false,
     nofollow = false,
-
-    priority = 0.7,
-
     customCanonical,
     skipHreflang = false,
     skipSchema = false,
-
     tags = [],
-
     author,
     publishedAt,
     updatedAt,
-
     title,
     description,
     keywords,
-
     customTitle,
     customDescription,
-
     openGraph,
     twitter,
   } = input;
 
   const cacheKey = `${route}:${locale}:${JSON.stringify(queryParams)}`;
-
   const cached = seoCache.get(cacheKey);
-
   if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
     cached.hits++;
     return cached.output;
@@ -229,11 +199,7 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
     const isProduction = process.env.NODE_ENV === "production";
 
     const shouldIndex =
-      !noindex &&
-      !isPaginated(route) &&
-      isProduction &&
-      !route.includes("preview");
-
+      !noindex && !isPaginated(route) && isProduction && !route.includes("preview");
     const shouldFollow = !nofollow;
 
     // ============================================================
@@ -249,8 +215,7 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
       normalizeSlashes: true,
     };
 
-    const canonical =
-      customCanonical || buildCanonical(route, canonicalOptions);
+    const canonical = customCanonical || buildCanonical(route, canonicalOptions);
 
     // ============================================================
     // Hreflang
@@ -287,11 +252,7 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
     // Automatic SEO
     // ============================================================
 
-    const autoSEO = generateLongTailSEO(
-      route,
-      SEO_CONFIG.primaryKeyword,
-      tags
-    );
+    const autoSEO = generateLongTailSEO(route, SEO_CONFIG.primaryKeyword, tags);
 
     metadata = enhanceMetadata(
       metadata,
@@ -334,7 +295,11 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
       suggestions
     );
 
-    const metrics = trackSEOGeneration({
+    // ============================================================
+    // Metrics (client-side only)
+    // ============================================================
+
+    let metrics: any = {
       pageType: pageType.type,
       generationTime: Date.now() - startTime,
       metadataSize: JSON.stringify(metadata).length,
@@ -342,7 +307,14 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
       cacheHit: false,
       warnings: warnings.length,
       suggestions: suggestions.length,
-    });
+    };
+
+    // Only track SEO analytics on client-side
+    if (typeof window !== "undefined") {
+      import("./seoAnalytics").then((mod) => {
+        if (mod.trackSEOGeneration) mod.trackSEOGeneration(metrics);
+      });
+    }
 
     const output: SEOOutput = {
       metadata,
@@ -353,20 +325,16 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
       links,
       preload,
       metrics: { ...metrics, seoScore },
+      warnings,
+      suggestions,
     };
 
-    seoCache.set(cacheKey, {
-      output,
-      timestamp: Date.now(),
-      hits: 1,
-    });
-
+    seoCache.set(cacheKey, { output, timestamp: Date.now(), hits: 1 });
     cleanupCache();
 
     return output;
   } catch (err) {
     console.error("SEO generation failed:", err);
-
     return {
       metadata: {
         title: SEO_CONFIG.defaultTitle,
@@ -381,6 +349,9 @@ export const buildSEO = cache(async (input: SEOInput): Promise<SEOOutput> => {
         metadata: {},
         matches: null,
       },
+      metrics: {},
+      warnings: [],
+      suggestions: [],
     };
   }
 });
@@ -444,7 +415,6 @@ function calculateSEOScore(
 
   if (metadata.openGraph) score += 10;
   if (metadata.twitter) score += 5;
-
   if (pageType.type === "home") score += 5;
 
   score -= warnings.length * 2;
