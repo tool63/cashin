@@ -14,7 +14,7 @@ import SeoRenderer from "@/components/SEO/SeoRenderer";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
 import { SEOOutput } from "@/components/SEO/seoEngine";
 
-import { supportedLanguages, defaultLanguage, normalizeLanguage } from "../lang/core/detector";
+import { supportedLanguages, defaultLanguage, normalizeLanguage } from "../[lang]/core/detector";
 
 interface LangLayoutProps {
   children: ReactNode;
