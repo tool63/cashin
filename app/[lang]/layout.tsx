@@ -17,8 +17,10 @@ import { SEOOutput } from "@/components/SEO/seoEngine";
 
 interface LangLayoutProps {
   children: ReactNode;
+  params: { lang: string }; // Next.js App Router provides this
 }
 
+// Default SEO object to prevent hydration errors
 const defaultSeo: SEOOutput = {
   metadata: {
     title: SEO_CONFIG.siteName,
@@ -53,12 +55,7 @@ const defaultSeo: SEOOutput = {
   canonical: SEO_CONFIG.siteUrl,
   hreflang: {},
   structuredData: [],
-  pageType: {
-    type: "unknown",
-    hierarchy: ["unknown"],
-    metadata: {},
-    matches: null,
-  },
+  pageType: { type: "unknown", hierarchy: ["unknown"], metadata: {}, matches: null },
   links: [],
   preconnect: SEO_CONFIG.preconnect || [],
   dnsPrefetch: SEO_CONFIG.dnsPrefetch || [],
@@ -79,43 +76,38 @@ const defaultSeo: SEOOutput = {
   },
 };
 
-export default function LangLayout({ children }: LangLayoutProps) {
+export default function LangLayout({ children, params }: LangLayoutProps) {
+  const lang = params?.lang || SEO_CONFIG.defaultLocale;
+
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <SeoRenderer seo={defaultSeo} />
-      </head>
+    <>
+      {/* Render SEO on client for hydration safety */}
+      <SeoRenderer seo={defaultSeo} />
 
-      <body className="relative text-black dark:text-white antialiased">
+      {/* Global Background */}
+      <Background />
 
-        {/* GLOBAL BACKGROUND */}
-        <Background />
+      {/* Providers */}
+      <RootProviders>
+        <div className="flex flex-col min-h-screen relative z-10">
 
-        <RootProviders>
+          {/* Header */}
+          <Header className="border-b border-theme bg-transparent" />
 
-          <div className="flex flex-col min-h-screen relative z-10">
+          {/* Main Content */}
+          <main className="flex-1 w-full max-w-7xl mx-auto px-6 pt-24 pb-16">
+            {children}
+          </main>
 
-            {/* HEADER */}
-            <Header className="border-b border-theme bg-transparent" />
+          {/* Footer */}
+          <Footer className="bg-transparent" />
+        </div>
 
-            {/* MAIN CONTENT */}
-            <main className="flex-1 w-full max-w-7xl mx-auto px-6 pt-24 pb-16">
-              {children}
-            </main>
-
-            {/* FOOTER */}
-            <Footer className="bg-transparent" />
-
-          </div>
-
-          {/* FLOATING CTA */}
-          <div className="fixed bottom-6 right-6 z-50">
-            <FloatingCTA />
-          </div>
-
-        </RootProviders>
-
-      </body>
-    </html>
+        {/* Floating CTA */}
+        <div className="fixed bottom-6 right-6 z-50">
+          <FloatingCTA />
+        </div>
+      </RootProviders>
+    </>
   );
 }
