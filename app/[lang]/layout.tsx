@@ -13,7 +13,7 @@ import SeoRenderer from "@/components/SEO/SeoRenderer";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
 import { SEOOutput } from "@/components/SEO/seoEngine";
 
-import { supportedLanguages, defaultLanguage, normalizeLanguage } from "../[lang]/core/detector";
+import { LanguageDetector, defaultLanguage } from "./core/detector";
 
 interface LangLayoutProps {
   children: ReactNode;
@@ -78,8 +78,9 @@ const defaultSeo: SEOOutput = {
 
 // --------------------- Layout Component ---------------------
 export default function LangLayout({ children, params }: LangLayoutProps) {
-  // Use language from URL params if valid, otherwise fallback
-  const lang = normalizeLanguage(params?.lang) || defaultLanguage;
+  // Detect language using server-side LanguageDetector
+  const detector = new LanguageDetector();
+  const lang = detector.detect() || defaultLanguage;
 
   // Optional: update SEO metadata per language
   const seo: SEOOutput = {
