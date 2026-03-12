@@ -1,58 +1,62 @@
-"use client"; // ensures this component only runs on the client
-
+// components/SEO/SeoRenderer.tsx
+import React from "react";
+import { SEOOutput } from "./seoEngine";
 import Head from "next/head";
-import { trackSEOGeneration } from "./seoAnalytics";
 
-type SeoProps = {
-  seo?: any;
-};
+interface SeoRendererProps {
+  seo: SEOOutput;
+}
 
-export default function SeoRenderer({ seo }: SeoProps) {
-  if (!seo) return null;
-
-  const meta = seo.metadata || {};
-  const og = meta.openGraph || {};
-  const twitter = meta.twitter || {};
-
-  // Track SEO generation on client-side only
-  if (typeof window !== "undefined") {
-    trackSEOGeneration({
-      pageType: meta.title || "unknown",
-      metadataSize: JSON.stringify(seo).length,
-      schemaCount: seo.schema?.["@graph"]?.length || 0,
-      cacheHit: false,
-      generationTime: 0,
-      timestamp: Date.now(),
-    });
-  }
+export default function SeoRenderer({ seo }: SeoRendererProps) {
+  const { metadata, canonical, preconnect, dnsPrefetch, preload } = seo;
 
   return (
     <Head>
-      <title>{meta.title}</title>
-
-      {meta.description && (
-        <meta name="description" content={meta.description} />
+      <title>{metadata.title}</title>
+      {metadata.description && (
+        <meta name="description" content={metadata.description} />
       )}
-
-      {meta.keywords && (
-        <meta name="keywords" content={meta.keywords.join(", ")} />
+      {metadata.keywords && (
+        <meta name="keywords" content={metadata.keywords.join(", ")} />
       )}
-
-      {meta.robots && <meta name="robots" content={meta.robots} />}
+      {metadata.robots && <meta name="robots" content={metadata.robots} />}
+      {metadata.viewport && <meta name="viewport" content={metadata.viewport} />}
+      {metadata.other &&
+        Object.entries(metadata.other).map(([key, value]) => (
+          <meta key={key} name={key} content={value} />
+        ))}
+      {canonical && <link rel="canonical" href={canonical} />}
+      {preconnect &&
+        preconnect.map((url) => <link key={url} rel="preconnect" href={url} />)}
+      {dnsPrefetch &&
+        dnsPrefetch.map((url) => <link key={url} rel="dns-prefetch" href={url} />)}
+      {preload &&
+        preload.map((url) => <link key={url} rel="preload" href={url} />)}
 
       {/* OpenGraph */}
-      {og.title && <meta property="og:title" content={og.title} />}
-      {og.description && <meta property="og:description" content={og.description} />}
-      {og.url && <meta property="og:url" content={og.url} />}
-      {og.type && <meta property="og:type" content={og.type} />}
-      {og.images?.length > 0 && <meta property="og:image" content={og.images[0].url} />}
+      {metadata.openGraph && (
+        <>
+          <meta property="og:title" content={metadata.openGraph.title} />
+          <meta property="og:description" content={metadata.openGraph.description} />
+          <meta property="og:type" content={metadata.openGraph.type} />
+          <meta property="og:url" content={metadata.openGraph.url} />
+          <meta property="og:site_name" content={metadata.openGraph.siteName} />
+          {metadata.openGraph.images?.map((img, i) => (
+            <meta key={i} property="og:image" content={img.url} />
+          ))}
+        </>
+      )}
 
       {/* Twitter */}
-      {twitter.card && <meta name="twitter:card" content={twitter.card} />}
-      {twitter.site && <meta name="twitter:site" content={twitter.site} />}
-      {twitter.images?.length > 0 && <meta name="twitter:image" content={twitter.images[0]} />}
-
-      {seo.canonical && <link rel="canonical" href={seo.canonical} />}
+      {metadata.twitter && (
+        <>
+          <meta name="twitter:card" content={metadata.twitter.card} />
+          <meta name="twitter:site" content={metadata.twitter.site} />
+          {metadata.twitter.images?.map((img, i) => (
+            <meta key={i} name="twitter:image" content={img} />
+          ))}
+        </>
+      )}
     </Head>
   );
 }
