@@ -4,20 +4,20 @@ import { LanguageDetector, defaultLanguage } from "./[lang]/core/detector";
 
 /**
  * Root layout automatically redirects users to their detected language.
- * Uses LanguageDetector (cookie, Accept-Language, Geo-IP, fallback).
+ * Server-side only (no "use client"), so cookies and headers work.
  */
 export default function RootLayout() {
   try {
-    // Instantiate detector (server-side)
+    // Instantiate detector
     const detector = new LanguageDetector();
 
-    // Detect the language
+    // Detect language (cookie, Accept-Language, Geo-IP)
     const lang = detector.detect() || defaultLanguage;
 
-    // Set persistent cookie for next visits
+    // Set persistent cookie for future visits
     detector.setCookie(lang);
 
-    // Server-side redirect to /[lang] route
+    // Server-side redirect to the correct language route
     redirect(`/${lang}`);
   } catch (err) {
     console.error("[RootLayout] Language detection failed:", err);
