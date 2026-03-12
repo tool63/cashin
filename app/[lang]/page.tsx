@@ -24,22 +24,16 @@ import TestimonialSection from "@/components/homepage/TestimonialSection";
 import OpeningStyle from "@/components/animations/openingstyle";
 import RevealWithBorder from "@/components/animations/CircleBorder";
 
-/* Live Components (dynamic, client-only) */
+/* Live Components (client-side dynamic) */
 const LiveJoining = dynamic(() => import("@/components/homepage/LiveJoining"), { ssr: false });
 const LiveEarnings = dynamic(() => import("@/components/homepage/LiveEarnings"), { ssr: false });
 const LiveOfferCompletion = dynamic(() => import("@/components/homepage/LiveOfferCompletion"), { ssr: false });
 const LiveWithdrawals = dynamic(() => import("@/components/homepage/LiveWithdrawals"), { ssr: false });
 
-interface HomePageProps {
-  params: { lang: string };
-  onOpenAuth?: (type: "login" | "signup" | "reset") => void;
-}
-
-/* Server-Side Homepage */
-export default async function HomePage({ params, onOpenAuth }: HomePageProps) {
+export default async function Page({ params }: { params: { lang: string } }) {
   const lang = params.lang || SEO_CONFIG.defaultLocale;
 
-  // Server-side SEO
+  // Build SEO server-side
   const seo: SEOOutput = await buildSEO({
     route: "/",
     locale: lang,
@@ -63,107 +57,42 @@ export default async function HomePage({ params, onOpenAuth }: HomePageProps) {
 
   return (
     <>
-      {seo && <SeoRenderer seo={seo} />}
+      <SeoRenderer seo={seo} />
       <Background />
 
       <main className="relative min-h-screen bg-transparent text-gray-900 dark:text-white">
 
+        {/* Hero Section */}
         <OpeningStyle>
           <RevealWithBorder>
-            <HeroSection onOpenAuth={onOpenAuth || (() => {})} />
+            <HeroSection />
           </RevealWithBorder>
         </OpeningStyle>
 
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
-
+        {/* Stats Section */}
         <OpeningStyle>
           <RevealWithBorder>
             <StatsSection />
           </RevealWithBorder>
         </OpeningStyle>
 
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
+        {/* Live Sections */}
+        <OpeningStyle><RevealWithBorder><LiveJoining /></RevealWithBorder></OpeningStyle>
+        <OpeningStyle><RevealWithBorder><LiveEarnings /></RevealWithBorder></OpeningStyle>
+        <OpeningStyle><RevealWithBorder><LiveOfferCompletion /></RevealWithBorder></OpeningStyle>
+        <OpeningStyle><RevealWithBorder><LiveWithdrawals /></RevealWithBorder></OpeningStyle>
 
-        <OpeningStyle>
-          <RevealWithBorder>
-            <LiveJoining />
-          </RevealWithBorder>
-        </OpeningStyle>
+        {/* Features / Tasks / Offers */}
+        <OpeningStyle><RevealWithBorder><FeaturesSection /></RevealWithBorder></OpeningStyle>
+        <OpeningStyle><RevealWithBorder><TasksSection /></RevealWithBorder></OpeningStyle>
+        <OpeningStyle><RevealWithBorder><HighPayingOffers /></RevealWithBorder></OpeningStyle>
+        <OpeningStyle><RevealWithBorder><TestimonialSection /></RevealWithBorder></OpeningStyle>
 
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
+        {/* Trust / Payment Sections */}
+        <OpeningStyle><RevealWithBorder><TrustSection /></RevealWithBorder></OpeningStyle>
+        <OpeningStyle><RevealWithBorder><PaymentSection /></RevealWithBorder></OpeningStyle>
 
-        <OpeningStyle>
-          <RevealWithBorder>
-            <LiveEarnings />
-          </RevealWithBorder>
-        </OpeningStyle>
-
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
-
-        <OpeningStyle>
-          <RevealWithBorder>
-            <LiveOfferCompletion />
-          </RevealWithBorder>
-        </OpeningStyle>
-
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
-
-        <OpeningStyle>
-          <RevealWithBorder>
-            <LiveWithdrawals />
-          </RevealWithBorder>
-        </OpeningStyle>
-
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
-
-        <OpeningStyle>
-          <RevealWithBorder>
-            <FeaturesSection />
-          </RevealWithBorder>
-        </OpeningStyle>
-
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
-
-        <OpeningStyle>
-          <RevealWithBorder>
-            <TasksSection />
-          </RevealWithBorder>
-        </OpeningStyle>
-
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
-
-        <OpeningStyle>
-          <RevealWithBorder>
-            <HighPayingOffers />
-          </RevealWithBorder>
-        </OpeningStyle>
-
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
-
-        <OpeningStyle>
-          <RevealWithBorder>
-            <TestimonialSection />
-          </RevealWithBorder>
-        </OpeningStyle>
-
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
-
-        <OpeningStyle>
-          <RevealWithBorder>
-            <TrustSection />
-          </RevealWithBorder>
-        </OpeningStyle>
-
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
-
-        <OpeningStyle>
-          <RevealWithBorder>
-            <PaymentSection />
-          </RevealWithBorder>
-        </OpeningStyle>
-
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent dark:via-green-500/30 my-4"></div>
-
+        {/* FAQ Section */}
         <OpeningStyle>
           <RevealWithBorder>
             <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
@@ -185,15 +114,8 @@ export default async function HomePage({ params, onOpenAuth }: HomePageProps) {
           </RevealWithBorder>
         </OpeningStyle>
 
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent dark:via-yellow-500/30 my-4"></div>
-
-        <OpeningStyle>
-          <RevealWithBorder>
-            <FinalCTASection />
-          </RevealWithBorder>
-        </OpeningStyle>
-
-        <div className="h-12"></div>
+        {/* Final CTA */}
+        <OpeningStyle><RevealWithBorder><FinalCTASection /></RevealWithBorder></OpeningStyle>
 
       </main>
     </>
