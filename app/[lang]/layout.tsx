@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { notFound } from "next/navigation";
 
 import RootProviders from "./providers/RootProviders";
 
@@ -11,26 +12,27 @@ import SeoRenderer from "@/components/SEO/SeoRenderer";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
 import { SEOOutput } from "@/components/SEO/seoEngine";
 
-// Layout props can only be children + params
+import { supportedLanguages } from "./core/detector";
+
 interface LangLayoutProps {
   children: ReactNode;
   params: { lang: string };
 }
 
-// Helper: build default SEOOutput
-const buildDefaultSeo = (): SEOOutput => ({
+const buildDefaultSeo = (lang: string): SEOOutput => ({
   metadata: {
     title: SEO_CONFIG.siteName,
     description: SEO_CONFIG.defaultDescription || "",
     keywords: SEO_CONFIG.defaultKeywords || [],
     robots: "index, follow",
+
     openGraph: {
       type: "website",
-      url: SEO_CONFIG.siteUrl,
+      url: `${SEO_CONFIG.siteUrl}/${lang}`,
       title: SEO_CONFIG.siteName,
       description: SEO_CONFIG.defaultDescription || "",
       siteName: SEO_CONFIG.siteName,
-      locale: SEO_CONFIG.defaultLocale,
+      locale: lang,
       images: [
         {
           url: SEO_CONFIG.defaultOgImage || "",
@@ -40,6 +42,7 @@ const buildDefaultSeo = (): SEOOutput => ({
         },
       ],
     },
+
     twitter: {
       card: "summary_large_image",
       site: SEO_CONFIG.twitterHandle || "",
@@ -48,22 +51,38 @@ const buildDefaultSeo = (): SEOOutput => ({
         : [],
       imageAlt: SEO_CONFIG.siteName,
     },
+
     viewport: "width=device-width, initial-scale=1",
-    other: { "theme-color": SEO_CONFIG.themeColor || "#000000" },
+
+    other: {
+      "theme-color": SEO_CONFIG.themeColor || "#000000",
+    },
   },
-  canonical: SEO_CONFIG.siteUrl,
-  hreflang: {},
+
+  canonical: `${SEO_CONFIG.siteUrl}/${lang}`,
+
+  hreflang: {
+    en: `${SEO_CONFIG.siteUrl}/en`,
+    es: `${SEO_CONFIG.siteUrl}/es`,
+    fr: `${SEO_CONFIG.siteUrl}/fr`,
+    de: `${SEO_CONFIG.siteUrl}/de`,
+    pt: `${SEO_CONFIG.siteUrl}/pt`,
+  },
+
   structuredData: [],
+
   pageType: {
     type: "unknown",
     hierarchy: ["unknown"],
     metadata: {},
     matches: null,
   },
+
   links: [],
   preconnect: SEO_CONFIG.preconnect || [],
   dnsPrefetch: SEO_CONFIG.dnsPrefetch || [],
   preload: SEO_CONFIG.preload || [],
+
   metrics: {
     pageType: "unknown",
     generationTime: 0,
@@ -78,40 +97,42 @@ const buildDefaultSeo = (): SEOOutput => ({
 });
 
 export default function LangLayout({ children, params }: LangLayoutProps) {
-  const lang = params?.lang || SEO_CONFIG.defaultLocale || "en";
+  const lang = params?.lang;
 
-  // Clone default SEO and update title dynamically
-  const seo: SEOOutput = {
-    ...buildDefaultSeo(),
-    metadata: {
-      ...buildDefaultSeo().metadata,
-      title: `${SEO_CONFIG.siteName} | ${lang.toUpperCase()}`,
-    },
-  };
+  if (!supportedLanguages.includes(lang as any)) {
+    notFound();
+  }
+
+  const seo = buildDefaultSeo(lang);
 
   return (
-    <>
-      {/* Default SEO */}
-      <SeoRenderer seo={seo} />
+    <html lang={lang}>
+      <body>
 
-      {/* Background */}
-      <Background />
+        <SeoRenderer seo={seo} />
 
-      <RootProviders>
-        <div className="flex flex-col min-h-screen relative z-10">
-          <Header className="border-b border-theme bg-transparent" />
+        <Background />
 
-          <main className="flex-1 w-full max-w-7xl mx-auto px-6 pt-24 pb-16">
-            {children}
-          </main>
+        <RootProviders>
+          <div className="flex flex-col min-h-screen relative z-10">
 
-          <Footer className="bg-transparent" />
-        </div>
+            <Header className="border-b border-theme bg-transparent" />
 
-        <div className="fixed bottom-6 right-6 z-50">
-          <FloatingCTA />
-        </div>
-      </RootProviders>
-    </>
+            <main className="flex-1 w-full max-w-7xl mx-auto px-6 pt-24 pb-16">
+              {children}
+            </main>
+
+            <Footer className="bg-transparent" />
+
+          </div>
+
+          <div className="fixed bottom-6 right-6 z-50">
+            <FloatingCTA />
+          </div>
+
+        </RootProviders>
+
+      </body>
+    </html>
   );
 }
