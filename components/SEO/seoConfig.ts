@@ -1,7 +1,6 @@
-// components/SEO/seoConfig.ts
-
 export const SEO_CONFIG = {
   siteName: "Cashog",
+  defaultTitle: "Earn Money Online - Cashog", // ✅ added defaultTitle
   siteUrl: "https://cashog.com",
   siteDomain: "cashog.com",
   defaultLocale: "en",
@@ -23,13 +22,13 @@ export const SEO_CONFIG = {
     "https://fonts.gstatic.com",
     "https://images.cashog.com",
     "https://api.cashog.com"
-  ],
+  ] as string[],
   dnsPrefetch: [
     "https://fonts.googleapis.com",
     "https://fonts.gstatic.com",
     "https://images.cashog.com",
     "https://api.cashog.com"
-  ],
+  ] as string[],
   prefetch: [] as string[],
   prerender: [] as string[],
   modulePreload: [] as string[],
