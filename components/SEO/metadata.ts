@@ -1,15 +1,16 @@
 // components/SEO/metadata.ts
 
-import { Metadata } from "next";
-import { SEO_CONFIG } from "./seoConfig";
-import { buildCanonical } from "./canonical";
-import { buildHreflang } from "./hreflang";
+import { Metadata } from "next"
+import { SEO_CONFIG } from "./seoConfig"
+import { buildCanonical } from "./canonical"
+import { buildHreflang } from "./hreflang"
 
 interface BuildMetadataParams {
   title: string
   description?: string
   path?: string
   locale?: string
+  keywords?: string[]
 }
 
 export function buildMetadata({
@@ -17,6 +18,7 @@ export function buildMetadata({
   description,
   path = "",
   locale,
+  keywords,
 }: BuildMetadataParams): Metadata {
 
   const canonical = buildCanonical(path, locale)
@@ -25,6 +27,7 @@ export function buildMetadata({
   return {
     title,
     description: description ?? SEO_CONFIG.defaultDescription,
+    keywords: keywords ?? SEO_CONFIG.defaultKeywords,
 
     alternates: {
       canonical,
@@ -56,5 +59,5 @@ export function buildMetadata({
       index: true,
       follow: true,
     },
-  };
+  }
 }
