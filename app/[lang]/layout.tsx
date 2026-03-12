@@ -62,13 +62,10 @@ const defaultSeo: SEOOutput = {
     matches: null,
   },
   links: [],
-  // ✅ Cast readonly arrays to mutable string[]
+  // ✅ Only include arrays that exist in SEO_CONFIG
   preconnect: (SEO_CONFIG.preconnect || []) as string[],
   dnsPrefetch: (SEO_CONFIG.dnsPrefetch || []) as string[],
   preload: [],
-  prefetch: (SEO_CONFIG.prefetch || []) as string[],
-  prerender: (SEO_CONFIG.prerender || []) as string[],
-  modulePreload: (SEO_CONFIG.modulePreload || []) as string[],
   metrics: {
     pageType: "unknown",
     generationTime: 0,
