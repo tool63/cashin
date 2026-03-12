@@ -1,4 +1,5 @@
 // app/[lang]/layout.tsx
+
 import "@/styles/globals.css";
 import { ReactNode } from "react";
 
@@ -13,11 +14,9 @@ import SeoRenderer from "@/components/SEO/SeoRenderer";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
 import { SEOOutput } from "@/components/SEO/seoEngine";
 
-import { LanguageDetector, defaultLanguage } from "./core/detector";
-
 interface LangLayoutProps {
   children: ReactNode;
-  params?: { lang: string };
+  params: { lang: string };
 }
 
 // --------------------- SEO Defaults ---------------------
@@ -46,7 +45,9 @@ const defaultSeo: SEOOutput = {
     twitter: {
       card: "summary_large_image",
       site: SEO_CONFIG.twitterHandle || "",
-      images: SEO_CONFIG.defaultTwitterImage ? [SEO_CONFIG.defaultTwitterImage] : [],
+      images: SEO_CONFIG.defaultTwitterImage
+        ? [SEO_CONFIG.defaultTwitterImage]
+        : [],
       imageAlt: SEO_CONFIG.siteName,
     },
     viewport: "width=device-width, initial-scale=1",
@@ -55,7 +56,12 @@ const defaultSeo: SEOOutput = {
   canonical: SEO_CONFIG.siteUrl,
   hreflang: {},
   structuredData: [],
-  pageType: { type: "unknown", hierarchy: ["unknown"], metadata: {}, matches: null },
+  pageType: {
+    type: "unknown",
+    hierarchy: ["unknown"],
+    metadata: {},
+    matches: null,
+  },
   links: [],
   preconnect: SEO_CONFIG.preconnect || [],
   dnsPrefetch: SEO_CONFIG.dnsPrefetch || [],
@@ -76,13 +82,11 @@ const defaultSeo: SEOOutput = {
   },
 };
 
-// --------------------- Layout Component ---------------------
+// --------------------- Layout ---------------------
 export default function LangLayout({ children, params }: LangLayoutProps) {
-  // Detect language using server-side LanguageDetector
-  const detector = new LanguageDetector();
-  const lang = detector.detect() || defaultLanguage;
+  const lang = params?.lang || SEO_CONFIG.defaultLocale || "en";
 
-  // Optional: update SEO metadata per language
+  // Language-based SEO title
   const seo: SEOOutput = {
     ...defaultSeo,
     metadata: {
@@ -98,14 +102,14 @@ export default function LangLayout({ children, params }: LangLayoutProps) {
       </head>
 
       <body className="relative text-black dark:text-white antialiased">
-
+        
         {/* GLOBAL BACKGROUND */}
         <Background />
 
         <RootProviders>
-
+          
           <div className="flex flex-col min-h-screen relative z-10">
-
+            
             {/* HEADER */}
             <Header className="border-b border-theme bg-transparent" />
 
