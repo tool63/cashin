@@ -2,7 +2,6 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
 
 import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
@@ -32,13 +31,17 @@ const LiveEarnings = dynamic(() => import("@/components/homepage/LiveEarnings"),
 const LiveOfferCompletion = dynamic(() => import("@/components/homepage/LiveOfferCompletion"), { ssr: false });
 const LiveWithdrawals = dynamic(() => import("@/components/homepage/LiveWithdrawals"), { ssr: false });
 
-export default function HomePage() {
+interface HomePageProps {
+  params: {
+    lang: string;
+  };
+}
+
+export default function HomePage({ params }: HomePageProps) {
   const [seo, setSeo] = useState<SEOOutput | null>(null);
   const [mounted, setMounted] = useState(false);
 
-  const params = useParams();
-  const langParam = params?.lang;
-  const lang = Array.isArray(langParam) ? langParam[0] : langParam ?? SEO_CONFIG.defaultLocale;
+  const lang = params?.lang ?? SEO_CONFIG.defaultLocale;
 
   // --- Auth handler for HeroSection ---
   const handleOpenAuth = (type: "login" | "signup" | "reset") => {
@@ -102,12 +105,10 @@ export default function HomePage() {
 
         <OpeningStyle>
           <RevealWithBorder>
-            {/* Pass the required prop */}
             <HeroSection onOpenAuth={handleOpenAuth} />
           </RevealWithBorder>
         </OpeningStyle>
 
-        {/* The rest of your sections remain unchanged */}
         <OpeningStyle>
           <RevealWithBorder>
             <StatsSection />
@@ -180,6 +181,7 @@ export default function HomePage() {
               <h2 className="text-3xl font-bold text-center mb-6 bg-gradient-to-r from-yellow-400 to-green-500 bg-clip-text text-transparent">
                 Frequently Asked Questions
               </h2>
+
               <FAQ
                 faqs={[
                   { q: "How can I start earning money online?", a: "Simply sign up and start completing tasks." },
@@ -191,6 +193,7 @@ export default function HomePage() {
                   { q: "How fast are withdrawals?", a: "Usually within 24-48 hours." },
                 ]}
               />
+
             </section>
           </RevealWithBorder>
         </OpeningStyle>
