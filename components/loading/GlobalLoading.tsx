@@ -1,3 +1,5 @@
+"use client";
+
 import Skeleton from "./Skeleton";
 
 export default function GlobalLoading() {
@@ -10,10 +12,7 @@ export default function GlobalLoading() {
       {/* Content Blocks */}
       <div className="space-y-6 w-full max-w-6xl">
         {Array.from({ length: 5 }).map((_, i) => (
-          <Skeleton
-            key={i}
-            className="h-40 w-full rounded-2xl"
-          />
+          <Skeleton key={i} className="h-40 w-full rounded-2xl" />
         ))}
       </div>
 
