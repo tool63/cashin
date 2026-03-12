@@ -1,8 +1,5 @@
-import { redirect } from "next/navigation";
-import { detectLanguage } from "./[lang]/core/detector";
+// app/page.tsx
 
 export default function RootPage() {
-  const lang = detectLanguage();
-
-  redirect(`/${lang}`);
+  return null;
 }
