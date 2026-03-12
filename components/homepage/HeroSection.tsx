@@ -5,7 +5,7 @@ import OpeningStyle from "@/components/animations/openingstyle";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 
 interface HeroSectionProps {
-  onOpenAuth?: (view: "login" | "signup" | "reset") => void; // made optional
+  onOpenAuth: (view: "login" | "signup" | "reset") => void;
 }
 
 export default function HeroSection({ onOpenAuth }: HeroSectionProps) {
@@ -31,12 +31,11 @@ export default function HeroSection({ onOpenAuth }: HeroSectionProps) {
         </p>
 
         {/* CTA BUTTON */}
-        <div className="inline-block">
-          <PrimaryCTA
-            href="/signup"
-            observer={true} // ensures FloatingCTA hides automatically
-            onClick={() => onOpenAuth?.("signup")} // only runs if provided
-          >
+        <div
+          className="inline-block cursor-pointer"
+          onClick={() => onOpenAuth?.("signup")}
+        >
+          <PrimaryCTA href="/signup" observer={true}>
             Start Earning Now
           </PrimaryCTA>
         </div>
