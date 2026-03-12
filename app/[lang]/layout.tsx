@@ -1,4 +1,3 @@
-// app/[lang]/layout.tsx
 import { ReactNode } from "react";
 
 import RootProviders from "./providers/RootProviders";
@@ -18,8 +17,8 @@ interface LangLayoutProps {
   params: { lang: string };
 }
 
-// Default SEO
-const defaultSeo: SEOOutput = {
+// Helper: build default SEOOutput
+const buildDefaultSeo = (): SEOOutput => ({
   metadata: {
     title: SEO_CONFIG.siteName,
     description: SEO_CONFIG.defaultDescription || "",
@@ -62,10 +61,9 @@ const defaultSeo: SEOOutput = {
     matches: null,
   },
   links: [],
-  // ✅ Only include arrays that exist in SEO_CONFIG
-  preconnect: (SEO_CONFIG.preconnect || []) as string[],
-  dnsPrefetch: (SEO_CONFIG.dnsPrefetch || []) as string[],
-  preload: [],
+  preconnect: SEO_CONFIG.preconnect || [],
+  dnsPrefetch: SEO_CONFIG.dnsPrefetch || [],
+  preload: SEO_CONFIG.preload || [],
   metrics: {
     pageType: "unknown",
     generationTime: 0,
@@ -77,15 +75,16 @@ const defaultSeo: SEOOutput = {
     seoScore: 0,
     timestamp: Date.now(),
   },
-};
+});
 
 export default function LangLayout({ children, params }: LangLayoutProps) {
   const lang = params?.lang || SEO_CONFIG.defaultLocale || "en";
 
+  // Clone default SEO and update title dynamically
   const seo: SEOOutput = {
-    ...defaultSeo,
+    ...buildDefaultSeo(),
     metadata: {
-      ...defaultSeo.metadata,
+      ...buildDefaultSeo().metadata,
       title: `${SEO_CONFIG.siteName} | ${lang.toUpperCase()}`,
     },
   };
