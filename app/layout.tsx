@@ -8,17 +8,21 @@ import { LanguageDetector, defaultLanguage } from "./[lang]/core/detector";
  */
 export default function RootLayout() {
   try {
+    // Instantiate detector (server-side)
     const detector = new LanguageDetector();
+
+    // Detect the language
     const lang = detector.detect() || defaultLanguage;
 
-    // Optional: set cookie for first-time visitors
+    // Set persistent cookie for next visits
     detector.setCookie(lang);
 
-    // Redirect to /[lang]
+    // Server-side redirect to /[lang] route
     redirect(`/${lang}`);
   } catch (err) {
     console.error("[RootLayout] Language detection failed:", err);
-    // fallback to default language
+
+    // Fallback to default language if detection fails
     redirect(`/${defaultLanguage}`);
   }
 }
