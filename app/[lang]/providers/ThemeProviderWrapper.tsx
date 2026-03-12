@@ -13,7 +13,10 @@ export default function ThemeProviderWrapper({ children }: ThemeProviderWrapperP
   // Only render after mount to avoid SSR theme mismatch
   useEffect(() => setMounted(true), []);
 
-  if (!mounted) return <div className="bg-background min-h-screen" />; // fallback div with background
+  if (!mounted)
+    return (
+      <div className="bg-primary dark:bg-gray-950 min-h-screen" />
+    ); // fully opaque fallback
 
   return (
     <ThemeProvider
