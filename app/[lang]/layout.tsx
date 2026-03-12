@@ -15,10 +15,9 @@ import { SEOOutput } from "@/components/SEO/seoEngine";
 interface LangLayoutProps {
   children: ReactNode;
   params: { lang: string };
-  seo?: SEOOutput; // optional SEO passed from page
 }
 
-// --------------------- Default SEO ---------------------
+// Default SEO
 const defaultSeo: SEOOutput = {
   metadata: {
     title: SEO_CONFIG.siteName,
@@ -81,24 +80,21 @@ const defaultSeo: SEOOutput = {
   },
 };
 
-export default function LangLayout({ children, params, seo }: LangLayoutProps) {
+export default function LangLayout({ children, params }: LangLayoutProps) {
   const lang = params?.lang || SEO_CONFIG.defaultLocale || "en";
 
-  // Merge default SEO with passed SEO
-  const finalSeo: SEOOutput = {
+  const seo: SEOOutput = {
     ...defaultSeo,
-    ...seo,
     metadata: {
       ...defaultSeo.metadata,
-      ...seo?.metadata,
-      title: seo?.metadata?.title || `${SEO_CONFIG.siteName} | ${lang.toUpperCase()}`,
+      title: `${SEO_CONFIG.siteName} | ${lang.toUpperCase()}`,
     },
   };
 
   return (
     <>
-      {/* Render dynamic SEO */}
-      <SeoRenderer seo={finalSeo} />
+      {/* Render default SEO */}
+      <SeoRenderer seo={seo} />
 
       {/* GLOBAL BACKGROUND */}
       <Background />
