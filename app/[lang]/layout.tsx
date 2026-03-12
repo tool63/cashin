@@ -1,5 +1,4 @@
 // app/[lang]/layout.tsx
-
 import { ReactNode } from "react";
 
 import RootProviders from "./providers/RootProviders";
@@ -16,9 +15,10 @@ import { SEOOutput } from "@/components/SEO/seoEngine";
 interface LangLayoutProps {
   children: ReactNode;
   params: { lang: string };
+  seo?: SEOOutput; // optional SEO passed from page
 }
 
-// --------------------- SEO Defaults ---------------------
+// --------------------- Default SEO ---------------------
 const defaultSeo: SEOOutput = {
   metadata: {
     title: SEO_CONFIG.siteName,
@@ -81,26 +81,29 @@ const defaultSeo: SEOOutput = {
   },
 };
 
-export default function LangLayout({ children, params }: LangLayoutProps) {
+export default function LangLayout({ children, params, seo }: LangLayoutProps) {
   const lang = params?.lang || SEO_CONFIG.defaultLocale || "en";
 
-  const seo: SEOOutput = {
+  // Merge default SEO with passed SEO
+  const finalSeo: SEOOutput = {
     ...defaultSeo,
+    ...seo,
     metadata: {
       ...defaultSeo.metadata,
-      title: `${SEO_CONFIG.siteName} | ${lang.toUpperCase()}`,
+      ...seo?.metadata,
+      title: seo?.metadata?.title || `${SEO_CONFIG.siteName} | ${lang.toUpperCase()}`,
     },
   };
 
   return (
     <>
-      <SeoRenderer seo={seo} />
+      {/* Render dynamic SEO */}
+      <SeoRenderer seo={finalSeo} />
 
       {/* GLOBAL BACKGROUND */}
       <Background />
 
       <RootProviders>
-
         <div className="flex flex-col min-h-screen relative z-10">
 
           {/* HEADER */}
@@ -120,7 +123,6 @@ export default function LangLayout({ children, params }: LangLayoutProps) {
         <div className="fixed bottom-6 right-6 z-50">
           <FloatingCTA />
         </div>
-
       </RootProviders>
     </>
   );
