@@ -14,11 +14,14 @@ import SeoRenderer from "@/components/SEO/SeoRenderer";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
 import { SEOOutput } from "@/components/SEO/seoEngine";
 
+import { supportedLanguages, defaultLanguage, normalizeLanguage } from "../lang/core/detector";
+
 interface LangLayoutProps {
   children: ReactNode;
   params?: { lang: string };
 }
 
+// --------------------- SEO Defaults ---------------------
 const defaultSeo: SEOOutput = {
   metadata: {
     title: SEO_CONFIG.siteName,
@@ -64,11 +67,24 @@ const defaultSeo: SEOOutput = {
   metrics: { pageType: "unknown", generationTime: 0, metadataSize: 0, schemaCount: 0, cacheHit: false, warnings: 0, suggestions: 0, seoScore: 0, timestamp: Date.now() },
 };
 
-export default function LangLayout({ children }: LangLayoutProps) {
+// --------------------- Layout Component ---------------------
+export default function LangLayout({ children, params }: LangLayoutProps) {
+  // Use language from URL params if valid, otherwise fallback
+  const lang = normalizeLanguage(params?.lang) || defaultLanguage;
+
+  // Optional: update SEO metadata per language
+  const seo: SEOOutput = {
+    ...defaultSeo,
+    metadata: {
+      ...defaultSeo.metadata,
+      title: `${SEO_CONFIG.siteName} | ${lang.toUpperCase()}`,
+    },
+  };
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={lang} suppressHydrationWarning>
       <head>
-        <SeoRenderer seo={defaultSeo} />
+        <SeoRenderer seo={seo} />
       </head>
 
       <body className="relative text-black dark:text-white antialiased">
