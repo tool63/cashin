@@ -1,5 +1,3 @@
-// app/[lang]/layout.tsx
-
 import { ReactNode } from "react";
 import { notFound } from "next/navigation";
 
@@ -35,24 +33,28 @@ export default function LangLayout({
 
   return (
     <html lang={lang}>
-      <body className="bg-primary">
+      <body>
 
+        {/* GLOBAL BACKGROUND */}
         <Background />
 
         <RootProviders>
-          <div className="flex flex-col min-h-screen relative z-10">
+          <div className="relative z-10 flex flex-col min-h-screen">
 
-            {/* Remove bg-transparent, use header-gradient */}
+            {/* HEADER */}
             <Header className="border-b border-theme header-gradient" />
 
+            {/* MAIN */}
             <main className="flex-1 w-full max-w-7xl mx-auto px-6 pt-24 pb-16">
               {children}
             </main>
 
-            <Footer className="bg-primary" />
+            {/* FOOTER */}
+            <Footer />
 
           </div>
 
+          {/* FLOATING CTA */}
           <div className="fixed bottom-6 right-6 z-50">
             <FloatingCTA />
           </div>
