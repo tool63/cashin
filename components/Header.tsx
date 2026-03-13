@@ -39,7 +39,7 @@ export default function Header({ className }: HeaderProps) {
       ref={headerRef}
       className={`fixed top-0 left-0 w-full z-30 border-b ${borderColor} bg-white dark:bg-gray-900 ${className || ""}`}
     >
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between text-black dark:text-white">
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between bg-white dark:bg-gray-900 text-black dark:text-white">
 
         {/* LOGO */}
         <Link
@@ -50,7 +50,7 @@ export default function Header({ className }: HeaderProps) {
         </Link>
 
         {/* DESKTOP NAV */}
-        <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+        <nav className="hidden md:flex items-center gap-6 text-sm font-medium bg-white dark:bg-gray-900">
 
           <Link href="/how-it-works" className="block hover:opacity-80">
             How it works
@@ -58,7 +58,7 @@ export default function Header({ className }: HeaderProps) {
 
           {/* EARN */}
           <div
-            className="relative"
+            className="relative bg-white dark:bg-gray-900"
             onMouseEnter={() => setEarnOpen(true)}
             onMouseLeave={() => setEarnOpen(false)}
           >
@@ -78,32 +78,32 @@ export default function Header({ className }: HeaderProps) {
                   exit={{ opacity: 0, y: 8 }}
                   className={`absolute top-full left-0 mt-2 w-48 flex flex-col gap-2 p-3 rounded-xl shadow-xl border ${borderColor} bg-white dark:bg-gray-900`}
                 >
-                  <Link href="/surveys" className="block hover:opacity-80">Surveys</Link>
-                  <Link href="/app-installs" className="block hover:opacity-80">App Installs</Link>
-                  <Link href="/play-games" className="block hover:opacity-80">Play Games</Link>
-                  <Link href="/watch-videos" className="block hover:opacity-80">Watch Videos</Link>
-                  <Link href="/offerwall" className="block hover:opacity-80">Offerwall</Link>
+                  <Link href="/surveys" className="block hover:opacity-80 bg-white dark:bg-gray-900">Surveys</Link>
+                  <Link href="/app-installs" className="block hover:opacity-80 bg-white dark:bg-gray-900">App Installs</Link>
+                  <Link href="/play-games" className="block hover:opacity-80 bg-white dark:bg-gray-900">Play Games</Link>
+                  <Link href="/watch-videos" className="block hover:opacity-80 bg-white dark:bg-gray-900">Watch Videos</Link>
+                  <Link href="/offerwall" className="block hover:opacity-80 bg-white dark:bg-gray-900">Offerwall</Link>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
 
-          <Link href="/cashout" className="block hover:opacity-80">
+          <Link href="/cashout" className="block hover:opacity-80 bg-white dark:bg-gray-900">
             Cashout
           </Link>
 
-          <Link href="/blog" className="block hover:opacity-80">
+          <Link href="/blog" className="block hover:opacity-80 bg-white dark:bg-gray-900">
             Blog
           </Link>
 
-          <Link href="/help" className="block hover:opacity-80">
+          <Link href="/help" className="block hover:opacity-80 bg-white dark:bg-gray-900">
             Help
           </Link>
 
         </nav>
 
         {/* DESKTOP ACTIONS */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-4 bg-white dark:bg-gray-900">
 
           <LanguageSwitcher />
           <DarkLightToggle />
@@ -114,7 +114,7 @@ export default function Header({ className }: HeaderProps) {
               className={`px-4 py-2 rounded-lg text-sm transition ${
                 activeButton === "login"
                   ? "bg-gradient-to-r from-yellow-400 to-green-500 text-black"
-                  : `border ${borderColor}`
+                  : `border ${borderColor} bg-white dark:bg-gray-900`
               }`}
             >
               Login
@@ -127,7 +127,7 @@ export default function Header({ className }: HeaderProps) {
               className={`px-5 py-2 rounded-lg text-sm transition ${
                 activeButton === "signup" || activeButton === "none"
                   ? "bg-gradient-to-r from-yellow-400 to-green-500 text-black"
-                  : `border ${borderColor}`
+                  : `border ${borderColor} bg-white dark:bg-gray-900`
               }`}
             >
               Sign up
@@ -138,7 +138,7 @@ export default function Header({ className }: HeaderProps) {
 
         {/* MOBILE MENU BUTTON */}
         <button
-          className="md:hidden text-black dark:text-white"
+          className="md:hidden text-black dark:text-white bg-white dark:bg-gray-900"
           onClick={() => setMobileOpen(!mobileOpen)}
         >
           {mobileOpen ? <X /> : <Menu />}
@@ -153,18 +153,18 @@ export default function Header({ className }: HeaderProps) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className={`md:hidden w-full px-6 pt-4 pb-6 border-t ${borderColor} shadow-xl text-black dark:text-white bg-white dark:bg-gray-900`}
+            className={`md:hidden w-full px-6 pt-4 pb-6 border-t ${borderColor} shadow-xl bg-white dark:bg-gray-900 text-black dark:text-white`}
           >
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 bg-white dark:bg-gray-900">
 
-              <Link href="/how-it-works" className="block hover:opacity-80">
+              <Link href="/how-it-works" className="block hover:opacity-80 bg-white dark:bg-gray-900">
                 How it works
               </Link>
 
               {/* MOBILE EARN */}
               <button
                 onClick={() => setMobileEarnOpen(!mobileEarnOpen)}
-                className="flex items-center justify-between w-full hover:opacity-80"
+                className="flex items-center justify-between w-full hover:opacity-80 bg-white dark:bg-gray-900"
               >
                 Earn
                 <ChevronDown
@@ -174,35 +174,39 @@ export default function Header({ className }: HeaderProps) {
               </button>
 
               {mobileEarnOpen && (
-                <div className="flex flex-col gap-3 pl-4 text-sm">
-                  <Link href="/surveys" className="block hover:opacity-80">Surveys</Link>
-                  <Link href="/app-installs" className="block hover:opacity-80">App Installs</Link>
-                  <Link href="/play-games" className="block hover:opacity-80">Play Games</Link>
-                  <Link href="/watch-videos" className="block hover:opacity-80">Watch Videos</Link>
-                  <Link href="/offerwall" className="block hover:opacity-80">Offerwall</Link>
+                <div className="flex flex-col gap-3 pl-4 text-sm bg-white dark:bg-gray-900">
+                  <Link href="/surveys" className="block hover:opacity-80 bg-white dark:bg-gray-900">Surveys</Link>
+                  <Link href="/app-installs" className="block hover:opacity-80 bg-white dark:bg-gray-900">App Installs</Link>
+                  <Link href="/play-games" className="block hover:opacity-80 bg-white dark:bg-gray-900">Play Games</Link>
+                  <Link href="/watch-videos" className="block hover:opacity-80 bg-white dark:bg-gray-900">Watch Videos</Link>
+                  <Link href="/offerwall" className="block hover:opacity-80 bg-white dark:bg-gray-900">Offerwall</Link>
                 </div>
               )}
 
-              <Link href="/cashout" className="block hover:opacity-80">
+              <Link href="/cashout" className="block hover:opacity-80 bg-white dark:bg-gray-900">
                 Cashout
               </Link>
 
-              <Link href="/blog" className="block hover:opacity-80">
+              <Link href="/blog" className="block hover:opacity-80 bg-white dark:bg-gray-900">
                 Blog
               </Link>
 
-              <Link href="/help" className="block hover:opacity-80">
+              <Link href="/help" className="block hover:opacity-80 bg-white dark:bg-gray-900">
                 Help
               </Link>
 
-              <div className="flex items-center justify-between pt-3">
-                <LanguageSwitcher />
-                <DarkLightToggle />
+              <div className="flex items-center justify-between pt-3 bg-white dark:bg-gray-900">
+                <div className="bg-white dark:bg-gray-900">
+                  <LanguageSwitcher />
+                </div>
+                <div className="bg-white dark:bg-gray-900">
+                  <DarkLightToggle />
+                </div>
               </div>
 
-              <div className="pt-3 flex flex-col gap-3">
+              <div className="pt-3 flex flex-col gap-3 bg-white dark:bg-gray-900">
                 <Link href="/login">
-                  <button className={`border ${borderColor} py-2 rounded-lg w-full hover:bg-gray-50 dark:hover:bg-gray-800 transition`}>
+                  <button className={`border ${borderColor} py-2 rounded-lg w-full hover:bg-gray-50 dark:hover:bg-gray-800 transition bg-white dark:bg-gray-900`}>
                     Login
                   </button>
                 </Link>
