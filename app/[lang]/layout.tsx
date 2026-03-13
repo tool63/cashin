@@ -35,20 +35,21 @@ export default function LangLayout({
 
   return (
     <html lang={lang}>
-      <body className="bg-transparent">
+      <body className="bg-primary">
 
         <Background />
 
         <RootProviders>
           <div className="flex flex-col min-h-screen relative z-10">
 
-            <Header className="border-b border-theme bg-transparent" />
+            {/* Remove bg-transparent, use header-gradient */}
+            <Header className="border-b border-theme header-gradient" />
 
             <main className="flex-1 w-full max-w-7xl mx-auto px-6 pt-24 pb-16">
               {children}
             </main>
 
-            <Footer className="bg-transparent" />
+            <Footer className="bg-primary" />
 
           </div>
 
