@@ -35,7 +35,7 @@ export default function LangLayout({
     <html lang={lang}>
       <body className="relative">
 
-        {/* GLOBAL BACKGROUND */}
+        {/* GLOBAL PREMIUM BACKGROUND */}
         <Background />
 
         <RootProviders>
