@@ -1,4 +1,40 @@
-return (
+"use client";
+
+import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, ChevronDown } from "lucide-react";
+import LanguageSwitcher from "@/components/switch/LanguageSwitcher";
+import DarkLightToggle from "@/components/switch/DarkLightToggle";
+
+interface HeaderProps {
+  className?: string;
+}
+
+export default function Header({ className }: HeaderProps) {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [earnOpen, setEarnOpen] = useState(false);
+  const [mobileEarnOpen, setMobileEarnOpen] = useState(false);
+  const [activeButton, setActiveButton] = useState<"none" | "signup" | "login">("none");
+
+  const headerRef = useRef<HTMLDivElement>(null);
+
+  const borderColor = "border-gray-300 dark:border-gray-700";
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
+        setMobileOpen(false);
+        setEarnOpen(false);
+        setMobileEarnOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  return (
     <header
       ref={headerRef}
       className={`fixed top-0 left-0 w-full z-30 border-b ${borderColor} bg-white dark:bg-gray-900 ${className || ""}`}
@@ -182,6 +218,6 @@ return (
           </motion.div>
         )}
       </AnimatePresence>
-
     </header>
   );
+}
