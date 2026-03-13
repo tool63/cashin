@@ -10,7 +10,6 @@ import RootProviders from "./providers/RootProviders";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingCTA from "@/components/cta/FloatingCTA";
-import Background from "@/components/Background";
 
 interface LangLayoutProps {
   children: ReactNode;
@@ -36,8 +35,6 @@ export default function LangLayout({
   return (
     <html lang={lang}>
       <body className="bg-transparent">
-
-        <Background />
 
         <RootProviders>
           <div className="flex flex-col min-h-screen relative z-10">
