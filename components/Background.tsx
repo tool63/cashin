@@ -6,93 +6,95 @@ export default function Background() {
   return (
     <>
       {/* ============================
-          Base Background
+          Base Background Color (Fallback)
       ============================ */}
-      <div className="fixed inset-0 bg-primary -z-30" />
+      <div className="fixed inset-0 bg-white dark:bg-gray-950 -z-20" />
 
       {/* ============================
-          Main Gradient (Enhanced Light / Softer Dark)
+          Main Gradient Layer - Ultra Premium Yellow-Green
       ============================ */}
       <div
-        className="fixed inset-0 -z-20"
+        className="fixed inset-0 -z-20 transition-colors duration-500"
         style={{
           background: `
             linear-gradient(
-              120deg,
-              var(--gradient-from),
-              var(--gradient-via),
-              var(--gradient-to)
+              130deg,
+              var(--gradient-from) 0%,
+              var(--gradient-via) 40%,
+              var(--gradient-to) 100%
             )
           `,
-          opacity: 0.45, // +10% brighter light mode
+          opacity: 0.55,
+          backgroundSize: "200% 200%",
+          animation: "gradientShift 14s ease infinite",
         }}
       />
 
       {/* ============================
-          Premium Radial Glow Layer
+          Premium Glow Lighting Layer
       ============================ */}
       <div
         className="fixed inset-0 -z-20"
         style={{
           background: `
-            radial-gradient(
-              circle at 20% 20%,
-              var(--glow-yellow) 0%,
-              transparent 60%
-            ),
-            radial-gradient(
-              circle at 80% 80%,
-              var(--glow-green) 0%,
-              transparent 60%
-            ),
-            radial-gradient(
-              circle at 70% 30%,
-              var(--glow-green) 0%,
-              transparent 70%
-            )
+            radial-gradient(circle at 15% 20%, rgba(255,220,120,0.35), transparent 55%),
+            radial-gradient(circle at 80% 80%, rgba(34,197,94,0.30), transparent 60%),
+            radial-gradient(circle at 70% 30%, rgba(16,185,129,0.25), transparent 65%)
           `,
-          opacity: 0.35,
         }}
       />
 
       {/* ============================
-          Animated Glow Blob 1
+          Glow Blobs - Deep, Premium
       ============================ */}
       <div
-        className="fixed w-[420px] h-[420px] rounded-full blur-[140px] -z-10 animate-blobMove"
-        style={{
-          background: "var(--glow-green)",
-          top: "5%",
-          left: "5%",
-          opacity: 0.35,
-        }}
+        className="
+          fixed w-80 h-80
+          bg-green-400/40
+          dark:bg-green-600/30
+          rounded-full
+          blur-[120px]
+          top-10 left-10
+          animate-pulse
+          -z-10
+        "
+      />
+
+      <div
+        className="
+          fixed w-96 h-96
+          bg-yellow-400/40
+          dark:bg-yellow-500/30
+          rounded-full
+          blur-[140px]
+          bottom-10 right-10
+          animate-pulse delay-1000
+          -z-10
+        "
+      />
+
+      <div
+        className="
+          fixed w-72 h-72
+          bg-green-500/30
+          dark:bg-green-800/25
+          rounded-full
+          blur-[100px]
+          top-1/3 right-1/4
+          animate-pulse delay-500
+          -z-10
+        "
       />
 
       {/* ============================
-          Animated Glow Blob 2
+          Gradient Animation Keyframes
       ============================ */}
-      <div
-        className="fixed w-[480px] h-[480px] rounded-full blur-[160px] -z-10 animate-blobMove"
-        style={{
-          background: "var(--glow-yellow)",
-          bottom: "5%",
-          right: "5%",
-          opacity: 0.35,
-        }}
-      />
-
-      {/* ============================
-          Animated Glow Blob 3
-      ============================ */}
-      <div
-        className="fixed w-[360px] h-[360px] rounded-full blur-[130px] -z-10 animate-blobMove"
-        style={{
-          background: "var(--glow-green)",
-          top: "35%",
-          right: "25%",
-          opacity: 0.25, // reduced ~10% for dark comfort
-        }}
-      />
+      <style>{`
+        @keyframes gradientShift {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+      `}</style>
     </>
   );
 }
