@@ -8,80 +8,72 @@ export default function Background() {
       {/* Base Background */}
       <div className="fixed inset-0 bg-white dark:bg-black -z-30" />
 
-      {/* Deep Premium Gradient Layer - Screenshot Colors */}
+      {/* Main Gradient - Yellow & Green Mix */}
       <div
-        className="fixed inset-0 -z-20 transition-colors duration-500"
+        className="fixed inset-0 -z-20 transition-opacity duration-500"
         style={{
           background: `
             linear-gradient(
-              135deg,
-              #667eea 0%,
-              #764ba2 100%
+              125deg,
+              #FBBF24 0%,
+              #F59E0B 30%,
+              #10B981 70%,
+              #059669 100%
             )
           `,
-          opacity: 0.65
+          opacity: 0.7
         }}
       />
 
-      {/* Radial Light Depth — Premium Multi‑Layer 
-          Note: not mode‑dependent; same richness in light & dark */}
+      {/* Soft Light Overlay */}
       <div
         className="fixed inset-0 -z-20"
         style={{
           background: `
-            radial-gradient(circle at 15% 15%, rgba(255,230,120,0.30), transparent 55%),
-            radial-gradient(circle at 85% 85%, rgba(147,51,234,0.25), transparent 60%),
-            radial-gradient(circle at 30% 70%, rgba(102,126,234,0.20), transparent 65%)
+            radial-gradient(circle at 20% 30%, rgba(251, 191, 36, 0.15), transparent 50%),
+            radial-gradient(circle at 90% 70%, rgba(16, 185, 129, 0.15), transparent 50%)
           `
         }}
       />
 
-      {/* Glow Blob Large */}
+      {/* Glow Blob - Warm Yellow */}
       <div
         className="
-          fixed w-[500px] h-[500px] rounded-full blur-[140px] -z-10 animate-blobMove
+          fixed w-[600px] h-[600px] rounded-full blur-[140px] -z-10
         "
         style={{
-          background: "#667eea",
-          top: "5%",
-          left: "5%",
-          opacity: 0.30,
+          background: "#FBBF24",
+          top: "10%",
+          left: "0%",
+          opacity: 0.25,
         }}
       />
 
-      {/* Glow Blob Medium */}
+      {/* Glow Blob - Fresh Green */}
       <div
         className="
-          fixed w-[600px] h-[600px] rounded-full blur-[160px] -z-10 animate-blobMove2
+          fixed w-[700px] h-[700px] rounded-full blur-[180px] -z-10
         "
         style={{
-          background: "#764ba2",
-          bottom: "5%",
-          right: "5%",
-          opacity: 0.30,
+          background: "#10B981",
+          bottom: "0%",
+          right: "0%",
+          opacity: 0.25,
         }}
       />
 
-      {/* Glow Blob Small */}
+      {/* Glow Blob - Amber Accent */}
       <div
         className="
-          fixed w-[380px] h-[380px] rounded-full blur-[120px] -z-10 animate-blobMove
+          fixed w-[450px] h-[450px] rounded-full blur-[120px] -z-10
         "
         style={{
-          background: "#667eea",
-          top: "30%",
-          right: "25%",
-          opacity: 0.22,
+          background: "#F59E0B",
+          top: "40%",
+          right: "30%",
+          opacity: 0.2,
         }}
       />
-
-      {/* Gradient Animation Keyframes */}
-      <style>{`
-        @keyframes gradientShift {
-          0%,100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-      `}</style>
     </>
   );
 }
