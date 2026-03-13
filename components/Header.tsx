@@ -34,8 +34,8 @@ export default function Header({ className }: HeaderProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Updated to remove opacity, use solid gradients
-  const gradientBg = "bg-gradient-to-br from-yellow-400 via-green-400 to-green-500 dark:from-yellow-500 dark:via-green-700 dark:to-green-800";
+  // Gradient background logic
+  const gradientBg = "bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20 dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20";
 
   return (
     <header
