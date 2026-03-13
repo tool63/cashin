@@ -43,7 +43,7 @@ export default function Header({ className }: HeaderProps) {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 w-full z-30 border-b ${borderColor} ${className || ""}`}
+      className={`fixed top-0 left-0 w-full z-30 border-b ${borderColor} header-gradient ${className || ""}`}
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between text-black dark:text-white">
 
@@ -82,7 +82,7 @@ export default function Header({ className }: HeaderProps) {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
-                  className={`absolute top-full left-0 mt-2 w-48 flex flex-col gap-2 p-3 rounded-xl shadow-xl border ${borderColor}`}
+                  className={`absolute top-full left-0 mt-2 w-48 flex flex-col gap-2 p-3 rounded-xl shadow-xl border ${borderColor} bg-card`}
                 >
                   <Link href="/surveys" className="block">Surveys</Link>
                   <Link href="/app-installs" className="block">App Installs</Link>
@@ -159,7 +159,7 @@ export default function Header({ className }: HeaderProps) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className={`md:hidden w-full px-6 pt-4 pb-6 border-t ${borderColor} shadow-xl text-black dark:text-white`}
+            className={`md:hidden w-full px-6 pt-4 pb-6 border-t ${borderColor} shadow-xl text-black dark:text-white bg-card`}
           >
             <div className="flex flex-col gap-4">
 
