@@ -9,14 +9,18 @@ module.exports = {
 
   theme: {
     extend: {
+      colors: {
+        // Define subtle header gradient stops
+        "header-from": "rgba(250,204,21,0.05)",
+        "header-via": "rgba(34,197,94,0.05)",
+        "header-to": "rgba(22,163,74,0.05)",
+      },
 
       animation: {
         gradient: "gradient 15s ease infinite",
         float: "float 8s ease-in-out infinite",
         blobMove: "blobMove 30s linear infinite",
         blobMove2: "blobMove2 45s linear infinite",
-
-        // Skeleton shimmer
         shimmer: "shimmer 1.6s linear infinite",
       },
 
@@ -59,5 +63,14 @@ module.exports = {
     },
   },
 
-  plugins: [],
+  plugins: [
+    // Disable all backdrop-blur utilities to prevent glass effect
+    function ({ addUtilities }) {
+      addUtilities({
+        ".backdrop-blur-none": {
+          "backdrop-filter": "none !important",
+        },
+      });
+    },
+  ],
 };
