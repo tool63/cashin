@@ -10,10 +10,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Define subtle header gradient stops
-        "header-from": "rgba(250,204,21,0.05)",
-        "header-via": "rgba(34,197,94,0.05)",
-        "header-to": "rgba(22,163,74,0.05)",
+        // Define solid header colors (no opacity here)
+        "header-from": "rgba(250,204,21,1)", // Solid yellow
+        "header-via": "rgba(34,197,94,1)",   // Solid green
+        "header-to": "rgba(22,163,74,1)",     // Solid dark green
       },
 
       animation: {
@@ -63,14 +63,5 @@ module.exports = {
     },
   },
 
-  plugins: [
-    // Disable all backdrop-blur utilities to prevent glass effect
-    function ({ addUtilities }) {
-      addUtilities({
-        ".backdrop-blur-none": {
-          "backdrop-filter": "none !important",
-        },
-      });
-    },
-  ],
+  plugins: [],
 };
