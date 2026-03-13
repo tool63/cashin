@@ -75,17 +75,16 @@ body {
 }
 
 /* =====================================================
-HEADER STYLE: Apply gradient background
+HEADER STYLE: Apply same background color as body
 ===================================================== */
 header {
-  background: linear-gradient(to bottom right, var(--gradient-from), var(--gradient-via), var(--gradient-to)) !important; 
+  background-color: var(--bg-primary); /* Set header background to match body */
   border-bottom: 1px solid var(--border-color); /* Border for header */
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 30; /* Ensure header is on top */
-  color: var(--text-primary);
 }
 
 header .header-container {
@@ -95,7 +94,9 @@ header .header-container {
   padding: 16px 24px;
   max-width: 1200px;
   margin: 0 auto;
-  background-color: transparent; /* Transparent to let gradient background shine through */
+  background-color: transparent; /* Transparent to let header background shine through */
+  color: var(--text-primary);
+  box-shadow: none; /* Remove any box shadow effect */
 }
 
 header a.logo {
@@ -146,34 +147,6 @@ MOBILE MENU: Gradient Background
 }
 
 /* =====================================================
-MOBILE MENU
-===================================================== */
-@media (max-width: 768px) {
-  .mobile-menu {
-    display: block;
-    background: linear-gradient(to bottom right, var(--gradient-from), var(--gradient-via), var(--gradient-to)) !important;
-  }
-}
-
-/* =====================================================
-MAIN CONTENT STYLE: Keep same background
-===================================================== */
-main {
-  background-color: var(--bg-primary); /* Keep white background for main content */
-}
-
-main .content {
-  padding: 20px;
-  background: var(--bg-card); /* White background for cards in the main content */
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-header nav a {
-  color: var(--text-primary);
-}
-
-/* =====================================================
 UTILITIES
 ===================================================== */
 
@@ -208,5 +181,14 @@ UTILITIES
 
   .border-theme-light {
     border-color: var(--border-light);
+  }
+}
+
+/* =====================================================
+MOBILE MENU
+===================================================== */
+@media (max-width: 768px) {
+  .mobile-menu {
+    display: block;
   }
 }
