@@ -77,17 +77,15 @@ THEME VARIABLES
 BASE STYLES
 ===================================================== */
 
-html {
-background: var(--bg-primary);
-color-scheme: light dark;
-}
-
-body {
-background: var(--bg-primary);
-color: var(--text-primary);
-font-family: "Inter", sans-serif;
-overflow-x: hidden;
-scroll-behavior: smooth;
+html, body, header, main, footer {
+  background: var(--bg-primary);
+  color-scheme: light dark;
+  color: var(--text-primary);
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
 }
 
 /* =====================================================
@@ -109,27 +107,25 @@ THEME UTILITIES
 }
 
 /* =====================================================
-GRADIENT BACKGROUND
+GRADIENT BACKGROUND (OPTIONAL FOR SECTIONS)
 ===================================================== */
 
 .core-gradient-bg{
-position:absolute;
-inset:0;
-
-background:linear-gradient(
-120deg,
-var(--gradient-from),
-var(--gradient-via),
-var(--gradient-to)
-);
-
-background-size:200% 200%;
-animation:gradientShift 14s ease infinite;
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    120deg,
+    var(--gradient-from),
+    var(--gradient-via),
+    var(--gradient-to)
+  );
+  background-size:200% 200%;
+  animation:gradientShift 14s ease infinite;
 }
 
 @keyframes gradientShift{
-0%,100%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
+  0%,100%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
 }
 
 /* =====================================================
@@ -137,21 +133,21 @@ SIMPLE ANIMATIONS
 ===================================================== */
 
 @keyframes revealUp{
-from{opacity:0;transform:translateY(20px)}
-to{opacity:1;transform:translateY(0)}
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
 .animate-reveal-up{
-animation:revealUp .6s ease-out forwards;
+  animation:revealUp .6s ease-out forwards;
 }
 
 @keyframes fadeIn{
-from{opacity:0}
-to{opacity:1}
+  from{opacity:0}
+  to{opacity:1}
 }
 
 .animate-fadeIn{
-animation:fadeIn .5s ease-out;
+  animation:fadeIn .5s ease-out;
 }
 
 /* =====================================================
@@ -159,10 +155,10 @@ GLOW BLOBS
 ===================================================== */
 
 .blob{
-position:absolute;
-border-radius:9999px;
-filter:blur(90px);
-pointer-events:none;
+  position:absolute;
+  border-radius:9999px;
+  filter:blur(90px);
+  pointer-events:none;
 }
 
 .blob-green{background:var(--glow-green)}
@@ -170,12 +166,12 @@ pointer-events:none;
 .blob-blue{background:var(--glow-blue)}
 
 @keyframes blobMove{
-0%,100%{transform:translate(0,0)}
-50%{transform:translate(20px,-30px)}
+  0%,100%{transform:translate(0,0)}
+  50%{transform:translate(20px,-30px)}
 }
 
 .animate-blobMove{
-animation:blobMove 30s linear infinite;
+  animation:blobMove 30s linear infinite;
 }
 
 /* =====================================================
@@ -196,21 +192,21 @@ INPUT FOCUS
 ===================================================== */
 
 .focus-ring-green:focus{
-outline:none;
-border-color:var(--focus-green);
-box-shadow:0 0 0 3px rgb(34 197 94 / .2);
+  outline:none;
+  border-color:var(--focus-green);
+  box-shadow:0 0 0 3px rgb(34 197 94 / .2);
 }
 
 .focus-ring-blue:focus{
-outline:none;
-border-color:var(--focus-blue);
-box-shadow:0 0 0 3px rgb(59 130 246 / .2);
+  outline:none;
+  border-color:var(--focus-blue);
+  box-shadow:0 0 0 3px rgb(59 130 246 / .2);
 }
 
 .focus-ring-purple:focus{
-outline:none;
-border-color:var(--focus-purple);
-box-shadow:0 0 0 3px rgb(168 85 247 / .2);
+  outline:none;
+  border-color:var(--focus-purple);
+  box-shadow:0 0 0 3px rgb(168 85 247 / .2);
 }
 
 /* =====================================================
@@ -218,10 +214,10 @@ GRADIENT TEXT
 ===================================================== */
 
 .gradient-text{
-background:linear-gradient(to right,#facc15,#22c55e,#16a34a);
--webkit-background-clip:text;
-background-clip:text;
-color:transparent;
+  background:linear-gradient(to right,#facc15,#22c55e,#16a34a);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
 }
 
 /* =====================================================
@@ -229,7 +225,7 @@ BUTTON EFFECT
 ===================================================== */
 
 .hover-scale{
-transition:transform .2s;
+  transition:transform .2s;
 }
 
 .hover-scale:hover{transform:scale(1.02)}
@@ -240,8 +236,8 @@ SELECTION
 ===================================================== */
 
 ::selection{
-background:#22c55e;
-color:#fff;
+  background:#22c55e;
+  color:#fff;
 }
 
 /* =====================================================
@@ -251,16 +247,16 @@ SCROLLBAR
 ::-webkit-scrollbar{width:8px}
 
 ::-webkit-scrollbar-track{
-background:var(--bg-secondary);
+  background:var(--bg-secondary);
 }
 
 ::-webkit-scrollbar-thumb{
-background:var(--border-color);
-border-radius:4px;
+  background:var(--border-color);
+  border-radius:4px;
 }
 
 ::-webkit-scrollbar-thumb:hover{
-background:var(--text-muted);
+  background:var(--text-muted);
 }
 
 /* =====================================================
@@ -269,11 +265,11 @@ ACCESSIBILITY
 
 @media (prefers-reduced-motion:reduce){
 
-*{
-animation-duration:.01ms!important;
-animation-iteration-count:1!important;
-transition-duration:.01ms!important;
-scroll-behavior:auto!important;
-}
+  *{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
+  }
 
 }
