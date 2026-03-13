@@ -7,119 +7,141 @@ THEME VARIABLES
 ===================================================== */
 
 :root {
+  /* Background */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9fafb;
+  --card-bg: #ffffff;
 
-/* Background */
---bg-primary:#ffffff;
---bg-secondary:#f9fafb;
---card-bg:#ffffff;
+  /* Text */
+  --text-primary: #111827;
+  --text-muted: #6b7280;
 
-/* Text */
---text-primary:#111827;
---text-muted:#6b7280;
+  /* Borders */
+  --border-color: #e5e7eb;
+  --border-light: #f3f4f6;
 
-/* Borders */
---border-color:#e5e7eb;
---border-light:#f3f4f6;
+  /* Gradient - Solid colors (no opacity) */
+  --gradient-from: #facc15;
+  --gradient-via: #22c55e;
+  --gradient-to: #16a34a;
 
-/* Gradient */
---gradient-from:#facc15;
---gradient-via:#22c55e;
---gradient-to:#16a34a;
+  /* Header gradient - Solid colors (no opacity) */
+  --header-gradient-from: #facc15;
+  --header-gradient-via: #22c55e;
+  --header-gradient-to: #16a34a;
 
-/* Header subtle overlay */
---header-gradient-from: rgba(250,204,21,0.05);
---header-gradient-via: rgba(34,197,94,0.05);
---header-gradient-to: rgba(22,163,74,0.05);
-
-/* Glow colors */
---glow-green:#22c55e;
---glow-yellow:#facc15;
---glow-blue:#3b82f6;
+  /* Glow colors */
+  --glow-green: #22c55e;
+  --glow-yellow: #facc15;
+  --glow-blue: #3b82f6;
 }
 
 /* ================= DARK MODE ================= */
 
 .dark {
+  --bg-primary: #05080f;
+  --bg-secondary: #0b1220;
+  --card-bg: #000000;
 
---bg-primary:#05080f;
---bg-secondary:#0b1220;
---card-bg:#000000;
+  --text-primary: #ffffff;
+  --text-muted: #9ca3af;
 
---text-primary:#ffffff;
---text-muted:#9ca3af;
+  --border-color: #1f2937;
+  --border-light: #374151;
 
---border-color:#1f2937;
---border-light:#374151;
+  /* Gradient - Solid colors (no opacity) */
+  --gradient-from: #eab308;
+  --gradient-via: #22c55e;
+  --gradient-to: #15803d;
 
---gradient-from:#eab308;
---gradient-via:#22c55e;
---gradient-to:#15803d;
-
---header-gradient-from: rgba(234,179,8,0.05);
---header-gradient-via: rgba(34,197,94,0.05);
---header-gradient-to: rgba(21,128,61,0.05);
+  /* Header gradient - Solid colors (no opacity) */
+  --header-gradient-from: #eab308;
+  --header-gradient-via: #22c55e;
+  --header-gradient-to: #15803d;
 }
 
 /* =====================================================
 BASE
 ===================================================== */
 
-html{
-color-scheme: light dark;
+html {
+  color-scheme: light dark;
 }
 
-body{
-color:var(--text-primary);
-font-family:"Inter",sans-serif;
-overflow-x:hidden;
-scroll-behavior:smooth;
+body {
+  color: var(--text-primary);
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 /* =====================================================
 UTILITIES
 ===================================================== */
 
-@layer utilities{
+@layer utilities {
+  .bg-primary {
+    background: var(--bg-primary);
+  }
+  .bg-secondary {
+    background: var(--bg-secondary);
+  }
+  .bg-card {
+    background: var(--card-bg);
+  }
 
-.bg-primary{background:var(--bg-primary);}
-.bg-secondary{background:var(--bg-secondary);}
-.bg-card{background:var(--card-bg);}
+  .text-primary {
+    color: var(--text-primary);
+  }
+  .text-muted {
+    color: var(--text-muted);
+  }
 
-.text-primary{color:var(--text-primary);}
-.text-muted{color:var(--text-muted);}
+  .border-theme {
+    border-color: var(--border-color);
+  }
+  .border-theme-light {
+    border-color: var(--border-light);
+  }
 
-.border-theme{border-color:var(--border-color);}
-.border-theme-light{border-color:var(--border-light);}
-
-.header-gradient{
-background:linear-gradient(
-120deg,
-var(--header-gradient-from),
-var(--header-gradient-via),
-var(--header-gradient-to)
-);
-}
-
+  .header-gradient {
+    background: linear-gradient(
+      120deg,
+      var(--header-gradient-from),
+      var(--header-gradient-via),
+      var(--header-gradient-to)
+    );
+  }
 }
 
 /* =====================================================
 ANIMATIONS
 ===================================================== */
 
-@keyframes blobMove{
-0%,100%{transform:translate(0,0)}
-50%{transform:translate(20px,-30px)}
+@keyframes blobMove {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(20px, -30px);
+  }
 }
 
-.animate-blobMove{
-animation:blobMove 30s linear infinite;
+.animate-blobMove {
+  animation: blobMove 30s linear infinite;
 }
 
-@keyframes blobMove2{
-0%,100%{transform:translate(0,0)}
-50%{transform:translate(-30px,20px)}
+@keyframes blobMove2 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-30px, 20px);
+  }
 }
 
-.animate-blobMove2{
-animation:blobMove2 40s linear infinite;
+.animate-blobMove2 {
+  animation: blobMove2 40s linear infinite;
 }
