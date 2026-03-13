@@ -37,20 +37,20 @@ export default function Header({ className }: HeaderProps) {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 w-full z-30 border-b ${borderColor} bg-gradient-to-r from-yellow-400 to-green-500 dark:from-yellow-600 dark:to-green-700 ${className || ""}`}
+      className={`fixed top-0 left-0 w-full z-30 border-b ${borderColor} bg-white dark:bg-gray-900 ${className || ""}`}
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between text-black dark:text-white">
 
         {/* LOGO */}
         <Link
           href="/"
-          className="bg-white dark:bg-gray-900 text-2xl font-bold px-3 py-1 rounded-lg text-black dark:text-white shadow-sm"
+          className="bg-gradient-to-r from-yellow-400 to-green-500 text-2xl font-bold px-3 py-1 rounded-lg text-black"
         >
           Cashog
         </Link>
 
         {/* DESKTOP NAV */}
-        <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-black dark:text-white">
+        <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
 
           <Link href="/how-it-works" className="block hover:opacity-80">
             How it works
@@ -76,7 +76,7 @@ export default function Header({ className }: HeaderProps) {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
-                  className={`absolute top-full left-0 mt-2 w-48 flex flex-col gap-2 p-3 rounded-xl shadow-xl border ${borderColor} bg-white dark:bg-gray-900 text-black dark:text-white`}
+                  className={`absolute top-full left-0 mt-2 w-48 flex flex-col gap-2 p-3 rounded-xl shadow-xl border ${borderColor} bg-white dark:bg-gray-900`}
                 >
                   <Link href="/surveys" className="block hover:opacity-80">Surveys</Link>
                   <Link href="/app-installs" className="block hover:opacity-80">App Installs</Link>
@@ -113,8 +113,8 @@ export default function Header({ className }: HeaderProps) {
               onClick={() => setActiveButton("login")}
               className={`px-4 py-2 rounded-lg text-sm transition ${
                 activeButton === "login"
-                  ? "bg-white dark:bg-gray-900 text-black dark:text-white shadow-sm"
-                  : `border ${borderColor} bg-white/90 dark:bg-gray-900/90 text-black dark:text-white`
+                  ? "bg-gradient-to-r from-yellow-400 to-green-500 text-black"
+                  : `border ${borderColor}`
               }`}
             >
               Login
@@ -126,8 +126,8 @@ export default function Header({ className }: HeaderProps) {
               onClick={() => setActiveButton("signup")}
               className={`px-5 py-2 rounded-lg text-sm transition ${
                 activeButton === "signup" || activeButton === "none"
-                  ? "bg-white dark:bg-gray-900 text-black dark:text-white shadow-sm"
-                  : `border ${borderColor} bg-white/90 dark:bg-gray-900/90 text-black dark:text-white`
+                  ? "bg-gradient-to-r from-yellow-400 to-green-500 text-black"
+                  : `border ${borderColor}`
               }`}
             >
               Sign up
@@ -153,7 +153,7 @@ export default function Header({ className }: HeaderProps) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className={`md:hidden w-full px-6 pt-4 pb-6 border-t ${borderColor} bg-gradient-to-r from-yellow-400 to-green-500 dark:from-yellow-600 dark:to-green-700 text-black dark:text-white`}
+            className={`md:hidden w-full px-6 pt-4 pb-6 border-t ${borderColor} shadow-xl text-black dark:text-white bg-white dark:bg-gray-900`}
           >
             <div className="flex flex-col gap-4">
 
@@ -202,13 +202,13 @@ export default function Header({ className }: HeaderProps) {
 
               <div className="pt-3 flex flex-col gap-3">
                 <Link href="/login">
-                  <button className={`border ${borderColor} py-2 rounded-lg w-full hover:opacity-80 transition bg-white/90 dark:bg-gray-900/90 text-black dark:text-white`}>
+                  <button className={`border ${borderColor} py-2 rounded-lg w-full hover:bg-gray-50 dark:hover:bg-gray-800 transition`}>
                     Login
                   </button>
                 </Link>
 
                 <Link href="/signup">
-                  <button className="bg-white dark:bg-gray-900 py-2 rounded-lg w-full text-black dark:text-white font-medium shadow-sm">
+                  <button className="bg-gradient-to-r from-yellow-400 to-green-500 py-2 rounded-lg w-full text-black font-medium">
                     Sign up
                   </button>
                 </Link>
