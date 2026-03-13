@@ -75,11 +75,10 @@ body {
 }
 
 /* =====================================================
-HEADER STYLE: Solid Background, No Transparency
+HEADER STYLE: Apply gradient background
 ===================================================== */
 header {
-  background-color: var(--bg-primary) !important; /* Ensure solid background */
-  background-image: none !important; /* Prevent any gradient or glass effect */
+  background: linear-gradient(to bottom right, var(--gradient-from), var(--gradient-via), var(--gradient-to)) !important; 
   border-bottom: 1px solid var(--border-color); /* Border for header */
   position: fixed;
   top: 0;
@@ -95,7 +94,7 @@ header .header-container {
   padding: 16px 24px;
   max-width: 1200px;
   margin: 0 auto;
-  background-color: var(--bg-primary); /* Solid color for header container */
+  background-color: transparent; /* Transparent to let gradient background shine through */
   color: var(--text-primary);
   box-shadow: none; /* Remove any box shadow effect */
 }
@@ -130,6 +129,21 @@ header nav a:hover {
 header .actions {
   display: flex;
   gap: 16px;
+}
+
+/* =====================================================
+MOBILE MENU: Gradient Background
+===================================================== */
+@media (max-width: 768px) {
+  .mobile-menu {
+    display: block;
+  }
+
+  .mobile-menu {
+    background: linear-gradient(to bottom right, var(--gradient-from), var(--gradient-via), var(--gradient-to)) !important;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
 }
 
 /* =====================================================
