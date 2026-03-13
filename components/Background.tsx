@@ -9,7 +9,7 @@ export default function Background() {
       <div 
         className="fixed inset-0 -z-30 transition-colors duration-300"
         style={{
-          background: 'linear-gradient(120deg, rgba(250, 204, 21, 0.2) 0%, rgba(74, 222, 128, 0.3) 50%, rgba(34, 197, 94, 0.2) 100%)'
+          background: 'linear-gradient(105deg, rgba(250, 204, 21, 0.2) 0%, rgba(74, 222, 128, 0.3) 50%, rgba(34, 197, 94, 0.2) 100%)'
         }}
       />
       
