@@ -10,8 +10,8 @@ THEME VARIABLES
 
   /* ================= BACKGROUND ================= */
 
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8fafc;
+  --bg-primary: #ffffff; /* White background */
+  --bg-secondary: #f8fafc; /* Light gray for secondary areas */
   --bg-card: #ffffff;
 
   /* ================= TEXT ================= */
@@ -40,7 +40,6 @@ THEME VARIABLES
 /* ================= DARK MODE ================= */
 
 .dark {
-
   --bg-primary: #05080f;
   --bg-secondary: #0b1220;
   --bg-card: #0a0f1a;
@@ -69,19 +68,23 @@ html {
 body {
   font-family: "Inter", sans-serif;
   color: var(--text-primary);
-
-  background-color: var(--bg-primary); /* Solid background color */
+  background-color: var(--bg-primary); /* Solid background color for body */
   overflow-x: hidden;
   scroll-behavior: smooth;
+  margin: 0; /* Ensure there's no default margin */
 }
 
 /* =====================================================
-HEADER STYLE (Separate Layer with Solid Background) 
+HEADER STYLE: Solid Background, No Transparency
 ===================================================== */
 header {
-  background-color: var(--bg-primary); /* Solid color for header */
-  background-image: none; /* No gradients or transparency */
+  background-color: var(--bg-primary) !important; /* Ensure solid background */
+  background-image: none !important; /* Prevent any gradient or glass effect */
   border-bottom: 1px solid var(--border-color); /* Border for header */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   z-index: 30; /* Ensure header is on top */
 }
 
@@ -94,10 +97,11 @@ header .header-container {
   margin: 0 auto;
   background-color: var(--bg-primary); /* Solid color for header container */
   color: var(--text-primary);
+  box-shadow: none; /* Remove any box shadow effect */
 }
 
 header a.logo {
-  background: linear-gradient(to right, #facc15, #22c55e); /* Gradient for the logo */
+  background: linear-gradient(to right, #facc15, #22c55e); /* Logo gradient */
   color: #000;
   padding: 8px 16px;
   font-size: 24px;
@@ -106,6 +110,7 @@ header a.logo {
   text-decoration: none;
 }
 
+/* NAVIGATION */
 header nav {
   display: flex;
   gap: 16px;
@@ -133,22 +138,20 @@ UTILITIES
 
 @layer utilities {
 
-  /* Background */
-
+  /* Background Utilities */
   .bg-primary {
-    background: var(--bg-primary);
+    background-color: var(--bg-primary) !important; /* Ensure solid background */
   }
 
   .bg-secondary {
-    background: var(--bg-secondary);
+    background-color: var(--bg-secondary) !important;
   }
 
   .bg-card {
-    background: var(--bg-card);
+    background-color: var(--bg-card) !important;
   }
 
-  /* Text */
-
+  /* Text Utilities */
   .text-primary {
     color: var(--text-primary);
   }
@@ -157,8 +160,7 @@ UTILITIES
     color: var(--text-muted);
   }
 
-  /* Border */
-
+  /* Border Utilities */
   .border-theme {
     border-color: var(--border-color);
   }
@@ -166,23 +168,6 @@ UTILITIES
   .border-theme-light {
     border-color: var(--border-light);
   }
-
-  /* Global gradient */
-
-  .theme-gradient {
-    background: linear-gradient(
-      120deg,
-      var(--gradient-from),
-      var(--gradient-via),
-      var(--gradient-to)
-    );
-  }
-
-  /* No glass effect */
-  .bg-solid {
-    background: var(--bg-primary); /* Used for solid background with no transparency */
-  }
-
 }
 
 /* =====================================================
