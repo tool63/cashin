@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* =====================================================
 THEME VARIABLES
 ===================================================== */
@@ -11,185 +10,223 @@ THEME VARIABLES
 
   /* ================= BACKGROUND ================= */
 
-  --bg-primary: #ffffff; /* White background */
-  --bg-secondary: #f8fafc; /* Light gray for secondary areas */
-  --bg-card: #ffffff;
+  --bg-primary:#ffffff;
+  --bg-secondary:#f8fafc;
+  --bg-card:#ffffff;
 
   /* ================= TEXT ================= */
 
-  --text-primary: #111827;
-  --text-muted: #6b7280;
+  --text-primary:#111827;
+  --text-muted:#6b7280;
 
   /* ================= BORDERS ================= */
 
-  --border-color: #e5e7eb;
-  --border-light: #f1f5f9;
+  --border-color:#e5e7eb;
+  --border-light:#f1f5f9;
 
-  /* ================= GLOBAL GRADIENT ================= */
+  /* ================= GRADIENT ================= */
 
-  --gradient-from: #facc15;
-  --gradient-via: #22c55e;
-  --gradient-to: #16a34a;
+  --gradient-from:#facc15;
+  --gradient-via:#22c55e;
+  --gradient-to:#16a34a;
 
-  /* ================= GLOW ================= */
-
-  --glow-green: #22c55e;
-  --glow-yellow: #facc15;
-  --glow-blue: #3b82f6;
 }
 
 /* ================= DARK MODE ================= */
 
 .dark {
-  --bg-primary: #05080f;
-  --bg-secondary: #0b1220;
-  --bg-card: #0a0f1a;
 
-  --text-primary: #ffffff;
-  --text-muted: #9ca3af;
+  --bg-primary:#05080f;
+  --bg-secondary:#0b1220;
+  --bg-card:#0a0f1a;
 
-  --border-color: #1f2937;
-  --border-light: #2a3441;
+  --text-primary:#ffffff;
+  --text-muted:#9ca3af;
 
-  /* deeper premium gradient */
+  --border-color:#1f2937;
+  --border-light:#2a3441;
 
-  --gradient-from: #eab308;
-  --gradient-via: #22c55e;
-  --gradient-to: #15803d;
+  --gradient-from:#eab308;
+  --gradient-via:#22c55e;
+  --gradient-to:#15803d;
 }
 
 /* =====================================================
 BASE
 ===================================================== */
 
-html {
-  color-scheme: light dark;
+html{
+  color-scheme:light dark;
 }
 
-body {
-  font-family: "Inter", sans-serif;
-  color: var(--text-primary);
-  background-color: var(--bg-primary); /* Solid background color for body */
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-  margin: 0; /* Ensure there's no default margin */
+body{
+  font-family:"Inter",sans-serif;
+  color:var(--text-primary);
+
+  /* MAIN SITE GRADIENT */
+
+  background:
+  linear-gradient(
+  135deg,
+  var(--gradient-from),
+  var(--gradient-via),
+  var(--gradient-to)
+  );
+
+  min-height:100vh;
+
+  overflow-x:hidden;
+  scroll-behavior:smooth;
+  margin:0;
 }
 
 /* =====================================================
-HEADER STYLE: Apply same background color as body
+HEADER
 ===================================================== */
-header {
-  background-color: var(--bg-primary); /* Set header background to match body */
-  border-bottom: 1px solid var(--border-color); /* Border for header */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 30; /* Ensure header is on top */
+
+/* IMPORTANT: NO TRANSPARENCY */
+
+header{
+
+  background:#ffffff;
+
+  border-bottom:1px solid var(--border-color);
+
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+
+  z-index:50;
+
 }
 
-header .header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 24px;
-  max-width: 1200px;
-  margin: 0 auto;
-  background-color: transparent; /* Transparent to let header background shine through */
-  color: var(--text-primary);
-  box-shadow: none; /* Remove any box shadow effect */
+/* DARK MODE HEADER */
+
+.dark header{
+
+  background:#05080f;
+
 }
 
-header a.logo {
-  background: linear-gradient(to right, #facc15, #22c55e); /* Logo gradient */
-  color: #000;
-  padding: 8px 16px;
-  font-size: 24px;
-  font-weight: bold;
-  border-radius: 8px;
-  text-decoration: none;
+header .header-container{
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:16px 24px;
+
+  max-width:1200px;
+  margin:auto;
+
+}
+
+/* LOGO */
+
+header a.logo{
+
+  background:linear-gradient(
+  90deg,
+  #facc15,
+  #22c55e
+  );
+
+  color:#000;
+
+  padding:8px 16px;
+
+  font-size:22px;
+  font-weight:700;
+
+  border-radius:8px;
+
+  text-decoration:none;
+
 }
 
 /* NAVIGATION */
-header nav {
-  display: flex;
-  gap: 16px;
+
+header nav{
+  display:flex;
+  gap:20px;
 }
 
-header nav a {
-  color: var(--text-primary);
-  font-weight: medium;
-  text-decoration: none;
-  transition: opacity 0.2s;
+header nav a{
+
+  color:var(--text-primary);
+
+  font-weight:500;
+
+  text-decoration:none;
+
+  transition:opacity .2s;
+
 }
 
-header nav a:hover {
-  opacity: 0.8;
+header nav a:hover{
+  opacity:.7;
 }
 
-header .actions {
-  display: flex;
-  gap: 16px;
+/* ACTIONS */
+
+header .actions{
+  display:flex;
+  gap:16px;
 }
 
 /* =====================================================
-MOBILE MENU: Gradient Background
+MOBILE MENU
 ===================================================== */
-@media (max-width: 768px) {
-  .mobile-menu {
-    display: block;
-  }
 
-  .mobile-menu {
-    background: linear-gradient(to bottom right, var(--gradient-from), var(--gradient-via), var(--gradient-to)) !important;
-    padding-top: 16px;
-    padding-bottom: 16px;
-  }
+.mobile-menu{
+
+  background:#ffffff;
+
+  border-top:1px solid var(--border-color);
+
+  padding:16px;
+
+}
+
+.dark .mobile-menu{
+
+  background:#05080f;
+
 }
 
 /* =====================================================
 UTILITIES
 ===================================================== */
 
-@layer utilities {
+@layer utilities{
 
-  /* Background Utilities */
-  .bg-primary {
-    background-color: var(--bg-primary) !important; /* Ensure solid background */
-  }
-
-  .bg-secondary {
-    background-color: var(--bg-secondary) !important;
-  }
-
-  .bg-card {
-    background-color: var(--bg-card) !important;
-  }
-
-  /* Text Utilities */
-  .text-primary {
-    color: var(--text-primary);
-  }
-
-  .text-muted {
-    color: var(--text-muted);
-  }
-
-  /* Border Utilities */
-  .border-theme {
-    border-color: var(--border-color);
-  }
-
-  .border-theme-light {
-    border-color: var(--border-light);
-  }
+.bg-primary{
+background-color:var(--bg-primary)!important;
 }
 
-/* =====================================================
-MOBILE MENU
-===================================================== */
-@media (max-width: 768px) {
-  .mobile-menu {
-    display: block;
-  }
+.bg-secondary{
+background-color:var(--bg-secondary)!important;
+}
+
+.bg-card{
+background-color:var(--bg-card)!important;
+}
+
+.text-primary{
+color:var(--text-primary);
+}
+
+.text-muted{
+color:var(--text-muted);
+}
+
+.border-theme{
+border-color:var(--border-color);
+}
+
+.border-theme-light{
+border-color:var(--border-light);
+}
+
 }
