@@ -1,44 +1,4 @@
-"use client";
-
-import { useState, useRef, useEffect } from "react";
-import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown } from "lucide-react";
-import LanguageSwitcher from "@/components/switch/LanguageSwitcher";
-import DarkLightToggle from "@/components/switch/DarkLightToggle";
-
-interface HeaderProps {
-  className?: string;
-}
-
-export default function Header({ className }: HeaderProps) {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [earnOpen, setEarnOpen] = useState(false);
-  const [mobileEarnOpen, setMobileEarnOpen] = useState(false);
-  const [activeButton, setActiveButton] =
-    useState<"none" | "signup" | "login">("none");
-
-  const headerRef = useRef<HTMLDivElement>(null);
-
-  const ctaGradient =
-    "bg-gradient-to-r from-yellow-400 to-green-500 text-black";
-
-  const borderColor = "border-gray-300 dark:border-gray-700";
-
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
-        setMobileOpen(false);
-        setEarnOpen(false);
-        setMobileEarnOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  return (
+return (
     <header
       ref={headerRef}
       className={`fixed top-0 left-0 w-full z-30 border-b ${borderColor} bg-white dark:bg-gray-900 ${className || ""}`}
@@ -48,7 +8,7 @@ export default function Header({ className }: HeaderProps) {
         {/* LOGO */}
         <Link
           href="/"
-          className={`${ctaGradient} text-2xl font-bold px-3 py-1 rounded-lg`}
+          className="bg-gradient-to-r from-yellow-400 to-green-500 text-2xl font-bold px-3 py-1 rounded-lg text-black"
         >
           Cashog
         </Link>
@@ -117,7 +77,7 @@ export default function Header({ className }: HeaderProps) {
               onClick={() => setActiveButton("login")}
               className={`px-4 py-2 rounded-lg text-sm transition ${
                 activeButton === "login"
-                  ? ctaGradient
+                  ? "bg-gradient-to-r from-yellow-400 to-green-500 text-black"
                   : `border ${borderColor}`
               }`}
             >
@@ -130,7 +90,7 @@ export default function Header({ className }: HeaderProps) {
               onClick={() => setActiveButton("signup")}
               className={`px-5 py-2 rounded-lg text-sm transition ${
                 activeButton === "signup" || activeButton === "none"
-                  ? ctaGradient
+                  ? "bg-gradient-to-r from-yellow-400 to-green-500 text-black"
                   : `border ${borderColor}`
               }`}
             >
@@ -212,7 +172,7 @@ export default function Header({ className }: HeaderProps) {
                 </Link>
 
                 <Link href="/signup">
-                  <button className={`${ctaGradient} py-2 rounded-lg w-full text-black font-medium`}>
+                  <button className="bg-gradient-to-r from-yellow-400 to-green-500 py-2 rounded-lg w-full text-black font-medium">
                     Sign up
                   </button>
                 </Link>
@@ -225,4 +185,3 @@ export default function Header({ className }: HeaderProps) {
 
     </header>
   );
-}
