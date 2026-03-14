@@ -15,7 +15,6 @@ export default function Header({ className }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [earnOpen, setEarnOpen] = useState(false);
   const [mobileEarnOpen, setMobileEarnOpen] = useState(false);
-  const [activeButton, setActiveButton] = useState<"none" | "signup" | "login">("none");
 
   const headerRef = useRef<HTMLDivElement>(null);
 
@@ -23,7 +22,9 @@ export default function Header({ className }: HeaderProps) {
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
+      if (!headerRef.current) return;
+
+      if (!headerRef.current.contains(e.target as Node)) {
         setMobileOpen(false);
         setEarnOpen(false);
         setMobileEarnOpen(false);
@@ -31,13 +32,14 @@ export default function Header({ className }: HeaderProps) {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
+
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 w-full z-30 border-b ${borderColor} bg-transparent backdrop-blur-none ${className || ""}`}
+      className={`fixed top-0 left-0 w-full z-40 border-b ${borderColor} bg-bg-primary ${className || ""}`}
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between text-black dark:text-white">
 
@@ -50,53 +52,73 @@ export default function Header({ className }: HeaderProps) {
         </Link>
 
         {/* DESKTOP NAV */}
-        <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+        <nav className="hidden md:flex items-center gap-7 text-sm font-medium">
 
-          <Link href="/how-it-works" className="block hover:opacity-80">
+          <Link href="/how-it-works" className="hover:opacity-80 transition">
             How it works
           </Link>
 
-          {/* EARN */}
+          {/* EARN DROPDOWN */}
           <div
             className="relative"
             onMouseEnter={() => setEarnOpen(true)}
             onMouseLeave={() => setEarnOpen(false)}
           >
-            <button className="flex items-center gap-1 hover:opacity-80">
+            <button
+              className="flex items-center gap-1 hover:opacity-80 transition"
+              aria-expanded={earnOpen}
+            >
               Earn
               <ChevronDown
                 size={14}
-                className={`transition-transform ${earnOpen ? "rotate-180" : ""}`}
+                className={`transition-transform ${
+                  earnOpen ? "rotate-180" : ""
+                }`}
               />
             </button>
 
             <AnimatePresence>
               {earnOpen && (
                 <motion.div
-                  initial={{ opacity: 0, y: 8 }}
+                  initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 8 }}
-                  className={`absolute top-full left-0 mt-2 w-48 flex flex-col gap-2 p-3 rounded-xl shadow-xl border ${borderColor} bg-white dark:bg-gray-900 backdrop-blur-none`}
+                  exit={{ opacity: 0, y: 6 }}
+                  transition={{ duration: 0.18 }}
+                  className={`absolute top-full left-0 mt-3 w-52 flex flex-col gap-2 p-4 rounded-xl shadow-xl border ${borderColor} bg-white dark:bg-gray-900`}
                 >
-                  <Link href="/surveys" className="block hover:opacity-80">Surveys</Link>
-                  <Link href="/app-installs" className="block hover:opacity-80">App Installs</Link>
-                  <Link href="/play-games" className="block hover:opacity-80">Play Games</Link>
-                  <Link href="/watch-videos" className="block hover:opacity-80">Watch Videos</Link>
-                  <Link href="/offerwall" className="block hover:opacity-80">Offerwall</Link>
+                  <Link href="/surveys" className="hover:opacity-80">
+                    Surveys
+                  </Link>
+
+                  <Link href="/app-installs" className="hover:opacity-80">
+                    App Installs
+                  </Link>
+
+                  <Link href="/play-games" className="hover:opacity-80">
+                    Play Games
+                  </Link>
+
+                  <Link href="/watch-videos" className="hover:opacity-80">
+                    Watch Videos
+                  </Link>
+
+                  <Link href="/offerwall" className="hover:opacity-80">
+                    Offerwall
+                  </Link>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
 
-          <Link href="/cashout" className="block hover:opacity-80">
+          <Link href="/cashout" className="hover:opacity-80 transition">
             Cashout
           </Link>
 
-          <Link href="/blog" className="block hover:opacity-80">
+          <Link href="/blog" className="hover:opacity-80 transition">
             Blog
           </Link>
 
-          <Link href="/help" className="block hover:opacity-80">
+          <Link href="/help" className="hover:opacity-80 transition">
             Help
           </Link>
 
@@ -106,29 +128,20 @@ export default function Header({ className }: HeaderProps) {
         <div className="hidden md:flex items-center gap-4">
 
           <LanguageSwitcher />
+
           <DarkLightToggle />
 
-          <Link href="/?auth=login">
+          <Link href="/login">
             <button
-              onClick={() => setActiveButton("login")}
-              className={`px-4 py-2 rounded-lg text-sm transition ${
-                activeButton === "login"
-                  ? "bg-gradient-to-r from-yellow-400 to-green-500 text-black"
-                  : `border ${borderColor} bg-transparent hover:bg-gray-100/50 dark:hover:bg-gray-800/50`
-              }`}
+              className={`px-4 py-2 rounded-lg text-sm border ${borderColor} hover:bg-gray-100 dark:hover:bg-gray-800 transition`}
             >
               Login
             </button>
           </Link>
 
-          <Link href="/?auth=signup">
+          <Link href="/signup">
             <button
-              onClick={() => setActiveButton("signup")}
-              className={`px-5 py-2 rounded-lg text-sm transition ${
-                activeButton === "signup" || activeButton === "none"
-                  ? "bg-gradient-to-r from-yellow-400 to-green-500 text-black"
-                  : `border ${borderColor} bg-transparent hover:bg-gray-100/50 dark:hover:bg-gray-800/50`
-              }`}
+              className="px-5 py-2 rounded-lg text-sm bg-gradient-to-r from-yellow-400 to-green-500 text-black font-medium hover:opacity-90 transition"
             >
               Sign up
             </button>
@@ -138,8 +151,9 @@ export default function Header({ className }: HeaderProps) {
 
         {/* MOBILE MENU BUTTON */}
         <button
-          className="md:hidden text-black dark:text-white hover:opacity-80"
+          className="md:hidden hover:opacity-80"
           onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label="Toggle Menu"
         >
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -150,14 +164,15 @@ export default function Header({ className }: HeaderProps) {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className={`md:hidden w-full px-6 pt-4 pb-6 border-t ${borderColor} shadow-xl text-black dark:text-white bg-white dark:bg-gray-900 backdrop-blur-none`}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.18 }}
+            className={`md:hidden w-full px-6 pt-4 pb-6 border-t ${borderColor} bg-white dark:bg-gray-900`}
           >
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 text-black dark:text-white">
 
-              <Link href="/how-it-works" className="block hover:opacity-80">
+              <Link href="/how-it-works" className="hover:opacity-80">
                 How it works
               </Link>
 
@@ -169,46 +184,44 @@ export default function Header({ className }: HeaderProps) {
                 Earn
                 <ChevronDown
                   size={16}
-                  className={`transition-transform ${mobileEarnOpen ? "rotate-180" : ""}`}
+                  className={`transition-transform ${
+                    mobileEarnOpen ? "rotate-180" : ""
+                  }`}
                 />
               </button>
 
               {mobileEarnOpen && (
                 <div className="flex flex-col gap-3 pl-4 text-sm">
-                  <Link href="/surveys" className="block hover:opacity-80">Surveys</Link>
-                  <Link href="/app-installs" className="block hover:opacity-80">App Installs</Link>
-                  <Link href="/play-games" className="block hover:opacity-80">Play Games</Link>
-                  <Link href="/watch-videos" className="block hover:opacity-80">Watch Videos</Link>
-                  <Link href="/offerwall" className="block hover:opacity-80">Offerwall</Link>
+                  <Link href="/surveys">Surveys</Link>
+                  <Link href="/app-installs">App Installs</Link>
+                  <Link href="/play-games">Play Games</Link>
+                  <Link href="/watch-videos">Watch Videos</Link>
+                  <Link href="/offerwall">Offerwall</Link>
                 </div>
               )}
 
-              <Link href="/cashout" className="block hover:opacity-80">
-                Cashout
-              </Link>
+              <Link href="/cashout">Cashout</Link>
 
-              <Link href="/blog" className="block hover:opacity-80">
-                Blog
-              </Link>
+              <Link href="/blog">Blog</Link>
 
-              <Link href="/help" className="block hover:opacity-80">
-                Help
-              </Link>
+              <Link href="/help">Help</Link>
 
-              <div className="flex items-center justify-between pt-3">
+              <div className="flex items-center justify-between pt-4">
                 <LanguageSwitcher />
                 <DarkLightToggle />
               </div>
 
               <div className="pt-3 flex flex-col gap-3">
                 <Link href="/login">
-                  <button className={`border ${borderColor} bg-transparent py-2 rounded-lg w-full hover:bg-gray-100/50 dark:hover:bg-gray-800/50 transition`}>
+                  <button
+                    className={`border ${borderColor} py-2 rounded-lg w-full hover:bg-gray-100 dark:hover:bg-gray-800 transition`}
+                  >
                     Login
                   </button>
                 </Link>
 
                 <Link href="/signup">
-                  <button className="bg-gradient-to-r from-yellow-400 to-green-500 py-2 rounded-lg w-full text-black font-medium hover:opacity-90 transition-opacity">
+                  <button className="bg-gradient-to-r from-yellow-400 to-green-500 py-2 rounded-lg w-full text-black font-medium hover:opacity-90">
                     Sign up
                   </button>
                 </Link>
@@ -218,6 +231,7 @@ export default function Header({ className }: HeaderProps) {
           </motion.div>
         )}
       </AnimatePresence>
+
     </header>
   );
 }
