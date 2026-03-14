@@ -6,7 +6,6 @@ export default function DashboardSkeleton() {
   return (
     <div className="space-y-8">
 
-      {/* Stats Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {Array.from({ length: 4 }).map((_, i) => (
           <div
@@ -19,12 +18,10 @@ export default function DashboardSkeleton() {
         ))}
       </div>
 
-      {/* Chart */}
       <div className="rounded-xl border border-gray-200 dark:border-white/10 p-6 bg-white dark:bg-white/5">
         <Skeleton className="h-64 w-full rounded-lg" />
       </div>
 
-      {/* Table */}
       <div className="rounded-xl border border-gray-200 dark:border-white/10 p-4 bg-white dark:bg-white/5">
         <Skeleton className="h-6 w-32 mb-4" />
         {Array.from({ length: 5 }).map((_, i) => (
