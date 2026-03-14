@@ -50,13 +50,12 @@ export default function FAQ({ faqs }: FAQProps) {
         >
           <summary className="font-semibold text-lg px-6 py-4 cursor-pointer flex items-center justify-between hover:bg-gradient-to-r hover:from-yellow-400/5 hover:via-green-400/5 hover:to-green-500/5">
             <span>{faq.q}</span>
-
             <span className="text-green-500 group-open:rotate-180 transition-transform duration-300">
               ▼
             </span>
           </summary>
 
-          <div className="px-6 pb-4 text-gray-600 dark:text-gray-400 border-t border-gray-200 dark:border-gray-800 pt-4">
+          <div className="px-6 pb-4 pt-4 text-gray-600 dark:text-gray-400 border-t border-gray-200 dark:border-gray-800">
             {faq.a}
           </div>
         </motion.details>
