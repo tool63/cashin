@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 
 type TypingTextProps = {
-  words?: string[];          
-  typingSpeed?: number;      
-  deletingSpeed?: number;    
-  pauseTime?: number;        
-  className?: string;        
+  words?: string[];
+  typingSpeed?: number;
+  deletingSpeed?: number;
+  pauseTime?: number;
+  className?: string;
 };
 
 export default function TypingText({
