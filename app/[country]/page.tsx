@@ -29,7 +29,7 @@ export default async function CountryPage({ params }: PageProps) {
 
       {/* Example: quick links to other regions */}
       <div className="mt-6 flex flex-wrap gap-4 justify-center">
-        {["us", "ca", "uk", "de", "fr", "in"].map((c) => (
+        {["us", "ca", "uk", "de", "fr", "eu", "in"].map((c) => (
           <a
             key={c}
             href={`/${c}`}
