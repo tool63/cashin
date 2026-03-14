@@ -1,11 +1,10 @@
-// app/[country]/layout.tsx
 "use client";
 
 import { ReactNode } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { ThemeProvider } from "next-themes";
-import LanguageProvider from "./providers/LanguageProvider"; // fixed import
+import LanguageProvider from "./providers/LanguageProvider";
 
 interface CountryLayoutProps {
   children: ReactNode;
