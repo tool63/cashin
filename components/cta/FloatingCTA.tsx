@@ -11,7 +11,6 @@ export default function FloatingCTA() {
   const text = "Start Earning Now!";
   const letters = text.split("");
 
-  /* ================= CTA VISIBILITY LOGIC ================= */
   useEffect(() => {
     let observer: IntersectionObserver | null = null;
 
@@ -35,16 +34,13 @@ export default function FloatingCTA() {
       ctaElements.forEach((el) => observer?.observe(el));
     };
 
-    // Initial observation
     requestAnimationFrame(observeCTAs);
 
-    // Observe DOM changes for late-loaded buttons (HeroSection, etc.)
     const mutationObserver = new MutationObserver(() => {
       observeCTAs();
     });
     mutationObserver.observe(document.body, { childList: true, subtree: true });
 
-    // Re-check on window resize
     window.addEventListener("resize", observeCTAs);
 
     return () => {
@@ -54,11 +50,8 @@ export default function FloatingCTA() {
     };
   }, []);
 
-  /* ================= BOUNCE EVERY 10s ================= */
   useEffect(() => {
-    const interval = setInterval(() => {
-      setBounceKey((prev) => prev + 1);
-    }, 10000);
+    const interval = setInterval(() => setBounceKey((prev) => prev + 1), 10000);
     return () => clearInterval(interval);
   }, []);
 
