@@ -10,13 +10,12 @@ interface ThemeProviderWrapperProps {
 export default function ThemeProviderWrapper({ children }: ThemeProviderWrapperProps) {
   const [mounted, setMounted] = useState(false);
 
-  // Only render after mount to avoid SSR theme mismatch
   useEffect(() => setMounted(true), []);
 
   if (!mounted)
     return (
       <div className="bg-primary dark:bg-gray-950 min-h-screen" />
-    ); // fully opaque fallback
+    ); 
 
   return (
     <ThemeProvider
