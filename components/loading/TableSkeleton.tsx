@@ -16,7 +16,6 @@ export default function TableSkeleton({ rows = 10 }: TableSkeletonProps) {
             index % 2 === 0 ? "bg-gray-50 dark:bg-white/5" : "bg-transparent"
           }`}
         >
-          {/* Offer (Name + Badges) */}
           <div className="col-span-2 flex items-center gap-3">
             <Skeleton className="h-5 w-3/4" />
             <div className="flex gap-1">
@@ -26,13 +25,8 @@ export default function TableSkeleton({ rows = 10 }: TableSkeletonProps) {
             </div>
           </div>
 
-          {/* Country */}
           <Skeleton className="h-5 w-12 mx-auto" />
-
-          {/* Completions */}
           <Skeleton className="h-5 w-16 mx-auto" />
-
-          {/* Payout */}
           <Skeleton className="h-5 w-14 ml-auto" />
         </div>
       ))}
