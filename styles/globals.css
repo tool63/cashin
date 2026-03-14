@@ -10,8 +10,8 @@ THEME VARIABLES
 
   /* ================= BACKGROUND ================= */
 
-  --bg-primary: #ffffff; /* White background */
-  --bg-secondary: #f8fafc; /* Light gray for secondary areas */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
   --bg-card: #ffffff;
 
   /* ================= TEXT ================= */
@@ -37,9 +37,12 @@ THEME VARIABLES
   --glow-blue: #3b82f6;
 }
 
-/* ================= DARK MODE ================= */
+/* =====================================================
+DARK MODE
+===================================================== */
 
 .dark {
+
   --bg-primary: #05080f;
   --bg-secondary: #0b1220;
   --bg-card: #0a0f1a;
@@ -49,8 +52,6 @@ THEME VARIABLES
 
   --border-color: #1f2937;
   --border-light: #2a3441;
-
-  /* deeper premium gradient */
 
   --gradient-from: #eab308;
   --gradient-via: #22c55e;
@@ -63,87 +64,126 @@ BASE
 
 html {
   color-scheme: light dark;
+  scroll-behavior: smooth;
 }
 
 body {
   font-family: "Inter", sans-serif;
   color: var(--text-primary);
-  background-color: var(--bg-primary); /* Solid background color for body */
+  background-color: var(--bg-primary);
   overflow-x: hidden;
-  scroll-behavior: smooth;
-  margin: 0; /* Ensure there's no default margin */
+  margin: 0;
 }
 
 /* =====================================================
-HEADER STYLE: Apply same background color as body
+HEADER
 ===================================================== */
+
 header {
-  background-color: var(--bg-primary); /* Set header background to match body */
-  border-bottom: 1px solid var(--border-color); /* Border for header */
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 30; /* Ensure header is on top */
+  z-index: 40;
 }
 
-header .header-container {
+.header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 16px 24px;
   max-width: 1200px;
   margin: 0 auto;
-  background-color: transparent; /* Transparent to let header background shine through */
-  color: var(--text-primary);
-  box-shadow: none; /* Remove any box shadow effect */
 }
 
+/* ================= LOGO ================= */
+
 header a.logo {
-  background: linear-gradient(to right, #facc15, #22c55e); /* Logo gradient */
+  background: linear-gradient(
+    to right,
+    var(--gradient-from),
+    var(--gradient-via)
+  );
   color: #000;
   padding: 8px 16px;
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 22px;
+  font-weight: 700;
   border-radius: 8px;
   text-decoration: none;
 }
 
-/* NAVIGATION */
+/* =====================================================
+NAVIGATION
+===================================================== */
+
 header nav {
   display: flex;
-  gap: 16px;
+  gap: 20px;
 }
 
 header nav a {
   color: var(--text-primary);
-  font-weight: medium;
+  font-weight: 500;
   text-decoration: none;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s ease;
 }
 
 header nav a:hover {
-  opacity: 0.8;
-}
-
-header .actions {
-  display: flex;
-  gap: 16px;
+  opacity: 0.75;
 }
 
 /* =====================================================
-MOBILE MENU: Gradient Background
+HEADER ACTIONS
 ===================================================== */
+
+header .actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* =====================================================
+MOBILE MENU
+===================================================== */
+
+.mobile-menu {
+  display: none;
+}
+
 @media (max-width: 768px) {
-  .mobile-menu {
-    display: block;
+
+  header nav {
+    display: none;
   }
 
   .mobile-menu {
-    background: linear-gradient(to bottom right, var(--gradient-from), var(--gradient-via), var(--gradient-to)) !important;
-    padding-top: 16px;
-    padding-bottom: 16px;
+    display: block;
+    background: linear-gradient(
+      to bottom right,
+      var(--gradient-from),
+      var(--gradient-via),
+      var(--gradient-to)
+    );
+    padding: 20px;
   }
+}
+
+/* =====================================================
+CARDS
+===================================================== */
+
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px;
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
 }
 
 /* =====================================================
@@ -152,9 +192,8 @@ UTILITIES
 
 @layer utilities {
 
-  /* Background Utilities */
   .bg-primary {
-    background-color: var(--bg-primary) !important; /* Ensure solid background */
+    background-color: var(--bg-primary) !important;
   }
 
   .bg-secondary {
@@ -165,7 +204,6 @@ UTILITIES
     background-color: var(--bg-card) !important;
   }
 
-  /* Text Utilities */
   .text-primary {
     color: var(--text-primary);
   }
@@ -174,7 +212,6 @@ UTILITIES
     color: var(--text-muted);
   }
 
-  /* Border Utilities */
   .border-theme {
     border-color: var(--border-color);
   }
@@ -182,13 +219,26 @@ UTILITIES
   .border-theme-light {
     border-color: var(--border-light);
   }
+
 }
 
 /* =====================================================
-MOBILE MENU
+SCROLLBAR
 ===================================================== */
-@media (max-width: 768px) {
-  .mobile-menu {
-    display: block;
-  }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
