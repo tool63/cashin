@@ -5,11 +5,13 @@ import { usePathname, useRouter } from "next/navigation";
 
 interface LanguageContextType {
   country: string;
+  language: string;
   setCountry: (country: string) => void;
 }
 
 export const LanguageContext = createContext<LanguageContextType>({
   country: "",
+  language: "EN",
   setCountry: () => {},
 });
 
@@ -17,7 +19,15 @@ interface ProviderProps {
   children: ReactNode;
 }
 
-const COUNTRIES = ["us", "uk", "ca", "au", "in", "fr", "de"];
+const COUNTRY_LANGUAGE_MAP: Record<string, string> = {
+  us: "EN",
+  uk: "EN",
+  ca: "EN",
+  au: "EN",
+  in: "EN",
+  fr: "FR",
+  de: "DE",
+};
 
 export default function LanguageProvider({ children }: ProviderProps) {
   const pathname = usePathname();
@@ -25,33 +35,32 @@ export default function LanguageProvider({ children }: ProviderProps) {
 
   const slug = pathname?.split("/")[1] || "";
 
-  const [country, setCountryState] = useState(slug);
+  const [country, setCountryState] = useState("");
+  const [language, setLanguage] = useState("EN");
 
   useEffect(() => {
-    if (COUNTRIES.includes(slug)) {
+    if (COUNTRY_LANGUAGE_MAP[slug]) {
       setCountryState(slug);
+      setLanguage(COUNTRY_LANGUAGE_MAP[slug]);
     } else {
-      setCountryState(""); // unknown country → root
+      setCountryState("");
+      setLanguage("EN");
     }
 
-    // allow Tailwind theme to render content
     document.documentElement.setAttribute("data-theme-ready", "true");
   }, [slug]);
 
   const setCountry = (newCountry: string) => {
-    if (!COUNTRIES.includes(newCountry)) return;
+    if (!COUNTRY_LANGUAGE_MAP[newCountry]) return;
 
     setCountryState(newCountry);
+    setLanguage(COUNTRY_LANGUAGE_MAP[newCountry]);
 
-    if (newCountry === "") {
-      router.push("/");
-    } else {
-      router.push(`/${newCountry}`);
-    }
+    router.push(`/${newCountry}`);
   };
 
   return (
-    <LanguageContext.Provider value={{ country, setCountry }}>
+    <LanguageContext.Provider value={{ country, language, setCountry }}>
       {children}
     </LanguageContext.Provider>
   );
