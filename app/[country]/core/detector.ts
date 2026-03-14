@@ -1,4 +1,4 @@
-// app/[lang]/core/detector.ts
+// app/[country]/core/detector.ts
 
 import { cookies, headers } from "next/headers";
 
