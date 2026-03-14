@@ -8,7 +8,7 @@ export default function Background() {
       {/* Base white/black layer for fallback */}
       <div className="fixed inset-0 bg-white dark:bg-black -z-50" />
       
-      {/* Main Background Gradient Layer */}
+      {/* Main Background Gradient Layer - Exact same as footer light mode */}
       <div 
         className="fixed inset-0 -z-40 transition-colors duration-500"
         style={{
@@ -16,7 +16,7 @@ export default function Background() {
         }}
       />
       
-      {/* Dark Mode Background Gradient Layer */}
+      {/* Dark Mode Background Gradient Layer - Exact same as footer dark mode */}
       <div 
         className="fixed inset-0 -z-40 hidden dark:block transition-colors duration-500"
         style={{
@@ -25,32 +25,32 @@ export default function Background() {
       />
 
       {/* ============================
-          Glow Blobs
+          Glow Blobs - Matching footer colors
       ============================ */}
-      {/* Top-left green blob */}
+      {/* Top-left green blob - matches footer green */}
       <div 
         className="fixed w-80 h-80 
-          bg-green-400/25 
+          bg-green-400/20
           rounded-full 
           blur-[120px] 
           top-10 left-10 
           animate-pulse -z-30"
       />
       
-      {/* Bottom-right yellow blob */}
+      {/* Bottom-right yellow blob - matches footer yellow */}
       <div 
         className="fixed w-96 h-96 
-          bg-yellow-400/25 
+          bg-yellow-400/20
           rounded-full 
           blur-[140px] 
           bottom-10 right-10 
           animate-pulse delay-1000 -z-30"
       />
       
-      {/* Additional center blob for depth (optional) */}
+      {/* Center green blob - for depth, matches footer green */}
       <div 
         className="fixed w-60 h-60 
-          bg-yellow-400/15 
+          bg-green-500/15
           rounded-full 
           blur-[100px] 
           top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
@@ -58,10 +58,10 @@ export default function Background() {
       />
 
       {/* ============================
-          Frosted Overlay
+          Frosted Overlay - Very subtle to maintain gradient visibility
       ============================ */}
       <div 
-        className="fixed inset-0 bg-white/5 dark:bg-black/5 backdrop-blur-[2px] pointer-events-none -z-20"
+        className="fixed inset-0 bg-white/10 dark:bg-black/10 backdrop-blur-[1px] pointer-events-none -z-20"
       />
     </>
   );
