@@ -1,7 +1,7 @@
 import '@/styles/globals.css';
 import { ReactNode } from 'react';
 import ThemeProviderWrapper from './providers/ThemeProviderWrapper';
-import { LanguageProvider } from './providers/LanguageProvider';
+import LanguageProvider from './providers/LanguageProvider';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 
