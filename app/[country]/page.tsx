@@ -1,28 +1,27 @@
-import { SEO_CONFIG } from "@/components/SEO/seoConfig";
-import { buildSEO } from "@/components/SEO/seoEngine";
+import { ReactNode } from 'react';
 
-interface PageProps {
-  params: {
-    country: string;
-  };
-}
-
-export default async function Page({ params }: PageProps) {
-  const country = params?.country ?? SEO_CONFIG.defaultLocale;
-
-  await buildSEO({
-    route: "/",
-    locale: country,
-    title: "Hello World",
-    description: "This is a simple Hello World page for testing.",
-  });
-
+export default function CountryHomePage() {
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center">
-      <h1 className="text-4xl font-bold mb-4">Hello World!</h1>
-      <p className="text-lg text-gray-700 dark:text-gray-300">
-        Current country: <strong>{country.toUpperCase()}</strong>
+    <section className="max-w-container mx-auto px-6 py-12">
+      <h1 className="text-4xl font-bold mb-6">Welcome to Cashog!</h1>
+      <p className="text-lg text-muted mb-4">
+        Earn rewards by completing surveys, playing games, watching videos, and more.
       </p>
-    </main>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+        <div className="card">
+          <h2 className="font-semibold text-xl mb-2">Surveys</h2>
+          <p className="text-muted">Complete surveys and earn points quickly.</p>
+        </div>
+        <div className="card">
+          <h2 className="font-semibold text-xl mb-2">App Installs</h2>
+          <p className="text-muted">Install apps and earn rewards instantly.</p>
+        </div>
+        <div className="card">
+          <h2 className="font-semibold text-xl mb-2">Play Games</h2>
+          <p className="text-muted">Play games and collect points while having fun.</p>
+        </div>
+      </div>
+    </section>
   );
 }
