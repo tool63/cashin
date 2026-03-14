@@ -34,13 +34,10 @@ export default function Header({ className }: HeaderProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Gradient background logic
-  const gradientBg = "bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20 dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20";
-
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 w-full z-30 border-b ${borderColor} ${gradientBg} ${className || ""}`}
+      className={`fixed top-0 left-0 w-full z-30 border-b ${borderColor} bg-transparent backdrop-blur-none ${className || ""}`}
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between text-black dark:text-white">
 
@@ -79,7 +76,7 @@ export default function Header({ className }: HeaderProps) {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
-                  className={`absolute top-full left-0 mt-2 w-48 flex flex-col gap-2 p-3 rounded-xl shadow-xl border ${borderColor} ${gradientBg}`}
+                  className={`absolute top-full left-0 mt-2 w-48 flex flex-col gap-2 p-3 rounded-xl shadow-xl border ${borderColor} bg-white dark:bg-gray-900 backdrop-blur-none`}
                 >
                   <Link href="/surveys" className="block hover:opacity-80">Surveys</Link>
                   <Link href="/app-installs" className="block hover:opacity-80">App Installs</Link>
@@ -156,7 +153,7 @@ export default function Header({ className }: HeaderProps) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className={`md:hidden w-full px-6 pt-4 pb-6 border-t ${borderColor} shadow-xl text-black dark:text-white ${gradientBg}`}
+            className={`md:hidden w-full px-6 pt-4 pb-6 border-t ${borderColor} shadow-xl text-black dark:text-white bg-white dark:bg-gray-900 backdrop-blur-none`}
           >
             <div className="flex flex-col gap-4">
 
