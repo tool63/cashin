@@ -39,12 +39,12 @@ export default function LangLayout({
         <Background />
 
         <RootProviders>
+          {/* HEADER - positioned fixed but content in container */}
+          <Header className="border-b border-gray-300 dark:border-gray-700 bg-transparent backdrop-blur-none w-full fixed top-0 left-0 z-20" />
+
           <div className="relative z-10 flex flex-col min-h-screen">
 
-            {/* HEADER - fully transparent, outside container */}
-            <Header className="border-b border-theme bg-transparent backdrop-blur-none w-full fixed top-0 left-0 z-20" />
-
-            {/* MAIN CONTENT */}
+            {/* MAIN CONTENT - with adjusted padding for fixed header */}
             <main className="flex-1 w-full max-w-7xl mx-auto px-6 pt-32 pb-16 relative z-10">
               {children}
             </main>
