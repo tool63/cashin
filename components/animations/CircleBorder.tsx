@@ -3,7 +3,7 @@
 import { ReactNode } from "react";
 import OpeningStyle from "./openingstyle";
 
-interface ContainerProps {
+interface CircleBorderProps {
   children: ReactNode;
   className?: string;
   delay?: number;
@@ -11,17 +11,17 @@ interface ContainerProps {
   asSection?: boolean;
 }
 
-function Container({ 
-  children, 
-  className = "", 
+export default function CircleBorder({
+  children,
+  className = "",
   delay = 0,
   noAnimation = false,
-  asSection = true 
-}: ContainerProps) {
-
+  asSection = true,
+}: CircleBorderProps) {
   const baseClasses = `
     max-w-7xl mx-auto px-6 py-20
     bg-primary dark:bg-secondary
+    relative overflow-hidden
     ${className}
   `.trim();
 
@@ -32,7 +32,6 @@ function Container({
   );
 
   if (noAnimation) return content;
+
   return <OpeningStyle delay={delay}>{content}</OpeningStyle>;
 }
-
-export default Container;
