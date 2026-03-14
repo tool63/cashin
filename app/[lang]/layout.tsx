@@ -39,8 +39,12 @@ export default function LangLayout({
         <Background />
 
         <RootProviders>
-          {/* HEADER - positioned fixed but content in container */}
-          <Header className="border-b border-gray-300 dark:border-gray-700 bg-transparent backdrop-blur-none w-full fixed top-0 left-0 z-20" />
+          {/* HEADER - Contained in its own container to prevent glass effect */}
+          <div className="fixed top-0 left-0 w-full z-20">
+            <div className="max-w-7xl mx-auto px-6">
+              <Header className="border-b border-gray-300 dark:border-gray-700 bg-transparent backdrop-blur-none w-full" />
+            </div>
+          </div>
 
           <div className="relative z-10 flex flex-col min-h-screen">
 
