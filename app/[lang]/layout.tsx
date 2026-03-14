@@ -1,71 +1,225 @@
-import { ReactNode } from "react";
-import { notFound } from "next/navigation";
+"use client";
 
-import { supportedLanguages } from "@/app/core/i18n/config";
+import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, ChevronDown } from "lucide-react";
+import LanguageSwitcher from "@/components/switch/LanguageSwitcher";
+import DarkLightToggle from "@/components/switch/DarkLightToggle";
 
-import RootProviders from "./providers/RootProviders";
-
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import FloatingCTA from "@/components/cta/FloatingCTA";
-import Background from "@/components/Background";
-
-interface LangLayoutProps {
-  children: ReactNode;
-  params: { lang: string };
+interface HeaderProps {
+  className?: string;
 }
 
-export function generateStaticParams() {
-  return supportedLanguages.map((lang) => ({
-    lang,
-  }));
-}
+export default function Header({ className }: HeaderProps) {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [earnOpen, setEarnOpen] = useState(false);
+  const [mobileEarnOpen, setMobileEarnOpen] = useState(false);
+  const [activeButton, setActiveButton] = useState<"none" | "signup" | "login">("none");
 
-export default function LangLayout({
-  children,
-  params,
-}: LangLayoutProps) {
-  const lang = params.lang;
+  const headerRef = useRef<HTMLDivElement>(null);
 
-  if (!supportedLanguages.includes(lang as any)) {
-    notFound();
-  }
+  const borderColor = "border-gray-300 dark:border-gray-700";
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
+        setMobileOpen(false);
+        setEarnOpen(false);
+        setMobileEarnOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
-    <html lang={lang}>
-      <body className="relative">
+    <header
+      ref={headerRef}
+      className={`w-full border-b ${borderColor} bg-transparent backdrop-blur-none ${className || ""}`}
+    >
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between text-black dark:text-white">
 
-        {/* GLOBAL PREMIUM BACKGROUND */}
-        <Background />
+        {/* LOGO */}
+        <Link
+          href="/"
+          className="bg-gradient-to-r from-yellow-400 to-green-500 text-2xl font-bold px-3 py-1 rounded-lg text-black"
+        >
+          Cashog
+        </Link>
 
-        <RootProviders>
-          {/* HEADER - Contained in its own container to prevent glass effect */}
-          <div className="fixed top-0 left-0 w-full z-20">
-            <div className="max-w-7xl mx-auto px-6">
-              <Header className="border-b border-gray-300 dark:border-gray-700 bg-transparent backdrop-blur-none w-full" />
+        {/* DESKTOP NAV */}
+        <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+
+          <Link href="/how-it-works" className="block hover:opacity-80">
+            How it works
+          </Link>
+
+          {/* EARN */}
+          <div
+            className="relative"
+            onMouseEnter={() => setEarnOpen(true)}
+            onMouseLeave={() => setEarnOpen(false)}
+          >
+            <button className="flex items-center gap-1 hover:opacity-80">
+              Earn
+              <ChevronDown
+                size={14}
+                className={`transition-transform ${earnOpen ? "rotate-180" : ""}`}
+              />
+            </button>
+
+            <AnimatePresence>
+              {earnOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 8 }}
+                  className={`absolute top-full left-0 mt-2 w-48 flex flex-col gap-2 p-3 rounded-xl shadow-xl border ${borderColor} bg-white dark:bg-gray-900 backdrop-blur-none`}
+                >
+                  <Link href="/surveys" className="block hover:opacity-80 text-gray-900 dark:text-white">Surveys</Link>
+                  <Link href="/app-installs" className="block hover:opacity-80 text-gray-900 dark:text-white">App Installs</Link>
+                  <Link href="/play-games" className="block hover:opacity-80 text-gray-900 dark:text-white">Play Games</Link>
+                  <Link href="/watch-videos" className="block hover:opacity-80 text-gray-900 dark:text-white">Watch Videos</Link>
+                  <Link href="/offerwall" className="block hover:opacity-80 text-gray-900 dark:text-white">Offerwall</Link>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          <Link href="/cashout" className="block hover:opacity-80">
+            Cashout
+          </Link>
+
+          <Link href="/blog" className="block hover:opacity-80">
+            Blog
+          </Link>
+
+          <Link href="/help" className="block hover:opacity-80">
+            Help
+          </Link>
+
+        </nav>
+
+        {/* DESKTOP ACTIONS */}
+        <div className="hidden md:flex items-center gap-4">
+
+          <LanguageSwitcher />
+          <DarkLightToggle />
+
+          <Link href="/?auth=login">
+            <button
+              onClick={() => setActiveButton("login")}
+              className={`px-4 py-2 rounded-lg text-sm transition ${
+                activeButton === "login"
+                  ? "bg-gradient-to-r from-yellow-400 to-green-500 text-black"
+                  : `border ${borderColor} bg-transparent hover:bg-gray-100/50 dark:hover:bg-gray-800/50 text-black dark:text-white`
+              }`}
+            >
+              Login
+            </button>
+          </Link>
+
+          <Link href="/?auth=signup">
+            <button
+              onClick={() => setActiveButton("signup")}
+              className={`px-5 py-2 rounded-lg text-sm transition ${
+                activeButton === "signup" || activeButton === "none"
+                  ? "bg-gradient-to-r from-yellow-400 to-green-500 text-black"
+                  : `border ${borderColor} bg-transparent hover:bg-gray-100/50 dark:hover:bg-gray-800/50 text-black dark:text-white`
+              }`}
+            >
+              Sign up
+            </button>
+          </Link>
+
+        </div>
+
+        {/* MOBILE MENU BUTTON */}
+        <button
+          className="md:hidden text-black dark:text-white hover:opacity-80"
+          onClick={() => setMobileOpen(!mobileOpen)}
+        >
+          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+
+      </div>
+
+      {/* MOBILE MENU */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className={`md:hidden w-full border-t ${borderColor} shadow-xl text-black dark:text-white bg-white dark:bg-gray-900 backdrop-blur-none`}
+          >
+            <div className="max-w-7xl mx-auto px-6 pt-4 pb-6">
+              <div className="flex flex-col gap-4">
+
+                <Link href="/how-it-works" className="block hover:opacity-80 text-gray-900 dark:text-white">
+                  How it works
+                </Link>
+
+                {/* MOBILE EARN */}
+                <button
+                  onClick={() => setMobileEarnOpen(!mobileEarnOpen)}
+                  className="flex items-center justify-between w-full hover:opacity-80 text-gray-900 dark:text-white"
+                >
+                  Earn
+                  <ChevronDown
+                    size={16}
+                    className={`transition-transform ${mobileEarnOpen ? "rotate-180" : ""}`}
+                  />
+                </button>
+
+                {mobileEarnOpen && (
+                  <div className="flex flex-col gap-3 pl-4 text-sm">
+                    <Link href="/surveys" className="block hover:opacity-80 text-gray-900 dark:text-white">Surveys</Link>
+                    <Link href="/app-installs" className="block hover:opacity-80 text-gray-900 dark:text-white">App Installs</Link>
+                    <Link href="/play-games" className="block hover:opacity-80 text-gray-900 dark:text-white">Play Games</Link>
+                    <Link href="/watch-videos" className="block hover:opacity-80 text-gray-900 dark:text-white">Watch Videos</Link>
+                    <Link href="/offerwall" className="block hover:opacity-80 text-gray-900 dark:text-white">Offerwall</Link>
+                  </div>
+                )}
+
+                <Link href="/cashout" className="block hover:opacity-80 text-gray-900 dark:text-white">
+                  Cashout
+                </Link>
+
+                <Link href="/blog" className="block hover:opacity-80 text-gray-900 dark:text-white">
+                  Blog
+                </Link>
+
+                <Link href="/help" className="block hover:opacity-80 text-gray-900 dark:text-white">
+                  Help
+                </Link>
+
+                <div className="flex items-center justify-between pt-3">
+                  <LanguageSwitcher />
+                  <DarkLightToggle />
+                </div>
+
+                <div className="pt-3 flex flex-col gap-3">
+                  <Link href="/login">
+                    <button className={`border ${borderColor} bg-transparent py-2 rounded-lg w-full hover:bg-gray-100/50 dark:hover:bg-gray-800/50 transition text-gray-900 dark:text-white`}>
+                      Login
+                    </button>
+                  </Link>
+
+                  <Link href="/signup">
+                    <button className="bg-gradient-to-r from-yellow-400 to-green-500 py-2 rounded-lg w-full text-black font-medium hover:opacity-90 transition-opacity">
+                      Sign up
+                    </button>
+                  </Link>
+                </div>
+
+              </div>
             </div>
-          </div>
-
-          <div className="relative z-10 flex flex-col min-h-screen">
-
-            {/* MAIN CONTENT - with adjusted padding for fixed header */}
-            <main className="flex-1 w-full max-w-7xl mx-auto px-6 pt-32 pb-16 relative z-10">
-              {children}
-            </main>
-
-            {/* FOOTER - fully transparent */}
-            <Footer className="bg-transparent backdrop-blur-none w-full relative z-10" />
-
-          </div>
-
-          {/* FLOATING CTA */}
-          <div className="fixed bottom-6 right-6 z-50">
-            <FloatingCTA />
-          </div>
-
-        </RootProviders>
-
-      </body>
-    </html>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
   );
 }
