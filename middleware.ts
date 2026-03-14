@@ -1,68 +1,62 @@
 // middleware.ts
-
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-import {
-  supportedLanguages,
-  defaultLanguage,
-  countryLangMap,
-} from "./app/core/i18n/config";
+import { supportedLanguages, defaultLanguage, countryLangMap } from "./app/core/i18n/config";
+
+// Map country code → default language
+const COUNTRY_TO_LANGUAGE: Record<string, string> = {
+  us: "EN",
+  uk: "EN",
+  ca: "EN",
+  au: "EN",
+  fr: "FR",
+  de: "DE",
+  in: "EN",
+};
 
 /**
  * Normalize language code
- * Example:
- * en-US -> en
- * fr-CA -> fr
+ * Example: en-US -> EN, fr-CA -> FR
  */
 function normalizeLanguage(lang?: string | null) {
   if (!lang) return null;
-
   const code = lang.toLowerCase().split("-")[0];
-
-  return supportedLanguages.includes(code as any) ? code : null;
+  return supportedLanguages.includes(code as any) ? code.toUpperCase() : null;
 }
 
 /**
  * Detect language from request
  */
 function detectLanguage(request: NextRequest) {
-  /* 1️⃣ Cookie preference */
+  // 1️⃣ Cookie preference
   const cookieLang = normalizeLanguage(request.cookies.get("lang")?.value);
+  if (cookieLang) return cookieLang;
 
-  if (cookieLang) {
-    return cookieLang;
-  }
-
-  /* 2️⃣ Accept-Language header */
+  // 2️⃣ Accept-Language header
   const acceptLang = request.headers.get("accept-language");
-
   if (acceptLang) {
-    const langs = acceptLang
-      .split(",")
-      .map((lang) => lang.split(";")[0].trim());
-
+    const langs = acceptLang.split(",").map((lang) => lang.split(";")[0].trim());
     for (const lang of langs) {
       const normalized = normalizeLanguage(lang);
-
-      if (normalized) {
-        return normalized;
-      }
+      if (normalized) return normalized;
     }
   }
 
-  /* 3️⃣ Geo-IP country detection */
+  // 3️⃣ Geo-IP country detection
   const country =
-    request.headers.get("cf-ipcountry") ||
-    request.headers.get("x-vercel-ip-country") ||
-    request.headers.get("cloudfront-viewer-country");
+    (request.headers.get("cf-ipcountry") ||
+      request.headers.get("x-vercel-ip-country") ||
+      request.headers.get("cloudfront-viewer-country") ||
+      "") // fallback empty
+      .toLowerCase();
 
-  if (country && countryLangMap[country]) {
-    return countryLangMap[country];
+  if (country && COUNTRY_TO_LANGUAGE[country]) {
+    return COUNTRY_TO_LANGUAGE[country];
   }
 
-  /* 4️⃣ Default fallback */
-  return defaultLanguage;
+  // 4️⃣ Default fallback
+  return defaultLanguage.toUpperCase();
 }
 
 /**
@@ -71,31 +65,35 @@ function detectLanguage(request: NextRequest) {
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  /* Skip Next.js internal routes */
-  if (
-    pathname.startsWith("/_next") ||
-    pathname.startsWith("/api") ||
-    pathname.includes(".")
-  ) {
+  // Skip Next.js internals and static files
+  if (pathname.startsWith("/_next") || pathname.startsWith("/api") || pathname.includes(".")) {
     return;
   }
 
-  /* Check if path already contains language */
-  const pathnameHasLang = supportedLanguages.some((lang) =>
-    pathname.startsWith(`/${lang}`)
+  // Check if path already contains a **country slug**
+  const pathHasCountry = Object.keys(COUNTRY_TO_LANGUAGE).some((country) =>
+    pathname.startsWith(`/${country}`)
   );
+  if (pathHasCountry) return;
 
-  if (pathnameHasLang) {
-    return;
-  }
-
-  /* Detect language */
+  // Detect user language
   const lang = detectLanguage(request);
 
-  /* Redirect to localized path */
+  // Determine country slug from language for redirect
+  // If language is from known country, map it back to a country slug
+  const countrySlug =
+    Object.entries(COUNTRY_TO_LANGUAGE).find(([country, l]) => l === lang)?.[0] || "";
+
   const url = request.nextUrl.clone();
 
-  url.pathname = `/${lang}${pathname}`;
+  if (countrySlug) {
+    // Known country → redirect to /countrySlug
+    url.pathname = `/${countrySlug}${pathname}`;
+  } else {
+    // Unknown country → stay on root, default language EN
+    url.pathname = pathname;
+    url.searchParams.set("lang", lang); // still pass language
+  }
 
   return NextResponse.redirect(url);
 }
@@ -104,5 +102,5 @@ export function middleware(request: NextRequest) {
  * Middleware matcher
  */
 export const config = {
-  matcher: ["/((?!_next|favicon.ico).*)"],
+  matcher: ["/((?!_next|favicon.ico|robots.txt).*)"],
 };
