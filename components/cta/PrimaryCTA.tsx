@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react";
 interface PrimaryCTAProps {
   href: string;
   children: React.ReactNode;
-  observer?: boolean; // default true: affects FloatingCTA visibility
+  observer?: boolean;
 }
 
 export default function PrimaryCTA({
