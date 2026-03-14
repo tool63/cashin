@@ -3,7 +3,7 @@
 import { useContext } from "react";
 import { LanguageContext } from "@/app/[country]/providers/LanguageProvider";
 
-const COUNTRIES = ["us", "ca", "uk", "de", "fr", "in"];
+const COUNTRIES = ["us", "ca", "uk", "de", "fr", "eu", "in"];
 
 export default function CountrySwitcher() {
   const { country, setCountry } = useContext(LanguageContext);
