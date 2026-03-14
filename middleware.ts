@@ -2,10 +2,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-import { supportedLanguages, defaultLanguage, countryLangMap } from "./app/core/i18n/config";
-
-// Map country code → default language
-const COUNTRY_TO_LANGUAGE: Record<string, string> = {
+const COUNTRY_LANGUAGE_MAP: Record<string, string> = {
   us: "EN",
   uk: "EN",
   ca: "EN",
@@ -15,48 +12,18 @@ const COUNTRY_TO_LANGUAGE: Record<string, string> = {
   in: "EN",
 };
 
-/**
- * Normalize language code
- * Example: en-US -> EN, fr-CA -> FR
- */
-function normalizeLanguage(lang?: string | null) {
-  if (!lang) return null;
-  const code = lang.toLowerCase().split("-")[0];
-  return supportedLanguages.includes(code as any) ? code.toUpperCase() : null;
-}
+const SUPPORTED_COUNTRIES = Object.keys(COUNTRY_LANGUAGE_MAP);
 
 /**
- * Detect language from request
+ * Detect user country from headers
  */
-function detectLanguage(request: NextRequest) {
-  // 1️⃣ Cookie preference
-  const cookieLang = normalizeLanguage(request.cookies.get("lang")?.value);
-  if (cookieLang) return cookieLang;
-
-  // 2️⃣ Accept-Language header
-  const acceptLang = request.headers.get("accept-language");
-  if (acceptLang) {
-    const langs = acceptLang.split(",").map((lang) => lang.split(";")[0].trim());
-    for (const lang of langs) {
-      const normalized = normalizeLanguage(lang);
-      if (normalized) return normalized;
-    }
-  }
-
-  // 3️⃣ Geo-IP country detection
+function detectCountry(request: NextRequest) {
   const country =
-    (request.headers.get("cf-ipcountry") ||
-      request.headers.get("x-vercel-ip-country") ||
-      request.headers.get("cloudfront-viewer-country") ||
-      "") // fallback empty
-      .toLowerCase();
+    request.headers.get("cf-ipcountry") ||
+    request.headers.get("x-vercel-ip-country") ||
+    request.headers.get("cloudfront-viewer-country");
 
-  if (country && COUNTRY_TO_LANGUAGE[country]) {
-    return COUNTRY_TO_LANGUAGE[country];
-  }
-
-  // 4️⃣ Default fallback
-  return defaultLanguage.toUpperCase();
+  return country?.toLowerCase() || "";
 }
 
 /**
@@ -65,37 +32,53 @@ function detectLanguage(request: NextRequest) {
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Skip Next.js internals and static files
-  if (pathname.startsWith("/_next") || pathname.startsWith("/api") || pathname.includes(".")) {
-    return;
+  // Skip internal routes
+  if (
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/api") ||
+    pathname.includes(".")
+  ) {
+    return NextResponse.next();
   }
 
-  // Check if path already contains a **country slug**
-  const pathHasCountry = Object.keys(COUNTRY_TO_LANGUAGE).some((country) =>
-    pathname.startsWith(`/${country}`)
-  );
-  if (pathHasCountry) return;
-
-  // Detect user language
-  const lang = detectLanguage(request);
-
-  // Determine country slug from language for redirect
-  // If language is from known country, map it back to a country slug
-  const countrySlug =
-    Object.entries(COUNTRY_TO_LANGUAGE).find(([country, l]) => l === lang)?.[0] || "";
-
+  const segments = pathname.split("/").filter(Boolean);
   const url = request.nextUrl.clone();
 
-  if (countrySlug) {
-    // Known country → redirect to /countrySlug
-    url.pathname = `/${countrySlug}${pathname}`;
-  } else {
-    // Unknown country → stay on root, default language EN
-    url.pathname = pathname;
-    url.searchParams.set("lang", lang); // still pass language
+  /**
+   * Case 1: Root visit → redirect based on geo
+   */
+  if (pathname === "/") {
+    const country = detectCountry(request);
+
+    if (SUPPORTED_COUNTRIES.includes(country)) {
+      url.pathname = `/${country}`;
+      return NextResponse.redirect(url);
+    }
+
+    // Unsupported country → stay on root
+    return NextResponse.next();
   }
 
-  return NextResponse.redirect(url);
+  /**
+   * Case 2: Validate country slug
+   */
+  const firstSegment = segments[0];
+
+  if (!SUPPORTED_COUNTRIES.includes(firstSegment)) {
+    url.pathname = "/";
+    return NextResponse.redirect(url);
+  }
+
+  /**
+   * Case 3: Prevent nested country paths
+   * /us/eu → /us
+   */
+  if (segments.length > 1) {
+    url.pathname = `/${firstSegment}`;
+    return NextResponse.redirect(url);
+  }
+
+  return NextResponse.next();
 }
 
 /**
