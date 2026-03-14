@@ -1,23 +1,46 @@
+// app/[country]/providers/LanguageProvider.tsx
 "use client";
 
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useState, useEffect } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
-interface CountryContextType {
+interface LanguageContextType {
   country: string;
-  setCountry: (c: string) => void;
+  setCountry: (country: string) => void;
 }
 
-export const LanguageContext = createContext<CountryContextType>({
+export const LanguageContext = createContext<LanguageContextType>({
   country: "us",
   setCountry: () => {},
 });
 
-interface Props {
+interface ProviderProps {
   children: ReactNode;
 }
 
-export default function CountryProvider({ children }: Props) {
-  const [country, setCountry] = useState("us");
+const COUNTRIES = ["us", "uk", "in", "ca", "de", "fr"];
+
+export default function LanguageProvider({ children }: ProviderProps) { // <-- default export
+  const pathname = usePathname();
+  const router = useRouter();
+  const slug = pathname?.split("/")[1] || "us";
+
+  const [country, setCountryState] = useState(slug);
+
+  useEffect(() => {
+    if (!COUNTRIES.includes(slug)) {
+      router.replace("/us");
+    } else {
+      setCountryState(slug);
+    }
+  }, [slug]);
+
+  const setCountry = (newCountry: string) => {
+    if (newCountry !== country && COUNTRIES.includes(newCountry)) {
+      setCountryState(newCountry);
+      router.push(`/${newCountry}`);
+    }
+  };
 
   return (
     <LanguageContext.Provider value={{ country, setCountry }}>
