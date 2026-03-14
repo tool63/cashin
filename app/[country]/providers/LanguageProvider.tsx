@@ -1,4 +1,3 @@
-// app/[country]/providers/LanguageProvider.tsx
 "use client";
 
 import { createContext, ReactNode, useState, useEffect } from "react";
@@ -33,7 +32,10 @@ export default function LanguageProvider({ children }: ProviderProps) {
     } else {
       setCountryState(slug);
     }
-  }, [slug]);
+
+    // allow Tailwind theme to show content
+    document.documentElement.setAttribute("data-theme-ready", "true");
+  }, [slug, router]);
 
   const setCountry = (newCountry: string) => {
     if (newCountry !== country && COUNTRIES.includes(newCountry)) {
