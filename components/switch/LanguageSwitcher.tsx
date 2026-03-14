@@ -3,14 +3,17 @@
 import { useContext } from "react";
 import { LanguageContext } from "@/app/[country]/providers/LanguageProvider";
 
-const COUNTRIES = ["us", "ca", "uk", "de", "fr", "eu", "in"];
+const COUNTRIES = ["us", "uk", "ca", "au", "fr", "de", "in"];
 
 export default function CountrySwitcher() {
-  const { country, setCountry } = useContext(LanguageContext);
+  const { country, language, setCountry } = useContext(LanguageContext);
 
   const switchCountry = () => {
     const currentIndex = COUNTRIES.indexOf(country);
-    const nextIndex = (currentIndex + 1) % COUNTRIES.length;
+
+    const nextIndex =
+      currentIndex === -1 ? 0 : (currentIndex + 1) % COUNTRIES.length;
+
     setCountry(COUNTRIES[nextIndex]);
   };
 
@@ -23,9 +26,9 @@ export default function CountrySwitcher() {
                  text-sm font-medium text-gray-700 dark:text-gray-200
                  hover:bg-gray-100 dark:hover:bg-gray-700
                  transition"
-      aria-label={`Country/Region (${country.toUpperCase()})`}
+      aria-label={`Language (${language})`}
     >
-      {country.toUpperCase()}
+      {language}
     </button>
   );
 }
