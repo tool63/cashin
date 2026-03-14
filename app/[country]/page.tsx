@@ -10,6 +10,7 @@ interface PageProps {
 export default async function CountryPage({ params }: PageProps) {
   const country = params?.country ?? "us";
 
+  // SEO for each country/region
   const seo = await buildSEO({
     route: "/",
     locale: country,
@@ -25,6 +26,19 @@ export default async function CountryPage({ params }: PageProps) {
       <p className="text-lg text-gray-700 dark:text-gray-300">
         Current region: <strong>{country.toUpperCase()}</strong>
       </p>
+
+      {/* Example: quick links to other regions */}
+      <div className="mt-6 flex flex-wrap gap-4 justify-center">
+        {["us", "ca", "uk", "de", "fr", "in"].map((c) => (
+          <a
+            key={c}
+            href={`/${c}`}
+            className="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition"
+          >
+            {c.toUpperCase()}
+          </a>
+        ))}
+      </div>
     </div>
   );
 }
