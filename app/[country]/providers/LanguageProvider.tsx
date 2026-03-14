@@ -1,4 +1,3 @@
-// app/[country]/providers/LanguageProvider.tsx
 "use client";
 
 import { createContext, ReactNode, useState, useEffect } from "react";
@@ -18,9 +17,9 @@ interface ProviderProps {
   children: ReactNode;
 }
 
-const COUNTRIES = ["us", "uk", "in", "ca", "de", "fr"];
+const COUNTRIES = ["us", "uk", "in", "ca", "de", "fr"]; // top countries
 
-export default function LanguageProvider({ children }: ProviderProps) { // <-- default export
+export default function LanguageProvider({ children }: ProviderProps) { // default export
   const pathname = usePathname();
   const router = useRouter();
   const slug = pathname?.split("/")[1] || "us";
