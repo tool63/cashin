@@ -1,4 +1,3 @@
-// app/[country]/page.tsx
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
 import { buildSEO } from "@/components/SEO/seoEngine";
 
@@ -11,7 +10,7 @@ interface PageProps {
 export default async function Page({ params }: PageProps) {
   const country = params?.country ?? SEO_CONFIG.defaultLocale;
 
-  const seo = await buildSEO({
+  await buildSEO({
     route: "/",
     locale: country,
     title: "Hello World",
@@ -19,7 +18,7 @@ export default async function Page({ params }: PageProps) {
   });
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white">
+    <main className="min-h-screen flex flex-col items-center justify-center">
       <h1 className="text-4xl font-bold mb-4">Hello World!</h1>
       <p className="text-lg text-gray-700 dark:text-gray-300">
         Current country: <strong>{country.toUpperCase()}</strong>
