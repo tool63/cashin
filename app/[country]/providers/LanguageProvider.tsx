@@ -1,6 +1,13 @@
 "use client";
 
-import { createContext, ReactNode, useState, useEffect } from "react";
+import {
+  createContext,
+  ReactNode,
+  useState,
+  useEffect,
+  useMemo,
+  useCallback,
+} from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 interface LanguageContextType {
@@ -10,7 +17,7 @@ interface LanguageContextType {
 }
 
 export const LanguageContext = createContext<LanguageContextType>({
-  country: "",
+  country: "us",
   language: "EN",
   setCountry: () => {},
 });
@@ -34,24 +41,70 @@ export default function LanguageProvider({ children, country: initialCountry }: 
   const pathname = usePathname();
   const router = useRouter();
 
-  const slug = initialCountry || pathname?.split("/")[1] || "us";
+  /**
+   * Detect country from URL
+   */
+  const detectedCountry = useMemo(() => {
+    return (
+      initialCountry ||
+      pathname?.split("/")[1]?.toLowerCase() ||
+      "us"
+    );
+  }, [pathname, initialCountry]);
 
-  const [country, setCountryState] = useState(slug);
-  const [language, setLanguage] = useState(COUNTRY_LANGUAGE_MAP[slug] || "EN");
+  /**
+   * State
+   */
+  const [country, setCountryState] = useState(detectedCountry);
+  const [language, setLanguage] = useState(
+    COUNTRY_LANGUAGE_MAP[detectedCountry] || "EN"
+  );
 
+  /**
+   * Update state if URL country changes
+   */
+  useEffect(() => {
+    if (detectedCountry !== country) {
+      setCountryState(detectedCountry);
+      setLanguage(COUNTRY_LANGUAGE_MAP[detectedCountry] || "EN");
+    }
+  }, [detectedCountry, country]);
+
+  /**
+   * Mark page ready (used for theme or UI hydration fixes)
+   */
   useEffect(() => {
     document.documentElement.setAttribute("data-theme-ready", "true");
   }, []);
 
-  const setCountry = (newCountry: string) => {
-    if (!COUNTRY_LANGUAGE_MAP[newCountry]) return;
-    setCountryState(newCountry);
-    setLanguage(COUNTRY_LANGUAGE_MAP[newCountry]);
-    router.push(`/${newCountry}`);
-  };
+  /**
+   * Change country
+   */
+  const setCountry = useCallback(
+    (newCountry: string) => {
+      if (!COUNTRY_LANGUAGE_MAP[newCountry]) return;
+
+      if (newCountry === country) return;
+
+      setCountryState(newCountry);
+      setLanguage(COUNTRY_LANGUAGE_MAP[newCountry]);
+
+      router.push(`/${newCountry}`);
+    },
+    [country, router]
+  );
+
+  const value = useMemo(
+    () => ({
+      country,
+      language,
+      setCountry,
+    }),
+    [country, language, setCountry]
+  );
 
   return (
-    <LanguageContext.Provider value={{ country, language, setCountry }}>
+    <LanguageContext.Provider value={value}>
       {children}
     </LanguageContext.Provider>
   );
