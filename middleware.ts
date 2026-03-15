@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 /**
- * Country → Language
+ * Country → Language mapping
  */
 const COUNTRY_LANGUAGE_MAP: Record<string, string> = {
   us: "EN",
@@ -16,9 +16,10 @@ const COUNTRY_LANGUAGE_MAP: Record<string, string> = {
 };
 
 const SUPPORTED_COUNTRIES = Object.keys(COUNTRY_LANGUAGE_MAP);
+const DEFAULT_COUNTRY = "us";
 
 /**
- * Detect user country from request headers
+ * Detect user country from headers
  */
 function detectCountry(request: NextRequest): string {
   const country =
@@ -32,10 +33,13 @@ function detectCountry(request: NextRequest): string {
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Skip system paths
+  /**
+   * Skip system routes
+   */
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
+    pathname.startsWith("/static") ||
     pathname.includes(".")
   ) {
     return NextResponse.next();
@@ -45,41 +49,51 @@ export function middleware(request: NextRequest) {
   const segments = pathname.split("/").filter(Boolean);
 
   /**
-   * Root visit
+   * ROOT VISIT → Detect country
    */
   if (pathname === "/") {
-    const country = detectCountry(request);
+    const detectedCountry = detectCountry(request);
 
-    if (SUPPORTED_COUNTRIES.includes(country)) {
-      url.pathname = `/${country}`;
-      return NextResponse.redirect(url);
-    }
+    const country = SUPPORTED_COUNTRIES.includes(detectedCountry)
+      ? detectedCountry
+      : DEFAULT_COUNTRY;
 
-    return NextResponse.next();
+    url.pathname = `/${country}`;
+
+    const response = NextResponse.redirect(url);
+
+    response.cookies.set("country", country, {
+      path: "/",
+      maxAge: 60 * 60 * 24 * 365,
+    });
+
+    return response;
   }
 
   /**
-   * Validate country slug
+   * If first segment is NOT a country
+   * redirect to default country
    */
-  const firstSegment = segments[0];
+  const country = segments[0];
 
-  if (!SUPPORTED_COUNTRIES.includes(firstSegment)) {
-    url.pathname = "/";
+  if (!SUPPORTED_COUNTRIES.includes(country)) {
+    url.pathname = `/${DEFAULT_COUNTRY}${pathname}`;
     return NextResponse.redirect(url);
   }
 
   /**
-   * Prevent nested routes
-   * /us/eu → /us
+   * Store country cookie
    */
-  if (segments.length > 1) {
-    url.pathname = `/${firstSegment}`;
-    return NextResponse.redirect(url);
-  }
+  const response = NextResponse.next();
 
-  return NextResponse.next();
+  response.cookies.set("country", country, {
+    path: "/",
+    maxAge: 60 * 60 * 24 * 365,
+  });
+
+  return response;
 }
 
 export const config = {
-  matcher: ["/((?!_next|favicon.ico|robots.txt).*)"],
+  matcher: ["/((?!_next|favicon.ico|robots.txt|sitemap.xml).*)"],
 };
