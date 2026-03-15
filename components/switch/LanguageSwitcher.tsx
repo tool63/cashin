@@ -4,13 +4,13 @@ import { useContext, useState, useRef, useEffect } from "react";
 import { LanguageContext } from "@/app/[country]/providers/LanguageProvider";
 
 const COUNTRIES = [
-  { code: "us", label: "EN-US" },
-  { code: "uk", label: "EN-GB" },
-  { code: "ca", label: "EN-CA" },
-  { code: "au", label: "EN-AU" },
-  { code: "fr", label: "FR-FR" },
-  { code: "de", label: "DE-DE" },
-  { code: "in", label: "EN-IN" },
+  { code: "us", label: "EN" },
+  { code: "uk", label: "EN" },
+  { code: "ca", label: "EN" },
+  { code: "au", label: "EN" },
+  { code: "fr", label: "FR" },
+  { code: "de", label: "DE" },
+  { code: "in", label: "EN" },
 ];
 
 export default function LanguageSwitcher() {
@@ -38,17 +38,18 @@ export default function LanguageSwitcher() {
                    bg-white dark:bg-gray-800
                    text-sm font-medium text-gray-700 dark:text-gray-200
                    hover:bg-gray-100 dark:hover:bg-gray-700
-                   transition flex items-center justify-between w-24"
+                   transition flex items-center justify-between w-20"
         aria-label={`Language (${language})`}
       >
-        {language}
-        <span className="ml-2 text-xs">&#9662;</span> {/* down arrow */}
+        {language.toUpperCase()}
+        <span className="ml-2 text-xs">&#9662;</span>
       </button>
 
       {open && (
-        <ul className="absolute z-50 mt-1 w-28 max-h-60 overflow-y-auto
-                       bg-white dark:bg-gray-800 border border-gray-200 dark:border-white/20
-                       rounded-lg shadow-lg p-1 text-sm"
+        <ul
+          className="absolute z-50 mt-1 w-24 max-h-60 overflow-y-auto
+                     bg-white dark:bg-gray-800 border border-gray-200 dark:border-white/20
+                     rounded-lg shadow-lg p-1 text-sm"
         >
           {COUNTRIES.map((c) => (
             <li
@@ -56,6 +57,7 @@ export default function LanguageSwitcher() {
               className={`px-3 py-2 rounded-md cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700
                           ${c.code === country ? "font-semibold bg-gray-100 dark:bg-gray-700" : ""}`}
               onClick={() => {
+                // Set selected country in memory, URL does not change
                 setCountry(c.code);
                 setOpen(false);
               }}
