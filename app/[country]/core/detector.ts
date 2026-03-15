@@ -1,6 +1,11 @@
 // app/[country]/core/detector.ts
 import { cookies, headers } from "next/headers";
-import { countryLangMap, defaultLanguage, supportedLanguages, type SupportedLang } from "@/app/core/i18n/config";
+import {
+  countryLangMap,
+  defaultLanguage,
+  supportedLanguages,
+  type SupportedLang,
+} from "@/app/core/i18n/config";
 
 /**
  * Normalize language code
@@ -19,7 +24,7 @@ export function detectCountry(pathname?: string): string {
   // 1️⃣ Check URL slug: example.com/[country]/...
   const segments = pathname?.split("/").filter(Boolean) || [];
   const urlCountry = segments[0]?.toLowerCase();
-  if (urlCountry && Object.keys(countryLangMap).includes(urlCountry)) {
+  if (urlCountry && Object.keys(countryLangMap).map(k => k.toLowerCase()).includes(urlCountry)) {
     return urlCountry;
   }
 
@@ -43,7 +48,7 @@ export function detectCountry(pathname?: string): string {
  * 3. Country → language map
  * 4. Default fallback
  */
-export function detectLanguage(): SupportedLang {
+export function detectLanguage(pathname?: string): SupportedLang {
   // 1️⃣ Cookie
   const cookieLang = normalizeLanguage(cookies().get("NEXT_LOCALE")?.value);
   if (cookieLang) return cookieLang;
@@ -61,8 +66,8 @@ export function detectLanguage(): SupportedLang {
   }
 
   // 3️⃣ Geo country → language map
-  const countryCode = detectCountry();
-  const geoLang = countryLangMap[countryCode.toUpperCase()]; // map uses uppercase country keys
+  const countryCode = detectCountry(pathname);
+  const geoLang = countryLangMap[countryCode.toUpperCase()]; // countryLangMap uses uppercase keys
   if (geoLang && supportedLanguages.includes(geoLang.toLowerCase() as SupportedLang)) {
     return geoLang.toLowerCase() as SupportedLang;
   }
@@ -72,19 +77,24 @@ export function detectLanguage(): SupportedLang {
 }
 
 /**
- * Utility class for consistent detection
+ * Detector utility class
  */
 export class Detector {
   private _country: string | null = null;
   private _language: SupportedLang | null = null;
+  private _pathname?: string;
+
+  constructor(pathname?: string) {
+    this._pathname = pathname;
+  }
 
   get country(): string {
-    if (!this._country) this._country = detectCountry();
+    if (!this._country) this._country = detectCountry(this._pathname);
     return this._country;
   }
 
   get language(): SupportedLang {
-    if (!this._language) this._language = detectLanguage();
+    if (!this._language) this._language = detectLanguage(this._pathname);
     return this._language;
   }
 }
@@ -92,8 +102,8 @@ export class Detector {
 /**
  * Shortcut function
  */
-export function detect(): { country: string; language: SupportedLang } {
-  const detector = new Detector();
+export function detect(pathname?: string): { country: string; language: SupportedLang } {
+  const detector = new Detector(pathname);
   return {
     country: detector.country,
     language: detector.language,
