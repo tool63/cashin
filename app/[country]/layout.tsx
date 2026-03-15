@@ -9,10 +9,6 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
 const BASE_URL = "https://payup-pi.vercel.app";
-
-/**
- * hreflang mapping
- */
 const HREFLANG_MAP: Record<string, string> = {
   us: "en-US",
   uk: "en-GB",
@@ -28,34 +24,30 @@ interface LayoutProps {
   params: { country: string };
 }
 
-/**
- * GLOBAL SEO CORE LOGIC
- */
 export async function generateMetadata({ params }: LayoutProps): Promise<Metadata> {
-  const country = params.country.toUpperCase();
+  const country = params.country.toLowerCase();
 
   const languages: Record<string, string> = {};
-
   Object.entries(HREFLANG_MAP).forEach(([c, lang]) => {
     languages[lang] = `${BASE_URL}/${c}`;
   });
 
   return {
     title: {
-      default: `Earn Rewards Online - Cashog (${country})`,
-      template: `%s - Cashog (${country})`,
+      default: `Earn Rewards Online - Cashog (${country.toUpperCase()})`,
+      template: `%s - Cashog (${country.toUpperCase()})`,
     },
     description:
       "Earn rewards by completing surveys, installing apps, playing games, and watching videos on Cashog.",
     alternates: {
-      canonical: `${BASE_URL}/${params.country}`,
+      canonical: `${BASE_URL}/${country}`,
       languages,
     },
   };
 }
 
 export default function CountryLayout({ children, params }: LayoutProps) {
-  const country = params.country;
+  const country = params.country.toLowerCase();
   const htmlLang = HREFLANG_MAP[country] || "en";
 
   return (
@@ -64,11 +56,9 @@ export default function CountryLayout({ children, params }: LayoutProps) {
         <ThemeProviderWrapper>
           <LanguageProvider country={country}>
             <Header />
-
             <main className="min-h-screen pt-20 bg-bg-secondary dark:bg-bg-primary">
               {children}
             </main>
-
             <Footer />
           </LanguageProvider>
         </ThemeProviderWrapper>
