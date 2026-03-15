@@ -2,6 +2,9 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+/**
+ * Supported countries and their default language
+ */
 const COUNTRY_LANGUAGE_MAP: Record<string, string> = {
   us: "EN",
   uk: "EN",
@@ -15,9 +18,9 @@ const COUNTRY_LANGUAGE_MAP: Record<string, string> = {
 const SUPPORTED_COUNTRIES = Object.keys(COUNTRY_LANGUAGE_MAP);
 
 /**
- * Detect user country from headers
+ * Detect visitor country from request headers
  */
-function detectCountry(request: NextRequest) {
+function detectCountry(request: NextRequest): string {
   const country =
     request.headers.get("cf-ipcountry") ||
     request.headers.get("x-vercel-ip-country") ||
@@ -27,12 +30,12 @@ function detectCountry(request: NextRequest) {
 }
 
 /**
- * Middleware handler
+ * Middleware
  */
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Skip internal routes
+  // Skip Next.js internals and static files
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
@@ -41,11 +44,11 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const segments = pathname.split("/").filter(Boolean);
   const url = request.nextUrl.clone();
+  const segments = pathname.split("/").filter(Boolean);
 
   /**
-   * Case 1: Root visit → redirect based on geo
+   * Case 1 — Root visit
    */
   if (pathname === "/") {
     const country = detectCountry(request);
@@ -60,7 +63,7 @@ export function middleware(request: NextRequest) {
   }
 
   /**
-   * Case 2: Validate country slug
+   * Case 2 — Validate country slug
    */
   const firstSegment = segments[0];
 
@@ -70,8 +73,8 @@ export function middleware(request: NextRequest) {
   }
 
   /**
-   * Case 3: Prevent nested country paths
-   * /us/eu → /us
+   * Case 3 — Prevent nested routes
+   * Example: /us/eu → /us
    */
   if (segments.length > 1) {
     url.pathname = `/${firstSegment}`;
