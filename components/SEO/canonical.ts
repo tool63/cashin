@@ -1,17 +1,17 @@
-// canonical.ts
-import { defaultLanguage, supportedLanguages } from "@/app/core/i18n/config";
+// components/SEO/canonical.ts
+
 import { SEO_CONFIG } from "./seoConfig";
 
 /**
  * Build canonical URL
- * @param path Page path, e.g., "/offers"
- * @param country Country code, e.g., "US"
+ * @param path Page path (example: "/offers")
+ * @param country Country slug (example: "us")
  */
-export function buildCanonical(path: string = "", country?: string): string {
-  // Normalize country to lowercase, fallback to default language if not supported
-  const countryCode = country?.toUpperCase();
-  const isSupported = countryCode && supportedLanguages.includes(countryCode.toLowerCase() as typeof supportedLanguages[number]);
-  const countryPath = isSupported ? countryCode.toLowerCase() : defaultLanguage;
+export function buildCanonical(path: string = "", country: string = "us"): string {
+  const countrySlug = country.toLowerCase();
 
-  return `${SEO_CONFIG.siteUrl}/${countryPath}${path}`;
+  const normalizedPath =
+    path && path !== "/" ? path : "";
+
+  return `${SEO_CONFIG.siteUrl}/${countrySlug}${normalizedPath}`;
 }
