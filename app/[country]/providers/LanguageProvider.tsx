@@ -15,8 +15,9 @@ export const LanguageContext = createContext<LanguageContextType>({
   setCountry: () => {},
 });
 
-interface ProviderProps {
+interface Props {
   children: ReactNode;
+  country?: string;
 }
 
 const COUNTRY_LANGUAGE_MAP: Record<string, string> = {
@@ -29,33 +30,23 @@ const COUNTRY_LANGUAGE_MAP: Record<string, string> = {
   de: "DE",
 };
 
-export default function LanguageProvider({ children }: ProviderProps) {
+export default function LanguageProvider({ children, country: initialCountry }: Props) {
   const pathname = usePathname();
   const router = useRouter();
 
-  const slug = pathname?.split("/")[1] || "";
+  const slug = initialCountry || pathname?.split("/")[1] || "us";
 
-  const [country, setCountryState] = useState("");
-  const [language, setLanguage] = useState("EN");
+  const [country, setCountryState] = useState(slug);
+  const [language, setLanguage] = useState(COUNTRY_LANGUAGE_MAP[slug] || "EN");
 
   useEffect(() => {
-    if (COUNTRY_LANGUAGE_MAP[slug]) {
-      setCountryState(slug);
-      setLanguage(COUNTRY_LANGUAGE_MAP[slug]);
-    } else {
-      setCountryState("");
-      setLanguage("EN");
-    }
-
     document.documentElement.setAttribute("data-theme-ready", "true");
-  }, [slug]);
+  }, []);
 
   const setCountry = (newCountry: string) => {
     if (!COUNTRY_LANGUAGE_MAP[newCountry]) return;
-
     setCountryState(newCountry);
     setLanguage(COUNTRY_LANGUAGE_MAP[newCountry]);
-
     router.push(`/${newCountry}`);
   };
 
