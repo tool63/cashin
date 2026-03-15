@@ -1,15 +1,17 @@
 // components/SEO/seoEngine.ts
+
 import { buildMetadata } from "./metadata";
 import { detectPageType } from "./pageTypes";
 import { buildOrganizationSchema, buildWebsiteSchema } from "./schema";
 import { logSeoMetrics } from "./seoAnalytics";
-import { countryHreflangMap, defaultLanguage } from "@/app/core/i18n/config";
+
+import { countryLangMap } from "@/app/core/i18n/config";
 
 interface BuildSEOParams {
   route: string;
   title: string;
   description?: string;
-  countryCode?: string; // use uppercase ISO 3166-1 alpha-2
+  countryCode?: string; // ISO country code like US, FR, DE
   keywords?: string[];
 }
 
@@ -25,13 +27,16 @@ export async function buildSEO({
 }: BuildSEOParams) {
   const start = Date.now();
 
-  // Validate country / fallback
-  const countryKey = countryCode && countryHreflangMap[countryCode.toUpperCase()]
-    ? countryCode.toUpperCase()
-    : defaultLanguage.toUpperCase();
+  // -----------------------------
+  // 1️⃣ Validate country
+  // -----------------------------
+  const countryKey =
+    countryCode && countryLangMap[countryCode.toUpperCase()]
+      ? countryCode.toUpperCase()
+      : "US";
 
   // -----------------------------
-  // 1️⃣ Build Metadata
+  // 2️⃣ Build Metadata
   // -----------------------------
   const metadata = buildMetadata({
     title,
@@ -42,24 +47,23 @@ export async function buildSEO({
   });
 
   // -----------------------------
-  // 2️⃣ Detect Page Type for structured data / SEO scoring
+  // 3️⃣ Detect Page Type
   // -----------------------------
   const pageType = detectPageType(route);
 
   // -----------------------------
-  // 3️⃣ Build Structured Data
+  // 4️⃣ Build Structured Data
   // -----------------------------
   const structuredData = [
     buildOrganizationSchema(),
     buildWebsiteSchema(),
-    // Additional corporate-level structured data could be added here:
-    // e.g., WebPage schema, Offer schema, Product schema
   ];
 
   // -----------------------------
-  // 4️⃣ Log SEO metrics (for enterprise monitoring)
+  // 5️⃣ Log SEO metrics
   // -----------------------------
   const generationTime = Date.now() - start;
+
   logSeoMetrics({
     page: route,
     generationTime,
@@ -69,6 +73,6 @@ export async function buildSEO({
     metadata,
     structuredData,
     pageType,
-    countryCode: countryKey, // optional, can be used in layout for <html lang>
+    countryCode: countryKey,
   };
 }
