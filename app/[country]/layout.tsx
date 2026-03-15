@@ -1,6 +1,4 @@
-"use client";
-
-import "@/styles/globals.css";
+// app/[country]/layout.tsx
 import { ReactNode } from "react";
 import { Metadata } from "next";
 
@@ -36,13 +34,9 @@ interface LayoutProps {
 export async function generateMetadata({ params }: LayoutProps): Promise<Metadata> {
   const country = params.country.toLowerCase();
 
-  // Hreflang links for all countries
   const languages = buildHreflang(`/${country}`);
-
-  // Canonical URL
   const canonical = buildCanonical("", country);
 
-  // JSON-LD structured data
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -59,38 +53,8 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
     },
     description: SEO_CONFIG.defaultDescription,
     keywords: SEO_CONFIG.defaultKeywords,
-    alternates: {
-      canonical,
-      languages,
-    },
-    openGraph: {
-      title: SEO_CONFIG.defaultTitle,
-      description: SEO_CONFIG.defaultDescription,
-      url: `${BASE_URL}/${country}`,
-      siteName: SEO_CONFIG.siteName,
-    },
-    twitter: {
-      card: "summary_large_image",
-      site: "@cashog",
-      title: SEO_CONFIG.defaultTitle,
-      description: SEO_CONFIG.defaultDescription,
-    },
-    icons: {
-      icon: "/favicon.ico",
-      shortcut: "/favicon-32x32.png",
-    },
-    metadataBase: new URL(BASE_URL),
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-      },
-    },
-    other: {
-      jsonLd: JSON.stringify(jsonLd),
-    },
+    alternates: { canonical, languages },
+    other: { jsonLd: JSON.stringify(jsonLd) },
   };
 }
 
