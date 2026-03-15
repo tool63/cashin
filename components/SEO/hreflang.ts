@@ -1,30 +1,22 @@
-// components/SEO/hreflang.ts
-import { supportedLanguages, countryHreflangMap, defaultLanguage } from "@/app/core/i18n/config";
+// hreflang.ts
+import { countryHreflangMap, defaultLanguage } from "@/app/core/i18n/config";
 import { SEO_CONFIG } from "./seoConfig";
 
-/**
- * Build hreflang mapping for a given path
- * Returns object suitable for Next.js Metadata alternates.languages
- *
- * Example output:
- * {
- *   "en-US": "https://cashog.com/us",
- *   "fr-FR": "https://cashog.com/fr",
- * }
- */
 export function buildHreflang(path: string = ""): Record<string, string> {
-  const hreflangMap: Record<string, string> = {};
-
-  // Loop through all supported countries/languages
-  Object.entries(countryHreflangMap).forEach(([countryCode, hreflang]) => {
-    const urlPath = `/${countryCode.toLowerCase()}${path}`;
-    hreflangMap[hreflang] = `${SEO_CONFIG.siteUrl}${urlPath}`;
+  const map: Record<string, string> = {};
+  Object.entries(countryHreflangMap).forEach(([country, hreflang]) => {
+    map[hreflang] = `${SEO_CONFIG.siteUrl}/${country.toLowerCase()}${path}`;
   });
 
-  // Fallback: ensure default language is present
-  if (!hreflangMap[`${defaultLanguage}-${defaultLanguage.toUpperCase()}`]) {
-    hreflangMap[`${defaultLanguage}-${defaultLanguage.toUpperCase()}`] = `${SEO_CONFIG.siteUrl}/${defaultLanguage}`;
-  }
+  // Ensure default language
+  const defaultKey = `${defaultLanguage}-${defaultLanguage.toUpperCase()}`;
+  if (!map[defaultKey]) map[defaultKey] = `${SEO_CONFIG.siteUrl}/${defaultLanguage}`;
 
-  return hreflangMap;
+  return map;
+}
+
+// canonical.ts
+export function buildCanonical(path: string = "", country?: string): string {
+  const countryPath = country?.toLowerCase() || defaultLanguage;
+  return `${SEO_CONFIG.siteUrl}/${countryPath}${path}`;
 }
