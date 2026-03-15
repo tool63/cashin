@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 import { ReactNode } from "react";
+import { Metadata } from "next";
 
 import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
 import LanguageProvider from "./providers/LanguageProvider";
@@ -28,10 +29,10 @@ interface LayoutProps {
 }
 
 /**
- * SEO Metadata
+ * GLOBAL SEO CORE LOGIC
  */
-export async function generateMetadata({ params }: LayoutProps) {
-  const country = params.country;
+export async function generateMetadata({ params }: LayoutProps): Promise<Metadata> {
+  const country = params.country.toUpperCase();
 
   const languages: Record<string, string> = {};
 
@@ -40,20 +41,21 @@ export async function generateMetadata({ params }: LayoutProps) {
   });
 
   return {
-    title: "Cashog",
+    title: {
+      default: `Earn Rewards Online - Cashog (${country})`,
+      template: `%s - Cashog (${country})`,
+    },
+    description:
+      "Earn rewards by completing surveys, installing apps, playing games, and watching videos on Cashog.",
     alternates: {
-      canonical: `${BASE_URL}/${country}`,
+      canonical: `${BASE_URL}/${params.country}`,
       languages,
     },
   };
 }
 
-export default function CountryLayout({
-  children,
-  params,
-}: LayoutProps) {
+export default function CountryLayout({ children, params }: LayoutProps) {
   const country = params.country;
-
   const htmlLang = HREFLANG_MAP[country] || "en";
 
   return (
