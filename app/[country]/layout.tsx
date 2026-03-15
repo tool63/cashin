@@ -1,4 +1,5 @@
 // app/[country]/layout.tsx
+import "@/styles/globals.css"; // ← Global styles import
 import { ReactNode } from "react";
 import { Metadata } from "next";
 
