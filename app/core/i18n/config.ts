@@ -1,7 +1,7 @@
 // app/core/i18n/config.ts
 
 // =======================
-// ✅ Supported Languages (only 3 active)
+// ✅ Supported Languages
 // =======================
 export const supportedLanguages = ["en", "fr", "de"] as const;
 export type SupportedLang = (typeof supportedLanguages)[number];
@@ -13,8 +13,7 @@ export const defaultLanguage: SupportedLang = "en";
 export const fallbackLanguage: SupportedLang = defaultLanguage;
 
 // =======================
-// ✅ Country → Language Mapping (ISO 3166-1 alpha-2)
-// All country codes uppercase for consistency
+// ✅ Country → Language Mapping
 // =======================
 export const countryLangMap: Record<string, SupportedLang> = {
   US: "en",
@@ -24,15 +23,13 @@ export const countryLangMap: Record<string, SupportedLang> = {
   IN: "en",
   FR: "fr",
   DE: "de",
-  ES: "en", // fallback to English
+  ES: "en",
   MX: "en",
   BR: "en",
-  // Add more countries in future; fallback to English if not translated
 };
 
 // =======================
-// ✅ Date & Currency Formatting Rules
-// Keep currency separate from DateTimeFormat
+// ✅ Date & Currency Formatting
 // =======================
 export const formattingRules: Record<
   SupportedLang,
@@ -53,44 +50,51 @@ export const pluralRules: Record<SupportedLang, Intl.PluralRules> = {
 };
 
 // =======================
-// ✅ RTL Languages Placeholder
+// ✅ RTL Languages
 // =======================
-export const rtlLanguages: SupportedLang[] = []; // Example: ["ar", "he"]
+export const rtlLanguages: SupportedLang[] = [];
 
 // =======================
 // ✅ Dynamic Translation Loader
 // =======================
 export async function loadTranslation(lang: SupportedLang) {
   try {
-    const translations = await import(`../../locales/${lang}.json`);
+    const translations = await import(`../../locales/${lang}/homepage.json`);
     return translations.default;
   } catch (error) {
     console.warn(
-      `Translation file for '${lang}' not found. Falling back to '${fallbackLanguage}'`
+      `Translation for '${lang}' not found. Falling back to '${fallbackLanguage}'`
     );
-    const fallback = await import(`../../locales/${fallbackLanguage}.json`);
+    const fallback = await import(`../../locales/${fallbackLanguage}/homepage.json`);
     return fallback.default;
   }
 }
 
 // =======================
-// ✅ In-memory Translation Cache
+// ✅ Translation Cache
 // =======================
 const translationCache: Record<SupportedLang, Record<string, string>> = {} as any;
+
 export async function getTranslation(lang: SupportedLang) {
   if (translationCache[lang]) return translationCache[lang];
+
   const translations = await loadTranslation(lang);
   translationCache[lang] = translations;
+
   return translations;
 }
 
 // =======================
-// ✅ Normalize Language Code (e.g., "en-US" → "en")
+// ✅ Normalize Language Code
 // =======================
 export function normalizeLangCode(lang?: string | null): SupportedLang {
   if (!lang) return defaultLanguage;
+
   const code = lang.toLowerCase().split("-")[0];
-  return supportedLanguages.includes(code as SupportedLang) ? (code as SupportedLang) : defaultLanguage;
+
+  return supportedLanguages.includes(code as SupportedLang)
+    ? (code as SupportedLang)
+    : defaultLanguage;
 }
 
 // =======================
