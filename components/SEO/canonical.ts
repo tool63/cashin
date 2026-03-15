@@ -1,18 +1,17 @@
-// components/SEO/canonical.ts
+// canonical.ts
+import { defaultLanguage, supportedLanguages } from "@/app/core/i18n/config";
 import { SEO_CONFIG } from "./seoConfig";
-import { countryHreflangMap, defaultLanguage } from "@/app/core/i18n/config";
 
 /**
- * Build canonical URL for a given path and optional country/language
- * If locale/country is not provided, uses defaultLanguage
+ * Build canonical URL
+ * @param path Page path, e.g., "/offers"
+ * @param country Country code, e.g., "US"
  */
-export function buildCanonical(path: string = "", countryCode?: string): string {
-  let countryPath = countryCode?.toLowerCase() || defaultLanguage;
-
-  // Validate country exists in config
-  if (!countryCode || !countryHreflangMap[countryCode.toUpperCase()]) {
-    countryPath = defaultLanguage;
-  }
+export function buildCanonical(path: string = "", country?: string): string {
+  // Normalize country to lowercase, fallback to default language if not supported
+  const countryCode = country?.toUpperCase();
+  const isSupported = countryCode && supportedLanguages.includes(countryCode.toLowerCase() as typeof supportedLanguages[number]);
+  const countryPath = isSupported ? countryCode.toLowerCase() : defaultLanguage;
 
   return `${SEO_CONFIG.siteUrl}/${countryPath}${path}`;
 }
