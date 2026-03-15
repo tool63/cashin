@@ -1,53 +1,101 @@
+// app/[country]/core/detector.ts
 import { cookies, headers } from "next/headers";
-import { supportedLanguages, defaultLanguage, countryLangMap, type SupportedLang } from "@/app/core/i18n/config";
+import { countryLangMap, defaultLanguage, supportedLanguages, type SupportedLang } from "@/app/core/i18n/config";
 
+/**
+ * Normalize language code
+ * Accepts "en", "EN-US", "fr-FR", etc.
+ */
 function normalizeLanguage(lang?: string | null): SupportedLang | null {
   if (!lang) return null;
   const code = lang.toLowerCase().split("-")[0];
   return supportedLanguages.includes(code as SupportedLang) ? (code as SupportedLang) : null;
 }
 
-export class LanguageDetector {
-  private _detected: SupportedLang | null = null;
-
-  detect(): SupportedLang {
-    if (this._detected) return this._detected;
-
-    // 1️⃣ Cookie
-    const cookieLang = normalizeLanguage(cookies().get("lang")?.value);
-    if (cookieLang) return (this._detected = cookieLang);
-
-    // 2️⃣ Accept-Language
-    const acceptLangHeader = headers().get("accept-language");
-    if (acceptLangHeader) {
-      const langs = acceptLangHeader.split(",").map((l) => l.split(";")[0].trim());
-      for (const lang of langs) {
-        const normalized = normalizeLanguage(lang);
-        if (normalized) return (this._detected = normalized);
-      }
-    }
-
-    // 3️⃣ Geo headers
-    const geoCountry =
-      headers().get("cf-ipcountry") ||
-      headers().get("x-vercel-ip-country") ||
-      headers().get("cloudfront-viewer-country");
-
-    if (geoCountry) {
-      const geoLang = countryLangMap[geoCountry.toUpperCase()];
-      if (geoLang) return (this._detected = geoLang);
-    }
-
-    // 4️⃣ Fallback
-    return (this._detected = defaultLanguage);
+/**
+ * Detect country from URL / headers / IP / CDN
+ */
+export function detectCountry(pathname?: string): string {
+  // 1️⃣ Check URL slug: example.com/[country]/...
+  const segments = pathname?.split("/").filter(Boolean) || [];
+  const urlCountry = segments[0]?.toLowerCase();
+  if (urlCountry && Object.keys(countryLangMap).includes(urlCountry)) {
+    return urlCountry;
   }
 
-  get detected(): SupportedLang {
-    if (!this._detected) return this.detect();
-    return this._detected;
+  // 2️⃣ Check geo headers
+  const geoCountry =
+    headers().get("cf-ipcountry") ||
+    headers().get("x-vercel-ip-country") ||
+    headers().get("cloudfront-viewer-country");
+
+  if (geoCountry) return geoCountry.toLowerCase();
+
+  // 3️⃣ Default fallback
+  return "us";
+}
+
+/**
+ * Detect language for user
+ * Priority:
+ * 1. Cookie
+ * 2. Accept-Language header
+ * 3. Country → language map
+ * 4. Default fallback
+ */
+export function detectLanguage(): SupportedLang {
+  // 1️⃣ Cookie
+  const cookieLang = normalizeLanguage(cookies().get("NEXT_LOCALE")?.value);
+  if (cookieLang) return cookieLang;
+
+  // 2️⃣ Accept-Language header
+  const acceptLangHeader = headers().get("accept-language");
+  if (acceptLangHeader) {
+    const langs = acceptLangHeader
+      .split(",")
+      .map((l) => l.split(";")[0].trim());
+    for (const lang of langs) {
+      const normalized = normalizeLanguage(lang);
+      if (normalized) return normalized;
+    }
+  }
+
+  // 3️⃣ Geo country → language map
+  const countryCode = detectCountry();
+  const geoLang = countryLangMap[countryCode.toUpperCase()]; // map uses uppercase country keys
+  if (geoLang && supportedLanguages.includes(geoLang.toLowerCase() as SupportedLang)) {
+    return geoLang.toLowerCase() as SupportedLang;
+  }
+
+  // 4️⃣ Default fallback
+  return defaultLanguage;
+}
+
+/**
+ * Utility class for consistent detection
+ */
+export class Detector {
+  private _country: string | null = null;
+  private _language: SupportedLang | null = null;
+
+  get country(): string {
+    if (!this._country) this._country = detectCountry();
+    return this._country;
+  }
+
+  get language(): SupportedLang {
+    if (!this._language) this._language = detectLanguage();
+    return this._language;
   }
 }
 
-export function detectLanguage(): SupportedLang {
-  return new LanguageDetector().detect();
+/**
+ * Shortcut function
+ */
+export function detect(): { country: string; language: SupportedLang } {
+  const detector = new Detector();
+  return {
+    country: detector.country,
+    language: detector.language,
+  };
 }
