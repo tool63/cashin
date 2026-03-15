@@ -5,15 +5,12 @@ import { LanguageContext } from "@/app/[country]/providers/LanguageProvider";
 
 const COUNTRIES = ["us", "uk", "ca", "au", "fr", "de", "in"];
 
-export default function CountrySwitcher() {
+export default function LanguageSwitcher() {
   const { country, language, setCountry } = useContext(LanguageContext);
 
   const switchCountry = () => {
     const currentIndex = COUNTRIES.indexOf(country);
-
-    const nextIndex =
-      currentIndex === -1 ? 0 : (currentIndex + 1) % COUNTRIES.length;
-
+    const nextIndex = (currentIndex + 1) % COUNTRIES.length;
     setCountry(COUNTRIES[nextIndex]);
   };
 
