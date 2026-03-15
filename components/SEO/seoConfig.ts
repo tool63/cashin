@@ -1,36 +1,14 @@
 // components/SEO/seoConfig.ts
-
 export const SEO_CONFIG = {
-  siteName: "Cashog",
-  siteUrl: "https://cashog.com",
-
-  defaultLocale: "en",
-
+  siteUrl: "https://payup-pi.vercel.app", // Your main site URL
+  defaultTitle: "Cashog - Earn Rewards Online",
   defaultDescription:
-    "Cashog is a premium rewards platform where users earn money online by completing tasks, surveys, and offers.",
-
-  defaultKeywords: [
-    "earn money online",
-    "make money online",
-    "paid surveys",
-    "cash rewards",
-    "earn paypal money",
-  ],
-
-  themeColor: "#000000",
-
-  defaultOgImage: "https://cashog.com/og-image.jpg",
-
-  twitterHandle: "@cashog",
-
-  preconnect: [
-    "https://fonts.googleapis.com",
-    "https://fonts.gstatic.com",
-  ],
-
-  dnsPrefetch: [
-    "https://fonts.googleapis.com",
-  ],
-
-  preload: [],
+    "Earn rewards by completing surveys, installing apps, playing games, and watching videos on Cashog.",
+  defaultImage: "/images/og-default.png", // Open Graph default
+  twitterHandle: "@Cashog", // Optional
+  twitterSite: "@Cashog",
+  themeColor: "#2563EB", // Corporate brand color
 };
+
+// Ultra-premium shortcut for BASE_URL
+export const BASE_URL = SEO_CONFIG.siteUrl;
