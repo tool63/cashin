@@ -7,36 +7,60 @@ import LanguageProvider from "./providers/LanguageProvider";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
-interface CountryLayoutProps {
+const BASE_URL = "https://payup-pi.vercel.app";
+
+/**
+ * hreflang mapping
+ */
+const HREFLANG_MAP: Record<string, string> = {
+  us: "en-US",
+  uk: "en-GB",
+  ca: "en-CA",
+  au: "en-AU",
+  fr: "fr-FR",
+  de: "de-DE",
+  in: "en-IN",
+};
+
+interface LayoutProps {
   children: ReactNode;
   params: { country: string };
 }
 
-const COUNTRY_LANGUAGE_MAP: Record<string, string> = {
-  us: "en",
-  uk: "en",
-  ca: "en",
-  au: "en",
-  in: "en",
-  fr: "fr",
-  de: "de",
-};
+/**
+ * SEO Metadata
+ */
+export async function generateMetadata({ params }: LayoutProps) {
+  const country = params.country;
+
+  const languages: Record<string, string> = {};
+
+  Object.entries(HREFLANG_MAP).forEach(([c, lang]) => {
+    languages[lang] = `${BASE_URL}/${c}`;
+  });
+
+  return {
+    title: "Cashog",
+    alternates: {
+      canonical: `${BASE_URL}/${country}`,
+      languages,
+    },
+  };
+}
 
 export default function CountryLayout({
   children,
   params,
-}: CountryLayoutProps) {
-  const lang = COUNTRY_LANGUAGE_MAP[params.country] || "en";
+}: LayoutProps) {
+  const country = params.country;
+
+  const htmlLang = HREFLANG_MAP[country] || "en";
 
   return (
-    <html lang={lang}>
-      <head>
-        <title>Cashog</title>
-      </head>
-
+    <html lang={htmlLang} suppressHydrationWarning>
       <body className="bg-primary text-primary transition-colors duration-200">
         <ThemeProviderWrapper>
-          <LanguageProvider>
+          <LanguageProvider country={country}>
             <Header />
 
             <main className="min-h-screen pt-20 bg-bg-secondary dark:bg-bg-primary">
