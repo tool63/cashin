@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 /**
- * Supported countries and their default language
+ * Country → Language
  */
 const COUNTRY_LANGUAGE_MAP: Record<string, string> = {
   us: "EN",
@@ -18,7 +18,7 @@ const COUNTRY_LANGUAGE_MAP: Record<string, string> = {
 const SUPPORTED_COUNTRIES = Object.keys(COUNTRY_LANGUAGE_MAP);
 
 /**
- * Detect visitor country from request headers
+ * Detect user country from request headers
  */
 function detectCountry(request: NextRequest): string {
   const country =
@@ -29,13 +29,10 @@ function detectCountry(request: NextRequest): string {
   return country?.toLowerCase() || "";
 }
 
-/**
- * Middleware
- */
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Skip Next.js internals and static files
+  // Skip system paths
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
@@ -48,7 +45,7 @@ export function middleware(request: NextRequest) {
   const segments = pathname.split("/").filter(Boolean);
 
   /**
-   * Case 1 — Root visit
+   * Root visit
    */
   if (pathname === "/") {
     const country = detectCountry(request);
@@ -58,12 +55,11 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(url);
     }
 
-    // Unsupported country → stay on root
     return NextResponse.next();
   }
 
   /**
-   * Case 2 — Validate country slug
+   * Validate country slug
    */
   const firstSegment = segments[0];
 
@@ -73,8 +69,8 @@ export function middleware(request: NextRequest) {
   }
 
   /**
-   * Case 3 — Prevent nested routes
-   * Example: /us/eu → /us
+   * Prevent nested routes
+   * /us/eu → /us
    */
   if (segments.length > 1) {
     url.pathname = `/${firstSegment}`;
@@ -84,9 +80,6 @@ export function middleware(request: NextRequest) {
   return NextResponse.next();
 }
 
-/**
- * Middleware matcher
- */
 export const config = {
   matcher: ["/((?!_next|favicon.ico|robots.txt).*)"],
 };
