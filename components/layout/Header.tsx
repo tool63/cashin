@@ -2,13 +2,12 @@
 
 import { useState, useRef, useEffect, useContext } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
-import DarkLightToggle from "@/components/switch/DarkLightToggle";
-import { LanguageContext } from "@/app/[country]/providers/LanguageProvider"; // CountryProvider renamed context
 
-const COUNTRIES = ["us", "ca", "uk", "de", "fr", "eu", "in"];
+import DarkLightToggle from "@/components/switch/DarkLightToggle";
+import LanguageSwitcher from "@/components/switch/LanguageSwitcher";
+import { LanguageContext } from "@/app/[country]/providers/LanguageProvider";
 
 interface HeaderProps {
   className?: string;
@@ -19,8 +18,7 @@ export default function Header({ className }: HeaderProps) {
   const [earnOpen, setEarnOpen] = useState(false);
   const [mobileEarnOpen, setMobileEarnOpen] = useState(false);
 
-  const { country, setCountry } = useContext(LanguageContext);
-  const router = useRouter();
+  const { country } = useContext(LanguageContext);
 
   const headerRef = useRef<HTMLDivElement>(null);
   const borderColor = "border-gray-300 dark:border-gray-700";
@@ -34,17 +32,10 @@ export default function Header({ className }: HeaderProps) {
         setMobileEarnOpen(false);
       }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  const switchCountry = () => {
-    const currentIndex = COUNTRIES.indexOf(country);
-    const nextIndex = (currentIndex + 1) % COUNTRIES.length;
-    const nextCountry = COUNTRIES[nextIndex];
-    setCountry(nextCountry);
-    router.push(`/${nextCountry}`); // navigate to country slug
-  };
 
   return (
     <header
@@ -63,7 +54,8 @@ export default function Header({ className }: HeaderProps) {
 
         {/* DESKTOP NAV */}
         <nav className="hidden md:flex items-center gap-7 text-sm font-medium">
-          <Link href={`/${country}/how-it-works`} className="hover:opacity-80 transition">
+
+          <Link href={`/${country}/how-it-works`} className="hover:opacity-80">
             How it works
           </Link>
 
@@ -73,9 +65,12 @@ export default function Header({ className }: HeaderProps) {
             onMouseEnter={() => setEarnOpen(true)}
             onMouseLeave={() => setEarnOpen(false)}
           >
-            <button className="flex items-center gap-1 hover:opacity-80 transition" aria-expanded={earnOpen}>
+            <button className="flex items-center gap-1">
               Earn
-              <ChevronDown size={14} className={`transition-transform ${earnOpen ? "rotate-180" : ""}`} />
+              <ChevronDown
+                size={14}
+                className={`transition-transform ${earnOpen ? "rotate-180" : ""}`}
+              />
             </button>
 
             <AnimatePresence>
@@ -87,50 +82,46 @@ export default function Header({ className }: HeaderProps) {
                   transition={{ duration: 0.18 }}
                   className={`absolute top-full left-0 mt-3 w-52 flex flex-col gap-2 p-4 rounded-xl shadow-xl border ${borderColor} bg-white dark:bg-gray-900`}
                 >
-                  <Link href={`/${country}/surveys`} className="hover:opacity-80">Surveys</Link>
-                  <Link href={`/${country}/app-installs`} className="hover:opacity-80">App Installs</Link>
-                  <Link href={`/${country}/play-games`} className="hover:opacity-80">Play Games</Link>
-                  <Link href={`/${country}/watch-videos`} className="hover:opacity-80">Watch Videos</Link>
-                  <Link href={`/${country}/offerwall`} className="hover:opacity-80">Offerwall</Link>
+                  <Link href={`/${country}/surveys`}>Surveys</Link>
+                  <Link href={`/${country}/app-installs`}>App Installs</Link>
+                  <Link href={`/${country}/play-games`}>Play Games</Link>
+                  <Link href={`/${country}/watch-videos`}>Watch Videos</Link>
+                  <Link href={`/${country}/offerwall`}>Offerwall</Link>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
 
-          <Link href={`/${country}/cashout`} className="hover:opacity-80 transition">Cashout</Link>
-          <Link href={`/${country}/blog`} className="hover:opacity-80 transition">Blog</Link>
-          <Link href={`/${country}/help`} className="hover:opacity-80 transition">Help</Link>
+          <Link href={`/${country}/cashout`}>Cashout</Link>
+          <Link href={`/${country}/blog`}>Blog</Link>
+          <Link href={`/${country}/help`}>Help</Link>
         </nav>
 
         {/* DESKTOP ACTIONS */}
         <div className="hidden md:flex items-center gap-4">
-          {/* Country Switcher */}
-          <button
-            onClick={switchCountry}
-            className="px-3 py-1 rounded-full border border-gray-300 dark:border-white/20
-                       bg-white dark:bg-gray-800
-                       text-sm font-medium text-gray-700 dark:text-gray-200
-                       hover:bg-gray-100 dark:hover:bg-gray-700
-                       transition"
-          >
-            {country.toUpperCase()}
-          </button>
+
+          <LanguageSwitcher />
 
           <DarkLightToggle />
+
           <Link href={`/${country}/login`}>
-            <button className={`px-4 py-2 rounded-lg text-sm border ${borderColor} hover:bg-gray-100 dark:hover:bg-gray-800 transition`}>
+            <button className={`px-4 py-2 rounded-lg text-sm border ${borderColor}`}>
               Login
             </button>
           </Link>
+
           <Link href={`/${country}/signup`}>
-            <button className="px-5 py-2 rounded-lg text-sm bg-gradient-to-r from-yellow-400 to-green-500 text-black font-medium hover:opacity-90">
+            <button className="px-5 py-2 rounded-lg text-sm bg-gradient-to-r from-yellow-400 to-green-500 text-black font-medium">
               Sign up
             </button>
           </Link>
         </div>
 
         {/* MOBILE MENU BUTTON */}
-        <button className="md:hidden hover:opacity-80" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle Menu">
+        <button
+          className="md:hidden"
+          onClick={() => setMobileOpen(!mobileOpen)}
+        >
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
@@ -145,13 +136,21 @@ export default function Header({ className }: HeaderProps) {
             transition={{ duration: 0.18 }}
             className={`md:hidden w-full px-6 pt-4 pb-6 border-t ${borderColor} bg-white dark:bg-gray-900`}
           >
-            <div className="flex flex-col gap-4 text-black dark:text-white">
-              <Link href={`/${country}/how-it-works`} className="hover:opacity-80">How it works</Link>
+            <div className="flex flex-col gap-4">
 
-              {/* MOBILE EARN */}
-              <button onClick={() => setMobileEarnOpen(!mobileEarnOpen)} className="flex items-center justify-between w-full hover:opacity-80">
+              <Link href={`/${country}/how-it-works`}>How it works</Link>
+
+              <button
+                onClick={() => setMobileEarnOpen(!mobileEarnOpen)}
+                className="flex items-center justify-between"
+              >
                 Earn
-                <ChevronDown size={16} className={`transition-transform ${mobileEarnOpen ? "rotate-180" : ""}`} />
+                <ChevronDown
+                  size={16}
+                  className={`transition-transform ${
+                    mobileEarnOpen ? "rotate-180" : ""
+                  }`}
+                />
               </button>
 
               {mobileEarnOpen && (
@@ -169,31 +168,21 @@ export default function Header({ className }: HeaderProps) {
               <Link href={`/${country}/help`}>Help</Link>
 
               <div className="flex items-center justify-between pt-4">
-                <button
-                  onClick={switchCountry}
-                  className="px-3 py-1 rounded-full border border-gray-300 dark:border-white/20
-                             bg-white dark:bg-gray-800
-                             text-sm font-medium text-gray-700 dark:text-gray-200
-                             hover:bg-gray-100 dark:hover:bg-gray-700
-                             transition"
-                >
-                  {country.toUpperCase()}
-                </button>
+                <LanguageSwitcher />
                 <DarkLightToggle />
               </div>
 
-              <div className="pt-3 flex flex-col gap-3">
-                <Link href={`/${country}/login`}>
-                  <button className={`border ${borderColor} py-2 rounded-lg w-full hover:bg-gray-100 dark:hover:bg-gray-800 transition`}>
-                    Login
-                  </button>
-                </Link>
-                <Link href={`/${country}/signup`}>
-                  <button className="bg-gradient-to-r from-yellow-400 to-green-500 py-2 rounded-lg w-full text-black font-medium hover:opacity-90">
-                    Sign up
-                  </button>
-                </Link>
-              </div>
+              <Link href={`/${country}/login`}>
+                <button className={`border ${borderColor} py-2 rounded-lg w-full`}>
+                  Login
+                </button>
+              </Link>
+
+              <Link href={`/${country}/signup`}>
+                <button className="bg-gradient-to-r from-yellow-400 to-green-500 py-2 rounded-lg w-full text-black font-medium">
+                  Sign up
+                </button>
+              </Link>
             </div>
           </motion.div>
         )}
