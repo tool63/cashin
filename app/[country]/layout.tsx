@@ -1,5 +1,5 @@
 // app/[country]/layout.tsx
-import "@/styles/globals.css"; // ← Global styles import
+import "@/styles/globals.css";
 import { ReactNode } from "react";
 import { Metadata } from "next";
 
@@ -33,11 +33,13 @@ interface LayoutProps {
  * Generate SEO metadata per country
  */
 export async function generateMetadata({ params }: LayoutProps): Promise<Metadata> {
-  const country = params.country.toLowerCase();
+  const country = params?.country?.toLowerCase() || "us";
 
+  // Canonical + hreflang
+  const canonical = buildCanonical(`/${country}`);
   const languages = buildHreflang(`/${country}`);
-  const canonical = buildCanonical("", country);
 
+  // JSON-LD Organization
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -63,7 +65,7 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
  * Corporate-grade country layout
  */
 export default function CountryLayout({ children, params }: LayoutProps) {
-  const country = params.country.toLowerCase();
+  const country = params?.country?.toLowerCase() || "us";
   const htmlLang = HREFLANG_MAP[country] || "en";
 
   return (
