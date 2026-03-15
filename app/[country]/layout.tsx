@@ -1,3 +1,5 @@
+"use client";
+
 import "@/styles/globals.css";
 import { ReactNode } from "react";
 import { Metadata } from "next";
@@ -8,7 +10,11 @@ import LanguageProvider from "./providers/LanguageProvider";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
-const BASE_URL = "https://payup-pi.vercel.app";
+import { SEO_CONFIG, BASE_URL } from "@/components/SEO/seoConfig";
+import { buildHreflang } from "@/components/SEO/hreflang";
+import { buildCanonical } from "@/components/SEO/canonical";
+
+// Country → HTML lang map
 const HREFLANG_MAP: Record<string, string> = {
   us: "en-US",
   uk: "en-GB",
@@ -24,28 +30,73 @@ interface LayoutProps {
   params: { country: string };
 }
 
+/**
+ * Generate SEO metadata per country
+ */
 export async function generateMetadata({ params }: LayoutProps): Promise<Metadata> {
   const country = params.country.toLowerCase();
 
-  const languages: Record<string, string> = {};
-  Object.entries(HREFLANG_MAP).forEach(([c, lang]) => {
-    languages[lang] = `${BASE_URL}/${c}`;
-  });
+  // Hreflang links for all countries
+  const languages = buildHreflang(`/${country}`);
+
+  // Canonical URL
+  const canonical = buildCanonical("", country);
+
+  // JSON-LD structured data
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: SEO_CONFIG.siteName,
+    url: `${BASE_URL}/${country}`,
+    description: SEO_CONFIG.defaultDescription,
+    logo: `${BASE_URL}/logo.png`,
+  };
 
   return {
     title: {
-      default: `Earn Rewards Online - Cashog (${country.toUpperCase()})`,
-      template: `%s - Cashog (${country.toUpperCase()})`,
+      default: `${SEO_CONFIG.defaultTitle} (${country.toUpperCase()})`,
+      template: `%s - ${SEO_CONFIG.siteName} (${country.toUpperCase()})`,
     },
-    description:
-      "Earn rewards by completing surveys, installing apps, playing games, and watching videos on Cashog.",
+    description: SEO_CONFIG.defaultDescription,
+    keywords: SEO_CONFIG.defaultKeywords,
     alternates: {
-      canonical: `${BASE_URL}/${country}`,
+      canonical,
       languages,
+    },
+    openGraph: {
+      title: SEO_CONFIG.defaultTitle,
+      description: SEO_CONFIG.defaultDescription,
+      url: `${BASE_URL}/${country}`,
+      siteName: SEO_CONFIG.siteName,
+    },
+    twitter: {
+      card: "summary_large_image",
+      site: "@cashog",
+      title: SEO_CONFIG.defaultTitle,
+      description: SEO_CONFIG.defaultDescription,
+    },
+    icons: {
+      icon: "/favicon.ico",
+      shortcut: "/favicon-32x32.png",
+    },
+    metadataBase: new URL(BASE_URL),
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+      },
+    },
+    other: {
+      jsonLd: JSON.stringify(jsonLd),
     },
   };
 }
 
+/**
+ * Corporate-grade country layout
+ */
 export default function CountryLayout({ children, params }: LayoutProps) {
   const country = params.country.toLowerCase();
   const htmlLang = HREFLANG_MAP[country] || "en";
