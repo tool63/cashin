@@ -1,28 +1,26 @@
 // components/SEO/metadata.ts
-
-import { Metadata } from "next"
-import { SEO_CONFIG } from "./seoConfig"
-import { buildCanonical } from "./canonical"
-import { buildHreflang } from "./hreflang"
+import { Metadata } from "next";
+import { SEO_CONFIG } from "./seoConfig";
+import { buildCanonical } from "./canonical";
+import { buildHreflang } from "./hreflang";
 
 interface BuildMetadataParams {
-  title: string
-  description?: string
-  path?: string
-  locale?: string
-  keywords?: string[]
+  title: string;
+  description?: string;
+  path?: string;
+  countryCode?: string; // optional, for country-specific metadata
+  keywords?: string[];
 }
 
 export function buildMetadata({
   title,
   description,
   path = "",
-  locale,
+  countryCode,
   keywords,
 }: BuildMetadataParams): Metadata {
-
-  const canonical = buildCanonical(path, locale)
-  const hreflang = buildHreflang(path)
+  const canonical = buildCanonical(path, countryCode);
+  const hreflang = buildHreflang(path);
 
   return {
     title,
@@ -36,7 +34,7 @@ export function buildMetadata({
 
     openGraph: {
       title,
-      description,
+      description: description ?? SEO_CONFIG.defaultDescription,
       url: canonical,
       siteName: SEO_CONFIG.siteName,
       images: [
@@ -59,5 +57,5 @@ export function buildMetadata({
       index: true,
       follow: true,
     },
-  }
+  };
 }
