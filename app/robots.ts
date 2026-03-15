@@ -1,7 +1,5 @@
-// app/robots.ts
-
-import type { MetadataRoute } from "next";
-import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import { MetadataRoute } from "next";
+import { BASE_URL } from "@/components/SEO/seoConfig";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -9,8 +7,10 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
+        disallow: ["/api/", "/dashboard/", "/admin/"],
       },
     ],
-    sitemap: `${SEO_CONFIG.siteUrl}/sitemap.xml`,
+    sitemap: `${BASE_URL}/sitemap.xml`,
+    host: BASE_URL,
   };
 }
