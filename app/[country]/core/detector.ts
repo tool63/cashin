@@ -21,23 +21,18 @@ function normalizeLanguage(lang?: string | null): SupportedLang | null {
  * Detect country from URL / headers / IP / CDN
  */
 export function detectCountry(pathname?: string): string {
-  // 1️⃣ Check URL slug: example.com/[country]/...
   const segments = pathname?.split("/").filter(Boolean) || [];
   const urlCountry = segments[0]?.toLowerCase();
   if (urlCountry && Object.keys(countryLangMap).map(k => k.toLowerCase()).includes(urlCountry)) {
     return urlCountry;
   }
 
-  // 2️⃣ Check geo headers
   const geoCountry =
     headers().get("cf-ipcountry") ||
     headers().get("x-vercel-ip-country") ||
     headers().get("cloudfront-viewer-country");
 
-  if (geoCountry) return geoCountry.toLowerCase();
-
-  // 3️⃣ Default fallback
-  return "us";
+  return geoCountry ? geoCountry.toLowerCase() : "us";
 }
 
 /**
@@ -49,30 +44,23 @@ export function detectCountry(pathname?: string): string {
  * 4. Default fallback
  */
 export function detectLanguage(pathname?: string): SupportedLang {
-  // 1️⃣ Cookie
   const cookieLang = normalizeLanguage(cookies().get("NEXT_LOCALE")?.value);
   if (cookieLang) return cookieLang;
 
-  // 2️⃣ Accept-Language header
   const acceptLangHeader = headers().get("accept-language");
   if (acceptLangHeader) {
-    const langs = acceptLangHeader
-      .split(",")
-      .map((l) => l.split(";")[0].trim());
-    for (const lang of langs) {
+    for (const lang of acceptLangHeader.split(",").map(l => l.split(";")[0].trim())) {
       const normalized = normalizeLanguage(lang);
       if (normalized) return normalized;
     }
   }
 
-  // 3️⃣ Geo country → language map
   const countryCode = detectCountry(pathname);
   const geoLang = countryLangMap[countryCode.toUpperCase()];
   if (geoLang && supportedLanguages.includes(geoLang.toLowerCase() as SupportedLang)) {
     return geoLang.toLowerCase() as SupportedLang;
   }
 
-  // 4️⃣ Default fallback
   return defaultLanguage;
 }
 
@@ -103,6 +91,18 @@ export class Detector {
  * Shortcut function
  */
 export function detect(pathname?: string): { country: string; language: SupportedLang } {
+  const detector = new Detector(pathname);
+  return {
+    country: detector.country,
+    language: detector.language,
+  };
+}
+
+/**
+ * NEW: Detect both country and language in one call
+ * For layout.tsx and metadata generation
+ */
+export function detectCountryAndLang(pathname?: string): { country: string; language: SupportedLang } {
   const detector = new Detector(pathname);
   return {
     country: detector.country,
