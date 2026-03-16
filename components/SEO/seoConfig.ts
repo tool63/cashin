@@ -1,17 +1,89 @@
 // components/SEO/seoConfig.ts
+
+/**
+ * Global SEO configuration
+ * Used across metadata, sitemap, robots, canonical, and hreflang
+ */
+
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://payup-pi.vercel.app";
+
 export const SEO_CONFIG = {
-  siteUrl: "https://payup-pi.vercel.app", // Main domain
-  siteName: "Cashog", // Corporate site name
-  defaultTitle: "Earn Money Online - Cashog",
+  siteUrl: SITE_URL,
+  siteName: "Cashog",
+
+  /**
+   * Default SEO
+   */
+  defaultTitle: "Earn Money Online | Cashog",
+  titleTemplate: "%s | Cashog",
+
   defaultDescription:
-    "Earn money by completing surveys, installing apps, playing games, and watching videos on Cashog.",
-  defaultImage: "/images/og-default.png", // OG image
-  defaultOgImage: "/images/og-default.png", // Explicit OG property
+    "Earn real money online by completing surveys, installing apps, playing games, and watching videos on Cashog.",
+
+  /**
+   * Keywords
+   */
+  defaultKeywords: [
+    "cashog",
+    "earn money online",
+    "paid surveys",
+    "reward apps",
+    "get paid for games",
+    "online rewards platform",
+  ],
+
+  /**
+   * Images
+   */
+  defaultImage: "/images/og-default.png",
+  defaultOgImage: "/images/og-default.png",
+
+  /**
+   * Social
+   */
   twitterHandle: "@Cashog",
   twitterSite: "@Cashog",
-  themeColor: "#2563EB", // Brand color
-  defaultKeywords: "cashog, rewards, surveys, apps, games, earn money online", // SEO keywords
+
+  /**
+   * Brand color
+   */
+  themeColor: "#2563EB",
+
+  /**
+   * Robots defaults
+   */
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+
+  /**
+   * Organization Schema
+   */
+  organization: {
+    name: "Cashog",
+    url: SITE_URL,
+    logo: `${SITE_URL}/images/logo.png`,
+  },
+
+  /**
+   * OpenGraph defaults
+   */
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+  },
 };
 
-// Shortcut for BASE_URL (used in robots, sitemap, canonical)
+/**
+ * BASE URL
+ */
 export const BASE_URL = SEO_CONFIG.siteUrl;
