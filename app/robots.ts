@@ -55,12 +55,11 @@ export default function robots(): MetadataRoute.Robots {
     ],
     sitemap: `${BASE_URL}/sitemap.xml`,
     host: BASE_URL,
-    comments: [
-      `Generated dynamically by Cashog ultra-premium SEO system`,
-      `Site: ${SEO_CONFIG.siteName}`,
-      `Theme color: ${SEO_CONFIG.themeColor}`,
-      `Default language: ${SEO_CONFIG.openGraph.locale}`,
-      `Disallowed prefixes: ${DYNAMIC_DISALLOW_PREFIXES.join(", ")}`,
-    ],
+
+    // ✅ Notes for devs (not part of actual robots file)
+    // Generated dynamically by Cashog ultra-premium SEO system
+    // Theme color: ${SEO_CONFIG.themeColor}
+    // Default language: ${SEO_CONFIG.openGraph.locale}
+    // Disallowed prefixes: ${DYNAMIC_DISALLOW_PREFIXES.join(", ")}
   };
 }
