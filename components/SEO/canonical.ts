@@ -3,15 +3,24 @@
 import { SEO_CONFIG } from "./seoConfig";
 
 /**
- * Build canonical URL
- * @param path Page path (example: "/offers")
- * @param country Country slug (example: "us")
+ * Normalize path
  */
-export function buildCanonical(path: string = "", country: string = "us"): string {
-  const countrySlug = country.toLowerCase();
+function normalizePath(path: string): string {
+  if (!path || path === "/") return "";
+  return path.startsWith("/") ? path : `/${path}`;
+}
 
-  const normalizedPath =
-    path && path !== "/" ? path : "";
+/**
+ * Build canonical URL
+ * Example output:
+ * https://cashog.com/us/offers
+ */
+export function buildCanonical(
+  path: string = "",
+  country: string = "us"
+): string {
+  const countrySlug = country.toLowerCase();
+  const normalizedPath = normalizePath(path);
 
   return `${SEO_CONFIG.siteUrl}/${countrySlug}${normalizedPath}`;
 }
