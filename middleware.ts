@@ -1,3 +1,4 @@
+// middleware.ts
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
@@ -13,22 +14,31 @@ const COUNTRY_LANGUAGE_MAP: Record<string, string> = {
 
 const DEFAULT_COUNTRY = "us";
 
-export function generateHreflangs(pathname: string) {
-  return Object.entries(COUNTRY_LANGUAGE_MAP).map(([country, lang]) => ({
-    href: `https://example.com/${country}${pathname.replace(/^\/[a-z]{2}/, "")}`,
-    hreflang: `${lang}-${country.toUpperCase()}`,
-  }));
+/**
+ * Detect visitor country from CDN headers
+ */
+function detectCountry(request: NextRequest) {
+  const geo =
+    request.headers.get("x-vercel-ip-country") ||
+    request.headers.get("cf-ipcountry");
+
+  const country = geo?.toLowerCase();
+
+  return COUNTRY_LANGUAGE_MAP[country || ""]
+    ? country
+    : DEFAULT_COUNTRY;
 }
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  /**
+   * Skip system files
+   */
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
-    pathname.includes(".") ||
-    pathname === "/favicon.ico" ||
-    pathname === "/robots.txt"
+    pathname.includes(".")
   ) {
     return NextResponse.next();
   }
@@ -36,66 +46,67 @@ export function middleware(request: NextRequest) {
   const segments = pathname.split("/").filter(Boolean);
   const redirectUrl = request.nextUrl.clone();
 
-  const geoCountry =
-    request.headers.get("cf-ipcountry") ||
-    request.headers.get("x-vercel-ip-country") ||
-    DEFAULT_COUNTRY;
-
-  const detectedCountry = geoCountry.toLowerCase();
-
-  const safeCountry = COUNTRY_LANGUAGE_MAP[detectedCountry]
-    ? detectedCountry
-    : DEFAULT_COUNTRY;
-
-  // Root → redirect to detected country
+  /**
+   * ROOT → redirect to detected country
+   */
   if (pathname === "/") {
-    redirectUrl.pathname = `/${safeCountry}`;
+    const country = detectCountry(request);
+    redirectUrl.pathname = `/${country}`;
     return NextResponse.redirect(redirectUrl);
   }
 
-  if (segments.length > 0) {
-    const countrySlug = segments[0].toLowerCase();
+  /**
+   * Validate country slug
+   */
+  const countrySlug = segments[0]?.toLowerCase();
 
-    // Replace invalid country slug
-    if (!COUNTRY_LANGUAGE_MAP[countrySlug]) {
-      const restPath = pathname.split("/").slice(2).join("/");
-      redirectUrl.pathname = `/${DEFAULT_COUNTRY}${restPath ? `/${restPath}` : ""}`;
-      return NextResponse.redirect(redirectUrl);
-    }
-
-    const language = COUNTRY_LANGUAGE_MAP[countrySlug];
-
-    const response = NextResponse.next();
-
-    response.cookies.set("NEXT_LOCALE", language, {
-      path: "/",
-      httpOnly: true,
-    });
-
-    response.headers.set(
-      "x-hreflangs",
-      JSON.stringify(generateHreflangs(pathname))
-    );
-
-    if (pathname.includes("/offers") || pathname.includes("/survey")) {
-      response.cookies.set("REWARD_CAMPAIGN_ACTIVE", "true", { path: "/" });
-    }
-
-    const abGroup = Math.random() < 0.5 ? "A" : "B";
-    response.cookies.set("AB_GROUP", abGroup, { path: "/" });
-
-    response.headers.set("x-analytics-country", countrySlug);
-    response.headers.set("x-analytics-language", language);
-
-    response.headers.set(
-      "Cache-Control",
-      "public, s-maxage=60, stale-while-revalidate=120"
-    );
-
-    return response;
+  if (!COUNTRY_LANGUAGE_MAP[countrySlug]) {
+    const restPath = segments.slice(1).join("/");
+    redirectUrl.pathname = `/${DEFAULT_COUNTRY}${restPath ? `/${restPath}` : ""}`;
+    return NextResponse.redirect(redirectUrl);
   }
 
-  return NextResponse.next();
+  /**
+   * Set language cookie
+   */
+  const language = COUNTRY_LANGUAGE_MAP[countrySlug];
+  const response = NextResponse.next();
+
+  response.cookies.set("NEXT_LOCALE", language, {
+    path: "/",
+    httpOnly: true,
+  });
+
+  /**
+   * Reward campaign detection
+   */
+  if (pathname.includes("/offers") || pathname.includes("/survey")) {
+    response.cookies.set("REWARD_CAMPAIGN_ACTIVE", "true", { path: "/" });
+  }
+
+  /**
+   * Simple A/B testing
+   */
+  if (!request.cookies.get("AB_GROUP")) {
+    const abGroup = Math.random() < 0.5 ? "A" : "B";
+    response.cookies.set("AB_GROUP", abGroup, { path: "/" });
+  }
+
+  /**
+   * Analytics headers
+   */
+  response.headers.set("x-country", countrySlug);
+  response.headers.set("x-language", language);
+
+  /**
+   * Edge cache optimization
+   */
+  response.headers.set(
+    "Cache-Control",
+    "public, s-maxage=120, stale-while-revalidate=300"
+  );
+
+  return response;
 }
 
 export const config = {
