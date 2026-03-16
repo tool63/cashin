@@ -1,9 +1,10 @@
+// app/[country]/layout.tsx
 import "@/styles/globals.css";
 import { ReactNode } from "react";
 import { Metadata } from "next";
 
-import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
-import LanguageProvider from "./providers/LanguageProvider";
+import ThemeProviderWrapper from "../[country]/providers/ThemeProviderWrapper";
+import LanguageProvider from "../[country]/providers/LanguageProvider";
 
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -12,9 +13,9 @@ import { SEO_CONFIG, BASE_URL } from "@/components/SEO/seoConfig";
 import { buildHreflang } from "@/components/SEO/hreflang";
 import { buildCanonical } from "@/components/SEO/canonical";
 
-// ✅ Fixed imports (relative paths)
-import { countryLangMap, defaultLanguage } from "./core/i18n/config";
-import { detect } from "./core/detector";
+// ✅ Fixed imports from shared core outside [country]
+import { countryLangMap, defaultLanguage } from "@/app/core/i18n/config";
+import { detect } from "@/app/core/detector";
 
 // Country → HTML lang map
 const HREFLANG_MAP: Record<string, string> = {
@@ -37,12 +38,11 @@ interface LayoutProps {
  * Generate SEO metadata per country
  */
 export async function generateMetadata({ params }: LayoutProps): Promise<Metadata> {
-  // ✅ Use updated detect()
   const { country, language } = detect(params?.country);
 
   // Canonical & hreflang
   const canonical = buildCanonical(country ? `/${country.toLowerCase()}` : "/");
-  const languages = buildHreflang(country ? `/${country.toLowerCase()}` : "/"); // only 1 arg
+  const languages = buildHreflang(); // buildHreflang now only needs path, optional countryLangMap is internal
 
   // JSON-LD Organization
   const jsonLd = {
