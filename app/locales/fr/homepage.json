@@ -1,6 +1,10 @@
 {
   "welcome": "Bienvenue sur Cashog !",
-  "surveys": "Complétez des sondages et gagnez des points rapidement.",
-  "app_installs": "Installez des applications et gagnez des récompenses instantanément.",
-  "play_games": "Jouez à des jeux et collectez des points tout en vous amusant."
+  "description": "Gagnez des récompenses en répondant à des sondages, en jouant à des jeux, en regardant des vidéos, et plus encore.",
+  "card_surveys_title": "Sondages",
+  "card_surveys_desc": "Complétez des sondages et gagnez des points rapidement.",
+  "card_apps_title": "Installation d'applications",
+  "card_apps_desc": "Installez des applications et gagnez des récompenses instantanément.",
+  "card_games_title": "Jouer à des jeux",
+  "card_games_desc": "Jouez à des jeux et collectez des points tout en vous amusant."
 }
