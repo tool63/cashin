@@ -1,4 +1,4 @@
-// app/core/i18n/config.ts
+// app/[country]/core/i18n/config.ts
 
 // =======================
 // ✅ Supported Languages
