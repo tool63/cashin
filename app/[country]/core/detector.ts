@@ -5,7 +5,7 @@ import {
   defaultLanguage,
   supportedLanguages,
   type SupportedLang,
-} from "@/app/core/i18n/config";
+} from "./i18n/config";
 
 /**
  * Normalize language code
@@ -67,7 +67,7 @@ export function detectLanguage(pathname?: string): SupportedLang {
 
   // 3️⃣ Geo country → language map
   const countryCode = detectCountry(pathname);
-  const geoLang = countryLangMap[countryCode.toUpperCase()]; // countryLangMap uses uppercase keys
+  const geoLang = countryLangMap[countryCode.toUpperCase()];
   if (geoLang && supportedLanguages.includes(geoLang.toLowerCase() as SupportedLang)) {
     return geoLang.toLowerCase() as SupportedLang;
   }
