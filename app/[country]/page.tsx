@@ -1,24 +1,28 @@
-// app/[country]/page.tsx
+"use client";
+
+import { useContext } from "react";
+import { LanguageContext } from "../providers/LanguageProvider";
+
 export default function HomePage() {
+  const { translations } = useContext(LanguageContext);
+
   return (
     <main className="max-w-container mx-auto px-6 py-12">
-      <h1 className="text-4xl font-bold mb-6">Welcome to Cashog!</h1>
-      <p className="text-lg text-muted mb-8">
-        Earn rewards by completing surveys, playing games, watching videos, and more.
-      </p>
+      <h1 className="text-4xl font-bold mb-6">{translations["welcome_title"]}</h1>
+      <p className="text-lg text-muted mb-8">{translations["earn_description"]}</p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div className="card bg-white dark:bg-bg-primary shadow-md rounded-lg p-6 hover:shadow-xl transition-shadow">
-          <h2 className="font-semibold text-xl mb-2">Surveys</h2>
-          <p className="text-muted">Complete surveys and earn points quickly.</p>
+          <h2 className="font-semibold text-xl mb-2">{translations["card_surveys_title"]}</h2>
+          <p className="text-muted">{translations["card_surveys_description"]}</p>
         </div>
         <div className="card bg-white dark:bg-bg-primary shadow-md rounded-lg p-6 hover:shadow-xl transition-shadow">
-          <h2 className="font-semibold text-xl mb-2">App Installs</h2>
-          <p className="text-muted">Install apps and earn rewards instantly.</p>
+          <h2 className="font-semibold text-xl mb-2">{translations["card_app_installs_title"]}</h2>
+          <p className="text-muted">{translations["card_app_installs_description"]}</p>
         </div>
         <div className="card bg-white dark:bg-bg-primary shadow-md rounded-lg p-6 hover:shadow-xl transition-shadow">
-          <h2 className="font-semibold text-xl mb-2">Play Games</h2>
-          <p className="text-muted">Play games and collect points while having fun.</p>
+          <h2 className="font-semibold text-xl mb-2">{translations["card_play_games_title"]}</h2>
+          <p className="text-muted">{translations["card_play_games_description"]}</p>
         </div>
       </div>
     </main>
