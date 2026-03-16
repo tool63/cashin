@@ -1,4 +1,4 @@
-// app/core/detector
+// app/core/detector.ts
 import { cookies, headers } from "next/headers";
 import {
   countryLangMap,
