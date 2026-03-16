@@ -14,7 +14,7 @@ import { buildCanonical } from "@/components/SEO/canonical";
 
 // ✅ Fixed imports (relative paths)
 import { countryLangMap, defaultLanguage } from "./core/i18n/config";
-import { detectCountryAndLang } from "./core/detector";
+import { detect } from "./core/detector";
 
 // Country → HTML lang map
 const HREFLANG_MAP: Record<string, string> = {
@@ -37,11 +37,12 @@ interface LayoutProps {
  * Generate SEO metadata per country
  */
 export async function generateMetadata({ params }: LayoutProps): Promise<Metadata> {
-  const { country, language } = detectCountryAndLang(params?.country);
+  // ✅ Use updated detect()
+  const { country, language } = detect(params?.country);
 
   // Canonical & hreflang
   const canonical = buildCanonical(country ? `/${country.toLowerCase()}` : "/");
-  const languages = buildHreflang(country ? `/${country.toLowerCase()}` : "/", countryLangMap);
+  const languages = buildHreflang(country ? `/${country.toLowerCase()}` : "/"); // only 1 arg
 
   // JSON-LD Organization
   const jsonLd = {
@@ -69,7 +70,7 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
  * Country-aware layout
  */
 export default function CountryLayout({ children, params }: LayoutProps) {
-  const { country } = detectCountryAndLang(params?.country);
+  const { country } = detect(params?.country);
 
   // <html lang>
   const htmlLang = country ? HREFLANG_MAP[country.toLowerCase()] || "en" : "en";
