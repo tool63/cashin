@@ -1,4 +1,3 @@
-// app/[country]/layout.tsx
 import "@/styles/globals.css";
 import { ReactNode } from "react";
 import { Metadata } from "next";
@@ -13,8 +12,8 @@ import { SEO_CONFIG, BASE_URL } from "@/components/SEO/seoConfig";
 import { buildHreflang } from "@/components/SEO/hreflang";
 import { buildCanonical } from "@/components/SEO/canonical";
 
-// ✅ Local i18n files inside country folder
-import { countryLangMap, defaultLanguage } from "./core/config";
+// ✅ Fixed imports (relative paths)
+import { countryLangMap, defaultLanguage } from "./core/i18n/config";
 import { detectCountryAndLang } from "./core/detector";
 
 // Country → HTML lang map
