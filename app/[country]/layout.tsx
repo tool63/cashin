@@ -1,3 +1,4 @@
+// app/[country]/layout.tsx
 import "@/styles/globals.css";
 import { ReactNode } from "react";
 import { Metadata } from "next";
@@ -11,7 +12,10 @@ import Footer from "@/components/layout/Footer";
 import { SEO_CONFIG, BASE_URL } from "@/components/SEO/seoConfig";
 import { buildHreflang } from "@/components/SEO/hreflang";
 import { buildCanonical } from "@/components/SEO/canonical";
-import { countryLangMap, defaultLanguage } from "@/app/core/i18n/config";
+
+// ✅ Local i18n files inside country folder
+import { countryLangMap, defaultLanguage } from "./core/config";
+import { detectCountryAndLang } from "./core/detector";
 
 // Country → HTML lang map
 const HREFLANG_MAP: Record<string, string> = {
@@ -27,37 +31,33 @@ const HREFLANG_MAP: Record<string, string> = {
 /** Props */
 interface LayoutProps {
   children: ReactNode;
-  params?: { country?: string }; // optional
+  params?: { country?: string };
 }
 
 /**
  * Generate SEO metadata per country
  */
 export async function generateMetadata({ params }: LayoutProps): Promise<Metadata> {
-  const countryParam = params?.country?.toLowerCase();
-
-  // If country is unknown, no country in URL, default language
-  const country = countryParam && HREFLANG_MAP[countryParam] ? countryParam : "";
-  const language = country ? countryLangMap[country.toUpperCase()] || defaultLanguage : defaultLanguage;
+  const { country, language } = detectCountryAndLang(params?.country);
 
   // Canonical & hreflang
-  const canonical = buildCanonical(country ? `/${country}` : "/");
-  const languages = buildHreflang(country ? `/${country}` : "/");
+  const canonical = buildCanonical(country ? `/${country.toLowerCase()}` : "/");
+  const languages = buildHreflang(country ? `/${country.toLowerCase()}` : "/", countryLangMap);
 
   // JSON-LD Organization
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: SEO_CONFIG.siteName,
-    url: country ? `${BASE_URL}/${country}` : BASE_URL,
+    url: country ? `${BASE_URL}/${country.toLowerCase()}` : BASE_URL,
     description: SEO_CONFIG.defaultDescription,
     logo: `${BASE_URL}/logo.png`,
   };
 
   return {
     title: {
-      default: `${SEO_CONFIG.defaultTitle}${country ? ` (${country.toUpperCase()})` : ""}`,
-      template: `%s - ${SEO_CONFIG.siteName}${country ? ` (${country.toUpperCase()})` : ""}`,
+      default: `${SEO_CONFIG.defaultTitle}${country ? ` (${country})` : ""}`,
+      template: `%s - ${SEO_CONFIG.siteName}${country ? ` (${country})` : ""}`,
     },
     description: SEO_CONFIG.defaultDescription,
     keywords: SEO_CONFIG.defaultKeywords,
@@ -67,14 +67,13 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
 }
 
 /**
- * Universal country layout
+ * Country-aware layout
  */
 export default function CountryLayout({ children, params }: LayoutProps) {
-  const countryParam = params?.country?.toLowerCase();
-  const country = countryParam && HREFLANG_MAP[countryParam] ? countryParam : "";
+  const { country } = detectCountryAndLang(params?.country);
 
   // <html lang>
-  const htmlLang = country ? HREFLANG_MAP[country] : "en";
+  const htmlLang = country ? HREFLANG_MAP[country.toLowerCase()] || "en" : "en";
 
   return (
     <html lang={htmlLang} suppressHydrationWarning>
