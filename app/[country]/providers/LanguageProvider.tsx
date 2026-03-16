@@ -8,23 +8,26 @@ import {
   useMemo,
   useCallback,
 } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 interface LanguageContextType {
   country: string;
   language: string;
   setCountry: (country: string) => void;
+  setLanguage: (lang: string) => void;
 }
 
 export const LanguageContext = createContext<LanguageContextType>({
   country: "us",
   language: "EN",
   setCountry: () => {},
+  setLanguage: () => {},
 });
 
 interface Props {
   children: ReactNode;
   country?: string;
+  language?: string; // ✅ Add optional initial language
 }
 
 // Country → Language mapping
@@ -41,9 +44,8 @@ const COUNTRY_LANGUAGE_MAP: Record<string, string> = {
 const DEFAULT_COUNTRY = "us";
 const DEFAULT_LANGUAGE = "EN";
 
-export default function LanguageProvider({ children, country: initialCountry }: Props) {
+export default function LanguageProvider({ children, country: initialCountry, language: initialLanguage }: Props) {
   const pathname = usePathname();
-  const router = useRouter();
 
   // Detect country from URL
   const detectedCountry = useMemo(() => {
@@ -58,15 +60,16 @@ export default function LanguageProvider({ children, country: initialCountry }: 
     return stored && COUNTRY_LANGUAGE_MAP[stored] ? stored : detectedCountry;
   });
 
-  const [language, setLanguage] = useState(() => {
-    return COUNTRY_LANGUAGE_MAP[country] || DEFAULT_LANGUAGE;
+  // Language state, uses initialLanguage if provided
+  const [language, setLanguageState] = useState(() => {
+    return initialLanguage || COUNTRY_LANGUAGE_MAP[country] || DEFAULT_LANGUAGE;
   });
 
   // Update state when URL country changes
   useEffect(() => {
     if (detectedCountry !== country && COUNTRY_LANGUAGE_MAP[detectedCountry]) {
       setCountryState(detectedCountry);
-      setLanguage(COUNTRY_LANGUAGE_MAP[detectedCountry]);
+      setLanguageState(COUNTRY_LANGUAGE_MAP[detectedCountry]);
     }
   }, [detectedCountry, country]);
 
@@ -82,14 +85,14 @@ export default function LanguageProvider({ children, country: initialCountry }: 
     document.documentElement.setAttribute("data-theme-ready", "true");
   }, []);
 
-  // Change country (in-memory only, URL does not change)
+  // Change country (in-memory only)
   const setCountry = useCallback(
     (newCountry: string) => {
       if (!COUNTRY_LANGUAGE_MAP[newCountry]) return;
       if (newCountry === country) return;
 
       setCountryState(newCountry);
-      setLanguage(COUNTRY_LANGUAGE_MAP[newCountry]);
+      setLanguageState(COUNTRY_LANGUAGE_MAP[newCountry]);
     },
     [country]
   );
@@ -99,6 +102,7 @@ export default function LanguageProvider({ children, country: initialCountry }: 
       country,
       language,
       setCountry,
+      setLanguage: setLanguageState,
     }),
     [country, language, setCountry]
   );
