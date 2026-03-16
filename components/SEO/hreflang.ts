@@ -1,6 +1,6 @@
 // components/SEO/hreflang.ts
 
-import { countryLangMap, supportedLanguages } from "@/app/core/i18n/config.ts";
+import { countryLangMap, supportedLanguages } from "@/app/core/i18n/config";
 import { SEO_CONFIG } from "./seoConfig";
 
 /**
