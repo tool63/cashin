@@ -13,6 +13,7 @@ import { usePathname } from "next/navigation";
 interface LanguageContextType {
   country: string;
   language: string;
+  translations: Record<string, string>;
   setCountry: (country: string) => void;
   setLanguage: (lang: string) => void;
 }
@@ -20,6 +21,7 @@ interface LanguageContextType {
 export const LanguageContext = createContext<LanguageContextType>({
   country: "us",
   language: "EN",
+  translations: {},
   setCountry: () => {},
   setLanguage: () => {},
 });
@@ -27,24 +29,28 @@ export const LanguageContext = createContext<LanguageContextType>({
 interface Props {
   children: ReactNode;
   country?: string;
-  language?: string; // ✅ Add optional initial language
+  language?: string;
 }
 
 // Country → Language mapping
 const COUNTRY_LANGUAGE_MAP: Record<string, string> = {
-  us: "EN",
-  uk: "EN",
-  ca: "EN",
-  au: "EN",
-  in: "EN",
-  fr: "FR",
-  de: "DE",
+  us: "en",
+  uk: "en",
+  ca: "en",
+  au: "en",
+  in: "en",
+  fr: "fr",
+  de: "de",
 };
 
 const DEFAULT_COUNTRY = "us";
-const DEFAULT_LANGUAGE = "EN";
+const DEFAULT_LANGUAGE = "en";
 
-export default function LanguageProvider({ children, country: initialCountry, language: initialLanguage }: Props) {
+export default function LanguageProvider({
+  children,
+  country: initialCountry,
+  language: initialLanguage,
+}: Props) {
   const pathname = usePathname();
 
   // Detect country from URL
@@ -53,25 +59,26 @@ export default function LanguageProvider({ children, country: initialCountry, la
     return initialCountry || urlCountry || DEFAULT_COUNTRY;
   }, [pathname, initialCountry]);
 
-  // Load country from localStorage if exists
-  const [country, setCountryState] = useState(() => {
-    if (typeof window === "undefined") return detectedCountry;
-    const stored = localStorage.getItem("country");
-    return stored && COUNTRY_LANGUAGE_MAP[stored] ? stored : detectedCountry;
-  });
+  // Country state
+  const [country, setCountryState] = useState(detectedCountry);
 
-  // Language state, uses initialLanguage if provided
-  const [language, setLanguageState] = useState(() => {
-    return initialLanguage || COUNTRY_LANGUAGE_MAP[country] || DEFAULT_LANGUAGE;
-  });
+  // Language state
+  const [language, setLanguageState] = useState(
+    initialLanguage || COUNTRY_LANGUAGE_MAP[country] || DEFAULT_LANGUAGE
+  );
 
-  // Update state when URL country changes
+  // Translations
+  const [translations, setTranslations] = useState<Record<string, string>>({});
+
+  // Load translations dynamically whenever language changes
   useEffect(() => {
-    if (detectedCountry !== country && COUNTRY_LANGUAGE_MAP[detectedCountry]) {
-      setCountryState(detectedCountry);
-      setLanguageState(COUNTRY_LANGUAGE_MAP[detectedCountry]);
-    }
-  }, [detectedCountry, country]);
+    const lang = COUNTRY_LANGUAGE_MAP[country] || DEFAULT_LANGUAGE;
+    setLanguageState(lang);
+
+    import(`../../locales/${lang}/homepage.json`)
+      .then((module) => setTranslations(module.default || module))
+      .catch(() => setTranslations({}));
+  }, [country]);
 
   // Persist selected country in localStorage
   useEffect(() => {
@@ -85,26 +92,30 @@ export default function LanguageProvider({ children, country: initialCountry, la
     document.documentElement.setAttribute("data-theme-ready", "true");
   }, []);
 
-  // Change country (in-memory only)
+  // Change country (updates language automatically)
   const setCountry = useCallback(
     (newCountry: string) => {
-      if (!COUNTRY_LANGUAGE_MAP[newCountry]) return;
-      if (newCountry === country) return;
-
+      if (!COUNTRY_LANGUAGE_MAP[newCountry] || newCountry === country) return;
       setCountryState(newCountry);
-      setLanguageState(COUNTRY_LANGUAGE_MAP[newCountry]);
     },
     [country]
   );
+
+  // Change language manually
+  const setLanguage = useCallback((lang: string) => {
+    if (!Object.values(COUNTRY_LANGUAGE_MAP).includes(lang)) return;
+    setLanguageState(lang);
+  }, []);
 
   const value = useMemo(
     () => ({
       country,
       language,
+      translations,
       setCountry,
-      setLanguage: setLanguageState,
+      setLanguage,
     }),
-    [country, language, setCountry]
+    [country, language, translations, setCountry, setLanguage]
   );
 
   return (
