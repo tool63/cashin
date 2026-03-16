@@ -1,10 +1,11 @@
 "use client";
 
 import { useContext } from "react";
-import { LanguageContext } from "../providers/LanguageProvider";
+// ✅ Correct relative import
+import { LanguageContext } from "./providers/LanguageProvider";
 
 export default function HomePage() {
-  const { translations } = useContext(LanguageContext);
+  const { language, country, translations } = useContext(LanguageContext);
 
   return (
     <main className="max-w-container mx-auto px-6 py-12">
