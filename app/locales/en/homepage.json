@@ -1,6 +1,10 @@
 {
   "welcome": "Welcome to Cashog!",
-  "surveys": "Complete surveys and earn points quickly.",
-  "app_installs": "Install apps and earn rewards instantly.",
-  "play_games": "Play games and collect points while having fun."
+  "description": "Earn rewards by completing surveys, playing games, watching videos, and more.",
+  "card_surveys_title": "Surveys",
+  "card_surveys_desc": "Complete surveys and earn points quickly.",
+  "card_apps_title": "App Installs",
+  "card_apps_desc": "Install apps and earn rewards instantly.",
+  "card_games_title": "Play Games",
+  "card_games_desc": "Play games and collect points while having fun."
 }
