@@ -8,7 +8,7 @@ import LanguageProvider from "./providers/LanguageProvider";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
-import { VALID_COUNTRY_CODES, getCountryName, getLanguageForCountry } from "@/app/core/geo";
+import { VALID_COUNTRY_CODES, getCountryName, getLanguageForCountry } from "@/app/core/detector";
 
 interface LayoutProps {
   children: ReactNode;
