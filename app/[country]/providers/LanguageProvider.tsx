@@ -9,7 +9,7 @@ import {
   SupportedLanguage,
   getLanguageForCountry,
   DEFAULT_LANGUAGE,
-} from "@/app/core/geo";
+} from "@/app/core/detector";
 
 interface LanguageContextType {
   country: string;
