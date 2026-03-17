@@ -1,4 +1,4 @@
-// app/core/geo/detector.ts
+// app/core/detector.ts
 import type { NextRequest } from "next/server";
 
 // ===============================
