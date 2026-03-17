@@ -1,57 +1,39 @@
 // components/SEO/seoConfig.ts
-"use client";
+import { SupportedLanguage } from "@/app/core/detector";
+import { baseUrl } from "@/app/config/baseUrl"; // adjust if needed
+import { getSupportedLocales } from "@/app/core/i18n/config";
 
-import React from "react";
-import { VALID_COUNTRY_CODES, getLanguageForCountry, DEFAULT_COUNTRY } from "@/app/core/detector";
-
-// Props for SEO config
 interface SEOConfigProps {
   title?: string;
   description?: string;
-  currentPath: string;           // e.g., "/how-it-works"
-  country?: string;              // optional, defaults to DEFAULT_COUNTRY
-  baseUrl?: string;              // e.g., "https://payup-pi.vercel.app"
+  country?: string;
+  path?: string;
+  language?: SupportedLanguage;
 }
 
-// Main SEO Config Component
-const SEOConfig: React.FC<SEOConfigProps> = ({
-  title,
-  description,
-  currentPath,
-  country = DEFAULT_COUNTRY,
-  baseUrl = "https://payup-pi.vercel.app",
-}) => {
-  const path = currentPath.startsWith("/") ? currentPath : `/${currentPath}`;
-  const lang = getLanguageForCountry(country);
-  const canonicalUrl = `${baseUrl}/${country}${path}`;
+export function generateSEO({ title, description, country = "us", path = "/", language = "en" }: SEOConfigProps) {
+  const cleanPath = path.startsWith("/") ? path : `/${path}`;
+  const canonicalUrl = `${baseUrl}/${country}${cleanPath}`;
 
-  return (
-    <>
-      {/* Primary SEO Tags */}
-      {title && <title>{title}</title>}
-      {description && <meta name="description" content={description} />}
+  // Generate hreflang tags
+  const hreflangTags = getSupportedLocales()
+    .map((locale) => {
+      const [lang, loc] = locale.split("-");
+      return `<link rel="alternate" href="${baseUrl}/${country}${cleanPath}" hreflang="${locale}" />`;
+    })
+    .join("\n");
 
-      {/* Canonical */}
-      <link rel="canonical" href={canonicalUrl} />
+  // Return all tags as strings
+  const tags = [];
 
-      {/* Hreflang Tags for all countries */}
-      {Array.from(VALID_COUNTRY_CODES).map((c) => {
-        const l = getLanguageForCountry(c);
-        const url = `${baseUrl}/${c}${path}`;
-        return <link key={`${c}-${l}`} rel="alternate" hrefLang={`${l}-${c.toUpperCase()}`} href={url} />;
-      })}
+  if (title) tags.push(`<title>${title}</title>`);
+  if (description) tags.push(`<meta name="description" content="${description}" />`);
 
-      {/* x-default fallback */}
-      <link rel="alternate" hrefLang="x-default" href={`${baseUrl}/${DEFAULT_COUNTRY}${path}`} />
+  // Canonical
+  tags.push(`<link rel="canonical" href="${canonicalUrl}" />`);
 
-      {/* Open Graph */}
-      <meta property="og:title" content={title || ""} />
-      <meta property="og:description" content={description || ""} />
-      <meta property="og:url" content={canonicalUrl} />
-      <meta property="og:locale" content={`${lang}-${country.toUpperCase()}`} />
-      <meta property="og:type" content="website" />
-    </>
-  );
-};
+  // Hreflang
+  tags.push(hreflangTags);
 
-export default SEOConfig;
+  return tags.join("\n");
+}
