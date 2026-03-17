@@ -1,186 +1,84 @@
 import "@/styles/globals.css";
 import { ReactNode } from "react";
 import { Metadata, Viewport } from "next";
+import { notFound } from "next/navigation";
 
 import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
 import LanguageProvider from "./providers/LanguageProvider";
-
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
-import {
-  getCompleteSeoMetadata,
-  generateOrganizationSchema,
-  generateWebsiteSchema,
-  DEFAULT_SEO,
-  COUNTRY_LOCALE_MAP,
-} from "@/components/SEO/seoConfig";
-
-import { generateHreflangMetadata } from "@/components/SEO/hreflang";
-import { generateCanonicalUrl } from "@/components/SEO/canonical";
-
-import { defaultLanguage } from "@/app/core/i18n/config";
-
-// ===============================
-// 🌍 Types
-// ===============================
+import { VALID_COUNTRY_CODES, getCountryName, getLanguageForCountry } from "@/app/core/geo";
 
 interface LayoutProps {
   children: ReactNode;
   params: { country: string };
 }
 
-// ===============================
-// 📱 Viewport
-// ===============================
-
+// Viewport config
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  colorScheme: "light dark",
 };
 
-// ===============================
-// 🌍 Static Countries (IMPORTANT)
-// ===============================
+// Static params for SSG
+export function generateStaticParams() {
+  return Array.from(VALID_COUNTRY_CODES).map((country) => ({ country }));
+}
 
-const SUPPORTED_COUNTRIES = [
-  "us",
-  "fr",
-  "bd",
-  "in",
-];
-
-// ===============================
-// 🧠 Metadata (FAST + STATIC)
-// ===============================
-
+// Metadata per country
 export function generateMetadata({ params }: LayoutProps): Metadata {
-  const country = params.country;
+  const country = params.country.toLowerCase();
+  if (!VALID_COUNTRY_CODES.has(country)) notFound();
 
-  const currentPath = "";
-
-  const canonical = generateCanonicalUrl(currentPath, country);
-  const hreflang = generateHreflangMetadata(currentPath, country);
-
-  const countryName = getCountryDisplayName(country);
-
-  const title = `Earn Money Online in ${countryName}`;
-  const description = `Earn real money online in ${countryName}. Complete surveys, apps, and tasks on Cashog.`;
-
-  const seo = getCompleteSeoMetadata(
-    currentPath,
-    country,
-    title,
-    description
-  );
-
-  const schemas = [
-    generateOrganizationSchema(country),
-    generateWebsiteSchema(country),
-  ];
+  const countryName = getCountryName(country);
+  const language = getLanguageForCountry(country);
 
   return {
     title: {
-      default: title,
-      template: `%s | Cashog`,
+      default: `Earn Money Online in ${countryName} | Cashog`,
+      template: `%s | Cashog ${countryName}`,
     },
-
-    description,
-
-    openGraph: {
-      ...seo.openGraph,
-      title,
-      description,
-      url: canonical,
-      locale: COUNTRY_LOCALE_MAP[country] || "en_US",
-    },
-
-    twitter: {
-      ...seo.twitter,
-      title,
-      description,
-    },
-
+    description: `Earn real money online in ${countryName}. Complete surveys, install apps, play games, and get paid instantly with Cashog.`,
     alternates: {
-      canonical,
-      languages: hreflang,
+      canonical: `https://cashog.com/${country}`,
+      languages: {
+        "en-us": "https://cashog.com/us",
+        "en-gb": "https://cashog.com/gb",
+        "fr-fr": "https://cashog.com/fr",
+        "de-de": "https://cashog.com/de",
+        "x-default": "https://cashog.com/us",
+      },
     },
-
-    robots: {
-      index: true,
-      follow: true,
-    },
-
-    // ✅ FIXED JSON-LD
-    other: {
-      "ld+json": JSON.stringify(schemas),
+    openGraph: {
+      title: `Earn Money Online in ${countryName}`,
+      description: `Join Cashog and start earning real money in ${countryName}.`,
+      url: `https://cashog.com/${country}`,
+      siteName: "Cashog",
+      locale: `${language}-${country.toUpperCase()}`,
+      type: "website",
     },
   };
 }
 
-// ===============================
-// 🧠 Static Params (SSG)
-// ===============================
-
-export function generateStaticParams() {
-  return SUPPORTED_COUNTRIES.map((country) => ({
-    country,
-  }));
-}
-
-// ===============================
-// 🌍 Layout
-// ===============================
-
-export default function CountryLayout({
-  children,
-  params,
-}: LayoutProps) {
-  const country = params.country;
-
-  const language = defaultLanguage;
-  const htmlLang = getHtmlLang(country, language);
-  const dir = getTextDirection(language);
+// Layout component
+export default function CountryLayout({ children, params }: LayoutProps) {
+  const country = params.country.toLowerCase();
+  const language = getLanguageForCountry(country);
+  const htmlLang = `${language}-${country.toUpperCase()}`;
 
   return (
-    <html lang={htmlLang} dir={dir} suppressHydrationWarning>
-      <body className="bg-primary text-primary transition-colors duration-200">
+    <html lang={htmlLang} suppressHydrationWarning>
+      <body>
         <ThemeProviderWrapper>
-          <LanguageProvider country={country} language={language}>
-            <Header country={country} />
-
-            <main className="min-h-screen pt-20">
-              {children}
-            </main>
-
-            <Footer country={country} />
+          <LanguageProvider>
+            <Header />
+            <main className="min-h-screen pt-20">{children}</main>
+            <Footer />
           </LanguageProvider>
         </ThemeProviderWrapper>
       </body>
     </html>
   );
-}
-
-// ===============================
-// 🔧 Helpers
-// ===============================
-
-function getCountryDisplayName(countryCode: string): string {
-  try {
-    return new Intl.DisplayNames(["en"], { type: "region" }).of(
-      countryCode.toUpperCase()
-    )!;
-  } catch {
-    return countryCode.toUpperCase();
-  }
-}
-
-function getHtmlLang(country: string, language: string): string {
-  return `${language}-${country.toUpperCase()}`;
-}
-
-function getTextDirection(language: string): "ltr" | "rtl" {
-  return ["ar", "he", "fa", "ur"].includes(language) ? "rtl" : "ltr";
 }
