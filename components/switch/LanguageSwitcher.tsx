@@ -3,69 +3,66 @@
 import { useContext, useState, useRef, useEffect } from "react";
 import { LanguageContext } from "@/app/[country]/providers/LanguageProvider";
 
-const COUNTRIES = [
-  { code: "us", label: "EN" },
-  { code: "uk", label: "EN" },
-  { code: "ca", label: "EN" },
-  { code: "au", label: "EN" },
-  { code: "fr", label: "FR" },
-  { code: "de", label: "DE" },
-  { code: "in", label: "EN" },
-];
+// Language options
+const LANGUAGE_OPTIONS = [
+  { code: "en", label: "English", flag: "🇺🇸" },
+  { code: "fr", label: "Français", flag: "🇫🇷" },
+  { code: "de", label: "Deutsch", flag: "🇩🇪" },
+] as const;
 
 export default function LanguageSwitcher() {
-  const { country, language, setCountry } = useContext(LanguageContext);
-  const [open, setOpen] = useState(false);
+  const { language, setLanguage } = useContext(LanguageContext);
+  const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdown if clicked outside
+  // Close dropdown when clicking outside
   useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setOpen(false);
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const currentLanguage = LANGUAGE_OPTIONS.find(l => l.code === language) || LANGUAGE_OPTIONS[0];
+
   return (
-    <div className="relative inline-block" ref={dropdownRef}>
+    <div className="relative" ref={dropdownRef}>
       <button
-        type="button"
-        onClick={() => setOpen(!open)}
-        className="px-4 py-2 rounded-full border border-gray-300 dark:border-white/20
-                   bg-white dark:bg-gray-800
-                   text-sm font-medium text-gray-700 dark:text-gray-200
-                   hover:bg-gray-100 dark:hover:bg-gray-700
-                   transition flex items-center justify-between w-20"
-        aria-label={`Language (${language})`}
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+        aria-label="Select language"
       >
-        {language.toUpperCase()}
-        <span className="ml-2 text-xs">&#9662;</span>
+        <span className="text-lg">{currentLanguage.flag}</span>
+        <span className="text-sm font-medium">{currentLanguage.code.toUpperCase()}</span>
+        <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
       </button>
 
-      {open && (
-        <ul
-          className="absolute z-50 mt-1 w-24 max-h-60 overflow-y-auto
-                     bg-white dark:bg-gray-800 border border-gray-200 dark:border-white/20
-                     rounded-lg shadow-lg p-1 text-sm"
-        >
-          {COUNTRIES.map((c) => (
-            <li
-              key={c.code}
-              className={`px-3 py-2 rounded-md cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700
-                          ${c.code === country ? "font-semibold bg-gray-100 dark:bg-gray-700" : ""}`}
+      {isOpen && (
+        <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-50">
+          {LANGUAGE_OPTIONS.map((option) => (
+            <button
+              key={option.code}
               onClick={() => {
-                // Set selected country in memory, URL does not change
-                setCountry(c.code);
-                setOpen(false);
+                setLanguage(option.code);
+                setIsOpen(false);
               }}
+              className={`w-full text-left px-4 py-2 flex items-center gap-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition ${
+                language === option.code ? "bg-gray-50 dark:bg-gray-800 font-medium" : ""
+              }`}
             >
-              {c.label}
-            </li>
+              <span className="text-lg">{option.flag}</span>
+              <span>{option.label}</span>
+              {language === option.code && (
+                <span className="ml-auto text-green-600">✓</span>
+              )}
+            </button>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );
