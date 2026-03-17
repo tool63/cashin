@@ -1,6 +1,6 @@
 // app/core/i18n/config.ts
 
-import { SupportedLanguage, DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from "@/app/core/geo";
+import { SupportedLanguage, DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from "@/app/core/detector";
 
 // ===============================
 // 🔤 RTL Languages (for future support)
