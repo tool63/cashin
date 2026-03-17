@@ -1,39 +1,50 @@
 // components/SEO/seoConfig.ts
-import { SupportedLanguage } from "@/app/core/detector";
-import { baseUrl } from "@/app/config/baseUrl"; // adjust if needed
-import { getSupportedLocales } from "@/app/core/i18n/config";
+"use client";
 
-interface SEOConfigProps {
+import React from "react";
+import { SupportedLanguage } from "@/app/core/detector";
+
+// ------------------------------
+// 🌐 Base URL
+// ------------------------------
+const baseUrl = "https://payup-pi.vercel.app"; // Current live base URL
+
+// ------------------------------
+// 🔗 Props
+// ------------------------------
+interface SEOProps {
   title?: string;
   description?: string;
-  country?: string;
-  path?: string;
-  language?: SupportedLanguage;
+  country: string;
+  path?: string; // path after country, e.g., "/how-it-works"
+  language: SupportedLanguage;
 }
 
-export function generateSEO({ title, description, country = "us", path = "/", language = "en" }: SEOConfigProps) {
+// ------------------------------
+// 🌟 Component
+// ------------------------------
+export default function SEO({ title, description, country, path = "/", language }: SEOProps) {
+  // Ensure leading slash for path
   const cleanPath = path.startsWith("/") ? path : `/${path}`;
+
+  // Canonical URL
   const canonicalUrl = `${baseUrl}/${country}${cleanPath}`;
 
-  // Generate hreflang tags
-  const hreflangTags = getSupportedLocales()
-    .map((locale) => {
-      const [lang, loc] = locale.split("-");
-      return `<link rel="alternate" href="${baseUrl}/${country}${cleanPath}" hreflang="${locale}" />`;
-    })
-    .join("\n");
+  return (
+    <>
+      {/* Primary SEO Tags */}
+      {title && <title>{title}</title>}
+      {description && <meta name="description" content={description} />}
 
-  // Return all tags as strings
-  const tags = [];
+      {/* Canonical */}
+      <link rel="canonical" href={canonicalUrl} />
 
-  if (title) tags.push(`<title>${title}</title>`);
-  if (description) tags.push(`<meta name="description" content="${description}" />`);
-
-  // Canonical
-  tags.push(`<link rel="canonical" href="${canonicalUrl}" />`);
-
-  // Hreflang
-  tags.push(hreflangTags);
-
-  return tags.join("\n");
+      {/* Hreflang alternate URLs */}
+      <link rel="alternate" hrefLang="en-us" href={`${baseUrl}/us${cleanPath}`} />
+      <link rel="alternate" hrefLang="en-gb" href={`${baseUrl}/gb${cleanPath}`} />
+      <link rel="alternate" hrefLang="fr-fr" href={`${baseUrl}/fr${cleanPath}`} />
+      <link rel="alternate" hrefLang="de-de" href={`${baseUrl}/de${cleanPath}`} />
+      <link rel="alternate" hrefLang="x-default" href={`${baseUrl}/us${cleanPath}`} />
+    </>
+  );
 }
