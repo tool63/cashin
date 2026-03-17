@@ -1,24 +1,25 @@
-// app/[country]/layout.tsx
-
 import "@/styles/globals.css";
 import { ReactNode } from "react";
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 
-import ThemeProviderWrapper from "../[country]/providers/ThemeProviderWrapper";
-import LanguageProvider from "../[country]/providers/LanguageProvider";
+import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
+import LanguageProvider from "./providers/LanguageProvider";
 
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
 import {
   getCompleteSeoMetadata,
-  getCountryName,
+  generateOrganizationSchema,
+  generateWebsiteSchema,
+  DEFAULT_SEO,
+  COUNTRY_LOCALE_MAP,
 } from "@/components/SEO/seoConfig";
 
-import { buildHreflang } from "@/components/SEO/hreflang";
+import { generateHreflangMetadata } from "@/components/SEO/hreflang";
+import { generateCanonicalUrl } from "@/components/SEO/canonical";
 
 import { defaultLanguage } from "@/app/core/i18n/config";
-import { detect } from "@/app/core/detector";
 
 // ===============================
 // 🌍 Types
@@ -26,103 +27,160 @@ import { detect } from "@/app/core/detector";
 
 interface LayoutProps {
   children: ReactNode;
-  params?: { country?: string };
+  params: { country: string };
 }
 
 // ===============================
-// 🧠 Generate Metadata (SEO)
+// 📱 Viewport
 // ===============================
 
-export async function generateMetadata({
-  params,
-}: LayoutProps): Promise<Metadata> {
-  const { country } = detect(params?.country);
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  colorScheme: "light dark",
+};
 
-  // 🌍 Path for country homepage
-  const path = "";
+// ===============================
+// 🌍 Static Countries (IMPORTANT)
+// ===============================
+
+const SUPPORTED_COUNTRIES = [
+  "us",
+  "fr",
+  "bd",
+  "in",
+];
+
+// ===============================
+// 🧠 Metadata (FAST + STATIC)
+// ===============================
+
+export function generateMetadata({ params }: LayoutProps): Metadata {
+  const country = params.country;
+
+  const currentPath = "";
+
+  const canonical = generateCanonicalUrl(currentPath, country);
+  const hreflang = generateHreflangMetadata(currentPath, country);
+
+  const countryName = getCountryDisplayName(country);
+
+  const title = `Earn Money Online in ${countryName}`;
+  const description = `Earn real money online in ${countryName}. Complete surveys, apps, and tasks on Cashog.`;
 
   const seo = getCompleteSeoMetadata(
-    path,
+    currentPath,
     country,
-    "Earn Money Online",
-    "Earn money by completing offers, surveys, and tasks worldwide."
+    title,
+    description
   );
 
-  const languages = buildHreflang(country ? `/${country}` : "/");
-
-  // 🌍 Better title with real country name
-  const countryName = country ? getCountryName(country) : "";
-
-  const title = {
-    default: country
-      ? `Earn Money Online in ${countryName}`
-      : "Earn Money Online",
-    template: `%s | Cashog`,
-  };
-
-  // JSON-LD
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "Cashog",
-    url: seo.alternates.canonical,
-    logo: `${seo.alternates.canonical}/logo.png`,
-  };
+  const schemas = [
+    generateOrganizationSchema(country),
+    generateWebsiteSchema(country),
+  ];
 
   return {
-    title,
-    description: seo.description,
-
-    openGraph: seo.openGraph,
-    twitter: seo.twitter,
-
-    alternates: {
-      canonical: seo.alternates.canonical,
-      languages,
+    title: {
+      default: title,
+      template: `%s | Cashog`,
     },
 
-    robots: seo.robots,
+    description,
 
+    openGraph: {
+      ...seo.openGraph,
+      title,
+      description,
+      url: canonical,
+      locale: COUNTRY_LOCALE_MAP[country] || "en_US",
+    },
+
+    twitter: {
+      ...seo.twitter,
+      title,
+      description,
+    },
+
+    alternates: {
+      canonical,
+      languages: hreflang,
+    },
+
+    robots: {
+      index: true,
+      follow: true,
+    },
+
+    // ✅ FIXED JSON-LD
     other: {
-      "script:ld+json": JSON.stringify(jsonLd),
+      "ld+json": JSON.stringify(schemas),
     },
   };
 }
 
 // ===============================
-// 🌍 Layout Component
+// 🧠 Static Params (SSG)
+// ===============================
+
+export function generateStaticParams() {
+  return SUPPORTED_COUNTRIES.map((country) => ({
+    country,
+  }));
+}
+
+// ===============================
+// 🌍 Layout
 // ===============================
 
 export default function CountryLayout({
   children,
   params,
 }: LayoutProps) {
-  const { country, language } = detect(params?.country);
+  const country = params.country;
 
-  // 🌍 Better html lang (SEO important)
-  const htmlLang = language || defaultLanguage;
+  const language = defaultLanguage;
+  const htmlLang = getHtmlLang(country, language);
+  const dir = getTextDirection(language);
 
   return (
-    <html lang={htmlLang} suppressHydrationWarning>
+    <html lang={htmlLang} dir={dir} suppressHydrationWarning>
       <body className="bg-primary text-primary transition-colors duration-200">
         <ThemeProviderWrapper>
-          <LanguageProvider
-            country={country || defaultLanguage}
-            language={language}
-          >
-            {/* Header */}
-            <Header />
+          <LanguageProvider country={country} language={language}>
+            <Header country={country} />
 
-            {/* Main Content */}
-            <main className="min-h-screen pt-20 bg-bg-secondary dark:bg-bg-primary">
+            <main className="min-h-screen pt-20">
               {children}
             </main>
 
-            {/* Footer */}
-            <Footer />
+            <Footer country={country} />
           </LanguageProvider>
         </ThemeProviderWrapper>
       </body>
     </html>
   );
+}
+
+// ===============================
+// 🔧 Helpers
+// ===============================
+
+function getCountryDisplayName(countryCode: string): string {
+  try {
+    return new Intl.DisplayNames(["en"], { type: "region" }).of(
+      countryCode.toUpperCase()
+    )!;
+  } catch {
+    return countryCode.toUpperCase();
+  }
+}
+
+function getHtmlLang(country: string, language: string): string {
+  return `${language}-${country.toUpperCase()}`;
+}
+
+function getTextDirection(language: string): "ltr" | "rtl" {
+  return ["ar", "he", "fa", "ur"].includes(language) ? "rtl" : "ltr";
 }
