@@ -1,30 +1,53 @@
-// components/SEO/pageTypes.ts
+// ------------------------------
+// 🌐 Page Types & Detection for SEO
+// ------------------------------
 
 export type PageType =
   | "homepage"
   | "article"
   | "product"
   | "landing"
-  | "generic"
+  | "promo"
+  | "faq"
+  | "blog"
+  | "generic";
 
 export interface PageTypeInfo {
-  type: PageType
-  priority: number
+  type: PageType;
+  priority: number; // 0.0 - 1.0 (used for sitemaps / SEO importance)
 }
 
+// ------------------------------
+// 🔍 Detect page type based on path
+// ------------------------------
 export function detectPageType(path: string): PageTypeInfo {
+  const cleanPath = path.toLowerCase().trim();
 
-  if (path === "/") {
-    return { type: "homepage", priority: 1 }
+  // Homepage
+  if (cleanPath === "/" || cleanPath === "") {
+    return { type: "homepage", priority: 1 };
   }
 
-  if (path.startsWith("/blog")) {
-    return { type: "article", priority: 0.8 }
+  // Blog / Article pages
+  if (cleanPath.startsWith("/blog") || cleanPath.startsWith("/news")) {
+    return { type: "article", priority: 0.8 };
   }
 
-  if (path.startsWith("/product")) {
-    return { type: "product", priority: 0.7 }
+  // Product / Offer pages
+  if (cleanPath.startsWith("/product") || cleanPath.startsWith("/offer")) {
+    return { type: "product", priority: 0.7 };
   }
 
-  return { type: "generic", priority: 0.6 }
+  // Landing pages / promo pages
+  if (cleanPath.startsWith("/landing") || cleanPath.startsWith("/promo")) {
+    return { type: "landing", priority: 0.65 };
+  }
+
+  // FAQ / informational pages
+  if (cleanPath.startsWith("/faq") || cleanPath.startsWith("/help") || cleanPath.startsWith("/support")) {
+    return { type: "faq", priority: 0.6 };
+  }
+
+  // Generic fallback for all other pages
+  return { type: "generic", priority: 0.5 };
 }
