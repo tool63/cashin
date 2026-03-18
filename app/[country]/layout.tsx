@@ -1,11 +1,11 @@
 // app/[country]/layout.tsx
 import "@/styles/globals.css";
 import { ReactNode } from "react";
-import { Metadata, Viewport } from "next";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
-import LanguageProvider from "./providers/LanguageProvider";
+import ThemeProviderWrapper from "../providers/ThemeProviderWrapper";
+import LanguageProvider from "../providers/LanguageProvider";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
@@ -49,7 +49,7 @@ interface LayoutProps {
 // ------------------------------
 // Viewport
 // ------------------------------
-export const viewport: Viewport = {
+export const viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -81,7 +81,6 @@ export function generateStaticParams() {
 // ------------------------------
 export function generateMetadata({ params }: LayoutProps): Metadata {
   const country = params.country.toLowerCase();
-
   if (!VALID_COUNTRY_CODES.has(country)) notFound();
 
   const countryName = getCountryName(country);
@@ -127,7 +126,6 @@ export function generateMetadata({ params }: LayoutProps): Metadata {
 // ------------------------------
 export default function CountryLayout({ children, params }: LayoutProps) {
   const country = params.country.toLowerCase();
-
   if (!VALID_COUNTRY_CODES.has(country)) notFound();
 
   const language = getLanguageForCountry(country);
