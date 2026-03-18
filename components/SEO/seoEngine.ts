@@ -1,22 +1,20 @@
-// components/SEO/seoEngine.ts
-
 import { buildMetadata } from "./metadata";
 import { detectPageType } from "./pageTypes";
 import { buildOrganizationSchema, buildWebsiteSchema } from "./schema";
 import { logSeoMetrics } from "./seoAnalytics";
 
-import { countryLangMap } from "@/app/core/i18n/config";
+import { COUNTRY_LANGUAGE_MAP, DEFAULT_COUNTRY, SupportedLanguage } from "@/app/core/detector";
 
 interface BuildSEOParams {
-  route: string;
-  title: string;
-  description?: string;
-  countryCode?: string; // ISO country code like US, FR, DE
+  route: string;                    // Page path e.g., "/how-it-works"
+  title: string;                     // Page title
+  description?: string;              // Page description
+  countryCode?: string;              // Optional ISO country code like "US", "FR"
   keywords?: string[];
 }
 
 /**
- * Ultra-premium SEO engine for corporate SaaS
+ * Ultra-premium SEO engine for corporate multi-country SaaS / Reward platforms
  */
 export async function buildSEO({
   route,
@@ -28,12 +26,13 @@ export async function buildSEO({
   const start = Date.now();
 
   // -----------------------------
-  // 1️⃣ Validate country
+  // 1️⃣ Normalize country & language
   // -----------------------------
-  const countryKey =
-    countryCode && countryLangMap[countryCode.toUpperCase()]
-      ? countryCode.toUpperCase()
-      : "US";
+  const country = countryCode?.toLowerCase() && COUNTRY_LANGUAGE_MAP[countryCode.toLowerCase()]
+    ? countryCode.toLowerCase()
+    : DEFAULT_COUNTRY;
+
+  const language: SupportedLanguage = COUNTRY_LANGUAGE_MAP[country] ?? "en";
 
   // -----------------------------
   // 2️⃣ Build Metadata
@@ -42,7 +41,7 @@ export async function buildSEO({
     title,
     description,
     path: route,
-    countryCode: countryKey,
+    countryCode: country,
     keywords,
   });
 
@@ -52,11 +51,11 @@ export async function buildSEO({
   const pageType = detectPageType(route);
 
   // -----------------------------
-  // 4️⃣ Build Structured Data
+  // 4️⃣ Build Structured Data (JSON-LD)
   // -----------------------------
   const structuredData = [
-    buildOrganizationSchema(),
-    buildWebsiteSchema(),
+    buildOrganizationSchema({ country }),
+    buildWebsiteSchema({ country }),
   ];
 
   // -----------------------------
@@ -66,13 +65,20 @@ export async function buildSEO({
 
   logSeoMetrics({
     page: route,
+    country,
+    language,
+    pageType: pageType.type,
     generationTime,
   });
 
+  // -----------------------------
+  // 6️⃣ Return full SEO object
+  // -----------------------------
   return {
     metadata,
     structuredData,
     pageType,
-    countryCode: countryKey,
+    countryCode: country,
+    language,
   };
 }
