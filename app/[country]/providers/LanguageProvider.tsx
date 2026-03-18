@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, ReactNode, useState, useEffect, useMemo, useCallback } from "react";
-import { useParams } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 
 import {
   getLanguageForCountry,
@@ -33,6 +33,9 @@ interface Props {
 
 export default function LanguageProvider({ children }: Props) {
   const params = useParams();
+  const pathname = usePathname();
+  const router = useRouter();
+
   const urlCountry = params?.country;
 
   const [uiCountry, setUiCountry] = useState<string>(urlCountry || DEFAULT_COUNTRY);
@@ -48,9 +51,9 @@ export default function LanguageProvider({ children }: Props) {
     }
   }, [urlCountry]);
 
-  // Load language/country from cookie or navigator on mount
+  // Load language/country from cookie or browser on mount
   useEffect(() => {
-    // 1️⃣ Language from cookie
+    // Language from cookie
     const cookieLang = document.cookie
       .split("; ")
       .find(row => row.startsWith(`${COOKIE_KEYS.LANGUAGE}=`))
@@ -59,7 +62,7 @@ export default function LanguageProvider({ children }: Props) {
     if (cookieLang && SUPPORTED_LANGUAGES.includes(cookieLang as SupportedLanguage)) {
       setUiLanguage(cookieLang as SupportedLanguage);
     } else {
-      // 2️⃣ Fallback: detect from browser
+      // Fallback: detect from browser
       const navLang = navigator.language.split("-")[0].toLowerCase();
       if (SUPPORTED_LANGUAGES.includes(navLang as SupportedLanguage)) {
         setUiLanguage(navLang as SupportedLanguage);
@@ -68,20 +71,27 @@ export default function LanguageProvider({ children }: Props) {
       }
     }
 
-    // 3️⃣ Country from cookie or browser (simplified)
+    // Country from cookie or browser
     const cookieCountry = document.cookie
       .split("; ")
       .find(row => row.startsWith(`${COOKIE_KEYS.COUNTRY}=`))
       ?.split("=")[1];
 
-    if (cookieCountry && VALID_COUNTRY_CODES.has(cookieCountry)) {
-      setUiCountry(cookieCountry);
-    } else {
-      // Try to guess from browser language
-      const navCountry = (navigator.language.split("-")[1] || DEFAULT_COUNTRY).toLowerCase();
-      setUiCountry(VALID_COUNTRY_CODES.has(navCountry) ? navCountry : DEFAULT_COUNTRY);
-    }
+    const detectedCountry = cookieCountry && VALID_COUNTRY_CODES.has(cookieCountry)
+      ? cookieCountry
+      : (navigator.language.split("-")[1] || DEFAULT_COUNTRY).toLowerCase();
+
+    setUiCountry(VALID_COUNTRY_CODES.has(detectedCountry) ? detectedCountry : DEFAULT_COUNTRY);
   }, []);
+
+  // 🚨 Client-side redirect if URL has no country
+  useEffect(() => {
+    const segments = pathname.split("/").filter(Boolean);
+    if (segments.length === 0 || !VALID_COUNTRY_CODES.has(segments[0].toLowerCase())) {
+      const redirectCountry = uiCountry || DEFAULT_COUNTRY;
+      router.replace(`/${redirectCountry}${pathname === "/" ? "" : pathname}`);
+    }
+  }, [pathname, uiCountry, router]);
 
   // Update language
   const setLanguage = useCallback((lang: SupportedLanguage) => {
