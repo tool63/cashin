@@ -4,8 +4,9 @@ import { ReactNode } from "react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import ThemeProviderWrapper from "../providers/ThemeProviderWrapper";
-import LanguageProvider from "../providers/LanguageProvider";
+// ✅ Fixed relative imports for providers
+import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
+import LanguageProvider from "./providers/LanguageProvider";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
@@ -47,7 +48,7 @@ interface LayoutProps {
 }
 
 // ------------------------------
-// Viewport
+// Viewport (metadata example)
 // ------------------------------
 export const viewport = {
   width: "device-width",
@@ -60,11 +61,11 @@ export const viewport = {
 // ------------------------------
 export function generateStaticParams() {
   const pages = ["", "how-it-works", "about", "faq"];
-  const countries = Array.from(VALID_COUNTRY_CODES);
+  const topCountries = ["us", "fr", "de", "es", "pt"];
 
   const params: { country: string; slug?: string[] }[] = [];
 
-  for (const country of countries) {
+  for (const country of topCountries) {
     for (const slug of pages) {
       params.push({
         country,
