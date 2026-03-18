@@ -4,9 +4,9 @@ import { SupportedLanguage, DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from "@/app/
 // ===============================
 // 🔤 RTL Languages (for future support)
 // ===============================
-export const RTL_LANGUAGES: SupportedLanguage[] = ["ar", "he", "ur", "fa"]; // extend if needed
+export const RTL_LANGUAGES: string[] = ["ar", "he", "ur", "fa"]; // use string[], not SupportedLanguage
 
-export function isRtlLanguage(lang: SupportedLanguage): boolean {
+export function isRtlLanguage(lang: SupportedLanguage | string): boolean {
   return RTL_LANGUAGES.includes(lang);
 }
 
@@ -18,7 +18,7 @@ export const CURRENCY_BY_LANGUAGE: Record<SupportedLanguage, string> = {
   fr: "EUR",
   de: "EUR",
   es: "EUR",
-  pt: "BRL", // Portuguese defaults to Brazil
+  pt: "BRL",
 };
 
 export const CURRENCY_SYMBOL: Record<SupportedLanguage, string> = {
