@@ -1,10 +1,9 @@
-// app/core/i18n/config.ts
 import { SupportedLanguage, DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from "@/app/core/detector";
 
 // ===============================
-// 🔤 RTL Languages (for future support)
+// 🔤 RTL Languages (future support)
 // ===============================
-export const RTL_LANGUAGES: string[] = ["ar", "he", "ur", "fa"]; // use string[], not SupportedLanguage
+export const RTL_LANGUAGES: string[] = ["ar", "he", "ur", "fa"];
 
 export function isRtlLanguage(lang: SupportedLanguage | string): boolean {
   return RTL_LANGUAGES.includes(lang);
@@ -46,7 +45,7 @@ export const TIME_FORMAT_BY_LANGUAGE: Record<SupportedLanguage, Intl.DateTimeFor
 };
 
 // ===============================
-// 🍪 Cookie Configuration (i18n-specific)
+// 🍪 Cookie Configuration
 // ===============================
 export const COOKIE_CONFIG = {
   LANGUAGE: "NEXT_LOCALE",
@@ -83,12 +82,16 @@ export function formatTime(date: Date | number, language: SupportedLanguage = DE
   return new Intl.DateTimeFormat(language, options).format(date);
 }
 
-export function formatNumber(number: number, language: SupportedLanguage = DEFAULT_LANGUAGE, options?: Intl.NumberFormatOptions): string {
+export function formatNumber(
+  number: number,
+  language: SupportedLanguage = DEFAULT_LANGUAGE,
+  options?: Intl.NumberFormatOptions
+): string {
   return new Intl.NumberFormat(language, options).format(number);
 }
 
 // ===============================
-// 📚 Translation Loading (Optional)
+// 📚 Translation Loader (dynamic)
 // ===============================
 const translationCache: Partial<Record<string, Record<string, string>>> = {};
 
@@ -101,7 +104,7 @@ export async function loadTranslations(lang: SupportedLanguage, namespace: strin
     translationCache[key] = translations.default;
     return translations.default;
   } catch (err) {
-    console.warn(`Failed to load ${namespace} for ${lang}, falling back to ${DEFAULT_LANGUAGE}`);
+    console.warn(`Failed to load translations for ${lang}/${namespace}, falling back to ${DEFAULT_LANGUAGE}`);
     if (lang !== DEFAULT_LANGUAGE) return loadTranslations(DEFAULT_LANGUAGE, namespace);
     return {};
   }
