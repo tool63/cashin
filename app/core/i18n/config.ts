@@ -1,11 +1,10 @@
 // app/core/i18n/config.ts
-
 import { SupportedLanguage, DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from "@/app/core/detector";
 
 // ===============================
 // 🔤 RTL Languages (for future support)
 // ===============================
-export const RTL_LANGUAGES: string[] = ["ar", "he", "ur", "fa"]; // add if needed
+export const RTL_LANGUAGES: SupportedLanguage[] = ["ar", "he", "ur", "fa"]; // extend if needed
 
 export function isRtlLanguage(lang: SupportedLanguage): boolean {
   return RTL_LANGUAGES.includes(lang);
@@ -18,24 +17,32 @@ export const CURRENCY_BY_LANGUAGE: Record<SupportedLanguage, string> = {
   en: "USD",
   fr: "EUR",
   de: "EUR",
+  es: "EUR",
+  pt: "BRL", // Portuguese defaults to Brazil
 };
 
 export const CURRENCY_SYMBOL: Record<SupportedLanguage, string> = {
   en: "$",
   fr: "€",
   de: "€",
+  es: "€",
+  pt: "R$",
 };
 
 export const DATE_FORMAT_BY_LANGUAGE: Record<SupportedLanguage, Intl.DateTimeFormatOptions> = {
   en: { year: "numeric", month: "long", day: "numeric", weekday: "long" },
   fr: { year: "numeric", month: "long", day: "numeric", weekday: "long" },
   de: { year: "numeric", month: "long", day: "numeric", weekday: "long" },
+  es: { year: "numeric", month: "long", day: "numeric", weekday: "long" },
+  pt: { year: "numeric", month: "long", day: "numeric", weekday: "long" },
 };
 
 export const TIME_FORMAT_BY_LANGUAGE: Record<SupportedLanguage, Intl.DateTimeFormatOptions> = {
   en: { hour: "numeric", minute: "numeric", hour12: true },
   fr: { hour: "numeric", minute: "numeric", hour12: false },
   de: { hour: "numeric", minute: "numeric", hour12: false },
+  es: { hour: "numeric", minute: "numeric", hour12: false },
+  pt: { hour: "numeric", minute: "numeric", hour12: false },
 };
 
 // ===============================
@@ -48,25 +55,32 @@ export const COOKIE_CONFIG = {
 } as const;
 
 export const COOKIE_OPTIONS = {
-  LANGUAGE: { path: "/", maxAge: 60 * 60 * 24 * 365, httpOnly: false },
-  AB_GROUP: { path: "/", maxAge: 60 * 60 * 24 * 90, httpOnly: false },
-  REWARD_CAMPAIGN: { path: "/", maxAge: 60 * 60 * 24 * 7, httpOnly: false },
+  LANGUAGE: { path: "/", maxAge: 60 * 60 * 24 * 365, httpOnly: false, sameSite: "lax" },
+  AB_GROUP: { path: "/", maxAge: 60 * 60 * 24 * 90, httpOnly: false, sameSite: "lax" },
+  REWARD_CAMPAIGN: { path: "/", maxAge: 60 * 60 * 24 * 7, httpOnly: false, sameSite: "lax" },
 } as const;
 
 // ===============================
 // 💱 Formatting Helpers
 // ===============================
 export function formatCurrency(amount: number, language: SupportedLanguage = DEFAULT_LANGUAGE): string {
-  const currency = CURRENCY_BY_LANGUAGE[language];
-  return new Intl.NumberFormat(language, { style: "currency", currency, minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(amount);
+  const currency = CURRENCY_BY_LANGUAGE[language] || CURRENCY_BY_LANGUAGE[DEFAULT_LANGUAGE];
+  return new Intl.NumberFormat(language, {
+    style: "currency",
+    currency,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(amount);
 }
 
 export function formatDate(date: Date | number, language: SupportedLanguage = DEFAULT_LANGUAGE): string {
-  return new Intl.DateTimeFormat(language, DATE_FORMAT_BY_LANGUAGE[language]).format(date);
+  const options = DATE_FORMAT_BY_LANGUAGE[language] || DATE_FORMAT_BY_LANGUAGE[DEFAULT_LANGUAGE];
+  return new Intl.DateTimeFormat(language, options).format(date);
 }
 
 export function formatTime(date: Date | number, language: SupportedLanguage = DEFAULT_LANGUAGE): string {
-  return new Intl.DateTimeFormat(language, TIME_FORMAT_BY_LANGUAGE[language]).format(date);
+  const options = TIME_FORMAT_BY_LANGUAGE[language] || TIME_FORMAT_BY_LANGUAGE[DEFAULT_LANGUAGE];
+  return new Intl.DateTimeFormat(language, options).format(date);
 }
 
 export function formatNumber(number: number, language: SupportedLanguage = DEFAULT_LANGUAGE, options?: Intl.NumberFormatOptions): string {
@@ -98,4 +112,8 @@ export async function loadTranslations(lang: SupportedLanguage, namespace: strin
 // ===============================
 export function getSupportedLocales(): string[] {
   return SUPPORTED_LANGUAGES.map(lang => `${lang}-${lang.toUpperCase()}`);
+}
+
+export function isLanguageSupported(lang: string): lang is SupportedLanguage {
+  return SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage);
 }
