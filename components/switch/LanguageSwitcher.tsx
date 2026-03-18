@@ -23,15 +23,6 @@ export default function LanguageSwitcher() {
   const [mounted, setMounted] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Debug: Log current language on mount and when it changes
-  useEffect(() => {
-    console.log('🔤 LanguageSwitcher mounted, current language:', language);
-  }, []);
-
-  useEffect(() => {
-    console.log('🔄 Language changed to:', language);
-  }, [language]);
-
   // Handle hydration
   useEffect(() => {
     setMounted(true);
@@ -58,28 +49,20 @@ export default function LanguageSwitcher() {
   const currentLanguage = LANGUAGE_OPTIONS.find(l => l.code === language) || LANGUAGE_OPTIONS[0];
 
   const handleLanguageChange = (lang: SupportedLanguage) => {
-    console.log('🎯 Language selected:', lang);
-    console.log('📝 Current language before change:', language);
-    
-    // Update context
+    // Update context (updates UI immediately)
     setLanguage(lang);
     
-    // Set cookie directly
+    // Set cookie for persistence
     document.cookie = `${COOKIE_KEYS.LANGUAGE}=${lang}; path=/; max-age=31536000; samesite=lax`;
-    console.log('🍪 Cookie set:', document.cookie);
     
     // Close dropdown
     setIsOpen(false);
     
     // Force server components to re-render with new language
-    console.log('🔄 Refreshing router...');
     router.refresh();
     
-    // Check if cookie was set
-    setTimeout(() => {
-      console.log('🍪 Cookies after change:', document.cookie);
-      console.log('🔤 Language context after change:', language);
-    }, 100);
+    // Dispatch event for any other components listening
+    window.dispatchEvent(new CustomEvent('languagechange', { detail: { language: lang } }));
   };
 
   return (
