@@ -1,6 +1,7 @@
+// app/sitemap.ts
 import type { MetadataRoute } from "next";
-import { SEO_CONFIG } from "@/components/SEO/seoConfig";
-import { VALID_COUNTRY_CODES, DEFAULT_COUNTRY } from "@/app/core/detector";
+import { BASE_URL } from "@/components/SEO/seoConfig";
+import { VALID_COUNTRY_CODES } from "@/app/core/detector";
 
 /**
  * Static site routes
@@ -44,7 +45,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // -----------------------------
     for (const route of STATIC_ROUTES) {
       urls.push({
-        url: `${SEO_CONFIG.siteUrl}/${country}${route}`,
+        url: `${BASE_URL}/${country}${route}`,
         lastModified: new Date(),
         changeFrequency: route === "" ? "daily" : "weekly",
         priority: route === "" ? 1 : 0.7,
@@ -56,7 +57,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // -----------------------------
     for (const offer of offers) {
       urls.push({
-        url: `${SEO_CONFIG.siteUrl}/${country}/offers/${offer.slug}`,
+        url: `${BASE_URL}/${country}/offers/${offer.slug}`,
         lastModified: new Date(),
         changeFrequency: "daily",
         priority: 0.85,
@@ -68,7 +69,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // -----------------------------
     for (const post of blogs) {
       urls.push({
-        url: `${SEO_CONFIG.siteUrl}/${country}/blog/${post.slug}`,
+        url: `${BASE_URL}/${country}/blog/${post.slug}`,
         lastModified: new Date(),
         changeFrequency: "weekly",
         priority: 0.75,
