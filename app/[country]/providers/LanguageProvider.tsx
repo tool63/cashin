@@ -1,5 +1,8 @@
+"use client";
+
 import { createContext, ReactNode, useState, useEffect, useMemo, useCallback } from "react";
 import { useParams } from "next/navigation";
+
 import {
   getLanguageForCountry,
   SupportedLanguage,
@@ -30,13 +33,14 @@ interface Props {
 
 export default function LanguageProvider({ children }: Props) {
   const params = useParams();
-  
-  // Add a check to ensure that `params.country` is a string
-  const urlCountry = typeof params?.country === "string" ? params?.country.toLowerCase() : DEFAULT_COUNTRY;
+
+  // Ensure params.country is a string
+  const urlCountry =
+    typeof params?.country === "string" ? params.country.toLowerCase() : DEFAULT_COUNTRY;
 
   const [uiCountry, setUiCountry] = useState<string>(urlCountry);
   const [uiLanguage, setUiLanguage] = useState<SupportedLanguage>(
-    urlCountry ? getLanguageForCountry(urlCountry) : DEFAULT_LANGUAGE
+    getLanguageForCountry(urlCountry)
   );
 
   // Sync state with URL (from middleware)
@@ -100,5 +104,5 @@ export default function LanguageProvider({ children }: Props) {
     [uiCountry, uiLanguage, setLanguage, setCountry]
   );
 
-  return <LanguageContext.Provider value={value}>{children}</LanguageProvider>;
+  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }
