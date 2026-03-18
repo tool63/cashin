@@ -6,7 +6,7 @@ interface Params {
   country: string;
 }
 
-// Server Component (async)
+// Server Component
 export default async function CountryHomePage({ params }: { params: Params }) {
   const country = params.country.toLowerCase();
 
