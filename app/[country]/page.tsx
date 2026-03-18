@@ -1,3 +1,4 @@
+// app/[country]/page.tsx
 import { notFound } from "next/navigation";
 import { getLanguageForCountry, VALID_COUNTRY_CODES } from "@/app/core/detector";
 import { loadTranslations } from "@/app/core/i18n/config";
@@ -12,18 +13,18 @@ export default async function CountryHomePage({ params }: { params: Params }) {
 
   if (!VALID_COUNTRY_CODES.has(country)) notFound();
 
+  // Get language based on country
   const language = getLanguageForCountry(country);
-
+  
+  // Load translations based on language only
   const translations = await loadTranslations(language, "homepage");
-
-  const countryName = translations["country_name"] || country.toUpperCase();
-  const welcomeText =
-    translations["welcome_message"] ||
-    `Welcome to PayUp in ${countryName}! Earn money online by completing surveys, installing apps, and playing games.`;
 
   return (
     <section className="max-w-6xl mx-auto px-4 py-16">
-      <h1 className="text-3xl font-bold mb-4">{welcomeText}</h1>
+      <h1 className="text-3xl font-bold mb-4">
+        {translations["welcome_message"] || "Welcome to PayUp! Earn money online."}
+      </h1>
+      
       <p className="text-gray-700 dark:text-gray-300 mb-6">
         {translations["homepage_description"] ||
           "PayUp helps you earn real money online safely and quickly."}
