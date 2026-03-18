@@ -1,6 +1,7 @@
 "use client";
 
 import { useContext, useState, useRef, useEffect } from "react";
+import { useRouter } from "next/navigation"; // ADD THIS
 import { LanguageContext } from "@/app/[country]/providers/LanguageProvider";
 import { SUPPORTED_LANGUAGES, SupportedLanguage, COOKIE_KEYS } from "@/app/core/detector";
 
@@ -16,6 +17,7 @@ const LANGUAGE_OPTIONS = [
 ];
 
 export default function LanguageSwitcher() {
+  const router = useRouter(); // ADD THIS
   const { language, setLanguage } = useContext(LanguageContext);
   const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -52,6 +54,9 @@ export default function LanguageSwitcher() {
     
     // Force re-render of language-dependent components
     window.dispatchEvent(new Event('languagechange'));
+    
+    // ADD THIS - Refresh server components to load new translations
+    router.refresh();
   };
 
   return (
