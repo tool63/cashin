@@ -40,7 +40,9 @@ export default function LanguageProvider({ children }: Props) {
     urlCountry ? getLanguageForCountry(urlCountry) : DEFAULT_LANGUAGE
   );
 
-  // Sync state with URL (from middleware)
+  // -------------------------------
+  // Sync state with URL
+  // -------------------------------
   useEffect(() => {
     if (urlCountry && VALID_COUNTRY_CODES.has(urlCountry)) {
       setUiCountry(urlCountry);
@@ -48,7 +50,9 @@ export default function LanguageProvider({ children }: Props) {
     }
   }, [urlCountry]);
 
+  // -------------------------------
   // Load language/country from cookies (set by middleware)
+  // -------------------------------
   useEffect(() => {
     // Language cookie
     const cookieLang = document.cookie
@@ -58,6 +62,7 @@ export default function LanguageProvider({ children }: Props) {
 
     if (cookieLang && SUPPORTED_LANGUAGES.includes(cookieLang)) {
       setUiLanguage(cookieLang);
+      document.documentElement.lang = cookieLang;
     }
 
     // Country cookie
@@ -68,26 +73,38 @@ export default function LanguageProvider({ children }: Props) {
 
     if (cookieCountry && VALID_COUNTRY_CODES.has(cookieCountry)) {
       setUiCountry(cookieCountry);
+      setUiLanguage(prev => getLanguageForCountry(cookieCountry));
     }
   }, []);
 
+  // -------------------------------
   // Update language
+  // -------------------------------
   const setLanguage = useCallback((lang: SupportedLanguage) => {
     setUiLanguage(lang);
     document.cookie = `${COOKIE_KEYS.LANGUAGE}=${lang}; path=/; max-age=${60 * 60 * 24 * 365}`;
     document.documentElement.lang = lang;
   }, []);
 
+  // -------------------------------
   // Update UI country (does not change URL)
+  // -------------------------------
   const setCountry = useCallback((country: string) => {
+    if (!VALID_COUNTRY_CODES.has(country)) return;
+
     setUiCountry(country);
+
+    // Update language if cookie is missing
     const cookieLang = document.cookie
       .split("; ")
       .find(row => row.startsWith(`${COOKIE_KEYS.LANGUAGE}=`))
       ?.split("=")[1];
 
     if (!cookieLang) {
-      setUiLanguage(getLanguageForCountry(country));
+      const lang = getLanguageForCountry(country);
+      setUiLanguage(lang);
+      document.cookie = `${COOKIE_KEYS.LANGUAGE}=${lang}; path=/; max-age=${60 * 60 * 24 * 365}`;
+      document.documentElement.lang = lang;
     }
   }, []);
 
