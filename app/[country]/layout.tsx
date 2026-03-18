@@ -4,8 +4,8 @@ import { ReactNode } from "react";
 import { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 
-import ThemeProviderWrapper from "@/app/providers/ThemeProviderWrapper";
-import LanguageProvider from "@/app/providers/LanguageProvider";
+import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
+import LanguageProvider from "./providers/LanguageProvider";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
