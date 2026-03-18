@@ -1,10 +1,11 @@
 {
-  "welcome": "Welcome to Cashog!",
-  "description": "Earn rewards by completing surveys, playing games, watching videos, and more.",
-  "card_surveys_title": "Surveys",
-  "card_surveys_desc": "Complete surveys and earn points quickly.",
-  "card_apps_title": "App Installs",
-  "card_apps_desc": "Install apps and earn rewards instantly.",
-  "card_games_title": "Play Games",
-  "card_games_desc": "Play games and collect points while having fun."
+  "country_name": "United States",
+  "welcome_message": "Welcome to PayUp in United States! Earn money online by completing surveys, installing apps, and playing games.",
+  "homepage_description": "PayUp helps you earn real money online safely and quickly.",
+  "feature_surveys": "Complete Surveys",
+  "feature_surveys_desc": "Answer surveys and earn points instantly.",
+  "feature_apps": "Install Apps",
+  "feature_apps_desc": "Download apps and get paid quickly.",
+  "feature_games": "Play Games",
+  "feature_games_desc": "Play fun games and earn rewards."
 }
