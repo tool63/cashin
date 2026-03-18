@@ -1,8 +1,7 @@
-// app/core/detector.ts
 import type { NextRequest } from "next/server";
 
 // ===============================
-// 🌍 Constants & Configuration
+// 🌍 Constants
 // ===============================
 export const DEFAULT_COUNTRY = "us";
 export const DEFAULT_LANGUAGE = "en";
@@ -11,7 +10,7 @@ export const SUPPORTED_LANGUAGES = ["en", "fr", "de", "es", "pt"] as const;
 export type SupportedLanguage = typeof SUPPORTED_LANGUAGES[number];
 
 // ===============================
-// ✅ ISO 3166-1 alpha-2 country codes (worldwide)
+// 🌍 Country Codes
 // ===============================
 export const VALID_COUNTRY_CODES = new Set([
   "af","ax","al","dz","as","ad","ao","ai","aq","ag","ar","am","aw","au","at","az",
@@ -33,33 +32,26 @@ export const VALID_COUNTRY_CODES = new Set([
 ]);
 
 // ===============================
-// 🌍 Country → Default Language Mapping
+// 🌍 Country → Language Map
 // ===============================
 export const COUNTRY_LANGUAGE_MAP: Record<string, SupportedLanguage> = {
-  // English-speaking countries
   us:"en", gb:"en", ca:"en", au:"en", nz:"en", in:"en", pk:"en", bd:"en",
   ph:"en", sg:"en", my:"en", za:"en", ng:"en", ke:"en", gh:"en",
 
-  // French-speaking countries
   fr:"fr", be:"fr", ch:"fr", lu:"fr", mc:"fr",
   ci:"fr", cm:"fr", sn:"fr", ml:"fr", ma:"fr", dz:"fr", tn:"fr",
 
-  // German-speaking countries
   de:"de", at:"de", li:"de",
 
-  // Spanish-speaking countries
   es:"es", mx:"es", ar:"es", co:"es", cl:"es", pe:"es", ve:"es", ec:"es",
   gt:"es", cu:"es", bo:"es", py:"es", hn:"es", sv:"es", ni:"es", cr:"es",
   uy:"es", pa:"es", do:"es",
 
-  // Portuguese-speaking countries
   pt:"pt", br:"pt", mz:"pt", ao:"pt",
-
-  // Fallback for all others → en
 };
 
 // ===============================
-// 🏳️‍🌈 Public Routes
+// 🏳️ Public Routes
 // ===============================
 export const PUBLIC_ROUTES = new Set([
   "about","contact","blog","faq","terms","privacy",
@@ -68,7 +60,7 @@ export const PUBLIC_ROUTES = new Set([
 ]);
 
 // ===============================
-// 🍪 Cookie Keys
+// 🍪 Cookies
 // ===============================
 export const COOKIE_KEYS = {
   LANGUAGE: "NEXT_LOCALE",
@@ -77,15 +69,10 @@ export const COOKIE_KEYS = {
 } as const;
 
 // ===============================
-// 🌐 Helpers
+// 🔍 Helpers
 // ===============================
 export function isCountryCode(segment: string): boolean {
   return /^[a-z]{2}$/i.test(segment) && VALID_COUNTRY_CODES.has(segment.toLowerCase());
-}
-
-export function isPublicRoute(path: string): boolean {
-  const first = path.split("/").filter(Boolean)[0]?.toLowerCase();
-  return first ? PUBLIC_ROUTES.has(first) : false;
 }
 
 export function extractCountryFromPath(pathname: string): string | null {
@@ -101,25 +88,48 @@ export function getPathWithoutCountry(pathname: string): string {
   return pathname;
 }
 
-export function buildUrl(path: string, country: string = DEFAULT_COUNTRY): string {
+export function buildUrl(path: string, country: string): string {
   const clean = path.startsWith("/") ? path : `/${path}`;
   return clean === "/" ? `/${country}` : `/${country}${clean}`;
 }
 
 // ===============================
-// 🌐 Country Detection
+// 🌍 GEO Detection
 // ===============================
 export function detectCountry(request: NextRequest): string {
   const geo =
     request.headers.get("x-vercel-ip-country") ||
     request.headers.get("cf-ipcountry") ||
     request.headers.get("cloudfront-viewer-country") ||
-    request.headers.get("x-country"); // For dev/testing
+    request.headers.get("x-country");
 
   if (!geo) return DEFAULT_COUNTRY;
 
   const normalized = geo.toLowerCase();
   return VALID_COUNTRY_CODES.has(normalized) ? normalized : DEFAULT_COUNTRY;
+}
+
+// ===============================
+// 🧠 CORE FIX: Country Resolver
+// ===============================
+export function resolveCountry(
+  request: NextRequest,
+  urlCountry: string | null
+): string {
+  const cookieCountry = request.cookies.get(COOKIE_KEYS.COUNTRY)?.value;
+
+  // 1️⃣ URL (strongest)
+  if (urlCountry && VALID_COUNTRY_CODES.has(urlCountry)) {
+    return urlCountry;
+  }
+
+  // 2️⃣ Cookie (user preference)
+  if (cookieCountry && VALID_COUNTRY_CODES.has(cookieCountry)) {
+    return cookieCountry;
+  }
+
+  // 3️⃣ Geo fallback
+  return detectCountry(request);
 }
 
 // ===============================
@@ -136,6 +146,7 @@ export function isLanguageSupported(lang: string): boolean {
 export function getLanguageFromCookie(request: NextRequest): SupportedLanguage | null {
   const cookieLang = request.cookies.get(COOKIE_KEYS.LANGUAGE)?.value;
   if (!cookieLang) return null;
+
   const norm = normalizeLanguage(cookieLang);
   return isLanguageSupported(norm) ? (norm as SupportedLanguage) : null;
 }
@@ -146,8 +157,7 @@ export function getLanguageFromHeader(request: NextRequest): SupportedLanguage |
 
   const langs = acceptLang
     .split(",")
-    .map(l => l.split(";")[0].trim())
-    .map(normalizeLanguage);
+    .map(l => normalizeLanguage(l.split(";")[0]));
 
   for (const lang of langs) {
     if (isLanguageSupported(lang)) return lang as SupportedLanguage;
@@ -160,23 +170,20 @@ export function getLanguageForCountry(country: string): SupportedLanguage {
 }
 
 export function detectLanguage(request: NextRequest, country: string): SupportedLanguage {
-  const cookieLang = getLanguageFromCookie(request);
-  if (cookieLang) return cookieLang;
-
-  const headerLang = getLanguageFromHeader(request);
-  if (headerLang) return headerLang;
-
-  return getLanguageForCountry(country);
+  return (
+    getLanguageFromCookie(request) ||
+    getLanguageFromHeader(request) ||
+    getLanguageForCountry(country)
+  );
 }
 
 // ===============================
-// 🌐 Full Geo Info Object
+// 🌐 GEO INFO
 // ===============================
 export interface GeoInfo {
   country: string;
   language: SupportedLanguage;
   hasCountryInUrl: boolean;
-  isPublicRoute: boolean;
   pathWithoutCountry: string;
   originalPath: string;
 }
@@ -184,22 +191,17 @@ export interface GeoInfo {
 export function getGeoInfo(request: NextRequest): GeoInfo {
   const { pathname } = request.nextUrl;
 
-  const publicRoute = isPublicRoute(pathname);
-  const urlCountry = !publicRoute ? extractCountryFromPath(pathname) : null;
+  const urlCountry = extractCountryFromPath(pathname);
 
-  const country = urlCountry || detectCountry(request);
+  // ✅ USE NEW RESOLVER
+  const country = resolveCountry(request, urlCountry);
   const language = detectLanguage(request, country);
-
-  const pathWithoutCountry = urlCountry
-    ? "/" + pathname.split("/").filter(Boolean).slice(1).join("/")
-    : pathname;
 
   return {
     country,
     language,
     hasCountryInUrl: !!urlCountry,
-    isPublicRoute: publicRoute,
-    pathWithoutCountry: pathWithoutCountry || "/",
+    pathWithoutCountry: getPathWithoutCountry(pathname) || "/",
     originalPath: pathname,
   };
 }
