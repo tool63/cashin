@@ -65,11 +65,20 @@ export default function LanguageSwitcher() {
       >
         <span className="text-lg" aria-hidden="true">{currentLanguage.flag}</span>
         <span className="text-sm font-bold uppercase">{currentLanguage.code}</span>
+        <svg 
+          className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
       </button>
 
       {isOpen && (
         <div 
-          className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-48 bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-50"
+          className="absolute right-0 md:left-1/2 md:transform md:-translate-x-1/2 mt-2 w-48 bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-50"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="language-menu"
