@@ -3,6 +3,10 @@ import { notFound } from "next/navigation";
 import { getLanguageForCountry, VALID_COUNTRY_CODES } from "@/app/core/detector";
 import { loadTranslations } from "@/app/core/i18n/config";
 
+// 🔴 ADD THESE TWO LINES - Force dynamic rendering for language changes
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 interface Params {
   country: string;
 }
