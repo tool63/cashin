@@ -34,21 +34,23 @@ export const VALID_COUNTRY_CODES = new Set([
 
 // ===============================
 // 🌍 Country → Default Language Mapping
-// (common global mapping with fallback to English)
 // ===============================
 export const COUNTRY_LANGUAGE_MAP: Record<string, SupportedLanguage> = {
   // English-speaking countries
-  us:"en", gb:"en", ca:"en", au:"en", nz:"en", in:"en", pk:"en", bd:"en", ph:"en", sg:"en", my:"en", za:"en", ng:"en", ke:"en", gh:"en",
+  us:"en", gb:"en", ca:"en", au:"en", nz:"en", in:"en", pk:"en", bd:"en",
+  ph:"en", sg:"en", my:"en", za:"en", ng:"en", ke:"en", gh:"en",
 
   // French-speaking countries
   fr:"fr", be:"fr", ch:"fr", lu:"fr", mc:"fr",
   ci:"fr", cm:"fr", sn:"fr", ml:"fr", ma:"fr", dz:"fr", tn:"fr",
 
   // German-speaking countries
-  de:"de", at:"de", li:"de", ch:"de", lu:"de",
+  de:"de", at:"de", li:"de",
 
   // Spanish-speaking countries
-  es:"es", mx:"es", ar:"es", co:"es", cl:"es", pe:"es", ve:"es", ec:"es", gt:"es", cu:"es", bo:"es", py:"es", hn:"es", sv:"es", ni:"es", cr:"es", uy:"es", pa:"es", do:"es", py:"es",
+  es:"es", mx:"es", ar:"es", co:"es", cl:"es", pe:"es", ve:"es", ec:"es",
+  gt:"es", cu:"es", bo:"es", py:"es", hn:"es", sv:"es", ni:"es", cr:"es",
+  uy:"es", pa:"es", do:"es",
 
   // Portuguese-speaking countries
   pt:"pt", br:"pt", mz:"pt", ao:"pt",
