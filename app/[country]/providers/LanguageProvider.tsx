@@ -5,11 +5,12 @@ import { useParams } from "next/navigation";
 
 import {
   getLanguageForCountry,
-  COOKIE_KEYS,
   SupportedLanguage,
   DEFAULT_LANGUAGE,
   DEFAULT_COUNTRY,
   SUPPORTED_LANGUAGES,
+  COOKIE_KEYS,
+  VALID_COUNTRY_CODES,
 } from "@/app/core/detector";
 
 interface LanguageContextType {
@@ -32,21 +33,24 @@ interface Props {
 
 export default function LanguageProvider({ children }: Props) {
   const params = useParams();
-  const urlCountry = params?.country || DEFAULT_COUNTRY;
+  const urlCountry = params?.country;
 
-  const [uiCountry, setUiCountry] = useState(urlCountry);
+  const [uiCountry, setUiCountry] = useState<string>(urlCountry || DEFAULT_COUNTRY);
   const [uiLanguage, setUiLanguage] = useState<SupportedLanguage>(
-    getLanguageForCountry(urlCountry)
+    urlCountry ? getLanguageForCountry(urlCountry) : DEFAULT_LANGUAGE
   );
 
   // Sync state with URL
   useEffect(() => {
-    setUiCountry(urlCountry);
-    setUiLanguage(getLanguageForCountry(urlCountry));
+    if (urlCountry && VALID_COUNTRY_CODES.has(urlCountry)) {
+      setUiCountry(urlCountry);
+      setUiLanguage(getLanguageForCountry(urlCountry));
+    }
   }, [urlCountry]);
 
-  // Load language from cookie
+  // Load language/country from cookie or navigator on mount
   useEffect(() => {
+    // 1️⃣ Language from cookie
     const cookieLang = document.cookie
       .split("; ")
       .find(row => row.startsWith(`${COOKIE_KEYS.LANGUAGE}=`))
@@ -54,6 +58,28 @@ export default function LanguageProvider({ children }: Props) {
 
     if (cookieLang && SUPPORTED_LANGUAGES.includes(cookieLang as SupportedLanguage)) {
       setUiLanguage(cookieLang as SupportedLanguage);
+    } else {
+      // 2️⃣ Fallback: detect from browser
+      const navLang = navigator.language.split("-")[0].toLowerCase();
+      if (SUPPORTED_LANGUAGES.includes(navLang as SupportedLanguage)) {
+        setUiLanguage(navLang as SupportedLanguage);
+      } else {
+        setUiLanguage(DEFAULT_LANGUAGE);
+      }
+    }
+
+    // 3️⃣ Country from cookie or browser (simplified)
+    const cookieCountry = document.cookie
+      .split("; ")
+      .find(row => row.startsWith(`${COOKIE_KEYS.COUNTRY}=`))
+      ?.split("=")[1];
+
+    if (cookieCountry && VALID_COUNTRY_CODES.has(cookieCountry)) {
+      setUiCountry(cookieCountry);
+    } else {
+      // Try to guess from browser language
+      const navCountry = (navigator.language.split("-")[1] || DEFAULT_COUNTRY).toLowerCase();
+      setUiCountry(VALID_COUNTRY_CODES.has(navCountry) ? navCountry : DEFAULT_COUNTRY);
     }
   }, []);
 
@@ -79,16 +105,15 @@ export default function LanguageProvider({ children }: Props) {
     }
   }, []);
 
-  const value = useMemo(() => ({
-    country: uiCountry,
-    language: uiLanguage,
-    setLanguage,
-    setCountry,
-  }), [uiCountry, uiLanguage, setLanguage, setCountry]);
-
-  return (
-    <LanguageContext.Provider value={value}>
-      {children}
-    </LanguageContext.Provider>
+  const value = useMemo(
+    () => ({
+      country: uiCountry,
+      language: uiLanguage,
+      setLanguage,
+      setCountry,
+    }),
+    [uiCountry, uiLanguage, setLanguage, setCountry]
   );
+
+  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }
