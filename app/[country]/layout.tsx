@@ -4,24 +4,23 @@ import { ReactNode } from "react";
 import { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 
-import ThemeProviderWrapper from "../providers/ThemeProviderWrapper";
-import LanguageProvider from "../providers/LanguageProvider";
+import ThemeProviderWrapper from "@/app/providers/ThemeProviderWrapper";
+import LanguageProvider from "@/app/providers/LanguageProvider";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
 import {
   VALID_COUNTRY_CODES,
   getLanguageForCountry,
-  // Added getCountryName helper directly here
   COUNTRY_LANGUAGE_MAP,
   DEFAULT_COUNTRY,
 } from "@/app/core/detector";
 
 // ------------------------------
-// Helper: get human-readable country name
+// Helper: Country Name Resolver
 // ------------------------------
-export function getCountryName(code: string): string {
-  const NAMES: Record<string, string> = {
+function getCountryName(code: string): string {
+  const names: Record<string, string> = {
     us: "United States",
     gb: "United Kingdom",
     ca: "Canada",
@@ -32,14 +31,16 @@ export function getCountryName(code: string): string {
     au: "Australia",
     nz: "New Zealand",
     in: "India",
+    bd: "Bangladesh",
+    pk: "Pakistan",
     br: "Brazil",
-    // Add more as needed
   };
-  return NAMES[code.toLowerCase()] || code.toUpperCase();
+
+  return names[code.toLowerCase()] || code.toUpperCase();
 }
 
 // ------------------------------
-// Layout Props
+// Types
 // ------------------------------
 interface LayoutProps {
   children: ReactNode;
@@ -47,7 +48,7 @@ interface LayoutProps {
 }
 
 // ------------------------------
-// Viewport config
+// Viewport
 // ------------------------------
 export const viewport: Viewport = {
   width: "device-width",
@@ -56,66 +57,74 @@ export const viewport: Viewport = {
 };
 
 // ------------------------------
-// Static params for SSG
+// Static Params (SSG)
 // ------------------------------
 export function generateStaticParams() {
-  const pages = ["", "how-it-works", "about", "faq"]; // add more pages here
+  const pages = ["", "how-it-works", "about", "faq"];
   const countries = Array.from(VALID_COUNTRY_CODES);
 
   const params: { country: string; slug?: string[] }[] = [];
 
-  countries.forEach((country) => {
-    pages.forEach((slug) => {
+  for (const country of countries) {
+    for (const slug of pages) {
       params.push({
         country,
         slug: slug ? [slug] : undefined,
       });
-    });
-  });
+    }
+  }
 
   return params;
 }
 
 // ------------------------------
-// Metadata generator
+// Metadata Generator
 // ------------------------------
 export function generateMetadata({ params }: LayoutProps): Metadata {
   const country = params.country.toLowerCase();
-  if (!VALID_COUNTRY_CODES.has(country)) notFound();
+
+  if (!VALID_COUNTRY_CODES.has(country)) {
+    notFound();
+  }
 
   const countryName = getCountryName(country);
   const language = getLanguageForCountry(country);
   const slug = params.slug?.join("/") || "";
 
-  const pageTitle = slug
-    ? `${slug.replace(/-/g, " ")} in ${countryName} | Cashog`
-    : `Earn Money Online in ${countryName} | Cashog`;
+  const cleanSlug = slug.replace(/-/g, " ");
 
-  const pageDescription = slug
-    ? `Learn about ${slug.replace(/-/g, " ")} and earn money in ${countryName} with PayUp.`
+  const title = slug
+    ? `${cleanSlug} in ${countryName} | PayUp`
+    : `Earn Money Online in ${countryName} | PayUp`;
+
+  const description = slug
+    ? `Learn about ${cleanSlug} and earn money in ${countryName} with PayUp.`
     : `Earn real money online in ${countryName}. Complete surveys, install apps, play games, and get paid instantly with PayUp.`;
 
   const baseUrl = "https://payup-pi.vercel.app";
-  const canonicalUrl = `${baseUrl}/${country}${slug ? `/${slug}` : ""}`;
+  const canonical = `${baseUrl}/${country}${slug ? `/${slug}` : ""}`;
 
-  const alternates: Record<string, string> = {};
-  Object.keys(COUNTRY_LANGUAGE_MAP).forEach((c) => {
+  // Dynamic hreflang
+  const languages: Record<string, string> = {};
+
+  for (const c in COUNTRY_LANGUAGE_MAP) {
     const lang = COUNTRY_LANGUAGE_MAP[c];
-    alternates[`${lang}-${c}`] = `${baseUrl}/${c}${slug ? `/${slug}` : ""}`;
-  });
-  alternates["x-default"] = `${baseUrl}/${DEFAULT_COUNTRY}${slug ? `/${slug}` : ""}`;
+    languages[`${lang}-${c}`] = `${baseUrl}/${c}${slug ? `/${slug}` : ""}`;
+  }
+
+  languages["x-default"] = `${baseUrl}/${DEFAULT_COUNTRY}${slug ? `/${slug}` : ""}`;
 
   return {
-    title: pageTitle,
-    description: pageDescription,
+    title,
+    description,
     alternates: {
-      canonical: canonicalUrl,
-      languages: alternates,
+      canonical,
+      languages,
     },
     openGraph: {
-      title: pageTitle,
-      description: pageDescription,
-      url: canonicalUrl,
+      title,
+      description,
+      url: canonical,
       siteName: "PayUp",
       locale: `${language}-${country.toUpperCase()}`,
       type: "website",
@@ -128,7 +137,10 @@ export function generateMetadata({ params }: LayoutProps): Metadata {
 // ------------------------------
 export default function CountryLayout({ children, params }: LayoutProps) {
   const country = params.country.toLowerCase();
-  if (!VALID_COUNTRY_CODES.has(country)) notFound();
+
+  if (!VALID_COUNTRY_CODES.has(country)) {
+    notFound();
+  }
 
   const language = getLanguageForCountry(country);
   const htmlLang = `${language}-${country.toUpperCase()}`;
