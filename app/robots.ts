@@ -1,16 +1,17 @@
+// app/robots.ts
 import { MetadataRoute } from "next";
-import { BASE_URL, SEO_CONFIG } from "@/components/SEO/seoConfig";
+import { BASE_URL } from "@/components/SEO/seoConfig";
 import { VALID_COUNTRY_CODES, DEFAULT_COUNTRY } from "@/app/core/detector";
 
 /**
  * Allowed pages for crawlers
  */
 const ALLOWED_PAGES = [
-  "/", 
-  "/blog", 
-  "/faq", 
-  "/apps", 
-  "/games"
+  "/",
+  "/blog",
+  "/faq",
+  "/apps",
+  "/games",
 ];
 
 /**
@@ -81,9 +82,7 @@ export default function robots(): MetadataRoute.Robots {
     host: `${BASE_URL}/${DEFAULT_COUNTRY}`,
 
     // ✅ Developer notes (not part of actual robots file)
-    // Generated dynamically by Cashog ultra-premium SEO system
-    // Theme color: ${SEO_CONFIG.themeColor}
-    // Default language: ${SEO_CONFIG.openGraph.locale}
+    // Generated dynamically by PayUp ultra-premium SEO system
     // Disallowed prefixes: ${DYNAMIC_DISALLOW_PREFIXES.join(", ")}
   };
 }
