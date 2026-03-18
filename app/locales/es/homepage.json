@@ -1,10 +1,10 @@
 {
-  "welcome_message": "¡Bienvenido a PayUp! Gana dinero online completando encuestas, instalando aplicaciones y jugando.",
+  "welcome_message": "¡Bienvenido a PayUp! Gana dinero online.",
   "homepage_description": "PayUp te ayuda a ganar dinero real online de forma segura y rápida.",
-  "feature_surveys": "Encuestas",
+  "feature_surveys": "Completar encuestas",
   "feature_surveys_desc": "Responde encuestas y gana puntos al instante.",
-  "feature_apps": "Aplicaciones",
+  "feature_apps": "Instalar aplicaciones",
   "feature_apps_desc": "Descarga aplicaciones y cobra rápidamente.",
-  "feature_games": "Juegos",
+  "feature_games": "Jugar juegos",
   "feature_games_desc": "Juega a juegos divertidos y gana recompensas."
 }
