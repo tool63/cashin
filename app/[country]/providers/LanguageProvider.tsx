@@ -1,3 +1,4 @@
+// app/[country]/providers/LanguageProvider.tsx
 "use client";
 
 import { createContext, ReactNode, useState, useEffect, useMemo, useCallback } from "react";
@@ -11,13 +12,12 @@ import {
   COOKIE_KEYS,
   VALID_COUNTRY_CODES,
   SUPPORTED_LANGUAGES,
-  isLanguageSupported,
 } from "@/app/core/detector";
 
 import { isRtlLanguage } from "@/app/core/i18n/config";
 
 // ------------------------------
-// Context
+// Context Type
 // ------------------------------
 interface LanguageContextType {
   country: string;
@@ -36,110 +36,115 @@ export const LanguageContext = createContext<LanguageContextType>({
 });
 
 // ------------------------------
-// Provider
+// Props with Server Initialization
 // ------------------------------
 interface Props {
   children: ReactNode;
+  initialCountry?: string;        // From server
+  initialLanguage?: SupportedLanguage; // From server
 }
 
-export default function LanguageProvider({ children }: Props) {
+export default function LanguageProvider({ 
+  children, 
+  initialCountry = DEFAULT_COUNTRY,
+  initialLanguage = DEFAULT_LANGUAGE 
+}: Props) {
   const params = useParams();
+  const urlCountry = typeof params?.country === "string" 
+    ? params.country.toLowerCase() 
+    : null;
 
   // ------------------------------
-  // Extract country from URL
+  // Initialize from server props first (prevents hydration mismatch)
   // ------------------------------
-  const urlCountry =
-    typeof params?.country === "string"
-      ? params.country.toLowerCase()
-      : DEFAULT_COUNTRY;
+  const [uiCountry, setUiCountry] = useState<string>(() => {
+    // Priority: URL > initialCountry > cookie > default
+    if (urlCountry && VALID_COUNTRY_CODES.has(urlCountry)) return urlCountry;
+    if (initialCountry && VALID_COUNTRY_CODES.has(initialCountry)) return initialCountry;
+    
+    // Check cookie on client only
+    if (typeof window !== 'undefined') {
+      const cookie = document.cookie
+        .split("; ")
+        .find(row => row.startsWith(`${COOKIE_KEYS.COUNTRY}=`))
+        ?.split("=")[1];
+      if (cookie && VALID_COUNTRY_CODES.has(cookie)) return cookie;
+    }
+    
+    return DEFAULT_COUNTRY;
+  });
 
-  const [uiCountry, setUiCountry] = useState<string>(urlCountry);
-  const [uiLanguage, setUiLanguage] = useState<SupportedLanguage>(
-    getLanguageForCountry(urlCountry)
-  );
-
-  const [isRtl, setIsRtl] = useState<boolean>(isRtlLanguage(uiLanguage));
-
-  // ------------------------------
-  // Sync with URL (on mount / param change)
-  // ------------------------------
-  useEffect(() => {
-    if (urlCountry && VALID_COUNTRY_CODES.has(urlCountry)) {
-      setUiCountry(urlCountry);
-
-      // Only update language if not set by cookie
-      const langFromCookie = document.cookie
+  const [uiLanguage, setUiLanguage] = useState<SupportedLanguage>(() => {
+    // Priority: Cookie > initialLanguage > country mapping > default
+    if (typeof window !== 'undefined') {
+      const cookie = document.cookie
         .split("; ")
         .find(row => row.startsWith(`${COOKIE_KEYS.LANGUAGE}=`))
-        ?.split("=")[1] as SupportedLanguage | undefined;
+        ?.split("=")[1] as SupportedLanguage;
+      if (cookie && SUPPORTED_LANGUAGES.includes(cookie)) return cookie;
+    }
+    
+    if (initialLanguage && SUPPORTED_LANGUAGES.includes(initialLanguage)) {
+      return initialLanguage;
+    }
+    
+    // Use country-based language as fallback
+    const country = urlCountry || initialCountry || DEFAULT_COUNTRY;
+    return getLanguageForCountry(country);
+  });
 
-      if (!langFromCookie) {
+  const [isRtl, setIsRtl] = useState<boolean>(() => isRtlLanguage(uiLanguage));
+
+  // ------------------------------
+  // Sync with URL when it changes
+  // ------------------------------
+  useEffect(() => {
+    if (urlCountry && VALID_COUNTRY_CODES.has(urlCountry) && urlCountry !== uiCountry) {
+      setUiCountry(urlCountry);
+      
+      // Check if language cookie exists before updating
+      const hasLangCookie = document.cookie.includes(`${COOKIE_KEYS.LANGUAGE}=`);
+      if (!hasLangCookie) {
         const lang = getLanguageForCountry(urlCountry);
         setUiLanguage(lang);
         setIsRtl(isRtlLanguage(lang));
-        document.cookie = `${COOKIE_KEYS.LANGUAGE}=${lang}; path=/; max-age=${60 * 60 * 24 * 365}`;
       }
     }
-  }, [urlCountry]);
+  }, [urlCountry, uiCountry]);
 
   // ------------------------------
-  // Load language & country from cookie on mount
-  // ------------------------------
-  useEffect(() => {
-    const cookieLang = document.cookie
-      .split("; ")
-      .find(row => row.startsWith(`${COOKIE_KEYS.LANGUAGE}=`))
-      ?.split("=")[1] as SupportedLanguage | undefined;
-
-    if (cookieLang && isLanguageSupported(cookieLang)) {
-      setUiLanguage(cookieLang);
-      setIsRtl(isRtlLanguage(cookieLang));
-    }
-
-    const cookieCountry = document.cookie
-      .split("; ")
-      .find(row => row.startsWith(`${COOKIE_KEYS.COUNTRY}=`))
-      ?.split("=")[1];
-
-    if (cookieCountry && VALID_COUNTRY_CODES.has(cookieCountry)) {
-      setUiCountry(cookieCountry);
-    }
-  }, []);
-
-  // ------------------------------
-  // Update language
+  // Set language with cookie sync
   // ------------------------------
   const setLanguage = useCallback((lang: SupportedLanguage) => {
     setUiLanguage(lang);
     setIsRtl(isRtlLanguage(lang));
-    document.cookie = `${COOKIE_KEYS.LANGUAGE}=${lang}; path=/; max-age=${60 * 60 * 24 * 365}`;
+    
+    // Set cookie with same options as middleware
+    document.cookie = `${COOKIE_KEYS.LANGUAGE}=${lang}; path=/; max-age=${60 * 60 * 24 * 365}; samesite=lax`;
     document.documentElement.lang = lang;
+    
+    // Dispatch event for other components
+    window.dispatchEvent(new CustomEvent('languagechange', { detail: { language: lang } }));
   }, []);
 
   // ------------------------------
-  // Update country (UI only, does not change URL)
+  // Set country (UI only)
   // ------------------------------
   const setCountry = useCallback((country: string) => {
     if (!VALID_COUNTRY_CODES.has(country)) return;
-
     setUiCountry(country);
-
-    // If language cookie is missing, update language to default for this country
-    const cookieLang = document.cookie
-      .split("; ")
-      .find(row => row.startsWith(`${COOKIE_KEYS.LANGUAGE}=`))
-      ?.split("=")[1];
-
-    if (!cookieLang) {
+    
+    // Only update language if no cookie exists
+    const hasLangCookie = document.cookie.includes(`${COOKIE_KEYS.LANGUAGE}=`);
+    if (!hasLangCookie) {
       const lang = getLanguageForCountry(country);
       setUiLanguage(lang);
       setIsRtl(isRtlLanguage(lang));
-      document.cookie = `${COOKIE_KEYS.LANGUAGE}=${lang}; path=/; max-age=${60 * 60 * 24 * 365}`;
     }
   }, []);
 
   // ------------------------------
-  // Context value
+  // Memoized context value
   // ------------------------------
   const value = useMemo(
     () => ({
