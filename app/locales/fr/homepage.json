@@ -1,10 +1,10 @@
 {
-  "welcome": "Bienvenue sur Cashog !",
-  "description": "Gagnez des récompenses en répondant à des sondages, en jouant à des jeux, en regardant des vidéos, et plus encore.",
-  "card_surveys_title": "Sondages",
-  "card_surveys_desc": "Complétez des sondages et gagnez des points rapidement.",
-  "card_apps_title": "Installation d'applications",
-  "card_apps_desc": "Installez des applications et gagnez des récompenses instantanément.",
-  "card_games_title": "Jouer à des jeux",
-  "card_games_desc": "Jouez à des jeux et collectez des points tout en vous amusant."
+  "welcome_message": "Bienvenue sur PayUp ! Gagnez de l'argent en ligne en répondant à des sondages, en installant des applications et en jouant à des jeux.",
+  "homepage_description": "PayUp vous aide à gagner de l'argent réel en ligne en toute sécurité et rapidement.",
+  "feature_surveys": "Sondages",
+  "feature_surveys_desc": "Répondez aux sondages et gagnez des points instantanément.",
+  "feature_apps": "Applications",
+  "feature_apps_desc": "Téléchargez des applications et soyez payé rapidement.",
+  "feature_games": "Jeux",
+  "feature_games_desc": "Jouez à des jeux amusants et gagnez des récompenses."
 }
