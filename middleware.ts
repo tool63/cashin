@@ -6,109 +6,139 @@ import {
   getGeoInfo,
   COOKIE_KEYS,
   DEFAULT_COUNTRY,
-  buildUrl,
-  isPublicRoute,
   VALID_COUNTRY_CODES,
-} from "@/app/core/geo";
+  buildUrl,
+} from "@/app/core/detector";
 
+// ===============================
+// ⚡ PERFORMANCE CONFIG
+// ===============================
+const STATIC_FILE_REGEX = /\.(.*)$/;
+
+// ===============================
+// 🚀 MAIN MIDDLEWARE
+// ===============================
 export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  const { pathname, search } = request.nextUrl;
 
-  // ⛔ Skip static files, API routes, assets
+  // ===============================
+  // ⛔ Skip internal/static requests
+  // ===============================
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
-    pathname.includes(".")
+    STATIC_FILE_REGEX.test(pathname)
   ) {
     return NextResponse.next();
   }
 
-  // 🌍 Get geo info (single source of truth)
-  const geoInfo = getGeoInfo(request);
+  // ===============================
+  // 🌍 GEO DETECTION
+  // ===============================
+  const geo = getGeoInfo(request);
 
   // ===============================
-  // 🚦 ROUTING LOGIC
+  // 🚦 ROUTING ENGINE
   // ===============================
 
-  // ✅ 1. Root → redirect to country homepage
+  // ✅ 1. Root → redirect to geo country
   if (pathname === "/") {
     const url = request.nextUrl.clone();
-    url.pathname = `/${geoInfo.country}`;
+    url.pathname = `/${geo.country}`;
     return NextResponse.redirect(url);
   }
 
-  // ✅ 2. Public routes → allow (no country prefix)
-  if (isPublicRoute(pathname)) {
-    return NextResponse.next();
-  }
-
-  // ✅ 3. If NO country in URL → redirect with country
-  if (!geoInfo.hasCountryInUrl) {
+  // ✅ 2. Ensure country exists in URL
+  if (!geo.hasCountryInUrl) {
     const url = request.nextUrl.clone();
-    url.pathname = buildUrl(pathname, geoInfo.country);
+    url.pathname = buildUrl(pathname, geo.country);
     return NextResponse.redirect(url);
   }
 
-  // ✅ 4. Validate country in URL
-  const firstSegment = pathname.split("/").filter(Boolean)[0]?.toLowerCase();
+  // ✅ 3. Validate country
+  const segments = pathname.split("/").filter(Boolean);
+  const country = segments[0]?.toLowerCase();
 
-  if (firstSegment && !VALID_COUNTRY_CODES.has(firstSegment)) {
-    const segments = pathname.split("/").filter(Boolean);
-    const restPath = segments.slice(1).join("/");
+  if (!VALID_COUNTRY_CODES.has(country)) {
+    const rest = segments.slice(1).join("/");
 
     const url = request.nextUrl.clone();
-    url.pathname = restPath
-      ? `/${DEFAULT_COUNTRY}/${restPath}`
+    url.pathname = rest
+      ? `/${DEFAULT_COUNTRY}/${rest}`
       : `/${DEFAULT_COUNTRY}`;
 
     return NextResponse.redirect(url);
   }
 
   // ===============================
-  // 🍪 RESPONSE (cookies + headers)
+  // 🍪 RESPONSE SETUP
   // ===============================
-
   const response = NextResponse.next();
 
-  // 🌐 Language cookie
-  response.cookies.set(COOKIE_KEYS.LANGUAGE, geoInfo.language, {
-    path: "/",
-    maxAge: 60 * 60 * 24 * 365,
-    httpOnly: false,
-  });
-
-  // 🌍 Country cookie
-  response.cookies.set(COOKIE_KEYS.COUNTRY, geoInfo.country, {
+  // ===============================
+  // 🌍 GEO COOKIES
+  // ===============================
+  response.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
     path: "/",
     maxAge: 60 * 60 * 24 * 30,
-    httpOnly: false,
+    sameSite: "lax",
   });
 
-  // 📊 Headers for frontend/debugging
-  response.headers.set("x-country", geoInfo.country);
-  response.headers.set("x-language", geoInfo.language);
+  response.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
+    path: "/",
+    maxAge: 60 * 60 * 24 * 365,
+    sameSite: "lax",
+  });
 
-  // 🧪 A/B testing
+  // ===============================
+  // 🧪 A/B TESTING (Growth System)
+  // ===============================
   if (!request.cookies.get(COOKIE_KEYS.AB_GROUP)) {
-    const abGroup = Math.random() < 0.5 ? "A" : "B";
+    const group = Math.random() < 0.5 ? "A" : "B";
 
-    response.cookies.set(COOKIE_KEYS.AB_GROUP, abGroup, {
+    response.cookies.set(COOKIE_KEYS.AB_GROUP, group, {
       path: "/",
       maxAge: 60 * 60 * 24 * 90,
+      sameSite: "lax",
     });
+
+    response.headers.set("x-ab-group", group);
   }
 
-  // ⚡ Cache control
+  // ===============================
+  // 💰 TRACKING (Revenue critical)
+  // ===============================
+  if (search.includes("ref=")) {
+    const ref = new URLSearchParams(search).get("ref");
+
+    if (ref) {
+      response.cookies.set("referral_code", ref, {
+        path: "/",
+        maxAge: 60 * 60 * 24 * 30,
+      });
+    }
+  }
+
+  // ===============================
+  // 📊 DEBUG + ANALYTICS HEADERS
+  // ===============================
+  response.headers.set("x-country", geo.country);
+  response.headers.set("x-language", geo.language);
+  response.headers.set("x-path", pathname);
+
+  // ===============================
+  // ⚡ CACHE (EDGE OPTIMIZED)
+  // ===============================
   response.headers.set(
     "Cache-Control",
-    "private, s-maxage=120, stale-while-revalidate=300"
+    "public, s-maxage=120, stale-while-revalidate=300"
   );
 
   return response;
 }
 
 // ===============================
-// 🎯 Matcher
+// 🎯 MATCHER
 // ===============================
 export const config = {
   matcher: ["/((?!_next|api|favicon.ico|robots.txt|.*\\..*).*)"],
