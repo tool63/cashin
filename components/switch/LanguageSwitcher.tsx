@@ -78,7 +78,7 @@ export default function LanguageSwitcher() {
 
       {isOpen && (
         <div 
-          className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-48 bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-50"
+          className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-40 bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-50"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="language-menu"
@@ -94,7 +94,7 @@ export default function LanguageSwitcher() {
               aria-current={language === option.code}
             >
               <span className="text-lg" aria-hidden="true">{option.flag}</span>
-              <span>{option.label}</span>
+              <span className="font-medium uppercase">{option.code}</span>
               {language === option.code && (
                 <span className="ml-auto text-green-600" aria-label="Selected">✓</span>
               )}
