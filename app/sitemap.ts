@@ -1,12 +1,6 @@
-// app/sitemap.ts
 import type { MetadataRoute } from "next";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
-
-/**
- * Country list (matches your middleware/country slugs)
- * Keep in sync with your actual routing
- */
-const COUNTRIES = ["us", "uk", "ca", "au", "in", "fr", "de"];
+import { VALID_COUNTRY_CODES, DEFAULT_COUNTRY } from "@/app/core/detector";
 
 /**
  * Static site routes
@@ -15,7 +9,7 @@ const STATIC_ROUTES = ["", "/surveys", "/games", "/apps", "/faq"];
 
 /**
  * Dynamic data sources
- * Replace these with DB/API calls in production
+ * Replace with real DB/API in production
  */
 async function getOffers() {
   return [
@@ -41,8 +35,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const offers = await getOffers();
   const blogs = await getBlogPosts();
 
-  for (const country of COUNTRIES) {
-    // ✅ Static pages
+  // ✅ Iterate all supported countries
+  const countries = Array.from(VALID_COUNTRY_CODES);
+
+  for (const country of countries) {
+    // -----------------------------
+    // Static pages
+    // -----------------------------
     for (const route of STATIC_ROUTES) {
       urls.push({
         url: `${SEO_CONFIG.siteUrl}/${country}${route}`,
@@ -52,23 +51,27 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       });
     }
 
-    // ✅ Dynamic offer pages
+    // -----------------------------
+    // Dynamic offer pages
+    // -----------------------------
     for (const offer of offers) {
       urls.push({
         url: `${SEO_CONFIG.siteUrl}/${country}/offers/${offer.slug}`,
         lastModified: new Date(),
         changeFrequency: "daily",
-        priority: 0.8,
+        priority: 0.85,
       });
     }
 
-    // ✅ Dynamic blog pages
+    // -----------------------------
+    // Dynamic blog pages
+    // -----------------------------
     for (const post of blogs) {
       urls.push({
         url: `${SEO_CONFIG.siteUrl}/${country}/blog/${post.slug}`,
         lastModified: new Date(),
         changeFrequency: "weekly",
-        priority: 0.7,
+        priority: 0.75,
       });
     }
   }
