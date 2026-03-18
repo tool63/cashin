@@ -2,20 +2,30 @@
 
 import { useContext, useState, useRef, useEffect } from "react";
 import { LanguageContext } from "@/app/[country]/providers/LanguageProvider";
+import { SUPPORTED_LANGUAGES, SupportedLanguage } from "@/app/core/detector";
 
-// Language options
-const LANGUAGE_OPTIONS = [
-  { code: "en", label: "English", flag: "🇺🇸" },
-  { code: "fr", label: "Français", flag: "🇫🇷" },
-  { code: "de", label: "Deutsch", flag: "🇩🇪" },
-] as const;
+// Dynamic language options
+const LANGUAGE_OPTIONS = SUPPORTED_LANGUAGES.map(code => ({
+  code,
+  label:
+    code === "en" ? "English" :
+    code === "fr" ? "Français" :
+    code === "de" ? "Deutsch" :
+    code === "es" ? "Español" :
+    code === "pt" ? "Português" : code.toUpperCase(),
+  flag:
+    code === "en" ? "🇺🇸" :
+    code === "fr" ? "🇫🇷" :
+    code === "de" ? "🇩🇪" :
+    code === "es" ? "🇪🇸" :
+    code === "pt" ? "🇧🇷" : "🏳️",
+}));
 
 export default function LanguageSwitcher() {
   const { language, setLanguage } = useContext(LanguageContext);
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -48,7 +58,7 @@ export default function LanguageSwitcher() {
             <button
               key={option.code}
               onClick={() => {
-                setLanguage(option.code);
+                setLanguage(option.code as SupportedLanguage);
                 setIsOpen(false);
               }}
               className={`w-full text-left px-4 py-2 flex items-center gap-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition ${
