@@ -63,10 +63,10 @@ export default function LanguageSwitcher() {
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
-        <span className="text-base" aria-hidden="true">{currentLanguage.flag}</span>
-        <span className="text-xs font-bold uppercase">{currentLanguage.code}</span>
+        <span className="text-lg" aria-hidden="true">{currentLanguage.flag}</span>
+        <span className="text-sm font-bold uppercase">{currentLanguage.code}</span>
         <svg 
-          className={`w-3 h-3 transition-transform ${isOpen ? 'rotate-180' : ''}`} 
+          className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} 
           fill="none" 
           stroke="currentColor" 
           viewBox="0 0 24 24"
@@ -78,7 +78,7 @@ export default function LanguageSwitcher() {
 
       {isOpen && (
         <div 
-          className="absolute left-1/2 transform -translate-x-1/2 mt-1 bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-0.5 z-50 min-w-[75px]"
+          className="absolute left-1/2 transform -translate-x-1/2 mt-2 bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-50 min-w-[90px]"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="language-menu"
@@ -87,18 +87,18 @@ export default function LanguageSwitcher() {
             <button
               key={option.code}
               onClick={() => handleLanguageChange(option.code)}
-              className={`w-full px-1.5 py-1 flex items-center justify-between gap-0.5 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-xs ${
+              className={`w-full px-2 py-1.5 flex items-center justify-between gap-1 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-sm ${
                 language === option.code ? 'bg-gray-50 dark:bg-gray-800 font-medium' : ''
               }`}
               role="menuitem"
               aria-current={language === option.code}
             >
-              <div className="flex items-center gap-0.5">
-                <span className="text-sm" aria-hidden="true">{option.flag}</span>
+              <div className="flex items-center gap-1">
+                <span className="text-base" aria-hidden="true">{option.flag}</span>
                 <span className="font-medium uppercase">{option.code}</span>
               </div>
               {language === option.code && (
-                <span className="text-green-600 text-[10px]" aria-label="Selected">✓</span>
+                <span className="text-green-600 text-xs" aria-label="Selected">✓</span>
               )}
             </button>
           ))}
