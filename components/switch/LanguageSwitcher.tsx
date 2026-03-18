@@ -4,7 +4,9 @@ import { useContext, useState, useRef, useEffect } from "react";
 import { LanguageContext } from "@/app/[country]/providers/LanguageProvider";
 import { SUPPORTED_LANGUAGES, SupportedLanguage } from "@/app/core/detector";
 
+// ------------------------------
 // Dynamic language options
+// ------------------------------
 const LANGUAGE_OPTIONS = SUPPORTED_LANGUAGES.map(code => ({
   code,
   label:
@@ -26,12 +28,16 @@ export default function LanguageSwitcher() {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  // ------------------------------
+  // Close dropdown when clicking outside
+  // ------------------------------
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsOpen(false);
       }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
@@ -40,6 +46,7 @@ export default function LanguageSwitcher() {
 
   return (
     <div className="relative" ref={dropdownRef}>
+      {/* Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
@@ -52,9 +59,10 @@ export default function LanguageSwitcher() {
         </svg>
       </button>
 
+      {/* Dropdown */}
       {isOpen && (
         <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-50">
-          {LANGUAGE_OPTIONS.map((option) => (
+          {LANGUAGE_OPTIONS.map(option => (
             <button
               key={option.code}
               onClick={() => {
