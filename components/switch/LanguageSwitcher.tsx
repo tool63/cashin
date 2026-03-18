@@ -49,20 +49,29 @@ export default function LanguageSwitcher() {
   const currentLanguage = LANGUAGE_OPTIONS.find(l => l.code === language) || LANGUAGE_OPTIONS[0];
 
   const handleLanguageChange = (lang: SupportedLanguage) => {
-    // Update context (updates UI immediately)
+    console.log('🔄 Changing language to:', lang);
+    
+    // 1. Update context (updates UI immediately)
     setLanguage(lang);
     
-    // Set cookie for persistence
+    // 2. Set cookie for persistence (multiple ways to ensure it works)
     document.cookie = `${COOKIE_KEYS.LANGUAGE}=${lang}; path=/; max-age=31536000; samesite=lax`;
+    localStorage.setItem(COOKIE_KEYS.LANGUAGE, lang); // Backup
     
-    // Close dropdown
+    // 3. Close dropdown
     setIsOpen(false);
     
-    // Force server components to re-render with new language
-    router.refresh();
+    // 4. Force hard reload to ensure server components re-render
+    // This is the most reliable method
+    window.location.href = window.location.pathname;
     
-    // Dispatch event for any other components listening
-    window.dispatchEvent(new CustomEvent('languagechange', { detail: { language: lang } }));
+    // Alternative if you want to try router.refresh first:
+    // router.refresh();
+    // setTimeout(() => {
+    //   if (document.documentElement.lang !== lang) {
+    //     window.location.reload();
+    //   }
+    // }, 100);
   };
 
   return (
