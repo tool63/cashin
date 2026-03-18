@@ -1,11 +1,19 @@
-"use client";
+import { notFound } from "next/navigation";
+import { VALID_COUNTRY_CODES, getLanguageForCountry } from "@/app/core/detector";
 
-import { useContext } from "react";
-// ✅ Correct relative import
-import { LanguageContext } from "./providers/LanguageProvider";
+interface HomePageProps {
+  params: { country: string };
+}
 
-export default function HomePage() {
-  const { language, country, translations } = useContext(LanguageContext);
+export default async function HomePage({ params }: HomePageProps) {
+  const country = params.country.toLowerCase();
+
+  if (!VALID_COUNTRY_CODES.has(country)) notFound();
+
+  const language = getLanguageForCountry(country);
+
+  // Load translations server-side
+  const translations = await import(`@/app/locales/${language}/homepage.json`).then(mod => mod.default);
 
   return (
     <main className="max-w-container mx-auto px-6 py-12">
