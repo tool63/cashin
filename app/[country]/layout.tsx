@@ -1,10 +1,8 @@
-// app/[country]/layout.tsx
 import "@/styles/globals.css";
 import { ReactNode } from "react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-// ✅ Fixed relative imports for providers
 import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
 import LanguageProvider from "./providers/LanguageProvider";
 import Header from "@/components/layout/Header";
@@ -131,9 +129,10 @@ export default function CountryLayout({ children, params }: LayoutProps) {
 
   const language = getLanguageForCountry(country);
   const htmlLang = `${language}-${country.toUpperCase()}`;
+  const isRtl = false; // optional: integrate isRtlLanguage if needed
 
   return (
-    <html lang={htmlLang} suppressHydrationWarning>
+    <html lang={htmlLang} dir={isRtl ? "rtl" : "ltr"} suppressHydrationWarning>
       <body>
         <ThemeProviderWrapper>
           <LanguageProvider>
