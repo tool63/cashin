@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext, useState, useRef, useEffect } from "react";
-import { useRouter } from "next/navigation"; // ADD THIS
+import { useRouter } from "next/navigation";
 import { LanguageContext } from "@/app/[country]/providers/LanguageProvider";
 import { SUPPORTED_LANGUAGES, SupportedLanguage, COOKIE_KEYS } from "@/app/core/detector";
 
@@ -17,11 +17,20 @@ const LANGUAGE_OPTIONS = [
 ];
 
 export default function LanguageSwitcher() {
-  const router = useRouter(); // ADD THIS
+  const router = useRouter();
   const { language, setLanguage } = useContext(LanguageContext);
   const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Debug: Log current language on mount and when it changes
+  useEffect(() => {
+    console.log('🔤 LanguageSwitcher mounted, current language:', language);
+  }, []);
+
+  useEffect(() => {
+    console.log('🔄 Language changed to:', language);
+  }, [language]);
 
   // Handle hydration
   useEffect(() => {
@@ -49,14 +58,28 @@ export default function LanguageSwitcher() {
   const currentLanguage = LANGUAGE_OPTIONS.find(l => l.code === language) || LANGUAGE_OPTIONS[0];
 
   const handleLanguageChange = (lang: SupportedLanguage) => {
+    console.log('🎯 Language selected:', lang);
+    console.log('📝 Current language before change:', language);
+    
+    // Update context
     setLanguage(lang);
+    
+    // Set cookie directly
+    document.cookie = `${COOKIE_KEYS.LANGUAGE}=${lang}; path=/; max-age=31536000; samesite=lax`;
+    console.log('🍪 Cookie set:', document.cookie);
+    
+    // Close dropdown
     setIsOpen(false);
     
-    // Force re-render of language-dependent components
-    window.dispatchEvent(new Event('languagechange'));
-    
-    // ADD THIS - Refresh server components to load new translations
+    // Force server components to re-render with new language
+    console.log('🔄 Refreshing router...');
     router.refresh();
+    
+    // Check if cookie was set
+    setTimeout(() => {
+      console.log('🍪 Cookies after change:', document.cookie);
+      console.log('🔤 Language context after change:', language);
+    }, 100);
   };
 
   return (
