@@ -22,9 +22,7 @@ interface LayoutProps {
   params: { country: string; slug?: string[] };
 }
 
-// ------------------------------
 // Helper: Get initial language from cookies (server-side)
-// ------------------------------
 function getInitialLanguage(country: string, cookieStore: ReturnType<typeof cookies>): SupportedLanguage {
   const langCookie = cookieStore.get(COOKIE_KEYS.LANGUAGE)?.value;
   
@@ -42,6 +40,7 @@ function getInitialLanguage(country: string, cookieStore: ReturnType<typeof cook
 export default function CountryLayout({ children, params }: LayoutProps) {
   const country = params.country.toLowerCase();
   
+  // Validate country
   if (!VALID_COUNTRY_CODES.has(country)) {
     notFound();
   }
