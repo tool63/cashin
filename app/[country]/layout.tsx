@@ -4,8 +4,10 @@ import { ReactNode } from "react";
 import { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 
-import ThemeProviderWrapper from "@/app/providers/ThemeProviderWrapper";
-import LanguageProvider from "@/app/providers/LanguageProvider";
+// ✅ FIXED IMPORTS
+import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
+import LanguageProvider from "./providers/LanguageProvider";
+
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
@@ -40,15 +42,11 @@ function getCountryName(code: string): string {
 }
 
 // ------------------------------
-// Types
-// ------------------------------
 interface LayoutProps {
   children: ReactNode;
   params: { country: string; slug?: string[] };
 }
 
-// ------------------------------
-// Viewport
 // ------------------------------
 export const viewport: Viewport = {
   width: "device-width",
@@ -56,8 +54,6 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
-// ------------------------------
-// Static Params (SSG)
 // ------------------------------
 export function generateStaticParams() {
   const pages = ["", "how-it-works", "about", "faq"];
@@ -77,8 +73,6 @@ export function generateStaticParams() {
   return params;
 }
 
-// ------------------------------
-// Metadata Generator
 // ------------------------------
 export function generateMetadata({ params }: LayoutProps): Metadata {
   const country = params.country.toLowerCase();
@@ -104,7 +98,6 @@ export function generateMetadata({ params }: LayoutProps): Metadata {
   const baseUrl = "https://payup-pi.vercel.app";
   const canonical = `${baseUrl}/${country}${slug ? `/${slug}` : ""}`;
 
-  // Dynamic hreflang
   const languages: Record<string, string> = {};
 
   for (const c in COUNTRY_LANGUAGE_MAP) {
@@ -132,8 +125,6 @@ export function generateMetadata({ params }: LayoutProps): Metadata {
   };
 }
 
-// ------------------------------
-// Layout Component
 // ------------------------------
 export default function CountryLayout({ children, params }: LayoutProps) {
   const country = params.country.toLowerCase();
