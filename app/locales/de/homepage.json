@@ -1,10 +1,10 @@
 {
-  "welcome": "Willkommen bei Cashog!",
-  "description": "Verdiene Belohnungen, indem du Umfragen ausfüllst, Spiele spielst, Videos ansiehst und mehr.",
-  "card_surveys_title": "Umfragen",
-  "card_surveys_desc": "Fülle Umfragen aus und verdiene schnell Punkte.",
-  "card_apps_title": "App-Installationen",
-  "card_apps_desc": "Installiere Apps und erhalte sofort Belohnungen.",
-  "card_games_title": "Spiele spielen",
-  "card_games_desc": "Spiele Spiele und sammle Punkte, während du Spaß hast."
+  "welcome_message": "Willkommen bei PayUp! Verdienen Sie Geld online durch Umfragen, App-Installationen und Spiele.",
+  "homepage_description": "PayUp hilft Ihnen, sicher und schnell echtes Geld online zu verdienen.",
+  "feature_surveys": "Umfragen",
+  "feature_surveys_desc": "Beantworten Sie Umfragen und sammeln Sie sofort Punkte.",
+  "feature_apps": "Apps",
+  "feature_apps_desc": "Laden Sie Apps herunter und erhalten Sie schnell Geld.",
+  "feature_games": "Spiele",
+  "feature_games_desc": "Spielen Sie unterhaltsame Spiele und verdienen Sie Belohnungen."
 }
