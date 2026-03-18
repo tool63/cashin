@@ -1,4 +1,3 @@
-// middleware.ts
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
@@ -12,20 +11,22 @@ import {
 } from "@/app/core/detector";
 
 // ===============================
-// ⚡ PERFORMANCE CONFIG
+// ⚡ CONFIG
 // ===============================
 const STATIC_FILE_REGEX = /\.(.*)$/;
 
 // ===============================
-// 🚀 MAIN MIDDLEWARE
+// 🚀 MIDDLEWARE
 // ===============================
 export function middleware(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
 
+  const segments = pathname.split("/").filter(Boolean);
+  const firstSegment = segments[0]?.toLowerCase();
+
   // -------------------------------
-  // ⛔ Skip static, API, and public routes
+  // ⛔ Skip static, API, public
   // -------------------------------
-  const firstSegment = pathname.split("/").filter(Boolean)[0]?.toLowerCase();
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
@@ -36,13 +37,12 @@ export function middleware(request: NextRequest) {
   }
 
   // -------------------------------
-  // 🌍 GEO INFO
+  // 🌍 GEO INFO (NEW CLEAN SYSTEM)
   // -------------------------------
   const geo = getGeoInfo(request);
 
   // -------------------------------
-  // 🚦 ROUTING
-  // 1️⃣ Redirect root to geo country
+  // 1️⃣ ROOT → Redirect to resolved country
   // -------------------------------
   if (pathname === "/") {
     const url = request.nextUrl.clone();
@@ -50,56 +50,85 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  // 2️⃣ Ensure country exists in URL
+  // -------------------------------
+  // 2️⃣ Missing country in URL
+  // -------------------------------
   if (!geo.hasCountryInUrl) {
     const url = request.nextUrl.clone();
     url.pathname = buildUrl(geo.pathWithoutCountry, geo.country);
     return NextResponse.redirect(url);
   }
 
+  // -------------------------------
   // 3️⃣ Validate country segment
-  const segments = pathname.split("/").filter(Boolean);
-  const country = segments[0]?.toLowerCase();
+  // -------------------------------
+  const country = firstSegment;
 
-  if (!VALID_COUNTRY_CODES.has(country)) {
-    const restOfPath = segments.slice(1).join("/");
+  if (!country || !VALID_COUNTRY_CODES.has(country)) {
+    const rest = segments.slice(1).join("/");
     const url = request.nextUrl.clone();
-    url.pathname = restOfPath ? `/${DEFAULT_COUNTRY}/${restOfPath}` : `/${DEFAULT_COUNTRY}`;
+
+    url.pathname = rest
+      ? `/${DEFAULT_COUNTRY}/${rest}`
+      : `/${DEFAULT_COUNTRY}`;
+
     return NextResponse.redirect(url);
   }
 
   // -------------------------------
-  // 🍪 RESPONSE SETUP
+  // ✅ PASS THROUGH RESPONSE
   // -------------------------------
   const response = NextResponse.next();
 
-  // 4️⃣ Set GEO cookies (country + language)
-  response.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
-    path: "/",
-    maxAge: 60 * 60 * 24 * 30, // 30 days
-    sameSite: "lax",
-  });
+  // -------------------------------
+  // 🍪 COUNTRY COOKIE (FIXED)
+  // Only set if missing or changed
+  // -------------------------------
+  const existingCountry = request.cookies.get(COOKIE_KEYS.COUNTRY)?.value;
 
-  response.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
-    path: "/",
-    maxAge: 60 * 60 * 24 * 365, // 1 year
-    sameSite: "lax",
-  });
-
-  // 5️⃣ A/B Testing
-  if (!request.cookies.get(COOKIE_KEYS.AB_GROUP)) {
-    const group = Math.random() < 0.5 ? "A" : "B";
-    response.cookies.set(COOKIE_KEYS.AB_GROUP, group, {
+  if (!existingCountry || existingCountry !== geo.country) {
+    response.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
       path: "/",
-      maxAge: 60 * 60 * 24 * 90, // 90 days
+      maxAge: 60 * 60 * 24 * 30,
       sameSite: "lax",
     });
+  }
+
+  // -------------------------------
+  // 🌐 LANGUAGE COOKIE (FIXED)
+  // Only set if missing or changed
+  // -------------------------------
+  const existingLang = request.cookies.get(COOKIE_KEYS.LANGUAGE)?.value;
+
+  if (!existingLang || existingLang !== geo.language) {
+    response.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
+      path: "/",
+      maxAge: 60 * 60 * 24 * 365,
+      sameSite: "lax",
+    });
+  }
+
+  // -------------------------------
+  // 🧪 A/B TESTING (unchanged)
+  // -------------------------------
+  if (!request.cookies.get(COOKIE_KEYS.AB_GROUP)) {
+    const group = Math.random() < 0.5 ? "A" : "B";
+
+    response.cookies.set(COOKIE_KEYS.AB_GROUP, group, {
+      path: "/",
+      maxAge: 60 * 60 * 24 * 90,
+      sameSite: "lax",
+    });
+
     response.headers.set("x-ab-group", group);
   }
 
-  // 6️⃣ Referral Tracking
+  // -------------------------------
+  // 🔗 REFERRAL TRACKING
+  // -------------------------------
   if (search.includes("ref=")) {
     const ref = new URLSearchParams(search).get("ref");
+
     if (ref) {
       response.cookies.set("referral_code", ref, {
         path: "/",
@@ -108,12 +137,16 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // 7️⃣ Debug / Analytics Headers
+  // -------------------------------
+  // 📊 DEBUG HEADERS
+  // -------------------------------
   response.headers.set("x-country", geo.country);
   response.headers.set("x-language", geo.language);
   response.headers.set("x-path", pathname);
 
-  // 8️⃣ Edge Cache Headers
+  // -------------------------------
+  // ⚡ EDGE CACHE
+  // -------------------------------
   response.headers.set(
     "Cache-Control",
     "public, s-maxage=120, stale-while-revalidate=300"
