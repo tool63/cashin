@@ -4,11 +4,12 @@ import { createContext, ReactNode, useState, useEffect, useMemo, useCallback } f
 import { useParams } from "next/navigation";
 
 import {
-  getGeoInfo,
+  getLanguageForCountry,
   COOKIE_KEYS,
   SupportedLanguage,
-  getLanguageForCountry,
   DEFAULT_LANGUAGE,
+  DEFAULT_COUNTRY,
+  SUPPORTED_LANGUAGES,
 } from "@/app/core/detector";
 
 interface LanguageContextType {
@@ -19,8 +20,8 @@ interface LanguageContextType {
 }
 
 export const LanguageContext = createContext<LanguageContextType>({
-  country: "us",
-  language: "en",
+  country: DEFAULT_COUNTRY,
+  language: DEFAULT_LANGUAGE,
   setLanguage: () => {},
   setCountry: () => {},
 });
@@ -31,9 +32,8 @@ interface Props {
 
 export default function LanguageProvider({ children }: Props) {
   const params = useParams();
-  const urlCountry = params?.country || "us";
+  const urlCountry = params?.country || DEFAULT_COUNTRY;
 
-  // UI state
   const [uiCountry, setUiCountry] = useState(urlCountry);
   const [uiLanguage, setUiLanguage] = useState<SupportedLanguage>(
     getLanguageForCountry(urlCountry)
@@ -45,24 +45,22 @@ export default function LanguageProvider({ children }: Props) {
     setUiLanguage(getLanguageForCountry(urlCountry));
   }, [urlCountry]);
 
-  // Load language from cookie on mount
+  // Load language from cookie
   useEffect(() => {
     const cookieLang = document.cookie
       .split("; ")
       .find(row => row.startsWith(`${COOKIE_KEYS.LANGUAGE}=`))
-      ?.split("=")[1] as SupportedLanguage | undefined;
+      ?.split("=")[1];
 
-    if (cookieLang) setUiLanguage(cookieLang);
+    if (cookieLang && SUPPORTED_LANGUAGES.includes(cookieLang as SupportedLanguage)) {
+      setUiLanguage(cookieLang as SupportedLanguage);
+    }
   }, []);
 
   // Update language
   const setLanguage = useCallback((lang: SupportedLanguage) => {
     setUiLanguage(lang);
-
-    // Persist cookie
     document.cookie = `${COOKIE_KEYS.LANGUAGE}=${lang}; path=/; max-age=${60 * 60 * 24 * 365}`;
-
-    // Update HTML lang attribute
     document.documentElement.lang = lang;
   }, []);
 
@@ -70,15 +68,14 @@ export default function LanguageProvider({ children }: Props) {
   const setCountry = useCallback((country: string) => {
     setUiCountry(country);
 
-    // Auto-update language only if user has not explicitly selected one
+    // Auto-update language only if user hasn't explicitly selected one
     const cookieLang = document.cookie
       .split("; ")
       .find(row => row.startsWith(`${COOKIE_KEYS.LANGUAGE}=`))
       ?.split("=")[1];
 
     if (!cookieLang) {
-      const newLang = getLanguageForCountry(country);
-      setUiLanguage(newLang);
+      setUiLanguage(getLanguageForCountry(country));
     }
   }, []);
 
