@@ -4,10 +4,8 @@ import { ReactNode } from "react";
 import { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 
-// ✅ FIXED IMPORTS
-import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
-import LanguageProvider from "./providers/LanguageProvider";
-
+import ThemeProviderWrapper from "@/app/providers/ThemeProviderWrapper";
+import LanguageProvider from "@/app/providers/LanguageProvider";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
@@ -37,10 +35,11 @@ function getCountryName(code: string): string {
     pk: "Pakistan",
     br: "Brazil",
   };
-
   return names[code.toLowerCase()] || code.toUpperCase();
 }
 
+// ------------------------------
+// Types
 // ------------------------------
 interface LayoutProps {
   children: ReactNode;
@@ -48,12 +47,16 @@ interface LayoutProps {
 }
 
 // ------------------------------
+// Viewport
+// ------------------------------
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
 };
 
+// ------------------------------
+// Static Params (SSG)
 // ------------------------------
 export function generateStaticParams() {
   const pages = ["", "how-it-works", "about", "faq"];
@@ -74,17 +77,16 @@ export function generateStaticParams() {
 }
 
 // ------------------------------
+// Metadata Generator
+// ------------------------------
 export function generateMetadata({ params }: LayoutProps): Metadata {
   const country = params.country.toLowerCase();
 
-  if (!VALID_COUNTRY_CODES.has(country)) {
-    notFound();
-  }
+  if (!VALID_COUNTRY_CODES.has(country)) notFound();
 
   const countryName = getCountryName(country);
   const language = getLanguageForCountry(country);
   const slug = params.slug?.join("/") || "";
-
   const cleanSlug = slug.replace(/-/g, " ");
 
   const title = slug
@@ -99,21 +101,16 @@ export function generateMetadata({ params }: LayoutProps): Metadata {
   const canonical = `${baseUrl}/${country}${slug ? `/${slug}` : ""}`;
 
   const languages: Record<string, string> = {};
-
   for (const c in COUNTRY_LANGUAGE_MAP) {
     const lang = COUNTRY_LANGUAGE_MAP[c];
     languages[`${lang}-${c}`] = `${baseUrl}/${c}${slug ? `/${slug}` : ""}`;
   }
-
   languages["x-default"] = `${baseUrl}/${DEFAULT_COUNTRY}${slug ? `/${slug}` : ""}`;
 
   return {
     title,
     description,
-    alternates: {
-      canonical,
-      languages,
-    },
+    alternates: { canonical, languages },
     openGraph: {
       title,
       description,
@@ -126,12 +123,12 @@ export function generateMetadata({ params }: LayoutProps): Metadata {
 }
 
 // ------------------------------
+// Layout Component
+// ------------------------------
 export default function CountryLayout({ children, params }: LayoutProps) {
   const country = params.country.toLowerCase();
 
-  if (!VALID_COUNTRY_CODES.has(country)) {
-    notFound();
-  }
+  if (!VALID_COUNTRY_CODES.has(country)) notFound();
 
   const language = getLanguageForCountry(country);
   const htmlLang = `${language}-${country.toUpperCase()}`;
