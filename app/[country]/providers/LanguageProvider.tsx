@@ -1,8 +1,5 @@
-"use client";
-
 import { createContext, ReactNode, useState, useEffect, useMemo, useCallback } from "react";
 import { useParams } from "next/navigation";
-
 import {
   getLanguageForCountry,
   SupportedLanguage,
@@ -33,16 +30,16 @@ interface Props {
 
 export default function LanguageProvider({ children }: Props) {
   const params = useParams();
-  const urlCountry = params?.country?.toLowerCase();
+  
+  // Add a check to ensure that `params.country` is a string
+  const urlCountry = typeof params?.country === "string" ? params?.country.toLowerCase() : DEFAULT_COUNTRY;
 
-  const [uiCountry, setUiCountry] = useState<string>(urlCountry || DEFAULT_COUNTRY);
+  const [uiCountry, setUiCountry] = useState<string>(urlCountry);
   const [uiLanguage, setUiLanguage] = useState<SupportedLanguage>(
     urlCountry ? getLanguageForCountry(urlCountry) : DEFAULT_LANGUAGE
   );
 
-  // -------------------------------
-  // Sync state with URL
-  // -------------------------------
+  // Sync state with URL (from middleware)
   useEffect(() => {
     if (urlCountry && VALID_COUNTRY_CODES.has(urlCountry)) {
       setUiCountry(urlCountry);
@@ -50,9 +47,7 @@ export default function LanguageProvider({ children }: Props) {
     }
   }, [urlCountry]);
 
-  // -------------------------------
   // Load language/country from cookies (set by middleware)
-  // -------------------------------
   useEffect(() => {
     // Language cookie
     const cookieLang = document.cookie
@@ -62,7 +57,6 @@ export default function LanguageProvider({ children }: Props) {
 
     if (cookieLang && SUPPORTED_LANGUAGES.includes(cookieLang)) {
       setUiLanguage(cookieLang);
-      document.documentElement.lang = cookieLang;
     }
 
     // Country cookie
@@ -73,38 +67,26 @@ export default function LanguageProvider({ children }: Props) {
 
     if (cookieCountry && VALID_COUNTRY_CODES.has(cookieCountry)) {
       setUiCountry(cookieCountry);
-      setUiLanguage(prev => getLanguageForCountry(cookieCountry));
     }
   }, []);
 
-  // -------------------------------
   // Update language
-  // -------------------------------
   const setLanguage = useCallback((lang: SupportedLanguage) => {
     setUiLanguage(lang);
     document.cookie = `${COOKIE_KEYS.LANGUAGE}=${lang}; path=/; max-age=${60 * 60 * 24 * 365}`;
     document.documentElement.lang = lang;
   }, []);
 
-  // -------------------------------
   // Update UI country (does not change URL)
-  // -------------------------------
   const setCountry = useCallback((country: string) => {
-    if (!VALID_COUNTRY_CODES.has(country)) return;
-
     setUiCountry(country);
-
-    // Update language if cookie is missing
     const cookieLang = document.cookie
       .split("; ")
       .find(row => row.startsWith(`${COOKIE_KEYS.LANGUAGE}=`))
       ?.split("=")[1];
 
     if (!cookieLang) {
-      const lang = getLanguageForCountry(country);
-      setUiLanguage(lang);
-      document.cookie = `${COOKIE_KEYS.LANGUAGE}=${lang}; path=/; max-age=${60 * 60 * 24 * 365}`;
-      document.documentElement.lang = lang;
+      setUiLanguage(getLanguageForCountry(country));
     }
   }, []);
 
@@ -118,5 +100,5 @@ export default function LanguageProvider({ children }: Props) {
     [uiCountry, uiLanguage, setLanguage, setCountry]
   );
 
-  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
+  return <LanguageContext.Provider value={value}>{children}</LanguageProvider>;
 }
