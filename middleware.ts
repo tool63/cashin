@@ -8,6 +8,7 @@ import {
   DEFAULT_COUNTRY,
   VALID_COUNTRY_CODES,
   buildUrl,
+  PUBLIC_ROUTES,
 } from "@/app/core/detector";
 
 // ===============================
@@ -22,12 +23,13 @@ export function middleware(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
 
   // ===============================
-  // ⛔ Skip internal/static requests
+  // ⛔ Skip internal/static/public requests
   // ===============================
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
-    STATIC_FILE_REGEX.test(pathname)
+    STATIC_FILE_REGEX.test(pathname) ||
+    PUBLIC_ROUTES.has(pathname.split("/")[1]?.toLowerCase() || "")
   ) {
     return NextResponse.next();
   }
@@ -41,30 +43,30 @@ export function middleware(request: NextRequest) {
   // 🚦 ROUTING ENGINE
   // ===============================
 
-  // ✅ 1. Root → redirect to geo country
+  // 1️⃣ Root → redirect to geo country
   if (pathname === "/") {
     const url = request.nextUrl.clone();
     url.pathname = `/${geo.country}`;
     return NextResponse.redirect(url);
   }
 
-  // ✅ 2. Ensure country exists in URL
+  // 2️⃣ Ensure country exists in URL
   if (!geo.hasCountryInUrl) {
     const url = request.nextUrl.clone();
-    url.pathname = buildUrl(pathname, geo.country);
+    url.pathname = buildUrl(geo.pathWithoutCountry, geo.country);
     return NextResponse.redirect(url);
   }
 
-  // ✅ 3. Validate country
+  // 3️⃣ Validate country segment
   const segments = pathname.split("/").filter(Boolean);
   const country = segments[0]?.toLowerCase();
 
   if (!VALID_COUNTRY_CODES.has(country)) {
-    const rest = segments.slice(1).join("/");
+    const restOfPath = segments.slice(1).join("/");
 
     const url = request.nextUrl.clone();
-    url.pathname = rest
-      ? `/${DEFAULT_COUNTRY}/${rest}`
+    url.pathname = restOfPath
+      ? `/${DEFAULT_COUNTRY}/${restOfPath}`
       : `/${DEFAULT_COUNTRY}`;
 
     return NextResponse.redirect(url);
@@ -75,60 +77,49 @@ export function middleware(request: NextRequest) {
   // ===============================
   const response = NextResponse.next();
 
-  // ===============================
-  // 🌍 GEO COOKIES
-  // ===============================
+  // 4️⃣ Set GEO cookies
   response.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
     path: "/",
-    maxAge: 60 * 60 * 24 * 30,
+    maxAge: 60 * 60 * 24 * 30, // 30 days
     sameSite: "lax",
   });
 
   response.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
     path: "/",
-    maxAge: 60 * 60 * 24 * 365,
+    maxAge: 60 * 60 * 24 * 365, // 1 year
     sameSite: "lax",
   });
 
-  // ===============================
-  // 🧪 A/B TESTING (Growth System)
-  // ===============================
+  // 5️⃣ A/B Testing
   if (!request.cookies.get(COOKIE_KEYS.AB_GROUP)) {
     const group = Math.random() < 0.5 ? "A" : "B";
 
     response.cookies.set(COOKIE_KEYS.AB_GROUP, group, {
       path: "/",
-      maxAge: 60 * 60 * 24 * 90,
+      maxAge: 60 * 60 * 24 * 90, // 90 days
       sameSite: "lax",
     });
 
     response.headers.set("x-ab-group", group);
   }
 
-  // ===============================
-  // 💰 TRACKING (Revenue critical)
-  // ===============================
+  // 6️⃣ Referral tracking
   if (search.includes("ref=")) {
     const ref = new URLSearchParams(search).get("ref");
-
     if (ref) {
       response.cookies.set("referral_code", ref, {
         path: "/",
-        maxAge: 60 * 60 * 24 * 30,
+        maxAge: 60 * 60 * 24 * 30, // 30 days
       });
     }
   }
 
-  // ===============================
-  // 📊 DEBUG + ANALYTICS HEADERS
-  // ===============================
+  // 7️⃣ Debug + Analytics headers
   response.headers.set("x-country", geo.country);
   response.headers.set("x-language", geo.language);
   response.headers.set("x-path", pathname);
 
-  // ===============================
-  // ⚡ CACHE (EDGE OPTIMIZED)
-  // ===============================
+  // 8️⃣ Edge cache headers
   response.headers.set(
     "Cache-Control",
     "public, s-maxage=120, stale-while-revalidate=300"
@@ -141,5 +132,7 @@ export function middleware(request: NextRequest) {
 // 🎯 MATCHER
 // ===============================
 export const config = {
-  matcher: ["/((?!_next|api|favicon.ico|robots.txt|.*\\..*).*)"],
+  matcher: [
+    "/((?!_next|api|favicon.ico|robots.txt|.*\\..*).*)",
+  ],
 };
