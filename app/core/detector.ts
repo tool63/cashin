@@ -110,7 +110,7 @@ export function detectCountry(request: NextRequest): string {
 }
 
 // ===============================
-// 🧠 CORE FIX: Country Resolver
+// 🧠 CORE: Country Resolver
 // ===============================
 export function resolveCountry(
   request: NextRequest,
@@ -123,17 +123,17 @@ export function resolveCountry(
     return urlCountry;
   }
 
-  // 2️⃣ Cookie (user preference)
+  // 2️⃣ Cookie
   if (cookieCountry && VALID_COUNTRY_CODES.has(cookieCountry)) {
     return cookieCountry;
   }
 
-  // 3️⃣ Geo fallback
+  // 3️⃣ Geo
   return detectCountry(request);
 }
 
 // ===============================
-// 🌐 Language Detection
+// 🌐 Language Utils
 // ===============================
 export function normalizeLanguage(lang: string): string {
   return lang.toLowerCase().split("-")[0];
@@ -169,12 +169,34 @@ export function getLanguageForCountry(country: string): SupportedLanguage {
   return COUNTRY_LANGUAGE_MAP[country.toLowerCase()] || DEFAULT_LANGUAGE;
 }
 
-export function detectLanguage(request: NextRequest, country: string): SupportedLanguage {
-  return (
-    getLanguageFromCookie(request) ||
-    getLanguageFromHeader(request) ||
-    getLanguageForCountry(country)
-  );
+// ===============================
+// 🌐 FINAL LANGUAGE RESOLVER (MAIN FIX)
+// ===============================
+export function detectLanguage(
+  request: NextRequest,
+  country: string
+): SupportedLanguage {
+  const countryLang = getLanguageForCountry(country);
+
+  // 1️⃣ Cookie (user override)
+  const cookieLang = getLanguageFromCookie(request);
+  if (cookieLang) {
+    return cookieLang;
+  }
+
+  // 2️⃣ Browser language
+  const headerLang = getLanguageFromHeader(request);
+  if (headerLang) {
+    return headerLang;
+  }
+
+  // 3️⃣ Country default
+  if (countryLang) {
+    return countryLang;
+  }
+
+  // 4️⃣ Global fallback
+  return DEFAULT_LANGUAGE;
 }
 
 // ===============================
@@ -193,7 +215,6 @@ export function getGeoInfo(request: NextRequest): GeoInfo {
 
   const urlCountry = extractCountryFromPath(pathname);
 
-  // ✅ USE NEW RESOLVER
   const country = resolveCountry(request, urlCountry);
   const language = detectLanguage(request, country);
 
