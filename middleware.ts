@@ -10,14 +10,8 @@ import {
   PUBLIC_ROUTES,
 } from "@/app/core/detector";
 
-// ===============================
-// ⚡ CONFIG
-// ===============================
 const STATIC_FILE_REGEX = /\.(.*)$/;
 
-// ===============================
-// 🚀 MIDDLEWARE
-// ===============================
 export function middleware(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
 
@@ -37,12 +31,12 @@ export function middleware(request: NextRequest) {
   }
 
   // -------------------------------
-  // 🌍 GEO INFO (NEW CLEAN SYSTEM)
+  // 🌍 GEO INFO
   // -------------------------------
   const geo = getGeoInfo(request);
 
   // -------------------------------
-  // 1️⃣ ROOT → Redirect to resolved country
+  // 1️⃣ ROOT → Redirect
   // -------------------------------
   if (pathname === "/") {
     const url = request.nextUrl.clone();
@@ -51,7 +45,7 @@ export function middleware(request: NextRequest) {
   }
 
   // -------------------------------
-  // 2️⃣ Missing country in URL
+  // 2️⃣ Missing country
   // -------------------------------
   if (!geo.hasCountryInUrl) {
     const url = request.nextUrl.clone();
@@ -60,7 +54,7 @@ export function middleware(request: NextRequest) {
   }
 
   // -------------------------------
-  // 3️⃣ Validate country segment
+  // 3️⃣ Validate country
   // -------------------------------
   const country = firstSegment;
 
@@ -76,13 +70,29 @@ export function middleware(request: NextRequest) {
   }
 
   // -------------------------------
-  // ✅ PASS THROUGH RESPONSE
+  // ✅ PASS THROUGH
   // -------------------------------
   const response = NextResponse.next();
 
   // -------------------------------
-  // 🍪 COUNTRY COOKIE (FIXED)
-  // Only set if missing or changed
+  // 🔥 FIX: INVALID LANGUAGE COOKIE
+  // -------------------------------
+  const langCookie = request.cookies.get(COOKIE_KEYS.LANGUAGE)?.value;
+
+  if (langCookie) {
+    const normalized = langCookie.toLowerCase().split("-")[0];
+
+    if (!["en", "fr", "de", "es", "pt"].includes(normalized)) {
+      response.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
+        path: "/",
+        maxAge: 60 * 60 * 24 * 365,
+        sameSite: "lax",
+      });
+    }
+  }
+
+  // -------------------------------
+  // 🍪 COUNTRY COOKIE
   // -------------------------------
   const existingCountry = request.cookies.get(COOKIE_KEYS.COUNTRY)?.value;
 
@@ -95,8 +105,7 @@ export function middleware(request: NextRequest) {
   }
 
   // -------------------------------
-  // 🌐 LANGUAGE COOKIE (FIXED)
-  // Only set if missing or changed
+  // 🌐 LANGUAGE COOKIE
   // -------------------------------
   const existingLang = request.cookies.get(COOKIE_KEYS.LANGUAGE)?.value;
 
@@ -109,7 +118,7 @@ export function middleware(request: NextRequest) {
   }
 
   // -------------------------------
-  // 🧪 A/B TESTING (unchanged)
+  // 🧪 A/B TESTING
   // -------------------------------
   if (!request.cookies.get(COOKIE_KEYS.AB_GROUP)) {
     const group = Math.random() < 0.5 ? "A" : "B";
@@ -155,9 +164,9 @@ export function middleware(request: NextRequest) {
   return response;
 }
 
-// ===============================
+// -------------------------------
 // 🎯 MATCHER
-// ===============================
+// -------------------------------
 export const config = {
   matcher: ["/((?!_next|api|favicon.ico|robots.txt|.*\\..*).*)"],
 };
