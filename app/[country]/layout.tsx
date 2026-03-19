@@ -15,6 +15,7 @@ import {
   COOKIE_KEYS,
   SupportedLanguage,
   DEFAULT_LANGUAGE,
+  SUPPORTED_LANGUAGES, // ✅ USE THIS (important fix)
 } from "@/app/core/detector";
 
 interface LayoutProps {
@@ -22,43 +23,60 @@ interface LayoutProps {
   params: { country: string; slug?: string[] };
 }
 
-// Helper: Get initial language from cookies (server-side)
-function getInitialLanguage(country: string, cookieStore: ReturnType<typeof cookies>): SupportedLanguage {
+// ===============================
+// ✅ FIXED: Safe Language Resolver
+// ===============================
+function getInitialLanguage(
+  country: string,
+  cookieStore: ReturnType<typeof cookies>
+): SupportedLanguage {
   const langCookie = cookieStore.get(COOKIE_KEYS.LANGUAGE)?.value;
-  
+
   if (langCookie) {
     const normalized = langCookie.toLowerCase().split("-")[0];
-    if (normalized === "en" || normalized === "fr" || normalized === "de" || 
-        normalized === "es" || normalized === "pt") {
+
+    // ✅ STRICT VALIDATION (NO HARDCODE)
+    if (SUPPORTED_LANGUAGES.includes(normalized as SupportedLanguage)) {
       return normalized as SupportedLanguage;
     }
   }
-  
-  return getLanguageForCountry(country);
+
+  // ✅ SAFE FALLBACK
+  return getLanguageForCountry(country) || DEFAULT_LANGUAGE;
 }
 
 export default function CountryLayout({ children, params }: LayoutProps) {
   const country = params.country.toLowerCase();
-  
-  // Validate country
+
+  // ------------------------------
+  // ✅ Validate country
+  // ------------------------------
   if (!VALID_COUNTRY_CODES.has(country)) {
     notFound();
   }
 
-  // Get cookies server-side
+  // ------------------------------
+  // ✅ Server-side cookies
+  // ------------------------------
   const cookieStore = cookies();
   const initialLanguage = getInitialLanguage(country, cookieStore);
+
+  // ------------------------------
+  // ✅ HTML attributes
+  // ------------------------------
   const htmlLang = `${initialLanguage}-${country.toUpperCase()}`;
 
-  // Set RTL direction if needed
-  const rtlLanguages = ['ar', 'he', 'ur', 'fa'];
-  const dir = rtlLanguages.includes(initialLanguage) ? 'rtl' : 'ltr';
+  const rtlLanguages = ["ar", "he", "ur", "fa"];
+  const dir = rtlLanguages.includes(initialLanguage) ? "rtl" : "ltr";
 
+  // ------------------------------
+  // 🚀 RENDER
+  // ------------------------------
   return (
     <html lang={htmlLang} dir={dir} suppressHydrationWarning>
       <body>
         <ThemeProviderWrapper>
-          <LanguageProvider 
+          <LanguageProvider
             initialCountry={country}
             initialLanguage={initialLanguage}
           >
