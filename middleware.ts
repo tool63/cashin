@@ -12,6 +12,9 @@ import {
 
 const STATIC_FILE_REGEX = /\.(.*)$/;
 
+// ===============================
+// 🌍 Middleware
+// ===============================
 export function middleware(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
 
@@ -45,7 +48,7 @@ export function middleware(request: NextRequest) {
   }
 
   // -------------------------------
-  // 2️⃣ Missing country
+  // 2️⃣ Missing country in URL
   // -------------------------------
   if (!geo.hasCountryInUrl) {
     const url = request.nextUrl.clone();
@@ -74,26 +77,9 @@ export function middleware(request: NextRequest) {
   // -------------------------------
   const response = NextResponse.next();
 
-  // -------------------------------
-  // 🔥 FIX: INVALID LANGUAGE COOKIE
-  // -------------------------------
-  const langCookie = request.cookies.get(COOKIE_KEYS.LANGUAGE)?.value;
-
-  if (langCookie) {
-    const normalized = langCookie.toLowerCase().split("-")[0];
-
-    if (!["en", "fr", "de", "es", "pt"].includes(normalized)) {
-      response.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
-        path: "/",
-        maxAge: 60 * 60 * 24 * 365,
-        sameSite: "lax",
-      });
-    }
-  }
-
-  // -------------------------------
-  // 🍪 COUNTRY COOKIE
-  // -------------------------------
+  // ===============================
+  // 🍪 COUNTRY COOKIE (SAFE)
+  // ===============================
   const existingCountry = request.cookies.get(COOKIE_KEYS.COUNTRY)?.value;
 
   if (!existingCountry || existingCountry !== geo.country) {
@@ -104,12 +90,30 @@ export function middleware(request: NextRequest) {
     });
   }
 
-  // -------------------------------
-  // 🌐 LANGUAGE COOKIE
-  // -------------------------------
+  // ===============================
+  // 🌐 LANGUAGE COOKIE (STRICT + SAFE)
+  // ===============================
   const existingLang = request.cookies.get(COOKIE_KEYS.LANGUAGE)?.value;
 
-  if (!existingLang || existingLang !== geo.language) {
+  const supportedLanguages = ["en", "fr", "de", "es", "pt"];
+
+  if (existingLang) {
+    const normalized = existingLang.toLowerCase().split("-")[0];
+
+    const isValid = supportedLanguages.includes(normalized);
+
+    // ❌ Fix invalid cookie
+    if (!isValid) {
+      response.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
+        path: "/",
+        maxAge: 60 * 60 * 24 * 365,
+        sameSite: "lax",
+      });
+    }
+
+    // ❌ If valid → DO NOTHING (respect user override)
+  } else {
+    // ✅ No cookie → set country-based default
     response.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
       path: "/",
       maxAge: 60 * 60 * 24 * 365,
@@ -117,9 +121,9 @@ export function middleware(request: NextRequest) {
     });
   }
 
-  // -------------------------------
+  // ===============================
   // 🧪 A/B TESTING
-  // -------------------------------
+  // ===============================
   if (!request.cookies.get(COOKIE_KEYS.AB_GROUP)) {
     const group = Math.random() < 0.5 ? "A" : "B";
 
@@ -132,9 +136,9 @@ export function middleware(request: NextRequest) {
     response.headers.set("x-ab-group", group);
   }
 
-  // -------------------------------
+  // ===============================
   // 🔗 REFERRAL TRACKING
-  // -------------------------------
+  // ===============================
   if (search.includes("ref=")) {
     const ref = new URLSearchParams(search).get("ref");
 
@@ -146,16 +150,16 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // -------------------------------
+  // ===============================
   // 📊 DEBUG HEADERS
-  // -------------------------------
+  // ===============================
   response.headers.set("x-country", geo.country);
   response.headers.set("x-language", geo.language);
   response.headers.set("x-path", pathname);
 
-  // -------------------------------
+  // ===============================
   // ⚡ EDGE CACHE
-  // -------------------------------
+  // ===============================
   response.headers.set(
     "Cache-Control",
     "public, s-maxage=120, stale-while-revalidate=300"
@@ -164,9 +168,9 @@ export function middleware(request: NextRequest) {
   return response;
 }
 
-// -------------------------------
+// ===============================
 // 🎯 MATCHER
-// -------------------------------
+// ===============================
 export const config = {
   matcher: ["/((?!_next|api|favicon.ico|robots.txt|.*\\..*).*)"],
 };
