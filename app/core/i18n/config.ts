@@ -3,10 +3,10 @@ import { SupportedLanguage, DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from "@/app/
 // ===============================
 // 🔤 RTL Languages (future support)
 // ===============================
-export const RTL_LANGUAGES: string[] = ["ar", "he", "ur", "fa"];
+export const RTL_LANGUAGES: SupportedLanguage[] = ["ar", "he", "ur", "fa"] as SupportedLanguage[];
 
 export function isRtlLanguage(lang: SupportedLanguage | string): boolean {
-  return RTL_LANGUAGES.includes(lang);
+  return RTL_LANGUAGES.includes(lang as SupportedLanguage);
 }
 
 // ===============================
@@ -119,4 +119,17 @@ export function getSupportedLocales(): string[] {
 
 export function isLanguageSupported(lang: string): lang is SupportedLanguage {
   return SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage);
+}
+
+// ===============================
+// 🌍 Safe Country → Language
+// ===============================
+import { COUNTRY_LANGUAGE_MAP, DEFAULT_LANGUAGE } from "@/app/core/detector";
+
+/**
+ * Returns the default language for a given country.
+ * If the country has no mapping, fallback to English.
+ */
+export function getLanguageForCountry(country: string): SupportedLanguage {
+  return COUNTRY_LANGUAGE_MAP[country.toLowerCase()] || DEFAULT_LANGUAGE;
 }
