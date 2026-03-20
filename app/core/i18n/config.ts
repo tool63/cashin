@@ -28,25 +28,20 @@ export const LOCALE_BY_LANGUAGE: Record<SupportedLanguage, string> = {
 // 💱 CURRENCY MAP
 // ===============================
 export const CURRENCY_BY_COUNTRY: Record<string, string> = {
-  // Americas
   us: "USD", ca: "CAD", mx: "MXN", br: "BRL", ar: "ARS",
   co: "COP", cl: "CLP", pe: "PEN", ec: "USD",
 
-  // Europe
   gb: "GBP", fr: "EUR", de: "EUR", es: "EUR", pt: "EUR",
   it: "EUR", nl: "EUR", ch: "CHF", at: "EUR",
   se: "SEK", no: "NOK", dk: "DKK", pl: "PLN",
 
-  // Asia
   in: "INR", bd: "BDT", pk: "PKR", jp: "JPY", kr: "KRW",
   cn: "CNY", sg: "SGD", my: "MYR", ph: "PHP", id: "IDR",
   th: "THB", vn: "VND", ae: "AED", sa: "SAR", il: "ILS",
   tr: "TRY", hk: "HKD", tw: "TWD",
 
-  // Oceania
   au: "AUD", nz: "NZD",
 
-  // Africa
   za: "ZAR", ng: "NGN", ke: "KES", eg: "EGP",
   ma: "MAD", dz: "DZD", tn: "TND",
 };
@@ -55,7 +50,7 @@ export const CURRENCY_BY_COUNTRY: Record<string, string> = {
 // 🔒 SAFE HELPERS
 // ===============================
 function safeLocale(language: SupportedLanguage): string {
-  return LOCALE_BY_LANGUAGE[language] || LOCALE_BY_LANGUAGE[DEFAULT_LANGUAGE];
+  return LOCALE_BY_LANGUAGE[language] || "en-US";
 }
 
 function safeCurrency(country: string): string {
@@ -183,26 +178,70 @@ export function getCurrencyForCountry(country: string): string {
 }
 
 // ===============================
-// 🌐 LOAD TRANSLATIONS (IMPROVED)
+// 🌐 LOAD TRANSLATIONS - FIXED FOR APP ROUTER
 // ===============================
 export async function loadTranslations(
   language: SupportedLanguage,
-  namespace: string
+  namespace: string = "homepage"
 ): Promise<Record<string, string>> {
   try {
+    // Dynamic import works perfectly in Next.js App Router
     const messages = await import(
-      `@/locales/${language}/${namespace}.json`
+      `@/app/locales/${language}/${namespace}.json`
     );
     return messages.default || {};
-  } catch {
-    // fallback → default language
-    try {
-      const fallback = await import(
-        `@/locales/${DEFAULT_LANGUAGE}/${namespace}.json`
-      );
-      return fallback.default || {};
-    } catch {
-      return {};
+  } catch (error) {
+    console.warn(`Failed to load translations for ${language}/${namespace}, falling back to English`);
+    
+    // Fallback to English
+    if (language !== DEFAULT_LANGUAGE) {
+      try {
+        const fallback = await import(
+          `@/app/locales/${DEFAULT_LANGUAGE}/${namespace}.json`
+        );
+        return fallback.default || {};
+      } catch {
+        return {};
+      }
+    }
+    
+    return {};
+  }
+}
+
+// ===============================
+// 🚀 SERVER-SIDE TRANSLATION HELPER
+// ===============================
+export async function getTranslations(
+  language: SupportedLanguage,
+  namespace: string = "homepage"
+): Promise<Record<string, string>> {
+  return loadTranslations(language, namespace);
+}
+
+// ===============================
+// 🏷️ TYPE FOR TRANSLATIONS
+// ===============================
+export type TranslationValue = string | Record<string, any>;
+export type TranslationObject = Record<string, TranslationValue>;
+
+// ===============================
+// 🔧 HELPER FOR NESTED TRANSLATIONS
+// ===============================
+export function getNestedTranslation(
+  translations: TranslationObject,
+  key: string
+): string | null {
+  const parts = key.split('.');
+  let current: any = translations;
+  
+  for (const part of parts) {
+    if (current && typeof current === 'object' && part in current) {
+      current = current[part];
+    } else {
+      return null;
     }
   }
+  
+  return typeof current === 'string' ? current : null;
 }
