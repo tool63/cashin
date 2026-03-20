@@ -8,6 +8,8 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import DarkLightToggle from "@/components/switch/DarkLightToggle";
 import LanguageSwitcher from "@/components/switch/LanguageSwitcher";
 import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
+import { useCountry } from "@/app/[country]/providers/CountryProvider";
+import { getTextDirection } from "@/app/core/i18n/config";
 
 // ===============================
 // 🧩 TYPES
@@ -28,9 +30,11 @@ export default function Header({ className }: HeaderProps) {
   const [mobileEarnOpen, setMobileEarnOpen] = useState(false);
 
   // ------------------------------
-  // CONTEXT (FIXED)
-// ------------------------------
-  const { country, isRtl } = useLanguage();
+  // CONTEXT
+  // ------------------------------
+  const { language } = useLanguage();
+  const { country } = useCountry();
+  const isRtl = getTextDirection(language);
 
   // ------------------------------
   // REFS
@@ -97,6 +101,17 @@ export default function Header({ className }: HeaderProps) {
   }, [mobileOpen]);
 
   // ------------------------------
+  // FORMAT EARN ITEMS
+  // ------------------------------
+  const earnItems = [
+    { key: "surveys", label: "Surveys" },
+    { key: "app-installs", label: "App Installs" },
+    { key: "play-games", label: "Play Games" },
+    { key: "watch-videos", label: "Watch Videos" },
+    { key: "offerwall", label: "Offerwall" },
+  ];
+
+  // ------------------------------
   // UI
   // ------------------------------
   return (
@@ -116,7 +131,10 @@ export default function Header({ className }: HeaderProps) {
 
         {/* DESKTOP NAV */}
         <nav className="hidden md:flex items-center gap-7 text-sm font-medium">
-          <Link href={`/${country}/how-it-works`} className="hover:opacity-80">
+          <Link 
+            href={`/${country}/how-it-works`} 
+            className="hover:opacity-80 transition-opacity"
+          >
             How it works
           </Link>
 
@@ -127,11 +145,11 @@ export default function Header({ className }: HeaderProps) {
             onMouseEnter={() => setEarnOpen(true)}
             onMouseLeave={() => setEarnOpen(false)}
           >
-            <button className="flex items-center gap-1 hover:opacity-80">
+            <button className="flex items-center gap-1 hover:opacity-80 transition-opacity">
               Earn
               <ChevronDown
                 size={14}
-                className={`transition-transform ${earnOpen ? "rotate-180" : ""}`}
+                className={`transition-transform duration-200 ${earnOpen ? "rotate-180" : ""}`}
               />
             </button>
 
@@ -146,21 +164,14 @@ export default function Header({ className }: HeaderProps) {
                     isRtl ? "right-0" : "left-0"
                   } mt-3 w-52 flex flex-col gap-2 p-4 rounded-xl shadow-xl border ${borderColor} bg-white dark:bg-gray-900`}
                 >
-                  {[
-                    "surveys",
-                    "app-installs",
-                    "play-games",
-                    "watch-videos",
-                    "offerwall",
-                  ].map((path) => (
+                  {earnItems.map((item) => (
                     <Link
-                      key={path}
-                      href={`/${country}/${path}`}
-                      className="hover:opacity-80 py-1"
+                      key={item.key}
+                      href={`/${country}/${item.key}`}
+                      className="hover:opacity-80 py-1 transition-opacity"
+                      onClick={() => setEarnOpen(false)}
                     >
-                      {path.replace("-", " ").replace(/\b\w/g, (c) =>
-                        c.toUpperCase()
-                      )}
+                      {item.label}
                     </Link>
                   ))}
                 </motion.div>
@@ -168,13 +179,22 @@ export default function Header({ className }: HeaderProps) {
             </AnimatePresence>
           </div>
 
-          <Link href={`/${country}/cashout`} className="hover:opacity-80">
+          <Link 
+            href={`/${country}/cashout`} 
+            className="hover:opacity-80 transition-opacity"
+          >
             Cashout
           </Link>
-          <Link href={`/${country}/blog`} className="hover:opacity-80">
+          <Link 
+            href={`/${country}/blog`} 
+            className="hover:opacity-80 transition-opacity"
+          >
             Blog
           </Link>
-          <Link href={`/${country}/help`} className="hover:opacity-80">
+          <Link 
+            href={`/${country}/help`} 
+            className="hover:opacity-80 transition-opacity"
+          >
             Help
           </Link>
         </nav>
@@ -185,13 +205,13 @@ export default function Header({ className }: HeaderProps) {
           <DarkLightToggle />
 
           <Link href={`/${country}/login`}>
-            <button className={`px-4 py-2 rounded-lg border ${borderColor}`}>
+            <button className={`px-4 py-2 rounded-lg border ${borderColor} hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors`}>
               Login
             </button>
           </Link>
 
           <Link href={`/${country}/signup`}>
-            <button className="px-5 py-2 rounded-lg bg-gradient-to-r from-yellow-400 to-green-500 text-black font-medium">
+            <button className="px-5 py-2 rounded-lg bg-gradient-to-r from-yellow-400 to-green-500 text-black font-medium hover:opacity-90 transition-opacity">
               Sign up
             </button>
           </Link>
@@ -199,8 +219,9 @@ export default function Header({ className }: HeaderProps) {
 
         {/* MOBILE BUTTON */}
         <button
-          className="md:hidden p-2 rounded-lg"
+          className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
           onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label="Toggle menu"
         >
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -213,57 +234,94 @@ export default function Header({ className }: HeaderProps) {
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            className={`md:hidden fixed top-20 left-0 right-0 px-6 pt-4 pb-6 border-t ${borderColor} bg-white dark:bg-gray-900`}
+            transition={{ duration: 0.2 }}
+            className={`md:hidden fixed top-20 left-0 right-0 px-6 pt-4 pb-6 border-t ${borderColor} bg-white dark:bg-gray-900 shadow-lg max-h-[calc(100vh-5rem)] overflow-y-auto`}
             dir={isRtl ? "rtl" : "ltr"}
           >
             <div className="flex flex-col gap-4">
-              <Link href={`/${country}/how-it-works`}>How it works</Link>
-
-              <button
-                onClick={() => setMobileEarnOpen(!mobileEarnOpen)}
-                className="flex justify-between w-full"
+              <Link 
+                href={`/${country}/how-it-works`}
+                onClick={() => setMobileOpen(false)}
+                className="hover:opacity-80 transition-opacity"
               >
-                Earn <ChevronDown />
-              </button>
+                How it works
+              </Link>
 
-              {mobileEarnOpen && (
-                <div className="flex flex-col pl-4 gap-2">
-                  {[
-                    "surveys",
-                    "app-installs",
-                    "play-games",
-                    "watch-videos",
-                    "offerwall",
-                  ].map((path) => (
-                    <Link
-                      key={path}
-                      href={`/${country}/${path}`}
-                      onClick={() => setMobileOpen(false)}
+              <div>
+                <button
+                  onClick={() => setMobileEarnOpen(!mobileEarnOpen)}
+                  className="flex justify-between w-full hover:opacity-80 transition-opacity"
+                >
+                  Earn 
+                  <ChevronDown 
+                    size={18} 
+                    className={`transition-transform duration-200 ${mobileEarnOpen ? "rotate-180" : ""}`}
+                  />
+                </button>
+
+                <AnimatePresence>
+                  {mobileEarnOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="flex flex-col pl-4 mt-2 gap-2 overflow-hidden"
                     >
-                      {path}
-                    </Link>
-                  ))}
-                </div>
-              )}
+                      {earnItems.map((item) => (
+                        <Link
+                          key={item.key}
+                          href={`/${country}/${item.key}`}
+                          onClick={() => {
+                            setMobileOpen(false);
+                            setMobileEarnOpen(false);
+                          }}
+                          className="py-1 hover:opacity-80 transition-opacity"
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
 
-              <Link href={`/${country}/cashout`}>Cashout</Link>
-              <Link href={`/${country}/blog`}>Blog</Link>
-              <Link href={`/${country}/help`}>Help</Link>
+              <Link 
+                href={`/${country}/cashout`}
+                onClick={() => setMobileOpen(false)}
+                className="hover:opacity-80 transition-opacity"
+              >
+                Cashout
+              </Link>
+              <Link 
+                href={`/${country}/blog`}
+                onClick={() => setMobileOpen(false)}
+                className="hover:opacity-80 transition-opacity"
+              >
+                Blog
+              </Link>
+              <Link 
+                href={`/${country}/help`}
+                onClick={() => setMobileOpen(false)}
+                className="hover:opacity-80 transition-opacity"
+              >
+                Help
+              </Link>
 
-              <div className="flex items-center justify-between pt-4">
+              <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-700">
                 <LanguageSwitcher />
                 <DarkLightToggle />
               </div>
 
               <div className="grid grid-cols-2 gap-3 pt-4">
-                <Link href={`/${country}/login`}>
-                  <button className={`border ${borderColor} py-3 w-full`}>
+                <Link href={`/${country}/login`} onClick={() => setMobileOpen(false)}>
+                  <button className={`border ${borderColor} py-3 w-full rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors`}>
                     Login
                   </button>
                 </Link>
 
-                <Link href={`/${country}/signup`}>
-                  <button className="bg-gradient-to-r from-yellow-400 to-green-500 py-3 w-full">
+                <Link href={`/${country}/signup`} onClick={() => setMobileOpen(false)}>
+                  <button className="bg-gradient-to-r from-yellow-400 to-green-500 py-3 w-full rounded-lg text-black font-medium hover:opacity-90 transition-opacity">
                     Sign up
                   </button>
                 </Link>
