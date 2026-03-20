@@ -28,20 +28,25 @@ export const LOCALE_BY_LANGUAGE: Record<SupportedLanguage, string> = {
 // 💱 CURRENCY MAP
 // ===============================
 export const CURRENCY_BY_COUNTRY: Record<string, string> = {
+  // Americas
   us: "USD", ca: "CAD", mx: "MXN", br: "BRL", ar: "ARS",
   co: "COP", cl: "CLP", pe: "PEN", ec: "USD",
 
+  // Europe
   gb: "GBP", fr: "EUR", de: "EUR", es: "EUR", pt: "EUR",
   it: "EUR", nl: "EUR", ch: "CHF", at: "EUR",
   se: "SEK", no: "NOK", dk: "DKK", pl: "PLN",
 
+  // Asia
   in: "INR", bd: "BDT", pk: "PKR", jp: "JPY", kr: "KRW",
   cn: "CNY", sg: "SGD", my: "MYR", ph: "PHP", id: "IDR",
   th: "THB", vn: "VND", ae: "AED", sa: "SAR", il: "ILS",
   tr: "TRY", hk: "HKD", tw: "TWD",
 
+  // Oceania
   au: "AUD", nz: "NZD",
 
+  // Africa
   za: "ZAR", ng: "NGN", ke: "KES", eg: "EGP",
   ma: "MAD", dz: "DZD", tn: "TND",
 };
@@ -50,7 +55,7 @@ export const CURRENCY_BY_COUNTRY: Record<string, string> = {
 // 🔒 SAFE HELPERS
 // ===============================
 function safeLocale(language: SupportedLanguage): string {
-  return LOCALE_BY_LANGUAGE[language] || "en-US";
+  return LOCALE_BY_LANGUAGE[language] || LOCALE_BY_LANGUAGE[DEFAULT_LANGUAGE];
 }
 
 function safeCurrency(country: string): string {
@@ -178,7 +183,7 @@ export function getCurrencyForCountry(country: string): string {
 }
 
 // ===============================
-// 🌐 LOAD TRANSLATIONS (FIX)
+// 🌐 LOAD TRANSLATIONS (IMPROVED)
 // ===============================
 export async function loadTranslations(
   language: SupportedLanguage,
@@ -190,7 +195,7 @@ export async function loadTranslations(
     );
     return messages.default || {};
   } catch {
-    // fallback to English
+    // fallback → default language
     try {
       const fallback = await import(
         `@/locales/${DEFAULT_LANGUAGE}/${namespace}.json`
