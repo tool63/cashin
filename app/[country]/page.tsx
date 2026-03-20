@@ -1,99 +1,161 @@
-// app/[country]/page.tsx
+"use client";
 
-import { notFound } from "next/navigation";
-
-import {
-  VALID_COUNTRY_CODES,
-  SupportedLanguage,
-} from "@/app/core/detector";
-
+import { useLanguage } from "./providers/LanguageProvider";
+import { useCountry } from "./providers/CountryProvider";
 import { loadTranslations } from "@/app/core/i18n/config";
+import { useEffect, useState } from "react";
 
-// 🔴 REQUIRED (keep these)
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
-
-interface PageProps {
-  params: { country: string };
+// ===============================
+// 🏷️ TYPES
+// ===============================
+interface Translations {
+  welcome_message?: string;
+  homepage_description?: string;
+  feature_surveys?: string;
+  feature_surveys_desc?: string;
+  feature_apps?: string;
+  feature_apps_desc?: string;
+  feature_games?: string;
+  feature_games_desc?: string;
+  cta_button?: string;
+  stats_users?: string;
+  stats_earned?: string;
+  stats_countries?: string;
+  [key: string]: string | undefined;
 }
 
 // ===============================
-// 🚀 PAGE
+// 🧩 FEATURE CARD COMPONENT
 // ===============================
-export default async function CountryHomePage({
-  params,
-}: PageProps) {
-  const country = params.country.toLowerCase();
+function FeatureCard({
+  title,
+  description,
+}: {
+  title: string;
+  description: string;
+}) {
+  return (
+    <div className="p-6 border rounded-lg shadow hover:shadow-lg transition-all duration-300 hover:scale-105">
+      <h2 className="font-semibold text-xl mb-2">{title}</h2>
+      <p className="text-gray-700 dark:text-gray-300">{description}</p>
+    </div>
+  );
+}
 
-  // ------------------------------
-  // ❌ INVALID COUNTRY
-  // ------------------------------
-  if (!VALID_COUNTRY_CODES.has(country)) {
-    notFound();
+// ===============================
+// 🚀 PAGE COMPONENT (CLIENT)
+// ===============================
+export default function CountryHomePage() {
+  const { language } = useLanguage();
+  const { country } = useCountry();
+  const [translations, setTranslations] = useState<Translations>({});
+  const [isLoading, setIsLoading] = useState(true);
+
+  // ===============================
+  // 📦 LOAD TRANSLATIONS
+  // ===============================
+  useEffect(() => {
+    const load = async () => {
+      setIsLoading(true);
+      try {
+        const data = await loadTranslations(language, "homepage");
+        setTranslations(data as Translations);
+      } catch (error) {
+        console.error("Failed to load translations:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    load();
+  }, [language]);
+
+  // ===============================
+  // 📝 TRANSLATION HELPER
+  // ===============================
+  const t = (key: string, fallback: string): string => {
+    return translations[key] || fallback;
+  };
+
+  // ===============================
+  // ⏳ LOADING STATE
+  // ===============================
+  if (isLoading) {
+    return (
+      <section className="max-w-6xl mx-auto px-4 py-16">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+          <p className="mt-4 text-gray-600">Loading...</p>
+        </div>
+      </section>
+    );
   }
 
-  // ------------------------------
-  // 🌐 LANGUAGE (FROM LAYOUT / PROVIDER FLOW)
-  // ------------------------------
-  // ⚠️ IMPORTANT:
-  // We DO NOT re-implement cookie logic here.
-  // Layout already resolves language correctly.
-
-  // Fallback to safe default (server-only)
-  const language: SupportedLanguage = "en";
-
-  // ------------------------------
-  // 📦 TRANSLATIONS
-  // ------------------------------
-  const translations = await loadTranslations(language, "homepage");
-
-  // ------------------------------
+  // ===============================
   // 🎨 UI
-  // ------------------------------
+  // ===============================
   return (
     <section className="max-w-6xl mx-auto px-4 py-16">
-      <h1 className="text-3xl font-bold mb-4">
-        {translations["welcome_message"] ||
-          "Welcome to PayUp! Earn money online."}
-      </h1>
+      {/* Hero Section */}
+      <div className="text-center mb-12">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          {t("welcome_message", "Welcome to PayUp! Earn money online.")}
+        </h1>
+        <p className="text-xl text-gray-700 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
+          {t(
+            "homepage_description",
+            "PayUp helps you earn real money online safely and quickly."
+          )}
+        </p>
+        <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg transition-colors">
+          {t("cta_button", "Get Started Now")}
+        </button>
+      </div>
 
-      <p className="text-gray-700 dark:text-gray-300 mb-6">
-        {translations["homepage_description"] ||
-          "PayUp helps you earn real money online safely and quickly."}
-      </p>
+      {/* Features Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <FeatureCard
+          title={t("feature_surveys", "Complete Surveys")}
+          description={t(
+            "feature_surveys_desc",
+            "Answer surveys and earn points instantly."
+          )}
+        />
+        <FeatureCard
+          title={t("feature_apps", "Install Apps")}
+          description={t(
+            "feature_apps_desc",
+            "Download apps and get paid quickly."
+          )}
+        />
+        <FeatureCard
+          title={t("feature_games", "Play Games")}
+          description={t(
+            "feature_games_desc",
+            "Play fun games and earn rewards."
+          )}
+        />
+      </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* FEATURE 1 */}
-        <div className="p-6 border rounded-lg shadow hover:shadow-lg transition">
-          <h2 className="font-semibold text-xl mb-2">
-            {translations["feature_surveys"] || "Complete Surveys"}
-          </h2>
-          <p>
-            {translations["feature_surveys_desc"] ||
-              "Answer surveys and earn points instantly."}
-          </p>
+      {/* Stats Section */}
+      <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+        <div className="p-6">
+          <div className="text-3xl font-bold text-blue-600">50K+</div>
+          <div className="text-gray-600 dark:text-gray-400">
+            {t("stats_users", "Active Users")}
+          </div>
         </div>
-
-        {/* FEATURE 2 */}
-        <div className="p-6 border rounded-lg shadow hover:shadow-lg transition">
-          <h2 className="font-semibold text-xl mb-2">
-            {translations["feature_apps"] || "Install Apps"}
-          </h2>
-          <p>
-            {translations["feature_apps_desc"] ||
-              "Download apps and get paid quickly."}
-          </p>
+        <div className="p-6">
+          <div className="text-3xl font-bold text-blue-600">$2M+</div>
+          <div className="text-gray-600 dark:text-gray-400">
+            {t("stats_earned", "Total Earned")}
+          </div>
         </div>
-
-        {/* FEATURE 3 */}
-        <div className="p-6 border rounded-lg shadow hover:shadow-lg transition">
-          <h2 className="font-semibold text-xl mb-2">
-            {translations["feature_games"] || "Play Games"}
-          </h2>
-          <p>
-            {translations["feature_games_desc"] ||
-              "Play fun games and earn rewards."}
-          </p>
+        <div className="p-6">
+          <div className="text-3xl font-bold text-blue-600">150+</div>
+          <div className="text-gray-600 dark:text-gray-400">
+            {t("stats_countries", "Countries")}
+          </div>
         </div>
       </div>
     </section>
