@@ -79,3 +79,8 @@ export function useLanguage() {
 
   return context;
 }
+
+// ===============================
+// 📤 EXPORT CONTEXT FOR BACKWARD COMPATIBILITY
+// ===============================
+export { LanguageContext };
