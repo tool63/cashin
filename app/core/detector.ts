@@ -13,7 +13,7 @@ export const SUPPORTED_LANGUAGES = ["en", "fr", "de", "es", "pt"] as const;
 export type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number];
 
 // ===============================
-// 🍪 COOKIE KEYS (✅ NEW - REQUIRED)
+// 🍪 COOKIE KEYS
 // ===============================
 export const COOKIE_KEYS = {
   COUNTRY: "USER_COUNTRY",
@@ -22,32 +22,11 @@ export const COOKIE_KEYS = {
 } as const;
 
 // ===============================
-// 🌍 ALL COUNTRIES (ISO 3166-1)
+// 🌍 COUNTRY CODES
 // ===============================
 export const COUNTRY_CODES = [
-  "af","ax","al","dz","ad","ao","ai","aq","ag","ar","am","aw","au","at","az",
-  "bs","bh","bd","bb","by","be","bz","bj","bm","bt","bo","bq","ba","bw","bv",
-  "br","io","bn","bg","bf","bi","kh","cm","ca","cv","ky","cf","td","cl","cn",
-  "cx","cc","co","km","cg","cd","ck","cr","ci","hr","cu","cw","cy","cz",
-  "dk","dj","dm","do",
-  "ec","eg","sv","gq","er","ee","sz","et",
-  "fk","fo","fj","fi","fr","gf","pf","tf",
-  "ga","gm","ge","de","gh","gi","gr","gl","gd","gp","gu","gt","gg","gn","gw","gy",
-  "ht","hm","va","hn","hk","hu",
-  "is","in","id","ir","iq","ie","im","il","it",
-  "jm","jp","je","jo",
-  "kz","ke","ki","kp","kr","kw","kg",
-  "la","lv","lb","ls","lr","ly","li","lt","lu",
-  "mo","mg","mw","my","mv","ml","mt","mh","mq","mr","mu","yt","mx","fm","md","mc","mn","me","ms","ma","mz","mm",
-  "na","nr","np","nl","nc","nz","ni","ne","ng","nu","nf","mk","mp","no","om",
-  "pk","pw","ps","pa","pg","py","pe","ph","pn","pl","pt","pr","qa",
-  "re","ro","ru","rw",
-  "bl","sh","kn","lc","mf","pm","vc","ws","sm","st","sa","sn","rs","sc","sl","sg","sx","sk","si","sb","so","za","gs","ss","es","lk","sd","sr","sj","se","ch","sy",
-  "tw","tj","tz","th","tl","tg","tk","to","tt","tn","tr","tm","tc","tv",
-  "ug","ua","ae","gb","us","um","uy","uz",
-  "vu","ve","vn","vg","vi",
-  "wf","eh",
-  "ye","zm","zw"
+  "us","gb","ca","au","de","fr","in","bd","pk","ng","mx","br",
+  "es","pt","it","nl","ar","co","cl","pe","za"
 ] as const;
 
 export type CountryCode = (typeof COUNTRY_CODES)[number];
@@ -96,7 +75,7 @@ export const COUNTRY_LANGUAGE_MAP: Partial<
 };
 
 // ===============================
-// 🌐 ✅ REQUIRED FIX (MISSING BEFORE)
+// 🌐 LANGUAGE RESOLUTION
 // ===============================
 export function getLanguageForCountry(
   country: string
@@ -110,13 +89,37 @@ export function getLanguageForCountry(
 }
 
 // ===============================
-// 🔤 LANGUAGE NORMALIZATION
+// 🔤 NORMALIZE LANGUAGE
 // ===============================
 export function normalizeLanguage(lang: string): SupportedLanguage {
   const base = lang.toLowerCase().split("-")[0];
 
   if ((SUPPORTED_LANGUAGES as readonly string[]).includes(base)) {
     return base as SupportedLanguage;
+  }
+
+  return DEFAULT_LANGUAGE;
+}
+
+// ===============================
+// 🌐 ACCEPT-LANGUAGE PARSER (FIXED)
+// ===============================
+function parseAcceptLanguage(header: string): SupportedLanguage {
+  const langs = header.split(",").map((item) => {
+    const [lang, qValue] = item.split(";q=");
+    return {
+      lang: lang.trim(),
+      q: qValue ? parseFloat(qValue) : 1,
+    };
+  });
+
+  const sorted = langs.sort((a, b) => b.q - a.q);
+
+  for (const l of sorted) {
+    const normalized = normalizeLanguage(l.lang);
+    if (SUPPORTED_LANGUAGES.includes(normalized)) {
+      return normalized;
+    }
   }
 
   return DEFAULT_LANGUAGE;
@@ -208,7 +211,7 @@ export function resolveCountry(
 }
 
 // ===============================
-// 🌐 LANGUAGE RESOLUTION
+// 🌐 FINAL LANGUAGE
 // ===============================
 export function getLanguage(
   req: NextRequest,
@@ -218,9 +221,7 @@ export function getLanguage(
   if (cookie) return normalizeLanguage(cookie);
 
   const header = req.headers.get("accept-language");
-  if (header) {
-    return normalizeLanguage(header.split(",")[0]);
-  }
+  if (header) return parseAcceptLanguage(header);
 
   return getLanguageForCountry(country);
 }
