@@ -1,122 +1,220 @@
-import { SupportedLanguage, DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from "@/app/core/detector";
+import {
+  SupportedLanguage,
+  DEFAULT_LANGUAGE,
+  SUPPORTED_LANGUAGES,
+} from "@/app/core/detector";
 
 // ===============================
-// 🔤 RTL Languages (future support)
+// 🔤 RTL LANGUAGES
 // ===============================
-export const RTL_LANGUAGES: string[] = ["ar", "he", "ur", "fa"];
+export const RTL_LANGUAGES = new Set<string>(["ar", "he", "ur", "fa"]);
 
 export function isRtlLanguage(lang: SupportedLanguage | string): boolean {
-  return RTL_LANGUAGES.includes(lang);
+  return RTL_LANGUAGES.has(lang.toLowerCase());
 }
 
 // ===============================
-// 💰 Currency & Formatting
+// 🌍 LOCALE MAP
 // ===============================
-export const CURRENCY_BY_LANGUAGE: Record<SupportedLanguage, string> = {
-  en: "USD",
+export const LOCALE_BY_LANGUAGE: Record<SupportedLanguage, string> = {
+  en: "en-US",
+  fr: "fr-FR",
+  de: "de-DE",
+  es: "es-ES",
+  pt: "pt-BR",
+};
+
+// ===============================
+// 💱 CURRENCY MAP (BASED ON COUNTRY)
+// ===============================
+export const CURRENCY_BY_COUNTRY: Record<string, string> = {
+  // Americas
+  us: "USD",
+  ca: "CAD",
+  mx: "MXN",
+  br: "BRL",
+  ar: "ARS",
+  co: "COP",
+  cl: "CLP",
+  pe: "PEN",
+  ec: "USD",
+
+  // Europe
+  gb: "GBP",
   fr: "EUR",
   de: "EUR",
   es: "EUR",
-  pt: "BRL",
-};
+  pt: "EUR",
+  it: "EUR",
+  nl: "EUR",
+  ch: "CHF",
+  at: "EUR",
+  se: "SEK",
+  no: "NOK",
+  dk: "DKK",
+  pl: "PLN",
 
-export const CURRENCY_SYMBOL: Record<SupportedLanguage, string> = {
-  en: "$",
-  fr: "€",
-  de: "€",
-  es: "€",
-  pt: "R$",
-};
+  // Asia
+  in: "INR",
+  bd: "BDT",
+  pk: "PKR",
+  jp: "JPY",
+  kr: "KRW",
+  cn: "CNY",
+  sg: "SGD",
+  my: "MYR",
+  ph: "PHP",
+  id: "IDR",
+  th: "THB",
+  vn: "VND",
+  ae: "AED",
+  sa: "SAR",
+  il: "ILS",
+  tr: "TRY",
+  hk: "HKD",
+  tw: "TWD",
 
-export const DATE_FORMAT_BY_LANGUAGE: Record<SupportedLanguage, Intl.DateTimeFormatOptions> = {
-  en: { year: "numeric", month: "long", day: "numeric", weekday: "long" },
-  fr: { year: "numeric", month: "long", day: "numeric", weekday: "long" },
-  de: { year: "numeric", month: "long", day: "numeric", weekday: "long" },
-  es: { year: "numeric", month: "long", day: "numeric", weekday: "long" },
-  pt: { year: "numeric", month: "long", day: "numeric", weekday: "long" },
-};
+  // Oceania
+  au: "AUD",
+  nz: "NZD",
 
-export const TIME_FORMAT_BY_LANGUAGE: Record<SupportedLanguage, Intl.DateTimeFormatOptions> = {
-  en: { hour: "numeric", minute: "numeric", hour12: true },
-  fr: { hour: "numeric", minute: "numeric", hour12: false },
-  de: { hour: "numeric", minute: "numeric", hour12: false },
-  es: { hour: "numeric", minute: "numeric", hour12: false },
-  pt: { hour: "numeric", minute: "numeric", hour12: false },
+  // Africa
+  za: "ZAR",
+  ng: "NGN",
+  ke: "KES",
+  eg: "EGP",
+  ma: "MAD",
+  dz: "DZD",
+  tn: "TND",
 };
 
 // ===============================
-// 🍪 Cookie Configuration
+// 🔒 SAFE HELPERS
 // ===============================
-export const COOKIE_CONFIG = {
-  LANGUAGE: "NEXT_LOCALE",
-  AB_GROUP: "AB_GROUP",
-  REWARD_CAMPAIGN: "REWARD_CAMPAIGN_ACTIVE",
-} as const;
-
-export const COOKIE_OPTIONS = {
-  LANGUAGE: { path: "/", maxAge: 60 * 60 * 24 * 365, httpOnly: false, sameSite: "lax" },
-  AB_GROUP: { path: "/", maxAge: 60 * 60 * 24 * 90, httpOnly: false, sameSite: "lax" },
-  REWARD_CAMPAIGN: { path: "/", maxAge: 60 * 60 * 24 * 7, httpOnly: false, sameSite: "lax" },
-} as const;
-
-// ===============================
-// 💱 Formatting Helpers
-// ===============================
-export function formatCurrency(amount: number, language: SupportedLanguage = DEFAULT_LANGUAGE): string {
-  const currency = CURRENCY_BY_LANGUAGE[language] || CURRENCY_BY_LANGUAGE[DEFAULT_LANGUAGE];
-  return new Intl.NumberFormat(language, {
-    style: "currency",
-    currency,
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(amount);
+function safeLocale(language: SupportedLanguage): string {
+  return LOCALE_BY_LANGUAGE[language] || "en-US";
 }
 
-export function formatDate(date: Date | number, language: SupportedLanguage = DEFAULT_LANGUAGE): string {
-  const options = DATE_FORMAT_BY_LANGUAGE[language] || DATE_FORMAT_BY_LANGUAGE[DEFAULT_LANGUAGE];
-  return new Intl.DateTimeFormat(language, options).format(date);
+function safeCurrency(country: string): string {
+  return CURRENCY_BY_COUNTRY[country.toLowerCase()] || "USD";
 }
 
-export function formatTime(date: Date | number, language: SupportedLanguage = DEFAULT_LANGUAGE): string {
-  const options = TIME_FORMAT_BY_LANGUAGE[language] || TIME_FORMAT_BY_LANGUAGE[DEFAULT_LANGUAGE];
-  return new Intl.DateTimeFormat(language, options).format(date);
-}
-
-export function formatNumber(
-  number: number,
-  language: SupportedLanguage = DEFAULT_LANGUAGE,
-  options?: Intl.NumberFormatOptions
+// ===============================
+// 💰 FORMAT CURRENCY
+// ===============================
+export function formatCurrency(
+  amount: number,
+  country: string,
+  language: SupportedLanguage = DEFAULT_LANGUAGE
 ): string {
-  return new Intl.NumberFormat(language, options).format(number);
-}
-
-// ===============================
-// 📚 Translation Loader (dynamic)
-// ===============================
-const translationCache: Partial<Record<string, Record<string, string>>> = {};
-
-export async function loadTranslations(lang: SupportedLanguage, namespace: string = "common"): Promise<Record<string, string>> {
-  const key = `${lang}-${namespace}`;
-  if (translationCache[key]) return translationCache[key]!;
-
   try {
-    const translations = await import(`../../locales/${lang}/${namespace}.json`);
-    translationCache[key] = translations.default;
-    return translations.default;
-  } catch (err) {
-    console.warn(`Failed to load translations for ${lang}/${namespace}, falling back to ${DEFAULT_LANGUAGE}`);
-    if (lang !== DEFAULT_LANGUAGE) return loadTranslations(DEFAULT_LANGUAGE, namespace);
-    return {};
+    return new Intl.NumberFormat(safeLocale(language), {
+      style: "currency",
+      currency: safeCurrency(country),
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(amount);
+  } catch {
+    return `${amount.toFixed(2)} ${safeCurrency(country)}`;
   }
 }
 
 // ===============================
-// ✅ Helpers
+// 🔢 FORMAT NUMBER
 // ===============================
-export function getSupportedLocales(): string[] {
-  return SUPPORTED_LANGUAGES.map(lang => `${lang}-${lang.toUpperCase()}`);
+export function formatNumber(
+  value: number,
+  language: SupportedLanguage = DEFAULT_LANGUAGE,
+  options?: Intl.NumberFormatOptions
+): string {
+  try {
+    return new Intl.NumberFormat(safeLocale(language), options).format(value);
+  } catch {
+    return value.toString();
+  }
 }
 
+// ===============================
+// 📊 FORMAT PERCENTAGE
+// ===============================
+export function formatPercentage(
+  value: number,
+  language: SupportedLanguage = DEFAULT_LANGUAGE
+): string {
+  return formatNumber(value / 100, language, {
+    style: "percent",
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+  });
+}
+
+// ===============================
+// 📅 FORMAT DATE
+// ===============================
+export function formatDate(
+  date: Date | number,
+  language: SupportedLanguage = DEFAULT_LANGUAGE,
+  options?: Intl.DateTimeFormatOptions
+): string {
+  try {
+    return new Intl.DateTimeFormat(
+      safeLocale(language),
+      options || {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }
+    ).format(date);
+  } catch {
+    return new Date(date).toLocaleDateString();
+  }
+}
+
+// ===============================
+// ⏰ FORMAT TIME
+// ===============================
+export function formatTime(
+  date: Date | number,
+  language: SupportedLanguage = DEFAULT_LANGUAGE
+): string {
+  try {
+    return new Intl.DateTimeFormat(safeLocale(language), {
+      hour: "numeric",
+      minute: "numeric",
+    }).format(date);
+  } catch {
+    return new Date(date).toLocaleTimeString();
+  }
+}
+
+// ===============================
+// 🌐 TEXT DIRECTION
+// ===============================
+export function getTextDirection(
+  lang: SupportedLanguage | string
+): "ltr" | "rtl" {
+  return isRtlLanguage(lang) ? "rtl" : "ltr";
+}
+
+// ===============================
+// ✅ LANGUAGE VALIDATION
+// ===============================
 export function isLanguageSupported(lang: string): lang is SupportedLanguage {
   return SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage);
+}
+
+// ===============================
+// 🌍 LOCALES LIST
+// ===============================
+export function getSupportedLocales(): string[] {
+  return SUPPORTED_LANGUAGES.map(
+    (lang) => LOCALE_BY_LANGUAGE[lang] || lang
+  );
+}
+
+// ===============================
+// 💱 GET CURRENCY
+// ===============================
+export function getCurrencyForCountry(country: string): string {
+  return safeCurrency(country);
 }
