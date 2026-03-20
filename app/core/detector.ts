@@ -13,6 +13,15 @@ export const SUPPORTED_LANGUAGES = ["en", "fr", "de", "es", "pt"] as const;
 export type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number];
 
 // ===============================
+// 🍪 COOKIE KEYS (✅ NEW - REQUIRED)
+// ===============================
+export const COOKIE_KEYS = {
+  COUNTRY: "USER_COUNTRY",
+  LANGUAGE: "NEXT_LOCALE",
+  FORCED_COUNTRY: "FORCED_COUNTRY",
+} as const;
+
+// ===============================
 // 🌍 ALL COUNTRIES (ISO 3166-1)
 // ===============================
 export const COUNTRY_CODES = [
@@ -43,11 +52,17 @@ export const COUNTRY_CODES = [
 
 export type CountryCode = (typeof COUNTRY_CODES)[number];
 
-// ⚡ VALIDATION SETS
+// ===============================
+// ⚡ VALIDATION
+// ===============================
 export const VALID_COUNTRY_CODES = new Set<string>(COUNTRY_CODES);
 
+export function isValidCountryCode(code: string): code is CountryCode {
+  return VALID_COUNTRY_CODES.has(code.toLowerCase());
+}
+
 // ===============================
-// 🌍 SUPPORTED COUNTRIES (ROUTING)
+// 🌍 SUPPORTED COUNTRIES
 // ===============================
 export const SUPPORTED_COUNTRIES = new Set<CountryCode>([
   "us","gb","ca","au","de","fr",
@@ -57,13 +72,6 @@ export const SUPPORTED_COUNTRIES = new Set<CountryCode>([
 
 export function isSupportedCountry(country: string): boolean {
   return SUPPORTED_COUNTRIES.has(country.toLowerCase() as CountryCode);
-}
-
-// ===============================
-// 🌍 COUNTRY VALIDATION
-// ===============================
-export function isValidCountryCode(code: string): code is CountryCode {
-  return VALID_COUNTRY_CODES.has(code.toLowerCase());
 }
 
 // ===============================
@@ -86,6 +94,20 @@ export const COUNTRY_LANGUAGE_MAP: Partial<
   bd: "en", in: "en", pk: "en", ng: "en", za: "en",
   br: "pt",
 };
+
+// ===============================
+// 🌐 ✅ REQUIRED FIX (MISSING BEFORE)
+// ===============================
+export function getLanguageForCountry(
+  country: string
+): SupportedLanguage {
+  const mapped =
+    COUNTRY_LANGUAGE_MAP[country.toLowerCase() as CountryCode];
+
+  return mapped && SUPPORTED_LANGUAGES.includes(mapped)
+    ? mapped
+    : DEFAULT_LANGUAGE;
+}
 
 // ===============================
 // 🔤 LANGUAGE NORMALIZATION
@@ -164,7 +186,7 @@ export function detectCountry(req: NextRequest): string {
 }
 
 // ===============================
-// 🧠 RESOLVE COUNTRY (CORE)
+// 🧠 RESOLVE COUNTRY
 // ===============================
 export function resolveCountry(
   req: NextRequest,
@@ -172,14 +194,14 @@ export function resolveCountry(
 ): string {
   const query = req.nextUrl.searchParams.get("country");
 
-  const forced = req.cookies.get("FORCED_COUNTRY")?.value;
+  const forced = req.cookies.get(COOKIE_KEYS.FORCED_COUNTRY)?.value;
   if (forced && isValidCountryCode(forced)) return forced;
 
   if (query && isValidCountryCode(query)) return query;
 
   if (urlCountry && isValidCountryCode(urlCountry)) return urlCountry;
 
-  const cookie = req.cookies.get("USER_COUNTRY")?.value;
+  const cookie = req.cookies.get(COOKIE_KEYS.COUNTRY)?.value;
   if (cookie && isValidCountryCode(cookie)) return cookie;
 
   return detectCountry(req);
@@ -192,7 +214,7 @@ export function getLanguage(
   req: NextRequest,
   country: string
 ): SupportedLanguage {
-  const cookie = req.cookies.get("NEXT_LOCALE")?.value;
+  const cookie = req.cookies.get(COOKIE_KEYS.LANGUAGE)?.value;
   if (cookie) return normalizeLanguage(cookie);
 
   const header = req.headers.get("accept-language");
@@ -200,11 +222,7 @@ export function getLanguage(
     return normalizeLanguage(header.split(",")[0]);
   }
 
-  const mapped = COUNTRY_LANGUAGE_MAP[country.toLowerCase() as CountryCode];
-
-  return mapped && SUPPORTED_LANGUAGES.includes(mapped)
-    ? mapped
-    : DEFAULT_LANGUAGE;
+  return getLanguageForCountry(country);
 }
 
 // ===============================
