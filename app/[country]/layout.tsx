@@ -1,4 +1,5 @@
 // app/[country]/layout.tsx
+
 import "@/styles/globals.css";
 import { ReactNode } from "react";
 import { notFound } from "next/navigation";
@@ -15,16 +16,16 @@ import {
   COOKIE_KEYS,
   SupportedLanguage,
   DEFAULT_LANGUAGE,
-  SUPPORTED_LANGUAGES, // ✅ USE THIS (important fix)
+  SUPPORTED_LANGUAGES,
 } from "@/app/core/detector";
 
 interface LayoutProps {
   children: ReactNode;
-  params: { country: string; slug?: string[] };
+  params: { country: string };
 }
 
 // ===============================
-// ✅ FIXED: Safe Language Resolver
+// 🌍 LANGUAGE RESOLVER (SERVER SAFE)
 // ===============================
 function getInitialLanguage(
   country: string,
@@ -35,34 +36,39 @@ function getInitialLanguage(
   if (langCookie) {
     const normalized = langCookie.toLowerCase().split("-")[0];
 
-    // ✅ STRICT VALIDATION (NO HARDCODE)
     if (SUPPORTED_LANGUAGES.includes(normalized as SupportedLanguage)) {
       return normalized as SupportedLanguage;
     }
   }
 
-  // ✅ SAFE FALLBACK
   return getLanguageForCountry(country) || DEFAULT_LANGUAGE;
 }
 
-export default function CountryLayout({ children, params }: LayoutProps) {
+// ===============================
+// 🚀 LAYOUT
+// ===============================
+export default function CountryLayout({
+  children,
+  params,
+}: LayoutProps) {
   const country = params.country.toLowerCase();
 
   // ------------------------------
-  // ✅ Validate country
+  // ❌ INVALID COUNTRY
   // ------------------------------
   if (!VALID_COUNTRY_CODES.has(country)) {
     notFound();
   }
 
   // ------------------------------
-  // ✅ Server-side cookies
+  // 🍪 COOKIES (SERVER)
   // ------------------------------
   const cookieStore = cookies();
+
   const initialLanguage = getInitialLanguage(country, cookieStore);
 
   // ------------------------------
-  // ✅ HTML attributes
+  // 🌐 HTML ATTRIBUTES
   // ------------------------------
   const htmlLang = `${initialLanguage}-${country.toUpperCase()}`;
 
@@ -70,7 +76,7 @@ export default function CountryLayout({ children, params }: LayoutProps) {
   const dir = rtlLanguages.includes(initialLanguage) ? "rtl" : "ltr";
 
   // ------------------------------
-  // 🚀 RENDER
+  // 🎯 RENDER
   // ------------------------------
   return (
     <html lang={htmlLang} dir={dir} suppressHydrationWarning>
