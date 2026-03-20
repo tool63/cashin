@@ -78,3 +78,8 @@ export function useCountry() {
 
   return context;
 }
+
+// ===============================
+// 📤 EXPORT CONTEXT FOR BACKWARD COMPATIBILITY
+// ===============================
+export { CountryContext };
