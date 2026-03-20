@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { cookies } from "next/headers";
 
 import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
-import LanguageProvider from "./providers/LanguageProvider";
+import { LanguageProvider } from "./providers/LanguageProvider";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
