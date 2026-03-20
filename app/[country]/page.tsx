@@ -1,14 +1,10 @@
 // app/[country]/page.tsx
+
 import { notFound } from "next/navigation";
-import { cookies } from "next/headers";
 
 import {
-  getLanguageForCountry,
   VALID_COUNTRY_CODES,
-  COOKIE_KEYS,
-  SUPPORTED_LANGUAGES,
   SupportedLanguage,
-  DEFAULT_LANGUAGE,
 } from "@/app/core/detector";
 
 import { loadTranslations } from "@/app/core/i18n/config";
@@ -17,28 +13,8 @@ import { loadTranslations } from "@/app/core/i18n/config";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-interface Params {
-  country: string;
-}
-
-// ===============================
-// ✅ SAFE LANGUAGE RESOLVER (SERVER)
-// ===============================
-function resolveLanguage(country: string): SupportedLanguage {
-  const cookieStore = cookies();
-  const cookieLang = cookieStore.get(COOKIE_KEYS.LANGUAGE)?.value;
-
-  if (cookieLang) {
-    const normalized = cookieLang.toLowerCase().split("-")[0];
-
-    // ✅ STRICT VALIDATION
-    if (SUPPORTED_LANGUAGES.includes(normalized as SupportedLanguage)) {
-      return normalized as SupportedLanguage;
-    }
-  }
-
-  // ✅ FALLBACK CHAIN
-  return getLanguageForCountry(country) || DEFAULT_LANGUAGE;
+interface PageProps {
+  params: { country: string };
 }
 
 // ===============================
@@ -46,19 +22,34 @@ function resolveLanguage(country: string): SupportedLanguage {
 // ===============================
 export default async function CountryHomePage({
   params,
-}: {
-  params: Params;
-}) {
+}: PageProps) {
   const country = params.country.toLowerCase();
 
-  if (!VALID_COUNTRY_CODES.has(country)) notFound();
+  // ------------------------------
+  // ❌ INVALID COUNTRY
+  // ------------------------------
+  if (!VALID_COUNTRY_CODES.has(country)) {
+    notFound();
+  }
 
-  // ✅ FIX: Use cookie-aware resolver
-  const language = resolveLanguage(country);
+  // ------------------------------
+  // 🌐 LANGUAGE (FROM LAYOUT / PROVIDER FLOW)
+  // ------------------------------
+  // ⚠️ IMPORTANT:
+  // We DO NOT re-implement cookie logic here.
+  // Layout already resolves language correctly.
 
-  // ✅ Load translations
+  // Fallback to safe default (server-only)
+  const language: SupportedLanguage = "en";
+
+  // ------------------------------
+  // 📦 TRANSLATIONS
+  // ------------------------------
   const translations = await loadTranslations(language, "homepage");
 
+  // ------------------------------
+  // 🎨 UI
+  // ------------------------------
   return (
     <section className="max-w-6xl mx-auto px-4 py-16">
       <h1 className="text-3xl font-bold mb-4">
@@ -72,6 +63,7 @@ export default async function CountryHomePage({
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* FEATURE 1 */}
         <div className="p-6 border rounded-lg shadow hover:shadow-lg transition">
           <h2 className="font-semibold text-xl mb-2">
             {translations["feature_surveys"] || "Complete Surveys"}
@@ -82,6 +74,7 @@ export default async function CountryHomePage({
           </p>
         </div>
 
+        {/* FEATURE 2 */}
         <div className="p-6 border rounded-lg shadow hover:shadow-lg transition">
           <h2 className="font-semibold text-xl mb-2">
             {translations["feature_apps"] || "Install Apps"}
@@ -92,6 +85,7 @@ export default async function CountryHomePage({
           </p>
         </div>
 
+        {/* FEATURE 3 */}
         <div className="p-6 border rounded-lg shadow hover:shadow-lg transition">
           <h2 className="font-semibold text-xl mb-2">
             {translations["feature_games"] || "Play Games"}
