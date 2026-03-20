@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
 import { ReactNode } from "react";
 import { notFound } from "next/navigation";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 
 import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
 import { LanguageProvider } from "./providers/LanguageProvider";
@@ -16,6 +16,7 @@ import {
   SupportedLanguage,
   DEFAULT_LANGUAGE,
   SUPPORTED_LANGUAGES,
+  shouldUsePrefix,
 } from "@/app/core/detector";
 
 interface LayoutProps {
@@ -24,90 +25,112 @@ interface LayoutProps {
 }
 
 // ===============================
-// 🌍 LANGUAGE RESOLVER (SERVER SAFE)
+// 🌍 GET INITIAL LANGUAGE (SERVER)
 // ===============================
 function getInitialLanguage(
   country: string,
   cookieStore: ReturnType<typeof cookies>
 ): SupportedLanguage {
+  // Priority 1: Cookie
   const langCookie = cookieStore.get(COOKIE_KEYS.LANGUAGE)?.value;
-
   if (langCookie) {
     const normalized = langCookie.toLowerCase().split("-")[0];
-
     if (SUPPORTED_LANGUAGES.includes(normalized as SupportedLanguage)) {
       return normalized as SupportedLanguage;
     }
   }
 
-  return getLanguageForCountry(country) || DEFAULT_LANGUAGE;
+  // Priority 2: Accept-Language header
+  const headersList = headers();
+  const acceptLanguage = headersList.get("accept-language");
+  if (acceptLanguage) {
+    const browserLang = acceptLanguage.split(",")[0].split("-")[0];
+    if (SUPPORTED_LANGUAGES.includes(browserLang as SupportedLanguage)) {
+      return browserLang as SupportedLanguage;
+    }
+  }
+
+  // Priority 3: Country mapping
+  const mappedLang = getLanguageForCountry(country);
+  if (mappedLang && SUPPORTED_LANGUAGES.includes(mappedLang)) {
+    return mappedLang;
+  }
+
+  // Priority 4: Default
+  return DEFAULT_LANGUAGE;
 }
 
 // ===============================
-// 🌍 GET INITIAL COUNTRY (with cookie priority)
+// 🌍 GET INITIAL COUNTRY (SERVER)
 // ===============================
 function getInitialCountry(
   paramsCountry: string,
   cookieStore: ReturnType<typeof cookies>
 ): string {
-  // Check for forced country cookie first (from middleware)
+  // Priority 1: Forced country cookie (admin override)
   const forcedCountry = cookieStore.get(COOKIE_KEYS.FORCED_COUNTRY)?.value;
   if (forcedCountry && VALID_COUNTRY_CODES.has(forcedCountry)) {
     return forcedCountry.toLowerCase();
   }
 
-  // Check for user country cookie
+  // Priority 2: User country cookie
   const userCountry = cookieStore.get(COOKIE_KEYS.COUNTRY)?.value;
   if (userCountry && VALID_COUNTRY_CODES.has(userCountry)) {
     return userCountry.toLowerCase();
   }
 
-  // Fall back to params country
+  // Priority 3: URL parameter
   return paramsCountry.toLowerCase();
+}
+
+// ===============================
+// 🌐 GET HTML DIRECTION
+// ===============================
+function getHtmlDirection(language: SupportedLanguage): "ltr" | "rtl" {
+  const rtlLanguages = ["ar", "he", "ur", "fa"];
+  return rtlLanguages.includes(language) ? "rtl" : "ltr";
 }
 
 // ===============================
 // 🚀 LAYOUT
 // ===============================
-export default function CountryLayout({
+export default async function CountryLayout({
   children,
   params,
 }: LayoutProps) {
   const paramsCountry = params.country.toLowerCase();
 
   // ------------------------------
-  // ❌ INVALID COUNTRY
+  // ❌ VALIDATE COUNTRY
   // ------------------------------
   if (!VALID_COUNTRY_CODES.has(paramsCountry)) {
     notFound();
   }
 
   // ------------------------------
-  // 🍪 COOKIES (SERVER)
+  // 🍪 GET COOKIES (SERVER)
   // ------------------------------
   const cookieStore = cookies();
 
-  // Resolve actual country (cookie takes priority)
+  // Resolve actual country and language
   const resolvedCountry = getInitialCountry(paramsCountry, cookieStore);
-  const initialLanguage = getInitialLanguage(resolvedCountry, cookieStore);
+  const resolvedLanguage = getInitialLanguage(resolvedCountry, cookieStore);
 
   // ------------------------------
   // 🌐 HTML ATTRIBUTES
   // ------------------------------
-  const htmlLang = `${initialLanguage}-${resolvedCountry.toUpperCase()}`;
-
-  const rtlLanguages = ["ar", "he", "ur", "fa"];
-  const dir = rtlLanguages.includes(initialLanguage) ? "rtl" : "ltr";
+  const htmlLang = `${resolvedLanguage}-${resolvedCountry.toUpperCase()}`;
+  const htmlDir = getHtmlDirection(resolvedLanguage);
 
   // ------------------------------
   // 🎯 RENDER
   // ------------------------------
   return (
-    <html lang={htmlLang} dir={dir} suppressHydrationWarning>
+    <html lang={htmlLang} dir={htmlDir} suppressHydrationWarning>
       <body>
         <ThemeProviderWrapper>
           <CountryProvider initialCountry={resolvedCountry}>
-            <LanguageProvider initialLanguage={initialLanguage}>
+            <LanguageProvider initialLanguage={resolvedLanguage}>
               <Header />
               <main className="min-h-screen pt-20">{children}</main>
               <Footer />
