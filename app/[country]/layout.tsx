@@ -16,7 +16,6 @@ import {
   SupportedLanguage,
   DEFAULT_LANGUAGE,
   SUPPORTED_LANGUAGES,
-  shouldUsePrefix,
 } from "@/app/core/detector";
 
 interface LayoutProps {
