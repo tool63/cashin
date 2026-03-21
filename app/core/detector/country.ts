@@ -1,21 +1,31 @@
 import type { NextRequest } from "next/server";
 import { DEFAULT_COUNTRY, COOKIE_KEYS } from "../constants";
-import { isSupportedCountry } from "../utils/validation";
 
 // ===============================
-// 🌐 Detect from headers
+// 🌐 Normalize country
+// ===============================
+function normalizeCountry(value: string | null): string | null {
+  if (!value) return null;
+
+  return value.toLowerCase();
+}
+
+// ===============================
+// 🌍 Detect from headers (AUTO)
 // ===============================
 export function detectCountry(req: NextRequest): string {
-  const headers = [
+  const headerKeys = [
     "x-vercel-ip-country",
     "cf-ipcountry",
     "x-country",
   ];
 
-  for (const h of headers) {
-    const val = req.headers.get(h);
-    if (val && isSupportedCountry(val)) {
-      return val.toLowerCase();
+  for (const key of headerKeys) {
+    const value = req.headers.get(key);
+    const country = normalizeCountry(value);
+
+    if (country) {
+      return country; // ✅ ACCEPT ALL COUNTRIES
     }
   }
 
@@ -23,23 +33,34 @@ export function detectCountry(req: NextRequest): string {
 }
 
 // ===============================
-// 🌍 Resolve country
+// 🌍 Resolve country (FULL AUTO)
 // ===============================
 export function resolveCountry(
   req: NextRequest,
   urlCountry: string | null
 ): string {
-  const query = req.nextUrl.searchParams.get("country");
+  const searchParams = req.nextUrl.searchParams;
 
-  const forced = req.cookies.get(COOKIE_KEYS.FORCED_COUNTRY)?.value;
-  if (forced && isSupportedCountry(forced)) return forced;
+  // 1️⃣ URL override (/us, /bd, /in etc.)
+  if (urlCountry) {
+    return urlCountry.toLowerCase();
+  }
 
-  if (query && isSupportedCountry(query)) return query;
+  // 2️⃣ Query (?country=us)
+  const query = normalizeCountry(searchParams.get("country"));
+  if (query) return query;
 
-  if (urlCountry && isSupportedCountry(urlCountry)) return urlCountry;
+  // 3️⃣ Cookie (user preference)
+  const forced = normalizeCountry(
+    req.cookies.get(COOKIE_KEYS.FORCED_COUNTRY)?.value || null
+  );
+  if (forced) return forced;
 
-  const cookie = req.cookies.get(COOKIE_KEYS.COUNTRY)?.value;
-  if (cookie && isSupportedCountry(cookie)) return cookie;
+  const cookie = normalizeCountry(
+    req.cookies.get(COOKIE_KEYS.COUNTRY)?.value || null
+  );
+  if (cookie) return cookie;
 
+  // 4️⃣ GEO detection (BEST)
   return detectCountry(req);
 }
