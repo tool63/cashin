@@ -1,36 +1,32 @@
 import { DEFAULT_LANGUAGE } from "@/app/core/constants";
 import type { SupportedLanguage } from "@/app/core/types";
 
-// ===============================
-// 🌐 LOAD TRANSLATIONS
-// ===============================
+const cache = new Map<string, Record<string, string>>();
+
 export async function loadTranslations(
   language: SupportedLanguage,
   namespace: string = "homepage"
 ): Promise<Record<string, string>> {
+  const key = `${language}:${namespace}`;
+
+  if (cache.has(key)) return cache.get(key)!;
+
   try {
     const messages = await import(
       `@/app/locales/${language}/${namespace}.json`
     );
-    return messages.default || {};
+
+    const data = messages.default || {};
+    cache.set(key, data);
+    return data;
   } catch {
     if (language !== DEFAULT_LANGUAGE) {
-      try {
-        const fallback = await import(
-          `@/app/locales/${DEFAULT_LANGUAGE}/${namespace}.json`
-        );
-        return fallback.default || {};
-      } catch {
-        return {};
-      }
+      return loadTranslations(DEFAULT_LANGUAGE, namespace);
     }
     return {};
   }
 }
 
-// ===============================
-// 🚀 SERVER HELPER
-// ===============================
 export async function getTranslations(
   language: SupportedLanguage,
   namespace: string = "homepage"
@@ -38,15 +34,9 @@ export async function getTranslations(
   return loadTranslations(language, namespace);
 }
 
-// ===============================
-// 🏷️ TYPES
-// ===============================
 export type TranslationValue = string | Record<string, any>;
 export type TranslationObject = Record<string, TranslationValue>;
 
-// ===============================
-// 🔧 NESTED HELPER
-// ===============================
 export function getNestedTranslation(
   translations: TranslationObject,
   key: string
