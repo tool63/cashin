@@ -5,13 +5,14 @@ import {
   useContext,
   useState,
   ReactNode,
+  useEffect,
 } from "react";
 
 import { DEFAULT_COUNTRY } from "@/app/core/constants";
 import { isSupportedCountry } from "@/app/core/utils/validation";
 
 // ===============================
-// 🌍 CONTEXT
+// 🌍 CONTEXT TYPE
 // ===============================
 type CountryContextType = {
   country: string;
@@ -21,7 +22,7 @@ type CountryContextType = {
 const CountryContext = createContext<CountryContextType | null>(null);
 
 // ===============================
-// 🔍 RESOLVE COUNTRY (AUTO)
+// 🔍 RESOLVE COUNTRY
 // ===============================
 function resolveCountry(country?: string): string {
   if (country && isSupportedCountry(country)) {
@@ -45,10 +46,11 @@ export function CountryProvider({
   );
 
   // ===============================
-  // 🔄 UPDATE COUNTRY
+  // 🔄 SET COUNTRY
   // ===============================
-  const setCountry = (c: string) => {
-    const valid = resolveCountry(c);
+  const setCountry = (value: string) => {
+    const valid = resolveCountry(value);
+
     setCountryState(valid);
 
     // sync cookie (middleware reads this)
@@ -56,6 +58,17 @@ export function CountryProvider({
       document.cookie = `USER_COUNTRY=${valid}; path=/; max-age=2592000`;
     }
   };
+
+  // ===============================
+  // 🔄 SYNC WITH SERVER
+  // ===============================
+  useEffect(() => {
+    const resolved = resolveCountry(initialCountry);
+
+    if (resolved !== country) {
+      setCountryState(resolved);
+    }
+  }, [initialCountry]);
 
   return (
     <CountryContext.Provider value={{ country, setCountry }}>
