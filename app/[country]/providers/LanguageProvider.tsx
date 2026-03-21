@@ -30,19 +30,15 @@ type LanguageContextType = {
 const LanguageContext = createContext<LanguageContextType | null>(null);
 
 // ===============================
-// 🔍 RESOLVE LANGUAGE (COUNTRY-FIRST)
+// 🔍 RESOLVE LANGUAGE (SMART + USER-FRIENDLY)
 // ===============================
 function resolveLanguage(
-  lang: string | undefined,
+  cookieLang: string | undefined,
   country: string
 ): SupportedLanguage {
-  // 1️⃣ Country → Language (HIGHEST PRIORITY)
-  const mapped = COUNTRY_LANGUAGE_MAP[country];
-  if (mapped) return mapped;
-
-  // 2️⃣ User provided language (cookie or server)
-  if (lang) {
-    const normalized = lang.toLowerCase().split("-")[0];
+  // 1️⃣ User preference (HIGHEST PRIORITY)
+  if (cookieLang) {
+    const normalized = cookieLang.toLowerCase().split("-")[0];
 
     if (
       SUPPORTED_LANGUAGES.includes(
@@ -53,7 +49,11 @@ function resolveLanguage(
     }
   }
 
-  // 3️⃣ Default fallback
+  // 2️⃣ Country-based default (ONLY if no user preference)
+  const mapped = COUNTRY_LANGUAGE_MAP[country];
+  if (mapped) return mapped;
+
+  // 3️⃣ Fallback
   return DEFAULT_LANGUAGE;
 }
 
@@ -71,12 +71,8 @@ export function LanguageProvider({
   initialCountry?: string;
   translations?: Record<string, string>;
 }) {
-  const [country] = useState<string>(
-    initialCountry?.toLowerCase() || "global"
-  );
-
-  const [language, setLanguageState] = useState<SupportedLanguage>(
-    resolveLanguage(initialLanguage, country)
+  const [language, setLanguageState] = useState<SupportedLanguage>(() =>
+    resolveLanguage(initialLanguage, initialCountry || "global")
   );
 
   const [translations, setTranslations] = useState<
@@ -84,7 +80,7 @@ export function LanguageProvider({
   >(initialTranslations);
 
   // ===============================
-  // 🔄 SET LANGUAGE (COOKIE + STATE)
+  // 🔄 CHANGE LANGUAGE (USER ACTION)
   // ===============================
   const setLanguage = (lang: SupportedLanguage) => {
     setLanguageState(lang);
@@ -95,15 +91,21 @@ export function LanguageProvider({
   };
 
   // ===============================
-  // 🔄 SYNC WITH SERVER / COUNTRY
+  // 🔄 SYNC (DO NOT FORCE USER)
   // ===============================
   useEffect(() => {
-    const resolved = resolveLanguage(initialLanguage, country);
+    // Only update if NO cookie exists (first load scenario)
+    if (!initialLanguage) {
+      const resolved = resolveLanguage(
+        undefined,
+        initialCountry || "global"
+      );
 
-    if (resolved !== language) {
-      setLanguageState(resolved);
+      if (resolved !== language) {
+        setLanguageState(resolved);
+      }
     }
-  }, [initialLanguage, country]);
+  }, [initialCountry]);
 
   return (
     <LanguageContext.Provider
@@ -133,6 +135,6 @@ export function useLanguage() {
 }
 
 // ===============================
-// 📤 EXPORT CONTEXT (OPTIONAL)
+// 📤 EXPORT CONTEXT
 // ===============================
 export { LanguageContext };
