@@ -11,9 +11,10 @@ import {
 import {
   DEFAULT_LANGUAGE,
   SUPPORTED_LANGUAGES,
+  COOKIE_KEYS,
 } from "@/app/core/constants";
 
-import type { SupportedLanguage } from "@/app/core/constants";
+import type { SupportedLanguage } from "@/app/core/types";
 
 // ===============================
 // 🌐 CONTEXT TYPE
@@ -65,21 +66,20 @@ export function LanguageProvider({
   );
 
   // ===============================
-  // 🔄 CHANGE LANGUAGE
+  // 🔄 CHANGE LANGUAGE (SYNC COOKIE)
   // ===============================
   const setLanguage = (lang: SupportedLanguage) => {
     const valid = resolveLanguage(lang);
 
     setLanguageState(valid);
 
-    // sync cookie (middleware reads this)
     if (typeof document !== "undefined") {
-      document.cookie = `NEXT_LOCALE=${valid}; path=/; max-age=31536000`;
+      document.cookie = `${COOKIE_KEYS.LANGUAGE}=${valid}; path=/; max-age=31536000`;
     }
   };
 
   // ===============================
-  // 🔄 SYNC WITH SERVER (OPTIONAL SAFETY)
+  // 🔄 SYNC WITH SERVER
   // ===============================
   useEffect(() => {
     const resolved = resolveLanguage(initialLanguage);
