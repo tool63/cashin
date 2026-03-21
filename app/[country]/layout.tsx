@@ -10,15 +10,14 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
 import {
-  VALID_COUNTRY_CODES,
-  getLanguageForCountry,
   COOKIE_KEYS,
   SupportedLanguage,
   DEFAULT_LANGUAGE,
   SUPPORTED_LANGUAGES,
-} from "@/app/core/detector";
+} from "@/app/core/constants";
 
-import { loadTranslations } from "@/app/core/i18n/config";
+import { isSupportedCountry } from "@/app/core/utils/validation";
+import { loadTranslations } from "@/app/core/i18n/translations";
 
 interface LayoutProps {
   children: ReactNode;
@@ -29,11 +28,11 @@ interface LayoutProps {
 // 🌍 GET INITIAL LANGUAGE (SERVER)
 // ===============================
 function getInitialLanguage(
-  country: string,
   cookieStore: ReturnType<typeof cookies>
 ): SupportedLanguage {
   // Priority 1: Cookie
   const langCookie = cookieStore.get(COOKIE_KEYS.LANGUAGE)?.value;
+
   if (langCookie) {
     const normalized = langCookie.toLowerCase().split("-")[0];
     if (SUPPORTED_LANGUAGES.includes(normalized as SupportedLanguage)) {
@@ -45,18 +44,13 @@ function getInitialLanguage(
   const acceptLanguage = headers().get("accept-language");
   if (acceptLanguage) {
     const browserLang = acceptLanguage.split(",")[0].split("-")[0];
+
     if (SUPPORTED_LANGUAGES.includes(browserLang as SupportedLanguage)) {
       return browserLang as SupportedLanguage;
     }
   }
 
-  // Priority 3: Country mapping
-  const mappedLang = getLanguageForCountry(country);
-  if (mappedLang && SUPPORTED_LANGUAGES.includes(mappedLang)) {
-    return mappedLang;
-  }
-
-  // Priority 4: Default
+  // Default
   return DEFAULT_LANGUAGE;
 }
 
@@ -67,20 +61,27 @@ function getInitialCountry(
   paramsCountry: string,
   cookieStore: ReturnType<typeof cookies>
 ): string {
-  // Priority 1: Forced country (admin)
-  const forcedCountry = cookieStore.get(COOKIE_KEYS.FORCED_COUNTRY)?.value;
-  if (forcedCountry && VALID_COUNTRY_CODES.has(forcedCountry)) {
-    return forcedCountry.toLowerCase();
+  const normalized = paramsCountry.toLowerCase();
+
+  // ❗ Validate dynamically (NO LIST)
+  if (!isSupportedCountry(normalized)) {
+    notFound(); // invalid country
   }
 
-  // Priority 2: User cookie
+  // Priority 1: Forced
+  const forced = cookieStore.get(COOKIE_KEYS.FORCED_COUNTRY)?.value;
+  if (forced && isSupportedCountry(forced)) {
+    return forced.toLowerCase();
+  }
+
+  // Priority 2: Cookie
   const userCountry = cookieStore.get(COOKIE_KEYS.COUNTRY)?.value;
-  if (userCountry && VALID_COUNTRY_CODES.has(userCountry)) {
+  if (userCountry && isSupportedCountry(userCountry)) {
     return userCountry.toLowerCase();
   }
 
   // Priority 3: URL param
-  return paramsCountry.toLowerCase();
+  return normalized;
 }
 
 // ===============================
@@ -98,25 +99,17 @@ export default async function CountryLayout({
   children,
   params,
 }: LayoutProps) {
-  const paramsCountry = params.country.toLowerCase();
-
-  // ------------------------------
-  // ❌ VALIDATE COUNTRY
-  // ------------------------------
-  if (!VALID_COUNTRY_CODES.has(paramsCountry)) {
-    notFound();
-  }
-
-  // ------------------------------
-  // 🍪 GET COOKIES
-  // ------------------------------
   const cookieStore = cookies();
 
   // ------------------------------
-  // 🌍 RESOLVE COUNTRY & LANGUAGE
+  // 🌍 COUNTRY (AUTO VALIDATED)
   // ------------------------------
-  const resolvedCountry = getInitialCountry(paramsCountry, cookieStore);
-  const resolvedLanguage = getInitialLanguage(resolvedCountry, cookieStore);
+  const resolvedCountry = getInitialCountry(params.country, cookieStore);
+
+  // ------------------------------
+  // 🌐 LANGUAGE
+  // ------------------------------
+  const resolvedLanguage = getInitialLanguage(cookieStore);
 
   // ------------------------------
   // 🌐 HTML ATTRIBUTES
@@ -125,7 +118,7 @@ export default async function CountryLayout({
   const htmlDir = getHtmlDirection(resolvedLanguage);
 
   // ------------------------------
-  // 🌍 LOAD TRANSLATIONS (SERVER)
+  // 🌍 TRANSLATIONS
   // ------------------------------
   let translations: Record<string, string> = {};
 
