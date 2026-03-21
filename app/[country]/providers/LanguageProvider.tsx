@@ -5,13 +5,15 @@ import {
   useContext,
   useState,
   ReactNode,
+  useEffect,
 } from "react";
 
 import {
-  SupportedLanguage,
   DEFAULT_LANGUAGE,
   SUPPORTED_LANGUAGES,
 } from "@/app/core/constants";
+
+import type { SupportedLanguage } from "@/app/core/constants";
 
 // ===============================
 // 🌐 CONTEXT TYPE
@@ -29,12 +31,16 @@ const LanguageContext = createContext<LanguageContextType | null>(null);
 // 🔍 RESOLVE LANGUAGE
 // ===============================
 function resolveLanguage(lang?: string): SupportedLanguage {
-  if (
-    lang &&
-    SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage)
-  ) {
-    return lang as SupportedLanguage;
+  if (lang) {
+    const normalized = lang.toLowerCase().split("-")[0];
+
+    if (
+      SUPPORTED_LANGUAGES.includes(normalized as SupportedLanguage)
+    ) {
+      return normalized as SupportedLanguage;
+    }
   }
+
   return DEFAULT_LANGUAGE;
 }
 
@@ -63,16 +69,34 @@ export function LanguageProvider({
   // ===============================
   const setLanguage = (lang: SupportedLanguage) => {
     const valid = resolveLanguage(lang);
+
     setLanguageState(valid);
 
+    // sync cookie (middleware reads this)
     if (typeof document !== "undefined") {
       document.cookie = `NEXT_LOCALE=${valid}; path=/; max-age=31536000`;
     }
   };
 
+  // ===============================
+  // 🔄 SYNC WITH SERVER (OPTIONAL SAFETY)
+  // ===============================
+  useEffect(() => {
+    const resolved = resolveLanguage(initialLanguage);
+
+    if (resolved !== language) {
+      setLanguageState(resolved);
+    }
+  }, [initialLanguage]);
+
   return (
     <LanguageContext.Provider
-      value={{ language, setLanguage, translations, setTranslations }}
+      value={{
+        language,
+        setLanguage,
+        translations,
+        setTranslations,
+      }}
     >
       {children}
     </LanguageContext.Provider>
@@ -92,4 +116,7 @@ export function useLanguage() {
   return context;
 }
 
+// ===============================
+// 📤 EXPORT CONTEXT (OPTIONAL)
+// ===============================
 export { LanguageContext };
