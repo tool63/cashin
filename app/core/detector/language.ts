@@ -13,7 +13,7 @@ function parseAcceptLanguage(header: string): SupportedLanguage {
     langs.sort((a, b) => b.q - a.q);
 
     for (const l of langs) {
-      return normalizeLanguage(l.lang); // ✅ already validated
+      return normalizeLanguage(l.lang);
     }
   } catch {}
 
