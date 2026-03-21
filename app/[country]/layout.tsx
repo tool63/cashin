@@ -18,6 +18,8 @@ import {
   SUPPORTED_LANGUAGES,
 } from "@/app/core/detector";
 
+import { loadTranslations } from "@/app/core/i18n/config";
+
 interface LayoutProps {
   children: ReactNode;
   params: { country: string };
@@ -40,8 +42,7 @@ function getInitialLanguage(
   }
 
   // Priority 2: Accept-Language header
-  const headersList = headers();
-  const acceptLanguage = headersList.get("accept-language");
+  const acceptLanguage = headers().get("accept-language");
   if (acceptLanguage) {
     const browserLang = acceptLanguage.split(",")[0].split("-")[0];
     if (SUPPORTED_LANGUAGES.includes(browserLang as SupportedLanguage)) {
@@ -66,24 +67,24 @@ function getInitialCountry(
   paramsCountry: string,
   cookieStore: ReturnType<typeof cookies>
 ): string {
-  // Priority 1: Forced country cookie (admin override)
+  // Priority 1: Forced country (admin)
   const forcedCountry = cookieStore.get(COOKIE_KEYS.FORCED_COUNTRY)?.value;
   if (forcedCountry && VALID_COUNTRY_CODES.has(forcedCountry)) {
     return forcedCountry.toLowerCase();
   }
 
-  // Priority 2: User country cookie
+  // Priority 2: User cookie
   const userCountry = cookieStore.get(COOKIE_KEYS.COUNTRY)?.value;
   if (userCountry && VALID_COUNTRY_CODES.has(userCountry)) {
     return userCountry.toLowerCase();
   }
 
-  // Priority 3: URL parameter
+  // Priority 3: URL param
   return paramsCountry.toLowerCase();
 }
 
 // ===============================
-// 🌐 GET HTML DIRECTION
+// 🌐 HTML DIRECTION
 // ===============================
 function getHtmlDirection(language: SupportedLanguage): "ltr" | "rtl" {
   const rtlLanguages = ["ar", "he", "ur", "fa"];
@@ -107,11 +108,13 @@ export default async function CountryLayout({
   }
 
   // ------------------------------
-  // 🍪 GET COOKIES (SERVER)
+  // 🍪 GET COOKIES
   // ------------------------------
   const cookieStore = cookies();
 
-  // Resolve actual country and language
+  // ------------------------------
+  // 🌍 RESOLVE COUNTRY & LANGUAGE
+  // ------------------------------
   const resolvedCountry = getInitialCountry(paramsCountry, cookieStore);
   const resolvedLanguage = getInitialLanguage(resolvedCountry, cookieStore);
 
@@ -122,6 +125,17 @@ export default async function CountryLayout({
   const htmlDir = getHtmlDirection(resolvedLanguage);
 
   // ------------------------------
+  // 🌍 LOAD TRANSLATIONS (SERVER)
+  // ------------------------------
+  let translations: Record<string, string> = {};
+
+  try {
+    translations = await loadTranslations(resolvedLanguage, "homepage");
+  } catch (error) {
+    console.error("❌ Translation load failed:", error);
+  }
+
+  // ------------------------------
   // 🎯 RENDER
   // ------------------------------
   return (
@@ -129,7 +143,10 @@ export default async function CountryLayout({
       <body>
         <ThemeProviderWrapper>
           <CountryProvider initialCountry={resolvedCountry}>
-            <LanguageProvider initialLanguage={resolvedLanguage}>
+            <LanguageProvider
+              initialLanguage={resolvedLanguage}
+              translations={translations}
+            >
               <Header />
               <main className="min-h-screen pt-20">{children}</main>
               <Footer />
