@@ -1,6 +1,12 @@
-export const DEFAULT_COUNTRY = "us";
+// ===============================
+// 🌍 DEFAULTS (GLOBAL-FIRST SYSTEM)
+// ===============================
+export const DEFAULT_COUNTRY = "global"; // ✅ No prefix for default users
 export const DEFAULT_LANGUAGE = "en";
 
+// ===============================
+// 🌐 SUPPORTED LANGUAGES
+// ===============================
 export const SUPPORTED_LANGUAGES = ["en", "fr", "de", "es", "pt"] as const;
 
 export type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number];
