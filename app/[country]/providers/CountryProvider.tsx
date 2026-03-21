@@ -7,10 +7,8 @@ import {
   ReactNode,
 } from "react";
 
-import {
-  COUNTRY_CODES,
-  DEFAULT_COUNTRY,
-} from "@/app/core/detector";
+import { DEFAULT_COUNTRY } from "@/app/core/constants";
+import { isSupportedCountry } from "@/app/core/utils/validation";
 
 // ===============================
 // 🌍 CONTEXT
@@ -23,10 +21,10 @@ type CountryContextType = {
 const CountryContext = createContext<CountryContextType | null>(null);
 
 // ===============================
-// 🔍 VALIDATE COUNTRY
+// 🔍 RESOLVE COUNTRY (AUTO)
 // ===============================
 function resolveCountry(country?: string): string {
-  if (country && COUNTRY_CODES.includes(country as any)) {
+  if (country && isSupportedCountry(country)) {
     return country.toLowerCase();
   }
   return DEFAULT_COUNTRY;
@@ -80,6 +78,6 @@ export function useCountry() {
 }
 
 // ===============================
-// 📤 EXPORT CONTEXT FOR BACKWARD COMPATIBILITY
+// 📤 EXPORT CONTEXT (OPTIONAL)
 // ===============================
 export { CountryContext };
