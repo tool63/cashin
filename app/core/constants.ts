@@ -12,6 +12,30 @@ export const SUPPORTED_LANGUAGES = ["en", "fr", "de", "es", "pt"] as const;
 export type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number];
 
 // ===============================
+// 🌍 COUNTRY → LANGUAGE MAPPING
+// (FIX: Prevent country-language mismatch)
+// ===============================
+export const COUNTRY_LANGUAGE_MAP: Record<string, SupportedLanguage> = {
+  global: "en",
+
+  // English regions
+  us: "en",
+  gb: "en",
+  ca: "en",
+  au: "en",
+  in: "en",
+  bd: "en",
+
+  // European languages
+  fr: "fr",
+  de: "de",
+  es: "es",
+  pt: "pt",
+
+  // Add more as needed
+};
+
+// ===============================
 // 🍪 COOKIE KEYS
 // ===============================
 export const COOKIE_KEYS = {
