@@ -1,10 +1,11 @@
 "use client";
 
+import { useMemo } from "react";
 import { useLanguage } from "./providers/LanguageProvider";
 import { useCountry } from "./providers/CountryProvider";
 
 // ===============================
-// 🧩 FEATURE CARD COMPONENT
+// 🧩 FEATURE CARD
 // ===============================
 function FeatureCard({
   title,
@@ -22,23 +23,25 @@ function FeatureCard({
 }
 
 // ===============================
-// 🚀 PAGE (PURE UI)
+// 🚀 PAGE
 // ===============================
 export default function CountryHomePage() {
   const { language, translations } = useLanguage();
   const { country } = useCountry();
 
   // ===============================
-  // 📝 TRANSLATION HELPER
+  // 📝 TRANSLATION HELPER (OPTIMIZED)
   // ===============================
-  const t = (key: string, fallback: string): string => {
-    return translations?.[key] || fallback;
-  };
+  const t = useMemo(() => {
+    return (key: string, fallback: string): string => {
+      return translations?.[key] || fallback;
+    };
+  }, [translations]);
 
   return (
     <section className="max-w-6xl mx-auto px-4 py-16">
       {/* ===============================
-          🎯 HERO SECTION
+          🎯 HERO
       =============================== */}
       <div className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
