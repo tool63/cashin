@@ -2,23 +2,18 @@ import type { NextRequest } from "next/server";
 import { resolveCountry } from "./country";
 import { getLanguage } from "./language";
 import { isSupportedCountry } from "../utils/validation";
-import { isSupportedCountry as isValid } from "../utils/validation";
 
-// ===============================
-// 🌍 Extract country from URL
-// ===============================
+// 🌍 Extract country
 export function extractCountryFromPath(path: string): string | null {
   const first = path.split("/").filter(Boolean)[0]?.toLowerCase();
-  return first && isValid(first) ? first : null;
+  return first && isSupportedCountry(first) ? first : null;
 }
 
-// ===============================
-// ✂️ Remove country from path
-// ===============================
+// ✂️ Remove country
 export function getPathWithoutCountry(path: string): string {
   const segments = path.split("/").filter(Boolean);
 
-  if (segments.length && isValid(segments[0])) {
+  if (segments.length && isSupportedCountry(segments[0])) {
     const rest = segments.slice(1).join("/");
     return rest ? `/${rest}` : "/";
   }
@@ -26,13 +21,10 @@ export function getPathWithoutCountry(path: string): string {
   return path;
 }
 
-// ===============================
 // 🔗 Build URL safely
-// ===============================
 export function buildUrl(path: string, country: string): string {
   const clean = path.startsWith("/") ? path : `/${path}`;
 
-  // ✅ prevent /us/us/page
   if (clean.startsWith(`/${country}`)) return clean;
 
   if (clean === "/") return `/${country}`;
@@ -40,9 +32,7 @@ export function buildUrl(path: string, country: string): string {
   return `/${country}${clean}`;
 }
 
-// ===============================
-// 🌐 Main geo resolver
-// ===============================
+// 🌐 Main
 export function getGeoInfo(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
 
