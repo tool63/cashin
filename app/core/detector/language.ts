@@ -1,5 +1,5 @@
 import type { NextRequest } from "next/server";
-import { DEFAULT_LANGUAGE, COOKIE_KEYS, SUPPORTED_LANGUAGES } from "../constants";
+import { DEFAULT_LANGUAGE, COOKIE_KEYS } from "../constants";
 import { normalizeLanguage } from "../utils/language";
 import type { SupportedLanguage } from "../types";
 
@@ -13,8 +13,7 @@ function parseAcceptLanguage(header: string): SupportedLanguage {
     langs.sort((a, b) => b.q - a.q);
 
     for (const l of langs) {
-      const normalized = normalizeLanguage(l.lang);
-      if (SUPPORTED_LANGUAGES.includes(normalized)) return normalized;
+      return normalizeLanguage(l.lang); // ✅ already validated
     }
   } catch {}
 
