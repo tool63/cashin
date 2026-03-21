@@ -11,7 +11,7 @@ import {
   SupportedLanguage,
   DEFAULT_LANGUAGE,
   SUPPORTED_LANGUAGES,
-} from "@/app/core/detector";
+} from "@/app/core/constants";
 
 // ===============================
 // 🌐 CONTEXT TYPE
@@ -19,17 +19,20 @@ import {
 type LanguageContextType = {
   language: SupportedLanguage;
   setLanguage: (lang: SupportedLanguage) => void;
-  translations: Record<string, string>; // ✅ NEW
-  setTranslations: (t: Record<string, string>) => void; // ✅ FUTURE USE
+  translations: Record<string, string>;
+  setTranslations: (t: Record<string, string>) => void;
 };
 
 const LanguageContext = createContext<LanguageContextType | null>(null);
 
 // ===============================
-// 🔍 VALIDATE LANGUAGE
+// 🔍 RESOLVE LANGUAGE
 // ===============================
 function resolveLanguage(lang?: string): SupportedLanguage {
-  if (lang && SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage)) {
+  if (
+    lang &&
+    SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage)
+  ) {
     return lang as SupportedLanguage;
   }
   return DEFAULT_LANGUAGE;
@@ -41,29 +44,27 @@ function resolveLanguage(lang?: string): SupportedLanguage {
 export function LanguageProvider({
   children,
   initialLanguage,
-  translations: initialTranslations = {}, // ✅ NEW
+  translations: initialTranslations = {},
 }: {
   children: ReactNode;
   initialLanguage?: string;
-  translations?: Record<string, string>; // ✅ NEW
+  translations?: Record<string, string>;
 }) {
   const [language, setLanguageState] = useState<SupportedLanguage>(
     resolveLanguage(initialLanguage)
   );
 
-  // ✅ STORE TRANSLATIONS (FROM LAYOUT)
   const [translations, setTranslations] = useState<Record<string, string>>(
     initialTranslations
   );
 
   // ===============================
-  // 🔄 UPDATE LANGUAGE
+  // 🔄 CHANGE LANGUAGE
   // ===============================
   const setLanguage = (lang: SupportedLanguage) => {
     const valid = resolveLanguage(lang);
     setLanguageState(valid);
 
-    // sync cookie (middleware reads this)
     if (typeof document !== "undefined") {
       document.cookie = `NEXT_LOCALE=${valid}; path=/; max-age=31536000`;
     }
@@ -91,7 +92,4 @@ export function useLanguage() {
   return context;
 }
 
-// ===============================
-// 📤 EXPORT CONTEXT (OPTIONAL)
-// ===============================
 export { LanguageContext };
