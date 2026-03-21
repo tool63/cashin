@@ -1,21 +1,12 @@
-import {
-  SupportedLanguage,
-  DEFAULT_LANGUAGE,
-  SUPPORTED_LANGUAGES,
-} from "@/app/core/types";
+import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from "@/app/core/constants";
+import type { SupportedLanguage } from "@/app/core/types";
 
-// ===============================
-// 🔤 RTL LANGUAGES
-// ===============================
 export const RTL_LANGUAGES = new Set<string>(["ar", "he", "ur", "fa"]);
 
 export function isRtlLanguage(lang: SupportedLanguage | string): boolean {
   return RTL_LANGUAGES.has(lang.toLowerCase());
 }
 
-// ===============================
-// 🌍 LOCALE MAP
-// ===============================
 export const LOCALE_BY_LANGUAGE: Record<SupportedLanguage, string> = {
   en: "en-US",
   fr: "fr-FR",
@@ -24,16 +15,10 @@ export const LOCALE_BY_LANGUAGE: Record<SupportedLanguage, string> = {
   pt: "pt-BR",
 };
 
-// ===============================
-// 🔒 SAFE LOCALE
-// ===============================
 function safeLocale(language: SupportedLanguage): string {
   return LOCALE_BY_LANGUAGE[language] || "en-US";
 }
 
-// ===============================
-// 🔢 FORMAT NUMBER
-// ===============================
 export function formatNumber(
   value: number,
   language: SupportedLanguage = DEFAULT_LANGUAGE,
@@ -46,9 +31,6 @@ export function formatNumber(
   }
 }
 
-// ===============================
-// 📊 FORMAT PERCENTAGE
-// ===============================
 export function formatPercentage(
   value: number,
   language: SupportedLanguage = DEFAULT_LANGUAGE
@@ -60,31 +42,21 @@ export function formatPercentage(
   });
 }
 
-// ===============================
-// 📅 FORMAT DATE
-// ===============================
 export function formatDate(
   date: Date | number,
-  language: SupportedLanguage = DEFAULT_LANGUAGE,
-  options?: Intl.DateTimeFormatOptions
+  language: SupportedLanguage = DEFAULT_LANGUAGE
 ): string {
   try {
-    return new Intl.DateTimeFormat(
-      safeLocale(language),
-      options || {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      }
-    ).format(date);
+    return new Intl.DateTimeFormat(safeLocale(language), {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }).format(date);
   } catch {
     return new Date(date).toLocaleDateString();
   }
 }
 
-// ===============================
-// ⏰ FORMAT TIME
-// ===============================
 export function formatTime(
   date: Date | number,
   language: SupportedLanguage = DEFAULT_LANGUAGE
@@ -99,25 +71,16 @@ export function formatTime(
   }
 }
 
-// ===============================
-// 🌐 TEXT DIRECTION
-// ===============================
 export function getTextDirection(
   lang: SupportedLanguage | string
 ): "ltr" | "rtl" {
   return isRtlLanguage(lang) ? "rtl" : "ltr";
 }
 
-// ===============================
-// ✅ LANGUAGE VALIDATION
-// ===============================
 export function isLanguageSupported(lang: string): lang is SupportedLanguage {
   return SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage);
 }
 
-// ===============================
-// 🌍 LOCALES LIST
-// ===============================
 export function getSupportedLocales(): string[] {
   return SUPPORTED_LANGUAGES.map(
     (lang) => LOCALE_BY_LANGUAGE[lang] || lang
