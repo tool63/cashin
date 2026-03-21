@@ -11,13 +11,19 @@ import {
   isValidCountryCode,
 } from "@/app/core/utils/validation";
 
-import { COOKIE_KEYS } from "@/app/core/constants";
+import { COOKIE_KEYS, DEFAULT_COUNTRY } from "@/app/core/constants";
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // Skip internal routes
-  if (pathname.startsWith("/api") || pathname.startsWith("/_next")) {
+  // ===============================
+  // 🚫 Skip internal routes
+  // ===============================
+  if (
+    pathname.startsWith("/api") ||
+    pathname.startsWith("/_next") ||
+    pathname.includes(".") // static files
+  ) {
     return NextResponse.next();
   }
 
@@ -28,22 +34,46 @@ export function middleware(req: NextRequest) {
 
   const hasPrefix = isValidCountryCode(first || "");
 
-  // 🔥 Root redirect
+  // ===============================
+  // 🌍 ROOT HANDLING (FIXED)
+  // ===============================
   if (pathname === "/") {
+    // ✅ Default/global → stay on root
+    if (geo.country === DEFAULT_COUNTRY) {
+      const res = NextResponse.next();
+
+      res.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
+        path: "/",
+        maxAge: 60 * 60 * 24 * 30,
+      });
+
+      res.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
+        path: "/",
+        maxAge: 60 * 60 * 24 * 365,
+      });
+
+      return res;
+    }
+
+    // ✅ Non-default → redirect to /country
     const url = req.nextUrl.clone();
     url.pathname = `/${geo.country}`;
     return NextResponse.redirect(url);
   }
 
-  // 🔥 Remove invalid prefix
+  // ===============================
+  // ❌ Remove invalid prefix
+  // ===============================
   if (hasPrefix && !isSupportedCountry(first!)) {
     const url = req.nextUrl.clone();
     url.pathname = "/" + segments.slice(1).join("/");
     return NextResponse.redirect(url);
   }
 
-  // 🔥 Add prefix if missing
-  if (!hasPrefix) {
+  // ===============================
+  // ➕ Add prefix ONLY if NOT default
+  // ===============================
+  if (!hasPrefix && geo.country !== DEFAULT_COUNTRY) {
     const target = buildUrl(pathname, geo.country);
 
     if (target !== pathname) {
@@ -55,13 +85,17 @@ export function middleware(req: NextRequest) {
 
   const res = NextResponse.next();
 
-  // 🌍 Save country
+  // ===============================
+  // 🍪 Persist country
+  // ===============================
   res.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
     path: "/",
     maxAge: 60 * 60 * 24 * 30,
   });
 
-  // 🌐 Save language
+  // ===============================
+  // 🌐 Persist language
+  // ===============================
   res.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
     path: "/",
     maxAge: 60 * 60 * 24 * 365,
