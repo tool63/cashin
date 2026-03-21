@@ -1,24 +1,30 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
+
 import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
 import { useCountry } from "@/app/[country]/providers/CountryProvider";
 
-// ===============================
-// 🌍 TYPES (LOCAL - SAFE)
-// ===============================
-type SupportedLanguage = "en" | "fr" | "de" | "es" | "pt";
+import {
+  SUPPORTED_LANGUAGES,
+} from "@/app/core/constants";
+
+import type { SupportedLanguage } from "@/app/core/constants";
 
 // ===============================
 // 🌐 OPTIONS
 // ===============================
-const LANGUAGE_OPTIONS = [
-  { code: "en" as SupportedLanguage, label: "English", flag: "🇺🇸" },
-  { code: "fr" as SupportedLanguage, label: "Français", flag: "🇫🇷" },
-  { code: "de" as SupportedLanguage, label: "Deutsch", flag: "🇩🇪" },
-  { code: "es" as SupportedLanguage, label: "Español", flag: "🇪🇸" },
-  { code: "pt" as SupportedLanguage, label: "Português", flag: "🇧🇷" },
+const LANGUAGE_OPTIONS: {
+  code: SupportedLanguage;
+  label: string;
+  flag: string;
+}[] = [
+  { code: "en", label: "English", flag: "🇺🇸" },
+  { code: "fr", label: "Français", flag: "🇫🇷" },
+  { code: "de", label: "Deutsch", flag: "🇩🇪" },
+  { code: "es", label: "Español", flag: "🇪🇸" },
+  { code: "pt", label: "Português", flag: "🇧🇷" },
 ];
 
 // ===============================
@@ -26,7 +32,7 @@ const LANGUAGE_OPTIONS = [
 // ===============================
 export default function LanguageSwitcher() {
   const router = useRouter();
-  const pathname = usePathname();
+
   const { language, setLanguage } = useLanguage();
   const { country } = useCountry();
 
@@ -34,7 +40,7 @@ export default function LanguageSwitcher() {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // ===============================
-  // ❌ OUTSIDE CLICK
+  // ❌ CLOSE ON OUTSIDE CLICK
   // ===============================
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -47,7 +53,8 @@ export default function LanguageSwitcher() {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return () =>
+      document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   // ===============================
@@ -66,10 +73,10 @@ export default function LanguageSwitcher() {
       return;
     }
 
-    // Update context (cookie/local storage)
+    // Update provider (cookie sync inside provider)
     setLanguage(lang);
 
-    // OPTIONAL: refresh page (safe for your routing system)
+    // 🔄 Refresh to re-trigger server rendering (translations/layout)
     router.refresh();
 
     setIsOpen(false);
