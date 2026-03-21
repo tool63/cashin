@@ -12,6 +12,7 @@ import {
   DEFAULT_LANGUAGE,
   SUPPORTED_LANGUAGES,
   COOKIE_KEYS,
+  COUNTRY_LANGUAGE_MAP,
 } from "@/app/core/constants";
 
 import type { SupportedLanguage } from "@/app/core/types";
@@ -29,19 +30,30 @@ type LanguageContextType = {
 const LanguageContext = createContext<LanguageContextType | null>(null);
 
 // ===============================
-// 🔍 RESOLVE LANGUAGE
+// 🔍 RESOLVE LANGUAGE (COUNTRY-FIRST)
 // ===============================
-function resolveLanguage(lang?: string): SupportedLanguage {
+function resolveLanguage(
+  lang: string | undefined,
+  country: string
+): SupportedLanguage {
+  // 1️⃣ Country → Language (HIGHEST PRIORITY)
+  const mapped = COUNTRY_LANGUAGE_MAP[country];
+  if (mapped) return mapped;
+
+  // 2️⃣ User provided language (cookie or server)
   if (lang) {
     const normalized = lang.toLowerCase().split("-")[0];
 
     if (
-      SUPPORTED_LANGUAGES.includes(normalized as SupportedLanguage)
+      SUPPORTED_LANGUAGES.includes(
+        normalized as SupportedLanguage
+      )
     ) {
       return normalized as SupportedLanguage;
     }
   }
 
+  // 3️⃣ Default fallback
   return DEFAULT_LANGUAGE;
 }
 
@@ -51,43 +63,47 @@ function resolveLanguage(lang?: string): SupportedLanguage {
 export function LanguageProvider({
   children,
   initialLanguage,
+  initialCountry,
   translations: initialTranslations = {},
 }: {
   children: ReactNode;
   initialLanguage?: string;
+  initialCountry?: string;
   translations?: Record<string, string>;
 }) {
-  const [language, setLanguageState] = useState<SupportedLanguage>(
-    resolveLanguage(initialLanguage)
+  const [country] = useState<string>(
+    initialCountry?.toLowerCase() || "global"
   );
 
-  const [translations, setTranslations] = useState<Record<string, string>>(
-    initialTranslations
+  const [language, setLanguageState] = useState<SupportedLanguage>(
+    resolveLanguage(initialLanguage, country)
   );
+
+  const [translations, setTranslations] = useState<
+    Record<string, string>
+  >(initialTranslations);
 
   // ===============================
-  // 🔄 CHANGE LANGUAGE (SYNC COOKIE)
+  // 🔄 SET LANGUAGE (COOKIE + STATE)
   // ===============================
   const setLanguage = (lang: SupportedLanguage) => {
-    const valid = resolveLanguage(lang);
-
-    setLanguageState(valid);
+    setLanguageState(lang);
 
     if (typeof document !== "undefined") {
-      document.cookie = `${COOKIE_KEYS.LANGUAGE}=${valid}; path=/; max-age=31536000`;
+      document.cookie = `${COOKIE_KEYS.LANGUAGE}=${lang}; path=/; max-age=31536000`;
     }
   };
 
   // ===============================
-  // 🔄 SYNC WITH SERVER
+  // 🔄 SYNC WITH SERVER / COUNTRY
   // ===============================
   useEffect(() => {
-    const resolved = resolveLanguage(initialLanguage);
+    const resolved = resolveLanguage(initialLanguage, country);
 
     if (resolved !== language) {
       setLanguageState(resolved);
     }
-  }, [initialLanguage]);
+  }, [initialLanguage, country]);
 
   return (
     <LanguageContext.Provider
