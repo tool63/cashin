@@ -3,13 +3,17 @@ import { resolveCountry } from "./country";
 import { getLanguage } from "./language";
 import { isSupportedCountry } from "../utils/validation";
 
-// 🌍 Extract country
+// ===============================
+// 🌍 Extract country from URL
+// ===============================
 export function extractCountryFromPath(path: string): string | null {
   const first = path.split("/").filter(Boolean)[0]?.toLowerCase();
   return first && isSupportedCountry(first) ? first : null;
 }
 
-// ✂️ Remove country
+// ===============================
+// ✂️ Remove country from path
+// ===============================
 export function getPathWithoutCountry(path: string): string {
   const segments = path.split("/").filter(Boolean);
 
@@ -21,7 +25,9 @@ export function getPathWithoutCountry(path: string): string {
   return path;
 }
 
+// ===============================
 // 🔗 Build URL safely
+// ===============================
 export function buildUrl(path: string, country: string): string {
   const clean = path.startsWith("/") ? path : `/${path}`;
 
@@ -32,7 +38,9 @@ export function buildUrl(path: string, country: string): string {
   return `/${country}${clean}`;
 }
 
-// 🌐 Main
+// ===============================
+// 🌐 MAIN GEO
+// ===============================
 export function getGeoInfo(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
 
