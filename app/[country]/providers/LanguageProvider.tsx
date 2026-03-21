@@ -14,11 +14,13 @@ import {
 } from "@/app/core/detector";
 
 // ===============================
-// 🌐 CONTEXT
+// 🌐 CONTEXT TYPE
 // ===============================
 type LanguageContextType = {
   language: SupportedLanguage;
   setLanguage: (lang: SupportedLanguage) => void;
+  translations: Record<string, string>; // ✅ NEW
+  setTranslations: (t: Record<string, string>) => void; // ✅ FUTURE USE
 };
 
 const LanguageContext = createContext<LanguageContextType | null>(null);
@@ -39,12 +41,19 @@ function resolveLanguage(lang?: string): SupportedLanguage {
 export function LanguageProvider({
   children,
   initialLanguage,
+  translations: initialTranslations = {}, // ✅ NEW
 }: {
   children: ReactNode;
   initialLanguage?: string;
+  translations?: Record<string, string>; // ✅ NEW
 }) {
   const [language, setLanguageState] = useState<SupportedLanguage>(
     resolveLanguage(initialLanguage)
+  );
+
+  // ✅ STORE TRANSLATIONS (FROM LAYOUT)
+  const [translations, setTranslations] = useState<Record<string, string>>(
+    initialTranslations
   );
 
   // ===============================
@@ -61,7 +70,9 @@ export function LanguageProvider({
   };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage }}>
+    <LanguageContext.Provider
+      value={{ language, setLanguage, translations, setTranslations }}
+    >
       {children}
     </LanguageContext.Provider>
   );
@@ -81,6 +92,6 @@ export function useLanguage() {
 }
 
 // ===============================
-// 📤 EXPORT CONTEXT FOR BACKWARD COMPATIBILITY
+// 📤 EXPORT CONTEXT (OPTIONAL)
 // ===============================
 export { LanguageContext };
