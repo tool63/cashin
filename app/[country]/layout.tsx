@@ -6,12 +6,12 @@ import { cookies, headers } from "next/headers";
 import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
 import { LanguageProvider } from "./providers/LanguageProvider";
 import { CountryProvider } from "./providers/CountryProvider";
+
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
 import {
   COOKIE_KEYS,
-  SupportedLanguage,
   DEFAULT_LANGUAGE,
   SUPPORTED_LANGUAGES,
 } from "@/app/core/constants";
@@ -19,77 +19,81 @@ import {
 import { isSupportedCountry } from "@/app/core/utils/validation";
 import { loadTranslations } from "@/app/core/i18n/translations";
 
-interface LayoutProps {
-  children: ReactNode;
-  params: { country: string };
-}
+import type { SupportedLanguage } from "@/app/core/constants";
 
 // ===============================
-// 🌍 GET INITIAL LANGUAGE (SERVER)
+// 🌐 GET INITIAL LANGUAGE
 // ===============================
-function getInitialLanguage(
-  cookieStore: ReturnType<typeof cookies>
-): SupportedLanguage {
-  // Priority 1: Cookie
+function getInitialLanguage(): SupportedLanguage {
+  const cookieStore = cookies();
+
+  // 1️⃣ Cookie
   const langCookie = cookieStore.get(COOKIE_KEYS.LANGUAGE)?.value;
 
   if (langCookie) {
     const normalized = langCookie.toLowerCase().split("-")[0];
-    if (SUPPORTED_LANGUAGES.includes(normalized as SupportedLanguage)) {
+
+    if (
+      SUPPORTED_LANGUAGES.includes(normalized as SupportedLanguage)
+    ) {
       return normalized as SupportedLanguage;
     }
   }
 
-  // Priority 2: Accept-Language header
+  // 2️⃣ Accept-Language header
   const acceptLanguage = headers().get("accept-language");
+
   if (acceptLanguage) {
     const browserLang = acceptLanguage.split(",")[0].split("-")[0];
 
-    if (SUPPORTED_LANGUAGES.includes(browserLang as SupportedLanguage)) {
+    if (
+      SUPPORTED_LANGUAGES.includes(browserLang as SupportedLanguage)
+    ) {
       return browserLang as SupportedLanguage;
     }
   }
 
-  // Default
+  // 3️⃣ Default
   return DEFAULT_LANGUAGE;
 }
 
 // ===============================
-// 🌍 GET INITIAL COUNTRY (SERVER)
+// 🌍 GET INITIAL COUNTRY
 // ===============================
-function getInitialCountry(
-  paramsCountry: string,
-  cookieStore: ReturnType<typeof cookies>
-): string {
+function getInitialCountry(paramsCountry: string): string {
   const normalized = paramsCountry.toLowerCase();
 
-  // ❗ Validate dynamically (NO LIST)
+  // ❗ Validate using unified logic
   if (!isSupportedCountry(normalized)) {
-    notFound(); // invalid country
+    notFound();
   }
 
-  // Priority 1: Forced
+  const cookieStore = cookies();
+
+  // 1️⃣ Forced country (priority)
   const forced = cookieStore.get(COOKIE_KEYS.FORCED_COUNTRY)?.value;
+
   if (forced && isSupportedCountry(forced)) {
     return forced.toLowerCase();
   }
 
-  // Priority 2: Cookie
+  // 2️⃣ User country (cookie)
   const userCountry = cookieStore.get(COOKIE_KEYS.COUNTRY)?.value;
+
   if (userCountry && isSupportedCountry(userCountry)) {
     return userCountry.toLowerCase();
   }
 
-  // Priority 3: URL param
+  // 3️⃣ URL param
   return normalized;
 }
 
 // ===============================
-// 🌐 HTML DIRECTION
+// 🌐 TEXT DIRECTION
 // ===============================
-function getHtmlDirection(language: SupportedLanguage): "ltr" | "rtl" {
+function getDirection(lang: SupportedLanguage): "ltr" | "rtl" {
   const rtlLanguages = ["ar", "he", "ur", "fa"];
-  return rtlLanguages.includes(language) ? "rtl" : "ltr";
+  return rtlLanguages.includes(lang) ? "rtl" : "ltr";
 }
 
 // ===============================
@@ -98,24 +102,25 @@ function getHtmlDirection(language: SupportedLanguage): "ltr" | "rtl" {
 export default async function CountryLayout({
   children,
   params,
-}: LayoutProps) {
-  const cookieStore = cookies();
-
+}: {
+  children: ReactNode;
+  params: { country: string };
+}) {
   // ------------------------------
-  // 🌍 COUNTRY (AUTO VALIDATED)
+  // 🌍 COUNTRY
   // ------------------------------
-  const resolvedCountry = getInitialCountry(params.country, cookieStore);
+  const country = getInitialCountry(params.country);
 
   // ------------------------------
   // 🌐 LANGUAGE
   // ------------------------------
-  const resolvedLanguage = getInitialLanguage(cookieStore);
+  const language = getInitialLanguage();
 
   // ------------------------------
   // 🌐 HTML ATTRIBUTES
   // ------------------------------
-  const htmlLang = `${resolvedLanguage}-${resolvedCountry.toUpperCase()}`;
-  const htmlDir = getHtmlDirection(resolvedLanguage);
+  const htmlLang = `${language}-${country.toUpperCase()}`;
+  const dir = getDirection(language);
 
   // ------------------------------
   // 🌍 TRANSLATIONS
@@ -123,21 +128,21 @@ export default async function CountryLayout({
   let translations: Record<string, string> = {};
 
   try {
-    translations = await loadTranslations(resolvedLanguage, "homepage");
+    translations = await loadTranslations(language, "homepage");
   } catch (error) {
-    console.error("❌ Translation load failed:", error);
+    console.error("❌ Failed to load translations:", error);
   }
 
   // ------------------------------
   // 🎯 RENDER
   // ------------------------------
   return (
-    <html lang={htmlLang} dir={htmlDir} suppressHydrationWarning>
+    <html lang={htmlLang} dir={dir} suppressHydrationWarning>
       <body>
         <ThemeProviderWrapper>
-          <CountryProvider initialCountry={resolvedCountry}>
+          <CountryProvider initialCountry={country}>
             <LanguageProvider
-              initialLanguage={resolvedLanguage}
+              initialLanguage={language}
               translations={translations}
             >
               <Header />
