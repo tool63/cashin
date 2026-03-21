@@ -25,7 +25,7 @@ export function getPathWithoutCountry(path: string): string {
   if (segments.length && isSupportedCountry(segments[0])) {
     const country = segments[0].toLowerCase();
 
-    // ❌ Do not strip "global" (should not exist anyway)
+    // ❌ Do not strip "global"
     if (country === DEFAULT_COUNTRY) return path;
 
     const rest = segments.slice(1).join("/");
@@ -60,13 +60,15 @@ export function getGeoInfo(req: NextRequest) {
 
   const urlCountry = extractCountryFromPath(pathname);
   const country = resolveCountry(req, urlCountry);
-  const language = getLanguage(req);
+
+  // ✅ IMPORTANT: language now depends on country
+  const language = getLanguage(req, country);
 
   return {
     country,
     language,
 
-    // Clean path (without country)
+    // Clean path (without country prefix)
     cleanPath: getPathWithoutCountry(pathname),
 
     // ✅ Only use prefix if NOT global
