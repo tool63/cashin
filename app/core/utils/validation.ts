@@ -1,10 +1,11 @@
-import { COUNTRY_CODES, SUPPORTED_COUNTRIES } from "../constants";
-import type { CountryCode } from "../types";
+// 🌍 Global ISO validation (auto, no list)
+export function isSupportedCountry(code: string): boolean {
+  if (!code) return false;
 
-export function isValidCountryCode(code: string): code is CountryCode {
-  return (COUNTRY_CODES as readonly string[]).includes(code.toLowerCase());
-}
+  const normalized = code.toLowerCase().trim();
 
-export function isSupportedCountry(country: string): boolean {
-  return SUPPORTED_COUNTRIES.has(country.toLowerCase() as CountryCode);
+  // must be 2 letters
+  if (normalized.length !== 2) return false;
+
+  return /^[a-z]{2}$/.test(normalized);
 }
