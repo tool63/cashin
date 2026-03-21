@@ -10,9 +10,9 @@ export function detectCountry(req: NextRequest): string {
   ];
 
   for (const h of headers) {
-    const val = req.headers.get(h);
+    const val = req.headers.get(h)?.toLowerCase();
     if (val && isSupportedCountry(val)) {
-      return val.toLowerCase();
+      return val;
     }
   }
 
@@ -23,22 +23,17 @@ export function resolveCountry(
   req: NextRequest,
   urlCountry: string | null
 ): string {
-  const query = req.nextUrl.searchParams.get("country");
+  const query = req.nextUrl.searchParams.get("country")?.toLowerCase();
 
-  // ✅ Highest priority: forced override
-  const forced = req.cookies.get(COOKIE_KEYS.FORCED_COUNTRY)?.value;
+  const forced = req.cookies.get(COOKIE_KEYS.FORCED_COUNTRY)?.value?.toLowerCase();
   if (forced && isSupportedCountry(forced)) return forced;
 
-  // ✅ Query param override
   if (query && isSupportedCountry(query)) return query;
 
-  // ✅ URL (/us/...)
   if (urlCountry && isSupportedCountry(urlCountry)) return urlCountry;
 
-  // ✅ Cookie
-  const cookie = req.cookies.get(COOKIE_KEYS.COUNTRY)?.value;
+  const cookie = req.cookies.get(COOKIE_KEYS.COUNTRY)?.value?.toLowerCase();
   if (cookie && isSupportedCountry(cookie)) return cookie;
 
-  // ✅ Header detection
   return detectCountry(req);
 }
