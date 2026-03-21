@@ -8,8 +8,12 @@ import {
   useEffect,
 } from "react";
 
-import { DEFAULT_COUNTRY } from "@/app/core/constants";
-import { isSupportedCountry } from "@/app/core/utils/validation";
+import {
+  DEFAULT_COUNTRY,
+  COOKIE_KEYS,
+} from "@/app/core/constants";
+
+import { isValidCountryCode } from "@/app/core/utils/validation";
 
 // ===============================
 // 🌍 CONTEXT TYPE
@@ -25,7 +29,7 @@ const CountryContext = createContext<CountryContextType | null>(null);
 // 🔍 RESOLVE COUNTRY
 // ===============================
 function resolveCountry(country?: string): string {
-  if (country && isSupportedCountry(country)) {
+  if (country && isValidCountryCode(country)) {
     return country.toLowerCase();
   }
   return DEFAULT_COUNTRY;
@@ -46,16 +50,15 @@ export function CountryProvider({
   );
 
   // ===============================
-  // 🔄 SET COUNTRY
+  // 🔄 SET COUNTRY (SYNC COOKIE)
   // ===============================
   const setCountry = (value: string) => {
     const valid = resolveCountry(value);
 
     setCountryState(valid);
 
-    // sync cookie (middleware reads this)
     if (typeof document !== "undefined") {
-      document.cookie = `USER_COUNTRY=${valid}; path=/; max-age=2592000`;
+      document.cookie = `${COOKIE_KEYS.COUNTRY}=${valid}; path=/; max-age=2592000`;
     }
   };
 
