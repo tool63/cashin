@@ -2,27 +2,6 @@
 
 import { useLanguage } from "./providers/LanguageProvider";
 import { useCountry } from "./providers/CountryProvider";
-import { loadTranslations } from "@/app/core/i18n/config";
-import { useEffect, useState } from "react";
-
-// ===============================
-// 🏷️ TYPES
-// ===============================
-interface Translations {
-  welcome_message?: string;
-  homepage_description?: string;
-  feature_surveys?: string;
-  feature_surveys_desc?: string;
-  feature_apps?: string;
-  feature_apps_desc?: string;
-  feature_games?: string;
-  feature_games_desc?: string;
-  cta_button?: string;
-  stats_users?: string;
-  stats_earned?: string;
-  stats_countries?: string;
-  [key: string]: string | undefined;
-}
 
 // ===============================
 // 🧩 FEATURE CARD COMPONENT
@@ -43,76 +22,44 @@ function FeatureCard({
 }
 
 // ===============================
-// 🚀 PAGE COMPONENT (CLIENT)
+// 🚀 PAGE (PURE UI)
 // ===============================
 export default function CountryHomePage() {
-  const { language } = useLanguage();
+  const { language, translations } = useLanguage();
   const { country } = useCountry();
-  const [translations, setTranslations] = useState<Translations>({});
-  const [isLoading, setIsLoading] = useState(true);
-
-  // ===============================
-  // 📦 LOAD TRANSLATIONS
-  // ===============================
-  useEffect(() => {
-    const load = async () => {
-      setIsLoading(true);
-      try {
-        const data = await loadTranslations(language, "homepage");
-        setTranslations(data as Translations);
-      } catch (error) {
-        console.error("Failed to load translations:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    load();
-  }, [language]);
 
   // ===============================
   // 📝 TRANSLATION HELPER
   // ===============================
   const t = (key: string, fallback: string): string => {
-    return translations[key] || fallback;
+    return translations?.[key] || fallback;
   };
 
-  // ===============================
-  // ⏳ LOADING STATE
-  // ===============================
-  if (isLoading) {
-    return (
-      <section className="max-w-6xl mx-auto px-4 py-16">
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
-        </div>
-      </section>
-    );
-  }
-
-  // ===============================
-  // 🎨 UI
-  // ===============================
   return (
     <section className="max-w-6xl mx-auto px-4 py-16">
-      {/* Hero Section */}
+      {/* ===============================
+          🎯 HERO SECTION
+      =============================== */}
       <div className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
           {t("welcome_message", "Welcome to PayUp! Earn money online.")}
         </h1>
+
         <p className="text-xl text-gray-700 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
           {t(
             "homepage_description",
             "PayUp helps you earn real money online safely and quickly."
           )}
         </p>
+
         <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg transition-colors">
           {t("cta_button", "Get Started Now")}
         </button>
       </div>
 
-      {/* Features Grid */}
+      {/* ===============================
+          🧩 FEATURES
+      =============================== */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <FeatureCard
           title={t("feature_surveys", "Complete Surveys")}
@@ -121,6 +68,7 @@ export default function CountryHomePage() {
             "Answer surveys and earn points instantly."
           )}
         />
+
         <FeatureCard
           title={t("feature_apps", "Install Apps")}
           description={t(
@@ -128,6 +76,7 @@ export default function CountryHomePage() {
             "Download apps and get paid quickly."
           )}
         />
+
         <FeatureCard
           title={t("feature_games", "Play Games")}
           description={t(
@@ -137,7 +86,9 @@ export default function CountryHomePage() {
         />
       </div>
 
-      {/* Stats Section */}
+      {/* ===============================
+          📊 STATS
+      =============================== */}
       <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
         <div className="p-6">
           <div className="text-3xl font-bold text-blue-600">50K+</div>
@@ -145,12 +96,14 @@ export default function CountryHomePage() {
             {t("stats_users", "Active Users")}
           </div>
         </div>
+
         <div className="p-6">
           <div className="text-3xl font-bold text-blue-600">$2M+</div>
           <div className="text-gray-600 dark:text-gray-400">
             {t("stats_earned", "Total Earned")}
           </div>
         </div>
+
         <div className="p-6">
           <div className="text-3xl font-bold text-blue-600">150+</div>
           <div className="text-gray-600 dark:text-gray-400">
