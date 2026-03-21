@@ -8,7 +8,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
 import { useCountry } from "@/app/[country]/providers/CountryProvider";
 import { getTextDirection } from "@/app/core/i18n/formatters";
-import { buildUrl } from "@/app/core/detector"; // ✅ NEW
 
 type Toggle = Record<string, boolean>;
 
@@ -42,11 +41,11 @@ export default function Footer({ className }: FooterProps) {
   }, []);
 
   // ===============================
-  // 🔗 LINK COMPONENT (FIXED)
+  // 🔗 LINK COMPONENT (MATCH HEADER)
   // ===============================
   const A = ({ href, children }: { href: string; children: ReactNode }) => (
     <Link
-      href={buildUrl(href, country)} // ✅ AUTO SAFE URL
+      href={`/${country}${href}`} // ✅ SAME AS HEADER LOGIC
       className="block text-primary hover:opacity-80 hover:translate-x-1 transition-all duration-150"
     >
       {children}
@@ -73,7 +72,9 @@ export default function Footer({ className }: FooterProps) {
         {title}
         <ChevronDown
           size={16}
-          className={`transition-transform duration-200 ${open[id] ? "rotate-180" : ""}`}
+          className={`transition-transform duration-200 ${
+            open[id] ? "rotate-180" : ""
+          }`}
         />
       </button>
 
@@ -118,7 +119,9 @@ export default function Footer({ className }: FooterProps) {
           {title}
           <ChevronDown
             size={14}
-            className={`transition-transform duration-200 ${state ? "rotate-180" : ""}`}
+            className={`transition-transform duration-200 ${
+              state ? "rotate-180" : ""
+            }`}
           />
         </button>
 
@@ -153,14 +156,13 @@ export default function Footer({ className }: FooterProps) {
     <footer
       className={`bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20
       dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20
-      text-primary transition-colors duration-300 border-t border-theme ${className || ""}`}
+      text-primary transition-colors duration-300 border-t border-theme ${
+        className || ""
+      }`}
       dir={isRtl ? "rtl" : "ltr"}
     >
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-          {/* Keep all your sections EXACTLY SAME */}
-          {/* No logic changes needed here */}
-          {/* Only A links are fixed via buildUrl */}
 
           <Section id="start" title="Get Started">
             <A href="/how-it-works">How it works</A>
@@ -170,6 +172,9 @@ export default function Footer({ className }: FooterProps) {
           <Section id="earn" title="Ways to Earn">
             <A href="/surveys">Surveys</A>
             <A href="/app-installs">App Installs</A>
+            <A href="/play-games">Play Games</A>
+            <A href="/watch-videos">Watch Videos</A>
+            <A href="/offerwall">Offerwall</A>
           </Section>
 
           <Section id="guides" title="Guides">
@@ -180,6 +185,7 @@ export default function Footer({ className }: FooterProps) {
             <A href="/blog">Blog</A>
             <A href="/help">Help Center</A>
           </Section>
+
         </div>
       </div>
 
