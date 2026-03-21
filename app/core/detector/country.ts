@@ -1,5 +1,6 @@
 import type { NextRequest } from "next/server";
 import { DEFAULT_COUNTRY, COOKIE_KEYS } from "../constants";
+import { isValidCountryCode } from "../utils/validation";
 
 // ===============================
 // 🌐 Normalize country
@@ -7,11 +8,16 @@ import { DEFAULT_COUNTRY, COOKIE_KEYS } from "../constants";
 function normalizeCountry(value: string | null): string | null {
   if (!value) return null;
 
-  return value.toLowerCase();
+  const normalized = value.toLowerCase().trim();
+
+  // ✅ Validate (includes "global" + ISO codes)
+  if (!isValidCountryCode(normalized)) return null;
+
+  return normalized;
 }
 
 // ===============================
-// 🌍 Detect from headers (AUTO)
+// 🌍 Detect from headers (AUTO GEO)
 // ===============================
 export function detectCountry(req: NextRequest): string {
   const headerKeys = [
@@ -24,16 +30,17 @@ export function detectCountry(req: NextRequest): string {
     const value = req.headers.get(key);
     const country = normalizeCountry(value);
 
-    if (country) {
-      return country; // ✅ ACCEPT ALL COUNTRIES
+    if (country && country !== "xx") {
+      return country; // ✅ Accept real countries only
     }
   }
 
+  // ✅ Fallback to global (NO forced country)
   return DEFAULT_COUNTRY;
 }
 
 // ===============================
-// 🌍 Resolve country (FULL AUTO)
+// 🌍 Resolve country (FULL LOGIC)
 // ===============================
 export function resolveCountry(
   req: NextRequest,
@@ -41,26 +48,27 @@ export function resolveCountry(
 ): string {
   const searchParams = req.nextUrl.searchParams;
 
-  // 1️⃣ URL override (/us, /bd, /in etc.)
+  // 1️⃣ URL prefix (/us, /bd)
   if (urlCountry) {
-    return urlCountry.toLowerCase();
+    return normalizeCountry(urlCountry) || DEFAULT_COUNTRY;
   }
 
-  // 2️⃣ Query (?country=us)
+  // 2️⃣ Query override (?country=us)
   const query = normalizeCountry(searchParams.get("country"));
   if (query) return query;
 
-  // 3️⃣ Cookie (user preference)
+  // 3️⃣ Forced country (user selection)
   const forced = normalizeCountry(
     req.cookies.get(COOKIE_KEYS.FORCED_COUNTRY)?.value || null
   );
   if (forced) return forced;
 
+  // 4️⃣ Saved cookie
   const cookie = normalizeCountry(
     req.cookies.get(COOKIE_KEYS.COUNTRY)?.value || null
   );
   if (cookie) return cookie;
 
-  // 4️⃣ GEO detection (BEST)
+  // 5️⃣ GEO detection (best effort)
   return detectCountry(req);
 }
