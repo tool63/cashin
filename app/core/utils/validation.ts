@@ -8,8 +8,10 @@ export function isSupportedCountry(code: string): boolean {
   // Must be exactly 2 letters
   if (!/^[a-z]{2}$/.test(normalized)) return false;
 
-  // Accept all valid ISO-like codes (no strict list)
-  // (This keeps it fully international)
-
   return true;
+}
+
+// ✅ Unified validator (use everywhere)
+export function isValidCountryCode(code: string): boolean {
+  return isSupportedCountry(code);
 }
