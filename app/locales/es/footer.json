@@ -1,0 +1,37 @@
+{
+  "hero": {
+    "title": "Gana dinero en línea",
+    "subtitle": "Completa tareas y gana recompensas",
+    "cta": "Empieza ahora"
+  },
+  "howItWorks": {
+    "title": "Cómo funciona",
+    "step1": "Regístrate",
+    "step2": "Completa tareas",
+    "step3": "Gana recompensas"
+  },
+  "features": {
+    "title": "Funciones",
+    "survey": "Encuestas",
+    "apps": "Instalar apps",
+    "games": "Jugar juegos",
+    "videos": "Ver videos"
+  },
+  "footer": {
+    "getStarted": "Comenzar",
+    "howItWorks": "Cómo funciona",
+    "startEarning": "Empieza a ganar",
+    "waysToEarn": "Formas de ganar",
+    "surveys": "Encuestas",
+    "appInstalls": "Instalación de apps",
+    "playGames": "Jugar juegos",
+    "watchVideos": "Ver videos",
+    "offerwall": "Offerwall",
+    "guides": "Guías",
+    "makeMoney": "Ganar dinero online",
+    "resources": "Recursos",
+    "blog": "Blog",
+    "help": "Centro de ayuda",
+    "copyright": "Todos los derechos reservados"
+  }
+}
