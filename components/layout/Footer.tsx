@@ -16,7 +16,7 @@ interface FooterProps {
 }
 
 export default function Footer({ className }: FooterProps) {
-  const { language, translations } = useLanguage();
+  const { language, getTranslation } = useLanguage();
   const { country } = useCountry();
 
   const isRtl = getTextDirection(language);
@@ -24,22 +24,14 @@ export default function Footer({ className }: FooterProps) {
   const [open, setOpen] = useState<Toggle>({});
 
   // ===============================
-  // ✅ FIXED: Access nested footer translations
+  // ✅ TRANSLATION HELPER FOR FOOTER NAMESPACE
   // ===============================
-  const t = useMemo(() => {
-    return (key: string, fallback: string): string => {
-      // Check if translations has a footer property (nested structure)
-      if (translations && typeof translations === 'object') {
-        // If translations has footer property (from layout)
-        if ('footer' in translations && translations.footer) {
-          return (translations.footer as Record<string, string>)?.[key] || fallback;
-        }
-        // If translations is flat (fallback)
-        return (translations as Record<string, string>)?.[key] || fallback;
-      }
-      return fallback;
-    };
-  }, [translations]);
+  const t = useCallback(
+    (key: string, fallback: string): string => {
+      return getTranslation("footer", key, fallback);
+    },
+    [getTranslation]
+  );
 
   const toggle = useCallback((k: string) => {
     setOpen((p) => ({ ...p, [k]: !p[k] }));
