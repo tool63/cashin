@@ -68,7 +68,7 @@ export default function LanguageSwitcher() {
       const newTranslations = await loadTranslations(lang);
       setTranslations(newTranslations);
 
-      // router.refresh(); // only if needed
+      // router.refresh(); // enable only if needed
     } catch (err) {
       console.error("Language switch failed:", err);
     } finally {
@@ -91,7 +91,7 @@ export default function LanguageSwitcher() {
       >
         <span>{language.toUpperCase()}</span>
 
-        {/* 🔽 Icon */}
+        {/* Chevron */}
         <span
           className={`text-xs transition-transform ${
             isOpen ? "rotate-180" : ""
@@ -104,7 +104,7 @@ export default function LanguageSwitcher() {
       {/* DROPDOWN */}
       {isOpen && (
         <div
-          className="absolute mt-2 min-w-[100px] rounded-md shadow z-50 p-1
+          className="absolute mt-2 min-w-[110px] rounded-md shadow z-50 p-1
           bg-white border border-gray-200
           dark:bg-gray-900 dark:border-gray-700"
         >
@@ -116,7 +116,7 @@ export default function LanguageSwitcher() {
                 key={code}
                 onClick={() => handleLanguageChange(code)}
                 disabled={isActive || isLoading}
-                className={`w-full text-left px-3 py-2 rounded transition
+                className={`w-full flex items-center justify-between px-3 py-2 rounded transition
                 ${
                   isActive
                     ? "bg-blue-50 text-blue-600 font-semibold dark:bg-blue-900/40 dark:text-blue-300"
@@ -125,7 +125,15 @@ export default function LanguageSwitcher() {
                 ${isLoading ? "opacity-50 cursor-not-allowed" : ""}
               `}
               >
-                {code.toUpperCase()}
+                {/* Language Code */}
+                <span>{code.toUpperCase()}</span>
+
+                {/* ✅ Selected Indicator */}
+                {isActive && (
+                  <span className="text-sm">
+                    ✓
+                  </span>
+                )}
               </button>
             );
           })}
