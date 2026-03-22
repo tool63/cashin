@@ -50,7 +50,7 @@ export function middleware(req: NextRequest) {
     !isSupportedCountry(first);
 
   // ===============================
-  // ❗ FIX: ROOT HANDLING
+  // ❗ FIX: ROOT HANDLING (Global Default)
   // ===============================
   if (pathname === "/") {
     const url = req.nextUrl.clone();
@@ -73,7 +73,7 @@ export function middleware(req: NextRequest) {
       return res;
     }
 
-    // Global → stay on root
+    // Global → stay on root (without country prefix)
     const res = NextResponse.next();
 
     res.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
