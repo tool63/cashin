@@ -24,11 +24,20 @@ export default function Footer({ className }: FooterProps) {
   const [open, setOpen] = useState<Toggle>({});
 
   // ===============================
-  // ✅ UPDATED TRANSLATION LOGIC
+  // ✅ FIXED: Access nested footer translations
   // ===============================
   const t = useMemo(() => {
     return (key: string, fallback: string): string => {
-      return translations?.footer?.[key] || fallback;
+      // Check if translations has a footer property (nested structure)
+      if (translations && typeof translations === 'object') {
+        // If translations has footer property (from layout)
+        if ('footer' in translations && translations.footer) {
+          return (translations.footer as Record<string, string>)?.[key] || fallback;
+        }
+        // If translations is flat (fallback)
+        return (translations as Record<string, string>)?.[key] || fallback;
+      }
+      return fallback;
     };
   }, [translations]);
 
