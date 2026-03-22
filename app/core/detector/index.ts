@@ -59,9 +59,14 @@ export function getGeoInfo(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
 
   const urlCountry = extractCountryFromPath(pathname);
+
+  // ✅ Resolve country (single source of truth)
   const country = resolveCountry(req, urlCountry);
 
-  // ✅ IMPORTANT: language now depends on country
+  // ===============================
+  // 🔥 IMPORTANT FIX
+  // ===============================
+  // Language should ALWAYS come AFTER country is resolved
   const language = getLanguage(req, country);
 
   return {
@@ -71,7 +76,7 @@ export function getGeoInfo(req: NextRequest) {
     // Clean path (without country prefix)
     cleanPath: getPathWithoutCountry(pathname),
 
-    // ✅ Only use prefix if NOT global
+    // Only use prefix if NOT global
     shouldUsePrefix: country !== DEFAULT_COUNTRY,
   };
 }
