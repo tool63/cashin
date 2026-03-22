@@ -68,7 +68,7 @@ export default function LanguageSwitcher() {
       const newTranslations = await loadTranslations(lang);
       setTranslations(newTranslations);
 
-      // router.refresh(); // optional
+      // router.refresh();
     } catch (err) {
       console.error("Language switch failed:", err);
     } finally {
@@ -78,6 +78,13 @@ export default function LanguageSwitcher() {
   };
 
   // ===============================
+  // 🎨 SHARED STYLE (MATCH BUTTON + DROPDOWN)
+  // ===============================
+  const baseBoxStyle =
+    "bg-white text-black border rounded-md shadow-sm " +
+    "dark:bg-gray-900 dark:text-white dark:border-gray-700";
+
+  // ===============================
   // 🎨 UI
   // ===============================
   return (
@@ -85,9 +92,7 @@ export default function LanguageSwitcher() {
       {/* BUTTON */}
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="flex items-center gap-1 px-3 py-2 border rounded-md font-semibold
-        bg-white text-black hover:bg-gray-50
-        dark:bg-gray-900 dark:text-white dark:border-gray-700 dark:hover:bg-gray-800"
+        className={`flex items-center gap-1 px-3 py-2 font-semibold hover:bg-gray-50 dark:hover:bg-gray-800 ${baseBoxStyle}`}
       >
         {language.toUpperCase()}
         <span className="text-xs">▼</span>
@@ -95,11 +100,7 @@ export default function LanguageSwitcher() {
 
       {/* DROPDOWN */}
       {isOpen && (
-        <div
-          className="absolute mt-2 min-w-[110px] z-50 rounded-md border shadow-sm p-1
-          bg-white text-black
-          dark:bg-gray-900 dark:text-white dark:border-gray-700"
-        >
+        <div className={`absolute mt-1 min-w-[110px] z-50 p-1 ${baseBoxStyle}`}>
           {LANGUAGE_OPTIONS.map((code) => {
             const isActive = code === language;
 
@@ -119,9 +120,7 @@ export default function LanguageSwitcher() {
                 <span>{code.toUpperCase()}</span>
 
                 {/* RIGHT SIDE SYMBOL */}
-                {isActive && (
-                  <span className="text-xs">✓</span>
-                )}
+                {isActive && <span className="text-xs">✓</span>}
               </button>
             );
           })}
