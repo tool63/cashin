@@ -24,11 +24,11 @@ export default function Footer({ className }: FooterProps) {
   const [open, setOpen] = useState<Toggle>({});
 
   // ===============================
-  // ✅ SAME TRANSLATION LOGIC AS HOMEPAGE
+  // ✅ UPDATED TRANSLATION LOGIC
   // ===============================
   const t = useMemo(() => {
     return (key: string, fallback: string): string => {
-      return translations?.[key] || fallback;
+      return translations?.footer?.[key] || fallback;
     };
   }, [translations]);
 
