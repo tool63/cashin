@@ -1,37 +1,16 @@
 {
-  "hero": {
-    "title": "Earn Money Online",
-    "subtitle": "Complete tasks, take surveys, and get rewarded",
-    "cta": "Start Earning"
-  },
-  "howItWorks": {
-    "title": "How it works",
-    "step1": "Sign up",
-    "step2": "Complete tasks",
-    "step3": "Earn rewards"
-  },
-  "features": {
-    "title": "Features",
-    "survey": "Surveys",
-    "apps": "App installs",
-    "games": "Play games",
-    "videos": "Watch videos"
-  },
-  "footer": {
-    "getStarted": "Get Started",
-    "howItWorks": "How it works",
-    "startEarning": "Start Earning",
-    "waysToEarn": "Ways to Earn",
-    "surveys": "Surveys",
-    "appInstalls": "App Installs",
-    "playGames": "Play Games",
-    "watchVideos": "Watch Videos",
-    "offerwall": "Offerwall",
-    "guides": "Guides",
-    "makeMoney": "Make Money Online",
-    "resources": "Resources",
-    "blog": "Blog",
-    "help": "Help Center",
-    "copyright": "All rights reserved"
-  }
+  "getStarted": "Get Started",
+  "howItWorks": "How it works",
+  "startEarning": "Start earning",
+  "waysToEarn": "Ways to Earn",
+  "surveys": "Surveys",
+  "appInstalls": "App Installs",
+  "playGames": "Play Games",
+  "watchVideos": "Watch videos",
+  "offerwall": "Offerwall",
+  "guides": "Guides",
+  "makeMoney": "Make money",
+  "blog": "Blog",
+  "help": "Help",
+  "copyright": "All rights reserved"
 }
