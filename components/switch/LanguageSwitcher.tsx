@@ -86,8 +86,8 @@ export default function LanguageSwitcher() {
       <button
         onClick={() => setIsOpen((prev) => !prev)}
         className="flex items-center gap-1 px-3 py-2 border rounded-md font-semibold
-                   bg-white text-black hover:bg-gray-50
-                   dark:bg-gray-900 dark:text-white dark:border-gray-700 dark:hover:bg-gray-800"
+        bg-white text-black hover:bg-gray-50
+        dark:bg-gray-900 dark:text-white dark:border-gray-700 dark:hover:bg-gray-800"
       >
         {language.toUpperCase()}
         <span className="text-xs">▼</span>
@@ -95,9 +95,11 @@ export default function LanguageSwitcher() {
 
       {/* DROPDOWN */}
       {isOpen && (
-        <div className="absolute mt-2 min-w-[90px] z-50 rounded-md border shadow p-1
-                        bg-white text-black
-                        dark:bg-gray-900 dark:text-white dark:border-gray-700">
+        <div
+          className="absolute mt-2 min-w-[110px] z-50 rounded-md border shadow-sm p-1
+          bg-white text-black
+          dark:bg-gray-900 dark:text-white dark:border-gray-700"
+        >
           {LANGUAGE_OPTIONS.map((code) => {
             const isActive = code === language;
 
@@ -106,17 +108,20 @@ export default function LanguageSwitcher() {
                 key={code}
                 onClick={() => handleLanguageChange(code)}
                 disabled={isActive || isLoading}
-                className={`w-full flex items-center justify-between px-3 py-2 text-sm transition
-                  ${
-                    isActive
-                      ? "bg-blue-50 dark:bg-gray-800 font-semibold cursor-default"
-                      : "hover:bg-gray-100 dark:hover:bg-gray-800"
-                  }
-                  ${isLoading ? "opacity-50 cursor-not-allowed" : ""}
-                `}
+                className={`flex items-center justify-between w-full px-3 py-2 text-sm rounded transition
+                ${
+                  isActive
+                    ? "bg-blue-50 dark:bg-gray-800 font-semibold"
+                    : "hover:bg-gray-100 dark:hover:bg-gray-800"
+                }
+                ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
               >
                 <span>{code.toUpperCase()}</span>
-                {isActive && <span>✓</span>}
+
+                {/* RIGHT SIDE SYMBOL */}
+                {isActive && (
+                  <span className="text-xs">✓</span>
+                )}
               </button>
             );
           })}
