@@ -2,13 +2,7 @@
 
 import { useState, ReactNode, useCallback, useMemo } from "react";
 import Link from "next/link";
-import {
-  ChevronDown,
-  Twitter,
-  Facebook,
-  Instagram,
-  Youtube,
-} from "lucide-react";
+import { ChevronDown, Twitter, Facebook, Instagram, Youtube } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
@@ -115,16 +109,14 @@ export default function Footer({ className }: FooterProps) {
 
           <Section id="earn" title={t("waysToEarn", "Ways to Earn")}>
             <A href="/surveys">{t("surveys", "Surveys")}</A>
-            <A href="/app-installs">{t("appInstalls", "App installs")}</A>
+            <A href="/app-installs">{t("appInstalls", "App Installs")}</A>
             <A href="/play-games">{t("playGames", "Play games")}</A>
             <A href="/watch-videos">{t("watchVideos", "Watch videos")}</A>
             <A href="/offerwall">{t("offerwall", "Offerwall")}</A>
           </Section>
 
           <Section id="guides" title={t("guides", "Guides")}>
-            <A href="/make-money-online">
-              {t("makeMoney", "Make money")}
-            </A>
+            <A href="/make-money-online">{t("makeMoney", "Make money")}</A>
           </Section>
 
           <Section id="resources" title={t("resources", "Resources")}>
