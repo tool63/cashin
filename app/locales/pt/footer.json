@@ -1,37 +1,16 @@
 {
-  "hero": {
-    "title": "Ganhe dinheiro online",
-    "subtitle": "Complete tarefas e ganhe recompensas",
-    "cta": "Começar"
-  },
-  "howItWorks": {
-    "title": "Como funciona",
-    "step1": "Cadastre-se",
-    "step2": "Complete tarefas",
-    "step3": "Ganhe recompensas"
-  },
-  "features": {
-    "title": "Recursos",
-    "survey": "Pesquisas",
-    "apps": "Instalar apps",
-    "games": "Jogar jogos",
-    "videos": "Assistir vídeos"
-  },
-  "footer": {
-    "getStarted": "Começar",
-    "howItWorks": "Como funciona",
-    "startEarning": "Começar a ganhar",
-    "waysToEarn": "Formas de ganhar",
-    "surveys": "Pesquisas",
-    "appInstalls": "Instalação de apps",
-    "playGames": "Jogar jogos",
-    "watchVideos": "Assistir vídeos",
-    "offerwall": "Offerwall",
-    "guides": "Guias",
-    "makeMoney": "Ganhar dinheiro online",
-    "resources": "Recursos",
-    "blog": "Blog",
-    "help": "Central de ajuda",
-    "copyright": "Todos os direitos reservados"
-  }
+  "getStarted": "Começar",
+  "howItWorks": "Como funciona",
+  "startEarning": "Comece a ganhar",
+  "waysToEarn": "Formas de ganhar",
+  "surveys": "Pesquisas",
+  "appInstalls": "Instalação de apps",
+  "playGames": "Jogar jogos",
+  "watchVideos": "Assistir vídeos",
+  "offerwall": "Muro de ofertas",
+  "guides": "Guias",
+  "makeMoney": "Ganhar dinheiro",
+  "blog": "Blog",
+  "help": "Ajuda",
+  "copyright": "Todos os direitos reservados"
 }
