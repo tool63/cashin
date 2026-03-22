@@ -1,14 +1,16 @@
 {
-  "welcome_message": "Willkommen bei PayUp! Verdiene Geld online.",
-  "homepage_description": "PayUp hilft Ihnen, sicher und schnell echtes Geld online zu verdienen.",
-  "cta_button": "Jetzt loslegen",
-  "feature_surveys": "Umfragen abschließen",
-  "feature_surveys_desc": "Beantworten Sie Umfragen und verdienen Sie sofort Punkte.",
-  "feature_apps": "Apps installieren",
-  "feature_apps_desc": "Laden Sie Apps herunter und verdienen Sie schnell Geld.",
-  "feature_games": "Spiele spielen",
-  "feature_games_desc": "Spielen Sie lustige Spiele und verdienen Sie Belohnungen.",
-  "stats_users": "Aktive Nutzer",
-  "stats_earned": "Insgesamt verdient",
-  "stats_countries": "Länder"
+  "getStarted": "Loslegen",
+  "howItWorks": "Wie es funktioniert",
+  "startEarning": "Jetzt verdienen",
+  "waysToEarn": "Verdienstmöglichkeiten",
+  "surveys": "Umfragen",
+  "appInstalls": "App-Installationen",
+  "playGames": "Spiele spielen",
+  "watchVideos": "Videos anschauen",
+  "offerwall": "Angebotswand",
+  "guides": "Anleitungen",
+  "makeMoney": "Geld verdienen",
+  "blog": "Blog",
+  "help": "Hilfe",
+  "copyright": "Alle Rechte vorbehalten"
 }
