@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
 import { loadTranslations } from "@/app/core/i18n/translations";
+
 import type { SupportedLanguage } from "@/app/core/constants";
 
 // ===============================
@@ -23,6 +24,7 @@ const LANGUAGE_OPTIONS: SupportedLanguage[] = [
 // ===============================
 export default function LanguageSwitcher() {
   const router = useRouter();
+
   const { language, setLanguage, setTranslations } = useLanguage();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -58,7 +60,7 @@ export default function LanguageSwitcher() {
 
     try {
       // ✅ 1. Update state + cookie
-      setLanguage(lang);
+      setLanguage(lang, true);  // Pass 'true' for `isUserOverride`
 
       // ✅ 2. Load translations
       const newTranslations = await loadTranslations(lang);
@@ -66,6 +68,7 @@ export default function LanguageSwitcher() {
 
       // ✅ 3. Refresh to sync server (VERY IMPORTANT)
       router.refresh();
+
     } catch (err) {
       console.error("Language switch failed:", err);
     } finally {
@@ -85,7 +88,6 @@ export default function LanguageSwitcher() {
         className="w-full flex items-center justify-between px-3 py-2 border rounded-md font-semibold
         bg-white text-black hover:bg-gray-50
         dark:bg-gray-900 dark:text-white dark:border-gray-700 dark:hover:bg-gray-800"
-        disabled={isLoading}
       >
         {language.toUpperCase()}
         <span className="text-xs ml-2">▼</span>
