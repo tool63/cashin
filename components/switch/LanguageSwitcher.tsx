@@ -63,15 +63,12 @@ export default function LanguageSwitcher() {
     setIsLoading(true);
 
     try {
-      // 1️⃣ Update state + cookie
       setLanguage(lang);
 
-      // 2️⃣ Load translations instantly
       const newTranslations = await loadTranslations(lang);
       setTranslations(newTranslations);
 
-      // 3️⃣ Optional (only if you rely on server components)
-      // router.refresh();
+      // router.refresh(); // only if needed
     } catch (err) {
       console.error("Language switch failed:", err);
     } finally {
@@ -85,15 +82,32 @@ export default function LanguageSwitcher() {
   // ===============================
   return (
     <div className="relative" ref={dropdownRef}>
+      {/* BUTTON */}
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="px-3 py-2 border rounded-md hover:bg-gray-50 font-semibold"
+        className="flex items-center gap-2 px-3 py-2 border rounded-md font-semibold
+        bg-white text-gray-900 border-gray-300 hover:bg-gray-100
+        dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700 dark:hover:bg-gray-800"
       >
-        {language.toUpperCase()}
+        <span>{language.toUpperCase()}</span>
+
+        {/* 🔽 Icon */}
+        <span
+          className={`text-xs transition-transform ${
+            isOpen ? "rotate-180" : ""
+          }`}
+        >
+          ▼
+        </span>
       </button>
 
+      {/* DROPDOWN */}
       {isOpen && (
-        <div className="absolute mt-2 bg-white border rounded shadow p-1 min-w-[100px] z-50">
+        <div
+          className="absolute mt-2 min-w-[100px] rounded-md shadow z-50 p-1
+          bg-white border border-gray-200
+          dark:bg-gray-900 dark:border-gray-700"
+        >
           {LANGUAGE_OPTIONS.map((code) => {
             const isActive = code === language;
 
@@ -102,11 +116,14 @@ export default function LanguageSwitcher() {
                 key={code}
                 onClick={() => handleLanguageChange(code)}
                 disabled={isActive || isLoading}
-                className={`w-full text-left px-3 py-2 transition ${
+                className={`w-full text-left px-3 py-2 rounded transition
+                ${
                   isActive
-                    ? "bg-blue-50 font-semibold cursor-default"
-                    : "hover:bg-gray-100"
-                } ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
+                    ? "bg-blue-50 text-blue-600 font-semibold dark:bg-blue-900/40 dark:text-blue-300"
+                    : "text-gray-800 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800"
+                }
+                ${isLoading ? "opacity-50 cursor-not-allowed" : ""}
+              `}
               >
                 {code.toUpperCase()}
               </button>
