@@ -15,6 +15,25 @@ interface FooterProps {
   className?: string;
 }
 
+// ✅ IMPORTANT: define type
+type FooterTranslations = {
+  getStarted: string;
+  howItWorks: string;
+  startEarning: string;
+  waysToEarn: string;
+  surveys: string;
+  appInstalls: string;
+  playGames: string;
+  watchVideos: string;
+  offerwall: string;
+  guides: string;
+  makeMoney: string;
+  resources: string;
+  blog: string;
+  help: string;
+  copyright: string;
+};
+
 export default function Footer({ className }: FooterProps) {
   const { language, translations } = useLanguage();
   const { country } = useCountry();
@@ -25,7 +44,8 @@ export default function Footer({ className }: FooterProps) {
   const [sub, setSub] = useState<Toggle>({});
   const [sub2, setSub2] = useState<Toggle>({});
 
-  const t = translations.footer || {}; // ✅ shortcut
+  // ✅ FIX: typed footer
+  const t = translations.footer as FooterTranslations;
 
   const toggle = useCallback((k: string) => {
     setOpen((p) => ({ ...p, [k]: !p[k] }));
@@ -39,9 +59,6 @@ export default function Footer({ className }: FooterProps) {
     setSub2((p) => ({ ...p, [k]: !p[k] }));
   }, []);
 
-  // ===============================
-  // 🔗 LINK COMPONENT
-  // ===============================
   const A = ({ href, children }: { href: string; children: ReactNode }) => (
     <Link
       href={`/${country}${href}`}
@@ -51,9 +68,6 @@ export default function Footer({ className }: FooterProps) {
     </Link>
   );
 
-  // ===============================
-  // SECTION
-  // ===============================
   const Section = ({
     id,
     title,
@@ -93,57 +107,6 @@ export default function Footer({ className }: FooterProps) {
     </div>
   );
 
-  // ===============================
-  // SUB
-  // ===============================
-  const Sub = ({
-    id,
-    title,
-    children,
-    level = 1,
-  }: {
-    id: string;
-    title: string;
-    children: ReactNode;
-    level?: number;
-  }) => {
-    const state = level === 1 ? sub[id] : sub2[id];
-
-    return (
-      <div className="mt-2" style={{ paddingLeft: `${level * 12}px` }}>
-        <button
-          onClick={() => (level === 1 ? toggleSub(id) : toggleSub2(id))}
-          className="w-full flex justify-between font-medium text-primary hover:opacity-80 transition-opacity"
-        >
-          {title}
-          <ChevronDown
-            size={14}
-            className={`transition-transform duration-200 ${
-              state ? "rotate-180" : ""
-            }`}
-          />
-        </button>
-
-        <AnimatePresence initial={false}>
-          {state && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.22 }}
-              className="mt-2 space-y-2 pl-3 overflow-hidden"
-            >
-              {children}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    );
-  };
-
-  // ===============================
-  // SOCIAL
-  // ===============================
   const socialLinks = [
     { href: "https://twitter.com/cashog", icon: Twitter, label: "Twitter" },
     { href: "https://facebook.com/cashog", icon: Facebook, label: "Facebook" },
@@ -188,7 +151,6 @@ export default function Footer({ className }: FooterProps) {
         </div>
       </div>
 
-      {/* SOCIAL */}
       <div className="border-t border-theme py-6 flex justify-center gap-6">
         {socialLinks.map((social) => (
           <a
