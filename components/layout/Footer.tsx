@@ -15,11 +15,8 @@ interface FooterProps {
   className?: string;
 }
 
-// ===============================
-// 🚀 FOOTER
-// ===============================
 export default function Footer({ className }: FooterProps) {
-  const { language } = useLanguage();
+  const { language, translations } = useLanguage();
   const { country } = useCountry();
 
   const isRtl = getTextDirection(language);
@@ -27,6 +24,8 @@ export default function Footer({ className }: FooterProps) {
   const [open, setOpen] = useState<Toggle>({});
   const [sub, setSub] = useState<Toggle>({});
   const [sub2, setSub2] = useState<Toggle>({});
+
+  const t = translations.footer || {}; // ✅ shortcut
 
   const toggle = useCallback((k: string) => {
     setOpen((p) => ({ ...p, [k]: !p[k] }));
@@ -41,11 +40,11 @@ export default function Footer({ className }: FooterProps) {
   }, []);
 
   // ===============================
-  // 🔗 LINK COMPONENT (MATCH HEADER)
+  // 🔗 LINK COMPONENT
   // ===============================
   const A = ({ href, children }: { href: string; children: ReactNode }) => (
     <Link
-      href={`/${country}${href}`} // ✅ SAME AS HEADER LOGIC
+      href={`/${country}${href}`}
       className="block text-primary hover:opacity-80 hover:translate-x-1 transition-all duration-150"
     >
       {children}
@@ -53,7 +52,7 @@ export default function Footer({ className }: FooterProps) {
   );
 
   // ===============================
-  // SECTION COMPONENT
+  // SECTION
   // ===============================
   const Section = ({
     id,
@@ -95,7 +94,7 @@ export default function Footer({ className }: FooterProps) {
   );
 
   // ===============================
-  // SUB COMPONENT
+  // SUB
   // ===============================
   const Sub = ({
     id,
@@ -164,26 +163,26 @@ export default function Footer({ className }: FooterProps) {
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
 
-          <Section id="start" title="Get Started">
-            <A href="/how-it-works">How it works</A>
-            <A href="/start-earning">Start Earning</A>
+          <Section id="start" title={t.getStarted}>
+            <A href="/how-it-works">{t.howItWorks}</A>
+            <A href="/start-earning">{t.startEarning}</A>
           </Section>
 
-          <Section id="earn" title="Ways to Earn">
-            <A href="/surveys">Surveys</A>
-            <A href="/app-installs">App Installs</A>
-            <A href="/play-games">Play Games</A>
-            <A href="/watch-videos">Watch Videos</A>
-            <A href="/offerwall">Offerwall</A>
+          <Section id="earn" title={t.waysToEarn}>
+            <A href="/surveys">{t.surveys}</A>
+            <A href="/app-installs">{t.appInstalls}</A>
+            <A href="/play-games">{t.playGames}</A>
+            <A href="/watch-videos">{t.watchVideos}</A>
+            <A href="/offerwall">{t.offerwall}</A>
           </Section>
 
-          <Section id="guides" title="Guides">
-            <A href="/make-money-online">Make Money Online</A>
+          <Section id="guides" title={t.guides}>
+            <A href="/make-money-online">{t.makeMoney}</A>
           </Section>
 
-          <Section id="resources" title="Resources">
-            <A href="/blog">Blog</A>
-            <A href="/help">Help Center</A>
+          <Section id="resources" title={t.resources}>
+            <A href="/blog">{t.blog}</A>
+            <A href="/help">{t.help}</A>
           </Section>
 
         </div>
@@ -206,7 +205,7 @@ export default function Footer({ className }: FooterProps) {
       </div>
 
       <div className="text-center text-sm text-primary pb-6">
-        © {new Date().getFullYear()} Cashog. All rights reserved.
+        © {new Date().getFullYear()} Cashog. {t.copyright}
       </div>
     </footer>
   );
