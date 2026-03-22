@@ -41,12 +41,15 @@ export function middleware(req: NextRequest) {
   const hasPrefix = isValidCountryCode(first || "");
 
   // ===============================
-  // 🌍 ROOT HANDLING
+  // ❗ FIX: ROOT HANDLING
   // ===============================
   if (pathname === "/") {
-    // Stay on root for global
-    if (geo.country === DEFAULT_COUNTRY) {
-      const res = NextResponse.next();
+    const url = req.nextUrl.clone();
+
+    // If NOT global → redirect to country
+    if (geo.country !== DEFAULT_COUNTRY) {
+      url.pathname = `/${geo.country}`;
+      const res = NextResponse.redirect(url);
 
       res.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
         path: "/",
@@ -61,24 +64,34 @@ export function middleware(req: NextRequest) {
       return res;
     }
 
-    // Redirect to country
-    const url = req.nextUrl.clone();
-    url.pathname = `/${geo.country}`;
+    // Global → stay on root
+    const res = NextResponse.next();
 
-    return NextResponse.redirect(url);
+    res.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
+      path: "/",
+      maxAge: 60 * 60 * 24 * 30,
+    });
+
+    res.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
+      path: "/",
+      maxAge: 60 * 60 * 24 * 365,
+    });
+
+    return res;
   }
 
   // ===============================
-  // ❌ Remove invalid country prefix
+  // ❌ REMOVE INVALID PREFIX
   // ===============================
   if (hasPrefix && !isSupportedCountry(first!)) {
     const url = req.nextUrl.clone();
     url.pathname = "/" + segments.slice(1).join("/");
+
     return NextResponse.redirect(url);
   }
 
   // ===============================
-  // ➕ Add prefix if missing (non-global)
+  // ➕ ADD PREFIX (ONLY IF NEEDED)
   // ===============================
   if (!hasPrefix && geo.country !== DEFAULT_COUNTRY) {
     const target = buildUrl(pathname, geo.country);
@@ -91,17 +104,17 @@ export function middleware(req: NextRequest) {
   }
 
   // ===============================
-  // 🍪 RESPONSE
+  // 🍪 RESPONSE (NORMAL REQUEST)
   // ===============================
   const res = NextResponse.next();
 
-  // ✅ Persist country (single source of truth)
+  // ✅ Persist country
   res.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
     path: "/",
     maxAge: 60 * 60 * 24 * 30,
   });
 
-  // ✅ Persist language (derived from country)
+  // ✅ Persist language
   res.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
     path: "/",
     maxAge: 60 * 60 * 24 * 365,
