@@ -4,7 +4,6 @@ import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
-import { loadTranslations } from "@/app/core/i18n/translations";
 
 import type { SupportedLanguage } from "@/app/core/constants";
 
@@ -19,13 +18,23 @@ const LANGUAGE_OPTIONS: SupportedLanguage[] = [
   "pt",
 ];
 
+// Language display names
+const LANGUAGE_NAMES: Record<SupportedLanguage, string> = {
+  en: "English",
+  fr: "Français",
+  de: "Deutsch",
+  es: "Español",
+  pt: "Português",
+  // Add more languages as needed
+};
+
 // ===============================
 // 🌐 COMPONENT
 // ===============================
 export default function LanguageSwitcher() {
   const router = useRouter();
 
-  const { language, setLanguage, setTranslations } = useLanguage();
+  const { language, setLanguage } = useLanguage();
 
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -59,14 +68,12 @@ export default function LanguageSwitcher() {
     setIsLoading(true);
 
     try {
-      // ✅ 1. Update state + cookie
-      setLanguage(lang, true);  // Pass 'true' for `isUserOverride`
+      // ✅ Update language in context and cookie
+      // Pass 'true' for `isUserOverride` to indicate user manually changed language
+      setLanguage(lang, true);
 
-      // ✅ 2. Load translations
-      const newTranslations = await loadTranslations(lang);
-      setTranslations(newTranslations);
-
-      // ✅ 3. Refresh to sync server (VERY IMPORTANT)
+      // ✅ Refresh to sync server and reload translations
+      // The LanguageProvider will automatically load new translations
       router.refresh();
 
     } catch (err) {
@@ -85,16 +92,18 @@ export default function LanguageSwitcher() {
       {/* BUTTON */}
       <button
         onClick={() => setIsOpen((prev) => !prev)}
+        disabled={isLoading}
         className="w-full flex items-center justify-between px-3 py-2 border rounded-md font-semibold
         bg-white text-black hover:bg-gray-50
-        dark:bg-gray-900 dark:text-white dark:border-gray-700 dark:hover:bg-gray-800"
+        dark:bg-gray-900 dark:text-white dark:border-gray-700 dark:hover:bg-gray-800
+        disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {language.toUpperCase()}
-        <span className="text-xs ml-2">▼</span>
+        <span>{LANGUAGE_NAMES[language] || language.toUpperCase()}</span>
+        <span className="text-xs ml-2">{isLoading ? "..." : "▼"}</span>
       </button>
 
       {/* DROPDOWN */}
-      {isOpen && (
+      {isOpen && !isLoading && (
         <div
           className="absolute mt-1 w-full z-50 border rounded-md shadow-sm p-1
           bg-white text-black
@@ -116,7 +125,7 @@ export default function LanguageSwitcher() {
                 }
                 ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
               >
-                <span>{code.toUpperCase()}</span>
+                <span>{LANGUAGE_NAMES[code] || code.toUpperCase()}</span>
 
                 {isActive && <span className="text-xs">✓</span>}
               </button>
