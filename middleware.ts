@@ -60,12 +60,12 @@ export function middleware(req: NextRequest) {
 
       res.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
         path: "/",
-        maxAge: 60 * 60 * 24 * 30,
+        maxAge: 60 * 60 * 24 * 30, // 30 days
       });
 
       res.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
         path: "/",
-        maxAge: 60 * 60 * 24 * 365,
+        maxAge: 60 * 60 * 24 * 365, // 1 year
       });
 
       return res;
@@ -76,12 +76,12 @@ export function middleware(req: NextRequest) {
 
     res.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
       path: "/",
-      maxAge: 60 * 60 * 24 * 30,
+      maxAge: 60 * 60 * 24 * 30, // 30 days
     });
 
     res.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
       path: "/",
-      maxAge: 60 * 60 * 24 * 365,
+      maxAge: 60 * 60 * 24 * 365, // 1 year
     });
 
     return res;
@@ -99,12 +99,12 @@ export function middleware(req: NextRequest) {
 
     response.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
       path: "/",
-      maxAge: 60 * 60 * 24 * 30,
+      maxAge: 60 * 60 * 24 * 30, // 30 days
     });
 
     response.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
       path: "/",
-      maxAge: 60 * 60 * 24 * 365,
+      maxAge: 60 * 60 * 24 * 365, // 1 year
     });
 
     return response;
@@ -123,12 +123,12 @@ export function middleware(req: NextRequest) {
 
       response.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
         path: "/",
-        maxAge: 60 * 60 * 24 * 30,
+        maxAge: 60 * 60 * 24 * 30, // 30 days
       });
 
       response.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
         path: "/",
-        maxAge: 60 * 60 * 24 * 365,
+        maxAge: 60 * 60 * 24 * 365, // 1 year
       });
 
       return response;
@@ -140,16 +140,16 @@ export function middleware(req: NextRequest) {
   // ===============================
   const res = NextResponse.next();
 
-  // ✅ Persist country
+  // ✅ Persist country from geo info
   res.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
     path: "/",
-    maxAge: 60 * 60 * 24 * 30,
+    maxAge: 60 * 60 * 24 * 30, // 30 days
   });
 
-  // ✅ Persist language
+  // ✅ Persist language from geo info
   res.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
     path: "/",
-    maxAge: 60 * 60 * 24 * 365,
+    maxAge: 60 * 60 * 24 * 365, // 1 year
   });
 
   return res;
