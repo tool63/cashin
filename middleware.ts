@@ -4,6 +4,7 @@ import type { NextRequest } from "next/server";
 import {
   getGeoInfo,
   buildUrl,
+  extractCountryFromPath,
 } from "@/app/core/detector/index";
 
 import {
@@ -38,7 +39,15 @@ export function middleware(req: NextRequest) {
   const segments = pathname.split("/").filter(Boolean);
   const first = segments[0]?.toLowerCase();
 
-  const hasPrefix = isValidCountryCode(first || "");
+  // Get the valid URL country using the same logic as getGeoInfo
+  const validUrlCountry = extractCountryFromPath(pathname);
+  const hasValidPrefix = validUrlCountry !== null;
+  
+  // Check if the first segment looks like a country code but is invalid
+  // This catches cases like "xyz" that pass isValidCountryCode but aren't real countries
+  const hasInvalidPrefix = first && 
+    isValidCountryCode(first) && 
+    !isSupportedCountry(first);
 
   // ===============================
   // ❗ FIX: ROOT HANDLING
@@ -83,23 +92,54 @@ export function middleware(req: NextRequest) {
   // ===============================
   // ❌ REMOVE INVALID PREFIX
   // ===============================
-  if (hasPrefix && !isSupportedCountry(first!)) {
+  if (hasInvalidPrefix) {
     const url = req.nextUrl.clone();
+    // Remove the invalid prefix and keep the rest of the path
     url.pathname = "/" + segments.slice(1).join("/");
-
-    return NextResponse.redirect(url);
+    
+    const response = NextResponse.redirect(url);
+    
+    // Preserve cookies when redirecting from invalid prefix
+    response.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
+      path: "/",
+      maxAge: 60 * 60 * 24 * 30,
+    });
+    
+    response.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
+      path: "/",
+      maxAge: 60 * 60 * 24 * 365,
+    });
+    
+    return response;
   }
 
   // ===============================
   // ➕ ADD PREFIX (ONLY IF NEEDED)
   // ===============================
-  if (!hasPrefix && geo.country !== DEFAULT_COUNTRY) {
+  // Only add prefix if:
+  // 1. There's no valid prefix already
+  // 2. The detected country is not "global"
+  // 3. We're not already on a path with a valid prefix
+  if (!hasValidPrefix && geo.country !== DEFAULT_COUNTRY) {
     const target = buildUrl(pathname, geo.country);
 
     if (target !== pathname) {
       const url = req.nextUrl.clone();
       url.pathname = target;
-      return NextResponse.redirect(url);
+      const response = NextResponse.redirect(url);
+      
+      // Preserve cookies when redirecting to add prefix
+      response.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
+        path: "/",
+        maxAge: 60 * 60 * 24 * 30,
+      });
+      
+      response.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
+        path: "/",
+        maxAge: 60 * 60 * 24 * 365,
+      });
+      
+      return response;
     }
   }
 
