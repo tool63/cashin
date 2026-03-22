@@ -13,14 +13,20 @@ import type { SupportedLanguage } from "@/app/core/types";
 import { loadTranslations } from "@/app/core/i18n/translations";
 
 // ===============================
-// 🌐 CONTEXT TYPE
+// 🌐 TYPES
 // ===============================
+type NestedTranslations = {
+  homepage?: Record<string, string>;
+  footer?: Record<string, string>;
+  [key: string]: Record<string, string> | undefined;
+};
+
 type LanguageContextType = {
   language: SupportedLanguage;
   setLanguage: (lang: SupportedLanguage, isUserOverride: boolean) => void;
-  translations: Record<string, string>;
-  setTranslations: (t: Record<string, string>) => void;
-  isUserOverridden: boolean; // Track if user has manually changed language
+  translations: NestedTranslations;
+  getTranslation: (namespace: string, key: string, fallback: string) => string;
+  isUserOverridden: boolean;
 };
 
 const LanguageContext = createContext<LanguageContextType | null>(null);
@@ -32,16 +38,25 @@ export function LanguageProvider({
   children,
   initialLanguage,
   translations: initialTranslations = {},
-  isOverridden = false, // Prop to track if the user has overridden the language
+  isOverridden = false,
 }: {
   children: ReactNode;
   initialLanguage: SupportedLanguage;
-  translations?: Record<string, string>;
+  translations?: NestedTranslations;
   isOverridden?: boolean;
 }) {
   const [language, setLanguageState] = useState<SupportedLanguage>(initialLanguage);
-  const [translations, setTranslations] = useState<Record<string, string>>(initialTranslations);
+  const [translations, setTranslations] = useState<NestedTranslations>(initialTranslations);
   const [isUserOverridden, setIsUserOverridden] = useState(isOverridden);
+
+  // Helper function to get a translation from a specific namespace
+  const getTranslation = (namespace: string, key: string, fallback: string): string => {
+    const namespaceTranslations = translations[namespace];
+    if (namespaceTranslations && typeof namespaceTranslations === 'object') {
+      return (namespaceTranslations as Record<string, string>)[key] || fallback;
+    }
+    return fallback;
+  };
 
   // Load translations when language changes
   useEffect(() => {
@@ -73,13 +88,11 @@ export function LanguageProvider({
     setIsUserOverridden(isUserOverride);
 
     if (typeof document !== "undefined") {
-      document.cookie = `${COOKIE_KEYS.LANGUAGE}=${lang}; path=/; max-age=31536000`; // 1 year cookie
+      document.cookie = `${COOKIE_KEYS.LANGUAGE}=${lang}; path=/; max-age=31536000`;
 
-      // If it's a user override, track it separately
       if (isUserOverride) {
         document.cookie = `${COOKIE_KEYS.USER_LANGUAGE_OVERRIDE}=${lang}; path=/; max-age=31536000`;
       } else {
-        // If it's country-based language, clear override
         document.cookie = `${COOKIE_KEYS.USER_LANGUAGE_OVERRIDE}=; path=/; max-age=0`;
       }
     }
@@ -91,7 +104,7 @@ export function LanguageProvider({
         language,
         setLanguage,
         translations,
-        setTranslations,
+        getTranslation,
         isUserOverridden,
       }}
     >
