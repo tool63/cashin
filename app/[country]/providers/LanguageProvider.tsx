@@ -65,14 +65,22 @@ export function LanguageProvider({
     const loadLangTranslations = async () => {
       try {
         const newTranslations = await loadTranslations(language);
-        // Ensure we're setting the correct type
+        
         if (mounted && newTranslations) {
-          // If loadTranslations returns a flat object, wrap it in homepage namespace
-          // This handles backward compatibility
-          const formattedTranslations: NestedTranslations = 
-            'homepage' in newTranslations || 'footer' in newTranslations
-              ? newTranslations as NestedTranslations
-              : { homepage: newTranslations as Record<string, string> };
+          // Check if newTranslations is already nested (has homepage or footer)
+          const isNested = 'homepage' in newTranslations || 'footer' in newTranslations;
+          
+          let formattedTranslations: NestedTranslations;
+          
+          if (isNested) {
+            // Use type assertion with unknown first to avoid TypeScript error
+            formattedTranslations = newTranslations as unknown as NestedTranslations;
+          } else {
+            // Wrap flat translations in homepage namespace
+            formattedTranslations = { 
+              homepage: newTranslations as Record<string, string> 
+            };
+          }
           
           setTranslations(formattedTranslations);
         }
@@ -128,7 +136,7 @@ export function useLanguage() {
   const context = useContext(LanguageContext);
 
   if (!context) {
-    throw new Error("useLanguage must be used within LanguageProvider");
+    throw new Error("useLanguage must be used within CountryProvider");
   }
 
   return context;
