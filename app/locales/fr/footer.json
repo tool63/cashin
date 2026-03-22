@@ -1,37 +1,16 @@
 {
-  "hero": {
-    "title": "Gagnez de l'argent en ligne",
-    "subtitle": "Effectuez des tâches et gagnez des récompenses",
-    "cta": "Commencer"
-  },
-  "howItWorks": {
-    "title": "Comment ça marche",
-    "step1": "S'inscrire",
-    "step2": "Effectuer des tâches",
-    "step3": "Gagner des récompenses"
-  },
-  "features": {
-    "title": "Fonctionnalités",
-    "survey": "Sondages",
-    "apps": "Installer des apps",
-    "games": "Jouer",
-    "videos": "Regarder des vidéos"
-  },
-  "footer": {
-    "getStarted": "Commencer",
-    "howItWorks": "Comment ça marche",
-    "startEarning": "Commencer à gagner",
-    "waysToEarn": "Façons de gagner",
-    "surveys": "Sondages",
-    "appInstalls": "Installation d'apps",
-    "playGames": "Jouer",
-    "watchVideos": "Regarder des vidéos",
-    "offerwall": "Offerwall",
-    "guides": "Guides",
-    "makeMoney": "Gagner de l'argent en ligne",
-    "resources": "Ressources",
-    "blog": "Blog",
-    "help": "Centre d'aide",
-    "copyright": "Tous droits réservés"
-  }
+  "getStarted": "Commencer",
+  "howItWorks": "Comment ça marche",
+  "startEarning": "Commencez à gagner",
+  "waysToEarn": "Façons de gagner",
+  "surveys": "Enquêtes",
+  "appInstalls": "Installations d'apps",
+  "playGames": "Jouer à des jeux",
+  "watchVideos": "Regarder des vidéos",
+  "offerwall": "Mur d'offres",
+  "guides": "Guides",
+  "makeMoney": "Gagner de l'argent",
+  "blog": "Blog",
+  "help": "Aide",
+  "copyright": "Tous droits réservés"
 }
