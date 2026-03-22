@@ -9,34 +9,13 @@ import { normalizeLanguage } from "../utils/language";
 import type { SupportedLanguage } from "../types";
 
 // ===============================
-// 🌐 Parse Accept-Language header (FIXED)
+// 🌐 Parse Accept-Language header (SIMPLIFIED & SAFE)
 // ===============================
 function parseAcceptLanguage(header: string): SupportedLanguage {
-  try {
-    const langs = header
-      .split(",")
-      .map((item) => {
-        const [lang, q] = item.split(";q=");
-        return {
-          lang: lang.trim(),
-          q: q ? parseFloat(q) : 1,
-        };
-      })
-      .sort((a, b) => b.q - a.q);
+  const lang = header.split(",")[0]?.split("-")[0]?.toLowerCase();
 
-    // ✅ Return first supported language
-    for (const l of langs) {
-      const normalized = normalizeLanguage(l.lang);
-      if (
-        (SUPPORTED_LANGUAGES as readonly string[]).includes(
-          normalized
-        )
-      ) {
-        return normalized;
-      }
-    }
-  } catch {
-    // fail silently
+  if ((SUPPORTED_LANGUAGES as readonly string[]).includes(lang)) {
+    return lang as SupportedLanguage;
   }
 
   return DEFAULT_LANGUAGE;
@@ -52,15 +31,16 @@ export function getLanguage(
   const normalizedCountry = country?.toLowerCase() || "global";
 
   // ===============================
-  // 1️⃣ USER PREFERENCE (HIGHEST PRIORITY)
+  // 1️⃣ USER PREFERENCE (STRICT PRIORITY)
   // ===============================
   const cookie = req.cookies.get(COOKIE_KEYS.LANGUAGE)?.value;
+
   if (cookie) {
     return normalizeLanguage(cookie);
   }
 
   // ===============================
-  // 2️⃣ COUNTRY → LANGUAGE
+  // 2️⃣ COUNTRY → LANGUAGE (ONLY IF NO USER PREF)
   // ===============================
   const countryLanguage =
     COUNTRY_LANGUAGE_MAP[normalizedCountry];
@@ -73,6 +53,7 @@ export function getLanguage(
   // 3️⃣ BROWSER HEADER
   // ===============================
   const header = req.headers.get("accept-language");
+
   if (header) {
     return parseAcceptLanguage(header);
   }
