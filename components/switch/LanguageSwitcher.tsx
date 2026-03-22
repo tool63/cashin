@@ -59,12 +59,16 @@ export default function LanguageSwitcher() {
     setIsLoading(true);
 
     try {
+      // ✅ 1. Update state + cookie
       setLanguage(lang);
 
+      // ✅ 2. Load translations
       const newTranslations = await loadTranslations(lang);
       setTranslations(newTranslations);
 
-      // router.refresh();
+      // ✅ 3. Refresh to sync server (VERY IMPORTANT)
+      router.refresh();
+
     } catch (err) {
       console.error("Language switch failed:", err);
     } finally {
