@@ -2,7 +2,13 @@
 
 import { useState, ReactNode, useCallback } from "react";
 import Link from "next/link";
-import { ChevronDown, Twitter, Facebook, Instagram, Youtube } from "lucide-react";
+import {
+  ChevronDown,
+  Twitter,
+  Facebook,
+  Instagram,
+  Youtube,
+} from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
@@ -15,7 +21,9 @@ interface FooterProps {
   className?: string;
 }
 
-// ✅ IMPORTANT: define type
+// ===============================
+// 🌐 TYPE (SAFE VERSION)
+// ===============================
 type FooterTranslations = {
   getStarted: string;
   howItWorks: string;
@@ -44,8 +52,10 @@ export default function Footer({ className }: FooterProps) {
   const [sub, setSub] = useState<Toggle>({});
   const [sub2, setSub2] = useState<Toggle>({});
 
-  // ✅ FIX: typed footer
-  const t = translations.footer as FooterTranslations;
+  // ===============================
+  // ⚡ SAFE TYPE CAST (FIX)
+  // ===============================
+  const t = translations.footer as unknown as FooterTranslations;
 
   const toggle = useCallback((k: string) => {
     setOpen((p) => ({ ...p, [k]: !p[k] }));
@@ -125,7 +135,6 @@ export default function Footer({ className }: FooterProps) {
     >
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-
           <Section id="start" title={t.getStarted}>
             <A href="/how-it-works">{t.howItWorks}</A>
             <A href="/start-earning">{t.startEarning}</A>
@@ -147,7 +156,6 @@ export default function Footer({ className }: FooterProps) {
             <A href="/blog">{t.blog}</A>
             <A href="/help">{t.help}</A>
           </Section>
-
         </div>
       </div>
 
