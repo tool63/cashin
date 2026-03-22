@@ -34,7 +34,6 @@ async function loadAllTranslations(lang: SupportedLanguage) {
       footer: footer.default || {},
     };
   } catch {
-    // fallback to default language
     const [homepage, footer] = await Promise.all([
       import(`@/app/locales/${DEFAULT_LANGUAGE}/homepage.json`),
       import(`@/app/locales/${DEFAULT_LANGUAGE}/footer.json`),
@@ -48,7 +47,7 @@ async function loadAllTranslations(lang: SupportedLanguage) {
 }
 
 // ===============================
-// 🌐 GET COUNTRY (clean & safe)
+// 🌍 GET COUNTRY
 // ===============================
 function getInitialCountry(paramsCountry: string): string {
   const normalized = paramsCountry.toLowerCase();
@@ -73,7 +72,7 @@ function getInitialCountry(paramsCountry: string): string {
 }
 
 // ===============================
-// 🌐 GET LANGUAGE (TRUST COOKIE ONLY)
+// 🌐 GET LANGUAGE (COOKIE ONLY)
 // ===============================
 function getInitialLanguage(): SupportedLanguage {
   const cookieStore = cookies();
@@ -90,7 +89,6 @@ function getInitialLanguage(): SupportedLanguage {
     }
   }
 
-  // ✅ STRICT fallback (NO header re-check here)
   return DEFAULT_LANGUAGE;
 }
 
@@ -118,7 +116,6 @@ export default async function CountryLayout({
   const htmlLang = `${language}-${country.toUpperCase()}`;
   const dir = getDirection(language);
 
-  // ✅ Load translations safely
   const translations = await loadAllTranslations(language);
 
   return (
@@ -128,7 +125,6 @@ export default async function CountryLayout({
           <CountryProvider initialCountry={country}>
             <LanguageProvider
               initialLanguage={language}
-              initialCountry={country}
               translations={translations}
             >
               <Header />
