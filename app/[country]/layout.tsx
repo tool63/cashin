@@ -59,59 +59,46 @@ function getInitialCountry(paramsCountry: string): string {
 
   const cookieStore = cookies();
 
-  // Check if the country is forcibly set
   const forced = cookieStore.get(COOKIE_KEYS.FORCED_COUNTRY)?.value;
   if (forced && isSupportedCountry(forced)) {
     return forced.toLowerCase();
   }
 
-  // Check if the user has a saved country preference
   const userCountry = cookieStore.get(COOKIE_KEYS.COUNTRY)?.value;
   if (userCountry && isSupportedCountry(userCountry)) {
     return userCountry.toLowerCase();
   }
 
-  // Return the normalized country from the URL if no cookie or forced country is found
   return normalized;
 }
 
 // ===============================
-// 🌐 GET LANGUAGE (COUNTRY-BASED OR COOKIE)
+// 🌐 GET LANGUAGE (COOKIE ONLY)
 // ===============================
-function getInitialLanguage(country: string): SupportedLanguage {
+function getInitialLanguage(): SupportedLanguage {
   const cookieStore = cookies();
-  
-  // Check if user has a language override
-  const userOverride = cookieStore.get(COOKIE_KEYS.USER_LANGUAGE_OVERRIDE)?.value;
-  if (userOverride) {
-    const normalizedOverride = userOverride.toLowerCase();
-    if (SUPPORTED_LANGUAGES.includes(normalizedOverride as SupportedLanguage)) {
-      return normalizedOverride as SupportedLanguage;
-    }
-  }
 
-  // Get language from country mapping if no user override
-  const countryLanguage = COUNTRY_LANGUAGE_MAP[country] || DEFAULT_LANGUAGE;
-
-  // Fallback to language cookie if not overridden
   const langCookie = cookieStore.get(COOKIE_KEYS.LANGUAGE)?.value;
+
   if (langCookie) {
     const normalized = langCookie.toLowerCase().split("-")[0];
-    if (SUPPORTED_LANGUAGES.includes(normalized as SupportedLanguage)) {
+
+    if (
+      SUPPORTED_LANGUAGES.includes(normalized as SupportedLanguage)
+    ) {
       return normalized as SupportedLanguage;
     }
   }
 
-  // Return the country-based language or default
-  return countryLanguage;
+  return DEFAULT_LANGUAGE;
 }
 
 // ===============================
 // 🌐 DIRECTION
 // ===============================
 function getDirection(lang: SupportedLanguage): "ltr" | "rtl" {
-  const rtlLanguages = ["ar", "he", "ur", "fa"];
-  return rtlLanguages.includes(lang) ? "rtl" : "ltr";
+  const rtl = ["ar", "he", "ur", "fa"];
+  return rtl.includes(lang) ? "rtl" : "ltr";
 }
 
 // ===============================
@@ -125,12 +112,11 @@ export default async function CountryLayout({
   params: { country: string };
 }) {
   const country = getInitialCountry(params.country);
-  const language = getInitialLanguage(country);
+  const language = getInitialLanguage();
 
   const htmlLang = `${language}-${country.toUpperCase()}`;
   const dir = getDirection(language);
 
-  // Load translations for the selected language
   const translations = await loadAllTranslations(language);
 
   return (
