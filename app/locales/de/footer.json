@@ -1,0 +1,37 @@
+{
+  "hero": {
+    "title": "Online Geld verdienen",
+    "subtitle": "Erledige Aufgaben und erhalte Belohnungen",
+    "cta": "Jetzt starten"
+  },
+  "howItWorks": {
+    "title": "So funktioniert es",
+    "step1": "Registrieren",
+    "step2": "Aufgaben erledigen",
+    "step3": "Belohnungen verdienen"
+  },
+  "features": {
+    "title": "Funktionen",
+    "survey": "Umfragen",
+    "apps": "Apps installieren",
+    "games": "Spiele spielen",
+    "videos": "Videos ansehen"
+  },
+  "footer": {
+    "getStarted": "Loslegen",
+    "howItWorks": "So funktioniert es",
+    "startEarning": "Jetzt verdienen",
+    "waysToEarn": "Verdienstmöglichkeiten",
+    "surveys": "Umfragen",
+    "appInstalls": "App-Installationen",
+    "playGames": "Spiele spielen",
+    "watchVideos": "Videos ansehen",
+    "offerwall": "Offerwall",
+    "guides": "Anleitungen",
+    "makeMoney": "Online Geld verdienen",
+    "resources": "Ressourcen",
+    "blog": "Blog",
+    "help": "Hilfezentrum",
+    "copyright": "Alle Rechte vorbehalten"
+  }
+}
