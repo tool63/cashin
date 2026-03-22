@@ -22,7 +22,7 @@ interface FooterProps {
 }
 
 // ===============================
-// 🌐 TYPE (SAFE VERSION)
+// 🌐 TYPE
 // ===============================
 type FooterTranslations = {
   getStarted: string;
@@ -53,10 +53,13 @@ export default function Footer({ className }: FooterProps) {
   const [sub2, setSub2] = useState<Toggle>({});
 
   // ===============================
-  // ⚡ SAFE TYPE CAST (FIX)
+  // ⚡ SAFE ACCESS (FIX)
   // ===============================
-  const t = translations.footer as unknown as FooterTranslations;
+  const t = (translations.footer || {}) as Partial<FooterTranslations>;
 
+  // ===============================
+  // 🔄 TOGGLES
+  // ===============================
   const toggle = useCallback((k: string) => {
     setOpen((p) => ({ ...p, [k]: !p[k] }));
   }, []);
@@ -135,26 +138,26 @@ export default function Footer({ className }: FooterProps) {
     >
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-          <Section id="start" title={t.getStarted}>
-            <A href="/how-it-works">{t.howItWorks}</A>
-            <A href="/start-earning">{t.startEarning}</A>
+          <Section id="start" title={t.getStarted || "Get Started"}>
+            <A href="/how-it-works">{t.howItWorks || "How it works"}</A>
+            <A href="/start-earning">{t.startEarning || "Start earning"}</A>
           </Section>
 
-          <Section id="earn" title={t.waysToEarn}>
-            <A href="/surveys">{t.surveys}</A>
-            <A href="/app-installs">{t.appInstalls}</A>
-            <A href="/play-games">{t.playGames}</A>
-            <A href="/watch-videos">{t.watchVideos}</A>
-            <A href="/offerwall">{t.offerwall}</A>
+          <Section id="earn" title={t.waysToEarn || "Ways to Earn"}>
+            <A href="/surveys">{t.surveys || "Surveys"}</A>
+            <A href="/app-installs">{t.appInstalls || "App installs"}</A>
+            <A href="/play-games">{t.playGames || "Play games"}</A>
+            <A href="/watch-videos">{t.watchVideos || "Watch videos"}</A>
+            <A href="/offerwall">{t.offerwall || "Offerwall"}</A>
           </Section>
 
-          <Section id="guides" title={t.guides}>
-            <A href="/make-money-online">{t.makeMoney}</A>
+          <Section id="guides" title={t.guides || "Guides"}>
+            <A href="/make-money-online">{t.makeMoney || "Make money"}</A>
           </Section>
 
-          <Section id="resources" title={t.resources}>
-            <A href="/blog">{t.blog}</A>
-            <A href="/help">{t.help}</A>
+          <Section id="resources" title={t.resources || "Resources"}>
+            <A href="/blog">{t.blog || "Blog"}</A>
+            <A href="/help">{t.help || "Help"}</A>
           </Section>
         </div>
       </div>
@@ -175,7 +178,7 @@ export default function Footer({ className }: FooterProps) {
       </div>
 
       <div className="text-center text-sm text-primary pb-6">
-        © {new Date().getFullYear()} Cashog. {t.copyright}
+        © {new Date().getFullYear()} Cashog. {t.copyright || "All rights reserved"}
       </div>
     </footer>
   );
