@@ -25,11 +25,7 @@ const LANGUAGE_OPTIONS: SupportedLanguage[] = [
 export default function LanguageSwitcher() {
   const router = useRouter();
 
-  const {
-    language,
-    setLanguage,
-    setTranslations,
-  } = useLanguage();
+  const { language, setLanguage, setTranslations } = useLanguage();
 
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -78,29 +74,28 @@ export default function LanguageSwitcher() {
   };
 
   // ===============================
-  // 🎨 SHARED STYLE (MATCH BUTTON + DROPDOWN)
-  // ===============================
-  const baseBoxStyle =
-    "bg-white text-black border rounded-md shadow-sm " +
-    "dark:bg-gray-900 dark:text-white dark:border-gray-700";
-
-  // ===============================
   // 🎨 UI
   // ===============================
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div ref={dropdownRef} className="relative inline-block">
       {/* BUTTON */}
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className={`flex items-center gap-1 px-3 py-2 font-semibold hover:bg-gray-50 dark:hover:bg-gray-800 ${baseBoxStyle}`}
+        className="w-full flex items-center justify-between px-3 py-2 border rounded-md font-semibold
+        bg-white text-black hover:bg-gray-50
+        dark:bg-gray-900 dark:text-white dark:border-gray-700 dark:hover:bg-gray-800"
       >
         {language.toUpperCase()}
-        <span className="text-xs">▼</span>
+        <span className="text-xs ml-2">▼</span>
       </button>
 
       {/* DROPDOWN */}
       {isOpen && (
-        <div className={`absolute mt-1 min-w-[110px] z-50 p-1 ${baseBoxStyle}`}>
+        <div
+          className="absolute mt-1 w-full z-50 border rounded-md shadow-sm p-1
+          bg-white text-black
+          dark:bg-gray-900 dark:text-white dark:border-gray-700"
+        >
           {LANGUAGE_OPTIONS.map((code) => {
             const isActive = code === language;
 
@@ -119,7 +114,6 @@ export default function LanguageSwitcher() {
               >
                 <span>{code.toUpperCase()}</span>
 
-                {/* RIGHT SIDE SYMBOL */}
                 {isActive && <span className="text-xs">✓</span>}
               </button>
             );
