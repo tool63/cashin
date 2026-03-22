@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, ReactNode, useCallback } from "react";
+import { useState, ReactNode, useCallback, useMemo } from "react";
 import Link from "next/link";
 import {
   ChevronDown,
@@ -21,27 +21,6 @@ interface FooterProps {
   className?: string;
 }
 
-// ===============================
-// 🌐 TYPE
-// ===============================
-type FooterTranslations = {
-  getStarted: string;
-  howItWorks: string;
-  startEarning: string;
-  waysToEarn: string;
-  surveys: string;
-  appInstalls: string;
-  playGames: string;
-  watchVideos: string;
-  offerwall: string;
-  guides: string;
-  makeMoney: string;
-  resources: string;
-  blog: string;
-  help: string;
-  copyright: string;
-};
-
 export default function Footer({ className }: FooterProps) {
   const { language, translations } = useLanguage();
   const { country } = useCountry();
@@ -49,27 +28,18 @@ export default function Footer({ className }: FooterProps) {
   const isRtl = getTextDirection(language);
 
   const [open, setOpen] = useState<Toggle>({});
-  const [sub, setSub] = useState<Toggle>({});
-  const [sub2, setSub2] = useState<Toggle>({});
 
   // ===============================
-  // ⚡ SAFE ACCESS (FIX)
+  // ✅ SAME TRANSLATION LOGIC AS HOMEPAGE
   // ===============================
-  const t = (translations.footer || {}) as Partial<FooterTranslations>;
+  const t = useMemo(() => {
+    return (key: string, fallback: string): string => {
+      return translations?.[key] || fallback;
+    };
+  }, [translations]);
 
-  // ===============================
-  // 🔄 TOGGLES
-  // ===============================
   const toggle = useCallback((k: string) => {
     setOpen((p) => ({ ...p, [k]: !p[k] }));
-  }, []);
-
-  const toggleSub = useCallback((k: string) => {
-    setSub((p) => ({ ...p, [k]: !p[k] }));
-  }, []);
-
-  const toggleSub2 = useCallback((k: string) => {
-    setSub2((p) => ({ ...p, [k]: !p[k] }));
   }, []);
 
   const A = ({ href, children }: { href: string; children: ReactNode }) => (
@@ -138,26 +108,28 @@ export default function Footer({ className }: FooterProps) {
     >
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-          <Section id="start" title={t.getStarted || "Get Started"}>
-            <A href="/how-it-works">{t.howItWorks || "How it works"}</A>
-            <A href="/start-earning">{t.startEarning || "Start earning"}</A>
+          <Section id="start" title={t("getStarted", "Get Started")}>
+            <A href="/how-it-works">{t("howItWorks", "How it works")}</A>
+            <A href="/start-earning">{t("startEarning", "Start earning")}</A>
           </Section>
 
-          <Section id="earn" title={t.waysToEarn || "Ways to Earn"}>
-            <A href="/surveys">{t.surveys || "Surveys"}</A>
-            <A href="/app-installs">{t.appInstalls || "App installs"}</A>
-            <A href="/play-games">{t.playGames || "Play games"}</A>
-            <A href="/watch-videos">{t.watchVideos || "Watch videos"}</A>
-            <A href="/offerwall">{t.offerwall || "Offerwall"}</A>
+          <Section id="earn" title={t("waysToEarn", "Ways to Earn")}>
+            <A href="/surveys">{t("surveys", "Surveys")}</A>
+            <A href="/app-installs">{t("appInstalls", "App installs")}</A>
+            <A href="/play-games">{t("playGames", "Play games")}</A>
+            <A href="/watch-videos">{t("watchVideos", "Watch videos")}</A>
+            <A href="/offerwall">{t("offerwall", "Offerwall")}</A>
           </Section>
 
-          <Section id="guides" title={t.guides || "Guides"}>
-            <A href="/make-money-online">{t.makeMoney || "Make money"}</A>
+          <Section id="guides" title={t("guides", "Guides")}>
+            <A href="/make-money-online">
+              {t("makeMoney", "Make money")}
+            </A>
           </Section>
 
-          <Section id="resources" title={t.resources || "Resources"}>
-            <A href="/blog">{t.blog || "Blog"}</A>
-            <A href="/help">{t.help || "Help"}</A>
+          <Section id="resources" title={t("resources", "Resources")}>
+            <A href="/blog">{t("blog", "Blog")}</A>
+            <A href="/help">{t("help", "Help")}</A>
           </Section>
         </div>
       </div>
@@ -170,7 +142,6 @@ export default function Footer({ className }: FooterProps) {
             target="_blank"
             rel="noopener noreferrer"
             className="hover:opacity-80 transition-opacity hover:scale-110 transform duration-200"
-            aria-label={social.label}
           >
             <social.icon size={20} />
           </a>
@@ -178,7 +149,8 @@ export default function Footer({ className }: FooterProps) {
       </div>
 
       <div className="text-center text-sm text-primary pb-6">
-        © {new Date().getFullYear()} Cashog. {t.copyright || "All rights reserved"}
+        © {new Date().getFullYear()} Cashog.{" "}
+        {t("copyright", "All rights reserved")}
       </div>
     </footer>
   );
