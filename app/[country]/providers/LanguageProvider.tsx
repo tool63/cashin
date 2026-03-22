@@ -53,7 +53,7 @@ export function LanguageProvider({
   const getTranslation = (namespace: string, key: string, fallback: string): string => {
     const namespaceTranslations = translations[namespace];
     if (namespaceTranslations && typeof namespaceTranslations === 'object') {
-      return (namespaceTranslations as Record<string, string>)[key] || fallback;
+      return namespaceTranslations[key] || fallback;
     }
     return fallback;
   };
@@ -65,8 +65,16 @@ export function LanguageProvider({
     const loadLangTranslations = async () => {
       try {
         const newTranslations = await loadTranslations(language);
-        if (mounted) {
-          setTranslations(newTranslations);
+        // Ensure we're setting the correct type
+        if (mounted && newTranslations) {
+          // If loadTranslations returns a flat object, wrap it in homepage namespace
+          // This handles backward compatibility
+          const formattedTranslations: NestedTranslations = 
+            'homepage' in newTranslations || 'footer' in newTranslations
+              ? newTranslations as NestedTranslations
+              : { homepage: newTranslations as Record<string, string> };
+          
+          setTranslations(formattedTranslations);
         }
       } catch (error) {
         console.error("Failed to load translations:", error);
