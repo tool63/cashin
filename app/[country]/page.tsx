@@ -26,17 +26,17 @@ function FeatureCard({
 // 🚀 PAGE
 // ===============================
 export default function CountryHomePage() {
-  const { language, translations } = useLanguage();
+  const { language, getTranslation } = useLanguage();
   const { country } = useCountry();
 
   // ===============================
-  // 📝 TRANSLATION HELPER (OPTIMIZED)
+  // 📝 TRANSLATION HELPER FOR HOMEPAGE NAMESPACE
   // ===============================
   const t = useMemo(() => {
     return (key: string, fallback: string): string => {
-      return translations?.[key] || fallback;
+      return getTranslation("homepage", key, fallback);
     };
-  }, [translations]);
+  }, [getTranslation]);
 
   return (
     <section className="max-w-6xl mx-auto px-4 py-16">
