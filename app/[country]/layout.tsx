@@ -14,38 +14,11 @@ import {
   COOKIE_KEYS,
   DEFAULT_LANGUAGE,
   SUPPORTED_LANGUAGES,
-  COUNTRY_LANGUAGE_MAP,
 } from "@/app/core/constants";
 
 import { isSupportedCountry } from "@/app/core/utils/validation";
 import type { SupportedLanguage } from "@/app/core/types";
-
-// ===============================
-// 🌍 LOAD TRANSLATIONS
-// ===============================
-async function loadAllTranslations(lang: SupportedLanguage) {
-  try {
-    const [homepage, footer] = await Promise.all([
-      import(`@/app/locales/${lang}/homepage.json`),
-      import(`@/app/locales/${lang}/footer.json`),
-    ]);
-
-    return {
-      homepage: homepage.default || {},
-      footer: footer.default || {},
-    };
-  } catch {
-    const [homepage, footer] = await Promise.all([
-      import(`@/app/locales/${DEFAULT_LANGUAGE}/homepage.json`),
-      import(`@/app/locales/${DEFAULT_LANGUAGE}/footer.json`),
-    ]);
-
-    return {
-      homepage: homepage.default || {},
-      footer: footer.default || {},
-    };
-  }
-}
+import { loadAllTranslations } from "@/app/core/i18n/loader";
 
 // ===============================
 // 🌍 GET COUNTRY
@@ -117,7 +90,13 @@ export default async function CountryLayout({
   const htmlLang = `${language}-${country.toUpperCase()}`;
   const dir = getDirection(language);
 
+  // Load all translations for the detected language
   const translations = await loadAllTranslations(language);
+
+  // Check if user has manually overridden language
+  const cookieStore = cookies();
+  const userOverride = cookieStore.get(COOKIE_KEYS.USER_LANGUAGE_OVERRIDE)?.value;
+  const isOverridden = !!userOverride;
 
   return (
     <html lang={htmlLang} dir={dir} suppressHydrationWarning>
@@ -127,6 +106,7 @@ export default async function CountryLayout({
             <LanguageProvider
               initialLanguage={language}
               translations={translations}
+              isOverridden={isOverridden}
             >
               <Header />
               <main className="min-h-screen pt-20">{children}</main>
