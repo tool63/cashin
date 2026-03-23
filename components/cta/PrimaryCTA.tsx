@@ -3,23 +3,33 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { useLanguage } from "@/app/[country]/providers/LanguageProvider"; // Import the LanguageProvider
 
 interface PrimaryCTAProps {
   href: string;
-  children: React.ReactNode;
+  children: string; // Ensure the children are passed as a string for translation
   observer?: boolean;
+  translationKey?: string; // Optional key for translations
 }
 
 export default function PrimaryCTA({
   href,
   children,
   observer = true,
+  translationKey, // Add translationKey as an optional prop
 }: PrimaryCTAProps) {
+  const { getTranslation } = useLanguage(); // Access the getTranslation function
+
+  // Fetch the translated text if a translationKey is provided
+  const translatedText = translationKey
+    ? getTranslation("cta", translationKey, children) // Fetch translation from the "cta" namespace
+    : children; // Default to children if no translationKey is provided
+
   return (
     <Link
       href={href}
       className={observer ? "cta-observer inline-block" : "inline-block"}
-      aria-label={typeof children === "string" ? children : "Primary CTA"}
+      aria-label={translatedText}
     >
       <motion.span
         whileHover={{ scale: 1.08 }}
@@ -35,7 +45,7 @@ export default function PrimaryCTA({
           transition-all duration-300
         "
       >
-        {children}
+        {translatedText} {/* Render the translated text */}
         <ArrowRight size={24} />
       </motion.span>
     </Link>
