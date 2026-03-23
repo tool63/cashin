@@ -29,17 +29,26 @@ export default function Footer() {
 
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href={`/${country}/about`} className="hover:underline">
+                <Link
+                  href={`/${country}/about`}
+                  className="hover:underline focus:outline-none"
+                >
                   {t("about", "About Us")}
                 </Link>
               </li>
               <li>
-                <Link href={`/${country}/blog`} className="hover:underline">
+                <Link
+                  href={`/${country}/blog`}
+                  className="hover:underline focus:outline-none"
+                >
                   {t("blog", "Blog")}
                 </Link>
               </li>
               <li>
-                <Link href={`/${country}/careers`} className="hover:underline">
+                <Link
+                  href={`/${country}/careers`}
+                  className="hover:underline focus:outline-none"
+                >
                   {t("careers", "Careers")}
                 </Link>
               </li>
@@ -56,17 +65,26 @@ export default function Footer() {
 
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href={`/${country}/terms`} className="hover:underline">
+                <Link
+                  href={`/${country}/terms`}
+                  className="hover:underline focus:outline-none"
+                >
                   {t("terms", "Terms of Service")}
                 </Link>
               </li>
               <li>
-                <Link href={`/${country}/privacy`} className="hover:underline">
+                <Link
+                  href={`/${country}/privacy`}
+                  className="hover:underline focus:outline-none"
+                >
                   {t("privacy", "Privacy Policy")}
                 </Link>
               </li>
               <li>
-                <Link href={`/${country}/cookies`} className="hover:underline">
+                <Link
+                  href={`/${country}/cookies`}
+                  className="hover:underline focus:outline-none"
+                >
                   {t("cookies", "Cookie Policy")}
                 </Link>
               </li>
@@ -83,17 +101,26 @@ export default function Footer() {
 
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href={`/${country}/help`} className="hover:underline">
+                <Link
+                  href={`/${country}/help`}
+                  className="hover:underline focus:outline-none"
+                >
                   {t("help", "Help Center")}
                 </Link>
               </li>
               <li>
-                <Link href={`/${country}/contact`} className="hover:underline">
+                <Link
+                  href={`/${country}/contact`}
+                  className="hover:underline focus:outline-none"
+                >
                   {t("contact", "Contact Us")}
                 </Link>
               </li>
               <li>
-                <Link href={`/${country}/faq`} className="hover:underline">
+                <Link
+                  href={`/${country}/faq`}
+                  className="hover:underline focus:outline-none"
+                >
                   {t("faq", "FAQ")}
                 </Link>
               </li>
@@ -113,7 +140,7 @@ export default function Footer() {
                 <Link
                   href="https://facebook.com"
                   target="_blank"
-                  className="hover:text-blue-500"
+                  className="hover:text-blue-500 focus:outline-none"
                 >
                   Facebook
                 </Link>
@@ -122,7 +149,7 @@ export default function Footer() {
                 <Link
                   href="https://twitter.com"
                   target="_blank"
-                  className="hover:text-blue-400"
+                  className="hover:text-blue-400 focus:outline-none"
                 >
                   Twitter
                 </Link>
@@ -131,7 +158,7 @@ export default function Footer() {
                 <Link
                   href="https://instagram.com"
                   target="_blank"
-                  className="hover:text-pink-500"
+                  className="hover:text-pink-500 focus:outline-none"
                 >
                   Instagram
                 </Link>
@@ -150,7 +177,7 @@ export default function Footer() {
             <Link
               href="https://facebook.com"
               target="_blank"
-              className="hover:text-blue-500"
+              className="hover:text-blue-500 focus:outline-none"
             >
               Facebook
             </Link>
@@ -158,7 +185,7 @@ export default function Footer() {
             <Link
               href="https://twitter.com"
               target="_blank"
-              className="hover:text-blue-400"
+              className="hover:text-blue-400 focus:outline-none"
             >
               Twitter
             </Link>
@@ -166,7 +193,7 @@ export default function Footer() {
             <Link
               href="https://instagram.com"
               target="_blank"
-              className="hover:text-pink-500"
+              className="hover:text-pink-500 focus:outline-none"
             >
               Instagram
             </Link>
