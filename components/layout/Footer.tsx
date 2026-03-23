@@ -41,8 +41,7 @@ const Footer: React.FC = () => {
         {/* Dynamic Copyright Message */}
         <div className="text-sm">
           <p>
-            &copy; {new Date().getFullYear()} {t("company_name", "Your Company Name")}.{" "}
-            {t("rights_reserved", "All Rights Reserved.")}
+            &copy; {new Date().getFullYear()} Cashog. {t("rights_reserved", "All Rights Reserved.")}
           </p>
           {/* Dynamic Country Message */}
           <p>
