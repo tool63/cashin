@@ -1,7 +1,17 @@
 {
-  "home": "Início",
-  "about": "Sobre nós",
-  "contact": "Contato",
-  "rights_reserved": "Todos os direitos reservados.",
-  "serving_message": "Atendendo clientes em"
+  "company": "Empresa",
+  "about": "Sobre Nós",
+  "blog": "Blog",
+  "careers": "Carreiras",
+  "legal": "Legal",
+  "terms": "Termos de Serviço",
+  "privacy": "Política de Privacidade",
+  "cookies": "Política de Cookies",
+  "support": "Suporte",
+  "help": "Central de Ajuda",
+  "contact": "Fale Conosco",
+  "faq": "FAQ",
+  "follow_us": "Siga-nos",
+  "rights": "Todos os direitos reservados.",
+  "serving": "Atendendo usuários em"
 }
