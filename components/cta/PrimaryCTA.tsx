@@ -22,7 +22,7 @@ export default function PrimaryCTA({
 
   // Fetch the translated text if a translationKey is provided
   const translatedText = translationKey
-    ? getTranslation("cta", translationKey, children) // Fetch translation from the "cta" namespace
+    ? getTranslation("primarycta", translationKey, children) // Fetch translation from the "primarycta" namespace
     : children; // Default to children if no translationKey is provided
 
   return (
