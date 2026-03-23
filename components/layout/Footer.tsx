@@ -16,29 +16,9 @@ export default function Footer() {
     <footer className="border-t border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 mt-10">
       <div className="max-w-7xl mx-auto px-6 py-12">
         {/* ===============================
-            GRID SECTION
+            GRID SECTION FOR FOOTER LINKS
         =============================== */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
-          
-          {/* =========================
-              BRAND
-          ========================= */}
-          <div>
-            <Link
-              href={`/${country}`}
-              className="inline-block bg-gradient-to-r from-yellow-400 to-green-500 text-black font-bold text-xl px-3 py-1 rounded-lg mb-4"
-            >
-              Cashog
-            </Link>
-
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-3">
-              {t(
-                "description",
-                "Earn money online by completing tasks, surveys, and offers."
-              )}
-            </p>
-          </div>
-
           {/* =========================
               COMPANY
           ========================= */}
@@ -115,6 +95,45 @@ export default function Footer() {
               <li>
                 <Link href={`/${country}/faq`} className="hover:underline">
                   {t("faq", "FAQ")}
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* =========================
+              FOLLOW US
+          ========================= */}
+          <div>
+            <h3 className="font-semibold text-lg mb-4">
+              {t("follow_us", "Follow Us")}
+            </h3>
+
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link
+                  href="https://facebook.com"
+                  target="_blank"
+                  className="hover:text-blue-500"
+                >
+                  Facebook
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="https://twitter.com"
+                  target="_blank"
+                  className="hover:text-blue-400"
+                >
+                  Twitter
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="https://instagram.com"
+                  target="_blank"
+                  className="hover:text-pink-500"
+                >
+                  Instagram
                 </Link>
               </li>
             </ul>
