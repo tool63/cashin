@@ -1,17 +1,7 @@
 {
-  "getStarted": "Loslegen",
-  "howItWorks": "Wie es funktioniert",
-  "startEarning": "Jetzt verdienen",
-  "waysToEarn": "Verdienstmöglichkeiten",
-  "surveys": "Umfragen",
-  "appInstalls": "App-Installationen",
-  "playGames": "Spiele spielen",
-  "watchVideos": "Videos ansehen",
-  "offerwall": "Angebotswand",
-  "guides": "Anleitungen",
-  "makeMoney": "Geld verdienen",
-  "resources": "Ressourcen",
-  "blog": "Blog",
-  "help": "Hilfe",
-  "copyright": "Alle Rechte vorbehalten"
+  "home": "Startseite",
+  "about": "Über uns",
+  "contact": "Kontakt",
+  "rights_reserved": "Alle Rechte vorbehalten.",
+  "serving_message": "Wir bedienen Kunden in"
 }
