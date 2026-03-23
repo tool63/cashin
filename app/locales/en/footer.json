@@ -1,7 +1,17 @@
 {
-  "home": "Home",
+  "company": "Company",
   "about": "About Us",
-  "contact": "Contact",
-  "rights_reserved": "All Rights Reserved.",
-  "serving_message": "Serving customers in"
+  "blog": "Blog",
+  "careers": "Careers",
+  "legal": "Legal",
+  "terms": "Terms of Service",
+  "privacy": "Privacy Policy",
+  "cookies": "Cookie Policy",
+  "support": "Support",
+  "help": "Help Center",
+  "contact": "Contact Us",
+  "faq": "FAQ",
+  "follow_us": "Follow Us",
+  "rights": "All rights reserved.",
+  "serving": "Serving users in"
 }
