@@ -1,17 +1,7 @@
 {
-  "getStarted": "Get Started",
-  "howItWorks": "How it works",
-  "startEarning": "Start earning",
-  "waysToEarn": "Ways to Earn",
-  "surveys": "Surveys",
-  "appInstalls": "App Installs",
-  "playGames": "Play games",
-  "watchVideos": "Watch videos",
-  "offerwall": "Offerwall",
-  "guides": "Guides",
-  "makeMoney": "Make money",
-  "resources": "Resources",
-  "blog": "Blog",
-  "help": "Help",
-  "copyright": "All rights reserved"
+  "home": "Home",
+  "about": "About Us",
+  "contact": "Contact",
+  "rights_reserved": "All Rights Reserved.",
+  "serving_message": "Serving customers in"
 }
