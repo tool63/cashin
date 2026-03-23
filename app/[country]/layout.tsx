@@ -9,6 +9,7 @@ import { CountryProvider } from "./providers/CountryProvider";
 
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import FloatingCTA from "@/components/cta/FloatingCTA"; // Import the FloatingCTA
 
 import {
   COOKIE_KEYS,
@@ -111,6 +112,9 @@ export default async function CountryLayout({
               <Header />
               <main className="min-h-screen pt-20">{children}</main>
               <Footer />
+
+              {/* Floating CTA */}
+              <FloatingCTA />
             </LanguageProvider>
           </CountryProvider>
         </ThemeProviderWrapper>
