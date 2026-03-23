@@ -31,7 +31,7 @@ export default function Footer() {
               <li>
                 <Link
                   href={`/${country}/about`}
-                  className="hover:underline focus:outline-none"
+                  className="text-gray-800 dark:text-gray-200 hover:text-blue-500 focus:outline-none no-underline"
                 >
                   {t("about", "About Us")}
                 </Link>
@@ -39,7 +39,7 @@ export default function Footer() {
               <li>
                 <Link
                   href={`/${country}/blog`}
-                  className="hover:underline focus:outline-none"
+                  className="text-gray-800 dark:text-gray-200 hover:text-blue-500 focus:outline-none no-underline"
                 >
                   {t("blog", "Blog")}
                 </Link>
@@ -47,7 +47,7 @@ export default function Footer() {
               <li>
                 <Link
                   href={`/${country}/careers`}
-                  className="hover:underline focus:outline-none"
+                  className="text-gray-800 dark:text-gray-200 hover:text-blue-500 focus:outline-none no-underline"
                 >
                   {t("careers", "Careers")}
                 </Link>
@@ -67,7 +67,7 @@ export default function Footer() {
               <li>
                 <Link
                   href={`/${country}/terms`}
-                  className="hover:underline focus:outline-none"
+                  className="text-gray-800 dark:text-gray-200 hover:text-blue-500 focus:outline-none no-underline"
                 >
                   {t("terms", "Terms of Service")}
                 </Link>
@@ -75,7 +75,7 @@ export default function Footer() {
               <li>
                 <Link
                   href={`/${country}/privacy`}
-                  className="hover:underline focus:outline-none"
+                  className="text-gray-800 dark:text-gray-200 hover:text-blue-500 focus:outline-none no-underline"
                 >
                   {t("privacy", "Privacy Policy")}
                 </Link>
@@ -83,7 +83,7 @@ export default function Footer() {
               <li>
                 <Link
                   href={`/${country}/cookies`}
-                  className="hover:underline focus:outline-none"
+                  className="text-gray-800 dark:text-gray-200 hover:text-blue-500 focus:outline-none no-underline"
                 >
                   {t("cookies", "Cookie Policy")}
                 </Link>
@@ -103,7 +103,7 @@ export default function Footer() {
               <li>
                 <Link
                   href={`/${country}/help`}
-                  className="hover:underline focus:outline-none"
+                  className="text-gray-800 dark:text-gray-200 hover:text-blue-500 focus:outline-none no-underline"
                 >
                   {t("help", "Help Center")}
                 </Link>
@@ -111,7 +111,7 @@ export default function Footer() {
               <li>
                 <Link
                   href={`/${country}/contact`}
-                  className="hover:underline focus:outline-none"
+                  className="text-gray-800 dark:text-gray-200 hover:text-blue-500 focus:outline-none no-underline"
                 >
                   {t("contact", "Contact Us")}
                 </Link>
@@ -119,7 +119,7 @@ export default function Footer() {
               <li>
                 <Link
                   href={`/${country}/faq`}
-                  className="hover:underline focus:outline-none"
+                  className="text-gray-800 dark:text-gray-200 hover:text-blue-500 focus:outline-none no-underline"
                 >
                   {t("faq", "FAQ")}
                 </Link>
@@ -140,7 +140,7 @@ export default function Footer() {
                 <Link
                   href="https://facebook.com"
                   target="_blank"
-                  className="hover:text-blue-500 focus:outline-none"
+                  className="text-gray-800 dark:text-gray-200 hover:text-blue-500 focus:outline-none no-underline"
                 >
                   Facebook
                 </Link>
@@ -149,7 +149,7 @@ export default function Footer() {
                 <Link
                   href="https://twitter.com"
                   target="_blank"
-                  className="hover:text-blue-400 focus:outline-none"
+                  className="text-gray-800 dark:text-gray-200 hover:text-blue-400 focus:outline-none no-underline"
                 >
                   Twitter
                 </Link>
@@ -158,7 +158,7 @@ export default function Footer() {
                 <Link
                   href="https://instagram.com"
                   target="_blank"
-                  className="hover:text-pink-500 focus:outline-none"
+                  className="text-gray-800 dark:text-gray-200 hover:text-pink-500 focus:outline-none no-underline"
                 >
                   Instagram
                 </Link>
@@ -177,7 +177,7 @@ export default function Footer() {
             <Link
               href="https://facebook.com"
               target="_blank"
-              className="hover:text-blue-500 focus:outline-none"
+              className="text-gray-800 dark:text-gray-200 hover:text-blue-500 focus:outline-none no-underline"
             >
               Facebook
             </Link>
@@ -185,7 +185,7 @@ export default function Footer() {
             <Link
               href="https://twitter.com"
               target="_blank"
-              className="hover:text-blue-400 focus:outline-none"
+              className="text-gray-800 dark:text-gray-200 hover:text-blue-400 focus:outline-none no-underline"
             >
               Twitter
             </Link>
@@ -193,7 +193,7 @@ export default function Footer() {
             <Link
               href="https://instagram.com"
               target="_blank"
-              className="hover:text-pink-500 focus:outline-none"
+              className="text-gray-800 dark:text-gray-200 hover:text-pink-500 focus:outline-none no-underline"
             >
               Instagram
             </Link>
