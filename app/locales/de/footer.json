@@ -1,7 +1,17 @@
 {
-  "home": "Startseite",
+  "company": "Unternehmen",
   "about": "Über uns",
+  "blog": "Blog",
+  "careers": "Karriere",
+  "legal": "Rechtliches",
+  "terms": "Nutzungsbedingungen",
+  "privacy": "Datenschutzrichtlinie",
+  "cookies": "Cookie-Richtlinie",
+  "support": "Unterstützung",
+  "help": "Hilfezentrum",
   "contact": "Kontakt",
-  "rights_reserved": "Alle Rechte vorbehalten.",
-  "serving_message": "Wir bedienen Kunden in"
+  "faq": "FAQ",
+  "follow_us": "Folge uns",
+  "rights": "Alle Rechte vorbehalten.",
+  "serving": "Wir bedienen Nutzer in"
 }
