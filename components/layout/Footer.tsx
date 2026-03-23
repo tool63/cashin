@@ -1,7 +1,7 @@
 "use client";
 
-import { useLanguage } from "./providers/LanguageProvider";
-import { useCountry } from "./providers/CountryProvider";
+import { useLanguage } from "@/app/[country]/providers/LanguageProvider"; // Updated path
+import { useCountry } from "@/app/[country]/providers/CountryProvider"; // Updated path
 import Link from "next/link";
 
 // Footer Component
