@@ -88,32 +88,6 @@ export default function CountryHomePage() {
           )}
         />
       </div>
-
-      {/* ===============================
-          📊 STATS
-      =============================== */}
-      <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
-        <div className="p-6">
-          <div className="text-3xl font-bold text-blue-600">50K+</div>
-          <div className="text-gray-600 dark:text-gray-400">
-            {t("stats_users", "Active Users")}
-          </div>
-        </div>
-
-        <div className="p-6">
-          <div className="text-3xl font-bold text-blue-600">$2M+</div>
-          <div className="text-gray-600 dark:text-gray-400">
-            {t("stats_earned", "Total Earned")}
-          </div>
-        </div>
-
-        <div className="p-6">
-          <div className="text-3xl font-bold text-blue-600">150+</div>
-          <div className="text-gray-600 dark:text-gray-400">
-            {t("stats_countries", "Countries")}
-          </div>
-        </div>
-      </div>
     </section>
   );
 }
