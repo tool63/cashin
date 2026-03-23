@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -8,7 +10,6 @@ import LanguageSwitcher from "@/components/switch/LanguageSwitcher";
 
 import { useCountry } from "@/app/[country]/providers/CountryProvider";
 import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
-import { useTranslation } from "react-i18next";  // Import the translation hook
 
 interface HeaderProps {
   className?: string;
@@ -23,8 +24,12 @@ export default function Header({ className }: HeaderProps) {
   // 🌍 CONTEXTS
   // ===============================
   const { country } = useCountry();
-  const { language } = useLanguage();
-  const { t } = useTranslation(); // Access the translation function
+  const { getTranslation } = useLanguage();
+
+  // Translation helper for header namespace
+  const t = (key: string, fallback: string): string => {
+    return getTranslation("header", key, fallback);
+  };
 
   const headerRef = useRef<HTMLDivElement>(null);
   const borderColor = "border-gray-300 dark:border-gray-700";
@@ -63,7 +68,7 @@ export default function Header({ className }: HeaderProps) {
           className="bg-gradient-to-r from-yellow-400 to-green-500 text-2xl font-bold px-3 py-1 rounded-lg text-black"
           onClick={() => setMobileOpen(false)}
         >
-          {t('logo')}
+          Cashog
         </Link>
 
         {/* =========================
@@ -72,7 +77,7 @@ export default function Header({ className }: HeaderProps) {
         <nav className="hidden md:flex items-center gap-7 text-sm font-medium">
 
           <Link href={`/${country}/how-it-works`} className="hover:opacity-80">
-            {t('how_it_works')}
+            {t("how_it_works", "How it works")}
           </Link>
 
           {/* =========================
@@ -84,7 +89,7 @@ export default function Header({ className }: HeaderProps) {
             onMouseLeave={() => setEarnOpen(false)}
           >
             <button className="flex items-center gap-1">
-              {t('earn')}
+              {t("earn", "Earn")}
               <ChevronDown
                 size={14}
                 className={`transition-transform ${earnOpen ? "rotate-180" : ""}`}
@@ -100,19 +105,35 @@ export default function Header({ className }: HeaderProps) {
                   transition={{ duration: 0.18 }}
                   className={`absolute top-full left-0 mt-3 w-52 flex flex-col gap-2 p-4 rounded-xl shadow-xl border ${borderColor} bg-white dark:bg-gray-900`}
                 >
-                  <Link href={`/${country}/surveys`}>{t('surveys')}</Link>
-                  <Link href={`/${country}/app-installs`}>{t('app_installs')}</Link>
-                  <Link href={`/${country}/play-games`}>{t('play_games')}</Link>
-                  <Link href={`/${country}/watch-videos`}>{t('watch_videos')}</Link>
-                  <Link href={`/${country}/offerwall`}>{t('offerwall')}</Link>
+                  <Link href={`/${country}/surveys`}>
+                    {t("surveys", "Surveys")}
+                  </Link>
+                  <Link href={`/${country}/app-installs`}>
+                    {t("app_installs", "App Installs")}
+                  </Link>
+                  <Link href={`/${country}/play-games`}>
+                    {t("play_games", "Play Games")}
+                  </Link>
+                  <Link href={`/${country}/watch-videos`}>
+                    {t("watch_videos", "Watch Videos")}
+                  </Link>
+                  <Link href={`/${country}/offerwall`}>
+                    {t("offerwall", "Offerwall")}
+                  </Link>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
 
-          <Link href={`/${country}/cashout`}>{t('cashout')}</Link>
-          <Link href={`/${country}/blog`}>{t('blog')}</Link>
-          <Link href={`/${country}/help`}>{t('help')}</Link>
+          <Link href={`/${country}/cashout`}>
+            {t("cashout", "Cashout")}
+          </Link>
+          <Link href={`/${country}/blog`}>
+            {t("blog", "Blog")}
+          </Link>
+          <Link href={`/${country}/help`}>
+            {t("help", "Help")}
+          </Link>
         </nav>
 
         {/* =========================
@@ -126,13 +147,13 @@ export default function Header({ className }: HeaderProps) {
 
           <Link href={`/${country}/login`}>
             <button className={`px-4 py-2 rounded-lg text-sm border ${borderColor}`}>
-              {t('login')}
+              {t("login", "Login")}
             </button>
           </Link>
 
           <Link href={`/${country}/signup`}>
             <button className="px-5 py-2 rounded-lg text-sm bg-gradient-to-r from-yellow-400 to-green-500 text-black font-medium">
-              {t('signup')}
+              {t("signup", "Sign up")}
             </button>
           </Link>
         </div>
@@ -166,14 +187,14 @@ export default function Header({ className }: HeaderProps) {
                 href={`/${country}/how-it-works`}
                 onClick={() => setMobileOpen(false)}
               >
-                {t('how_it_works')}
+                {t("how_it_works", "How it works")}
               </Link>
 
               <button
                 onClick={() => setMobileEarnOpen(!mobileEarnOpen)}
                 className="flex items-center justify-between"
               >
-                {t('earn')}
+                {t("earn", "Earn")}
                 <ChevronDown
                   size={16}
                   className={`transition-transform ${
@@ -184,17 +205,33 @@ export default function Header({ className }: HeaderProps) {
 
               {mobileEarnOpen && (
                 <div className="flex flex-col gap-3 pl-4 text-sm">
-                  <Link href={`/${country}/surveys`} onClick={() => setMobileOpen(false)}>{t('surveys')}</Link>
-                  <Link href={`/${country}/app-installs`} onClick={() => setMobileOpen(false)}>{t('app_installs')}</Link>
-                  <Link href={`/${country}/play-games`} onClick={() => setMobileOpen(false)}>{t('play_games')}</Link>
-                  <Link href={`/${country}/watch-videos`} onClick={() => setMobileOpen(false)}>{t('watch_videos')}</Link>
-                  <Link href={`/${country}/offerwall`} onClick={() => setMobileOpen(false)}>{t('offerwall')}</Link>
+                  <Link href={`/${country}/surveys`} onClick={() => setMobileOpen(false)}>
+                    {t("surveys", "Surveys")}
+                  </Link>
+                  <Link href={`/${country}/app-installs`} onClick={() => setMobileOpen(false)}>
+                    {t("app_installs", "App Installs")}
+                  </Link>
+                  <Link href={`/${country}/play-games`} onClick={() => setMobileOpen(false)}>
+                    {t("play_games", "Play Games")}
+                  </Link>
+                  <Link href={`/${country}/watch-videos`} onClick={() => setMobileOpen(false)}>
+                    {t("watch_videos", "Watch Videos")}
+                  </Link>
+                  <Link href={`/${country}/offerwall`} onClick={() => setMobileOpen(false)}>
+                    {t("offerwall", "Offerwall")}
+                  </Link>
                 </div>
               )}
 
-              <Link href={`/${country}/cashout`} onClick={() => setMobileOpen(false)}>{t('cashout')}</Link>
-              <Link href={`/${country}/blog`} onClick={() => setMobileOpen(false)}>{t('blog')}</Link>
-              <Link href={`/${country}/help`} onClick={() => setMobileOpen(false)}>{t('help')}</Link>
+              <Link href={`/${country}/cashout`} onClick={() => setMobileOpen(false)}>
+                {t("cashout", "Cashout")}
+              </Link>
+              <Link href={`/${country}/blog`} onClick={() => setMobileOpen(false)}>
+                {t("blog", "Blog")}
+              </Link>
+              <Link href={`/${country}/help`} onClick={() => setMobileOpen(false)}>
+                {t("help", "Help")}
+              </Link>
 
               <div className="flex items-center justify-between pt-4">
                 <LanguageSwitcher />
@@ -203,13 +240,13 @@ export default function Header({ className }: HeaderProps) {
 
               <Link href={`/${country}/login`}>
                 <button className={`border ${borderColor} py-2 rounded-lg w-full`}>
-                  {t('login')}
+                  {t("login", "Login")}
                 </button>
               </Link>
 
               <Link href={`/${country}/signup`}>
                 <button className="bg-gradient-to-r from-yellow-400 to-green-500 py-2 rounded-lg w-full text-black font-medium">
-                  {t('signup')}
+                  {t("signup", "Sign up")}
                 </button>
               </Link>
 
