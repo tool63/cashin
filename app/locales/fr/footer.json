@@ -1,17 +1,7 @@
 {
-  "getStarted": "Commencer",
-  "howItWorks": "Comment ça marche",
-  "startEarning": "Commencez à gagner",
-  "waysToEarn": "Façons de gagner",
-  "surveys": "Enquêtes",
-  "appInstalls": "Installations d'applications",
-  "playGames": "Jouer à des jeux",
-  "watchVideos": "Regarder des vidéos",
-  "offerwall": "Murs d'offres",
-  "guides": "Guides",
-  "makeMoney": "Gagner de l'argent",
-  "resources": "Ressources",
-  "blog": "Blog",
-  "help": "Aide",
-  "copyright": "Tous droits réservés"
+  "home": "Accueil",
+  "about": "À propos de nous",
+  "contact": "Contact",
+  "rights_reserved": "Tous droits réservés.",
+  "serving_message": "Nous servons des clients en"
 }
