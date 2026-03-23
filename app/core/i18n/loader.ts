@@ -4,6 +4,7 @@ import type { SupportedLanguage } from "../types";
 export interface Translations {
   homepage: Record<string, string>;
   footer: Record<string, string>;
+  header: Record<string, string>;
   [key: string]: Record<string, string>;
 }
 
@@ -58,7 +59,7 @@ export async function loadAllTranslations(
   }
   
   // List of all namespaces to load
-  const namespaces = ["homepage", "footer"];
+  const namespaces = ["homepage", "footer", "header"];
   
   try {
     // Load all namespaces in parallel
@@ -80,9 +81,10 @@ export async function loadAllTranslations(
     console.error(`Failed to load translations for ${language}:`, error);
     
     // Return empty translations as fallback
-    const emptyTranslations = {
+    const emptyTranslations: Translations = {
       homepage: {},
       footer: {},
+      header: {},
     };
     
     // Cache empty result to prevent repeated failing requests
