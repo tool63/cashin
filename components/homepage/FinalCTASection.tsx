@@ -21,11 +21,12 @@ export default function FinalCTASection() {
             Join millions of users already earning daily. Complete surveys, tasks, and high-paying offers securely from anywhere.
           </p>
 
-          {/* CTA Button using PrimaryCTA */}
+          {/* ✅ CTA (CORRECT — NO CHILDREN) */}
           <div className="inline-block">
-            <PrimaryCTA href="/signup">
-              Get Started Now
-            </PrimaryCTA>
+            <PrimaryCTA
+              href="/signup"
+              translationKey="start_earning_now"
+            />
           </div>
 
           {/* Trust indicators */}
