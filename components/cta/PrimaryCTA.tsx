@@ -3,28 +3,71 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { useMemo } from "react";
 import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
 
 interface PrimaryCTAProps {
   href: string;
-  translationKey: string;
+  translationKey?: string; // optional now
   observer?: boolean;
-  fallback?: string; // ✅ add fallback support
+  fallback?: string;
 }
 
 export default function PrimaryCTA({
   href,
   translationKey,
   observer = true,
-  fallback = "Get Started", // default fallback
+  fallback = "Get Started Now",
 }: PrimaryCTAProps) {
   const { getTranslation } = useLanguage();
 
-  const text = getTranslation(
-    "primarycta",
-    translationKey,
-    fallback
+  // ✅ ALL keys from your JSON
+  const CTA_KEYS = useMemo(
+    () => [
+      "start_earning_now",
+      "get_started_now",
+      "join_now",
+      "sign_up",
+      "learn_more",
+      "create_account",
+      "start_free_trial",
+      "claim_offer",
+
+      "get_cashback",
+      "earn_cashback",
+      "get_discount",
+      "unlock_deal",
+      "grab_offer",
+      "save_money",
+      "earn_rewards",
+      "redeem_now",
+
+      "start_now",
+      "earn_now",
+      "join_free",
+      "try_now",
+      "get_rewards",
+      "withdraw_now",
+      "earn_free_money",
+      "start_earning_free",
+      "claim_rewards",
+      "unlock_rewards"
+    ],
+    []
   );
+
+  // ✅ Safe key logic (same idea as FloatingCTA)
+  const safeKey = useMemo(() => {
+    if (translationKey && CTA_KEYS.includes(translationKey)) {
+      return translationKey;
+    }
+
+    // fallback → random high-converting CTA
+    return CTA_KEYS[Math.floor(Math.random() * CTA_KEYS.length)];
+  }, [translationKey, CTA_KEYS]);
+
+  // ✅ Get translation safely
+  const text = getTranslation("primarycta", safeKey, fallback);
 
   return (
     <Link
