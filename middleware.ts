@@ -21,7 +21,7 @@ export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // ===============================
-  // 🚫 Skip internal routes (API, next.js assets)
+  // 🚫 Skip internal routes
   // ===============================
   if (
     pathname.startsWith("/api") ||
@@ -32,56 +32,34 @@ export function middleware(req: NextRequest) {
   }
 
   // ===============================
-  // 🌍 GEO INFO (country + language)
+  // 🌍 GEO INFO
   // ===============================
   const geo = getGeoInfo(req);
 
   const segments = pathname.split("/").filter(Boolean);
   const first = segments[0]?.toLowerCase();
 
-  // Extract country from the path (if valid country exists)
   const validUrlCountry = extractCountryFromPath(pathname);
   const hasValidPrefix = validUrlCountry !== null;
 
-  // Check for invalid country prefixes (like "/xyz")
   const hasInvalidPrefix =
     first && isValidCountryCode(first) && !isSupportedCountry(first);
 
   // ===============================
-  // ❗ FIX: ROOT HANDLING (Global Default)
+  // 🌐 ROOT (SEO FIXED)
   // ===============================
   if (pathname === "/") {
-    const url = req.nextUrl.clone();
-
-    // If NOT global → redirect to country
-    if (geo.country !== DEFAULT_COUNTRY) {
-      url.pathname = `/${geo.country}`; // Redirect to country-based URL
-      const res = NextResponse.redirect(url);
-
-      res.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
-        path: "/",
-        maxAge: 60 * 60 * 24 * 30, // 30 days
-      });
-
-      res.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
-        path: "/",
-        maxAge: 60 * 60 * 24 * 365, // 1 year
-      });
-
-      return res;
-    }
-
-    // Global → stay on root
     const res = NextResponse.next();
 
+    // ✅ DO NOT redirect root (important for SEO)
     res.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
       path: "/",
-      maxAge: 60 * 60 * 24 * 30, // 30 days
+      maxAge: 60 * 60 * 24 * 30,
     });
 
     res.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
       path: "/",
-      maxAge: 60 * 60 * 24 * 365, // 1 year
+      maxAge: 60 * 60 * 24 * 365,
     });
 
     return res;
@@ -92,64 +70,63 @@ export function middleware(req: NextRequest) {
   // ===============================
   if (hasInvalidPrefix) {
     const url = req.nextUrl.clone();
-    // Remove invalid country-like prefix and keep the rest of the path
     url.pathname = "/" + segments.slice(1).join("/");
 
-    const response = NextResponse.redirect(url);
+    const res = NextResponse.redirect(url);
 
-    response.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
+    res.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
       path: "/",
-      maxAge: 60 * 60 * 24 * 30, // 30 days
+      maxAge: 60 * 60 * 24 * 30,
     });
 
-    response.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
+    res.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
       path: "/",
-      maxAge: 60 * 60 * 24 * 365, // 1 year
+      maxAge: 60 * 60 * 24 * 365,
     });
 
-    return response;
+    return res;
   }
 
   // ===============================
-  // ➕ ADD PREFIX (ONLY IF NEEDED)
+  // ➕ ADD COUNTRY PREFIX (SEO SAFE)
   // ===============================
   if (!hasValidPrefix && geo.country !== DEFAULT_COUNTRY) {
     const target = buildUrl(pathname, geo.country);
 
+    // ✅ Prevent infinite redirect
     if (target !== pathname) {
       const url = req.nextUrl.clone();
       url.pathname = target;
-      const response = NextResponse.redirect(url);
 
-      response.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
+      const res = NextResponse.redirect(url);
+
+      res.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
         path: "/",
-        maxAge: 60 * 60 * 24 * 30, // 30 days
+        maxAge: 60 * 60 * 24 * 30,
       });
 
-      response.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
+      res.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
         path: "/",
-        maxAge: 60 * 60 * 24 * 365, // 1 year
+        maxAge: 60 * 60 * 24 * 365,
       });
 
-      return response;
+      return res;
     }
   }
 
   // ===============================
-  // 🍪 RESPONSE (NORMAL REQUEST)
+  // ✅ NORMAL RESPONSE
   // ===============================
   const res = NextResponse.next();
 
-  // ✅ Persist country from geo info
   res.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
     path: "/",
-    maxAge: 60 * 60 * 24 * 30, // 30 days
+    maxAge: 60 * 60 * 24 * 30,
   });
 
-  // ✅ Persist language from geo info
   res.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
     path: "/",
-    maxAge: 60 * 60 * 24 * 365, // 1 year
+    maxAge: 60 * 60 * 24 * 365,
   });
 
   return res;
