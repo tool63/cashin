@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
 import { useCountry } from "@/app/[country]/providers/CountryProvider";
 import { motion } from "framer-motion";
-import PrimaryCTA from "@/components/cta/PrimaryCTA";  // Import the CTA component
+import PrimaryCTA from "@/components/cta/PrimaryCTA";
 
 // ===============================
 // 🧩 STEP CARD (Expandable)
@@ -32,6 +32,7 @@ function StepCard({
         <div className="p-4 bg-blue-600 text-white rounded-full">{icon}</div>
         <h3 className="text-xl font-semibold">{title}</h3>
       </div>
+
       <p className="text-gray-700 dark:text-gray-300">{description}</p>
 
       {isExpanded && (
@@ -47,12 +48,9 @@ function StepCard({
 // 🚀 PAGE
 // ===============================
 export default function HowItWorksPage() {
-  const { language, getTranslation } = useLanguage();
+  const { getTranslation } = useLanguage();
   const { country } = useCountry();
 
-  // ===============================
-  // 📝 TRANSLATION HELPER FOR HOW-IT-WORKS NAMESPACE
-  // ===============================
   const t = useMemo(() => {
     return (key: string, fallback: string): string => {
       return getTranslation("how-it-works", key, fallback);
@@ -76,14 +74,15 @@ export default function HowItWorksPage() {
           )}
         </p>
 
-        {/* Primary CTA - Hero Section */}
-        <PrimaryCTA href={`/${country}/start-earning`}>
-          {t("cta_button", "Get Started Now")}
-        </PrimaryCTA>
+        {/* ✅ FIXED CTA */}
+        <PrimaryCTA
+          href={`/${country}/start-earning`}
+          translationKey="start_earning_now"
+        />
       </div>
 
       {/* ===============================
-          🧩 STEPS (Interactive & Expandable)
+          🧩 STEPS
       =============================== */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <StepCard
@@ -95,7 +94,7 @@ export default function HowItWorksPage() {
           icon={<i className="fas fa-user-plus text-3xl" />}
           expandedContent={t(
             "step_1_expanded",
-            "Signing up is simple and only takes a few minutes. You'll receive a confirmation email to get started."
+            "Signing up is simple and only takes a few minutes."
           )}
         />
 
@@ -103,12 +102,12 @@ export default function HowItWorksPage() {
           title={t("step_2_title", "Complete Offers")}
           description={t(
             "step_2_desc",
-            "Complete surveys, install apps, play games, and more to earn points."
+            "Complete surveys, install apps, play games, and more."
           )}
           icon={<i className="fas fa-tasks text-3xl" />}
           expandedContent={t(
             "step_2_expanded",
-            "Explore a variety of offers on our platform. Choose the ones you enjoy and start earning points."
+            "Choose offers and start earning points instantly."
           )}
         />
 
@@ -116,23 +115,24 @@ export default function HowItWorksPage() {
           title={t("step_3_title", "Cash Out")}
           description={t(
             "step_3_desc",
-            "Redeem your points for real money via PayPal or other methods."
+            "Redeem your points for real money."
           )}
           icon={<i className="fas fa-credit-card text-3xl" />}
           expandedContent={t(
             "step_3_expanded",
-            "Once you've earned enough points, simply request a cashout. You can choose to receive your rewards through PayPal or other available payment methods."
+            "Withdraw via PayPal or other payment methods."
           )}
         />
       </div>
 
       {/* ===============================
-          🖼️ IMAGE / GRAPHIC SECTION
+          🖼️ IMAGE SECTION
       =============================== */}
       <div className="mt-12 text-center">
         <h2 className="text-3xl font-semibold mb-6">
-          {t("how_it_works_graphic_title", "See How It Works in Action")}
+          {t("how_it_works_graphic_title", "See How It Works")}
         </h2>
+
         <img
           src="/images/how-it-works.png"
           alt="How PayUp Works"
@@ -141,12 +141,13 @@ export default function HowItWorksPage() {
       </div>
 
       {/* ===============================
-          ✅ CALL TO ACTION - Final Section
+          ✅ FINAL CTA
       =============================== */}
       <div className="text-center mt-12">
-        <PrimaryCTA href={`/${country}/start-earning`}>
-          {t("cta_button", "Get Started Now")}
-        </PrimaryCTA>
+        <PrimaryCTA
+          href={`/${country}/start-earning`}
+          translationKey="start_earning_now"
+        />
       </div>
     </section>
   );
