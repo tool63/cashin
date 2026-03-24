@@ -1,10 +1,19 @@
 {
   "start_earning_now": "Start Earning Now",
-  "get_started": "Get Started Now",
+  "get_started_now": "Get Started Now",
   "join_now": "Join Now",
   "sign_up": "Sign Up",
   "learn_more": "Learn More",
   "create_account": "Create Account",
   "start_free_trial": "Start Free Trial",
-  "claim_offer": "Claim Offer"
+  "claim_offer": "Claim Offer",
+
+  "get_cashback": "Get Cashback",
+  "earn_cashback": "Earn Cashback",
+  "get_discount": "Get Discount",
+  "unlock_deal": "Unlock Deal",
+  "grab_offer": "Grab This Offer",
+  "save_money": "Save Money",
+  "earn_rewards": "Earn Rewards",
+  "redeem_now": "Redeem Now"
 }
