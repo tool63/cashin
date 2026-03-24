@@ -1,10 +1,39 @@
 {
-  "start_earning_now": "Empieza a Ganar Ahora",
-  "get_started": "Comienza Ahora",
-  "join_now": "Únete Ahora",
-  "sign_up": "Regístrate",
-  "learn_more": "Más Información",
-  "create_account": "Crear Cuenta",
-  "start_free_trial": "Prueba Gratis",
-  "claim_offer": "Reclamar Oferta"
+  "default": {
+    "start_earning_now": "Empieza a ganar ahora",
+    "get_started_now": "Comenzar ahora",
+    "join_now": "Únete ahora",
+    "sign_up": "Regístrate",
+    "learn_more": "Saber más",
+    "create_account": "Crear cuenta",
+    "start_free_trial": "Iniciar prueba gratis",
+    "claim_offer": "Reclamar oferta"
+  },
+
+  "offers": {
+    "claim_offer": "Reclamar oferta",
+    "grab_offer": "Aprovechar oferta",
+    "unlock_deal": "Desbloquear oferta"
+  },
+
+  "earnings": {
+    "start_earning_now": "Empieza a ganar ahora",
+    "earn_rewards": "Ganar recompensas"
+  },
+
+  "cashback": {
+    "get_cashback": "Obtén cashback",
+    "earn_cashback": "Gana cashback"
+  },
+
+  "discounts": {
+    "get_discount": "Obtén descuento",
+    "save_money": "Ahorrar dinero"
+  },
+
+  "floating_cta": [
+    "start_earning_now",
+    "get_cashback",
+    "grab_offer"
+  ]
 }
