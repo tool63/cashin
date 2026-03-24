@@ -2,12 +2,13 @@ import { DEFAULT_LANGUAGE } from "../constants";
 import type { SupportedLanguage } from "../types";
 
 // ===============================
-// 🌐 TYPES (COMPATIBLE)
+// 🌐 TYPES
 // ===============================
 export interface Translations {
   homepage: Record<string, string>;
   footer: Record<string, string>;
   header: Record<string, string>;
+  primarycta: Record<string, string>; // ✅ NEW
   [key: string]: Record<string, string>;
 }
 
@@ -17,7 +18,7 @@ export interface Translations {
 const translationCache = new Map<string, Translations>();
 
 // ===============================
-// 🔥 SAFE DYNAMIC IMPORT
+// 🔥 SAFE IMPORT
 // ===============================
 async function safeImport(
   language: SupportedLanguage,
@@ -29,6 +30,7 @@ async function safeImport(
     );
     return mod.default || {};
   } catch {
+    // fallback to default language
     if (language !== DEFAULT_LANGUAGE) {
       try {
         const fallback = await import(
@@ -44,29 +46,6 @@ async function safeImport(
 }
 
 // ===============================
-// 🧠 AUTO NAMESPACE DISCOVERY
-// ===============================
-/**
- * ⚠️ Trick:
- * Instead of scanning folder (not allowed),
- * we define a "base set" and allow dynamic extension
- */
-const BASE_NAMESPACES = ["homepage", "footer", "header"];
-
-/**
- * Extract namespace from translation access (future-proof)
- */
-function mergeTranslations(
-  base: Translations,
-  incoming: Record<string, Record<string, string>>
-): Translations {
-  return {
-    ...base,
-    ...incoming,
-  };
-}
-
-// ===============================
 // 🚀 MAIN LOADER
 // ===============================
 export async function loadAllTranslations(
@@ -74,69 +53,47 @@ export async function loadAllTranslations(
 ): Promise<Translations> {
   const cacheKey = language;
 
+  // ✅ CACHE CHECK
   if (translationCache.has(cacheKey)) {
     return translationCache.get(cacheKey)!;
   }
+
+  // ===============================
+  // 🌐 BASE NAMESPACES (IMPORTANT)
+  // ===============================
+  const namespaces = [
+    "homepage",
+    "footer",
+    "header",
+    "primarycta", // ✅ ADDED HERE
+  ];
 
   const translations: Translations = {
     homepage: {},
     footer: {},
     header: {},
-    primarycta: {},
+    primarycta: {}, // ✅ ADDED HERE
   };
 
   // ===============================
-  // 🔥 LOAD BASE (FAST PATH)
+  // ⚡ LOAD ALL IN PARALLEL
   // ===============================
   await Promise.all(
-    BASE_NAMESPACES.map(async (ns) => {
+    namespaces.map(async (ns) => {
       translations[ns] = await safeImport(language, ns);
     })
   );
 
   // ===============================
-  // 🚀 OPTIONAL AUTO-EXTENSION
+  // 📦 CACHE RESULT
   // ===============================
-  /**
-   * Try loading extra namespaces dynamically
-   * (you don't need to register them anywhere)
-   */
-  const dynamicNamespaces = [
-    "dashboard",
-    "profile",
-    "settings",
-    "auth",
-    "common",
-  ];
+  translationCache.set(cacheKey, translations);
 
-  const dynamicResults: Record<string, Record<string, string>> = {};
-
-  await Promise.all(
-    dynamicNamespaces.map(async (ns) => {
-      const data = await safeImport(language, ns);
-
-      // Only attach if file exists (non-empty)
-      if (Object.keys(data).length > 0) {
-        dynamicResults[ns] = data;
-      }
-    })
-  );
-
-  const finalTranslations = mergeTranslations(
-    translations,
-    dynamicResults
-  );
-
-  // ===============================
-  // 📦 CACHE
-  // ===============================
-  translationCache.set(cacheKey, finalTranslations);
-
-  return finalTranslations;
+  return translations;
 }
 
 // ===============================
-// 🧹 CACHE CONTROL
+// 🧹 CLEAR CACHE
 // ===============================
 export function clearTranslationCache(): void {
   translationCache.clear();
@@ -154,7 +111,7 @@ export async function preloadTranslations(
 }
 
 // ===============================
-// 🔍 CHECK KEY
+// 🔍 CHECK TRANSLATION KEY
 // ===============================
 export function hasTranslation(
   translations: Translations,
