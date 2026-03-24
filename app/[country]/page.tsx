@@ -54,7 +54,7 @@ export default function CountryHomePage() {
           )}
         </p>
 
-        {/* 🔥 CTA (FULLY CLEAN - NO MIXING) */}
+        {/* ✅ CLEAN CTA (NO CHILDREN, NO MIXING) */}
         <PrimaryCTA
           href={`/${country}/signup`}
           translationKey="hero_cta"
@@ -115,7 +115,7 @@ export default function CountryHomePage() {
           )}
         </p>
 
-        {/* 🔥 FINAL CTA (CLEAN) */}
+        {/* ✅ FINAL CTA (CORRECT) */}
         <PrimaryCTA
           href={`/${country}/signup`}
           translationKey="final_cta_button"
