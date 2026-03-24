@@ -82,6 +82,7 @@ export async function loadAllTranslations(
     homepage: {},
     footer: {},
     header: {},
+    primarycta: {},
   };
 
   // ===============================
