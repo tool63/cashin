@@ -18,7 +18,7 @@ export default function HeroSection({ onOpenAuth }: HeroSectionProps) {
           Get Paid Instantly By
         </h1>
 
-        {/* TYPING GRADIENT TEXT */}
+        {/* TYPING TEXT */}
         <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
             <TypingText />
@@ -30,14 +30,16 @@ export default function HeroSection({ onOpenAuth }: HeroSectionProps) {
           Complete tasks, surveys, watch videos, and earn rewards securely from anywhere.
         </p>
 
-        {/* CTA BUTTON */}
+        {/* ✅ CTA (CORRECT — NO CHILDREN) */}
         <div
           className="inline-block cursor-pointer"
           onClick={() => onOpenAuth?.("signup")}
         >
-          <PrimaryCTA href="/signup" observer={true}>
-            Start Earning Now
-          </PrimaryCTA>
+          <PrimaryCTA
+            href="/signup"
+            translationKey="start_earning_now"
+            observer={true}
+          />
         </div>
 
         {/* TRUST BADGES */}
