@@ -1,39 +1,30 @@
 {
-  "default": {
-    "start_earning_now": "Start Earning Now",
-    "get_started_now": "Get Started Now",
-    "join_now": "Join Now",
-    "sign_up": "Sign Up",
-    "learn_more": "Learn More",
-    "create_account": "Create Account",
-    "start_free_trial": "Start Free Trial",
-    "claim_offer": "Claim Offer"
-  },
+  "start_earning_now": "Start Earning Now",
+  "get_started_now": "Get Started Now",
+  "join_now": "Join Now",
+  "sign_up": "Sign Up",
+  "learn_more": "Learn More",
+  "create_account": "Create Account",
+  "start_free_trial": "Start Free Trial",
+  "claim_offer": "Claim Offer",
 
-  "offers": {
-    "claim_offer": "Claim Offer",
-    "grab_offer": "Grab This Offer",
-    "unlock_deal": "Unlock Deal"
-  },
+  "get_cashback": "Get Cashback",
+  "earn_cashback": "Earn Cashback",
+  "get_discount": "Get Discount",
+  "unlock_deal": "Unlock Deal",
+  "grab_offer": "Grab This Offer",
+  "save_money": "Save Money",
+  "earn_rewards": "Earn Rewards",
+  "redeem_now": "Redeem Now",
 
-  "earnings": {
-    "start_earning_now": "Start Earning Now",
-    "earn_rewards": "Earn Rewards"
-  },
-
-  "cashback": {
-    "get_cashback": "Get Cashback",
-    "earn_cashback": "Earn Cashback"
-  },
-
-  "discounts": {
-    "get_discount": "Get Discount",
-    "save_money": "Save Money"
-  },
-
-  "floating_cta": [
-    "start_earning_now",
-    "get_cashback",
-    "grab_offer"
-  ]
+  "start_now": "Start Now",
+  "earn_now": "Earn Now",
+  "join_free": "Join for Free",
+  "try_now": "Try Now",
+  "get_rewards": "Get Rewards",
+  "withdraw_now": "Withdraw Now",
+  "earn_free_money": "Earn Free Money",
+  "start_earning_free": "Start Earning for Free",
+  "claim_rewards": "Claim Rewards",
+  "unlock_rewards": "Unlock Rewards"
 }
