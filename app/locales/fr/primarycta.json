@@ -1,39 +1,30 @@
 {
-  "default": {
-    "start_earning_now": "Commencez à gagner maintenant",
-    "get_started_now": "Commencer maintenant",
-    "join_now": "Rejoignez maintenant",
-    "sign_up": "S'inscrire",
-    "learn_more": "En savoir plus",
-    "create_account": "Créer un compte",
-    "start_free_trial": "Essai gratuit",
-    "claim_offer": "Réclamer l'offre"
-  },
+  "start_earning_now": "Commencez à gagner maintenant",
+  "get_started_now": "Commencer maintenant",
+  "join_now": "Rejoignez maintenant",
+  "sign_up": "S'inscrire",
+  "learn_more": "En savoir plus",
+  "create_account": "Créer un compte",
+  "start_free_trial": "Essai gratuit",
+  "claim_offer": "Réclamer l'offre",
 
-  "offers": {
-    "claim_offer": "Réclamer l'offre",
-    "grab_offer": "Profiter de l'offre",
-    "unlock_deal": "Débloquer l'offre"
-  },
+  "get_cashback": "Obtenir du cashback",
+  "earn_cashback": "Gagner du cashback",
+  "get_discount": "Obtenir une réduction",
+  "unlock_deal": "Débloquer l'offre",
+  "grab_offer": "Profiter de l'offre",
+  "save_money": "Économiser de l'argent",
+  "earn_rewards": "Gagner des récompenses",
+  "redeem_now": "Utiliser maintenant",
 
-  "earnings": {
-    "start_earning_now": "Commencez à gagner maintenant",
-    "earn_rewards": "Gagner des récompenses"
-  },
-
-  "cashback": {
-    "get_cashback": "Obtenir du cashback",
-    "earn_cashback": "Gagner du cashback"
-  },
-
-  "discounts": {
-    "get_discount": "Obtenir une réduction",
-    "save_money": "Économiser de l'argent"
-  },
-
-  "floating_cta": [
-    "start_earning_now",
-    "get_cashback",
-    "grab_offer"
-  ]
+  "start_now": "Commencer maintenant",
+  "earn_now": "Gagner maintenant",
+  "join_free": "Rejoindre gratuitement",
+  "try_now": "Essayer maintenant",
+  "get_rewards": "Obtenir des récompenses",
+  "withdraw_now": "Retirer maintenant",
+  "earn_free_money": "Gagner de l'argent gratuitement",
+  "start_earning_free": "Commencer à gagner gratuitement",
+  "claim_rewards": "Réclamer les récompenses",
+  "unlock_rewards": "Débloquer les récompenses"
 }
