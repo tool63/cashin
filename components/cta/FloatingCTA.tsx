@@ -3,12 +3,20 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import styles from "./FloatingCTA.module.css";
+import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
 
 export default function FloatingCTA() {
   const [visible, setVisible] = useState(false);
   const [bounceKey, setBounceKey] = useState(0);
 
-  const text = "Start Earning Now!";
+  const { getTranslation } = useLanguage();
+
+  const text = getTranslation(
+    "primarycta",
+    "start_earning_now",
+    "Start Earning Now"
+  );
+
   const letters = text.split("");
 
   useEffect(() => {
@@ -16,6 +24,7 @@ export default function FloatingCTA() {
 
     const observeCTAs = () => {
       const ctaElements = document.querySelectorAll(".cta-observer");
+
       if (!ctaElements.length) {
         setVisible(true);
         return;
@@ -39,7 +48,11 @@ export default function FloatingCTA() {
     const mutationObserver = new MutationObserver(() => {
       observeCTAs();
     });
-    mutationObserver.observe(document.body, { childList: true, subtree: true });
+
+    mutationObserver.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
 
     window.addEventListener("resize", observeCTAs);
 
@@ -51,19 +64,25 @@ export default function FloatingCTA() {
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => setBounceKey((prev) => prev + 1), 10000);
+    const interval = setInterval(
+      () => setBounceKey((prev) => prev + 1),
+      10000
+    );
     return () => clearInterval(interval);
   }, []);
 
   return (
     <Link
       href="/signup"
+      aria-label={text}
       className={`${styles.floatingCTA} ${visible ? styles.show : styles.hide}`}
     >
       {letters.map((char, index) => (
         <span
           key={`${bounceKey}-${index}`}
-          className={`${styles.letter} ${bounceKey ? styles.sparkle : ""}`}
+          className={`${styles.letter} ${
+            bounceKey ? styles.sparkle : ""
+          }`}
           style={{ animationDelay: `${index * 0.05}s` }}
         >
           {char === " " ? "\u00A0" : char}
