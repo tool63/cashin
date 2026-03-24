@@ -7,28 +7,24 @@ import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
 
 interface PrimaryCTAProps {
   href: string;
-  children?: string; // optional now
+  translationKey: string;
   observer?: boolean;
-  translationKey?: string;
 }
 
 export default function PrimaryCTA({
   href,
-  children = "",
-  observer = true,
   translationKey,
+  observer = true,
 }: PrimaryCTAProps) {
   const { getTranslation } = useLanguage();
 
-  const translatedText = translationKey
-    ? getTranslation("primarycta", translationKey, children)
-    : children;
+  const text = getTranslation("primarycta", translationKey, translationKey);
 
   return (
     <Link
       href={href}
       className={observer ? "cta-observer inline-block" : "inline-block"}
-      aria-label={translatedText}
+      aria-label={text}
     >
       <motion.span
         whileHover={{ scale: 1.08 }}
@@ -44,7 +40,7 @@ export default function PrimaryCTA({
           transition-all duration-300
         "
       >
-        {translatedText}
+        {text}
         <ArrowRight size={24} />
       </motion.span>
     </Link>
