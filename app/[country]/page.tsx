@@ -57,7 +57,7 @@ export default function CountryHomePage() {
         {/* ✅ CLEAN CTA (NO CHILDREN, NO MIXING) */}
         <PrimaryCTA
           href={`/${country}/signup`}
-          translationKey="hero_cta"
+          translationKey="get_started_now"
         />
 
         <p className="text-sm mt-4 text-gray-500">
@@ -118,7 +118,7 @@ export default function CountryHomePage() {
         {/* ✅ FINAL CTA (CORRECT) */}
         <PrimaryCTA
           href={`/${country}/signup`}
-          translationKey="final_cta_button"
+          translationKey="get_started_now"
         />
 
         <p className="text-sm mt-4 opacity-80">
