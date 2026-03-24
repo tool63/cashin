@@ -54,13 +54,11 @@ export default function CountryHomePage() {
           )}
         </p>
 
-        {/* 🔥 CTA (FIXED) */}
+        {/* 🔥 CTA (FULLY CLEAN - NO MIXING) */}
         <PrimaryCTA
           href={`/${country}/signup`}
           translationKey="hero_cta"
-        >
-          {t("hero_cta", "Get Started Now")}
-        </PrimaryCTA>
+        />
 
         <p className="text-sm mt-4 text-gray-500">
           No credit card required • Start instantly
@@ -117,13 +115,11 @@ export default function CountryHomePage() {
           )}
         </p>
 
-        {/* 🔥 Final CTA (FIXED) */}
+        {/* 🔥 FINAL CTA (CLEAN) */}
         <PrimaryCTA
           href={`/${country}/signup`}
           translationKey="final_cta_button"
-        >
-          {t("final_cta_button", "Get Started Now")}
-        </PrimaryCTA>
+        />
 
         <p className="text-sm mt-4 opacity-80">
           Fast signup • Instant access • No hidden fees
