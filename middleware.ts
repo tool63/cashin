@@ -3,13 +3,13 @@ import type { NextRequest } from "next/server";
 
 import {
   getGeoInfo,
-  buildCountryUrl,
+  buildUrl,
   extractCountryFromPath,
 } from "@/app/core/detector/index";
 
 import {
   isSupportedCountry,
-  normalizeCountry,
+  isValidCountryCode,
 } from "@/app/core/utils/validation";
 
 import {
@@ -17,18 +17,8 @@ import {
   DEFAULT_COUNTRY,
 } from "@/app/core/constants";
 
-// ===============================
-// 🤖 BOT DETECTION (SEO SAFE)
-// ===============================
-function isBot(userAgent: string) {
-  return /googlebot|bingbot|slurp|duckduckbot|baiduspider/i.test(
-    userAgent
-  );
-}
-
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
-  const userAgent = req.headers.get("user-agent") || "";
 
   // ===============================
   // 🚫 Skip internal routes
@@ -42,121 +32,104 @@ export function middleware(req: NextRequest) {
   }
 
   // ===============================
+  // 🌐 BOT DETECTION (IMPORTANT FOR SEO)
+  // ===============================
+  const userAgent = req.headers.get("user-agent") || "";
+  const isBot = /bot|crawl|spider|slurp|google|bing|yandex/i.test(userAgent);
+
+  // ===============================
   // 🌍 GEO INFO
   // ===============================
   const geo = getGeoInfo(req);
 
   const segments = pathname.split("/").filter(Boolean);
-  const firstSegment = segments[0]?.toLowerCase();
+  const first = segments[0]?.toLowerCase();
 
-  const urlCountry = extractCountryFromPath(pathname);
-  const hasValidPrefix = !!urlCountry;
+  const validUrlCountry = extractCountryFromPath(pathname);
+  const hasValidPrefix = validUrlCountry !== null;
 
-  const normalizedGeoCountry = normalizeCountry(geo.country);
-
-  // ===============================
-  // ❌ INVALID PREFIX HANDLING
-  // ===============================
   const hasInvalidPrefix =
-    firstSegment &&
-    !isSupportedCountry(firstSegment) &&
-    isSupportedCountry(normalizedGeoCountry || "");
-
-  if (hasInvalidPrefix) {
-    const url = req.nextUrl.clone();
-
-    url.pathname = "/" + segments.slice(1).join("/");
-
-    const res = NextResponse.redirect(url);
-
-    res.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
-      path: "/",
-      maxAge: 60 * 60 * 24 * 30,
-    });
-
-    res.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
-      path: "/",
-      maxAge: 60 * 60 * 24 * 365,
-    });
-
-    return res;
-  }
+    first && isValidCountryCode(first) && !isSupportedCountry(first);
 
   // ===============================
-  // 🌐 ROOT HANDLING (SEO OPTIMIZED)
+  // 🌐 ROOT (SEO SAFE)
   // ===============================
   if (pathname === "/") {
     const res = NextResponse.next();
 
-    res.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
-      path: "/",
-      maxAge: 60 * 60 * 24 * 30,
-    });
-
-    res.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
-      path: "/",
-      maxAge: 60 * 60 * 24 * 365,
-    });
+    setCookiesIfChanged(res, req, geo);
 
     return res;
   }
 
   // ===============================
-  // ➕ ADD COUNTRY PREFIX (SMART SEO)
+  // ❌ REMOVE INVALID PREFIX
+  // ===============================
+  if (hasInvalidPrefix) {
+    const url = req.nextUrl.clone();
+    url.pathname = "/" + segments.slice(1).join("/");
+
+    const res = NextResponse.redirect(url);
+
+    setCookiesIfChanged(res, req, geo);
+
+    return res;
+  }
+
+  // ===============================
+  // ➕ COUNTRY PREFIX (USER ONLY, NOT BOT)
   // ===============================
   if (
+    !isBot && // ✅ IMPORTANT: don't redirect bots
     !hasValidPrefix &&
-    normalizedGeoCountry &&
-    normalizedGeoCountry !== DEFAULT_COUNTRY
+    geo.country !== DEFAULT_COUNTRY
   ) {
-    const targetPath = buildCountryUrl(pathname, normalizedGeoCountry);
+    const target = buildUrl(pathname, geo.country);
 
-    // 🚨 Prevent infinite redirects
-    if (targetPath !== pathname) {
+    if (target !== pathname) {
       const url = req.nextUrl.clone();
-      url.pathname = targetPath;
+      url.pathname = target;
 
       const res = NextResponse.redirect(url);
 
-      res.cookies.set(COOKIE_KEYS.COUNTRY, normalizedGeoCountry, {
-        path: "/",
-        maxAge: 60 * 60 * 24 * 30,
-      });
-
-      res.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
-        path: "/",
-        maxAge: 60 * 60 * 24 * 365,
-      });
+      setCookiesIfChanged(res, req, geo);
 
       return res;
     }
   }
 
   // ===============================
-  // 🤖 BOT PRIORITY (IMPORTANT FOR SEO)
-  // ===============================
-  if (isBot(userAgent)) {
-    const res = NextResponse.next();
-
-    res.headers.set("x-robots-tag", "index, follow");
-
-    return res;
-  }
-
-  // ===============================
-  // 🍪 NORMAL RESPONSE
+  // ✅ NORMAL RESPONSE
   // ===============================
   const res = NextResponse.next();
 
-  res.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
-    path: "/",
-    maxAge: 60 * 60 * 24 * 30,
-  });
-
-  res.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
-    path: "/",
-    maxAge: 60 * 60 * 24 * 365,
-  });
+  setCookiesIfChanged(res, req, geo);
 
   return res;
+}
+
+// ===============================
+// 🍪 SAFE COOKIE HANDLER
+// ===============================
+function setCookiesIfChanged(
+  res: NextResponse,
+  req: NextRequest,
+  geo: { country: string; language: string }
+) {
+  const currentCountry = req.cookies.get(COOKIE_KEYS.COUNTRY)?.value;
+  const currentLanguage = req.cookies.get(COOKIE_KEYS.LANGUAGE)?.value;
+
+  if (currentCountry !== geo.country) {
+    res.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
+      path: "/",
+      maxAge: 60 * 60 * 24 * 30,
+    });
+  }
+
+  if (currentLanguage !== geo.language) {
+    res.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
+      path: "/",
+      maxAge: 60 * 60 * 24 * 365,
+    });
+  }
 }
