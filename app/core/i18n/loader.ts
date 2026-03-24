@@ -1,108 +1,93 @@
+// app/core/i18n/loader.ts
+
 import { DEFAULT_LANGUAGE } from "../constants";
 import type { SupportedLanguage } from "../types";
 
 export interface Translations {
-  homepage: Record<string, string>;
-  footer: Record<string, string>;
-  header: Record<string, string>;
   [key: string]: Record<string, string>;
 }
 
-// Cache translations to avoid reloading
+// Cache translations
 const translationCache = new Map<string, Translations>();
 
 /**
- * Load translations for a specific namespace
- */
-export async function loadTranslationsByNamespace(
-  language: SupportedLanguage,
-  namespace: string
-): Promise<Record<string, string>> {
-  try {
-    // Dynamic import based on language and namespace
-    const module = await import(
-      `@/app/locales/${language}/${namespace}.json`
-    );
-    return module.default || {};
-  } catch (error) {
-    // Namespace doesn't exist for this language
-    console.warn(`Namespace "${namespace}" not found for language "${language}"`);
-    
-    // Fallback to default language if available and not already default
-    if (language !== DEFAULT_LANGUAGE) {
-      try {
-        const fallbackModule = await import(
-          `@/app/locales/${DEFAULT_LANGUAGE}/${namespace}.json`
-        );
-        return fallbackModule.default || {};
-      } catch (fallbackError) {
-        console.warn(`Fallback namespace "${namespace}" not found for default language`);
-        return {};
-      }
-    }
-    
-    return {};
-  }
-}
-
-/**
  * Load all translations for a language
+ * Auto-detect namespaces from EN folder
  */
 export async function loadAllTranslations(
   language: SupportedLanguage
 ): Promise<Translations> {
   const cacheKey = language;
-  
-  // Check cache first
+
+  // ✅ Cache check
   if (translationCache.has(cacheKey)) {
     return translationCache.get(cacheKey)!;
   }
-  
-  // List of all namespaces to load
-  const namespaces = ["homepage", "footer", "header"];
-  
+
+  const translations: Translations = {};
+
   try {
-    // Load all namespaces in parallel
-    const translationsArray = await Promise.all(
-      namespaces.map(namespace => loadTranslationsByNamespace(language, namespace))
+    // 🔥 Load ALL English namespace modules (source of truth)
+    const enModules = import.meta.glob(
+      "@/app/locales/en/*.json",
+      { eager: true }
+    ) as Record<string, { default: Record<string, string> }>;
+
+    // ✅ Loop through all detected namespaces
+    await Promise.all(
+      Object.entries(enModules).map(async ([path, module]) => {
+        const namespace = path.split("/").pop()?.replace(".json", "");
+
+        if (!namespace) return;
+
+        // ✅ If language is EN → use directly
+        if (language === DEFAULT_LANGUAGE) {
+          translations[namespace] = module.default || {};
+          return;
+        }
+
+        try {
+          // 👉 Try loading target language
+          const langModule = await import(
+            `@/app/locales/${language}/${namespace}.json`
+          );
+
+          translations[namespace] = langModule.default || {};
+        } catch {
+          // 👉 Fallback to EN (already loaded)
+          translations[namespace] = module.default || {};
+        }
+      })
     );
-    
-    // Combine into single object
-    const translations = namespaces.reduce((acc, namespace, index) => {
-      acc[namespace] = translationsArray[index];
-      return acc;
-    }, {} as Translations);
-    
-    // Cache the result
+
+    // ✅ Cache result
     translationCache.set(cacheKey, translations);
-    
+
     return translations;
   } catch (error) {
     console.error(`Failed to load translations for ${language}:`, error);
-    
-    // Return empty translations as fallback
-    const emptyTranslations: Translations = {
-      homepage: {},
-      footer: {},
-      header: {},
-    };
-    
-    // Cache empty result to prevent repeated failing requests
+
+    // 🔥 Safe fallback to English
+    if (language !== DEFAULT_LANGUAGE) {
+      return loadAllTranslations(DEFAULT_LANGUAGE);
+    }
+
+    const emptyTranslations: Translations = {};
     translationCache.set(cacheKey, emptyTranslations);
-    
+
     return emptyTranslations;
   }
 }
 
 /**
- * Clear translation cache (useful for development)
+ * Clear translation cache
  */
 export function clearTranslationCache(): void {
   translationCache.clear();
 }
 
 /**
- * Preload translations for a language
+ * Preload translations
  */
 export async function preloadTranslations(
   language: SupportedLanguage
@@ -113,7 +98,7 @@ export async function preloadTranslations(
 }
 
 /**
- * Check if a translation key exists
+ * Check if translation exists
  */
 export function hasTranslation(
   translations: Translations,
