@@ -44,13 +44,13 @@ export default function CountryHomePage() {
       =============================== */}
       <div className="text-center mb-16">
         <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-          {t("welcome_message", "Welcome to PayUp! Earn money online.")}
+          {t("welcome_message", "Welcome to Cashog! Earn money online.")}
         </h1>
 
         <p className="text-xl text-gray-700 dark:text-gray-300 mb-10 max-w-3xl mx-auto">
           {t(
             "homepage_description",
-            "PayUp helps you earn real money online safely and quickly."
+            "Cashog helps you earn real money online safely and quickly."
           )}
         </p>
 
@@ -111,7 +111,7 @@ export default function CountryHomePage() {
         <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto opacity-90">
           {t(
             "final_cta_description",
-            "Join thousands of users already earning with PayUp. It only takes a few seconds to begin."
+            "Join thousands of users already earning with Cashog. It only takes a few seconds to begin."
           )}
         </p>
 
