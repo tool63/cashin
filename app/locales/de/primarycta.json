@@ -1,39 +1,30 @@
 {
-  "default": {
-    "start_earning_now": "Jetzt Geld verdienen",
-    "get_started_now": "Jetzt starten",
-    "join_now": "Jetzt beitreten",
-    "sign_up": "Registrieren",
-    "learn_more": "Mehr erfahren",
-    "create_account": "Konto erstellen",
-    "start_free_trial": "Kostenlos testen",
-    "claim_offer": "Angebot sichern"
-  },
+  "start_earning_now": "Jetzt Geld verdienen",
+  "get_started_now": "Jetzt starten",
+  "join_now": "Jetzt beitreten",
+  "sign_up": "Registrieren",
+  "learn_more": "Mehr erfahren",
+  "create_account": "Konto erstellen",
+  "start_free_trial": "Kostenlos testen",
+  "claim_offer": "Angebot sichern",
 
-  "offers": {
-    "claim_offer": "Angebot sichern",
-    "grab_offer": "Angebot sichern",
-    "unlock_deal": "Angebot freischalten"
-  },
+  "get_cashback": "Cashback erhalten",
+  "earn_cashback": "Cashback verdienen",
+  "get_discount": "Rabatt erhalten",
+  "unlock_deal": "Angebot freischalten",
+  "grab_offer": "Angebot sichern",
+  "save_money": "Geld sparen",
+  "earn_rewards": "Belohnungen verdienen",
+  "redeem_now": "Jetzt einlösen",
 
-  "earnings": {
-    "start_earning_now": "Jetzt Geld verdienen",
-    "earn_rewards": "Belohnungen verdienen"
-  },
-
-  "cashback": {
-    "get_cashback": "Cashback erhalten",
-    "earn_cashback": "Cashback verdienen"
-  },
-
-  "discounts": {
-    "get_discount": "Rabatt erhalten",
-    "save_money": "Geld sparen"
-  },
-
-  "floating_cta": [
-    "start_earning_now",
-    "get_cashback",
-    "grab_offer"
-  ]
+  "start_now": "Jetzt starten",
+  "earn_now": "Jetzt verdienen",
+  "join_free": "Kostenlos beitreten",
+  "try_now": "Jetzt ausprobieren",
+  "get_rewards": "Belohnungen erhalten",
+  "withdraw_now": "Jetzt auszahlen",
+  "earn_free_money": "Kostenlos Geld verdienen",
+  "start_earning_free": "Kostenlos Geld verdienen",
+  "claim_rewards": "Belohnungen sichern",
+  "unlock_rewards": "Belohnungen freischalten"
 }
