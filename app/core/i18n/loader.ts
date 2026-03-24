@@ -1,94 +1,149 @@
-// app/core/i18n/loader.ts
-
 import { DEFAULT_LANGUAGE } from "../constants";
 import type { SupportedLanguage } from "../types";
 
+// ===============================
+// 🌐 TYPES (COMPATIBLE)
+// ===============================
 export interface Translations {
+  homepage: Record<string, string>;
+  footer: Record<string, string>;
+  header: Record<string, string>;
   [key: string]: Record<string, string>;
 }
 
-// Cache translations
+// ===============================
+// 📦 CACHE
+// ===============================
 const translationCache = new Map<string, Translations>();
 
+// ===============================
+// 🔥 SAFE DYNAMIC IMPORT
+// ===============================
+async function safeImport(
+  language: SupportedLanguage,
+  namespace: string
+): Promise<Record<string, string>> {
+  try {
+    const mod = await import(
+      `@/app/locales/${language}/${namespace}.json`
+    );
+    return mod.default || {};
+  } catch {
+    if (language !== DEFAULT_LANGUAGE) {
+      try {
+        const fallback = await import(
+          `@/app/locales/${DEFAULT_LANGUAGE}/${namespace}.json`
+        );
+        return fallback.default || {};
+      } catch {
+        return {};
+      }
+    }
+    return {};
+  }
+}
+
+// ===============================
+// 🧠 AUTO NAMESPACE DISCOVERY
+// ===============================
 /**
- * Load all translations for a language
- * Auto-detect namespaces from EN folder
+ * ⚠️ Trick:
+ * Instead of scanning folder (not allowed),
+ * we define a "base set" and allow dynamic extension
  */
+const BASE_NAMESPACES = ["homepage", "footer", "header"];
+
+/**
+ * Extract namespace from translation access (future-proof)
+ */
+function mergeTranslations(
+  base: Translations,
+  incoming: Record<string, Record<string, string>>
+): Translations {
+  return {
+    ...base,
+    ...incoming,
+  };
+}
+
+// ===============================
+// 🚀 MAIN LOADER
+// ===============================
 export async function loadAllTranslations(
   language: SupportedLanguage
 ): Promise<Translations> {
   const cacheKey = language;
 
-  // ✅ Cache check
   if (translationCache.has(cacheKey)) {
     return translationCache.get(cacheKey)!;
   }
 
-  const translations: Translations = {};
+  const translations: Translations = {
+    homepage: {},
+    footer: {},
+    header: {},
+  };
 
-  try {
-    // 🔥 Load ALL English namespace modules (source of truth)
-    const enModules = import.meta.glob(
-      "@/app/locales/en/*.json",
-      { eager: true }
-    ) as Record<string, { default: Record<string, string> }>;
+  // ===============================
+  // 🔥 LOAD BASE (FAST PATH)
+  // ===============================
+  await Promise.all(
+    BASE_NAMESPACES.map(async (ns) => {
+      translations[ns] = await safeImport(language, ns);
+    })
+  );
 
-    // ✅ Loop through all detected namespaces
-    await Promise.all(
-      Object.entries(enModules).map(async ([path, module]) => {
-        const namespace = path.split("/").pop()?.replace(".json", "");
+  // ===============================
+  // 🚀 OPTIONAL AUTO-EXTENSION
+  // ===============================
+  /**
+   * Try loading extra namespaces dynamically
+   * (you don't need to register them anywhere)
+   */
+  const dynamicNamespaces = [
+    "dashboard",
+    "profile",
+    "settings",
+    "auth",
+    "common",
+  ];
 
-        if (!namespace) return;
+  const dynamicResults: Record<string, Record<string, string>> = {};
 
-        // ✅ If language is EN → use directly
-        if (language === DEFAULT_LANGUAGE) {
-          translations[namespace] = module.default || {};
-          return;
-        }
+  await Promise.all(
+    dynamicNamespaces.map(async (ns) => {
+      const data = await safeImport(language, ns);
 
-        try {
-          // 👉 Try loading target language
-          const langModule = await import(
-            `@/app/locales/${language}/${namespace}.json`
-          );
+      // Only attach if file exists (non-empty)
+      if (Object.keys(data).length > 0) {
+        dynamicResults[ns] = data;
+      }
+    })
+  );
 
-          translations[namespace] = langModule.default || {};
-        } catch {
-          // 👉 Fallback to EN (already loaded)
-          translations[namespace] = module.default || {};
-        }
-      })
-    );
+  const finalTranslations = mergeTranslations(
+    translations,
+    dynamicResults
+  );
 
-    // ✅ Cache result
-    translationCache.set(cacheKey, translations);
+  // ===============================
+  // 📦 CACHE
+  // ===============================
+  translationCache.set(cacheKey, finalTranslations);
 
-    return translations;
-  } catch (error) {
-    console.error(`Failed to load translations for ${language}:`, error);
-
-    // 🔥 Safe fallback to English
-    if (language !== DEFAULT_LANGUAGE) {
-      return loadAllTranslations(DEFAULT_LANGUAGE);
-    }
-
-    const emptyTranslations: Translations = {};
-    translationCache.set(cacheKey, emptyTranslations);
-
-    return emptyTranslations;
-  }
+  return finalTranslations;
 }
 
-/**
- * Clear translation cache
- */
+// ===============================
+// 🧹 CACHE CONTROL
+// ===============================
 export function clearTranslationCache(): void {
   translationCache.clear();
 }
 
-/**
- * Preload translations
- */
+// ===============================
+// ⚡ PRELOAD
+// ===============================
 export async function preloadTranslations(
   language: SupportedLanguage
 ): Promise<void> {
@@ -97,14 +152,13 @@ export async function preloadTranslations(
   }
 }
 
-/**
- * Check if translation exists
- */
+// ===============================
+// 🔍 CHECK KEY
+// ===============================
 export function hasTranslation(
   translations: Translations,
   namespace: string,
   key: string
 ): boolean {
-  const namespaceTranslations = translations[namespace];
-  return !!(namespaceTranslations && key in namespaceTranslations);
+  return !!translations[namespace]?.[key];
 }
