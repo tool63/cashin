@@ -9,16 +9,22 @@ interface PrimaryCTAProps {
   href: string;
   translationKey: string;
   observer?: boolean;
+  fallback?: string; // ✅ add fallback support
 }
 
 export default function PrimaryCTA({
   href,
   translationKey,
   observer = true,
+  fallback = "Get Started", // default fallback
 }: PrimaryCTAProps) {
   const { getTranslation } = useLanguage();
 
-  const text = getTranslation("primarycta", translationKey, translationKey);
+  const text = getTranslation(
+    "primarycta",
+    translationKey,
+    fallback
+  );
 
   return (
     <Link
