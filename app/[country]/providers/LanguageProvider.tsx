@@ -19,6 +19,8 @@ import { loadAllTranslations } from "@/app/core/i18n/loader";
 export type TranslationsMap = {
   homepage: Record<string, string>;
   footer: Record<string, string>;
+  header?: Record<string, string>;
+  primarycta?: Record<string, string>;
   [key: string]: Record<string, string>;
 };
 
@@ -52,66 +54,75 @@ export function LanguageProvider({
   const [isUserOverridden, setIsUserOverridden] = useState(isOverridden);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Helper function to get a translation from a specific namespace
-  const getTranslation = useCallback((
-    namespace: string,
-    key: string,
-    fallback: string
-  ): string => {
-    const namespaceTranslations = translations[namespace];
-    
-    if (namespaceTranslations && typeof namespaceTranslations === 'object') {
-      const value = namespaceTranslations[key];
-      if (value && typeof value === 'string') {
-        return value;
-      }
-    }
-    
-    // Try to find in other namespaces if not found in requested one
-    for (const ns of Object.keys(translations)) {
-      const nsTranslations = translations[ns];
-      if (nsTranslations && typeof nsTranslations === 'object' && nsTranslations[key]) {
-        return nsTranslations[key];
-      }
-    }
-    
-    return fallback;
-  }, [translations]);
+  // ===============================
+  // ✅ FIXED TRANSLATION FUNCTION
+  // ===============================
+  const getTranslation = useCallback(
+    (namespace: string, key: string, fallback: string): string => {
+      const ns = translations[namespace];
 
-  // Load translations when language changes
+      if (ns && typeof ns === "object") {
+        const value = ns[key];
+        if (typeof value === "string") {
+          return value;
+        }
+      }
+
+      // ❗ NO cross-namespace fallback (important fix)
+      return fallback;
+    },
+    [translations]
+  );
+
+  // ===============================
+  // 🔄 LOAD TRANSLATIONS
+  // ===============================
   useEffect(() => {
     let mounted = true;
 
     const loadTranslations = async () => {
-      // Don't show loading for initial load if we already have translations
-      if (!initialTranslations.homepage || Object.keys(initialTranslations.homepage).length === 0) {
+      if (
+        !initialTranslations.homepage ||
+        Object.keys(initialTranslations.homepage).length === 0
+      ) {
         setIsLoading(true);
       }
 
       try {
         const newTranslations = await loadAllTranslations(language);
-        
+
         if (mounted) {
           setTranslations(newTranslations);
         }
       } catch (error) {
         console.error(`Failed to load translations for ${language}:`, error);
-        
+
         if (mounted && language !== DEFAULT_LANGUAGE) {
-          // Try fallback to default language
           try {
             const fallbackTranslations = await loadAllTranslations(DEFAULT_LANGUAGE);
+
             if (mounted) {
               setTranslations(fallbackTranslations);
             }
           } catch (fallbackError) {
             console.error("Failed to load fallback translations:", fallbackError);
+
             if (mounted) {
-              setTranslations({ homepage: {}, footer: {} });
+              setTranslations({
+                homepage: {},
+                footer: {},
+                header: {},
+                primarycta: {},
+              });
             }
           }
         } else if (mounted) {
-          setTranslations({ homepage: {}, footer: {} });
+          setTranslations({
+            homepage: {},
+            footer: {},
+            header: {},
+            primarycta: {},
+          });
         }
       } finally {
         if (mounted) {
@@ -125,29 +136,32 @@ export function LanguageProvider({
     return () => {
       mounted = false;
     };
-  }, [language, DEFAULT_LANGUAGE]);
+  }, [language]);
 
   // ===============================
-  // 🔄 USER LANGUAGE CHANGE ONLY
+  // 🔄 CHANGE LANGUAGE
   // ===============================
-  const setLanguage = useCallback((lang: SupportedLanguage, isUserOverride: boolean = true) => {
-    setLanguageState(lang);
-    setIsUserOverridden(isUserOverride);
+  const setLanguage = useCallback(
+    (lang: SupportedLanguage, isUserOverride: boolean = true) => {
+      setLanguageState(lang);
+      setIsUserOverridden(isUserOverride);
 
-    if (typeof document !== "undefined") {
-      // Set language cookie
-      document.cookie = `${COOKIE_KEYS.LANGUAGE}=${lang}; path=/; max-age=31536000; SameSite=Lax`;
+      if (typeof document !== "undefined") {
+        document.cookie = `${COOKIE_KEYS.LANGUAGE}=${lang}; path=/; max-age=31536000; SameSite=Lax`;
 
-      // Set or clear user override cookie
-      if (isUserOverride) {
-        document.cookie = `${COOKIE_KEYS.USER_LANGUAGE_OVERRIDE}=${lang}; path=/; max-age=31536000; SameSite=Lax`;
-      } else {
-        document.cookie = `${COOKIE_KEYS.USER_LANGUAGE_OVERRIDE}=; path=/; max-age=0; SameSite=Lax`;
+        if (isUserOverride) {
+          document.cookie = `${COOKIE_KEYS.USER_LANGUAGE_OVERRIDE}=${lang}; path=/; max-age=31536000; SameSite=Lax`;
+        } else {
+          document.cookie = `${COOKIE_KEYS.USER_LANGUAGE_OVERRIDE}=; path=/; max-age=0; SameSite=Lax`;
+        }
       }
-    }
-  }, []);
+    },
+    []
+  );
 
-  // Sync with server-side language changes
+  // ===============================
+  // 🔄 SYNC WITH SERVER
+  // ===============================
   useEffect(() => {
     if (initialLanguage !== language && !isUserOverridden) {
       setLanguageState(initialLanguage);
