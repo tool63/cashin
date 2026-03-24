@@ -1,39 +1,30 @@
 {
-  "default": {
-    "start_earning_now": "Comece a ganhar agora",
-    "get_started_now": "Começar agora",
-    "join_now": "Junte-se agora",
-    "sign_up": "Cadastre-se",
-    "learn_more": "Saiba mais",
-    "create_account": "Criar conta",
-    "start_free_trial": "Iniciar teste gratuito",
-    "claim_offer": "Resgatar oferta"
-  },
+  "start_earning_now": "Comece a ganhar agora",
+  "get_started_now": "Começar agora",
+  "join_now": "Junte-se agora",
+  "sign_up": "Cadastre-se",
+  "learn_more": "Saiba mais",
+  "create_account": "Criar conta",
+  "start_free_trial": "Iniciar teste gratuito",
+  "claim_offer": "Resgatar oferta",
 
-  "offers": {
-    "claim_offer": "Resgatar oferta",
-    "grab_offer": "Aproveitar oferta",
-    "unlock_deal": "Desbloquear oferta"
-  },
+  "get_cashback": "Obter cashback",
+  "earn_cashback": "Ganhar cashback",
+  "get_discount": "Obter desconto",
+  "unlock_deal": "Desbloquear oferta",
+  "grab_offer": "Aproveitar oferta",
+  "save_money": "Economizar dinheiro",
+  "earn_rewards": "Ganhar recompensas",
+  "redeem_now": "Resgatar agora",
 
-  "earnings": {
-    "start_earning_now": "Comece a ganhar agora",
-    "earn_rewards": "Ganhar recompensas"
-  },
-
-  "cashback": {
-    "get_cashback": "Obter cashback",
-    "earn_cashback": "Ganhar cashback"
-  },
-
-  "discounts": {
-    "get_discount": "Obter desconto",
-    "save_money": "Economizar dinheiro"
-  },
-
-  "floating_cta": [
-    "start_earning_now",
-    "get_cashback",
-    "grab_offer"
-  ]
+  "start_now": "Começar agora",
+  "earn_now": "Ganhar agora",
+  "join_free": "Junte-se gratuitamente",
+  "try_now": "Experimentar agora",
+  "get_rewards": "Obter recompensas",
+  "withdraw_now": "Sacar agora",
+  "earn_free_money": "Ganhar dinheiro grátis",
+  "start_earning_free": "Começar a ganhar gratuitamente",
+  "claim_rewards": "Resgatar recompensas",
+  "unlock_rewards": "Desbloquear recompensas"
 }
