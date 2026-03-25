@@ -10,12 +10,11 @@ type MetadataProps = {
   description?: string;
   path: string;
   country?: string;
-  language?: string;
   noindex?: boolean;
 };
 
 // ===============================
-// 🧠 TITLE ENGINE (SMART)
+// 🧠 TITLE ENGINE
 // ===============================
 function generateTitle({
   title,
@@ -48,7 +47,7 @@ function generateTitle({
 }
 
 // ===============================
-// 🧠 DESCRIPTION ENGINE (SMART)
+// 🧠 DESCRIPTION ENGINE
 // ===============================
 function generateDescription({
   description,
@@ -86,28 +85,27 @@ function generateDescription({
 }
 
 // ===============================
-// 🔗 CANONICAL ENGINE (FIXED)
+// 🔗 CANONICAL
 // ===============================
 function generateCanonical(props: MetadataProps): string {
   return getCanonicalUrl({
     path: props.path,
     country: props.country,
-    language: props.language,
   });
 }
 
 // ===============================
-// 🌐 HREFLANG ENGINE (OPTIMIZED + DEDUPED)
+// 🌐 HREFLANG (COUNTRY ONLY)
 // ===============================
-function generateHreflangLinks(path: string) {
+function generateHreflangLinks(path: string, country?: string) {
   const cleanPath = path.startsWith("/") ? path : `/${path}`;
 
   const links: Record<string, string> = {};
 
-  // x-default
+  // x-default (global)
   links["x-default"] = SEO_CONFIG.buildUrl({ path: cleanPath });
 
-  // COUNTRIES
+  // COUNTRIES ONLY
   const countries = Array.from(
     new Set([
       ...SEO_CONFIG.highValueCountries,
@@ -116,24 +114,12 @@ function generateHreflangLinks(path: string) {
     ])
   );
 
-  for (const country of countries) {
-    const hreflang = SEO_CONFIG.getHreflang(country);
+  for (const c of countries) {
+    const hreflang = SEO_CONFIG.getHreflang(c);
 
     links[hreflang] = SEO_CONFIG.buildUrl({
       path: cleanPath,
-      country,
-    });
-  }
-
-  // LANGUAGES
-  const languages = Array.from(new Set(SEO_CONFIG.languages || []));
-
-  for (const lang of languages) {
-    if (lang === "en") continue;
-
-    links[lang] = SEO_CONFIG.buildUrl({
-      path: cleanPath,
-      language: lang,
+      country: c,
     });
   }
 
@@ -141,14 +127,13 @@ function generateHreflangLinks(path: string) {
 }
 
 // ===============================
-// 🚀 MAIN METADATA GENERATOR
+// 🚀 MAIN METADATA
 // ===============================
 export function generateMetadata({
   title,
   description,
   path,
   country,
-  language,
   noindex,
 }: MetadataProps): Metadata {
   const metaTitle = generateTitle({ title, path, country });
@@ -162,10 +147,9 @@ export function generateMetadata({
   const canonical = generateCanonical({
     path,
     country,
-    language,
   });
 
-  const hreflangs = generateHreflangLinks(path);
+  const hreflangs = generateHreflangLinks(path, country);
 
   return {
     title: metaTitle,
@@ -173,7 +157,7 @@ export function generateMetadata({
 
     alternates: {
       canonical,
-      languages: hreflangs,
+      languages: hreflangs, // 👈 OK because it's hreflang map, NOT language system
     },
 
     robots: noindex
@@ -207,7 +191,7 @@ export function generateMetadata({
 }
 
 // ===============================
-// 🚀 ELITE+ ALIASES (ENTERPRISE PATTERN)
+// 🚀 ALIASES
 // ===============================
 export const buildMetadata = generateMetadata;
 export const createMetadata = generateMetadata;
