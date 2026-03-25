@@ -3,9 +3,8 @@ export type SEOConfigType = {
   baseUrl: string;
   defaultCountry: string;
 
-  highValueCountries: string[];
-  midValueCountries: string[];
-  lowValueCountries: string[];
+  // 🌍 Tier system
+  getTier: (country?: string) => number;
 
   moneyPages: string[];
   earnPages: string[];
@@ -27,43 +26,67 @@ export type SEOConfigType = {
 export const SEO_CONFIG: SEOConfigType = {
   siteName: "Cashog",
   baseUrl: "https://cashog.com",
-
   defaultCountry: "us",
 
-  highValueCountries: ["us", "gb", "ca", "au"],
-  midValueCountries: ["de", "fr", "es", "it", "nl", "se", "ch", "br", "in"],
-  lowValueCountries: ["bd", "pk", "ng", "za", "ke", "eg", "id", "ph", "sg"],
+  // ===============================
+  // 🌍 7-TIER SYSTEM (GLOBAL STANDARD)
+  // ===============================
+  getTier(country) {
+    if (!country) return 1;
 
-  moneyPages: ["/earn", "/make-money", "/rewards", "/affiliate", "/partners", "/advertise"],
+    const c = country.toLowerCase();
 
-  earnPages: [
-    "/surveys", "/app-installs", "/play-games", "/watch-videos",
-    "/mining-rewards", "/complete-offers", "/cashback", "/offerwall",
-    "/surveywall", "/watch-ads", "/micro-tasks", "/complete-free-trials",
-    "/test-products", "/read-emails", "/visit-websites",
-    "/review-tasks", "/spinning-wheel", "/loyalty", "/vouchers",
-  ],
+    if (["us","gb","ca","au"].includes(c)) return 1;
+    if (["de","fr","nl","se","ch","no","dk"].includes(c)) return 2;
+    if (["it","es","fi","ie","at","be"].includes(c)) return 3;
+    if (["br","mx","pl","pt","tr","ro"].includes(c)) return 4;
+    if (["in","id","ph","vn","th","eg"].includes(c)) return 5;
+    if (["pk","bd","ng","ke","za"].includes(c)) return 6;
 
-  priority: {
-    money: 1.0,
-    earn: 0.98,
-    shopping: 0.9,
-    content: 0.85,
-    low: 0.7,
+    return 7;
   },
 
   // ===============================
-  // 🔗 COUNTRY-ONLY URL BUILDER
+  // 💰 PAGE GROUPS
+  // ===============================
+  moneyPages: [
+    "/earn",
+    "/make-money",
+    "/rewards",
+    "/affiliate",
+    "/partners",
+    "/advertise",
+  ],
+
+  earnPages: [
+    "/surveys","/app-installs","/play-games","/watch-videos",
+    "/mining-rewards","/complete-offers","/cashback","/offerwall",
+    "/surveywall","/watch-ads","/micro-tasks","/complete-free-trials",
+    "/test-products","/read-emails","/visit-websites",
+    "/review-tasks","/spinning-wheel","/loyalty","/vouchers",
+  ],
+
+  // ===============================
+  // 📊 BASE PRIORITY (PAGE VALUE)
+  // ===============================
+  priority: {
+    money: 1.0,
+    earn: 0.95,
+    shopping: 0.9,
+    content: 0.85,
+    low: 0.75,
+  },
+
+  // ===============================
+  // 🔗 URL BUILDER
   // ===============================
   buildUrl({ path, country }) {
     const cleanPath = path.startsWith("/") ? path : `/${path}`;
 
-    // Default (global)
     if (!country || country === this.defaultCountry) {
       return `${this.baseUrl}${cleanPath}`;
     }
 
-    // Country-based URL
     return `${this.baseUrl}/${country}${cleanPath}`;
   },
 
@@ -73,43 +96,62 @@ export const SEO_CONFIG: SEOConfigType = {
   getPageType(path) {
     if (this.moneyPages.includes(path)) return "money";
     if (this.earnPages.includes(path)) return "earn";
+
+    if (
+      path.includes("shop") ||
+      path.includes("store") ||
+      path.includes("cashback")
+    ) return "shopping";
+
+    if (
+      path.includes("blog") ||
+      path.includes("guide") ||
+      path.includes("compare")
+    ) return "content";
+
     return "low";
   },
 
   // ===============================
-  // 🚀 PRIORITY LOGIC
+  // 🚀 TIER-BASED PRIORITY ENGINE
   // ===============================
   getPriority(path, country) {
     const type = this.getPageType(path);
-    let base = this.priority[type] ?? 0.7;
+    const base = this.priority[type] ?? 0.75;
 
-    if (!country || country === this.defaultCountry) return base;
+    const tier = this.getTier(country);
 
-    if (this.highValueCountries.includes(country)) {
-      return Math.min(1, base + 0.05);
-    }
+    const tierBoost: Record<number, number> = {
+      1: 0.05,
+      2: 0.04,
+      3: 0.03,
+      4: 0.02,
+      5: 0.01,
+      6: 0,
+      7: -0.02,
+    };
 
-    if (this.midValueCountries.includes(country)) {
-      return Math.min(1, base + 0.02);
-    }
+    const boost = tierBoost[tier] ?? 0;
 
-    return base;
+    return Math.max(0.3, Math.min(1, base + boost));
   },
 
   // ===============================
-  // 🔄 CHANGE FREQUENCY
+  // 🔄 CHANGE FREQUENCY (TIER BASED)
   // ===============================
   getChangeFrequency(country) {
     if (!country) return "daily";
 
-    if (this.highValueCountries.includes(country)) return "daily";
-    if (this.midValueCountries.includes(country)) return "weekly";
+    const tier = this.getTier(country);
+
+    if (tier === 1) return "daily";
+    if (tier <= 3) return "weekly";
 
     return "monthly";
   },
 
   // ===============================
-  // 🌍 HREFLANG (COUNTRY ONLY)
+  // 🌍 HREFLANG
   // ===============================
   getHreflang(country) {
     if (!country) return "x-default";
@@ -119,6 +161,7 @@ export const SEO_CONFIG: SEOConfigType = {
       gb: "en-GB",
       ca: "en-CA",
       au: "en-AU",
+
       de: "de-DE",
       fr: "fr-FR",
       es: "es-ES",
@@ -126,14 +169,19 @@ export const SEO_CONFIG: SEOConfigType = {
       nl: "nl-NL",
       se: "sv-SE",
       ch: "de-CH",
+
       br: "pt-BR",
+      mx: "es-MX",
+
       in: "en-IN",
       bd: "bn-BD",
       pk: "ur-PK",
+
       ng: "en-NG",
       za: "en-ZA",
       ke: "en-KE",
       eg: "ar-EG",
+
       id: "id-ID",
       ph: "en-PH",
       sg: "en-SG",
@@ -144,19 +192,10 @@ export const SEO_CONFIG: SEOConfigType = {
 };
 
 // ===============================
-// 🚀 ALIASES (STABLE API)
+// 🚀 ENTERPRISE ALIASES
 // ===============================
 export const buildUrl = SEO_CONFIG.buildUrl;
-export const getBuildUrl = SEO_CONFIG.buildUrl;
-
 export const getPageType = SEO_CONFIG.getPageType;
-export const detectPageType = SEO_CONFIG.getPageType;
-
 export const getPriority = SEO_CONFIG.getPriority;
-export const calculatePriority = SEO_CONFIG.getPriority;
-
 export const getChangeFrequency = SEO_CONFIG.getChangeFrequency;
-export const getFrequency = SEO_CONFIG.getChangeFrequency;
-
 export const getHreflang = SEO_CONFIG.getHreflang;
-export const resolveHreflang = SEO_CONFIG.getHreflang;
