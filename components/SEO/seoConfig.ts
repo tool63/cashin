@@ -27,9 +27,6 @@ export type SEOConfigType = {
   getHreflang: (country?: string) => string;
 };
 
-// ===============================
-// 🌍 SEO CONFIG (CORE)
-// ===============================
 export const SEO_CONFIG: SEOConfigType = {
   siteName: "Cashog",
   baseUrl: "https://cashog.com",
@@ -37,17 +34,13 @@ export const SEO_CONFIG: SEOConfigType = {
   defaultCountry: "us",
   defaultLanguage: "en",
 
-  languages: [
-    "en", "fr", "de", "es", "pt", "it", "nl", "sv", "ar", "hi",
-  ],
+  languages: ["en", "fr", "de", "es", "pt", "it", "nl", "sv", "ar", "hi"],
 
   highValueCountries: ["us", "gb", "ca", "au"],
   midValueCountries: ["de", "fr", "es", "it", "nl", "se", "ch", "br", "in"],
   lowValueCountries: ["bd", "pk", "ng", "za", "ke", "eg", "id", "ph", "sg"],
 
-  moneyPages: [
-    "/earn", "/make-money", "/rewards", "/affiliate", "/partners", "/advertise",
-  ],
+  moneyPages: ["/earn", "/make-money", "/rewards", "/affiliate", "/partners", "/advertise"],
 
   earnPages: [
     "/surveys", "/app-installs", "/play-games", "/watch-videos",
@@ -65,39 +58,26 @@ export const SEO_CONFIG: SEOConfigType = {
     low: 0.7,
   },
 
-  // ===============================
-  // 🔗 CORE URL BUILDER
-  // ===============================
   buildUrl({ path, country, language }) {
-    const base = this.baseUrl;
     const cleanPath = path.startsWith("/") ? path : `/${path}`;
 
-    // LANGUAGE FIRST (STRICT SEO RULE)
     if (language) {
-      return `${base}/${language}${cleanPath}`;
+      return `${this.baseUrl}/${language}${cleanPath}`;
     }
 
-    // COUNTRY (NON-DEFAULT ONLY)
     if (country && country !== this.defaultCountry) {
-      return `${base}/${country}${cleanPath}`;
+      return `${this.baseUrl}/${country}${cleanPath}`;
     }
 
-    // DEFAULT → GLOBAL
-    return `${base}${cleanPath}`;
+    return `${this.baseUrl}${cleanPath}`;
   },
 
-  // ===============================
-  // 🧠 PAGE TYPE DETECTION
-  // ===============================
   getPageType(path) {
     if (this.moneyPages.includes(path)) return "money";
     if (this.earnPages.includes(path)) return "earn";
     return "low";
   },
 
-  // ===============================
-  // ⚡ PRIORITY ENGINE
-  // ===============================
   getPriority(path, country) {
     const type = this.getPageType(path);
     let base = this.priority[type] ?? 0.7;
@@ -117,21 +97,13 @@ export const SEO_CONFIG: SEOConfigType = {
     return base;
   },
 
-  // ===============================
-  // 🔁 CHANGE FREQUENCY
-  // ===============================
   getChangeFrequency(country) {
     if (!country) return "daily";
-
     if (this.highValueCountries.includes(country)) return "daily";
     if (this.midValueCountries.includes(country)) return "weekly";
-
     return "monthly";
   },
 
-  // ===============================
-  // 🌐 HREFLANG
-  // ===============================
   getHreflang(country) {
     if (!country) return "x-default";
 
@@ -164,28 +136,20 @@ export const SEO_CONFIG: SEOConfigType = {
   },
 };
 
-
-
-// ======================================================
-// 🚀 ELITE+ ALIAS LAYER (PUBLIC API - STABLE)
-// ======================================================
-
-// Alias for URL builder (SAFE)
+// ===============================
+// 🚀 ELITE+ ALIASES (STABLE API)
+// ===============================
 export const buildUrl = SEO_CONFIG.buildUrl;
 export const getBuildUrl = SEO_CONFIG.buildUrl;
 
-// Alias for page type
 export const getPageType = SEO_CONFIG.getPageType;
 export const detectPageType = SEO_CONFIG.getPageType;
 
-// Alias for priority
 export const getPriority = SEO_CONFIG.getPriority;
 export const calculatePriority = SEO_CONFIG.getPriority;
 
-// Alias for change frequency
 export const getChangeFrequency = SEO_CONFIG.getChangeFrequency;
 export const getFrequency = SEO_CONFIG.getChangeFrequency;
 
-// Alias for hreflang
 export const getHreflang = SEO_CONFIG.getHreflang;
 export const resolveHreflang = SEO_CONFIG.getHreflang;
