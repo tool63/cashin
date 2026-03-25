@@ -28,85 +28,35 @@ export type SEOConfigType = {
 };
 
 // ===============================
-// 🌍 SEO CONFIG (ENTERPRISE)
+// 🌍 SEO CONFIG (CORE)
 // ===============================
 export const SEO_CONFIG: SEOConfigType = {
-  // ===============================
-  // 🏢 BRAND
-  // ===============================
   siteName: "Cashog",
-
-  // ===============================
-  // 🌍 CORE DOMAIN
-  // ===============================
   baseUrl: "https://cashog.com",
 
   defaultCountry: "us",
   defaultLanguage: "en",
 
-  // ===============================
-  // 🌐 LANGUAGES
-  // ===============================
   languages: [
-    "en",
-    "fr",
-    "de",
-    "es",
-    "pt",
-    "it",
-    "nl",
-    "sv",
-    "ar",
-    "hi",
+    "en", "fr", "de", "es", "pt", "it", "nl", "sv", "ar", "hi",
   ],
 
-  // ===============================
-  // 🌍 COUNTRY TIERS
-  // ===============================
   highValueCountries: ["us", "gb", "ca", "au"],
   midValueCountries: ["de", "fr", "es", "it", "nl", "se", "ch", "br", "in"],
   lowValueCountries: ["bd", "pk", "ng", "za", "ke", "eg", "id", "ph", "sg"],
 
-  // ===============================
-  // 💰 MONEY PAGES
-  // ===============================
   moneyPages: [
-    "/earn",
-    "/make-money",
-    "/rewards",
-    "/affiliate",
-    "/partners",
-    "/advertise",
+    "/earn", "/make-money", "/rewards", "/affiliate", "/partners", "/advertise",
   ],
 
-  // ===============================
-  // 💸 EARN PAGES (FULL LIST)
-  // ===============================
   earnPages: [
-    "/surveys",
-    "/app-installs",
-    "/play-games",
-    "/watch-videos",
-    "/mining-rewards",
-    "/complete-offers",
-    "/cashback",
-    "/offerwall",
-    "/surveywall",
-    "/watch-ads",
-    "/micro-tasks",
-    "/complete-free-trials",
-    "/test-products",
-    "/read-emails",
-    "/visit-websites",
-    "/review-tasks",
-    "/spinning-wheel",
-    "/loyalty",
-    "/vouchers",
+    "/surveys", "/app-installs", "/play-games", "/watch-videos",
+    "/mining-rewards", "/complete-offers", "/cashback", "/offerwall",
+    "/surveywall", "/watch-ads", "/micro-tasks", "/complete-free-trials",
+    "/test-products", "/read-emails", "/visit-websites",
+    "/review-tasks", "/spinning-wheel", "/loyalty", "/vouchers",
   ],
 
-  // ===============================
-  // ⚡ PRIORITY SYSTEM
-  // ===============================
   priority: {
     money: 1.0,
     earn: 0.98,
@@ -116,23 +66,23 @@ export const SEO_CONFIG: SEOConfigType = {
   },
 
   // ===============================
-  // 🔗 URL BUILDER (SEO PERFECT)
+  // 🔗 CORE URL BUILDER
   // ===============================
   buildUrl({ path, country, language }) {
     const base = this.baseUrl;
     const cleanPath = path.startsWith("/") ? path : `/${path}`;
 
-    // LANGUAGE FIRST (IMPORTANT FOR SEO)
+    // LANGUAGE FIRST (STRICT SEO RULE)
     if (language) {
       return `${base}/${language}${cleanPath}`;
     }
 
-    // COUNTRY LOGIC
+    // COUNTRY (NON-DEFAULT ONLY)
     if (country && country !== this.defaultCountry) {
       return `${base}/${country}${cleanPath}`;
     }
 
-    // DEFAULT (GLOBAL - NO PREFIX)
+    // DEFAULT → GLOBAL
     return `${base}${cleanPath}`;
   },
 
@@ -146,25 +96,25 @@ export const SEO_CONFIG: SEOConfigType = {
   },
 
   // ===============================
-  // ⚡ PRIORITY CALCULATOR
+  // ⚡ PRIORITY ENGINE
   // ===============================
   getPriority(path, country) {
     const type = this.getPageType(path);
+    let base = this.priority[type] ?? 0.7;
 
-    let basePriority = this.priority[type] ?? 0.7;
+    if (!country) return base;
 
-    // BOOST FOR HIGH VALUE COUNTRIES
-    if (country === this.defaultCountry) return basePriority;
+    if (country === this.defaultCountry) return base;
 
-    if (country && this.highValueCountries.includes(country)) {
-      return Math.min(1, basePriority + 0.05);
+    if (this.highValueCountries.includes(country)) {
+      return Math.min(1, base + 0.05);
     }
 
-    if (country && this.midValueCountries.includes(country)) {
-      return Math.min(1, basePriority + 0.02);
+    if (this.midValueCountries.includes(country)) {
+      return Math.min(1, base + 0.02);
     }
 
-    return basePriority;
+    return base;
   },
 
   // ===============================
@@ -180,7 +130,7 @@ export const SEO_CONFIG: SEOConfigType = {
   },
 
   // ===============================
-  // 🌐 HREFLANG SYSTEM
+  // 🌐 HREFLANG
   // ===============================
   getHreflang(country) {
     if (!country) return "x-default";
@@ -213,3 +163,29 @@ export const SEO_CONFIG: SEOConfigType = {
     return map[country] || "en";
   },
 };
+
+
+
+// ======================================================
+// 🚀 ELITE+ ALIAS LAYER (PUBLIC API - STABLE)
+// ======================================================
+
+// Alias for URL builder (SAFE)
+export const buildUrl = SEO_CONFIG.buildUrl;
+export const getBuildUrl = SEO_CONFIG.buildUrl;
+
+// Alias for page type
+export const getPageType = SEO_CONFIG.getPageType;
+export const detectPageType = SEO_CONFIG.getPageType;
+
+// Alias for priority
+export const getPriority = SEO_CONFIG.getPriority;
+export const calculatePriority = SEO_CONFIG.getPriority;
+
+// Alias for change frequency
+export const getChangeFrequency = SEO_CONFIG.getChangeFrequency;
+export const getFrequency = SEO_CONFIG.getChangeFrequency;
+
+// Alias for hreflang
+export const getHreflang = SEO_CONFIG.getHreflang;
+export const resolveHreflang = SEO_CONFIG.getHreflang;
