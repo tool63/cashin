@@ -4,10 +4,13 @@ import {
   SUPPORTED_LANGUAGES,
 } from "@/app/core/constants";
 
+// ===============================
+// 🌍 CONFIG
+// ===============================
 const BASE_URL = "https://cashog.com";
 
 // ===============================
-// 🌍 ISO COUNTRIES (SHORT SAMPLE → use full list in your system)
+// 🌎 COUNTRY GROUPS
 // ===============================
 const ISO_COUNTRIES = [
   "af","al","dz","ad","ao","ag","ar","am","au","at","az",
@@ -37,20 +40,13 @@ const ISO_COUNTRIES = [
 ];
 
 // ===============================
-// 🥇 HIGH VALUE COUNTRIES
+// 🥇 PRIORITY GROUPS
 // ===============================
-const HIGH_VALUE = ["us", "gb", "ca", "au"];
+const HIGH_VALUE_COUNTRIES = ["us", "gb", "ca", "au"];
+const MID_VALUE_COUNTRIES = ["de", "fr", "es", "it", "nl", "se", "ch", "br", "in"];
 
 // ===============================
-// 🥈 MID VALUE COUNTRIES
-// ===============================
-const MID_VALUE = [
-  "de","fr","es","it","nl","se","ch",
-  "br","in"
-];
-
-// ===============================
-// 💰 GLOBAL CORE PAGES
+// 📦 PAGE STRUCTURE
 // ===============================
 const CORE_PAGES = [
   "",
@@ -66,9 +62,6 @@ const CORE_PAGES = [
   "/cashout",
 ];
 
-// ===============================
-// 💸 EARNING PAGES (FULL LIST)
-// ===============================
 const EARN_PAGES = [
   "/surveys",
   "/app-installs",
@@ -91,9 +84,6 @@ const EARN_PAGES = [
   "/vouchers",
 ];
 
-// ===============================
-// 🛍 SHOPPING STRUCTURE
-// ===============================
 const SHOPPING_PAGES = [
   "/shopping-rewards",
   "/shopping-rewards/electronics",
@@ -107,81 +97,80 @@ const SHOPPING_PAGES = [
   "/shopping-rewards/travel/flights",
 ];
 
-// ===============================
-// 📚 CONTENT PAGES
-// ===============================
-const CONTENT_PAGES = [
-  "/blog",
-  "/guides",
-  "/compare",
-];
+const CONTENT_PAGES = ["/blog", "/guides", "/compare"];
 
 // ===============================
-// 🧠 MERGED ALL PAGES
+// 🧠 PAGE SET (OPTIMIZED)
 // ===============================
 const ALL_PAGES = [
-  ...CORE_PAGES,
-  ...EARN_PAGES,
-  ...SHOPPING_PAGES,
-  ...CONTENT_PAGES,
+  ...new Set([...CORE_PAGES, ...EARN_PAGES, ...SHOPPING_PAGES, ...CONTENT_PAGES]),
 ];
 
 // ===============================
-// 🧠 PRIORITY ENGINE
+// 🔧 HELPERS (ENTERPRISE LEVEL)
 // ===============================
-function getPriority(country: string, path: string): number {
-  if (path === "") return 1;
+function normalizePath(path: string) {
+  if (!path) return "/";
+  return path.startsWith("/") ? path : `/${path}`;
+}
 
-  if (HIGH_VALUE.includes(country)) return 0.95;
+function buildUrl({
+  path,
+  country,
+  lang,
+}: {
+  path: string;
+  country?: string;
+  lang?: string;
+}) {
+  const cleanPath = normalizePath(path);
 
-  if (MID_VALUE.includes(country)) return 0.85;
+  if (lang) return `${BASE_URL}/${lang}${cleanPath}`;
 
-  return 0.7;
+  if (country && country !== DEFAULT_COUNTRY) {
+    return `${BASE_URL}/${country}${cleanPath}`;
+  }
+
+  return `${BASE_URL}${cleanPath}`;
 }
 
 // ===============================
-// 🔁 CHANGE FREQUENCY ENGINE
+// 📊 PRIORITY ENGINE (SMART)
 // ===============================
-function getChangeFreq(country: string): MetadataRoute.Sitemap[number]["changeFrequency"] {
-  if (HIGH_VALUE.includes(country)) return "daily";
-  if (MID_VALUE.includes(country)) return "weekly";
+function getPriority(country: string, path: string): number {
+  if (path === "/") return 1;
+
+  if (HIGH_VALUE_COUNTRIES.includes(country)) return 0.95;
+  if (MID_VALUE_COUNTRIES.includes(country)) return 0.85;
+
+  return 0.75;
+}
+
+// ===============================
+// 🔄 CHANGEFREQ ENGINE
+// ===============================
+function getChangeFrequency(
+  country: string
+): MetadataRoute.Sitemap[number]["changeFrequency"] {
+  if (HIGH_VALUE_COUNTRIES.includes(country)) return "daily";
+  if (MID_VALUE_COUNTRIES.includes(country)) return "weekly";
   return "monthly";
 }
 
 // ===============================
-// 🔗 URL BUILDER
-// ===============================
-function buildUrl(path: string, country?: string, lang?: string) {
-  const clean = path.startsWith("/") ? path : `/${path}`;
-
-  if (!country && !lang) {
-    return `${BASE_URL}${clean}`;
-  }
-
-  if (lang) {
-    return `${BASE_URL}/${lang}${clean}`;
-  }
-
-  if (country && country !== DEFAULT_COUNTRY) {
-    return `${BASE_URL}/${country}${clean}`;
-  }
-
-  return `${BASE_URL}${clean}`;
-}
-
-// ===============================
-// 🚀 MAIN SITEMAP ENGINE
+// 🚀 SITEMAP ENGINE (CORE)
 // ===============================
 export default function sitemap(): MetadataRoute.Sitemap {
-  const urls: MetadataRoute.Sitemap = [];
   const now = new Date();
 
+  const sitemap: MetadataRoute.Sitemap = [];
+
   // ===============================
-  // 🌍 GLOBAL DEFAULT (MAIN INDEX)
+  // 🌍 GLOBAL (NO COUNTRY / NO LANG)
   // ===============================
   for (const path of ALL_PAGES) {
-    urls.push({
-      url: buildUrl(path),
+    sitemap.push({
+      url: buildUrl({ path }),
       lastModified: now,
       changeFrequency: "daily",
       priority: path === "" ? 1 : 0.98,
@@ -189,28 +178,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }
 
   // ===============================
-  // 🌍 COUNTRY FULL COVERAGE
+  // 🌎 COUNTRY PAGES (DEDUPED)
   // ===============================
   for (const country of ISO_COUNTRIES) {
     for (const path of ALL_PAGES) {
-      urls.push({
-        url: buildUrl(path, country),
+      sitemap.push({
+        url: buildUrl({ path, country }),
         lastModified: now,
-        changeFrequency: getChangeFreq(country),
+        changeFrequency: getChangeFrequency(country),
         priority: getPriority(country, path),
       });
     }
   }
 
   // ===============================
-  // 🌐 LANGUAGE VERSIONS
+  // 🌐 LANGUAGE PAGES (DEDUPED)
   // ===============================
-  for (const lang of SUPPORTED_LANGUAGES) {
+  const uniqueLanguages = Array.from(new Set(SUPPORTED_LANGUAGES));
+
+  for (const lang of uniqueLanguages) {
     if (lang === "en") continue;
 
     for (const path of ALL_PAGES) {
-      urls.push({
-        url: buildUrl(path, undefined, lang),
+      sitemap.push({
+        url: buildUrl({ path, lang }),
         lastModified: now,
         changeFrequency: "weekly",
         priority: 0.85,
@@ -218,5 +209,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  return urls;
+  return sitemap;
 }
