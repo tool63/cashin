@@ -7,7 +7,7 @@ import { DEFAULT_COUNTRY } from "@/app/core/constants";
 const BASE_URL = "https://cashog.com";
 
 // ===============================
-// 🌎 COUNTRIES ONLY
+// 🌎 ALL COUNTRIES (FULL GLOBAL)
 // ===============================
 const ISO_COUNTRIES = [
   "af","al","dz","ad","ao","ag","ar","am","au","at","az",
@@ -37,10 +37,18 @@ const ISO_COUNTRIES = [
 ];
 
 // ===============================
-// 🥇 PRIORITY GROUPS
+// 🧠 7-TIER COUNTRY SYSTEM
 // ===============================
-const HIGH_VALUE_COUNTRIES = ["us", "gb", "ca", "au"];
-const MID_VALUE_COUNTRIES = ["de", "fr", "es", "it", "nl", "se", "ch", "br", "in"];
+function getTier(country: string): number {
+  if (["us","gb","ca","au"].includes(country)) return 1;
+  if (["de","fr","nl","se","ch","no","dk"].includes(country)) return 2;
+  if (["it","es","fi","ie","at","be"].includes(country)) return 3;
+  if (["br","mx","pl","pt","tr","ro"].includes(country)) return 4;
+  if (["in","id","ph","vn","th","eg"].includes(country)) return 5;
+  if (["pk","bd","ng","ke","za"].includes(country)) return 6;
+
+  return 7; // fallback (rest of world)
+}
 
 // ===============================
 // 📦 PAGE STRUCTURE
@@ -87,55 +95,101 @@ const SHOPPING_PAGES = [
 
 const CONTENT_PAGES = ["/blog", "/guides", "/compare"];
 
-// ===============================
-// 🧠 ALL PAGES
-// ===============================
-const ALL_PAGES = [
-  ...new Set([...CORE_PAGES, ...EARN_PAGES, ...SHOPPING_PAGES, ...CONTENT_PAGES]),
-];
+const ALL_PAGES = Array.from(
+  new Set([
+    ...CORE_PAGES,
+    ...EARN_PAGES,
+    ...SHOPPING_PAGES,
+    ...CONTENT_PAGES,
+  ])
+);
 
 // ===============================
 // 🔧 HELPERS
 // ===============================
 function normalizePath(path: string) {
+  if (!path || path === "") return "/";
   return path.startsWith("/") ? path : `/${path}`;
 }
 
 function buildUrl(path: string, country?: string) {
-  const cleanPath = normalizePath(path);
+  const clean = normalizePath(path);
 
   if (country && country !== DEFAULT_COUNTRY) {
-    return `${BASE_URL}/${country}${cleanPath}`;
+    return `${BASE_URL}/${country}${clean}`;
   }
 
-  return `${BASE_URL}${cleanPath}`;
+  return `${BASE_URL}${clean}`;
 }
 
 // ===============================
-// 📊 PRIORITY ENGINE
+// 📊 PAGE VALUE ENGINE
 // ===============================
-function getPriority(country: string, path: string): number {
-  if (path === "/") return 1;
+function getPageWeight(path: string): number {
+  const clean = normalizePath(path);
 
-  if (HIGH_VALUE_COUNTRIES.includes(country)) return 0.95;
-  if (MID_VALUE_COUNTRIES.includes(country)) return 0.85;
+  if (clean === "/") return 1;
+
+  if (
+    ["/earn","/make-money","/rewards","/affiliate"].includes(clean)
+  ) return 0.98;
+
+  if (EARN_PAGES.includes(clean)) return 0.95;
+
+  if (clean.includes("shopping")) return 0.9;
+
+  if (
+    clean.includes("blog") ||
+    clean.includes("guides") ||
+    clean.includes("compare")
+  ) return 0.85;
 
   return 0.75;
 }
 
 // ===============================
-// 🔄 CHANGEFREQ ENGINE
+// 📊 FINAL PRIORITY ENGINE
+// ===============================
+function getPriority(country: string | undefined, path: string): number {
+  const base = getPageWeight(path);
+
+  if (!country) return base;
+
+  const tier = getTier(country);
+
+  const tierBoost: Record<number, number> = {
+    1: 0.05,
+    2: 0.04,
+    3: 0.03,
+    4: 0.02,
+    5: 0.01,
+    6: 0,
+    7: -0.02,
+  };
+
+  const boost = tierBoost[tier] ?? 0;
+
+  return Math.max(0.3, Math.min(1, base + boost));
+}
+
+// ===============================
+// 🔄 CHANGE FREQUENCY
 // ===============================
 function getChangeFrequency(
-  country: string
+  country?: string
 ): MetadataRoute.Sitemap[number]["changeFrequency"] {
-  if (HIGH_VALUE_COUNTRIES.includes(country)) return "daily";
-  if (MID_VALUE_COUNTRIES.includes(country)) return "weekly";
+  if (!country) return "daily";
+
+  const tier = getTier(country);
+
+  if (tier === 1) return "daily";
+  if (tier <= 3) return "weekly";
+
   return "monthly";
 }
 
 // ===============================
-// 🚀 SITEMAP (CLEAN)
+// 🚀 FINAL SITEMAP ENGINE
 // ===============================
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -147,11 +201,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: buildUrl(path),
       lastModified: now,
       changeFrequency: "daily",
-      priority: path === "" ? 1 : 0.98,
+      priority: getPriority(undefined, path),
     });
   }
 
-  // 🌎 COUNTRY ONLY
+  // 🌎 ALL COUNTRIES (TIER BASED)
   for (const country of ISO_COUNTRIES) {
     for (const path of ALL_PAGES) {
       sitemap.push({
