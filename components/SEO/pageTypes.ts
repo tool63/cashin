@@ -1,7 +1,7 @@
 import { SEO_CONFIG } from "./seoConfig";
 
 // ===============================
-// 🧠 PAGE TYPES
+// 🧠 PAGE TYPES (STRICT ENUM)
 // ===============================
 export type PageType =
   | "money"
@@ -11,12 +11,33 @@ export type PageType =
   | "low";
 
 // ===============================
-// 🧠 NORMALIZE PATH
+// 🧠 NORMALIZE PATH (SAFE)
 // ===============================
 function normalizePath(path: string): string {
   if (!path) return "/";
-  if (!path.startsWith("/")) return `/${path}`;
-  return path.split("?")[0].split("#")[0];
+
+  let clean = path;
+
+  if (!clean.startsWith("/")) {
+    clean = `/${clean}`;
+  }
+
+  // Remove query + hash
+  clean = clean.split("?")[0].split("#")[0];
+
+  // Remove trailing slash (except root)
+  if (clean.length > 1 && clean.endsWith("/")) {
+    clean = clean.slice(0, -1);
+  }
+
+  return clean;
+}
+
+// ===============================
+// 🧠 MATCH HELPERS (TYPE SAFE)
+// ===============================
+function matchPath(list: string[], path: string): boolean {
+  return list.some((p) => path === p || path.startsWith(`${p}/`));
 }
 
 // ===============================
@@ -28,40 +49,39 @@ function detectPageType(path: string): PageType {
   // ===============================
   // 💰 MONEY PAGES
   // ===============================
-  if (
-    SEO_CONFIG.moneyPages.some((p) => cleanPath.startsWith(p))
-  ) {
+  if (matchPath(SEO_CONFIG.moneyPages, cleanPath)) {
     return "money";
   }
 
   // ===============================
   // 🎯 EARN PAGES
   // ===============================
-  if (
-    SEO_CONFIG.earnPages.some((p) => cleanPath.startsWith(p))
-  ) {
+  if (matchPath(SEO_CONFIG.earnPages, cleanPath)) {
     return "earn";
   }
 
   // ===============================
-  // 🛍 SHOPPING (EXTENSIBLE)
+  // 🛍 SHOPPING (SMART DETECTION)
   // ===============================
   if (
     cleanPath.includes("shop") ||
     cleanPath.includes("store") ||
-    cleanPath.includes("product")
+    cleanPath.includes("product") ||
+    cleanPath.includes("deal") ||
+    cleanPath.includes("cashback")
   ) {
     return "shopping";
   }
 
   // ===============================
-  // 📚 CONTENT
+  // 📚 CONTENT (SEO BLOG / GUIDE)
   // ===============================
   if (
     cleanPath.includes("blog") ||
     cleanPath.includes("guide") ||
     cleanPath.includes("learn") ||
-    cleanPath.includes("article")
+    cleanPath.includes("article") ||
+    cleanPath.includes("tips")
   ) {
     return "content";
   }
@@ -73,15 +93,23 @@ function detectPageType(path: string): PageType {
 }
 
 // ===============================
-// 🚀 PUBLIC API
+// 🚀 PUBLIC API (PRIMARY)
 // ===============================
 export function getPageType(path: string): PageType {
   return detectPageType(path);
 }
 
 // ===============================
-// 🚀 ALIASES (ENTERPRISE PATTERN)
+// 🚀 ENTERPRISE ALIASES
 // ===============================
 export const detectPageCategory = getPageType;
 export const resolvePageType = getPageType;
 export const classifyPage = getPageType;
+
+// ===============================
+// 🔥 OPTIONAL: PRIORITY HELPER
+// ===============================
+export function getPagePriority(path: string, country?: string): number {
+  const type = getPageType(path);
+  return SEO_CONFIG.getPriority(path, country) ?? SEO_CONFIG.priority[type] ?? 0.7;
+}
