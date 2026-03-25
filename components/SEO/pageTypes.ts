@@ -1,6 +1,22 @@
 import { SEO_CONFIG } from "./seoConfig";
 
 // ===============================
+// 🧠 SEO INPUT TYPE (FIXED - REQUIRED)
+// ===============================
+export type SeoInput = {
+  path: string;
+
+  title?: string;
+  description?: string;
+  keywords?: string[];
+
+  country?: string;
+  language?: string;
+
+  noindex?: boolean;
+};
+
+// ===============================
 // 🧠 PAGE TYPES (STRICT ENUM)
 // ===============================
 export type PageType =
@@ -107,9 +123,14 @@ export const resolvePageType = getPageType;
 export const classifyPage = getPageType;
 
 // ===============================
-// 🔥 OPTIONAL: PRIORITY HELPER
+// 🔥 PRIORITY HELPER (SAFE)
 // ===============================
 export function getPagePriority(path: string, country?: string): number {
   const type = getPageType(path);
-  return SEO_CONFIG.getPriority(path, country) ?? SEO_CONFIG.priority[type] ?? 0.7;
+
+  return (
+    SEO_CONFIG.getPriority(path, country) ??
+    SEO_CONFIG.priority[type] ??
+    0.7
+  );
 }
