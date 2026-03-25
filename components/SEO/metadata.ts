@@ -14,6 +14,17 @@ type MetadataProps = {
 };
 
 // ===============================
+// 🌍 GLOBAL COUNTRY LIST (SHARED)
+// ===============================
+const ALL_COUNTRIES = [
+  "us","gb","ca","au","de","fr","nl","se","ch","no","dk",
+  "it","es","fi","ie","at","be",
+  "br","mx","pl","pt","tr","ro",
+  "in","id","ph","vn","th","eg",
+  "pk","bd","ng","ke","za"
+];
+
+// ===============================
 // 🧠 TITLE ENGINE
 // ===============================
 function generateTitle({
@@ -95,31 +106,23 @@ function generateCanonical(props: MetadataProps): string {
 }
 
 // ===============================
-// 🌐 HREFLANG (COUNTRY ONLY)
+// 🌐 HREFLANG ENGINE (TIER SAFE)
 // ===============================
-function generateHreflangLinks(path: string, country?: string) {
+function generateHreflangLinks(path: string) {
   const cleanPath = path.startsWith("/") ? path : `/${path}`;
 
   const links: Record<string, string> = {};
 
-  // x-default (global)
+  // 🌍 x-default
   links["x-default"] = SEO_CONFIG.buildUrl({ path: cleanPath });
 
-  // COUNTRIES ONLY
-  const countries = Array.from(
-    new Set([
-      ...SEO_CONFIG.highValueCountries,
-      ...SEO_CONFIG.midValueCountries,
-      ...SEO_CONFIG.lowValueCountries,
-    ])
-  );
-
-  for (const c of countries) {
-    const hreflang = SEO_CONFIG.getHreflang(c);
+  // 🌎 ALL COUNTRIES (CONTROLLED LIST)
+  for (const country of ALL_COUNTRIES) {
+    const hreflang = SEO_CONFIG.getHreflang(country);
 
     links[hreflang] = SEO_CONFIG.buildUrl({
       path: cleanPath,
-      country: c,
+      country,
     });
   }
 
@@ -149,7 +152,7 @@ export function generateMetadata({
     country,
   });
 
-  const hreflangs = generateHreflangLinks(path, country);
+  const hreflangs = generateHreflangLinks(path);
 
   return {
     title: metaTitle,
@@ -157,7 +160,7 @@ export function generateMetadata({
 
     alternates: {
       canonical,
-      languages: hreflangs, // 👈 OK because it's hreflang map, NOT language system
+      languages: hreflangs,
     },
 
     robots: noindex
