@@ -1,5 +1,5 @@
 import { SEO_CONFIG } from "./seoConfig";
-import type { PageType } from "./pageType";
+import type { PageType } from "./pageTypes";
 
 // ===============================
 // 🧠 TYPES
