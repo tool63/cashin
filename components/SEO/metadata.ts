@@ -86,10 +86,14 @@ function generateDescription({
 }
 
 // ===============================
-// 🔗 CANONICAL ENGINE (TRUTH SOURCE)
+// 🔗 CANONICAL ENGINE (FIXED)
 // ===============================
 function generateCanonical(props: MetadataProps): string {
-  return getCanonicalUrl(props.path, props.country, props.language);
+  return getCanonicalUrl({
+    path: props.path,
+    country: props.country,
+    language: props.language,
+  });
 }
 
 // ===============================
@@ -103,7 +107,7 @@ function generateHreflangLinks(path: string) {
   // x-default
   links["x-default"] = SEO_CONFIG.buildUrl({ path: cleanPath });
 
-  // COUNTRIES (deduplicated)
+  // COUNTRIES
   const countries = Array.from(
     new Set([
       ...SEO_CONFIG.highValueCountries,
@@ -114,13 +118,14 @@ function generateHreflangLinks(path: string) {
 
   for (const country of countries) {
     const hreflang = SEO_CONFIG.getHreflang(country);
+
     links[hreflang] = SEO_CONFIG.buildUrl({
       path: cleanPath,
       country,
     });
   }
 
-  // LANGUAGES (deduplicated)
+  // LANGUAGES
   const languages = Array.from(new Set(SEO_CONFIG.languages || []));
 
   for (const lang of languages) {
@@ -147,6 +152,7 @@ export function generateMetadata({
   noindex,
 }: MetadataProps): Metadata {
   const metaTitle = generateTitle({ title, path, country });
+
   const metaDescription = generateDescription({
     description,
     path,
@@ -172,7 +178,17 @@ export function generateMetadata({
 
     robots: noindex
       ? { index: false, follow: false }
-      : { index: true, follow: true },
+      : {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+            "max-video-preview": -1,
+          },
+        },
 
     openGraph: {
       title: metaTitle,
