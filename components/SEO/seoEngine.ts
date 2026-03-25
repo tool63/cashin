@@ -14,14 +14,7 @@ const DEFAULT_DESCRIPTION =
 // 🧠 MAIN SEO ENGINE (CLEAN)
 // ===============================
 export function generateSeo(input: SeoInput) {
-  const {
-    title,
-    description,
-    path,
-    country,
-    language,
-    noindex,
-  } = input;
+  const { title, description, path, country, noindex } = input;
 
   // ===============================
   // 🏷 TITLE ENGINE
@@ -41,13 +34,12 @@ export function generateSeo(input: SeoInput) {
     description: finalDescription,
     path,
     country,
-    language,
     noindex,
   });
 }
 
 // ===============================
-// 🚀 ENTERPRISE ALIASES (STABLE API)
+// 🚀 ENTERPRISE ALIASES
 // ===============================
 export const buildSeo = generateSeo;
 export const createSeo = generateSeo;
