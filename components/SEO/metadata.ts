@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SEO_CONFIG } from "./seoConfig";
+import { getCanonicalUrl } from "./canonical";
 
 // ===============================
 // 🧠 TYPES
@@ -14,7 +15,7 @@ type MetadataProps = {
 };
 
 // ===============================
-// 🧠 TITLE ENGINE
+// 🧠 TITLE ENGINE (SMART)
 // ===============================
 function generateTitle({
   title,
@@ -47,7 +48,7 @@ function generateTitle({
 }
 
 // ===============================
-// 🧠 DESCRIPTION ENGINE
+// 🧠 DESCRIPTION ENGINE (SMART)
 // ===============================
 function generateDescription({
   description,
@@ -85,67 +86,49 @@ function generateDescription({
 }
 
 // ===============================
-// 🔗 CANONICAL
+// 🔗 CANONICAL ENGINE (TRUTH SOURCE)
 // ===============================
-function generateCanonical({
-  path,
-  country,
-  language,
-}: MetadataProps) {
-  return SEO_CONFIG.buildUrl({
-    path,
-    country,
-    language,
-  });
+function generateCanonical(props: MetadataProps): string {
+  return getCanonicalUrl(props.path, props.country, props.language);
 }
 
 // ===============================
-// 🌐 HREFLANG ENGINE (DEDUPED + CLEAN)
+// 🌐 HREFLANG ENGINE (OPTIMIZED + DEDUPED)
 // ===============================
 function generateHreflangLinks(path: string) {
   const cleanPath = path.startsWith("/") ? path : `/${path}`;
 
-  const links: { hrefLang: string; href: string }[] = [];
+  const links: Record<string, string> = {};
 
   // x-default
-  links.push({
-    hrefLang: "x-default",
-    href: SEO_CONFIG.buildUrl({ path: cleanPath }),
-  });
+  links["x-default"] = SEO_CONFIG.buildUrl({ path: cleanPath });
 
-  // COUNTRIES
-  const allCountries = [
-    ...SEO_CONFIG.highValueCountries,
-    ...SEO_CONFIG.midValueCountries,
-    ...SEO_CONFIG.lowValueCountries,
-  ];
+  // COUNTRIES (deduplicated)
+  const countries = Array.from(
+    new Set([
+      ...SEO_CONFIG.highValueCountries,
+      ...SEO_CONFIG.midValueCountries,
+      ...SEO_CONFIG.lowValueCountries,
+    ])
+  );
 
-  const uniqueCountries = Array.from(new Set(allCountries));
-
-  for (const country of uniqueCountries) {
-    links.push({
-      hrefLang: SEO_CONFIG.getHreflang(country),
-      href: SEO_CONFIG.buildUrl({
-        path: cleanPath,
-        country,
-      }),
+  for (const country of countries) {
+    const hreflang = SEO_CONFIG.getHreflang(country);
+    links[hreflang] = SEO_CONFIG.buildUrl({
+      path: cleanPath,
+      country,
     });
   }
 
-  // LANGUAGES
-  const uniqueLanguages = Array.from(
-    new Set(SEO_CONFIG.languages || [])
-  );
+  // LANGUAGES (deduplicated)
+  const languages = Array.from(new Set(SEO_CONFIG.languages || []));
 
-  for (const lang of uniqueLanguages) {
+  for (const lang of languages) {
     if (lang === "en") continue;
 
-    links.push({
-      hrefLang: lang,
-      href: SEO_CONFIG.buildUrl({
-        path: cleanPath,
-        language: lang,
-      }),
+    links[lang] = SEO_CONFIG.buildUrl({
+      path: cleanPath,
+      language: lang,
     });
   }
 
@@ -178,31 +161,18 @@ export function generateMetadata({
 
   const hreflangs = generateHreflangLinks(path);
 
-  // Convert hreflang to Next.js format
-  const hreflangMap: Record<string, string> = {};
-
-  hreflangs.forEach((link) => {
-    hreflangMap[link.hrefLang] = link.href;
-  });
-
   return {
     title: metaTitle,
     description: metaDescription,
 
     alternates: {
       canonical,
-      languages: hreflangMap,
+      languages: hreflangs,
     },
 
     robots: noindex
-      ? {
-          index: false,
-          follow: false,
-        }
-      : {
-          index: true,
-          follow: true,
-        },
+      ? { index: false, follow: false }
+      : { index: true, follow: true },
 
     openGraph: {
       title: metaTitle,
@@ -219,3 +189,11 @@ export function generateMetadata({
     },
   };
 }
+
+// ===============================
+// 🚀 ELITE+ ALIASES (ENTERPRISE PATTERN)
+// ===============================
+export const buildMetadata = generateMetadata;
+export const createMetadata = generateMetadata;
+export const getMetadata = generateMetadata;
+export const seoMetadata = generateMetadata;
