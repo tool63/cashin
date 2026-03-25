@@ -22,18 +22,12 @@ export default function SeoRenderer(props: SeoRendererProps) {
   const metadata = generateSeo(seoInput);
 
   // ===============================
-  // 🔗 SAFE CANONICAL (FIXED)
+  // 🔗 SAFE CANONICAL (FINAL FIX)
 // ===============================
-  const canonicalRaw =
-    metadata?.alternates?.canonical ||
-    SEO_CONFIG.baseUrl + (seoInput.path || "/");
-
   const canonical =
-    typeof canonicalRaw === "string"
-      ? canonicalRaw
-      : canonicalRaw instanceof URL
-      ? canonicalRaw.toString()
-      : canonicalRaw?.url || SEO_CONFIG.baseUrl + (seoInput.path || "/");
+    typeof metadata?.alternates?.canonical === "string"
+      ? metadata.alternates.canonical
+      : SEO_CONFIG.baseUrl + (seoInput.path || "/");
 
   // ===============================
   // 🌐 SAFE HREFLANG
