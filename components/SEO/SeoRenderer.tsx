@@ -24,9 +24,16 @@ export default function SeoRenderer(props: SeoRendererProps) {
   // ===============================
   // 🔗 SAFE CANONICAL (FIXED)
 // ===============================
-  const canonical =
+  const canonicalRaw =
     metadata?.alternates?.canonical ||
     SEO_CONFIG.baseUrl + (seoInput.path || "/");
+
+  const canonical =
+    typeof canonicalRaw === "string"
+      ? canonicalRaw
+      : canonicalRaw instanceof URL
+      ? canonicalRaw.toString()
+      : canonicalRaw?.url || SEO_CONFIG.baseUrl + (seoInput.path || "/");
 
   // ===============================
   // 🌐 SAFE HREFLANG
