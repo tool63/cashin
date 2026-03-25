@@ -1,6 +1,5 @@
 import { DEFAULT_COUNTRY } from "@/app/core/constants";
-
-const BASE_URL = "https://cashog.com";
+import { SEO_CONFIG } from "./seoConfig";
 
 // ===============================
 // 🧠 STRICT PATH NORMALIZER
@@ -10,18 +9,13 @@ function normalizePath(path: string): string {
 
   let clean = path;
 
-  // Ensure leading slash
   if (!clean.startsWith("/")) {
     clean = `/${clean}`;
   }
 
-  // Remove query params, hashes, and fragments
   clean = clean.split("?")[0].split("#")[0];
-
-  // Remove multiple slashes (e.g. //page → /page)
   clean = clean.replace(/\/+/g, "/");
 
-  // Remove trailing slash (except root)
   if (clean.length > 1 && clean.endsWith("/")) {
     clean = clean.slice(0, -1);
   }
@@ -30,23 +24,20 @@ function normalizePath(path: string): string {
 }
 
 // ===============================
-// 🌐 VALIDATE COUNTRY CODE
+// 🌐 STRICT COUNTRY NORMALIZER
 // ===============================
 function normalizeCountry(country?: string): string | undefined {
   if (!country) return undefined;
 
   const clean = country.toLowerCase().trim();
 
-  // Accept only ISO-style 2-letter codes
-  if (/^[a-z]{2}$/.test(clean)) {
-    return clean;
-  }
+  if (/^[a-z]{2}$/.test(clean)) return clean;
 
   return undefined;
 }
 
 // ===============================
-// 🌍 CANONICAL URL BUILDER (CORE)
+// 🌍 CANONICAL ENGINE (CORE)
 // ===============================
 function buildCanonicalUrl({
   path,
@@ -61,34 +52,34 @@ function buildCanonicalUrl({
   const cleanCountry = normalizeCountry(country);
 
   // ===============================
-  // 🌐 LANGUAGE RULE (STRICT)
+  // 🌐 LANGUAGE RULE (HIGHEST PRIORITY)
   // Canonical NEVER includes language
   // ===============================
   if (language) {
-    return `${BASE_URL}${cleanPath}`;
+    return `${SEO_CONFIG.baseUrl}${cleanPath}`;
   }
 
   // ===============================
-  // 🌍 COUNTRY RULE
+  // 🌍 COUNTRY LOGIC
   // ===============================
   if (cleanCountry) {
-    // DEFAULT COUNTRY → GLOBAL CANONICAL
+    // DEFAULT COUNTRY → GLOBAL CANONICAL (example.com style)
     if (cleanCountry === DEFAULT_COUNTRY) {
-      return `${BASE_URL}${cleanPath}`;
+      return `${SEO_CONFIG.baseUrl}${cleanPath}`;
     }
 
-    // NON-DEFAULT COUNTRY → COUNTRY URL
-    return `${BASE_URL}/${cleanCountry}${cleanPath}`;
+    // NON-DEFAULT → COUNTRY PATH
+    return `${SEO_CONFIG.baseUrl}/${cleanCountry}${cleanPath}`;
   }
 
   // ===============================
-  // 🌍 GLOBAL FALLBACK
+  // 🌍 GLOBAL DEFAULT
   // ===============================
-  return `${BASE_URL}${cleanPath}`;
+  return `${SEO_CONFIG.baseUrl}${cleanPath}`;
 }
 
 // ===============================
-// 🚀 PUBLIC CANONICAL API
+// 🚀 PRIMARY API
 // ===============================
 export function generateCanonical({
   path,
@@ -103,13 +94,14 @@ export function generateCanonical({
 }
 
 // ===============================
-// 🔥 OPTIONAL: SEO CANONICAL HELPER
-// (USED INTERNALLY BY SEO ENGINE)
+// 🔥 ALIAS LAYER (ENTERPRISE STANDARD)
 // ===============================
-export function getCanonicalUrl(
-  path: string,
-  country?: string,
-  language?: string
-): string {
-  return generateCanonical({ path, country, language });
-}
+
+// Core alias
+export const getCanonicalUrl = generateCanonical;
+
+// Secondary alias (future-proof naming)
+export const buildCanonical = generateCanonical;
+
+// Internal alias (SEO engine usage)
+export const resolveCanonical = buildCanonicalUrl;
