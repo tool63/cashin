@@ -1,15 +1,20 @@
+import type { Metadata } from "next";
 import { SEO_CONFIG } from "./seoConfig";
 
+// ===============================
+// 🧠 TYPES
+// ===============================
 type MetadataProps = {
   title?: string;
   description?: string;
   path: string;
   country?: string;
   language?: string;
+  noindex?: boolean;
 };
 
 // ===============================
-// 🧠 META TITLE ENGINE
+// 🧠 TITLE ENGINE
 // ===============================
 function generateTitle({
   title,
@@ -34,7 +39,6 @@ function generateTitle({
 
   let base = baseTitles[type] || "Earn Rewards Online";
 
-  // Add country targeting for high-value SEO
   if (country) {
     base = `${base} in ${country.toUpperCase()}`;
   }
@@ -43,7 +47,7 @@ function generateTitle({
 }
 
 // ===============================
-// 🧠 META DESCRIPTION ENGINE
+// 🧠 DESCRIPTION ENGINE
 // ===============================
 function generateDescription({
   description,
@@ -81,7 +85,7 @@ function generateDescription({
 }
 
 // ===============================
-// 🔗 CANONICAL URL
+// 🔗 CANONICAL
 // ===============================
 function generateCanonical({
   path,
@@ -96,50 +100,47 @@ function generateCanonical({
 }
 
 // ===============================
-// 🌐 HREFLANG BUILDER
+// 🌐 HREFLANG ENGINE (DEDUPED + CLEAN)
 // ===============================
-function generateHreflangTags(path: string, country?: string) {
-  const links: {
-    rel: string;
-    hrefLang: string;
-    href: string;
-  }[] = [];
-
+function generateHreflangLinks(path: string) {
   const cleanPath = path.startsWith("/") ? path : `/${path}`;
 
-  // x-default (GLOBAL)
+  const links: { hrefLang: string; href: string }[] = [];
+
+  // x-default
   links.push({
-    rel: "alternate",
     hrefLang: "x-default",
     href: SEO_CONFIG.buildUrl({ path: cleanPath }),
   });
 
-  // Country-based hreflang
-  const countries = [
+  // COUNTRIES
+  const allCountries = [
     ...SEO_CONFIG.highValueCountries,
     ...SEO_CONFIG.midValueCountries,
     ...SEO_CONFIG.lowValueCountries,
   ];
 
-  for (const c of countries) {
-    const hreflang = SEO_CONFIG.getHreflang(c);
+  const uniqueCountries = Array.from(new Set(allCountries));
 
+  for (const country of uniqueCountries) {
     links.push({
-      rel: "alternate",
-      hrefLang: hreflang,
+      hrefLang: SEO_CONFIG.getHreflang(country),
       href: SEO_CONFIG.buildUrl({
         path: cleanPath,
-        country: c,
+        country,
       }),
     });
   }
 
-  // Language-based hreflang
-  for (const lang of SEO_CONFIG.languages) {
+  // LANGUAGES
+  const uniqueLanguages = Array.from(
+    new Set(SEO_CONFIG.languages || [])
+  );
+
+  for (const lang of uniqueLanguages) {
     if (lang === "en") continue;
 
     links.push({
-      rel: "alternate",
       hrefLang: lang,
       href: SEO_CONFIG.buildUrl({
         path: cleanPath,
@@ -160,7 +161,8 @@ export function generateMetadata({
   path,
   country,
   language,
-}: MetadataProps) {
+  noindex,
+}: MetadataProps): Metadata {
   const metaTitle = generateTitle({ title, path, country });
   const metaDescription = generateDescription({
     description,
@@ -174,7 +176,14 @@ export function generateMetadata({
     language,
   });
 
-  const hreflangs = generateHreflangTags(path, country);
+  const hreflangs = generateHreflangLinks(path);
+
+  // Convert hreflang to Next.js format
+  const hreflangMap: Record<string, string> = {};
+
+  hreflangs.forEach((link) => {
+    hreflangMap[link.hrefLang] = link.href;
+  });
 
   return {
     title: metaTitle,
@@ -182,11 +191,18 @@ export function generateMetadata({
 
     alternates: {
       canonical,
-      languages: hreflangs.reduce((acc: any, link) => {
-        acc[link.hrefLang] = link.href;
-        return acc;
-      }, {}),
+      languages: hreflangMap,
     },
+
+    robots: noindex
+      ? {
+          index: false,
+          follow: false,
+        }
+      : {
+          index: true,
+          follow: true,
+        },
 
     openGraph: {
       title: metaTitle,
