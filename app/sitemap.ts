@@ -1,8 +1,5 @@
 import type { MetadataRoute } from "next";
-import {
-  DEFAULT_COUNTRY,
-  SUPPORTED_LANGUAGES,
-} from "@/app/core/constants";
+import { DEFAULT_COUNTRY } from "@/app/core/constants";
 
 // ===============================
 // 🌍 CONFIG
@@ -10,7 +7,7 @@ import {
 const BASE_URL = "https://cashog.com";
 
 // ===============================
-// 🌎 COUNTRY GROUPS
+// 🌎 COUNTRIES ONLY
 // ===============================
 const ISO_COUNTRIES = [
   "af","al","dz","ad","ao","ag","ar","am","au","at","az",
@@ -74,18 +71,9 @@ const EARN_PAGES = [
   "/surveywall",
   "/watch-ads",
   "/micro-tasks",
-  "/complete-free-trials",
-  "/test-products",
-  "/read-emails",
-  "/visit-websites",
-  "/review-tasks",
-  "/spinning-wheel",
-  "/loyalty",
-  "/vouchers",
 ];
 
 const SHOPPING_PAGES = [
-  "/shopping-rewards",
   "/shopping-rewards/electronics",
   "/shopping-rewards/fashion",
   "/shopping-rewards/home-garden",
@@ -100,32 +88,21 @@ const SHOPPING_PAGES = [
 const CONTENT_PAGES = ["/blog", "/guides", "/compare"];
 
 // ===============================
-// 🧠 PAGE SET (OPTIMIZED)
+// 🧠 ALL PAGES
 // ===============================
 const ALL_PAGES = [
   ...new Set([...CORE_PAGES, ...EARN_PAGES, ...SHOPPING_PAGES, ...CONTENT_PAGES]),
 ];
 
 // ===============================
-// 🔧 HELPERS (ENTERPRISE LEVEL)
+// 🔧 HELPERS
 // ===============================
 function normalizePath(path: string) {
-  if (!path) return "/";
   return path.startsWith("/") ? path : `/${path}`;
 }
 
-function buildUrl({
-  path,
-  country,
-  lang,
-}: {
-  path: string;
-  country?: string;
-  lang?: string;
-}) {
+function buildUrl(path: string, country?: string) {
   const cleanPath = normalizePath(path);
-
-  if (lang) return `${BASE_URL}/${lang}${cleanPath}`;
 
   if (country && country !== DEFAULT_COUNTRY) {
     return `${BASE_URL}/${country}${cleanPath}`;
@@ -135,7 +112,7 @@ function buildUrl({
 }
 
 // ===============================
-// 📊 PRIORITY ENGINE (SMART)
+// 📊 PRIORITY ENGINE
 // ===============================
 function getPriority(country: string, path: string): number {
   if (path === "/") return 1;
@@ -158,53 +135,30 @@ function getChangeFrequency(
 }
 
 // ===============================
-// 🚀 SITEMAP ENGINE (CORE)
+// 🚀 SITEMAP (CLEAN)
 // ===============================
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-
   const sitemap: MetadataRoute.Sitemap = [];
 
-  // ===============================
-  // 🌍 GLOBAL (NO COUNTRY / NO LANG)
-  // ===============================
+  // 🌍 GLOBAL
   for (const path of ALL_PAGES) {
     sitemap.push({
-      url: buildUrl({ path }),
+      url: buildUrl(path),
       lastModified: now,
       changeFrequency: "daily",
       priority: path === "" ? 1 : 0.98,
     });
   }
 
-  // ===============================
-  // 🌎 COUNTRY PAGES (DEDUPED)
-  // ===============================
+  // 🌎 COUNTRY ONLY
   for (const country of ISO_COUNTRIES) {
     for (const path of ALL_PAGES) {
       sitemap.push({
-        url: buildUrl({ path, country }),
+        url: buildUrl(path, country),
         lastModified: now,
         changeFrequency: getChangeFrequency(country),
         priority: getPriority(country, path),
-      });
-    }
-  }
-
-  // ===============================
-  // 🌐 LANGUAGE PAGES (DEDUPED)
-  // ===============================
-  const uniqueLanguages = Array.from(new Set(SUPPORTED_LANGUAGES));
-
-  for (const lang of uniqueLanguages) {
-    if (lang === "en") continue;
-
-    for (const path of ALL_PAGES) {
-      sitemap.push({
-        url: buildUrl({ path, lang }),
-        lastModified: now,
-        changeFrequency: "weekly",
-        priority: 0.85,
       });
     }
   }
