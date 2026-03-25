@@ -1,29 +1,81 @@
-"use client";
+import React from "react";
+import { generateSeo } from "./seoEngine";
+import type { SeoInput } from "./pageTypes";
+import { SEO_CONFIG } from "./seoConfig";
 
-import Script from "next/script";
-import {
-  organizationSchema,
-  websiteSchema,
-} from "./schema";
+// ===============================
+// 🧠 PROPS
+// ===============================
+type SeoRendererProps = SeoInput & {
+  children?: React.ReactNode;
+};
 
-export default function SeoRenderer() {
+// ===============================
+// 🚀 SEO RENDERER (SERVER COMPONENT)
+// ===============================
+export default function SeoRenderer(props: SeoRendererProps) {
+  const { children, ...seoInput } = props;
+
+  // ===============================
+  // 🧠 GENERATE SEO METADATA
+  // ===============================
+  const metadata = generateSeo(seoInput);
+
+  // ===============================
+  // 🔗 EXTRACT CANONICAL
+  // ===============================
+  const canonical =
+    metadata.alternates?.canonical ||
+    SEO_CONFIG.baseUrl + seoInput.path;
+
+  // ===============================
+  // 🌐 EXTRACT HREFLANG
+  // ===============================
+  const hreflangs = metadata.alternates?.languages || {};
+
+  // ===============================
+  // 🧾 STRUCTURED DATA (BASIC)
+  // ===============================
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SEO_CONFIG.siteName,
+    url: canonical,
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${canonical}?q={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
+  };
+
   return (
     <>
-      <Script
-        id="org-schema"
+      {/* =============================== */}
+      {/* 🔗 CANONICAL TAG */}
+      {/* =============================== */}
+      <link rel="canonical" href={canonical} />
+
+      {/* =============================== */}
+      {/* 🌐 HREFLANG TAGS */}
+      {/* =============================== */}
+      {Object.entries(hreflangs).map(([lang, url]) => (
+        <link key={lang} rel="alternate" hrefLang={lang} href={url} />
+      ))}
+
+      {/* =============================== */}
+      {/* 🧠 STRUCTURED DATA */}
+      {/* =============================== */}
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(organizationSchema()),
+          __html: JSON.stringify(structuredData),
         }}
       />
 
-      <Script
-        id="website-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(websiteSchema()),
-        }}
-      />
+      {/* =============================== */}
+      {/* 📦 CHILD CONTENT */}
+      {/* =============================== */}
+      {children}
     </>
   );
 }
