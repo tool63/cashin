@@ -36,27 +36,17 @@ const COUNTRY_HREFLANG_MAP: Record<string, string> = {
 };
 
 // ===============================
-// 🌐 LANGUAGE → HREFLANG MAP
+// 🔗 URL BUILDER (COUNTRY ONLY)
 // ===============================
-const LANGUAGE_HREFLANG_MAP: Record<string, string> = {
-  en: "en",
-  fr: "fr",
-  de: "de",
-  es: "es",
-  pt: "pt",
-};
-
-// ===============================
-// 🔗 URL BUILDER
-// ===============================
-function buildUrl(path: string, prefix?: string) {
+function buildUrl(path: string, country?: string) {
   const clean = path.startsWith("/") ? path : `/${path}`;
 
-  if (!prefix) {
+  // Global (no country)
+  if (!country) {
     return `${BASE_URL}${clean}`;
   }
 
-  return `${BASE_URL}/${prefix}${clean}`;
+  return `${BASE_URL}/${country}${clean}`;
 }
 
 // ===============================
@@ -64,10 +54,8 @@ function buildUrl(path: string, prefix?: string) {
 // ===============================
 export function generateHreflang({
   path,
-  country,
 }: {
   path: string;
-  country?: string;
 }) {
   const links: {
     rel: string;
@@ -78,7 +66,7 @@ export function generateHreflang({
   const cleanPath = path.startsWith("/") ? path : `/${path}`;
 
   // ===============================
-  // 🌍 1. GLOBAL (x-default)
+  // 🌍 1. x-default (global)
   // ===============================
   links.push({
     rel: "alternate",
@@ -87,7 +75,7 @@ export function generateHreflang({
   });
 
   // ===============================
-  // 🥇 2. COUNTRY VERSIONS
+  // 🥇 2. COUNTRY VERSIONS ONLY
   // ===============================
   for (const [countryCode, hreflang] of Object.entries(
     COUNTRY_HREFLANG_MAP
@@ -96,21 +84,6 @@ export function generateHreflang({
       rel: "alternate",
       hrefLang: hreflang,
       href: buildUrl(cleanPath, countryCode),
-    });
-  }
-
-  // ===============================
-  // 🌐 3. LANGUAGE VERSIONS
-  // ===============================
-  for (const lang of SUPPORTED_LANGUAGES) {
-    if (lang === "en") continue; // avoid duplicate with global
-
-    const hreflang = LANGUAGE_HREFLANG_MAP[lang];
-
-    links.push({
-      rel: "alternate",
-      hrefLang: hreflang,
-      href: buildUrl(cleanPath, lang),
     });
   }
 
