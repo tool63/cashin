@@ -22,16 +22,16 @@ export default function SeoRenderer(props: SeoRendererProps) {
   const metadata = generateSeo(seoInput);
 
   // ===============================
-  // 🔗 EXTRACT CANONICAL
-  // ===============================
+  // 🔗 SAFE CANONICAL (FIXED)
+// ===============================
   const canonical =
-    metadata.alternates?.canonical ||
-    SEO_CONFIG.baseUrl + seoInput.path;
+    metadata?.alternates?.canonical ||
+    SEO_CONFIG.baseUrl + (seoInput.path || "/");
 
   // ===============================
-  // 🌐 EXTRACT HREFLANG
+  // 🌐 SAFE HREFLANG
   // ===============================
-  const hreflangs = metadata.alternates?.languages || {};
+  const hreflangs = metadata?.alternates?.languages || {};
 
   // ===============================
   // 🧾 STRUCTURED DATA (BASIC)
@@ -59,7 +59,12 @@ export default function SeoRenderer(props: SeoRendererProps) {
       {/* 🌐 HREFLANG TAGS */}
       {/* =============================== */}
       {Object.entries(hreflangs).map(([lang, url]) => (
-        <link key={lang} rel="alternate" hrefLang={lang} href={url} />
+        <link
+          key={lang}
+          rel="alternate"
+          hrefLang={lang}
+          href={url as string}
+        />
       ))}
 
       {/* =============================== */}
