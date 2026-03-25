@@ -4,6 +4,22 @@ import { buildMetadata } from "./metadata";
 import type { SeoInput } from "./pageTypes";
 
 // ===============================
+// 🧠 DEFAULT FALLBACKS
+// ===============================
+const DEFAULT_TITLE = `${SEO_CONFIG.siteName} | Earn Rewards Online`;
+
+const DEFAULT_DESCRIPTION =
+  "Earn rewards, cashback, and money online worldwide.";
+
+const DEFAULT_KEYWORDS = [
+  "earn money online",
+  "cashback",
+  "rewards",
+  "affiliate",
+  "online earning",
+];
+
+// ===============================
 // 🧠 MAIN SEO ENGINE
 // ===============================
 export function generateSeo(input: SeoInput) {
@@ -20,35 +36,20 @@ export function generateSeo(input: SeoInput) {
   // ===============================
   // 🏷 TITLE ENGINE
   // ===============================
-  const finalTitle =
-    title ||
-    SEO_CONFIG.defaultTitle ||
-    `${SEO_CONFIG.siteName} | Earn Rewards Online`;
+  const finalTitle = title || DEFAULT_TITLE;
 
   // ===============================
   // 📝 DESCRIPTION ENGINE
   // ===============================
-  const finalDescription =
-    description ||
-    SEO_CONFIG.defaultDescription ||
-    "Earn rewards, cashback, and money online worldwide.";
+  const finalDescription = description || DEFAULT_DESCRIPTION;
 
   // ===============================
   // 🔑 KEYWORDS ENGINE
   // ===============================
-  const finalKeywords =
-    keywords ||
-    SEO_CONFIG.defaultKeywords ||
-    [
-      "earn money online",
-      "cashback",
-      "rewards",
-      "affiliate",
-      "online earning",
-    ];
+  const finalKeywords = keywords || DEFAULT_KEYWORDS;
 
   // ===============================
-  // 🔗 CANONICAL URL (FIXED CALL)
+  // 🔗 CANONICAL (FIXED & SAFE)
   // ===============================
   const canonical = getCanonicalUrl({
     path,
@@ -57,19 +58,44 @@ export function generateSeo(input: SeoInput) {
   });
 
   // ===============================
-  // 🌐 HREFLANG GENERATION
+  // 🌐 HREFLANG (DEDUPED + CORRECT)
   // ===============================
-  const hreflang = SEO_CONFIG.languages.map((lang) => ({
-    lang,
-    url: SEO_CONFIG.buildUrl({
+  const hreflangMap: Record<string, string> = {};
+
+  // x-default
+  hreflangMap["x-default"] = SEO_CONFIG.buildUrl({ path });
+
+  // COUNTRY LINKS
+  const allCountries = Array.from(
+    new Set([
+      ...SEO_CONFIG.highValueCountries,
+      ...SEO_CONFIG.midValueCountries,
+      ...SEO_CONFIG.lowValueCountries,
+    ])
+  );
+
+  for (const countryCode of allCountries) {
+    hreflangMap[SEO_CONFIG.getHreflang(countryCode)] =
+      SEO_CONFIG.buildUrl({
+        path,
+        country: countryCode,
+      });
+  }
+
+  // LANGUAGE LINKS
+  const languages = Array.from(new Set(SEO_CONFIG.languages || []));
+
+  for (const lang of languages) {
+    if (lang === "en") continue;
+
+    hreflangMap[lang] = SEO_CONFIG.buildUrl({
       path,
       language: lang,
-      country: country || SEO_CONFIG.defaultCountry,
-    }),
-  }));
+    });
+  }
 
   // ===============================
-  // ⚡ PRIORITY + CHANGE FREQ
+  // ⚡ PRIORITY + CHANGE FREQUENCY
   // ===============================
   const priority = SEO_CONFIG.getPriority(path, country);
   const changeFrequency = SEO_CONFIG.getChangeFrequency(country);
@@ -77,10 +103,9 @@ export function generateSeo(input: SeoInput) {
   // ===============================
   // 🚫 ROBOTS CONTROL
   // ===============================
-  const robots =
-    noindex === true
-      ? "noindex, nofollow"
-      : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
+  const robots = noindex
+    ? "noindex, nofollow"
+    : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
 
   // ===============================
   // 🚀 FINAL METADATA OBJECT
@@ -88,10 +113,11 @@ export function generateSeo(input: SeoInput) {
   return buildMetadata({
     title: finalTitle,
     description: finalDescription,
-    canonical,
     keywords: finalKeywords,
-    hreflang,
+    canonical,
+    hreflang: hreflangMap,
     robots,
+
     openGraph: {
       title: finalTitle,
       description: finalDescription,
@@ -99,14 +125,24 @@ export function generateSeo(input: SeoInput) {
       siteName: SEO_CONFIG.siteName,
       type: "website",
     },
+
     twitter: {
       card: "summary_large_image",
       title: finalTitle,
       description: finalDescription,
     },
+
     extra: {
       priority,
       changeFrequency,
     },
   });
 }
+
+// ===============================
+// 🚀 ENTERPRISE ALIASES (STABLE API)
+// ===============================
+export const buildSeo = generateSeo;
+export const createSeo = generateSeo;
+export const getSeo = generateSeo;
+export const seoEngine = generateSeo;
