@@ -29,10 +29,9 @@ function getCrawlDelay(country?: string): number {
 // 🧠 ROBOTS.TXT CONFIG GENERATOR
 // ===============================
 export function generateRobots(): MetadataRoute.Robots {
-  const rules: MetadataRoute.RobotsRule[] = [
-    // ===============================
+  // Remove explicit type, let TS infer it
+  const rules = [
     // 🌍 GLOBAL ACCESS (ALL BOTS)
-    // ===============================
     {
       userAgent: "*",
       allow: "/",
@@ -49,9 +48,7 @@ export function generateRobots(): MetadataRoute.Robots {
       ],
     },
 
-    // ===============================
     // 🤖 GOOGLEBOT / BINGBOT
-    // ===============================
     {
       userAgent: "Googlebot",
       allow: "/",
@@ -65,9 +62,7 @@ export function generateRobots(): MetadataRoute.Robots {
       crawlDelay: 2,
     },
 
-    // ===============================
     // 🧠 AI / RESEARCH BOTS
-    // ===============================
     {
       userAgent: "GPTBot",
       allow: "/",
@@ -79,9 +74,7 @@ export function generateRobots(): MetadataRoute.Robots {
       disallow: ["/admin/", "/private/"],
     },
 
-    // ===============================
     // 🚫 BLOCK SCRAPER / MALICIOUS BOTS
-    // ===============================
     {
       userAgent: [
         "AhrefsBot",
@@ -98,9 +91,7 @@ export function generateRobots(): MetadataRoute.Robots {
     },
   ];
 
-  // ===============================
   // 🌎 COUNTRY-SPECIFIC RULES
-  // ===============================
   [...HIGH_PRIORITY_COUNTRIES, ...MID_PRIORITY_COUNTRIES, ...LOW_PRIORITY_COUNTRIES].forEach(
     (country) => {
       rules.push({
