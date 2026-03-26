@@ -15,102 +15,83 @@ import {
 import {
   COOKIE_KEYS,
   DEFAULT_COUNTRY,
+  SUPPORTED_COUNTRIES,       // ['us', 'uk', 'ca', ...]
+  COUNTRY_LANG_MAP,          // { us: 'en', fr: 'fr', ... }
 } from "@/app/core/constants";
 
 export function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
+  const { pathname, origin } = req.nextUrl;
 
-  // ===============================
-  // 🚫 Skip internal routes
-  // ===============================
-  if (
-    pathname.startsWith("/api") ||
-    pathname.startsWith("/_next") ||
-    pathname.includes(".")
-  ) {
+  // 🚫 Skip API, Next internals, or static assets
+  if (pathname.startsWith("/api") || pathname.startsWith("/_next") || pathname.includes(".")) {
     return NextResponse.next();
   }
 
-  // ===============================
-  // 🌐 BOT DETECTION (IMPORTANT FOR SEO)
-  // ===============================
+  // 🌐 BOT DETECTION
   const userAgent = req.headers.get("user-agent") || "";
   const isBot = /bot|crawl|spider|slurp|google|bing|yandex/i.test(userAgent);
 
-  // ===============================
   // 🌍 GEO INFO
-  // ===============================
   const geo = getGeoInfo(req);
 
   const segments = pathname.split("/").filter(Boolean);
-  const first = segments[0]?.toLowerCase();
+  const firstSegment = segments[0]?.toLowerCase();
 
-  const validUrlCountry = extractCountryFromPath(pathname);
-  const hasValidPrefix = validUrlCountry !== null;
-
+  const urlCountry = extractCountryFromPath(pathname);
+  const hasValidPrefix = urlCountry !== null;
   const hasInvalidPrefix =
-    first && isValidCountryCode(first) && !isSupportedCountry(first);
+    firstSegment && isValidCountryCode(firstSegment) && !isSupportedCountry(firstSegment);
 
-  // ===============================
-  // 🌐 ROOT (SEO SAFE)
-  // ===============================
+  // 🌐 ROOT PATH
   if (pathname === "/") {
     const res = NextResponse.next();
-
     setCookiesIfChanged(res, req, geo);
-
     return res;
   }
 
-  // ===============================
-  // ❌ REMOVE INVALID PREFIX
-  // ===============================
+  // ❌ REMOVE INVALID COUNTRY PREFIX
   if (hasInvalidPrefix) {
     const url = req.nextUrl.clone();
     url.pathname = "/" + segments.slice(1).join("/");
-
     const res = NextResponse.redirect(url);
-
     setCookiesIfChanged(res, req, geo);
-
     return res;
   }
 
-  // ===============================
-  // ➕ COUNTRY PREFIX (USER ONLY, NOT BOT)
-  // ===============================
-  if (
-    !isBot && // ✅ IMPORTANT: don't redirect bots
-    !hasValidPrefix &&
-    geo.country !== DEFAULT_COUNTRY
-  ) {
-    const target = buildUrl(pathname, geo.country);
-
-    if (target !== pathname) {
+  // ➕ ADD COUNTRY PREFIX FOR USERS (skip bots)
+  if (!isBot && !hasValidPrefix && geo.country !== DEFAULT_COUNTRY) {
+    const targetPath = buildUrl(pathname, geo.country);
+    if (targetPath !== pathname) {
       const url = req.nextUrl.clone();
-      url.pathname = target;
-
+      url.pathname = targetPath.replace(origin, "");
       const res = NextResponse.redirect(url);
-
       setCookiesIfChanged(res, req, geo);
-
       return res;
     }
   }
 
-  // ===============================
   // ✅ NORMAL RESPONSE
-  // ===============================
   const res = NextResponse.next();
-
   setCookiesIfChanged(res, req, geo);
+
+  // 🌐 HREFLANG HEADERS FOR SEO (bots only)
+  if (isBot) {
+    const hreflangLinks = SUPPORTED_COUNTRIES.map((country) => {
+      const lang = COUNTRY_LANG_MAP[country] || "en";
+      const href = buildUrl(pathname, country);
+      return `<${href}>; rel="alternate"; hreflang="${lang}"`;
+    });
+
+    // x-default points to default country
+    hreflangLinks.push(`<${buildUrl(pathname, DEFAULT_COUNTRY)}>; rel="alternate"; hreflang="x-default"`);
+
+    res.headers.set("Link", hreflangLinks.join(", "));
+  }
 
   return res;
 }
 
-// ===============================
-// 🍪 SAFE COOKIE HANDLER
-// ===============================
+// 🍪 COOKIE HANDLER
 function setCookiesIfChanged(
   res: NextResponse,
   req: NextRequest,
@@ -120,16 +101,10 @@ function setCookiesIfChanged(
   const currentLanguage = req.cookies.get(COOKIE_KEYS.LANGUAGE)?.value;
 
   if (currentCountry !== geo.country) {
-    res.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
-      path: "/",
-      maxAge: 60 * 60 * 24 * 30,
-    });
+    res.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, { path: "/", maxAge: 60 * 60 * 24 * 30 });
   }
 
   if (currentLanguage !== geo.language) {
-    res.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, {
-      path: "/",
-      maxAge: 60 * 60 * 24 * 365,
-    });
+    res.cookies.set(COOKIE_KEYS.LANGUAGE, geo.language, { path: "/", maxAge: 60 * 60 * 24 * 365 });
   }
 }
