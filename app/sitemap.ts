@@ -39,12 +39,19 @@ const ISO_COUNTRIES = [
 // 🧠 7-TIER COUNTRY SYSTEM
 // ===============================
 function getTier(country: string): number {
-  if (["us","gb","ca","au"].includes(country)) return 1;
-  if (["de","fr","nl","se","ch","no","dk"].includes(country)) return 2;
-  if (["it","es","fi","ie","at","be"].includes(country)) return 3;
-  if (["br","mx","pl","pt","tr","ro"].includes(country)) return 4;
-  if (["in","id","ph","vn","th","eg"].includes(country)) return 5;
-  if (["pk","bd","ng","ke","za"].includes(country)) return 6;
+  const tier1 = ["us","gb","ca","au"];
+  const tier2 = ["de","fr","nl","se","ch","no","dk"];
+  const tier3 = ["it","es","fi","ie","at","be"];
+  const tier4 = ["br","mx","pl","pt","tr","ro"];
+  const tier5 = ["in","id","ph","vn","th","eg"];
+  const tier6 = ["pk","bd","ng","ke","za"];
+
+  if (tier1.includes(country)) return 1;
+  if (tier2.includes(country)) return 2;
+  if (tier3.includes(country)) return 3;
+  if (tier4.includes(country)) return 4;
+  if (tier5.includes(country)) return 5;
+  if (tier6.includes(country)) return 6;
   return 7;
 }
 
@@ -158,12 +165,12 @@ function getChangeFrequency(country?: string): MetadataRoute.Sitemap[number]["ch
 }
 
 // ===============================
-// 🚀 SITEMAP GENERATOR (ELITE)
+// 🚀 SITEMAP GENERATOR
 export function generateSitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const sitemap: MetadataRoute.Sitemap = [];
 
-  // 🌍 GLOBAL
+  // 🌍 GLOBAL PAGES
   for (const path of ALL_PAGES) {
     sitemap.push({
       url: buildUrl(path),
@@ -173,7 +180,7 @@ export function generateSitemap(): MetadataRoute.Sitemap {
     });
   }
 
-  // 🌎 ALL COUNTRIES
+  // 🌎 COUNTRY-SPECIFIC PAGES
   for (const country of ISO_COUNTRIES) {
     for (const path of ALL_PAGES) {
       sitemap.push({
@@ -190,8 +197,6 @@ export function generateSitemap(): MetadataRoute.Sitemap {
 
 // ===============================
 // 🔥 ENTERPRISE ALIAS LAYER
-// ===============================
-
 export const sitemapEngine = generateSitemap;
 export const buildSitemap = generateSitemap;
 export const getSitemap = generateSitemap;
