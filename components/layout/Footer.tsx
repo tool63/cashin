@@ -1,216 +1,442 @@
 "use client";
 
+import { useState, ReactNode, useCallback } from "react";
+import Link from "next/link";
+import { ChevronDown, Twitter, Facebook, Instagram, Youtube } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+
 import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
 import { useCountry } from "@/app/[country]/providers/CountryProvider";
-import Link from "next/link";
 
-export default function Footer() {
+type Toggle = Record<string, boolean>;
+
+interface FooterProps {
+  className?: string;
+}
+
+/* ---------- TRANSLATIONS (moved outside component for performance) ---------- */
+
+const translations: any = {
+  "footer.getStarted": "Get Started",
+  "footer.waysToEarn": "Ways to Earn",
+  "footer.guides": "Guides",
+  "footer.rewards": "Rewards",
+  "footer.resources": "Resources",
+  "footer.business": "Business",
+  "footer.cashback": "Cashback",
+  "footer.legal": "Legal",
+  "footer.copyright": "© 2026 Cashog. All rights reserved.",
+  "footer.links": {
+    howItWorks: "How it works",
+    startEarning: "Start Earning",
+    cashoutMethods: "Cashout Methods",
+    withdrawalProofs: "Withdrawal Proofs",
+    trustSafety: "Trust & Safety",
+    surveys: "Surveys",
+    appInstalls: "App Installs",
+    playGames: "Play Games",
+    watchVideos: "Watch Videos",
+    miningRewards: "Mining Rewards",
+    completeOffers: "Complete Offers",
+    offerwall: "Offerwall",
+    surveywall: "Surveywall",
+    extraEarning: "Extra Earning",
+    watchAds: "Watch Ads",
+    microTasks: "Micro Tasks",
+    freeTrials: "Free Trials",
+    testProducts: "Test Products",
+    readEmails: "Read Emails",
+    visitWebsites: "Visit Websites",
+    reviewTasks: "Review Tasks",
+    spinningWheel: "Spinning Wheel",
+    loyalty: "Loyalty",
+    vouchers: "Vouchers",
+    makeMoneyOnline: "Make Money Online",
+    earnFromHome: "Earn from Home",
+    earnWithoutInvestment: "Earn without Investment",
+    getPaidToPlayGames: "Get Paid to Play Games",
+    installApps: "Install Apps",
+    watchVideosForMoney: "Watch Videos for Money",
+    completeOffersOnline: "Complete Offers Online",
+    workFromHomeJobs: "Work from Home Jobs",
+    onlineEarningMethods: "Online Earning Methods",
+    earnFast: "Earn Fast",
+    allGuides: "All Guides",
+    passiveIncome: "Passive Income",
+    onlineJobs: "Online Jobs",
+    studentEarnings: "Student Earnings",
+    earnWithoutSkills: "Earn without Skills",
+    earnUsingMobile: "Earn Using Mobile",
+    earnWorldwide: "Earn Worldwide",
+    cashbackRewards: "Cashback Rewards",
+    legitWays: "Legit Ways",
+    freeWays: "Free Ways",
+    earnPayPal: "Earn PayPal Money",
+    earnGiftCards: "Earn Gift Cards",
+    amazonGiftCard: "Amazon Gift Card",
+    appleGiftCard: "Apple Gift Card",
+    googleGiftCard: "Google Play Gift Card",
+    earnCrypto: "Earn Crypto",
+    bitcoin: "Bitcoin",
+    litecoin: "Litecoin",
+    ethereum: "Ethereum",
+    dogecoin: "Dogecoin",
+    earnGaming: "Earn Gaming",
+    robux: "Free Robux",
+    steam: "Steam Gift Cards",
+    xbox: "Xbox Gift Cards",
+    psn: "PSN Gift Cards",
+    spotify: "Spotify Premium",
+    blog: "Blog",
+    helpCenter: "Help Center",
+    faq: "FAQ",
+    contactSupport: "Contact Support",
+    about: "About",
+    affiliate: "Affiliate",
+    partners: "Partners",
+    advertise: "Advertise",
+    cashbackOffers: "Cashback Offers",
+    shoppingRewards: "Shopping Rewards",
+    electronics: "Electronics",
+    fashion: "Fashion",
+    homeGarden: "Home & Garden",
+    grocery: "Grocery",
+    beauty: "Beauty",
+    mobile: "Mobile",
+    travel: "Travel",
+    hotels: "Hotels",
+    flights: "Flights",
+    finance: "Finance",
+    promoCodes: "Promo Codes",
+    dailyDeals: "Daily Deals",
+    banking: "Banking & Finance",
+    terms: "Terms & Conditions",
+    privacy: "Privacy Policy",
+    cookies: "Cookie Policy",
+  },
+};
+
+export default function Footer({ className }: FooterProps) {
   const { getTranslation } = useLanguage();
   const { country } = useCountry();
 
-  const t = (key: string, fallback: string): string => {
-    return getTranslation("footer", key, fallback);
+  // Translation helper with fallback to static translations
+  const t = (key: string, fallback?: string): string => {
+    const translation = getTranslation("footer", key, "");
+    if (translation) return translation;
+    
+    // Fallback to static translations if dynamic ones aren't available
+    const staticTranslation = translations[key] || fallback || key;
+    if (typeof staticTranslation === "string") return staticTranslation;
+    
+    return key;
   };
 
+  const [open, setOpen] = useState<Toggle>({});
+  const [sub, setSub] = useState<Toggle>({});
+  const [sub2, setSub2] = useState<Toggle>({});
+
+  const toggle = useCallback((k: string) => {
+    setOpen((p) => ({ ...p, [k]: !p[k] }));
+  }, []);
+
+  const toggleSub = useCallback((k: string) => {
+    setSub((p) => ({ ...p, [k]: !p[k] }));
+  }, []);
+
+  const toggleSub2 = useCallback((k: string) => {
+    setSub2((p) => ({ ...p, [k]: !p[k] }));
+  }, []);
+
+  /* ---------- LINK COMPONENT WITH COUNTRY PREFIX ---------- */
+  const A = ({ href, children }: { href: string; children: ReactNode }) => {
+    // Check if it's an external link (starts with http)
+    const isExternal = href.startsWith("http");
+    
+    if (isExternal) {
+      return (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block text-primary hover:opacity-80 hover:translate-x-1 transition-all duration-150"
+        >
+          {children}
+        </a>
+      );
+    }
+    
+    // Internal link - add country prefix
+    const cleanHref = href.startsWith("/") ? href : `/${href}`;
+    return (
+      <Link
+        href={`/${country}${cleanHref}`}
+        className="block text-primary hover:opacity-80 hover:translate-x-1 transition-all duration-150"
+      >
+        {children}
+      </Link>
+    );
+  };
+
+  /* ---------- SECTION ---------- */
+  const Section = ({
+    id,
+    title,
+    children,
+  }: {
+    id: string;
+    title: string;
+    children: ReactNode;
+  }) => (
+    <div>
+      <button
+        onClick={() => toggle(id)}
+        className="w-full flex justify-between items-center font-semibold mb-3 text-primary"
+      >
+        {title}
+        <ChevronDown
+          size={16}
+          className={`transition-transform ${open[id] ? "rotate-180" : ""}`}
+        />
+      </button>
+
+      <AnimatePresence initial={false}>
+        {open[id] && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.22 }}
+            className="space-y-2 text-sm text-muted overflow-hidden"
+          >
+            {children}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+
+  /* ---------- SUB SECTION ---------- */
+  const Sub = ({
+    id,
+    title,
+    children,
+    level = 1,
+  }: {
+    id: string;
+    title: string;
+    children: ReactNode;
+    level?: number;
+  }) => {
+    const state = level === 1 ? sub[id] : sub2[id];
+
+    return (
+      <div className="mt-2" style={{ paddingLeft: `${level * 12}px` }}>
+        <button
+          onClick={() => (level === 1 ? toggleSub(id) : toggleSub2(id))}
+          className="w-full flex justify-between font-medium text-primary"
+        >
+          {title}
+          <ChevronDown
+            size={14}
+            className={`transition-transform ${state ? "rotate-180" : ""}`}
+          />
+        </button>
+
+        <AnimatePresence initial={false}>
+          {state && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.22 }}
+              className="mt-2 space-y-2 pl-3 overflow-hidden"
+            >
+              {children}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    );
+  };
+
+  const footerColumns = {
+    getStarted: t("footer.getStarted", "Get Started"),
+    waysToEarn: t("footer.waysToEarn", "Ways to Earn"),
+    guides: t("footer.guides", "Guides"),
+    rewards: t("footer.rewards", "Rewards"),
+    resources: t("footer.resources", "Resources"),
+    business: t("footer.business", "Business"),
+    cashback: t("footer.cashback", "Cashback"),
+    legal: t("footer.legal", "Legal"),
+  };
+
+  const links = translations["footer.links"];
+
   return (
-    <footer className="border-t border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 mt-10">
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        {/* ===============================
-            GRID SECTION FOR FOOTER LINKS
-        =============================== */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
-          {/* =========================
-              COMPANY
-          ========================= */}
-          <div>
-            <h3 className="font-semibold text-lg mb-4">
-              {t("company", "Company")}
-            </h3>
+    <footer
+      className={`bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20
+      dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20
+      text-primary transition-colors duration-300 border-t border-theme ${className || ""}`}
+    >
+      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10">
 
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link
-                  href={`/${country}/about`}
-                  className="text-gray-800 dark:text-gray-200 hover:text-blue-500 focus:outline-none no-underline"
-                >
-                  {t("about", "About Us")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/${country}/blog`}
-                  className="text-gray-800 dark:text-gray-200 hover:text-blue-500 focus:outline-none no-underline"
-                >
-                  {t("blog", "Blog")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/${country}/careers`}
-                  className="text-gray-800 dark:text-gray-200 hover:text-blue-500 focus:outline-none no-underline"
-                >
-                  {t("careers", "Careers")}
-                </Link>
-              </li>
-            </ul>
-          </div>
+        {/* COLUMN 1 */}
+        <Section id="start" title={footerColumns.getStarted}>
+          <A href="/how-it-works">{links.howItWorks}</A>
+          <A href="/start-earning">{links.startEarning}</A>
+          <A href="/cashout">{links.cashoutMethods}</A>
+          <A href="/withdrawals">{links.withdrawalProofs}</A>
+          <A href="/trust-safety">{links.trustSafety}</A>
+        </Section>
 
-          {/* =========================
-              LEGAL
-          ========================= */}
-          <div>
-            <h3 className="font-semibold text-lg mb-4">
-              {t("legal", "Legal")}
-            </h3>
+        {/* COLUMN 2 */}
+        <Section id="earn" title={footerColumns.waysToEarn}>
+          <A href="/surveys">{links.surveys}</A>
+          <A href="/app-installs">{links.appInstalls}</A>
+          <A href="/play-games">{links.playGames}</A>
+          <A href="/watch-videos">{links.watchVideos}</A>
+          <A href="/mining-rewards">{links.miningRewards}</A>
+          <A href="/complete-offers">{links.completeOffers}</A>
+          <A href="/offerwall">{links.offerwall}</A>
+          <A href="/surveywall">{links.surveywall}</A>
 
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link
-                  href={`/${country}/terms`}
-                  className="text-gray-800 dark:text-gray-200 hover:text-blue-500 focus:outline-none no-underline"
-                >
-                  {t("terms", "Terms of Service")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/${country}/privacy`}
-                  className="text-gray-800 dark:text-gray-200 hover:text-blue-500 focus:outline-none no-underline"
-                >
-                  {t("privacy", "Privacy Policy")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/${country}/cookies`}
-                  className="text-gray-800 dark:text-gray-200 hover:text-blue-500 focus:outline-none no-underline"
-                >
-                  {t("cookies", "Cookie Policy")}
-                </Link>
-              </li>
-            </ul>
-          </div>
+          <Sub id="extra" title={links.extraEarning}>
+            <A href="/watch-ads">{links.watchAds}</A>
+            <A href="/micro-tasks">{links.microTasks}</A>
+            <A href="/complete-free-trials">{links.freeTrials}</A>
+            <A href="/test-products">{links.testProducts}</A>
+            <A href="/read-emails">{links.readEmails}</A>
+            <A href="/visit-websites">{links.visitWebsites}</A>
+            <A href="/review-tasks">{links.reviewTasks}</A>
+            <A href="/spinning-wheel">{links.spinningWheel}</A>
+            <A href="/loyalty">{links.loyalty}</A>
+            <A href="/vouchers">{links.vouchers}</A>
+          </Sub>
+        </Section>
 
-          {/* =========================
-              SUPPORT
-          ========================= */}
-          <div>
-            <h3 className="font-semibold text-lg mb-4">
-              {t("support", "Support")}
-            </h3>
+        {/* COLUMN 3 */}
+        <Section id="guides" title={footerColumns.guides}>
+          <A href="/make-money-online">{links.makeMoneyOnline}</A>
+          <A href="/earn-money-from-home">{links.earnFromHome}</A>
+          <A href="/earn-without-investment">{links.earnWithoutInvestment}</A>
+          <A href="/get-paid-to-play-games">{links.getPaidToPlayGames}</A>
+          <A href="/install-apps-for-cash">{links.installApps}</A>
+          <A href="/watch-videos-for-money">{links.watchVideosForMoney}</A>
+          <A href="/complete-offers-online">{links.completeOffersOnline}</A>
+          <A href="/work-from-home-jobs">{links.workFromHomeJobs}</A>
+          <A href="/online-earning-methods">{links.onlineEarningMethods}</A>
+          <A href="/earn-money-online-fast">{links.earnFast}</A>
 
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link
-                  href={`/${country}/help`}
-                  className="text-gray-800 dark:text-gray-200 hover:text-blue-500 focus:outline-none no-underline"
-                >
-                  {t("help", "Help Center")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/${country}/contact`}
-                  className="text-gray-800 dark:text-gray-200 hover:text-blue-500 focus:outline-none no-underline"
-                >
-                  {t("contact", "Contact Us")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/${country}/faq`}
-                  className="text-gray-800 dark:text-gray-200 hover:text-blue-500 focus:outline-none no-underline"
-                >
-                  {t("faq", "FAQ")}
-                </Link>
-              </li>
-            </ul>
-          </div>
+          <Sub id="allGuides" title={links.allGuides}>
+            <A href="/passive-income-online">{links.passiveIncome}</A>
+            <A href="/online-jobs-for-beginners">{links.onlineJobs}</A>
+            <A href="/earn-money-as-a-student">{links.studentEarnings}</A>
+            <A href="/earn-money-without-skills">{links.earnWithoutSkills}</A>
+            <A href="/earn-money-using-mobile">{links.earnUsingMobile}</A>
+            <A href="/earn-money-online-worldwide">{links.earnWorldwide}</A>
+            <A href="/cashback-rewards">{links.cashbackRewards}</A>
+            <A href="/legit-ways-to-make-money-online">{links.legitWays}</A>
+            <A href="/free-ways-to-make-money-online">{links.freeWays}</A>
+          </Sub>
+        </Section>
 
-          {/* =========================
-              FOLLOW US
-          ========================= */}
-          <div>
-            <h3 className="font-semibold text-lg mb-4">
-              {t("follow_us", "Follow Us")}
-            </h3>
+        {/* COLUMN 4 */}
+        <Section id="rewards" title={footerColumns.rewards}>
+          <A href="/earn-paypal-money">{links.earnPayPal}</A>
 
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link
-                  href="https://facebook.com"
-                  target="_blank"
-                  className="text-gray-800 dark:text-gray-200 hover:text-blue-500 focus:outline-none no-underline"
-                >
-                  Facebook
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="https://twitter.com"
-                  target="_blank"
-                  className="text-gray-800 dark:text-gray-200 hover:text-blue-400 focus:outline-none no-underline"
-                >
-                  Twitter
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="https://instagram.com"
-                  target="_blank"
-                  className="text-gray-800 dark:text-gray-200 hover:text-pink-500 focus:outline-none no-underline"
-                >
-                  Instagram
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
+          <Sub id="giftcards" title={links.earnGiftCards}>
+            <A href="/earn-amazon-gift-card">{links.amazonGiftCard}</A>
+            <A href="/earn-apple-gift-card">{links.appleGiftCard}</A>
+            <A href="/earn-google-play-gift-card">{links.googleGiftCard}</A>
+          </Sub>
 
-        {/* ===============================
-            SOCIAL + COPYRIGHT
-        =============================== */}
-        <div className="mt-10 border-t border-gray-300 dark:border-gray-700 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          
-          {/* Social Links */}
-          <div className="flex gap-5 text-sm">
-            <Link
-              href="https://facebook.com"
-              target="_blank"
-              className="text-gray-800 dark:text-gray-200 hover:text-blue-500 focus:outline-none no-underline"
-            >
-              Facebook
-            </Link>
+          <Sub id="crypto" title={links.earnCrypto}>
+            <A href="/earn-bitcoin-online">{links.bitcoin}</A>
+            <A href="/earn-litecoin-online">{links.litecoin}</A>
+            <A href="/earn-ethereum-online">{links.ethereum}</A>
+            <A href="/earn-dogecoin-online">{links.dogecoin}</A>
+          </Sub>
 
-            <Link
-              href="https://twitter.com"
-              target="_blank"
-              className="text-gray-800 dark:text-gray-200 hover:text-blue-400 focus:outline-none no-underline"
-            >
-              Twitter
-            </Link>
+          <Sub id="gaming" title={links.earnGaming}>
+            <A href="/earn-free-robux">{links.robux}</A>
+            <A href="/earn-steam-gift-cards">{links.steam}</A>
+            <A href="/earn-xbox-gift-cards">{links.xbox}</A>
+            <A href="/earn-psn-gift-cards">{links.psn}</A>
+          </Sub>
 
-            <Link
-              href="https://instagram.com"
-              target="_blank"
-              className="text-gray-800 dark:text-gray-200 hover:text-pink-500 focus:outline-none no-underline"
-            >
-              Instagram
-            </Link>
-          </div>
+          <A href="/earn-spotify-premium">{links.spotify}</A>
+        </Section>
 
-          {/* Copyright */}
-          <div className="text-sm text-center md:text-right">
-            <p>
-              &copy; {new Date().getFullYear()}{" "}
-              <span className="font-semibold">Cashog</span>.{" "}
-              {t("rights", "All rights reserved.")}{" "}
-            </p>
-            <p className="text-gray-500 dark:text-gray-400">
-              {t("serving", "Serving users in")} {country.toUpperCase()}
-            </p>
-          </div>
-        </div>
+        {/* COLUMN 5 */}
+        <Section id="resources" title={footerColumns.resources}>
+          <A href="/blog">{links.blog}</A>
+          <A href="/help">{links.helpCenter}</A>
+          <A href="/faq">{links.faq}</A>
+          <A href="/contact">{links.contactSupport}</A>
+          <A href="/about">{links.about}</A>
+        </Section>
+
+        {/* COLUMN 6 */}
+        <Section id="business" title={footerColumns.business}>
+          <A href="/affiliate">{links.affiliate}</A>
+          <A href="/partners">{links.partners}</A>
+          <A href="/advertise">{links.advertise}</A>
+        </Section>
+
+        {/* COLUMN 7 */}
+        <Section id="cashback" title={footerColumns.cashback}>
+          <A href="/cashback-offers">{links.cashbackOffers}</A>
+
+          <Sub id="shopping" title={links.shoppingRewards}>
+            <A href="/shopping-rewards/electronics">{links.electronics}</A>
+            <A href="/shopping-rewards/fashion">{links.fashion}</A>
+            <A href="/shopping-rewards/home-garden">{links.homeGarden}</A>
+            <A href="/shopping-rewards/grocery">{links.grocery}</A>
+            <A href="/shopping-rewards/beauty">{links.beauty}</A>
+            <A href="/shopping-rewards/mobile">{links.mobile}</A>
+
+            <Sub id="travel" title={links.travel} level={2}>
+              <A href="/shopping-rewards/travel/hotels">{links.hotels}</A>
+              <A href="/shopping-rewards/travel/flights">{links.flights}</A>
+            </Sub>
+
+            <A href="/shopping-rewards/finance">{links.finance}</A>
+          </Sub>
+
+          <A href="/promo-codes">{links.promoCodes}</A>
+          <A href="/daily-deals">{links.dailyDeals}</A>
+          <A href="/banking-finance-offers">{links.banking}</A>
+        </Section>
+
+        {/* COLUMN 8 */}
+        <Section id="legal" title={footerColumns.legal}>
+          <A href="/terms-and-conditions">{links.terms}</A>
+          <A href="/privacy-policy">{links.privacy}</A>
+          <A href="/cookie-policy">{links.cookies}</A>
+        </Section>
+
+      </div>
+
+      {/* SOCIAL ICONS */}
+      <div className="border-t border-theme py-6 flex justify-center gap-6">
+        <a href="https://twitter.com/cashog" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+          <Twitter size={20} />
+        </a>
+        <a href="https://facebook.com/cashog" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+          <Facebook size={20} />
+        </a>
+        <a href="https://instagram.com/cashog" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+          <Instagram size={20} />
+        </a>
+        <a href="https://youtube.com/cashog" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+          <Youtube size={20} />
+        </a>
+      </div>
+
+      {/* COPYRIGHT */}
+      <div className="text-center text-sm text-primary pb-6">
+        {t("footer.copyright", "© 2026 Cashog. All rights reserved.")}
       </div>
     </footer>
   );
