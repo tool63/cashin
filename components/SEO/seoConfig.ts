@@ -23,13 +23,46 @@ export type SEOConfigType = {
   getHreflang: (country?: string) => string;
 };
 
+// ===============================
+// 🧠 HELPERS (ENTERPRISE SAFE)
+// ===============================
+function normalizePath(path: string): string {
+  if (!path) return "/";
+
+  let clean = path;
+
+  if (!clean.startsWith("/")) clean = `/${clean}`;
+
+  clean = clean.split("?")[0].split("#")[0];
+  clean = clean.replace(/\/+/g, "/");
+
+  if (clean.length > 1 && clean.endsWith("/")) {
+    clean = clean.slice(0, -1);
+  }
+
+  return clean;
+}
+
+function normalizeCountry(country?: string): string | undefined {
+  if (!country) return undefined;
+
+  const c = country.toLowerCase().trim();
+
+  if (/^[a-z]{2}$/.test(c)) return c;
+
+  return undefined;
+}
+
+// ===============================
+// 🚀 MAIN CONFIG
+// ===============================
 export const SEO_CONFIG: SEOConfigType = {
   siteName: "Cashog",
   baseUrl: "https://cashog.com",
   defaultCountry: "us",
 
   // ===============================
-  // 🌍 7-TIER SYSTEM (GLOBAL STANDARD)
+  // 🌍 7-TIER SYSTEM
   // ===============================
   getTier(country) {
     if (!country) return 1;
@@ -67,7 +100,7 @@ export const SEO_CONFIG: SEOConfigType = {
   ],
 
   // ===============================
-  // 📊 BASE PRIORITY (PAGE VALUE)
+  // 📊 BASE PRIORITY
   // ===============================
   priority: {
     money: 1.0,
@@ -78,42 +111,47 @@ export const SEO_CONFIG: SEOConfigType = {
   },
 
   // ===============================
-  // 🔗 URL BUILDER
+  // 🔗 URL BUILDER (GLOBAL + COUNTRY)
   // ===============================
   buildUrl({ path, country }) {
-    const cleanPath = path.startsWith("/") ? path : `/${path}`;
+    const cleanPath = normalizePath(path);
+    const cleanCountry = normalizeCountry(country);
 
-    if (!country || country === this.defaultCountry) {
+    // 🌐 GLOBAL
+    if (!cleanCountry) {
       return `${this.baseUrl}${cleanPath}`;
     }
 
-    return `${this.baseUrl}/${country}${cleanPath}`;
+    // 🌎 COUNTRY (INCLUDING US)
+    return `${this.baseUrl}/${cleanCountry}${cleanPath}`;
   },
 
   // ===============================
   // 📄 PAGE TYPE DETECTION
   // ===============================
   getPageType(path) {
-    if (this.moneyPages.includes(path)) return "money";
-    if (this.earnPages.includes(path)) return "earn";
+    const clean = normalizePath(path);
+
+    if (this.moneyPages.includes(clean)) return "money";
+    if (this.earnPages.includes(clean)) return "earn";
 
     if (
-      path.includes("shop") ||
-      path.includes("store") ||
-      path.includes("cashback")
+      clean.includes("shop") ||
+      clean.includes("store") ||
+      clean.includes("cashback")
     ) return "shopping";
 
     if (
-      path.includes("blog") ||
-      path.includes("guide") ||
-      path.includes("compare")
+      clean.includes("blog") ||
+      clean.includes("guide") ||
+      clean.includes("compare")
     ) return "content";
 
     return "low";
   },
 
   // ===============================
-  // 🚀 TIER-BASED PRIORITY ENGINE
+  // 🚀 PRIORITY ENGINE
   // ===============================
   getPriority(path, country) {
     const type = this.getPageType(path);
@@ -137,7 +175,7 @@ export const SEO_CONFIG: SEOConfigType = {
   },
 
   // ===============================
-  // 🔄 CHANGE FREQUENCY (TIER BASED)
+  // 🔄 CHANGE FREQUENCY
   // ===============================
   getChangeFrequency(country) {
     if (!country) return "daily";
@@ -151,7 +189,7 @@ export const SEO_CONFIG: SEOConfigType = {
   },
 
   // ===============================
-  // 🌍 HREFLANG
+  // 🌍 HREFLANG (UNIFIED SOURCE)
   // ===============================
   getHreflang(country) {
     if (!country) return "x-default";
@@ -174,8 +212,8 @@ export const SEO_CONFIG: SEOConfigType = {
       mx: "es-MX",
 
       in: "en-IN",
-      bd: "bn-BD",
-      pk: "ur-PK",
+      bd: "en-BD",
+      pk: "en-PK",
 
       ng: "en-NG",
       za: "en-ZA",
@@ -192,10 +230,19 @@ export const SEO_CONFIG: SEOConfigType = {
 };
 
 // ===============================
-// 🚀 ENTERPRISE ALIASES
+// 🚀 ELITE ENTERPRISE ALIASES
 // ===============================
-export const buildUrl = SEO_CONFIG.buildUrl;
-export const getPageType = SEO_CONFIG.getPageType;
-export const getPriority = SEO_CONFIG.getPriority;
-export const getChangeFrequency = SEO_CONFIG.getChangeFrequency;
-export const getHreflang = SEO_CONFIG.getHreflang;
+export const buildUrl = (args: Parameters<typeof SEO_CONFIG.buildUrl>[0]) =>
+  SEO_CONFIG.buildUrl(args);
+
+export const getPageType = (path: string) =>
+  SEO_CONFIG.getPageType(path);
+
+export const getPriority = (path: string, country?: string) =>
+  SEO_CONFIG.getPriority(path, country);
+
+export const getChangeFrequency = (country?: string) =>
+  SEO_CONFIG.getChangeFrequency(country);
+
+export const getHreflang = (country?: string) =>
+  SEO_CONFIG.getHreflang(country);
