@@ -2,19 +2,15 @@
 
 import { useMemo } from "react";
 import { motion } from "framer-motion";
-import { useLanguage } from "./providers/LanguageProvider";
-import { useCountry } from "./providers/CountryProvider";
+import { useLanguage } from "@/providers/LanguageProvider";
+import { useCountry } from "@/providers/CountryProvider";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
-
-// ===============================
-// SEO Imports
-// ===============================
 import SeoRenderer from "@/components/SEO/SeoRenderer";
-import { buildUrl } from "@/components/SEO/canonical";
-import { getHreflangs } from "@/components/SEO/hreflang";
+import { generateMetadata } from "@/components/SEO/metadata";
+import { generateJsonLd } from "@/components/SEO/schema";
 
 // ===============================
-// 🧩 FEATURE CARD
+// Feature Card Component
 // ===============================
 function FeatureCard({ title, description }: { title: string; description: string }) {
   return (
@@ -26,7 +22,7 @@ function FeatureCard({ title, description }: { title: string; description: strin
 }
 
 // ===============================
-// 🚀 COUNTRY HOMEPAGE
+// Country Homepage
 // ===============================
 export default function CountryHomePage() {
   const { getTranslation } = useLanguage();
@@ -38,78 +34,92 @@ export default function CountryHomePage() {
     [getTranslation]
   );
 
-  // -------------------------------
-  // SEO Metadata
-  // -------------------------------
-  const pageTitle = t("welcome_message", "Welcome to Cashog! Earn money online.");
-  const pageDescription = t(
-    "homepage_description",
-    "Cashog helps you earn real money online safely and quickly."
-  );
-  const canonicalUrl = buildUrl({ path: "", country });
-  const hreflangs = getHreflangs({ path: "", country });
+  // Page content (SEO + UI)
+  const pageContent = useMemo(() => {
+    const title = t("welcome_message", "Welcome to Cashog! Earn money online.");
+    const description = t(
+      "homepage_description",
+      "Cashog helps you earn real money online safely and quickly."
+    );
 
-  const jsonLd = useMemo(
-    () => ({
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      name: pageTitle,
-      url: canonicalUrl,
-      description: pageDescription,
-    }),
-    [pageTitle, canonicalUrl, pageDescription]
-  );
+    return {
+      title,
+      description,
+      features: [
+        {
+          title: t("feature_surveys", "Complete Surveys"),
+          description: t("feature_surveys_desc", "Answer surveys and earn points instantly."),
+        },
+        {
+          title: t("feature_apps", "Install Apps"),
+          description: t("feature_apps_desc", "Download apps and get paid quickly."),
+        },
+        {
+          title: t("feature_games", "Play Games"),
+          description: t("feature_games_desc", "Play fun games and earn rewards."),
+        },
+      ],
+      finalCta: {
+        title: t("final_cta_title", "Start Earning Today"),
+        description: t(
+          "final_cta_description",
+          "Join thousands of users already earning with Cashog. It only takes a few seconds to begin."
+        ),
+      },
+    };
+  }, [t]);
 
-  // -------------------------------
-  // CTA Link
-  // -------------------------------
+  // Generate metadata and structured data based on page content
+  const { metadata, structuredData } = useMemo(() => {
+    const meta = generateMetadata({
+      title: pageContent.title,
+      description: pageContent.description,
+      path: "/",
+      country,
+      language: "en",
+      noindex: false,
+    });
+
+    const schema = generateJsonLd({
+      path: "/",
+      title: pageContent.title,
+      description: pageContent.description,
+      type: "low",
+    });
+
+    return { metadata: meta, structuredData: schema };
+  }, [pageContent.title, pageContent.description, country]);
+
+  // Signup CTA link
   const signupLink = useMemo(() => `/${country}/signup`, [country]);
-
-  // -------------------------------
-  // Features Section
-  // -------------------------------
-  const features = useMemo(
-    () => [
-      {
-        title: t("feature_surveys", "Complete Surveys"),
-        description: t("feature_surveys_desc", "Answer surveys and earn points instantly."),
-      },
-      {
-        title: t("feature_apps", "Install Apps"),
-        description: t("feature_apps_desc", "Download apps and get paid quickly."),
-      },
-      {
-        title: t("feature_games", "Play Games"),
-        description: t("feature_games_desc", "Play fun games and earn rewards."),
-      },
-    ],
-    [t]
-  );
 
   return (
     <>
-      {/* SEO Component */}
+      {/* SEO Renderer - Handles canonical, hreflang, and meta tags */}
       <SeoRenderer
-        title={pageTitle}
-        description={pageDescription}
-        canonical={canonicalUrl}
-        hreflangs={hreflangs}
-        structuredData={jsonLd}
+        path="/"
+        title={pageContent.title}
+        description={pageContent.description}
+        country={country}
+        noindex={false}
+      />
+
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
       <section className="max-w-6xl mx-auto px-4 py-16">
         {/* HERO SECTION */}
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            {pageTitle}
+            {pageContent.title}
           </h1>
-
           <p className="text-xl text-gray-700 dark:text-gray-300 mb-10 max-w-3xl mx-auto">
-            {pageDescription}
+            {pageContent.description}
           </p>
-
           <PrimaryCTA href={signupLink} translationKey="get_started_now" aria-label="Get started now" />
-
           <p className="text-sm mt-4 text-gray-500">
             No credit card required • Start instantly
           </p>
@@ -117,7 +127,7 @@ export default function CountryHomePage() {
 
         {/* FEATURES SECTION */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, idx) => (
+          {pageContent.features.map((feature, idx) => (
             <FeatureCard key={idx} title={feature.title} description={feature.description} />
           ))}
         </div>
@@ -130,17 +140,13 @@ export default function CountryHomePage() {
           viewport={{ once: true }}
           className="mt-24 text-center bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-2xl p-10 md:p-16 text-white shadow-2xl shadow-blue-500/30"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">{t("final_cta_title", "Start Earning Today")}</h2>
-
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            {pageContent.finalCta.title}
+          </h2>
           <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto opacity-90">
-            {t(
-              "final_cta_description",
-              "Join thousands of users already earning with Cashog. It only takes a few seconds to begin."
-            )}
+            {pageContent.finalCta.description}
           </p>
-
           <PrimaryCTA href={signupLink} translationKey="get_started_now" aria-label="Get started now" />
-
           <p className="text-sm mt-4 opacity-80">
             Fast signup • Instant access • No hidden fees
           </p>
