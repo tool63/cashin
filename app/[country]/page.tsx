@@ -2,8 +2,8 @@
 
 import { useMemo } from "react";
 import { motion } from "framer-motion";
-import { useLanguage } from "@/providers/LanguageProvider";
-import { useCountry } from "@/providers/CountryProvider";
+import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
+import { useCountry } from "@/app/[country]/providers/CountryProvider";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import SeoRenderer from "@/components/SEO/SeoRenderer";
 import { generateMetadata } from "@/components/SEO/metadata";
@@ -69,26 +69,15 @@ export default function CountryHomePage() {
     };
   }, [t]);
 
-  // Generate metadata and structured data based on page content
-  const { metadata, structuredData } = useMemo(() => {
-    const meta = generateMetadata({
-      title: pageContent.title,
-      description: pageContent.description,
-      path: "/",
-      country,
-      language: "en",
-      noindex: false,
-    });
-
-    const schema = generateJsonLd({
+  // Generate structured data based on page content
+  const structuredData = useMemo(() => {
+    return generateJsonLd({
       path: "/",
       title: pageContent.title,
       description: pageContent.description,
       type: "low",
     });
-
-    return { metadata: meta, structuredData: schema };
-  }, [pageContent.title, pageContent.description, country]);
+  }, [pageContent.title, pageContent.description]);
 
   // Signup CTA link
   const signupLink = useMemo(() => `/${country}/signup`, [country]);
