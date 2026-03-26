@@ -1,20 +1,57 @@
-// ===============================
-// 🌐 BASE CONFIG (ENTERPRISE CORE)
-// ===============================
-const BASE_URL = "https://cashog.com";
+// =======================================
+// 🌐 hreflang.ts (FULL ENTERPRISE VERSION)
+// =======================================
 
-// Global = unknown users
-const GLOBAL_HREFLANG = "x-default";
+export type HreflangLink = {
+  rel: "alternate";
+  hrefLang: string;
+  href: string;
+};
 
 // ===============================
-// 🌍 COUNTRY → HREFLANG MAP
+// 🌍 GLOBAL COUNTRY LIST (200+)
 // ===============================
-const COUNTRY_HREFLANG_MAP: Record<string, string> = {
+export const ALL_COUNTRIES = [
+  "af","al","dz","ad","ao","ag","ar","am","au","at","az",
+  "bs","bh","bd","bb","by","be","bz","bj","bt","bo","ba","bw","br","bn","bg","bf","bi",
+  "cv","kh","cm","ca","cf","td","cl","cn","co","km","cg","cd","cr","ci","hr","cu","cy","cz",
+  "dk","dj","dm","do",
+  "ec","eg","sv","gq","er","ee","sz","et",
+  "fj","fi","fr",
+  "ga","gm","ge","de","gh","gr","gd","gt","gn","gw","gy",
+  "ht","hn","hu",
+  "is","in","id","ir","iq","ie","il","it",
+  "jm","jp","jo",
+  "kz","ke","ki","kp","kr","kw","kg",
+  "la","lv","lb","ls","lr","ly","li","lt","lu",
+  "mg","mw","my","mv","ml","mt","mh","mr","mu","mx","fm","md","mc","mn","me","ma","mz","mm",
+  "na","nr","np","nl","nz","ni","ne","ng","mk","no",
+  "om",
+  "pk","pw","pa","pg","py","pe","ph","pl","pt",
+  "qa",
+  "ro","ru","rw",
+  "kn","lc","vc","ws","sm","st","sa","sn","rs","sc","sl","sg","sk","si","sb","so","za","ss","es","lk","sd","sr","se","ch","sy",
+  "tw","tj","tz","th","tl","tg","to","tt","tn","tr","tm","tv",
+  "ug","ua","ae","gb","us","uy","uz",
+  "vu","va","ve","vn",
+  "ye",
+  "zm","zw"
+];
+
+// ===============================
+// 🌐 BASE CONFIG
+// ===============================
+export const BASE_URL = "https://cashog.com";
+export const GLOBAL_HREFLANG = "x-default";
+
+// ===============================
+// 🌍 COUNTRY → HREFLANG MAP (OVERRIDES)
+// ===============================
+export const COUNTRY_HREFLANG_MAP: Record<string, string> = {
   us: "en-US",
   gb: "en-GB",
   ca: "en-CA",
   au: "en-AU",
-
   de: "de-DE",
   fr: "fr-FR",
   es: "es-ES",
@@ -22,136 +59,98 @@ const COUNTRY_HREFLANG_MAP: Record<string, string> = {
   nl: "nl-NL",
   se: "sv-SE",
   ch: "de-CH",
-
   in: "en-IN",
   bd: "en-BD",
   pk: "en-PK",
-
   br: "pt-BR",
   mx: "es-MX",
-
   sg: "en-SG",
   ph: "en-PH",
-
   za: "en-ZA",
   ng: "en-NG",
   ke: "en-KE",
   eg: "ar-EG",
+  cn: "zh-CN",
+  tw: "zh-TW",
+  jp: "ja-JP",
+  kr: "ko-KR",
 };
 
 // ===============================
-// 🧠 PATH NORMALIZER (STRICT)
+// 🧹 PATH NORMALIZER
 // ===============================
 function normalizePath(path: string): string {
   if (!path) return "/";
-
-  let clean = path;
-
-  if (!clean.startsWith("/")) {
-    clean = `/${clean}`;
-  }
-
-  // Remove query + hash
+  let clean = path.startsWith("/") ? path : `/${path}`;
   clean = clean.split("?")[0].split("#")[0];
-
-  // Remove duplicate slashes
   clean = clean.replace(/\/+/g, "/");
-
-  // Remove trailing slash (except root)
-  if (clean.length > 1 && clean.endsWith("/")) {
-    clean = clean.slice(0, -1);
-  }
-
+  if (clean.length > 1 && clean.endsWith("/")) clean = clean.slice(0, -1);
   return clean;
 }
 
 // ===============================
-// 🌍 COUNTRY NORMALIZER (STRICT)
+// 🌍 COUNTRY NORMALIZER
 // ===============================
 function normalizeCountry(country?: string): string | undefined {
   if (!country) return undefined;
-
   const c = country.toLowerCase().trim();
-
-  if (/^[a-z]{2}$/.test(c)) return c;
-
-  return undefined;
+  return /^[a-z]{2}$/.test(c) ? c : undefined;
 }
 
 // ===============================
-// 🔗 URL BUILDER (GLOBAL + COUNTRY)
+// 🔗 URL BUILDER
 // ===============================
-function buildUrl(path: string, country?: string): string {
+export function buildUrl(path: string, country?: string): string {
   const cleanPath = normalizePath(path);
   const cleanCountry = normalizeCountry(country);
-
-  // 🌐 GLOBAL (UNKNOWN USERS)
-  if (!cleanCountry) {
-    return `${BASE_URL}${cleanPath}`;
-  }
-
-  // 🌎 COUNTRY-SPECIFIC
-  return `${BASE_URL}/${cleanCountry}${cleanPath}`;
+  return cleanCountry && ALL_COUNTRIES.includes(cleanCountry)
+    ? `${BASE_URL}/${cleanCountry}${cleanPath}`
+    : `${BASE_URL}${cleanPath}`;
 }
 
 // ===============================
-// 🚀 HREFLANG ENGINE (ENTERPRISE)
+// 🌐 GET HREFLANG
 // ===============================
-export function generateHreflang({
-  path,
-}: {
-  path: string;
-}) {
-  const links: {
-    rel: "alternate";
-    hrefLang: string;
-    href: string;
-  }[] = [];
+export function getHreflang(country: string): string {
+  const c = country.toLowerCase();
+  return COUNTRY_HREFLANG_MAP[c] || `en-${c.toUpperCase()}`;
+}
 
+// ===============================
+// 🌐 GENERATE HREFLANG LINKS
+// ===============================
+export function generateHreflangLinks(path: string): HreflangLink[] {
   const cleanPath = normalizePath(path);
+  const links: HreflangLink[] = [];
 
-  // ===============================
-  // 🌍 1. GLOBAL (x-default)
-  // ===============================
-  links.push({
-    rel: "alternate",
-    hrefLang: GLOBAL_HREFLANG,
-    href: buildUrl(cleanPath),
-  });
+  // x-default
+  links.push({ rel: "alternate", hrefLang: GLOBAL_HREFLANG, href: buildUrl(cleanPath) });
 
-  // ===============================
-  // 🌎 2. ALL COUNTRY VARIANTS
-  // ===============================
-  for (const [countryCode, hreflang] of Object.entries(
-    COUNTRY_HREFLANG_MAP
-  )) {
-    links.push({
-      rel: "alternate",
-      hrefLang: hreflang,
-      href: buildUrl(cleanPath, countryCode),
-    });
+  // All countries
+  for (const country of ALL_COUNTRIES) {
+    links.push({ rel: "alternate", hrefLang: getHreflang(country), href: buildUrl(cleanPath, country) });
   }
 
   return links;
 }
 
 // ===============================
-// 🚀 OPTIONAL: SINGLE COUNTRY HELPER
+// 🌍 SINGLE COUNTRY URL HELPER
 // ===============================
 export function getCountryUrl(path: string, country?: string) {
   return buildUrl(path, country);
 }
 
 // ===============================
-// 🚀 OPTIONAL: GLOBAL URL HELPER
+// 🌐 GLOBAL URL HELPER
 // ===============================
 export function getGlobalUrl(path: string) {
   return buildUrl(path);
 }
 
 // ===============================
-// 🚀 OPTIONAL: SUPPORTED COUNTRIES
+// 🧭 SUPPORTED COUNTRIES
 // ===============================
 export function getSupportedCountries() {
-  return Object.keys(COUNTRY_HREFLANG_MAP);
+  return ALL_COUNTRIES;
 }
