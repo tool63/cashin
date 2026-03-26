@@ -5,16 +5,17 @@ import { getCanonicalUrl } from "./canonical";
 // ===============================
 // 🧠 TYPES
 // ===============================
-type MetadataProps = {
+export type MetadataProps = {
   title?: string;
   description?: string;
   path: string;
   country?: string;
+  language?: string;
   noindex?: boolean;
 };
 
 // ===============================
-// 🌍 GLOBAL COUNTRY LIST (SHARED)
+// 🌍 GLOBAL COUNTRY LIST
 // ===============================
 const ALL_COUNTRIES = [
   "af","al","dz","ad","ao","ag","ar","am","au","at","az",
@@ -46,15 +47,7 @@ const ALL_COUNTRIES = [
 // ===============================
 // 🧠 TITLE ENGINE
 // ===============================
-function generateTitle({
-  title,
-  path,
-  country,
-}: {
-  title?: string;
-  path: string;
-  country?: string;
-}) {
+function generateTitle({ title, path, country }: { title?: string; path: string; country?: string; }) {
   if (title) return title;
 
   const type = SEO_CONFIG.getPageType(path);
@@ -69,9 +62,7 @@ function generateTitle({
 
   let base = baseTitles[type] || "Earn Rewards Online";
 
-  if (country) {
-    base = `${base} in ${country.toUpperCase()}`;
-  }
+  if (country) base = `${base} in ${country.toUpperCase()}`;
 
   return `${base} | ${SEO_CONFIG.siteName}`;
 }
@@ -79,98 +70,62 @@ function generateTitle({
 // ===============================
 // 🧠 DESCRIPTION ENGINE
 // ===============================
-function generateDescription({
-  description,
-  path,
-  country,
-}: {
-  description?: string;
-  path: string;
-  country?: string;
-}) {
+function generateDescription({ description, path, country }: { description?: string; path: string; country?: string; }) {
   if (description) return description;
 
   const type = SEO_CONFIG.getPageType(path);
 
   const descriptions: Record<string, string> = {
-    money:
-      "Start earning money online with surveys, offers, games, and cashback rewards.",
-    earn:
-      "Complete tasks, play games, and earn real rewards online instantly.",
-    shopping:
-      "Get cashback, discounts, and rewards while shopping online.",
-    content:
-      "Learn strategies to maximize your online earnings.",
-    low:
-      "Join and start earning rewards worldwide.",
+    money: "Start earning money online with surveys, offers, games, and cashback rewards.",
+    earn: "Complete tasks, play games, and earn real rewards online instantly.",
+    shopping: "Get cashback, discounts, and rewards while shopping online.",
+    content: "Learn strategies to maximize your online earnings.",
+    low: "Join and start earning rewards worldwide.",
   };
 
   let desc = descriptions[type] || descriptions.low;
 
-  if (country) {
-    desc += ` Available in ${country.toUpperCase()}.`;
-  }
+  if (country) desc += ` Available in ${country.toUpperCase()}.`;
 
   return desc;
 }
 
 // ===============================
-// 🔗 CANONICAL
+// 🔗 CANONICAL ENGINE
 // ===============================
 function generateCanonical(props: MetadataProps): string {
   return getCanonicalUrl({
     path: props.path,
     country: props.country,
+    language: props.language,
   });
 }
 
 // ===============================
-// 🌐 HREFLANG ENGINE (TIER SAFE)
+// 🌐 HREFLANG ENGINE
 // ===============================
 function generateHreflangLinks(path: string) {
   const cleanPath = path.startsWith("/") ? path : `/${path}`;
-
   const links: Record<string, string> = {};
 
-  // 🌍 x-default
+  // x-default
   links["x-default"] = SEO_CONFIG.buildUrl({ path: cleanPath });
 
-  // 🌎 ALL COUNTRIES (CONTROLLED LIST)
   for (const country of ALL_COUNTRIES) {
     const hreflang = SEO_CONFIG.getHreflang(country);
-
-    links[hreflang] = SEO_CONFIG.buildUrl({
-      path: cleanPath,
-      country,
-    });
+    links[hreflang] = SEO_CONFIG.buildUrl({ path: cleanPath, country });
   }
 
   return links;
 }
 
 // ===============================
-// 🚀 MAIN METADATA
+// 🚀 METADATA GENERATOR
 // ===============================
-export function generateMetadata({
-  title,
-  description,
-  path,
-  country,
-  noindex,
-}: MetadataProps): Metadata {
+export function generateMetadata({ title, description, path, country, language, noindex }: MetadataProps): Metadata {
   const metaTitle = generateTitle({ title, path, country });
-
-  const metaDescription = generateDescription({
-    description,
-    path,
-    country,
-  });
-
-  const canonical = generateCanonical({
-    path,
-    country,
-  });
-
+  const metaDescription = generateDescription({ description, path, country });
+  const canonical = generateCanonical({ path, country, language });
   const hreflangs = generateHreflangLinks(path);
 
   return {
@@ -213,9 +168,15 @@ export function generateMetadata({
 }
 
 // ===============================
-// 🚀 ALIASES
+// 🔥 ENTERPRISE ALIAS LAYER
 // ===============================
 export const buildMetadata = generateMetadata;
 export const createMetadata = generateMetadata;
 export const getMetadata = generateMetadata;
 export const seoMetadata = generateMetadata;
+export const resolveMetadata = generateMetadata;
+export const generateSEO = generateMetadata;
+export const buildSEO = generateMetadata;
+export const createSEO = generateMetadata;
+
+export default generateMetadata;
