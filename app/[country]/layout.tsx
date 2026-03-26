@@ -1,3 +1,4 @@
+// app/layouts/CountryLayout.tsx
 import "@/styles/globals.css";
 import { ReactNode } from "react";
 import { notFound } from "next/navigation";
@@ -15,6 +16,7 @@ import {
   COOKIE_KEYS,
   DEFAULT_LANGUAGE,
   SUPPORTED_LANGUAGES,
+  COUNTRY_LANGUAGE_MAP,
 } from "@/app/core/constants";
 
 import { isSupportedCountry } from "@/app/core/utils/validation";
@@ -24,7 +26,10 @@ import { loadAllTranslations } from "@/app/core/i18n/loader";
 // ===============================
 // 🌍 GET COUNTRY
 // ===============================
-function getInitialCountry(paramsCountry: string, cookieStore: ReturnType<typeof cookies>): string {
+function getInitialCountry(
+  paramsCountry: string,
+  cookieStore: ReturnType<typeof cookies>
+): string {
   const normalized = paramsCountry.toLowerCase();
 
   if (!isSupportedCountry(normalized)) {
@@ -45,14 +50,15 @@ function getInitialCountry(paramsCountry: string, cookieStore: ReturnType<typeof
 }
 
 // ===============================
-// 🌐 GET LANGUAGE (COOKIE ONLY)
+// 🌐 GET LANGUAGE (COOKIE)
 // ===============================
-function getInitialLanguage(cookieStore: ReturnType<typeof cookies>): SupportedLanguage {
+function getInitialLanguage(
+  cookieStore: ReturnType<typeof cookies>
+): SupportedLanguage {
   const langCookie = cookieStore.get(COOKIE_KEYS.LANGUAGE)?.value;
 
   if (langCookie) {
     const normalized = langCookie.toLowerCase().split("-")[0];
-
     if (SUPPORTED_LANGUAGES.includes(normalized as SupportedLanguage)) {
       return normalized as SupportedLanguage;
     }
@@ -70,7 +76,7 @@ function getDirection(lang: SupportedLanguage): "ltr" | "rtl" {
 }
 
 // ===============================
-// 🚀 LAYOUT
+// 🚀 COUNTRY LAYOUT
 // ===============================
 export default async function CountryLayout({
   children,
@@ -81,21 +87,42 @@ export default async function CountryLayout({
 }) {
   const cookieStore = cookies();
 
+  // -------------------------------
+  // 🌍 COUNTRY
+  // -------------------------------
   const country = getInitialCountry(params.country, cookieStore);
-  const language = getInitialLanguage(cookieStore);
 
-  const htmlLang = `${language}-${country.toUpperCase()}`;
-  const dir = getDirection(language);
+  // -------------------------------
+  // 🌐 LANGUAGE
+  // -------------------------------
+  let language = getInitialLanguage(cookieStore);
 
-  // Load all translations for the detected language
-  const translations = await loadAllTranslations(language);
-
-  // Check if user has manually overridden language
+  // Check if user manually selected language
   const userOverride = cookieStore.get(COOKIE_KEYS.USER_LANGUAGE_OVERRIDE)?.value;
   const isOverridden = !!userOverride;
 
+  // Force correct language per country if not overridden
+  if (!isOverridden) {
+    language = COUNTRY_LANGUAGE_MAP[country] || DEFAULT_LANGUAGE;
+  }
+
+  // -------------------------------
+  // 🌐 HTML ATTRIBUTES
+  // -------------------------------
+  const htmlLang = language; // SEO: just language code
+  const dir = getDirection(language);
+
+  // -------------------------------
+  // 📦 LOAD TRANSLATIONS
+  // -------------------------------
+  const translations = await loadAllTranslations(language);
+
   return (
     <html lang={htmlLang} dir={dir} suppressHydrationWarning>
+      <head>
+        {/* Optional SEO meta for language */}
+        <meta httpEquiv="content-language" content={language} />
+      </head>
       <body>
         <ThemeProviderWrapper>
           <CountryProvider initialCountry={country}>
