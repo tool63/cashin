@@ -47,11 +47,10 @@ const ALL_COUNTRIES = [
 // ===============================
 // 🧠 TITLE ENGINE
 // ===============================
-function generateTitle({ title, path, country }: { title?: string; path: string; country?: string; }) {
+function generateTitle({ title, path, country }: { title?: string; path: string; country?: string }) {
   if (title) return title;
 
   const type = SEO_CONFIG.getPageType(path);
-
   const baseTitles: Record<string, string> = {
     money: "Earn Money Online",
     earn: "Make Money Fast Online",
@@ -61,7 +60,6 @@ function generateTitle({ title, path, country }: { title?: string; path: string;
   };
 
   let base = baseTitles[type] || "Earn Rewards Online";
-
   if (country) base = `${base} in ${country.toUpperCase()}`;
 
   return `${base} | ${SEO_CONFIG.siteName}`;
@@ -70,11 +68,10 @@ function generateTitle({ title, path, country }: { title?: string; path: string;
 // ===============================
 // 🧠 DESCRIPTION ENGINE
 // ===============================
-function generateDescription({ description, path, country }: { description?: string; path: string; country?: string; }) {
+function generateDescription({ description, path, country }: { description?: string; path: string; country?: string }) {
   if (description) return description;
 
   const type = SEO_CONFIG.getPageType(path);
-
   const descriptions: Record<string, string> = {
     money: "Start earning money online with surveys, offers, games, and cashback rewards.",
     earn: "Complete tasks, play games, and earn real rewards online instantly.",
@@ -84,10 +81,46 @@ function generateDescription({ description, path, country }: { description?: str
   };
 
   let desc = descriptions[type] || descriptions.low;
-
   if (country) desc += ` Available in ${country.toUpperCase()}.`;
 
   return desc;
+}
+
+// ===============================
+// 🧠 KEYWORD GENERATOR ENGINE
+// ===============================
+function generateKeywords({ path, title, country }: { path: string; title?: string; country?: string }) {
+  const type = SEO_CONFIG.getPageType(path);
+  const cleanPath = path.startsWith("/") ? path.slice(1) : path;
+
+  const keywordsBase: Record<string, string[]> = {
+    money: ["earn money", "online rewards", "cash rewards", "money online"],
+    earn: ["make money fast", "instant rewards", "online tasks", "play games for cash"],
+    shopping: ["cashback", "shopping rewards", "discounts", "online deals"],
+    content: ["guides", "tips", "earn online guides", "reward strategies"],
+    low: ["free rewards", "online earning", "survey rewards", "reward platform"],
+  };
+
+  let keywords = keywordsBase[type] || ["online rewards", "earn money online", "cash rewards"];
+
+  // Include URL segments as keywords
+  const urlSegments = cleanPath.split("/").filter(Boolean);
+  keywords.push(...urlSegments);
+
+  // Include title words
+  if (title) {
+    const titleWords = title.split(" ").map(w => w.toLowerCase());
+    keywords.push(...titleWords);
+  }
+
+  // Country-specific
+  if (country) {
+    keywords.push(country.toLowerCase());
+    keywords.push(`${country.toUpperCase()} rewards`);
+  }
+
+  // Remove duplicates & return
+  return Array.from(new Set(keywords));
 }
 
 // ===============================
@@ -108,9 +141,7 @@ function generateHreflangLinks(path: string) {
   const cleanPath = path.startsWith("/") ? path : `/${path}`;
   const links: Record<string, string> = {};
 
-  // x-default
   links["x-default"] = SEO_CONFIG.buildUrl({ path: cleanPath });
-
   for (const country of ALL_COUNTRIES) {
     const hreflang = SEO_CONFIG.getHreflang(country);
     links[hreflang] = SEO_CONFIG.buildUrl({ path: cleanPath, country });
@@ -122,22 +153,24 @@ function generateHreflangLinks(path: string) {
 // ===============================
 // 🚀 METADATA GENERATOR
 // ===============================
-export function generateMetadata({ title, description, path, country, language, noindex }: MetadataProps): Metadata {
-  const metaTitle = generateTitle({ title, path, country });
-  const metaDescription = generateDescription({ description, path, country });
-  const canonical = generateCanonical({ path, country, language });
-  const hreflangs = generateHreflangLinks(path);
+export function generateMetadata(props: MetadataProps): Metadata & { keywords: string[] } {
+  const metaTitle = generateTitle({ title: props.title, path: props.path, country: props.country });
+  const metaDescription = generateDescription({ description: props.description, path: props.path, country: props.country });
+  const canonical = generateCanonical(props);
+  const hreflangs = generateHreflangLinks(props.path);
+  const keywords = generateKeywords({ path: props.path, title: props.title, country: props.country });
 
   return {
     title: metaTitle,
     description: metaDescription,
+    keywords, // elite keyword engine output
 
     alternates: {
       canonical,
       languages: hreflangs,
     },
 
-    robots: noindex
+    robots: props.noindex
       ? { index: false, follow: false }
       : {
           index: true,
@@ -178,5 +211,6 @@ export const resolveMetadata = generateMetadata;
 export const generateSEO = generateMetadata;
 export const buildSEO = generateMetadata;
 export const createSEO = generateMetadata;
+export const generateKeywordsSEO = generateKeywords;
 
 export default generateMetadata;
