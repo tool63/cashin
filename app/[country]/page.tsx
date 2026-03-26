@@ -2,8 +2,8 @@
 
 import { useMemo } from "react";
 import { motion } from "framer-motion";
-import { useLanguage } from "./providers/LanguageProvider";
-import { useCountry } from "./providers/CountryProvider";
+import { useLanguage } from "@/components/providers/LanguageProvider";
+import { useCountry } from "@/components/providers/CountryProvider";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 
 // ===============================
