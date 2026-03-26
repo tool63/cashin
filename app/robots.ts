@@ -2,24 +2,22 @@ import type { MetadataRoute } from "next";
 import { DEFAULT_COUNTRY } from "@/app/core/constants";
 
 // ===============================
-// 🌐 BASE URL
+// 🌐 BASE URL (PRIMARY DOMAIN)
 // ===============================
 const BASE_URL = "https://cashog.com";
 
 // ===============================
-// 🚀 ROBOTS CONFIG (ENTERPRISE)
+// 🧠 ENTERPRISE ROBOTS CONFIG ENGINE
 // ===============================
-export default function robots(): MetadataRoute.Robots {
+export function generateRobots(): MetadataRoute.Robots {
   return {
     rules: [
       // ===============================
-      // 🌍 GLOBAL RULES (PRIMARY BOT ACCESS)
+      // 🌍 GLOBAL ACCESS (PRIMARY BOT CONTROL)
       // ===============================
       {
         userAgent: "*",
         allow: "/",
-
-        // Protect sensitive / system paths
         disallow: [
           "/api/",
           "/admin/",
@@ -34,22 +32,34 @@ export default function robots(): MetadataRoute.Robots {
       },
 
       // ===============================
-      // 🤖 GOOGLEBOT (HIGH PRIORITY INDEXING)
+      // 🤖 GOOGLEBOT / BINGBOT (HIGH PRIORITY INDEXING)
       // ===============================
       {
         userAgent: "Googlebot",
         allow: "/",
-
-        // Ensure faster crawling for revenue pages
         disallow: [
           "/api/",
           "/admin/",
           "/dashboard/",
+          "/private/",
         ],
+        crawlDelay: 1,
+      },
+
+      {
+        userAgent: "Bingbot",
+        allow: "/",
+        disallow: [
+          "/api/",
+          "/admin/",
+          "/dashboard/",
+          "/private/",
+        ],
+        crawlDelay: 2,
       },
 
       // ===============================
-      // 🧠 AI CRAWLERS / SCRAPERS (CONTROLLED ACCESS)
+      // 🧠 AI CRAWLERS / RESEARCH BOTS
       // ===============================
       {
         userAgent: "GPTBot",
@@ -58,16 +68,18 @@ export default function robots(): MetadataRoute.Robots {
           "/api/",
           "/admin/",
           "/dashboard/",
+          "/private/",
         ],
       },
 
       {
         userAgent: "CCBot",
         allow: "/",
+        disallow: ["/admin/", "/private/"],
       },
 
       // ===============================
-      // 🚫 BAD BOTS / SCRAPERS
+      // 🚫 MALICIOUS / SCRAPER BOTS BLOCK
       // ===============================
       {
         userAgent: [
@@ -75,25 +87,41 @@ export default function robots(): MetadataRoute.Robots {
           "SemrushBot",
           "MJ12bot",
           "DotBot",
+          "BLEXBot",
+          "Cliqzbot",
+          "Sogou",
+          "YandexBot",
+          "ia_archiver",
         ],
         disallow: "/",
       },
     ],
 
     // ===============================
-    // 🗺 SITEMAP INDEXING
+    // 🗺 SITEMAP INDEX (ELITE ENTERPRISE READY)
     // ===============================
     sitemap: [
       `${BASE_URL}/sitemap.xml`,
 
-      // Optional future scaling (recommended for large sites)
+      // Optional future scaling for large networks
       // `${BASE_URL}/sitemap-1.xml`,
       // `${BASE_URL}/sitemap-2.xml`,
     ],
 
     // ===============================
-    // 🌍 HOST DIRECTIVE (CANONICAL DOMAIN)
+    // 🌍 HOST / CANONICAL DOMAIN
     // ===============================
     host: BASE_URL,
   };
 }
+
+// ===============================
+// 🔥 ALIAS LAYER (ENTERPRISE / FUTURE PROOF)
+// ===============================
+export const getRobots = generateRobots;
+export const buildRobots = generateRobots;
+export const createRobots = generateRobots;
+export const resolveRobots = generateRobots;
+export const generateRobotsConfig = generateRobots;
+
+export default generateRobots;
