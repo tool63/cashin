@@ -1,13 +1,12 @@
 import type { MetadataRoute } from "next";
-import { DEFAULT_COUNTRY } from "@/app/core/constants";
 
 // ===============================
-// 🌍 CONFIG
+// 🌐 GLOBAL CONFIG
 // ===============================
 const BASE_URL = "https://cashog.com";
 
 // ===============================
-// 🌎 ALL COUNTRIES (FULL GLOBAL)
+// 🌎 ISO COUNTRY LIST (FULL GLOBAL)
 // ===============================
 const ISO_COUNTRIES = [
   "af","al","dz","ad","ao","ag","ar","am","au","at","az",
@@ -46,8 +45,7 @@ function getTier(country: string): number {
   if (["br","mx","pl","pt","tr","ro"].includes(country)) return 4;
   if (["in","id","ph","vn","th","eg"].includes(country)) return 5;
   if (["pk","bd","ng","ke","za"].includes(country)) return 6;
-
-  return 7; // fallback (rest of world)
+  return 7;
 }
 
 // ===============================
@@ -96,12 +94,7 @@ const SHOPPING_PAGES = [
 const CONTENT_PAGES = ["/blog", "/guides", "/compare"];
 
 const ALL_PAGES = Array.from(
-  new Set([
-    ...CORE_PAGES,
-    ...EARN_PAGES,
-    ...SHOPPING_PAGES,
-    ...CONTENT_PAGES,
-  ])
+  new Set([...CORE_PAGES, ...EARN_PAGES, ...SHOPPING_PAGES, ...CONTENT_PAGES])
 );
 
 // ===============================
@@ -109,89 +102,64 @@ const ALL_PAGES = Array.from(
 // ===============================
 function normalizePath(path: string) {
   if (!path || path === "") return "/";
-  return path.startsWith("/") ? path : `/${path}`;
+  let clean = path.startsWith("/") ? path : `/${path}`;
+  clean = clean.split("?")[0].split("#")[0];
+  clean = clean.replace(/\/+/g, "/");
+  if (clean.length > 1 && clean.endsWith("/")) clean = clean.slice(0, -1);
+  return clean;
+}
+
+function normalizeCountry(country?: string): string | undefined {
+  if (!country) return undefined;
+  const clean = country.toLowerCase().trim();
+  return /^[a-z]{2}$/.test(clean) ? clean : undefined;
 }
 
 function buildUrl(path: string, country?: string) {
   const clean = normalizePath(path);
+  const cleanCountry = normalizeCountry(country);
 
-  if (country && country !== DEFAULT_COUNTRY) {
-    return `${BASE_URL}/${country}${clean}`;
-  }
-
+  if (cleanCountry) return `${BASE_URL}/${cleanCountry}${clean}`;
   return `${BASE_URL}${clean}`;
 }
 
 // ===============================
-// 📊 PAGE VALUE ENGINE
+// 📊 PRIORITY ENGINE
 // ===============================
 function getPageWeight(path: string): number {
   const clean = normalizePath(path);
-
   if (clean === "/") return 1;
-
-  if (
-    ["/earn","/make-money","/rewards","/affiliate"].includes(clean)
-  ) return 0.98;
-
+  if (["/earn","/make-money","/rewards","/affiliate"].includes(clean)) return 0.98;
   if (EARN_PAGES.includes(clean)) return 0.95;
-
   if (clean.includes("shopping")) return 0.9;
-
-  if (
-    clean.includes("blog") ||
-    clean.includes("guides") ||
-    clean.includes("compare")
-  ) return 0.85;
-
+  if (clean.includes("blog") || clean.includes("guides") || clean.includes("compare")) return 0.85;
   return 0.75;
 }
 
-// ===============================
-// 📊 FINAL PRIORITY ENGINE
-// ===============================
-function getPriority(country: string | undefined, path: string): number {
+function getPriority(path: string, country?: string): number {
   const base = getPageWeight(path);
-
   if (!country) return base;
 
   const tier = getTier(country);
-
-  const tierBoost: Record<number, number> = {
-    1: 0.05,
-    2: 0.04,
-    3: 0.03,
-    4: 0.02,
-    5: 0.01,
-    6: 0,
-    7: -0.02,
-  };
-
+  const tierBoost: Record<number, number> = { 1: 0.05, 2: 0.04, 3: 0.03, 4: 0.02, 5: 0.01, 6: 0, 7: -0.02 };
   const boost = tierBoost[tier] ?? 0;
-
   return Math.max(0.3, Math.min(1, base + boost));
 }
 
 // ===============================
 // 🔄 CHANGE FREQUENCY
 // ===============================
-function getChangeFrequency(
-  country?: string
-): MetadataRoute.Sitemap[number]["changeFrequency"] {
+function getChangeFrequency(country?: string): MetadataRoute.Sitemap[number]["changeFrequency"] {
   if (!country) return "daily";
-
   const tier = getTier(country);
-
   if (tier === 1) return "daily";
   if (tier <= 3) return "weekly";
-
   return "monthly";
 }
 
 // ===============================
-// 🚀 FINAL SITEMAP ENGINE
-// ===============================
-export default function sitemap(): MetadataRoute.Sitemap {
+// 🚀 SITEMAP GENERATOR (ELITE)
+export function generateSitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const sitemap: MetadataRoute.Sitemap = [];
 
@@ -201,21 +169,42 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: buildUrl(path),
       lastModified: now,
       changeFrequency: "daily",
-      priority: getPriority(undefined, path),
+      priority: getPriority(path),
     });
   }
 
-  // 🌎 ALL COUNTRIES (TIER BASED)
+  // 🌎 ALL COUNTRIES
   for (const country of ISO_COUNTRIES) {
     for (const path of ALL_PAGES) {
       sitemap.push({
         url: buildUrl(path, country),
         lastModified: now,
         changeFrequency: getChangeFrequency(country),
-        priority: getPriority(country, path),
+        priority: getPriority(path, country),
       });
     }
   }
 
   return sitemap;
 }
+
+// ===============================
+// 🔥 ENTERPRISE ALIAS LAYER
+// ===============================
+
+export const sitemapEngine = generateSitemap;
+export const buildSitemap = generateSitemap;
+export const getSitemap = generateSitemap;
+export const resolveSitemap = generateSitemap;
+export const createSitemap = generateSitemap;
+export const generateFullSitemap = generateSitemap;
+
+// ===============================
+// 🧪 OPTIONAL VALIDATION
+export function validateSitemapEntry(entry: MetadataRoute.Sitemap[number]): boolean {
+  if (!entry.url || !entry.lastModified) return false;
+  if (!/^https?:\/\//.test(entry.url)) return false;
+  return true;
+}
+
+export default generateSitemap;
