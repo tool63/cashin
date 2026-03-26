@@ -7,6 +7,13 @@ import { useCountry } from "./providers/CountryProvider";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 
 // ===============================
+// SEO Imports
+// ===============================
+import SeoRenderer from "@/components/SEO/SeoRenderer";
+import { buildUrl } from "@/components/SEO/canonical";
+import { getHreflangs } from "@/components/SEO/hreflang";
+
+// ===============================
 // 🧩 FEATURE CARD
 // ===============================
 function FeatureCard({
@@ -25,106 +32,133 @@ function FeatureCard({
 }
 
 // ===============================
-// 🚀 PAGE
+// 🚀 COUNTRY HOMEPAGE
 // ===============================
 export default function CountryHomePage() {
   const { getTranslation } = useLanguage();
   const { country } = useCountry();
 
-  const t = useMemo(() => {
-    return (key: string, fallback: string): string => {
-      return getTranslation("homepage", key, fallback);
-    };
-  }, [getTranslation]);
+  // Simplified translation function
+  const t = useMemo(
+    () => (key: string, fallback: string) =>
+      getTranslation("homepage", key, fallback),
+    [getTranslation]
+  );
+
+  // -------------------------------
+  // SEO Metadata
+  // -------------------------------
+  const pageTitle = t(
+    "welcome_message",
+    "Welcome to Cashog! Earn money online."
+  );
+  const pageDescription = t(
+    "homepage_description",
+    "Cashog helps you earn real money online safely and quickly."
+  );
+  const canonicalUrl = buildUrl({ path: "", country });
+  const hreflangs = getHreflangs({ path: "", country });
 
   return (
-    <section className="max-w-6xl mx-auto px-4 py-16">
-      {/* ===============================
-          🎯 HERO
-      =============================== */}
-      <div className="text-center mb-16">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-          {t("welcome_message", "Welcome to Cashog! Earn money online.")}
-        </h1>
+    <>
+      {/* SEO Component */}
+      <SeoRenderer
+        title={pageTitle}
+        description={pageDescription}
+        canonical={canonicalUrl}
+        hreflangs={hreflangs}
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: pageTitle,
+          url: canonicalUrl,
+        }}
+      />
 
-        <p className="text-xl text-gray-700 dark:text-gray-300 mb-10 max-w-3xl mx-auto">
-          {t(
-            "homepage_description",
-            "Cashog helps you earn real money online safely and quickly."
-          )}
-        </p>
+      <section className="max-w-6xl mx-auto px-4 py-16">
+        {/* ===============================
+            🎯 HERO SECTION
+        =============================== */}
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            {pageTitle}
+          </h1>
 
-        {/* ✅ CLEAN CTA (NO CHILDREN, NO MIXING) */}
-        <PrimaryCTA
-          href={`/${country}/signup`}
-          translationKey="get_started_now"
-        />
+          <p className="text-xl text-gray-700 dark:text-gray-300 mb-10 max-w-3xl mx-auto">
+            {pageDescription}
+          </p>
 
-        <p className="text-sm mt-4 text-gray-500">
-          No credit card required • Start instantly
-        </p>
-      </div>
+          {/* Primary CTA */}
+          <PrimaryCTA
+            href={`/${country}/signup`}
+            translationKey="get_started_now"
+          />
 
-      {/* ===============================
-          🧩 FEATURES
-      =============================== */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <FeatureCard
-          title={t("feature_surveys", "Complete Surveys")}
-          description={t(
-            "feature_surveys_desc",
-            "Answer surveys and earn points instantly."
-          )}
-        />
+          <p className="text-sm mt-4 text-gray-500">
+            No credit card required • Start instantly
+          </p>
+        </div>
 
-        <FeatureCard
-          title={t("feature_apps", "Install Apps")}
-          description={t(
-            "feature_apps_desc",
-            "Download apps and get paid quickly."
-          )}
-        />
+        {/* ===============================
+            🧩 FEATURES SECTION
+        =============================== */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <FeatureCard
+            title={t("feature_surveys", "Complete Surveys")}
+            description={t(
+              "feature_surveys_desc",
+              "Answer surveys and earn points instantly."
+            )}
+          />
 
-        <FeatureCard
-          title={t("feature_games", "Play Games")}
-          description={t(
-            "feature_games_desc",
-            "Play fun games and earn rewards."
-          )}
-        />
-      </div>
+          <FeatureCard
+            title={t("feature_apps", "Install Apps")}
+            description={t(
+              "feature_apps_desc",
+              "Download apps and get paid quickly."
+            )}
+          />
 
-      {/* ===============================
-          💎 FINAL CTA SECTION
-      =============================== */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-        className="mt-24 text-center bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-2xl p-10 md:p-16 text-white shadow-2xl shadow-blue-500/30"
-      >
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">
-          {t("final_cta_title", "Start Earning Today")}
-        </h2>
+          <FeatureCard
+            title={t("feature_games", "Play Games")}
+            description={t(
+              "feature_games_desc",
+              "Play fun games and earn rewards."
+            )}
+          />
+        </div>
 
-        <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto opacity-90">
-          {t(
-            "final_cta_description",
-            "Join thousands of users already earning with Cashog. It only takes a few seconds to begin."
-          )}
-        </p>
+        {/* ===============================
+            💎 FINAL CTA SECTION
+        =============================== */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mt-24 text-center bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-2xl p-10 md:p-16 text-white shadow-2xl shadow-blue-500/30"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            {t("final_cta_title", "Start Earning Today")}
+          </h2>
 
-        {/* ✅ FINAL CTA (CORRECT) */}
-        <PrimaryCTA
-          href={`/${country}/signup`}
-          translationKey="get_started_now"
-        />
+          <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto opacity-90">
+            {t(
+              "final_cta_description",
+              "Join thousands of users already earning with Cashog. It only takes a few seconds to begin."
+            )}
+          </p>
 
-        <p className="text-sm mt-4 opacity-80">
-          Fast signup • Instant access • No hidden fees
-        </p>
-      </motion.div>
-    </section>
+          <PrimaryCTA
+            href={`/${country}/signup`}
+            translationKey="get_started_now"
+          />
+
+          <p className="text-sm mt-4 opacity-80">
+            Fast signup • Instant access • No hidden fees
+          </p>
+        </motion.div>
+      </section>
+    </>
   );
 }
