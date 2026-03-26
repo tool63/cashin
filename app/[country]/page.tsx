@@ -49,13 +49,24 @@ export default function CountryHomePage() {
   const canonicalUrl = buildUrl({ path: "", country });
   const hreflangs = getHreflangs({ path: "", country });
 
+  const jsonLd = useMemo(
+    () => ({
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: pageTitle,
+      url: canonicalUrl,
+      description: pageDescription,
+    }),
+    [pageTitle, canonicalUrl, pageDescription]
+  );
+
   // -------------------------------
   // CTA Link
   // -------------------------------
   const signupLink = useMemo(() => `/${country}/signup`, [country]);
 
   // -------------------------------
-  // Features
+  // Features Section
   // -------------------------------
   const features = useMemo(
     () => [
@@ -83,12 +94,7 @@ export default function CountryHomePage() {
         description={pageDescription}
         canonical={canonicalUrl}
         hreflangs={hreflangs}
-        structuredData={{
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          name: pageTitle,
-          url: canonicalUrl,
-        }}
+        structuredData={jsonLd}
       />
 
       <section className="max-w-6xl mx-auto px-4 py-16">
