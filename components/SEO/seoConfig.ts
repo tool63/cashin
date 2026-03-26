@@ -3,7 +3,6 @@ export type SEOConfigType = {
   baseUrl: string;
   defaultCountry: string;
 
-  // 🌍 Tier system
   getTier: (country?: string) => number;
 
   moneyPages: string[];
@@ -24,7 +23,7 @@ export type SEOConfigType = {
 };
 
 // ===============================
-// 🧠 HELPERS (ENTERPRISE SAFE)
+// 🧠 HELPERS (STRICT + REUSABLE)
 // ===============================
 function normalizePath(path: string): string {
   if (!path) return "/";
@@ -48,9 +47,14 @@ function normalizeCountry(country?: string): string | undefined {
 
   const c = country.toLowerCase().trim();
 
-  if (/^[a-z]{2}$/.test(c)) return c;
+  return /^[a-z]{2}$/.test(c) ? c : undefined;
+}
 
-  return undefined;
+// ===============================
+// 🧠 SAFE MATCH (PREFIX SUPPORT)
+// ===============================
+function matchPath(list: string[], path: string): boolean {
+  return list.some((p) => path === p || path.startsWith(`${p}/`));
 }
 
 // ===============================
@@ -62,12 +66,11 @@ export const SEO_CONFIG: SEOConfigType = {
   defaultCountry: "us",
 
   // ===============================
-  // 🌍 7-TIER SYSTEM
+  // 🌍 TIER SYSTEM
   // ===============================
   getTier(country) {
-    if (!country) return 1;
-
-    const c = country.toLowerCase();
+    const c = normalizeCountry(country);
+    if (!c) return 1;
 
     if (["us","gb","ca","au"].includes(c)) return 1;
     if (["de","fr","nl","se","ch","no","dk"].includes(c)) return 2;
@@ -100,7 +103,7 @@ export const SEO_CONFIG: SEOConfigType = {
   ],
 
   // ===============================
-  // 📊 BASE PRIORITY
+  // 📊 PRIORITY BASE
   // ===============================
   priority: {
     money: 1.0,
@@ -111,40 +114,43 @@ export const SEO_CONFIG: SEOConfigType = {
   },
 
   // ===============================
-  // 🔗 URL BUILDER (GLOBAL + COUNTRY)
+  // 🔗 URL BUILDER (STRICT GLOBAL RULE)
   // ===============================
   buildUrl({ path, country }) {
     const cleanPath = normalizePath(path);
     const cleanCountry = normalizeCountry(country);
 
-    // 🌐 GLOBAL
+    // 🌐 GLOBAL ONLY (UNKNOWN USERS)
     if (!cleanCountry) {
       return `${this.baseUrl}${cleanPath}`;
     }
 
-    // 🌎 COUNTRY (INCLUDING US)
+    // 🌎 ALL COUNTRIES (INCLUDING US)
     return `${this.baseUrl}/${cleanCountry}${cleanPath}`;
   },
 
   // ===============================
-  // 📄 PAGE TYPE DETECTION
+  // 📄 PAGE TYPE DETECTION (SMART)
   // ===============================
   getPageType(path) {
     const clean = normalizePath(path);
 
-    if (this.moneyPages.includes(clean)) return "money";
-    if (this.earnPages.includes(clean)) return "earn";
+    if (matchPath(this.moneyPages, clean)) return "money";
+    if (matchPath(this.earnPages, clean)) return "earn";
 
     if (
       clean.includes("shop") ||
       clean.includes("store") ||
+      clean.includes("product") ||
+      clean.includes("deal") ||
       clean.includes("cashback")
     ) return "shopping";
 
     if (
       clean.includes("blog") ||
       clean.includes("guide") ||
-      clean.includes("compare")
+      clean.includes("compare") ||
+      clean.includes("learn")
     ) return "content";
 
     return "low";
@@ -178,9 +184,11 @@ export const SEO_CONFIG: SEOConfigType = {
   // 🔄 CHANGE FREQUENCY
   // ===============================
   getChangeFrequency(country) {
-    if (!country) return "daily";
+    const c = normalizeCountry(country);
 
-    const tier = this.getTier(country);
+    if (!c) return "daily";
+
+    const tier = this.getTier(c);
 
     if (tier === 1) return "daily";
     if (tier <= 3) return "weekly";
@@ -189,10 +197,12 @@ export const SEO_CONFIG: SEOConfigType = {
   },
 
   // ===============================
-  // 🌍 HREFLANG (UNIFIED SOURCE)
+  // 🌍 HREFLANG (CLEAN + SAFE)
   // ===============================
   getHreflang(country) {
-    if (!country) return "x-default";
+    const c = normalizeCountry(country);
+
+    if (!c) return "x-default";
 
     const map: Record<string, string> = {
       us: "en-US",
@@ -225,12 +235,12 @@ export const SEO_CONFIG: SEOConfigType = {
       sg: "en-SG",
     };
 
-    return map[country] || "en-US";
+    return map[c] || "en-US";
   },
 };
 
 // ===============================
-// 🚀 ELITE ENTERPRISE ALIASES
+// 🚀 ENTERPRISE ALIASES (SAFE)
 // ===============================
 export const buildUrl = (args: Parameters<typeof SEO_CONFIG.buildUrl>[0]) =>
   SEO_CONFIG.buildUrl(args);
