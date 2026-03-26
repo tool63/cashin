@@ -9,7 +9,7 @@ import { CountryProvider } from "./providers/CountryProvider";
 
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import FloatingCTA from "@/components/cta/FloatingCTA"; // Import the FloatingCTA
+import FloatingCTA from "@/components/cta/FloatingCTA";
 
 import {
   COOKIE_KEYS,
@@ -24,14 +24,12 @@ import { loadAllTranslations } from "@/app/core/i18n/loader";
 // ===============================
 // 🌍 GET COUNTRY
 // ===============================
-function getInitialCountry(paramsCountry: string): string {
+function getInitialCountry(paramsCountry: string, cookieStore: ReturnType<typeof cookies>): string {
   const normalized = paramsCountry.toLowerCase();
 
   if (!isSupportedCountry(normalized)) {
     notFound();
   }
-
-  const cookieStore = cookies();
 
   const forced = cookieStore.get(COOKIE_KEYS.FORCED_COUNTRY)?.value;
   if (forced && isSupportedCountry(forced)) {
@@ -49,17 +47,13 @@ function getInitialCountry(paramsCountry: string): string {
 // ===============================
 // 🌐 GET LANGUAGE (COOKIE ONLY)
 // ===============================
-function getInitialLanguage(): SupportedLanguage {
-  const cookieStore = cookies();
-
+function getInitialLanguage(cookieStore: ReturnType<typeof cookies>): SupportedLanguage {
   const langCookie = cookieStore.get(COOKIE_KEYS.LANGUAGE)?.value;
 
   if (langCookie) {
     const normalized = langCookie.toLowerCase().split("-")[0];
 
-    if (
-      SUPPORTED_LANGUAGES.includes(normalized as SupportedLanguage)
-    ) {
+    if (SUPPORTED_LANGUAGES.includes(normalized as SupportedLanguage)) {
       return normalized as SupportedLanguage;
     }
   }
@@ -71,8 +65,8 @@ function getInitialLanguage(): SupportedLanguage {
 // 🌐 DIRECTION
 // ===============================
 function getDirection(lang: SupportedLanguage): "ltr" | "rtl" {
-  const rtl = ["ar", "he", "ur", "fa"];
-  return rtl.includes(lang) ? "rtl" : "ltr";
+  const rtlLanguages = ["ar", "he", "ur", "fa"];
+  return rtlLanguages.includes(lang) ? "rtl" : "ltr";
 }
 
 // ===============================
@@ -85,8 +79,10 @@ export default async function CountryLayout({
   children: ReactNode;
   params: { country: string };
 }) {
-  const country = getInitialCountry(params.country);
-  const language = getInitialLanguage();
+  const cookieStore = cookies();
+
+  const country = getInitialCountry(params.country, cookieStore);
+  const language = getInitialLanguage(cookieStore);
 
   const htmlLang = `${language}-${country.toUpperCase()}`;
   const dir = getDirection(language);
@@ -95,7 +91,6 @@ export default async function CountryLayout({
   const translations = await loadAllTranslations(language);
 
   // Check if user has manually overridden language
-  const cookieStore = cookies();
   const userOverride = cookieStore.get(COOKIE_KEYS.USER_LANGUAGE_OVERRIDE)?.value;
   const isOverridden = !!userOverride;
 
