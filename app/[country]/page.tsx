@@ -16,16 +16,10 @@ import { getHreflangs } from "@/components/SEO/hreflang";
 // ===============================
 // 🧩 FEATURE CARD
 // ===============================
-function FeatureCard({
-  title,
-  description,
-}: {
-  title: string;
-  description: string;
-}) {
+function FeatureCard({ title, description }: { title: string; description: string }) {
   return (
     <div className="p-6 border rounded-lg shadow hover:shadow-lg transition-all duration-300 hover:scale-105">
-      <h2 className="font-semibold text-xl mb-2">{title}</h2>
+      <h3 className="font-semibold text-xl mb-2">{title}</h3>
       <p className="text-gray-700 dark:text-gray-300">{description}</p>
     </div>
   );
@@ -38,26 +32,48 @@ export default function CountryHomePage() {
   const { getTranslation } = useLanguage();
   const { country } = useCountry();
 
-  // Simplified translation function
+  // Translation helper
   const t = useMemo(
-    () => (key: string, fallback: string) =>
-      getTranslation("homepage", key, fallback),
+    () => (key: string, fallback: string) => getTranslation("homepage", key, fallback),
     [getTranslation]
   );
 
   // -------------------------------
   // SEO Metadata
   // -------------------------------
-  const pageTitle = t(
-    "welcome_message",
-    "Welcome to Cashog! Earn money online."
-  );
+  const pageTitle = t("welcome_message", "Welcome to Cashog! Earn money online.");
   const pageDescription = t(
     "homepage_description",
     "Cashog helps you earn real money online safely and quickly."
   );
   const canonicalUrl = buildUrl({ path: "", country });
   const hreflangs = getHreflangs({ path: "", country });
+
+  // -------------------------------
+  // CTA Link
+  // -------------------------------
+  const signupLink = useMemo(() => `/${country}/signup`, [country]);
+
+  // -------------------------------
+  // Features
+  // -------------------------------
+  const features = useMemo(
+    () => [
+      {
+        title: t("feature_surveys", "Complete Surveys"),
+        description: t("feature_surveys_desc", "Answer surveys and earn points instantly."),
+      },
+      {
+        title: t("feature_apps", "Install Apps"),
+        description: t("feature_apps_desc", "Download apps and get paid quickly."),
+      },
+      {
+        title: t("feature_games", "Play Games"),
+        description: t("feature_games_desc", "Play fun games and earn rewards."),
+      },
+    ],
+    [t]
+  );
 
   return (
     <>
@@ -76,9 +92,7 @@ export default function CountryHomePage() {
       />
 
       <section className="max-w-6xl mx-auto px-4 py-16">
-        {/* ===============================
-            🎯 HERO SECTION
-        =============================== */}
+        {/* HERO SECTION */}
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             {pageTitle}
@@ -88,49 +102,21 @@ export default function CountryHomePage() {
             {pageDescription}
           </p>
 
-          {/* Primary CTA */}
-          <PrimaryCTA
-            href={`/${country}/signup`}
-            translationKey="get_started_now"
-          />
+          <PrimaryCTA href={signupLink} translationKey="get_started_now" aria-label="Get started now" />
 
           <p className="text-sm mt-4 text-gray-500">
             No credit card required • Start instantly
           </p>
         </div>
 
-        {/* ===============================
-            🧩 FEATURES SECTION
-        =============================== */}
+        {/* FEATURES SECTION */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <FeatureCard
-            title={t("feature_surveys", "Complete Surveys")}
-            description={t(
-              "feature_surveys_desc",
-              "Answer surveys and earn points instantly."
-            )}
-          />
-
-          <FeatureCard
-            title={t("feature_apps", "Install Apps")}
-            description={t(
-              "feature_apps_desc",
-              "Download apps and get paid quickly."
-            )}
-          />
-
-          <FeatureCard
-            title={t("feature_games", "Play Games")}
-            description={t(
-              "feature_games_desc",
-              "Play fun games and earn rewards."
-            )}
-          />
+          {features.map((feature, idx) => (
+            <FeatureCard key={idx} title={feature.title} description={feature.description} />
+          ))}
         </div>
 
-        {/* ===============================
-            💎 FINAL CTA SECTION
-        =============================== */}
+        {/* FINAL CTA SECTION */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -138,9 +124,7 @@ export default function CountryHomePage() {
           viewport={{ once: true }}
           className="mt-24 text-center bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-2xl p-10 md:p-16 text-white shadow-2xl shadow-blue-500/30"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            {t("final_cta_title", "Start Earning Today")}
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">{t("final_cta_title", "Start Earning Today")}</h2>
 
           <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto opacity-90">
             {t(
@@ -149,10 +133,7 @@ export default function CountryHomePage() {
             )}
           </p>
 
-          <PrimaryCTA
-            href={`/${country}/signup`}
-            translationKey="get_started_now"
-          />
+          <PrimaryCTA href={signupLink} translationKey="get_started_now" aria-label="Get started now" />
 
           <p className="text-sm mt-4 opacity-80">
             Fast signup • Instant access • No hidden fees
