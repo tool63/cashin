@@ -10,9 +10,6 @@ export type SchemaInput = {
   description?: string;
   url?: string;
   type?: PageType;
-  breadcrumbs?: { name: string; url: string }[];
-  faq?: { question: string; answer: string }[];
-  reviews?: { author: string; reviewBody: string; rating: number }[];
 };
 
 // ===============================
@@ -35,13 +32,12 @@ function baseSchema(url: string) {
 // ===============================
 // 💰 MONEY SCHEMA (EARN PAGES)
 // ===============================
-function moneySchema({ url, title, description }: SchemaInput) {
+function moneySchema({ url, title }: SchemaInput) {
   return {
     "@context": "https://schema.org",
     "@type": "FinancialProduct",
     name: title || "Earn Money Online",
-    description:
-      description || "Earn money online through surveys, offers, and rewards.",
+    description: "Earn money online through surveys, offers, and rewards.",
     url,
   };
 }
@@ -49,13 +45,12 @@ function moneySchema({ url, title, description }: SchemaInput) {
 // ===============================
 // 🎯 EARN SCHEMA (TASK PAGES)
 // ===============================
-function earnSchema({ url, title, description }: SchemaInput) {
+function earnSchema({ url, title }: SchemaInput) {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
     name: title || "Earn Rewards",
-    description:
-      description || "Complete tasks and earn rewards instantly.",
+    description: "Complete tasks and earn rewards instantly.",
     url,
   };
 }
@@ -63,13 +58,12 @@ function earnSchema({ url, title, description }: SchemaInput) {
 // ===============================
 // 🛍 SHOPPING SCHEMA
 // ===============================
-function shoppingSchema({ url, title, description }: SchemaInput) {
+function shoppingSchema({ url, title }: SchemaInput) {
   return {
     "@context": "https://schema.org",
     "@type": "Product",
     name: title || "Shopping Rewards",
-    description:
-      description || "Earn cashback and rewards while shopping online.",
+    description: "Earn cashback and rewards while shopping online.",
     url,
   };
 }
@@ -81,8 +75,8 @@ function contentSchema({ url, title, description }: SchemaInput) {
   return {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: title || SEO_CONFIG.siteName,
-    description: description || "",
+    headline: title,
+    description,
     author: {
       "@type": "Organization",
       name: SEO_CONFIG.siteName,
@@ -92,117 +86,69 @@ function contentSchema({ url, title, description }: SchemaInput) {
 }
 
 // ===============================
-// 📂 FAQ SCHEMA (Optional)
+// 🔽 LOW PRIORITY SCHEMA
 // ===============================
-function faqSchema(faq: SchemaInput["faq"]) {
-  if (!faq || faq.length === 0) return null;
-
+function defaultSchema({ url, title }: SchemaInput) {
   return {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faq.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
-    })),
-  };
-}
-
-// ===============================
-// ⭐ REVIEW SCHEMA (Optional)
-// ===============================
-function reviewSchema(reviews: SchemaInput["reviews"], url: string) {
-  if (!reviews || reviews.length === 0) return null;
-
-  return {
-    "@context": "https://schema.org",
-    "@type": "Product",
+    "@type": "WebPage",
+    name: title || SEO_CONFIG.siteName,
     url,
-    review: reviews.map((r) => ({
-      "@type": "Review",
-      author: { "@type": "Person", name: r.author },
-      reviewBody: r.reviewBody,
-      reviewRating: {
-        "@type": "Rating",
-        ratingValue: r.rating,
-        bestRating: 5,
-        worstRating: 1,
-      },
-    })),
   };
 }
 
 // ===============================
-// 📌 BREADCRUMB SCHEMA (Optional)
-// ===============================
-function breadcrumbSchema(breadcrumbs: SchemaInput["breadcrumbs"], url: string) {
-  if (!breadcrumbs || breadcrumbs.length === 0) return null;
-
-  return {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: breadcrumbs.map((crumb, idx) => ({
-      "@type": "ListItem",
-      position: idx + 1,
-      name: crumb.name,
-      item: crumb.url || url,
-    })),
-  };
-}
-
-// ===============================
-// 🧠 SCHEMA ENGINE
+// 🧠 SCHEMA ENGINE (CORE) - FIXED
 // ===============================
 function generateSchema(input: SchemaInput) {
-  const { path, url, type, faq, breadcrumbs, reviews } = input;
-  const finalUrl = url || `${SEO_CONFIG.baseUrl}${path}`;
-  const pageType: PageType = type || SEO_CONFIG.getPageType(path);
+  const { path, url, type, title, description } = input;
 
-  let mainSchema;
+  const finalUrl = url || `${SEO_CONFIG.baseUrl}${path}`;
+
+  // Ensure pageType is valid PageType
+  const rawType = type || SEO_CONFIG.getPageType(path);
+  const validTypes: PageType[] = ["money", "earn", "shopping", "content", "low"];
+  const pageType: PageType = validTypes.includes(rawType as PageType)
+    ? (rawType as PageType)
+    : "low";
+
   switch (pageType) {
     case "money":
-      mainSchema = moneySchema({ ...input, url: finalUrl });
-      break;
+      return moneySchema({ ...input, url: finalUrl });
     case "earn":
-      mainSchema = earnSchema({ ...input, url: finalUrl });
-      break;
+      return earnSchema({ ...input, url: finalUrl });
     case "shopping":
-      mainSchema = shoppingSchema({ ...input, url: finalUrl });
-      break;
+      return shoppingSchema({ ...input, url: finalUrl });
     case "content":
-      mainSchema = contentSchema({ ...input, url: finalUrl });
-      break;
+      return contentSchema({ ...input, url: finalUrl });
     default:
-      mainSchema = { "@context": "https://schema.org", "@type": "WebPage", name: input.title || SEO_CONFIG.siteName, url: finalUrl };
+      return defaultSchema({ ...input, url: finalUrl });
   }
-
-  const schemas = [
-    baseSchema(finalUrl),
-    mainSchema,
-    faqSchema(faq),
-    reviewSchema(reviews, finalUrl),
-    breadcrumbSchema(breadcrumbs, finalUrl),
-  ].filter(Boolean); // Remove nulls
-
-  return schemas;
 }
 
 // ===============================
 // 🚀 JSON-LD WRAPPER
 // ===============================
 export function generateJsonLd(input: SchemaInput) {
-  const schemas = generateSchema(input);
+  const schema = generateSchema(input);
+
   return {
     type: "application/ld+json",
-    innerHTML: JSON.stringify(schemas.length === 1 ? schemas[0] : schemas),
+    innerHTML: JSON.stringify(schema),
   };
 }
 
 // ===============================
-// 🚀 ALIASES
+// 🚀 MULTI-SCHEMA COMBINER
+// ===============================
+export function generateSchemas(input: SchemaInput) {
+  const base = baseSchema(input.url || `${SEO_CONFIG.baseUrl}${input.path}`);
+  const specific = generateSchema(input);
+  return [base, specific];
+}
+
+// ===============================
+// 🚀 ALIASES (ENTERPRISE PATTERN)
 // ===============================
 export const buildSchema = generateSchema;
 export const getSchema = generateSchema;
