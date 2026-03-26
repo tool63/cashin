@@ -420,5 +420,6 @@ export default function Footer({ className }: FooterProps) {
 <div className="text-center text-sm text-primary mt-8 pb-4">
   {t("copyright")}
 </div>
+</footer>
   );
 }
