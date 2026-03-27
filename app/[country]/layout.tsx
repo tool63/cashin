@@ -26,6 +26,7 @@ import { loadAllTranslations } from "@/app/core/i18n/loader";
 // 🌍 COUNTRY LANGUAGE MAP
 // ===============================
 function getCountryLanguage(countryCode: string): SupportedLanguage {
+  if (countryCode === "global") return DEFAULT_LANGUAGE;
   const country = getCountry(countryCode);
   return country.defaultLanguage as SupportedLanguage;
 }
@@ -38,8 +39,8 @@ function getInitialCountry(
   cookieStore: ReturnType<typeof cookies>
 ): CountryCode {
   // Handle global/no country route
-  if (!paramsCountry || paramsCountry === "global") {
-    // Check for saved user country cookie for global routes
+  if (!paramsCountry) {
+    // Check for saved user country cookie
     const userCountry = cookieStore.get(COOKIE_KEYS.COUNTRY)?.value;
     if (userCountry && isValidCountryCode(userCountry)) {
       return userCountry.toLowerCase() as CountryCode;
@@ -48,6 +49,11 @@ function getInitialCountry(
   }
 
   const normalized = paramsCountry.toLowerCase();
+
+  // Allow "global" as a special value
+  if (normalized === "global") {
+    return "global";
+  }
 
   // Check if it's a valid country code
   if (!isValidCountryCode(normalized)) {
