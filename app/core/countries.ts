@@ -78,24 +78,61 @@ export const ISO_COUNTRIES = [
 export type CountryCode = typeof ISO_COUNTRIES[number] | "global";
 
 // ===============================
-// 🌍 COUNTRY NAMES
+// 🌍 COUNTRY NAMES (EXPANDED)
 // ===============================
 const COUNTRY_NAMES: Partial<Record<CountryCode, string>> = {
+  // Tier 1
   us: "United States",
   gb: "United Kingdom",
-  bd: "Bangladesh",
-  in: "India",
-  de: "Germany",
-  fr: "France",
-  es: "Spain",
-  pt: "Portugal",
-  br: "Brazil",
   ca: "Canada",
   au: "Australia",
+  de: "Germany",
+  fr: "France",
+  nl: "Netherlands",
+  se: "Sweden",
+  ch: "Switzerland",
+  no: "Norway",
+  dk: "Denmark",
+  fi: "Finland",
+  ie: "Ireland",
+  be: "Belgium",
+  at: "Austria",
+  
+  // Tier 2
+  es: "Spain",
+  it: "Italy",
+  pt: "Portugal",
+  gr: "Greece",
+  pl: "Poland",
+  cz: "Czech Republic",
+  hu: "Hungary",
+  tr: "Turkey",
+  ae: "United Arab Emirates",
+  sa: "Saudi Arabia",
+  kr: "South Korea",
+  jp: "Japan",
+  sg: "Singapore",
+  my: "Malaysia",
+  br: "Brazil",
+  mx: "Mexico",
+  za: "South Africa",
+  
+  // Tier 3 (Major)
+  bd: "Bangladesh",
+  in: "India",
   pk: "Pakistan",
   ng: "Nigeria",
   id: "Indonesia",
   ph: "Philippines",
+  eg: "Egypt",
+  vn: "Vietnam",
+  th: "Thailand",
+  ke: "Kenya",
+  ua: "Ukraine",
+  ro: "Romania",
+  il: "Israel",
+  hk: "Hong Kong",
+  tw: "Taiwan",
 };
 
 // ===============================
@@ -136,7 +173,7 @@ export const COUNTRIES: Record<CountryCode, CountryMeta> = {
 // ===============================
 export function normalizeCountry(code?: string | null): CountryCode {
   if (!code) return "global";
-  const c = code.toLowerCase();
+  const c = code.toLowerCase().trim();
   return (c in COUNTRIES ? c : "global") as CountryCode;
 }
 
@@ -150,4 +187,28 @@ export function getCountryLanguage(code?: string | null): SupportedLanguage {
 
 export function getCountryTier(code?: string | null): CountryTier {
   return getCountry(code).tier;
+}
+
+// ===============================
+// 🆕 ADDED: NUMERIC TIER HELPER
+// ===============================
+export function getTierNumber(code?: string | null): 1 | 2 | 3 {
+  const meta = getCountry(code);
+  if (meta.tier === "tier1") return 1;
+  if (meta.tier === "tier2") return 2;
+  return 3;
+}
+
+// ===============================
+// 🆕 ADDED: VALIDATION HELPER
+// ===============================
+export function isValidCountryCode(code: string): boolean {
+  return code in COUNTRIES && code !== "global";
+}
+
+// ===============================
+// 🆕 ADDED: GET ALL COUNTRIES BY TIER
+// ===============================
+export function getCountriesByTier(tier: CountryTier): CountryMeta[] {
+  return Object.values(COUNTRIES).filter(country => country.tier === tier);
 }
