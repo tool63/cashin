@@ -1,4 +1,4 @@
-// app/layouts/CountryLayout.tsx
+// app/[country]/layout.tsx
 import "@/styles/globals.css";
 import { ReactNode } from "react";
 import { notFound } from "next/navigation";
@@ -23,7 +23,7 @@ import type { SupportedLanguage } from "@/app/core/types";
 import { loadAllTranslations } from "@/app/core/i18n/loader";
 
 // ===============================
-// 🌍 COUNTRY LANGUAGE MAP (from countries.ts)
+// 🌍 COUNTRY LANGUAGE MAP
 // ===============================
 function getCountryLanguage(countryCode: string): SupportedLanguage {
   const country = getCountry(countryCode);
@@ -39,6 +39,11 @@ function getInitialCountry(
 ): CountryCode {
   // Handle global/no country route
   if (!paramsCountry || paramsCountry === "global") {
+    // Check for saved user country cookie for global routes
+    const userCountry = cookieStore.get(COOKIE_KEYS.COUNTRY)?.value;
+    if (userCountry && isValidCountryCode(userCountry)) {
+      return userCountry.toLowerCase() as CountryCode;
+    }
     return "global";
   }
 
@@ -115,19 +120,6 @@ function getDirection(lang: SupportedLanguage): "ltr" | "rtl" {
 }
 
 // ===============================
-// 🔗 CANONICAL URL HELPER
-// ===============================
-function getCanonicalUrl(country: CountryCode, pathname: string): string {
-  const baseUrl = "https://cashog.com";
-  
-  if (country === "global") {
-    return `${baseUrl}${pathname}`;
-  }
-  
-  return `${baseUrl}/${country}${pathname}`;
-}
-
-// ===============================
 // 🚀 COUNTRY LAYOUT
 // ===============================
 export default async function CountryLayout({
@@ -161,26 +153,10 @@ export default async function CountryLayout({
   // -------------------------------
   const translations = await loadAllTranslations(language);
 
-  // -------------------------------
-  // 🚀 CANONICAL URL for current page
-  // -------------------------------
-  // Note: You'll need to pass the actual pathname from the route
-  // For now, using placeholder - you might want to get this from headers
-  const pathname = "/"; // This should be dynamically set based on current route
-  const canonicalUrl = getCanonicalUrl(country, pathname);
-
   return (
     <html lang={htmlLang} dir={dir} suppressHydrationWarning>
       <head>
         <meta httpEquiv="content-language" content={language} />
-        
-        {/* Canonical URL */}
-        <link rel="canonical" href={canonicalUrl} />
-        
-        {/* x-default hreflang for global */}
-        <link rel="alternate" hrefLang="x-default" href={`https://cashog.com${pathname}`} />
-        
-        {/* Country will be handled by SeoRenderer component in page level */}
       </head>
       <body>
         <ThemeProviderWrapper>
