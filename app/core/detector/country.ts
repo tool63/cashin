@@ -44,11 +44,12 @@ export function detectCountry(req: NextRequest): string {
 // ===============================
 export function resolveCountry(
   req: NextRequest,
-  urlCountry: string | null
+  urlCountry: string | null,
+  preferGlobal: boolean = false
 ): string {
   const searchParams = req.nextUrl.searchParams;
 
-  // 1️⃣ URL prefix (/us, /bd)
+  // 1️⃣ URL prefix (/us, /bd) - Highest priority
   if (urlCountry) {
     return normalizeCountry(urlCountry) || DEFAULT_COUNTRY;
   }
@@ -57,18 +58,23 @@ export function resolveCountry(
   const query = normalizeCountry(searchParams.get("country"));
   if (query) return query;
 
-  // 3️⃣ Forced country (user selection)
+  // 3️⃣ Forced country (admin override)
   const forced = normalizeCountry(
     req.cookies.get(COOKIE_KEYS.FORCED_COUNTRY)?.value || null
   );
   if (forced) return forced;
 
-  // 4️⃣ Saved cookie
+  // 4️⃣ Check if we should prefer global
+  if (preferGlobal) {
+    return DEFAULT_COUNTRY;
+  }
+
+  // 5️⃣ Saved cookie - Only use if NOT preferring global
   const cookie = normalizeCountry(
     req.cookies.get(COOKIE_KEYS.COUNTRY)?.value || null
   );
   if (cookie) return cookie;
 
-  // 5️⃣ GEO detection (best effort)
+  // 6️⃣ GEO detection (best effort)
   return detectCountry(req);
 }
