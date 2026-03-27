@@ -1,7 +1,7 @@
 // ===============================
 // 🌍 DEFAULTS (GLOBAL-FIRST SYSTEM)
 // ===============================
-export const DEFAULT_COUNTRY = "/"; // ✅ No prefix for default users
+export const DEFAULT_COUNTRY = "global"; // ✅ No prefix for default users
 export const DEFAULT_LANGUAGE = "en";
 
 // ===============================
