@@ -1,8 +1,8 @@
-// app/[country]/layout.tsx
+// app/layouts/CountryLayout.tsx
 import "@/styles/globals.css";
 import { ReactNode } from "react";
 import { notFound } from "next/navigation";
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
 
 import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
 import { LanguageProvider } from "./providers/LanguageProvider";
@@ -115,75 +115,16 @@ function getDirection(lang: SupportedLanguage): "ltr" | "rtl" {
 }
 
 // ===============================
-// 🔗 GET CURRENT PATHNAME FROM HEADERS
-// ===============================
-function getCurrentPathname(): string {
-  const headersList = headers();
-  const pathname = headersList.get("x-pathname") || headersList.get("x-url") || "/";
-  return pathname;
-}
-
-// ===============================
-// 🔗 BUILD CANONICAL URL
+// 🔗 CANONICAL URL HELPER
 // ===============================
 function getCanonicalUrl(country: CountryCode, pathname: string): string {
   const baseUrl = "https://cashog.com";
   
-  // Remove the country prefix from pathname for canonical URL
-  let cleanPath = pathname;
-  if (country !== "global") {
-    // Remove the country segment from the path for canonical
-    const pathSegments = pathname.split("/").filter(Boolean);
-    if (pathSegments[0] === country) {
-      cleanPath = "/" + pathSegments.slice(1).join("/");
-    }
-  }
-  
-  // Ensure path is normalized
-  if (!cleanPath) cleanPath = "/";
-  if (!cleanPath.startsWith("/")) cleanPath = "/" + cleanPath;
-  
   if (country === "global") {
-    return `${baseUrl}${cleanPath}`;
+    return `${baseUrl}${pathname}`;
   }
   
-  return `${baseUrl}/${country}${cleanPath}`;
-}
-
-// ===============================
-// 🌐 GENERATE HREFLANG LINKS
-// ===============================
-function generateHreflangLinks(country: CountryCode, pathname: string): ReactNode {
-  const baseUrl = "https://cashog.com";
-  let cleanPath = pathname;
-  
-  // Remove the country prefix from pathname for hreflang
-  if (country !== "global") {
-    const pathSegments = pathname.split("/").filter(Boolean);
-    if (pathSegments[0] === country) {
-      cleanPath = "/" + pathSegments.slice(1).join("/");
-    }
-  }
-  
-  if (!cleanPath) cleanPath = "/";
-  if (!cleanPath.startsWith("/")) cleanPath = "/" + cleanPath;
-  
-  const links = [
-    <link key="x-default" rel="alternate" hrefLang="x-default" href={`${baseUrl}${cleanPath}`} />
-  ];
-  
-  // Get all countries from the countries module
-  const { ISO_COUNTRIES } = require("@/app/core/countries");
-  
-  for (const countryCode of ISO_COUNTRIES) {
-    const hrefLang = getCountryLanguage(countryCode);
-    const url = `${baseUrl}/${countryCode}${cleanPath}`;
-    links.push(
-      <link key={countryCode} rel="alternate" hrefLang={hrefLang} href={url} />
-    );
-  }
-  
-  return links;
+  return `${baseUrl}/${country}${pathname}`;
 }
 
 // ===============================
@@ -197,10 +138,6 @@ export default async function CountryLayout({
   params: { country?: string };
 }) {
   const cookieStore = cookies();
-  const headersList = headers();
-  
-  // Get current pathname from headers (set in middleware)
-  const pathname = headersList.get("x-pathname") || "/";
 
   // -------------------------------
   // 🌍 COUNTRY (Handle global/no country)
@@ -227,8 +164,10 @@ export default async function CountryLayout({
   // -------------------------------
   // 🚀 CANONICAL URL for current page
   // -------------------------------
+  // Note: You'll need to pass the actual pathname from the route
+  // For now, using placeholder - you might want to get this from headers
+  const pathname = "/"; // This should be dynamically set based on current route
   const canonicalUrl = getCanonicalUrl(country, pathname);
-  const hreflangLinks = generateHreflangLinks(country, pathname);
 
   return (
     <html lang={htmlLang} dir={dir} suppressHydrationWarning>
@@ -238,12 +177,10 @@ export default async function CountryLayout({
         {/* Canonical URL */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* Hreflang links */}
-        {hreflangLinks}
+        {/* x-default hreflang for global */}
+        <link rel="alternate" hrefLang="x-default" href={`https://cashog.com${pathname}`} />
         
-        {/* Additional SEO meta tags */}
-        <meta name="robots" content="index, follow" />
-        <meta name="googlebot" content="index, follow" />
+        {/* Country will be handled by SeoRenderer component in page level */}
       </head>
       <body>
         <ThemeProviderWrapper>
