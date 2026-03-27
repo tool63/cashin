@@ -28,31 +28,23 @@ export default function CountryHomePage() {
   const { getTranslation } = useLanguage();
   const { country } = useCountry();
 
-  // Check if this is a global route
-  const isGlobal = country === "global";
-
   // Translation helper
   const t = useMemo(
     () => (key: string, fallback: string) => getTranslation("homepage", key, fallback),
     [getTranslation]
   );
 
-  // Page content (SEO + UI)
+  // Page content (SEO + UI) - No more global check
   const pageContent = useMemo(() => {
-    // Customize content based on whether it's global or country-specific
-    const title = isGlobal
-      ? (t("welcome_message_global", "Cashog - Earn Money Online Worldwide") || "Cashog - Earn Money Online Worldwide")
-      : (t("welcome_message", `Cashog ${country.toUpperCase()} - Earn Money in ${country.toUpperCase()}`) || `Cashog ${country.toUpperCase()} - Earn Money in ${country.toUpperCase()}`);
+    const title = t(
+      "welcome_message", 
+      `Cashog ${country.toUpperCase()} - Earn Money in ${country.toUpperCase()}`
+    ) || `Cashog ${country.toUpperCase()} - Earn Money in ${country.toUpperCase()}`;
     
-    const description = isGlobal
-      ? (t(
-          "homepage_description_global",
-          "Cashog helps you earn real money online safely and quickly from anywhere in the world."
-        ) || "Cashog helps you earn real money online safely and quickly from anywhere in the world.")
-      : (t(
-          "homepage_description",
-          `Cashog helps you earn real money online safely and quickly in ${country.toUpperCase()}.`
-        ) || `Cashog helps you earn real money online safely and quickly in ${country.toUpperCase()}.`);
+    const description = t(
+      "homepage_description",
+      `Cashog helps you earn real money online safely and quickly in ${country.toUpperCase()}.`
+    ) || `Cashog helps you earn real money online safely and quickly in ${country.toUpperCase()}.`;
 
     return {
       title,
@@ -72,21 +64,17 @@ export default function CountryHomePage() {
         },
       ],
       finalCta: {
-        title: isGlobal
-          ? (t("final_cta_title_global", "Start Earning Worldwide Today") || "Start Earning Worldwide Today")
-          : (t("final_cta_title", `Start Earning in ${country.toUpperCase()} Today`) || `Start Earning in ${country.toUpperCase()} Today`),
-        description: isGlobal
-          ? (t(
-              "final_cta_description_global",
-              "Join thousands of users worldwide already earning with Cashog. It only takes a few seconds to begin."
-            ) || "Join thousands of users worldwide already earning with Cashog. It only takes a few seconds to begin.")
-          : (t(
-              "final_cta_description",
-              `Join thousands of users in ${country.toUpperCase()} already earning with Cashog. It only takes a few seconds to begin.`
-            ) || `Join thousands of users in ${country.toUpperCase()} already earning with Cashog. It only takes a few seconds to begin.`),
+        title: t(
+          "final_cta_title", 
+          `Start Earning in ${country.toUpperCase()} Today`
+        ) || `Start Earning in ${country.toUpperCase()} Today`,
+        description: t(
+          "final_cta_description",
+          `Join thousands of users in ${country.toUpperCase()} already earning with Cashog. It only takes a few seconds to begin.`
+        ) || `Join thousands of users in ${country.toUpperCase()} already earning with Cashog. It only takes a few seconds to begin.`,
       },
     };
-  }, [t, country, isGlobal]);
+  }, [t, country]);
 
   // Generate structured data based on page content
   const structuredData = useMemo(() => {
@@ -98,13 +86,10 @@ export default function CountryHomePage() {
     });
   }, [pageContent.title, pageContent.description]);
 
-  // Signup CTA link - handle global vs country-specific
+  // Signup CTA link - country-specific only
   const signupLink = useMemo(() => {
-    if (isGlobal) {
-      return "/global/signup";
-    }
     return `/${country}/signup`;
-  }, [country, isGlobal]);
+  }, [country]);
 
   return (
     <>
@@ -113,7 +98,7 @@ export default function CountryHomePage() {
         path="/"
         title={pageContent.title}
         description={pageContent.description}
-        country={isGlobal ? undefined : country}
+        country={country}
         noindex={false}
       />
 
