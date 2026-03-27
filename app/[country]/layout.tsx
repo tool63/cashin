@@ -1,7 +1,7 @@
 // app/[country]/layout.tsx
 import "@/styles/globals.css";
 import { ReactNode } from "react";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
 import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
@@ -26,33 +26,33 @@ import { loadAllTranslations } from "@/app/core/i18n/loader";
 // 🌍 COUNTRY LANGUAGE MAP
 // ===============================
 function getCountryLanguage(countryCode: string): SupportedLanguage {
-  if (countryCode === "global") return DEFAULT_LANGUAGE;
   const country = getCountry(countryCode);
   return country.defaultLanguage as SupportedLanguage;
 }
 
 // ===============================
-// 🌍 GET COUNTRY
+// 🌍 GET COUNTRY (UPDATED - NO "global" ALLOWED)
 // ===============================
 function getInitialCountry(
   paramsCountry: string | undefined,
   cookieStore: ReturnType<typeof cookies>
 ): CountryCode {
-  // Handle global/no country route
+  // Handle root route (no country in URL)
   if (!paramsCountry) {
     // Check for saved user country cookie
     const userCountry = cookieStore.get(COOKIE_KEYS.COUNTRY)?.value;
     if (userCountry && isValidCountryCode(userCountry)) {
       return userCountry.toLowerCase() as CountryCode;
     }
-    return "global";
+    // No saved country, use default (US or your primary market)
+    return "us"; // Change this to your primary country
   }
 
   const normalized = paramsCountry.toLowerCase();
 
-  // Allow "global" as a special value
+  // ❌ BLOCK /global completely - redirect to root
   if (normalized === "global") {
-    return "global";
+    redirect("/");
   }
 
   // Check if it's a valid country code
@@ -77,7 +77,7 @@ function getInitialCountry(
 }
 
 // ===============================
-// 🌐 GET LANGUAGE
+// 🌐 GET LANGUAGE (UPDATED - No "global" case)
 // ===============================
 function getInitialLanguage(
   country: CountryCode,
@@ -99,11 +99,6 @@ function getInitialLanguage(
     if (SUPPORTED_LANGUAGES.includes(normalized as SupportedLanguage)) {
       return normalized as SupportedLanguage;
     }
-  }
-
-  // For global route, return default language
-  if (country === "global") {
-    return DEFAULT_LANGUAGE;
   }
 
   // Return language based on country
@@ -138,7 +133,7 @@ export default async function CountryLayout({
   const cookieStore = cookies();
 
   // -------------------------------
-  // 🌍 COUNTRY (Handle global/no country)
+  // 🌍 COUNTRY
   // -------------------------------
   const country = getInitialCountry(params?.country, cookieStore);
 
