@@ -78,7 +78,7 @@ export const ISO_COUNTRIES = [
 export type CountryCode = typeof ISO_COUNTRIES[number] | "global";
 
 // ===============================
-// 🌍 COUNTRY NAMES (EXPANDED)
+// 🌍 COUNTRY NAMES (ONLY ISO CODES)
 // ===============================
 const COUNTRY_NAMES: Partial<Record<CountryCode, string>> = {
   // Tier 1
@@ -131,7 +131,6 @@ const COUNTRY_NAMES: Partial<Record<CountryCode, string>> = {
   ua: "Ukraine",
   ro: "Romania",
   il: "Israel",
-  hk: "Hong Kong",
   tw: "Taiwan",
 };
 
