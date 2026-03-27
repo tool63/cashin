@@ -1,4 +1,5 @@
 import { SEO_CONFIG } from "./seoConfig";
+import { ISO_COUNTRIES } from "@/app/core/countries";
 
 // ===============================
 // 🧠 SEO INPUT TYPE (FIXED - REQUIRED)
@@ -50,9 +51,9 @@ function normalizePath(path: string): string {
 }
 
 // ===============================
-// 🧠 MATCH HELPERS (TYPE SAFE)
+// 🧠 MATCH HELPERS (TYPE SAFE) - FIXED FOR READONLY
 // ===============================
-function matchPath(list: string[], path: string): boolean {
+function matchPath(list: readonly string[], path: string): boolean {
   return list.some((p) => path === p || path.startsWith(`${p}/`));
 }
 
@@ -134,3 +135,8 @@ export function getPagePriority(path: string, country?: string): number {
     0.7
   );
 }
+
+// ===============================
+// 🌍 EXPORT COUNTRIES FROM CORE
+// ===============================
+export const ALL_COUNTRIES = ISO_COUNTRIES;
