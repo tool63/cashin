@@ -1,11 +1,45 @@
-// =======================================
-// 🌍 GLOBAL COUNTRY SYSTEM (ENTERPRISE)
-// =======================================
+import type { SupportedLanguage } from "./types";
 
 // ===============================
-// 🌐 ALL ISO COUNTRIES (SINGLE SOURCE OF TRUTH)
+// 🌍 COUNTRY TIERS
 // ===============================
-export const ALL_COUNTRIES = [
+export type CountryTier = "tier1" | "tier2" | "tier3";
+
+// ===============================
+// 🌍 COUNTRY TYPE
+// ===============================
+export type CountryMeta = {
+  code: string;
+  name: string;
+  tier: CountryTier;
+  defaultLanguage: SupportedLanguage;
+};
+
+// ===============================
+// 🌐 LANGUAGE FALLBACK MAP
+// ===============================
+const LANGUAGE_BY_COUNTRY: Partial<Record<string, SupportedLanguage>> = {
+  fr: "fr",
+  de: "de",
+  es: "es",
+  pt: "pt",
+};
+
+// ===============================
+// 💰 TIER DEFINITIONS
+// ===============================
+const TIER1 = new Set([
+  "us","gb","ca","au","de","fr","nl","se","ch","no","dk","fi","ie","be","at"
+]);
+
+const TIER2 = new Set([
+  "es","it","pt","gr","pl","cz","hu","tr","ae","sa","kr","jp","sg","my","br","mx","za"
+]);
+
+// ===============================
+// 🌍 ISO COUNTRY LIST (SYNC WITH VALIDATOR)
+// ===============================
+export const ISO_COUNTRIES = [
   "af","al","dz","ad","ao","ag","ar","am","au","at","az",
   "bs","bh","bd","bb","by","be","bz","bj","bt","bo","ba","bw","br","bn","bg","bf","bi",
   "cv","kh","cm","ca","cf","td","cl","cn","co","km","cg","cd","cr","ci","hr","cu","cy","cz",
@@ -32,93 +66,109 @@ export const ALL_COUNTRIES = [
   "zm","zw"
 ] as const;
 
-export type CountryCode = (typeof ALL_COUNTRIES)[number];
+export type CountryCode = typeof ISO_COUNTRIES[number] | "global";
 
 // ===============================
-// ⚡ FAST LOOKUP SET (PERFORMANCE)
+// 🌍 COUNTRY NAME MAP (IMPORTANT FOR SEO)
 // ===============================
-export const COUNTRY_SET = new Set<string>(ALL_COUNTRIES);
-
-// ===============================
-// 🌍 TIER SYSTEM (SEO + MONETIZATION)
-// ===============================
-export const COUNTRY_TIERS: Record<number, CountryCode[]> = {
-  // 💰 Tier 1 (Top earning countries)
-  1: ["us","gb","ca","au"],
-
-  // 💶 Tier 2 (High value EU)
-  2: ["de","fr","nl","se","ch","no","dk"],
-
-  // 💼 Tier 3 (Mid-high EU)
-  3: ["it","es","fi","ie","at","be"],
-
-  // 🌎 Tier 4 (Emerging strong markets)
-  4: ["br","mx","pl","pt","tr","ro"],
-
-  // 🌏 Tier 5 (High traffic, lower CPM)
-  5: ["in","id","ph","vn","th","eg"],
-
-  // 🌍 Tier 6 (Growth markets)
-  6: ["pk","bd","ng","ke","za"],
-
-  // 🌐 Tier 7 (Rest of world)
-  7: [] // auto-filled below
+const COUNTRY_NAMES: Partial<Record<CountryCode, string>> = {
+  us: "United States",
+  gb: "United Kingdom",
+  bd: "Bangladesh",
+  in: "India",
+  de: "Germany",
+  fr: "France",
+  es: "Spain",
+  pt: "Portugal",
+  br: "Brazil",
+  ca: "Canada",
+  au: "Australia",
+  pk: "Pakistan",
+  ng: "Nigeria",
+  id: "Indonesia",
+  ph: "Philippines",
 };
 
 // ===============================
-// 🧠 AUTO-FILL TIER 7
+// 🧠 BUILD COUNTRY OBJECT
 // ===============================
-const assignedCountries = new Set(
-  Object.values(COUNTRY_TIERS).flat()
-);
+function buildCountry(code: string): CountryMeta {
+  const tier: CountryTier =
+    TIER1.has(code) ? "tier1" :
+    TIER2.has(code) ? "tier2" :
+    "tier3";
 
-COUNTRY_TIERS[7] = ALL_COUNTRIES.filter(
-  (c) => !assignedCountries.has(c)
-);
+  return {
+    code,
+    name: COUNTRY_NAMES[code as CountryCode] || code.toUpperCase(),
+    tier,
+    defaultLanguage: LANGUAGE_BY_COUNTRY[code] || "en",
+  };
+}
 
 // ===============================
-// 🧠 COUNTRY → TIER MAP (FAST LOOKUP)
+// 🌍 FINAL COUNTRIES OBJECT
 // ===============================
-export const COUNTRY_TIER_MAP: Record<string, number> = {};
+export const COUNTRIES: Record<CountryCode, CountryMeta> = {
+  global: {
+    code: "global",
+    name: "Global",
+    tier: "tier3",
+    defaultLanguage: "en",
+  },
 
-for (const [tier, countries] of Object.entries(COUNTRY_TIERS)) {
-  for (const c of countries) {
-    COUNTRY_TIER_MAP[c] = Number(tier);
-  }
+  ...Object.fromEntries(
+    ISO_COUNTRIES.map((code) => [code, buildCountry(code)])
+  ) as Record<string, CountryMeta>,
+} as Record<CountryCode, CountryMeta>;
+
+// ===============================
+// 🔧 NORMALIZER (VERY IMPORTANT)
+// ===============================
+export function normalizeCountryCode(code?: string | null): CountryCode {
+  if (!code) return "global";
+  const c = code.toLowerCase();
+  return (c in COUNTRIES ? c : "global") as CountryCode;
 }
 
 // ===============================
 // 🔍 HELPERS
 // ===============================
-
-// ✅ Validate country
-export function isSupportedCountry(code?: string): boolean {
-  if (!code) return false;
-  const c = code.toLowerCase().trim();
-  if (c === "global") return true;
-  return COUNTRY_SET.has(c);
+export function getCountry(code?: string): CountryMeta {
+  return COUNTRIES[normalizeCountryCode(code)];
 }
 
-// ✅ Get tier
-export function getCountryTier(code?: string): number {
-  if (!code) return 7;
-  const c = code.toLowerCase();
-  return COUNTRY_TIER_MAP[c] || 7;
+export function getCountryLanguage(code?: string): SupportedLanguage {
+  return getCountry(code).defaultLanguage;
 }
 
-// ✅ Check tier
+export function getCountryTier(code?: string): CountryTier {
+  return getCountry(code).tier;
+}
+
 export function isTier1(code?: string): boolean {
-  return getCountryTier(code) === 1;
+  return getCountryTier(code) === "tier1";
 }
 
-// ✅ Normalize country
-export function normalizeCountry(code?: string): string | undefined {
-  if (!code) return undefined;
-  const c = code.toLowerCase().trim();
-  return isSupportedCountry(c) ? c : undefined;
+export function isTier2(code?: string): boolean {
+  return getCountryTier(code) === "tier2";
 }
 
-// ✅ Get countries by tier
-export function getCountriesByTier(tier: number): CountryCode[] {
-  return COUNTRY_TIERS[tier] || [];
+export function isTier3(code?: string): boolean {
+  return getCountryTier(code) === "tier3";
 }
+
+// ===============================
+// 📊 GROUPED LISTS
+// ===============================
+export const TIER1_COUNTRIES = Object.values(COUNTRIES).filter(
+  (c) => c.tier === "tier1"
+);
+
+export const TIER2_COUNTRIES = Object.values(COUNTRIES).filter(
+  (c) => c.tier === "tier2"
+);
+
+export const TIER3_COUNTRIES = Object.values(COUNTRIES).filter(
+  (c) => c.tier === "tier3"
+);
