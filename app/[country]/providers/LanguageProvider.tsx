@@ -7,6 +7,7 @@ import {
   ReactNode,
   useEffect,
   useCallback,
+  useRef,
 } from "react";
 
 import { COOKIE_KEYS, DEFAULT_LANGUAGE } from "@/app/core/constants";
@@ -31,6 +32,7 @@ type LanguageContextType = {
   getTranslation: (namespace: string, key: string, fallback: string) => string;
   isUserOverridden: boolean;
   isLoading: boolean;
+  error: string | null;
 };
 
 const LanguageContext = createContext<LanguageContextType | null>(null);
@@ -53,6 +55,15 @@ export function LanguageProvider({
   const [translations, setTranslations] = useState<TranslationsMap>(initialTranslations);
   const [isUserOverridden, setIsUserOverridden] = useState(isOverridden);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  
+  // Track if initial translations are already loaded
+  const hasInitialTranslations = useRef(
+    initialTranslations.homepage && Object.keys(initialTranslations.homepage).length > 0
+  );
+  
+  // Track loading to prevent duplicate requests
+  const loadingRef = useRef<Set<SupportedLanguage>>(new Set());
 
   // ===============================
   // ✅ FIXED TRANSLATION FUNCTION
@@ -68,55 +79,59 @@ export function LanguageProvider({
         }
       }
 
-      // ❗ NO cross-namespace fallback (important fix)
+      // Check nested translations for dot notation (e.g., "hero.title")
+      if (key.includes(".")) {
+        const parts = key.split(".");
+        let current: any = translations[namespace];
+        
+        for (const part of parts) {
+          if (current && typeof current === "object" && part in current) {
+            current = current[part];
+          } else {
+            return fallback;
+          }
+        }
+        
+        if (typeof current === "string") {
+          return current;
+        }
+      }
+
       return fallback;
     },
     [translations]
   );
 
   // ===============================
-  // 🔄 LOAD TRANSLATIONS
+  // 🔄 LOAD TRANSLATIONS (with deduplication)
   // ===============================
-  useEffect(() => {
-    let mounted = true;
+  const loadTranslationsForLanguage = useCallback(async (lang: SupportedLanguage) => {
+    // Prevent duplicate loads for the same language
+    if (loadingRef.current.has(lang)) {
+      return;
+    }
+    
+    loadingRef.current.add(lang);
+    setIsLoading(true);
+    setError(null);
 
-    const loadTranslations = async () => {
-      if (
-        !initialTranslations.homepage ||
-        Object.keys(initialTranslations.homepage).length === 0
-      ) {
-        setIsLoading(true);
-      }
-
-      try {
-        const newTranslations = await loadAllTranslations(language);
-
-        if (mounted) {
-          setTranslations(newTranslations);
-        }
-      } catch (error) {
-        console.error(`Failed to load translations for ${language}:`, error);
-
-        if (mounted && language !== DEFAULT_LANGUAGE) {
-          try {
-            const fallbackTranslations = await loadAllTranslations(DEFAULT_LANGUAGE);
-
-            if (mounted) {
-              setTranslations(fallbackTranslations);
-            }
-          } catch (fallbackError) {
-            console.error("Failed to load fallback translations:", fallbackError);
-
-            if (mounted) {
-              setTranslations({
-                homepage: {},
-                footer: {},
-                header: {},
-                primarycta: {},
-              });
-            }
-          }
-        } else if (mounted) {
+    try {
+      const newTranslations = await loadAllTranslations(lang);
+      setTranslations(newTranslations);
+    } catch (err) {
+      console.error(`Failed to load translations for ${lang}:`, err);
+      setError(`Failed to load ${lang} translations`);
+      
+      // Try fallback if not already using default language
+      if (lang !== DEFAULT_LANGUAGE) {
+        try {
+          console.log(`Falling back to ${DEFAULT_LANGUAGE} translations`);
+          const fallbackTranslations = await loadAllTranslations(DEFAULT_LANGUAGE);
+          setTranslations(fallbackTranslations);
+          setError(null); // Clear error since we have fallback
+        } catch (fallbackError) {
+          console.error("Failed to load fallback translations:", fallbackError);
+          setError("Failed to load translations");
           setTranslations({
             homepage: {},
             footer: {},
@@ -124,43 +139,61 @@ export function LanguageProvider({
             primarycta: {},
           });
         }
-      } finally {
-        if (mounted) {
-          setIsLoading(false);
-        }
+      } else {
+        // Default language failed
+        setTranslations({
+          homepage: {},
+          footer: {},
+          header: {},
+          primarycta: {},
+        });
       }
-    };
+    } finally {
+      setIsLoading(false);
+      loadingRef.current.delete(lang);
+    }
+  }, []);
 
-    loadTranslations();
-
-    return () => {
-      mounted = false;
-    };
-  }, [language]);
+  // ===============================
+  // 🔄 LOAD TRANSLATIONS ON LANGUAGE CHANGE
+  // ===============================
+  useEffect(() => {
+    // Skip if we already have initial translations and language matches initial
+    if (hasInitialTranslations.current && language === initialLanguage) {
+      return;
+    }
+    
+    loadTranslationsForLanguage(language);
+  }, [language, initialLanguage, loadTranslationsForLanguage]);
 
   // ===============================
   // 🔄 CHANGE LANGUAGE
   // ===============================
   const setLanguage = useCallback(
     (lang: SupportedLanguage, isUserOverride: boolean = true) => {
+      if (lang === language) return; // Prevent unnecessary updates
+      
       setLanguageState(lang);
       setIsUserOverridden(isUserOverride);
 
       if (typeof document !== "undefined") {
+        // Set language cookie
         document.cookie = `${COOKIE_KEYS.LANGUAGE}=${lang}; path=/; max-age=31536000; SameSite=Lax`;
 
         if (isUserOverride) {
+          // Set user override cookie
           document.cookie = `${COOKIE_KEYS.USER_LANGUAGE_OVERRIDE}=${lang}; path=/; max-age=31536000; SameSite=Lax`;
         } else {
+          // Clear user override cookie
           document.cookie = `${COOKIE_KEYS.USER_LANGUAGE_OVERRIDE}=; path=/; max-age=0; SameSite=Lax`;
         }
       }
     },
-    []
+    [language]
   );
 
   // ===============================
-  // 🔄 SYNC WITH SERVER
+  // 🔄 SYNC WITH SERVER (only if not overridden)
   // ===============================
   useEffect(() => {
     if (initialLanguage !== language && !isUserOverridden) {
@@ -175,6 +208,7 @@ export function LanguageProvider({
     getTranslation,
     isUserOverridden,
     isLoading,
+    error,
   };
 
   return (
