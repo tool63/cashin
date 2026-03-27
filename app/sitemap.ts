@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { ISO_COUNTRIES, getTierNumber } from "@/app/core/countries";
 
 // ===============================
 // 🌐 GLOBAL CONFIG
@@ -6,53 +7,10 @@ import type { MetadataRoute } from "next";
 const BASE_URL = "https://cashog.com";
 
 // ===============================
-// 🌎 ISO COUNTRY LIST (FULL GLOBAL)
-// ===============================
-const ISO_COUNTRIES = [
-  "af","al","dz","ad","ao","ag","ar","am","au","at","az",
-  "bs","bh","bd","bb","by","be","bz","bj","bt","bo","ba","bw","br","bn","bg","bf","bi",
-  "cv","kh","cm","ca","cf","td","cl","cn","co","km","cg","cd","cr","ci","hr","cu","cy","cz",
-  "dk","dj","dm","do",
-  "ec","eg","sv","gq","er","ee","sz","et",
-  "fj","fi","fr",
-  "ga","gm","ge","de","gh","gr","gd","gt","gn","gw","gy",
-  "ht","hn","hu",
-  "is","in","id","ir","iq","ie","il","it",
-  "jm","jp","jo",
-  "kz","ke","ki","kp","kr","kw","kg",
-  "la","lv","lb","ls","lr","ly","li","lt","lu",
-  "mg","mw","my","mv","ml","mt","mh","mr","mu","mx","fm","md","mc","mn","me","ma","mz","mm",
-  "na","nr","np","nl","nz","ni","ne","ng","mk","no",
-  "om",
-  "pk","pw","pa","pg","py","pe","ph","pl","pt",
-  "qa",
-  "ro","ru","rw",
-  "kn","lc","vc","ws","sm","st","sa","sn","rs","sc","sl","sg","sk","si","sb","so","za","ss","es","lk","sd","sr","se","ch","sy",
-  "tw","tj","tz","th","tl","tg","to","tt","tn","tr","tm","tv",
-  "ug","ua","ae","gb","us","uy","uz",
-  "vu","va","ve","vn",
-  "ye",
-  "zm","zw"
-];
-
-// ===============================
-// 🧠 7-TIER COUNTRY SYSTEM
+// 🧠 TIER SYSTEM (Using core getTierNumber)
 // ===============================
 function getTier(country: string): number {
-  const tier1 = ["us","gb","ca","au"];
-  const tier2 = ["de","fr","nl","se","ch","no","dk"];
-  const tier3 = ["it","es","fi","ie","at","be"];
-  const tier4 = ["br","mx","pl","pt","tr","ro"];
-  const tier5 = ["in","id","ph","vn","th","eg"];
-  const tier6 = ["pk","bd","ng","ke","za"];
-
-  if (tier1.includes(country)) return 1;
-  if (tier2.includes(country)) return 2;
-  if (tier3.includes(country)) return 3;
-  if (tier4.includes(country)) return 4;
-  if (tier5.includes(country)) return 5;
-  if (tier6.includes(country)) return 6;
-  return 7;
+  return getTierNumber(country);
 }
 
 // ===============================
@@ -165,7 +123,8 @@ function getChangeFrequency(country?: string): MetadataRoute.Sitemap[number]["ch
 }
 
 // ===============================
-// 🚀 SITEMAP GENERATOR
+// 🚀 SITEMAP GENERATOR (Using imported ISO_COUNTRIES)
+// ===============================
 export function generateSitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const sitemap: MetadataRoute.Sitemap = [];
@@ -180,7 +139,7 @@ export function generateSitemap(): MetadataRoute.Sitemap {
     });
   }
 
-  // 🌎 COUNTRY-SPECIFIC PAGES
+  // 🌎 COUNTRY-SPECIFIC PAGES (Using ISO_COUNTRIES from core)
   for (const country of ISO_COUNTRIES) {
     for (const path of ALL_PAGES) {
       sitemap.push({
@@ -197,6 +156,7 @@ export function generateSitemap(): MetadataRoute.Sitemap {
 
 // ===============================
 // 🔥 ENTERPRISE ALIAS LAYER
+// ===============================
 export const sitemapEngine = generateSitemap;
 export const buildSitemap = generateSitemap;
 export const getSitemap = generateSitemap;
@@ -206,6 +166,7 @@ export const generateFullSitemap = generateSitemap;
 
 // ===============================
 // 🧪 OPTIONAL VALIDATION
+// ===============================
 export function validateSitemapEntry(entry: MetadataRoute.Sitemap[number]): boolean {
   if (!entry.url || !entry.lastModified) return false;
   if (!/^https?:\/\//.test(entry.url)) return false;
