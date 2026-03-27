@@ -92,9 +92,9 @@ export function cleanInvalidPrefix(path: string): string {
 }
 
 // ===============================
-// 🌐 MAIN GEO INFO
+// 🌐 MAIN GEO INFO (UPDATED with ignoreCookies)
 // ===============================
-export function getGeoInfo(req: NextRequest) {
+export function getGeoInfo(req: NextRequest, ignoreCookies: boolean = false) {
   const pathname = req.nextUrl.pathname;
 
   // Get valid country from URL (only real ISO codes, not "global")
@@ -106,8 +106,8 @@ export function getGeoInfo(req: NextRequest) {
   // Clean the path if there's an invalid prefix
   const cleanPathname = hasInvalidPrefix ? cleanInvalidPrefix(pathname) : pathname;
 
-  // ✅ Resolve country (single source of truth)
-  const country = resolveCountry(req, urlCountry);
+  // ✅ Resolve country with ignoreCookies flag
+  const country = resolveCountry(req, urlCountry, ignoreCookies);
 
   // ===============================
   // 🔥 IMPORTANT FIX
