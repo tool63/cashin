@@ -1,3 +1,4 @@
+// app/[country]/page.tsx
 "use client";
 
 import { useMemo } from "react";
@@ -6,7 +7,6 @@ import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
 import { useCountry } from "@/app/[country]/providers/CountryProvider";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import SeoRenderer from "@/components/SEO/SeoRenderer";
-import { generateMetadata } from "@/components/SEO/metadata";
 import { generateJsonLd } from "@/components/SEO/schema";
 
 // ===============================
@@ -28,6 +28,9 @@ export default function CountryHomePage() {
   const { getTranslation } = useLanguage();
   const { country } = useCountry();
 
+  // Check if this is a global route
+  const isGlobal = country === "global";
+
   // Translation helper
   const t = useMemo(
     () => (key: string, fallback: string) => getTranslation("homepage", key, fallback),
@@ -36,11 +39,20 @@ export default function CountryHomePage() {
 
   // Page content (SEO + UI)
   const pageContent = useMemo(() => {
-    const title = t("welcome_message", "Welcome to Cashog! Earn money online.");
-    const description = t(
-      "homepage_description",
-      "Cashog helps you earn real money online safely and quickly."
-    );
+    // Customize content based on whether it's global or country-specific
+    const title = isGlobal
+      ? t("welcome_message_global", "Cashog - Earn Money Online Worldwide")
+      : t("welcome_message", `Cashog ${country.toUpperCase()} - Earn Money in ${country.toUpperCase()}`);
+    
+    const description = isGlobal
+      ? t(
+          "homepage_description_global",
+          "Cashog helps you earn real money online safely and quickly from anywhere in the world."
+        )
+      : t(
+          "homepage_description",
+          `Cashog helps you earn real money online safely and quickly in ${country.toUpperCase()}.`
+        );
 
     return {
       title,
@@ -60,14 +72,21 @@ export default function CountryHomePage() {
         },
       ],
       finalCta: {
-        title: t("final_cta_title", "Start Earning Today"),
-        description: t(
-          "final_cta_description",
-          "Join thousands of users already earning with Cashog. It only takes a few seconds to begin."
-        ),
+        title: isGlobal
+          ? t("final_cta_title_global", "Start Earning Worldwide Today")
+          : t("final_cta_title", `Start Earning in ${country.toUpperCase()} Today`),
+        description: isGlobal
+          ? t(
+              "final_cta_description_global",
+              "Join thousands of users worldwide already earning with Cashog. It only takes a few seconds to begin."
+            )
+          : t(
+              "final_cta_description",
+              `Join thousands of users in ${country.toUpperCase()} already earning with Cashog. It only takes a few seconds to begin.`
+            ),
       },
     };
-  }, [t]);
+  }, [t, country, isGlobal]);
 
   // Generate structured data based on page content
   const structuredData = useMemo(() => {
@@ -79,8 +98,13 @@ export default function CountryHomePage() {
     });
   }, [pageContent.title, pageContent.description]);
 
-  // Signup CTA link
-  const signupLink = useMemo(() => `/${country}/signup`, [country]);
+  // Signup CTA link - handle global vs country-specific
+  const signupLink = useMemo(() => {
+    if (isGlobal) {
+      return "/signup";
+    }
+    return `/${country}/signup`;
+  }, [country, isGlobal]);
 
   return (
     <>
@@ -89,7 +113,7 @@ export default function CountryHomePage() {
         path="/"
         title={pageContent.title}
         description={pageContent.description}
-        country={country}
+        country={isGlobal ? undefined : country}
         noindex={false}
       />
 
