@@ -38,11 +38,8 @@ export function middleware(req: NextRequest) {
   const isBot = /bot|crawl|spider|slurp|googlebot|bingbot|yandexbot|baiduspider/i.test(userAgent);
 
   // ===============================
-  // 🌍 GEO INFO
+  // 🌍 Get country from URL path
   // ===============================
-  const geo = getGeoInfo(req);
-  
-  // Get country from URL path
   const segments = pathname.split("/").filter(Boolean);
   const firstSegment = segments[0]?.toLowerCase();
   const urlCountry = extractCountryFromPath(pathname);
@@ -54,9 +51,15 @@ export function middleware(req: NextRequest) {
   const isGlobalRoute = !hasValidCountryPrefix;
 
   // ===============================
-  // 🌍 ROOT PATH - Set cookies only
+  // 🌍 ROOT PATH - Force global
   // ===============================
   if (pathname === "/") {
+    // Create geo info with forced global country
+    const geo = {
+      country: DEFAULT_COUNTRY,
+      language: "en", // You might want to detect this from headers
+    };
+    
     const res = NextResponse.next();
     setCookiesIfChanged(res, req, geo);
     return res;
@@ -66,8 +69,7 @@ export function middleware(req: NextRequest) {
   // 🚫 BLOCK INVALID COUNTRY CODES
   // ===============================
   if (firstSegment && !isValidCountryCode(firstSegment) && firstSegment !== "global") {
-    // It's an invalid country code, but might be a valid page path
-    // Check if it's a valid page path (like /earn, /surveys, etc.)
+    // Valid paths that should be accessible without country prefix
     const validPaths = [
       "", "earn", "make-money", "rewards", "shopping-rewards", 
       "affiliate", "partners", "advertise", "how-it-works", 
@@ -83,20 +85,37 @@ export function middleware(req: NextRequest) {
       url.pathname = "/";
       return NextResponse.redirect(url);
     }
-    // Valid page path without country prefix - treat as global route
   }
 
+  // ===============================
+  // 🌍 Get geo info based on route type
+  // ===============================
+  let geo;
+  
+  if (isGlobalRoute) {
+    // For global routes (like /earn, /surveys), don't use cookies
+    // Only use URL or query params
+    geo = getGeoInfo(req, true); // Pass flag to ignore cookies
+  } else {
+    // For country-specific routes, use full resolution
+    geo = getGeoInfo(req, false);
+  }
+  
   // ===============================
   // 🍪 SET COOKIES FOR ALL REQUESTS
   // ===============================
   const res = NextResponse.next();
-  setCookiesIfChanged(res, req, geo);
+  
+  // Only set cookies if not a global route or if it's a bot
+  // This prevents overwriting with country-specific values on global routes
+  if (!isGlobalRoute || isBot) {
+    setCookiesIfChanged(res, req, geo);
+  }
   
   // ===============================
   // 🌐 HANDLE BOTS - Let them see all URLs without redirects
   // ===============================
   if (isBot) {
-    // Bots can access all URLs directly (good for SEO)
     return res;
   }
 
@@ -106,23 +125,15 @@ export function middleware(req: NextRequest) {
   
   // Case 1: Global route (no country in URL)
   if (isGlobalRoute) {
-    // Don't redirect users on global routes
-    // They can browse globally or choose a country via UI
+    // Don't redirect - just return the response
+    // Users see global content (English by default)
     return res;
   }
   
   // Case 2: Has valid country prefix
   if (hasValidCountryPrefix) {
-    // Check if this is the user's actual geo country
-    const userCountry = geo.country;
-    const urlCountryLower = urlCountry?.toLowerCase();
-    
-    // If user is visiting a different country page than their geo location
-    // Let them stay (they might be intentionally browsing that country)
-    // Don't auto-redirect - they might want to see offers for that specific country
-    
     // Verify the country is valid in our system
-    const countryMeta = getCountry(urlCountryLower);
+    const countryMeta = getCountry(urlCountry);
     if (!countryMeta) {
       // Invalid country in our system - redirect to home
       const url = req.nextUrl.clone();
@@ -147,8 +158,8 @@ function setCookiesIfChanged(
   const currentCountry = req.cookies.get(COOKIE_KEYS.COUNTRY)?.value;
   const currentLanguage = req.cookies.get(COOKIE_KEYS.LANGUAGE)?.value;
 
-  // Only update if changed
-  if (currentCountry !== geo.country) {
+  // Only update if changed and not global
+  if (geo.country !== DEFAULT_COUNTRY && currentCountry !== geo.country) {
     res.cookies.set(COOKIE_KEYS.COUNTRY, geo.country, {
       path: "/",
       maxAge: 60 * 60 * 24 * 30, // 30 days
