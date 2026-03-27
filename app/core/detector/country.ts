@@ -49,7 +49,7 @@ export function resolveCountry(
 ): string {
   const searchParams = req.nextUrl.searchParams;
 
-  // 1️⃣ URL prefix (/us, /bd) - Highest priority
+  // 1️⃣ URL prefix (/us, /uk, /ca, /au) - Highest priority
   if (urlCountry) {
     return normalizeCountry(urlCountry) || DEFAULT_COUNTRY;
   }
