@@ -2,41 +2,13 @@
 // 🌐 hreflang.ts (FULL ENTERPRISE VERSION)
 // =======================================
 
+import { ISO_COUNTRIES } from "@/app/core/countries";
+
 export type HreflangLink = {
   rel: "alternate";
   hrefLang: string;
   href: string;
 };
-
-// ===============================
-// 🌍 GLOBAL COUNTRY LIST (200+)
-// ===============================
-export const ALL_COUNTRIES = [
-  "af","al","dz","ad","ao","ag","ar","am","au","at","az",
-  "bs","bh","bd","bb","by","be","bz","bj","bt","bo","ba","bw","br","bn","bg","bf","bi",
-  "cv","kh","cm","ca","cf","td","cl","cn","co","km","cg","cd","cr","ci","hr","cu","cy","cz",
-  "dk","dj","dm","do",
-  "ec","eg","sv","gq","er","ee","sz","et",
-  "fj","fi","fr",
-  "ga","gm","ge","de","gh","gr","gd","gt","gn","gw","gy",
-  "ht","hn","hu",
-  "is","in","id","ir","iq","ie","il","it",
-  "jm","jp","jo",
-  "kz","ke","ki","kp","kr","kw","kg",
-  "la","lv","lb","ls","lr","ly","li","lt","lu",
-  "mg","mw","my","mv","ml","mt","mh","mr","mu","mx","fm","md","mc","mn","me","ma","mz","mm",
-  "na","nr","np","nl","nz","ni","ne","ng","mk","no",
-  "om",
-  "pk","pw","pa","pg","py","pe","ph","pl","pt",
-  "qa",
-  "ro","ru","rw",
-  "kn","lc","vc","ws","sm","st","sa","sn","rs","sc","sl","sg","sk","si","sb","so","za","ss","es","lk","sd","sr","se","ch","sy",
-  "tw","tj","tz","th","tl","tg","to","tt","tn","tr","tm","tv",
-  "ug","ua","ae","gb","us","uy","uz",
-  "vu","va","ve","vn",
-  "ye",
-  "zm","zw"
-];
 
 // ===============================
 // 🌐 BASE CONFIG
@@ -74,6 +46,16 @@ export const COUNTRY_HREFLANG_MAP: Record<string, string> = {
   tw: "zh-TW",
   jp: "ja-JP",
   kr: "ko-KR",
+  // Add more as needed
+  ae: "ar-AE",
+  sa: "ar-SA",
+  th: "th-TH",
+  vn: "vi-VN",
+  id: "id-ID",
+  tr: "tr-TR",
+  pl: "pl-PL",
+  ro: "ro-RO",
+  il: "he-IL",
 };
 
 // ===============================
@@ -98,12 +80,12 @@ function normalizeCountry(country?: string): string | undefined {
 }
 
 // ===============================
-// 🔗 URL BUILDER
+// 🔗 URL BUILDER (Using imported ISO_COUNTRIES)
 // ===============================
 export function buildUrl(path: string, country?: string): string {
   const cleanPath = normalizePath(path);
   const cleanCountry = normalizeCountry(country);
-  return cleanCountry && ALL_COUNTRIES.includes(cleanCountry)
+  return cleanCountry && ISO_COUNTRIES.includes(cleanCountry as any)
     ? `${BASE_URL}/${cleanCountry}${cleanPath}`
     : `${BASE_URL}${cleanPath}`;
 }
@@ -117,7 +99,7 @@ export function getHreflang(country: string): string {
 }
 
 // ===============================
-// 🌐 GENERATE HREFLANG LINKS
+// 🌐 GENERATE HREFLANG LINKS (Using imported ISO_COUNTRIES)
 // ===============================
 export function generateHreflangLinks(path: string): HreflangLink[] {
   const cleanPath = normalizePath(path);
@@ -126,9 +108,13 @@ export function generateHreflangLinks(path: string): HreflangLink[] {
   // x-default
   links.push({ rel: "alternate", hrefLang: GLOBAL_HREFLANG, href: buildUrl(cleanPath) });
 
-  // All countries
-  for (const country of ALL_COUNTRIES) {
-    links.push({ rel: "alternate", hrefLang: getHreflang(country), href: buildUrl(cleanPath, country) });
+  // All countries from ISO_COUNTRIES
+  for (const country of ISO_COUNTRIES) {
+    links.push({ 
+      rel: "alternate", 
+      hrefLang: getHreflang(country), 
+      href: buildUrl(cleanPath, country) 
+    });
   }
 
   return links;
@@ -149,8 +135,13 @@ export function getGlobalUrl(path: string) {
 }
 
 // ===============================
-// 🧭 SUPPORTED COUNTRIES
+// 🧭 SUPPORTED COUNTRIES (Using imported ISO_COUNTRIES)
 // ===============================
 export function getSupportedCountries() {
-  return ALL_COUNTRIES;
+  return ISO_COUNTRIES;
 }
+
+// ===============================
+// 🔥 EXPORT ALL_COUNTRIES FOR BACKWARD COMPATIBILITY
+// ===============================
+export const ALL_COUNTRIES = ISO_COUNTRIES;
