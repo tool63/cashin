@@ -1,14 +1,16 @@
-import { getCountry } from "@/app/core/countries";
+import { getCountry, getTierNumber, type CountryCode } from "@/app/core/countries";
 
 // =======================================
 // 🌐 SEO CONFIG TYPE
 // =======================================
+export type PageType = "money" | "earn" | "shopping" | "content" | "low";
+
 export type SEOConfigType = {
   siteName: string;
   baseUrl: string;
   defaultCountry: string;
 
-  getTier: (country?: string) => number;
+  getTier: (country?: string) => 1 | 2 | 3;
 
   moneyPages: readonly string[];
   earnPages: readonly string[];
@@ -23,7 +25,7 @@ export type SEOConfigType = {
 
   buildUrl: (args: { path: string; country?: string }) => string;
 
-  getPageType: (path: string) => string;
+  getPageType: (path: string) => PageType;
   getPriority: (path: string, country?: string) => number;
   getChangeFrequency: (country?: string) => "daily" | "weekly" | "monthly";
   getHreflang: (country?: string) => string;
@@ -41,12 +43,8 @@ export const SEO_CONFIG: SEOConfigType = {
   // 🌍 TIER (FROM countries.ts)
   // ===================================
   getTier(country) {
-    const c = country?.toLowerCase() as CountryCode;
-    const meta = getCountry(c);
-
-    if (meta.tier === "tier1") return 1;
-    if (meta.tier === "tier2") return 2;
-    return 3;
+    // Use the new numeric tier helper
+    return getTierNumber(country);
   },
 
   // ===================================
@@ -101,7 +99,7 @@ export const SEO_CONFIG: SEOConfigType = {
     const cleanPath = path.startsWith("/") ? path : `/${path}`;
     const c = country?.toLowerCase();
 
-    if (c && c !== "global") {
+    if (c && c !== "global" && c !== "us") {
       return `${this.baseUrl}/${c}${cleanPath}`;
     }
 
@@ -111,7 +109,7 @@ export const SEO_CONFIG: SEOConfigType = {
   // ===================================
   // 📄 PAGE TYPE
   // ===================================
-  getPageType(path) {
+  getPageType(path): PageType {
     const clean = path.toLowerCase();
 
     if (this.moneyPages.some(p => clean.startsWith(p))) return "money";
@@ -156,7 +154,7 @@ export const SEO_CONFIG: SEOConfigType = {
   },
 
   // ===================================
-  // 🌐 HREFLANG
+  // 🌐 HREFLANG (EXPANDED)
   // ===================================
   getHreflang(country) {
     const c = country?.toLowerCase();
@@ -164,14 +162,66 @@ export const SEO_CONFIG: SEOConfigType = {
     if (!c) return "x-default";
 
     const map: Record<string, string> = {
-      us:"en-US", gb:"en-GB", ca:"en-CA", au:"en-AU",
-      de:"de-DE", fr:"fr-FR", es:"es-ES", it:"it-IT",
-      nl:"nl-NL", se:"sv-SE", ch:"de-CH",
-      br:"pt-BR", mx:"es-MX",
-      in:"en-IN", bd:"en-BD", pk:"en-PK",
-      ng:"en-NG", za:"en-ZA", ke:"en-KE", eg:"ar-EG",
-      id:"id-ID", ph:"en-PH", sg:"en-SG",
-      cn:"zh-CN", tw:"zh-TW", jp:"ja-JP", kr:"ko-KR"
+      // English variants
+      us: "en-US",
+      gb: "en-GB",
+      ca: "en-CA",
+      au: "en-AU",
+      in: "en-IN",
+      bd: "en-BD",
+      pk: "en-PK",
+      ng: "en-NG",
+      za: "en-ZA",
+      ke: "en-KE",
+      ph: "en-PH",
+      sg: "en-SG",
+      
+      // European languages
+      de: "de-DE",
+      fr: "fr-FR",
+      es: "es-ES",
+      it: "it-IT",
+      pt: "pt-PT",
+      nl: "nl-NL",
+      se: "sv-SE",
+      ch: "de-CH",
+      at: "de-AT",
+      be: "nl-BE",
+      
+      // Portuguese variant
+      br: "pt-BR",
+      
+      // Spanish variants
+      mx: "es-MX",
+      ar: "es-AR",
+      co: "es-CO",
+      cl: "es-CL",
+      pe: "es-PE",
+      
+      // Asian languages
+      cn: "zh-CN",
+      tw: "zh-TW",
+      jp: "ja-JP",
+      kr: "ko-KR",
+      id: "id-ID",
+      th: "th-TH",
+      vn: "vi-VN",
+      
+      // Middle East
+      eg: "ar-EG",
+      ae: "ar-AE",
+      sa: "ar-SA",
+      il: "he-IL",
+      
+      // Eastern Europe
+      pl: "pl-PL",
+      cz: "cs-CZ",
+      hu: "hu-HU",
+      ro: "ro-RO",
+      tr: "tr-TR",
+      ru: "ru-RU",
+      ua: "uk-UA",
+      gr: "el-GR",
     };
 
     return map[c] || `en-${c.toUpperCase()}`;
@@ -186,3 +236,4 @@ export const getPageType = SEO_CONFIG.getPageType;
 export const getPriority = SEO_CONFIG.getPriority;
 export const getChangeFrequency = SEO_CONFIG.getChangeFrequency;
 export const getHreflang = SEO_CONFIG.getHreflang;
+export const getTier = SEO_CONFIG.getTier;
