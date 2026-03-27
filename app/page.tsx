@@ -1,21 +1,30 @@
 // app/page.tsx
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-import { COOKIE_KEYS } from "@/app/core/constants";
-import { isValidCountryCode } from "@/app/core/countries";
+import { DEFAULT_LANGUAGE, COOKIE_KEYS } from "@/app/core/constants";
+import { loadAllTranslations } from "@/app/core/i18n/loader";
+import { CountryProvider } from "@/app/[country]/providers/CountryProvider";
+import { LanguageProvider } from "@/app/[country]/providers/LanguageProvider";
+import CountryHomePage from "@/app/[country]/page";
 
 export default async function RootPage() {
   const cookieStore = cookies();
   
-  // Check if user has a saved country
-  const savedCountry = cookieStore.get(COOKIE_KEYS.COUNTRY)?.value;
+  // Get language preference from cookie, or default to English
+  const language = (cookieStore.get(COOKIE_KEYS.LANGUAGE)?.value as any) || DEFAULT_LANGUAGE;
+  const isOverridden = !!cookieStore.get(COOKIE_KEYS.USER_LANGUAGE_OVERRIDE)?.value;
   
-  // If user has a saved country and it's valid, redirect there
-  if (savedCountry && isValidCountryCode(savedCountry)) {
-    redirect(`/${savedCountry}`);
-  }
-  
-  // Otherwise, redirect to global (no country prefix)
-  // This will use the [country] layout with country="global"
-  redirect("/global");
+  // Load translations for the detected language
+  const translations = await loadAllTranslations(language);
+
+  return (
+    <CountryProvider initialCountry="global">
+      <LanguageProvider
+        initialLanguage={language}
+        translations={translations}
+        isOverridden={isOverridden}
+      >
+        <CountryHomePage />
+      </LanguageProvider>
+    </CountryProvider>
+  );
 }
