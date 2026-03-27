@@ -1,4 +1,4 @@
-import { getCountry, CountryCode } from "./countries";
+import { getCountry } from "@/app/core/countries";
 
 // =======================================
 // 🌐 SEO CONFIG TYPE
