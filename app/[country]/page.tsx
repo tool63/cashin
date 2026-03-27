@@ -41,18 +41,18 @@ export default function CountryHomePage() {
   const pageContent = useMemo(() => {
     // Customize content based on whether it's global or country-specific
     const title = isGlobal
-      ? t("welcome_message_global", "Cashog - Earn Money Online Worldwide")
-      : t("welcome_message", `Cashog ${country.toUpperCase()} - Earn Money in ${country.toUpperCase()}`);
+      ? (t("welcome_message_global", "Cashog - Earn Money Online Worldwide") || "Cashog - Earn Money Online Worldwide")
+      : (t("welcome_message", `Cashog ${country.toUpperCase()} - Earn Money in ${country.toUpperCase()}`) || `Cashog ${country.toUpperCase()} - Earn Money in ${country.toUpperCase()}`);
     
     const description = isGlobal
-      ? t(
+      ? (t(
           "homepage_description_global",
           "Cashog helps you earn real money online safely and quickly from anywhere in the world."
-        )
-      : t(
+        ) || "Cashog helps you earn real money online safely and quickly from anywhere in the world.")
+      : (t(
           "homepage_description",
           `Cashog helps you earn real money online safely and quickly in ${country.toUpperCase()}.`
-        );
+        ) || `Cashog helps you earn real money online safely and quickly in ${country.toUpperCase()}.`);
 
     return {
       title,
@@ -73,17 +73,17 @@ export default function CountryHomePage() {
       ],
       finalCta: {
         title: isGlobal
-          ? t("final_cta_title_global", "Start Earning Worldwide Today")
-          : t("final_cta_title", `Start Earning in ${country.toUpperCase()} Today`),
+          ? (t("final_cta_title_global", "Start Earning Worldwide Today") || "Start Earning Worldwide Today")
+          : (t("final_cta_title", `Start Earning in ${country.toUpperCase()} Today`) || `Start Earning in ${country.toUpperCase()} Today`),
         description: isGlobal
-          ? t(
+          ? (t(
               "final_cta_description_global",
               "Join thousands of users worldwide already earning with Cashog. It only takes a few seconds to begin."
-            )
-          : t(
+            ) || "Join thousands of users worldwide already earning with Cashog. It only takes a few seconds to begin.")
+          : (t(
               "final_cta_description",
               `Join thousands of users in ${country.toUpperCase()} already earning with Cashog. It only takes a few seconds to begin.`
-            ),
+            ) || `Join thousands of users in ${country.toUpperCase()} already earning with Cashog. It only takes a few seconds to begin.`),
       },
     };
   }, [t, country, isGlobal]);
@@ -101,7 +101,7 @@ export default function CountryHomePage() {
   // Signup CTA link - handle global vs country-specific
   const signupLink = useMemo(() => {
     if (isGlobal) {
-      return "/signup";
+      return "/global/signup";
     }
     return `/${country}/signup`;
   }, [country, isGlobal]);
