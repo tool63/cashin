@@ -49,6 +49,17 @@ export async function generateMetadata({
   const country = countryParam as CountryCode;
   const countryData = getCountry(country);
   const countryName = countryData.name;
+  const defaultLang = countryData.defaultLanguage;
+
+  // Fix: Convert to string for comparison or use type assertion
+  const getLocale = () => {
+    const lang = defaultLang as string;
+    if (lang === "bn") return "bn_BD";
+    if (lang === "ur") return "ur_PK";
+    if (lang === "ar") return "ar_SA";
+    if (lang === "hi") return "hi_IN";
+    return `${lang}_${country.toUpperCase()}`;
+  };
 
   // Country-specific metadata with generic keywords
   return {
@@ -98,9 +109,7 @@ export async function generateMetadata({
     },
     openGraph: {
       type: "website",
-      locale: countryData.defaultLanguage === "bn" ? "bn_BD" : 
-              countryData.defaultLanguage === "ur" ? "ur_PK" : 
-              `${countryData.defaultLanguage}_${country.toUpperCase()}`,
+      locale: getLocale(),
       url: `https://cashog.com/${country}`,
       siteName: `Cashog ${countryName}`,
       title: `Earn Money Online in ${countryName} | Cashog`,
