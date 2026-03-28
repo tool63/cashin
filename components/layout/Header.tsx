@@ -46,7 +46,7 @@ export default function Header({ className }: HeaderProps) {
       document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // ✅ SAME GRADIENT (REUSED)
+  // ✅ GRADIENT (NO GLASS)
   const gradientBg = `
     bg-[linear-gradient(to_right,
       rgba(250,204,21,0.2),
@@ -63,7 +63,7 @@ export default function Header({ className }: HeaderProps) {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 w-full z-40 border-b ${borderColor} ${gradientBg} backdrop-blur-md ${className || ""}`}
+      className={`fixed top-0 left-0 w-full z-40 border-b ${borderColor} ${gradientBg} ${className || ""}`}
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between text-black dark:text-white">
 
@@ -104,7 +104,7 @@ export default function Header({ className }: HeaderProps) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 6 }}
                   transition={{ duration: 0.18 }}
-                  className={`absolute top-full left-0 mt-3 w-52 flex flex-col gap-2 p-4 rounded-xl shadow-xl border ${borderColor} ${gradientBg} backdrop-blur-md`}
+                  className={`absolute top-full left-0 mt-3 w-52 flex flex-col gap-2 p-4 rounded-xl shadow-xl border ${borderColor} ${gradientBg}`}
                 >
                   <Link href={`/${country}/surveys`}>{t("surveys", "Surveys")}</Link>
                   <Link href={`/${country}/app-installs`}>{t("app_installs", "App Installs")}</Link>
@@ -156,7 +156,7 @@ export default function Header({ className }: HeaderProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.18 }}
-            className={`md:hidden w-full px-6 pt-4 pb-6 border-t ${borderColor} ${gradientBg} backdrop-blur-md`}
+            className={`md:hidden w-full px-6 pt-4 pb-6 border-t ${borderColor} ${gradientBg}`}
           >
             <div className="flex flex-col gap-4">
 
