@@ -1,14 +1,13 @@
 // app/layout.tsx
-import { ReactNode } from "react";
 import "@/styles/globals.css";
 
 export default function RootLayout({
   children,
 }: {
-  children: ReactNode;
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html suppressHydrationWarning>
       <body>{children}</body>
     </html>
   );
