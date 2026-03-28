@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import { ReactNode } from "react";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
+import { Metadata } from "next";
 
 import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
 import { LanguageProvider } from "./providers/LanguageProvider";
@@ -24,6 +25,105 @@ import {
 
 import type { SupportedLanguage } from "@/app/core/types";
 import { loadAllTranslations } from "@/app/core/i18n/loader";
+
+// ===============================
+// 📝 COUNTRY-SPECIFIC METADATA
+// ===============================
+export async function generateMetadata({
+  params,
+}: {
+  params: { country?: string };
+}): Promise<Metadata> {
+  const countryParam = params?.country?.toLowerCase();
+  
+  // Validate country
+  if (!countryParam || !isValidCountryCode(countryParam)) {
+    return {
+      title: "Country Not Found | Cashog",
+      robots: {
+        index: false,
+      },
+    };
+  }
+
+  const country = countryParam as CountryCode;
+  const countryData = getCountry(country);
+  const countryName = countryData.name;
+
+  // Country-specific metadata with generic keywords
+  return {
+    title: {
+      template: `%s ${countryName}`,
+      default: `Earn Money Online in ${countryName} | Cashog`,
+    },
+    description: `Earn real money online in ${countryName} with Cashog. Complete paid surveys, install apps, play games, and get instant payouts. Join thousands of successful earners in ${countryName} today!`,
+    keywords: [
+      "earn money online",
+      "make money online",
+      "online earning",
+      "paid surveys",
+      "get paid",
+      "cash app",
+      "online jobs",
+      "work from home",
+      "earn cash",
+      "money making apps",
+      "Cashog",
+      "earn money fast",
+      "legitimate online income",
+      "side hustle",
+      "passive income",
+      "online rewards",
+      "get paid to play games",
+      "get paid to take surveys",
+      "instant payout",
+      "real earning app",
+    ].join(", "),
+    authors: [{ name: "Cashog" }],
+    creator: "Cashog",
+    publisher: "Cashog",
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+    alternates: {
+      canonical: `https://cashog.com/${country}`,
+    },
+    openGraph: {
+      type: "website",
+      locale: countryData.defaultLanguage === "bn" ? "bn_BD" : 
+              countryData.defaultLanguage === "ur" ? "ur_PK" : 
+              `${countryData.defaultLanguage}_${country.toUpperCase()}`,
+      url: `https://cashog.com/${country}`,
+      siteName: `Cashog ${countryName}`,
+      title: `Earn Money Online in ${countryName} | Cashog`,
+      description: `Start earning real money online in ${countryName} with Cashog. Complete simple tasks, surveys, and offers to get paid instantly. Trusted by thousands of users in ${countryName}.`,
+      images: [
+        {
+          url: `https://cashog.com/og-image-${country}.jpg`,
+          width: 1200,
+          height: 630,
+          alt: "Earn Money Online - Cashog",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Earn Money Online in ${countryName} | Cashog`,
+      description: `Start earning real money online in ${countryName} with Cashog. Join thousands of successful earners today!`,
+      images: [`https://cashog.com/twitter-image-${country}.jpg`],
+      creator: "@cashog",
+      site: "@cashog",
+    },
+  };
+}
 
 // ===============================
 // 🌍 COUNTRY → LANGUAGE
@@ -105,6 +205,7 @@ export default async function CountryLayout({
   }
 
   const country = countryParam as CountryCode;
+  const countryData = getCountry(country);
 
   // -------------------------------
   // 🌐 LANGUAGE
@@ -122,21 +223,23 @@ export default async function CountryLayout({
   // 🎯 RENDER
   // -------------------------------
   return (
-    <div lang={language} dir={dir} suppressHydrationWarning>
-      <ThemeProviderWrapper>
-        <CountryProvider initialCountry={country}>
-          <LanguageProvider
-            initialLanguage={language}
-            translations={translations}
-            isOverridden={isOverridden}
-          >
-            <Header />
-            <main className="min-h-screen pt-20">{children}</main>
-            <Footer />
-            <FloatingCTA />
-          </LanguageProvider>
-        </CountryProvider>
-      </ThemeProviderWrapper>
-    </div>
+    <html lang={language} dir={dir} suppressHydrationWarning>
+      <body>
+        <ThemeProviderWrapper>
+          <CountryProvider initialCountry={country}>
+            <LanguageProvider
+              initialLanguage={language}
+              translations={translations}
+              isOverridden={isOverridden}
+            >
+              <Header />
+              <main className="min-h-screen pt-20">{children}</main>
+              <Footer />
+              <FloatingCTA />
+            </LanguageProvider>
+          </CountryProvider>
+        </ThemeProviderWrapper>
+      </body>
+    </html>
   );
 }
