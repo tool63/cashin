@@ -7,31 +7,25 @@ interface ThemeProviderWrapperProps {
   children: ReactNode;
 }
 
-export default function ThemeProviderWrapper({ children }: ThemeProviderWrapperProps) {
+export default function ThemeProviderWrapper({
+  children,
+}: ThemeProviderWrapperProps) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => setMounted(true), []);
 
+  // ✅ EXACT SAME GRADIENT AS HEADER / FOOTER
   const gradientClass = `
     min-h-screen
-    bg-[linear-gradient(to_bottom_right,
-      rgba(250,204,21,0.2),
-      rgba(74,222,128,0.3),
-      rgba(34,197,94,0.2)
-    )]
-    dark:bg-[linear-gradient(to_bottom_right,
-      rgba(250,204,21,0.1),
-      rgba(74,222,128,0.15),
-      rgba(34,197,94,0.1)
-    )]
+    bg-gradient-to-br from-yellow-400/20 via-green-400/30 to-green-500/20
+    dark:from-yellow-500/10 dark:via-green-700/20 dark:to-green-800/20
   `;
 
-  // BEFORE mount (prevents flash)
+  // BEFORE mount (prevents theme flash)
   if (!mounted) {
     return <div className={gradientClass} />;
   }
 
-  // AFTER mount (this is what you were missing)
   return (
     <ThemeProvider
       attribute="class"
