@@ -1,27 +1,58 @@
 // app/page.tsx
-import { headers } from "next/headers";
-import { redirect } from "next/navigation";
-import { isValidCountryCode } from "@/app/core/countries";
 
-function getCountryFromHeaders(): string | null {
-  const h = headers();
-
-  // Works on Vercel / Cloudflare
-  const country =
-    h.get("x-vercel-ip-country") ||
-    h.get("cf-ipcountry");
-
-  return country?.toLowerCase() || null;
-}
+import PrimaryCTA from "@/components/cta/PrimaryCTA";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
+import { generateJsonLd } from "@/components/SEO/schema";
 
 export default function RootPage() {
-  const detectedCountry = getCountryFromHeaders();
+  const title = "Cashog - Earn Money Online Worldwide";
+  const description =
+    "Earn real money online from anywhere. Complete surveys, install apps, and play games.";
 
-  // If valid → redirect to country page
-  if (detectedCountry && isValidCountryCode(detectedCountry)) {
-    redirect(`/${detectedCountry}`);
-  }
+  const structuredData = generateJsonLd({
+    path: "/",
+    title,
+    description,
+    type: "low",
+  });
 
-  // Fallback (unknown country)
-  redirect("/bd"); // or your preferred default
+  return (
+    <>
+      <SeoRenderer
+        path="/"
+        title={title}
+        description={description}
+        noindex={false}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData),
+        }}
+      />
+
+      <section className="max-w-6xl mx-auto px-4 py-16 text-center">
+        {/* HERO */}
+        <h1 className="text-4xl md:text-5xl font-bold mb-6">
+          Earn Money Online 🌍
+        </h1>
+
+        <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
+          Start earning from anywhere in the world. Choose your country for the best offers.
+        </p>
+
+        {/* DEFAULT CTA */}
+        <PrimaryCTA
+          href="/bd"
+          translationKey="get_started_now"
+          aria-label="Get started"
+        />
+
+        <p className="text-sm mt-4 text-gray-500">
+          Available worldwide • No credit card required
+        </p>
+      </section>
+    </>
+  );
 }
