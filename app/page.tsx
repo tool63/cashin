@@ -44,10 +44,6 @@ export default function GlobalHomePage() {
           translationKey="get_started_now"
           aria-label="Get started"
         />
-
-        <p className="text-sm mt-4 text-gray-500">
-          Available worldwide • No credit card required
-        </p>
       </section>
     </>
   );
