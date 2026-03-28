@@ -65,7 +65,7 @@ export async function generateMetadata({
   return {
     title: {
       template: `%s ${countryName}`,
-      default: `Earn Money Online in ${countryName} | Cashog`,
+      default: `Earn Money Online in ${countryName}`,
     },
     description: `Earn real money online in ${countryName} with Cashog. Complete paid surveys, install apps, play games, and get instant payouts. Join thousands of successful earners in ${countryName} today!`,
     keywords: [
