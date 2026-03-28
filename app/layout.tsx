@@ -4,7 +4,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: {
     template: "%s | Cashog",
-    default: "Earn Money Online | Cashog",
+    default: "Earn Money Online",
   },
   description: "Earn real money online from anywhere in the world. Complete surveys, install apps, play games, and get paid instantly. Join thousands of satisfied users worldwide.",
   keywords: [
