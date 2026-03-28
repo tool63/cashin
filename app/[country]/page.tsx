@@ -1,4 +1,3 @@
-// app/[country]/page.tsx
 "use client";
 
 import { motion } from "framer-motion";
@@ -36,44 +35,57 @@ export default function CountryHomePage() {
   // Safety check
   if (!country) return null;
 
+  // Get country data
+  const countryNames: Record<string, string> = {
+    us: "United States",
+    uk: "United Kingdom",
+    bd: "Bangladesh",
+    pk: "Pakistan",
+    au: "Australia",
+    ca: "Canada",
+    in: "India",
+  };
+  
+  const countryName = countryNames[country] || country.toUpperCase();
+
   // Simple translation helper
   const t = (key: string, fallback: string) =>
     getTranslation("homepage", key, fallback);
 
-  // Page content
+  // Page content with country name embedded
   const title =
     t(
       "welcome_message",
-      `Cashog ${country.toUpperCase()} - Earn Money in ${country.toUpperCase()}`
-    ) || `Cashog ${country.toUpperCase()} - Earn Money in ${country.toUpperCase()}`;
+      `Cashog ${countryName} - Earn Money in ${countryName}`
+    ) || `Cashog ${countryName} - Earn Money in ${countryName}`;
 
   const description =
     t(
       "homepage_description",
-      `Cashog helps you earn real money online safely and quickly in ${country.toUpperCase()}.`
+      `Cashog helps you earn real money online safely and quickly in ${countryName}. Join thousands of successful earners in ${countryName} and start making money today!`
     ) ||
-    `Cashog helps you earn real money online safely and quickly in ${country.toUpperCase()}.`;
+    `Cashog helps you earn real money online safely and quickly in ${countryName}. Join thousands of successful earners in ${countryName} and start making money today!`;
 
   const features = [
     {
-      title: t("feature_surveys", "Complete Surveys"),
+      title: t("feature_surveys", `Complete Surveys in ${countryName}`),
       description: t(
         "feature_surveys_desc",
-        "Answer surveys and earn points instantly."
+        `Answer surveys tailored for ${countryName} users and earn points instantly.`
       ),
     },
     {
-      title: t("feature_apps", "Install Apps"),
+      title: t("feature_apps", `Install Apps Popular in ${countryName}`),
       description: t(
         "feature_apps_desc",
-        "Download apps and get paid quickly."
+        `Download and try apps popular in ${countryName} and get paid quickly.`
       ),
     },
     {
-      title: t("feature_games", "Play Games"),
+      title: t("feature_games", `Play Games Loved in ${countryName}`),
       description: t(
         "feature_games_desc",
-        "Play fun games and earn rewards."
+        `Play fun games that are trending in ${countryName} and earn rewards.`
       ),
     },
   ];
@@ -82,17 +94,17 @@ export default function CountryHomePage() {
     title:
       t(
         "final_cta_title",
-        `Start Earning in ${country.toUpperCase()} Today`
-      ) || `Start Earning in ${country.toUpperCase()} Today`,
+        `Start Earning in ${countryName} Today`
+      ) || `Start Earning in ${countryName} Today`,
     description:
       t(
         "final_cta_description",
-        `Join thousands of users in ${country.toUpperCase()} already earning with Cashog. It only takes a few seconds to begin.`
+        `Join thousands of users in ${countryName} already earning with Cashog. It only takes a few seconds to begin your earning journey in ${countryName}.`
       ) ||
-      `Join thousands of users in ${country.toUpperCase()} already earning with Cashog. It only takes a few seconds to begin.`,
+      `Join thousands of users in ${countryName} already earning with Cashog. It only takes a few seconds to begin your earning journey in ${countryName}.`,
   };
 
-  // Structured Data
+  // Structured Data with country name
   const structuredData = generateJsonLd({
     path: `/${country}`,
     title,
@@ -140,7 +152,7 @@ export default function CountryHomePage() {
           />
 
           <p className="text-sm mt-4 text-gray-500">
-            No credit card required • Start instantly
+            ✓ Trusted by {countryName} users • No credit card required • Start instantly
           </p>
         </div>
 
@@ -178,7 +190,7 @@ export default function CountryHomePage() {
           />
 
           <p className="text-sm mt-4 opacity-80">
-            Fast signup • Instant access • No hidden fees
+            Fast signup • Instant access • No hidden fees • Available in {countryName}
           </p>
         </motion.div>
       </section>
