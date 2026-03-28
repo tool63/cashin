@@ -94,12 +94,11 @@ body {
 }
 
 /* =====================================================
-HEADER (FIXED)
+HEADER (NO GLASS, NO BLUR)
 ===================================================== */
 
 header {
-  /* ❌ removed solid background */
-  background-color: transparent;
+  background-color: var(--bg-primary);
 
   border-bottom: 1px solid var(--border-color);
   position: fixed;
@@ -107,9 +106,6 @@ header {
   left: 0;
   width: 100%;
   z-index: 40;
-
-  /* ✅ optional premium blur */
-  backdrop-filter: blur(10px);
 }
 
 .header-container {
