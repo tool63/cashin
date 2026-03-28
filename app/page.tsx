@@ -1,12 +1,9 @@
-// app/page.tsx
-
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import SeoRenderer from "@/components/SEO/SeoRenderer";
 import { generateJsonLd } from "@/components/SEO/schema";
 
-export default function RootPage() {
+export default function GlobalHomePage() {
   const title = "Cashog - Earn Money Online Worldwide";
-
   const description =
     "Earn real money online from anywhere. Complete surveys, install apps, and play games.";
 
@@ -19,7 +16,6 @@ export default function RootPage() {
 
   return (
     <>
-      {/* SEO */}
       <SeoRenderer
         path="/"
         title={title}
@@ -27,7 +23,6 @@ export default function RootPage() {
         noindex={false}
       />
 
-      {/* JSON-LD */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -35,7 +30,6 @@ export default function RootPage() {
         }}
       />
 
-      {/* HERO */}
       <section className="max-w-6xl mx-auto px-4 py-16 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-6">
           Earn Money Online 🌍
@@ -45,7 +39,6 @@ export default function RootPage() {
           Start earning from anywhere in the world. Choose your country for the best offers.
         </p>
 
-        {/* CTA */}
         <PrimaryCTA
           href="/bd"
           translationKey="get_started_now"
