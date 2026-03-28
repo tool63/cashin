@@ -12,25 +12,26 @@ export default function ThemeProviderWrapper({ children }: ThemeProviderWrapperP
 
   useEffect(() => setMounted(true), []);
 
-  if (!mounted)
-    return (
-      <div
-        className={`
-          min-h-screen
-          bg-[linear-gradient(to_bottom_right,
-            rgba(250,204,21,0.2),
-            rgba(74,222,128,0.3),
-            rgba(34,197,94,0.2)
-          )]
-          dark:bg-[linear-gradient(to_bottom_right,
-            rgba(250,204,21,0.1),
-            rgba(74,222,128,0.15),
-            rgba(34,197,94,0.1)
-          )]
-        `}
-      />
-    );
+  const gradientClass = `
+    min-h-screen
+    bg-[linear-gradient(to_bottom_right,
+      rgba(250,204,21,0.2),
+      rgba(74,222,128,0.3),
+      rgba(34,197,94,0.2)
+    )]
+    dark:bg-[linear-gradient(to_bottom_right,
+      rgba(250,204,21,0.1),
+      rgba(74,222,128,0.15),
+      rgba(34,197,94,0.1)
+    )]
+  `;
 
+  // BEFORE mount (prevents flash)
+  if (!mounted) {
+    return <div className={gradientClass} />;
+  }
+
+  // AFTER mount (this is what you were missing)
   return (
     <ThemeProvider
       attribute="class"
@@ -38,7 +39,9 @@ export default function ThemeProviderWrapper({ children }: ThemeProviderWrapperP
       enableSystem
       disableTransitionOnChange
     >
-      {children}
+      <div className={gradientClass}>
+        {children}
+      </div>
     </ThemeProvider>
   );
 }
