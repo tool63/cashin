@@ -28,7 +28,6 @@ export default function Header({ className }: HeaderProps) {
   };
 
   const headerRef = useRef<HTMLDivElement>(null);
-
   const borderColor = "border-gray-300 dark:border-gray-700";
 
   useEffect(() => {
@@ -47,10 +46,24 @@ export default function Header({ className }: HeaderProps) {
       document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // ✅ GRADIENT (NO GLASS)
+  const gradientBg = `
+    bg-[linear-gradient(to_right,
+      rgba(250,204,21,0.2),
+      rgba(74,222,128,0.25),
+      rgba(34,197,94,0.2)
+    )]
+    dark:bg-[linear-gradient(to_right,
+      rgba(250,204,21,0.1),
+      rgba(74,222,128,0.15),
+      rgba(34,197,94,0.1)
+    )]
+  `;
+
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 w-full z-40 border-b ${borderColor} bg-transparent ${className || ""}`}
+      className={`fixed top-0 left-0 w-full z-40 border-b ${borderColor} ${gradientBg} ${className || ""}`}
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between text-black dark:text-white">
 
@@ -91,7 +104,7 @@ export default function Header({ className }: HeaderProps) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 6 }}
                   transition={{ duration: 0.18 }}
-                  className={`absolute top-full left-0 mt-3 w-52 flex flex-col gap-2 p-4 rounded-xl shadow-xl border bg-white dark:bg-gray-900 ${borderColor}`}
+                  className={`absolute top-full left-0 mt-3 w-52 flex flex-col gap-2 p-4 rounded-xl shadow-xl border ${borderColor} ${gradientBg}`}
                 >
                   <Link href={`/${country}/surveys`}>{t("surveys", "Surveys")}</Link>
                   <Link href={`/${country}/app-installs`}>{t("app_installs", "App Installs")}</Link>
@@ -143,7 +156,7 @@ export default function Header({ className }: HeaderProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.18 }}
-            className={`md:hidden w-full px-6 pt-4 pb-6 border-t ${borderColor} bg-white dark:bg-gray-900`}
+            className={`md:hidden w-full px-6 pt-4 pb-6 border-t ${borderColor} ${gradientBg}`}
           >
             <div className="flex flex-col gap-4">
 
