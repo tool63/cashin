@@ -20,13 +20,9 @@ export default function Header({ className }: HeaderProps) {
   const [earnOpen, setEarnOpen] = useState(false);
   const [mobileEarnOpen, setMobileEarnOpen] = useState(false);
 
-  // ===============================
-  // 🌍 CONTEXTS
-  // ===============================
   const { country } = useCountry();
   const { getTranslation } = useLanguage();
 
-  // Translation helper for header namespace
   const t = (key: string, fallback: string): string => {
     return getTranslation("header", key, fallback);
   };
@@ -34,9 +30,6 @@ export default function Header({ className }: HeaderProps) {
   const headerRef = useRef<HTMLDivElement>(null);
   const borderColor = "border-gray-300 dark:border-gray-700";
 
-  // ===============================
-  // ❌ CLOSE ON OUTSIDE CLICK
-  // ===============================
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (!headerRef.current) return;
@@ -53,16 +46,28 @@ export default function Header({ className }: HeaderProps) {
       document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // ✅ SAME GRADIENT (REUSED)
+  const gradientBg = `
+    bg-[linear-gradient(to_right,
+      rgba(250,204,21,0.2),
+      rgba(74,222,128,0.25),
+      rgba(34,197,94,0.2)
+    )]
+    dark:bg-[linear-gradient(to_right,
+      rgba(250,204,21,0.1),
+      rgba(74,222,128,0.15),
+      rgba(34,197,94,0.1)
+    )]
+  `;
+
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 w-full z-40 border-b ${borderColor} bg-bg-primary ${className || ""}`}
+      className={`fixed top-0 left-0 w-full z-40 border-b ${borderColor} ${gradientBg} backdrop-blur-md ${className || ""}`}
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between text-black dark:text-white">
 
-        {/* =========================
-            LOGO
-        ========================= */}
+        {/* LOGO */}
         <Link
           href={`/${country}`}
           className="bg-gradient-to-r from-yellow-400 to-green-500 text-2xl font-bold px-3 py-1 rounded-lg text-black"
@@ -71,18 +76,14 @@ export default function Header({ className }: HeaderProps) {
           Cashog
         </Link>
 
-        {/* =========================
-            DESKTOP NAV
-        ========================= */}
+        {/* DESKTOP NAV */}
         <nav className="hidden md:flex items-center gap-7 text-sm font-medium">
 
           <Link href={`/${country}/how-it-works`} className="hover:opacity-80">
             {t("how_it_works", "How it works")}
           </Link>
 
-          {/* =========================
-              EARN DROPDOWN
-          ========================= */}
+          {/* EARN DROPDOWN */}
           <div
             className="relative"
             onMouseEnter={() => setEarnOpen(true)}
@@ -103,46 +104,26 @@ export default function Header({ className }: HeaderProps) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 6 }}
                   transition={{ duration: 0.18 }}
-                  className={`absolute top-full left-0 mt-3 w-52 flex flex-col gap-2 p-4 rounded-xl shadow-xl border ${borderColor} bg-white dark:bg-gray-900`}
+                  className={`absolute top-full left-0 mt-3 w-52 flex flex-col gap-2 p-4 rounded-xl shadow-xl border ${borderColor} ${gradientBg} backdrop-blur-md`}
                 >
-                  <Link href={`/${country}/surveys`}>
-                    {t("surveys", "Surveys")}
-                  </Link>
-                  <Link href={`/${country}/app-installs`}>
-                    {t("app_installs", "App Installs")}
-                  </Link>
-                  <Link href={`/${country}/play-games`}>
-                    {t("play_games", "Play Games")}
-                  </Link>
-                  <Link href={`/${country}/watch-videos`}>
-                    {t("watch_videos", "Watch Videos")}
-                  </Link>
-                  <Link href={`/${country}/offerwall`}>
-                    {t("offerwall", "Offerwall")}
-                  </Link>
+                  <Link href={`/${country}/surveys`}>{t("surveys", "Surveys")}</Link>
+                  <Link href={`/${country}/app-installs`}>{t("app_installs", "App Installs")}</Link>
+                  <Link href={`/${country}/play-games`}>{t("play_games", "Play Games")}</Link>
+                  <Link href={`/${country}/watch-videos`}>{t("watch_videos", "Watch Videos")}</Link>
+                  <Link href={`/${country}/offerwall`}>{t("offerwall", "Offerwall")}</Link>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
 
-          <Link href={`/${country}/cashout`}>
-            {t("cashout", "Cashout")}
-          </Link>
-          <Link href={`/${country}/blog`}>
-            {t("blog", "Blog")}
-          </Link>
-          <Link href={`/${country}/help`}>
-            {t("help", "Help")}
-          </Link>
+          <Link href={`/${country}/cashout`}>{t("cashout", "Cashout")}</Link>
+          <Link href={`/${country}/blog`}>{t("blog", "Blog")}</Link>
+          <Link href={`/${country}/help`}>{t("help", "Help")}</Link>
         </nav>
 
-        {/* =========================
-            DESKTOP ACTIONS
-        ========================= */}
+        {/* DESKTOP ACTIONS */}
         <div className="hidden md:flex items-center gap-4">
-
           <LanguageSwitcher />
-
           <DarkLightToggle />
 
           <Link href={`/${country}/login`}>
@@ -158,9 +139,7 @@ export default function Header({ className }: HeaderProps) {
           </Link>
         </div>
 
-        {/* =========================
-            MOBILE BUTTON
-        ========================= */}
+        {/* MOBILE BUTTON */}
         <button
           className="md:hidden"
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -169,9 +148,7 @@ export default function Header({ className }: HeaderProps) {
         </button>
       </div>
 
-      {/* =========================
-          MOBILE MENU
-      ========================= */}
+      {/* MOBILE MENU */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -179,14 +156,11 @@ export default function Header({ className }: HeaderProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.18 }}
-            className={`md:hidden w-full px-6 pt-4 pb-6 border-t ${borderColor} bg-white dark:bg-gray-900`}
+            className={`md:hidden w-full px-6 pt-4 pb-6 border-t ${borderColor} ${gradientBg} backdrop-blur-md`}
           >
             <div className="flex flex-col gap-4">
 
-              <Link
-                href={`/${country}/how-it-works`}
-                onClick={() => setMobileOpen(false)}
-              >
+              <Link href={`/${country}/how-it-works`} onClick={() => setMobileOpen(false)}>
                 {t("how_it_works", "How it works")}
               </Link>
 
@@ -205,33 +179,17 @@ export default function Header({ className }: HeaderProps) {
 
               {mobileEarnOpen && (
                 <div className="flex flex-col gap-3 pl-4 text-sm">
-                  <Link href={`/${country}/surveys`} onClick={() => setMobileOpen(false)}>
-                    {t("surveys", "Surveys")}
-                  </Link>
-                  <Link href={`/${country}/app-installs`} onClick={() => setMobileOpen(false)}>
-                    {t("app_installs", "App Installs")}
-                  </Link>
-                  <Link href={`/${country}/play-games`} onClick={() => setMobileOpen(false)}>
-                    {t("play_games", "Play Games")}
-                  </Link>
-                  <Link href={`/${country}/watch-videos`} onClick={() => setMobileOpen(false)}>
-                    {t("watch_videos", "Watch Videos")}
-                  </Link>
-                  <Link href={`/${country}/offerwall`} onClick={() => setMobileOpen(false)}>
-                    {t("offerwall", "Offerwall")}
-                  </Link>
+                  <Link href={`/${country}/surveys`} onClick={() => setMobileOpen(false)}>Surveys</Link>
+                  <Link href={`/${country}/app-installs`} onClick={() => setMobileOpen(false)}>App Installs</Link>
+                  <Link href={`/${country}/play-games`} onClick={() => setMobileOpen(false)}>Play Games</Link>
+                  <Link href={`/${country}/watch-videos`} onClick={() => setMobileOpen(false)}>Watch Videos</Link>
+                  <Link href={`/${country}/offerwall`} onClick={() => setMobileOpen(false)}>Offerwall</Link>
                 </div>
               )}
 
-              <Link href={`/${country}/cashout`} onClick={() => setMobileOpen(false)}>
-                {t("cashout", "Cashout")}
-              </Link>
-              <Link href={`/${country}/blog`} onClick={() => setMobileOpen(false)}>
-                {t("blog", "Blog")}
-              </Link>
-              <Link href={`/${country}/help`} onClick={() => setMobileOpen(false)}>
-                {t("help", "Help")}
-              </Link>
+              <Link href={`/${country}/cashout`} onClick={() => setMobileOpen(false)}>Cashout</Link>
+              <Link href={`/${country}/blog`} onClick={() => setMobileOpen(false)}>Blog</Link>
+              <Link href={`/${country}/help`} onClick={() => setMobileOpen(false)}>Help</Link>
 
               <div className="flex items-center justify-between pt-4">
                 <LanguageSwitcher />
