@@ -14,8 +14,22 @@ export default function ThemeProviderWrapper({ children }: ThemeProviderWrapperP
 
   if (!mounted)
     return (
-      <div className="bg-primary dark:bg-gray-950 min-h-screen" />
-    ); 
+      <div
+        className={`
+          min-h-screen
+          bg-[linear-gradient(to_bottom_right,
+            rgba(250,204,21,0.2),
+            rgba(74,222,128,0.3),
+            rgba(34,197,94,0.2)
+          )]
+          dark:bg-[linear-gradient(to_bottom_right,
+            rgba(250,204,21,0.1),
+            rgba(74,222,128,0.15),
+            rgba(34,197,94,0.1)
+          )]
+        `}
+      />
+    );
 
   return (
     <ThemeProvider
