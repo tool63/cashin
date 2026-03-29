@@ -1,37 +1,39 @@
 "use client";
 
-import { ReactNode } from "react";
-import OpeningStyle from "./openingstyle";
-
-interface CircleBorderProps {
-  children: ReactNode;
-  className?: string;
-  delay?: number;
-  noAnimation?: boolean;
-  asSection?: boolean;
-}
+import { motion } from "framer-motion";
 
 export default function CircleBorder({
   children,
-  className = "",
-  delay = 0,
-  noAnimation = false,
-  asSection = true,
-}: CircleBorderProps) {
-  const baseClasses = `
-    max-w-7xl mx-auto px-6 py-20
-    bg-primary dark:bg-secondary
-    relative overflow-hidden
-    ${className}
-  `.trim();
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="relative w-full rounded-2xl p-[2px] overflow-hidden">
 
-  const content = asSection ? (
-    <section className={baseClasses}>{children}</section>
-  ) : (
-    <div className={baseClasses}>{children}</div>
+      {/* 🔥 Animated Gradient Border */}
+      <motion.div
+        className="absolute inset-0 rounded-2xl"
+        style={{
+          background:
+            "conic-gradient(from 180deg at 50% 50%, #facc15, #22c55e, #10b981, #facc15)",
+        }}
+        animate={{
+          rotate: 360,
+        }}
+        transition={{
+          repeat: Infinity,
+          ease: "linear",
+          duration: 6,
+        }}
+      />
+
+      {/* Glow Effect */}
+      <div className="absolute inset-0 rounded-2xl blur-md opacity-40 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500" />
+
+      {/* Content */}
+      <div className="relative z-10 w-full h-full bg-white dark:bg-black rounded-2xl p-6 md:p-10">
+        {children}
+      </div>
+    </div>
   );
-
-  if (noAnimation) return content;
-
-  return <OpeningStyle delay={delay}>{content}</OpeningStyle>;
 }
