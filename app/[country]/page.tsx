@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useMemo } from "react";
 import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
 import { useCountry } from "@/app/[country]/providers/CountryProvider";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
@@ -8,7 +9,7 @@ import SeoRenderer from "@/components/SEO/SeoRenderer";
 import { generateJsonLd } from "@/components/SEO/schema";
 
 // ===============================
-// Feature Card Component
+// Feature Card
 // ===============================
 function FeatureCard({
   title,
@@ -26,85 +27,112 @@ function FeatureCard({
 }
 
 // ===============================
-// Country Homepage
+// FAQ Item
+// ===============================
+function FAQItem({ q, a }: { q: string; a: string }) {
+  return (
+    <div className="mb-4">
+      <h4 className="font-semibold">{q}</h4>
+      <p className="text-gray-600 dark:text-gray-300">{a}</p>
+    </div>
+  );
+}
+
+// ===============================
+// Helper: Format Country Name
+// ===============================
+function formatCountryName(code: string) {
+  try {
+    const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
+    return regionNames.of(code.toUpperCase()) || code.toUpperCase();
+  } catch {
+    return code.toUpperCase();
+  }
+}
+
+// ===============================
+// Main Page
 // ===============================
 export default function CountryHomePage() {
   const { getTranslation } = useLanguage();
   const { country } = useCountry();
 
-  // Safety check
   if (!country) return null;
 
-  // Get country data
-  const countryNames: Record<string, string> = {
-    us: "United States",
-    uk: "United Kingdom",
-    bd: "Bangladesh",
-    pk: "Pakistan",
-    au: "Australia",
-    ca: "Canada",
-    in: "India",
-  };
-  
-  const countryName = countryNames[country] || country.toUpperCase();
+  const countryName = formatCountryName(country);
+  const currentYear = new Date().getFullYear();
 
-  // Simple translation helper
   const t = (key: string, fallback: string) =>
     getTranslation("homepage", key, fallback);
 
-  // Page content with country name embedded
+  // ===============================
+  // SEO Content (AUTO YEAR)
+  // ===============================
   const title =
     t(
       "welcome_message",
-      `Cashog ${countryName} - Earn Money in ${countryName}`
-    ) || `Cashog ${countryName} - Earn Money in ${countryName}`;
+      `Earn Money Online in ${countryName} (${currentYear}) - Cashog`
+    ) ||
+    `Earn Money Online in ${countryName} (${currentYear}) - Cashog`;
 
   const description =
     t(
       "homepage_description",
-      `Cashog helps you earn real money online safely and quickly in ${countryName}. Join thousands of successful earners in ${countryName} and start making money today!`
+      `Cashog helps you earn real money online safely and quickly in ${countryName}. Start earning today with surveys, apps, and games.`
     ) ||
-    `Cashog helps you earn real money online safely and quickly in ${countryName}. Join thousands of successful earners in ${countryName} and start making money today!`;
+    `Cashog helps you earn real money online safely and quickly in ${countryName}.`;
 
-  const features = [
+  // ===============================
+  // Features
+  // ===============================
+  const features = useMemo(
+    () => [
+      {
+        title: `Complete Surveys in ${countryName}`,
+        description: `Answer surveys tailored for users in ${countryName} and earn instantly.`,
+      },
+      {
+        title: `Install Apps & Earn`,
+        description: `Try trending apps in ${countryName} and get rewarded.`,
+      },
+      {
+        title: `Play Games & Get Paid`,
+        description: `Play popular games and earn real cash rewards.`,
+      },
+      {
+        title: `Instant Rewards`,
+        description: `Earn points and convert them into real money easily.`,
+      },
+      {
+        title: `Secure & Trusted`,
+        description: `Verified platform with real payouts and secure tracking.`,
+      },
+      {
+        title: `Daily New Offers`,
+        description: `New high-paying earning opportunities added every day.`,
+      },
+    ],
+    [countryName]
+  );
+
+  // ===============================
+  // FAQs
+  // ===============================
+  const faqs = [
     {
-      title: t("feature_surveys", `Complete Surveys in ${countryName}`),
-      description: t(
-        "feature_surveys_desc",
-        `Answer surveys tailored for ${countryName} users and earn points instantly.`
-      ),
+      q: `Is Cashog legit in ${countryName}?`,
+      a: `Yes, thousands of users in ${countryName} are earning daily.`,
     },
     {
-      title: t("feature_apps", `Install Apps Popular in ${countryName}`),
-      description: t(
-        "feature_apps_desc",
-        `Download and try apps popular in ${countryName} and get paid quickly.`
-      ),
+      q: `How do I start earning?`,
+      a: `Sign up, complete offers, and start earning instantly.`,
     },
     {
-      title: t("feature_games", `Play Games Loved in ${countryName}`),
-      description: t(
-        "feature_games_desc",
-        `Play fun games that are trending in ${countryName} and earn rewards.`
-      ),
+      q: `How fast can I earn money?`,
+      a: `You can start earning within minutes after joining.`,
     },
   ];
 
-  const finalCta = {
-    title:
-      t(
-        "final_cta_title",
-        `Start Earning in ${countryName} Today`
-      ) || `Start Earning in ${countryName} Today`,
-    description:
-      t(
-        "final_cta_description",
-        `Join thousands of users in ${countryName} already earning with Cashog. It only takes a few seconds to begin your earning journey in ${countryName}.`
-      ) ||
-      `Join thousands of users in ${countryName} already earning with Cashog. It only takes a few seconds to begin your earning journey in ${countryName}.`,
-  };
-
-  // Structured Data with country name
   const structuredData = generateJsonLd({
     path: `/${country}`,
     title,
@@ -112,9 +140,11 @@ export default function CountryHomePage() {
     type: "low",
   });
 
-  // Signup link
   const signupLink = `/${country}/signup`;
 
+  // ===============================
+  // UI
+  // ===============================
   return (
     <>
       {/* SEO */}
@@ -123,7 +153,6 @@ export default function CountryHomePage() {
         title={title}
         description={description}
         country={country}
-        noindex={false}
       />
 
       {/* JSON-LD */}
@@ -141,58 +170,60 @@ export default function CountryHomePage() {
             {title}
           </h1>
 
-          <p className="text-xl text-gray-700 dark:text-gray-300 mb-10 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-700 dark:text-gray-300 mb-6 max-w-3xl mx-auto">
             {description}
           </p>
 
-          <PrimaryCTA
-            href={signupLink}
-            translationKey="get_started_now"
-            aria-label="Get started now"
-          />
+          <PrimaryCTA href={signupLink} />
 
           <p className="text-sm mt-4 text-gray-500">
-            ✓ Trusted by {countryName} users • No credit card required • Start instantly
+            ✓ Trusted by thousands of users in {countryName} • No credit card required
+          </p>
+
+          <p className="text-sm text-gray-500 mt-2">
+            🔒 Secure platform • Verified offers • Real payouts
           </p>
         </div>
 
         {/* FEATURES */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, idx) => (
-            <FeatureCard
-              key={idx}
-              title={feature.title}
-              description={feature.description}
-            />
+            <FeatureCard key={idx} {...feature} />
           ))}
         </div>
 
-        {/* FINAL CTA */}
+        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="mt-24 text-center bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-2xl p-10 md:p-16 text-white shadow-2xl shadow-blue-500/30"
+          className="mt-24 text-center bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-2xl p-10 text-white"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            {finalCta.title}
+          <h2 className="text-3xl font-bold mb-4">
+            Start Earning in {countryName} Today 🚀
           </h2>
 
-          <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto opacity-90">
-            {finalCta.description}
+          <p className="mb-6">
+            Join thousands of users already earning online.
           </p>
 
-          <PrimaryCTA
-            href={signupLink}
-            translationKey="get_started_now"
-            aria-label="Get started now"
-          />
+          <PrimaryCTA href={signupLink} />
 
           <p className="text-sm mt-4 opacity-80">
-            Fast signup • Instant access • No hidden fees • Available in {countryName}
+            🔥 Limited high-paying offers available in {countryName}
           </p>
         </motion.div>
+
+        {/* FAQ */}
+        <div className="mt-20 max-w-3xl mx-auto">
+          <h2 className="text-2xl font-bold mb-6 text-center">
+            Frequently Asked Questions
+          </h2>
+
+          {faqs.map((faq, i) => (
+            <FAQItem key={i} {...faq} />
+          ))}
+        </div>
       </section>
     </>
   );
