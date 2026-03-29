@@ -18,22 +18,14 @@ const LANGUAGE_OPTIONS: SupportedLanguage[] = [
   "pt",
 ];
 
-// Language display names
-const LANGUAGE_NAMES: Record<SupportedLanguage, string> = {
-  en: "English",
-  fr: "Français",
-  de: "Deutsch",
-  es: "Español",
-  pt: "Português",
-  // Add more languages as needed
-};
+// Short display (EN, FR, etc.)
+const getShortLabel = (code: SupportedLanguage) => code.toUpperCase();
 
 // ===============================
 // 🌐 COMPONENT
 // ===============================
 export default function LanguageSwitcher() {
   const router = useRouter();
-
   const { language, setLanguage } = useLanguage();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -68,14 +60,8 @@ export default function LanguageSwitcher() {
     setIsLoading(true);
 
     try {
-      // ✅ Update language in context and cookie
-      // Pass 'true' for `isUserOverride` to indicate user manually changed language
       setLanguage(lang, true);
-
-      // ✅ Refresh to sync server and reload translations
-      // The LanguageProvider will automatically load new translations
       router.refresh();
-
     } catch (err) {
       console.error("Language switch failed:", err);
     } finally {
@@ -98,7 +84,7 @@ export default function LanguageSwitcher() {
         dark:bg-gray-900 dark:text-white dark:border-gray-700 dark:hover:bg-gray-800
         disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        <span>{LANGUAGE_NAMES[language] || language.toUpperCase()}</span>
+        <span>{getShortLabel(language)}</span>
         <span className="text-xs ml-2">{isLoading ? "..." : "▼"}</span>
       </button>
 
@@ -125,7 +111,7 @@ export default function LanguageSwitcher() {
                 }
                 ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
               >
-                <span>{LANGUAGE_NAMES[code] || code.toUpperCase()}</span>
+                <span>{getShortLabel(code)}</span>
 
                 {isActive && <span className="text-xs">✓</span>}
               </button>
