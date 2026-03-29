@@ -17,7 +17,7 @@ import RevealWithBorder from "@/components/animations/CircleBorder";
 
 /* SEO */
 import SeoRenderer from "@/components/SEO/SeoRenderer";
-import { generateJsonLd } from "@/components/SEO/jsonLd";
+import { generateJsonLd } from "@/components/SEO/schema";
 
 /* FAQ */
 import FAQ from "@/components/faq/FAQ";
@@ -29,7 +29,7 @@ import {
   type CountryCode,
 } from "@/app/core/countries";
 
-/* Live Components - client-only */
+/* Live Components */
 const LiveJoining = dynamic(() => import("@/components/homepage/LiveJoining"), { ssr: false });
 const LiveEarnings = dynamic(() => import("@/components/homepage/LiveEarnings"), { ssr: false });
 const LiveOfferCompletion = dynamic(() => import("@/components/homepage/LiveOfferCompletion"), { ssr: false });
@@ -70,10 +70,10 @@ export default async function HomePage({
   const currentYear = new Date().getFullYear();
 
   // -------------------------------
-  // 🔥 SEO (FROM YOUR OLD LOGIC)
+  // 🔥 SEO (FROM YOUR CLIENT LOGIC)
   // -------------------------------
   const title = `Earn Money Online in ${countryName} (${currentYear})`;
-  const description = `Earn real money online in ${countryName}. Complete surveys, play games, and get paid instantly.`;
+  const description = `Earn real money online in ${countryName}.`;
 
   const structuredData = generateJsonLd({
     path: `/${country}`,
