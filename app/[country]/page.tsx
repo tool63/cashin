@@ -1,165 +1,125 @@
+"use client";
 
-import dynamic from "next/dynamic";
-import { buildSEO } from "@/components/SEO/seoEngine";
-import { SEO_CONFIG } from "@/components/SEO/seoConfig";
+import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
+import { useCountry } from "@/app/[country]/providers/CountryProvider";
+
+import PrimaryCTA from "@/components/cta/PrimaryCTA";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
+import { generateJsonLd } from "@/components/SEO/schema";
+
+import OpeningStyle from "@/components/animations/openingstyle";
+import CircleBorder from "@/components/animations/CircleBorder";
+
+import FeaturesSection from "@/components/homepage/FeaturesSection";
 import FAQ from "@/components/faq/FAQ";
 
-/* Homepage Sections */
-import HeroSection from "@/components/homepage/HeroSection";
-import FeaturesSection from "@/components/homepage/FeaturesSection";
-import TasksSection from "@/components/homepage/TasksSection";
-import HighPayingOffers from "@/components/homepage/HighPayingOffers";
-import TrustSection from "@/components/homepage/TrustSection";
-import PaymentSection from "@/components/homepage/PaymentSection";
-import FinalCTASection from "@/components/homepage/FinalCTASection";
-import StatsSection from "@/components/homepage/StatsSection";
-import TestimonialSection from "@/components/homepage/TestimonialSection";
+// ===============================
+function formatCountryName(code: string) {
+  try {
+    const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
+    return regionNames.of(code.toUpperCase()) || code.toUpperCase();
+  } catch {
+    return code.toUpperCase();
+  }
+}
 
-/* Animation Components */
-import OpeningStyle from "@/components/animations/openingstyle";
-import RevealWithBorder from "@/components/animations/CircleBorder";
+// ===============================
+export default function CountryHomePage() {
+  const { getTranslation } = useLanguage();
+  const { country } = useCountry();
 
-/* Live Components - client-only */
-const LiveJoining = dynamic(() => import("@/components/homepage/LiveJoining"), { ssr: false });
-const LiveEarnings = dynamic(() => import("@/components/homepage/LiveEarnings"), { ssr: false });
-const LiveOfferCompletion = dynamic(() => import("@/components/homepage/LiveOfferCompletion"), { ssr: false });
-const LiveWithdrawals = dynamic(() => import("@/components/homepage/LiveWithdrawals"), { ssr: false });
+  if (!country) return null;
 
-export default async function HomePage({
-  params,
-}: {
-  params: { lang: string };
-}) {
-  const lang = params?.lang ?? SEO_CONFIG.defaultLocale;
+  const countryName = formatCountryName(country);
+  const currentYear = new Date().getFullYear();
 
-  // Build SEO for layout (pass to layout if desired)
-  const seo = await buildSEO({
-    route: "/",
-    locale: lang,
-    title: "Earn Money Online",
-    description:
-      "Cashog is a premium rewards platform where users earn money online by completing surveys, playing games, testing apps, and finishing offers. Join millions of users earning real cash and gift cards daily.",
-    keywords: [
-      "earn money online",
-      "make money completing tasks",
-      "paid surveys online",
-      "earn money playing games",
-      "get paid for offers",
-      "cash rewards platform",
-      "make money online free",
-      "best GPT sites",
-      "earn paypal cash online",
-      "earn gift cards online",
-      "cashog rewards",
-    ],
+  const t = (key: string, fallback: string) =>
+    getTranslation("homepage", key, fallback);
+
+  const title =
+    t(
+      "welcome_message",
+      `Earn Money Online in ${countryName} (${currentYear})`
+    ) || `Earn Money Online in ${countryName}`;
+
+  const description =
+    t(
+      "homepage_description",
+      `Earn real money online in ${countryName}.`
+    ) || `Earn Money Online`;
+
+  const faqs = [
+    {
+      q: `Is it legit in ${countryName}?`,
+      a: `Yes, users are earning daily.`,
+    },
+    {
+      q: `How to start?`,
+      a: `Sign up and complete offers.`,
+    },
+  ];
+
+  const structuredData = generateJsonLd({
+    path: `/${country}`,
+    title,
+    description,
+    type: "low",
   });
 
-  const handleOpenAuth = (type: "login" | "signup" | "reset") => {
-    console.log("Open auth modal:", type);
-  };
+  const signupLink = `/${country}/signup`;
 
+  // ===============================
   return (
-    <main className="relative min-h-screen bg-transparent text-gray-900 dark:text-white">
+    <main>
+      {/* SEO */}
+      <SeoRenderer
+        path={`/${country}`}
+        title={title}
+        description={description}
+        country={country}
+      />
 
+      {/* JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData),
+        }}
+      />
+
+      {/* ================= HERO ================= */}
       <OpeningStyle>
-        <RevealWithBorder>
-          <HeroSection onOpenAuth={handleOpenAuth} />
-        </RevealWithBorder>
+        <CircleBorder>
+          <section className="max-w-7xl mx-auto px-4 py-20 text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              {title}
+            </h1>
+
+            <p className="mb-6 text-lg">{description}</p>
+
+            <PrimaryCTA href={signupLink} />
+          </section>
+        </CircleBorder>
       </OpeningStyle>
 
+      {/* ================= FEATURES ================= */}
       <OpeningStyle>
-        <RevealWithBorder>
-          <StatsSection />
-        </RevealWithBorder>
-      </OpeningStyle>
-
-      <OpeningStyle>
-        <RevealWithBorder>
-          <LiveJoining />
-        </RevealWithBorder>
-      </OpeningStyle>
-
-      <OpeningStyle>
-        <RevealWithBorder>
-          <LiveEarnings />
-        </RevealWithBorder>
-      </OpeningStyle>
-
-      <OpeningStyle>
-        <RevealWithBorder>
-          <LiveOfferCompletion />
-        </RevealWithBorder>
-      </OpeningStyle>
-
-      <OpeningStyle>
-        <RevealWithBorder>
-          <LiveWithdrawals />
-        </RevealWithBorder>
-      </OpeningStyle>
-
-      <OpeningStyle>
-        <RevealWithBorder>
+        <CircleBorder>
           <FeaturesSection />
-        </RevealWithBorder>
+        </CircleBorder>
       </OpeningStyle>
 
+      {/* ================= FAQ ================= */}
       <OpeningStyle>
-        <RevealWithBorder>
-          <TasksSection />
-        </RevealWithBorder>
-      </OpeningStyle>
-
-      <OpeningStyle>
-        <RevealWithBorder>
-          <HighPayingOffers />
-        </RevealWithBorder>
-      </OpeningStyle>
-
-      <OpeningStyle>
-        <RevealWithBorder>
-          <TestimonialSection />
-        </RevealWithBorder>
-      </OpeningStyle>
-
-      <OpeningStyle>
-        <RevealWithBorder>
-          <TrustSection />
-        </RevealWithBorder>
-      </OpeningStyle>
-
-      <OpeningStyle>
-        <RevealWithBorder>
-          <PaymentSection />
-        </RevealWithBorder>
-      </OpeningStyle>
-
-      <OpeningStyle>
-        <RevealWithBorder>
+        <CircleBorder>
           <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
             <h2 className="text-3xl font-bold text-center mb-6 bg-gradient-to-r from-yellow-400 to-green-500 bg-clip-text text-transparent">
               Frequently Asked Questions
             </h2>
 
-            <FAQ
-              faqs={[
-                { q: "How can I start earning money online?", a: "Simply sign up and start completing tasks." },
-                { q: "Is this website legit?", a: "Yes, we have paid millions to our users." },
-                { q: "How much can I earn?", a: "Active users earn $100-$500 monthly." },
-                { q: "Payment methods?", a: "PayPal, Payoneer, Bitcoin, and gift cards." },
-                { q: "Do I need to pay?", a: "No, joining is 100% free." },
-                { q: "Which countries are supported?", a: "Over 50 countries including US, UK, Canada." },
-                { q: "How fast are withdrawals?", a: "Usually within 24-48 hours." },
-              ]}
-            />
-
+            <FAQ faqs={faqs} />
           </section>
-        </RevealWithBorder>
-      </OpeningStyle>
-
-      <OpeningStyle>
-        <RevealWithBorder>
-          <FinalCTASection />
-        </RevealWithBorder>
+        </CircleBorder>
       </OpeningStyle>
 
       <div className="h-12"></div>
