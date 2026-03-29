@@ -1,6 +1,5 @@
 "use client";
 
-import { useMemo } from "react";
 import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
 import { useCountry } from "@/app/[country]/providers/CountryProvider";
 
@@ -11,6 +10,7 @@ import { generateJsonLd } from "@/components/SEO/schema";
 import OpeningStyle from "@/components/animations/openingstyle";
 import CircleBorder from "@/components/animations/CircleBorder";
 
+import FeaturesSection from "@/components/homepage/FeaturesSection";
 import FAQ from "@/components/faq/FAQ";
 
 // ===============================
@@ -47,16 +47,6 @@ export default function CountryHomePage() {
       "homepage_description",
       `Earn real money online in ${countryName}.`
     ) || `Earn Money Online`;
-
-  const features = useMemo(
-    () => [
-      { title: "Surveys", description: "Earn by answering surveys." },
-      { title: "Apps", description: "Install apps and earn." },
-      { title: "Games", description: "Play games and get rewards." },
-      { title: "Withdraw", description: "Cash out easily." },
-    ],
-    []
-  );
 
   const faqs = [
     {
@@ -111,41 +101,10 @@ export default function CountryHomePage() {
         </CircleBorder>
       </OpeningStyle>
 
-      {/* ================= FEATURES ================= */}
+      {/* ================= FEATURES (NEW COMPONENT) ================= */}
       <OpeningStyle>
         <CircleBorder>
-          <section className="max-w-7xl mx-auto px-4 py-12">
-            <div className="grid md:grid-cols-4 gap-6">
-              {features.map((f, i) => (
-                <div
-                  key={i}
-                  className="p-6 rounded-2xl bg-white/5 backdrop-blur border border-white/10 text-center"
-                >
-                  <h3 className="text-xl font-semibold mb-2">
-                    {f.title}
-                  </h3>
-                  <p className="text-sm opacity-80">
-                    {f.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </section>
-        </CircleBorder>
-      </OpeningStyle>
-
-      {/* ================= CTA ================= */}
-      <OpeningStyle>
-        <CircleBorder>
-          <section className="max-w-7xl mx-auto px-4 py-12 text-center">
-            <div className="p-10 rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-              <h2 className="text-3xl font-bold mb-4">
-                Start Earning Now 🚀
-              </h2>
-
-              <PrimaryCTA href={signupLink} />
-            </div>
-          </section>
+          <FeaturesSection />
         </CircleBorder>
       </OpeningStyle>
 
