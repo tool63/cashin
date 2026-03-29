@@ -1,34 +1,21 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useMemo } from "react";
 import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
 import { useCountry } from "@/app/[country]/providers/CountryProvider";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import SeoRenderer from "@/components/SEO/SeoRenderer";
 import { generateJsonLd } from "@/components/SEO/schema";
+
+// Animations & Layout
+import Reveal from "@/components/animations/openingstyle";
+import Container from "@/components/animations/container";
+import CircleBorder from "@/components/animations/CircleBorder";
+import { CardGrid, Card, CardTitle, CardDescription } from "@/components/animations/container";
 import FAQ from "@/components/faq/FAQ";
 
 // ===============================
-// Feature Card
-// ===============================
-function FeatureCard({
-  title,
-  description,
-}: {
-  title: string;
-  description: string;
-}) {
-  return (
-    <div className="p-6 border rounded-lg shadow hover:shadow-lg transition-all duration-300 hover:scale-105">
-      <h3 className="font-semibold text-xl mb-2">{title}</h3>
-      <p className="text-gray-700 dark:text-gray-300">{description}</p>
-    </div>
-  );
-}
-
-// ===============================
-// Helper: Country Name
+// Helper
 // ===============================
 function formatCountryName(code: string) {
   try {
@@ -40,7 +27,7 @@ function formatCountryName(code: string) {
 }
 
 // ===============================
-// Main Page
+// Page
 // ===============================
 export default function CountryHomePage() {
   const { getTranslation } = useLanguage();
@@ -54,75 +41,41 @@ export default function CountryHomePage() {
   const t = (key: string, fallback: string) =>
     getTranslation("homepage", key, fallback);
 
-  // ===============================
   // SEO
-  // ===============================
   const title =
     t(
       "welcome_message",
       `Earn Money Online in ${countryName} (${currentYear}) - Cashog`
-    ) ||
-    `Earn Money Online in ${countryName} (${currentYear}) - Cashog`;
+    ) || `Earn Money Online in ${countryName} (${currentYear}) - Cashog`;
 
   const description =
     t(
       "homepage_description",
-      `Cashog helps you earn real money online in ${countryName}. Start earning today with surveys, apps, and games.`
-    ) ||
-    `Cashog helps you earn real money online in ${countryName}.`;
+      `Cashog helps you earn real money online in ${countryName}.`
+    ) || `Earn Money Online in ${countryName}`;
 
-  // ===============================
   // Features
-  // ===============================
   const features = useMemo(
     () => [
-      {
-        title: `Complete Surveys in ${countryName}`,
-        description: `Answer surveys tailored for users in ${countryName} and earn instantly.`,
-      },
-      {
-        title: `Install Apps & Earn`,
-        description: `Try trending apps in ${countryName} and get rewarded.`,
-      },
-      {
-        title: `Play Games & Get Paid`,
-        description: `Play popular games and earn real cash rewards.`,
-      },
-      {
-        title: `Instant Rewards`,
-        description: `Earn points and convert them into real money easily.`,
-      },
-      {
-        title: `Secure & Trusted`,
-        description: `Verified platform with real payouts and secure tracking.`,
-      },
-      {
-        title: `Daily New Offers`,
-        description: `New high-paying earning opportunities added every day.`,
-      },
+      { title: "Surveys", description: `Earn by completing surveys in ${countryName}.` },
+      { title: "Apps", description: `Install apps and get rewarded.` },
+      { title: "Games", description: `Play and earn real rewards.` },
+      { title: "Withdraw", description: `Cash out your earnings easily.` },
+      { title: "Secure", description: `Safe and trusted system.` },
+      { title: "Daily Offers", description: `New earning tasks daily.` },
     ],
     [countryName]
   );
 
-  // ===============================
-  // FAQ DATA (used by FAQ component)
-  // ===============================
+  // FAQ
   const faqs = [
     {
       q: `Is Cashog legit in ${countryName}?`,
-      a: `Yes, thousands of users in ${countryName} are earning daily with real payouts.`,
+      a: `Yes, thousands of users in ${countryName} are earning daily.`,
     },
     {
       q: `How do I start earning?`,
-      a: `Sign up, complete offers like surveys or apps, and start earning instantly.`,
-    },
-    {
-      q: `How fast can I withdraw money?`,
-      a: `Withdrawals are processed quickly depending on your selected method.`,
-    },
-    {
-      q: `Do I need to pay anything?`,
-      a: `No, joining Cashog is completely free.`,
+      a: `Sign up and complete offers.`,
     },
   ];
 
@@ -140,7 +93,6 @@ export default function CountryHomePage() {
   // ===============================
   return (
     <>
-      {/* SEO */}
       <SeoRenderer
         path={`/${country}`}
         title={title}
@@ -148,7 +100,6 @@ export default function CountryHomePage() {
         country={country}
       />
 
-      {/* JSON-LD */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -156,66 +107,82 @@ export default function CountryHomePage() {
         }}
       />
 
-      <section className="max-w-6xl mx-auto px-4 py-16">
-        {/* HERO */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            {title}
-          </h1>
+      {/* ================= HERO ================= */}
+      <CircleBorder>
+        <Container>
+          <Reveal>
+            <div className="text-center">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                {title}
+              </h1>
 
-          <p className="text-xl text-gray-700 dark:text-gray-300 mb-6 max-w-3xl mx-auto">
-            {description}
-          </p>
+              <p className="text-xl text-gray-700 dark:text-gray-300 mb-6 max-w-3xl mx-auto">
+                {description}
+              </p>
 
-          <PrimaryCTA href={signupLink} />
+              <PrimaryCTA href={signupLink} />
 
-          <p className="text-sm mt-4 text-gray-500">
-            ✓ Trusted by thousands in {countryName} • No credit card required
-          </p>
+              <p className="text-sm mt-4 text-gray-500">
+                ✓ Trusted by thousands in {countryName}
+              </p>
+            </div>
+          </Reveal>
+        </Container>
+      </CircleBorder>
 
-          <p className="text-sm text-gray-500 mt-2">
-            🔒 Secure platform • Verified offers • Real payouts
-          </p>
-        </div>
+      {/* ================= FEATURES ================= */}
+      <CircleBorder>
+        <Container>
+          <Reveal delay={0.1}>
+            <CardGrid>
+              {features.map((f, i) => (
+                <Card key={i}>
+                  <CardTitle>{f.title}</CardTitle>
+                  <CardDescription>{f.description}</CardDescription>
+                </Card>
+              ))}
+            </CardGrid>
+          </Reveal>
+        </Container>
+      </CircleBorder>
 
-        {/* FEATURES */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, idx) => (
-            <FeatureCard key={idx} {...feature} />
-          ))}
-        </div>
+      {/* ================= CTA ================= */}
+      <CircleBorder>
+        <Container>
+          <Reveal delay={0.2}>
+            <div className="text-center bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-2xl p-10 text-white">
+              <h2 className="text-3xl font-bold mb-4">
+                Start Earning in {countryName} 🚀
+              </h2>
 
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mt-24 text-center bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-2xl p-10 text-white"
-        >
-          <h2 className="text-3xl font-bold mb-4">
-            Start Earning in {countryName} Today 🚀
-          </h2>
+              <p className="mb-6">
+                Join thousands already earning online.
+              </p>
 
-          <p className="mb-6">
-            Join thousands already earning online.
-          </p>
+              <PrimaryCTA href={signupLink} />
 
-          <PrimaryCTA href={signupLink} />
+              <p className="text-sm mt-4 opacity-80">
+                🔥 High-paying offers available
+              </p>
+            </div>
+          </Reveal>
+        </Container>
+      </CircleBorder>
 
-          <p className="text-sm mt-4 opacity-80">
-            🔥 Limited high-paying offers available in {countryName}
-          </p>
-        </motion.div>
+      {/* ================= FAQ ================= */}
+      <CircleBorder>
+        <Container>
+          <Reveal delay={0.3}>
+            <div className="mt-10">
+              <h2 className="text-2xl font-bold mb-6 text-center">
+                Frequently Asked Questions
+              </h2>
 
-        {/* FAQ (NEW COMPONENT) */}
-        <div className="mt-20">
-          <h2 className="text-2xl font-bold mb-6 text-center">
-            Frequently Asked Questions
-          </h2>
-
-          <FAQ faqs={faqs} />
-        </div>
-      </section>
+              <FAQ faqs={faqs} />
+            </div>
+          </Reveal>
+        </Container>
+      </CircleBorder>
     </>
   );
 }
