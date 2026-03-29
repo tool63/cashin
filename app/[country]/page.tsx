@@ -1,7 +1,4 @@
 import dynamic from "next/dynamic";
-import { buildSEO } from "@/components/SEO/seoEngine";
-import { SEO_CONFIG } from "@/components/SEO/seoConfig";
-import FAQ from "@/components/faq/FAQ";
 
 /* Homepage Sections */
 import HeroSection from "@/components/homepage/HeroSection";
@@ -18,6 +15,13 @@ import TestimonialSection from "@/components/homepage/TestimonialSection";
 import OpeningStyle from "@/components/animations/openingstyle";
 import RevealWithBorder from "@/components/animations/CircleBorder";
 
+/* SEO */
+import SeoRenderer from "@/components/SEO/SeoRenderer";
+import { generateJsonLd } from "@/components/SEO/jsonLd";
+
+/* FAQ */
+import FAQ from "@/components/faq/FAQ";
+
 /* Country helpers */
 import {
   getCountry,
@@ -31,6 +35,21 @@ const LiveEarnings = dynamic(() => import("@/components/homepage/LiveEarnings"),
 const LiveOfferCompletion = dynamic(() => import("@/components/homepage/LiveOfferCompletion"), { ssr: false });
 const LiveWithdrawals = dynamic(() => import("@/components/homepage/LiveWithdrawals"), { ssr: false });
 
+/* ===============================
+   🌍 FORMAT COUNTRY NAME
+=============================== */
+function formatCountryName(code: string) {
+  try {
+    const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
+    return regionNames.of(code.toUpperCase()) || code.toUpperCase();
+  } catch {
+    return code.toUpperCase();
+  }
+}
+
+/* ===============================
+   🚀 PAGE
+=============================== */
 export default async function HomePage({
   params,
 }: {
@@ -42,42 +61,69 @@ export default async function HomePage({
   const countryParam = params?.country?.toLowerCase();
 
   if (!countryParam || !isValidCountryCode(countryParam)) {
-    return null; // layout already handles redirect
+    return null;
   }
 
   const country = countryParam as CountryCode;
   const countryData = getCountry(country);
+  const countryName = formatCountryName(country);
+  const currentYear = new Date().getFullYear();
 
   // -------------------------------
-  // 🌐 SEO (COUNTRY BASED)
+  // 🔥 SEO (FROM YOUR OLD LOGIC)
   // -------------------------------
-  const seo = await buildSEO({
-    route: `/${country}`,
-    locale: countryData.defaultLanguage || SEO_CONFIG.defaultLocale,
-    title: `Earn Money Online in ${countryData.name}`,
-    description: `Start earning real money online in ${countryData.name} with Cashog. Complete surveys, play games, and get paid instantly.`,
-    keywords: [
-      "earn money online",
-      "make money online",
-      "paid surveys",
-      "earn money playing games",
-      "cash rewards",
-      "online income",
-      "Cashog",
-      countryData.name,
-    ],
+  const title = `Earn Money Online in ${countryName} (${currentYear})`;
+  const description = `Earn real money online in ${countryName}. Complete surveys, play games, and get paid instantly.`;
+
+  const structuredData = generateJsonLd({
+    path: `/${country}`,
+    title,
+    description,
+    type: "low",
   });
+
+  // -------------------------------
+  // 📌 FAQ DATA
+  // -------------------------------
+  const faqs = [
+    {
+      q: `Is it legit in ${countryName}?`,
+      a: `Yes, users are earning daily.`,
+    },
+    {
+      q: `How to start?`,
+      a: `Sign up and complete offers.`,
+    },
+  ];
 
   const handleOpenAuth = (type: "login" | "signup" | "reset") => {
     console.log("Open auth modal:", type);
   };
 
   // -------------------------------
-  // 🎯 PAGE UI
+  // 🎯 UI
   // -------------------------------
   return (
     <main className="relative min-h-screen bg-transparent text-gray-900 dark:text-white">
 
+      {/* ✅ SEO */}
+      <SeoRenderer
+        path={`/${country}`}
+        title={title}
+        description={description}
+        country={country}
+      />
+
+      {/* ✅ JSON-LD */}
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData),
+        }}
+      />
+
+      {/* ================= HERO ================= */}
       <OpeningStyle>
         <RevealWithBorder>
           <HeroSection onOpenAuth={handleOpenAuth} />
@@ -150,7 +196,7 @@ export default async function HomePage({
         </RevealWithBorder>
       </OpeningStyle>
 
-      {/* FAQ */}
+      {/* ================= FAQ ================= */}
       <OpeningStyle>
         <RevealWithBorder>
           <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
@@ -158,17 +204,7 @@ export default async function HomePage({
               Frequently Asked Questions
             </h2>
 
-            <FAQ
-              faqs={[
-                { q: "How can I start earning money online?", a: "Simply sign up and start completing tasks." },
-                { q: "Is this website legit?", a: "Yes, we have paid millions to our users." },
-                { q: "How much can I earn?", a: "Active users earn $100-$500 monthly." },
-                { q: "Payment methods?", a: "PayPal, Payoneer, Bitcoin, and gift cards." },
-                { q: "Do I need to pay?", a: "No, joining is 100% free." },
-                { q: "Which countries are supported?", a: `We support users in ${countryData.name} and many other countries.` },
-                { q: "How fast are withdrawals?", a: "Usually within 24-48 hours." },
-              ]}
-            />
+            <FAQ faqs={faqs} />
           </section>
         </RevealWithBorder>
       </OpeningStyle>
