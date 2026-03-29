@@ -1,150 +1,161 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
-
-import Meta from "@/components/SEO/seoEngine";
-import Background from "@/components/Background";
+import { useMemo } from "react";
+import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
+import { useCountry } from "@/app/[country]/providers/CountryProvider";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
+import SeoRenderer from "@/components/SEO/SeoRenderer";
+import { generateJsonLd } from "@/components/SEO/schema";
 
 import Reveal from "@/components/animations/openingstyle";
 import Container from "@/components/animations/container";
 import CircleBorder from "@/components/animations/CircleBorder";
 
+import { CardGrid, Card, CardTitle, CardDescription } from "@/components/animations/container";
 import FAQ from "@/components/faq/FAQ";
 
-import {
-  Users, Gift, DollarSign, Trophy, Star, User, Target, Zap,
-  CheckCircle, Globe, Shield, Clock, Wallet, BarChart3,
-  Rocket, Crown, Infinity, ClipboardList, Smartphone,
-  Gamepad2, Film, Hammer, CheckSquare, LayoutGrid,
-  Eye, Sparkles, Timer, FlaskConical, Mail, PenTool,
-  Puzzle, Ticket
-} from "lucide-react";
+// ===============================
+function formatCountryName(code: string) {
+  try {
+    const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
+    return regionNames.of(code.toUpperCase()) || code.toUpperCase();
+  } catch {
+    return code.toUpperCase();
+  }
+}
 
-/* ================= DATA ================= */
+// ===============================
+export default function CountryHomePage() {
+  const { getTranslation } = useLanguage();
+  const { country } = useCountry();
 
-const affiliateStats = [
-  { label: "Commission Rate", value: "15%", icon: <DollarSign />, trend: "+25%" },
-  { label: "Active Affiliates", value: "50K+", icon: <Users />, trend: "Growing" },
-  { label: "Trustpilot Rating", value: "4.7", icon: <Star />, trend: "Top rated" },
-];
+  if (!country) return null;
 
-const steps = [
-  { title: "Invite", icon: <User /> },
-  { title: "They Earn", icon: <Gift /> },
-  { title: "You Earn", icon: <DollarSign /> },
-];
+  const countryName = formatCountryName(country);
+  const currentYear = new Date().getFullYear();
 
-const faqs = [
-  { q: "How does commission work?", a: "You earn 15% from referrals." },
-  { q: "Is it free?", a: "Yes, 100% free." },
-];
+  const t = (key: string, fallback: string) =>
+    getTranslation("homepage", key, fallback);
 
-/* ================= PAGE ================= */
+  const title =
+    t(
+      "welcome_message",
+      `Earn Money Online in ${countryName} (${currentYear})`
+    ) || `Earn Money Online in ${countryName}`;
 
-export default function AffiliatePage() {
+  const description =
+    t(
+      "homepage_description",
+      `Earn real money online in ${countryName}.`
+    ) || `Earn Money Online`;
+
+  const features = useMemo(
+    () => [
+      { title: "Surveys", description: "Earn by answering surveys." },
+      { title: "Apps", description: "Install apps and earn." },
+      { title: "Games", description: "Play games and get rewards." },
+      { title: "Withdraw", description: "Cash out easily." },
+    ],
+    []
+  );
+
+  const faqs = [
+    {
+      q: `Is it legit in ${countryName}?`,
+      a: `Yes, users are earning daily.`,
+    },
+    {
+      q: `How to start?`,
+      a: `Sign up and complete offers.`,
+    },
+  ];
+
+  const structuredData = generateJsonLd({
+    path: `/${country}`,
+    title,
+    description,
+    type: "low",
+  });
+
+  const signupLink = `/${country}/signup`;
+
+  // ===============================
   return (
     <>
-      <Meta
-        title="Affiliate Program - Earn 15% Commission"
-        description="Earn money by referring users."
+      <SeoRenderer
+        path={`/${country}`}
+        title={title}
+        description={description}
+        country={country}
       />
 
-      <main className="relative min-h-screen overflow-hidden">
-        <Background />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData),
+        }}
+      />
 
-        {/* ================= HERO ================= */}
-        <Container className="relative">
-          <CircleBorder />
+      {/* ================= HERO ================= */}
+      <Container className="relative">
+        <CircleBorder />
 
-          <Reveal>
-            <div className="text-center py-20">
-              <h1 className="text-5xl font-bold mb-6">
-                Earn 15% Commission
-              </h1>
+        <Reveal>
+          <div className="text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              {title}
+            </h1>
 
-              <p className="mb-6 text-lg">
-                Join thousands earning daily
-              </p>
+            <p className="mb-6 text-lg">{description}</p>
 
-              <PrimaryCTA href="/signup">
-                Become Affiliate
-              </PrimaryCTA>
-            </div>
-          </Reveal>
-        </Container>
+            <PrimaryCTA href={signupLink} />
+          </div>
+        </Reveal>
+      </Container>
 
-        {/* ================= STATS ================= */}
-        <Container className="relative">
-          <CircleBorder />
+      {/* ================= FEATURES ================= */}
+      <Container className="relative">
+        <CircleBorder />
 
-          <Reveal>
-            <div className="flex justify-center gap-10 py-10">
-              {affiliateStats.map((stat, i) => (
-                <div key={i} className="text-center">
-                  <div className="text-xl">{stat.icon}</div>
-                  <div className="font-bold text-2xl">{stat.value}</div>
-                  <div className="text-sm">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-        </Container>
+        <Reveal delay={0.1}>
+          <CardGrid>
+            {features.map((f, i) => (
+              <Card key={i}>
+                <CardTitle>{f.title}</CardTitle>
+                <CardDescription>{f.description}</CardDescription>
+              </Card>
+            ))}
+          </CardGrid>
+        </Reveal>
+      </Container>
 
-        {/* ================= HOW IT WORKS ================= */}
-        <Container className="relative">
-          <CircleBorder />
+      {/* ================= CTA ================= */}
+      <Container className="relative">
+        <CircleBorder />
 
-          <Reveal>
-            <div className="text-center py-10">
-              <h2 className="text-3xl font-bold mb-6">How It Works</h2>
+        <Reveal delay={0.2}>
+          <div className="text-center p-10 rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+            <h2 className="text-3xl font-bold mb-4">
+              Start Earning Now 🚀
+            </h2>
 
-              <div className="flex justify-center gap-8">
-                {steps.map((step, i) => (
-                  <div key={i} className="flex items-center gap-2">
-                    {step.icon}
-                    <span>{step.title}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Reveal>
-        </Container>
+            <PrimaryCTA href={signupLink} />
+          </div>
+        </Reveal>
+      </Container>
 
-        {/* ================= FAQ ================= */}
-        <Container className="relative max-w-3xl">
-          <CircleBorder />
+      {/* ================= FAQ ================= */}
+      <Container className="relative">
+        <CircleBorder />
 
-          <Reveal>
-            <div className="py-10">
-              <h2 className="text-2xl font-bold text-center mb-6">
-                FAQ
-              </h2>
+        <Reveal delay={0.3}>
+          <h2 className="text-2xl font-bold text-center mb-6">
+            FAQ
+          </h2>
 
-              <FAQ faqs={faqs} />
-            </div>
-          </Reveal>
-        </Container>
-
-        {/* ================= CTA ================= */}
-        <Container className="relative">
-          <CircleBorder />
-
-          <Reveal>
-            <div className="text-center py-20">
-              <h2 className="text-4xl font-bold mb-6">
-                Start Earning Today
-              </h2>
-
-              <PrimaryCTA href="/signup">
-                Join Now
-              </PrimaryCTA>
-            </div>
-          </Reveal>
-        </Container>
-
-      </main>
+          <FAQ faqs={faqs} />
+        </Reveal>
+      </Container>
     </>
   );
 }
