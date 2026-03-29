@@ -2,10 +2,10 @@ import dynamic from "next/dynamic";
 
 import { getCountry, isValidCountryCode, type CountryCode } from "@/app/core/countries";
 
-/* UI / Layout */
-import Container, { Card, CardGrid } from "@/components/animations/container";
+/* Layout / Animations */
 import CircleBorder from "@/components/animations/CircleBorder";
 import OpeningStyle from "@/components/animations/openingstyle";
+import { Card, CardGrid } from "@/components/animations/container";
 
 /* Sections */
 import HeroSection from "@/components/homepage/HeroSection";
@@ -18,7 +18,7 @@ import FinalCTASection from "@/components/homepage/FinalCTASection";
 import StatsSection from "@/components/homepage/StatsSection";
 import TestimonialSection from "@/components/homepage/TestimonialSection";
 
-/* Live Sections (Dynamic) */
+/* Live Sections */
 const LiveJoining = dynamic(() => import("@/components/homepage/LiveJoining"), { ssr: false });
 const LiveEarnings = dynamic(() => import("@/components/homepage/LiveEarnings"), { ssr: false });
 const LiveOfferCompletion = dynamic(() => import("@/components/homepage/LiveOfferCompletion"), { ssr: false });
@@ -86,15 +86,22 @@ export default async function HomePage({
   ];
 
   /* ===============================
-     SECTION WRAPPER (CIRCLE BORDER)
+     FIXED SECTION WRAPPER (IMPORTANT)
   =============================== */
   const Section = ({ children }: { children: React.ReactNode }) => (
     <OpeningStyle>
-      <CircleBorder>
-        <Container>
-          <Card>{children}</Card>
-        </Container>
-      </CircleBorder>
+      <div className="w-full px-4 py-10 flex justify-center">
+        
+        {/* 🔥 IMPORTANT FIX FOR BORDER */}
+        <div className="w-full max-w-7xl">
+          <CircleBorder>
+            <div className="w-full">
+              {children}
+            </div>
+          </CircleBorder>
+        </div>
+
+      </div>
     </OpeningStyle>
   );
 
@@ -179,7 +186,7 @@ export default async function HomePage({
 
       {/* ================= FAQ ================= */}
       <Section>
-        <section className="text-center">
+        <div className="text-center w-full">
           <h2 className="text-3xl font-bold mb-6">
             Frequently Asked Questions
           </h2>
@@ -194,7 +201,7 @@ export default async function HomePage({
               </Card>
             ))}
           </CardGrid>
-        </section>
+        </div>
       </Section>
 
       {/* ================= CTA ================= */}
