@@ -7,15 +7,13 @@ import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import SeoRenderer from "@/components/SEO/SeoRenderer";
 import { generateJsonLd } from "@/components/SEO/schema";
 
-// Animations & Layout
 import Reveal from "@/components/animations/openingstyle";
 import Container from "@/components/animations/container";
 import CircleBorder from "@/components/animations/CircleBorder";
+
 import { CardGrid, Card, CardTitle, CardDescription } from "@/components/animations/container";
 import FAQ from "@/components/faq/FAQ";
 
-// ===============================
-// Helper
 // ===============================
 function formatCountryName(code: string) {
   try {
@@ -26,8 +24,6 @@ function formatCountryName(code: string) {
   }
 }
 
-// ===============================
-// Page
 // ===============================
 export default function CountryHomePage() {
   const { getTranslation } = useLanguage();
@@ -41,40 +37,34 @@ export default function CountryHomePage() {
   const t = (key: string, fallback: string) =>
     getTranslation("homepage", key, fallback);
 
-  // SEO
   const title =
     t(
       "welcome_message",
       `Earn Money Online in ${countryName} (${currentYear}) - Cashog`
-    ) || `Earn Money Online in ${countryName} (${currentYear}) - Cashog`;
+    ) || `Earn Money Online in ${countryName}`;
 
   const description =
     t(
       "homepage_description",
-      `Cashog helps you earn real money online in ${countryName}.`
-    ) || `Earn Money Online in ${countryName}`;
+      `Earn real money online in ${countryName}.`
+    ) || `Earn Money Online`;
 
-  // Features
   const features = useMemo(
     () => [
-      { title: "Surveys", description: `Earn by completing surveys in ${countryName}.` },
-      { title: "Apps", description: `Install apps and get rewarded.` },
-      { title: "Games", description: `Play and earn real rewards.` },
-      { title: "Withdraw", description: `Cash out your earnings easily.` },
-      { title: "Secure", description: `Safe and trusted system.` },
-      { title: "Daily Offers", description: `New earning tasks daily.` },
+      { title: "Surveys", description: "Earn by answering surveys." },
+      { title: "Apps", description: "Install apps and earn." },
+      { title: "Games", description: "Play games and get rewards." },
     ],
-    [countryName]
+    []
   );
 
-  // FAQ
   const faqs = [
     {
       q: `Is Cashog legit in ${countryName}?`,
-      a: `Yes, thousands of users in ${countryName} are earning daily.`,
+      a: `Yes, thousands are earning daily.`,
     },
     {
-      q: `How do I start earning?`,
+      q: `How do I start?`,
       a: `Sign up and complete offers.`,
     },
   ];
@@ -88,8 +78,6 @@ export default function CountryHomePage() {
 
   const signupLink = `/${country}/signup`;
 
-  // ===============================
-  // UI
   // ===============================
   return (
     <>
@@ -108,81 +96,65 @@ export default function CountryHomePage() {
       />
 
       {/* ================= HERO ================= */}
-      <CircleBorder>
-        <Container>
-          <Reveal>
-            <div className="text-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                {title}
-              </h1>
+      <Container className="relative">
+        <CircleBorder />
 
-              <p className="text-xl text-gray-700 dark:text-gray-300 mb-6 max-w-3xl mx-auto">
-                {description}
-              </p>
+        <Reveal>
+          <div className="text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              {title}
+            </h1>
 
-              <PrimaryCTA href={signupLink} />
+            <p className="text-xl mb-6">{description}</p>
 
-              <p className="text-sm mt-4 text-gray-500">
-                ✓ Trusted by thousands in {countryName}
-              </p>
-            </div>
-          </Reveal>
-        </Container>
-      </CircleBorder>
+            <PrimaryCTA href={signupLink} />
+          </div>
+        </Reveal>
+      </Container>
 
       {/* ================= FEATURES ================= */}
-      <CircleBorder>
-        <Container>
-          <Reveal delay={0.1}>
-            <CardGrid>
-              {features.map((f, i) => (
-                <Card key={i}>
-                  <CardTitle>{f.title}</CardTitle>
-                  <CardDescription>{f.description}</CardDescription>
-                </Card>
-              ))}
-            </CardGrid>
-          </Reveal>
-        </Container>
-      </CircleBorder>
+      <Container className="relative">
+        <CircleBorder />
+
+        <Reveal delay={0.1}>
+          <CardGrid>
+            {features.map((f, i) => (
+              <Card key={i}>
+                <CardTitle>{f.title}</CardTitle>
+                <CardDescription>{f.description}</CardDescription>
+              </Card>
+            ))}
+          </CardGrid>
+        </Reveal>
+      </Container>
 
       {/* ================= CTA ================= */}
-      <CircleBorder>
-        <Container>
-          <Reveal delay={0.2}>
-            <div className="text-center bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-2xl p-10 text-white">
-              <h2 className="text-3xl font-bold mb-4">
-                Start Earning in {countryName} 🚀
-              </h2>
+      <Container className="relative">
+        <CircleBorder />
 
-              <p className="mb-6">
-                Join thousands already earning online.
-              </p>
+        <Reveal delay={0.2}>
+          <div className="text-center bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white rounded-2xl p-10">
+            <h2 className="text-3xl font-bold mb-4">
+              Start Earning in {countryName} 🚀
+            </h2>
 
-              <PrimaryCTA href={signupLink} />
-
-              <p className="text-sm mt-4 opacity-80">
-                🔥 High-paying offers available
-              </p>
-            </div>
-          </Reveal>
-        </Container>
-      </CircleBorder>
+            <PrimaryCTA href={signupLink} />
+          </div>
+        </Reveal>
+      </Container>
 
       {/* ================= FAQ ================= */}
-      <CircleBorder>
-        <Container>
-          <Reveal delay={0.3}>
-            <div className="mt-10">
-              <h2 className="text-2xl font-bold mb-6 text-center">
-                Frequently Asked Questions
-              </h2>
+      <Container className="relative">
+        <CircleBorder />
 
-              <FAQ faqs={faqs} />
-            </div>
-          </Reveal>
-        </Container>
-      </CircleBorder>
+        <Reveal delay={0.3}>
+          <h2 className="text-2xl font-bold text-center mb-6">
+            Frequently Asked Questions
+          </h2>
+
+          <FAQ faqs={faqs} />
+        </Reveal>
+      </Container>
     </>
   );
 }
