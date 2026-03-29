@@ -3,15 +3,14 @@
 import { useMemo } from "react";
 import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
 import { useCountry } from "@/app/[country]/providers/CountryProvider";
+
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import SeoRenderer from "@/components/SEO/SeoRenderer";
 import { generateJsonLd } from "@/components/SEO/schema";
 
-import Reveal from "@/components/animations/openingstyle";
-import Container from "@/components/animations/container";
-import CircleBorder from "@/components/animations/CircleBorder";
+import OpeningStyle from "@/components/animations/openingstyle";
+import RevealWithBorder from "@/components/animations/RevealWithBorder";
 
-import { CardGrid, Card, CardTitle, CardDescription } from "@/components/animations/container";
 import FAQ from "@/components/faq/FAQ";
 
 // ===============================
@@ -81,7 +80,7 @@ export default function CountryHomePage() {
 
   // ===============================
   return (
-    <>
+    <main>
       <SeoRenderer
         path={`/${country}`}
         title={title}
@@ -97,11 +96,9 @@ export default function CountryHomePage() {
       />
 
       {/* ================= HERO ================= */}
-      <Container className="relative">
-        <CircleBorder />
-
-        <Reveal>
-          <div className="text-center">
+      <OpeningStyle>
+        <RevealWithBorder>
+          <section className="max-w-7xl mx-auto px-4 py-20 text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               {title}
             </h1>
@@ -109,53 +106,62 @@ export default function CountryHomePage() {
             <p className="mb-6 text-lg">{description}</p>
 
             <PrimaryCTA href={signupLink} />
-          </div>
-        </Reveal>
-      </Container>
+          </section>
+        </RevealWithBorder>
+      </OpeningStyle>
 
       {/* ================= FEATURES ================= */}
-      <Container className="relative">
-        <CircleBorder />
-
-        <Reveal delay={0.1}>
-          <CardGrid>
-            {features.map((f, i) => (
-              <Card key={i}>
-                <CardTitle>{f.title}</CardTitle>
-                <CardDescription>{f.description}</CardDescription>
-              </Card>
-            ))}
-          </CardGrid>
-        </Reveal>
-      </Container>
+      <OpeningStyle>
+        <RevealWithBorder>
+          <section className="max-w-7xl mx-auto px-4 py-12">
+            <div className="grid md:grid-cols-4 gap-6">
+              {features.map((f, i) => (
+                <div
+                  key={i}
+                  className="p-6 rounded-2xl bg-white/5 backdrop-blur border border-white/10 text-center"
+                >
+                  <h3 className="text-xl font-semibold mb-2">
+                    {f.title}
+                  </h3>
+                  <p className="text-sm opacity-80">
+                    {f.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+        </RevealWithBorder>
+      </OpeningStyle>
 
       {/* ================= CTA ================= */}
-      <Container className="relative">
-        <CircleBorder />
+      <OpeningStyle>
+        <RevealWithBorder>
+          <section className="max-w-7xl mx-auto px-4 py-12 text-center">
+            <div className="p-10 rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+              <h2 className="text-3xl font-bold mb-4">
+                Start Earning Now 🚀
+              </h2>
 
-        <Reveal delay={0.2}>
-          <div className="text-center p-10 rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-            <h2 className="text-3xl font-bold mb-4">
-              Start Earning Now 🚀
-            </h2>
-
-            <PrimaryCTA href={signupLink} />
-          </div>
-        </Reveal>
-      </Container>
+              <PrimaryCTA href={signupLink} />
+            </div>
+          </section>
+        </RevealWithBorder>
+      </OpeningStyle>
 
       {/* ================= FAQ ================= */}
-      <Container className="relative">
-        <CircleBorder />
+      <OpeningStyle>
+        <RevealWithBorder>
+          <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
+            <h2 className="text-3xl font-bold text-center mb-6 bg-gradient-to-r from-yellow-400 to-green-500 bg-clip-text text-transparent">
+              Frequently Asked Questions
+            </h2>
 
-        <Reveal delay={0.3}>
-          <h2 className="text-2xl font-bold text-center mb-6">
-            FAQ
-          </h2>
+            <FAQ faqs={faqs} />
+          </section>
+        </RevealWithBorder>
+      </OpeningStyle>
 
-          <FAQ faqs={faqs} />
-        </Reveal>
-      </Container>
-    </>
+      <div className="h-12"></div>
+    </main>
   );
 }
