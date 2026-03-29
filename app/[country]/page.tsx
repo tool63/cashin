@@ -15,8 +15,12 @@ import TestimonialSection from "@/components/homepage/TestimonialSection";
 import OpeningStyle from "@/components/animations/openingstyle";
 import RevealWithBorder from "@/components/animations/CircleBorder";
 
-/* SEO */
-import SeoRenderer from "@/components/SEO/SeoRenderer";
+/* SEO (client-safe via dynamic) */
+const SeoRenderer = dynamic(
+  () => import("@/components/SEO/SeoRenderer"),
+  { ssr: false }
+);
+
 import { generateJsonLd } from "@/components/SEO/schema";
 
 /* FAQ */
@@ -36,10 +40,13 @@ const LiveOfferCompletion = dynamic(() => import("@/components/homepage/LiveOffe
 const LiveWithdrawals = dynamic(() => import("@/components/homepage/LiveWithdrawals"), { ssr: false });
 
 /* ===============================
-   🌍 FORMAT COUNTRY NAME
+   🌍 FORMAT COUNTRY NAME (SAFE)
 =============================== */
 function formatCountryName(code: string) {
   try {
+    if (typeof Intl === "undefined" || !("DisplayNames" in Intl)) {
+      return code.toUpperCase();
+    }
     const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
     return regionNames.of(code.toUpperCase()) || code.toUpperCase();
   } catch {
@@ -66,11 +73,14 @@ export default async function HomePage({
 
   const country = countryParam as CountryCode;
   const countryData = getCountry(country);
+
+  if (!countryData) return null;
+
   const countryName = formatCountryName(country);
   const currentYear = new Date().getFullYear();
 
   // -------------------------------
-  // 🔥 SEO (FROM YOUR CLIENT LOGIC)
+  // 🔥 SEO
   // -------------------------------
   const title = `Earn Money Online in ${countryName} (${currentYear})`;
   const description = `Earn real money online in ${countryName}.`;
@@ -83,7 +93,7 @@ export default async function HomePage({
   });
 
   // -------------------------------
-  // 📌 FAQ DATA
+  // 📌 FAQ
   // -------------------------------
   const faqs = [
     {
@@ -96,17 +106,13 @@ export default async function HomePage({
     },
   ];
 
-  const handleOpenAuth = (type: "login" | "signup" | "reset") => {
-    console.log("Open auth modal:", type);
-  };
-
   // -------------------------------
   // 🎯 UI
   // -------------------------------
   return (
     <main className="relative min-h-screen bg-transparent text-gray-900 dark:text-white">
 
-      {/* ✅ SEO */}
+      {/* ✅ SEO (client-only safe) */}
       <SeoRenderer
         path={`/${country}`}
         title={title}
@@ -126,7 +132,7 @@ export default async function HomePage({
       {/* ================= HERO ================= */}
       <OpeningStyle>
         <RevealWithBorder>
-          <HeroSection onOpenAuth={handleOpenAuth} />
+          <HeroSection />
         </RevealWithBorder>
       </OpeningStyle>
 
