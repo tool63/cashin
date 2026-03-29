@@ -1,6 +1,13 @@
 import dynamic from "next/dynamic";
 
-/* Homepage Sections */
+import { getCountry, isValidCountryCode, type CountryCode } from "@/app/core/countries";
+
+/* UI / Layout */
+import Container, { Card, CardGrid } from "@/components/animations/container";
+import CircleBorder from "@/components/animations/CircleBorder";
+import OpeningStyle from "@/components/animations/openingstyle";
+
+/* Sections */
 import HeroSection from "@/components/homepage/HeroSection";
 import FeaturesSection from "@/components/homepage/FeaturesSection";
 import TasksSection from "@/components/homepage/TasksSection";
@@ -11,36 +18,21 @@ import FinalCTASection from "@/components/homepage/FinalCTASection";
 import StatsSection from "@/components/homepage/StatsSection";
 import TestimonialSection from "@/components/homepage/TestimonialSection";
 
-/* Animation Components */
-import OpeningStyle from "@/components/animations/openingstyle";
-import RevealWithBorder from "@/components/animations/CircleBorder";
-
-/* SEO (client-safe via dynamic) */
-const SeoRenderer = dynamic(
-  () => import("@/components/SEO/SeoRenderer"),
-  { ssr: false }
-);
-
-import { generateJsonLd } from "@/components/SEO/schema";
-
-/* FAQ */
-import FAQ from "@/components/faq/FAQ";
-
-/* Country helpers */
-import {
-  getCountry,
-  isValidCountryCode,
-  type CountryCode,
-} from "@/app/core/countries";
-
-/* Live Components */
+/* Live Sections (Dynamic) */
 const LiveJoining = dynamic(() => import("@/components/homepage/LiveJoining"), { ssr: false });
 const LiveEarnings = dynamic(() => import("@/components/homepage/LiveEarnings"), { ssr: false });
 const LiveOfferCompletion = dynamic(() => import("@/components/homepage/LiveOfferCompletion"), { ssr: false });
 const LiveWithdrawals = dynamic(() => import("@/components/homepage/LiveWithdrawals"), { ssr: false });
 
+/* FAQ */
+import FAQ from "@/components/faq/FAQ";
+
+/* SEO */
+import { generateJsonLd } from "@/components/SEO/schema";
+const SeoRenderer = dynamic(() => import("@/components/SEO/SeoRenderer"), { ssr: false });
+
 /* ===============================
-   🌍 FORMAT COUNTRY NAME (SAFE)
+   🌍 COUNTRY FORMAT
 =============================== */
 function formatCountryName(code: string) {
   try {
@@ -62,9 +54,6 @@ export default async function HomePage({
 }: {
   params: { country?: string };
 }) {
-  // -------------------------------
-  // 🌍 VALIDATE COUNTRY
-  // -------------------------------
   const countryParam = params?.country?.toLowerCase();
 
   if (!countryParam || !isValidCountryCode(countryParam)) {
@@ -79,9 +68,7 @@ export default async function HomePage({
   const countryName = formatCountryName(country);
   const currentYear = new Date().getFullYear();
 
-  // -------------------------------
-  // 🔥 SEO
-  // -------------------------------
+  /* SEO */
   const title = `Earn Money Online in ${countryName} (${currentYear})`;
   const description = `Earn real money online in ${countryName}.`;
 
@@ -92,27 +79,32 @@ export default async function HomePage({
     type: "low",
   });
 
-  // -------------------------------
-  // 📌 FAQ
-  // -------------------------------
+  /* FAQ */
   const faqs = [
-    {
-      q: `Is it legit in ${countryName}?`,
-      a: `Yes, users are earning daily.`,
-    },
-    {
-      q: `How to start?`,
-      a: `Sign up and complete offers.`,
-    },
+    { q: `Is it legit in ${countryName}?`, a: "Yes, users are earning daily." },
+    { q: "How to start?", a: "Sign up and complete offers." },
   ];
 
-  // -------------------------------
-  // 🎯 UI
-  // -------------------------------
-  return (
-    <main className="relative min-h-screen bg-transparent text-gray-900 dark:text-white">
+  /* ===============================
+     SECTION WRAPPER (CIRCLE BORDER)
+  =============================== */
+  const Section = ({ children }: { children: React.ReactNode }) => (
+    <OpeningStyle>
+      <CircleBorder>
+        <Container>
+          <Card>{children}</Card>
+        </Container>
+      </CircleBorder>
+    </OpeningStyle>
+  );
 
-      {/* ✅ SEO (client-only safe) */}
+  /* ===============================
+     UI
+  =============================== */
+  return (
+    <main>
+
+      {/* SEO */}
       <SeoRenderer
         path={`/${country}`}
         title={title}
@@ -120,7 +112,6 @@ export default async function HomePage({
         country={country}
       />
 
-      {/* ✅ JSON-LD */}
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -130,98 +121,88 @@ export default async function HomePage({
       />
 
       {/* ================= HERO ================= */}
-      <OpeningStyle>
-        <RevealWithBorder>
-          <HeroSection />
-        </RevealWithBorder>
-      </OpeningStyle>
+      <Section>
+        <HeroSection />
+      </Section>
 
-      <OpeningStyle>
-        <RevealWithBorder>
-          <StatsSection />
-        </RevealWithBorder>
-      </OpeningStyle>
+      {/* ================= LIVE ================= */}
+      <Section>
+        <LiveJoining />
+      </Section>
 
-      <OpeningStyle>
-        <RevealWithBorder>
-          <LiveJoining />
-        </RevealWithBorder>
-      </OpeningStyle>
+      <Section>
+        <LiveEarnings />
+      </Section>
 
-      <OpeningStyle>
-        <RevealWithBorder>
-          <LiveEarnings />
-        </RevealWithBorder>
-      </OpeningStyle>
+      <Section>
+        <LiveOfferCompletion />
+      </Section>
 
-      <OpeningStyle>
-        <RevealWithBorder>
-          <LiveOfferCompletion />
-        </RevealWithBorder>
-      </OpeningStyle>
+      <Section>
+        <LiveWithdrawals />
+      </Section>
 
-      <OpeningStyle>
-        <RevealWithBorder>
-          <LiveWithdrawals />
-        </RevealWithBorder>
-      </OpeningStyle>
+      {/* ================= STATS ================= */}
+      <Section>
+        <StatsSection />
+      </Section>
 
-      <OpeningStyle>
-        <RevealWithBorder>
-          <FeaturesSection />
-        </RevealWithBorder>
-      </OpeningStyle>
+      {/* ================= FEATURES ================= */}
+      <Section>
+        <FeaturesSection />
+      </Section>
 
-      <OpeningStyle>
-        <RevealWithBorder>
-          <TasksSection />
-        </RevealWithBorder>
-      </OpeningStyle>
+      {/* ================= TASKS ================= */}
+      <Section>
+        <TasksSection />
+      </Section>
 
-      <OpeningStyle>
-        <RevealWithBorder>
-          <HighPayingOffers />
-        </RevealWithBorder>
-      </OpeningStyle>
+      {/* ================= OFFERS ================= */}
+      <Section>
+        <HighPayingOffers />
+      </Section>
 
-      <OpeningStyle>
-        <RevealWithBorder>
-          <TestimonialSection />
-        </RevealWithBorder>
-      </OpeningStyle>
+      {/* ================= TRUST ================= */}
+      <Section>
+        <TrustSection />
+      </Section>
 
-      <OpeningStyle>
-        <RevealWithBorder>
-          <TrustSection />
-        </RevealWithBorder>
-      </OpeningStyle>
+      {/* ================= TESTIMONIAL ================= */}
+      <Section>
+        <TestimonialSection />
+      </Section>
 
-      <OpeningStyle>
-        <RevealWithBorder>
-          <PaymentSection />
-        </RevealWithBorder>
-      </OpeningStyle>
+      {/* ================= PAYMENT ================= */}
+      <Section>
+        <PaymentSection />
+      </Section>
 
       {/* ================= FAQ ================= */}
-      <OpeningStyle>
-        <RevealWithBorder>
-          <section className="max-w-7xl mx-auto px-4 py-12 bg-transparent">
-            <h2 className="text-3xl font-bold text-center mb-6 bg-gradient-to-r from-yellow-400 to-green-500 bg-clip-text text-transparent">
-              Frequently Asked Questions
-            </h2>
+      <Section>
+        <section className="text-center">
+          <h2 className="text-3xl font-bold mb-6">
+            Frequently Asked Questions
+          </h2>
 
-            <FAQ faqs={faqs} />
-          </section>
-        </RevealWithBorder>
-      </OpeningStyle>
+          <CardGrid cols={{ default: 1, md: 2 }}>
+            {faqs.map((faq) => (
+              <Card key={faq.q}>
+                <h3 className="font-semibold mb-2">{faq.q}</h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  {faq.a}
+                </p>
+              </Card>
+            ))}
+          </CardGrid>
+        </section>
+      </Section>
 
-      <OpeningStyle>
-        <RevealWithBorder>
-          <FinalCTASection />
-        </RevealWithBorder>
-      </OpeningStyle>
+      {/* ================= CTA ================= */}
+      <Section>
+        <FinalCTASection />
+      </Section>
 
-      <div className="h-12"></div>
+      <div className="h-12" />
     </main>
   );
 }
