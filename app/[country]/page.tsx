@@ -7,6 +7,7 @@ import { useCountry } from "@/app/[country]/providers/CountryProvider";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import SeoRenderer from "@/components/SEO/SeoRenderer";
 import { generateJsonLd } from "@/components/SEO/schema";
+import FAQ from "@/components/faq/FAQ";
 
 // ===============================
 // Feature Card
@@ -27,19 +28,7 @@ function FeatureCard({
 }
 
 // ===============================
-// FAQ Item
-// ===============================
-function FAQItem({ q, a }: { q: string; a: string }) {
-  return (
-    <div className="mb-4">
-      <h4 className="font-semibold">{q}</h4>
-      <p className="text-gray-600 dark:text-gray-300">{a}</p>
-    </div>
-  );
-}
-
-// ===============================
-// Helper: Format Country Name
+// Helper: Country Name
 // ===============================
 function formatCountryName(code: string) {
   try {
@@ -66,7 +55,7 @@ export default function CountryHomePage() {
     getTranslation("homepage", key, fallback);
 
   // ===============================
-  // SEO Content (AUTO YEAR)
+  // SEO
   // ===============================
   const title =
     t(
@@ -78,9 +67,9 @@ export default function CountryHomePage() {
   const description =
     t(
       "homepage_description",
-      `Cashog helps you earn real money online safely and quickly in ${countryName}. Start earning today with surveys, apps, and games.`
+      `Cashog helps you earn real money online in ${countryName}. Start earning today with surveys, apps, and games.`
     ) ||
-    `Cashog helps you earn real money online safely and quickly in ${countryName}.`;
+    `Cashog helps you earn real money online in ${countryName}.`;
 
   // ===============================
   // Features
@@ -116,20 +105,24 @@ export default function CountryHomePage() {
   );
 
   // ===============================
-  // FAQs
+  // FAQ DATA (used by FAQ component)
   // ===============================
   const faqs = [
     {
       q: `Is Cashog legit in ${countryName}?`,
-      a: `Yes, thousands of users in ${countryName} are earning daily.`,
+      a: `Yes, thousands of users in ${countryName} are earning daily with real payouts.`,
     },
     {
       q: `How do I start earning?`,
-      a: `Sign up, complete offers, and start earning instantly.`,
+      a: `Sign up, complete offers like surveys or apps, and start earning instantly.`,
     },
     {
-      q: `How fast can I earn money?`,
-      a: `You can start earning within minutes after joining.`,
+      q: `How fast can I withdraw money?`,
+      a: `Withdrawals are processed quickly depending on your selected method.`,
+    },
+    {
+      q: `Do I need to pay anything?`,
+      a: `No, joining Cashog is completely free.`,
     },
   ];
 
@@ -177,7 +170,7 @@ export default function CountryHomePage() {
           <PrimaryCTA href={signupLink} />
 
           <p className="text-sm mt-4 text-gray-500">
-            ✓ Trusted by thousands of users in {countryName} • No credit card required
+            ✓ Trusted by thousands in {countryName} • No credit card required
           </p>
 
           <p className="text-sm text-gray-500 mt-2">
@@ -204,7 +197,7 @@ export default function CountryHomePage() {
           </h2>
 
           <p className="mb-6">
-            Join thousands of users already earning online.
+            Join thousands already earning online.
           </p>
 
           <PrimaryCTA href={signupLink} />
@@ -214,15 +207,13 @@ export default function CountryHomePage() {
           </p>
         </motion.div>
 
-        {/* FAQ */}
-        <div className="mt-20 max-w-3xl mx-auto">
+        {/* FAQ (NEW COMPONENT) */}
+        <div className="mt-20">
           <h2 className="text-2xl font-bold mb-6 text-center">
             Frequently Asked Questions
           </h2>
 
-          {faqs.map((faq, i) => (
-            <FAQItem key={i} {...faq} />
-          ))}
+          <FAQ faqs={faqs} />
         </div>
       </section>
     </>
