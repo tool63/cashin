@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 
 import { getCountry, isValidCountryCode, type CountryCode } from "@/app/core/countries";
+import { loadAllTranslations } from "@/app/core/i18n/loader";
 
 /* Layout / Animations */
 import CircleBorder from "@/components/animations/CircleBorder";
@@ -23,7 +24,7 @@ const LiveEarnings = dynamic(() => import("@/components/homepage/LiveEarnings"),
 const LiveOfferCompletion = dynamic(() => import("@/components/homepage/LiveOfferCompletion"), { ssr: false });
 const LiveWithdrawals = dynamic(() => import("@/components/homepage/LiveWithdrawals"), { ssr: false });
 
-/* FAQ (ACCORDION DESIGN) */
+/* FAQ */
 import FAQ from "@/components/faq/FAQ";
 
 /* SEO */
@@ -63,6 +64,12 @@ export default async function HomePage({
   const countryName = formatCountryName(country);
   const currentYear = new Date().getFullYear();
 
+  /* 🌐 LANGUAGE DETECTION */
+  const language = countryData.language || "en";
+
+  /* 🌐 LOAD TRANSLATIONS */
+  const t = await loadAllTranslations(language);
+
   /* SEO */
   const title = `Earn Money Online in ${countryName} (${currentYear})`;
   const description = `Earn real money online in ${countryName}.`;
@@ -74,35 +81,35 @@ export default async function HomePage({
     type: "low",
   });
 
-  /* 🔥 HIGH-QUALITY FAQ (FOR ACCORDION) */
+  /* FAQ */
   const faqs = [
     {
       q: `Is it really possible to earn money online in ${countryName}?`,
-      a: `Yes, many users in ${countryName} earn real money every day by completing simple online tasks such as surveys, downloading apps, and testing services. With consistent effort, you can build a steady side income from home.`,
+      a: `Yes, many users in ${countryName} earn real money every day by completing simple online tasks such as surveys, downloading apps, and testing services.`,
     },
     {
       q: `How much can I realistically earn?`,
-      a: `Your earnings depend on how active you are. Most users earn between $50 to $500 per month by regularly completing offers and surveys. High-paying tasks and consistency can significantly increase your income.`,
+      a: `Most users earn between $50 to $500 per month depending on activity and consistency.`,
     },
     {
       q: `Is this platform safe and legit?`,
-      a: `Yes, the platform is secure and trusted by thousands of users worldwide. All transactions are encrypted, and payments are processed through reliable payout systems to ensure safety and transparency.`,
+      a: `Yes, the platform is secure and trusted with encrypted transactions.`,
     },
     {
       q: `How do I start earning money quickly?`,
-      a: `Simply create a free account, complete your profile, and start completing available tasks. Focus on high-paying offers and daily activities to maximize your earnings quickly.`,
+      a: `Create an account, complete tasks, and focus on high-paying offers.`,
     },
     {
       q: `What payment methods are available in ${countryName}?`,
-      a: `Users can withdraw earnings through PayPal, Payoneer, cryptocurrency, and gift cards. The available options may vary depending on your country.`,
+      a: `PayPal, crypto, Payoneer, and gift cards.`,
     },
     {
       q: `How fast are withdrawals processed?`,
-      a: `Most withdrawals are processed within 24 to 48 hours. Some methods offer instant payouts, allowing you to access your earnings quickly.`,
+      a: `Usually within 24–48 hours.`,
     },
     {
       q: `Do I need to pay anything to join?`,
-      a: `No, the platform is completely free to join. There are no hidden charges, and you can start earning immediately without any investment.`,
+      a: `No, it's completely free.`,
     },
   ];
 
@@ -122,7 +129,6 @@ export default async function HomePage({
   /* =============================== */
   return (
     <main>
-
       {/* SEO */}
       <SeoRenderer
         path={`/${country}`}
@@ -140,7 +146,9 @@ export default async function HomePage({
       />
 
       {/* HERO */}
-      <Section><HeroSection /></Section>
+      <Section>
+        <HeroSection data={t.homepage.hero} />
+      </Section>
 
       {/* LIVE */}
       <Section><LiveJoining /></Section>
@@ -149,21 +157,40 @@ export default async function HomePage({
       <Section><LiveWithdrawals /></Section>
 
       {/* CORE */}
-      <Section><StatsSection /></Section>
-      <Section><FeaturesSection /></Section>
-      <Section><TasksSection /></Section>
-      <Section><HighPayingOffers /></Section>
+      <Section>
+        <StatsSection data={t.homepage.stats} />
+      </Section>
+
+      <Section>
+        <FeaturesSection data={t.homepage.features} />
+      </Section>
+
+      <Section>
+        <TasksSection data={t.homepage.tasks} />
+      </Section>
+
+      <Section>
+        <HighPayingOffers data={t.homepage.high_paying_offers} />
+      </Section>
 
       {/* TRUST */}
-      <Section><TrustSection /></Section>
-      <Section><TestimonialSection /></Section>
-      <Section><PaymentSection /></Section>
+      <Section>
+        <TrustSection data={t.homepage.trust} />
+      </Section>
 
-      {/* 🔥 FAQ (ACCORDION DESIGN) */}
+      <Section>
+        <TestimonialSection data={t.homepage.testimonials} />
+      </Section>
+
+      <Section>
+        <PaymentSection data={t.homepage.payment} />
+      </Section>
+
+      {/* FAQ */}
       <Section>
         <div className="w-full max-w-3xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-8">
-            Frequently Asked Questions
+            {t.homepage.faq?.title || "Frequently Asked Questions"}
           </h2>
 
           <FAQ faqs={faqs} />
@@ -171,7 +198,9 @@ export default async function HomePage({
       </Section>
 
       {/* CTA */}
-      <Section><FinalCTASection /></Section>
+      <Section>
+        <FinalCTASection data={t.homepage.final_cta} />
+      </Section>
 
       <div className="h-12" />
     </main>
