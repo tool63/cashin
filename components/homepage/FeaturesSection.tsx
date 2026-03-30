@@ -2,24 +2,31 @@
 
 import { SectionTitle } from "@/components/homepage/SmallComponents";
 import { motion } from "framer-motion";
-import Container, { Card, CardIcon, CardTitle, CardDescription, CardCTA, CardGrid } from "@/components/animations/container";
+import Container, {
+  Card,
+  CardIcon,
+  CardTitle,
+  CardDescription,
+  CardCTA,
+  CardGrid,
+} from "@/components/animations/container";
 
-export default function FeaturesSection() {
+export default function FeaturesSection({ data }: { data: any }) {
   const features = [
     {
       icon: "⚡",
-      title: "Instant Withdrawals",
-      description: "Lightning-fast payouts to your preferred payment method. No waiting, no delays.",
+      title: data.instant_withdrawals?.title,
+      description: data.instant_withdrawals?.description,
     },
     {
       icon: "🛡️",
-      title: "Secure & Trusted",
-      description: "Enterprise-grade security with 256-bit encryption. Your earnings are always protected.",
+      title: data.secure_trusted?.title,
+      description: data.secure_trusted?.description,
     },
     {
       icon: "💳",
-      title: "Multiple Payment Options",
-      description: "Flexible payouts via PayPal, cryptocurrency, bank transfers, and gift cards.",
+      title: data.multiple_payment_options?.title,
+      description: data.multiple_payment_options?.description,
     },
   ];
 
@@ -27,14 +34,14 @@ export default function FeaturesSection() {
     <Container delay={0.12}>
       {/* Section Heading */}
       <div className="mb-12">
-        <SectionTitle icon="✨" text="Why Choose Cashog" />
+        <SectionTitle icon="✨" text={data.title} />
       </div>
 
       {/* Features Grid */}
       <CardGrid cols={{ default: 1, md: 3 }}>
         {features.map((feature, i) => (
           <motion.div
-            key={feature.title}
+            key={i}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
@@ -45,7 +52,7 @@ export default function FeaturesSection() {
               <CardTitle>{feature.title}</CardTitle>
               <CardDescription>{feature.description}</CardDescription>
               <CardCTA>
-                Learn more <span className="text-lg">→</span>
+                {data.cta} <span className="text-lg">→</span>
               </CardCTA>
             </Card>
           </motion.div>
