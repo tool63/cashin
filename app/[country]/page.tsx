@@ -63,7 +63,7 @@ export default async function HomePage({
 
   /* SEO */
   const title = `Earn Money Online in ${countryName} (${currentYear})`;
-  const description = `Earn real money online in ${countryName} by completing surveys, playing games, testing apps, and finishing simple tasks. Start earning today with fast payouts.`;
+  const description = `Earn real money online in ${countryName}.`;
 
   const structuredData = generateJsonLd({
     path: `/${country}`,
@@ -72,35 +72,35 @@ export default async function HomePage({
     type: "low",
   });
 
-  /* 🔥 HIGH-VALUE SEO FAQ */
+  /* 🔥 UPDATED SEO FAQ */
   const faqs = [
     {
       q: `Is it really possible to earn money online in ${countryName}?`,
-      a: `Yes, thousands of users in ${countryName} are earning real money daily through online platforms like Cashog. By completing surveys, installing apps, and finishing simple tasks, you can generate a steady side income from home without any investment.`,
+      a: `Yes, thousands of users in ${countryName} are earning real money daily by completing simple tasks like surveys, app downloads, and offers. With consistent activity, you can build a reliable side income from home.`,
     },
     {
-      q: `How much money can I earn from Cashog in ${countryName}?`,
-      a: `Your earnings depend on your activity level. Most active users in ${countryName} earn between $50 to $500 per month by consistently completing high-paying offers, surveys, and tasks available on the platform.`,
+      q: `How much can I earn from this platform?`,
+      a: `Earnings depend on your activity. Many users earn between $50 to $500 per month by regularly completing high-paying offers and surveys available on the platform.`,
     },
     {
-      q: `Is Cashog safe and legit to use?`,
-      a: `Yes, Cashog is a secure and trusted platform used by thousands of users worldwide. All transactions are protected with encryption, and payouts are processed through reliable payment methods ensuring your earnings are safe.`,
+      q: `Is this platform safe and legit?`,
+      a: `Yes, the platform is secure and trusted. All transactions are encrypted, and users receive payments through reliable and verified payout methods.`,
     },
     {
-      q: `How do I start earning money online quickly?`,
-      a: `Getting started is simple. Sign up for free, complete your profile, and begin taking surveys, downloading apps, or completing offers. The more active you are, the faster you can earn money online.`,
+      q: `How do I start earning quickly?`,
+      a: `Simply sign up for free, complete your profile, and start completing available tasks. The more offers you complete, the faster you can earn money.`,
     },
     {
-      q: `What payment methods are available in ${countryName}?`,
-      a: `Users in ${countryName} can withdraw earnings through popular payment methods such as PayPal, Payoneer, cryptocurrency, and gift cards. Payout options may vary depending on availability in your region.`,
+      q: `What payment methods are available?`,
+      a: `You can withdraw your earnings using PayPal, Payoneer, cryptocurrency, and gift cards, depending on availability in your region.`,
     },
     {
-      q: `How fast can I withdraw my earnings?`,
-      a: `Most withdrawals are processed within 24 to 48 hours. Some instant payout methods are also available, allowing you to receive your earnings quickly after completing tasks.`,
+      q: `How fast are withdrawals processed?`,
+      a: `Most withdrawals are processed within 24 to 48 hours, with some instant payout options available.`,
     },
     {
-      q: `Do I need to pay anything to join?`,
-      a: `No, Cashog is completely free to join. There are no hidden fees or subscription costs. You can start earning money online immediately without any upfront investment.`,
+      q: `Do I need to pay to join?`,
+      a: `No, the platform is completely free to join. There are no hidden fees or subscription costs.`,
     },
   ];
 
@@ -157,7 +157,7 @@ export default async function HomePage({
       <Section><TestimonialSection /></Section>
       <Section><PaymentSection /></Section>
 
-      {/* 🔥 PREMIUM FAQ */}
+      {/* 🔥 IMPROVED FAQ DESIGN */}
       <Section>
         <div className="text-center w-full">
           <h2 className="text-3xl md:text-4xl font-bold mb-10">
@@ -165,14 +165,23 @@ export default async function HomePage({
           </h2>
 
           <CardGrid cols={{ default: 1, md: 2 }}>
-            {faqs.map((faq) => (
-              <Card key={faq.q}>
-                <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">
+            {faqs.map((faq, i) => (
+              <Card
+                key={faq.q}
+                className="text-left p-6 md:p-8 hover:shadow-xl transition duration-300 border border-gray-200 dark:border-gray-800 rounded-xl"
+              >
+                {/* Question */}
+                <h3 className="text-lg md:text-xl font-semibold mb-3 text-gray-900 dark:text-white">
                   {faq.q}
                 </h3>
+
+                {/* Answer */}
                 <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm md:text-base">
                   {faq.a}
                 </p>
+
+                {/* subtle divider */}
+                <div className="mt-4 h-[2px] w-12 bg-gradient-to-r from-yellow-400 to-green-500 rounded-full" />
               </Card>
             ))}
           </CardGrid>
