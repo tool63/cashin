@@ -1,10 +1,213 @@
 {
-  "welcome_message": "Willkommen bei PayUp! Verdienen Sie Geld online durch Umfragen, App-Installationen und Spiele.",
-  "homepage_description": "PayUp hilft Ihnen, sicher und schnell echtes Geld online zu verdienen.",
-  "feature_surveys": "Umfragen",
-  "feature_surveys_desc": "Beantworten Sie Umfragen und sammeln Sie sofort Punkte.",
-  "feature_apps": "Apps",
-  "feature_apps_desc": "Laden Sie Apps herunter und erhalten Sie schnell Geld.",
-  "feature_games": "Spiele",
-  "feature_games_desc": "Spielen Sie unterhaltsame Spiele und verdienen Sie Belohnungen."
+  "hero": {
+    "headline": "Sofort bezahlt werden durch",
+    "subtext": "Erledige Aufgaben, Umfragen, schaue Videos und verdiene Belohnungen sicher von überall aus.",
+    "cta": "Jetzt mit dem Verdienen beginnen",
+    "trust_badge_1": "100% Kostenlos",
+    "trust_badge_2": "Sofortige Auszahlungen",
+    "trust_badge_3": "1M+ Zufriedene Nutzer"
+  },
+  "features": {
+    "title": "Warum Cashog wählen",
+    "instant_withdrawals": {
+      "title": "Sofortige Auszahlungen",
+      "description": "Blitzschnelle Auszahlungen auf deine bevorzugte Zahlungsmethode. Kein Warten, keine Verzögerungen."
+    },
+    "secure_trusted": {
+      "title": "Sicher & Vertrauenswürdig",
+      "description": "Sicherheit auf Unternehmensniveau mit 256-Bit-Verschlüsselung. Deine Einnahmen sind immer geschützt."
+    },
+    "multiple_payment_options": {
+      "title": "Mehrere Zahlungsoptionen",
+      "description": "Flexible Auszahlungen per PayPal, Kryptowährung, Banküberweisung und Geschenkkarten."
+    },
+    "cta": "Mehr erfahren"
+  },
+  "stats": {
+    "title": "Unsere Erfolge",
+    "description": "Echte Kennzahlen, die unser Wachstum und unser Engagement für die beste Verdienstplattform zeigen",
+    "total_users": "Gesamtnutzer",
+    "total_users_description": "Registrierte Nutzer weltweit",
+    "daily_active_users": "Täglich aktive Nutzer",
+    "daily_active_users_description": "Täglich online",
+    "total_offers": "Angebote insgesamt",
+    "total_offers_description": "Aktive Verdienstmöglichkeiten",
+    "offers_completed": "Abgeschlossene Angebote",
+    "offers_completed_description": "Erledigte Aufgaben und Angebote",
+    "total_advertisers": "Werbetreibende insgesamt",
+    "total_advertisers_description": "Vertrauenswürdige Markenpartner",
+    "total_amount_paid": "Ausgezahlter Gesamtbetrag",
+    "total_amount_paid_description": "An Nutzer ausgezahlte Einnahmen",
+    "trust_badge_1": "4.8/5 Trustpilot Bewertung",
+    "trust_badge_2": "24/7 Support",
+    "trust_badge_3": "99.9% Verfügbarkeit",
+    "trust_badge_4": "5+ Jahre im Geschäft",
+    "trust_badge_5": "100% Sicher",
+    "trust_badge_6": "Verifizierte Erfolge",
+    "trust_badge_7": "Echtzeit-Updates",
+    "trust_badge_8": "Von Dritten verifiziert",
+    "trust_badge_9": "Täglich aktualisiert"
+  },
+  "live_joining": {
+    "title": "Live-Beitritte",
+    "description": "Sieh in Echtzeit, wie neue Nutzer aus aller Welt beitreten",
+    "toggle": "Live-Updates",
+    "stat_1": "Aktive Nutzer",
+    "stat_2": "Länder",
+    "stat_3": "Echtzeit-Updates"
+  },
+  "live_earnings": {
+    "title": "Live-Einnahmen",
+    "description": "Sieh in Echtzeit, wie Nutzer aus aller Welt Aufgaben erledigen und verdienen",
+    "toggle": "Live-Updates",
+    "stat_1": "Aktive Nutzer",
+    "stat_2": "Echtzeit-Updates",
+    "stat_3": "Gesamt"
+  },
+  "live_offer_completion": {
+    "title": "Live-Angebotsabschlüsse",
+    "description": "Sieh in Echtzeit, wie Nutzer Angebote abschließen und Belohnungen verdienen",
+    "toggle": "Live-Updates",
+    "stat_1": "Abgeschlossene Angebote",
+    "stat_2": "Länder",
+    "stat_3": "Echtzeit-Updates"
+  },
+  "live_withdrawals": {
+    "title": "Live-Auszahlungen",
+    "description": "Sieh in Echtzeit, wie Nutzer aus aller Welt ihre Einnahmen abheben",
+    "toggle": "Live-Updates",
+    "stat_1": "Auszahlungen",
+    "stat_2": "Länder",
+    "stat_3": "Gesamt"
+  },
+  "tasks": {
+    "title": "Hochbezahlte Aufgaben",
+    "surveys": "Umfragen",
+    "surveys_description": "Teile deine Meinung und werde sofort belohnt",
+    "app_installs": "App-Installationen",
+    "app_installs_description": "Installiere Apps und verdiene einfach Geld",
+    "playing_games": "Spiele spielen",
+    "playing_games_description": "Hab Spaß und verdiene Belohnungen",
+    "watching_videos": "Videos ansehen",
+    "watching_videos_description": "Schaue kurze Videos und werde bezahlt",
+    "mining_rewards": "Mining-Belohnungen",
+    "mining_rewards_description": "Verdiene Krypto beim Mining",
+    "completing_offers": "Angebote abschließen",
+    "completing_offers_description": "Erledige Aufgaben und erhalte sofortige Auszahlungen",
+    "offerwall": "Angebotswand",
+    "offerwall_description": "Schließe mehrere Angebote für Boni ab",
+    "surveywall": "Umfragewand",
+    "surveywall_description": "Entdecke Umfragen mit höheren Auszahlungen",
+    "watching_ads": "Werbung ansehen",
+    "watching_ads_description": "Verdiene durch das Ansehen von Werbung",
+    "micro_tasks": "Mikroaufgaben",
+    "micro_tasks_description": "Kleine Aufgaben für zusätzliches Geld",
+    "free_trials": "Kostenlose Testversionen",
+    "free_trials_description": "Teste kostenlose Testversionen und verdiene Belohnungen",
+    "testing_products": "Produkte testen",
+    "testing_products_description": "Teste Produkte und werde bezahlt",
+    "reading_emails": "E-Mails lesen",
+    "reading_emails_description": "Lies E-Mails und verdiene Geld",
+    "visiting_websites": "Websites besuchen",
+    "visiting_websites_description": "Besuche Websites und verdiene sofort",
+    "review_tasks": "Bewertungsaufgaben",
+    "review_tasks_description": "Erledige Bewertungsaufgaben für Belohnungen",
+    "spinning_wheel": "Glücksrad",
+    "spinning_wheel_description": "Drehe das Rad und gewinne Preise",
+    "loyalty": "Treueprogramm",
+    "loyalty_description": "Sammle Treuepunkte im Laufe der Zeit",
+    "vouchers": "Gutscheine",
+    "vouchers_description": "Erhalte Gutscheine als Auszahlungsoption",
+    "cta": "Jetzt verdienen"
+  },
+  "high_paying_offers": {
+    "title": "Hochbezahlte Angebote",
+    "description": "Schließe diese Top-Angebote ab und verdiene sofort große Belohnungen",
+    "categories": {
+      "surveys": "Umfragen",
+      "app_installs": "App-Installationen",
+      "play_games": "Spiele spielen",
+      "watch_videos": "Videos ansehen"
+    },
+    "table": {
+      "offer": "Angebot",
+      "country": "Land",
+      "completions": "Abschlüsse",
+      "payout": "Auszahlung"
+    },
+    "stats": {
+      "available_offers": "Verfügbare Angebote",
+      "total_potential": "Gesamtpotenzial",
+      "high_paying": "Hochbezahlt",
+      "hot_offers": "Heiße Angebote"
+    },
+    "no_offers": "Keine Angebote in dieser Kategorie verfügbar"
+  },
+  "trust": {
+    "title": "Warum du uns vertrauen kannst",
+    "description": "Unsere Plattform gewährleistet Sicherheit, Zuverlässigkeit und sofortige Auszahlungen, damit du dich ohne Sorgen auf das Verdienen konzentrieren kannst.",
+    "secure_payments": {
+      "title": "Sichere Zahlungen",
+      "description": "Alle Transaktionen sind verschlüsselt und sicher"
+    },
+    "trusted_by_millions": {
+      "title": "Von Millionen vertraut",
+      "description": "Millionen von Nutzern weltweit vertrauen unserer Plattform"
+    },
+    "fast_payouts": {
+      "title": "Schnelle Auszahlungen",
+      "description": "Erhalte deine Einnahmen sofort mit mehreren Methoden"
+    },
+    "support": {
+      "title": "24/7 Support",
+      "description": "Unser Support-Team ist immer für dich da"
+    },
+    "trust_badge_1": "256-Bit-Verschlüsselung",
+    "trust_badge_2": "DSGVO-konform",
+    "trust_badge_3": "SSL-gesichert",
+    "trust_badge_4": "Verifiziertes Unternehmen"
+  },
+  "testimonials": {
+    "title": "Was unsere Nutzer sagen",
+    "description": "Schließe dich 2,5 Mio. zufriedenen Nutzern an, die täglich echtes Geld verdienen",
+    "stats": {
+      "average_rating": "Durchschnittliche Bewertung",
+      "verified_reviews": "Verifizierte Bewertungen",
+      "would_recommend": "Würden empfehlen",
+      "countries": "Länder"
+    },
+    "trust_badge_1": "Verifizierte Bewertungen",
+    "trust_badge_2": "Echte Nutzer",
+    "trust_badge_3": "Wöchentlich aktualisiert",
+    "trust_badge_4": "Trustpilot verifiziert"
+  },
+  "payment": {
+    "title": "Zahlungsmethoden",
+    "description": "Schnelle, sichere und vertrauenswürdige Auszahlungsoptionen. Hebe deine Einnahmen sofort mit deiner bevorzugten Methode ab.",
+    "methods": {
+      "paypal": "PayPal",
+      "tether": "Tether (USDT)",
+      "bitcoin": "Bitcoin",
+      "gift_cards": "Geschenkkarten",
+      "litecoin": "Litecoin",
+      "ethereum": "Ethereum",
+      "dogecoin": "Dogecoin",
+      "binance_coin": "Binance Coin (BNB)"
+    },
+    "trust_badge_1": "Sofortige Auszahlungen",
+    "trust_badge_2": "Keine versteckten Gebühren",
+    "trust_badge_3": "24/7 Bearbeitung",
+    "trust_badge_4": "Weltweite Zahlungen"
+  },
+  "faq": {
+    "title": "Häufig gestellte Fragen"
+  },
+  "final_cta": {
+    "title": "Beginne noch heute, echtes Geld zu verdienen!",
+    "description": "Schließe dich Millionen von Nutzern an, die bereits täglich verdienen. Erledige Umfragen, Aufgaben und hochbezahlte Angebote sicher von überall aus.",
+    "cta": "Jetzt mit dem Verdienen beginnen",
+    "trust_badge_1": "1M+ Zufriedene Nutzer",
+    "trust_badge_2": "$10M+ Ausgezahlt",
+    "trust_badge_3": "4.8/5 Trustpilot"
+  }
 }
