@@ -24,6 +24,10 @@ import {
 
 /* ================= TYPES ================= */
 
+interface Props {
+  data: any;
+}
+
 interface Stat {
   icon: React.ReactNode;
   value: string;
@@ -36,56 +40,55 @@ interface Stat {
   };
 }
 
-/* ================= DATA ================= */
-
-const stats: Stat[] = [
-  {
-    icon: <Users className="w-8 h-8 text-blue-500" />,
-    value: "2.5M+",
-    label: "Total Users",
-    description: "Registered users worldwide",
-    trend: { value: "+12%", direction: "up", text: "+150k this month" },
-  },
-  {
-    icon: <Activity className="w-8 h-8 text-indigo-500" />,
-    value: "850K+",
-    label: "Daily Active Users",
-    description: "Users online daily",
-    trend: { value: "+18%", direction: "up", text: "Peak: 1.2M yesterday" },
-  },
-  {
-    icon: <Target className="w-8 h-8 text-purple-500" />,
-    value: "1,200+",
-    label: "Total Offers",
-    description: "Active earning opportunities",
-    trend: { value: "+8%", direction: "up", text: "+50 new offers" },
-  },
-  {
-    icon: <CheckCircle className="w-8 h-8 text-green-500" />,
-    value: "15M+",
-    label: "Offers Completed",
-    description: "Total tasks and offers finished",
-    trend: { value: "+15%", direction: "up", text: "+2M this quarter" },
-  },
-  {
-    icon: <Building2 className="w-8 h-8 text-orange-500" />,
-    value: "350+",
-    label: "Total Advertisers",
-    description: "Trusted brand partners",
-    trend: { value: "+5%", direction: "up", text: "Including Fortune 500" },
-  },
-  {
-    icon: <DollarSign className="w-8 h-8 text-emerald-500" />,
-    value: "$8.5M+",
-    label: "Total Paid",
-    description: "Earnings paid to users",
-    trend: { value: "+22%", direction: "up", text: "+$1.2M this year" },
-  },
-];
-
 /* ================= COMPONENT ================= */
 
-export default function StatsSection() {
+export default function StatsSection({ data }: Props) {
+  const stats: Stat[] = [
+    {
+      icon: <Users className="w-8 h-8 text-blue-500" />,
+      value: data.stats.users.value,
+      label: data.stats.users.label,
+      description: data.stats.users.description,
+      trend: data.stats.users.trend,
+    },
+    {
+      icon: <Activity className="w-8 h-8 text-indigo-500" />,
+      value: data.stats.daily.value,
+      label: data.stats.daily.label,
+      description: data.stats.daily.description,
+      trend: data.stats.daily.trend,
+    },
+    {
+      icon: <Target className="w-8 h-8 text-purple-500" />,
+      value: data.stats.offers.value,
+      label: data.stats.offers.label,
+      description: data.stats.offers.description,
+      trend: data.stats.offers.trend,
+    },
+    {
+      icon: <CheckCircle className="w-8 h-8 text-green-500" />,
+      value: data.stats.completed.value,
+      label: data.stats.completed.label,
+      description: data.stats.completed.description,
+      trend: data.stats.completed.trend,
+    },
+    {
+      icon: <Building2 className="w-8 h-8 text-orange-500" />,
+      value: data.stats.advertisers.value,
+      label: data.stats.advertisers.label,
+      description: data.stats.advertisers.description,
+      trend: data.stats.advertisers.trend,
+    },
+    {
+      icon: <DollarSign className="w-8 h-8 text-emerald-500" />,
+      value: data.stats.paid.value,
+      label: data.stats.paid.label,
+      description: data.stats.paid.description,
+      trend: data.stats.paid.trend,
+    },
+  ];
+
+  /* Trend Renderer */
   const renderTrend = (trend?: Stat["trend"]) => {
     if (!trend) return null;
 
@@ -123,9 +126,9 @@ export default function StatsSection() {
 
         {/* Heading */}
         <div className="text-center mb-12">
-          <SectionTitle icon="🏆" text="Our Achievements" />
+          <SectionTitle icon="🏆" text={data.title} />
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-4 leading-relaxed">
-            Real metrics that showcase our growth and commitment to providing the best earning platform
+            {data.description}
           </p>
         </div>
 
@@ -133,7 +136,7 @@ export default function StatsSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {stats.map((stat, index) => (
             <motion.div
-              key={stat.label}
+              key={index}
               initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
@@ -157,19 +160,16 @@ export default function StatsSection() {
 
         {/* Highlights */}
         <div className="mt-16 flex flex-wrap justify-center gap-8 text-sm text-gray-600 dark:text-gray-400">
-          <span>★ 4.8/5 Trustpilot Rating</span>
-          <span>✓ 24/7 Support</span>
-          <span>✓ 99.9% Uptime</span>
-          <span>✓ 5+ Years in Business</span>
-          <span>✓ 100% Secure</span>
+          {data.highlights.map((item: string, i: number) => (
+            <span key={i}>{item}</span>
+          ))}
         </div>
 
         {/* Trust */}
         <div className="mt-8 flex flex-wrap justify-center gap-8 text-sm text-gray-600 dark:text-gray-400">
-          <span>✓ Verified Achievements</span>
-          <span>✓ Real-time Updates</span>
-          <span>✓ Third-party Verified</span>
-          <span>✓ Updated Daily</span>
+          {data.trust.map((item: string, i: number) => (
+            <span key={i}>{item}</span>
+          ))}
         </div>
 
       </section>
