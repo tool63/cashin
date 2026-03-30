@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback, useMemo } from "react";
 import { Wallet } from "lucide-react";
 import OpeningStyle from "@/components/animations/openingstyle";
+import { useTranslations } from "@/components/providers/LanguageProvider";
 
 /* ================= DATA ================= */
 
@@ -60,6 +61,8 @@ const generateWithdrawal = (id: number): Withdrawal => ({
 /* ================= COMPONENT ================= */
 
 export default function LiveWithdrawals() {
+  const t = useTranslations("homepage");
+
   const [withdrawals, setWithdrawals] = useState<Withdrawal[]>(() =>
     Array.from({ length: 50 }, (_, i) => generateWithdrawal(i + 1))
   );
@@ -78,7 +81,7 @@ export default function LiveWithdrawals() {
   useEffect(() => {
     if (!isLive) return;
 
-    let timeout: NodeJS.Timeout;
+    let timeout: ReturnType<typeof setTimeout>;
 
     const loop = () => {
       addWithdrawal();
@@ -99,12 +102,11 @@ export default function LiveWithdrawals() {
     return () => clearInterval(interval);
   }, []);
 
-  /* Memoized total (performance optimization) */
+  /* Memoized total */
   const totalAmount = useMemo(() => {
-    return withdrawals.reduce(
-      (sum, w) => sum + parseFloat(w.amount.replace("$", "")),
-      0
-    ).toFixed(0);
+    return withdrawals
+      .reduce((sum, w) => sum + parseFloat(w.amount.replace(/[^\d.]/g, "")), 0)
+      .toFixed(0);
   }, [withdrawals]);
 
   return (
@@ -120,14 +122,14 @@ export default function LiveWithdrawals() {
 
             <h2 className="text-3xl md:text-4xl font-bold">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-orange-500">
-                Live Withdrawals
+                {t("liveWithdrawals.title")}
               </span>
             </h2>
           </div>
 
           {/* Description */}
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8 leading-relaxed">
-            Watch users withdraw their earnings in real-time from around the world
+            {t("liveWithdrawals.description")}
           </p>
 
           {/* Toggle */}
@@ -179,9 +181,9 @@ export default function LiveWithdrawals() {
 
           {/* Stats */}
           <div className="mt-8 flex flex-wrap justify-center gap-6 text-sm text-gray-600 dark:text-gray-400">
-            <span>● {withdrawals.length}+ Withdrawals</span>
-            <span>● 24+ Countries</span>
-            <span>● Total: ${totalAmount}+</span>
+            <span>● {withdrawals.length}+ {t("liveWithdrawals.withdrawals")}</span>
+            <span>● 24+ {t("liveWithdrawals.countries")}</span>
+            <span>● {t("liveWithdrawals.total")}: ${totalAmount}+</span>
           </div>
 
         </div>
