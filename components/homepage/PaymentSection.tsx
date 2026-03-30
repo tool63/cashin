@@ -4,30 +4,33 @@ import { SectionTitle } from "@/components/homepage/SmallComponents";
 import { motion } from "framer-motion";
 import OpeningStyle from "@/components/animations/openingstyle";
 import { Card, CardIcon, CardTitle, CardDescription, CardGrid } from "@/components/animations/container";
+import { useTranslations } from "@/components/providers/LanguageProvider";
 
 /* ================= TYPES ================= */
 
 interface PaymentMethod {
-  name: string;
+  key: string;
   emoji: string;
 }
 
 /* ================= DATA ================= */
 
 const methods: PaymentMethod[] = [
-  { name: "PayPal", emoji: "💸" },
-  { name: "Tether (USDT)", emoji: "🪙" },
-  { name: "Bitcoin", emoji: "₿" },
-  { name: "Gift Cards", emoji: "🎁" },
-  { name: "Litecoin", emoji: "Ł" },
-  { name: "Ethereum", emoji: "Ξ" },
-  { name: "Dogecoin", emoji: "Ð" },
-  { name: "Binance Coin (BNB)", emoji: "🟡" },
+  { key: "paypal", emoji: "💸" },
+  { key: "usdt", emoji: "🪙" },
+  { key: "bitcoin", emoji: "₿" },
+  { key: "giftcards", emoji: "🎁" },
+  { key: "litecoin", emoji: "Ł" },
+  { key: "ethereum", emoji: "Ξ" },
+  { key: "dogecoin", emoji: "Ð" },
+  { key: "bnb", emoji: "🟡" },
 ];
 
 /* ================= COMPONENT ================= */
 
 export default function PaymentSection() {
+  const t = useTranslations("homepage");
+
   return (
     <OpeningStyle delay={0.15}>
       <section className="max-w-7xl mx-auto px-6 py-20">
@@ -35,19 +38,22 @@ export default function PaymentSection() {
 
           {/* Heading */}
           <div className="mb-6">
-            <SectionTitle icon="💰" text="Payment Methods" />
+            <SectionTitle
+              icon="💰"
+              text={t("payments.title")}
+            />
           </div>
 
           {/* Description */}
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed">
-            Fast, secure, and trusted payout options. Withdraw your earnings instantly via your favorite method.
+            {t("payments.description")}
           </p>
 
           {/* Grid */}
           <CardGrid cols={{ default: 2, sm: 3, md: 4 }}>
             {methods.map((method, i) => (
               <motion.div
-                key={method.name}
+                key={method.key}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
@@ -55,8 +61,10 @@ export default function PaymentSection() {
               >
                 <Card>
                   <CardIcon>{method.emoji}</CardIcon>
-                  <CardTitle>{method.name}</CardTitle>
-                  <CardDescription>Instant payout</CardDescription>
+                  <CardTitle>{t(`payments.methods.${method.key}`)}</CardTitle>
+                  <CardDescription>
+                    {t("payments.instant")}
+                  </CardDescription>
                 </Card>
               </motion.div>
             ))}
@@ -64,18 +72,27 @@ export default function PaymentSection() {
 
           {/* Trust badges */}
           <div className="mt-16 flex flex-wrap justify-center gap-8 text-sm text-gray-600 dark:text-gray-400">
+
             <span className="flex items-center gap-2">
-              <span className="text-green-500">✓</span> Instant Withdrawals
+              <span className="text-green-500">✓</span>
+              {t("payments.trust.instant")}
             </span>
+
             <span className="flex items-center gap-2">
-              <span className="text-green-500">✓</span> No Hidden Fees
+              <span className="text-green-500">✓</span>
+              {t("payments.trust.noFees")}
             </span>
+
             <span className="flex items-center gap-2">
-              <span className="text-green-500">✓</span> 24/7 Processing
+              <span className="text-green-500">✓</span>
+              {t("payments.trust.processing")}
             </span>
+
             <span className="flex items-center gap-2">
-              <span className="text-green-500">✓</span> Global Payments
+              <span className="text-green-500">✓</span>
+              {t("payments.trust.global")}
             </span>
+
           </div>
 
         </div>
