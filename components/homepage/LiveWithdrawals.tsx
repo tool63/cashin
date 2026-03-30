@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { Wallet } from "lucide-react";
 import OpeningStyle from "@/components/animations/openingstyle";
-import Container from "@/components/animations/container";
 
 /* ================= DATA ================= */
 
@@ -34,11 +33,11 @@ interface Withdrawal {
 
 /* ================= HELPERS ================= */
 
-const randomCountry = () =>
-  countries[Math.floor(Math.random() * countries.length)];
+const randomFrom = <T,>(arr: T[]): T =>
+  arr[Math.floor(Math.random() * arr.length)];
 
-const randomName = () =>
-  names[Math.floor(Math.random() * names.length)];
+const randomCountry = () => randomFrom(countries);
+const randomName = () => randomFrom(names);
 
 const randomAmount = () => {
   const value = Math.random() * 45 + 5;
@@ -47,62 +46,66 @@ const randomAmount = () => {
 
 const formatTime = (timestamp: number) => {
   const diff = Math.floor((Date.now() - timestamp) / 1000);
-  if (diff < 60) return `${diff}s ago`;
-  return `${Math.floor(diff / 60)}m ago`;
+  return diff < 60 ? `${diff}s ago` : `${Math.floor(diff / 60)}m ago`;
 };
 
-const generateWithdrawal = (id: number): Withdrawal => {
-  const country = randomCountry();
-  return {
-    id,
-    name: randomName(),
-    flag: country.flag,
-    amount: randomAmount(),
-    createdAt: Date.now() - Math.floor(Math.random() * 60000),
-  };
-};
+const generateWithdrawal = (id: number): Withdrawal => ({
+  id,
+  name: randomName(),
+  flag: randomCountry().flag,
+  amount: randomAmount(),
+  createdAt: Date.now() - Math.floor(Math.random() * 60000),
+});
 
 /* ================= COMPONENT ================= */
 
 export default function LiveWithdrawals() {
   const [withdrawals, setWithdrawals] = useState<Withdrawal[]>(() =>
-    Array.from({ length: 100 }, (_, i) => generateWithdrawal(i + 1))
+    Array.from({ length: 50 }, (_, i) => generateWithdrawal(i + 1))
   );
 
   const [isLive, setIsLive] = useState(true);
 
-  /* Live update */
+  /* Add new withdrawal */
+  const addWithdrawal = useCallback(() => {
+    setWithdrawals((prev) => {
+      const newItem = generateWithdrawal(Date.now());
+      return [newItem, ...prev.slice(0, 49)];
+    });
+  }, []);
+
+  /* Live updates */
   useEffect(() => {
     if (!isLive) return;
 
-    let active = true;
+    let timeout: NodeJS.Timeout;
 
-    const addNew = () => {
-      if (!active) return;
-
-      setWithdrawals((prev) => [
-        generateWithdrawal(Date.now()),
-        ...prev.slice(0, 99),
-      ]);
-
-      const next = Math.floor(Math.random() * 50000) + 2000;
-      setTimeout(addNew, next);
+    const loop = () => {
+      addWithdrawal();
+      timeout = setTimeout(loop, Math.random() * 45000 + 2000);
     };
 
-    addNew();
+    loop();
 
-    return () => {
-      active = false;
-    };
-  }, [isLive]);
+    return () => clearTimeout(timeout);
+  }, [isLive, addWithdrawal]);
 
-  /* Update time every second */
+  /* Force time refresh */
   useEffect(() => {
     const interval = setInterval(() => {
       setWithdrawals((prev) => [...prev]);
     }, 1000);
+
     return () => clearInterval(interval);
   }, []);
+
+  /* Memoized total (performance optimization) */
+  const totalAmount = useMemo(() => {
+    return withdrawals.reduce(
+      (sum, w) => sum + parseFloat(w.amount.replace("$", "")),
+      0
+    ).toFixed(0);
+  }, [withdrawals]);
 
   return (
     <OpeningStyle delay={0.15}>
@@ -114,6 +117,7 @@ export default function LiveWithdrawals() {
             <div className="p-3 rounded-2xl bg-amber-400/20 border border-amber-400">
               <Wallet className="text-amber-500 w-7 h-7" />
             </div>
+
             <h2 className="text-3xl md:text-4xl font-bold">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-orange-500">
                 Live Withdrawals
@@ -128,27 +132,23 @@ export default function LiveWithdrawals() {
 
           {/* Toggle */}
           <div className="flex justify-center mb-8">
-            <label className="flex items-center cursor-pointer gap-2">
-              <span className="text-gray-700 dark:text-gray-300 font-medium">
-                Live Updates
-              </span>
-              <div
-                onClick={() => setIsLive(!isLive)}
-                className={`w-12 h-6 flex items-center rounded-full p-1 transition-colors duration-300 ${
-                  isLive ? "bg-amber-400" : "bg-gray-400"
+            <button
+              onClick={() => setIsLive((prev) => !prev)}
+              className={`w-14 h-7 flex items-center rounded-full p-1 transition ${
+                isLive ? "bg-amber-400" : "bg-gray-400"
+              }`}
+              aria-label="Toggle live updates"
+            >
+              <span
+                className={`bg-white w-5 h-5 rounded-full shadow transform transition ${
+                  isLive ? "translate-x-7" : "translate-x-0"
                 }`}
-              >
-                <div
-                  className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-300 ${
-                    isLive ? "translate-x-6" : "translate-x-0"
-                  }`}
-                />
-              </div>
-            </label>
+              />
+            </button>
           </div>
 
-          {/* List Container */}
-          <div className="relative rounded-3xl border border-gray-200 dark:border-white/10 bg-gray-100 dark:bg-white/5 shadow-lg hover:border-amber-500/40 hover:shadow-xl transition-all duration-300 overflow-hidden">
+          {/* List */}
+          <div className="relative rounded-3xl border border-gray-200 dark:border-white/10 bg-gray-100 dark:bg-white/5 shadow-lg overflow-hidden">
             <div className="h-[500px] overflow-y-auto">
               <ul className="space-y-4 p-6">
                 {withdrawals.map((w) => (
@@ -157,9 +157,8 @@ export default function LiveWithdrawals() {
                     className="grid grid-cols-4 items-center px-5 py-3 rounded-xl
                       bg-white/80 dark:bg-[#111827]/80
                       border border-gray-200 dark:border-white/10
-                      text-gray-900 dark:text-white text-sm md:text-base font-medium
-                      hover:border-amber-500/40 hover:shadow-lg hover:-translate-y-0.5
-                      transition-all duration-300"
+                      text-sm md:text-base font-medium
+                      hover:border-amber-500/40 transition"
                   >
                     <span className="truncate">{w.name}</span>
                     <span className="text-xl text-center">{w.flag}</span>
@@ -174,22 +173,17 @@ export default function LiveWithdrawals() {
               </ul>
             </div>
 
-            {/* Gradient fade at bottom */}
-            <div className="pointer-events-none absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-gray-100 dark:from-[#0b0f19] to-transparent rounded-b-3xl" />
+            {/* Fade */}
+            <div className="pointer-events-none absolute bottom-0 w-full h-20 bg-gradient-to-t from-gray-100 dark:from-[#0b0f19]" />
           </div>
 
           {/* Stats */}
           <div className="mt-8 flex flex-wrap justify-center gap-6 text-sm text-gray-600 dark:text-gray-400">
-            <div className="flex items-center gap-2">
-              <span className="text-amber-500">●</span> {withdrawals.length}+ Withdrawals
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-amber-500">●</span> 24+ Countries
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-amber-500">●</span> Total: ${withdrawals.reduce((sum, w) => sum + parseFloat(w.amount.replace('$', '')), 0).toFixed(0)}+
-            </div>
+            <span>● {withdrawals.length}+ Withdrawals</span>
+            <span>● 24+ Countries</span>
+            <span>● Total: ${totalAmount}+</span>
           </div>
+
         </div>
       </section>
     </OpeningStyle>
