@@ -1,10 +1,213 @@
 {
-  "welcome_message": "Welcome to Cashog! Earn money online by completing surveys, installing apps, and playing games.",
-  "homepage_description": "Cashog helps you earn real money online safely and quickly.",
-  "feature_surveys": "Complete Surveys",
-  "feature_surveys_desc": "Answer surveys and earn points instantly.",
-  "feature_apps": "Install Apps",
-  "feature_apps_desc": "Download apps and get paid quickly.",
-  "feature_games": "Play Games",
-  "feature_games_desc": "Play fun games and earn rewards."
+  "hero": {
+    "headline": "Get Paid Instantly By",
+    "subtext": "Complete tasks, surveys, watch videos, and earn rewards securely from anywhere.",
+    "cta": "Start Earning Now",
+    "trust_badge_1": "100% Free to Join",
+    "trust_badge_2": "Instant Payouts",
+    "trust_badge_3": "1M+ Happy Users"
+  },
+  "features": {
+    "title": "Why Choose Cashog",
+    "instant_withdrawals": {
+      "title": "Instant Withdrawals",
+      "description": "Lightning-fast payouts to your preferred payment method. No waiting, no delays."
+    },
+    "secure_trusted": {
+      "title": "Secure & Trusted",
+      "description": "Enterprise-grade security with 256-bit encryption. Your earnings are always protected."
+    },
+    "multiple_payment_options": {
+      "title": "Multiple Payment Options",
+      "description": "Flexible payouts via PayPal, cryptocurrency, bank transfers, and gift cards."
+    },
+    "cta": "Learn more"
+  },
+  "stats": {
+    "title": "Our Achievements",
+    "description": "Real metrics that showcase our growth and commitment to providing the best earning platform",
+    "total_users": "Total Users",
+    "total_users_description": "Registered users worldwide",
+    "daily_active_users": "Daily Active Users",
+    "daily_active_users_description": "Users online daily",
+    "total_offers": "Total Offers",
+    "total_offers_description": "Active earning opportunities",
+    "offers_completed": "Offers Completed",
+    "offers_completed_description": "Total tasks and offers finished",
+    "total_advertisers": "Total Advertisers",
+    "total_advertisers_description": "Trusted brand partners",
+    "total_amount_paid": "Total Amount Paid",
+    "total_amount_paid_description": "Earnings paid to users",
+    "trust_badge_1": "4.8/5 Trustpilot Rating",
+    "trust_badge_2": "24/7 Support",
+    "trust_badge_3": "99.9% Uptime",
+    "trust_badge_4": "5+ Years in Business",
+    "trust_badge_5": "100% Secure",
+    "trust_badge_6": "Verified Achievements",
+    "trust_badge_7": "Real-time Updates",
+    "trust_badge_8": "Third-party Verified",
+    "trust_badge_9": "Updated Daily"
+  },
+  "live_joining": {
+    "title": "Live Joining",
+    "description": "Watch new users joining from around the world in real-time",
+    "toggle": "Live Updates",
+    "stat_1": "Active Users",
+    "stat_2": "Countries",
+    "stat_3": "Updated in Real-time"
+  },
+  "live_earnings": {
+    "title": "Live Earnings",
+    "description": "Watch real-time earnings from users around the world completing tasks and offers",
+    "toggle": "Live Updates",
+    "stat_1": "Active Users",
+    "stat_2": "Updated in Real-time",
+    "stat_3": "Total"
+  },
+  "live_offer_completion": {
+    "title": "Live Offer Completion",
+    "description": "Watch users complete offers and earn rewards in real-time",
+    "toggle": "Live Updates",
+    "stat_1": "Offers Completed",
+    "stat_2": "Countries",
+    "stat_3": "Updated in Real-time"
+  },
+  "live_withdrawals": {
+    "title": "Live Withdrawals",
+    "description": "Watch users withdraw their earnings in real-time from around the world",
+    "toggle": "Live Updates",
+    "stat_1": "Withdrawals",
+    "stat_2": "Countries",
+    "stat_3": "Total"
+  },
+  "tasks": {
+    "title": "High Paying Tasks",
+    "surveys": "Surveys",
+    "surveys_description": "Share your opinions and get rewarded instantly",
+    "app_installs": "App Installs",
+    "app_installs_description": "Install apps and earn money easily",
+    "playing_games": "Playing Games",
+    "playing_games_description": "Have fun while earning rewards",
+    "watching_videos": "Watching Videos",
+    "watching_videos_description": "Watch short videos and get paid",
+    "mining_rewards": "Mining Rewards",
+    "mining_rewards_description": "Earn crypto while mining rewards",
+    "completing_offers": "Completing Offers",
+    "completing_offers_description": "Finish tasks and get instant payouts",
+    "offerwall": "Offerwall",
+    "offerwall_description": "Complete multiple offers for bonuses",
+    "surveywall": "Surveywall",
+    "surveywall_description": "Explore surveys with higher payouts",
+    "watching_ads": "Watching Ads",
+    "watching_ads_description": "Earn by watching ads online",
+    "micro_tasks": "Micro Tasks",
+    "micro_tasks_description": "Quick small tasks for extra cash",
+    "free_trials": "Free Trials",
+    "free_trials_description": "Try free trials and earn rewards",
+    "testing_products": "Testing Products",
+    "testing_products_description": "Test products and get paid",
+    "reading_emails": "Reading Emails",
+    "reading_emails_description": "Read emails and earn money",
+    "visiting_websites": "Visiting Websites",
+    "visiting_websites_description": "Visit websites and earn instantly",
+    "review_tasks": "Review Tasks",
+    "review_tasks_description": "Complete review tasks for rewards",
+    "spinning_wheel": "Spinning Wheel",
+    "spinning_wheel_description": "Spin the wheel and win prizes",
+    "loyalty": "Loyalty",
+    "loyalty_description": "Earn loyalty rewards over time",
+    "vouchers": "Vouchers",
+    "vouchers_description": "Get vouchers as payout options",
+    "cta": "Start earning"
+  },
+  "high_paying_offers": {
+    "title": "High Paying Offers",
+    "description": "Complete these top-paying offers and earn big rewards instantly",
+    "categories": {
+      "surveys": "Surveys",
+      "app_installs": "App Installs",
+      "play_games": "Play Games",
+      "watch_videos": "Watch Videos"
+    },
+    "table": {
+      "offer": "Offer",
+      "country": "Country",
+      "completions": "Completions",
+      "payout": "Payout"
+    },
+    "stats": {
+      "available_offers": "Available Offers",
+      "total_potential": "Total Potential",
+      "high_paying": "High Paying",
+      "hot_offers": "Hot Offers"
+    },
+    "no_offers": "No offers available in this category"
+  },
+  "trust": {
+    "title": "Why You Can Trust Us",
+    "description": "Our platform ensures security, reliability, and instant payouts so you can focus on earning without worries.",
+    "secure_payments": {
+      "title": "Secure Payments",
+      "description": "All transactions are encrypted and safe"
+    },
+    "trusted_by_millions": {
+      "title": "Trusted by Millions",
+      "description": "Millions of users trust our platform globally"
+    },
+    "fast_payouts": {
+      "title": "Fast Payouts",
+      "description": "Get your earnings instantly with multiple methods"
+    },
+    "support": {
+      "title": "24/7 Support",
+      "description": "Our support team is always here to help"
+    },
+    "trust_badge_1": "256-bit Encryption",
+    "trust_badge_2": "GDPR Compliant",
+    "trust_badge_3": "SSL Secure",
+    "trust_badge_4": "Verified Company"
+  },
+  "testimonials": {
+    "title": "What Our Users Say",
+    "description": "Join 2.5M+ happy users who are earning real money every day",
+    "stats": {
+      "average_rating": "Average Rating",
+      "verified_reviews": "Verified Reviews",
+      "would_recommend": "Would Recommend",
+      "countries": "Countries"
+    },
+    "trust_badge_1": "Verified Reviews",
+    "trust_badge_2": "Real Users",
+    "trust_badge_3": "Updated Weekly",
+    "trust_badge_4": "Trustpilot Verified"
+  },
+  "payment": {
+    "title": "Payment Methods",
+    "description": "Fast, secure, and trusted payout options. Withdraw your earnings instantly via your favorite method.",
+    "methods": {
+      "paypal": "PayPal",
+      "tether": "Tether (USDT)",
+      "bitcoin": "Bitcoin",
+      "gift_cards": "Gift Cards",
+      "litecoin": "Litecoin",
+      "ethereum": "Ethereum",
+      "dogecoin": "Dogecoin",
+      "binance_coin": "Binance Coin (BNB)"
+    },
+    "trust_badge_1": "Instant Withdrawals",
+    "trust_badge_2": "No Hidden Fees",
+    "trust_badge_3": "24/7 Processing",
+    "trust_badge_4": "Global Payments"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions"
+  },
+  "final_cta": {
+    "title": "Start Earning Real Money Today!",
+    "description": "Join millions of users already earning daily. Complete surveys, tasks, and high-paying offers securely from anywhere.",
+    "cta": "Start Earning Now",
+    "trust_badge_1": "1M+ Happy Users",
+    "trust_badge_2": "$10M+ Paid Out",
+    "trust_badge_3": "4.8/5 Trustpilot"
+  }
 }
