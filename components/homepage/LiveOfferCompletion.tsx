@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { BadgeCheck } from "lucide-react";
 import OpeningStyle from "@/components/animations/openingstyle";
-import Container from "@/components/animations/container";
 
 /* ================= DATA ================= */
 
@@ -38,32 +37,32 @@ interface Offer {
 
 /* ================= HELPERS ================= */
 
-const randomCountry = () =>
-  countries[Math.floor(Math.random() * countries.length)];
+const randomFrom = <T,>(arr: T[]): T =>
+  arr[Math.floor(Math.random() * arr.length)];
 
-const randomOffer = () =>
-  offerNames[Math.floor(Math.random() * offerNames.length)];
+const randomCountry = () => randomFrom(countries);
+
+const randomOffer = () => randomFrom(offerNames);
 
 const randomAmount = () => {
-  const low = Math.random() < 0.8;
-  const value = low
+  const isSmall = Math.random() < 0.8;
+  const value = isSmall
     ? Math.random() * 0.94 + 0.05
     : Math.random() * 1 + 1;
+
   return `$${value.toFixed(2)}`;
 };
 
 const formatTime = (timestamp: number) => {
   const diff = Math.floor((Date.now() - timestamp) / 1000);
-  if (diff < 60) return `${diff}s ago`;
-  return `${Math.floor(diff / 60)}m ago`;
+  return diff < 60 ? `${diff}s ago` : `${Math.floor(diff / 60)}m ago`;
 };
 
 const generateOffer = (id: number): Offer => {
-  const country = randomCountry();
   return {
     id,
     name: randomOffer(),
-    flag: country.flag,
+    flag: randomCountry().flag,
     amount: randomAmount(),
     createdAt: Date.now() - Math.floor(Math.random() * 60000),
   };
@@ -73,43 +72,34 @@ const generateOffer = (id: number): Offer => {
 
 export default function LiveOfferCompletion() {
   const [offers, setOffers] = useState<Offer[]>(() =>
-    Array.from({ length: 100 }, (_, i) => generateOffer(i + 1))
+    Array.from({ length: 50 }, (_, i) => generateOffer(i + 1))
   );
 
   const [isLive, setIsLive] = useState(true);
 
-  /* Live update */
+  /* Add new offer */
+  const addOffer = useCallback(() => {
+    setOffers((prev) => {
+      const newOffer = generateOffer(Date.now());
+      return [newOffer, ...prev.slice(0, 49)];
+    });
+  }, []);
+
+  /* Live updates */
   useEffect(() => {
     if (!isLive) return;
 
-    let active = true;
+    let timeout: NodeJS.Timeout;
 
-    const addNew = () => {
-      if (!active) return;
-
-      setOffers((prev) => [
-        generateOffer(Date.now()),
-        ...prev.slice(0, 99),
-      ]);
-
-      const next = Math.floor(Math.random() * 50000) + 1000;
-      setTimeout(addNew, next);
+    const loop = () => {
+      addOffer();
+      timeout = setTimeout(loop, Math.random() * 40000 + 2000);
     };
 
-    addNew();
+    loop();
 
-    return () => {
-      active = false;
-    };
-  }, [isLive]);
-
-  /* Update time every second */
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setOffers((prev) => [...prev]);
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
+    return () => clearTimeout(timeout);
+  }, [isLive, addOffer]);
 
   return (
     <OpeningStyle delay={0.15}>
@@ -121,6 +111,7 @@ export default function LiveOfferCompletion() {
             <div className="p-3 rounded-2xl bg-purple-400/20 border border-purple-400">
               <BadgeCheck className="text-purple-500 w-7 h-7" />
             </div>
+
             <h2 className="text-3xl md:text-4xl font-bold">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">
                 Live Offer Completion
@@ -135,38 +126,33 @@ export default function LiveOfferCompletion() {
 
           {/* Toggle */}
           <div className="flex justify-center mb-8">
-            <label className="flex items-center cursor-pointer gap-2">
-              <span className="text-gray-700 dark:text-gray-300 font-medium">
-                Live Updates
-              </span>
-              <div
-                onClick={() => setIsLive(!isLive)}
-                className={`w-12 h-6 flex items-center rounded-full p-1 transition-colors duration-300 ${
-                  isLive ? "bg-purple-400" : "bg-gray-400"
+            <button
+              onClick={() => setIsLive((prev) => !prev)}
+              className={`relative w-14 h-7 flex items-center rounded-full p-1 transition ${
+                isLive ? "bg-purple-500" : "bg-gray-400"
+              }`}
+              aria-label="Toggle live updates"
+            >
+              <span
+                className={`bg-white w-5 h-5 rounded-full shadow transform transition ${
+                  isLive ? "translate-x-7" : "translate-x-0"
                 }`}
-              >
-                <div
-                  className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-300 ${
-                    isLive ? "translate-x-6" : "translate-x-0"
-                  }`}
-                />
-              </div>
-            </label>
+              />
+            </button>
           </div>
 
-          {/* List Container */}
-          <div className="relative rounded-3xl border border-gray-200 dark:border-white/10 bg-gray-100 dark:bg-white/5 shadow-lg hover:border-purple-500/40 hover:shadow-xl transition-all duration-300 overflow-hidden">
+          {/* List */}
+          <div className="relative rounded-3xl border border-gray-200 dark:border-white/10 bg-gray-100 dark:bg-white/5 shadow-lg overflow-hidden">
             <div className="h-[500px] overflow-y-auto">
-              <ul className="space-y-4 p-6">
+              <ul className="space-y-3 p-6">
                 {offers.map((o) => (
                   <li
                     key={o.id}
-                    className="grid grid-cols-4 items-center px-5 py-3 rounded-xl
+                    className="grid grid-cols-4 items-center px-4 py-3 rounded-xl
                       bg-white/80 dark:bg-[#111827]/80
                       border border-gray-200 dark:border-white/10
-                      text-gray-900 dark:text-white text-sm md:text-base font-medium
-                      hover:border-purple-500/40 hover:shadow-lg hover:-translate-y-0.5
-                      transition-all duration-300"
+                      text-sm md:text-base font-medium
+                      hover:border-purple-500/40 transition"
                   >
                     <span className="truncate">{o.name}</span>
                     <span className="text-xl text-center">{o.flag}</span>
@@ -181,22 +167,17 @@ export default function LiveOfferCompletion() {
               </ul>
             </div>
 
-            {/* Gradient fade at bottom */}
-            <div className="pointer-events-none absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-gray-100 dark:from-[#0b0f19] to-transparent rounded-b-3xl" />
+            {/* Fade */}
+            <div className="pointer-events-none absolute bottom-0 w-full h-20 bg-gradient-to-t from-gray-100 dark:from-[#0b0f19]" />
           </div>
 
           {/* Stats */}
           <div className="mt-8 flex flex-wrap justify-center gap-6 text-sm text-gray-600 dark:text-gray-400">
-            <div className="flex items-center gap-2">
-              <span className="text-purple-500">●</span> {offers.length}+ Offers Completed
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-purple-500">●</span> 24+ Countries
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-purple-500">●</span> Updated in Real-time
-            </div>
+            <span>● {offers.length}+ Offers Completed</span>
+            <span>● 24+ Countries</span>
+            <span>● Real-time Updates</span>
           </div>
+
         </div>
       </section>
     </OpeningStyle>
