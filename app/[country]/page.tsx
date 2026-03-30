@@ -9,20 +9,6 @@ import OpeningStyle from "@/components/animations/openingstyle";
 
 /* Sections */
 import HeroSection from "@/components/homepage/HeroSection";
-import FeaturesSection from "@/components/homepage/FeaturesSection";
-import TasksSection from "@/components/homepage/TasksSection";
-import HighPayingOffers from "@/components/homepage/HighPayingOffers";
-import TrustSection from "@/components/homepage/TrustSection";
-import PaymentSection from "@/components/homepage/PaymentSection";
-import FinalCTASection from "@/components/homepage/FinalCTASection";
-import StatsSection from "@/components/homepage/StatsSection";
-import TestimonialSection from "@/components/homepage/TestimonialSection";
-
-/* Live Sections */
-const LiveJoining = dynamic(() => import("@/components/homepage/LiveJoining"), { ssr: false });
-const LiveEarnings = dynamic(() => import("@/components/homepage/LiveEarnings"), { ssr: false });
-const LiveOfferCompletion = dynamic(() => import("@/components/homepage/LiveOfferCompletion"), { ssr: false });
-const LiveWithdrawals = dynamic(() => import("@/components/homepage/LiveWithdrawals"), { ssr: false });
 
 /* FAQ */
 import FAQ from "@/components/faq/FAQ";
@@ -64,10 +50,10 @@ export default async function HomePage({
   const countryName = formatCountryName(country);
   const currentYear = new Date().getFullYear();
 
-  /* 🌐 LANGUAGE DETECTION */
+  /* 🌐 LANGUAGE */
   const language = countryData.language || "en";
 
-  /* 🌐 LOAD TRANSLATIONS */
+  /* 🌐 TRANSLATIONS */
   const t = await loadAllTranslations(language);
 
   /* SEO */
@@ -113,7 +99,7 @@ export default async function HomePage({
     },
   ];
 
-  /* =============================== */
+  /* Wrapper */
   const Section = ({ children }: { children: React.ReactNode }) => (
     <OpeningStyle>
       <div className="w-full px-4 py-10 flex justify-center">
@@ -150,42 +136,6 @@ export default async function HomePage({
         <HeroSection data={t.homepage.hero} />
       </Section>
 
-      {/* LIVE */}
-      <Section><LiveJoining /></Section>
-      <Section><LiveEarnings /></Section>
-      <Section><LiveOfferCompletion /></Section>
-      <Section><LiveWithdrawals /></Section>
-
-      {/* CORE */}
-      <Section>
-        <StatsSection data={t.homepage.stats} />
-      </Section>
-
-      <Section>
-        <FeaturesSection data={t.homepage.features} />
-      </Section>
-
-      <Section>
-        <TasksSection data={t.homepage.tasks} />
-      </Section>
-
-      <Section>
-        <HighPayingOffers data={t.homepage.high_paying_offers} />
-      </Section>
-
-      {/* TRUST */}
-      <Section>
-        <TrustSection data={t.homepage.trust} />
-      </Section>
-
-      <Section>
-        <TestimonialSection data={t.homepage.testimonials} />
-      </Section>
-
-      <Section>
-        <PaymentSection data={t.homepage.payment} />
-      </Section>
-
       {/* FAQ */}
       <Section>
         <div className="w-full max-w-3xl mx-auto text-center">
@@ -195,11 +145,6 @@ export default async function HomePage({
 
           <FAQ faqs={faqs} />
         </div>
-      </Section>
-
-      {/* CTA */}
-      <Section>
-        <FinalCTASection data={t.homepage.final_cta} />
       </Section>
 
       <div className="h-12" />
