@@ -2,13 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { Users } from "lucide-react";
+import { useTranslations } from "next-intl";
+
 import OpeningStyle from "@/components/animations/openingstyle";
 
 /* ===================== TYPES ===================== */
-
-interface Props {
-  data: any;
-}
 
 interface LiveUser {
   username: string;
@@ -66,17 +64,26 @@ function generateUsers(): LiveUser[] {
   });
 }
 
-const formatTime = (timestamp: number) => {
+/* 👉 LOCALIZED TIME (IMPORTANT) */
+function formatTime(timestamp: number, locale: string) {
   const diff = Math.floor((Date.now() - timestamp) / 1000);
-  if (diff < 60) return `${diff}s ago`;
-  return `${Math.floor(diff / 60)}m ago`;
-};
+
+  const rtf = new Intl.RelativeTimeFormat(locale, { numeric: "auto" });
+
+  if (diff < 60) return rtf.format(-diff, "second");
+  if (diff < 3600) return rtf.format(-Math.floor(diff / 60), "minute");
+  return rtf.format(-Math.floor(diff / 3600), "hour");
+}
 
 /* ===================== COMPONENT ===================== */
 
-export default function LiveJoining({ data }: Props) {
+export default function LiveJoining() {
+  const t = useTranslations("liveJoining");
+
   const [users, setUsers] = useState<LiveUser[]>(generateUsers());
   const [isLive, setIsLive] = useState(true);
+
+  const locale = t("locale") || "en";
 
   /* LIVE UPDATE */
   useEffect(() => {
@@ -91,8 +98,10 @@ export default function LiveJoining({ data }: Props) {
         const next = [...prev];
         const moved = next.pop();
 
-        if (moved) moved.joinedAt = Date.now();
-        if (moved) next.unshift(moved);
+        if (moved) {
+          moved.joinedAt = Date.now();
+          next.unshift(moved);
+        }
 
         return next;
       });
@@ -131,21 +140,21 @@ export default function LiveJoining({ data }: Props) {
 
             <h2 className="text-3xl md:text-4xl font-bold">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-500">
-                {data.title}
+                {t("title")}
               </span>
             </h2>
           </div>
 
           {/* DESCRIPTION */}
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8 leading-relaxed">
-            {data.description}
+            {t("description")}
           </p>
 
           {/* TOGGLE */}
           <div className="flex justify-center mb-8">
             <label className="flex items-center cursor-pointer gap-2">
               <span className="text-gray-700 dark:text-gray-300 font-medium">
-                {data.live_label}
+                {t("live_label")}
               </span>
 
               <div
@@ -173,10 +182,16 @@ export default function LiveJoining({ data }: Props) {
                     key={idx}
                     className="grid grid-cols-3 items-center px-5 py-3 rounded-xl bg-white/80 dark:bg-[#111827]/80 border border-gray-200 dark:border-white/10 text-sm font-medium hover:shadow-lg transition"
                   >
-                    <span className="truncate font-semibold">{user.username}</span>
-                    <span className="text-xl text-center">{user.flag}</span>
+                    <span className="truncate font-semibold">
+                      {user.username}
+                    </span>
+
+                    <span className="text-xl text-center">
+                      {user.flag}
+                    </span>
+
                     <span className="text-gray-500 text-center">
-                      {formatTime(user.joinedAt)}
+                      {formatTime(user.joinedAt, locale)}
                     </span>
                   </li>
                 ))}
@@ -192,17 +207,17 @@ export default function LiveJoining({ data }: Props) {
 
             <div className="flex items-center gap-2">
               <span className="text-blue-500">●</span>
-              {data.stats.active.replace("{count}", users.length)}
+              {t("stats.active", { count: users.length })}
             </div>
 
             <div className="flex items-center gap-2">
               <span className="text-blue-500">●</span>
-              {data.stats.countries}
+              {t("stats.countries")}
             </div>
 
             <div className="flex items-center gap-2">
               <span className="text-blue-500">●</span>
-              {data.stats.realtime}
+              {t("stats.realtime")}
             </div>
 
           </div>
