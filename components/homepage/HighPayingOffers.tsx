@@ -1,7 +1,16 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Flame, Zap, Clock, TrendingUp, Award, Star, Gift, Crown } from "lucide-react";
+import {
+  Flame,
+  Zap,
+  Clock,
+  TrendingUp,
+  Award,
+  Star,
+  Gift,
+  Crown,
+} from "lucide-react";
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 import OpeningStyle from "@/components/animations/openingstyle";
@@ -30,8 +39,230 @@ interface Props {
   data: any;
 }
 
-/* ===================== OFFERS (STATIC FOR NOW) ===================== */
-import { OFFERS } from "./offers-data"; // 👈 move your huge OFFERS object here (recommended)
+/* ===================== FAKE DATA ===================== */
+const generateOffers = (category: CategoryKey): Offer[] => {
+  const baseOffers: Record<CategoryKey, Offer[]> = {
+    Surveys: [
+      {
+        id: 1,
+        title: "Complete 5-Min Survey",
+        payout: 2.5,
+        completions: 12000,
+        country: "Global",
+        badgeHigh: true,
+        badgeFast: true,
+        badgeNew: true,
+        difficulty: "Easy",
+        rating: 4.8,
+      },
+      {
+        id: 2,
+        title: "Health Survey Study",
+        payout: 3.2,
+        completions: 9800,
+        country: "Global",
+        badgeHigh: true,
+        badgeTrending: true,
+        difficulty: "Medium",
+        rating: 4.7,
+      },
+      {
+        id: 3,
+        title: "Finance Survey",
+        payout: 4.1,
+        completions: 7400,
+        country: "Global",
+        badgeHigh: true,
+        difficulty: "Medium",
+        rating: 4.6,
+      },
+      {
+        id: 4,
+        title: "Quick Opinion Survey",
+        payout: 1.8,
+        completions: 15000,
+        country: "Global",
+        badgeFast: true,
+        difficulty: "Easy",
+        rating: 4.5,
+      },
+      {
+        id: 5,
+        title: "Product Feedback Survey",
+        payout: 2.9,
+        completions: 11000,
+        country: "Global",
+        badgeTrending: true,
+        difficulty: "Easy",
+        rating: 4.7,
+      },
+    ],
+
+    "App Installs": [
+      {
+        id: 6,
+        title: "Install & Open App",
+        payout: 1.5,
+        completions: 20000,
+        country: "Global",
+        badgeFast: true,
+        badgeNew: true,
+        difficulty: "Easy",
+        rating: 4.6,
+      },
+      {
+        id: 7,
+        title: "Try New Finance App",
+        payout: 3.8,
+        completions: 9000,
+        country: "Global",
+        badgeHigh: true,
+        badgeTrending: true,
+        difficulty: "Medium",
+        rating: 4.8,
+      },
+      {
+        id: 8,
+        title: "Gaming App Install",
+        payout: 2.2,
+        completions: 15000,
+        country: "Global",
+        badgeFast: true,
+        difficulty: "Easy",
+        rating: 4.5,
+      },
+      {
+        id: 9,
+        title: "Install Shopping App",
+        payout: 2.9,
+        completions: 13000,
+        country: "Global",
+        badgeTrending: true,
+        difficulty: "Easy",
+        rating: 4.6,
+      },
+      {
+        id: 10,
+        title: "Install & Register App",
+        payout: 4.5,
+        completions: 7000,
+        country: "Global",
+        badgeHigh: true,
+        badgeLimited: true,
+        difficulty: "Medium",
+        rating: 4.9,
+      },
+    ],
+
+    "Play Games": [
+      {
+        id: 11,
+        title: "Reach Level 10",
+        payout: 3.0,
+        completions: 18000,
+        country: "Global",
+        badgeFast: true,
+        difficulty: "Easy",
+        rating: 4.7,
+      },
+      {
+        id: 12,
+        title: "Complete Tutorial",
+        payout: 1.2,
+        completions: 22000,
+        country: "Global",
+        badgeFast: true,
+        difficulty: "Easy",
+        rating: 4.4,
+      },
+      {
+        id: 13,
+        title: "Win First Match",
+        payout: 2.8,
+        completions: 14000,
+        country: "Global",
+        badgeTrending: true,
+        difficulty: "Medium",
+        rating: 4.6,
+      },
+      {
+        id: 14,
+        title: "Play Strategy Game",
+        payout: 4.0,
+        completions: 8000,
+        country: "Global",
+        badgeHigh: true,
+        difficulty: "Hard",
+        rating: 4.8,
+      },
+      {
+        id: 15,
+        title: "Daily Game Rewards",
+        payout: 2.0,
+        completions: 16000,
+        country: "Global",
+        badgeNew: true,
+        difficulty: "Easy",
+        rating: 4.5,
+      },
+    ],
+
+    "Watch Videos": [
+      {
+        id: 16,
+        title: "Watch 5 Videos",
+        payout: 1.0,
+        completions: 25000,
+        country: "Global",
+        badgeFast: true,
+        difficulty: "Easy",
+        rating: 4.5,
+      },
+      {
+        id: 17,
+        title: "Watch Ads Series",
+        payout: 1.8,
+        completions: 21000,
+        country: "Global",
+        badgeTrending: true,
+        difficulty: "Easy",
+        rating: 4.6,
+      },
+      {
+        id: 18,
+        title: "Video Engagement Task",
+        payout: 2.5,
+        completions: 17000,
+        country: "Global",
+        badgeHigh: true,
+        difficulty: "Easy",
+        rating: 4.7,
+      },
+      {
+        id: 19,
+        title: "Watch & Rate Videos",
+        payout: 2.2,
+        completions: 19000,
+        country: "Global",
+        badgeNew: true,
+        difficulty: "Easy",
+        rating: 4.6,
+      },
+      {
+        id: 20,
+        title: "Short Video Task",
+        payout: 1.3,
+        completions: 24000,
+        country: "Global",
+        badgeFast: true,
+        difficulty: "Easy",
+        rating: 4.5,
+      },
+    ],
+  };
+
+  return baseOffers[category];
+};
 
 /* ===================== COMPONENT ===================== */
 export default function HighPayingOffers({ data }: Props) {
@@ -39,7 +270,7 @@ export default function HighPayingOffers({ data }: Props) {
   const [loading, setLoading] = useState(true);
   const { resolvedTheme } = useTheme();
 
-  const offers = useMemo(() => OFFERS[category], [category]);
+  const offers = useMemo(() => generateOffers(category), [category]);
 
   useEffect(() => {
     setLoading(true);
@@ -51,7 +282,7 @@ export default function HighPayingOffers({ data }: Props) {
     <OpeningStyle delay={0.15}>
       <section className="max-w-7xl mx-auto px-6 py-20">
 
-        {/* SECTION TITLE */}
+        {/* TITLE */}
         <div className="text-center mb-12">
           <h2 className="text-4xl sm:text-5xl font-extrabold mb-4">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500">
@@ -63,18 +294,18 @@ export default function HighPayingOffers({ data }: Props) {
           </p>
         </div>
 
-        {/* CATEGORY FILTER */}
+        {/* CATEGORY */}
         <div className="flex justify-center gap-3 mb-8 flex-wrap">
-          {data.categories.map((c: string) => (
+          {data.categories.map((c: CategoryKey) => (
             <motion.button
               key={c}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setCategory(c)}
-              className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
+              className={`px-6 py-3 rounded-full font-semibold ${
                 category === c
-                  ? "bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black shadow-lg"
-                  : "bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-700 dark:text-gray-300"
+                  ? "bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 text-black"
+                  : "bg-gray-100 dark:bg-white/5"
               }`}
             >
               {c}
@@ -82,99 +313,14 @@ export default function HighPayingOffers({ data }: Props) {
           ))}
         </div>
 
-        {/* TABLE */}
-        <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-white/10 bg-gray-100 dark:bg-white/5">
-
-          {/* HEADER */}
-          <div className="grid grid-cols-5 gap-4 px-6 py-4 font-semibold bg-yellow-400/10 dark:bg-yellow-400/5 border-b border-gray-200 dark:border-white/10">
-            <span className="col-span-2">{data.headers.offer}</span>
-            <span className="text-center">{data.headers.country}</span>
-            <span className="text-center">{data.headers.completions}</span>
-            <span className="text-right">{data.headers.payout}</span>
-          </div>
-
-          {/* CONTENT */}
-          <div className="overflow-y-auto max-h-[600px]">
-            {loading ? (
-              Array.from({ length: 10 }).map((_, i) => (
-                <div key={i} className="h-12 animate-pulse border-b border-gray-200 dark:border-white/10" />
-              ))
-            ) : offers.length === 0 ? (
-              <div className="p-10 text-center text-gray-500">
-                {data.no_offers}
-              </div>
-            ) : (
-              offers.map((offer, index) => (
-                <motion.div
-                  key={offer.id}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: index * 0.02 }}
-                  className="grid grid-cols-5 gap-4 px-6 py-4 border-b border-gray-200 dark:border-white/10 hover:bg-yellow-400/5"
-                >
-
-                  {/* TITLE + BADGES */}
-                  <div className="col-span-2 flex items-center gap-2 truncate">
-                    <span className="truncate">{offer.title}</span>
-                    <div className="flex gap-1">
-                      {offer.badgeHigh && <Crown size={14} className="text-yellow-400" />}
-                      {offer.badgeFast && <Zap size={14} className="text-green-400" />}
-                      {offer.badgeNew && <Star size={14} className="text-blue-400" />}
-                      {offer.badgeTrending && <TrendingUp size={14} className="text-purple-400" />}
-                      {offer.badgeLimited && <Clock size={14} className="text-red-400" />}
-                      {offer.rating && offer.rating >= 4.7 && <Award size={14} className="text-orange-400" />}
-                    </div>
-                  </div>
-
-                  {/* COUNTRY */}
-                  <div className="text-center">
-                    {offer.country}
-                  </div>
-
-                  {/* COMPLETIONS */}
-                  <div className="text-center">
-                    {offer.completions.toLocaleString()}
-                  </div>
-
-                  {/* PAYOUT */}
-                  <div className="text-right font-bold text-green-500">
-                    ${offer.payout.toFixed(2)}
-                  </div>
-
-                </motion.div>
-              ))
-            )}
-          </div>
-        </div>
-
-        {/* STATS */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-          <div className="p-4 text-center border rounded-xl">
-            <div className="text-2xl font-bold text-yellow-400">{offers.length}</div>
-            <div>{data.stats.available}</div>
-          </div>
-
-          <div className="p-4 text-center border rounded-xl">
-            <div className="text-2xl font-bold text-green-400">
-              ${offers.reduce((sum, o) => sum + o.payout, 0).toFixed(0)}
+        {/* LIST */}
+        <div className="rounded-xl border overflow-hidden">
+          {offers.map((offer) => (
+            <div key={offer.id} className="flex justify-between p-4 border-b">
+              <div>{offer.title}</div>
+              <div>${offer.payout.toFixed(2)}</div>
             </div>
-            <div>{data.stats.total}</div>
-          </div>
-
-          <div className="p-4 text-center border rounded-xl">
-            <div className="text-2xl font-bold text-purple-400">
-              {offers.filter(o => o.badgeHigh).length}
-            </div>
-            <div>{data.stats.high}</div>
-          </div>
-
-          <div className="p-4 text-center border rounded-xl">
-            <div className="text-2xl font-bold text-blue-400">
-              {offers.filter(o => o.badgeNew || o.badgeTrending).length}
-            </div>
-            <div>{data.stats.hot}</div>
-          </div>
+          ))}
         </div>
 
       </section>
