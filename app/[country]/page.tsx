@@ -19,15 +19,6 @@ import FAQ from "@/components/faq/FAQ";
 
 import { generateJsonLd } from "@/components/SEO/schema";
 
-type Translations = {
-  homepage?: {
-    hero?: any;
-    faq?: {
-      title?: string;
-    } | string;
-  };
-};
-
 /* ================= LANGUAGE ================= */
 
 function getLanguage(country: CountryCode): SupportedLanguage {
@@ -70,7 +61,9 @@ export default async function HomePage({
 
   const language = getLanguage(country);
 
-  const t = (await loadAllTranslations(language)) as Translations;
+  const translations = await loadAllTranslations(language);
+
+  const t = translations || {};
 
   const title = `Earn Money Online in ${countryName}`;
   const description = `Earn real money online in ${countryName}.`;
@@ -84,16 +77,19 @@ export default async function HomePage({
 
   return (
     <main>
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(structuredData),
-        }}
-      />
+      {/* JSON-LD SAFETY CHECK */}
+      {structuredData && (
+        <script
+          type="application/ld+json"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData),
+          }}
+        />
+      )}
 
-      {/* HERO */}
-      <HeroSection data={t?.homepage?.hero} />
+      {/* HERO (SAFE) */}
+      <HeroSection data={t?.homepage?.hero || {}} />
 
       {/* FAQ */}
       <div className="max-w-3xl mx-auto text-center py-12">
