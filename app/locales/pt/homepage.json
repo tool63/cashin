@@ -1,15 +1,31 @@
 {
-  "homepage": {
-    "hero": {
-      "headline": "Ganhe dinheiro instantaneamente",
-      "subtext": "Complete tarefas, pesquisas, assista vídeos e ganhe recompensas com segurança.",
-      "cta": "Começar a ganhar",
-      "trust_badge_1": "100% grátis",
-      "trust_badge_2": "Pagamentos instantâneos",
-      "trust_badge_3": "1M+ usuários satisfeitos"
-    },
-    "faq": {
-      "title": "Perguntas frequentes"
-    }
+  "faq": {
+    "title": "Perguntas Frequentes",
+    "items": [
+      {
+        "q": "Como posso ganhar dinheiro online em {country}?",
+        "a": "Você pode ganhar dinheiro online em {country} completando tarefas simples como pesquisas, instalar apps e assistir vídeos."
+      },
+      {
+        "q": "É possível ganhar dinheiro sem investimento?",
+        "a": "Sim, absolutamente. Você não precisa investir dinheiro para começar."
+      },
+      {
+        "q": "Quanto posso ganhar por dia?",
+        "a": "Depende da sua atividade. Alguns ganham pouco, outros ganham mais com consistência."
+      },
+      {
+        "q": "Como retirar meus ganhos?",
+        "a": "Você pode retirar via carteiras digitais, transferências bancárias ou gift cards em {country}."
+      },
+      {
+        "q": "A plataforma é segura?",
+        "a": "Sim, é confiável e usada por milhares de usuários diariamente."
+      },
+      {
+        "q": "Quanto tempo leva para receber?",
+        "a": "Pagamentos são geralmente instantâneos ou em poucas horas."
+      }
+    ]
   }
 }
