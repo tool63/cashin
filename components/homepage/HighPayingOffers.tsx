@@ -2,13 +2,11 @@
 
 import { useEffect, useMemo, useState } from "react";
 import {
-  Flame,
   Zap,
   Clock,
   TrendingUp,
   Award,
   Star,
-  Gift,
   Crown,
 } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -22,8 +20,8 @@ type Offer = {
   payout: number;
   completions: number;
   country: string;
-  badgeHigh: boolean;
-  badgeFast: boolean;
+  badgeHigh?: boolean;
+  badgeFast?: boolean;
   badgeNew?: boolean;
   badgeTrending?: boolean;
   badgeLimited?: boolean;
@@ -112,7 +110,7 @@ const generateOffers = (category: CategoryKey): Offer[] => {
       },
       {
         id: 7,
-        title: "Try New Finance App",
+        title: "Try Finance App",
         payout: 3.8,
         completions: 9000,
         country: "Global",
@@ -133,7 +131,7 @@ const generateOffers = (category: CategoryKey): Offer[] => {
       },
       {
         id: 9,
-        title: "Install Shopping App",
+        title: "Shopping App Install",
         payout: 2.9,
         completions: 13000,
         country: "Global",
@@ -143,7 +141,7 @@ const generateOffers = (category: CategoryKey): Offer[] => {
       },
       {
         id: 10,
-        title: "Install & Register App",
+        title: "Install & Register",
         payout: 4.5,
         completions: 7000,
         country: "Global",
@@ -187,7 +185,7 @@ const generateOffers = (category: CategoryKey): Offer[] => {
       },
       {
         id: 14,
-        title: "Play Strategy Game",
+        title: "Strategy Game",
         payout: 4.0,
         completions: 8000,
         country: "Global",
@@ -197,7 +195,7 @@ const generateOffers = (category: CategoryKey): Offer[] => {
       },
       {
         id: 15,
-        title: "Daily Game Rewards",
+        title: "Daily Rewards",
         payout: 2.0,
         completions: 16000,
         country: "Global",
@@ -230,7 +228,7 @@ const generateOffers = (category: CategoryKey): Offer[] => {
       },
       {
         id: 18,
-        title: "Video Engagement Task",
+        title: "Video Engagement",
         payout: 2.5,
         completions: 17000,
         country: "Global",
@@ -240,7 +238,7 @@ const generateOffers = (category: CategoryKey): Offer[] => {
       },
       {
         id: 19,
-        title: "Watch & Rate Videos",
+        title: "Rate Videos",
         payout: 2.2,
         completions: 19000,
         country: "Global",
@@ -313,12 +311,20 @@ export default function HighPayingOffers({ data }: Props) {
           ))}
         </div>
 
-        {/* LIST */}
+        {/* OFFERS LIST */}
         <div className="rounded-xl border overflow-hidden">
           {offers.map((offer) => (
             <div key={offer.id} className="flex justify-between p-4 border-b">
-              <div>{offer.title}</div>
-              <div>${offer.payout.toFixed(2)}</div>
+              <div className="flex items-center gap-2">
+                {offer.title}
+                {offer.badgeHigh && <Crown size={14} />}
+                {offer.badgeFast && <Zap size={14} />}
+                {offer.badgeTrending && <TrendingUp size={14} />}
+                {offer.badgeNew && <Star size={14} />}
+              </div>
+              <div className="font-bold text-green-500">
+                ${offer.payout.toFixed(2)}
+              </div>
             </div>
           ))}
         </div>
