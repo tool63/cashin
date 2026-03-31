@@ -1,15 +1,31 @@
 {
-  "homepage": {
-    "hero": {
-      "headline": "Sofort bezahlt werden durch",
-      "subtext": "Erledige Aufgaben, Umfragen, schaue Videos und verdiene sicher von überall.",
-      "cta": "Jetzt starten",
-      "trust_badge_1": "100% kostenlos",
-      "trust_badge_2": "Sofortige Auszahlungen",
-      "trust_badge_3": "1M+ zufriedene Nutzer"
-    },
-    "faq": {
-      "title": "Häufig gestellte Fragen"
-    }
+  "faq": {
+    "title": "Häufig gestellte Fragen",
+    "items": [
+      {
+        "q": "Wie kann ich online Geld verdienen in {country}?",
+        "a": "Sie können in {country} online Geld verdienen, indem Sie einfache Aufgaben wie Umfragen, App-Installationen, Videos ansehen und Dienste testen. Viele Nutzer verdienen innerhalb weniger Minuten Geld und heben ihre erste Auszahlung noch am selben Tag ab."
+      },
+      {
+        "q": "Ist es wirklich möglich, ohne Investition Geld zu verdienen?",
+        "a": "Ja, absolut. Sie müssen kein Geld investieren, um zu starten. Plattformen wie diese sind völlig kostenlos und bezahlen Nutzer für ihre Zeit und Teilnahme an Partnerangeboten."
+      },
+      {
+        "q": "Wie viel Geld kann ich täglich verdienen?",
+        "a": "Ihr Verdienst hängt davon ab, wie aktiv Sie sind. Einige Nutzer verdienen ein paar Euro pro Tag, während aktivere Nutzer durch das Abschließen mehrerer hochbezahlter Aufgaben deutlich mehr verdienen können."
+      },
+      {
+        "q": "Wie kann ich meine Einnahmen auszahlen lassen?",
+        "a": "Sie können Ihre Einnahmen über verschiedene Zahlungsmethoden auszahlen lassen, z. B. mobile Geldbörsen, Banküberweisungen oder Geschenkkarten, je nach Verfügbarkeit in {country}."
+      },
+      {
+        "q": "Ist diese Plattform sicher und seriös?",
+        "a": "Ja, die Plattform ist sicher und vertrauenswürdig. Tausende Nutzer weltweit verdienen täglich Geld. Befolgen Sie stets die Richtlinien, um Ihr Konto zu schützen."
+      },
+      {
+        "q": "Wie schnell erhalte ich meine Auszahlung?",
+        "a": "Die meisten Auszahlungen erfolgen sofort oder innerhalb weniger Stunden. In manchen Fällen kann es bis zu 24 Stunden dauern."
+      }
+    ]
   }
 }
