@@ -16,7 +16,7 @@ import React from "react";
 const SeoRenderer = dynamic(() => import("@/components/SEO/SeoRenderer"));
 
 /* =============================== */
-export const revalidate = 3600; // ISR: 1 hour
+export const revalidate = 3600;
 
 /* =============================== */
 function formatCountryName(code: string) {
@@ -154,7 +154,7 @@ export default async function HomePage({
       <Section>
         <div className="w-full max-w-3xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-8">
-            {t?.homepage?.faq?.title || "Frequently Asked Questions"}
+            {t?.homepage?.faq?.title ?? "Frequently Asked Questions"}
           </h2>
 
           <FAQ faqs={faqs} />
