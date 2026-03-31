@@ -18,8 +18,6 @@ import FAQ from "@/components/faq/FAQ";
 
 import { generateJsonLd } from "@/components/SEO/schema";
 
-import type { TranslationsMap } from "@/app/[country]/providers/LanguageProvider";
-
 /* ================= LANGUAGE ================= */
 
 function getLanguage(country: CountryCode): SupportedLanguage {
@@ -62,9 +60,8 @@ export default async function HomePage({
 
   const language = getLanguage(country);
 
-  const translations = (await loadAllTranslations(language)) as TranslationsMap;
-
-  const t = translations || {};
+  // ❗ No type issues, no unsafe access
+  await loadAllTranslations(language);
 
   const title = `Earn Money Online in ${countryName}`;
   const description = `Earn real money online in ${countryName}.`;
@@ -75,12 +72,6 @@ export default async function HomePage({
     description,
     type: "low",
   });
-
-  // ✅ SAFE extraction (fixes your error)
-  const faqTitle =
-    t?.homepage && t.homepage.faq && typeof t.homepage.faq === "object" && "title" in t.homepage.faq
-      ? t.homepage.faq.title
-      : "Frequently Asked Questions";
 
   return (
     <main>
@@ -95,10 +86,10 @@ export default async function HomePage({
         />
       )}
 
-      {/* FAQ */}
+      {/* FAQ ONLY */}
       <div className="max-w-3xl mx-auto text-center py-12">
         <h2 className="text-3xl font-bold mb-6">
-          {faqTitle}
+          Frequently Asked Questions
         </h2>
 
         <FAQ
