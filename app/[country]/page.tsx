@@ -1,6 +1,4 @@
-import dynamic from "next/dynamic";
-
-import { getCountry, isValidCountryCode, type CountryCode } from "@/app/core/countries";
+import { getCountry, isValidCountryCode, type CountryCode, getCountryLanguage } from "@/app/core/countries";
 import { loadAllTranslations } from "@/app/core/i18n/loader";
 
 /* Layout / Animations */
@@ -15,6 +13,8 @@ import FAQ from "@/components/faq/FAQ";
 
 /* SEO */
 import { generateJsonLd } from "@/components/SEO/schema";
+import dynamic from "next/dynamic";
+
 const SeoRenderer = dynamic(() => import("@/components/SEO/SeoRenderer"), { ssr: false });
 
 /* =============================== */
@@ -50,8 +50,8 @@ export default async function HomePage({
   const countryName = formatCountryName(country);
   const currentYear = new Date().getFullYear();
 
-  /* 🌐 LANGUAGE */
-  const language = countryData.language || "en";
+  /* 🌐 LANGUAGE (FIXED) */
+  const language = getCountryLanguage(country);
 
   /* 🌐 TRANSLATIONS */
   const t = await loadAllTranslations(language);
@@ -99,7 +99,7 @@ export default async function HomePage({
     },
   ];
 
-  /* Wrapper */
+  /* =============================== */
   const Section = ({ children }: { children: React.ReactNode }) => (
     <OpeningStyle>
       <div className="w-full px-4 py-10 flex justify-center">
