@@ -1,15 +1,31 @@
 {
-  "homepage": {
-    "hero": {
-      "headline": "Gana dinero instantáneamente",
-      "subtext": "Completa tareas, encuestas, mira videos y gana recompensas de forma segura desde cualquier lugar.",
-      "cta": "Empieza a ganar",
-      "trust_badge_1": "100% gratis",
-      "trust_badge_2": "Pagos instantáneos",
-      "trust_badge_3": "1M+ usuarios felices"
-    },
-    "faq": {
-      "title": "Preguntas frecuentes"
-    }
+  "faq": {
+    "title": "Preguntas Frecuentes",
+    "items": [
+      {
+        "q": "¿Cómo puedo ganar dinero en línea en {country}?",
+        "a": "Puedes ganar dinero en línea en {country} completando tareas simples como encuestas, instalaciones de aplicaciones, ver videos y probar servicios."
+      },
+      {
+        "q": "¿Es realmente posible ganar dinero sin inversión?",
+        "a": "Sí, absolutamente. No necesitas invertir dinero para comenzar. Estas plataformas son gratuitas y pagan por tu tiempo."
+      },
+      {
+        "q": "¿Cuánto dinero puedo ganar diariamente?",
+        "a": "Tus ingresos dependen de tu actividad. Algunos usuarios ganan unos pocos dólares al día, mientras que otros más activos ganan significativamente más."
+      },
+      {
+        "q": "¿Cómo retiro mis ganancias?",
+        "a": "Puedes retirar tus ganancias mediante billeteras móviles, transferencias bancarias o tarjetas de regalo según disponibilidad en {country}."
+      },
+      {
+        "q": "¿Es esta plataforma segura y legítima?",
+        "a": "Sí, es segura y confiable. Miles de usuarios ganan dinero diariamente."
+      },
+      {
+        "q": "¿Cuánto tarda el pago?",
+        "a": "La mayoría de los pagos son instantáneos o dentro de pocas horas. En algunos casos puede tardar hasta 24 horas."
+      }
+    ]
   }
 }
