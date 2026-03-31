@@ -1,5 +1,10 @@
 import { notFound } from "next/navigation";
-import { getCountry, isValidCountryCode, type CountryCode, getCountryLanguage } from "@/app/core/countries";
+import {
+  getCountry,
+  isValidCountryCode,
+  type CountryCode,
+  getCountryLanguage,
+} from "@/app/core/countries";
 import { loadAllTranslations } from "@/app/core/i18n/loader";
 
 import CircleBorder from "@/components/animations/CircleBorder";
@@ -17,6 +22,16 @@ const SeoRenderer = dynamic(() => import("@/components/SEO/SeoRenderer"));
 
 /* =============================== */
 export const revalidate = 3600;
+
+/* =============================== */
+type Translations = {
+  homepage?: {
+    hero?: any;
+    faq?: {
+      title?: string;
+    } | string;
+  };
+};
 
 /* =============================== */
 function formatCountryName(code: string) {
@@ -59,8 +74,8 @@ export default async function HomePage({
   }
 
   const country = countryParam as CountryCode;
-  const countryData = getCountry(country);
 
+  const countryData = getCountry(country);
   if (!countryData) {
     notFound();
   }
@@ -79,7 +94,7 @@ export default async function HomePage({
     : "en";
 
   /* ================= TRANSLATIONS ================= */
-  const t = await loadAllTranslations(safeLanguage);
+  const t = (await loadAllTranslations(safeLanguage)) as Translations;
 
   /* ================= SEO ================= */
   const title = `Earn Money Online in ${countryName} - Get Paid Surveys, Apps & Tasks (${currentYear})`;
@@ -97,38 +112,17 @@ export default async function HomePage({
   const faqs = [
     {
       q: `Is it really possible to earn money online in ${countryName}?`,
-      a: `Yes, many users in ${countryName} earn real money daily by completing simple tasks like surveys, app installs, and testing offers.`,
+      a: `Yes, many users in ${countryName} earn real money daily by completing simple tasks.`,
     },
     {
-      q: `How much can I realistically earn?`,
-      a: `Earnings depend on your activity. Many users earn between $50 to $500 per month.`,
-    },
-    {
-      q: `Is this platform safe and legit?`,
-      a: `Yes, it is secure with encrypted transactions and trusted payment systems.`,
-    },
-    {
-      q: `How do I start earning money quickly?`,
-      a: `Sign up, complete your profile, and start completing available tasks.`,
-    },
-    {
-      q: `What payment methods are available in ${countryName}?`,
-      a: `PayPal, cryptocurrency, Payoneer, and gift cards.`,
-    },
-    {
-      q: `How fast are withdrawals processed?`,
-      a: `Withdrawals are usually processed within 24–48 hours.`,
-    },
-    {
-      q: `Do I need to pay anything to join?`,
-      a: `No, joining is completely free.`,
+      q: `How much can I earn?`,
+      a: `Most users earn between $50 to $500 per month.`,
     },
   ];
 
   /* ================= RENDER ================= */
   return (
     <main>
-      {/* SEO */}
       <SeoRenderer
         path={`/${country}`}
         title={title}
@@ -136,7 +130,6 @@ export default async function HomePage({
         country={country}
       />
 
-      {/* Structured Data */}
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -154,7 +147,9 @@ export default async function HomePage({
       <Section>
         <div className="w-full max-w-3xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-8">
-            {t?.homepage?.faq?.title ?? "Frequently Asked Questions"}
+            {typeof t?.homepage?.faq === "object" && t?.homepage?.faq?.title
+              ? t.homepage.faq.title
+              : "Frequently Asked Questions"}
           </h2>
 
           <FAQ faqs={faqs} />
