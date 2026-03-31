@@ -14,7 +14,8 @@ import {
 import type { SupportedLanguage } from "@/app/core/types";
 import { loadAllTranslations } from "@/app/core/i18n/loader";
 
-import FAQ from "@/components/animations/FAQ.tsx";
+// ✅ Updated import path
+import FAQ from "@/components/animations/FAQ";
 
 import { generateJsonLd } from "@/components/SEO/schema";
 
@@ -60,7 +61,7 @@ export default async function HomePage({
 
   const language = getLanguage(country);
 
-  // ❗ No type issues, no unsafe access
+  // Load translations (but DO NOT access unsafe properties)
   await loadAllTranslations(language);
 
   const title = `Earn Money Online in ${countryName}`;
