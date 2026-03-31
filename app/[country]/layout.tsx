@@ -23,29 +23,36 @@ import {
   type CountryCode,
 } from "@/app/core/countries";
 
+import type { SupportedLanguage } from "@/app/core/types";
 import { loadAllTranslations } from "@/app/core/i18n/loader";
 
-/* ================= LANGUAGE HELPERS ================= */
+/* ================= LANGUAGE ================= */
 
-function getInitialLanguage(country: CountryCode) {
+function getInitialLanguage(country: CountryCode): SupportedLanguage {
   const cookieStore = cookies();
 
   const override = cookieStore.get(COOKIE_KEYS.USER_LANGUAGE_OVERRIDE)?.value;
   if (override) {
     const lang = override.toLowerCase().split("-")[0];
-    if (SUPPORTED_LANGUAGES.includes(lang as any)) return lang;
+    if (SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage)) {
+      return lang as SupportedLanguage;
+    }
   }
 
   const saved = cookieStore.get(COOKIE_KEYS.LANGUAGE)?.value;
   if (saved) {
     const lang = saved.toLowerCase().split("-")[0];
-    if (SUPPORTED_LANGUAGES.includes(lang as any)) return lang;
+    if (SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage)) {
+      return lang as SupportedLanguage;
+    }
   }
 
-  return getCountry(country).defaultLanguage;
+  return getCountry(country).defaultLanguage as SupportedLanguage;
 }
 
-function getDirection(lang: string): "ltr" | "rtl" {
+/* ================= DIRECTION ================= */
+
+function getDirection(lang: SupportedLanguage): "ltr" | "rtl" {
   return ["ar", "he", "ur", "fa"].includes(lang) ? "rtl" : "ltr";
 }
 
@@ -66,11 +73,11 @@ export async function generateMetadata({
   }
 
   const country = countryParam as CountryCode;
-  const countryData = getCountry(country);
+  const countryName = getCountry(country).name;
 
   return {
-    title: `Earn Money Online in ${countryData.name}`,
-    description: `Earn money online in ${countryData.name} with Cashog.`,
+    title: `Earn Money Online in ${countryName}`,
+    description: `Earn money online in ${countryName} with Cashog.`,
     alternates: {
       canonical: `https://cashog.com/${country}`,
     },
@@ -88,8 +95,13 @@ export default async function CountryLayout({
 }) {
   const countryParam = params?.country?.toLowerCase();
 
-  if (!countryParam || countryParam === "global") redirect("/");
-  if (!isValidCountryCode(countryParam)) redirect("/");
+  if (!countryParam || countryParam === "global") {
+    redirect("/");
+  }
+
+  if (!isValidCountryCode(countryParam)) {
+    redirect("/");
+  }
 
   const country = countryParam as CountryCode;
 
@@ -99,7 +111,7 @@ export default async function CountryLayout({
   const translations = await loadAllTranslations(language);
 
   return (
-    <html lang={language} dir={dir}>
+    <html lang={language} dir={dir} suppressHydrationWarning>
       <body>
         <ThemeProviderWrapper>
           <CountryProvider initialCountry={country}>
