@@ -1,30 +1,16 @@
-import dynamic from "next/dynamic";
-
-import {
-  getCountry,
-  isValidCountryCode,
-  type CountryCode,
-  getCountryLanguage,
-} from "@/app/core/countries";
+import { getCountry, isValidCountryCode, type CountryCode, getCountryLanguage } from "@/app/core/countries";
 import { loadAllTranslations } from "@/app/core/i18n/loader";
 
-/* Layout */
 import CircleBorder from "@/components/animations/CircleBorder";
 import OpeningStyle from "@/components/animations/openingstyle";
 
-/* Sections */
 import HeroSection from "@/components/homepage/HeroSection";
-
-/* FAQ */
 import FAQ from "@/components/faq/FAQ";
 
-/* SEO */
 import { generateJsonLd } from "@/components/SEO/schema";
+import dynamic from "next/dynamic";
 
-const SeoRenderer = dynamic(
-  () => import("@/components/SEO/SeoRenderer"),
-  { ssr: false }
-);
+const SeoRenderer = dynamic(() => import("@/components/SEO/SeoRenderer"), { ssr: false });
 
 /* =============================== */
 function formatCountryName(code: string) {
@@ -32,9 +18,7 @@ function formatCountryName(code: string) {
     if (typeof Intl === "undefined" || !("DisplayNames" in Intl)) {
       return code.toUpperCase();
     }
-    const regionNames = new Intl.DisplayNames(["en"], {
-      type: "region",
-    });
+    const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
     return regionNames.of(code.toUpperCase()) || code.toUpperCase();
   } catch {
     return code.toUpperCase();
@@ -61,18 +45,15 @@ export default async function HomePage({
   const countryName = formatCountryName(country);
   const currentYear = new Date().getFullYear();
 
-  /* 🌐 LANGUAGE (SAFE FIX) */
-  const rawLanguage = getCountryLanguage(country);
+  /* ✅ LANGUAGE FIX */
+  const language = getCountryLanguage(country);
 
-  const supportedLanguages = ["en", "fr", "de", "es", "pt"] as const;
+  /* ✅ TRANSLATION SAFE CAST */
+  const safeLanguage = ["en", "fr", "de", "es", "pt"].includes(language)
+    ? language
+    : "en";
 
-  const language: "en" | "fr" | "de" | "es" | "pt" =
-    supportedLanguages.includes(rawLanguage as any)
-      ? (rawLanguage as any)
-      : "en";
-
-  /* 🌐 TRANSLATIONS */
-  const t = await loadAllTranslations(language);
+  const t = await loadAllTranslations(safeLanguage as "en" | "fr" | "de" | "es" | "pt");
 
   /* SEO */
   const title = `Earn Money Online in ${countryName} (${currentYear})`;
@@ -158,7 +139,9 @@ export default async function HomePage({
       <Section>
         <div className="w-full max-w-3xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-8">
-            {t.homepage.faq?.title || "Frequently Asked Questions"}
+            {typeof t.homepage.faq === "object"
+              ? t.homepage.faq.title
+              : t.homepage.faq || "Frequently Asked Questions"}
           </h2>
 
           <FAQ faqs={faqs} />
