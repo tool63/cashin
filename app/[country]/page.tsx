@@ -45,15 +45,17 @@ export default async function HomePage({
   const countryName = formatCountryName(country);
   const currentYear = new Date().getFullYear();
 
-  /* ✅ LANGUAGE FIX */
+  /* ✅ LANGUAGE */
   const language = getCountryLanguage(country);
 
-  /* ✅ TRANSLATION SAFE CAST */
-  const safeLanguage = ["en", "fr", "de", "es", "pt"].includes(language)
-    ? language
-    : "en";
+  /* ✅ SAFE LANGUAGE (only supported ones) */
+  const safeLanguage: "en" | "fr" | "de" | "es" | "pt" =
+    ["en", "fr", "de", "es", "pt"].includes(language)
+      ? (language as any)
+      : "en";
 
-  const t = await loadAllTranslations(safeLanguage as "en" | "fr" | "de" | "es" | "pt");
+  /* ✅ TRANSLATIONS */
+  const t = await loadAllTranslations(safeLanguage);
 
   /* SEO */
   const title = `Earn Money Online in ${countryName} (${currentYear})`;
@@ -132,16 +134,18 @@ export default async function HomePage({
 
       {/* HERO */}
       <Section>
-        <HeroSection data={t.homepage.hero} />
+        <HeroSection data={t?.homepage?.hero} />
       </Section>
 
       {/* FAQ */}
       <Section>
         <div className="w-full max-w-3xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-8">
-            {typeof t.homepage.faq === "object"
+            {t?.homepage?.faq && typeof t.homepage.faq === "object"
               ? t.homepage.faq.title
-              : t.homepage.faq || "Frequently Asked Questions"}
+              : typeof t?.homepage?.faq === "string"
+              ? t.homepage.faq
+              : "Frequently Asked Questions"}
           </h2>
 
           <FAQ faqs={faqs} />
