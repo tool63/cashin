@@ -13,9 +13,10 @@ import {
 
 import type { SupportedLanguage } from "@/app/core/types";
 import { loadAllTranslations } from "@/app/core/i18n/loader";
+import { getTranslations } from "next-intl/server";
 
 import FAQ from "@/components/animations/FAQ";
-import CircleBorder from "@/components/animations/CircleBorder"; // ✅ added
+import CircleBorder from "@/components/animations/CircleBorder";
 
 import { generateJsonLd } from "@/components/SEO/schema";
 
@@ -62,6 +63,9 @@ export default async function HomePage({
   const language = getLanguage(country);
 
   await loadAllTranslations(language);
+  const t = await getTranslations("homepage");
+
+  /* ================= SEO ================= */
 
   const title = `Earn Money Online in ${countryName}`;
   const description = `Earn real money online in ${countryName}.`;
@@ -72,6 +76,17 @@ export default async function HomePage({
     description,
     type: "low",
   });
+
+  /* ================= FAQ (i18n) ================= */
+
+  const rawFaqs = t.raw("faq.items") as { q: string; a: string }[];
+
+  const faqs = rawFaqs.map((item) => ({
+    q: item.q.replace("{country}", countryName),
+    a: item.a.replace("{country}", countryName),
+  }));
+
+  /* ================= RENDER ================= */
 
   return (
     <main>
@@ -86,42 +101,15 @@ export default async function HomePage({
         />
       )}
 
-      {/* FAQ SECTION WITH CIRCLE BORDER */}
+      {/* FAQ SECTION */}
       <div className="py-16 px-4">
         <CircleBorder>
           <div className="max-w-3xl mx-auto text-center py-12">
             <h2 className="text-3xl font-bold mb-6">
-              Frequently Asked Questions
+              {t("faq.title")}
             </h2>
 
-            <FAQ
-              faqs={[
-                {
-                  q: `How can I earn money online in ${countryName}?`,
-                  a: `You can earn money online in ${countryName} by completing simple tasks such as surveys, app installs, watching videos, and testing services. Many users start earning within minutes and withdraw their first payment the same day.`,
-                },
-                {
-                  q: `Is it really possible to earn money without investment?`,
-                  a: `Yes, absolutely. You don’t need to invest any money to start earning. Platforms like this are completely free to join and pay users for their time and engagement with partner offers.`,
-                },
-                {
-                  q: `How much money can I make daily?`,
-                  a: `Your earnings depend on how active you are. Some users earn a few dollars per day casually, while more active users can earn significantly more by completing multiple high-paying tasks consistently.`,
-                },
-                {
-                  q: `How do I withdraw my earnings?`,
-                  a: `You can withdraw your earnings through multiple payment methods such as mobile wallets, bank transfers, or gift cards depending on availability in ${countryName}. Withdrawals are usually fast and secure.`,
-                },
-                {
-                  q: `Is this platform safe and legit?`,
-                  a: `Yes, the platform is designed to be secure and trustworthy. Thousands of users worldwide are earning daily. Always follow the guidelines and avoid suspicious activities to keep your account safe.`,
-                },
-                {
-                  q: `How quickly will I receive my payment?`,
-                  a: `Most payments are processed instantly or within a few hours. In some cases, it may take up to 24 hours depending on the payment method and verification requirements.`,
-                },
-              ]}
-            />
+            <FAQ faqs={faqs} />
           </div>
         </CircleBorder>
       </div>
