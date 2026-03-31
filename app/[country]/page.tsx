@@ -6,7 +6,12 @@ import {
   type CountryCode,
 } from "@/app/core/countries";
 
-import { COOKIE_KEYS, SUPPORTED_LANGUAGES } from "@/app/core/constants";
+import {
+  COOKIE_KEYS,
+  SUPPORTED_LANGUAGES,
+} from "@/app/core/constants";
+
+import type { SupportedLanguage } from "@/app/core/types";
 import { loadAllTranslations } from "@/app/core/i18n/loader";
 
 import HeroSection from "@/components/homepage/HeroSection";
@@ -23,23 +28,31 @@ type Translations = {
   };
 };
 
-function getLanguage(country: CountryCode) {
+/* ================= LANGUAGE ================= */
+
+function getLanguage(country: CountryCode): SupportedLanguage {
   const cookieStore = cookies();
 
   const override = cookieStore.get(COOKIE_KEYS.USER_LANGUAGE_OVERRIDE)?.value;
   if (override) {
     const lang = override.toLowerCase().split("-")[0];
-    if (SUPPORTED_LANGUAGES.includes(lang as any)) return lang;
+    if (SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage)) {
+      return lang as SupportedLanguage;
+    }
   }
 
   const saved = cookieStore.get(COOKIE_KEYS.LANGUAGE)?.value;
   if (saved) {
     const lang = saved.toLowerCase().split("-")[0];
-    if (SUPPORTED_LANGUAGES.includes(lang as any)) return lang;
+    if (SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage)) {
+      return lang as SupportedLanguage;
+    }
   }
 
-  return getCountry(country).defaultLanguage;
+  return getCountry(country).defaultLanguage as SupportedLanguage;
 }
+
+/* ================= PAGE ================= */
 
 export default async function HomePage({
   params,
@@ -49,13 +62,14 @@ export default async function HomePage({
   const countryParam = params?.country?.toLowerCase();
 
   if (!countryParam || !isValidCountryCode(countryParam)) {
-    return null; // layout already handles redirect
+    return null;
   }
 
   const country = countryParam as CountryCode;
   const countryName = getCountry(country).name;
 
   const language = getLanguage(country);
+
   const t = (await loadAllTranslations(language)) as Translations;
 
   const title = `Earn Money Online in ${countryName}`;
@@ -73,12 +87,16 @@ export default async function HomePage({
       <script
         type="application/ld+json"
         suppressHydrationWarning
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData),
+        }}
       />
 
+      {/* HERO */}
       <HeroSection data={t?.homepage?.hero} />
 
-      <div className="max-w-3xl mx-auto text-center">
+      {/* FAQ */}
+      <div className="max-w-3xl mx-auto text-center py-12">
         <h2 className="text-3xl font-bold mb-6">
           {typeof t?.homepage?.faq === "object" &&
           t.homepage?.faq?.title
