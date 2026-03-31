@@ -28,12 +28,12 @@ const SeoRenderer = dynamic(() => import("@/components/SEO/SeoRenderer"));
 
 export const revalidate = 3600;
 
-/* ================= LANGUAGE LOGIC (MATCHES LAYOUT) ================= */
+/* ================= LANGUAGE LOGIC ================= */
 
 function getLanguage(
   country: CountryCode,
   cookieStore: ReturnType<typeof cookies>
-): string {
+) {
   // 1. User override
   const userOverride = cookieStore.get(COOKIE_KEYS.USER_LANGUAGE_OVERRIDE)?.value;
   if (userOverride) {
@@ -43,7 +43,7 @@ function getLanguage(
     }
   }
 
-  // 2. Saved cookie
+  // 2. Saved language
   const langCookie = cookieStore.get(COOKIE_KEYS.LANGUAGE)?.value;
   if (langCookie) {
     const normalized = langCookie.toLowerCase().split("-")[0];
@@ -63,6 +63,7 @@ function getDirection(lang: string): "ltr" | "rtl" {
 }
 
 /* ================= TYPES ================= */
+
 type Translations = {
   homepage?: {
     hero?: any;
@@ -73,6 +74,7 @@ type Translations = {
 };
 
 /* ================= COUNTRY NAME ================= */
+
 function formatCountryName(code: string) {
   try {
     if (typeof Intl === "undefined" || !("DisplayNames" in Intl)) {
@@ -86,6 +88,7 @@ function formatCountryName(code: string) {
 }
 
 /* ================= SECTION WRAPPER ================= */
+
 function Section({ children }: { children: React.ReactNode }) {
   return (
     <OpeningStyle>
@@ -101,6 +104,7 @@ function Section({ children }: { children: React.ReactNode }) {
 }
 
 /* ================= PAGE ================= */
+
 export default async function HomePage({
   params,
 }: {
@@ -126,12 +130,22 @@ export default async function HomePage({
 
   /* ================= LANGUAGE ================= */
   const language = getLanguage(country, cookieStore);
-  const dir = getDirection(language);
+
+  // 🔥 This is the FIX: ensure type-safe language
+  const allowedLanguages = ["en", "fr", "de", "es", "pt"] as const;
+  type SafeLang = (typeof allowedLanguages)[number];
+
+  const safeLanguage: SafeLang = allowedLanguages.includes(language as SafeLang)
+    ? (language as SafeLang)
+    : "en";
+
+  const dir = getDirection(safeLanguage);
 
   /* ================= TRANSLATIONS ================= */
-  const t = (await loadAllTranslations(language)) as Translations;
+  const t = (await loadAllTranslations(safeLanguage)) as Translations;
 
   /* ================= SEO ================= */
+
   const title = `Earn Money Online in ${countryName} - Get Paid Surveys, Apps & Tasks (${currentYear})`;
 
   const description = `Start earning real money online in ${countryName} with surveys, apps, and simple tasks. Fast payouts via PayPal, crypto, and more.`;
@@ -144,6 +158,7 @@ export default async function HomePage({
   });
 
   /* ================= FAQ ================= */
+
   const faqs = [
     {
       q: `Is it really possible to earn money online in ${countryName}?`,
@@ -156,6 +171,7 @@ export default async function HomePage({
   ];
 
   /* ================= RENDER ================= */
+
   return (
     <main dir={dir}>
       <SeoRenderer
