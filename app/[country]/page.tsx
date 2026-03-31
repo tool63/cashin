@@ -19,6 +19,8 @@ import FAQ from "@/components/faq/FAQ";
 
 import { generateJsonLd } from "@/components/SEO/schema";
 
+import type { TranslationsMap } from "@/app/[country]/providers/LanguageProvider";
+
 /* ================= LANGUAGE ================= */
 
 function getLanguage(country: CountryCode): SupportedLanguage {
@@ -61,9 +63,10 @@ export default async function HomePage({
 
   const language = getLanguage(country);
 
-  const translations = await loadAllTranslations(language);
+  // ✅ Proper typing (fixes your build error)
+  const translations = (await loadAllTranslations(language)) as TranslationsMap;
 
-  const t = translations || {};
+  const t: TranslationsMap = translations;
 
   const title = `Earn Money Online in ${countryName}`;
   const description = `Earn real money online in ${countryName}.`;
@@ -77,7 +80,7 @@ export default async function HomePage({
 
   return (
     <main>
-      {/* JSON-LD SAFETY CHECK */}
+      {/* JSON-LD */}
       {structuredData && (
         <script
           type="application/ld+json"
@@ -88,13 +91,13 @@ export default async function HomePage({
         />
       )}
 
-      {/* HERO (SAFE) */}
-      <HeroSection data={t?.homepage?.hero || {}} />
+      {/* HERO */}
+      <HeroSection data={t.homepage?.hero || {}} />
 
       {/* FAQ */}
       <div className="max-w-3xl mx-auto text-center py-12">
         <h2 className="text-3xl font-bold mb-6">
-          {typeof t?.homepage?.faq === "object" &&
+          {typeof t.homepage?.faq === "object" &&
           t.homepage?.faq?.title
             ? t.homepage.faq.title
             : "Frequently Asked Questions"}
