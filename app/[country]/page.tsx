@@ -62,10 +62,9 @@ export default async function HomePage({
 
   const language = getLanguage(country);
 
-  // ✅ Proper typing (fixes your build error)
   const translations = (await loadAllTranslations(language)) as TranslationsMap;
 
-  const t: TranslationsMap = translations;
+  const t = translations || {};
 
   const title = `Earn Money Online in ${countryName}`;
   const description = `Earn real money online in ${countryName}.`;
@@ -76,6 +75,12 @@ export default async function HomePage({
     description,
     type: "low",
   });
+
+  // ✅ SAFE extraction (fixes your error)
+  const faqTitle =
+    t?.homepage && t.homepage.faq && typeof t.homepage.faq === "object" && "title" in t.homepage.faq
+      ? t.homepage.faq.title
+      : "Frequently Asked Questions";
 
   return (
     <main>
@@ -93,10 +98,7 @@ export default async function HomePage({
       {/* FAQ */}
       <div className="max-w-3xl mx-auto text-center py-12">
         <h2 className="text-3xl font-bold mb-6">
-          {typeof t.homepage?.faq === "object" &&
-          t.homepage?.faq?.title
-            ? t.homepage.faq.title
-            : "Frequently Asked Questions"}
+          {faqTitle}
         </h2>
 
         <FAQ
