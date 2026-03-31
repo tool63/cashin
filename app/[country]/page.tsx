@@ -15,6 +15,7 @@ import type { SupportedLanguage } from "@/app/core/types";
 import { loadAllTranslations } from "@/app/core/i18n/loader";
 
 import FAQ from "@/components/animations/FAQ";
+import CircleBorder from "@/components/animations/CircleBorder"; // ✅ added
 
 import { generateJsonLd } from "@/components/SEO/schema";
 
@@ -60,7 +61,6 @@ export default async function HomePage({
 
   const language = getLanguage(country);
 
-  // Load translations (safe, no direct usage)
   await loadAllTranslations(language);
 
   const title = `Earn Money Online in ${countryName}`;
@@ -86,40 +86,44 @@ export default async function HomePage({
         />
       )}
 
-      {/* FAQ SECTION */}
-      <div className="max-w-3xl mx-auto text-center py-12">
-        <h2 className="text-3xl font-bold mb-6">
-          Frequently Asked Questions
-        </h2>
+      {/* FAQ SECTION WITH CIRCLE BORDER */}
+      <div className="py-16 px-4">
+        <CircleBorder>
+          <div className="max-w-3xl mx-auto text-center py-12">
+            <h2 className="text-3xl font-bold mb-6">
+              Frequently Asked Questions
+            </h2>
 
-        <FAQ
-          faqs={[
-            {
-              q: `How can I earn money online in ${countryName}?`,
-              a: `You can earn money online in ${countryName} by completing simple tasks such as surveys, app installs, watching videos, and testing services. Many users start earning within minutes and withdraw their first payment the same day.`,
-            },
-            {
-              q: `Is it really possible to earn money without investment?`,
-              a: `Yes, absolutely. You don’t need to invest any money to start earning. Platforms like this are completely free to join and pay users for their time and engagement with partner offers.`,
-            },
-            {
-              q: `How much money can I make daily?`,
-              a: `Your earnings depend on how active you are. Some users earn a few dollars per day casually, while more active users can earn significantly more by completing multiple high-paying tasks consistently.`,
-            },
-            {
-              q: `How do I withdraw my earnings?`,
-              a: `You can withdraw your earnings through multiple payment methods such as mobile wallets, bank transfers, or gift cards depending on availability in ${countryName}. Withdrawals are usually fast and secure.`,
-            },
-            {
-              q: `Is this platform safe and legit?`,
-              a: `Yes, the platform is designed to be secure and trustworthy. Thousands of users worldwide are earning daily. Always follow the guidelines and avoid suspicious activities to keep your account safe.`,
-            },
-            {
-              q: `How quickly will I receive my payment?`,
-              a: `Most payments are processed instantly or within a few hours. In some cases, it may take up to 24 hours depending on the payment method and verification requirements.`,
-            },
-          ]}
-        />
+            <FAQ
+              faqs={[
+                {
+                  q: `How can I earn money online in ${countryName}?`,
+                  a: `You can earn money online in ${countryName} by completing simple tasks such as surveys, app installs, watching videos, and testing services. Many users start earning within minutes and withdraw their first payment the same day.`,
+                },
+                {
+                  q: `Is it really possible to earn money without investment?`,
+                  a: `Yes, absolutely. You don’t need to invest any money to start earning. Platforms like this are completely free to join and pay users for their time and engagement with partner offers.`,
+                },
+                {
+                  q: `How much money can I make daily?`,
+                  a: `Your earnings depend on how active you are. Some users earn a few dollars per day casually, while more active users can earn significantly more by completing multiple high-paying tasks consistently.`,
+                },
+                {
+                  q: `How do I withdraw my earnings?`,
+                  a: `You can withdraw your earnings through multiple payment methods such as mobile wallets, bank transfers, or gift cards depending on availability in ${countryName}. Withdrawals are usually fast and secure.`,
+                },
+                {
+                  q: `Is this platform safe and legit?`,
+                  a: `Yes, the platform is designed to be secure and trustworthy. Thousands of users worldwide are earning daily. Always follow the guidelines and avoid suspicious activities to keep your account safe.`,
+                },
+                {
+                  q: `How quickly will I receive my payment?`,
+                  a: `Most payments are processed instantly or within a few hours. In some cases, it may take up to 24 hours depending on the payment method and verification requirements.`,
+                },
+              ]}
+            />
+          </div>
+        </CircleBorder>
       </div>
     </main>
   );
