@@ -1,10 +1,17 @@
 import { notFound } from "next/navigation";
+import { cookies } from "next/headers";
+
 import {
   getCountry,
   isValidCountryCode,
   type CountryCode,
-  getCountryLanguage,
 } from "@/app/core/countries";
+
+import {
+  COOKIE_KEYS,
+  SUPPORTED_LANGUAGES,
+} from "@/app/core/constants";
+
 import { loadAllTranslations } from "@/app/core/i18n/loader";
 
 import CircleBorder from "@/components/animations/CircleBorder";
@@ -17,13 +24,45 @@ import { generateJsonLd } from "@/components/SEO/schema";
 import dynamic from "next/dynamic";
 import React from "react";
 
-/* =============================== */
 const SeoRenderer = dynamic(() => import("@/components/SEO/SeoRenderer"));
 
-/* =============================== */
 export const revalidate = 3600;
 
-/* =============================== */
+/* ================= LANGUAGE LOGIC (MATCHES LAYOUT) ================= */
+
+function getLanguage(
+  country: CountryCode,
+  cookieStore: ReturnType<typeof cookies>
+): string {
+  // 1. User override
+  const userOverride = cookieStore.get(COOKIE_KEYS.USER_LANGUAGE_OVERRIDE)?.value;
+  if (userOverride) {
+    const normalized = userOverride.toLowerCase().split("-")[0];
+    if (SUPPORTED_LANGUAGES.includes(normalized as any)) {
+      return normalized;
+    }
+  }
+
+  // 2. Saved cookie
+  const langCookie = cookieStore.get(COOKIE_KEYS.LANGUAGE)?.value;
+  if (langCookie) {
+    const normalized = langCookie.toLowerCase().split("-")[0];
+    if (SUPPORTED_LANGUAGES.includes(normalized as any)) {
+      return normalized;
+    }
+  }
+
+  // 3. Country default
+  const countryData = getCountry(country);
+  return countryData.defaultLanguage || "en";
+}
+
+function getDirection(lang: string): "ltr" | "rtl" {
+  const rtlLanguages = ["ar", "he", "ur", "fa"];
+  return rtlLanguages.includes(lang) ? "rtl" : "ltr";
+}
+
+/* ================= TYPES ================= */
 type Translations = {
   homepage?: {
     hero?: any;
@@ -33,7 +72,7 @@ type Translations = {
   };
 };
 
-/* =============================== */
+/* ================= COUNTRY NAME ================= */
 function formatCountryName(code: string) {
   try {
     if (typeof Intl === "undefined" || !("DisplayNames" in Intl)) {
@@ -46,7 +85,7 @@ function formatCountryName(code: string) {
   }
 }
 
-/* =============================== */
+/* ================= SECTION WRAPPER ================= */
 function Section({ children }: { children: React.ReactNode }) {
   return (
     <OpeningStyle>
@@ -61,12 +100,14 @@ function Section({ children }: { children: React.ReactNode }) {
   );
 }
 
-/* =============================== */
+/* ================= PAGE ================= */
 export default async function HomePage({
   params,
 }: {
   params: { country?: string };
 }) {
+  const cookieStore = cookies();
+
   const countryParam = params?.country?.toLowerCase();
 
   if (!countryParam || !isValidCountryCode(countryParam)) {
@@ -84,17 +125,11 @@ export default async function HomePage({
   const currentYear = new Date().getFullYear();
 
   /* ================= LANGUAGE ================= */
-  const language = getCountryLanguage(country) || "en";
-
-  const allowedLanguages = ["en", "fr", "de", "es", "pt"] as const;
-  type SupportedLang = (typeof allowedLanguages)[number];
-
-  const safeLanguage: SupportedLang = allowedLanguages.includes(language as SupportedLang)
-    ? (language as SupportedLang)
-    : "en";
+  const language = getLanguage(country, cookieStore);
+  const dir = getDirection(language);
 
   /* ================= TRANSLATIONS ================= */
-  const t = (await loadAllTranslations(safeLanguage)) as Translations;
+  const t = (await loadAllTranslations(language)) as Translations;
 
   /* ================= SEO ================= */
   const title = `Earn Money Online in ${countryName} - Get Paid Surveys, Apps & Tasks (${currentYear})`;
@@ -122,7 +157,7 @@ export default async function HomePage({
 
   /* ================= RENDER ================= */
   return (
-    <main>
+    <main dir={dir}>
       <SeoRenderer
         path={`/${country}`}
         title={title}
