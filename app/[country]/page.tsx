@@ -14,7 +14,6 @@ import {
 import type { SupportedLanguage } from "@/app/core/types";
 import { loadAllTranslations } from "@/app/core/i18n/loader";
 
-import HeroSection from "@/components/homepage/HeroSection";
 import FAQ from "@/components/faq/FAQ";
 
 import { generateJsonLd } from "@/components/SEO/schema";
@@ -90,9 +89,6 @@ export default async function HomePage({
           }}
         />
       )}
-
-      {/* HERO */}
-      <HeroSection data={t.homepage?.hero || {}} />
 
       {/* FAQ */}
       <div className="max-w-3xl mx-auto text-center py-12">
