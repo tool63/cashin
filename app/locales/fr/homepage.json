@@ -1,15 +1,31 @@
 {
-  "homepage": {
-    "hero": {
-      "headline": "Gagnez de l'argent instantanément",
-      "subtext": "Complétez des tâches, sondages, regardez des vidéos et gagnez des récompenses en toute sécurité.",
-      "cta": "Commencer à gagner",
-      "trust_badge_1": "100% gratuit",
-      "trust_badge_2": "Paiements instantanés",
-      "trust_badge_3": "1M+ utilisateurs satisfaits"
-    },
-    "faq": {
-      "title": "Questions fréquemment posées"
-    }
+  "faq": {
+    "title": "Questions Fréquemment Posées",
+    "items": [
+      {
+        "q": "Comment gagner de l'argent en ligne en {country} ?",
+        "a": "Vous pouvez gagner de l'argent en ligne en {country} en complétant des tâches simples comme des sondages, des installations d'applications et le visionnage de vidéos."
+      },
+      {
+        "q": "Est-il possible de gagner de l'argent sans investissement ?",
+        "a": "Oui, absolument. Aucun investissement n'est nécessaire. Ces plateformes sont gratuites."
+      },
+      {
+        "q": "Combien puis-je gagner par jour ?",
+        "a": "Cela dépend de votre activité. Certains gagnent quelques euros, d'autres beaucoup plus."
+      },
+      {
+        "q": "Comment retirer mes gains ?",
+        "a": "Vous pouvez retirer via portefeuilles mobiles, virements bancaires ou cartes cadeaux selon {country}."
+      },
+      {
+        "q": "La plateforme est-elle fiable ?",
+        "a": "Oui, elle est sécurisée et fiable. Des milliers d'utilisateurs gagnent chaque jour."
+      },
+      {
+        "q": "Quand vais-je recevoir mon paiement ?",
+        "a": "La plupart des paiements sont instantanés ou sous quelques heures."
+      }
+    ]
   }
 }
