@@ -14,7 +14,7 @@ import {
 import type { SupportedLanguage } from "@/app/core/types";
 import { loadAllTranslations } from "@/app/core/i18n/loader";
 
-import FAQ from "@/components/faq/FAQ";
+import FAQ from "@/components/animations/FAQ.tsx";
 
 import { generateJsonLd } from "@/components/SEO/schema";
 
