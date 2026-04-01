@@ -1,7 +1,9 @@
 {
-  "title": "Start Earning Today",
-  "description": "Join thousands of users earning real money by completing simple tasks online.",
-  "trust_badge_1": "Instant payouts available",
-  "trust_badge_2": "Trusted by thousands of users",
-  "trust_badge_3": "100% free to join"
+  "title": "Turn Your Time Into Money in {country}",
+  "description": "Thousands of users in {country} earning real money by completing simple tasks online.",
+  "trust_badges": [
+    "Instant payouts in {country}",
+    "Trusted by thousands in {country}",
+    "100% free to join in {country}"
+  ]
 }
