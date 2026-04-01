@@ -21,8 +21,9 @@ export default function TypingText({
 }: TypingTextProps) {
   /* ================= WORDS ================= */
 
+  // ✅ Correct path: typing.words
   const wordsFromTranslations: string[] =
-    translations?.typinghome?.typing?.words || [];
+    translations?.typing?.words || [];
 
   const fallbackWords: string[] = [
     "Answering Surveys",
@@ -50,21 +51,14 @@ export default function TypingText({
       ? wordsFromTranslations
       : fallbackWords;
 
-  /* ================= COUNTRY APPEND ================= */
+  /* ================= COUNTRY LOGIC ================= */
 
   const words = useMemo(() => {
     if (!countryName) return baseWords;
 
-    return baseWords.map((word) => {
-      const cleanWord = word.replace("{country}", countryName);
-
-      // ✅ Ensure "in Country" is appended properly
-      if (cleanWord.toLowerCase().includes("in")) {
-        return cleanWord.replace(/\s+in\s+\{?country\}?/i, ` in ${countryName}`);
-      }
-
-      return `${cleanWord} in ${countryName}`;
-    });
+    return baseWords.map((word) =>
+      word.replace(/\{country\}/g, countryName)
+    );
   }, [baseWords, countryName]);
 
   /* ================= STATE ================= */
@@ -77,8 +71,10 @@ export default function TypingText({
   /* ================= EFFECT ================= */
 
   useEffect(() => {
-    const currentWord = words[wordIndex] || "";
-    let timeout: NodeJS.Timeout;
+    if (!words.length) return;
+
+    const currentWord = words[wordIndex];
+    let timeout: ReturnType<typeof setTimeout>;
 
     if (!isDeleting) {
       if (charIndex < currentWord.length) {
