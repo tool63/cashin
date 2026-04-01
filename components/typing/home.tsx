@@ -4,7 +4,6 @@ import { useEffect, useState, useMemo } from "react";
 
 type TypingTextProps = {
   translations?: any;
-  countryName?: string;
   typingSpeed?: number;
   deletingSpeed?: number;
   pauseTime?: number;
@@ -13,7 +12,6 @@ type TypingTextProps = {
 
 export default function TypingText({
   translations,
-  countryName,
   typingSpeed = 90,
   deletingSpeed = 50,
   pauseTime = 1500,
@@ -21,7 +19,6 @@ export default function TypingText({
 }: TypingTextProps) {
   /* ================= WORDS ================= */
 
-  // ✅ FIXED PATH (IMPORTANT)
   const wordsFromTranslations: string[] =
     translations?.typing?.words || [];
 
@@ -46,29 +43,10 @@ export default function TypingText({
     "Uploading Vouchers",
   ];
 
-  const baseWords =
+  const words =
     Array.isArray(wordsFromTranslations) && wordsFromTranslations.length > 0
       ? wordsFromTranslations
       : fallbackWords;
-
-  /* ================= COUNTRY REPLACEMENT ================= */
-
-  const words = useMemo(() => {
-    if (!countryName) return baseWords;
-
-    return baseWords.map((word) => {
-      // Replace {country} if exists
-      let cleanWord = word.replace(/\{country\}/gi, countryName);
-
-      // If already contains country → return
-      if (cleanWord.toLowerCase().includes(countryName.toLowerCase())) {
-        return cleanWord;
-      }
-
-      // Otherwise append
-      return `${cleanWord} in ${countryName}`;
-    });
-  }, [baseWords, countryName]);
 
   /* ================= STATE ================= */
 
