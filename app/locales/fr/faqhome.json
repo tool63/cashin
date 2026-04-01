@@ -1,0 +1,29 @@
+{
+  "title": "Questions Fréquemment Posées",
+  "items": [
+    {
+      "q": "Comment gagner de l'argent en ligne en {country} ?",
+      "a": "Vous pouvez gagner de l'argent en {country} en effectuant des tâches simples comme des sondages, l'installation d'applications, regarder des vidéos et tester des offres. C'est adapté aux débutants."
+    },
+    {
+      "q": "Dois-je investir de l'argent pour commencer ?",
+      "a": "Non, aucun investissement n'est nécessaire. La plateforme est entièrement gratuite en {country}."
+    },
+    {
+      "q": "Combien puis-je gagner par jour ?",
+      "a": "Vos gains en {country} dépendent de votre activité. Les utilisateurs occasionnels gagnent quelques dollars, tandis que les utilisateurs actifs gagnent davantage."
+    },
+    {
+      "q": "Comment retirer mes gains en {country} ?",
+      "a": "Vous pouvez retirer vos gains via les méthodes disponibles en {country}, comme les portefeuilles mobiles, virements bancaires ou cartes cadeaux."
+    },
+    {
+      "q": "Cette plateforme est-elle sûre et fiable ?",
+      "a": "Oui, la plateforme est sécurisée et utilisée dans le monde entier, y compris en {country}."
+    },
+    {
+      "q": "Combien de temps prennent les paiements ?",
+      "a": "La plupart des paiements en {country} sont traités instantanément ou en quelques heures."
+    }
+  ]
+}
