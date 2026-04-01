@@ -125,14 +125,18 @@ export default async function HomePage({
         />
       )}
 
-      {/* HERO SECTION */}
-      <HeroSection
-        data={heroData}
-        translations={translations}
-        countryName={countryName}
-      />
+      {/* HERO SECTION WITH CYCLING BORDER */}
+      <div className="py-16 px-4">
+        <CircleBorder>
+          <HeroSection
+            data={heroData}
+            translations={translations}
+            countryName={countryName}
+          />
+        </CircleBorder>
+      </div>
 
-      {/* FAQ SECTION */}
+      {/* FAQ SECTION WITH CYCLING BORDER */}
       <div className="py-16 px-4">
         <CircleBorder>
           <div className="max-w-3xl mx-auto text-center py-12">
