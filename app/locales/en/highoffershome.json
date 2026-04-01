@@ -1,0 +1,11 @@
+{
+  "title": "High Paying Offers",
+  "description": "Complete tasks and earn money instantly.",
+
+  "categories": [
+    { "key": "surveys", "label": "Surveys" },
+    { "key": "app_installs", "label": "App Installs" },
+    { "key": "play_games", "label": "Play Games" },
+    { "key": "watch_videos", "label": "Watch Videos" }
+  ]
+}
