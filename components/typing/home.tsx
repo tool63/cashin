@@ -21,9 +21,9 @@ export default function TypingText({
 }: TypingTextProps) {
   /* ================= WORDS ================= */
 
-  // ✅ Correct path based on typinghome.json
+  // ✅ FIXED PATH (IMPORTANT)
   const wordsFromTranslations: string[] =
-    translations?.typinghome?.typing?.words || [];
+    translations?.typing?.words || [];
 
   const fallbackWords: string[] = [
     "Answering Surveys",
@@ -56,9 +56,18 @@ export default function TypingText({
   const words = useMemo(() => {
     if (!countryName) return baseWords;
 
-    return baseWords.map((word) =>
-      word.replace(/\{country\}/g, countryName)
-    );
+    return baseWords.map((word) => {
+      // Replace {country} if exists
+      let cleanWord = word.replace(/\{country\}/gi, countryName);
+
+      // If already contains country → return
+      if (cleanWord.toLowerCase().includes(countryName.toLowerCase())) {
+        return cleanWord;
+      }
+
+      // Otherwise append
+      return `${cleanWord} in ${countryName}`;
+    });
   }, [baseWords, countryName]);
 
   /* ================= STATE ================= */
@@ -107,6 +116,15 @@ export default function TypingText({
     deletingSpeed,
     pauseTime,
   ]);
+
+  /* ================= RESET ON CHANGE ================= */
+
+  useEffect(() => {
+    setWordIndex(0);
+    setCharIndex(0);
+    setDisplayText("");
+    setIsDeleting(false);
+  }, [words]);
 
   /* ================= RENDER ================= */
 
