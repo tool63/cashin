@@ -1,0 +1,29 @@
+{
+  "title": "Perguntas Frequentes",
+  "items": [
+    {
+      "q": "Como posso ganhar dinheiro online em {country}?",
+      "a": "Você pode ganhar dinheiro em {country} completando tarefas simples como pesquisas, instalação de aplicativos, assistir vídeos e testar ofertas."
+    },
+    {
+      "q": "Preciso investir dinheiro para começar?",
+      "a": "Não, você não precisa investir nada. A plataforma é totalmente gratuita em {country}."
+    },
+    {
+      "q": "Quanto posso ganhar por dia?",
+      "a": "Seus ganhos em {country} dependem do seu nível de atividade. Usuários casuais ganham alguns dólares, enquanto usuários ativos ganham mais."
+    },
+    {
+      "q": "Como posso sacar meus ganhos em {country}?",
+      "a": "Você pode sacar seus ganhos usando métodos disponíveis em {country}, como carteiras digitais, transferências bancárias ou cartões-presente."
+    },
+    {
+      "q": "Esta plataforma é segura e confiável?",
+      "a": "Sim, a plataforma é segura e confiável, com usuários em todo o mundo, incluindo {country}."
+    },
+    {
+      "q": "Quanto tempo leva para processar os pagamentos?",
+      "a": "A maioria dos pagamentos em {country} é processada instantaneamente ou em poucas horas."
+    }
+  ]
+}
