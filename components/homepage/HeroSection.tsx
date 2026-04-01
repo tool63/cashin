@@ -14,16 +14,14 @@ interface HeroSectionProps {
   data?: HeroData;
   onOpenAuth?: (view: "login" | "signup" | "reset") => void;
 
-  // ✅ NEW: pass translations + country
+  // ✅ keep translations only
   translations?: any;
-  countryName?: string;
 }
 
 export default function HeroSection({
   data = {},
   onOpenAuth,
   translations,
-  countryName,
 }: HeroSectionProps) {
   return (
     <OpeningStyle delay={0.1}>
@@ -38,7 +36,6 @@ export default function HeroSection({
         <div className="mb-6">
           <TypingText
             translations={translations}
-            countryName={countryName}
           />
         </div>
 
