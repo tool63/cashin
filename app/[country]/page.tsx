@@ -13,7 +13,6 @@ import {
 
 import type { SupportedLanguage } from "@/app/core/types";
 import { loadAllTranslations } from "@/app/core/i18n/loader";
-import { getTranslations } from "next-intl/server";
 
 import FAQ from "@/components/animations/FAQ";
 import CircleBorder from "@/components/animations/CircleBorder";
@@ -62,8 +61,8 @@ export default async function HomePage({
 
   const language = getLanguage(country);
 
-  await loadAllTranslations(language);
-  const t = await getTranslations("homepage");
+  // ✅ Load translations
+  const translations = await loadAllTranslations(language);
 
   /* ================= SEO ================= */
 
@@ -77,11 +76,16 @@ export default async function HomePage({
     type: "low",
   });
 
-  /* ================= FAQ (i18n) ================= */
+  /* ================= FAQ FROM JSON ================= */
 
-  const rawFaqs = t.raw("faq.items") as { q: string; a: string }[];
+  const rawFaqs =
+    translations?.homepage?.faq?.items || [];
 
-  const faqs = rawFaqs.map((item) => ({
+  const faqTitle =
+    translations?.homepage?.faq?.title ||
+    "Frequently Asked Questions";
+
+  const faqs = rawFaqs.map((item: any) => ({
     q: item.q.replace("{country}", countryName),
     a: item.a.replace("{country}", countryName),
   }));
@@ -106,7 +110,7 @@ export default async function HomePage({
         <CircleBorder>
           <div className="max-w-3xl mx-auto text-center py-12">
             <h2 className="text-3xl font-bold mb-6">
-              {t("faq.title")}
+              {faqTitle}
             </h2>
 
             <FAQ faqs={faqs} />
