@@ -1,24 +1,24 @@
 {
   "typing": {
     "words": [
-      "Answering Surveys in {country}",
-      "Installing Apps in {country}",
-      "Playing Games in {country}",
-      "Watching Videos in {country}",
-      "Mining in {country}",
-      "Completing Offers in {country}",
-      "Using Offerwall in {country}",
-      "Using Surveywall in {country}",
-      "Watching Ads in {country}",
-      "Completing Micro Tasks in {country}",
-      "Completing Free Trials in {country}",
-      "Testing Products in {country}",
-      "Reading Emails in {country}",
-      "Visiting Websites in {country}",
-      "Writing Reviews in {country}",
-      "Spinning Wheel Rewards in {country}",
-      "Loyalty Tasks in {country}",
-      "Uploading Vouchers in {country}"
+      "Answering Surveys",
+      "Installing Apps",
+      "Playing Games",
+      "Watching Videos",
+      "Mining",
+      "Completing Offers",
+      "Using Offerwall",
+      "Using Surveywall",
+      "Watching Ads",
+      "Completing Micro Tasks",
+      "Completing Free Trials",
+      "Testing Products",
+      "Reading Emails",
+      "Visiting Websites",
+      "Writing Reviews",
+      "Spinning Wheel Rewards",
+      "Loyalty Tasks",
+      "Uploading Vouchers"
     ]
   }
 }
