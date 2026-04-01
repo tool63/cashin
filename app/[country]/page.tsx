@@ -43,6 +43,15 @@ function getLanguage(country: CountryCode): SupportedLanguage {
   return getCountry(country).defaultLanguage as SupportedLanguage;
 }
 
+/* ================= TYPES ================= */
+
+type HomepageTranslation = {
+  faq?: {
+    title?: string;
+    items?: { q: string; a: string }[];
+  };
+};
+
 /* ================= PAGE ================= */
 
 export default async function HomePage({
@@ -64,6 +73,9 @@ export default async function HomePage({
   // ✅ Load translations
   const translations = await loadAllTranslations(language);
 
+  // ✅ FIX: Proper typing (no TS error anymore)
+  const homepage = (translations?.homepage || {}) as HomepageTranslation;
+
   /* ================= SEO ================= */
 
   const title = `Earn Money Online in ${countryName}`;
@@ -76,16 +88,15 @@ export default async function HomePage({
     type: "low",
   });
 
-  /* ================= FAQ FROM JSON ================= */
+  /* ================= FAQ ================= */
 
-  const rawFaqs =
-    translations?.homepage?.faq?.items || [];
+  const rawFaqs = homepage?.faq?.items || [];
 
   const faqTitle =
-    translations?.homepage?.faq?.title ||
+    homepage?.faq?.title ||
     "Frequently Asked Questions";
 
-  const faqs = rawFaqs.map((item: any) => ({
+  const faqs = rawFaqs.map((item) => ({
     q: item.q.replace("{country}", countryName),
     a: item.a.replace("{country}", countryName),
   }));
