@@ -1,0 +1,19 @@
+{
+  "title": "Warum Uns Wählen",
+  "cta": "Jetzt Verdienen",
+
+  "instant_withdrawals": {
+    "title": "Sofortige Auszahlungen",
+    "description": "Erhalte deine Einnahmen schnell und ohne Verzögerung."
+  },
+
+  "secure_trusted": {
+    "title": "Sicher & Vertrauenswürdig",
+    "description": "Deine Daten und Zahlungen sind vollständig geschützt."
+  },
+
+  "multiple_payment_options": {
+    "title": "Mehrere Zahlungsmethoden",
+    "description": "Zahle dein Geld mit deiner bevorzugten Methode aus."
+  }
+}
