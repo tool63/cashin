@@ -50,12 +50,21 @@ export default function TypingText({
       ? wordsFromTranslations
       : fallbackWords;
 
-  /* ================= MEMO ================= */
+  /* ================= COUNTRY APPEND ================= */
 
   const words = useMemo(() => {
-    return baseWords.map((word) =>
-      countryName ? word.replace("{country}", countryName) : word
-    );
+    if (!countryName) return baseWords;
+
+    return baseWords.map((word) => {
+      const cleanWord = word.replace("{country}", countryName);
+
+      // ✅ Ensure "in Country" is appended properly
+      if (cleanWord.toLowerCase().includes("in")) {
+        return cleanWord.replace(/\s+in\s+\{?country\}?/i, ` in ${countryName}`);
+      }
+
+      return `${cleanWord} in ${countryName}`;
+    });
   }, [baseWords, countryName]);
 
   /* ================= STATE ================= */
