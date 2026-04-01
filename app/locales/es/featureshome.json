@@ -1,0 +1,19 @@
+{
+  "title": "Por Qué Elegirnos",
+  "cta": "Empieza a Ganar",
+
+  "instant_withdrawals": {
+    "title": "Retiros Instantáneos",
+    "description": "Obtén tus ganancias rápidamente sin demoras."
+  },
+
+  "secure_trusted": {
+    "title": "Seguro y Confiable",
+    "description": "Tus datos y pagos están completamente protegidos."
+  },
+
+  "multiple_payment_options": {
+    "title": "Múltiples Opciones de Pago",
+    "description": "Retira tu dinero usando tu método preferido."
+  }
+}
