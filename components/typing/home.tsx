@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 type TypingTextProps = {
   translations?: any;
@@ -21,11 +21,10 @@ export default function TypingText({
 }: TypingTextProps) {
   /* ================= WORDS ================= */
 
-  const wordsFromTranslations =
+  const wordsFromTranslations: string[] =
     translations?.typinghome?.typing?.words || [];
 
-  // ✅ FULL fallback list (your original)
-  const fallbackWords = [
+  const fallbackWords: string[] = [
     "Answering Surveys",
     "Installing Apps",
     "Playing Games",
@@ -47,14 +46,17 @@ export default function TypingText({
   ];
 
   const baseWords =
-    wordsFromTranslations.length > 0
+    Array.isArray(wordsFromTranslations) && wordsFromTranslations.length > 0
       ? wordsFromTranslations
       : fallbackWords;
 
-  // ✅ Replace {country} if exists
-  const words = baseWords.map((word: string) =>
-    countryName ? word.replace("{country}", countryName) : word
-  );
+  /* ================= MEMO (IMPORTANT) ================= */
+
+  const words = useMemo(() => {
+    return baseWords.map((word) =>
+      countryName ? word.replace("{country}", countryName) : word
+    );
+  }, [baseWords, countryName]);
 
   /* ================= STATE ================= */
 
