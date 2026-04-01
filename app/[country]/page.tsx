@@ -12,13 +12,29 @@ import {
 } from "@/app/core/constants";
 
 import type { SupportedLanguage } from "@/app/core/types";
-import { loadAllTranslations } from "@/app/core/i18n/loader";
 
 import HeroSection from "@/components/homepage/HeroSection";
+import TypingText from "@/components/typing/home";
 import FAQ from "@/components/animations/FAQ";
 import CircleBorder from "@/components/animations/CircleBorder";
 
 import { generateJsonLd } from "@/components/SEO/schema";
+
+/* ================= HELPER: LOAD SECTION ================= */
+
+async function loadSectionTranslation(
+  language: string,
+  section: string
+) {
+  try {
+    const file = await import(
+      `@/app/locales/${language}/${section}.json`
+    );
+    return file.default;
+  } catch {
+    return {};
+  }
+}
 
 /* ================= LANGUAGE ================= */
 
@@ -44,20 +60,6 @@ function getLanguage(country: CountryCode): SupportedLanguage {
   return getCountry(country).defaultLanguage as SupportedLanguage;
 }
 
-/* ================= TYPES ================= */
-
-type HomepageTranslation = {
-  hero?: {
-    headline?: string;
-    subtext?: string;
-    trust_badges?: string[];
-  };
-  faq?: {
-    title?: string;
-    items?: { q: string; a: string }[];
-  };
-};
-
 /* ================= PAGE ================= */
 
 export default async function HomePage({
@@ -76,10 +78,11 @@ export default async function HomePage({
 
   const language = getLanguage(country);
 
-  // ✅ Load translations
-  const translations = await loadAllTranslations(language);
+  /* ================= LOAD TRANSLATIONS ================= */
 
-  const homepage = (translations?.homepage || {}) as HomepageTranslation;
+  const hero = await loadSectionTranslation(language, "herohome");
+  const typing = await loadSectionTranslation(language, "typinghome");
+  const faq = await loadSectionTranslation(language, "faqhome");
 
   /* ================= SEO ================= */
 
@@ -95,24 +98,30 @@ export default async function HomePage({
 
   /* ================= HERO ================= */
 
-  const heroData = homepage?.hero || {};
+  const heroData = {
+    headline: hero?.headline?.replace(/\{country\}/g, countryName),
+    subtext: hero?.subtext?.replace(/\{country\}/g, countryName),
+    trust_badges: hero?.trust_badges?.map((b: string) =>
+      b.replace(/\{country\}/g, countryName)
+    ),
+  };
 
   /* ================= FAQ ================= */
 
-  const rawFaqs = homepage?.faq?.items || [];
-
   const faqTitle =
-    homepage?.faq?.title || "Frequently Asked Questions";
+    faq?.title || "Frequently Asked Questions";
 
-  const faqs = rawFaqs.map((item) => ({
-    q: item.q.replace(/\{country\}/g, countryName),
-    a: item.a.replace(/\{country\}/g, countryName),
-  }));
+  const faqs =
+    faq?.items?.map((item: any) => ({
+      q: item.q.replace(/\{country\}/g, countryName),
+      a: item.a.replace(/\{country\}/g, countryName),
+    })) || [];
 
   /* ================= RENDER ================= */
 
   return (
     <main>
+      {/* JSON-LD */}
       {structuredData && (
         <script
           type="application/ld+json"
@@ -128,7 +137,7 @@ export default async function HomePage({
         <CircleBorder>
           <HeroSection
             data={heroData}
-            translations={translations}
+            translations={typing}   {/* 👈 only typing passed */}
             countryName={countryName}
           />
         </CircleBorder>
