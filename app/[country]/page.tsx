@@ -14,7 +14,6 @@ import {
 import type { SupportedLanguage } from "@/app/core/types";
 
 import HeroSection from "@/components/homepage/HeroSection";
-import TypingText from "@/components/typing/home";
 import FAQ from "@/components/animations/FAQ";
 import CircleBorder from "@/components/animations/CircleBorder";
 
@@ -108,8 +107,7 @@ export default async function HomePage({
 
   /* ================= FAQ ================= */
 
-  const faqTitle =
-    faq?.title || "Frequently Asked Questions";
+  const faqTitle = faq?.title || "Frequently Asked Questions";
 
   const faqs =
     faq?.items?.map((item: any) => ({
@@ -137,7 +135,7 @@ export default async function HomePage({
         <CircleBorder>
           <HeroSection
             data={heroData}
-            translations={typing}   {/* 👈 only typing passed */}
+            translations={typing}
             countryName={countryName}
           />
         </CircleBorder>
