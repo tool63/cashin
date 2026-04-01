@@ -50,7 +50,7 @@ export default function TypingText({
       ? wordsFromTranslations
       : fallbackWords;
 
-  /* ================= MEMO (IMPORTANT) ================= */
+  /* ================= MEMO ================= */
 
   const words = useMemo(() => {
     return baseWords.map((word) =>
