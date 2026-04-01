@@ -14,6 +14,7 @@ import {
 import type { SupportedLanguage } from "@/app/core/types";
 
 import HeroSection from "@/components/homepage/HeroSection";
+import FinalCTASection from "@/components/homepage/FinalCTASection";
 import FAQ from "@/components/animations/FAQ";
 import CircleBorder from "@/components/animations/CircleBorder";
 
@@ -82,6 +83,7 @@ export default async function HomePage({
   const hero = await loadSectionTranslation(language, "herohome");
   const typing = await loadSectionTranslation(language, "typinghome");
   const faq = await loadSectionTranslation(language, "faqhome");
+  const final = await loadSectionTranslation(language, "finalhome"); // ✅ NEW
 
   /* ================= SEO ================= */
 
@@ -114,6 +116,16 @@ export default async function HomePage({
       q: item.q.replace(/\{country\}/g, countryName),
       a: item.a.replace(/\{country\}/g, countryName),
     })) || [];
+
+  /* ================= FINAL CTA ================= */
+
+  const finalData = {
+    title: final?.title?.replace(/\{country\}/g, countryName),
+    description: final?.description?.replace(/\{country\}/g, countryName),
+    trust_badges: final?.trust_badges?.map((b: string) =>
+      b.replace(/\{country\}/g, countryName)
+    ),
+  };
 
   /* ================= RENDER ================= */
 
@@ -150,6 +162,17 @@ export default async function HomePage({
 
             <FAQ faqs={faqs} />
           </div>
+        </CircleBorder>
+      </div>
+
+      {/* FINAL CTA */}
+      <div className="py-16 px-4">
+        <CircleBorder>
+          <FinalCTASection
+            data={finalData}
+            translations={{ finalhome: final }}
+            countryName={countryName}
+          />
         </CircleBorder>
       </div>
     </main>
