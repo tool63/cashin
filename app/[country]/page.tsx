@@ -14,6 +14,7 @@ import {
 import type { SupportedLanguage } from "@/app/core/types";
 import { loadAllTranslations } from "@/app/core/i18n/loader";
 
+import HeroSection from "@/components/homepage/HeroSection";
 import FAQ from "@/components/animations/FAQ";
 import CircleBorder from "@/components/animations/CircleBorder";
 
@@ -46,6 +47,11 @@ function getLanguage(country: CountryCode): SupportedLanguage {
 /* ================= TYPES ================= */
 
 type HomepageTranslation = {
+  hero?: {
+    headline?: string;
+    subtext?: string;
+    trust_badges?: string[];
+  };
   faq?: {
     title?: string;
     items?: { q: string; a: string }[];
@@ -73,7 +79,6 @@ export default async function HomePage({
   // ✅ Load translations
   const translations = await loadAllTranslations(language);
 
-  // ✅ FIX: Proper typing (no TS error anymore)
   const homepage = (translations?.homepage || {}) as HomepageTranslation;
 
   /* ================= SEO ================= */
@@ -87,6 +92,10 @@ export default async function HomePage({
     description,
     type: "low",
   });
+
+  /* ================= HERO DATA ================= */
+
+  const heroData = homepage?.hero || {};
 
   /* ================= FAQ ================= */
 
@@ -115,6 +124,13 @@ export default async function HomePage({
           }}
         />
       )}
+
+      {/* HERO SECTION */}
+      <HeroSection
+        data={heroData}
+        translations={translations}
+        countryName={countryName}
+      />
 
       {/* FAQ SECTION */}
       <div className="py-16 px-4">
