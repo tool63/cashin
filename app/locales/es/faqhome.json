@@ -1,0 +1,29 @@
+{
+  "title": "Preguntas Frecuentes",
+  "items": [
+    {
+      "q": "¿Cómo puedo ganar dinero en línea en {country}?",
+      "a": "Puedes ganar dinero en {country} completando tareas simples como encuestas, instalaciones de aplicaciones, ver videos y probar ofertas. Es fácil para principiantes y no requiere experiencia."
+    },
+    {
+      "q": "¿Necesito invertir dinero para empezar?",
+      "a": "No, no necesitas ninguna inversión. La plataforma es completamente gratuita en {country} y ganas dinero completando tareas."
+    },
+    {
+      "q": "¿Cuánto puedo ganar diariamente?",
+      "a": "Tus ganancias en {country} dependen de tu nivel de actividad. Los usuarios ocasionales ganan unos pocos dólares al día, mientras que los usuarios activos pueden ganar más."
+    },
+    {
+      "q": "¿Cómo retiro mis ganancias en {country}?",
+      "a": "Puedes retirar tus ganancias usando métodos disponibles en {country}, incluyendo billeteras móviles, transferencias bancarias o tarjetas de regalo."
+    },
+    {
+      "q": "¿Es esta plataforma segura y legítima?",
+      "a": "Sí, la plataforma es segura y confiable, con usuarios en todo el mundo, incluyendo {country}. Sigue siempre las reglas para mantener tu cuenta segura."
+    },
+    {
+      "q": "¿Qué tan rápido se procesan los pagos?",
+      "a": "La mayoría de los pagos en {country} se procesan instantáneamente o en pocas horas, dependiendo del método de pago."
+    }
+  ]
+}
