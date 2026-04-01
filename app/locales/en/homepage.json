@@ -1,4 +1,16 @@
 {
+  "hero": {
+    "headline": "Start Earning Online",
+    "subtext": "Earn money online by completing simple tasks like surveys, app installs, watching videos, and more. No investment required. Start earning today from {country}.",
+    "cta": "Start Earning Now",
+    "trust_badges": [
+      "No Investment Required",
+      "Instant Withdrawals",
+      "Trusted Worldwide",
+      "Beginner Friendly"
+    ]
+  },
+
   "faq": {
     "title": "Frequently Asked Questions",
     "items": [
