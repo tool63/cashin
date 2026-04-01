@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 
 type TypingTextProps = {
-  words?: string[];
+  translations?: any;
+  countryName?: string;
   typingSpeed?: number;
   deletingSpeed?: number;
   pauseTime?: number;
@@ -11,7 +12,20 @@ type TypingTextProps = {
 };
 
 export default function TypingText({
-  words = [
+  translations,
+  countryName,
+  typingSpeed = 90,
+  deletingSpeed = 50,
+  pauseTime = 1500,
+  className = "text-4xl sm:text-5xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500",
+}: TypingTextProps) {
+  /* ================= WORDS ================= */
+
+  const wordsFromTranslations =
+    translations?.typinghome?.typing?.words || [];
+
+  // ✅ FULL fallback list (your original)
+  const fallbackWords = [
     "Answering Surveys",
     "Installing Apps",
     "Playing Games",
@@ -30,19 +44,29 @@ export default function TypingText({
     "Spinning Wheel",
     "Loyalty",
     "Uploading Vouchers",
-  ],
-  typingSpeed = 90,
-  deletingSpeed = 50,
-  pauseTime = 1500,
-  className = "text-4xl sm:text-5xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-green-400 to-green-500",
-}: TypingTextProps) {
+  ];
+
+  const baseWords =
+    wordsFromTranslations.length > 0
+      ? wordsFromTranslations
+      : fallbackWords;
+
+  // ✅ Replace {country} if exists
+  const words = baseWords.map((word: string) =>
+    countryName ? word.replace("{country}", countryName) : word
+  );
+
+  /* ================= STATE ================= */
+
   const [wordIndex, setWordIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [displayText, setDisplayText] = useState("");
 
+  /* ================= EFFECT ================= */
+
   useEffect(() => {
-    const currentWord = words[wordIndex];
+    const currentWord = words[wordIndex] || "";
     let timeout: NodeJS.Timeout;
 
     if (!isDeleting) {
@@ -67,7 +91,17 @@ export default function TypingText({
     }
 
     return () => clearTimeout(timeout);
-  }, [charIndex, isDeleting, wordIndex, words, typingSpeed, deletingSpeed, pauseTime]);
+  }, [
+    charIndex,
+    isDeleting,
+    wordIndex,
+    words,
+    typingSpeed,
+    deletingSpeed,
+    pauseTime,
+  ]);
+
+  /* ================= RENDER ================= */
 
   return (
     <span className={className}>
