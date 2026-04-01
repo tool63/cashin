@@ -1,0 +1,19 @@
+{
+  "title": "Why Choose Us",
+  "cta": "Start Now",
+
+  "instant_withdrawals": {
+    "title": "Instant Withdrawals",
+    "description": "Get your earnings quickly without delays."
+  },
+
+  "secure_trusted": {
+    "title": "Secure & Trusted",
+    "description": "Your data and payments are fully protected."
+  },
+
+  "multiple_payment_options": {
+    "title": "Multiple Payment Options",
+    "description": "Withdraw your money using your preferred method."
+  }
+}
