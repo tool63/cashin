@@ -93,7 +93,7 @@ export default async function HomePage({
     type: "low",
   });
 
-  /* ================= HERO DATA ================= */
+  /* ================= HERO ================= */
 
   const heroData = homepage?.hero || {};
 
@@ -102,19 +102,17 @@ export default async function HomePage({
   const rawFaqs = homepage?.faq?.items || [];
 
   const faqTitle =
-    homepage?.faq?.title ||
-    "Frequently Asked Questions";
+    homepage?.faq?.title || "Frequently Asked Questions";
 
   const faqs = rawFaqs.map((item) => ({
-    q: item.q.replace("{country}", countryName),
-    a: item.a.replace("{country}", countryName),
+    q: item.q.replace(/\{country\}/g, countryName),
+    a: item.a.replace(/\{country\}/g, countryName),
   }));
 
   /* ================= RENDER ================= */
 
   return (
     <main>
-      {/* JSON-LD */}
       {structuredData && (
         <script
           type="application/ld+json"
@@ -125,7 +123,7 @@ export default async function HomePage({
         />
       )}
 
-      {/* HERO SECTION WITH CYCLING BORDER */}
+      {/* HERO */}
       <div className="py-16 px-4">
         <CircleBorder>
           <HeroSection
@@ -136,7 +134,7 @@ export default async function HomePage({
         </CircleBorder>
       </div>
 
-      {/* FAQ SECTION WITH CYCLING BORDER */}
+      {/* FAQ */}
       <div className="py-16 px-4">
         <CircleBorder>
           <div className="max-w-3xl mx-auto text-center py-12">
