@@ -136,7 +136,6 @@ export default async function HomePage({
           <HeroSection
             data={heroData}
             translations={typing}
-            countryName={countryName}
           />
         </CircleBorder>
       </div>
