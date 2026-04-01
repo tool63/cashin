@@ -31,7 +31,7 @@ export default function HeroSection({
 
         {/* HEADLINE */}
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 text-gray-900 dark:text-white">
-          {data.headline || "Start Earning Online"}
+          {data.headline || "Get Paid Instantly"}
         </h1>
 
         {/* TYPING TEXT */}
