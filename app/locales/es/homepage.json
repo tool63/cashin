@@ -1,30 +1,41 @@
 {
+  "hero": {
+    "headline": "Empieza a ganar dinero online",
+    "subtext": "Gana dinero completando tareas simples como encuestas, instalar apps, ver videos y más. Sin inversión. Empieza hoy en {country}.",
+    "cta": "Empieza ahora",
+    "trust_badges": [
+      "Sin inversión",
+      "Pagos instantáneos",
+      "Confiable",
+      "Fácil para principiantes"
+    ]
+  },
   "faq": {
-    "title": "Preguntas Frecuentes",
+    "title": "Preguntas frecuentes",
     "items": [
       {
-        "q": "¿Cómo puedo ganar dinero en línea en {country}?",
-        "a": "Puedes ganar dinero en línea en {country} completando tareas simples como encuestas, instalaciones de aplicaciones, ver videos y probar servicios."
+        "q": "¿Cómo ganar dinero en {country}?",
+        "a": "Puedes ganar dinero completando tareas simples como encuestas y ver videos."
       },
       {
-        "q": "¿Es realmente posible ganar dinero sin inversión?",
-        "a": "Sí, absolutamente. No necesitas invertir dinero para comenzar. Estas plataformas son gratuitas y pagan por tu tiempo."
+        "q": "¿Necesito inversión?",
+        "a": "No, es totalmente gratis."
       },
       {
-        "q": "¿Cuánto dinero puedo ganar diariamente?",
-        "a": "Tus ingresos dependen de tu actividad. Algunos usuarios ganan unos pocos dólares al día, mientras que otros más activos ganan significativamente más."
+        "q": "¿Cuánto puedo ganar?",
+        "a": "Depende de tu actividad."
       },
       {
-        "q": "¿Cómo retiro mis ganancias?",
-        "a": "Puedes retirar tus ganancias mediante billeteras móviles, transferencias bancarias o tarjetas de regalo según disponibilidad en {country}."
+        "q": "¿Cómo retiro dinero?",
+        "a": "A través de varios métodos disponibles en {country}."
       },
       {
-        "q": "¿Es esta plataforma segura y legítima?",
-        "a": "Sí, es segura y confiable. Miles de usuarios ganan dinero diariamente."
+        "q": "¿Es seguro?",
+        "a": "Sí, es seguro y confiable."
       },
       {
         "q": "¿Cuánto tarda el pago?",
-        "a": "La mayoría de los pagos son instantáneos o dentro de pocas horas. En algunos casos puede tardar hasta 24 horas."
+        "a": "Generalmente es rápido."
       }
     ]
   }
