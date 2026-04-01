@@ -1,0 +1,29 @@
+{
+  "title": "Frequently Asked Questions",
+  "items": [
+    {
+      "q": "How can I earn money online in {country}?",
+      "a": "You can earn money in {country} by completing simple tasks such as surveys, app installs, watching videos, and testing offers. It’s beginner-friendly and requires no experience."
+    },
+    {
+      "q": "Do I need to invest money to start?",
+      "a": "No, you don’t need any investment. The platform is completely free to use in {country}, and you earn by completing tasks."
+    },
+    {
+      "q": "How much can I earn daily?",
+      "a": "Your earnings in {country} depend on your activity level. Casual users earn a few dollars daily, while active users can earn significantly more."
+    },
+    {
+      "q": "How do I withdraw my earnings in {country}?",
+      "a": "You can withdraw your earnings using available payment methods in {country}, including mobile wallets, bank transfer, or gift cards."
+    },
+    {
+      "q": "Is this platform safe and legit?",
+      "a": "Yes, the platform is secure and trusted by users worldwide, including in {country}. Always follow guidelines for safe usage."
+    },
+    {
+      "q": "How fast are payments processed?",
+      "a": "Most payments in {country} are processed instantly or within a few hours, depending on the payment method."
+    }
+  ]
+}
