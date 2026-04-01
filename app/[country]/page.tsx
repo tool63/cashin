@@ -14,6 +14,7 @@ import {
 import type { SupportedLanguage } from "@/app/core/types";
 
 import HeroSection from "@/components/homepage/HeroSection";
+import FeaturesSection from "@/components/homepage/FeaturesSection";
 import FinalCTASection from "@/components/homepage/FinalCTASection";
 import FAQ from "@/components/animations/FAQ";
 import CircleBorder from "@/components/animations/CircleBorder";
@@ -82,8 +83,9 @@ export default async function HomePage({
 
   const hero = await loadSectionTranslation(language, "herohome");
   const typing = await loadSectionTranslation(language, "typinghome");
+  const features = await loadSectionTranslation(language, "featureshome"); // ✅ NEW
   const faq = await loadSectionTranslation(language, "faqhome");
-  const final = await loadSectionTranslation(language, "finalhome"); // ✅ NEW
+  const final = await loadSectionTranslation(language, "finalhome");
 
   /* ================= SEO ================= */
 
@@ -105,6 +107,28 @@ export default async function HomePage({
     trust_badges: hero?.trust_badges?.map((b: string) =>
       b.replace(/\{country\}/g, countryName)
     ),
+  };
+
+  /* ================= FEATURES ================= */
+
+  const featuresData = {
+    title: features?.title?.replace(/\{country\}/g, countryName),
+    cta: features?.cta?.replace(/\{country\}/g, countryName),
+
+    instant_withdrawals: {
+      title: features?.instant_withdrawals?.title?.replace(/\{country\}/g, countryName),
+      description: features?.instant_withdrawals?.description?.replace(/\{country\}/g, countryName),
+    },
+
+    secure_trusted: {
+      title: features?.secure_trusted?.title?.replace(/\{country\}/g, countryName),
+      description: features?.secure_trusted?.description?.replace(/\{country\}/g, countryName),
+    },
+
+    multiple_payment_options: {
+      title: features?.multiple_payment_options?.title?.replace(/\{country\}/g, countryName),
+      description: features?.multiple_payment_options?.description?.replace(/\{country\}/g, countryName),
+    },
   };
 
   /* ================= FAQ ================= */
@@ -152,6 +176,17 @@ export default async function HomePage({
         </CircleBorder>
       </div>
 
+      {/* FEATURES */}
+      <div className="py-16 px-4">
+        <CircleBorder>
+          <FeaturesSection
+            data={featuresData}
+            translations={features}
+            countryName={countryName}
+          />
+        </CircleBorder>
+      </div>
+
       {/* FAQ */}
       <div className="py-16 px-4">
         <CircleBorder>
@@ -178,4 +213,3 @@ export default async function HomePage({
     </main>
   );
 }
-
