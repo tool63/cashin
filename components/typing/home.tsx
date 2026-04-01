@@ -21,9 +21,9 @@ export default function TypingText({
 }: TypingTextProps) {
   /* ================= WORDS ================= */
 
-  // ✅ Correct path: typing.words
+  // ✅ Correct path based on typinghome.json
   const wordsFromTranslations: string[] =
-    translations?.typing?.words || [];
+    translations?.typinghome?.typing?.words || [];
 
   const fallbackWords: string[] = [
     "Answering Surveys",
@@ -51,7 +51,7 @@ export default function TypingText({
       ? wordsFromTranslations
       : fallbackWords;
 
-  /* ================= COUNTRY LOGIC ================= */
+  /* ================= COUNTRY REPLACEMENT ================= */
 
   const words = useMemo(() => {
     if (!countryName) return baseWords;
