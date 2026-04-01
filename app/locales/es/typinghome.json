@@ -1,24 +1,24 @@
 {
   "typing": {
     "words": [
-      "Ganar dinero respondiendo encuestas en {country}",
-      "Instalar aplicaciones y ganar dinero en {country}",
-      "Jugar juegos y ganar dinero en {country}",
-      "Ver videos y ganar dinero en {country}",
-      "Hacer minería en {country}",
-      "Completar ofertas en {country}",
-      "Usar Offerwall en {country}",
-      "Usar Surveywall en {country}",
-      "Ver anuncios y ganar dinero en {country}",
-      "Completar micro tareas en {country}",
-      "Probar ofertas gratuitas en {country}",
-      "Probar productos en {country}",
-      "Leer correos y ganar dinero en {country}",
-      "Visitar sitios web y ganar dinero en {country}",
-      "Escribir reseñas en {country}",
-      "Girar la ruleta de recompensas en {country}",
-      "Completar tareas de fidelidad en {country}",
-      "Subir cupones en {country}"
+      "Responder encuestas",
+      "Instalar aplicaciones",
+      "Jugar juegos",
+      "Ver videos",
+      "Minar",
+      "Completar ofertas",
+      "Usar Offerwall",
+      "Usar Surveywall",
+      "Ver anuncios",
+      "Completar microtareas",
+      "Completar pruebas gratuitas",
+      "Probar productos",
+      "Leer correos electrónicos",
+      "Visitar sitios web",
+      "Escribir reseñas",
+      "Girar la rueda de recompensas",
+      "Tareas de lealtad",
+      "Subir vales"
     ]
   }
 }
