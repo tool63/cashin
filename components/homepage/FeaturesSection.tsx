@@ -2,7 +2,8 @@
 
 import { SectionTitle } from "@/components/homepage/SmallComponents";
 import { motion } from "framer-motion";
-import Container, {
+import OpeningStyle from "@/components/animations/openingstyle";
+import {
   Card,
   CardIcon,
   CardTitle,
@@ -11,33 +12,118 @@ import Container, {
   CardGrid,
 } from "@/components/animations/container";
 
-export default function FeaturesSection({ data }: { data: any }) {
+interface FeaturesData {
+  title?: string;
+  cta?: string;
+
+  instant_withdrawals?: {
+    title?: string;
+    description?: string;
+  };
+
+  secure_trusted?: {
+    title?: string;
+    description?: string;
+  };
+
+  multiple_payment_options?: {
+    title?: string;
+    description?: string;
+  };
+}
+
+interface FeaturesSectionProps {
+  data?: FeaturesData;
+
+  // full featureshome.json translation object
+  translations?: any;
+
+  countryName?: string;
+}
+
+export default function FeaturesSection({
+  data = {},
+  translations = {},
+  countryName = "",
+}: FeaturesSectionProps) {
+  /* ================= HELPERS ================= */
+
+  function replaceCountry(text?: string) {
+    if (!text) return "";
+    return text.replace(/\{country\}/g, countryName);
+  }
+
+  function getText(
+    dataValue?: string,
+    translationValue?: string,
+    fallback: string = ""
+  ) {
+    return dataValue || translationValue || fallback;
+  }
+
+  /* ================= FEATURES ================= */
+
   const features = [
     {
       icon: "⚡",
-      title: data.instant_withdrawals?.title,
-      description: data.instant_withdrawals?.description,
+      title: getText(
+        data.instant_withdrawals?.title,
+        translations?.instant_withdrawals?.title,
+        "Instant Withdrawals"
+      ),
+      description: getText(
+        data.instant_withdrawals?.description,
+        translations?.instant_withdrawals?.description,
+        ""
+      ),
     },
     {
       icon: "🛡️",
-      title: data.secure_trusted?.title,
-      description: data.secure_trusted?.description,
+      title: getText(
+        data.secure_trusted?.title,
+        translations?.secure_trusted?.title,
+        "Secure & Trusted"
+      ),
+      description: getText(
+        data.secure_trusted?.description,
+        translations?.secure_trusted?.description,
+        ""
+      ),
     },
     {
       icon: "💳",
-      title: data.multiple_payment_options?.title,
-      description: data.multiple_payment_options?.description,
+      title: getText(
+        data.multiple_payment_options?.title,
+        translations?.multiple_payment_options?.title,
+        "Multiple Payment Options"
+      ),
+      description: getText(
+        data.multiple_payment_options?.description,
+        translations?.multiple_payment_options?.description,
+        ""
+      ),
     },
   ];
 
+  /* ================= RENDER ================= */
+
   return (
-    <Container delay={0.12}>
-      {/* Section Heading */}
-      <div className="mb-12">
-        <SectionTitle icon="✨" text={data.title} />
+    <OpeningStyle delay={0.12}>
+      {/* SECTION TITLE */}
+      <div className="mb-12 text-center">
+        <SectionTitle
+          icon="✨"
+          text={replaceCountry(
+            getText(
+              data.title,
+              translations?.title,
+              "Why Choose Us"
+            )
+          )}
+        />
       </div>
 
-      {/* Features Grid */}
+      {/* FEATURES GRID */}
       <CardGrid cols={{ default: 1, md: 3 }}>
         {features.map((feature, i) => (
           <motion.div
@@ -45,19 +131,36 @@ export default function FeaturesSection({ data }: { data: any }) {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6, delay: i * 0.15 }}
+            transition={{
+              duration: 0.6,
+              delay: i * 0.15,
+            }}
           >
             <Card>
               <CardIcon>{feature.icon}</CardIcon>
-              <CardTitle>{feature.title}</CardTitle>
-              <CardDescription>{feature.description}</CardDescription>
+
+              <CardTitle>
+                {replaceCountry(feature.title)}
+              </CardTitle>
+
+              <CardDescription>
+                {replaceCountry(feature.description)}
+              </CardDescription>
+
               <CardCTA>
-                {data.cta} <span className="text-lg">→</span>
+                {replaceCountry(
+                  getText(
+                    data.cta,
+                    translations?.cta,
+                    "Start Now"
+                  )
+                )}{" "}
+                <span className="text-lg">→</span>
               </CardCTA>
             </Card>
           </motion.div>
         ))}
       </CardGrid>
-    </Container>
+    </OpeningStyle>
   );
 }
