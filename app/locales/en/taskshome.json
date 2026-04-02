@@ -1,0 +1,80 @@
+{
+  "title": "High Paying Tasks in {country}",
+  "icon": "🎯",
+  "cta": "Start earning",
+
+  "items": [
+    {
+      "title": "Surveys",
+      "description": "Share your opinions and get rewarded instantly in {country}"
+    },
+    {
+      "title": "App Installs",
+      "description": "Install apps and earn money easily"
+    },
+    {
+      "title": "Playing Games",
+      "description": "Have fun while earning rewards"
+    },
+    {
+      "title": "Watching Videos",
+      "description": "Watch short videos and get paid"
+    },
+    {
+      "title": "Mining Rewards",
+      "description": "Earn crypto while mining rewards"
+    },
+    {
+      "title": "Completing Offers",
+      "description": "Finish tasks and get instant payouts"
+    },
+    {
+      "title": "Offerwall",
+      "description": "Complete multiple offers for bonuses"
+    },
+    {
+      "title": "Surveywall",
+      "description": "Explore surveys with higher payouts"
+    },
+    {
+      "title": "Watching Ads",
+      "description": "Earn by watching ads online"
+    },
+    {
+      "title": "Micro Tasks",
+      "description": "Quick small tasks for extra cash"
+    },
+    {
+      "title": "Free Trials",
+      "description": "Try free trials and earn rewards"
+    },
+    {
+      "title": "Testing Products",
+      "description": "Test products and get paid"
+    },
+    {
+      "title": "Reading Emails",
+      "description": "Read emails and earn money"
+    },
+    {
+      "title": "Visiting Websites",
+      "description": "Visit websites and earn instantly"
+    },
+    {
+      "title": "Review Tasks",
+      "description": "Complete review tasks for rewards"
+    },
+    {
+      "title": "Spinning Wheel",
+      "description": "Spin the wheel and win prizes"
+    },
+    {
+      "title": "Loyalty",
+      "description": "Earn loyalty rewards over time"
+    },
+    {
+      "title": "Vouchers",
+      "description": "Get vouchers as payout options"
+    }
+  ]
+}
