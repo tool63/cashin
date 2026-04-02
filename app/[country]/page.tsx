@@ -19,11 +19,9 @@ import TasksSection from "@/components/homepage/TasksSection";
 import PaymentSection from "@/components/homepage/PaymentSection";
 import HighPayingOffers from "@/components/homepage/HighPayingOffers";
 import LiveEarnings from "@/components/homepage/LiveEarnings";
-
 import LiveWithdrawals from "@/components/homepage/LiveWithdrawals";
-import LiveJoining from "@/components/homepage/LiveJoining";
-import LiveOfferCompletion from "@/components/homepage/LiveOfferCompletion";
-
+import LiveJoining from "@/components/homepage/LiveJoining"; // ✅ ADDED
+import LiveOfferCompletion from "@/components/homepage/LiveOfferCompletion"; // ✅ ADDED
 import StatsSection from "@/components/homepage/StatsSection";
 import TrustSection from "@/components/homepage/TrustSection";
 import TestimonialSection from "@/components/homepage/TestimonialSection";
@@ -51,6 +49,7 @@ function getLanguage(country: CountryCode): SupportedLanguage {
   const cookieStore = cookies();
 
   const override = cookieStore.get(COOKIE_KEYS.USER_LANGUAGE_OVERRIDE)?.value;
+
   if (override) {
     const lang = override.toLowerCase().split("-")[0];
     if (SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage)) {
@@ -59,6 +58,7 @@ function getLanguage(country: CountryCode): SupportedLanguage {
   }
 
   const saved = cookieStore.get(COOKIE_KEYS.LANGUAGE)?.value;
+
   if (saved) {
     const lang = saved.toLowerCase().split("-")[0];
     if (SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage)) {
@@ -96,11 +96,9 @@ export default async function HomePage({
   const payments = await loadSectionTranslation(language, "paymentshome");
   const highOffers = await loadSectionTranslation(language, "highoffershome");
   const liveEarnings = await loadSectionTranslation(language, "liveearningshome");
-
   const withdrawals = await loadSectionTranslation(language, "withdrawalshome");
-  const joining = await loadSectionTranslation(language, "livejoininghome");
-  const offerCompletion = await loadSectionTranslation(language, "offercompletionhome");
-
+  const joining = await loadSectionTranslation(language, "livejoininghome"); // ✅ NEW
+  const offerCompletion = await loadSectionTranslation(language, "liveoffercompletionhome"); // ✅ NEW
   const stats = await loadSectionTranslation(language, "statshome");
   const trust = await loadSectionTranslation(language, "trusthome");
   const testimonials = await loadSectionTranslation(language, "testimonialshome");
@@ -205,11 +203,17 @@ export default async function HomePage({
       </CircleBorder>
 
       <CircleBorder>
-        <LiveJoining data={joiningData} countryName={countryName} />
+        <LiveJoining
+          data={joiningData}
+          countryName={countryName}
+        />
       </CircleBorder>
 
       <CircleBorder>
-        <LiveOfferCompletion data={offerCompletionData} countryName={countryName} />
+        <LiveOfferCompletion
+          data={offerCompletionData}
+          countryName={countryName}
+        />
       </CircleBorder>
 
       <CircleBorder>
