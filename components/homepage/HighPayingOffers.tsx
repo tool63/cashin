@@ -15,11 +15,6 @@ type Offer = {
   payout: number;
   completions: number;
   country: string;
-  badgeHigh?: boolean;
-  badgeFast?: boolean;
-  badgeNew?: boolean;
-  badgeTrending?: boolean;
-  badgeLimited?: boolean;
   difficulty?: "Easy" | "Medium" | "Hard";
   rating?: number;
 };
@@ -36,45 +31,128 @@ interface Props {
   data: any;
 }
 
-/* ===================== DATA GENERATOR ===================== */
+/* ===================== REALISTIC DATA (3 PER CATEGORY) ===================== */
 
-const generateOffers = (category: CategoryKey): Offer[] => {
-  const base = [
-    "Quick Survey",
-    "Mobile App Install",
-    "Game Bonus",
-    "Video Reward",
-    "Task Completion",
-    "Daily Challenge",
-    "High Reward Offer",
-    "Exclusive Deal",
-    "Fast Cash Task",
-    "Limited Time Offer",
-  ];
-
-  const offers: Offer[] = [];
-
-  for (let i = 1; i <= 20; i++) {
-    const title = `${base[i % base.length]} #${i}`;
-
-    offers.push({
-      id: i,
-      title: `${category.toUpperCase()} - ${title}`,
-      payout: parseFloat((Math.random() * 5 + 0.5).toFixed(2)),
-      completions: Math.floor(Math.random() * 50000 + 1000),
+const categoryOffers: Record<CategoryKey, Offer[]> = {
+  surveys: [
+    {
+      id: 1,
+      title: "Quick Market Survey",
+      payout: 1.20,
+      completions: 12000,
       country: "Global",
-      badgeHigh: Math.random() > 0.7,
-      badgeFast: Math.random() > 0.6,
-      badgeNew: Math.random() > 0.8,
-      badgeTrending: Math.random() > 0.5,
-      difficulty: ["Easy", "Medium", "Hard"][
-        Math.floor(Math.random() * 3)
-      ] as any,
-      rating: parseFloat((Math.random() * 2 + 3).toFixed(1)),
-    });
-  }
+      difficulty: "Easy",
+      rating: 4.3,
+    },
+    {
+      id: 2,
+      title: "Consumer Feedback Survey",
+      payout: 1.80,
+      completions: 9000,
+      country: "US",
+      difficulty: "Medium",
+      rating: 4.5,
+    },
+    {
+      id: 3,
+      title: "Product Research Survey",
+      payout: 2.10,
+      completions: 7000,
+      country: "Global",
+      difficulty: "Medium",
+      rating: 4.6,
+    },
+  ],
 
-  return offers.sort((a, b) => b.payout - a.payout);
+  app_installs: [
+    {
+      id: 1,
+      title: "Install & Open App",
+      payout: 1.50,
+      completions: 15000,
+      country: "Global",
+      difficulty: "Easy",
+      rating: 4.2,
+    },
+    {
+      id: 2,
+      title: "Install & Register App",
+      payout: 2.30,
+      completions: 11000,
+      country: "UK",
+      difficulty: "Medium",
+      rating: 4.5,
+    },
+    {
+      id: 3,
+      title: "Install & Complete Tutorial",
+      payout: 3.00,
+      completions: 8000,
+      country: "Global",
+      difficulty: "Medium",
+      rating: 4.6,
+    },
+  ],
+
+  play_games: [
+    {
+      id: 1,
+      title: "Reach Level 10",
+      payout: 2.20,
+      completions: 14000,
+      country: "Global",
+      difficulty: "Medium",
+      rating: 4.4,
+    },
+    {
+      id: 2,
+      title: "Win 3 Matches",
+      payout: 3.10,
+      completions: 10000,
+      country: "Global",
+      difficulty: "Medium",
+      rating: 4.5,
+    },
+    {
+      id: 3,
+      title: "Complete Game Challenge",
+      payout: 4.00,
+      completions: 6000,
+      country: "Global",
+      difficulty: "Hard",
+      rating: 4.7,
+    },
+  ],
+
+  watch_videos: [
+    {
+      id: 1,
+      title: "Watch Short Video",
+      payout: 0.30,
+      completions: 50000,
+      country: "Global",
+      difficulty: "Easy",
+      rating: 4.1,
+    },
+    {
+      id: 2,
+      title: "Watch Ad + Confirm",
+      payout: 0.60,
+      completions: 40000,
+      country: "Global",
+      difficulty: "Easy",
+      rating: 4.2,
+    },
+    {
+      id: 3,
+      title: "Watch Full Promo Video",
+      payout: 1.00,
+      completions: 30000,
+      country: "Global",
+      difficulty: "Easy",
+      rating: 4.4,
+    },
+  ],
 };
 
 /* ===================== COMPONENT ===================== */
@@ -84,7 +162,7 @@ export default function HighPayingOffers({ data }: Props) {
   const [loading, setLoading] = useState(true);
   const { resolvedTheme } = useTheme();
 
-  const offers = useMemo(() => generateOffers(category), [category]);
+  const offers = useMemo(() => categoryOffers[category], [category]);
 
   useEffect(() => {
     setLoading(true);
@@ -129,23 +207,18 @@ export default function HighPayingOffers({ data }: Props) {
 
         {/* LOADING */}
         {loading ? (
-          <CardSkeleton rows={10} />
+          <CardSkeleton cards={5} />
         ) : (
-          /* OFFERS */
+          /* ROW BASED OFFER LIST */
           <div className="rounded-xl border overflow-hidden">
             {offers.map((offer) => (
               <div
                 key={offer.id}
-                className="flex justify-between items-center p-4 border-b"
+                className="flex justify-between items-center px-4 py-4 border-b border-gray-200 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/5 transition"
               >
                 {/* LEFT */}
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span>{offer.title}</span>
-
-                  {offer.badgeHigh && <Crown size={14} />}
-                  {offer.badgeFast && <Zap size={14} />}
-                  {offer.badgeTrending && <TrendingUp size={14} />}
-                  {offer.badgeNew && <Star size={14} />}
+                <div className="flex items-center gap-3 flex-wrap">
+                  <span className="font-medium">{offer.title}</span>
 
                   <span className="text-xs text-gray-500">
                     ({offer.difficulty})
@@ -153,13 +226,20 @@ export default function HighPayingOffers({ data }: Props) {
                 </div>
 
                 {/* RIGHT */}
-                <div className="text-right">
+                <div className="text-right flex items-center gap-3">
                   <div className="font-bold text-green-500">
                     ${offer.payout.toFixed(2)}
                   </div>
-                  <div className="text-xs text-gray-500">
-                    ⭐ {offer.rating} | {offer.completions} completions
+
+                  <div className="text-xs text-gray-500 hidden sm:block">
+                    ⭐ {offer.rating} | {offer.completions} leads
                   </div>
+
+                  {/* BADGES */}
+                  {offer.payout > 3 && <Crown size={14} />}
+                  {offer.rating && offer.rating > 4.5 && <Star size={14} />}
+                  {offer.payout < 1 && <Zap size={14} />}
+                  {offer.completions > 40000 && <TrendingUp size={14} />}
                 </div>
               </div>
             ))}
