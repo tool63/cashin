@@ -1,0 +1,79 @@
+{
+  "title": "Platform Stats in {country}",
+  "description": "Join thousands of users already earning money online in {country}.",
+
+  "stats": {
+    "users": {
+      "value": "1M+",
+      "label": "Total Users",
+      "description": "Active members earning daily",
+      "trend": {
+        "value": "+12%",
+        "direction": "up",
+        "text": "Growing fast"
+      }
+    },
+    "daily": {
+      "value": "50K+",
+      "label": "Daily Earnings",
+      "description": "Users earning every day",
+      "trend": {
+        "value": "+8%",
+        "direction": "up",
+        "text": "Increasing daily"
+      }
+    },
+    "offers": {
+      "value": "10K+",
+      "label": "Available Offers",
+      "description": "Tasks you can complete",
+      "trend": {
+        "value": "+5%",
+        "direction": "up",
+        "text": "New offers added"
+      }
+    },
+    "completed": {
+      "value": "25M+",
+      "label": "Tasks Completed",
+      "description": "Successfully finished tasks",
+      "trend": {
+        "value": "+15%",
+        "direction": "up",
+        "text": "High completion rate"
+      }
+    },
+    "advertisers": {
+      "value": "500+",
+      "label": "Advertisers",
+      "description": "Trusted partner brands",
+      "trend": {
+        "value": "+3%",
+        "direction": "up",
+        "text": "More brands joining"
+      }
+    },
+    "paid": {
+      "value": "$10M+",
+      "label": "Total Paid",
+      "description": "Money paid to users",
+      "trend": {
+        "value": "+20%",
+        "direction": "up",
+        "text": "Payments growing"
+      }
+    }
+  },
+
+  "highlights": [
+    "Fast payouts in {country}",
+    "Trusted by thousands",
+    "Daily new opportunities"
+  ],
+
+  "trust": [
+    "Secure platform",
+    "Real earnings",
+    "Global support"
+  ]
+}
