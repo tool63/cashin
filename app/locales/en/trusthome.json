@@ -1,0 +1,36 @@
+{
+  "title": "Why You Can Trust Us in {country}",
+  "description": "Our platform ensures security, reliability, and instant payouts so you can focus on earning without worries.",
+
+  "icon": "🔒",
+
+  "features": [
+    {
+      "title": "Secure Payments",
+      "description": "All transactions are encrypted and safe",
+      "icon": "💳"
+    },
+    {
+      "title": "Trusted by Millions",
+      "description": "Millions of users trust our platform globally",
+      "icon": "🌍"
+    },
+    {
+      "title": "Fast Payouts",
+      "description": "Get your earnings instantly with multiple methods",
+      "icon": "⚡"
+    },
+    {
+      "title": "24/7 Support",
+      "description": "Our support team is always here to help",
+      "icon": "🕒"
+    }
+  ],
+
+  "trust_indicators": [
+    "256-bit Encryption",
+    "GDPR Compliant",
+    "SSL Secure",
+    "Verified Company"
+  ]
+}
