@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Zap, TrendingUp, Star, Crown } from "lucide-react";
 import { motion } from "framer-motion";
-import { useTheme } from "next-themes";
 import OpeningStyle from "@/components/animations/openingstyle";
 import CardSkeleton from "@/components/loading/CardSkeleton";
 
@@ -15,7 +14,6 @@ type Offer = {
   payout: number;
   completions: number;
   country: string;
-  difficulty?: "Easy" | "Medium" | "Hard";
   rating?: number;
 };
 
@@ -31,31 +29,168 @@ interface Props {
   data: any;
 }
 
+/* ===================== COUNTRY FLAGS ===================== */
+
+const countryPool = [
+  "🇺🇸 USA",
+  "🇬🇧 UK",
+  "🇨🇦 Canada",
+  "🇦🇺 Australia",
+  "🇯🇵 Japan",
+  "🇪🇺 Europe",
+];
+
+const getCountry = (i: number) => countryPool[i % countryPool.length];
+
 /* ===================== DATA ===================== */
 
 const categoryOffers: Record<CategoryKey, Offer[]> = {
   surveys: [
-    { id: 1, title: "Market Survey", payout: 1.2, completions: 12000, country: "Global", difficulty: "Easy", rating: 4.3 },
-    { id: 2, title: "Consumer Survey", payout: 1.5, completions: 18000, country: "Global", difficulty: "Medium", rating: 4.5 },
-    { id: 3, title: "Health Survey", payout: 0.9, completions: 9000, country: "Global", difficulty: "Easy", rating: 4.2 },
+    ...Array.from({ length: 20 }, (_, i) => ({
+      id: i + 1,
+      title: `Survey Offer ${i + 1}`,
+      payout: +(0.8 + i * 0.12).toFixed(2),
+      completions: 5000 + i * 3000,
+      country: getCountry(i),
+      rating: +(4.1 + (i % 5) * 0.1).toFixed(1),
+    })),
+
+    // ➕ 3 NEW
+    {
+      id: 21,
+      title: "Quick Market Insights",
+      payout: 1.95,
+      completions: 28500,
+      country: "🇺🇸 USA",
+      rating: 4.6,
+    },
+    {
+      id: 22,
+      title: "Brand Feedback Survey",
+      payout: 2.15,
+      completions: 32000,
+      country: "🇬🇧 UK",
+      rating: 4.7,
+    },
+    {
+      id: 23,
+      title: "Product Experience Survey",
+      payout: 2.35,
+      completions: 41000,
+      country: "🇨🇦 Canada",
+      rating: 4.8,
+    },
   ],
 
   app_installs: [
-    { id: 1, title: "Install Finance App", payout: 2.1, completions: 25000, country: "Global", difficulty: "Easy", rating: 4.6 },
-    { id: 2, title: "Install Shopping App", payout: 2.5, completions: 30000, country: "Global", difficulty: "Medium", rating: 4.7 },
-    { id: 3, title: "Install Game App", payout: 1.8, completions: 22000, country: "Global", difficulty: "Easy", rating: 4.4 },
+    ...Array.from({ length: 20 }, (_, i) => ({
+      id: i + 1,
+      title: `Install App ${i + 1}`,
+      payout: +(1.5 + i * 0.18).toFixed(2),
+      completions: 10000 + i * 3500,
+      country: getCountry(i),
+      rating: +(4.2 + (i % 4) * 0.1).toFixed(1),
+    })),
+
+    // ➕ 3 NEW
+    {
+      id: 21,
+      title: "Finance App Install",
+      payout: 3.25,
+      completions: 38000,
+      country: "🇺🇸 USA",
+      rating: 4.6,
+    },
+    {
+      id: 22,
+      title: "Shopping App Install",
+      payout: 3.75,
+      completions: 42000,
+      country: "🇬🇧 UK",
+      rating: 4.7,
+    },
+    {
+      id: 23,
+      title: "Gaming App Install",
+      payout: 4.1,
+      completions: 50000,
+      country: "🇨🇦 Canada",
+      rating: 4.8,
+    },
   ],
 
   play_games: [
-    { id: 1, title: "Reach Level 10", payout: 3.2, completions: 15000, country: "Global", difficulty: "Medium", rating: 4.5 },
-    { id: 2, title: "Win 5 Matches", payout: 4.5, completions: 18000, country: "Global", difficulty: "Hard", rating: 4.7 },
-    { id: 3, title: "Complete Missions", payout: 2.8, completions: 20000, country: "Global", difficulty: "Easy", rating: 4.3 },
+    ...Array.from({ length: 20 }, (_, i) => ({
+      id: i + 1,
+      title: `Game Task ${i + 1}`,
+      payout: +(2.2 + i * 0.22).toFixed(2),
+      completions: 8000 + i * 2500,
+      country: getCountry(i),
+      rating: +(4.3 + (i % 5) * 0.1).toFixed(1),
+    })),
+
+    // ➕ 3 NEW
+    {
+      id: 21,
+      title: "Reach Level 20",
+      payout: 5.25,
+      completions: 45000,
+      country: "🇺🇸 USA",
+      rating: 4.7,
+    },
+    {
+      id: 22,
+      title: "Win Tournament",
+      payout: 6.5,
+      completions: 52000,
+      country: "🇯🇵 Japan",
+      rating: 4.8,
+    },
+    {
+      id: 23,
+      title: "Daily Missions",
+      payout: 4.75,
+      completions: 48000,
+      country: "🇦🇺 Australia",
+      rating: 4.6,
+    },
   ],
 
   watch_videos: [
-    { id: 1, title: "Watch 10 Ads", payout: 0.5, completions: 50000, country: "Global", difficulty: "Easy", rating: 4.2 },
-    { id: 2, title: "Watch Content", payout: 0.8, completions: 60000, country: "Global", difficulty: "Easy", rating: 4.4 },
-    { id: 3, title: "Watch & Answer", payout: 0.7, completions: 45000, country: "Global", difficulty: "Easy", rating: 4.3 },
+    ...Array.from({ length: 20 }, (_, i) => ({
+      id: i + 1,
+      title: `Watch & Earn ${i + 1}`,
+      payout: +(0.3 + i * 0.06).toFixed(2),
+      completions: 20000 + i * 4000,
+      country: getCountry(i),
+      rating: +(4.0 + (i % 3) * 0.1).toFixed(1),
+    })),
+
+    // ➕ 3 NEW
+    {
+      id: 21,
+      title: "Premium Video Watch",
+      payout: 0.95,
+      completions: 65000,
+      country: "🇬🇧 UK",
+      rating: 4.6,
+    },
+    {
+      id: 22,
+      title: "Ad Engagement Task",
+      payout: 0.85,
+      completions: 72000,
+      country: "🇺🇸 USA",
+      rating: 4.7,
+    },
+    {
+      id: 23,
+      title: "Short Video Tasks",
+      payout: 0.75,
+      completions: 80000,
+      country: "🇨🇦 Canada",
+      rating: 4.5,
+    },
   ],
 };
 
@@ -73,6 +208,13 @@ export default function HighPayingOffers({ data }: Props) {
     return () => clearTimeout(timer);
   }, [category]);
 
+  const getBadge = (offer: Offer) => {
+    if (offer.payout > 3) return "HOT";
+    if (offer.completions > 40000) return "TRENDING";
+    if (offer.rating && offer.rating > 4.6) return "NEW";
+    return null;
+  };
+
   return (
     <OpeningStyle delay={0.15}>
       <section className="max-w-7xl mx-auto px-6 py-20">
@@ -84,9 +226,6 @@ export default function HighPayingOffers({ data }: Props) {
               {data?.title}
             </span>
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            {data?.description}
-          </p>
         </div>
 
         {/* CATEGORY */}
@@ -115,7 +254,7 @@ export default function HighPayingOffers({ data }: Props) {
           <div className="rounded-xl border overflow-hidden">
 
             {/* HEADER */}
-            <div className="grid grid-cols-4 px-4 py-3 text-xs font-semibold text-gray-500 border-b border-gray-200 dark:border-white/10">
+            <div className="grid grid-cols-4 px-4 py-3 text-xs font-semibold text-gray-500 border-b">
               <div>Name</div>
               <div>Country</div>
               <div>Completed</div>
@@ -123,41 +262,46 @@ export default function HighPayingOffers({ data }: Props) {
             </div>
 
             {/* ROWS */}
-            {offers.map((offer) => (
-              <div
-                key={offer.id}
-                className="grid grid-cols-4 items-center px-4 py-4 border-b border-gray-200 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/5 transition text-sm"
-              >
-                {/* NAME */}
-                <div className="font-medium truncate">
-                  {offer.title}
-                </div>
+            {offers.map((offer) => {
+              const badge = getBadge(offer);
 
-                {/* COUNTRY */}
-                <div className="text-gray-600 dark:text-gray-400">
-                  🌍 {offer.country}
-                </div>
+              return (
+                <div
+                  key={offer.id}
+                  className="grid grid-cols-4 items-center px-4 py-4 border-b hover:bg-gray-50 dark:hover:bg-white/5 transition text-sm"
+                >
+                  <div className="flex items-center gap-2 font-medium truncate">
+                    {offer.title}
 
-                {/* COMPLETED */}
-                <div className="text-gray-600 dark:text-gray-400">
-                  {offer.completions.toLocaleString()}
-                </div>
+                    {badge && (
+                      <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${
+                        badge === "HOT"
+                          ? "bg-red-500 text-white"
+                          : badge === "TRENDING"
+                          ? "bg-yellow-400 text-black"
+                          : "bg-green-500 text-white"
+                      }`}>
+                        {badge}
+                      </span>
+                    )}
+                  </div>
 
-                {/* PAYOUT */}
-                <div className="flex justify-end items-center gap-3">
-                  <span className="font-bold text-green-500">
-                    ${offer.payout.toFixed(2)}
-                  </span>
+                  <div className="text-gray-600 dark:text-gray-400">
+                    {offer.country}
+                  </div>
 
-                  <div className="flex gap-2">
-                    {offer.payout > 3 && <Crown size={14} />}
-                    {offer.rating && offer.rating > 4.5 && <Star size={14} />}
-                    {offer.payout < 1 && <Zap size={14} />}
-                    {offer.completions > 40000 && <TrendingUp size={14} />}
+                  <div className="text-gray-600 dark:text-gray-400">
+                    {offer.completions.toLocaleString()}
+                  </div>
+
+                  <div className="flex justify-end items-center">
+                    <span className="font-bold text-green-500">
+                      ${offer.payout.toFixed(2)}
+                    </span>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
 
