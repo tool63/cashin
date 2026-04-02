@@ -116,7 +116,11 @@ export default async function HomePage({
     type: "low",
   });
 
-  /* ================= FAQ FIX ================= */
+  /* ================= FAQ ================= */
+
+  const faqTitle =
+    faq?.title?.replace(/\{country\}/g, countryName) ||
+    "Frequently Asked Questions";
 
   const safeFaqItems = Array.isArray(faq?.items)
     ? faq.items
@@ -126,7 +130,7 @@ export default async function HomePage({
 
           if (!q || !a) return null;
 
-          return { q, a }; // ✅ matches your FAQ component
+          return { q, a };
         })
         .filter(Boolean)
     : [];
@@ -246,10 +250,14 @@ export default async function HomePage({
         <TestimonialSection data={testimonials} countryName={countryName} />
       </CircleBorder>
 
-      {/* ✅ FAQ SECTION */}
+      {/* ✅ FAQ SECTION WITH TITLE */}
       {safeFaqItems.length > 0 && (
         <CircleBorder>
           <div className="w-full max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-8">
+              {faqTitle}
+            </h2>
+
             <FAQ faqs={safeFaqItems} />
           </div>
         </CircleBorder>
