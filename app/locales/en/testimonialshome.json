@@ -1,0 +1,20 @@
+{
+  "title": "What Our Users Say",
+  "description": "Join thousands of users earning daily in {country}",
+  "statsText": "Trusted by thousands in {country}",
+
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "Sarah",
+      "avatar": "👩",
+      "country": "USA",
+      "flag": "🇺🇸",
+      "rating": 5,
+      "text": "I earn daily using this platform in {country}.",
+      "earnings": "$3000+ earned",
+      "date": "Member since 2023",
+      "verified": true
+    }
+  ]
+}
