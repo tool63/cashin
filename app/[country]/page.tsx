@@ -116,7 +116,7 @@ export default async function HomePage({
     type: "low",
   });
 
-  /* ================= ✅ FIXED FAQ ================= */
+  /* ================= FAQ FIX ================= */
 
   const safeFaqItems = Array.isArray(faq?.items)
     ? faq.items
@@ -126,7 +126,7 @@ export default async function HomePage({
 
           if (!q || !a) return null;
 
-          return { q, a }; // ✅ IMPORTANT FIX
+          return { q, a }; // ✅ matches your FAQ component
         })
         .filter(Boolean)
     : [];
@@ -246,7 +246,7 @@ export default async function HomePage({
         <TestimonialSection data={testimonials} countryName={countryName} />
       </CircleBorder>
 
-      {/* ✅ FAQ NOW WORKS */}
+      {/* ✅ FAQ SECTION */}
       {safeFaqItems.length > 0 && (
         <CircleBorder>
           <div className="w-full max-w-4xl mx-auto text-center">
