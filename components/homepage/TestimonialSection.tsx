@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import OpeningStyle from "@/components/animations/openingstyle";
 import { SectionTitle } from "@/components/homepage/SmallComponents";
 import { Card } from "@/components/animations/container";
@@ -68,10 +68,14 @@ export default function TestimonialSection({
       const { scrollLeft, scrollWidth, clientWidth } =
         scrollContainerRef.current;
 
-      setShowLeftArrow(scrollLeft > 0);
+      setShowLeftArrow(scrollLeft > 10);
       setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 10);
     }
   };
+
+  useEffect(() => {
+    handleScroll();
+  }, [testimonials]);
 
   const scroll = (direction: "left" | "right") => {
     if (scrollContainerRef.current) {
@@ -129,53 +133,67 @@ export default function TestimonialSection({
         </div>
 
         {/* SCROLL */}
-        <div className="relative group">
-          {showLeftArrow && (
-            <button onClick={() => scroll("left")} className="absolute left-0 top-1/2 -translate-y-1/2 z-10">
-              <ChevronLeft />
-            </button>
-          )}
-
-          {showRightArrow && (
-            <button onClick={() => scroll("right")} className="absolute right-0 top-1/2 -translate-y-1/2 z-10">
-              <ChevronRight />
-            </button>
-          )}
-
-          <div
-            ref={scrollContainerRef}
-            onScroll={handleScroll}
-            className="flex overflow-x-auto gap-6 pb-8 snap-x"
-          >
-            {testimonials.map((t: Testimonial, i: number) => (
-              <motion.div
-                key={t.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.05 }}
-                className="flex-none w-[350px]"
+        {testimonials.length > 0 ? (
+          <div className="relative group">
+            {showLeftArrow && (
+              <button
+                onClick={() => scroll("left")}
+                className="absolute left-0 top-1/2 -translate-y-1/2 z-10"
               >
-                <Card>
-                  <div className="flex justify-between">
-                    <h3>{t.name}</h3>
-                    <span>{t.flag}</span>
-                  </div>
+                <ChevronLeft />
+              </button>
+            )}
 
-                  <div className="flex">{renderStars(t.rating)}</div>
+            {showRightArrow && (
+              <button
+                onClick={() => scroll("right")}
+                className="absolute right-0 top-1/2 -translate-y-1/2 z-10"
+              >
+                <ChevronRight />
+              </button>
+            )}
 
-                  <Quote className="my-2" />
+            <div
+              ref={scrollContainerRef}
+              onScroll={handleScroll}
+              className="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory scroll-smooth"
+            >
+              {testimonials.map((t: Testimonial, i: number) => (
+                <motion.div
+                  key={t.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                  className="flex-none w-[350px] snap-start"
+                >
+                  <Card>
+                    <div className="flex justify-between items-center">
+                      <h3 className="font-semibold">{t.name}</h3>
+                      <span>{t.flag}</span>
+                    </div>
 
-                  <p>{replaceCountry(t.text)}</p>
+                    <div className="flex mt-2">{renderStars(t.rating)}</div>
 
-                  <div className="flex justify-between mt-4 text-sm">
-                    <span>{t.earnings}</span>
-                    <span>{t.date}</span>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
+                    <Quote className="my-3 opacity-50" />
+
+                    <p className="text-sm text-gray-600 dark:text-gray-300">
+                      {replaceCountry(t.text)}
+                    </p>
+
+                    <div className="flex justify-between mt-4 text-sm text-gray-500">
+                      <span>{t.earnings}</span>
+                      <span>{t.date}</span>
+                    </div>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
           </div>
-        </div>
+        ) : (
+          <p className="text-center text-gray-500">
+            No testimonials available.
+          </p>
+        )}
 
         {/* STATS */}
         <div className="mt-12 text-center">
