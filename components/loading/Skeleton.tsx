@@ -4,11 +4,12 @@ import { motion } from "framer-motion";
 
 type Props = {
   rows?: number;
+  className?: string; // ✅ ADD THIS
 };
 
-export default function Skeleton({ rows = 8 }: Props) {
+export default function Skeleton({ rows = 8, className }: Props) {
   return (
-    <div className="rounded-xl border overflow-hidden">
+    <div className={`rounded-xl border overflow-hidden ${className || ""}`}>
       {Array.from({ length: rows }).map((_, i) => (
         <div
           key={i}
@@ -16,10 +17,7 @@ export default function Skeleton({ rows = 8 }: Props) {
         >
           {/* LEFT SIDE */}
           <div className="flex items-center gap-4 w-2/3">
-            {/* Title */}
             <Shimmer className="h-4 w-48 rounded-md" />
-
-            {/* Badges */}
             <div className="flex gap-2">
               <Shimmer className="h-3 w-3 rounded-full" />
               <Shimmer className="h-3 w-3 rounded-full" />
@@ -38,7 +36,7 @@ export default function Skeleton({ rows = 8 }: Props) {
   );
 }
 
-/* ===================== SHIMMER COMPONENT ===================== */
+/* ===================== SHIMMER ===================== */
 
 function Shimmer({ className }: { className?: string }) {
   return (
