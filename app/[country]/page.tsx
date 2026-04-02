@@ -27,8 +27,7 @@ import TrustSection from "@/components/homepage/TrustSection";
 import TestimonialSection from "@/components/homepage/TestimonialSection";
 import FinalCTASection from "@/components/homepage/FinalCTASection";
 
-import FAQSection from "@/components/homepage/FAQSection";
-
+import FAQ from "@/components/animations/FAQ";
 import CircleBorder from "@/components/animations/CircleBorder";
 
 import { generateJsonLd } from "@/components/SEO/schema";
@@ -163,7 +162,6 @@ export default async function HomePage({
     description: offerCompletion?.description?.replace(/\{country\}/g, countryName),
   };
 
-  /* ✅ FAQ DATA (same pattern as others) */
   const faqData = {
     title: faq?.title?.replace(/\{country\}/g, countryName),
     items: Array.isArray(faq?.items)
@@ -220,10 +218,7 @@ export default async function HomePage({
       </CircleBorder>
 
       <CircleBorder>
-        <LiveOfferCompletion
-          data={offerCompletionData}
-          countryName={countryName}
-        />
+        <LiveOfferCompletion data={offerCompletionData} countryName={countryName} />
       </CircleBorder>
 
       <CircleBorder>
@@ -242,10 +237,10 @@ export default async function HomePage({
         <TestimonialSection data={testimonials} countryName={countryName} />
       </CircleBorder>
 
-      {/* ✅ FAQ NOW SAME AS OTHER SECTIONS */}
+      {/* ✅ FIXED FAQ (now same structure as others) */}
       {faqData.items.length > 0 && (
         <CircleBorder>
-          <FAQSection data={faqData} countryName={countryName} />
+          <FAQ data={faqData} countryName={countryName} />
         </CircleBorder>
       )}
 
