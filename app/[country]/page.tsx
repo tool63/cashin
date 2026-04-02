@@ -16,9 +16,10 @@ import type { SupportedLanguage } from "@/app/core/types";
 import HeroSection from "@/components/homepage/HeroSection";
 import FeaturesSection from "@/components/homepage/FeaturesSection";
 import TasksSection from "@/components/homepage/TasksSection";
-import PaymentSection from "@/components/homepage/PaymentSection"; // ✅ ADDED
+import PaymentSection from "@/components/homepage/PaymentSection";
 import HighPayingOffers from "@/components/homepage/HighPayingOffers";
 import LiveEarnings from "@/components/homepage/LiveEarnings";
+import LiveWithdrawals from "@/components/homepage/LiveWithdrawals"; // ✅ ADDED
 import StatsSection from "@/components/homepage/StatsSection";
 import TrustSection from "@/components/homepage/TrustSection";
 import TestimonialSection from "@/components/homepage/TestimonialSection";
@@ -90,9 +91,10 @@ export default async function HomePage({
   const typing = await loadSectionTranslation(language, "typinghome");
   const features = await loadSectionTranslation(language, "featureshome");
   const tasks = await loadSectionTranslation(language, "taskshome");
-  const payments = await loadSectionTranslation(language, "paymentshome"); // ✅ ADDED
+  const payments = await loadSectionTranslation(language, "paymentshome");
   const highOffers = await loadSectionTranslation(language, "highoffershome");
   const liveEarnings = await loadSectionTranslation(language, "liveearningshome");
+  const withdrawals = await loadSectionTranslation(language, "withdrawalshome"); // ✅ NEW
   const stats = await loadSectionTranslation(language, "statshome");
   const trust = await loadSectionTranslation(language, "trusthome");
   const testimonials = await loadSectionTranslation(language, "testimonialshome");
@@ -111,36 +113,12 @@ export default async function HomePage({
     type: "low",
   });
 
-  /* ================= HERO ================= */
+  /* ================= DATA ================= */
 
   const heroData = {
     headline: hero?.headline?.replace(/\{country\}/g, countryName),
     subtext: hero?.subtext?.replace(/\{country\}/g, countryName),
-    trust_badges: hero?.trust_badges?.map((b: string) =>
-      b.replace(/\{country\}/g, countryName)
-    ),
   };
-
-  /* ================= FEATURES ================= */
-
-  const featuresData = {
-    title: features?.title?.replace(/\{country\}/g, countryName),
-    cta: features?.cta?.replace(/\{country\}/g, countryName),
-    instant_withdrawals: {
-      title: features?.instant_withdrawals?.title?.replace(/\{country\}/g, countryName),
-      description: features?.instant_withdrawals?.description?.replace(/\{country\}/g, countryName),
-    },
-    secure_trusted: {
-      title: features?.secure_trusted?.title?.replace(/\{country\}/g, countryName),
-      description: features?.secure_trusted?.description?.replace(/\{country\}/g, countryName),
-    },
-    multiple_payment_options: {
-      title: features?.multiple_payment_options?.title?.replace(/\{country\}/g, countryName),
-      description: features?.multiple_payment_options?.description?.replace(/\{country\}/g, countryName),
-    },
-  };
-
-  /* ================= TASKS ================= */
 
   const tasksData = {
     title: tasks?.title?.replace(/\{country\}/g, countryName),
@@ -148,17 +126,11 @@ export default async function HomePage({
     items: tasks?.items || [],
   };
 
-  /* ================= PAYMENTS ================= */
-
   const paymentData = {
     title: payments?.title?.replace(/\{country\}/g, countryName),
     description: payments?.description?.replace(/\{country\}/g, countryName),
-    icon: payments?.icon,
     methods: payments?.methods || {},
-    trust: payments?.trust || [],
   };
-
-  /* ================= HIGH OFFERS ================= */
 
   const offersData = {
     title: highOffers?.title?.replace(/\{country\}/g, countryName),
@@ -166,73 +138,22 @@ export default async function HomePage({
     categories: highOffers?.categories || [],
   };
 
-  /* ================= LIVE ================= */
-
   const liveData = {
     title: liveEarnings?.title?.replace(/\{country\}/g, countryName),
     description: liveEarnings?.description?.replace(/\{country\}/g, countryName),
-    live_label: liveEarnings?.live_label,
-    stats: liveEarnings?.stats || {},
   };
 
-  /* ================= STATS ================= */
-
-  const statsData = {
-    title: stats?.title?.replace(/\{country\}/g, countryName),
-    description: stats?.description?.replace(/\{country\}/g, countryName),
-    stats: stats?.stats || {},
-    highlights:
-      stats?.highlights?.map((h: string) =>
-        h.replace(/\{country\}/g, countryName)
-      ) || [],
-    trust:
-      stats?.trust?.map((t: string) =>
-        t.replace(/\{country\}/g, countryName)
-      ) || [],
-  };
-
-  /* ================= TRUST ================= */
-
-  const trustData = {
-    title: trust?.title?.replace(/\{country\}/g, countryName),
-    description: trust?.description?.replace(/\{country\}/g, countryName),
-    features: trust?.features || [],
-    trust_indicators: trust?.trust_indicators || [],
-  };
-
-  /* ================= TESTIMONIALS ================= */
-
-  const testimonialData = {
-    title: testimonials?.title?.replace(/\{country\}/g, countryName),
-    description: testimonials?.description?.replace(/\{country\}/g, countryName),
-    testimonials: testimonials?.testimonials || [],
-    statsText: testimonials?.statsText?.replace(/\{country\}/g, countryName),
-  };
-
-  /* ================= FAQ ================= */
-
-  const faqTitle = faq?.title || "Frequently Asked Questions";
-
-  const faqs =
-    faq?.items?.map((item: any) => ({
-      q: item.q.replace(/\{country\}/g, countryName),
-      a: item.a.replace(/\{country\}/g, countryName),
-    })) || [];
-
-  /* ================= FINAL ================= */
-
-  const finalData = {
-    title: final?.title?.replace(/\{country\}/g, countryName),
-    description: final?.description?.replace(/\{country\}/g, countryName),
-    trust_badges: final?.trust_badges?.map((b: string) =>
-      b.replace(/\{country\}/g, countryName)
-    ),
+  const withdrawalsData = {
+    title: withdrawals?.title?.replace(/\{country\}/g, countryName),
+    description: withdrawals?.description?.replace(/\{country\}/g, countryName),
+    stats: withdrawals?.stats || {},
   };
 
   /* ================= RENDER ================= */
 
   return (
     <main>
+
       {structuredData && (
         <script
           type="application/ld+json"
@@ -248,19 +169,13 @@ export default async function HomePage({
       </CircleBorder>
 
       <CircleBorder>
-        <FeaturesSection
-          data={featuresData}
-          translations={features}
-          countryName={countryName}
-        />
+        <FeaturesSection data={features} translations={features} />
       </CircleBorder>
 
-      {/* TASKS */}
       <CircleBorder>
         <TasksSection data={tasksData} countryName={countryName} />
       </CircleBorder>
 
-      {/* PAYMENTS ✅ NEW */}
       <CircleBorder>
         <PaymentSection data={paymentData} countryName={countryName} />
       </CircleBorder>
@@ -270,47 +185,38 @@ export default async function HomePage({
       </CircleBorder>
 
       <CircleBorder>
-        <LiveEarnings
-          data={liveData}
-          translations={liveEarnings}
+        <LiveEarnings data={liveData} countryName={countryName} />
+      </CircleBorder>
+
+      {/* ✅ LIVE WITHDRAWALS ADDED */}
+      <CircleBorder>
+        <LiveWithdrawals
+          data={withdrawalsData}
+          translations={withdrawals}
           countryName={countryName}
         />
       </CircleBorder>
 
       <CircleBorder>
-        <StatsSection
-          data={statsData}
-          translations={stats}
-          countryName={countryName}
-        />
+        <StatsSection data={stats} countryName={countryName} />
       </CircleBorder>
 
       <CircleBorder>
-        <TrustSection data={trustData} countryName={countryName} />
+        <TrustSection data={trust} countryName={countryName} />
       </CircleBorder>
 
       <CircleBorder>
-        <TestimonialSection
-          data={testimonialData}
-          translations={testimonials}
-          countryName={countryName}
-        />
+        <TestimonialSection data={testimonials} countryName={countryName} />
       </CircleBorder>
 
       <CircleBorder>
-        <div className="max-w-3xl mx-auto text-center py-12">
-          <h2 className="text-3xl font-bold mb-6">{faqTitle}</h2>
-          <FAQ faqs={faqs} />
-        </div>
+        <FAQ faqs={faq?.items || []} />
       </CircleBorder>
 
       <CircleBorder>
-        <FinalCTASection
-          data={finalData}
-          translations={{ finalhome: final }}
-          countryName={countryName}
-        />
+        <FinalCTASection data={final} countryName={countryName} />
       </CircleBorder>
+
     </main>
   );
 }
