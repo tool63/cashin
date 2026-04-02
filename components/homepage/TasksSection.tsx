@@ -1,42 +1,49 @@
-// components/homepage/TasksSection.tsx
 "use client";
 
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+
 import { earningOptions } from "@/components/homepage/earningOptions";
 import { SectionTitle } from "@/components/homepage/SmallComponents";
 import OpeningStyle from "@/components/animations/openingstyle";
-import Container, { Card, CardIcon, CardTitle, CardDescription, CardCTA, CardGrid } from "@/components/animations/container";
+import {
+  Card,
+  CardIcon,
+  CardTitle,
+  CardDescription,
+  CardCTA,
+  CardGrid,
+} from "@/components/animations/container";
 
-const earningDescriptions: Record<string, string> = {
-  Surveys: "Share your opinions and get rewarded instantly",
-  "App Installs": "Install apps and earn money easily",
-  "Playing Games": "Have fun while earning rewards",
-  "Watching Videos": "Watch short videos and get paid",
-  "Mining Rewards": "Earn crypto while mining rewards",
-  "Completing Offers": "Finish tasks and get instant payouts",
-  Offerwall: "Complete multiple offers for bonuses",
-  Surveywall: "Explore surveys with higher payouts",
-  "Watching Ads": "Earn by watching ads online",
-  "Micro Tasks": "Quick small tasks for extra cash",
-  "Free Trials": "Try free trials and earn rewards",
-  "Testing Products": "Test products and get paid",
-  "Reading Emails": "Read emails and earn money",
-  "Visiting Websites": "Visit websites and earn instantly",
-  "Review Tasks": "Complete review tasks for rewards",
-  "Spinning Wheel": "Spin the wheel and win prizes",
-  Loyalty: "Earn loyalty rewards over time",
-  Vouchers: "Get vouchers as payout options",
-};
+export default function TasksSection({
+  data,
+  countryName,
+}: {
+  data: any;
+  countryName?: string;
+}) {
+  // Translate descriptions dynamically
+  const descriptions: Record<string, string> = {};
 
-export default function TasksSection() {
+  data?.items?.forEach((item: any) => {
+    if (item?.title && item?.description) {
+      descriptions[item.title] = item.description;
+    }
+  });
+
   return (
     <OpeningStyle delay={0.12}>
       <section className="max-w-7xl mx-auto px-6 py-20">
         {/* Section Heading */}
         <div className="mb-12">
-          <SectionTitle icon="🎯" text="High Paying Tasks" />
+          <SectionTitle
+            icon={data?.icon || "🎯"}
+            text={
+              data?.title?.replace(/\{country\}/g, countryName || "") ||
+              "High Paying Tasks"
+            }
+          />
         </div>
 
         {/* Task Cards Grid */}
@@ -52,13 +59,23 @@ export default function TasksSection() {
               <Link href={href} className="block">
                 <Card>
                   <CardIcon>{icon}</CardIcon>
-                  <CardTitle>{title}</CardTitle>
+
+                  <CardTitle>
+                    {title.replace(/\{country\}/g, countryName || "")}
+                  </CardTitle>
+
                   <CardDescription>
-                    {earningDescriptions[title] ||
-                      `Earn rewards with ${title.toLowerCase()}`}
+                    {descriptions[title]
+                      ? descriptions[title].replace(
+                          /\{country\}/g,
+                          countryName || ""
+                        )
+                      : `Earn rewards with ${title.toLowerCase()}`}
                   </CardDescription>
+
                   <CardCTA>
-                    Start earning <ArrowRight size={16} />
+                    {data?.cta || "Start earning"}{" "}
+                    <ArrowRight size={16} />
                   </CardCTA>
                 </Card>
               </Link>
