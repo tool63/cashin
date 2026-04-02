@@ -15,7 +15,8 @@ import type { SupportedLanguage } from "@/app/core/types";
 
 import HeroSection from "@/components/homepage/HeroSection";
 import FeaturesSection from "@/components/homepage/FeaturesSection";
-import TasksSection from "@/components/homepage/TasksSection"; // ✅ ADDED
+import TasksSection from "@/components/homepage/TasksSection";
+import PaymentSection from "@/components/homepage/PaymentSection"; // ✅ ADDED
 import HighPayingOffers from "@/components/homepage/HighPayingOffers";
 import LiveEarnings from "@/components/homepage/LiveEarnings";
 import StatsSection from "@/components/homepage/StatsSection";
@@ -88,7 +89,8 @@ export default async function HomePage({
   const hero = await loadSectionTranslation(language, "herohome");
   const typing = await loadSectionTranslation(language, "typinghome");
   const features = await loadSectionTranslation(language, "featureshome");
-  const tasks = await loadSectionTranslation(language, "taskshome"); // ✅ ADDED
+  const tasks = await loadSectionTranslation(language, "taskshome");
+  const payments = await loadSectionTranslation(language, "paymentshome"); // ✅ ADDED
   const highOffers = await loadSectionTranslation(language, "highoffershome");
   const liveEarnings = await loadSectionTranslation(language, "liveearningshome");
   const stats = await loadSectionTranslation(language, "statshome");
@@ -124,17 +126,14 @@ export default async function HomePage({
   const featuresData = {
     title: features?.title?.replace(/\{country\}/g, countryName),
     cta: features?.cta?.replace(/\{country\}/g, countryName),
-
     instant_withdrawals: {
       title: features?.instant_withdrawals?.title?.replace(/\{country\}/g, countryName),
       description: features?.instant_withdrawals?.description?.replace(/\{country\}/g, countryName),
     },
-
     secure_trusted: {
       title: features?.secure_trusted?.title?.replace(/\{country\}/g, countryName),
       description: features?.secure_trusted?.description?.replace(/\{country\}/g, countryName),
     },
-
     multiple_payment_options: {
       title: features?.multiple_payment_options?.title?.replace(/\{country\}/g, countryName),
       description: features?.multiple_payment_options?.description?.replace(/\{country\}/g, countryName),
@@ -147,6 +146,16 @@ export default async function HomePage({
     title: tasks?.title?.replace(/\{country\}/g, countryName),
     cta: tasks?.cta?.replace(/\{country\}/g, countryName),
     items: tasks?.items || [],
+  };
+
+  /* ================= PAYMENTS ================= */
+
+  const paymentData = {
+    title: payments?.title?.replace(/\{country\}/g, countryName),
+    description: payments?.description?.replace(/\{country\}/g, countryName),
+    icon: payments?.icon,
+    methods: payments?.methods || {},
+    trust: payments?.trust || [],
   };
 
   /* ================= HIGH OFFERS ================= */
@@ -234,101 +243,74 @@ export default async function HomePage({
         />
       )}
 
-      {/* HERO */}
-      <div className="py-16 px-4">
-        <CircleBorder>
-          <HeroSection data={heroData} translations={typing} />
-        </CircleBorder>
-      </div>
+      <CircleBorder>
+        <HeroSection data={heroData} translations={typing} />
+      </CircleBorder>
 
-      {/* FEATURES */}
-      <div className="py-16 px-4">
-        <CircleBorder>
-          <FeaturesSection
-            data={featuresData}
-            translations={features}
-            countryName={countryName}
-          />
-        </CircleBorder>
-      </div>
+      <CircleBorder>
+        <FeaturesSection
+          data={featuresData}
+          translations={features}
+          countryName={countryName}
+        />
+      </CircleBorder>
 
-      {/* TASKS ✅ NEW */}
-      <div className="py-16 px-4">
-        <CircleBorder>
-          <TasksSection
-            data={tasksData}
-            countryName={countryName}
-          />
-        </CircleBorder>
-      </div>
+      {/* TASKS */}
+      <CircleBorder>
+        <TasksSection data={tasksData} countryName={countryName} />
+      </CircleBorder>
 
-      {/* HIGH OFFERS */}
-      <div className="py-16 px-4">
-        <CircleBorder>
-          <HighPayingOffers data={offersData} />
-        </CircleBorder>
-      </div>
+      {/* PAYMENTS ✅ NEW */}
+      <CircleBorder>
+        <PaymentSection data={paymentData} countryName={countryName} />
+      </CircleBorder>
 
-      {/* LIVE */}
-      <div className="py-16 px-4">
-        <CircleBorder>
-          <LiveEarnings
-            data={liveData}
-            translations={liveEarnings}
-            countryName={countryName}
-          />
-        </CircleBorder>
-      </div>
+      <CircleBorder>
+        <HighPayingOffers data={offersData} />
+      </CircleBorder>
 
-      {/* STATS */}
-      <div className="py-16 px-4">
-        <CircleBorder>
-          <StatsSection
-            data={statsData}
-            translations={stats}
-            countryName={countryName}
-          />
-        </CircleBorder>
-      </div>
+      <CircleBorder>
+        <LiveEarnings
+          data={liveData}
+          translations={liveEarnings}
+          countryName={countryName}
+        />
+      </CircleBorder>
 
-      {/* TRUST */}
-      <div className="py-16 px-4">
-        <CircleBorder>
-          <TrustSection data={trustData} countryName={countryName} />
-        </CircleBorder>
-      </div>
+      <CircleBorder>
+        <StatsSection
+          data={statsData}
+          translations={stats}
+          countryName={countryName}
+        />
+      </CircleBorder>
 
-      {/* TESTIMONIALS */}
-      <div className="py-16 px-4">
-        <CircleBorder>
-          <TestimonialSection
-            data={testimonialData}
-            translations={testimonials}
-            countryName={countryName}
-          />
-        </CircleBorder>
-      </div>
+      <CircleBorder>
+        <TrustSection data={trustData} countryName={countryName} />
+      </CircleBorder>
 
-      {/* FAQ */}
-      <div className="py-16 px-4">
-        <CircleBorder>
-          <div className="max-w-3xl mx-auto text-center py-12">
-            <h2 className="text-3xl font-bold mb-6">{faqTitle}</h2>
-            <FAQ faqs={faqs} />
-          </div>
-        </CircleBorder>
-      </div>
+      <CircleBorder>
+        <TestimonialSection
+          data={testimonialData}
+          translations={testimonials}
+          countryName={countryName}
+        />
+      </CircleBorder>
 
-      {/* FINAL CTA */}
-      <div className="py-16 px-4">
-        <CircleBorder>
-          <FinalCTASection
-            data={finalData}
-            translations={{ finalhome: final }}
-            countryName={countryName}
-          />
-        </CircleBorder>
-      </div>
+      <CircleBorder>
+        <div className="max-w-3xl mx-auto text-center py-12">
+          <h2 className="text-3xl font-bold mb-6">{faqTitle}</h2>
+          <FAQ faqs={faqs} />
+        </div>
+      </CircleBorder>
+
+      <CircleBorder>
+        <FinalCTASection
+          data={finalData}
+          translations={{ finalhome: final }}
+          countryName={countryName}
+        />
+      </CircleBorder>
     </main>
   );
 }
