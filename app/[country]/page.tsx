@@ -116,13 +116,19 @@ export default async function HomePage({
     type: "low",
   });
 
-  /* ================= FIX FAQ ================= */
+  /* ================= ✅ FIXED FAQ ================= */
 
   const safeFaqItems = Array.isArray(faq?.items)
-    ? faq.items.map((item: any) => ({
-        question: item.q?.replace(/\{country\}/g, countryName) || "",
-        answer: item.a?.replace(/\{country\}/g, countryName) || "",
-      }))
+    ? faq.items
+        .map((item: any) => {
+          const q = item?.q?.replace(/\{country\}/g, countryName)?.trim();
+          const a = item?.a?.replace(/\{country\}/g, countryName)?.trim();
+
+          if (!q || !a) return null;
+
+          return { q, a }; // ✅ IMPORTANT FIX
+        })
+        .filter(Boolean)
     : [];
 
   /* ================= OTHER DATA ================= */
@@ -240,7 +246,7 @@ export default async function HomePage({
         <TestimonialSection data={testimonials} countryName={countryName} />
       </CircleBorder>
 
-      {/* ✅ FINAL WORKING FAQ */}
+      {/* ✅ FAQ NOW WORKS */}
       {safeFaqItems.length > 0 && (
         <CircleBorder>
           <div className="w-full max-w-4xl mx-auto text-center">
