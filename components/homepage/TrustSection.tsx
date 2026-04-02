@@ -3,31 +3,32 @@
 import { SectionTitle } from "@/components/homepage/SmallComponents";
 import { motion } from "framer-motion";
 import OpeningStyle from "@/components/animations/openingstyle";
-import Container, { Card, CardIcon, CardTitle, CardDescription, CardGrid } from "@/components/animations/container";
+import {
+  Card,
+  CardIcon,
+  CardTitle,
+  CardDescription,
+  CardGrid,
+} from "@/components/animations/container";
 
-export default function TrustSection() {
-  const features = [
-    { 
-      title: "Secure Payments", 
-      description: "All transactions are encrypted and safe", 
-      icon: "💳" 
-    },
-    { 
-      title: "Trusted by Millions", 
-      description: "Millions of users trust our platform globally", 
-      icon: "🌍" 
-    },
-    { 
-      title: "Fast Payouts", 
-      description: "Get your earnings instantly with multiple methods", 
-      icon: "⚡" 
-    },
-    { 
-      title: "24/7 Support", 
-      description: "Our support team is always here to help", 
-      icon: "🕒" 
-    },
-  ];
+export default function TrustSection({
+  data,
+  countryName,
+}: {
+  data: any;
+  countryName?: string;
+}) {
+  const features =
+    data?.features?.map((f: any) => ({
+      title: f.title?.replace(/\{country\}/g, countryName || ""),
+      description: f.description?.replace(/\{country\}/g, countryName || ""),
+      icon: f.icon,
+    })) || [];
+
+  const trustIndicators =
+    data?.trust_indicators?.map((t: string) =>
+      t.replace(/\{country\}/g, countryName || "")
+    ) || [];
 
   return (
     <OpeningStyle delay={0.15}>
@@ -35,17 +36,28 @@ export default function TrustSection() {
         <div className="text-center">
           {/* Section Heading */}
           <div className="mb-6">
-            <SectionTitle icon="🔒" text="Why You Can Trust Us" />
+            <SectionTitle
+              icon={data?.icon || "🔒"}
+              text={
+                data?.title?.replace(
+                  /\{country\}/g,
+                  countryName || ""
+                ) || "Why You Can Trust Us"
+              }
+            />
           </div>
 
           {/* Description */}
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed">
-            Our platform ensures security, reliability, and instant payouts so you can focus on earning without worries.
+            {data?.description?.replace(
+              /\{country\}/g,
+              countryName || ""
+            )}
           </p>
 
-          {/* Feature Cards Grid */}
+          {/* Feature Cards */}
           <CardGrid cols={{ default: 1, sm: 2, lg: 4 }}>
-            {features.map((feature, i) => (
+            {features.map((feature: any, i: number) => (
               <motion.div
                 key={feature.title}
                 initial={{ opacity: 0, y: 30 }}
@@ -56,27 +68,25 @@ export default function TrustSection() {
                 <Card>
                   <CardIcon>{feature.icon}</CardIcon>
                   <CardTitle>{feature.title}</CardTitle>
-                  <CardDescription>{feature.description}</CardDescription>
+                  <CardDescription>
+                    {feature.description}
+                  </CardDescription>
                 </Card>
               </motion.div>
             ))}
           </CardGrid>
 
-          {/* Optional: Additional trust indicators */}
-          <div className="mt-16 flex flex-wrap justify-center gap-8 text-sm text-gray-600 dark:text-gray-400">
-            <div className="flex items-center gap-2">
-              <span className="text-green-500">✓</span> 256-bit Encryption
+          {/* Trust Indicators */}
+          {trustIndicators.length > 0 && (
+            <div className="mt-16 flex flex-wrap justify-center gap-8 text-sm text-gray-600 dark:text-gray-400">
+              {trustIndicators.map((item: string, i: number) => (
+                <div key={i} className="flex items-center gap-2">
+                  <span className="text-green-500">✓</span>
+                  {item}
+                </div>
+              ))}
             </div>
-            <div className="flex items-center gap-2">
-              <span className="text-green-500">✓</span> GDPR Compliant
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-green-500">✓</span> SSL Secure
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-green-500">✓</span> Verified Company
-            </div>
-          </div>
+          )}
         </div>
       </section>
     </OpeningStyle>
