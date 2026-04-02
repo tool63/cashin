@@ -18,7 +18,8 @@ import FeaturesSection from "@/components/homepage/FeaturesSection";
 import HighPayingOffers from "@/components/homepage/HighPayingOffers";
 import LiveEarnings from "@/components/homepage/LiveEarnings";
 import StatsSection from "@/components/homepage/StatsSection";
-import TestimonialSection from "@/components/homepage/TestimonialSection"; // ✅ NEW
+import TrustSection from "@/components/homepage/TrustSection"; // ✅ ADDED
+import TestimonialSection from "@/components/homepage/TestimonialSection";
 import FinalCTASection from "@/components/homepage/FinalCTASection";
 
 import FAQ from "@/components/animations/FAQ";
@@ -96,7 +97,8 @@ export default async function HomePage({
   const highOffers = await loadSectionTranslation(language, "highoffershome");
   const liveEarnings = await loadSectionTranslation(language, "liveearningshome");
   const stats = await loadSectionTranslation(language, "statshome");
-  const testimonials = await loadSectionTranslation(language, "testimonialshome"); // ✅ NEW
+  const trust = await loadSectionTranslation(language, "trusthome"); // ✅ NEW
+  const testimonials = await loadSectionTranslation(language, "testimonialshome");
   const faq = await loadSectionTranslation(language, "faqhome");
   const final = await loadSectionTranslation(language, "finalhome");
 
@@ -152,7 +154,7 @@ export default async function HomePage({
     categories: highOffers?.categories || [],
   };
 
-  /* ================= LIVE EARNINGS ================= */
+  /* ================= LIVE ================= */
 
   const liveData = {
     title: liveEarnings?.title?.replace(/\{country\}/g, countryName),
@@ -177,6 +179,15 @@ export default async function HomePage({
       ) || [],
   };
 
+  /* ================= TRUST ================= */
+
+  const trustData = {
+    title: trust?.title?.replace(/\{country\}/g, countryName),
+    description: trust?.description?.replace(/\{country\}/g, countryName),
+    features: trust?.features || [],
+    trust_indicators: trust?.trust_indicators || [],
+  };
+
   /* ================= TESTIMONIALS ================= */
 
   const testimonialData = {
@@ -196,7 +207,7 @@ export default async function HomePage({
       a: item.a.replace(/\{country\}/g, countryName),
     })) || [];
 
-  /* ================= FINAL CTA ================= */
+  /* ================= FINAL ================= */
 
   const finalData = {
     title: final?.title?.replace(/\{country\}/g, countryName),
@@ -210,7 +221,6 @@ export default async function HomePage({
 
   return (
     <main>
-      {/* JSON-LD */}
       {structuredData && (
         <script
           type="application/ld+json"
@@ -268,7 +278,14 @@ export default async function HomePage({
         </CircleBorder>
       </div>
 
-      {/* TESTIMONIALS ✅ */}
+      {/* TRUST ✅ */}
+      <div className="py-16 px-4">
+        <CircleBorder>
+          <TrustSection data={trustData} countryName={countryName} />
+        </CircleBorder>
+      </div>
+
+      {/* TESTIMONIALS */}
       <div className="py-16 px-4">
         <CircleBorder>
           <TestimonialSection
@@ -283,9 +300,7 @@ export default async function HomePage({
       <div className="py-16 px-4">
         <CircleBorder>
           <div className="max-w-3xl mx-auto text-center py-12">
-            <h2 className="text-3xl font-bold mb-6">
-              {faqTitle}
-            </h2>
+            <h2 className="text-3xl font-bold mb-6">{faqTitle}</h2>
             <FAQ faqs={faqs} />
           </div>
         </CircleBorder>
