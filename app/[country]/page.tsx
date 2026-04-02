@@ -16,7 +16,8 @@ import type { SupportedLanguage } from "@/app/core/types";
 import HeroSection from "@/components/homepage/HeroSection";
 import FeaturesSection from "@/components/homepage/FeaturesSection";
 import HighPayingOffers from "@/components/homepage/HighPayingOffers";
-import LiveEarnings from "@/components/homepage/LiveEarnings"; // ✅ NEW
+import LiveEarnings from "@/components/homepage/LiveEarnings";
+import StatsSection from "@/components/homepage/StatsSection"; // ✅ NEW
 import FinalCTASection from "@/components/homepage/FinalCTASection";
 
 import FAQ from "@/components/animations/FAQ";
@@ -92,7 +93,8 @@ export default async function HomePage({
   const typing = await loadSectionTranslation(language, "typinghome");
   const features = await loadSectionTranslation(language, "featureshome");
   const highOffers = await loadSectionTranslation(language, "highoffershome");
-  const liveEarnings = await loadSectionTranslation(language, "liveearningshome"); // ✅ NEW
+  const liveEarnings = await loadSectionTranslation(language, "liveearningshome");
+  const stats = await loadSectionTranslation(language, "statshome"); // ✅ NEW
   const faq = await loadSectionTranslation(language, "faqhome");
   const final = await loadSectionTranslation(language, "finalhome");
 
@@ -157,6 +159,22 @@ export default async function HomePage({
     stats: liveEarnings?.stats || {},
   };
 
+  /* ================= STATS ================= */
+
+  const statsData = {
+    title: stats?.title?.replace(/\{country\}/g, countryName),
+    description: stats?.description?.replace(/\{country\}/g, countryName),
+    stats: stats?.stats || {},
+    highlights:
+      stats?.highlights?.map((h: string) =>
+        h.replace(/\{country\}/g, countryName)
+      ) || [],
+    trust:
+      stats?.trust?.map((t: string) =>
+        t.replace(/\{country\}/g, countryName)
+      ) || [],
+  };
+
   /* ================= FAQ ================= */
 
   const faqTitle = faq?.title || "Frequently Asked Questions";
@@ -213,19 +231,30 @@ export default async function HomePage({
         </CircleBorder>
       </div>
 
-      {/* HIGH PAYING OFFERS */}
+      {/* HIGH OFFERS */}
       <div className="py-16 px-4">
         <CircleBorder>
           <HighPayingOffers data={offersData} />
         </CircleBorder>
       </div>
 
-      {/* LIVE EARNINGS ✅ */}
+      {/* LIVE EARNINGS */}
       <div className="py-16 px-4">
         <CircleBorder>
           <LiveEarnings
             data={liveData}
             translations={liveEarnings}
+            countryName={countryName}
+          />
+        </CircleBorder>
+      </div>
+
+      {/* STATS ✅ */}
+      <div className="py-16 px-4">
+        <CircleBorder>
+          <StatsSection
+            data={statsData}
+            translations={stats}
             countryName={countryName}
           />
         </CircleBorder>
