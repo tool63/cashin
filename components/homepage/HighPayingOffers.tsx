@@ -31,14 +31,14 @@ interface Props {
   data: any;
 }
 
-/* ===================== REALISTIC DATA (3 PER CATEGORY) ===================== */
+/* ===================== REALISTIC DATA ===================== */
 
 const categoryOffers: Record<CategoryKey, Offer[]> = {
   surveys: [
     {
       id: 1,
-      title: "Quick Market Survey",
-      payout: 1.20,
+      title: "Market Research Survey - Tech Users",
+      payout: 1.2,
       completions: 12000,
       country: "Global",
       difficulty: "Easy",
@@ -46,111 +46,111 @@ const categoryOffers: Record<CategoryKey, Offer[]> = {
     },
     {
       id: 2,
-      title: "Consumer Feedback Survey",
-      payout: 1.80,
-      completions: 9000,
-      country: "US",
+      title: "Consumer Behavior Survey",
+      payout: 1.5,
+      completions: 18000,
+      country: "Global",
       difficulty: "Medium",
       rating: 4.5,
     },
     {
       id: 3,
-      title: "Product Research Survey",
-      payout: 2.10,
-      completions: 7000,
+      title: "Health & Fitness Survey",
+      payout: 0.9,
+      completions: 9000,
       country: "Global",
-      difficulty: "Medium",
-      rating: 4.6,
+      difficulty: "Easy",
+      rating: 4.2,
     },
   ],
 
   app_installs: [
     {
       id: 1,
-      title: "Install & Open App",
-      payout: 1.50,
-      completions: 15000,
+      title: "Install & Open Finance App",
+      payout: 2.1,
+      completions: 25000,
       country: "Global",
       difficulty: "Easy",
-      rating: 4.2,
+      rating: 4.6,
     },
     {
       id: 2,
-      title: "Install & Register App",
-      payout: 2.30,
-      completions: 11000,
-      country: "UK",
+      title: "Install Shopping App & Signup",
+      payout: 2.5,
+      completions: 30000,
+      country: "Global",
       difficulty: "Medium",
-      rating: 4.5,
+      rating: 4.7,
     },
     {
       id: 3,
-      title: "Install & Complete Tutorial",
-      payout: 3.00,
-      completions: 8000,
+      title: "Install Gaming App & Play",
+      payout: 1.8,
+      completions: 22000,
       country: "Global",
-      difficulty: "Medium",
-      rating: 4.6,
+      difficulty: "Easy",
+      rating: 4.4,
     },
   ],
 
   play_games: [
     {
       id: 1,
-      title: "Reach Level 10",
-      payout: 2.20,
-      completions: 14000,
-      country: "Global",
-      difficulty: "Medium",
-      rating: 4.4,
-    },
-    {
-      id: 2,
-      title: "Win 3 Matches",
-      payout: 3.10,
-      completions: 10000,
+      title: "Reach Level 10 in Puzzle Game",
+      payout: 3.2,
+      completions: 15000,
       country: "Global",
       difficulty: "Medium",
       rating: 4.5,
     },
     {
-      id: 3,
-      title: "Complete Game Challenge",
-      payout: 4.00,
-      completions: 6000,
+      id: 2,
+      title: "Win 5 Matches in Strategy Game",
+      payout: 4.5,
+      completions: 18000,
       country: "Global",
       difficulty: "Hard",
       rating: 4.7,
+    },
+    {
+      id: 3,
+      title: "Complete Beginner Missions",
+      payout: 2.8,
+      completions: 20000,
+      country: "Global",
+      difficulty: "Easy",
+      rating: 4.3,
     },
   ],
 
   watch_videos: [
     {
       id: 1,
-      title: "Watch Short Video",
-      payout: 0.30,
+      title: "Watch 10 Short Ads",
+      payout: 0.5,
       completions: 50000,
-      country: "Global",
-      difficulty: "Easy",
-      rating: 4.1,
-    },
-    {
-      id: 2,
-      title: "Watch Ad + Confirm",
-      payout: 0.60,
-      completions: 40000,
       country: "Global",
       difficulty: "Easy",
       rating: 4.2,
     },
     {
-      id: 3,
-      title: "Watch Full Promo Video",
-      payout: 1.00,
-      completions: 30000,
+      id: 2,
+      title: "Watch Sponsored Content",
+      payout: 0.8,
+      completions: 60000,
       country: "Global",
       difficulty: "Easy",
       rating: 4.4,
+    },
+    {
+      id: 3,
+      title: "Watch Video & Answer Questions",
+      payout: 0.7,
+      completions: 45000,
+      country: "Global",
+      difficulty: "Easy",
+      rating: 4.3,
     },
   ],
 };
@@ -205,19 +205,19 @@ export default function HighPayingOffers({ data }: Props) {
           ))}
         </div>
 
-        {/* LOADING */}
+        {/* LOADING (ROW BASED) */}
         {loading ? (
-          <CardSkeleton cards={5} />
+          <CardSkeleton rows={5} />
         ) : (
-          /* ROW BASED OFFER LIST */
+          /* ROW BASED OFFER LIST (VERCEL STYLE) */
           <div className="rounded-xl border overflow-hidden">
             {offers.map((offer) => (
               <div
                 key={offer.id}
                 className="flex justify-between items-center px-4 py-4 border-b border-gray-200 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/5 transition"
               >
-                {/* LEFT */}
-                <div className="flex items-center gap-3 flex-wrap">
+                {/* LEFT SIDE */}
+                <div className="flex items-center gap-4 w-2/3">
                   <span className="font-medium">{offer.title}</span>
 
                   <span className="text-xs text-gray-500">
@@ -225,21 +225,27 @@ export default function HighPayingOffers({ data }: Props) {
                   </span>
                 </div>
 
-                {/* RIGHT */}
-                <div className="text-right flex items-center gap-3">
+                {/* RIGHT SIDE */}
+                <div className="flex flex-col items-end gap-1">
                   <div className="font-bold text-green-500">
                     ${offer.payout.toFixed(2)}
                   </div>
 
-                  <div className="text-xs text-gray-500 hidden sm:block">
-                    ⭐ {offer.rating} | {offer.completions} leads
+                  <div className="text-xs text-gray-500">
+                    ⭐ {offer.rating} | {offer.completions}
                   </div>
 
-                  {/* BADGES */}
-                  {offer.payout > 3 && <Crown size={14} />}
-                  {offer.rating && offer.rating > 4.5 && <Star size={14} />}
-                  {offer.payout < 1 && <Zap size={14} />}
-                  {offer.completions > 40000 && <TrendingUp size={14} />}
+                  {/* ICON BADGES */}
+                  <div className="flex gap-2">
+                    {offer.payout > 3 && <Crown size={14} />}
+                    {offer.rating && offer.rating > 4.5 && (
+                      <Star size={14} />
+                    )}
+                    {offer.payout < 1 && <Zap size={14} />}
+                    {offer.completions > 40000 && (
+                      <TrendingUp size={14} />
+                    )}
+                  </div>
                 </div>
               </div>
             ))}
