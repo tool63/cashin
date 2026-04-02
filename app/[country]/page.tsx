@@ -20,8 +20,8 @@ import PaymentSection from "@/components/homepage/PaymentSection";
 import HighPayingOffers from "@/components/homepage/HighPayingOffers";
 import LiveEarnings from "@/components/homepage/LiveEarnings";
 import LiveWithdrawals from "@/components/homepage/LiveWithdrawals";
-import LiveJoining from "@/components/homepage/LiveJoining"; // ✅ ADDED
-import LiveOfferCompletion from "@/components/homepage/LiveOfferCompletion"; // ✅ ADDED
+import LiveJoining from "@/components/homepage/LiveJoining";
+import LiveOfferCompletion from "@/components/homepage/LiveOfferCompletion";
 import StatsSection from "@/components/homepage/StatsSection";
 import TrustSection from "@/components/homepage/TrustSection";
 import TestimonialSection from "@/components/homepage/TestimonialSection";
@@ -38,7 +38,8 @@ async function loadSectionTranslation(language: string, section: string) {
   try {
     const file = await import(`@/app/locales/${language}/${section}.json`);
     return file.default;
-  } catch {
+  } catch (error) {
+    console.warn(`Missing translation: ${section} (${language})`);
     return {};
   }
 }
@@ -49,7 +50,6 @@ function getLanguage(country: CountryCode): SupportedLanguage {
   const cookieStore = cookies();
 
   const override = cookieStore.get(COOKIE_KEYS.USER_LANGUAGE_OVERRIDE)?.value;
-
   if (override) {
     const lang = override.toLowerCase().split("-")[0];
     if (SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage)) {
@@ -58,7 +58,6 @@ function getLanguage(country: CountryCode): SupportedLanguage {
   }
 
   const saved = cookieStore.get(COOKIE_KEYS.LANGUAGE)?.value;
-
   if (saved) {
     const lang = saved.toLowerCase().split("-")[0];
     if (SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage)) {
@@ -97,8 +96,8 @@ export default async function HomePage({
   const highOffers = await loadSectionTranslation(language, "highoffershome");
   const liveEarnings = await loadSectionTranslation(language, "liveearningshome");
   const withdrawals = await loadSectionTranslation(language, "withdrawalshome");
-  const joining = await loadSectionTranslation(language, "livejoininghome"); // ✅ NEW
-  const offerCompletion = await loadSectionTranslation(language, "liveoffercompletionhome"); // ✅ NEW
+  const joining = await loadSectionTranslation(language, "livejoininghome");
+  const offerCompletion = await loadSectionTranslation(language, "liveoffercompletionhome");
   const stats = await loadSectionTranslation(language, "statshome");
   const trust = await loadSectionTranslation(language, "trusthome");
   const testimonials = await loadSectionTranslation(language, "testimonialshome");
@@ -117,7 +116,16 @@ export default async function HomePage({
     type: "low",
   });
 
-  /* ================= DATA ================= */
+  /* ================= FIX FAQ ================= */
+
+  const safeFaqItems = Array.isArray(faq?.items)
+    ? faq.items.map((item: any) => ({
+        question: item.q?.replace(/\{country\}/g, countryName) || "",
+        answer: item.a?.replace(/\{country\}/g, countryName) || "",
+      }))
+    : [];
+
+  /* ================= OTHER DATA ================= */
 
   const heroData = {
     headline: hero?.headline?.replace(/\{country\}/g, countryName),
@@ -166,7 +174,7 @@ export default async function HomePage({
   /* ================= RENDER ================= */
 
   return (
-    <main>
+    <main className="flex flex-col items-center w-full">
 
       {structuredData && (
         <script
@@ -203,10 +211,7 @@ export default async function HomePage({
       </CircleBorder>
 
       <CircleBorder>
-        <LiveJoining
-          data={joiningData}
-          countryName={countryName}
-        />
+        <LiveJoining data={joiningData} countryName={countryName} />
       </CircleBorder>
 
       <CircleBorder>
@@ -235,9 +240,14 @@ export default async function HomePage({
         <TestimonialSection data={testimonials} countryName={countryName} />
       </CircleBorder>
 
-      <CircleBorder>
-        <FAQ faqs={faq?.items || []} />
-      </CircleBorder>
+      {/* ✅ FINAL WORKING FAQ */}
+      {safeFaqItems.length > 0 && (
+        <CircleBorder>
+          <div className="w-full max-w-4xl mx-auto text-center">
+            <FAQ faqs={safeFaqItems} />
+          </div>
+        </CircleBorder>
+      )}
 
       <CircleBorder>
         <FinalCTASection data={final} countryName={countryName} />
