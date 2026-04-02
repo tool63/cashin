@@ -25,7 +25,9 @@ import {
 /* ================= TYPES ================= */
 
 interface Props {
-  data: any;
+  data?: any;
+  translations?: any;
+  countryName?: string;
 }
 
 interface Stat {
@@ -42,53 +44,82 @@ interface Stat {
 
 /* ================= COMPONENT ================= */
 
-export default function StatsSection({ data }: Props) {
+export default function StatsSection({
+  data = {},
+  translations = {},
+  countryName = "",
+}: Props) {
+  /* ================= HELPERS ================= */
+
+  function replaceCountry(text?: string) {
+    if (!text) return "";
+    return text.replace(/\{country\}/g, countryName);
+  }
+
+  function getText(
+    dataValue?: string,
+    translationValue?: string,
+    fallback: string = ""
+  ) {
+    return dataValue || translationValue || fallback;
+  }
+
+  function getNested(path: string, fallback: any = "") {
+    const get = (obj: any) =>
+      path.split(".").reduce((o, i) => o?.[i], obj);
+
+    return get(data) || get(translations) || fallback;
+  }
+
+  /* ================= STATS ================= */
+
   const stats: Stat[] = [
     {
       icon: <Users className="w-8 h-8 text-blue-500" />,
-      value: data.stats.users.value,
-      label: data.stats.users.label,
-      description: data.stats.users.description,
-      trend: data.stats.users.trend,
+      value: getNested("stats.users.value"),
+      label: getNested("stats.users.label"),
+      description: getNested("stats.users.description"),
+      trend: getNested("stats.users.trend"),
     },
     {
       icon: <Activity className="w-8 h-8 text-indigo-500" />,
-      value: data.stats.daily.value,
-      label: data.stats.daily.label,
-      description: data.stats.daily.description,
-      trend: data.stats.daily.trend,
+      value: getNested("stats.daily.value"),
+      label: getNested("stats.daily.label"),
+      description: getNested("stats.daily.description"),
+      trend: getNested("stats.daily.trend"),
     },
     {
       icon: <Target className="w-8 h-8 text-purple-500" />,
-      value: data.stats.offers.value,
-      label: data.stats.offers.label,
-      description: data.stats.offers.description,
-      trend: data.stats.offers.trend,
+      value: getNested("stats.offers.value"),
+      label: getNested("stats.offers.label"),
+      description: getNested("stats.offers.description"),
+      trend: getNested("stats.offers.trend"),
     },
     {
       icon: <CheckCircle className="w-8 h-8 text-green-500" />,
-      value: data.stats.completed.value,
-      label: data.stats.completed.label,
-      description: data.stats.completed.description,
-      trend: data.stats.completed.trend,
+      value: getNested("stats.completed.value"),
+      label: getNested("stats.completed.label"),
+      description: getNested("stats.completed.description"),
+      trend: getNested("stats.completed.trend"),
     },
     {
       icon: <Building2 className="w-8 h-8 text-orange-500" />,
-      value: data.stats.advertisers.value,
-      label: data.stats.advertisers.label,
-      description: data.stats.advertisers.description,
-      trend: data.stats.advertisers.trend,
+      value: getNested("stats.advertisers.value"),
+      label: getNested("stats.advertisers.label"),
+      description: getNested("stats.advertisers.description"),
+      trend: getNested("stats.advertisers.trend"),
     },
     {
       icon: <DollarSign className="w-8 h-8 text-emerald-500" />,
-      value: data.stats.paid.value,
-      label: data.stats.paid.label,
-      description: data.stats.paid.description,
-      trend: data.stats.paid.trend,
+      value: getNested("stats.paid.value"),
+      label: getNested("stats.paid.label"),
+      description: getNested("stats.paid.description"),
+      trend: getNested("stats.paid.trend"),
     },
   ];
 
-  /* Trend Renderer */
+  /* ================= TREND ================= */
+
   const renderTrend = (trend?: Stat["trend"]) => {
     if (!trend) return null;
 
@@ -120,19 +151,33 @@ export default function StatsSection({ data }: Props) {
     );
   };
 
+  /* ================= RENDER ================= */
+
   return (
     <OpeningStyle delay={0.12}>
       <section className="max-w-7xl mx-auto px-6 py-20">
 
-        {/* Heading */}
+        {/* HEADER */}
         <div className="text-center mb-12">
-          <SectionTitle icon="🏆" text={data.title} />
+          <SectionTitle
+            icon="🏆"
+            text={replaceCountry(
+              getText(data.title, translations?.title, "Platform Stats")
+            )}
+          />
+
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-4 leading-relaxed">
-            {data.description}
+            {replaceCountry(
+              getText(
+                data.description,
+                translations?.description,
+                ""
+              )
+            )}
           </p>
         </div>
 
-        {/* Stats Grid */}
+        {/* GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {stats.map((stat, index) => (
             <motion.div
@@ -146,11 +191,16 @@ export default function StatsSection({ data }: Props) {
                 <CardIcon>{stat.icon}</CardIcon>
 
                 <div className="text-3xl md:text-4xl font-extrabold mt-3 text-gray-900 dark:text-white">
-                  {stat.value}
+                  {replaceCountry(stat.value)}
                 </div>
 
-                <CardTitle>{stat.label}</CardTitle>
-                <CardDescription>{stat.description}</CardDescription>
+                <CardTitle>
+                  {replaceCountry(stat.label)}
+                </CardTitle>
+
+                <CardDescription>
+                  {replaceCountry(stat.description)}
+                </CardDescription>
 
                 {renderTrend(stat.trend)}
               </Card>
@@ -158,18 +208,26 @@ export default function StatsSection({ data }: Props) {
           ))}
         </div>
 
-        {/* Highlights */}
+        {/* HIGHLIGHTS */}
         <div className="mt-16 flex flex-wrap justify-center gap-8 text-sm text-gray-600 dark:text-gray-400">
-          {data.highlights.map((item: string, i: number) => (
-            <span key={i}>{item}</span>
-          ))}
+          {(data.highlights || translations?.highlights || []).map(
+            (item: string, i: number) => (
+              <span key={i}>
+                {replaceCountry(item)}
+              </span>
+            )
+          )}
         </div>
 
-        {/* Trust */}
+        {/* TRUST */}
         <div className="mt-8 flex flex-wrap justify-center gap-8 text-sm text-gray-600 dark:text-gray-400">
-          {data.trust.map((item: string, i: number) => (
-            <span key={i}>{item}</span>
-          ))}
+          {(data.trust || translations?.trust || []).map(
+            (item: string, i: number) => (
+              <span key={i}>
+                {replaceCountry(item)}
+              </span>
+            )
+          )}
         </div>
 
       </section>
