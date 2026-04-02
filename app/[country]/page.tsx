@@ -17,7 +17,8 @@ import HeroSection from "@/components/homepage/HeroSection";
 import FeaturesSection from "@/components/homepage/FeaturesSection";
 import HighPayingOffers from "@/components/homepage/HighPayingOffers";
 import LiveEarnings from "@/components/homepage/LiveEarnings";
-import StatsSection from "@/components/homepage/StatsSection"; // ✅ NEW
+import StatsSection from "@/components/homepage/StatsSection";
+import TestimonialSection from "@/components/homepage/TestimonialSection"; // ✅ NEW
 import FinalCTASection from "@/components/homepage/FinalCTASection";
 
 import FAQ from "@/components/animations/FAQ";
@@ -94,7 +95,8 @@ export default async function HomePage({
   const features = await loadSectionTranslation(language, "featureshome");
   const highOffers = await loadSectionTranslation(language, "highoffershome");
   const liveEarnings = await loadSectionTranslation(language, "liveearningshome");
-  const stats = await loadSectionTranslation(language, "statshome"); // ✅ NEW
+  const stats = await loadSectionTranslation(language, "statshome");
+  const testimonials = await loadSectionTranslation(language, "testimonialshome"); // ✅ NEW
   const faq = await loadSectionTranslation(language, "faqhome");
   const final = await loadSectionTranslation(language, "finalhome");
 
@@ -175,6 +177,15 @@ export default async function HomePage({
       ) || [],
   };
 
+  /* ================= TESTIMONIALS ================= */
+
+  const testimonialData = {
+    title: testimonials?.title?.replace(/\{country\}/g, countryName),
+    description: testimonials?.description?.replace(/\{country\}/g, countryName),
+    testimonials: testimonials?.testimonials || [],
+    statsText: testimonials?.statsText?.replace(/\{country\}/g, countryName),
+  };
+
   /* ================= FAQ ================= */
 
   const faqTitle = faq?.title || "Frequently Asked Questions";
@@ -213,10 +224,7 @@ export default async function HomePage({
       {/* HERO */}
       <div className="py-16 px-4">
         <CircleBorder>
-          <HeroSection
-            data={heroData}
-            translations={typing}
-          />
+          <HeroSection data={heroData} translations={typing} />
         </CircleBorder>
       </div>
 
@@ -238,7 +246,7 @@ export default async function HomePage({
         </CircleBorder>
       </div>
 
-      {/* LIVE EARNINGS */}
+      {/* LIVE */}
       <div className="py-16 px-4">
         <CircleBorder>
           <LiveEarnings
@@ -249,12 +257,23 @@ export default async function HomePage({
         </CircleBorder>
       </div>
 
-      {/* STATS ✅ */}
+      {/* STATS */}
       <div className="py-16 px-4">
         <CircleBorder>
           <StatsSection
             data={statsData}
             translations={stats}
+            countryName={countryName}
+          />
+        </CircleBorder>
+      </div>
+
+      {/* TESTIMONIALS ✅ */}
+      <div className="py-16 px-4">
+        <CircleBorder>
+          <TestimonialSection
+            data={testimonialData}
+            translations={testimonials}
             countryName={countryName}
           />
         </CircleBorder>
@@ -267,7 +286,6 @@ export default async function HomePage({
             <h2 className="text-3xl font-bold mb-6">
               {faqTitle}
             </h2>
-
             <FAQ faqs={faqs} />
           </div>
         </CircleBorder>
