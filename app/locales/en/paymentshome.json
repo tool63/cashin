@@ -1,0 +1,47 @@
+{
+  "title": "Payment Methods in {country}",
+  "description": "Withdraw your earnings instantly in {country}",
+  "icon": "💳",
+
+  "methods": {
+    "paypal": {
+      "title": "PayPal",
+      "description": "Fast and secure payments"
+    },
+    "usdt": {
+      "title": "USDT",
+      "description": "Crypto stablecoin payments"
+    },
+    "bitcoin": {
+      "title": "Bitcoin",
+      "description": "Decentralized crypto payments"
+    },
+    "giftcards": {
+      "title": "Gift Cards",
+      "description": "Redeem rewards as gift cards"
+    },
+    "litecoin": {
+      "title": "Litecoin",
+      "description": "Fast crypto transactions"
+    },
+    "ethereum": {
+      "title": "Ethereum",
+      "description": "Smart contract payments"
+    },
+    "dogecoin": {
+      "title": "Dogecoin",
+      "description": "Fun and fast crypto"
+    },
+    "bnb": {
+      "title": "BNB",
+      "description": "Binance ecosystem payments"
+    }
+  },
+
+  "trust": [
+    "Instant Withdrawals",
+    "No Hidden Fees",
+    "Fast Processing",
+    "Global Availability"
+  ]
+}
