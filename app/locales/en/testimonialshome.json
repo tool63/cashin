@@ -15,6 +15,102 @@
       "earnings": "$3000+ earned",
       "date": "Member since 2023",
       "verified": true
+    },
+    {
+      "id": 2,
+      "name": "Ahmed",
+      "avatar": "👨",
+      "country": "Bangladesh",
+      "flag": "🇧🇩",
+      "rating": 5,
+      "text": "This platform changed my life in {country}. I make consistent income.",
+      "earnings": "$1500+ earned",
+      "date": "Member since 2022",
+      "verified": true
+    },
+    {
+      "id": 3,
+      "name": "John",
+      "avatar": "👨",
+      "country": "UK",
+      "flag": "🇬🇧",
+      "rating": 4,
+      "text": "Very easy to use and reliable. I earn from {country} daily.",
+      "earnings": "$2200+ earned",
+      "date": "Member since 2023",
+      "verified": true
+    },
+    {
+      "id": 4,
+      "name": "Maria",
+      "avatar": "👩",
+      "country": "Spain",
+      "flag": "🇪🇸",
+      "rating": 5,
+      "text": "Amazing experience! I recommend this to everyone in {country}.",
+      "earnings": "$2800+ earned",
+      "date": "Member since 2022",
+      "verified": true
+    },
+    {
+      "id": 5,
+      "name": "David",
+      "avatar": "👨",
+      "country": "Canada",
+      "flag": "🇨🇦",
+      "rating": 5,
+      "text": "One of the best earning platforms in {country}.",
+      "earnings": "$3200+ earned",
+      "date": "Member since 2024",
+      "verified": true
+    },
+    {
+      "id": 6,
+      "name": "Lina",
+      "avatar": "👩",
+      "country": "Germany",
+      "flag": "🇩🇪",
+      "rating": 4,
+      "text": "Great support and easy withdrawals in {country}.",
+      "earnings": "$1800+ earned",
+      "date": "Member since 2023",
+      "verified": true
+    },
+    {
+      "id": 7,
+      "name": "Ravi",
+      "avatar": "👨",
+      "country": "India",
+      "flag": "🇮🇳",
+      "rating": 5,
+      "text": "I love this platform. Earning from {country} is simple now.",
+      "earnings": "$2500+ earned",
+      "date": "Member since 2022",
+      "verified": true
+    },
+    {
+      "id": 8,
+      "name": "Fatima",
+      "avatar": "👩",
+      "country": "UAE",
+      "flag": "🇦🇪",
+      "rating": 5,
+      "text": "Super fast payments and great experience in {country}.",
+      "earnings": "$2700+ earned",
+      "date": "Member since 2023",
+      "verified": true
+    },
+    {
+      "id": 9,
+      "name": "Carlos",
+      "avatar": "👨",
+      "country": "Brazil",
+      "flag": "🇧🇷",
+      "rating": 5,
+      "text": "Best platform I've used in {country} for earning online.",
+      "earnings": "$3100+ earned",
+      "date": "Member since 2024",
+      "verified": true
     }
   ]
 }
