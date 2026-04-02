@@ -18,6 +18,7 @@ export type CountryMeta = {
   name: string;
   tier: CountryTier;
   defaultLanguage: SupportedLanguage;
+  flag: string; // 🆕 added
 };
 
 // ===============================
@@ -44,6 +45,18 @@ const TIER1 = new Set([
 const TIER2 = new Set([
   "es","it","pt","gr","pl","cz","hu","tr","ae","sa","kr","jp","sg","my","br","mx","za"
 ]);
+
+// ===============================
+// 🏳️ FLAG HELPER
+// ===============================
+function getFlagEmoji(code: string): string {
+  if (code === "global") return "🌍";
+  return code
+    .toUpperCase()
+    .replace(/./g, char =>
+      String.fromCodePoint(127397 + char.charCodeAt(0))
+    );
+}
 
 // ===============================
 // 🌍 ISO COUNTRIES
@@ -78,10 +91,9 @@ export const ISO_COUNTRIES = [
 export type CountryCode = typeof ISO_COUNTRIES[number] | "global";
 
 // ===============================
-// 🌍 COUNTRY NAMES (ONLY ISO CODES)
+// 🌍 COUNTRY NAMES
 // ===============================
 const COUNTRY_NAMES: Partial<Record<CountryCode, string>> = {
-  // Tier 1
   us: "United States",
   gb: "United Kingdom",
   ca: "Canada",
@@ -98,7 +110,6 @@ const COUNTRY_NAMES: Partial<Record<CountryCode, string>> = {
   be: "Belgium",
   at: "Austria",
 
-  // Tier 2
   es: "Spain",
   it: "Italy",
   pt: "Portugal",
@@ -117,7 +128,6 @@ const COUNTRY_NAMES: Partial<Record<CountryCode, string>> = {
   mx: "Mexico",
   za: "South Africa",
 
-  // Tier 3 (Major)
   bd: "Bangladesh",
   in: "India",
   pk: "Pakistan",
@@ -132,155 +142,6 @@ const COUNTRY_NAMES: Partial<Record<CountryCode, string>> = {
   ro: "Romania",
   il: "Israel",
   tw: "Taiwan",
-
-  // --- Remaining ISO Countries ---
-
-  af: "Afghanistan",
-  al: "Albania",
-  dz: "Algeria",
-  ad: "Andorra",
-  ao: "Angola",
-  ag: "Antigua and Barbuda",
-  ar: "Argentina",
-  am: "Armenia",
-  az: "Azerbaijan",
-  bs: "Bahamas",
-  bh: "Bahrain",
-  bb: "Barbados",
-  by: "Belarus",
-  bz: "Belize",
-  bj: "Benin",
-  bt: "Bhutan",
-  bo: "Bolivia",
-  ba: "Bosnia and Herzegovina",
-  bw: "Botswana",
-  bn: "Brunei",
-  bg: "Bulgaria",
-  bf: "Burkina Faso",
-  bi: "Burundi",
-  cv: "Cape Verde",
-  kh: "Cambodia",
-  cm: "Cameroon",
-  cf: "Central African Republic",
-  td: "Chad",
-  cl: "Chile",
-  cn: "China",
-  co: "Colombia",
-  km: "Comoros",
-  cg: "Republic of the Congo",
-  cd: "Democratic Republic of the Congo",
-  cr: "Costa Rica",
-  ci: "Côte d'Ivoire",
-  hr: "Croatia",
-  cu: "Cuba",
-  cy: "Cyprus",
-  dj: "Djibouti",
-  dm: "Dominica",
-  do: "Dominican Republic",
-  ec: "Ecuador",
-  sv: "El Salvador",
-  gq: "Equatorial Guinea",
-  er: "Eritrea",
-  ee: "Estonia",
-  sz: "Eswatini",
-  et: "Ethiopia",
-  fj: "Fiji",
-  ga: "Gabon",
-  gm: "Gambia",
-  ge: "Georgia",
-  gh: "Ghana",
-  gd: "Grenada",
-  gt: "Guatemala",
-  gn: "Guinea",
-  gw: "Guinea-Bissau",
-  gy: "Guyana",
-  ht: "Haiti",
-  hn: "Honduras",
-  is: "Iceland",
-  ir: "Iran",
-  iq: "Iraq",
-  jm: "Jamaica",
-  jo: "Jordan",
-  kz: "Kazakhstan",
-  ki: "Kiribati",
-  kp: "North Korea",
-  kw: "Kuwait",
-  kg: "Kyrgyzstan",
-  la: "Laos",
-  lv: "Latvia",
-  lb: "Lebanon",
-  ls: "Lesotho",
-  lr: "Liberia",
-  ly: "Libya",
-  li: "Liechtenstein",
-  lt: "Lithuania",
-  lu: "Luxembourg",
-  mg: "Madagascar",
-  mw: "Malawi",
-  mv: "Maldives",
-  ml: "Mali",
-  mt: "Malta",
-  mh: "Marshall Islands",
-  mr: "Mauritania",
-  mu: "Mauritius",
-  fm: "Micronesia",
-  md: "Moldova",
-  mc: "Monaco",
-  mn: "Mongolia",
-  me: "Montenegro",
-  ma: "Morocco",
-  mz: "Mozambique",
-  mm: "Myanmar",
-  na: "Namibia",
-  nr: "Nauru",
-  np: "Nepal",
-  ni: "Nicaragua",
-  ne: "Niger",
-  om: "Oman",
-  pw: "Palau",
-  pa: "Panama",
-  pg: "Papua New Guinea",
-  py: "Paraguay",
-  pe: "Peru",
-  qa: "Qatar",
-  ru: "Russia",
-  rw: "Rwanda",
-  kn: "Saint Kitts and Nevis",
-  lc: "Saint Lucia",
-  vc: "Saint Vincent and the Grenadines",
-  ws: "Samoa",
-  sm: "San Marino",
-  st: "Sao Tome and Principe",
-  sn: "Senegal",
-  rs: "Serbia",
-  sc: "Seychelles",
-  sl: "Sierra Leone",
-  sk: "Slovakia",
-  si: "Slovenia",
-  sb: "Solomon Islands",
-  so: "Somalia",
-  ss: "South Sudan",
-  lk: "Sri Lanka",
-  sd: "Sudan",
-  sr: "Suriname",
-  sy: "Syria",
-  tj: "Tajikistan",
-  tz: "Tanzania",
-  tg: "Togo",
-  to: "Tonga",
-  tt: "Trinidad and Tobago",
-  tn: "Tunisia",
-  tm: "Turkmenistan",
-  tv: "Tuvalu",
-  ug: "Uganda",
-  uy: "Uruguay",
-  uz: "Uzbekistan",
-  vu: "Vanuatu",
-  va: "Vatican City",
-  ve: "Venezuela",
-  ye: "Yemen",
-  zm: "Zambia",
-  zw: "Zimbabwe",
 };
 
 // ===============================
@@ -297,6 +158,7 @@ function buildCountry(code: string): CountryMeta {
     name: COUNTRY_NAMES[code as CountryCode] || code.toUpperCase(),
     tier,
     defaultLanguage: LANGUAGE_BY_COUNTRY[code] || "en",
+    flag: getFlagEmoji(code), // 🆕 added
   };
 }
 
@@ -309,6 +171,7 @@ export const COUNTRIES: Record<CountryCode, CountryMeta> = {
     name: "Global",
     tier: "tier3",
     defaultLanguage: "en",
+    flag: "🌍",
   },
 
   ...Object.fromEntries(
@@ -338,7 +201,7 @@ export function getCountryTier(code?: string | null): CountryTier {
 }
 
 // ===============================
-// 🆕 ADDED: NUMERIC TIER HELPER
+// 🔢 NUMERIC TIER
 // ===============================
 export function getTierNumber(code?: string | null): 1 | 2 | 3 {
   const meta = getCountry(code);
@@ -348,14 +211,14 @@ export function getTierNumber(code?: string | null): 1 | 2 | 3 {
 }
 
 // ===============================
-// 🆕 ADDED: VALIDATION HELPER
+// ✅ VALIDATION
 // ===============================
 export function isValidCountryCode(code: string): boolean {
   return code in COUNTRIES && code !== "global";
 }
 
 // ===============================
-// 🆕 ADDED: GET ALL COUNTRIES BY TIER
+// 📊 GET COUNTRIES BY TIER
 // ===============================
 export function getCountriesByTier(tier: CountryTier): CountryMeta[] {
   return Object.values(COUNTRIES).filter(country => country.tier === tier);
