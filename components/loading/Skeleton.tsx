@@ -1,15 +1,59 @@
 "use client";
 
-interface SkeletonProps {
-  className?: string;
+import { motion } from "framer-motion";
+
+type Props = {
+  rows?: number;
+};
+
+export default function Skeleton({ rows = 8 }: Props) {
+  return (
+    <div className="rounded-xl border overflow-hidden">
+      {Array.from({ length: rows }).map((_, i) => (
+        <div
+          key={i}
+          className="flex justify-between items-center px-4 py-4 border-b"
+        >
+          {/* LEFT SIDE */}
+          <div className="flex items-center gap-4 w-2/3">
+            {/* Title */}
+            <Shimmer className="h-4 w-48 rounded-md" />
+
+            {/* Badges */}
+            <div className="flex gap-2">
+              <Shimmer className="h-3 w-3 rounded-full" />
+              <Shimmer className="h-3 w-3 rounded-full" />
+              <Shimmer className="h-3 w-3 rounded-full" />
+            </div>
+          </div>
+
+          {/* RIGHT SIDE */}
+          <div className="flex flex-col items-end gap-2">
+            <Shimmer className="h-4 w-16 rounded-md" />
+            <Shimmer className="h-3 w-24 rounded-md" />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }
 
-export default function Skeleton({ className = "" }: SkeletonProps) {
+/* ===================== SHIMMER COMPONENT ===================== */
+
+function Shimmer({ className }: { className?: string }) {
   return (
     <div
-      className={`relative overflow-hidden rounded-md bg-gray-200 dark:bg-white/10 ${className}`}
+      className={`relative overflow-hidden bg-gray-200 dark:bg-white/10 ${className}`}
     >
-      <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/40 to-transparent dark:via-white/10" />
+      <motion.div
+        className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 dark:via-white/10 to-transparent"
+        animate={{ x: ["0%", "200%"] }}
+        transition={{
+          repeat: Infinity,
+          duration: 1.2,
+          ease: "linear",
+        }}
+      />
     </div>
   );
 }
