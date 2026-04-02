@@ -1,0 +1,10 @@
+{
+  "title": "Live Offer Completions",
+  "description": "Users from around the world are completing offers in real-time.",
+  "live_label": "Live",
+  "stats": {
+    "completed": "Completed",
+    "countries": "Countries",
+    "realtime": "Real-time"
+  }
+}
