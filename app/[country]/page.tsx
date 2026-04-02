@@ -15,13 +15,15 @@ import type { SupportedLanguage } from "@/app/core/types";
 
 import HeroSection from "@/components/homepage/HeroSection";
 import FeaturesSection from "@/components/homepage/FeaturesSection";
+import HighPayingOffers from "@/components/homepage/HighPayingOffers"; // ✅ NEW
 import FinalCTASection from "@/components/homepage/FinalCTASection";
+
 import FAQ from "@/components/animations/FAQ";
 import CircleBorder from "@/components/animations/CircleBorder";
 
 import { generateJsonLd } from "@/components/SEO/schema";
 
-/* ================= HELPER: LOAD SECTION ================= */
+/* ================= HELPER ================= */
 
 async function loadSectionTranslation(
   language: string,
@@ -42,7 +44,10 @@ async function loadSectionTranslation(
 function getLanguage(country: CountryCode): SupportedLanguage {
   const cookieStore = cookies();
 
-  const override = cookieStore.get(COOKIE_KEYS.USER_LANGUAGE_OVERRIDE)?.value;
+  const override = cookieStore.get(
+    COOKIE_KEYS.USER_LANGUAGE_OVERRIDE
+  )?.value;
+
   if (override) {
     const lang = override.toLowerCase().split("-")[0];
     if (SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage)) {
@@ -51,6 +56,7 @@ function getLanguage(country: CountryCode): SupportedLanguage {
   }
 
   const saved = cookieStore.get(COOKIE_KEYS.LANGUAGE)?.value;
+
   if (saved) {
     const lang = saved.toLowerCase().split("-")[0];
     if (SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage)) {
@@ -83,7 +89,8 @@ export default async function HomePage({
 
   const hero = await loadSectionTranslation(language, "herohome");
   const typing = await loadSectionTranslation(language, "typinghome");
-  const features = await loadSectionTranslation(language, "featureshome"); // ✅ NEW
+  const features = await loadSectionTranslation(language, "featureshome");
+  const highOffers = await loadSectionTranslation(language, "highoffershome"); // ✅ NEW
   const faq = await loadSectionTranslation(language, "faqhome");
   const final = await loadSectionTranslation(language, "finalhome");
 
@@ -129,6 +136,14 @@ export default async function HomePage({
       title: features?.multiple_payment_options?.title?.replace(/\{country\}/g, countryName),
       description: features?.multiple_payment_options?.description?.replace(/\{country\}/g, countryName),
     },
+  };
+
+  /* ================= HIGH OFFERS ================= */
+
+  const offersData = {
+    title: highOffers?.title?.replace(/\{country\}/g, countryName),
+    description: highOffers?.description?.replace(/\{country\}/g, countryName),
+    categories: highOffers?.categories || [],
   };
 
   /* ================= FAQ ================= */
@@ -184,6 +199,13 @@ export default async function HomePage({
             translations={features}
             countryName={countryName}
           />
+        </CircleBorder>
+      </div>
+
+      {/* HIGH PAYING OFFERS */}
+      <div className="py-16 px-4">
+        <CircleBorder>
+          <HighPayingOffers data={offersData} />
         </CircleBorder>
       </div>
 
