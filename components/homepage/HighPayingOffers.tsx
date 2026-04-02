@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Zap, TrendingUp, Star, Crown } from "lucide-react";
 import { motion } from "framer-motion";
 import OpeningStyle from "@/components/animations/openingstyle";
 import CardSkeleton from "@/components/loading/CardSkeleton";
@@ -13,7 +12,7 @@ type Offer = {
   title: string;
   payout: number;
   completions: number;
-  country: string;
+  country: string; // USA, UK, etc
   rating?: number;
 };
 
@@ -29,17 +28,30 @@ interface Props {
   data: any;
 }
 
-/* ===================== COUNTRY FLAGS ===================== */
+/* ===================== FLAG HELPER ===================== */
 
-const countryPool = [
-  "🇺🇸 USA",
-  "🇬🇧 UK",
-  "🇨🇦 Canada",
-  "🇦🇺 Australia",
-  "🇯🇵 Japan",
-  "🇪🇺 Europe",
-];
+const getFlag = (country: string) => {
+  switch (country) {
+    case "USA":
+      return "🇺🇸";
+    case "UK":
+      return "🇬🇧";
+    case "Canada":
+      return "🇨🇦";
+    case "Australia":
+      return "🇦🇺";
+    case "Japan":
+      return "🇯🇵";
+    case "Europe":
+      return "🇪🇺";
+    default:
+      return "🌍";
+  }
+};
 
+/* ===================== COUNTRY POOL ===================== */
+
+const countryPool = ["USA", "UK", "Canada", "Australia", "Japan", "Europe"];
 const getCountry = (i: number) => countryPool[i % countryPool.length];
 
 /* ===================== DATA ===================== */
@@ -55,21 +67,20 @@ const categoryOffers: Record<CategoryKey, Offer[]> = {
       rating: +(4.1 + (i % 5) * 0.1).toFixed(1),
     })),
 
-    // ➕ 3 NEW
     {
       id: 21,
-      title: "Quick Market Insights",
-      payout: 1.95,
-      completions: 28500,
-      country: "🇺🇸 USA",
-      rating: 4.6,
+      title: "Netflix Viewing Habits Survey",
+      payout: 1.25,
+      completions: 18200,
+      country: "USA",
+      rating: 4.5,
     },
     {
       id: 22,
       title: "Brand Feedback Survey",
       payout: 2.15,
       completions: 32000,
-      country: "🇬🇧 UK",
+      country: "UK",
       rating: 4.7,
     },
     {
@@ -77,7 +88,7 @@ const categoryOffers: Record<CategoryKey, Offer[]> = {
       title: "Product Experience Survey",
       payout: 2.35,
       completions: 41000,
-      country: "🇨🇦 Canada",
+      country: "Canada",
       rating: 4.8,
     },
   ],
@@ -92,13 +103,12 @@ const categoryOffers: Record<CategoryKey, Offer[]> = {
       rating: +(4.2 + (i % 4) * 0.1).toFixed(1),
     })),
 
-    // ➕ 3 NEW
     {
       id: 21,
-      title: "Finance App Install",
-      payout: 3.25,
-      completions: 38000,
-      country: "🇺🇸 USA",
+      title: "Install Revolut Banking App",
+      payout: 3.8,
+      completions: 39800,
+      country: "UK",
       rating: 4.6,
     },
     {
@@ -106,7 +116,7 @@ const categoryOffers: Record<CategoryKey, Offer[]> = {
       title: "Shopping App Install",
       payout: 3.75,
       completions: 42000,
-      country: "🇬🇧 UK",
+      country: "USA",
       rating: 4.7,
     },
     {
@@ -114,7 +124,7 @@ const categoryOffers: Record<CategoryKey, Offer[]> = {
       title: "Gaming App Install",
       payout: 4.1,
       completions: 50000,
-      country: "🇨🇦 Canada",
+      country: "Canada",
       rating: 4.8,
     },
   ],
@@ -129,29 +139,28 @@ const categoryOffers: Record<CategoryKey, Offer[]> = {
       rating: +(4.3 + (i % 5) * 0.1).toFixed(1),
     })),
 
-    // ➕ 3 NEW
     {
       id: 21,
-      title: "Reach Level 20",
-      payout: 5.25,
-      completions: 45000,
-      country: "🇺🇸 USA",
+      title: "Reach Level 20 in Puzzle Game",
+      payout: 5.2,
+      completions: 38900,
+      country: "Canada",
       rating: 4.7,
     },
     {
       id: 22,
-      title: "Win Tournament",
+      title: "Win Tournament Challenge",
       payout: 6.5,
       completions: 52000,
-      country: "🇯🇵 Japan",
+      country: "Japan",
       rating: 4.8,
     },
     {
       id: 23,
-      title: "Daily Missions",
+      title: "Daily Missions Completion",
       payout: 4.75,
       completions: 48000,
-      country: "🇦🇺 Australia",
+      country: "Australia",
       rating: 4.6,
     },
   ],
@@ -166,29 +175,28 @@ const categoryOffers: Record<CategoryKey, Offer[]> = {
       rating: +(4.0 + (i % 3) * 0.1).toFixed(1),
     })),
 
-    // ➕ 3 NEW
     {
       id: 21,
-      title: "Premium Video Watch",
-      payout: 0.95,
-      completions: 65000,
-      country: "🇬🇧 UK",
-      rating: 4.6,
+      title: "Watch Sponsored Ads",
+      payout: 0.65,
+      completions: 78000,
+      country: "USA",
+      rating: 4.4,
     },
     {
       id: 22,
-      title: "Ad Engagement Task",
-      payout: 0.85,
-      completions: 72000,
-      country: "🇺🇸 USA",
-      rating: 4.7,
+      title: "Premium Video Watch",
+      payout: 0.95,
+      completions: 65000,
+      country: "UK",
+      rating: 4.6,
     },
     {
       id: 23,
       title: "Short Video Tasks",
       payout: 0.75,
       completions: 80000,
-      country: "🇨🇦 Canada",
+      country: "Canada",
       rating: 4.5,
     },
   ],
@@ -209,9 +217,9 @@ export default function HighPayingOffers({ data }: Props) {
   }, [category]);
 
   const getBadge = (offer: Offer) => {
-    if (offer.payout > 3) return "HOT";
-    if (offer.completions > 40000) return "TRENDING";
-    if (offer.rating && offer.rating > 4.6) return "NEW";
+    if (offer.payout > 3) return "🚀";
+    if (offer.completions > 40000) return "🔥";
+    if (offer.rating && offer.rating > 4.6) return "🆕";
     return null;
   };
 
@@ -270,34 +278,32 @@ export default function HighPayingOffers({ data }: Props) {
                   key={offer.id}
                   className="grid grid-cols-4 items-center px-4 py-4 border-b hover:bg-gray-50 dark:hover:bg-white/5 transition text-sm"
                 >
+                  {/* NAME */}
                   <div className="flex items-center gap-2 font-medium truncate">
                     {offer.title}
-
-                    {badge && (
-                      <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${
-                        badge === "HOT"
-                          ? "bg-red-500 text-white"
-                          : badge === "TRENDING"
-                          ? "bg-yellow-400 text-black"
-                          : "bg-green-500 text-white"
-                      }`}>
-                        {badge}
-                      </span>
-                    )}
+                    {badge && <span>{badge}</span>}
                   </div>
 
-                  <div className="text-gray-600 dark:text-gray-400">
-                    {offer.country}
+                  {/* FLAG */}
+                  <div className="text-lg">
+                    {getFlag(offer.country)}
                   </div>
 
+                  {/* COMPLETED */}
                   <div className="text-gray-600 dark:text-gray-400">
                     {offer.completions.toLocaleString()}
                   </div>
 
-                  <div className="flex justify-end items-center">
+                  {/* PAYOUT */}
+                  <div className="flex justify-end items-center gap-2">
                     <span className="font-bold text-green-500">
                       ${offer.payout.toFixed(2)}
                     </span>
+                    {offer.rating && (
+                      <span className="text-xs text-gray-500">
+                        ⭐{offer.rating}
+                      </span>
+                    )}
                   </div>
                 </div>
               );
