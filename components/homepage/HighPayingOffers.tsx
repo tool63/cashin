@@ -1,15 +1,11 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import {
-  Zap,
-  TrendingUp,
-  Star,
-  Crown,
-} from "lucide-react";
+import { Zap, TrendingUp, Star, Crown } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import OpeningStyle from "@/components/animations/openingstyle";
+import CardSkeleton from "@/components/loading/CardSkeleton";
 
 /* ===================== TYPES ===================== */
 
@@ -40,22 +36,45 @@ interface Props {
   data: any;
 }
 
-/* ===================== FAKE DATA ===================== */
+/* ===================== DATA GENERATOR ===================== */
 
 const generateOffers = (category: CategoryKey): Offer[] => {
-  return [
-    {
-      id: 1,
-      title: "Sample Offer",
-      payout: 2.5,
-      completions: 12000,
-      country: "Global",
-      badgeHigh: true,
-      badgeFast: true,
-      difficulty: "Easy",
-      rating: 4.8,
-    },
+  const base = [
+    "Quick Survey",
+    "Mobile App Install",
+    "Game Bonus",
+    "Video Reward",
+    "Task Completion",
+    "Daily Challenge",
+    "High Reward Offer",
+    "Exclusive Deal",
+    "Fast Cash Task",
+    "Limited Time Offer",
   ];
+
+  const offers: Offer[] = [];
+
+  for (let i = 1; i <= 20; i++) {
+    const title = `${base[i % base.length]} #${i}`;
+
+    offers.push({
+      id: i,
+      title: `${category.toUpperCase()} - ${title}`,
+      payout: parseFloat((Math.random() * 5 + 0.5).toFixed(2)),
+      completions: Math.floor(Math.random() * 50000 + 1000),
+      country: "Global",
+      badgeHigh: Math.random() > 0.7,
+      badgeFast: Math.random() > 0.6,
+      badgeNew: Math.random() > 0.8,
+      badgeTrending: Math.random() > 0.5,
+      difficulty: ["Easy", "Medium", "Hard"][
+        Math.floor(Math.random() * 3)
+      ] as any,
+      rating: parseFloat((Math.random() * 2 + 3).toFixed(1)),
+    });
+  }
+
+  return offers.sort((a, b) => b.payout - a.payout);
 };
 
 /* ===================== COMPONENT ===================== */
@@ -76,7 +95,6 @@ export default function HighPayingOffers({ data }: Props) {
   return (
     <OpeningStyle delay={0.15}>
       <section className="max-w-7xl mx-auto px-6 py-20">
-
         {/* TITLE */}
         <div className="text-center mb-12">
           <h2 className="text-4xl sm:text-5xl font-extrabold mb-4">
@@ -109,28 +127,44 @@ export default function HighPayingOffers({ data }: Props) {
           ))}
         </div>
 
-        {/* OFFERS */}
-        <div className="rounded-xl border overflow-hidden">
-          {offers.map((offer) => (
-            <div
-              key={offer.id}
-              className="flex justify-between p-4 border-b"
-            >
-              <div className="flex items-center gap-2">
-                {offer.title}
+        {/* LOADING */}
+        {loading ? (
+          <CardSkeleton rows={10} />
+        ) : (
+          /* OFFERS */
+          <div className="rounded-xl border overflow-hidden">
+            {offers.map((offer) => (
+              <div
+                key={offer.id}
+                className="flex justify-between items-center p-4 border-b"
+              >
+                {/* LEFT */}
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span>{offer.title}</span>
 
-                {offer.badgeHigh && <Crown size={14} />}
-                {offer.badgeFast && <Zap size={14} />}
-                {offer.badgeTrending && <TrendingUp size={14} />}
-                {offer.badgeNew && <Star size={14} />}
-              </div>
+                  {offer.badgeHigh && <Crown size={14} />}
+                  {offer.badgeFast && <Zap size={14} />}
+                  {offer.badgeTrending && <TrendingUp size={14} />}
+                  {offer.badgeNew && <Star size={14} />}
 
-              <div className="font-bold text-green-500">
-                ${offer.payout.toFixed(2)}
+                  <span className="text-xs text-gray-500">
+                    ({offer.difficulty})
+                  </span>
+                </div>
+
+                {/* RIGHT */}
+                <div className="text-right">
+                  <div className="font-bold text-green-500">
+                    ${offer.payout.toFixed(2)}
+                  </div>
+                  <div className="text-xs text-gray-500">
+                    ⭐ {offer.rating} | {offer.completions} completions
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </section>
     </OpeningStyle>
   );
