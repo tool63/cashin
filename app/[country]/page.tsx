@@ -237,10 +237,14 @@ export default async function HomePage({
         <TestimonialSection data={testimonials} countryName={countryName} />
       </CircleBorder>
 
-      {/* ✅ FIXED FAQ (now same structure as others) */}
+      {/* ✅ FIXED FAQ */}
       {faqData.items.length > 0 && (
         <CircleBorder>
-          <FAQ data={faqData} countryName={countryName} />
+          <FAQ
+            title={faqData.title}
+            items={faqData.items}
+            countryName={countryName}
+          />
         </CircleBorder>
       )}
 
