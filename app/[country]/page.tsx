@@ -27,7 +27,8 @@ import TrustSection from "@/components/homepage/TrustSection";
 import TestimonialSection from "@/components/homepage/TestimonialSection";
 import FinalCTASection from "@/components/homepage/FinalCTASection";
 
-import FAQ from "@/components/animations/FAQ";
+import FAQSection from "@/components/homepage/FAQSection";
+
 import CircleBorder from "@/components/animations/CircleBorder";
 
 import { generateJsonLd } from "@/components/SEO/schema";
@@ -116,26 +117,7 @@ export default async function HomePage({
     type: "low",
   });
 
-  /* ================= FAQ ================= */
-
-  const faqTitle =
-    faq?.title?.replace(/\{country\}/g, countryName) ||
-    "Frequently Asked Questions";
-
-  const safeFaqItems = Array.isArray(faq?.items)
-    ? faq.items
-        .map((item: any) => {
-          const q = item?.q?.replace(/\{country\}/g, countryName)?.trim();
-          const a = item?.a?.replace(/\{country\}/g, countryName)?.trim();
-
-          if (!q || !a) return null;
-
-          return { q, a };
-        })
-        .filter(Boolean)
-    : [];
-
-  /* ================= OTHER DATA ================= */
+  /* ================= DATA ================= */
 
   const heroData = {
     headline: hero?.headline?.replace(/\{country\}/g, countryName),
@@ -179,6 +161,19 @@ export default async function HomePage({
   const offerCompletionData = {
     title: offerCompletion?.title?.replace(/\{country\}/g, countryName),
     description: offerCompletion?.description?.replace(/\{country\}/g, countryName),
+  };
+
+  /* ✅ FAQ DATA (same pattern as others) */
+  const faqData = {
+    title: faq?.title?.replace(/\{country\}/g, countryName),
+    items: Array.isArray(faq?.items)
+      ? faq.items
+          .map((item: any) => ({
+            q: item?.q?.replace(/\{country\}/g, countryName),
+            a: item?.a?.replace(/\{country\}/g, countryName),
+          }))
+          .filter((item: any) => item.q && item.a)
+      : [],
   };
 
   /* ================= RENDER ================= */
@@ -232,10 +227,7 @@ export default async function HomePage({
       </CircleBorder>
 
       <CircleBorder>
-        <LiveWithdrawals
-          data={withdrawalsData}
-          countryName={countryName}
-        />
+        <LiveWithdrawals data={withdrawalsData} countryName={countryName} />
       </CircleBorder>
 
       <CircleBorder>
@@ -250,16 +242,10 @@ export default async function HomePage({
         <TestimonialSection data={testimonials} countryName={countryName} />
       </CircleBorder>
 
-      {/* ✅ UPDATED FAQ SECTION (consistent with others) */}
-      {safeFaqItems.length > 0 && (
+      {/* ✅ FAQ NOW SAME AS OTHER SECTIONS */}
+      {faqData.items.length > 0 && (
         <CircleBorder>
-          <section className="w-full max-w-4xl mx-auto px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">
-              {faqTitle}
-            </h2>
-
-            <FAQ faqs={safeFaqItems} />
-          </section>
+          <FAQSection data={faqData} countryName={countryName} />
         </CircleBorder>
       )}
 
