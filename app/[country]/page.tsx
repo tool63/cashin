@@ -15,7 +15,8 @@ import type { SupportedLanguage } from "@/app/core/types";
 
 import HeroSection from "@/components/homepage/HeroSection";
 import FeaturesSection from "@/components/homepage/FeaturesSection";
-import HighPayingOffers from "@/components/homepage/HighPayingOffers"; // ✅ NEW
+import HighPayingOffers from "@/components/homepage/HighPayingOffers";
+import LiveEarnings from "@/components/homepage/LiveEarnings"; // ✅ NEW
 import FinalCTASection from "@/components/homepage/FinalCTASection";
 
 import FAQ from "@/components/animations/FAQ";
@@ -90,7 +91,8 @@ export default async function HomePage({
   const hero = await loadSectionTranslation(language, "herohome");
   const typing = await loadSectionTranslation(language, "typinghome");
   const features = await loadSectionTranslation(language, "featureshome");
-  const highOffers = await loadSectionTranslation(language, "highoffershome"); // ✅ NEW
+  const highOffers = await loadSectionTranslation(language, "highoffershome");
+  const liveEarnings = await loadSectionTranslation(language, "liveearningshome"); // ✅ NEW
   const faq = await loadSectionTranslation(language, "faqhome");
   const final = await loadSectionTranslation(language, "finalhome");
 
@@ -144,6 +146,15 @@ export default async function HomePage({
     title: highOffers?.title?.replace(/\{country\}/g, countryName),
     description: highOffers?.description?.replace(/\{country\}/g, countryName),
     categories: highOffers?.categories || [],
+  };
+
+  /* ================= LIVE EARNINGS ================= */
+
+  const liveData = {
+    title: liveEarnings?.title?.replace(/\{country\}/g, countryName),
+    description: liveEarnings?.description?.replace(/\{country\}/g, countryName),
+    live_label: liveEarnings?.live_label,
+    stats: liveEarnings?.stats || {},
   };
 
   /* ================= FAQ ================= */
@@ -206,6 +217,17 @@ export default async function HomePage({
       <div className="py-16 px-4">
         <CircleBorder>
           <HighPayingOffers data={offersData} />
+        </CircleBorder>
+      </div>
+
+      {/* LIVE EARNINGS ✅ */}
+      <div className="py-16 px-4">
+        <CircleBorder>
+          <LiveEarnings
+            data={liveData}
+            translations={liveEarnings}
+            countryName={countryName}
+          />
         </CircleBorder>
       </div>
 
