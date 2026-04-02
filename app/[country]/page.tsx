@@ -15,10 +15,11 @@ import type { SupportedLanguage } from "@/app/core/types";
 
 import HeroSection from "@/components/homepage/HeroSection";
 import FeaturesSection from "@/components/homepage/FeaturesSection";
+import TasksSection from "@/components/homepage/TasksSection"; // ✅ ADDED
 import HighPayingOffers from "@/components/homepage/HighPayingOffers";
 import LiveEarnings from "@/components/homepage/LiveEarnings";
 import StatsSection from "@/components/homepage/StatsSection";
-import TrustSection from "@/components/homepage/TrustSection"; // ✅ ADDED
+import TrustSection from "@/components/homepage/TrustSection";
 import TestimonialSection from "@/components/homepage/TestimonialSection";
 import FinalCTASection from "@/components/homepage/FinalCTASection";
 
@@ -29,14 +30,9 @@ import { generateJsonLd } from "@/components/SEO/schema";
 
 /* ================= HELPER ================= */
 
-async function loadSectionTranslation(
-  language: string,
-  section: string
-) {
+async function loadSectionTranslation(language: string, section: string) {
   try {
-    const file = await import(
-      `@/app/locales/${language}/${section}.json`
-    );
+    const file = await import(`@/app/locales/${language}/${section}.json`);
     return file.default;
   } catch {
     return {};
@@ -48,9 +44,7 @@ async function loadSectionTranslation(
 function getLanguage(country: CountryCode): SupportedLanguage {
   const cookieStore = cookies();
 
-  const override = cookieStore.get(
-    COOKIE_KEYS.USER_LANGUAGE_OVERRIDE
-  )?.value;
+  const override = cookieStore.get(COOKIE_KEYS.USER_LANGUAGE_OVERRIDE)?.value;
 
   if (override) {
     const lang = override.toLowerCase().split("-")[0];
@@ -94,10 +88,11 @@ export default async function HomePage({
   const hero = await loadSectionTranslation(language, "herohome");
   const typing = await loadSectionTranslation(language, "typinghome");
   const features = await loadSectionTranslation(language, "featureshome");
+  const tasks = await loadSectionTranslation(language, "taskshome"); // ✅ ADDED
   const highOffers = await loadSectionTranslation(language, "highoffershome");
   const liveEarnings = await loadSectionTranslation(language, "liveearningshome");
   const stats = await loadSectionTranslation(language, "statshome");
-  const trust = await loadSectionTranslation(language, "trusthome"); // ✅ NEW
+  const trust = await loadSectionTranslation(language, "trusthome");
   const testimonials = await loadSectionTranslation(language, "testimonialshome");
   const faq = await loadSectionTranslation(language, "faqhome");
   const final = await loadSectionTranslation(language, "finalhome");
@@ -144,6 +139,14 @@ export default async function HomePage({
       title: features?.multiple_payment_options?.title?.replace(/\{country\}/g, countryName),
       description: features?.multiple_payment_options?.description?.replace(/\{country\}/g, countryName),
     },
+  };
+
+  /* ================= TASKS ================= */
+
+  const tasksData = {
+    title: tasks?.title?.replace(/\{country\}/g, countryName),
+    cta: tasks?.cta?.replace(/\{country\}/g, countryName),
+    items: tasks?.items || [],
   };
 
   /* ================= HIGH OFFERS ================= */
@@ -249,6 +252,16 @@ export default async function HomePage({
         </CircleBorder>
       </div>
 
+      {/* TASKS ✅ NEW */}
+      <div className="py-16 px-4">
+        <CircleBorder>
+          <TasksSection
+            data={tasksData}
+            countryName={countryName}
+          />
+        </CircleBorder>
+      </div>
+
       {/* HIGH OFFERS */}
       <div className="py-16 px-4">
         <CircleBorder>
@@ -278,7 +291,7 @@ export default async function HomePage({
         </CircleBorder>
       </div>
 
-      {/* TRUST ✅ */}
+      {/* TRUST */}
       <div className="py-16 px-4">
         <CircleBorder>
           <TrustSection data={trustData} countryName={countryName} />
