@@ -7,7 +7,9 @@ import OpeningStyle from "@/components/animations/openingstyle";
 /* ===================== TYPES ===================== */
 
 interface Props {
-  data: any;
+  data?: any;
+  translations?: any;
+  countryName?: string;
 }
 
 interface Earning {
@@ -62,6 +64,19 @@ function generateEarning(id: number): Earning {
 
 /* ===================== HELPERS ===================== */
 
+function replaceCountry(text?: string, countryName?: string) {
+  if (!text) return "";
+  return text.replace(/\{country\}/g, countryName || "");
+}
+
+function getText(
+  dataValue?: string,
+  translationValue?: string,
+  fallback: string = ""
+) {
+  return dataValue || translationValue || fallback;
+}
+
 const formatTime = (timestamp: number) => {
   const diff = Math.floor((Date.now() - timestamp) / 1000);
   if (diff < 60) return `${diff}s ago`;
@@ -71,7 +86,11 @@ const formatTime = (timestamp: number) => {
 
 /* ===================== COMPONENT ===================== */
 
-export default function LiveEarnings({ data }: Props) {
+export default function LiveEarnings({
+  data = {},
+  translations = {},
+  countryName = "",
+}: Props) {
   const [earnings, setEarnings] = useState<Earning[]>(() =>
     Array.from({ length: 100 }, (_, i) => generateEarning(i + 1))
   );
@@ -92,7 +111,9 @@ export default function LiveEarnings({ data }: Props) {
         ...prev.slice(0, 99),
       ]);
 
-      const nextInterval = Math.floor(Math.random() * 50000) + 1000;
+      const nextInterval =
+        Math.floor(Math.random() * 50000) + 1000;
+
       setTimeout(addNewEarning, nextInterval);
     };
 
@@ -112,10 +133,12 @@ export default function LiveEarnings({ data }: Props) {
     return () => clearInterval(interval);
   }, []);
 
-  /* TOTAL EARNINGS */
+  /* TOTAL */
   const totalEarnings = earnings.reduce((sum, e) => {
     return sum + parseFloat(e.amount.replace("$", ""));
   }, 0);
+
+  /* ===================== RENDER ===================== */
 
   return (
     <OpeningStyle delay={0.15}>
@@ -131,32 +154,46 @@ export default function LiveEarnings({ data }: Props) {
 
             <h2 className="text-3xl md:text-4xl font-bold">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-green-500">
-                {data.title}
+                {replaceCountry(
+                  getText(data.title, translations.title, "Live Earnings"),
+                  countryName
+                )}
               </span>
             </h2>
           </div>
 
           {/* DESCRIPTION */}
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8 leading-relaxed">
-            {data.description}
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8">
+            {replaceCountry(
+              getText(
+                data.description,
+                translations.description,
+                ""
+              ),
+              countryName
+            )}
           </p>
 
           {/* TOGGLE */}
           <div className="flex justify-center mb-8">
             <label className="flex items-center cursor-pointer gap-2">
               <span className="text-gray-700 dark:text-gray-300 font-medium">
-                {data.live_label}
+                {getText(
+                  data.live_label,
+                  translations.live_label,
+                  "Live"
+                )}
               </span>
 
               <div
-                className={`w-12 h-6 flex items-center rounded-full p-1 transition-colors duration-300 ${
+                className={`w-12 h-6 flex items-center rounded-full p-1 ${
                   isLive ? "bg-emerald-400" : "bg-gray-400"
                 }`}
                 onClick={() => setIsLive(!isLive)}
               >
                 <div
-                  className={`bg-white w-4 h-4 rounded-full shadow-md transition-transform duration-300 ${
-                    isLive ? "translate-x-6" : "translate-x-0"
+                  className={`bg-white w-4 h-4 rounded-full ${
+                    isLive ? "translate-x-6" : ""
                   }`}
                 />
               </div>
@@ -164,22 +201,18 @@ export default function LiveEarnings({ data }: Props) {
           </div>
 
           {/* LIST */}
-          <div className="relative rounded-3xl border border-gray-200 dark:border-white/10 bg-gray-100 dark:bg-white/5 overflow-hidden">
-
+          <div className="rounded-3xl border overflow-hidden">
             <div className="h-[500px] overflow-y-auto">
               <ul className="space-y-4 p-6">
 
                 {earnings.map((e) => (
-                  <li
-                    key={e.id}
-                    className="grid grid-cols-4 items-center px-5 py-3 rounded-xl bg-white/80 dark:bg-[#111827]/80 border border-gray-200 dark:border-white/10 text-sm font-medium hover:shadow-lg transition"
-                  >
-                    <span className="truncate">{e.name}</span>
-                    <span className="text-xl text-center">{e.flag}</span>
-                    <span className="text-emerald-600 dark:text-emerald-400 font-bold text-center">
+                  <li key={e.id} className="grid grid-cols-4 p-3">
+                    <span>{e.name}</span>
+                    <span className="text-center">{e.flag}</span>
+                    <span className="text-center text-green-500 font-bold">
                       {e.amount}
                     </span>
-                    <span className="text-gray-500 text-center">
+                    <span className="text-center text-gray-500">
                       {formatTime(e.joinedAt)}
                     </span>
                   </li>
@@ -187,27 +220,35 @@ export default function LiveEarnings({ data }: Props) {
 
               </ul>
             </div>
-
-            {/* FADE */}
-            <div className="pointer-events-none absolute bottom-0 w-full h-24 bg-gradient-to-t from-gray-100 dark:from-[#0b0f19] to-transparent" />
           </div>
 
           {/* STATS */}
-          <div className="mt-8 flex flex-wrap justify-center gap-6 text-sm text-gray-600 dark:text-gray-400">
+          <div className="mt-8 flex flex-wrap justify-center gap-6 text-sm">
 
-            <div className="flex items-center gap-2">
-              <span className="text-emerald-500">●</span>
-              {data.stats.active}
+            <div>
+              {getText(
+                data?.stats?.active,
+                translations?.stats?.active,
+                "Active Users"
+              )}
             </div>
 
-            <div className="flex items-center gap-2">
-              <span className="text-emerald-500">●</span>
-              {data.stats.realtime}
+            <div>
+              {getText(
+                data?.stats?.realtime,
+                translations?.stats?.realtime,
+                "Real-time Updates"
+              )}
             </div>
 
-            <div className="flex items-center gap-2">
-              <span className="text-emerald-500">●</span>
-              ${totalEarnings.toFixed(0)}+ {data.stats.total}
+            <div>
+              ${totalEarnings.toFixed(0)}+
+              {" "}
+              {getText(
+                data?.stats?.total,
+                translations?.stats?.total,
+                "Earned Today"
+              )}
             </div>
 
           </div>
