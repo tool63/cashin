@@ -1,0 +1,12 @@
+{
+  "title": "Live Earnings in {country}",
+  "description": "See how users are earning money in real-time.",
+
+  "live_label": "Live",
+
+  "stats": {
+    "active": "Active Users",
+    "realtime": "Real-time Updates",
+    "total": "Earned Today"
+  }
+}
