@@ -1,0 +1,15 @@
+{
+  "title": "Live Withdrawals in {country}",
+  "description": "Real users are withdrawing money right now in {country}",
+
+  "stats": {
+    "withdrawals": "Total Withdrawals",
+    "countries": "Active Countries",
+    "total": "Total Paid"
+  },
+
+  "recent": {
+    "title": "Recent Withdrawals",
+    "empty": "No withdrawals yet"
+  }
+}
