@@ -1,0 +1,10 @@
+{
+  "title": "Users Are Joining Live",
+  "description": "People from around the world are joining the platform in real-time.",
+  "live_label": "Live",
+  "stats": {
+    "active": "Active Users",
+    "countries": "Countries",
+    "realtime": "Real-time"
+  }
+}
