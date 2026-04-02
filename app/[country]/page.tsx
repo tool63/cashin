@@ -250,16 +250,16 @@ export default async function HomePage({
         <TestimonialSection data={testimonials} countryName={countryName} />
       </CircleBorder>
 
-      {/* ✅ FAQ SECTION WITH TITLE */}
+      {/* ✅ UPDATED FAQ SECTION (consistent with others) */}
       {safeFaqItems.length > 0 && (
         <CircleBorder>
-          <div className="w-full max-w-4xl mx-auto text-center">
+          <section className="w-full max-w-4xl mx-auto px-4 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-8">
               {faqTitle}
             </h2>
 
             <FAQ faqs={safeFaqItems} />
-          </div>
+          </section>
         </CircleBorder>
       )}
 
