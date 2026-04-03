@@ -1,0 +1,108 @@
+app/locales/en/howitworks.json
+
+{
+  "seo": {
+    "title": "How It Works - Start Earning Money Online",
+    "description": "Learn how to earn real money online with our simple 4-step process. Complete tasks, surveys, offers and withdraw your earnings instantly."
+  },
+  "hero": {
+    "title": "How {country} Works",
+    "subtitle": "Start earning real money online in 4 simple steps"
+  },
+  "steps": [
+    {
+      "icon": "📝",
+      "title": "Create Your Free Account",
+      "description": "Sign up in less than 30 seconds with your email address. No credit card required, completely free to join."
+    },
+    {
+      "icon": "🎯",
+      "title": "Choose Your Earning Method",
+      "description": "Select from multiple ways to earn: complete tasks, take surveys, try offers, watch videos, or refer friends."
+    },
+    {
+      "icon": "💰",
+      "title": "Complete Tasks & Earn",
+      "description": "Start completing available tasks in your {country}. Each task shows exactly how much you'll earn before you start."
+    },
+    {
+      "icon": "💸",
+      "title": "Withdraw Your Earnings",
+      "title": "Withdraw Your Earnings Instantly",
+      "description": "Once you reach the minimum withdrawal amount, cash out via PayPal, bank transfer, gift cards, or mobile money."
+    }
+  ],
+  "video": {
+    "url": "https://www.youtube.com/embed/YOUR_VIDEO_ID",
+    "title": "Watch How It Works",
+    "description": "See exactly how users in {country} are earning real money every day"
+  },
+  "methodsTitle": "Multiple Ways to Earn in {country}",
+  "methodsSubtitle": "Choose the earning method that fits your lifestyle",
+  "earningMethods": [
+    {
+      "icon": "✅",
+      "title": "Complete Simple Tasks",
+      "description": "Test apps, review products, data entry, and other micro-tasks"
+    },
+    {
+      "icon": "📊",
+      "title": "Take Paid Surveys",
+      "description": "Share your opinion and earn money for each survey completed"
+    },
+    {
+      "icon": "🎁",
+      "title": "Try Special Offers",
+      "description": "Get paid to try new products, services, and free trials"
+    },
+    {
+      "icon": "👥",
+      "title": "Refer Friends",
+      "description": "Earn commission when friends join and complete tasks"
+    },
+    {
+      "icon": "📹",
+      "title": "Watch Videos",
+      "description": "Get paid to watch short videos and ads"
+    },
+    {
+      "icon": "🏆",
+      "title": "Complete Challenges",
+      "description": "Participate in daily and weekly challenges for bonus rewards"
+    }
+  ],
+  "faq": {
+    "title": "Common Questions About Earning in {country}",
+    "items": [
+      {
+        "question": "Is this really free to join?",
+        "answer": "Yes! Creating an account is completely free. There are no hidden fees or charges to start earning money in {country}."
+      },
+      {
+        "question": "How much can I earn in {country}?",
+        "answer": "Earnings vary based on the tasks you complete. Many users earn $100-$500 monthly by spending 1-2 hours daily. Top earners make $1000+ per month."
+      },
+      {
+        "question": "How do I get paid in {country}?",
+        "answer": "We offer multiple payment methods including PayPal, bank transfer, gift cards (Amazon, Google Play, etc.), and mobile money options available in {country}."
+      },
+      {
+        "question": "What's the minimum withdrawal amount?",
+        "answer": "The minimum withdrawal amount is just $10 for most payment methods. Some methods may have different minimums."
+      },
+      {
+        "question": "How long does it take to get paid?",
+        "answer": "Withdrawals are processed instantly for PayPal and mobile money. Bank transfers take 1-3 business days."
+      },
+      {
+        "question": "Is this available everywhere in {country}?",
+        "answer": "Yes! Our platform works across all regions of {country}. As long as you have an internet connection, you can earn money."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Ready to Start Earning in {country}?",
+    "subtitle": "Join thousands of happy users who are already earning real money online",
+    "buttonText": "Create Free Account Now"
+  }
+}
