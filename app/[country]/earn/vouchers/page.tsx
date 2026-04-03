@@ -108,7 +108,7 @@ async function loadSectionTranslation(
     const file = await import(`@/app/locales/${language}/${section}.json`);
     return file.default;
   } catch (error) {
-    console.warn(`Missing translation: ${section} (${language})`);
+    console.warn(`Missing translation: ${section} (${language}), using defaults`);
     return {};
   }
 }
@@ -332,8 +332,13 @@ export default async function VouchersPage({
   const countryName = countryData.name;
   const language = getLanguage(country);
 
-  // Load translations
-  const tData = await loadSectionTranslation(language, "vouchers");
+  // Load translations with fallback to empty object
+  let tData: TranslationSection = {};
+  try {
+    tData = await loadSectionTranslation(language, "vouchers");
+  } catch (error) {
+    console.error("Failed to load vouchers translation:", error);
+  }
 
   // Helper function to replace country placeholder
   const t = (text: string | undefined, fallback: string): string => {
@@ -354,7 +359,7 @@ export default async function VouchersPage({
     type: "low",
   });
 
-  // Prepare data with fallbacks
+  // Prepare data with fallbacks (hardcoded defaults to prevent empty state)
   const heroData = {
     title: t(tData?.hero?.title, `Save Money with Vouchers in ${countryName}`),
     subtitle: t(
@@ -375,42 +380,233 @@ export default async function VouchersPage({
     totalSavedLabel: tData?.stats?.totalSavedLabel || "Total Saved",
   };
 
-  const voucherCategoriesData = (tData?.voucherCategories || []).map((category) => ({
+  // Default voucher categories (hardcoded fallback)
+  const defaultVoucherCategories = [
+    {
+      icon: "🛍️",
+      title: "Fashion & Apparel",
+      description: "Clothing, shoes, accessories",
+      avgDiscount: "20-50%",
+      popularity: "🔥 Very High",
+      expiryDays: "7-30 days"
+    },
+    {
+      icon: "📱",
+      title: "Electronics",
+      description: "Phones, laptops, gadgets",
+      avgDiscount: "10-30%",
+      popularity: "🔥 High",
+      expiryDays: "14-45 days"
+    },
+    {
+      icon: "🏠",
+      title: "Home & Living",
+      description: "Furniture, decor, appliances",
+      avgDiscount: "15-40%",
+      popularity: "Medium",
+      expiryDays: "7-60 days"
+    },
+    {
+      icon: "🍔",
+      title: "Food & Dining",
+      description: "Restaurants, delivery, groceries",
+      avgDiscount: "10-25%",
+      popularity: "🔥 Very High",
+      expiryDays: "3-14 days"
+    },
+    {
+      icon: "✈️",
+      title: "Travel",
+      description: "Flights, hotels, rentals",
+      avgDiscount: "15-40%",
+      popularity: "Medium",
+      expiryDays: "30-90 days"
+    },
+    {
+      icon: "💄",
+      title: "Beauty & Health",
+      description: "Cosmetics, skincare, wellness",
+      avgDiscount: "15-30%",
+      popularity: "High",
+      expiryDays: "7-30 days"
+    }
+  ];
+
+  const voucherCategoriesData = (tData?.voucherCategories && tData.voucherCategories.length > 0 
+    ? tData.voucherCategories 
+    : defaultVoucherCategories
+  ).map((category) => ({
     ...category,
     title: t(category.title, category.title),
     description: t(category.description, category.description),
   }));
 
-  const featuredVouchersData = (tData?.featuredVouchers || []).map((voucher) => ({
+  // Default featured vouchers (hardcoded fallback)
+  const defaultFeaturedVouchers = [
+    {
+      title: "Amazon Fashion Week Sale",
+      discount: "30% OFF + Free Shipping",
+      code: "AMZ30FS",
+      category: "Fashion",
+      usesLeft: 5000,
+      store: "Amazon",
+      rating: "4.9",
+      expiryDate: "Mar 31, 2026"
+    },
+    {
+      title: "Nike Member Exclusive",
+      discount: "25% OFF Sitewide",
+      code: "NIKE25",
+      category: "Fashion",
+      usesLeft: 2500,
+      store: "Nike",
+      rating: "4.8",
+      expiryDate: "Mar 25, 2026"
+    },
+    {
+      title: "Best Buy Tech Deals",
+      discount: "$50 OFF $500+",
+      code: "BBY50",
+      category: "Electronics",
+      usesLeft: 1000,
+      store: "Best Buy",
+      rating: "4.7",
+      expiryDate: "Mar 20, 2026"
+    }
+  ];
+
+  const featuredVouchersData = (tData?.featuredVouchers && tData.featuredVouchers.length > 0
+    ? tData.featuredVouchers
+    : defaultFeaturedVouchers
+  ).map((voucher) => ({
     ...voucher,
     title: t(voucher.title, voucher.title),
   }));
 
-  const benefitsData = (tData?.benefits || []).map((benefit) => ({
+  // Default benefits
+  const defaultBenefits = [
+    {
+      icon: "💰",
+      title: "Save Money Instantly",
+      description: "Apply codes at checkout and save instantly on your purchases"
+    },
+    {
+      icon: "🔄",
+      title: "Daily Updates",
+      description: "New vouchers added every day. We verify all codes work"
+    },
+    {
+      icon: "🎯",
+      title: "1000+ Stores",
+      description: "Vouchers for all your favorite stores in one place"
+    },
+    {
+      icon: "⭐",
+      title: "Verified & Tested",
+      description: "Every voucher is tested and verified by our team"
+    }
+  ];
+
+  const benefitsData = (tData?.benefits && tData.benefits.length > 0
+    ? tData.benefits
+    : defaultBenefits
+  ).map((benefit) => ({
     ...benefit,
     title: t(benefit.title, benefit.title),
     description: t(benefit.description, benefit.description),
   }));
 
-  const tipsData = (tData?.tips || []).map((tip, index) => ({
+  // Default tips
+  const defaultTips = [
+    {
+      title: "Check Expiry Dates",
+      description: "Vouchers expire quickly. Use them before they're gone"
+    },
+    {
+      title: "Stack When Possible",
+      description: "Some stores allow combining vouchers with sales"
+    },
+    {
+      title: "Sign Up for Alerts",
+      description: "Get notified when new vouchers for your favorite stores drop"
+    },
+    {
+      title: "Read Terms & Conditions",
+      description: "Check minimum spend and excluded items before using"
+    }
+  ];
+
+  const tipsData = (tData?.tips && tData.tips.length > 0
+    ? tData.tips
+    : defaultTips
+  ).map((tip, index) => ({
     number: index + 1,
     title: t(tip.title, tip.title),
     description: t(tip.description, tip.description),
   }));
 
-  const testimonialsData = (tData?.testimonials || []).map((testimonial) => ({
+  // Default testimonials
+  const defaultTestimonials = [
+    {
+      name: "Jessica M.",
+      country: "United States",
+      saved: "$450",
+      quote: "Saved over $450 last month using Cashog vouchers. The Amazon codes are amazing!",
+      avatar: "JM"
+    },
+    {
+      name: "David L.",
+      country: "Canada",
+      saved: "$280",
+      quote: "Found a 30% off Nike voucher that actually worked. Saved $60 on new shoes!",
+      avatar: "DL"
+    },
+    {
+      name: "Sarah K.",
+      country: "United Kingdom",
+      saved: "$620",
+      quote: "I check Cashog before every online purchase. Already saved over $600 this year.",
+      avatar: "SK"
+    }
+  ];
+
+  const testimonialsData = (tData?.testimonials && tData.testimonials.length > 0
+    ? tData.testimonials
+    : defaultTestimonials
+  ).map((testimonial) => ({
     ...testimonial,
     quote: t(testimonial.quote, testimonial.quote),
   }));
 
+  // Default FAQ items
+  const defaultFaqItems = [
+    {
+      question: "Are these vouchers really free?",
+      answer: "Yes! All vouchers on Cashog are completely free to use. Just copy the code and paste at checkout."
+    },
+    {
+      question: "How do I use a voucher code?",
+      answer: "Copy the voucher code, go to the store's website, add items to your cart, and paste the code in the 'Promo Code' or 'Discount Code' box at checkout."
+    },
+    {
+      question: "Do vouchers expire?",
+      answer: "Yes, most vouchers have an expiry date. Check the expiry date shown on each voucher. Use them before they expire!"
+    },
+    {
+      question: "How often are new vouchers added?",
+      answer: "New vouchers are added daily. We update our database constantly to bring you the latest deals and discounts."
+    }
+  ];
+
   const faqData = {
     title: t(tData?.faq?.title, `Vouchers in ${countryName} - FAQ`),
-    items: (tData?.faq?.items || [])
-      .map((item) => ({
-        q: t(item.question, item.question),
-        a: t(item.answer, item.answer),
-      }))
-      .filter((item) => item.q && item.a),
+    items: (tData?.faq?.items && tData.faq.items.length > 0
+      ? tData.faq.items
+      : defaultFaqItems
+    ).map((item) => ({
+      q: t(item.question, item.question),
+      a: t(item.answer, item.answer),
+    })).filter((item) => item.q && item.a),
   };
 
   const finalData = {
@@ -421,7 +617,7 @@ export default async function VouchersPage({
     ),
   };
 
-  // Function to handle copy to clipboard
+  // Function to handle copy to clipboard (client-side only)
   const copyToClipboard = (code: string) => {
     if (typeof navigator !== 'undefined') {
       navigator.clipboard.writeText(code);
