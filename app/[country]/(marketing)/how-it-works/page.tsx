@@ -1,3 +1,5 @@
+app/[country]/(marketing)/how-it-works/page.tsx
+
 import { cookies } from "next/headers";
 import Link from "next/link";
 
@@ -16,6 +18,7 @@ import type { SupportedLanguage } from "@/app/core/types";
 
 import CircleBorder from "@/components/animations/CircleBorder";
 import { generateJsonLd } from "@/components/SEO/schema";
+import PrimaryCTA from "@/components/cta/PrimaryCTA";
 
 /* ================= HELPER ================= */
 
@@ -153,12 +156,11 @@ function CTABanner({ title, subtitle, ctaText, countryName }: { title: string; s
     <div className="bg-gradient-to-r from-primary-600 to-primary-800 rounded-2xl p-8 md:p-12 text-center text-white">
       <h3 className="text-2xl md:text-3xl font-bold mb-4">{title}</h3>
       <p className="text-primary-100 mb-6 max-w-2xl mx-auto">{subtitle}</p>
-      <Link
-        href={`/${countryName.toLowerCase()}/signup`}
-        className="inline-block bg-white text-primary-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors shadow-lg"
-      >
-        {ctaText}
-      </Link>
+      <PrimaryCTA 
+        href="/signup" 
+        translationKey="start_earning_now"
+        observer={false}
+      />
     </div>
   );
 }
@@ -240,15 +242,20 @@ export default async function HowItWorksPage({
         />
       )}
 
-      {/* Hero Section */}
+      {/* Hero Section with PrimaryCTA */}
       <section className="w-full bg-gradient-to-br from-primary-50 via-white to-secondary-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 py-16 md:py-24">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-4 md:mb-6">
             {heroData.title}
           </h1>
-          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8 md:mb-10">
             {heroData.subtitle}
           </p>
+          <PrimaryCTA 
+            href="/signup" 
+            translationKey="start_earning_now"
+            observer={false}
+          />
         </div>
       </section>
 
@@ -337,7 +344,7 @@ export default async function HowItWorksPage({
         </section>
       )}
 
-      {/* CTA Banner */}
+      {/* CTA Banner with PrimaryCTA */}
       {ctaData.title && (
         <section className="w-full py-16 md:py-24 bg-white dark:bg-gray-900">
           <div className="container mx-auto px-4">
