@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+import { Metadata } from "next";
 
 import {
   getCountry,
@@ -31,6 +32,7 @@ import FAQ from "@/components/animations/FAQ";
 import CircleBorder from "@/components/animations/CircleBorder";
 
 import { generateJsonLd } from "@/components/SEO/schema";
+import { generateMetadata as generateSEOMetadata } from "@/lib/seo";
 
 /* ================= HELPER ================= */
 
@@ -68,14 +70,42 @@ function getLanguage(country: CountryCode): SupportedLanguage {
   return getCountry(country).defaultLanguage as SupportedLanguage;
 }
 
+/* ================= METADATA ================= */
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ country?: string }> | { country?: string };
+}): Promise<Metadata> {
+  const resolvedParams = await params;
+  const countryParam = resolvedParams?.country?.toLowerCase();
+
+  if (!countryParam || !isValidCountryCode(countryParam)) {
+    return {
+      title: "Country Not Found | Cashog",
+      robots: { index: false },
+    };
+  }
+
+  const country = countryParam as CountryCode;
+  
+  // Use your SEO utility for consistent metadata generation
+  return generateSEOMetadata({
+    path: `/${country}`,
+    country: country,
+    language: getLanguage(country),
+  });
+}
+
 /* ================= PAGE ================= */
 
 export default async function HomePage({
   params,
 }: {
-  params: { country?: string };
+  params: Promise<{ country?: string }> | { country?: string };
 }) {
-  const countryParam = params?.country?.toLowerCase();
+  const resolvedParams = await params;
+  const countryParam = resolvedParams?.country?.toLowerCase();
 
   if (!countryParam || !isValidCountryCode(countryParam)) {
     return null;
