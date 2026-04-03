@@ -28,7 +28,7 @@ export default function ModalRoot({
   showCloseButton = true,
   closeOnOutsideClick = true,
   closeOnEsc = true,
-  showCancelButton = false,
+  showCancelButton = true,
   cancelText = "Cancel",
   confirmText = "Confirm",
   onConfirm,
