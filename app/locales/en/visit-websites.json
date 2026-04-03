@@ -1,0 +1,220 @@
+{
+  "seo": {
+    "title": "Visit Websites & Get Paid in {country} - Earn $0.05-$2 Per Visit | Cashog",
+    "description": "Join 65,000+ members earning money in {country} by visiting websites. Browse pages, stay for 30 seconds, and earn PayPal cash instantly. Free to join today!"
+  },
+  "hero": {
+    "title": "Get Paid to Visit Websites in {country}",
+    "subtitle": "Join 65,000+ members earning money in {country} by visiting websites. Browse pages, stay for 30 seconds, and earn cash instantly via PayPal! Takes just seconds per website."
+  },
+  "statsTitle": "Website Visit Statistics",
+  "stats": {
+    "websitesVisited": "30M+",
+    "websitesVisitedLabel": "Websites Visited",
+    "avgPayout": "$0.10",
+    "avgPayoutLabel": "Average Per Visit",
+    "activeUsers": "65K+",
+    "activeUsersLabel": "Active Members",
+    "totalPaid": "$3M+",
+    "totalPaidLabel": "Total Paid"
+  },
+  "categoriesTitle": "Website Categories",
+  "categoriesSubtitle": "Earn by visiting these types of websites",
+  "websiteCategories": [
+    {
+      "icon": "🛍️",
+      "title": "E-commerce & Shopping",
+      "description": "Visit online stores, browse products, and help improve shopping experiences",
+      "avgReward": "$0.05-$0.15",
+      "timeRequired": "30-45 seconds",
+      "frequency": "Daily (10-20 sites)"
+    },
+    {
+      "icon": "📰",
+      "title": "News & Media",
+      "description": "Read articles, watch videos, and engage with content from major publishers",
+      "avgReward": "$0.08-$0.20",
+      "timeRequired": "45-60 seconds",
+      "frequency": "Daily (15-25 sites)"
+    },
+    {
+      "icon": "💻",
+      "title": "Tech & Software",
+      "description": "Test software demos, review tech products, and explore new tools",
+      "avgReward": "$0.15-$0.35",
+      "timeRequired": "60-90 seconds",
+      "frequency": "Weekly (5-10 sites)"
+    },
+    {
+      "icon": "🏦",
+      "title": "Finance & Banking",
+      "description": "Review financial services, compare rates, and explore banking options",
+      "avgReward": "$0.20-$0.50",
+      "timeRequired": "60-120 seconds",
+      "frequency": "Weekly (3-7 sites)"
+    },
+    {
+      "icon": "🎮",
+      "title": "Gaming & Entertainment",
+      "description": "Try game demos, watch trailers, and explore entertainment content",
+      "avgReward": "$0.10-$0.25",
+      "timeRequired": "45-75 seconds",
+      "frequency": "Daily (8-12 sites)"
+    },
+    {
+      "icon": "🏥",
+      "title": "Health & Wellness",
+      "description": "Explore health content, wellness products, and fitness programs",
+      "avgReward": "$0.12-$0.30",
+      "timeRequired": "50-70 seconds",
+      "frequency": "Daily (10-15 sites)"
+    }
+  ],
+  "featuredWebsitesTitle": "High-Paying Websites Available Now",
+  "featuredWebsitesSubtitle": "Limited spots - visit these websites today",
+  "featuredWebsites": [
+    {
+      "title": "Amazon Product Testing",
+      "reward": "$0.35",
+      "timeEstimate": "45 seconds",
+      "category": "E-commerce",
+      "spotsLeft": 1247,
+      "company": "Amazon",
+      "rating": "4.8"
+    },
+    {
+      "title": "Tech Demo Review",
+      "reward": "$0.50",
+      "timeEstimate": "60 seconds",
+      "category": "Technology",
+      "spotsLeft": 843,
+      "company": "Microsoft",
+      "rating": "4.9"
+    },
+    {
+      "title": "News Article Engagement",
+      "reward": "$0.15",
+      "timeEstimate": "30 seconds",
+      "category": "Media",
+      "spotsLeft": 2561,
+      "company": "CNN",
+      "rating": "4.6"
+    },
+    {
+      "title": "Banking Rate Comparison",
+      "reward": "$0.45",
+      "timeEstimate": "75 seconds",
+      "category": "Finance",
+      "spotsLeft": 562,
+      "company": "Chase",
+      "rating": "4.7"
+    }
+  ],
+  "benefitsTitle": "Why Get Paid to Visit Websites",
+  "benefits": [
+    {
+      "icon": "⚡",
+      "title": "Instant Earnings",
+      "description": "Get paid immediately after completing each website visit. No waiting periods or minimum thresholds."
+    },
+    {
+      "icon": "💰",
+      "title": "Multiple Payout Options",
+      "description": "Cash out via PayPal, Venmo, direct bank transfer, or gift cards from top retailers."
+    },
+    {
+      "icon": "🕐",
+      "title": "Flexible Schedule",
+      "description": "Work whenever you want. Visit 5 websites or 50 websites per day - it's completely up to you."
+    },
+    {
+      "icon": "🌍",
+      "title": "Global Opportunities",
+      "description": "Access website visits from companies worldwide. Available in over 50 countries."
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Website Visit Earnings",
+  "tips": [
+    {
+      "title": "Stay Active Daily",
+      "description": "Log in every day to access the highest-paying website visits before they run out."
+    },
+    {
+      "title": "Complete Your Profile",
+      "description": "Fully complete your profile to unlock premium website visits with higher payouts."
+    },
+    {
+      "title": "Refer Friends",
+      "description": "Earn 10% of your referrals' earnings for life when they join through your link."
+    },
+    {
+      "title": "Use Multiple Devices",
+      "description": "Access website visits from desktop, tablet, and mobile to maximize opportunities."
+    }
+  ],
+  "testimonialsTitle": "What Our Members Say",
+  "testimonials": [
+    {
+      "name": "Sarah Johnson",
+      "country": "United States",
+      "earnings": "$847",
+      "quote": "I make an extra $300-400 monthly just by visiting websites while watching TV at night. It's so easy and actually works!",
+      "avatar": "SJ"
+    },
+    {
+      "name": "Michael Chen",
+      "country": "Canada",
+      "earnings": "$1,247",
+      "quote": "Best side hustle I've found. Takes 30 minutes daily and pays reliably through PayPal every week.",
+      "avatar": "MC"
+    },
+    {
+      "name": "Emma Williams",
+      "country": "United Kingdom",
+      "earnings": "$623",
+      "quote": "Perfect for students like me. I visit websites between classes and earn my coffee money daily.",
+      "avatar": "EW"
+    }
+  ],
+  "faq": {
+    "title": "Visit Websites & Get Paid in {country} - FAQ",
+    "items": [
+      {
+        "question": "How do I get paid to visit websites in {country}?",
+        "answer": "Simply sign up for free, browse our list of available websites, click on any offer, visit the website for the required time (usually 30-60 seconds), and you'll automatically earn cash. Payments are processed instantly to your PayPal account or other payment methods."
+      },
+      {
+        "question": "Is getting paid to visit websites legitimate?",
+        "answer": "Yes, absolutely! Companies pay real money for website visits because they need real user feedback, traffic data, and engagement metrics. Cashog has paid over $3 million to 65,000+ members worldwide."
+      },
+      {
+        "question": "How much can I earn visiting websites in {country}?",
+        "answer": "Most members earn $100-500 monthly by spending 30-60 minutes per day. Each website visit pays $0.05-$2.00 depending on the task complexity. High-paying opportunities ($0.50+) are available daily."
+      },
+      {
+        "question": "How do I receive my payments?",
+        "answer": "You can withdraw your earnings via PayPal, Venmo, direct bank transfer (ACH), or choose from over 50 gift card options including Amazon, Walmart, and Starbucks. Payments are processed instantly with no minimum threshold."
+      },
+      {
+        "question": "Is Cashog free to join?",
+        "answer": "Yes! Signing up is completely free. There are no membership fees, subscription costs, or hidden charges. You only earn money by visiting websites."
+      },
+      {
+        "question": "Can I do this on my phone?",
+        "answer": "Yes! Our platform works perfectly on smartphones, tablets, and computers. You can earn money visiting websites from anywhere with an internet connection."
+      },
+      {
+        "question": "How much time do I need to invest?",
+        "answer": "It's completely flexible. Some members earn $10-20 daily with just 15-20 minutes of website visits. You choose how many websites to visit each day based on your schedule."
+      },
+      {
+        "question": "Are there enough website visits available in {country}?",
+        "answer": "Yes! We have partnerships with thousands of companies worldwide. New website visits are added daily, with 50-100+ opportunities available at any time for {country} members."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Start Earning in {country}?",
+    "subtitle": "Join 65,000+ members already getting paid in {country}. Sign up for free and start visiting paid websites today!"
+  }
+}
