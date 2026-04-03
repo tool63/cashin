@@ -5,7 +5,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Eye,
   EyeOff,
@@ -82,6 +82,7 @@ export default function LoginPage() {
   const country = params?.country as string || "us";
   
   const [showPassword, setShowPassword] = useState(false);
+  const [formVisible, setFormVisible] = useState(false); // Added: controls form visibility
   const [mounted, setMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -116,6 +117,10 @@ export default function LoginPage() {
     if (errors[name as keyof typeof errors]) {
       setErrors(prev => ({ ...prev, [name]: undefined }));
     }
+  };
+
+  const handleContinueWithEmail = () => {
+    setFormVisible(true);
   };
 
   const validateForm = () => {
@@ -314,115 +319,151 @@ export default function LoginPage() {
                   <div className="flex-grow h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent"></div>
                 </div>
 
-                {/* Login Form */}
-                <form onSubmit={handleLogin}>
-                  {/* Email Field */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="relative mb-4"
-                  >
-                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      placeholder="Email Address"
-                      className={`w-full p-4 pl-12 rounded-xl bg-[#1A1F2E] border-2 ${
-                        errors.email ? "border-red-500" : "border-[#2A2F3E]"
-                      } text-white placeholder-gray-400 focus:border-green-500 focus:outline-none transition-colors duration-200`}
-                    />
-                    {errors.email && (
-                      <p className="mt-1 text-xs text-red-500">{errors.email}</p>
-                    )}
-                  </motion.div>
-
-                  {/* Password Field */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: 0.1 }}
-                    className="relative mb-2"
-                  >
-                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      name="password"
-                      value={formData.password}
-                      onChange={handleInputChange}
-                      placeholder="Password"
-                      className={`w-full p-4 pl-12 pr-12 rounded-xl bg-[#1A1F2E] border-2 ${
-                        errors.password ? "border-red-500" : "border-[#2A2F3E]"
-                      } text-white placeholder-gray-400 focus:border-green-500 focus:outline-none transition-colors duration-200`}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-green-500 transition-colors duration-200"
-                    >
-                      {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
-                    </button>
-                  </motion.div>
-
-                  {/* Forgot Password & Remember Me */}
-                  <div className="flex items-center justify-between mb-6">
-                    <label className="flex items-center gap-2 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={rememberMe}
-                        onChange={(e) => setRememberMe(e.target.checked)}
-                        className="w-4 h-4 rounded border-[#2A2F3E] bg-[#1A1F2E] text-green-500 focus:ring-green-500 focus:ring-offset-0"
-                      />
-                      <span className="text-sm text-gray-400">Remember me</span>
-                    </label>
-                    <button
-                      type="button"
-                      onClick={handleForgotPassword}
-                      className="text-sm text-green-500 hover:text-green-400 hover:underline transition-colors"
-                    >
-                      Forgot password?
-                    </button>
-                  </div>
-
-                  {/* General Error */}
-                  {errors.general && (
-                    <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg">
-                      <p className="text-sm text-red-400 text-center">{errors.general}</p>
-                    </div>
-                  )}
-
-                  {/* Login Button */}
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3, delay: 0.2 }}
-                  >
-                    <button
-                      type="submit"
+                {/* Continue with Email Button - Only show when form is NOT visible */}
+                {!formVisible && (
+                  <>
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={handleContinueWithEmail}
                       disabled={isLoading}
-                      className="group relative w-full rounded-xl px-6 py-4 flex items-center justify-center gap-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 shadow-lg shadow-green-500/20 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                      className="w-full py-3.5 rounded-xl bg-[#1A1F2E] border-2 border-[#2A2F3E] text-white font-medium flex items-center justify-center gap-2 hover:border-green-500 hover:bg-[#2A2F3E] hover:shadow-lg hover:shadow-green-500/10 transition-all duration-300 group disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      {isLoading ? (
-                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                      ) : (
-                        <>
-                          <span className="text-lg md:text-xl font-bold text-white">Log In</span>
-                          <ArrowRight className="text-white group-hover:translate-x-1 transition-transform duration-300" />
-                        </>
-                      )}
-                    </button>
-                  </motion.div>
-                </form>
+                      <Mail className="w-4 h-4 text-gray-400 group-hover:text-green-500" />
+                      <span>Continue with Email</span>
+                    </motion.button>
 
-                {/* Sign Up Link - Updated with country parameter */}
-                <p className="mt-6 text-center text-sm text-gray-400">
-                  Don't have an account?{" "}
-                  <Link href={`/${country}/signup`} className="text-green-500 hover:underline font-medium">
-                    Sign up
-                  </Link>
-                </p>
+                    {/* Sign Up Link - Below Continue with Email button */}
+                    <p className="mt-6 text-center text-sm text-gray-400">
+                      Don't have an account?{" "}
+                      <Link href={`/${country}/signup`} className="text-green-500 hover:underline font-medium">
+                        Sign up
+                      </Link>
+                    </p>
+                  </>
+                )}
+
+                {/* Email Login Form - Only show when formVisible is true */}
+                <AnimatePresence>
+                  {formVisible && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <form onSubmit={handleLogin}>
+                        {/* Email Field */}
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="relative mb-4"
+                        >
+                          <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                          <input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleInputChange}
+                            placeholder="Email Address"
+                            className={`w-full p-4 pl-12 rounded-xl bg-[#1A1F2E] border-2 ${
+                              errors.email ? "border-red-500" : "border-[#2A2F3E]"
+                            } text-white placeholder-gray-400 focus:border-green-500 focus:outline-none transition-colors duration-200`}
+                          />
+                          {errors.email && (
+                            <p className="mt-1 text-xs text-red-500">{errors.email}</p>
+                          )}
+                        </motion.div>
+
+                        {/* Password Field */}
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.3, delay: 0.1 }}
+                          className="relative mb-2"
+                        >
+                          <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                          <input
+                            type={showPassword ? "text" : "password"}
+                            name="password"
+                            value={formData.password}
+                            onChange={handleInputChange}
+                            placeholder="Password"
+                            className={`w-full p-4 pl-12 pr-12 rounded-xl bg-[#1A1F2E] border-2 ${
+                              errors.password ? "border-red-500" : "border-[#2A2F3E]"
+                            } text-white placeholder-gray-400 focus:border-green-500 focus:outline-none transition-colors duration-200`}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)}
+                            className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-green-500 transition-colors duration-200"
+                          >
+                            {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+                          </button>
+                        </motion.div>
+
+                        {/* Forgot Password & Remember Me */}
+                        <div className="flex items-center justify-between mb-6">
+                          <label className="flex items-center gap-2 cursor-pointer">
+                            <input
+                              type="checkbox"
+                              checked={rememberMe}
+                              onChange={(e) => setRememberMe(e.target.checked)}
+                              className="w-4 h-4 rounded border-[#2A2F3E] bg-[#1A1F2E] text-green-500 focus:ring-green-500 focus:ring-offset-0"
+                            />
+                            <span className="text-sm text-gray-400">Remember me</span>
+                          </label>
+                          <button
+                            type="button"
+                            onClick={handleForgotPassword}
+                            className="text-sm text-green-500 hover:text-green-400 hover:underline transition-colors"
+                          >
+                            Forgot password?
+                          </button>
+                        </div>
+
+                        {/* General Error */}
+                        {errors.general && (
+                          <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg">
+                            <p className="text-sm text-red-400 text-center">{errors.general}</p>
+                          </div>
+                        )}
+
+                        {/* Login Button */}
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.95 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.3, delay: 0.2 }}
+                        >
+                          <button
+                            type="submit"
+                            disabled={isLoading}
+                            className="group relative w-full rounded-xl px-6 py-4 flex items-center justify-center gap-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 shadow-lg shadow-green-500/20 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                          >
+                            {isLoading ? (
+                              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                            ) : (
+                              <>
+                                <span className="text-lg md:text-xl font-bold text-white">Log In</span>
+                                <ArrowRight className="text-white group-hover:translate-x-1 transition-transform duration-300" />
+                              </>
+                            )}
+                          </button>
+                        </motion.div>
+
+                        {/* Sign Up Link inside form */}
+                        <p className="mt-6 text-center text-sm text-gray-400">
+                          Don't have an account?{" "}
+                          <Link href={`/${country}/signup`} className="text-green-500 hover:underline font-medium">
+                            Sign up
+                          </Link>
+                        </p>
+                      </form>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
                 {/* Warning Notice */}
                 <div className="mt-6 p-3 bg-yellow-500/5 border border-yellow-500/20 rounded-lg">
