@@ -140,169 +140,163 @@ export default async function HowItWorksPage({
         />
       )}
 
-      <OpeningStyle>
-        <section className="w-full bg-gradient-to-br from-primary-50 via-white to-secondary-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 py-16 md:py-24">
-          <div className="container mx-auto px-4 text-center">
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-4 md:mb-6">
-              {heroData.title}
-            </h1>
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8 md:mb-10">
-              {heroData.subtitle}
-            </p>
-            <PrimaryCTA 
-              href="/signup" 
-              translationKey="start_earning_now"
-              observer={false}
-            />
+      {/* Hero Section */}
+      <OpeningStyle delay={0.1}>
+        <section className="max-w-7xl mx-auto px-6 py-24 md:py-32 text-center">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 text-gray-900 dark:text-white">
+            {heroData.title}
+          </h1>
+          <p className="text-lg sm:text-xl md:text-2xl mb-12 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            {heroData.subtitle}
+          </p>
+          <PrimaryCTA
+            href="/signup"
+            translationKey="start_earning_now"
+            observer={true}
+          />
+        </section>
+      </OpeningStyle>
+
+      {/* Steps Section */}
+      <OpeningStyle delay={0.1}>
+        <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
+          <div className="max-w-4xl mx-auto space-y-12 md:space-y-16">
+            {stepsData.map((step: any, index: number) => (
+              <div key={index} className="relative">
+                <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
+                  <div className="flex-shrink-0">
+                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center shadow-lg">
+                      {step.icon ? (
+                        <span className="text-2xl md:text-3xl">{step.icon}</span>
+                      ) : (
+                        <span className="text-2xl md:text-3xl font-bold text-white">
+                          {step.number}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-3">
+                      {step.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
+                </div>
+                {index < stepsData.length - 1 && (
+                  <div className="hidden md:block absolute left-8 top-20 w-0.5 h-16 bg-gradient-to-b from-primary-400 to-transparent" />
+                )}
+              </div>
+            ))}
           </div>
         </section>
       </OpeningStyle>
 
-      <OpeningStyle>
-        <section className="w-full py-16 md:py-24 bg-white dark:bg-gray-900">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto space-y-12 md:space-y-16">
-              {stepsData.map((step: any, index: number) => (
-                <div key={index} className="relative">
-                  <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
-                    <div className="flex-shrink-0">
-                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center shadow-lg">
-                        {step.icon ? (
-                          <span className="text-2xl md:text-3xl">{step.icon}</span>
-                        ) : (
-                          <span className="text-2xl md:text-3xl font-bold text-white">
-                            {step.number}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-3">
-                        {step.title}
-                      </h3>
-                      <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                        {step.description}
-                      </p>
-                    </div>
-                  </div>
-                  {index < stepsData.length - 1 && (
-                    <div className="hidden md:block absolute left-8 top-20 w-0.5 h-16 bg-gradient-to-b from-primary-400 to-transparent" />
-                  )}
+      {/* Video Section */}
+      {videoData.url && (
+        <OpeningStyle delay={0.1}>
+          <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
+            <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-6 md:p-8">
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4 text-center">
+                {videoData.title}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 text-center mb-8 max-w-2xl mx-auto">
+                {videoData.description}
+              </p>
+              <div className="aspect-video rounded-xl overflow-hidden shadow-xl">
+                <iframe
+                  src={videoData.url}
+                  title="How it works video"
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+          </section>
+        </OpeningStyle>
+      )}
+
+      {/* Earning Methods Grid */}
+      {methodsData.length > 0 && (
+        <OpeningStyle delay={0.1}>
+          <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
+                {howItWorks?.methodsTitle?.replace(/\{country\}/g, countryName) || "Multiple Ways to Earn"}
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                {howItWorks?.methodsSubtitle?.replace(/\{country\}/g, countryName) || "Choose the earning method that works best for you"}
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {methodsData.map((method: any, index: number) => (
+                <div
+                  key={index}
+                  className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow border border-gray-100 dark:border-gray-700"
+                >
+                  <div className="text-4xl mb-4">{method.icon}</div>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                    {method.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">
+                    {method.description}
+                  </p>
                 </div>
               ))}
             </div>
-          </div>
-        </section>
-      </OpeningStyle>
-
-      {videoData.url && (
-        <OpeningStyle>
-          <section className="w-full py-16 md:py-24 bg-gray-50 dark:bg-gray-800">
-            <div className="container mx-auto px-4">
-              <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-6 md:p-8">
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4 text-center">
-                  {videoData.title}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300 text-center mb-8 max-w-2xl mx-auto">
-                  {videoData.description}
-                </p>
-                <div className="aspect-video rounded-xl overflow-hidden shadow-xl">
-                  <iframe
-                    src={videoData.url}
-                    title="How it works video"
-                    className="w-full h-full"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                </div>
-              </div>
-            </div>
           </section>
         </OpeningStyle>
       )}
 
-      {methodsData.length > 0 && (
-        <OpeningStyle>
-          <section className="w-full py-16 md:py-24 bg-white dark:bg-gray-900">
-            <div className="container mx-auto px-4">
-              <div className="text-center mb-12">
-                <h2 className="text-2xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                  {howItWorks?.methodsTitle?.replace(/\{country\}/g, countryName) || "Multiple Ways to Earn"}
-                </h2>
-                <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                  {howItWorks?.methodsSubtitle?.replace(/\{country\}/g, countryName) || "Choose the earning method that works best for you"}
-                </p>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {methodsData.map((method: any, index: number) => (
-                  <div
-                    key={index}
-                    className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow border border-gray-100 dark:border-gray-700"
-                  >
-                    <div className="text-4xl mb-4">{method.icon}</div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                      {method.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm">
-                      {method.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        </OpeningStyle>
-      )}
-
+      {/* FAQ Section */}
       {faqData.items.length > 0 && (
-        <OpeningStyle>
-          <section className="w-full py-16 md:py-24 bg-gray-50 dark:bg-gray-800">
-            <div className="container mx-auto px-4">
-              <div className="text-center mb-12">
-                <h2 className="text-2xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                  {faqData.title}
-                </h2>
-              </div>
-              <div className="max-w-3xl mx-auto space-y-4">
-                {faqData.items.map((item: any, index: number) => (
-                  <details
-                    key={index}
-                    className="group bg-white dark:bg-gray-900 rounded-xl shadow-sm hover:shadow-md transition-shadow"
-                  >
-                    <summary className="flex justify-between items-center cursor-pointer list-none p-6">
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white pr-4">
-                        {item.q}
-                      </h3>
-                      <div className="text-primary-600 dark:text-primary-400 group-open:rotate-45 transition-transform">
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                        </svg>
-                      </div>
-                    </summary>
-                    <div className="px-6 pb-6 text-gray-600 dark:text-gray-300">
-                      {item.a}
+        <OpeningStyle delay={0.1}>
+          <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
+                {faqData.title}
+              </h2>
+            </div>
+            <div className="max-w-3xl mx-auto space-y-4">
+              {faqData.items.map((item: any, index: number) => (
+                <details
+                  key={index}
+                  className="group bg-gray-50 dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <summary className="flex justify-between items-center cursor-pointer list-none p-6">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white pr-4">
+                      {item.q}
+                    </h3>
+                    <div className="text-primary-600 dark:text-primary-400 group-open:rotate-45 transition-transform">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                      </svg>
                     </div>
-                  </details>
-                ))}
-              </div>
+                  </summary>
+                  <div className="px-6 pb-6 text-gray-600 dark:text-gray-300">
+                    {item.a}
+                  </div>
+                </details>
+              ))}
             </div>
           </section>
         </OpeningStyle>
       )}
 
+      {/* CTA Banner */}
       {ctaData.title && (
-        <OpeningStyle>
-          <section className="w-full py-16 md:py-24 bg-white dark:bg-gray-900">
-            <div className="container mx-auto px-4">
-              <div className="bg-gradient-to-r from-primary-600 to-primary-800 rounded-2xl p-8 md:p-12 text-center text-white">
-                <h3 className="text-2xl md:text-3xl font-bold mb-4">{ctaData.title}</h3>
-                <p className="text-primary-100 mb-6 max-w-2xl mx-auto">{ctaData.subtitle}</p>
-                <PrimaryCTA 
-                  href="/signup" 
-                  translationKey="start_earning_now"
-                  observer={false}
-                />
-              </div>
+        <OpeningStyle delay={0.1}>
+          <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
+            <div className="bg-gradient-to-r from-primary-600 to-primary-800 rounded-2xl p-8 md:p-12 text-center text-white">
+              <h3 className="text-2xl md:text-3xl font-bold mb-4">{ctaData.title}</h3>
+              <p className="text-primary-100 mb-6 max-w-2xl mx-auto">{ctaData.subtitle}</p>
+              <PrimaryCTA
+                href="/signup"
+                translationKey="start_earning_now"
+                observer={false}
+              />
             </div>
           </section>
         </OpeningStyle>
