@@ -570,7 +570,7 @@ export default function SignupPage() {
                     {/* Login Link inside form */}
                     <p className="mt-6 text-center text-sm text-gray-400">
                       Already have an account?{" "}
-                      <Link href="/login" className="text-green-500 hover:underline font-medium">
+                      <Link href={`/${country}/login`} className="text-green-500 hover:underline font-medium">
                         Log in
                       </Link>
                     </p>
