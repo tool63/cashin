@@ -1,3 +1,5 @@
+// app/[country]/(marketing)/how-it-works/page.tsx
+
 import { cookies } from "next/headers";
 
 import {
@@ -68,7 +70,6 @@ export default async function HowItWorksPage({
 
   const country = countryParam as CountryCode;
   const countryName = getCountry(country).name;
-
   const language = getLanguage(country);
 
   /* ================= LOAD TRANSLATIONS ================= */
@@ -160,6 +161,14 @@ export default async function HowItWorksPage({
       {/* Steps Section */}
       <OpeningStyle delay={0.1}>
         <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
+              {howItWorks?.stepsTitle?.replace(/\{country\}/g, countryName) || "Simple Steps to Start Earning"}
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              {howItWorks?.stepsSubtitle?.replace(/\{country\}/g, countryName) || "Get started in minutes with our easy process"}
+            </p>
+          </div>
           <div className="max-w-4xl mx-auto space-y-12 md:space-y-16">
             {stepsData.map((step: any, index: number) => (
               <div key={index} className="relative">
@@ -222,7 +231,7 @@ export default async function HowItWorksPage({
       {methodsData.length > 0 && (
         <OpeningStyle delay={0.1}>
           <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
-            <div className="text-center mb-12">
+            <div className="text-center mb-16">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
                 {howItWorks?.methodsTitle?.replace(/\{country\}/g, countryName) || "Multiple Ways to Earn"}
               </h2>
@@ -234,13 +243,13 @@ export default async function HowItWorksPage({
               {methodsData.map((method: any, index: number) => (
                 <div
                   key={index}
-                  className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow border border-gray-100 dark:border-gray-700"
+                  className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700"
                 >
                   <div className="text-4xl mb-4">{method.icon}</div>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                     {method.title}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm">
+                  <p className="text-gray-600 dark:text-gray-300">
                     {method.description}
                   </p>
                 </div>
@@ -250,11 +259,35 @@ export default async function HowItWorksPage({
         </OpeningStyle>
       )}
 
+      {/* Stats Highlights */}
+      <OpeningStyle delay={0.1}>
+        <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+              <div className="text-3xl md:text-4xl font-bold text-primary-600">50K+</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">Active Users</div>
+            </div>
+            <div>
+              <div className="text-3xl md:text-4xl font-bold text-primary-600">$2.5M+</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">Paid Out</div>
+            </div>
+            <div>
+              <div className="text-3xl md:text-4xl font-bold text-primary-600">24/7</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">Task Availability</div>
+            </div>
+            <div>
+              <div className="text-3xl md:text-4xl font-bold text-primary-600">Instant</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">Withdrawals</div>
+            </div>
+          </div>
+        </section>
+      </OpeningStyle>
+
       {/* FAQ Section */}
       {faqData.items.length > 0 && (
         <OpeningStyle delay={0.1}>
           <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
-            <div className="text-center mb-12">
+            <div className="text-center mb-16">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
                 {faqData.title}
               </h2>
@@ -285,13 +318,15 @@ export default async function HowItWorksPage({
         </OpeningStyle>
       )}
 
-      {/* CTA Banner */}
+      {/* Final CTA Banner */}
       {ctaData.title && (
         <OpeningStyle delay={0.1}>
           <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
             <div className="bg-gradient-to-r from-primary-600 to-primary-800 rounded-2xl p-8 md:p-12 text-center text-white">
-              <h3 className="text-2xl md:text-3xl font-bold mb-4">{ctaData.title}</h3>
-              <p className="text-primary-100 mb-6 max-w-2xl mx-auto">{ctaData.subtitle}</p>
+              <h3 className="text-2xl md:text-4xl font-bold mb-4">{ctaData.title}</h3>
+              <p className="text-primary-100 mb-8 max-w-2xl mx-auto text-lg">
+                {ctaData.subtitle}
+              </p>
               <PrimaryCTA
                 href="/signup"
                 translationKey="start_earning_now"
