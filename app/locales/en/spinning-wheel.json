@@ -1,0 +1,247 @@
+{
+  "seo": {
+    "title": "Spin the Wheel & Win Real Money in {country} - Daily Cash Prizes | Cashog",
+    "description": "Spin the prize wheel daily in {country} and win real cash prizes up to $500! Free spins for new members. Join 100,000+ winners and start spinning today!"
+  },
+  "hero": {
+    "title": "Spin the Wheel & Win Real Cash in {country}",
+    "subtitle": "Join 100,000+ winners in {country} who've won real money on our prize wheel. Spin daily for free and win instant cash prizes up to $500! No purchase necessary."
+  },
+  "statsTitle": "Spin Wheel Statistics",
+  "stats": {
+    "spinsCompleted": "10M+",
+    "spinsCompletedLabel": "Spins Completed",
+    "avgPrize": "$2.50",
+    "avgPrizeLabel": "Average Prize",
+    "activePlayers": "100K+",
+    "activePlayersLabel": "Active Players",
+    "totalWon": "$8M+",
+    "totalWonLabel": "Total Won"
+  },
+  "prizesTitle": "Amazing Prizes Await You",
+  "prizesSubtitle": "Every spin guarantees a prize! Here's what you can win",
+  "prizeTiers": [
+    {
+      "icon": "💰",
+      "prize": "Grand Prize",
+      "value": "$500",
+      "probability": "1 in 10,000",
+      "description": "Instant PayPal cash"
+    },
+    {
+      "icon": "💵",
+      "prize": "Runner Up",
+      "value": "$100",
+      "probability": "1 in 2,000",
+      "description": "Instant PayPal cash"
+    },
+    {
+      "icon": "🎁",
+      "prize": "Big Winner",
+      "value": "$50",
+      "probability": "1 in 500",
+      "description": "Instant PayPal cash"
+    },
+    {
+      "icon": "💎",
+      "prize": "Lucky Winner",
+      "value": "$25",
+      "probability": "1 in 200",
+      "description": "Instant PayPal cash"
+    },
+    {
+      "icon": "⭐",
+      "prize": "Cash Prize",
+      "value": "$10",
+      "probability": "1 in 50",
+      "description": "Instant PayPal cash"
+    },
+    {
+      "icon": "🎉",
+      "prize": "Bonus Prize",
+      "value": "$5",
+      "probability": "1 in 20",
+      "description": "Instant PayPal cash"
+    },
+    {
+      "icon": "🍀",
+      "prize": "Small Win",
+      "value": "$2",
+      "probability": "1 in 10",
+      "description": "Instant PayPal cash"
+    },
+    {
+      "icon": "✨",
+      "prize": "Daily Bonus",
+      "value": "$1",
+      "probability": "1 in 5",
+      "description": "Instant PayPal cash"
+    },
+    {
+      "icon": "🎈",
+      "prize": "Free Spin",
+      "value": "Free Spin",
+      "probability": "1 in 3",
+      "description": "Extra chance to win"
+    }
+  ],
+  "howItWorksTitle": "How the Prize Wheel Works",
+  "howItWorksSteps": [
+    {
+      "number": 1,
+      "title": "Sign Up Free",
+      "description": "Create your free Cashog account in seconds. No credit card required."
+    },
+    {
+      "number": 2,
+      "title": "Get Your Free Spin",
+      "description": "New members receive 3 free spins instantly. Daily login bonuses available."
+    },
+    {
+      "number": 3,
+      "title": "Spin the Wheel",
+      "description": "Click the spin button and watch the wheel determine your prize."
+    },
+    {
+      "number": 4,
+      "title": "Claim Your Prize",
+      "description": "Your winnings are instantly added to your account. Withdraw anytime!"
+    }
+  ],
+  "benefitsTitle": "Why Play Our Prize Wheel",
+  "benefits": [
+    {
+      "icon": "🎯",
+      "title": "100% Free to Play",
+      "description": "No purchase necessary. Every member gets free spins daily. No hidden fees or charges."
+    },
+    {
+      "icon": "⚡",
+      "title": "Instant Cash Prizes",
+      "description": "Win real money that's instantly credited to your account. Withdraw via PayPal within minutes."
+    },
+    {
+      "icon": "🎲",
+      "title": "Guaranteed Wins",
+      "description": "Every spin wins a prize! You'll never walk away empty-handed from our prize wheel."
+    },
+    {
+      "icon": "📅",
+      "title": "Daily Bonuses",
+      "description": "Login daily for extra free spins. More spins = more chances to win big prizes!"
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Your Winnings",
+  "tips": [
+    {
+      "title": "Spin Daily",
+      "description": "Log in every day to claim your daily free spins. Consistent players win 3x more prizes."
+    },
+    {
+      "title": "Complete Tasks for Extra Spins",
+      "description": "Earn additional spins by completing simple tasks like visiting websites or writing reviews."
+    },
+    {
+      "title": "Refer Friends",
+      "description": "Get 5 bonus spins for every friend who joins and spins the wheel using your referral link."
+    },
+    {
+      "title": "Watch for Special Events",
+      "description": "During holidays and special events, prize values double and win probabilities increase!"
+    }
+  ],
+  "testimonialsTitle": "Real Winners, Real Stories",
+  "testimonials": [
+    {
+      "name": "Michael Rodriguez",
+      "country": "United States",
+      "winnings": "$500",
+      "quote": "I couldn't believe it when I won $500 on my third spin! The money was in my PayPal account within minutes. This is absolutely legit!",
+      "avatar": "MR"
+    },
+    {
+      "name": "Lisa Chen",
+      "country": "Canada",
+      "winnings": "$250",
+      "quote": "I spin the wheel every morning with my coffee. Won $250 last month and $100 this month. Such an easy way to earn extra cash!",
+      "avatar": "LC"
+    },
+    {
+      "name": "James Wilson",
+      "country": "United Kingdom",
+      "winnings": "$150",
+      "quote": "Been playing for 3 months and won over $400 total. The daily free spins add up and the payouts are instant. Highly recommend!",
+      "avatar": "JW"
+    },
+    {
+      "name": "Sarah Martinez",
+      "country": "Australia",
+      "winnings": "$75",
+      "quote": "Love starting my day with a spin. Even small wins like $5 make me happy. Cashed out multiple times with no issues.",
+      "avatar": "SM"
+    },
+    {
+      "name": "David Kim",
+      "country": "United States",
+      "winnings": "$1,000",
+      "quote": "Hit the $500 grand prize twice in one month! My wife thought I was joking until the PayPal notification popped up.",
+      "avatar": "DK"
+    },
+    {
+      "name": "Emma Thompson",
+      "country": "New Zealand",
+      "winnings": "$300",
+      "quote": "The best part is every spin wins something. Even free spins give you another chance. So much fun and actually pays!",
+      "avatar": "ET"
+    }
+  ],
+  "faq": {
+    "title": "Spin Wheel Win Real Money in {country} - FAQ",
+    "items": [
+      {
+        "question": "Is the spin wheel really free to play?",
+        "answer": "Yes! Cashog's prize wheel is 100% free to play. Every member receives free spins daily with no purchase necessary. There are no hidden fees, subscription costs, or credit card requirements."
+      },
+      {
+        "question": "Can I really win real money?",
+        "answer": "Absolutely! Thousands of members win real cash prizes every day. Prizes range from $1 to $500, and all winnings are instantly credited to your Cashog account. You can withdraw your winnings via PayPal, Venmo, or bank transfer."
+      },
+      {
+        "question": "How do I get spins?",
+        "answer": "New members receive 3 free spins instantly upon signing up. After that, you get 1 free spin every day just for logging in. You can earn additional spins by completing tasks (visiting websites, writing reviews) and referring friends."
+      },
+      {
+        "question": "How are the prizes determined?",
+        "answer": "The prize wheel uses a certified random number generator (RNG) to ensure fair and random outcomes. Each segment has a specific probability of being selected. The wheel is regularly audited for fairness."
+      },
+      {
+        "question": "How do I withdraw my winnings?",
+        "answer": "Your winnings are automatically added to your Cashog account balance. You can withdraw via PayPal (instant, no minimum), Venmo, or direct bank transfer (ACH). Withdrawals are processed instantly 24/7."
+      },
+      {
+        "question": "Is there a limit to how much I can win?",
+        "answer": "No! There's no maximum limit on winnings. Many members have won multiple times and withdrawn thousands of dollars. The more you play (with free spins), the more chances you have to win."
+      },
+      {
+        "question": "Can I play on my phone?",
+        "answer": "Yes! The prize wheel works perfectly on all devices - smartphones, tablets, and computers. You can spin from anywhere with an internet connection."
+      },
+      {
+        "question": "Do my spins expire?",
+        "answer": "Free spins expire after 24 hours, so we recommend spinning daily! Bonus spins earned from tasks or referrals expire after 7 days. Always spin before they expire to maximize your chances."
+      },
+      {
+        "question": "What's the probability of winning the $500 prize?",
+        "answer": "The $500 grand prize has a 1 in 10,000 chance of being won on each spin. While rare, someone wins it every week! With daily spins and bonus spins, your chances increase significantly over time."
+      },
+      {
+        "question": "Is this available in {country}?",
+        "answer": "Yes! Cashog's prize wheel is available to members in {country} and over 50 countries worldwide. All prizes are paid in your local currency equivalent via PayPal or other payment methods."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Spin & Win in {country}?",
+    "subtitle": "Join 100,000+ winners already spinning in {country}. Sign up for free and try your luck on the prize wheel today!"
+  }
+}
