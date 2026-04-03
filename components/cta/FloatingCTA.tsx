@@ -2,12 +2,15 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import styles from "./FloatingCTA.module.css";
 import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
 
 export default function FloatingCTA() {
   const [visible, setVisible] = useState(false);
   const [bounceKey, setBounceKey] = useState(0);
+  const params = useParams();
+  const country = params?.country as string || "us";
 
   const { getTranslation } = useLanguage();
 
@@ -18,6 +21,9 @@ export default function FloatingCTA() {
   );
 
   const letters = text.split("");
+
+  // Dynamic href with country parameter
+  const href = `/${country}/signup`;
 
   useEffect(() => {
     let observer: IntersectionObserver | null = null;
@@ -73,7 +79,7 @@ export default function FloatingCTA() {
 
   return (
     <Link
-      href="/signup"
+      href={href}
       aria-label={text}
       className={`${styles.floatingCTA} ${visible ? styles.show : styles.hide}`}
     >
