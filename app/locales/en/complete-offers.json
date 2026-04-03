@@ -1,0 +1,220 @@
+{
+  "seo": {
+    "title": "Complete Offers & Get Paid in {country} - Earn $5-$100 Per Offer | Cashog",
+    "description": "Join 100,000+ members earning real cash in {country} by completing offers, surveys, and trials. Get paid via PayPal or gift cards. Free to join!"
+  },
+  "hero": {
+    "title": "Get Paid to Complete Offers in {country}",
+    "subtitle": "Join 100,000+ members earning real cash in {country} by completing offers, surveys, and trials. Simple tasks that pay instantly!"
+  },
+  "statsTitle": "Trusted by Thousands",
+  "stats": {
+    "offersCompleted": "10M+",
+    "offersCompletedLabel": "Offers Completed",
+    "avgPayout": "$15.00",
+    "avgPayoutLabel": "Average Per Offer",
+    "activeUsers": "100K+",
+    "activeUsersLabel": "Active Members",
+    "totalPaid": "$30M+",
+    "totalPaidLabel": "Total Paid to Members"
+  },
+  "categoriesTitle": "Popular Offer Categories",
+  "categoriesSubtitle": "Earn by completing these types of offers",
+  "offerCategories": [
+    {
+      "icon": "📝",
+      "title": "Surveys",
+      "description": "Share your opinion on products and services. Get paid for every survey you complete.",
+      "avgReward": "$1-$10",
+      "timeRequired": "5-20 min",
+      "difficulty": "Easy"
+    },
+    {
+      "icon": "📱",
+      "title": "App Downloads",
+      "description": "Download and try new mobile apps. Get paid instantly for each successful download.",
+      "avgReward": "$2-$15",
+      "timeRequired": "2-5 min",
+      "difficulty": "Easy"
+    },
+    {
+      "icon": "📧",
+      "title": "Sign-up Offers",
+      "description": "Create free accounts on popular platforms. Quick and easy way to earn.",
+      "avgReward": "$5-$25",
+      "timeRequired": "3-10 min",
+      "difficulty": "Easy"
+    },
+    {
+      "icon": "🎁",
+      "title": "Free Trials",
+      "description": "Try services free for 7-30 days. Cancel anytime and keep the reward.",
+      "avgReward": "$10-$50",
+      "timeRequired": "5-15 min",
+      "difficulty": "Medium"
+    },
+    {
+      "icon": "💳",
+      "title": "Credit Card Offers",
+      "description": "Apply for free credit cards with no annual fee. High paying offers.",
+      "avgReward": "$50-$100",
+      "timeRequired": "10-20 min",
+      "difficulty": "Medium"
+    },
+    {
+      "icon": "📺",
+      "title": "Video Offers",
+      "description": "Watch short videos and get paid. No commitment required.",
+      "avgReward": "$0.50-$2",
+      "timeRequired": "1-5 min",
+      "difficulty": "Easy"
+    }
+  ],
+  "featuredOffersTitle": "High-Paying Offers Available Now",
+  "featuredOffersSubtitle": "Limited spots - complete these offers today",
+  "featuredOffers": [
+    {
+      "title": "Credit Card Application",
+      "reward": "$75",
+      "timeEstimate": "10 min",
+      "difficulty": "Medium",
+      "spotsLeft": 250,
+      "provider": "Chase Bank",
+      "rating": "4.9"
+    },
+    {
+      "title": "Disney+ Free Trial",
+      "reward": "$25",
+      "timeEstimate": "5 min",
+      "difficulty": "Easy",
+      "spotsLeft": 1000,
+      "provider": "Disney",
+      "rating": "4.8"
+    },
+    {
+      "title": "Consumer Survey Panel",
+      "reward": "$50",
+      "timeEstimate": "20 min",
+      "difficulty": "Easy",
+      "spotsLeft": 500,
+      "provider": "Nielsen",
+      "rating": "4.7"
+    },
+    {
+      "title": "Mobile Game Download",
+      "reward": "$10",
+      "timeEstimate": "3 min",
+      "difficulty": "Easy",
+      "spotsLeft": 2000,
+      "provider": "Game Studio",
+      "rating": "4.6"
+    }
+  ],
+  "benefitsTitle": "Why Complete Offers on Cashog",
+  "benefits": [
+    {
+      "icon": "💰",
+      "title": "High Payouts",
+      "description": "Get paid $5-$100 per offer. Higher than most other platforms for the same tasks."
+    },
+    {
+      "icon": "⚡",
+      "title": "Instant Payments",
+      "description": "Most offers pay instantly upon completion. No waiting for approval or minimum thresholds."
+    },
+    {
+      "icon": "📱",
+      "title": "Easy & Fast",
+      "description": "Most offers take 2-10 minutes. Perfect for earning during short breaks or free time."
+    },
+    {
+      "icon": "🌍",
+      "title": "Available in {country}",
+      "description": "Hundreds of offers available daily in {country} with local providers and payment methods."
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Your Offer Earnings",
+  "tips": [
+    {
+      "title": "Complete Your Profile",
+      "description": "Fill out your interests and demographics to get matched with higher-paying, relevant offers."
+    },
+    {
+      "title": "Check Daily",
+      "description": "New offers are added every day. Check early - the best offers have limited spots."
+    },
+    {
+      "title": "Focus on Free Trials",
+      "description": "Free trial offers pay the most. Set calendar reminders to cancel before being charged."
+    },
+    {
+      "title": "Use a Dedicated Email",
+      "description": "Create a separate email for offers to keep your main inbox clean and organized."
+    }
+  ],
+  "testimonialsTitle": "Real Members, Real Earnings",
+  "testimonials": [
+    {
+      "name": "Jennifer Lopez",
+      "country": "United States",
+      "earnings": "$847",
+      "quote": "I complete offers during my lunch break. Made over $800 last month just from surveys and free trials!",
+      "avatar": "JL"
+    },
+    {
+      "name": "Robert Taylor",
+      "country": "Canada",
+      "earnings": "$1,203",
+      "quote": "The app download offers are my favorite. Takes 2 minutes and pays instantly. Perfect for extra cash.",
+      "avatar": "RT"
+    },
+    {
+      "name": "Emma Wilson",
+      "country": "Australia",
+      "earnings": "$2,450",
+      "quote": "Credit card offers pay really well. I've earned over $2000 in 3 months just from those. Highly recommend!",
+      "avatar": "EW"
+    }
+  ],
+  "faq": {
+    "title": "Complete Offers & Get Paid in {country} - FAQ",
+    "items": [
+      {
+        "question": "Is it really free to complete offers?",
+        "answer": "Yes! Cashog is completely free to join. You never pay anything. Some offers may require free trial sign-ups, but you can cancel anytime at no cost."
+      },
+      {
+        "question": "How much can I earn completing offers in {country}?",
+        "answer": "Most members earn $200-500 monthly. Active users who complete high-paying offers can earn $1000+. Some power users earn $3000+ monthly by completing offers daily."
+      },
+      {
+        "question": "How do I get paid?",
+        "answer": "We offer multiple payment options including PayPal, bank transfer, Visa direct, and gift cards for Amazon, Google Play, and more. Most offers pay instantly upon completion."
+      },
+      {
+        "question": "What types of offers can I complete?",
+        "answer": "We have hundreds of offers across many categories: surveys, app downloads, free trials, sign-up offers, video watching, shopping offers, and credit card applications. New offers added daily."
+      },
+      {
+        "question": "Do I need to use my real information?",
+        "answer": "Yes, always use accurate information when completing offers. Using fake information can result in disqualification and account suspension."
+      },
+      {
+        "question": "Can I complete offers on mobile?",
+        "answer": "Absolutely! Cashog works perfectly on all devices. Download our mobile app for iOS and Android to complete offers anywhere, anytime."
+      },
+      {
+        "question": "Is this available everywhere in {country}?",
+        "answer": "Yes! Cashog is available nationwide in {country}. Most offers work across the entire country. Some offers may have specific regional requirements, but hundreds are available to everyone."
+      },
+      {
+        "question": "How long until I receive my first payment?",
+        "answer": "Most users receive their first payment within minutes of completing their first offer. Many offers pay instantly. The minimum withdrawal amount is just $1 for PayPal and $5 for other methods."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Start Earning in {country}?",
+    "subtitle": "Join 100,000+ members already getting paid in {country}. Sign up for free and start completing paid offers today!"
+  }
+}
