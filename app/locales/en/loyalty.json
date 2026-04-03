@@ -1,0 +1,361 @@
+{
+  "seo": {
+    "title": "Loyalty Rewards Program in {country} - Earn Points & Get Paid | Cashog",
+    "description": "Join Cashog's loyalty program in {country} and earn points for every action. Redeem points for cash, gift cards, and exclusive rewards. Free to join!"
+  },
+  "hero": {
+    "title": "Earn Points, Get Rewarded in {country}",
+    "subtitle": "Join 200,000+ loyal members in {country} earning points for every action. Redeem points for cash, gift cards, and exclusive rewards. The more you engage, the more you earn!"
+  },
+  "statsTitle": "Loyalty Program Statistics",
+  "stats": {
+    "membersEnrolled": "200K+",
+    "membersEnrolledLabel": "Members Enrolled",
+    "avgRewards": "$350",
+    "avgRewardsLabel": "Avg Rewards/Year",
+    "activeMembers": "85K+",
+    "activeMembersLabel": "Active Members",
+    "rewardsDistributed": "$12M+",
+    "rewardsDistributedLabel": "Rewards Distributed"
+  },
+  "tiersTitle": "Loyalty Tiers",
+  "tiersSubtitle": "The more points you earn, the higher your tier and better your rewards",
+  "loyaltyTiers": [
+    {
+      "icon": "🥉",
+      "tier": "Bronze",
+      "minPoints": "0 - 999 points",
+      "benefits": [
+        "1x points on all activities",
+        "Basic support",
+        "Monthly bonus offers"
+      ],
+      "color": "from-orange-100 to-orange-200 dark:from-orange-900/30 dark:to-orange-800/30"
+    },
+    {
+      "icon": "🥈",
+      "tier": "Silver",
+      "minPoints": "1,000 - 4,999 points",
+      "benefits": [
+        "2x points on all activities",
+        "Priority support",
+        "Weekly bonus offers",
+        "Early access to new features"
+      ],
+      "color": "from-gray-100 to-gray-300 dark:from-gray-700/50 dark:to-gray-600/50"
+    },
+    {
+      "icon": "🥇",
+      "tier": "Gold",
+      "minPoints": "5,000 - 9,999 points",
+      "benefits": [
+        "3x points on all activities",
+        "VIP support (24/7)",
+        "Daily bonus offers",
+        "Exclusive gold-only rewards",
+        "Birthday bonus points"
+      ],
+      "color": "from-yellow-100 to-yellow-300 dark:from-yellow-900/30 dark:to-yellow-700/30"
+    },
+    {
+      "icon": "💎",
+      "tier": "Platinum",
+      "minPoints": "10,000+ points",
+      "benefits": [
+        "5x points on all activities",
+        "Dedicated account manager",
+        "Custom reward requests",
+        "Invite-only events",
+        "Double points on birthdays",
+        "Free monthly gift"
+      ],
+      "color": "from-blue-100 to-purple-200 dark:from-blue-900/30 dark:to-purple-800/30"
+    }
+  ],
+  "howToEarnTitle": "How to Earn Points",
+  "howToEarnSubtitle": "Earn points for every action you take on Cashog",
+  "earningMethods": [
+    {
+      "icon": "📋",
+      "title": "Complete Surveys",
+      "points": "100-500 points",
+      "description": "Share your opinion and earn points for every survey you complete",
+      "frequency": "Daily available"
+    },
+    {
+      "icon": "📱",
+      "title": "Install Apps",
+      "points": "50-200 points",
+      "description": "Download and try new apps to earn points instantly",
+      "frequency": "Daily available"
+    },
+    {
+      "icon": "🎮",
+      "title": "Play Games",
+      "points": "200-1,000 points",
+      "description": "Reach levels and complete achievements in mobile games",
+      "frequency": "Daily available"
+    },
+    {
+      "icon": "📺",
+      "title": "Watch Ads",
+      "points": "5-25 points",
+      "description": "Watch short video ads and earn points",
+      "frequency": "Unlimited daily"
+    },
+    {
+      "icon": "✅",
+      "title": "Complete Offers",
+      "points": "500-5,000 points",
+      "description": "Sign up for free trials and complete special offers",
+      "frequency": "Weekly available"
+    },
+    {
+      "icon": "👥",
+      "title": "Refer Friends",
+      "points": "1,000 points",
+      "description": "Invite friends to join Cashog and earn bonus points",
+      "frequency": "Unlimited"
+    },
+    {
+      "icon": "📅",
+      "title": "Daily Login",
+      "points": "10-100 points",
+      "description": "Log in daily to claim your streak bonus",
+      "frequency": "Daily"
+    },
+    {
+      "icon": "🎯",
+      "title": "Complete Achievements",
+      "points": "250-2,500 points",
+      "description": "Reach milestones and earn achievement bonuses",
+      "frequency": "One-time per achievement"
+    }
+  ],
+  "rewardsTitle": "Redeem Your Points",
+  "rewardsSubtitle": "Exchange your hard-earned points for amazing rewards",
+  "availableRewards": [
+    {
+      "icon": "💰",
+      "title": "PayPal Cash",
+      "points": "1,000 points = $10",
+      "description": "Withdraw cash directly to your PayPal account",
+      "popular": true
+    },
+    {
+      "icon": "💳",
+      "title": "Bank Transfer",
+      "points": "2,000 points = $20",
+      "description": "Direct deposit to your bank account",
+      "popular": false
+    },
+    {
+      "icon": "🛍️",
+      "title": "Amazon Gift Card",
+      "points": "1,000 points = $10",
+      "description": "Shop on Amazon with gift cards",
+      "popular": true
+    },
+    {
+      "icon": "🍎",
+      "title": "Apple Gift Card",
+      "points": "1,000 points = $10",
+      "description": "Use on App Store, iTunes, and Apple services",
+      "popular": false
+    },
+    {
+      "icon": "🤖",
+      "title": "Google Play Card",
+      "points": "1,000 points = $10",
+      "description": "Buy apps, games, and more on Google Play",
+      "popular": false
+    },
+    {
+      "icon": "🎮",
+      "title": "Xbox Gift Card",
+      "points": "1,000 points = $10",
+      "description": "Redeem for games and add-ons on Xbox",
+      "popular": false
+    },
+    {
+      "icon": "🎮",
+      "title": "PlayStation Store Card",
+      "points": "1,000 points = $10",
+      "description": "Purchase games and DLC on PlayStation Store",
+      "popular": false
+    },
+    {
+      "icon": "🤖",
+      "title": "Robux",
+      "points": "800 points = 800 Robux",
+      "description": "Get Robux for Roblox games",
+      "popular": true
+    },
+    {
+      "icon": "💻",
+      "title": "Steam Wallet",
+      "points": "1,000 points = $10",
+      "description": "Add funds to your Steam wallet for PC games",
+      "popular": false
+    },
+    {
+      "icon": "🎵",
+      "title": "Spotify Premium",
+      "points": "1,200 points = 1 month",
+      "description": "Enjoy ad-free music streaming",
+      "popular": false
+    },
+    {
+      "icon": "₿",
+      "title": "Bitcoin",
+      "points": "10,000 points = $100 BTC",
+      "description": "Get paid in cryptocurrency",
+      "popular": false
+    },
+    {
+      "icon": "✨",
+      "title": "Exclusive Merchandise",
+      "points": "Varies",
+      "description": "Cashog branded merchandise and special items",
+      "popular": false
+    }
+  ],
+  "benefitsTitle": "Why Join Our Loyalty Program",
+  "benefits": [
+    {
+      "icon": "💰",
+      "title": "Earn Cash Back",
+      "description": "Get paid for activities you already do every day"
+    },
+    {
+      "icon": "📈",
+      "title": "Climb the Tiers",
+      "description": "Unlock better rewards and higher point multipliers"
+    },
+    {
+      "icon": "🎁",
+      "title": "Exclusive Rewards",
+      "description": "Access rewards that non-members can't get"
+    },
+    {
+      "icon": "⭐",
+      "title": "No Fees Ever",
+      "description": "100% free to join and earn points"
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Your Points",
+  "tips": [
+    {
+      "title": "Log in Daily",
+      "description": "Build your daily streak for bonus points. The longer your streak, the bigger the bonus!"
+    },
+    {
+      "title": "Complete High-Value Offers",
+      "description": "Focus on offers that give 500+ points for maximum earnings"
+    },
+    {
+      "title": "Refer Friends",
+      "description": "Earn 1,000 points for every friend who joins through your referral link"
+    },
+    {
+      "title": "Maintain Your Streak",
+      "description": "Don't break your daily login streak - it's an easy way to earn passive points"
+    },
+    {
+      "title": "Complete Achievements",
+      "description": "Check the achievements page for one-time bonus opportunities"
+    },
+    {
+      "title": "Reach Higher Tiers",
+      "description": "Silver, Gold, and Platinum tiers earn 2x, 3x, and 5x points on everything!"
+    }
+  ],
+  "testimonialsTitle": "What Loyal Members Say",
+  "testimonials": [
+    {
+      "name": "Michael T.",
+      "country": "United States",
+      "points": "15,000+",
+      "quote": "The points add up fast. I'm Platinum tier and earn 5x points on everything. Redeemed over $500 in PayPal cash last year!",
+      "avatar": "MT",
+      "tier": "Platinum"
+    },
+    {
+      "name": "Jennifer L.",
+      "country": "Canada",
+      "points": "8,500",
+      "quote": "Love the loyalty program! Reached Gold tier in 3 months. The daily login streak bonus is my favorite feature.",
+      "avatar": "JL",
+      "tier": "Gold"
+    },
+    {
+      "name": "David K.",
+      "country": "United Kingdom",
+      "points": "3,200",
+      "quote": "Just hit Silver tier. The 2x points multiplier is already helping me earn faster. Can't wait to reach Gold!",
+      "avatar": "DK",
+      "tier": "Silver"
+    },
+    {
+      "name": "Sarah M.",
+      "country": "Australia",
+      "points": "25,000+",
+      "quote": "Platinum member here! The dedicated account manager and custom rewards make this program unbeatable.",
+      "avatar": "SM",
+      "tier": "Platinum"
+    },
+    {
+      "name": "Carlos R.",
+      "country": "Spain",
+      "points": "1,500",
+      "quote": "Just started but already loving it. The points system is simple and rewards are easy to redeem.",
+      "avatar": "CR",
+      "tier": "Bronze"
+    },
+    {
+      "name": "Priya S.",
+      "country": "India",
+      "points": "6,200",
+      "quote": "Gold tier benefits are amazing. I earn 3x points and got birthday bonus points last month!",
+      "avatar": "PS",
+      "tier": "Gold"
+    }
+  ],
+  "faq": {
+    "title": "Loyalty Rewards Program in {country} - FAQ",
+    "items": [
+      {
+        "question": "How do I earn loyalty points?",
+        "answer": "You earn points for every action on Cashog: completing surveys (100-500 points), installing apps (50-200 points), playing games (200-1,000 points), watching ads (5-25 points), completing offers (500-5,000 points), referring friends (1,000 points), daily login streaks (10-100 points), and completing achievements (250-2,500 points)."
+      },
+      {
+        "question": "How many points equal $1?",
+        "answer": "100 points = $1 when redeeming for PayPal cash or gift cards. Higher tiers get better redemption rates through multipliers."
+      },
+      {
+        "question": "What are the loyalty tiers?",
+        "answer": "Bronze (0-999 points) - 1x points. Silver (1,000-4,999 points) - 2x points. Gold (5,000-9,999 points) - 3x points. Platinum (10,000+ points) - 5x points. Higher tiers unlock better rewards and exclusive benefits."
+      },
+      {
+        "question": "Do points expire?",
+        "answer": "Points never expire as long as your account remains active (at least one activity every 12 months). Platinum and Gold tier points never expire regardless of activity."
+      },
+      {
+        "question": "How do I redeem my points?",
+        "answer": "Go to the Rewards section in your dashboard, choose your reward, and click 'Redeem'. Points are deducted instantly and rewards are processed within 24-48 hours."
+      },
+      {
+        "question": "Can I transfer points to another member?",
+        "answer": "Yes! Platinum and Gold tier members can transfer points to other members. Bronze and Silver members cannot transfer points."
+      },
+      {
+        "question": "Is there a limit to how many points I can earn?",
+        "answer": "No! There is no maximum limit. You can earn as many points as you want. Some Platinum members have earned over 100,000 points!"
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Start Earning Rewards in {country}?",
+    "subtitle": "Join 200,000+ loyal members already earning rewards in {country}. Sign up for free and start collecting points today!"
+  }
+}
