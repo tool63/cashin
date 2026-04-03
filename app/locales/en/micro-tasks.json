@@ -1,0 +1,268 @@
+{
+  "seo": {
+    "title": "Micro Tasks in {country} - Earn $0.50-$50 Per Small Task | Cashog",
+    "description": "Join 120,000+ members earning money in {country} by completing simple micro tasks. Data entry, image tagging, captcha solving & more. Get paid via PayPal instantly!"
+  },
+  "hero": {
+    "title": "Get Paid for Micro Tasks in {country}",
+    "subtitle": "Join 120,000+ members earning money in {country} by completing simple micro tasks. Data entry, image tagging, captcha solving & more - no experience needed!"
+  },
+  "statsTitle": "Micro Tasks Statistics",
+  "stats": {
+    "tasksCompleted": "75M+",
+    "tasksCompletedLabel": "Tasks Completed",
+    "avgPayout": "$2.50",
+    "avgPayoutLabel": "Average Per Task",
+    "activeUsers": "120K+",
+    "activeUsersLabel": "Active Workers",
+    "totalPaid": "$18M+",
+    "totalPaidLabel": "Total Paid"
+  },
+  "categoriesTitle": "Micro Task Categories",
+  "categoriesSubtitle": "Earn by completing these types of tasks",
+  "taskCategories": [
+    {
+      "icon": "📝",
+      "title": "Data Entry",
+      "description": "Copy, paste, and organize information",
+      "avgReward": "$0.50-$5",
+      "timeRequired": "1-5 min",
+      "difficulty": "Easy"
+    },
+    {
+      "icon": "🖼️",
+      "title": "Image Tagging",
+      "description": "Label and categorize images",
+      "avgReward": "$0.10-$2",
+      "timeRequired": "10-30 sec",
+      "difficulty": "Easy"
+    },
+    {
+      "icon": "🔐",
+      "title": "Captcha Solving",
+      "description": "Solve simple captcha challenges",
+      "avgReward": "$0.01-$0.10",
+      "timeRequired": "5-10 sec",
+      "difficulty": "Easy"
+    },
+    {
+      "icon": "✅",
+      "title": "Data Validation",
+      "description": "Verify and check information accuracy",
+      "avgReward": "$0.50-$3",
+      "timeRequired": "30 sec - 2 min",
+      "difficulty": "Medium"
+    },
+    {
+      "icon": "🔍",
+      "title": "Web Research",
+      "description": "Find specific information online",
+      "avgReward": "$2-$20",
+      "timeRequired": "5-15 min",
+      "difficulty": "Medium"
+    },
+    {
+      "icon": "📊",
+      "title": "Survey Pre-screening",
+      "description": "Answer qualifying questions for surveys",
+      "avgReward": "$0.10-$1",
+      "timeRequired": "30-60 sec",
+      "difficulty": "Easy"
+    },
+    {
+      "icon": "🎤",
+      "title": "Audio Transcription",
+      "description": "Convert audio to text",
+      "avgReward": "$5-$50",
+      "timeRequired": "10-30 min",
+      "difficulty": "Hard"
+    },
+    {
+      "icon": "🏷️",
+      "title": "Product Categorization",
+      "description": "Sort products into categories",
+      "avgReward": "$0.50-$2",
+      "timeRequired": "30 sec - 1 min",
+      "difficulty": "Easy"
+    },
+    {
+      "icon": "📧",
+      "title": "Email Sorting",
+      "description": "Organize and categorize emails",
+      "avgReward": "$1-$5",
+      "timeRequired": "2-5 min",
+      "difficulty": "Easy"
+    }
+  ],
+  "featuredTasksTitle": "High-Paying Tasks Available Now",
+  "featuredTasksSubtitle": "Limited spots - complete these tasks today",
+  "featuredTasks": [
+    {
+      "title": "Product Image Tagging - 500 Images",
+      "reward": "$25",
+      "timeEstimate": "30-45 min",
+      "category": "Image Tagging",
+      "spotsLeft": 50,
+      "provider": "Amazon ML",
+      "rating": "4.9"
+    },
+    {
+      "title": "Website Data Entry - 200 Records",
+      "reward": "$15",
+      "timeEstimate": "20-30 min",
+      "category": "Data Entry",
+      "spotsLeft": 120,
+      "provider": "Google",
+      "rating": "4.8"
+    },
+    {
+      "title": "Audio Transcription - 10 Minutes",
+      "reward": "$8",
+      "timeEstimate": "15-20 min",
+      "category": "Audio Transcription",
+      "spotsLeft": 75,
+      "provider": "Rev",
+      "rating": "4.7"
+    },
+    {
+      "title": "Captcha Solving - 1000 Captchas",
+      "reward": "$10",
+      "timeEstimate": "20-30 min",
+      "category": "Captcha Solving",
+      "spotsLeft": 500,
+      "provider": "2Captcha",
+      "rating": "4.6"
+    },
+    {
+      "title": "Local Business Research",
+      "reward": "$20",
+      "timeEstimate": "25-35 min",
+      "category": "Web Research",
+      "spotsLeft": 30,
+      "provider": "Yelp",
+      "rating": "4.8"
+    },
+    {
+      "title": "Email Categorization - 500 Emails",
+      "reward": "$12",
+      "timeEstimate": "15-20 min",
+      "category": "Email Sorting",
+      "spotsLeft": 200,
+      "provider": "Microsoft",
+      "rating": "4.7"
+    }
+  ],
+  "benefitsTitle": "Why Complete Micro Tasks",
+  "benefits": [
+    {
+      "icon": "💰",
+      "title": "Quick Earnings",
+      "description": "Complete tasks in seconds or minutes. Get paid immediately after finishing"
+    },
+    {
+      "icon": "⏰",
+      "title": "Work Anytime",
+      "description": "No schedule required. Complete tasks whenever you have free time"
+    },
+    {
+      "icon": "🏠",
+      "title": "Work From Home",
+      "description": "No commute, no dress code. Just complete tasks from your computer"
+    },
+    {
+      "icon": "🎯",
+      "title": "No Experience Needed",
+      "description": "Most tasks require no special skills. Anyone can do them"
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Micro Task Earnings",
+  "tips": [
+    {
+      "title": "Start with Easy Tasks",
+      "description": "Begin with data entry and image tagging to build your speed and accuracy"
+    },
+    {
+      "title": "Complete Tasks Accurately",
+      "description": "High-quality work leads to more task invitations and higher pay rates"
+    },
+    {
+      "title": "Check for New Tasks Daily",
+      "description": "New high-paying tasks are added every day. The best ones fill up fast"
+    },
+    {
+      "title": "Focus on Higher Paying Categories",
+      "description": "Web research and transcription pay more than basic tasks"
+    }
+  ],
+  "testimonialsTitle": "What Our Task Workers Say",
+  "testimonials": [
+    {
+      "name": "John M.",
+      "country": "United States",
+      "earnings": "$850",
+      "quote": "I do micro tasks during my lunch break and evenings. Made over $800 in 3 months. So easy!",
+      "avatar": "JM"
+    },
+    {
+      "name": "Priya K.",
+      "country": "India",
+      "earnings": "$350",
+      "quote": "Perfect for students. I earn $100-150 monthly just doing data entry tasks between classes.",
+      "avatar": "PK"
+    },
+    {
+      "name": "Carlos R.",
+      "country": "Spain",
+      "earnings": "$420",
+      "quote": "The image tagging tasks are my favorite. Quick and easy money. Cashog pays instantly to PayPal.",
+      "avatar": "CR"
+    },
+    {
+      "name": "Lisa W.",
+      "country": "Canada",
+      "earnings": "$620",
+      "quote": "I've tried many micro task sites. Cashog has the highest paying tasks and fastest payouts.",
+      "avatar": "LW"
+    },
+    {
+      "name": "Ahmed S.",
+      "country": "UAE",
+      "earnings": "$510",
+      "quote": "Audio transcription tasks pay really well. I earn $15-20 per hour doing transcription work.",
+      "avatar": "AS"
+    }
+  ],
+  "faq": {
+    "title": "Micro Tasks in {country} - FAQ",
+    "items": [
+      {
+        "question": "How much can I earn from micro tasks?",
+        "answer": "Earnings vary by task type. Simple tasks pay $0.01-$2 each. Complex tasks like transcription pay $5-$50. Most members earn $100-$500 per month, but active workers earn $1000+ by completing hundreds of tasks daily."
+      },
+      {
+        "question": "Is it really free to join?",
+        "answer": "Yes! Cashog is 100% free to join. You never need to pay anything. Just complete tasks and get paid."
+      },
+      {
+        "question": "How do I get paid for completing tasks?",
+        "answer": "You can cash out via PayPal, bank transfer, Bitcoin, Ethereum, or gift cards (Amazon, Apple, Google Play, Robux, Steam, Xbox, PlayStation). Minimum payout is just $5."
+      },
+      {
+        "question": "Do I need special skills for micro tasks?",
+        "answer": "No! Most tasks require no special skills. Data entry, image tagging, and captcha solving are easy for anyone. Some tasks like transcription may require basic English skills."
+      },
+      {
+        "question": "How long does each task take?",
+        "answer": "Tasks range from 10 seconds to 30 minutes. Simple tasks like captcha solving take 5-10 seconds. Complex tasks like transcription take 15-30 minutes. You can choose tasks that fit your available time."
+      },
+      {
+        "question": "Is Cashog available in my country?",
+        "answer": "Cashog is available in over 50 countries including the US, Canada, UK, Australia, India, Philippines, Germany, France, Spain, Italy, and many more. Sign up for free to check micro task availability in {country}."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Start Earning in {country}?",
+    "subtitle": "Join 120,000+ members already getting paid in {country}. Sign up for free and complete your first micro task today!"
+  }
+}
