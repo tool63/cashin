@@ -124,9 +124,9 @@ export default async function HowItWorksPage({
       : [],
   };
 
-  const ctaData = {
-    title: howItWorks?.cta?.title?.replace(/\{country\}/g, countryName),
-    subtitle: howItWorks?.cta?.subtitle?.replace(/\{country\}/g, countryName),
+  const finalData = {
+    title: howItWorks?.final?.title?.replace(/\{country\}/g, countryName),
+    subtitle: howItWorks?.final?.subtitle?.replace(/\{country\}/g, countryName),
   };
 
   /* ================= RENDER ================= */
@@ -272,26 +272,42 @@ export default async function HowItWorksPage({
         <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
-              Platform Statistics
+              {howItWorks?.statsTitle?.replace(/\{country\}/g, countryName) || "Platform Statistics"}
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full" />
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl">
-              <div className="text-3xl md:text-4xl font-bold text-green-600">50K+</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">Active Users</div>
+              <div className="text-3xl md:text-4xl font-bold text-green-600">
+                {howItWorks?.stats?.activeUsers || "50K+"}
+              </div>
+              <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                {howItWorks?.stats?.activeUsersLabel || "Active Users"}
+              </div>
             </div>
             <div className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl">
-              <div className="text-3xl md:text-4xl font-bold text-green-600">$2.5M+</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">Paid Out</div>
+              <div className="text-3xl md:text-4xl font-bold text-green-600">
+                {howItWorks?.stats?.paidOut || "$2.5M+"}
+              </div>
+              <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                {howItWorks?.stats?.paidOutLabel || "Paid Out"}
+              </div>
             </div>
             <div className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl">
-              <div className="text-3xl md:text-4xl font-bold text-green-600">24/7</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">Task Availability</div>
+              <div className="text-3xl md:text-4xl font-bold text-green-600">
+                {howItWorks?.stats?.availability || "24/7"}
+              </div>
+              <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                {howItWorks?.stats?.availabilityLabel || "Task Availability"}
+              </div>
             </div>
             <div className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl">
-              <div className="text-3xl md:text-4xl font-bold text-green-600">Instant</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">Withdrawals</div>
+              <div className="text-3xl md:text-4xl font-bold text-green-600">
+                {howItWorks?.stats?.withdrawals || "Instant"}
+              </div>
+              <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                {howItWorks?.stats?.withdrawalsLabel || "Withdrawals"}
+              </div>
             </div>
           </div>
         </section>
@@ -306,26 +322,23 @@ export default async function HowItWorksPage({
         </OpeningStyle>
       )}
 
-      {/* Final CTA Banner */}
-      {ctaData.title && (
-        <OpeningStyle delay={0.1}>
-          <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
-            <div className="bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 rounded-2xl p-8 md:p-12 text-center">
-              <h3 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">
-                {ctaData.title}
-              </h3>
-              <p className="text-gray-800 mb-8 max-w-2xl mx-auto text-lg">
-                {ctaData.subtitle}
-              </p>
-              <PrimaryCTA
-                href="/signup"
-                translationKey="start_earning_now"
-                observer={false}
-              />
-            </div>
-          </section>
-        </OpeningStyle>
-      )}
+      {/* Final Section - Same style as Hero */}
+      <OpeningStyle delay={0.1}>
+        <section className="max-w-7xl mx-auto px-6 py-24 md:py-32 text-center">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
+            {finalData.title}
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full mb-8" />
+          <p className="text-lg sm:text-xl md:text-2xl mb-12 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            {finalData.subtitle}
+          </p>
+          <PrimaryCTA
+            href="/signup"
+            translationKey="start_earning_now"
+            observer={true}
+          />
+        </section>
+      </OpeningStyle>
     </main>
   );
 }
