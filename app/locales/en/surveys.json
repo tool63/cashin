@@ -1,0 +1,252 @@
+{
+  "seo": {
+    "title": "Paid Surveys - Earn $5-$50 Per Survey",
+    "description": "Join 200,000+ members earning real cash. Take paid surveys from top brands. Get paid via PayPal or gift cards. Free to join today!"
+  },
+  "hero": {
+    "title": "Get Paid For Your Opinion",
+    "subtitle": "Join 200,000+ members earning real cash. Share your thoughts, influence brands, and get paid instantly. No experience needed!"
+  },
+  "statsTitle": "Trusted by Thousands",
+  "stats": {
+    "surveysCompleted": "5M+",
+    "surveysCompletedLabel": "Paid Surveys Completed",
+    "avgPayout": "$3.50",
+    "avgPayoutLabel": "Average Payout",
+    "activeUsers": "200K+",
+    "activeUsersLabel": "Active Members",
+    "brands": "500+",
+    "brandsLabel": "Brand Partners"
+  },
+  "categoriesTitle": "Popular Survey Categories",
+  "categoriesSubtitle": "Share your opinion and get paid in these categories",
+  "surveyCategories": [
+    {
+      "icon": "🛍️",
+      "title": "Shopping & Retail",
+      "description": "Share your shopping habits and preferences",
+      "avgReward": "$2-8",
+      "timeRequired": "5-15 min",
+      "frequency": "Daily"
+    },
+    {
+      "icon": "📱",
+      "title": "Technology",
+      "description": "Review gadgets, apps, and software",
+      "avgReward": "$3-10",
+      "timeRequired": "10-20 min",
+      "frequency": "Daily"
+    },
+    {
+      "icon": "🍔",
+      "title": "Food & Beverage",
+      "description": "Share opinions on restaurants and products",
+      "avgReward": "$2-6",
+      "timeRequired": "5-10 min",
+      "frequency": "Daily"
+    },
+    {
+      "icon": "🎬",
+      "title": "Entertainment",
+      "description": "Review movies, music, and streaming",
+      "avgReward": "$2-7",
+      "timeRequired": "5-15 min",
+      "frequency": "Daily"
+    },
+    {
+      "icon": "❤️",
+      "title": "Health & Wellness",
+      "description": "Share health and fitness opinions",
+      "avgReward": "$3-12",
+      "timeRequired": "10-20 min",
+      "frequency": "Weekly"
+    },
+    {
+      "icon": "💰",
+      "title": "Finance",
+      "description": "Opinions on banking and investments",
+      "avgReward": "$4-15",
+      "timeRequired": "10-25 min",
+      "frequency": "Weekly"
+    },
+    {
+      "icon": "🚗",
+      "title": "Automotive",
+      "description": "Share car and transportation views",
+      "avgReward": "$3-10",
+      "timeRequired": "10-15 min",
+      "frequency": "Weekly"
+    },
+    {
+      "icon": "👶",
+      "title": "Parenting",
+      "description": "Share family and parenting insights",
+      "avgReward": "$3-8",
+      "timeRequired": "10-15 min",
+      "frequency": "Weekly"
+    },
+    {
+      "icon": "✈️",
+      "title": "Travel",
+      "description": "Share travel experiences and plans",
+      "avgReward": "$3-12",
+      "timeRequired": "10-20 min",
+      "frequency": "Weekly"
+    }
+  ],
+  "featuredTitle": "High-Paying Surveys Available Now",
+  "featuredSubtitle": "Limited spots - complete these surveys today",
+  "featuredSurveys": [
+    {
+      "title": "Consumer Electronics Shopping Habits",
+      "reward": "$3.50",
+      "timeEstimate": "10 mins",
+      "difficulty": "Easy",
+      "spotsLeft": 124,
+      "company": "Tech Research Inc"
+    },
+    {
+      "title": "Streaming Service Preferences 2024",
+      "reward": "$4.00",
+      "timeEstimate": "15 mins",
+      "difficulty": "Medium",
+      "spotsLeft": 87,
+      "company": "Media Insights"
+    },
+    {
+      "title": "Mobile Banking App Feedback",
+      "reward": "$5.50",
+      "timeEstimate": "20 mins",
+      "difficulty": "Medium",
+      "spotsLeft": 53,
+      "company": "FinTech Research"
+    },
+    {
+      "title": "Fast Food Restaurant Experience",
+      "reward": "$2.50",
+      "timeEstimate": "5 mins",
+      "difficulty": "Easy",
+      "spotsLeft": 256,
+      "company": "Food Industry Group"
+    },
+    {
+      "title": "Fitness Tracker User Survey",
+      "reward": "$6.00",
+      "timeEstimate": "25 mins",
+      "difficulty": "Hard",
+      "spotsLeft": 32,
+      "company": "Health Tech Labs"
+    },
+    {
+      "title": "Online Shopping Behavior Study",
+      "reward": "$4.50",
+      "timeEstimate": "15 mins",
+      "difficulty": "Medium",
+      "spotsLeft": 178,
+      "company": "E-commerce Research"
+    }
+  ],
+  "benefitsTitle": "Why Take Paid Surveys",
+  "benefits": [
+    {
+      "icon": "💰",
+      "title": "Easy Money",
+      "description": "Get paid for simple opinions with no special skills"
+    },
+    {
+      "icon": "⏰",
+      "title": "Flexible Schedule",
+      "description": "Take surveys anytime, anywhere at your convenience"
+    },
+    {
+      "icon": "📱",
+      "title": "Work from Anywhere",
+      "description": "Complete surveys on your phone, tablet, or computer"
+    },
+    {
+      "icon": "🎯",
+      "title": "Influence Brands",
+      "description": "Help shape products and services you use every day"
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Your Earnings",
+  "tips": [
+    {
+      "title": "Complete Your Profile",
+      "description": "Fill out your profile completely to get more survey invites that match your demographics"
+    },
+    {
+      "title": "Respond Quickly",
+      "description": "High-paying surveys fill up fast. Check for new surveys regularly"
+    },
+    {
+      "title": "Be Consistent",
+      "description": "Take surveys daily to build your reputation and unlock higher-paying opportunities"
+    }
+  ],
+  "testimonialsTitle": "Real Members, Real Earnings",
+  "testimonials": [
+    {
+      "name": "Sarah Johnson",
+      "country": "United States",
+      "earnings": "$847",
+      "quote": "I take surveys during my lunch break and earn an extra $200-300 every month. It's so easy!",
+      "avatar": "S"
+    },
+    {
+      "name": "Michael Chen",
+      "country": "Canada",
+      "earnings": "$1,250",
+      "quote": "Best survey platform I've used. Consistent payouts and interesting topics.",
+      "avatar": "M"
+    },
+    {
+      "name": "Emma Williams",
+      "country": "United Kingdom",
+      "earnings": "$632",
+      "quote": "Perfect for stay-at-home parents. I earn while watching TV in the evening.",
+      "avatar": "E"
+    }
+  ],
+  "faq": {
+    "title": "Paid Surveys - Frequently Asked Questions",
+    "items": [
+      {
+        "question": "How much can I earn from paid surveys?",
+        "answer": "Most surveys pay between $2-$15 each. Active users earn $100-$500 monthly by completing 5-10 surveys daily."
+      },
+      {
+        "question": "How long does each survey take?",
+        "answer": "Survey length varies from 5-30 minutes depending on complexity. Most surveys take 10-15 minutes to complete."
+      },
+      {
+        "question": "Do I need special qualifications?",
+        "answer": "No, anyone can take surveys. You just need to share honest opinions based on your experiences."
+      },
+      {
+        "question": "How do I get paid for surveys?",
+        "answer": "Payments are made via PayPal, bank transfer, gift cards, or cryptocurrency. Minimum withdrawal is $10."
+      },
+      {
+        "question": "Are there surveys available every day?",
+        "answer": "Yes, new surveys are added daily. Active users typically receive 10-20 survey invites per day."
+      },
+      {
+        "question": "Why do I get screened out of surveys?",
+        "answer": "Sometimes your profile doesn't match what researchers need. Completing your profile accurately helps reduce this."
+      },
+      {
+        "question": "Is this really free to join?",
+        "answer": "Yes, creating an account is completely free. There are no hidden fees or charges to start taking surveys."
+      },
+      {
+        "question": "Can I take surveys on my phone?",
+        "answer": "Yes, our platform is fully mobile-optimized. You can take surveys on any device with an internet connection."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Start Earning?",
+    "subtitle": "Join 200,000+ members already getting paid. Sign up for free and take your first paid survey today!"
+  }
+}
