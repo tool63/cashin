@@ -1,0 +1,229 @@
+{
+  "seo": {
+    "title": "Offerwall Earnings in {country} - Access 50+ Offer Providers | Cashog",
+    "description": "Access 50+ offer providers through our offerwall in {country}. Complete surveys, downloads, trials & earn $1000+ monthly. Highest paying offers guaranteed!"
+  },
+  "hero": {
+    "title": "Access the Best Offerwall in {country}",
+    "subtitle": "Get access to 50+ premium offer providers in {country}. Complete surveys, download apps, sign up for trials, and earn $1000+ monthly from a single dashboard!"
+  },
+  "statsTitle": "Offerwall Statistics",
+  "stats": {
+    "offersAvailable": "10,000+",
+    "offersAvailableLabel": "Daily Offers",
+    "avgReward": "$15.00",
+    "avgRewardLabel": "Average Reward",
+    "activeUsers": "150K+",
+    "activeUsersLabel": "Active Users",
+    "totalPaid": "$50M+",
+    "totalPaidLabel": "Total Paid"
+  },
+  "providersTitle": "Premium Offer Providers",
+  "providersSubtitle": "Access offers from the industry's top providers",
+  "providers": [
+    {
+      "name": "OfferToro",
+      "logo": "OT",
+      "description": "Premium offers including high-value surveys, app installs, and video tasks. Known for reliable payouts.",
+      "offerCount": 2000,
+      "avgPayout": "$18.50",
+      "features": ["Surveys", "App Downloads", "Videos"]
+    },
+    {
+      "name": "AdGate Media",
+      "logo": "AM",
+      "description": "Trusted provider with unique offers, free trials, and shopping rewards. Great for consistent earnings.",
+      "offerCount": 1500,
+      "avgPayout": "$15.00",
+      "features": ["Free Trials", "Shopping", "Games"]
+    },
+    {
+      "name": "OfferDaddy",
+      "logo": "OD",
+      "description": "Specializes in credit card offers, loan applications, and insurance quotes. Highest paying offers.",
+      "offerCount": 800,
+      "avgPayout": "$35.00",
+      "features": ["Credit Cards", "Loans", "Insurance"]
+    },
+    {
+      "name": "Persona.ly",
+      "logo": "PL",
+      "description": "Mobile-focused offers including app downloads, game installs, and in-app actions.",
+      "offerCount": 1200,
+      "avgPayout": "$8.50",
+      "features": ["Mobile Apps", "Games", "In-App"]
+    },
+    {
+      "name": "RevenueWall",
+      "logo": "RW",
+      "description": "Diverse offer selection with email submits, zip code submits, and daily surveys.",
+      "offerCount": 1000,
+      "avgPayout": "$12.00",
+      "features": ["Email Submits", "Zip Submits", "Surveys"]
+    },
+    {
+      "name": "Lootably",
+      "logo": "LB",
+      "description": "Known for high-converting offers and daily bonuses. Great for power users.",
+      "offerCount": 900,
+      "avgPayout": "$14.00",
+      "features": ["Daily Bonuses", "High Value", "Fast Payouts"]
+    }
+  ],
+  "featuredOffersTitle": "Top Offers on Our Offerwall",
+  "featuredOffersSubtitle": "Highest paying offers available right now",
+  "featuredOffers": [
+    {
+      "title": "Chase Sapphire Preferred Application",
+      "reward": "$125",
+      "timeEstimate": "15 min",
+      "type": "Credit Card",
+      "spotsLeft": 100,
+      "provider": "OfferDaddy",
+      "rating": "4.9"
+    },
+    {
+      "title": "Nielsen Computer & Mobile Panel",
+      "reward": "$75",
+      "timeEstimate": "10 min",
+      "type": "Survey Panel",
+      "spotsLeft": 500,
+      "provider": "AdGate Media",
+      "rating": "4.8"
+    },
+    {
+      "title": "Disney+ Annual Subscription",
+      "reward": "$50",
+      "timeEstimate": "5 min",
+      "type": "Free Trial",
+      "spotsLeft": 1000,
+      "provider": "OfferToro",
+      "rating": "4.7"
+    },
+    {
+      "title": "Coinbase Sign Up Bonus",
+      "reward": "$25",
+      "timeEstimate": "8 min",
+      "type": "Sign Up",
+      "spotsLeft": 2000,
+      "provider": "Lootably",
+      "rating": "4.6"
+    },
+    {
+      "title": "Norton 360 Free Trial",
+      "reward": "$40",
+      "timeEstimate": "6 min",
+      "type": "Free Trial",
+      "spotsLeft": 750,
+      "provider": "RevenueWall",
+      "rating": "4.8"
+    }
+  ],
+  "benefitsTitle": "Why Choose Our Offerwall",
+  "benefits": [
+    {
+      "icon": "🏢",
+      "title": "50+ Providers",
+      "description": "Access offers from multiple premium providers in one place. No need to join separate sites."
+    },
+    {
+      "icon": "💰",
+      "title": "Highest Payouts",
+      "description": "We negotiate the best rates with providers. You get paid more for the same offers."
+    },
+    {
+      "icon": "⚡",
+      "title": "Instant Tracking",
+      "description": "Real-time offer completion tracking. Get credited immediately when you complete an offer."
+    },
+    {
+      "icon": "🔄",
+      "title": "Daily Fresh Offers",
+      "description": "Thousands of new offers added daily. Never run out of ways to earn."
+    }
+  ],
+  "tipsTitle": "Offerwall Success Tips",
+  "tips": [
+    {
+      "title": "Try Multiple Providers",
+      "description": "Different providers have different offers. Check all 50+ providers to find the highest paying opportunities."
+    },
+    {
+      "title": "Complete Profile Surveys",
+      "description": "Many providers use profile data to match you with higher-paying, relevant offers."
+    },
+    {
+      "title": "Focus on Free Trials",
+      "description": "Free trial offers pay the most. Just remember to cancel before the trial ends to avoid charges."
+    },
+    {
+      "title": "Use Offerwalls Daily",
+      "description": "New high-paying offers appear daily. Check early - the best offers have limited spots."
+    }
+  ],
+  "testimonialsTitle": "What Our Users Say",
+  "testimonials": [
+    {
+      "name": "Daniel Peterson",
+      "country": "United States",
+      "earnings": "$3,247",
+      "quote": "Having 50+ providers in one place is amazing. I used to join multiple sites, now I just use Cashog's offerwall. Made over $3000 last month!",
+      "avatar": "DP"
+    },
+    {
+      "name": "Sarah Mitchell",
+      "country": "United Kingdom",
+      "earnings": "$1,892",
+      "quote": "The variety of offers is incredible. From quick surveys to high-value credit card offers, there's always something to complete.",
+      "avatar": "SM"
+    },
+    {
+      "name": "Carlos Mendez",
+      "country": "Spain",
+      "earnings": "$2,450",
+      "quote": "Best offerwall platform I've used. The tracking is instant and payments arrive quickly. Highly recommend!",
+      "avatar": "CM"
+    }
+  ],
+  "faq": {
+    "title": "Offerwall in {country} - FAQ",
+    "items": [
+      {
+        "question": "What is an offerwall?",
+        "answer": "An offerwall is a platform that connects users with multiple offer providers. Instead of joining 50+ different sites, you access all their offers through one dashboard on Cashog."
+      },
+      {
+        "question": "How many offer providers do you have?",
+        "answer": "We have 50+ premium offer providers including OfferToro, AdGate Media, OfferDaddy, Persona.ly, RevenueWall, Lootably, and many more. We're constantly adding new providers."
+      },
+      {
+        "question": "How much can I earn through the offerwall in {country}?",
+        "answer": "Most users earn $300-800 monthly. Active users who complete high-value offers can earn $2000+. Some power users earn $5000+ monthly by completing multiple offers daily."
+      },
+      {
+        "question": "Do I need to complete offers on different websites?",
+        "answer": "No! All offers are accessible directly through Cashog's offerwall. You complete everything from one dashboard without needing to create separate accounts."
+      },
+      {
+        "question": "How do I get paid?",
+        "answer": "We offer multiple payment options including PayPal, bank transfer, Visa direct, Bitcoin, Ethereum, and gift cards for Amazon, Google Play, and more. Most offers credit instantly."
+      },
+      {
+        "question": "Is the offerwall available in {country}?",
+        "answer": "Yes! Our offerwall is fully available in {country}. Most providers have hundreds of offers specifically for {country} users with local payment options."
+      },
+      {
+        "question": "Can I access the offerwall on mobile?",
+        "answer": "Absolutely! Our offerwall works perfectly on all devices. Download our mobile app for iOS and Android to access offers anywhere, anytime."
+      },
+      {
+        "question": "Are there any fees to use the offerwall?",
+        "answer": "No! Cashog is completely free. We earn commissions from providers, so you get paid for completing offers at no cost to you."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Access Our Offerwall in {country}?",
+    "subtitle": "Join 150,000+ members already earning through our offerwall in {country}. Sign up for free and start completing offers today!"
+  }
+}
