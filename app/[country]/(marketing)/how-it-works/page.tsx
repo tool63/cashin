@@ -1,5 +1,3 @@
-app/[country]/(marketing)/how-it-works/page.tsx
-
 import { cookies } from "next/headers";
 import Link from "next/link";
 
