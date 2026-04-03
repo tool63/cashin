@@ -336,7 +336,7 @@ export default async function SpinningWheelPage({
     return replaceCountryPlaceholder(text, countryName);
   };
 
-  // SEO data for structured data
+  // SEO data for structured data - using "low" type instead of "game"
   const rawTitle = tData?.seo?.title;
   const rawDescription = tData?.seo?.description;
   const title = t(rawTitle, `Spin the Wheel & Win Real Money in ${countryName}`);
@@ -346,7 +346,7 @@ export default async function SpinningWheelPage({
     path: `/${country}/spinning-wheel`,
     title,
     description,
-    type: "game",
+    type: "low", // Changed from "game" to valid PageType
   });
 
   // Prepare data with fallbacks
