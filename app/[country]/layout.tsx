@@ -2,7 +2,7 @@ import "@/styles/globals.css";
 import { ReactNode } from "react";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
-import { Metadata } from "next";
+// ❌ REMOVE: import { Metadata } from "next";
 
 import ThemeProviderWrapper from "./providers/ThemeProviderWrapper";
 import { LanguageProvider } from "./providers/LanguageProvider";
@@ -56,44 +56,20 @@ function getDirection(lang: SupportedLanguage): "ltr" | "rtl" {
   return ["ar", "he", "ur", "fa"].includes(lang) ? "rtl" : "ltr";
 }
 
-/* ================= METADATA ================= */
-
-export async function generateMetadata({
-  params,
-}: {
-  params: { country?: string };
-}): Promise<Metadata> {
-  const countryParam = params?.country?.toLowerCase();
-
-  if (!countryParam || !isValidCountryCode(countryParam)) {
-    return {
-      title: "Country Not Found | Cashog",
-      robots: { index: false },
-    };
-  }
-
-  const country = countryParam as CountryCode;
-  const countryName = getCountry(country).name;
-
-  return {
-    title: `Earn Money Online in ${countryName}`,
-    description: `Earn money online in ${countryName} with Cashog.`,
-    alternates: {
-      canonical: `https://cashog.com/${country}`,
-    },
-  };
-}
-
 /* ================= LAYOUT ================= */
+// ❌ REMOVED generateMetadata function - layouts should not have metadata
+// Each page should define its own generateMetadata using your SEO utility
 
 export default async function CountryLayout({
   children,
   params,
 }: {
   children: ReactNode;
-  params: { country?: string };
+  params: Promise<{ country?: string }> | { country?: string };
 }) {
-  const countryParam = params?.country?.toLowerCase();
+  // ✅ Handle async params (Next.js 15+)
+  const resolvedParams = await params;
+  const countryParam = resolvedParams?.country?.toLowerCase();
 
   if (!countryParam || countryParam === "global") {
     redirect("/");
