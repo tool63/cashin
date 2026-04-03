@@ -70,6 +70,17 @@
       "description": "Participate in daily and weekly challenges for bonus rewards"
     }
   ],
+  "statsTitle": "Platform Statistics",
+  "stats": {
+    "activeUsers": "50K+",
+    "activeUsersLabel": "Active Users",
+    "paidOut": "$2.5M+",
+    "paidOutLabel": "Paid Out",
+    "availability": "24/7",
+    "availabilityLabel": "Task Availability",
+    "withdrawals": "Instant",
+    "withdrawalsLabel": "Withdrawals"
+  },
   "faq": {
     "title": "Frequently Asked Questions About Earning in {country}",
     "items": [
@@ -99,20 +110,8 @@
       }
     ]
   },
-  "statsTitle": "Platform Statistics",
-  "stats": {
-    "activeUsers": "50K+",
-    "activeUsersLabel": "Active Users",
-    "paidOut": "$2.5M+",
-    "paidOutLabel": "Paid Out",
-    "availability": "24/7",
-    "availabilityLabel": "Task Availability",
-    "withdrawals": "Instant",
-    "withdrawalsLabel": "Withdrawals"
-  },
-  "cta": {
+  "final": {
     "title": "Ready to Start Earning in {country}?",
-    "subtitle": "Join thousands of happy users who are already earning real money online in {country}",
-    "buttonText": "Create Free Account Now"
+    "subtitle": "Join thousands of happy users who are already earning real money online in {country}"
   }
 }
