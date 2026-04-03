@@ -1,0 +1,221 @@
+{
+  "seo": {
+    "title": "Read Emails & Get Paid in {country} - Earn $0.10-$5 Per Email | Cashog",
+    "description": "Join 70,000+ members earning passive income in {country} by reading emails. Open promotional emails, click links, and earn PayPal cash instantly. Free to join today!"
+  },
+  "hero": {
+    "title": "Get Paid to Read Emails in {country}",
+    "subtitle": "Join 70,000+ members earning passive income in {country} by reading emails. Open promotional emails, click links, and earn cash instantly via PayPal! Takes just seconds per email."
+  },
+  "statsTitle": "Paid Email Statistics",
+  "stats": {
+    "emailsRead": "25M+",
+    "emailsReadLabel": "Emails Read",
+    "avgPayout": "$0.15",
+    "avgPayoutLabel": "Average Per Email",
+    "activeUsers": "70K+",
+    "activeUsersLabel": "Active Members",
+    "totalPaid": "$3.7M+",
+    "totalPaidLabel": "Total Paid"
+  },
+  "categoriesTitle": "Paid Email Categories",
+  "categoriesSubtitle": "Earn by reading these types of emails",
+  "emailCategories": [
+    {
+      "icon": "🛍️",
+      "title": "Shopping Deals",
+      "description": "Promotional emails from retailers",
+      "avgReward": "$0.10-$0.50",
+      "frequency": "Daily",
+      "timeRequired": "10-20 sec"
+    },
+    {
+      "icon": "📰",
+      "title": "Newsletters",
+      "description": "Read brand newsletters",
+      "avgReward": "$0.05-$0.25",
+      "frequency": "Weekly",
+      "timeRequired": "15-30 sec"
+    },
+    {
+      "icon": "🎮",
+      "title": "Gaming Offers",
+      "description": "Gaming promotions and updates",
+      "avgReward": "$0.15-$1",
+      "frequency": "Daily",
+      "timeRequired": "10-15 sec"
+    },
+    {
+      "icon": "💰",
+      "title": "Finance Tips",
+      "description": "Financial newsletters",
+      "avgReward": "$0.25-$2",
+      "frequency": "Weekly",
+      "timeRequired": "20-30 sec"
+    },
+    {
+      "icon": "📱",
+      "title": "App Updates",
+      "description": "New app announcements",
+      "avgReward": "$0.10-$0.50",
+      "frequency": "Daily",
+      "timeRequired": "10-15 sec"
+    },
+    {
+      "icon": "🎬",
+      "title": "Entertainment",
+      "description": "Movie and TV show promos",
+      "avgReward": "$0.10-$0.75",
+      "frequency": "Weekly",
+      "timeRequired": "15-20 sec"
+    }
+  ],
+  "featuredEmailsTitle": "High-Paying Emails Available Now",
+  "featuredEmailsSubtitle": "Limited spots - read these emails today",
+  "featuredEmails": [
+    {
+      "title": "Amazon Prime Day Early Access",
+      "reward": "$0.50",
+      "category": "Shopping",
+      "spotsLeft": 5000,
+      "sender": "Amazon",
+      "rating": "4.9",
+      "estimatedTime": "20 sec"
+    },
+    {
+      "title": "Netflix New Releases - March",
+      "reward": "$0.35",
+      "category": "Entertainment",
+      "spotsLeft": 3500,
+      "sender": "Netflix",
+      "rating": "4.8",
+      "estimatedTime": "15 sec"
+    },
+    {
+      "title": "Cash App Weekly Newsletter",
+      "reward": "$2",
+      "category": "Finance",
+      "spotsLeft": 1000,
+      "sender": "Cash App",
+      "rating": "4.7",
+      "estimatedTime": "30 sec"
+    },
+    {
+      "title": "Steam Summer Sale Announcement",
+      "reward": "$0.75",
+      "category": "Gaming",
+      "spotsLeft": 2500,
+      "sender": "Steam",
+      "rating": "4.8",
+      "estimatedTime": "15 sec"
+    },
+    {
+      "title": "Uber Eats Promo Code",
+      "reward": "$0.40",
+      "category": "Shopping",
+      "spotsLeft": 4000,
+      "sender": "Uber Eats",
+      "rating": "4.6",
+      "estimatedTime": "15 sec"
+    }
+  ],
+  "benefitsTitle": "Why Get Paid to Read Emails",
+  "benefits": [
+    {
+      "icon": "💰",
+      "title": "Passive Income",
+      "description": "Earn money while doing nothing - just check your inbox daily"
+    },
+    {
+      "icon": "⏰",
+      "title": "Takes Seconds",
+      "description": "Each email takes 10-30 seconds to read. Quick and easy earnings"
+    },
+    {
+      "icon": "📱",
+      "title": "Works Anywhere",
+      "description": "Read emails on your phone, tablet, or computer"
+    },
+    {
+      "icon": "🎯",
+      "title": "No Commitment",
+      "description": "Read as many or as few emails as you want. No minimum requirements"
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Email Earnings",
+  "tips": [
+    {
+      "title": "Check Your Inbox Daily",
+      "description": "New paid emails are sent daily. Read them quickly before spots fill up"
+    },
+    {
+      "title": "Use a Separate Email",
+      "description": "Create a dedicated email address for paid emails to stay organized"
+    },
+    {
+      "title": "Click All Links",
+      "description": "Some emails require clicking links to verify you read the content"
+    },
+    {
+      "title": "Don't Mark as Spam",
+      "description": "Marking emails as spam will remove you from future paid email programs"
+    }
+  ],
+  "testimonialsTitle": "What Our Members Say",
+  "testimonials": [
+    {
+      "name": "Lisa M.",
+      "country": "United States",
+      "earnings": "$85",
+      "quote": "I make about $15-20 per month just reading emails while drinking my morning coffee. So easy!",
+      "avatar": "LM"
+    },
+    {
+      "name": "James K.",
+      "country": "Canada",
+      "earnings": "$120",
+      "quote": "Perfect for passive income. I read emails during my commute and earn extra cash each month.",
+      "avatar": "JK"
+    },
+    {
+      "name": "Sarah T.",
+      "country": "United Kingdom",
+      "earnings": "$95",
+      "quote": "The finance emails pay the most. Made $2 from one email last week!",
+      "avatar": "ST"
+    }
+  ],
+  "faq": {
+    "title": "Read Emails & Get Paid in {country} - FAQ",
+    "items": [
+      {
+        "question": "How much can I earn from reading emails?",
+        "answer": "Each paid email pays between $0.05 and $5. Most members earn $20-$50 per month, but active users can earn $100+ by reading 10-20 emails daily. Finance and gaming emails typically pay the most."
+      },
+      {
+        "question": "Is it really free to join?",
+        "answer": "Yes! Cashog is 100% free to join. You never need to pay anything. Just read emails and get paid."
+      },
+      {
+        "question": "How do I get paid for reading emails?",
+        "answer": "You can cash out via PayPal, bank transfer, Bitcoin, Ethereum, or gift cards (Amazon, Apple, Google Play, Robux, Steam, Xbox, PlayStation). Minimum payout is just $5."
+      },
+      {
+        "question": "Do I need to click on links in the emails?",
+        "answer": "Most emails require you to click a link to verify you've read the content. This takes just a few seconds and ensures you get credited."
+      },
+      {
+        "question": "Will I get spam emails?",
+        "answer": "No. We partner only with legitimate brands. You can unsubscribe from any email at any time. We recommend using a dedicated email address for paid emails."
+      },
+      {
+        "question": "Is Cashog available in my country?",
+        "answer": "Cashog is available in over 50 countries including the US, Canada, UK, Australia, Germany, France, Spain, Italy, India, Philippines, and many more. Sign up for free to start receiving paid emails in {country}."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Start Earning in {country}?",
+    "subtitle": "Join 70,000+ members already getting paid in {country}. Sign up for free and start reading paid emails today!"
+  }
+}
