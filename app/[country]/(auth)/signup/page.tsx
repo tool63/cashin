@@ -4,6 +4,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
 import {
   Eye,
@@ -81,6 +82,9 @@ const AUTH_BASE = process.env.NEXT_PUBLIC_AUTH_URL || "https://auth.cashog.com";
 const useExternalAuth = process.env.NEXT_PUBLIC_USE_EXTERNAL_AUTH === "true";
 
 export default function SignupPage() {
+  const params = useParams();
+  const country = params?.country as string || "us";
+  
   const [showPassword, setShowPassword] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
   const [showStrength, setShowStrength] = useState(false);
@@ -151,7 +155,7 @@ export default function SignupPage() {
   const handleSocialSignup = async (provider: string) => {
     setIsLoading(true);
     try {
-      window.location.href = `/api/auth/${provider}?action=signup`;
+      window.location.href = `/api/auth/${provider}?action=signup&country=${country}`;
     } catch (error) {
       console.error(`Error signing up with ${provider}:`, error);
       setIsLoading(false);
@@ -182,6 +186,7 @@ export default function SignupPage() {
           fullName: formData.fullName,
           email: formData.email,
           password: formData.password,
+          country,
         }),
       });
 
@@ -192,7 +197,7 @@ export default function SignupPage() {
       }
 
       // Redirect to dashboard or verification page
-      window.location.href = "/dashboard";
+      window.location.href = `/${country}/dashboard`;
     } catch (error) {
       alert(error instanceof Error ? error.message : "Something went wrong");
     } finally {
@@ -256,7 +261,7 @@ export default function SignupPage() {
         <Background />
         <main className="relative min-h-screen bg-[#0E111B] flex items-center justify-center p-4">
           <iframe
-            src={`${AUTH_BASE}/signup?redirect_back=https://cashog.com`}
+            src={`${AUTH_BASE}/signup?redirect_back=https://cashog.com/${country}`}
             className="w-full max-w-md h-[650px] rounded-3xl border border-neutral-800 shadow-2xl"
             frameBorder="0"
             title="Sign Up"
@@ -374,7 +379,7 @@ export default function SignupPage() {
                 {!formVisible && (
                   <p className="mt-6 text-center text-sm text-gray-400">
                     Already have an account?{" "}
-                    <Link href="/login" className="text-green-500 hover:underline font-medium">
+                    <Link href={`/${country}/login`} className="text-green-500 hover:underline font-medium">
                       Log in
                     </Link>
                   </p>
@@ -540,11 +545,11 @@ export default function SignupPage() {
                       />
                       <label htmlFor="terms" className="text-xs text-gray-400">
                         I agree to the{" "}
-                        <Link href="/terms" className="text-green-500 hover:underline">
+                        <Link href={`/${country}/terms`} className="text-green-500 hover:underline">
                           Terms of Service
                         </Link>{" "}
                         and{" "}
-                        <Link href="/privacy" className="text-green-500 hover:underline">
+                        <Link href={`/${country}/privacy`} className="text-green-500 hover:underline">
                           Privacy Policy
                         </Link>
                       </label>
@@ -561,7 +566,7 @@ export default function SignupPage() {
                     {/* Sign Up Button - Using PrimaryCTA */}
                     <div className="flex justify-center">
                       <PrimaryCTA 
-                        href="/dashboard" 
+                        href={`/${country}/dashboard`} 
                         translationKey="sign_up"
                         fallback="Sign Up"
                       />
