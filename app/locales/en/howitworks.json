@@ -99,6 +99,17 @@
       }
     ]
   },
+  "statsTitle": "Platform Statistics",
+  "stats": {
+    "activeUsers": "50K+",
+    "activeUsersLabel": "Active Users",
+    "paidOut": "$2.5M+",
+    "paidOutLabel": "Paid Out",
+    "availability": "24/7",
+    "availabilityLabel": "Task Availability",
+    "withdrawals": "Instant",
+    "withdrawalsLabel": "Withdrawals"
+  },
   "cta": {
     "title": "Ready to Start Earning in {country}?",
     "subtitle": "Join thousands of happy users who are already earning real money online in {country}",
