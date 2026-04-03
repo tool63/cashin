@@ -1,0 +1,221 @@
+{
+  "seo": {
+    "title": "Get Paid to Watch Videos in {country} - Earn $5-$50 Per Hour | Cashog",
+    "description": "Join 100,000+ members earning real cash in {country} by watching videos, ads, and content. Get paid via PayPal or gift cards for your viewing time. Free to join!"
+  },
+  "hero": {
+    "title": "Get Paid to Watch Videos in {country}",
+    "subtitle": "Join 100,000+ members earning real cash in {country} by watching videos, ads, and content. Watch, earn, and get paid instantly!"
+  },
+  "statsTitle": "Trusted by Thousands",
+  "stats": {
+    "videosWatched": "50M+",
+    "videosWatchedLabel": "Videos Watched",
+    "avgPayout": "$0.50",
+    "avgPayoutLabel": "Average Per Video",
+    "activeUsers": "100K+",
+    "activeUsersLabel": "Active Members",
+    "totalPaid": "$8M+",
+    "totalPaidLabel": "Total Paid to Members"
+  },
+  "categoriesTitle": "Popular Video Categories",
+  "categoriesSubtitle": "Earn by watching these types of videos",
+  "videoCategories": [
+    {
+      "icon": "📺",
+      "title": "Advertisements",
+      "description": "Watch short ads from major brands. Each ad pays instantly and takes just 15-30 seconds to complete.",
+      "avgReward": "$0.02-$0.10",
+      "timeRequired": "15-30 sec",
+      "popularity": "High"
+    },
+    {
+      "icon": "🎬",
+      "title": "Movie Trailers",
+      "description": "Preview upcoming movies and TV shows. Get paid to watch exclusive content before anyone else.",
+      "avgReward": "$0.10-$0.50",
+      "timeRequired": "1-3 min",
+      "popularity": "High"
+    },
+    {
+      "icon": "📰",
+      "title": "News Clips",
+      "description": "Stay informed while earning. Watch news highlights and current events from around the world.",
+      "avgReward": "$0.05-$0.20",
+      "timeRequired": "30-60 sec",
+      "popularity": "Medium"
+    },
+    {
+      "icon": "🎮",
+      "title": "Gaming Content",
+      "description": "Watch game reviews, walkthroughs, and esports highlights. Perfect for gamers!",
+      "avgReward": "$0.10-$0.30",
+      "timeRequired": "2-5 min",
+      "popularity": "High"
+    },
+    {
+      "icon": "📚",
+      "title": "Educational Videos",
+      "description": "Learn new skills while earning. Tutorials, how-to guides, and educational content.",
+      "avgReward": "$0.15-$0.50",
+      "timeRequired": "3-10 min",
+      "popularity": "Medium"
+    },
+    {
+      "icon": "🎵",
+      "title": "Music Videos",
+      "description": "Watch the latest music videos and discover new artists. Get paid for listening!",
+      "avgReward": "$0.05-$0.15",
+      "timeRequired": "2-4 min",
+      "popularity": "High"
+    }
+  ],
+  "featuredVideosTitle": "High-Paying Videos Available Now",
+  "featuredVideosSubtitle": "Limited views - watch these videos today",
+  "featuredVideos": [
+    {
+      "title": "Summer Blockbuster Trailer",
+      "reward": "$0.50",
+      "duration": "2 min",
+      "category": "Movie Trailer",
+      "viewsLeft": 5000,
+      "platform": "Warner Bros",
+      "rating": "4.9"
+    },
+    {
+      "title": "New Smartphone Ad Campaign",
+      "reward": "$0.25",
+      "duration": "30 sec",
+      "category": "Advertisement",
+      "viewsLeft": 15000,
+      "platform": "Samsung",
+      "rating": "4.8"
+    },
+    {
+      "title": "Esports Championship Highlights",
+      "reward": "$0.40",
+      "duration": "5 min",
+      "category": "Gaming",
+      "viewsLeft": 3000,
+      "platform": "ESL Gaming",
+      "rating": "4.7"
+    },
+    {
+      "title": "Digital Marketing Course Preview",
+      "reward": "$0.75",
+      "duration": "10 min",
+      "category": "Educational",
+      "viewsLeft": 1000,
+      "platform": "Udemy",
+      "rating": "4.9"
+    }
+  ],
+  "benefitsTitle": "Why Get Paid to Watch Videos",
+  "benefits": [
+    {
+      "icon": "💰",
+      "title": "Passive Income",
+      "description": "Earn money while doing something you already do daily. Turn your screen time into cash effortlessly."
+    },
+    {
+      "icon": "⚡",
+      "title": "Instant Payments",
+      "description": "Get paid immediately after watching. No minimum thresholds - withdraw as low as $1 via PayPal."
+    },
+    {
+      "icon": "📱",
+      "title": "Watch Anywhere",
+      "description": "Use our mobile app to earn on the go. Watch videos during your commute, lunch break, or while relaxing."
+    },
+    {
+      "icon": "🌍",
+      "title": "Available in {country}",
+      "description": "Fully available in {country} with local content and payment methods that work for you."
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Your Video Earnings",
+  "tips": [
+    {
+      "title": "Watch Daily",
+      "description": "New videos are added every day. Check the platform daily to catch high-paying videos before views run out."
+    },
+    {
+      "title": "Complete Your Profile",
+      "description": "Fill out your interests to get matched with videos you'll enjoy watching. Higher engagement often means better pay."
+    },
+    {
+      "title": "Refer Friends",
+      "description": "Invite friends to join and earn 10% of their video earnings for life. It's the easiest way to boost your income."
+    },
+    {
+      "title": "Use Multiple Devices",
+      "description": "Watch on your phone, tablet, or computer. Switch between devices to maximize your daily earning potential."
+    }
+  ],
+  "testimonialsTitle": "Real Members, Real Earnings",
+  "testimonials": [
+    {
+      "name": "Jessica Martinez",
+      "country": "United States",
+      "earnings": "$342",
+      "quote": "I watch videos while making dinner and during my commute. Made over $300 last month without even trying. It's literally free money!",
+      "avatar": "JM"
+    },
+    {
+      "name": "David Kim",
+      "country": "Canada",
+      "earnings": "$187",
+      "quote": "Perfect for killing time. I watch a few videos during breaks at work and cash out $20-30 every week. Easy and legit.",
+      "avatar": "DK"
+    },
+    {
+      "name": "Sarah Thompson",
+      "country": "United Kingdom",
+      "earnings": "$523",
+      "title": "Sarah Thompson",
+      "quote": "The educational videos are my favorite. I learn new things AND get paid. Been doing this for 6 months and payments are always on time.",
+      "avatar": "ST"
+    }
+  ],
+  "faq": {
+    "title": "Get Paid to Watch Videos in {country} - FAQ",
+    "items": [
+      {
+        "question": "Is it really free to join?",
+        "answer": "Yes! Cashog is completely free. No subscription fees, no hidden costs. Just sign up and start watching paid videos immediately."
+      },
+      {
+        "question": "How much can I earn watching videos in {country}?",
+        "answer": "Most members earn $50-$200 monthly watching videos casually. Active users who watch regularly can earn $300-500+. The more videos you watch, the more you earn. Some members make over $1000/month by combining video watching with our other earning opportunities."
+      },
+      {
+        "question": "How do I get paid?",
+        "answer": "We offer multiple payment options including PayPal, bank transfer, Visa direct, and gift cards for Amazon, Google Play, and other major retailers. Payments are typically processed within 24 hours, and many videos pay instantly."
+      },
+      {
+        "question": "What types of videos can I watch?",
+        "answer": "We have thousands of videos across many categories: advertisements, movie trailers, music videos, gaming content, educational videos, news clips, product reviews, and more. New videos are added daily."
+      },
+      {
+        "question": "Do I need to watch entire videos?",
+        "answer": "Yes, you need to watch videos fully to receive credit. Most videos are short (30 seconds to 5 minutes). Some educational content may be longer but pays proportionally more."
+      },
+      {
+        "question": "Can I watch on my phone?",
+        "answer": "Absolutely! Cashog works perfectly on all devices. Download our free mobile app for iOS and Android to watch videos and earn anywhere, anytime."
+      },
+      {
+        "question": "Is this available everywhere in {country}?",
+        "answer": "Yes! Cashog is available nationwide in {country}. All our videos and payment methods work across the entire country. Some videos may have regional restrictions, but most are available to everyone."
+      },
+      {
+        "question": "How long until I receive my first payment?",
+        "answer": "Most users receive their first payment within 24-48 hours. Some videos offer instant payouts directly to your PayPal account. The minimum withdrawal amount is just $1 for PayPal and $5 for other methods."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Start Earning in {country}?",
+    "subtitle": "Join 100,000+ members already getting paid in {country}. Sign up for free and start watching paid videos today!"
+  }
+}
