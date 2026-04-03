@@ -198,6 +198,20 @@
       "saved": "$620",
       "quote": "I check Cashog before every online purchase. Already saved over $600 this year.",
       "avatar": "SK"
+    },
+    {
+      "name": "Michael T.",
+      "country": "Australia",
+      "saved": "$350",
+      "quote": "The Best Buy codes are my favorite. Saved $50 on a new laptop last week!",
+      "avatar": "MT"
+    },
+    {
+      "name": "Emma W.",
+      "country": "Germany",
+      "saved": "€280",
+      "quote": "Found amazing travel vouchers. Saved €280 on my last vacation booking!",
+      "avatar": "EW"
     }
   ],
   "faq": {
@@ -220,12 +234,20 @@
         "answer": "New vouchers are added daily. We update our database constantly to bring you the latest deals and discounts."
       },
       {
+        "question": "Can I use vouchers with other offers?",
+        "answer": "It depends on the store. Some allow stacking with sales, others don't. Always check the terms and conditions."
+      },
+      {
         "question": "What if a voucher doesn't work?",
         "answer": "Vouchers occasionally expire faster than expected. Try another code or check the terms. Report invalid codes and we'll remove them."
       },
       {
-        "question": "Can I use vouchers with other offers?",
-        "answer": "It depends on the store. Some allow stacking with sales, others don't. Always check the terms and conditions."
+        "question": "Do I need to create an account to use vouchers?",
+        "answer": "No! All vouchers are accessible without an account. However, creating a free account lets you save favorite codes and get alerts for new vouchers."
+      },
+      {
+        "question": "Are the vouchers valid in my country?",
+        "answer": "Most vouchers are valid in {country}. Check the voucher details for any regional restrictions before using."
       }
     ]
   },
