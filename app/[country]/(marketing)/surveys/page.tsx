@@ -2,6 +2,7 @@
 
 import { cookies } from "next/headers";
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 import {
   getCountry,
@@ -22,9 +23,86 @@ import CircleBorder from "@/components/animations/CircleBorder";
 import OpeningStyle from "@/components/animations/openingstyle";
 import FAQ from "@/components/animations/FAQ";
 
-/* ================= HELPER ================= */
+/* ================= TYPES ================= */
 
-async function loadSectionTranslation(language: string, section: string) {
+interface TranslationSection {
+  seo?: {
+    title?: string;
+    description?: string;
+  };
+  hero?: {
+    title?: string;
+    subtitle?: string;
+  };
+  statsTitle?: string;
+  stats?: {
+    surveysCompleted?: string;
+    surveysCompletedLabel?: string;
+    avgPayout?: string;
+    avgPayoutLabel?: string;
+    activeUsers?: string;
+    activeUsersLabel?: string;
+    brands?: string;
+    brandsLabel?: string;
+  };
+  categoriesTitle?: string;
+  categoriesSubtitle?: string;
+  surveyCategories?: Array<{
+    icon: string;
+    title: string;
+    description: string;
+    avgReward: string;
+    timeRequired: string;
+    frequency: string;
+  }>;
+  featuredTitle?: string;
+  featuredSubtitle?: string;
+  featuredSurveys?: Array<{
+    title: string;
+    reward: string;
+    timeEstimate: string;
+    difficulty: "Easy" | "Medium" | "Hard";
+    spotsLeft: number;
+    company: string;
+  }>;
+  benefitsTitle?: string;
+  benefits?: Array<{
+    icon: string;
+    title: string;
+    description: string;
+  }>;
+  tipsTitle?: string;
+  tips?: Array<{
+    title: string;
+    description: string;
+  }>;
+  testimonialsTitle?: string;
+  testimonials?: Array<{
+    name: string;
+    country: string;
+    earnings: string;
+    quote: string;
+    avatar: string;
+  }>;
+  faq?: {
+    title?: string;
+    items?: Array<{
+      question: string;
+      answer: string;
+    }>;
+  };
+  final?: {
+    title?: string;
+    subtitle?: string;
+  };
+}
+
+/* ================= HELPERS ================= */
+
+async function loadSectionTranslation(
+  language: string,
+  section: string
+): Promise<TranslationSection> {
   try {
     const file = await import(`@/app/locales/${language}/${section}.json`);
     return file.default;
@@ -34,7 +112,15 @@ async function loadSectionTranslation(language: string, section: string) {
   }
 }
 
-/* ================= LANGUAGE ================= */
+async function loadAllTranslations(
+  language: string
+): Promise<TranslationSection> {
+  // Load translations in parallel for better performance
+  const [surveys] = await Promise.all([
+    loadSectionTranslation(language, "surveys"),
+  ]);
+  return surveys;
+}
 
 function getLanguage(country: CountryCode): SupportedLanguage {
   const cookieStore = cookies();
@@ -58,6 +144,11 @@ function getLanguage(country: CountryCode): SupportedLanguage {
   return getCountry(country).defaultLanguage as SupportedLanguage;
 }
 
+function replaceCountryPlaceholder(text: string, countryName: string): string {
+  if (!text) return "";
+  return text.replace(/\{country\}/g, countryName);
+}
+
 /* ================= METADATA ================= */
 
 export async function generateMetadata({
@@ -76,27 +167,43 @@ export async function generateMetadata({
   }
 
   const country = countryParam as CountryCode;
-  const countryName = getCountry(country).name;
-
-  // Try to load translations for SEO
+  const countryData = getCountry(country);
+  const countryName = countryData.name;
   const language = getLanguage(country);
-  let surveysTranslation = {};
+
+  let surveysTranslation: TranslationSection = {};
   try {
     surveysTranslation = await loadSectionTranslation(language, "surveys");
   } catch (error) {
-    // Use defaults if translation fails
+    // Use defaults
   }
 
-  const seoTitle = (surveysTranslation as any)?.seo?.title || 
+  // SEO-optimized title (50-60 characters recommended)
+  const seoTitle =
+    surveysTranslation?.seo?.title ||
     `Paid Surveys in ${countryName} - Earn $5-$50 Per Survey | Cashog`;
-  
-  const seoDescription = (surveysTranslation as any)?.seo?.description || 
-    `Join 200,000+ members earning real cash in ${countryName}. Take paid surveys from top brands. Get paid via PayPal or gift cards. Free to join today!`;
+
+  // SEO-optimized description (150-160 characters recommended)
+  const seoDescription =
+    surveysTranslation?.seo?.description ||
+    `Join 200,000+ members earning real cash in ${countryName}. Take paid surveys from top brands like Nike, Amazon & Apple. Get paid via PayPal or gift cards. Free to join today!`;
+
+  // Extended keywords for better ranking
+  const keywords = [
+    `paid surveys ${countryName}`,
+    `earn money surveys ${countryName}`,
+    `online surveys paid cash ${countryName}`,
+    `survey sites ${countryName}`,
+    `get paid for opinions ${countryName}`,
+    `legit survey sites ${countryName}`,
+    `highest paying surveys ${countryName}`,
+    `survey jobs ${countryName}`,
+  ].join(", ");
 
   return {
     title: seoTitle,
     description: seoDescription,
-    keywords: `paid surveys ${countryName}, earn money surveys ${countryName}, online surveys paid cash ${countryName}, survey sites ${countryName}, get paid for opinions ${countryName}`,
+    keywords,
     alternates: {
       canonical: `https://cashog.com/${country}/surveys`,
     },
@@ -106,16 +213,28 @@ export async function generateMetadata({
       url: `https://cashog.com/${country}/surveys`,
       siteName: "Cashog",
       type: "website",
+      locale: language === "es" ? "es_ES" : language === "fr" ? "fr_FR" : "en_US",
     },
     twitter: {
       card: "summary_large_image",
       title: seoTitle,
       description: seoDescription,
     },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
   };
 }
 
-/* ================= PAGE ================= */
+/* ================= PAGE COMPONENT ================= */
 
 export default async function SurveysPage({
   params,
@@ -126,19 +245,31 @@ export default async function SurveysPage({
   const countryParam = resolvedParams?.country?.toLowerCase();
 
   if (!countryParam || !isValidCountryCode(countryParam)) {
-    return null;
+    return (
+      <main className="flex flex-col items-center justify-center min-h-screen">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold">Country Not Supported</h1>
+          <p className="mt-2">Please check your region settings.</p>
+        </div>
+      </main>
+    );
   }
 
   const country = countryParam as CountryCode;
-  const countryName = getCountry(country).name;
+  const countryData = getCountry(country);
+  const countryName = countryData.name;
   const language = getLanguage(country);
 
-  /* ================= LOAD TRANSLATIONS ================= */
-  const surveys = await loadSectionTranslation(language, "surveys");
+  // Load translations
+  const surveys = await loadAllTranslations(language);
 
-  /* ================= SEO OPTIMIZED (50-60 chars) ================= */
-  const title = surveys?.seo?.title || `Paid Surveys in ${countryName} - Earn $5-$50 Per Survey`;
-  const description = surveys?.seo?.description || `Join 200,000+ members earning real cash in ${countryName}. Take paid surveys from top brands. Get paid via PayPal or gift cards. Free to join today!`;
+  // SEO data for structured data
+  const title =
+    surveys?.seo?.title ||
+    `Paid Surveys in ${countryName} - Earn $5-$50 Per Survey`;
+  const description =
+    surveys?.seo?.description ||
+    `Join 200,000+ members earning real cash in ${countryName}. Take paid surveys from top brands.`;
 
   const structuredData = generateJsonLd({
     path: `/${country}/surveys`,
@@ -147,14 +278,23 @@ export default async function SurveysPage({
     type: "low",
   });
 
-  /* ================= DATA TRANSFORMATION ================= */
+  // Helper function to replace country placeholder
+  const t = (text: string | undefined, fallback: string): string => {
+    if (!text) return replaceCountryPlaceholder(fallback, countryName);
+    return replaceCountryPlaceholder(text, countryName);
+  };
+
+  // Prepare data with fallbacks
   const heroData = {
-    title: surveys?.hero?.title?.replace(/\{country\}/g, countryName) || `Get Paid For Your Opinion in ${countryName}`,
-    subtitle: surveys?.hero?.subtitle?.replace(/\{country\}/g, countryName) || `Join 200,000+ members earning real cash. Share your thoughts, influence brands, and get paid instantly. No experience needed!`,
+    title: t(surveys?.hero?.title, `Get Paid For Your Opinion in ${countryName}`),
+    subtitle: t(
+      surveys?.hero?.subtitle,
+      `Join 200,000+ members earning real cash in ${countryName}. Share your thoughts, influence brands, and get paid instantly. No experience needed!`
+    ),
   };
 
   const statsData = {
-    title: surveys?.statsTitle?.replace(/\{country\}/g, countryName) || "Trusted by Thousands",
+    title: t(surveys?.statsTitle, "Trusted by Thousands"),
     surveysCompleted: surveys?.stats?.surveysCompleted || "5M+",
     surveysCompletedLabel: surveys?.stats?.surveysCompletedLabel || "Paid Surveys Completed",
     avgPayout: surveys?.stats?.avgPayout || "$3.50",
@@ -165,59 +305,61 @@ export default async function SurveysPage({
     brandsLabel: surveys?.stats?.brandsLabel || "Brand Partners",
   };
 
-  const surveyCategoriesData = (surveys?.surveyCategories || []).map((category: any) => ({
-    icon: category?.icon,
-    title: category?.title?.replace(/\{country\}/g, countryName),
-    description: category?.description?.replace(/\{country\}/g, countryName),
-    avgReward: category?.avgReward,
-    timeRequired: category?.timeRequired,
-    frequency: category?.frequency,
+  const surveyCategoriesData = (surveys?.surveyCategories || []).map(
+    (category) => ({
+      ...category,
+      title: t(category.title, category.title),
+      description: t(category.description, category.description),
+    })
+  );
+
+  const featuredSurveysData = (surveys?.featuredSurveys || []).map((survey) => ({
+    ...survey,
+    title: t(survey.title, survey.title),
   }));
 
-  const featuredSurveysData = (surveys?.featuredSurveys || []).map((survey: any) => ({
-    title: survey?.title?.replace(/\{country\}/g, countryName),
-    reward: survey?.reward,
-    timeEstimate: survey?.timeEstimate,
-    difficulty: survey?.difficulty,
-    spotsLeft: survey?.spotsLeft,
-    company: survey?.company,
+  const benefitsData = (surveys?.benefits || []).map((benefit) => ({
+    ...benefit,
+    title: t(benefit.title, benefit.title),
+    description: t(benefit.description, benefit.description),
   }));
 
-  const benefitsData = (surveys?.benefits || []).map((benefit: any) => ({
-    icon: benefit?.icon,
-    title: benefit?.title?.replace(/\{country\}/g, countryName),
-    description: benefit?.description?.replace(/\{country\}/g, countryName),
-  }));
-
-  const tipsData = (surveys?.tips || []).map((tip: any, index: number) => ({
+  const tipsData = (surveys?.tips || []).map((tip, index) => ({
     number: index + 1,
-    title: tip?.title?.replace(/\{country\}/g, countryName),
-    description: tip?.description?.replace(/\{country\}/g, countryName),
+    title: t(tip.title, tip.title),
+    description: t(tip.description, tip.description),
   }));
 
-  const testimonialsData = (surveys?.testimonials || []).map((testimonial: any) => ({
-    name: testimonial?.name,
-    country: testimonial?.country,
-    earnings: testimonial?.earnings,
-    quote: testimonial?.quote?.replace(/\{country\}/g, countryName),
-    avatar: testimonial?.avatar,
+  const testimonialsData = (surveys?.testimonials || []).map((testimonial) => ({
+    ...testimonial,
+    quote: t(testimonial.quote, testimonial.quote),
   }));
 
   const faqData = {
-    title: surveys?.faq?.title?.replace(/\{country\}/g, countryName) || `Paid Surveys in ${countryName} - FAQ`,
-    items: Array.isArray(surveys?.faq?.items)
-      ? surveys.faq.items
-          .map((item: any) => ({
-            q: item?.question?.replace(/\{country\}/g, countryName),
-            a: item?.answer?.replace(/\{country\}/g, countryName),
-          }))
-          .filter((item: any) => item.q && item.a)
-      : [],
+    title: t(surveys?.faq?.title, `Paid Surveys in ${countryName} - FAQ`),
+    items: (surveys?.faq?.items || [])
+      .map((item) => ({
+        q: t(item.question, item.question),
+        a: t(item.answer, item.answer),
+      }))
+      .filter((item) => item.q && item.a),
   };
 
   const finalData = {
-    title: surveys?.final?.title?.replace(/\{country\}/g, countryName) || `Ready to Start Earning in ${countryName}?`,
-    subtitle: surveys?.final?.subtitle?.replace(/\{country\}/g, countryName) || `Join 200,000+ members already getting paid. Sign up for free and take your first paid survey today!`,
+    title: t(
+      surveys?.final?.title,
+      `Ready to Start Earning in ${countryName}?`
+    ),
+    subtitle: t(
+      surveys?.final?.subtitle,
+      `Join 200,000+ members already getting paid in ${countryName}. Sign up for free and take your first paid survey today!`
+    ),
+  };
+
+  const difficultyColors = {
+    Easy: "text-green-600 bg-green-50 dark:bg-green-900/20",
+    Medium: "text-yellow-600 bg-yellow-50 dark:bg-yellow-900/20",
+    Hard: "text-red-600 bg-red-50 dark:bg-red-900/20",
   };
 
   /* ================= RENDER ================= */
@@ -236,8 +378,14 @@ export default async function SurveysPage({
       {/* Hero Section */}
       <CircleBorder>
         <OpeningStyle delay={0.1}>
-          <section className="max-w-7xl mx-auto px-6 py-24 md:py-32 text-center">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 text-gray-900 dark:text-white">
+          <section
+            className="max-w-7xl mx-auto px-6 py-24 md:py-32 text-center"
+            aria-labelledby="hero-heading"
+          >
+            <h1
+              id="hero-heading"
+              className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 text-gray-900 dark:text-white"
+            >
               {heroData.title}
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl mb-12 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
@@ -255,12 +403,21 @@ export default async function SurveysPage({
       {/* Stats Section */}
       <CircleBorder>
         <OpeningStyle delay={0.1}>
-          <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
+          <section
+            className="max-w-7xl mx-auto px-6 py-24 md:py-32"
+            aria-labelledby="stats-heading"
+          >
             <div className="text-center mb-16">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
+              <h2
+                id="stats-heading"
+                className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
+              >
                 {statsData.title}
               </h2>
-              <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full" />
+              <div
+                className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
+                aria-hidden="true"
+              />
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               <div className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl">
@@ -304,23 +461,40 @@ export default async function SurveysPage({
       {surveyCategoriesData.length > 0 && (
         <CircleBorder>
           <OpeningStyle delay={0.1}>
-            <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
+            <section
+              className="max-w-7xl mx-auto px-6 py-24 md:py-32"
+              aria-labelledby="categories-heading"
+            >
               <div className="text-center mb-16">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
-                  {surveys?.categoriesTitle?.replace(/\{country\}/g, countryName) || "Popular Survey Categories"}
+                <h2
+                  id="categories-heading"
+                  className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
+                >
+                  {t(
+                    surveys?.categoriesTitle,
+                    "Popular Survey Categories"
+                  )}
                 </h2>
-                <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full" />
+                <div
+                  className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
+                  aria-hidden="true"
+                />
                 <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-6">
-                  {surveys?.categoriesSubtitle?.replace(/\{country\}/g, countryName) || "Share your opinion and get paid in these categories"}
+                  {t(
+                    surveys?.categoriesSubtitle,
+                    "Share your opinion and get paid in these categories"
+                  )}
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {surveyCategoriesData.map((category: any, index: number) => (
+                {surveyCategoriesData.map((category, index) => (
                   <div
                     key={index}
                     className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700 text-center"
                   >
-                    <div className="text-5xl mb-4">{category.icon}</div>
+                    <div className="text-5xl mb-4" aria-hidden="true">
+                      {category.icon}
+                    </div>
                     <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                       {category.title}
                     </h3>
@@ -329,16 +503,28 @@ export default async function SurveysPage({
                     </p>
                     <div className="space-y-2 border-t border-gray-200 dark:border-gray-700 pt-4">
                       <div className="flex justify-between text-sm">
-                        <span className="text-gray-500 dark:text-gray-400">Avg Reward:</span>
-                        <span className="font-semibold text-green-600 dark:text-green-400">{category.avgReward}</span>
+                        <span className="text-gray-500 dark:text-gray-400">
+                          Avg Reward:
+                        </span>
+                        <span className="font-semibold text-green-600 dark:text-green-400">
+                          {category.avgReward}
+                        </span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-gray-500 dark:text-gray-400">Time:</span>
-                        <span className="font-semibold text-gray-700 dark:text-gray-300">{category.timeRequired}</span>
+                        <span className="text-gray-500 dark:text-gray-400">
+                          Time:
+                        </span>
+                        <span className="font-semibold text-gray-700 dark:text-gray-300">
+                          {category.timeRequired}
+                        </span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-gray-500 dark:text-gray-400">Frequency:</span>
-                        <span className="font-semibold text-gray-700 dark:text-gray-300">{category.frequency}</span>
+                        <span className="text-gray-500 dark:text-gray-400">
+                          Frequency:
+                        </span>
+                        <span className="font-semibold text-gray-700 dark:text-gray-300">
+                          {category.frequency}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -353,60 +539,76 @@ export default async function SurveysPage({
       {featuredSurveysData.length > 0 && (
         <CircleBorder>
           <OpeningStyle delay={0.1}>
-            <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
+            <section
+              className="max-w-7xl mx-auto px-6 py-24 md:py-32"
+              aria-labelledby="featured-heading"
+            >
               <div className="text-center mb-16">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
-                  {surveys?.featuredTitle?.replace(/\{country\}/g, countryName) || "High-Paying Surveys Available Now"}
+                <h2
+                  id="featured-heading"
+                  className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
+                >
+                  {t(
+                    surveys?.featuredTitle,
+                    "High-Paying Surveys Available Now"
+                  )}
                 </h2>
-                <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full" />
+                <div
+                  className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
+                  aria-hidden="true"
+                />
                 <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-6">
-                  {surveys?.featuredSubtitle?.replace(/\{country\}/g, countryName) || "Limited spots - complete these surveys today"}
+                  {t(
+                    surveys?.featuredSubtitle,
+                    "Limited spots - complete these surveys today"
+                  )}
                 </p>
               </div>
               <div className="max-w-4xl mx-auto space-y-4">
-                {featuredSurveysData.map((survey: any, index: number) => {
-                  const difficultyColors = {
-                    Easy: 'text-green-600 bg-green-50 dark:bg-green-900/20',
-                    Medium: 'text-yellow-600 bg-yellow-50 dark:bg-yellow-900/20',
-                    Hard: 'text-red-600 bg-red-50 dark:bg-red-900/20',
-                  };
-                  return (
-                    <div
-                      key={index}
-                      className="bg-white dark:bg-gray-800 rounded-xl p-5 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 dark:border-gray-700"
-                    >
-                      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-2">
-                            <h3 className="font-bold text-gray-900 dark:text-white">
-                              {survey.title}
-                            </h3>
-                            <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${difficultyColors[survey.difficulty]}`}>
-                              {survey.difficulty}
-                            </span>
-                          </div>
-                          <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
-                            {survey.company}
-                          </p>
-                          <div className="flex flex-wrap gap-4 text-xs">
-                            <span className="text-gray-500 dark:text-gray-400">⏱️ {survey.timeEstimate}</span>
-                            <span className="text-orange-600 dark:text-orange-400">🎯 {survey.spotsLeft} spots left</span>
-                          </div>
+                {featuredSurveysData.map((survey, index) => (
+                  <div
+                    key={index}
+                    className="bg-white dark:bg-gray-800 rounded-xl p-5 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 dark:border-gray-700"
+                  >
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-2 flex-wrap">
+                          <h3 className="font-bold text-gray-900 dark:text-white">
+                            {survey.title}
+                          </h3>
+                          <span
+                            className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                              difficultyColors[survey.difficulty]
+                            }`}
+                          >
+                            {survey.difficulty}
+                          </span>
                         </div>
-                        <div className="text-right">
-                          <div className="text-2xl font-bold text-green-600 dark:text-green-400">
-                            {survey.reward}
-                          </div>
-                          <PrimaryCTA
-                            href="/signup"
-                            translationKey="start_now"
-                            observer={false}
-                          />
+                        <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+                          {survey.company}
+                        </p>
+                        <div className="flex flex-wrap gap-4 text-xs">
+                          <span className="text-gray-500 dark:text-gray-400">
+                            ⏱️ {survey.timeEstimate}
+                          </span>
+                          <span className="text-orange-600 dark:text-orange-400">
+                            🎯 {survey.spotsLeft} spots left
+                          </span>
                         </div>
                       </div>
+                      <div className="text-right">
+                        <div className="text-2xl font-bold text-green-600 dark:text-green-400">
+                          {survey.reward}
+                        </div>
+                        <PrimaryCTA
+                          href="/signup"
+                          translationKey="start_now"
+                          observer={false}
+                        />
+                      </div>
                     </div>
-                  );
-                })}
+                  </div>
+                ))}
               </div>
             </section>
           </OpeningStyle>
@@ -417,20 +619,31 @@ export default async function SurveysPage({
       {benefitsData.length > 0 && (
         <CircleBorder>
           <OpeningStyle delay={0.1}>
-            <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
+            <section
+              className="max-w-7xl mx-auto px-6 py-24 md:py-32"
+              aria-labelledby="benefits-heading"
+            >
               <div className="text-center mb-16">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
-                  {surveys?.benefitsTitle?.replace(/\{country\}/g, countryName) || "Why Take Paid Surveys"}
+                <h2
+                  id="benefits-heading"
+                  className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
+                >
+                  {t(surveys?.benefitsTitle, "Why Take Paid Surveys")}
                 </h2>
-                <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full" />
+                <div
+                  className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
+                  aria-hidden="true"
+                />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {benefitsData.map((benefit: any, index: number) => (
+                {benefitsData.map((benefit, index) => (
                   <div
                     key={index}
                     className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 rounded-xl p-6 text-center"
                   >
-                    <div className="text-4xl mb-3">{benefit.icon}</div>
+                    <div className="text-4xl mb-3" aria-hidden="true">
+                      {benefit.icon}
+                    </div>
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
                       {benefit.title}
                     </h3>
@@ -449,17 +662,29 @@ export default async function SurveysPage({
       {tipsData.length > 0 && (
         <CircleBorder>
           <OpeningStyle delay={0.1}>
-            <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
+            <section
+              className="max-w-7xl mx-auto px-6 py-24 md:py-32"
+              aria-labelledby="tips-heading"
+            >
               <div className="text-center mb-16">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
-                  {surveys?.tipsTitle?.replace(/\{country\}/g, countryName) || "Tips to Maximize Your Earnings"}
+                <h2
+                  id="tips-heading"
+                  className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
+                >
+                  {t(surveys?.tipsTitle, "Tips to Maximize Your Earnings")}
                 </h2>
-                <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full" />
+                <div
+                  className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
+                  aria-hidden="true"
+                />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                {tipsData.map((tip: any, index: number) => (
-                  <div key={index} className="text-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-green-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">
+                {tipsData.map((tip) => (
+                  <div key={tip.number} className="text-center">
+                    <div
+                      className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-green-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg"
+                      aria-label={`Tip ${tip.number}`}
+                    >
                       {tip.number}
                     </div>
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
@@ -480,26 +705,45 @@ export default async function SurveysPage({
       {testimonialsData.length > 0 && (
         <CircleBorder>
           <OpeningStyle delay={0.1}>
-            <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
+            <section
+              className="max-w-7xl mx-auto px-6 py-24 md:py-32"
+              aria-labelledby="testimonials-heading"
+            >
               <div className="text-center mb-16">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
-                  {surveys?.testimonialsTitle?.replace(/\{country\}/g, countryName) || "Real Members, Real Earnings"}
+                <h2
+                  id="testimonials-heading"
+                  className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
+                >
+                  {t(
+                    surveys?.testimonialsTitle,
+                    "Real Members, Real Earnings"
+                  )}
                 </h2>
-                <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full" />
+                <div
+                  className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
+                  aria-hidden="true"
+                />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {testimonialsData.map((testimonial: any, index: number) => (
+                {testimonialsData.map((testimonial, index) => (
                   <div
                     key={index}
                     className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md border border-gray-100 dark:border-gray-700"
                   >
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-green-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                      <div
+                        className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-green-500 rounded-full flex items-center justify-center text-white font-bold text-lg"
+                        aria-hidden="true"
+                      >
                         {testimonial.avatar}
                       </div>
                       <div>
-                        <h4 className="font-semibold text-gray-900 dark:text-white">{testimonial.name}</h4>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">{testimonial.country}</p>
+                        <h4 className="font-semibold text-gray-900 dark:text-white">
+                          {testimonial.name}
+                        </h4>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                          {testimonial.country}
+                        </p>
                       </div>
                     </div>
                     <p className="text-gray-600 dark:text-gray-300 text-sm italic mb-3">
@@ -530,11 +774,20 @@ export default async function SurveysPage({
       {/* Final CTA Section */}
       <CircleBorder>
         <OpeningStyle delay={0.1}>
-          <section className="max-w-7xl mx-auto px-6 py-24 md:py-32 text-center">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
+          <section
+            className="max-w-7xl mx-auto px-6 py-24 md:py-32 text-center"
+            aria-labelledby="final-heading"
+          >
+            <h2
+              id="final-heading"
+              className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
+            >
               {finalData.title}
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full mb-8" />
+            <div
+              className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full mb-8"
+              aria-hidden="true"
+            />
             <p className="text-lg sm:text-xl md:text-2xl mb-12 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
               {finalData.subtitle}
             </p>
