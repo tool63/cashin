@@ -1,0 +1,288 @@
+{
+  "seo": {
+    "title": "Withdraw Your Earnings - Fast & Secure Payouts",
+    "description": "Withdraw your earnings instantly with multiple payment methods including PayPal, Crypto, Bank Transfer, and Gift Cards. Fast and secure payouts."
+  },
+  "hero": {
+    "title": "Withdraw Your Earnings Instantly in {country}",
+    "subtitle": "Get your money fast with multiple withdrawal options. Secure, reliable, and instant payouts."
+  },
+  "statsTitle": "Withdrawal Statistics",
+  "stats": {
+    "totalWithdrawn": "$10M+",
+    "totalWithdrawnLabel": "Total Withdrawn",
+    "dailyWithdrawals": "$50K+",
+    "dailyWithdrawalsLabel": "Daily Withdrawals",
+    "activeUsers": "50K+",
+    "activeUsersLabel": "Active Users",
+    "avgWithdrawal": "$47",
+    "avgWithdrawalLabel": "Average Withdrawal"
+  },
+  "methodsTitle": "Withdrawal Methods in {country}",
+  "methodsSubtitle": "Choose the method that works best for you",
+  "withdrawalMethods": [
+    {
+      "icon": "💸",
+      "title": "PayPal",
+      "description": "Fast and secure payments",
+      "processingTime": "Instant",
+      "minAmount": "$10",
+      "fee": "Free",
+      "isPopular": true
+    },
+    {
+      "icon": "💰",
+      "title": "USDT (TRC20)",
+      "description": "Crypto stablecoin payments",
+      "processingTime": "Instant",
+      "minAmount": "$10",
+      "fee": "$0.50",
+      "isPopular": true
+    },
+    {
+      "icon": "₿",
+      "title": "Bitcoin",
+      "description": "Decentralized crypto payments",
+      "processingTime": "10-30 min",
+      "minAmount": "$20",
+      "fee": "$1.00",
+      "isPopular": false
+    },
+    {
+      "icon": "🏦",
+      "title": "Bank Transfer",
+      "description": "Direct bank account deposits",
+      "processingTime": "1-3 days",
+      "minAmount": "$50",
+      "fee": "Free",
+      "isPopular": false
+    },
+    {
+      "icon": "🎁",
+      "title": "Gift Cards",
+      "description": "Redeem rewards as gift cards",
+      "processingTime": "Instant",
+      "minAmount": "$5",
+      "fee": "Free",
+      "isPopular": true
+    },
+    {
+      "icon": "Ł",
+      "title": "Litecoin",
+      "description": "Fast crypto transactions",
+      "processingTime": "10-30 min",
+      "minAmount": "$10",
+      "fee": "$0.25",
+      "isPopular": false
+    },
+    {
+      "icon": "Ξ",
+      "title": "Ethereum",
+      "description": "Smart contract payments",
+      "processingTime": "10-30 min",
+      "minAmount": "$20",
+      "fee": "$1.00",
+      "isPopular": false
+    },
+    {
+      "icon": "Ð",
+      "title": "Dogecoin",
+      "description": "Fun and fast crypto",
+      "processingTime": "10-30 min",
+      "minAmount": "$10",
+      "fee": "$0.25",
+      "isPopular": false
+    },
+    {
+      "icon": "🟡",
+      "title": "BNB",
+      "description": "Binance ecosystem payments",
+      "processingTime": "Instant",
+      "minAmount": "$10",
+      "fee": "$0.25",
+      "isPopular": false
+    }
+  ],
+  "stepsTitle": "How to Withdraw Your Money",
+  "stepsSubtitle": "Get your earnings in 3 simple steps",
+  "steps": [
+    {
+      "icon": "1",
+      "title": "Reach Minimum Threshold",
+      "description": "Earn at least $10 to be eligible for withdrawal"
+    },
+    {
+      "icon": "2",
+      "title": "Choose Payment Method",
+      "description": "Select your preferred withdrawal option from 10+ methods"
+    },
+    {
+      "icon": "3",
+      "title": "Get Paid Instantly",
+      "description": "Receive your money in minutes or hours depending on method"
+    }
+  ],
+  "benefitsTitle": "Why Choose Our Withdrawal System",
+  "benefits": [
+    {
+      "icon": "⚡",
+      "title": "Instant Withdrawals",
+      "description": "Get your earnings quickly without delays"
+    },
+    {
+      "icon": "🛡️",
+      "title": "Secure & Trusted",
+      "description": "Your data and payments are fully protected with 256-bit encryption"
+    },
+    {
+      "icon": "💳",
+      "title": "Multiple Options",
+      "description": "Choose from 10+ payment methods including PayPal and Crypto"
+    },
+    {
+      "icon": "🌍",
+      "title": "Global Access",
+      "description": "Withdraw from anywhere in the world"
+    },
+    {
+      "icon": "📱",
+      "title": "Mobile Friendly",
+      "description": "Withdraw directly from your phone or tablet"
+    },
+    {
+      "icon": "🕒",
+      "title": "24/7 Support",
+      "description": "Get help whenever you need it from our support team"
+    },
+    {
+      "icon": "💰",
+      "title": "No Hidden Fees",
+      "description": "Transparent fees with no surprises"
+    },
+    {
+      "icon": "📊",
+      "title": "Track Withdrawals",
+      "description": "Monitor all your transactions in one place"
+    },
+    {
+      "icon": "🔒",
+      "title": "Secure Authentication",
+      "description": "Two-factor authentication for withdrawals"
+    }
+  ],
+  "liveWithdrawalsTitle": "Live Withdrawals in {country}",
+  "liveWithdrawalsSubtitle": "Real users are withdrawing money right now",
+  "liveWithdrawals": [
+    {
+      "name": "John",
+      "country": "🇺🇸",
+      "amount": "32.22",
+      "method": "PayPal",
+      "time": "29s ago"
+    },
+    {
+      "name": "Ava",
+      "country": "🇺🇸",
+      "amount": "47.08",
+      "method": "USDT",
+      "time": "41s ago"
+    },
+    {
+      "name": "Mason",
+      "country": "🇩🇪",
+      "amount": "32.06",
+      "method": "Bank Transfer",
+      "time": "5s ago"
+    },
+    {
+      "name": "Noah",
+      "country": "🇪🇸",
+      "amount": "39.88",
+      "method": "PayPal",
+      "time": "51s ago"
+    },
+    {
+      "name": "Emma",
+      "country": "🇬🇧",
+      "amount": "26.20",
+      "method": "Gift Card",
+      "time": "7s ago"
+    },
+    {
+      "name": "James",
+      "country": "🇩🇪",
+      "amount": "31.68",
+      "method": "Bitcoin",
+      "time": "31s ago"
+    },
+    {
+      "name": "Isabella",
+      "country": "🇨🇦",
+      "amount": "17.75",
+      "method": "USDT",
+      "time": "50s ago"
+    },
+    {
+      "name": "Sophia",
+      "country": "🇫🇷",
+      "amount": "28.93",
+      "method": "PayPal",
+      "time": "43s ago"
+    },
+    {
+      "name": "Olivia",
+      "country": "🇳🇱",
+      "amount": "13.05",
+      "method": "Litecoin",
+      "time": "45s ago"
+    },
+    {
+      "name": "Alex",
+      "country": "🇩🇪",
+      "amount": "39.31",
+      "method": "USDT",
+      "time": "3s ago"
+    }
+  ],
+  "faq": {
+    "title": "Frequently Asked Questions About Withdrawals in {country}",
+    "items": [
+      {
+        "question": "What is the minimum withdrawal amount?",
+        "answer": "The minimum withdrawal amount is $10 for most payment methods including PayPal, USDT, and Gift Cards. Bank transfers require a minimum of $50."
+      },
+      {
+        "question": "How long does it take to receive my money?",
+        "answer": "Withdrawals are processed instantly for PayPal, USDT, and Gift Cards. Crypto payments take 10-30 minutes. Bank transfers may take 1-3 business days."
+      },
+      {
+        "question": "Are there any fees for withdrawing?",
+        "answer": "We do not charge any withdrawal fees. However, crypto networks may have small transaction fees (typically $0.25-$1.00) that go to miners."
+      },
+      {
+        "question": "Which payment methods are available in {country}?",
+        "answer": "We offer PayPal, USDT, Bitcoin, Ethereum, Litecoin, Dogecoin, BNB, Bank Transfer, and Gift Cards including Amazon and Google Play."
+      },
+      {
+        "question": "Is it safe to withdraw my earnings?",
+        "answer": "Yes, all withdrawals are processed through secure and encrypted channels. We use 256-bit SSL encryption and two-factor authentication for withdrawals."
+      },
+      {
+        "question": "Can I cancel a withdrawal request?",
+        "answer": "You can cancel a withdrawal request as long as it hasn't been processed yet. Once processed, it cannot be reversed."
+      },
+      {
+        "question": "How many withdrawals can I make per day?",
+        "answer": "You can make up to 3 withdrawals per day. There is no limit on the total amount you can withdraw."
+      },
+      {
+        "question": "Do I need to verify my identity to withdraw?",
+        "answer": "For withdrawals under $500, no verification is required. For larger amounts, basic identity verification may be needed for security."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Withdraw Your Earnings?",
+    "subtitle": "Start earning today and withdraw your money instantly with our secure payment system"
+  }
+}
