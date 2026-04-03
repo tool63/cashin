@@ -202,7 +202,6 @@ export default function SignupPage() {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    // Optionally redirect or close the modal
     window.history.back();
   };
 
@@ -294,7 +293,8 @@ export default function SignupPage() {
                   <p className="text-green-400 text-sm font-medium">
                     3671+ users sign up today
                   </p>
-                  <div className="absolute top-0 right-0 mt-2 group">
+                  {/* Bonus Badge - positioned slightly below the corner */}
+                  <div className="absolute -top-2 right-0 mt-2 group">
                     <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-yellow-500 rounded-full blur-lg opacity-50 group-hover:opacity-70 transition-opacity duration-300"></div>
                     <div className="relative flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-amber-400 to-yellow-500 rounded-full shadow-lg shadow-yellow-500/30 border border-white/20 group-hover:scale-105 group-hover:shadow-xl group-hover:shadow-yellow-500/40 transition-all duration-300">
                       <Gift className="w-3.5 h-3.5 text-white" />
@@ -368,6 +368,16 @@ export default function SignupPage() {
                     <Mail className="w-4 h-4 text-gray-400 group-hover:text-green-500" />
                     <span>Continue with Email</span>
                   </motion.button>
+                )}
+
+                {/* Login Link - Below Continue with Email button, outside form */}
+                {!formVisible && (
+                  <p className="mt-6 text-center text-sm text-gray-400">
+                    Already have an account?{" "}
+                    <Link href="/login" className="text-green-500 hover:underline font-medium">
+                      Log in
+                    </Link>
+                  </p>
                 )}
 
                 {/* Email Signup Form */}
@@ -557,7 +567,7 @@ export default function SignupPage() {
                       />
                     </div>
 
-                    {/* Login Link */}
+                    {/* Login Link inside form */}
                     <p className="mt-6 text-center text-sm text-gray-400">
                       Already have an account?{" "}
                       <Link href="/login" className="text-green-500 hover:underline font-medium">
