@@ -1,0 +1,229 @@
+{
+  "seo": {
+    "title": "SurveyWall in {country} - Get Paid $1-$50 Per Survey | Cashog",
+    "description": "Access 30+ survey providers through our surveywall in {country}. Share your opinion & earn $500+ monthly. Highest paying surveys guaranteed!"
+  },
+  "hero": {
+    "title": "Get Paid for Your Opinion in {country}",
+    "subtitle": "Access 30+ premium survey providers in {country}. Share your opinion on products, services, and brands. Earn $500+ monthly from a single dashboard!"
+  },
+  "statsTitle": "SurveyWall Statistics",
+  "stats": {
+    "surveysCompleted": "20M+",
+    "surveysCompletedLabel": "Surveys Completed",
+    "avgPayout": "$3.50",
+    "avgPayoutLabel": "Average Per Survey",
+    "activeUsers": "200K+",
+    "activeUsersLabel": "Active Members",
+    "totalPaid": "$40M+",
+    "totalPaidLabel": "Total Paid"
+  },
+  "categoriesTitle": "Survey Categories",
+  "categoriesSubtitle": "Earn by sharing your opinion on these topics",
+  "surveyCategories": [
+    {
+      "icon": "🛒",
+      "title": "Consumer Products",
+      "description": "Share your opinions about everyday products, electronics, household items, and more.",
+      "avgReward": "$2-$10",
+      "timeRequired": "10-20 min",
+      "difficulty": "Easy"
+    },
+    {
+      "icon": "📺",
+      "title": "Media & Entertainment",
+      "description": "Review TV shows, movies, music, and streaming services. Help shape entertainment.",
+      "avgReward": "$3-$15",
+      "timeRequired": "15-25 min",
+      "difficulty": "Easy"
+    },
+    {
+      "icon": "🏦",
+      "title": "Financial Services",
+      "description": "Share insights on banking, insurance, investments, and financial products.",
+      "avgReward": "$5-$25",
+      "timeRequired": "15-30 min",
+      "difficulty": "Medium"
+    },
+    {
+      "icon": "🏥",
+      "title": "Healthcare",
+      "description": "Participate in health-related research and pharmaceutical surveys.",
+      "avgReward": "$10-$50",
+      "timeRequired": "20-40 min",
+      "difficulty": "Medium"
+    },
+    {
+      "icon": "🚗",
+      "title": "Automotive",
+      "description": "Share your vehicle preferences, driving habits, and car buying experiences.",
+      "avgReward": "$5-$20",
+      "timeRequired": "15-25 min",
+      "difficulty": "Easy"
+    },
+    {
+      "icon": "💼",
+      "title": "Business & Tech",
+      "description": "Provide feedback on B2B services, software, and technology products.",
+      "avgReward": "$10-$30",
+      "timeRequired": "20-35 min",
+      "difficulty": "Hard"
+    }
+  ],
+  "featuredSurveysTitle": "High-Paying Surveys Available Now",
+  "featuredSurveysSubtitle": "Limited spots - take these surveys today",
+  "featuredSurveys": [
+    {
+      "title": "Consumer Electronics Feedback",
+      "reward": "$15",
+      "timeEstimate": "20 min",
+      "category": "Consumer Products",
+      "spotsLeft": 300,
+      "provider": "Nielsen",
+      "rating": "4.9"
+    },
+    {
+      "title": "Streaming Service Preferences",
+      "reward": "$10",
+      "timeEstimate": "15 min",
+      "category": "Media & Entertainment",
+      "spotsLeft": 500,
+      "provider": "Netflix Research",
+      "rating": "4.8"
+    },
+    {
+      "title": "Banking Customer Experience",
+      "reward": "$25",
+      "timeEstimate": "25 min",
+      "category": "Financial Services",
+      "spotsLeft": 200,
+      "provider": "J.D. Power",
+      "rating": "4.7"
+    },
+    {
+      "title": "Healthcare Product Survey",
+      "reward": "$20",
+      "timeEstimate": "30 min",
+      "category": "Healthcare",
+      "spotsLeft": 150,
+      "provider": "Pfizer",
+      "rating": "4.8"
+    },
+    {
+      "title": "Electric Vehicle Interest",
+      "reward": "$12",
+      "timeEstimate": "18 min",
+      "category": "Automotive",
+      "spotsLeft": 400,
+      "provider": "Tesla Research",
+      "rating": "4.6"
+    }
+  ],
+  "benefitsTitle": "Why Choose Our SurveyWall",
+  "benefits": [
+    {
+      "icon": "📊",
+      "title": "30+ Survey Providers",
+      "description": "Access surveys from multiple premium providers in one place. More surveys = more earning opportunities."
+    },
+    {
+      "icon": "💰",
+      "title": "Highest Payouts",
+      "description": "We negotiate premium rates with providers. You get paid more for sharing your opinion."
+    },
+    {
+      "icon": "⚡",
+      "title": "Instant Qualification",
+      "description": "Smart matching system connects you with surveys you qualify for. Less screening, more earning."
+    },
+    {
+      "icon": "📱",
+      "title": "Survey on Mobile",
+      "description": "Take surveys anywhere on our mobile app. Perfect for commuting, breaks, or downtime."
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Survey Earnings",
+  "tips": [
+    {
+      "title": "Complete Your Profile",
+      "description": "Fill out your demographic profile completely. More profile data = better survey matches = higher earnings."
+    },
+    {
+      "title": "Take Surveys Early",
+      "description": "High-paying surveys fill up fast. Check daily and take surveys as soon as they appear."
+    },
+    {
+      "title": "Be Consistent",
+      "description": "Regular survey takers earn more. Set aside 30-60 minutes daily for surveys."
+    },
+    {
+      "title": "Answer Honestly",
+      "description": "Quality responses lead to more survey invitations. Providers reward honest, thoughtful answers."
+    }
+  ],
+  "testimonialsTitle": "What Our Survey Takers Say",
+  "testimonials": [
+    {
+      "name": "Amanda Johnson",
+      "country": "United States",
+      "earnings": "$1,847",
+      "quote": "I love sharing my opinion and getting paid for it! The surveywall makes it so easy to find surveys I qualify for. Made almost $2000 last year!",
+      "avatar": "AJ"
+    },
+    {
+      "name": "Mark Williams",
+      "country": "Canada",
+      "earnings": "$892",
+      "quote": "Best survey platform I've used. Multiple providers mean I always have surveys available. Payouts are quick and reliable.",
+      "avatar": "MW"
+    },
+    {
+      "name": "Sophie Martin",
+      "country": "France",
+      "earnings": "$1,203",
+      "quote": "The healthcare surveys pay really well. I've earned over $1000 just sharing my health experiences. Highly recommend!",
+      "avatar": "SM"
+    }
+  ],
+  "faq": {
+    "title": "SurveyWall in {country} - FAQ",
+    "items": [
+      {
+        "question": "What is a surveywall?",
+        "answer": "A surveywall is a platform that aggregates surveys from multiple providers. Instead of joining 30+ different survey sites, you access all their surveys through one dashboard on Cashog."
+      },
+      {
+        "question": "How many survey providers do you have?",
+        "answer": "We have 30+ premium survey providers including Nielsen, J.D. Power, Ipsos, SurveyMonkey, Qualtrics, YouGov, and many more. We're constantly adding new providers."
+      },
+      {
+        "question": "How much can I earn taking surveys in {country}?",
+        "answer": "Most users earn $100-300 monthly. Active users who take surveys daily can earn $500+. Some power users earn $1000+ monthly by taking multiple surveys each day."
+      },
+      {
+        "question": "How long do surveys take?",
+        "answer": "Most surveys take 10-30 minutes. Some quick surveys take 5 minutes, while in-depth studies can take 45-60 minutes but pay more."
+      },
+      {
+        "question": "How do I get paid?",
+        "answer": "We offer multiple payment options including PayPal, bank transfer, Visa direct, and gift cards for Amazon, Google Play, and more. Most surveys credit instantly upon completion."
+      },
+      {
+        "question": "Will I qualify for all surveys?",
+        "answer": "Not every survey will match your profile. Our smart matching system pre-screens surveys to show you the ones you're most likely to qualify for, saving you time."
+      },
+      {
+        "question": "Is the surveywall available in {country}?",
+        "answer": "Yes! Our surveywall is fully available in {country}. Most providers have hundreds of surveys specifically for {country} residents with local payment options."
+      },
+      {
+        "question": "Can I take surveys on mobile?",
+        "answer": "Absolutely! Our surveywall works perfectly on all devices. Download our mobile app for iOS and Android to take surveys anywhere, anytime."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Share Your Opinion in {country}?",
+    "subtitle": "Join 200,000+ members already earning through our surveywall in {country}. Sign up for free and start taking paid surveys today!"
+  }
+}
