@@ -16,6 +16,7 @@ import {
   Gift,
   Sparkles,
   ArrowRight,
+  X,
 } from "lucide-react";
 
 // Animation Components - Using existing components from your project
@@ -24,6 +25,7 @@ import CircleBorder from "@/components/animations/CircleBorder";
 
 // Auth Components
 import AuthPageWrapper from "@/components/auth/AuthPageWrapper";
+import PrimaryCTA from "@/components/cta/PrimaryCTA";
 
 // Background component inline to avoid missing import
 const Background = () => (
@@ -84,6 +86,7 @@ export default function SignupPage() {
   const [showStrength, setShowStrength] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -197,6 +200,12 @@ export default function SignupPage() {
     }
   };
 
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    // Optionally redirect or close the modal
+    window.history.back();
+  };
+
   const getStrengthColor = () => {
     switch (passwordStrength) {
       case 0:
@@ -258,20 +267,33 @@ export default function SignupPage() {
     );
   }
 
+  if (!isModalOpen) return null;
+
   return (
     <>
       <Background />
       <main className="relative min-h-screen bg-[#0E111B] text-white flex items-center justify-center py-12 px-4">
         <OpeningStyle>
           <CircleBorder>
-            <div className="w-full max-w-md mx-auto">
+            <div className="w-full max-w-md mx-auto relative">
+              {/* Close Button - Cross to cancel modal */}
+              <button
+                onClick={handleCloseModal}
+                className="absolute -top-12 right-0 z-20 bg-[#0E111B] border border-[#2A2F3E] rounded-full p-2.5 text-gray-400 hover:text-white hover:bg-[#1A1F2E] transition-all duration-200 group"
+                aria-label="Close Modal"
+              >
+                <X className="w-5 h-5 group-hover:scale-110 transition-transform" />
+              </button>
+
               <AuthPageWrapper title="" subtitle="">
                 {/* Header with Bonus */}
                 <div className="relative mb-8 text-center">
                   <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
                     Get Instant Bonus
                   </h1>
-                  <p className="text-gray-400 text-sm">Create your account and start earning today</p>
+                  <p className="text-green-400 text-sm font-medium">
+                    3671+ users sign up today
+                  </p>
                   <div className="absolute top-0 right-0 mt-2 group">
                     <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-yellow-500 rounded-full blur-lg opacity-50 group-hover:opacity-70 transition-opacity duration-300"></div>
                     <div className="relative flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-amber-400 to-yellow-500 rounded-full shadow-lg shadow-yellow-500/30 border border-white/20 group-hover:scale-105 group-hover:shadow-xl group-hover:shadow-yellow-500/40 transition-all duration-300">
@@ -526,29 +548,14 @@ export default function SignupPage() {
                       </p>
                     </div>
 
-                    {/* Create Account Button */}
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.3, delay: 0.3 }}
-                    >
-                      <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={handleCreateAccount}
-                        disabled={isLoading}
-                        className="group relative w-full rounded-xl px-6 py-4 flex items-center justify-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
-                      >
-                        {isLoading ? (
-                          <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin" />
-                        ) : (
-                          <>
-                            <span className="text-lg md:text-xl font-bold text-black">Create Account</span>
-                            <ArrowRight className="text-black group-hover:translate-x-1 transition-transform duration-300" />
-                          </>
-                        )}
-                      </motion.button>
-                    </motion.div>
+                    {/* Sign Up Button - Using PrimaryCTA */}
+                    <div className="flex justify-center">
+                      <PrimaryCTA 
+                        href="/dashboard" 
+                        translationKey="sign_up"
+                        fallback="Sign Up"
+                      />
+                    </div>
 
                     {/* Login Link */}
                     <p className="mt-6 text-center text-sm text-gray-400">
