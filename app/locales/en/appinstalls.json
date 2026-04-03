@@ -1,0 +1,241 @@
+{
+  "seo": {
+    "title": "Get Paid to Install Apps - Earn $0.50-$5 Per Install",
+    "description": "Earn real money by installing and testing mobile apps. Get paid $0.50-$5 per app install. Complete simple tasks and earn instantly. Free to join!"
+  },
+  "hero": {
+    "title": "Get Paid to Install Apps",
+    "subtitle": "Earn $0.50-$5 per app install. Test new apps, leave reviews, and get paid instantly. No experience needed!"
+  },
+  "statsTitle": "App Install Platform Stats",
+  "stats": {
+    "totalInstalls": "10M+",
+    "totalInstallsLabel": "App Installs Completed",
+    "avgPayout": "$2.50",
+    "avgPayoutLabel": "Average Per Install",
+    "activeUsers": "300K+",
+    "activeUsersLabel": "Active Earners",
+    "availableApps": "1,000+",
+    "availableAppsLabel": "Available Apps"
+  },
+  "howItWorksTitle": "How It Works",
+  "howItWorksSubtitle": "Get paid in 3 simple steps",
+  "howItWorks": [
+    {
+      "icon": "1",
+      "title": "Browse Available Apps",
+      "description": "Choose from hundreds of paid app install offers"
+    },
+    {
+      "icon": "2",
+      "title": "Install & Test",
+      "description": "Download the app, open it, and test basic features"
+    },
+    {
+      "icon": "3",
+      "title": "Get Paid Instantly",
+      "description": "Receive your reward directly to your account"
+    }
+  ],
+  "categoriesTitle": "Popular App Categories",
+  "categoriesSubtitle": "Choose from hundreds of apps to install and test",
+  "appCategories": [
+    {
+      "icon": "🎮",
+      "title": "Gaming Apps",
+      "description": "Test new mobile games and earn rewards",
+      "avgReward": "$1-5",
+      "timeRequired": "5-10 min",
+      "tasksPerWeek": "20+"
+    },
+    {
+      "icon": "🛍️",
+      "title": "Shopping Apps",
+      "description": "Install and review e-commerce apps",
+      "avgReward": "$1-4",
+      "timeRequired": "3-8 min",
+      "tasksPerWeek": "15+"
+    },
+    {
+      "icon": "📱",
+      "title": "Social Media",
+      "description": "Test new social networking platforms",
+      "avgReward": "$2-6",
+      "timeRequired": "5-12 min",
+      "tasksPerWeek": "10+"
+    },
+    {
+      "icon": "💰",
+      "title": "Finance Apps",
+      "description": "Install banking and investment apps",
+      "avgReward": "$3-8",
+      "timeRequired": "8-15 min",
+      "tasksPerWeek": "8+"
+    },
+    {
+      "icon": "❤️",
+      "title": "Health & Fitness",
+      "description": "Test wellness and workout apps",
+      "avgReward": "$2-5",
+      "timeRequired": "5-10 min",
+      "tasksPerWeek": "12+"
+    },
+    {
+      "icon": "🎬",
+      "title": "Entertainment",
+      "description": "Install streaming and media apps",
+      "avgReward": "$2-7",
+      "timeRequired": "5-10 min",
+      "tasksPerWeek": "15+"
+    }
+  ],
+  "featuredTitle": "🔥 Featured High-Paying Apps",
+  "featuredSubtitle": "Limited spots - install these apps today",
+  "featuredApps": [
+    {
+      "icon": "🎮",
+      "name": "Candy Crush Saga",
+      "reward": "$3.50",
+      "timeEstimate": "8 mins",
+      "requirements": "Install & reach level 5",
+      "spotsLeft": 234,
+      "category": "Gaming"
+    },
+    {
+      "icon": "🛍️",
+      "name": "Temu Shopping",
+      "reward": "$4.00",
+      "timeEstimate": "5 mins",
+      "requirements": "Install & browse 5 products",
+      "spotsLeft": 156,
+      "category": "Shopping"
+    },
+    {
+      "icon": "💰",
+      "name": "Cash App",
+      "reward": "$5.00",
+      "timeEstimate": "10 mins",
+      "requirements": "Install & verify email",
+      "spotsLeft": 89,
+      "category": "Finance"
+    },
+    {
+      "icon": "📱",
+      "name": "Instagram",
+      "reward": "$2.50",
+      "timeEstimate": "5 mins",
+      "requirements": "Install & follow 3 accounts",
+      "spotsLeft": 432,
+      "category": "Social"
+    },
+    {
+      "icon": "🎬",
+      "name": "Netflix",
+      "reward": "$4.50",
+      "timeEstimate": "8 mins",
+      "requirements": "Install & watch 5 minutes",
+      "spotsLeft": 67,
+      "category": "Entertainment"
+    },
+    {
+      "icon": "❤️",
+      "name": "MyFitnessPal",
+      "reward": "$3.00",
+      "timeEstimate": "7 mins",
+      "requirements": "Install & log 1 meal",
+      "spotsLeft": 198,
+      "category": "Health"
+    }
+  ],
+  "benefitsTitle": "Why Install Apps With Us",
+  "benefits": [
+    {
+      "icon": "💰",
+      "title": "Easy Money",
+      "description": "Get paid for simple app installations"
+    },
+    {
+      "icon": "⏰",
+      "title": "Quick Tasks",
+      "description": "Most app installs take less than 10 minutes"
+    },
+    {
+      "icon": "📱",
+      "title": "Any Device",
+      "description": "Works on iPhone, Android, or tablet"
+    },
+    {
+      "icon": "💸",
+      "title": "Instant Payouts",
+      "description": "Get paid immediately after completion"
+    }
+  ],
+  "testimonialsTitle": "Real Members, Real Earnings",
+  "testimonials": [
+    {
+      "name": "David Kim",
+      "country": "United States",
+      "earnings": "$1,247",
+      "quote": "I install apps while watching TV and earn an extra $200-300 monthly. It's so easy!",
+      "avatar": "D",
+      "appsInstalled": "450+"
+    },
+    {
+      "name": "Lisa Martinez",
+      "country": "Canada",
+      "earnings": "$892",
+      "quote": "Best way to earn pocket money. I've installed over 300 apps and got paid for each one.",
+      "avatar": "L",
+      "appsInstalled": "300+"
+    },
+    {
+      "name": "James Wilson",
+      "country": "United Kingdom",
+      "earnings": "$1,560",
+      "quote": "Perfect for tech lovers. I test new apps daily and earn consistently.",
+      "avatar": "J",
+      "appsInstalled": "600+"
+    }
+  ],
+  "faq": {
+    "title": "Get Paid to Install Apps - FAQ",
+    "items": [
+      {
+        "question": "How much can I earn from app installs?",
+        "answer": "Each app install pays $0.50-$5. Active users earn $100-$500 monthly by installing 20-50 apps per week."
+      },
+      {
+        "question": "How long does each app install take?",
+        "answer": "Most app installs take 3-10 minutes. You simply download, open, and test basic features."
+      },
+      {
+        "question": "Do I need special skills?",
+        "answer": "No, anyone can do this. Just follow simple instructions like installing an app and taking a screenshot."
+      },
+      {
+        "question": "How do I get paid?",
+        "answer": "Payments are made via PayPal, bank transfer, gift cards, or cryptocurrency. Minimum withdrawal is $10."
+      },
+      {
+        "question": "Are there apps available every day?",
+        "answer": "Yes, new apps are added daily. Active users typically see 30-50 available app installs per day."
+      },
+      {
+        "question": "Can I do this on any phone?",
+        "answer": "Yes, works on both iPhone (iOS) and Android devices. Some offers are device-specific."
+      },
+      {
+        "question": "Is this really free to join?",
+        "answer": "Yes, creating an account is completely free. There are no hidden fees or charges."
+      },
+      {
+        "question": "Do I have to keep the apps installed?",
+        "answer": "No, you can uninstall apps after completing the required tasks and receiving payment."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Start Earning?",
+    "subtitle": "Join 300,000+ members already getting paid. Install apps, leave reviews, and earn instantly!"
+  }
+}
