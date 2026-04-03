@@ -63,9 +63,10 @@ interface Testimonial {
   avatar: string;
 }
 
-interface FaqItem {
-  question: string;
-  answer: string;
+// IMPORTANT: FAQItem must have 'q' and 'a' properties (not 'question' and 'answer')
+interface FAQItem {
+  q: string;
+  a: string;
 }
 
 /* ================= HELPERS ================= */
@@ -311,30 +312,31 @@ const testimonials: Testimonial[] = [
   }
 ];
 
-const faqItems: FaqItem[] = [
+// IMPORTANT: Use 'q' and 'a' properties for FAQ component
+const faqItems: FAQItem[] = [
   {
-    question: "Are these vouchers really free?",
-    answer: "Yes! All vouchers on Cashog are completely free to use. Just copy the code and paste at checkout."
+    q: "Are these vouchers really free?",
+    a: "Yes! All vouchers on Cashog are completely free to use. Just copy the code and paste at checkout."
   },
   {
-    question: "How do I use a voucher code?",
-    answer: "Copy the voucher code, go to the store's website, add items to your cart, and paste the code in the 'Promo Code' or 'Discount Code' box at checkout."
+    q: "How do I use a voucher code?",
+    a: "Copy the voucher code, go to the store's website, add items to your cart, and paste the code in the 'Promo Code' or 'Discount Code' box at checkout."
   },
   {
-    question: "Do vouchers expire?",
-    answer: "Yes, most vouchers have an expiry date. Check the expiry date shown on each voucher. Use them before they expire!"
+    q: "Do vouchers expire?",
+    a: "Yes, most vouchers have an expiry date. Check the expiry date shown on each voucher. Use them before they expire!"
   },
   {
-    question: "How often are new vouchers added?",
-    answer: "New vouchers are added daily. We update our database constantly to bring you the latest deals and discounts."
+    q: "How often are new vouchers added?",
+    a: "New vouchers are added daily. We update our database constantly to bring you the latest deals and discounts."
   },
   {
-    question: "Can I use vouchers with other offers?",
-    answer: "It depends on the store. Some allow stacking with sales, others don't. Always check the terms and conditions."
+    q: "Can I use vouchers with other offers?",
+    a: "It depends on the store. Some allow stacking with sales, others don't. Always check the terms and conditions."
   },
   {
-    question: "What if a voucher doesn't work?",
-    answer: "Vouchers occasionally expire faster than expected. Try another code or check the terms. Report invalid codes and we'll remove them."
+    q: "What if a voucher doesn't work?",
+    a: "Vouchers occasionally expire faster than expected. Try another code or check the terms. Report invalid codes and we'll remove them."
   }
 ];
 
@@ -461,7 +463,6 @@ export default async function VouchersPage({
   const copyToClipboard = (code: string) => {
     if (typeof navigator !== 'undefined') {
       navigator.clipboard.writeText(code);
-      // Optional: Show a toast notification
       alert(`Copied: ${code}`);
     }
   };
@@ -811,7 +812,7 @@ export default async function VouchersPage({
         </OpeningStyle>
       </CircleBorder>
 
-      {/* FAQ Section */}
+      {/* FAQ Section - Fixed: Using q and a properties */}
       <CircleBorder>
         <OpeningStyle delay={0.1}>
           <div className="max-w-4xl mx-auto px-6 py-16 md:py-24">
