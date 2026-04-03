@@ -18,14 +18,14 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-// Animation Components
+// Animation Components - Using existing components from your project
 import OpeningStyle from "@/components/animations/openingstyle";
-import RevealWithBorder from "@/components/animations/RevealWithBorder";
+import CircleBorder from "@/components/animations/CircleBorder";
 
 // Auth Components
 import AuthPageWrapper from "@/components/auth/AuthPageWrapper";
 
-// Background
+// Background component inline to avoid missing import
 const Background = () => (
   <div className="fixed inset-0 -z-10">
     <div className="absolute inset-0 bg-gradient-to-br from-[#0A0D14] via-[#0E111B] to-[#121826]" />
@@ -263,7 +263,7 @@ export default function SignupPage() {
       <Background />
       <main className="relative min-h-screen bg-[#0E111B] text-white flex items-center justify-center py-12 px-4">
         <OpeningStyle>
-          <RevealWithBorder borderColor="border-gradient-rainbow">
+          <CircleBorder>
             <div className="w-full max-w-md mx-auto">
               <AuthPageWrapper title="" subtitle="">
                 {/* Header with Bonus */}
@@ -561,7 +561,7 @@ export default function SignupPage() {
                 )}
               </AuthPageWrapper>
             </div>
-          </RevealWithBorder>
+          </CircleBorder>
         </OpeningStyle>
       </main>
     </>
