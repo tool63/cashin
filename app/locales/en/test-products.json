@@ -1,0 +1,236 @@
+{
+  "seo": {
+    "title": "Test Products in {country} - Earn $10-$100 + Keep Free Products | Cashog",
+    "description": "Join 60,000+ product testers in {country}. Test electronics, beauty, home & food products. Keep products for free + get paid via PayPal. Limited spots available!"
+  },
+  "hero": {
+    "title": "Get Paid to Test Products in {country}",
+    "subtitle": "Join 60,000+ product testers in {country}. Test electronics, beauty products, home goods & food items. Keep the products for free AND get paid via PayPal! Limited spots available."
+  },
+  "statsTitle": "Product Testing Statistics",
+  "stats": {
+    "productsTested": "500K+",
+    "productsTestedLabel": "Products Tested",
+    "avgPayout": "$25",
+    "avgPayoutLabel": "Average Payout",
+    "activeUsers": "60K+",
+    "activeUsersLabel": "Active Testers",
+    "totalPaid": "$12M+",
+    "totalPaidLabel": "Total Paid"
+  },
+  "categoriesTitle": "Product Testing Categories",
+  "categoriesSubtitle": "Test these types of products and get paid",
+  "productCategories": [
+    {
+      "icon": "📱",
+      "title": "Electronics",
+      "description": "Smartphones, headphones, smartwatches, tablets",
+      "avgReward": "$50-$100",
+      "timeRequired": "1-2 weeks",
+      "keepProduct": "Yes"
+    },
+    {
+      "icon": "💄",
+      "title": "Beauty & Cosmetics",
+      "description": "Skincare, makeup, haircare products",
+      "avgReward": "$10-$30",
+      "timeRequired": "1-2 weeks",
+      "keepProduct": "Yes"
+    },
+    {
+      "icon": "🏠",
+      "title": "Home & Kitchen",
+      "description": "Appliances, cookware, home decor",
+      "avgReward": "$20-$50",
+      "timeRequired": "1-2 weeks",
+      "keepProduct": "Yes"
+    },
+    {
+      "icon": "🍕",
+      "title": "Food & Beverage",
+      "description": "Snacks, drinks, meal kits",
+      "avgReward": "$5-$15",
+      "timeRequired": "3-5 days",
+      "keepProduct": "Yes"
+    },
+    {
+      "icon": "👕",
+      "title": "Clothing & Apparel",
+      "description": "Clothes, shoes, accessories",
+      "avgReward": "$15-$40",
+      "timeRequired": "1 week",
+      "keepProduct": "Yes"
+    },
+    {
+      "icon": "🐶",
+      "title": "Pet Products",
+      "description": "Pet food, toys, accessories",
+      "avgReward": "$10-$25",
+      "timeRequired": "1 week",
+      "keepProduct": "Yes"
+    }
+  ],
+  "featuredProductsTitle": "Products Available for Testing Now",
+  "featuredProductsSubtitle": "Limited spots - test these products today",
+  "featuredProducts": [
+    {
+      "title": "Samsung Galaxy Buds2 Pro",
+      "reward": "$75",
+      "timeEstimate": "2 weeks",
+      "category": "Electronics",
+      "spotsLeft": 50,
+      "brand": "Samsung",
+      "rating": "4.9",
+      "keepProduct": "Yes"
+    },
+    {
+      "title": "Dyson V15 Vacuum",
+      "reward": "$100",
+      "timeEstimate": "3 weeks",
+      "category": "Home",
+      "spotsLeft": 25,
+      "brand": "Dyson",
+      "rating": "4.8",
+      "keepProduct": "Yes"
+    },
+    {
+      "title": "L'Oréal Skin Care Set",
+      "reward": "$25",
+      "timeEstimate": "2 weeks",
+      "category": "Beauty",
+      "spotsLeft": 200,
+      "brand": "L'Oréal",
+      "rating": "4.7",
+      "keepProduct": "Yes"
+    },
+    {
+      "title": "HelloFresh Meal Kit",
+      "reward": "$15",
+      "timeEstimate": "1 week",
+      "category": "Food",
+      "spotsLeft": 500,
+      "brand": "HelloFresh",
+      "rating": "4.6",
+      "keepProduct": "Yes"
+    },
+    {
+      "title": "Nike Running Shoes",
+      "reward": "$50",
+      "timeEstimate": "2 weeks",
+      "category": "Clothing",
+      "spotsLeft": 75,
+      "brand": "Nike",
+      "rating": "4.8",
+      "keepProduct": "Yes"
+    },
+    {
+      "title": "Purina Dog Food",
+      "reward": "$20",
+      "timeEstimate": "2 weeks",
+      "category": "Pet",
+      "spotsLeft": 150,
+      "brand": "Purina",
+      "rating": "4.7",
+      "keepProduct": "Yes"
+    }
+  ],
+  "benefitsTitle": "Why Become a Product Tester",
+  "benefits": [
+    {
+      "icon": "🎁",
+      "title": "Keep Free Products",
+      "description": "Most products are yours to keep after testing. Get high-value items for free"
+    },
+    {
+      "icon": "💰",
+      "title": "Get Paid Cash",
+      "description": "Earn $10-$100 per product tested. Plus keep the product!"
+    },
+    {
+      "icon": "🏠",
+      "title": "Work From Home",
+      "description": "Test products at home. No commute, no dress code"
+    },
+    {
+      "icon": "🎯",
+      "title": "Influence Brands",
+      "description": "Your feedback helps companies improve their products"
+    }
+  ],
+  "tipsTitle": "Tips to Become a Successful Product Tester",
+  "tips": [
+    {
+      "title": "Complete Your Profile",
+      "description": "Fill out your demographics to get matched with relevant product tests"
+    },
+    {
+      "title": "Write Detailed Reviews",
+      "description": "Brands prefer testers who provide thorough, honest feedback"
+    },
+    {
+      "title": "Apply Quickly",
+      "description": "Product tests fill up fast. Apply as soon as you see an opportunity"
+    },
+    {
+      "title": "Meet Deadlines",
+      "description": "Complete testing and submit feedback on time to qualify for more tests"
+    }
+  ],
+  "testimonialsTitle": "What Our Product Testers Say",
+  "testimonials": [
+    {
+      "name": "Jennifer L.",
+      "country": "United States",
+      "earnings": "$450 + Products",
+      "quote": "I've tested headphones, skincare, and even a vacuum. Kept everything for free AND got paid. Best side gig ever!",
+      "avatar": "JL"
+    },
+    {
+      "name": "Michael R.",
+      "country": "Canada",
+      "earnings": "$320 + Products",
+      "quote": "Tested a smartwatch worth $300. Got paid $75 and kept the watch. Cashog is amazing for product testers.",
+      "avatar": "MR"
+    },
+    {
+      "name": "Sophie T.",
+      "country": "United Kingdom",
+      "earnings": "$280 + Products",
+      "quote": "Love testing beauty products. Get free makeup and skincare plus cash. Can't beat that!",
+      "avatar": "ST"
+    }
+  ],
+  "faq": {
+    "title": "Test Products in {country} - FAQ",
+    "items": [
+      {
+        "question": "How much can I earn from product testing?",
+        "answer": "Each product test pays between $10 and $100. Most members earn $100-$500 per month, plus they keep the products they test (which can be worth $50-$500 each). Electronics and home appliances pay the most."
+      },
+      {
+        "question": "Do I really get to keep the products?",
+        "answer": "Yes! Most product tests allow you to keep the product for free. Some high-value items may need to be returned, but this is clearly stated before you apply."
+      },
+      {
+        "question": "How do I get paid for testing products?",
+        "answer": "You can cash out via PayPal, bank transfer, Bitcoin, Ethereum, or gift cards (Amazon, Apple, Google Play, Robux, Steam, Xbox, PlayStation). Minimum payout is just $5."
+      },
+      {
+        "question": "What do I need to do as a product tester?",
+        "answer": "Use the product as instructed (usually 1-3 weeks), take photos/videos if required, and complete a feedback survey or review. That's it!"
+      },
+      {
+        "question": "Do I need special equipment?",
+        "answer": "Most tests only require a smartphone to take photos. Some electronics tests may require a computer, but this is specified in the test requirements."
+      },
+      {
+        "question": "Is Cashog available in my country?",
+        "answer": "Cashog is available in over 50 countries including the US, Canada, UK, Australia, Germany, France, Spain, Italy, and many more. Product testing availability varies by region. Sign up to see available tests in {country}."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Start Testing in {country}?",
+    "subtitle": "Join 60,000+ product testers already getting paid in {country}. Sign up for free and test your first product today!"
+  }
+}
