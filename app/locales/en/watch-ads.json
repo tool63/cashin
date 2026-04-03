@@ -1,0 +1,221 @@
+{
+  "seo": {
+    "title": "Watch Ads & Get Paid in {country} - Earn $0.50-$5 Per Ad | Cashog",
+    "description": "Join 80,000+ members earning passive income in {country} by watching video ads. Watch 30-second ads & earn PayPal cash instantly. Free to join today!"
+  },
+  "hero": {
+    "title": "Get Paid to Watch Ads in {country}",
+    "subtitle": "Join 80,000+ members earning passive income in {country} by watching video ads. Watch 30-second ads, earn cash, and get paid instantly via PayPal!"
+  },
+  "statsTitle": "Watch Ads Statistics",
+  "stats": {
+    "adsWatched": "50M+",
+    "adsWatchedLabel": "Ads Watched",
+    "avgPayout": "$0.05",
+    "avgPayoutLabel": "Average Per Ad",
+    "activeUsers": "80K+",
+    "activeUsersLabel": "Active Members",
+    "totalPaid": "$2.5M+",
+    "totalPaidLabel": "Total Paid"
+  },
+  "categoriesTitle": "Ad Categories",
+  "categoriesSubtitle": "Earn by watching these types of ads",
+  "adCategories": [
+    {
+      "icon": "🎬",
+      "title": "Video Ads",
+      "description": "Watch short promotional videos",
+      "avgReward": "$0.03-$0.10",
+      "timeRequired": "15-30 sec",
+      "dailyLimit": "50 ads"
+    },
+    {
+      "icon": "📺",
+      "title": "TV Commercials",
+      "description": "Watch TV-style advertisements",
+      "avgReward": "$0.05-$0.15",
+      "timeRequired": "30-60 sec",
+      "dailyLimit": "30 ads"
+    },
+    {
+      "icon": "📱",
+      "title": "Mobile App Ads",
+      "description": "Watch in-app advertisements",
+      "avgReward": "$0.02-$0.08",
+      "timeRequired": "10-20 sec",
+      "dailyLimit": "100 ads"
+    },
+    {
+      "icon": "🎮",
+      "title": "Game Ads",
+      "description": "Watch ads within mobile games",
+      "avgReward": "$0.01-$0.05",
+      "timeRequired": "5-15 sec",
+      "dailyLimit": "200 ads"
+    },
+    {
+      "icon": "🛍️",
+      "title": "Shopping Ads",
+      "description": "Watch product promotions",
+      "avgReward": "$0.05-$0.20",
+      "timeRequired": "20-40 sec",
+      "dailyLimit": "40 ads"
+    },
+    {
+      "icon": "💰",
+      "title": "Finance Ads",
+      "description": "Watch financial service ads",
+      "avgReward": "$0.10-$0.50",
+      "timeRequired": "30-60 sec",
+      "dailyLimit": "20 ads"
+    }
+  ],
+  "featuredAdsTitle": "High-Paying Ads Available Now",
+  "featuredAdsSubtitle": "Limited views - watch these ads today",
+  "featuredAds": [
+    {
+      "title": "Nike - Just Do It Campaign",
+      "reward": "$0.50",
+      "timeEstimate": "30 sec",
+      "category": "Shopping",
+      "spotsLeft": 5000,
+      "advertiser": "Nike",
+      "rating": "4.9"
+    },
+    {
+      "title": "Amazon Prime Day Special",
+      "reward": "$0.75",
+      "timeEstimate": "45 sec",
+      "category": "Shopping",
+      "spotsLeft": 2500,
+      "advertiser": "Amazon",
+      "rating": "4.8"
+    },
+    {
+      "title": "Coca-Cola Summer Ad",
+      "reward": "$0.30",
+      "timeEstimate": "20 sec",
+      "category": "Beverage",
+      "spotsLeft": 10000,
+      "advertiser": "Coca-Cola",
+      "rating": "4.7"
+    },
+    {
+      "title": "McDonald's New Menu",
+      "reward": "$0.40",
+      "timeEstimate": "25 sec",
+      "category": "Food",
+      "spotsLeft": 7500,
+      "advertiser": "McDonald's",
+      "rating": "4.6"
+    },
+    {
+      "title": "Samsung Galaxy Launch",
+      "reward": "$1.00",
+      "timeEstimate": "60 sec",
+      "category": "Electronics",
+      "spotsLeft": 1000,
+      "advertiser": "Samsung",
+      "rating": "4.9"
+    }
+  ],
+  "benefitsTitle": "Why Watch Ads for Cash",
+  "benefits": [
+    {
+      "icon": "💰",
+      "title": "Passive Income",
+      "description": "Earn money while doing other tasks - just let ads play"
+    },
+    {
+      "icon": "⏰",
+      "title": "Takes Seconds",
+      "description": "Most ads are 15-30 seconds long. Quick and easy earnings"
+    },
+    {
+      "icon": "📱",
+      "title": "Works Anywhere",
+      "description": "Watch ads on your phone, tablet, or computer"
+    },
+    {
+      "icon": "🎯",
+      "title": "No Commitment",
+      "description": "Watch as many or as few ads as you want. No minimum requirements"
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Ad Watching Earnings",
+  "tips": [
+    {
+      "title": "Watch Daily",
+      "description": "New ads are added every day. Watch your daily limit to maximize earnings"
+    },
+    {
+      "title": "Use Multiple Devices",
+      "description": "Watch ads on different devices to increase your daily earning potential"
+    },
+    {
+      "title": "Complete Your Profile",
+      "description": "Fill out your profile to get targeted higher-paying ads"
+    },
+    {
+      "title": "Watch During Off-Peak Hours",
+      "description": "More ads are available early morning and late night"
+    }
+  ],
+  "testimonialsTitle": "What Our Members Say",
+  "testimonials": [
+    {
+      "name": "Emma S.",
+      "country": "United States",
+      "earnings": "$150",
+      "quote": "I watch ads while watching TV. Made $150 last month without doing anything extra. So easy!",
+      "avatar": "ES"
+    },
+    {
+      "name": "David L.",
+      "country": "Canada",
+      "earnings": "$95",
+      "quote": "Perfect for passive income. I let ads play while working and earn about $3-5 daily.",
+      "avatar": "DL"
+    },
+    {
+      "name": "Sarah K.",
+      "country": "United Kingdom",
+      "earnings": "$210",
+      "quote": "The finance ads pay the most. I've earned over $200 in 2 months just watching ads on my phone.",
+      "avatar": "SK"
+    }
+  ],
+  "faq": {
+    "title": "Watch Ads & Get Paid in {country} - FAQ",
+    "items": [
+      {
+        "question": "How much can I earn watching ads?",
+        "answer": "Each ad pays between $0.01 and $1.00. Most members earn $30-$100 per month, but active users can earn $200+ by watching their daily limit of 100-200 ads."
+      },
+      {
+        "question": "Is it really free to join?",
+        "answer": "Yes! Cashog is 100% free to join. You never need to pay anything. Just watch ads and get paid."
+      },
+      {
+        "question": "How do I get paid for watching ads?",
+        "answer": "You can cash out via PayPal, bank transfer, Bitcoin, Ethereum, or gift cards (Amazon, Apple, Google Play, Robux, Steam, Xbox, PlayStation). Minimum payout is just $5."
+      },
+      {
+        "question": "How long does each ad take?",
+        "answer": "Most ads are 15-60 seconds long. You need to watch the entire ad to earn the reward."
+      },
+      {
+        "question": "Can I watch ads on my phone?",
+        "answer": "Yes! Cashog works on all devices - iPhone, Android, tablet, and computer. You can watch ads anywhere."
+      },
+      {
+        "question": "Is Cashog available in my country?",
+        "answer": "Cashog is available in over 50 countries including the US, Canada, UK, Australia, Germany, France, Spain, Italy, and many more. Sign up for free to check ad watching availability in {country}."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Start Earning in {country}?",
+    "subtitle": "Join 80,000+ members already getting paid in {country}. Sign up for free and start watching paid ads today!"
+  }
+}
