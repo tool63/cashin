@@ -18,6 +18,7 @@ import type { SupportedLanguage } from "@/app/core/types";
 import { generateJsonLd } from "@/components/SEO/schema";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import OpeningStyle from "@/components/animations/openingstyle";
+import FAQ from "@/components/animations/FAQ";
 
 /* ================= HELPER ================= */
 
@@ -165,7 +166,8 @@ export default async function HowItWorksPage({
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
               {howItWorks?.stepsTitle?.replace(/\{country\}/g, countryName) || "Simple Steps to Start Earning"}
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full" />
+            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-6">
               {howItWorks?.stepsSubtitle?.replace(/\{country\}/g, countryName) || "Get started in minutes with our easy process"}
             </p>
           </div>
@@ -173,8 +175,8 @@ export default async function HowItWorksPage({
             {stepsData.map((step: any, index: number) => (
               <div key={index} className="relative">
                 <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
-                  <div className="flex-shrink-0">
-                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center shadow-lg">
+                  <div className="flex-shrink-0 mx-auto md:mx-0">
+                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-yellow-400 to-green-500 flex items-center justify-center shadow-lg">
                       {step.icon ? (
                         <span className="text-2xl md:text-3xl">{step.icon}</span>
                       ) : (
@@ -184,7 +186,7 @@ export default async function HowItWorksPage({
                       )}
                     </div>
                   </div>
-                  <div className="flex-1">
+                  <div className="flex-1 text-center md:text-left">
                     <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-3">
                       {step.title}
                     </h3>
@@ -194,7 +196,7 @@ export default async function HowItWorksPage({
                   </div>
                 </div>
                 {index < stepsData.length - 1 && (
-                  <div className="hidden md:block absolute left-8 top-20 w-0.5 h-16 bg-gradient-to-b from-primary-400 to-transparent" />
+                  <div className="hidden md:block absolute left-10 top-20 w-0.5 h-16 bg-gradient-to-b from-green-400 to-transparent" />
                 )}
               </div>
             ))}
@@ -206,21 +208,26 @@ export default async function HowItWorksPage({
       {videoData.url && (
         <OpeningStyle delay={0.1}>
           <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
-            <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-6 md:p-8">
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4 text-center">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
                 {videoData.title}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300 text-center mb-8 max-w-2xl mx-auto">
+              </h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full" />
+              <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-6">
                 {videoData.description}
               </p>
-              <div className="aspect-video rounded-xl overflow-hidden shadow-xl">
-                <iframe
-                  src={videoData.url}
-                  title="How it works video"
-                  className="w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
+            </div>
+            <div className="max-w-4xl mx-auto">
+              <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-6 md:p-8">
+                <div className="aspect-video rounded-xl overflow-hidden shadow-xl">
+                  <iframe
+                    src={videoData.url}
+                    title="How it works video"
+                    className="w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
               </div>
             </div>
           </section>
@@ -235,7 +242,8 @@ export default async function HowItWorksPage({
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
                 {howItWorks?.methodsTitle?.replace(/\{country\}/g, countryName) || "Multiple Ways to Earn"}
               </h2>
-              <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full" />
+              <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-6">
                 {howItWorks?.methodsSubtitle?.replace(/\{country\}/g, countryName) || "Choose the earning method that works best for you"}
               </p>
             </div>
@@ -243,9 +251,9 @@ export default async function HowItWorksPage({
               {methodsData.map((method: any, index: number) => (
                 <div
                   key={index}
-                  className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700"
+                  className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700 text-center"
                 >
-                  <div className="text-4xl mb-4">{method.icon}</div>
+                  <div className="text-5xl mb-4">{method.icon}</div>
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                     {method.title}
                   </h3>
@@ -262,21 +270,27 @@ export default async function HowItWorksPage({
       {/* Stats Highlights */}
       <OpeningStyle delay={0.1}>
         <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
+              Platform Statistics
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full" />
+          </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-3xl md:text-4xl font-bold text-primary-600">50K+</div>
+            <div className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl">
+              <div className="text-3xl md:text-4xl font-bold text-green-600">50K+</div>
               <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">Active Users</div>
             </div>
-            <div>
-              <div className="text-3xl md:text-4xl font-bold text-primary-600">$2.5M+</div>
+            <div className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl">
+              <div className="text-3xl md:text-4xl font-bold text-green-600">$2.5M+</div>
               <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">Paid Out</div>
             </div>
-            <div>
-              <div className="text-3xl md:text-4xl font-bold text-primary-600">24/7</div>
+            <div className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl">
+              <div className="text-3xl md:text-4xl font-bold text-green-600">24/7</div>
               <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">Task Availability</div>
             </div>
-            <div>
-              <div className="text-3xl md:text-4xl font-bold text-primary-600">Instant</div>
+            <div className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl">
+              <div className="text-3xl md:text-4xl font-bold text-green-600">Instant</div>
               <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">Withdrawals</div>
             </div>
           </div>
@@ -286,35 +300,9 @@ export default async function HowItWorksPage({
       {/* FAQ Section */}
       {faqData.items.length > 0 && (
         <OpeningStyle delay={0.1}>
-          <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
-                {faqData.title}
-              </h2>
-            </div>
-            <div className="max-w-3xl mx-auto space-y-4">
-              {faqData.items.map((item: any, index: number) => (
-                <details
-                  key={index}
-                  className="group bg-gray-50 dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow"
-                >
-                  <summary className="flex justify-between items-center cursor-pointer list-none p-6">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white pr-4">
-                      {item.q}
-                    </h3>
-                    <div className="text-primary-600 dark:text-primary-400 group-open:rotate-45 transition-transform">
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                      </svg>
-                    </div>
-                  </summary>
-                  <div className="px-6 pb-6 text-gray-600 dark:text-gray-300">
-                    {item.a}
-                  </div>
-                </details>
-              ))}
-            </div>
-          </section>
+          <div className="max-w-4xl mx-auto px-6 py-16 md:py-24">
+            <FAQ title={faqData.title} faqs={faqData.items} />
+          </div>
         </OpeningStyle>
       )}
 
@@ -322,9 +310,11 @@ export default async function HowItWorksPage({
       {ctaData.title && (
         <OpeningStyle delay={0.1}>
           <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
-            <div className="bg-gradient-to-r from-primary-600 to-primary-800 rounded-2xl p-8 md:p-12 text-center text-white">
-              <h3 className="text-2xl md:text-4xl font-bold mb-4">{ctaData.title}</h3>
-              <p className="text-primary-100 mb-8 max-w-2xl mx-auto text-lg">
+            <div className="bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 rounded-2xl p-8 md:p-12 text-center">
+              <h3 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">
+                {ctaData.title}
+              </h3>
+              <p className="text-gray-800 mb-8 max-w-2xl mx-auto text-lg">
                 {ctaData.subtitle}
               </p>
               <PrimaryCTA
