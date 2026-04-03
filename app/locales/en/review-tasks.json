@@ -1,0 +1,291 @@
+{
+  "seo": {
+    "title": "Get Paid for Review Tasks in {country} - Earn $0.50-$5 Per Review | Cashog",
+    "description": "Join 50,000+ reviewers earning money in {country} by writing product reviews. Share your opinion, rate products, and earn PayPal cash instantly. Free to join today!"
+  },
+  "hero": {
+    "title": "Get Paid to Write Reviews in {country}",
+    "subtitle": "Join 50,000+ reviewers earning money in {country} by writing honest product reviews. Share your opinion, rate products, and earn cash instantly via PayPal! Takes just 2-5 minutes per review."
+  },
+  "statsTitle": "Review Task Statistics",
+  "stats": {
+    "tasksCompleted": "2.5M+",
+    "tasksCompletedLabel": "Reviews Completed",
+    "avgPayout": "$1.25",
+    "avgPayoutLabel": "Average Per Review",
+    "activeReviewers": "50K+",
+    "activeReviewersLabel": "Active Reviewers",
+    "totalPaid": "$5M+",
+    "totalPaidLabel": "Total Paid"
+  },
+  "categoriesTitle": "Review Task Categories",
+  "categoriesSubtitle": "Earn by writing reviews in these categories",
+  "taskCategories": [
+    {
+      "icon": "📱",
+      "title": "Mobile Apps & Games",
+      "description": "Test and review mobile applications, games, and software on iOS and Android platforms",
+      "avgReward": "$0.50-$2.00",
+      "timeRequired": "3-5 minutes",
+      "difficulty": "Easy"
+    },
+    {
+      "icon": "🛒",
+      "title": "Product Reviews",
+      "description": "Review physical products from Amazon, Walmart, and other major retailers",
+      "avgReward": "$1.00-$3.00",
+      "timeRequired": "4-6 minutes",
+      "difficulty": "Medium"
+    },
+    {
+      "icon": "🍽️",
+      "title": "Restaurant & Food",
+      "description": "Share your dining experiences at local restaurants and food delivery services",
+      "avgReward": "$0.75-$2.50",
+      "timeRequired": "2-4 minutes",
+      "difficulty": "Easy"
+    },
+    {
+      "icon": "💻",
+      "title": "Software & SaaS",
+      "description": "Review business software, productivity tools, and cloud services",
+      "avgReward": "$2.00-$5.00",
+      "timeRequired": "5-8 minutes",
+      "difficulty": "Advanced"
+    },
+    {
+      "icon": "🎬",
+      "title": "Movies & Streaming",
+      "description": "Write reviews for movies, TV shows, and streaming platform content",
+      "avgReward": "$0.50-$1.50",
+      "timeRequired": "2-3 minutes",
+      "difficulty": "Easy"
+    },
+    {
+      "icon": "✈️",
+      "title": "Travel & Hotels",
+      "description": "Review hotels, flights, rental cars, and travel experiences",
+      "avgReward": "$1.50-$4.00",
+      "timeRequired": "4-7 minutes",
+      "difficulty": "Medium"
+    },
+    {
+      "icon": "🔧",
+      "title": "Services & Professionals",
+      "description": "Rate plumbers, electricians, cleaners, and other service providers",
+      "avgReward": "$1.00-$3.50",
+      "timeRequired": "3-5 minutes",
+      "difficulty": "Easy"
+    },
+    {
+      "icon": "📚",
+      "title": "Books & Education",
+      "description": "Review textbooks, online courses, educational materials, and e-books",
+      "avgReward": "$0.75-$2.00",
+      "timeRequired": "3-5 minutes",
+      "difficulty": "Medium"
+    },
+    {
+      "icon": "💊",
+      "title": "Health & Beauty",
+      "description": "Share experiences with skincare, supplements, fitness products, and wellness services",
+      "avgReward": "$1.00-$3.00",
+      "timeRequired": "3-6 minutes",
+      "difficulty": "Easy"
+    }
+  ],
+  "featuredTasksTitle": "High-Paying Review Tasks Available Now",
+  "featuredTasksSubtitle": "Limited spots - complete these reviews today",
+  "featuredTasks": [
+    {
+      "title": "New iPhone 15 Review",
+      "reward": "$5.00",
+      "timeEstimate": "8 minutes",
+      "category": "Electronics",
+      "spotsLeft": 247,
+      "company": "Apple",
+      "rating": "4.9",
+      "requirements": "Must own iPhone 15"
+    },
+    {
+      "title": "Local Restaurant Experience",
+      "reward": "$2.50",
+      "timeEstimate": "4 minutes",
+      "category": "Food & Dining",
+      "spotsLeft": 1843,
+      "company": "DoorDash",
+      "rating": "4.7",
+      "requirements": "Recent dining experience"
+    },
+    {
+      "title": "Netflix Series Review",
+      "reward": "$1.50",
+      "timeEstimate": "3 minutes",
+      "category": "Entertainment",
+      "spotsLeft": 2561,
+      "company": "Netflix",
+      "rating": "4.6",
+      "requirements": "Must have watched the series"
+    },
+    {
+      "title": "Marriott Hotel Stay Review",
+      "reward": "$4.00",
+      "timeEstimate": "6 minutes",
+      "category": "Travel",
+      "spotsLeft": 562,
+      "company": "Marriott",
+      "rating": "4.8",
+      "requirements": "Recent hotel stay"
+    },
+    {
+      "title": "Salesforce Software Review",
+      "reward": "$5.00",
+      "timeEstimate": "7 minutes",
+      "category": "Software",
+      "spotsLeft": 189,
+      "company": "Salesforce",
+      "rating": "4.9",
+      "requirements": "Business user preferred"
+    },
+    {
+      "title": "Amazon Product Review",
+      "reward": "$3.00",
+      "timeEstimate": "5 minutes",
+      "category": "E-commerce",
+      "spotsLeft": 3421,
+      "company": "Amazon",
+      "rating": "4.7",
+      "requirements": "Purchased product within 30 days"
+    }
+  ],
+  "benefitsTitle": "Why Get Paid to Write Reviews",
+  "benefits": [
+    {
+      "icon": "💰",
+      "title": "High Earnings Potential",
+      "description": "Earn $0.50-$5 per review. Top reviewers make $500-1000+ monthly by completing 10-20 reviews daily."
+    },
+    {
+      "icon": "⚡",
+      "title": "Instant Payments",
+      "description": "Get paid immediately after each approved review. Cash out via PayPal, Venmo, or direct bank transfer."
+    },
+    {
+      "icon": "🎯",
+      "title": "Share Your Expertise",
+      "description": "Help other consumers make informed decisions while getting paid for your valuable opinions."
+    },
+    {
+      "icon": "📱",
+      "title": "Work Anywhere",
+      "description": "Write reviews from your phone, tablet, or computer. Perfect for commuting, breaks, or working from home."
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Your Review Earnings",
+  "tips": [
+    {
+      "title": "Write Detailed Reviews",
+      "description": "Detailed, honest reviews with specific examples earn higher ratings and unlock premium review opportunities."
+    },
+    {
+      "title": "Include Photos When Possible",
+      "description": "Reviews with photos earn 40% more on average and are approved faster than text-only reviews."
+    },
+    {
+      "title": "Maintain High Quality",
+      "description": "Maintain a 4+ star rating to access exclusive high-paying review tasks worth $3-5 each."
+    },
+    {
+      "title": "Review What You Know",
+      "description": "Focus on products, services, and experiences you're familiar with to write authentic reviews faster."
+    }
+  ],
+  "testimonialsTitle": "What Our Reviewers Say",
+  "testimonials": [
+    {
+      "name": "Jennifer Martinez",
+      "country": "United States",
+      "earnings": "$1,247",
+      "quote": "I've been writing reviews for 6 months and make $400-500 monthly. It's so easy to review products I already buy!",
+      "avatar": "JM"
+    },
+    {
+      "name": "David Kim",
+      "country": "Canada",
+      "earnings": "$2,891",
+      "quote": "As a tech enthusiast, getting paid $5 per software review is amazing. I write 5-10 reviews weekly and love it!",
+      "avatar": "DK"
+    },
+    {
+      "name": "Sarah Thompson",
+      "country": "United Kingdom",
+      "earnings": "$923",
+      "keyword": "reviewer",
+      "quote": "Perfect side income. I review restaurants I already visit and earn an extra $200-300 monthly.",
+      "avatar": "ST"
+    },
+    {
+      "name": "Marco Rossi",
+      "country": "Italy",
+      "earnings": "$1,562",
+      "quote": "Cashog is legit! I've withdrawn over $1500 in the last year just by sharing my honest opinions.",
+      "avatar": "MR"
+    },
+    {
+      "name": "Emma Wilson",
+      "country": "Australia",
+      "earnings": "$756",
+      "quote": "Love reviewing beauty products. Fast payments and always plenty of tasks available in Australia.",
+      "avatar": "EW"
+    }
+  ],
+  "faq": {
+    "title": "Get Paid for Reviews in {country} - FAQ",
+    "items": [
+      {
+        "question": "How do I get paid to write reviews in {country}?",
+        "answer": "Simply sign up for free, browse available review tasks, choose products or services you're familiar with, write an honest review (100-300 words), and submit. Once approved, you'll earn cash instantly to your account. Payments can be withdrawn via PayPal, Venmo, or bank transfer."
+      },
+      {
+        "question": "Is getting paid to write reviews legitimate?",
+        "answer": "Yes! Companies pay real money for authentic consumer reviews because they need genuine feedback to improve their products and services. Cashog has paid over $5 million to 50,000+ reviewers worldwide. All review tasks are 100% legitimate and legal."
+      },
+      {
+        "question": "How much can I earn writing reviews in {country}?",
+        "answer": "Most reviewers earn $200-600 monthly by completing 10-20 reviews per week. Each review pays $0.50-$5.00 depending on length, detail level, and category. Top reviewers who write daily earn $1000+ per month."
+      },
+      {
+        "question": "What types of reviews can I write?",
+        "answer": "You can review virtually anything! Popular categories include: mobile apps, Amazon products, restaurants, hotels, software, movies, books, beauty products, electronics, services, and much more. New review tasks are added daily."
+      },
+      {
+        "question": "How do I receive my payments?",
+        "answer": "You can withdraw your earnings via PayPal, Venmo, direct bank transfer (ACH), or choose from over 50 gift card options including Amazon, Walmart, Starbucks, and Uber. Payments are processed instantly with no minimum threshold for PayPal."
+      },
+      {
+        "question": "Are there any requirements to write reviews?",
+        "answer": "Basic requirements include being 18+ years old and having experience with the product/service you're reviewing. Some premium tasks may require verified purchases or specific expertise. Always be honest and authentic in your reviews."
+      },
+      {
+        "question": "How long does each review take?",
+        "answer": "Simple reviews (100-150 words) take 2-3 minutes. Detailed reviews (200-300 words) take 4-6 minutes. Including photos adds 1-2 minutes but increases your earnings significantly."
+      },
+      {
+        "question": "Will my reviews be published publicly?",
+        "answer": "Most reviews are published on partner websites like Amazon, Yelp, TripAdvisor, or the company's product page. Your real name isn't shared - you can use a reviewer alias to protect your privacy."
+      },
+      {
+        "question": "Can I write reviews on my phone?",
+        "answer": "Absolutely! Our platform is fully mobile-optimized. You can write reviews from anywhere using your smartphone or tablet. Most reviewers use their phones to write reviews during commutes or breaks."
+      },
+      {
+        "question": "Are there enough review tasks in {country}?",
+        "answer": "Yes! We have partnerships with 5,000+ companies worldwide. New review tasks are added hourly, with 50-200+ opportunities available at any time for {country} members across all categories."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Start Earning in {country}?",
+    "subtitle": "Join 50,000+ reviewers already getting paid in {country}. Sign up for free and start writing paid reviews today!"
+  }
+}
