@@ -21,7 +21,6 @@ import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import CircleBorder from "@/components/animations/CircleBorder";
 import OpeningStyle from "@/components/animations/openingstyle";
 import FAQ from "@/components/animations/FAQ";
-import SpinWheel from "@/components/games/SpinWheel";
 
 /* ================= TYPES ================= */
 
@@ -431,7 +430,7 @@ export default async function SpinningWheelPage({
         />
       )}
 
-      {/* Hero Section with Spin Wheel */}
+      {/* Hero Section */}
       <CircleBorder>
         <OpeningStyle delay={0.1}>
           <section
@@ -450,9 +449,27 @@ export default async function SpinningWheelPage({
               </p>
             </div>
             
-            {/* Interactive Spin Wheel Component */}
+            {/* Interactive Spin Wheel Section - Coming Soon */}
             <div className="max-w-4xl mx-auto mb-12">
-              <SpinWheel countryCode={country} />
+              <div className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-12 text-center shadow-xl border-2 border-yellow-300 dark:border-yellow-600">
+                <div className="text-8xl mb-6" aria-hidden="true">
+                  🎡
+                </div>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                  Prize Wheel Coming Soon!
+                </h2>
+                <p className="text-gray-600 dark:text-gray-400 mb-6">
+                  Get ready to spin and win amazing cash prizes. Sign up now to get notified when we launch!
+                </p>
+                <div className="flex justify-center gap-4">
+                  <span className="inline-flex items-center px-4 py-2 rounded-lg bg-yellow-100 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-400">
+                    🎁 Up to $500 Prizes
+                  </span>
+                  <span className="inline-flex items-center px-4 py-2 rounded-lg bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-400">
+                    🎰 Daily Free Spins
+                  </span>
+                </div>
+              </div>
             </div>
             
             <div className="text-center">
