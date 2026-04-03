@@ -1,0 +1,230 @@
+{
+  "seo": {
+    "title": "Cash Out Your Earnings - Fast & Secure Withdrawals",
+    "description": "Withdraw your earnings instantly with multiple payment methods including PayPal, USDT, Bitcoin, Gift Cards, and more. Fast and secure payouts."
+  },
+  "hero": {
+    "title": "Cash Out Your Earnings Instantly in {country}",
+    "subtitle": "Get your money fast with multiple withdrawal options. Secure, reliable, and instant payouts."
+  },
+  "statsTitle": "Withdrawal Statistics",
+  "stats": {
+    "totalWithdrawals": "$10M+",
+    "totalWithdrawalsLabel": "Total Withdrawn",
+    "instantPayouts": "Instant",
+    "instantPayoutsLabel": "Payout Speed",
+    "methods": "10+",
+    "methodsLabel": "Payment Methods",
+    "users": "50K+",
+    "usersLabel": "Happy Users"
+  },
+  "methodsTitle": "Withdrawal Methods in {country}",
+  "methodsSubtitle": "Choose your preferred way to cash out",
+  "paymentMethods": [
+    {
+      "icon": "💸",
+      "title": "PayPal",
+      "description": "Fast and secure payments",
+      "features": ["Instant transfers", "No fees"],
+      "isPopular": true
+    },
+    {
+      "icon": "💰",
+      "title": "USDT",
+      "description": "Crypto stablecoin payments",
+      "features": ["Low fees", "Global access"],
+      "isPopular": false
+    },
+    {
+      "icon": "₿",
+      "title": "Bitcoin",
+      "description": "Decentralized crypto payments",
+      "features": ["Secure", "Worldwide"],
+      "isPopular": true
+    },
+    {
+      "icon": "🎁",
+      "title": "Gift Cards",
+      "description": "Redeem rewards as gift cards",
+      "features": ["Amazon", "Google Play", "iTunes"],
+      "isPopular": false
+    },
+    {
+      "icon": "Ł",
+      "title": "Litecoin",
+      "description": "Fast crypto transactions",
+      "features": ["Low fees", "Quick confirmations"],
+      "isPopular": false
+    },
+    {
+      "icon": "Ξ",
+      "title": "Ethereum",
+      "description": "Smart contract payments",
+      "features": ["Secure", "Widely accepted"],
+      "isPopular": false
+    },
+    {
+      "icon": "Ð",
+      "title": "Dogecoin",
+      "description": "Fun and fast crypto",
+      "features": ["Low fees", "Community driven"],
+      "isPopular": false
+    },
+    {
+      "icon": "🟡",
+      "title": "BNB",
+      "description": "Binance ecosystem payments",
+      "features": ["Fast", "Low fees"],
+      "isPopular": false
+    }
+  ],
+  "stepsTitle": "How to Withdraw Your Earnings",
+  "stepsSubtitle": "Withdraw your money in 3 simple steps",
+  "steps": [
+    {
+      "icon": "1",
+      "title": "Reach Minimum Threshold",
+      "description": "Earn at least $10 to be eligible for withdrawal"
+    },
+    {
+      "icon": "2",
+      "title": "Choose Payment Method",
+      "description": "Select your preferred withdrawal option"
+    },
+    {
+      "icon": "3",
+      "title": "Get Paid Instantly",
+      "description": "Receive your money in minutes or hours"
+    }
+  ],
+  "featuresTitle": "Why Users Love Our Payout System",
+  "features": [
+    {
+      "icon": "⚡",
+      "title": "Instant Withdrawals",
+      "description": "Get your earnings quickly without delays"
+    },
+    {
+      "icon": "🛡️",
+      "title": "Secure & Trusted",
+      "description": "Your data and payments are fully protected"
+    },
+    {
+      "icon": "💳",
+      "title": "Multiple Options",
+      "description": "Choose from 10+ payment methods"
+    },
+    {
+      "icon": "🌍",
+      "title": "Global Access",
+      "description": "Withdraw from anywhere in the world"
+    },
+    {
+      "icon": "📱",
+      "title": "Mobile Friendly",
+      "description": "Withdraw directly from your phone"
+    },
+    {
+      "icon": "🕒",
+      "title": "24/7 Support",
+      "description": "Get help whenever you need it"
+    }
+  ],
+  "liveWithdrawalsTitle": "Live Withdrawals in {country}",
+  "liveWithdrawalsSubtitle": "Real users are withdrawing money right now",
+  "liveWithdrawals": [
+    {
+      "name": "John",
+      "country": "🇺🇸",
+      "amount": "32.22",
+      "time": "29s ago"
+    },
+    {
+      "name": "Ava",
+      "country": "🇺🇸",
+      "amount": "47.08",
+      "time": "41s ago"
+    },
+    {
+      "name": "Mason",
+      "country": "🇩🇪",
+      "amount": "32.06",
+      "time": "5s ago"
+    },
+    {
+      "name": "Noah",
+      "country": "🇪🇸",
+      "amount": "39.88",
+      "time": "51s ago"
+    },
+    {
+      "name": "Emma",
+      "country": "🇬🇧",
+      "amount": "26.20",
+      "time": "7s ago"
+    },
+    {
+      "name": "James",
+      "country": "🇩🇪",
+      "amount": "31.68",
+      "time": "31s ago"
+    },
+    {
+      "name": "Isabella",
+      "country": "🇨🇦",
+      "amount": "17.75",
+      "time": "50s ago"
+    },
+    {
+      "name": "Sophia",
+      "country": "🇫🇷",
+      "amount": "28.93",
+      "time": "43s ago"
+    },
+    {
+      "name": "Olivia",
+      "country": "🇳🇱",
+      "amount": "13.05",
+      "time": "45s ago"
+    },
+    {
+      "name": "Alex",
+      "country": "🇩🇪",
+      "amount": "39.31",
+      "time": "3s ago"
+    }
+  ],
+  "faq": {
+    "title": "Frequently Asked Questions About Withdrawals in {country}",
+    "items": [
+      {
+        "question": "What is the minimum withdrawal amount?",
+        "answer": "The minimum withdrawal amount is just $10 for most payment methods. Some methods may have different minimums."
+      },
+      {
+        "question": "How long does it take to receive my money?",
+        "answer": "Withdrawals are processed instantly for PayPal, USDT, and other cryptocurrencies. Bank transfers may take 1-3 business days."
+      },
+      {
+        "question": "Are there any fees for withdrawing?",
+        "answer": "We do not charge any withdrawal fees. However, some payment providers may have small network fees for crypto transactions."
+      },
+      {
+        "question": "Which payment methods are available in {country}?",
+        "answer": "We offer PayPal, USDT, Bitcoin, Ethereum, Litecoin, Dogecoin, BNB, and Gift Cards including Amazon and Google Play."
+      },
+      {
+        "question": "Is it safe to withdraw my earnings?",
+        "answer": "Yes, all withdrawals are processed through secure and encrypted channels. Your financial information is always protected."
+      },
+      {
+        "question": "Can I change my withdrawal method?",
+        "answer": "Yes, you can choose any available payment method each time you withdraw. There is no requirement to stick with one method."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Cash Out Your Earnings?",
+    "subtitle": "Start earning today and withdraw your money instantly with our secure payment system"
+  }
+}
