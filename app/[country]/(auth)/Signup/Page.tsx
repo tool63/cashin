@@ -1,4 +1,4 @@
-// app/[country]/(auth)/Signup/Page.tsx
+// app/[country]/(auth)/signup/page.tsx
 
 "use client";
 
@@ -15,25 +15,38 @@ import {
   XCircle,
   Gift,
   Sparkles,
+  ArrowRight,
+  Chrome,
+  Facebook,
 } from "lucide-react";
 
 // SEO Imports
-import { buildSeo, SEOOutput } from "@/components/SEO/seoEngine";
-import { SEO_CONFIG } from "@/components/SEO/seoConfig";
-import SeoRenderer from "@/components/SEO/SeoRenderer";
+import { SeoRenderer } from "@/components/SEO/SeoRenderer";
+import { buildSeo } from "@/components/SEO/seoBuilder";
+import { SEO_CONFIG } from "@/components/SEO/config";
+import type { SEOOutput } from "@/components/SEO/types";
 
 // Animation Components
 import OpeningStyle from "@/components/animations/openingstyle";
 import RevealWithBorder from "@/components/animations/RevealWithBorder";
 
 // Background
-import Background from "@/components/Background";
+import Background from "@/components/ui/Background";
 
 // Auth Components
 import AuthPageWrapper from "@/components/auth/AuthPageWrapper";
 
 const AUTH_BASE = process.env.NEXT_PUBLIC_AUTH_URL || "https://auth.cashog.com";
 const useExternalAuth = process.env.NEXT_PUBLIC_USE_EXTERNAL_AUTH === "true";
+
+// Apple Icon Component
+function AppleIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...props} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.78.99-.14 2.01-.78 3.14-.78 1.15 0 2.16.54 2.95 1.32-1.17.94-1.78 2.11-1.65 3.69.15 1.98 1.62 2.94 1.62 2.94-.25.62-.88 1.35-1.57 2.02-1.01 1.02-1.64 1.24-2.65.24-.06-.06-.1-.1-.14-.14zM14.25 5.19c.47-.56.78-1.34.7-2.19-.68.05-1.5.46-2 1.02-.46.51-.84 1.25-.73 2 .76.04 1.53-.38 2.03-.83z" />
+    </svg>
+  );
+}
 
 export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -57,24 +70,32 @@ export default function SignupPage() {
     special: false
   });
 
+  // SEO Effect - following pattern from page.tsx
   useEffect(() => {
     setMounted(true);
-    let mounted = true;
+    let isMounted = true;
 
     buildSeo({
       route: "/signup",
-      locale: SEO_CONFIG.defaultLocale
+      locale: SEO_CONFIG.defaultLocale,
+      type: "website",
+      metadata: {
+        title: "Sign Up | Create Account & Start Earning",
+        description: "Join Cashog today and get an instant $0.50 bonus. Complete offers, earn money, and withdraw easily. Sign up now - it's free!",
+        keywords: "sign up, create account, register, earn money, bonus",
+      }
     })
       .then((result) => {
-        if (mounted) setSeo(result);
+        if (isMounted) setSeo(result);
       })
       .catch((err) => console.error("SEO hydration failed:", err));
 
     return () => {
-      mounted = false;
+      isMounted = false;
     };
   }, []);
 
+  // Password strength calculation
   useEffect(() => {
     if (!formData.password) {
       setPasswordStrength(0);
@@ -112,6 +133,31 @@ export default function SignupPage() {
 
   const handlePasswordFocus = () => {
     setShowStrength(true);
+  };
+
+  const handleSocialSignup = (provider: string) => {
+    console.log(`Signing up with ${provider}`);
+    // Redirect to OAuth endpoint
+    window.location.href = `/api/auth/${provider}?action=signup`;
+  };
+
+  const handleCreateAccount = async () => {
+    // Validation
+    if (!formData.fullName.trim()) {
+      alert("Please enter your full name");
+      return;
+    }
+    if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) {
+      alert("Please enter a valid email address");
+      return;
+    }
+    if (passwordStrength < 4) {
+      alert("Please create a stronger password");
+      return;
+    }
+
+    // API call would go here
+    console.log("Creating account:", formData);
   };
 
   const getStrengthColor = () => {
@@ -162,11 +208,13 @@ export default function SignupPage() {
       <>
         {seo && <SeoRenderer seo={seo} />}
         <Background />
-        <iframe
-          src={`${AUTH_BASE}/signup?redirect_back=https://cashog.com`}
-          className="w-full h-[650px] rounded-3xl border border-neutral-800 shadow-2xl"
-          frameBorder="0"
-        />
+        <div className="min-h-screen flex items-center justify-center p-4">
+          <iframe
+            src={`${AUTH_BASE}/signup?redirect_back=https://cashog.com`}
+            className="w-full max-w-md h-[650px] rounded-3xl border border-neutral-800 shadow-2xl"
+            frameBorder="0"
+          />
+        </div>
       </>
     );
   }
@@ -175,242 +223,295 @@ export default function SignupPage() {
     <>
       {seo && <SeoRenderer seo={seo} />}
       <Background />
-      <main className="relative min-h-screen bg-[#0E111B] text-white">
+      <main className="relative min-h-screen bg-[#0E111B] text-white flex items-center justify-center py-12 px-4">
         <OpeningStyle>
           <RevealWithBorder borderColor="border-gradient-rainbow">
-            <AuthPageWrapper title="" subtitle="">
-              {/* Header with Bonus */}
-              <div className="relative mb-10 text-center">
-                <h1 className="text-3xl font-bold text-white">
-                  Get Instant Bonus
-                </h1>
-                <div className="absolute top-full right-0 mt-2 group">
-                  <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-yellow-500 rounded-full blur-lg opacity-50 group-hover:opacity-70 transition-opacity duration-300"></div>
-                  <div className="relative flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-amber-400 to-yellow-500 rounded-full shadow-lg shadow-yellow-500/30 border border-white/20 group-hover:scale-105 group-hover:shadow-xl group-hover:shadow-yellow-500/40 transition-all duration-300">
-                    <Gift className="w-3.5 h-3.5 text-white" />
-                    <span className="font-bold text-white text-sm">$0.50</span>
-                    <Sparkles className="w-3 h-3 text-white/80" />
+            <div className="w-full max-w-md mx-auto">
+              <AuthPageWrapper title="" subtitle="">
+                {/* Header with Bonus */}
+                <div className="relative mb-8 text-center">
+                  <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                    Get Instant Bonus
+                  </h1>
+                  <p className="text-gray-400 text-sm">Create your account and start earning today</p>
+                  <div className="absolute top-0 right-0 mt-2 group">
+                    <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-yellow-500 rounded-full blur-lg opacity-50 group-hover:opacity-70 transition-opacity duration-300"></div>
+                    <div className="relative flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-amber-400 to-yellow-500 rounded-full shadow-lg shadow-yellow-500/30 border border-white/20 group-hover:scale-105 group-hover:shadow-xl group-hover:shadow-yellow-500/40 transition-all duration-300">
+                      <Gift className="w-3.5 h-3.5 text-white" />
+                      <span className="font-bold text-white text-sm">$0.50</span>
+                      <Sparkles className="w-3 h-3 text-white/80" />
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Social Login */}
-              <div className="space-y-3 mb-4">
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full group relative overflow-hidden rounded-xl"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="relative flex items-center justify-center gap-3 px-4 py-3.5 bg-[#1A1F2E] border-2 border-blue-500/20 group-hover:border-blue-500 rounded-xl text-white font-medium hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300">
-                    <Chrome className="w-5 h-5 text-blue-500" />
-                    <span>Sign up with Google</span>
-                  </div>
-                </motion.button>
-
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full group relative overflow-hidden rounded-xl"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-indigo-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="relative flex items-center justify-center gap-3 px-4 py-3.5 bg-[#1A1F2E] border-2 border-indigo-500/20 group-hover:border-indigo-500 rounded-xl text-white font-medium hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300">
-                    <Facebook className="w-5 h-5 text-indigo-500" />
-                    <span>Sign up with Facebook</span>
-                  </div>
-                </motion.button>
-              </div>
-
-              {/* OR Divider */}
-              <div className="flex items-center my-8">
-                <div className="flex-grow h-px bg-gradient-to-r from-transparent via-green-400/70 to-transparent"></div>
-                <span className="px-4 text-sm font-semibold text-white">or</span>
-                <div className="flex-grow h-px bg-gradient-to-r from-transparent via-blue-400/70 to-transparent"></div>
-              </div>
-
-              {/* Continue with Email Button */}
-              {!formVisible && (
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={handleContinueWithEmail}
-                  className="w-full py-3.5 rounded-xl bg-[#1A1F2E] border-2 border-[#2A2F3E] text-white font-medium flex items-center justify-center gap-2 hover:border-green-500 hover:bg-[#2A2F3E] hover:shadow-lg hover:shadow-green-500/10 transition-all duration-300 group"
-                >
-                  <Mail className="w-4 h-4 text-gray-400 group-hover:text-green-500" />
-                  <span>Continue with Email</span>
-                </motion.button>
-              )}
-
-              {/* Email Signup Form */}
-              {formVisible && (
-                <>
-                  {/* Full Name Field */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="relative mb-4"
+                {/* Social Login */}
+                <div className="space-y-3 mb-6">
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => handleSocialSignup("google")}
+                    className="w-full group relative overflow-hidden rounded-xl"
                   >
-                    <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                    <input
-                      type="text"
-                      name="fullName"
-                      value={formData.fullName}
-                      onChange={handleInputChange}
-                      placeholder="Full Name"
-                      className="w-full p-4 pl-12 rounded-xl bg-[#1A1F2E] border-2 border-[#2A2F3E] text-white placeholder-gray-400 focus:border-green-500 focus:outline-none transition-colors duration-200"
-                    />
-                  </motion.div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="relative flex items-center justify-center gap-3 px-4 py-3.5 bg-[#1A1F2E] border-2 border-blue-500/20 group-hover:border-blue-500 rounded-xl text-white font-medium hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300">
+                      <Chrome className="w-5 h-5 text-blue-500" />
+                      <span>Sign up with Google</span>
+                    </div>
+                  </motion.button>
 
-                  {/* Email Field */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: 0.1 }}
-                    className="relative mb-4"
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => handleSocialSignup("facebook")}
+                    className="w-full group relative overflow-hidden rounded-xl"
                   >
-                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      placeholder="Email Address"
-                      className="w-full p-4 pl-12 rounded-xl bg-[#1A1F2E] border-2 border-[#2A2F3E] text-white placeholder-gray-400 focus:border-green-500 focus:outline-none transition-colors duration-200"
-                    />
-                  </motion.div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-indigo-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="relative flex items-center justify-center gap-3 px-4 py-3.5 bg-[#1A1F2E] border-2 border-indigo-500/20 group-hover:border-indigo-500 rounded-xl text-white font-medium hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300">
+                      <Facebook className="w-5 h-5 text-indigo-500" />
+                      <span>Sign up with Facebook</span>
+                    </div>
+                  </motion.button>
 
-                  {/* Password Field */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: 0.2 }}
-                    className="relative mb-2"
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => handleSocialSignup("apple")}
+                    className="w-full group relative overflow-hidden rounded-xl"
                   >
-                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      name="password"
-                      value={formData.password}
-                      onChange={handleInputChange}
-                      onFocus={handlePasswordFocus}
-                      placeholder="Create Password"
-                      className="w-full p-4 pl-12 pr-12 rounded-xl bg-[#1A1F2E] border-2 border-[#2A2F3E] text-white placeholder-gray-400 focus:border-green-500 focus:outline-none transition-colors duration-200"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-green-500 transition-colors duration-200"
-                    >
-                      {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
-                    </button>
-                  </motion.div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-gray-700 to-gray-900 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="relative flex items-center justify-center gap-3 px-4 py-3.5 bg-[#1A1F2E] border-2 border-gray-500/20 group-hover:border-gray-500 rounded-xl text-white font-medium hover:shadow-lg hover:shadow-gray-500/20 transition-all duration-300">
+                      <AppleIcon className="w-5 h-5 text-white" />
+                      <span>Sign up with Apple</span>
+                    </div>
+                  </motion.button>
+                </div>
 
-                  {/* Password Strength Indicator */}
-                  {showStrength && formData.password && (
+                {/* OR Divider */}
+                <div className="flex items-center my-6">
+                  <div className="flex-grow h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent"></div>
+                  <span className="px-4 text-sm font-semibold text-gray-400">or</span>
+                  <div className="flex-grow h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent"></div>
+                </div>
+
+                {/* Continue with Email Button */}
+                {!formVisible && (
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={handleContinueWithEmail}
+                    className="w-full py-3.5 rounded-xl bg-[#1A1F2E] border-2 border-[#2A2F3E] text-white font-medium flex items-center justify-center gap-2 hover:border-green-500 hover:bg-[#2A2F3E] hover:shadow-lg hover:shadow-green-500/10 transition-all duration-300 group"
+                  >
+                    <Mail className="w-4 h-4 text-gray-400 group-hover:text-green-500" />
+                    <span>Continue with Email</span>
+                  </motion.button>
+                )}
+
+                {/* Email Signup Form */}
+                {formVisible && (
+                  <>
+                    {/* Full Name Field */}
                     <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.3 }}
-                      className="mb-4 space-y-3 overflow-hidden"
+                      className="relative mb-4"
                     >
-                      <div className="space-y-1">
-                        <div className="flex justify-between items-center">
-                          <span className="text-xs text-gray-400">Password strength:</span>
-                          <span className="text-xs font-medium" style={{ 
-                            color: passwordStrength <= 1 ? '#ef4444' : 
-                                   passwordStrength === 2 ? '#f97316' : 
-                                   passwordStrength === 3 ? '#eab308' : '#22c55e' 
-                          }}>
-                            {getStrengthText()}
-                          </span>
-                        </div>
-                        <div className="h-1.5 w-full bg-gray-700 rounded-full overflow-hidden">
-                          <motion.div 
-                            initial={{ width: 0 }}
-                            animate={{ width: `${(passwordStrength / 4) * 100}%` }}
-                            transition={{ duration: 0.3 }}
-                            className={`h-full transition-all duration-300 ${getStrengthColor()}`}
-                          />
-                        </div>
-                      </div>
-
-                      {/* Password Requirements */}
-                      <div className="grid grid-cols-2 gap-2 text-xs">
-                        <div className="flex items-center gap-1.5">
-                          {passwordRequirements.length ? (
-                            <CheckCircle className="w-3.5 h-3.5 text-green-500" />
-                          ) : (
-                            <XCircle className="w-3.5 h-3.5 text-gray-600" />
-                          )}
-                          <span className={passwordRequirements.length ? "text-green-500" : "text-gray-400"}>
-                            8+ characters
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                          {passwordRequirements.number ? (
-                            <CheckCircle className="w-3.5 h-3.5 text-green-500" />
-                          ) : (
-                            <XCircle className="w-3.5 h-3.5 text-gray-600" />
-                          )}
-                          <span className={passwordRequirements.number ? "text-green-500" : "text-gray-400"}>
-                            Number
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                          {passwordRequirements.uppercase ? (
-                            <CheckCircle className="w-3.5 h-3.5 text-green-500" />
-                          ) : (
-                            <XCircle className="w-3.5 h-3.5 text-gray-600" />
-                          )}
-                          <span className={passwordRequirements.uppercase ? "text-green-500" : "text-gray-400"}>
-                            Uppercase
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                          {passwordRequirements.lowercase ? (
-                            <CheckCircle className="w-3.5 h-3.5 text-green-500" />
-                          ) : (
-                            <XCircle className="w-3.5 h-3.5 text-gray-600" />
-                          )}
-                          <span className={passwordRequirements.lowercase ? "text-green-500" : "text-gray-400"}>
-                            Lowercase
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-1.5 col-span-2">
-                          {passwordRequirements.special ? (
-                            <CheckCircle className="w-3.5 h-3.5 text-green-500" />
-                          ) : (
-                            <XCircle className="w-3.5 h-3.5 text-gray-600" />
-                          )}
-                          <span className={passwordRequirements.special ? "text-green-500" : "text-gray-400"}>
-                            Special character (!@#$%^&*)
-                          </span>
-                        </div>
-                      </div>
+                      <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <input
+                        type="text"
+                        name="fullName"
+                        value={formData.fullName}
+                        onChange={handleInputChange}
+                        placeholder="Full Name"
+                        className="w-full p-4 pl-12 rounded-xl bg-[#1A1F2E] border-2 border-[#2A2F3E] text-white placeholder-gray-400 focus:border-green-500 focus:outline-none transition-colors duration-200"
+                      />
                     </motion.div>
-                  )}
 
-                  {/* Create Account Button */}
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3, delay: 0.3 }}
-                    className="relative mt-6 mb-6"
-                  >
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.97 }}
-                      className="group relative w-full rounded-xl px-6 py-4 flex items-center justify-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+                    {/* Email Field */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: 0.1 }}
+                      className="relative mb-4"
                     >
-                      <span className="text-lg md:text-xl font-bold text-black">Create Account</span>
-                      <ArrowRight className="text-black group-hover:translate-x-1 transition-transform duration-300" />
-                    </motion.button>
-                  </motion.div>
-                </>
-              )}
-            </AuthPageWrapper>
+                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder="Email Address"
+                        className="w-full p-4 pl-12 rounded-xl bg-[#1A1F2E] border-2 border-[#2A2F3E] text-white placeholder-gray-400 focus:border-green-500 focus:outline-none transition-colors duration-200"
+                      />
+                    </motion.div>
+
+                    {/* Password Field */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: 0.2 }}
+                      className="relative mb-2"
+                    >
+                      <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        name="password"
+                        value={formData.password}
+                        onChange={handleInputChange}
+                        onFocus={handlePasswordFocus}
+                        placeholder="Create Password"
+                        className="w-full p-4 pl-12 pr-12 rounded-xl bg-[#1A1F2E] border-2 border-[#2A2F3E] text-white placeholder-gray-400 focus:border-green-500 focus:outline-none transition-colors duration-200"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-green-500 transition-colors duration-200"
+                      >
+                        {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+                      </button>
+                    </motion.div>
+
+                    {/* Password Strength Indicator */}
+                    {showStrength && formData.password && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="mb-4 space-y-3 overflow-hidden"
+                      >
+                        <div className="space-y-1">
+                          <div className="flex justify-between items-center">
+                            <span className="text-xs text-gray-400">Password strength:</span>
+                            <span className="text-xs font-medium" style={{ 
+                              color: passwordStrength <= 1 ? '#ef4444' : 
+                                     passwordStrength === 2 ? '#f97316' : 
+                                     passwordStrength === 3 ? '#eab308' : '#22c55e' 
+                            }}>
+                              {getStrengthText()}
+                            </span>
+                          </div>
+                          <div className="h-1.5 w-full bg-gray-700 rounded-full overflow-hidden">
+                            <motion.div 
+                              initial={{ width: 0 }}
+                              animate={{ width: `${(passwordStrength / 4) * 100}%` }}
+                              transition={{ duration: 0.3 }}
+                              className={`h-full transition-all duration-300 ${getStrengthColor()}`}
+                            />
+                          </div>
+                        </div>
+
+                        {/* Password Requirements */}
+                        <div className="grid grid-cols-2 gap-2 text-xs">
+                          <div className="flex items-center gap-1.5">
+                            {passwordRequirements.length ? (
+                              <CheckCircle className="w-3.5 h-3.5 text-green-500" />
+                            ) : (
+                              <XCircle className="w-3.5 h-3.5 text-gray-600" />
+                            )}
+                            <span className={passwordRequirements.length ? "text-green-500" : "text-gray-400"}>
+                              8+ characters
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1.5">
+                            {passwordRequirements.number ? (
+                              <CheckCircle className="w-3.5 h-3.5 text-green-500" />
+                            ) : (
+                              <XCircle className="w-3.5 h-3.5 text-gray-600" />
+                            )}
+                            <span className={passwordRequirements.number ? "text-green-500" : "text-gray-400"}>
+                              Number
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1.5">
+                            {passwordRequirements.uppercase ? (
+                              <CheckCircle className="w-3.5 h-3.5 text-green-500" />
+                            ) : (
+                              <XCircle className="w-3.5 h-3.5 text-gray-600" />
+                            )}
+                            <span className={passwordRequirements.uppercase ? "text-green-500" : "text-gray-400"}>
+                              Uppercase
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1.5">
+                            {passwordRequirements.lowercase ? (
+                              <CheckCircle className="w-3.5 h-3.5 text-green-500" />
+                            ) : (
+                              <XCircle className="w-3.5 h-3.5 text-gray-600" />
+                            )}
+                            <span className={passwordRequirements.lowercase ? "text-green-500" : "text-gray-400"}>
+                              Lowercase
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1.5 col-span-2">
+                            {passwordRequirements.special ? (
+                              <CheckCircle className="w-3.5 h-3.5 text-green-500" />
+                            ) : (
+                              <XCircle className="w-3.5 h-3.5 text-gray-600" />
+                            )}
+                            <span className={passwordRequirements.special ? "text-green-500" : "text-gray-400"}>
+                              Special character (!@#$%^&*)
+                            </span>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {/* Terms Agreement */}
+                    <div className="flex items-start gap-2 mb-4">
+                      <input
+                        type="checkbox"
+                        id="terms"
+                        className="mt-1 w-4 h-4 rounded border-[#2A2F3E] bg-[#1A1F2E] text-green-500 focus:ring-green-500 focus:ring-offset-0"
+                      />
+                      <label htmlFor="terms" className="text-xs text-gray-400">
+                        I agree to the{" "}
+                        <Link href="/terms" className="text-green-500 hover:underline">
+                          Terms of Service
+                        </Link>{" "}
+                        and{" "}
+                        <Link href="/privacy" className="text-green-500 hover:underline">
+                          Privacy Policy
+                        </Link>
+                      </label>
+                    </div>
+
+                    {/* Warning Notice */}
+                    <div className="mb-6 p-3 bg-yellow-500/5 border border-yellow-500/20 rounded-lg">
+                      <p className="text-xs text-yellow-500 text-center leading-relaxed">
+                        Users are prohibited from using multiple accounts, completing offers on another user's account,
+                        or using any type of VPN, VPS, or Emulator software.
+                      </p>
+                    </div>
+
+                    {/* Create Account Button */}
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3, delay: 0.3 }}
+                    >
+                      <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={handleCreateAccount}
+                        className="group relative w-full rounded-xl px-6 py-4 flex items-center justify-center gap-3 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+                      >
+                        <span className="text-lg md:text-xl font-bold text-black">Create Account</span>
+                        <ArrowRight className="text-black group-hover:translate-x-1 transition-transform duration-300" />
+                      </motion.button>
+                    </motion.div>
+
+                    {/* Login Link */}
+                    <p className="mt-6 text-center text-sm text-gray-400">
+                      Already have an account?{" "}
+                      <Link href="/login" className="text-green-500 hover:underline font-medium">
+                        Log in
+                      </Link>
+                    </p>
+                  </>
+                )}
+              </AuthPageWrapper>
+            </div>
           </RevealWithBorder>
         </OpeningStyle>
       </main>
