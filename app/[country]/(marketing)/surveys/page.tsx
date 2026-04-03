@@ -1,6 +1,7 @@
 // app/[country]/(marketing)/surveys/page.tsx
 
 import { cookies } from "next/headers";
+import { Metadata } from "next";
 
 import {
   getCountry,
@@ -57,14 +58,72 @@ function getLanguage(country: CountryCode): SupportedLanguage {
   return getCountry(country).defaultLanguage as SupportedLanguage;
 }
 
+/* ================= METADATA ================= */
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ country?: string }> | { country?: string };
+}): Promise<Metadata> {
+  const resolvedParams = await params;
+  const countryParam = resolvedParams?.country?.toLowerCase();
+
+  if (!countryParam || !isValidCountryCode(countryParam)) {
+    return {
+      title: "Country Not Found | Cashog",
+      robots: { index: false },
+    };
+  }
+
+  const country = countryParam as CountryCode;
+  const countryName = getCountry(country).name;
+
+  // Try to load translations for SEO
+  const language = getLanguage(country);
+  let surveysTranslation = {};
+  try {
+    surveysTranslation = await loadSectionTranslation(language, "surveys");
+  } catch (error) {
+    // Use defaults if translation fails
+  }
+
+  const seoTitle = (surveysTranslation as any)?.seo?.title || 
+    `Paid Surveys in ${countryName} - Earn $5-$50 Per Survey | Cashog`;
+  
+  const seoDescription = (surveysTranslation as any)?.seo?.description || 
+    `Join 200,000+ members earning real cash in ${countryName}. Take paid surveys from top brands. Get paid via PayPal or gift cards. Free to join today!`;
+
+  return {
+    title: seoTitle,
+    description: seoDescription,
+    keywords: `paid surveys ${countryName}, earn money surveys ${countryName}, online surveys paid cash ${countryName}, survey sites ${countryName}, get paid for opinions ${countryName}`,
+    alternates: {
+      canonical: `https://cashog.com/${country}/surveys`,
+    },
+    openGraph: {
+      title: seoTitle,
+      description: seoDescription,
+      url: `https://cashog.com/${country}/surveys`,
+      siteName: "Cashog",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: seoTitle,
+      description: seoDescription,
+    },
+  };
+}
+
 /* ================= PAGE ================= */
 
 export default async function SurveysPage({
   params,
 }: {
-  params: { country?: string };
+  params: Promise<{ country?: string }> | { country?: string };
 }) {
-  const countryParam = params?.country?.toLowerCase();
+  const resolvedParams = await params;
+  const countryParam = resolvedParams?.country?.toLowerCase();
 
   if (!countryParam || !isValidCountryCode(countryParam)) {
     return null;
