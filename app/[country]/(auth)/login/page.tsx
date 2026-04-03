@@ -4,6 +4,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
 import {
   Eye,
@@ -77,6 +78,9 @@ const AUTH_BASE = process.env.NEXT_PUBLIC_AUTH_URL || "https://auth.cashog.com";
 const useExternalAuth = process.env.NEXT_PUBLIC_USE_EXTERNAL_AUTH === "true";
 
 export default function LoginPage() {
+  const params = useParams();
+  const country = params?.country as string || "us";
+  
   const [showPassword, setShowPassword] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -136,7 +140,7 @@ export default function LoginPage() {
   const handleSocialLogin = async (provider: string) => {
     setIsLoading(true);
     try {
-      window.location.href = `/api/auth/${provider}?action=login`;
+      window.location.href = `/api/auth/${provider}?action=login&country=${country}`;
     } catch (error) {
       console.error(`Error logging in with ${provider}:`, error);
       setIsLoading(false);
@@ -158,6 +162,7 @@ export default function LoginPage() {
           email: formData.email,
           password: formData.password,
           rememberMe,
+          country,
         }),
       });
 
@@ -174,8 +179,8 @@ export default function LoginPage() {
         localStorage.removeItem("rememberedEmail");
       }
 
-      // Redirect to dashboard
-      window.location.href = "/dashboard";
+      // Redirect to dashboard with country
+      window.location.href = `/${country}/dashboard`;
     } catch (error) {
       setErrors({
         general: error instanceof Error ? error.message : "Invalid email or password",
@@ -191,8 +196,7 @@ export default function LoginPage() {
   };
 
   const handleForgotPassword = () => {
-    // Redirect to forgot password page
-    window.location.href = "/forgot-password";
+    window.location.href = `/${country}/forgot-password`;
   };
 
   if (!mounted) {
@@ -211,7 +215,7 @@ export default function LoginPage() {
         <Background />
         <main className="relative min-h-screen bg-[#0E111B] flex items-center justify-center p-4">
           <iframe
-            src={`${AUTH_BASE}/login?redirect_back=https://cashog.com`}
+            src={`${AUTH_BASE}/login?redirect_back=https://cashog.com/${country}`}
             className="w-full max-w-md h-[650px] rounded-3xl border border-neutral-800 shadow-2xl"
             frameBorder="0"
             title="Login"
@@ -248,7 +252,7 @@ export default function LoginPage() {
                   <p className="text-green-400 text-sm font-medium">
                     Sign in to continue earning
                   </p>
-                  <div className="absolute top-0 right-0 mt-2 group">
+                  <div className="absolute -top-2 right-0 mt-2 group">
                     <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-yellow-500 rounded-full blur-lg opacity-50 group-hover:opacity-70 transition-opacity duration-300"></div>
                     <div className="relative flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-amber-400 to-yellow-500 rounded-full shadow-lg shadow-yellow-500/30 border border-white/20 group-hover:scale-105 group-hover:shadow-xl group-hover:shadow-yellow-500/40 transition-all duration-300">
                       <Gift className="w-3.5 h-3.5 text-white" />
@@ -412,10 +416,10 @@ export default function LoginPage() {
                   </motion.div>
                 </form>
 
-                {/* Sign Up Link */}
+                {/* Sign Up Link - Updated with country parameter */}
                 <p className="mt-6 text-center text-sm text-gray-400">
                   Don't have an account?{" "}
-                  <Link href="/signup" className="text-green-500 hover:underline font-medium">
+                  <Link href={`/${country}/signup`} className="text-green-500 hover:underline font-medium">
                     Sign up
                   </Link>
                 </p>
