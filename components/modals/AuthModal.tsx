@@ -14,6 +14,8 @@ interface AuthModalProps {
   closeOnOutsideClick?: boolean;
   closeOnEsc?: boolean;
   showCloseButton?: boolean;
+  showCancelButton?: boolean;
+  cancelText?: string;
 }
 
 export default function AuthModal({ 
@@ -25,6 +27,8 @@ export default function AuthModal({
   closeOnOutsideClick = true,
   closeOnEsc = true,
   showCloseButton = true,
+  showCancelButton = false,
+  cancelText = "Cancel",
 }: AuthModalProps) {
   const [mounted, setMounted] = useState(false);
 
@@ -102,14 +106,16 @@ export default function AuthModal({
         </div>
 
         {/* Optional Footer with Cancel Button */}
-        <div className="px-6 pb-6 pt-2 border-t border-[#2A2F3E] mt-2">
-          <button
-            onClick={onClose}
-            className="w-full py-2.5 rounded-lg bg-[#1A1F2E] hover:bg-[#2A2F3E] text-gray-300 hover:text-white transition-all duration-200 text-sm font-medium"
-          >
-            Cancel
-          </button>
-        </div>
+        {showCancelButton && (
+          <div className="px-6 pb-6 pt-2 border-t border-[#2A2F3E] mt-2">
+            <button
+              onClick={onClose}
+              className="w-full py-2.5 rounded-lg bg-[#1A1F2E] hover:bg-[#2A2F3E] text-gray-300 hover:text-white transition-all duration-200 text-sm font-medium"
+            >
+              {cancelText}
+            </button>
+          </div>
+        )}
       </div>
     </div>,
     document.body
