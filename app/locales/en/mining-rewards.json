@@ -1,0 +1,227 @@
+{
+  "seo": {
+    "title": "Mining Rewards in {country} - Earn Up to $500 Daily | Cashog",
+    "description": "Join 50,000+ miners earning daily rewards in {country}. Start mining instantly and get paid via PayPal or crypto. No equipment needed!"
+  },
+  "hero": {
+    "title": "Earn Daily Mining Rewards in {country}",
+    "subtitle": "Join 50,000+ miners earning daily rewards in {country}. Start mining instantly - no expensive equipment needed! Get paid daily via PayPal or crypto."
+  },
+  "statsTitle": "Mining Network Statistics",
+  "stats": {
+    "totalMined": "500M+",
+    "totalMinedLabel": "Total Mined",
+    "avgDailyReward": "$12.50",
+    "avgDailyRewardLabel": "Average Daily Reward",
+    "activeMiners": "50K+",
+    "activeMinersLabel": "Active Miners",
+    "totalPaid": "$25M+",
+    "totalPaidLabel": "Total Mining Rewards Paid"
+  },
+  "howItWorksTitle": "How Mining Rewards Work",
+  "howItWorksSubtitle": "Start earning in 3 simple steps",
+  "steps": [
+    {
+      "icon": "📝",
+      "title": "Create Free Account",
+      "description": "Sign up in 30 seconds. No credit card or equipment needed. Start mining immediately."
+    },
+    {
+      "icon": "⛏️",
+      "title": "Start Mining",
+      "description": "Activate your mining rig with one click. Our cloud system does all the work for you."
+    },
+    {
+      "icon": "💰",
+      "title": "Collect Daily Rewards",
+      "description": "Earn daily mining rewards automatically. Withdraw anytime to PayPal or crypto wallet."
+    }
+  ],
+  "miningLevelsTitle": "Mining Reward Tiers",
+  "miningLevelsSubtitle": "Higher tiers mean bigger daily rewards",
+  "miningLevels": [
+    {
+      "level": "Starter",
+      "icon": "🆓",
+      "dailyReward": "$2-5",
+      "requirements": "Free - No investment",
+      "benefits": [
+        "Basic mining speed",
+        "Daily rewards",
+        "Standard withdrawal",
+        "Email support"
+      ]
+    },
+    {
+      "level": "Bronze",
+      "icon": "🥉",
+      "dailyReward": "$10-20",
+      "requirements": "100 referrals or 30 days active",
+      "benefits": [
+        "2x mining speed",
+        "Daily bonus rewards",
+        "Priority withdrawals",
+        "24/7 chat support"
+      ]
+    },
+    {
+      "level": "Silver",
+      "icon": "🥈",
+      "dailyReward": "$25-50",
+      "requirements": "500 referrals or 90 days active",
+      "benefits": [
+        "5x mining speed",
+        "Weekly bonus events",
+        "Instant withdrawals",
+        "Dedicated account manager"
+      ],
+      "popular": true
+    },
+    {
+      "level": "Gold",
+      "icon": "🥇",
+      "dailyReward": "$100-500",
+      "requirements": "1000+ referrals or VIP status",
+      "benefits": [
+        "10x mining speed",
+        "Monthly bonus pool",
+        "VIP withdrawal priority",
+        "Exclusive mining events"
+      ]
+    }
+  ],
+  "bonusFeaturesTitle": "Bonus Mining Features",
+  "bonusFeatures": [
+    {
+      "icon": "👥",
+      "title": "Referral Bonuses",
+      "description": "Earn 15% of what your referrals mine daily. Lifetime commissions!",
+      "reward": "15% Lifetime"
+    },
+    {
+      "icon": "📅",
+      "title": "Daily Streak Bonus",
+      "description": "Mine every day to multiply your rewards. Higher streaks = bigger bonuses.",
+      "reward": "Up to 50%"
+    },
+    {
+      "icon": "🎯",
+      "title": "Achievement Rewards",
+      "description": "Complete mining milestones and earn one-time bonus rewards.",
+      "reward": "$50-$500"
+    },
+    {
+      "icon": "🎲",
+      "title": "Lucky Miner Bonus",
+      "description": "Random daily bonuses for active miners. Check daily for surprises!",
+      "reward": "$1-$100"
+    }
+  ],
+  "benefitsTitle": "Why Choose Our Mining Platform",
+  "benefits": [
+    {
+      "icon": "⚡",
+      "title": "Instant Setup",
+      "description": "Start mining in under 1 minute. No hardware, no software, no technical knowledge needed."
+    },
+    {
+      "icon": "💎",
+      "title": "Daily Payouts",
+      "description": "Get paid every single day. Withdraw your mining rewards 24/7 with no minimum limits."
+    },
+    {
+      "icon": "🔒",
+      "title": "Secure & Reliable",
+      "description": "Bank-grade security protects your earnings. 99.9% uptime guaranteed."
+    },
+    {
+      "icon": "🌍",
+      "title": "Global Mining Pool",
+      "description": "Join miners from 150+ countries including {country}. Fair rewards for everyone."
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Mining Rewards",
+  "tips": [
+    {
+      "title": "Mine Daily",
+      "description": "Log in every day to claim your rewards and maintain your mining streak. Consistent mining = bigger bonuses."
+    },
+    {
+      "title": "Invite Friends",
+      "description": "Build your mining network. Each referral adds to your mining power and earns you lifetime commissions."
+    },
+    {
+      "title": "Complete Achievements",
+      "description": "Work towards mining milestones. Each achievement unlocks bonus rewards and increases your mining speed."
+    },
+    {
+      "title": "Upgrade Your Tier",
+      "description": "Stay active and refer others to reach higher tiers. Higher tiers mean exponentially larger daily rewards."
+    }
+  ],
+  "testimonialsTitle": "What Miners Say",
+  "testimonials": [
+    {
+      "name": "Michael Chen",
+      "country": "United States",
+      "earnings": "$3,247",
+      "quote": "I was skeptical at first, but the daily payouts are real! Been mining for 6 months and earned over $3000. Best decision ever.",
+      "avatar": "MC"
+    },
+    {
+      "name": "Lisa Rodriguez",
+      "country": "Spain",
+      "earnings": "$1,892",
+      "quote": "Love how easy this is. I just login once a day and watch my earnings grow. Withdrew $500 last week to my PayPal!",
+      "avatar": "LR"
+    },
+    {
+      "name": "Thomas Anderson",
+      "country": "Germany",
+      "earnings": "$5,103",
+      "quote": "The referral program is amazing. Built a team of 200 miners and now earning passive income daily. Highly recommend!",
+      "avatar": "TA"
+    }
+  ],
+  "faq": {
+    "title": "Mining Rewards in {country} - FAQ",
+    "items": [
+      {
+        "question": "Do I need expensive mining equipment?",
+        "answer": "No! We use cloud mining technology. All mining happens on our servers. You just need an internet connection and a device to check your daily earnings."
+      },
+      {
+        "question": "How much can I earn mining in {country}?",
+        "answer": "Most miners earn $100-500 monthly. Active miners who refer friends can earn $1000+. Gold tier miners earn $3000-5000+ monthly. Your earnings grow as you level up."
+      },
+      {
+        "question": "Is mining really free?",
+        "answer": "Yes! The Starter tier is completely free forever. You can upgrade to higher tiers through activity and referrals, never required to pay."
+      },
+      {
+        "question": "How do I get paid my mining rewards?",
+        "answer": "We offer multiple payout options including PayPal, bank transfer, Bitcoin, Ethereum, and major gift cards. Daily withdrawals available with no minimum for crypto."
+      },
+      {
+        "question": "How does the referral program work?",
+        "answer": "Share your unique referral link. When friends join and mine, you earn 15% of their daily rewards forever. Build a team and earn passive income."
+      },
+      {
+        "question": "Is this available in {country}?",
+        "answer": "Absolutely! Cashog mining is fully available in {country}. All features, bonuses, and payment methods work perfectly for users in {country}."
+      },
+      {
+        "question": "How long does mining take?",
+        "answer": "Mining runs automatically 24/7. You just need to login daily (takes 1 minute) to claim your rewards and maintain your streak bonuses."
+      },
+      {
+        "question": "Can I mine on mobile?",
+        "answer": "Yes! Our mobile app lets you check earnings, claim rewards, and track your mining stats on the go. Available for iOS and Android."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Start Mining in {country}?",
+    "subtitle": "Join 50,000+ miners already earning daily rewards in {country}. Start mining for free and get paid today!"
+  }
+}
