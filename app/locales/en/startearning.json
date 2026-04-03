@@ -1,0 +1,231 @@
+// app/locales/en/startearning.json
+
+{
+  "seo": {
+    "title": "Start Earning Money Online in {country} - Join Free Today",
+    "description": "Start earning real money online in {country} today. Complete simple tasks, take surveys, and get paid instantly. Free to join!"
+  },
+  "hero": {
+    "title": "Start Earning Real Money in {country} Today",
+    "subtitle": "Join thousands of active earners. Complete simple tasks, get paid instantly. No experience needed - start in minutes!"
+  },
+  "statsTitle": "Platform Statistics",
+  "stats": {
+    "activeUsers": "50K+",
+    "activeUsersLabel": "Active Users",
+    "paidOut": "$2.5M+",
+    "paidOutLabel": "Paid Out",
+    "availability": "24/7",
+    "availabilityLabel": "Task Availability",
+    "withdrawals": "Instant",
+    "withdrawalsLabel": "Withdrawals"
+  },
+  "categoriesTitle": "Choose Your Earning Path in {country}",
+  "categoriesSubtitle": "Find the perfect earning method that matches your skills and schedule",
+  "categories": [
+    {
+      "icon": "📝",
+      "title": "Complete Surveys",
+      "description": "Share your opinion and get paid. Companies want to hear from people in {country}.",
+      "earningPotential": "$5-$50 per survey",
+      "timeRequired": "5-20 minutes",
+      "tasks": [
+        "Market research surveys",
+        "Product feedback",
+        "Consumer behavior studies",
+        "Brand preference polls"
+      ],
+      "isPopular": true
+    },
+    {
+      "icon": "✅",
+      "title": "Micro Tasks",
+      "description": "Quick, simple tasks that anyone can do. Perfect for beginners in {country}.",
+      "earningPotential": "$0.50-$10 per task",
+      "timeRequired": "1-10 minutes",
+      "tasks": [
+        "Data entry & verification",
+        "Image categorization",
+        "Content moderation",
+        "App testing"
+      ]
+    },
+    {
+      "icon": "🎁",
+      "title": "Special Offers",
+      "description": "Try new products and services. Get paid to test and review offers in {country}.",
+      "earningPotential": "$10-$100 per offer",
+      "timeRequired": "15-45 minutes",
+      "tasks": [
+        "Free trial signups",
+        "Product testing",
+        "Service reviews",
+        "Subscription offers"
+      ]
+    },
+    {
+      "icon": "👥",
+      "title": "Referral Program",
+      "description": "Earn passive income by inviting friends and family in {country} to join.",
+      "earningPotential": "$5-$50 per referral",
+      "timeRequired": "2 minutes",
+      "tasks": [
+        "Share your unique link",
+        "Earn commission on their tasks",
+        "Bonus for active referrals",
+        "Monthly referral contests"
+      ],
+      "isPopular": true
+    },
+    {
+      "icon": "📹",
+      "title": "Watch Videos",
+      "description": "Get paid to watch short videos, ads, and content from {country} and worldwide.",
+      "earningPotential": "$0.10-$2 per video",
+      "timeRequired": "30 seconds - 5 minutes",
+      "tasks": [
+        "Watch promotional videos",
+        "View ad campaigns",
+        "Video ratings",
+        "Content feedback"
+      ]
+    },
+    {
+      "icon": "🏆",
+      "title": "Daily Challenges",
+      "description": "Complete daily and weekly challenges for bonus rewards in {country}.",
+      "earningPotential": "$2-$50 per challenge",
+      "timeRequired": "10-30 minutes",
+      "tasks": [
+        "Complete X tasks daily",
+        "Streak bonuses",
+        "Weekly achievement rewards",
+        "Leaderboard competitions"
+      ]
+    }
+  ],
+  "quickTasksTitle": "Quick Tasks You Can Start Today",
+  "quickTasksSubtitle": "No experience needed - start earning in minutes",
+  "quickTasks": [
+    {
+      "task": "Take a 5-minute survey about online shopping habits",
+      "reward": "$3.50",
+      "timeEstimate": "5 mins",
+      "difficulty": "Easy"
+    },
+    {
+      "task": "Test a new mobile app and provide feedback",
+      "reward": "$8.00",
+      "timeEstimate": "15 mins",
+      "difficulty": "Medium"
+    },
+    {
+      "task": "Verify 50 business listings in {country}",
+      "reward": "$12.00",
+      "timeEstimate": "20 mins",
+      "difficulty": "Easy"
+    },
+    {
+      "task": "Complete a product research study for local brands",
+      "reward": "$25.00",
+      "timeEstimate": "45 mins",
+      "difficulty": "Medium"
+    },
+    {
+      "task": "Refer a friend who completes 5 tasks",
+      "reward": "$10.00",
+      "timeEstimate": "2 mins",
+      "difficulty": "Easy"
+    }
+  ],
+  "bonusesTitle": "Exclusive Welcome Bonuses for {country}",
+  "bonusesSubtitle": "Get started with these special offers - limited time only!",
+  "bonuses": [
+    {
+      "amount": "$5",
+      "condition": "Complete your first 5 tasks within 24 hours",
+      "badge": "New Member Bonus"
+    },
+    {
+      "amount": "$10",
+      "condition": "Reach $50 in total earnings in your first week",
+      "badge": "Rapid Starter"
+    },
+    {
+      "amount": "$25",
+      "condition": "Refer 3 friends who complete 10 tasks each",
+      "badge": "Super Referrer"
+    }
+  ],
+  "stepsTitle": "How to Start Earning in {country}",
+  "stepsSubtitle": "Get started in 3 simple steps - it's completely free!",
+  "steps": [
+    {
+      "title": "Create Your Free Account",
+      "description": "Sign up in 30 seconds with just your email address. No credit card required."
+    },
+    {
+      "title": "Choose Your Tasks",
+      "description": "Browse hundreds of available tasks, surveys, and offers. Pick what interests you."
+    },
+    {
+      "title": "Get Paid Instantly",
+      "description": "Complete tasks and withdraw your earnings via PayPal, bank transfer, or gift cards."
+    }
+  ],
+  "testimonialsTitle": "Real Success Stories from {country}",
+  "testimonialsSubtitle": "See how others are earning real money every day",
+  "testimonials": [
+    {
+      "name": "Sarah M.",
+      "earnings": "$1,247",
+      "quote": "I was skeptical at first, but within my first month I earned over $200 just doing surveys during my lunch break!",
+      "avatar": "S"
+    },
+    {
+      "name": "James K.",
+      "earnings": "$3,892",
+      "quote": "The referral program is amazing. I've built a team of 50+ active earners and now make passive income every week.",
+      "avatar": "J"
+    },
+    {
+      "name": "Maria L.",
+      "earnings": "$856",
+      "quote": "Perfect for stay-at-home parents. I complete tasks while my kids nap and earn extra money for our family.",
+      "avatar": "M"
+    }
+  ],
+  "faq": {
+    "title": "Frequently Asked Questions About Earning in {country}",
+    "items": [
+      {
+        "question": "Is it really free to start earning?",
+        "answer": "Yes! Creating an account is completely free. We never charge any fees to join or access tasks. You only need to sign up with your email address."
+      },
+      {
+        "question": "How much can I realistically earn in {country}?",
+        "answer": "Most users earn between $100-$500 per month by spending 1-2 hours daily. Dedicated users who spend 3-4 hours daily often earn $800-$1500+ monthly."
+      },
+      {
+        "question": "What payment methods are available in {country}?",
+        "answer": "We offer PayPal, direct bank transfer, Visa/Mastercard, gift cards (Amazon, Google Play, iTunes, and more), and mobile money options."
+      },
+      {
+        "question": "How quickly will I get paid?",
+        "answer": "Withdrawals are processed instantly for PayPal and mobile money. Bank transfers take 1-3 business days. Minimum withdrawal is just $10."
+      },
+      {
+        "question": "Do I need special skills or experience?",
+        "answer": "Not at all! Most tasks are designed for beginners and require no special skills. If you can use a smartphone or computer, you can start earning immediately."
+      },
+      {
+        "question": "Is this available everywhere in {country}?",
+        "answer": "Yes! Our platform works across all regions of {country}. All you need is an internet connection."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Start Earning in {country}?",
+    "subtitle": "Join thousands of happy earners. Create your free account now and start making money today!"
+  }
+}
