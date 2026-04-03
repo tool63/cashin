@@ -1,241 +1,222 @@
 {
   "seo": {
-    "title": "Get Paid to Install Apps - Earn $0.50-$5 Per Install",
-    "description": "Earn real money by installing and testing mobile apps. Get paid $0.50-$5 per app install. Complete simple tasks and earn instantly. Free to join!"
+    "title": "Get Paid to Install Apps in {country} - Earn $0.50-$5 Per App | Cashog",
+    "description": "Join 150,000+ members earning cash in {country} by installing free apps. Download apps, try them for 30 seconds, and get paid via PayPal or gift cards. Free to join!"
   },
   "hero": {
-    "title": "Get Paid to Install Apps",
-    "subtitle": "Earn $0.50-$5 per app install. Test new apps, leave reviews, and get paid instantly. No experience needed!"
+    "title": "Get Paid to Install Apps in {country}",
+    "subtitle": "Join 150,000+ members earning real cash in {country} by installing free apps. Download, try, and earn - it's that simple!"
   },
-  "statsTitle": "App Install Platform Stats",
+  "statsTitle": "Trusted by Thousands",
   "stats": {
-    "totalInstalls": "10M+",
-    "totalInstallsLabel": "App Installs Completed",
-    "avgPayout": "$2.50",
-    "avgPayoutLabel": "Average Per Install",
-    "activeUsers": "300K+",
-    "activeUsersLabel": "Active Earners",
-    "availableApps": "1,000+",
-    "availableAppsLabel": "Available Apps"
+    "appsInstalled": "10M+",
+    "appsInstalledLabel": "Apps Installed",
+    "avgPayout": "$1.50",
+    "avgPayoutLabel": "Average Per App",
+    "activeUsers": "150K+",
+    "activeUsersLabel": "Active Members",
+    "totalPaid": "$8M+",
+    "totalPaidLabel": "Total Paid to Members"
   },
-  "howItWorksTitle": "How It Works",
-  "howItWorksSubtitle": "Get paid in 3 simple steps",
-  "howItWorks": [
-    {
-      "icon": "1",
-      "title": "Browse Available Apps",
-      "description": "Choose from hundreds of paid app install offers"
-    },
-    {
-      "icon": "2",
-      "title": "Install & Test",
-      "description": "Download the app, open it, and test basic features"
-    },
-    {
-      "icon": "3",
-      "title": "Get Paid Instantly",
-      "description": "Receive your reward directly to your account"
-    }
-  ],
   "categoriesTitle": "Popular App Categories",
-  "categoriesSubtitle": "Choose from hundreds of apps to install and test",
+  "categoriesSubtitle": "Earn by installing these types of apps",
   "appCategories": [
     {
       "icon": "🎮",
-      "title": "Gaming Apps",
-      "description": "Test new mobile games and earn rewards",
-      "avgReward": "$1-5",
-      "timeRequired": "5-10 min",
-      "tasksPerWeek": "20+"
+      "title": "Mobile Games",
+      "description": "Install and play new mobile games",
+      "avgReward": "$0.50-$3",
+      "timeRequired": "30 sec - 2 min",
+      "deviceType": "iOS & Android"
     },
     {
       "icon": "🛍️",
       "title": "Shopping Apps",
-      "description": "Install and review e-commerce apps",
-      "avgReward": "$1-4",
-      "timeRequired": "3-8 min",
-      "tasksPerWeek": "15+"
+      "description": "Download popular shopping applications",
+      "avgReward": "$1-$5",
+      "timeRequired": "1-3 min",
+      "deviceType": "iOS & Android"
     },
     {
       "icon": "📱",
       "title": "Social Media",
-      "description": "Test new social networking platforms",
-      "avgReward": "$2-6",
-      "timeRequired": "5-12 min",
-      "tasksPerWeek": "10+"
+      "description": "Install trending social platforms",
+      "avgReward": "$0.75-$2",
+      "timeRequired": "30 sec - 1 min",
+      "deviceType": "iOS & Android"
+    },
+    {
+      "icon": "🎵",
+      "title": "Music & Entertainment",
+      "description": "Download music streaming apps",
+      "avgReward": "$1-$4",
+      "timeRequired": "1-2 min",
+      "deviceType": "iOS & Android"
     },
     {
       "icon": "💰",
-      "title": "Finance Apps",
-      "description": "Install banking and investment apps",
-      "avgReward": "$3-8",
-      "timeRequired": "8-15 min",
-      "tasksPerWeek": "8+"
+      "title": "Finance & Banking",
+      "description": "Install financial management apps",
+      "avgReward": "$2-$10",
+      "timeRequired": "2-5 min",
+      "deviceType": "iOS & Android"
     },
     {
-      "icon": "❤️",
-      "title": "Health & Fitness",
-      "description": "Test wellness and workout apps",
-      "avgReward": "$2-5",
-      "timeRequired": "5-10 min",
-      "tasksPerWeek": "12+"
-    },
-    {
-      "icon": "🎬",
-      "title": "Entertainment",
-      "description": "Install streaming and media apps",
-      "avgReward": "$2-7",
-      "timeRequired": "5-10 min",
-      "tasksPerWeek": "15+"
+      "icon": "📸",
+      "title": "Photo & Video",
+      "description": "Download photo editing apps",
+      "avgReward": "$0.50-$2",
+      "timeRequired": "30 sec - 1 min",
+      "deviceType": "iOS & Android"
     }
   ],
-  "featuredTitle": "🔥 Featured High-Paying Apps",
-  "featuredSubtitle": "Limited spots - install these apps today",
+  "featuredAppsTitle": "High-Paying App Installs Available Now",
+  "featuredAppsSubtitle": "Limited spots - install these apps today",
   "featuredApps": [
     {
-      "icon": "🎮",
-      "name": "Candy Crush Saga",
-      "reward": "$3.50",
-      "timeEstimate": "8 mins",
-      "requirements": "Install & reach level 5",
-      "spotsLeft": 234,
-      "category": "Gaming"
+      "title": "Temu - Shop Like a Billionaire",
+      "reward": "$5",
+      "timeEstimate": "2 min",
+      "difficulty": "Easy",
+      "spotsLeft": 1250,
+      "company": "Temu",
+      "rating": "4.7"
     },
     {
-      "icon": "🛍️",
-      "name": "Temu Shopping",
-      "reward": "$4.00",
-      "timeEstimate": "5 mins",
-      "requirements": "Install & browse 5 products",
-      "spotsLeft": 156,
-      "category": "Shopping"
+      "title": "Cash App - Money Transfer",
+      "reward": "$10",
+      "timeEstimate": "3 min",
+      "difficulty": "Medium",
+      "spotsLeft": 500,
+      "company": "Square Inc.",
+      "rating": "4.8"
     },
     {
-      "icon": "💰",
-      "name": "Cash App",
-      "reward": "$5.00",
-      "timeEstimate": "10 mins",
-      "requirements": "Install & verify email",
-      "spotsLeft": 89,
-      "category": "Finance"
+      "title": "TikTok - Short Videos",
+      "reward": "$3",
+      "timeEstimate": "1 min",
+      "difficulty": "Easy",
+      "spotsLeft": 3200,
+      "company": "ByteDance",
+      "rating": "4.9"
     },
     {
-      "icon": "📱",
-      "name": "Instagram",
-      "reward": "$2.50",
-      "timeEstimate": "5 mins",
-      "requirements": "Install & follow 3 accounts",
-      "spotsLeft": 432,
-      "category": "Social"
+      "title": "Robinhood - Investing",
+      "reward": "$15",
+      "timeEstimate": "5 min",
+      "difficulty": "Hard",
+      "spotsLeft": 150,
+      "company": "Robinhood",
+      "rating": "4.6"
     },
     {
-      "icon": "🎬",
-      "name": "Netflix",
-      "reward": "$4.50",
-      "timeEstimate": "8 mins",
-      "requirements": "Install & watch 5 minutes",
-      "spotsLeft": 67,
-      "category": "Entertainment"
-    },
-    {
-      "icon": "❤️",
-      "name": "MyFitnessPal",
-      "reward": "$3.00",
-      "timeEstimate": "7 mins",
-      "requirements": "Install & log 1 meal",
-      "spotsLeft": 198,
-      "category": "Health"
+      "title": "Spotify - Music Streaming",
+      "reward": "$4",
+      "timeEstimate": "2 min",
+      "difficulty": "Easy",
+      "spotsLeft": 2100,
+      "company": "Spotify",
+      "rating": "4.8"
     }
   ],
-  "benefitsTitle": "Why Install Apps With Us",
+  "benefitsTitle": "Why Install Apps for Cash",
   "benefits": [
     {
       "icon": "💰",
-      "title": "Easy Money",
-      "description": "Get paid for simple app installations"
+      "title": "Instant Earnings",
+      "description": "Get paid within minutes after installing and opening the app"
     },
     {
       "icon": "⏰",
-      "title": "Quick Tasks",
-      "description": "Most app installs take less than 10 minutes"
+      "title": "Takes Seconds",
+      "description": "Most app installs take less than 60 seconds to complete"
     },
     {
       "icon": "📱",
-      "title": "Any Device",
-      "description": "Works on iPhone, Android, or tablet"
+      "title": "Works on Any Phone",
+      "description": "Compatible with both iPhone and Android devices"
     },
     {
-      "icon": "💸",
-      "title": "Instant Payouts",
-      "description": "Get paid immediately after completion"
+      "icon": "🎯",
+      "title": "No Commitment",
+      "description": "Delete the app after getting paid - no strings attached"
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Your Earnings",
+  "tips": [
+    {
+      "title": "Check Daily for New Apps",
+      "description": "New paid app installs are added every day. The highest paying ones fill up fast!"
+    },
+    {
+      "title": "Use Multiple Devices",
+      "title": "Complete Your Profile",
+      "description": "Fill out your full profile to get matched with higher-paying app install offers"
+    },
+    {
+      "title": "Check Daily",
+      "description": "New app install offers drop every day. The best-paying ones fill up fast - check in daily"
+    },
+    {
+      "title": "Follow Instructions Carefully",
+      "description": "Open the app and keep it installed for the required time to ensure your reward is credited"
     }
   ],
   "testimonialsTitle": "Real Members, Real Earnings",
   "testimonials": [
     {
-      "name": "David Kim",
+      "name": "Mike T.",
       "country": "United States",
-      "earnings": "$1,247",
-      "quote": "I install apps while watching TV and earn an extra $200-300 monthly. It's so easy!",
-      "avatar": "D",
-      "appsInstalled": "450+"
+      "earnings": "$320",
+      "quote": "I make about $10-15 every day just by installing apps while watching TV. It's so easy and Cashog pays instantly!",
+      "avatar": "MT"
     },
     {
-      "name": "Lisa Martinez",
+      "name": "Jessica L.",
       "country": "Canada",
-      "earnings": "$892",
-      "quote": "Best way to earn pocket money. I've installed over 300 apps and got paid for each one.",
-      "avatar": "L",
-      "appsInstalled": "300+"
+      "earnings": "$180",
+      "quote": "Never knew installing free apps could pay real money. Made $180 in my first month. Highly recommend!",
+      "avatar": "JL"
     },
     {
-      "name": "James Wilson",
+      "name": "Tom H.",
       "country": "United Kingdom",
-      "earnings": "$1,560",
-      "quote": "Perfect for tech lovers. I test new apps daily and earn consistently.",
-      "avatar": "J",
-      "appsInstalled": "600+"
+      "earnings": "$450",
+      "quote": "The finance apps pay the most. I've earned $450 so far just from installing banking and investing apps.",
+      "avatar": "TH"
     }
   ],
   "faq": {
-    "title": "Get Paid to Install Apps - FAQ",
+    "title": "Get Paid to Install Apps in {country} - FAQ",
     "items": [
       {
-        "question": "How much can I earn from app installs?",
-        "answer": "Each app install pays $0.50-$5. Active users earn $100-$500 monthly by installing 20-50 apps per week."
+        "question": "How much can I earn from installing apps?",
+        "answer": "Each app install pays between $0.50 and $15. Most members earn $50-$200 per month, but active users make $300+ by installing 10-20 apps daily."
       },
       {
-        "question": "How long does each app install take?",
-        "answer": "Most app installs take 3-10 minutes. You simply download, open, and test basic features."
+        "question": "Is it really free to join?",
+        "answer": "Yes! Cashog is 100% free to join. You never need to pay anything. Just download apps, try them, and get paid."
       },
       {
-        "question": "Do I need special skills?",
-        "answer": "No, anyone can do this. Just follow simple instructions like installing an app and taking a screenshot."
+        "question": "How do I get paid for installing apps?",
+        "answer": "You can cash out via PayPal, bank transfer, Bitcoin, Ethereum, or gift cards (Amazon, Apple, Google Play, Robux, Steam, Xbox, PlayStation). Minimum payout is just $5."
       },
       {
-        "question": "How do I get paid?",
-        "answer": "Payments are made via PayPal, bank transfer, gift cards, or cryptocurrency. Minimum withdrawal is $10."
+        "question": "Do I need to keep the apps installed?",
+        "answer": "No! You only need to open the app and keep it installed for 30-60 seconds. After that, you can delete it. Your reward is yours to keep."
       },
       {
-        "question": "Are there apps available every day?",
-        "answer": "Yes, new apps are added daily. Active users typically see 30-50 available app installs per day."
+        "question": "Does this work on iPhone and Android?",
+        "answer": "Yes! Cashog works on both iOS (iPhone, iPad) and Android devices. Most offers work on both platforms."
       },
       {
-        "question": "Can I do this on any phone?",
-        "answer": "Yes, works on both iPhone (iOS) and Android devices. Some offers are device-specific."
-      },
-      {
-        "question": "Is this really free to join?",
-        "answer": "Yes, creating an account is completely free. There are no hidden fees or charges."
-      },
-      {
-        "question": "Do I have to keep the apps installed?",
-        "answer": "No, you can uninstall apps after completing the required tasks and receiving payment."
+        "question": "Is Cashog available in my country?",
+        "answer": "Cashog is available in over 50 countries including the US, Canada, UK, Australia, Germany, France, Spain, Italy, and many more. Sign up for free to check app install offers in {country}."
       }
     ]
   },
   "final": {
-    "title": "Ready to Start Earning?",
-    "subtitle": "Join 300,000+ members already getting paid. Install apps, leave reviews, and earn instantly!"
+    "title": "Ready to Start Earning in {country}?",
+    "subtitle": "Join 150,000+ members already getting paid in {country}. Sign up for free and install your first paid app today!"
   }
 }
