@@ -32,7 +32,6 @@ import FAQ from "@/components/animations/FAQ";
 import CircleBorder from "@/components/animations/CircleBorder";
 
 import { generateJsonLd } from "@/components/SEO/schema";
-import { generateMetadata as generateSEOMetadata } from "@/lib/seo";
 
 /* ================= HELPER ================= */
 
@@ -88,13 +87,28 @@ export async function generateMetadata({
   }
 
   const country = countryParam as CountryCode;
-  
-  // Use your SEO utility for consistent metadata generation
-  return generateSEOMetadata({
-    path: `/${country}`,
-    country: country,
-    language: getLanguage(country),
-  });
+  const countryName = getCountry(country).name;
+
+  return {
+    title: `Earn Money Online in ${countryName} | Cashog`,
+    description: `Start earning real money online in ${countryName} with Cashog. Complete tasks, play games, get cashback, and withdraw your earnings instantly.`,
+    keywords: `earn money online ${countryName}, make money fast ${countryName}, online rewards ${countryName}, cashback ${countryName}`,
+    alternates: {
+      canonical: `https://cashog.com/${country}`,
+    },
+    openGraph: {
+      title: `Earn Money Online in ${countryName} | Cashog`,
+      description: `Start earning real money online in ${countryName} with Cashog. Complete tasks, play games, get cashback, and withdraw your earnings instantly.`,
+      url: `https://cashog.com/${country}`,
+      siteName: "Cashog",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Earn Money Online in ${countryName} | Cashog`,
+      description: `Start earning real money online in ${countryName} with Cashog. Complete tasks, play games, get cashback, and withdraw your earnings instantly.`,
+    },
+  };
 }
 
 /* ================= PAGE ================= */
