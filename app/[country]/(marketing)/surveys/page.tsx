@@ -2,7 +2,6 @@
 
 import { cookies } from "next/headers";
 import { Metadata } from "next";
-import { Suspense } from "react";
 
 import {
   getCountry,
@@ -29,6 +28,7 @@ interface TranslationSection {
   seo?: {
     title?: string;
     description?: string;
+    keywords?: string[];
   };
   hero?: {
     title?: string;
@@ -112,16 +112,6 @@ async function loadSectionTranslation(
   }
 }
 
-async function loadAllTranslations(
-  language: string
-): Promise<TranslationSection> {
-  // Load translations in parallel for better performance
-  const [surveys] = await Promise.all([
-    loadSectionTranslation(language, "surveys"),
-  ]);
-  return surveys;
-}
-
 function getLanguage(country: CountryCode): SupportedLanguage {
   const cookieStore = cookies();
 
@@ -144,10 +134,95 @@ function getLanguage(country: CountryCode): SupportedLanguage {
   return getCountry(country).defaultLanguage as SupportedLanguage;
 }
 
-function replaceCountryPlaceholder(text: string, countryName: string): string {
+// Helper to replace {country} placeholder
+const replaceCountryPlaceholder = (text: string, countryName: string): string => {
   if (!text) return "";
   return text.replace(/\{country\}/g, countryName);
-}
+};
+
+// Dynamic keywords based on country type
+const getCountrySpecificKeywords = (countryName: string, countryCode: string): string[] => {
+  const lowerCountry = countryName.toLowerCase();
+  
+  const baseKeywords = [
+    `paid surveys ${lowerCountry}`,
+    `earn money surveys ${lowerCountry}`,
+    `online surveys paid cash ${lowerCountry}`,
+    `survey sites ${lowerCountry}`,
+    `get paid for opinions ${lowerCountry}`,
+    `legit survey sites ${lowerCountry}`,
+    `highest paying surveys ${lowerCountry}`,
+    `survey jobs ${lowerCountry}`,
+    `paid online surveys ${lowerCountry}`,
+    `make money taking surveys ${lowerCountry}`,
+    `best paid survey sites ${lowerCountry}`,
+    `how to make money with surveys ${lowerCountry}`,
+    `survey panels that pay cash ${lowerCountry}`,
+    `daily paid surveys ${lowerCountry}`,
+    `instant payout surveys ${lowerCountry}`,
+    `survey apps that pay real money ${lowerCountry}`,
+    `paid market research ${lowerCountry}`,
+    `consumer survey rewards ${lowerCountry}`,
+    `get paid to share your opinion ${lowerCountry}`,
+    `cash for completing surveys ${lowerCountry}`,
+    `legitimate survey sites ${lowerCountry}`,
+    `high paying survey panels ${lowerCountry}`,
+    `survey sites that pay instantly ${lowerCountry}`,
+    `make extra money from home ${lowerCountry}`,
+    `online focus groups paid ${lowerCountry}`,
+  ];
+
+  // Add country-specific variations
+  if (countryCode === "us") {
+    baseKeywords.push(
+      "survey sites that pay via paypal usa",
+      "make extra money from home usa",
+      "legit survey sites for americans",
+      "paid surveys for us residents"
+    );
+  } else if (countryCode === "gb") {
+    baseKeywords.push(
+      "paid surveys uk legit",
+      "make money online uk surveys",
+      "best survey sites for british users",
+      "earn pounds from surveys uk"
+    );
+  } else if (countryCode === "ca") {
+    baseKeywords.push(
+      "canadian paid survey sites",
+      "earn cad from surveys canada",
+      "legit survey sites for canadians",
+      "paid surveys canada paypal"
+    );
+  } else if (countryCode === "au") {
+    baseKeywords.push(
+      "paid surveys australia legit",
+      "make money online australia surveys",
+      "best survey sites for australians",
+      "earn aud from surveys australia"
+    );
+  } else if (countryCode === "de") {
+    baseKeywords.push(
+      "bezahlte umfragen deutschland",
+      "geld verdienen mit umfragen",
+      "seriöse umfrage seiten deutschland"
+    );
+  } else if (countryCode === "fr") {
+    baseKeywords.push(
+      "sondages rémunérés france",
+      "gagner de l'argent avec sondages",
+      "sites de sondages payants france"
+    );
+  } else if (countryCode === "es") {
+    baseKeywords.push(
+      "encuestas pagadas españa",
+      "ganar dinero con encuestas",
+      "sitios de encuestas legítimos españa"
+    );
+  }
+
+  return baseKeywords;
+};
 
 /* ================= METADATA ================= */
 
@@ -178,27 +253,30 @@ export async function generateMetadata({
     // Use defaults
   }
 
-  // SEO-optimized title (50-60 characters recommended)
-  const seoTitle =
-    surveysTranslation?.seo?.title ||
-    `Paid Surveys in ${countryName} - Earn $5-$50 Per Survey | Cashog`;
+  // Helper to replace {country} in metadata
+  const replaceCountry = (text: string | undefined, fallback: string): string => {
+    const str = text || fallback;
+    return str.replace(/\{country\}/g, countryName);
+  };
 
-  // SEO-optimized description (150-160 characters recommended)
-  const seoDescription =
-    surveysTranslation?.seo?.description ||
-    `Join 200,000+ members earning real cash in ${countryName}. Take paid surveys from top brands like Nike, Amazon & Apple. Get paid via PayPal or gift cards. Free to join today!`;
+  // Get raw translations with {country} placeholder
+  const rawTitle = surveysTranslation?.seo?.title;
+  const rawDescription = surveysTranslation?.seo?.description;
 
-  // Extended keywords for better ranking
-  const keywords = [
-    `paid surveys ${countryName}`,
-    `earn money surveys ${countryName}`,
-    `online surveys paid cash ${countryName}`,
-    `survey sites ${countryName}`,
-    `get paid for opinions ${countryName}`,
-    `legit survey sites ${countryName}`,
-    `highest paying surveys ${countryName}`,
-    `survey jobs ${countryName}`,
-  ].join(", ");
+  // Replace {country} in title and description
+  const seoTitle = replaceCountry(
+    rawTitle,
+    `Paid Surveys in ${countryName} - Earn $5-$50 Per Survey | Cashog`
+  );
+
+  const seoDescription = replaceCountry(
+    rawDescription,
+    `Join 200,000+ members earning real cash in ${countryName}. Take paid surveys from top brands like Nike, Amazon & Apple. Get paid via PayPal or gift cards. Free to join today!`
+  );
+
+  // Generate dynamic keywords based on country
+  const keywordsArray = getCountrySpecificKeywords(countryName, country);
+  const keywords = keywordsArray.join(", ");
 
   return {
     title: seoTitle,
@@ -261,15 +339,19 @@ export default async function SurveysPage({
   const language = getLanguage(country);
 
   // Load translations
-  const surveys = await loadAllTranslations(language);
+  const surveys = await loadSectionTranslation(language, "surveys");
+
+  // Helper function to replace country placeholder
+  const t = (text: string | undefined, fallback: string): string => {
+    if (!text) return replaceCountryPlaceholder(fallback, countryName);
+    return replaceCountryPlaceholder(text, countryName);
+  };
 
   // SEO data for structured data
-  const title =
-    surveys?.seo?.title ||
-    `Paid Surveys in ${countryName} - Earn $5-$50 Per Survey`;
-  const description =
-    surveys?.seo?.description ||
-    `Join 200,000+ members earning real cash in ${countryName}. Take paid surveys from top brands.`;
+  const rawTitle = surveys?.seo?.title;
+  const rawDescription = surveys?.seo?.description;
+  const title = t(rawTitle, `Paid Surveys in ${countryName} - Earn $5-$50 Per Survey`);
+  const description = t(rawDescription, `Join 200,000+ members earning real cash in ${countryName}. Take paid surveys from top brands.`);
 
   const structuredData = generateJsonLd({
     path: `/${country}/surveys`,
@@ -277,12 +359,6 @@ export default async function SurveysPage({
     description,
     type: "low",
   });
-
-  // Helper function to replace country placeholder
-  const t = (text: string | undefined, fallback: string): string => {
-    if (!text) return replaceCountryPlaceholder(fallback, countryName);
-    return replaceCountryPlaceholder(text, countryName);
-  };
 
   // Prepare data with fallbacks
   const heroData = {
@@ -346,10 +422,7 @@ export default async function SurveysPage({
   };
 
   const finalData = {
-    title: t(
-      surveys?.final?.title,
-      `Ready to Start Earning in ${countryName}?`
-    ),
+    title: t(surveys?.final?.title, `Ready to Start Earning in ${countryName}?`),
     subtitle: t(
       surveys?.final?.subtitle,
       `Join 200,000+ members already getting paid in ${countryName}. Sign up for free and take your first paid survey today!`
@@ -470,20 +543,14 @@ export default async function SurveysPage({
                   id="categories-heading"
                   className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
                 >
-                  {t(
-                    surveys?.categoriesTitle,
-                    "Popular Survey Categories"
-                  )}
+                  {t(surveys?.categoriesTitle, "Popular Survey Categories")}
                 </h2>
                 <div
                   className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
                   aria-hidden="true"
                 />
                 <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-6">
-                  {t(
-                    surveys?.categoriesSubtitle,
-                    "Share your opinion and get paid in these categories"
-                  )}
+                  {t(surveys?.categoriesSubtitle, "Share your opinion and get paid in these categories")}
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -548,20 +615,14 @@ export default async function SurveysPage({
                   id="featured-heading"
                   className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
                 >
-                  {t(
-                    surveys?.featuredTitle,
-                    "High-Paying Surveys Available Now"
-                  )}
+                  {t(surveys?.featuredTitle, "High-Paying Surveys Available Now")}
                 </h2>
                 <div
                   className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
                   aria-hidden="true"
                 />
                 <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-6">
-                  {t(
-                    surveys?.featuredSubtitle,
-                    "Limited spots - complete these surveys today"
-                  )}
+                  {t(surveys?.featuredSubtitle, "Limited spots - complete these surveys today")}
                 </p>
               </div>
               <div className="max-w-4xl mx-auto space-y-4">
@@ -714,10 +775,7 @@ export default async function SurveysPage({
                   id="testimonials-heading"
                   className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
                 >
-                  {t(
-                    surveys?.testimonialsTitle,
-                    "Real Members, Real Earnings"
-                  )}
+                  {t(surveys?.testimonialsTitle, "Real Members, Real Earnings")}
                 </h2>
                 <div
                   className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
