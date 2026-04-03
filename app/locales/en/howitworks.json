@@ -1,12 +1,16 @@
+// app/locales/en/howitworks.json
+
 {
   "seo": {
     "title": "How It Works - Start Earning Money Online",
-    "description": "Learn how to earn real money online with our simple 4-step process. Complete tasks, surveys, offers and withdraw your earnings instantly."
+    "description": "Learn how to earn real money online with our simple process. Complete tasks, take surveys, and get paid instantly."
   },
   "hero": {
     "title": "How {country} Works",
-    "subtitle": "Start earning real money online in 4 simple steps"
+    "subtitle": "Start earning real money online in {country} in 4 simple steps"
   },
+  "stepsTitle": "Simple Steps to Start Earning in {country}",
+  "stepsSubtitle": "Get started in minutes with our easy process",
   "steps": [
     {
       "icon": "📝",
@@ -26,12 +30,11 @@
     {
       "icon": "💸",
       "title": "Withdraw Your Earnings",
-      "title": "Withdraw Your Earnings Instantly",
       "description": "Once you reach the minimum withdrawal amount, cash out via PayPal, bank transfer, gift cards, or mobile money."
     }
   ],
   "video": {
-    "url": "https://www.youtube.com/embed/YOUR_VIDEO_ID",
+    "url": "https://www.youtube.com/embed/dQw4w9WgXcQ",
     "title": "Watch How It Works",
     "description": "See exactly how users in {country} are earning real money every day"
   },
@@ -70,7 +73,7 @@
     }
   ],
   "faq": {
-    "title": "Common Questions About Earning in {country}",
+    "title": "Frequently Asked Questions About Earning in {country}",
     "items": [
       {
         "question": "Is this really free to join?",
@@ -100,7 +103,7 @@
   },
   "cta": {
     "title": "Ready to Start Earning in {country}?",
-    "subtitle": "Join thousands of happy users who are already earning real money online",
+    "subtitle": "Join thousands of happy users who are already earning real money online in {country}",
     "buttonText": "Create Free Account Now"
   }
 }
