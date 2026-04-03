@@ -2,21 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { cookies } from "next/headers";
-import Link from "next/link";
 import { motion } from "framer-motion";
-import {
-  Eye,
-  EyeOff,
-  Mail,
-  User,
-  Lock,
-  CheckCircle,
-  XCircle,
-  Gift,
-  Sparkles,
-} from "lucide-react";
+import { Eye, EyeOff, Mail, User, Lock, CheckCircle, XCircle, Gift, Sparkles, ArrowRight } from "lucide-react";
 
 // SEO Imports
+import { generateJsonLd } from "@/components/SEO/schema";
 import { buildSeo, SEOOutput } from "@/components/SEO/seoEngine";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
 import SeoRenderer from "@/components/SEO/SeoRenderer";
@@ -31,10 +21,11 @@ import Background from "@/components/Background";
 // Auth Components
 import AuthPageWrapper from "@/components/auth/AuthPageWrapper";
 
-// Cookie management and language function
+// Helper functions for translations and language
 import { getCountry, isValidCountryCode, type CountryCode } from "@/app/core/countries";
 import { COOKIE_KEYS, SUPPORTED_LANGUAGES } from "@/app/core/constants";
 import type { SupportedLanguage } from "@/app/core/types";
+import { loadAllTranslations } from "@/app/core/i18n/loader";
 
 // Helper function for translations
 async function loadSectionTranslation(language: string, section: string) {
@@ -47,8 +38,8 @@ async function loadSectionTranslation(language: string, section: string) {
   }
 }
 
-// Language and Country-specific logic
-function getLanguage(country: CountryCode): SupportedLanguage {
+// Language handling and country-based logic
+function getInitialLanguage(country: CountryCode): SupportedLanguage {
   const cookieStore = cookies();
 
   const override = cookieStore.get(COOKIE_KEYS.USER_LANGUAGE_OVERRIDE)?.value;
@@ -70,7 +61,16 @@ function getLanguage(country: CountryCode): SupportedLanguage {
   return getCountry(country).defaultLanguage as SupportedLanguage;
 }
 
-export default function SignupPage({ params }: { params: { country: string } }) {
+function getDirection(lang: SupportedLanguage): "ltr" | "rtl" {
+  return ["ar", "he", "ur", "fa"].includes(lang) ? "rtl" : "ltr";
+}
+
+// Page component for Signup
+export default async function SignupPage({
+  params,
+}: {
+  params: { country?: string };
+}) {
   const countryParam = params?.country?.toLowerCase();
 
   if (!countryParam || !isValidCountryCode(countryParam)) {
@@ -80,7 +80,10 @@ export default function SignupPage({ params }: { params: { country: string } }) 
   const country = countryParam as CountryCode;
   const countryName = getCountry(country).name;
 
-  const language = getLanguage(country);
+  const language = getInitialLanguage(country);
+  const dir = getDirection(language);
+
+  const translations = await loadAllTranslations(language);
 
   const [showPassword, setShowPassword] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
@@ -343,11 +346,18 @@ export default function SignupPage({ params }: { params: { country: string } }) 
                       <div className="space-y-1">
                         <div className="flex justify-between items-center">
                           <span className="text-xs text-gray-400">Password strength:</span>
-                          <span className="text-xs font-medium" style={{
-                            color: passwordStrength <= 1 ? '#ef4444' :
-                                   passwordStrength === 2 ? '#f97316' :
-                                   passwordStrength === 3 ? '#eab308' : '#22c55e'
-                          }}>
+                          <span
+                            className="text-xs font-medium"
+                            style={{
+                              color: passwordStrength <= 1
+                                ? "#ef4444"
+                                : passwordStrength === 2
+                                ? "#f97316"
+                                : passwordStrength === 3
+                                ? "#eab308"
+                                : "#22c55e",
+                            }}
+                          >
                             {getStrengthText()}
                           </span>
                         </div>
