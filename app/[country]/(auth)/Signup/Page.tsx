@@ -1,11 +1,23 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { cookies } from "next/headers";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { Eye, EyeOff, Mail, User, Lock, CheckCircle, XCircle, Gift, Sparkles, ArrowRight } from "lucide-react";
+import {
+  Eye,
+  EyeOff,
+  Mail,
+  User,
+  Lock,
+  CheckCircle,
+  XCircle,
+  Gift,
+  Sparkles,
+} from "lucide-react";
 
 // SEO Imports
-import { buildSEO, SEOOutput } from "@/components/SEO/seoEngine";
+import { buildSeo, SEOOutput } from "@/components/SEO/seoEngine";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
 import SeoRenderer from "@/components/SEO/SeoRenderer";
 
@@ -19,7 +31,12 @@ import Background from "@/components/Background";
 // Auth Components
 import AuthPageWrapper from "@/components/auth/AuthPageWrapper";
 
-// Helper function to load translations dynamically
+// Cookie management and language function
+import { getCountry, isValidCountryCode, type CountryCode } from "@/app/core/countries";
+import { COOKIE_KEYS, SUPPORTED_LANGUAGES } from "@/app/core/constants";
+import type { SupportedLanguage } from "@/app/core/types";
+
+// Helper function for translations
 async function loadSectionTranslation(language: string, section: string) {
   try {
     const file = await import(`@/app/locales/${language}/${section}.json`);
@@ -30,11 +47,41 @@ async function loadSectionTranslation(language: string, section: string) {
   }
 }
 
-function getLanguage(country: string): string {
-  return country === "us" ? "en" : "es"; // Default language based on country (could be expanded for other countries)
+// Language and Country-specific logic
+function getLanguage(country: CountryCode): SupportedLanguage {
+  const cookieStore = cookies();
+
+  const override = cookieStore.get(COOKIE_KEYS.USER_LANGUAGE_OVERRIDE)?.value;
+  if (override) {
+    const lang = override.toLowerCase().split("-")[0];
+    if (SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage)) {
+      return lang as SupportedLanguage;
+    }
+  }
+
+  const saved = cookieStore.get(COOKIE_KEYS.LANGUAGE)?.value;
+  if (saved) {
+    const lang = saved.toLowerCase().split("-")[0];
+    if (SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage)) {
+      return lang as SupportedLanguage;
+    }
+  }
+
+  return getCountry(country).defaultLanguage as SupportedLanguage;
 }
 
-export default function SignupPage({ params }: { params: { country?: string } }) {
+export default function SignupPage({ params }: { params: { country: string } }) {
+  const countryParam = params?.country?.toLowerCase();
+
+  if (!countryParam || !isValidCountryCode(countryParam)) {
+    return null;
+  }
+
+  const country = countryParam as CountryCode;
+  const countryName = getCountry(country).name;
+
+  const language = getLanguage(country);
+
   const [showPassword, setShowPassword] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
   const [showStrength, setShowStrength] = useState(false);
@@ -56,15 +103,13 @@ export default function SignupPage({ params }: { params: { country?: string } })
     special: false,
   });
 
-  // Dynamic loading of SEO and translations based on country
+  // Load SEO for the signup page
   useEffect(() => {
     setMounted(true);
     let mounted = true;
-    const countryParam = params?.country?.toLowerCase();
-    const language = getLanguage(countryParam || "us");
 
-    buildSEO({
-      route: `/signup/${countryParam}`,
+    buildSeo({
+      route: `/signup`,
       locale: SEO_CONFIG.defaultLocale,
     })
       .then((result) => {
@@ -75,18 +120,9 @@ export default function SignupPage({ params }: { params: { country?: string } })
     return () => {
       mounted = false;
     };
-  }, [params?.country]);
+  }, []);
 
-  // Dynamically load translations
-  useEffect(() => {
-    const loadTranslations = async () => {
-      const language = getLanguage(params?.country || "us");
-      const hero = await loadSectionTranslation(language, "herohome");
-      console.log(hero); // Example usage of dynamic translations for Hero section
-    };
-    loadTranslations();
-  }, [params?.country]);
-
+  // Password validation logic
   useEffect(() => {
     if (!formData.password) {
       setPasswordStrength(0);
@@ -179,7 +215,7 @@ export default function SignupPage({ params }: { params: { country?: string } })
       <main className="relative min-h-screen bg-[#0E111B] text-white">
         <OpeningStyle>
           <RevealWithBorder borderColor="border-gradient-rainbow">
-            <AuthPageWrapper title="Sign Up" subtitle="Join our community and start earning.">
+            <AuthPageWrapper title="Signup" subtitle="Join us and start earning">
               {/* Header with Bonus */}
               <div className="relative mb-10 text-center">
                 <h1 className="text-3xl font-bold text-white">
@@ -205,7 +241,7 @@ export default function SignupPage({ params }: { params: { country?: string } })
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="relative flex items-center justify-center gap-3 px-4 py-3.5 bg-[#1A1F2E] border-2 border-blue-500/20 group-hover:border-blue-500 rounded-xl text-white font-medium hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300">
                     <Mail className="w-5 h-5 text-blue-500" />
-                    <span>Sign up with Email</span>
+                    <span>Sign up with Google</span>
                   </div>
                 </motion.button>
               </div>
@@ -307,19 +343,11 @@ export default function SignupPage({ params }: { params: { country?: string } })
                       <div className="space-y-1">
                         <div className="flex justify-between items-center">
                           <span className="text-xs text-gray-400">Password strength:</span>
-                          <span
-                            className="text-xs font-medium"
-                            style={{
-                              color:
-                                passwordStrength <= 1
-                                  ? "#ef4444"
-                                  : passwordStrength === 2
-                                  ? "#f97316"
-                                  : passwordStrength === 3
-                                  ? "#eab308"
-                                  : "#22c55e",
-                            }}
-                          >
+                          <span className="text-xs font-medium" style={{
+                            color: passwordStrength <= 1 ? '#ef4444' :
+                                   passwordStrength === 2 ? '#f97316' :
+                                   passwordStrength === 3 ? '#eab308' : '#22c55e'
+                          }}>
                             {getStrengthText()}
                           </span>
                         </div>
@@ -341,9 +369,7 @@ export default function SignupPage({ params }: { params: { country?: string } })
                           ) : (
                             <XCircle className="w-3.5 h-3.5 text-gray-600" />
                           )}
-                          <span
-                            className={passwordRequirements.length ? "text-green-500" : "text-gray-400"}
-                          >
+                          <span className={passwordRequirements.length ? "text-green-500" : "text-gray-400"}>
                             8+ characters
                           </span>
                         </div>
@@ -353,9 +379,7 @@ export default function SignupPage({ params }: { params: { country?: string } })
                           ) : (
                             <XCircle className="w-3.5 h-3.5 text-gray-600" />
                           )}
-                          <span
-                            className={passwordRequirements.number ? "text-green-500" : "text-gray-400"}
-                          >
+                          <span className={passwordRequirements.number ? "text-green-500" : "text-gray-400"}>
                             Number
                           </span>
                         </div>
@@ -365,9 +389,7 @@ export default function SignupPage({ params }: { params: { country?: string } })
                           ) : (
                             <XCircle className="w-3.5 h-3.5 text-gray-600" />
                           )}
-                          <span
-                            className={passwordRequirements.uppercase ? "text-green-500" : "text-gray-400"}
-                          >
+                          <span className={passwordRequirements.uppercase ? "text-green-500" : "text-gray-400"}>
                             Uppercase
                           </span>
                         </div>
@@ -377,9 +399,7 @@ export default function SignupPage({ params }: { params: { country?: string } })
                           ) : (
                             <XCircle className="w-3.5 h-3.5 text-gray-600" />
                           )}
-                          <span
-                            className={passwordRequirements.lowercase ? "text-green-500" : "text-gray-400"}
-                          >
+                          <span className={passwordRequirements.lowercase ? "text-green-500" : "text-gray-400"}>
                             Lowercase
                           </span>
                         </div>
@@ -389,9 +409,7 @@ export default function SignupPage({ params }: { params: { country?: string } })
                           ) : (
                             <XCircle className="w-3.5 h-3.5 text-gray-600" />
                           )}
-                          <span
-                            className={passwordRequirements.special ? "text-green-500" : "text-gray-400"}
-                          >
+                          <span className={passwordRequirements.special ? "text-green-500" : "text-gray-400"}>
                             Special character (!@#$%^&*)
                           </span>
                         </div>
