@@ -1,0 +1,223 @@
+{
+  "seo": {
+    "title": "Get Paid to Play Games in {country} - Earn $5-$50 Per Game | Cashog",
+    "description": "Join 100,000+ gamers earning real cash in {country} by playing mobile & PC games. Test new games, reach levels, and get paid via PayPal or gift cards. Free to join!"
+  },
+  "hero": {
+    "title": "Get Paid to Play Games in {country}",
+    "subtitle": "Join 100,000+ gamers earning real cash in {country} by playing mobile & PC games. Test new games, reach levels, and get paid instantly!"
+  },
+  "statsTitle": "Trusted by Thousands",
+  "stats": {
+    "gamesPlayed": "25M+",
+    "gamesPlayedLabel": "Games Played",
+    "avgPayout": "$8.50",
+    "avgPayoutLabel": "Average Payout",
+    "activeUsers": "100K+",
+    "activeUsersLabel": "Active Gamers",
+    "totalPaid": "$12M+",
+    "totalPaidLabel": "Total Paid to Gamers"
+  },
+  "categoriesTitle": "Popular Game Categories",
+  "categoriesSubtitle": "Earn by playing these types of games",
+  "gameCategories": [
+    {
+      "icon": "🎮",
+      "title": "Mobile Games",
+      "description": "Play popular mobile games and earn cash rewards for reaching levels, completing challenges, or testing new features.",
+      "avgReward": "$5-$15",
+      "timeRequired": "10-30 min",
+      "skillLevel": "Beginner"
+    },
+    {
+      "icon": "💻",
+      "title": "PC Games",
+      "description": "Test PC games before they launch. Provide feedback and report bugs while earning real money.",
+      "avgReward": "$15-$50",
+      "timeRequired": "30-60 min",
+      "skillLevel": "Intermediate"
+    },
+    {
+      "icon": "👾",
+      "title": "Arcade & Puzzle",
+      "description": "Quick-play games that pay instantly. Perfect for short breaks and casual gaming sessions.",
+      "avgReward": "$2-$10",
+      "timeRequired": "5-15 min",
+      "skillLevel": "Beginner"
+    },
+    {
+      "icon": "⚔️",
+      "title": "Strategy Games",
+      "description": "Higher rewards for strategic thinking. Build empires and compete against other players for cash prizes.",
+      "avgReward": "$20-$100",
+      "timeRequired": "45-90 min",
+      "skillLevel": "Advanced"
+    },
+    {
+      "icon": "🏆",
+      "title": "Tournaments",
+      "description": "Compete in skill-based tournaments. Top players earn significant cash prizes and exclusive rewards.",
+      "avgReward": "$50-$500",
+      "timeRequired": "60-120 min",
+      "skillLevel": "Expert"
+    },
+    {
+      "icon": "📱",
+      "title": "App Testing",
+      "description": "Test new mobile apps and games. Provide feedback and get paid for finding bugs and suggesting improvements.",
+      "avgReward": "$10-$30",
+      "timeRequired": "20-40 min",
+      "skillLevel": "Intermediate"
+    }
+  ],
+  "featuredGamesTitle": "High-Paying Games Available Now",
+  "featuredGamesSubtitle": "Limited spots - play these games today",
+  "featuredGames": [
+    {
+      "title": "Dragon Quest: Legends",
+      "reward": "$25",
+      "timeEstimate": "45 min",
+      "difficulty": "Medium",
+      "spotsLeft": 150,
+      "company": "Epic Games",
+      "rating": "4.8"
+    },
+    {
+      "title": "Puzzle Masters",
+      "reward": "$10",
+      "timeEstimate": "15 min",
+      "difficulty": "Easy",
+      "spotsLeft": 500,
+      "company": "Puzzle Inc.",
+      "rating": "4.6"
+    },
+    {
+      "title": "Strategy Empire",
+      "reward": "$50",
+      "timeEstimate": "90 min",
+      "difficulty": "Hard",
+      "spotsLeft": 50,
+      "company": "Strategy Games",
+      "rating": "4.9"
+    },
+    {
+      "title": "Racing Champions",
+      "reward": "$15",
+      "timeEstimate": "25 min",
+      "difficulty": "Medium",
+      "spotsLeft": 300,
+      "company": "Racing Studio",
+      "rating": "4.7"
+    }
+  ],
+  "benefitsTitle": "Why Get Paid to Play Games",
+  "benefits": [
+    {
+      "icon": "💰",
+      "title": "Real Cash Rewards",
+      "description": "Earn real money that you can withdraw via PayPal, bank transfer, or gift cards. No fake points or worthless rewards."
+    },
+    {
+      "icon": "🎯",
+      "title": "Multiple Games Daily",
+      "title": "New Games Every Day",
+      "description": "Fresh opportunities added daily. Never run out of ways to earn money playing games you love."
+    },
+    {
+      "icon": "⚡",
+      "title": "Instant Payouts",
+      "description": "Get paid immediately after completing tasks. No waiting periods or minimum thresholds to cash out."
+    },
+    {
+      "icon": "🌍",
+      "title": "Available in {country}",
+      "description": "Fully available in {country} with local payment methods and customer support in your language."
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Your Gaming Earnings",
+  "tips": [
+    {
+      "title": "Complete Your Profile",
+      "description": "Fill out your gaming preferences to get matched with higher-paying games that suit your skills."
+    },
+    {
+      "title": "Play New Games First",
+      "title": "Start with Daily Games",
+      "description": "Check the platform daily and play newly added games first - they often have the highest rewards and available spots."
+    },
+    {
+      "title": "Focus on High-Value Tasks",
+      "title": "Focus on Bonus Opportunities",
+      "description": "Prioritize games with bonus rewards, tournaments, and special events to maximize your hourly earnings."
+    },
+    {
+      "title": "Refer Friends",
+      "description": "Invite friends to join and earn 20% of their earnings for life. It's the easiest way to boost your income."
+    }
+  ],
+  "testimonialsTitle": "Real Gamers, Real Earnings",
+  "testimonials": [
+    {
+      "name": "Sarah Johnson",
+      "country": "United States",
+      "earnings": "$1,247",
+      "quote": "I never thought playing games could actually pay my bills! Cashog has been a game-changer for me. I earn around $300-400 monthly just by playing during my free time.",
+      "avatar": "SJ"
+    },
+    {
+      "name": "Marcus Chen",
+      "country": "Canada",
+      "earnings": "$892",
+      "quote": "The best part is how fast payments arrive. I've tried other platforms, but Cashog actually delivers. Got my first payout within 24 hours!",
+      "avatar": "MC"
+    },
+    {
+      "name": "Emma Williams",
+      "country": "United Kingdom",
+      "earnings": "$2,103",
+      "quote": "As a stay-at-home mom, this has been perfect. I can earn while the kids nap. The strategy games pay really well once you get good at them.",
+      "avatar": "EW"
+    }
+  ],
+  "faq": {
+    "title": "Get Paid to Play Games in {country} - FAQ",
+    "items": [
+      {
+        "question": "Is Cashog really free to join?",
+        "answer": "Yes! Cashog is completely free to join. There are no hidden fees or subscription costs. You just sign up, browse available games, and start earning."
+      },
+      {
+        "question": "How much can I earn playing games in {country}?",
+        "answer": "Most gamers earn between $50-$500 per month playing casually. Active users who play daily can earn $1000+. The top players in tournaments can earn $5000+ monthly. Your earnings depend on how much time you invest and which games you play."
+      },
+      {
+        "question": "How do I get paid?",
+        "answer": "We offer multiple payment options including PayPal, bank transfer (ACH), Visa direct, and gift cards for Amazon, Google Play, and more. Most payments are processed instantly or within 24 hours."
+      },
+      {
+        "question": "What types of games can I play?",
+        "answer": "We have hundreds of games across all genres: mobile games, PC games, puzzles, strategy games, racing games, RPGs, and casual arcade games. New games are added daily."
+      },
+      {
+        "question": "Is this available everywhere in {country}?",
+        "answer": "Yes! Cashog is available nationwide in {country}. All our games and payment methods work across the entire country. Some games may have specific regional requirements, but most are available to everyone."
+      },
+      {
+        "question": "Do I need special gaming skills?",
+        "answer": "Not at all! We have games for all skill levels. Beginners can start with easy puzzle games and casual mobile games. As you gain experience, you can try more challenging games that pay higher rewards."
+      },
+      {
+        "question": "How long until I receive my first payout?",
+        "answer": "Most users receive their first payment within 24-48 hours of requesting withdrawal. Some games offer instant payouts directly to your PayPal account. The minimum withdrawal amount is just $5."
+      },
+      {
+        "question": "Can I play on mobile?",
+        "answer": "Absolutely! Cashog works perfectly on both desktop and mobile devices. Download our mobile app for iOS and Android to play and earn on the go."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Start Earning in {country}?",
+    "subtitle": "Join 100,000+ gamers already getting paid in {country}. Sign up for free and start playing paid games today!"
+  }
+}
