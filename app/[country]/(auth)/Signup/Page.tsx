@@ -1,12 +1,23 @@
+// app/[country]/(auth)/Signup/Page.tsx
+
 "use client";
 
 import { useState, useEffect } from "react";
-import { cookies } from "next/headers";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { Eye, EyeOff, Mail, User, Lock, CheckCircle, XCircle, Gift, Sparkles, ArrowRight } from "lucide-react";
+import {
+  Eye,
+  EyeOff,
+  Mail,
+  User,
+  Lock,
+  CheckCircle,
+  XCircle,
+  Gift,
+  Sparkles,
+} from "lucide-react";
 
 // SEO Imports
-import { generateJsonLd } from "@/components/SEO/schema";
 import { buildSeo, SEOOutput } from "@/components/SEO/seoEngine";
 import { SEO_CONFIG } from "@/components/SEO/seoConfig";
 import SeoRenderer from "@/components/SEO/SeoRenderer";
@@ -21,70 +32,10 @@ import Background from "@/components/Background";
 // Auth Components
 import AuthPageWrapper from "@/components/auth/AuthPageWrapper";
 
-// Helper functions for translations and language
-import { getCountry, isValidCountryCode, type CountryCode } from "@/app/core/countries";
-import { COOKIE_KEYS, SUPPORTED_LANGUAGES } from "@/app/core/constants";
-import type { SupportedLanguage } from "@/app/core/types";
-import { loadAllTranslations } from "@/app/core/i18n/loader";
+const AUTH_BASE = process.env.NEXT_PUBLIC_AUTH_URL || "https://auth.cashog.com";
+const useExternalAuth = process.env.NEXT_PUBLIC_USE_EXTERNAL_AUTH === "true";
 
-// Helper function for translations
-async function loadSectionTranslation(language: string, section: string) {
-  try {
-    const file = await import(`@/app/locales/${language}/${section}.json`);
-    return file.default;
-  } catch (error) {
-    console.warn(`Missing translation: ${section} (${language})`);
-    return {};
-  }
-}
-
-// Language handling and country-based logic
-function getInitialLanguage(country: CountryCode): SupportedLanguage {
-  const cookieStore = cookies();
-
-  const override = cookieStore.get(COOKIE_KEYS.USER_LANGUAGE_OVERRIDE)?.value;
-  if (override) {
-    const lang = override.toLowerCase().split("-")[0];
-    if (SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage)) {
-      return lang as SupportedLanguage;
-    }
-  }
-
-  const saved = cookieStore.get(COOKIE_KEYS.LANGUAGE)?.value;
-  if (saved) {
-    const lang = saved.toLowerCase().split("-")[0];
-    if (SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage)) {
-      return lang as SupportedLanguage;
-    }
-  }
-
-  return getCountry(country).defaultLanguage as SupportedLanguage;
-}
-
-function getDirection(lang: SupportedLanguage): "ltr" | "rtl" {
-  return ["ar", "he", "ur", "fa"].includes(lang) ? "rtl" : "ltr";
-}
-
-// Page component for Signup
-export default async function SignupPage({
-  params,
-}: {
-  params: { country?: string };
-}) {
-  const countryParam = params?.country?.toLowerCase();
-
-  if (!countryParam || !isValidCountryCode(countryParam)) {
-    return null;
-  }
-
-  const country = countryParam as CountryCode;
-  const countryName = getCountry(country).name;
-
-  const language = getInitialLanguage(country);
-  const dir = getDirection(language);
-
-  const translations = await loadAllTranslations(language);
-
+export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
   const [showStrength, setShowStrength] = useState(false);
@@ -94,7 +45,7 @@ export default async function SignupPage({
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
-    password: "",
+    password: ""
   });
 
   const [passwordStrength, setPasswordStrength] = useState(0);
@@ -103,17 +54,16 @@ export default async function SignupPage({
     number: false,
     uppercase: false,
     lowercase: false,
-    special: false,
+    special: false
   });
 
-  // Load SEO for the signup page
   useEffect(() => {
     setMounted(true);
     let mounted = true;
 
     buildSeo({
-      route: `/signup`,
-      locale: SEO_CONFIG.defaultLocale,
+      route: "/signup",
+      locale: SEO_CONFIG.defaultLocale
     })
       .then((result) => {
         if (mounted) setSeo(result);
@@ -125,7 +75,6 @@ export default async function SignupPage({
     };
   }, []);
 
-  // Password validation logic
   useEffect(() => {
     if (!formData.password) {
       setPasswordStrength(0);
@@ -134,7 +83,7 @@ export default async function SignupPage({
         number: false,
         uppercase: false,
         lowercase: false,
-        special: false,
+        special: false
       });
       return;
     }
@@ -144,7 +93,7 @@ export default async function SignupPage({
       number: /\d/.test(formData.password),
       uppercase: /[A-Z]/.test(formData.password),
       lowercase: /[a-z]/.test(formData.password),
-      special: /[!@#$%^&*(),.?":{}|<>]/.test(formData.password),
+      special: /[!@#$%^&*(),.?":{}|<>]/.test(formData.password)
     };
 
     setPasswordRequirements(requirements);
@@ -154,7 +103,7 @@ export default async function SignupPage({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleContinueWithEmail = () => {
@@ -200,13 +149,24 @@ export default async function SignupPage({
 
   if (!mounted) {
     return (
+      <main className="relative min-h-screen bg-[#0E111B] text-white">
+        <div className="animate-pulse p-8 max-w-md mx-auto">
+          <div className="h-96 bg-gray-800 rounded-lg mb-4"></div>
+        </div>
+      </main>
+    );
+  }
+
+  if (useExternalAuth) {
+    return (
       <>
+        {seo && <SeoRenderer seo={seo} />}
         <Background />
-        <main className="relative min-h-screen bg-[#0E111B] text-white">
-          <div className="animate-pulse p-8 max-w-md mx-auto">
-            <div className="h-96 bg-gray-800 rounded-lg mb-4"></div>
-          </div>
-        </main>
+        <iframe
+          src={`${AUTH_BASE}/signup?redirect_back=https://cashog.com`}
+          className="w-full h-[650px] rounded-3xl border border-neutral-800 shadow-2xl"
+          frameBorder="0"
+        />
       </>
     );
   }
@@ -218,7 +178,7 @@ export default async function SignupPage({
       <main className="relative min-h-screen bg-[#0E111B] text-white">
         <OpeningStyle>
           <RevealWithBorder borderColor="border-gradient-rainbow">
-            <AuthPageWrapper title="Signup" subtitle="Join us and start earning">
+            <AuthPageWrapper title="" subtitle="">
               {/* Header with Bonus */}
               <div className="relative mb-10 text-center">
                 <h1 className="text-3xl font-bold text-white">
@@ -243,8 +203,20 @@ export default async function SignupPage({
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="relative flex items-center justify-center gap-3 px-4 py-3.5 bg-[#1A1F2E] border-2 border-blue-500/20 group-hover:border-blue-500 rounded-xl text-white font-medium hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300">
-                    <Mail className="w-5 h-5 text-blue-500" />
+                    <Chrome className="w-5 h-5 text-blue-500" />
                     <span>Sign up with Google</span>
+                  </div>
+                </motion.button>
+
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full group relative overflow-hidden rounded-xl"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-indigo-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="relative flex items-center justify-center gap-3 px-4 py-3.5 bg-[#1A1F2E] border-2 border-indigo-500/20 group-hover:border-indigo-500 rounded-xl text-white font-medium hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300">
+                    <Facebook className="w-5 h-5 text-indigo-500" />
+                    <span>Sign up with Facebook</span>
                   </div>
                 </motion.button>
               </div>
@@ -346,23 +318,16 @@ export default async function SignupPage({
                       <div className="space-y-1">
                         <div className="flex justify-between items-center">
                           <span className="text-xs text-gray-400">Password strength:</span>
-                          <span
-                            className="text-xs font-medium"
-                            style={{
-                              color: passwordStrength <= 1
-                                ? "#ef4444"
-                                : passwordStrength === 2
-                                ? "#f97316"
-                                : passwordStrength === 3
-                                ? "#eab308"
-                                : "#22c55e",
-                            }}
-                          >
+                          <span className="text-xs font-medium" style={{ 
+                            color: passwordStrength <= 1 ? '#ef4444' : 
+                                   passwordStrength === 2 ? '#f97316' : 
+                                   passwordStrength === 3 ? '#eab308' : '#22c55e' 
+                          }}>
                             {getStrengthText()}
                           </span>
                         </div>
                         <div className="h-1.5 w-full bg-gray-700 rounded-full overflow-hidden">
-                          <motion.div
+                          <motion.div 
                             initial={{ width: 0 }}
                             animate={{ width: `${(passwordStrength / 4) * 100}%` }}
                             transition={{ duration: 0.3 }}
