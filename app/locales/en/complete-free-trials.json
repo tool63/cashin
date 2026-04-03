@@ -1,0 +1,236 @@
+{
+  "seo": {
+    "title": "Free Trials in {country} - Earn $5-$50 Per Free Trial | Cashog",
+    "description": "Join 90,000+ members earning money in {country} by signing up for free trials. Test streaming, gaming, & software trials. Get paid via PayPal instantly! No risk - cancel anytime."
+  },
+  "hero": {
+    "title": "Get Paid for Free Trials in {country}",
+    "subtitle": "Join 90,000+ members earning money in {country} by signing up for free trials. Test streaming services, gaming platforms, & software - get paid instantly via PayPal!"
+  },
+  "statsTitle": "Free Trial Statistics",
+  "stats": {
+    "trialsCompleted": "2M+",
+    "trialsCompletedLabel": "Free Trials Completed",
+    "avgPayout": "$12.50",
+    "avgPayoutLabel": "Average Payout",
+    "activeUsers": "90K+",
+    "activeUsersLabel": "Active Members",
+    "totalPaid": "$25M+",
+    "totalPaidLabel": "Total Paid"
+  },
+  "categoriesTitle": "Free Trial Categories",
+  "categoriesSubtitle": "Earn by signing up for these types of free trials",
+  "trialCategories": [
+    {
+      "icon": "🎬",
+      "title": "Streaming Services",
+      "description": "Netflix, Disney+, Hulu, Amazon Prime",
+      "avgReward": "$10-$25",
+      "trialDuration": "7-30 days",
+      "cancellationPolicy": "Easy online"
+    },
+    {
+      "icon": "🎮",
+      "title": "Gaming Platforms",
+      "description": "Xbox Game Pass, PlayStation Plus, EA Play",
+      "avgReward": "$5-$15",
+      "trialDuration": "7-14 days",
+      "cancellationPolicy": "Easy online"
+    },
+    {
+      "icon": "💻",
+      "title": "Software & Tools",
+      "description": "Adobe, Microsoft, VPN services",
+      "avgReward": "$15-$50",
+      "trialDuration": "7-30 days",
+      "cancellationPolicy": "Easy online"
+    },
+    {
+      "icon": "📚",
+      "title": "Education & Learning",
+      "description": "Skillshare, Coursera, MasterClass",
+      "avgReward": "$8-$20",
+      "trialDuration": "7-30 days",
+      "cancellationPolicy": "Easy online"
+    },
+    {
+      "icon": "💪",
+      "title": "Fitness & Health",
+      "description": "Peloton, Daily Burn, MyFitnessPal",
+      "avgReward": "$10-$30",
+      "trialDuration": "7-30 days",
+      "cancellationPolicy": "Easy online"
+    },
+    {
+      "icon": "📦",
+      "title": "Subscription Boxes",
+      "description": "Birchbox, Dollar Shave Club, HelloFresh",
+      "avgReward": "$5-$20",
+      "trialDuration": "First box free",
+      "cancellationPolicy": "Easy online"
+    }
+  ],
+  "featuredTrialsTitle": "High-Paying Free Trials Available Now",
+  "featuredTrialsSubtitle": "Limited spots - sign up for these free trials today",
+  "featuredTrials": [
+    {
+      "title": "Netflix Premium - 30 Day Trial",
+      "reward": "$25",
+      "trialDuration": "30 days",
+      "category": "Streaming",
+      "spotsLeft": 500,
+      "provider": "Netflix",
+      "rating": "4.9",
+      "requirements": "New users only"
+    },
+    {
+      "title": "Xbox Game Pass Ultimate",
+      "reward": "$15",
+      "trialDuration": "14 days",
+      "category": "Gaming",
+      "spotsLeft": 750,
+      "provider": "Microsoft",
+      "rating": "4.8",
+      "requirements": "New subscribers"
+    },
+    {
+      "title": "Adobe Creative Cloud",
+      "reward": "$50",
+      "trialDuration": "7 days",
+      "category": "Software",
+      "spotsLeft": 200,
+      "provider": "Adobe",
+      "rating": "4.7",
+      "requirements": "New users only"
+    },
+    {
+      "title": "Disney+ Bundle",
+      "reward": "$20",
+      "trialDuration": "7 days",
+      "category": "Streaming",
+      "spotsLeft": 1000,
+      "provider": "Disney",
+      "rating": "4.8",
+      "requirements": "New subscribers"
+    },
+    {
+      "title": "NordVPN - 30 Day Trial",
+      "reward": "$30",
+      "trialDuration": "30 days",
+      "category": "Software",
+      "spotsLeft": 300,
+      "provider": "NordVPN",
+      "rating": "4.9",
+      "requirements": "New users only"
+    },
+    {
+      "title": "HelloFresh - First Box Free",
+      "reward": "$15",
+      "trialDuration": "First box",
+      "category": "Subscription",
+      "spotsLeft": 1500,
+      "provider": "HelloFresh",
+      "rating": "4.6",
+      "requirements": "New customers"
+    }
+  ],
+  "benefitsTitle": "Why Complete Free Trials",
+  "benefits": [
+    {
+      "icon": "💰",
+      "title": "High Payouts",
+      "description": "Earn $5-$50 per free trial. Some premium trials pay even more"
+    },
+    {
+      "icon": "🎁",
+      "title": "Keep What You Love",
+      "description": "Enjoy premium services for free during the trial period"
+    },
+    {
+      "icon": "❌",
+      "title": "Cancel Anytime",
+      "description": "No commitment. Cancel before trial ends - pay absolutely nothing"
+    },
+    {
+      "icon": "💳",
+      "title": "Virtual Cards Accepted",
+      "description": "Use virtual credit cards for extra security and peace of mind"
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Free Trial Earnings",
+  "tips": [
+    {
+      "title": "Set Cancellation Reminders",
+      "description": "Always set a calendar reminder before your trial ends to avoid automatic charges"
+    },
+    {
+      "title": "Use a Virtual Card",
+      "description": "Use virtual credit cards like Privacy.com for added security and control"
+    },
+    {
+      "title": "Read the Terms Carefully",
+      "description": "Understand cancellation policies and requirements before signing up"
+    },
+    {
+      "title": "Try New Services First",
+      "description": "Prioritize trials you're genuinely interested in trying"
+    }
+  ],
+  "testimonialsTitle": "What Our Members Say",
+  "testimonials": [
+    {
+      "name": "Ryan P.",
+      "country": "United States",
+      "earnings": "$450",
+      "quote": "I've earned over $450 just by signing up for free trials I actually wanted to try. Streaming services pay the most!",
+      "avatar": "RP"
+    },
+    {
+      "name": "Emma W.",
+      "country": "Canada",
+      "earnings": "$280",
+      "quote": "Free trials are my favorite way to earn. Got paid $25 for Netflix trial that I was going to try anyway!",
+      "avatar": "EW"
+    },
+    {
+      "name": "David C.",
+      "country": "United Kingdom",
+      "earnings": "$620",
+      "quote": "The software trials pay really well. Made $50 from Adobe Creative Cloud trial. Just set a reminder to cancel.",
+      "avatar": "DC"
+    }
+  ],
+  "faq": {
+    "title": "Free Trials in {country} - FAQ",
+    "items": [
+      {
+        "question": "How much can I earn from free trials?",
+        "answer": "Each free trial pays between $5 and $50. Most members earn $100-$300 per month, but active users can earn $500+ by completing 10-20 trials monthly. Streaming and software trials typically pay the most."
+      },
+      {
+        "question": "Is it really free? Will I be charged?",
+        "answer": "Yes, free trials are truly free. You will only be charged if you forget to cancel before the trial ends. Always set a calendar reminder to cancel on time. Use virtual cards for extra protection."
+      },
+      {
+        "question": "How do I get paid for completing free trials?",
+        "answer": "You can cash out via PayPal, bank transfer, Bitcoin, Ethereum, or gift cards (Amazon, Apple, Google Play, Robux, Steam, Xbox, PlayStation). Minimum payout is just $5."
+      },
+      {
+        "question": "Do I need a credit card?",
+        "answer": "Most free trials require a credit or debit card for verification. You can use virtual cards from services like Privacy.com for added security."
+      },
+      {
+        "question": "How do I cancel my free trial?",
+        "answer": "Each offer includes cancellation instructions. Most can be cancelled online from your account settings. Always cancel at least 24 hours before the trial ends."
+      },
+      {
+        "question": "Is Cashog available in my country?",
+        "answer": "Cashog is available in over 50 countries including the US, Canada, UK, Australia, Germany, France, Spain, Italy, and many more. Free trial availability varies by region. Sign up to see offers in {country}."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Start Earning in {country}?",
+    "subtitle": "Join 90,000+ members already getting paid in {country}. Sign up for free and complete your first paid free trial today!"
+  }
+}
