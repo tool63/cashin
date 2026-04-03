@@ -1,11 +1,11 @@
 {
   "seo": {
-    "title": "Paid Surveys - Earn $5-$50 Per Survey",
-    "description": "Join 200,000+ members earning real cash. Take paid surveys from top brands. Get paid via PayPal or gift cards. Free to join today!"
+    "title": "Paid Surveys in {country} - Earn $5-$50 Per Survey | Cashog",
+    "description": "Join 200,000+ members earning real cash in {country}. Take paid surveys from top brands like Nike, Amazon & Apple. Get paid via PayPal or gift cards. Free to join today!"
   },
   "hero": {
-    "title": "Get Paid For Your Opinion",
-    "subtitle": "Join 200,000+ members earning real cash. Share your thoughts, influence brands, and get paid instantly. No experience needed!"
+    "title": "Get Paid For Your Opinion in {country}",
+    "subtitle": "Join 200,000+ members earning real cash in {country}. Share your thoughts, influence brands, and get paid instantly. No experience needed!"
   },
   "statsTitle": "Trusted by Thousands",
   "stats": {
@@ -22,75 +22,51 @@
   "categoriesSubtitle": "Share your opinion and get paid in these categories",
   "surveyCategories": [
     {
-      "icon": "🛍️",
+      "icon": "🛒",
       "title": "Shopping & Retail",
-      "description": "Share your shopping habits and preferences",
+      "description": "Share your shopping habits and favorite stores",
       "avgReward": "$2-8",
-      "timeRequired": "5-15 min",
-      "frequency": "Daily"
-    },
-    {
-      "icon": "📱",
-      "title": "Technology",
-      "description": "Review gadgets, apps, and software",
-      "avgReward": "$3-10",
-      "timeRequired": "10-20 min",
-      "frequency": "Daily"
-    },
-    {
-      "icon": "🍔",
-      "title": "Food & Beverage",
-      "description": "Share opinions on restaurants and products",
-      "avgReward": "$2-6",
       "timeRequired": "5-10 min",
       "frequency": "Daily"
     },
     {
-      "icon": "🎬",
-      "title": "Entertainment",
-      "description": "Review movies, music, and streaming",
-      "avgReward": "$2-7",
-      "timeRequired": "5-15 min",
+      "icon": "📱",
+      "title": "Technology & Apps",
+      "description": "Review new apps, gadgets, and software",
+      "avgReward": "$5-15",
+      "timeRequired": "8-15 min",
+      "frequency": "Weekly"
+    },
+    {
+      "icon": "🍔",
+      "title": "Food & Beverage",
+      "description": "Share opinions about restaurants and products",
+      "avgReward": "$2-6",
+      "timeRequired": "4-8 min",
       "frequency": "Daily"
+    },
+    {
+      "icon": "🎮",
+      "title": "Gaming & Entertainment",
+      "description": "Review games, movies, and streaming services",
+      "avgReward": "$3-10",
+      "timeRequired": "6-12 min",
+      "frequency": "Weekly"
+    },
+    {
+      "icon": "💼",
+      "title": "Business & Finance",
+      "description": "Share professional opinions and financial habits",
+      "avgReward": "$10-50",
+      "timeRequired": "15-25 min",
+      "frequency": "Monthly"
     },
     {
       "icon": "❤️",
       "title": "Health & Wellness",
-      "description": "Share health and fitness opinions",
-      "avgReward": "$3-12",
-      "timeRequired": "10-20 min",
-      "frequency": "Weekly"
-    },
-    {
-      "icon": "💰",
-      "title": "Finance",
-      "description": "Opinions on banking and investments",
-      "avgReward": "$4-15",
-      "timeRequired": "10-25 min",
-      "frequency": "Weekly"
-    },
-    {
-      "icon": "🚗",
-      "title": "Automotive",
-      "description": "Share car and transportation views",
-      "avgReward": "$3-10",
-      "timeRequired": "10-15 min",
-      "frequency": "Weekly"
-    },
-    {
-      "icon": "👶",
-      "title": "Parenting",
-      "description": "Share family and parenting insights",
-      "avgReward": "$3-8",
-      "timeRequired": "10-15 min",
-      "frequency": "Weekly"
-    },
-    {
-      "icon": "✈️",
-      "title": "Travel",
-      "description": "Share travel experiences and plans",
-      "avgReward": "$3-12",
-      "timeRequired": "10-20 min",
+      "description": "Discuss fitness, nutrition, and healthcare",
+      "avgReward": "$4-12",
+      "timeRequired": "7-14 min",
       "frequency": "Weekly"
     }
   ],
@@ -98,155 +74,139 @@
   "featuredSubtitle": "Limited spots - complete these surveys today",
   "featuredSurveys": [
     {
-      "title": "Consumer Electronics Shopping Habits",
-      "reward": "$3.50",
-      "timeEstimate": "10 mins",
-      "difficulty": "Easy",
-      "spotsLeft": 124,
-      "company": "Tech Research Inc"
-    },
-    {
-      "title": "Streaming Service Preferences 2024",
-      "reward": "$4.00",
-      "timeEstimate": "15 mins",
+      "title": "Consumer Electronics Feedback",
+      "reward": "$15",
+      "timeEstimate": "15-20 min",
       "difficulty": "Medium",
-      "spotsLeft": 87,
-      "company": "Media Insights"
+      "spotsLeft": 342,
+      "company": "Samsung Electronics"
     },
     {
-      "title": "Mobile Banking App Feedback",
-      "reward": "$5.50",
-      "timeEstimate": "20 mins",
-      "difficulty": "Medium",
-      "spotsLeft": 53,
-      "company": "FinTech Research"
-    },
-    {
-      "title": "Fast Food Restaurant Experience",
-      "reward": "$2.50",
-      "timeEstimate": "5 mins",
+      "title": "Streaming Service Preferences",
+      "reward": "$8",
+      "timeEstimate": "8-12 min",
       "difficulty": "Easy",
-      "spotsLeft": 256,
-      "company": "Food Industry Group"
+      "spotsLeft": 1247,
+      "company": "Netflix Research"
     },
     {
-      "title": "Fitness Tracker User Survey",
-      "reward": "$6.00",
-      "timeEstimate": "25 mins",
+      "title": "Banking & Finance Survey",
+      "reward": "$25",
+      "timeEstimate": "20-25 min",
       "difficulty": "Hard",
-      "spotsLeft": 32,
-      "company": "Health Tech Labs"
+      "spotsLeft": 89,
+      "company": "Chase Bank"
     },
     {
-      "title": "Online Shopping Behavior Study",
-      "reward": "$4.50",
-      "timeEstimate": "15 mins",
+      "title": "Fast Food Brand Review",
+      "reward": "$5",
+      "timeEstimate": "5-7 min",
+      "difficulty": "Easy",
+      "spotsLeft": 2531,
+      "company": "McDonald's Corp"
+    },
+    {
+      "title": "Mobile App User Experience",
+      "reward": "$12",
+      "timeEstimate": "10-15 min",
       "difficulty": "Medium",
-      "spotsLeft": 178,
-      "company": "E-commerce Research"
+      "spotsLeft": 567,
+      "company": "Google Play"
     }
   ],
   "benefitsTitle": "Why Take Paid Surveys",
   "benefits": [
     {
       "icon": "💰",
-      "title": "Easy Money",
-      "description": "Get paid for simple opinions with no special skills"
+      "title": "Earn Real Cash",
+      "description": "Get paid via PayPal, gift cards, or crypto for every survey you complete"
     },
     {
       "icon": "⏰",
-      "title": "Flexible Schedule",
-      "description": "Take surveys anytime, anywhere at your convenience"
+      "title": "Work Anytime",
+      "description": "Take surveys whenever you have free time - morning, night, or weekends"
     },
     {
-      "icon": "📱",
-      "title": "Work from Anywhere",
-      "description": "Complete surveys on your phone, tablet, or computer"
+      "icon": "🏠",
+      "title": "Work From Home",
+      "description": "No commute, no dress code. Just share your opinion from your couch"
     },
     {
       "icon": "🎯",
       "title": "Influence Brands",
-      "description": "Help shape products and services you use every day"
+      "description": "Your feedback helps shape products and services from top companies"
     }
   ],
   "tipsTitle": "Tips to Maximize Your Earnings",
   "tips": [
     {
       "title": "Complete Your Profile",
-      "description": "Fill out your profile completely to get more survey invites that match your demographics"
+      "description": "Fill out your full profile to get matched with higher-paying surveys that fit your demographics"
     },
     {
-      "title": "Respond Quickly",
-      "description": "High-paying surveys fill up fast. Check for new surveys regularly"
+      "title": "Check Daily",
+      "description": "New surveys drop every day. The best-paying ones fill up fast - check in daily"
     },
     {
-      "title": "Be Consistent",
-      "description": "Take surveys daily to build your reputation and unlock higher-paying opportunities"
+      "title": "Be Honest & Consistent",
+      "description": "Quality responses lead to more survey invitations and higher rewards over time"
     }
   ],
   "testimonialsTitle": "Real Members, Real Earnings",
   "testimonials": [
     {
-      "name": "Sarah Johnson",
+      "name": "Sarah J.",
       "country": "United States",
-      "earnings": "$847",
-      "quote": "I take surveys during my lunch break and earn an extra $200-300 every month. It's so easy!",
-      "avatar": "S"
+      "earnings": "$450",
+      "quote": "I've tried so many survey sites, but Cashog is the only one that actually pays. Made $450 in my first month just doing surveys during my lunch break!",
+      "avatar": "SJ"
     },
     {
-      "name": "Michael Chen",
+      "name": "David K.",
       "country": "Canada",
-      "earnings": "$1,250",
-      "quote": "Best survey platform I've used. Consistent payouts and interesting topics.",
-      "avatar": "M"
+      "earnings": "$280",
+      "quote": "Easy money. The surveys are actually interesting and I've never had a problem with payouts. PayPal hits within 24 hours every time.",
+      "avatar": "DK"
     },
     {
-      "name": "Emma Williams",
+      "name": "Maria R.",
       "country": "United Kingdom",
-      "earnings": "$632",
-      "quote": "Perfect for stay-at-home parents. I earn while watching TV in the evening.",
-      "avatar": "E"
+      "earnings": "$620",
+      "quote": "Best survey site I've found. The $25 finance surveys are my favorite. Cashog has helped me pay off my credit card debt.",
+      "avatar": "MR"
     }
   ],
   "faq": {
-    "title": "Paid Surveys - Frequently Asked Questions",
+    "title": "Paid Surveys in {country} - Frequently Asked Questions",
     "items": [
       {
-        "question": "How much can I earn from paid surveys?",
-        "answer": "Most surveys pay between $2-$15 each. Active users earn $100-$500 monthly by completing 5-10 surveys daily."
+        "question": "How much can I earn from paid surveys on Cashog?",
+        "answer": "Most surveys pay between $2 and $50 each. On average, members earn $100-$300 per month, but top earners make $500+ by completing surveys daily. The more surveys you complete, the more you earn!"
+      },
+      {
+        "question": "Are Cashog paid surveys legit?",
+        "answer": "Yes! Cashog is 100% legit. We've paid over $5 million to members worldwide. We partner with Fortune 500 brands like Amazon, Nike, and Netflix who need real consumer opinions. Check our Trustpilot reviews - 4.8/5 stars from 10,000+ members."
+      },
+      {
+        "question": "How do I get paid for taking surveys?",
+        "answer": "You can cash out via PayPal, bank transfer, Bitcoin, Ethereum, or gift cards (Amazon, Apple, Google Play, Robux, Steam, Xbox, PlayStation). Minimum payout is just $5, and payments are processed within 24-48 hours."
+      },
+      {
+        "question": "Do I need any special skills to take paid surveys?",
+        "answer": "None at all! Anyone can take surveys. You just need your honest opinion. No experience, degree, or special skills required. Perfect for students, stay-at-home parents, retirees, or anyone looking for extra cash."
       },
       {
         "question": "How long does each survey take?",
-        "answer": "Survey length varies from 5-30 minutes depending on complexity. Most surveys take 10-15 minutes to complete."
+        "answer": "Surveys range from 5 to 30 minutes. Most are 10-15 minutes. You can see the estimated time before starting, so you can choose surveys that fit your schedule."
       },
       {
-        "question": "Do I need special qualifications?",
-        "answer": "No, anyone can take surveys. You just need to share honest opinions based on your experiences."
-      },
-      {
-        "question": "How do I get paid for surveys?",
-        "answer": "Payments are made via PayPal, bank transfer, gift cards, or cryptocurrency. Minimum withdrawal is $10."
-      },
-      {
-        "question": "Are there surveys available every day?",
-        "answer": "Yes, new surveys are added daily. Active users typically receive 10-20 survey invites per day."
-      },
-      {
-        "question": "Why do I get screened out of surveys?",
-        "answer": "Sometimes your profile doesn't match what researchers need. Completing your profile accurately helps reduce this."
-      },
-      {
-        "question": "Is this really free to join?",
-        "answer": "Yes, creating an account is completely free. There are no hidden fees or charges to start taking surveys."
-      },
-      {
-        "question": "Can I take surveys on my phone?",
-        "answer": "Yes, our platform is fully mobile-optimized. You can take surveys on any device with an internet connection."
+        "question": "Is Cashog available in my country?",
+        "answer": "Cashog is available in over 50 countries including the US, Canada, UK, Australia, Germany, France, Spain, Italy, and many more. Sign up for free to check if surveys are available in {country}."
       }
     ]
   },
   "final": {
-    "title": "Ready to Start Earning?",
-    "subtitle": "Join 200,000+ members already getting paid. Sign up for free and take your first paid survey today!"
+    "title": "Ready to Start Earning in {country}?",
+    "subtitle": "Join 200,000+ members already getting paid in {country}. Sign up for free and take your first paid survey today!"
   }
 }
