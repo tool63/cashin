@@ -1,0 +1,380 @@
+{
+  "seo": {
+    "title": "Daily Deals - Best Cashback Offers Today in {country} | Cashog",
+    "description": "Discover the best daily deals with cashback in {country}. Save up to 70% off plus earn extra cashback on electronics, fashion, home goods, groceries, and more. Updated daily!"
+  },
+  "hero": {
+    "title": "Today's Best Daily Deals",
+    "subtitle": "Save big with hand-picked deals updated daily. Get up to 70% off plus earn cashback at top stores in {country}. New deals added every day - don't miss out!"
+  },
+  "categoryTitle": "Shop Deals by Category",
+  "categories": [
+    {
+      "name": "Electronics",
+      "icon": "💻",
+      "description": "Laptops, phones, TVs, and gaming",
+      "dealCount": 156
+    },
+    {
+      "name": "Fashion",
+      "icon": "👕",
+      "description": "Clothing, shoes, and accessories",
+      "dealCount": 243
+    },
+    {
+      "name": "Home & Garden",
+      "icon": "🏠",
+      "description": "Furniture, decor, and tools",
+      "dealCount": 189
+    },
+    {
+      "name": "Groceries",
+      "icon": "🛒",
+      "description": "Food, beverages, and meal kits",
+      "dealCount": 97
+    },
+    {
+      "name": "Beauty",
+      "icon": "💄",
+      "description": "Skincare, makeup, and haircare",
+      "dealCount": 134
+    },
+    {
+      "name": "Toys & Games",
+      "icon": "🎮",
+      "description": "Toys, games, and collectibles",
+      "dealCount": 78
+    }
+  ],
+  "featuredDealsTitle": "🔥 Featured Deals of the Day",
+  "featuredDeals": [
+    {
+      "title": "Samsung 55\" 4K Smart TV",
+      "description": "Crystal clear picture with smart features",
+      "originalPrice": "$699",
+      "salePrice": "$499",
+      "cashbackRate": "8%",
+      "store": "Best Buy",
+      "image": "📺",
+      "category": "Electronics",
+      "link": "/deal/samsung-tv",
+      "expiresIn": "2 days",
+      "isLimited": true
+    },
+    {
+      "title": "Nike Air Max Sneakers",
+      "description": "Comfortable and stylish running shoes",
+      "originalPrice": "$160",
+      "salePrice": "$112",
+      "cashbackRate": "10%",
+      "store": "Nike",
+      "image": "👟",
+      "category": "Fashion",
+      "link": "/deal/nike-air-max",
+      "expiresIn": "1 day",
+      "isLimited": false
+    },
+    {
+      "title": "Instant Pot Duo 7-in-1",
+      "description": "Pressure cooker, slow cooker, and more",
+      "originalPrice": "$129",
+      "salePrice": "$79",
+      "cashbackRate": "6%",
+      "store": "Amazon",
+      "image": "🍲",
+      "category": "Home & Garden",
+      "link": "/deal/instant-pot",
+      "expiresIn": "3 days",
+      "isLimited": true
+    }
+  ],
+  "flashSalesTitle": "⚡ Flash Sales - Limited Time",
+  "flashSales": [
+    {
+      "title": "Wireless Earbuds",
+      "description": "Bluetooth 5.0 with charging case",
+      "originalPrice": "$79",
+      "salePrice": "$39",
+      "cashbackRate": "12%",
+      "store": "Target",
+      "image": "🎧",
+      "category": "Electronics",
+      "link": "/deal/earbuds",
+      "expiresIn": "4 hours",
+      "isLimited": true
+    },
+    {
+      "title": "Leather Backpack",
+      "description": "Genuine leather laptop backpack",
+      "originalPrice": "$89",
+      "salePrice": "$49",
+      "cashbackRate": "8%",
+      "store": "Macy's",
+      "image": "🎒",
+      "category": "Fashion",
+      "link": "/deal/backpack",
+      "expiresIn": "6 hours",
+      "isLimited": true
+    },
+    {
+      "title": "Air Fryer",
+      "description": "4.5 quart digital air fryer",
+      "originalPrice": "$99",
+      "salePrice": "$59",
+      "cashbackRate": "7%",
+      "store": "Walmart",
+      "image": "🍟",
+      "category": "Home & Garden",
+      "link": "/deal/air-fryer",
+      "expiresIn": "3 hours",
+      "isLimited": true
+    }
+  ],
+  "trendingNowTitle": "📈 Trending Now",
+  "trendingNow": [
+    {
+      "title": "Robot Vacuum",
+      "description": "Smart mapping and app control",
+      "originalPrice": "$399",
+      "salePrice": "$249",
+      "cashbackRate": "10%",
+      "store": "Best Buy",
+      "image": "🤖",
+      "category": "Home & Garden",
+      "link": "/deal/robot-vacuum",
+      "expiresIn": "",
+      "isLimited": false
+    },
+    {
+      "title": "Skincare Gift Set",
+      "description": "Anti-aging serum and moisturizer",
+      "originalPrice": "$120",
+      "salePrice": "$84",
+      "cashbackRate": "15%",
+      "store": "Sephora",
+      "image": "💆",
+      "category": "Beauty",
+      "link": "/deal/skincare-set",
+      "expiresIn": "",
+      "isLimited": false
+    },
+    {
+      "title": "LEGO Star Wars Set",
+      "description": "Collector's edition building kit",
+      "originalPrice": "$199",
+      "salePrice": "$149",
+      "cashbackRate": "8%",
+      "store": "LEGO",
+      "image": "🧱",
+      "category": "Toys & Games",
+      "link": "/deal/lego-starwars",
+      "expiresIn": "",
+      "isLimited": false
+    }
+  ],
+  "topStoresTitle": "Top Stores with Active Deals",
+  "topStores": [
+    {
+      "name": "Amazon",
+      "logo": "📦",
+      "cashbackRate": "Up to 10%",
+      "description": "Today's lightning deals and limited-time offers",
+      "categories": ["Electronics", "Home", "Fashion"],
+      "features": ["Free shipping", "Prime early access", "Price protection"],
+      "link": "/store/amazon-deals"
+    },
+    {
+      "name": "Best Buy",
+      "logo": "💻",
+      "cashbackRate": "Up to 8%",
+      "description": "Daily deals on electronics and appliances",
+      "categories": ["Electronics", "Gaming", "TVs"],
+      "features": ["Price match", "Free shipping", "Member deals"],
+      "link": "/store/bestbuy-deals"
+    },
+    {
+      "name": "Walmart",
+      "logo": "🎯",
+      "cashbackRate": "Up to 6%",
+      "description": "Rollback prices and clearance events",
+      "categories": ["Everything", "Groceries", "Home"],
+      "features": ["Free pickup", "Free delivery", "Price match"],
+      "link": "/store/walmart-deals"
+    },
+    {
+      "name": "Target",
+      "logo": "📍",
+      "cashbackRate": "Up to 7%",
+      "description": "Weekly deals and circle offers",
+      "categories": ["Home", "Beauty", "Toys"],
+      "features": ["Drive up", "Circle rewards", "Price match"],
+      "link": "/store/target-deals"
+    }
+  ],
+  "tipsTitle": "Smart Deal Hunting Tips",
+  "tips": [
+    {
+      "title": "Act Fast on Flash Sales",
+      "description": "Limited-time deals sell out quickly. Add to cart immediately if you see a great price.",
+      "icon": "⚡"
+    },
+    {
+      "title": "Stack Cashback",
+      "description": "Always click through our links to earn cashback on top of sale prices.",
+      "icon": "💰"
+    },
+    {
+      "title": "Compare Prices",
+      "description": "Use price comparison tools to ensure you're getting the best deal.",
+      "icon": "📊"
+    },
+    {
+      "title": "Sign Up for Alerts",
+      "description": "Get notified when your favorite products go on sale.",
+      "icon": "🔔"
+    }
+  ],
+  "dealAlert": {
+    "title": "Never Miss a Deal",
+    "description": "Sign up for free deal alerts and get the best offers delivered to your inbox",
+    "buttonText": "Get Deal Alerts"
+  },
+  "priceDropTitle": "📉 Recent Price Drops",
+  "priceDrop": [
+    {
+      "product": "iPad 10.9-inch",
+      "store": "Apple",
+      "previousPrice": "$449",
+      "currentPrice": "$399",
+      "savings": "$50",
+      "link": "/deal/ipad"
+    },
+    {
+      "product": "Dyson V8 Vacuum",
+      "store": "Dyson",
+      "previousPrice": "$399",
+      "currentPrice": "$299",
+      "savings": "$100",
+      "link": "/deal/dyson-v8"
+    },
+    {
+      "product": "Keurig Coffee Maker",
+      "store": "Keurig",
+      "previousPrice": "$149",
+      "currentPrice": "$99",
+      "savings": "$50",
+      "link": "/deal/keurig"
+    }
+  ],
+  "seasonalEventsTitle": "📅 Upcoming Sale Events",
+  "seasonalEvents": [
+    {
+      "name": "Prime Day",
+      "date": "July 15-16, 2025",
+      "description": "Exclusive deals for Amazon Prime members",
+      "expectedSavings": "Up to 60% off",
+      "link": "/event/prime-day"
+    },
+    {
+      "name": "Black Friday",
+      "date": "November 28, 2025",
+      "description": "Biggest shopping event of the year",
+      "expectedSavings": "Up to 80% off",
+      "link": "/event/black-friday"
+    },
+    {
+      "name": "Cyber Monday",
+      "date": "December 1, 2025",
+      "description": "Online-only deals and doorbusters",
+      "expectedSavings": "Up to 70% off",
+      "link": "/event/cyber-monday"
+    }
+  ],
+  "couponSpotlightTitle": "🎟️ Active Coupons & Codes",
+  "couponSpotlight": [
+    {
+      "code": "SAVE20",
+      "description": "20% off your first purchase",
+      "store": "ASOS",
+      "discount": "20% OFF",
+      "expiryDate": "Dec 31, 2025",
+      "link": "/coupon/asos"
+    },
+    {
+      "code": "WELCOME15",
+      "description": "15% off sitewide for new customers",
+      "store": "Wayfair",
+      "discount": "15% OFF",
+      "expiryDate": "Dec 31, 2025",
+      "link": "/coupon/wayfair"
+    },
+    {
+      "code": "FRESH10",
+      "description": "$10 off first grocery order",
+      "store": "Instacart",
+      "discount": "$10 OFF",
+      "expiryDate": "Dec 31, 2025",
+      "link": "/coupon/instacart"
+    }
+  ],
+  "buyingGuidesTitle": "Deal Hunting Guides",
+  "buyingGuides": [
+    {
+      "title": "How to Spot a Real Deal",
+      "description": "Learn to distinguish genuine savings from marketing gimmicks",
+      "readTime": "6 min",
+      "link": "/guide/spot-real-deals"
+    },
+    {
+      "title": "Best Times to Buy Everything",
+      "description": "Seasonal buying guide for every product category",
+      "readTime": "10 min",
+      "link": "/guide/best-times-to-buy"
+    },
+    {
+      "title": "Price Tracking Tools",
+      "description": "Use technology to never overpay again",
+      "readTime": "5 min",
+      "link": "/guide/price-tracking"
+    }
+  ],
+  "priceMatch": {
+    "title": "Found a Better Price Elsewhere?",
+    "description": "We'll help you find the best deals with cashback",
+    "buttonText": "Compare Prices"
+  },
+  "faq": {
+    "title": "Daily Deals FAQ - {country}",
+    "items": [
+      {
+        "question": "How often are deals updated?",
+        "answer": "We update our deals daily, with flash sales refreshed every few hours. Check back often for the latest offers!"
+      },
+      {
+        "question": "Can I earn cashback on deal prices?",
+        "answer": "Yes! Most deals are eligible for cashback. Just click through our link before purchasing to earn cashback on top of sale prices."
+      },
+      {
+        "question": "What's a flash sale?",
+        "answer": "Flash sales are limited-time offers that typically last 24 hours or less. They often have the deepest discounts but sell out quickly."
+      },
+      {
+        "question": "How do I know if a deal is legitimate?",
+        "answer": "We verify all deals before posting. Look for price history and compare with other stores to ensure you're getting real savings."
+      },
+      {
+        "question": "Can I combine multiple coupons?",
+        "answer": "It depends on the store. Some allow stacking, others don't. Check the store's coupon policy for details."
+      },
+      {
+        "question": "What happens if a deal expires?",
+        "answer": "Expired deals are removed from our site. Sign up for deal alerts to get notified before time-sensitive offers end."
+      }
+    ]
+  },
+  "final": {
+    "title": "Start Saving on Today's Best Deals",
+    "subtitle": "Join thousands of smart shoppers who never pay full price",
+    "buttonText": "Browse All Deals"
+  }
+}
