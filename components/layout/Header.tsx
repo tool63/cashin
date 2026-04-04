@@ -171,11 +171,11 @@ export default function Header({ className }: HeaderProps) {
 
               {mobileEarnOpen && (
                 <div className="flex flex-col gap-3 pl-4 text-sm">
-                  <Link href={`/${country}/surveys`} onClick={() => setMobileOpen(false)}>Surveys</Link>
-                  <Link href={`/${country}/app-installs`} onClick={() => setMobileOpen(false)}>App Installs</Link>
-                  <Link href={`/${country}/play-games`} onClick={() => setMobileOpen(false)}>Play Games</Link>
-                  <Link href={`/${country}/watch-videos`} onClick={() => setMobileOpen(false)}>Watch Videos</Link>
-                  <Link href={`/${country}/offerwall`} onClick={() => setMobileOpen(false)}>Offerwall</Link>
+                  <Link href={`/${country}/earn/surveys`} onClick={() => setMobileOpen(false)}>Surveys</Link>
+                  <Link href={`/${country}/earn/app-installs`} onClick={() => setMobileOpen(false)}>App Installs</Link>
+                  <Link href={`/${country}/earn/play-games`} onClick={() => setMobileOpen(false)}>Play Games</Link>
+                  <Link href={`/${country}/earn/watch-videos`} onClick={() => setMobileOpen(false)}>Watch Videos</Link>
+                  <Link href={`/${country}/earn/offerwall`} onClick={() => setMobileOpen(false)}>Offerwall</Link>
                 </div>
               )}
 
