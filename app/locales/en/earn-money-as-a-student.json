@@ -1,0 +1,354 @@
+{
+  "seo": {
+    "title": "Earn Money as a Student in {country} - Flexible Side Hustles | Cashog",
+    "description": "Discover flexible ways to earn money as a student in {country}. From online tutoring and freelancing to surveys and cashback - balance work and study with these student-friendly opportunities."
+  },
+  "hero": {
+    "title": "Earn Money as a Student",
+    "subtitle": "Balance studying with earning! Discover flexible, student-friendly ways to make money in {country}. From online tutoring to freelancing - start earning without compromising your grades."
+  },
+  "statsTitle": "Student Earnings by the Numbers",
+  "stats": [
+    {
+      "value": "70%",
+      "label": "of Students",
+      "description": "Work while studying"
+    },
+    {
+      "value": "$15-25",
+      "label": "Average Hourly Rate",
+      "description": "For student-friendly jobs"
+    },
+    {
+      "value": "10-15 hrs",
+      "label": "Flexible Hours",
+      "description": "Perfect for class schedules"
+    },
+    {
+      "value": "$500-2,000",
+      "label": "Monthly Potential",
+      "description": "With part-time work"
+    }
+  ],
+  "studentJobsTitle": "Best Student-Friendly Jobs",
+  "studentJobs": [
+    {
+      "title": "Online Tutoring",
+      "type": "Teaching",
+      "icon": "📚",
+      "description": "Teach subjects you're good at to younger students. Perfect for honor students.",
+      "earnings": "$15-30/hour",
+      "timeCommitment": "5-15 hours/week",
+      "skillsNeeded": ["Subject expertise", "Patience", "Communication"],
+      "platforms": ["VIPKid", "Chegg", "Wyzant"],
+      "link": "/student/tutoring"
+    },
+    {
+      "title": "Freelance Writing",
+      "type": "Writing",
+      "icon": "✍️",
+      "description": "Write articles, blog posts, or social media content for businesses.",
+      "earnings": "$20-50/hour",
+      "timeCommitment": "5-20 hours/week",
+      "skillsNeeded": ["Writing skills", "Grammar", "Research"],
+      "platforms": ["Upwork", "Fiverr", "Contena"],
+      "link": "/student/freelance-writing"
+    },
+    {
+      "title": "Virtual Assistant",
+      "type": "Admin",
+      "icon": "📋",
+      "description": "Help businesses with email, scheduling, and social media management.",
+      "earnings": "$15-25/hour",
+      "timeCommitment": "10-20 hours/week",
+      "skillsNeeded": ["Organization", "Communication", "Tech skills"],
+      "platforms": ["Belay", "Time Etc", "Upwork"],
+      "link": "/student/virtual-assistant"
+    },
+    {
+      "title": "Survey & Cashback",
+      "type": "Passive",
+      "icon": "💰",
+      "description": "Earn money during study breaks with surveys and cashback apps.",
+      "earnings": "$50-200/month",
+      "timeCommitment": "2-5 hours/week",
+      "skillsNeeded": ["None - just time"],
+      "platforms": ["Swagbucks", "Survey Junkie", "Cashog"],
+      "link": "/student/surveys"
+    },
+    {
+      "title": "Social Media Manager",
+      "type": "Marketing",
+      "icon": "📱",
+      "description": "Manage Instagram, TikTok, or Twitter for small businesses.",
+      "earnings": "$18-35/hour",
+      "timeCommitment": "5-15 hours/week",
+      "skillsNeeded": ["Social media savvy", "Creativity", "Analytics"],
+      "platforms": ["Upwork", "Fiverr", "LinkedIn"],
+      "link": "/student/social-media"
+    },
+    {
+      "title": "Data Entry",
+      "type": "Admin",
+      "icon": "📊",
+      "description": "Enter and organize data for companies. Great for detail-oriented students.",
+      "earnings": "$12-18/hour",
+      "timeCommitment": "5-20 hours/week",
+      "skillsNeeded": ["Typing speed", "Accuracy", "Excel"],
+      "platforms": ["Clickworker", "Amazon MTurk", "Upwork"],
+      "link": "/student/data-entry"
+    },
+    {
+      "title": "Graphic Design",
+      "type": "Creative",
+      "icon": "🎨",
+      "description": "Create logos, social media graphics, and marketing materials.",
+      "earnings": "$20-45/hour",
+      "timeCommitment": "5-15 hours/week",
+      "skillsNeeded": ["Design software", "Creativity", "Portfolio"],
+      "platforms": ["99designs", "Fiverr", "Upwork"],
+      "link": "/student/graphic-design"
+    },
+    {
+      "title": "Transcription",
+      "type": "Audio",
+      "icon": "🎙️",
+      "description": "Convert audio and video files to text. Flexible schedule.",
+      "earnings": "$12-20/hour",
+      "timeCommitment": "5-15 hours/week",
+      "skillsNeeded": ["Fast typing", "Good listening", "Grammar"],
+      "platforms": ["Rev", "TranscribeMe", "GoTranscript"],
+      "link": "/student/transcription"
+    }
+  ],
+  "platformsTitle": "Student-Friendly Earning Platforms",
+  "platforms": [
+    {
+      "name": "Cashog",
+      "logo": "💰",
+      "category": "Cashback",
+      "signupBonus": "$5",
+      "description": "Earn cashback on everyday purchases. Perfect for student shopping needs.",
+      "bestFor": ["Shopping", "Groceries", "Textbooks"],
+      "payoutMethods": ["PayPal", "Gift Cards", "Bank Transfer"],
+      "link": "/signup"
+    },
+    {
+      "name": "Swagbucks",
+      "logo": "🎯",
+      "category": "Surveys & Tasks",
+      "signupBonus": "$10",
+      "description": "Complete surveys, watch videos, and shop online for points.",
+      "bestFor": ["Study breaks", "Free time", "Passive earning"],
+      "payoutMethods": ["PayPal", "Amazon", "Visa"],
+      "link": "/platform/swagbucks"
+    },
+    {
+      "name": "Upwork",
+      "logo": "💼",
+      "category": "Freelancing",
+      "signupBonus": "$0",
+      "description": "Find freelance work in writing, design, programming, and more.",
+      "bestFor": ["Skilled students", "Portfolio building", "Career experience"],
+      "payoutMethods": ["PayPal", "Direct Deposit", "Wire Transfer"],
+      "link": "/platform/upwork"
+    },
+    {
+      "name": "Fiverr",
+      "logo": "⭐",
+      "category": "Gigs",
+      "signupBonus": "$0",
+      "description": "Create 'gigs' offering your skills starting at $5.",
+      "bestFor": ["Creative students", "Quick tasks", "Building reputation"],
+      "payoutMethods": ["PayPal", "Fiverr Revenue Card"],
+      "link": "/platform/fiverr"
+    },
+    {
+      "name": "Chegg",
+      "logo": "📚",
+      "category": "Tutoring",
+      "signupBonus": "$0",
+      "description": "Get paid to help other students with homework and test prep.",
+      "bestFor": ["High GPA students", "STEM majors", "Teaching skills"],
+      "payoutMethods": ["Direct Deposit", "PayPal"],
+      "link": "/platform/chegg"
+    },
+    {
+      "name": "Rev",
+      "logo": "🎙️",
+      "category": "Transcription",
+      "signupBonus": "$0",
+      "description": "Earn money transcribing audio and video files.",
+      "bestFor": ["Fast typists", "Detail-oriented", "Flexible schedule"],
+      "payoutMethods": ["PayPal"],
+      "link": "/platform/rev"
+    }
+  ],
+  "tipsTitle": "Tips for Student Earners",
+  "tips": [
+    {
+      "title": "Start During Summer Break",
+      "description": "Build skills and save money before the school year starts.",
+      "icon": "☀️"
+    },
+    {
+      "title": "Use Your Class Schedule",
+      "description": "Choose jobs that fit around your classes, not the other way around.",
+      "icon": "📅"
+    },
+    {
+      "title": "Leverage Your Major",
+      "description": "Look for jobs related to your field of study for experience + money.",
+      "icon": "🎓"
+    },
+    {
+      "title": "Set a Weekly Hour Limit",
+      "description": "Decide how many hours you can work without hurting your grades.",
+      "icon": "⏰"
+    },
+    {
+      "title": "Use Campus Resources",
+      "description": "Check your university's job board for on-campus opportunities.",
+      "icon": "🏫"
+    },
+    {
+      "title": "Build Your Resume",
+      "description": "Even part-time work adds valuable experience for future jobs.",
+      "icon": "📄"
+    }
+  ],
+  "successStoriesTitle": "Student Success Stories",
+  "successStories": [
+    {
+      "name": "Alex",
+      "age": 21,
+      "university": "University of Texas",
+      "earnings": "$1,200/month",
+      "story": "Started freelance writing during sophomore year. Now I pay for my own rent and textbooks.",
+      "method": "Freelance Writing"
+    },
+    {
+      "name": "Sarah",
+      "age": 20,
+      "university": "Ohio State",
+      "earnings": "$800/month",
+      "story": "Tutor math and science online. Work 10 hours/week and still have time for studying.",
+      "method": "Online Tutoring"
+    },
+    {
+      "name": "Michael",
+      "age": 22,
+      "university": "UC Berkeley",
+      "earnings": "$2,000/month",
+      "story": "Run social media for 3 local businesses. Graduating with no debt and job offers lined up.",
+      "method": "Social Media Management"
+    }
+  ],
+  "timeManagementTitle": "Time Management Tips for Working Students",
+  "timeManagement": [
+    {
+      "title": "Use a Digital Calendar",
+      "description": "Block out class time, study time, and work time in Google Calendar.",
+      "icon": "📱"
+    },
+    {
+      "title": "Study During Downtime",
+      "description": "Listen to lectures or read while doing low-focus tasks like data entry.",
+      "icon": "🎧"
+    },
+    {
+      "title": "Batch Similar Tasks",
+      "description": "Group similar work tasks together to save mental energy.",
+      "icon": "📦"
+    },
+    {
+      "title": "Set Boundaries",
+      "description": "Communicate your availability clearly to employers and clients.",
+      "icon": "🚧"
+    }
+  ],
+  "taxTipsTitle": "Tax Tips for Students",
+  "taxTips": [
+    {
+      "title": "Track Your Earnings",
+      "description": "Keep records of all income, even if under the filing threshold."
+    },
+    {
+      "title": "Save for Taxes",
+      "description": "Set aside 15-20% of freelance income for tax time."
+    },
+    {
+      "title": "Claim Education Credits",
+      "description": "Students may qualify for education tax credits. Consult a tax professional."
+    },
+    {
+      "title": "Deduct Business Expenses",
+      "description": "Freelancers can deduct computer, internet, and software costs."
+    }
+  ],
+  "balanceTipsTitle": "How to Balance Work and Study",
+  "balanceTips": [
+    "🎯 Prioritize assignments by due date",
+    "📝 Create a weekly schedule every Sunday",
+    "💪 Take breaks to avoid burnout",
+    "🎓 Remember why you're in school",
+    "🤝 Communicate with professors about deadlines",
+    "😴 Get enough sleep - don't overwork"
+  ],
+  "newsletter": {
+    "title": "Get Student Earning Tips",
+    "subtitle": "Subscribe for weekly student-friendly job opportunities and money tips",
+    "buttonText": "Subscribe",
+    "placeholder": "Enter your email"
+  },
+  "faq": {
+    "title": "Earn Money as a Student FAQ - {country}",
+    "items": [
+      {
+        "question": "How many hours can a student work while studying?",
+        "answer": "Most students work 10-20 hours per week successfully. Full-time students should aim for 15 hours or less to maintain good grades."
+      },
+      {
+        "question": "What's the best job for a student with no experience?",
+        "answer": "Survey sites, cashback apps, and data entry require no experience. Online tutoring is great if you excel in certain subjects."
+      },
+      {
+        "question": "Can international students work online?",
+        "answer": "It depends on your visa. Many international students can work on-campus or do freelance work. Check your visa terms carefully."
+      },
+      {
+        "question": "How do I get paid as a student?",
+        "answer": "Most platforms pay via PayPal, direct deposit, or gift cards. Set up a PayPal account to receive payments easily."
+      },
+      {
+        "question": "Will working affect my financial aid?",
+        "answer": "Earnings can affect need-based aid. Check with your financial aid office about income limits before earning too much."
+      },
+      {
+        "question": "What skills pay the most for students?",
+        "answer": "Programming, graphic design, and tutoring pay the highest ($25-50/hour). Writing and social media management also pay well ($18-35/hour)."
+      },
+      {
+        "question": "Can I work from my dorm room?",
+        "answer": "Yes! Most online jobs can be done from your dorm. Just need a laptop and reliable internet."
+      },
+      {
+        "question": "How do I find legitimate online jobs?",
+        "answer": "Use reputable platforms like Upwork, Fiverr, and Chegg. Avoid any job asking for upfront payment."
+      },
+      {
+        "question": "Should I focus on one job or multiple?",
+        "answer": "Start with one to learn the ropes. Then you can add more as you figure out your schedule and earning potential."
+      },
+      {
+        "question": "Can I earn money during summer break?",
+        "answer": "Absolutely! Summer is perfect for full-time freelance work, internships, or building skills for higher-paying jobs."
+      }
+    ]
+  },
+  "final": {
+    "title": "Start Earning as a Student Today",
+    "subtitle": "Join thousands of students already making money while pursuing their degrees",
+    "buttonText": "Find Student Jobs"
+  }
+}
