@@ -1,0 +1,437 @@
+{
+  "seo": {
+    "title": "Earn Money from Home in {country} - Legit Remote Jobs & Side Hustles | Cashog",
+    "description": "Find legit ways to earn money from home in {country}. Discover remote jobs, side hustles, and work-from-home opportunities that actually pay. Start your home-based career today."
+  },
+  "hero": {
+    "title": "Earn Money from Home in {country}",
+    "subtitle": "Discover legitimate work-from-home opportunities in {country}. Whether you're looking for a full-time remote job or a flexible side hustle, find proven ways to earn income from the comfort of your home."
+  },
+  "statsTitle": "The Work-from-Home Revolution",
+  "stats": [
+    {
+      "value": "58%",
+      "label": "of workers",
+      "description": "want to work remotely full-time"
+    },
+    {
+      "value": "4.7M+",
+      "label": "remote jobs",
+      "description": "available worldwide"
+    },
+    {
+      "value": "$50K+",
+      "label": "average salary",
+      "description": "for remote positions"
+    },
+    {
+      "value": "30%",
+      "label": "higher productivity",
+      "description": "for remote workers"
+    }
+  ],
+  "jobCategoriesTitle": "Popular Work-from-Home Categories",
+  "jobCategories": [
+    {
+      "name": "Customer Service",
+      "icon": "🎧",
+      "description": "Support customers via phone, chat, or email",
+      "jobCount": 12500
+    },
+    {
+      "name": "Virtual Assistant",
+      "icon": "📋",
+      "description": "Administrative support for businesses",
+      "jobCount": 8900
+    },
+    {
+      "name": "Data Entry",
+      "icon": "📊",
+      "description": "Input and manage data remotely",
+      "jobCount": 7500
+    },
+    {
+      "name": "Sales",
+      "icon": "📞",
+      "description": "Sell products and services remotely",
+      "jobCount": 6200
+    },
+    {
+      "name": "IT & Tech Support",
+      "icon": "💻",
+      "description": "Technical support and IT services",
+      "jobCount": 15400
+    },
+    {
+      "name": "Writing & Editing",
+      "icon": "✍️",
+      "description": "Content creation and editing",
+      "jobCount": 9800
+    },
+    {
+      "name": "Design",
+      "icon": "🎨",
+      "description": "Graphic and web design services",
+      "jobCount": 7300
+    },
+    {
+      "name": "Accounting",
+      "icon": "📈",
+      "description": "Bookkeeping and accounting services",
+      "jobCount": 4100
+    }
+  ],
+  "featuredJobsTitle": "Featured Remote Jobs",
+  "featuredJobs": [
+    {
+      "title": "Customer Support Specialist",
+      "company": "SupportHub",
+      "logo": "🎧",
+      "salary": "$35,000 - $45,000",
+      "description": "Provide exceptional customer support via chat and email for a growing tech company.",
+      "requirements": ["Excellent communication", "Problem-solving skills", "1+ year experience"],
+      "jobType": "Full-time",
+      "link": "/job/customer-support"
+    },
+    {
+      "title": "Virtual Assistant",
+      "company": "AdminPro",
+      "logo": "📋",
+      "salary": "$25 - $35/hour",
+      "description": "Help entrepreneurs and businesses with administrative tasks, scheduling, and email management.",
+      "requirements": ["Organized", "Tech-savvy", "Self-motivated"],
+      "jobType": "Part-time",
+      "link": "/job/virtual-assistant"
+    },
+    {
+      "title": "Remote Sales Representative",
+      "company": "SalesForce",
+      "logo": "📞",
+      "salary": "$50,000 - $70,000 + commission",
+      "description": "Sell software solutions to businesses across the country.",
+      "requirements": ["Sales experience", "CRM knowledge", "Excellent communication"],
+      "jobType": "Full-time",
+      "link": "/job/sales-representative"
+    },
+    {
+      "title": "Content Writer",
+      "company": "ContentCo",
+      "logo": "✍️",
+      "salary": "$45,000 - $60,000",
+      "description": "Create engaging blog posts, articles, and web content for various clients.",
+      "requirements": ["Writing portfolio", "SEO knowledge", "Research skills"],
+      "jobType": "Full-time",
+      "link": "/job/content-writer"
+    }
+  ],
+  "sideHustlesTitle": "Best Side Hustles from Home",
+  "sideHustles": [
+    {
+      "name": "Freelance Writing",
+      "icon": "✍️",
+      "description": "Write articles, blog posts, and copy for clients",
+      "earnings": "$500-5,000/month",
+      "timeRequired": "10-20 hrs/week",
+      "difficulty": "Medium",
+      "link": "/freelance-writing"
+    },
+    {
+      "name": "Online Tutoring",
+      "icon": "📚",
+      "description": "Teach students online in your area of expertise",
+      "earnings": "$500-3,000/month",
+      "timeRequired": "5-15 hrs/week",
+      "difficulty": "Easy",
+      "link": "/online-tutoring"
+    },
+    {
+      "name": "Virtual Assistant",
+      "icon": "📋",
+      "description": "Help businesses with administrative tasks",
+      "earnings": "$1,000-4,000/month",
+      "timeRequired": "10-20 hrs/week",
+      "difficulty": "Easy",
+      "link": "/virtual-assistant"
+    },
+    {
+      "name": "Transcription",
+      "icon": "🎙️",
+      "description": "Convert audio and video to text",
+      "earnings": "$500-2,000/month",
+      "timeRequired": "10-15 hrs/week",
+      "difficulty": "Easy",
+      "link": "/transcription"
+    },
+    {
+      "name": "Social Media Management",
+      "icon": "📱",
+      "description": "Manage social media accounts for businesses",
+      "earnings": "$1,000-5,000/month",
+      "timeRequired": "5-10 hrs/week",
+      "difficulty": "Medium",
+      "link": "/social-media-manager"
+    },
+    {
+      "name": "Graphic Design",
+      "icon": "🎨",
+      "description": "Create designs for logos, social media, and websites",
+      "earnings": "$1,000-6,000/month",
+      "timeRequired": "10-20 hrs/week",
+      "difficulty": "Hard",
+      "link": "/graphic-design"
+    }
+  ],
+  "remoteCompaniesTitle": "Top Remote-Friendly Companies",
+  "remoteCompanies": [
+    {
+      "name": "FlexJobs",
+      "logo": "💼",
+      "industry": "Job Board",
+      "hiringFor": ["Customer Service", "Writing", "Tech", "Admin"],
+      "link": "/company/flexjobs"
+    },
+    {
+      "name": "Automattic",
+      "logo": "🔵",
+      "industry": "Tech",
+      "hiringFor": ["Developers", "Designers", "Support", "Marketing"],
+      "link": "/company/automattic"
+    },
+    {
+      "name": "Zapier",
+      "logo": "⚡",
+      "industry": "Automation",
+      "hiringFor": ["Engineering", "Product", "Support", "Ops"],
+      "link": "/company/zapier"
+    },
+    {
+      "name": "Buffer",
+      "logo": "🔴",
+      "industry": "Social Media",
+      "hiringFor": ["Marketing", "Engineering", "Support", "Content"],
+      "link": "/company/buffer"
+    },
+    {
+      "name": "GitLab",
+      "logo": "🟠",
+      "industry": "DevOps",
+      "hiringFor": ["Engineering", "Sales", "Marketing", "Support"],
+      "link": "/company/gitlab"
+    },
+    {
+      "name": "InVision",
+      "logo": "🎨",
+      "industry": "Design",
+      "hiringFor": ["Design", "Engineering", "Product", "Sales"],
+      "link": "/company/invision"
+    }
+  ],
+  "essentialToolsTitle": "Essential Tools for Working from Home",
+  "essentialTools": [
+    {
+      "name": "Zoom",
+      "icon": "🎥",
+      "description": "Video conferencing and meetings",
+      "freeTier": true,
+      "link": "/tool/zoom"
+    },
+    {
+      "name": "Slack",
+      "icon": "💬",
+      "description": "Team communication and collaboration",
+      "freeTier": true,
+      "link": "/tool/slack"
+    },
+    {
+      "name": "Trello",
+      "icon": "📋",
+      "description": "Project management and task tracking",
+      "freeTier": true,
+      "link": "/tool/trello"
+    },
+    {
+      "name": "Google Workspace",
+      "icon": "🔵",
+      "description": "Email, documents, and cloud storage",
+      "freeTier": true,
+      "link": "/tool/google-workspace"
+    },
+    {
+      "name": "LastPass",
+      "icon": "🔒",
+      "description": "Password management",
+      "freeTier": true,
+      "link": "/tool/lastpass"
+    },
+    {
+      "name": "Grammarly",
+      "icon": "✍️",
+      "description": "Writing assistance and grammar check",
+      "freeTier": true,
+      "link": "/tool/grammarly"
+    }
+  ],
+  "tipsTitle": "Tips for Success Working from Home",
+  "tips": [
+    {
+      "title": "Create a Dedicated Workspace",
+      "description": "Set up a quiet, organized area for work to maintain focus and productivity.",
+      "icon": "🏠"
+    },
+    {
+      "title": "Stick to a Schedule",
+      "description": "Maintain regular work hours to create boundaries between work and personal life.",
+      "icon": "⏰"
+    },
+    {
+      "title": "Minimize Distractions",
+      "description": "Turn off notifications, use noise-canceling headphones, and set boundaries with family.",
+      "icon": "📵"
+    },
+    {
+      "title": "Stay Connected",
+      "description": "Regular communication with colleagues helps combat isolation and stay aligned.",
+      "icon": "💬"
+    },
+    {
+      "title": "Take Breaks",
+      "description": "Step away from your screen regularly to avoid burnout and stay fresh.",
+      "icon": "☕"
+    },
+    {
+      "title": "Invest in Ergonomics",
+      "description": "Good chair, desk, and equipment prevent physical strain and injury.",
+      "icon": "🪑"
+    }
+  ],
+  "successStoriesTitle": "Success Stories",
+  "successStories": [
+    {
+      "name": "Emily",
+      "age": 32,
+      "location": "Ohio",
+      "earnings": "$65,000/year",
+      "story": "Left my office job to work remotely as a customer success manager. Now I have more time with family and no commute.",
+      "role": "Customer Success Manager"
+    },
+    {
+      "name": "David",
+      "age": 28,
+      "location": "Texas",
+      "earnings": "$80,000/year",
+      "story": "Started as a freelance web developer, now run my own remote agency with 5 team members.",
+      "role": "Web Developer"
+    },
+    {
+      "name": "Maria",
+      "age": 45,
+      "location": "Florida",
+      "earnings": "$55,000/year",
+      "story": "Transitioned from teaching to virtual tutoring. I work fewer hours and earn more than before.",
+      "role": "Online Tutor"
+    }
+  ],
+  "salaryGuide": {
+    "title": "Remote Work Salary Guide",
+    "description": "Average salaries for common remote roles",
+    "roles": [
+      {
+        "role": "Customer Support",
+        "entryLevel": "$30,000",
+        "experienced": "$45,000",
+        "expert": "$60,000+"
+      },
+      {
+        "role": "Virtual Assistant",
+        "entryLevel": "$25,000",
+        "experienced": "$40,000",
+        "expert": "$55,000+"
+      },
+      {
+        "role": "Software Developer",
+        "entryLevel": "$60,000",
+        "experienced": "$90,000",
+        "expert": "$130,000+"
+      },
+      {
+        "role": "Content Writer",
+        "entryLevel": "$35,000",
+        "experienced": "$55,000",
+        "expert": "$80,000+"
+      },
+      {
+        "role": "Sales Representative",
+        "entryLevel": "$40,000",
+        "experienced": "$65,000",
+        "expert": "$100,000+"
+      },
+      {
+        "role": "Project Manager",
+        "entryLevel": "$55,000",
+        "experienced": "$80,000",
+        "expert": "$120,000+"
+      }
+    ]
+  },
+  "checklist": {
+    "title": "Get Started Checklist",
+    "items": [
+      "Set up a dedicated workspace",
+      "Get reliable high-speed internet",
+      "Create a professional resume",
+      "Sign up for remote job alerts",
+      "Update your LinkedIn profile",
+      "Prepare for virtual interviews",
+      "Set daily work hours",
+      "Create a morning routine"
+    ]
+  },
+  "newsletter": {
+    "title": "Get Remote Job Alerts",
+    "subtitle": "Subscribe for weekly work-from-home opportunities",
+    "buttonText": "Subscribe",
+    "placeholder": "Enter your email"
+  },
+  "faq": {
+    "title": "Earn Money from Home FAQ - {country}",
+    "items": [
+      {
+        "question": "Are work-from-home jobs legit?",
+        "answer": "Yes! Many legitimate companies hire remote workers. Always research companies and avoid anything asking for upfront payment."
+      },
+      {
+        "question": "What equipment do I need to work from home?",
+        "answer": "At minimum: a reliable computer, high-speed internet, and a quiet workspace. Some jobs may require specific software or equipment."
+      },
+      {
+        "question": "How do I find remote jobs?",
+        "answer": "Use remote job boards like FlexJobs, We Work Remotely, and Remote.co. Also check company career pages directly."
+      },
+      {
+        "question": "Can I work from home without experience?",
+        "answer": "Yes! Entry-level remote jobs exist in customer service, data entry, virtual assisting, and more."
+      },
+      {
+        "question": "How much can I earn working from home?",
+        "answer": "Earnings vary widely. Entry-level positions start around $15-25/hour, while skilled roles can earn $50-100+/hour."
+      },
+      {
+        "question": "Do remote jobs pay less than office jobs?",
+        "answer": "Not necessarily. Many remote jobs pay competitive salaries. Some even pay more due to reduced overhead costs."
+      },
+      {
+        "question": "How do I avoid work-from-home scams?",
+        "answer": "Never pay for a job opportunity, research the company, check reviews, and trust your instincts. Legitimate jobs don't ask for upfront payment."
+      },
+      {
+        "question": "Can I work from home outside the country?",
+        "answer": "It depends on the employer. Some allow international work, others require you to be in a specific country. Always check with the employer first."
+      }
+    ]
+  },
+  "final": {
+    "title": "Start Your Work-from-Home Journey Today",
+    "subtitle": "Join thousands of people already earning money from home",
+    "buttonText": "Find Remote Jobs"
+  }
+}
