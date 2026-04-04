@@ -1,0 +1,296 @@
+{
+  "seo": {
+    "title": "Grocery Cashback - Earn Up to 15% Back on Groceries in {country} | Cashog",
+    "description": "Shop groceries with cashback in {country}. Earn up to 15% back at top stores like Instacart, Walmart, Kroger, Whole Foods, and more. Get the best deals on fresh food, pantry staples, and meal delivery."
+  },
+  "hero": {
+    "title": "Earn Cashback on Groceries",
+    "subtitle": "Save money on every shopping trip. Earn up to 15% cashback at top grocery stores and food delivery services in {country}. From fresh produce to pantry essentials and meal kits."
+  },
+  "categoryTitle": "Shop by Category",
+  "categories": [
+    {
+      "name": "Fresh Produce",
+      "icon": "🍎",
+      "description": "Fruits, vegetables, and organic options",
+      "storeCount": 35
+    },
+    {
+      "name": "Pantry Staples",
+      "icon": "🥫",
+      "description": "Canned goods, pasta, rice, and baking supplies",
+      "storeCount": 42
+    },
+    {
+      "name": "Meat & Seafood",
+      "icon": "🥩",
+      "description": "Fresh meat, poultry, fish, and plant-based alternatives",
+      "storeCount": 28
+    },
+    {
+      "name": "Dairy & Eggs",
+      "icon": "🥛",
+      "description": "Milk, cheese, yogurt, butter, and eggs",
+      "storeCount": 31
+    },
+    {
+      "name": "Beverages",
+      "icon": "🥤",
+      "description": "Coffee, tea, juice, soda, and water",
+      "storeCount": 38
+    },
+    {
+      "name": "Meal Kits",
+      "icon": "📦",
+      "description": "Pre-portioned ingredients and recipes",
+      "storeCount": 22
+    }
+  ],
+  "featuredStoresTitle": "Top Grocery Stores",
+  "featuredStores": [
+    {
+      "name": "Instacart",
+      "logo": "🛒",
+      "cashbackRate": "Up to 10%",
+      "description": "Same-day delivery from your favorite stores",
+      "categories": ["All Groceries", "Fresh", "Organic"],
+      "features": ["Same-day delivery", "Pickup available", "Membership perks"],
+      "link": "/store/instacart"
+    },
+    {
+      "name": "Walmart Grocery",
+      "logo": "🎯",
+      "cashbackRate": "Up to 6%",
+      "description": "Everyday low prices on groceries",
+      "categories": ["Fresh", "Pantry", "Household"],
+      "features": ["Free pickup", "Delivery pass", "Rollback prices"],
+      "link": "/store/walmart-grocery"
+    },
+    {
+      "name": "Kroger",
+      "logo": "🛍️",
+      "cashbackRate": "Up to 5%",
+      "description": "America's largest grocery store",
+      "categories": ["Fresh", "Pharmacy", "Deli"],
+      "features": ["Fuel points", "Digital coupons", "Boost membership"],
+      "link": "/store/kroger"
+    },
+    {
+      "name": "Whole Foods",
+      "logo": "🌿",
+      "cashbackRate": "Up to 8%",
+      "description": "Natural and organic grocery leader",
+      "categories": ["Organic", "Prepared Foods", "Produce"],
+      "features": ["Amazon Prime discounts", "Quality standards", "Hot bar"],
+      "link": "/store/whole-foods"
+    },
+    {
+      "name": "HelloFresh",
+      "logo": "🍽️",
+      "cashbackRate": "Up to 15%",
+      "description": "Meal kit delivery service",
+      "categories": ["Meal Kits", "Quick Recipes", "Family Meals"],
+      "features": ["Easy recipes", "Portion control", "Skip anytime"],
+      "link": "/store/hellofresh"
+    },
+    {
+      "name": "Target Grocery",
+      "logo": "📍",
+      "cashbackRate": "Up to 7%",
+      "description": "Groceries and household essentials",
+      "categories": ["Fresh", "Pantry", "Household"],
+      "features": ["Drive up", "Circle rewards", "Price match"],
+      "link": "/store/target-grocery"
+    }
+  ],
+  "topDealsTitle": "Hot Grocery Deals",
+  "topDeals": [
+    {
+      "title": "Buy One Get One Free",
+      "description": "Select snacks and beverages",
+      "originalPrice": "$5.99",
+      "salePrice": "BOGO",
+      "cashbackRate": "10%",
+      "store": "Kroger",
+      "image": "🥨",
+      "link": "/deal/bogo-snacks"
+    },
+    {
+      "title": "Organic Produce Box",
+      "description": "Mixed seasonal vegetables delivered",
+      "originalPrice": "$39",
+      "salePrice": "$29",
+      "cashbackRate": "12%",
+      "store": "Whole Foods",
+      "image": "🥬",
+      "link": "/deal/organic-box"
+    },
+    {
+      "title": "Meal Kit Trial Offer",
+      "description": "First box including shipping",
+      "originalPrice": "$69",
+      "salePrice": "$39",
+      "cashbackRate": "15%",
+      "store": "HelloFresh",
+      "image": "🍳",
+      "link": "/deal/hellofresh-trial"
+    }
+  ],
+  "tipsTitle": "Smart Grocery Shopping Tips",
+  "tips": [
+    {
+      "title": "Plan Your Meals",
+      "description": "Create a weekly meal plan to avoid impulse purchases and reduce food waste.",
+      "icon": "📋"
+    },
+    {
+      "title": "Use Digital Coupons",
+      "description": "Combine cashback with store apps and digital coupons for extra savings.",
+      "icon": "📱"
+    },
+    {
+      "title": "Buy in Bulk",
+      "description": "Stock up on non-perishables when they're on sale with cashback.",
+      "icon": "📦"
+    },
+    {
+      "title": "Compare Unit Prices",
+      "description": "Check price per ounce or pound to find the best value deals.",
+      "icon": "💰"
+    }
+  ],
+  "compareTitle": "Compare Cashback Rates",
+  "compare": {
+    "description": "See how much you can earn at top grocery stores",
+    "stores": [
+      {
+        "name": "Instacart",
+        "cashbackRate": "Up to 10%",
+        "shippingTime": "Same-day",
+        "returnPolicy": "Store policy",
+        "rating": 4.5
+      },
+      {
+        "name": "Walmart",
+        "cashbackRate": "Up to 6%",
+        "shippingTime": "2-3 days",
+        "returnPolicy": "90 days",
+        "rating": 4.4
+      },
+      {
+        "name": "Kroger",
+        "cashbackRate": "Up to 5%",
+        "shippingTime": "1-2 days",
+        "returnPolicy": "30 days",
+        "rating": 4.3
+      },
+      {
+        "name": "HelloFresh",
+        "cashbackRate": "Up to 15%",
+        "shippingTime": "Weekly delivery",
+        "returnPolicy": "7 days",
+        "rating": 4.6
+      }
+    ]
+  },
+  "seasonalPromosTitle": "Seasonal Promotions",
+  "seasonalPromos": [
+    {
+      "title": "Summer BBQ Event",
+      "description": "Up to 20% off grilling essentials",
+      "endDate": "Aug 31, 2025",
+      "link": "/promos/bbq-event"
+    },
+    {
+      "title": "Back to School Snacks",
+      "description": "15% off lunchbox favorites + cashback",
+      "endDate": "Sep 15, 2025",
+      "code": "SCHOOL15",
+      "link": "/promos/back-to-school"
+    }
+  ],
+  "brandSpotlightTitle": "Brand Spotlight",
+  "brandSpotlight": [
+    {
+      "name": "Organic Valley",
+      "logo": "🥛",
+      "description": "Organic dairy and eggs from family farms",
+      "cashbackRate": "Up to 8%",
+      "featuredProducts": ["Milk", "Eggs", "Butter", "Cheese"],
+      "link": "/brand/organic-valley"
+    },
+    {
+      "name": "Beyond Meat",
+      "logo": "🌱",
+      "description": "Plant-based meat alternatives",
+      "cashbackRate": "Up to 10%",
+      "featuredProducts": ["Beyond Burger", "Sausages", "Ground Beef"],
+      "link": "/brand/beyond-meat"
+    }
+  ],
+  "buyingGuidesTitle": "Grocery Buying Guides",
+  "buyingGuides": [
+    {
+      "title": "Healthy Eating on a Budget",
+      "description": "Nutritious grocery shopping without breaking the bank",
+      "readTime": "7 min",
+      "link": "/guide/healthy-budget"
+    },
+    {
+      "title": "Understanding Food Labels",
+      "description": "Decode organic, non-GMO, and other certifications",
+      "readTime": "5 min",
+      "link": "/guide/food-labels"
+    },
+    {
+      "title": "Meal Prep Mastery",
+      "description": "Save time and money with weekly meal preparation",
+      "readTime": "8 min",
+      "link": "/guide/meal-prep"
+    }
+  ],
+  "priceMatch": {
+    "title": "Found a Better Price?",
+    "description": "We'll help you find the best cashback rates on groceries",
+    "buttonText": "Compare Prices"
+  },
+  "mealPlanning": {
+    "title": "Need Meal Planning Help?",
+    "description": "Get weekly meal plans and shopping lists tailored to your preferences",
+    "buttonText": "Start Planning"
+  },
+  "faq": {
+    "title": "Grocery Cashback FAQ - {country}",
+    "items": [
+      {
+        "question": "Which grocery stores offer the highest cashback?",
+        "answer": "Cashback rates vary by store and season. HelloFresh often offers up to 15%, Instacart up to 10%, and Whole Foods up to 8%. Check our store listings for current rates."
+      },
+      {
+        "question": "Can I earn cashback on grocery delivery fees?",
+        "answer": "Delivery fees and tips are typically not eligible for cashback. However, the cashback applies to the product cost before taxes and delivery charges."
+      },
+      {
+        "question": "How long does grocery cashback take to confirm?",
+        "answer": "Grocery cashback typically takes 15-30 days to confirm due to shorter return periods for food items. This protects against returns and adjustments."
+      },
+      {
+        "question": "What about perishable items?",
+        "answer": "Cashback applies to all eligible grocery items, including perishables. However, refunds for spoiled items will reduce your cashback."
+      },
+      {
+        "question": "Can I use grocery store loyalty cards?",
+        "answer": "Yes! You can use store loyalty cards and still earn cashback. Just make sure to click through our link before shopping."
+      },
+      {
+        "question": "Do meal kit subscriptions offer recurring cashback?",
+        "answer": "Yes! Most meal kit services offer cashback on every delivery. Check individual store terms as some have limits on total cashback per account."
+      }
+    ]
+  },
+  "final": {
+    "title": "Start Saving on Groceries Today",
+    "subtitle": "Join thousands of smart shoppers earning cashback on their everyday grocery purchases",
+    "buttonText": "Shop Groceries Now"
+  }
+}
