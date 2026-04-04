@@ -1,0 +1,331 @@
+{
+  "seo": {
+    "title": "Earn Money Online Worldwide - Global Earning Opportunities from {country} | Cashog",
+    "description": "Discover worldwide online earning opportunities available from {country}. Global platforms that accept international users. Start earning money online no matter where you live."
+  },
+  "hero": {
+    "title": "Earn Money Online Worldwide",
+    "subtitle": "No matter where you live in {country}, you can earn money online! Discover global platforms that accept international users. From freelancing to microtasks - start earning worldwide today."
+  },
+  "categoryTitle": "Global Earning Categories",
+  "categories": [
+    {
+      "name": "Freelancing",
+      "icon": "💼",
+      "description": "Sell skills to global clients",
+      "platformCount": 25
+    },
+    {
+      "name": "Micro Tasks",
+      "icon": "✅",
+      "description": "Small tasks for worldwide platforms",
+      "platformCount": 18
+    },
+    {
+      "name": "Content Creation",
+      "icon": "📹",
+      "description": "Monetize content globally",
+      "platformCount": 15
+    },
+    {
+      "name": "Online Teaching",
+      "icon": "🎓",
+      "description": "Teach students worldwide",
+      "platformCount": 12
+    },
+    {
+      "name": "Virtual Assistant",
+      "icon": "📋",
+      "description": "Support businesses globally",
+      "platformCount": 20
+    },
+    {
+      "name": "Translation",
+      "icon": "🌐",
+      "description": "Translate for global clients",
+      "platformCount": 10
+    }
+  ],
+  "globalPlatformsTitle": "🌍 Best Global Earning Platforms",
+  "globalPlatforms": [
+    {
+      "name": "Upwork",
+      "icon": "🌐",
+      "description": "World's largest freelance marketplace - available in over 180 countries",
+      "availableCountries": ["USA", "UK", "Canada", "Australia", "India", "Philippines", "180+ countries"],
+      "earningMethods": ["Freelancing", "Contract Work", "Hourly Projects"],
+      "earningPotential": "$20-100/hour",
+      "payoutMethods": ["PayPal", "Wire Transfer", "Payoneer", "Direct Deposit"],
+      "minimumPayout": "$10",
+      "rating": 4.5,
+      "steps": [
+        "Create a free Upwork account",
+        "Complete your profile with skills",
+        "Browse available jobs worldwide",
+        "Submit proposals to clients",
+        "Get paid upon completion"
+      ],
+      "tips": [
+        "Start with smaller projects to build reputation",
+        "Complete your profile 100%",
+        "Take skill tests to stand out",
+        "Respond quickly to client messages"
+      ],
+      "link": "/worldwide/upwork",
+      "isFeatured": true
+    },
+    {
+      "name": "Fiverr",
+      "icon": "🎯",
+      "description": "Sell digital services starting at $5 - global marketplace",
+      "availableCountries": ["Worldwide - 160+ countries"],
+      "earningMethods": ["Gig Selling", "Digital Services", "Custom Offers"],
+      "earningPotential": "$10-500/gig",
+      "payoutMethods": ["PayPal", "Fiverr Revenue Card", "Direct Deposit"],
+      "minimumPayout": "$10",
+      "rating": 4.4,
+      "steps": [
+        "Sign up for Fiverr",
+        "Create your first gig",
+        "Set your pricing",
+        "Promote your services",
+        "Get paid when orders complete"
+      ],
+      "tips": [
+        "Create multiple gigs for different services",
+        "Use attractive gig images",
+        "Respond to messages within 24 hours",
+        "Deliver high-quality work"
+      ],
+      "link": "/worldwide/fiverr",
+      "isFeatured": true
+    },
+    {
+      "name": "Appen",
+      "icon": "📱",
+      "description": "Global microtask and data annotation platform",
+      "availableCountries": ["130+ countries worldwide"],
+      "earningMethods": ["Micro Tasks", "Data Annotation", "Search Evaluation"],
+      "earningPotential": "$10-20/hour",
+      "payoutMethods": ["PayPal", "Payoneer", "Direct Deposit"],
+      "minimumPayout": "$10",
+      "rating": 4.3,
+      "steps": [
+        "Apply on Appen website",
+        "Complete qualification tests",
+        "Choose available projects",
+        "Complete tasks accurately",
+        "Get paid monthly"
+      ],
+      "tips": [
+        "Apply for multiple projects",
+        "Be consistent with quality",
+        "Complete training thoroughly",
+        "Check for new projects regularly"
+      ],
+      "link": "/worldwide/appen",
+      "isFeatured": false
+    },
+    {
+      "name": "Clickworker",
+      "icon": "✅",
+      "description": "Global microtask platform - available internationally",
+      "availableCountries": ["130+ countries"],
+      "earningMethods": ["Micro Tasks", "Text Creation", "Data Entry", "Surveys"],
+      "earningPotential": "$5-15/hour",
+      "payoutMethods": ["PayPal", "Payoneer"],
+      "minimumPayout": "$5",
+      "rating": 4.2,
+      "steps": [
+        "Register on Clickworker",
+        "Complete profile and assessments",
+        "Browse available tasks",
+        "Complete tasks accurately",
+        "Withdraw earnings weekly"
+      ],
+      "tips": [
+        "Complete all assessments for better tasks",
+        "Check for new tasks daily",
+        "Focus on higher-paying jobs",
+        "Maintain high quality rating"
+      ],
+      "link": "/worldwide/clickworker",
+      "isFeatured": false
+    }
+  ],
+  "countrySpecificTitle": "📍 Earning Opportunities by Region",
+  "countrySpecific": [
+    {
+      "country": "United States",
+      "platforms": ["Upwork", "Fiverr", "Appen", "Clickworker", "Amazon MTurk"],
+      "earningPotential": "$500-3000/month",
+      "popularMethods": ["Freelancing", "Micro Tasks", "Online Surveys"],
+      "flag": "🇺🇸"
+    },
+    {
+      "country": "United Kingdom",
+      "platforms": ["Upwork", "Fiverr", "Appen", "Clickworker", "PeoplePerHour"],
+      "earningPotential": "$400-2500/month",
+      "popularMethods": ["Freelancing", "Virtual Assistant", "Online Teaching"],
+      "flag": "🇬🇧"
+    },
+    {
+      "country": "India",
+      "platforms": ["Upwork", "Fiverr", "Appen", "Clickworker", "Truelancer"],
+      "earningPotential": "$200-1500/month",
+      "popularMethods": ["Freelancing", "Data Entry", "Virtual Assistant"],
+      "flag": "🇮🇳"
+    },
+    {
+      "country": "Philippines",
+      "platforms": ["Upwork", "Fiverr", "Appen", "OnlineJobs.ph"],
+      "earningPotential": "$300-2000/month",
+      "popularMethods": ["Virtual Assistant", "Freelancing", "Customer Support"],
+      "flag": "🇵🇭"
+    }
+  ],
+  "comparisonTitle": "📊 Compare Global Platforms",
+  "comparison": {
+    "description": "Find the best platform for your location and skills",
+    "items": [
+      {
+        "platform": "Upwork",
+        "globalAvailability": "180+ countries",
+        "earningPotential": "$20-100/hour",
+        "payoutMethods": "PayPal, Payoneer, Wire",
+        "easeOfUse": "Medium"
+      },
+      {
+        "platform": "Fiverr",
+        "globalAvailability": "160+ countries",
+        "earningPotential": "$10-500/gig",
+        "payoutMethods": "PayPal, Direct Deposit",
+        "easeOfUse": "Easy"
+      },
+      {
+        "platform": "Appen",
+        "globalAvailability": "130+ countries",
+        "earningPotential": "$10-20/hour",
+        "payoutMethods": "PayPal, Payoneer",
+        "easeOfUse": "Easy"
+      },
+      {
+        "platform": "Clickworker",
+        "globalAvailability": "130+ countries",
+        "earningPotential": "$5-15/hour",
+        "payoutMethods": "PayPal, Payoneer",
+        "easeOfUse": "Very Easy"
+      }
+    ]
+  },
+  "successStoriesTitle": "🌟 Global Success Stories",
+  "successStories": [
+    {
+      "name": "Miguel R.",
+      "country": "Mexico",
+      "earnings": "2,500",
+      "platform": "Upwork",
+      "story": "Started freelancing on Upwork from Mexico. Now earning $2,500/month working with US clients.",
+      "flag": "🇲🇽"
+    },
+    {
+      "name": "Priya K.",
+      "country": "India",
+      "earnings": "1,800",
+      "platform": "Fiverr",
+      "story": "Sell graphic design services on Fiverr to clients worldwide. Made $1,800 last month!",
+      "flag": "🇮🇳"
+    },
+    {
+      "name": "John M.",
+      "country": "Kenya",
+      "earnings": "1,200",
+      "platform": "Appen",
+      "story": "Working on Appen microtasks from Kenya. Earn $1,200/month consistently.",
+      "flag": "🇰🇪"
+    }
+  ],
+  "tipsTitle": "💡 Tips for Global Online Earning",
+  "tips": [
+    {
+      "title": "Build a Strong Profile",
+      "description": "Complete your profile 100% with skills, experience, and portfolio samples.",
+      "icon": "📝"
+    },
+    {
+      "title": "Learn Global Payment Methods",
+      "description": "Set up PayPal, Payoneer, or Wise to receive international payments easily.",
+      "icon": "💰"
+    },
+    {
+      "title": "Work in Your Time Zone",
+      "description": "Find clients and tasks that match your available hours.",
+      "icon": "⏰"
+    },
+    {
+      "title": "Build Your Reputation",
+      "description": "Positive reviews help you earn more and attract better clients.",
+      "icon": "⭐"
+    }
+  ],
+  "earningsCalculator": {
+    "title": "Calculate Your Global Earning Potential",
+    "description": "See how much you could earn based on your country and skills",
+    "buttonText": "Try Calculator"
+  },
+  "resourcesTitle": "Global Earning Resources",
+  "resources": [
+    {
+      "title": "How to Receive International Payments",
+      "description": "Guide to PayPal, Payoneer, and Wise",
+      "readTime": "8 min",
+      "link": "/resource/international-payments"
+    },
+    {
+      "title": "Freelancing for Non-Native English Speakers",
+      "description": "Tips for success in global marketplaces",
+      "readTime": "10 min",
+      "link": "/resource/freelancing-non-native"
+    },
+    {
+      "title": "Avoiding Global Scams",
+      "description": "How to identify legitimate worldwide opportunities",
+      "readTime": "6 min",
+      "link": "/resource/global-scams"
+    }
+  ],
+  "faq": {
+    "title": "Earn Money Online Worldwide FAQ - {country}",
+    "items": [
+      {
+        "question": "Can I really earn money online from any country?",
+        "answer": "Yes! Many global platforms accept users from 130+ countries. While some platforms are region-restricted, there are plenty of worldwide opportunities available."
+      },
+      {
+        "question": "How do I receive international payments?",
+        "answer": "Most global platforms use PayPal, Payoneer, or Wise. These services allow you to receive payments in multiple currencies and withdraw to your local bank."
+      },
+      {
+        "question": "Which platform is best for beginners worldwide?",
+        "answer": "Fiverr and Clickworker are great for beginners - they're easy to use and available in most countries. Start with small tasks to build confidence."
+      },
+      {
+        "question": "Do I need to speak perfect English?",
+        "answer": "Not necessarily. Many tasks require basic English only. Some platforms also offer work in Spanish, French, German, and other languages."
+      },
+      {
+        "question": "How much can I earn from developing countries?",
+        "answer": "Earnings vary, but many earn $200-1500/month working part-time. Full-time freelancers can earn $2000-5000+ depending on skills and clients."
+      },
+      {
+        "question": "Are these platforms safe and legitimate?",
+        "answer": "Yes, we only recommend established platforms with millions of users worldwide and proven payment histories. Always read platform policies before starting."
+      }
+    ]
+  },
+  "final": {
+    "title": "Start Earning Worldwide Today",
+    "subtitle": "No matter where you live in {country}, there's an online earning opportunity waiting for you",
+    "buttonText": "Explore Global Platforms"
+  }
+}
