@@ -1,0 +1,255 @@
+{
+  "seo": {
+    "title": "Cashback Shopping in {country} - Earn Up to 15% Back on Every Purchase | Cashog",
+    "description": "Join 200,000+ smart shoppers earning cashback in {country}. Get money back on purchases from 1,000+ stores. Free to join, instant payouts via PayPal!"
+  },
+  "hero": {
+    "title": "Earn Cashback on Every Purchase in {country}",
+    "subtitle": "Join 200,000+ smart shoppers earning cashback in {country}. Shop at 1,000+ stores and get up to 15% back on every purchase. Start earning today!"
+  },
+  "statsTitle": "Trusted by Smart Shoppers",
+  "stats": {
+    "activeUsers": "200K+",
+    "activeUsersLabel": "Active Shoppers",
+    "cashbackEarned": "$50M+",
+    "cashbackEarnedLabel": "Cashback Earned",
+    "avgCashback": "8.5%",
+    "avgCashbackLabel": "Average Cashback",
+    "totalPaid": "$15M+",
+    "totalPaidLabel": "Paid to Members"
+  },
+  "categoriesTitle": "Popular Cashback Categories",
+  "categoriesSubtitle": "Earn cashback on these popular categories",
+  "cashbackCategories": [
+    {
+      "icon": "🛍️",
+      "title": "Fashion & Apparel",
+      "description": "Get cashback on clothing, shoes, and accessories",
+      "rate": "Up to 15%",
+      "stores": 250
+    },
+    {
+      "icon": "💻",
+      "title": "Electronics",
+      "description": "Earn cashback on laptops, phones, and gadgets",
+      "rate": "Up to 10%",
+      "stores": 180
+    },
+    {
+      "icon": "✈️",
+      "title": "Travel & Hotels",
+      "description": "Save on flights, hotels, and vacation packages",
+      "rate": "Up to 12%",
+      "stores": 120
+    },
+    {
+      "icon": "🛒",
+      "title": "Groceries",
+      "description": "Get cashback on everyday grocery shopping",
+      "rate": "Up to 8%",
+      "stores": 95
+    },
+    {
+      "icon": "🏠",
+      "title": "Home & Garden",
+      "description": "Earn on furniture, decor, and home improvement",
+      "rate": "Up to 11%",
+      "stores": 140
+    },
+    {
+      "icon": "💊",
+      "title": "Health & Beauty",
+      "description": "Cashback on skincare, makeup, and wellness",
+      "rate": "Up to 14%",
+      "stores": 110
+    }
+  ],
+  "featuredTitle": "Top Cashback Stores",
+  "featuredSubtitle": "Shop at these stores and earn cashback today",
+  "featuredStores": [
+    {
+      "title": "Amazon",
+      "cashbackRate": "Up to 10%",
+      "minPayout": "No minimum",
+      "payoutTime": "24-48 hours",
+      "category": "General",
+      "rating": "4.9"
+    },
+    {
+      "title": "eBay",
+      "cashbackRate": "Up to 8%",
+      "minPayout": "$5",
+      "payoutTime": "48-72 hours",
+      "category": "Marketplace",
+      "rating": "4.8"
+    },
+    {
+      "title": "Walmart",
+      "cashbackRate": "Up to 12%",
+      "minPayout": "No minimum",
+      "payoutTime": "24 hours",
+      "category": "Retail",
+      "rating": "4.7"
+    },
+    {
+      "title": "Target",
+      "cashbackRate": "Up to 11%",
+      "minPayout": "No minimum",
+      "payoutTime": "24-48 hours",
+      "category": "Retail",
+      "rating": "4.8"
+    },
+    {
+      "title": "Best Buy",
+      "cashbackRate": "Up to 9%",
+      "minPayout": "$5",
+      "payoutTime": "48 hours",
+      "category": "Electronics",
+      "rating": "4.6"
+    },
+    {
+      "title": "Expedia",
+      "cashbackRate": "Up to 15%",
+      "minPayout": "$10",
+      "payoutTime": "72 hours",
+      "category": "Travel",
+      "rating": "4.7"
+    }
+  ],
+  "benefitsTitle": "Why Choose Cashog Cashback",
+  "benefits": [
+    {
+      "icon": "💰",
+      "title": "Highest Rates",
+      "description": "Get the best cashback rates compared to other platforms"
+    },
+    {
+      "icon": "⚡",
+      "title": "Fast Payouts",
+      "description": "Withdraw your earnings quickly via PayPal or bank transfer"
+    },
+    {
+      "icon": "🛡️",
+      "title": "100% Free",
+      "description": "No fees, no hidden costs - completely free to join"
+    },
+    {
+      "icon": "🏪",
+      "title": "1,000+ Stores",
+      "description": "Shop at your favorite stores and earn cashback"
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Your Cashback",
+  "tips": [
+    {
+      "title": "Always Start Here",
+      "description": "Always start your shopping journey from Cashog to ensure you earn cashback on every purchase"
+    },
+    {
+      "title": "Stack Your Savings",
+      "description": "Combine cashback with store coupons and credit card rewards for maximum savings"
+    },
+    {
+      "title": "Check Special Offers",
+      "description": "Look for boosted cashback rates and special promotions for even higher earnings"
+    },
+    {
+      "title": "Refer Friends",
+      "description": "Invite friends to earn bonus cashback on their first purchases"
+    },
+    {
+      "title": "Mobile App Bonus",
+      "description": "Use our mobile app for exclusive cashback offers and higher rates"
+    },
+    {
+      "title": "Seasonal Shopping",
+      "description": "Shop during holidays and sales events for increased cashback percentages"
+    }
+  ],
+  "testimonialsTitle": "Real Members, Real Cashback",
+  "testimonials": [
+    {
+      "name": "Sarah Johnson",
+      "country": "United States",
+      "earnings": "$847",
+      "quote": "I've earned over $800 in cashback just by shopping normally. Cashog is amazing!",
+      "avatar": "SJ"
+    },
+    {
+      "name": "Michael Chen",
+      "country": "Canada",
+      "earnings": "$523",
+      "quote": "The cashback rates are the highest I've found. Fast payouts too!",
+      "avatar": "MC"
+    },
+    {
+      "name": "Emma Williams",
+      "country": "United Kingdom",
+      "earnings": "$1,247",
+      "quote": "I always check Cashog before shopping online. Saved hundreds on Christmas gifts!",
+      "avatar": "EW"
+    },
+    {
+      "name": "David Miller",
+      "country": "Australia",
+      "earnings": "$392",
+      "quote": "Easy to use and actually pays out. Highly recommend!",
+      "avatar": "DM"
+    },
+    {
+      "name": "Lisa Anderson",
+      "country": "United States",
+      "earnings": "$1,856",
+      "quote": "Best cashback site I've ever used. Made back over $1800 in two years!",
+      "avatar": "LA"
+    },
+    {
+      "name": "James Wilson",
+      "country": "Canada",
+      "earnings": "$678",
+      "quote": "The referral program is great. Getting cashback for shopping I'd do anyway.",
+      "avatar": "JW"
+    }
+  ],
+  "faq": {
+    "title": "Cashback Shopping in {country} - FAQ",
+    "items": [
+      {
+        "question": "How does cashback work?",
+        "answer": "When you shop through Cashog, we earn a commission from the store. We share that commission back with you as cashback. Simply click through our links, shop as normal, and we'll track your purchase and add cashback to your account."
+      },
+      {
+        "question": "Is Cashog really free?",
+        "answer": "Yes! Cashog is completely free to join and use. There are no membership fees, subscription costs, or hidden charges. We only make money when you earn cashback, so we're motivated to help you save."
+      },
+      {
+        "question": "How do I get paid?",
+        "answer": "You can withdraw your earnings via PayPal, bank transfer, or gift cards. Most withdrawals are processed within 24-48 hours. The minimum payout is typically $10, but some stores may have different minimums."
+      },
+      {
+        "question": "How long does cashback take to appear?",
+        "answer": "Most cashback appears in your account within 24-72 hours after purchase. Some stores may take longer (up to 30 days) for the return period to expire. This protects against returns and cancellations."
+      },
+      {
+        "question": "Can I use coupons with cashback?",
+        "answer": "Yes! In most cases, you can stack cashback with store coupons, promo codes, and even credit card rewards. Just make sure you start from Cashog first and don't use third-party coupon sites that might override our tracking."
+      },
+      {
+        "question": "Is cashback available on mobile?",
+        "answer": "Absolutely! Download our mobile app for iOS and Android to earn cashback on the go. The app often features exclusive deals and boosted cashback rates you won't find on desktop."
+      },
+      {
+        "question": "What stores offer cashback?",
+        "answer": "We work with over 1,000 stores including Amazon, Walmart, Target, eBay, Best Buy, Expedia, and many more. New stores are added regularly. Check our website or app for the complete list."
+      },
+      {
+        "question": "What if my cashback doesn't track?",
+        "answer": "If your cashback doesn't appear within 7 days, you can submit a missing cashback claim through your account dashboard. Our support team will investigate and add the cashback manually if the purchase qualified."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Start Earning Cashback in {country}?",
+    "subtitle": "Join 200,000+ smart shoppers already earning cashback in {country}. Sign up for free and start getting money back on your purchases today!"
+  }
+}
