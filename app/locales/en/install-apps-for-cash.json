@@ -1,0 +1,369 @@
+{
+  "seo": {
+    "title": "Install Apps for Cash - Earn Money by Downloading Apps in {country} | Cashog",
+    "description": "Get paid to install and try new apps in {country}. Earn cash rewards, gift cards, and bonuses for downloading and testing mobile apps. Start earning today!"
+  },
+  "hero": {
+    "title": "Get Paid to Install Apps",
+    "subtitle": "Earn real cash rewards just for downloading and trying new apps in {country}. No investment required - start earning today with our trusted app partners."
+  },
+  "categoryTitle": "Browse Earning Categories",
+  "categories": [
+    {
+      "name": "Survey Apps",
+      "icon": "📋",
+      "description": "Get paid for your opinions",
+      "appCount": 45
+    },
+    {
+      "name": "Gaming Apps",
+      "icon": "🎮",
+      "description": "Earn while playing games",
+      "appCount": 78
+    },
+    {
+      "name": "Shopping Apps",
+      "icon": "🛍️",
+      "description": "Cashback on purchases",
+      "appCount": 32
+    },
+    {
+      "name": "Cashback Apps",
+      "icon": "💰",
+      "description": "Get money back on spending",
+      "appCount": 28
+    },
+    {
+      "name": "Fitness Apps",
+      "icon": "🏃",
+      "description": "Get paid to stay active",
+      "appCount": 15
+    },
+    {
+      "name": "Micro Tasks",
+      "icon": "✅",
+      "description": "Small tasks, quick cash",
+      "appCount": 56
+    }
+  ],
+  "featuredAppsTitle": "🌟 Featured Cash Apps",
+  "featuredApps": [
+    {
+      "name": "Swagbucks",
+      "logo": "💰",
+      "payoutAmount": "$5 - $100+",
+      "description": "Earn points for surveys, shopping, watching videos, and more",
+      "requirements": ["Download app", "Create free account", "Complete simple tasks"],
+      "platform": ["iOS", "Android", "Web"],
+      "rating": 4.5,
+      "link": "/app/swagbucks",
+      "isFeatured": true
+    },
+    {
+      "name": "Mistplay",
+      "logo": "🎮",
+      "payoutAmount": "$5 - $50",
+      "description": "Get paid to play mobile games",
+      "requirements": ["Download app", "Play games", "Earn units for playtime"],
+      "platform": ["Android"],
+      "rating": 4.3,
+      "link": "/app/mistplay",
+      "isFeatured": true
+    },
+    {
+      "name": "Fetch Rewards",
+      "logo": "📸",
+      "payoutAmount": "$5 - $20",
+      "description": "Earn points by scanning grocery receipts",
+      "requirements": ["Download app", "Scan receipts", "Get points for purchases"],
+      "platform": ["iOS", "Android"],
+      "rating": 4.7,
+      "link": "/app/fetch-rewards",
+      "isFeatured": true
+    }
+  ],
+  "highestPayingTitle": "💎 Highest Paying Apps",
+  "highestPaying": [
+    {
+      "name": "UserTesting",
+      "logo": "📱",
+      "payoutAmount": "$10 - $60 per test",
+      "description": "Test websites and apps, provide feedback",
+      "requirements": ["Complete sample test", "Speak thoughts aloud", "Record screen"],
+      "platform": ["iOS", "Android", "Desktop"],
+      "rating": 4.8,
+      "link": "/app/usertesting"
+    },
+    {
+      "name": "Dscout",
+      "logo": "🎥",
+      "payoutAmount": "$50 - $200+",
+      "description": "Video diary studies and missions",
+      "requirements": ["Apply for studies", "Complete video entries", "Share experiences"],
+      "platform": ["iOS", "Android"],
+      "rating": 4.6,
+      "link": "/app/dscout"
+    },
+    {
+      "name": "Respondent",
+      "logo": "👥",
+      "payoutAmount": "$50 - $500",
+      "description": "Paid research studies and interviews",
+      "requirements": ["Qualify for studies", "Schedule interviews", "Share expertise"],
+      "platform": ["Web"],
+      "rating": 4.9,
+      "link": "/app/respondent"
+    }
+  ],
+  "quickEarningsTitle": "⚡ Quick Earnings",
+  "quickEarnings": [
+    {
+      "title": "Download & Open App",
+      "description": "Install and open any featured app",
+      "reward": "$0.50 - $2",
+      "timeToComplete": "2-5 minutes",
+      "difficulty": "Easy",
+      "category": "Install",
+      "link": "/offer/download-open"
+    },
+    {
+      "title": "Complete Profile",
+      "description": "Fill out your profile information",
+      "reward": "$1 - $5",
+      "timeToComplete": "5-10 minutes",
+      "difficulty": "Easy",
+      "category": "Profile",
+      "link": "/offer/complete-profile"
+    },
+    {
+      "title": "First Survey",
+      "description": "Complete your first paid survey",
+      "reward": "$3 - $10",
+      "timeToComplete": "10-20 minutes",
+      "difficulty": "Medium",
+      "category": "Survey",
+      "link": "/offer/first-survey"
+    }
+  ],
+  "surveyAppsTitle": "📋 Best Survey Apps",
+  "surveyApps": [
+    {
+      "name": "Survey Junkie",
+      "logo": "📝",
+      "payoutAmount": "$1 - $3 per survey",
+      "description": "Share your opinions and earn points",
+      "requirements": ["Create account", "Complete profile", "Take surveys"],
+      "platform": ["iOS", "Android", "Web"],
+      "rating": 4.4,
+      "link": "/app/survey-junkie"
+    },
+    {
+      "name": "InboxDollars",
+      "logo": "📧",
+      "payoutAmount": "$0.50 - $5 per survey",
+      "description": "Get paid for surveys, emails, and offers",
+      "requirements": ["Sign up free", "Complete offers", "Cash out at $30"],
+      "platform": ["iOS", "Android"],
+      "rating": 4.2,
+      "link": "/app/inboxdollars"
+    }
+  ],
+  "gamingAppsTitle": "🎮 Gaming Apps That Pay",
+  "gamingApps": [
+    {
+      "name": "Lucktastic",
+      "logo": "🍀",
+      "payoutAmount": "$0.10 - $100",
+      "description": "Free scratch cards and games",
+      "requirements": ["Download app", "Play scratch cards", "Win prizes"],
+      "platform": ["iOS", "Android"],
+      "rating": 4.1,
+      "link": "/app/lucktastic"
+    },
+    {
+      "name": "Cash'em All",
+      "logo": "💵",
+      "payoutAmount": "$0.10 - $5 per game",
+      "description": "Play games and earn real money",
+      "requirements": ["Download games", "Reach milestones", "Cash out"],
+      "platform": ["Android"],
+      "rating": 4.3,
+      "link": "/app/cashem-all"
+    }
+  ],
+  "shoppingAppsTitle": "🛍️ Shopping & Cashback Apps",
+  "shoppingApps": [
+    {
+      "name": "Ibotta",
+      "logo": "💰",
+      "payoutAmount": "$0.20 - $20",
+      "description": "Cashback on groceries and shopping",
+      "requirements": ["Browse offers", "Upload receipts", "Earn cashback"],
+      "platform": ["iOS", "Android"],
+      "rating": 4.7,
+      "link": "/app/ibotta"
+    },
+    {
+      "name": "Rakuten",
+      "logo": "🛒",
+      "payoutAmount": "1-15% cashback",
+      "description": "Shop through app and earn cashback",
+      "requirements": ["Install browser extension", "Shop at stores", "Get paid quarterly"],
+      "platform": ["iOS", "Android", "Web"],
+      "rating": 4.8,
+      "link": "/app/rakuten"
+    }
+  ],
+  "tipsTitle": "Smart Earning Tips",
+  "tips": [
+    {
+      "title": "Use a Dedicated Email",
+      "description": "Create a separate email for earning apps to manage offers and avoid spam.",
+      "icon": "📧"
+    },
+    {
+      "title": "Check Daily",
+      "description": "New offers appear regularly. Check apps daily for the best earning opportunities.",
+      "icon": "📅"
+    },
+    {
+      "title": "Refer Friends",
+      "description": "Most apps offer generous referral bonuses. Share your code with friends.",
+      "icon": "👥"
+    },
+    {
+      "title": "Stack Multiple Apps",
+      "description": "Use several apps simultaneously to maximize your earning potential.",
+      "icon": "📚"
+    }
+  ],
+  "earningsCalculator": {
+    "title": "Calculate Your Potential Earnings",
+    "description": "See how much you could earn monthly with different apps and activities",
+    "buttonText": "Try Calculator"
+  },
+  "compareTitle": "Compare Top Earning Apps",
+  "compare": {
+    "description": "Find the best app for your earning goals",
+    "items": [
+      {
+        "name": "Swagbucks",
+        "payout": "$100+/month",
+        "timeToPayout": "3-5 days",
+        "minimumPayout": "$5",
+        "rating": 4.5
+      },
+      {
+        "name": "Mistplay",
+        "payout": "$30-50/month",
+        "timeToPayout": "1-2 days",
+        "minimumPayout": "$5",
+        "rating": 4.3
+      },
+      {
+        "name": "UserTesting",
+        "payout": "$200-500/month",
+        "timeToPayout": "7 days",
+        "minimumPayout": "$10",
+        "rating": 4.8
+      }
+    ]
+  },
+  "referralBonusesTitle": "🤝 Best Referral Bonuses",
+  "referralBonuses": [
+    {
+      "app": "Swagbucks",
+      "bonusAmount": "$10",
+      "requirement": "Friend earns 300 SB",
+      "link": "/refer/swagbucks"
+    },
+    {
+      "app": "Ibotta",
+      "bonusAmount": "$5",
+      "requirement": "Friend redeems first offer",
+      "link": "/refer/ibotta"
+    },
+    {
+      "app": "Fetch Rewards",
+      "bonusAmount": "$2",
+      "requirement": "Friend scans first receipt",
+      "link": "/refer/fetch"
+    }
+  ],
+  "earningGuidesTitle": "Earning Guides",
+  "earningGuides": [
+    {
+      "title": "How to Maximize App Earnings",
+      "description": "Proven strategies to earn more from cash apps",
+      "readTime": "8 min",
+      "link": "/guide/maximize-earnings"
+    },
+    {
+      "title": "Avoiding Scams",
+      "description": "How to identify legitimate earning apps",
+      "readTime": "6 min",
+      "link": "/guide/avoid-scams"
+    },
+    {
+      "title": "Tax Guide for App Earnings",
+      "description": "Understanding taxes on your side income",
+      "readTime": "10 min",
+      "link": "/guide/tax-guide"
+    }
+  ],
+  "successStoriesTitle": "🌟 Success Stories",
+  "successStories": [
+    {
+      "name": "Sarah M.",
+      "amount": "450",
+      "story": "I earned $450 last month just by using cashback apps and taking surveys during my commute!",
+      "app": "Multiple Apps"
+    },
+    {
+      "name": "Mike T.",
+      "amount": "200",
+      "story": "Playing games on Mistplay earned me over $200 in gift cards. It's like getting paid to have fun!",
+      "app": "Mistplay"
+    },
+    {
+      "name": "Jessica R.",
+      "amount": "100",
+      "story": "Scanning my grocery receipts with Fetch and Ibotta saves me about $100 every month.",
+      "app": "Fetch + Ibotta"
+    }
+  ],
+  "faq": {
+    "title": "Install Apps for Cash FAQ - {country}",
+    "items": [
+      {
+        "question": "Are these apps really free to use?",
+        "answer": "Yes! All the apps we list are completely free to download and use. Never pay to start earning money."
+      },
+      {
+        "question": "How much money can I actually make?",
+        "answer": "Earnings vary by app and time invested. Some users make $50-100/month casually, while dedicated users can earn $500+ monthly."
+      },
+      {
+        "question": "How do I get paid?",
+        "answer": "Most apps offer PayPal cash, gift cards (Amazon, Visa, etc.), or direct deposit. Minimum payout thresholds typically range from $5-20."
+      },
+      {
+        "question": "Are these apps safe?",
+        "answer": "We only recommend legitimate, vetted apps. Always read reviews and never share sensitive information like your Social Security number unless verified."
+      },
+      {
+        "question": "Can I use multiple apps at once?",
+        "answer": "Absolutely! Using several apps simultaneously is the best way to maximize your earnings."
+      },
+      {
+        "question": "Do I need to pay taxes on earnings?",
+        "answer": "Yes, app earnings are considered taxable income. Keep track of your earnings and consult a tax professional."
+      }
+    ]
+  },
+  "final": {
+    "title": "Start Earning Cash Today",
+    "subtitle": "Join thousands of users who earn real money by installing and trying new apps",
+    "buttonText": "Browse All Apps"
+  }
+}
