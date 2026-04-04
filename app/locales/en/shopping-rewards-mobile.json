@@ -1,0 +1,425 @@
+{
+  "seo": {
+    "title": "Mobile Phone Cashback - Earn Up to 15% Back on Smartphones in {country} | Cashog",
+    "description": "Shop mobile phones with cashback in {country}. Earn up to 15% back on iPhones, Samsung Galaxy, Google Pixel, and more. Get the best deals on smartphones and plans."
+  },
+  "hero": {
+    "title": "Earn Cashback on Mobile Phones",
+    "subtitle": "Upgrade your phone and save money. Earn up to 15% cashback on the latest smartphones from Apple, Samsung, Google, and more in {country}. Plus earn cashback on mobile plans and accessories."
+  },
+  "categoryTitle": "Shop by Category",
+  "categories": [
+    {
+      "name": "iPhone",
+      "icon": "📱",
+      "description": "Latest iPhone models and accessories",
+      "storeCount": 25
+    },
+    {
+      "name": "Samsung Galaxy",
+      "icon": "📱",
+      "description": "Galaxy S, Z Fold, and Note series",
+      "storeCount": 22
+    },
+    {
+      "name": "Google Pixel",
+      "icon": "📱",
+      "description": "Pixel phones with pure Android",
+      "storeCount": 18
+    },
+    {
+      "name": "OnePlus",
+      "icon": "📱",
+      "description": "Flagship killers and fast charging",
+      "storeCount": 15
+    },
+    {
+      "name": "Mobile Plans",
+      "icon": "📡",
+      "description": "Postpaid, prepaid, and family plans",
+      "storeCount": 20
+    },
+    {
+      "name": "Accessories",
+      "icon": "🎧",
+      "description": "Cases, chargers, headphones, and more",
+      "storeCount": 35
+    }
+  ],
+  "featuredStoresTitle": "Top Mobile Phone Stores",
+  "featuredStores": [
+    {
+      "name": "Apple",
+      "logo": "🍎",
+      "cashbackRate": "Up to 5%",
+      "description": "iPhone, iPad, Mac, and official accessories",
+      "categories": ["iPhone", "iPad", "Accessories", "Watches"],
+      "features": ["Student discount", "Trade-in program", "Free engraving"],
+      "link": "/store/apple"
+    },
+    {
+      "name": "Samsung",
+      "logo": "⭐",
+      "cashbackRate": "Up to 8%",
+      "description": "Galaxy smartphones, tablets, and wearables",
+      "categories": ["Galaxy S", "Galaxy Z", "Tablets", "Watches"],
+      "features": ["Pre-order bonuses", "Trade-in deals", "Financing"],
+      "link": "/store/samsung"
+    },
+    {
+      "name": "Google Store",
+      "logo": "🔵",
+      "cashbackRate": "Up to 6%",
+      "description": "Pixel phones, Nest devices, and accessories",
+      "categories": ["Pixel", "Nest", "Accessories"],
+      "features": ["Free shipping", "Device protection", "Trade-in"],
+      "link": "/store/google"
+    },
+    {
+      "name": "Best Buy Mobile",
+      "logo": "🛒",
+      "cashbackRate": "Up to 8%",
+      "description": "Unlocked phones and carrier deals",
+      "categories": ["All brands", "Unlocked phones", "Carrier plans"],
+      "features": ["Price match", "Geek Squad", "Free shipping"],
+      "link": "/store/best-buy-mobile"
+    },
+    {
+      "name": "Amazon Mobile",
+      "logo": "📦",
+      "cashbackRate": "Up to 10%",
+      "description": "Unlocked phones and accessories with fast shipping",
+      "categories": ["Unlocked phones", "Cases", "Chargers"],
+      "features": ["Prime shipping", "30-day returns", "Price tracking"],
+      "link": "/store/amazon-mobile"
+    },
+    {
+      "name": "OnePlus",
+      "logo": "⚡",
+      "cashbackRate": "Up to 7%",
+      "description": "Fast and smooth flagship killers",
+      "categories": ["OnePlus phones", "Accessories", "Buds"],
+      "features": ["Free shipping", "Student discount", "Trade-in"],
+      "link": "/store/oneplus"
+    }
+  ],
+  "topDealsTitle": "Hot Mobile Phone Deals",
+  "topDeals": [
+    {
+      "title": "iPhone 15 Pro Max",
+      "description": "A17 Pro chip, Titanium design, 5x zoom",
+      "originalPrice": "$1,199",
+      "salePrice": "$1,099",
+      "cashbackRate": "5%",
+      "store": "Apple",
+      "image": "📱",
+      "link": "/deal/iphone-15-pro-max"
+    },
+    {
+      "title": "Samsung Galaxy S24 Ultra",
+      "description": "AI-powered, 200MP camera, S Pen included",
+      "originalPrice": "$1,299",
+      "salePrice": "$1,199",
+      "cashbackRate": "8%",
+      "store": "Samsung",
+      "image": "📱",
+      "link": "/deal/galaxy-s24-ultra"
+    },
+    {
+      "title": "Google Pixel 8 Pro",
+      "description": "Tensor G3, AI features, best Android camera",
+      "originalPrice": "$999",
+      "salePrice": "$899",
+      "cashbackRate": "6%",
+      "store": "Google",
+      "image": "📱",
+      "link": "/deal/pixel-8-pro"
+    },
+    {
+      "title": "OnePlus 12",
+      "description": "Snapdragon 8 Gen 3, 100W charging",
+      "originalPrice": "$799",
+      "salePrice": "$749",
+      "cashbackRate": "7%",
+      "store": "OnePlus",
+      "image": "📱",
+      "link": "/deal/oneplus-12"
+    },
+    {
+      "title": "Samsung Galaxy Z Fold 5",
+      "description": "Foldable display, multitasking powerhouse",
+      "originalPrice": "$1,799",
+      "salePrice": "$1,599",
+      "cashbackRate": "8%",
+      "store": "Samsung",
+      "image": "📱",
+      "link": "/deal/galaxy-z-fold-5"
+    },
+    {
+      "title": "iPhone 15 Plus",
+      "description": "A16 chip, Dynamic Island, great battery",
+      "originalPrice": "$899",
+      "salePrice": "$799",
+      "cashbackRate": "5%",
+      "store": "Apple",
+      "image": "📱",
+      "link": "/deal/iphone-15-plus"
+    }
+  ],
+  "tipsTitle": "Smart Mobile Shopping Tips",
+  "tips": [
+    {
+      "title": "Trade In Your Old Phone",
+      "description": "Get extra value by trading in your old device when buying new.",
+      "icon": "🔄"
+    },
+    {
+      "title": "Compare Carrier Deals",
+      "description": "Check promotions from different carriers before committing.",
+      "icon": "📊"
+    },
+    {
+      "title": "Consider Unlocked",
+      "description": "Unlocked phones offer flexibility to switch carriers anytime.",
+      "icon": "🔓"
+    },
+    {
+      "title": "Check Refurbished",
+      "description": "Certified refurbished phones can save you hundreds.",
+      "icon": "✅"
+    }
+  ],
+  "compareTitle": "Compare Cashback Rates",
+  "compare": {
+    "description": "See how much you can earn at top mobile stores",
+    "stores": [
+      {
+        "name": "Apple",
+        "cashbackRate": "Up to 5%",
+        "shippingTime": "2-5 days",
+        "returnPolicy": "14 days",
+        "warranty": "1 year",
+        "rating": 4.8
+      },
+      {
+        "name": "Samsung",
+        "cashbackRate": "Up to 8%",
+        "shippingTime": "3-6 days",
+        "returnPolicy": "15 days",
+        "warranty": "1 year",
+        "rating": 4.6
+      },
+      {
+        "name": "Google Store",
+        "cashbackRate": "Up to 6%",
+        "shippingTime": "2-4 days",
+        "returnPolicy": "15 days",
+        "warranty": "1 year",
+        "rating": 4.5
+      },
+      {
+        "name": "Best Buy",
+        "cashbackRate": "Up to 8%",
+        "shippingTime": "1-3 days",
+        "returnPolicy": "15 days",
+        "warranty": "1 year",
+        "rating": 4.4
+      },
+      {
+        "name": "Amazon",
+        "cashbackRate": "Up to 10%",
+        "shippingTime": "1-2 days",
+        "returnPolicy": "30 days",
+        "warranty": "Varies",
+        "rating": 4.7
+      }
+    ]
+  },
+  "carriersTitle": "Mobile Carrier Cashback",
+  "carriers": [
+    {
+      "name": "Verizon",
+      "logo": "🔴",
+      "cashbackRate": "Up to $200",
+      "description": "America's most reliable 5G network",
+      "plans": ["Unlimited Plus", "Unlimited Ultimate", "Welcome Unlimited"],
+      "link": "/carrier/verizon"
+    },
+    {
+      "name": "T-Mobile",
+      "logo": "🟣",
+      "cashbackRate": "Up to $150",
+      "description": "5G leader with amazing perks",
+      "plans": ["Go5G Plus", "Go5G Next", "Essentials"],
+      "link": "/carrier/t-mobile"
+    },
+    {
+      "name": "AT&T",
+      "logo": "🔵",
+      "cashbackRate": "Up to $180",
+      "description": "Nationwide coverage and HBO Max included",
+      "plans": ["Unlimited Premium", "Unlimited Extra", "Unlimited Starter"],
+      "link": "/carrier/att"
+    },
+    {
+      "name": "Mint Mobile",
+      "logo": "🟢",
+      "cashbackRate": "Up to $50",
+      "description": "Affordable prepaid plans on T-Mobile network",
+      "plans": ["3-month", "6-month", "12-month"],
+      "link": "/carrier/mint-mobile"
+    },
+    {
+      "name": "Visible",
+      "logo": "🔵",
+      "cashbackRate": "Up to $20",
+      "description": "Verizon's digital-only prepaid brand",
+      "plans": ["Visible", "Visible+", "Party Pay"],
+      "link": "/carrier/visible"
+    },
+    {
+      "name": "Google Fi",
+      "logo": "🔵",
+      "cashbackRate": "Up to $100",
+      "description": "Smart network switching and international coverage",
+      "plans": ["Simply Unlimited", "Unlimited Plus", "Flexible"],
+      "link": "/carrier/google-fi"
+    }
+  ],
+  "tradeIn": {
+    "title": "Trade In Your Old Phone",
+    "description": "Get extra cashback when you trade in your old device. Many stores offer trade-in credits that can be combined with our cashback.",
+    "buttonText": "Check Trade-In Value"
+  },
+  "unlockedVsCarrier": {
+    "title": "Unlocked vs Carrier Phones",
+    "description": "Which is right for you?",
+    "benefits": [
+      {
+        "title": "Unlocked Phones",
+        "description": "Freedom to switch carriers anytime, no contracts, no bloatware, higher resale value, and often work internationally. Pay full price upfront or through manufacturer financing."
+      },
+      {
+        "title": "Carrier Phones",
+        "description": "Lower upfront costs with installment plans, carrier promotions (BOGO, trade-in deals), easy financing, and guaranteed network compatibility. May include bloatware and be locked to carrier."
+      }
+    ]
+  },
+  "brandSpotlightTitle": "Brand Spotlight",
+  "brandSpotlight": [
+    {
+      "name": "Apple iPhone",
+      "logo": "🍎",
+      "description": "Premium smartphones with industry-leading performance, camera quality, and ecosystem integration. Known for long software support and high resale value.",
+      "cashbackRate": "Up to 5%",
+      "featuredProducts": ["iPhone 15 Pro", "iPhone 15 Plus", "iPhone 15", "iPhone 14"],
+      "link": "/brand/apple"
+    },
+    {
+      "name": "Samsung Galaxy",
+      "logo": "⭐",
+      "description": "Innovative Android phones featuring beautiful displays, versatile cameras, and S Pen functionality on Ultra models. Leader in foldable technology.",
+      "cashbackRate": "Up to 8%",
+      "featuredProducts": ["Galaxy S24 Ultra", "Galaxy Z Fold 5", "Galaxy S24+", "Galaxy Z Flip 5"],
+      "link": "/brand/samsung"
+    },
+    {
+      "name": "Google Pixel",
+      "logo": "🔵",
+      "description": "Pure Android experience with exclusive AI features, best-in-class computational photography, and guaranteed updates directly from Google.",
+      "cashbackRate": "Up to 6%",
+      "featuredProducts": ["Pixel 8 Pro", "Pixel 8", "Pixel 7a", "Pixel Fold"],
+      "link": "/brand/google"
+    },
+    {
+      "name": "OnePlus",
+      "logo": "⚡",
+      "description": "Flagship performance at competitive prices. Known for ultra-fast charging, smooth 120Hz displays, and clean OxygenOS software.",
+      "cashbackRate": "Up to 7%",
+      "featuredProducts": ["OnePlus 12", "OnePlus Open", "OnePlus 12R", "OnePlus Nord N30"],
+      "link": "/brand/oneplus"
+    }
+  ],
+  "accessoriesTitle": "Mobile Accessories",
+  "accessories": [
+    {
+      "name": "Cases",
+      "logo": "🛡️",
+      "cashbackRate": "Up to 12%",
+      "description": "Protective cases, clear cases, and designer covers",
+      "categories": ["iPhone", "Samsung", "Pixel", "Universal"],
+      "link": "/accessories/cases"
+    },
+    {
+      "name": "Chargers",
+      "logo": "⚡",
+      "cashbackRate": "Up to 10%",
+      "description": "Fast chargers, wireless pads, and power banks",
+      "categories": ["USB-C", "MagSafe", "Wireless", "Car chargers"],
+      "link": "/accessories/chargers"
+    },
+    {
+      "name": "Audio",
+      "logo": "🎧",
+      "cashbackRate": "Up to 15%",
+      "description": "Earbuds, headphones, and Bluetooth speakers",
+      "categories": ["True wireless", "Over-ear", "Neckband"],
+      "link": "/accessories/audio"
+    },
+    {
+      "name": "Screen Protectors",
+      "logo": "🛡️",
+      "cashbackRate": "Up to 8%",
+      "description": "Tempered glass and film screen protectors",
+      "categories": ["Privacy", "Anti-glare", "Sapphire", "Liquid"],
+      "link": "/accessories/screen-protectors"
+    }
+  ],
+  "priceMatch": {
+    "title": "Found a Better Price?",
+    "description": "We'll help you find the best cashback rates on mobile phones. Compare prices across stores and maximize your savings.",
+    "buttonText": "Compare Prices"
+  },
+  "faq": {
+    "title": "Mobile Phone Cashback FAQ - {country}",
+    "items": [
+      {
+        "question": "Can I earn cashback on mobile phone plans?",
+        "answer": "Yes! Many carriers offer cashback on new plans, upgrades, and even monthly bills. Check individual carrier terms for details."
+      },
+      {
+        "question": "Do trade-in phones qualify for cashback?",
+        "answer": "Yes, the net purchase price after trade-in typically qualifies for cashback. Some stores also offer additional cashback on trade-ins."
+      },
+      {
+        "question": "How long does mobile cashback take to confirm?",
+        "answer": "Mobile phone cashback typically takes 30-60 days to confirm due to return periods and carrier plan verification."
+      },
+      {
+        "question": "Can I combine carrier promotions with cashback?",
+        "answer": "Yes! Most carrier promotions like BOGO deals or port-in credits can be combined with our cashback for maximum savings."
+      },
+      {
+        "question": "Are pre-orders eligible for cashback?",
+        "answer": "Yes, pre-orders are typically eligible for cashback. The cashback will be confirmed after the phone ships and the return period passes."
+      },
+      {
+        "question": "What's better: unlocked or carrier phone?",
+        "answer": "Unlocked phones offer flexibility to switch carriers, while carrier phones may have better upfront deals. Compare total cost including cashback."
+      },
+      {
+        "question": "Can I earn cashback on refurbished phones?",
+        "answer": "Yes! Certified refurbished phones from authorized sellers typically qualify for cashback at the same rates as new phones."
+      },
+      {
+        "question": "Do phone insurance plans earn cashback?",
+        "answer": "Yes, phone protection plans and AppleCare+ added during checkout are usually eligible for cashback."
+      }
+    ]
+  },
+  "final": {
+    "title": "Start Saving on Mobile Phones Today",
+    "subtitle": "Join thousands of smart shoppers earning cashback on their mobile upgrades",
+    "buttonText": "Shop Mobile Phones Now"
+  }
+}
