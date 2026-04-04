@@ -1,0 +1,248 @@
+{
+  "seo": {
+    "title": "Help Center - Cashog Support in {country} | Cashog",
+    "description": "Get help with Cashog in {country}. Find answers to common questions about cashback, account management, and more. Our support center is here to assist you."
+  },
+  "hero": {
+    "title": "How Can We Help You?",
+    "subtitle": "Find answers, guides, and support resources for all your Cashog questions in {country}."
+  },
+  "searchPlaceholder": "Search for help articles...",
+  "popularTopicsTitle": "Popular Topics",
+  "popularTopics": [
+    {
+      "icon": "💰",
+      "title": "How Cashback Works",
+      "description": "Learn how to earn cashback on your purchases",
+      "link": "/help/cashback-guide"
+    },
+    {
+      "icon": "📝",
+      "title": "Account Setup",
+      "description": "Create and manage your Cashog account",
+      "link": "/help/account-setup"
+    },
+    {
+      "icon": "🏧",
+      "title": "Withdrawals",
+      "description": "How to withdraw your earned cashback",
+      "link": "/help/withdrawals"
+    },
+    {
+      "icon": "🔒",
+      "title": "Security & Privacy",
+      "description": "Learn how we protect your information",
+      "link": "/help/security"
+    },
+    {
+      "icon": "🛍️",
+      "title": "Shopping Tips",
+      "description": "Maximize your savings while shopping",
+      "link": "/help/shopping-tips"
+    },
+    {
+      "icon": "❓",
+      "title": "Troubleshooting",
+      "description": "Fix common issues and errors",
+      "link": "/help/troubleshooting"
+    }
+  ],
+  "gettingStartedTitle": "Getting Started with Cashog",
+  "gettingStarted": [
+    {
+      "step": 1,
+      "title": "Create Your Account",
+      "description": "Sign up for free using your email or social media account",
+      "link": "/signup"
+    },
+    {
+      "step": 2,
+      "title": "Browse Partner Stores",
+      "description": "Shop at thousands of partner stores through Cashog",
+      "link": "/stores"
+    },
+    {
+      "step": 3,
+      "title": "Earn Cashback",
+      "description": "Get cashback automatically when you make purchases",
+      "link": "/how-it-works"
+    },
+    {
+      "step": 4,
+      "title": "Withdraw Your Earnings",
+      "description": "Cash out via PayPal, bank transfer, or gift cards",
+      "link": "/withdraw"
+    }
+  ],
+  "videoTutorialsTitle": "Video Tutorials",
+  "videoTutorials": [
+    {
+      "title": "Getting Started with Cashog",
+      "description": "Learn the basics of earning cashback",
+      "duration": "3:45",
+      "thumbnail": "/videos/getting-started.jpg",
+      "link": "https://youtube.com/watch?v=example1"
+    },
+    {
+      "title": "How to Maximize Your Cashback",
+      "description": "Tips and tricks for earning more",
+      "duration": "5:20",
+      "thumbnail": "/videos/maximize-cashback.jpg",
+      "link": "https://youtube.com/watch?v=example2"
+    },
+    {
+      "title": "Withdrawing Your Earnings",
+      "description": "Step-by-step withdrawal guide",
+      "duration": "4:15",
+      "thumbnail": "/videos/withdrawals.jpg",
+      "link": "https://youtube.com/watch?v=example3"
+    }
+  ],
+  "faqCategories": [
+    {
+      "id": "account-management",
+      "title": "Account Management",
+      "icon": "👤",
+      "questions": [
+        {
+          "question": "How do I create a Cashog account?",
+          "answer": "Creating an account is free and easy. Click 'Sign Up' on our homepage, enter your email address, create a password, and you're ready to start earning cashback!"
+        },
+        {
+          "question": "How do I reset my password?",
+          "answer": "Click 'Forgot Password' on the login page. We'll send you a link to reset your password. Make sure to check your spam folder if you don't see it within a few minutes."
+        },
+        {
+          "question": "How do I update my account information?",
+          "answer": "Go to your Account Settings page. From there, you can update your email, password, payment methods, and notification preferences."
+        },
+        {
+          "question": "Can I close my Cashog account?",
+          "answer": "Yes. Contact our support team and they'll help you close your account. Make sure to withdraw any pending cashback before closing."
+        }
+      ]
+    },
+    {
+      "id": "cashback",
+      "title": "Cashback Help",
+      "icon": "💰",
+      "questions": [
+        {
+          "question": "How do I earn cashback?",
+          "answer": "Simply click through our partner store links, shop as usual, and complete your purchase. Cashback will be automatically tracked and added to your account."
+        },
+        {
+          "question": "When will I receive my cashback?",
+          "answer": "Cashback is typically confirmed within 30-90 days, depending on the store's return policy. Once confirmed, it becomes available for withdrawal."
+        },
+        {
+          "question": "Why is my cashback showing as pending?",
+          "answer": "Cashback is pending while stores verify your purchase and wait for the return period to expire. This protects against returns and cancellations."
+        },
+        {
+          "question": "What happens if I return an item?",
+          "answer": "If you return an item, the cashback for that purchase will be deducted from your account. This is standard practice across all cashback platforms."
+        },
+        {
+          "question": "Can I earn cashback on every purchase?",
+          "answer": "Most purchases are eligible for cashback, but some exclusions may apply. Check the store's terms on our website for specific details."
+        }
+      ]
+    },
+    {
+      "id": "withdrawals",
+      "title": "Withdrawals & Payments",
+      "icon": "🏧",
+      "questions": [
+        {
+          "question": "How do I withdraw my cashback?",
+          "answer": "Go to your Wallet or Withdraw page, choose your withdrawal method (PayPal, bank transfer, or gift cards), enter the amount, and confirm."
+        },
+        {
+          "question": "What is the minimum withdrawal amount?",
+          "answer": "The minimum withdrawal amount is $10. Some payment methods may have different minimums - check your withdrawal page for details."
+        },
+        {
+          "question": "How long do withdrawals take?",
+          "answer": "PayPal withdrawals typically take 1-3 business days. Bank transfers take 3-5 business days. Gift cards are usually instant."
+        },
+        {
+          "question": "Are there any fees for withdrawing?",
+          "answer": "We don't charge fees for withdrawals. However, your payment provider may have their own fees - please check with them directly."
+        }
+      ]
+    },
+    {
+      "id": "technical",
+      "title": "Technical Support",
+      "icon": "🔧",
+      "questions": [
+        {
+          "question": "Cashback isn't showing in my account. What should I do?",
+          "answer": "Wait up to 7 days for tracking. If it still doesn't appear, submit a missing cashback claim with your order confirmation and date of purchase."
+        },
+        {
+          "question": "The Cashog extension isn't working. How do I fix it?",
+          "answer": "Try clearing your browser cache, reinstalling the extension, or updating your browser. If issues persist, contact our support team."
+        },
+        {
+          "question": "Why am I not seeing cashback on my purchase?",
+          "answer": "Ensure you clicked through Cashog before purchasing, didn't use ad blockers, and completed checkout in the same session. Also check store exclusions."
+        },
+        {
+          "question": "How do I report a technical issue?",
+          "answer": "Contact our support team with details about the issue, screenshots if possible, and steps to reproduce the problem."
+        }
+      ]
+    }
+  ],
+  "accountManagement": {
+    "title": "Account Management",
+    "items": [
+      {
+        "question": "How do I change my email address?",
+        "answer": "Go to Account Settings, click on 'Change Email', verify your new email address, and save the changes."
+      },
+      {
+        "question": "How do I enable two-factor authentication?",
+        "answer": "Go to Security Settings, click 'Enable 2FA', scan the QR code with your authenticator app, and enter the verification code."
+      }
+    ]
+  },
+  "cashbackHelp": {
+    "title": "Cashback Help",
+    "items": [
+      {
+        "question": "Can I combine cashback with coupons?",
+        "answer": "Yes! You can stack coupons and promo codes with Cashog for even more savings. Just make sure to start through Cashog first."
+      },
+      {
+        "question": "Does cashback work on mobile?",
+        "answer": "Yes! Use our mobile app or mobile website to earn cashback on your phone or tablet."
+      }
+    ]
+  },
+  "technicalSupport": {
+    "title": "Technical Support",
+    "items": [
+      {
+        "question": "Which browsers are supported?",
+        "answer": "We support the latest versions of Chrome, Firefox, Safari, and Edge. For the best experience, keep your browser updated."
+      },
+      {
+        "question": "Do you have a mobile app?",
+        "answer": "Yes! Download our app from the Apple App Store or Google Play Store for easy cashback on the go."
+      }
+    ]
+  },
+  "contactSupport": {
+    "title": "Still Need Help?",
+    "subtitle": "Our support team is ready to assist you",
+    "buttonText": "Contact Support"
+  },
+  "stillNeedHelp": {
+    "title": "Can't Find What You're Looking For?",
+    "subtitle": "We're here to help you with any questions or issues",
+    "buttonText": "Get in Touch"
+  }
+}
