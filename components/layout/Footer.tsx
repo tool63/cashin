@@ -212,7 +212,7 @@ export default function Footer({ className }: FooterProps) {
     <Sub id="allGuides" title={t("allGuides", "All Guides")}>
       <A href="/make-money/passive-income-online">{t("passiveIncome", "Passive Income")}</A>
       <A href="/make-money/online-jobs-for-beginners">{t("onlineJobs", "Online Jobs")}</A>
-      <A href="/make-money/make-money/earn-money-as-a-student">{t("studentEarnings", "Student Earnings")}</A>
+      <A href="/make-money/earn-money-as-a-student">{t("studentEarnings", "Student Earnings")}</A>
       <A href="/make-money/earn-money-without-skills">{t("earnWithoutSkills", "Earn without Skills")}</A>
       <A href="/make-money/earn-money-using-mobile">{t("earnUsingMobile", "Earn Using Mobile")}</A>
       <A href="/make-money/earn-money-online-worldwide">{t("earnWorldwide", "Earn Worldwide")}</A>
