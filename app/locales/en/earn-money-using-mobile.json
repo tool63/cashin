@@ -1,0 +1,384 @@
+{
+  "seo": {
+    "title": "Earn Money Using Mobile - Best Phone Earning Apps in {country} | Cashog",
+    "description": "Make money from your smartphone in {country}. Discover the best mobile apps that pay real cash, gift cards, and rewards. Start earning on your phone today - anywhere, anytime."
+  },
+  "hero": {
+    "title": "Earn Money Using Your Mobile Phone",
+    "subtitle": "Turn your smartphone into a money-making machine! Discover the best mobile apps that pay real cash in {country}. From surveys and tasks to cashback and games - start earning anywhere, anytime."
+  },
+  "categoryTitle": "Mobile Earning Categories",
+  "categories": [
+    {
+      "name": "Survey Apps",
+      "icon": "📋",
+      "description": "Get paid for your opinions",
+      "appCount": 25
+    },
+    {
+      "name": "Cashback Apps",
+      "icon": "💰",
+      "description": "Earn on everyday purchases",
+      "appCount": 18
+    },
+    {
+      "name": "Game Apps",
+      "icon": "🎮",
+      "description": "Play games and earn rewards",
+      "appCount": 22
+    },
+    {
+      "name": "Task Apps",
+      "icon": "✅",
+      "description": "Complete small tasks for cash",
+      "appCount": 15
+    },
+    {
+      "name": "Scanning Apps",
+      "icon": "📸",
+      "description": "Scan receipts and products",
+      "appCount": 12
+    },
+    {
+      "name": "Investment Apps",
+      "icon": "📈",
+      "description": "Grow money with micro-investing",
+      "appCount": 10
+    }
+  ],
+  "topAppsTitle": "🔥 Best Mobile Apps That Pay Real Money",
+  "topApps": [
+    {
+      "name": "Swagbucks",
+      "icon": "💰",
+      "description": "Earn points (SB) for surveys, shopping, watching videos, and more",
+      "platforms": ["iOS", "Android"],
+      "earningMethods": ["Surveys", "Shopping", "Videos", "Games", "Search"],
+      "earningPotential": "$50-200/month",
+      "payoutMethods": ["PayPal", "Amazon", "Visa", "Walmart"],
+      "minimumPayout": "$5",
+      "rating": 4.5,
+      "steps": [
+        "Download Swagbucks app",
+        "Create free account",
+        "Complete your profile",
+        "Choose earning activities",
+        "Redeem points for cash or gift cards"
+      ],
+      "tips": [
+        "Complete daily goals for bonuses",
+        "Use the shopping portal for cashback",
+        "Watch videos while doing other tasks",
+        "Complete your profile fully for more surveys"
+      ],
+      "link": "/mobile-app/swagbucks",
+      "isFeatured": true,
+      "isBeginnerFriendly": true
+    },
+    {
+      "name": "Mistplay",
+      "icon": "🎮",
+      "description": "Get paid to play mobile games",
+      "platforms": ["Android"],
+      "earningMethods": ["Playing Games", "Leveling Up", "Daily Bonuses"],
+      "earningPotential": "$30-100/month",
+      "payoutMethods": ["Amazon", "Visa", "PayPal", "Google Play"],
+      "minimumPayout": "$5",
+      "rating": 4.3,
+      "steps": [
+        "Download Mistplay app",
+        "Create account",
+        "Browse available games",
+        "Play games and earn units",
+        "Redeem for gift cards"
+      ],
+      "tips": [
+        "Try new games for bonus points",
+        "Play daily for streak bonuses",
+        "Focus on games you enjoy",
+        "Check for limited-time events"
+      ],
+      "link": "/mobile-app/mistplay",
+      "isFeatured": true,
+      "isBeginnerFriendly": true
+    },
+    {
+      "name": "Fetch Rewards",
+      "icon": "📸",
+      "description": "Earn points by scanning grocery receipts",
+      "platforms": ["iOS", "Android"],
+      "earningMethods": ["Receipt Scanning", "Special Offers", "Referrals"],
+      "earningPotential": "$20-50/month",
+      "payoutMethods": ["Amazon", "Walmart", "Target", "Visa"],
+      "minimumPayout": "$3",
+      "rating": 4.7,
+      "steps": [
+        "Download Fetch Rewards",
+        "Create free account",
+        "Scan any grocery receipt",
+        "Earn points on eligible items",
+        "Redeem for gift cards"
+      ],
+      "tips": [
+        "Scan all receipts, even small purchases",
+        "Refer friends for bonus points",
+        "Look for special bonus offers",
+        "Connect email for online purchase points"
+      ],
+      "link": "/mobile-app/fetch-rewards",
+      "isFeatured": true,
+      "isBeginnerFriendly": true
+    },
+    {
+      "name": "Ibotta",
+      "icon": "💰",
+      "description": "Get cashback on groceries and online shopping",
+      "platforms": ["iOS", "Android"],
+      "earningMethods": ["Cashback Offers", "Receipt Scanning", "Pay with Ibotta"],
+      "earningPotential": "$30-150/month",
+      "payoutMethods": ["PayPal", "Venmo", "Gift Cards"],
+      "minimumPayout": "$20",
+      "rating": 4.6,
+      "steps": [
+        "Download Ibotta app",
+        "Create account",
+        "Browse available offers",
+        "Shop and upload receipt",
+        "Earn cashback"
+      ],
+      "tips": [
+        "Activate offers before shopping",
+        "Stack with store coupons",
+        "Use PayPal for fastest payout",
+        "Complete bonus challenges"
+      ],
+      "link": "/mobile-app/ibotta",
+      "isFeatured": false,
+      "isBeginnerFriendly": true
+    }
+  ],
+  "beginnerAppsTitle": "🌱 Best Apps for Beginners",
+  "beginnerApps": [
+    {
+      "name": "Survey Junkie",
+      "icon": "📋",
+      "description": "Simple surveys that pay cash",
+      "platforms": ["iOS", "Android", "Web"],
+      "earningMethods": ["Paid Surveys", "Profile Questions"],
+      "earningPotential": "$30-80/month",
+      "payoutMethods": ["PayPal", "Gift Cards"],
+      "minimumPayout": "$5",
+      "rating": 4.4,
+      "steps": [
+        "Download Survey Junkie",
+        "Complete profile",
+        "Take available surveys",
+        "Earn points",
+        "Redeem for cash"
+      ],
+      "tips": [
+        "Complete profile fully for more surveys",
+        "Check daily for new opportunities",
+        "Be honest with answers"
+      ],
+      "link": "/mobile-app/survey-junkie",
+      "isBeginnerFriendly": true
+    },
+    {
+      "name": "InboxDollars",
+      "icon": "📧",
+      "description": "Get paid for surveys, emails, and offers",
+      "platforms": ["iOS", "Android"],
+      "earningMethods": ["Surveys", "Emails", "Videos", "Offers"],
+      "earningPotential": "$40-120/month",
+      "payoutMethods": ["Check", "PayPal", "Gift Cards"],
+      "minimumPayout": "$30",
+      "rating": 4.2,
+      "steps": [
+        "Download InboxDollars",
+        "Sign up free",
+        "Complete paid emails",
+        "Take surveys",
+        "Cash out"
+      ],
+      "tips": [
+        "Check daily for paid emails",
+        "Complete your profile",
+        "Watch videos for extra points"
+      ],
+      "link": "/mobile-app/inboxdollars",
+      "isBeginnerFriendly": true
+    }
+  ],
+  "quickEarningsTitle": "⚡ Quick Earnings - Start Today",
+  "quickEarnings": [
+    {
+      "title": "$10 Welcome Bonus",
+      "description": "Sign up and earn $10 bonus",
+      "reward": "$10",
+      "timeRequired": "5 minutes",
+      "app": "Swagbucks",
+      "link": "/quick/signup-bonus",
+      "isLimited": true
+    },
+    {
+      "title": "First Receipt Scan",
+      "description": "Scan any receipt for instant points",
+      "reward": "$2",
+      "timeRequired": "2 minutes",
+      "app": "Fetch Rewards",
+      "link": "/quick/receipt-scan",
+      "isLimited": true
+    },
+    {
+      "title": "Play Any Game",
+      "description": "Download and play any featured game",
+      "reward": "$5",
+      "timeRequired": "10 minutes",
+      "app": "Mistplay",
+      "link": "/quick/play-game",
+      "isLimited": false
+    }
+  ],
+  "comparisonTitle": "📊 Compare Top Earning Apps",
+  "comparison": {
+    "description": "Find the best app for your mobile earning goals",
+    "items": [
+      {
+        "app": "Swagbucks",
+        "earningPotential": "$50-200/month",
+        "timeToEarn": "1-2 hours/day",
+        "payoutSpeed": "1-3 days",
+        "easeOfUse": "Very Easy"
+      },
+      {
+        "app": "Mistplay",
+        "earningPotential": "$30-100/month",
+        "timeToEarn": "1-2 hours/day",
+        "payoutSpeed": "1-2 days",
+        "easeOfUse": "Very Easy"
+      },
+      {
+        "app": "Fetch Rewards",
+        "earningPotential": "$20-50/month",
+        "timeToEarn": "5 min/day",
+        "payoutSpeed": "1-7 days",
+        "easeOfUse": "Extremely Easy"
+      },
+      {
+        "app": "Ibotta",
+        "earningPotential": "$30-150/month",
+        "timeToEarn": "10 min/day",
+        "payoutSpeed": "1-3 days",
+        "easeOfUse": "Easy"
+      }
+    ]
+  },
+  "successStoriesTitle": "🌟 Real Success Stories",
+  "successStories": [
+    {
+      "name": "Amanda S.",
+      "earnings": "200",
+      "app": "Swagbucks",
+      "story": "I earn $200/month just using Swagbucks during my commute and lunch breaks. So easy!",
+      "timeSpent": "1-2 hours/day"
+    },
+    {
+      "name": "Brian L.",
+      "earnings": "100",
+      "app": "Mistplay",
+      "story": "I play games in the evening anyway. Now I earn $100/month for doing what I love!",
+      "timeSpent": "1 hour/day"
+    },
+    {
+      "name": "Crystal M.",
+      "earnings": "50",
+      "app": "Fetch Rewards",
+      "story": "Scanning grocery receipts takes 2 minutes. Earned $50 last month without changing my habits.",
+      "timeSpent": "5 min/day"
+    }
+  ],
+  "tipsTitle": "💡 Mobile Earning Tips",
+  "tips": [
+    {
+      "title": "Use Multiple Apps",
+      "description": "Don't rely on just one app. Use several to maximize your earnings.",
+      "icon": "📱"
+    },
+    {
+      "title": "Enable Notifications",
+      "description": "Turn on push alerts to catch limited-time offers and bonuses.",
+      "icon": "🔔"
+    },
+    {
+      "title": "Refer Friends",
+      "description": "Most apps offer generous referral bonuses. Share your code!",
+      "icon": "👥"
+    },
+    {
+      "title": "Be Consistent",
+      "description": "Small daily earnings add up. Set aside time each day.",
+      "icon": "📅"
+    }
+  ],
+  "earningsTracker": {
+    "title": "Track Your Mobile Earnings",
+    "description": "Monitor how much you're earning across all your mobile apps",
+    "buttonText": "Start Tracking"
+  },
+  "resourcesTitle": "Mobile Earning Resources",
+  "resources": [
+    {
+      "title": "How to Earn $100 on Your Phone",
+      "description": "Step-by-step guide to mobile earning",
+      "readTime": "8 min",
+      "link": "/resource/mobile-earn-100"
+    },
+    {
+      "title": "Best Apps for Passive Income",
+      "description": "Apps that earn while you sleep",
+      "readTime": "6 min",
+      "link": "/resource/passive-mobile-apps"
+    },
+    {
+      "title": "Mobile Earning Safety Tips",
+      "description": "Protect your data while earning",
+      "readTime": "5 min",
+      "link": "/resource/mobile-safety"
+    }
+  ],
+  "faq": {
+    "title": "Earn Money Using Mobile FAQ - {country}",
+    "items": [
+      {
+        "question": "Can I really earn money from my phone?",
+        "answer": "Absolutely! There are dozens of legitimate apps that pay real cash, gift cards, and rewards for simple activities like taking surveys, playing games, scanning receipts, and shopping."
+      },
+      {
+        "question": "How much can I earn on my phone?",
+        "answer": "Casual users earn $50-150/month. Dedicated users can earn $200-500+ monthly using multiple apps. Some power users earn over $1,000/month."
+      },
+      {
+        "question": "Do I need to pay to use these apps?",
+        "answer": "No! All legitimate earning apps are free to download and use. Never pay to start earning money."
+      },
+      {
+        "question": "How do I get paid?",
+        "answer": "Most apps pay via PayPal, Venmo, direct deposit, or gift cards (Amazon, Walmart, Target, Visa). Minimum payout thresholds range from $3-20."
+      },
+      {
+        "question": "Are these apps safe to use?",
+        "answer": "Yes, we only recommend established apps with good reputations and positive user reviews. Always check app permissions before installing."
+      },
+      {
+        "question": "Can I use these apps on both iPhone and Android?",
+        "answer": "Most apps work on both platforms, but some are Android-only or iOS-only. Check individual app requirements before downloading."
+      }
+    ]
+  },
+  "final": {
+    "title": "Start Earning Money on Your Phone Today",
+    "subtitle": "Download these apps and turn your smartphone into a money-making machine",
+    "buttonText": "Download Apps Now"
+  }
+}
