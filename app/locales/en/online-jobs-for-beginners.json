@@ -1,349 +1,316 @@
 {
   "seo": {
-    "title": "Online Jobs for Beginners in {country} - No Experience Needed | Cashog",
-    "description": "Find beginner-friendly online jobs in {country}. No experience required! Discover legit work-from-home opportunities, entry-level remote jobs, and side hustles for beginners."
+    "title": "Online Jobs for Beginners in {country} - No Experience Remote Work | Cashog",
+    "description": "Find legit online jobs for beginners in {country}. No experience required! Discover entry-level remote work, flexible side hustles, and start earning from home today."
   },
   "hero": {
-    "title": "Online Jobs for Beginners",
-    "subtitle": "Start your remote career today with zero experience needed! Discover legit online jobs perfect for beginners in {country}. No degree required - just willingness to learn and earn."
+    "title": "Online Jobs for Beginners in {country}",
+    "subtitle": "Start your remote career today with zero experience! Discover legit online jobs perfect for beginners in {country}. No degree required - just motivation and a computer."
   },
-  "statsTitle": "Beginner-Friendly Online Jobs by the Numbers",
+  "statsTitle": "Why Start with Online Jobs?",
   "stats": [
     {
-      "value": "2M+",
-      "label": "Entry-Level Remote Jobs",
-      "description": "Available worldwide"
+      "value": "67%",
+      "label": "of beginners",
+      "description": "find work within 2 weeks"
     },
     {
       "value": "$15-25",
-      "label": "Average Hourly Rate",
-      "description": "For beginner positions"
+      "label": "average hourly rate",
+      "description": "for entry-level online jobs"
     },
     {
-      "value": "No Experience",
-      "label": "Required for Most",
-      "description": "Just basic computer skills"
+      "value": "0",
+      "label": "years experience",
+      "description": "required to start"
     },
     {
-      "value": "1-2 Weeks",
-      "label": "To Land First Job",
-      "description": "With consistent effort"
+      "value": "500K+",
+      "label": "beginner jobs",
+      "description": "available worldwide"
     }
   ],
-  "jobCategoriesTitle": "Beginner-Friendly Job Categories",
-  "jobCategories": [
-    {
-      "name": "Virtual Assistant",
-      "icon": "📋",
-      "description": "Administrative support for businesses and entrepreneurs",
-      "jobCount": 15000,
-      "startingPay": "$15-25/hr"
-    },
-    {
-      "name": "Data Entry",
-      "icon": "📊",
-      "description": "Input and manage data for companies",
-      "jobCount": 12000,
-      "startingPay": "$14-20/hr"
-    },
-    {
-      "name": "Customer Service",
-      "icon": "🎧",
-      "description": "Support customers via chat, email, or phone",
-      "jobCount": 25000,
-      "startingPay": "$15-22/hr"
-    },
-    {
-      "name": "Social Media Manager",
-      "icon": "📱",
-      "description": "Manage social accounts for small businesses",
-      "jobCount": 8000,
-      "startingPay": "$18-30/hr"
-    },
-    {
-      "name": "Transcription",
-      "icon": "🎙️",
-      "description": "Convert audio/video to text",
-      "jobCount": 6000,
-      "startingPay": "$12-20/hr"
-    },
-    {
-      "name": "Online Tutoring",
-      "icon": "📚",
-      "description": "Teach students online in various subjects",
-      "jobCount": 10000,
-      "startingPay": "$15-30/hr"
-    }
-  ],
-  "beginnerJobsTitle": "Entry-Level Remote Jobs Hiring Now",
-  "beginnerJobs": [
-    {
-      "title": "Virtual Assistant",
-      "company": "Belay Solutions",
-      "logo": "📋",
-      "salary": "$15-22/hour",
-      "description": "Help entrepreneurs with email management, scheduling, and administrative tasks.",
-      "requirements": ["Reliable internet", "Basic computer skills", "Organized"],
-      "skillsNeeded": ["Communication", "Time management", "Google Workspace"],
-      "jobType": "Part-time / Full-time",
-      "link": "/job/virtual-assistant"
-    },
-    {
-      "title": "Customer Support Representative",
-      "company": "SupportNinja",
-      "logo": "🎧",
-      "salary": "$16-20/hour",
-      "description": "Answer customer questions via chat and email for e-commerce brands.",
-      "requirements": ["Good writing skills", "Empathy", "Problem-solving"],
-      "skillsNeeded": ["Written communication", "Patience", "CRM tools"],
-      "jobType": "Full-time",
-      "link": "/job/customer-support"
-    },
+  "quickStartJobsTitle": "Quick-Start Online Jobs (No Experience Needed)",
+  "quickStartJobs": [
     {
       "title": "Data Entry Clerk",
-      "company": "Precision Sourcing",
+      "company": "Various Companies",
       "logo": "📊",
-      "salary": "$14-18/hour",
-      "description": "Enter and verify data in spreadsheets and databases accurately.",
-      "requirements": ["Typing 40+ WPM", "Attention to detail", "Excel basics"],
-      "skillsNeeded": ["Typing speed", "Accuracy", "Organization"],
-      "jobType": "Part-time",
+      "salary": "$15-22/hour",
+      "description": "Enter and manage data in spreadsheets and databases. Perfect for beginners with basic computer skills.",
+      "requirements": ["Basic typing", "Attention to detail", "Computer access"],
+      "jobType": "Flexible",
+      "startImmediately": true,
       "link": "/job/data-entry"
+    },
+    {
+      "title": "Customer Support Agent",
+      "company": "Global Support Inc.",
+      "logo": "🎧",
+      "salary": "$16-24/hour",
+      "description": "Help customers via chat and email. Training provided - no phone calls required!",
+      "requirements": ["Good communication", "Problem solving", "Reliable internet"],
+      "jobType": "Part/Full Time",
+      "startImmediately": true,
+      "link": "/job/customer-support"
     },
     {
       "title": "Social Media Assistant",
       "company": "SocialBee",
       "logo": "📱",
-      "salary": "$18-25/hour",
-      "description": "Schedule posts, engage with followers, and create basic content.",
-      "requirements": ["Familiar with social platforms", "Creative", "Reliable"],
-      "skillsNeeded": ["Instagram", "Facebook", "Content creation basics"],
-      "jobType": "Part-time",
+      "salary": "$18-28/hour",
+      "description": "Schedule posts, respond to comments, and grow social media accounts.",
+      "requirements": ["Familiar with social media", "Creative thinking", "Basic writing"],
+      "jobType": "Flexible",
+      "startImmediately": true,
       "link": "/job/social-media-assistant"
     },
     {
       "title": "Transcriptionist",
-      "company": "Rev",
+      "company": "Rev & Similar",
       "logo": "🎙️",
       "salary": "$12-20/hour",
-      "description": "Transcribe audio and video files into text documents.",
-      "requirements": ["Good listening skills", "Fast typing", "Grammar knowledge"],
-      "skillsNeeded": ["Typing speed", "English proficiency", "Attention to detail"],
+      "description": "Convert audio and video files into text. No experience needed - just good listening skills.",
+      "requirements": ["Good typing speed", "English fluency", "Attention to detail"],
       "jobType": "Flexible",
+      "startImmediately": true,
       "link": "/job/transcription"
     },
     {
-      "title": "Online Tutor",
-      "company": "VIPKid",
-      "logo": "📚",
-      "salary": "$16-22/hour",
-      "description": "Teach English to students online using provided curriculum.",
-      "requirements": ["Bachelor's degree (any field)", "TESOL/TEFL (can obtain)", "Enthusiastic"],
-      "skillsNeeded": ["Patience", "Clear speech", "Lesson planning"],
+      "title": "Virtual Assistant",
+      "company": "Small Businesses",
+      "logo": "📋",
+      "salary": "$15-30/hour",
+      "description": "Help entrepreneurs with email, scheduling, research, and admin tasks.",
+      "requirements": ["Organized", "Reliable", "Basic computer skills"],
       "jobType": "Part-time",
-      "link": "/job/online-tutor"
+      "startImmediately": true,
+      "link": "/job/virtual-assistant"
+    },
+    {
+      "title": "Online Survey Taker",
+      "company": "Market Research",
+      "logo": "📝",
+      "salary": "$10-20/hour",
+      "description": "Share your opinions and get paid. Perfect for extra cash in spare time.",
+      "requirements": ["Internet access", "Honest opinions", "Basic English"],
+      "jobType": "Very Flexible",
+      "startImmediately": true,
+      "link": "/job/surveys"
     }
   ],
-  "platformsTitle": "Best Platforms to Find Beginner Online Jobs",
-  "platforms": [
+  "inDemandSkillsTitle": "In-Demand Skills You Can Learn for Free",
+  "inDemandSkills": [
+    {
+      "name": "Microsoft Excel",
+      "icon": "📊",
+      "description": "Learn data entry, formulas, and basic analysis",
+      "timeToLearn": "2-4 weeks",
+      "difficulty": "Easy",
+      "freeResources": ["YouTube", "Microsoft Learn", "GCF Global"]
+    },
+    {
+      "name": "Social Media Management",
+      "icon": "📱",
+      "description": "Schedule posts, create content, engage audiences",
+      "timeToLearn": "1-2 weeks",
+      "difficulty": "Easy",
+      "freeResources": ["HubSpot Academy", "Meta Blueprint", "YouTube"]
+    },
+    {
+      "name": "Customer Service",
+      "icon": "💬",
+      "description": "Learn to handle inquiries, complaints, and support",
+      "timeToLearn": "1-3 weeks",
+      "difficulty": "Easy",
+      "freeResources": ["Coursera (audit)", "LinkedIn Learning (free trial)"]
+    },
+    {
+      "name": "Basic HTML/CSS",
+      "icon": "💻",
+      "description": "Understand website basics for entry-level web jobs",
+      "timeToLearn": "4-6 weeks",
+      "difficulty": "Medium",
+      "freeResources": ["freeCodeCamp", "Codecademy", "W3Schools"]
+    },
+    {
+      "name": "Email Marketing",
+      "icon": "✉️",
+      "description": "Learn Mailchimp, newsletters, and campaigns",
+      "timeToLearn": "2-3 weeks",
+      "difficulty": "Easy",
+      "freeResources": ["Mailchimp Academy", "HubSpot Academy"]
+    },
+    {
+      "name": "Time Management",
+      "icon": "⏰",
+      "description": "Essential for remote work success",
+      "timeToLearn": "1 week",
+      "difficulty": "Easy",
+      "freeResources": ["Trello guides", "YouTube productivity channels"]
+    }
+  ],
+  "topPlatformsTitle": "Best Platforms for Beginner Online Jobs",
+  "topPlatforms": [
     {
       "name": "Upwork",
-      "logo": "💼",
-      "type": "Freelance Marketplace",
-      "signupBonus": "$0",
-      "description": "Find entry-level freelance work in writing, VA, data entry, and more.",
-      "bestFor": ["Virtual Assistant", "Data Entry", "Customer Service"],
-      "payoutMethods": ["PayPal", "Bank Transfer", "Direct Deposit"],
+      "icon": "💼",
+      "description": "Largest freelance marketplace with entry-level jobs",
+      "bestFor": ["Writing", "Virtual Assistant", "Data Entry"],
+      "jobsAvailable": 15000,
       "link": "/platform/upwork"
     },
     {
       "name": "Fiverr",
-      "logo": "⭐",
-      "type": "Gig Marketplace",
-      "signupBonus": "$0",
-      "description": "Create 'gigs' offering your services starting at $5.",
-      "bestFor": ["Social Media", "Transcription", "Basic Design"],
-      "payoutMethods": ["PayPal", "Fiverr Revenue Card"],
+      "icon": "⭐",
+      "description": "Sell services starting at $5 - perfect for beginners",
+      "bestFor": ["Logo Design", "Voice Over", "Social Media"],
+      "jobsAvailable": 20000,
       "link": "/platform/fiverr"
     },
     {
-      "name": "Remote.co",
-      "logo": "🌐",
-      "type": "Remote Job Board",
-      "signupBonus": "$0",
-      "description": "Curated remote jobs from companies hiring beginners.",
-      "bestFor": ["Customer Service", "Admin Support", "Entry Level"],
-      "payoutMethods": ["Varies by employer"],
-      "link": "/platform/remote-co"
+      "name": "Amazon Mechanical Turk",
+      "icon": "🤖",
+      "description": "Micro-tasks like data categorization and surveys",
+      "bestFor": ["Data Entry", "Surveys", "Image Tagging"],
+      "jobsAvailable": 5000,
+      "link": "/platform/mturk"
+    },
+    {
+      "name": "Appen",
+      "icon": "📱",
+      "description": "Work on AI training and data projects",
+      "bestFor": ["Data Annotation", "Search Evaluation"],
+      "jobsAvailable": 3000,
+      "link": "/platform/appen"
+    },
+    {
+      "name": "RemoteOK",
+      "icon": "🌍",
+      "description": "Curated remote jobs with beginner filters",
+      "bestFor": ["Customer Support", "Sales", "Admin"],
+      "jobsAvailable": 8000,
+      "link": "/platform/remoteok"
     },
     {
       "name": "FlexJobs",
-      "logo": "💪",
-      "type": "Premium Job Board",
-      "signupBonus": "$0",
-      "description": "Hand-screened remote and flexible jobs (subscription required).",
-      "bestFor": ["All beginner roles", "Legitimate companies"],
-      "payoutMethods": ["Varies by employer"],
+      "icon": "🔧",
+      "description": "Hand-screened remote jobs (paid but worth it)",
+      "bestFor": ["Professional entry-level roles"],
+      "jobsAvailable": 25000,
       "link": "/platform/flexjobs"
-    },
-    {
-      "name": "Rev",
-      "logo": "🎙️",
-      "type": "Transcription Platform",
-      "signupBonus": "$0",
-      "description": "Get paid to transcribe audio and video files.",
-      "bestFor": ["Transcription", "Captioning"],
-      "payoutMethods": ["PayPal"],
-      "link": "/platform/rev"
-    },
-    {
-      "name": "Belay",
-      "logo": "📋",
-      "type": "VA Staffing",
-      "signupBonus": "$0",
-      "description": "Match with businesses needing virtual assistants.",
-      "bestFor": ["Virtual Assistant", "Admin Support"],
-      "payoutMethods": ["Direct Deposit"],
-      "link": "/platform/belay"
     }
   ],
-  "skillsTitle": "In-Demand Skills You Can Learn Free",
-  "skills": [
+  "successStoriesTitle": "Real Success Stories from Beginners",
+  "successStories": [
     {
-      "name": "Typing",
-      "icon": "⌨️",
-      "description": "Learn to type faster with free online tools. Aim for 40+ WPM.",
-      "learningTime": "2-4 weeks",
-      "earningPotential": "$12-20/hr",
-      "resources": ["TypingClub", "Keybr", "10FastFingers"]
+      "name": "Sarah",
+      "age": 24,
+      "location": "Nebraska",
+      "earnings": "$3,200/month",
+      "story": "Started with zero experience as a virtual assistant. Within 3 months, I had 5 regular clients and quit my retail job.",
+      "jobType": "Virtual Assistant",
+      "startPoint": "No experience"
     },
     {
-      "name": "Google Workspace",
-      "icon": "🔵",
-      "description": "Master Docs, Sheets, Gmail, and Calendar for admin roles.",
-      "learningTime": "1-2 weeks",
-      "earningPotential": "$15-25/hr",
-      "resources": ["Google Skillshop", "YouTube", "Coursera"]
+      "name": "James",
+      "age": 19,
+      "location": "Florida",
+      "earnings": "$1,800/month",
+      "story": "I'm a college student who started doing data entry part-time. It pays for my tuition and I study on my own schedule.",
+      "jobType": "Data Entry",
+      "startPoint": "Student"
     },
     {
-      "name": "Social Media",
-      "icon": "📱",
-      "description": "Learn to schedule posts, engage, and analyze basic metrics.",
-      "learningTime": "2-3 weeks",
-      "earningPotential": "$18-30/hr",
-      "resources": ["Meta Blueprint", "HubSpot Academy", "Later Blog"]
-    },
-    {
-      "name": "Customer Service",
-      "icon": "🎧",
-      "description": "Develop empathy, problem-solving, and communication skills.",
-      "learningTime": "1-2 weeks",
-      "earningPotential": "$15-22/hr",
-      "resources": ["Zendesk Training", "LinkedIn Learning", "Udemy"]
-    },
-    {
-      "name": "Transcription",
-      "icon": "🎙️",
-      "description": "Learn to transcribe accurately with proper grammar.",
-      "learningTime": "1-2 weeks",
-      "earningPotential": "$12-20/hr",
-      "resources": ["Transcribe Anywhere", "YouTube tutorials", "Practice audio"]
-    },
-    {
-      "name": "Data Entry",
-      "icon": "📊",
-      "description": "Master Excel basics and database management.",
-      "learningTime": "1-2 weeks",
-      "earningPotential": "$14-18/hr",
-      "resources": ["Excel Easy", "GCFGlobal", "Coursera"]
+      "name": "Maria",
+      "age": 35,
+      "location": "Texas",
+      "earnings": "$4,500/month",
+      "story": "After being laid off, I learned social media management in 2 weeks. Now I manage accounts for 8 small businesses.",
+      "jobType": "Social Media Manager",
+      "startPoint": "No tech background"
     }
   ],
-  "tipsTitle": "Tips for Landing Your First Online Job",
+  "tipsTitle": "Essential Tips for Online Job Beginners",
   "tips": [
     {
-      "title": "Create a Professional Email",
-      "description": "Use a simple email like firstname.lastname@gmail.com for job applications.",
-      "icon": "📧"
-    },
-    {
-      "title": "Build a Simple Resume",
-      "description": "Highlight transferable skills, computer literacy, and any volunteer work.",
-      "icon": "📄"
-    },
-    {
       "title": "Start with Small Gigs",
-      "description": "Build your reputation by taking smaller, lower-paid jobs first.",
+      "description": "Build your reputation with smaller jobs first. Positive reviews lead to better opportunities.",
       "icon": "🎯"
     },
     {
-      "title": "Create a Portfolio",
-      "description": "Save samples of your work, even if self-created, to show skills.",
+      "title": "Create a Simple Portfolio",
+      "description": "Even without experience, create sample work to show your skills (e.g., sample social media posts).",
       "icon": "📁"
     },
     {
-      "title": "Be Consistent",
-      "description": "Apply to multiple jobs daily. First job may take 1-2 weeks of consistent effort.",
-      "icon": "⏰"
+      "title": "Be Professional",
+      "description": "Respond quickly, meet deadlines, and communicate clearly. Professionalism beats experience.",
+      "icon": "💼"
+    },
+    {
+      "title": "Learn While You Earn",
+      "description": "Take free courses in your spare time to upgrade your skills and command higher rates.",
+      "icon": "📚"
     },
     {
       "title": "Avoid Scams",
-      "description": "Never pay for a job. Legitimate employers won't ask for upfront payment.",
-      "icon": "🛡️"
-    }
-  ],
-  "successStoriesTitle": "Beginners Who Started with No Experience",
-  "successStories": [
-    {
-      "name": "Emily",
-      "age": 24,
-      "location": "Ohio",
-      "earnings": "$2,800/month",
-      "story": "Started as a virtual assistant with no experience. Within 6 months, I had 3 regular clients and quit my retail job.",
-      "jobType": "Virtual Assistant"
+      "description": "Never pay to get a job. Legitimate employers pay you, not the other way around.",
+      "icon": "⚠️"
     },
     {
-      "name": "Carlos",
-      "age": 32,
-      "location": "Texas",
-      "earnings": "$1,500/month",
-      "story": "Learned transcription in 2 weeks using free resources. Now I work 15 hours/week while staying home with my kids.",
-      "jobType": "Transcriptionist"
-    },
-    {
-      "name": "Priya",
-      "age": 28,
-      "location": "California",
-      "earnings": "$3,200/month",
-      "story": "No degree, just basic social media skills. Started managing Instagram for small businesses and grew from there.",
-      "jobType": "Social Media Manager"
+      "title": "Set Realistic Goals",
+      "description": "Start with 10-15 hours per week while you learn the ropes. Increase hours as you gain confidence.",
+      "icon": "🎯"
     }
   ],
+  "redFlagsTitle": "🚩 Red Flags: How to Spot Online Job Scams",
+  "redFlags": [
+    {
+      "warning": "Asking for upfront payment",
+      "description": "Legitimate jobs never ask you to pay for training, software, or 'background checks'.",
+      "icon": "💰"
+    },
+    {
+      "warning": "Too good to be true",
+      "description": "$5,000/week for data entry? That's a scam. Research average rates for each job type.",
+      "icon": "🤔"
+    },
+    {
+      "warning": "Vague job descriptions",
+      "description": "If they won't tell you exactly what you'll be doing, walk away.",
+      "icon": "❓"
+    },
+    {
+      "warning": "Unprofessional communication",
+      "description": "Poor grammar, generic email addresses (@gmail.com), and pressure tactics are red flags.",
+      "icon": "📧"
+    },
+    {
+      "warning": "Request for personal info",
+      "description": "Never share your SSN or bank info before being officially hired by a legitimate company.",
+      "icon": "🔒"
+    }
+  ],
+  "checklistTitle": "Your First 30 Days: Beginner Action Plan",
   "checklist": {
-    "title": "Your First Online Job Checklist",
+    "title": "Your First 30 Days: Beginner Action Plan",
     "items": [
-      "☐ Create a professional email address",
-      "☐ Set up a PayPal account for payments",
-      "☐ Write a simple beginner resume",
-      "☐ Choose 1-2 skills to focus on",
-      "☐ Complete free training for chosen skills",
-      "☐ Create profiles on 2-3 job platforms",
-      "☐ Apply to 5-10 jobs daily",
-      "☐ Complete first small gig for experience"
+      "Week 1: Choose 2-3 job types that interest you",
+      "Week 1: Complete 1-2 free courses in those areas",
+      "Week 2: Create profiles on 2-3 job platforms",
+      "Week 2: Apply to 10-20 beginner jobs",
+      "Week 3: Complete your first small gig or job",
+      "Week 3: Ask for feedback and a review",
+      "Week 4: Apply to higher-paying jobs with your new review",
+      "Week 4: Start building your portfolio"
     ]
   },
-  "redFlagsTitle": "Red Flags to Avoid in Online Jobs",
-  "redFlags": [
-    "⚠️ Any job asking for upfront payment or training fees",
-    "⚠️ Promises of 'get rich quick' or unrealistic earnings",
-    "⚠️ Requests for your bank login or sensitive personal info",
-    "⚠️ Jobs that require paying for a 'starter kit'",
-    "⚠️ Vague job descriptions with no clear responsibilities",
-    "⚠️ Communication only through messaging apps (no email/phone)"
-  ],
+  "newsletterTitle": "Get Beginner Jobs Sent to Your Inbox",
   "newsletter": {
-    "title": "Get Beginner Job Alerts",
-    "subtitle": "Subscribe for weekly entry-level remote job opportunities",
-    "buttonText": "Subscribe",
+    "title": "Get Beginner Jobs Sent to Your Inbox",
+    "subtitle": "Weekly curated list of entry-level remote jobs - perfect for beginners",
+    "buttonText": "Send Me Jobs",
     "placeholder": "Enter your email"
   },
   "faq": {
@@ -351,49 +318,37 @@
     "items": [
       {
         "question": "Can I really get an online job with no experience?",
-        "answer": "Yes! Many entry-level remote jobs like virtual assistant, data entry, and customer service require no prior experience - just basic computer skills and willingness to learn."
+        "answer": "Yes! Many entry-level online jobs only require basic computer skills and a willingness to learn. Data entry, virtual assistance, and customer support are great starting points."
       },
       {
-        "question": "How much can a beginner earn online?",
-        "answer": "Beginners typically earn $12-25/hour depending on the role. Virtual assistants start around $15-20/hr, while transcription and data entry start around $12-18/hr."
-      },
-      {
-        "question": "Do I need a degree for online jobs?",
-        "answer": "No! Most beginner online jobs don't require a degree. Employers care more about your skills, reliability, and willingness to learn."
-      },
-      {
-        "question": "How long does it take to find my first online job?",
-        "answer": "With consistent effort (applying to 5-10 jobs daily), most beginners land their first job within 1-3 weeks."
+        "question": "How much money can I make as a beginner?",
+        "answer": "Most beginners earn $12-25 per hour. As you gain skills and positive reviews, you can quickly increase your rates to $25-40+ per hour."
       },
       {
         "question": "What equipment do I need?",
-        "answer": "At minimum: a reliable computer/laptop, high-speed internet, and a quiet workspace. Some roles may require a headset or microphone."
+        "answer": "At minimum: a reliable computer (Windows or Mac), high-speed internet, and a quiet workspace. A headset is helpful for customer service roles."
       },
       {
-        "question": "Are these jobs legit or scams?",
-        "answer": "The platforms and jobs we recommend are legitimate. Always follow our red flags guide to avoid scams - never pay for a job opportunity."
+        "question": "How do I avoid online job scams?",
+        "answer": "Never pay for a job, research companies before applying, trust your gut if something feels wrong, and stick to reputable platforms like Upwork and FlexJobs."
       },
       {
-        "question": "Can I work from anywhere in the world?",
-        "answer": "Many online jobs are location-independent. However, some require you to be in specific countries due to time zones or legal requirements."
+        "question": "Can I work online while living outside the US?",
+        "answer": "Absolutely! Many platforms accept workers worldwide. Some jobs are location-specific, but many are open globally. Check each job's requirements."
       },
       {
-        "question": "How do I get paid for online work?",
-        "answer": "Most platforms pay via PayPal, direct deposit, or bank transfer. Payment schedules vary - weekly, bi-weekly, or monthly."
+        "question": "How long until I get my first job?",
+        "answer": "Most beginners land their first gig within 1-3 weeks if they apply consistently. Start with smaller jobs to build your reputation quickly."
       },
       {
-        "question": "What skills should I learn first?",
-        "answer": "Start with typing (40+ WPM), Google Workspace basics, and communication skills. These are useful for most beginner online jobs."
-      },
-      {
-        "question": "Can I do online jobs while studying?",
-        "answer": "Yes! Many online jobs offer flexible schedules perfect for students. Virtual assistant and data entry roles are especially flexible."
+        "question": "Do I need to pay taxes on online income?",
+        "answer": "Yes, online income is taxable in most countries. Keep records of your earnings and consult a tax professional about deductions (home office, internet, etc.)."
       }
     ]
   },
   "final": {
-    "title": "Start Your Online Career Journey Today",
-    "subtitle": "Join thousands of beginners who started with no experience and now earn from home",
-    "buttonText": "Find Beginner Jobs"
+    "title": "Ready to Start Your Online Career?",
+    "subtitle": "Thousands of beginners are earning from home. You can too.",
+    "buttonText": "Find Beginner Jobs Now"
   }
 }
