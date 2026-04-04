@@ -1,0 +1,224 @@
+{
+  "seo": {
+    "title": "About Cashog in {country} - Our Mission to Help You Save Money | Cashog",
+    "description": "Learn about Cashog's mission to help people save money and earn cashback in {country}. Discover our story, values, and commitment to smart shopping."
+  },
+  "hero": {
+    "title": "Our Mission: Help You Save Money, Every Day",
+    "subtitle": "Cashog was founded with a simple belief: everyone deserves to save money on the things they buy every day. We're building the smartest way to shop online and earn cashback."
+  },
+  "storyTitle": "Our Story",
+  "story": {
+    "founded": "Founded in 2020",
+    "description1": "Cashog started with a simple observation: millions of people were leaving money on the table by not using cashback sites. Traditional cashback platforms were clunky, slow, and frustrating to use.",
+    "description2": "We set out to build something better. A platform that's fast, intuitive, and actually rewarding. Today, Cashog helps over {activeUsers} users in {country} save money on thousands of stores, from fashion to electronics, travel to home goods.",
+    "description3": "But we're just getting started. Our team is constantly working on new features, better rewards, and smarter ways to help you keep more money in your pocket."
+  },
+  "missionTitle": "Our Mission & Values",
+  "mission": {
+    "title": "Make Saving Money Effortless",
+    "description": "We believe saving money shouldn't be hard work. Our mission is to build technology that automatically finds you the best deals, highest cashback rates, and smartest shopping insights.",
+    "values": [
+      {
+        "icon": "💚",
+        "title": "Customer First",
+        "description": "Every decision we make starts with our users. If it doesn't help you save money or time, we don't do it."
+      },
+      {
+        "icon": "⚡",
+        "title": "Speed & Simplicity",
+        "description": "Shopping should be fast and fun. We obsess over making Cashog the quickest way to find deals and earn cashback."
+      },
+      {
+        "icon": "🔒",
+        "title": "Trust & Transparency",
+        "description": "No hidden fees. No fine print. We're upfront about how we make money and how much you'll earn."
+      },
+      {
+        "icon": "🌱",
+        "title": "Sustainable Growth",
+        "description": "We're building a company for the long term, focused on creating real value for our users, partners, and communities."
+      }
+    ]
+  },
+  "statsTitle": "Cashog by the Numbers in {country}",
+  "stats": [
+    {
+      "value": "{activeUsers}",
+      "label": "Active Users",
+      "description": "And growing every day"
+    },
+    {
+      "value": "10K+",
+      "label": "Partner Stores",
+      "description": "From fashion to electronics"
+    },
+    {
+      "value": "$50M+",
+      "label": "Cashback Earned",
+      "description": "Put back in users' pockets"
+    },
+    {
+      "value": "4.9",
+      "label": "User Rating",
+      "description": "From thousands of reviews"
+    }
+  ],
+  "teamTitle": "Meet Our Team",
+  "teamSubtitle": "The passionate people behind Cashog",
+  "team": [
+    {
+      "name": "Sarah Johnson",
+      "role": "CEO & Co-founder",
+      "bio": "Former e-commerce executive on a mission to make saving money effortless for everyone.",
+      "image": "/team/sarah.jpg",
+      "social": {
+        "linkedin": "https://linkedin.com/in/sarahjohnson",
+        "twitter": "https://twitter.com/sarahjohnson"
+      }
+    },
+    {
+      "name": "Michael Chen",
+      "role": "CTO & Co-founder",
+      "bio": "Tech veteran who's built platforms used by millions. Passionate about creating seamless user experiences.",
+      "image": "/team/michael.jpg",
+      "social": {
+        "linkedin": "https://linkedin.com/in/michaelchen",
+        "twitter": "https://twitter.com/michaelchen"
+      }
+    },
+    {
+      "name": "Emma Rodriguez",
+      "role": "Head of Partnerships",
+      "bio": "Builds relationships with top retailers to bring you the best cashback rates and exclusive deals.",
+      "image": "/team/emma.jpg",
+      "social": {
+        "linkedin": "https://linkedin.com/in/emmarodriguez"
+      }
+    },
+    {
+      "name": "David Kim",
+      "role": "Lead Product Designer",
+      "bio": "Creates intuitive experiences that make saving money feel natural and enjoyable.",
+      "image": "/team/david.jpg",
+      "social": {
+        "linkedin": "https://linkedin.com/in/davidkim",
+        "twitter": "https://twitter.com/davidkim"
+      }
+    }
+  ],
+  "valuesTitle": "Our Core Values",
+  "values": [
+    {
+      "icon": "🎯",
+      "title": "Obsess Over Users",
+      "description": "Everything we do is designed to help our users save more money with less effort."
+    },
+    {
+      "icon": "💪",
+      "title": "Move Fast",
+      "description": "We move quickly to bring you the best deals and newest features before anyone else."
+    },
+    {
+      "icon": "🤝",
+      "title": "Win Together",
+      "description": "We succeed when our users, partners, and team succeed together."
+    },
+    {
+      "icon": "📈",
+      "title": "Think Long Term",
+      "description": "We make decisions that build lasting value, not quick wins."
+    }
+  ],
+  "partnersTitle": "Our Partners",
+  "partnersSubtitle": "Trusted by leading brands and retailers",
+  "partners": [
+    {
+      "name": "Amazon",
+      "logo": "🛍️",
+      "description": "Global e-commerce leader"
+    },
+    {
+      "name": "Walmart",
+      "logo": "🛒",
+      "description": "America's largest retailer"
+    },
+    {
+      "name": "eBay",
+      "logo": "🔨",
+      "description": "Online marketplace"
+    },
+    {
+      "name": "Target",
+      "logo": "🎯",
+      "description": "Department store chain"
+    },
+    {
+      "name": "Best Buy",
+      "logo": "💻",
+      "description": "Electronics retailer"
+    },
+    {
+      "name": "Etsy",
+      "logo": "🧵",
+      "description": "Handmade & vintage goods"
+    },
+    {
+      "name": "Expedia",
+      "logo": "✈️",
+      "description": "Travel booking platform"
+    },
+    {
+      "name": "Nike",
+      "logo": "👟",
+      "description": "Sportswear giant"
+    }
+  ],
+  "careers": {
+    "title": "Join Our Team",
+    "subtitle": "Help us build the future of smart shopping",
+    "buttonText": "View Open Positions"
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "Have questions? We'd love to hear from you",
+    "buttonText": "Contact Us"
+  },
+  "faq": {
+    "title": "About Cashog in {country} - FAQ",
+    "items": [
+      {
+        "question": "Is Cashog really free to use?",
+        "answer": "Yes! Cashog is completely free for users. We earn a commission from our partner stores when you make a purchase through our links, and we share that commission with you as cashback."
+      },
+      {
+        "question": "How do I get my cashback?",
+        "answer": "Once your purchase is confirmed by the store (usually within 30-90 days), the cashback is added to your account. You can then withdraw it via PayPal, bank transfer, or gift cards."
+      },
+      {
+        "question": "Is Cashog available in my country?",
+        "answer": "Cashog is available in multiple countries including {country}. Check our website for the full list of supported countries and stores."
+      },
+      {
+        "question": "How does Cashog make money?",
+        "answer": "We earn affiliate commissions from stores when we send them customers. We then share a portion of that commission with you as cashback, and keep a small portion to run and improve the platform."
+      },
+      {
+        "question": "Is my personal information safe?",
+        "answer": "Absolutely. We take privacy and security seriously. We never sell your personal information, and we use industry-standard encryption to protect your data."
+      },
+      {
+        "question": "How do I contact support?",
+        "answer": "You can reach our support team through the contact form on our website, or email us directly at support@cashog.com. We typically respond within 24 hours."
+      },
+      {
+        "question": "How long does it take to get cashback?",
+        "answer": "Cashback is typically confirmed within 30-90 days depending on the store's return policy. Once confirmed, you can withdraw it immediately."
+      },
+      {
+        "question": "Can I use Cashog with coupon codes?",
+        "answer": "Yes! You can stack our cashback with coupon codes and other discounts to maximize your savings. Just make sure to start your shopping session through Cashog."
+      }
+    ]
+  }
+}
