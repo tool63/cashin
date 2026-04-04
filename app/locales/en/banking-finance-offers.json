@@ -1,0 +1,359 @@
+{
+  "seo": {
+    "title": "Banking & Finance Offers - Best Rates & Bonuses in {country} | Cashog",
+    "description": "Compare the best banking and finance offers in {country}. Find top credit cards, savings accounts, loans, and investment deals. Earn cashback and bonuses on financial products."
+  },
+  "hero": {
+    "title": "Best Banking & Finance Offers",
+    "subtitle": "Maximize your money with exclusive banking and finance offers in {country}. Compare credit cards, savings accounts, loans, and investment deals. Earn bonuses, cashback, and premium rates."
+  },
+  "categoryTitle": "Browse by Category",
+  "categories": [
+    {
+      "name": "Credit Cards",
+      "icon": "💳",
+      "description": "Rewards, cashback, and low APR offers",
+      "offerCount": 245
+    },
+    {
+      "name": "Savings Accounts",
+      "icon": "🏦",
+      "description": "High-yield savings and bonus rates",
+      "offerCount": 89
+    },
+    {
+      "name": "Personal Loans",
+      "icon": "📝",
+      "description": "Low-interest loans and debt consolidation",
+      "offerCount": 67
+    },
+    {
+      "name": "Mortgages",
+      "icon": "🏠",
+      "description": "Home loans with competitive rates",
+      "offerCount": 43
+    },
+    {
+      "name": "Investments",
+      "icon": "📈",
+      "description": "Trading platforms and robo-advisors",
+      "offerCount": 56
+    },
+    {
+      "name": "Bank Bonuses",
+      "icon": "🎁",
+      "description": "Cash bonuses for new accounts",
+      "offerCount": 78
+    }
+  ],
+  "featuredOffersTitle": "🌟 Featured Offers",
+  "featuredOffers": [
+    {
+      "title": "Chase Sapphire Preferred",
+      "description": "Premium travel rewards credit card",
+      "offerValue": "60,000 bonus points",
+      "requirements": "$4,000 spend in 3 months",
+      "bank": "Chase",
+      "type": "Credit Card",
+      "image": "💳",
+      "link": "/offer/chase-sapphire",
+      "expiryDate": "Feb 28, 2025",
+      "isFeatured": true
+    },
+    {
+      "title": "American Express Gold",
+      "description": "Earn points on dining and groceries",
+      "offerValue": "75,000 Membership Rewards points",
+      "requirements": "$6,000 spend in 6 months",
+      "bank": "American Express",
+      "type": "Credit Card",
+      "image": "✨",
+      "link": "/offer/amex-gold",
+      "expiryDate": "Mar 15, 2025",
+      "isFeatured": true
+    },
+    {
+      "title": "Capital One 360",
+      "description": "High-yield savings account",
+      "offerValue": "4.25% APY",
+      "requirements": "No minimum balance",
+      "bank": "Capital One",
+      "type": "Savings",
+      "image": "💰",
+      "link": "/offer/capital-one-360",
+      "expiryDate": "",
+      "isFeatured": false
+    }
+  ],
+  "creditCardsTitle": "💳 Top Credit Card Offers",
+  "creditCards": [
+    {
+      "name": "Citi Double Cash",
+      "bank": "Citi",
+      "annualFee": "$0",
+      "rewardsRate": "2% cashback",
+      "signupBonus": "$200",
+      "introApr": "0% for 18 months",
+      "regularApr": "17.99% - 27.99%",
+      "image": "💳",
+      "link": "/card/citi-double-cash"
+    },
+    {
+      "name": "Discover it Cash Back",
+      "bank": "Discover",
+      "annualFee": "$0",
+      "rewardsRate": "5% rotating categories",
+      "signupBonus": "Cashback match first year",
+      "introApr": "0% for 15 months",
+      "regularApr": "16.99% - 27.99%",
+      "image": "🎯",
+      "link": "/card/discover-it"
+    },
+    {
+      "name": "Wells Fargo Active Cash",
+      "bank": "Wells Fargo",
+      "annualFee": "$0",
+      "rewardsRate": "2% unlimited cashback",
+      "signupBonus": "$200",
+      "introApr": "0% for 15 months",
+      "regularApr": "18.99% - 28.99%",
+      "image": "💵",
+      "link": "/card/wells-fargo-active"
+    }
+  ],
+  "topBanksTitle": "🏦 Top Banks with Offers",
+  "topBanks": [
+    {
+      "name": "Chase",
+      "logo": "🏦",
+      "offerCount": 24,
+      "description": "Credit cards, banking, and mortgage offers",
+      "features": ["Sapphire Reserve", "Freedom Unlimited", "Business cards"],
+      "link": "/bank/chase"
+    },
+    {
+      "name": "American Express",
+      "logo": "✨",
+      "offerCount": 18,
+      "description": "Premium credit cards and rewards",
+      "features": ["Platinum Card", "Gold Card", "Blue Cash Preferred"],
+      "link": "/bank/amex"
+    },
+    {
+      "name": "Capital One",
+      "logo": "🔴",
+      "offerCount": 15,
+      "description": "Banking and credit card offers",
+      "features": ["Venture Rewards", "Quicksilver", "360 Savings"],
+      "link": "/bank/capital-one"
+    },
+    {
+      "name": "Discover",
+      "logo": "🎯",
+      "offerCount": 12,
+      "description": "Cashback cards and high-yield savings",
+      "features": ["Cash Back", "Miles", "Student cards"],
+      "link": "/bank/discover"
+    }
+  ],
+  "savingsAccountsTitle": "💰 High-Yield Savings Accounts",
+  "savingsAccounts": [
+    {
+      "bank": "Ally Bank",
+      "apy": "4.25%",
+      "minimumDeposit": "$0",
+      "features": ["No monthly fees", "24/7 customer support", "FDIC insured"],
+      "link": "/savings/ally"
+    },
+    {
+      "bank": "Marcus by Goldman Sachs",
+      "apy": "4.15%",
+      "minimumDeposit": "$0",
+      "features": ["No fees", "Same-day transfers", "FDIC insured"],
+      "link": "/savings/marcus"
+    },
+    {
+      "bank": "Synchrony Bank",
+      "apy": "4.30%",
+      "minimumDeposit": "$0",
+      "features": ["ATM access", "No minimum balance", "FDIC insured"],
+      "link": "/savings/synchrony"
+    }
+  ],
+  "loanOffersTitle": "📋 Personal Loan Offers",
+  "loanOffers": [
+    {
+      "bank": "SoFi",
+      "loanType": "Personal Loan",
+      "rate": "8.99% - 23.43% APR",
+      "loanAmount": "$5,000 - $100,000",
+      "terms": "2-7 years",
+      "link": "/loan/sofi"
+    },
+    {
+      "bank": "LightStream",
+      "loanType": "Personal Loan",
+      "rate": "7.49% - 25.49% APR",
+      "loanAmount": "$5,000 - $100,000",
+      "terms": "2-7 years",
+      "link": "/loan/lightstream"
+    },
+    {
+      "bank": "Upstart",
+      "loanType": "Personal Loan",
+      "rate": "7.80% - 35.99% APR",
+      "loanAmount": "$1,000 - $50,000",
+      "terms": "3-5 years",
+      "link": "/loan/upstart"
+    }
+  ],
+  "investmentOffersTitle": "📊 Investment Platform Offers",
+  "investmentOffers": [
+    {
+      "platform": "Robinhood",
+      "offer": "Free stock worth up to $200",
+      "commission": "$0 trades",
+      "minimumDeposit": "$0",
+      "features": ["Fractional shares", "Cryptocurrency", "IPO access"],
+      "link": "/invest/robinhood"
+    },
+    {
+      "platform": "Webull",
+      "offer": "12 free stocks",
+      "commission": "$0 trades",
+      "minimumDeposit": "$100",
+      "features": ["Extended hours", "Options trading", "Margin accounts"],
+      "link": "/invest/webull"
+    },
+    {
+      "platform": "M1 Finance",
+      "offer": "$30 bonus",
+      "commission": "$0 trades",
+      "minimumDeposit": "$100",
+      "features": ["Automated investing", "Pie portfolios", "Borrowing"],
+      "link": "/invest/m1"
+    }
+  ],
+  "tipsTitle": "Smart Financial Tips",
+  "tips": [
+    {
+      "title": "Compare Multiple Offers",
+      "description": "Don't settle for the first offer. Compare rates, fees, and benefits across multiple providers.",
+      "icon": "📊"
+    },
+    {
+      "title": "Read the Fine Print",
+      "description": "Understand fees, APR terms, and bonus requirements before applying.",
+      "icon": "🔍"
+    },
+    {
+      "title": "Check Your Credit Score",
+      "description": "Know your credit score before applying for credit cards or loans.",
+      "icon": "📈"
+    },
+    {
+      "title": "Stack Rewards",
+      "description": "Combine credit card rewards with cashback apps for maximum savings.",
+      "icon": "💰"
+    }
+  ],
+  "calculator": {
+    "title": "Need Help Calculating?",
+    "description": "Use our financial calculators to compare loan payments, savings growth, and credit card rewards",
+    "buttonText": "Try Calculators"
+  },
+  "compareTitle": "Compare Top Offers",
+  "compare": {
+    "description": "See how the best banking offers stack up",
+    "items": [
+      {
+        "name": "Chase Sapphire Preferred",
+        "rate": "60k points",
+        "fee": "$95",
+        "rating": 4.8
+      },
+      {
+        "name": "Capital One Venture",
+        "rate": "75k miles",
+        "fee": "$95",
+        "rating": 4.7
+      },
+      {
+        "name": "Amex Gold",
+        "rate": "75k points",
+        "fee": "$250",
+        "rating": 4.6
+      }
+    ]
+  },
+  "seasonalPromosTitle": "🎯 Limited-Time Promotions",
+  "seasonalPromos": [
+    {
+      "title": "Tax Season Loan Special",
+      "description": "Reduced rates on personal loans through April 15",
+      "endDate": "Apr 15, 2025",
+      "link": "/promo/tax-loans"
+    },
+    {
+      "title": "Summer Travel Bonus",
+      "description": "Extra points on travel bookings with select cards",
+      "endDate": "Aug 31, 2025",
+      "link": "/promo/travel-bonus"
+    }
+  ],
+  "buyingGuidesTitle": "Financial Guides",
+  "buyingGuides": [
+    {
+      "title": "How to Choose a Credit Card",
+      "description": "Find the best card for your spending habits and goals",
+      "readTime": "8 min",
+      "link": "/guide/choose-credit-card"
+    },
+    {
+      "title": "Understanding Credit Scores",
+      "description": "Learn how credit scores work and how to improve yours",
+      "readTime": "6 min",
+      "link": "/guide/credit-scores"
+    },
+    {
+      "title": "Debt Repayment Strategies",
+      "description": "Proven methods to pay off debt faster",
+      "readTime": "10 min",
+      "link": "/guide/debt-repayment"
+    }
+  ],
+  "faq": {
+    "title": "Banking & Finance FAQ - {country}",
+    "items": [
+      {
+        "question": "How do I qualify for credit card bonuses?",
+        "answer": "Most signup bonuses require you to spend a certain amount within the first 3-6 months. Check the specific offer terms for exact requirements."
+      },
+      {
+        "question": "What's a good APY for savings?",
+        "answer": "High-yield savings accounts currently offer between 4-5% APY. Compare rates across multiple banks to find the best deal."
+      },
+      {
+        "question": "Will applying for multiple cards hurt my credit?",
+        "answer": "Each application creates a hard inquiry, which may temporarily lower your score by a few points. Space out applications every 6 months."
+      },
+      {
+        "question": "Are online banks safe?",
+        "answer": "Yes, reputable online banks are FDIC or NCUA insured, protecting your deposits up to $250,000."
+      },
+      {
+        "question": "How do I choose between rewards and low APR?",
+        "answer": "If you carry a balance monthly, prioritize low APR. If you pay in full, rewards cards offer better value."
+      },
+      {
+        "question": "Can I negotiate loan rates?",
+        "answer": "Yes! Many lenders will negotiate rates, especially if you have good credit or existing relationship with the bank."
+      }
+    ]
+  },
+  "final": {
+    "title": "Start Maximizing Your Money Today",
+    "subtitle": "Join thousands of smart consumers who found the best banking and finance offers",
+    "buttonText": "Browse All Offers"
+  }
+}
