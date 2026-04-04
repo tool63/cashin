@@ -1,9 +1,7 @@
-'use client';
-
 // app/[country]/(marketing)/vouchers/page.tsx
 
+import { cookies } from "next/headers";
 import { Metadata } from "next";
-import { useEffect, useState } from "react";
 
 import {
   getCountry,
@@ -37,12 +35,12 @@ interface TranslationSection {
   };
   statsTitle?: string;
   stats?: {
-    vouchersRedeemed?: string;
-    vouchersRedeemedLabel?: string;
-    avgDiscount?: string;
-    avgDiscountLabel?: string;
     activeUsers?: string;
     activeUsersLabel?: string;
+    vouchersRedeemed?: string;
+    vouchersRedeemedLabel?: string;
+    avgSavings?: string;
+    avgSavingsLabel?: string;
     totalSaved?: string;
     totalSavedLabel?: string;
   };
@@ -52,19 +50,18 @@ interface TranslationSection {
     icon: string;
     title: string;
     description: string;
-    discountRange: string;
-    storesCount: string;
+    discount: string;
+    stores: number;
   }>;
-  featuredVouchersTitle?: string;
-  featuredVouchersSubtitle?: string;
+  featuredTitle?: string;
+  featuredSubtitle?: string;
   featuredVouchers?: Array<{
     title: string;
     discount: string;
     code: string;
-    category: string;
-    expiresIn: string;
-    company: string;
-    usedCount: number;
+    expiry: string;
+    store: string;
+    rating: string;
   }>;
   benefitsTitle?: string;
   benefits?: Array<{
@@ -81,7 +78,7 @@ interface TranslationSection {
   testimonials?: Array<{
     name: string;
     country: string;
-    saved: string;
+    savings: string;
     quote: string;
     avatar: string;
   }>;
@@ -113,6 +110,28 @@ async function loadSectionTranslation(
   }
 }
 
+function getLanguage(country: CountryCode): SupportedLanguage {
+  const cookieStore = cookies();
+
+  const override = cookieStore.get(COOKIE_KEYS.USER_LANGUAGE_OVERRIDE)?.value;
+  if (override) {
+    const lang = override.toLowerCase().split("-")[0];
+    if (SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage)) {
+      return lang as SupportedLanguage;
+    }
+  }
+
+  const saved = cookieStore.get(COOKIE_KEYS.LANGUAGE)?.value;
+  if (saved) {
+    const lang = saved.toLowerCase().split("-")[0];
+    if (SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage)) {
+      return lang as SupportedLanguage;
+    }
+  }
+
+  return getCountry(country).defaultLanguage as SupportedLanguage;
+}
+
 // Helper to replace {country} placeholder
 const replaceCountryPlaceholder = (text: string, countryName: string): string => {
   if (!text) return "";
@@ -124,155 +143,146 @@ const getCountrySpecificKeywords = (countryName: string, countryCode: string): s
   const lowerCountry = countryName.toLowerCase();
   
   const baseKeywords = [
-    `discount vouchers ${lowerCountry}`,
-    `promo codes ${lowerCountry}`,
-    `save money shopping ${lowerCountry}`,
-    `voucher codes ${lowerCountry}`,
-    `coupon codes ${lowerCountry}`,
+    `free vouchers ${lowerCountry}`,
     `discount codes ${lowerCountry}`,
-    `money saving vouchers ${lowerCountry}`,
-    `best voucher sites ${lowerCountry}`,
-    `free discount codes ${lowerCountry}`,
     `shopping vouchers ${lowerCountry}`,
-    `online promo codes ${lowerCountry}`,
-    `store coupons ${lowerCountry}`,
-    `discount vouchers online ${lowerCountry}`,
-    `voucher discounts ${lowerCountry}`,
-    `save money online shopping ${lowerCountry}`,
-    `promotional codes ${lowerCountry}`,
-    `discount offers ${lowerCountry}`,
-    `coupon deals ${lowerCountry}`,
-    `voucher savings ${lowerCountry}`,
-    `best discount codes ${lowerCountry}`,
+    `save money shopping ${lowerCountry}`,
+    `promo codes ${lowerCountry}`,
+    `cashback vouchers ${lowerCountry}`,
+    `best voucher sites ${lowerCountry}`,
+    `legit discount codes ${lowerCountry}`,
+    `daily vouchers ${lowerCountry}`,
+    `exclusive deals ${lowerCountry}`,
+    `voucher codes for online shopping ${lowerCountry}`,
+    `get free vouchers ${lowerCountry}`,
+    `discount websites ${lowerCountry}`,
+    `savings codes ${lowerCountry}`,
   ];
 
   // Add country-specific variations
   if (countryCode === "us") {
     baseKeywords.push(
-      "discount vouchers usa",
-      "promo codes usa",
+      "free vouchers usa",
+      "american discount codes",
       "best coupon sites usa"
     );
   } else if (countryCode === "gb") {
     baseKeywords.push(
-      "discount vouchers uk",
-      "promo codes uk",
-      "voucher codes uk"
+      "free vouchers uk",
+      "british discount codes",
+      "best voucher codes uk"
     );
   } else if (countryCode === "ca") {
     baseKeywords.push(
-      "discount vouchers canada",
-      "promo codes canada",
+      "free vouchers canada",
+      "canadian discount codes",
       "save money canada"
     );
   } else if (countryCode === "au") {
     baseKeywords.push(
-      "discount vouchers australia",
-      "promo codes australia",
+      "free vouchers australia",
+      "australian discount codes",
       "voucher codes australia"
-    );
-  } else if (countryCode === "de") {
-    baseKeywords.push(
-      "rabattgutscheine deutschland",
-      "promo codes deutschland",
-      "sparen beim online shopping"
-    );
-  } else if (countryCode === "fr") {
-    baseKeywords.push(
-      "bons de réduction france",
-      "codes promo france",
-      "économiser argent france"
-    );
-  } else if (countryCode === "es") {
-    baseKeywords.push(
-      "vales de descuento españa",
-      "códigos promocionales españa",
-      "ahorrar dinero españa"
-    );
-  } else if (countryCode === "in") {
-    baseKeywords.push(
-      "discount vouchers india",
-      "promo codes india",
-      "save money india"
     );
   }
 
   return baseKeywords;
 };
 
+/* ================= METADATA ================= */
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ country?: string }> | { country?: string };
+}): Promise<Metadata> {
+  const resolvedParams = await params;
+  const countryParam = resolvedParams?.country?.toLowerCase();
+
+  if (!countryParam || !isValidCountryCode(countryParam)) {
+    return {
+      title: "Country Not Found | Cashog",
+      robots: { index: false },
+    };
+  }
+
+  const country = countryParam as CountryCode;
+  const countryData = getCountry(country);
+  const countryName = countryData.name;
+  const language = getLanguage(country);
+
+  let translation: TranslationSection = {};
+  try {
+    translation = await loadSectionTranslation(language, "vouchers");
+  } catch (error) {
+    // Use defaults
+  }
+
+  // Helper to replace {country} in metadata
+  const replaceCountry = (text: string | undefined, fallback: string): string => {
+    const str = text || fallback;
+    return str.replace(/\{country\}/g, countryName);
+  };
+
+  const rawTitle = translation?.seo?.title;
+  const rawDescription = translation?.seo?.description;
+
+  const seoTitle = replaceCountry(
+    rawTitle,
+    `Free Vouchers & Discount Codes in ${countryName} - Save Up to 70% | Cashog`
+  );
+
+  const seoDescription = replaceCountry(
+    rawDescription,
+    `Get exclusive voucher codes and discounts for 500+ stores in ${countryName}. Save money on shopping, dining, and entertainment. New vouchers added daily!`
+  );
+
+  // Generate dynamic keywords
+  const keywordsArray = getCountrySpecificKeywords(countryName, country);
+  const keywords = keywordsArray.join(", ");
+
+  return {
+    title: seoTitle,
+    description: seoDescription,
+    keywords,
+    alternates: {
+      canonical: `https://cashog.com/${country}/vouchers`,
+    },
+    openGraph: {
+      title: seoTitle,
+      description: seoDescription,
+      url: `https://cashog.com/${country}/vouchers`,
+      siteName: "Cashog",
+      type: "website",
+      locale: language === "es" ? "es_ES" : language === "fr" ? "fr_FR" : "en_US",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: seoTitle,
+      description: seoDescription,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+  };
+}
+
 /* ================= PAGE COMPONENT ================= */
 
-export default function VouchersPage({
+export default async function VouchersPage({
   params,
 }: {
   params: Promise<{ country?: string }> | { country?: string };
 }) {
-  const [resolvedParams, setResolvedParams] = useState<{ country?: string } | null>(null);
-  const [tData, setTData] = useState<TranslationSection>({});
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const loadData = async () => {
-      // Resolve params
-      const paramsResolved = await params;
-      setResolvedParams(paramsResolved);
-
-      const countryParam = paramsResolved?.country?.toLowerCase();
-
-      if (!countryParam || !isValidCountryCode(countryParam)) {
-        setLoading(false);
-        return;
-      }
-
-      const country = countryParam as CountryCode;
-      const countryData = getCountry(country);
-      const countryName = countryData.name;
-      
-      // Get language from cookies (client-side)
-      const getCookie = (name: string) => {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop()?.split(';').shift();
-        return null;
-      };
-
-      let language = getCountry(country).defaultLanguage as SupportedLanguage;
-      const override = getCookie(COOKIE_KEYS.USER_LANGUAGE_OVERRIDE);
-      if (override) {
-        const lang = override.toLowerCase().split("-")[0];
-        if (SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage)) {
-          language = lang as SupportedLanguage;
-        }
-      } else {
-        const saved = getCookie(COOKIE_KEYS.LANGUAGE);
-        if (saved) {
-          const lang = saved.toLowerCase().split("-")[0];
-          if (SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage)) {
-            language = lang as SupportedLanguage;
-          }
-        }
-      }
-
-      // Load translations
-      const translation = await loadSectionTranslation(language, "vouchers");
-      setTData(translation);
-      setLoading(false);
-    };
-
-    loadData();
-  }, [params]);
-
-  if (loading) {
-    return (
-      <main className="flex flex-col items-center justify-center min-h-screen">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-500 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
-        </div>
-      </main>
-    );
-  }
-
+  const resolvedParams = await params;
   const countryParam = resolvedParams?.country?.toLowerCase();
 
   if (!countryParam || !isValidCountryCode(countryParam)) {
@@ -289,6 +299,10 @@ export default function VouchersPage({
   const country = countryParam as CountryCode;
   const countryData = getCountry(country);
   const countryName = countryData.name;
+  const language = getLanguage(country);
+
+  // Load translations
+  const tData = await loadSectionTranslation(language, "vouchers");
 
   // Helper function to replace country placeholder
   const t = (text: string | undefined, fallback: string): string => {
@@ -296,25 +310,38 @@ export default function VouchersPage({
     return replaceCountryPlaceholder(text, countryName);
   };
 
+  // SEO data for structured data
+  const rawTitle = tData?.seo?.title;
+  const rawDescription = tData?.seo?.description;
+  const title = t(rawTitle, `Free Vouchers in ${countryName} - Save Money`);
+  const description = t(rawDescription, `Get exclusive discount codes and save money shopping in ${countryName}.`);
+
+  const structuredData = generateJsonLd({
+    path: `/${country}/vouchers`,
+    title,
+    description,
+    type: "low",
+  });
+
   // Prepare data with fallbacks
   const heroData = {
-    title: t(tData?.hero?.title, `Save Money with Discount Vouchers in ${countryName}`),
+    title: t(tData?.hero?.title, `Free Vouchers & Discount Codes in ${countryName}`),
     subtitle: t(
       tData?.hero?.subtitle,
-      `Access thousands of verified discount vouchers and promo codes for your favorite stores in ${countryName}. Save up to 70% on shopping, dining, travel, and more. Updated daily!`
+      `Join 100,000+ smart shoppers saving money in ${countryName} with exclusive voucher codes. Get discounts up to 70% at your favorite stores!`
     ),
   };
 
   const statsData = {
-    title: t(tData?.statsTitle, "Voucher Statistics"),
-    vouchersRedeemed: tData?.stats?.vouchersRedeemed || "5M+",
+    title: t(tData?.statsTitle, "Trusted by Smart Shoppers"),
+    activeUsers: tData?.stats?.activeUsers || "100K+",
+    activeUsersLabel: tData?.stats?.activeUsersLabel || "Active Shoppers",
+    vouchersRedeemed: tData?.stats?.vouchersRedeemed || "2M+",
     vouchersRedeemedLabel: tData?.stats?.vouchersRedeemedLabel || "Vouchers Redeemed",
-    avgDiscount: tData?.stats?.avgDiscount || "35%",
-    avgDiscountLabel: tData?.stats?.avgDiscountLabel || "Average Discount",
-    activeUsers: tData?.stats?.activeUsers || "200K+",
-    activeUsersLabel: tData?.stats?.activeUsersLabel || "Active Savers",
-    totalSaved: tData?.stats?.totalSaved || "$15M+",
-    totalSavedLabel: tData?.stats?.totalSavedLabel || "Total Saved",
+    avgSavings: tData?.stats?.avgSavings || "$15",
+    avgSavingsLabel: tData?.stats?.avgSavingsLabel || "Average Savings",
+    totalSaved: tData?.stats?.totalSaved || "$30M+",
+    totalSavedLabel: tData?.stats?.totalSavedLabel || "Total Member Savings",
   };
 
   const voucherCategoriesData = (tData?.voucherCategories || []).map((category) => ({
@@ -346,7 +373,7 @@ export default function VouchersPage({
   }));
 
   const faqData = {
-    title: t(tData?.faq?.title, `Discount Vouchers in ${countryName} - FAQ`),
+    title: t(tData?.faq?.title, `Free Vouchers in ${countryName} - FAQ`),
     items: (tData?.faq?.items || [])
       .map((item) => ({
         q: t(item.question, item.question),
@@ -359,13 +386,23 @@ export default function VouchersPage({
     title: t(tData?.final?.title, `Ready to Start Saving in ${countryName}?`),
     subtitle: t(
       tData?.final?.subtitle,
-      `Join 200,000+ savvy shoppers already saving in ${countryName}. Sign up for free and access exclusive discount vouchers today!`
+      `Join 100,000+ smart shoppers already saving money in ${countryName}. Sign up for free and get your first voucher code today!`
     ),
   };
 
   /* ================= RENDER ================= */
   return (
     <main className="flex flex-col items-center w-full">
+      {structuredData && (
+        <script
+          type="application/ld+json"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData),
+          }}
+        />
+      )}
+
       {/* Hero Section */}
       <CircleBorder>
         <OpeningStyle delay={0.1}>
@@ -379,12 +416,12 @@ export default function VouchersPage({
             >
               {heroData.title}
             </h1>
-            <p className="text-lg sm:text-xl md:text-2xl mb-12 text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl md:text-2xl mb-12 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
               {heroData.subtitle}
             </p>
             <PrimaryCTA
               href="/signup"
-              translationKey="start_saving_now"
+              translationKey="get_vouchers_now"
               observer={true}
             />
           </section>
@@ -413,6 +450,14 @@ export default function VouchersPage({
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               <div className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl">
                 <div className="text-3xl md:text-4xl font-bold text-green-600">
+                  {statsData.activeUsers}
+                </div>
+                <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                  {statsData.activeUsersLabel}
+                </div>
+              </div>
+              <div className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl">
+                <div className="text-3xl md:text-4xl font-bold text-green-600">
                   {statsData.vouchersRedeemed}
                 </div>
                 <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">
@@ -421,18 +466,10 @@ export default function VouchersPage({
               </div>
               <div className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl">
                 <div className="text-3xl md:text-4xl font-bold text-green-600">
-                  {statsData.avgDiscount}
+                  {statsData.avgSavings}
                 </div>
                 <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-                  {statsData.avgDiscountLabel}
-                </div>
-              </div>
-              <div className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl">
-                <div className="text-3xl md:text-4xl font-bold text-green-600">
-                  {statsData.activeUsers}
-                </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-                  {statsData.activeUsersLabel}
+                  {statsData.avgSavingsLabel}
                 </div>
               </div>
               <div className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl">
@@ -461,14 +498,14 @@ export default function VouchersPage({
                   id="categories-heading"
                   className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
                 >
-                  {t(tData?.categoriesTitle, "Voucher Categories")}
+                  {t(tData?.categoriesTitle, "Popular Voucher Categories")}
                 </h2>
                 <div
                   className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
                   aria-hidden="true"
                 />
                 <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-6">
-                  {t(tData?.categoriesSubtitle, "Find vouchers for your favorite stores and services")}
+                  {t(tData?.categoriesSubtitle, "Save on these popular categories")}
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -489,10 +526,10 @@ export default function VouchersPage({
                     <div className="space-y-2 border-t border-gray-200 dark:border-gray-700 pt-4">
                       <div className="flex justify-between text-sm">
                         <span className="text-gray-500 dark:text-gray-400">
-                          Discount Range:
+                          Discount:
                         </span>
                         <span className="font-semibold text-green-600 dark:text-green-400">
-                          {category.discountRange}
+                          {category.discount}
                         </span>
                       </div>
                       <div className="flex justify-between text-sm">
@@ -500,7 +537,7 @@ export default function VouchersPage({
                           Stores:
                         </span>
                         <span className="font-semibold text-gray-700 dark:text-gray-300">
-                          {category.storesCount}
+                          {category.stores}+ stores
                         </span>
                       </div>
                     </div>
@@ -525,14 +562,14 @@ export default function VouchersPage({
                   id="featured-heading"
                   className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
                 >
-                  {t(tData?.featuredVouchersTitle, "Hot Vouchers & Promo Codes")}
+                  {t(tData?.featuredTitle, "Today's Top Voucher Codes")}
                 </h2>
                 <div
                   className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
                   aria-hidden="true"
                 />
                 <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-6">
-                  {t(tData?.featuredVouchersSubtitle, "Limited time offers - grab these deals before they expire")}
+                  {t(tData?.featuredSubtitle, "Limited time offers - grab these deals today")}
                 </p>
               </div>
               <div className="max-w-4xl mx-auto space-y-4">
@@ -547,37 +584,31 @@ export default function VouchersPage({
                           <h3 className="font-bold text-gray-900 dark:text-white">
                             {voucher.title}
                           </h3>
-                          <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-purple-50 text-purple-600 dark:bg-purple-900/20 dark:text-purple-400">
-                            {voucher.category}
+                          <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400">
+                            ⭐ {voucher.rating}
                           </span>
                         </div>
-                        <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">
-                          Company: {voucher.company}
+                        <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+                          {voucher.store}
                         </p>
                         <div className="flex flex-wrap gap-4 text-xs">
-                          <span className="text-orange-600 dark:text-orange-400">
-                            🕐 Expires: {voucher.expiresIn}
-                          </span>
-                          <span className="text-blue-600 dark:text-blue-400">
-                            👥 Used {voucher.usedCount.toLocaleString()} times
+                          <span className="text-gray-500 dark:text-gray-400">
+                            🕐 Expires: {voucher.expiry}
                           </span>
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-2xl font-bold text-green-600 dark:text-green-400 mb-2">
+                        <div className="text-2xl font-bold text-green-600 dark:text-green-400">
                           {voucher.discount}
                         </div>
-                        <div className="flex gap-2">
-                          <code className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded text-sm font-mono">
-                            {voucher.code}
-                          </code>
-                          <button
-                            onClick={() => navigator.clipboard.writeText(voucher.code)}
-                            className="px-3 py-1 bg-gradient-to-r from-yellow-400 to-green-500 text-white rounded text-sm hover:shadow-lg transition-all"
-                          >
-                            Copy
-                          </button>
+                        <div className="bg-gray-100 dark:bg-gray-700 rounded px-3 py-1 text-sm font-mono mb-2">
+                          {voucher.code}
                         </div>
+                        <PrimaryCTA
+                          href="/signup"
+                          translationKey="get_code"
+                          observer={false}
+                        />
                       </div>
                     </div>
                   </div>
@@ -651,7 +682,7 @@ export default function VouchersPage({
                   aria-hidden="true"
                 />
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                 {tipsData.map((tip) => (
                   <div key={tip.number} className="text-center">
                     <div
@@ -687,7 +718,7 @@ export default function VouchersPage({
                   id="testimonials-heading"
                   className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
                 >
-                  {t(tData?.testimonialsTitle, "What Our Savers Say")}
+                  {t(tData?.testimonialsTitle, "What Our Members Say")}
                 </h2>
                 <div
                   className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
@@ -720,7 +751,7 @@ export default function VouchersPage({
                       "{testimonial.quote}"
                     </p>
                     <p className="text-green-600 dark:text-green-400 font-semibold text-sm">
-                      Saved {testimonial.saved}
+                      Saved {testimonial.savings}
                     </p>
                   </div>
                 ))}
@@ -763,7 +794,7 @@ export default function VouchersPage({
             </p>
             <PrimaryCTA
               href="/signup"
-              translationKey="start_saving_now"
+              translationKey="get_vouchers_now"
               observer={true}
             />
           </section>
