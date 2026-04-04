@@ -1,0 +1,388 @@
+{
+  "seo": {
+    "title": "Cashback Rewards - Get Money Back on Every Purchase in {country} | Cashog",
+    "description": "Earn cashback rewards on your everyday purchases in {country}. Get money back from top stores, shop through cashback apps, and maximize your savings. Start earning cashback today!"
+  },
+  "hero": {
+    "title": "Get Cashback on Every Purchase",
+    "subtitle": "Turn your everyday spending into savings! Earn cashback rewards when you shop at thousands of stores in {country}. Get money back on everything from groceries to electronics - it's free money for shopping you already do."
+  },
+  "categoryTitle": "Shop by Category",
+  "categories": [
+    {
+      "name": "Clothing & Fashion",
+      "icon": "👕",
+      "description": "Cashback on apparel, shoes, and accessories",
+      "storeCount": 450,
+      "averageCashback": "6-10%"
+    },
+    {
+      "name": "Electronics",
+      "icon": "💻",
+      "description": "Laptops, phones, TVs, and gaming",
+      "storeCount": 320,
+      "averageCashback": "3-8%"
+    },
+    {
+      "name": "Home & Garden",
+      "icon": "🏠",
+      "description": "Furniture, decor, and tools",
+      "storeCount": 380,
+      "averageCashback": "5-12%"
+    },
+    {
+      "name": "Groceries",
+      "icon": "🛒",
+      "description": "Food, beverages, and household items",
+      "storeCount": 280,
+      "averageCashback": "2-10%"
+    },
+    {
+      "name": "Travel",
+      "icon": "✈️",
+      "description": "Flights, hotels, and vacation packages",
+      "storeCount": 200,
+      "averageCashback": "4-15%"
+    },
+    {
+      "name": "Health & Beauty",
+      "icon": "💄",
+      "description": "Skincare, makeup, and wellness",
+      "storeCount": 310,
+      "averageCashback": "5-12%"
+    }
+  ],
+  "topPlatformsTitle": "🏆 Best Cashback Platforms",
+  "topPlatforms": [
+    {
+      "name": "Rakuten",
+      "icon": "💰",
+      "description": "Formerly Ebates - earn cashback at over 2,500 stores",
+      "cashbackRate": "Up to 40%",
+      "categories": ["Clothing", "Electronics", "Travel", "Home"],
+      "payoutMethods": ["PayPal", "Check", "Gift Cards"],
+      "minimumPayout": "$5",
+      "rating": 4.7,
+      "steps": [
+        "Sign up for free Rakuten account",
+        "Get $10 welcome bonus",
+        "Shop through Rakuten links",
+        "Earn cashback automatically",
+        "Get paid quarterly"
+      ],
+      "tips": [
+        "Install browser extension for automatic cashback",
+        "Stack with store coupons",
+        "Refer friends for $25 bonus",
+        "Check for double cashback events"
+      ],
+      "link": "/cashback/rakuten",
+      "isFeatured": true,
+      "signupBonus": "$10"
+    },
+    {
+      "name": "TopCashback",
+      "icon": "⭐",
+      "description": "Highest paying cashback site - 100% of commissions paid to you",
+      "cashbackRate": "Up to 50%",
+      "categories": ["All categories", "Travel", "Electronics", "Clothing"],
+      "payoutMethods": ["PayPal", "Bank Transfer", "Gift Cards"],
+      "minimumPayout": "$1",
+      "rating": 4.6,
+      "steps": [
+        "Create free TopCashback account",
+        "Search for your store",
+        "Click through to shop",
+        "Complete your purchase",
+        "Cashback added to account"
+      ],
+      "tips": [
+        "Compare cashback rates across platforms",
+        "Use the mobile app for in-store cashback",
+        "Withdraw as soon as you reach minimum",
+        "Check for exclusive higher rates"
+      ],
+      "link": "/cashback/topcashback",
+      "isFeatured": true,
+      "signupBonus": "$5"
+    },
+    {
+      "name": "Ibotta",
+      "icon": "📱",
+      "description": "Cashback on groceries, online shopping, and more",
+      "cashbackRate": "2-20%",
+      "categories": ["Groceries", "Online Shopping", "Pharmacy", "Liquor"],
+      "payoutMethods": ["PayPal", "Venmo", "Gift Cards"],
+      "minimumPayout": "$20",
+      "rating": 4.8,
+      "steps": [
+        "Download Ibotta app",
+        "Browse available offers",
+        "Activate offers before shopping",
+        "Upload receipt or link loyalty card",
+        "Earn cashback instantly"
+      ],
+      "tips": [
+        "Activate offers before shopping",
+        "Scan all receipts, even without offers",
+        "Complete bonus challenges",
+        "Use for in-store and online shopping"
+      ],
+      "link": "/cashback/ibotta",
+      "isFeatured": true,
+      "signupBonus": "$10"
+    },
+    {
+      "name": "Fetch Rewards",
+      "icon": "📸",
+      "description": "Scan grocery receipts for instant points",
+      "cashbackRate": "1-10%",
+      "categories": ["Groceries", "Pet Supplies", "Household"],
+      "payoutMethods": ["Gift Cards", "Visa"],
+      "minimumPayout": "$3",
+      "rating": 4.7,
+      "steps": [
+        "Download Fetch Rewards",
+        "Scan any grocery receipt",
+        "Earn points on eligible items",
+        "Redeem for gift cards",
+        "No minimum purchase required"
+      ],
+      "tips": [
+        "Scan every receipt, even small ones",
+        "Refer friends for bonus points",
+        "Look for special bonus offers",
+        "Connect Amazon and email for points"
+      ],
+      "link": "/cashback/fetch-rewards",
+      "isFeatured": false,
+      "signupBonus": "$2"
+    }
+  ],
+  "popularStoresTitle": "🛍️ Popular Stores with Cashback",
+  "popularStores": [
+    {
+      "name": "Amazon",
+      "logo": "📦",
+      "cashbackRate": "1-10%",
+      "categories": ["Electronics", "Books", "Home", "Fashion"],
+      "link": "/store/amazon",
+      "isPopular": true
+    },
+    {
+      "name": "Walmart",
+      "logo": "🎯",
+      "cashbackRate": "2-8%",
+      "categories": ["Groceries", "Electronics", "Home", "Clothing"],
+      "link": "/store/walmart",
+      "isPopular": true
+    },
+    {
+      "name": "Target",
+      "logo": "📍",
+      "cashbackRate": "1-5%",
+      "categories": ["Groceries", "Clothing", "Home", "Beauty"],
+      "link": "/store/target",
+      "isPopular": true
+    },
+    {
+      "name": "Best Buy",
+      "logo": "💻",
+      "cashbackRate": "1-6%",
+      "categories": ["Electronics", "Gaming", "Appliances"],
+      "link": "/store/best-buy",
+      "isPopular": false
+    },
+    {
+      "name": "Nike",
+      "logo": "👟",
+      "cashbackRate": "4-12%",
+      "categories": ["Clothing", "Shoes", "Activewear"],
+      "link": "/store/nike",
+      "isPopular": false
+    },
+    {
+      "name": "Sephora",
+      "logo": "💄",
+      "cashbackRate": "2-8%",
+      "categories": ["Beauty", "Skincare", "Makeup"],
+      "link": "/store/sephora",
+      "isPopular": false
+    }
+  ],
+  "specialOffersTitle": "🔥 Limited Time Cashback Offers",
+  "specialOffers": [
+    {
+      "title": "Double Cashback Weekend",
+      "description": "Get double cashback on all electronics purchases",
+      "cashbackRate": "Up to 16%",
+      "store": "Best Buy",
+      "expiryDate": "Dec 31, 2025",
+      "link": "/offer/double-cashback",
+      "isLimited": true
+    },
+    {
+      "title": "Back to School Special",
+      "description": "Extra 5% cashback on school supplies",
+      "cashbackRate": "12%",
+      "store": "Walmart",
+      "expiryDate": "Sep 15, 2025",
+      "link": "/offer/back-to-school",
+      "isLimited": true
+    },
+    {
+      "title": "Beauty Week",
+      "description": "10% cashback on all beauty products",
+      "cashbackRate": "10%",
+      "store": "Sephora",
+      "expiryDate": "Aug 30, 2025",
+      "link": "/offer/beauty-week",
+      "isLimited": true
+    }
+  ],
+  "comparisonTitle": "📊 Compare Cashback Platforms",
+  "comparison": {
+    "description": "Find the best platform for your shopping habits",
+    "items": [
+      {
+        "platform": "Rakuten",
+        "cashbackRate": "Up to 40%",
+        "payoutSpeed": "Quarterly",
+        "minimumPayout": "$5",
+        "signupBonus": "$10",
+        "easeOfUse": "Very Easy"
+      },
+      {
+        "platform": "TopCashback",
+        "cashbackRate": "Up to 50%",
+        "payoutSpeed": "1-2 weeks",
+        "minimumPayout": "$1",
+        "signupBonus": "$5",
+        "easeOfUse": "Easy"
+      },
+      {
+        "platform": "Ibotta",
+        "cashbackRate": "2-20%",
+        "payoutSpeed": "Instant",
+        "minimumPayout": "$20",
+        "signupBonus": "$10",
+        "easeOfUse": "Very Easy"
+      },
+      {
+        "platform": "Fetch Rewards",
+        "cashbackRate": "1-10%",
+        "payoutSpeed": "Instant",
+        "minimumPayout": "$3",
+        "signupBonus": "$2",
+        "easeOfUse": "Extremely Easy"
+      }
+    ]
+  },
+  "successStoriesTitle": "🌟 Real Cashback Success Stories",
+  "successStories": [
+    {
+      "name": "Sarah M.",
+      "earnings": "850",
+      "platform": "Rakuten",
+      "story": "I earned $850 in cashback last year just by shopping through Rakuten. It's like getting paid to shop!",
+      "timeSaved": "1 year"
+    },
+    {
+      "name": "David L.",
+      "earnings": "420",
+      "platform": "Ibotta",
+      "story": "Scanning grocery receipts takes 2 minutes. Earned $420 back on groceries I was buying anyway.",
+      "timeSaved": "6 months"
+    },
+    {
+      "name": "Jessica T.",
+      "earnings": "1,200",
+      "platform": "TopCashback",
+      "story": "Combined cashback with credit card rewards and saved over $1,200 on holiday shopping.",
+      "timeSaved": "1 holiday season"
+    }
+  ],
+  "tipsTitle": "💡 Smart Cashback Tips",
+  "tips": [
+    {
+      "title": "Stack Your Savings",
+      "description": "Use cashback apps + store coupons + credit card rewards for maximum savings.",
+      "icon": "💰"
+    },
+    {
+      "title": "Install Browser Extensions",
+      "description": "Automatic cashback alerts make sure you never miss an opportunity.",
+      "icon": "🔌"
+    },
+    {
+      "title": "Use Multiple Apps",
+      "description": "Different apps have different rates. Compare before shopping.",
+      "icon": "📱"
+    },
+    {
+      "title": "Refer Friends",
+      "description": "Most platforms offer generous referral bonuses - share your code!",
+      "icon": "👥"
+    }
+  ],
+  "cashbackCalculator": {
+    "title": "Calculate Your Cashback Earnings",
+    "description": "See how much you could earn back on your yearly spending",
+    "buttonText": "Try Calculator"
+  },
+  "resourcesTitle": "Cashback Resources",
+  "resources": [
+    {
+      "title": "How to Maximize Cashback",
+      "description": "Advanced strategies for earning more cashback",
+      "readTime": "10 min",
+      "link": "/resource/maximize-cashback"
+    },
+    {
+      "title": "Best Cashback Apps Compared",
+      "description": "Which platform pays the most for your shopping",
+      "readTime": "8 min",
+      "link": "/resource/cashback-comparison"
+    },
+    {
+      "title": "Cashback vs Credit Card Rewards",
+      "description": "How to combine both for maximum savings",
+      "readTime": "7 min",
+      "link": "/resource/cashback-vs-rewards"
+    }
+  ],
+  "faq": {
+    "title": "Cashback Rewards FAQ - {country}",
+    "items": [
+      {
+        "question": "How does cashback work?",
+        "answer": "Cashback sites earn commissions from stores when you shop through their links. They share a portion of that commission with you as 'cashback'. It's free money for shopping you already do."
+      },
+      {
+        "question": "Is cashback really free money?",
+        "answer": "Yes! Cashback sites don't charge you anything. They make money from store commissions, and you get a percentage back. Never pay to join a cashback program."
+      },
+      {
+        "question": "How long does cashback take?",
+        "answer": "Most cashback takes 1-7 days to show as 'pending'. It becomes 'confirmed' after the store's return period (typically 30-90 days), then you can withdraw."
+      },
+      {
+        "question": "Can I use coupons with cashback?",
+        "answer": "Yes! Stacking coupons with cashback maximizes savings. Just make sure to click through the cashback link first, then apply coupons at checkout."
+      },
+      {
+        "question": "How do I get paid?",
+        "answer": "Most platforms pay via PayPal, direct deposit, or gift cards. Minimum payout thresholds range from $1-20 depending on the platform."
+      },
+      {
+        "question": "Is cashback taxable?",
+        "answer": "Cashback is generally considered a rebate or discount, not taxable income. However, signup bonuses and referral earnings may be taxable. Consult a tax professional."
+      }
+    ]
+  },
+  "final": {
+    "title": "Start Earning Cashback Today",
+    "subtitle": "Join millions of smart shoppers who get paid for the purchases they already make",
+    "buttonText": "Get Started Now"
+  }
+}
