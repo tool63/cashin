@@ -98,11 +98,11 @@ export default function Header({ className }: HeaderProps) {
                   transition={{ duration: 0.18 }}
                   className={`absolute top-full left-0 mt-3 w-52 flex flex-col gap-2 p-4 rounded-xl shadow-xl border ${borderColor} ${gradientBg} backdrop-blur-md`}
                 >
-                  <Link href={`/${country}/surveys`}>{t("surveys", "Surveys")}</Link>
-                  <Link href={`/${country}/app-installs`}>{t("app_installs", "App Installs")}</Link>
-                  <Link href={`/${country}/play-games`}>{t("play_games", "Play Games")}</Link>
-                  <Link href={`/${country}/watch-videos`}>{t("watch_videos", "Watch Videos")}</Link>
-                  <Link href={`/${country}/offerwall`}>{t("offerwall", "Offerwall")}</Link>
+                  <Link href={`/${country}/earn/surveys`}>{t("surveys", "Surveys")}</Link>
+                  <Link href={`/${country}/earn/app-installs`}>{t("app_installs", "App Installs")}</Link>
+                  <Link href={`/${country}/earn/play-games`}>{t("play_games", "Play Games")}</Link>
+                  <Link href={`/${country}/earn/watch-videos`}>{t("watch_videos", "Watch Videos")}</Link>
+                  <Link href={`/${country}/earn/offerwall`}>{t("offerwall", "Offerwall")}</Link>
                 </motion.div>
               )}
             </AnimatePresence>
