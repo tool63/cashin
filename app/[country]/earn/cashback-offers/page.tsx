@@ -214,7 +214,7 @@ export async function generateMetadata({
 
   let translation: TranslationSection = {};
   try {
-    translation = await loadSectionTranslation(language, "cashback");
+    translation = await loadSectionTranslation(language, "cashback-offers");
   } catch (error) {
     // Use defaults
   }
