@@ -247,7 +247,7 @@
     "buttonText": "Contact Our Sales Team"
   },
   "final": {
-    "title": "Start Advertising to 500K+ Users in {country} Today",
+    "title": "Start Advertising to {activeUsers} Users in {country} Today",
     "subtitle": "Join hundreds of successful advertisers already reaching our engaged audience. Let's grow your business together!"
   }
 }
