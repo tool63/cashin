@@ -1,0 +1,317 @@
+{
+  "seo": {
+    "title": "Promo Codes & Coupons - Save Money with Discount Codes in {country} | Cashog",
+    "description": "Find the best promo codes and coupons for top stores in {country}. Save money with exclusive discount codes, free shipping offers, and verified vouchers updated daily."
+  },
+  "hero": {
+    "title": "Find the Best Promo Codes & Coupons",
+    "subtitle": "Save money instantly with verified discount codes from thousands of stores in {country}. Get exclusive promo codes, free shipping offers, and cashback deals.",
+    "searchPlaceholder": "Search for stores or promo codes..."
+  },
+  "categoriesTitle": "Shop by Category",
+  "categories": [
+    {
+      "name": "Fashion",
+      "icon": "👕",
+      "couponCount": 1245,
+      "stores": ["Nike", "ASOS", "Zara", "H&M"]
+    },
+    {
+      "name": "Electronics",
+      "icon": "📱",
+      "couponCount": 892,
+      "stores": ["Best Buy", "Amazon", "Apple", "Newegg"]
+    },
+    {
+      "name": "Beauty",
+      "icon": "💄",
+      "couponCount": 756,
+      "stores": ["Sephora", "Ulta", "Nordstrom", "Dermstore"]
+    },
+    {
+      "name": "Home & Garden",
+      "icon": "🏠",
+      "couponCount": 634,
+      "stores": ["Wayfair", "Home Depot", "Lowe's", "IKEA"]
+    },
+    {
+      "name": "Travel",
+      "icon": "✈️",
+      "couponCount": 523,
+      "stores": ["Expedia", "Booking.com", "Airbnb", "Kayak"]
+    },
+    {
+      "name": "Groceries",
+      "icon": "🛒",
+      "couponCount": 445,
+      "stores": ["Walmart", "Target", "Kroger", "Instacart"]
+    },
+    {
+      "name": "Toys & Games",
+      "icon": "🎮",
+      "couponCount": 378,
+      "stores": ["Amazon", "Walmart", "GameStop", "Target"]
+    },
+    {
+      "name": "Health & Wellness",
+      "icon": "💪",
+      "couponCount": 312,
+      "stores": ["CVS", "Walgreens", "Vitamin Shoppe", "iHerb"]
+    }
+  ],
+  "featuredCouponsTitle": "Today's Top Coupons",
+  "featuredCoupons": [
+    {
+      "code": "SAVE20",
+      "description": "20% off your first purchase",
+      "discount": "20% OFF",
+      "expiryDate": "Dec 31, 2024",
+      "store": "Nike",
+      "storeLogo": "👟",
+      "verified": true,
+      "link": "/coupon/nike-save20"
+    },
+    {
+      "code": "FREESHIP",
+      "description": "Free shipping on orders $50+",
+      "discount": "Free Shipping",
+      "expiryDate": "Dec 31, 2024",
+      "store": "Amazon",
+      "storeLogo": "📦",
+      "verified": true,
+      "link": "/coupon/amazon-freeship"
+    },
+    {
+      "code": "BEAUTY15",
+      "description": "15% off sitewide",
+      "discount": "15% OFF",
+      "expiryDate": "Nov 30, 2024",
+      "store": "Sephora",
+      "storeLogo": "💄",
+      "verified": true,
+      "link": "/coupon/sephora-beauty15"
+    },
+    {
+      "code": "TECH10",
+      "description": "$10 off $100+ electronics",
+      "discount": "$10 OFF",
+      "expiryDate": "Dec 15, 2024",
+      "store": "Best Buy",
+      "storeLogo": "🛒",
+      "verified": true,
+      "link": "/coupon/bestbuy-tech10"
+    },
+    {
+      "code": "TRAVEL50",
+      "description": "$50 off first booking",
+      "discount": "$50 OFF",
+      "expiryDate": "Jan 31, 2025",
+      "store": "Expedia",
+      "storeLogo": "✈️",
+      "verified": true,
+      "link": "/coupon/expedia-travel50"
+    },
+    {
+      "code": "HOME10",
+      "description": "10% off furniture",
+      "discount": "10% OFF",
+      "expiryDate": "Dec 31, 2024",
+      "store": "Wayfair",
+      "storeLogo": "🏠",
+      "verified": true,
+      "link": "/coupon/wayfair-home10"
+    }
+  ],
+  "topStoresTitle": "Top Stores with Coupons",
+  "topStores": [
+    {
+      "name": "Amazon",
+      "logo": "📦",
+      "couponCount": 342,
+      "categories": ["Electronics", "Home", "Fashion"],
+      "link": "/store/amazon"
+    },
+    {
+      "name": "Walmart",
+      "logo": "🛒",
+      "couponCount": 289,
+      "categories": ["Groceries", "Electronics", "Home"],
+      "link": "/store/walmart"
+    },
+    {
+      "name": "Target",
+      "logo": "🎯",
+      "couponCount": 267,
+      "categories": ["Fashion", "Home", "Beauty"],
+      "link": "/store/target"
+    },
+    {
+      "name": "Nike",
+      "logo": "👟",
+      "couponCount": 156,
+      "categories": ["Fashion", "Sports"],
+      "link": "/store/nike"
+    },
+    {
+      "name": "Best Buy",
+      "logo": "💻",
+      "couponCount": 143,
+      "categories": ["Electronics", "Gaming"],
+      "link": "/store/bestbuy"
+    },
+    {
+      "name": "Sephora",
+      "logo": "💄",
+      "couponCount": 128,
+      "categories": ["Beauty", "Skincare"],
+      "link": "/store/sephora"
+    },
+    {
+      "name": "Home Depot",
+      "logo": "🔨",
+      "couponCount": 112,
+      "categories": ["Home", "Tools"],
+      "link": "/store/homedepot"
+    },
+    {
+      "name": "ASOS",
+      "logo": "👕",
+      "couponCount": 98,
+      "categories": ["Fashion", "Accessories"],
+      "link": "/store/asos"
+    }
+  ],
+  "tipsTitle": "How to Save More with Promo Codes",
+  "tips": [
+    {
+      "title": "Copy & Apply at Checkout",
+      "description": "Simply copy the promo code and paste it at the store's checkout page.",
+      "icon": "📋"
+    },
+    {
+      "title": "Stack with Cashback",
+      "description": "Use promo codes with our cashback offers for double savings.",
+      "icon": "💰"
+    },
+    {
+      "title": "Check Expiry Dates",
+      "description": "Always check the expiry date before using a promo code.",
+      "icon": "📅"
+    },
+    {
+      "title": "Sign Up for Emails",
+      "description": "Get exclusive codes delivered to your inbox by joining store newsletters.",
+      "icon": "📧"
+    }
+  ],
+  "howItWorksTitle": "How Promo Codes Work",
+  "howItWorks": [
+    {
+      "step": 1,
+      "title": "Find a Code",
+      "description": "Browse our list of verified promo codes for your favorite store."
+    },
+    {
+      "step": 2,
+      "title": "Copy the Code",
+      "description": "Click to copy the promo code to your clipboard."
+    },
+    {
+      "step": 3,
+      "title": "Shop & Apply",
+      "description": "Go to the store and paste the code at checkout."
+    },
+    {
+      "step": 4,
+      "title": "Save Money",
+      "description": "Enjoy your discount instantly on your purchase."
+    }
+  ],
+  "todayDealsTitle": "Today's Best Deals",
+  "todayDeals": [
+    {
+      "code": "FLASH30",
+      "description": "30% off flash sale items",
+      "discount": "30% OFF",
+      "expiryDate": "Today only",
+      "store": "Amazon",
+      "storeLogo": "📦",
+      "verified": true,
+      "link": "/deal/flash30"
+    },
+    {
+      "code": "BOGO50",
+      "description": "Buy one get one 50% off",
+      "discount": "BOGO 50%",
+      "expiryDate": "Dec 1, 2024",
+      "store": "Nike",
+      "storeLogo": "👟",
+      "verified": true,
+      "link": "/deal/bogo50"
+    }
+  ],
+  "trendingSearchesTitle": "Trending Searches",
+  "trendingSearches": [
+    "Amazon promo codes",
+    "Walmart coupons",
+    "Nike discount codes",
+    "Sephora promo codes",
+    "Best Buy coupons",
+    "Target promo codes",
+    "eBay voucher codes",
+    "Etsy coupon codes"
+  ],
+  "newsLetter": {
+    "title": "Get Exclusive Promo Codes",
+    "subtitle": "Subscribe to get the best deals delivered to your inbox",
+    "buttonText": "Subscribe Now",
+    "placeholder": "Enter your email address"
+  },
+  "priceMatch": {
+    "title": "Found a Better Deal?",
+    "description": "We'll help you find the best promo codes and coupons. Report a better code and help other shoppers save money.",
+    "buttonText": "Report Better Code"
+  },
+  "faq": {
+    "title": "Promo Codes FAQ - {country}",
+    "items": [
+      {
+        "question": "Are these promo codes verified?",
+        "answer": "Yes! We verify all promo codes before listing them. However, some codes may expire or have terms that change."
+      },
+      {
+        "question": "Why isn't my promo code working?",
+        "answer": "Check the expiry date, minimum purchase requirements, and eligible products. Some codes are for new customers only."
+      },
+      {
+        "question": "Can I use promo codes with cashback?",
+        "answer": "Yes! Most promo codes can be combined with our cashback offers for double savings. Some exclusions may apply."
+      },
+      {
+        "question": "How often are promo codes updated?",
+        "answer": "We update our promo codes daily to ensure you have access to the latest discounts and deals."
+      },
+      {
+        "question": "Do you have promo codes for all stores?",
+        "answer": "We have codes for thousands of stores. If you don't see one, check back soon or sign up for alerts."
+      },
+      {
+        "question": "Are there promo codes for first-time buyers?",
+        "answer": "Yes! Many stores offer special discounts for first-time customers. Look for 'new customer' codes."
+      },
+      {
+        "question": "How do I use a promo code?",
+        "answer": "Copy the code, go to the store's checkout page, paste it in the promo code box, and click apply to see your discount."
+      },
+      {
+        "question": "Can I use multiple promo codes?",
+        "answer": "Most stores only allow one promo code per order. Try to use the one that gives you the biggest discount."
+      }
+    ]
+  },
+  "final": {
+    "title": "Start Saving with Promo Codes Today",
+    "subtitle": "Join thousands of smart shoppers saving money with our verified promo codes",
+    "buttonText": "Browse All Codes"
+  }
+}
