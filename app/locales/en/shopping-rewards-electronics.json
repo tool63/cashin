@@ -1,0 +1,376 @@
+{
+  "seo": {
+    "title": "Electronics Cashback - Earn Up to 15% Back on Electronics in {country} | Cashog",
+    "description": "Shop electronics with cashback in {country}. Earn up to 15% back at top stores like Best Buy, Amazon, Newegg, and more. Get the best deals on laptops, phones, TVs, and gaming gear."
+  },
+  "hero": {
+    "title": "Earn Cashback on Electronics",
+    "subtitle": "Get paid to shop for the latest tech. Earn up to 15% cashback at top electronics retailers in {country}. From laptops and smartphones to TVs and gaming consoles."
+  },
+  "categoryTitle": "Shop by Category",
+  "categories": [
+    {
+      "name": "Laptops & Computers",
+      "icon": "💻",
+      "description": "Desktop PCs, laptops, monitors, and accessories",
+      "storeCount": 25
+    },
+    {
+      "name": "Smartphones",
+      "icon": "📱",
+      "description": "Latest phones, cases, and mobile accessories",
+      "storeCount": 18
+    },
+    {
+      "name": "TV & Home Theater",
+      "icon": "📺",
+      "description": "4K TVs, soundbars, and streaming devices",
+      "storeCount": 22
+    },
+    {
+      "name": "Gaming",
+      "icon": "🎮",
+      "description": "Consoles, games, and gaming peripherals",
+      "storeCount": 20
+    },
+    {
+      "name": "Audio",
+      "icon": "🎧",
+      "description": "Headphones, speakers, and audio gear",
+      "storeCount": 19
+    },
+    {
+      "name": "Smart Home",
+      "icon": "🏠",
+      "description": "Smart speakers, lights, and security",
+      "storeCount": 15
+    }
+  ],
+  "featuredStoresTitle": "Top Electronics Stores",
+  "featuredStores": [
+    {
+      "name": "Best Buy",
+      "logo": "🛒",
+      "cashbackRate": "Up to 8%",
+      "description": "Electronics, appliances, and tech accessories",
+      "categories": ["Laptops", "TVs", "Gaming", "Audio"],
+      "features": ["Price match guarantee", "Free shipping", "Store pickup"],
+      "link": "/store/best-buy"
+    },
+    {
+      "name": "Amazon Electronics",
+      "logo": "📦",
+      "cashbackRate": "Up to 10%",
+      "description": "Millions of electronics with fast shipping",
+      "categories": ["All electronics", "Accessories", "Smart Home"],
+      "features": ["Prime shipping", "30-day returns", "Price tracking"],
+      "link": "/store/amazon-electronics"
+    },
+    {
+      "name": "Newegg",
+      "logo": "🖥️",
+      "cashbackRate": "Up to 6%",
+      "description": "Computer hardware and consumer electronics",
+      "categories": ["PC Components", "Gaming", "Networking"],
+      "features": ["Tech experts", "Bundle deals", "Iron Egg guarantee"],
+      "link": "/store/newegg"
+    },
+    {
+      "name": "Apple",
+      "logo": "🍎",
+      "cashbackRate": "Up to 5%",
+      "description": "Mac, iPhone, iPad, and accessories",
+      "categories": ["Apple Products", "Accessories", "Software"],
+      "features": ["Student discounts", "Trade-in program", "Free engraving"],
+      "link": "/store/apple"
+    },
+    {
+      "name": "Dell",
+      "logo": "💻",
+      "cashbackRate": "Up to 12%",
+      "description": "Computers, monitors, and tech solutions",
+      "categories": ["Laptops", "Desktops", "Monitors"],
+      "features": ["Member discounts", "Financing", "Business solutions"],
+      "link": "/store/dell"
+    },
+    {
+      "name": "B&H Photo",
+      "logo": "📷",
+      "cashbackRate": "Up to 7%",
+      "description": "Professional electronics and photography gear",
+      "categories": ["Cameras", "Audio", "Computers"],
+      "features": ["Expert advice", "Free expedited shipping", "Price protection"],
+      "link": "/store/bh-photo"
+    }
+  ],
+  "topDealsTitle": "Hot Electronics Deals",
+  "topDeals": [
+    {
+      "title": "MacBook Pro 14-inch",
+      "description": "M3 chip, 16GB RAM, 512GB SSD",
+      "originalPrice": "$1,999",
+      "salePrice": "$1,799",
+      "cashbackRate": "5%",
+      "store": "Apple",
+      "image": "💻",
+      "link": "/deal/macbook-pro"
+    },
+    {
+      "title": "Samsung 65-inch 4K TV",
+      "description": "QLED, 120Hz, Smart TV",
+      "originalPrice": "$1,499",
+      "salePrice": "$1,099",
+      "cashbackRate": "8%",
+      "store": "Best Buy",
+      "image": "📺",
+      "link": "/deal/samsung-tv"
+    },
+    {
+      "title": "PlayStation 5",
+      "description": "Ultra HD Blu-ray, 825GB SSD",
+      "originalPrice": "$499",
+      "salePrice": "$499",
+      "cashbackRate": "6%",
+      "store": "Amazon",
+      "image": "🎮",
+      "link": "/deal/ps5"
+    },
+    {
+      "title": "AirPods Pro 2",
+      "description": "Active Noise Cancellation, USB-C",
+      "originalPrice": "$249",
+      "salePrice": "$199",
+      "cashbackRate": "5%",
+      "store": "Apple",
+      "image": "🎧",
+      "link": "/deal/airpods-pro"
+    },
+    {
+      "title": "RTX 4080 Graphics Card",
+      "description": "16GB GDDR6X, Ray Tracing",
+      "originalPrice": "$1,199",
+      "salePrice": "$1,099",
+      "cashbackRate": "6%",
+      "store": "Newegg",
+      "image": "🖥️",
+      "link": "/deal/rtx-4080"
+    },
+    {
+      "title": "iPad Pro 12.9-inch",
+      "description": "M2 chip, 128GB, Wi-Fi",
+      "originalPrice": "$1,099",
+      "salePrice": "$999",
+      "cashbackRate": "5%",
+      "store": "Amazon",
+      "image": "📱",
+      "link": "/deal/ipad-pro"
+    }
+  ],
+  "tipsTitle": "Smart Electronics Shopping Tips",
+  "tips": [
+    {
+      "title": "Compare Prices",
+      "description": "Use price comparison tools to find the best deals across multiple stores before buying.",
+      "icon": "💰"
+    },
+    {
+      "title": "Stack Cashback",
+      "description": "Combine our cashback with store sales, coupons, and credit card rewards for maximum savings.",
+      "icon": "📚"
+    },
+    {
+      "title": "Check Return Policies",
+      "description": "Review electronics return policies, especially for big-ticket items like laptops and TVs.",
+      "icon": "🔄"
+    },
+    {
+      "title": "Read Reviews",
+      "description": "Check expert and user reviews before making major electronics purchases.",
+      "icon": "⭐"
+    }
+  ],
+  "compareTitle": "Compare Cashback Rates",
+  "compare": {
+    "description": "See how much you can earn at top electronics stores",
+    "stores": [
+      {
+        "name": "Best Buy",
+        "cashbackRate": "Up to 8%",
+        "shippingTime": "2-5 days",
+        "returnPolicy": "15 days",
+        "rating": 4.5
+      },
+      {
+        "name": "Amazon",
+        "cashbackRate": "Up to 10%",
+        "shippingTime": "1-3 days",
+        "returnPolicy": "30 days",
+        "rating": 4.8
+      },
+      {
+        "name": "Newegg",
+        "cashbackRate": "Up to 6%",
+        "shippingTime": "3-7 days",
+        "returnPolicy": "30 days",
+        "rating": 4.3
+      },
+      {
+        "name": "Apple",
+        "cashbackRate": "Up to 5%",
+        "shippingTime": "2-4 days",
+        "returnPolicy": "14 days",
+        "rating": 4.7
+      },
+      {
+        "name": "Dell",
+        "cashbackRate": "Up to 12%",
+        "shippingTime": "3-5 days",
+        "returnPolicy": "30 days",
+        "rating": 4.4
+      }
+    ]
+  },
+  "seasonalPromosTitle": "Seasonal Promotions",
+  "seasonalPromos": [
+    {
+      "title": "Back to School Sale",
+      "description": "Extra 5% cashback on laptops and tablets",
+      "endDate": "September 15",
+      "code": "SCHOOL5",
+      "link": "/promo/back-to-school"
+    },
+    {
+      "title": "Black Friday Early Access",
+      "description": "Up to 15% cashback + exclusive deals",
+      "endDate": "November 30",
+      "link": "/promo/black-friday"
+    },
+    {
+      "title": "Tech Trade-In Event",
+      "description": "Double cashback when you trade in old devices",
+      "endDate": "December 31",
+      "link": "/promo/trade-in"
+    }
+  ],
+  "brandSpotlightTitle": "Brand Spotlight",
+  "brandSpotlight": [
+    {
+      "name": "Samsung",
+      "logo": "📱",
+      "description": "Premium electronics including smartphones, TVs, and home appliances. Known for innovative display technology and cutting-edge mobile devices.",
+      "cashbackRate": "Up to 8%",
+      "featuredProducts": ["Galaxy S24", "QLED TVs", "Galaxy Tab", "Galaxy Watch"],
+      "link": "/brand/samsung"
+    },
+    {
+      "name": "Sony",
+      "logo": "🎮",
+      "description": "Leading electronics brand for gaming, audio, and home entertainment. Home of PlayStation and premium audio equipment.",
+      "cashbackRate": "Up to 6%",
+      "featuredProducts": ["PlayStation 5", "WH-1000XM5", "BRAVIA TVs", "Alpha Cameras"],
+      "link": "/brand/sony"
+    },
+    {
+      "name": "LG",
+      "logo": "📺",
+      "description": "Innovative electronics from OLED TVs to smart home appliances. Leader in display technology and energy-efficient products.",
+      "cashbackRate": "Up to 7%",
+      "featuredProducts": ["OLED TVs", "Gram Laptops", "Tone Headphones", "Appliances"],
+      "link": "/brand/lg"
+    },
+    {
+      "name": "Microsoft",
+      "logo": "💻",
+      "description": "Surface devices, Xbox gaming, and productivity solutions. Leader in software and premium hardware.",
+      "cashbackRate": "Up to 9%",
+      "featuredProducts": ["Surface Laptop", "Xbox Series X", "Surface Pro", "Xbox Game Pass"],
+      "link": "/brand/microsoft"
+    }
+  ],
+  "buyingGuidesTitle": "Electronics Buying Guides",
+  "buyingGuides": [
+    {
+      "title": "How to Choose a Laptop",
+      "description": "Compare processors, RAM, storage, and more to find the perfect laptop for your needs and budget.",
+      "readTime": "8 min",
+      "link": "/guide/choose-laptop"
+    },
+    {
+      "title": "TV Buying Guide",
+      "description": "Everything you need to know about 4K, OLED, QLED, refresh rates, and smart TV features.",
+      "readTime": "10 min",
+      "link": "/guide/tv-buying"
+    },
+    {
+      "title": "Gaming PC vs Console",
+      "description": "Which is right for you? Compare costs, performance, game libraries, and upgrade options.",
+      "readTime": "6 min",
+      "link": "/guide/gaming-pc-vs-console"
+    },
+    {
+      "title": "Smartphone Comparison",
+      "description": "Compare the latest iPhone, Samsung Galaxy, Pixel, and other top smartphones side by side.",
+      "readTime": "7 min",
+      "link": "/guide/smartphone-comparison"
+    },
+    {
+      "title": "Audio Gear Guide",
+      "description": "Find the perfect headphones, speakers, or soundbar for your listening preferences and budget.",
+      "readTime": "5 min",
+      "link": "/guide/audio-gear"
+    },
+    {
+      "title": "Smart Home Setup",
+      "description": "Build your smart home ecosystem with compatible devices, hubs, and automation tips.",
+      "readTime": "9 min",
+      "link": "/guide/smart-home"
+    }
+  ],
+  "priceMatch": {
+    "title": "Found a Better Price?",
+    "description": "We'll help you find the best cashback rates on electronics. Compare prices across stores and maximize your savings.",
+    "buttonText": "Compare Prices"
+  },
+  "faq": {
+    "title": "Electronics Cashback FAQ - {country}",
+    "items": [
+      {
+        "question": "Which electronics stores offer the highest cashback?",
+        "answer": "Cashback rates vary by store and season. Dell often offers 12%, Amazon up to 10%, and Best Buy up to 8%. Check our store listings for current rates."
+      },
+      {
+        "question": "Can I earn cashback on refurbished electronics?",
+        "answer": "Yes! Most stores offer cashback on refurbished and open-box items. However, check individual store terms as some exclusions may apply."
+      },
+      {
+        "question": "How long does electronics cashback take to confirm?",
+        "answer": "Electronics cashback typically takes 30-60 days to confirm due to return periods. This protects against returns and price adjustments."
+      },
+      {
+        "question": "What happens if I return an electronic item?",
+        "answer": "If you return an item, the cashback will be deducted from your account. Wait until after the return period to withdraw cashback on big purchases."
+      },
+      {
+        "question": "Can I use warranty or protection plans with cashback?",
+        "answer": "Yes! Extended warranties and protection plans are usually eligible for cashback. Just make sure to add them during the same checkout session."
+      },
+      {
+        "question": "Do price adjustments affect my cashback?",
+        "answer": "If a store refunds the difference for a price drop, your cashback will be adjusted to the final purchase amount. This is automatically handled by our system."
+      },
+      {
+        "question": "Can I stack cashback with student discounts?",
+        "answer": "Yes! Many electronics stores like Apple and Dell offer student discounts that can be combined with our cashback for even greater savings."
+      },
+      {
+        "question": "Are pre-orders eligible for cashback?",
+        "answer": "Yes, pre-orders are typically eligible for cashback. The cashback will be confirmed after the item ships and the return period passes."
+      }
+    ]
+  },
+  "final": {
+    "title": "Start Saving on Electronics Today",
+    "subtitle": "Join thousands of smart shoppers earning cashback on their tech purchases",
+    "buttonText": "Shop Electronics Now"
+  }
+}
