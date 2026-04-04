@@ -175,24 +175,24 @@ export default function Footer({ className }: FooterProps) {
   <Section id="earn" title={t("waysToEarn", "Ways to Earn")}>
     <A href="/earn/surveys">{t("surveys", "Surveys")}</A>
     <A href="/earn/app-installs">{t("appInstalls", "App Installs")}</A>
-    <A href="/play-games">{t("playGames", "Play Games")}</A>
-    <A href="/watch-videos">{t("watchVideos", "Watch Videos")}</A>
-    <A href="/mining-rewards">{t("miningRewards", "Mining Rewards")}</A>
-    <A href="/complete-offers">{t("completeOffers", "Complete Offers")}</A>
-    <A href="/offerwall">{t("offerwall", "Offerwall")}</A>
-    <A href="/surveywall">{t("surveywall", "Surveywall")}</A>
+    <A href="/earn/play-games">{t("playGames", "Play Games")}</A>
+    <A href="/earn/watch-videos">{t("watchVideos", "Watch Videos")}</A>
+    <A href="/earn/mining-rewards">{t("miningRewards", "Mining Rewards")}</A>
+    <A href="/earn/complete-offers">{t("completeOffers", "Complete Offers")}</A>
+    <A href="/earn/offerwall">{t("offerwall", "Offerwall")}</A>
+    <A href="/earn/surveywall">{t("surveywall", "Surveywall")}</A>
 
     <Sub id="extra" title={t("extraEarning", "Extra Earning")}>
-      <A href="/watch-ads">{t("watchAds", "Watch Ads")}</A>
-      <A href="/micro-tasks">{t("microTasks", "Micro Tasks")}</A>
-      <A href="/complete-free-trials">{t("freeTrials", "Free Trials")}</A>
-      <A href="/test-products">{t("testProducts", "Test Products")}</A>
-      <A href="/read-emails">{t("readEmails", "Read Emails")}</A>
-      <A href="/visit-websites">{t("visitWebsites", "Visit Websites")}</A>
-      <A href="/review-tasks">{t("reviewTasks", "Review Tasks")}</A>
-      <A href="/spinning-wheel">{t("spinningWheel", "Spinning Wheel")}</A>
-      <A href="/loyalty">{t("loyalty", "Loyalty")}</A>
-      <A href="/vouchers">{t("vouchers", "Vouchers")}</A>
+      <A href="/earn/watch-ads">{t("watchAds", "Watch Ads")}</A>
+      <A href="/earn/micro-tasks">{t("microTasks", "Micro Tasks")}</A>
+      <A href="/earn/complete-free-trials">{t("freeTrials", "Free Trials")}</A>
+      <A href="/earn/test-products">{t("testProducts", "Test Products")}</A>
+      <A href="/earn/read-emails">{t("readEmails", "Read Emails")}</A>
+      <A href="/earn/visit-websites">{t("visitWebsites", "Visit Websites")}</A>
+      <A href="/earn/review-tasks">{t("reviewTasks", "Review Tasks")}</A>
+      <A href="/earn/spinning-wheel">{t("spinningWheel", "Spinning Wheel")}</A>
+      <A href="/earn/loyalty">{t("loyalty", "Loyalty")}</A>
+      <A href="/earn/vouchers">{t("vouchers", "Vouchers")}</A>
     </Sub>
   </Section>
 
