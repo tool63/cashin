@@ -1,113 +1,113 @@
 {
   "seo": {
-    "title": "Cashback Mode - Gagnez Jusqu'à 15% sur les Vêtements en {country} | Cashog",
-    "description": "Achetez de la mode avec cashback en {country}. Gagnez jusqu'à 15% de remise dans les meilleures boutiques comme ASOS, Nordstrom, Macy's, Zara et plus. Obtenez les meilleures offres sur les vêtements, chaussures, accessoires et marques de créateurs."
+    "title": "Fashion Cashback - Earn Up to 15% Back on Clothing in {country} | Cashog",
+    "description": "Shop fashion with cashback in {country}. Earn up to 15% back at top stores like ASOS, Nordstrom, Macy's, Zara, and more. Get the best deals on clothing, shoes, accessories, and designer brands."
   },
   "hero": {
-    "title": "Gagnez du Cashback sur la Mode",
-    "subtitle": "Soyez payé pour acheter les dernières tendances. Gagnez jusqu'à 15% de cashback chez les meilleurs détaillants de mode en {country}. Des essentiels du quotidien aux pièces de luxe des créateurs."
+    "title": "Earn Cashback on Fashion",
+    "subtitle": "Get paid to shop for the latest trends. Earn up to 15% cashback at top fashion retailers in {country}. From everyday essentials to luxury designer pieces."
   },
-  "categoryTitle": "Acheter par Catégorie",
+  "categoryTitle": "Shop by Category",
   "categories": [
     {
-      "name": "Vêtements Femme",
+      "name": "Women's Clothing",
       "icon": "👗",
-      "description": "Robes, hauts, jeans, jupes et plus",
+      "description": "Dresses, tops, jeans, skirts, and more",
       "storeCount": 45
     },
     {
-      "name": "Vêtements Homme",
+      "name": "Men's Clothing",
       "icon": "👔",
-      "description": "Costumes, chemises, pantalons, vestes et accessoires",
+      "description": "Suits, shirts, pants, jackets, and accessories",
       "storeCount": 38
     },
     {
-      "name": "Chaussures",
+      "name": "Shoes",
       "icon": "👠",
-      "description": "Baskets, bottes, talons, sandales et mocassins",
+      "description": "Sneakers, boots, heels, sandals, and loafers",
       "storeCount": 42
     },
     {
-      "name": "Accessoires",
+      "name": "Accessories",
       "icon": "👜",
-      "description": "Sacs, montres, bijoux, ceintures et chapeaux",
+      "description": "Bags, watches, jewelry, belts, and hats",
       "storeCount": 35
     },
     {
-      "name": "Tenues de Sport",
+      "name": "Activewear",
       "icon": "🏃‍♀️",
-      "description": "Vêtements de gym, yoga et équipement sportif",
+      "description": "Gym clothes, yoga wear, and sports gear",
       "storeCount": 28
     },
     {
-      "name": "Créateur & Luxe",
+      "name": "Designer & Luxury",
       "icon": "💎",
-      "description": "Marques premium et collections exclusives",
+      "description": "Premium brands and exclusive collections",
       "storeCount": 22
     }
   ],
-  "featuredStoresTitle": "Meilleures Boutiques de Mode",
+  "featuredStoresTitle": "Top Fashion Stores",
   "featuredStores": [
     {
       "name": "ASOS",
       "logo": "👕",
-      "cashbackRate": "Jusqu'à 10%",
-      "description": "Des milliers de marques et styles pour hommes et femmes",
-      "categories": ["Vêtements", "Chaussures", "Accessoires"],
-      "features": ["Retours gratuits", "Réduction étudiant", "Livraison le lendemain"],
+      "cashbackRate": "Up to 10%",
+      "description": "Thousands of brands and styles for men and women",
+      "categories": ["Clothing", "Shoes", "Accessories"],
+      "features": ["Free returns", "Student discount", "Next-day delivery"],
       "link": "/store/asos"
     },
     {
       "name": "Nordstrom",
       "logo": "🛍️",
-      "cashbackRate": "Jusqu'à 8%",
-      "description": "Mode premium, chaussures et accessoires",
-      "categories": ["Créateur", "Chaussures", "Beauté"],
-      "features": ["Livraison gratuite", "Alignement des prix", "Retrait en magasin"],
+      "cashbackRate": "Up to 8%",
+      "description": "Premium fashion, shoes, and accessories",
+      "categories": ["Designer", "Shoes", "Beauty"],
+      "features": ["Free shipping", "Price match", "Curbside pickup"],
       "link": "/store/nordstrom"
     },
     {
       "name": "Macy's",
       "logo": "⭐",
-      "cashbackRate": "Jusqu'à 6%",
-      "description": "Grand magasin avec d'innombrables options de mode",
-      "categories": ["Vêtements", "Maison", "Beauté"],
-      "features": ["Événements de soldes", "Récompenses Star", "Retrait gratuit"],
+      "cashbackRate": "Up to 6%",
+      "description": "Department store with endless fashion options",
+      "categories": ["Clothing", "Home", "Beauty"],
+      "features": ["Sales events", "Star rewards", "Free pickup"],
       "link": "/store/macys"
     },
     {
       "name": "Zara",
       "logo": "👚",
-      "cashbackRate": "Jusqu'à 5%",
-      "description": "Mode tendance et abordable",
-      "categories": ["Femme", "Homme", "Enfants"],
-      "features": ["Nouveautés hebdomadaires", "Retrait en magasin", "Retours faciles"],
+      "cashbackRate": "Up to 5%",
+      "description": "Trendy and affordable fashion",
+      "categories": ["Women", "Men", "Kids"],
+      "features": ["New arrivals weekly", "Store pickup", "Easy returns"],
       "link": "/store/zara"
     },
     {
       "name": "Nike",
       "logo": "👟",
-      "cashbackRate": "Jusqu'à 12%",
-      "description": "Chaussures de sport, vêtements et équipement",
-      "categories": ["Tenues de Sport", "Chaussures", "Sports"],
-      "features": ["Exclusif membres", "App Nike", "Livraison gratuite"],
+      "cashbackRate": "Up to 12%",
+      "description": "Athletic footwear, apparel, and equipment",
+      "categories": ["Activewear", "Shoes", "Sports"],
+      "features": ["Member exclusive", "Nike app", "Free shipping"],
       "link": "/store/nike"
     },
     {
       "name": "Revolve",
       "logo": "✨",
-      "cashbackRate": "Jusqu'à 7%",
-      "description": "Marques de mode émergentes et établies",
-      "categories": ["Robes", "Denim", "Actif"],
-      "features": ["Livraison gratuite", "Programme VIP", "Retours faciles"],
+      "cashbackRate": "Up to 7%",
+      "description": "Emerging and established fashion brands",
+      "categories": ["Dresses", "Denim", "Active"],
+      "features": ["Free shipping", "VIP program", "Easy returns"],
       "link": "/store/revolve"
     }
   ],
-  "topDealsTitle": "Offres Mode Chaudes",
+  "topDealsTitle": "Hot Fashion Deals",
   "topDeals": [
     {
-      "title": "Soldes Manteaux d'Hiver",
-      "description": "Restez au chaud avec jusqu'à 40% de réduction sur les vestes d'hiver",
+      "title": "Winter Coat Sale",
+      "description": "Stay warm with up to 40% off winter jackets",
       "originalPrice": "$199",
       "salePrice": "$119",
       "cashbackRate": "8%",
@@ -116,8 +116,8 @@
       "link": "/deal/winter-coat-sale"
     },
     {
-      "title": "Déstockage Baskets",
-      "description": "Styles de la saison dernière à prix imbattables",
+      "title": "Sneaker Clearance",
+      "description": "Last season's styles at unbeatable prices",
       "originalPrice": "$120",
       "salePrice": "$69",
       "cashbackRate": "10%",
@@ -126,171 +126,270 @@
       "link": "/deal/sneaker-clearance"
     },
     {
-      "title": "Sacs de Créateur",
-      "description": "Sacs de luxe à partir de $199",
+      "title": "Designer Handbags",
+      "description": "Luxury bags starting at $199",
       "originalPrice": "$450",
       "salePrice": "$199",
       "cashbackRate": "12%",
       "store": "Revolve",
       "image": "👜",
       "link": "/deal/designer-handbags"
+    },
+    {
+      "title": "Summer Dress Sale",
+      "description": "Light and breezy dresses for warm weather",
+      "originalPrice": "$89",
+      "salePrice": "$49",
+      "cashbackRate": "7%",
+      "store": "ASOS",
+      "image": "👗",
+      "link": "/deal/summer-dress-sale"
+    },
+    {
+      "title": "Men's Suit Event",
+      "description": "Premium suits for work and special occasions",
+      "originalPrice": "$399",
+      "salePrice": "$249",
+      "cashbackRate": "6%",
+      "store": "Macy's",
+      "image": "👔",
+      "link": "/deal/mens-suit-event"
+    },
+    {
+      "title": "Activewear Bundle",
+      "description": "Get 2 leggings + sports bra for $79",
+      "originalPrice": "$140",
+      "salePrice": "$79",
+      "cashbackRate": "10%",
+      "store": "Nike",
+      "image": "🏃‍♀️",
+      "link": "/deal/activewear-bundle"
     }
   ],
-  "tipsTitle": "Conseils Malins pour Acheter de la Mode",
+  "tipsTitle": "Smart Fashion Shopping Tips",
   "tips": [
     {
-      "title": "Cumulez vos Économies",
-      "description": "Combinez le cashback avec les soldes en magasin, coupons et réductions étudiantes pour maximiser vos économies.",
+      "title": "Stack Your Savings",
+      "description": "Combine cashback with store sales, coupons, and student discounts for maximum savings.",
       "icon": "💰"
     },
     {
-      "title": "Vérifiez les Politiques de Retour",
-      "description": "Consultez les politiques de retour avant d'acheter, surtout pour les articles en solde finale ou de liquidation.",
+      "title": "Check Return Policies",
+      "description": "Review return policies before buying, especially for final sale or clearance items.",
       "icon": "🔄"
     },
     {
-      "title": "Inscrivez-vous aux Newsletters",
-      "description": "Obtenez des coupons exclusifs et un accès anticipé aux soldes en rejoignant les listes d'envoi des magasins.",
+      "title": "Sign Up for Newsletters",
+      "description": "Get exclusive coupons and early access to sales by joining store email lists.",
       "icon": "📧"
     },
     {
-      "title": "Les Guides des Tailles Comptent",
-      "description": "Utilisez les guides des tailles des magasins et vérifiez les avis pour garantir une coupe parfaite du premier coup.",
+      "title": "Size Guides Matter",
+      "description": "Use store size guides and check reviews to ensure the perfect fit the first time.",
       "icon": "📏"
     }
   ],
-  "compareTitle": "Comparer les Taux de Cashback",
+  "compareTitle": "Compare Cashback Rates",
   "compare": {
-    "description": "Voyez combien vous pouvez gagner chez les meilleures boutiques de mode",
+    "description": "See how much you can earn at top fashion stores",
     "stores": [
       {
         "name": "ASOS",
-        "cashbackRate": "Jusqu'à 10%",
-        "shippingTime": "2-4 jours",
-        "returnPolicy": "28 jours",
+        "cashbackRate": "Up to 10%",
+        "shippingTime": "2-4 days",
+        "returnPolicy": "28 days",
         "rating": 4.5
       },
       {
         "name": "Nordstrom",
-        "cashbackRate": "Jusqu'à 8%",
-        "shippingTime": "3-5 jours",
-        "returnPolicy": "365 jours",
+        "cashbackRate": "Up to 8%",
+        "shippingTime": "3-5 days",
+        "returnPolicy": "365 days",
         "rating": 4.8
       },
       {
         "name": "Macy's",
-        "cashbackRate": "Jusqu'à 6%",
-        "shippingTime": "3-7 jours",
-        "returnPolicy": "90 jours",
+        "cashbackRate": "Up to 6%",
+        "shippingTime": "3-7 days",
+        "returnPolicy": "90 days",
         "rating": 4.3
       },
       {
         "name": "Zara",
-        "cashbackRate": "Jusqu'à 5%",
-        "shippingTime": "3-6 jours",
-        "returnPolicy": "30 jours",
+        "cashbackRate": "Up to 5%",
+        "shippingTime": "3-6 days",
+        "returnPolicy": "30 days",
         "rating": 4.2
+      },
+      {
+        "name": "Nike",
+        "cashbackRate": "Up to 12%",
+        "shippingTime": "2-5 days",
+        "returnPolicy": "60 days",
+        "rating": 4.7
+      },
+      {
+        "name": "Revolve",
+        "cashbackRate": "Up to 7%",
+        "shippingTime": "2-4 days",
+        "returnPolicy": "30 days",
+        "rating": 4.4
       }
     ]
   },
-  "seasonalPromosTitle": "Promotions Saisonnières",
+  "seasonalPromosTitle": "Seasonal Promotions",
   "seasonalPromos": [
     {
-      "title": "Soldes de Fin de Saison",
-      "description": "Jusqu'à 60% de réduction sur les articles de liquidation",
-      "endDate": "31 Jan 2025",
+      "title": "End of Season Sale",
+      "description": "Up to 60% off on clearance items",
+      "endDate": "Jan 31, 2025",
       "link": "/promos/end-of-season"
     },
     {
-      "title": "Événement Mode des Fêtes",
-      "description": "20% supplémentaire + cashback sur toutes les commandes",
-      "endDate": "25 Déc 2025",
-      "code": "FETES20",
+      "title": "Holiday Fashion Event",
+      "description": "Extra 20% off + cashback on all orders",
+      "endDate": "Dec 25, 2025",
+      "code": "HOLIDAY20",
       "link": "/promos/holiday-fashion"
+    },
+    {
+      "title": "Back to School",
+      "description": "15% off student essentials",
+      "endDate": "Sep 15, 2025",
+      "code": "BTS15",
+      "link": "/promos/back-to-school"
+    },
+    {
+      "title": "Black Friday Fashion",
+      "description": "Up to 50% off + double cashback",
+      "endDate": "Nov 30, 2025",
+      "link": "/promos/black-friday-fashion"
     }
   ],
-  "brandSpotlightTitle": "Marques à l'Honneur",
+  "brandSpotlightTitle": "Brand Spotlight",
   "brandSpotlight": [
     {
       "name": "Levi's",
       "logo": "👖",
-      "description": "Denim iconique et vêtements décontractés pour tous",
-      "cashbackRate": "Jusqu'à 8%",
-      "featuredProducts": ["501 Original Jeans", "Veste Trucker", "T-shirts Graphiques"],
+      "description": "Iconic denim and casual wear for all. Known for quality jeans that last for years.",
+      "cashbackRate": "Up to 8%",
+      "featuredProducts": ["501 Original Jeans", "Trucker Jacket", "Graphic Tees", "Denim Shirts"],
       "link": "/brand/levis"
     },
     {
       "name": "Adidas",
       "logo": "👕",
-      "description": "Vêtements de sport et mode lifestyle",
-      "cashbackRate": "Jusqu'à 10%",
-      "featuredProducts": ["Ultraboost", "Stan Smith", "Survêtements"],
+      "description": "Sportswear and lifestyle fashion. Combining performance with street style.",
+      "cashbackRate": "Up to 10%",
+      "featuredProducts": ["Ultraboost", "Stan Smith", "Track Suits", "Originals Hoodie"],
       "link": "/brand/adidas"
+    },
+    {
+      "name": "H&M",
+      "logo": "👚",
+      "description": "Affordable fashion for everyone. Sustainable collections and everyday essentials.",
+      "cashbackRate": "Up to 6%",
+      "featuredProducts": ["Basic Tees", "Denim", "Dresses", "Conscious Collection"],
+      "link": "/brand/hm"
+    },
+    {
+      "name": "Gucci",
+      "logo": "💎",
+      "description": "Luxury Italian fashion house. Iconic designs and premium craftsmanship.",
+      "cashbackRate": "Up to 4%",
+      "featuredProducts": ["GG Marmont Bag", "Ace Sneakers", "Silk Scarf", "Belt"],
+      "link": "/brand/gucci"
     }
   ],
-  "buyingGuidesTitle": "Guides d'Achat Mode",
+  "buyingGuidesTitle": "Fashion Buying Guides",
   "buyingGuides": [
     {
-      "title": "Guide de la Coupe Parfaite du Jean",
-      "description": "Trouvez vos jeans idéaux selon votre morphologie et vos préférences de style",
+      "title": "The Perfect Jean Fit Guide",
+      "description": "Find your ideal jeans based on body type and style preference",
       "readTime": "5 min",
       "link": "/guide/jean-fit"
     },
     {
-      "title": "Achats de Mode Durable",
-      "description": "Comment acheter éthiquement tout en gagnant du cashback",
+      "title": "Sustainable Fashion Shopping",
+      "description": "How to shop ethically while earning cashback",
       "readTime": "7 min",
       "link": "/guide/sustainable-fashion"
     },
     {
-      "title": "S'habiller pour Chaque Saison",
-      "description": "Construisez une garde-robe polyvalente qui fonctionne toute l'année",
+      "title": "Dressing for Every Season",
+      "description": "Build a versatile wardrobe that works year-round",
       "readTime": "6 min",
       "link": "/guide/seasonal-dressing"
+    },
+    {
+      "title": "Shoe Sizing Guide",
+      "description": "Find the perfect fit for sneakers, boots, and dress shoes",
+      "readTime": "4 min",
+      "link": "/guide/shoe-sizing"
+    },
+    {
+      "title": "Accessory Styling Tips",
+      "description": "How to elevate any outfit with the right accessories",
+      "readTime": "5 min",
+      "link": "/guide/accessory-styling"
+    },
+    {
+      "title": "Activewear Buying Guide",
+      "description": "Choose the right fabrics and fits for your workout",
+      "readTime": "6 min",
+      "link": "/guide/activewear-guide"
     }
   ],
   "priceMatch": {
-    "title": "Vous avez Trouvé un Meilleur Prix ?",
-    "description": "Nous vous aiderons à trouver les meilleurs taux de cashback sur la mode",
-    "buttonText": "Comparer les Prix"
+    "title": "Found a Better Price?",
+    "description": "We'll help you find the best cashback rates on fashion. Compare prices across stores and maximize your savings.",
+    "buttonText": "Compare Prices"
   },
   "sizeGuide": {
-    "title": "Besoin d'Aide avec les Tailles ?",
-    "description": "Utilisez nos guides de tailles complets pour trouver la coupe parfaite à chaque fois",
-    "buttonText": "Voir les Guides de Tailles"
+    "title": "Need Help with Sizing?",
+    "description": "Use our comprehensive size guides to find the perfect fit every time. Avoid returns and get it right the first time.",
+    "buttonText": "View Size Guides"
   },
   "faq": {
-    "title": "FAQ Cashback Mode - {country}",
+    "title": "Fashion Cashback FAQ - {country}",
     "items": [
       {
-        "question": "Quelles boutiques de mode offrent le plus de cashback ?",
-        "answer": "Les taux de cashback varient selon les magasins et les saisons. Nike offre souvent 12%, ASOS jusqu'à 10%, et Nordstrom jusqu'à 8%. Consultez nos listes de magasins pour les taux actuels."
+        "question": "Which fashion stores offer the highest cashback?",
+        "answer": "Cashback rates vary by store and season. Nike often offers 12%, ASOS up to 10%, and Nordstrom up to 8%. Check our store listings for current rates."
       },
       {
-        "question": "Puis-je gagner du cashback sur les articles en solde ou de liquidation ?",
-        "answer": "Oui ! La plupart des magasins offrent du cashback sur les articles en solde et de liquidation. Cependant, vérifiez les conditions individuelles des magasins car certaines exclusions peuvent s'appliquer."
+        "question": "Can I earn cashback on sale or clearance items?",
+        "answer": "Yes! Most stores offer cashback on sale and clearance items. However, check individual store terms as some exclusions may apply."
       },
       {
-        "question": "Combien de temps prend la confirmation du cashback mode ?",
-        "answer": "Le cashback mode prend généralement 30 à 60 jours pour être confirmé en raison des périodes de retour. Cela nous protège contre les retours et les échanges."
+        "question": "How long does fashion cashback take to confirm?",
+        "answer": "Fashion cashback typically takes 30-60 days to confirm due to return periods. This protects against returns and exchanges."
       },
       {
-        "question": "Que se passe-t-il si je retourne un article ?",
-        "answer": "Si vous retournez un article, le cashback sera déduit de votre compte. Attendez la fin de la période de retour pour retirer votre cashback."
+        "question": "What happens if I return an item?",
+        "answer": "If you return an item, the cashback will be deducted from your account. Wait until after the return period to withdraw cashback."
       },
       {
-        "question": "Puis-je utiliser des coupons avec le cashback ?",
-        "answer": "Oui ! Dans la plupart des cas, vous pouvez combiner coupons et codes promo avec le cashback. Assurez-vous simplement de cliquer d'abord sur notre lien."
+        "question": "Can I use coupons with cashback?",
+        "answer": "Yes! In most cases, you can stack coupons and promo codes with cashback. Just make sure to click through our link first."
       },
       {
-        "question": "Les échanges de taille affectent-ils mon cashback ?",
-        "answer": "Les échanges pour différentes tailles n'affectent généralement pas le cashback tant que la valeur de la commande reste la même. Cependant, les retours pour remboursement réduiront votre cashback."
+        "question": "Do size exchanges affect my cashback?",
+        "answer": "Exchanges for different sizes usually don't affect cashback as long as the order value remains the same. However, returns for refunds will reduce your cashback."
+      },
+      {
+        "question": "Can I earn cashback on gift card purchases?",
+        "answer": "Most stores do not offer cashback on gift card purchases. Cashback is typically earned on merchandise only."
+      },
+      {
+        "question": "What about cashback on international shipping?",
+        "answer": "Cashback is calculated on the total purchase amount including taxes. International shipping fees may or may not qualify - check store terms."
       }
     ]
   },
   "final": {
-    "title": "Commencez à Économiser sur la Mode Aujourd'hui",
-    "subtitle": "Rejoignez des milliers d'acheteurs intelligents qui gagnent du cashback sur leurs achats de vêtements",
-    "buttonText": "Acheter de la Mode Maintenant"
+    "title": "Start Saving on Fashion Today",
+    "subtitle": "Join thousands of smart shoppers earning cashback on their clothing purchases",
+    "buttonText": "Shop Fashion Now"
   }
 }
