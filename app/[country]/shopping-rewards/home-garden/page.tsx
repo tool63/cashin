@@ -707,7 +707,7 @@ export default async function HomeGardenRewardsPage({
     buttonText: t(tData?.roomInspo?.buttonText, "Get Inspired"),
   };
 
-  const faqData = {
+    const faqData = {
     title: t(tData?.faq?.title, `Home & Garden Cashback FAQ - ${countryName}`),
     items: (tData?.faq?.items || [])
       .map((item) => ({
@@ -722,27 +722,27 @@ export default async function HomeGardenRewardsPage({
     faqData.items = [
       {
         q: "Which home & garden stores offer the highest cashback?",
-        answer: "Cashback rates vary by store and season. Wayfair often offers up to 8%, Home Depot and Lowe's up to 6%, and Crate & Barrel up to 7%. Check our store listings for current rates."
+        a: "Cashback rates vary by store and season. Wayfair often offers up to 8%, Home Depot and Lowe's up to 6%, and Crate & Barrel up to 7%. Check our store listings for current rates."
       },
       {
         q: "Can I earn cashback on furniture delivery fees?",
-        answer: "Delivery fees are typically not eligible for cashback. However, the cashback applies to the product cost before taxes and delivery charges."
+        a: "Delivery fees are typically not eligible for cashback. However, the cashback applies to the product cost before taxes and delivery charges."
       },
       {
         q: "How long does home & garden cashback take to confirm?",
-        answer: "Home and garden cashback typically takes 45-90 days to confirm due to longer return periods for furniture and large appliances. This protects against returns and exchanges."
+        a: "Home and garden cashback typically takes 45-90 days to confirm due to longer return periods for furniture and large appliances. This protects against returns and exchanges."
       },
       {
         q: "What happens if I return furniture?",
-        answer: "If you return an item, the cashback will be deducted from your account. Wait until after the return period to withdraw cashback on large purchases."
+        a: "If you return an item, the cashback will be deducted from your account. Wait until after the return period to withdraw cashback on large purchases."
       },
       {
         q: "Can I use gift cards with cashback?",
-        answer: "Yes! You can use gift cards and still earn cashback on the portion paid with the gift card. Just make sure to click through our link first."
+        a: "Yes! You can use gift cards and still earn cashback on the portion paid with the gift card. Just make sure to click through our link first."
       },
       {
         q: "Do assembly services affect my cashback?",
-        answer: "Assembly fees and installation services are usually not eligible for cashback, but they don't affect the cashback you earn on the product itself."
+        a: "Assembly fees and installation services are usually not eligible for cashback, but they don't affect the cashback you earn on the product itself."
       },
     ];
   }
