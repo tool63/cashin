@@ -1,244 +1,282 @@
 {
   "seo": {
-    "title": "Vouchers & Discount Codes in {country} - Save Up to 70% Off | Cashog",
-    "description": "Find the best vouchers and discount codes in {country}. Save money at 1000+ stores including Amazon, Nike, and Walmart. Free daily updated promo codes!"
+    "title": "Discount Vouchers & Promo Codes in {country} - Save Money Shopping | Cashog",
+    "description": "Get the best discount vouchers and promo codes in {country}. Save up to 70% at 5000+ stores. Free access to exclusive deals and coupons. Start saving today!"
   },
   "hero": {
-    "title": "Save Money with Vouchers in {country}",
-    "subtitle": "Find the best vouchers and discount codes in {country}. Save up to 70% at 1000+ stores including Amazon, Nike, Walmart, and more. New codes added daily!"
+    "title": "Save Money with Discount Vouchers in {country}",
+    "subtitle": "Access thousands of verified discount vouchers and promo codes for your favorite stores in {country}. Save up to 70% on shopping, dining, travel, and more. Updated daily!"
   },
   "statsTitle": "Voucher Statistics",
   "stats": {
     "vouchersRedeemed": "5M+",
     "vouchersRedeemedLabel": "Vouchers Redeemed",
-    "avgDiscount": "25%",
+    "avgDiscount": "35%",
     "avgDiscountLabel": "Average Discount",
-    "activeUsers": "100K+",
+    "activeUsers": "200K+",
     "activeUsersLabel": "Active Savers",
-    "totalSaved": "$50M+",
+    "totalSaved": "$15M+",
     "totalSavedLabel": "Total Saved"
   },
   "categoriesTitle": "Voucher Categories",
-  "categoriesSubtitle": "Save money with vouchers in these categories",
+  "categoriesSubtitle": "Find vouchers for your favorite stores and services",
   "voucherCategories": [
     {
       "icon": "🛍️",
       "title": "Fashion & Apparel",
-      "description": "Clothing, shoes, accessories",
-      "avgDiscount": "20-50%",
-      "popularity": "🔥 Very High",
-      "expiryDays": "7-30 days"
+      "description": "Save on clothing, shoes, accessories from top brands",
+      "discountRange": "20-70% OFF",
+      "storesCount": "500+ stores"
     },
     {
       "icon": "📱",
       "title": "Electronics",
-      "description": "Phones, laptops, gadgets",
-      "avgDiscount": "10-30%",
-      "popularity": "🔥 High",
-      "expiryDays": "14-45 days"
+      "description": "Discounts on phones, laptops, gaming, and gadgets",
+      "discountRange": "10-50% OFF",
+      "storesCount": "300+ stores"
     },
     {
-      "icon": "🏠",
-      "title": "Home & Living",
-      "description": "Furniture, decor, appliances",
-      "avgDiscount": "15-40%",
-      "popularity": "Medium",
-      "expiryDays": "7-60 days"
-    },
-    {
-      "icon": "🍔",
+      "icon": "🍕",
       "title": "Food & Dining",
-      "description": "Restaurants, delivery, groceries",
-      "avgDiscount": "10-25%",
-      "popularity": "🔥 Very High",
-      "expiryDays": "3-14 days"
+      "description": "Save at restaurants, fast food, and meal delivery",
+      "discountRange": "15-40% OFF",
+      "storesCount": "800+ stores"
     },
     {
       "icon": "✈️",
-      "title": "Travel",
-      "description": "Flights, hotels, rentals",
-      "avgDiscount": "15-40%",
-      "popularity": "Medium",
-      "expiryDays": "30-90 days"
+      "title": "Travel & Hotels",
+      "description": "Cheap flights, hotel deals, and vacation packages",
+      "discountRange": "10-60% OFF",
+      "storesCount": "400+ stores"
     },
     {
-      "icon": "💄",
-      "title": "Beauty & Health",
-      "description": "Cosmetics, skincare, wellness",
-      "avgDiscount": "15-30%",
-      "popularity": "High",
-      "expiryDays": "7-30 days"
+      "icon": "💊",
+      "title": "Health & Beauty",
+      "description": "Skincare, makeup, vitamins, and wellness products",
+      "discountRange": "15-50% OFF",
+      "storesCount": "600+ stores"
+    },
+    {
+      "icon": "🏠",
+      "title": "Home & Garden",
+      "description": "Furniture, decor, tools, and outdoor living",
+      "discountRange": "20-55% OFF",
+      "storesCount": "450+ stores"
+    },
+    {
+      "icon": "🎮",
+      "title": "Gaming & Entertainment",
+      "description": "Video games, consoles, movies, and streaming",
+      "discountRange": "10-40% OFF",
+      "storesCount": "250+ stores"
+    },
+    {
+      "icon": "📚",
+      "title": "Education & Books",
+      "description": "Textbooks, courses, software, and learning tools",
+      "discountRange": "15-45% OFF",
+      "storesCount": "200+ stores"
+    },
+    {
+      "icon": "🐾",
+      "title": "Pet Supplies",
+      "description": "Food, toys, accessories for your furry friends",
+      "discountRange": "10-35% OFF",
+      "storesCount": "350+ stores"
     }
   ],
-  "featuredVouchersTitle": "Today's Hot Vouchers",
-  "featuredVouchersSubtitle": "Limited time - use these vouchers today",
+  "featuredVouchersTitle": "Hot Vouchers & Promo Codes",
+  "featuredVouchersSubtitle": "Limited time offers - grab these deals before they expire",
   "featuredVouchers": [
     {
-      "title": "Amazon Fashion Week Sale",
-      "discount": "30% OFF + Free Shipping",
-      "code": "AMZ30FS",
+      "title": "Amazon Fashion Sale",
+      "discount": "40% OFF",
+      "code": "AMZN40",
       "category": "Fashion",
-      "usesLeft": 5000,
-      "store": "Amazon",
-      "rating": "4.9",
-      "expiryDate": "Mar 31, 2026"
+      "expiresIn": "3 days",
+      "company": "Amazon",
+      "usedCount": 2847
     },
     {
-      "title": "Nike Member Exclusive",
-      "discount": "25% OFF Sitewide",
-      "code": "NIKE25",
-      "category": "Fashion",
-      "usesLeft": 2500,
-      "store": "Nike",
-      "rating": "4.8",
-      "expiryDate": "Mar 25, 2026"
-    },
-    {
-      "title": "Best Buy Tech Deals",
-      "discount": "$50 OFF $500+",
-      "code": "BBY50",
+      "title": "eBay Electronics Deal",
+      "discount": "$50 OFF",
+      "code": "EBAY50",
       "category": "Electronics",
-      "usesLeft": 1000,
-      "store": "Best Buy",
-      "rating": "4.7",
-      "expiryDate": "Mar 20, 2026"
+      "expiresIn": "5 days",
+      "company": "eBay",
+      "usedCount": 1923
     },
     {
-      "title": "Uber Eats First Order",
-      "discount": "$15 OFF $20+",
-      "code": "EATS15",
+      "title": "Uber Eats Delivery",
+      "discount": "30% OFF",
+      "code": "EATS30",
       "category": "Food",
-      "usesLeft": 10000,
-      "store": "Uber Eats",
-      "rating": "4.8",
-      "expiryDate": "Apr 15, 2026"
+      "expiresIn": "2 days",
+      "company": "Uber Eats",
+      "usedCount": 4561
     },
     {
-      "title": "Expedia Spring Break",
-      "discount": "20% OFF Hotels",
-      "code": "EXPEDIA20",
+      "title": "Nike Sportswear",
+      "discount": "25% OFF",
+      "code": "NIKE25",
+      "category": "Sports",
+      "expiresIn": "7 days",
+      "company": "Nike",
+      "usedCount": 3156
+    },
+    {
+      "title": "Booking.com Hotels",
+      "discount": "15% OFF",
+      "code": "BOOK15",
       "category": "Travel",
-      "usesLeft": 3000,
-      "store": "Expedia",
-      "rating": "4.6",
-      "expiryDate": "Apr 10, 2026"
+      "expiresIn": "10 days",
+      "company": "Booking.com",
+      "usedCount": 5238
     },
     {
-      "title": "Sephora Beauty Insider",
-      "discount": "15% OFF $50+",
-      "code": "SEPHORA15",
+      "title": "Sephora Beauty",
+      "discount": "20% OFF",
+      "code": "SEP20",
       "category": "Beauty",
-      "usesLeft": 5000,
-      "store": "Sephora",
-      "rating": "4.7",
-      "expiryDate": "Mar 28, 2026"
+      "expiresIn": "4 days",
+      "company": "Sephora",
+      "usedCount": 1892
     }
   ],
   "benefitsTitle": "Why Use Cashog Vouchers",
   "benefits": [
     {
       "icon": "💰",
-      "title": "Save Money Instantly",
-      "description": "Apply codes at checkout and save instantly on your purchases"
+      "title": "100% Free",
+      "description": "All vouchers and promo codes are completely free to use. No subscription fees or hidden costs."
+    },
+    {
+      "icon": "✅",
+      "title": "Verified Codes",
+      "description": "Every voucher is tested and verified by our team to ensure it works before you try it."
     },
     {
       "icon": "🔄",
       "title": "Daily Updates",
-      "description": "New vouchers added every day. We verify all codes work"
-    },
-    {
-      "icon": "🎯",
-      "title": "1000+ Stores",
-      "description": "Vouchers for all your favorite stores in one place"
+      "description": "New vouchers added daily. We remove expired codes so you always find working deals."
     },
     {
       "icon": "⭐",
-      "title": "Verified & Tested",
-      "description": "Every voucher is tested and verified by our team"
+      "title": "Top Brands",
+      "description": "Access exclusive discounts from 5000+ trusted stores and popular brands worldwide."
     }
   ],
   "tipsTitle": "Tips to Maximize Your Savings",
   "tips": [
     {
       "title": "Check Expiry Dates",
-      "description": "Vouchers expire quickly. Use them before they're gone"
+      "description": "Always check when vouchers expire. Use the soonest expiring codes first to maximize savings."
     },
     {
-      "title": "Stack When Possible",
-      "description": "Some stores allow combining vouchers with sales"
+      "title": "Copy & Apply",
+      "description": "Copy the code exactly as shown and paste it at checkout. Watch for minimum purchase requirements."
+    },
+    {
+      "title": "Stack Savings",
+      "description": "Combine vouchers with store sales and cashback offers for maximum discounts."
     },
     {
       "title": "Sign Up for Alerts",
-      "description": "Get notified when new vouchers for your favorite stores drop"
-    },
-    {
-      "title": "Read Terms & Conditions",
-      "description": "Check minimum spend and excluded items before using"
+      "description": "Create a free account to get notified when new vouchers for your favorite stores are added."
     }
   ],
-  "testimonialsTitle": "What Our Savvy Shoppers Say",
+  "testimonialsTitle": "What Our Savers Say",
   "testimonials": [
     {
-      "name": "Jessica M.",
+      "name": "Sarah Johnson",
       "country": "United States",
-      "saved": "$450",
-      "quote": "Saved over $450 last month using Cashog vouchers. The Amazon codes are amazing!",
-      "avatar": "JM"
+      "saved": "$1,247",
+      "quote": "I've saved over $1000 this year using Cashog vouchers. The codes always work and the savings add up fast!",
+      "avatar": "SJ"
     },
     {
-      "name": "David L.",
+      "name": "Mike Thompson",
       "country": "Canada",
-      "saved": "$280",
-      "quote": "Found a 30% off Nike voucher that actually worked. Saved $60 on new shoes!",
-      "avatar": "DL"
+      "saved": "$892",
+      "quote": "Best voucher site out there. Found a 40% off code for my new laptop that saved me $300 instantly.",
+      "avatar": "MT"
     },
     {
-      "name": "Sarah K.",
+      "name": "Emma Davis",
       "country": "United Kingdom",
-      "saved": "$620",
-      "quote": "I check Cashog before every online purchase. Already saved over $600 this year.",
-      "avatar": "SK"
+      "saved": "$654",
+      "quote": "Love how easy it is to find working codes. The daily updates mean I never miss a deal.",
+      "avatar": "ED"
+    },
+    {
+      "name": "Carlos Rodriguez",
+      "country": "Spain",
+      "saved": "$1,523",
+      "quote": "Saved over $1500 on travel this year alone. The hotel and flight vouchers are incredible!",
+      "avatar": "CR"
+    },
+    {
+      "name": "Lisa Chen",
+      "country": "Australia",
+      "saved": "$756",
+      "quote": "My go-to for shopping discounts. The fashion vouchers alone save me hundreds monthly.",
+      "avatar": "LC"
+    },
+    {
+      "name": "David Kim",
+      "country": "United States",
+      "saved": "$2,134",
+      "quote": "From electronics to groceries, I check Cashog before every purchase. Best decision ever!",
+      "avatar": "DK"
     }
   ],
   "faq": {
-    "title": "Vouchers in {country} - FAQ",
+    "title": "Discount Vouchers in {country} - FAQ",
     "items": [
       {
-        "question": "Are these vouchers really free?",
-        "answer": "Yes! All vouchers on Cashog are completely free to use. Just copy the code and paste at checkout."
+        "question": "Are the vouchers really free?",
+        "answer": "Yes! All vouchers and promo codes on Cashog are 100% free to use. We never charge for access to discounts or deals."
       },
       {
         "question": "How do I use a voucher code?",
-        "answer": "Copy the voucher code, go to the store's website, add items to your cart, and paste the code in the 'Promo Code' or 'Discount Code' box at checkout."
+        "answer": "Simply copy the code, go to the store's website, add items to your cart, and paste the code at checkout in the 'Promo Code' or 'Discount Code' field."
       },
       {
-        "question": "Do vouchers expire?",
-        "answer": "Yes, most vouchers have an expiry date. Check the expiry date shown on each voucher. Use them before they expire!"
+        "question": "Why did my voucher code not work?",
+        "answer": "Codes may expire, have minimum purchase requirements, or be limited to specific products. Check the expiry date and terms before using. We verify codes daily but some may expire between updates."
       },
       {
-        "question": "How often are new vouchers added?",
-        "answer": "New vouchers are added daily. We update our database constantly to bring you the latest deals and discounts."
+        "question": "How often are vouchers updated?",
+        "answer": "We update our voucher database daily. New codes are added and expired ones are removed to ensure you always find working discounts."
       },
       {
         "question": "Can I use vouchers with other offers?",
-        "answer": "It depends on the store. Some allow stacking with sales, others don't. Always check the terms and conditions."
+        "answer": "It depends on the store's policy. Many allow stacking with store sales, but some restrict combining with other promotions. Check the terms on the voucher."
       },
       {
-        "question": "What if a voucher doesn't work?",
-        "answer": "Vouchers occasionally expire faster than expected. Try another code or check the terms. Report invalid codes and we'll remove them."
+        "question": "Do you have vouchers for local stores in {country}?",
+        "answer": "Yes! We have vouchers for both international chains and local stores specific to {country}. Our database includes thousands of local retailers."
       },
       {
-        "question": "Do I need to create an account to use vouchers?",
-        "answer": "No! All vouchers are accessible without an account. However, creating a free account lets you save favorite codes and get alerts for new vouchers."
+        "question": "How can I get notified about new vouchers?",
+        "answer": "Sign up for a free Cashog account and subscribe to email alerts for your favorite stores. You'll be notified immediately when new vouchers are added."
       },
       {
-        "question": "Are the vouchers valid in my country?",
-        "answer": "Most vouchers are valid in {country}. Check the voucher details for any regional restrictions before using."
+        "question": "What's the best way to find vouchers?",
+        "answer": "Use our category filters to browse by store type, or search for specific stores. Check the 'Featured' section for the best current deals."
+      },
+      {
+        "question": "Do vouchers work on mobile apps?",
+        "answer": "Most vouchers work on both websites and mobile apps. Some are specific to one platform - check the voucher details for any restrictions."
+      },
+      {
+        "question": "How much can I save with Cashog vouchers?",
+        "answer": "Members save an average of $350-500 per year. Active users who shop regularly save $1000+ annually by checking for vouchers before every purchase."
       }
     ]
   },
   "final": {
     "title": "Ready to Start Saving in {country}?",
-    "subtitle": "Join 100,000+ savvy shoppers already saving in {country}. Sign up for free and get access to exclusive vouchers today!"
+    "subtitle": "Join 200,000+ savvy shoppers already saving in {country}. Sign up for free and access exclusive discount vouchers today!"
   }
 }
