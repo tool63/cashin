@@ -1,0 +1,347 @@
+{
+  "seo": {
+    "title": "Online Earning Methods - Make Money Online in {country} | Cashog",
+    "description": "Discover legitimate online earning methods in {country}. From freelancing to passive income, find the best ways to make money online. Start earning today with proven strategies."
+  },
+  "hero": {
+    "title": "Discover Legitimate Online Earning Methods",
+    "subtitle": "Explore proven ways to make money online in {country}. From freelancing and surveys to passive income and e-commerce - find the method that fits your skills and lifestyle."
+  },
+  "categoryTitle": "Earning Method Categories",
+  "categories": [
+    {
+      "name": "Freelancing",
+      "icon": "💼",
+      "description": "Sell your skills and services",
+      "methodCount": 25
+    },
+    {
+      "name": "Passive Income",
+      "icon": "💰",
+      "description": "Earn while you sleep",
+      "methodCount": 18
+    },
+    {
+      "name": "Microtasks",
+      "icon": "✅",
+      "description": "Small tasks for quick cash",
+      "methodCount": 12
+    },
+    {
+      "name": "Content Creation",
+      "icon": "📹",
+      "description": "Create and monetize content",
+      "methodCount": 15
+    },
+    {
+      "name": "E-commerce",
+      "icon": "🛍️",
+      "description": "Sell products online",
+      "methodCount": 10
+    },
+    {
+      "name": "Investing",
+      "icon": "📈",
+      "description": "Grow your money online",
+      "methodCount": 8
+    }
+  ],
+  "allMethodsTitle": "📋 Complete List of Online Earning Methods",
+  "allMethods": [
+    {
+      "name": "Freelance Writing",
+      "icon": "✍️",
+      "description": "Write articles, blog posts, and content for clients",
+      "earningPotential": "$25-100/hour",
+      "timeToStart": "1-2 days",
+      "difficulty": "Medium",
+      "passiveIncome": false,
+      "skills": ["Writing", "Research", "SEO"],
+      "platforms": ["Upwork", "Fiverr", "ProBlogger"],
+      "pros": ["Flexible schedule", "High earning potential", "Work from anywhere"],
+      "cons": ["Competitive", "Income fluctuates", "Need portfolio"],
+      "link": "/method/freelance-writing",
+      "isPopular": true
+    },
+    {
+      "name": "Online Surveys",
+      "icon": "📋",
+      "description": "Get paid for sharing your opinions",
+      "earningPotential": "$5-20/hour",
+      "timeToStart": "1 hour",
+      "difficulty": "Easy",
+      "passiveIncome": false,
+      "skills": ["None required", "Basic English"],
+      "platforms": ["Swagbucks", "Survey Junkie", "InboxDollars"],
+      "pros": ["No skills needed", "Easy to start", "Can do anytime"],
+      "cons": ["Low pay", "Can be boring", "Limited availability"],
+      "link": "/method/online-surveys",
+      "isPopular": true
+    },
+    {
+      "name": "Print on Demand",
+      "icon": "👕",
+      "description": "Sell custom designs on products",
+      "earningPotential": "$500-5000/month",
+      "timeToStart": "1-2 weeks",
+      "difficulty": "Medium",
+      "passiveIncome": true,
+      "skills": ["Design", "Marketing", "E-commerce"],
+      "platforms": ["Printful", "Redbubble", "TeeSpring"],
+      "pros": ["No inventory", "Passive income", "Creative work"],
+      "cons": ["Competitive", "Marketing needed", "Lower margins"],
+      "link": "/method/print-on-demand",
+      "isPopular": true
+    },
+    {
+      "name": "Affiliate Marketing",
+      "icon": "🔗",
+      "description": "Earn commissions promoting products",
+      "earningPotential": "$500-10,000+/month",
+      "timeToStart": "1-3 months",
+      "difficulty": "Hard",
+      "passiveIncome": true,
+      "skills": ["Marketing", "SEO", "Content creation"],
+      "platforms": ["Amazon Associates", "ShareASale", "CJ Affiliate"],
+      "pros": ["High earning potential", "Passive income", "Work from anywhere"],
+      "cons": ["Takes time to build", "Requires traffic", "Commission based"],
+      "link": "/method/affiliate-marketing",
+      "isPopular": true
+    }
+  ],
+  "passiveIncomeTitle": "💤 Best Passive Income Methods",
+  "passiveIncome": [
+    {
+      "name": "Dividend Investing",
+      "icon": "📊",
+      "description": "Earn regular payments from stocks",
+      "earningPotential": "4-8% annual returns",
+      "timeToStart": "1-2 days",
+      "difficulty": "Medium",
+      "passiveIncome": true,
+      "skills": ["Research", "Patience", "Basic finance"],
+      "platforms": ["Robinhood", "Vanguard", "Fidelity"],
+      "pros": ["Truly passive", "Compound growth", "Tax advantages"],
+      "cons": ["Capital required", "Market risk", "Research needed"],
+      "link": "/method/dividend-investing"
+    },
+    {
+      "name": "Digital Products",
+      "icon": "📱",
+      "description": "Create and sell ebooks, courses, templates",
+      "earningPotential": "$1,000-50,000+/year",
+      "timeToStart": "2-4 weeks",
+      "difficulty": "Medium",
+      "passiveIncome": true,
+      "skills": ["Expertise", "Creation", "Marketing"],
+      "platforms": ["Gumroad", "Teachable", "Etsy"],
+      "pros": ["High margins", "Scalable", "Once created, sells forever"],
+      "cons": ["Time to create", "Marketing needed", "Competition"],
+      "link": "/method/digital-products"
+    },
+    {
+      "name": "Rental Income",
+      "icon": "🏠",
+      "description": "Rent out property or space",
+      "earningPotential": "$500-5,000+/month",
+      "timeToStart": "1-2 months",
+      "difficulty": "Hard",
+      "passiveIncome": true,
+      "skills": ["Property management", "Customer service", "Basic maintenance"],
+      "platforms": ["Airbnb", "VRBO", "Zillow"],
+      "pros": ["Real asset", "Appreciation", "Tax benefits"],
+      "cons": ["High capital", "Maintenance", "Tenant issues"],
+      "link": "/method/rental-income"
+    }
+  ],
+  "fastestEarningTitle": "⚡ Fastest Ways to Start Earning",
+  "fastestEarning": [
+    {
+      "name": "Micro Task Sites",
+      "icon": "✅",
+      "description": "Complete small tasks for quick cash",
+      "earningPotential": "$5-15/hour",
+      "timeToStart": "30 minutes",
+      "difficulty": "Easy",
+      "passiveIncome": false,
+      "skills": ["Basic computer skills", "Attention to detail"],
+      "platforms": ["Amazon MTurk", "Clickworker", "Appen"],
+      "pros": ["Start immediately", "No skills needed", "Flexible hours"],
+      "cons": ["Low pay", "Repetitive", "Limited tasks"],
+      "link": "/method/micro-tasks"
+    },
+    {
+      "name": "Mystery Shopping",
+      "icon": "🕵️",
+      "description": "Get paid to shop and review experiences",
+      "earningPotential": "$10-50 per assignment",
+      "timeToStart": "1-2 days",
+      "difficulty": "Easy",
+      "passiveIncome": false,
+      "skills": ["Observation", "Writing", "Attention to detail"],
+      "platforms": ["Mystery Shopper", "BestMark", "Market Force"],
+      "pros": ["Fun tasks", "Free products", "Flexible"],
+      "cons": ["Inconsistent", "Reimbursement delays", "Detailed reports"],
+      "link": "/method/mystery-shopping"
+    },
+    {
+      "name": "User Testing",
+      "icon": "📱",
+      "description": "Test websites and apps for feedback",
+      "earningPotential": "$10-60/test",
+      "timeToStart": "1-2 hours",
+      "difficulty": "Medium",
+      "passiveIncome": false,
+      "skills": ["Communication", "Attention to detail", "Tech comfort"],
+      "platforms": ["UserTesting", "Userlytics", "TryMyUI"],
+      "pros": ["Good pay", "Interesting", "Learn about UX"],
+      "cons": ["Limited tests", "Need microphone", "Screen recording"],
+      "link": "/method/user-testing"
+    }
+  ],
+  "comparisonTitle": "📊 Compare Earning Methods",
+  "comparison": {
+    "description": "See which online earning method fits your goals",
+    "items": [
+      {
+        "method": "Freelancing",
+        "earningPotential": "$$$$",
+        "startupCost": "$",
+        "timeToEarn": "Days",
+        "scalability": "High",
+        "difficulty": "Medium"
+      },
+      {
+        "method": "Online Surveys",
+        "earningPotential": "$",
+        "startupCost": "$",
+        "timeToEarn": "Hours",
+        "scalability": "Low",
+        "difficulty": "Easy"
+      },
+      {
+        "method": "Affiliate Marketing",
+        "earningPotential": "$$$$$",
+        "startupCost": "$$",
+        "timeToEarn": "Months",
+        "scalability": "Very High",
+        "difficulty": "Hard"
+      },
+      {
+        "method": "Print on Demand",
+        "earningPotential": "$$$",
+        "startupCost": "$$",
+        "timeToEarn": "Weeks",
+        "scalability": "High",
+        "difficulty": "Medium"
+      }
+    ]
+  },
+  "successStoriesTitle": "🌟 Success Stories",
+  "successStories": [
+    {
+      "name": "Emma L.",
+      "earnings": "5,000/month",
+      "method": "Freelance Writing",
+      "story": "Started freelance writing part-time while working full-time. Within 6 months, I replaced my 9-5 income!",
+      "timeToAchieve": "6 months"
+    },
+    {
+      "name": "David C.",
+      "earnings": "2,000/month",
+      "method": "Print on Demand",
+      "story": "Design t-shirts and mugs in my spare time. Now earning $2k monthly passive income.",
+      "timeToAchieve": "4 months"
+    },
+    {
+      "name": "Rachel K.",
+      "earnings": "10,000/year",
+      "method": "Online Surveys",
+      "story": "Complete surveys during TV commercials. Made $10k last year just from spare time!",
+      "timeToAchieve": "1 year"
+    }
+  ],
+  "tipsTitle": "Smart Tips for Online Earning",
+  "tips": [
+    {
+      "title": "Start Small",
+      "description": "Begin with one method, master it, then expand to others. Don't try everything at once.",
+      "icon": "🌱"
+    },
+    {
+      "title": "Be Consistent",
+      "description": "Set regular hours for your online work. Consistency beats intensity.",
+      "icon": "⏰"
+    },
+    {
+      "title": "Track Your Time",
+      "description": "Monitor how much you earn per hour. Focus on high-value activities.",
+      "icon": "📊"
+    },
+    {
+      "title": "Avoid Scams",
+      "description": "Never pay to start earning. Legitimate opportunities don't require upfront fees.",
+      "icon": "🛡️"
+    }
+  ],
+  "earningsCalculator": {
+    "title": "Calculate Your Online Earning Potential",
+    "description": "See how much you could earn with different online methods",
+    "buttonText": "Try Calculator"
+  },
+  "resourcesTitle": "Resources & Guides",
+  "resources": [
+    {
+      "title": "How to Start Freelancing",
+      "description": "Step-by-step guide to launching your freelance career",
+      "readTime": "10 min",
+      "link": "/resource/start-freelancing"
+    },
+    {
+      "title": "Beginner's Guide to Passive Income",
+      "description": "Build wealth while you sleep with these strategies",
+      "readTime": "12 min",
+      "link": "/resource/passive-income-guide"
+    },
+    {
+      "title": "Avoid Online Earning Scams",
+      "description": "Red flags to watch for and how to stay safe",
+      "readTime": "7 min",
+      "link": "/resource/avoid-scams"
+    }
+  ],
+  "faq": {
+    "title": "Online Earning Methods FAQ - {country}",
+    "items": [
+      {
+        "question": "What is the fastest way to earn money online?",
+        "answer": "Microtasks, online surveys, and user testing offer the quickest path to earning - often within hours or days. However, they typically pay less than skilled work."
+      },
+      {
+        "question": "How much can I realistically earn online?",
+        "answer": "Beginners earn $100-500/month. With skills and dedication, $1,000-5,000/month is achievable. Full-time professionals can earn $5,000-20,000+/month."
+      },
+      {
+        "question": "Do I need special skills to earn online?",
+        "answer": "No! Many methods like surveys, microtasks, and cashback apps require no special skills. As you gain experience, you can develop higher-paying skills."
+      },
+      {
+        "question": "Is passive income really passive?",
+        "answer": "Most 'passive' income requires upfront work to create. Once established, it requires minimal maintenance. True passive income (dividends, interest) needs capital."
+      },
+      {
+        "question": "Which method is best for beginners?",
+        "answer": "Start with online surveys, microtasks, or freelance writing. These have low barriers to entry and help you build confidence and skills."
+      },
+      {
+        "question": "Can I earn online without investment?",
+        "answer": "Yes! Many methods require zero investment: surveys, microtasks, freelance work, user testing, and content creation. Never pay to start earning."
+      }
+    ]
+  },
+  "final": {
+    "title": "Start Your Online Earning Journey Today",
+    "subtitle": "Choose a method that fits your lifestyle and start earning real money online",
+    "buttonText": "Explore All Methods"
+  }
+}
