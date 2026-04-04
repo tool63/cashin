@@ -1,0 +1,500 @@
+{
+  "seo": {
+    "title": "Finance Cashback - Earn Bonuses & Cash Back on Financial Products in {country} | Cashog",
+    "description": "Earn cashback and bonuses on financial products in {country}. Get paid for opening bank accounts, credit cards, investment accounts, insurance, and more."
+  },
+  "hero": {
+    "title": "Earn Cashback on Financial Products",
+    "subtitle": "Get paid to improve your finances. Earn cashback bonuses for opening bank accounts, credit cards, investment accounts, and more in {country}. Turn smart financial decisions into real cash rewards."
+  },
+  "categoryTitle": "Shop by Category",
+  "categories": [
+    {
+      "name": "Bank Accounts",
+      "icon": "🏦",
+      "description": "Checking, savings, and high-yield accounts",
+      "storeCount": 35
+    },
+    {
+      "name": "Credit Cards",
+      "icon": "💳",
+      "description": "Rewards, cashback, and travel cards",
+      "storeCount": 50
+    },
+    {
+      "name": "Investing",
+      "icon": "📈",
+      "description": "Brokerage, retirement, and roboadvisors",
+      "storeCount": 28
+    },
+    {
+      "name": "Loans",
+      "icon": "💰",
+      "description": "Personal, mortgage, and student loans",
+      "storeCount": 25
+    },
+    {
+      "name": "Insurance",
+      "icon": "🛡️",
+      "description": "Life, auto, home, and health insurance",
+      "storeCount": 30
+    },
+    {
+      "name": "Tax Software",
+      "icon": "📊",
+      "description": "File taxes and maximize refunds",
+      "storeCount": 15
+    }
+  ],
+  "featuredStoresTitle": "Top Financial Providers",
+  "featuredStores": [
+    {
+      "name": "Chase",
+      "logo": "🏦",
+      "cashbackRate": "$200-$900",
+      "description": "Premium bank accounts with generous welcome bonuses",
+      "categories": ["Checking", "Savings", "Credit Cards"],
+      "features": ["Nationwide branches", "Mobile app", "24/7 support"],
+      "link": "/finance/chase"
+    },
+    {
+      "name": "SoFi",
+      "logo": "💙",
+      "cashbackRate": "$250-$500",
+      "description": "All-in-one finance platform with high yields",
+      "categories": ["Banking", "Investing", "Loans", "Credit Cards"],
+      "features": ["No fees", "Early direct deposit", "Career coaching"],
+      "link": "/finance/sofi"
+    },
+    {
+      "name": "American Express",
+      "logo": "💳",
+      "cashbackRate": "$200-$800",
+      "description": "Premium credit cards with exceptional rewards",
+      "categories": ["Credit Cards", "Business Cards"],
+      "features": ["Membership Rewards", "Centurion Lounge", "Concierge"],
+      "link": "/finance/amex"
+    },
+    {
+      "name": "Vanguard",
+      "logo": "📈",
+      "cashbackRate": "Up to $1,000",
+      "description": "Low-cost investing for long-term wealth building",
+      "categories": ["Brokerage", "Retirement", "529 Plans"],
+      "features": ["Low fees", "Index funds", "Retirement planning"],
+      "link": "/finance/vanguard"
+    },
+    {
+      "name": "TurboTax",
+      "logo": "📊",
+      "cashbackRate": "$15-$30",
+      "description": "Easy tax filing with maximum refund guarantee",
+      "categories": ["Tax Software", "CPA Services"],
+      "features": ["Max refund", "Audit support", "Step-by-step guidance"],
+      "link": "/finance/turbotax"
+    },
+    {
+      "name": "Progressive",
+      "logo": "🛡️",
+      "cashbackRate": "$50-$150",
+      "description": "Name Your Price® insurance tool",
+      "categories": ["Auto", "Home", "Renters"],
+      "features": ["Comparison shopping", "Bundle discounts", "Snapshot program"],
+      "link": "/finance/progressive"
+    }
+  ],
+  "topDealsTitle": "Hot Financial Offers",
+  "topDeals": [
+    {
+      "title": "Chase Total Checking®",
+      "description": "$300 bonus for new checking customers",
+      "originalPrice": "",
+      "salePrice": "$300",
+      "cashbackRate": "+$50",
+      "store": "Chase",
+      "image": "🏦",
+      "link": "/deal/chase-checking"
+    },
+    {
+      "title": "SoFi Checking & Savings",
+      "description": "$250 bonus + 4.60% APY",
+      "originalPrice": "",
+      "salePrice": "$250",
+      "cashbackRate": "+4.60%",
+      "store": "SoFi",
+      "image": "💙",
+      "link": "/deal/sofi-bonus"
+    },
+    {
+      "title": "American Express Platinum",
+      "description": "80,000 Membership Rewards® points",
+      "originalPrice": "$695 fee",
+      "salePrice": "$695",
+      "cashbackRate": "80k points",
+      "store": "Amex",
+      "image": "💳",
+      "link": "/deal/amex-platinum"
+    },
+    {
+      "title": "Vanguard Cash Plus Account",
+      "description": "Up to $1,000 bonus on new deposits",
+      "originalPrice": "",
+      "salePrice": "$1,000",
+      "cashbackRate": "4.70% APY",
+      "store": "Vanguard",
+      "image": "📈",
+      "link": "/deal/vanguard-bonus"
+    },
+    {
+      "title": "TurboTax Deluxe",
+      "description": "Maximum refund guaranteed + cashback",
+      "originalPrice": "$69",
+      "salePrice": "$49",
+      "cashbackRate": "$20",
+      "store": "TurboTax",
+      "image": "📊",
+      "link": "/deal/turbotax"
+    },
+    {
+      "title": "Progressive Auto Insurance",
+      "description": "Save up to $756 when switching",
+      "originalPrice": "",
+      "salePrice": "$756 avg savings",
+      "cashbackRate": "$100",
+      "store": "Progressive",
+      "image": "🛡️",
+      "link": "/deal/progressive"
+    }
+  ],
+  "tipsTitle": "Smart Financial Shopping Tips",
+  "tips": [
+    {
+      "title": "Read the Fine Print",
+      "description": "Always check requirements for bonuses like minimum deposits or spending thresholds.",
+      "icon": "📝"
+    },
+    {
+      "title": "Stack Multiple Offers",
+      "description": "Combine referral bonuses, cashback, and account perks for maximum value.",
+      "icon": "📚"
+    },
+    {
+      "title": "Check Your Credit",
+      "description": "Some financial products require good credit. Check your score before applying.",
+      "icon": "📊"
+    },
+    {
+      "title": "Avoid Fees",
+      "description": "Look for accounts with no monthly fees or ways to waive them easily.",
+      "icon": "💰"
+    }
+  ],
+  "compareTitle": "Compare Financial Offers",
+  "compare": {
+    "description": "See how much you can earn with different providers",
+    "stores": [
+      {
+        "name": "Chase",
+        "cashbackRate": "$300-$900",
+        "minInvestment": "$0",
+        "fees": "$0 w/ direct deposit",
+        "rating": 4.5
+      },
+      {
+        "name": "SoFi",
+        "cashbackRate": "$250-$500",
+        "minInvestment": "$0",
+        "fees": "$0",
+        "rating": 4.7
+      },
+      {
+        "name": "Amex",
+        "cashbackRate": "$200-$800",
+        "minInvestment": "Good credit",
+        "fees": "$0-$695",
+        "rating": 4.8
+      },
+      {
+        "name": "Vanguard",
+        "cashbackRate": "Up to $1,000",
+        "minInvestment": "$0",
+        "fees": "$0",
+        "rating": 4.6
+      }
+    ]
+  },
+  "bankAccountsTitle": "Top Bank Account Bonuses",
+  "bankAccounts": [
+    {
+      "name": "Chase Total Checking",
+      "logo": "🏦",
+      "bonus": "$300",
+      "cashbackRate": "Plus $50",
+      "description": "Premium checking with nationwide access",
+      "requirements": ["Direct deposit", "Online banking", "New customer"],
+      "link": "/finance/chase-checking"
+    },
+    {
+      "name": "SoFi Checking",
+      "logo": "💙",
+      "bonus": "$250",
+      "cashbackRate": "4.60% APY",
+      "description": "High-yield checking with no fees",
+      "requirements": ["Direct deposit", "Account opening", "No minimum"],
+      "link": "/finance/sofi-checking"
+    },
+    {
+      "name": "Capital One 360",
+      "logo": "🔴",
+      "bonus": "$300",
+      "cashbackRate": "4.25% APY",
+      "description": "Online savings with competitive rates",
+      "requirements": ["$10,000 deposit", "Maintain balance", "New account"],
+      "link": "/finance/capital-one"
+    },
+    {
+      "name": "Discover Bank",
+      "logo": "💳",
+      "bonus": "$200",
+      "cashbackRate": "4.35% APY",
+      "description": "Cashback debit and high-yield savings",
+      "requirements": ["$15,000 deposit", "No fees", "24/7 support"],
+      "link": "/finance/discover"
+    },
+    {
+      "name": "Ally Bank",
+      "logo": "🏦",
+      "bonus": "$150",
+      "cashbackRate": "4.40% APY",
+      "description": "Online banking with great rates",
+      "requirements": ["$10,000 deposit", "Money market", "Savings account"],
+      "link": "/finance/ally"
+    },
+    {
+      "name": "Citibank",
+      "logo": "🔵",
+      "bonus": "$700",
+      "cashbackRate": "4.50% APY",
+      "description": "Premium banking with relationship rates",
+      "requirements": ["$50,000 deposit", "Direct deposit", "Monthly fees"],
+      "link": "/finance/citibank"
+    }
+  ],
+  "creditCardsTitle": "Best Credit Card Offers",
+  "creditCards": [
+    {
+      "name": "Chase Sapphire Preferred",
+      "logo": "💳",
+      "bonus": "60,000 points",
+      "cashbackRate": "5x travel",
+      "description": "Premium travel rewards card",
+      "benefits": ["$50 hotel credit", "Point transfer", "Trip insurance"],
+      "annualFee": "$95",
+      "link": "/finance/chase-sapphire"
+    },
+    {
+      "name": "Capital One Venture X",
+      "logo": "💳",
+      "bonus": "75,000 miles",
+      "cashbackRate": "10x hotels",
+      "description": "Luxury travel card with lounge access",
+      "benefits": ["$300 travel credit", "Global Entry", "Priority Pass"],
+      "annualFee": "$395",
+      "link": "/finance/venture-x"
+    },
+    {
+      "name": "Citi Double Cash",
+      "logo": "💳",
+      "bonus": "$200",
+      "cashbackRate": "2% back",
+      "description": "Simple cashback on everything",
+      "benefits": ["No annual fee", "Balance transfer", "Citi Entertainment"],
+      "annualFee": "$0",
+      "link": "/finance/citi-double"
+    },
+    {
+      "name": "Amex Gold Card",
+      "logo": "💳",
+      "bonus": "60,000 points",
+      "cashbackRate": "4x dining",
+      "description": "Premium dining and groceries card",
+      "benefits": ["$120 dining credit", "Uber Cash", "Resy access"],
+      "annualFee": "$250",
+      "link": "/finance/amex-gold"
+    }
+  ],
+  "investingTitle": "Investment Account Bonuses",
+  "investing": [
+    {
+      "name": "Vanguard",
+      "logo": "📈",
+      "bonus": "Up to $1,000",
+      "cashbackRate": "0.30% fee",
+      "description": "Low-cost index fund investing",
+      "features": ["No account fees", "ETF access", "Retirement planning"],
+      "link": "/finance/vanguard-invest"
+    },
+    {
+      "name": "Fidelity",
+      "logo": "🔵",
+      "bonus": "$100-$1,000",
+      "cashbackRate": "0.00% fees",
+      "description": "Commission-free trading platform",
+      "features": ["Fractional shares", "Research tools", "Cash management"],
+      "link": "/finance/fidelity"
+    },
+    {
+      "name": "Wealthfront",
+      "logo": "📊",
+      "bonus": "$250",
+      "cashbackRate": "5.00% APY",
+      "description": "Automated investing and high-yield cash",
+      "features": ["Robo-advisor", "Tax-loss harvesting", "No trading fees"],
+      "link": "/finance/wealthfront"
+    },
+    {
+      "name": "Robinhood",
+      "logo": "🟢",
+      "bonus": "$100-$500",
+      "cashbackRate": "0% commission",
+      "description": "Commission-free stock and crypto trading",
+      "features": ["Fractional shares", "Gold benefits", "IRA match"],
+      "link": "/finance/robinhood"
+    },
+    {
+      "name": "Betterment",
+      "logo": "📈",
+      "bonus": "$150",
+      "cashbackRate": "0.25% fee",
+      "description": "Goal-based automated investing",
+      "features": ["Socially responsible", "Retirement tools", "Cash reserve"],
+      "link": "/finance/betterment"
+    },
+    {
+      "name": "M1 Finance",
+      "logo": "📊",
+      "bonus": "$100",
+      "cashbackRate": "0% commission",
+      "description": "Custom pie investing platform",
+      "features": ["Automated rebalancing", "Margin lending", "Checking account"],
+      "link": "/finance/m1-finance"
+    }
+  ],
+  "insuranceTitle": "Insurance Cashback Offers",
+  "insurance": [
+    {
+      "name": "Progressive",
+      "logo": "🛡️",
+      "cashbackRate": "$100",
+      "description": "Auto, home, and renters insurance",
+      "coverage": ["Auto", "Home", "Renters", "Boat"],
+      "link": "/insurance/progressive"
+    },
+    {
+      "name": "GEICO",
+      "logo": "🦎",
+      "cashbackRate": "$75",
+      "description": "Government Employees Insurance Company",
+      "coverage": ["Auto", "Motorcycle", "Home", "Umbrella"],
+      "link": "/insurance/geico"
+    },
+    {
+      "name": "State Farm",
+      "logo": "🔴",
+      "cashbackRate": "$50",
+      "description": "Neighborhood insurance agent network",
+      "coverage": ["Auto", "Home", "Life", "Health"],
+      "link": "/insurance/state-farm"
+    },
+    {
+      "name": "Lemonade",
+      "logo": "🍋",
+      "cashbackRate": "$25",
+      "description": "Digital renters and homeowners insurance",
+      "coverage": ["Renters", "Homeowners", "Pet", "Term Life"],
+      "link": "/insurance/lemonade"
+    }
+  ],
+  "taxSoftwareTitle": "Tax Software Deals",
+  "taxSoftware": [
+    {
+      "name": "TurboTax",
+      "logo": "📊",
+      "cashbackRate": "$20",
+      "description": "Maximum refund guaranteed",
+      "features": ["Step-by-step", "Audit support", "Live CPA"],
+      "link": "/tax/turbotax"
+    },
+    {
+      "name": "H&R Block",
+      "logo": "🔵",
+      "cashbackRate": "$15",
+      "description": "DIY or expert help available",
+      "features": ["Price match", "In-person offices", "Tax pro review"],
+      "link": "/tax/hr-block"
+    },
+    {
+      "name": "TaxSlayer",
+      "logo": "💻",
+      "cashbackRate": "$10",
+      "description": "Affordable tax filing solution",
+      "features": ["Simple interface", "Prior year returns", "Deduction finder"],
+      "link": "/tax/taxslayer"
+    },
+    {
+      "name": "Cash App Taxes",
+      "logo": "💰",
+      "cashbackRate": "$0",
+      "description": "Completely free federal and state filing",
+      "features": ["Free both", "Easy import", "Direct deposit"],
+      "link": "/tax/cash-app"
+    }
+  ],
+  "priceMatch": {
+    "title": "Found a Better Offer?",
+    "description": "We'll help you find the best financial bonuses and cashback rates. Compare offers across providers and maximize your earnings.",
+    "buttonText": "Compare Offers"
+  },
+  "faq": {
+    "title": "Financial Cashback FAQ - {country}",
+    "items": [
+      {
+        "question": "How do bank account bonuses work?",
+        "answer": "Open a new account and meet requirements like direct deposit or minimum balance. Bonus is credited within 30-90 days."
+      },
+      {
+        "question": "Can I earn cashback on credit card annual fees?",
+        "answer": "The annual fee itself doesn't earn cashback, but welcome bonuses and spending rewards more than offset the fee."
+      },
+      {
+        "question": "Are investment account bonuses taxable?",
+        "answer": "Yes, most bonuses are considered taxable income. You'll receive a 1099 form for bonuses over $600."
+      },
+      {
+        "question": "How long do financial bonuses take to post?",
+        "answer": "Most bonuses post within 60-90 days after meeting requirements. Check each offer's terms for specifics."
+      },
+      {
+        "question": "Can I get multiple bank account bonuses?",
+        "answer": "Yes! Many people open multiple accounts each year to earn thousands in bonuses."
+      },
+      {
+        "question": "Do refinance offers affect my credit score?",
+        "answer": "Yes, refinance applications involve hard credit checks. Multiple applications in a short period count as one inquiry."
+      },
+      {
+        "question": "What's the catch with financial bonuses?",
+        "answer": "Most require meeting specific conditions like direct deposit or minimum spending. Read terms carefully before applying."
+      },
+      {
+        "question": "Can I earn cashback on loan payments?",
+        "answer": "Yes, many refinance and loan providers offer cashback when you close a loan through their platform."
+      }
+    ]
+  },
+  "final": {
+    "title": "Start Earning Financial Cashback Today",
+    "subtitle": "Join thousands of smart savers earning cashback on their financial decisions",
+    "buttonText": "Browse Financial Offers"
+  }
+}
