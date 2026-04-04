@@ -1,0 +1,273 @@
+{
+  "seo": {
+    "title": "Affiliate Program in {country} - Earn 30% Recurring Commission | Cashog",
+    "description": "Join the Cashog affiliate program in {country} and earn 30% recurring commission. Get marketing tools, dedicated support, and monthly payments. Start earning today!"
+  },
+  "hero": {
+    "title": "Join the Cashog Affiliate Program in {country}",
+    "subtitle": "Earn 30% recurring commission for every user you refer. Join 5,000+ successful affiliates already earning passive income with Cashog in {country}."
+  },
+  "statsTitle": "Affiliate Program by the Numbers",
+  "stats": {
+    "activeAffiliates": "5,000+",
+    "activeAffiliatesLabel": "Active Affiliates",
+    "monthlyCommissions": "$250K+",
+    "monthlyCommissionsLabel": "Monthly Commissions",
+    "avgCommission": "$850",
+    "avgCommissionLabel": "Average Monthly Earnings",
+    "totalPaid": "$15M+",
+    "totalPaidLabel": "Total Paid to Affiliates"
+  },
+  "featuresTitle": "Why Join Our Affiliate Program",
+  "featuresSubtitle": "Everything you need to succeed as an affiliate",
+  "features": [
+    {
+      "icon": "💰",
+      "title": "30% Recurring Commission",
+      "description": "Earn 30% commission every month for every active user you refer. No cap on earnings.",
+      "highlight": "Lifetime commissions"
+    },
+    {
+      "icon": "📊",
+      "title": "Real-Time Analytics",
+      "description": "Track clicks, signups, and commissions with our detailed dashboard. See exactly what's working.",
+      "highlight": "Live tracking"
+    },
+    {
+      "icon": "🎁",
+      "title": "Bonus Incentives",
+      "description": "Earn special bonuses for hitting milestones. Extra $500 for 100 referrals, $1000 for 250 referrals.",
+      "highlight": "Performance bonuses"
+    },
+    {
+      "icon": "📢",
+      "title": "Marketing Materials",
+      "description": "Access banners, email templates, landing pages, and social media content ready to use.",
+      "highlight": "Ready-to-use assets"
+    },
+    {
+      "icon": "🤝",
+      "title": "Dedicated Support",
+      "description": "Get personalized support from your affiliate manager. Weekly tips and strategy calls.",
+      "highlight": "24/7 support"
+    },
+    {
+      "icon": "💳",
+      "title": "Monthly Payments",
+      "description": "Get paid on time every month via PayPal, bank transfer, or cryptocurrency.",
+      "highlight": "Reliable payouts"
+    }
+  ],
+  "commissionTiersTitle": "Commission Tiers",
+  "commissionTiersSubtitle": "Earn more as you refer more users",
+  "commissionTiers": [
+    {
+      "level": "Starter",
+      "earnings": "30% Commission",
+      "requirements": "0-50 referrals/month",
+      "benefits": [
+        "30% recurring commission",
+        "Basic analytics dashboard",
+        "Email support",
+        "Standard banners & links"
+      ],
+      "popular": false
+    },
+    {
+      "level": "Pro",
+      "earnings": "35% Commission",
+      "requirements": "51-200 referrals/month",
+      "benefits": [
+        "35% recurring commission",
+        "Advanced analytics",
+        "Priority support",
+        "Custom banners & landing pages",
+        "Monthly strategy call"
+      ],
+      "popular": true
+    },
+    {
+      "level": "Elite",
+      "earnings": "40% Commission",
+      "requirements": "201+ referrals/month",
+      "benefits": [
+        "40% recurring commission",
+        "Real-time analytics API",
+        "Dedicated account manager",
+        "Custom creative assets",
+        "Weekly strategy sessions",
+        "Early access to new features"
+      ],
+      "popular": false
+    }
+  ],
+  "howItWorksTitle": "How It Works",
+  "howItWorks": [
+    {
+      "step": 1,
+      "title": "Sign Up Free",
+      "description": "Create your affiliate account in minutes. No fees, no credit card required."
+    },
+    {
+      "step": 2,
+      "title": "Get Your Link",
+      "description": "Access your unique referral link and marketing materials from your dashboard."
+    },
+    {
+      "step": 3,
+      "title": "Promote Cashog",
+      "description": "Share your link on your website, social media, email list, or YouTube channel."
+    },
+    {
+      "step": 4,
+      "title": "Earn Commissions",
+      "description": "Get paid monthly for every active user you refer. It's that simple!"
+    }
+  ],
+  "benefitsTitle": "Affiliate Benefits",
+  "benefits": [
+    {
+      "icon": "💵",
+      "title": "Passive Income",
+      "description": "Earn money while you sleep with recurring commissions"
+    },
+    {
+      "icon": "🌍",
+      "title": "Global Program",
+      "description": "Promote to audiences in any country worldwide"
+    },
+    {
+      "icon": "📈",
+      "title": "High Conversion",
+      "description": "Our landing pages convert at 15%+ on average"
+    },
+    {
+      "icon": "🔒",
+      "title": "Secure Tracking",
+      "description": "90-day cookie window for all your referrals"
+    }
+  ],
+  "toolsTitle": "Marketing Tools & Resources",
+  "tools": [
+    {
+      "icon": "🎨",
+      "title": "Banners & Graphics",
+      "description": "Professional banners in multiple sizes for your website"
+    },
+    {
+      "icon": "📧",
+      "title": "Email Templates",
+      "description": "Ready-to-use email sequences for your list"
+    },
+    {
+      "icon": "📱",
+      "title": "Social Media Kit",
+      "description": "Optimized posts for Instagram, Facebook, Twitter, and LinkedIn"
+    },
+    {
+      "icon": "📄",
+      "title": "Landing Pages",
+      "description": "High-converting pages you can customize"
+    }
+  ],
+  "testimonialsTitle": "Successful Affiliates",
+  "testimonials": [
+    {
+      "name": "Sarah Johnson",
+      "country": "United States",
+      "earnings": "$12,847",
+      "quote": "The Cashog affiliate program changed my life. I'm earning over $3,000/month in passive income just by recommending a service I already love.",
+      "avatar": "SJ",
+      "role": "Top Earner 2024"
+    },
+    {
+      "name": "David Chen",
+      "country": "Canada",
+      "earnings": "$8,234",
+      "quote": "The conversion rates are incredible. Every 100 clicks gives me about 15-20 signups. Best affiliate program I've ever joined.",
+      "avatar": "DC",
+      "role": "Pro Affiliate"
+    },
+    {
+      "name": "Emma Williams",
+      "country": "United Kingdom",
+      "earnings": "$5,621",
+      "quote": "Support is amazing. My affiliate manager helped me optimize my campaigns and doubled my earnings in just 2 months.",
+      "avatar": "EW",
+      "role": "Content Creator"
+    },
+    {
+      "name": "Mike Thompson",
+      "country": "Australia",
+      "earnings": "$15,432",
+      "quote": "The 90-day cookie window is a game changer. I get credit for sales weeks after my initial referral.",
+      "avatar": "MT",
+      "role": "Blogger"
+    },
+    {
+      "name": "Lisa Anderson",
+      "country": "United States",
+      "earnings": "$22,156",
+      "quote": "I've tried dozens of affiliate programs. Cashog pays the highest and most consistently. Hit Elite tier in 6 months!",
+      "avatar": "LA",
+      "role": "Elite Affiliate"
+    },
+    {
+      "name": "James Wilson",
+      "country": "New Zealand",
+      "earnings": "$4,893",
+      "quote": "The marketing materials are top-notch. I just copy and paste their emails to my list and watch commissions roll in.",
+      "avatar": "JW",
+      "role": "Email Marketer"
+    }
+  ],
+  "faq": {
+    "title": "Affiliate Program in {country} - FAQ",
+    "items": [
+      {
+        "question": "How do I join the affiliate program?",
+        "answer": "Simply click the 'Join Now' button above and complete the registration form. It takes less than 5 minutes and is completely free. Once approved, you'll get immediate access to your affiliate dashboard and marketing materials."
+      },
+      {
+        "question": "How much commission can I earn?",
+        "answer": "You earn 30% recurring commission for every active user you refer. As you refer more users, you can move up to 35% (Pro tier) or 40% (Elite tier). There's no cap on earnings - the more you refer, the more you earn."
+      },
+      {
+        "question": "How often do I get paid?",
+        "answer": "We pay commissions monthly via PayPal, bank transfer (ACH/SEPA), or cryptocurrency (Bitcoin/Ethereum). Payments are processed on the 15th of each month for the previous month's earnings. Minimum payout is $50."
+      },
+      {
+        "question": "What's the cookie duration?",
+        "answer": "Our cookie lasts for 90 days. That means if someone clicks your link and signs up within 90 days, you get credit for that referral - even if they don't sign up immediately."
+      },
+      {
+        "question": "Can I promote Cashog on YouTube or social media?",
+        "answer": "Absolutely! We encourage promotion on all platforms including YouTube, TikTok, Instagram, Facebook, Twitter, and LinkedIn. Just make sure to follow our brand guidelines and disclose your affiliate relationship."
+      },
+      {
+        "question": "Do you provide marketing materials?",
+        "answer": "Yes! You'll get access to banners, text links, email templates, social media posts, landing pages, and video scripts. All materials are professionally designed and tested for high conversion rates."
+      },
+      {
+        "question": "Is there a limit to how much I can earn?",
+        "answer": "No, there is absolutely no cap on earnings. Our top affiliates earn over $10,000 per month. The more you promote, the more you earn."
+      },
+      {
+        "question": "Can I refer users from any country?",
+        "answer": "Yes! Cashog is available in over 50 countries including the US, UK, Canada, Australia, and most European countries. You can promote to audiences anywhere in the world."
+      },
+      {
+        "question": "What tracking software do you use?",
+        "answer": "We use industry-leading affiliate tracking software that provides real-time analytics, click tracking, conversion tracking, and detailed reports. You can see exactly how many clicks, signups, and commissions you're earning."
+      },
+      {
+        "question": "Do you have an affiliate support team?",
+        "answer": "Yes! You'll get access to dedicated affiliate support via email and live chat. Pro and Elite affiliates also get a personal account manager and monthly strategy calls."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Start Earning as an Affiliate in {country}?",
+    "subtitle": "Join 5,000+ successful affiliates already earning passive income. Sign up today and start earning 30% recurring commission!"
+  }
+}
