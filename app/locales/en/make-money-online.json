@@ -1,0 +1,261 @@
+{
+  "seo": {
+    "title": "Make Money Online in {country} - 15+ Legit Ways to Earn | Cashog",
+    "description": "Discover legit ways to make money online in {country}. From cashback and surveys to freelancing and passive income. Start earning today with our proven methods."
+  },
+  "hero": {
+    "title": "Make Money Online in {country}",
+    "subtitle": "Discover legit ways to earn extra income from home in {country}. Whether you want a side hustle or full-time online income, we've got you covered with proven methods that actually work."
+  },
+  "methodsTitle": "Proven Ways to Make Money Online",
+  "methods": [
+    {
+      "name": "Cashback Shopping",
+      "icon": "💰",
+      "description": "Earn money back on purchases you already make. Get paid to shop at thousands of stores.",
+      "earningPotential": "$50-500/month",
+      "difficulty": "Easy",
+      "timeToStart": "Minutes",
+      "link": "/shopping-rewards"
+    },
+    {
+      "name": "Online Surveys",
+      "icon": "📋",
+      "description": "Get paid for your opinion. Companies want to hear what you think about products and services.",
+      "earningPotential": "$20-200/month",
+      "difficulty": "Easy",
+      "timeToStart": "Minutes",
+      "link": "/surveys"
+    },
+    {
+      "name": "Freelancing",
+      "icon": "💻",
+      "description": "Sell your skills online. Writing, design, programming, virtual assistance, and more.",
+      "earningPotential": "$500-5,000+/month",
+      "difficulty": "Medium",
+      "timeToStart": "Hours",
+      "link": "/freelancing"
+    },
+    {
+      "name": "Affiliate Marketing",
+      "icon": "🔗",
+      "description": "Earn commissions promoting products you love. Share links and get paid for sales.",
+      "earningPotential": "$100-10,000+/month",
+      "difficulty": "Medium",
+      "timeToStart": "Days",
+      "link": "/affiliate"
+    },
+    {
+      "name": "User Testing",
+      "icon": "🧪",
+      "description": "Test websites and apps. Get paid to find bugs and share feedback.",
+      "earningPotential": "$100-500/month",
+      "difficulty": "Easy",
+      "timeToStart": "Minutes",
+      "link": "/user-testing"
+    },
+    {
+      "name": "Online Tutoring",
+      "icon": "📚",
+      "description": "Share your knowledge. Teach students online in subjects you're good at.",
+      "earningPotential": "$500-3,000/month",
+      "difficulty": "Medium",
+      "timeToStart": "Hours",
+      "link": "/tutoring"
+    },
+    {
+      "name": "Dropshipping",
+      "icon": "📦",
+      "description": "Start an online store without inventory. Sell products that ship directly to customers.",
+      "earningPotential": "$500-10,000+/month",
+      "difficulty": "Hard",
+      "timeToStart": "Days",
+      "link": "/dropshipping"
+    },
+    {
+      "name": "Content Creation",
+      "icon": "🎥",
+      "description": "Create videos, blogs, or podcasts. Build an audience and monetize through ads and sponsors.",
+      "earningPotential": "$100-10,000+/month",
+      "difficulty": "Hard",
+      "timeToStart": "Weeks",
+      "link": "/content-creation"
+    }
+  ],
+  "opportunitiesTitle": "Top Earning Opportunities",
+  "opportunities": [
+    {
+      "title": "Cashback App",
+      "company": "Cashog",
+      "logo": "💰",
+      "earningPotential": "$50-500/month",
+      "description": "Earn cashback on everyday purchases at thousands of stores. Stack with coupons and sales.",
+      "requirements": ["Free account", "Valid email", "Any country"],
+      "link": "/signup"
+    },
+    {
+      "title": "Survey Panel",
+      "company": "Survey Junkie",
+      "logo": "📋",
+      "earningPotential": "$20-150/month",
+      "description": "Share your opinions and get paid. Join paid surveys on products and services.",
+      "requirements": ["18+ years", "Email address", "Any country"],
+      "link": "/survey-junkie"
+    },
+    {
+      "title": "Freelance Platform",
+      "company": "Upwork",
+      "logo": "💼",
+      "earningPotential": "$500-5,000+/month",
+      "description": "Find freelance work in writing, design, programming, marketing, and more.",
+      "requirements": ["Skills portfolio", "Profile", "Payment method"],
+      "link": "/upwork"
+    },
+    {
+      "title": "User Testing",
+      "company": "UserTesting",
+      "logo": "🧪",
+      "earningPotential": "$100-500/month",
+      "description": "Test websites and apps. Record your screen and voice while giving feedback.",
+      "requirements": ["Microphone", "Computer", "English fluency"],
+      "link": "/usertesting"
+    }
+  ],
+  "successStoriesTitle": "Real Success Stories",
+  "successStories": [
+    {
+      "name": "Sarah",
+      "age": 28,
+      "location": "Texas",
+      "earnings": "$2,500/month",
+      "story": "Started with cashback and surveys, now runs a full-time freelance writing business.",
+      "image": "👩",
+      "method": "Freelancing"
+    },
+    {
+      "name": "Mike",
+      "age": 35,
+      "location": "Florida",
+      "earnings": "$1,200/month",
+      "story": "Earns extra income through cashback and user testing while working full-time.",
+      "image": "👨",
+      "method": "Cashback + Testing"
+    },
+    {
+      "name": "Jessica",
+      "age": 42,
+      "location": "California",
+      "earnings": "$8,000/month",
+      "story": "Built a successful dropshipping store after learning e-commerce basics online.",
+      "image": "👩",
+      "method": "Dropshipping"
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Your Earnings",
+  "tips": [
+    {
+      "title": "Start with What You Know",
+      "description": "Begin with methods that match your existing skills and interests.",
+      "icon": "🎯"
+    },
+    {
+      "title": "Diversify Income Streams",
+      "description": "Combine multiple methods for more stable and higher earnings.",
+      "icon": "📚"
+    },
+    {
+      "title": "Be Consistent",
+      "description": "Set aside dedicated time each day or week for your online earning activities.",
+      "icon": "⏰"
+    },
+    {
+      "title": "Track Your Earnings",
+      "description": "Monitor what works best and focus your energy on the most profitable methods.",
+      "icon": "📊"
+    }
+  ],
+  "calculator": {
+    "title": "Calculate Your Earning Potential",
+    "description": "See how much you could earn with different online money-making methods",
+    "buttonText": "Try Our Calculator"
+  },
+  "resourcesTitle": "Helpful Resources",
+  "resources": [
+    {
+      "name": "Cashog Blog",
+      "logo": "📝",
+      "description": "Weekly tips and strategies for making money online",
+      "link": "/blog"
+    },
+    {
+      "name": "Earning Calculator",
+      "logo": "🧮",
+      "description": "Calculate your potential earnings with different methods",
+      "link": "/calculator"
+    },
+    {
+      "name": "Free Guides",
+      "logo": "📚",
+      "description": "Downloadable PDF guides for getting started",
+      "link": "/guides"
+    },
+    {
+      "name": "Community Forum",
+      "logo": "💬",
+      "description": "Connect with others making money online",
+      "link": "/forum"
+    }
+  ],
+  "comparisonTitle": "Compare Earning Methods",
+  "comparison": {
+    "description": "Find the right method for your goals and schedule"
+  },
+  "newsletter": {
+    "title": "Get Weekly Earning Tips",
+    "subtitle": "Join 50,000+ subscribers getting money-making strategies",
+    "buttonText": "Subscribe",
+    "placeholder": "Enter your email"
+  },
+  "faq": {
+    "title": "Make Money Online FAQ - {country}",
+    "items": [
+      {
+        "question": "Can I really make money online?",
+        "answer": "Yes! Thousands of people earn legitimate income online through cashback, freelancing, surveys, and other methods. It takes time and effort, but it's absolutely possible."
+      },
+      {
+        "question": "How much can I earn?",
+        "answer": "Earnings vary widely based on method and effort. Some earn $50-200/month with surveys and cashback, while freelancers and entrepreneurs earn $1,000-10,000+/month."
+      },
+      {
+        "question": "Do I need special skills?",
+        "answer": "Not for all methods. Cashback and surveys require no special skills. Freelancing and affiliate marketing benefit from existing skills but can be learned."
+      },
+      {
+        "question": "Are these methods legit?",
+        "answer": "Yes, all methods we recommend are legitimate. We only list proven platforms that actually pay users. Always avoid get-rich-quick schemes."
+      },
+      {
+        "question": "How quickly can I start earning?",
+        "answer": "Some methods like surveys and cashback let you start earning within minutes. Others like freelancing may take days to land your first client."
+      },
+      {
+        "question": "Do I need to pay taxes on online earnings?",
+        "answer": "Yes, online earnings are taxable income. Keep records of your earnings and consult a tax professional for guidance."
+      },
+      {
+        "question": "Can I do this part-time?",
+        "answer": "Absolutely! Many methods are perfect for part-time work. You can start with just a few hours per week and scale up as you see results."
+      },
+      {
+        "question": "What's the easiest way to start?",
+        "answer": "Cashback shopping and online surveys are the easiest ways to start. They require no special skills and you can begin earning immediately."
+      }
+    ]
+  },
+  "final": {
+    "title": "Start Your Online Earning Journey Today",
+    "subtitle": "Join thousands of people already making money online with Cashog",
+    "buttonText": "Get Started Now"
+  }
+}
