@@ -1,0 +1,385 @@
+{
+  "seo": {
+    "title": "Passive Income Online - Build Wealth While You Sleep in {country} | Cashog",
+    "description": "Discover legitimate passive income streams online in {country}. Build automated income sources that earn while you sleep. From digital products to investments - start your passive income journey today!"
+  },
+  "hero": {
+    "title": "Build Passive Income Online",
+    "subtitle": "Create automated income streams that earn money while you sleep in {country}. From digital products and affiliate marketing to investments and royalties - start building wealth today."
+  },
+  "categoryTitle": "Passive Income Categories",
+  "categories": [
+    {
+      "name": "Digital Products",
+      "icon": "📱",
+      "description": "Create once, sell forever",
+      "methodCount": 12
+    },
+    {
+      "name": "Affiliate Marketing",
+      "icon": "🔗",
+      "description": "Earn commissions promoting products",
+      "methodCount": 15
+    },
+    {
+      "name": "Investing",
+      "icon": "📈",
+      "description": "Let your money work for you",
+      "methodCount": 8
+    },
+    {
+      "name": "Content Creation",
+      "icon": "📹",
+      "description": "Monetize your content",
+      "methodCount": 10
+    },
+    {
+      "name": "Print on Demand",
+      "icon": "👕",
+      "description": "Sell designs without inventory",
+      "methodCount": 6
+    },
+    {
+      "name": "Royalties",
+      "icon": "🎵",
+      "description": "Earn from your creations",
+      "methodCount": 5
+    }
+  ],
+  "allMethodsTitle": "📋 Best Passive Income Methods",
+  "allMethods": [
+    {
+      "name": "Digital Products",
+      "icon": "📱",
+      "description": "Create ebooks, courses, templates, or software",
+      "upfrontWork": "20-100 hours",
+      "startupCost": "$0-500",
+      "monthlyEarning": "$500-10,000+",
+      "difficulty": "Medium",
+      "timeToPassive": "1-3 months",
+      "scalability": "High",
+      "steps": [
+        "Identify your expertise and target audience",
+        "Create high-quality digital product",
+        "Set up sales platform (Gumroad, Teachable, Etsy)",
+        "Create marketing content",
+        "Drive traffic to your product"
+      ],
+      "platforms": ["Gumroad", "Teachable", "Etsy", "Amazon KDP"],
+      "pros": ["High margins", "No inventory", "Scalable", "Passive after creation"],
+      "cons": ["Time to create", "Marketing required", "Competition"],
+      "link": "/passive/digital-products",
+      "isBeginnerFriendly": true
+    },
+    {
+      "name": "Affiliate Marketing",
+      "icon": "🔗",
+      "description": "Promote products and earn commissions",
+      "upfrontWork": "10-50 hours",
+      "startupCost": "$0-100",
+      "monthlyEarning": "$500-20,000+",
+      "difficulty": "Medium",
+      "timeToPassive": "2-6 months",
+      "scalability": "High",
+      "steps": [
+        "Choose a niche",
+        "Join affiliate programs (Amazon, ShareASale)",
+        "Create content (blog, YouTube, social media)",
+        "Add affiliate links",
+        "Drive traffic and earn commissions"
+      ],
+      "platforms": ["Amazon Associates", "ShareASale", "CJ Affiliate", "ClickBank"],
+      "pros": ["No product creation", "Work from anywhere", "High earning potential"],
+      "cons": ["Requires traffic", "Commission based", "Takes time to build"],
+      "link": "/passive/affiliate-marketing",
+      "isBeginnerFriendly": true
+    },
+    {
+      "name": "Dividend Investing",
+      "icon": "📊",
+      "description": "Earn regular payments from stocks",
+      "upfrontWork": "5-10 hours",
+      "startupCost": "$500+",
+      "monthlyEarning": "4-8% annual returns",
+      "difficulty": "Medium",
+      "timeToPassive": "Immediately after investing",
+      "scalability": "High",
+      "steps": [
+        "Open brokerage account",
+        "Research dividend stocks",
+        "Invest in dividend-paying companies",
+        "Reinvest dividends for growth",
+        "Monitor portfolio quarterly"
+      ],
+      "platforms": ["Robinhood", "Vanguard", "Fidelity", "Schwab"],
+      "pros": ["Truly passive", "Compound growth", "Tax advantages"],
+      "cons": ["Capital required", "Market risk", "Research needed"],
+      "link": "/passive/dividend-investing",
+      "isBeginnerFriendly": false
+    },
+    {
+      "name": "Print on Demand",
+      "icon": "👕",
+      "description": "Sell custom designs on products",
+      "upfrontWork": "10-40 hours",
+      "startupCost": "$0-50",
+      "monthlyEarning": "$200-5,000+",
+      "difficulty": "Easy",
+      "timeToPassive": "1-2 months",
+      "scalability": "Medium",
+      "steps": [
+        "Create designs or use templates",
+        "Choose products (t-shirts, mugs, posters)",
+        "Set up store (Redbubble, Printful)",
+        "Upload designs to products",
+        "Promote your store"
+      ],
+      "platforms": ["Redbubble", "Printful", "TeeSpring", "Merch by Amazon"],
+      "pros": ["No inventory", "No shipping", "Creative work", "Low risk"],
+      "cons": ["Lower margins", "Competitive", "Marketing needed"],
+      "link": "/passive/print-on-demand",
+      "isBeginnerFriendly": true
+    }
+  ],
+  "beginnerFriendlyTitle": "🌱 Beginner-Friendly Passive Income",
+  "beginnerFriendly": [
+    {
+      "name": "Cashback Apps",
+      "icon": "💰",
+      "description": "Earn money back on purchases you already make",
+      "upfrontWork": "1-2 hours",
+      "startupCost": "$0",
+      "monthlyEarning": "$20-100",
+      "difficulty": "Easy",
+      "timeToPassive": "Immediate",
+      "scalability": "Low",
+      "steps": [
+        "Download cashback apps",
+        "Link credit/debit cards",
+        "Shop through app or activate offers",
+        "Earn cashback automatically"
+      ],
+      "platforms": ["Rakuten", "Ibotta", "Fetch Rewards", "Dosh"],
+      "pros": ["Zero effort after setup", "Works on normal spending", "Easy to start"],
+      "cons": ["Low earnings", "Requires spending", "Limited by purchases"],
+      "link": "/passive/cashback-apps",
+      "isBeginnerFriendly": true
+    },
+    {
+      "name": "High-Yield Savings",
+      "icon": "🏦",
+      "description": "Earn interest on your savings",
+      "upfrontWork": "1 hour",
+      "startupCost": "$100+",
+      "monthlyEarning": "4-5% APY",
+      "difficulty": "Easy",
+      "timeToPassive": "Immediate",
+      "scalability": "Medium",
+      "steps": [
+        "Research high-yield savings accounts",
+        "Open account online",
+        "Deposit money",
+        "Watch interest accrue automatically"
+      ],
+      "platforms": ["Ally", "Marcus", "Synchrony", "Discover"],
+      "pros": ["FDIC insured", "No risk", "Completely passive", "Liquid"],
+      "cons": ["Low returns compared to investing", "Inflation risk"],
+      "link": "/passive/high-yield-savings",
+      "isBeginnerFriendly": true
+    }
+  ],
+  "highEarningTitle": "💎 Highest Earning Passive Income",
+  "highEarning": [
+    {
+      "name": "Real Estate Crowdfunding",
+      "icon": "🏠",
+      "description": "Invest in property without being a landlord",
+      "upfrontWork": "2-5 hours",
+      "startupCost": "$500+",
+      "monthlyEarning": "8-12% annual returns",
+      "difficulty": "Medium",
+      "timeToPassive": "Immediate after investing",
+      "scalability": "High",
+      "steps": [
+        "Join real estate crowdfunding platform",
+        "Review available properties",
+        "Invest in properties",
+        "Receive monthly dividends",
+        "Reinvest or withdraw earnings"
+      ],
+      "platforms": ["Fundrise", "CrowdStreet", "RealtyMogul"],
+      "pros": ["Real estate exposure", "Professional management", "Monthly dividends"],
+      "cons": ["Capital required", "Illiquid", "Fees"],
+      "link": "/passive/real-estate-crowdfunding",
+      "isBeginnerFriendly": false
+    },
+    {
+      "name": "Create an Online Course",
+      "icon": "🎓",
+      "description": "Share your expertise and earn forever",
+      "upfrontWork": "40-100 hours",
+      "startupCost": "$0-500",
+      "monthlyEarning": "$1,000-50,000+",
+      "difficulty": "Hard",
+      "timeToPassive": "2-4 months",
+      "scalability": "High",
+      "steps": [
+        "Identify a profitable topic",
+        "Outline course curriculum",
+        "Record video lessons",
+        "Upload to course platform",
+        "Market your course"
+      ],
+      "platforms": ["Udemy", "Teachable", "Thinkific", "Kajabi"],
+      "pros": ["High margins", "Establish authority", "Scalable", "Global audience"],
+      "cons": ["Time-intensive to create", "Marketing required", "Competition"],
+      "link": "/passive/online-course",
+      "isBeginnerFriendly": false
+    }
+  ],
+  "comparisonTitle": "📊 Compare Passive Income Methods",
+  "comparison": {
+    "description": "Find the right passive income stream for your goals",
+    "items": [
+      {
+        "method": "Digital Products",
+        "upfrontWork": "High",
+        "startupCost": "Low",
+        "monthlyPotential": "High",
+        "maintenance": "Low",
+        "scalability": "High"
+      },
+      {
+        "method": "Affiliate Marketing",
+        "upfrontWork": "Medium",
+        "startupCost": "Low",
+        "monthlyPotential": "High",
+        "maintenance": "Medium",
+        "scalability": "High"
+      },
+      {
+        "method": "Dividend Investing",
+        "upfrontWork": "Low",
+        "startupCost": "High",
+        "monthlyPotential": "Medium",
+        "maintenance": "Very Low",
+        "scalability": "High"
+      },
+      {
+        "method": "Print on Demand",
+        "upfrontWork": "Medium",
+        "startupCost": "Low",
+        "monthlyPotential": "Medium",
+        "maintenance": "Low",
+        "scalability": "Medium"
+      }
+    ]
+  },
+  "successStoriesTitle": "🌟 Real Passive Income Success Stories",
+  "successStories": [
+    {
+      "name": "Patricia L.",
+      "earnings": "3,000/month",
+      "method": "Digital Products",
+      "story": "Created a budgeting spreadsheet template. Now earns $3k monthly with zero ongoing work!",
+      "timeToBuild": "3 months"
+    },
+    {
+      "name": "Brian K.",
+      "earnings": "5,000/month",
+      "method": "Affiliate Marketing",
+      "story": "Built a review blog about outdoor gear. Took 6 months, now earns $5k/month passively.",
+      "timeToBuild": "6 months"
+    },
+    {
+      "name": "Lisa W.",
+      "earnings": "2,500/month",
+      "method": "Print on Demand",
+      "story": "Designs funny t-shirts. After initial setup, earns $2.5k monthly while working full-time job.",
+      "timeToBuild": "2 months"
+    }
+  ],
+  "tipsTitle": "Smart Passive Income Tips",
+  "tips": [
+    {
+      "title": "Start Small",
+      "description": "Begin with one method, master it, then expand. Don't try to build everything at once.",
+      "icon": "🌱"
+    },
+    {
+      "title": "Focus on Quality",
+      "description": "High-quality products and content generate sustainable passive income longer.",
+      "icon": "⭐"
+    },
+    {
+      "title": "Reinvest Earnings",
+      "description": "Use your passive income to build additional streams for compounding growth.",
+      "icon": "🔄"
+    },
+    {
+      "title": "Be Patient",
+      "description": "Most passive income takes 3-6 months to build. Stay consistent and trust the process.",
+      "icon": "⏰"
+    }
+  ],
+  "passiveCalculator": {
+    "title": "Calculate Your Passive Income Potential",
+    "description": "See how much you could earn with different passive income streams",
+    "buttonText": "Try Calculator"
+  },
+  "resourcesTitle": "Passive Income Resources",
+  "resources": [
+    {
+      "title": "How to Create Your First Digital Product",
+      "description": "Step-by-step guide from idea to first sale",
+      "readTime": "12 min",
+      "link": "/resource/create-digital-product"
+    },
+    {
+      "title": "Affiliate Marketing for Beginners",
+      "description": "Start earning commissions with zero products",
+      "readTime": "10 min",
+      "link": "/resource/affiliate-beginners"
+    },
+    {
+      "title": "Passive Income Tax Guide",
+      "description": "Understanding taxes on different income streams",
+      "readTime": "8 min",
+      "link": "/resource/passive-income-tax"
+    }
+  ],
+  "faq": {
+    "title": "Passive Income Online FAQ - {country}",
+    "items": [
+      {
+        "question": "How much money do I need to start passive income?",
+        "answer": "It depends on the method. Digital products and affiliate marketing can start with $0. Investing requires capital - start with as little as $100."
+      },
+      {
+        "question": "How long until I see passive income?",
+        "answer": "Some methods pay immediately (investing, savings). Others take 1-6 months to build (digital products, affiliate marketing)."
+      },
+      {
+        "question": "Is passive income really passive?",
+        "answer": "Most methods require upfront work to create. Once established, they need minimal maintenance - a few hours per month."
+      },
+      {
+        "question": "What's the best passive income for beginners?",
+        "answer": "Start with high-yield savings, cashback apps, or print on demand. These have low barriers to entry and minimal risk."
+      },
+      {
+        "question": "Can I quit my job with passive income?",
+        "answer": "Yes, but it takes time. Most people need 1-3 years to build enough passive income to replace a full-time salary."
+      },
+      {
+        "question": "Do I need special skills?",
+        "answer": "Not necessarily. Many methods use skills you already have. Others can be learned through free online resources."
+      }
+    ]
+  },
+  "final": {
+    "title": "Start Building Your Passive Income Today",
+    "subtitle": "Choose a method, put in the upfront work, and watch your money grow while you sleep",
+    "buttonText": "Explore Methods"
+  }
+}
