@@ -1,0 +1,131 @@
+{
+  "seo": {
+    "title": "Contact Cashog Support in {country} - Get Help | Cashog",
+    "description": "Need help with your Cashog account in {country}? Contact our support team for assistance with cashback, account issues, or general questions. We're here to help!"
+  },
+  "hero": {
+    "title": "We're Here to Help",
+    "subtitle": "Have questions about cashback, account issues, or just want to say hello? Our support team in {country} is ready to assist you."
+  },
+  "contactMethodsTitle": "Ways to Reach Us",
+  "contactMethods": [
+    {
+      "icon": "💬",
+      "title": "Live Chat",
+      "description": "Get instant answers from our support team",
+      "action": "Start Chat",
+      "href": "#chat"
+    },
+    {
+      "icon": "📧",
+      "title": "Email Us",
+      "description": "Send us an email and we'll respond within 24 hours",
+      "action": "support@cashog.com",
+      "href": "mailto:support@cashog.com"
+    },
+    {
+      "icon": "📞",
+      "title": "Call Us",
+      "description": "Speak directly with a support representative",
+      "action": "+1 (800) 123-4567",
+      "href": "tel:+18001234567"
+    },
+    {
+      "icon": "🐦",
+      "title": "Social Media",
+      "description": "Reach out on Twitter, Facebook, or Instagram",
+      "action": "@cashog",
+      "href": "https://twitter.com/cashog"
+    }
+  ],
+  "formTitle": "Send Us a Message",
+  "formSubtitle": "Fill out the form below and we'll get back to you as soon as possible",
+  "form": {
+    "nameLabel": "Your Name",
+    "namePlaceholder": "Enter your full name",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "Enter your email address",
+    "subjectLabel": "Subject",
+    "subjectPlaceholder": "What is this regarding?",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Please provide details about your question or issue...",
+    "submitButton": "Send Message",
+    "successMessage": "Thank you! Your message has been sent. We'll respond within 24 hours.",
+    "errorMessage": "Sorry, something went wrong. Please try again or email us directly."
+  },
+  "supportHours": {
+    "title": "Support Hours & Information",
+    "hours": "Monday - Friday: 9:00 AM - 6:00 PM {country} Time",
+    "responseTime": "Response Time: Within 24 hours",
+    "phone": "Emergency Support: +1 (800) 123-4567",
+    "email": "24/7 Email Support: support@cashog.com"
+  },
+  "locationsTitle": "Our Global Offices",
+  "locations": [
+    {
+      "city": "San Francisco",
+      "country": "USA",
+      "address": "123 Market Street, Suite 400, San Francisco, CA 94105",
+      "phone": "+1 (800) 123-4567",
+      "email": "us@cashog.com"
+    },
+    {
+      "city": "London",
+      "country": "UK",
+      "address": "45 Oxford Street, London, W1D 2DZ",
+      "phone": "+44 20 1234 5678",
+      "email": "uk@cashog.com"
+    },
+    {
+      "city": "Toronto",
+      "country": "Canada",
+      "address": "789 King Street West, Suite 200, Toronto, ON M5V 1N5",
+      "phone": "+1 (416) 123-4567",
+      "email": "ca@cashog.com"
+    },
+    {
+      "city": "Sydney",
+      "country": "Australia",
+      "address": "123 George Street, Level 15, Sydney, NSW 2000",
+      "phone": "+61 2 1234 5678",
+      "email": "au@cashog.com"
+    }
+  ],
+  "faq": {
+    "title": "Frequently Asked Questions - {country}",
+    "items": [
+      {
+        "question": "How long does it take to get a response?",
+        "answer": "We typically respond to all inquiries within 24 hours during business days. For urgent issues, please call our support hotline."
+      },
+      {
+        "question": "How do I report missing cashback?",
+        "answer": "You can report missing cashback through your account dashboard or by emailing us with your order details. Please include your order confirmation number and date of purchase."
+      },
+      {
+        "question": "Can I get help in my local language?",
+        "answer": "Yes! Our support team in {country} speaks the local language and can assist you with any questions or issues."
+      },
+      {
+        "question": "What information should I include in my message?",
+        "answer": "Please include your account email, a clear description of the issue, and any relevant screenshots or order numbers. This helps us resolve your issue faster."
+      },
+      {
+        "question": "Do you have phone support?",
+        "answer": "Yes, we offer phone support during business hours. Our phone number is listed above in the contact methods section."
+      },
+      {
+        "question": "How do I delete my account?",
+        "answer": "To delete your account, please contact our support team directly. We'll guide you through the process and ensure all your data is handled according to our privacy policy."
+      },
+      {
+        "question": "What are your business hours?",
+        "answer": "Our support team is available Monday through Friday, 9:00 AM to 6:00 PM {country} Time. We respond to emails 24/7."
+      },
+      {
+        "question": "Can I partner with Cashog for my business?",
+        "answer": "Absolutely! We're always looking for new retail partners. Please email partnerships@cashog.com with information about your business."
+      }
+    ]
+  }
+}
