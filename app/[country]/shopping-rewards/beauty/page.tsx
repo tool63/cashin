@@ -603,32 +603,40 @@ export default async function BeautyRewardsPage({
       .filter((item) => item.q && item.a),
   };
 
-  // Default FAQ if not in translation
+  // Default FAQ if not in translation - FIXED: using 'a' instead of 'answer'
   if (faqData.items.length === 0) {
     faqData.items = [
       {
         q: "Which beauty stores offer the highest cashback?",
-        answer: "Cashback rates vary by store and season. Dermstore often offers 12%, Ulta up to 10%, and Nordstrom up to 10%. Check our store listings for current rates.",
+        a: "Cashback rates vary by store and season. Dermstore often offers 12%, Ulta up to 10%, and Nordstrom up to 10%. Check our store listings for current rates.",
       },
       {
         q: "Can I earn cashback on beauty subscription boxes?",
-        answer: "Yes! Most beauty subscription services offer cashback on your recurring orders. Check individual store terms for details.",
+        a: "Yes! Most beauty subscription services offer cashback on your recurring orders. Check individual store terms for details.",
       },
       {
         q: "How long does beauty cashback take to confirm?",
-        answer: "Beauty cashback typically takes 30-45 days to confirm due to return periods. This is standard for the beauty industry.",
+        a: "Beauty cashback typically takes 30-45 days to confirm due to return periods. This is standard for the beauty industry.",
       },
       {
         q: "Can I use store coupons with cashback?",
-        answer: "Yes! You can stack store coupons, promo codes, and loyalty rewards with our cashback for maximum savings on beauty products.",
+        a: "Yes! You can stack store coupons, promo codes, and loyalty rewards with our cashback for maximum savings on beauty products.",
       },
       {
         q: "Do beauty rewards points affect cashback?",
-        answer: "No, earning store loyalty points does not affect your cashback. You can earn both simultaneously for extra savings.",
+        a: "No, earning store loyalty points does not affect your cashback. You can earn both simultaneously for extra savings.",
       },
       {
         q: "Is cashback available on clearance beauty items?",
-        answer: "Yes! Clearance and sale items are typically eligible for cashback, making already discounted products an even better deal.",
+        a: "Yes! Clearance and sale items are typically eligible for cashback, making already discounted products an even better deal.",
+      },
+      {
+        q: "Can I return beauty products and keep the cashback?",
+        a: "No, if you return a product, the cashback will be deducted from your account. Wait until after the return period to withdraw cashback.",
+      },
+      {
+        q: "Are fragrance purchases eligible for cashback?",
+        a: "Yes! Fragrance purchases are typically eligible for cashback at most beauty retailers.",
       },
     ];
   }
