@@ -1,0 +1,344 @@
+{
+  "seo": {
+    "title": "Work From Home Jobs - Legitimate Remote Jobs in {country} | Cashog",
+    "description": "Find legitimate work from home jobs in {country}. Browse remote positions, freelance gigs, and online opportunities. Start your remote career today with verified employers."
+  },
+  "hero": {
+    "title": "Find Legitimate Work From Home Jobs",
+    "subtitle": "Discover real remote job opportunities in {country}. Whether you're looking for full-time remote positions, freelance gigs, or part-time online work - start your work from home journey today."
+  },
+  "categoryTitle": "Remote Job Categories",
+  "categories": [
+    {
+      "name": "Customer Support",
+      "icon": "💬",
+      "description": "Remote customer service and support roles",
+      "jobCount": 2340,
+      "skills": ["Communication", "Problem Solving", "CRM Software"],
+      "averagePay": "$15-25/hour"
+    },
+    {
+      "name": "Virtual Assistant",
+      "icon": "📋",
+      "description": "Administrative support from home",
+      "jobCount": 1850,
+      "skills": ["Organization", "Email Management", "Calendar Management"],
+      "averagePay": "$18-30/hour"
+    },
+    {
+      "name": "Data Entry",
+      "icon": "📊",
+      "description": "Typing and data processing jobs",
+      "jobCount": 2100,
+      "skills": ["Typing Speed", "Attention to Detail", "Excel"],
+      "averagePay": "$12-20/hour"
+    },
+    {
+      "name": "Writing & Editing",
+      "icon": "✍️",
+      "description": "Content creation and editing roles",
+      "jobCount": 3200,
+      "skills": ["Grammar", "SEO", "Research"],
+      "averagePay": "$25-50/hour"
+    },
+    {
+      "name": "IT & Tech Support",
+      "icon": "💻",
+      "description": "Technical support and IT roles",
+      "jobCount": 1950,
+      "skills": ["Troubleshooting", "Networking", "Help Desk"],
+      "averagePay": "$25-45/hour"
+    },
+    {
+      "name": "Sales & Marketing",
+      "icon": "📈",
+      "description": "Remote sales and digital marketing",
+      "jobCount": 2800,
+      "skills": ["Communication", "Social Media", "CRM"],
+      "averagePay": "$20-40/hour + commission"
+    }
+  ],
+  "featuredPlatformsTitle": "🌟 Best Platforms for Remote Work",
+  "featuredPlatforms": [
+    {
+      "name": "FlexJobs",
+      "logo": "💼",
+      "jobTypes": ["Full-Time", "Part-Time", "Freelance"],
+      "description": "Curated remote and flexible jobs - all hand-screened",
+      "averagePay": "$40-80k/year",
+      "features": ["Scam-free jobs", "Career coaching", "Skills tests"],
+      "rating": 4.7,
+      "link": "/platform/flexjobs",
+      "isFeatured": true
+    },
+    {
+      "name": "Upwork",
+      "logo": "🌐",
+      "jobTypes": ["Freelance", "Contract", "Hourly"],
+      "description": "World's largest freelance marketplace",
+      "averagePay": "$20-100/hour",
+      "features": ["Escrow protection", "Dispute resolution", "Time tracking"],
+      "rating": 4.5,
+      "link": "/platform/upwork",
+      "isFeatured": true
+    },
+    {
+      "name": "Remote.co",
+      "logo": "🏠",
+      "jobTypes": ["Full-Time", "Part-Time"],
+      "description": "Remote jobs from top companies",
+      "averagePay": "$50-100k/year",
+      "features": ["Remote-first companies", "Expert advice", "Job alerts"],
+      "rating": 4.6,
+      "link": "/platform/remote-co",
+      "isFeatured": true
+    }
+  ],
+  "remoteJobsTitle": "🔍 Featured Remote Jobs",
+  "remoteJobs": [
+    {
+      "title": "Remote Customer Support Specialist",
+      "company": "Atlassian",
+      "jobType": "Full-Time",
+      "description": "Provide exceptional support to global customers via chat and email",
+      "payRange": "$45,000 - $60,000",
+      "requirements": ["1+ year support experience", "Excellent communication", "CRM knowledge"],
+      "link": "/job/customer-support-atlassian",
+      "isUrgent": true
+    },
+    {
+      "title": "Virtual Assistant",
+      "company": "Belay",
+      "jobType": "Part-Time",
+      "description": "Support executives with scheduling, email, and administrative tasks",
+      "payRange": "$18 - $25/hour",
+      "requirements": ["2+ years admin experience", "Tech savvy", "Self-motivated"],
+      "link": "/job/virtual-assistant-belay",
+      "isUrgent": false
+    },
+    {
+      "title": "Content Writer",
+      "company": "HubSpot",
+      "jobType": "Contract",
+      "description": "Create engaging blog content and marketing materials",
+      "payRange": "$30 - $50/hour",
+      "requirements": ["Writing portfolio", "SEO knowledge", "B2B experience"],
+      "link": "/job/content-writer-hubspot",
+      "isUrgent": true
+    }
+  ],
+  "freelanceGigsTitle": "💼 High-Demand Freelance Gigs",
+  "freelanceGigs": [
+    {
+      "title": "Social Media Manager",
+      "category": "Marketing",
+      "averagePay": "$25-75/hour",
+      "demand": "High",
+      "skills": ["Content creation", "Analytics", "Community management"],
+      "platforms": ["Upwork", "Fiverr", "LinkedIn"],
+      "link": "/freelance/social-media-manager"
+    },
+    {
+      "title": "Web Developer",
+      "category": "Tech",
+      "averagePay": "$40-150/hour",
+      "demand": "High",
+      "skills": ["JavaScript", "React", "HTML/CSS"],
+      "platforms": ["Toptal", "Upwork", "Freelancer"],
+      "link": "/freelance/web-developer"
+    },
+    {
+      "title": "Graphic Designer",
+      "category": "Design",
+      "averagePay": "$30-80/hour",
+      "demand": "High",
+      "skills": ["Adobe Suite", "Figma", "Typography"],
+      "platforms": ["99designs", "Upwork", "Fiverr"],
+      "link": "/freelance/graphic-designer"
+    }
+  ],
+  "entryLevelTitle": "🎯 Entry Level Remote Jobs",
+  "entryLevel": [
+    {
+      "title": "Data Entry Clerk",
+      "company": "Accenture",
+      "jobType": "Full-Time",
+      "description": "Enter and verify data in company systems",
+      "payRange": "$30,000 - $40,000",
+      "requirements": ["Typing 40+ WPM", "High school diploma", "Detail-oriented"],
+      "link": "/job/data-entry-accenture",
+      "isUrgent": false
+    },
+    {
+      "title": "Junior Copywriter",
+      "company": "Brafton",
+      "jobType": "Full-Time",
+      "description": "Write blog posts and social media content",
+      "payRange": "$35,000 - $45,000",
+      "requirements": ["Writing samples", "English degree or equivalent", "Creativity"],
+      "link": "/job/junior-copywriter-brafton",
+      "isUrgent": false
+    }
+  ],
+  "highestPayingTitle": "💰 Highest Paying Remote Skills",
+  "highestPaying": [
+    {
+      "title": "Software Engineer",
+      "category": "Tech",
+      "averagePay": "$80-200/hour",
+      "demand": "High",
+      "skills": ["Python", "Java", "Cloud Computing"],
+      "platforms": ["Toptal", "Arc", "Upwork"],
+      "link": "/freelance/software-engineer"
+    },
+    {
+      "title": "UX/UI Designer",
+      "category": "Design",
+      "averagePay": "$60-150/hour",
+      "demand": "High",
+      "skills": ["Figma", "User Research", "Prototyping"],
+      "platforms": ["Dribbble", "Upwork", "Toptal"],
+      "link": "/freelance/ux-designer"
+    },
+    {
+      "title": "Digital Marketing Consultant",
+      "category": "Marketing",
+      "averagePay": "$50-200/hour",
+      "demand": "High",
+      "skills": ["SEO", "PPC", "Analytics"],
+      "platforms": ["Upwork", "LinkedIn", "Clutch"],
+      "link": "/freelance/marketing-consultant"
+    }
+  ],
+  "tipsTitle": "Smart Work From Home Tips",
+  "tips": [
+    {
+      "title": "Create a Dedicated Workspace",
+      "description": "Set up a quiet, organized area for work to boost productivity and separate work from personal life.",
+      "icon": "🏠"
+    },
+    {
+      "title": "Avoid Scams",
+      "description": "Never pay for a job opportunity. Legitimate employers won't ask for upfront fees.",
+      "icon": "🛡️"
+    },
+    {
+      "title": "Build Your Portfolio",
+      "description": "Showcase your best work to attract higher-paying clients and employers.",
+      "icon": "📁"
+    },
+    {
+      "title": "Network Online",
+      "description": "Join remote work communities and LinkedIn groups to find opportunities.",
+      "icon": "🤝"
+    }
+  ],
+  "salaryCalculator": {
+    "title": "Calculate Your Remote Salary",
+    "description": "See how much you could earn working from home based on your skills and experience",
+    "buttonText": "Try Calculator"
+  },
+  "compareTitle": "Compare Remote Job Platforms",
+  "compare": {
+    "description": "Find the best platform for your remote work journey",
+    "items": [
+      {
+        "name": "FlexJobs",
+        "jobTypes": "Full-Time, Part-Time",
+        "averagePay": "$40-80k/year",
+        "flexibility": "High",
+        "rating": 4.7
+      },
+      {
+        "name": "Upwork",
+        "jobTypes": "Freelance, Contract",
+        "averagePay": "$20-100/hour",
+        "flexibility": "Very High",
+        "rating": 4.5
+      },
+      {
+        "name": "Remote.co",
+        "jobTypes": "Full-Time, Part-Time",
+        "averagePay": "$50-100k/year",
+        "flexibility": "High",
+        "rating": 4.6
+      }
+    ]
+  },
+  "successStoriesTitle": "🌟 Success Stories",
+  "successStories": [
+    {
+      "name": "Sarah J.",
+      "earnings": "65,000",
+      "story": "Found a remote customer success role on FlexJobs. Now I work from home and save 15 hours weekly on commuting!",
+      "role": "Customer Success Manager"
+    },
+    {
+      "name": "Mike R.",
+      "earnings": "85,000",
+      "story": "Transitioned from office to remote software development. Better pay, better work-life balance.",
+      "role": "Software Developer"
+    },
+    {
+      "name": "Jessica T.",
+      "earnings": "52,000",
+      "story": "Started as a freelance writer on Upwork, now have steady clients and work from anywhere.",
+      "role": "Content Writer"
+    }
+  ],
+  "resourcesTitle": "Remote Work Resources",
+  "resources": [
+    {
+      "title": "How to Create a Remote Resume",
+      "description": "Tips for highlighting remote-ready skills",
+      "readTime": "8 min",
+      "link": "/resource/remote-resume"
+    },
+    {
+      "title": "Remote Interview Tips",
+      "description": "Ace your virtual interview with these strategies",
+      "readTime": "6 min",
+      "link": "/resource/remote-interview"
+    },
+    {
+      "title": "Productivity Tools for Remote Workers",
+      "description": "Essential apps and software for working from home",
+      "readTime": "10 min",
+      "link": "/resource/productivity-tools"
+    }
+  ],
+  "faq": {
+    "title": "Work From Home Jobs FAQ - {country}",
+    "items": [
+      {
+        "question": "Are work from home jobs legitimate?",
+        "answer": "Yes! Many reputable companies now offer remote positions. However, be cautious of scams - legitimate jobs never ask for upfront payment."
+      },
+      {
+        "question": "What skills do I need to work from home?",
+        "answer": "Essential skills include self-discipline, time management, communication, and basic computer literacy. Specific technical skills vary by role."
+      },
+      {
+        "question": "How much can I earn working from home?",
+        "answer": "Earnings vary widely: entry-level $30-45k/year, mid-level $45-80k/year, and senior roles $80-150k+. Freelancers can earn $20-200+/hour based on skills."
+      },
+      {
+        "question": "Where can I find legitimate remote jobs?",
+        "answer": "Trusted platforms include FlexJobs, Remote.co, We Work Remotely, and LinkedIn. These sites screen jobs to reduce scam listings."
+      },
+      {
+        "question": "Do I need experience to start?",
+        "answer": "Many entry-level remote jobs don't require experience. Focus on building relevant skills through online courses and freelance projects."
+      },
+      {
+        "question": "Can I work from home outside my country?",
+        "answer": "Some companies allow international remote work, but consider time zones, tax implications, and visa requirements. Check each company's policy."
+      }
+    ]
+  },
+  "final": {
+    "title": "Start Your Remote Career Today",
+    "subtitle": "Join thousands who found legitimate work from home jobs and transformed their lives",
+    "buttonText": "Browse Remote Jobs"
+  }
+}
