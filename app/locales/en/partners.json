@@ -1,0 +1,247 @@
+{
+  "seo": {
+    "title": "Partnership Opportunities in {country} - Grow Your Business with Cashog | Cashog",
+    "description": "Join the Cashog partner program in {country}. Flexible partnership models, competitive revenue share, dedicated support. Perfect for influencers, businesses, and content creators."
+  },
+  "hero": {
+    "title": "Partner with Cashog in {country}",
+    "subtitle": "Join 1,000+ successful partners already growing their business with Cashog in {country}. Flexible partnership models, competitive revenue share, and dedicated support."
+  },
+  "statsTitle": "Partner Program by the Numbers",
+  "stats": {
+    "activePartners": "1,000+",
+    "activePartnersLabel": "Active Partners",
+    "monthlyRevenue": "$500K+",
+    "monthlyRevenueLabel": "Monthly Partner Revenue",
+    "avgPartnerEarnings": "$3,500",
+    "avgPartnerEarningsLabel": "Average Partner Earnings",
+    "totalPaid": "$25M+",
+    "totalPaidLabel": "Total Paid to Partners"
+  },
+  "partnerTypesTitle": "Partnership Opportunities",
+  "partnerTypesSubtitle": "Choose the partnership model that fits your business",
+  "partnerTypes": [
+    {
+      "icon": "🤝",
+      "title": "Affiliate Partners",
+      "description": "Earn commission by referring users to Cashog through your channels",
+      "benefits": [
+        "30% recurring commission",
+        "90-day cookie window",
+        "Real-time analytics",
+        "Marketing materials provided"
+      ],
+      "idealFor": "Bloggers, influencers, content creators, website owners"
+    },
+    {
+      "icon": "🏢",
+      "title": "Strategic Partners",
+      "description": "Integrate Cashog into your platform or service",
+      "benefits": [
+        "Custom revenue share up to 50%",
+        "API access & integration support",
+        "Co-marketing opportunities",
+        "Dedicated account manager"
+      ],
+      "idealFor": "SaaS platforms, financial services, loyalty programs"
+    },
+    {
+      "icon": "💻",
+      "title": "Technology Partners",
+      "description": "Build integrations and tools that work with Cashog",
+      "benefits": [
+        "Technical documentation",
+        "Sandbox environment",
+        "Developer support",
+        "Revenue share on API calls"
+      ],
+      "idealFor": "Developers, agencies, software companies"
+    },
+    {
+      "icon": "📈",
+      "title": "Enterprise Partners",
+      "description": "Large-scale partnership with custom terms",
+      "benefits": [
+        "Custom commission structure",
+        "Dedicated support team",
+        "White-label options",
+        "Strategic planning sessions"
+      ],
+      "idealFor": "Large corporations, media companies, financial institutions"
+    }
+  ],
+  "benefitsTitle": "Why Partner with Cashog",
+  "benefits": [
+    {
+      "icon": "💰",
+      "title": "Competitive Commissions",
+      "description": "Earn up to 50% revenue share with our tiered commission structure"
+    },
+    {
+      "icon": "📊",
+      "title": "Real-Time Tracking",
+      "description": "Advanced analytics dashboard with live reporting and insights"
+    },
+    {
+      "icon": "🎯",
+      "title": "High Conversion Rates",
+      "description": "Our optimized funnel converts at 15-20% on average"
+    },
+    {
+      "icon": "🤝",
+      "title": "Dedicated Support",
+      "description": "Personal account manager and priority support for all partners"
+    }
+  ],
+  "howItWorksTitle": "How Partnership Works",
+  "howItWorks": [
+    {
+      "step": 1,
+      "title": "Apply to Partner",
+      "description": "Fill out our partnership application form. Tell us about your business and goals."
+    },
+    {
+      "step": 2,
+      "title": "Get Approved",
+      "description": "Our partnership team reviews your application and schedules an onboarding call."
+    },
+    {
+      "step": 3,
+      "title": "Set Up Integration",
+      "description": "Access your partner dashboard, get your API keys, and start promoting."
+    },
+    {
+      "step": 4,
+      "title": "Grow Together",
+      "description": "Scale your earnings with our support. Regular check-ins and optimization tips."
+    }
+  ],
+  "featuresTitle": "Partnership Features",
+  "features": [
+    {
+      "icon": "🔗",
+      "title": "API Access",
+      "description": "Full REST API for custom integrations and automation"
+    },
+    {
+      "icon": "📱",
+      "title": "White-Label Options",
+      "description": "Custom branding and white-label solutions available"
+    },
+    {
+      "icon": "📊",
+      "title": "Advanced Analytics",
+      "description": "Detailed reports on clicks, conversions, and revenue"
+    },
+    {
+      "icon": "🔒",
+      "title": "Secure Platform",
+      "description": "Enterprise-grade security and fraud protection"
+    }
+  ],
+  "successStoriesTitle": "Partner Success Stories",
+  "successStories": [
+    {
+      "name": "Sarah Johnson",
+      "company": "Finance Tips Daily",
+      "country": "United States",
+      "revenue": "$47,892",
+      "quote": "Partnering with Cashog was the best decision for our business. We've earned nearly $50,000 in just 8 months through their affiliate program.",
+      "logo": "FT"
+    },
+    {
+      "name": "David Chen",
+      "company": "TechFlow Solutions",
+      "country": "Canada",
+      "revenue": "$128,450",
+      "quote": "As a strategic partner, we've integrated Cashog into our platform. Our users love it and we're generating significant recurring revenue.",
+      "logo": "TF"
+    },
+    {
+      "name": "Emma Williams",
+      "company": "Money Saver Pro",
+      "country": "United Kingdom",
+      "revenue": "$23,891",
+      "quote": "The conversion rates are incredible. Every 100 clicks gives us about 18 signups. Best partnership program we've joined.",
+      "logo": "MS"
+    },
+    {
+      "name": "Michael Rodriguez",
+      "company": "Latino Finance",
+      "country": "Spain",
+      "revenue": "$67,234",
+      "quote": "Cashog's support team is amazing. They helped us optimize our campaigns and doubled our earnings in 3 months.",
+      "logo": "LF"
+    },
+    {
+      "name": "Lisa Anderson",
+      "company": "Smart Money Media",
+      "country": "United States",
+      "revenue": "$156,789",
+      "quote": "Enterprise partnership has been transformative. White-label solution allowed us to offer cashback under our own brand.",
+      "logo": "SM"
+    },
+    {
+      "name": "James Wilson",
+      "company": "FinTech Australia",
+      "country": "Australia",
+      "revenue": "$92,456",
+      "quote": "API integration was seamless. Our developers had it up and running in days. Revenue share has exceeded expectations.",
+      "logo": "FA"
+    }
+  ],
+  "faq": {
+    "title": "Partner Program in {country} - FAQ",
+    "items": [
+      {
+        "question": "What types of partnerships do you offer?",
+        "answer": "We offer four partnership types: Affiliate Partners (earn commission on referrals), Strategic Partners (integrate Cashog into your platform), Technology Partners (build integrations and tools), and Enterprise Partners (large-scale custom partnerships). Choose the model that best fits your business."
+      },
+      {
+        "question": "How much commission can I earn?",
+        "answer": "Commission rates vary by partnership type. Affiliate partners earn 30% recurring commission (up to 40% for high volume). Strategic partners can earn up to 50% revenue share. Enterprise partners receive custom commission structures based on volume and integration depth."
+      },
+      {
+        "question": "How do I get paid?",
+        "answer": "We pay partners monthly via PayPal, bank transfer (ACH/SEPA), or cryptocurrency. Payments are processed on the 15th of each month for the previous month's earnings. Minimum payout is $100 for most partnership types (customizable for Enterprise partners)."
+      },
+      {
+        "question": "Do you provide marketing materials?",
+        "answer": "Yes! Affiliate and Strategic partners get access to banners, email templates, social media content, landing pages, and video assets. All materials are professionally designed and optimized for conversion."
+      },
+      {
+        "question": "What API access do you provide?",
+        "answer": "Technology and Strategic partners get full REST API access including user verification, transaction tracking, commission reporting, and automated payouts. We provide comprehensive documentation and a sandbox environment for testing."
+      },
+      {
+        "question": "Can I white-label Cashog?",
+        "answer": "Yes! Enterprise partners can white-label our solution under their own brand. This includes custom domain, branded interface, and co-branded marketing materials. Contact our partnership team for white-label requirements."
+      },
+      {
+        "question": "How long does partnership approval take?",
+        "answer": "Most applications are reviewed within 2-3 business days. Strategic and Enterprise partnerships may take 5-7 business days for due diligence. Once approved, you'll be onboarded within 24 hours."
+      },
+      {
+        "question": "Is there a minimum commitment?",
+        "answer": "No minimum commitment for Affiliate partners. Strategic and Technology partners have a 3-month minimum to allow for integration and testing. Enterprise partnerships have custom terms based on the agreement."
+      },
+      {
+        "question": "What support do partners receive?",
+        "answer": "All partners receive email support. Strategic and Technology partners get dedicated account managers and priority support. Enterprise partners receive 24/7 dedicated support, monthly strategy sessions, and technical account management."
+      },
+      {
+        "question": "How do I get started?",
+        "answer": "Click the 'Become a Partner' button above to fill out our partnership application. Our team will review your application and schedule an onboarding call to discuss the best partnership model for your business."
+      }
+    ]
+  },
+  "contact": {
+    "title": "Ready to Become a Partner?",
+    "subtitle": "Let's discuss how we can grow together",
+    "buttonText": "Contact Our Partnership Team"
+  },
+  "final": {
+    "title": "Start Your Partnership Journey in {country} Today",
+    "subtitle": "Join 1,000+ successful partners already growing with Cashog. Let's build something amazing together!"
+  }
+}
