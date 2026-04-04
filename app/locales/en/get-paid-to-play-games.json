@@ -1,0 +1,379 @@
+{
+  "seo": {
+    "title": "Get Paid to Play Games in {country} - Best Gaming Apps That Pay | Cashog",
+    "description": "Discover the best apps that pay you to play games in {country}. Earn real money, gift cards, and rewards while playing mobile games. Start gaming and earning today!"
+  },
+  "hero": {
+    "title": "Get Paid to Play Games",
+    "subtitle": "Turn your gaming passion into real money! Discover the best apps that pay you to play mobile games in {country}. Earn cash, gift cards, and rewards while having fun."
+  },
+  "statsTitle": "Gaming Rewards by the Numbers",
+  "stats": [
+    {
+      "value": "50M+",
+      "label": "Gamers",
+      "description": "Earning rewards worldwide"
+    },
+    {
+      "value": "$500M+",
+      "label": "Paid Out",
+      "description": "To mobile gamers"
+    },
+    {
+      "value": "2-5 hrs",
+      "label": "Average Play",
+      "description": "To earn $50/month"
+    },
+    {
+      "value": "100+",
+      "label": "Games",
+      "description": "That pay real rewards"
+    }
+  ],
+  "gameCategoriesTitle": "Game Categories That Pay",
+  "gameCategories": [
+    {
+      "name": "Skill-Based Games",
+      "icon": "🎯",
+      "description": "Compete and win based on your skill level",
+      "gameCount": 45
+    },
+    {
+      "name": "Match 3 & Puzzle",
+      "icon": "🧩",
+      "description": "Relaxing puzzle games that reward progress",
+      "gameCount": 120
+    },
+    {
+      "name": "Strategy & RPG",
+      "icon": "⚔️",
+      "description": "Build, battle, and earn as you advance",
+      "gameCount": 65
+    },
+    {
+      "name": "Casino & Slots",
+      "icon": "🎰",
+      "description": "Free-to-play casino games with real rewards",
+      "gameCount": 80
+    },
+    {
+      "name": "Arcade & Action",
+      "icon": "🎮",
+      "description": "Fast-paced games with quick rewards",
+      "gameCount": 95
+    },
+    {
+      "name": "Trivia & Quiz",
+      "icon": "❓",
+      "description": "Test your knowledge and win prizes",
+      "gameCount": 40
+    }
+  ],
+  "topAppsTitle": "Best Apps That Pay You to Play",
+  "topApps": [
+    {
+      "name": "Mistplay",
+      "logo": "🎮",
+      "platform": "Android",
+      "signupBonus": "0",
+      "earnings": "$20-150/month",
+      "description": "Play mobile games and earn points redeemable for gift cards. One of the most popular gaming rewards apps.",
+      "payoutMethods": ["Amazon", "Visa", "PayPal", "Xbox", "Google Play"],
+      "requirements": ["Android phone", "Age 13+", "Internet connection"],
+      "link": "/mistplay"
+    },
+    {
+      "name": "Swagbucks",
+      "logo": "🎯",
+      "platform": "iOS, Android, Web",
+      "signupBonus": "$10",
+      "earnings": "$30-300/month",
+      "description": "Complete offers, play games, and earn SB points redeemable for cash and gift cards.",
+      "payoutMethods": ["PayPal", "Amazon", "Visa", "Target", "Walmart"],
+      "requirements": ["Email address", "Time to play"],
+      "link": "/swagbucks"
+    },
+    {
+      "name": "Lucktastic",
+      "logo": "🍀",
+      "platform": "iOS, Android",
+      "signupBonus": "0",
+      "earnings": "$10-100/month",
+      "description": "Free scratch-off lottery tickets and games. Win real cash and gift cards daily.",
+      "payoutMethods": ["PayPal", "Amazon", "Visa"],
+      "requirements": ["Smartphone", "Daily play"],
+      "link": "/lucktastic"
+    },
+    {
+      "name": "Skillz",
+      "logo": "⚡",
+      "platform": "iOS, Android",
+      "signupBonus": "$5",
+      "earnings": "$100-1,000+/month",
+      "description": "Compete in skill-based games for real money. Higher skill = higher earnings.",
+      "payoutMethods": ["PayPal", "Check"],
+      "requirements": ["Skill", "Practice", "Competitive mindset"],
+      "link": "/skillz"
+    },
+    {
+      "name": "Cash'em All",
+      "logo": "💰",
+      "platform": "Android",
+      "signupBonus": "$1",
+      "earnings": "$15-100/month",
+      "description": "Play games, reach levels, and earn cash rewards. Simple and straightforward.",
+      "payoutMethods": ["PayPal", "Amazon"],
+      "requirements": ["Android phone", "Patience"],
+      "link": "/cashem-all"
+    },
+    {
+      "name": "InboxDollars",
+      "logo": "📧",
+      "platform": "iOS, Android, Web",
+      "signupBonus": "$5",
+      "earnings": "$30-200/month",
+      "description": "Play games, take surveys, and complete offers for cash rewards.",
+      "payoutMethods": ["Check", "PayPal", "Gift Cards"],
+      "requirements": ["Email address", "US only"],
+      "link": "/inboxdollars"
+    }
+  ],
+  "popularGamesTitle": "Popular Pay-to-Play Games",
+  "popularGames": [
+    {
+      "name": "Solitaire Cube",
+      "icon": "🃏",
+      "genre": "Card Game",
+      "earnings": "$5-50/day",
+      "difficulty": "Medium",
+      "timeToReward": "Minutes",
+      "platforms": ["Skillz"]
+    },
+    {
+      "name": "Blackout Bingo",
+      "icon": "🎲",
+      "genre": "Bingo",
+      "earnings": "$10-100/day",
+      "difficulty": "Easy",
+      "timeToReward": "Minutes",
+      "platforms": ["Skillz"]
+    },
+    {
+      "name": "Mistplay Hub Games",
+      "icon": "🎮",
+      "genre": "Various",
+      "earnings": "$20-150/month",
+      "difficulty": "Easy",
+      "timeToReward": "Hours",
+      "platforms": ["Mistplay"]
+    },
+    {
+      "name": "Swagbucks Live",
+      "icon": "❓",
+      "genre": "Trivia",
+      "earnings": "$5-50/week",
+      "difficulty": "Medium",
+      "timeToReward": "Daily",
+      "platforms": ["Swagbucks"]
+    },
+    {
+      "name": "8 Ball Pool",
+      "icon": "🎱",
+      "genre": "Sports",
+      "earnings": "$10-200/month",
+      "difficulty": "Medium",
+      "timeToReward": "Minutes",
+      "platforms": ["Miniclip", "Skillz"]
+    },
+    {
+      "name": "Words With Friends",
+      "icon": "📝",
+      "genre": "Word Game",
+      "earnings": "$5-50/month",
+      "difficulty": "Easy",
+      "timeToReward": "Minutes",
+      "platforms": ["Zynga"]
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Your Gaming Earnings",
+  "tips": [
+    {
+      "title": "Use Multiple Apps",
+      "description": "Don't rely on just one app. Use 3-5 different gaming apps to maximize your earnings.",
+      "icon": "📚"
+    },
+    {
+      "title": "Play Daily",
+      "description": "Many apps offer daily bonuses and streak rewards. Log in and play every day.",
+      "icon": "📅"
+    },
+    {
+      "title": "Focus on Higher Paying Games",
+      "description": "Some games pay better than others. Focus your time on the most rewarding ones.",
+      "icon": "🎯"
+    },
+    {
+      "title": "Complete Achievements",
+      "description": "Many games offer bonus rewards for reaching certain levels or achievements.",
+      "icon": "🏆"
+    },
+    {
+      "title": "Invite Friends",
+      "description": "Referral bonuses can significantly boost your earnings with minimal effort.",
+      "icon": "👥"
+    },
+    {
+      "title": "Watch for Double Reward Events",
+      "description": "Many apps offer special events with double points or bonus rewards.",
+      "icon": "⚡"
+    }
+  ],
+  "tournamentsTitle": "Upcoming Gaming Tournaments",
+  "tournaments": [
+    {
+      "name": "Weekly Solitaire Championship",
+      "game": "Solitaire Cube",
+      "entryFee": "$5",
+      "prizePool": "$10,000",
+      "participants": "2,345",
+      "nextStart": "Tomorrow 8pm EST",
+      "link": "/tournament/solitaire"
+    },
+    {
+      "name": "Bingo Masters",
+      "game": "Blackout Bingo",
+      "entryFee": "$10",
+      "prizePool": "$25,000",
+      "participants": "5,678",
+      "nextStart": "Saturday 3pm EST",
+      "link": "/tournament/bingo"
+    },
+    {
+      "name": "8 Ball Open",
+      "game": "8 Ball Pool",
+      "entryFee": "$2",
+      "prizePool": "$5,000",
+      "participants": "1,234",
+      "nextStart": "Sunday 2pm EST",
+      "link": "/tournament/8ball"
+    }
+  ],
+  "successStoriesTitle": "Gamer Success Stories",
+  "successStories": [
+    {
+      "name": "Alex",
+      "age": 24,
+      "location": "Texas",
+      "earnings": "$450/month",
+      "story": "I play games during my commute and lunch breaks. It pays for my Netflix and gaming subscriptions every month!",
+      "favoriteGames": ["Mistplay", "Solitaire Cube"]
+    },
+    {
+      "name": "Taylor",
+      "age": 31,
+      "location": "Florida",
+      "earnings": "$800/month",
+      "story": "Competitive gaming on Skillz has become my main side hustle. I practice 2 hours daily and earn consistently.",
+      "favoriteGames": ["Blackout Bingo", "8 Ball Pool"]
+    },
+    {
+      "name": "Jordan",
+      "age": 19,
+      "location": "California",
+      "earnings": "$300/month",
+      "story": "I use multiple gaming apps while watching TV. It adds up to extra spending money without much effort.",
+      "favoriteGames": ["Swagbucks Live", "Lucktastic"]
+    }
+  ],
+  "comparisonTitle": "Compare Gaming Apps",
+  "comparison": {
+    "description": "Find the best app for your gaming style"
+  },
+  "earningStrategiesTitle": "Earning Strategies",
+  "earningStrategies": [
+    {
+      "title": "Casual Gaming",
+      "description": "Play puzzle and match games during downtime. Low effort, steady rewards.",
+      "icon": "🎮"
+    },
+    {
+      "title": "Competitive Gaming",
+      "description": "Master skill-based games for higher payouts. More effort = more money.",
+      "icon": "⚔️"
+    },
+    {
+      "title": "Multi-App Approach",
+      "description": "Use 5+ apps simultaneously. Switch between them to maximize time.",
+      "icon": "📱"
+    },
+    {
+      "title": "Tournament Focus",
+      "description": "Enter paid tournaments with high prize pools. Higher risk, higher reward.",
+      "icon": "🏆"
+    }
+  ],
+  "newsletter": {
+    "title": "Get Gaming Reward Alerts",
+    "subtitle": "Subscribe for weekly updates on new paying games and bonus opportunities",
+    "buttonText": "Subscribe",
+    "placeholder": "Enter your email"
+  },
+  "faq": {
+    "title": "Get Paid to Play Games FAQ - {country}",
+    "items": [
+      {
+        "question": "Can I really get paid to play games?",
+        "answer": "Yes! Many legitimate apps pay you real money and gift cards for playing mobile games. It's not a get-rich-quick scheme, but you can earn extra cash in your spare time."
+      },
+      {
+        "question": "How much can I earn playing games?",
+        "answer": "Most people earn $20-150/month casually. Dedicated gamers can earn $300-1,000+ by mastering skill-based competitive games."
+      },
+      {
+        "question": "Do I need to invest money to start?",
+        "answer": "No! All the apps we recommend are free to download and play. Avoid any app that asks for upfront payment."
+      },
+      {
+        "question": "Which games pay the most?",
+        "answer": "Skill-based competitive games on platforms like Skillz offer the highest earning potential. Casual reward apps like Mistplay offer steady but lower earnings."
+      },
+      {
+        "question": "How do I get paid?",
+        "answer": "Most apps pay via PayPal, gift cards (Amazon, Walmart, Target, Google Play), or direct bank transfer. Minimum payout thresholds vary by app."
+      },
+      {
+        "question": "Are these apps available worldwide?",
+        "answer": "Most are available in the US, UK, Canada, and Australia. Some have international options. Check each app's availability."
+      },
+      {
+        "question": "Do I need special skills?",
+        "answer": "For casual games, no. For competitive games, practice and skill development helps you earn more."
+      },
+      {
+        "question": "How long until I get paid?",
+        "answer": "Casual apps pay within days to weeks. Competitive platforms pay instantly or within a few days after tournament wins."
+      },
+      {
+        "question": "Can I play on iPhone and Android?",
+        "answer": "Most apps work on both. Some are Android-only. Check app requirements before downloading."
+      },
+      {
+        "question": "Is this safe for kids?",
+        "answer": "Most apps require users to be 13+. Some competitive gaming apps require 18+. Always check age requirements."
+      },
+      {
+        "question": "Do I need to pay taxes on gaming earnings?",
+        "answer": "Yes, gaming earnings are taxable income. Keep records of your earnings. In the US, platforms issue 1099 forms if you earn over $600."
+      },
+      {
+        "question": "Can I play multiple games at once?",
+        "answer": "Yes! Many gamers use multiple apps and switch between games to maximize their time and earnings."
+      }
+    ]
+  },
+  "final": {
+    "title": "Start Getting Paid to Play Games Today",
+    "subtitle": "Join millions of gamers already earning real money while having fun",
+    "buttonText": "Start Gaming Now"
+  }
+}
