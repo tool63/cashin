@@ -1,0 +1,341 @@
+{
+  "seo": {
+    "title": "Earn Money Without Investment in {country} - 100% Free Methods | Cashog",
+    "description": "Discover legit ways to earn money without any investment in {country}. Free apps, websites, and methods that pay real money. Start earning today with zero cost."
+  },
+  "hero": {
+    "title": "Earn Money Without Any Investment",
+    "subtitle": "Start earning real money today with zero investment. Discover legit free methods that actually pay - from cashback apps and surveys to free online work. No credit card required, no hidden fees."
+  },
+  "statsTitle": "No Investment Needed - Start Today",
+  "stats": [
+    {
+      "value": "$0",
+      "label": "Investment",
+      "description": "Required to start earning"
+    },
+    {
+      "value": "50+",
+      "label": "Free Methods",
+      "description": "To earn real money"
+    },
+    {
+      "value": "10M+",
+      "label": "Users",
+      "description": "Earning without investment"
+    },
+    {
+      "value": "$100-500",
+      "label": "Monthly Potential",
+      "description": "With consistent effort"
+    }
+  ],
+  "methodsTitle": "Zero-Investment Earning Methods",
+  "methods": [
+    {
+      "name": "Cashback Shopping",
+      "icon": "💰",
+      "description": "Earn money back on purchases you already make. Get paid to shop at thousands of stores.",
+      "earnings": "$50-500/month",
+      "timeToStart": "5 minutes",
+      "platforms": ["Cashog", "Rakuten", "TopCashback"],
+      "requirements": ["Email address", "Shopping online"],
+      "link": "/cashback"
+    },
+    {
+      "name": "Online Surveys",
+      "icon": "📋",
+      "description": "Share your opinion and get paid. Companies want your feedback on products and services.",
+      "earnings": "$20-200/month",
+      "timeToStart": "2 minutes",
+      "platforms": ["Survey Junkie", "Swagbucks", "Branded Surveys"],
+      "requirements": ["Email address", "Basic internet access"],
+      "link": "/surveys"
+    },
+    {
+      "name": "GPT (Get-Paid-To) Sites",
+      "icon": "🎯",
+      "description": "Complete simple tasks like watching videos, playing games, and signing up for offers.",
+      "earnings": "$30-300/month",
+      "timeToStart": "2 minutes",
+      "platforms": ["Swagbucks", "InboxDollars", "PrizeRebel"],
+      "requirements": ["Email address", "Time to complete tasks"],
+      "link": "/gpt-sites"
+    },
+    {
+      "name": "Micro Tasks",
+      "icon": "🔍",
+      "description": "Small tasks like data entry, image tagging, and content moderation that pay per task.",
+      "earnings": "$50-400/month",
+      "timeToStart": "5 minutes",
+      "platforms": ["Amazon MTurk", "Clickworker", "Appen"],
+      "requirements": ["Attention to detail", "Computer access"],
+      "link": "/micro-tasks"
+    },
+    {
+      "name": "User Testing",
+      "icon": "🧪",
+      "description": "Test websites and apps. Record your screen and voice while giving feedback.",
+      "earnings": "$100-500/month",
+      "timeToStart": "10 minutes",
+      "platforms": ["UserTesting", "Userlytics", "TryMyUI"],
+      "requirements": ["Microphone", "Computer", "Speak clearly"],
+      "link": "/user-testing"
+    },
+    {
+      "name": "Mystery Shopping",
+      "icon": "🕵️",
+      "description": "Get paid to shop, dine, and review businesses. Share your experience as a secret shopper.",
+      "earnings": "$50-300/month",
+      "timeToStart": "15 minutes",
+      "platforms": ["BestMark", "Mystery Shopper", "Market Force"],
+      "requirements": ["Observation skills", "Writing ability"],
+      "link": "/mystery-shopping"
+    },
+    {
+      "name": "Referral Programs",
+      "icon": "🔗",
+      "description": "Earn by referring friends to apps and services you already use.",
+      "earnings": "$50-1,000+/month",
+      "timeToStart": "5 minutes",
+      "platforms": ["Cashog", "PayPal", "Bank bonuses"],
+      "requirements": ["Friends/family", "Social media presence"],
+      "link": "/referrals"
+    },
+    {
+      "name": "Freemium Games",
+      "icon": "🎮",
+      "description": "Play mobile games that reward you with real money or gift cards.",
+      "earnings": "$20-150/month",
+      "timeToStart": "2 minutes",
+      "platforms": ["Mistplay", "Lucktastic", "Skillz"],
+      "requirements": ["Smartphone", "Time to play"],
+      "link": "/freemium-games"
+    }
+  ],
+  "featuredPlatformsTitle": "Top Free Earning Platforms",
+  "featuredPlatforms": [
+    {
+      "name": "Cashog",
+      "logo": "💰",
+      "type": "Cashback & Rewards",
+      "signupBonus": "$5",
+      "earnings": "$50-500/month",
+      "description": "Earn cashback on everyday purchases at thousands of stores. Stack with coupons and sales.",
+      "payoutMethods": ["PayPal", "Bank Transfer", "Gift Cards"],
+      "link": "/signup"
+    },
+    {
+      "name": "Swagbucks",
+      "logo": "🎯",
+      "type": "GPT & Surveys",
+      "signupBonus": "$10",
+      "earnings": "$30-300/month",
+      "description": "Complete surveys, watch videos, play games, and shop online for points redeemable for cash.",
+      "payoutMethods": ["PayPal", "Amazon", "Visa", "Gift Cards"],
+      "link": "/swagbucks"
+    },
+    {
+      "name": "Survey Junkie",
+      "logo": "📋",
+      "type": "Paid Surveys",
+      "signupBonus": "$0",
+      "earnings": "$20-150/month",
+      "description": "Share your opinion on products and services. Get paid for each survey you complete.",
+      "payoutMethods": ["PayPal", "Bank Transfer", "Gift Cards"],
+      "link": "/survey-junkie"
+    },
+    {
+      "name": "UserTesting",
+      "logo": "🧪",
+      "type": "User Testing",
+      "signupBonus": "$0",
+      "earnings": "$100-500/month",
+      "description": "Test websites and apps. Get paid $10-60 per test for providing feedback.",
+      "payoutMethods": ["PayPal"],
+      "link": "/usertesting"
+    },
+    {
+      "name": "Amazon MTurk",
+      "logo": "🔵",
+      "type": "Micro Tasks",
+      "signupBonus": "$0",
+      "earnings": "$50-400/month",
+      "description": "Complete small tasks like data entry, surveys, and content moderation for payment.",
+      "payoutMethods": ["Amazon Gift Card", "Bank Transfer"],
+      "link": "/mturk"
+    },
+    {
+      "name": "Mistplay",
+      "logo": "🎮",
+      "type": "Freemium Games",
+      "signupBonus": "$0",
+      "earnings": "$20-150/month",
+      "description": "Play mobile games and earn points redeemable for gift cards. Available on Android.",
+      "payoutMethods": ["Amazon", "Visa", "PayPal", "Xbox"],
+      "link": "/mistplay"
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Your Free Earnings",
+  "tips": [
+    {
+      "title": "Use Multiple Platforms",
+      "description": "Don't rely on just one method. Use 3-5 different platforms to maximize your earnings.",
+      "icon": "📚"
+    },
+    {
+      "title": "Be Consistent",
+      "description": "Set aside dedicated time each day for your earning activities. Consistency pays off.",
+      "icon": "⏰"
+    },
+    {
+      "title": "Check Daily",
+      "description": "Many apps offer daily bonuses or streaks. Log in daily to maximize rewards.",
+      "icon": "📅"
+    },
+    {
+      "title": "Refer Friends",
+      "description": "Referral programs can significantly boost your earnings with minimal effort.",
+      "icon": "👥"
+    },
+    {
+      "title": "Cash Out Early",
+      "description": "Don't wait too long to cash out. Platforms can change terms or shut down unexpectedly.",
+      "icon": "💰"
+    },
+    {
+      "title": "Avoid Scams",
+      "description": "Never pay to join. Legitimate opportunities never require upfront investment.",
+      "icon": "🛡️"
+    }
+  ],
+  "successStoriesTitle": "Real Success Stories",
+  "successStories": [
+    {
+      "name": "Sarah",
+      "age": 29,
+      "location": "Texas",
+      "earnings": "$450/month",
+      "story": "I earn extra income through cashback and surveys while working my full-time job. It pays for my groceries every month!",
+      "method": "Cashback + Surveys"
+    },
+    {
+      "name": "Mike",
+      "age": 34,
+      "location": "Florida",
+      "earnings": "$600/month",
+      "story": "User testing and micro tasks have become my favorite side hustle. I do it during lunch breaks and evenings.",
+      "method": "User Testing"
+    },
+    {
+      "name": "Jessica",
+      "age": 25,
+      "location": "California",
+      "earnings": "$300/month",
+      "story": "Playing mobile games on Mistplay and doing surveys helps me afford my streaming subscriptions and coffee.",
+      "method": "Games + Surveys"
+    }
+  ],
+  "comparisonTitle": "Compare Earning Methods",
+  "comparison": {
+    "description": "Find the right method for your schedule and goals"
+  },
+  "dailyEarningsTitle": "Example Daily Earnings Breakdown",
+  "dailyEarnings": [
+    {
+      "activity": "Complete 5 surveys",
+      "timeSpent": "30 minutes",
+      "earnings": "$5-10",
+      "platforms": "Survey Junkie, Swagbucks"
+    },
+    {
+      "activity": "Play games on Mistplay",
+      "timeSpent": "1 hour",
+      "earnings": "$2-5",
+      "platforms": "Mistplay"
+    },
+    {
+      "activity": "User testing (1 test)",
+      "timeSpent": "20 minutes",
+      "earnings": "$10",
+      "platforms": "UserTesting"
+    },
+    {
+      "activity": "Micro tasks on MTurk",
+      "timeSpent": "1 hour",
+      "earnings": "$8-15",
+      "platforms": "Amazon MTurk"
+    },
+    {
+      "activity": "Cashback shopping",
+      "timeSpent": "5 minutes",
+      "earnings": "$1-10 per purchase",
+      "platforms": "Cashog, Rakuten"
+    }
+  ],
+  "redFlagsTitle": "Red Flags to Avoid",
+  "redFlags": [
+    "Any platform asking for upfront payment",
+    "Get-rich-quick promises",
+    "Pyramid schemes or MLMs requiring payment",
+    "Requests for your bank password",
+    "Unrealistic earning claims ($1000/day with no effort)",
+    "Pressure to recruit others before earning"
+  ],
+  "newsletter": {
+    "title": "Get Free Earning Tips",
+    "subtitle": "Subscribe for weekly updates on new zero-investment opportunities",
+    "buttonText": "Subscribe",
+    "placeholder": "Enter your email"
+  },
+  "faq": {
+    "title": "Earn Without Investment FAQ - {country}",
+    "items": [
+      {
+        "question": "Can I really earn money without any investment?",
+        "answer": "Yes! Many legitimate platforms pay you for your time, opinions, and data. Cashback apps, surveys, and micro tasks require zero investment."
+      },
+      {
+        "question": "How much can I earn without investing?",
+        "answer": "Most people earn $100-500/month with consistent effort. Some power users earn $1,000+ by using multiple platforms actively."
+      },
+      {
+        "question": "Are these methods legit or scams?",
+        "answer": "All methods we recommend are legitimate. However, always be cautious of any platform asking for upfront payment - real opportunities never require investment."
+      },
+      {
+        "question": "How do I get paid?",
+        "answer": "Most platforms pay via PayPal, bank transfer, or gift cards (Amazon, Walmart, Target, etc.). Minimum payout thresholds vary by platform."
+      },
+      {
+        "question": "Do I need special skills?",
+        "answer": "Not for most methods. Surveys, cashback, and micro tasks require no special skills. Some methods like user testing require clear communication."
+      },
+      {
+        "question": "Can I do this from any country?",
+        "answer": "Most platforms work in the US, UK, Canada, and Australia. Some have international options. Check each platform's availability."
+      },
+      {
+        "question": "How quickly can I start earning?",
+        "answer": "Most platforms let you start earning within minutes of signing up. Payouts typically take days to weeks depending on the platform."
+      },
+      {
+        "question": "Do I need to pay taxes on these earnings?",
+        "answer": "Yes, these earnings are taxable income. Keep records of your earnings. In the US, platforms issue 1099 forms if you earn over $600."
+      },
+      {
+        "question": "What's the easiest method to start with?",
+        "answer": "Cashback apps and surveys are the easiest. Sign up, start shopping or sharing opinions, and you'll earn within minutes."
+      },
+      {
+        "question": "Can I do these on my phone?",
+        "answer": "Yes! Most platforms have mobile apps or mobile-friendly websites. You can earn from anywhere using your smartphone."
+      }
+    ]
+  },
+  "final": {
+    "title": "Start Earning Without Investment Today",
+    "subtitle": "Join millions of people already making money with zero investment",
+    "buttonText": "Get Started Free"
+  }
+}
