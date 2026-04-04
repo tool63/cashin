@@ -1,0 +1,412 @@
+{
+  "seo": {
+    "title": "Beauty Cashback - Earn Up to 15% Back on Cosmetics in {country} | Cashog",
+    "description": "Shop beauty products with cashback in {country}. Earn up to 15% back at top stores like Sephora, Ulta, and more. Get the best deals on makeup, skincare, and haircare."
+  },
+  "hero": {
+    "title": "Earn Cashback on Beauty",
+    "subtitle": "Look your best and save money. Earn up to 15% cashback at top beauty retailers in {country}. From makeup and skincare to haircare and fragrances, get paid to shop for your beauty routine."
+  },
+  "categoryTitle": "Shop by Category",
+  "categories": [
+    {
+      "name": "Makeup",
+      "icon": "💄",
+      "description": "Foundation, lipstick, eyeshadow, and more",
+      "storeCount": 35
+    },
+    {
+      "name": "Skincare",
+      "icon": "🧴",
+      "description": "Cleansers, serums, moisturizers, and masks",
+      "storeCount": 40
+    },
+    {
+      "name": "Haircare",
+      "icon": "💇",
+      "description": "Shampoo, conditioner, styling tools, and treatments",
+      "storeCount": 32
+    },
+    {
+      "name": "Fragrance",
+      "icon": "🌸",
+      "description": "Perfume, cologne, and body sprays",
+      "storeCount": 28
+    },
+    {
+      "name": "Tools & Brushes",
+      "icon": "🪞",
+      "description": "Makeup brushes, sponges, and applicators",
+      "storeCount": 25
+    },
+    {
+      "name": "Men's Grooming",
+      "icon": "✂️",
+      "description": "Shaving, beard care, and skincare for men",
+      "storeCount": 22
+    }
+  ],
+  "featuredStoresTitle": "Top Beauty Stores",
+  "featuredStores": [
+    {
+      "name": "Sephora",
+      "logo": "💄",
+      "cashbackRate": "Up to 8%",
+      "description": "Premium beauty retailer with top brands and exclusive products",
+      "categories": ["Makeup", "Skincare", "Fragrance", "Haircare"],
+      "features": ["Beauty Insider rewards", "Free samples", "Free shipping"],
+      "link": "/store/sephora"
+    },
+    {
+      "name": "Ulta Beauty",
+      "logo": "💅",
+      "cashbackRate": "Up to 10%",
+      "description": "Mass and prestige beauty products with salon services",
+      "categories": ["Makeup", "Skincare", "Haircare", "Tools"],
+      "features": ["Ultamate Rewards", "Salon services", "Buy online pickup"],
+      "link": "/store/ulta"
+    },
+    {
+      "name": "Nordstrom Beauty",
+      "logo": "🛍️",
+      "cashbackRate": "Up to 10%",
+      "description": "Luxury beauty brands and expert service",
+      "categories": ["Luxury", "Makeup", "Skincare", "Fragrance"],
+      "features": ["Free shipping", "Free returns", "Beauty stylists"],
+      "link": "/store/nordstrom-beauty"
+    },
+    {
+      "name": "Dermstore",
+      "logo": "🧴",
+      "cashbackRate": "Up to 12%",
+      "description": "Professional skincare and dermatologist-recommended brands",
+      "categories": ["Skincare", "Sun care", "Tools", "Body care"],
+      "features": ["Autoship savings", "Free samples", "Expert advice"],
+      "link": "/store/dermstore"
+    },
+    {
+      "name": "Blue Mercury",
+      "logo": "💙",
+      "cashbackRate": "Up to 8%",
+      "description": "Luxury beauty and skincare boutiques",
+      "categories": ["Makeup", "Skincare", "Fragrance", "Bath & Body"],
+      "features": ["Loyalty program", "Gift wrapping", "In-store events"],
+      "link": "/store/blue-mercury"
+    },
+    {
+      "name": "Beautylish",
+      "logo": "✨",
+      "cashbackRate": "Up to 6%",
+      "description": "Curated indie and luxury beauty brands",
+      "categories": ["Makeup", "Skincare", "Tools", "Haircare"],
+      "features": ["Flexible payments", "Free shipping", "Artist community"],
+      "link": "/store/beautylish"
+    }
+  ],
+  "topDealsTitle": "Hot Beauty Deals",
+  "topDeals": [
+    {
+      "title": "Tatcha Dewy Skin Cream",
+      "description": "Rich moisturizer for radiant, dewy skin",
+      "originalPrice": "$69",
+      "salePrice": "$55",
+      "cashbackRate": "10%",
+      "store": "Sephora",
+      "image": "🧴",
+      "link": "/deal/tatcha-dewy-skin"
+    },
+    {
+      "title": "Dyson Airwrap Complete",
+      "description": "Multi-styler hair tool with attachments",
+      "originalPrice": "$599",
+      "salePrice": "$549",
+      "cashbackRate": "8%",
+      "store": "Ulta",
+      "image": "💇",
+      "link": "/deal/dyson-airwrap"
+    },
+    {
+      "title": "Charlotte Tilbury Flawless Filter",
+      "description": "Hollywood Flawless Filter for glowing skin",
+      "originalPrice": "$44",
+      "salePrice": "$44",
+      "cashbackRate": "12%",
+      "store": "Nordstrom",
+      "image": "💄",
+      "link": "/deal/flawless-filter"
+    },
+    {
+      "title": "Drunk Elephant Trunk 6.0",
+      "description": "Complete skincare routine bundle",
+      "originalPrice": "$348",
+      "salePrice": "$310",
+      "cashbackRate": "10%",
+      "store": "Dermstore",
+      "image": "🧴",
+      "link": "/deal/drunk-elephant"
+    },
+    {
+      "title": "Tom Ford Lost Cherry",
+      "description": "Luxury fragrance with cherry and almond notes",
+      "originalPrice": "$395",
+      "salePrice": "$395",
+      "cashbackRate": "8%",
+      "store": "Sephora",
+      "image": "🌸",
+      "link": "/deal/lost-cherry"
+    },
+    {
+      "title": "Olaplex Bond Maintenance Set",
+      "description": "Hair repair kit for damaged hair",
+      "originalPrice": "$148",
+      "salePrice": "$128",
+      "cashbackRate": "10%",
+      "store": "Ulta",
+      "image": "💇",
+      "link": "/deal/olaplex-set"
+    }
+  ],
+  "tipsTitle": "Smart Beauty Shopping Tips",
+  "tips": [
+    {
+      "title": "Stack Rewards",
+      "description": "Combine cashback with store loyalty programs and credit card rewards for triple savings.",
+      "icon": "💰"
+    },
+    {
+      "title": "Subscribe & Save",
+      "description": "Sign up for auto-delivery on regular purchases to save up to 15% plus earn cashback.",
+      "icon": "📦"
+    },
+    {
+      "title": "Sample First",
+      "description": "Try samples before committing to full-size products, especially for expensive skincare.",
+      "icon": "🧪"
+    },
+    {
+      "title": "Seasonal Sales",
+      "description": "Stock up during major beauty sales events for the best deals and cashback combos.",
+      "icon": "📅"
+    }
+  ],
+  "compareTitle": "Compare Cashback Rates",
+  "compare": {
+    "description": "See how much you can earn at top beauty stores",
+    "stores": [
+      {
+        "name": "Sephora",
+        "cashbackRate": "Up to 8%",
+        "shippingTime": "2-5 days",
+        "returnPolicy": "60 days",
+        "freeShipping": "on $50+",
+        "rating": 4.7
+      },
+      {
+        "name": "Ulta Beauty",
+        "cashbackRate": "Up to 10%",
+        "shippingTime": "3-6 days",
+        "returnPolicy": "60 days",
+        "freeShipping": "on $35+",
+        "rating": 4.6
+      },
+      {
+        "name": "Nordstrom",
+        "cashbackRate": "Up to 10%",
+        "shippingTime": "2-4 days",
+        "returnPolicy": "Free returns",
+        "freeShipping": "Always",
+        "rating": 4.8
+      },
+      {
+        "name": "Dermstore",
+        "cashbackRate": "Up to 12%",
+        "shippingTime": "3-7 days",
+        "returnPolicy": "60 days",
+        "freeShipping": "on $49+",
+        "rating": 4.5
+      }
+    ]
+  },
+  "seasonalPromosTitle": "Seasonal Beauty Promotions",
+  "seasonalPromos": [
+    {
+      "title": "Sephora Beauty Insider Sale",
+      "description": "Up to 20% off + extra 5% cashback for Rouge members",
+      "endDate": "April 15",
+      "code": "BISALE20",
+      "link": "/promo/sephora-sale"
+    },
+    {
+      "title": "Ulta 21 Days of Beauty",
+      "description": "New deals daily + double cashback on all purchases",
+      "endDate": "March 21",
+      "link": "/promo/ulta-beauty-days"
+    },
+    {
+      "title": "Nordstrom Anniversary Sale",
+      "description": "Early access to new beauty products + 10% cashback",
+      "endDate": "August 8",
+      "link": "/promo/nordstrom-anniversary"
+    },
+    {
+      "title": "Black Friday Beauty Deals",
+      "description": "Up to 50% off + triple cashback at select stores",
+      "endDate": "November 30",
+      "link": "/promo/black-friday-beauty"
+    }
+  ],
+  "brandSpotlightTitle": "Brand Spotlight",
+  "brandSpotlight": [
+    {
+      "name": "Fenty Beauty",
+      "logo": "💄",
+      "description": "Rihanna's inclusive makeup line with 50+ foundation shades. Known for innovative formulas and bold colors.",
+      "cashbackRate": "Up to 8%",
+      "featuredProducts": ["Pro Filt'r Foundation", "Gloss Bomb", "Match Stix", "Killawatt Highlighter"],
+      "link": "/brand/fenty-beauty"
+    },
+    {
+      "name": "The Ordinary",
+      "logo": "🧪",
+      "description": "Clinical skincare at accessible prices. No-nonsense formulas with transparent ingredient lists.",
+      "cashbackRate": "Up to 10%",
+      "featuredProducts": ["Niacinamide Serum", "Hyaluronic Acid", "AHA Peel", "Buffet Serum"],
+      "link": "/brand/the-ordinary"
+    },
+    {
+      "name": "Rare Beauty",
+      "logo": "💕",
+      "description": "Selena Gomez's makeup brand focused on mental health and positive messaging. Lightweight, buildable formulas.",
+      "cashbackRate": "Up to 8%",
+      "featuredProducts": ["Liquid Blush", "Foundation", "Highlighter", "Lip Souffle"],
+      "link": "/brand/rare-beauty"
+    },
+    {
+      "name": "Kiehl's",
+      "logo": "🧴",
+      "description": "Apothecary-inspired skincare with natural ingredients. Cult-favorite products since 1851.",
+      "cashbackRate": "Up to 9%",
+      "featuredProducts": ["Ultra Facial Cream", "Midnight Recovery Oil", "Clearly Corrective", "Calendula Toner"],
+      "link": "/brand/kiehls"
+    }
+  ],
+  "beautySubscription": {
+    "title": "Beauty Subscription Boxes",
+    "description": "Discover new products and save with subscription boxes",
+    "boxes": [
+      {
+        "name": "Ipsy Glam Bag",
+        "logo": "💄",
+        "price": "$13/month",
+        "cashbackRate": "5% cashback",
+        "description": "5 deluxe sample-sized beauty products personalized to your preferences",
+        "link": "/subscription/ipsy"
+      },
+      {
+        "name": "Boxycharm",
+        "logo": "📦",
+        "price": "$28/month",
+        "cashbackRate": "6% cashback",
+        "description": "5-6 full-size beauty products from top brands",
+        "link": "/subscription/boxycharm"
+      },
+      {
+        "name": "Allure Beauty Box",
+        "logo": "✨",
+        "price": "$25/month",
+        "cashbackRate": "5% cashback",
+        "description": "Curated box with editor-approved products",
+        "link": "/subscription/allure"
+      },
+      {
+        "name": "Birchbox",
+        "logo": "🌿",
+        "price": "$15/month",
+        "cashbackRate": "4% cashback",
+        "description": "5 personalized samples with a focus on discovery",
+        "link": "/subscription/birchbox"
+      }
+    ]
+  },
+  "cleanBeauty": {
+    "title": "Clean & Conscious Beauty",
+    "subtitle": "Shop eco-friendly, cruelty-free, and clean beauty brands",
+    "stores": [
+      {
+        "name": "Credo Beauty",
+        "logo": "🌿",
+        "cashbackRate": "Up to 8%",
+        "description": "Clean beauty marketplace with strict ingredient standards",
+        "link": "/store/credo-beauty"
+      },
+      {
+        "name": "Follain",
+        "logo": "🌸",
+        "cashbackRate": "Up to 7%",
+        "description": "Curated clean beauty and skincare",
+        "link": "/store/follain"
+      },
+      {
+        "name": "The Detox Market",
+        "logo": "💚",
+        "cashbackRate": "Up to 8%",
+        "description": "Non-toxic beauty and wellness products",
+        "link": "/store/detox-market"
+      },
+      {
+        "name": "Beautycounter",
+        "logo": "✨",
+        "cashbackRate": "Up to 10%",
+        "description": "Safe, high-performance skincare and makeup",
+        "link": "/store/beautycounter"
+      }
+    ]
+  },
+  "priceMatch": {
+    "title": "Found a Better Price?",
+    "description": "We'll help you find the best cashback rates on beauty products. Compare prices across stores and maximize your savings.",
+    "buttonText": "Compare Prices"
+  },
+  "faq": {
+    "title": "Beauty Cashback FAQ - {country}",
+    "items": [
+      {
+        "question": "Which beauty stores offer the highest cashback?",
+        "answer": "Cashback rates vary by store and season. Dermstore often offers 12%, Ulta up to 10%, and Nordstrom up to 10%. Check our store listings for current rates."
+      },
+      {
+        "question": "Can I earn cashback on beauty subscription boxes?",
+        "answer": "Yes! Most beauty subscription services offer cashback on your recurring orders. Check individual store terms for details."
+      },
+      {
+        "question": "How long does beauty cashback take to confirm?",
+        "answer": "Beauty cashback typically takes 30-45 days to confirm due to return periods. This is standard for the beauty industry."
+      },
+      {
+        "question": "Can I use store coupons with cashback?",
+        "answer": "Yes! You can stack store coupons, promo codes, and loyalty rewards with our cashback for maximum savings on beauty products."
+      },
+      {
+        "question": "Do beauty rewards points affect cashback?",
+        "answer": "No, earning store loyalty points does not affect your cashback. You can earn both simultaneously for extra savings."
+      },
+      {
+        "question": "Is cashback available on clearance beauty items?",
+        "answer": "Yes! Clearance and sale items are typically eligible for cashback, making already discounted products an even better deal."
+      },
+      {
+        "question": "Can I return beauty products and keep the cashback?",
+        "answer": "No, if you return a product, the cashback will be deducted from your account. Wait until after the return period to withdraw cashback."
+      },
+      {
+        "question": "Are fragrance purchases eligible for cashback?",
+        "answer": "Yes! Fragrance purchases are typically eligible for cashback at most beauty retailers."
+      }
+    ]
+  },
+  "final": {
+    "title": "Start Saving on Beauty Today",
+    "subtitle": "Join thousands of smart shoppers earning cashback on their beauty routine",
+    "buttonText": "Shop Beauty Now"
+  }
+}
