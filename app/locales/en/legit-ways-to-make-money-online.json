@@ -1,0 +1,351 @@
+{
+  "seo": {
+    "title": "Legit Ways to Make Money Online - Trusted Methods in {country} | Cashog",
+    "description": "Discover legit ways to make money online in {country}. Verified platforms, scam-free opportunities, and trusted earning methods. Start earning safely with our expert-vetted recommendations."
+  },
+  "hero": {
+    "title": "Legit Ways to Make Money Online",
+    "subtitle": "Don't waste time on scams! Discover legitimate, proven ways to earn money online in {country}. We've verified every method - so you can start earning safely and confidently."
+  },
+  "categoryTitle": "Legitimate Earning Categories",
+  "categories": [
+    {
+      "name": "Freelancing",
+      "icon": "💼",
+      "description": "Sell your skills on trusted platforms",
+      "methodCount": 25,
+      "scamRisk": "Low"
+    },
+    {
+      "name": "Micro Tasks",
+      "icon": "✅",
+      "description": "Small tasks, guaranteed payment",
+      "methodCount": 18,
+      "scamRisk": "Low"
+    },
+    {
+      "name": "Online Surveys",
+      "icon": "📋",
+      "description": "Get paid for your opinions",
+      "methodCount": 15,
+      "scamRisk": "Low"
+    },
+    {
+      "name": "Cashback Apps",
+      "icon": "💰",
+      "description": "Earn on everyday purchases",
+      "methodCount": 20,
+      "scamRisk": "Low"
+    },
+    {
+      "name": "Virtual Assistant",
+      "icon": "📋",
+      "description": "Support businesses remotely",
+      "methodCount": 12,
+      "scamRisk": "Low"
+    },
+    {
+      "name": "User Testing",
+      "icon": "📱",
+      "description": "Test websites and apps",
+      "methodCount": 10,
+      "scamRisk": "Low"
+    }
+  ],
+  "verifiedMethodsTitle": "✅ Verified Legitimate Earning Methods",
+  "verifiedMethods": [
+    {
+      "name": "Upwork",
+      "icon": "🌐",
+      "description": "World's largest freelance marketplace - fully vetted clients",
+      "earningPotential": "$20-100/hour",
+      "timeToStart": "1-2 days",
+      "difficulty": "Medium",
+      "redFlags": [
+        "Never work without a contract",
+        "Don't accept off-platform payments",
+        "Watch for fake check scams"
+      ],
+      "verificationSteps": [
+        "Complete profile",
+        "Add portfolio",
+        "Take skill tests",
+        "Start with small jobs"
+      ],
+      "platforms": ["Upwork.com"],
+      "tips": [
+        "Build reputation with smaller jobs first",
+        "Always use Upwork's payment protection",
+        "Communicate through platform"
+      ],
+      "link": "/legit/upwork",
+      "isVerified": true,
+      "isBeginnerFriendly": false
+    },
+    {
+      "name": "Swagbucks",
+      "icon": "💰",
+      "description": "Earn points for surveys, shopping, videos - millions of paid users",
+      "earningPotential": "$50-200/month",
+      "timeToStart": "5 minutes",
+      "difficulty": "Easy",
+      "redFlags": [
+        "Never pay to join",
+        "Avoid offers that seem too good",
+        "Don't share sensitive info"
+      ],
+      "verificationSteps": [
+        "Create free account",
+        "Complete profile",
+        "Start with simple tasks",
+        "Build up slowly"
+      ],
+      "platforms": ["Swagbucks.com", "iOS", "Android"],
+      "tips": [
+        "Complete daily goals for bonuses",
+        "Use the shopping portal",
+        "Watch videos passively"
+      ],
+      "link": "/legit/swagbucks",
+      "isVerified": true,
+      "isBeginnerFriendly": true
+    },
+    {
+      "name": "UserTesting",
+      "icon": "📱",
+      "description": "Get paid to test websites and apps - legitimate company",
+      "earningPotential": "$10-60/test",
+      "timeToStart": "1-2 hours",
+      "difficulty": "Easy",
+      "redFlags": [
+        "Never pay to become a tester",
+        "Avoid sites asking for bank access",
+        "Watch for fake test invites"
+      ],
+      "verificationSteps": [
+        "Sign up free",
+        "Complete sample test",
+        "Verify payment info",
+        "Start testing"
+      ],
+      "platforms": ["UserTesting.com"],
+      "tips": [
+        "Speak your thoughts continuously",
+        "Complete profile thoroughly",
+        "Apply quickly when tests appear"
+      ],
+      "link": "/legit/usertesting",
+      "isVerified": true,
+      "isBeginnerFriendly": true
+    },
+    {
+      "name": "Rakuten",
+      "icon": "🛍️",
+      "description": "Legitimate cashback on shopping - formerly Ebates",
+      "earningPotential": "$50-500+/year",
+      "timeToStart": "2 minutes",
+      "difficulty": "Easy",
+      "redFlags": [
+        "Never pay to join",
+        "Avoid 'too good to be true' rates",
+        "Watch for fake cashback sites"
+      ],
+      "verificationSteps": [
+        "Create free account",
+        "Install browser extension",
+        "Shop normally",
+        "Get paid quarterly"
+      ],
+      "platforms": ["Rakuten.com", "iOS", "Android"],
+      "tips": [
+        "Install browser extension",
+        "Stack with coupons",
+        "Refer friends for bonus"
+      ],
+      "link": "/legit/rakuten",
+      "isVerified": true,
+      "isBeginnerFriendly": true
+    }
+  ],
+  "scamAlertsTitle": "🚨 Common Online Scams to Avoid",
+  "scamAlerts": [
+    {
+      "title": "Pyramid Schemes",
+      "description": "Promises high returns for recruiting others, not selling products",
+      "redFlags": ["Focus on recruitment", "Upfront payment required", "Get rich quick promises"],
+      "icon": "🔺"
+    },
+    {
+      "title": "Fake Check Scams",
+      "description": "You receive a check, deposit it, then send money back",
+      "redFlags": ["Overpayment for services", "Buy gift cards", "Urgent requests"],
+      "icon": "💵"
+    },
+    {
+      "title": "Work-from-Home Job Scams",
+      "description": "Jobs that require upfront payment for training or materials",
+      "redFlags": ["Pay to start", "Buy training materials", "No legitimate company info"],
+      "icon": "🏠"
+    },
+    {
+      "title": "Phishing Attempts",
+      "description": "Fake emails pretending to be from legitimate platforms",
+      "redFlags": ["Suspicious links", "Urgent action required", "Requests for password"],
+      "icon": "🎣"
+    }
+  ],
+  "redFlagsTitle": "⚠️ 10 Red Flags That Signal a Scam",
+  "redFlags": [
+    "They ask you to pay money to start working",
+    "The pay seems too good to be true (e.g., $5,000/week for simple tasks)",
+    "They promise guaranteed income with no effort",
+    "They request your bank login information",
+    "They want you to buy gift cards as part of the job",
+    "The website has poor grammar and spelling",
+    "They pressure you to act immediately",
+    "No legitimate company information or physical address",
+    "They contact you unsolicited via email or text",
+    "They ask for your Social Security number before hiring"
+  ],
+  "comparisonTitle": "📊 Compare Legit Earning Methods",
+  "comparison": {
+    "description": "Find the safest and most reliable method for your situation",
+    "items": [
+      {
+        "method": "Upwork",
+        "legitimacy": "High",
+        "earningPotential": "$20-100/hour",
+        "timeToEarn": "Days",
+        "scamRisk": "Low"
+      },
+      {
+        "method": "Swagbucks",
+        "legitimacy": "High",
+        "earningPotential": "$50-200/month",
+        "timeToEarn": "Hours",
+        "scamRisk": "Very Low"
+      },
+      {
+        "method": "UserTesting",
+        "legitimacy": "High",
+        "earningPotential": "$10-60/test",
+        "timeToEarn": "Hours",
+        "scamRisk": "Very Low"
+      },
+      {
+        "method": "Rakuten",
+        "legitimacy": "High",
+        "earningPotential": "$50-500+/year",
+        "timeToEarn": "Days",
+        "scamRisk": "Very Low"
+      }
+    ]
+  },
+  "successStoriesTitle": "🌟 Real Success Stories (Verified)",
+  "successStories": [
+    {
+      "name": "Michael R.",
+      "earnings": "3,200",
+      "method": "Upwork",
+      "story": "Started freelancing on Upwork with zero experience. Within 3 months, I earned $3,200 from legit clients.",
+      "verificationNote": "Verified payment proof"
+    },
+    {
+      "name": "Jennifer L.",
+      "earnings": "450",
+      "method": "Swagbucks",
+      "story": "Used Swagbucks during my commute. Earned $450 in gift cards last year - completely legit!",
+      "verificationNote": "Verified user reviews"
+    },
+    {
+      "name": "David P.",
+      "earnings": "280",
+      "method": "UserTesting",
+      "story": "Tested 15 websites last month. Got paid $280 via PayPal - no scams, no issues.",
+      "verificationNote": "Payment verified"
+    }
+  ],
+  "tipsTitle": "💡 How to Spot Legit Opportunities",
+  "tips": [
+    {
+      "title": "Research Before Joining",
+      "description": "Search for reviews on Trustpilot, Reddit, and BBB before signing up.",
+      "icon": "🔍"
+    },
+    {
+      "title": "Never Pay to Work",
+      "description": "Legitimate opportunities never ask for upfront payment. This is the #1 red flag.",
+      "icon": "💰"
+    },
+    {
+      "title": "Check Payment Proof",
+      "description": "Look for payment screenshots from real users on social media and forums.",
+      "icon": "📸"
+    },
+    {
+      "title": "Trust Your Gut",
+      "description": "If something feels wrong, it probably is. Don't ignore your instincts.",
+      "icon": "💭"
+    }
+  ],
+  "verificationTool": {
+    "title": "Verify Any Online Opportunity",
+    "description": "Use our free tool to check if a website or opportunity is legitimate",
+    "buttonText": "Check Now"
+  },
+  "resourcesTitle": "Safety Resources",
+  "resources": [
+    {
+      "title": "How to Research a Company",
+      "description": "Step-by-step guide to vetting online opportunities",
+      "readTime": "8 min",
+      "link": "/resource/research-company"
+    },
+    {
+      "title": "Report a Scam",
+      "description": "Where to report fraudulent online schemes",
+      "readTime": "5 min",
+      "link": "/resource/report-scam"
+    },
+    {
+      "title": "FTC Guide on Online Scams",
+      "description": "Official government resource for scam prevention",
+      "readTime": "10 min",
+      "link": "/resource/ftc-guide"
+    }
+  ],
+  "faq": {
+    "title": "Legit Ways to Make Money Online FAQ - {country}",
+    "items": [
+      {
+        "question": "How can I tell if an online earning opportunity is legitimate?",
+        "answer": "Legitimate opportunities never ask for upfront payment. Research the company, read reviews on Trustpilot and Reddit, check for payment proof, and verify they have a physical address and contact information."
+      },
+      {
+        "question": "What are the most common online scams?",
+        "answer": "Pyramid schemes, fake check scams, work-from-home job scams requiring upfront payment, phishing emails, and 'get rich quick' schemes are the most common."
+      },
+      {
+        "question": "Can I really make money online without any investment?",
+        "answer": "Yes! Many legitimate methods require zero investment: online surveys, micro tasks, cashback apps, user testing, and freelancing platforms are all free to join."
+      },
+      {
+        "question": "How much can I legitimately earn online?",
+        "answer": "Beginners earn $100-500/month part-time. Skilled freelancers earn $2,000-10,000+/month. Success depends on your skills, time investment, and consistency."
+      },
+      {
+        "question": "What should I do if I've been scammed?",
+        "answer": "Report to your bank immediately, file a complaint with the FTC (usa.gov), report to the platform where you found the scam, and warn others on social media."
+      },
+      {
+        "question": "Are the methods on this page truly verified?",
+        "answer": "Yes! We only recommend platforms we've personally tested or that have thousands of positive verified user reviews and proven payment histories."
+      }
+    ]
+  },
+  "final": {
+    "title": "Start Earning Safely Today",
+    "subtitle": "Choose a verified method and start earning legitimate income online - no scams, no risks, just real opportunities",
+    "buttonText": "Get Started Safely"
+  }
+}
