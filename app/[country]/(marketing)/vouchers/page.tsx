@@ -50,55 +50,6 @@ const replaceCountryPlaceholder = (text: string, countryName: string): string =>
   return text.replace(/\{country\}/g, countryName);
 };
 
-/* ================= HARDCODED DATA ================= */
-
-const voucherCategories = [
-  { icon: "🛍️", title: "Fashion & Apparel", description: "Clothing, shoes, accessories", avgDiscount: "20-50%", popularity: "🔥 Very High", expiryDays: "7-30 days" },
-  { icon: "📱", title: "Electronics", description: "Phones, laptops, gadgets", avgDiscount: "10-30%", popularity: "🔥 High", expiryDays: "14-45 days" },
-  { icon: "🏠", title: "Home & Living", description: "Furniture, decor, appliances", avgDiscount: "15-40%", popularity: "Medium", expiryDays: "7-60 days" },
-  { icon: "🍔", title: "Food & Dining", description: "Restaurants, delivery, groceries", avgDiscount: "10-25%", popularity: "🔥 Very High", expiryDays: "3-14 days" },
-  { icon: "✈️", title: "Travel", description: "Flights, hotels, rentals", avgDiscount: "15-40%", popularity: "Medium", expiryDays: "30-90 days" },
-  { icon: "💄", title: "Beauty & Health", description: "Cosmetics, skincare, wellness", avgDiscount: "15-30%", popularity: "High", expiryDays: "7-30 days" },
-];
-
-const featuredVouchers = [
-  { title: "Amazon Fashion Week Sale", discount: "30% OFF + Free Shipping", code: "AMZ30FS", category: "Fashion", usesLeft: 5000, store: "Amazon", rating: "4.9", expiryDate: "Mar 31, 2026" },
-  { title: "Nike Member Exclusive", discount: "25% OFF Sitewide", code: "NIKE25", category: "Fashion", usesLeft: 2500, store: "Nike", rating: "4.8", expiryDate: "Mar 25, 2026" },
-  { title: "Best Buy Tech Deals", discount: "$50 OFF $500+", code: "BBY50", category: "Electronics", usesLeft: 1000, store: "Best Buy", rating: "4.7", expiryDate: "Mar 20, 2026" },
-  { title: "Uber Eats First Order", discount: "$15 OFF $20+", code: "EATS15", category: "Food", usesLeft: 10000, store: "Uber Eats", rating: "4.8", expiryDate: "Apr 15, 2026" },
-  { title: "Expedia Spring Break", discount: "20% OFF Hotels", code: "EXPEDIA20", category: "Travel", usesLeft: 3000, store: "Expedia", rating: "4.6", expiryDate: "Apr 10, 2026" },
-  { title: "Sephora Beauty Insider", discount: "15% OFF $50+", code: "SEPHORA15", category: "Beauty", usesLeft: 5000, store: "Sephora", rating: "4.7", expiryDate: "Mar 28, 2026" },
-];
-
-const benefits = [
-  { icon: "💰", title: "Save Money Instantly", description: "Apply codes at checkout and save instantly on your purchases" },
-  { icon: "🔄", title: "Daily Updates", description: "New vouchers added every day. We verify all codes work" },
-  { icon: "🎯", title: "1000+ Stores", description: "Vouchers for all your favorite stores in one place" },
-  { icon: "⭐", title: "Verified & Tested", description: "Every voucher is tested and verified by our team" },
-];
-
-const tips = [
-  { title: "Check Expiry Dates", description: "Vouchers expire quickly. Use them before they're gone" },
-  { title: "Stack When Possible", description: "Some stores allow combining vouchers with sales" },
-  { title: "Sign Up for Alerts", description: "Get notified when new vouchers for your favorite stores drop" },
-  { title: "Read Terms & Conditions", description: "Check minimum spend and excluded items before using" },
-];
-
-const testimonials = [
-  { name: "Jessica M.", country: "United States", saved: "$450", quote: "Saved over $450 last month using Cashog vouchers. The Amazon codes are amazing!", avatar: "JM" },
-  { name: "David L.", country: "Canada", saved: "$280", quote: "Found a 30% off Nike voucher that actually worked. Saved $60 on new shoes!", avatar: "DL" },
-  { name: "Sarah K.", country: "United Kingdom", saved: "$620", quote: "I check Cashog before every online purchase. Already saved over $600 this year.", avatar: "SK" },
-];
-
-const faqItems = [
-  { q: "Are these vouchers really free?", a: "Yes! All vouchers on Cashog are completely free to use. Just copy the code and paste at checkout." },
-  { q: "How do I use a voucher code?", a: "Copy the voucher code, go to the store's website, add items to your cart, and paste the code in the 'Promo Code' or 'Discount Code' box at checkout." },
-  { q: "Do vouchers expire?", a: "Yes, most vouchers have an expiry date. Check the expiry date shown on each voucher. Use them before they expire!" },
-  { q: "How often are new vouchers added?", a: "New vouchers are added daily. We update our database constantly to bring you the latest deals and discounts." },
-  { q: "Can I use vouchers with other offers?", a: "It depends on the store. Some allow stacking with sales, others don't. Always check the terms and conditions." },
-  { q: "What if a voucher doesn't work?", a: "Vouchers occasionally expire faster than expected. Try another code or check the terms. Report invalid codes and we'll remove them." },
-];
-
 /* ================= METADATA ================= */
 
 export async function generateMetadata({
@@ -120,7 +71,7 @@ export async function generateMetadata({
 
   return {
     title: replaceCountry(`Vouchers & Discount Codes in {country} - Save Up to 70% Off | Cashog`),
-    description: replaceCountry(`Find the best vouchers and discount codes in {country}. Save money at 1000+ stores including Amazon, Nike, and Walmart.`),
+    description: replaceCountry(`Find the best vouchers and discount codes in {country}. Save money at 1000+ stores.`),
     alternates: { canonical: `https://cashog.com/${country}/vouchers` },
     robots: { index: true, follow: true },
   };
@@ -154,9 +105,61 @@ export default async function VouchersPage({
   const copyToClipboard = (code: string) => {
     if (typeof navigator !== 'undefined') {
       navigator.clipboard.writeText(code);
-      alert(`Copied: ${code}`);
     }
   };
+
+  // FAQ items
+  const faqItems = [
+    { q: "Are these vouchers really free?", a: "Yes! All vouchers on Cashog are completely free to use. Just copy the code and paste at checkout." },
+    { q: "How do I use a voucher code?", a: "Copy the voucher code, go to the store's website, add items to your cart, and paste the code at checkout." },
+    { q: "Do vouchers expire?", a: "Yes, most vouchers have an expiry date. Check the expiry date shown on each voucher." },
+    { q: "How often are new vouchers added?", a: "New vouchers are added daily. We update our database constantly." },
+    { q: "Can I use vouchers with other offers?", a: "It depends on the store. Some allow stacking with sales, others don't." },
+    { q: "What if a voucher doesn't work?", a: "Vouchers occasionally expire faster than expected. Try another code." },
+  ];
+
+  // Voucher categories
+  const voucherCategories = [
+    { icon: "🛍️", title: "Fashion & Apparel", description: "Clothing, shoes, accessories", avgDiscount: "20-50%", popularity: "🔥 Very High", expiryDays: "7-30 days" },
+    { icon: "📱", title: "Electronics", description: "Phones, laptops, gadgets", avgDiscount: "10-30%", popularity: "🔥 High", expiryDays: "14-45 days" },
+    { icon: "🏠", title: "Home & Living", description: "Furniture, decor, appliances", avgDiscount: "15-40%", popularity: "Medium", expiryDays: "7-60 days" },
+    { icon: "🍔", title: "Food & Dining", description: "Restaurants, delivery, groceries", avgDiscount: "10-25%", popularity: "🔥 Very High", expiryDays: "3-14 days" },
+    { icon: "✈️", title: "Travel", description: "Flights, hotels, rentals", avgDiscount: "15-40%", popularity: "Medium", expiryDays: "30-90 days" },
+    { icon: "💄", title: "Beauty & Health", description: "Cosmetics, skincare, wellness", avgDiscount: "15-30%", popularity: "High", expiryDays: "7-30 days" },
+  ];
+
+  // Featured vouchers
+  const featuredVouchers = [
+    { title: "Amazon Fashion Week Sale", discount: "30% OFF + Free Shipping", code: "AMZ30FS", category: "Fashion", usesLeft: 5000, store: "Amazon", rating: "4.9", expiryDate: "Mar 31, 2026" },
+    { title: "Nike Member Exclusive", discount: "25% OFF Sitewide", code: "NIKE25", category: "Fashion", usesLeft: 2500, store: "Nike", rating: "4.8", expiryDate: "Mar 25, 2026" },
+    { title: "Best Buy Tech Deals", discount: "$50 OFF $500+", code: "BBY50", category: "Electronics", usesLeft: 1000, store: "Best Buy", rating: "4.7", expiryDate: "Mar 20, 2026" },
+    { title: "Uber Eats First Order", discount: "$15 OFF $20+", code: "EATS15", category: "Food", usesLeft: 10000, store: "Uber Eats", rating: "4.8", expiryDate: "Apr 15, 2026" },
+    { title: "Expedia Spring Break", discount: "20% OFF Hotels", code: "EXPEDIA20", category: "Travel", usesLeft: 3000, store: "Expedia", rating: "4.6", expiryDate: "Apr 10, 2026" },
+    { title: "Sephora Beauty Insider", discount: "15% OFF $50+", code: "SEPHORA15", category: "Beauty", usesLeft: 5000, store: "Sephora", rating: "4.7", expiryDate: "Mar 28, 2026" },
+  ];
+
+  // Benefits
+  const benefits = [
+    { icon: "💰", title: "Save Money Instantly", description: "Apply codes at checkout and save instantly" },
+    { icon: "🔄", title: "Daily Updates", description: "New vouchers added every day. We verify all codes work" },
+    { icon: "🎯", title: "1000+ Stores", description: "Vouchers for all your favorite stores in one place" },
+    { icon: "⭐", title: "Verified & Tested", description: "Every voucher is tested and verified by our team" },
+  ];
+
+  // Tips
+  const tips = [
+    { title: "Check Expiry Dates", description: "Vouchers expire quickly. Use them before they're gone" },
+    { title: "Stack When Possible", description: "Some stores allow combining vouchers with sales" },
+    { title: "Sign Up for Alerts", description: "Get notified when new vouchers for your favorite stores drop" },
+    { title: "Read Terms & Conditions", description: "Check minimum spend and excluded items before using" },
+  ];
+
+  // Testimonials
+  const testimonials = [
+    { name: "Jessica M.", country: "United States", saved: "$450", quote: "Saved over $450 last month using Cashog vouchers!", avatar: "JM" },
+    { name: "David L.", country: "Canada", saved: "$280", quote: "Found a 30% off Nike voucher that actually worked!", avatar: "DL" },
+    { name: "Sarah K.", country: "United Kingdom", saved: "$620", quote: "I check Cashog before every online purchase!", avatar: "SK" },
+  ];
 
   return (
     <main className="flex flex-col items-center w-full">
@@ -168,7 +171,7 @@ export default async function VouchersPage({
               {t(`Save Money with Vouchers in ${countryName}`)}
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl mb-12 text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              {t(`Find the best vouchers and discount codes in ${countryName}. Save up to 70% at 1000+ stores including Amazon, Nike, Walmart, and more. New codes added daily!`)}
+              {t(`Find the best vouchers and discount codes in ${countryName}. Save up to 70% at 1000+ stores. New codes added daily!`)}
             </p>
             <PrimaryCTA href="/signup" translationKey="start_saving_now" observer={true} />
           </section>
@@ -205,7 +208,7 @@ export default async function VouchersPage({
         </OpeningStyle>
       </CircleBorder>
 
-      {/* Voucher Categories Grid */}
+      {/* Voucher Categories */}
       <CircleBorder>
         <OpeningStyle delay={0.1}>
           <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
@@ -257,25 +260,20 @@ export default async function VouchersPage({
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2 flex-wrap">
                         <h3 className="font-bold text-gray-900 dark:text-white">{voucher.title}</h3>
-                        <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-purple-50 text-purple-600 dark:bg-purple-900/20 dark:text-purple-400">{voucher.category}</span>
-                        <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400">⭐ {voucher.rating}</span>
+                        <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-purple-50 text-purple-600">{voucher.category}</span>
+                        <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-600">⭐ {voucher.rating}</span>
                       </div>
                       <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Store: {voucher.store}</p>
                       <div className="flex flex-wrap gap-4 text-xs">
-                        <span className="text-green-600 dark:text-green-400 font-semibold">💰 {voucher.discount}</span>
-                        <span className="text-orange-600 dark:text-orange-400">🎯 {voucher.usesLeft.toLocaleString()} uses left</span>
-                        <span className="text-red-500 dark:text-red-400">⏰ Expires: {voucher.expiryDate}</span>
+                        <span className="text-green-600 font-semibold">💰 {voucher.discount}</span>
+                        <span className="text-orange-600">🎯 {voucher.usesLeft.toLocaleString()} uses left</span>
+                        <span className="text-red-500">⏰ Expires: {voucher.expiryDate}</span>
                       </div>
                     </div>
                     <div className="text-right">
                       <div className="flex items-center gap-2">
                         <code className="px-3 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg text-sm font-mono">{voucher.code}</code>
-                        <button
-                          onClick={() => copyToClipboard(voucher.code)}
-                          className="px-3 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg text-sm transition-colors cursor-pointer"
-                        >
-                          Copy
-                        </button>
+                        <button onClick={() => copyToClipboard(voucher.code)} className="px-3 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg text-sm transition-colors cursor-pointer">Copy</button>
                       </div>
                     </div>
                   </div>
@@ -286,7 +284,7 @@ export default async function VouchersPage({
         </OpeningStyle>
       </CircleBorder>
 
-      {/* Benefits Section */}
+      {/* Benefits */}
       <CircleBorder>
         <OpeningStyle delay={0.1}>
           <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
@@ -307,7 +305,7 @@ export default async function VouchersPage({
         </OpeningStyle>
       </CircleBorder>
 
-      {/* Tips Section */}
+      {/* Tips */}
       <CircleBorder>
         <OpeningStyle delay={0.1}>
           <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
@@ -364,7 +362,7 @@ export default async function VouchersPage({
         </OpeningStyle>
       </CircleBorder>
 
-      {/* Final CTA Section */}
+      {/* Final CTA */}
       <CircleBorder>
         <OpeningStyle delay={0.1}>
           <section className="max-w-7xl mx-auto px-6 py-24 md:py-32 text-center">
