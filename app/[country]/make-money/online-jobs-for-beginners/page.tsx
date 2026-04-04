@@ -31,19 +31,8 @@ interface BeginnerJob {
   salary: string;
   description: string;
   requirements: string[];
-  skillsNeeded: string[];
   jobType: string;
-  link: string;
-}
-
-interface Platform {
-  name: string;
-  logo: string;
-  type: string;
-  signupBonus: string;
-  description: string;
-  bestFor: string[];
-  payoutMethods: string[];
+  startImmediately: boolean;
   link: string;
 }
 
@@ -51,15 +40,18 @@ interface Skill {
   name: string;
   icon: string;
   description: string;
-  learningTime: string;
-  earningPotential: string;
-  resources: string[];
+  timeToLearn: string;
+  difficulty: string;
+  freeResources: string[];
 }
 
-interface Tip {
-  title: string;
-  description: string;
+interface Platform {
+  name: string;
   icon: string;
+  description: string;
+  bestFor: string[];
+  jobsAvailable: number;
+  link: string;
 }
 
 interface SuccessStory {
@@ -69,6 +61,13 @@ interface SuccessStory {
   earnings: string;
   story: string;
   jobType: string;
+  startPoint: string;
+}
+
+interface Tip {
+  title: string;
+  description: string;
+  icon: string;
 }
 
 interface TranslationSection {
@@ -86,31 +85,27 @@ interface TranslationSection {
     label: string;
     description: string;
   }>;
-  jobCategoriesTitle?: string;
-  jobCategories?: Array<{
-    name: string;
-    icon: string;
-    description: string;
-    jobCount: number;
-    startingPay: string;
-  }>;
-  beginnerJobsTitle?: string;
-  beginnerJobs?: BeginnerJob[];
-  platformsTitle?: string;
-  platforms?: Platform[];
-  skillsTitle?: string;
-  skills?: Skill[];
-  tipsTitle?: string;
-  tips?: Tip[];
+  quickStartJobsTitle?: string;
+  quickStartJobs?: BeginnerJob[];
+  inDemandSkillsTitle?: string;
+  inDemandSkills?: Skill[];
+  topPlatformsTitle?: string;
+  topPlatforms?: Platform[];
   successStoriesTitle?: string;
   successStories?: SuccessStory[];
+  tipsTitle?: string;
+  tips?: Tip[];
+  redFlagsTitle?: string;
+  redFlags?: Array<{
+    warning: string;
+    description: string;
+    icon: string;
+  }>;
   checklistTitle?: string;
   checklist?: {
     title?: string;
     items?: string[];
   };
-  redFlagsTitle?: string;
-  redFlags?: string[];
   newsletterTitle?: string;
   newsletter?: {
     title?: string;
@@ -183,38 +178,38 @@ const getCountrySpecificKeywords = (countryName: string, countryCode: string): s
     `online jobs for beginners ${lowerCountry}`,
     `entry level remote jobs ${lowerCountry}`,
     `work from home no experience ${lowerCountry}`,
-    `beginner friendly online jobs ${lowerCountry}`,
-    `easy online jobs from home ${lowerCountry}`,
-    `no experience remote jobs ${lowerCountry}`,
+    `easy online jobs ${lowerCountry}`,
+    `beginner friendly remote work ${lowerCountry}`,
+    `no experience work from home ${lowerCountry}`,
     `online jobs for students ${lowerCountry}`,
-    `work from home jobs entry level ${lowerCountry}`,
-    `online side hustles for beginners ${lowerCountry}`,
-    `legitimate online jobs beginners ${lowerCountry}`,
+    `part time online jobs ${lowerCountry}`,
+    `flexible online jobs ${lowerCountry}`,
+    `legit online jobs for beginners ${lowerCountry}`,
   ];
 
   if (countryCode === "us") {
     baseKeywords.push(
-      "beginner remote jobs usa",
-      "entry level work from home usa",
-      "online jobs for beginners america"
+      "online jobs for beginners usa",
+      "entry level remote work america",
+      "no experience jobs usa"
     );
   } else if (countryCode === "gb") {
     baseKeywords.push(
-      "beginner remote jobs uk",
-      "entry level work from home uk",
-      "online jobs for beginners britain"
+      "online jobs for beginners uk",
+      "entry level remote work britain",
+      "no experience jobs uk"
     );
   } else if (countryCode === "ca") {
     baseKeywords.push(
-      "beginner remote jobs canada",
-      "entry level work from home canada",
-      "online jobs for beginners canada"
+      "online jobs for beginners canada",
+      "entry level remote work canada",
+      "no experience jobs canada"
     );
   } else if (countryCode === "au") {
     baseKeywords.push(
-      "beginner remote jobs australia",
-      "entry level work from home australia",
-      "online jobs for beginners australia"
+      "online jobs for beginners australia",
+      "entry level remote work australia",
+      "no experience jobs australia"
     );
   }
 
@@ -260,12 +255,12 @@ export async function generateMetadata({
 
   const seoTitle = replaceCountry(
     rawTitle,
-    `Online Jobs for Beginners in ${countryName} - No Experience Needed | Cashog`
+    `Online Jobs for Beginners in ${countryName} - No Experience Remote Work | Cashog`
   );
 
   const seoDescription = replaceCountry(
     rawDescription,
-    `Find beginner-friendly online jobs in ${countryName}. No experience required! Discover legit work-from-home opportunities, entry-level remote jobs, and side hustles for beginners.`
+    `Find legit online jobs for beginners in ${countryName}. No experience required! Discover entry-level remote work, flexible side hustles, and start earning from home today.`
   );
 
   const keywordsArray = getCountrySpecificKeywords(countryName, country);
@@ -344,7 +339,7 @@ export default async function OnlineJobsForBeginnersPage({
   const rawTitle = tData?.seo?.title;
   const rawDescription = tData?.seo?.description;
   const title = t(rawTitle, `Online Jobs for Beginners in ${countryName}`);
-  const description = t(rawDescription, `Find beginner-friendly online jobs in ${countryName}.`);
+  const description = t(rawDescription, `Find legit online jobs for beginners in ${countryName}. No experience required!`);
 
   const structuredData = generateJsonLd({
     path: `/${country}/online-jobs-for-beginners`,
@@ -355,15 +350,15 @@ export default async function OnlineJobsForBeginnersPage({
 
   // Prepare data with fallbacks
   const heroData = {
-    title: t(tData?.hero?.title, "Online Jobs for Beginners"),
+    title: t(tData?.hero?.title, "Online Jobs for Beginners in {country}"),
     subtitle: t(
       tData?.hero?.subtitle,
-      `Start your remote career today with zero experience needed! Discover legit online jobs perfect for beginners in ${countryName}. No degree required - just willingness to learn and earn.`
+      `Start your remote career today with zero experience! Discover legit online jobs perfect for beginners in ${countryName}. No degree required - just motivation and a computer.`
     ),
   };
 
   const statsData = {
-    title: t(tData?.statsTitle, "Beginner-Friendly Online Jobs by the Numbers"),
+    title: t(tData?.statsTitle, "Why Start with Online Jobs?"),
     stats: (tData?.stats || []).map((stat) => ({
       ...stat,
       value: t(stat.value, stat.value),
@@ -376,88 +371,31 @@ export default async function OnlineJobsForBeginnersPage({
   if (statsData.stats.length === 0) {
     statsData.stats = [
       {
-        value: "2M+",
-        label: "Entry-Level Remote Jobs",
-        description: "Available worldwide",
+        value: "67%",
+        label: "of beginners",
+        description: "find work within 2 weeks",
       },
       {
         value: "$15-25",
-        label: "Average Hourly Rate",
-        description: "For beginner positions",
+        label: "average hourly rate",
+        description: "for entry-level online jobs",
       },
       {
-        value: "No Experience",
-        label: "Required for Most",
-        description: "Just basic computer skills",
+        value: "0",
+        label: "years experience",
+        description: "required to start",
       },
       {
-        value: "1-2 Weeks",
-        label: "To Land First Job",
-        description: "With consistent effort",
+        value: "500K+",
+        label: "beginner jobs",
+        description: "available worldwide",
       },
     ];
   }
 
-  const jobCategoriesData = {
-    title: t(tData?.jobCategoriesTitle, "Beginner-Friendly Job Categories"),
-    categories: (tData?.jobCategories || []).map((category) => ({
-      ...category,
-      name: t(category.name, category.name),
-      description: t(category.description, category.description),
-    })),
-  };
-
-  // Default job categories if not in translation
-  if (jobCategoriesData.categories.length === 0) {
-    jobCategoriesData.categories = [
-      {
-        name: "Virtual Assistant",
-        icon: "📋",
-        description: "Administrative support for businesses and entrepreneurs",
-        jobCount: 15000,
-        startingPay: "$15-25/hr",
-      },
-      {
-        name: "Data Entry",
-        icon: "📊",
-        description: "Input and manage data for companies",
-        jobCount: 12000,
-        startingPay: "$14-20/hr",
-      },
-      {
-        name: "Customer Service",
-        icon: "🎧",
-        description: "Support customers via chat, email, or phone",
-        jobCount: 25000,
-        startingPay: "$15-22/hr",
-      },
-      {
-        name: "Social Media Manager",
-        icon: "📱",
-        description: "Manage social accounts for small businesses",
-        jobCount: 8000,
-        startingPay: "$18-30/hr",
-      },
-      {
-        name: "Transcription",
-        icon: "🎙️",
-        description: "Convert audio/video to text",
-        jobCount: 6000,
-        startingPay: "$12-20/hr",
-      },
-      {
-        name: "Online Tutoring",
-        icon: "📚",
-        description: "Teach students online in various subjects",
-        jobCount: 10000,
-        startingPay: "$15-30/hr",
-      },
-    ];
-  }
-
-  const beginnerJobsData = {
-    title: t(tData?.beginnerJobsTitle, "Entry-Level Remote Jobs Hiring Now"),
-    jobs: (tData?.beginnerJobs || []).map((job) => ({
+  const quickStartJobsData = {
+    title: t(tData?.quickStartJobsTitle, "Quick-Start Online Jobs (No Experience Needed)"),
+    jobs: (tData?.quickStartJobs || []).map((job) => ({
       ...job,
       title: t(job.title, job.title),
       company: t(job.company, job.company),
@@ -465,156 +403,81 @@ export default async function OnlineJobsForBeginnersPage({
     })),
   };
 
-  // Default beginner jobs if not in translation - FIXED syntax error
-  if (beginnerJobsData.jobs.length === 0) {
-    beginnerJobsData.jobs = [
-      {
-        title: "Virtual Assistant",
-        company: "Belay Solutions",
-        logo: "📋",
-        salary: "$15-22/hour",
-        description: "Help entrepreneurs with email management, scheduling, and administrative tasks.",
-        requirements: ["Reliable internet", "Basic computer skills", "Organized"],
-        skillsNeeded: ["Communication", "Time management", "Google Workspace"],
-        jobType: "Part-time / Full-time",
-        link: "/job/virtual-assistant",
-      },
-      {
-        title: "Customer Support Representative",
-        company: "SupportNinja",
-        logo: "🎧",
-        salary: "$16-20/hour",
-        description: "Answer customer questions via chat and email for e-commerce brands.",
-        requirements: ["Good writing skills", "Empathy", "Problem-solving"],
-        skillsNeeded: ["Written communication", "Patience", "CRM tools"],
-        jobType: "Full-time",
-        link: "/job/customer-support",
-      },
+  // Default quick start jobs if not in translation
+  if (quickStartJobsData.jobs.length === 0) {
+    quickStartJobsData.jobs = [
       {
         title: "Data Entry Clerk",
-        company: "Precision Sourcing",
+        company: "Various Companies",
         logo: "📊",
-        salary: "$14-18/hour",
-        description: "Enter and verify data in spreadsheets and databases accurately.",
-        requirements: ["Typing 40+ WPM", "Attention to detail", "Excel basics"],
-        skillsNeeded: ["Typing speed", "Accuracy", "Organization"],
-        jobType: "Part-time",
+        salary: "$15-22/hour",
+        description: "Enter and manage data in spreadsheets and databases. Perfect for beginners with basic computer skills.",
+        requirements: ["Basic typing", "Attention to detail", "Computer access"],
+        jobType: "Flexible",
+        startImmediately: true,
         link: "/job/data-entry",
+      },
+      {
+        title: "Customer Support Agent",
+        company: "Global Support Inc.",
+        logo: "🎧",
+        salary: "$16-24/hour",
+        description: "Help customers via chat and email. Training provided - no phone calls required!",
+        requirements: ["Good communication", "Problem solving", "Reliable internet"],
+        jobType: "Part/Full Time",
+        startImmediately: true,
+        link: "/job/customer-support",
       },
       {
         title: "Social Media Assistant",
         company: "SocialBee",
         logo: "📱",
-        salary: "$18-25/hour",
-        description: "Schedule posts, engage with followers, and create basic content.",
-        requirements: ["Familiar with social platforms", "Creative", "Reliable"],
-        skillsNeeded: ["Instagram", "Facebook", "Content creation basics"],
-        jobType: "Part-time",
+        salary: "$18-28/hour",
+        description: "Schedule posts, respond to comments, and grow social media accounts.",
+        requirements: ["Familiar with social media", "Creative thinking", "Basic writing"],
+        jobType: "Flexible",
+        startImmediately: true,
         link: "/job/social-media-assistant",
       },
       {
         title: "Transcriptionist",
-        company: "Rev",
+        company: "Rev & Similar",
         logo: "🎙️",
         salary: "$12-20/hour",
-        description: "Transcribe audio and video files into text documents.",
-        requirements: ["Good listening skills", "Fast typing", "Grammar knowledge"],
-        skillsNeeded: ["Typing speed", "English proficiency", "Attention to detail"],
+        description: "Convert audio and video files into text. No experience needed - just good listening skills.",
+        requirements: ["Good typing speed", "English fluency", "Attention to detail"],
         jobType: "Flexible",
+        startImmediately: true,
         link: "/job/transcription",
       },
       {
-        title: "Online Tutor",
-        company: "VIPKid",
-        logo: "📚",
-        salary: "$16-22/hour",
-        description: "Teach English to students online using provided curriculum.",
-        requirements: ["Bachelor's degree (any field)", "TESOL/TEFL (can obtain)", "Enthusiastic"],
-        skillsNeeded: ["Patience", "Clear speech", "Lesson planning"],
-        jobType: "Part-time",
-        link: "/job/online-tutor",
-      },
-    ];
-  }
-
-  const platformsData = {
-    title: t(tData?.platformsTitle, "Best Platforms to Find Beginner Online Jobs"),
-    platforms: (tData?.platforms || []).map((platform) => ({
-      ...platform,
-      name: t(platform.name, platform.name),
-      description: t(platform.description, platform.description),
-    })),
-  };
-
-  // Default platforms if not in translation
-  if (platformsData.platforms.length === 0) {
-    platformsData.platforms = [
-      {
-        name: "Upwork",
-        logo: "💼",
-        type: "Freelance Marketplace",
-        signupBonus: "$0",
-        description: "Find entry-level freelance work in writing, VA, data entry, and more.",
-        bestFor: ["Virtual Assistant", "Data Entry", "Customer Service"],
-        payoutMethods: ["PayPal", "Bank Transfer", "Direct Deposit"],
-        link: "/platform/upwork",
-      },
-      {
-        name: "Fiverr",
-        logo: "⭐",
-        type: "Gig Marketplace",
-        signupBonus: "$0",
-        description: "Create 'gigs' offering your services starting at $5.",
-        bestFor: ["Social Media", "Transcription", "Basic Design"],
-        payoutMethods: ["PayPal", "Fiverr Revenue Card"],
-        link: "/platform/fiverr",
-      },
-      {
-        name: "Remote.co",
-        logo: "🌐",
-        type: "Remote Job Board",
-        signupBonus: "$0",
-        description: "Curated remote jobs from companies hiring beginners.",
-        bestFor: ["Customer Service", "Admin Support", "Entry Level"],
-        payoutMethods: ["Varies by employer"],
-        link: "/platform/remote-co",
-      },
-      {
-        name: "FlexJobs",
-        logo: "💪",
-        type: "Premium Job Board",
-        signupBonus: "$0",
-        description: "Hand-screened remote and flexible jobs (subscription required).",
-        bestFor: ["All beginner roles", "Legitimate companies"],
-        payoutMethods: ["Varies by employer"],
-        link: "/platform/flexjobs",
-      },
-      {
-        name: "Rev",
-        logo: "🎙️",
-        type: "Transcription Platform",
-        signupBonus: "$0",
-        description: "Get paid to transcribe audio and video files.",
-        bestFor: ["Transcription", "Captioning"],
-        payoutMethods: ["PayPal"],
-        link: "/platform/rev",
-      },
-      {
-        name: "Belay",
+        title: "Virtual Assistant",
+        company: "Small Businesses",
         logo: "📋",
-        type: "VA Staffing",
-        signupBonus: "$0",
-        description: "Match with businesses needing virtual assistants.",
-        bestFor: ["Virtual Assistant", "Admin Support"],
-        payoutMethods: ["Direct Deposit"],
-        link: "/platform/belay",
+        salary: "$15-30/hour",
+        description: "Help entrepreneurs with email, scheduling, research, and admin tasks.",
+        requirements: ["Organized", "Reliable", "Basic computer skills"],
+        jobType: "Part-time",
+        startImmediately: true,
+        link: "/job/virtual-assistant",
+      },
+      {
+        title: "Online Survey Taker",
+        company: "Market Research",
+        logo: "📝",
+        salary: "$10-20/hour",
+        description: "Share your opinions and get paid. Perfect for extra cash in spare time.",
+        requirements: ["Internet access", "Honest opinions", "Basic English"],
+        jobType: "Very Flexible",
+        startImmediately: true,
+        link: "/job/surveys",
       },
     ];
   }
 
-  const skillsData = {
-    title: t(tData?.skillsTitle, "In-Demand Skills You Can Learn Free"),
-    skills: (tData?.skills || []).map((skill) => ({
+  const inDemandSkillsData = {
+    title: t(tData?.inDemandSkillsTitle, "In-Demand Skills You Can Learn for Free"),
+    skills: (tData?.inDemandSkills || []).map((skill) => ({
       ...skill,
       name: t(skill.name, skill.name),
       description: t(skill.description, skill.description),
@@ -622,106 +485,124 @@ export default async function OnlineJobsForBeginnersPage({
   };
 
   // Default skills if not in translation
-  if (skillsData.skills.length === 0) {
-    skillsData.skills = [
+  if (inDemandSkillsData.skills.length === 0) {
+    inDemandSkillsData.skills = [
       {
-        name: "Typing",
-        icon: "⌨️",
-        description: "Learn to type faster with free online tools. Aim for 40+ WPM.",
-        learningTime: "2-4 weeks",
-        earningPotential: "$12-20/hr",
-        resources: ["TypingClub", "Keybr", "10FastFingers"],
+        name: "Microsoft Excel",
+        icon: "📊",
+        description: "Learn data entry, formulas, and basic analysis",
+        timeToLearn: "2-4 weeks",
+        difficulty: "Easy",
+        freeResources: ["YouTube", "Microsoft Learn", "GCF Global"],
       },
       {
-        name: "Google Workspace",
-        icon: "🔵",
-        description: "Master Docs, Sheets, Gmail, and Calendar for admin roles.",
-        learningTime: "1-2 weeks",
-        earningPotential: "$15-25/hr",
-        resources: ["Google Skillshop", "YouTube", "Coursera"],
-      },
-      {
-        name: "Social Media",
+        name: "Social Media Management",
         icon: "📱",
-        description: "Learn to schedule posts, engage, and analyze basic metrics.",
-        learningTime: "2-3 weeks",
-        earningPotential: "$18-30/hr",
-        resources: ["Meta Blueprint", "HubSpot Academy", "Later Blog"],
+        description: "Schedule posts, create content, engage audiences",
+        timeToLearn: "1-2 weeks",
+        difficulty: "Easy",
+        freeResources: ["HubSpot Academy", "Meta Blueprint", "YouTube"],
       },
       {
         name: "Customer Service",
-        icon: "🎧",
-        description: "Develop empathy, problem-solving, and communication skills.",
-        learningTime: "1-2 weeks",
-        earningPotential: "$15-22/hr",
-        resources: ["Zendesk Training", "LinkedIn Learning", "Udemy"],
+        icon: "💬",
+        description: "Learn to handle inquiries, complaints, and support",
+        timeToLearn: "1-3 weeks",
+        difficulty: "Easy",
+        freeResources: ["Coursera (audit)", "LinkedIn Learning (free trial)"],
       },
       {
-        name: "Transcription",
-        icon: "🎙️",
-        description: "Learn to transcribe accurately with proper grammar.",
-        learningTime: "1-2 weeks",
-        earningPotential: "$12-20/hr",
-        resources: ["Transcribe Anywhere", "YouTube tutorials", "Practice audio"],
+        name: "Basic HTML/CSS",
+        icon: "💻",
+        description: "Understand website basics for entry-level web jobs",
+        timeToLearn: "4-6 weeks",
+        difficulty: "Medium",
+        freeResources: ["freeCodeCamp", "Codecademy", "W3Schools"],
       },
       {
-        name: "Data Entry",
-        icon: "📊",
-        description: "Master Excel basics and database management.",
-        learningTime: "1-2 weeks",
-        earningPotential: "$14-18/hr",
-        resources: ["Excel Easy", "GCFGlobal", "Coursera"],
+        name: "Email Marketing",
+        icon: "✉️",
+        description: "Learn Mailchimp, newsletters, and campaigns",
+        timeToLearn: "2-3 weeks",
+        difficulty: "Easy",
+        freeResources: ["Mailchimp Academy", "HubSpot Academy"],
+      },
+      {
+        name: "Time Management",
+        icon: "⏰",
+        description: "Essential for remote work success",
+        timeToLearn: "1 week",
+        difficulty: "Easy",
+        freeResources: ["Trello guides", "YouTube productivity channels"],
       },
     ];
   }
 
-  const tipsData = {
-    title: t(tData?.tipsTitle, "Tips for Landing Your First Online Job"),
-    tips: (tData?.tips || []).map((tip) => ({
-      ...tip,
-      title: t(tip.title, tip.title),
-      description: t(tip.description, tip.description),
+  const topPlatformsData = {
+    title: t(tData?.topPlatformsTitle, "Best Platforms for Beginner Online Jobs"),
+    platforms: (tData?.topPlatforms || []).map((platform) => ({
+      ...platform,
+      name: t(platform.name, platform.name),
+      description: t(platform.description, platform.description),
     })),
   };
 
-  // Default tips if not in translation
-  if (tipsData.tips.length === 0) {
-    tipsData.tips = [
+  // Default platforms if not in translation
+  if (topPlatformsData.platforms.length === 0) {
+    topPlatformsData.platforms = [
       {
-        title: "Create a Professional Email",
-        description: "Use a simple email like firstname.lastname@gmail.com for job applications.",
-        icon: "📧",
+        name: "Upwork",
+        icon: "💼",
+        description: "Largest freelance marketplace with entry-level jobs",
+        bestFor: ["Writing", "Virtual Assistant", "Data Entry"],
+        jobsAvailable: 15000,
+        link: "/platform/upwork",
       },
       {
-        title: "Build a Simple Resume",
-        description: "Highlight transferable skills, computer literacy, and any volunteer work.",
-        icon: "📄",
+        name: "Fiverr",
+        icon: "⭐",
+        description: "Sell services starting at $5 - perfect for beginners",
+        bestFor: ["Logo Design", "Voice Over", "Social Media"],
+        jobsAvailable: 20000,
+        link: "/platform/fiverr",
       },
       {
-        title: "Start with Small Gigs",
-        description: "Build your reputation by taking smaller, lower-paid jobs first.",
-        icon: "🎯",
+        name: "Amazon Mechanical Turk",
+        icon: "🤖",
+        description: "Micro-tasks like data categorization and surveys",
+        bestFor: ["Data Entry", "Surveys", "Image Tagging"],
+        jobsAvailable: 5000,
+        link: "/platform/mturk",
       },
       {
-        title: "Create a Portfolio",
-        description: "Save samples of your work, even if self-created, to show skills.",
-        icon: "📁",
+        name: "Appen",
+        icon: "📱",
+        description: "Work on AI training and data projects",
+        bestFor: ["Data Annotation", "Search Evaluation"],
+        jobsAvailable: 3000,
+        link: "/platform/appen",
       },
       {
-        title: "Be Consistent",
-        description: "Apply to multiple jobs daily. First job may take 1-2 weeks of consistent effort.",
-        icon: "⏰",
+        name: "RemoteOK",
+        icon: "🌍",
+        description: "Curated remote jobs with beginner filters",
+        bestFor: ["Customer Support", "Sales", "Admin"],
+        jobsAvailable: 8000,
+        link: "/platform/remoteok",
       },
       {
-        title: "Avoid Scams",
-        description: "Never pay for a job. Legitimate employers won't ask for upfront payment.",
-        icon: "🛡️",
+        name: "FlexJobs",
+        icon: "🔧",
+        description: "Hand-screened remote jobs (paid but worth it)",
+        bestFor: ["Professional entry-level roles"],
+        jobsAvailable: 25000,
+        link: "/platform/flexjobs",
       },
     ];
   }
 
   const successStoriesData = {
-    title: t(tData?.successStoriesTitle, "Beginners Who Started with No Experience"),
+    title: t(tData?.successStoriesTitle, "Real Success Stories from Beginners"),
     stories: (tData?.successStories || []).map((story) => ({
       ...story,
       name: t(story.name, story.name),
@@ -735,72 +616,143 @@ export default async function OnlineJobsForBeginnersPage({
   if (successStoriesData.stories.length === 0) {
     successStoriesData.stories = [
       {
-        name: "Emily",
+        name: "Sarah",
         age: 24,
-        location: "Ohio",
-        earnings: "$2,800/month",
-        story: "Started as a virtual assistant with no experience. Within 6 months, I had 3 regular clients and quit my retail job.",
-        jobType: "Virtual Assistant",
-      },
-      {
-        name: "Carlos",
-        age: 32,
-        location: "Texas",
-        earnings: "$1,500/month",
-        story: "Learned transcription in 2 weeks using free resources. Now I work 15 hours/week while staying home with my kids.",
-        jobType: "Transcriptionist",
-      },
-      {
-        name: "Priya",
-        age: 28,
-        location: "California",
+        location: "Nebraska",
         earnings: "$3,200/month",
-        story: "No degree, just basic social media skills. Started managing Instagram for small businesses and grew from there.",
+        story: "Started with zero experience as a virtual assistant. Within 3 months, I had 5 regular clients and quit my retail job.",
+        jobType: "Virtual Assistant",
+        startPoint: "No experience",
+      },
+      {
+        name: "James",
+        age: 19,
+        location: "Florida",
+        earnings: "$1,800/month",
+        story: "I'm a college student who started doing data entry part-time. It pays for my tuition and I study on my own schedule.",
+        jobType: "Data Entry",
+        startPoint: "Student",
+      },
+      {
+        name: "Maria",
+        age: 35,
+        location: "Texas",
+        earnings: "$4,500/month",
+        story: "After being laid off, I learned social media management in 2 weeks. Now I manage accounts for 8 small businesses.",
         jobType: "Social Media Manager",
+        startPoint: "No tech background",
+      },
+    ];
+  }
+
+  const tipsData = {
+    title: t(tData?.tipsTitle, "Essential Tips for Online Job Beginners"),
+    tips: (tData?.tips || []).map((tip) => ({
+      ...tip,
+      title: t(tip.title, tip.title),
+      description: t(tip.description, tip.description),
+    })),
+  };
+
+  // Default tips if not in translation
+  if (tipsData.tips.length === 0) {
+    tipsData.tips = [
+      {
+        title: "Start with Small Gigs",
+        description: "Build your reputation with smaller jobs first. Positive reviews lead to better opportunities.",
+        icon: "🎯",
+      },
+      {
+        title: "Create a Simple Portfolio",
+        description: "Even without experience, create sample work to show your skills (e.g., sample social media posts).",
+        icon: "📁",
+      },
+      {
+        title: "Be Professional",
+        description: "Respond quickly, meet deadlines, and communicate clearly. Professionalism beats experience.",
+        icon: "💼",
+      },
+      {
+        title: "Learn While You Earn",
+        description: "Take free courses in your spare time to upgrade your skills and command higher rates.",
+        icon: "📚",
+      },
+      {
+        title: "Avoid Scams",
+        description: "Never pay to get a job. Legitimate employers pay you, not the other way around.",
+        icon: "⚠️",
+      },
+      {
+        title: "Set Realistic Goals",
+        description: "Start with 10-15 hours per week while you learn the ropes. Increase hours as you gain confidence.",
+        icon: "🎯",
+      },
+    ];
+  }
+
+  const redFlagsData = {
+    title: t(tData?.redFlagsTitle, "🚩 Red Flags: How to Spot Online Job Scams"),
+    flags: (tData?.redFlags || []).map((flag) => ({
+      ...flag,
+      warning: t(flag.warning, flag.warning),
+      description: t(flag.description, flag.description),
+    })),
+  };
+
+  // Default red flags if not in translation
+  if (redFlagsData.flags.length === 0) {
+    redFlagsData.flags = [
+      {
+        warning: "Asking for upfront payment",
+        description: "Legitimate jobs never ask you to pay for training, software, or 'background checks'.",
+        icon: "💰",
+      },
+      {
+        warning: "Too good to be true",
+        description: "$5,000/week for data entry? That's a scam. Research average rates for each job type.",
+        icon: "🤔",
+      },
+      {
+        warning: "Vague job descriptions",
+        description: "If they won't tell you exactly what you'll be doing, walk away.",
+        icon: "❓",
+      },
+      {
+        warning: "Unprofessional communication",
+        description: "Poor grammar, generic email addresses (@gmail.com), and pressure tactics are red flags.",
+        icon: "📧",
+      },
+      {
+        warning: "Request for personal info",
+        description: "Never share your SSN or bank info before being officially hired by a legitimate company.",
+        icon: "🔒",
       },
     ];
   }
 
   const checklistData = {
-    title: t(tData?.checklist?.title, "Your First Online Job Checklist"),
+    title: t(tData?.checklist?.title, "Your First 30 Days: Beginner Action Plan"),
     items: (tData?.checklist?.items || []).map((item) => t(item, item)),
   };
 
   // Default checklist if not in translation
   if (checklistData.items.length === 0) {
     checklistData.items = [
-      "☐ Create a professional email address",
-      "☐ Set up a PayPal account for payments",
-      "☐ Write a simple beginner resume",
-      "☐ Choose 1-2 skills to focus on",
-      "☐ Complete free training for chosen skills",
-      "☐ Create profiles on 2-3 job platforms",
-      "☐ Apply to 5-10 jobs daily",
-      "☐ Complete first small gig for experience",
-    ];
-  }
-
-  const redFlagsData = {
-    title: t(tData?.redFlagsTitle, "Red Flags to Avoid in Online Jobs"),
-    flags: (tData?.redFlags || []).map((flag) => t(flag, flag)),
-  };
-
-  // Default red flags if not in translation
-  if (redFlagsData.flags.length === 0) {
-    redFlagsData.flags = [
-      "⚠️ Any job asking for upfront payment or training fees",
-      "⚠️ Promises of 'get rich quick' or unrealistic earnings",
-      "⚠️ Requests for your bank login or sensitive personal info",
-      "⚠️ Jobs that require paying for a 'starter kit'",
-      "⚠️ Vague job descriptions with no clear responsibilities",
-      "⚠️ Communication only through messaging apps (no email/phone)",
+      "Week 1: Choose 2-3 job types that interest you",
+      "Week 1: Complete 1-2 free courses in those areas",
+      "Week 2: Create profiles on 2-3 job platforms",
+      "Week 2: Apply to 10-20 beginner jobs",
+      "Week 3: Complete your first small gig or job",
+      "Week 3: Ask for feedback and a review",
+      "Week 4: Apply to higher-paying jobs with your new review",
+      "Week 4: Start building your portfolio",
     ];
   }
 
   const newsletterData = {
-    title: t(tData?.newsletter?.title, "Get Beginner Job Alerts"),
-    subtitle: t(tData?.newsletter?.subtitle, "Subscribe for weekly entry-level remote job opportunities"),
-    buttonText: t(tData?.newsletter?.buttonText, "Subscribe"),
+    title: t(tData?.newsletter?.title, "Get Beginner Jobs Sent to Your Inbox"),
+    subtitle: t(tData?.newsletter?.subtitle, "Weekly curated list of entry-level remote jobs - perfect for beginners"),
+    buttonText: t(tData?.newsletter?.buttonText, "Send Me Jobs"),
     placeholder: t(tData?.newsletter?.placeholder, "Enter your email"),
   };
 
@@ -819,51 +771,39 @@ export default async function OnlineJobsForBeginnersPage({
     faqData.items = [
       {
         q: "Can I really get an online job with no experience?",
-        a: "Yes! Many entry-level remote jobs like virtual assistant, data entry, and customer service require no prior experience - just basic computer skills and willingness to learn.",
+        a: "Yes! Many entry-level online jobs only require basic computer skills and a willingness to learn. Data entry, virtual assistance, and customer support are great starting points.",
       },
       {
-        q: "How much can a beginner earn online?",
-        a: "Beginners typically earn $12-25/hour depending on the role. Virtual assistants start around $15-20/hr, while transcription and data entry start around $12-18/hr.",
-      },
-      {
-        q: "Do I need a degree for online jobs?",
-        a: "No! Most beginner online jobs don't require a degree. Employers care more about your skills, reliability, and willingness to learn.",
-      },
-      {
-        q: "How long does it take to find my first online job?",
-        a: "With consistent effort (applying to 5-10 jobs daily), most beginners land their first job within 1-3 weeks.",
+        q: "How much money can I make as a beginner?",
+        a: "Most beginners earn $12-25 per hour. As you gain skills and positive reviews, you can quickly increase your rates to $25-40+ per hour.",
       },
       {
         q: "What equipment do I need?",
-        a: "At minimum: a reliable computer/laptop, high-speed internet, and a quiet workspace. Some roles may require a headset or microphone.",
+        a: "At minimum: a reliable computer (Windows or Mac), high-speed internet, and a quiet workspace. A headset is helpful for customer service roles.",
       },
       {
-        q: "Are these jobs legit or scams?",
-        a: "The platforms and jobs we recommend are legitimate. Always follow our red flags guide to avoid scams - never pay for a job opportunity.",
+        q: "How do I avoid online job scams?",
+        a: "Never pay for a job, research companies before applying, trust your gut if something feels wrong, and stick to reputable platforms like Upwork and FlexJobs.",
       },
       {
-        q: "Can I work from anywhere in the world?",
-        a: "Many online jobs are location-independent. However, some require you to be in specific countries due to time zones or legal requirements.",
+        q: "Can I work online while living outside the US?",
+        a: "Absolutely! Many platforms accept workers worldwide. Some jobs are location-specific, but many are open globally. Check each job's requirements.",
       },
       {
-        q: "How do I get paid for online work?",
-        a: "Most platforms pay via PayPal, direct deposit, or bank transfer. Payment schedules vary - weekly, bi-weekly, or monthly.",
+        q: "How long until I get my first job?",
+        a: "Most beginners land their first gig within 1-3 weeks if they apply consistently. Start with smaller jobs to build your reputation quickly.",
       },
       {
-        q: "What skills should I learn first?",
-        a: "Start with typing (40+ WPM), Google Workspace basics, and communication skills. These are useful for most beginner online jobs.",
-      },
-      {
-        q: "Can I do online jobs while studying?",
-        a: "Yes! Many online jobs offer flexible schedules perfect for students. Virtual assistant and data entry roles are especially flexible.",
+        q: "Do I need to pay taxes on online income?",
+        a: "Yes, online income is taxable in most countries. Keep records of your earnings and consult a tax professional about deductions (home office, internet, etc.).",
       },
     ];
   }
 
   const finalData = {
-    title: t(tData?.final?.title, "Start Your Online Career Journey Today"),
-    subtitle: t(tData?.final?.subtitle, "Join thousands of beginners who started with no experience and now earn from home"),
-    buttonText: t(tData?.final?.buttonText, "Find Beginner Jobs"),
+    title: t(tData?.final?.title, "Ready to Start Your Online Career?"),
+    subtitle: t(tData?.final?.subtitle, "Thousands of beginners are earning from home. You can too."),
+    buttonText: t(tData?.final?.buttonText, "Find Beginner Jobs Now"),
   };
 
   /* ================= RENDER ================= */
@@ -896,8 +836,8 @@ export default async function OnlineJobsForBeginnersPage({
               {heroData.subtitle}
             </p>
             <PrimaryCTA
-              href="/remote-jobs"
-              translationKey="find_jobs"
+              href="/beginner-jobs"
+              translationKey="find_beginner_jobs"
               observer={true}
             />
           </section>
@@ -945,52 +885,7 @@ export default async function OnlineJobsForBeginnersPage({
         </OpeningStyle>
       </CircleBorder>
 
-      {/* Job Categories Section */}
-      <CircleBorder>
-        <OpeningStyle delay={0.1}>
-          <section
-            className="max-w-7xl mx-auto px-6 py-24 md:py-32"
-            aria-labelledby="categories-heading"
-          >
-            <div className="text-center mb-16">
-              <h2
-                id="categories-heading"
-                className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
-              >
-                {jobCategoriesData.title}
-              </h2>
-              <div
-                className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
-                aria-hidden="true"
-              />
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-              {jobCategoriesData.categories.map((category, index) => (
-                <div
-                  key={index}
-                  className="bg-white dark:bg-gray-800 rounded-xl p-6 text-center shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700"
-                >
-                  <div className="text-5xl mb-4">{category.icon}</div>
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
-                    {category.name}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-xs mb-2">
-                    {category.description}
-                  </p>
-                  <div className="text-xs text-green-600 dark:text-green-400 font-semibold">
-                    {category.startingPay}
-                  </div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                    {category.jobCount.toLocaleString()}+ jobs
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        </OpeningStyle>
-      </CircleBorder>
-
-      {/* Beginner Jobs Section */}
+      {/* Quick Start Jobs Section */}
       <CircleBorder>
         <OpeningStyle delay={0.1}>
           <section
@@ -1002,15 +897,18 @@ export default async function OnlineJobsForBeginnersPage({
                 id="jobs-heading"
                 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
               >
-                {beginnerJobsData.title}
+                {quickStartJobsData.title}
               </h2>
               <div
                 className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
                 aria-hidden="true"
               />
+              <p className="text-gray-600 dark:text-gray-400 mt-4 max-w-2xl mx-auto">
+                These jobs are perfect for beginners - no degree or experience required
+              </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {beginnerJobsData.jobs.map((job, index) => (
+              {quickStartJobsData.jobs.map((job, index) => (
                 <div
                   key={index}
                   className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700"
@@ -1027,16 +925,23 @@ export default async function OnlineJobsForBeginnersPage({
                         </p>
                       </div>
                     </div>
-                    <div className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs font-bold">
+                    {job.startImmediately && (
+                      <span className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded-full text-xs font-bold">
+                        Start Today
+                      </span>
+                    )}
+                  </div>
+                  <div className="mb-3">
+                    <span className="inline-block bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-2 py-1 rounded-full text-xs font-bold">
                       {job.salary}
-                    </div>
+                    </span>
                   </div>
                   <p className="text-gray-600 dark:text-gray-300 text-sm mb-3">
                     {job.description}
                   </p>
                   <div className="mb-3">
-                    <div className="flex flex-wrap gap-1 mb-2">
-                      {job.requirements.slice(0, 2).map((req, idx) => (
+                    <div className="flex flex-wrap gap-1">
+                      {job.requirements.map((req, idx) => (
                         <span
                           key={idx}
                           className="inline-block px-2 py-1 bg-gray-100 dark:bg-gray-700 text-xs rounded text-gray-600 dark:text-gray-300"
@@ -1045,15 +950,17 @@ export default async function OnlineJobsForBeginnersPage({
                         </span>
                       ))}
                     </div>
-                    <div className="text-xs text-gray-500 dark:text-gray-400">
+                  </div>
+                  <div className="flex justify-between items-center mt-4">
+                    <span className="text-xs text-gray-500 dark:text-gray-400">
                       {job.jobType}
-                    </div>
+                    </span>
+                    <PrimaryCTA
+                      href={job.link}
+                      translationKey="apply_now"
+                      observer={false}
+                    />
                   </div>
-                  <PrimaryCTA
-                    href={job.link}
-                    translationKey="apply_now"
-                    observer={false}
-                  />
                 </div>
               ))}
             </div>
@@ -1061,72 +968,7 @@ export default async function OnlineJobsForBeginnersPage({
         </OpeningStyle>
       </CircleBorder>
 
-      {/* Platforms Section */}
-      <CircleBorder>
-        <OpeningStyle delay={0.1}>
-          <section
-            className="max-w-7xl mx-auto px-6 py-24 md:py-32"
-            aria-labelledby="platforms-heading"
-          >
-            <div className="text-center mb-16">
-              <h2
-                id="platforms-heading"
-                className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
-              >
-                {platformsData.title}
-              </h2>
-              <div
-                className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
-                aria-hidden="true"
-              />
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {platformsData.platforms.map((platform, index) => (
-                <div
-                  key={index}
-                  className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700"
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center space-x-3">
-                      <div className="text-4xl">{platform.logo}</div>
-                      <div>
-                        <h3 className="text-lg font-bold text-gray-900 dark:text-white">
-                          {platform.name}
-                        </h3>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">
-                          {platform.type}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm mb-3">
-                    {platform.description}
-                  </p>
-                  <div className="mb-3">
-                    <div className="flex flex-wrap gap-1">
-                      {platform.bestFor.slice(0, 3).map((role, idx) => (
-                        <span
-                          key={idx}
-                          className="inline-block px-2 py-1 bg-gray-100 dark:bg-gray-700 text-xs rounded text-gray-600 dark:text-gray-300"
-                        >
-                          {role}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <PrimaryCTA
-                    href={platform.link}
-                    translationKey="sign_up"
-                    observer={false}
-                  />
-                </div>
-              ))}
-            </div>
-          </section>
-        </OpeningStyle>
-      </CircleBorder>
-
-      {/* Skills Section */}
+      {/* In-Demand Skills Section */}
       <CircleBorder>
         <OpeningStyle delay={0.1}>
           <section
@@ -1138,37 +980,51 @@ export default async function OnlineJobsForBeginnersPage({
                 id="skills-heading"
                 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
               >
-                {skillsData.title}
+                {inDemandSkillsData.title}
               </h2>
               <div
                 className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
                 aria-hidden="true"
               />
+              <p className="text-gray-600 dark:text-gray-400 mt-4 max-w-2xl mx-auto">
+                Learn these skills for free and start earning within weeks
+              </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {skillsData.skills.map((skill, index) => (
+              {inDemandSkillsData.skills.map((skill, index) => (
                 <div
                   key={index}
-                  className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 rounded-xl p-6"
+                  className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700"
                 >
-                  <div className="flex items-start space-x-3">
-                    <div className="text-4xl">{skill.icon}</div>
-                    <div>
-                      <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
-                        {skill.name}
-                      </h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                        {skill.description}
-                      </p>
-                      <div className="space-y-1 text-xs">
-                        <div className="flex justify-between">
-                          <span className="text-gray-500">Learning:</span>
-                          <span className="font-semibold">{skill.learningTime}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-gray-500">Potential:</span>
-                          <span className="font-semibold text-green-600">{skill.earningPotential}</span>
-                        </div>
+                  <div className="text-4xl mb-3">{skill.icon}</div>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                    {skill.name}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm mb-3">
+                    {skill.description}
+                  </p>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-gray-500 dark:text-gray-400">Time to learn:</span>
+                      <span className="font-semibold text-green-600 dark:text-green-400">
+                        {skill.timeToLearn}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-500 dark:text-gray-400">Difficulty:</span>
+                      <span className="text-gray-700 dark:text-gray-300">{skill.difficulty}</span>
+                    </div>
+                    <div className="mt-2">
+                      <span className="text-gray-500 dark:text-gray-400 text-xs">Free resources:</span>
+                      <div className="flex flex-wrap gap-1 mt-1">
+                        {skill.freeResources.map((resource, idx) => (
+                          <span
+                            key={idx}
+                            className="inline-block px-2 py-0.5 bg-gray-100 dark:bg-gray-700 text-xs rounded text-gray-600 dark:text-gray-300"
+                          >
+                            {resource}
+                          </span>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -1179,19 +1035,19 @@ export default async function OnlineJobsForBeginnersPage({
         </OpeningStyle>
       </CircleBorder>
 
-      {/* Tips Section */}
+      {/* Top Platforms Section */}
       <CircleBorder>
         <OpeningStyle delay={0.1}>
           <section
             className="max-w-7xl mx-auto px-6 py-24 md:py-32"
-            aria-labelledby="tips-heading"
+            aria-labelledby="platforms-heading"
           >
             <div className="text-center mb-16">
               <h2
-                id="tips-heading"
+                id="platforms-heading"
                 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
               >
-                {tipsData.title}
+                {topPlatformsData.title}
               </h2>
               <div
                 className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
@@ -1199,22 +1055,79 @@ export default async function OnlineJobsForBeginnersPage({
               />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {tipsData.tips.map((tip, index) => (
-                <div
+              {topPlatformsData.platforms.map((platform, index) => (
+                <a
                   key={index}
-                  className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md border border-gray-100 dark:border-gray-700"
+                  href={platform.link}
+                  className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700 group"
                 >
-                  <div className="flex items-start space-x-3">
-                    <div className="text-3xl">{tip.icon}</div>
-                    <div>
-                      <h3 className="font-bold text-gray-900 dark:text-white mb-1">
-                        {tip.title}
-                      </h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
-                        {tip.description}
-                      </p>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center space-x-3">
+                      <div className="text-4xl group-hover:scale-110 transition-transform duration-300">
+                        {platform.icon}
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+                          {platform.name}
+                        </h3>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">
+                          {platform.jobsAvailable.toLocaleString()}+ jobs
+                        </p>
+                      </div>
                     </div>
                   </div>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm mb-3">
+                    {platform.description}
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    {platform.bestFor.map((category, idx) => (
+                      <span
+                        key={idx}
+                        className="inline-block px-2 py-1 bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-xs rounded"
+                      >
+                        {category}
+                      </span>
+                    ))}
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+        </OpeningStyle>
+      </CircleBorder>
+
+      {/* Red Flags Section */}
+      <CircleBorder>
+        <OpeningStyle delay={0.1}>
+          <section
+            className="max-w-7xl mx-auto px-6 py-24 md:py-32"
+            aria-labelledby="redflags-heading"
+          >
+            <div className="text-center mb-16">
+              <h2
+                id="redflags-heading"
+                className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
+              >
+                {redFlagsData.title}
+              </h2>
+              <div
+                className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
+                aria-hidden="true"
+              />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {redFlagsData.flags.map((flag, index) => (
+                <div
+                  key={index}
+                  className="bg-red-50 dark:bg-red-900/20 rounded-xl p-6 border border-red-200 dark:border-red-800"
+                >
+                  <div className="text-3xl mb-3">{flag.icon}</div>
+                  <h3 className="text-lg font-bold text-red-700 dark:text-red-400 mb-2">
+                    {flag.warning}
+                  </h3>
+                  <p className="text-sm text-red-600 dark:text-red-300">
+                    {flag.description}
+                  </p>
                 </div>
               ))}
             </div>
@@ -1249,7 +1162,7 @@ export default async function OnlineJobsForBeginnersPage({
                     className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md border border-gray-100 dark:border-gray-700"
                   >
                     <div className="text-center mb-4">
-                      <div className="text-5xl mb-2">👤</div>
+                      <div className="text-5xl mb-2">🌟</div>
                       <h3 className="text-xl font-bold text-gray-900 dark:text-white">
                         {story.name}, {story.age}
                       </h3>
@@ -1260,12 +1173,17 @@ export default async function OnlineJobsForBeginnersPage({
                         {story.earnings}
                       </div>
                       <p className="text-xs text-gray-500 dark:text-gray-400">
-                        {story.jobType}
+                        Started: {story.startPoint}
                       </p>
                     </div>
                     <p className="text-gray-600 dark:text-gray-300 text-sm italic text-center">
                       "{story.story}"
                     </p>
+                    <div className="mt-3 text-center">
+                      <span className="inline-block bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 px-3 py-1 rounded-full text-xs">
+                        {story.jobType}
+                      </span>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -1274,6 +1192,49 @@ export default async function OnlineJobsForBeginnersPage({
         </CircleBorder>
       )}
 
+      {/* Tips Section */}
+      <CircleBorder>
+        <OpeningStyle delay={0.1}>
+          <section
+            className="max-w-7xl mx-auto px-6 py-24 md:py-32"
+            aria-labelledby="tips-heading"
+          >
+            <div className="text-center mb-16">
+              <h2
+                id="tips-heading"
+                className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
+              >
+                {tipsData.title}
+              </h2>
+              <div
+                className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
+                aria-hidden="true"
+              />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {tipsData.tips.map((tip, index) => (
+                <div
+                  key={index}
+                  className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 rounded-xl p-6"
+                >
+                  <div className="flex items-start space-x-3">
+                    <div className="text-3xl">{tip.icon}</div>
+                    <div>
+                      <h3 className="font-bold text-gray-900 dark:text-white mb-1">
+                        {tip.title}
+                      </h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        {tip.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        </OpeningStyle>
+      </CircleBorder>
+
       {/* Checklist Section */}
       <CircleBorder>
         <OpeningStyle delay={0.1}>
@@ -1281,59 +1242,25 @@ export default async function OnlineJobsForBeginnersPage({
             className="max-w-4xl mx-auto px-6 py-24 md:py-32"
             aria-labelledby="checklist-heading"
           >
-            <div className="text-center mb-12">
+            <div className="bg-gradient-to-r from-green-50 to-yellow-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-8 md:p-12">
               <h2
                 id="checklist-heading"
-                className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
+                className="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white mb-6 text-center"
               >
                 {checklistData.title}
               </h2>
-              <div
-                className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
-                aria-hidden="true"
-              />
-            </div>
-            <div className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 rounded-xl p-8">
-              <ul className="space-y-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {checklistData.items.map((item, index) => (
-                  <li key={index} className="text-gray-700 dark:text-gray-300">
-                    {item}
-                  </li>
+                  <div key={index} className="flex items-start space-x-3">
+                    <div className="flex-shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mt-0.5">
+                      <span className="text-white text-xs font-bold">{index + 1}</span>
+                    </div>
+                    <p className="text-gray-700 dark:text-gray-300 text-sm">
+                      {item}
+                    </p>
+                  </div>
                 ))}
-              </ul>
-            </div>
-          </section>
-        </OpeningStyle>
-      </CircleBorder>
-
-      {/* Red Flags Section */}
-      <CircleBorder>
-        <OpeningStyle delay={0.1}>
-          <section
-            className="max-w-4xl mx-auto px-6 py-24 md:py-32"
-            aria-labelledby="redflags-heading"
-          >
-            <div className="text-center mb-12">
-              <h2
-                id="redflags-heading"
-                className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
-              >
-                {redFlagsData.title}
-              </h2>
-              <div
-                className="w-24 h-1 bg-gradient-to-r from-red-400 to-orange-500 mx-auto mt-4 rounded-full"
-                aria-hidden="true"
-              />
-            </div>
-            <div className="bg-red-50 dark:bg-red-900/20 rounded-xl p-8 border border-red-200 dark:border-red-800">
-              <ul className="space-y-3">
-                {redFlagsData.flags.map((flag, index) => (
-                  <li key={index} className="flex items-start space-x-3">
-                    <span className="text-red-500 text-xl">⚠️</span>
-                    <span className="text-gray-700 dark:text-gray-300">{flag}</span>
-                  </li>
-                ))}
-              </ul>
+              </div>
             </div>
           </section>
         </OpeningStyle>
@@ -1403,7 +1330,7 @@ export default async function OnlineJobsForBeginnersPage({
               {finalData.subtitle}
             </p>
             <PrimaryCTA
-              href="/remote-jobs"
+              href="/beginner-jobs"
               translationKey={finalData.buttonText}
               observer={true}
             />
