@@ -1,0 +1,296 @@
+{
+  "seo": {
+    "title": "Home & Garden Cashback - Earn Up to 15% Back on Home Goods in {country} | Cashog",
+    "description": "Shop home and garden with cashback in {country}. Earn up to 15% back at top stores like Wayfair, Home Depot, IKEA, Lowe's, and more. Get the best deals on furniture, decor, appliances, and outdoor living."
+  },
+  "hero": {
+    "title": "Earn Cashback on Home & Garden",
+    "subtitle": "Transform your space while saving money. Earn up to 15% cashback at top home and garden retailers in {country}. From furniture and decor to tools and outdoor living."
+  },
+  "categoryTitle": "Shop by Category",
+  "categories": [
+    {
+      "name": "Furniture",
+      "icon": "🛋️",
+      "description": "Sofas, beds, tables, chairs, and storage",
+      "storeCount": 52
+    },
+    {
+      "name": "Home Decor",
+      "icon": "🖼️",
+      "description": "Wall art, mirrors, pillows, and rugs",
+      "storeCount": 48
+    },
+    {
+      "name": "Kitchen & Dining",
+      "icon": "🍳",
+      "description": "Cookware, appliances, dinnerware, and utensils",
+      "storeCount": 45
+    },
+    {
+      "name": "Bed & Bath",
+      "icon": "🛏️",
+      "description": "Bedding, towels, mattresses, and organizers",
+      "storeCount": 38
+    },
+    {
+      "name": "Garden & Outdoor",
+      "icon": "🌷",
+      "description": "Plants, tools, furniture, and grills",
+      "storeCount": 42
+    },
+    {
+      "name": "Tools & DIY",
+      "icon": "🔧",
+      "description": "Power tools, hardware, and home improvement",
+      "storeCount": 35
+    }
+  ],
+  "featuredStoresTitle": "Top Home & Garden Stores",
+  "featuredStores": [
+    {
+      "name": "Wayfair",
+      "logo": "🏠",
+      "cashbackRate": "Up to 8%",
+      "description": "Everything home - furniture, decor, and more",
+      "categories": ["Furniture", "Decor", "Lighting"],
+      "features": ["Free shipping", "Price match", "30-day returns"],
+      "link": "/store/wayfair"
+    },
+    {
+      "name": "Home Depot",
+      "logo": "🔨",
+      "cashbackRate": "Up to 6%",
+      "description": "Home improvement, tools, and appliances",
+      "categories": ["Tools", "Hardware", "Outdoor"],
+      "features": ["Price guarantee", "Free pickup", "Pro rewards"],
+      "link": "/store/home-depot"
+    },
+    {
+      "name": "IKEA",
+      "logo": "📦",
+      "cashbackRate": "Up to 5%",
+      "description": "Affordable furniture and home accessories",
+      "categories": ["Furniture", "Storage", "Kitchen"],
+      "features": ["Click & collect", "Family rewards", "Easy assembly"],
+      "link": "/store/ikea"
+    },
+    {
+      "name": "Lowe's",
+      "logo": "🪴",
+      "cashbackRate": "Up to 6%",
+      "description": "Home improvement and garden supplies",
+      "categories": ["Tools", "Garden", "Appliances"],
+      "features": ["Military discount", "Free delivery", "Price match"],
+      "link": "/store/lowes"
+    },
+    {
+      "name": "Crate & Barrel",
+      "logo": "🍽️",
+      "cashbackRate": "Up to 7%",
+      "description": "Modern furniture and kitchenware",
+      "categories": ["Furniture", "Kitchen", "Decor"],
+      "features": ["Design services", "Wedding registry", "Free shipping"],
+      "link": "/store/crate-and-barrel"
+    },
+    {
+      "name": "Pottery Barn",
+      "logo": "🕯️",
+      "cashbackRate": "Up to 8%",
+      "description": "Premium home furnishings and decor",
+      "categories": ["Furniture", "Bedding", "Decor"],
+      "features": ["Design crew", "Key rewards", "Free swatches"],
+      "link": "/store/pottery-barn"
+    }
+  ],
+  "topDealsTitle": "Hot Home & Garden Deals",
+  "topDeals": [
+    {
+      "title": "Sofa Sale",
+      "description": "Comfortable sectionals starting at $399",
+      "originalPrice": "$899",
+      "salePrice": "$399",
+      "cashbackRate": "8%",
+      "store": "Wayfair",
+      "image": "🛋️",
+      "link": "/deal/sofa-sale"
+    },
+    {
+      "title": "Patio Furniture Clearance",
+      "description": "Prepare for summer with up to 50% off outdoor sets",
+      "originalPrice": "$599",
+      "salePrice": "$299",
+      "cashbackRate": "10%",
+      "store": "Home Depot",
+      "image": "🪑",
+      "link": "/deal/patio-clearance"
+    },
+    {
+      "title": "Kitchen Appliance Bundle",
+      "description": "Save big on refrigerator, stove, and dishwasher",
+      "originalPrice": "$2499",
+      "salePrice": "$1899",
+      "cashbackRate": "12%",
+      "store": "Lowe's",
+      "image": "🍳",
+      "link": "/deal/kitchen-bundle"
+    }
+  ],
+  "tipsTitle": "Smart Home & Garden Shopping Tips",
+  "tips": [
+    {
+      "title": "Measure Twice, Buy Once",
+      "description": "Always measure your space before buying furniture to ensure the perfect fit.",
+      "icon": "📏"
+    },
+    {
+      "title": "Stack Cashback",
+      "description": "Combine our cashback with store sales, coupons, and credit card rewards for maximum savings.",
+      "icon": "💰"
+    },
+    {
+      "title": "Check Assembly Requirements",
+      "description": "Review assembly needs before purchasing furniture to avoid surprises.",
+      "icon": "🔧"
+    },
+    {
+      "title": "Compare Delivery Options",
+      "description": "Check shipping costs and delivery times, especially for large items.",
+      "icon": "🚚"
+    }
+  ],
+  "compareTitle": "Compare Cashback Rates",
+  "compare": {
+    "description": "See how much you can earn at top home & garden stores",
+    "stores": [
+      {
+        "name": "Wayfair",
+        "cashbackRate": "Up to 8%",
+        "shippingTime": "5-10 days",
+        "returnPolicy": "30 days",
+        "rating": 4.6
+      },
+      {
+        "name": "Home Depot",
+        "cashbackRate": "Up to 6%",
+        "shippingTime": "2-7 days",
+        "returnPolicy": "90 days",
+        "rating": 4.7
+      },
+      {
+        "name": "IKEA",
+        "cashbackRate": "Up to 5%",
+        "shippingTime": "5-12 days",
+        "returnPolicy": "365 days",
+        "rating": 4.4
+      },
+      {
+        "name": "Lowe's",
+        "cashbackRate": "Up to 6%",
+        "shippingTime": "3-8 days",
+        "returnPolicy": "90 days",
+        "rating": 4.6
+      }
+    ]
+  },
+  "seasonalPromosTitle": "Seasonal Promotions",
+  "seasonalPromos": [
+    {
+      "title": "Spring Garden Event",
+      "description": "Up to 40% off plants, soil, and garden tools",
+      "endDate": "May 31, 2025",
+      "link": "/promos/spring-garden"
+    },
+    {
+      "title": "Labor Day Furniture Sale",
+      "description": "Extra 15% off + cashback on all furniture",
+      "endDate": "Sep 8, 2025",
+      "code": "LABOR15",
+      "link": "/promos/labor-day-furniture"
+    }
+  ],
+  "brandSpotlightTitle": "Brand Spotlight",
+  "brandSpotlight": [
+    {
+      "name": "Samsung Home",
+      "logo": "📺",
+      "description": "Smart appliances and home electronics",
+      "cashbackRate": "Up to 8%",
+      "featuredProducts": ["Smart Refrigerator", "Washer & Dryer", "Microwave"],
+      "link": "/brand/samsung-home"
+    },
+    {
+      "name": "Black+Decker",
+      "logo": "🔧",
+      "description": "Power tools and home improvement",
+      "cashbackRate": "Up to 10%",
+      "featuredProducts": ["Drill Set", "Lawn Mower", "Coffee Maker"],
+      "link": "/brand/black-decker"
+    }
+  ],
+  "buyingGuidesTitle": "Home & Garden Buying Guides",
+  "buyingGuides": [
+    {
+      "title": "Choosing the Perfect Sofa",
+      "description": "Find the right style, size, and fabric for your living room",
+      "readTime": "8 min",
+      "link": "/guide/perfect-sofa"
+    },
+    {
+      "title": "Indoor Plant Care Guide",
+      "description": "Keep your houseplants thriving with these expert tips",
+      "readTime": "6 min",
+      "link": "/guide/indoor-plants"
+    },
+    {
+      "title": "Kitchen Remodel on a Budget",
+      "description": "Transform your kitchen without breaking the bank",
+      "readTime": "10 min",
+      "link": "/guide/kitchen-remodel"
+    }
+  ],
+  "priceMatch": {
+    "title": "Found a Better Price?",
+    "description": "We'll help you find the best cashback rates on home & garden items",
+    "buttonText": "Compare Prices"
+  },
+  "roomInspo": {
+    "title": "Need Room Inspiration?",
+    "description": "Explore our curated room ideas and design tips to transform your space",
+    "buttonText": "Get Inspired"
+  },
+  "faq": {
+    "title": "Home & Garden Cashback FAQ - {country}",
+    "items": [
+      {
+        "question": "Which home & garden stores offer the highest cashback?",
+        "answer": "Cashback rates vary by store and season. Wayfair often offers up to 8%, Home Depot and Lowe's up to 6%, and Crate & Barrel up to 7%. Check our store listings for current rates."
+      },
+      {
+        "question": "Can I earn cashback on furniture delivery fees?",
+        "answer": "Delivery fees are typically not eligible for cashback. However, the cashback applies to the product cost before taxes and delivery charges."
+      },
+      {
+        "question": "How long does home & garden cashback take to confirm?",
+        "answer": "Home and garden cashback typically takes 45-90 days to confirm due to longer return periods for furniture and large appliances. This protects against returns and exchanges."
+      },
+      {
+        "question": "What happens if I return furniture?",
+        "answer": "If you return an item, the cashback will be deducted from your account. Wait until after the return period to withdraw cashback on large purchases."
+      },
+      {
+        "question": "Can I use gift cards with cashback?",
+        "answer": "Yes! You can use gift cards and still earn cashback on the portion paid with the gift card. Just make sure to click through our link first."
+      },
+      {
+        "question": "Do assembly services affect my cashback?",
+        "answer": "Assembly fees and installation services are usually not eligible for cashback, but they don't affect the cashback you earn on the product itself."
+      }
+    ]
+  },
+  "final": {
+    "title": "Start Saving on Home & Garden Today",
+    "subtitle": "Join thousands of smart shoppers earning cashback on their home improvement purchases",
+    "buttonText": "Shop Home & Garden Now"
+  }
+}
