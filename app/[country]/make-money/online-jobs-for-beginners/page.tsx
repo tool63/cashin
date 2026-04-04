@@ -465,7 +465,7 @@ export default async function OnlineJobsForBeginnersPage({
     })),
   };
 
-  // Default beginner jobs if not in translation
+  // Default beginner jobs if not in translation - FIXED syntax error
   if (beginnerJobsData.jobs.length === 0) {
     beginnerJobsData.jobs = [
       {
@@ -508,7 +508,7 @@ export default async function OnlineJobsForBeginnersPage({
         salary: "$18-25/hour",
         description: "Schedule posts, engage with followers, and create basic content.",
         requirements: ["Familiar with social platforms", "Creative", "Reliable"],
-        skillsNeeded": ["Instagram", "Facebook", "Content creation basics"],
+        skillsNeeded: ["Instagram", "Facebook", "Content creation basics"],
         jobType: "Part-time",
         link: "/job/social-media-assistant",
       },
@@ -849,6 +849,14 @@ export default async function OnlineJobsForBeginnersPage({
         q: "How do I get paid for online work?",
         a: "Most platforms pay via PayPal, direct deposit, or bank transfer. Payment schedules vary - weekly, bi-weekly, or monthly.",
       },
+      {
+        q: "What skills should I learn first?",
+        a: "Start with typing (40+ WPM), Google Workspace basics, and communication skills. These are useful for most beginner online jobs.",
+      },
+      {
+        q: "Can I do online jobs while studying?",
+        a: "Yes! Many online jobs offer flexible schedules perfect for students. Virtual assistant and data entry roles are especially flexible.",
+      },
     ];
   }
 
@@ -1051,7 +1059,7 @@ export default async function OnlineJobsForBeginnersPage({
             </div>
           </section>
         </OpeningStyle>
-      </CircleBorder)
+      </CircleBorder>
 
       {/* Platforms Section */}
       <CircleBorder>
