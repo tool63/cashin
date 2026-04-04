@@ -16,7 +16,6 @@ import {
 
 import type { SupportedLanguage } from "@/app/core/types";
 
-import { generateJsonLd } from "@/components/SEO/schema";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import CircleBorder from "@/components/animations/CircleBorder";
 import OpeningStyle from "@/components/animations/openingstyle";
@@ -46,234 +45,51 @@ function getLanguage(country: CountryCode): SupportedLanguage {
   return getCountry(country).defaultLanguage as SupportedLanguage;
 }
 
-// Helper to replace {country} placeholder
 const replaceCountryPlaceholder = (text: string, countryName: string): string => {
   if (!text) return "";
   return text.replace(/\{country\}/g, countryName);
 };
 
-// Dynamic keywords based on country type
-const getCountrySpecificKeywords = (countryName: string, countryCode: string): string[] => {
-  const lowerCountry = countryName.toLowerCase();
-  
-  const baseKeywords = [
-    `vouchers ${lowerCountry}`,
-    `discount vouchers ${lowerCountry}`,
-    `promo codes ${lowerCountry}`,
-    `coupon codes ${lowerCountry}`,
-    `voucher codes ${lowerCountry}`,
-    `save money vouchers ${lowerCountry}`,
-    `shopping vouchers ${lowerCountry}`,
-    `discount codes ${lowerCountry}`,
-    `free shipping vouchers ${lowerCountry}`,
-    `best voucher sites ${lowerCountry}`,
-    `online shopping vouchers ${lowerCountry}`,
-    `daily voucher deals ${lowerCountry}`,
-    `money saving vouchers ${lowerCountry}`,
-    `retail vouchers ${lowerCountry}`,
-    `restaurant vouchers ${lowerCountry}`,
-    `travel vouchers ${lowerCountry}`,
-    `electronics vouchers ${lowerCountry}`,
-    `fashion vouchers ${lowerCountry}`,
-    `best discount codes ${lowerCountry}`,
-  ];
-
-  if (countryCode === "us") {
-    baseKeywords.push("coupon codes usa", "promo codes for american stores", "best discount codes usa");
-  } else if (countryCode === "gb") {
-    baseKeywords.push("voucher codes uk", "discount codes uk", "save money uk vouchers");
-  } else if (countryCode === "ca") {
-    baseKeywords.push("coupon codes canada", "canadian discount vouchers", "save cad with vouchers");
-  } else if (countryCode === "au") {
-    baseKeywords.push("voucher codes australia", "discount codes australia", "save aud with vouchers");
-  }
-
-  return baseKeywords;
-};
-
 /* ================= HARDCODED DATA ================= */
 
 const voucherCategories = [
-  {
-    icon: "🛍️",
-    title: "Fashion & Apparel",
-    description: "Clothing, shoes, accessories",
-    avgDiscount: "20-50%",
-    popularity: "🔥 Very High",
-    expiryDays: "7-30 days"
-  },
-  {
-    icon: "📱",
-    title: "Electronics",
-    description: "Phones, laptops, gadgets",
-    avgDiscount: "10-30%",
-    popularity: "🔥 High",
-    expiryDays: "14-45 days"
-  },
-  {
-    icon: "🏠",
-    title: "Home & Living",
-    description: "Furniture, decor, appliances",
-    avgDiscount: "15-40%",
-    popularity: "Medium",
-    expiryDays: "7-60 days"
-  },
-  {
-    icon: "🍔",
-    title: "Food & Dining",
-    description: "Restaurants, delivery, groceries",
-    avgDiscount: "10-25%",
-    popularity: "🔥 Very High",
-    expiryDays: "3-14 days"
-  },
-  {
-    icon: "✈️",
-    title: "Travel",
-    description: "Flights, hotels, rentals",
-    avgDiscount: "15-40%",
-    popularity: "Medium",
-    expiryDays: "30-90 days"
-  },
-  {
-    icon: "💄",
-    title: "Beauty & Health",
-    description: "Cosmetics, skincare, wellness",
-    avgDiscount: "15-30%",
-    popularity: "High",
-    expiryDays: "7-30 days"
-  }
+  { icon: "🛍️", title: "Fashion & Apparel", description: "Clothing, shoes, accessories", avgDiscount: "20-50%", popularity: "🔥 Very High", expiryDays: "7-30 days" },
+  { icon: "📱", title: "Electronics", description: "Phones, laptops, gadgets", avgDiscount: "10-30%", popularity: "🔥 High", expiryDays: "14-45 days" },
+  { icon: "🏠", title: "Home & Living", description: "Furniture, decor, appliances", avgDiscount: "15-40%", popularity: "Medium", expiryDays: "7-60 days" },
+  { icon: "🍔", title: "Food & Dining", description: "Restaurants, delivery, groceries", avgDiscount: "10-25%", popularity: "🔥 Very High", expiryDays: "3-14 days" },
+  { icon: "✈️", title: "Travel", description: "Flights, hotels, rentals", avgDiscount: "15-40%", popularity: "Medium", expiryDays: "30-90 days" },
+  { icon: "💄", title: "Beauty & Health", description: "Cosmetics, skincare, wellness", avgDiscount: "15-30%", popularity: "High", expiryDays: "7-30 days" },
 ];
 
 const featuredVouchers = [
-  {
-    title: "Amazon Fashion Week Sale",
-    discount: "30% OFF + Free Shipping",
-    code: "AMZ30FS",
-    category: "Fashion",
-    usesLeft: 5000,
-    store: "Amazon",
-    rating: "4.9",
-    expiryDate: "Mar 31, 2026"
-  },
-  {
-    title: "Nike Member Exclusive",
-    discount: "25% OFF Sitewide",
-    code: "NIKE25",
-    category: "Fashion",
-    usesLeft: 2500,
-    store: "Nike",
-    rating: "4.8",
-    expiryDate: "Mar 25, 2026"
-  },
-  {
-    title: "Best Buy Tech Deals",
-    discount: "$50 OFF $500+",
-    code: "BBY50",
-    category: "Electronics",
-    usesLeft: 1000,
-    store: "Best Buy",
-    rating: "4.7",
-    expiryDate: "Mar 20, 2026"
-  },
-  {
-    title: "Uber Eats First Order",
-    discount: "$15 OFF $20+",
-    code: "EATS15",
-    category: "Food",
-    usesLeft: 10000,
-    store: "Uber Eats",
-    rating: "4.8",
-    expiryDate: "Apr 15, 2026"
-  },
-  {
-    title: "Expedia Spring Break",
-    discount: "20% OFF Hotels",
-    code: "EXPEDIA20",
-    category: "Travel",
-    usesLeft: 3000,
-    store: "Expedia",
-    rating: "4.6",
-    expiryDate: "Apr 10, 2026"
-  },
-  {
-    title: "Sephora Beauty Insider",
-    discount: "15% OFF $50+",
-    code: "SEPHORA15",
-    category: "Beauty",
-    usesLeft: 5000,
-    store: "Sephora",
-    rating: "4.7",
-    expiryDate: "Mar 28, 2026"
-  }
+  { title: "Amazon Fashion Week Sale", discount: "30% OFF + Free Shipping", code: "AMZ30FS", category: "Fashion", usesLeft: 5000, store: "Amazon", rating: "4.9", expiryDate: "Mar 31, 2026" },
+  { title: "Nike Member Exclusive", discount: "25% OFF Sitewide", code: "NIKE25", category: "Fashion", usesLeft: 2500, store: "Nike", rating: "4.8", expiryDate: "Mar 25, 2026" },
+  { title: "Best Buy Tech Deals", discount: "$50 OFF $500+", code: "BBY50", category: "Electronics", usesLeft: 1000, store: "Best Buy", rating: "4.7", expiryDate: "Mar 20, 2026" },
+  { title: "Uber Eats First Order", discount: "$15 OFF $20+", code: "EATS15", category: "Food", usesLeft: 10000, store: "Uber Eats", rating: "4.8", expiryDate: "Apr 15, 2026" },
+  { title: "Expedia Spring Break", discount: "20% OFF Hotels", code: "EXPEDIA20", category: "Travel", usesLeft: 3000, store: "Expedia", rating: "4.6", expiryDate: "Apr 10, 2026" },
+  { title: "Sephora Beauty Insider", discount: "15% OFF $50+", code: "SEPHORA15", category: "Beauty", usesLeft: 5000, store: "Sephora", rating: "4.7", expiryDate: "Mar 28, 2026" },
 ];
 
 const benefits = [
-  {
-    icon: "💰",
-    title: "Save Money Instantly",
-    description: "Apply codes at checkout and save instantly on your purchases"
-  },
-  {
-    icon: "🔄",
-    title: "Daily Updates",
-    description: "New vouchers added every day. We verify all codes work"
-  },
-  {
-    icon: "🎯",
-    title: "1000+ Stores",
-    description: "Vouchers for all your favorite stores in one place"
-  },
-  {
-    icon: "⭐",
-    title: "Verified & Tested",
-    description: "Every voucher is tested and verified by our team"
-  }
+  { icon: "💰", title: "Save Money Instantly", description: "Apply codes at checkout and save instantly on your purchases" },
+  { icon: "🔄", title: "Daily Updates", description: "New vouchers added every day. We verify all codes work" },
+  { icon: "🎯", title: "1000+ Stores", description: "Vouchers for all your favorite stores in one place" },
+  { icon: "⭐", title: "Verified & Tested", description: "Every voucher is tested and verified by our team" },
 ];
 
 const tips = [
-  {
-    title: "Check Expiry Dates",
-    description: "Vouchers expire quickly. Use them before they're gone"
-  },
-  {
-    title: "Stack When Possible",
-    description: "Some stores allow combining vouchers with sales"
-  },
-  {
-    title: "Sign Up for Alerts",
-    description: "Get notified when new vouchers for your favorite stores drop"
-  },
-  {
-    title: "Read Terms & Conditions",
-    description: "Check minimum spend and excluded items before using"
-  }
+  { title: "Check Expiry Dates", description: "Vouchers expire quickly. Use them before they're gone" },
+  { title: "Stack When Possible", description: "Some stores allow combining vouchers with sales" },
+  { title: "Sign Up for Alerts", description: "Get notified when new vouchers for your favorite stores drop" },
+  { title: "Read Terms & Conditions", description: "Check minimum spend and excluded items before using" },
 ];
 
 const testimonials = [
-  {
-    name: "Jessica M.",
-    country: "United States",
-    saved: "$450",
-    quote: "Saved over $450 last month using Cashog vouchers. The Amazon codes are amazing!",
-    avatar: "JM"
-  },
-  {
-    name: "David L.",
-    country: "Canada",
-    saved: "$280",
-    quote: "Found a 30% off Nike voucher that actually worked. Saved $60 on new shoes!",
-    avatar: "DL"
-  },
-  {
-    name: "Sarah K.",
-    country: "United Kingdom",
-    saved: "$620",
-    quote: "I check Cashog before every online purchase. Already saved over $600 this year.",
-    avatar: "SK"
-  }
+  { name: "Jessica M.", country: "United States", saved: "$450", quote: "Saved over $450 last month using Cashog vouchers. The Amazon codes are amazing!", avatar: "JM" },
+  { name: "David L.", country: "Canada", saved: "$280", quote: "Found a 30% off Nike voucher that actually worked. Saved $60 on new shoes!", avatar: "DL" },
+  { name: "Sarah K.", country: "United Kingdom", saved: "$620", quote: "I check Cashog before every online purchase. Already saved over $600 this year.", avatar: "SK" },
 ];
 
-// FAQ items with 'q' and 'a' format for FAQ component
 const faqItems = [
   { q: "Are these vouchers really free?", a: "Yes! All vouchers on Cashog are completely free to use. Just copy the code and paste at checkout." },
   { q: "How do I use a voucher code?", a: "Copy the voucher code, go to the store's website, add items to your cart, and paste the code in the 'Promo Code' or 'Discount Code' box at checkout." },
@@ -281,8 +97,6 @@ const faqItems = [
   { q: "How often are new vouchers added?", a: "New vouchers are added daily. We update our database constantly to bring you the latest deals and discounts." },
   { q: "Can I use vouchers with other offers?", a: "It depends on the store. Some allow stacking with sales, others don't. Always check the terms and conditions." },
   { q: "What if a voucher doesn't work?", a: "Vouchers occasionally expire faster than expected. Try another code or check the terms. Report invalid codes and we'll remove them." },
-  { q: "Do I need to create an account to use vouchers?", a: "No! All vouchers are accessible without an account. However, creating a free account lets you save favorite codes and get alerts for new vouchers." },
-  { q: "Are the vouchers valid in my country?", a: "Most vouchers are valid internationally. Check the voucher details for any regional restrictions before using." }
 ];
 
 /* ================= METADATA ================= */
@@ -296,56 +110,19 @@ export async function generateMetadata({
   const countryParam = resolvedParams?.country?.toLowerCase();
 
   if (!countryParam || !isValidCountryCode(countryParam)) {
-    return {
-      title: "Country Not Found | Cashog",
-      robots: { index: false },
-    };
+    return { title: "Country Not Found | Cashog", robots: { index: false } };
   }
 
   const country = countryParam as CountryCode;
-  const countryData = getCountry(country);
-  const countryName = countryData.name;
+  const countryName = getCountry(country).name;
 
-  const replaceCountry = (text: string): string => {
-    return text.replace(/\{country\}/g, countryName);
-  };
-
-  const seoTitle = replaceCountry(`Vouchers & Discount Codes in {country} - Save Up to 70% Off | Cashog`);
-  const seoDescription = replaceCountry(`Find the best vouchers and discount codes in {country}. Save money at 1000+ stores including Amazon, Nike, and Walmart. Free daily updated promo codes!`);
-
-  const keywordsArray = getCountrySpecificKeywords(countryName, country);
-  const keywords = keywordsArray.join(", ");
+  const replaceCountry = (text: string) => text.replace(/\{country\}/g, countryName);
 
   return {
-    title: seoTitle,
-    description: seoDescription,
-    keywords,
-    alternates: {
-      canonical: `https://cashog.com/${country}/vouchers`,
-    },
-    openGraph: {
-      title: seoTitle,
-      description: seoDescription,
-      url: `https://cashog.com/${country}/vouchers`,
-      siteName: "Cashog",
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: seoTitle,
-      description: seoDescription,
-    },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        "max-video-preview": -1,
-        "max-image-preview": "large",
-        "max-snippet": -1,
-      },
-    },
+    title: replaceCountry(`Vouchers & Discount Codes in {country} - Save Up to 70% Off | Cashog`),
+    description: replaceCountry(`Find the best vouchers and discount codes in {country}. Save money at 1000+ stores including Amazon, Nike, and Walmart.`),
+    alternates: { canonical: `https://cashog.com/${country}/vouchers` },
+    robots: { index: true, follow: true },
   };
 }
 
@@ -371,25 +148,9 @@ export default async function VouchersPage({
   }
 
   const country = countryParam as CountryCode;
-  const countryData = getCountry(country);
-  const countryName = countryData.name;
+  const countryName = getCountry(country).name;
+  const t = (text: string) => replaceCountryPlaceholder(text, countryName);
 
-  const t = (text: string): string => replaceCountryPlaceholder(text, countryName);
-
-  const structuredData = generateJsonLd({
-    path: `/${country}/vouchers`,
-    title: t(`Vouchers in ${countryName}`),
-    description: t(`Find the best vouchers in ${countryName}`),
-    type: "low",
-  });
-
-  const heroTitle = t(`Save Money with Vouchers in ${countryName}`);
-  const heroSubtitle = t(`Find the best vouchers and discount codes in ${countryName}. Save up to 70% at 1000+ stores including Amazon, Nike, Walmart, and more. New codes added daily!`);
-  const faqTitle = t(`Vouchers in ${countryName} - FAQ`);
-  const finalTitle = t(`Ready to Start Saving in ${countryName}?`);
-  const finalSubtitle = t(`Join 100,000+ savvy shoppers already saving in ${countryName}. Sign up for free and get access to exclusive vouchers today!`);
-
-  // Function to handle copy to clipboard
   const copyToClipboard = (code: string) => {
     if (typeof navigator !== 'undefined') {
       navigator.clipboard.writeText(code);
@@ -399,25 +160,15 @@ export default async function VouchersPage({
 
   return (
     <main className="flex flex-col items-center w-full">
-      {structuredData && (
-        <script
-          type="application/ld+json"
-          suppressHydrationWarning
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(structuredData),
-          }}
-        />
-      )}
-
       {/* Hero Section */}
       <CircleBorder>
         <OpeningStyle delay={0.1}>
           <section className="max-w-7xl mx-auto px-6 py-24 md:py-32 text-center">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 text-gray-900 dark:text-white">
-              {heroTitle}
+              {t(`Save Money with Vouchers in ${countryName}`)}
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl mb-12 text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              {heroSubtitle}
+              {t(`Find the best vouchers and discount codes in ${countryName}. Save up to 70% at 1000+ stores including Amazon, Nike, Walmart, and more. New codes added daily!`)}
             </p>
             <PrimaryCTA href="/signup" translationKey="start_saving_now" observer={true} />
           </section>
@@ -608,7 +359,7 @@ export default async function VouchersPage({
       <CircleBorder>
         <OpeningStyle delay={0.1}>
           <div className="max-w-4xl mx-auto px-6 py-16 md:py-24">
-            <FAQ title={faqTitle} faqs={faqItems} />
+            <FAQ title={t(`Vouchers in ${countryName} - FAQ`)} faqs={faqItems} />
           </div>
         </OpeningStyle>
       </CircleBorder>
@@ -617,9 +368,9 @@ export default async function VouchersPage({
       <CircleBorder>
         <OpeningStyle delay={0.1}>
           <section className="max-w-7xl mx-auto px-6 py-24 md:py-32 text-center">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">{finalTitle}</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">{t(`Ready to Start Saving in ${countryName}?`)}</h2>
             <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full mb-8" />
-            <p className="text-lg sm:text-xl md:text-2xl mb-12 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">{finalSubtitle}</p>
+            <p className="text-lg sm:text-xl md:text-2xl mb-12 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">{t(`Join 100,000+ savvy shoppers already saving in ${countryName}. Sign up for free and get access to exclusive vouchers today!`)}</p>
             <PrimaryCTA href="/signup" translationKey="start_saving_now" observer={true} />
           </section>
         </OpeningStyle>
