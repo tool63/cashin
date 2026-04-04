@@ -1,0 +1,253 @@
+{
+  "seo": {
+    "title": "Advertise with Cashog in {country} - Reach 500K+ Active Users | Cashog",
+    "description": "Advertise to 500,000+ money-savvy users in {country}. Multiple ad formats, precise targeting, high engagement rates. Start your campaign today!"
+  },
+  "hero": {
+    "title": "Advertise with Cashog in {country}",
+    "subtitle": "Reach 500,000+ engaged users actively looking to save money and earn cashback in {country}. Multiple ad formats, precise targeting, and measurable results."
+  },
+  "statsTitle": "Advertising Platform by the Numbers",
+  "stats": {
+    "dailyImpressions": "2M+",
+    "dailyImpressionsLabel": "Daily Impressions",
+    "activeUsers": "500K+",
+    "activeUsersLabel": "Active Users",
+    "avgCTR": "4.8%",
+    "avgCTRLabel": "Average CTR",
+    "advertiserROI": "350%",
+    "advertiserROILabel": "Average ROI"
+  },
+  "adFormatsTitle": "Advertising Formats",
+  "adFormatsSubtitle": "Choose the format that works best for your campaign goals",
+  "adFormats": [
+    {
+      "icon": "📊",
+      "title": "Display Ads",
+      "description": "Eye-catching banner ads that appear throughout our platform, designed to capture user attention without disrupting their experience.",
+      "specs": "300x250, 728x90, 300x600",
+      "placement": "Sidebar, Header, In-content"
+    },
+    {
+      "icon": "🎥",
+      "title": "Video Ads",
+      "description": "Engaging video content that plays before, during, or after user interactions. Perfect for brand storytelling and product demonstrations.",
+      "specs": "15-30 seconds, MP4 format",
+      "placement": "Pre-roll, In-stream"
+    },
+    {
+      "icon": "📧",
+      "title": "Sponsored Newsletters",
+      "description": "Reach our most engaged users directly in their inbox with sponsored content in our weekly newsletter.",
+      "specs": "Text + Image, 500 words max",
+      "placement": "Weekly Newsletter"
+    },
+    {
+      "icon": "🔍",
+      "title": "Native Ads",
+      "description": "Seamlessly integrated ads that match the look and feel of our platform, providing a non-disruptive user experience.",
+      "specs": "Custom integration",
+      "placement": "Feed, Search Results"
+    },
+    {
+      "icon": "🏷️",
+      "title": "Sponsored Deals",
+      "description": "Feature your best offers and promotions directly in our deals section where users actively look for savings.",
+      "specs": "Custom offer page",
+      "placement": "Deals Section"
+    },
+    {
+      "icon": "📱",
+      "title": "Mobile Ads",
+      "description": "Reach users on-the-go with mobile-optimized ad formats designed for smaller screens and higher engagement.",
+      "specs": "Responsive designs",
+      "placement": "Mobile App, Mobile Web"
+    }
+  ],
+  "targetingTitle": "Precision Targeting Options",
+  "targetingSubtitle": "Reach exactly the right audience for your brand",
+  "targetingOptions": [
+    {
+      "icon": "📍",
+      "title": "Location Targeting",
+      "description": "Target users based on their geographic location",
+      "options": ["Country", "City", "Region", "Postal Code", "Radius around location"]
+    },
+    {
+      "icon": "👥",
+      "title": "Demographic Targeting",
+      "description": "Reach specific age groups and demographics",
+      "options": ["Age", "Gender", "Income Level", "Education", "Occupation"]
+    },
+    {
+      "icon": "💡",
+      "title": "Interest Targeting",
+      "description": "Target based on user interests and behaviors",
+      "options": ["Shopping Habits", "Investment Preferences", "Saving Goals", "Product Categories"]
+    },
+    {
+      "icon": "🎯",
+      "title": "Behavioral Targeting",
+      "description": "Reach users based on their past actions and engagement",
+      "options": ["Purchase History", "Click Patterns", "Engagement Level", "Returning Users"]
+    }
+  ],
+  "benefitsTitle": "Why Advertise with Cashog",
+  "benefits": [
+    {
+      "icon": "🎯",
+      "title": "High Engagement Rates",
+      "description": "Our users are actively engaged and responsive to relevant advertising, resulting in higher CTRs and conversion rates."
+    },
+    {
+      "icon": "📊",
+      "title": "Real-time Analytics",
+      "description": "Access detailed campaign metrics and adjust your strategy on the fly with our comprehensive dashboard."
+    },
+    {
+      "icon": "🤝",
+      "title": "Dedicated Support",
+      "description": "Work with our advertising specialists to optimize your campaigns and maximize your ROI."
+    },
+    {
+      "icon": "💰",
+      "title": "Flexible Budgeting",
+      "description": "Start with any budget and scale as you see results. No long-term commitments required."
+    }
+  ],
+  "howItWorksTitle": "How It Works",
+  "howItWorks": [
+    {
+      "step": 1,
+      "title": "Contact Our Team",
+      "description": "Reach out to our advertising specialists to discuss your goals and target audience."
+    },
+    {
+      "step": 2,
+      "title": "Choose Your Format",
+      "description": "Select from our range of ad formats that best align with your campaign objectives."
+    },
+    {
+      "step": 3,
+      "title": "Launch Campaign",
+      "description": "Our team helps you set up and launch your campaign to start reaching engaged users."
+    },
+    {
+      "step": 4,
+      "title": "Monitor & Optimize",
+      "description": "Track performance in real-time and work with us to continuously improve results."
+    }
+  ],
+  "pricingTitle": "Flexible Pricing Plans",
+  "pricingPlans": [
+    {
+      "name": "Starter",
+      "price": "$500",
+      "period": "per month",
+      "description": "Perfect for testing the platform",
+      "features": [
+        "50,000 impressions",
+        "1 ad format",
+        "Basic targeting",
+        "Weekly reports",
+        "Email support"
+      ],
+      "popular": false,
+      "cta": "Get Started"
+    },
+    {
+      "name": "Professional",
+      "price": "$2,000",
+      "period": "per month",
+      "description": "Most popular for growing brands",
+      "features": [
+        "250,000 impressions",
+        "3 ad formats",
+        "Advanced targeting",
+        "Real-time analytics",
+        "Priority support",
+        "A/B testing"
+      ],
+      "popular": true,
+      "cta": "Choose Plan"
+    },
+    {
+      "name": "Enterprise",
+      "price": "Custom",
+      "period": "contact us",
+      "description": "For large-scale campaigns",
+      "features": [
+        "Custom impressions",
+        "All ad formats",
+        "Premium targeting",
+        "Custom reporting",
+        "Dedicated account manager",
+        "API access"
+      ],
+      "popular": false,
+      "cta": "Contact Sales"
+    }
+  ],
+  "caseStudiesTitle": "Success Stories",
+  "caseStudies": [
+    {
+      "company": "TechGadgets",
+      "industry": "Electronics Retail",
+      "result": "312% ROI",
+      "quote": "Cashog's targeted advertising helped us reach exactly the right audience. Our conversion rates doubled within the first month.",
+      "logo": "TG"
+    },
+    {
+      "company": "GreenEnergy",
+      "industry": "Sustainable Products",
+      "result": "150K+ Clicks",
+      "quote": "The engagement rates on Cashog exceeded our expectations. We've made this a permanent part of our marketing strategy.",
+      "logo": "GE"
+    },
+    {
+      "company": "FinanceHub",
+      "industry": "Financial Services",
+      "result": "45% CTR Increase",
+      "quote": "No other platform has given us such precise targeting capabilities. Our cost per acquisition dropped by 60%.",
+      "logo": "FH"
+    }
+  ],
+  "faq": {
+    "title": "Advertising with Cashog in {country} - FAQ",
+    "items": [
+      {
+        "question": "What is the minimum budget to start advertising?",
+        "answer": "Our Starter plan begins at $500 per month, but we can work with custom budgets based on your specific needs. Contact our sales team to discuss options."
+      },
+      {
+        "question": "How quickly can I launch my campaign?",
+        "answer": "Most campaigns can be launched within 2-3 business days after creative approval. Our team works quickly to get your ads in front of our audience."
+      },
+      {
+        "question": "What targeting options are available?",
+        "answer": "We offer comprehensive targeting including location, demographics, interests, and behavioral targeting. You can combine multiple criteria to create your ideal audience profile."
+      },
+      {
+        "question": "Can I track my campaign performance?",
+        "answer": "Yes! All advertisers get access to our real-time analytics dashboard where you can track impressions, clicks, CTR, conversions, and other key metrics."
+      },
+      {
+        "question": "Do you offer support for ad creative?",
+        "answer": "Absolutely. Our creative team can help you design effective ads that resonate with our audience and drive results."
+      },
+      {
+        "question": "What makes Cashog different from other advertising platforms?",
+        "answer": "Our users are highly engaged and actively looking for money-saving opportunities. This intent-driven audience leads to higher conversion rates and better ROI for advertisers."
+      }
+    ]
+  },
+  "contact": {
+    "title": "Ready to Start Advertising?",
+    "subtitle": "Let's create a campaign that delivers results",
+    "buttonText": "Contact Our Sales Team"
+  },
+  "final": {
+    "title": "Start Advertising to 500K+ Users in {country} Today",
+    "subtitle": "Join hundreds of successful advertisers already reaching our engaged audience. Let's grow your business together!"
+  }
+}
