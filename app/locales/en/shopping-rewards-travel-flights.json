@@ -1,0 +1,434 @@
+{
+  "seo": {
+    "title": "Flight Cashback - Earn Up to 10% Back on Flight Bookings in {country} | Cashog",
+    "description": "Book flights with cashback in {country}. Earn up to 10% back on airline tickets at Expedia, Kayak, CheapOair, and more. Save on domestic and international flights."
+  },
+  "hero": {
+    "title": "Earn Cashback on Flight Bookings",
+    "subtitle": "Save money on every flight in {country}. Earn up to 10% cashback when you book through top travel sites like Expedia, Kayak, CheapOair, and more. Domestic or international, economy or business class."
+  },
+  "stats": {
+    "flightsBooked": "1.5M+",
+    "savingsAmount": "$15M+",
+    "airlinesPartnered": "100+",
+    "userRating": "4.7"
+  },
+  "bookingSitesTitle": "Top Flight Booking Sites",
+  "bookingSites": [
+    {
+      "name": "Expedia",
+      "logo": "✈️",
+      "cashbackRate": "Up to 10%",
+      "description": "Flights, hotels, car rentals, and vacation packages",
+      "features": ["Bundle savings", "Member prices", "OneKey rewards", "Free cancellation"],
+      "bestFor": ["Package deals", "Last minute", "US travelers"],
+      "link": "/travel/expedia"
+    },
+    {
+      "name": "Kayak",
+      "logo": "🔍",
+      "cashbackRate": "Up to 8%",
+      "description": "Flight price comparison and booking",
+      "features": ["Price alerts", "Explore tool", "Flexible dates", "Hacker fares"],
+      "bestFor": ["Price comparison", "Flexible travel", "Budget seekers"],
+      "link": "/travel/kayak"
+    },
+    {
+      "name": "CheapOair",
+      "logo": "💰",
+      "cashbackRate": "Up to 12%",
+      "description": "Budget-friendly flight bookings",
+      "features": ["Price match", "24/7 support", "Low price guarantee", "Mobile app deals"],
+      "bestFor": ["Budget flights", "Domestic travel", "Price sensitive"],
+      "link": "/travel/cheapoair"
+    },
+    {
+      "name": "Priceline",
+      "logo": "💰",
+      "cashbackRate": "Up to 8%",
+      "description": "Express deals and name-your-own-price flights",
+      "features": ["Express deals", "Pricebreakers", "VIP program", "Bundle savings"],
+      "bestFor": ["Express deals", "Name your price", "Flexible travelers"],
+      "link": "/travel/priceline"
+    },
+    {
+      "name": "Orbitz",
+      "logo": "🌍",
+      "cashbackRate": "Up to 8%",
+      "description": "Flights, hotels, and travel packages",
+      "features": ["Rewards program", "Price guarantee", "Free cancellation", "Orbucks"],
+      "bestFor": ["Package deals", "Rewards seekers", "Family travel"],
+      "link": "/travel/orbitz"
+    },
+    {
+      "name": "Travelocity",
+      "logo": "🧙",
+      "cashbackRate": "Up to 7%",
+      "description": "Flights, hotels, and vacation packages",
+      "features": ["Price match", "24/7 support", "Free cancellation", "Insider prices"],
+      "bestFor": ["Package deals", "Customer service", "Leisure travel"],
+      "link": "/travel/travelocity"
+    }
+  ],
+  "airlinesTitle": "Airline Cashback Offers",
+  "airlines": [
+    {
+      "name": "Delta Air Lines",
+      "logo": "🔺",
+      "cashbackRate": "Up to 6%",
+      "description": "Premium service with extensive domestic and international network",
+      "hubs": ["Atlanta", "Detroit", "Minneapolis", "Salt Lake City"],
+      "benefits": ["SkyMiles", "Free Wi-Fi", "Delta One lounge"],
+      "link": "/airline/delta"
+    },
+    {
+      "name": "United Airlines",
+      "logo": "🌐",
+      "cashbackRate": "Up to 5%",
+      "description": "Global carrier with award-winning MileagePlus program",
+      "hubs": ["Chicago", "Denver", "Houston", "Newark"],
+      "benefits": ["MileagePlus", "Polaris lounge", "Economy Plus"],
+      "link": "/airline/united"
+    },
+    {
+      "name": "American Airlines",
+      "logo": "🔴",
+      "cashbackRate": "Up to 5%",
+      "description": "Largest airline in the world by fleet size",
+      "hubs": ["Dallas", "Charlotte", "Chicago", "Miami"],
+      "benefits": ["AAdvantage", "Admirals Club", "Flagship service"],
+      "link": "/airline/american"
+    },
+    {
+      "name": "Southwest Airlines",
+      "logo": "❤️",
+      "cashbackRate": "Up to 7%",
+      "description": "Low-fare carrier with two free checked bags",
+      "hubs": ["Dallas", "Chicago", "Denver", "Las Vegas"],
+      "benefits": ["Rapid Rewards", "No change fees", "Two free bags"],
+      "link": "/airline/southwest"
+    },
+    {
+      "name": "JetBlue",
+      "logo": "🔵",
+      "cashbackRate": "Up to 8%",
+      "description": "Low-fare carrier with premium economy options",
+      "hubs": ["New York", "Boston", "Fort Lauderdale", "Orlando"],
+      "benefits": ["TrueBlue", "Free Wi-Fi", "More legroom"],
+      "link": "/airline/jetblue"
+    },
+    {
+      "name": "Alaska Airlines",
+      "logo": "🐻",
+      "cashbackRate": "Up to 7%",
+      "description": "West Coast carrier with excellent loyalty program",
+      "hubs": ["Seattle", "Portland", "San Francisco", "Los Angeles"],
+      "benefits": ["Mileage Plan", "First class upgrades", "Global partners"],
+      "link": "/airline/alaska"
+    }
+  ],
+  "hotDealsTitle": "Hot Flight Deals",
+  "hotDeals": [
+    {
+      "title": "NYC to London",
+      "description": "Round-trip flights with premium amenities",
+      "originalPrice": "$899",
+      "salePrice": "$599",
+      "cashbackRate": "10%",
+      "airline": "Delta",
+      "route": "JFK → LHR",
+      "dates": "Jan 15 - Jan 22",
+      "image": "🗽",
+      "link": "/deal/nyc-london"
+    },
+    {
+      "title": "LA to Tokyo",
+      "description": "Non-stop flights with included meals",
+      "originalPrice": "$1,299",
+      "salePrice": "$899",
+      "cashbackRate": "12%",
+      "airline": "United",
+      "route": "LAX → NRT",
+      "dates": "Feb 1 - Feb 14",
+      "image": "🗻",
+      "link": "/deal/la-tokyo"
+    },
+    {
+      "title": "Chicago to Miami",
+      "description": "Weekend getaway flights",
+      "originalPrice": "$349",
+      "salePrice": "$199",
+      "cashbackRate": "8%",
+      "airline": "Southwest",
+      "route": "ORD → MIA",
+      "dates": "Mar 5 - Mar 8",
+      "image": "🏖️",
+      "link": "/deal/chicago-miami"
+    },
+    {
+      "title": "San Francisco to Paris",
+      "description": "Direct flights to Paris with checked bags",
+      "originalPrice": "$1,099",
+      "salePrice": "$749",
+      "cashbackRate": "10%",
+      "airline": "Air France",
+      "route": "SFO → CDG",
+      "dates": "Apr 10 - Apr 20",
+      "image": "🗼",
+      "link": "/deal/sf-paris"
+    },
+    {
+      "title": "Dallas to Cancun",
+      "description": "Beach vacation flights",
+      "originalPrice": "$499",
+      "salePrice": "$299",
+      "cashbackRate": "8%",
+      "airline": "American",
+      "route": "DFW → CUN",
+      "dates": "May 1 - May 7",
+      "image": "🏝️",
+      "link": "/deal/dallas-cancun"
+    },
+    {
+      "title": "Boston to Dublin",
+      "description": "Ireland non-stop deals",
+      "originalPrice": "$749",
+      "salePrice": "$499",
+      "cashbackRate": "10%",
+      "airline": "Aer Lingus",
+      "route": "BOS → DUB",
+      "dates": "Jun 5 - Jun 12",
+      "image": "🍀",
+      "link": "/deal/boston-dublin"
+    }
+  ],
+  "tipsTitle": "Smart Flight Booking Tips",
+  "tips": [
+    {
+      "title": "Book on Tuesdays",
+      "description": "Flight prices are often lower when booked on Tuesday afternoons.",
+      "icon": "📅"
+    },
+    {
+      "title": "Use Incognito Mode",
+      "description": "Search for flights in private browsing to avoid price increases.",
+      "icon": "🕵️"
+    },
+    {
+      "title": "Set Price Alerts",
+      "description": "Get notified when flight prices drop for your desired route.",
+      "icon": "🔔"
+    },
+    {
+      "title": "Be Flexible",
+      "description": "Flexible dates can save you hundreds on airfare.",
+      "icon": "📆"
+    }
+  ],
+  "comparisonTitle": "Compare Booking Sites",
+  "comparison": {
+    "description": "Find the best cashback rates for your flights",
+    "sites": [
+      {
+        "name": "Expedia",
+        "cashbackRate": "Up to 10%",
+        "priceAlerts": "✓",
+        "flexibleDates": "✓",
+        "bundleDiscount": "✓",
+        "rating": 4.7
+      },
+      {
+        "name": "Kayak",
+        "cashbackRate": "Up to 8%",
+        "priceAlerts": "✓",
+        "flexibleDates": "✓",
+        "bundleDiscount": "Limited",
+        "rating": 4.6
+      },
+      {
+        "name": "CheapOair",
+        "cashbackRate": "Up to 12%",
+        "priceAlerts": "✓",
+        "flexibleDates": "Limited",
+        "bundleDiscount": "Limited",
+        "rating": 4.4
+      },
+      {
+        "name": "Priceline",
+        "cashbackRate": "Up to 8%",
+        "priceAlerts": "✓",
+        "flexibleDates": "✓",
+        "bundleDiscount": "✓",
+        "rating": 4.5
+      }
+    ]
+  },
+  "domesticDealsTitle": "Domestic Flight Deals",
+  "domesticDeals": [
+    {
+      "title": "NYC to Los Angeles",
+      "description": "Coast to coast non-stop flights",
+      "originalPrice": "$499",
+      "salePrice": "$299",
+      "cashbackRate": "8%",
+      "airline": "JetBlue",
+      "route": "JFK → LAX",
+      "dates": "Multiple dates",
+      "image": "🗽",
+      "link": "/deal/domestic/nyc-lax"
+    },
+    {
+      "title": "Seattle to Denver",
+      "description": "Mountain getaway flights",
+      "originalPrice": "$349",
+      "salePrice": "$199",
+      "cashbackRate": "7%",
+      "airline": "Alaska",
+      "route": "SEA → DEN",
+      "dates": "Weekly",
+      "image": "🏔️",
+      "link": "/deal/domestic/sea-den"
+    },
+    {
+      "title": "Atlanta to Orlando",
+      "description": "Theme park vacation flights",
+      "originalPrice": "$249",
+      "salePrice": "$149",
+      "cashbackRate": "8%",
+      "airline": "Delta",
+      "route": "ATL → MCO",
+      "dates": "Daily",
+      "image": "🎢",
+      "link": "/deal/domestic/atl-mco"
+    }
+  ],
+  "internationalDealsTitle": "International Flight Deals",
+  "internationalDeals": [
+    {
+      "title": "Miami to Barcelona",
+      "description": "Spain non-stop flights",
+      "originalPrice": "$899",
+      "salePrice": "$599",
+      "cashbackRate": "10%",
+      "airline": "American",
+      "route": "MIA → BCN",
+      "dates": "Select dates",
+      "image": "🏖️",
+      "link": "/deal/intl/mia-bcn"
+    },
+    {
+      "title": "Chicago to Rome",
+      "description": "Italian adventure flights",
+      "originalPrice": "$1,099",
+      "salePrice": "$749",
+      "cashbackRate": "10%",
+      "airline": "United",
+      "route": "ORD → FCO",
+      "dates": "Spring 2025",
+      "image": "🏛️",
+      "link": "/deal/intl/ord-fco"
+    },
+    {
+      "title": "San Francisco to Singapore",
+      "description": "Asia non-stop flights",
+      "originalPrice": "$1,299",
+      "salePrice": "$899",
+      "cashbackRate": "12%",
+      "airline": "Singapore",
+      "route": "SFO → SIN",
+      "dates": "Weekly",
+      "image": "🏯",
+      "link": "/deal/intl/sfo-sin"
+    }
+  ],
+  "businessClassTitle": "Business Class Deals",
+  "businessClass": [
+    {
+      "airline": "Delta One",
+      "logo": "🔺",
+      "cashbackRate": "Up to 8%",
+      "description": "Lie-flat seats, premium dining, and Delta Sky Club access on international routes.",
+      "routes": ["JFK → LHR", "LAX → SYD", "ATL → CDG", "SEA → ICN"],
+      "link": "/business/delta-one"
+    },
+    {
+      "airline": "United Polaris",
+      "logo": "🌐",
+      "cashbackRate": "Up to 7%",
+      "description": "Luxury business class with all-aisle access, Saks Fifth Avenue bedding, and Polaris lounges.",
+      "routes": ["EWR → FRA", "SFO → HND", "ORD → BRU", "IAH → GRU"],
+      "link": "/business/united-polaris"
+    },
+    {
+      "airline": "Emirates Business",
+      "logo": "🛩️",
+      "cashbackRate": "Up to 9%",
+      "description": "Award-winning business class with A380 onboard lounge and chauffeur service.",
+      "routes": ["JFK → DXB", "LAX → MXP", "SFO → DXB", "IAD → ATH"],
+      "link": "/business/emirates"
+    },
+    {
+      "airline": "Qatar Qsuite",
+      "logo": "🐫",
+      "cashbackRate": "Up to 8%",
+      "description": "Private suites with double bed option, dine-on-demand, and award-winning service.",
+      "routes": ["DFW → DOH", "LAX → DOH", "JFK → DOH", "SEA → DOH"],
+      "link": "/business/qatar-qsuite"
+    }
+  ],
+  "priceMatch": {
+    "title": "Found a Better Price?",
+    "description": "We'll help you find the best flight cashback rates. Compare prices across booking sites and maximize your savings on every flight.",
+    "buttonText": "Compare Flight Prices"
+  },
+  "faq": {
+    "title": "Flight Cashback FAQ - {country}",
+    "items": [
+      {
+        "question": "How do I earn cashback on flight bookings?",
+        "answer": "Simply click through Cashog to your preferred flight booking site, complete your reservation as usual, and cashback will be automatically tracked and added to your account."
+      },
+      {
+        "question": "Can I combine cashback with airline miles?",
+        "answer": "Yes! Most flight booking sites allow you to earn both cashback and airline miles simultaneously. Just make sure to enter your frequent flyer number during checkout."
+      },
+      {
+        "question": "How long does flight cashback take to confirm?",
+        "answer": "Flight cashback typically takes 30-45 days to confirm after your flight is completed. This accounts for cancellation periods and flight verification."
+      },
+      {
+        "question": "What if I need to cancel my flight?",
+        "answer": "If you cancel a flight, the cashback will not be credited. If you've already received it, it will be deducted from your account."
+      },
+      {
+        "question": "Do all flights qualify for cashback?",
+        "answer": "Most flights on our partner sites qualify, but some exclusions may apply (e.g., basic economy, certain airlines). Check site terms for details."
+      },
+      {
+        "question": "Can I earn cashback on international flights?",
+        "answer": "Yes! International flights are eligible for cashback on most partner sites. Rates may vary by route and airline."
+      },
+      {
+        "question": "What about business and first class?",
+        "answer": "Yes! Premium cabin bookings qualify for cashback at the same rates as economy flights."
+      },
+      {
+        "question": "Do I need to book directly through Cashog every time?",
+        "answer": "Yes, to ensure cashback tracking, you must start your booking session by clicking through Cashog to the partner site."
+      },
+      {
+        "question": "Can I earn cashback on flight upgrades?",
+        "answer": "Yes, seat upgrades and baggage fees paid during booking typically qualify for cashback as well."
+      },
+      {
+        "question": "What about round-the-world tickets?",
+        "answer": "Multi-city and round-the-world tickets are eligible for cashback on most partner sites. Rates apply to the total booking amount."
+      }
+    ]
+  },
+  "final": {
+    "title": "Start Saving on Flights Today",
+    "subtitle": "Join thousands of travelers earning cashback on every flight booking",
+    "buttonText": "Book Flights with Cashback"
+  }
+}
