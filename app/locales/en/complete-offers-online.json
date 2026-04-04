@@ -1,0 +1,327 @@
+{
+  "seo": {
+    "title": "Complete Offers Online - Get Paid to Complete Offers in {country} | Cashog",
+    "description": "Earn real money by completing online offers in {country}. Get paid for signups, free trials, surveys, and more. Join legitimate platforms and start earning today!"
+  },
+  "hero": {
+    "title": "Get Paid to Complete Offers Online",
+    "subtitle": "Turn your spare time into cash! Complete simple offers, sign up for free trials, take surveys, and earn real money in {country}. Start earning today with zero investment."
+  },
+  "categoryTitle": "Offer Categories",
+  "categories": [
+    {
+      "name": "Free Trials",
+      "icon": "🎁",
+      "description": "Get paid for testing free subscriptions",
+      "offerCount": 45
+    },
+    {
+      "name": "Email Submissions",
+      "icon": "📧",
+      "description": "Simple sign-up offers",
+      "offerCount": 120
+    },
+    {
+      "name": "Download Apps",
+      "icon": "📱",
+      "description": "Install and try new apps",
+      "offerCount": 78
+    },
+    {
+      "name": "Surveys",
+      "icon": "📋",
+      "description": "Share your opinions",
+      "offerCount": 95
+    },
+    {
+      "name": "Video Offers",
+      "icon": "🎬",
+      "description": "Watch short videos",
+      "offerCount": 62
+    },
+    {
+      "name": "Shopping Offers",
+      "icon": "🛍️",
+      "description": "Cashback on purchases",
+      "offerCount": 48
+    }
+  ],
+  "featuredPlatformsTitle": "🌟 Best Offer Platforms",
+  "featuredPlatforms": [
+    {
+      "name": "Swagbucks",
+      "logo": "💰",
+      "earningPotential": "$50-200/month",
+      "description": "Complete offers, take surveys, watch videos for SB points",
+      "offerTypes": ["Free Trials", "Signups", "Surveys", "Shopping"],
+      "payoutMethods": ["PayPal", "Amazon", "Visa"],
+      "minimumPayout": "$5",
+      "rating": 4.5,
+      "link": "/platform/swagbucks",
+      "isFeatured": true
+    },
+    {
+      "name": "InboxDollars",
+      "logo": "📧",
+      "earningPotential": "$40-150/month",
+      "description": "Get paid for offers, surveys, emails, and more",
+      "offerTypes": ["Email Submissions", "Surveys", "Paid Offers"],
+      "payoutMethods": ["Check", "PayPal", "Gift Cards"],
+      "minimumPayout": "$30",
+      "rating": 4.3,
+      "link": "/platform/inboxdollars",
+      "isFeatured": true
+    },
+    {
+      "name": "PrizeRebel",
+      "logo": "🏆",
+      "earningPotential": "$60-250/month",
+      "description": "Complete offers and surveys for points",
+      "offerTypes": ["Free Trials", "Surveys", "Download Offers"],
+      "payoutMethods": ["PayPal", "Amazon", "Cryptocurrency"],
+      "minimumPayout": "$5",
+      "rating": 4.6,
+      "link": "/platform/prizerebel",
+      "isFeatured": true
+    }
+  ],
+  "offerTypesTitle": "📋 Types of Paid Offers",
+  "offerTypes": [
+    {
+      "title": "Free Trial Offers",
+      "description": "Sign up for free trials of services you actually want to try",
+      "averagePayout": "$2-15",
+      "timeRequired": "2-5 minutes",
+      "difficulty": "Easy",
+      "icon": "🎁",
+      "tips": ["Cancel before trial ends", "Use a dedicated email", "Track expiration dates"]
+    },
+    {
+      "title": "Email Signups",
+      "description": "Submit your email for newsletters and offers",
+      "averagePayout": "$0.50-3",
+      "timeRequired": "1-2 minutes",
+      "difficulty": "Easy",
+      "icon": "📧",
+      "tips": ["Use a separate email account", "Complete profile info", "Confirm email when required"]
+    },
+    {
+      "title": "Download & Install",
+      "description": "Download and install mobile apps or desktop software",
+      "averagePayout": "$1-10",
+      "timeRequired": "3-10 minutes",
+      "difficulty": "Medium",
+      "icon": "📱",
+      "tips": ["Open app after install", "Complete registration", "Keep app for 30 days"]
+    },
+    {
+      "title": "Survey Offers",
+      "description": "Share your opinions on products and services",
+      "averagePayout": "$1-5",
+      "timeRequired": "10-30 minutes",
+      "difficulty": "Medium",
+      "icon": "📋",
+      "tips": ["Be honest with answers", "Complete profile surveys", "Qualify for higher paying surveys"]
+    }
+  ],
+  "topOffersTitle": "🔥 Hot Offers Right Now",
+  "topOffers": [
+    {
+      "title": "Disney+ Free Trial",
+      "description": "Sign up for 7-day free trial",
+      "reward": "$10",
+      "requirements": "Valid email, cancel before billing",
+      "platform": "Swagbucks",
+      "category": "Free Trial",
+      "link": "/offer/disney-plus",
+      "isLimited": true
+    },
+    {
+      "title": "Newsletter Signup",
+      "description": "Subscribe to daily deals newsletter",
+      "reward": "$2",
+      "requirements": "Valid email address",
+      "platform": "InboxDollars",
+      "category": "Email",
+      "link": "/offer/newsletter",
+      "isLimited": false
+    },
+    {
+      "title": "Mobile Game Install",
+      "description": "Download and reach level 5",
+      "reward": "$5",
+      "requirements": "Install, play to level 5",
+      "platform": "PrizeRebel",
+      "category": "App Install",
+      "link": "/offer/mobile-game",
+      "isLimited": true
+    }
+  ],
+  "highestPayingTitle": "💎 Highest Paying Offer Platforms",
+  "highestPaying": [
+    {
+      "name": "Freecash",
+      "logo": "💵",
+      "earningPotential": "$100-500/month",
+      "description": "Complete offers, play games, earn crypto",
+      "offerTypes": ["High Value Offers", "Games", "Surveys"],
+      "payoutMethods": ["PayPal", "Bitcoin", "Gift Cards"],
+      "minimumPayout": "$5",
+      "rating": 4.7,
+      "link": "/platform/freecash"
+    },
+    {
+      "name": "GG2U",
+      "logo": "🎮",
+      "earningPotential": "$80-300/month",
+      "description": "Get paid for offers, surveys, and tasks",
+      "offerTypes": ["Offers", "Surveys", "Games"],
+      "payoutMethods": ["PayPal", "Amazon", "Visa"],
+      "minimumPayout": "$7",
+      "rating": 4.6,
+      "link": "/platform/gg2u"
+    },
+    {
+      "name": "RewardXP",
+      "logo": "⭐",
+      "earningPotential": "$70-250/month",
+      "description": "Complete offers and watch videos",
+      "offerTypes": ["Offer Walls", "Video Loyalty", "Surveys"],
+      "payoutMethods": ["PayPal", "Gift Cards"],
+      "minimumPayout": "$5",
+      "rating": 4.5,
+      "link": "/platform/rewardxp"
+    }
+  ],
+  "tipsTitle": "Smart Offer Completion Tips",
+  "tips": [
+    {
+      "title": "Use a Dedicated Email",
+      "description": "Create a separate email account for offers to avoid spam in your primary inbox.",
+      "icon": "📧"
+    },
+    {
+      "title": "Read Requirements Carefully",
+      "description": "Always read offer terms to ensure you complete all steps correctly for credit.",
+      "icon": "📖"
+    },
+    {
+      "title": "Track Your Offers",
+      "description": "Keep a spreadsheet of completed offers, expected payouts, and dates.",
+      "icon": "📊"
+    },
+    {
+      "title": "Clear Cookies Regularly",
+      "description": "Clear browser cookies between offers to ensure proper tracking and credit.",
+      "icon": "🍪"
+    }
+  ],
+  "earningsCalculator": {
+    "title": "Calculate Your Offer Earnings",
+    "description": "See how much you could earn monthly by completing offers",
+    "buttonText": "Try Calculator"
+  },
+  "compareTitle": "Compare Offer Platforms",
+  "compare": {
+    "description": "Find the best platform for your offer completion goals",
+    "items": [
+      {
+        "name": "Swagbucks",
+        "earningPotential": "$50-200/month",
+        "timeToComplete": "2-3 days",
+        "minimumPayout": "$5",
+        "rating": 4.5
+      },
+      {
+        "name": "PrizeRebel",
+        "earningPotential": "$60-250/month",
+        "timeToComplete": "1-2 days",
+        "minimumPayout": "$5",
+        "rating": 4.6
+      },
+      {
+        "name": "Freecash",
+        "earningPotential": "$100-500/month",
+        "timeToComplete": "1-2 days",
+        "minimumPayout": "$5",
+        "rating": 4.7
+      }
+    ]
+  },
+  "successStoriesTitle": "🌟 Real Success Stories",
+  "successStories": [
+    {
+      "name": "Rachel T.",
+      "amount": "350",
+      "story": "I complete offers during my commute. Earned $350 last month just from free trials and signups!",
+      "platform": "Swagbucks"
+    },
+    {
+      "name": "Tom H.",
+      "amount": "500",
+      "story": "Focusing on high-value offers and games, I consistently make $500+ per month.",
+      "platform": "Freecash"
+    },
+    {
+      "name": "Lisa M.",
+      "amount": "280",
+      "story": "Stay-at-home mom - I earn $280/month completing offers while kids nap. Perfect side income!",
+      "platform": "PrizeRebel"
+    }
+  ],
+  "buyingGuidesTitle": "Offer Completion Guides",
+  "buyingGuides": [
+    {
+      "title": "Beginner's Guide to Offers",
+      "description": "Everything you need to know to start completing offers today",
+      "readTime": "8 min",
+      "link": "/guide/offers-basics"
+    },
+    {
+      "title": "Maximizing Offer Earnings",
+      "description": "Advanced strategies for higher payouts and efficiency",
+      "readTime": "12 min",
+      "link": "/guide/maximize-offers"
+    },
+    {
+      "title": "Avoiding Offer Scams",
+      "description": "How to identify legitimate offers and avoid wasting time",
+      "readTime": "7 min",
+      "link": "/guide/offer-scams"
+    }
+  ],
+  "faq": {
+    "title": "Complete Offers Online FAQ - {country}",
+    "items": [
+      {
+        "question": "How do I get paid for completing offers?",
+        "answer": "Most platforms pay through PayPal, gift cards (Amazon, Visa, Walmart), or cryptocurrency. You'll earn points or cash that can be redeemed once you reach the minimum payout threshold."
+      },
+      {
+        "question": "How much can I earn from offers?",
+        "answer": "Earnings vary widely. Casual users earn $50-100/month. Dedicated users who complete high-value offers can earn $300-500+ monthly."
+      },
+      {
+        "question": "Do I need to spend money to complete offers?",
+        "answer": "No! Many offers are completely free (email signups, app downloads, surveys). Some offers require purchases, but these are optional and typically pay more."
+      },
+      {
+        "question": "How long do offers take to credit?",
+        "answer": "Crediting time varies: instant for simple signups, 1-7 days for app installs, and up to 30-60 days for purchase-based offers (due to return periods)."
+      },
+      {
+        "question": "Can I complete offers from multiple platforms?",
+        "answer": "Yes! Using multiple platforms is the best way to maximize your earnings, as each platform has different offers available."
+      },
+      {
+        "question": "Are these offers legitimate?",
+        "answer": "We only recommend legitimate platforms with verified payment histories. However, always read offer terms and never provide sensitive information like your Social Security number."
+      }
+    ]
+  },
+  "final": {
+    "title": "Start Earning by Completing Offers Today",
+    "subtitle": "Join thousands of users who turned simple tasks into real cash",
+    "buttonText": "Browse Offers Now"
+  }
+}
