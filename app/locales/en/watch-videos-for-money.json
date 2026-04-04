@@ -1,0 +1,297 @@
+{
+  "seo": {
+    "title": "Watch Videos for Money - Get Paid to Watch Videos in {country} | Cashog",
+    "description": "Earn real money by watching videos in {country}. Get paid for watching ads, trailers, movie clips, and more. Join legitimate platforms and start earning today!"
+  },
+  "hero": {
+    "title": "Get Paid to Watch Videos",
+    "subtitle": "Turn your screen time into real cash! Watch videos, movie trailers, ads, and content you love - and get paid for it in {country}. Start earning today with zero investment."
+  },
+  "categoryTitle": "Ways to Earn",
+  "categories": [
+    {
+      "name": "Watch Ads",
+      "icon": "📺",
+      "description": "Get paid for watching short video ads",
+      "platformCount": 25
+    },
+    {
+      "name": "Movie Trailers",
+      "icon": "🎬",
+      "description": "Earn watching previews and clips",
+      "platformCount": 18
+    },
+    {
+      "name": "Music Videos",
+      "icon": "🎵",
+      "description": "Get paid for listening and watching",
+      "platformCount": 12
+    },
+    {
+      "name": "News Clips",
+      "icon": "📰",
+      "description": "Earn staying informed",
+      "platformCount": 15
+    },
+    {
+      "name": "Gaming Content",
+      "icon": "🎮",
+      "description": "Watch gameplay and earn",
+      "platformCount": 20
+    },
+    {
+      "name": "Educational Videos",
+      "icon": "📚",
+      "description": "Learn and get paid",
+      "platformCount": 10
+    }
+  ],
+  "featuredPlatformsTitle": "🌟 Top Platforms to Watch Videos for Money",
+  "featuredPlatforms": [
+    {
+      "name": "Swagbucks",
+      "logo": "💰",
+      "payoutRate": "$0.01 - $0.05 per video",
+      "description": "Watch videos, earn SB points, redeem for cash or gift cards",
+      "payoutMethods": ["PayPal", "Amazon", "Visa"],
+      "minimumPayout": "$5",
+      "rating": 4.5,
+      "link": "/platform/swagbucks",
+      "isFeatured": true
+    },
+    {
+      "name": "InboxDollars",
+      "logo": "📧",
+      "payoutRate": "$0.01 - $0.10 per video",
+      "description": "Get paid to watch videos, take surveys, and read emails",
+      "payoutMethods": ["Check", "PayPal", "Gift Cards"],
+      "minimumPayout": "$30",
+      "rating": 4.3,
+      "link": "/platform/inboxdollars",
+      "isFeatured": true
+    },
+    {
+      "name": "MyPoints",
+      "logo": "⭐",
+      "payoutRate": "$0.02 - $0.08 per video",
+      "description": "Earn points watching videos, shopping online, and more",
+      "payoutMethods": ["PayPal", "Gift Cards"],
+      "minimumPayout": "$5",
+      "rating": 4.4,
+      "link": "/platform/mypoints",
+      "isFeatured": true
+    }
+  ],
+  "highestPayingTitle": "💎 Highest Paying Video Platforms",
+  "highestPaying": [
+    {
+      "name": "Earnably",
+      "logo": "💵",
+      "payoutRate": "$0.05 - $0.15 per video",
+      "description": "Premium rates for watching promotional videos",
+      "payoutMethods": ["PayPal", "Bitcoin", "Gift Cards"],
+      "minimumPayout": "$5",
+      "rating": 4.6,
+      "link": "/platform/earnably"
+    },
+    {
+      "name": "Gain.gg",
+      "logo": "🎮",
+      "payoutRate": "$0.03 - $0.12 per video",
+      "description": "Watch videos, play games, complete offers",
+      "payoutMethods": ["PayPal", "Cryptocurrency"],
+      "minimumPayout": "$5",
+      "rating": 4.7,
+      "link": "/platform/gain"
+    },
+    {
+      "name": "Hideout.tv",
+      "logo": "🎬",
+      "payoutRate": "$0.02 - $0.10 per video",
+      "description": "Watch curated video content and earn points",
+      "payoutMethods": ["PayPal", "Gift Cards"],
+      "minimumPayout": "$5",
+      "rating": 4.5,
+      "link": "/platform/hideout"
+    }
+  ],
+  "earningMethodsTitle": "🎯 Ways to Maximize Your Earnings",
+  "earningMethods": [
+    {
+      "title": "Watch Multiple Platforms",
+      "description": "Run videos on different platforms simultaneously to multiply earnings",
+      "earningPotential": "$50-100/month",
+      "timeRequired": "1-2 hours/day",
+      "difficulty": "Easy",
+      "icon": "📱",
+      "link": "/guide/multiple-platforms"
+    },
+    {
+      "title": "Complete Daily Goals",
+      "description": "Meet daily watch requirements for bonus rewards",
+      "earningPotential": "$20-50 extra/month",
+      "timeRequired": "30-60 min/day",
+      "difficulty": "Easy",
+      "icon": "🎯",
+      "link": "/guide/daily-goals"
+    },
+    {
+      "title": "Refer Friends",
+      "description": "Earn commission from friends' video watching",
+      "earningPotential": "$50-200+/month",
+      "timeRequired": "5 min setup",
+      "difficulty": "Easy",
+      "icon": "👥",
+      "link": "/guide/referrals"
+    }
+  ],
+  "tipsTitle": "Smart Video Earning Tips",
+  "tips": [
+    {
+      "title": "Use Auto-Play Features",
+      "description": "Many platforms offer auto-play for continuous earning while you do other tasks.",
+      "icon": "▶️"
+    },
+    {
+      "title": "Create a Schedule",
+      "description": "Set aside dedicated time each day for video watching to build a consistent income stream.",
+      "icon": "⏰"
+    },
+    {
+      "title": "Stack with Other Apps",
+      "description": "Watch videos while using other earning apps to maximize your time.",
+      "icon": "📚"
+    },
+    {
+      "title": "Cash Out Strategically",
+      "description": "Wait for bonus promotions or cash out to high-value gift cards for extra value.",
+      "icon": "💡"
+    }
+  ],
+  "earningsCalculator": {
+    "title": "Calculate Your Video Earnings",
+    "description": "See how much you could earn monthly by watching videos",
+    "buttonText": "Try Calculator"
+  },
+  "compareTitle": "Compare Video Platforms",
+  "compare": {
+    "description": "Find the best platform for your video watching habits",
+    "items": [
+      {
+        "name": "Swagbucks",
+        "payoutRate": "$0.01-0.05/video",
+        "timeToEarn": "$1-2/hour",
+        "minimumPayout": "$5",
+        "rating": 4.5
+      },
+      {
+        "name": "InboxDollars",
+        "payoutRate": "$0.01-0.10/video",
+        "timeToEarn": "$1-3/hour",
+        "minimumPayout": "$30",
+        "rating": 4.3
+      },
+      {
+        "name": "Earnably",
+        "payoutRate": "$0.05-0.15/video",
+        "timeToEarn": "$2-5/hour",
+        "minimumPayout": "$5",
+        "rating": 4.6
+      }
+    ]
+  },
+  "popularContentTitle": "🔥 Popular Content Categories",
+  "popularContent": [
+    {
+      "category": "Entertainment News",
+      "examples": ["Celebrity gossip", "Movie updates", "TV show highlights"],
+      "earningTip": "Higher pay for trending topics"
+    },
+    {
+      "category": "Product Reviews",
+      "examples": ["Tech gadgets", "Beauty products", "Household items"],
+      "earningTip": "Complete offers after watching for bonus"
+    },
+    {
+      "category": "How-To Videos",
+      "examples": ["DIY projects", "Cooking tutorials", "Fitness guides"],
+      "earningTip": "Watch related content for consistent earning"
+    }
+  ],
+  "successStoriesTitle": "🌟 Real Success Stories",
+  "successStories": [
+    {
+      "name": "David K.",
+      "amount": "250",
+      "story": "I watch videos during my lunch break and while commuting. Earned $250 last month without any extra effort!",
+      "platform": "Swagbucks"
+    },
+    {
+      "name": "Maria S.",
+      "amount": "180",
+      "story": "Being a stay-at-home mom, watching videos is perfect. I've made $180 this month during nap time.",
+      "platform": "InboxDollars"
+    },
+    {
+      "name": "James W.",
+      "amount": "320",
+      "story": "I use auto-play features while working. Made $320 in my best month just from video watching!",
+      "platform": "Multiple Platforms"
+    }
+  ],
+  "buyingGuidesTitle": "Video Earning Guides",
+  "buyingGuides": [
+    {
+      "title": "Beginner's Guide to Video Earnings",
+      "description": "Everything you need to know to start earning today",
+      "readTime": "8 min",
+      "link": "/guide/video-earning-basics"
+    },
+    {
+      "title": "Maximizing Passive Income",
+      "description": "Set up automated video watching for consistent earnings",
+      "readTime": "10 min",
+      "link": "/guide/passive-video-income"
+    },
+    {
+      "title": "Avoiding Video Earning Scams",
+      "description": "How to identify legitimate platforms and avoid wasting time",
+      "readTime": "6 min",
+      "link": "/guide/video-scams"
+    }
+  ],
+  "faq": {
+    "title": "Watch Videos for Money FAQ - {country}",
+    "items": [
+      {
+        "question": "Can I really get paid to watch videos?",
+        "answer": "Yes! Legitimate platforms pay users to watch videos as it helps them with advertising metrics and user engagement. You won't get rich, but it's a great way to earn extra cash."
+      },
+      {
+        "question": "How much can I earn watching videos?",
+        "answer": "Most users earn $50-200/month watching videos casually. Dedicated users can earn $300-500+ by using multiple platforms and maximizing earning opportunities."
+      },
+      {
+        "question": "Do I need to watch every video?",
+        "answer": "Many platforms allow videos to play automatically. You can let them run in the background while doing other tasks, though some require occasional interaction."
+      },
+      {
+        "question": "How do I get paid?",
+        "answer": "Most platforms offer PayPal cash, gift cards (Amazon, Walmart, Target), or direct deposit. Minimum payout thresholds typically range from $5-30."
+      },
+      {
+        "question": "Is this available in my country?",
+        "answer": "Availability varies by platform. Most major platforms work in the US, UK, Canada, Australia, and select European countries. Check each platform's terms."
+      },
+      {
+        "question": "Are these platforms safe to use?",
+        "answer": "Yes, we only recommend established, legitimate platforms with positive user reviews. Always use a dedicated email and never share sensitive information."
+      }
+    ]
+  },
+  "final": {
+    "title": "Start Earning Money Watching Videos Today",
+    "subtitle": "Join thousands of users who turned their screen time into real cash",
+    "buttonText": "Start Watching Now"
+  }
+}
