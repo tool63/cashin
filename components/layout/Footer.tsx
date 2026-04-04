@@ -173,8 +173,8 @@ export default function Footer({ className }: FooterProps) {
 
   {/* WAYS TO EARN */}
   <Section id="earn" title={t("waysToEarn", "Ways to Earn")}>
-    <A href="/surveys">{t("surveys", "Surveys")}</A>
-    <A href="/app-installs">{t("appInstalls", "App Installs")}</A>
+    <A href="/earn/surveys">{t("surveys", "Surveys")}</A>
+    <A href="/earn/app-installs">{t("appInstalls", "App Installs")}</A>
     <A href="/play-games">{t("playGames", "Play Games")}</A>
     <A href="/watch-videos">{t("watchVideos", "Watch Videos")}</A>
     <A href="/mining-rewards">{t("miningRewards", "Mining Rewards")}</A>
