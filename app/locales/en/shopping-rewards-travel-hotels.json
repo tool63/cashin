@@ -1,0 +1,436 @@
+{
+  "seo": {
+    "title": "Hotel Cashback - Earn Up to 15% Back on Hotel Bookings in {country} | Cashog",
+    "description": "Book hotels with cashback in {country}. Earn up to 15% back on hotel stays at Booking.com, Expedia, Hotels.com, and more. Save on luxury resorts, budget hotels, and everything in between."
+  },
+  "hero": {
+    "title": "Earn Cashback on Hotel Bookings",
+    "subtitle": "Save money on every hotel stay in {country}. Earn up to 15% cashback when you book through top hotel sites like Booking.com, Expedia, Hotels.com, and more. From budget motels to luxury resorts."
+  },
+  "stats": {
+    "hotelsBooked": "2M+",
+    "savingsAmount": "$25M+",
+    "partnerSites": "50+",
+    "userRating": "4.8"
+  },
+  "bookingSitesTitle": "Top Hotel Booking Sites",
+  "bookingSites": [
+    {
+      "name": "Booking.com",
+      "logo": "🏨",
+      "cashbackRate": "Up to 8%",
+      "description": "World's largest selection of hotels, apartments, and hostels",
+      "features": ["Free cancellation", "Price match", "24/7 support", "Genius loyalty"],
+      "bestFor": ["All travelers", "Best selection", "Flexible bookings"],
+      "link": "/travel/booking"
+    },
+    {
+      "name": "Expedia",
+      "logo": "✈️",
+      "cashbackRate": "Up to 10%",
+      "description": "Hotels, flights, car rentals, and vacation packages",
+      "features": ["Bundle savings", "Member prices", "OneKey rewards", "Free cancellation"],
+      "bestFor": ["Package deals", "Last minute", "US travelers"],
+      "link": "/travel/expedia"
+    },
+    {
+      "name": "Hotels.com",
+      "logo": "🏨",
+      "cashbackRate": "Up to 12%",
+      "description": "Specialized hotel booking with rewards program",
+      "features": ["Collect 10 nights get 1 free", "Secret prices", "Price guarantee", "VIP access"],
+      "bestFor": ["Hotel specialists", "Rewards seekers", "Regular travelers"],
+      "link": "/travel/hotelscom"
+    },
+    {
+      "name": "Agoda",
+      "logo": "🌏",
+      "cashbackRate": "Up to 10%",
+      "description": "Great deals on hotels in Asia and worldwide",
+      "features": ["Flash deals", "Member discounts", "PointsMax rewards", "24/7 support"],
+      "bestFor": ["Asia travel", "Budget stays", "Last minute"],
+      "link": "/travel/agoda"
+    },
+    {
+      "name": "Kayak",
+      "logo": "🔍",
+      "cashbackRate": "Up to 6%",
+      "description": "Hotel price comparison and booking",
+      "features": ["Price alerts", "Travel search", "Deals finder", "Explore tool"],
+      "bestFor": ["Price comparison", "Flexible dates", "Value seekers"],
+      "link": "/travel/kayak"
+    },
+    {
+      "name": "Priceline",
+      "logo": "💰",
+      "cashbackRate": "Up to 8%",
+      "description": "Express deals and name-your-own-price hotels",
+      "features": ["Express deals", "Pricebreakers", "VIP program", "Bundle savings"],
+      "bestFor": ["Express deals", "Name your price", "Budget travelers"],
+      "link": "/travel/priceline"
+    }
+  ],
+  "topDestinationsTitle": "Popular Hotel Destinations",
+  "topDestinations": [
+    {
+      "city": "New York",
+      "country": "USA",
+      "image": "🗽",
+      "hotelCount": 850,
+      "avgCashback": "8%",
+      "link": "/travel/hotels/new-york"
+    },
+    {
+      "city": "London",
+      "country": "UK",
+      "image": "🏰",
+      "hotelCount": 720,
+      "avgCashback": "7%",
+      "link": "/travel/hotels/london"
+    },
+    {
+      "city": "Paris",
+      "country": "France",
+      "image": "🗼",
+      "hotelCount": 680,
+      "avgCashback": "8%",
+      "link": "/travel/hotels/paris"
+    },
+    {
+      "city": "Tokyo",
+      "country": "Japan",
+      "image": "🗻",
+      "hotelCount": 950,
+      "avgCashback": "9%",
+      "link": "/travel/hotels/tokyo"
+    },
+    {
+      "city": "Dubai",
+      "country": "UAE",
+      "image": "🏜️",
+      "hotelCount": 520,
+      "avgCashback": "10%",
+      "link": "/travel/hotels/dubai"
+    },
+    {
+      "city": "Sydney",
+      "country": "Australia",
+      "image": "🏄",
+      "hotelCount": 480,
+      "avgCashback": "7%",
+      "link": "/travel/hotels/sydney"
+    },
+    {
+      "city": "Bangkok",
+      "country": "Thailand",
+      "image": "🏯",
+      "hotelCount": 890,
+      "avgCashback": "12%",
+      "link": "/travel/hotels/bangkok"
+    },
+    {
+      "city": "Las Vegas",
+      "country": "USA",
+      "image": "🎰",
+      "hotelCount": 420,
+      "avgCashback": "6%",
+      "link": "/travel/hotels/las-vegas"
+    }
+  ],
+  "hotelChainsTitle": "Hotel Chain Cashback",
+  "hotelChains": [
+    {
+      "name": "Marriott Bonvoy",
+      "logo": "🏨",
+      "cashbackRate": "Up to 8%",
+      "description": "World's largest hotel portfolio with 30+ brands",
+      "properties": 8000,
+      "benefits": ["Free nights", "Room upgrades", "Late checkout", "Mobile check-in"],
+      "link": "/hotel/marriott"
+    },
+    {
+      "name": "Hilton Honors",
+      "logo": "🏨",
+      "cashbackRate": "Up to 7%",
+      "description": "Premium hotels from luxury to budget",
+      "properties": 7000,
+      "benefits": ["Points pooling", "Digital key", "Free nights", "Diamond status"],
+      "link": "/hotel/hilton"
+    },
+    {
+      "name": "IHG One Rewards",
+      "logo": "🏨",
+      "cashbackRate": "Up to 8%",
+      "description": "InterContinental, Holiday Inn, Kimpton, and more",
+      "properties": 6000,
+      "benefits": ["Reward nights", "Milestone rewards", "Point transfers", "Elite status"],
+      "link": "/hotel/ihg"
+    },
+    {
+      "name": "Accor Live Limitless",
+      "logo": "🏨",
+      "cashbackRate": "Up to 9%",
+      "description": "Fairmont, Sofitel, Novotel, and budget options",
+      "properties": 5000,
+      "benefits": ["Status matches", "Free breakfast", "Room upgrades", "Local experiences"],
+      "link": "/hotel/accor"
+    }
+  ],
+  "hotDealsTitle": "Hot Hotel Deals",
+  "hotDeals": [
+    {
+      "title": "Grand Plaza Beach Resort",
+      "description": "Ocean view suite with breakfast included",
+      "originalPrice": "$399",
+      "salePrice": "$299",
+      "cashbackRate": "12%",
+      "site": "Expedia",
+      "location": "Miami, FL",
+      "rating": 4.8,
+      "image": "🏖️",
+      "link": "/deal/grand-plaza"
+    },
+    {
+      "title": "Mountain View Lodge",
+      "description": "Cozy mountain retreat with spa access",
+      "originalPrice": "$249",
+      "salePrice": "$179",
+      "cashbackRate": "10%",
+      "site": "Booking.com",
+      "location": "Aspen, CO",
+      "rating": 4.6,
+      "image": "⛰️",
+      "link": "/deal/mountain-view"
+    },
+    {
+      "title": "City Center Hotel",
+      "description": "Modern rooms in the heart of downtown",
+      "originalPrice": "$189",
+      "salePrice": "$139",
+      "cashbackRate": "8%",
+      "site": "Hotels.com",
+      "location": "Chicago, IL",
+      "rating": 4.5,
+      "image": "🏙️",
+      "link": "/deal/city-center"
+    },
+    {
+      "title": "Luxury Desert Oasis",
+      "description": "5-star resort with private pools",
+      "originalPrice": "$599",
+      "salePrice": "$449",
+      "cashbackRate": "15%",
+      "site": "Agoda",
+      "location": "Dubai, UAE",
+      "rating": 4.9,
+      "image": "🏜️",
+      "link": "/deal/desert-oasis"
+    },
+    {
+      "title": "Seaside Boutique Hotel",
+      "description": "Charming beachfront property",
+      "originalPrice": "$279",
+      "salePrice": "$209",
+      "cashbackRate": "10%",
+      "site": "Expedia",
+      "location": "Santa Monica, CA",
+      "rating": 4.7,
+      "image": "🌊",
+      "link": "/deal/seaside-boutique"
+    },
+    {
+      "title": "Historic Downtown Inn",
+      "description": "Victorian-era hotel with modern amenities",
+      "originalPrice": "$159",
+      "salePrice": "$119",
+      "cashbackRate": "8%",
+      "site": "Booking.com",
+      "location": "Boston, MA",
+      "rating": 4.4,
+      "image": "🏛️",
+      "link": "/deal/historic-inn"
+    }
+  ],
+  "tipsTitle": "Smart Hotel Booking Tips",
+  "tips": [
+    {
+      "title": "Book Direct vs OTA",
+      "description": "Compare direct booking benefits with OTA cashback offers for best value.",
+      "icon": "🏨"
+    },
+    {
+      "title": "Stack Rewards",
+      "description": "Combine cashback with hotel loyalty programs and credit card points.",
+      "icon": "📚"
+    },
+    {
+      "title": "Flexible Dates",
+      "description": "Use flexible date search to find lower rates and higher cashback.",
+      "icon": "📅"
+    },
+    {
+      "title": "Last Minute Deals",
+      "description": "Check last-minute apps for same-day booking discounts plus cashback.",
+      "icon": "⚡"
+    }
+  ],
+  "comparisonTitle": "Compare Booking Sites",
+  "comparison": {
+    "description": "Find the best cashback rates for your hotel stay",
+    "sites": [
+      {
+        "name": "Booking.com",
+        "cashbackRate": "Up to 8%",
+        "priceMatch": "✓",
+        "freeCancellation": "Most properties",
+        "loyaltyProgram": "Genius",
+        "rating": 4.7
+      },
+      {
+        "name": "Expedia",
+        "cashbackRate": "Up to 10%",
+        "priceMatch": "✓",
+        "freeCancellation": "Most properties",
+        "loyaltyProgram": "OneKey",
+        "rating": 4.6
+      },
+      {
+        "name": "Hotels.com",
+        "cashbackRate": "Up to 12%",
+        "priceMatch": "✓",
+        "freeCancellation": "Most properties",
+        "loyaltyProgram": "Rewards",
+        "rating": 4.5
+      },
+      {
+        "name": "Agoda",
+        "cashbackRate": "Up to 10%",
+        "priceMatch": "Limited",
+        "freeCancellation": "Varies",
+        "loyaltyProgram": "PointsMax",
+        "rating": 4.4
+      }
+    ]
+  },
+  "lastMinuteDealsTitle": "Last Minute Hotel Deals",
+  "lastMinuteDeals": [
+    {
+      "title": "Tonight Only: Luxury Suite",
+      "description": "50% off premium suite + late checkout",
+      "originalPrice": "$450",
+      "salePrice": "$225",
+      "cashbackRate": "12%",
+      "site": "Hotels.com",
+      "location": "Las Vegas, NV",
+      "rating": 4.7,
+      "image": "🎰",
+      "link": "/deal/last-minute-vegas"
+    },
+    {
+      "title": "Beachfront Flash Sale",
+      "description": "24-hour sale on ocean view rooms",
+      "originalPrice": "$320",
+      "salePrice": "$199",
+      "cashbackRate": "10%",
+      "site": "Expedia",
+      "location": "San Diego, CA",
+      "rating": 4.6,
+      "image": "🏖️",
+      "link": "/deal/beach-flash"
+    },
+    {
+      "title": "Downtown Weekend Special",
+      "description": "Limited rooms at reduced rates",
+      "originalPrice": "$210",
+      "salePrice": "$149",
+      "cashbackRate": "8%",
+      "site": "Booking.com",
+      "location": "Austin, TX",
+      "rating": 4.5,
+      "image": "🎸",
+      "link": "/deal/downtown-weekend"
+    }
+  ],
+  "luxuryCollectionTitle": "Luxury Hotel Collection",
+  "luxuryCollection": [
+    {
+      "name": "Four Seasons",
+      "logo": "👑",
+      "cashbackRate": "Up to 6%",
+      "description": "Ultimate luxury with personalized service and exceptional amenities worldwide.",
+      "locations": ["New York", "Paris", "Tokyo", "Beverly Hills"],
+      "link": "/luxury/four-seasons"
+    },
+    {
+      "name": "Ritz-Carlton",
+      "logo": "🦁",
+      "cashbackRate": "Up to 7%",
+      "description": "Iconic luxury hotels known for impeccable service and club level experiences.",
+      "locations": ["London", "Hong Kong", "Miami", "Dubai"],
+      "link": "/luxury/ritz-carlton"
+    },
+    {
+      "name": "Waldorf Astoria",
+      "logo": "🌲",
+      "cashbackRate": "Up to 6%",
+      "description": "Legendary luxury hotels with world-class spas and dining experiences.",
+      "locations": ["New York", "Beverly Hills", "Rome", "Amsterdam"],
+      "link": "/luxury/waldorf"
+    },
+    {
+      "name": "St. Regis",
+      "logo": "👔",
+      "cashbackRate": "Up to 7%",
+      "description": "Timeless elegance with signature butler service and champagne sabering rituals.",
+      "locations": ["Aspen", "Bora Bora", "Singapore", "Maldives"],
+      "link": "/luxury/st-regis"
+    }
+  ],
+  "priceMatch": {
+    "title": "Found a Better Rate?",
+    "description": "We'll help you find the best hotel cashback rates. Compare rates across booking sites and maximize your savings on every stay.",
+    "buttonText": "Compare Hotel Rates"
+  },
+  "faq": {
+    "title": "Hotel Cashback FAQ - {country}",
+    "items": [
+      {
+        "question": "How do I earn cashback on hotel bookings?",
+        "answer": "Simply click through Cashog to your preferred hotel booking site, complete your reservation as usual, and cashback will be automatically tracked and added to your account."
+      },
+      {
+        "question": "Can I combine cashback with hotel loyalty programs?",
+        "answer": "Yes! Most hotel booking sites allow you to earn both cashback and loyalty points simultaneously. Just make sure to enter your loyalty number during checkout."
+      },
+      {
+        "question": "How long does hotel cashback take to confirm?",
+        "answer": "Hotel cashback typically takes 30-60 days to confirm after your stay is completed. This accounts for cancellation periods and stay verification."
+      },
+      {
+        "question": "What if I need to cancel my booking?",
+        "answer": "If you cancel a booking, the cashback will not be credited. If you've already received it, it will be deducted from your account."
+      },
+      {
+        "question": "Do all hotels qualify for cashback?",
+        "answer": "Most hotels on our partner sites qualify, but some exclusions may apply (e.g., non-refundable rates, certain chains). Check site terms for details."
+      },
+      {
+        "question": "Can I earn cashback on prepaid hotel bookings?",
+        "answer": "Yes! Prepaid bookings are eligible for cashback. The cashback will be confirmed after your stay is completed."
+      },
+      {
+        "question": "What about Airbnb and vacation rentals?",
+        "answer": "Yes! Many vacation rental platforms like Airbnb and Vrbo are also eligible for cashback through our partner sites."
+      },
+      {
+        "question": "Do I need to book directly through Cashog every time?",
+        "answer": "Yes, to ensure cashback tracking, you must start your booking session by clicking through Cashog to the partner site."
+      }
+    ]
+  },
+  "final": {
+    "title": "Start Saving on Hotel Stays Today",
+    "subtitle": "Join thousands of travelers earning cashback on every hotel booking",
+    "buttonText": "Book Hotels with Cashback"
+  }
+}
