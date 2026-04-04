@@ -1,0 +1,351 @@
+{
+  "seo": {
+    "title": "Cashback Shopping - Earn Money Back on Every Purchase in {country} | Cashog",
+    "description": "Earn cashback on every online purchase in {country}. Sign up free and get paid to shop at 10,000+ stores. Up to 15% cashback + exclusive deals."
+  },
+  "hero": {
+    "title": "Earn Cashback on Every Purchase",
+    "subtitle": "Join over 500,000 smart shoppers in {country} earning cashback at 10,000+ stores. Get paid to shop for fashion, electronics, beauty, travel, and more. It's completely free!"
+  },
+  "stats": {
+    "totalCashback": "$50M+",
+    "activeUsers": "500K+",
+    "partnerStores": "10,000+",
+    "satisfactionRate": "98%"
+  },
+  "howItWorksTitle": "How Cashback Works",
+  "howItWorks": [
+    {
+      "step": 1,
+      "title": "Sign Up Free",
+      "description": "Create your free Cashog account in seconds",
+      "icon": "📝"
+    },
+    {
+      "step": 2,
+      "title": "Shop Through Cashog",
+      "description": "Click your favorite store from our partner list",
+      "icon": "🛒"
+    },
+    {
+      "step": 3,
+      "title": "Earn Cashback",
+      "description": "Cashback is automatically added to your account",
+      "icon": "💰"
+    },
+    {
+      "step": 4,
+      "title": "Withdraw Your Money",
+      "description": "Get paid via PayPal, bank transfer, or gift cards",
+      "icon": "💵"
+    }
+  ],
+  "categoriesTitle": "Shop by Category",
+  "categories": [
+    {
+      "name": "Fashion",
+      "icon": "👕",
+      "description": "Clothing, shoes, accessories",
+      "storeCount": 2500,
+      "avgCashback": "8%"
+    },
+    {
+      "name": "Electronics",
+      "icon": "📱",
+      "description": "Laptops, phones, gaming",
+      "storeCount": 1800,
+      "avgCashback": "6%"
+    },
+    {
+      "name": "Beauty",
+      "icon": "💄",
+      "description": "Makeup, skincare, haircare",
+      "storeCount": 1200,
+      "avgCashback": "10%"
+    },
+    {
+      "name": "Home & Garden",
+      "icon": "🏠",
+      "description": "Furniture, decor, tools",
+      "storeCount": 1500,
+      "avgCashback": "7%"
+    },
+    {
+      "name": "Travel",
+      "icon": "✈️",
+      "description": "Flights, hotels, rentals",
+      "storeCount": 800,
+      "avgCashback": "5%"
+    },
+    {
+      "name": "Health & Wellness",
+      "icon": "💪",
+      "description": "Vitamins, fitness, pharmacy",
+      "storeCount": 900,
+      "avgCashback": "9%"
+    },
+    {
+      "name": "Toys & Games",
+      "icon": "🎮",
+      "description": "Games, puzzles, collectibles",
+      "storeCount": 700,
+      "avgCashback": "6%"
+    },
+    {
+      "name": "Groceries",
+      "icon": "🛒",
+      "description": "Food delivery, meal kits",
+      "storeCount": 600,
+      "avgCashback": "5%"
+    }
+  ],
+  "featuredStoresTitle": "Top Cashback Stores",
+  "featuredStores": [
+    {
+      "name": "Amazon",
+      "logo": "📦",
+      "cashbackRate": "Up to 10%",
+      "description": "Millions of products with fast shipping",
+      "categories": ["Electronics", "Home", "Fashion"],
+      "features": ["Prime eligible", "30-day returns", "Price tracking"],
+      "link": "/store/amazon"
+    },
+    {
+      "name": "Walmart",
+      "logo": "🛒",
+      "cashbackRate": "Up to 8%",
+      "description": "Everyday low prices on everything",
+      "categories": ["Groceries", "Electronics", "Home"],
+      "features": ["Free pickup", "Free shipping", "Price match"],
+      "link": "/store/walmart"
+    },
+    {
+      "name": "Target",
+      "logo": "🎯",
+      "cashbackRate": "Up to 10%",
+      "description": "Style, home, electronics, and more",
+      "categories": ["Fashion", "Home", "Beauty"],
+      "features": ["Circle offers", "Drive Up", "RedCard savings"],
+      "link": "/store/target"
+    },
+    {
+      "name": "eBay",
+      "logo": "🔨",
+      "cashbackRate": "Up to 8%",
+      "description": "New and used items from around the world",
+      "categories": ["Electronics", "Fashion", "Collectibles"],
+      "features": ["Authenticity guarantee", "Best price", "Buyer protection"],
+      "link": "/store/ebay"
+    },
+    {
+      "name": "Best Buy",
+      "logo": "💻",
+      "cashbackRate": "Up to 6%",
+      "description": "Electronics, appliances, and more",
+      "categories": ["Electronics", "Gaming", "Appliances"],
+      "features": ["Price match", "Geek Squad", "Free shipping"],
+      "link": "/store/bestbuy"
+    },
+    {
+      "name": "Sephora",
+      "logo": "💄",
+      "cashbackRate": "Up to 12%",
+      "description": "Beauty products from top brands",
+      "categories": ["Makeup", "Skincare", "Fragrance"],
+      "features": ["Beauty Insider", "Free samples", "Free shipping"],
+      "link": "/store/sephora"
+    }
+  ],
+  "topCashbackTitle": "Highest Cashback Rates",
+  "topCashback": [
+    {
+      "store": "Sephora",
+      "logo": "💄",
+      "cashbackRate": "12%",
+      "category": "Beauty",
+      "link": "/store/sephora"
+    },
+    {
+      "store": "Dell",
+      "logo": "💻",
+      "cashbackRate": "12%",
+      "category": "Electronics",
+      "link": "/store/dell"
+    },
+    {
+      "store": "ASOS",
+      "logo": "👕",
+      "cashbackRate": "10%",
+      "category": "Fashion",
+      "link": "/store/asos"
+    },
+    {
+      "store": "Ulta",
+      "logo": "💄",
+      "cashbackRate": "10%",
+      "category": "Beauty",
+      "link": "/store/ulta"
+    },
+    {
+      "store": "Wayfair",
+      "logo": "🏠",
+      "cashbackRate": "10%",
+      "category": "Home",
+      "link": "/store/wayfair"
+    },
+    {
+      "store": "Expedia",
+      "logo": "✈️",
+      "cashbackRate": "8%",
+      "category": "Travel",
+      "link": "/store/expedia"
+    }
+  ],
+  "tipsTitle": "Maximize Your Cashback",
+  "tips": [
+    {
+      "title": "Always Start Here",
+      "description": "Always start your shopping session by clicking through Cashog to ensure cashback tracking.",
+      "icon": "🎯"
+    },
+    {
+      "title": "Stack with Coupons",
+      "description": "Use store coupons and promo codes on top of cashback for maximum savings.",
+      "icon": "📚"
+    },
+    {
+      "title": "Check Exclusions",
+      "description": "Some categories may be excluded. Check store terms before purchasing.",
+      "icon": "📋"
+    },
+    {
+      "title": "Refer Friends",
+      "description": "Earn bonus cashback when friends join and start shopping through Cashog.",
+      "icon": "👥"
+    }
+  ],
+  "testimonialsTitle": "What Our Members Say",
+  "testimonials": [
+    {
+      "name": "Sarah Johnson",
+      "location": "New York",
+      "amount": "1,247",
+      "text": "Cashog has completely changed how I shop online. I've earned over $1,000 cashback just by shopping as I normally would!",
+      "avatar": "SJ"
+    },
+    {
+      "name": "Michael Chen",
+      "location": "California",
+      "amount": "892",
+      "text": "The cashback adds up so fast. I check Cashog before every purchase now. Best decision ever!",
+      "avatar": "MC"
+    },
+    {
+      "name": "Emily Rodriguez",
+      "location": "Texas",
+      "amount": "2,103",
+      "text": "From electronics to everyday essentials, I earn cashback on everything. The payouts are fast and reliable.",
+      "avatar": "ER"
+    }
+  ],
+  "calculator": {
+    "title": "Calculate Your Cashback",
+    "description": "See how much you could earn",
+    "placeholder": "Enter monthly spending amount",
+    "buttonText": "Calculate"
+  },
+  "compareTitle": "Why Cashog is Better",
+  "compare": {
+    "description": "Compare Cashog with other cashback platforms",
+    "features": [
+      {
+        "name": "Cashback Rates",
+        "cashog": "Up to 15%",
+        "others": "Up to 10%"
+      },
+      {
+        "name": "Payout Speed",
+        "cashog": "2-3 days",
+        "others": "30-60 days"
+      },
+      {
+        "name": "Minimum Withdrawal",
+        "cashog": "$10",
+        "others": "$20+"
+      },
+      {
+        "name": "Free to Join",
+        "cashog": "✓",
+        "others": "✓"
+      },
+      {
+        "name": "Mobile App",
+        "cashog": "✓",
+        "others": "✓"
+      },
+      {
+        "name": "Referral Bonus",
+        "cashog": "$25",
+        "others": "$10"
+      }
+    ]
+  },
+  "mobileApp": {
+    "title": "Cashback on the Go",
+    "subtitle": "Earn cashback from anywhere with our mobile app",
+    "features": [
+      "Shop on your phone",
+      "Track cashback in real-time",
+      "Get in-store offers",
+      "Instant payout alerts"
+    ],
+    "buttonText": "Download the App"
+  },
+  "priceMatch": {
+    "title": "Found a Better Rate?",
+    "description": "We'll help you find the best cashback rates. Compare our rates with other platforms and see the difference.",
+    "buttonText": "Compare Cashback"
+  },
+  "faq": {
+    "title": "Cashback FAQ - {country}",
+    "items": [
+      {
+        "question": "How does cashback work?",
+        "answer": "When you click through Cashog to a partner store and make a purchase, the store pays us a commission. We share that commission with you as cashback."
+      },
+      {
+        "question": "Is Cashog really free?",
+        "answer": "Yes! Cashog is completely free to join and use. There are no hidden fees or subscription costs."
+      },
+      {
+        "question": "How long does cashback take?",
+        "answer": "Cashback is typically confirmed within 30-90 days, depending on the store's return policy. Once confirmed, you can withdraw it immediately."
+      },
+      {
+        "question": "How do I withdraw my cashback?",
+        "answer": "You can withdraw via PayPal, bank transfer, or gift cards once you reach the $10 minimum withdrawal amount."
+      },
+      {
+        "question": "Can I use coupons with cashback?",
+        "answer": "Yes! You can stack store coupons and promo codes with our cashback for even more savings."
+      },
+      {
+        "question": "What if my cashback doesn't track?",
+        "answer": "If cashback doesn't appear within 7 days, you can submit a missing cashback claim with your order details."
+      },
+      {
+        "question": "How do I refer friends?",
+        "answer": "Share your unique referral link with friends. When they join and earn cashback, you'll both get a bonus."
+      },
+      {
+        "question": "Is my personal information safe?",
+        "answer": "Absolutely. We take privacy and security seriously. We never sell your personal information to third parties."
+      }
+    ]
+  },
+  "final": {
+    "title": "Start Earning Cashback Today",
+    "subtitle": "Join over 500,000 smart shoppers already earning cashback on their everyday purchases",
+    "buttonText": "Sign Up Free"
+  }
+}
