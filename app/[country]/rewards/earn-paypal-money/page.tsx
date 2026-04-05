@@ -2,7 +2,6 @@
 
 import { cookies } from "next/headers";
 import { Metadata } from "next";
-import { Suspense } from "react";
 
 import {
   getCountry,
@@ -525,6 +524,7 @@ export default async function EarnPaypalMoneyPage({
     buttonText: t(tData?.final?.buttonText, "Join Free & Start Earning 💙"),
   };
 
+  // JSX Return
   return (
     <main className="flex flex-col items-center w-full overflow-x-hidden">
       {structuredData && (
@@ -542,10 +542,10 @@ export default async function EarnPaypalMoneyPage({
         <div className="absolute -bottom-40 left-20 w-80 h-80 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse animation-delay-4000" />
       </div>
 
-      {/* Hero Section with Premium Design */}
+      {/* Hero Section */}
       <CircleBorder>
         <OpeningStyle delay={0.1}>
-          <section className="relative max-w-7xl mx-auto px-6 py-24 md:py-32 text-center overflow-hidden">
+          <div className="relative max-w-7xl mx-auto px-6 py-24 md:py-32 text-center overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-transparent to-purple-600/5 rounded-3xl" />
             <div className="relative z-10">
               <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-white/20">
@@ -577,20 +577,20 @@ export default async function EarnPaypalMoneyPage({
               </div>
               <PrimaryCTA href="/signup" translationKey="start_earning" observer={true} />
             </div>
-          </section>
+          </div>
         </OpeningStyle>
       </CircleBorder>
 
-      {/* Live Offers Ticker - Marquee Style */}
+      {/* Live Offers Ticker */}
       <CircleBorder>
         <OpeningStyle delay={0.1}>
-          <section className="max-w-7xl mx-auto px-6 py-12">
+          <div className="max-w-7xl mx-auto px-6 py-12">
             <div className="relative overflow-hidden">
               <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white dark:from-gray-900 to-transparent z-10" />
               <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white dark:from-gray-900 to-transparent z-10" />
-              <div className="animate-marquee whitespace-nowrap">
+              <div className="flex overflow-x-auto whitespace-nowrap gap-2 pb-4 scrollbar-hide">
                 {[...liveOffersData.offers, ...liveOffersData.offers].map((offer, idx) => (
-                  <div key={idx} className="inline-block mx-2">
+                  <div key={idx} className="inline-block mx-2 flex-shrink-0">
                     <div className="inline-flex items-center gap-3 bg-white dark:bg-gray-800 rounded-full px-4 py-2 shadow-lg border border-gray-100 dark:border-gray-700">
                       <div className={`w-2 h-2 rounded-full ${offer.isPaypal ? 'bg-blue-500 animate-pulse' : 'bg-green-500'}`} />
                       <span className="font-medium text-sm">{offer.user}</span>
@@ -603,14 +603,14 @@ export default async function EarnPaypalMoneyPage({
               </div>
             </div>
             <p className="text-center text-xs text-gray-500 mt-4">{liveOffersData.title}</p>
-          </section>
+          </div>
         </OpeningStyle>
       </CircleBorder>
 
-      {/* PayPal Amounts - Glassmorphism Cards */}
+      {/* PayPal Amounts Section */}
       <CircleBorder>
         <OpeningStyle delay={0.1}>
-          <section className="max-w-5xl mx-auto px-6 py-12">
+          <div className="max-w-5xl mx-auto px-6 py-12">
             <div className="relative bg-gradient-to-br from-blue-600/10 via-purple-600/10 to-pink-600/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-2xl">
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                 <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full text-sm font-semibold shadow-lg">
@@ -636,20 +636,19 @@ export default async function EarnPaypalMoneyPage({
                     <p className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">${amount.amount}</p>
                     <p className="text-xs text-gray-500 mt-1">PayPal</p>
                     {amount.bonus && <p className="text-xs text-green-500 font-semibold mt-1">{amount.bonus} bonus</p>}
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600/0 to-purple-600/0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
                 ))}
               </div>
               <p className="text-center text-xs text-gray-500 mt-6">*Minimum cashout: $5. Instant delivery to your PayPal account.</p>
             </div>
-          </section>
+          </div>
         </OpeningStyle>
       </CircleBorder>
 
-      {/* Earning Methods - Premium Cards with 3D Hover */}
+      {/* Earning Methods Section */}
       <CircleBorder>
         <OpeningStyle delay={0.1}>
-          <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
+          <div className="max-w-7xl mx-auto px-6 py-24 md:py-32">
             <div className="text-center mb-16">
               <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 dark:from-white dark:via-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
                 {earningMethodsData.title}
@@ -669,7 +668,7 @@ export default async function EarnPaypalMoneyPage({
                     <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{method.name}</h3>
                     <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">{method.description}</p>
                     <div className="space-y-2 mb-4">
-                      {method.examples.map((example, idx) => (
+                      {method.examples.slice(0, 3).map((example, idx) => (
                         <div key={idx} className="flex justify-between items-center text-sm bg-gray-50 dark:bg-gray-700/50 rounded-lg p-2">
                           <span className="text-gray-700 dark:text-gray-300">{example.title}</span>
                           <div className="flex items-center gap-2">
@@ -687,14 +686,14 @@ export default async function EarnPaypalMoneyPage({
                 </div>
               ))}
             </div>
-          </section>
+          </div>
         </OpeningStyle>
       </CircleBorder>
 
-      {/* 3 Steps - Animated Progress */}
+      {/* 3 Steps Section */}
       <CircleBorder>
         <OpeningStyle delay={0.1}>
-          <section className="max-w-7xl mx-auto px-6 py-24 md:py-32 bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 dark:from-gray-800 dark:via-gray-800 dark:to-gray-900 rounded-3xl my-8">
+          <div className="max-w-7xl mx-auto px-6 py-24 md:py-32 bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 dark:from-gray-800 dark:via-gray-800 dark:to-gray-900 rounded-3xl my-8">
             <div className="text-center mb-16">
               <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 {stepsData.title}
@@ -702,12 +701,10 @@ export default async function EarnPaypalMoneyPage({
               <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mt-4 rounded-full" />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
-              {/* Connecting Line */}
-              <div className="hidden md:block absolute top-1/3 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-300 via-purple-300 to-pink-300 -translate-y-1/2" />
-              {stepsData.steps.map((step, idx) => (
+              {stepsData.steps.map((step) => (
                 <div key={step.step} className="relative text-center group">
                   <div className="relative z-10 w-24 h-24 mx-auto mb-6">
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full animate-pulse-slow opacity-75" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full animate-pulse opacity-75" />
                     <div className="relative w-full h-full bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white text-4xl font-bold shadow-xl transform group-hover:scale-110 transition-transform duration-300">
                       {step.step}
                     </div>
@@ -721,14 +718,14 @@ export default async function EarnPaypalMoneyPage({
             <div className="text-center mt-12">
               <PrimaryCTA href="/signup" translationKey="join_free_now" observer={true} />
             </div>
-          </section>
+          </div>
         </OpeningStyle>
       </CircleBorder>
 
       {/* Live Activity Feed */}
       <CircleBorder>
         <OpeningStyle delay={0.1}>
-          <section className="max-w-4xl mx-auto px-6 py-24 md:py-32">
+          <div className="max-w-4xl mx-auto px-6 py-24 md:py-32">
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white mb-2">{activityFeedData.title}</h2>
               <p className="text-gray-500">Real-time earnings from our community</p>
@@ -757,7 +754,7 @@ export default async function EarnPaypalMoneyPage({
                 </div>
               ))}
             </div>
-          </section>
+          </div>
         </OpeningStyle>
       </CircleBorder>
 
@@ -765,7 +762,7 @@ export default async function EarnPaypalMoneyPage({
       {tasksData.tasks.length > 0 && (
         <CircleBorder>
           <OpeningStyle delay={0.1}>
-            <section className="max-w-7xl mx-auto px-6 py-24 md:py-32 bg-gradient-to-r from-gray-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 rounded-3xl my-8">
+            <div className="max-w-7xl mx-auto px-6 py-24 md:py-32 bg-gradient-to-r from-gray-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 rounded-3xl my-8">
               <div className="text-center mb-12">
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-2">{tasksData.title}</h2>
                 <p className="text-gray-500">Complete these tasks and get paid instantly</p>
@@ -797,15 +794,15 @@ export default async function EarnPaypalMoneyPage({
                   </div>
                 ))}
               </div>
-            </section>
+            </div>
           </OpeningStyle>
         </CircleBorder>
       )}
 
-      {/* Earnings Estimate - Animated Counter Card */}
+      {/* Earnings Estimate */}
       <CircleBorder>
         <OpeningStyle delay={0.1}>
-          <section className="max-w-4xl mx-auto px-6 py-24 md:py-32 text-center">
+          <div className="max-w-4xl mx-auto px-6 py-24 md:py-32 text-center">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">How Much Can You Earn?</h2>
             <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mt-4 rounded-full mb-12" />
             <div className="bg-gradient-to-br from-blue-600 to-purple-600 rounded-3xl p-8 shadow-2xl text-white">
@@ -827,15 +824,15 @@ export default async function EarnPaypalMoneyPage({
                 <p className="text-xs opacity-70">{earningsEstimateData.disclaimer}</p>
               </div>
             </div>
-          </section>
+          </div>
         </OpeningStyle>
       </CircleBorder>
 
-      {/* User Reviews - Testimonial Cards */}
+      {/* User Reviews */}
       {userReviewsData.reviews.length > 0 && (
         <CircleBorder>
           <OpeningStyle delay={0.1}>
-            <section className="max-w-7xl mx-auto px-6 py-24 md:py-32">
+            <div className="max-w-7xl mx-auto px-6 py-24 md:py-32">
               <div className="text-center mb-12">
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-2">{userReviewsData.title}</h2>
                 <p className="text-gray-500">Join 20M+ satisfied users worldwide</p>
@@ -866,7 +863,7 @@ export default async function EarnPaypalMoneyPage({
                   </div>
                 ))}
               </div>
-            </section>
+            </div>
           </OpeningStyle>
         </CircleBorder>
       )}
@@ -886,10 +883,10 @@ export default async function EarnPaypalMoneyPage({
         </CircleBorder>
       )}
 
-      {/* Final CTA - Premium Footer */}
+      {/* Final CTA */}
       <CircleBorder>
         <OpeningStyle delay={0.1}>
-          <section className="relative max-w-6xl mx-auto px-6 py-24 md:py-32 text-center my-8 overflow-hidden rounded-3xl">
+          <div className="relative max-w-6xl mx-auto px-6 py-24 md:py-32 text-center my-8 overflow-hidden rounded-3xl">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600" />
             <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.1"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-10" />
             <div className="relative z-10">
@@ -899,7 +896,7 @@ export default async function EarnPaypalMoneyPage({
               <PrimaryCTA href="/signup" translationKey={finalData.buttonText} observer={true} />
               <p className="text-sm text-white/70 mt-6">✓ No credit card required ✓ 100% free to join ✓ Instant payouts</p>
             </div>
-          </section>
+          </div>
         </OpeningStyle>
       </CircleBorder>
     </main>
