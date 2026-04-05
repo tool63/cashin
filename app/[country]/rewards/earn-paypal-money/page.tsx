@@ -506,15 +506,24 @@ export default async function EarnPaypalMoneyPage({
     disclaimer: tData?.earningsEstimate?.disclaimer || "Earnings depend on your location, activity, and offer availability.",
   };
 
+  // Fix: Properly map FAQ items
+  const defaultFaqItems = [
+    { question: "Can I withdraw PayPal balance to my bank account?", answer: "Yes! Once money is in your PayPal account, you can transfer it to your linked bank account for free (1-3 business days) or instantly for a small fee." },
+    { question: "Are there any fees for using PayPal?", answer: "Receiving money to PayPal is completely free. PayPal may charge fees for currency conversion or instant transfers to your bank." },
+    { question: "How long will it take me to earn a PayPal gift card?", answer: "Most users earn their first $5-$10 within 1-2 hours. With consistent effort, many earn $100+ per month." },
+    { question: "What will I need to sign up and start earning?", answer: "Just an email address or Google/Facebook account. No credit card or payment required to start." },
+    { question: "Is this available in my country?", answer: "Yes! Our platform is available in over 130 countries worldwide. Minimum withdrawal amounts may vary by region." },
+  ];
+
+  const faqItems = tData?.faq?.items || defaultFaqItems;
+  const mappedFaqItems = faqItems.map((item) => ({ 
+    q: t(item.question, item.question), 
+    a: t(item.answer, item.answer) 
+  }));
+
   const faqData = {
     title: t(tData?.faq?.title, `Earn PayPal Money FAQ - ${countryName}`),
-    items: (tData?.faq?.items || [
-      { question: "Can I withdraw PayPal balance to my bank account?", answer: "Yes! Once money is in your PayPal account, you can transfer it to your linked bank account for free (1-3 business days) or instantly for a small fee." },
-      { question: "Are there any fees for using PayPal?", answer: "Receiving money to PayPal is completely free. PayPal may charge fees for currency conversion or instant transfers to your bank." },
-      { question: "How long will it take me to earn a PayPal gift card?", answer: "Most users earn their first $5-$10 within 1-2 hours. With consistent effort, many earn $100+ per month." },
-      { question: "What will I need to sign up and start earning?", answer: "Just an email address or Google/Facebook account. No credit card or payment required to start." },
-      { question: "Is this available in my country?", answer: "Yes! Our platform is available in over 130 countries worldwide. Minimum withdrawal amounts may vary by region." },
-    ]).map((item) => ({ q: t(item.question, item.question), a: t(item.answer, item.answer) })),
+    items: mappedFaqItems,
   };
 
   const finalData = {
