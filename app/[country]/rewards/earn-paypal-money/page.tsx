@@ -1,4 +1,4 @@
-// app/[country]/rewards/earn-paypal-money/page.tsx
+// app/[country]/(marketing)/earn-paypal-money/page.tsx
 
 import { cookies } from "next/headers";
 import { Metadata } from "next";
@@ -19,65 +19,10 @@ import type { SupportedLanguage } from "@/app/core/types";
 import { generateJsonLd } from "@/components/SEO/schema";
 import PrimaryCTA from "@/components/cta/PrimaryCTA";
 import CircleBorder from "@/components/animations/CircleBorder";
+import OpeningStyle from "@/components/animations/openingstyle";
 import FAQ from "@/components/animations/FAQ";
 
 /* ================= TYPES ================= */
-
-interface EarningMethod {
-  name: string;
-  icon: string;
-  description: string;
-  examples: Array<{
-    title: string;
-    reward: string;
-    duration?: string;
-    action?: string;
-  }>;
-  link: string;
-  gradient: string;
-  stats: string;
-}
-
-interface PaypalAmount {
-  amount: number;
-  isPopular?: boolean;
-  bonus?: string;
-}
-
-interface UserReview {
-  name: string;
-  text: string;
-  rating: number;
-  achievement?: string;
-  avatar?: string;
-  date?: string;
-}
-
-interface LiveOffer {
-  platform: string;
-  user: string;
-  amount: number;
-  isPaypal?: boolean;
-  timestamp?: string;
-}
-
-interface Task {
-  title: string;
-  reward: string;
-  action?: string;
-  platform?: string;
-  difficulty?: "Easy" | "Medium" | "Hard";
-  popular?: boolean;
-}
-
-interface ActivityItem {
-  user: string;
-  action: string;
-  amount: number;
-  platform: string;
-  timestamp: string;
-  avatar?: string;
-}
 
 interface TranslationSection {
   seo?: {
@@ -88,34 +33,66 @@ interface TranslationSection {
     title?: string;
     subtitle?: string;
   };
-  liveOffersTitle?: string;
-  liveOffers?: LiveOffer[];
-  paypalAmounts?: PaypalAmount[];
-  earningMethodsTitle?: string;
-  earningMethods?: EarningMethod[];
-  stepsTitle?: string;
-  steps?: Array<{
-    step: number;
+  statsTitle?: string;
+  stats?: {
+    totalEarned?: string;
+    totalEarnedLabel?: string;
+    activeUsers?: string;
+    activeUsersLabel?: string;
+    avgPayout?: string;
+    avgPayoutLabel?: string;
+    withdrawalSpeed?: string;
+    withdrawalSpeedLabel?: string;
+  };
+  methodsTitle?: string;
+  methodsSubtitle?: string;
+  paymentMethods?: Array<{
+    icon: string;
+    name: string;
+    description: string;
+    processingTime: string;
+    minWithdrawal: string;
+    fee: string;
+  }>;
+  earningWaysTitle?: string;
+  earningWaysSubtitle?: string;
+  earningWays?: Array<{
+    icon: string;
     title: string;
     description: string;
-    icon: string;
+    avgEarnings: string;
+    timeRequired: string;
   }>;
-  userReviewsTitle?: string;
-  userReviews?: UserReview[];
-  earningsEstimate?: {
-    timeMinutes: number;
-    platformEarnings: string;
-    otherPlatformsEarnings: string;
-    disclaimer: string;
-  };
-  tasks?: {
+  featuredOffersTitle?: string;
+  featuredOffersSubtitle?: string;
+  featuredOffers?: Array<{
     title: string;
-    tasks: Task[];
-  };
-  activityFeed?: {
+    reward: string;
+    timeEstimate: string;
+    difficulty: "Easy" | "Medium" | "Hard";
+    spotsLeft: number;
+    provider: string;
+    rating: string;
+  }>;
+  benefitsTitle?: string;
+  benefits?: Array<{
+    icon: string;
     title: string;
-    activities: ActivityItem[];
-  };
+    description: string;
+  }>;
+  tipsTitle?: string;
+  tips?: Array<{
+    title: string;
+    description: string;
+  }>;
+  testimonialsTitle?: string;
+  testimonials?: Array<{
+    name: string;
+    country: string;
+    earnings: string;
+    quote: string;
+    avatar: string;
+  }>;
   faq?: {
     title?: string;
     items?: Array<{
@@ -126,7 +103,6 @@ interface TranslationSection {
   final?: {
     title?: string;
     subtitle?: string;
-    buttonText?: string;
   };
 }
 
@@ -167,35 +143,86 @@ function getLanguage(country: CountryCode): SupportedLanguage {
   return getCountry(country).defaultLanguage as SupportedLanguage;
 }
 
-const replacePlaceholders = (text: string, countryName: string): string => {
+// Helper to replace {country} placeholder
+const replaceCountryPlaceholder = (text: string, countryName: string): string => {
   if (!text) return "";
   return text.replace(/\{country\}/g, countryName);
 };
 
+// Dynamic keywords based on country type for PayPal earnings
 const getCountrySpecificKeywords = (countryName: string, countryCode: string): string[] => {
   const lowerCountry = countryName.toLowerCase();
   
   const baseKeywords = [
     `earn paypal money ${lowerCountry}`,
-    `free paypal money ${lowerCountry}`,
-    `get paypal gift cards ${lowerCountry}`,
-    `paypal cash rewards ${lowerCountry}`,
     `make money paypal ${lowerCountry}`,
-    `free paypal cash ${lowerCountry}`,
-    `earn paypal instantly ${lowerCountry}`,
-    `paypal money online ${lowerCountry}`,
-    `free paypal gift card ${lowerCountry}`,
     `get paid to paypal ${lowerCountry}`,
+    `earn money online paypal ${lowerCountry}`,
+    `paypal money earning apps ${lowerCountry}`,
+    `free paypal money ${lowerCountry}`,
+    `how to earn paypal money ${lowerCountry}`,
+    `make money online paypal ${lowerCountry}`,
+    `earn cash to paypal ${lowerCountry}`,
+    `paypal earning methods ${lowerCountry}`,
+    `get money on paypal ${lowerCountry}`,
+    `earn real money paypal ${lowerCountry}`,
+    `paypal cash earning ${lowerCountry}`,
+    `best paypal earning apps ${lowerCountry}`,
+    `legit paypal money makers ${lowerCountry}`,
+    `earn $10 paypal ${lowerCountry}`,
+    `paypal money from phone ${lowerCountry}`,
+    `instant paypal money ${lowerCountry}`,
+    `paypal earning sites ${lowerCountry}`,
+    `make extra money paypal ${lowerCountry}`,
+    `paypal cash rewards ${lowerCountry}`,
+    `earn paypal without investment ${lowerCountry}`,
+    `daily paypal earnings ${lowerCountry}`,
+    `paypal money making apps ${lowerCountry}`,
   ];
 
+  // Add country-specific variations
   if (countryCode === "us") {
-    baseKeywords.push("free paypal money usa", "earn paypal usa", "paypal cash usa");
+    baseKeywords.push(
+      "earn paypal money usa",
+      "make money online usa paypal",
+      "best paypal earning apps for americans"
+    );
   } else if (countryCode === "gb") {
-    baseKeywords.push("free paypal money uk", "earn paypal uk", "paypal cash uk");
+    baseKeywords.push(
+      "earn paypal money uk",
+      "make pounds to paypal",
+      "uk paypal earning opportunities"
+    );
   } else if (countryCode === "ca") {
-    baseKeywords.push("free paypal money canada", "earn paypal canada", "paypal cash canada");
+    baseKeywords.push(
+      "earn paypal money canada",
+      "canadian paypal earnings",
+      "make cad to paypal"
+    );
   } else if (countryCode === "au") {
-    baseKeywords.push("free paypal money australia", "earn paypal australia", "paypal cash australia");
+    baseKeywords.push(
+      "earn paypal money australia",
+      "australian paypal earning apps",
+      "make aud to paypal"
+    );
+  } else if (countryCode === "de") {
+    baseKeywords.push(
+      "paypal geld verdienen deutschland",
+      "geld auf paypal verdienen",
+      "paypal einnahmen deutschland"
+    );
+  } else if (countryCode === "fr") {
+    baseKeywords.push(
+      "gagner de l'argent paypal france",
+      "argent paypal facile",
+      "gagner paypal france"
+    );
+  } else if (countryCode === "es") {
+    baseKeywords.push(
+      "ganar dinero paypal españa",
+      "dinero paypal gratis",
+      "ganar paypal españa"
+    );
   }
 
   return baseKeywords;
@@ -230,6 +257,7 @@ export async function generateMetadata({
     // Use defaults
   }
 
+  // Helper to replace {country} in metadata
   const replaceCountry = (text: string | undefined, fallback: string): string => {
     const str = text || fallback;
     return str.replace(/\{country\}/g, countryName);
@@ -240,14 +268,15 @@ export async function generateMetadata({
 
   const seoTitle = replaceCountry(
     rawTitle,
-    `Earn PayPal Money - Get Free PayPal Gift Cards in ${countryName} | Cashog`
+    `Earn PayPal Money in ${countryName} - Get Paid Instantly | Cashog`
   );
 
   const seoDescription = replaceCountry(
     rawDescription,
-    `Earn free PayPal money in ${countryName}. Complete simple tasks, play games, take surveys, and get paid directly to your PayPal account. Start earning today!`
+    `Discover 10+ legit ways to earn PayPal money in ${countryName}. Complete tasks, play games, take surveys - get paid instantly to your PayPal account. Free to join!`
   );
 
+  // Generate dynamic keywords
   const keywordsArray = getCountrySpecificKeywords(countryName, country);
   const keywords = keywordsArray.join(", ");
 
@@ -256,12 +285,12 @@ export async function generateMetadata({
     description: seoDescription,
     keywords,
     alternates: {
-      canonical: `https://cashog.com/${country}/rewards/earn-paypal-money`,
+      canonical: `https://cashog.com/${country}/earn-paypal-money`,
     },
     openGraph: {
       title: seoTitle,
       description: seoDescription,
-      url: `https://cashog.com/${country}/rewards/earn-paypal-money`,
+      url: `https://cashog.com/${country}/earn-paypal-money`,
       siteName: "Cashog",
       type: "website",
       locale: language === "es" ? "es_ES" : language === "fr" ? "fr_FR" : "en_US",
@@ -287,7 +316,7 @@ export async function generateMetadata({
 
 /* ================= PAGE COMPONENT ================= */
 
-export default async function EarnPaypalMoneyPage({
+export default async function EarnPayPalMoneyPage({
   params,
 }: {
   params: Promise<{ country?: string }> | { country?: string };
@@ -297,12 +326,12 @@ export default async function EarnPaypalMoneyPage({
 
   if (!countryParam || !isValidCountryCode(countryParam)) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen">
+      <main className="flex flex-col items-center justify-center min-h-screen">
         <div className="text-center">
           <h1 className="text-2xl font-bold">Country Not Supported</h1>
           <p className="mt-2">Please check your region settings.</p>
         </div>
-      </div>
+      </main>
     );
   }
 
@@ -311,286 +340,596 @@ export default async function EarnPaypalMoneyPage({
   const countryName = countryData.name;
   const language = getLanguage(country);
 
+  // Load translations
   const tData = await loadSectionTranslation(language, "earn-paypal-money");
 
+  // Helper function to replace country placeholder
   const t = (text: string | undefined, fallback: string): string => {
-    if (!text) return replacePlaceholders(fallback, countryName);
-    return replacePlaceholders(text, countryName);
+    if (!text) return replaceCountryPlaceholder(fallback, countryName);
+    return replaceCountryPlaceholder(text, countryName);
   };
 
-  const title = t(tData?.seo?.title, "Earn PayPal Money - Get Free PayPal Gift Cards");
-  const description = t(tData?.seo?.description, `Earn free PayPal money in ${countryName}.`);
+  // SEO data for structured data
+  const rawTitle = tData?.seo?.title;
+  const rawDescription = tData?.seo?.description;
+  const title = t(rawTitle, `Earn PayPal Money in ${countryName} - Get Paid Instantly`);
+  const description = t(rawDescription, `Join 500,000+ users earning PayPal cash in ${countryName} through simple online tasks.`);
 
   const structuredData = generateJsonLd({
-    path: `/${country}/rewards/earn-paypal-money`,
+    path: `/${country}/earn-paypal-money`,
     title,
     description,
     type: "low",
   });
 
-  // Hero Section Data
-  const heroTitle = t(tData?.hero?.title, "Get Free PayPal Money");
-  const heroSubtitle = t(
-    tData?.hero?.subtitle,
-    `Earn real PayPal cash by completing simple tasks. Sign up, play cool games, complete surveys or watch videos - and get paid via PayPal. Start earning today in ${countryName}!`
-  );
-
-  // Live Offers Data
-  const liveOffersTitle = t(tData?.liveOffersTitle, "🔥 Live Earnings Feed");
-  const liveOffers = tData?.liveOffers || [
-    { platform: "PayPal", user: "Keziah", amount: 18, isPaypal: true, timestamp: "Just now" },
-    { platform: "Stake", user: "MoDanU", amount: 5, timestamp: "2 min ago" },
-    { platform: "PayPal", user: "Lexi B", amount: 3.75, isPaypal: true, timestamp: "5 min ago" },
-  ];
-
-  // PayPal Amounts Data
-  const paypalAmounts = tData?.paypalAmounts || [
-    { amount: 5, isPopular: true, bonus: "+$0.50" },
-    { amount: 10, bonus: "+$1" },
-    { amount: 25, bonus: "+$2.50" },
-    { amount: 50, bonus: "+$5" },
-    { amount: 100, bonus: "+$10" },
-  ];
-
-  // Earning Methods Data
-  const earningMethodsTitle = t(tData?.earningMethodsTitle, "Discover Fun & Easy Ways To Earn PayPal");
-  const earningMethods = tData?.earningMethods || [
-    {
-      name: "Play Games",
-      icon: "🎮",
-      description: "Get paid PayPal to play games! Select from our many fun gaming offers, complete the steps, and get paid.",
-      examples: [
-        { title: "Monopoly Go!", reward: "$10" },
-        { title: "Uno", reward: "$10" },
-        { title: "Premium", reward: "$215" },
-      ],
-      link: "/earn/play-games",
-      gradient: "from-green-500 to-emerald-600",
-      stats: "1,234 active players",
-    },
-    {
-      name: "Answer Surveys",
-      icon: "📋",
-      description: "Share your opinion and earn PayPal cash. Complete paid surveys in just a few minutes.",
-      examples: [
-        { title: "Prime Video", reward: "$5", duration: "10 min" },
-        { title: "Lego Magazine", reward: "$1.00", duration: "5 min" },
-        { title: "Finanzguru", reward: "$10", duration: "15 min" },
-      ],
-      link: "/earn/surveys",
-      gradient: "from-blue-500 to-indigo-600",
-      stats: "5,678 surveys completed today",
-    },
-  ];
-
-  // Steps Data
-  const stepsTitle = t(tData?.stepsTitle, "Get Free PayPal Gift Cards In 3 Simple Steps");
-  const steps = tData?.steps || [
-    {
-      step: 1,
-      title: "Join Free",
-      description: "Sign up in under 30 seconds. Log in instantly using Google or Facebook.",
-      icon: "🚀",
-    },
-    {
-      step: 2,
-      title: "Complete Tasks",
-      description: "Complete simple tasks like surveys, playing games, and watching videos.",
-      icon: "✅",
-    },
-    {
-      step: 3,
-      title: "Withdraw to PayPal",
-      description: "When you want to cash out, select PayPal and get paid instantly!",
-      icon: "💙",
-    },
-  ];
-
-  // Activity Feed Data
-  const activityFeedTitle = t(tData?.activityFeed?.title, "📡 Live Activity Feed");
-  const activities = tData?.activityFeed?.activities || [
-    { user: "Sarah_J", action: "completed survey", amount: 5, platform: "PayPal", timestamp: "Just now", avatar: "S" },
-    { user: "Mike_T", action: "finished game level", amount: 15, platform: "PayPal", timestamp: "2 min ago", avatar: "M" },
-  ];
-
-  // User Reviews Data
-  const userReviewsTitle = t(tData?.userReviewsTitle, "⭐ What Our Users Say");
-  const userReviews = tData?.userReviews || [
-    {
-      name: "Renee",
-      text: "I was skeptical at first, but almost 4 months of playing and I have earned so much free money!!!",
-      rating: 5,
-      achievement: "$100+ Earned",
-      avatar: "R",
-      date: "2 days ago",
-    },
-  ];
-
-  // Tasks Data
-  const tasksTitle = t(tData?.tasks?.title, "🎯 Featured High-Paying Tasks");
-  const tasks = tData?.tasks?.tasks || [
-    { title: "Chime", reward: "$400", action: "First Deposit", difficulty: "Medium", popular: true },
-    { title: "Monopoly Go", reward: "$30", action: "Reach Board 26", difficulty: "Easy", popular: true },
-  ];
-
-  // Earnings Estimate Data
-  const earningsEstimate = {
-    timeMinutes: tData?.earningsEstimate?.timeMinutes || 240,
-    platformEarnings: tData?.earningsEstimate?.platformEarnings || "$108.42",
-    otherPlatformsEarnings: tData?.earningsEstimate?.otherPlatformsEarnings || "$40.08",
-    disclaimer: tData?.earningsEstimate?.disclaimer || "Earnings depend on your location, activity, and offer availability.",
+  // Prepare data with fallbacks
+  const heroData = {
+    title: t(tData?.hero?.title, `Earn Real PayPal Money in ${countryName}`),
+    subtitle: t(
+      tData?.hero?.subtitle,
+      `Join 500,000+ users who've earned over $15M to PayPal in ${countryName}. Complete simple tasks, play games, and get paid instantly!`
+    ),
   };
 
-  // FAQ Data
-  const defaultFaqItems = [
-    { question: "Can I withdraw PayPal balance to my bank account?", answer: "Yes! Once money is in your PayPal account, you can transfer it to your linked bank account for free." },
-    { question: "Are there any fees for using PayPal?", answer: "Receiving money to PayPal is completely free." },
-  ];
-  
-  const faqItemsSource = tData?.faq?.items || defaultFaqItems;
-  const faqItems = faqItemsSource.map((item) => ({ 
-    q: t(item.question, item.question), 
-    a: t(item.answer, item.answer) 
+  const statsData = {
+    title: t(tData?.statsTitle, "Trusted by Thousands"),
+    totalEarned: tData?.stats?.totalEarned || "$15M+",
+    totalEarnedLabel: tData?.stats?.totalEarnedLabel || "Total Earned to PayPal",
+    activeUsers: tData?.stats?.activeUsers || "500K+",
+    activeUsersLabel: tData?.stats?.activeUsersLabel || "Active Earners",
+    avgPayout: tData?.stats?.avgPayout || "$25",
+    avgPayoutLabel: tData?.stats?.avgPayoutLabel || "Average Monthly Earnings",
+    withdrawalSpeed: tData?.stats?.withdrawalSpeed || "Instant",
+    withdrawalSpeedLabel: tData?.stats?.withdrawalSpeedLabel || "Withdrawal Speed",
+  };
+
+  const paymentMethodsData = (tData?.paymentMethods || []).map((method) => ({
+    ...method,
+    name: t(method.name, method.name),
+    description: t(method.description, method.description),
   }));
-  const faqTitle = t(tData?.faq?.title, `Earn PayPal Money FAQ - ${countryName}`);
 
-  // Final CTA Data
-  const finalTitle = t(tData?.final?.title, "Ready to Start Earning Free PayPal Money?");
-  const finalSubtitle = t(tData?.final?.subtitle, "Join over 20 million users who already earn with us. Sign up free - no credit card required!");
-  const finalButtonText = t(tData?.final?.buttonText, "Join Free & Start Earning 💙");
+  const earningWaysData = (tData?.earningWays || []).map((way) => ({
+    ...way,
+    title: t(way.title, way.title),
+    description: t(way.description, way.description),
+  }));
 
+  const featuredOffersData = (tData?.featuredOffers || []).map((offer) => ({
+    ...offer,
+    title: t(offer.title, offer.title),
+  }));
+
+  const benefitsData = (tData?.benefits || []).map((benefit) => ({
+    ...benefit,
+    title: t(benefit.title, benefit.title),
+    description: t(benefit.description, benefit.description),
+  }));
+
+  const tipsData = (tData?.tips || []).map((tip, index) => ({
+    number: index + 1,
+    title: t(tip.title, tip.title),
+    description: t(tip.description, tip.description),
+  }));
+
+  const testimonialsData = (tData?.testimonials || []).map((testimonial) => ({
+    ...testimonial,
+    quote: t(testimonial.quote, testimonial.quote),
+  }));
+
+  const faqData = {
+    title: t(tData?.faq?.title, `Earn PayPal Money in ${countryName} - FAQ`),
+    items: (tData?.faq?.items || [])
+      .map((item) => ({
+        q: t(item.question, item.question),
+        a: t(item.answer, item.answer),
+      }))
+      .filter((item) => item.q && item.a),
+  };
+
+  const finalData = {
+    title: t(tData?.final?.title, `Ready to Start Earning PayPal Money in ${countryName}?`),
+    subtitle: t(
+      tData?.final?.subtitle,
+      `Join 500,000+ earners already getting paid in ${countryName}. Sign up for free and start earning PayPal cash today!`
+    ),
+  };
+
+  const difficultyColors = {
+    Easy: "text-green-600 bg-green-50 dark:bg-green-900/20",
+    Medium: "text-yellow-600 bg-yellow-50 dark:bg-yellow-900/20",
+    Hard: "text-red-600 bg-red-50 dark:bg-red-900/20",
+  };
+
+  /* ================= RENDER ================= */
   return (
-    <div className="flex flex-col items-center w-full overflow-x-hidden">
+    <main className="flex flex-col items-center w-full">
       {structuredData && (
         <script
           type="application/ld+json"
           suppressHydrationWarning
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData),
+          }}
         />
       )}
 
-      {/* Animated Background Orbs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-        <div className="absolute top-0 -left-40 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" />
-        <div className="absolute top-0 -right-40 w-80 h-80 bg-yellow-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" />
-        <div className="absolute -bottom-40 left-20 w-80 h-80 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" />
-      </div>
-
       {/* Hero Section */}
       <CircleBorder>
-        <div className="relative max-w-7xl mx-auto px-6 py-24 md:py-32 text-center overflow-hidden">
-          <div className="relative z-10">
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-white/20">
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500" />
-              </span>
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">20M+ Active Users Worldwide</span>
-            </div>
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold mb-6 bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 dark:from-white dark:via-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
-              {heroTitle}
+        <OpeningStyle delay={0.1}>
+          <section
+            className="max-w-7xl mx-auto px-6 py-24 md:py-32 text-center"
+            aria-labelledby="hero-heading"
+          >
+            <h1
+              id="hero-heading"
+              className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 text-gray-900 dark:text-white"
+            >
+              {heroData.title}
             </h1>
-            <p className="text-lg sm:text-xl md:text-2xl mb-8 text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              {heroSubtitle}
+            <p className="text-lg sm:text-xl md:text-2xl mb-12 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+              {heroData.subtitle}
             </p>
-            <PrimaryCTA href="/signup" translationKey="start_earning" observer={true} />
-          </div>
-        </div>
+            <PrimaryCTA
+              href="/signup"
+              translationKey="start_earning_now"
+              observer={true}
+            />
+          </section>
+        </OpeningStyle>
       </CircleBorder>
 
-      {/* Live Offers Ticker */}
+      {/* Stats Section */}
       <CircleBorder>
-        <div className="max-w-7xl mx-auto px-6 py-12">
-          <div className="relative overflow-hidden">
-            <div className="flex overflow-x-auto gap-2 pb-4">
-              {liveOffers.map((offer, idx) => (
-                <div key={idx} className="flex-shrink-0">
-                  <div className="inline-flex items-center gap-3 bg-white dark:bg-gray-800 rounded-full px-4 py-2 shadow-lg border border-gray-100 dark:border-gray-700">
-                    <div className={`w-2 h-2 rounded-full ${offer.isPaypal ? 'bg-blue-500 animate-pulse' : 'bg-green-500'}`} />
-                    <span className="font-medium text-sm">{offer.user}</span>
-                    <span className="text-gray-500 text-xs">{offer.timestamp}</span>
-                    <span className="font-bold text-green-600">+${offer.amount}</span>
-                    <span className="text-xs text-gray-400">{offer.platform}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <p className="text-center text-xs text-gray-500 mt-4">{liveOffersTitle}</p>
-        </div>
-      </CircleBorder>
-
-      {/* PayPal Amounts Section */}
-      <CircleBorder>
-        <div className="max-w-5xl mx-auto px-6 py-12">
-          <div className="relative bg-gradient-to-br from-blue-600/10 via-purple-600/10 to-pink-600/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-2xl">
-            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-              <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full text-sm font-semibold shadow-lg">
-                Instant Withdrawals
-              </div>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-              {paypalAmounts.map((amount, index) => (
-                <div
-                  key={index}
-                  className={`group relative bg-white dark:bg-gray-800 rounded-2xl p-4 text-center transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer ${
-                    amount.isPopular ? "ring-2 ring-yellow-400 shadow-lg" : ""
-                  }`}
-                >
-                  {amount.isPopular && (
-                    <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                      <span className="bg-yellow-400 text-yellow-900 text-xs font-bold px-3 py-0.5 rounded-full">Popular</span>
-                    </div>
-                  )}
-                  <p className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">${amount.amount}</p>
-                  <p className="text-xs text-gray-500 mt-1">PayPal</p>
-                  {amount.bonus && <p className="text-xs text-green-500 font-semibold mt-1">{amount.bonus} bonus</p>}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </CircleBorder>
-
-      {/* Earning Methods Section */}
-      <CircleBorder>
-        <div className="max-w-7xl mx-auto px-6 py-24 md:py-32">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 dark:from-white dark:via-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
-              {earningMethodsTitle}
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {earningMethods.map((method, index) => (
-              <div
-                key={index}
-                className="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+        <OpeningStyle delay={0.1}>
+          <section
+            className="max-w-7xl mx-auto px-6 py-24 md:py-32"
+            aria-labelledby="stats-heading"
+          >
+            <div className="text-center mb-16">
+              <h2
+                id="stats-heading"
+                className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
               >
-                <div className="relative p-6">
-                  <div className="text-6xl mb-4">{method.icon}</div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{method.name}</h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">{method.description}</p>
-                  <PrimaryCTA href={method.link} translationKey="start_earning" observer={false} />
+                {statsData.title}
+              </h2>
+              <div
+                className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
+                aria-hidden="true"
+              />
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              <div className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl">
+                <div className="text-3xl md:text-4xl font-bold text-green-600">
+                  {statsData.totalEarned}
+                </div>
+                <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                  {statsData.totalEarnedLabel}
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
+              <div className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl">
+                <div className="text-3xl md:text-4xl font-bold text-green-600">
+                  {statsData.activeUsers}
+                </div>
+                <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                  {statsData.activeUsersLabel}
+                </div>
+              </div>
+              <div className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl">
+                <div className="text-3xl md:text-4xl font-bold text-green-600">
+                  {statsData.avgPayout}
+                </div>
+                <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                  {statsData.avgPayoutLabel}
+                </div>
+              </div>
+              <div className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl">
+                <div className="text-3xl md:text-4xl font-bold text-green-600">
+                  {statsData.withdrawalSpeed}
+                </div>
+                <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                  {statsData.withdrawalSpeedLabel}
+                </div>
+              </div>
+            </div>
+          </section>
+        </OpeningStyle>
       </CircleBorder>
 
-      {/* Final CTA */}
+      {/* Payment Methods Section */}
+      {paymentMethodsData.length > 0 && (
+        <CircleBorder>
+          <OpeningStyle delay={0.1}>
+            <section
+              className="max-w-7xl mx-auto px-6 py-24 md:py-32"
+              aria-labelledby="methods-heading"
+            >
+              <div className="text-center mb-16">
+                <h2
+                  id="methods-heading"
+                  className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
+                >
+                  {t(tData?.methodsTitle, "Fast & Secure Payment Methods")}
+                </h2>
+                <div
+                  className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
+                  aria-hidden="true"
+                />
+                <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-6">
+                  {t(tData?.methodsSubtitle, "Get paid instantly to your preferred method")}
+                </p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {paymentMethodsData.map((method, index) => (
+                  <div
+                    key={index}
+                    className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700 text-center"
+                  >
+                    <div className="text-5xl mb-4" aria-hidden="true">
+                      {method.icon}
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                      {method.name}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                      {method.description}
+                    </p>
+                    <div className="space-y-2 border-t border-gray-200 dark:border-gray-700 pt-4">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-500 dark:text-gray-400">
+                          Processing:
+                        </span>
+                        <span className="font-semibold text-green-600 dark:text-green-400">
+                          {method.processingTime}
+                        </span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-500 dark:text-gray-400">
+                          Min. Withdrawal:
+                        </span>
+                        <span className="font-semibold text-gray-700 dark:text-gray-300">
+                          {method.minWithdrawal}
+                        </span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-500 dark:text-gray-400">
+                          Fee:
+                        </span>
+                        <span className="font-semibold text-gray-700 dark:text-gray-300">
+                          {method.fee}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </OpeningStyle>
+        </CircleBorder>
+      )}
+
+      {/* Earning Ways Section */}
+      {earningWaysData.length > 0 && (
+        <CircleBorder>
+          <OpeningStyle delay={0.1}>
+            <section
+              className="max-w-7xl mx-auto px-6 py-24 md:py-32"
+              aria-labelledby="earning-ways-heading"
+            >
+              <div className="text-center mb-16">
+                <h2
+                  id="earning-ways-heading"
+                  className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
+                >
+                  {t(tData?.earningWaysTitle, "10+ Ways to Earn PayPal Money")}
+                </h2>
+                <div
+                  className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
+                  aria-hidden="true"
+                />
+                <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-6">
+                  {t(tData?.earningWaysSubtitle, "Choose what works best for you")}
+                </p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {earningWaysData.map((way, index) => (
+                  <div
+                    key={index}
+                    className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300"
+                  >
+                    <div className="text-4xl mb-3" aria-hidden="true">
+                      {way.icon}
+                    </div>
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                      {way.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                      {way.description}
+                    </p>
+                    <div className="border-t border-gray-200 dark:border-gray-700 pt-3 mt-2">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-500 dark:text-gray-400">
+                          Avg Earnings:
+                        </span>
+                        <span className="font-semibold text-green-600 dark:text-green-400">
+                          {way.avgEarnings}
+                        </span>
+                      </div>
+                      <div className="flex justify-between text-sm mt-1">
+                        <span className="text-gray-500 dark:text-gray-400">
+                          Time Required:
+                        </span>
+                        <span className="font-semibold text-gray-700 dark:text-gray-300">
+                          {way.timeRequired}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </OpeningStyle>
+        </CircleBorder>
+      )}
+
+      {/* Featured Offers */}
+      {featuredOffersData.length > 0 && (
+        <CircleBorder>
+          <OpeningStyle delay={0.1}>
+            <section
+              className="max-w-7xl mx-auto px-6 py-24 md:py-32"
+              aria-labelledby="featured-heading"
+            >
+              <div className="text-center mb-16">
+                <h2
+                  id="featured-heading"
+                  className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
+                >
+                  {t(tData?.featuredOffersTitle, "Hot Offers - Limited Time")}
+                </h2>
+                <div
+                  className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
+                  aria-hidden="true"
+                />
+                <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-6">
+                  {t(tData?.featuredOffersSubtitle, "Highest paying opportunities right now")}
+                </p>
+              </div>
+              <div className="max-w-4xl mx-auto space-y-4">
+                {featuredOffersData.map((offer, index) => (
+                  <div
+                    key={index}
+                    className="bg-white dark:bg-gray-800 rounded-xl p-5 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 dark:border-gray-700"
+                  >
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-2 flex-wrap">
+                          <h3 className="font-bold text-gray-900 dark:text-white">
+                            {offer.title}
+                          </h3>
+                          <span
+                            className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                              difficultyColors[offer.difficulty]
+                            }`}
+                          >
+                            {offer.difficulty}
+                          </span>
+                          <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400">
+                            ⭐ {offer.rating}
+                          </span>
+                        </div>
+                        <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+                          {offer.provider}
+                        </p>
+                        <div className="flex flex-wrap gap-4 text-xs">
+                          <span className="text-gray-500 dark:text-gray-400">
+                            ⏱️ {offer.timeEstimate}
+                          </span>
+                          <span className="text-orange-600 dark:text-orange-400">
+                            🎯 {offer.spotsLeft.toLocaleString()} spots left
+                          </span>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-2xl font-bold text-green-600 dark:text-green-400">
+                          {offer.reward}
+                        </div>
+                        <PrimaryCTA
+                          href="/signup"
+                          translationKey="claim_offer"
+                          observer={false}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </OpeningStyle>
+        </CircleBorder>
+      )}
+
+      {/* Benefits Section */}
+      {benefitsData.length > 0 && (
+        <CircleBorder>
+          <OpeningStyle delay={0.1}>
+            <section
+              className="max-w-7xl mx-auto px-6 py-24 md:py-32"
+              aria-labelledby="benefits-heading"
+            >
+              <div className="text-center mb-16">
+                <h2
+                  id="benefits-heading"
+                  className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
+                >
+                  {t(tData?.benefitsTitle, "Why Choose Cashog for PayPal Earnings")}
+                </h2>
+                <div
+                  className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
+                  aria-hidden="true"
+                />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {benefitsData.map((benefit, index) => (
+                  <div
+                    key={index}
+                    className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 rounded-xl p-6 text-center"
+                  >
+                    <div className="text-4xl mb-3" aria-hidden="true">
+                      {benefit.icon}
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      {benefit.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </OpeningStyle>
+        </CircleBorder>
+      )}
+
+      {/* Tips Section */}
+      {tipsData.length > 0 && (
+        <CircleBorder>
+          <OpeningStyle delay={0.1}>
+            <section
+              className="max-w-7xl mx-auto px-6 py-24 md:py-32"
+              aria-labelledby="tips-heading"
+            >
+              <div className="text-center mb-16">
+                <h2
+                  id="tips-heading"
+                  className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
+                >
+                  {t(tData?.tipsTitle, "Pro Tips to Maximize Your PayPal Earnings")}
+                </h2>
+                <div
+                  className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
+                  aria-hidden="true"
+                />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                {tipsData.map((tip) => (
+                  <div key={tip.number} className="text-center">
+                    <div
+                      className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-green-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg"
+                      aria-label={`Tip ${tip.number}`}
+                    >
+                      {tip.number}
+                    </div>
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                      {tip.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm">
+                      {tip.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </OpeningStyle>
+        </CircleBorder>
+      )}
+
+      {/* Testimonials */}
+      {testimonialsData.length > 0 && (
+        <CircleBorder>
+          <OpeningStyle delay={0.1}>
+            <section
+              className="max-w-7xl mx-auto px-6 py-24 md:py-32"
+              aria-labelledby="testimonials-heading"
+            >
+              <div className="text-center mb-16">
+                <h2
+                  id="testimonials-heading"
+                  className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
+                >
+                  {t(tData?.testimonialsTitle, "Real People, Real PayPal Earnings")}
+                </h2>
+                <div
+                  className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
+                  aria-hidden="true"
+                />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {testimonialsData.map((testimonial, index) => (
+                  <div
+                    key={index}
+                    className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md border border-gray-100 dark:border-gray-700"
+                  >
+                    <div className="flex items-center gap-3 mb-4">
+                      <div
+                        className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-green-500 rounded-full flex items-center justify-center text-white font-bold text-lg"
+                        aria-hidden="true"
+                      >
+                        {testimonial.avatar}
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-gray-900 dark:text-white">
+                          {testimonial.name}
+                        </h4>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                          {testimonial.country}
+                        </p>
+                      </div>
+                    </div>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm italic mb-3">
+                      "{testimonial.quote}"
+                    </p>
+                    <p className="text-green-600 dark:text-green-400 font-semibold text-sm">
+                      Earned {testimonial.earnings} to PayPal
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </OpeningStyle>
+        </CircleBorder>
+      )}
+
+      {/* FAQ Section */}
+      {faqData.items.length > 0 && (
+        <CircleBorder>
+          <OpeningStyle delay={0.1}>
+            <div className="max-w-4xl mx-auto px-6 py-16 md:py-24">
+              <FAQ title={faqData.title} faqs={faqData.items} />
+            </div>
+          </OpeningStyle>
+        </CircleBorder>
+      )}
+
+      {/* Final CTA Section */}
       <CircleBorder>
-        <div className="relative max-w-6xl mx-auto px-6 py-24 md:py-32 text-center my-8 overflow-hidden rounded-3xl">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600" />
-          <div className="relative z-10">
-            <div className="text-7xl mb-6 animate-bounce">💙</div>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-4">{finalTitle}</h2>
-            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">{finalSubtitle}</p>
-            <PrimaryCTA href="/signup" translationKey={finalButtonText} observer={true} />
-            <p className="text-sm text-white/70 mt-6">✓ No credit card required ✓ 100% free to join ✓ Instant payouts</p>
-          </div>
-        </div>
+        <OpeningStyle delay={0.1}>
+          <section
+            className="max-w-7xl mx-auto px-6 py-24 md:py-32 text-center"
+            aria-labelledby="final-heading"
+          >
+            <h2
+              id="final-heading"
+              className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
+            >
+              {finalData.title}
+            </h2>
+            <div
+              className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full mb-8"
+              aria-hidden="true"
+            />
+            <p className="text-lg sm:text-xl md:text-2xl mb-12 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+              {finalData.subtitle}
+            </p>
+            <PrimaryCTA
+              href="/signup"
+              translationKey="start_earning_now"
+              observer={true}
+            />
+          </section>
+        </OpeningStyle>
       </CircleBorder>
-    </div>
+    </main>
   );
 }
