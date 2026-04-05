@@ -198,27 +198,27 @@ export default function Footer({ className }: FooterProps) {
 
   {/* GUIDES */}
   <Section id="guides" title={t("guides", "Guides")}>
-    <A href="/make-money/make-money-online">{t("makeMoneyOnline", "Make Money Online")}</A>
-    <A href="/make-money/earn-money-from-home">{t("earnFromHome", "Earn from Home")}</A>
-    <A href="/make-money/earn-without-investment">{t("earnWithoutInvestment", "Earn without Investment")}</A>
-    <A href="/make-money/get-paid-to-play-games">{t("getPaidToPlayGames", "Get Paid to Play Games")}</A>
-    <A href="/make-money/install-apps-for-cash">{t("installApps", "Install Apps")}</A>
-    <A href="/make-money/watch-videos-for-money">{t("watchVideosForMoney", "Watch Videos for Money")}</A>
-    <A href="/make-money/complete-offers-online">{t("completeOffersOnline", "Complete Offers Online")}</A>
-    <A href="/make-money/work-from-home-jobs">{t("workFromHomeJobs", "Work from Home Jobs")}</A>
-    <A href="/make-money/online-earning-methods">{t("onlineEarningMethods", "Online Earning Methods")}</A>
-    <A href="/make-money/earn-money-online-fast">{t("earnFast", "Earn Fast")}</A>
+    <A href="/guides/make-money-online">{t("makeMoneyOnline", "Make Money Online")}</A>
+    <A href="/guides/earn-money-from-home">{t("earnFromHome", "Earn from Home")}</A>
+    <A href="/guides/earn-without-investment">{t("earnWithoutInvestment", "Earn without Investment")}</A>
+    <A href="/guides/get-paid-to-play-games">{t("getPaidToPlayGames", "Get Paid to Play Games")}</A>
+    <A href="/guides/install-apps-for-cash">{t("installApps", "Install Apps")}</A>
+    <A href="/guides/watch-videos-for-money">{t("watchVideosForMoney", "Watch Videos for Money")}</A>
+    <A href="/guides/complete-offers-online">{t("completeOffersOnline", "Complete Offers Online")}</A>
+    <A href="/guides/work-from-home-jobs">{t("workFromHomeJobs", "Work from Home Jobs")}</A>
+    <A href="/guides/online-earning-methods">{t("onlineEarningMethods", "Online Earning Methods")}</A>
+    <A href="/guides/earn-money-online-fast">{t("earnFast", "Earn Fast")}</A>
 
     <Sub id="allGuides" title={t("allGuides", "All Guides")}>
-      <A href="/make-money/passive-income-online">{t("passiveIncome", "Passive Income")}</A>
-      <A href="/make-money/online-jobs-for-beginners">{t("onlineJobs", "Online Jobs")}</A>
-      <A href="/make-money/earn-money-as-a-student">{t("studentEarnings", "Student Earnings")}</A>
-      <A href="/make-money/earn-money-without-skills">{t("earnWithoutSkills", "Earn without Skills")}</A>
-      <A href="/make-money/earn-money-using-mobile">{t("earnUsingMobile", "Earn Using Mobile")}</A>
-      <A href="/make-money/earn-money-online-worldwide">{t("earnWorldwide", "Earn Worldwide")}</A>
-      <A href="/make-money/cashback-rewards">{t("cashbackRewards", "Cashback Rewards")}</A>
-      <A href="/make-money/legit-ways-to-make-money-online">{t("legitWays", "Legit Ways")}</A>
-      <A href="/make-money/free-ways-to-make-money-online">{t("freeWays", "Free Ways")}</A>
+      <A href="/guides/passive-income-online">{t("passiveIncome", "Passive Income")}</A>
+      <A href="/guides/online-jobs-for-beginners">{t("onlineJobs", "Online Jobs")}</A>
+      <A href="/guides/earn-money-as-a-student">{t("studentEarnings", "Student Earnings")}</A>
+      <A href="/guides/earn-money-without-skills">{t("earnWithoutSkills", "Earn without Skills")}</A>
+      <A href="/guides/earn-money-using-mobile">{t("earnUsingMobile", "Earn Using Mobile")}</A>
+      <A href="/guides/earn-money-online-worldwide">{t("earnWorldwide", "Earn Worldwide")}</A>
+      <A href="/guides/cashback-rewards">{t("cashbackRewards", "Cashback Rewards")}</A>
+      <A href="/guides/legit-ways-to-make-money-online">{t("legitWays", "Legit Ways")}</A>
+      <A href="/guides/free-ways-to-make-money-online">{t("freeWays", "Free Ways")}</A>
     </Sub>
   </Section>
 
