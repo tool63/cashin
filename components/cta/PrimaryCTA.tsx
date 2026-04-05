@@ -123,6 +123,9 @@ export default function PrimaryCTA({
         transition-all duration-300
         cursor-pointer
       "
+      style={{
+        display: "inline-flex",
+      }}
     >
       {text}
     </motion.span>
@@ -135,9 +138,10 @@ export default function PrimaryCTA({
           href={processedHref}
           target="_blank"
           rel="noopener noreferrer"
-          className={observer ? "cta-observer inline-block" : "inline-block"}
+          className={observer ? "cta-observer" : ""}
           aria-label={text}
           onClick={handleClick}
+          style={{ display: "inline-block" }}
         >
           <ButtonContent />
         </a>
@@ -147,44 +151,55 @@ export default function PrimaryCTA({
     return (
       <Link
         href={processedHref}
-        className={observer ? "cta-observer inline-block" : "inline-block"}
+        className={observer ? "cta-observer" : ""}
         aria-label={text}
         onClick={handleClick}
+        style={{ display: "inline-block" }}
       >
         <ButtonContent />
       </Link>
     );
   };
 
+  // 0.50mm = 1.89px, using 2px for better rendering
+  const borderWidth = "2px";
+  const gap = "0.50mm";
+
   return (
-    <div 
-      className="inline-block"
+    <div
       style={{
-        borderRadius: "1.5rem",
+        display: "inline-block",
         background: "linear-gradient(90deg, #facc15, #4ade80, #22c55e)",
-        padding: "0.50mm",
-        animation: "gradientShift 3s ease infinite",
+        borderRadius: "1.5rem",
+        padding: gap,
         backgroundSize: "200% 200%",
+        animation: "gradientMove 3s ease infinite",
       }}
     >
-      <style>
-        {`
-          @keyframes gradientShift {
-            0% { background-position: 0% 0%; }
-            50% { background-position: 100% 100%; }
-            100% { background-position: 0% 0%; }
-          }
-        `}
-      </style>
-      <div 
+      <div
         style={{
-          borderRadius: "calc(1.5rem - 0.50mm)",
+          borderRadius: "calc(1.5rem - 2px)",
           overflow: "hidden",
+          display: "inline-block",
         }}
       >
         <CTAElement />
       </div>
+      <style>
+        {`
+          @keyframes gradientMove {
+            0% {
+              background-position: 0% 0%;
+            }
+            50% {
+              background-position: 100% 100%;
+            }
+            100% {
+              background-position: 0% 0%;
+            }
+          }
+        `}
+      </style>
     </div>
   );
 }
-
