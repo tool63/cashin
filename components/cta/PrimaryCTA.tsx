@@ -7,7 +7,6 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useMemo, useCallback } from "react";
 import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
-import CircleBorder from "@/components/animations/CircleBorder";
 
 interface PrimaryCTAProps {
   href: string;
@@ -123,17 +122,38 @@ export default function PrimaryCTA({
         hover:shadow-4xl
         transition-all duration-300
         cursor-pointer
+        relative z-10
       "
-      style={{ margin: '1mm' }}
     >
       {text}
     </motion.span>
   );
 
+  // Custom animated border without using CircleBorder
   const WrappedButton = () => (
-    <CircleBorder>
-      <ButtonContent />
-    </CircleBorder>
+    <div className="relative inline-block rounded-3xl p-[2px] overflow-hidden">
+      {/* Animated Gradient Border */}
+      <motion.div
+        className="absolute inset-0 rounded-3xl"
+        style={{
+          background: "conic-gradient(from 180deg at 50% 50%, #facc15, #22c55e, #10b981, #facc15)",
+        }}
+        animate={{
+          rotate: 360,
+        }}
+        transition={{
+          repeat: Infinity,
+          ease: "linear",
+          duration: 6,
+        }}
+      />
+      {/* Glow Effect */}
+      <div className="absolute inset-0 rounded-3xl blur-md opacity-40 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500" />
+      {/* Button with 1mm space */}
+      <div className="relative z-10" style={{ margin: '0.264mm' }}>
+        <ButtonContent />
+      </div>
+    </div>
   );
 
   if (external || processedHref.startsWith("http") || processedHref.startsWith("//")) {
