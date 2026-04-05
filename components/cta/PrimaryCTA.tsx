@@ -7,7 +7,6 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useMemo, useCallback } from "react";
 import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
-import CircleBorder from "@/components/animations/CircleBorder";
 
 interface PrimaryCTAProps {
   href: string;
@@ -123,6 +122,8 @@ export default function PrimaryCTA({
         hover:shadow-4xl
         transition-all duration-300
         cursor-pointer
+        relative
+        z-10
       "
     >
       {text}
@@ -158,14 +159,49 @@ export default function PrimaryCTA({
   };
 
   return (
-    <CircleBorder>
-      <div className="relative" style={{ 
-        padding: "0.50mm",
-        margin: "-0.50mm",
-        display: "inline-block"
-      }}>
+    <div className="relative inline-block">
+      {/* Animated Circle Border */}
+      <motion.div
+        className="absolute inset-0 rounded-3xl"
+        style={{
+          padding: "0.50mm",
+          background: "linear-gradient(90deg, #facc15, #4ade80, #22c55e)",
+          backgroundSize: "200% 200%",
+        }}
+        animate={{
+          backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+      />
+      
+      {/* Inner border glow effect */}
+      <motion.div
+        className="absolute inset-0 rounded-3xl"
+        style={{
+          padding: "0.50mm",
+          background: "linear-gradient(90deg, #facc15, #4ade80, #22c55e)",
+          backgroundSize: "200% 200%",
+          filter: "blur(4px)",
+          opacity: 0.5,
+        }}
+        animate={{
+          backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+      />
+      
+      {/* Main CTA Button */}
+      <div className="relative z-20">
         <CTAElement />
       </div>
-    </CircleBorder>
+    </div>
   );
 }
