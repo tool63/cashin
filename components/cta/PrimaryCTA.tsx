@@ -131,9 +131,13 @@ export default function PrimaryCTA({
   );
 
   const WrappedButton = () => (
-    <CircleBorder>
-      <ButtonContent />
-    </CircleBorder>
+    <div className="inline-block">
+      <CircleBorder>
+        <div className="-m-6 md:-m-10">
+          <ButtonContent />
+        </div>
+      </CircleBorder>
+    </div>
   );
 
   if (external || processedHref.startsWith("http") || processedHref.startsWith("//")) {
