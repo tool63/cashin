@@ -122,84 +122,63 @@ export default function PrimaryCTA({
         hover:shadow-4xl
         transition-all duration-300
         cursor-pointer
+        relative z-10
       "
-      style={{
-        display: "inline-flex",
-      }}
     >
       {text}
     </motion.span>
   );
 
-  const CTAElement = () => {
-    if (external || processedHref.startsWith("http") || processedHref.startsWith("//")) {
-      return (
-        <a
-          href={processedHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={observer ? "cta-observer" : ""}
-          aria-label={text}
-          onClick={handleClick}
-          style={{ display: "inline-block" }}
-        >
-          <ButtonContent />
-        </a>
-      );
-    }
+  // Custom animated border without using CircleBorder
+  const WrappedButton = () => (
+    <div className="relative inline-block rounded-3xl p-[2px] overflow-hidden">
+      {/* Animated Gradient Border */}
+      <motion.div
+        className="absolute inset-0 rounded-3xl"
+        style={{
+          background: "conic-gradient(from 180deg at 50% 50%, #facc15, #22c55e, #10b981, #facc15)",
+        }}
+        animate={{
+          rotate: 360,
+        }}
+        transition={{
+          repeat: Infinity,
+          ease: "linear",
+          duration: 6,
+        }}
+      />
+      {/* Glow Effect */}
+      <div className="absolute inset-0 rounded-3xl blur-md opacity-40 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500" />
+      {/* Button with 1mm space */}
+      <div className="relative z-10" style={{ margin: '0.264mm' }}>
+        <ButtonContent />
+      </div>
+    </div>
+  );
 
+  if (external || processedHref.startsWith("http") || processedHref.startsWith("//")) {
     return (
-      <Link
+      <a
         href={processedHref}
-        className={observer ? "cta-observer" : ""}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={observer ? "cta-observer inline-block" : "inline-block"}
         aria-label={text}
         onClick={handleClick}
-        style={{ display: "inline-block" }}
       >
-        <ButtonContent />
-      </Link>
+        <WrappedButton />
+      </a>
     );
-  };
-
-  // 0.50mm = 1.89px, using 2px for better rendering
-  const borderWidth = "2px";
-  const gap = "0.50mm";
+  }
 
   return (
-    <div
-      style={{
-        display: "inline-block",
-        background: "linear-gradient(90deg, #facc15, #4ade80, #22c55e)",
-        borderRadius: "1.5rem",
-        padding: gap,
-        backgroundSize: "200% 200%",
-        animation: "gradientMove 3s ease infinite",
-      }}
+    <Link
+      href={processedHref}
+      className={observer ? "cta-observer inline-block" : "inline-block"}
+      aria-label={text}
+      onClick={handleClick}
     >
-      <div
-        style={{
-          borderRadius: "calc(1.5rem - 2px)",
-          overflow: "hidden",
-          display: "inline-block",
-        }}
-      >
-        <CTAElement />
-      </div>
-      <style>
-        {`
-          @keyframes gradientMove {
-            0% {
-              background-position: 0% 0%;
-            }
-            50% {
-              background-position: 100% 100%;
-            }
-            100% {
-              background-position: 0% 0%;
-            }
-          }
-        `}
-      </style>
-    </div>
+      <WrappedButton />
+    </Link>
   );
 }
