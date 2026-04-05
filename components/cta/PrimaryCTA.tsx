@@ -115,13 +115,16 @@ export default function PrimaryCTA({
       className="
         inline-flex items-center gap-3
         bg-gradient-to-r from-yellow-400 via-green-400 to-green-500
-        text-black px-10 sm:px-16 md:px-20 py-3 sm:py-5 md:py-7
+        text-black 
+        px-10 sm:px-16 md:px-20 
+        py-3 sm:py-5 md:py-7
         rounded-3xl
         font-bold text-lg sm:text-xl md:text-xl
         shadow-3xl
         hover:shadow-4xl
         transition-all duration-300
         cursor-pointer
+        w-full
       "
     >
       {text}
@@ -129,11 +132,13 @@ export default function PrimaryCTA({
     </motion.span>
   );
 
-  // Wrapping CircleBorder but making sure it doesn't add extra background
+  // Override CircleBorder's inner styling by targeting with negative margin
   const WrappedButton = () => (
-    <div className="inline-block">
+    <div className="inline-block -m-6 -m-10">
       <CircleBorder>
-        <ButtonContent />
+        <div className="-m-6 -m-10">
+          <ButtonContent />
+        </div>
       </CircleBorder>
     </div>
   );
