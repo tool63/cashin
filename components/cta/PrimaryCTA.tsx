@@ -159,7 +159,7 @@ export default function PrimaryCTA({
 
   return (
     <CircleBorder>
-      <div style={{ padding: "0.5mm" }}>
+      <div style={{ padding: "0.50mm" }}>
         <CTAElement />
       </div>
     </CircleBorder>
