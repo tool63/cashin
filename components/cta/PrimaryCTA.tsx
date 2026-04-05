@@ -158,50 +158,64 @@ export default function PrimaryCTA({
     );
   };
 
+  // Calculate the spacing in pixels (0.50mm ≈ 1.89px, we'll use 2px)
+  const spacingPx = 2;
+
   return (
     <div className="relative inline-block">
-      {/* Animated Circle Border */}
-      <motion.div
-        className="absolute inset-0 rounded-3xl"
+      {/* Animated Circle Border - positioned behind the button with exact spacing */}
+      <div
+        className="absolute"
         style={{
-          padding: "0.50mm",
+          top: -spacingPx,
+          left: -spacingPx,
+          right: -spacingPx,
+          bottom: -spacingPx,
+          borderRadius: "calc(1.5rem + 2px)",
+          padding: `${spacingPx}px`,
           background: "linear-gradient(90deg, #facc15, #4ade80, #22c55e)",
           backgroundSize: "200% 200%",
-        }}
-        animate={{
-          backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: "linear",
+          animation: "gradientShift 3s ease infinite",
+          zIndex: 5,
         }}
       />
       
-      {/* Inner border glow effect */}
-      <motion.div
-        className="absolute inset-0 rounded-3xl"
+      {/* Glow effect */}
+      <div
+        className="absolute"
         style={{
-          padding: "0.50mm",
+          top: -spacingPx - 2,
+          left: -spacingPx - 2,
+          right: -spacingPx - 2,
+          bottom: -spacingPx - 2,
+          borderRadius: "calc(1.5rem + 6px)",
           background: "linear-gradient(90deg, #facc15, #4ade80, #22c55e)",
           backgroundSize: "200% 200%",
-          filter: "blur(4px)",
-          opacity: 0.5,
-        }}
-        animate={{
-          backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: "linear",
+          filter: "blur(6px)",
+          opacity: 0.4,
+          animation: "gradientShift 3s ease infinite",
+          zIndex: 4,
         }}
       />
       
       {/* Main CTA Button */}
-      <div className="relative z-20">
+      <div className="relative z-10">
         <CTAElement />
       </div>
+
+      <style jsx>{`
+        @keyframes gradientShift {
+          0% {
+            background-position: 0% 0%;
+          }
+          50% {
+            background-position: 100% 100%;
+          }
+          100% {
+            background-position: 0% 0%;
+          }
+        }
+      `}</style>
     </div>
   );
 }
