@@ -1,0 +1,334 @@
+{
+  "seo": {
+    "title": "Earn Bitcoin Online in {country} - Get Free BTC Rewards | Cashog",
+    "description": "Earn Bitcoin online in {country} by playing games, completing offers & tasks. Get paid in BTC instantly. Start earning cryptocurrency for free today!"
+  },
+  "hero": {
+    "title": "Earn Bitcoin Online in {country}",
+    "subtitle": "Get free Bitcoin (BTC) by playing games, completing offers & tasks. Join 100,000+ users who've already earned 500+ BTC in cryptocurrency rewards!"
+  },
+  "statsTitle": "Trusted by Thousands",
+  "stats": {
+    "btcEarned": "500+",
+    "btcEarnedLabel": "BTC Earned",
+    "avgPayout": "$25",
+    "avgPayoutLabel": "Average Payout",
+    "activeUsers": "100K+",
+    "activeUsersLabel": "Active Users",
+    "totalPaid": "$5M+",
+    "totalPaidLabel": "Total Value Paid"
+  },
+  "methodsTitle": "Ways to Earn Bitcoin Online",
+  "methodsSubtitle": "Choose the method that works best for you",
+  "earningMethods": [
+    {
+      "icon": "🎮",
+      "title": "Play Crypto Games",
+      "description": "Play Bitcoin-earning games on mobile and PC. Complete levels, defeat bosses, and earn satoshis instantly.",
+      "timeEstimate": "10-30 mins/day",
+      "difficulty": "Easy",
+      "rewardRange": "0.00001 - 0.001 BTC"
+    },
+    {
+      "icon": "💧",
+      "title": "Bitcoin Faucets",
+      "description": "Claim free Bitcoin every hour from trusted faucets. Complete simple captchas and get instant BTC rewards.",
+      "timeEstimate": "1-5 mins",
+      "difficulty": "Easy",
+      "rewardRange": "0.000001 - 0.0001 BTC"
+    },
+    {
+      "icon": "📝",
+      "title": "Crypto Surveys",
+      "description": "Share your opinion on crypto projects and blockchain topics. Get paid in Bitcoin for each survey.",
+      "timeEstimate": "5-20 mins each",
+      "difficulty": "Easy",
+      "rewardRange": "0.00005 - 0.0005 BTC"
+    },
+    {
+      "icon": "🛒",
+      "title": "Complete Offers",
+      "description": "Sign up for crypto exchanges, download wallets, or try DeFi platforms to earn Bitcoin rewards.",
+      "timeEstimate": "5-60 mins",
+      "difficulty": "Medium",
+      "rewardRange": "0.0001 - 0.01 BTC"
+    },
+    {
+      "icon": "⛏️",
+      "title": "Cloud Mining",
+      "description": "Rent mining power and earn passive Bitcoin income. No hardware needed - start with small investments.",
+      "timeEstimate": "24/7 passive",
+      "difficulty": "Hard",
+      "rewardRange": "0.0005 - 0.05 BTC/month"
+    },
+    {
+      "icon": "👥",
+      "title": "Refer Friends",
+      "description": "Invite friends to join and earn Bitcoin commissions when they complete offers or make deposits.",
+      "timeEstimate": "5 mins",
+      "difficulty": "Easy",
+      "rewardRange": "0.001 - 0.01 BTC per referral"
+    },
+    {
+      "icon": "📊",
+      "title": "Crypto Trading",
+      "description": "Learn to trade Bitcoin on exchanges. Start with demo accounts, then trade with small amounts to earn profits.",
+      "timeEstimate": "1-8 hours/day",
+      "difficulty": "Hard",
+      "rewardRange": "Variable"
+    },
+    {
+      "icon": "🎯",
+      "title": "Micro Tasks",
+      "description": "Complete small tasks like captcha solving, data entry, or content moderation for Bitcoin payments.",
+      "timeEstimate": "5-30 mins",
+      "difficulty": "Easy",
+      "rewardRange": "0.00001 - 0.0001 BTC"
+    },
+    {
+      "icon": "💻",
+      "title": "Freelance Work",
+      "description": "Offer your skills (writing, design, programming) and get paid in Bitcoin by international clients.",
+      "timeEstimate": "1-8 hours",
+      "difficulty": "Medium",
+      "rewardRange": "0.001 - 0.1 BTC"
+    }
+  ],
+  "featuredOffersTitle": "Top Bitcoin Earning Opportunities",
+  "featuredOffersSubtitle": "Limited spots - start earning BTC today",
+  "featuredOffers": [
+    {
+      "title": "Play Bitcoin Blast - Earn 0.0005 BTC",
+      "reward": "0.0005 BTC",
+      "timeEstimate": "30 mins",
+      "difficulty": "Easy",
+      "spotsLeft": 5000,
+      "company": "CryptoGames",
+      "rating": "4.7"
+    },
+    {
+      "title": "Complete 10 Crypto Surveys - 0.002 BTC",
+      "reward": "0.002 BTC",
+      "timeEstimate": "2 hours",
+      "difficulty": "Easy",
+      "spotsLeft": 3000,
+      "company": "CryptoPanel",
+      "rating": "4.6"
+    },
+    {
+      "title": "Sign Up for Binance - Get 0.001 BTC",
+      "reward": "0.001 BTC",
+      "timeEstimate": "10 mins",
+      "difficulty": "Easy",
+      "spotsLeft": 10000,
+      "company": "Binance",
+      "rating": "4.9"
+    },
+    {
+      "title": "Reach Level 100 in Crypto Idle Miner",
+      "reward": "0.01 BTC",
+      "timeEstimate": "2-3 weeks",
+      "difficulty": "Hard",
+      "spotsLeft": 500,
+      "company": "IdleGames",
+      "rating": "4.5"
+    },
+    {
+      "title": "Complete 50 Micro Tasks - 0.001 BTC Bonus",
+      "reward": "0.001 BTC",
+      "timeEstimate": "3-4 hours",
+      "difficulty": "Medium",
+      "spotsLeft": 2000,
+      "company": "MicroWorkers",
+      "rating": "4.7"
+    }
+  ],
+  "benefitsTitle": "Why Earn Bitcoin With Us",
+  "benefits": [
+    {
+      "icon": "⚡",
+      "title": "Instant Withdrawals",
+      "description": "Withdraw your Bitcoin instantly to any wallet with no minimum limits or hidden fees."
+    },
+    {
+      "icon": "🛡️",
+      "title": "100% Legitimate",
+      "description": "We partner with trusted crypto platforms. No scams, no hacks - just real Bitcoin earning opportunities."
+    },
+    {
+      "icon": "🌍",
+      "title": "Global Access",
+      "description": "Bitcoin is borderless. Earn from anywhere in {country} and send money globally without banks."
+    },
+    {
+      "icon": "💎",
+      "title": "Store of Value",
+      "description": "Bitcoin has historically increased in value. Your earnings today could be worth much more tomorrow."
+    },
+    {
+      "icon": "🔒",
+      "title": "Full Control",
+      "description": "You control your private keys. No bank can freeze your funds or limit your transactions."
+    },
+    {
+      "icon": "📈",
+      "title": "Price Appreciation",
+      "description": "Hold your Bitcoin and benefit from potential price increases over time."
+    },
+    {
+      "icon": "🔄",
+      "title": "Low Transaction Fees",
+      "description": "Send Bitcoin anywhere in the world for pennies compared to bank wire fees."
+    },
+    {
+      "icon": "🎯",
+      "title": "No Bank Account Needed",
+      "description": "Start earning Bitcoin without needing a bank account or credit check."
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Your Bitcoin Earnings",
+  "tips": [
+    {
+      "title": "Use Multiple Earning Methods",
+      "description": "Combine games, faucets, surveys, and offers to maximize daily Bitcoin earnings. Don't rely on just one method."
+    },
+    {
+      "title": "Complete Your Profile",
+      "description": "Fill out your complete profile to qualify for higher-paying crypto surveys and offers."
+    },
+    {
+      "title": "Check Daily for New Offers",
+      "description": "New high-paying Bitcoin offers are added daily. Check back regularly to grab limited spots before they fill up."
+    },
+    {
+      "title": "Refer Your Friends",
+      "description": "Invite friends to earn Bitcoin commissions. Referral earnings can add up quickly without extra work."
+    },
+    {
+      "title": "Hold for Long Term",
+      "description": "Instead of cashing out immediately, consider holding your Bitcoin. Historical price appreciation could multiply your earnings."
+    },
+    {
+      "title": "Secure Your Earnings",
+      "description": "Always withdraw to a personal wallet you control. Never leave large amounts on exchange platforms."
+    },
+    {
+      "title": "Learn About Bitcoin",
+      "description": "Understanding how Bitcoin works helps you avoid scams and make better earning decisions."
+    },
+    {
+      "title": "Set Daily Goals",
+      "description": "Set realistic daily earning targets (e.g., 0.0001 BTC/day). Consistency is key to building your Bitcoin stack."
+    }
+  ],
+  "testimonialsTitle": "Real Users, Real Bitcoin Earnings",
+  "testimonials": [
+    {
+      "name": "Michael C.",
+      "country": "United States",
+      "earnings": "0.05 BTC",
+      "quote": "I've earned over 0.05 BTC just by playing crypto games in my free time. The withdrawals are instant and the platform is legit!",
+      "avatar": "MC"
+    },
+    {
+      "name": "Priya K.",
+      "country": "India",
+      "earnings": "0.03 BTC",
+      "quote": "Been using this for 6 months. Already earned ₹1,50,000+ worth of Bitcoin. Perfect for saving and investing!",
+      "avatar": "PK"
+    },
+    {
+      "name": "David W.",
+      "country": "United Kingdom",
+      "earnings": "0.08 BTC",
+      "quote": "The crypto surveys pay well and the faucet claims add up. I've withdrawn over 0.08 BTC to my personal wallet. Highly recommend!",
+      "avatar": "DW"
+    },
+    {
+      "name": "Carlos M.",
+      "country": "Spain",
+      "earnings": "0.04 BTC",
+      "quote": "Best way to earn free Bitcoin I've found. The offers actually pay out and customer support is responsive. My Bitcoin stack is growing!",
+      "avatar": "CM"
+    },
+    {
+      "name": "Sarah J.",
+      "country": "Canada",
+      "earnings": "0.06 BTC",
+      "quote": "I was skeptical at first but decided to try. Earned my first 0.001 BTC in 2 days. Now I do this while commuting and HODL for the future.",
+      "avatar": "SJ"
+    },
+    {
+      "name": "Ahmed R.",
+      "country": "UAE",
+      "earnings": "0.12 BTC",
+      "quote": "The referral program is amazing. I've earned over 0.12 BTC just by inviting friends who love crypto. Passive Bitcoin income at its best!",
+      "avatar": "AR"
+    }
+  ],
+  "faq": {
+    "title": "Earn Bitcoin Online in {country} - FAQ",
+    "items": [
+      {
+        "question": "How do I earn Bitcoin online?",
+        "answer": "You can earn Bitcoin online by playing crypto games, claiming from faucets, completing surveys, finishing offers, doing micro tasks, referring friends, or freelance work. Each activity rewards you with satoshis (fractions of Bitcoin) that can be withdrawn to your wallet."
+      },
+      {
+        "question": "Is this really free?",
+        "answer": "Yes, signing up and earning is completely free. There are no hidden fees or subscriptions. You just complete activities and get paid in Bitcoin. Some methods like cloud mining or trading may require small investments, but most earning methods are 100% free."
+      },
+      {
+        "question": "How long does it take to get my first Bitcoin?",
+        "answer": "Most users earn their first 0.00001 BTC within 24 hours of signing up. Some high-paying offers can get you to 0.001 BTC in under an hour!"
+      },
+      {
+        "question": "How do I withdraw my Bitcoin?",
+        "answer": "Once you have enough satoshis, go to the Withdraw section, enter your Bitcoin wallet address, choose the amount, and click Withdraw. Payments are sent instantly to your wallet via the blockchain."
+      },
+      {
+        "question": "What wallet should I use?",
+        "answer": "We recommend using a personal wallet where you control the private keys. Popular options include BlueWallet, Electrum, Trust Wallet, or hardware wallets like Ledger and Trezor for larger amounts."
+      },
+      {
+        "question": "Is Bitcoin legal in {country}?",
+        "answer": "Bitcoin legality varies by country. In most countries including the US, UK, Canada, Australia, and EU nations, Bitcoin is legal to own and use. Please check your local regulations. We operate in compliance with international laws."
+      },
+      {
+        "question": "How much can I earn per month?",
+        "answer": "Most active users earn 0.001 - 0.01 BTC per month ($25-$250 at current prices). Power users who complete high-value offers and refer friends can earn 0.05+ BTC monthly ($1,250+)."
+      },
+      {
+        "question": "Do I need to invest money?",
+        "answer": "No, you can earn Bitcoin completely free without any investment. All the methods listed (games, faucets, surveys, offers, tasks) require $0 to start. Cloud mining and trading may require capital but are optional."
+      },
+      {
+        "question": "What are satoshis?",
+        "answer": "Satoshis (sats) are the smallest unit of Bitcoin. 1 Bitcoin = 100,000,000 satoshis. Most rewards are paid in satoshis since they're easier to earn and transfer."
+      },
+      {
+        "question": "Can I earn Bitcoin on mobile?",
+        "answer": "Absolutely! Our platform works perfectly on both desktop and mobile devices. Download crypto games from app stores and complete offers on your phone."
+      },
+      {
+        "question": "How are Bitcoin payments sent?",
+        "answer": "We send Bitcoin payments directly to your wallet address via the Bitcoin blockchain. Transactions typically confirm within 10-60 minutes depending on network congestion."
+      },
+      {
+        "question": "What's the minimum withdrawal amount?",
+        "answer": "The minimum withdrawal amount is 0.0001 BTC (approximately $2.50 at current prices). This helps cover blockchain transaction fees."
+      },
+      {
+        "question": "Are there transaction fees?",
+        "answer": "We cover the Bitcoin network fees for your first withdrawal each month. Additional withdrawals may have a small fee to cover blockchain costs."
+      },
+      {
+        "question": "Can I earn Bitcoin without KYC?",
+        "answer": "Yes! Most earning methods don't require identity verification. You can start earning Bitcoin instantly with just an email address."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Start Earning Bitcoin in {country}?",
+    "subtitle": "Join 100,000+ users already earning Bitcoin in {country}. Sign up for free and start building your crypto portfolio today!"
+  }
+}
