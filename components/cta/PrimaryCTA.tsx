@@ -12,7 +12,7 @@ import CircleBorder from "@/components/animations/CircleBorder";
 
 interface PrimaryCTAProps {
   href: string;
-  translationKey?: string; // optional now
+  translationKey?: string;
   observer?: boolean;
   fallback?: string;
   external?: boolean;
@@ -32,7 +32,6 @@ export default function PrimaryCTA({
   const country = params?.country as string || "us";
   const { getTranslation } = useLanguage();
 
-  // ✅ ALL keys from your JSON
   const CTA_KEYS = useMemo(
     () => [
       "start_earning_now",
@@ -43,7 +42,6 @@ export default function PrimaryCTA({
       "create_account",
       "start_free_trial",
       "claim_offer",
-
       "get_cashback",
       "earn_cashback",
       "get_discount",
@@ -52,7 +50,6 @@ export default function PrimaryCTA({
       "save_money",
       "earn_rewards",
       "redeem_now",
-
       "start_now",
       "earn_now",
       "join_free",
@@ -67,31 +64,22 @@ export default function PrimaryCTA({
     []
   );
 
-  // ✅ Safe key logic (same idea as FloatingCTA)
   const safeKey = useMemo(() => {
     if (translationKey && CTA_KEYS.includes(translationKey)) {
       return translationKey;
     }
-    // fallback → random high-converting CTA
     return CTA_KEYS[Math.floor(Math.random() * CTA_KEYS.length)];
   }, [translationKey, CTA_KEYS]);
 
-  // ✅ Get translation safely
   const text = getTranslation("primarycta", safeKey, fallback);
 
-  // ✅ Process href to include country if needed
   const getProcessedHref = useCallback(() => {
     if (external) return href;
     
-    // If href already starts with / and country, return as is
     if (href.startsWith(`/${country}`)) return href;
-    
-    // If href is absolute URL or starts with http
     if (href.startsWith("http") || href.startsWith("//")) return href;
     
-    // If href is just a path without country
     if (href.startsWith("/")) {
-      // Special paths that shouldn't get country prefix
       const noPrefixPaths = ["/api/", "/auth/", "/_next/", "/favicon.ico"];
       if (noPrefixPaths.some(path => href.startsWith(path))) {
         return href;
@@ -99,10 +87,7 @@ export default function PrimaryCTA({
       return `/${country}${href}`;
     }
     
-    // Handle anchor links
     if (href.startsWith("#")) return href;
-    
-    // Handle relative paths
     return `/${country}/${href}`;
   }, [href, country, external]);
 
@@ -114,7 +99,6 @@ export default function PrimaryCTA({
       onClick();
     }
     
-    // Handle scroll to hash
     if (processedHref.startsWith("#")) {
       e.preventDefault();
       const element = document.querySelector(processedHref);
@@ -124,7 +108,6 @@ export default function PrimaryCTA({
     }
   };
 
-  // Button content
   const ButtonContent = () => (
     <motion.span
       whileHover={{ scale: 1.08 }}
@@ -146,7 +129,15 @@ export default function PrimaryCTA({
     </motion.span>
   );
 
-  // For external links or special cases
+  // Wrapping CircleBorder but making sure it doesn't add extra background
+  const WrappedButton = () => (
+    <div className="inline-block">
+      <CircleBorder>
+        <ButtonContent />
+      </CircleBorder>
+    </div>
+  );
+
   if (external || processedHref.startsWith("http") || processedHref.startsWith("//")) {
     return (
       <a
@@ -157,14 +148,11 @@ export default function PrimaryCTA({
         aria-label={text}
         onClick={handleClick}
       >
-        <CircleBorder>
-          <ButtonContent />
-        </CircleBorder>
+        <WrappedButton />
       </a>
     );
   }
 
-  // Internal Next.js Link
   return (
     <Link
       href={processedHref}
@@ -172,9 +160,7 @@ export default function PrimaryCTA({
       aria-label={text}
       onClick={handleClick}
     >
-      <CircleBorder>
-        <ButtonContent />
-      </CircleBorder>
+      <WrappedButton />
     </Link>
   );
 }
