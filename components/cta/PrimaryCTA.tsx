@@ -128,6 +128,13 @@ export default function PrimaryCTA({
     </motion.span>
   );
 
+  // Simple border line with 1mm space
+  const WrappedButton = () => (
+    <div className="inline-block rounded-3xl border-2 border-yellow-400" style={{ margin: '1mm' }}>
+      <ButtonContent />
+    </div>
+  );
+
   if (external || processedHref.startsWith("http") || processedHref.startsWith("//")) {
     return (
       <a
@@ -138,7 +145,7 @@ export default function PrimaryCTA({
         aria-label={text}
         onClick={handleClick}
       >
-        <ButtonContent />
+        <WrappedButton />
       </a>
     );
   }
@@ -150,7 +157,7 @@ export default function PrimaryCTA({
       aria-label={text}
       onClick={handleClick}
     >
-      <ButtonContent />
+      <WrappedButton />
     </Link>
   );
 }
