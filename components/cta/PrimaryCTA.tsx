@@ -123,7 +123,6 @@ export default function PrimaryCTA({
         hover:shadow-4xl
         transition-all duration-300
         cursor-pointer
-        w-full
       "
     >
       {text}
@@ -131,13 +130,11 @@ export default function PrimaryCTA({
   );
 
   const WrappedButton = () => (
-    <div className="inline-block">
-      <CircleBorder>
-        <div className="-m-6 md:-m-10">
-          <ButtonContent />
-        </div>
-      </CircleBorder>
-    </div>
+    <CircleBorder>
+      <div className="p-1">
+        <ButtonContent />
+      </div>
+    </CircleBorder>
   );
 
   if (external || processedHref.startsWith("http") || processedHref.startsWith("//")) {
