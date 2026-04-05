@@ -224,29 +224,29 @@ export default function Footer({ className }: FooterProps) {
 
   {/* REWARDS */}
   <Section id="rewards" title={t("rewards", "Rewards")}>
-    <A href="/earn-paypal-money">{t("earnPayPal", "Earn PayPal Money")}</A>
+    <A href="/rewards/earn-paypal-money">{t("earnPayPal", "Earn PayPal Money")}</A>
 
     <Sub id="giftcards" title={t("earnGiftCards", "Earn Gift Cards")}>
-      <A href="/earn-amazon-gift-card">{t("amazonGiftCard", "Amazon Gift Card")}</A>
-      <A href="/earn-apple-gift-card">{t("appleGiftCard", "Apple Gift Card")}</A>
-      <A href="/earn-google-play-gift-card">{t("googleGiftCard", "Google Play Gift Card")}</A>
+      <A href="/rewards/earn-amazon-gift-card">{t("amazonGiftCard", "Amazon Gift Card")}</A>
+      <A href="/rewards/earn-apple-gift-card">{t("appleGiftCard", "Apple Gift Card")}</A>
+      <A href="/rewards/earn-google-play-gift-card">{t("googleGiftCard", "Google Play Gift Card")}</A>
     </Sub>
 
     <Sub id="crypto" title={t("earnCrypto", "Earn Crypto")}>
-      <A href="/earn-bitcoin-online">{t("bitcoin", "Bitcoin")}</A>
-      <A href="/earn-litecoin-online">{t("litecoin", "Litecoin")}</A>
-      <A href="/earn-ethereum-online">{t("ethereum", "Ethereum")}</A>
-      <A href="/earn-dogecoin-online">{t("dogecoin", "Dogecoin")}</A>
+      <A href="/rewards/earn-bitcoin-online">{t("bitcoin", "Bitcoin")}</A>
+      <A href="/rewards/earn-litecoin-online">{t("litecoin", "Litecoin")}</A>
+      <A href="/rewards/earn-ethereum-online">{t("ethereum", "Ethereum")}</A>
+      <A href="/rewards/earn-dogecoin-online">{t("dogecoin", "Dogecoin")}</A>
     </Sub>
 
     <Sub id="gaming" title={t("earnGaming", "Earn Gaming")}>
-      <A href="/earn-free-robux">{t("robux", "Free Robux")}</A>
-      <A href="/earn-steam-gift-cards">{t("steam", "Steam Gift Cards")}</A>
-      <A href="/earn-xbox-gift-cards">{t("xbox", "Xbox Gift Cards")}</A>
-      <A href="/earn-psn-gift-cards">{t("psn", "PSN Gift Cards")}</A>
+      <A href="/rewards/earn-free-robux">{t("robux", "Free Robux")}</A>
+      <A href="/rewards/earn-steam-gift-cards">{t("steam", "Steam Gift Cards")}</A>
+      <A href="/rewards/earn-xbox-gift-cards">{t("xbox", "Xbox Gift Cards")}</A>
+      <A href="/rewards/earn-psn-gift-cards">{t("psn", "PSN Gift Cards")}</A>
     </Sub>
 
-    <A href="/earn-spotify-premium">{t("spotify", "Spotify Premium")}</A>
+    <A href="/rewards/earn-spotify-premium">{t("spotify", "Spotify Premium")}</A>
   </Section>
 
   {/* RESOURCES */}
