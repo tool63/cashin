@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useMemo, useCallback } from "react";
 import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
+import CircleBorder from "@/components/animations/CircleBorder";
 
 interface PrimaryCTAProps {
   href: string;
@@ -128,47 +129,39 @@ export default function PrimaryCTA({
     </motion.span>
   );
 
-  const CTAWithBorder = () => (
-    <div className="relative inline-block rounded-3xl p-[2px] overflow-hidden">
-      {/* Animated Gradient Border */}
-      <motion.div
-        className="absolute inset-0 rounded-3xl"
-        style={{
-          background: "conic-gradient(from 180deg at 50% 50%, #facc15, #22c55e, #10b981, #facc15)",
-        }}
-        animate={{ rotate: 360 }}
-        transition={{ repeat: Infinity, ease: "linear", duration: 6 }}
-      />
-      
-      {/* Glow Effect */}
-      <div className="absolute inset-0 rounded-3xl blur-md opacity-40 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500" />
-      
-      {/* 0.5mm spacing wrapper */}
-      <div className="relative z-10" style={{ padding: "0.5mm" }}>
-        {external || processedHref.startsWith("http") || processedHref.startsWith("//") ? (
-          <a
-            href={processedHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={observer ? "cta-observer inline-block" : "inline-block"}
-            aria-label={text}
-            onClick={handleClick}
-          >
-            <ButtonContent />
-          </a>
-        ) : (
-          <Link
-            href={processedHref}
-            className={observer ? "cta-observer inline-block" : "inline-block"}
-            aria-label={text}
-            onClick={handleClick}
-          >
-            <ButtonContent />
-          </Link>
-        )}
-      </div>
-    </div>
-  );
+  const CTAElement = () => {
+    if (external || processedHref.startsWith("http") || processedHref.startsWith("//")) {
+      return (
+        <a
+          href={processedHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={observer ? "cta-observer inline-block" : "inline-block"}
+          aria-label={text}
+          onClick={handleClick}
+        >
+          <ButtonContent />
+        </a>
+      );
+    }
 
-  return <CTAWithBorder />;
+    return (
+      <Link
+        href={processedHref}
+        className={observer ? "cta-observer inline-block" : "inline-block"}
+        aria-label={text}
+        onClick={handleClick}
+      >
+        <ButtonContent />
+      </Link>
+    );
+  };
+
+  return (
+    <CircleBorder>
+      <div style={{ padding: "0.5mm" }}>
+        <CTAElement />
+      </div>
+    </CircleBorder>
+  );
 }
