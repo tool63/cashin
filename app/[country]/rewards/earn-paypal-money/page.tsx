@@ -298,12 +298,12 @@ export default async function EarnPaypalMoneyPage({
 
   if (!countryParam || !isValidCountryCode(countryParam)) {
     return (
-      <main className="flex flex-col items-center justify-center min-h-screen">
+      <div className="flex flex-col items-center justify-center min-h-screen">
         <div className="text-center">
           <h1 className="text-2xl font-bold">Country Not Supported</h1>
           <p className="mt-2">Please check your region settings.</p>
         </div>
-      </main>
+      </div>
     );
   }
 
@@ -321,7 +321,7 @@ export default async function EarnPaypalMoneyPage({
 
   const rawTitle = tData?.seo?.title;
   const rawDescription = tData?.seo?.description;
-  const title = t(rawTitle, `Earn PayPal Money - Get Free PayPal Gift Cards`);
+  const title = t(rawTitle, "Earn PayPal Money - Get Free PayPal Gift Cards");
   const description = t(rawDescription, `Earn free PayPal money in ${countryName}.`);
 
   const structuredData = generateJsonLd({
@@ -524,9 +524,8 @@ export default async function EarnPaypalMoneyPage({
     buttonText: t(tData?.final?.buttonText, "Join Free & Start Earning 💙"),
   };
 
-  // JSX Return
   return (
-    <main className="flex flex-col items-center w-full overflow-x-hidden">
+    <div className="flex flex-col items-center w-full overflow-x-hidden">
       {structuredData && (
         <script
           type="application/ld+json"
@@ -538,8 +537,8 @@ export default async function EarnPaypalMoneyPage({
       {/* Animated Background Orbs */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
         <div className="absolute top-0 -left-40 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" />
-        <div className="absolute top-0 -right-40 w-80 h-80 bg-yellow-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse animation-delay-2000" />
-        <div className="absolute -bottom-40 left-20 w-80 h-80 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse animation-delay-4000" />
+        <div className="absolute top-0 -right-40 w-80 h-80 bg-yellow-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" />
+        <div className="absolute -bottom-40 left-20 w-80 h-80 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" />
       </div>
 
       {/* Hero Section */}
@@ -588,13 +587,13 @@ export default async function EarnPaypalMoneyPage({
             <div className="relative overflow-hidden">
               <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white dark:from-gray-900 to-transparent z-10" />
               <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white dark:from-gray-900 to-transparent z-10" />
-              <div className="flex overflow-x-auto whitespace-nowrap gap-2 pb-4 scrollbar-hide">
-                {[...liveOffersData.offers, ...liveOffersData.offers].map((offer, idx) => (
-                  <div key={idx} className="inline-block mx-2 flex-shrink-0">
+              <div className="flex overflow-x-auto gap-2 pb-4 scrollbar-hide">
+                {liveOffersData.offers.map((offer, idx) => (
+                  <div key={idx} className="flex-shrink-0">
                     <div className="inline-flex items-center gap-3 bg-white dark:bg-gray-800 rounded-full px-4 py-2 shadow-lg border border-gray-100 dark:border-gray-700">
                       <div className={`w-2 h-2 rounded-full ${offer.isPaypal ? 'bg-blue-500 animate-pulse' : 'bg-green-500'}`} />
                       <span className="font-medium text-sm">{offer.user}</span>
-                      <span className="text-gray-500 text-xs">{offer.timestamp || `${Math.floor(Math.random() * 30) + 1} min ago`}</span>
+                      <span className="text-gray-500 text-xs">{offer.timestamp}</span>
                       <span className="font-bold text-green-600">+${offer.amount}</span>
                       <span className="text-xs text-gray-400">{offer.platform}</span>
                     </div>
@@ -673,6 +672,7 @@ export default async function EarnPaypalMoneyPage({
                           <span className="text-gray-700 dark:text-gray-300">{example.title}</span>
                           <div className="flex items-center gap-2">
                             {example.duration && <span className="text-xs text-gray-400">{example.duration}</span>}
+                            {example.action && <span className="text-xs text-gray-400">{example.action}</span>}
                             <span className="font-bold text-green-600">{example.reward}</span>
                           </div>
                         </div>
@@ -700,7 +700,7 @@ export default async function EarnPaypalMoneyPage({
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mt-4 rounded-full" />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
               {stepsData.steps.map((step) => (
                 <div key={step.step} className="relative text-center group">
                   <div className="relative z-10 w-24 h-24 mx-auto mb-6">
@@ -734,7 +734,7 @@ export default async function EarnPaypalMoneyPage({
               {activityFeedData.activities.map((activity, idx) => (
                 <div
                   key={idx}
-                  className="group bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-x-1 border-l-4 border-blue-500"
+                  className="group bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-x-1 border-l-4 border-blue-500"
                 >
                   <div className="flex items-center gap-4">
                     <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm">
@@ -811,7 +811,7 @@ export default async function EarnPaypalMoneyPage({
                   <p className="text-5xl font-bold">{earningsEstimateData.timeMinutes}</p>
                   <p className="text-sm opacity-80 mt-2">Minutes Invested</p>
                 </div>
-                <div className="text-center border-l border-r border-white/20">
+                <div className="text-center md:border-l md:border-r border-white/20">
                   <p className="text-5xl font-bold">{earningsEstimateData.platformEarnings}</p>
                   <p className="text-sm opacity-80 mt-2">Our Platform Earnings</p>
                 </div>
@@ -841,7 +841,7 @@ export default async function EarnPaypalMoneyPage({
                 {userReviewsData.reviews.map((review, idx) => (
                   <div
                     key={idx}
-                    className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+                    className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
                   >
                     <div className="flex items-center gap-1 mb-4">
                       {[...Array(5)].map((_, i) => (
@@ -899,6 +899,6 @@ export default async function EarnPaypalMoneyPage({
           </div>
         </OpeningStyle>
       </CircleBorder>
-    </main>
+    </div>
   );
 }
