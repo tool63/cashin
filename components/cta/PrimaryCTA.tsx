@@ -122,17 +122,16 @@ export default function PrimaryCTA({
         hover:shadow-4xl
         transition-all duration-300
         cursor-pointer
-        relative z-10
       "
     >
       {text}
     </motion.span>
   );
 
-  // Custom animated border with 1mm space - removed glow effect
+  // Custom animated border - only the border line circles, no background in between
   const WrappedButton = () => (
-    <div className="relative inline-block rounded-3xl p-[2px] overflow-hidden">
-      {/* Animated Gradient Border */}
+    <div className="relative inline-block rounded-3xl p-[2px] overflow-hidden bg-transparent">
+      {/* Animated Gradient Border - only this circles */}
       <motion.div
         className="absolute inset-0 rounded-3xl"
         style={{
@@ -147,8 +146,8 @@ export default function PrimaryCTA({
           duration: 6,
         }}
       />
-      {/* Button with 1mm space - removed glow effect div */}
-      <div className="relative z-10" style={{ margin: '1mm' }}>
+      {/* Transparent space between border and button - no circling color */}
+      <div className="relative z-10 bg-transparent" style={{ margin: '1mm' }}>
         <ButtonContent />
       </div>
     </div>
