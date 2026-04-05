@@ -131,9 +131,7 @@ export default function PrimaryCTA({
 
   const WrappedButton = () => (
     <CircleBorder>
-      <div className="p-1">
-        <ButtonContent />
-      </div>
+      <ButtonContent />
     </CircleBorder>
   );
 
