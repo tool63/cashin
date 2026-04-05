@@ -128,31 +128,6 @@ export default function PrimaryCTA({
     </motion.span>
   );
 
-  // Custom animated border - only the border line circles, no background in between
-  const WrappedButton = () => (
-    <div className="relative inline-block rounded-3xl p-[2px] overflow-hidden bg-transparent">
-      {/* Animated Gradient Border - only this circles */}
-      <motion.div
-        className="absolute inset-0 rounded-3xl"
-        style={{
-          background: "conic-gradient(from 180deg at 50% 50%, #facc15, #22c55e, #10b981, #facc15)",
-        }}
-        animate={{
-          rotate: 360,
-        }}
-        transition={{
-          repeat: Infinity,
-          ease: "linear",
-          duration: 6,
-        }}
-      />
-      {/* Transparent space between border and button - no circling color */}
-      <div className="relative z-10 bg-transparent" style={{ margin: '1mm' }}>
-        <ButtonContent />
-      </div>
-    </div>
-  );
-
   if (external || processedHref.startsWith("http") || processedHref.startsWith("//")) {
     return (
       <a
@@ -163,7 +138,7 @@ export default function PrimaryCTA({
         aria-label={text}
         onClick={handleClick}
       >
-        <WrappedButton />
+        <ButtonContent />
       </a>
     );
   }
@@ -175,7 +150,7 @@ export default function PrimaryCTA({
       aria-label={text}
       onClick={handleClick}
     >
-      <WrappedButton />
+      <ButtonContent />
     </Link>
   );
 }
