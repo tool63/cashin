@@ -159,10 +159,13 @@ export default function PrimaryCTA({
 
   return (
     <CircleBorder>
-      <div style={{ padding: "0.50mm" }}>
+      <div className="relative" style={{ 
+        padding: "0.50mm",
+        margin: "-0.50mm",
+        display: "inline-block"
+      }}>
         <CTAElement />
       </div>
     </CircleBorder>
   );
 }
-
