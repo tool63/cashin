@@ -1,0 +1,346 @@
+{
+  "seo": {
+    "title": "Earn Xbox Gift Cards in {country} - Get Free Xbox & Microsoft Store Credit | Cashog",
+    "description": "Earn Xbox gift cards in {country} by playing games, completing offers & surveys. Redeem for Xbox Game Pass, games, and more. Start earning free Xbox credit today!"
+  },
+  "hero": {
+    "title": "Earn Xbox Gift Cards in {country}",
+    "subtitle": "Get free Xbox & Microsoft Store credit by playing games, completing offers & surveys. Join 400,000+ gamers who've already redeemed $1,800,000+ in Xbox gift cards!"
+  },
+  "statsTitle": "Trusted by Thousands",
+  "stats": {
+    "giftCardsRedeemed": "180,000+",
+    "giftCardsRedeemedLabel": "Gift Cards Redeemed",
+    "avgCardValue": "$15",
+    "avgCardValueLabel": "Average Card Value",
+    "activeUsers": "400K+",
+    "activeUsersLabel": "Active Gamers",
+    "totalValue": "$1.8M+",
+    "totalValueLabel": "Total Value Redeemed"
+  },
+  "methodsTitle": "Ways to Earn Xbox Gift Cards",
+  "methodsSubtitle": "Choose the method that works best for you",
+  "earningMethods": [
+    {
+      "icon": "🎮",
+      "title": "Play Xbox Games",
+      "description": "Play featured Xbox games and earn Microsoft Store credit for achievements and playtime milestones.",
+      "timeEstimate": "10-60 mins/day",
+      "difficulty": "Easy",
+      "rewardRange": "$5 - $50"
+    },
+    {
+      "icon": "📝",
+      "title": "Gaming Surveys",
+      "description": "Share your opinion on Xbox games, hardware, and Game Pass titles. Get paid in Xbox credit for each survey.",
+      "timeEstimate": "5-20 mins each",
+      "difficulty": "Easy",
+      "rewardRange": "$1 - $10"
+    },
+    {
+      "icon": "🛒",
+      "title": "Complete Offers",
+      "description": "Sign up for Game Pass trials, download apps, or watch videos to earn Xbox gift card rewards.",
+      "timeEstimate": "5-60 mins",
+      "difficulty": "Medium",
+      "rewardRange": "$5 - $25"
+    },
+    {
+      "icon": "⭐",
+      "title": "Microsoft Rewards",
+      "description": "Earn Microsoft Rewards points by searching with Bing, completing quizzes, and daily challenges.",
+      "timeEstimate": "5-15 mins/day",
+      "difficulty": "Easy",
+      "rewardRange": "$5 - $20/month"
+    },
+    {
+      "icon": "🏆",
+      "title": "Xbox Achievements",
+      "description": "Earn Xbox Gift Cards by unlocking specific achievements and completing gamer score challenges.",
+      "timeEstimate": "30-120 mins",
+      "difficulty": "Medium",
+      "rewardRange": "$5 - $50"
+    },
+    {
+      "icon": "👥",
+      "title": "Refer Friends",
+      "description": "Invite friends to join and earn bonus Xbox credit when they complete their first offer.",
+      "timeEstimate": "5 mins",
+      "difficulty": "Easy",
+      "rewardRange": "$5 - $20 per referral"
+    },
+    {
+      "icon": "💚",
+      "title": "Game Pass Quests",
+      "description": "Complete Game Pass quests and challenges to earn Microsoft Rewards points redeemable for Xbox credit.",
+      "timeEstimate": "15-45 mins",
+      "difficulty": "Easy",
+      "rewardRange": "$5 - $15/month"
+    },
+    {
+      "icon": "📱",
+      "title": "Xbox App Tasks",
+      "description": "Use the Xbox mobile app to complete daily tasks, logins, and community challenges for rewards.",
+      "timeEstimate": "5-10 mins/day",
+      "difficulty": "Easy",
+      "rewardRange": "$5 - $10/month"
+    }
+  ],
+  "featuredOffersTitle": "Top Xbox Gift Card Opportunities",
+  "featuredOffersSubtitle": "Limited spots - start earning Xbox credit today",
+  "featuredOffers": [
+    {
+      "title": "Play Halo Infinite - Earn $10 Xbox",
+      "reward": "$10 Xbox",
+      "timeEstimate": "30 mins",
+      "difficulty": "Easy",
+      "spotsLeft": 15000,
+      "company": "Xbox Game Studios",
+      "rating": "4.9"
+    },
+    {
+      "title": "Complete 10 Gaming Surveys - $20 Xbox",
+      "reward": "$20 Xbox",
+      "timeEstimate": "2 hours",
+      "difficulty": "Easy",
+      "spotsLeft": 8000,
+      "company": "Xbox Insights",
+      "rating": "4.7"
+    },
+    {
+      "title": "Try Xbox Game Pass Ultimate - $15 Credit",
+      "reward": "$15 Xbox",
+      "timeEstimate": "10 mins",
+      "difficulty": "Easy",
+      "spotsLeft": 10000,
+      "company": "Microsoft",
+      "rating": "4.9"
+    },
+    {
+      "title": "Complete Microsoft Rewards Streak - $25 Bonus",
+      "reward": "$25 Xbox",
+      "timeEstimate": "30 days",
+      "difficulty": "Easy",
+      "spotsLeft": 5000,
+      "company": "Microsoft Rewards",
+      "rating": "4.8"
+    },
+    {
+      "title": "Unlock 10 Rare Achievements - $30 Xbox",
+      "reward": "$30 Xbox",
+      "timeEstimate": "2-5 hours",
+      "difficulty": "Medium",
+      "spotsLeft": 3000,
+      "company": "Xbox Live",
+      "rating": "4.6"
+    }
+  ],
+  "benefitsTitle": "Why Earn Xbox Gift Cards With Us",
+  "benefits": [
+    {
+      "icon": "⚡",
+      "title": "Instant Delivery",
+      "description": "Xbox gift card codes delivered instantly to your email as soon as you redeem."
+    },
+    {
+      "icon": "🛡️",
+      "title": "100% Legitimate",
+      "description": "No scams, no hacks - just real earning opportunities through legitimate offers."
+    },
+    {
+      "icon": "💚",
+      "title": "Official Xbox Credit",
+      "description": "All rewards are official Xbox & Microsoft Store codes that work directly on your Xbox console."
+    },
+    {
+      "icon": "💰",
+      "title": "No Purchase Needed",
+      "description": "Earn Xbox gift cards completely free without spending any real money."
+    },
+    {
+      "icon": "🎮",
+      "title": "Massive Game Library",
+      "description": "Use your Xbox credit to buy thousands of games, DLC, and in-game content."
+    },
+    {
+      "icon": "🔄",
+      "title": "Xbox Game Pass",
+      "description": "Use credit to subscribe to Xbox Game Pass Ultimate for 100+ games."
+    },
+    {
+      "icon": "🎁",
+      "title": "Gift to Friends",
+      "description": "Use your Xbox credit to buy and gift games to your Xbox friends."
+    },
+    {
+      "icon": "💻",
+      "title": "Works on PC Too",
+      "description": "Xbox credit also works on Windows PC for Microsoft Store purchases."
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Your Xbox Gift Card Earnings",
+  "tips": [
+    {
+      "title": "Use Microsoft Rewards Daily",
+      "description": "Earn points daily by searching with Bing and completing quizzes. Points add up quickly for Xbox credit."
+    },
+    {
+      "title": "Complete Game Pass Quests",
+      "description": "If you have Game Pass, complete weekly and monthly quests for bonus Microsoft Rewards points."
+    },
+    {
+      "title": "Maintain Your Streak",
+      "description": "Microsoft Rewards gives bonus points for maintaining daily streaks. Don't break your streak!"
+    },
+    {
+      "title": "Complete Your Gaming Profile",
+      "description": "Fill out your complete gaming profile to qualify for higher-paying Xbox surveys and offers."
+    },
+    {
+      "title": "Check Daily for New Offers",
+      "description": "New high-paying Xbox offers are added daily. Check back regularly to grab limited spots."
+    },
+    {
+      "title": "Combine Multiple Methods",
+      "description": "Use Microsoft Rewards, Game Pass quests, and surveys together to maximize monthly earnings."
+    },
+    {
+      "title": "Refer Your Gamer Friends",
+      "description": "Invite friends to earn bonus Xbox credit. Referral earnings add up quickly without extra work."
+    },
+    {
+      "title": "Save for Major Sales",
+      "description": "Save your Xbox credit for major sales events (Black Friday, Summer Sale) for better deals."
+    }
+  ],
+  "testimonialsTitle": "Real Gamers, Real Xbox Gift Cards",
+  "testimonials": [
+    {
+      "name": "James T.",
+      "country": "United States",
+      "earnings": "$520",
+      "quote": "I've earned over $520 in Xbox credit just by using Microsoft Rewards and completing surveys. Bought so many games during sales!",
+      "avatar": "JT"
+    },
+    {
+      "name": "Sarah M.",
+      "country": "United Kingdom",
+      "earnings": "$380",
+      "quote": "Been using this for 10 months. Already bought a new Xbox controller and several games. Xbox credit works perfectly!",
+      "avatar": "SM"
+    },
+    {
+      "name": "Carlos R.",
+      "country": "Mexico",
+      "earnings": "$310",
+      "quote": "He ganado más de $310 en crédito Xbox. ¡El Game Pass es increíble! (Earned over $310 in Xbox credit. Game Pass is amazing!)",
+      "avatar": "CR"
+    },
+    {
+      "name": "Ana S.",
+      "country": "Brazil",
+      "earnings": "$290",
+      "quote": "Ganhei $290 em crédito Xbox. Comprei jogos para toda a família! (Earned $290 in Xbox credit. Bought games for the whole family!)",
+      "avatar": "AS"
+    },
+    {
+      "name": "Thomas L.",
+      "country": "Germany",
+      "earnings": "$450",
+      "quote": "Habe über 400€ Xbox Guthaben verdient. Die Microsoft Rewards sind fantastisch! (Earned over €400 Xbox credit. Microsoft Rewards are fantastic!)",
+      "avatar": "TL"
+    },
+    {
+      "name": "Kevin P.",
+      "country": "Canada",
+      "earnings": "$670",
+      "quote": "The Game Pass quests are my favorite. Earned over $670 in Xbox credit while playing games I already love!",
+      "avatar": "KP"
+    }
+  ],
+  "faq": {
+    "title": "Earn Xbox Gift Cards in {country} - FAQ",
+    "items": [
+      {
+        "question": "What are Xbox gift cards?",
+        "answer": "Xbox gift cards add funds to your Microsoft account balance, which you can use to buy games, DLC, Game Pass subscriptions, movies, apps, and hardware on Xbox consoles and Windows PC via the Microsoft Store."
+      },
+      {
+        "question": "How do I earn Xbox gift cards?",
+        "answer": "You can earn Xbox gift cards by playing featured games, completing gaming surveys, using Microsoft Rewards, finishing Game Pass quests, unlocking achievements, referring friends, and completing offers."
+      },
+      {
+        "question": "Are these real Xbox gift cards?",
+        "answer": "Yes! All rewards are official Xbox & Microsoft Store gift cards that work directly on your Xbox console or Windows PC. We partner with legitimate offer providers to ensure you get real Xbox credit."
+      },
+      {
+        "question": "What is Microsoft Rewards?",
+        "answer": "Microsoft Rewards is a loyalty program that gives you points for searching with Bing, completing quizzes, shopping at Microsoft Store, and more. Points can be redeemed for Xbox gift cards, Game Pass, and other rewards."
+      },
+      {
+        "question": "Is this really free?",
+        "answer": "Yes, absolutely! Signing up and earning is completely free. There are no hidden fees or subscriptions. You just complete gaming-related activities and get paid in Xbox credit."
+      },
+      {
+        "question": "How long does it take to get my first Xbox gift card?",
+        "answer": "Most users earn their first $5 Xbox gift card within 24-48 hours of signing up. Microsoft Rewards can get you $5-10 per month with daily use."
+      },
+      {
+        "question": "How do I redeem my Xbox gift card?",
+        "answer": "Once you have enough points, go to the Rewards section, select Xbox Gift Card, choose your amount ($5-$100), and click Redeem. The code will be sent instantly to your email. Redeem on your Xbox console or at microsoft.com/redeem."
+      },
+      {
+        "question": "Do I need an Xbox console?",
+        "answer": "No! Xbox gift cards work on Windows PC too. You can use them to buy games and apps from the Microsoft Store on your computer."
+      },
+      {
+        "question": "What's the minimum payout amount?",
+        "answer": "The minimum payout is just $5 Xbox credit. This makes it easy to cash out frequently!"
+      },
+      {
+        "question": "What can I buy with Xbox credit?",
+        "answer": "You can buy Xbox games, DLC, Game Pass subscriptions, movies, TV shows, apps, Xbox hardware (controllers, headsets), and more. You can also gift games to friends."
+      },
+      {
+        "question": "How much can I earn per month?",
+        "answer": "Most active users earn $20-50 in Xbox credit per month. Power users using Microsoft Rewards, Game Pass quests, and surveys can earn $100+ monthly."
+      },
+      {
+        "question": "What is Xbox Game Pass?",
+        "answer": "Xbox Game Pass is a subscription service giving you access to 100+ games for a monthly fee. You can use Xbox credit to pay for Game Pass Ultimate or Core subscriptions."
+      },
+      {
+        "question": "Do Xbox gift cards expire?",
+        "answer": "Once redeemed to your Microsoft account, the funds expire after 90 days of inactivity. However, if you make any purchase (even free), the clock resets. Codes themselves usually have no expiration."
+      },
+      {
+        "question": "What are Game Pass Quests?",
+        "answer": "Game Pass Quests are challenges within Game Pass games that reward Microsoft Rewards points. Complete daily, weekly, and monthly quests to earn points for Xbox credit."
+      },
+      {
+        "question": "Can I earn Xbox gift cards on mobile?",
+        "answer": "Absolutely! Use the Xbox mobile app, Microsoft Rewards app, or our platform on your phone to earn Xbox credit on the go."
+      },
+      {
+        "question": "What's the best way to earn Xbox credit?",
+        "answer": "For consistent daily earnings, use Microsoft Rewards (search with Bing daily). For larger earnings, combine surveys, offers, and Game Pass quests."
+      },
+      {
+        "question": "Are Xbox gift card generators real?",
+        "answer": "NO! Xbox gift card generators are scams. They don't work and can steal your account or personal information. Always use legitimate earning methods like ours."
+      },
+      {
+        "question": "Can I use Xbox credit for Game Pass?",
+        "answer": "Yes! You can use your Xbox credit to pay for Game Pass Ultimate, Core, or PC Game Pass subscriptions."
+      },
+      {
+        "question": "What's Xbox Game Pass Ultimate?",
+        "answer": "Game Pass Ultimate includes Xbox Game Pass for console and PC, EA Play, Xbox Live Gold, and cloud gaming. All for one monthly price you can pay with Xbox credit."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Start Earning Xbox Gift Cards in {country}?",
+    "subtitle": "Join 400,000+ gamers already earning Xbox credit in {country}. Sign up for free and start building your Xbox library today! 💚"
+  }
+}
