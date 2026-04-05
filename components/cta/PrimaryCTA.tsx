@@ -15,7 +15,6 @@ interface PrimaryCTAProps {
   fallback?: string;
   external?: boolean;
   onClick?: () => void;
-  withBorder?: boolean; // New prop to enable circle border wrapping
 }
 
 export default function PrimaryCTA({
@@ -25,7 +24,6 @@ export default function PrimaryCTA({
   fallback = "Get Started Now",
   external = false,
   onClick,
-  withBorder = false, // Default false to maintain backward compatibility
 }: PrimaryCTAProps) {
   const params = useParams();
   const router = useRouter();
@@ -126,10 +124,6 @@ export default function PrimaryCTA({
         cursor-pointer
         w-full
       "
-      style={{
-        // Add 0.5mm spacing when wrapped in CircleBorder
-        margin: withBorder ? "0.5mm" : "0",
-      }}
     >
       {text}
     </motion.span>
@@ -142,7 +136,7 @@ export default function PrimaryCTA({
           href={processedHref}
           target="_blank"
           rel="noopener noreferrer"
-          className={observer ? "cta-observer block" : "block"}
+          className={observer ? "cta-observer block w-full" : "block w-full"}
           aria-label={text}
           onClick={handleClick}
         >
@@ -154,7 +148,7 @@ export default function PrimaryCTA({
     return (
       <Link
         href={processedHref}
-        className={observer ? "cta-observer block" : "block"}
+        className={observer ? "cta-observer block w-full" : "block w-full"}
         aria-label={text}
         onClick={handleClick}
       >
