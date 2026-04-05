@@ -1,0 +1,286 @@
+{
+  "seo": {
+    "title": "Earn Amazon Gift Cards in {country} - Get Free $5-$100 Codes | Cashog",
+    "description": "Earn Amazon gift cards in {country} by playing games, completing offers & surveys. Redeem for $5-$100 Amazon codes. 100,000+ users already cashed out!"
+  },
+  "hero": {
+    "title": "Earn Amazon Gift Cards in {country}",
+    "subtitle": "Get free Amazon gift cards by playing games, completing offers & surveys. Join 100,000+ users who've already redeemed $500,000+ in Amazon codes!"
+  },
+  "statsTitle": "Trusted by Thousands",
+  "stats": {
+    "giftCardsRedeemed": "50,000+",
+    "giftCardsRedeemedLabel": "Gift Cards Redeemed",
+    "avgCardValue": "$25",
+    "avgCardValueLabel": "Average Card Value",
+    "activeUsers": "100K+",
+    "activeUsersLabel": "Active Users",
+    "totalValue": "$1.2M+",
+    "totalValueLabel": "Total Value Redeemed"
+  },
+  "methodsTitle": "Ways to Earn Amazon Gift Cards",
+  "methodsSubtitle": "Choose the method that works best for you",
+  "earningMethods": [
+    {
+      "icon": "🎮",
+      "title": "Play Mobile Games",
+      "description": "Download and play new mobile games to earn Amazon credits. Reach level milestones for bigger rewards.",
+      "timeEstimate": "10-30 mins/day",
+      "difficulty": "Easy",
+      "rewardRange": "$5-$50"
+    },
+    {
+      "icon": "📝",
+      "title": "Take Paid Surveys",
+      "description": "Share your opinion on products and brands. Complete surveys tailored to your profile.",
+      "timeEstimate": "5-20 mins each",
+      "difficulty": "Easy",
+      "rewardRange": "$1-$25"
+    },
+    {
+      "icon": "🛒",
+      "title": "Complete Offers",
+      "description": "Sign up for free trials, download apps, or watch videos to earn Amazon gift cards.",
+      "timeEstimate": "5-60 mins",
+      "difficulty": "Medium",
+      "rewardRange": "$5-$100"
+    },
+    {
+      "icon": "💻",
+      "title": "Test Websites & Apps",
+      "description": "Get paid to test new websites and apps before they launch. Provide feedback to developers.",
+      "timeEstimate": "15-45 mins",
+      "difficulty": "Medium",
+      "rewardRange": "$10-$50"
+    },
+    {
+      "icon": "🎯",
+      "title": "Complete Tasks",
+      "description": "Small tasks like data entry, image tagging, or content moderation for Amazon credits.",
+      "timeEstimate": "5-30 mins",
+      "difficulty": "Easy",
+      "rewardRange": "$2-$20"
+    },
+    {
+      "icon": "👥",
+      "title": "Refer Friends",
+      "description": "Invite friends to join and earn bonus Amazon gift cards when they complete their first offer.",
+      "timeEstimate": "5 mins",
+      "difficulty": "Easy",
+      "rewardRange": "$10-$50 per referral"
+    }
+  ],
+  "featuredOffersTitle": "Top Earning Opportunities",
+  "featuredOffersSubtitle": "Limited spots - start earning today",
+  "featuredOffers": [
+    {
+      "title": "Play Coin Master - Get $20 Amazon Card",
+      "reward": "$20 Amazon",
+      "timeEstimate": "30 mins",
+      "difficulty": "Easy",
+      "spotsLeft": 5000,
+      "company": "Moon Active",
+      "rating": "4.6"
+    },
+    {
+      "title": "Complete 5 Surveys - $15 Amazon Reward",
+      "reward": "$15 Amazon",
+      "timeEstimate": "45 mins",
+      "difficulty": "Easy",
+      "spotsLeft": 10000,
+      "company": "SurveyPanel",
+      "rating": "4.8"
+    },
+    {
+      "title": "Sign Up for Audible Trial - $25 Amazon",
+      "reward": "$25 Amazon",
+      "timeEstimate": "5 mins",
+      "difficulty": "Easy",
+      "spotsLeft": 2500,
+      "company": "Amazon",
+      "rating": "4.9"
+    },
+    {
+      "title": "Reach Level 100 in Rise of Kingdoms",
+      "reward": "$100 Amazon",
+      "timeEstimate": "2-3 weeks",
+      "difficulty": "Hard",
+      "spotsLeft": 1000,
+      "company": "Lilith Games",
+      "rating": "4.5"
+    },
+    {
+      "title": "Complete 10 Task Offers - $50 Bonus",
+      "reward": "$50 Amazon",
+      "timeEstimate": "2-3 hours",
+      "difficulty": "Medium",
+      "spotsLeft": 2000,
+      "company": "OfferWall",
+      "rating": "4.7"
+    }
+  ],
+  "benefitsTitle": "Why Earn Amazon Gift Cards With Us",
+  "benefits": [
+    {
+      "icon": "⚡",
+      "title": "Instant Delivery",
+      "description": "Amazon gift cards delivered instantly to your email as soon as you redeem."
+    },
+    {
+      "icon": "🛡️",
+      "title": "100% Legitimate",
+      "description": "We partner with trusted offer providers. No scams, no hacks - just real earning opportunities."
+    },
+    {
+      "icon": "🌍",
+      "title": "Available in {country}",
+      "description": "Amazon gift cards work perfectly in {country} with local Amazon store access."
+    },
+    {
+      "icon": "💳",
+      "title": "No Bank Account Needed",
+      "description": "Get paid in Amazon credit without needing a bank account or PayPal."
+    },
+    {
+      "icon": "🎁",
+      "title": "Stackable Rewards",
+      "description": "Combine multiple gift cards to buy bigger items on Amazon."
+    },
+    {
+      "icon": "📱",
+      "title": "Mobile Friendly",
+      "description": "Earn Amazon gift cards directly from your phone, anywhere, anytime."
+    },
+    {
+      "icon": "🔄",
+      "title": "New Offers Daily",
+      "description": "Fresh earning opportunities added every day. Never run out of ways to earn."
+    },
+    {
+      "icon": "🎯",
+      "title": "Low Minimum Payout",
+      "description": "Redeem your first Amazon gift card starting from just $5 earned."
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Your Amazon Gift Card Earnings",
+  "tips": [
+    {
+      "title": "Complete Your Profile",
+      "description": "Fill out your complete profile to qualify for higher-paying surveys and offers tailored to you."
+    },
+    {
+      "title": "Check Daily for New Offers",
+      "description": "New high-paying offers are added daily. Check back regularly to grab limited spots before they fill up."
+    },
+    {
+      "title": "Focus on High-Value Tasks",
+      "description": "Prioritize offers that pay the most for your time. Look for $10+ Amazon rewards first."
+    },
+    {
+      "title": "Combine Multiple Methods",
+      "description": "Play games while waiting for survey invitations. Stack different earning methods to maximize daily earnings."
+    },
+    {
+      "title": "Refer Your Friends",
+      "description": "Invite friends to earn bonus Amazon gift cards. Referral earnings can add up quickly without extra work."
+    },
+    {
+      "title": "Save Up for Bigger Purchases",
+      "description": "Combine multiple gift cards to save for larger Amazon purchases like electronics or appliances."
+    }
+  ],
+  "testimonialsTitle": "Real Users, Real Amazon Gift Cards",
+  "testimonials": [
+    {
+      "name": "Sarah M.",
+      "country": "United States",
+      "earnings": "$450",
+      "quote": "I've earned over $450 in Amazon gift cards just by playing games in my free time. The codes arrive instantly via email. Perfect for buying stuff on Amazon!",
+      "avatar": "SM"
+    },
+    {
+      "name": "David K.",
+      "country": "Canada",
+      "earnings": "$280",
+      "quote": "Been using this for 3 months. Already redeemed $280 in Amazon.ca gift cards. The surveys are quick and the game offers are actually fun to play.",
+      "avatar": "DK"
+    },
+    {
+      "name": "Emma L.",
+      "country": "United Kingdom",
+      "earnings": "$620",
+      "quote": "Saved up Amazon vouchers for a new Kindle. Took about 2 months of casual playing. Completely free and legit. Highly recommend!",
+      "avatar": "EL"
+    },
+    {
+      "name": "Michael T.",
+      "country": "Australia",
+      "earnings": "$350",
+      "quote": "Best way to earn Amazon gift cards I've found. The offers actually pay out and customer support is responsive. Already on my 8th redemption.",
+      "avatar": "MT"
+    },
+    {
+      "name": "Jessica R.",
+      "country": "Germany",
+      "earnings": "$195",
+      "quote": "I was skeptical at first but decided to try. Earned my first $25 Amazon card in 2 days. Now I do this while watching TV. Easy money!",
+      "avatar": "JR"
+    },
+    {
+      "name": "Thomas W.",
+      "country": "France",
+      "earnings": "$510",
+      "quote": "The Amazon.fr gift cards work perfectly. I've bought games, books, and even a new mouse with my earnings. Completely changed my online shopping.",
+      "avatar": "TW"
+    }
+  ],
+  "faq": {
+    "title": "Earn Amazon Gift Cards in {country} - FAQ",
+    "items": [
+      {
+        "question": "How do I earn Amazon gift cards?",
+        "answer": "You can earn Amazon gift cards by playing mobile games, completing surveys, testing apps, finishing offers, and referring friends. Each activity rewards you with points that can be redeemed for Amazon gift cards."
+      },
+      {
+        "question": "Are these Amazon gift cards real?",
+        "answer": "Yes, absolutely! We provide legitimate Amazon gift card codes that work on Amazon stores worldwide. We partner with trusted offer providers to ensure all rewards are genuine."
+      },
+      {
+        "question": "How long does it take to get my first gift card?",
+        "answer": "Most users earn their first $5 Amazon gift card within 24-48 hours of signing up. Some high-paying offers can get you there in under an hour!"
+      },
+      {
+        "question": "Do Amazon gift cards expire?",
+        "answer": "Amazon gift cards never expire. You can save them for as long as you want or combine multiple cards for bigger purchases."
+      },
+      {
+        "question": "Can I use these in {country}?",
+        "answer": "Yes! Amazon gift cards work perfectly in {country}. Just make sure to select your local Amazon store (amazon.com, amazon.co.uk, amazon.de, etc.) when redeeming."
+      },
+      {
+        "question": "Is there a minimum payout amount?",
+        "answer": "Yes, you can redeem your first Amazon gift card starting from just $5 earned. Higher denominations like $10, $25, $50, and $100 are also available."
+      },
+      {
+        "question": "How do I redeem my Amazon gift card?",
+        "answer": "Once you have enough points, go to the Rewards section, select Amazon Gift Card, choose your amount ($5-$100), and click Redeem. The code will be sent instantly to your email."
+      },
+      {
+        "question": "Is this really free?",
+        "answer": "Yes, signing up and earning is completely free. There are no hidden fees or subscriptions. You just complete activities and get paid in Amazon gift cards."
+      },
+      {
+        "question": "Can I earn on mobile?",
+        "answer": "Absolutely! Our platform works perfectly on both desktop and mobile devices. Download games directly from app stores and complete offers on your phone."
+      },
+      {
+        "question": "How much can I earn per month?",
+        "answer": "Most active users earn $50-200 in Amazon gift cards per month. Some power users earn $500+ by completing high-value offers and referring friends."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Start Earning in {country}?",
+    "subtitle": "Join 100,000+ users already earning Amazon gift cards in {country}. Sign up for free and start redeeming today!"
+  }
+}
