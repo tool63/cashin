@@ -8,6 +8,7 @@ import { useParams, useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { useMemo, useCallback } from "react";
 import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
+import CircleBorder from "@/components/animations/CircleBorder";
 
 interface PrimaryCTAProps {
   href: string;
@@ -123,6 +124,36 @@ export default function PrimaryCTA({
     }
   };
 
+  // Button content
+  const ButtonContent = () => (
+    <motion.span
+      whileHover={{ scale: 1.08 }}
+      whileTap={{ scale: 0.97 }}
+      className="
+        inline-flex items-center gap-3
+        bg-gradient-to-r from-yellow-400 via-green-400 to-green-500
+        text-black px-10 sm:px-16 md:px-20 py-3 sm:py-5 md:py-7
+        rounded-2xl
+        font-bold text-lg sm:text-xl md:text-xl
+        shadow-3xl
+        hover:shadow-4xl
+        transition-all duration-300
+        cursor-pointer
+        w-full
+      "
+    >
+      {text}
+      <ArrowRight size={24} />
+    </motion.span>
+  );
+
+  // Wrapped button with CircleBorder
+  const WrappedButton = () => (
+    <CircleBorder>
+      <ButtonContent />
+    </CircleBorder>
+  );
+
   // For external links or special cases
   if (external || processedHref.startsWith("http") || processedHref.startsWith("//")) {
     return (
@@ -130,28 +161,11 @@ export default function PrimaryCTA({
         href={processedHref}
         target="_blank"
         rel="noopener noreferrer"
-        className={observer ? "cta-observer inline-block" : "inline-block"}
+        className={observer ? "cta-observer inline-block w-full" : "inline-block w-full"}
         aria-label={text}
         onClick={handleClick}
       >
-        <motion.span
-          whileHover={{ scale: 1.08 }}
-          whileTap={{ scale: 0.97 }}
-          className="
-            inline-flex items-center gap-3
-            bg-gradient-to-r from-yellow-400 via-green-400 to-green-500
-            text-black px-10 sm:px-16 md:px-20 py-3 sm:py-5 md:py-7
-            rounded-3xl
-            font-bold text-lg sm:text-xl md:text-xl
-            shadow-3xl
-            hover:shadow-4xl
-            transition-all duration-300
-            cursor-pointer
-          "
-        >
-          {text}
-          <ArrowRight size={24} />
-        </motion.span>
+        <WrappedButton />
       </a>
     );
   }
@@ -160,28 +174,11 @@ export default function PrimaryCTA({
   return (
     <Link
       href={processedHref}
-      className={observer ? "cta-observer inline-block" : "inline-block"}
+      className={observer ? "cta-observer inline-block w-full" : "inline-block w-full"}
       aria-label={text}
       onClick={handleClick}
     >
-      <motion.span
-        whileHover={{ scale: 1.08 }}
-        whileTap={{ scale: 0.97 }}
-        className="
-          inline-flex items-center gap-3
-          bg-gradient-to-r from-yellow-400 via-green-400 to-green-500
-          text-black px-10 sm:px-16 md:px-20 py-3 sm:py-5 md:py-7
-          rounded-3xl
-          font-bold text-lg sm:text-xl md:text-xl
-          shadow-3xl
-          hover:shadow-4xl
-          transition-all duration-300
-          cursor-pointer
-        "
-      >
-        {text}
-        <ArrowRight size={24} />
-      </motion.span>
+      <WrappedButton />
     </Link>
   );
 }
