@@ -5,7 +5,6 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { ArrowRight } from "lucide-react";
 import { useMemo, useCallback } from "react";
 import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
 import CircleBorder from "@/components/animations/CircleBorder";
@@ -113,7 +112,7 @@ export default function PrimaryCTA({
       whileHover={{ scale: 1.08 }}
       whileTap={{ scale: 0.97 }}
       className="
-        inline-flex items-center gap-3
+        inline-flex items-center justify-center
         bg-gradient-to-r from-yellow-400 via-green-400 to-green-500
         text-black 
         px-10 sm:px-16 md:px-20 
@@ -128,19 +127,13 @@ export default function PrimaryCTA({
       "
     >
       {text}
-      <ArrowRight size={24} />
     </motion.span>
   );
 
-  // Override CircleBorder's inner styling by targeting with negative margin
   const WrappedButton = () => (
-    <div className="inline-block -m-6 -m-10">
-      <CircleBorder>
-        <div className="-m-6 -m-10">
-          <ButtonContent />
-        </div>
-      </CircleBorder>
-    </div>
+    <CircleBorder>
+      <ButtonContent />
+    </CircleBorder>
   );
 
   if (external || processedHref.startsWith("http") || processedHref.startsWith("//")) {
