@@ -1,0 +1,295 @@
+{
+  "seo": {
+    "title": "Earn Apple Gift Cards in {country} - Get Free $5-$100 iTunes & App Store Codes | Cashog",
+    "description": "Earn Apple gift cards in {country} by playing games, completing offers & surveys. Redeem for $5-$100 iTunes & App Store credit. 100,000+ users already cashed out!"
+  },
+  "hero": {
+    "title": "Earn Apple Gift Cards in {country}",
+    "subtitle": "Get free Apple gift cards for iTunes, App Store & Apple Store by playing games, completing offers & surveys. Join 100,000+ users who've already redeemed $500,000+ in Apple credit!"
+  },
+  "statsTitle": "Trusted by Thousands",
+  "stats": {
+    "giftCardsRedeemed": "45,000+",
+    "giftCardsRedeemedLabel": "Gift Cards Redeemed",
+    "avgCardValue": "$20",
+    "avgCardValueLabel": "Average Card Value",
+    "activeUsers": "100K+",
+    "activeUsersLabel": "Active Users",
+    "totalValue": "$900K+",
+    "totalValueLabel": "Total Value Redeemed"
+  },
+  "methodsTitle": "Ways to Earn Apple Gift Cards",
+  "methodsSubtitle": "Choose the method that works best for you",
+  "earningMethods": [
+    {
+      "icon": "🎮",
+      "title": "Play iOS Games",
+      "description": "Download and play new iOS games to earn App Store credit. Reach level milestones for bigger Apple gift card rewards.",
+      "timeEstimate": "10-30 mins/day",
+      "difficulty": "Easy",
+      "rewardRange": "$5-$50"
+    },
+    {
+      "icon": "📝",
+      "title": "Take Paid Surveys",
+      "description": "Share your opinion on products and brands. Complete surveys tailored to your profile and earn iTunes credit.",
+      "timeEstimate": "5-20 mins each",
+      "difficulty": "Easy",
+      "rewardRange": "$1-$25"
+    },
+    {
+      "icon": "🛒",
+      "title": "Complete Offers",
+      "description": "Sign up for free trials, download apps, or watch videos to earn Apple Store & iTunes gift cards.",
+      "timeEstimate": "5-60 mins",
+      "difficulty": "Medium",
+      "rewardRange": "$5-$100"
+    },
+    {
+      "icon": "💻",
+      "title": "Test iOS Apps",
+      "description": "Get paid to test new iOS apps before they launch on the App Store. Provide feedback to developers.",
+      "timeEstimate": "15-45 mins",
+      "difficulty": "Medium",
+      "rewardRange": "$10-$50"
+    },
+    {
+      "icon": "🎯",
+      "title": "Complete Tasks",
+      "description": "Small tasks like app reviews, bug reporting, or content moderation for Apple gift card credits.",
+      "timeEstimate": "5-30 mins",
+      "difficulty": "Easy",
+      "rewardRange": "$2-$20"
+    },
+    {
+      "icon": "👥",
+      "title": "Refer Friends",
+      "description": "Invite friends to join and earn bonus Apple gift cards when they complete their first offer.",
+      "timeEstimate": "5 mins",
+      "difficulty": "Easy",
+      "rewardRange": "$10-$50 per referral"
+    }
+  ],
+  "featuredOffersTitle": "Top Earning Opportunities",
+  "featuredOffersSubtitle": "Limited spots - start earning today",
+  "featuredOffers": [
+    {
+      "title": "Play Raid: Shadow Legends - Get $25 Apple Card",
+      "reward": "$25 Apple",
+      "timeEstimate": "45 mins",
+      "difficulty": "Easy",
+      "spotsLeft": 3500,
+      "company": "Plarium",
+      "rating": "4.7"
+    },
+    {
+      "title": "Complete 5 Surveys - $15 iTunes Reward",
+      "reward": "$15 iTunes",
+      "timeEstimate": "45 mins",
+      "difficulty": "Easy",
+      "spotsLeft": 8000,
+      "company": "SurveyPanel",
+      "rating": "4.8"
+    },
+    {
+      "title": "Sign Up for Apple Music Trial - $20 Apple Card",
+      "reward": "$20 Apple",
+      "timeEstimate": "5 mins",
+      "difficulty": "Easy",
+      "spotsLeft": 5000,
+      "company": "Apple",
+      "rating": "4.9"
+    },
+    {
+      "title": "Reach Level 50 in Genshin Impact",
+      "reward": "$100 Apple",
+      "timeEstimate": "2-4 weeks",
+      "difficulty": "Hard",
+      "spotsLeft": 800,
+      "company": "HoYoverse",
+      "rating": "4.8"
+    },
+    {
+      "title": "Test 10 iOS Apps - $50 App Store Credit",
+      "reward": "$50 App Store",
+      "timeEstimate": "2-3 hours",
+      "difficulty": "Medium",
+      "spotsLeft": 1500,
+      "company": "TestFlight",
+      "rating": "4.6"
+    }
+  ],
+  "benefitsTitle": "Why Earn Apple Gift Cards With Us",
+  "benefits": [
+    {
+      "icon": "⚡",
+      "title": "Instant Delivery",
+      "description": "Apple gift card codes delivered instantly to your email as soon as you redeem."
+    },
+    {
+      "icon": "🛡️",
+      "title": "100% Legitimate",
+      "description": "We partner with trusted offer providers. No scams, no hacks - just real Apple credit earning opportunities."
+    },
+    {
+      "icon": "🌍",
+      "title": "Works in {country}",
+      "description": "Apple gift cards work perfectly in {country} with local App Store, iTunes & Apple Store access."
+    },
+    {
+      "icon": "💳",
+      "title": "No Credit Card Needed",
+      "description": "Get App Store & iTunes credit without needing a credit card or PayPal account."
+    },
+    {
+      "icon": "🎁",
+      "title": "Stackable Rewards",
+      "description": "Combine multiple Apple gift cards to buy apps, games, music, movies, or even Apple devices."
+    },
+    {
+      "icon": "📱",
+      "title": "iOS Friendly",
+      "description": "Earn Apple gift cards directly from your iPhone or iPad. Works seamlessly with your Apple ID."
+    },
+    {
+      "icon": "🔄",
+      "title": "New Offers Daily",
+      "description": "Fresh earning opportunities added every day. Never run out of ways to earn Apple credit."
+    },
+    {
+      "icon": "🎯",
+      "title": "Low Minimum Payout",
+      "description": "Redeem your first Apple gift card starting from just $5 earned."
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Your Apple Gift Card Earnings",
+  "tips": [
+    {
+      "title": "Complete Your Profile",
+      "description": "Fill out your complete profile to qualify for higher-paying surveys and iOS app testing offers tailored to you."
+    },
+    {
+      "title": "Check Daily for New Offers",
+      "description": "New high-paying Apple gift card offers are added daily. Check back regularly to grab limited spots before they fill up."
+    },
+    {
+      "title": "Focus on iOS Game Offers",
+      "description": "Game offers often pay the most for your time. Look for new iOS game launches that offer $20+ in App Store credit."
+    },
+    {
+      "title": "Combine Multiple Methods",
+      "description": "Play iOS games while waiting for survey invitations. Stack different earning methods to maximize daily Apple credit earnings."
+    },
+    {
+      "title": "Refer Your Friends",
+      "description": "Invite friends to earn bonus Apple gift cards. Referral earnings can add up quickly without extra work."
+    },
+    {
+      "title": "Save Up for Bigger Purchases",
+      "description": "Combine multiple Apple gift cards to save for larger purchases like AirPods, iPad accessories, or Apple Watches."
+    }
+  ],
+  "testimonialsTitle": "Real Users, Real Apple Gift Cards",
+  "testimonials": [
+    {
+      "name": "Jennifer S.",
+      "country": "United States",
+      "earnings": "$380",
+      "quote": "I've earned over $380 in Apple gift cards just by playing iOS games in my free time. The codes arrive instantly and work perfectly on the App Store.",
+      "avatar": "JS"
+    },
+    {
+      "name": "Michael R.",
+      "country": "Canada",
+      "earnings": "$250",
+      "quote": "Been using this for 4 months. Already redeemed $250 in Canadian App Store credit. Perfect for buying apps and in-game purchases!",
+      "avatar": "MR"
+    },
+    {
+      "name": "Sophie L.",
+      "country": "United Kingdom",
+      "earnings": "$540",
+      "quote": "Saved up Apple vouchers for a new pair of AirPods. Took about 3 months of casual earning. Completely free and legit. Highly recommend!",
+      "avatar": "SL"
+    },
+    {
+      "name": "Daniel T.",
+      "country": "Australia",
+      "earnings": "$310",
+      "quote": "Best way to earn iTunes credit I've found. The iOS app testing offers are fun and actually pay out. Already on my 12th redemption.",
+      "avatar": "DT"
+    },
+    {
+      "name": "Emma W.",
+      "country": "Germany",
+      "earnings": "$175",
+      "quote": "I was skeptical but decided to try. Earned my first $15 iTunes card in 2 days. Now I do this while commuting. Free music and apps!",
+      "avatar": "EW"
+    },
+    {
+      "name": "Lucas B.",
+      "country": "France",
+      "email": "lucas@example.com",
+      "earnings": "$430",
+      "quote": "The App Store gift cards work perfectly. I've bought games, pro apps, and even Apple Music subscriptions with my earnings. Changed my iOS experience.",
+      "avatar": "LB"
+    }
+  ],
+  "faq": {
+    "title": "Earn Apple Gift Cards in {country} - FAQ",
+    "items": [
+      {
+        "question": "How do I earn Apple gift cards?",
+        "answer": "You can earn Apple gift cards by playing iOS games, completing surveys, testing apps, finishing offers, and referring friends. Each activity rewards you with points that can be redeemed for Apple Store, iTunes, or App Store credit."
+      },
+      {
+        "question": "Are these Apple gift cards real?",
+        "answer": "Yes, absolutely! We provide legitimate Apple gift card codes that work on the App Store, iTunes Store, and Apple Store worldwide. We partner with trusted offer providers to ensure all rewards are genuine."
+      },
+      {
+        "question": "How long does it take to get my first Apple gift card?",
+        "answer": "Most users earn their first $5 Apple gift card within 24-48 hours of signing up. Some high-paying iOS game offers can get you there in under an hour!"
+      },
+      {
+        "question": "Do Apple gift cards expire?",
+        "answer": "Apple gift cards never expire. You can save them for as long as you want or combine multiple cards for bigger purchases on the App Store, iTunes, or Apple Store."
+      },
+      {
+        "question": "Can I use these in {country}?",
+        "answer": "Yes! Apple gift cards work perfectly in {country}. Just make sure to redeem them on your local App Store or iTunes store for the correct currency."
+      },
+      {
+        "question": "Is there a minimum payout amount?",
+        "answer": "Yes, you can redeem your first Apple gift card starting from just $5 earned. Higher denominations like $10, $15, $25, $50, and $100 are also available."
+      },
+      {
+        "question": "How do I redeem my Apple gift card?",
+        "answer": "Once you have enough points, go to the Rewards section, select Apple Gift Card, choose your amount ($5-$100), and click Redeem. The code will be sent instantly to your email. Then open the App Store app and tap your profile photo > 'Redeem Gift Card or Code'."
+      },
+      {
+        "question": "Is this really free?",
+        "answer": "Yes, signing up and earning is completely free. There are no hidden fees or subscriptions. You just complete activities and get paid in Apple gift cards."
+      },
+      {
+        "question": "Can I earn on iPhone or iPad?",
+        "answer": "Absolutely! Our platform works perfectly on iOS devices. Download games directly from the App Store and complete offers on your iPhone or iPad."
+      },
+      {
+        "question": "What can I buy with Apple gift cards?",
+        "answer": "Apple gift cards can be used to buy apps, games, in-app purchases, Apple Music subscriptions, iCloud storage, movies, TV shows, books, and even physical Apple products like AirPods, cases, and accessories."
+      },
+      {
+        "question": "How much can I earn per month?",
+        "answer": "Most active users earn $50-200 in Apple gift cards per month. Some power users earn $500+ by completing high-value iOS app testing offers and referring friends."
+      },
+      {
+        "question": "Can I use Apple gift cards for Apple Arcade?",
+        "answer": "Yes! Apple gift cards can be used to pay for Apple Arcade subscriptions, along with Apple Music, Apple TV+, and iCloud+ storage plans."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Start Earning in {country}?",
+    "subtitle": "Join 100,000+ users already earning Apple gift cards in {country}. Sign up for free and start redeeming for apps, games, music & more today!"
+  }
+}
