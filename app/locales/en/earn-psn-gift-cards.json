@@ -1,0 +1,350 @@
+{
+  "seo": {
+    "title": "Earn PSN Gift Cards in {country} - Get Free PlayStation Store Credit | Cashog",
+    "description": "Earn PSN gift cards in {country} by playing games, completing offers & surveys. Redeem for PlayStation Store credit, PS Plus, and more. Start earning free PSN credit today!"
+  },
+  "hero": {
+    "title": "Earn PSN Gift Cards in {country}",
+    "subtitle": "Get free PlayStation Store credit by playing games, completing offers & surveys. Join 350,000+ gamers who've already redeemed $1,500,000+ in PSN gift cards!"
+  },
+  "statsTitle": "Trusted by Thousands",
+  "stats": {
+    "giftCardsRedeemed": "150,000+",
+    "giftCardsRedeemedLabel": "Gift Cards Redeemed",
+    "avgCardValue": "$15",
+    "avgCardValueLabel": "Average Card Value",
+    "activeUsers": "350K+",
+    "activeUsersLabel": "Active Gamers",
+    "totalValue": "$1.5M+",
+    "totalValueLabel": "Total Value Redeemed"
+  },
+  "methodsTitle": "Ways to Earn PSN Gift Cards",
+  "methodsSubtitle": "Choose the method that works best for you",
+  "earningMethods": [
+    {
+      "icon": "🎮",
+      "title": "Play PlayStation Games",
+      "description": "Play featured PS4 & PS5 games and earn PSN credit for reaching milestones and earning trophies.",
+      "timeEstimate": "10-60 mins/day",
+      "difficulty": "Easy",
+      "rewardRange": "$5 - $50"
+    },
+    {
+      "icon": "📝",
+      "title": "Gaming Surveys",
+      "description": "Share your opinion on PlayStation games, hardware, and PS Plus titles. Get paid in PSN credit for each survey.",
+      "timeEstimate": "5-20 mins each",
+      "difficulty": "Easy",
+      "rewardRange": "$1 - $10"
+    },
+    {
+      "icon": "🛒",
+      "title": "Complete Offers",
+      "description": "Sign up for PS Plus trials, download apps, or watch videos to earn PlayStation Store credit.",
+      "timeEstimate": "5-60 mins",
+      "difficulty": "Medium",
+      "rewardRange": "$5 - $25"
+    },
+    {
+      "icon": "🏆",
+      "title": "Earn Trophies",
+      "description": "Earn PSN gift cards by unlocking specific trophies and completing platinum challenges.",
+      "timeEstimate": "30-120 mins",
+      "difficulty": "Medium",
+      "rewardRange": "$5 - $50"
+    },
+    {
+      "icon": "👥",
+      "title": "Refer Friends",
+      "description": "Invite friends to join and earn bonus PSN credit when they complete their first offer.",
+      "timeEstimate": "5 mins",
+      "difficulty": "Easy",
+      "rewardRange": "$5 - $20 per referral"
+    },
+    {
+      "icon": "💙",
+      "title": "PS Plus Challenges",
+      "description": "Complete PS Plus monthly challenges and multiplayer objectives for PSN rewards.",
+      "timeEstimate": "15-45 mins",
+      "difficulty": "Easy",
+      "rewardRange": "$5 - $15/month"
+    },
+    {
+      "icon": "📱",
+      "title": "PlayStation App Tasks",
+      "description": "Use the PlayStation mobile app to complete daily tasks and community challenges for rewards.",
+      "timeEstimate": "5-10 mins/day",
+      "difficulty": "Easy",
+      "rewardRange": "$5 - $10/month"
+    },
+    {
+      "icon": "🎯",
+      "title": "Game Testing",
+      "description": "Test new PS4/PS5 games before release. Report bugs and provide feedback for PSN credit.",
+      "timeEstimate": "2-10 hours",
+      "difficulty": "Medium",
+      "rewardRange": "$20 - $100"
+    }
+  ],
+  "featuredOffersTitle": "Top PSN Gift Card Opportunities",
+  "featuredOffersSubtitle": "Limited spots - start earning PSN credit today",
+  "featuredOffers": [
+    {
+      "title": "Play God of War Ragnarök - Earn $10 PSN",
+      "reward": "$10 PSN",
+      "timeEstimate": "30 mins",
+      "difficulty": "Easy",
+      "spotsLeft": 15000,
+      "company": "Sony Interactive",
+      "rating": "4.9"
+    },
+    {
+      "title": "Complete 10 Gaming Surveys - $20 PSN",
+      "reward": "$20 PSN",
+      "timeEstimate": "2 hours",
+      "difficulty": "Easy",
+      "spotsLeft": 8000,
+      "company": "PlayStation Insights",
+      "rating": "4.7"
+    },
+    {
+      "title": "Try PS Plus Premium - $15 Credit",
+      "reward": "$15 PSN",
+      "timeEstimate": "10 mins",
+      "difficulty": "Easy",
+      "spotsLeft": 10000,
+      "company": "PlayStation",
+      "rating": "4.9"
+    },
+    {
+      "title": "Earn 5 Platinum Trophies - $50 PSN",
+      "reward": "$50 PSN",
+      "timeEstimate": "2-4 weeks",
+      "difficulty": "Hard",
+      "spotsLeft": 2000,
+      "company": "PlayStation Trophies",
+      "rating": "4.8"
+    },
+    {
+      "title": "Test New PS5 Game - $30 PSN",
+      "reward": "$30 PSN",
+      "timeEstimate": "2-3 hours",
+      "difficulty": "Medium",
+      "spotsLeft": 3000,
+      "company": "Beta Testing",
+      "rating": "4.6"
+    }
+  ],
+  "benefitsTitle": "Why Earn PSN Gift Cards With Us",
+  "benefits": [
+    {
+      "icon": "⚡",
+      "title": "Instant Delivery",
+      "description": "PSN gift card codes delivered instantly to your email as soon as you redeem."
+    },
+    {
+      "icon": "🛡️",
+      "title": "100% Legitimate",
+      "description": "No scams, no hacks - just real earning opportunities through legitimate offers."
+    },
+    {
+      "icon": "💙",
+      "title": "Official PlayStation Credit",
+      "description": "All rewards are official PlayStation Store codes that work directly on your PS4, PS5, or web browser."
+    },
+    {
+      "icon": "💰",
+      "title": "No Purchase Needed",
+      "description": "Earn PSN gift cards completely free without spending any real money."
+    },
+    {
+      "icon": "🎮",
+      "title": "Massive Game Library",
+      "description": "Use your PSN credit to buy thousands of games, DLC, and in-game content."
+    },
+    {
+      "icon": "💎",
+      "title": "PS Plus Subscription",
+      "description": "Use credit to subscribe to PS Plus Essential, Extra, or Premium for online play and free games."
+    },
+    {
+      "icon": "🎁",
+      "title": "Gift to Friends",
+      "description": "Use your PSN credit to buy and gift games to your PlayStation friends."
+    },
+    {
+      "icon": "📱",
+      "title": "Works on PS App",
+      "description": "Manage and spend your PSN credit from the PlayStation mobile app."
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Your PSN Gift Card Earnings",
+  "tips": [
+    {
+      "title": "Complete Daily Offers",
+      "description": "Check back every day for new PlayStation offers. Consistency is key to earning PSN credit faster."
+    },
+    {
+      "title": "Focus on Trophy Challenges",
+      "description": "High-value trophy challenges can earn you $50+ PSN credit. Focus on games with easy platinum trophies."
+    },
+    {
+      "title": "Complete Your Gaming Profile",
+      "description": "Fill out your complete gaming profile to qualify for higher-paying PlayStation surveys and offers."
+    },
+    {
+      "title": "Use PS Plus Benefits",
+      "description": "If you have PS Plus, complete monthly challenges and multiplayer objectives for bonus rewards."
+    },
+    {
+      "title": "Check Daily for New Offers",
+      "description": "New high-paying PSN offers are added daily. Check back regularly to grab limited spots."
+    },
+    {
+      "title": "Combine Multiple Methods",
+      "description": "Use surveys, game testing, and trophy challenges together to maximize monthly earnings."
+    },
+    {
+      "title": "Refer Your Gamer Friends",
+      "description": "Invite friends to earn bonus PSN credit. Referral earnings add up quickly without extra work."
+    },
+    {
+      "title": "Save for Major Sales",
+      "description": "Save your PSN credit for major PlayStation Store sales (Black Friday, Days of Play) for better deals."
+    }
+  ],
+  "testimonialsTitle": "Real Gamers, Real PSN Gift Cards",
+  "testimonials": [
+    {
+      "name": "David S.",
+      "country": "United States",
+      "earnings": "$480",
+      "quote": "I've earned over $480 in PSN credit just by playing PS5 games and completing surveys. Bought so many exclusives!",
+      "avatar": "DS"
+    },
+    {
+      "name": "Emma T.",
+      "country": "United Kingdom",
+      "earnings": "$350",
+      "quote": "Been using this for 9 months. Already bought a DualSense controller and several games. PSN credit works perfectly!",
+      "avatar": "ET"
+    },
+    {
+      "name": "Yuki S.",
+      "country": "Japan",
+      "earnings": "$420",
+      "quote": "PSNギフトカードで400ドル以上獲得しました。素晴らしいプラットフォームです！(Earned over $420 in PSN gift cards. Great platform!)",
+      "avatar": "YS"
+    },
+    {
+      "name": "Lucas M.",
+      "country": "Brazil",
+      "earnings": "$310",
+      "quote": "Ganhei $310 em crédito PSN. Comprei God of War e The Last of Us! (Earned $310 in PSN credit. Bought God of War and The Last of Us!)",
+      "avatar": "LM"
+    },
+    {
+      "name": "Sophie L.",
+      "country": "France",
+      "earnings": "$390",
+      "quote": "J'ai gagné plus de 350€ de crédit PSN. Les jeux PlayStation sont tellement bons! (Earned over €350 in PSN credit. PlayStation games are so good!)",
+      "avatar": "SL"
+    },
+    {
+      "name": "Marcus W.",
+      "country": "Germany",
+      "earnings": "$560",
+      "quote": "Habe über 500€ PSN Guthaben verdient. Die Trophäen-Herausforderungen sind mein Favorit! (Earned over €500 in PSN credit. Trophy challenges are my favorite!)",
+      "avatar": "MW"
+    }
+  ],
+  "faq": {
+    "title": "Earn PSN Gift Cards in {country} - FAQ",
+    "items": [
+      {
+        "question": "What are PSN gift cards?",
+        "answer": "PSN gift cards add funds to your PlayStation Network wallet, which you can use to buy games, DLC, PS Plus subscriptions, movies, and more on the PlayStation Store for PS4, PS5, and web browser."
+      },
+      {
+        "question": "How do I earn PSN gift cards?",
+        "answer": "You can earn PSN gift cards by playing featured PlayStation games, completing gaming surveys, earning trophies, testing new games, completing PS Plus challenges, referring friends, and finishing offers."
+      },
+      {
+        "question": "Are these real PSN gift cards?",
+        "answer": "Yes! All rewards are official PlayStation Store gift cards that work directly on your PS4, PS5, or PlayStation App. We partner with legitimate offer providers to ensure you get real PSN credit."
+      },
+      {
+        "question": "What is PS Plus?",
+        "answer": "PS Plus is Sony's subscription service for PlayStation. Essential tier gives online play and monthly games. Extra adds a game catalog. Premium adds classic games and cloud streaming. You can use PSN credit to pay for any tier."
+      },
+      {
+        "question": "Is this really free?",
+        "answer": "Yes, absolutely! Signing up and earning is completely free. There are no hidden fees or subscriptions. You just complete gaming-related activities and get paid in PSN credit."
+      },
+      {
+        "question": "How long does it take to get my first PSN gift card?",
+        "answer": "Most users earn their first $10 PSN gift card within 24-48 hours of signing up. Some high-paying game testing offers can get you to $50 in under a week!"
+      },
+      {
+        "question": "How do I redeem my PSN gift card?",
+        "answer": "Once you have enough points, go to the Rewards section, select PSN Gift Card, choose your amount ($10-$100), and click Redeem. The code will be sent instantly to your email. Redeem on PlayStation Store > Redeem Codes."
+      },
+      {
+        "question": "Do I need a PlayStation console?",
+        "answer": "No! You can redeem and use PSN gift cards on the web at store.playstation.com or through the PlayStation App on mobile, even without a console."
+      },
+      {
+        "question": "What's the minimum payout amount?",
+        "answer": "The minimum payout is just $10 PSN credit. This makes it easy to cash out frequently!"
+      },
+      {
+        "question": "What can I buy with PSN credit?",
+        "answer": "You can buy PS4/PS5 games, DLC, PS Plus subscriptions, movies, TV shows, avatars, themes, and more. You can also gift games to friends on your PlayStation Network friends list."
+      },
+      {
+        "question": "How much can I earn per month?",
+        "answer": "Most active users earn $20-50 in PSN credit per month. Power users who do game testing and trophy challenges can earn $100-200+ monthly."
+      },
+      {
+        "question": "What are PlayStation Trophies?",
+        "answer": "Trophies are achievements earned by completing specific objectives in PlayStation games. They come in Bronze, Silver, Gold, and Platinum tiers. Some of our offers reward you for earning trophies."
+      },
+      {
+        "question": "Do PSN gift cards expire?",
+        "answer": "Once redeemed to your PSN wallet, funds typically expire after 12 months of inactivity. However, codes themselves usually have an expiration date printed on them. Always redeem codes promptly."
+      },
+      {
+        "question": "What are PS Stars?",
+        "answer": "PlayStation Stars is a loyalty program that rewards you for completing campaigns and activities. Points can be redeemed for PSN wallet funds. Some of our methods integrate with PS Stars."
+      },
+      {
+        "question": "Can I earn PSN gift cards on mobile?",
+        "answer": "Absolutely! Use the PlayStation App or our platform on your phone to earn PSN credit on the go."
+      },
+      {
+        "question": "What's the best way to earn PSN credit?",
+        "answer": "For consistent daily earnings, complete surveys and offers. For larger earnings, focus on game testing and trophy challenges. Combining multiple methods yields the best results."
+      },
+      {
+        "question": "Are PSN gift card generators real?",
+        "answer": "NO! PSN gift card generators are scams. They don't work and can steal your account or personal information. Always use legitimate earning methods like ours."
+      },
+      {
+        "question": "Can I use PSN credit for PS Plus?",
+        "answer": "Yes! You can use your PSN wallet funds to pay for PS Plus Essential, Extra, or Premium subscriptions."
+      },
+      {
+        "question": "What's the difference between PS4 and PS5?",
+        "answer": "PS5 is Sony's next-generation console with faster loading, better graphics, and new features. PSN credit works on both consoles, and most games are cross-buy compatible."
+      },
+      {
+        "question": "Can I earn PSN credit in {country}?",
+        "answer": "Yes! Our platform provides region-specific PSN gift cards that work perfectly with PlayStation Store in {country}. Just select your correct region when redeeming."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Start Earning PSN Gift Cards in {country}?",
+    "subtitle": "Join 350,000+ gamers already earning PSN credit in {country}. Sign up for free and start building your PlayStation library today! 💙"
+  }
+}
