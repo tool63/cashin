@@ -129,7 +129,7 @@ export default function PrimaryCTA({
     </motion.span>
   );
 
-  // Custom animated border with 1mm space
+  // Custom animated border without space
   const WrappedButton = () => (
     <div className="relative inline-block rounded-3xl p-[2px] overflow-hidden">
       {/* Animated Gradient Border */}
@@ -149,8 +149,8 @@ export default function PrimaryCTA({
       />
       {/* Glow Effect */}
       <div className="absolute inset-0 rounded-3xl blur-md opacity-40 bg-gradient-to-r from-yellow-400 via-green-400 to-green-500" />
-      {/* Button with 1mm space */}
-      <div className="relative z-10" style={{ margin: '1mm' }}>
+      {/* Button without space */}
+      <div className="relative z-10">
         <ButtonContent />
       </div>
     </div>
