@@ -1,4 +1,4 @@
-// app/[country]/(marketing)/earn-paypal-money/page.tsx
+// app/[country]/rewards/earn-paypal-money/page.tsx
 
 import { cookies } from "next/headers";
 import { Metadata } from "next";
@@ -253,12 +253,12 @@ export async function generateMetadata({
     description: seoDescription,
     keywords,
     alternates: {
-      canonical: `https://cashog.com/${country}/earn-paypal-money`,
+      canonical: `https://cashog.com/${country}/rewards/earn-paypal-money`,
     },
     openGraph: {
       title: seoTitle,
       description: seoDescription,
-      url: `https://cashog.com/${country}/earn-paypal-money`,
+      url: `https://cashog.com/${country}/rewards/earn-paypal-money`,
       siteName: "Cashog",
       type: "website",
       locale: language === "es" ? "es_ES" : language === "fr" ? "fr_FR" : "en_US",
@@ -324,7 +324,7 @@ export default async function EarnPaypalMoneyPage({
   const description = t(rawDescription, `Earn free PayPal money in ${countryName}.`);
 
   const structuredData = generateJsonLd({
-    path: `/${country}/earn-paypal-money`,
+    path: `/${country}/rewards/earn-paypal-money`,
     title,
     description,
     type: "low",
@@ -335,7 +335,7 @@ export default async function EarnPaypalMoneyPage({
     title: t(tData?.hero?.title, "Get Free PayPal Money"),
     subtitle: t(
       tData?.hero?.subtitle,
-      `Earn real PayPal cash by completing simple tasks. Sign up for Freecash, play cool games, complete surveys or watch videos - and get paid via PayPal. Start earning today in ${countryName}!`
+      `Earn real PayPal cash by completing simple tasks. Sign up, play cool games, complete surveys or watch videos - and get paid via PayPal. Start earning today in ${countryName}!`
     ),
   };
 
@@ -437,7 +437,7 @@ export default async function EarnPaypalMoneyPage({
       {
         step: 1,
         title: "Join Free",
-        description: "Sign up to Freecash in under 30 seconds. Log in instantly using Google or Facebook.",
+        description: "Sign up in under 30 seconds. Log in instantly using Google or Facebook.",
       },
       {
         step: 2,
@@ -531,7 +531,7 @@ export default async function EarnPaypalMoneyPage({
       },
       {
         question: "Are there any fees for using PayPal?",
-        answer: "Receiving money from Freecash to PayPal is completely free. PayPal may charge fees for currency conversion or instant transfers to your bank."
+        answer: "Receiving money to PayPal is completely free. PayPal may charge fees for currency conversion or instant transfers to your bank."
       },
       {
         question: "Does PayPal balance expire?",
@@ -722,7 +722,6 @@ export default async function EarnPaypalMoneyPage({
                       href={method.link}
                       translationKey="start_earning"
                       observer={false}
-                      size="small"
                     />
                   </div>
                 </div>
@@ -843,7 +842,7 @@ export default async function EarnPaypalMoneyPage({
                 <div className="text-4xl text-gray-300">⚡</div>
                 <div className="text-center flex-1">
                   <p className="text-3xl font-bold text-green-600">{earningsEstimateData.freecashEarnings}</p>
-                  <p className="text-sm text-gray-500">Freecash Earnings</p>
+                  <p className="text-sm text-gray-500">Platform Earnings</p>
                 </div>
               </div>
               <div className="border-t pt-6">
