@@ -1,0 +1,350 @@
+{
+  "seo": {
+    "title": "Earn Spotify Premium in {country} - Get Free Spotify Premium Membership | Cashog",
+    "description": "Earn Spotify Premium in {country} by completing offers, surveys & tasks. Get ad-free music, offline listening, and more. Start earning free Spotify Premium today!"
+  },
+  "hero": {
+    "title": "Earn Spotify Premium in {country}",
+    "subtitle": "Get free Spotify Premium membership by completing offers, surveys & tasks. Join 300,000+ music lovers who've already earned 500,000+ months of Premium!"
+  },
+  "statsTitle": "Trusted by Thousands",
+  "stats": {
+    "premiumEarned": "500,000+",
+    "premiumEarnedLabel": "Months of Premium Earned",
+    "avgValue": "$12",
+    "avgValueLabel": "Average Monthly Value",
+    "activeUsers": "300K+",
+    "activeUsersLabel": "Active Music Fans",
+    "totalValue": "$6M+",
+    "totalValueLabel": "Total Value Saved"
+  },
+  "methodsTitle": "Ways to Earn Spotify Premium",
+  "methodsSubtitle": "Choose the method that works best for you",
+  "earningMethods": [
+    {
+      "icon": "🎵",
+      "title": "Music Surveys",
+      "description": "Share your opinion on music genres, artists, and listening habits. Get Premium codes for each survey.",
+      "timeEstimate": "5-15 mins each",
+      "difficulty": "Easy",
+      "rewardRange": "1 week - 1 month"
+    },
+    {
+      "icon": "📝",
+      "title": "Complete Offers",
+      "description": "Sign up for music trials, download apps, or watch videos to earn Spotify Premium rewards.",
+      "timeEstimate": "5-30 mins",
+      "difficulty": "Easy",
+      "rewardRange": "1 week - 3 months"
+    },
+    {
+      "icon": "🎧",
+      "title": "Podcast Listening",
+      "description": "Listen to sponsored podcasts and answer questions to earn free Premium access.",
+      "timeEstimate": "10-30 mins",
+      "difficulty": "Easy",
+      "rewardRange": "1 week - 1 month"
+    },
+    {
+      "icon": "📱",
+      "title": "App Downloads",
+      "description": "Download and try new music-related apps. Earn Spotify Premium for testing them out.",
+      "timeEstimate": "5-20 mins",
+      "difficulty": "Easy",
+      "rewardRange": "1 week - 2 months"
+    },
+    {
+      "icon": "👥",
+      "title": "Refer Friends",
+      "description": "Invite friends to join and earn bonus Premium months when they complete their first offer.",
+      "timeEstimate": "5 mins",
+      "difficulty": "Easy",
+      "rewardRange": "1 week - 1 month per referral"
+    },
+    {
+      "icon": "📊",
+      "title": "Playlist Promotion",
+      "description": "Create and promote Spotify playlists. Earn Premium for growing your playlist followers.",
+      "timeEstimate": "10-60 mins/day",
+      "difficulty": "Medium",
+      "rewardRange": "1 - 12 months"
+    },
+    {
+      "icon": "🎮",
+      "title": "Music Games",
+      "description": "Play music trivia and rhythm games. Earn points redeemable for Spotify Premium.",
+      "timeEstimate": "10-30 mins/day",
+      "difficulty": "Easy",
+      "rewardRange": "1 week - 1 month"
+    },
+    {
+      "icon": "💬",
+      "title": "Music Community",
+      "description": "Participate in music forums and Discord communities. Get rewarded with Premium for helpful contributions.",
+      "timeEstimate": "15-45 mins/day",
+      "difficulty": "Easy",
+      "rewardRange": "1 week - 3 months"
+    }
+  ],
+  "featuredOffersTitle": "Top Spotify Premium Opportunities",
+  "featuredOffersSubtitle": "Limited spots - start earning Premium today",
+  "featuredOffers": [
+    {
+      "title": "Complete 5 Music Surveys - 3 Months Premium",
+      "reward": "3 Months Premium",
+      "timeEstimate": "45 mins",
+      "difficulty": "Easy",
+      "spotsLeft": 10000,
+      "company": "Spotify Insights",
+      "rating": "4.8"
+    },
+    {
+      "title": "Download 3 Music Apps - 2 Months Premium",
+      "reward": "2 Months Premium",
+      "timeEstimate": "30 mins",
+      "difficulty": "Easy",
+      "spotsLeft": 8000,
+      "company": "AppRewards",
+      "rating": "4.7"
+    },
+    {
+      "title": "Listen to 10 Podcast Episodes - 1 Month Premium",
+      "reward": "1 Month Premium",
+      "timeEstimate": "2-3 hours",
+      "difficulty": "Easy",
+      "spotsLeft": 15000,
+      "company": "Podcast Network",
+      "rating": "4.6"
+    },
+    {
+      "title": "Create Popular Playlist (500+ followers) - 6 Months",
+      "reward": "6 Months Premium",
+      "timeEstimate": "2-4 weeks",
+      "difficulty": "Medium",
+      "spotsLeft": 2000,
+      "company": "Spotify Community",
+      "rating": "4.9"
+    },
+    {
+      "title": "Refer 10 Friends - 1 Year Premium",
+      "reward": "12 Months Premium",
+      "timeEstimate": "1-4 weeks",
+      "difficulty": "Easy",
+      "spotsLeft": 5000,
+      "company": "Referral Program",
+      "rating": "4.8"
+    }
+  ],
+  "benefitsTitle": "Why Earn Spotify Premium With Us",
+  "benefits": [
+    {
+      "icon": "🚫",
+      "title": "Ad-Free Music",
+      "description": "Listen to millions of songs without any interruptions or advertisements."
+    },
+    {
+      "icon": "📱",
+      "title": "Offline Listening",
+      "description": "Download your favorite playlists and listen anywhere, even without internet."
+    },
+    {
+      "icon": "🎵",
+      "title": "Higher Quality Audio",
+      "description": "Stream music in up to 320kbps for the best listening experience."
+    },
+    {
+      "icon": "⏭️",
+      "title": "Unlimited Skips",
+      "description": "Skip as many songs as you want. No limits on track changes."
+    },
+    {
+      "icon": "🎧",
+      "title": "Play Any Song",
+      "description": "Play any specific song or album on demand - not just shuffle."
+    },
+    {
+      "icon": "💚",
+      "title": "Official Spotify Codes",
+      "description": "All rewards are official Spotify Premium codes that work directly on your account."
+    },
+    {
+      "icon": "💰",
+      "title": "No Credit Card Needed",
+      "description": "Earn Premium completely free without providing payment information."
+    },
+    {
+      "icon": "🌍",
+      "title": "Works Worldwide",
+      "description": "Spotify Premium codes work in {country} and over 180 countries worldwide."
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Your Spotify Premium Earnings",
+  "tips": [
+    {
+      "title": "Complete Daily Offers",
+      "description": "Check back every day for new music-related offers. Consistency is key to earning Premium faster."
+    },
+    {
+      "title": "Complete Your Music Profile",
+      "description": "Fill out your complete music profile to qualify for higher-paying music surveys and offers."
+    },
+    {
+      "title": "Focus on High-Value Surveys",
+      "description": "Some music surveys pay 3+ months of Premium. Prioritize these for the best value."
+    },
+    {
+      "title": "Create Shareable Playlists",
+      "description": "Build quality playlists and share them on social media. Growing followers can earn you long-term Premium."
+    },
+    {
+      "title": "Combine Multiple Methods",
+      "description": "Do surveys while listening to podcasts. Stack different earning methods to maximize monthly Premium."
+    },
+    {
+      "title": "Refer Your Music Friends",
+      "description": "Invite friends who love music to earn bonus Premium months. Referral earnings add up quickly."
+    },
+    {
+      "title": "Stack Your Premium",
+      "description": "Redeem codes immediately to stack Premium months. You can have up to 3 years of Premium stacked."
+    },
+    {
+      "title": "Share on Social Media",
+      "description": "Share your playlist links on Twitter, Instagram, and TikTok to grow followers faster."
+    }
+  ],
+  "testimonialsTitle": "Real Music Lovers, Real Premium",
+  "testimonials": [
+    {
+      "name": "Jessica M.",
+      "country": "United States",
+      "earnings": "18 months",
+      "quote": "I've earned over 18 months of Spotify Premium just by doing music surveys and listening to podcasts. No ads, no interruptions!",
+      "avatar": "JM"
+    },
+    {
+      "name": "Daniel K.",
+      "country": "United Kingdom",
+      "earnings": "12 months",
+      "quote": "Been using this for a year. Haven't paid for Premium since. The playlist promotion method works great!",
+      "avatar": "DK"
+    },
+    {
+      "name": "Laura S.",
+      "country": "Germany",
+      "earnings": "24 months",
+      "quote": "Habe über 2 Jahre Spotify Premium verdient. Die Offline-Funktion ist ein Gamechanger! (Earned over 2 years of Spotify Premium. Offline feature is a gamechanger!)",
+      "avatar": "LS"
+    },
+    {
+      "name": "Carlos R.",
+      "country": "Brazil",
+      "earnings": "15 months",
+      "quote": "Ganhei 15 meses de Premium. Música sem anúncios é tudo! (Earned 15 months of Premium. Ad-free music is everything!)",
+      "avatar": "CR"
+    },
+    {
+      "name": "Sophie L.",
+      "country": "France",
+      "earnings": "9 months",
+      "quote": "J'ai gagné 9 mois de Spotify Premium. La qualité audio est incroyable! (Earned 9 months of Spotify Premium. The audio quality is amazing!)",
+      "avatar": "SL"
+    },
+    {
+      "name": "Priya N.",
+      "country": "India",
+      "earnings": "6 months",
+      "quote": "Earned 6 months of Premium for free. Downloading playlists for my commute is a lifesaver!",
+      "avatar": "PN"
+    }
+  ],
+  "faq": {
+    "title": "Earn Spotify Premium in {country} - FAQ",
+    "items": [
+      {
+        "question": "What is Spotify Premium?",
+        "answer": "Spotify Premium is a paid subscription that gives you ad-free music, offline listening, higher quality audio (up to 320kbps), unlimited skips, and the ability to play any song on demand. It costs $9.99-$14.99/month depending on your plan and region."
+      },
+      {
+        "question": "How do I earn Spotify Premium?",
+        "answer": "You can earn Spotify Premium by completing music surveys, listening to sponsored podcasts, downloading music apps, creating popular playlists, referring friends, playing music games, and participating in music communities."
+      },
+      {
+        "question": "Are these real Spotify Premium codes?",
+        "answer": "Yes! All rewards are official Spotify Premium codes that work directly on your Spotify account. We partner with legitimate offer providers to ensure you get real Premium access."
+      },
+      {
+        "question": "Is this really free?",
+        "answer": "Yes, absolutely! Signing up and earning is completely free. There are no hidden fees or subscriptions. You just complete music-related activities and get paid in Premium codes."
+      },
+      {
+        "question": "How long does it take to get my first Premium code?",
+        "answer": "Most users earn their first 1 month Premium code within 24-48 hours of signing up. Some high-paying surveys can get you 3 months in under a week!"
+      },
+      {
+        "question": "How do I redeem my Spotify Premium code?",
+        "answer": "Once you have enough points, go to the Rewards section, select Spotify Premium, choose your duration (1 week - 12 months), and click Redeem. The code will be sent instantly to your email. Redeem at spotify.com/redeem."
+      },
+      {
+        "question": "Can I stack multiple Premium codes?",
+        "answer": "Yes! You can redeem multiple codes to stack your Premium subscription. Spotify allows up to 3 years (36 months) of Premium to be stacked on your account."
+      },
+      {
+        "question": "Do I need a credit card?",
+        "answer": "No! When redeeming a Premium code, you don't need to enter any payment information. The code automatically activates Premium on your account."
+      },
+      {
+        "question": "What's the minimum payout amount?",
+        "answer": "The minimum payout is just 1 week of Spotify Premium. This makes it easy to try Premium and cash out frequently!"
+      },
+      {
+        "question": "What's the difference between Free and Premium?",
+        "answer": "Spotify Free has ads, shuffle-only play on mobile, lower quality audio (160kbps), limited skips, and no offline listening. Premium has no ads, play any song on demand, higher quality (320kbps), unlimited skips, and offline downloads."
+      },
+      {
+        "question": "How much can I earn per month?",
+        "answer": "Most active users earn 3-6 months of Premium per month. Power users who create popular playlists can earn 12+ months monthly."
+      },
+      {
+        "question": "Does Premium work on all devices?",
+        "answer": "Yes! Spotify Premium works on all devices - mobile (iOS/Android), desktop (Windows/Mac), web player, smart speakers, gaming consoles, and car systems."
+      },
+      {
+        "question": "What is Spotify Duo or Family?",
+        "answer": "Spotify Duo is for 2 people living together, Family is for up to 6 family members. Both include all Premium features plus shared playlists. Some of our offers reward Duo or Family codes."
+      },
+      {
+        "question": "Can I earn Premium for Duo or Family?",
+        "answer": "Yes! Some high-value offers reward Duo (2 accounts) or Family (6 accounts) Premium codes, which are worth $14.99-$19.99 monthly."
+      },
+      {
+        "question": "Are Spotify Premium generators real?",
+        "answer": "NO! Spotify Premium generators are scams. They don't work and can steal your account or personal information. Always use legitimate earning methods like ours."
+      },
+      {
+        "question": "Can I earn Premium on mobile?",
+        "answer": "Absolutely! Our platform works perfectly on mobile devices. Complete surveys and offers from your phone."
+      },
+      {
+        "question": "What's the best way to earn Premium?",
+        "answer": "For beginners, music surveys and podcast listening are easiest. For advanced users, creating popular playlists can earn you years of Premium."
+      },
+      {
+        "question": "Do Premium codes expire?",
+        "answer": "Yes, unredeemed Premium codes typically expire 6-12 months after issuance. Always redeem codes promptly to your Spotify account."
+      },
+      {
+        "question": "Can I gift Premium codes to friends?",
+        "answer": "Yes! You can share unredeemed codes with friends and family. Perfect for gifting music to loved ones."
+      },
+      {
+        "question": "What's Spotify Wrapped?",
+        "answer": "Spotify Wrapped is an annual feature showing your top artists, songs, and listening stats. Premium users get additional insights and sharing features."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Start Earning Spotify Premium in {country}?",
+    "subtitle": "Join 300,000+ music lovers already earning Spotify Premium in {country}. Sign up for free and start enjoying ad-free music today! 🎧💚"
+  }
+}
