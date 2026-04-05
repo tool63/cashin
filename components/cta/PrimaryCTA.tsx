@@ -124,6 +124,7 @@ export default function PrimaryCTA({
         transition-all duration-300
         cursor-pointer
       "
+      style={{ margin: '1mm' }}
     >
       {text}
     </motion.span>
