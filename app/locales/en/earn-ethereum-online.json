@@ -1,0 +1,367 @@
+{
+  "seo": {
+    "title": "Earn Ethereum Online in {country} - Get Free ETH Rewards | Cashog",
+    "description": "Earn Ethereum online in {country} by playing games, completing offers & DeFi tasks. Get paid in ETH instantly. Start earning cryptocurrency for free today!"
+  },
+  "hero": {
+    "title": "Earn Ethereum Online in {country}",
+    "subtitle": "Get free Ethereum (ETH) by playing games, completing offers & DeFi tasks. Join 100,000+ users who've already earned 50,000+ ETH in cryptocurrency rewards!"
+  },
+  "statsTitle": "Trusted by Thousands",
+  "stats": {
+    "ethEarned": "50,000+",
+    "ethEarnedLabel": "ETH Earned",
+    "avgPayout": "$30",
+    "avgPayoutLabel": "Average Payout",
+    "activeUsers": "100K+",
+    "activeUsersLabel": "Active Users",
+    "totalPaid": "$150M+",
+    "totalPaidLabel": "Total Value Paid"
+  },
+  "methodsTitle": "Ways to Earn Ethereum Online",
+  "methodsSubtitle": "Choose the method that works best for you",
+  "earningMethods": [
+    {
+      "icon": "🎮",
+      "title": "Play Blockchain Games",
+      "description": "Play Ethereum-based games like Axie Infinity, Gods Unchained, and earn ETH & NFTs.",
+      "timeEstimate": "10-60 mins/day",
+      "difficulty": "Medium",
+      "rewardRange": "0.01 - 1 ETH"
+    },
+    {
+      "icon": "💧",
+      "title": "Ethereum Faucets",
+      "description": "Claim free ETH every hour from trusted faucets. Complete simple tasks and get instant Ethereum rewards.",
+      "timeEstimate": "1-5 mins",
+      "difficulty": "Easy",
+      "rewardRange": "0.00001 - 0.001 ETH"
+    },
+    {
+      "icon": "📝",
+      "title": "Crypto Surveys",
+      "description": "Share your opinion on DeFi projects, NFTs, and blockchain topics. Earn ETH for each survey.",
+      "timeEstimate": "5-20 mins each",
+      "difficulty": "Easy",
+      "rewardRange": "0.001 - 0.01 ETH"
+    },
+    {
+      "icon": "🛒",
+      "title": "Complete Offers",
+      "description": "Sign up for DeFi platforms, try dApps, or use crypto wallets to earn ETH rewards.",
+      "timeEstimate": "5-60 mins",
+      "difficulty": "Medium",
+      "rewardRange": "0.01 - 1 ETH"
+    },
+    {
+      "icon": "⛏️",
+      "title": "Staking & Yield Farming",
+      "description": "Stake your ETH or provide liquidity to DeFi protocols to earn passive income.",
+      "timeEstimate": "Passive",
+      "difficulty": "Hard",
+      "rewardRange": "0.1 - 10 ETH/year"
+    },
+    {
+      "icon": "👥",
+      "title": "Refer Friends",
+      "description": "Invite friends to join and earn Ethereum commissions when they complete offers or earn rewards.",
+      "timeEstimate": "5 mins",
+      "difficulty": "Easy",
+      "rewardRange": "0.01 - 0.1 ETH per referral"
+    },
+    {
+      "icon": "🎨",
+      "title": "Create & Sell NFTs",
+      "description": "Create digital art, music, or collectibles and sell them as NFTs on OpenSea, Rarible, etc.",
+      "timeEstimate": "1-10 hours",
+      "difficulty": "Hard",
+      "rewardRange": "0.1 - 100 ETH"
+    },
+    {
+      "icon": "🎯",
+      "title": "Micro Tasks",
+      "description": "Complete small tasks like testing dApps, bug reporting, or community moderation for ETH.",
+      "timeEstimate": "5-30 mins",
+      "difficulty": "Easy",
+      "rewardRange": "0.001 - 0.01 ETH"
+    },
+    {
+      "icon": "💻",
+      "title": "Freelance Development",
+      "description": "Offer smart contract development, dApp building, or blockchain consulting for ETH payments.",
+      "timeEstimate": "1-40 hours",
+      "difficulty": "Hard",
+      "rewardRange": "1 - 100 ETH"
+    },
+    {
+      "icon": "🔒",
+      "title": "Bug Bounties",
+      "description": "Find security vulnerabilities in smart contracts and earn ETH rewards from protocols.",
+      "timeEstimate": "5-40 hours",
+      "difficulty": "Hard",
+      "rewardRange": "0.1 - 1000 ETH"
+    }
+  ],
+  "featuredOffersTitle": "Top Ethereum Earning Opportunities",
+  "featuredOffersSubtitle": "Limited spots - start earning ETH today",
+  "featuredOffers": [
+    {
+      "title": "Play Axie Infinity - Earn 0.1 ETH",
+      "reward": "0.1 ETH",
+      "timeEstimate": "1-2 hours",
+      "difficulty": "Medium",
+      "spotsLeft": 5000,
+      "company": "Sky Mavis",
+      "rating": "4.8"
+    },
+    {
+      "title": "Complete 10 DeFi Surveys - 0.05 ETH",
+      "reward": "0.05 ETH",
+      "timeEstimate": "2 hours",
+      "difficulty": "Easy",
+      "spotsLeft": 3000,
+      "company": "DeFi Pulse",
+      "rating": "4.6"
+    },
+    {
+      "title": "Sign Up for MetaMask - Get 0.01 ETH",
+      "reward": "0.01 ETH",
+      "timeEstimate": "5 mins",
+      "difficulty": "Easy",
+      "spotsLeft": 10000,
+      "company": "MetaMask",
+      "rating": "4.9"
+    },
+    {
+      "title": "Try Uniswap Swap - Earn 0.02 ETH",
+      "reward": "0.02 ETH",
+      "timeEstimate": "15 mins",
+      "difficulty": "Easy",
+      "spotsLeft": 8000,
+      "company": "Uniswap",
+      "rating": "4.9"
+    },
+    {
+      "title": "Mint Your First NFT - 0.05 ETH Bonus",
+      "reward": "0.05 ETH",
+      "timeEstimate": "30 mins",
+      "difficulty": "Medium",
+      "spotsLeft": 2000,
+      "company": "OpenSea",
+      "rating": "4.7"
+    },
+    {
+      "title": "Complete 50 Micro Tasks - 0.02 ETH",
+      "reward": "0.02 ETH",
+      "timeEstimate": "3-4 hours",
+      "difficulty": "Easy",
+      "spotsLeft": 5000,
+      "company": "Gitcoin",
+      "rating": "4.8"
+    }
+  ],
+  "benefitsTitle": "Why Earn Ethereum With Us",
+  "benefits": [
+    {
+      "icon": "⚡",
+      "title": "Smart Contract Power",
+      "description": "Ethereum enables programmable money and decentralized applications. Your earnings can interact with the entire DeFi ecosystem."
+    },
+    {
+      "icon": "🎨",
+      "title": "NFT Ecosystem",
+      "description": "Use your ETH to buy, sell, or create NFTs. Ethereum is the #1 blockchain for digital collectibles."
+    },
+    {
+      "icon": "🛡️",
+      "title": "Most Secure L1",
+      "description": "Ethereum is the most battle-tested smart contract platform with thousands of developers securing the network."
+    },
+    {
+      "icon": "🌍",
+      "title": "Global Access",
+      "description": "Ethereum is decentralized and accessible worldwide. No banks, no borders - just open finance."
+    },
+    {
+      "icon": "💎",
+      "title": "Store of Value",
+      "description": "Ethereum has shown massive growth since its launch. Your earnings could appreciate significantly over time."
+    },
+    {
+      "icon": "🔒",
+      "title": "Full Control",
+      "description": "You control your private keys. No bank can freeze your ETH or limit your DeFi transactions."
+    },
+    {
+      "icon": "🔄",
+      "title": "DeFi Integration",
+      "description": "Lend, borrow, trade, or earn yield on your ETH using hundreds of DeFi protocols."
+    },
+    {
+      "icon": "📈",
+      "title": "Staking Rewards",
+      "description": "Earn passive income by staking your ETH and helping secure the Ethereum network (post-Merge)."
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Your Ethereum Earnings",
+  "tips": [
+    {
+      "title": "Understand Gas Fees",
+      "description": "Ethereum transactions require gas fees. Check gas prices (Gwei) before moving ETH to avoid high costs. Use L2 solutions like Arbitrum or Optimism for lower fees."
+    },
+    {
+      "title": "Use Multiple Earning Methods",
+      "description": "Combine gaming, DeFi, NFTs, and surveys to maximize daily ETH earnings. Diversify your income streams across the ecosystem."
+    },
+    {
+      "title": "Complete Your Profile",
+      "description": "Fill out your complete profile to qualify for higher-paying DeFi surveys and dApp testing offers."
+    },
+    {
+      "title": "Learn About Layer 2",
+      "description": "Ethereum L2 solutions (Arbitrum, Optimism, Base) offer much lower fees. Many earning platforms now support L2 withdrawals."
+    },
+    {
+      "title": "Check Daily for New Offers",
+      "description": "New high-paying Ethereum offers are added daily. Check back regularly to grab limited spots for new dApps and protocols."
+    },
+    {
+      "title": "Refer Your Friends",
+      "description": "Invite friends to earn ETH commissions. Referral earnings add up quickly without extra work."
+    },
+    {
+      "title": "Consider Staking",
+      "description": "Once you've accumulated ETH, consider staking to earn passive yield (currently 3-5% APY)."
+    },
+    {
+      "title": "Secure Your ETH",
+      "description": "Always use hardware wallets for significant amounts. Never share your seed phrase or private keys."
+    }
+  ],
+  "testimonialsTitle": "Real Users, Real Ethereum Earnings",
+  "testimonials": [
+    {
+      "name": "David C.",
+      "country": "United States",
+      "earnings": "12 ETH",
+      "quote": "I've earned over 12 ETH playing Axie Infinity and other blockchain games. The play-to-earn revolution is real!",
+      "avatar": "DC"
+    },
+    {
+      "name": "Sarah K.",
+      "country": "United Kingdom",
+      "earnings": "8 ETH",
+      "quote": "Been using this for a year. Already earned 8 ETH through surveys and DeFi offers. Ethereum changed my financial life!",
+      "avatar": "SK"
+    },
+    {
+      "name": "Miguel R.",
+      "country": "Spain",
+      "earnings": "5 ETH",
+      "quote": "The NFT creation tutorials helped me mint my first collection. Made 5 ETH in sales. Highly recommend!",
+      "avatar": "MR"
+    },
+    {
+      "name": "Priya M.",
+      "country": "India",
+      "earnings": "3 ETH",
+      "quote": "I was skeptical but decided to try DeFi surveys. Earned 3 ETH worth ₹6,00,000+. Now I'm a true believer in crypto!",
+      "avatar": "PM"
+    },
+    {
+      "name": "Andreas W.",
+      "country": "Germany",
+      "earnings": "15 ETH",
+      "quote": "Best platform for earning ETH I've found. The dApp testing offers pay well and I've learned so much about Web3.",
+      "avatar": "AW"
+    },
+    {
+      "name": "Jessica L.",
+      "country": "Canada",
+      "earnings": "7 ETH",
+      "quote": "The bug bounty program is amazing. Found a critical vulnerability and earned 7 ETH. Legit and professional!",
+      "avatar": "JL"
+    }
+  ],
+  "faq": {
+    "title": "Earn Ethereum Online in {country} - FAQ",
+    "items": [
+      {
+        "question": "What is Ethereum (ETH)?",
+        "answer": "Ethereum is a decentralized blockchain platform that enables smart contracts and decentralized applications (dApps). It's the world's leading programmable blockchain with the largest DeFi and NFT ecosystem. ETH is the native cryptocurrency used to pay for transactions and computational services on the network."
+      },
+      {
+        "question": "How do I earn Ethereum online?",
+        "answer": "You can earn Ethereum by playing blockchain games (Play-to-Earn), claiming from faucets, completing DeFi surveys, testing dApps, staking, yield farming, creating NFTs, freelance development, bug bounties, and referring friends. Each activity rewards you with ETH or Gwei (fractions of Ethereum)."
+      },
+      {
+        "question": "What are Gwei?",
+        "answer": "Gwei is a denomination of Ethereum. 1 ETH = 1,000,000,000 Gwei (10^9). Gas prices on Ethereum are measured in Gwei. Most small rewards are paid in Gwei since they're easier to work with."
+      },
+      {
+        "question": "What are gas fees?",
+        "answer": "Gas fees are transaction costs on Ethereum paid to miners/validators for processing your transaction. Gas is measured in Gwei and varies based on network congestion. Use L2 solutions like Arbitrum or Optimism for much lower fees."
+      },
+      {
+        "question": "Is this really free?",
+        "answer": "Yes, signing up and earning is completely free. There are no hidden fees or subscriptions. You just complete activities and get paid in Ethereum. Some methods like staking or yield farming require existing ETH, but most earning methods are 100% free."
+      },
+      {
+        "question": "How long does it take to get my first Ethereum?",
+        "answer": "Most users earn their first 0.001 ETH within 24-48 hours of signing up. Some high-paying offers can get you to 0.01 ETH in under a week!"
+      },
+      {
+        "question": "How do I withdraw my Ethereum?",
+        "answer": "Once you have enough Gwei, go to the Withdraw section, enter your ETH wallet address, choose the amount, and click Withdraw. Payments are sent to your wallet via the Ethereum blockchain."
+      },
+      {
+        "question": "What wallet should I use for Ethereum?",
+        "answer": "We recommend using a non-custodial wallet where you control the private keys. Popular options include MetaMask (best for dApps), Trust Wallet, Rainbow, or hardware wallets like Ledger and Trezor for larger amounts."
+      },
+      {
+        "question": "What is DeFi?",
+        "answer": "DeFi (Decentralized Finance) is a ecosystem of financial applications built on Ethereum. You can lend, borrow, trade, and earn interest on your ETH without banks or intermediaries."
+      },
+      {
+        "question": "What are NFTs?",
+        "answer": "NFTs (Non-Fungible Tokens) are unique digital assets on Ethereum representing ownership of art, collectibles, music, virtual real estate, and more. You can earn ETH by creating and selling NFTs."
+      },
+      {
+        "question": "Is Ethereum legal in {country}?",
+        "answer": "Yes, Ethereum is legal to own and use in most countries including the US, UK, Canada, Australia, India, and EU nations. Always check your local regulations. We operate in compliance with international laws."
+      },
+      {
+        "question": "How much can I earn per month?",
+        "answer": "Most active users earn 0.1-1 ETH per month ($200-$2000 at current prices). Power users who play blockchain games, create NFTs, or do freelance development can earn 5-50+ ETH monthly ($10,000-$100,000+)."
+      },
+      {
+        "question": "What is Ethereum 2.0 (The Merge)?",
+        "answer": "The Merge was Ethereum's transition from Proof-of-Work (mining) to Proof-of-Stake (staking). It reduced energy consumption by 99.9% and allows ETH holders to earn staking rewards (currently 3-5% APY)."
+      },
+      {
+        "question": "Can I earn Ethereum on mobile?",
+        "answer": "Absolutely! Our platform works perfectly on mobile devices. Play blockchain games, use DeFi apps, and manage your ETH wallet from your phone."
+      },
+      {
+        "question": "What's the minimum withdrawal amount?",
+        "answer": "The minimum withdrawal amount is 0.005 ETH (approximately $10 at current prices). This helps cover Ethereum network gas fees."
+      },
+      {
+        "question": "What are Layer 2 solutions?",
+        "answer": "Layer 2 (L2) are networks built on top of Ethereum that offer faster and cheaper transactions. Popular L2s include Arbitrum, Optimism, Base, and Polygon. Many earning platforms now support L2 withdrawals with much lower fees."
+      },
+      {
+        "question": "Can I earn Ethereum without KYC?",
+        "answer": "Yes! Most earning methods don't require identity verification. You can start earning Ethereum instantly with just an email address and a wallet."
+      },
+      {
+        "question": "What's the difference between ETH and WETH?",
+        "answer": "WETH (Wrapped Ethereum) is an ERC-20 token representing ETH 1:1. It's used in DeFi protocols that require the ERC-20 standard. You can easily convert between ETH and WETH."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Start Earning Ethereum in {country}?",
+    "subtitle": "Join 100,000+ users already earning Ethereum in {country}. Sign up for free and start building your crypto portfolio on the world's leading smart contract platform today!"
+  }
+}
