@@ -1,0 +1,338 @@
+{
+  "seo": {
+    "title": "Earn Free Robux in {country} - Get Free Roblox Credits | Cashog",
+    "description": "Earn free Robux in {country} by playing games, completing offers & surveys. Get Roblox credits instantly. Start earning Robux for free today!"
+  },
+  "hero": {
+    "title": "Earn Free Robux in {country}",
+    "subtitle": "Get free Robux by playing games, completing offers & surveys. Join 500,000+ Roblox players who've already earned 100,000,000+ Robux! No scams, no generators - just real earning opportunities."
+  },
+  "statsTitle": "Trusted by Thousands",
+  "stats": {
+    "robuxEarned": "100,000,000+",
+    "robuxEarnedLabel": "Robux Earned",
+    "avgPayout": "500",
+    "avgPayoutLabel": "Average Payout (R$)",
+    "activeUsers": "500K+",
+    "activeUsersLabel": "Active Players",
+    "totalPaid": "$2M+",
+    "totalPaidLabel": "Total Value Paid"
+  },
+  "methodsTitle": "Ways to Earn Free Robux",
+  "methodsSubtitle": "Choose the method that works best for you",
+  "earningMethods": [
+    {
+      "icon": "🎮",
+      "title": "Play Roblox Games",
+      "description": "Play featured Roblox games and earn Robux rewards for reaching milestones and achievements.",
+      "timeEstimate": "10-60 mins/day",
+      "difficulty": "Easy",
+      "rewardRange": "50 - 5,000 R$"
+    },
+    {
+      "icon": "📝",
+      "title": "Complete Surveys",
+      "description": "Share your opinion on games and products. Get paid in Robux for each survey you complete.",
+      "timeEstimate": "5-20 mins each",
+      "difficulty": "Easy",
+      "rewardRange": "10 - 500 R$"
+    },
+    {
+      "icon": "🛒",
+      "title": "Download & Try Apps",
+      "description": "Download and try new mobile apps and games. Earn Robux rewards for testing them out.",
+      "timeEstimate": "5-30 mins",
+      "difficulty": "Easy",
+      "rewardRange": "100 - 2,000 R$"
+    },
+    {
+      "icon": "🎨",
+      "title": "Create Roblox Items",
+      "description": "Design and sell custom clothing, accessories, and game passes in the Roblox marketplace.",
+      "timeEstimate": "30-120 mins",
+      "difficulty": "Medium",
+      "rewardRange": "100 - 100,000+ R$"
+    },
+    {
+      "icon": "🏆",
+      "title": "Complete Offers",
+      "description": "Sign up for free trials, watch videos, or complete tasks to earn Robux rewards.",
+      "timeEstimate": "5-60 mins",
+      "difficulty": "Medium",
+      "rewardRange": "50 - 10,000 R$"
+    },
+    {
+      "icon": "👥",
+      "title": "Refer Friends",
+      "description": "Invite friends to join and earn bonus Robux when they complete their first offer.",
+      "timeEstimate": "5 mins",
+      "difficulty": "Easy",
+      "rewardRange": "100 - 1,000 R$ per referral"
+    },
+    {
+      "icon": "📹",
+      "title": "Create Roblox Content",
+      "description": "Make YouTube videos or TikTok content about Roblox. Earn Robux from sponsors and donations.",
+      "timeEstimate": "1-8 hours",
+      "difficulty": "Hard",
+      "rewardRange": "1,000 - 1,000,000+ R$"
+    },
+    {
+      "icon": "💻",
+      "title": "Learn Roblox Studio",
+      "description": "Create your own Roblox games. Earn Robux from game passes, developer products, and premium payouts.",
+      "timeEstimate": "10-100+ hours",
+      "difficulty": "Hard",
+      "rewardRange": "10,000 - 10,000,000+ R$"
+    }
+  ],
+  "featuredOffersTitle": "Top Robux Earning Opportunities",
+  "featuredOffersSubtitle": "Limited spots - start earning Robux today",
+  "featuredOffers": [
+    {
+      "title": "Play Adopt Me! - Earn 500 R$",
+      "reward": "500 R$",
+      "timeEstimate": "30 mins",
+      "difficulty": "Easy",
+      "spotsLeft": 10000,
+      "company": "Adopt Me!",
+      "rating": "4.9"
+    },
+    {
+      "title": "Complete 10 Surveys - 1,000 R$",
+      "reward": "1,000 R$",
+      "timeEstimate": "2 hours",
+      "difficulty": "Easy",
+      "spotsLeft": 5000,
+      "company": "SurveyPanel",
+      "rating": "4.7"
+    },
+    {
+      "title": "Download 5 Games - 2,000 R$",
+      "reward": "2,000 R$",
+      "timeEstimate": "1 hour",
+      "difficulty": "Easy",
+      "spotsLeft": 8000,
+      "company": "AppRewards",
+      "rating": "4.6"
+    },
+    {
+      "title": "Design & Sell 10 Clothing Items",
+      "reward": "5,000 R$",
+      "timeEstimate": "2-3 hours",
+      "difficulty": "Medium",
+      "spotsLeft": 2000,
+      "company": "Roblox Marketplace",
+      "rating": "4.8"
+    },
+    {
+      "title": "Create a Popular Game Pass",
+      "reward": "25,000 R$",
+      "timeEstimate": "1-2 weeks",
+      "difficulty": "Hard",
+      "spotsLeft": 500,
+      "company": "Roblox Studio",
+      "rating": "4.9"
+    }
+  ],
+  "benefitsTitle": "Why Earn Robux With Us",
+  "benefits": [
+    {
+      "icon": "⚡",
+      "title": "Instant Delivery",
+      "description": "Robux codes delivered instantly to your Roblox account as soon as you redeem."
+    },
+    {
+      "icon": "🛡️",
+      "title": "100% Legitimate",
+      "description": "No scams, no hacks, no generators. Just real earning opportunities through legitimate offers."
+    },
+    {
+      "icon": "🎮",
+      "title": "Roblox Official",
+      "description": "We partner with trusted offer providers. All Robux rewards are official Roblox credits."
+    },
+    {
+      "icon": "💰",
+      "title": "No Purchase Needed",
+      "description": "Earn Robux completely free without spending any real money."
+    },
+    {
+      "icon": "🎨",
+      "title": "Customize Your Avatar",
+      "description": "Use your earned Robux to buy cool outfits, accessories, and animations for your character."
+    },
+    {
+      "icon": "🏆",
+      "title": "Unlock Game Passes",
+      "description": "Use Robux to purchase game passes and special abilities in your favorite Roblox games."
+    },
+    {
+      "icon": "🏠",
+      "title": "Build Your Dream Home",
+      "description": "Spend Robux on furniture, decorations, and upgrades for your Roblox home."
+    },
+    {
+      "icon": "🎁",
+      "title": "Gift Friends",
+      "description": "Share the joy by gifting Robux or items to your Roblox friends."
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Your Robux Earnings",
+  "tips": [
+    {
+      "title": "Complete Daily Offers",
+      "description": "Check back every day for new offers. Consistency is key to earning Robux faster."
+    },
+    {
+      "title": "Complete Your Profile",
+      "description": "Fill out your complete profile to qualify for higher-paying surveys and offers."
+    },
+    {
+      "title": "Focus on High-Paying Offers",
+      "description": "Prioritize offers that pay the most Robux for your time. Look for 500+ R$ rewards first."
+    },
+    {
+      "title": "Combine Multiple Methods",
+      "description": "Play games while waiting for survey invitations. Stack different earning methods to maximize daily earnings."
+    },
+    {
+      "title": "Create & Sell Items",
+      "description": "Designing clothing and accessories can generate passive Robux income every time someone buys your items."
+    },
+    {
+      "title": "Learn Game Development",
+      "description": "Creating your own Roblox games can earn you thousands of Robux through game passes and premium payouts."
+    },
+    {
+      "title": "Refer Your Friends",
+      "description": "Invite friends to earn bonus Robux. Referral earnings add up quickly without extra work."
+    },
+    {
+      "title": "Save Up for Big Purchases",
+      "description": "Combine multiple rewards to save for larger purchases like game passes or rare limited items."
+    }
+  ],
+  "testimonialsTitle": "Real Players, Real Robux Earnings",
+  "testimonials": [
+    {
+      "name": "Alex J.",
+      "country": "United States",
+      "earnings": "50,000 R$",
+      "quote": "I've earned over 50,000 Robux just by playing games and completing surveys. No scams, no hacks - completely legit!",
+      "avatar": "AJ"
+    },
+    {
+      "name": "Emma S.",
+      "country": "United Kingdom",
+      "earnings": "35,000 R$",
+      "quote": "Been using this for 6 months. Already bought all the game passes I wanted. Such an amazing platform!",
+      "avatar": "ES"
+    },
+    {
+      "name": "Rahul M.",
+      "country": "India",
+      "earnings": "20,000 R$",
+      "quote": "I was skeptical but decided to try. Earned 20,000 Robux worth ₹15,000+. Best decision ever!",
+      "avatar": "RM"
+    },
+    {
+      "name": "Sarah L.",
+      "country": "Canada",
+      "earnings": "75,000 R$",
+      "quote": "The clothing design feature is amazing. I've made over 75,000 Robux selling my custom shirts and pants!",
+      "avatar": "SL"
+    },
+    {
+      "name": "Lucas P.",
+      "country": "Brazil",
+      "earnings": "45,000 R$",
+      "quote": "Melhor plataforma para ganhar Robux! (Best platform to earn Robux!) Already bought my dream avatar.",
+      "avatar": "LP"
+    },
+    {
+      "name": "Sophie W.",
+      "country": "Australia",
+      "earnings": "60,000 R$",
+      "quote": "Created my own game in Roblox Studio and it's earning me passive Robux every day. Highly recommend learning development!",
+      "avatar": "SW"
+    }
+  ],
+  "faq": {
+    "title": "Earn Free Robux in {country} - FAQ",
+    "items": [
+      {
+        "question": "What is Robux?",
+        "answer": "Robux (R$) is the virtual currency used in Roblox. You can use Robux to buy avatar accessories, game passes, special abilities, developer products, and more in the Roblox marketplace."
+      },
+      {
+        "question": "Is this really free?",
+        "answer": "Yes, absolutely! Signing up and earning is completely free. There are no hidden fees or subscriptions. You just complete activities and get paid in Robux. No purchase necessary!"
+      },
+      {
+        "question": "Are these real Robux?",
+        "answer": "Yes! All Robux rewards are official Roblox credits that work in your Roblox account. We partner with legitimate offer providers to ensure you get real Robux."
+      },
+      {
+        "question": "Is this allowed by Roblox?",
+        "answer": "Yes! Earning Robux through legitimate offers, surveys, and app downloads is completely allowed. We DO NOT use hacks, cheats, or generators which violate Roblox Terms of Service."
+      },
+      {
+        "question": "How long does it take to get my first Robux?",
+        "answer": "Most users earn their first 100 Robux within 24-48 hours of signing up. Some high-paying offers can get you to 1,000 Robux in under a week!"
+      },
+      {
+        "question": "How do I redeem my Robux?",
+        "answer": "Once you have enough points, go to the Rewards section, select Robux, choose your amount (100 - 10,000+ R$), and click Redeem. The Robux will be added instantly to your Roblox account."
+      },
+      {
+        "question": "Do I need a Roblox account?",
+        "answer": "Yes, you'll need a free Roblox account to receive your Robux rewards. You can sign up for Roblox for free if you don't have one."
+      },
+      {
+        "question": "What's the minimum payout amount?",
+        "answer": "The minimum payout is just 100 Robux (approximately $1). This makes it easy to cash out frequently!"
+      },
+      {
+        "question": "Can I earn Robux without surveys?",
+        "answer": "Absolutely! You can earn Robux by playing games, downloading apps, creating items, developing games, referring friends, and many other methods. Choose what works best for you."
+      },
+      {
+        "question": "How much can I earn per month?",
+        "answer": "Most active users earn 5,000-20,000 Robux per month ($50-$200). Power users who create popular items or games can earn 100,000+ Robux monthly ($1,000+)."
+      },
+      {
+        "question": "What can I buy with Robux?",
+        "answer": "You can buy avatar clothing and accessories, game passes, special abilities, developer products, private servers, name changes, group items, and much more in the Roblox marketplace."
+      },
+      {
+        "question": "Are Robux generators real?",
+        "answer": "NO! Robux generators are scams. They don't work and can steal your account or personal information. Always use legitimate earning methods like the ones we provide."
+      },
+      {
+        "question": "Is this safe for kids?",
+        "answer": "Yes! Our platform is safe for Roblox players of all ages. All offers are family-friendly and require parental permission when needed."
+      },
+      {
+        "question": "Can I earn Robux on mobile?",
+        "answer": "Absolutely! Our platform works perfectly on both desktop and mobile devices. Complete offers and play games from your phone or tablet."
+      },
+      {
+        "question": "What's the best way to earn Robux?",
+        "answer": "For beginners, playing games and completing surveys is easiest. For advanced users, creating and selling clothing or developing games can earn the most Robux."
+      },
+      {
+        "question": "Can I earn Robux without downloading apps?",
+        "answer": "Yes! You can earn through surveys, watching videos, completing online offers, and referring friends without downloading anything."
+      },
+      {
+        "question": "Do Robux expire?",
+        "answer": "No, Robux never expires once added to your Roblox account. You can save them for as long as you want!"
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Start Earning Robux in {country}?",
+    "subtitle": "Join 500,000+ Roblox players already earning free Robux in {country}. Sign up for free and start customizing your avatar, buying game passes, and more today!"
+  }
+}
