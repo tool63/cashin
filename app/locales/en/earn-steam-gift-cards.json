@@ -1,0 +1,342 @@
+{
+  "seo": {
+    "title": "Earn Steam Gift Cards in {country} - Get Free Steam Wallet Codes | Cashog",
+    "description": "Earn Steam gift cards in {country} by playing games, completing offers & surveys. Redeem for Steam Wallet credit. Start earning free Steam games today!"
+  },
+  "hero": {
+    "title": "Earn Steam Gift Cards in {country}",
+    "subtitle": "Get free Steam Wallet credit by playing games, completing offers & surveys. Join 500,000+ gamers who've already redeemed $2,000,000+ in Steam gift cards!"
+  },
+  "statsTitle": "Trusted by Thousands",
+  "stats": {
+    "giftCardsRedeemed": "200,000+",
+    "giftCardsRedeemedLabel": "Gift Cards Redeemed",
+    "avgCardValue": "$15",
+    "avgCardValueLabel": "Average Card Value",
+    "activeUsers": "500K+",
+    "activeUsersLabel": "Active Gamers",
+    "totalValue": "$2M+",
+    "totalValueLabel": "Total Value Redeemed"
+  },
+  "methodsTitle": "Ways to Earn Steam Gift Cards",
+  "methodsSubtitle": "Choose the method that works best for you",
+  "earningMethods": [
+    {
+      "icon": "🎮",
+      "title": "Play Steam Games",
+      "description": "Play featured Steam games and earn Wallet credit for reaching achievements and playtime milestones.",
+      "timeEstimate": "10-60 mins/day",
+      "difficulty": "Easy",
+      "rewardRange": "$5 - $50"
+    },
+    {
+      "icon": "📝",
+      "title": "Gaming Surveys",
+      "description": "Share your opinion on games, hardware, and gaming trends. Get paid in Steam credit for each survey.",
+      "timeEstimate": "5-20 mins each",
+      "difficulty": "Easy",
+      "rewardRange": "$1 - $10"
+    },
+    {
+      "icon": "🛒",
+      "title": "Game Testing",
+      "description": "Test new PC games before release. Report bugs and provide feedback to developers for Steam rewards.",
+      "timeEstimate": "30-120 mins",
+      "difficulty": "Medium",
+      "rewardRange": "$10 - $50"
+    },
+    {
+      "icon": "🃏",
+      "title": "Steam Trading Cards",
+      "description": "Collect and sell Steam Trading Cards on the Community Market. Earn Steam Wallet funds from card sales.",
+      "timeEstimate": "10-30 mins/day",
+      "difficulty": "Easy",
+      "rewardRange": "$1 - $20"
+    },
+    {
+      "icon": "📖",
+      "title": "Write Game Reviews",
+      "description": "Write detailed game reviews on Steam. Get rewarded with Wallet credit for helpful reviews.",
+      "timeEstimate": "15-45 mins",
+      "difficulty": "Easy",
+      "rewardRange": "$5 - $25"
+    },
+    {
+      "icon": "👥",
+      "title": "Refer Friends",
+      "description": "Invite friends to join and earn bonus Steam Wallet credit when they complete their first offer.",
+      "timeEstimate": "5 mins",
+      "difficulty": "Easy",
+      "rewardRange": "$5 - $20 per referral"
+    },
+    {
+      "icon": "🎯",
+      "title": "Complete Achievements",
+      "description": "Earn Steam Wallet credit by completing specific in-game achievements and challenges.",
+      "timeEstimate": "30-180 mins",
+      "difficulty": "Medium",
+      "rewardRange": "$5 - $100"
+    },
+    {
+      "icon": "💻",
+      "title": "PC Game Betas",
+      "description": "Participate in PC game beta tests. Earn Steam gift cards for finding bugs and providing feedback.",
+      "timeEstimate": "2-10 hours",
+      "difficulty": "Medium",
+      "rewardRange": "$20 - $100"
+    }
+  ],
+  "featuredOffersTitle": "Top Steam Gift Card Opportunities",
+  "featuredOffersSubtitle": "Limited spots - start earning Steam Wallet credit today",
+  "featuredOffers": [
+    {
+      "title": "Play Counter-Strike 2 - Earn $10 Steam",
+      "reward": "$10 Steam",
+      "timeEstimate": "30 mins",
+      "difficulty": "Easy",
+      "spotsLeft": 15000,
+      "company": "Valve",
+      "rating": "4.9"
+    },
+    {
+      "title": "Complete 10 Gaming Surveys - $20 Steam",
+      "reward": "$20 Steam",
+      "timeEstimate": "2 hours",
+      "difficulty": "Easy",
+      "spotsLeft": 8000,
+      "company": "GameInsights",
+      "rating": "4.7"
+    },
+    {
+      "title": "Test New RPG Game - $50 Steam",
+      "reward": "$50 Steam",
+      "timeEstimate": "2-3 hours",
+      "difficulty": "Medium",
+      "spotsLeft": 2000,
+      "company": "BetaTesting",
+      "rating": "4.8"
+    },
+    {
+      "title": "Sell 100 Trading Cards - $25 Bonus",
+      "reward": "$25 Steam",
+      "timeEstimate": "1-2 hours",
+      "difficulty": "Easy",
+      "spotsLeft": 5000,
+      "company": "Steam Market",
+      "rating": "4.6"
+    },
+    {
+      "title": "Write 5 Helpful Reviews - $15 Steam",
+      "reward": "$15 Steam",
+      "timeEstimate": "1-2 hours",
+      "difficulty": "Easy",
+      "spotsLeft": 10000,
+      "company": "Steam Community",
+      "rating": "4.8"
+    }
+  ],
+  "benefitsTitle": "Why Earn Steam Gift Cards With Us",
+  "benefits": [
+    {
+      "icon": "⚡",
+      "title": "Instant Delivery",
+      "description": "Steam Wallet codes delivered instantly to your email as soon as you redeem."
+    },
+    {
+      "icon": "🛡️",
+      "title": "100% Legitimate",
+      "description": "No scams, no hacks - just real earning opportunities through legitimate offers."
+    },
+    {
+      "icon": "🎮",
+      "title": "Official Steam Credit",
+      "description": "All rewards are official Steam Wallet codes that work directly in your Steam account."
+    },
+    {
+      "icon": "💰",
+      "title": "No Purchase Needed",
+      "description": "Earn Steam gift cards completely free without spending any real money."
+    },
+    {
+      "icon": "🎁",
+      "title": "Massive Game Library",
+      "description": "Use your Steam credit to buy thousands of games during Steam sales."
+    },
+    {
+      "icon": "🔄",
+      "title": "Steam Sales",
+      "description": "Save your credit for major Steam sales (Summer, Winter, Halloween) for huge discounts."
+    },
+    {
+      "icon": "🎨",
+      "title": "Community Market",
+      "description": "Use Steam Wallet funds to buy and sell items on the Steam Community Market."
+    },
+    {
+      "icon": "💝",
+      "title": "Gift Games to Friends",
+      "description": "Use your Steam credit to buy and gift games to your Steam friends."
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Your Steam Gift Card Earnings",
+  "tips": [
+    {
+      "title": "Complete Daily Offers",
+      "description": "Check back every day for new gaming offers. Consistency is key to earning Steam credit faster."
+    },
+    {
+      "title": "Complete Your Gaming Profile",
+      "description": "Fill out your complete gaming profile to qualify for higher-paying game testing opportunities."
+    },
+    {
+      "title": "Focus on Game Testing",
+      "description": "Game testing offers often pay the most Steam credit. Look for beta tests and early access opportunities."
+    },
+    {
+      "title": "Combine Multiple Methods",
+      "description": "Play games while waiting for survey invitations. Stack different earning methods to maximize daily earnings."
+    },
+    {
+      "title": "Sell Trading Cards",
+      "description": "Play games that drop trading cards and sell them on the Community Market for passive Steam credit."
+    },
+    {
+      "title": "Wait for Steam Sales",
+      "description": "Save your Steam Wallet credit for major sales when games are 50-90% off. Get more games for your credit!"
+    },
+    {
+      "title": "Refer Your Gamer Friends",
+      "description": "Invite gamer friends to earn bonus Steam credit. Referral earnings add up quickly without extra work."
+    },
+    {
+      "title": "Write Quality Reviews",
+      "description": "Write detailed, helpful reviews on Steam. Quality reviews get more upvotes and higher rewards."
+    }
+  ],
+  "testimonialsTitle": "Real Gamers, Real Steam Gift Cards",
+  "testimonials": [
+    {
+      "name": "Mike R.",
+      "country": "United States",
+      "earnings": "$450",
+      "quote": "I've earned over $450 in Steam credit just by testing games and completing surveys. Bought so many games during Steam sales!",
+      "avatar": "MR"
+    },
+    {
+      "name": "Alex S.",
+      "country": "United Kingdom",
+      "earnings": "$320",
+      "quote": "Been using this for 8 months. Already bought Cyberpunk 2077, Elden Ring, and more. Steam Wallet credit works perfectly!",
+      "avatar": "AS"
+    },
+    {
+      "name": "Dmitry V.",
+      "country": "Russia",
+      "earnings": "$280",
+      "quote": "Заработал более $280 на Steam. Спасибо! (Earned over $280 on Steam. Thank you!) Best platform for gamers.",
+      "avatar": "DV"
+    },
+    {
+      "name": "Carlos M.",
+      "country": "Brazil",
+      "earnings": "$390",
+      "quote": "Ganhei $390 em crédito Steam. Comprei todos os jogos que queria! (Earned $390 in Steam credit. Bought all the games I wanted!)",
+      "avatar": "CM"
+    },
+    {
+      "name": "Lisa W.",
+      "country": "Canada",
+      "earnings": "$510",
+      "quote": "The game testing offers are amazing. I've earned over $500 testing indie games. Highly recommend for PC gamers!",
+      "avatar": "LW"
+    },
+    {
+      "name": "Thomas K.",
+      "country": "Germany",
+      "earnings": "$670",
+      "quote": "Habe über 600€ Steam Guthaben verdient. Die Steam Sales sind jetzt noch besser! (Earned over €600 Steam credit. Steam Sales are even better now!)",
+      "avatar": "TK"
+    }
+  ],
+  "faq": {
+    "title": "Earn Steam Gift Cards in {country} - FAQ",
+    "items": [
+      {
+        "question": "What are Steam gift cards?",
+        "answer": "Steam gift cards add funds to your Steam Wallet, which you can use to buy games, software, hardware, and in-game items on the Steam platform. Steam is the world's largest PC gaming digital distribution platform."
+      },
+      {
+        "question": "How do I earn Steam gift cards?",
+        "answer": "You can earn Steam gift cards by playing featured games, completing gaming surveys, testing new PC games, selling Steam Trading Cards, writing game reviews, referring friends, and completing gaming offers."
+      },
+      {
+        "question": "Are these real Steam Wallet codes?",
+        "answer": "Yes! All rewards are official Steam Wallet codes that work directly on Steam. We partner with legitimate offer providers to ensure you get real Steam credit."
+      },
+      {
+        "question": "Is this really free?",
+        "answer": "Yes, absolutely! Signing up and earning is completely free. There are no hidden fees or subscriptions. You just complete gaming-related activities and get paid in Steam credit."
+      },
+      {
+        "question": "How long does it take to get my first Steam gift card?",
+        "answer": "Most users earn their first $5 Steam gift card within 24-48 hours of signing up. Some high-paying game testing offers can get you to $20 in under a week!"
+      },
+      {
+        "question": "How do I redeem my Steam gift card?",
+        "answer": "Once you have enough points, go to the Rewards section, select Steam Gift Card, choose your amount ($5-$100), and click Redeem. The code will be sent instantly to your email. Then go to Steam > Games > Redeem Steam Wallet Code."
+      },
+      {
+        "question": "Do I need a Steam account?",
+        "answer": "Yes, you'll need a free Steam account to redeem your gift cards. You can sign up for Steam for free at store.steampowered.com."
+      },
+      {
+        "question": "What's the minimum payout amount?",
+        "answer": "The minimum payout is just $5 Steam credit. This makes it easy to cash out frequently!"
+      },
+      {
+        "question": "What can I buy with Steam Wallet credit?",
+        "answer": "You can buy games, DLC, software, hardware (Steam Deck, controllers), in-game items, trading cards, and more. You can also gift games to friends and participate in Steam Community Market."
+      },
+      {
+        "question": "How much can I earn per month?",
+        "answer": "Most active users earn $20-100 in Steam credit per month. Power users who do game testing can earn $200-500+ monthly."
+      },
+      {
+        "question": "What are Steam Trading Cards?",
+        "answer": "Steam Trading Cards are virtual cards you earn by playing games. You can collect full sets to craft badges, or sell individual cards on the Community Market for Steam Wallet funds."
+      },
+      {
+        "question": "Do Steam gift cards expire?",
+        "answer": "No, once redeemed to your Steam Wallet, the funds never expire. You can save them for as long as you want for future Steam Sales."
+      },
+      {
+        "question": "What are Steam Sales?",
+        "answer": "Steam has major seasonal sales (Summer, Winter, Autumn, Spring) where games are discounted 50-90% off. Your Steam Wallet credit goes much further during these sales!"
+      },
+      {
+        "question": "Can I earn Steam gift cards on mobile?",
+        "answer": "Absolutely! Our platform works perfectly on both desktop and mobile devices. Complete offers and surveys from your phone."
+      },
+      {
+        "question": "What's the best way to earn Steam credit?",
+        "answer": "For beginners, playing featured games and completing surveys is easiest. For advanced users, game testing and selling trading cards can earn the most Steam credit."
+      },
+      {
+        "question": "Are Steam gift card generators real?",
+        "answer": "NO! Steam gift card generators are scams. They don't work and can steal your account or personal information. Always use legitimate earning methods like ours."
+      },
+      {
+        "question": "Can I use Steam credit in any country?",
+        "answer": "Steam Wallet codes are region-specific. Make sure to select the correct region for {country}. We automatically provide codes compatible with your region."
+      },
+      {
+        "question": "What is Steam Deck?",
+        "answer": "Steam Deck is Valve's handheld gaming PC. You can use your Steam Wallet credit to buy games for Steam Deck or even save up to purchase the device itself!"
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Start Earning Steam Gift Cards in {country}?",
+    "subtitle": "Join 500,000+ gamers already earning Steam Wallet credit in {country}. Sign up for free and start building your Steam library today!"
+  }
+}
