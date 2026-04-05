@@ -1,0 +1,298 @@
+{
+  "seo": {
+    "title": "Earn Google Play Gift Cards in {country} - Get Free $5-$100 Play Store Credit | Cashog",
+    "description": "Earn Google Play gift cards in {country} by playing games, completing offers & surveys. Redeem for $5-$100 Google Play credit for apps, games, movies & books. 100,000+ users already cashed out!"
+  },
+  "hero": {
+    "title": "Earn Google Play Gift Cards in {country}",
+    "subtitle": "Get free Google Play credit for apps, games, movies & books by playing games, completing offers & surveys. Join 100,000+ users who've already redeemed $500,000+ in Google Play credit!"
+  },
+  "statsTitle": "Trusted by Thousands",
+  "stats": {
+    "giftCardsRedeemed": "60,000+",
+    "giftCardsRedeemedLabel": "Gift Cards Redeemed",
+    "avgCardValue": "$15",
+    "avgCardValueLabel": "Average Card Value",
+    "activeUsers": "100K+",
+    "activeUsersLabel": "Active Users",
+    "totalValue": "$900K+",
+    "totalValueLabel": "Total Value Redeemed"
+  },
+  "methodsTitle": "Ways to Earn Google Play Gift Cards",
+  "methodsSubtitle": "Choose the method that works best for you",
+  "earningMethods": [
+    {
+      "icon": "🎮",
+      "title": "Play Android Games",
+      "description": "Download and play new Android games to earn Google Play credit. Reach level milestones for bigger rewards.",
+      "timeEstimate": "10-30 mins/day",
+      "difficulty": "Easy",
+      "rewardRange": "$5-$50"
+    },
+    {
+      "icon": "📝",
+      "title": "Take Paid Surveys",
+      "description": "Share your opinion on products and brands. Complete surveys tailored to your profile and earn Play Store credit.",
+      "timeEstimate": "5-20 mins each",
+      "difficulty": "Easy",
+      "rewardRange": "$1-$25"
+    },
+    {
+      "icon": "🛒",
+      "title": "Complete Offers",
+      "description": "Sign up for free trials, download apps, or watch videos to earn Google Play gift cards.",
+      "timeEstimate": "5-60 mins",
+      "difficulty": "Medium",
+      "rewardRange": "$5-$100"
+    },
+    {
+      "icon": "💻",
+      "title": "Test Android Apps",
+      "description": "Get paid to test new Android apps before they launch on the Play Store. Provide feedback to developers.",
+      "timeEstimate": "15-45 mins",
+      "difficulty": "Medium",
+      "rewardRange": "$10-$50"
+    },
+    {
+      "icon": "🎯",
+      "title": "Complete Tasks",
+      "description": "Small tasks like app reviews, bug reporting, or data entry for Google Play credit.",
+      "timeEstimate": "5-30 mins",
+      "difficulty": "Easy",
+      "rewardRange": "$2-$20"
+    },
+    {
+      "icon": "👥",
+      "title": "Refer Friends",
+      "description": "Invite friends to join and earn bonus Google Play gift cards when they complete their first offer.",
+      "timeEstimate": "5 mins",
+      "difficulty": "Easy",
+      "rewardRange": "$10-$50 per referral"
+    }
+  ],
+  "featuredOffersTitle": "Top Earning Opportunities",
+  "featuredOffersSubtitle": "Limited spots - start earning today",
+  "featuredOffers": [
+    {
+      "title": "Play RAID: Shadow Legends - Get $20 Google Play Card",
+      "reward": "$20 Google Play",
+      "timeEstimate": "45 mins",
+      "difficulty": "Easy",
+      "spotsLeft": 5000,
+      "company": "Plarium",
+      "rating": "4.7"
+    },
+    {
+      "title": "Complete 5 Surveys - $15 Play Store Credit",
+      "reward": "$15 Play Store",
+      "timeEstimate": "45 mins",
+      "difficulty": "Easy",
+      "spotsLeft": 10000,
+      "company": "SurveyPanel",
+      "rating": "4.8"
+    },
+    {
+      "title": "Sign Up for YouTube Premium Trial - $25 Google Play",
+      "reward": "$25 Google Play",
+      "timeEstimate": "5 mins",
+      "difficulty": "Easy",
+      "spotsLeft": 3000,
+      "company": "Google",
+      "rating": "4.9"
+    },
+    {
+      "title": "Reach Level 50 in Genshin Impact",
+      "reward": "$100 Google Play",
+      "timeEstimate": "2-4 weeks",
+      "difficulty": "Hard",
+      "spotsLeft": 1000,
+      "company": "HoYoverse",
+      "rating": "4.8"
+    },
+    {
+      "title": "Test 10 Android Apps - $50 Play Store Credit",
+      "reward": "$50 Play Store",
+      "timeEstimate": "2-3 hours",
+      "difficulty": "Medium",
+      "spotsLeft": 2000,
+      "company": "Google Play Testing",
+      "rating": "4.6"
+    }
+  ],
+  "benefitsTitle": "Why Earn Google Play Gift Cards With Us",
+  "benefits": [
+    {
+      "icon": "⚡",
+      "title": "Instant Delivery",
+      "description": "Google Play gift card codes delivered instantly to your email as soon as you redeem."
+    },
+    {
+      "icon": "🛡️",
+      "title": "100% Legitimate",
+      "description": "We partner with trusted offer providers. No scams, no hacks - just real Google Play credit earning opportunities."
+    },
+    {
+      "icon": "🌍",
+      "title": "Works in {country}",
+      "description": "Google Play gift cards work perfectly in {country} with local Play Store access."
+    },
+    {
+      "icon": "💳",
+      "title": "No Credit Card Needed",
+      "description": "Get Play Store credit without needing a credit card or PayPal account."
+    },
+    {
+      "icon": "🎁",
+      "title": "Stackable Rewards",
+      "description": "Combine multiple Google Play gift cards to buy apps, games, movies, books, or in-app purchases."
+    },
+    {
+      "icon": "📱",
+      "title": "Android Friendly",
+      "description": "Earn Google Play gift cards directly from your Android phone or tablet. Works seamlessly with your Google account."
+    },
+    {
+      "icon": "🔄",
+      "title": "New Offers Daily",
+      "description": "Fresh earning opportunities added every day. Never run out of ways to earn Google Play credit."
+    },
+    {
+      "icon": "🎯",
+      "title": "Low Minimum Payout",
+      "description": "Redeem your first Google Play gift card starting from just $5 earned."
+    }
+  ],
+  "tipsTitle": "Tips to Maximize Your Google Play Gift Card Earnings",
+  "tips": [
+    {
+      "title": "Complete Your Profile",
+      "description": "Fill out your complete profile to qualify for higher-paying surveys and Android app testing offers tailored to you."
+    },
+    {
+      "title": "Check Daily for New Offers",
+      "description": "New high-paying Google Play gift card offers are added daily. Check back regularly to grab limited spots before they fill up."
+    },
+    {
+      "title": "Focus on Android Game Offers",
+      "description": "Game offers often pay the most for your time. Look for new Android game launches that offer $20+ in Play Store credit."
+    },
+    {
+      "title": "Combine Multiple Methods",
+      "description": "Play Android games while waiting for survey invitations. Stack different earning methods to maximize daily Google Play credit earnings."
+    },
+    {
+      "title": "Refer Your Friends",
+      "description": "Invite friends to earn bonus Google Play gift cards. Referral earnings can add up quickly without extra work."
+    },
+    {
+      "title": "Save Up for Bigger Purchases",
+      "description": "Combine multiple Google Play gift cards to save for larger purchases like premium games, app bundles, or Google hardware."
+    }
+  ],
+  "testimonialsTitle": "Real Users, Real Google Play Gift Cards",
+  "testimonials": [
+    {
+      "name": "Alex T.",
+      "country": "United States",
+      "earnings": "$420",
+      "quote": "I've earned over $420 in Google Play credit just by playing Android games in my free time. The codes arrive instantly and work perfectly on the Play Store.",
+      "avatar": "AT"
+    },
+    {
+      "name": "Priya S.",
+      "country": "India",
+      "earnings": "$200",
+      "quote": "Been using this for 3 months. Already redeemed ₹15,000+ in Google Play credit. Perfect for buying apps and in-app purchases!",
+      "avatar": "PS"
+    },
+    {
+      "name": "James W.",
+      "country": "United Kingdom",
+      "earnings": "$380",
+      "quote": "Saved up Google Play vouchers for a Stadia controller. Took about 2 months of casual earning. Completely free and legit. Highly recommend!",
+      "avatar": "JW"
+    },
+    {
+      "name": "Maria G.",
+      "country": "Spain",
+      "earnings": "$290",
+      "quote": "Best way to earn Play Store credit I've found. The Android app testing offers are fun and actually pay out. Already on my 10th redemption.",
+      "avatar": "MG"
+    },
+    {
+      "name": "Ryan K.",
+      "country": "Canada",
+      "earnings": "$310",
+      "quote": "I was skeptical but decided to try. Earned my first $15 Google Play card in 2 days. Now I do this while commuting. Free apps and games!",
+      "avatar": "RK"
+    },
+    {
+      "name": "Lisa M.",
+      "country": "Australia",
+      "earnings": "$450",
+      "quote": "The Google Play gift cards work perfectly. I've bought premium apps, books, and even rented movies with my earnings. Changed my Android experience.",
+      "avatar": "LM"
+    }
+  ],
+  "faq": {
+    "title": "Earn Google Play Gift Cards in {country} - FAQ",
+    "items": [
+      {
+        "question": "How do I earn Google Play gift cards?",
+        "answer": "You can earn Google Play gift cards by playing Android games, completing surveys, testing apps, finishing offers, and referring friends. Each activity rewards you with points that can be redeemed for Google Play Store credit."
+      },
+      {
+        "question": "Are these Google Play gift cards real?",
+        "answer": "Yes, absolutely! We provide legitimate Google Play gift card codes that work on the Google Play Store worldwide. We partner with trusted offer providers to ensure all rewards are genuine."
+      },
+      {
+        "question": "How long does it take to get my first Google Play gift card?",
+        "answer": "Most users earn their first $5 Google Play gift card within 24-48 hours of signing up. Some high-paying Android game offers can get you there in under an hour!"
+      },
+      {
+        "question": "Do Google Play gift cards expire?",
+        "answer": "Google Play gift cards never expire. You can save them for as long as you want or combine multiple cards for bigger purchases on the Play Store."
+      },
+      {
+        "question": "Can I use these in {country}?",
+        "answer": "Yes! Google Play gift cards work perfectly in {country}. Just make sure to redeem them on your local Play Store for the correct currency."
+      },
+      {
+        "question": "Is there a minimum payout amount?",
+        "answer": "Yes, you can redeem your first Google Play gift card starting from just $5 earned. Higher denominations like $10, $15, $25, $50, and $100 are also available."
+      },
+      {
+        "question": "How do I redeem my Google Play gift card?",
+        "answer": "Once you have enough points, go to the Rewards section, select Google Play Gift Card, choose your amount ($5-$100), and click Redeem. The code will be sent instantly to your email. Then open the Google Play Store app > Menu > Redeem > Enter code."
+      },
+      {
+        "question": "Is this really free?",
+        "answer": "Yes, signing up and earning is completely free. There are no hidden fees or subscriptions. You just complete activities and get paid in Google Play gift cards."
+      },
+      {
+        "question": "Can I earn on Android phone or tablet?",
+        "answer": "Absolutely! Our platform works perfectly on Android devices. Download games directly from the Play Store and complete offers on your phone or tablet."
+      },
+      {
+        "question": "What can I buy with Google Play gift cards?",
+        "answer": "Google Play gift cards can be used to buy apps, games, in-app purchases, movies, TV shows, books, music, and even Google hardware like Pixel phones and Nest devices through the Google Store."
+      },
+      {
+        "question": "How much can I earn per month?",
+        "answer": "Most active users earn $50-200 in Google Play gift cards per month. Some power users earn $500+ by completing high-value Android app testing offers and referring friends."
+      },
+      {
+        "question": "Can I use Google Play gift cards for YouTube Premium?",
+        "answer": "Yes! Google Play gift cards can be used to pay for YouTube Premium, YouTube Music, Google One storage, and other Google subscriptions."
+      },
+      {
+        "question": "What's the difference between Google Play and Google Play gift cards?",
+        "answer": "Google Play gift cards add credit to your Google Play balance, which you can use to purchase apps, games, movies, books, and subscriptions from the Google Play Store. They work across all Google services."
+      }
+    ]
+  },
+  "final": {
+    "title": "Ready to Start Earning in {country}?",
+    "subtitle": "Join 100,000+ users already earning Google Play gift cards in {country}. Sign up for free and start redeeming for apps, games, movies & more today!"
+  }
+}
