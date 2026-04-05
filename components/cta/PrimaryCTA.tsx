@@ -15,6 +15,7 @@ interface PrimaryCTAProps {
   fallback?: string;
   external?: boolean;
   onClick?: () => void;
+  withBorder?: boolean; // New prop to enable circle border wrapping
 }
 
 export default function PrimaryCTA({
@@ -24,6 +25,7 @@ export default function PrimaryCTA({
   fallback = "Get Started Now",
   external = false,
   onClick,
+  withBorder = false, // Default false to maintain backward compatibility
 }: PrimaryCTAProps) {
   const params = useParams();
   const router = useRouter();
@@ -122,42 +124,44 @@ export default function PrimaryCTA({
         hover:shadow-4xl
         transition-all duration-300
         cursor-pointer
+        w-full
       "
+      style={{
+        // Add 0.5mm spacing when wrapped in CircleBorder
+        margin: withBorder ? "0.5mm" : "0",
+      }}
     >
       {text}
     </motion.span>
   );
 
-  // Simple border line with 1mm space
-  const WrappedButton = () => (
-    <div className="inline-block rounded-3xl border-2 border-yellow-400" style={{ margin: '1mm' }}>
-      <ButtonContent />
-    </div>
-  );
+  const CTAElement = () => {
+    if (external || processedHref.startsWith("http") || processedHref.startsWith("//")) {
+      return (
+        <a
+          href={processedHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={observer ? "cta-observer block" : "block"}
+          aria-label={text}
+          onClick={handleClick}
+        >
+          <ButtonContent />
+        </a>
+      );
+    }
 
-  if (external || processedHref.startsWith("http") || processedHref.startsWith("//")) {
     return (
-      <a
+      <Link
         href={processedHref}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={observer ? "cta-observer inline-block" : "inline-block"}
+        className={observer ? "cta-observer block" : "block"}
         aria-label={text}
         onClick={handleClick}
       >
-        <WrappedButton />
-      </a>
+        <ButtonContent />
+      </Link>
     );
-  }
+  };
 
-  return (
-    <Link
-      href={processedHref}
-      className={observer ? "cta-observer inline-block" : "inline-block"}
-      aria-label={text}
-      onClick={handleClick}
-    >
-      <WrappedButton />
-    </Link>
-  );
+  return <CTAElement />;
 }
