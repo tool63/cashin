@@ -5,6 +5,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { motion } from "framer-motion";
 import styles from "./FloatingCTA.module.css";
 import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
 import CircleBorder from "@/components/animations/CircleBorder";
@@ -79,20 +80,36 @@ export default function FloatingCTA() {
     return () => clearInterval(interval);
   }, []);
 
+  // Updated ButtonContent matching PrimaryCTA's structure
   const ButtonContent = () => (
-    <div className={styles.buttonContent}>
+    <motion.span
+      whileHover={{ scale: 1.08 }}
+      whileTap={{ scale: 0.97 }}
+      className="
+        inline-flex items-center justify-center
+        bg-gradient-to-r from-yellow-400 via-green-400 to-green-500
+        text-black 
+        px-10 sm:px-16 md:px-20 
+        py-3 sm:py-5 md:py-7
+        rounded-3xl
+        font-bold text-lg sm:text-xl md:text-xl
+        shadow-3xl
+        hover:shadow-4xl
+        transition-all duration-300
+        cursor-pointer
+        w-full
+      "
+    >
       {letters.map((char, index) => (
         <span
           key={`${bounceKey}-${index}`}
-          className={`${styles.letter} ${
-            bounceKey ? styles.sparkle : ""
-          }`}
+          className={styles.letter}
           style={{ animationDelay: `${index * 0.05}s` }}
         >
           {char === " " ? "\u00A0" : char}
         </span>
       ))}
-    </div>
+    </motion.span>
   );
 
   // EXACT same pattern as PrimaryCTA
