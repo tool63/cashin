@@ -95,7 +95,7 @@ export default function FloatingCTA() {
     </div>
   );
 
-  // EXACT same pattern as PrimaryCTA - no extra wrappers or classes
+  // EXACT same pattern as PrimaryCTA
   const WrappedButton = () => (
     <div className="inline-block">
       <CircleBorder>
