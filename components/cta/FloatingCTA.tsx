@@ -17,6 +17,7 @@ export default function FloatingCTA() {
 
   const { getTranslation } = useLanguage();
 
+  // Use the same translation key pattern as PrimaryCTA
   const text = getTranslation(
     "primarycta",
     "start_earning_now",
@@ -25,9 +26,28 @@ export default function FloatingCTA() {
 
   const letters = text.split("");
 
-  // Dynamic href with country parameter
-  const href = `/${country}/signup`;
+  // Dynamic href with country parameter (following PrimaryCTA's href processing logic)
+  const getProcessedHref = () => {
+    const href = `/${country}/signup`;
+    
+    if (href.startsWith(`/${country}`)) return href;
+    if (href.startsWith("http") || href.startsWith("//")) return href;
+    
+    if (href.startsWith("/")) {
+      const noPrefixPaths = ["/api/", "/auth/", "/_next/", "/favicon.ico"];
+      if (noPrefixPaths.some(path => href.startsWith(path))) {
+        return href;
+      }
+      return `/${country}${href}`;
+    }
+    
+    if (href.startsWith("#")) return href;
+    return `/${country}/${href}`;
+  };
 
+  const processedHref = getProcessedHref();
+
+  // Observer logic to show/hide when other CTAs are visible (same as PrimaryCTA's observer pattern)
   useEffect(() => {
     let observer: IntersectionObserver | null = null;
 
@@ -72,6 +92,7 @@ export default function FloatingCTA() {
     };
   }, []);
 
+  // Sparkle animation interval (every 10 seconds)
   useEffect(() => {
     const interval = setInterval(
       () => setBounceKey((prev) => prev + 1),
@@ -80,6 +101,7 @@ export default function FloatingCTA() {
     return () => clearInterval(interval);
   }, []);
 
+  // Button content with letter animations (matching PrimaryCTA's ButtonContent pattern)
   const ButtonContent = () => (
     <div className={styles.buttonContent}>
       {letters.map((char, index) => (
@@ -96,10 +118,11 @@ export default function FloatingCTA() {
     </div>
   );
 
+  // Wrapped button with CircleBorder (matching PrimaryCTA's WrappedButton pattern exactly)
   const WrappedButton = () => (
-    <div className={styles.wrapper}>
+    <div className="inline-block">
       <CircleBorder>
-        <div className={styles.innerPadding}>
+        <div className="-m-6 md:-m-10">
           <ButtonContent />
         </div>
       </CircleBorder>
@@ -108,7 +131,7 @@ export default function FloatingCTA() {
 
   return (
     <Link
-      href={href}
+      href={processedHref}
       aria-label={text}
       className={`${styles.floatingCTA} ${visible ? styles.show : styles.hide}`}
     >
