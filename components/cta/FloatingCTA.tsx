@@ -2,39 +2,28 @@
 
 "use client";
 
-import { motion } from "framer-motion";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import styles from "./FloatingCTA.module.css";
 import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
 import CircleBorder from "@/components/animations/CircleBorder";
 
 export default function FloatingCTA() {
   const [visible, setVisible] = useState(false);
   const [bounceKey, setBounceKey] = useState(0);
-  const [isReady, setIsReady] = useState(false);
-  const [displayText, setDisplayText] = useState("Start Earning Now");
   const params = useParams();
   const country = params?.country as string || "us";
 
-  const { getTranslation, isLoading } = useLanguage();
+  const { getTranslation } = useLanguage();
 
-  // Get translation once and store it
   const text = getTranslation(
     "primarycta",
     "start_earning_now",
     "Start Earning Now"
   );
 
-  // Store the final text once it's loaded and never change it
-  useEffect(() => {
-    if (!isLoading && text && !isReady) {
-      setDisplayText(text);
-      setIsReady(true);
-    }
-  }, [isLoading, text, isReady]);
-
-  const letters = displayText.split("");
+  const letters = text.split("");
 
   // Dynamic href with country parameter
   const href = `/${country}/signup`;
@@ -84,68 +73,30 @@ export default function FloatingCTA() {
   }, []);
 
   useEffect(() => {
-    // Only start the interval when the text is ready
-    if (!isReady) return;
-    
     const interval = setInterval(
       () => setBounceKey((prev) => prev + 1),
       10000
     );
     return () => clearInterval(interval);
-  }, [isReady]);
+  }, []);
 
   const ButtonContent = () => (
-    <motion.span
-      whileHover={{ scale: 1.08 }}
-      whileTap={{ scale: 0.97 }}
-      className="
-        inline-flex items-center justify-center gap-0.5
-        bg-gradient-to-r from-yellow-400 via-green-400 to-green-500
-        text-black 
-        px-10 sm:px-16 md:px-20 
-        py-3 sm:py-5 md:py-7
-        rounded-3xl
-        font-bold text-lg sm:text-xl md:text-xl
-        shadow-3xl
-        hover:shadow-4xl
-        transition-all duration-300
-        cursor-pointer
-      "
-    >
+    <div className={styles.buttonContent}>
       {letters.map((char, index) => (
-        <motion.span
+        <span
           key={`${bounceKey}-${index}`}
-          className="inline-block relative"
-          animate={
-            bounceKey
-              ? {
-                  y: [0, -8, 2, 0],
-                }
-              : {}
-          }
-          transition={{ duration: 0.6, delay: index * 0.05 }}
+          className={`${styles.letter} ${
+            bounceKey ? styles.sparkle : ""
+          }`}
+          style={{ animationDelay: `${index * 0.05}s` }}
         >
           {char === " " ? "\u00A0" : char}
-          {bounceKey && (
-            <motion.span
-              className="absolute top-[-8px] left-1/2 transform -translate-x-1/2 text-sm"
-              initial={{ opacity: 0, scale: 0, y: -8 }}
-              animate={{
-                opacity: [0, 1, 0],
-                scale: [0, 1.2, 0],
-                y: [-8, -14, -20],
-              }}
-              transition={{ duration: 0.6, delay: index * 0.05 }}
-            >
-              ✨
-            </motion.span>
-          )}
-        </motion.span>
+        </span>
       ))}
-    </motion.span>
+    </div>
   );
 
-  // EXACT same WrappedButton pattern as PrimaryCTA
+  // Updated WrappedButton to match PrimaryCTA's CircleBorder pattern
   const WrappedButton = () => (
     <div className="inline-block">
       <CircleBorder>
@@ -156,18 +107,11 @@ export default function FloatingCTA() {
     </div>
   );
 
-  // Don't render until text is ready to prevent flash
-  if (!isReady) {
-    return null;
-  }
-
   return (
     <Link
       href={href}
-      className={`fixed bottom-5 right-5 z-[9999] transition-all duration-300 ${
-        visible ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-20 pointer-events-none"
-      }`}
-      aria-label={displayText}
+      aria-label={text}
+      className={`${styles.floatingCTA} ${visible ? styles.show : styles.hide}`}
     >
       <WrappedButton />
     </Link>
