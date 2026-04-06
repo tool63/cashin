@@ -95,7 +95,7 @@ export default function FloatingCTA() {
     <div className={styles.buttonContent}>
       {!isReady ? (
         // Show fallback text while loading
-        <span className={styles.fallbackText}>Start Earning Now</span>
+        <span>Start Earning Now</span>
       ) : (
         letters.map((char, index) => (
           <span
