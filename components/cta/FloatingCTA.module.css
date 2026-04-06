@@ -9,28 +9,32 @@
   transition: transform 0.4s ease, opacity 0.3s ease;
 }
 
-/* Button content styling - matches PrimaryCTA but with letter animations */
+/* Button content styling */
 .buttonContent {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 2px;
   
-  /* Exact same gradient as PrimaryCTA */
+  /* Gradient background */
   background: linear-gradient(to right, #facc15, #84cc16, #22c55e);
   
-  /* Same padding as PrimaryCTA but adjusted for smaller floating button */
+  /* Padding - adjusted for perfect centering */
   padding: 12px 24px;
   
-  /* Same styling as PrimaryCTA */
+  /* Styling */
   color: black;
-  border-radius: 1.5rem; /* rounded-3xl */
+  border-radius: 1.5rem;
   font-weight: 700;
-  font-size: 1.125rem; /* text-lg */
+  font-size: 1.125rem;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
   cursor: pointer;
   white-space: nowrap;
+  
+  /* Ensure centering */
+  position: relative;
+  z-index: 1;
 }
 
 /* Hover effect */
@@ -39,22 +43,22 @@
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
 }
 
-/* Responsive padding to match PrimaryCTA's responsive sizing */
+/* Responsive padding */
 @media (min-width: 640px) {
   .buttonContent {
     padding: 16px 32px;
-    font-size: 1.25rem; /* text-xl */
+    font-size: 1.25rem;
   }
 }
 
 @media (min-width: 768px) {
   .buttonContent {
     padding: 20px 40px;
-    font-size: 1.25rem; /* text-xl */
+    font-size: 1.25rem;
   }
 }
 
-/* ================= SHOW / HIDE ================= */
+/* Show/Hide animations */
 .show {
   opacity: 1;
   transform: translateY(0);
@@ -67,14 +71,14 @@
   pointer-events: none;
 }
 
-/* ================= LETTER ANIMATION ================= */
+/* Letter animations */
 .letter {
   display: inline-block;
   animation: bounce 0.6s ease forwards;
   position: relative;
 }
 
-/* ================= SPARKLE EFFECT ================= */
+/* Sparkle effect */
 .sparkle::after {
   content: "✨";
   position: absolute;
@@ -85,7 +89,7 @@
   animation: sparkle 0.6s ease forwards;
 }
 
-/* ================= KEYFRAMES ================= */
+/* Keyframes */
 @keyframes bounce {
   0% { transform: translateY(0); }
   40% { transform: translateY(-8px); }
