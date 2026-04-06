@@ -96,11 +96,11 @@ export default function FloatingCTA() {
     </div>
   );
 
-  // Updated WrappedButton to match PrimaryCTA's CircleBorder pattern
+  // WrappedButton matching PrimaryCTA exactly
   const WrappedButton = () => (
-    <div className="inline-block">
+    <div className={styles.circleBorderWrapper}>
       <CircleBorder>
-        <div className="-m-6 md:-m-10">
+        <div className={styles.innerPadding}>
           <ButtonContent />
         </div>
       </CircleBorder>
