@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 import { earningOptions } from "@/components/homepage/earningOptions";
@@ -12,7 +11,6 @@ import {
   CardIcon,
   CardTitle,
   CardDescription,
-  CardCTA,
   CardGrid,
 } from "@/components/animations/container";
 import { useCountry } from "@/app/[country]/providers/CountryProvider";
@@ -82,10 +80,7 @@ export default function TasksSection({
                       : `Earn rewards with ${option.title.toLowerCase()}`}
                   </CardDescription>
 
-                  <CardCTA>
-                    {data?.cta || "Start earning"}{" "}
-                    <ArrowRight size={16} />
-                  </CardCTA>
+                  {/* CardCTA removed - no more hover text/arrow */}
                 </Card>
               </Link>
             </motion.div>
