@@ -2,10 +2,10 @@
 
 "use client";
 
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import styles from "./FloatingCTA.module.css";
 import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
 import CircleBorder from "@/components/animations/CircleBorder";
 
@@ -101,24 +101,53 @@ export default function FloatingCTA() {
     return () => clearInterval(interval);
   }, []);
 
-  // Button content with letter animations (matching PrimaryCTA's ButtonContent pattern)
+  // Button content with letter animations using Tailwind classes (matching PrimaryCTA)
   const ButtonContent = () => (
-    <div className={styles.buttonContent}>
+    <motion.div
+      whileHover={{ scale: 1.08 }}
+      whileTap={{ scale: 0.97 }}
+      className="
+        inline-flex items-center justify-center gap-0.5
+        bg-gradient-to-r from-yellow-400 via-green-400 to-green-500
+        text-black 
+        px-10 sm:px-16 md:px-20 
+        py-3 sm:py-5 md:py-7
+        rounded-3xl
+        font-bold text-lg sm:text-xl md:text-xl
+        shadow-3xl
+        hover:shadow-4xl
+        transition-all duration-300
+        cursor-pointer
+      "
+    >
       {letters.map((char, index) => (
-        <span
+        <motion.span
           key={`${bounceKey}-${index}`}
-          className={`${styles.letter} ${
-            bounceKey ? styles.sparkle : ""
-          }`}
-          style={{ animationDelay: `${index * 0.05}s` }}
+          className="inline-block"
+          animate={bounceKey ? {
+            y: [0, -8, 2, 0],
+            scale: [1, 1.2, 0.95, 1],
+          } : {}}
+          transition={{ duration: 0.6, delay: index * 0.05 }}
+          style={{ position: 'relative' }}
         >
           {char === " " ? "\u00A0" : char}
-        </span>
+          {bounceKey && (
+            <motion.span
+              className="absolute top-[-8px] left-1/2 transform -translate-x-1/2 text-sm"
+              initial={{ opacity: 0, scale: 0, y: -8 }}
+              animate={{ opacity: [0, 1, 0], scale: [0, 1.2, 0], y: [-8, -14, -20] }}
+              transition={{ duration: 0.6, delay: index * 0.05 }}
+            >
+              ✨
+            </motion.span>
+          )}
+        </motion.span>
       ))}
-    </div>
+    </motion.div>
   );
 
-  // Wrapped button with CircleBorder (matching PrimaryCTA's WrappedButton pattern exactly)
+  // Wrapped button with CircleBorder (exactly matching PrimaryCTA's pattern)
   const WrappedButton = () => (
     <div className="inline-block">
       <CircleBorder>
@@ -133,7 +162,9 @@ export default function FloatingCTA() {
     <Link
       href={processedHref}
       aria-label={text}
-      className={`${styles.floatingCTA} ${visible ? styles.show : styles.hide}`}
+      className={`fixed bottom-5 right-5 z-[9999] transition-all duration-300 ease-in-out ${
+        visible ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-20 pointer-events-none'
+      }`}
     >
       <WrappedButton />
     </Link>
