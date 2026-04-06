@@ -9,12 +9,13 @@
   transition: transform 0.4s ease, opacity 0.3s ease;
 }
 
-/* Wrapper for CircleBorder */
-.wrapper {
+/* Wrapper to control CircleBorder positioning */
+.circleBorderWrapper {
   display: inline-block;
+  /* CircleBorder adds its own padding, we'll offset it with innerPadding */
 }
 
-/* Negative margin to offset CircleBorder padding (matching PrimaryCTA) */
+/* Negative margin to offset CircleBorder padding - matching PrimaryCTA */
 .innerPadding {
   margin: -6px;
 }
@@ -51,6 +52,10 @@
   background-size: 600% 600%;
   animation: gradientBG 8s ease infinite;
   color: #000; /* keep text readable */
+  
+  /* Ensure the button content sits properly */
+  position: relative;
+  z-index: 1;
 }
 
 /* Hover effect on the wrapped button */
@@ -121,5 +126,17 @@
   .buttonContent {
     padding: 12px 20px;
     font-size: 14px;
+  }
+  
+  .innerPadding {
+    margin: -4px;
+  }
+}
+
+/* For larger screens, ensure proper spacing */
+@media (min-width: 1024px) {
+  .buttonContent {
+    padding: 18px 32px;
+    font-size: 18px;
   }
 }
