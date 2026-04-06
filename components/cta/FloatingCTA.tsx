@@ -96,11 +96,11 @@ export default function FloatingCTA() {
     </div>
   );
 
-  // Exact same pattern as PrimaryCTA
+  // Wrapped with proper centering
   const WrappedButton = () => (
-    <div className="inline-block">
+    <div className="inline-flex items-center justify-center">
       <CircleBorder>
-        <div className="-m-6 md:-m-10">
+        <div className="flex items-center justify-center -m-6 md:-m-10">
           <ButtonContent />
         </div>
       </CircleBorder>
