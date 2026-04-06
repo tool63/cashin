@@ -74,7 +74,7 @@ export default async function TrustSafetyPage({
   const language = getLanguage(country);
 
   /* ================= LOAD TRANSLATIONS ================= */
-  const trustSafety = await loadSectionTranslation(language, "trustsafety");
+  const trustSafety = await loadSectionTranslation(language, "trust-safety");
 
   /* ================= SEO ================= */
   const title = trustSafety?.seo?.title || `Trust & Safety - Secure Platform in ${countryName}`;
