@@ -3,7 +3,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
@@ -13,25 +13,28 @@ export default function FloatingCTA() {
   const [visible, setVisible] = useState(false);
   const [bounceKey, setBounceKey] = useState(0);
   const [isReady, setIsReady] = useState(false);
+  const [displayText, setDisplayText] = useState("Start Earning Now");
   const params = useParams();
   const country = params?.country as string || "us";
 
   const { getTranslation, isLoading } = useLanguage();
 
+  // Get translation once and store it
   const text = getTranslation(
     "primarycta",
     "start_earning_now",
     "Start Earning Now"
   );
 
-  // Wait for translation to be ready
+  // Store the final text once it's loaded and never change it
   useEffect(() => {
-    if (!isLoading && text) {
+    if (!isLoading && text && !isReady) {
+      setDisplayText(text);
       setIsReady(true);
     }
-  }, [isLoading, text]);
+  }, [isLoading, text, isReady]);
 
-  const letters = isReady ? text.split("") : [];
+  const letters = displayText.split("");
 
   // Dynamic href with country parameter
   const href = `/${country}/signup`;
@@ -109,41 +112,36 @@ export default function FloatingCTA() {
         cursor-pointer
       "
     >
-      {!isReady ? (
-        // Show fallback text while loading
-        <span>Start Earning Now</span>
-      ) : (
-        letters.map((char, index) => (
-          <motion.span
-            key={`${bounceKey}-${index}`}
-            className="inline-block relative"
-            animate={
-              bounceKey
-                ? {
-                    y: [0, -8, 2, 0],
-                  }
-                : {}
-            }
-            transition={{ duration: 0.6, delay: index * 0.05 }}
-          >
-            {char === " " ? "\u00A0" : char}
-            {bounceKey && (
-              <motion.span
-                className="absolute top-[-8px] left-1/2 transform -translate-x-1/2 text-sm"
-                initial={{ opacity: 0, scale: 0, y: -8 }}
-                animate={{
-                  opacity: [0, 1, 0],
-                  scale: [0, 1.2, 0],
-                  y: [-8, -14, -20],
-                }}
-                transition={{ duration: 0.6, delay: index * 0.05 }}
-              >
-                ✨
-              </motion.span>
-            )}
-          </motion.span>
-        ))
-      )}
+      {letters.map((char, index) => (
+        <motion.span
+          key={`${bounceKey}-${index}`}
+          className="inline-block relative"
+          animate={
+            bounceKey
+              ? {
+                  y: [0, -8, 2, 0],
+                }
+              : {}
+          }
+          transition={{ duration: 0.6, delay: index * 0.05 }}
+        >
+          {char === " " ? "\u00A0" : char}
+          {bounceKey && (
+            <motion.span
+              className="absolute top-[-8px] left-1/2 transform -translate-x-1/2 text-sm"
+              initial={{ opacity: 0, scale: 0, y: -8 }}
+              animate={{
+                opacity: [0, 1, 0],
+                scale: [0, 1.2, 0],
+                y: [-8, -14, -20],
+              }}
+              transition={{ duration: 0.6, delay: index * 0.05 }}
+            >
+              ✨
+            </motion.span>
+          )}
+        </motion.span>
+      ))}
     </motion.span>
   );
 
@@ -158,13 +156,18 @@ export default function FloatingCTA() {
     </div>
   );
 
+  // Don't render until text is ready to prevent flash
+  if (!isReady) {
+    return null;
+  }
+
   return (
     <Link
       href={href}
       className={`fixed bottom-5 right-5 z-[9999] transition-all duration-300 ${
         visible ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-20 pointer-events-none"
       }`}
-      aria-label={text}
+      aria-label={displayText}
     >
       <WrappedButton />
     </Link>
