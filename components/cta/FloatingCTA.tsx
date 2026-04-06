@@ -1,3 +1,5 @@
+// components/cta/FloatingCTA.tsx
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -5,6 +7,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import styles from "./FloatingCTA.module.css";
 import { useLanguage } from "@/app/[country]/providers/LanguageProvider";
+import CircleBorder from "@/components/animations/CircleBorder";
 
 export default function FloatingCTA() {
   const [visible, setVisible] = useState(false);
@@ -77,12 +80,8 @@ export default function FloatingCTA() {
     return () => clearInterval(interval);
   }, []);
 
-  return (
-    <Link
-      href={href}
-      aria-label={text}
-      className={`${styles.floatingCTA} ${visible ? styles.show : styles.hide}`}
-    >
+  const ButtonContent = () => (
+    <div className={styles.buttonContent}>
       {letters.map((char, index) => (
         <span
           key={`${bounceKey}-${index}`}
@@ -94,6 +93,26 @@ export default function FloatingCTA() {
           {char === " " ? "\u00A0" : char}
         </span>
       ))}
+    </div>
+  );
+
+  const WrappedButton = () => (
+    <div className={styles.wrapper}>
+      <CircleBorder>
+        <div className={styles.innerPadding}>
+          <ButtonContent />
+        </div>
+      </CircleBorder>
+    </div>
+  );
+
+  return (
+    <Link
+      href={href}
+      aria-label={text}
+      className={`${styles.floatingCTA} ${visible ? styles.show : styles.hide}`}
+    >
+      <WrappedButton />
     </Link>
   );
 }
