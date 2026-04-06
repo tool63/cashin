@@ -8,7 +8,6 @@ import {
   CardIcon,
   CardTitle,
   CardDescription,
-  CardCTA,
   CardGrid,
 } from "@/components/animations/container";
 
@@ -147,16 +146,7 @@ export default function FeaturesSection({
                 {replaceCountry(feature.description)}
               </CardDescription>
 
-              <CardCTA>
-                {replaceCountry(
-                  getText(
-                    data.cta,
-                    translations?.cta,
-                    "Start Now"
-                  )
-                )}{" "}
-                <span className="text-lg">→</span>
-              </CardCTA>
+              {/* CardCTA removed - no more "Start Now" text/arrow */}
             </Card>
           </motion.div>
         ))}
