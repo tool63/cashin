@@ -9,41 +9,20 @@
   transition: transform 0.4s ease, opacity 0.3s ease;
 }
 
-/* Wrapper to ensure CircleBorder has proper dimensions */
-.circleWrapper {
-  display: inline-block;
-  /* Ensure the wrapper doesn't clip the CircleBorder */
-  overflow: visible;
-}
-
-/* Inner content to properly position the button */
-.innerContent {
-  /* These negative margins offset CircleBorder's internal padding */
-  margin: -6px;
-  /* Ensure content doesn't get clipped */
-  overflow: visible;
-}
-
-@media (min-width: 768px) {
-  .innerContent {
-    margin: -10px;
-  }
-}
-
-/* Button content styling */
+/* EXACT button styling - matching PrimaryCTA but with letter animations */
 .buttonContent {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 2px;
   
-  /* Gradient background */
+  /* Same gradient as PrimaryCTA */
   background: linear-gradient(to right, #facc15, #84cc16, #22c55e);
   
-  /* Padding */
-  padding: 12px 28px;
+  /* Same padding structure as PrimaryCTA */
+  padding: 12px 24px;
   
-  /* Styling */
+  /* Same styling as PrimaryCTA */
   color: black;
   border-radius: 1.5rem;
   font-weight: 700;
@@ -51,25 +30,13 @@
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
   cursor: pointer;
-  
-  /* Prevent text wrapping */
   white-space: nowrap;
   
-  /* Ensure proper stacking */
-  position: relative;
-  z-index: 1;
-  
-  /* Add a slight margin to ensure CircleBorder has room */
-  margin: 2px;
+  /* NO extra margins - this was causing the cut off */
+  margin: 0;
 }
 
-/* Hover effect */
-.floatingCTA:hover .buttonContent {
-  transform: scale(1.02);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
-}
-
-/* Responsive sizing */
+/* Responsive sizing - matching PrimaryCTA's responsive pattern */
 @media (min-width: 640px) {
   .buttonContent {
     padding: 14px 32px;
@@ -82,6 +49,12 @@
     padding: 16px 40px;
     font-size: 1.25rem;
   }
+}
+
+/* Hover effect */
+.floatingCTA:hover .buttonContent {
+  transform: scale(1.02);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
 }
 
 /* Show/Hide animations */
@@ -138,20 +111,7 @@
   }
   
   .buttonContent {
-    padding: 8px 20px;
+    padding: 10px 20px;
     font-size: 0.875rem;
-    white-space: nowrap;
-  }
-  
-  .innerContent {
-    margin: -4px;
-  }
-}
-
-/* For very small screens */
-@media (max-width: 480px) {
-  .buttonContent {
-    padding: 6px 16px;
-    font-size: 0.75rem;
   }
 }
