@@ -15,6 +15,7 @@ import {
   CardCTA,
   CardGrid,
 } from "@/components/animations/container";
+import { useCountry } from "@/app/[country]/providers/CountryProvider";
 
 export default function TasksSection({
   data,
@@ -23,6 +24,8 @@ export default function TasksSection({
   data: any;
   countryName?: string;
 }) {
+  const { country } = useCountry();
+
   // Translate descriptions dynamically
   const descriptions: Record<string, string> = {};
 
@@ -31,6 +34,12 @@ export default function TasksSection({
       descriptions[item.title] = item.description;
     }
   });
+
+  // Same link logic as footer
+  const getTaskLink = (href: string) => {
+    const path = href.startsWith("/") ? href.slice(1) : href;
+    return `/${country}/${path}`;
+  };
 
   return (
     <OpeningStyle delay={0.12}>
@@ -48,29 +57,29 @@ export default function TasksSection({
 
         {/* Task Cards Grid */}
         <CardGrid cols={{ default: 2, md: 3, lg: 4 }}>
-          {earningOptions.map(([icon, title, href], index) => (
+          {earningOptions.map((option, index) => (
             <motion.div
-              key={title}
+              key={option.href}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              <Link href={href} className="block">
+              <Link href={getTaskLink(option.href)} className="block">
                 <Card>
-                  <CardIcon>{icon}</CardIcon>
+                  <CardIcon>{option.emoji}</CardIcon>
 
                   <CardTitle>
-                    {title.replace(/\{country\}/g, countryName || "")}
+                    {option.title.replace(/\{country\}/g, countryName || "")}
                   </CardTitle>
 
                   <CardDescription>
-                    {descriptions[title]
-                      ? descriptions[title].replace(
+                    {descriptions[option.title]
+                      ? descriptions[option.title].replace(
                           /\{country\}/g,
                           countryName || ""
                         )
-                      : `Earn rewards with ${title.toLowerCase()}`}
+                      : `Earn rewards with ${option.title.toLowerCase()}`}
                   </CardDescription>
 
                   <CardCTA>
