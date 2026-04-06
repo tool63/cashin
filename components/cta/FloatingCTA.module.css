@@ -9,59 +9,49 @@
   transition: transform 0.4s ease, opacity 0.3s ease;
 }
 
-/* Wrapper to control CircleBorder positioning */
-.circleBorderWrapper {
-  display: inline-block;
-  /* CircleBorder adds its own padding, we'll offset it with innerPadding */
-}
-
-/* Negative margin to offset CircleBorder padding - matching PrimaryCTA */
-.innerPadding {
-  margin: -6px;
-}
-
-@media (min-width: 768px) {
-  .innerPadding {
-    margin: -10px;
-  }
-}
-
-/* Button content with your gradient and styling */
+/* Button content styling - matches PrimaryCTA but with letter animations */
 .buttonContent {
-  padding: 15px 25px;
-  border-radius: 50px;
-  font-weight: 700;
-  font-size: 16px;
-  text-decoration: none;
-  white-space: nowrap;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
-  transition: all 0.3s ease;
-  cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 2px;
   
-  /* Your updated gradient */
-  background: linear-gradient(
-    270deg,
-    #facc15, /* yellow-400 */
-    #84cc16, /* green-400 */
-    #22c55e  /* green-500 */
-  );
-  background-size: 600% 600%;
-  animation: gradientBG 8s ease infinite;
-  color: #000; /* keep text readable */
+  /* Exact same gradient as PrimaryCTA */
+  background: linear-gradient(to right, #facc15, #84cc16, #22c55e);
   
-  /* Ensure the button content sits properly */
-  position: relative;
-  z-index: 1;
+  /* Same padding as PrimaryCTA but adjusted for smaller floating button */
+  padding: 12px 24px;
+  
+  /* Same styling as PrimaryCTA */
+  color: black;
+  border-radius: 1.5rem; /* rounded-3xl */
+  font-weight: 700;
+  font-size: 1.125rem; /* text-lg */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  white-space: nowrap;
 }
 
-/* Hover effect on the wrapped button */
+/* Hover effect */
 .floatingCTA:hover .buttonContent {
   transform: scale(1.02);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+/* Responsive padding to match PrimaryCTA's responsive sizing */
+@media (min-width: 640px) {
+  .buttonContent {
+    padding: 16px 32px;
+    font-size: 1.25rem; /* text-xl */
+  }
+}
+
+@media (min-width: 768px) {
+  .buttonContent {
+    padding: 20px 40px;
+    font-size: 1.25rem; /* text-xl */
+  }
 }
 
 /* ================= SHOW / HIDE ================= */
@@ -109,14 +99,7 @@
   100% { opacity: 0; transform: translate(-50%, -20px) scale(0); }
 }
 
-/* ================= GRADIENT ANIMATION ================= */
-@keyframes gradientBG {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Responsive adjustments */
+/* Mobile adjustments */
 @media (max-width: 640px) {
   .floatingCTA {
     bottom: 16px;
@@ -124,19 +107,7 @@
   }
   
   .buttonContent {
-    padding: 12px 20px;
-    font-size: 14px;
-  }
-  
-  .innerPadding {
-    margin: -4px;
-  }
-}
-
-/* For larger screens, ensure proper spacing */
-@media (min-width: 1024px) {
-  .buttonContent {
-    padding: 18px 32px;
-    font-size: 18px;
+    padding: 10px 20px;
+    font-size: 0.875rem;
   }
 }
