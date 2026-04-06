@@ -12,9 +12,15 @@ import CircleBorder from "@/components/animations/CircleBorder";
 export default function FloatingCTA() {
   const [visible, setVisible] = useState(false);
   const [bounceKey, setBounceKey] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
   const params = useParams();
   const country = params?.country as string || "us";
-  const { getTranslation } = useLanguage();
+  const { getTranslation, isLoading } = useLanguage();
+
+  // Wait for client-side mounting to avoid hydration mismatch
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const text = getTranslation(
     "primarycta",
@@ -22,7 +28,7 @@ export default function FloatingCTA() {
     "Start Earning Now"
   );
 
-  const letters = text.split("");
+  const letters = isMounted && !isLoading ? text.split("") : [];
 
   const getProcessedHref = () => {
     const href = `/${country}/signup`;
@@ -114,36 +120,41 @@ export default function FloatingCTA() {
         cursor-pointer
       "
     >
-      {letters.map((char, index) => (
-        <motion.span
-          key={`${bounceKey}-${index}`}
-          className="inline-block relative"
-          animate={
-            bounceKey
-              ? {
-                  y: [0, -8, 2, 0],
-                }
-              : {}
-          }
-          transition={{ duration: 0.6, delay: index * 0.05 }}
-        >
-          {char === " " ? "\u00A0" : char}
-          {bounceKey && (
-            <motion.span
-              className="absolute top-[-8px] left-1/2 transform -translate-x-1/2 text-sm"
-              initial={{ opacity: 0, scale: 0, y: -8 }}
-              animate={{
-                opacity: [0, 1, 0],
-                scale: [0, 1.2, 0],
-                y: [-8, -14, -20],
-              }}
-              transition={{ duration: 0.6, delay: index * 0.05 }}
-            >
-              ✨
-            </motion.span>
-          )}
-        </motion.span>
-      ))}
+      {!isMounted || isLoading ? (
+        // Show a simple loading state or skeleton
+        <span>Start Earning Now</span>
+      ) : (
+        letters.map((char, index) => (
+          <motion.span
+            key={`${bounceKey}-${index}`}
+            className="inline-block relative"
+            animate={
+              bounceKey
+                ? {
+                    y: [0, -8, 2, 0],
+                  }
+                : {}
+            }
+            transition={{ duration: 0.6, delay: index * 0.05 }}
+          >
+            {char === " " ? "\u00A0" : char}
+            {bounceKey && (
+              <motion.span
+                className="absolute top-[-8px] left-1/2 transform -translate-x-1/2 text-sm"
+                initial={{ opacity: 0, scale: 0, y: -8 }}
+                animate={{
+                  opacity: [0, 1, 0],
+                  scale: [0, 1.2, 0],
+                  y: [-8, -14, -20],
+                }}
+                transition={{ duration: 0.6, delay: index * 0.05 }}
+              >
+                ✨
+              </motion.span>
+            )}
+          </motion.span>
+        ))
+      )}
     </motion.span>
   );
 
