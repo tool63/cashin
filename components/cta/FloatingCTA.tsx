@@ -95,10 +95,11 @@ export default function FloatingCTA() {
     </div>
   );
 
+  // EXACT same pattern as PrimaryCTA - no extra wrappers or classes
   const WrappedButton = () => (
-    <div className={styles.circleWrapper}>
+    <div className="inline-block">
       <CircleBorder>
-        <div className={styles.innerContent}>
+        <div className="-m-6 md:-m-10">
           <ButtonContent />
         </div>
       </CircleBorder>
