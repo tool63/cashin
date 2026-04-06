@@ -25,7 +25,6 @@ export default function FloatingCTA() {
 
   const letters = text.split("");
 
-  // Dynamic href with country parameter
   const href = `/${country}/signup`;
 
   useEffect(() => {
@@ -96,11 +95,10 @@ export default function FloatingCTA() {
     </div>
   );
 
-  // Wrapped with proper centering
   const WrappedButton = () => (
-    <div className="inline-flex items-center justify-center">
+    <div className={styles.circleWrapper}>
       <CircleBorder>
-        <div className="flex items-center justify-center -m-6 md:-m-10">
+        <div className={styles.innerContent}>
           <ButtonContent />
         </div>
       </CircleBorder>
