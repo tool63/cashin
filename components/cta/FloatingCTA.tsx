@@ -96,13 +96,11 @@ export default function FloatingCTA() {
     </div>
   );
 
-  // Updated WrappedButton to match PrimaryCTA's CircleBorder pattern
+  // Updated WrappedButton with proper CircleBorder wrapping all sides
   const WrappedButton = () => (
     <div className="inline-block">
       <CircleBorder>
-        <div className="-m-6 md:-m-10">
-          <ButtonContent />
-        </div>
+        <ButtonContent />
       </CircleBorder>
     </div>
   );
