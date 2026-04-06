@@ -1,7 +1,10 @@
 // app/[country]/(marketing)/watch-videos/page.tsx
 
 import { cookies } from "next/headers";
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
+import Link from "next/link";
+import Image from "next/image";
+import { lazy, Suspense } from "react";
 
 import {
   getCountry,
@@ -22,92 +25,13 @@ import CircleBorder from "@/components/animations/CircleBorder";
 import OpeningStyle from "@/components/animations/openingstyle";
 import FAQ from "@/components/animations/FAQ";
 
-/* ================= TYPES ================= */
-
-interface TranslationSection {
-  seo?: {
-    title?: string;
-    description?: string;
-  };
-  hero?: {
-    title?: string;
-    subtitle?: string;
-  };
-  statsTitle?: string;
-  stats?: {
-    videosWatched?: string;
-    videosWatchedLabel?: string;
-    avgPayout?: string;
-    avgPayoutLabel?: string;
-    activeUsers?: string;
-    activeUsersLabel?: string;
-    totalPaid?: string;
-    totalPaidLabel?: string;
-  };
-  categoriesTitle?: string;
-  categoriesSubtitle?: string;
-  videoCategories?: Array<{
-    icon: string;
-    title: string;
-    description: string;
-    avgReward: string;
-    timeRequired: string;
-    popularity: string;
-  }>;
-  featuredVideosTitle?: string;
-  featuredVideosSubtitle?: string;
-  featuredVideos?: Array<{
-    title: string;
-    reward: string;
-    duration: string;
-    category: string;
-    viewsLeft: number;
-    platform: string;
-    rating: string;
-  }>;
-  benefitsTitle?: string;
-  benefits?: Array<{
-    icon: string;
-    title: string;
-    description: string;
-  }>;
-  tipsTitle?: string;
-  tips?: Array<{
-    title: string;
-    description: string;
-  }>;
-  testimonialsTitle?: string;
-  testimonials?: Array<{
-    name: string;
-    country: string;
-    earnings: string;
-    quote: string;
-    avatar: string;
-  }>;
-  faq?: {
-    title?: string;
-    items?: Array<{
-      question: string;
-      answer: string;
-    }>;
-  };
-  final?: {
-    title?: string;
-    subtitle?: string;
-  };
-}
-
 /* ================= HELPERS ================= */
 
-async function loadSectionTranslation(
-  language: string,
-  section: string
-): Promise<TranslationSection> {
+async function loadSectionTranslation(language: string, section: string) {
   try {
     const file = await import(`@/app/locales/${language}/${section}.json`);
     return file.default;
-  } catch (error) {
-    console.warn(`Missing translation: ${section} (${language})`);
+  } catch {
     return {};
   }
 }
@@ -116,120 +40,34 @@ function getLanguage(country: CountryCode): SupportedLanguage {
   const cookieStore = cookies();
 
   const override = cookieStore.get(COOKIE_KEYS.USER_LANGUAGE_OVERRIDE)?.value;
-  if (override) {
-    const lang = override.toLowerCase().split("-")[0];
-    if (SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage)) {
-      return lang as SupportedLanguage;
-    }
-  }
+  if (override) return override.split("-")[0] as SupportedLanguage;
 
   const saved = cookieStore.get(COOKIE_KEYS.LANGUAGE)?.value;
-  if (saved) {
-    const lang = saved.toLowerCase().split("-")[0];
-    if (SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage)) {
-      return lang as SupportedLanguage;
-    }
-  }
+  if (saved) return saved.split("-")[0] as SupportedLanguage;
 
   return getCountry(country).defaultLanguage as SupportedLanguage;
 }
 
-// Helper to replace {country} placeholder
-const replaceCountryPlaceholder = (text: string, countryName: string): string => {
-  if (!text) return "";
-  return text.replace(/\{country\}/g, countryName);
-};
-
-// Dynamic keywords based on country type
-const getCountrySpecificKeywords = (countryName: string, countryCode: string): string[] => {
-  const lowerCountry = countryName.toLowerCase();
-  
-  const baseKeywords = [
-    `get paid to watch videos ${lowerCountry}`,
-    `watch videos earn money ${lowerCountry}`,
-    `paid to watch videos ${lowerCountry}`,
-    `earn money watching videos ${lowerCountry}`,
-    `watch ads get paid ${lowerCountry}`,
-    `get paid for watching content ${lowerCountry}`,
-    `make money watching videos online ${lowerCountry}`,
-    `paid video watching jobs ${lowerCountry}`,
-    `earn while watching videos ${lowerCountry}`,
-    `best sites to watch videos and earn money ${lowerCountry}`,
-    `legit video earning apps ${lowerCountry}`,
-    `watch videos get paid paypal ${lowerCountry}`,
-    `video rewards program ${lowerCountry}`,
-    `cash for watching videos ${lowerCountry}`,
-    `highest paying video apps ${lowerCountry}`,
-    `earn $5 per video ${lowerCountry}`,
-    `watch to earn platform ${lowerCountry}`,
-    `video watching from home ${lowerCountry}`,
-    `get paid to watch youtube videos ${lowerCountry}`,
-    `watch videos earn gift cards ${lowerCountry}`,
-    `passive income watching videos ${lowerCountry}`,
-    `watch videos for bitcoin ${lowerCountry}`,
-  ];
-
-  // Add country-specific variations
-  if (countryCode === "us") {
-    baseKeywords.push(
-      "get paid to watch videos usa",
-      "video watching jobs for americans",
-      "highest paying video apps usa"
-    );
-  } else if (countryCode === "gb") {
-    baseKeywords.push(
-      "get paid to watch videos uk",
-      "paid video watching uk",
-      "earn pounds watching videos"
-    );
-  } else if (countryCode === "ca") {
-    baseKeywords.push(
-      "get paid to watch videos canada",
-      "canadian video watching jobs",
-      "earn cad watching videos"
-    );
-  } else if (countryCode === "au") {
-    baseKeywords.push(
-      "get paid to watch videos australia",
-      "video watching australia",
-      "earn aud from watching videos"
-    );
-  } else if (countryCode === "de") {
-    baseKeywords.push(
-      "bezahlt videos schauen deutschland",
-      "geld verdienen mit videos",
-      "video tester deutschland"
-    );
-  } else if (countryCode === "fr") {
-    baseKeywords.push(
-      "payer pour regarder des vidéos france",
-      "gagner de l'argent en regardant des vidéos",
-      "testeur de vidéos france"
-    );
-  } else if (countryCode === "es") {
-    baseKeywords.push(
-      "pagan por ver videos españa",
-      "ganar dinero viendo videos",
-      "revisor de videos españa"
-    );
-  }
-
-  return baseKeywords;
-};
+const replaceCountry = (text: string, country: string) =>
+  text.replace(/\{country\}/g, country);
 
 /* ================= METADATA ================= */
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ country?: string }> | { country?: string };
-}): Promise<Metadata> {
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#ffffff",
+};
+
+export async function generateMetadata({ params }: any): Promise<Metadata> {
   const resolvedParams = await params;
   const countryParam = resolvedParams?.country?.toLowerCase();
 
   if (!countryParam || !isValidCountryCode(countryParam)) {
     return {
-      title: "Country Not Found | Cashog",
+      title: "Page Not Found | Cashog",
+      description: "The requested page could not be found.",
       robots: { index: false },
     };
   }
@@ -238,56 +76,49 @@ export async function generateMetadata({
   const countryData = getCountry(country);
   const countryName = countryData.name;
   const language = getLanguage(country);
-
-  let translation: TranslationSection = {};
-  try {
-    translation = await loadSectionTranslation(language, "watch-videos");
-  } catch (error) {
-    // Use defaults
-  }
-
-  // Helper to replace {country} in metadata
-  const replaceCountry = (text: string | undefined, fallback: string): string => {
-    const str = text || fallback;
-    return str.replace(/\{country\}/g, countryName);
-  };
-
-  const rawTitle = translation?.seo?.title;
-  const rawDescription = translation?.seo?.description;
-
-  const seoTitle = replaceCountry(
-    rawTitle,
-    `Get Paid to Watch Videos in ${countryName} - Earn $5-$50 Per Hour | Cashog`
-  );
-
-  const seoDescription = replaceCountry(
-    rawDescription,
-    `Join 100,000+ members earning real cash in ${countryName} by watching videos, ads, and content. Get paid via PayPal or gift cards for your viewing time. Free to join!`
-  );
-
-  // Generate dynamic keywords
-  const keywordsArray = getCountrySpecificKeywords(countryName, country);
-  const keywords = keywordsArray.join(", ");
-
+  
+  const title = `Get Paid to Watch Videos in ${countryName} - Earn Money Online 2025`;
+  const description = `Start earning real money in ${countryName} by watching videos. ✓ Free signup ✓ Instant payouts via PayPal/Gift cards ✓ Join 100K+ users. Start earning today!`;
+  
   return {
-    title: seoTitle,
-    description: seoDescription,
-    keywords,
+    title,
+    description,
+    keywords: `earn money watching videos ${countryName}, get paid to watch videos ${countryName}, passive income ${countryName}, watch videos earn money ${countryName}, online earning ${countryName}`,
+    authors: [{ name: "Cashog", url: "https://cashog.com" }],
+    category: "earn money online",
     alternates: {
       canonical: `https://cashog.com/${country}/watch-videos`,
+      languages: {
+        "en-US": "/en/watch-videos",
+        "es": "/es/watch-videos",
+        "fr": "/fr/watch-videos",
+        "de": "/de/watch-videos",
+        "it": "/it/watch-videos",
+      },
     },
     openGraph: {
-      title: seoTitle,
-      description: seoDescription,
+      title,
+      description,
       url: `https://cashog.com/${country}/watch-videos`,
       siteName: "Cashog",
+      locale: language === "en" ? "en_US" : `${language}_${country.toUpperCase()}`,
       type: "website",
-      locale: language === "es" ? "es_ES" : language === "fr" ? "fr_FR" : "en_US",
+      images: [
+        {
+          url: `https://cashog.com/og-images/watch-videos-${country}.jpg`,
+          width: 1200,
+          height: 630,
+          alt: `Get Paid to Watch Videos in ${countryName} - Cashog Platform`,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
-      title: seoTitle,
-      description: seoDescription,
+      title,
+      description,
+      images: [`https://cashog.com/og-images/watch-videos-${country}.jpg`],
+      site: "@cashog",
+      creator: "@cashog",
     },
     robots: {
       index: true,
@@ -297,558 +128,555 @@ export async function generateMetadata({
         follow: true,
         "max-video-preview": -1,
         "max-image-preview": "large",
-        "max-snippet": -1,
+        "max-snippet": 200,
       },
     },
+    verification: {
+      google: "your-google-verification-code",
+      other: {
+        "msvalidate.01": "your-bing-verification-code",
+      },
+    },
+    appleWebApp: {
+      capable: true,
+      title: "Cashog - Earn Money",
+      statusBarStyle: "black-translucent",
+    },
+    formatDetection: {
+      telephone: true,
+      email: true,
+      address: false,
+    },
+    icons: {
+      icon: "/favicon.ico",
+      shortcut: "/favicon-16x16.png",
+      apple: "/apple-touch-icon.png",
+    },
+    manifest: "/site.webmanifest",
   };
 }
 
 /* ================= PAGE COMPONENT ================= */
 
-export default async function WatchVideosPage({
-  params,
-}: {
-  params: Promise<{ country?: string }> | { country?: string };
-}) {
+export default async function WatchVideosPage({ params }: any) {
   const resolvedParams = await params;
   const countryParam = resolvedParams?.country?.toLowerCase();
 
   if (!countryParam || !isValidCountryCode(countryParam)) {
     return (
-      <main className="flex flex-col items-center justify-center min-h-screen">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold">Country Not Supported</h1>
-          <p className="mt-2">Please check your region settings.</p>
+          <h1 className="text-4xl font-bold mb-4">Country Not Supported</h1>
+          <p className="text-lg mb-8">
+            We're sorry, but this service is not available in your country yet.
+          </p>
+          <Link href="/" className="text-blue-600 hover:underline">
+            Return to Home
+          </Link>
         </div>
-      </main>
+      </div>
     );
   }
 
   const country = countryParam as CountryCode;
   const countryData = getCountry(country);
   const countryName = countryData.name;
+  const countryCode = countryData.code || country.toUpperCase();
+  const currency = countryData.currency || "USD";
   const language = getLanguage(country);
 
-  // Load translations
   const tData = await loadSectionTranslation(language, "watch-videos");
 
-  // Helper function to replace country placeholder
-  const t = (text: string | undefined, fallback: string): string => {
-    if (!text) return replaceCountryPlaceholder(fallback, countryName);
-    return replaceCountryPlaceholder(text, countryName);
-  };
-
-  // SEO data for structured data
-  const rawTitle = tData?.seo?.title;
-  const rawDescription = tData?.seo?.description;
-  const title = t(rawTitle, `Get Paid to Watch Videos in ${countryName} - Earn Cash`);
-  const description = t(rawDescription, `Join 100,000+ members earning cash in ${countryName} by watching videos.`);
-
+  /* STRUCTURED DATA - JSON-LD */
   const structuredData = generateJsonLd({
     path: `/${country}/watch-videos`,
-    title,
-    description,
+    title: `Get Paid to Watch Videos in ${countryName}`,
+    description: `Earn money watching videos in ${countryName}. Free signup, instant payouts. Join thousands earning passive income daily.`,
     type: "low",
   });
 
-  // Prepare data with fallbacks
-  const heroData = {
-    title: t(tData?.hero?.title, `Get Paid to Watch Videos in ${countryName}`),
-    subtitle: t(
-      tData?.hero?.subtitle,
-      `Join 100,000+ members earning real cash in ${countryName} by watching videos, ads, and content. Watch, earn, and get paid instantly!`
-    ),
+  /* BREADCRUMB SCHEMA */
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": `https://cashog.com/${country}`,
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Watch Videos",
+        "item": `https://cashog.com/${country}/watch-videos`,
+      },
+    ],
   };
 
-  const statsData = {
-    title: t(tData?.statsTitle, "Trusted by Thousands"),
-    videosWatched: tData?.stats?.videosWatched || "50M+",
-    videosWatchedLabel: tData?.stats?.videosWatchedLabel || "Videos Watched",
-    avgPayout: tData?.stats?.avgPayout || "$0.50",
-    avgPayoutLabel: tData?.stats?.avgPayoutLabel || "Average Per Video",
-    activeUsers: tData?.stats?.activeUsers || "100K+",
-    activeUsersLabel: tData?.stats?.activeUsersLabel || "Active Members",
-    totalPaid: tData?.stats?.totalPaid || "$8M+",
-    totalPaidLabel: tData?.stats?.totalPaidLabel || "Total Paid to Members",
+  /* FAQ SCHEMA */
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: (tData?.faq?.items || []).map((item: any) => ({
+      "@type": "Question",
+      name: replaceCountry(item.question, countryName),
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: replaceCountry(item.answer, countryName),
+      },
+    })),
   };
 
-  const videoCategoriesData = (tData?.videoCategories || []).map((category) => ({
-    ...category,
-    title: t(category.title, category.title),
-    description: t(category.description, category.description),
-  }));
-
-  const featuredVideosData = (tData?.featuredVideos || []).map((video) => ({
-    ...video,
-    title: t(video.title, video.title),
-  }));
-
-  const benefitsData = (tData?.benefits || []).map((benefit) => ({
-    ...benefit,
-    title: t(benefit.title, benefit.title),
-    description: t(benefit.description, benefit.description),
-  }));
-
-  const tipsData = (tData?.tips || []).map((tip, index) => ({
-    number: index + 1,
-    title: t(tip.title, tip.title),
-    description: t(tip.description, tip.description),
-  }));
-
-  const testimonialsData = (tData?.testimonials || []).map((testimonial) => ({
-    ...testimonial,
-    quote: t(testimonial.quote, testimonial.quote),
-  }));
-
-  const faqData = {
-    title: t(tData?.faq?.title, `Get Paid to Watch Videos in ${countryName} - FAQ`),
-    items: (tData?.faq?.items || [])
-      .map((item) => ({
-        q: t(item.question, item.question),
-        a: t(item.answer, item.answer),
-      }))
-      .filter((item) => item.q && item.a),
+  /* HOW-TO SCHEMA */
+  const howToSchema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: `How to Earn Money Watching Videos in ${countryName}`,
+    description: `Step-by-step guide to start earning money by watching videos in ${countryName}`,
+    estimatedCost: {
+      "@type": "MonetaryAmount",
+      currency: currency,
+      value: "0",
+    },
+    step: [
+      {
+        "@type": "HowToStep",
+        name: "Create Free Account",
+        text: `Sign up for a free Cashog account in ${countryName}`,
+        position: 1,
+      },
+      {
+        "@type": "HowToStep",
+        name: "Watch Videos",
+        text: "Start watching sponsored videos and ads",
+        position: 2,
+      },
+      {
+        "@type": "HowToStep",
+        name: "Earn Rewards",
+        text: "Collect points and convert to real money",
+        position: 3,
+      },
+      {
+        "@type": "HowToStep",
+        name: "Withdraw Earnings",
+        text: `Cash out via PayPal, gift cards, or bank transfer in ${countryName}`,
+        position: 4,
+      },
+    ],
   };
 
-  const finalData = {
-    title: t(tData?.final?.title, `Ready to Start Earning in ${countryName}?`),
-    subtitle: t(
-      tData?.final?.subtitle,
-      `Join 100,000+ members already getting paid in ${countryName}. Sign up for free and start watching paid videos today!`
-    ),
+  /* VIDEO OBJECT SCHEMA */
+  const videoSchema = {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: `Earn Money Watching Videos in ${countryName} - Tutorial`,
+    description: `Learn how to earn real money by watching videos online in ${countryName}`,
+    thumbnailUrl: `https://cashog.com/video-thumbnail-${country}.jpg`,
+    uploadDate: "2024-01-01",
+    duration: "PT3M30S",
+    embedUrl: "https://www.youtube.com/embed/your-video-id",
+    interactionStatistic: {
+      "@type": "InteractionCounter",
+      interactionType: "https://schema.org/WatchAction",
+      userInteractionCount: 125000,
+    },
   };
 
-  const categoryColors = {
-    "High": "text-purple-600 bg-purple-50 dark:bg-purple-900/20",
-    "Medium": "text-blue-600 bg-blue-50 dark:bg-blue-900/20",
-    "Low": "text-green-600 bg-green-50 dark:bg-green-900/20",
-  };
+  /* EARNING POTENTIAL TABLE DATA */
+  const earningMethods = [
+    { name: "Ad Videos", earnings: "$0.01-$0.05", time: "5-10 seconds", daily: "$5-10" },
+    { name: "Sponsored Content", earnings: "$0.10-$0.50", time: "30-60 seconds", daily: "$15-30" },
+    { name: "Premium Videos", earnings: "$0.50-$2.00", time: "2-5 minutes", daily: "$20-50" },
+    { name: "Daily Bonuses", earnings: "$0.50-$5.00", time: "5 minutes", daily: "$5-10" },
+  ];
 
-  /* ================= RENDER ================= */
   return (
-    <main className="flex flex-col items-center w-full">
-      {structuredData && (
-        <script
-          type="application/ld+json"
-          suppressHydrationWarning
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(structuredData),
-          }}
-        />
-      )}
+    <main className="flex flex-col items-center w-full bg-white dark:bg-gray-900">
+      {/* SCHEMA MARKUP */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
+      />
 
-      {/* Hero Section */}
-      <CircleBorder>
-        <OpeningStyle delay={0.1}>
-          <section
-            className="max-w-7xl mx-auto px-6 py-24 md:py-32 text-center"
-            aria-labelledby="hero-heading"
-          >
-            <h1
-              id="hero-heading"
-              className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 text-gray-900 dark:text-white"
-            >
-              {heroData.title}
-            </h1>
-            <p className="text-lg sm:text-xl md:text-2xl mb-12 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-              {heroData.subtitle}
-            </p>
-            <PrimaryCTA
-              href="/signup"
-              translationKey="start_watching_now"
-              observer={true}
-            />
-          </section>
-        </OpeningStyle>
-      </CircleBorder>
-
-      {/* Stats Section */}
-      <CircleBorder>
-        <OpeningStyle delay={0.1}>
-          <section
-            className="max-w-7xl mx-auto px-6 py-24 md:py-32"
-            aria-labelledby="stats-heading"
-          >
-            <div className="text-center mb-16">
-              <h2
-                id="stats-heading"
-                className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
-              >
-                {statsData.title}
-              </h2>
-              <div
-                className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
-                aria-hidden="true"
+      {/* ================= HERO SECTION ================= */}
+      <section className="relative w-full bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 overflow-hidden">
+        <div className="absolute inset-0 bg-grid-pattern opacity-5" />
+        <div className="container mx-auto px-4 py-16 md:py-24 lg:py-32 text-center relative z-10">
+          <div className="mb-8 flex justify-center">
+            <div className="relative w-32 h-32 md:w-40 md:h-40">
+              <Image
+                src="/icons/video-earnings-icon.svg"
+                alt={`Get paid to watch videos in ${countryName} - Cashog platform`}
+                fill
+                className="object-contain"
+                priority
               />
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-              <div className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl">
-                <div className="text-3xl md:text-4xl font-bold text-green-600">
-                  {statsData.videosWatched}
-                </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-                  {statsData.videosWatchedLabel}
-                </div>
-              </div>
-              <div className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl">
-                <div className="text-3xl md:text-4xl font-bold text-green-600">
-                  {statsData.avgPayout}
-                </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-                  {statsData.avgPayoutLabel}
-                </div>
-              </div>
-              <div className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl">
-                <div className="text-3xl md:text-4xl font-bold text-green-600">
-                  {statsData.activeUsers}
-                </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-                  {statsData.activeUsersLabel}
-                </div>
-              </div>
-              <div className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl">
-                <div className="text-3xl md:text-4xl font-bold text-green-600">
-                  {statsData.totalPaid}
-                </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-                  {statsData.totalPaidLabel}
-                </div>
-              </div>
-            </div>
-          </section>
-        </OpeningStyle>
-      </CircleBorder>
-
-      {/* Video Categories Grid */}
-      {videoCategoriesData.length > 0 && (
-        <CircleBorder>
-          <OpeningStyle delay={0.1}>
-            <section
-              className="max-w-7xl mx-auto px-6 py-24 md:py-32"
-              aria-labelledby="categories-heading"
+          </div>
+          
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+            Get Paid to Watch Videos in{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
+              {countryName}
+            </span>
+          </h1>
+          
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
+            Earn real money by watching videos, ads, and sponsored content in {countryName}.
+            Join over 100,000 members already making passive income daily.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <PrimaryCTA href="/signup" className="text-lg px-8 py-3" />
+            <Link
+              href="#how-it-works"
+              className="inline-flex items-center justify-center px-8 py-3 text-lg font-medium text-blue-600 bg-white dark:bg-gray-800 border-2 border-blue-600 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors"
             >
-              <div className="text-center mb-16">
-                <h2
-                  id="categories-heading"
-                  className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
-                >
-                  {t(tData?.categoriesTitle, "Popular Video Categories")}
-                </h2>
-                <div
-                  className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
-                  aria-hidden="true"
-                />
-                <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-6">
-                  {t(tData?.categoriesSubtitle, "Earn by watching these types of videos")}
-                </p>
+              Learn How It Works
+              <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </Link>
+          </div>
+          
+          <div className="mt-8 flex flex-wrap gap-4 justify-center text-sm text-gray-500 dark:text-gray-400">
+            <span className="flex items-center">
+              <svg className="w-4 h-4 mr-1 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Free Signup
+            </span>
+            <span className="flex items-center">
+              <svg className="w-4 h-4 mr-1 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Instant Payouts
+            </span>
+            <span className="flex items-center">
+              <svg className="w-4 h-4 mr-1 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Trusted Platform
+            </span>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= TRUST SECTION ================= */}
+      <section className="w-full py-16 bg-white dark:bg-gray-800 border-y border-gray-200 dark:border-gray-700">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">
+            Trusted by Earners Worldwide
+          </h2>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { number: "100K+", label: "Active Users", icon: "/icons/users-icon.svg", alt: `Over 100,000 active users in ${countryName}` },
+              { number: "$8M+", label: "Total Paid", icon: "/icons/payments-icon.svg", alt: `Over $8 million paid to users in ${countryName}` },
+              { number: "Instant", label: "Payouts", icon: "/icons/instant-icon.svg", alt: "Instant payment processing" },
+              { number: "4.8★", label: "User Rating", icon: "/icons/rating-icon.svg", alt: "4.8 star rating from users" },
+            ].map((stat, index) => (
+              <div key={index} className="text-center group">
+                <div className="relative w-16 h-16 mx-auto mb-4 transition-transform group-hover:scale-110">
+                  <Image
+                    src={stat.icon}
+                    alt={stat.alt}
+                    fill
+                    className="object-contain"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="text-2xl md:text-3xl font-bold text-blue-600 dark:text-blue-400">
+                  {stat.number}
+                </div>
+                <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                  {stat.label}
+                </div>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {videoCategoriesData.map((category, index) => (
-                  <div
-                    key={index}
-                    className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700 text-center"
-                  >
-                    <div className="text-5xl mb-4" aria-hidden="true">
-                      {category.icon}
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                      {category.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
-                      {category.description}
-                    </p>
-                    <div className="space-y-2 border-t border-gray-200 dark:border-gray-700 pt-4">
-                      <div className="flex justify-between text-sm">
-                        <span className="text-gray-500 dark:text-gray-400">
-                          Avg Reward:
-                        </span>
-                        <span className="font-semibold text-green-600 dark:text-green-400">
-                          {category.avgReward}
-                        </span>
-                      </div>
-                      <div className="flex justify-between text-sm">
-                        <span className="text-gray-500 dark:text-gray-400">
-                          Time:
-                        </span>
-                        <span className="font-semibold text-gray-700 dark:text-gray-300">
-                          {category.timeRequired}
-                        </span>
-                      </div>
-                      <div className="flex justify-between text-sm">
-                        <span className="text-gray-500 dark:text-gray-400">
-                          Popularity:
-                        </span>
-                        <span className={`font-semibold px-2 py-0.5 rounded-full text-xs ${
-                          category.popularity === "High" ? "text-purple-600 bg-purple-50" :
-                          category.popularity === "Medium" ? "text-blue-600 bg-blue-50" :
-                          "text-green-600 bg-green-50"
-                        }`}>
-                          {category.popularity}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= HOW IT WORKS SECTION ================= */}
+      <section id="how-it-works" className="w-full py-16 bg-gray-50 dark:bg-gray-900">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-gray-900 dark:text-white">
+            How to Start Earning in {countryName}
+          </h2>
+          <p className="text-center text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-12">
+            Get started in minutes with these simple steps
+          </p>
+          
+          <div className="grid md:grid-cols-4 gap-8">
+            {[
+              { step: "1", title: "Create Account", desc: `Sign up for free in ${countryName} - no credit card required` },
+              { step: "2", title: "Watch Videos", desc: "Start watching ads, trailers, and sponsored content" },
+              { step: "3", title: "Earn Points", desc: "Collect points for every video you watch" },
+              { step: "4", title: "Cash Out", desc: `Withdraw via PayPal, gift cards, or bank in ${countryName}` },
+            ].map((item, index) => (
+              <div key={index} className="text-center">
+                <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+                  {item.step}
+                </div>
+                <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= EARNING POTENTIAL TABLE ================= */}
+      <section className="w-full py-16 bg-white dark:bg-gray-800">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-gray-900 dark:text-white">
+            Earning Potential in {countryName}
+          </h2>
+          <p className="text-center text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-12">
+            Different video types offer different rewards - maximize your earnings
+          </p>
+          
+          <div className="overflow-x-auto">
+            <table className="min-w-full bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow-lg">
+              <thead className="bg-blue-600 text-white">
+                <tr>
+                  <th className="px-6 py-3 text-left">Video Type</th>
+                  <th className="px-6 py-3 text-left">Earnings per Video</th>
+                  <th className="px-6 py-3 text-left">Time Required</th>
+                  <th className="px-6 py-3 text-left">Daily Potential</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                {earningMethods.map((method, index) => (
+                  <tr key={index} className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                    <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">{method.name}</td>
+                    <td className="px-6 py-4 text-green-600 dark:text-green-400 font-semibold">{method.earnings}</td>
+                    <td className="px-6 py-4 text-gray-600 dark:text-gray-400">{method.time}</td>
+                    <td className="px-6 py-4 text-gray-900 dark:text-white font-semibold">{method.daily}</td>
+                  </tr>
                 ))}
-              </div>
-            </section>
-          </OpeningStyle>
-        </CircleBorder>
-      )}
-
-      {/* Featured Videos */}
-      {featuredVideosData.length > 0 && (
-        <CircleBorder>
-          <OpeningStyle delay={0.1}>
-            <section
-              className="max-w-7xl mx-auto px-6 py-24 md:py-32"
-              aria-labelledby="featured-heading"
-            >
-              <div className="text-center mb-16">
-                <h2
-                  id="featured-heading"
-                  className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
-                >
-                  {t(tData?.featuredVideosTitle, "High-Paying Videos Available Now")}
-                </h2>
-                <div
-                  className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
-                  aria-hidden="true"
-                />
-                <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-6">
-                  {t(tData?.featuredVideosSubtitle, "Limited views - watch these videos today")}
-                </p>
-              </div>
-              <div className="max-w-4xl mx-auto space-y-4">
-                {featuredVideosData.map((video, index) => (
-                  <div
-                    key={index}
-                    className="bg-white dark:bg-gray-800 rounded-xl p-5 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 dark:border-gray-700"
-                  >
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2 flex-wrap">
-                          <h3 className="font-bold text-gray-900 dark:text-white">
-                            {video.title}
-                          </h3>
-                          <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400">
-                            {video.category}
-                          </span>
-                          <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-50 text-yellow-600 dark:bg-yellow-900/20 dark:text-yellow-400">
-                            ⭐ {video.rating}
-                          </span>
-                        </div>
-                        <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
-                          {video.platform}
-                        </p>
-                        <div className="flex flex-wrap gap-4 text-xs">
-                          <span className="text-gray-500 dark:text-gray-400">
-                            ⏱️ {video.duration}
-                          </span>
-                          <span className="text-orange-600 dark:text-orange-400">
-                            👁️ {video.viewsLeft.toLocaleString()} views left
-                          </span>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-2xl font-bold text-green-600 dark:text-green-400">
-                          {video.reward}
-                        </div>
-                        <PrimaryCTA
-                          href="/signup"
-                          translationKey="watch_now"
-                          observer={false}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-          </OpeningStyle>
-        </CircleBorder>
-      )}
-
-      {/* Benefits Section */}
-      {benefitsData.length > 0 && (
-        <CircleBorder>
-          <OpeningStyle delay={0.1}>
-            <section
-              className="max-w-7xl mx-auto px-6 py-24 md:py-32"
-              aria-labelledby="benefits-heading"
-            >
-              <div className="text-center mb-16">
-                <h2
-                  id="benefits-heading"
-                  className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
-                >
-                  {t(tData?.benefitsTitle, "Why Get Paid to Watch Videos")}
-                </h2>
-                <div
-                  className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
-                  aria-hidden="true"
-                />
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {benefitsData.map((benefit, index) => (
-                  <div
-                    key={index}
-                    className="bg-gradient-to-br from-yellow-50 to-green-50 dark:from-gray-800 dark:to-gray-900 rounded-xl p-6 text-center"
-                  >
-                    <div className="text-4xl mb-3" aria-hidden="true">
-                      {benefit.icon}
-                    </div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                      {benefit.title}
-                    </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      {benefit.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </section>
-          </OpeningStyle>
-        </CircleBorder>
-      )}
-
-      {/* Tips Section */}
-      {tipsData.length > 0 && (
-        <CircleBorder>
-          <OpeningStyle delay={0.1}>
-            <section
-              className="max-w-7xl mx-auto px-6 py-24 md:py-32"
-              aria-labelledby="tips-heading"
-            >
-              <div className="text-center mb-16">
-                <h2
-                  id="tips-heading"
-                  className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
-                >
-                  {t(tData?.tipsTitle, "Tips to Maximize Your Video Earnings")}
-                </h2>
-                <div
-                  className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
-                  aria-hidden="true"
-                />
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                {tipsData.map((tip) => (
-                  <div key={tip.number} className="text-center">
-                    <div
-                      className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-green-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg"
-                      aria-label={`Tip ${tip.number}`}
-                    >
-                      {tip.number}
-                    </div>
-                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
-                      {tip.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm">
-                      {tip.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </section>
-          </OpeningStyle>
-        </CircleBorder>
-      )}
-
-      {/* Testimonials */}
-      {testimonialsData.length > 0 && (
-        <CircleBorder>
-          <OpeningStyle delay={0.1}>
-            <section
-              className="max-w-7xl mx-auto px-6 py-24 md:py-32"
-              aria-labelledby="testimonials-heading"
-            >
-              <div className="text-center mb-16">
-                <h2
-                  id="testimonials-heading"
-                  className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
-                >
-                  {t(tData?.testimonialsTitle, "Real Members, Real Earnings")}
-                </h2>
-                <div
-                  className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full"
-                  aria-hidden="true"
-                />
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {testimonialsData.map((testimonial, index) => (
-                  <div
-                    key={index}
-                    className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md border border-gray-100 dark:border-gray-700"
-                  >
-                    <div className="flex items-center gap-3 mb-4">
-                      <div
-                        className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-green-500 rounded-full flex items-center justify-center text-white font-bold text-lg"
-                        aria-hidden="true"
-                      >
-                        {testimonial.avatar}
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-gray-900 dark:text-white">
-                          {testimonial.name}
-                        </h4>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">
-                          {testimonial.country}
-                        </p>
-                      </div>
-                    </div>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm italic mb-3">
-                      "{testimonial.quote}"
-                    </p>
-                    <p className="text-green-600 dark:text-green-400 font-semibold text-sm">
-                      Earned {testimonial.earnings}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </section>
-          </OpeningStyle>
-        </CircleBorder>
-      )}
-
-      {/* FAQ Section */}
-      {faqData.items.length > 0 && (
-        <CircleBorder>
-          <OpeningStyle delay={0.1}>
-            <div className="max-w-4xl mx-auto px-6 py-16 md:py-24">
-              <FAQ title={faqData.title} faqs={faqData.items} />
-            </div>
-          </OpeningStyle>
-        </CircleBorder>
-      )}
-
-      {/* Final CTA Section */}
-      <CircleBorder>
-        <OpeningStyle delay={0.1}>
-          <section
-            className="max-w-7xl mx-auto px-6 py-24 md:py-32 text-center"
-            aria-labelledby="final-heading"
-          >
-            <h2
-              id="final-heading"
-              className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4"
-            >
-              {finalData.title}
-            </h2>
-            <div
-              className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-green-500 mx-auto mt-4 rounded-full mb-8"
-              aria-hidden="true"
-            />
-            <p className="text-lg sm:text-xl md:text-2xl mb-12 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-              {finalData.subtitle}
+              </tbody>
+            </table>
+          </div>
+          
+          <div className="mt-8 text-center">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              *Based on average user data. Actual earnings may vary by location and activity level in {countryName}.
             </p>
-            <PrimaryCTA
-              href="/signup"
-              translationKey="start_watching_now"
-              observer={true}
-            />
-          </section>
-        </OpeningStyle>
-      </CircleBorder>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= SEO CONTENT SECTION ================= */}
+      <section className="w-full py-16 bg-gray-50 dark:bg-gray-900">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+            How to Maximize Your Earnings Watching Videos in {countryName}
+          </h2>
+          
+          <div className="prose prose-lg dark:prose-invert max-w-none">
+            <p className="mb-6 text-gray-600 dark:text-gray-400">
+              Watching videos online has become one of the most popular ways to earn extra income in{" "}
+              {countryName}. With platforms like Cashog, you can transform your free time into real money
+              by simply engaging with video content, advertisements, and sponsored materials.
+            </p>
+
+            <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">
+              Why Video Earning Works in {countryName}
+            </h3>
+            <p className="mb-6 text-gray-600 dark:text-gray-400">
+              The digital economy in {countryName} is booming, and companies are willing to pay for user
+              attention. When you watch videos on Cashog, advertisers pay for your engagement, and we share
+              that revenue with you. It's a win-win situation that has helped thousands of users in{" "}
+              {countryName} supplement their income.
+            </p>
+
+            <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">
+              Top Strategies for Maximum Earnings
+            </h3>
+            <ul className="list-disc pl-6 space-y-3 mb-8 text-gray-600 dark:text-gray-400">
+              <li><strong>Watch Daily:</strong> Consistency is key. Log in every day to watch available videos and earn daily bonuses.</li>
+              <li><strong>Complete Your Profile:</strong> A complete profile gets access to higher-paying video opportunities.</li>
+              <li><strong>Refer Friends:</strong> Earn bonus points when friends you invite join Cashog in {countryName}.</li>
+              <li><strong>Combine Methods:</strong> Watch videos while completing surveys or offers to maximize your hourly rate.</li>
+              <li><strong>Peak Hours:</strong> More videos are available during peak hours (evenings and weekends) in {countryName}.</li>
+            </ul>
+
+            <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">
+              Payment Options in {countryName}
+            </h3>
+            <p className="mb-6 text-gray-600 dark:text-gray-400">
+              Cashog offers multiple withdrawal methods for users in {countryName}:
+            </p>
+            <ul className="list-disc pl-6 space-y-3 mb-8 text-gray-600 dark:text-gray-400">
+              <li><strong>PayPal:</strong> Instant withdrawals with no fees</li>
+              <li><strong>Gift Cards:</strong> Amazon, Google Play, iTunes, and more</li>
+              <li><strong>Cryptocurrency:</strong> Bitcoin, Ethereum, and other popular options</li>
+              <li><strong>Bank Transfer:</strong> Direct deposits to your {countryName} bank account</li>
+            </ul>
+
+            <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-600 p-6 my-8 rounded-r-lg">
+              <p className="text-gray-700 dark:text-gray-300 font-semibold">
+                💡 Pro Tip: Users in {countryName} earn an average of {currency === "USD" ? "$15-25" : "15-25 units"} per hour
+                when combining video watching with other earning methods on Cashog.
+              </p>
+            </div>
+
+            <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">
+              Is Watching Videos for Money Legit in {countryName}?
+            </h3>
+            <p className="mb-6 text-gray-600 dark:text-gray-400">
+              Absolutely! Cashog is a legitimate platform that has paid over $8 million to users worldwide,
+              including thousands in {countryName}. We're transparent about our payment system and have
+              hundreds of verified payment proofs from {countryName} users. While you won't get rich overnight,
+              video watching provides a reliable way to earn extra cash during your free time.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= INTERNAL LINKS SECTION ================= */}
+      <section className="w-full py-16 bg-white dark:bg-gray-800">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">
+            More Ways to Earn Money in {countryName}
+          </h2>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              { href: "surveys", title: "Paid Surveys", desc: `Share your opinion and earn ${currency === "USD" ? "$1-$5" : "1-5 units"} per survey in ${countryName}`, icon: "📋" },
+              { href: "apps", title: "Download Apps", desc: `Get paid ${currency === "USD" ? "$0.50-$2" : "0.50-2 units"} for trying new apps and games`, icon: "📱" },
+              { href: "offers", title: "Complete Offers", desc: `Earn bonuses for signing up for free trials and services`, icon: "🎁" },
+              { href: "referrals", title: "Referral Program", desc: `Earn 10% of your friends' earnings for life in ${countryName}`, icon: "👥" },
+              { href: "daily-bonus", title: "Daily Bonuses", desc: `Claim your free daily bonus and streak rewards`, icon: "🎯" },
+              { href: "contests", title: "Contests", desc: `Compete with users in ${countryName} for cash prizes`, icon: "🏆" },
+            ].map((item, index) => (
+              <Link
+                key={index}
+                href={`/${country}/${item.href}`}
+                className="group bg-gray-50 dark:bg-gray-900 rounded-lg p-6 hover:shadow-lg transition-all hover:-translate-y-1"
+              >
+                <div className="text-4xl mb-4">{item.icon}</div>
+                <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">{item.desc}</p>
+                <div className="mt-4 text-blue-600 group-hover:translate-x-2 transition-transform inline-block">
+                  Learn More →
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= BLOG LINKS SECTION ================= */}
+      <section className="w-full py-16 bg-gray-50 dark:bg-gray-900">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-gray-900 dark:text-white">
+            Learn More About Online Earning
+          </h2>
+          <p className="text-center text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-12">
+            Check out our latest articles and guides
+          </p>
+          
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {[
+              { href: "/blog/how-to-earn-money-online", title: "Ultimate Guide: How to Earn Money Online in 2025", desc: "Discover 15 legitimate ways to make money from home" },
+              { href: `/blog/best-side-hustles-${country}`, title: `Best Side Hustles in ${countryName} for 2025`, desc: "Top part-time opportunities to boost your income" },
+              { href: "/blog/passive-income-ideas", title: "10 Passive Income Ideas That Actually Work", desc: "Build wealth while you sleep with these strategies" },
+              { href: "/blog/make-money-watching-videos", title: "Complete Guide: Get Paid to Watch Videos", desc: "Maximize your earnings with these pro tips" },
+            ].map((post, index) => (
+              <Link
+                key={index}
+                href={post.href}
+                className="bg-white dark:bg-gray-800 rounded-lg p-6 hover:shadow-lg transition-all"
+              >
+                <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white hover:text-blue-600 transition-colors">
+                  {post.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">{post.desc}</p>
+                <div className="mt-4 text-blue-600">Read Article →</div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= FAQ SECTION ================= */}
+      {tData?.faq?.items?.length > 0 && (
+        <section className="w-full py-16 bg-white dark:bg-gray-800">
+          <div className="container mx-auto px-4 max-w-3xl">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-gray-900 dark:text-white">
+              Frequently Asked Questions About Earning in {countryName}
+            </h2>
+            <p className="text-center text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-12">
+              Everything you need to know about getting paid to watch videos
+            </p>
+            
+            <Suspense fallback={<div className="text-center py-8">Loading FAQ...</div>}>
+              <FAQ
+                title={`FAQ - ${countryName}`}
+                faqs={tData.faq.items.map((f: any) => ({
+                  q: replaceCountry(f.question, countryName),
+                  a: replaceCountry(f.answer, countryName),
+                }))}
+              />
+            </Suspense>
+          </div>
+        </section>
+      )}
+
+      {/* ================= FINAL CTA SECTION ================= */}
+      <section className="relative w-full bg-gradient-to-r from-blue-600 to-indigo-600 py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-grid-pattern opacity-10" />
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+            Ready to Start Earning in {countryName}?
+          </h2>
+          <p className="text-lg md:text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+            Join over 100,000 users who are already making money by watching videos online.
+            Sign up today - it's completely free!
+          </p>
+          <PrimaryCTA href="/signup" className="text-lg px-8 py-3 bg-white text-blue-600 hover:bg-gray-100" />
+          <p className="mt-6 text-sm text-blue-100">
+            No credit card required • Cancel anytime • Instant payouts
+          </p>
+        </div>
+      </section>
+
+      {/* ================= SCROLL TO TOP BUTTON ================= */}
+      <button
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className="fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-colors opacity-0 group-hover:opacity-100"
+        aria-label="Scroll to top"
+      >
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+      </button>
     </main>
   );
 }
