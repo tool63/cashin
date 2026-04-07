@@ -115,8 +115,9 @@ async function loadSectionTranslation(
   }
 }
 
-function getLanguage(country: CountryCode): SupportedLanguage {
-  const cookieStore = cookies();
+// FIXED: Made this function async and added await to cookies()
+async function getLanguage(country: CountryCode): Promise<SupportedLanguage> {
+  const cookieStore = await cookies(); // Added await here
 
   const override = cookieStore.get(COOKIE_KEYS.USER_LANGUAGE_OVERRIDE)?.value;
   if (override) {
@@ -370,7 +371,7 @@ export async function generateMetadata({
   const country = countryParam as CountryCode;
   const countryData = getCountry(country);
   const countryName = countryData.name;
-  const language = getLanguage(country);
+  const language = await getLanguage(country); // FIXED: Added await
 
   let translation: TranslationSection = {};
   try {
@@ -471,7 +472,7 @@ export default async function WatchVideosPage({
   const country = countryParam as CountryCode;
   const countryData = getCountry(country);
   const countryName = countryData.name;
-  const language = getLanguage(country);
+  const language = await getLanguage(country); // FIXED: Added await
 
   // Load translations
   const tData = await loadSectionTranslation(language, "watch-videos");
