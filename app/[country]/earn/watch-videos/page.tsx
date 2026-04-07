@@ -188,28 +188,32 @@ const getHreflangLanguages = (country: CountryCode) => {
   return languages;
 };
 
-// Country-specific data helpers (inline fallbacks)
+// Country-specific data helpers (using switch statements to avoid TypeScript Record issues)
 const getCountryPaymentMethods = (country: CountryCode): string[] => {
-  const methods: Record<CountryCode, string[]> = {
-    us: ["PayPal", "Bank Transfer", "Gift Cards"],
-    gb: ["PayPal", "Bank Transfer", "Gift Cards"],
-    ca: ["PayPal", "Bank Transfer", "Gift Cards"],
-    au: ["PayPal", "Bank Transfer", "Gift Cards"],
-    de: ["PayPal", "Bank Transfer", "Gift Cards"],
-    fr: ["PayPal", "Bank Transfer", "Gift Cards"],
-    es: ["PayPal", "Bank Transfer", "Gift Cards"],
-    it: ["PayPal", "Bank Transfer", "Gift Cards"],
-    bd: ["bKash", "PayPal", "Bank Transfer"],
-    in: ["Paytm", "PayPal", "Bank Transfer"],
-    ph: ["GCash", "PayPal", "Bank Transfer"],
-    ke: ["M-Pesa", "PayPal", "Bank Transfer"],
-    tz: ["Tigo Pesa", "PayPal", "Bank Transfer"],
-  };
-  return methods[country] || ["PayPal", "Bank Transfer", "Gift Cards"];
+  const countryCode = country.toLowerCase();
+  
+  // Special country-specific payment methods
+  if (countryCode === "bd") return ["bKash", "PayPal", "Bank Transfer", "Gift Cards"];
+  if (countryCode === "in") return ["Paytm", "PayPal", "Bank Transfer", "Gift Cards"];
+  if (countryCode === "ph") return ["GCash", "PayPal", "Bank Transfer", "Gift Cards"];
+  if (countryCode === "ke") return ["M-Pesa", "PayPal", "Bank Transfer", "Gift Cards"];
+  if (countryCode === "tz") return ["Tigo Pesa", "PayPal", "Bank Transfer", "Gift Cards"];
+  if (countryCode === "ng") return ["PayPal", "Bank Transfer", "Gift Cards"];
+  if (countryCode === "pk") return ["PayPal", "Bank Transfer", "Gift Cards"];
+  if (countryCode === "id") return ["PayPal", "Bank Transfer", "Gift Cards"];
+  if (countryCode === "vn") return ["PayPal", "Bank Transfer", "Gift Cards"];
+  if (countryCode === "th") return ["PayPal", "Bank Transfer", "Gift Cards"];
+  if (countryCode === "my") return ["PayPal", "Bank Transfer", "Gift Cards"];
+  if (countryCode === "sg") return ["PayPal", "Bank Transfer", "Gift Cards"];
+  
+  // Default for US, UK, CA, AU, EU countries
+  return ["PayPal", "Bank Transfer", "Gift Cards"];
 };
 
-const getCountryCPM = (country: CountryCode): { perVideo: string; dailyAverage: string; dailyMax?: string } => {
-  const cpm: Record<CountryCode, { perVideo: string; dailyAverage: string; dailyMax: string }> = {
+const getCountryCPM = (country: CountryCode): { perVideo: string; dailyAverage: string; dailyMax: string } => {
+  const countryCode = country.toLowerCase();
+  
+  const cpmMap: Record<string, { perVideo: string; dailyAverage: string; dailyMax: string }> = {
     us: { perVideo: "$0.08-$0.12", dailyAverage: "$15-25", dailyMax: "$40-50" },
     gb: { perVideo: "£0.06-£0.10", dailyAverage: "£12-20", dailyMax: "£35-45" },
     ca: { perVideo: "C$0.07-C$0.11", dailyAverage: "C$18-30", dailyMax: "C$50-60" },
@@ -221,12 +225,19 @@ const getCountryCPM = (country: CountryCode): { perVideo: string; dailyAverage: 
     bd: { perVideo: "৳5-৳10", dailyAverage: "৳500-1000", dailyMax: "৳1500-2000" },
     in: { perVideo: "₹5-₹10", dailyAverage: "₹500-1000", dailyMax: "₹1500-2000" },
     ph: { perVideo: "₱3-₱6", dailyAverage: "₱300-600", dailyMax: "₱900-1200" },
+    ng: { perVideo: "₦50-₦100", dailyAverage: "₦5000-10000", dailyMax: "₦15000-20000" },
+    pk: { perVideo: "₨10-₨20", dailyAverage: "₨1000-2000", dailyMax: "₨3000-4000" },
+    id: { perVideo: "Rp500-Rp1000", dailyAverage: "Rp50000-100000", dailyMax: "Rp150000-200000" },
+    vn: { perVideo: "₫1000-₫2000", dailyAverage: "₫100000-200000", dailyMax: "₫300000-400000" },
   };
-  return cpm[country] || { perVideo: "$0.05-$0.10", dailyAverage: "$10-20", dailyMax: "$30-40" };
+  
+  return cpmMap[countryCode] || { perVideo: "$0.05-$0.10", dailyAverage: "$10-20", dailyMax: "$30-40" };
 };
 
-const getCountryLocalTestimonials = (country: CountryCode) => {
-  const testimonials: Record<CountryCode, Array<{ name: string; earnings: string; quote: string }>> = {
+const getCountryLocalTestimonials = (country: CountryCode): Array<{ name: string; earnings: string; quote: string }> => {
+  const countryCode = country.toLowerCase();
+  
+  const testimonialMap: Record<string, Array<{ name: string; earnings: string; quote: string }>> = {
     bd: [
       { name: "Rahim U.", earnings: "৳15,000", quote: "Cashog helped me earn extra income while watching videos on my phone during commute." },
       { name: "Fatima K.", earnings: "৳12,500", quote: "The bKash withdrawal option is amazing! Money arrives instantly." },
@@ -239,12 +250,23 @@ const getCountryLocalTestimonials = (country: CountryCode) => {
       { name: "Maria R.", earnings: "₱15,000", quote: "GCash payout is super fast. I love earning while watching videos!" },
       { name: "Juan D.", earnings: "₱18,000", quote: "Legit platform. Received my first payout within 24 hours." },
     ],
+    us: [
+      { name: "John S.", earnings: "$2,450", quote: "Best side hustle ever! I earn $20 daily watching videos during my lunch break." },
+      { name: "Sarah M.", earnings: "$3,200", quote: "PayPal withdrawals are instant. Highly recommend Cashog!" },
+    ],
+    gb: [
+      { name: "David K.", earnings: "£1,890", quote: "Great platform for extra income. Earn while watching videos on the train!" },
+      { name: "Emma L.", earnings: "£2,100", quote: "Love the instant payouts to my bank account. 5 stars!" },
+    ],
   };
-  return testimonials[country] || [];
+  
+  return testimonialMap[countryCode] || [];
 };
 
 const getCountryEarningTips = (country: CountryCode): Array<{ title: string; description: string }> => {
-  const tips: Record<CountryCode, Array<{ title: string; description: string }>> = {
+  const countryCode = country.toLowerCase();
+  
+  const tipsMap: Record<string, Array<{ title: string; description: string }>> = {
     bd: [
       { title: "Watch During Off-Peak Hours", description: "Internet is faster and videos load quicker between 10 PM - 8 AM." },
       { title: "Use bKash for Withdrawals", description: "bKash offers the lowest fees and instant transfers in Bangladesh." },
@@ -253,15 +275,25 @@ const getCountryEarningTips = (country: CountryCode): Array<{ title: string; des
       { title: "Use Paytm for Fast Payouts", description: "Paytm withdrawals are processed instantly with zero fees." },
       { title: "Watch During Evenings", description: "6 PM - 10 PM has the highest paying video offers in India." },
     ],
+    ph: [
+      { title: "Use GCash for Instant Payouts", description: "GCash offers the fastest withdrawals with no fees." },
+      { title: "Watch During Peak Hours", description: "Evenings and weekends offer 40% more video opportunities." },
+    ],
   };
-  return tips[country] || [
+  
+  return tipsMap[countryCode] || [
     { title: "Watch During Peak Hours", description: "Evenings and weekends offer 40% more video opportunities." },
     { title: "Complete Your Profile", description: "Verified users get access to 3x more video opportunities." },
+    { title: "Maintain Daily Streak", description: "Log in daily to unlock bonus rewards up to $5 extra per day." },
+    { title: "Use Mobile App", description: "Exclusive app-only video offers pay up to 2x more than web." },
   ];
 };
 
 const getCountryFAQs = (country: CountryCode): Array<{ question: string; answer: string }> => {
   const countryName = getCountry(country).name;
+  const cpmData = getCountryCPM(country);
+  const paymentMethods = getCountryPaymentMethods(country);
+  
   return [
     {
       question: `Is watching videos for money legit in ${countryName}?`,
@@ -269,15 +301,23 @@ const getCountryFAQs = (country: CountryCode): Array<{ question: string; answer:
     },
     {
       question: `How much can I earn watching videos in ${countryName}?`,
-      answer: `Most users earn ${getCountryCPM(country).dailyAverage} per day watching videos for 2-3 hours. Top earners make up to ${getCountryCPM(country).dailyMax} monthly.`
+      answer: `Most users earn ${cpmData.dailyAverage} per day watching videos for 2-3 hours. Top earners make up to ${cpmData.dailyMax} monthly.`
     },
     {
       question: `Which app pays the most for watching videos in ${countryName}?`,
-      answer: `Cashog pays the highest rates in ${countryName} with ${getCountryCPM(country).perVideo} per video - that's 3-5x higher than competitors like Swagbucks or InboxDollars.`
+      answer: `Cashog pays the highest rates in ${countryName} with ${cpmData.perVideo} per video - that's 3-5x higher than competitors like Swagbucks or InboxDollars.`
     },
     {
       question: `How do I withdraw my earnings in ${countryName}?`,
-      answer: `You can withdraw via ${getCountryPaymentMethods(country).join(", ")}. Most withdrawals are processed instantly with no hidden fees.`
+      answer: `You can withdraw via ${paymentMethods.slice(0, 3).join(", ")}. Most withdrawals are processed instantly with no hidden fees.`
+    },
+    {
+      question: `Do I need to pay taxes on my earnings in ${countryName}?`,
+      answer: `You should report your earnings to your local tax authority. Cashog provides annual earnings statements for tax purposes. Consult a tax professional for specific advice.`
+    },
+    {
+      question: `What's the minimum payout in ${countryName}?`,
+      answer: `The minimum payout is $5 for PayPal and $10 for gift cards. Verified users can withdraw instantly with no minimum on PayPal.`
     },
   ];
 };
@@ -285,6 +325,7 @@ const getCountryFAQs = (country: CountryCode): Array<{ question: string; answer:
 const getCountryPeopleAlsoSearch = (country: CountryCode): string[] => {
   const countryName = getCountry(country).name;
   const lowerCountry = countryName.toLowerCase();
+  
   return [
     `earn money online in ${lowerCountry}`,
     `best earning apps in ${lowerCountry}`,
@@ -294,6 +335,8 @@ const getCountryPeopleAlsoSearch = (country: CountryCode): string[] => {
     `daily income app ${lowerCountry}`,
     `side hustle apps ${lowerCountry}`,
     `work from home jobs ${lowerCountry}`,
+    `make money from phone ${lowerCountry}`,
+    `online earning sites ${lowerCountry}`,
   ];
 };
 
@@ -571,7 +614,7 @@ export default async function WatchVideosPage({
       },
       {
         subtitle: `Fastest Way to Earn Daily Income in ${countryName}`,
-        content: `The fastest way to start earning daily income in ${countryName} is to combine multiple earning methods. While watching videos alone can earn you ${cpmData.dailyAverage}, power users who also complete ${hubPages[0].anchorText} ${countryName}, ${hubPages[1].anchorText}, and ${hubPages[4].anchorText} typically earn ${cpmData.dailyMax || "$30-$50"} per day. The key is consistency - even 30 minutes daily can generate $50-$100 monthly. Most users reach their first payout within 24-48 hours.`
+        content: `The fastest way to start earning daily income in ${countryName} is to combine multiple earning methods. While watching videos alone can earn you ${cpmData.dailyAverage}, power users who also complete ${hubPages[0].anchorText} ${countryName}, ${hubPages[1].anchorText}, and ${hubPages[4].anchorText} typically earn ${cpmData.dailyMax} per day. The key is consistency - even 30 minutes daily can generate $50-$100 monthly. Most users reach their first payout within 24-48 hours.`
       }
     ]
   };
@@ -780,7 +823,7 @@ export default async function WatchVideosPage({
                   For those who prefer mobile earning, <Link href={`/${country}/earn/apps`} className="text-blue-600 dark:text-blue-400 hover:underline font-medium">app install earnings</Link> can add an extra $5-$10 daily. You can also <Link href={`/${country}/earn/play-games`} className="text-blue-600 dark:text-blue-400 hover:underline font-medium">play games for money</Link> and earn while having fun. Don't forget our <Link href={`/${country}/earn/referrals`} className="text-blue-600 dark:text-blue-400 hover:underline font-medium">referral program for passive income</Link> - you earn 10% of your friends' earnings for life!
                 </p>
                 <p>
-                  The key to success on Cashog is diversifying your earning methods. While watching videos alone can earn you {cpmData.dailyAverage}, combining it with <Link href={`/${country}/earn/surveys`} className="text-blue-600 dark:text-blue-400 hover:underline">paid surveys in {countryName}</Link>, <Link href={`/${country}/earn/offers`} className="text-blue-600 dark:text-blue-400 hover:underline">high paying offers</Link>, and <Link href={`/${country}/earn/play-games`} className="text-blue-600 dark:text-blue-400 hover:underline">play games for money</Link> can push your earnings to {cpmData.dailyMax || "$30-$50"} per day.
+                  The key to success on Cashog is diversifying your earning methods. While watching videos alone can earn you {cpmData.dailyAverage}, combining it with <Link href={`/${country}/earn/surveys`} className="text-blue-600 dark:text-blue-400 hover:underline">paid surveys in {countryName}</Link>, <Link href={`/${country}/earn/offers`} className="text-blue-600 dark:text-blue-400 hover:underline">high paying offers</Link>, and <Link href={`/${country}/earn/play-games`} className="text-blue-600 dark:text-blue-400 hover:underline">play games for money</Link> can push your earnings to {cpmData.dailyMax} per day.
                 </p>
               </div>
             </div>
