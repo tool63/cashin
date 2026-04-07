@@ -115,9 +115,8 @@ async function loadSectionTranslation(
   }
 }
 
-// FIXED: Made this function async and added await to cookies()
 async function getLanguage(country: CountryCode): Promise<SupportedLanguage> {
-  const cookieStore = await cookies(); // Added await here
+  const cookieStore = await cookies();
 
   const override = cookieStore.get(COOKIE_KEYS.USER_LANGUAGE_OVERRIDE)?.value;
   if (override) {
@@ -189,11 +188,10 @@ const getHreflangLanguages = (country: CountryCode) => {
   return languages;
 };
 
-// Country-specific data helpers (using switch statements to avoid TypeScript Record issues)
+// Country-specific data helpers
 const getCountryPaymentMethods = (country: CountryCode): string[] => {
   const countryCode = country.toLowerCase();
   
-  // Special country-specific payment methods
   if (countryCode === "bd") return ["bKash", "PayPal", "Bank Transfer", "Gift Cards"];
   if (countryCode === "in") return ["Paytm", "PayPal", "Bank Transfer", "Gift Cards"];
   if (countryCode === "ph") return ["GCash", "PayPal", "Bank Transfer", "Gift Cards"];
@@ -207,7 +205,6 @@ const getCountryPaymentMethods = (country: CountryCode): string[] => {
   if (countryCode === "my") return ["PayPal", "Bank Transfer", "Gift Cards"];
   if (countryCode === "sg") return ["PayPal", "Bank Transfer", "Gift Cards"];
   
-  // Default for US, UK, CA, AU, EU countries
   return ["PayPal", "Bank Transfer", "Gift Cards"];
 };
 
@@ -371,7 +368,7 @@ export async function generateMetadata({
   const country = countryParam as CountryCode;
   const countryData = getCountry(country);
   const countryName = countryData.name;
-  const language = await getLanguage(country); // FIXED: Added await
+  const language = await getLanguage(country);
 
   let translation: TranslationSection = {};
   try {
@@ -472,7 +469,7 @@ export default async function WatchVideosPage({
   const country = countryParam as CountryCode;
   const countryData = getCountry(country);
   const countryName = countryData.name;
-  const language = await getLanguage(country); // FIXED: Added await
+  const language = await getLanguage(country);
 
   // Load translations
   const tData = await loadSectionTranslation(language, "watch-videos");
@@ -491,7 +488,7 @@ export default async function WatchVideosPage({
   const countryFAQs = getCountryFAQs(country);
   const peopleAlsoSearch = getCountryPeopleAlsoSearch(country);
 
-  // Default active users value (since CountryMeta doesn't have activeUsers)
+  // Default active users value
   const defaultActiveUsers = "100K+";
   
   // SEO data for structured data
@@ -547,7 +544,7 @@ export default async function WatchVideosPage({
 
   // Use local testimonials if available, otherwise use translation
   const testimonialsData = localTestimonials.length > 0 
-    ? localTestimonials.map((testimonial, index) => ({
+    ? localTestimonials.map((testimonial) => ({
         name: testimonial.name,
         country: countryName,
         earnings: testimonial.earnings,
@@ -635,13 +632,13 @@ export default async function WatchVideosPage({
     ]
   };
 
-  // FAQ schema
+  // FAQ schema - FIXED: removed .q and .a references
   const faqSchemaData = {
     "@type": "FAQPage",
     "mainEntity": faqData.items.slice(0, 8).map((item) => ({
       "@type": "Question",
-      "name": item.q || item.question,
-      "acceptedAnswer": { "@type": "Answer", "text": item.a || item.answer }
+      "name": item.question,
+      "acceptedAnswer": { "@type": "Answer", "text": item.answer }
     }))
   };
 
