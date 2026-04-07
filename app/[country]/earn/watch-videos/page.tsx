@@ -3,8 +3,7 @@
 import { cookies } from "next/headers";
 import { Metadata, Viewport } from "next";
 import Link from "next/link";
-import Image from "next/image";
-import { lazy, Suspense, cache } from "react";
+import { cache } from "react";
 
 import {
   getCountry,
@@ -312,7 +311,9 @@ export default async function WatchVideosPage({ params }: any) {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <PrimaryCTA href="/signup" className="text-lg px-8 py-4 transform hover:scale-105 transition-all duration-300 shadow-lg" />
+              <div className="transform hover:scale-105 transition-all duration-300 shadow-lg">
+                <PrimaryCTA href="/signup" />
+              </div>
               <Link
                 href="#how-it-works"
                 className="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white bg-white/20 backdrop-blur-sm border-2 border-white/30 rounded-lg hover:bg-white/30 transition-all duration-300"
@@ -654,7 +655,9 @@ export default async function WatchVideosPage({ params }: any) {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <PrimaryCTA href="/signup" className="text-lg px-8 py-4 bg-white text-blue-600 hover:bg-gray-100 shadow-lg transform hover:scale-105 transition-all duration-300" />
+            <div className="transform hover:scale-105 transition-all duration-300 shadow-lg">
+              <PrimaryCTA href="/signup" />
+            </div>
             <div className="text-white text-sm">
               <span className="flex items-center gap-2">
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
