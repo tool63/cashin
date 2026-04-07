@@ -1,6 +1,6 @@
 // app/[country]/(marketing)/watch-videos/page.tsx
 
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
 import { Metadata, Viewport } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -73,7 +73,6 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
       title: "Page Not Found | Cashog",
       description: "The requested page could not be found.",
       robots: { index: false },
-      status: "404",
     };
   }
 
@@ -85,21 +84,9 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
   const title = `Get Paid to Watch Videos in ${countryName} | Earn $50-$100 Daily (2025)`;
   const description = `Start earning real money in ${countryName} by watching videos. ✓ $100+ daily potential ✓ Instant PayPal payouts ✓ 100% free to join. Trusted by 100K+ users. Start earning in 5 minutes!`;
   
-  const keywords = [
-    `earn money watching videos ${countryName}`,
-    `get paid to watch videos ${countryName}`,
-    `passive income ${countryName}`,
-    `watch videos earn money ${countryName}`,
-    `online earning ${countryName}`,
-    `make money online ${countryName}`,
-    `video earning platform ${countryName}`,
-    `cash for watching videos ${countryName}`,
-  ].join(", ");
-  
   return {
     title,
     description,
-    keywords,
     authors: [{ name: "Cashog", url: "https://cashog.com" }],
     creator: "Cashog",
     publisher: "Cashog",
@@ -160,7 +147,7 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
         "max-image-preview": "large",
         "max-snippet": 200,
         noimageindex: false,
-        "notranslate": false,
+        notranslate: false,
       },
     },
     verification: {
@@ -191,16 +178,11 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
       ],
     },
     manifest: "/site.webmanifest",
-    assets: [
-      "https://cashog.com/fonts/inter.woff2",
-      "https://cashog.com/images/hero.webp",
-    ],
-    bookmarks: [`https://cashog.com/${country}/watch-videos`],
     other: {
       "geo.region": country.toUpperCase(),
       "geo.placename": countryName,
-      "geo.position": countryData.coordinates || "0,0",
-      "ICBM": countryData.coordinates || "0,0",
+      "geo.position": "0,0",
+      "ICBM": "0,0",
       "revisit-after": "1 day",
       "rating": "General",
       "distribution": "global",
@@ -279,7 +261,7 @@ export default async function WatchVideosPage({ params }: any) {
       },
       tData?.faq?.items?.length > 0 && {
         "@type": "FAQPage",
-        mainEntity: tData.faq.items.map((item: any) => ({
+        mainEntity: tData.faq.items.slice(0, 6).map((item: any) => ({
           "@type": "Question",
           name: replaceCountry(item.question, countryName),
           acceptedAnswer: { "@type": "Answer", text: replaceCountry(item.answer, countryName) },
@@ -288,7 +270,7 @@ export default async function WatchVideosPage({ params }: any) {
     ].filter(Boolean),
   };
 
-  // Optimized earning data with micro-schema
+  // Optimized earning data
   const earningMethods = [
     { name: "Ad Videos", earnings: "$0.05-$0.15", time: "5-10 sec", daily: "$15-30", difficulty: "Easy" },
     { name: "Sponsored Content", earnings: "$0.25-$1.00", time: "30-60 sec", daily: "$30-60", difficulty: "Medium" },
@@ -299,13 +281,13 @@ export default async function WatchVideosPage({ params }: any) {
   return (
     <main className="flex flex-col items-center w-full bg-white dark:bg-gray-900" itemScope itemType="https://schema.org/WebPage">
       
-      {/* ADVANCED STRUCTURED DATA */}
+      {/* STRUCTURED DATA */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
-      {/* HERO SECTION WITH LAZY LOADING */}
+      {/* HERO SECTION */}
       <section className="relative w-full bg-gradient-to-br from-blue-600 via-blue-500 to-indigo-600 overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-10" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20" />
@@ -367,7 +349,7 @@ export default async function WatchVideosPage({ params }: any) {
         </div>
       </section>
 
-      {/* TRUST SECTION WITH SOCIAL PROOF */}
+      {/* TRUST SECTION */}
       <section className="w-full py-16 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -402,7 +384,7 @@ export default async function WatchVideosPage({ params }: any) {
         </div>
       </section>
 
-      {/* EARNING POTENTIAL TABLE WITH MICRO-DATA */}
+      {/* EARNING POTENTIAL TABLE */}
       <section className="w-full py-20 bg-gray-50 dark:bg-gray-800">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -447,7 +429,7 @@ export default async function WatchVideosPage({ params }: any) {
         </div>
       </section>
 
-      {/* HOW IT WORKS WITH VIDEO EMBED */}
+      {/* HOW IT WORKS */}
       <section id="how-it-works" className="w-full py-20 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -485,9 +467,145 @@ export default async function WatchVideosPage({ params }: any) {
         </div>
       </section>
 
-      {/* FAQ SECTION WITH ACCORDION SCHEMA */}
+      {/* SEO CONTENT SECTION */}
+      <section className="w-full py-20 bg-gray-50 dark:bg-gray-800">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+            How to Maximize Your Earnings Watching Videos in {countryName}
+          </h2>
+          
+          <div className="prose prose-lg dark:prose-invert max-w-none">
+            <p className="mb-6 text-gray-600 dark:text-gray-400">
+              Watching videos online has become one of the most popular ways to earn extra income in{" "}
+              {countryName}. With platforms like Cashog, you can transform your free time into real money
+              by simply engaging with video content, advertisements, and sponsored materials.
+            </p>
+
+            <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">
+              Why Video Earning Works in {countryName}
+            </h3>
+            <p className="mb-6 text-gray-600 dark:text-gray-400">
+              The digital economy in {countryName} is booming, and companies are willing to pay for user
+              attention. When you watch videos on Cashog, advertisers pay for your engagement, and we share
+              that revenue with you. It's a win-win situation that has helped thousands of users in{" "}
+              {countryName} supplement their income.
+            </p>
+
+            <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">
+              Top Strategies for Maximum Earnings
+            </h3>
+            <ul className="list-disc pl-6 space-y-3 mb-8 text-gray-600 dark:text-gray-400">
+              <li><strong>Watch Daily:</strong> Consistency is key. Log in every day to watch available videos and earn daily bonuses.</li>
+              <li><strong>Complete Your Profile:</strong> A complete profile gets access to higher-paying video opportunities.</li>
+              <li><strong>Refer Friends:</strong> Earn bonus points when friends you invite join Cashog in {countryName}.</li>
+              <li><strong>Combine Methods:</strong> Watch videos while completing surveys or offers to maximize your hourly rate.</li>
+              <li><strong>Peak Hours:</strong> More videos are available during peak hours (evenings and weekends) in {countryName}.</li>
+            </ul>
+
+            <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">
+              Payment Options in {countryName}
+            </h3>
+            <p className="mb-6 text-gray-600 dark:text-gray-400">
+              Cashog offers multiple withdrawal methods for users in {countryName}:
+            </p>
+            <ul className="list-disc pl-6 space-y-3 mb-8 text-gray-600 dark:text-gray-400">
+              <li><strong>PayPal:</strong> Instant withdrawals with no fees</li>
+              <li><strong>Gift Cards:</strong> Amazon, Google Play, iTunes, and more</li>
+              <li><strong>Cryptocurrency:</strong> Bitcoin, Ethereum, and other popular options</li>
+              <li><strong>Bank Transfer:</strong> Direct deposits to your {countryName} bank account</li>
+            </ul>
+
+            <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-600 p-6 my-8 rounded-r-lg">
+              <p className="text-gray-700 dark:text-gray-300 font-semibold">
+                💡 Pro Tip: Users in {countryName} earn an average of $15-$25 per hour
+                when combining video watching with other earning methods on Cashog.
+              </p>
+            </div>
+
+            <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">
+              Is Watching Videos for Money Legit in {countryName}?
+            </h3>
+            <p className="mb-6 text-gray-600 dark:text-gray-400">
+              Absolutely! Cashog is a legitimate platform that has paid over $12.5 million to users worldwide,
+              including thousands in {countryName}. We're transparent about our payment system and have
+              hundreds of verified payment proofs from {countryName} users. While you won't get rich overnight,
+              video watching provides a reliable way to earn extra cash during your free time.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* INTERNAL LINKS SECTION */}
+      <section className="w-full py-20 bg-white dark:bg-gray-900">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">
+            More Ways to Earn Money in {countryName}
+          </h2>
+          
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {[
+              { href: "surveys", title: "Paid Surveys", desc: `Share your opinion and earn $1-$5 per survey in ${countryName}`, icon: "📋" },
+              { href: "apps", title: "Download Apps", desc: `Get paid $0.50-$2 for trying new apps and games`, icon: "📱" },
+              { href: "offers", title: "Complete Offers", desc: `Earn bonuses for signing up for free trials and services`, icon: "🎁" },
+              { href: "referrals", title: "Referral Program", desc: `Earn 10% of your friends' earnings for life in ${countryName}`, icon: "👥" },
+              { href: "daily-bonus", title: "Daily Bonuses", desc: `Claim your free daily bonus and streak rewards`, icon: "🎯" },
+              { href: "contests", title: "Contests", desc: `Compete with users in ${countryName} for cash prizes`, icon: "🏆" },
+            ].map((item, index) => (
+              <Link
+                key={index}
+                href={`/${country}/${item.href}`}
+                className="group bg-gray-50 dark:bg-gray-800 rounded-lg p-6 hover:shadow-lg transition-all hover:-translate-y-1"
+              >
+                <div className="text-4xl mb-4">{item.icon}</div>
+                <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">{item.desc}</p>
+                <div className="mt-4 text-blue-600 group-hover:translate-x-2 transition-transform inline-block">
+                  Learn More →
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* BLOG LINKS SECTION */}
+      <section className="w-full py-20 bg-gray-50 dark:bg-gray-800">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-gray-900 dark:text-white">
+            Learn More About Online Earning
+          </h2>
+          <p className="text-center text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-12">
+            Check out our latest articles and guides
+          </p>
+          
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {[
+              { href: "/blog/how-to-earn-money-online", title: "Ultimate Guide: How to Earn Money Online in 2025", desc: "Discover 15 legitimate ways to make money from home" },
+              { href: `/blog/best-side-hustles-${country}`, title: `Best Side Hustles in ${countryName} for 2025`, desc: "Top part-time opportunities to boost your income" },
+              { href: "/blog/passive-income-ideas", title: "10 Passive Income Ideas That Actually Work", desc: "Build wealth while you sleep with these strategies" },
+              { href: "/blog/make-money-watching-videos", title: "Complete Guide: Get Paid to Watch Videos", desc: "Maximize your earnings with these pro tips" },
+            ].map((post, index) => (
+              <Link
+                key={index}
+                href={post.href}
+                className="bg-white dark:bg-gray-900 rounded-lg p-6 hover:shadow-lg transition-all"
+              >
+                <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white hover:text-blue-600 transition-colors">
+                  {post.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">{post.desc}</p>
+                <div className="mt-4 text-blue-600">Read Article →</div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ SECTION */}
       {tData?.faq?.items?.length > 0 && (
-        <section className="w-full py-20 bg-gray-50 dark:bg-gray-800">
+        <section className="w-full py-20 bg-white dark:bg-gray-900">
           <div className="container mx-auto px-4 max-w-3xl">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
@@ -500,7 +618,7 @@ export default async function WatchVideosPage({ params }: any) {
             
             <div className="space-y-4">
               {tData.faq.items.slice(0, 6).map((item: any, index: number) => (
-                <details key={index} className="group bg-white dark:bg-gray-900 rounded-lg shadow-sm">
+                <details key={index} className="group bg-gray-50 dark:bg-gray-800 rounded-lg shadow-sm">
                   <summary className="flex justify-between items-center cursor-pointer p-6 font-semibold text-gray-900 dark:text-white list-none">
                     <span>{replaceCountry(item.question, countryName)}</span>
                     <span className="transition-transform duration-200 group-open:rotate-180">
@@ -519,7 +637,7 @@ export default async function WatchVideosPage({ params }: any) {
         </section>
       )}
 
-      {/* FINAL CTA WITH COUNTDOWN TIMER */}
+      {/* FINAL CTA SECTION */}
       <section className="relative w-full py-24 bg-gradient-to-r from-blue-600 to-indigo-600 overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-black/20"></div>
