@@ -197,15 +197,15 @@ export default async function WatchVideosPage({ params }: any) {
 
   if (!countryParam || !isValidCountryCode(countryParam)) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
         <div className="text-center px-4">
           <div className="text-6xl mb-4">🌍</div>
-          <h1 className="text-4xl font-bold mb-4 text-gray-900">Country Not Supported</h1>
-          <p className="text-lg mb-8 text-gray-600 max-w-md mx-auto">
+          <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Country Not Supported</h1>
+          <p className="text-lg mb-8 text-gray-600 dark:text-gray-400 max-w-md mx-auto">
             We're sorry, but this service is not available in your country yet.
             We're expanding rapidly - check back soon!
           </p>
-          <Link href="/" className="inline-flex items-center justify-center px-6 py-3 text-lg font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">
+          <Link href="/" className="inline-flex items-center justify-center px-6 py-3 text-lg font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors">
             Return to Home
             <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -286,27 +286,27 @@ export default async function WatchVideosPage({ params }: any) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
-      {/* HERO SECTION */}
-      <section className="relative w-full bg-gradient-to-br from-blue-600 via-blue-500 to-indigo-600 overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-10" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20" />
+      {/* HERO SECTION - Updated for dark/light mode */}
+      <section className="relative w-full bg-gradient-to-br from-blue-50 via-indigo-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
+        <div className="absolute inset-0 bg-grid-pattern opacity-5 dark:opacity-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/50 dark:to-gray-900/50" />
         
         <div className="container mx-auto px-4 py-24 md:py-32 lg:py-40 text-center relative z-10">
           <div className="animate-fade-in-up">
-            <div className="inline-flex items-center justify-center mb-6 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full">
-              <span className="text-yellow-300 mr-2">⭐</span>
-              <span className="text-white text-sm font-medium">Trusted by 100,000+ users worldwide</span>
+            <div className="inline-flex items-center justify-center mb-6 px-4 py-2 bg-blue-100 dark:bg-gray-800 rounded-full">
+              <span className="text-yellow-500 dark:text-yellow-400 mr-2">⭐</span>
+              <span className="text-gray-700 dark:text-gray-300 text-sm font-medium">Trusted by 100,000+ users worldwide</span>
             </div>
             
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
               Get Paid to Watch Videos
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-400">
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">
                 in {countryName}
               </span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto mb-8">
-              Earn <strong className="text-yellow-300">$50-$100 daily</strong> by watching videos, ads, and sponsored content.
+            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
+              Earn <strong className="text-blue-600 dark:text-blue-400">$50-$100 daily</strong> by watching videos, ads, and sponsored content.
               Join over 100,000 members already making passive income.
             </p>
             
@@ -316,7 +316,7 @@ export default async function WatchVideosPage({ params }: any) {
               </div>
               <Link
                 href="#how-it-works"
-                className="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white bg-white/20 backdrop-blur-sm border-2 border-white/30 rounded-lg hover:bg-white/30 transition-all duration-300"
+                className="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-gray-700 dark:text-white bg-gray-100 dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300"
               >
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
@@ -326,21 +326,21 @@ export default async function WatchVideosPage({ params }: any) {
               </Link>
             </div>
             
-            <div className="mt-12 flex flex-wrap gap-6 justify-center text-sm text-blue-100">
+            <div className="mt-12 flex flex-wrap gap-6 justify-center text-sm text-gray-600 dark:text-gray-400">
               <div className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-green-500 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <span>100% Free to Join</span>
               </div>
               <div className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-green-500 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <span>Instant Payouts</span>
               </div>
               <div className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-green-500 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
                 <span>24/7 Support</span>
@@ -400,7 +400,7 @@ export default async function WatchVideosPage({ params }: any) {
           <div className="max-w-4xl mx-auto">
             <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl overflow-hidden">
               <table className="w-full">
-                <thead className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+                <thead className="bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-500 dark:to-indigo-500 text-white">
                   <tr>
                     <th className="px-6 py-4 text-left text-sm font-semibold">Video Type</th>
                     <th className="px-6 py-4 text-left text-sm font-semibold">Per Video</th>
@@ -449,10 +449,10 @@ export default async function WatchVideosPage({ params }: any) {
               { step: "03", title: "Cash Out", desc: `Withdraw via PayPal, gift cards, or bank transfer in ${countryName}`, icon: "💰", time: "Instant" },
             ].map((item, index) => (
               <div key={index} className="relative group">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-300"></div>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-500 dark:to-indigo-500 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-300"></div>
                 <div className="relative p-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
                   <div className="text-5xl mb-4">{item.icon}</div>
-                  <div className="text-4xl font-bold text-blue-600 mb-2">{item.step}</div>
+                  <div className="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">{item.step}</div>
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{item.title}</h3>
                   <p className="text-gray-600 dark:text-gray-400 mb-3">{item.desc}</p>
                   <div className="inline-flex items-center text-sm text-green-600 dark:text-green-400">
@@ -558,11 +558,11 @@ export default async function WatchVideosPage({ params }: any) {
                 className="group bg-gray-50 dark:bg-gray-800 rounded-lg p-6 hover:shadow-lg transition-all hover:-translate-y-1"
               >
                 <div className="text-4xl mb-4">{item.icon}</div>
-                <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors">
+                <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                   {item.title}
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400">{item.desc}</p>
-                <div className="mt-4 text-blue-600 group-hover:translate-x-2 transition-transform inline-block">
+                <div className="mt-4 text-blue-600 dark:text-blue-400 group-hover:translate-x-2 transition-transform inline-block">
                   Learn More →
                 </div>
               </Link>
@@ -593,11 +593,11 @@ export default async function WatchVideosPage({ params }: any) {
                 href={post.href}
                 className="bg-white dark:bg-gray-900 rounded-lg p-6 hover:shadow-lg transition-all"
               >
-                <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white hover:text-blue-600 transition-colors">
+                <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                   {post.title}
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400">{post.desc}</p>
-                <div className="mt-4 text-blue-600">Read Article →</div>
+                <div className="mt-4 text-blue-600 dark:text-blue-400">Read Article →</div>
               </Link>
             ))}
           </div>
@@ -623,7 +623,7 @@ export default async function WatchVideosPage({ params }: any) {
                   <summary className="flex justify-between items-center cursor-pointer p-6 font-semibold text-gray-900 dark:text-white list-none">
                     <span>{replaceCountry(item.question, countryName)}</span>
                     <span className="transition-transform duration-200 group-open:rotate-180">
-                      <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                       </svg>
                     </span>
@@ -638,19 +638,16 @@ export default async function WatchVideosPage({ params }: any) {
         </section>
       )}
 
-      {/* FINAL CTA SECTION */}
-      <section className="relative w-full py-24 bg-gradient-to-r from-blue-600 to-indigo-600 overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-black/20"></div>
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-white/10 rounded-full blur-3xl"></div>
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-white/10 rounded-full blur-3xl"></div>
-        </div>
+      {/* FINAL CTA SECTION - Updated for dark/light mode */}
+      <section className="relative w-full py-24 bg-gradient-to-br from-blue-50 via-indigo-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
+        <div className="absolute inset-0 bg-grid-pattern opacity-5 dark:opacity-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-transparent to-white/50 dark:to-gray-900/50" />
         
         <div className="container mx-auto px-4 text-center relative z-10">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             Start Earning Real Money Today
           </h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
             Join 100,000+ users already earning with Cashog. Free to join - start in 30 seconds!
           </p>
           
@@ -658,9 +655,9 @@ export default async function WatchVideosPage({ params }: any) {
             <div className="transform hover:scale-105 transition-all duration-300 shadow-lg">
               <PrimaryCTA href="/signup" />
             </div>
-            <div className="text-white text-sm">
+            <div className="text-gray-600 dark:text-gray-400 text-sm">
               <span className="flex items-center gap-2">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
                 No credit card required
@@ -668,7 +665,7 @@ export default async function WatchVideosPage({ params }: any) {
             </div>
           </div>
           
-          <p className="mt-8 text-sm text-blue-100">
+          <p className="mt-8 text-sm text-gray-500 dark:text-gray-500">
             *Limited time offer for {countryName} users - exclusive signup bonus available
           </p>
         </div>
