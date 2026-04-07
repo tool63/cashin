@@ -290,7 +290,8 @@ const getCountryEarningTips = (country: CountryCode): Array<{ title: string; des
 };
 
 const getCountryFAQs = (country: CountryCode): Array<{ question: string; answer: string }> => {
-  const countryName = getCountry(country).name;
+  const countryData = getCountry(country);
+  const countryName = countryData.name;
   const cpmData = getCountryCPM(country);
   const paymentMethods = getCountryPaymentMethods(country);
   
@@ -323,7 +324,8 @@ const getCountryFAQs = (country: CountryCode): Array<{ question: string; answer:
 };
 
 const getCountryPeopleAlsoSearch = (country: CountryCode): string[] => {
-  const countryName = getCountry(country).name;
+  const countryData = getCountry(country);
+  const countryName = countryData.name;
   const lowerCountry = countryName.toLowerCase();
   
   return [
@@ -488,6 +490,9 @@ export default async function WatchVideosPage({
   const countryFAQs = getCountryFAQs(country);
   const peopleAlsoSearch = getCountryPeopleAlsoSearch(country);
 
+  // Default active users value (since CountryMeta doesn't have activeUsers)
+  const defaultActiveUsers = "100K+";
+  
   // SEO data for structured data
   const rawTitle = tData?.seo?.title;
   const rawDescription = tData?.seo?.description;
@@ -499,7 +504,7 @@ export default async function WatchVideosPage({
     title: t(tData?.hero?.title, `Earn Money Watching Videos in ${countryName} (Get Paid Daily)`),
     subtitle: t(
       tData?.hero?.subtitle,
-      `Want to earn fast daily income in ${countryName}? Join ${countryData.activeUsers || "100K+"} members earning ${cpmData.dailyAverage} daily by watching videos. ✓ No investment ✓ Legit platform ✓ Instant payouts via ${paymentMethods.slice(0, 2).join(" or ")}!`
+      `Want to earn fast daily income in ${countryName}? Join ${defaultActiveUsers} members earning ${cpmData.dailyAverage} daily by watching videos. ✓ No investment ✓ Legit platform ✓ Instant payouts via ${paymentMethods.slice(0, 2).join(" or ")}!`
     ),
   };
 
@@ -509,9 +514,9 @@ export default async function WatchVideosPage({
     videosWatchedLabel: tData?.stats?.videosWatchedLabel || "Videos Watched",
     avgPayout: tData?.stats?.avgPayout || cpmData.perVideo,
     avgPayoutLabel: tData?.stats?.avgPayoutLabel || "Average Per Video",
-    activeUsers: tData?.stats?.activeUsers || countryData.activeUsers || "100K+",
+    activeUsers: tData?.stats?.activeUsers || defaultActiveUsers,
     activeUsersLabel: tData?.stats?.activeUsersLabel || "Active Members",
-    totalPaid: tData?.stats?.totalPaid || countryData.totalPaid || "$12.5M+",
+    totalPaid: tData?.stats?.totalPaid || "$12.5M+",
     totalPaidLabel: tData?.stats?.totalPaidLabel || "Total Paid",
   };
 
