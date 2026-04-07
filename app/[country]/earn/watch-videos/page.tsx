@@ -556,18 +556,21 @@ export default async function WatchVideosPage({
         quote: t(testimonial.quote, testimonial.quote),
       }));
 
-  // Combine FAQs
+  // Combine FAQs - TRANSFORM to match FAQ component expected format (q and a)
   const combinedFAQs = [
-    ...countryFAQs,
+    ...countryFAQs.map(item => ({
+      q: item.question,
+      a: item.answer
+    })),
     ...(tData?.faq?.items || []).map((item) => ({
-      question: t(item.question, item.question),
-      answer: t(item.answer, item.answer),
+      q: t(item.question, item.question),
+      a: t(item.answer, item.answer),
     })),
   ];
 
   const faqData = {
     title: t(tData?.faq?.title, `Earn Money Watching Videos in ${countryName} - Frequently Asked Questions`),
-    items: combinedFAQs.filter((item) => item.question && item.answer),
+    items: combinedFAQs.filter((item) => item.q && item.a),
   };
 
   const finalData = {
@@ -632,13 +635,13 @@ export default async function WatchVideosPage({
     ]
   };
 
-  // FAQ schema - FIXED: removed .q and .a references
+  // FAQ schema - UPDATED to use q and a properties
   const faqSchemaData = {
     "@type": "FAQPage",
     "mainEntity": faqData.items.slice(0, 8).map((item) => ({
       "@type": "Question",
-      "name": item.question,
-      "acceptedAnswer": { "@type": "Answer", "text": item.answer }
+      "name": item.q,
+      "acceptedAnswer": { "@type": "Answer", "text": item.a }
     }))
   };
 
