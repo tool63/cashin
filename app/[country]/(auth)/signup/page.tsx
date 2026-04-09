@@ -566,7 +566,7 @@ export default function SignupPage() {
                     {/* Sign Up Button - Using PrimaryCTA */}
                     <div className="flex justify-center">
                       <PrimaryCTA 
-                        href={`/${country}/dashboard`} 
+                        href={`https://www.cashooz.com/`} 
                         translationKey="sign_up"
                         fallback="Sign Up"
                       />
