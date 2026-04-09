@@ -197,7 +197,7 @@ export default function SignupPage() {
       }
 
       // Redirect to dashboard or verification page
-      window.location.href = `https://www.cashooz.com/`;
+      window.location.href = `/${country}/dashboard`;
     } catch (error) {
       alert(error instanceof Error ? error.message : "Something went wrong");
     } finally {
