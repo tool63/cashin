@@ -30,6 +30,7 @@ import { loadAllTranslations } from "@/app/core/i18n/loader";
 function getInitialLanguage(country: CountryCode): SupportedLanguage {
   const cookieStore = cookies();
 
+  // 🔁 User override language
   const override = cookieStore.get(COOKIE_KEYS.USER_LANGUAGE_OVERRIDE)?.value;
   if (override) {
     const lang = override.toLowerCase().split("-")[0];
@@ -38,6 +39,7 @@ function getInitialLanguage(country: CountryCode): SupportedLanguage {
     }
   }
 
+  // 💾 Saved language
   const saved = cookieStore.get(COOKIE_KEYS.LANGUAGE)?.value;
   if (saved) {
     const lang = saved.toLowerCase().split("-")[0];
@@ -46,7 +48,9 @@ function getInitialLanguage(country: CountryCode): SupportedLanguage {
     }
   }
 
-  return getCountry(country).defaultLanguage as SupportedLanguage;
+  // 🌍 Country default (SAFE fallback)
+  const countryData = getCountry(country);
+  return (countryData?.defaultLanguage || "en") as SupportedLanguage;
 }
 
 /* ================= DIRECTION ================= */
@@ -65,21 +69,28 @@ export default async function CountryLayout({
   params: Promise<{ country?: string }> | { country?: string };
 }) {
   const resolvedParams = await params;
-  const countryParam = resolvedParams?.country?.toLowerCase();
+  let countryParam = resolvedParams?.country?.toLowerCase();
 
+  // ❌ If empty or global → redirect to root
   if (!countryParam || countryParam === "global") {
     redirect("/");
   }
 
-  if (!isValidCountryCode(countryParam)) {
-    redirect("/");
+  // ✅ Allow ALL countries (fallback instead of blocking)
+  let country: CountryCode;
+
+  if (isValidCountryCode(countryParam)) {
+    country = countryParam as CountryCode;
+  } else {
+    // 🔥 fallback (important for worldwide support)
+    country = "us"; // you can change to "global" if needed
   }
 
-  const country = countryParam as CountryCode;
-
+  // 🌐 Language + direction
   const language = getInitialLanguage(country);
   const dir = getDirection(language);
 
+  // 🌍 Load translations
   const translations = await loadAllTranslations(language);
 
   return (
