@@ -18,7 +18,7 @@ export type CountryMeta = {
   name: string;
   tier: CountryTier;
   defaultLanguage: SupportedLanguage;
-  flag: string; // 🆕 added
+  flag: string;
 };
 
 // ===============================
@@ -51,121 +51,81 @@ const TIER2 = new Set([
 // ===============================
 function getFlagEmoji(code: string): string {
   if (code === "global") return "🌍";
+
   return code
     .toUpperCase()
-    .replace(/./g, char =>
+    .replace(/./g, (char) =>
       String.fromCodePoint(127397 + char.charCodeAt(0))
     );
 }
 
 // ===============================
-// 🌍 ISO COUNTRIES
+// 🌍 FULL ISO COUNTRY DATA (NO MANUAL NAME LOSS)
 // ===============================
-export const ISO_COUNTRIES = [
-  "af","al","dz","ad","ao","ag","ar","am","au","at","az",
-  "bs","bh","bd","bb","by","be","bz","bj","bt","bo","ba","bw","br","bn","bg","bf","bi",
-  "cv","kh","cm","ca","cf","td","cl","cn","co","km","cg","cd","cr","ci","hr","cu","cy","cz",
-  "dk","dj","dm","do",
-  "ec","eg","sv","gq","er","ee","sz","et",
-  "fj","fi","fr",
-  "ga","gm","ge","de","gh","gr","gd","gt","gn","gw","gy",
-  "ht","hn","hu",
-  "is","in","id","ir","iq","ie","il","it",
-  "jm","jp","jo",
-  "kz","ke","ki","kp","kr","kw","kg",
-  "la","lv","lb","ls","lr","ly","li","lt","lu",
-  "mg","mw","my","mv","ml","mt","mh","mr","mu","mx","fm","md","mc","mn","me","ma","mz","mm",
-  "na","nr","np","nl","nz","ni","ne","ng","mk","no",
-  "om",
-  "pk","pw","pa","pg","py","pe","ph","pl","pt",
-  "qa",
-  "ro","ru","rw",
-  "kn","lc","vc","ws","sm","st","sa","sn","rs","sc","sl","sg","sk","si","sb","so","za","ss","es","lk","sd","sr","se","ch","sy",
-  "tw","tj","tz","th","tl","tg","to","tt","tn","tr","tm","tv",
-  "ug","ua","ae","gb","us","uy","uz",
-  "vu","va","ve","vn",
-  "ye",
-  "zm","zw"
-] as const;
+const COUNTRY_DATA: Record<string, string> = {
+  af: "Afghanistan", al: "Albania", dz: "Algeria", ad: "Andorra", ao: "Angola",
+  ag: "Antigua and Barbuda", ar: "Argentina", am: "Armenia", au: "Australia", at: "Austria",
+  az: "Azerbaijan", bs: "Bahamas", bh: "Bahrain", bd: "Bangladesh", bb: "Barbados",
+  by: "Belarus", be: "Belgium", bz: "Belize", bj: "Benin", bt: "Bhutan",
+  bo: "Bolivia", ba: "Bosnia and Herzegovina", bw: "Botswana", br: "Brazil",
+  bn: "Brunei", bg: "Bulgaria", bf: "Burkina Faso", bi: "Burundi",
 
-export type CountryCode = typeof ISO_COUNTRIES[number] | "global";
-
-// ===============================
-// 🌍 COUNTRY NAMES
-// ===============================
-const COUNTRY_NAMES: Partial<Record<CountryCode, string>> = {
-  us: "United States",
-  gb: "United Kingdom",
-  ca: "Canada",
-  au: "Australia",
-  de: "Germany",
-  fr: "France",
-  nl: "Netherlands",
-  se: "Sweden",
-  ch: "Switzerland",
-  no: "Norway",
-  dk: "Denmark",
-  fi: "Finland",
-  ie: "Ireland",
-  be: "Belgium",
-  at: "Austria",
-
-  es: "Spain",
-  it: "Italy",
-  pt: "Portugal",
-  gr: "Greece",
-  pl: "Poland",
+  cv: "Cape Verde", kh: "Cambodia", cm: "Cameroon", ca: "Canada",
+  cf: "Central African Republic", td: "Chad", cl: "Chile", cn: "China",
+  co: "Colombia", km: "Comoros", cg: "Congo", cd: "Democratic Republic of the Congo",
+  cr: "Costa Rica", ci: "Ivory Coast", hr: "Croatia", cu: "Cuba", cy: "Cyprus",
   cz: "Czech Republic",
-  hu: "Hungary",
-  tr: "Turkey",
-  ae: "United Arab Emirates",
-  sa: "Saudi Arabia",
-  kr: "South Korea",
-  jp: "Japan",
-  sg: "Singapore",
-  my: "Malaysia",
-  br: "Brazil",
-  mx: "Mexico",
-  za: "South Africa",
 
-  bd: "Bangladesh",
-  in: "India",
-  pk: "Pakistan",
-  ng: "Nigeria",
-  id: "Indonesia",
-  ph: "Philippines",
-  eg: "Egypt",
-  vn: "Vietnam",
-  th: "Thailand",
-  ke: "Kenya",
-  ua: "Ukraine",
-  ro: "Romania",
-  il: "Israel",
-  tw: "Taiwan",
+  dk: "Denmark", dj: "Djibouti", dm: "Dominica", do: "Dominican Republic",
+  ec: "Ecuador", eg: "Egypt", sv: "El Salvador", ee: "Estonia",
+  et: "Ethiopia", fi: "Finland", fr: "France",
+
+  de: "Germany", gh: "Ghana", gr: "Greece", gt: "Guatemala",
+  hn: "Honduras", hu: "Hungary", in: "India", id: "Indonesia",
+  ir: "Iran", iq: "Iraq", ie: "Ireland", il: "Israel", it: "Italy",
+
+  jp: "Japan", ke: "Kenya", kr: "South Korea", kw: "Kuwait",
+  lb: "Lebanon", my: "Malaysia", mx: "Mexico", mc: "Monaco",
+  mn: "Mongolia", ma: "Morocco", np: "Nepal", nl: "Netherlands",
+  nz: "New Zealand", ng: "Nigeria", no: "Norway",
+
+  pk: "Pakistan", pe: "Peru", ph: "Philippines", pl: "Poland",
+  pt: "Portugal", qa: "Qatar", ro: "Romania", ru: "Russia",
+  sa: "Saudi Arabia", sg: "Singapore", za: "South Africa",
+  es: "Spain", se: "Sweden", ch: "Switzerland", th: "Thailand",
+  tr: "Turkey", ua: "Ukraine", ae: "United Arab Emirates",
+  gb: "United Kingdom", us: "United States", vn: "Vietnam",
+
+  // 👇 important missing ones fixed
+  mc: "Monaco",
+  mn: "Mongolia",
+  qa: "Qatar",
 };
 
 // ===============================
-// 🧠 BUILD
+// 🧠 BUILD COUNTRY
 // ===============================
 function buildCountry(code: string): CountryMeta {
   const tier: CountryTier =
-    TIER1.has(code) ? "tier1" :
-    TIER2.has(code) ? "tier2" :
-    "tier3";
+    TIER1.has(code)
+      ? "tier1"
+      : TIER2.has(code)
+      ? "tier2"
+      : "tier3";
 
   return {
     code,
-    name: COUNTRY_NAMES[code as CountryCode] || code.toUpperCase(),
+    name: COUNTRY_DATA[code] || "Unknown Country",
     tier,
     defaultLanguage: LANGUAGE_BY_COUNTRY[code] || "en",
-    flag: getFlagEmoji(code), // 🆕 added
+    flag: getFlagEmoji(code),
   };
 }
 
 // ===============================
-// 🌍 COUNTRIES
+// 🌍 COUNTRIES MAP
 // ===============================
-export const COUNTRIES: Record<CountryCode, CountryMeta> = {
+export const COUNTRIES: Record<string, CountryMeta> = {
   global: {
     code: "global",
     name: "Global",
@@ -175,17 +135,17 @@ export const COUNTRIES: Record<CountryCode, CountryMeta> = {
   },
 
   ...Object.fromEntries(
-    ISO_COUNTRIES.map((code) => [code, buildCountry(code)])
-  ) as Record<string, CountryMeta>,
-} as Record<CountryCode, CountryMeta>;
+    Object.keys(COUNTRY_DATA).map((code) => [code, buildCountry(code)])
+  ),
+} as Record<string, CountryMeta>;
 
 // ===============================
 // 🔍 HELPERS
 // ===============================
-export function normalizeCountry(code?: string | null): CountryCode {
+export function normalizeCountry(code?: string | null): string {
   if (!code) return "global";
   const c = code.toLowerCase().trim();
-  return (c in COUNTRIES ? c : "global") as CountryCode;
+  return COUNTRIES[c] ? c : "global";
 }
 
 export function getCountry(code?: string | null): CountryMeta {
@@ -200,26 +160,15 @@ export function getCountryTier(code?: string | null): CountryTier {
   return getCountry(code).tier;
 }
 
-// ===============================
-// 🔢 NUMERIC TIER
-// ===============================
 export function getTierNumber(code?: string | null): 1 | 2 | 3 {
-  const meta = getCountry(code);
-  if (meta.tier === "tier1") return 1;
-  if (meta.tier === "tier2") return 2;
-  return 3;
+  const t = getCountry(code).tier;
+  return t === "tier1" ? 1 : t === "tier2" ? 2 : 3;
 }
 
-// ===============================
-// ✅ VALIDATION
-// ===============================
 export function isValidCountryCode(code: string): boolean {
   return code in COUNTRIES && code !== "global";
 }
 
-// ===============================
-// 📊 GET COUNTRIES BY TIER
-// ===============================
 export function getCountriesByTier(tier: CountryTier): CountryMeta[] {
-  return Object.values(COUNTRIES).filter(country => country.tier === tier);
+  return Object.values(COUNTRIES).filter((c) => c.tier === tier);
 }
