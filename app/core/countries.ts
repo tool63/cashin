@@ -60,46 +60,127 @@ function getFlagEmoji(code: string): string {
 }
 
 // ===============================
-// 🌍 FULL ISO COUNTRY DATA (NO MANUAL NAME LOSS)
+// 🌍 SINGLE SOURCE OF TRUTH (AUTO SAFE)
 // ===============================
-const COUNTRY_DATA: Record<string, string> = {
-  af: "Afghanistan", al: "Albania", dz: "Algeria", ad: "Andorra", ao: "Angola",
-  ag: "Antigua and Barbuda", ar: "Argentina", am: "Armenia", au: "Australia", at: "Austria",
-  az: "Azerbaijan", bs: "Bahamas", bh: "Bahrain", bd: "Bangladesh", bb: "Barbados",
-  by: "Belarus", be: "Belgium", bz: "Belize", bj: "Benin", bt: "Bhutan",
-  bo: "Bolivia", ba: "Bosnia and Herzegovina", bw: "Botswana", br: "Brazil",
-  bn: "Brunei", bg: "Bulgaria", bf: "Burkina Faso", bi: "Burundi",
+const COUNTRY_NAMES: Record<string, string> = {
+  af: "Afghanistan",
+  al: "Albania",
+  dz: "Algeria",
+  ad: "Andorra",
+  ao: "Angola",
+  ag: "Antigua and Barbuda",
+  ar: "Argentina",
+  am: "Armenia",
+  au: "Australia",
+  at: "Austria",
+  az: "Azerbaijan",
 
-  cv: "Cape Verde", kh: "Cambodia", cm: "Cameroon", ca: "Canada",
-  cf: "Central African Republic", td: "Chad", cl: "Chile", cn: "China",
-  co: "Colombia", km: "Comoros", cg: "Congo", cd: "Democratic Republic of the Congo",
-  cr: "Costa Rica", ci: "Ivory Coast", hr: "Croatia", cu: "Cuba", cy: "Cyprus",
+  bs: "Bahamas",
+  bh: "Bahrain",
+  bd: "Bangladesh",
+  bb: "Barbados",
+  by: "Belarus",
+  be: "Belgium",
+  bz: "Belize",
+  bj: "Benin",
+  bt: "Bhutan",
+  bo: "Bolivia",
+  ba: "Bosnia and Herzegovina",
+  bw: "Botswana",
+  br: "Brazil",
+  bn: "Brunei",
+  bg: "Bulgaria",
+  bf: "Burkina Faso",
+  bi: "Burundi",
+
+  cv: "Cape Verde",
+  kh: "Cambodia",
+  cm: "Cameroon",
+  ca: "Canada",
+  cf: "Central African Republic",
+  td: "Chad",
+  cl: "Chile",
+  cn: "China",
+  co: "Colombia",
+  km: "Comoros",
+  cg: "Congo",
+  cd: "Democratic Republic of the Congo",
+  cr: "Costa Rica",
+  ci: "Ivory Coast",
+  hr: "Croatia",
+  cu: "Cuba",
+  cy: "Cyprus",
   cz: "Czech Republic",
 
-  dk: "Denmark", dj: "Djibouti", dm: "Dominica", do: "Dominican Republic",
-  ec: "Ecuador", eg: "Egypt", sv: "El Salvador", ee: "Estonia",
-  et: "Ethiopia", fi: "Finland", fr: "France",
+  dk: "Denmark",
+  dj: "Djibouti",
+  dm: "Dominica",
+  do: "Dominican Republic",
 
-  de: "Germany", gh: "Ghana", gr: "Greece", gt: "Guatemala",
-  hn: "Honduras", hu: "Hungary", in: "India", id: "Indonesia",
-  ir: "Iran", iq: "Iraq", ie: "Ireland", il: "Israel", it: "Italy",
+  ec: "Ecuador",
+  eg: "Egypt",
+  sv: "El Salvador",
+  ee: "Estonia",
+  et: "Ethiopia",
+  fi: "Finland",
+  fr: "France",
 
-  jp: "Japan", ke: "Kenya", kr: "South Korea", kw: "Kuwait",
-  lb: "Lebanon", my: "Malaysia", mx: "Mexico", mc: "Monaco",
-  mn: "Mongolia", ma: "Morocco", np: "Nepal", nl: "Netherlands",
-  nz: "New Zealand", ng: "Nigeria", no: "Norway",
+  de: "Germany",
+  gh: "Ghana",
+  gr: "Greece",
+  gt: "Guatemala",
+  hn: "Honduras",
+  hu: "Hungary",
+  in: "India",
+  id: "Indonesia",
+  ir: "Iran",
+  iq: "Iraq",
+  ie: "Ireland",
+  il: "Israel",
+  it: "Italy",
 
-  pk: "Pakistan", pe: "Peru", ph: "Philippines", pl: "Poland",
-  pt: "Portugal", qa: "Qatar", ro: "Romania", ru: "Russia",
-  sa: "Saudi Arabia", sg: "Singapore", za: "South Africa",
-  es: "Spain", se: "Sweden", ch: "Switzerland", th: "Thailand",
-  tr: "Turkey", ua: "Ukraine", ae: "United Arab Emirates",
-  gb: "United Kingdom", us: "United States", vn: "Vietnam",
-
-  // 👇 important missing ones fixed
+  jp: "Japan",
+  ke: "Kenya",
+  kr: "South Korea",
+  kw: "Kuwait",
+  lb: "Lebanon",
+  my: "Malaysia",
+  mx: "Mexico",
   mc: "Monaco",
   mn: "Mongolia",
+  ma: "Morocco",
+  np: "Nepal",
+  nl: "Netherlands",
+  nz: "New Zealand",
+  ng: "Nigeria",
+  no: "Norway",
+
+  pk: "Pakistan",
+  pe: "Peru",
+  ph: "Philippines",
+  pl: "Poland",
+  pt: "Portugal",
   qa: "Qatar",
+
+  ro: "Romania",
+  ru: "Russia",
+  sa: "Saudi Arabia",
+  sg: "Singapore",
+  za: "South Africa",
+  es: "Spain",
+  se: "Sweden",
+  ch: "Switzerland",
+  th: "Thailand",
+  tr: "Turkey",
+  ua: "Ukraine",
+  ae: "United Arab Emirates",
+  gb: "United Kingdom",
+  us: "United States",
+  vn: "Vietnam",
+
+  vn: "Vietnam",
+  zm: "Zambia",
+  zw: "Zimbabwe",
 };
 
 // ===============================
@@ -115,7 +196,7 @@ function buildCountry(code: string): CountryMeta {
 
   return {
     code,
-    name: COUNTRY_DATA[code] || "Unknown Country",
+    name: COUNTRY_NAMES[code] ?? "Unknown Country",
     tier,
     defaultLanguage: LANGUAGE_BY_COUNTRY[code] || "en",
     flag: getFlagEmoji(code),
@@ -123,7 +204,7 @@ function buildCountry(code: string): CountryMeta {
 }
 
 // ===============================
-// 🌍 COUNTRIES MAP
+// 🌍 COUNTRIES MAP (AUTO GENERATED)
 // ===============================
 export const COUNTRIES: Record<string, CountryMeta> = {
   global: {
@@ -135,7 +216,10 @@ export const COUNTRIES: Record<string, CountryMeta> = {
   },
 
   ...Object.fromEntries(
-    Object.keys(COUNTRY_DATA).map((code) => [code, buildCountry(code)])
+    Object.keys(COUNTRY_NAMES).map((code) => [
+      code,
+      buildCountry(code),
+    ])
   ),
 } as Record<string, CountryMeta>;
 
@@ -166,9 +250,11 @@ export function getTierNumber(code?: string | null): 1 | 2 | 3 {
 }
 
 export function isValidCountryCode(code: string): boolean {
-  return code in COUNTRIES && code !== "global";
+  return Boolean(COUNTRIES[code]) && code !== "global";
 }
 
 export function getCountriesByTier(tier: CountryTier): CountryMeta[] {
-  return Object.values(COUNTRIES).filter((c) => c.tier === tier);
+  return Object.values(COUNTRIES).filter(
+    (c) => c.tier === tier
+  );
 }
