@@ -9,28 +9,22 @@ import type { MetadataRoute } from "next";
 const BASE_URL = "https://cashog.com";
 
 // ===============================
-// 🧠 7-TIER COUNTRY SYSTEM (For reference only)
+// 🧠 7-TIER COUNTRY SYSTEM (REFERENCE)
 // ===============================
 const HIGH_PRIORITY_COUNTRIES = ["us", "gb", "ca", "au"];
 const MID_PRIORITY_COUNTRIES = ["de", "fr", "nl", "se", "ch", "no", "dk"];
 const LOW_PRIORITY_COUNTRIES = [
-  "it", "es", "fi", "ie", "at", "be", "br", "mx", "pl", "pt", 
-  "tr", "ro", "in", "id", "ph", "vn", "th", "eg", "pk", "bd", 
+  "it", "es", "fi", "ie", "at", "be", "br", "mx", "pl", "pt",
+  "tr", "ro", "in", "id", "ph", "vn", "th", "eg", "pk", "bd",
   "ng", "ke", "za"
 ];
 
 // ===============================
-// 📊 SITEMAP URLS BY PRIORITY
+// 📊 SITEMAP URLS (SIMPLIFIED & SCALABLE)
 // ===============================
 function getSitemapUrls(): string[] {
-  const sitemaps: string[] = [`${BASE_URL}/sitemap.xml`];
-  
-  // Add country-specific sitemaps for high priority countries only
-  for (const country of HIGH_PRIORITY_COUNTRIES) {
-    sitemaps.push(`${BASE_URL}/${country}/sitemap.xml`);
-  }
-  
-  return sitemaps;
+  // ✅ BEST PRACTICE: Use single sitemap (or sitemap index later)
+  return [`${BASE_URL}/sitemap.xml`];
 }
 
 // ===============================
@@ -51,8 +45,6 @@ export function generateRobots(): MetadataRoute.Robots {
           "/dashboard/",
           "/private/",
           "/internal/",
-          "/_next/",
-          "/static/",
           "/tmp/",
           "/logs/",
           "/*.json$",
@@ -61,7 +53,7 @@ export function generateRobots(): MetadataRoute.Robots {
       },
 
       // ====================
-      // 🤖 GOOGLE (Primary)
+      // 🤖 GOOGLE (PRIMARY)
       // ====================
       {
         userAgent: "Googlebot",
@@ -76,7 +68,7 @@ export function generateRobots(): MetadataRoute.Robots {
       },
 
       // ====================
-      // 🔵 BING (Secondary)
+      // 🔵 BING
       // ====================
       {
         userAgent: "Bingbot",
@@ -94,7 +86,12 @@ export function generateRobots(): MetadataRoute.Robots {
       // 🤖 AI / RESEARCH BOTS
       // ====================
       {
-        userAgent: "GPTBot",
+        userAgent: [
+          "GPTBot",
+          "CCBot",
+          "ClaudeBot",
+          "Google-Extended",
+        ],
         allow: "/",
         disallow: [
           "/api/",
@@ -104,38 +101,9 @@ export function generateRobots(): MetadataRoute.Robots {
           "/internal/",
         ],
       },
-      {
-        userAgent: "CCBot",
-        allow: "/",
-        disallow: [
-          "/admin/",
-          "/private/",
-          "/dashboard/",
-        ],
-      },
-      {
-        userAgent: "Google-Extended",
-        allow: "/",
-        disallow: [
-          "/api/",
-          "/admin/",
-          "/dashboard/",
-          "/private/",
-        ],
-      },
-      {
-        userAgent: "ClaudeBot",
-        allow: "/",
-        disallow: [
-          "/api/",
-          "/admin/",
-          "/dashboard/",
-          "/private/",
-        ],
-      },
 
       // ====================
-      // 🚫 BLOCK SCRAPER / MALICIOUS BOTS
+      // 🚫 BLOCK SCRAPERS / HEAVY BOTS
       // ====================
       {
         userAgent: [
@@ -160,38 +128,43 @@ export function generateRobots(): MetadataRoute.Robots {
       },
 
       // ====================
-      // ⚡ LEGACY / LESS IMPORTANT
+      // 🍏 APPLE / DUCKDUCKGO
       // ====================
-      {
-        userAgent: "DuckDuckBot",
-        allow: "/",
-        disallow: ["/api/", "/admin/", "/dashboard/"],
-        crawlDelay: 3,
-      },
       {
         userAgent: "Applebot",
         allow: "/",
         disallow: ["/api/", "/admin/"],
         crawlDelay: 2,
       },
+      {
+        userAgent: "DuckDuckBot",
+        allow: "/",
+        disallow: ["/api/", "/admin/", "/dashboard/"],
+        crawlDelay: 3,
+      },
     ],
+
+    // ====================
+    // 📊 SINGLE SITEMAP ENTRY (CRITICAL FIX)
+    // ====================
     sitemap: getSitemapUrls(),
   };
 }
 
 // ===============================
-// 📊 DEBUG / STATS (FIXED TYPE ERROR)
+// 📊 DEBUG / STATS
 // ===============================
 export function getRobotsStats() {
   const config = generateRobots();
-  
-  // ✅ Fix: Type guard to check if rules is an array
-  const rulesArray = Array.isArray(config.rules) ? config.rules : [config.rules];
-  
+
+  const rulesArray = Array.isArray(config.rules)
+    ? config.rules
+    : [config.rules];
+
   return {
     totalRules: rulesArray.length,
     totalSitemaps: config.sitemap?.length || 0,
-    blockedBots: rulesArray.some(r => 
+    blockedBots: rulesArray.some(r =>
       r.userAgent && (
         (Array.isArray(r.userAgent) && r.userAgent.includes("AhrefsBot")) ||
         r.userAgent === "AhrefsBot"
