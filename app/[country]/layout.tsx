@@ -71,20 +71,13 @@ export default async function CountryLayout({
   const resolvedParams = await params;
   let countryParam = resolvedParams?.country?.toLowerCase();
 
-  // ❌ If empty or global → redirect to root
-  if (!countryParam || countryParam === "global") {
+  // ❌ If empty, "global", OR invalid country code → redirect to root
+  if (!countryParam || countryParam === "global" || !isValidCountryCode(countryParam)) {
     redirect("/");
   }
 
-  // ✅ Allow ALL countries (fallback instead of blocking)
-  let country: CountryCode;
-
-  if (isValidCountryCode(countryParam)) {
-    country = countryParam as CountryCode;
-  } else {
-    // 🔥 fallback (important for worldwide support)
-    country = "us"; // you can change to "global" if needed
-  }
+  // ✅ Only valid country codes reach this point
+  const country = countryParam as CountryCode;
 
   // 🌐 Language + direction
   const language = getInitialLanguage(country);
